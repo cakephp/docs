@@ -43,7 +43,9 @@ appliquez les matchers aux élements de l'expression.
 
 Tous les éléments d'expression supportent toutes les méthodes. En plus des
 éléments d'expression, vous pouvez utiliser les attributs qui matchent avec
-les méthodes comme ``extract()``.
+certaines méthodes. Il y a ``extract()``,
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
+``apply()``, ``sort()`` et ``nest()``.
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -103,7 +105,7 @@ les méthodes comme ``extract()``.
     :rtype: array
 
     Insère $data dans un tableau comme défini par $path. Cette méthode
-    supporte seulement les types d'expression de :ref:`hash-path-syntax`::
+    supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -133,7 +135,7 @@ les méthodes comme ``extract()``.
     :rtype: array
 
     Retire tous les éléments d'un tableau qui matche avec $path. Cette
-    méthode supporte tous les éléments d'expression de
+    méthode supporte **seulement** tous les éléments d'expression de
     :ref:`hash-path-syntax`::
 
         $a = array(

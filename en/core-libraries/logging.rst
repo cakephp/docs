@@ -61,34 +61,33 @@ Creating log adapters
 
 Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
-``DatabaseLogger``. As part of your application it would be placed
-in ``App/Log/Engine/DatabaseLogger.php``. As part of a plugin it
-would be placed in
-``App/Plugin/LoggingPack/Log/Engine/DatabaseLogger.php``. To configure log
-adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example configuring our DatabaseLogger
-would look like::
+``DatabaseLog``. As part of your application it would be placed in
+``App/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
+``App/Plugin/LoggingPack/Log/Engine/DatabaseLog.php``. To configure log
+adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
+configuring our DatabaseLog would look like::
 
     // for App/Log
     Log::config('otherFile', [
-        'className' => 'DatabaseLogger',
+        'className' => 'DatabaseLog',
         'model' => 'LogEntry',
         // ...
     ]);
     
     // for plugin called LoggingPack
     Log::config('otherFile', [
-        'className' => 'LoggingPack.DatabaseLogger',
+        'className' => 'LoggingPack.DatabaseLog',
         'model' => 'LogEntry',
         // ...
     ]);
 
-When configuring a log adapter the ``engine`` parameter is used to
+When configuring a log adapter the ``className`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log adapter's constructor as an array.::
 
     use Cake\Log\LogInterface;
 
-    class DatabaseLogger implements LogInterface {
+    class DatabaseLog implements LogInterface {
         public function __construct($options = []) {
             // ...
         }
@@ -101,33 +100,45 @@ properties are passed to the log adapter's constructor as an array.::
 CakePHP requires that all logging adapters implement
 :php:class:`Cake\\Log\\LogInterface`.
 
-.. versionadded:: 2.4
-
 .. _file-log:
 
-As of 2.4 ``FileLog`` engine takes two new configurations::
+.. versionadded:: 2.4
 
-  - ``size`` Used to implement basic log file rotation. If log file size
-    reaches specified size the existing file is renamed by appending timestamp
-    to filename and new log file is created. Can be integer bytes value or
-    human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
-  - ``rotate`` Log files are rotated specified times before being removed.
-    If value is 0, old versions are removed rather then rotated. Defaults to 10.
+As of 2.4 ``FileLog`` engine takes a few new options:
+
+* ``size`` Used to implement basic log file rotation. If log file size
+   reaches specified size the existing file is renamed by appending timestamp
+   to filename and new log file is created. Can be integer bytes value or
+   human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
+* ``rotate`` Log files are rotated specified times before being removed.
+  If value is 0, old versions are removed rather then rotated. Defaults to 10.
+* ``mask`` Set the file permissions for created files. If left empty the default
+  permissions are used.
+
+.. warning::
+
+    Prior to 2.4 you had to include the suffix ``Log``` in your configuration
+    (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
+    If you have been using a Log engine like ```DatabaseLogger`` that does not follow
+    the convention to use a suffix ``Log`` for your class name you have to adjust your
+    class name to ``DatabaseLog``. You should also avoid class names like ``SomeLogLog``
+    which include the suffix twice at the end.
 
 .. note::
 
     You should configure loggers during bootstrapping. ``app/Config/log.php`` is the
     conventional place to configure log adapters.
 
+    Also new in 2.4: In debug mode missing directories will now be automatically created to avoid unnecessary
+    errors thrown when using the FileEngine.
 
 Error and Exception logging
 ===========================
 
-Errors and Exceptions can also be logged.  By configuring the 
-co-responding values in your core.php file.  Errors will be 
-displayed when debug > 0 and logged when debug == 0. Set ``Exception.log``
-to true to log uncaught exceptions. See :doc:`/development/configuration`
-for more information.
+Errors and Exceptions can also be logged.  By configuring the co-responding
+values in your app.php file.  Errors will be displayed when debug > 0 and logged
+when debug == 0. Set ``Exception.log`` to true to log uncaught exceptions. See
+:doc:`/development/configuration` for more information.
 
 Interacting with log streams
 ============================
@@ -149,7 +160,7 @@ error log. The default log location is ``app/tmp/logs/$level.log``::
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
-    
+
     // Results in this being appended to app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
@@ -161,7 +172,7 @@ a logger.FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
     Log::config('custom_path', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => '/path/to/custom/place/'
     ]);
 
@@ -189,7 +200,7 @@ be done in the `bootstrap.php` file.
 ::
 
     CakeLog::config('default', array(
-        'engine' => 'SyslogLog'
+        'engine' => 'Syslog'
     ));
 
 The configuration array accepted for the Syslog logging engine understands the
@@ -300,6 +311,11 @@ Log API
     A simple class for writing to logs.
 
 .. php:staticmethod:: config($key, $config)
+
+    :param string $name: Name for the logger being connected, used
+        to drop a logger later on.
+    :param array $config: Array of configuration information and
+        constructor arguments for the logger.
 
     Get or set the configuration for a Logger. See :ref:`log-configuration` for
     more information.

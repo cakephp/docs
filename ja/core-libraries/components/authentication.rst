@@ -12,8 +12,8 @@ AuthComponent により、認証オブジェクトと、ユーザの権限を識
 
 ..
   Identifying, authenticating and authorizing users is a common part of almost every web application.
-  In CakePHP AuthComponent provides a pluggable way to do these tasks.  
-  AuthComponent allows you to combine authentication objects, 
+  In CakePHP AuthComponent provides a pluggable way to do these tasks.
+  AuthComponent allows you to combine authentication objects,
   and authorization objects to create flexible ways of identifying and checking user authorization.
 
 .. _authentication-objects:
@@ -29,7 +29,7 @@ AuthComponent により、認証オブジェクトと、ユーザの権限を識
 CakePHP には、あなたのアプリケーション内に保管されているユーザを認証するための組み込み済みの方法がいくつか存在します。
 
 ..
-  Authentication is the process of identifying users by provided credentials 
+  Authentication is the process of identifying users by provided credentials
   and ensuring that users are who they say they are.
   Generally this is done through a username and password, that are checked against a known list of users.
   In CakePHP, there are several built in ways of authenticating users stored in your application.
@@ -68,19 +68,19 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 ..
   Generally you'll want to offer form based authentication. It is the easiest for
   users using a web-browser to use.  If you are building an API or webservice, you
-  may want to consider basic authentication or digest authentication.  
-  The key differences between digest and basic authentication are mostly related to 
-  how passwords are handled.  
-  In basic authentication, the username and password are transmitted as plain-text to the server.  
-  This makes basic authentication un-suitable for applications without SSL, 
-  as you would end up exposing sensitive passwords.  
-  Digest authentication uses a digest hash of the username, password, and a few other details.  
+  may want to consider basic authentication or digest authentication.
+  The key differences between digest and basic authentication are mostly related to
+  how passwords are handled.
+  In basic authentication, the username and password are transmitted as plain-text to the server.
+  This makes basic authentication un-suitable for applications without SSL,
+  as you would end up exposing sensitive passwords.
+  Digest authentication uses a digest hash of the username, password, and a few other details.
   This makes digest authentication more appropriate for applications without SSL encryption.
 
 また、OpenID のような認証システムを使うことも可能です。ただし、OpenID は CakePHP のコアには含まれません。
 
 ..
-  You can also use authentication systems like openid as well, 
+  You can also use authentication systems like openid as well,
   however openid is not part of CakePHP core.
 
 
@@ -100,11 +100,11 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 
 ..
   You configure authentication handlers using ``$this->Auth->authenticate``.
-  You can configure one or many handlers for authentication.  
-  Using multiple handlers allows you to support different ways of logging users in.  
-  When logging users in, authentication handlers are checked in the order they are declared.  
-  Once one handler is able to identify the user, no other handlers will be checked.  
-  Conversely you can halt all authentication by throwing an exception.  
+  You can configure one or many handlers for authentication.
+  Using multiple handlers allows you to support different ways of logging users in.
+  When logging users in, authentication handlers are checked in the order they are declared.
+  Once one handler is able to identify the user, no other handlers will be checked.
+  Conversely you can halt all authentication by throwing an exception.
   You will need to catch any thrown exceptions, and handle them as needed.
 
 コントローラの ``beforeFilter`` の中、もしくは ``$components`` 配列の中に、認証ハンドラをいくつでも設定することができます。
@@ -115,13 +115,13 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 
     // 設定を中に記述
     $this->Auth->authenticate = array(
-        'Form' => array('userModel' => 'Member'),
-        'Basic' => array('userModel' => 'Member')
+        'Basic' => array('userModel' => 'Member'),
+        'Form' => array('userModel' => 'Member')
     );
 
 ..
-  You can configure authentication handlers in your controller's ``beforeFilter`` or, 
-  in the ``$components`` array.  
+  You can configure authentication handlers in your controller's ``beforeFilter`` or,
+  in the ``$components`` array.
   You can pass configuration information into each authentication object, using an array::
 
 上記の２つ目のブロックでは、``userModel`` キーを２回宣言しなければならないということに気づいたでしょう。
@@ -132,14 +132,14 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     // 'all' を使って設定を記述
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Member'),
-        'Form',
-        'Basic'
+        'Basic',
+        'Form'
     );
 
 ..
-  In the second example you'll notice that we had to declare the ``userModel`` key twice. 
-  To help you keep your code DRY, you can use the ``all`` key.  
-  This special key allows you to set settings that are passed to every attached object.  
+  In the second example you'll notice that we had to declare the ``userModel`` key twice.
+  To help you keep your code DRY, you can use the ``all`` key.
+  This special key allows you to set settings that are passed to every attached object.
   The all key is also exposed as ``AuthComponent::ALL``::
 
 上記の例では、``Form`` と ``Basic`` の両方ともが  'all' キーで宣言された設定を取得することになります。
@@ -147,14 +147,14 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 コアの認証オブジェクトでは次の設定キーをサポートしています。
 
 ..
-  In the above example, both ``Form`` and ``Basic`` will get the settings defined for the 'all' key.  
+  In the above example, both ``Form`` and ``Basic`` will get the settings defined for the 'all' key.
   Any settings passed to a specific authentication object will override the matching key in the 'all' key.
   The core authentication objects support the following configuration keys.
 
 
 - ``fields`` ユーザを識別するのに使う列名の配列。
 - ``userModel`` User のモデル名。デフォルトは User。
-- ``scope`` 認証するユーザを検索する際に使う、追加の条件。例： ``array('User.is_active' => 1).``
+- ``scope`` 認証するユーザを検索する際に使う、追加の条件。例： ``array('User.is_active' => 1)``
 - ``contain`` ユーザのレコードがロードされた際に含めることのできるオプション。
 
   .. versionadded:: 2.2
@@ -165,6 +165,13 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
   - ``scope`` Additional conditions to use when looking up and
     authenticating users, i.e. ``array('User.is_active' => 1)``。
   - ``contain`` Containable options for when the user record is loaded.
+
+- ``passwordHasher`` パスワードをハッシュするクラス。デフォルトは ``Simple`` 。
+
+  .. versionadded:: 2.4
+
+  ..
+   - ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
 
 配列 ``$components`` の中でユーザの特定の列名を設定するには::
 
@@ -182,34 +189,32 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ..
   To configure different fields for user in ``$components`` array::
 
-.. note::
+Auth の他の設定キー(authError や loginAction など)を authenticate や Form の下位要素として書いてはいけません。
+それらは authenticate キーと同じレベルであるべきです。
+上記の例を他の Auth 設定を使って書いた場合は次のようになります::
 
-    Auth の他の設定キー(authError や loginAction など)を authenticate や Form の下位要素として書いてはいけません。
-    それらは authenticate キーと同じレベルであるべきです。
-    上記の例を他の Auth 設定を使って書いた場合は次のようになります::
-
-        // $components 配列の中で設定を記述
-        public $components = array(
-            'Auth' => array(
-                'loginAction' => array(
-                    'controller' => 'users',
-                    'action' => 'login',
-                    'plugin' => 'users'
-                ),
-                'authError' => 'Did you really think you are allowed to see that?',
-                'authenticate' => array(
-                    'Form' => array(
-                        'fields' => array('username' => 'email')
-                    )
+    // $components 配列の中で設定を記述
+    public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'plugin' => 'users'
+            ),
+            'authError' => 'Did you really think you are allowed to see that?',
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email')
                 )
             )
-        );
+        )
+    );
 
 ..
   Do not put other Auth configuration keys (like authError, loginAction etc)
   within the authenticate or Form element. They should be at the same level as
-  the authenticate key.
-  Above setup with other Auth configurations should look something like::
+  the authenticate key. The setup above with other Auth configuration
+  should look like::
 
 共通の設定に加えて、Basic 認証では次のキーも利用できます:
 
@@ -234,6 +239,91 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
   - ``opaque`` A string that must be returned unchanged by clients. Defaults
     to ``md5($settings['realm'])``
 
+ユーザの識別とログイン
+-------------------------------------
+
+..
+  Identifying users and logging them in
+
+以前の ``AuthComponent`` は自動的にログインを行っていました。
+これに混乱する人が多く、時には AuthComponent の利用をやや難しくしていました。
+2.0 でログインしたい場合には、手動で ``$this->Auth->login()`` を呼び出す必要があります。
+
+..
+  In the past ``AuthComponent`` auto-magically logged users in.
+  This was confusing for many people, and made using AuthComponent a bit difficult at times.
+  For 2.0, you'll need to manually call ``$this->Auth->login()`` to log a user in.
+
+ユーザを認証する際には、設定されている認証オブジェクトを設定された順にチェックしていきます。
+あるオブジェクトでユーザが識別できたら、以降のオブジェクトはチェックされません。
+ログインフォームと連携する単純な login 関数なら次のようになります::
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                return $this->redirect($this->Auth->redirectUrl());
+                // 2.3より前なら `return $this->redirect($this->Auth->redirect());`
+            } else {
+                $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+            }
+        }
+    }
+
+..
+  When authenticating users, attached authentication objects are checked in the order they are attached.
+  Once one of the objects can identify the user, no other objects are checked.
+  A sample login function for working with a login form could look like::
+
+上記のコードは（``login`` メソッドに渡される情報以外は）、POSTデータを使ってユーザをログインさせようとします。
+ログインが成功ならユーザが最後に訪れていたページか :php:attr:`AuthComponent::$loginRedirect` へと redirect します。ログインが失敗なら、フラッシュメッセージがセットされます。
+
+..
+  The above code (without any data passed to the ``login`` method),
+  will attempt to log a user in using the POST data,
+  and if successful redirect the user to either the last page they were visiting,
+  or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a flash message is set.
+
+.. warning::
+
+    1.3 の ``$this->Auth->login($this->data)`` では、ユーザの識別を試みて成功したときのみログインが行われましたが、
+    2.x では ``$this->Auth->login($this->request->data)`` でなにが POST されたのだとしてもログインを行います。
+
+    ..
+      In 2.x ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
+      whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in when successful.
+
+ログインでのダイジェスト認証・Basic認証の利用
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..
+  Using Digest and Basic Authentication for logging in
+
+Basicおよびダイジェスト認証は初期POSTやフォームを必要としないので、
+もしBasic／ダイジェストオーセンティケータだけを使っているならコントローラにログインアクションは必要ありません。
+また、 AuthComponent がユーザー情報を session から読み込まないようにするために ``AuthComponent::$sessionKey`` を false に設定することができます。
+こうすると、ステートレス認証がリクエストごとにユーザーの資格情報を再確認します。
+これは若干のオーバーヘッドになりますが、クッキーを使用することなくログイン処理を行えます。
+
+..
+  Because basic and digest authentication don't require an initial POST or a form
+  so if using only basic / digest authenticators you don't require a login action
+  in your controller. Also you can set ``AuthComponent::$sessionKey`` to false to
+  ensure AuthComponent doesn't try to read user info from session. Stateless
+  authentication will re-verify the user's credentials on each request, this creates
+  a small amount of additional overhead, but allows clients that to login in without
+  using cookies.
+
+.. note::
+
+  2.4より前のバージョンでは、Basic またはダイジェスト認証だけを使用する場合でも、
+  認証されていないユーザーが保護されたページにアクセスしようとするとログインにリダイレクトされるように、
+  ログインアクションが必要となります。また、2.4より前では ``AuthComponent::$sessionKey`` に false を設定するとエラーが発生します。
+
+  ..
+    Prior to 2.4 you still need the login action as you are redirected to login
+    when an unauthenticated user tries to access a protected page even when using
+    only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
+    will cause an error prior to 2.4.
+
 カスタム認証オブジェクトの作成
 --------------------------------------
 
@@ -242,20 +332,22 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 
 認証オブジェクトはプラガブルなので、カスタム認証オブジェクトを自分のアプリケーション内にでも、プラグインとしてでも作成が可能です。
-もし例えば、OpenID 認証オブジェクトを作成したいのだとしたら、``app/Controller/Component/Auth/OpenidAuthenticate.php`` の中で次のように記述することができます::
+もし例えば、OpenID 認証オブジェクトを作成したいのだとしたら、 ``app/Controller/Component/Auth/OpenidAuthenticate.php`` の中で次のように記述することができます::
 
     App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
             // OpenID 用の処理をここに記述します。
+            // ユーザ認証が通った場合は、user の配列を返します。
+            // 通らなかった場合は false を返します。
         }
     }
 
 ..
-  Because authentication objects are pluggable, 
-  you can create custom authentication objects in your application or plugins.  
-  If for example you wanted to create an OpenID authentication object.  
+  Because authentication objects are pluggable,
+  you can create custom authentication objects in your application or plugins.
+  If for example you wanted to create an OpenID authentication object.
   In ``app/Controller/Component/Auth/OpenidAuthenticate.php`` you could put the following::
 
 認証オブジェクトは、ユーザを識別できなかった場合に ``false`` を返さなければなりません。
@@ -266,13 +358,13 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 詳細は下記の Basic／ダイジェスト認証のセクションを参照してください。
 
 ..
-  Authentication objects should return ``false`` if they cannot identify the user.  
-  And an array of user information if they can. 
-  It's not required that you extend ``BaseAuthenticate``, 
-  only that your authentication object implements an ``authenticate()`` method.  
-  The ``BaseAuthenticate`` class provides a number of helpful methods that are commonly used.  
-  You can also implement a ``getUser()`` method if your authentication object needs 
-  to support stateless or cookie-less authentication. 
+  Authentication objects should return ``false`` if they cannot identify the user.
+  And an array of user information if they can.
+  It's not required that you extend ``BaseAuthenticate``,
+  only that your authentication object implements an ``authenticate()`` method.
+  The ``BaseAuthenticate`` class provides a number of helpful methods that are commonly used.
+  You can also implement a ``getUser()`` method if your authentication object needs
+  to support stateless or cookie-less authentication.
   See the sections on basic and digest authentication below for more information.
 
 カスタム認証オブジェクトの利用
@@ -291,92 +383,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ..
   Once you've created your custom authentication object, you can use them by including them in AuthComponents authenticate array::
 
-
-ユーザの識別とログイン
--------------------------------------
-
-..
-  Identifying users and logging them in
-
-以前の ``AuthComponent`` は自動的にログインを行っていました。
-これに混乱する人が多く、時には AuthComponent の利用をやや難しくしていました。
-2.0 でログインしたい場合には、手動で ``$this->Auth->login()`` を呼び出す必要があります。
-
-..
-  In the past ``AuthComponent`` auto-magically logged users in.  
-  This was confusing for many people, and made using AuthComponent a bit difficult at times.  
-  For 2.0, you'll need to manually call ``$this->Auth->login()`` to log a user in.
-
-ユーザを認証する際には、設定されている認証オブジェクトを設定された順にチェックしていきます。
-あるオブジェクトでユーザが識別できたら、以降のオブジェクトはチェックされません。
-ログインフォームと連携する単純な login 関数なら次のようになります::
-
-    public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash(__('ユーザ名もしくはパスワードが正しくありません。'), 'default', array(), 'auth');
-            }
-        }
-    }
-
-..
-  When authenticating users, attached authentication objects are checked in the order they are attached.
-  Once one of the objects can identify the user, no other objects are checked.  
-  A sample login function for working with a login form could look like::
-
-上記のコードは（``login`` メソッドに渡される情報以外は）、POSTデータを使ってユーザをログインさせようとします。
-ログインが成功ならユーザが最後に訪れていたページか :php:attr:`AuthComponent::$loginRedirect` へと redirect します。ログインが失敗なら、フラッシュメッセージがセットされます。
-
-..
-  The above code (without any data passed to the ``login`` method), 
-  will attempt to log a user in using the POST data, 
-  and if successful redirect the user to either the last page they were visiting,
-  or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a flash message is set.
-
-.. warning::
-
-    1.3 の ``$this->Auth->login($this->data)`` では、ユーザの識別を試みて成功したときのみログインが行われましたが、
-    2.0 では ``$this->Auth->login($this->request->data)`` でなにが POST されたのだとしてもログインを行います。
-
-    ..
-      In 2.0 ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
-      whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in when successful.
-
-ログインでのダイジェスト認証・Basic認証の利用
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-..
-  Using Digest and Basic Authentication for logging in
-
-Basic認証・ダイジェスト認証では、ログイン処理の前に実行される、最初の POST を必要としないため、あなたが実装した ``login()`` 関数は ``FormAuthentication`` を使う場合とい若干異なります::
-
-    public function login() {
-        if ($this->Auth->login()) {
-            return $this->redirect($this->Auth->redirect());
-        } else {
-            $this->Session->setFlash(__('ユーザ名もしくはパスワードが正しくありません。'), 'default', array(), 'auth');
-        }
-    }
-
-..
-  Because basic and digest authentication don't require an initial POST to be performed before they initiate the login sequence, 
-  your ``login()`` function will look a bit different than when using ``FormAuthentication``::
-
-ログイン後、ダイジェスト認証・Basic認証を使うユーザはクッキーが必要ありません。
-実際のところ、すべての認証オブジェクトは ``getUser()`` メソッドを実装することで *ステートレス* な認証を提供することが可能です。
-クライアントがクッキーをサポートする場合は、Basic認証もダイジェスト認証も、他の認証オブジェクトと同様にセッションにユーザを保管します。
-クライアントがクッキーをサポートしない場合（CURL上に構築された単純なHTTPクライアントなどの場合）は、ステートレス認証もサポートされます。
-ステートレス認証はリクエストごとにユーザの認証情報を再照合します。これにより若干のオーバーヘッドが生まれますが、クッキーをサポートしないかできないユーザでもログインできるようになります。
-
-..
-  Once logged in, users using digest and basic auth are not required to have cookies.  
-  In fact, all authentication objects are able to provide *stateless* authentication through implementing the ``getUser()`` method.
-  If the client supports cookies, basic and digest auth will store a user in session much like any other authentication object.  
-  If a client doesn't support cookies, (such as a simple HTTP client built on top of CURL) stateless authentication is also supported.  
-  Stateless authentication will re-verify the user's credentials on each request,
-  this creates a small amount of additional overhead, but allows clients that cannot or do not support cookies to login in.
-
 ステートレス認証システムの作成
 -----------------------------------------
 
@@ -386,7 +392,7 @@ Basic認証・ダイジェスト認証では、ログイン処理の前に実行
 認証オブジェクトはクッキーに依存しないユーザログインのシステムをサポートするために使われる ``getUser()`` メソッドを実装することができます。
 典型的な getUser メソッドはリクエストや環境を見て、ユーザを識別するためにその情報を使います。
 HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値として ``$_SERVER['PHP_AUTH_USER']`` と ``$_SERVER['PHP_AUTH_PW']`` を使います。
-リクエストごとに、もしクライアントがクッキーをサポートしていないなら、それらの値を再度ユーザを識別するために使い、正規のユーザであることを確認します。
+リクエストごとに、それらの値を再度ユーザを識別するために使い、正規のユーザであることを確認します。
 認証オブジェクトの ``authenticate()`` メソッドと同様に、``getUser()`` メソッドも成功ならユーザ情報の配列を、失敗なら ``false`` を返すようにしてください::
 
     public function getUser($request) {
@@ -400,20 +406,53 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
     }
 
 ..
-  Authentication objects can implement a ``getUser()`` method that can be used to support user login systems that don't rely on cookies.  
-  A typical getUser method looks at the request/environment and uses the information there to confirm the identity of the user.  
-  HTTP Basic authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.  
-  On each request, if a client doesn't support cookies, these values are used to re-identify the user and ensure they are valid user.  
-  As with authentication object's ``authenticate()`` method the ``getUser()`` method should return an array of user information on success, 
-  and ``false`` on failure.::
+  Authentication objects can implement a ``getUser()`` method that can be used to support user login systems that don't rely on cookies.
+  A typical getUser method looks at the request/environment and uses the information there to confirm the identity of the user.
+  HTTP Basic authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.
+  On each request, these values are used to re-identify the user and ensure they are valid user.
+  As with authentication object's ``authenticate()`` method the ``getUser()`` method should return an array of user information on success or ``false`` on failure.::
 
 上記では HTTP Basic認証用の getUser メソッドをどのように実行できるのかを示しています。
 ``_findUser()`` メソッドは ``BaseAuthenticate`` の一部でユーザ名、パスワードをもとにユーザを識別します。
 
 ..
-  The above is how you could implement getUser method for HTTP basic authentication.  
+  The above is how you could implement getUser method for HTTP basic authentication.
   The ``_findUser()`` method is part of ``BaseAuthenticate`` and identifies a user based on a username and password.
 
+認証されていないリクエストの扱い
+--------------------------------
+
+..
+  Handling unauthenticated requests
+
+認証されていないユーザーが最初に保護されたページにアクセスしようとすると、
+チェーンの最後のオーセンティケータの `unauthenticated()` メソッドが呼び出されます。
+認証オブジェクトが適切に応答またはリダイレクトを送信処理し、
+それ以上のアクションは必要ないということを示すために `true` を返すことができます。
+`AuthComponent::$authenticate` プロパティで認証オブジェクトを指定する順序を設定できます。
+
+..
+  When an unauthenticated user tries to access a protected page first the
+  `unauthenticated()` method of the last authenticator in the chain is called.
+  The authenticate object can handle sending response or redirection as appropriate
+  and return `true` to indicate no further action is necessary. Due to this the
+  order in which you specify the authenticate object in `AuthComponent::$authenticate`
+  property matters.
+
+オーセンティケータが null を返した場合、 `AuthComponent` は、ユーザーをログインアクションにリダイレクトします。
+それは、Ajaxリクエストでかつ `AuthComponent::$ajaxLogin` にHTTPステータスコード403 が返され、他にレンダリングされるエレメントが指定されていた場合です。
+
+..
+  If authenticator returns null, `AuthComponent` redirects user to login action.
+  If it's an ajax request and `AuthComponent::$ajaxLogin` is specified that element
+  is rendered else a 403 http status code is returned.
+
+.. note::
+
+  2.4より前では、認証オブジェクトは `unauthenticated()` メソッドを提供しません。
+
+  ..
+    Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
 
 認証についてのフラッシュメッセージの表示
 ----------------------------------------
@@ -428,7 +467,7 @@ Auth が生成するセッションエラーメッセージを表示するため
     echo $this->Session->flash('auth');
 
 ..
-  In order to display the session error messages that Auth generates, you need to add the following code to your layout. 
+  In order to display the session error messages that Auth generates, you need to add the following code to your layout.
   Add the following two lines to the ``app/View/Layouts/default.ctp`` file in the body section preferable before the content_for_layout line.::
 
 AuthComponent の flash 設定を使うことでエラーメッセージをカスタマイズすることができます。
@@ -440,9 +479,9 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 - ``params`` - 使用される追加の params 配列。デフォルトは array()
 
 ..
-  You can customize the error messages, and flash settings AuthComponent uses.  
-  Using ``$this->Auth->flash`` you can configure the parameters AuthComponent uses for setting flash messages.  
-  The available keys are 
+  You can customize the error messages, and flash settings AuthComponent uses.
+  Using ``$this->Auth->flash`` you can configure the parameters AuthComponent uses for setting flash messages.
+  The available keys are
   - ``element`` - The element to use, defaults to 'default'.
   - ``key`` - The key to use, defaults to 'auth'
   - ``params`` - The array of additional params to use, defaults to array()
@@ -453,8 +492,28 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
     $this->Auth->authError = "このエラーは保護されたWebサイトの一部にユーザがアクセスしようとした際に表示されます。";
 
 ..
-  In addition to the flash message settings you can customize other error messages AuthComponent uses. 
+  In addition to the flash message settings you can customize other error messages AuthComponent uses.
   In your controller's beforeFilter, or component settings you can use ``authError`` to customize the error used for when authorization fails::
+
+.. versionchanged:: 2.4
+   ユーザーがすでにログインしていた後にのみ、認可エラーを表示したいということもあると思います。
+   その場合は `false` を設定することにより、このメッセージを表示しないようにすることができます。
+
+   ..
+     Sometimes, you want to display the authorization error only after
+     the user has already logged-in. You can suppress this message by setting
+     its value to boolean `false`.
+
+コントローラの beforeFilter()、またはコンポーネントの設定で::
+
+    if (!$this->Auth->loggedIn()) {
+        $this->Auth->authError = false;
+    }
+
+..
+  In your controller's beforeFilter(), or component settings::
+
+.. _hashing-passwords:
 
 パスワードのハッシュ化
 ----------------------
@@ -465,43 +524,105 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 AuthComponent がもはや自動ではパスワードをハッシュ化しなくなったことに、気づいたかもしれません。
 これは妥当性チェックのような多くの共通タスクを難しいものにしていたため、取り除かれました。
 パスワードを平文テキストのまま保管しては **いけません**。ユーザのレコードを保存する前に、パスワードは必ずハッシュ化するべきです。
-ユーザを保存する前にパスワードをハッシュ化するために、static の ``AuthComponent::password()`` を使うことができます。
-これはあなたのアプリケーションでハッシュ化する際の戦略を設定するために使われるものです。
 
 ..
   AuthComponent no longer automatically hashes every password it can find.
-  This was removed because it made a number of common tasks like validation difficult.  
-  You should **never** store plain text passwords, and before saving a user record you should always hash the password.
-  You can use the static ``AuthComponent::password()`` to hash passwords before saving them.  
-  This will use the configured hashing strategy for your application.
+  This was removed because it made a number of common tasks like
+  validation difficult.  You should **never** store plain text passwords,
+  and before saving a user record you should always hash the password.
 
-パスワードの妥当性チェックのあと、あなたのモデルの beforeSave コールバックの中でパスワードをハッシュ化することができます::
+2.4の時点で、パスワードハッシュの生成とチェックはパスワードハッシュ化クラスに委譲されています。
+認証オブジェクトは ``passwordHasher`` という新しい設定項目で使用するパスワードハッシュ化クラスを指定します。
+この設定項目にはクラス名を文字列で指定するか、 ``className`` というキーにクラス名を指定した配列を設定します。
+このとき、配列の余分なキーが設定としてパスワードハッシュ化クラスのコンストラクタに渡されます。
+デフォルトのハッシュ化クラス ``Simple`` は sha1、sha256、md5ハッシュに使用することができます。
+次のようにしてハッシュ化クラスを指定します::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => array(
+                        'className' => 'Simple',
+                        'hashType' => 'sha256'
+                    )
+                )
+            )
+        )
+    );
+
+..
+  As of 2.4 the generation and checking of password hashes has been delegated to
+  password hasher classes. Authenticating objects use a new setting ``passwordHasher``
+  which specifies the password hasher class to use. It can be a string specifying class
+  name or an array with key ``className`` stating the class name and any extra keys
+  will be passed to password hasher constructor as config. The default hasher
+  class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
+  type set in Security class will be used. You can use specific hash type like this::
+
+新しいユーザレコードを作成するとき、
+モデルの beforeSave コールバック内で適切なパスワードハッシュ化クラスを使用してパスワードをハッシュ化できます::
+
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            if (!$this->id) {
+                $passwordHasher = new SimplePasswordHasher();
+                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
+            }
             return true;
         }
     }
 
 ..
-  After validating the password, you can hash a password in the beforeSave callback of your model::
+  When creating new user records you can hash a password in the beforeSave
+  callback of your model using appropriate password hasher class::
 
 ``$this->Auth->login()`` を呼び出す前にパスワードをハッシュ化する必要はありません。
 さまざまな認証オブジェクトが個々にパスワードをハッシュ化します。
-ダイジェスト認証を使う場合、パスワードの生成に AuthComponent::password() を使ってはいけません。
-ダイジェストのハッシュを生成する方法については下記を参照してください。
 
 ..
   You don't need to hash passwords before calling ``$this->Auth->login()``.
-  The various authentication objects will hash passwords individually. 
-  If you are using Digest authentication, you should not use AuthComponent::password() for generating passwords.  
-  See below for how to generate digest hashes.
+  The various authentication objects will hash passwords individually.
 
+パスワードにbcryptを使う
+------------------------
+
+..
+  Using bcrypt for passwords
+
+CakePHP 2.3 で ``BlowfishAuthenticate`` クラスが導入され、
+`bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ (別名: Blowfish)をパスワードのハッシュ化に使用できるようになりました。
+bcrypt ハッシュは SHA1 で保存されたパスワードよりもブルートフォースアタックに対してとても強固です。
+なお、 ``BlowfishAuthenticate`` は 2.4 で非推奨になり、代わりに ``BlowfishPasswordHasher`` が追加されました。
+
+..
+  In CakePHP 2.3 the ``BlowfishAuthenticate`` class was introduced to allow
+  using `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ a.k.a Blowfish for hash passwords.
+  Bcrypt hashes are much harder to brute force than passwords stored with sha1.
+  But ``BlowfishAuthenticate`` has been deprecated in 2.4 and instead ``BlowfishPasswordHasher``
+  has been added.
+
+Blowfish password hasher は、任意の認証クラスで使用することができます。
+使用するには、認証オブジェクトの ``passwordHasher`` の設定で Blowfish password hasher を指定しないといけません::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
+
+..
+  A blowfish password hasher can be used with any authentication class. All you have
+  to do with specify ``passwordHasher`` setting for the authenticating object::
 
 ダイジェスト認証のパスワードのハッシュ化
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 ..
   Hashing passwords for digest authentication
 
@@ -520,28 +641,55 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
     }
 
 ..
-  Because Digest authentication requires a password hashed in the format defined by the RFC.  
-  In order to correctly hash a password for use with Digest authentication you should use the special password hashing function on ``DigestAuthenticate``. 
-  If you are going to be combining digest authentication with any other authentication strategies, 
+  Because Digest authentication requires a password hashed in the format defined by the RFC,
+  in order to correctly hash a password for use with Digest authentication you should use the special password hashing function on ``DigestAuthenticate``.
+  If you are going to be combining digest authentication with any other authentication strategies,
   it's also recommended that you store the digest password in a separate column, from the normal password hash::
 
 ダイジェスト認証用のパスワードは、ダイジェスト認証の RFC に基づき、他のハッシュ化パスワードよりもやや多くの情報を要求します。
-ダイジェストハッシュのために AuthComponent::password() を使うとログインできなくなってしまいます。
 
 ..
-  Passwords for digest authentication need a bit more information than other password hashes, based on the RFC for digest authentication. 
-  If you use AuthComponent::password() for digest hashes you will not be able to login.
+  Passwords for digest authentication need a bit more information than
+  other password hashes, based on the RFC for digest authentication.
 
 .. note::
 
     AuthComponent::$authenticate 内で DigestAuthentication が設定された場合、
     DigestAuthenticate::password() の第３パラメータは定義した 'realm' の設定値と一致する必要があります。このデフォルトは  ``env('SCRIPT_NAME)`` です。
     複数の環境で一貫したハッシュが欲しい場合に static な文字列を使いたいと思うかもしれません。
-    
+
     ..
-      The third parameter of DigestAuthenticate::password() must match the 'realm' config value defined 
+      The third parameter of DigestAuthenticate::password() must match the 'realm' config value defined
       when DigestAuthentication was configured in AuthComponent::$authenticate.  This defaults to ``env('SCRIPT_NAME)``.
       You may wish to use a static string if you want consistent hashes in multiple environments.
+
+カスタムパスワードハッシュ化クラスの作成
+----------------------------------------
+
+..
+  Creating custom password hasher classes
+
+カスタムパスワードハッシュ化クラスは ``AbstractPasswordHasher`` クラスを継承し、
+抽象メソッドの ``hash()`` と ``check()`` を実装する必要があります。
+``app/Controller/Component/Auth/CustomPasswordHasher.php`` に次のように記述します::
+
+    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
+
+    class CustomPasswordHasher extends AbstractPasswordHasher {
+        public function hash($password) {
+            // ここにコードを書く
+        }
+
+        public function check($password, $hashedPassword) {
+            // ここにコードを書く
+        }
+    }
+
+..
+  Custom password hasher classes need to extend the ``AbstractPasswordHasher``
+  class and need to implement the abstract methods ``hash()`` and ``check()``.
+  In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+  the following::
 
 手動でのユーザログイン
 -------------------------
@@ -562,13 +710,13 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
     }
 
 ..
-  Sometimes the need arises where you need to manually log a user in, such as just after they registered for your application.  
+  Sometimes the need arises where you need to manually log a user in, such as just after they registered for your application.
   You can do this by calling ``$this->Auth->login()`` with the user data you want to 'login'::
 
 .. warning::
 
     login メソッドに渡される配列に新たなユーザIDが追加されていることを必ず確認してください。そうでない場合、そのユーザIDが利用できなくなってしまいます。
-    
+
     ..
       Be sure to manually add the new User id to the array passed to the login method. Otherwise you won't have the user id available.
 
@@ -590,9 +738,9 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
     $this->Auth->user('id');
 
 ..
-  Once a user is logged in, you will often need some particular information about the current user.  
-  You can access the currently logged in user using ``AuthComponent::user()``.  
-  This method is static, and can be used globally after the AuthComponent has been loaded. 
+  Once a user is logged in, you will often need some particular information about the current user.
+  You can access the currently logged in user using ``AuthComponent::user()``.
+  This method is static, and can be used globally after the AuthComponent has been loaded.
   You can access it both as an instance method or as a static method::
 
 
@@ -610,7 +758,7 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
     }
 
 ..
-  Eventually you'll want a quick way to de-authenticate someone, and redirect them to where they need to go. 
+  Eventually you'll want a quick way to de-authenticate someone, and redirect them to where they need to go.
   This method is also useful if you want to provide a 'Log me out' link inside a members' area of your application::
 
 ダイジェスト／Basic認証でログインしたユーザのログアウトを、すべてのクライアントで成し遂げるのは難しいものです。
@@ -619,9 +767,9 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 認証 realm の変更は、一部のクライアントで機能させるためのもう１つの解決法です。
 
 ..
-  Logging out users that logged in with Digest or Basic auth is difficult to accomplish for all clients.  
-  Most browsers will retain credentials for the duration they are still open.  
-  Some clients can be forced to logout by sending a 401 status code.  
+  Logging out users that logged in with Digest or Basic auth is difficult to accomplish for all clients.
+  Most browsers will retain credentials for the duration they are still open.
+  Some clients can be forced to logout by sending a 401 status code.
   Changing the authentication realm is another solution that works for some clients.
 
 .. _authorization-objects:
@@ -641,9 +789,9 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 - ``ControllerAuthorize`` アクティブなコントローラの ``isAuthorized()`` を呼び、ユーザの権限判定のために、その戻り値を使う。これはユーザの権限判定をもっともシンプルに行う方法です。
 
 ..
-  Authorization is the process of ensuring that an identified/authenticated user is allowed to access the resources they are requesting.  
-  If enabled ``AuthComponent`` can automatically check authorization handlers and ensure that logged in users are allowed to access the resources 
-  they are requesting.  
+  Authorization is the process of ensuring that an identified/authenticated user is allowed to access the resources they are requesting.
+  If enabled ``AuthComponent`` can automatically check authorization handlers and ensure that logged in users are allowed to access the resources
+  they are requesting.
   There are several built-in authorization handlers, and you can create custom ones for your application, or as part of a plugin.
   - ``ActionsAuthorize`` Uses the AclComponent to check for permissions on an action level.
   - ``CrudAuthorize`` Uses the AclComponent and action -> CRUD mappings to check permissions for resources.
@@ -669,12 +817,12 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 
 ..
   You configure authorization handlers using ``$this->Auth->authorize``.
-  You can configure one or many handlers for authorization.  
-  Using multiple handlers allows you to support different ways of checking authorization.  
-  When authorization handlers are checked, they will be called in the order they are declared.  
+  You can configure one or many handlers for authorization.
+  Using multiple handlers allows you to support different ways of checking authorization.
+  When authorization handlers are checked, they will be called in the order they are declared.
   Handlers should return false, if they are unable to check authorization, or the check has failed.
-  Handlers should return true if they were able to check authorization successfully. 
-  Handlers will be called in sequence until one passes.  
+  Handlers should return true if they were able to check authorization successfully.
+  Handlers will be called in sequence until one passes.
   If all checks fail, the user will be redirected to the page they came from.
   Additionally you can halt all authorization by throwing an exception.
   You will need to catch any thrown exceptions, and handle them.
@@ -692,7 +840,7 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
     );
 
 ..
-  You can configure authorization handlers in your controller's ``beforeFilter`` or, in the ``$components`` array.  
+  You can configure authorization handlers in your controller's ``beforeFilter`` or, in the ``$components`` array.
   You can pass configuration information into each authorization object, using an array::
 
 ``Auth->authorize`` も ``Auth->authenticate`` とほぼ同様で、``all`` キーを使うことでコードを DRY に保ちやすくなります。
@@ -707,8 +855,8 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     );
 
 ..
-  Much like ``Auth->authenticate``, ``Auth->authorize``, helps you keep your code DRY, by using the ``all`` key. 
-  This special key allows you to set settings that are passed to every attached object. 
+  Much like ``Auth->authenticate``, ``Auth->authorize``, helps you keep your code DRY, by using the ``all`` key.
+  This special key allows you to set settings that are passed to every attached object.
   The all key is also exposed as ``AuthComponent::ALL``::
 
 上記の例では、``Actions`` と ``Controller`` の両方ともが 'all' キーで宣言された設定を取得することになります。
@@ -720,7 +868,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 - ``userModel`` ARO/モデル のノード名。これ以下からユーザ情報を探します。ActionsAuthorize で使われます。
 
 ..
-  In the above example, both the ``Actions`` and ``Controller`` will get the settings defined for the 'all' key. 
+  In the above example, both the ``Actions`` and ``Controller`` will get the settings defined for the 'all' key.
   Any settings passed to a specific authorization object will override the matching key in the 'all' key.
   The core authorize objects support the following configuration keys.
   - ``actionPath`` Used by ``ActionsAuthorize`` to locate controller action ACO's in the ACO tree.
@@ -746,8 +894,8 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     }
 
 ..
-  Because authorize objects are pluggable, you can create custom authorize objects in your application or plugins. 
-  If for example you wanted to create an LDAP authorize object. 
+  Because authorize objects are pluggable, you can create custom authorize objects in your application or plugins.
+  If for example you wanted to create an LDAP authorize object.
   In ``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the following::
 
 
@@ -757,9 +905,9 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ``BaseAuthorize`` クラスではよく使われる強力なメソッドが多数提供されます。
 
 ..
-  Authorize objects should return ``false`` if the user is denied access, or if the object is unable to perform a check.  
-  If the object is able to verify the user's access, ``true`` should be returned. 
-  It's not required that you extend ``BaseAuthorize``, only that your authorize object implements an ``authorize()`` method.  
+  Authorize objects should return ``false`` if the user is denied access, or if the object is unable to perform a check.
+  If the object is able to verify the user's access, ``true`` should be returned.
+  It's not required that you extend ``BaseAuthorize``, only that your authorize object implements an ``authorize()`` method.
   The ``BaseAuthorize`` class provides a number of helpful methods that are commonly used.
 
 
@@ -769,7 +917,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ..
   Using custom authorize objects
 
-カスタム権限判定オブジェクトを作成したら、AuthComponents の authorize 配列にそれらを含めることで使うことができます::
+カスタム権限判定オブジェクトを作成したら、AuthComponent の authorize 配列にそれらを含めることで使うことができます::
 
     $this->Auth->authorize = array(
         'Ldap', // app内の権限判定オブジェクト
@@ -777,7 +925,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     );
 
 ..
-  Once you've created your custom authorize object, you can use them by including them in AuthComponents authorize array::
+  Once you've created your custom authorize object, you can use them by including them in your AuthComponent's authorize array::
 
 権限判定を使用しない
 ----------------------
@@ -790,9 +938,9 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 権限判定のスキーマを使いたくない場合は、コントローラの beforeFilter か、別のコンポーネントで権限を確実にチェックしてください。
 
 ..
-  If you'd like to not use any of the built-in authorization objects, and want to handle things entirely outside of AuthComponent 
-  you can set ``$this->Auth->authorize = false;``.  
-  By default AuthComponent starts off with ``authorize = false``.  
+  If you'd like to not use any of the built-in authorization objects, and want to handle things entirely outside of AuthComponent
+  you can set ``$this->Auth->authorize = false;``.
+  By default AuthComponent starts off with ``authorize = false``.
   If you don't use an authorization scheme, make sure to check authorization yourself in your controller's beforeFilter, or with another component.
 
 
@@ -821,16 +969,24 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
 
 ..
   There are often times controller actions that you wish to remain entirely public, or that don't require users to be logged in.
-  AuthComponent is pessimistic, and defaults to denying access. 
-  You can mark actions as public actions by using ``AuthComponent::allow()``.  
+  AuthComponent is pessimistic, and defaults to denying access.
+  You can mark actions as public actions by using ``AuthComponent::allow()``.
   By marking actions as public, AuthComponent, will not check for a logged in user, nor will authorize objects be checked::
 
+.. warning::
+
+  もし scaffolding を使っている場合、すべてを許可する設定では scaffold のメソッドを識別できず、許可されません。
+  それらのアクション名を明示するようにしてください。
+
+  ..
+    If you're using scaffolding, allow all will not identify and allow the
+    scaffolded methods. You have to specify their action names.
 
 ``allow()`` には必要な数だけいくつでもアクション名を記述することができます。
 すべてのアクション名を含む配列を渡してもかまいません。
 
 ..
-  You can provide as many action names as you need to ``allow()``.  
+  You can provide as many action names as you need to ``allow()``.
   You can also supply an array containing all the action names.
 
 権限判定が必要なアクションの作成
@@ -853,44 +1009,16 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
     $this->Auth->deny(array('add', 'edit'));
 
 ..
-  If after making actions public, you want to revoke the public access.
-  You can do so using ``AuthComponent::deny()``::
+  By default all actions require authorization. However, after making actions
+  public, you want to revoke the public access.  You can do so using
+  ``AuthComponent::deny()``::
 
 ``deny()`` には必要な数だけいくつでもアクション名を記述することができます。
 すべてのアクション名を含む配列を渡してもかまいません。
 
 ..
-  You can provide as many action names as you need to ``deny()``.  
+  You can provide as many action names as you need to ``deny()``.
   You can also supply an array containing all the action names.
-
-CrudAuthorize を使う場合のアクションのマッピング
-------------------------------------------------
-
-..
-  Mapping actions when using CrudAuthorize
-
-CrudAuthorize やアクションマッピングを使う他の権限判定オブジェクトを使う場合、追加でモデルのマッピングが必要になるかもしれません。
-その場合、mapAction() を使うことで、アクション -> CRUD パーミッションのマッピングを行うことができます。
-AuthComponent のこのメソッドを呼び出すことで、設定済みのすべての権限判定オブジェクトに設定が渡されます::
-ですので、設定がどこでも確実に適用されます::
-
-    $this->Auth->mapActions(array(
-        'create' => array('register'),
-        'view' => array('show', 'display')
-    ));
-
-..
-  When using CrudAuthorize or any other authorize objects that use action mappings, it might be necessary to map additional methods.  
-  You can map actions -> CRUD permissions using mapAction().  
-  Calling this on AuthComponent will delegate to all the of the configured authorize objects, 
-  so you can be sure the settings were applied every where::
-
-mapActions のキーには設定したい CRUD パーミッションを指定してください。
-一方、値には CRUD パーミッションにマッピングされたすべてのアクションの配列を設定してください。
-
-..
-  The keys for mapActions should be the CRUD permissions you want to set,
-  while the values should be an array of all the actions that are mapped to the CRUD permission.
 
 ControllerAuthorize の利用
 --------------------------
@@ -902,8 +1030,8 @@ ControllerAuthorize を使うことで、コントローラのコールバック
 非常にシンプルな権限判定を行う場合や、権限判定を行うのにモデルとコンポーネントを合わせて利用する必要がある場合、しかしカスタム権限判定オブジェクトを作成したくない場合に、これは理想的です。
 
 ..
-  ControllerAuthorize allows you to handle authorization checks in a controller callback. 
-  This is ideal when you have very simple authorization, or you need to use a combination of models + components to do your authorization, 
+  ControllerAuthorize allows you to handle authorization checks in a controller callback.
+  This is ideal when you have very simple authorization, or you need to use a combination of models + components to do your authorization,
   and don't want to create a custom authorize object.
 
 コールバックでは必ず ``isAuthorized()`` を呼んでください。これは該当ユーザがリクエスト内でリソースにアクセスすることが許可されるかを boolean で返します。
@@ -930,7 +1058,7 @@ ControllerAuthorize を使うことで、コントローラのコールバック
     }
 
 ..
-  The callback is always called ``isAuthorized()`` and it should return a boolean as to whether or not the user is allowed to access resources in the request. 
+  The callback is always called ``isAuthorized()`` and it should return a boolean as to whether or not the user is allowed to access resources in the request.
   The callback is passed the active user, so it can be checked::
 
 上記のコールバックは非常にシンプルな権限判定システムとなっており、role = admin のユーザだけが admin に設定されたアクションにアクセスすることができます。
@@ -950,8 +1078,8 @@ ActionsAuthorize は DbAcl とペアで使うことが多く、アプリケー�
 それは、ただし、たとえば IniAcl とカスタムアプリケーション ACL バックエンドというように、他の ACL の実装と組み合わせることが可能です。
 
 ..
-  ActionsAuthorize integrates with the AclComponent, and provides a fine grained per action ACL check on each request.  
-  ActionsAuthorize is often paired with DbAcl to give dynamic and flexible permission systems that can be edited by admin users through the application.  
+  ActionsAuthorize integrates with the AclComponent, and provides a fine grained per action ACL check on each request.
+  ActionsAuthorize is often paired with DbAcl to give dynamic and flexible permission systems that can be edited by admin users through the application.
   It can however, be combined with other Acl implementations such as IniAcl and custom application Acl backends.
 
 CrudAuthorize の利用
@@ -964,7 +1092,7 @@ CrudAuthorize の利用
 CRUD マッピングを使った権限判定の機能を提供します。これらのマッピングされたリクエストは AclComponent 内で特別なパーミッションとしてチェックされます。
 
 ..
-  ``CrudAuthorize`` integrates with AclComponent, and provides the ability to map requests to CRUD operations.  
+  ``CrudAuthorize`` integrates with AclComponent, and provides the ability to map requests to CRUD operations.
   Provides the ability to authorize using CRUD mappings. These mapped results are then checked in the AclComponent as specific permissions.
 
 たとえば、``/posts/index`` を現在のリクエストであるとします。
@@ -973,11 +1101,40 @@ ACL チェックは ``posts`` コントローラの ``read`` パーミッショ�
 これにより、アクセスされたアクションにとどまらず、リソースへと行われる行為により焦点を合わせたパーミッションシステムを作ることができるようになります。
 
 ..
-  For example, taking ``/posts/index`` as the current request.  
-  The default mapping for ``index``, is a ``read`` permission check. 
-  The Acl check would then be for the ``posts`` controller with the ``read`` permission.  
-  This allows you to create permission systems that focus more on what is being done to resources, 
+  For example, taking ``/posts/index`` as the current request.
+  The default mapping for ``index``, is a ``read`` permission check.
+  The Acl check would then be for the ``posts`` controller with the ``read`` permission.
+  This allows you to create permission systems that focus more on what is being done to resources,
   rather than the specific actions being visited.
+
+CrudAuthorize を使う場合のアクションのマッピング
+------------------------------------------------
+
+..
+  Mapping actions when using CrudAuthorize
+
+CrudAuthorize やアクションマッピングを使う他の権限判定オブジェクトを使う場合、追加でモデルのマッピングが必要になるかもしれません。
+その場合、mapAction() を使うことで、アクション -> CRUD パーミッションのマッピングを行うことができます。
+AuthComponent のこのメソッドを呼び出すことで、設定済みのすべての権限判定オブジェクトに設定が渡されます::
+ですので、設定がどこでも確実に適用されます::
+
+    $this->Auth->mapActions(array(
+        'create' => array('register'),
+        'view' => array('show', 'display')
+    ));
+
+..
+  When using CrudAuthorize or any other authorize objects that use action mappings, it might be necessary to map additional methods.
+  You can map actions -> CRUD permissions using mapAction().
+  Calling this on AuthComponent will delegate to all the of the configured authorize objects,
+  so you can be sure the settings were applied every where::
+
+mapActions のキーには設定したい CRUD パーミッションを指定してください。
+一方、値には CRUD パーミッションにマッピングされたすべてのアクションの配列を設定してください。
+
+..
+  The keys for mapActions should be the CRUD permissions you want to set,
+  while the values should be an array of all the actions that are mapped to the CRUD permission.
 
 AuthComponent API
 =================
@@ -990,14 +1147,14 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:attr:: ajaxLogin
 
     不正な／期限切れのセッションを伴った Ajax リクエストの場合に render すべき任意のビューエレメントの名前。
-    
-    ..
-      The name of an optional view element to render when an Ajax request is made with an invalid or expired session
 
-.. php:attr: allowedActions
+    ..
+      The name of an optional view element to render when an Ajax request is made with an invalid or expired session.
+
+.. php:attr:: allowedActions
 
     ユーザの妥当性チェックが必要ないコントローラのアクションの配列。
-    
+
     ..
       Controller actions for which user validation is not required.
 
@@ -1005,31 +1162,38 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     ユーザのログインに使いたい認証オブジェクトの配列を設定してください。
     コアの認証オブジェクトがいくつか存在します。 :ref:`authentication-objects` を参照してください。
-    
+
     ..
-      Set to an array of Authentication objects you want to use when logging users in. 
-      There are several core authentication objects, see the section on :ref:`authentication-objects`
+      Set to an array of Authentication objects you want to use when logging users in.
+      There are several core authentication objects, see the section on :ref:`authentication-objects`.
 
 .. php:attr:: authError
 
     ユーザがアクセス権の無いオブジェクトやアクションにアクセスした場合に表示されるエラー。
-    
+
     ..
       Error to display when user attempts to access an object or action to which they do not have access.
+
+    .. versionchanged:: 2.4
+       `false` を設定することにより、authError メッセージを表示しないようにできます。
+
+       ..
+         You can suppress authError message from being displayed by setting this
+         value to boolean `false`.
 
 .. php:attr:: authorize
 
     各リクエストでユーザの権限判定に使いたい権限判定オブジェクトの配列を設定してください。
     :ref:`authorization-objects` を参照してください。
-    
+
     ..
-      Set to an array of Authorization objects you want to use when authorizing users on each request, 
-      see the section on :ref:`authorization-objects`
+      Set to an array of Authorization objects you want to use when authorizing users on each request,
+      see the section on :ref:`authorization-objects`.
 
 .. php:attr:: components
 
     AuthComponent により利用される他のコンポーネント。
-    
+
     ..
       Other components utilized by AuthComponent
 
@@ -1052,7 +1216,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:attr:: loginAction
 
     ログインを扱うコントローラとアクションを表す、(文字列や配列で定義した) URL。デフォルトで `/users/login`。
-    
+
     ..
       A URL (defined as a string or array) to the controller action that handles logins.  Defaults to `/users/login`
 
@@ -1060,9 +1224,9 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     ログイン後のリダイレクト先のコントローラとアクションを表す、(文字列や配列で定義した) URL。
     この値はユーザが ``Auth.redirect`` をセッション内に持っている場合には無視されます。
-    
+
     ..
-      The URL (defined as a string or array) to the controller action users should be redirected to after logging in. 
+      The URL (defined as a string or array) to the controller action users should be redirected to after logging in.
       This value will be ignored if the user has an ``Auth.redirect`` value in their session.
 
 .. php:attr:: logoutRedirect
@@ -1070,30 +1234,41 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
     ユーザがログアウトした後のリダイレクト先となるデフォルトのアクション。
     AuthComponent は post-logout のリダイレクトを扱いませんが、リダイレクト先の URL は :php:meth:`AuthComponent::logout()` から返されるものとなります。
     デフォルトは :php:attr:`AuthComponent::$loginAction`。
-    
+
     ..
-      The default action to redirect to after the user is logged out. 
-      While AuthComponent does not handle post-logout redirection, a redirect URL will be returned from :php:meth:`AuthComponent::logout()`. 
+      The default action to redirect to after the user is logged out.
+      While AuthComponent does not handle post-logout redirection, a redirect URL will be returned from :php:meth:`AuthComponent::logout()`.
       Defaults to :php:attr:`AuthComponent::$loginAction`.
+
+.. php:attr:: unauthorizedRedirect
+
+    許可されていないアクセスに対する処理を制御します。
+    デフォルトでは、許可されていないユーザーはリファラの URL か ``AuthComponent::$loginAction`` か、もしくは '/' にリダイレクトされます。
+    false をセットした場合は、リダイレクトする代わりに ForbiddenException が送出されます。
+
+    ..
+      Controls handling of unauthorized access. By default unauthorized user is
+      redirected to the referrer url or ``AuthComponent::$loginAction`` or '/'.
+      If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 .. php:attr:: request
 
     リクエストオブジェクト。
-    
+
     ..
       Request object
 
 .. php:attr:: response
 
     レスポンスオブジェクト。
-    
+
     ..
       Response object
 
 .. php:attr:: sessionKey
 
     現在のユーザレコードが保存されているセッションのキー名。指定がない場合は "Auth.User" となる。
-    
+
     ..
       The session key name where the record of the current user is stored. If unspecified, it will be "Auth.User".
 
@@ -1101,7 +1276,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     公開するアクションの配列。これで指定したアクションは権限判定チェックが行われません。
     特別な値 ``'*'`` は対象コントローラのすべてのアクションを公開に設定します。コントローラの beforeFilter メソッド内で使ってください。
-    
+
     ..
       Set one or more actions as public actions, this means that no authorization checks will be performed for the specified actions.
       The special value of ``'*'`` will mark all the current controllers actions as public. Best used in your controller's beforeFilter method.
@@ -1109,14 +1284,14 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:method:: constructAuthenticate()
 
     設定済みの認証オブジェクトを読み込む。
-    
+
     ..
       Loads the configured authentication objects.
 
 .. php:method:: constructAuthorize()
 
     設定済みの権限判定オブジェクトを読み込む。
-    
+
     ..
       Loads the authorization objects configured.
 
@@ -1124,15 +1299,15 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     以前に公開アクションとして宣言されていたアクションを非公開へと変更する。
     こうすることで、これらのアクションも権限判定されることになります。コントローラの beforeFilter メソッド内で使ってください。
-    
+
     ..
-      Toggle one more more actions previously declared as public actions, as non-public methods.  
+      Toggle one more more actions previously declared as public actions, as non-public methods.
       These methods will now require authorization.  Best used inside your controller's beforeFilter method.
 
 .. php:method:: flash($message)
 
     フラッシュメッセージを設定します。セッションコンポーネントを使い、値は :php:attr:`AuthComponent::$flash` から取得します。
-    
+
     ..
       Set a flash message. Uses the Session component, and values from :php:attr:`AuthComponent::$flash`.
 
@@ -1140,13 +1315,13 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     :param CakeRequest $request: 使用されるリクエスト。
     :param CakeResponse $response: 使用されるレスポンス。認証が失敗なら、ヘッダーを送信できる。
-    
+
     ..
       :param CakeRequest $request: The request to use.
       :param CakeResponse $response: The response to use, headers can be sent if authentication fails.
 
     このメソッドは AuthComponent が現在のリクエストに含まれる情報に基づき、ユーザを識別するために使います。
-    
+
     ..
       This method is used by AuthComponent to identify a user based on the
       information contained in the current request.
@@ -1154,7 +1329,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:method:: initialize($Controller)
 
     AuthComponent をコントローラ内で使えるように初期化します。
-    
+
     ..
       Initializes AuthComponent for use in the controller.
 
@@ -1162,22 +1337,22 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     ユーザに権限があるかどうかをチェックするために、設定された権限判定アダプタを使用します。
     各アダプタは順にチェックされます。いずれかが true を返したら、ユーザはそのリクエストで権限ありとみなされます。
-    
+
     ..
-      Uses the configured Authorization adapters to check whether or not a user is authorized. 
+      Uses the configured Authorization adapters to check whether or not a user is authorized.
       Each adapter will be checked in sequence, if any of them return true, then the user will be authorized for the request.
 
 .. php:method:: loggedIn()
 
     現在のクライアントがログイン済みなら true を返します。そうでないなら false を返します。
-    
+
     ..
       Returns true if the current client is a logged in user, or false if they are not.
 
 .. php:method:: login($user)
 
     :param array $user: ログインしたユーザのデータ配列。
-    
+
     ..
       :param array $user: Array of logged in user data.
 
@@ -1185,22 +1360,22 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
     提供された情報は user() の呼び出しによりセッションへと保存されます。
     ユーザが提供されない場合、AuthComponent は現在のリクエスト情報を使って識別しようとします。
     :php:meth:`AuthComponent::identify()` を参照してください。
-    
+
     ..
-      Takes an array of user data to login with.  Allows for manual logging of users.  
-      Calling user() will populate the session value with the provided information.  
-      If no user is provided, AuthComponent will try to identify a user using the current request information.  
+      Takes an array of user data to login with.  Allows for manual logging of users.
+      Calling user() will populate the session value with the provided information.
+      If no user is provided, AuthComponent will try to identify a user using the current request information.
       See :php:meth:`AuthComponent::identify()`
 
 .. php:method:: logout()
 
     :return: ログアウトでリダイレクト先となる URL の文字列。
-    
+
     ..
       :return: A string url to redirect the logged out user to.
 
     現在のユーザをログアウトさせます。
-    
+
     ..
       Logs out the current user.
 
@@ -1209,60 +1384,63 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
     アクション名と CRUD 操作をマッピングします。コントローラに基づく認証で使用されます。
     このメソッドを呼ぶ前に権限判定プロパティの設定を確認してください。
     設定されているすべての権限判定オブジェクトに $map が渡されるためです。
-    
+
     ..
-      Maps action names to CRUD operations. Used for controller-based authentication. 
-      Make sure to configure the authorize property before calling this method. 
+      Maps action names to CRUD operations. Used for controller-based authentication.
+      Make sure to configure the authorize property before calling this method.
       As it delegates $map to all the attached authorize objects.
 
 .. php:staticmethod:: password($pass)
 
-    アプリケーションのソルト値をい使ってパスワードをハッシュ化する。
-    
-    ..
-      Hash a password with the application's salt value.
+.. deprecated:: 2.4
 
 .. php:method:: redirect($url = null)
+
+.. deprecated:: 2.3
+
+.. php:method:: redirectUrl($url = null)
 
     パラメータが渡されなかったら、認証のリダイレクト URL を取得します。
     ログイン後、リダイレクト先となる URL を渡します。
     リダイレクトの値が保存されないなら、:php:attr:`AuthComponent::$loginRedirect` へとフォールバックします。
-    
+
     ..
-      If no parameter is passed, gets the authentication redirect URL. 
-      Pass a url in to set the destination a user should be redirected to upon logging in. 
+      If no parameter is passed, gets the authentication redirect URL.
+      Pass a url in to set the destination a user should be redirected to upon logging in.
       Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is no stored redirect value.
+
+.. versionadded:: 2.3
 
 .. php:method:: shutdown($Controller)
 
     コンポーネントをシャットダウンします。ユーザがログインしているなら、リダイレクトを行いません。
-    
+
     ..
       Component shutdown. If user is logged in, wipe out redirect.
 
 .. php:method:: startup($Controller)
 
     主要な実行メソッドです。不正なユーザのリダイレクトやログインフォームのデータ処理を扱います。
-    
+
     ..
       Main execution method. Handles redirecting of invalid users, and processing of login form data.
 
 .. php:staticmethod:: user($key = null)
 
     :param string $key:  フェッチしたいユーザデータのキー。null ならユーザの全データが返される。インスタンスメソッドとしても呼び出し可能。
-    
+
     ..
-      :param string $key:  The user data key you want to fetch if null, all user data will be returned.  Can also be called as an instance method.
+      :param string $key:  The user data key you want to fetch. If null, all user data will be returned.  Can also be called as an instance method.
 
     ログインしている現在のユーザのデータを取得する。プロパティのキーを使用することで、このユーザについて特定のデータをフェッチすることが可能::
-    
+
         $id = $this->Auth->user('id');
 
     ..
       Get data concerning the currently logged in user, you can use a property key to fetch specific data about the user::
 
     現在のユーザがログインしていない、もしくは存在しないなら、null が返される。
-    
+
     ..
       If the current user is not logged in or the key doesn't exist, null will be returned.
 

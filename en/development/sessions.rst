@@ -4,7 +4,7 @@ Sessions
 CakePHP provides a wrapper and suite of utility features on top of PHP's native
 ``session`` extension.  Sessions allow you to identify unique users across the
 requests and store persistent data for specific users. Unlike Cookies, session
-data is not available on the client side.  Usage of the ``$_SESSION`` is generally
+data is not available on the client side.  Usage of ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
 
 .. _session-configuration:
@@ -12,8 +12,7 @@ avoided in CakePHP, and instead usage of the Session classes is preferred.
 Session Configuration
 =====================
 
-Session configuration is stored in ``Configure``, and the session classes will
-retrieve it from there as needed. Session configuration is stored under the top
+Session configuration is stored in ``Configure`` under the top
 level ``Session`` key, and a number of options are available:
 
 * ``Session.cookie`` - Change the name of the session cookie.
@@ -26,10 +25,10 @@ level ``Session`` key, and a number of options are available:
   This affects the session cookie, and is handled by PHP itself.
 
 * ``Session.checkAgent`` - Should the user agent be checked, on each request.  If
-  the useragent does not match the session will be destroyed.
+  the user agent does not match the session will be destroyed.
 
 * ``Session.autoRegenerate`` - Enabling this setting, turns on automatic
-  renewal of sessions, and sessionids that change frequently. Enabling this
+  renewal of sessions, and session ids that change frequently. Enabling this
   value will use the session's ``Config.countdown`` value to keep track of requests.
   Once the countdown reaches 0, the session id will be regenerated.  This is a
   good option to use for applications that need frequently
@@ -178,7 +177,7 @@ Cache Sessions
 --------------
 
 The Cache class can be used to store sessions as well.  This allows you to store
-sessions in a cache like APC, memcache, or Xcache.  There are some caveats to
+sessions in a cache like APC, Memcached, or Xcache.  There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 
@@ -296,7 +295,7 @@ writing session data.
 Reading & writing session data
 ==============================
 
-Depending on the context you are in your application you have different classes
+Depending on the context you are in, your application has different classes
 that provide access to the session.  In controllers you can use
 :php:class:`SessionComponent`.  In the view, you can use
 :php:class:`SessionHelper`.  In any part of your application you can use

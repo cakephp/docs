@@ -7,7 +7,7 @@ séparer la logique qui ne doit pas être directement reliée à un model, mais
 qui nécessite d'être là. En offrant une simple, mais puissante, manière
 d'étendre les models, les behaviors nous permettent d'attacher des
 fonctionnalités aux models en définissant une simple variable de classe.
-C'est comme çà que les behaviors permettent de débarrasser les models de
+C'est comme cela que les behaviors permettent de débarrasser les models de
 tout le "sur-poids" qui ne devrait pas faire partie du contrat métier qu'ils
 modèlent ou de ce qui est aussi nécessité par différents models et qui peut
 alors être extrapolé.
@@ -85,7 +85,7 @@ seulement comme un arbre, il pourrait aussi supporter l'internationalisation::
 
 Jusqu'à présent, nous avons ajouter les behaviors aux models en utilisant
 une variable de classe. Cela signifie que nos behaviors seront attachés
-à nos models de tout au long de leur durée vie. Pourtant, nous pourrions
+à nos models tout au long de leur durée vie. Pourtant, nous pourrions
 avoir besoin de "détacher" les behaviors des models à l'exécution.
 Considérons que dans notre précédent model Category, lequel agit comme un
 model Tree et Translate, nous ayons besoin pour quelque raison de le forcer
@@ -94,7 +94,7 @@ model Tree et Translate, nous ayons besoin pour quelque raison de le forcer
     // Détache un behavior de notre model :
     $this->Category->Behaviors->unload('Translate');
 
-Cela fera que notre model Categorie arrêtera dorénavant de se comporter
+Cela fera que notre model Category arrêtera dorénavant de se comporter
 comme un model Translate. Nous pourrions avoir besoin, sinon, de désactiver
 simplement le behavior Translate pour qu'il n'agisse pas sur les
 opérations normales de notre model : nos finds, nos saves, etc. En fait,
@@ -204,10 +204,10 @@ qui 'act as' le behavior. Par exemple si vous avez::
     }
 
 Vous seriez capable d'appeler les méthodes de ``FlyingBehavior`` comme si
-elles étaient des méthodes du model Duck. Quand on créer des méthodes d'un
+elles étaient des méthodes du model Duck. Quand vous créez des méthodes d'un
 behavior, vous obtenez automatiquement une référence du model appelé en
-premier paramètre. Tous les autres paramètres fournis sont shifté one
-place to the right. Par exemple::
+premier paramètre. Tous les autres paramètres fournis sont décalés d'une place
+vers la droite. Par exemple::
 
     $this->Duck->fly('toronto', 'montreal');
 
@@ -243,7 +243,7 @@ celle d'une méthode mixin normal d'un behavior::
         }
     }
 
-Ce qui est au-dessus mappera chaque méthode ``doXXX()`` appélé vers le
+Ce qui est au-dessus mappera chaque méthode ``doXXX()`` appélée vers le
 behavior. Comme vous pouvez le voir, le model est toujours le premier
 paramètre, mais le nom de la méthode appelée sera le deuxième paramètre.
 Cela vous permet de munge le nom de la méthode pour des informations
@@ -259,9 +259,9 @@ Callbacks du Behavior
 =====================
 
 Les Behaviors d'un Model peuvent définir un nombre de callbacks qui sont
-déclenchés before les callbacks du model du même nom. Les callbacks
+déclenchés avant les callbacks du model du même nom. Les callbacks
 du Behavior vous permettent de capturer des évènements dans les models
-attachés et d'augmenter les paramètres ou accoler dans un behavior
+attachés et d'augmenter les paramètres ou de les accoler dans un behavior
 supplémentaire.
 
 Les callbacks disponibles sont:
@@ -286,12 +286,12 @@ paramètre est le model pour lequel la méthode du behavior a été invoquée.
 
 .. php:method:: setup(Model $Model, array $settings = array())
 
-    Appelé quand un behavior est attaché à un model. Les paramètres viennent
+    Appelée quand un behavior est attaché à un model. Les paramètres viennent
     de la propriété ``$actsAs`` du model attaché.
 
 .. php:method:: cleanup(Model $Model)
 
-    Appelé quand un behavior est détaché d'un model. La méthode de base retire
+    Appelée quand un behavior est détaché d'un model. La méthode de base retire
     les paramètres du model basées sur ``$model->alias``. Vous pouvez écraser
     cette méthode et fournir une fonctionnalité personnalisée nettoyée.
 

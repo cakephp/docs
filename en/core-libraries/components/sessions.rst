@@ -4,7 +4,7 @@ Sessions
 .. php:class:: SessionComponent(ComponentCollection $collection, array $settings = array())
 
 The CakePHP SessionComponent provides a way to persist client data
-between page requests. It acts as a wrapper for the ``$_SESSION`` as
+between page requests. It acts as a wrapper for ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
 related functions.
 
@@ -134,7 +134,7 @@ Creating notification messages
     Then we create the file ``app/View/Elements/flash_custom.ctp`` and build our
     custom flash element::
 
-        <div id="myCustomFlash"><?php echo $message; ?></div>
+        <div id="myCustomFlash"><?php echo h($message); ?></div>
 
     ``$params`` allows you to pass additional view variables to the
     rendered layout. Parameters can be passed affecting the rendered div, for 
@@ -153,6 +153,11 @@ Creating notification messages
 
         // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+
+    .. note::
+        By default CakePHP does not HTML escape flash messages. If you are using
+        any request or user data in your flash messages you should escape it
+        with :php:func:`h` when formatting your messages.
 
 .. meta::
     :title lang=en: Sessions

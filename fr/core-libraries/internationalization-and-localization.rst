@@ -80,6 +80,13 @@ Les codes des locales en trois caractères suivent la norme
 mais si vous créez des locales régionales (en\_US, en\_GB, etc.)
 Cake les utilisera dans les cas appropriés.
 
+.. warning::
+
+    Dans 2.3 et 2.4, certains codes de langues ont été corrigés pour
+    correspondre au standard ISO.
+    Merci de regarder les guides de migrations correspondants pour plus de
+    détails.
+
 Souvenez-vous que les fichiers po sont utiles pour des messages courts.
 Si vous pensez que vous aurez à traduire de longs paragraphes,
 ou des pages entières, vous devriez penser à l'implémentation
@@ -98,6 +105,21 @@ ou::
 
     // code de la Vue
     echo $this->element(Configure::read('Config.language') . '/tos')
+
+.. _lc-time:
+
+Pour la traduction de chaînes de catégorie LC_TIME, CakePHP utilise des fichiers
+POSIX compliant LC_TIME. Les fonctions i18n de la classe d'utilitaire
+:php:class:`CakeTime` et le helper :php:class:`TimeHelper` utilise ces fichiers
+LC_TIME.
+
+Placez juste le fichier LC_TIME dans son répertoire local respectif::
+
+    /app/Locale/fra/LC_TIME (French)
+    /app/Locale/por/LC_TIME (Portuguese)
+
+Vous pouvez trouver ces fichiers pour quelques langues populaires à partir du
+dépôt officiel `Localized <https://github.com/cakephp/localized>`_.
 
 Internationaliser les plugins CakePHP
 =====================================

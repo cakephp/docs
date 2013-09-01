@@ -2,7 +2,7 @@ Documentation
 #############
 
 Contribuer à la documentation est simple. Les fichiers sont hébergés sur
-http://github.com/cakephp/docs. N'hésitez pas à forker le dépôt, ajoutez vos
+https://github.com/cakephp/docs. N'hésitez pas à forker le dépôt, ajoutez vos
 changements/améliorations/traductions et retournez les avec un pull request.
 Vous pouvez même modifier les documents en ligne avec github, sans télécharger
 les fichiers.
@@ -80,9 +80,17 @@ d'une ligne vide.
 Le balisage interne
 -------------------
 
-* Un astérisque: *text* pour une accentuation (italiques),
-* Deux astérisques: **text** pour une forte accentuation (caractères gras), et
-* backquotes: ``text`` pour les exemples de code.
+* Un astérisque: *text* pour une accentuation (italiques)
+
+  * ``*text*``
+ 
+* Two asterisks: **text** pour une forte accentuation (caractères gras)
+
+  * ``**text**``
+ 
+* Two backquotes: ``text`` pour les exemples de code
+
+  * ````text````
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
 confondus avec les délimiteurs du balisage interne, ils doivent être echappés
@@ -105,12 +113,12 @@ ordonnées commencent par une ligne avec un unique astérisque et un espace.
 Les listes numérotées peuvent être créées avec, soit les numéros, soit ``#``
 pour une numérotation automatique::
 
-    * C\'est une balle
+    * C'est une balle
     * Ici aussi. Mais cette ligne
       a deux lignes.
 
-    1. Premi\ère ligne
-    2. Deuxi\ème ligne
+    1. Première ligne
+    2. Deuxième ligne
 
     #. Numérotation automatique
     #. Va vous faire économiser du temps.
@@ -118,10 +126,10 @@ pour une numérotation automatique::
 Les listes indentées peuvent aussi être créées, en indentant les sections et en
 les séparant avec une ligne vide::
 
-    * Premi\ère ligne
-    * Deuxi\ème ligne
+    * Première ligne
+    * Deuxième ligne
 
-        * Allez plus profond\ément
+        * Allez plus profondément
         * Whoah
 
     * Retour au premier niveau.
@@ -129,7 +137,7 @@ les séparant avec une ligne vide::
 Les listes avec définitions peuvent être créées en faisant ce qui suit::
 
     term
-        d\éfinition
+        définition
     CakePHP
         Un framework MVC pour PHP
 
@@ -233,7 +241,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
            .. php:method:: method($argument)
 
-           Description de la m\éthode
+           Description de la méthode
 
 
    Attributs, méthodes et constantes ne doivent pas être imbriqués. Ils peuvent
@@ -245,7 +253,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
         .. php:method:: methodName()
 
-            Texte sur la m\éthode
+            Texte sur la méthode
 
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
@@ -334,7 +342,7 @@ séparé par des lignes uniques::
             faireDesTrucs()
         }
 
-    C\'est un texte r\égulier de nouveau.
+    C'est un texte régulier de nouveau.
 
 Le texte littéral n'est pas modifié ou formaté, la sauvegarde du niveau
 d'indentation est supprimée.
@@ -364,10 +372,10 @@ Tous les avertissements sont faits de la même façon::
 
     .. note::
 
-        Indent\é, pr\éced\é et suivi par une ligne vide. Exactement comme
+        Indenté, précedé et suivi par une ligne vide. Exactement comme
         un paragraphe.
 
-    Ce texte n\'est pas une partie de la note.
+    Ce texte n'est pas une partie de la note.
 
 Exemples
 ~~~~~~~~

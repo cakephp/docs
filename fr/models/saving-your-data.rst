@@ -3,7 +3,7 @@ Sauvegarder vos Données
 
 CakePHP rend la sauvegarde des données d’un model très rapide. Les données
 prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du
-model en utilisant le format basique suivant ::
+model en utilisant le format basique suivant::
 
     Array
     (
@@ -30,7 +30,7 @@ CakePHP pour sauvegarder les données dans une table de la base de données ::
            if($this->Recipe->save($this->request->data)) {
                //On définit une message flash en session et on redirige.
                $this->Session->setFlash("Recipe sauvegardée !");
-               $this->redirect('/recettes');
+               return $this->redirect('/recettes');
            }
         }
         //Si aucune données de formulaire, on récupère la recipe à éditer
@@ -65,9 +65,9 @@ par le model::
     $this->Post->set('title', 'Nouveau titre pour l\'article');
     $this->Post->save();
 
-Dans un exemple de l'utilisation de ``set()`` pour mettre à jour et sauvegarder
-les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser
-``set()`` pour assigner de nouvelles valeurs aux champs multiples::
+C'est un exemple de l'utilisation de ``set()`` pour mettre à jour les champs
+uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser ``set()``
+pour assigner de nouvelles valeurs aux champs multiples::
 
     $this->Post->read(null, 1);
     $this->Post->set(array(
@@ -76,8 +76,17 @@ les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser
     ));
     $this->Post->save();
 
-Ce qui est au-dessus met à jour les champs title et published et les sauvegarde
-dans le base de données.
+Ce qui est au-dessus met à jour les champs title et published et sauvegarde
+l'enregistrement dans le base de données.
+
+:php:meth:`Model::clear()`
+==========================
+
+Cette méthode peut être utilisée pour réinitialiser l'état du model et effacer
+toutes les données non sauvegardées et les erreurs de validation.
+
+.. versionadded:: 2.4
+
 
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
@@ -106,6 +115,8 @@ suivante en clé:
   sauvegarde.
 * ``callbacks`` Défini à false permet la désactivation des callbacks. En
   utilisant 'before' ou 'after' activera seulement ces callbacks.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a).
 
 Plus d'informations sur les callbacks du model sont disponibles
 :doc:`ici <callback-methods>`.
@@ -204,6 +215,9 @@ suivantes:
 * ``validate`` Définie à true/false pour activer/désactiver la validation.
 * ``callbacks`` Définie à false pour désactiver les callbacks. Utiliser
   'before' ou 'after' activera seulement ces callbacks.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a).
+
     
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -213,22 +227,28 @@ mettre à jour sont identifiés par le tableau ``$conditions``, et les champs
 devant être mis à jour, ainsi que leurs valeurs, sont identifiés par
 le tableau ``$fields``.
 
-Par exemple, si je voulais approuver tous les boulangers qui sont membres
+Par exemple, si je voulais approuver tous les bakers qui sont membres
 depuis plus d’un an, l’appel à update devrait ressembler à quelque chose
 du style:: 
 
-    $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approve' => true),
-        array('Baker.created <=' => $cette_annee)
+        array('Baker.created <=' => $thisYear)
     );
 
-.. tip::
+Le tableau ``$fields`` accepte des expressions SQL. Les valeurs littérales
+doivent être manuellement quotées en utilisant :php:meth:`DboSource::value()`.
+Par exemple, si une de vos méthodes de model appelait ``updateAll()``,
+vous feriez ce qui suit::
 
-    Le tableau $fields accepte des expressions SQL. Les valeurs littérales
-    doivent être manuellement quotées en utilisant
-    :php:meth:`Sanitize::escape()`.
+    $db = $this->getDataSource();
+    $value = $db->value($value, 'string');
+    $this->updateAll(
+        array('Baker.approved' => true),
+        array('Baker.created <=' => $value)
+    );
 
 .. note::
 
@@ -254,16 +274,18 @@ délier les associations temporairement.
 La méthode utilisée pour sauvegarder les lignes multiples du même model en
 une fois. Les options suivantes peuvent être utilisées:
 
-* ``validate``: Défini à false pour désactiver la validation, true pour
+* ``validate``: Définie à false pour désactiver la validation, true pour
   valider chaque enregistrement avant la sauvegarde, 'first' pour valider
   *tous* les enregistrements avant qu'un soit sauvegardé (par défaut),
 * ``atomic``: Si true (par défaut), essaiera de sauvegarder tous les
   enregistrements en une seule transaction.
-  Devrait être défini à false si la base de données/table ne supporte pas les
+  Devrait être définie à false si la base de données/table ne supporte pas les
   transactions.
 * ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 * ``deep``: (since 2.1) Si défini à true, les données associées sont aussi
   sauvegardées, regardez aussi saveAssociated.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a).
 
 Pour sauvegarder de multiples enregistrements d'un unique model, $data
 a besoin d'être un tableau d'enregistrements indexé numériquement comme
@@ -322,12 +344,14 @@ Les options suivantes peuvent être utilisées:
   les enregistrements avant toute sauvegarde (par défaut).
 * ``atomic``: Si à true (par défaut), va tenter de sauvegarder tous les
   enregistrements en une seule transaction.
-  Devrait être défini à false si la base de données/table ne supporte pas les
+  Devrait être définie à false si la base de données/table ne supporte pas les
   transactions.
 * ``fieldList``: Equivalent au paramètre $fieldList de Model::save().
-* ``deep``: (depuis 2.1) Si défini à true, les données pas seulement associées
+* ``deep``: (depuis 2.1) Si définie à true, les données pas seulement associées
   directement vont être sauvegardées, mais aussi les données associées
   imbriquées plus profondément. Par défaut à false.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a).
 
 Pour sauvegarder un enregistrement et tous ses enregistrements liés avec une
 association hasOne ou belongsTo, le tableau de données devra ressembler à
@@ -454,7 +478,7 @@ d'abord le model principal, ou le model parent.
 
 Pour avoir une bonne idée de la façon de faire, imaginons que nous ayons une
 action dans notre UsersController qui gère la sauvegarde d'un nouveau User et
-son Profile lié. L'action montré en exemple ci-dessous supposera que vous
+son Profile lié. L'action montrée en exemple ci-dessous supposera que vous
 avez POSTé assez de données (en utilisant FormHelper) pour créer un User
 unique et un Profile unique::
 
@@ -481,7 +505,7 @@ unique et un Profile unique::
     }
 
 Comme règle, quand vous travaillez avec des associations hasOne, hasMany,
-et belongsTo, Tout est question de clé. L'idée de base est de récupérer la clé
+et belongsTo, tout est question de clé. L'idée de base est de récupérer la clé
 d'un autre model et de la placer dans le champ clé étrangère sur l'autre.
 Parfois, cela pourra gêner l'utilisation de l'attribut ``$id`` de la classe
 model après un ``save()``, mais d'autres fois, cela impliquera juste la
@@ -543,7 +567,7 @@ Maintenant, dans notre CompaniesController nous pouvons créer une action
     }
 
 C'est tout pour le moment. Maintenant nos models Company et Account seront
-validés et sauvegardé en même temps. Par défaut ``saveAssociated``
+validés et sauvegardés en même temps. Par défaut ``saveAssociated``
 validera toutes les valeurs passées et ensuite essaiera d'effectuer une
 sauvegarde pour chacun.
 
@@ -555,7 +579,7 @@ sont sauvegardées. Comme montré dans la section :ref:`hasMany-through`,
 la table jointe est associée pour chaque model en utilisant un type de relation
 `hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole
 Cake qui nous demande d'écrire une application qui lui permette de connecter
-la présence d'un étudiant à un cours avec les journées assistées et de
+la présence d'un étudiant à un cours avec les journées assistées et
 validées. Jettez un oeil au code suivant.::
 
    // Controller/CourseMembershipController.php
@@ -569,7 +593,7 @@ validées. Jettez un oeil au code suivant.::
        public function add() {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                   $this->redirect(array('action' => 'index'));
+                   return $this->redirect(array('action' => 'index'));
                }
            }
        }
@@ -763,14 +787,14 @@ celui qui suit::
     )
 
 Passer le tableau ci-dessus à ``saveAll()`` va créer les tags contenus, chacun
-associé avec leur recettes respectives.
+associé avec leur recipies respectives.
 
-Pour exemple, nous allons construire un formulaire qui crée un nouveau tag et
-générerons le tableau de données approprié pour l'associer à la volée avec
-certaines recettes.
+Par exemple, nous allons construire un formulaire qui crée un nouveau tag et
+génèrerons le tableau de données approprié pour l'associer à la volée avec
+certaines recipies.
 
 Le formulaire le plus simple ressemblerait à ceci (nous supposerons que
-``$recipe_id`` est déjà défini à une valeur)::
+``$recipe_id`` est déjà définie à une valeur)::
 
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
@@ -795,11 +819,11 @@ automatiquement sauvegarder les données HABTM dans la base de données::
 Avec le code précédent, notre Tag nouveau est crée et associé avec un Recipe,
 dont l'ID a été défini dans ``$this->request->data['Recipe']['id']``.
 
-Les autres façons que nous pouvons avoir envie pour présenter nos données
-associées peuvent inclure une liste de select drop down. Les données peuvent
-être envoyées d'un model en utilisant la méthode ``find('list')`` et assignées
-à une variable de vue du nom du model. Une entrée avec le même nom va
-automatiquement envoyer dans ces données dans un ``<select>``::
+Les autres façons possibles pour présenter nos données associées peuvent
+inclure une liste déroulante. Les données peuvent être envoyées d'un model en
+utilisant la méthode ``find('list')`` et assignées à une variable de vue du
+nom du model. Une entrée avec le même nom va automatiquement envoyer ces
+données dans un ``<select>``::
 
     // dans le controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
@@ -810,7 +834,7 @@ automatiquement envoyer dans ces données dans un ``<select>``::
 Un scénario plus probable avec une relation HABTM incluerait un
 ``<select>`` défini pour permettre des sélections multiples. Par exemple, un
 Recipe peut avoir plusieurs Tags lui étant assignés. Dans ce cas, les données
-sort du model de la même façon, mais l'entrée du formulaire est déclarée
+du model sont triées de la même façon, mais l'entrée du formulaire est déclarée
 légèrement différemment. Le nom du Tag est défini en utilisant la convention
 ``ModelName``::
 
@@ -820,7 +844,7 @@ légèrement différemment. Le nom du Tag est défini en utilisant la convention
     // dans la vue:
     $this->Form->input('Tag');
 
-En utilisant le code précédent, un select drop down est crée, permettant aux
+En utilisant le code précédent, un liste déroulante est créée, permettant aux
 multiples choix d'être automatiquement sauvegarder au Recipe existant en étant
 ajouté à la base de données.
 
@@ -884,8 +908,8 @@ Une autre façon de regarder cela est d'ajouter un model Membership::
     Membership belongsTo Child, Club
     Club hasMany Membership.
 
-Ces deux exemples sont presque les mêmes. Ils utilisent le même montant de
-champs nommés dans la base de données et le même montant de models.
+Ces deux exemples sont presque les mêmes. Ils utilisent le même nombre de
+champs nommés dans la base de données et le même nombre de models.
 Les différences importantes sont que le model "join" est nommé différemment
 et que son comportement est plus prévisible.
 
@@ -894,7 +918,7 @@ et que son comportement est plus prévisible.
     Quand votre table jointe contient des champs supplémentaires en plus
     des deux clés étrangères, vous pouvez éviter de perdre les valeurs des
     champs supplémentaires en définissant la clé ``'unique'`` du tableau à
-    ``'keepExisting'``. Vous pouvez penser le penser comme quelque chose de
+    ``'keepExisting'``. Vous pouvez le penser comme quelque chose de
     similaire à 'unique' => true, mais sans perdre les données des champs
     supplémentaires pendant l'opération de sauvegarde. Regardez:
     :ref:`les tablaux des associations HABTM <ref-habtm-arrays>`.
@@ -913,7 +937,7 @@ autres. Vous pouvez créer vos tables de base de données comme vous l'auriez
 fait normalement. Quand vous créez vos classes Model, elles seront
 automatiquement liées aux tables que vous avez créees. Les noms de table sont
 par convention en minuscules et au pluriel avec tous les mots de la table
-séparés par des underscores. Par exemple, un nom de mode Ingredient s'attendra
+séparés par des underscores. Par exemple, un nom de model Ingredient s'attendra
 à un nom de table ingredients. Un nom de Model de EventRegistration s'attendra
 à un nom de table de event_registrations. CakePHP va inspecter vos tables
 pour déterminer le type de données de chaque champ et utiliser cette

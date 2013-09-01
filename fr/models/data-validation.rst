@@ -91,7 +91,7 @@ vous pouvez toujours ajouter vos propres règles de validation, selon vos
 besoins.
 
 Maintenant que nous avons vu, en gros, comment la validation fonctionne, voyons
-comme ces règles sont définies dans le model. Il y a trois manières
+comment ces règles sont définies dans le model. Il y a trois manières
 différentes pour définir les règles de validation : tableaux simples, une règle
 par champ et plusieurs règles par champ.
 
@@ -243,6 +243,12 @@ personnalisé pour la règle::
             'message' => 'Le mot de passe doit comporter au moins 8 caractères'
         )
     );
+
+.. note::
+
+    Quelque soit la règle, l'échec de validation sans un message défini par
+    défaut sera "This field cannot be left blank." (Ce champ ne peut être
+    laissé vide)
 
 Plusieurs règles par champ
 ==========================
@@ -553,8 +559,8 @@ utilisant une méthode similiare::
         'otherRule' => array(...)
     ));
 
-Si vous souhaitez juste modifier une propriété unique dans une règle dans
-laquelle vous pouvez définir des propriétés directement dans l'objet
+Si vous souhaitez juste modifier une propriété unique dans une règle,
+vous pouvez définir des propriétés directement dans l'objet
 ``CakeValidationRule``::
 
     // Dans une classe de model
@@ -749,7 +755,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: date(string $check, mixed $format = 'ymd', string $regex = null)
 
-    Cette règle s'assure que les données soumises sont des formats de date
+    Cette règle s'assure que les données soumises sont dans des formats de date
     valides. Un seul paramètre (qui peut être un tableau) doit être passé
     et sera utilisé pour vérifier le format de la date soumise. La valeur
     de ce paramètre peut être l'une des suivantes :
@@ -766,6 +772,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     -  ‘My’, par exemple : (Décembre 2006 ou Déc 2006)
     -  ‘my’, par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être
        l'espace, le point, le tiret, le slash)
+    -  'ym' par ex. 2006/12 ou 06/12 (les séparateurs peuvent être un espace,
+       une période, un tiret, ou un slash)
+    -  'y' e.g. 2006 (les séparateurs peuvent être un espace, une période,
+       un tiret, ou un slash)
 
     Si aucune clé n'est soumise, la clé par défaut 'ymd' sera utilisée::
 
@@ -783,9 +793,12 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     plutôt que de forcer les gens à les soumettre dans un format donné. Le
     plus de travail vous ferez pour les users, le mieux ce sera.
 
+    .. versionchanged:: 2.4
+        Les formats ``ym`` et ``y`` ont été ajoutés.
+
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
     
-    Cette règle s'assure que les données sont dans format datetime valide.
+    Cette règle s'assure que les données sont dans un format datetime valide.
     Un paramètre (qui peut être un tableau) peut être passé pour spécifier le
     format de la date. La valeur du paramètre peut être une ou plusieurs des
     valeurs suivantes:
@@ -835,7 +848,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: email(string $check, boolean $deep = false, string $regex = null)
 
-    Celle-ci vérifie que la donnée soit une adresse email valide. En passant
+    Celle-ci vérifie que la donnée est une adresse email valide. En passant
     un booléen true comme second paramètre de cette règle, elle tentera de
     vérifier aussi, que l'hôte de l'adresse est valide::
     
@@ -850,7 +863,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: equalTo(mixed $check, mixed $compareTo)
 
-    Cette règle s'assurera que la valeur est égal à la valeur passée et
+    Cette règle s'assurera que la valeur est égale à la valeur passée et
     qu'elle est du même type.
 
     ::
@@ -916,7 +929,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
 
-    Cette règle s'assurera qu'une adresse IPv4 ou IPv6 valide ait été soumise.
+    Cette règle s'assurera qu'une adresse IPv4 ou IPv6 valide a été soumise.
     Accepte 'both' en option (par défaut), 'IPv4' ou 'IPv6'.
 
     ::
@@ -999,7 +1012,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
-    Cette règle s'assurera que la valeur est une somme monétaire valide.
+    Cette règle s'assure que la valeur est une somme monétaire valide.
 
     Le second paramètre définit où le symbole est situé (gauche/droite).
 
@@ -1060,7 +1073,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     .. versionadded:: 2.2
 
     Cette règle vérifie si une donnée passée est un nombre entier naturel
-    valide. Si ``$allowZero`` est défini à true, la valeur zero est aussi
+    valide. Si ``$allowZero`` est définie à true, la valeur zero est aussi
     acceptée.
 
     ::
@@ -1177,7 +1190,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         );
 
     Pour s'assurer qu'un protocole est présent dans l'url, le mode strict
-    mode peut être activé comme ceci::
+    peut être activé comme ceci::
 
         public $validate = array(
             'siteweb' => array(

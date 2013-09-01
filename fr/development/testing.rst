@@ -72,7 +72,7 @@ la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
 lancer vos propres tests en lancant un de ceux présents dans le coeur. Il y a
 deux exécuteurs integrés pour le test, nous commencerons en utilisant
 l'exécution par le navigateur. Les tests peuvent être accessibles par le
-navigateur à http://localhost/your_app/test.php. Vous devriez voir une liste
+navigateur à http://localhost/votre_app/test.php. Vous devriez voir une liste
 des cas de test du coeur. Cliquez sur le test 'AllConfigure'. Vous devriez voir
 une barre verte avec quelques informations supplémentaires sur les tests
 lancés, et les nombres passés.
@@ -100,7 +100,7 @@ conventions. En ce qui concerne les tests:
    en méthodes de test.
 
 Quand vous avez crée un cas de test, vous pouvez l'exécuter en naviguant sur
-``http://localhost/you_app/test.php`` (selon votre configuration spécifique)
+``http://localhost/votre_app/test.php`` (selon votre configuration spécifique)
 Cliquez sur les cas de test de App, et cliquez ensuite sur le lien de votre
 fichier spécifique. Vous pouvez lancer les tests à partir des lignes de
 commande en utilisant le shell de test::
@@ -206,7 +206,7 @@ Lancer les tests à partir d'un navigateur
 CakePHP fournit une interface web pour lancer les tests, donc vous pouvez
 exécuter vos tests par le navigateur si vous êtes plus habitué à cet
 environnement. Vous pouvez accéder au web runner en allant sur
-``http://localhost/your_app/test.php``. La localisation exacte du
+``http://localhost/votre_app/test.php``. La localisation exacte du
 test.php va changer en fonction de votre configuration. Mais le fichier est
 au même niveau que ``index.php``.
 
@@ -301,7 +301,7 @@ test en faisant ce qui suit::
 
 Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
-``http://localhost/your_app/coverage``.
+``http://localhost/votre_app/coverage``.
 
 Lancer les tests qui utilisent des sessions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -793,7 +793,7 @@ existant, il va continuer de lancer le code suivant le redirect. Par exemple::
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 }
             }
             // plus de code
@@ -932,12 +932,17 @@ les redirects::
 
         $this->testAction('/posts/add', array(
             'data' => array(
-                'Post' => array('name' => 'New Post')
+                'Post' => array('title' => 'New Post')
             )
         ));
+        $this->assertContains('/posts', $this->headers['Location']);
+    }
 
-        $this->assertContains('/posts/index', $this->headers['Location']);
-        $this->assertEquals('New Post', $this->vars['post']['Post']['name']);
+    public function testAddGet() {
+        $this->testAction('/posts/add', array(
+            'method' => 'GET',
+            'return' => 'contents'
+        ));
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
@@ -1003,6 +1008,20 @@ et nous assurons que notre service web retourne la réponse appropriée::
             $this->assertEquals($expected, $result);
         }
     }
+
+Tester les Views
+================
+
+Généralement, la plupart des applications ne va pas directement tester leur
+code HTML. Faire ça donne souvent des résultats fragiles, il est difficile de
+maintenir les suites de test qui sont sujet à se casser. En écrivant des
+tests fonctionnels en utilisant :php:class:`ControllerTestCase`, vous
+pouvez inspecter le contenu de la vue rendue en configurant l'option
+``return`` à 'view'. Alors qu'il est possible de tester le contenu de la vue
+en utilisant ControllerTestCase, un test d'intégration/vue plus robuste
+et maintenable peut être effectué en utilisant des outils comme
+`Selenium webdriver <http://seleniumhq.org>`_.
+
 
 Tester les Components
 =====================
@@ -1253,6 +1272,7 @@ localhost). Ajoutez une *étape de script shell* au build qui contient ce qui
 suit::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
+    <?php
     class DATABASE_CONFIG {
         public $test = array(
             'datasource' => 'Database/Mysql',

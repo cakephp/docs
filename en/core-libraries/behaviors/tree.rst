@@ -498,7 +498,7 @@ Advanced Usage
                 $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
             }
 
-            $this->redirect(array('action' => 'index'), null, true);
+            return $this->redirect(array('action' => 'index'));
         }
 
     For example, if you'd like to move the "Sport" ( id of 3 ) category one
@@ -526,7 +526,7 @@ Advanced Usage
                 $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
             }
 
-            $this->redirect(array('action' => 'index'), null, true);
+            return $this->redirect(array('action' => 'index'));
         }
 
     For example, if you would like to move the category "Gwendolyn" ( id of 8 ) up

@@ -15,8 +15,8 @@ ajouter, éditer et supprimer des posts.
 Voici ce dont vous aurez besoin :
 
 #. Un serveur web fonctionnel. Nous supposerons que vous utilisez Apache,
-   bien que les instructions pour utiliser d'autres serveurs devraient
-   être très semblables. Nous aurons peut-être besoin de jouer un peu sur la
+   bien que les instructions pour utiliser d'autres serveurs doivent
+   être assez semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire
    fonctionner Cake sans aucune configuration préalable.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL.
@@ -92,8 +92,8 @@ de données :
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
 Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
-Si vous respectez les conventions de nommage Cake pour les bases de données
-et les classes (toutes deux expliquées le chapitre
+Si vous respectez les conventions de nommage de Cake pour les bases de données
+et les classes (toutes deux expliquées au chapitre
 :doc:`/getting-started/cakephp-conventions`), vous tirerez profit d'un
 grand nombre de fonctionnalités automatiques et vous éviterez des étapes
 de configurations. Cake est suffisamment souple pour implémenter les pires
@@ -132,13 +132,13 @@ ressembler à ce qui suit::
         'database' => 'cake_blog_tutorial',
         'schema' => '',
         'prefix' => '',
-        'encoding' => ''
+        'encoding' => 'utf8'
     );
 
 Une fois votre nouveau fichier ``database.php`` sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
-de Cake. Elle devrait également vous indiquer votre fichier de connexion a été
-trouvé, et que Cake peut s'y connecter avec succès.
+de Cake. Elle devrait également vous indiquer que votre fichier de connexion a
+été trouvé, et que Cake peut s'y connecter avec succès.
 
 .. note::
 
@@ -193,7 +193,7 @@ Une note sur mod\_rewrite
 =========================
 
 Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
-mod\_rewrite. par exemple si la page d'accueil de CakePHP a l'air marrante
+mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
 (pas d'images ou de styles css), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
 à la section suivante sur l'url rewriting pour que votre serveur

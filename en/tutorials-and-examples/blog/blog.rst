@@ -55,7 +55,7 @@ something like the following::
         README
 
 Now might be a good time to learn a bit about how Cake's directory
-structure works: check out
+structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
 Creating the Blog Database
@@ -124,7 +124,7 @@ like the following::
         'database' => 'cake_blog_tutorial',
         'schema' => '',
         'prefix' => '',
-        'encoding' => ''
+        'encoding' => 'utf8'
     );
 
 Once you've saved your new ``database.php`` file, you should be
@@ -134,7 +134,7 @@ that Cake can successfully connect to the database.
 
 .. note::
 
-    Remember that you'll need to have PDO, and pdo_mysql enabled in 
+    Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
 
 Optional Configuration

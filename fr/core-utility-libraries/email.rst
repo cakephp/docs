@@ -22,8 +22,8 @@ Premièrement, vous devez vous assurer que la classe est chargée en utilisant
     App::uses('CakeEmail', 'Network/Email');
 
 L'utilisation de CakeEmail est similaire à l'utilisation de
-:php:class:`EmailComponent`. Mais au lieu d'utiliser les attributs, vous devez
-utiliser les méthodes. Exemple::
+:php:class:`EmailComponent`. Mais au lieu d'utiliser les attributs, vous
+utilisez les méthodes. Exemple::
 
     $Email = new CakeEmail();
     $Email->from(array('me@example.com' => 'My Site'));
@@ -60,8 +60,8 @@ Vous pouvez faire ceci en utilisant ``sender()`` ::
 Configuration
 =============
 
-La configuration est la même que pour la base de données, les emails peuvent
-avoir une classe pour centraliser toute la configuration.
+De même que pour la base de données, la configuration d'email peut être
+centralisée dans une classe.
 
 Créer le fichier ``app/Config/email.php`` avec la classe ``EmailConfig``.
 Le fichier ``app/Config/email.php.default`` donne un exemple de ce fichier.
@@ -215,9 +215,10 @@ Les Emails sont souvent bien plus que de simples message textes. Afin de
 faciliter cela, CakePHP fournit une façon d'envoyer les emails en utilisant la
 :doc:`view layer </views>` de CakePHP.
 
-Les templates pour les emails se placent dans un dossier spécial dans le
-répertoire ``View`` de votre application. Les vues des emails peuvent aussi
-utiliser les layouts et éléments tout comme les vues normales::
+Les templates pour les emails se placent dans un dossier spécial appelé
+``Emails`` dans le répertoire ``View`` de votre application. Les vues des
+emails peuvent aussi utiliser les layouts et éléments tout comme les vues
+normales::
 
     $Email = new CakeEmail();
     $Email->template('welcome', 'fancy')
@@ -314,8 +315,15 @@ client:
        header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
        l'envoi d'invitations ical à des clients utilisant outlook.
 
+   4.3 Au lieu de l'option ``file``, vous pouvez fournir les contenus de
+       fichier en chaîne en utilisant l'option ``data``. Cela vous permet
+       d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
+
 .. versionchanged:: 2.3
-    L'option ``contentDisposition`` a été ajoutée dans 2.3.
+    L'option ``contentDisposition`` a été ajoutée.
+
+.. versionchanged:: 2.4
+    L'option ``data`` a été ajoutée.
 
 Utiliser les transports
 -----------------------
@@ -360,6 +368,24 @@ Exemple::
     $yourInstance = $Email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
     $Email->send();
+
+Faciliter les règles de validation des adresses
+-----------------------------------------------
+
+.. php:method:: emailPattern($pattern = null)
+
+Si vous avez des problèmes de validation lors de l'envoi vers des adresses
+non conformes, vous pouvez faciliter le patron utilisé pour valider les
+adresses email. C'est parfois nécessaire quand il s'agit de certains
+ISP Japonais.
+
+    $email = new CakeEmail('default');
+
+    // Relax le patron d\'email, ainsi vous pouvez envoyer
+    // vers des adresses non conformes
+    $email->emailPattern($newPattern);
+
+.. versionadded:: 2.4
 
 
 Envoyer des messages rapidement

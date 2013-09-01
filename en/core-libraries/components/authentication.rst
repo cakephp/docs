@@ -94,7 +94,7 @@ keys.
 - ``fields`` The fields to use to identify a user by.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
-  authenticating users, i.e. ``array('User.is_active' => 1).``
+  authenticating users, i.e. ``array('User.is_active' => 1)``.
 - ``contain`` Containable options for when the user record is loaded.
 
   .. versionadded:: 2.2
@@ -202,7 +202,7 @@ using cookies.
   Prior to 2.4 you still need the login action as you are redirected to login
   when an unauthenticated user tries to access a protected page even when using
   only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
-  will cause an error to 2.4.
+  will cause an error prior to 2.4.
 
 Creating Custom Authentication objects
 --------------------------------------
@@ -217,7 +217,9 @@ the following::
 
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
-            // Do things for openid here.
+            // Do things for OpenID here.
+            // Return an array of user if they could authenticate the user,
+            // return false if not
         }
     }
 
@@ -285,7 +287,7 @@ is rendered else a 403 http status code is returned.
 
 .. note::
 
-  Prior to 2.4 the authenticate objects do not have an `unauthenticated()` method.
+  Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
 
 Displaying auth related flash messages
 --------------------------------------
@@ -314,7 +316,7 @@ for when authorization fails::
     $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 
 .. versionchanged:: 2.4
-   Sometimes, you only want to display the authorization error only after
+   Sometimes, you want to display the authorization error only after
    the user has already logged-in. You can suppress this message by setting
    its value to boolean `false`
 
@@ -459,7 +461,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
             $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
-            $this->redirect('/users/home');
+            return $this->redirect('/users/home');
         }
     }
 
@@ -493,7 +495,7 @@ you want to provide a 'Log me out' link inside a members' area of your
 application::
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 Logging out users that logged in with Digest or Basic auth is difficult
@@ -766,7 +768,7 @@ and authentication mechanics in CakePHP.
     The name of an optional view element to render when an Ajax request is made
     with an invalid or expired session.
 
-.. php:attr: allowedActions
+.. php:attr:: allowedActions
 
     Controller actions for which user validation is not required.
 
@@ -945,7 +947,7 @@ and authentication mechanics in CakePHP.
 
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  The user data key you want to fetch if null,
+    :param string $key:  The user data key you want to fetch. If null,
         all user data will be returned.  Can also be called as an instance
         method.
 

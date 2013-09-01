@@ -493,7 +493,7 @@ Utilisation avancée
                 $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
             }
 
-            $this->redirect(array('action' => 'index'), null, true);
+            $this->redirect(array('action' => 'index'));
         }
 
     Par exemple, si vous souhaitez déplacer le "Sport" (id de 3) d'une
@@ -521,7 +521,7 @@ Utilisation avancée
                 $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
             }
 
-            $this->redirect(array('action' => 'index'), null, true);
+            $this->redirect(array('action' => 'index'));
         }
 
     Par exemple, si vous souhaitez déplacer la catégory "Gwendoline" (id de 8)

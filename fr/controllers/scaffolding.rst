@@ -30,7 +30,7 @@ tout le code équivalent à ce que ferait le scaffolding.
 Le Scaffolding est à utiliser au tout début du développement
 d'une application Internet. Le schéma de votre base de données
 est encore susceptible de changer, ce qui est tout à faire normal à ce
-stade du processus de création. Ca a un inconvénient : un développeur déteste
+stade du processus de création. Ceci a un inconvénient : un développeur déteste
 créer des formulaires dont il ne verra jamais l'utilisation réelle. C'est pour
 réduire le stress du développeur que le Scaffolding a été introduit dans
 CakePHP. Il analyse les tables de votre base et crée de façon simple une liste
@@ -76,7 +76,7 @@ vue affiche un select pour le Group dans le nouveau formulaire User::
 Si vous préférez voir autre chose en plus des identifiants
 (par exemple les prénoms des users), vous pouvez
 affecter la variable $displayField dans le model.
-Voyons comme définir la variable $displayField dans la classe des users,
+Voyons comment définir la variable $displayField dans la classe des users,
 afin que le prénom soit montré en lieu et place de l'unique identifiant.
 Cette astuce permet de rendre le scaffolding plus lisible dans de nombreux cas::
 

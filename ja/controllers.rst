@@ -306,6 +306,13 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
+    クエリストリングとハッシュを使う場合は次のようになります。 ::
+
+        $this->redirect(array(
+            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+
+    生成される URL はこのようになります: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
+
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
     ``redirect()`` のように、 ``flash()`` メソッドはある操作の後に、ユーザーを新しいページに誘導するために使われます。
@@ -491,7 +498,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ここに書かれた方法では、エレメントが描画されると毎回、データを取得するためにコントローラに対してリクエストが作られ、データが処理されて結果が返ってきます。
     したがって、不必要な処理を防ぐためにエレメントのキャッシュを使うのが良いでしょう。::
 
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', array(), array('cache' => true));
 
     ``requestAction`` の呼び出しはキャッシュされたエレメントのビューファイルが存在してそれが有効な限り、リクエストの発行はしません。
 

@@ -68,6 +68,16 @@ les différentes méthodes HTTP.
     être une chaîne, soit un tableau d'arguments d'une recherche sous forme de
     chaîne pour la requête.
 
+.. php:method:: patch($uri, $data, $request)
+
+    La méthode patch fait une simple requête HTTP PATCH retournant les
+    résultats.
+
+    Les paramètres pour la méthode ``patch`` sont les mêmes que pour la
+    méthode :php:meth:`~HttpSocket::post()`.
+
+    .. versionadded:: 2.4
+
 .. php:method:: request($request)
 
     La méthode request de base qui est appelée à partir de tous les wrappers

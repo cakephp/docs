@@ -26,9 +26,9 @@ méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui sont
 généralement appelées *actions*. Les actions sont les méthodes d'un controller
-qui gère les requêtes. Par défaut, toutes les méthodes publiques d'un
-controller sont des actions accessibles d'une url. Les actions sont
-responsables de l'interpretation des requêtes et de la création de
+qui gèrent les requêtes. Par défaut, toutes les méthodes publiques d'un
+controller sont des actions accessibles via une url. Les actions sont
+responsables de l'interprétation des requêtes et de la création de
 la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
 il y a aussi d'autres façons de créer des réponses.
 
@@ -144,7 +144,7 @@ la vue.
 Quand les méthodes du controller sont utilisées avec
 :php:meth:`~Controller::requestAction()`, vous voudrez souvent retourner les
 données qui ne sont pas des chaînes de caractère. Si vous avez des méthodes
-du controller qui sont utilisées pour des requêtes web normales + requestAction
+du controller qui sont utilisées pour des requêtes web normales + requestAction,
 vous devrez vérifier le type de requête avant de retourner::
 
     class RecipesController extends AppController {
@@ -176,7 +176,7 @@ Request Life-cycle callbacks
 .. php:class:: Controller
 
 Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
-(ou callback) qui vous pouvez utiliser pour insérer de la logique juste avant
+(ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
 ou juste après que les actions du controller soient effectuées:
 
 .. php:method:: beforeFilter()
@@ -203,8 +203,8 @@ ou juste après que les actions du controller soient effectuées:
     que l'affichage soit terminé. C'est la dernière méthode du controller
     qui est exécutée.
 
-En plus des callbacks, :doc:`/controllers/components` fournit aussi un ensemble
-similaire de callbacks.
+En plus des callbacks des controllers, les :doc:`/controllers/components`
+fournissent aussi un ensemble similaire de callbacks.
 
 .. _controller-methods:
 
@@ -313,7 +313,7 @@ Rendre une vue spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans votre controller, vous pourriez avoir envie de rendre une vue
-différente que celle rendue par défaut. Vous pouvez faire cela en appelant
+différente de celle rendue par défaut. Vous pouvez faire cela en appelant
 directement ``render()``. Une fois que vous avez appelé ``render()`` CakePHP
 n'essaiera pas de re-rendre la vue::
 
@@ -352,9 +352,9 @@ Contrôle de Flux
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
-                $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
+                return $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
             } else {
-                $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
+                return $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
             }
         }
 
@@ -388,6 +388,14 @@ Contrôle de Flux
 
         $this->redirect(array('controller' => 'commandes', 'action' => 'confirmation', 'produit' => 'pizza', 'quantite' => 5));
 
+    Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
+    à ceci::
+
+        $this->redirect(array(
+            'controller' => 'commandes', 'action' => 'confirmation', '?' => array('produit' => 'pizza', 'quantite' => 5), '#' => 'top'));
+
+    L'url généré serait: ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
+
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
     Tout comme ``redirect()``, la méthode ``flash()`` est utilisée pour
@@ -401,7 +409,7 @@ Contrôle de Flux
     l'utilisateur.
 
     Si vous souhaitez utiliser un template particulier pour messages flash,
-    vous pouvezspécifier le nom du layout dans le paramètre ``$layout``.
+    vous pouvez spécifier le nom du layout dans le paramètre ``$layout``.
     
     Pour définir des messages flash dans une page, regardez du côté de la
     méthode setFlash() du component Session (SessionComponent).
@@ -418,32 +426,32 @@ callbacks liés au scaffolding.
 
 .. php:method:: afterScaffoldSave($method)
 
-    $method nom de la méthode appelée soit edit soit update.
+    $method nom de la méthode appelée, soit edit soit update.
 
 .. php:method:: afterScaffoldSaveError($method)
 
-    $method nom de la méthode appelée soit edit soit update.
+    $method nom de la méthode appelée, soit edit soit update.
 
 .. php:method:: scaffoldError($method)
 
-    $method nom de la méthode appelée , par exemple index, edit, etc...
+    $method nom de la méthode appelée, par exemple index, edit, etc...
 
 Autres Méthodes utiles
 ----------------------
 
 .. php:method:: constructClasses
 
-    Cette méthode charge en mémoire les models requis par le controller.
+    Cette méthode charge en mémoire les models nécessaires au controller.
     Cette procédure de chargement est normalement effectuée par CakePHP,
     mais cette méthode est à garder sous le coude quand vous avez besoin
-    d'accéder à certains controllers depuis une perspective différente. Si
+    d'accéder à certains controllers dans une autre perspective. Si
     vous avez besoin de CakePHP dans un script utilisable en ligne de
     commande ou d'autres utilisations externes, constructClasses() peut
     devenir pratique.
 
 .. php:method:: referer(mixed $default = null, boolean $local = false)
 
-    Retourne l'URL référente de la requête courante. Le Paramètre
+    Retourne l'URL référente de la requête courante. Le paramètre
     ``$default`` peut être utilisé pour fournir une URL par défaut à
     utiliser si HTTP\_REFERER ne peut pas être lu par les headers. Donc,
     au lieu de faire ceci::
@@ -452,10 +460,9 @@ Autres Méthodes utiles
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
                 if ($this->referer() != '/') {
-                    $this->redirect($this->referer());
-                } else {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect($this->referer());
                 }
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -464,14 +471,14 @@ Autres Méthodes utiles
         class UtilisateursController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
-                $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
     Si ``$default`` n'est pas défini, la fonction se met par défaut sur
     à la racine (root) de votre domaine - '/'.
 
-    Le paramètre ``$local`` si il est défini à ``true``, restreint les URLs se
+    Le paramètre ``$local``, si il est défini à ``true``, restreint les URLs se
     référant au serveur local.
 
 .. php:method:: disableCache
@@ -495,7 +502,7 @@ Autres Méthodes utiles
     conditions de recherche pour un model. Cette fonction offre un
     raccourci appréciable pour la construction de la logique de recherche.
     Par exemple, un administrateur aimerait pouvoir chercher des commandes
-    dans le but de connaître quels produits doivent être emballés. Vous
+    dans le but de connaître les produits devant être emballés. Vous
     pouvez utiliser les Helpers Form et Html pour construire un formulaire
     rapide basé sur le model Commande. Ensuite une action du controller
     peut utiliser les données postées par ce formulaire pour construire
@@ -548,7 +555,7 @@ Autres Méthodes utiles
 
     Cette méthode est utilisée pour paginer les résultats retournés par vos
     models. Vous pouvez définir les tailles de la page, les conditions à
-    utiliser pour la recherche de ces données et bien plus. Consultez la
+    utiliser pour la recherche de ces données et bien plus encore. Consultez la
     section :doc:`pagination <core-libraries/components/pagination>`
     pour plus de détails sur l'utilisation de la pagination.
 
@@ -558,7 +565,7 @@ Autres Méthodes utiles
     du code et retourne les données associées à cette action. L'``$url``
     passée est une adresse relative à votre application CakePHP
     (/nomducontroleur/nomaction/parametres). Pour passer des données
-    supplémentaires au controller destinataire ajoutez le tableau $options.
+    supplémentaires au controller destinataire, ajoutez le tableau $options.
 
     .. note::
 
@@ -578,7 +585,7 @@ Autres Méthodes utiles
     ``requestAction`` est plutôt utilisé en conjonction avec des éléments
     (mis en cache) - comme moyen de récupérer les données pour un élément
     avant de l'afficher. Prenons l'exemple de la mise en place d'un élément
-    "derniers commentaires" dans le gabarit (layout). Nous devons d'abord
+    "derniers commentaires" dans le layout. Nous devons d'abord
     créer une méthode de controller qui retourne les données::
     
         // Controller/CommentsController.php
@@ -618,7 +625,7 @@ Autres Méthodes utiles
     des traitements inutiles. En modifiant l'appel à l'élément pour qu'il
     ressemble à ceci::
 
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', array(), array('cache' => true));
 
     L'appel à ``requestAction`` ne sera pas effectué tant que le fichier de vue
     de l'élément en cache existe et est valide.
@@ -632,16 +639,16 @@ Autres Méthodes utiles
         );
 
     Cela permet à l'appel de requestAction d'éviter l'utilisation de
-    Router::url ce qui peut améliorer la performance. Les url basées sur
+    Router::url ce qui peut améliorer la performance. Les urls basées sur
     des tableaux sont les mêmes que celles utilisées par
     :php:meth:`HtmlHelper::link()` avec une seule différence. Si vous utilisez
-    des paramètres nommés ou passés dans vos url, vous devez les mettre dans
-    un second tableau et les inclures dans la clé correcte. La raison de cela
+    des paramètres nommés ou passés dans vos urls, vous devez les mettre dans
+    un second tableau et les inclure dans la clé correcte. La raison de cela
     est que requestAction fusionne seulement le tableau des arguments nommés
     avec les membres du tableau de Controller::params et ne place pas les
     arguments nommés dans la clé 'named'.
-    Des membres supplémentaires dans le tableau ``$option`` va aussi être rendu
-    disponible dans le tableau Controller::params de l'action requêtée ::
+    Des parties supplémentaires dans le tableau ``$option`` vont aussi être
+    disponibles dans le tableau Controller::params de l'action requêtée ::
         
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
@@ -694,7 +701,7 @@ visitez l'API de CakePHP. Regardez
 
     L'attribut ``$name`` doit être défini selon le nom du controller.
     Habituellement, c'est juste la forme plurielle du model principal que le
-    controller utilise. Cette propriété n'est pas requis, mais évite à
+    controller utilise. Cette propriété n'est pas requise, mais évite à
     CakePHP d'inflecter dessus::
 
         // Exemple d'utilisation d'attribut $name du controller
@@ -729,7 +736,7 @@ fournies par ``$helpers``, disponibles pour la vue comme une variable référenc
     du model primaire du controller courant doit également être inclu. Ceci
     est illustré dans l'exemple ci-dessous.
     
-    Si vous ne souhaitez pas utilisez un Model dans votre controller,
+    Si vous ne souhaitez pas utiliser un Model dans votre controller,
     définissez ``public $uses = array()``. Cela vous permettra d'utiliser un
     controller sans avoir besoin d'un fichier Model correspondant. Cependant,
     les models définis dans ``AppController`` seront toujours chargés. Vous

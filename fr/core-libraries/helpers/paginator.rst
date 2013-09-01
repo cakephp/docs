@@ -574,6 +574,18 @@ D'autres Méthodes
         )
         */
 
+.. php:method:: param(string $key, string $model = null)
+
+    Récupère le paramètre de pagination spécifique à partir de l'ensemble de
+    résultats pour le model donné::
+
+        debug($this->Paginator->param('count'));
+        /*
+        (int)43
+        */
+
+.. versionadded:: 2.4
+    La méthode ``param()`` a été ajoutée dans 2.4.
 
 .. meta::
     :title lang=fr: PaginatorHelper

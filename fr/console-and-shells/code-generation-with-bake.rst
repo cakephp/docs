@@ -24,9 +24,9 @@ problèmes si la base de donnée host est 'localhost' et devront essayer
 '127.0.0.1' à la place. Cela peut causer des soucis avec le CLI PHP.
 
 En exécutant Bake la première fois, vous serez invité à créer un fichier de
-configuration de la base de données, si vous n'en avez pas créées auparavant.
+configuration de la base de données, si vous n'en avez pas créé un auparavant.
 
-Après que vous avez créé un fichier de configuration de base de données,
+Après que vous avez créé un fichier de configuration de la base de données,
 exécuter Bake vous présentera les options suivantes ::
 
     ---------------------------------------------------------------
@@ -71,11 +71,11 @@ Pour fabriquer des vues sur mesure
 
 #. Aller dans le dossier: lib/Cake/Console/Templates/default/views.
 #. Remarquez les 4 fichiers ici.
-#. Copier les dans le dossier: app/Console/Templates/[themename]/views.
+#. Copiez les dans le dossier: app/Console/Templates/[themename]/views.
 #. Faire les changements pour la sortie HTML pour contrôler la façon dont
    "bake" fabrique vos vues.
 
-La partie du chemin ``[themename]`` est le nom du theme de bake que vous créez.
+La partie du chemin ``[themename]`` est le nom du thème de bake que vous créez.
 Les noms des thèmes de Bake doivent être uniques, donc n'utilisez pas
 'default'.
 
@@ -90,7 +90,7 @@ va construire vos vues.
 Passez le paramètre de squelette du chemin à la tâche du projet.
 ::
 
-    cake bake project -skel Console/Templates/skel
+    cake bake project --skel Console/Templates/skel
 
 .. note::
 
@@ -119,7 +119,7 @@ avec le rajout de fonctionnalités et améliorations.
    d'autres connections de bake que le 'default'.
    Utilisez le paramètre ``-connection``.
 -  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant
-   utiliser ``-plugin NomDuPlugin`` ou ``Plugin.class``.
+   utiliser ``--plugin NomDuPlugin`` ou ``Plugin.class``.
 -  Les Questions ont été clarifiées, et sont plus facilement compréhensibles.
 -  Les validations multiples sur les models ont été ajoutées.
 -  Les associations des models sur eux-mêmes utilisant ``parent_id`` sont
@@ -162,7 +162,7 @@ les vues cuites étaient basées sur des templates, mais tout le reste du code
 ne l'était pas. Avec 1.3, presque tout le contenu dans les fichiers générés par
 bake sont contrôlés par les templates et la ``TemplateTask``.
 
-``FixtureTask`` ne génére plus seulement les fixtures avec les données
+``FixtureTask`` ne génère plus seulement les fixtures avec les données
 factices mais en utilisant les options interactives ou l'option ``-records``
 vous pouvez activer la génération de fixture en utilisant les données live.
 
@@ -178,7 +178,7 @@ et reconstruit rapidement et facilement.
 
 Bakerait tous les models pour une application en une fois. De même,
 ``cake bake controller all`` bakerait tous les controllers et
-``cake bake view all`` générerait tous les fichiers vues. Les paramètres de
+``cake bake view all`` génèrerait tous les fichiers vues. Les paramètres de
 la tâche ``ControllerTask`` ont aussi changé.
 ``cake bake controller scaffold`` est maintenant
 ``cake bake controller public``. ``ViewTask`` a eu un drapeau ``-admin``
@@ -192,14 +192,14 @@ application. Le paramètre ``-count`` vous autorise à configurer le nombre
 d'enregistrements faux qui sont créés. En lançant la tâche de fixture de façon
 interactive, vous pouvez générer les fixtures en utilisant les données dons vos
 tables live. Vous pouvez utiliser ``cake bake test <type> <class>`` pour créer
-les cas de test pour les objets déjà crées dans votre app. Le type doit être
+les cas de test pour les objets déjà créés dans votre app. Le type doit être
 l'un des types standards de CakePHP ('component',
 'controller', 'model', 'helper', 'behavior') mais peut ne pas exister.
 Les classes doivent être un objet existant d'un type choisi.
 
 **Des templates en abondance**
 
-Une nouveauté dans bake pour 1.3 est l'addition de plus de templates.
+Une nouveauté dans bake pour 1.3 est l'ajout de plus de templates.
 Dans 1.2, les vues bakées utilisaient les templates qui pouvaient être
 changés pour modifier les fichiers vues bakés générées. Dans 1.3, les
 templates sont utilisés pour générer toute sortie de bake générée.
@@ -208,23 +208,23 @@ des controllers, les fixtures, les models, les cas de test, et les fichiers
 de vue de 1.2. Comme de plus en plus de templates, vous pouvez aussi avoir des
 ensembles de template multiple ou, de thèmes bakés. Les thèmes bakés peuvent
 être fournis dans votre app, ou dans une partie des plugins. Un exemple de
-chemin de plugin pouf le thème baké serait
+chemin de plugin pour le thème baké serait
 ``app/Plugin/BakeTheme/Console/Templates/dark_red/``. Un thème d'app
 bakée appelé ``blue_bunny`` serait placé dans
 ``app/Console/Templates/blue_bunny``. Vous pouvez regarder dans
 ``lib/Cake/Console/Templates/default/`` pour voir quels répertoires et fichiers
-sont requis d'un thème baké. Cependant, comme les fichiers vues, si votre
+sont requis pour un thème baké. Cependant, comme les fichiers vues, si votre
 thème baké n'implémente pas un template, les autres thèmes installés seront
 vérifiés jusqu'à ce que le template correct soit trouvé.
 
-**Support de plugins additionels.**
+**Support de plugins supplémentaires.**
 
-Nouveau dans 1.3 sont les chemins additionnels pour spécifier les noms de
+Nouveau dans 1.3 sont les chemins supplémentaires pour spécifier les noms de
 plugin quand on utilise bake. En plus de ``cake bake plugin Todo controller
 Posts``, il y a deux nouvelles formes. ``cake bake controller Todo.Posts`` et
-``cake bake controller Posts -plugin Todo``. Le paramètre de plugin peut aussi
+``cake bake controller Posts --plugin Todo``. Le paramètre de plugin peut aussi
 exister en utilisant le bake interactif.
-``cake bake controller -plugin Todo``, par exemple vous autorisera
+``cake bake controller --plugin Todo``, par exemple vous autorisera
 à utiliser le bake interactif pour ajouter des controllers à votre plugin Todo.
 Des chemins de plugin supplémentaires / multiples sont aussi supportés. Dans
 le passé, bake nécessitait que le plugin soit dans app/plugins. Dans 1.3, bake

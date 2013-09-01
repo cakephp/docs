@@ -117,7 +117,7 @@ controller, you could access them like so::
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
-                $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             }
         }
 
@@ -248,7 +248,7 @@ way you include them in controllers - using the ``$components`` var::
         }
     }
 
-Note that in contrast to a component included in a controller no callbacks will be triggered on an component's component.
+Note that in contrast to a component included in a controller no callbacks will be triggered on a component's component.
 
 .. _component-api:
 

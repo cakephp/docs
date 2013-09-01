@@ -107,16 +107,28 @@ Formatage
     `options de formatage de la fonction PHP date() <http://www.php.net/manual/en/function.date.php>`_::
 
         // appel via TimeHelper
-        echo $this->Time->format('2011-08-22 11:53:00', 'F jS, Y h:i A');
+        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
         // August 22nd, 2011 11:53 AM
 
-        echo $this->Time->format('+2 days', 'r');
+        echo $this->Time->format('%r', '+2 days');
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
         // appel avec CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::format('2011-08-22 11:53:00', 'F jS, Y h:i A');
-        echo CakeTime::format('+2 days', 'r');
+        echo CakeTime::format('2011-08-22 11:53:00', '%F %jS, %Y %h:%i %A');
+        echo CakeTime::format('+2 days', '%r');
+
+    Vous pouvez aussi fournir la date/time en premier argument. En faisant cela
+    vous devrez utiliser le format ``strftime`` compatible. Cette signature
+    d'appel vous permet de tirer parti du format de date de la locale ce qui
+    n'est pas possible en utilisant le format de ``date()`` compatible::
+
+        // appel avec TimeHelper
+        echo $this->Time->format('2012-01-13', '%d-%m-%Y', 'invalid');
+
+        // appel avec CakeTime
+        App::uses('CakeTime', 'Utility');
+        echo CakeTime::format('2011-08-22', '%d-%m-%Y');
 
     .. versionchanged:: 2.2
        Les paramètres ``$format`` et ``$date`` sont en ordre opposé par rapport
@@ -176,7 +188,8 @@ Formatage
     Retourne une chaîne de date formatée, étant donné soit un timestamp UNIX
     soit une chaîne de date valide strtotime(). Il prend en compte le format
     de la date par défaut pour le langage courant si un fichier LC_TIME est
-    utilisé.
+    utilisé. Pour plus d'infos sur le fichier LC_TIME, allez voir
+    :ref:`ici <lc-time>`
 
     .. versionchanged:: 2.2
        Le paramètre ``$timezone`` remplace le paramètre ``$userOffset`` utilisé
@@ -318,6 +331,12 @@ Formatage
     .. versionadded:: 2.2
        Le paramètre ``$dateString`` accepte aussi maintenant un objet DateTime.
 
+    .. versionadded:: 2.4
+       Les nouveaux paramètres d'option ``relativeString`` (par défaut à
+       ``%s ago``) et ``absoluteString`` (par défaut à ``on %s``) pour
+       permettre la personnalisation de la chaîne de sortie résultante sont
+       maintenant disponibles.
+
 .. php:method:: toRSS($dateString, $timezone = NULL)
 
     :rtype: string
@@ -378,6 +397,14 @@ Tester Time
 .. php:method:: isThisYear($dateString, $timezone = NULL)
 .. php:method:: wasYesterday($dateString, $timezone = NULL)
 .. php:method:: isTomorrow($dateString, $timezone = NULL)
+.. php:method:: isFuture($dateString, $timezone = NULL)
+
+    .. versionadded:: 2.4
+
+.. php:method:: isPast($dateString, $timezone = NULL)
+
+    .. versionadded:: 2.4
+
 .. php:method:: wasWithinLast($timeInterval, $dateString, $timezone = NULL)
 
     .. versionchanged:: 2.2

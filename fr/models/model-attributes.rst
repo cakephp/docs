@@ -18,7 +18,7 @@ pour n'importe quelles connexions de base de données définies dans votre
 fichier de configuration database. Le fichier de configuration database
 est placé dans /app/Config/database.php.
 
-La propriété ``useDbConfig`` est par défaut à la connection à la base de
+La propriété ``useDbConfig`` est par défaut la connection à la base de
 données 'default'.
 
 Exemple d'utilisation:
@@ -34,8 +34,8 @@ useTable
 
 La propriété ``useTable`` spécifie le nom de la table de la base de données.
 Par défaut, le model utilise le nom de classe du model en minuscule, au
-pluriel. Configurer cette attribut du nom d'une table alternative ou
-définissez le à ``false`` si vous souhaitez que le model utilise aucune table
+pluriel. Configurez cette attribut du nom d'une table alternative ou
+définissez le à ``false`` si vous souhaitez que le model n'utilise aucune table
 de la base de données.
 
 Exemple d'utilisation::
@@ -87,7 +87,7 @@ Exemple d'utilisation::
 displayField
 ============
 
-L'attribut ``displayField`` spécifie quel champ de la base de données doit
+L'attribut ``displayField`` spécifie le champ de la base de données qui doit
 être utilisé comme label pour un enregistrement. Le label est utilisé
 dans le scaffolding et dans les appels avec ``find('list')``. Le model va
 utiliser ``name`` ou ``title``, par défaut.
@@ -111,15 +111,15 @@ attraper les models de données associés via les méthodes ``find()``,
 ``findAll()`` et ``read()``.
 
 Imaginez que votre application dispose de Groups qui appartiennent à un
-domain et ont plusieurs (many) Users qui à leur tour ont plusieurs (many)
+Domain et ont plusieurs (many) Users qui à leur tour ont plusieurs (many)
 Articles. vous pouvez définir $recursive à différentes valeurs basées sur
 la quantité de données que vous souhaitez retourner à partir d'un appel
 $this->Group->find():
 
 * -1 Cake récupère seulement les données de Group, pas de jointures.
-* 0  Cake récupère les données de Group et leur domain.
+* 0  Cake récupère les données de Group et leur Domain.
 * 1  Cake récupère Group, son domaine et ses Users associés.
-* 2  Cake récupère un Group, son domain, ses utilisateurs associés, et les
+* 2  Cake récupère un Group, son domain, ses Users associés, et les
   Articles associés des Users.
 
 Ne le définissez pas à plus que vous n'avez besoin. Faire que CakePHP
@@ -130,7 +130,7 @@ est 1.
 .. note::
 
     Si vous voulez combiner $recursive avec la fonctionnalité ``fields``,
-    vous devrez ajouter les colonnes contenant les clés étrangères nécéssaires
+    vous devrez ajouter les colonnes contenant les clés étrangères nécessaires
     au tableau ``fields`` manuellement. Dans l'exemple ci-dessus, ceci
     pourrait signifier d'ajouter ``domain_id``.
 
@@ -229,10 +229,10 @@ Exemple d'utilisation pour MySQL::
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-Dans les opérations ultérieures de find, vos résultats de User contiendraient
+Dans les opérations ultérieures de find, vos résultats de User contiendront
 une clé ``name`` avec le résultat de la concaténation. Il n'est pas conseillé
 de créer des champs virtuels avec les mêmes noms comme colonnes dans la base de
-données, ceci peut causer des erreurs de SQL.
+données, ceci peut causer des erreurs SQL.
 
 Pour plus d'informations sur la propriété ``virtualFields``, son usage propre,
 ainsi que des limitations, regardez :doc:`/models/virtual-fields`.
@@ -253,8 +253,8 @@ Exemple d'utilisation::
 cacheQueries
 ============
 
-Si défini à true, les données récupérées par le model pendant une requête
-unique est mis en cache. Cette mise en cache est seulement en mémoire, et
+Si définie à true, les données récupérées par le model pendant une requête
+unique sont mises en cache. Cette mise en cache est seulement en mémoire, et
 dure seulement le temps de la requête. Toute requête dupliquée pour les
 mêmes données va être gérée par le cache.
 

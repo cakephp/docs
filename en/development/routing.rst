@@ -870,6 +870,8 @@ You can use a custom route class when making a route by using the
 ``routeClass`` option, and loading the file containing your route
 before trying to use it::
 
+    App::uses('SlugRoute', 'Routing/Route');
+
     Router::connect(
          '/:slug',
          ['controller' => 'posts', 'action' => 'view'],
@@ -1025,7 +1027,7 @@ Router API
 
     Set the default route to be used when connecting routes in the future.
 
-.. php:staticmethod:: baseUrl($url = null)
+.. php:staticmethod:: fullBaseUrl($url = null)
 
     Get or set the baseURL used for generating URL's. When setting this value
     you should be sure to include the fully qualified domain name including

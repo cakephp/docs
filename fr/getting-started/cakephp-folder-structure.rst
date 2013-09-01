@@ -35,8 +35,13 @@ Config
     Informations de connexion à la base de données, démarrage, fichiers de
     configuration de base et tous fichiers du même genre doivent être rangés
     ici.
+Console
+    Contient les commandes de la console et les Tasks de la console pour votre
+    application. Ce répertoire peut aussi contenir un répertoire ``Templates``
+    pour personnaliser la sortie de bake. Pour plus d'informations, regardez
+    :doc:`/console-and-shells`.
 Controller
-    Contient vos controllers et leurs components.
+    Contient vos Controllers et leurs Components.
 Lib
     Contient les librairies internes qui ne proviennent pas de librairies
     externes. Cela vous permet de séparer les librairies internes de votre
@@ -44,10 +49,16 @@ Lib
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model
-    Pour les models, behaviors et sources de données de votre
+    Pour les Models, Behaviors et Sources de Données de votre
     application.
 Plugin
     Contient les packages des Plugins.
+Test
+    Ce répertoire contient tous les cas de test, et les fixtures de test pour
+    votre application. Le répertoire ``Test/Case`` devra refléter votre
+    application et contenir un ou plusieurs cas de test par classe dans votre
+    application. Pour plus d'informations sur les cas de test et les fixtures
+    de test, référez-vous à la documentation :doc:`/development/testing`.
 tmp
     C'est ici que CakePHP enregistre les données temporaires. La manière dont
     sont stockées les données actuelles dépend de la configuration que vous
@@ -55,12 +66,12 @@ tmp
     les descriptions de models, les logs et parfois les informations de
     session.
 
-    Assurez vous que ce dossier existe et qu'il est en écriture, autrement la
+    Assurez-vous que ce dossier existe et qu'il est en écriture, autrement la
     performance de votre application sera sévèrement impactée. En mode debug,
     CakePHP vous avertira si ce n'est pas le cas.
 
 Vendor
-    Toutes classes ou librairies tierces doivent être mises ici, de sorte qu'il
+    Toute classe ou librairie tierce doit être mise ici, de sorte qu'il
     sera facile d'y accéder par la fonction App::import('vendor','name'). Les
     observateurs avisés noteront que cela semble redondant avec le répertoire
     "vendors" à la racine de l'arborescence. Nous aborderons les différences

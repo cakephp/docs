@@ -30,7 +30,7 @@ model to save data to a database table::
             if ($this->Recipe->save($this->request->data)) {
                 // Set a session flash message and redirect.
                 $this->Session->setFlash('Recipe Saved!');
-                $this->redirect('/recipes');
+                return $this->redirect('/recipes');
             }
         }
 
@@ -64,7 +64,7 @@ the ActiveRecord features offered by Model::
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
 
-Is an example of how you can use ``set()`` to update and save
+Is an example of how you can use ``set()`` to update
 single fields, in an ActiveRecord approach. You can also use
 ``set()`` to assign new values to multiple fields::
 
@@ -75,8 +75,8 @@ single fields, in an ActiveRecord approach. You can also use
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save them
-to the database.
+The above would update the title and published fields and save the 
+record to the database.
 
 :php:meth:`Model::clear()`
 ==========================
@@ -166,10 +166,10 @@ It does not actually create a record in the database but clears
 Model::$id and sets Model::$data based on your database field defaults. If you have
 not defined defaults for your database fields, Model::$data will be set to an empty array.
 
-If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database 
+If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database
 field defaults and the model instance will be ready to save with that data (accessible at ``$this->data``).
 
-If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array. 
+If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array.
 
 .. tip::
 
@@ -217,17 +217,24 @@ along with their values, are identified by the ``$fields`` array.
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
 
-    $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approved' => true),
-        array('Baker.created <=' => $this_year)
+        array('Baker.created <=' => $thisYear)
     );
 
-.. tip::
 
-    The $fields array accepts SQL expressions. Literal values should be
-    quoted manually using :php:meth:`Sanitize::escape()`.
+The ``$fields`` array accepts SQL expressions. Literal values should be 
+quoted manually using :php:meth:`DboSource::value()`. For example if one of your
+model methods was calling ``updateAll()`` you would do the following::
+
+    $db = $this->getDataSource();
+    $value = $db->value($value, 'string');
+    $this->updateAll(
+        array('Baker.approved' => true),
+        array('Baker.created <=' => $value)
+    );
 
 .. note::
 
@@ -547,7 +554,7 @@ a look at the following code.::
        public function add() {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                   $this->redirect(array('action' => 'index'));
+                   return $this->redirect(array('action' => 'index'));
                }
            }
        }

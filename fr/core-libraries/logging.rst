@@ -24,25 +24,25 @@ Création et Configuration des flux d'un log (journal)
 
 Les gestionnaires de flux de log peuvent faire partie de votre application,
 ou partie d'un plugin. Si par exemple vous avez un enregistreur de logs de
-base de données appelé ``DatabaseLogger``. Comme faisant parti de votre
+base de données appelé ``DatabaseLog``. Comme faisant parti de votre
 application il devrait être placé dans
-``app/Lib/Log/Engine/DatabaseLogger.php``. Comme faisant partie d'un plugin
+``app/Lib/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
 il devrait être placé dans
-``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLogger.php``. Une fois
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php``. Une fois
 configuré ``CakeLog`` va tenter de charger la configuration des flux de logs
-en appelant``CakeLog::config()``. La configuration de notre ``DatabaseLogger``
+en appelant``CakeLog::config()``. La configuration de notre ``DatabaseLog``
 pourrait ressembler à ceci::
 
     // pour app/Lib
     CakeLog::config('otherFile', array(
-        'engine' => 'DatabaseLogger',
+        'engine' => 'Database',
         'model' => 'LogEntry',
         // ...
     ));
     
     // pour un plugin appelé LoggingPack
     CakeLog::config('otherFile', array(
-        'engine' => 'LoggingPack.DatabaseLogger',
+        'engine' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ));
@@ -54,7 +54,7 @@ un tableau.::
 
     App::uses('CakeLogInterface', 'Log');
 
-    class DatabaseLogger implements CakeLogInterface {
+    class DatabaseLog implements CakeLogInterface {
         public function __construct($options = array()) {
             // ...
         }
@@ -71,13 +71,46 @@ logué, les valeurs de noyau sont ``error``, ``warning``, ``info`` et ``debug``.
 De plus vous pouvez définir vos propres types par leur utilisation en appelant
 ``CakeLog::write``.
 
+.. _file-log:
+
+.. versionadded:: 2.4
+
+Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations::
+
+* ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
+  Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
+  existant est renommé en ajoutant le timestamp au nom du fichier et un
+  nouveau fichier de log est crée. Peut être une valeur de bytes en entier
+  ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
+  Par défaut à 10MB.
+* ``rotate`` Les fichiers de log font une rotation à un temps spécifié
+  avant d\'être retiré.
+  Si la valeur est 0, les versions anciennes seront retirées plutôt que
+  mises en rotation. Par défaut à 10.
+* ``mask`` Définit les permissions du fichier pour les fichiers créés. Si
+  laissé vide, les permissions par défaut sont utilisées.
+
+.. warning::
+
+    Avant 2.4 vous deviez inclure le suffixe ``Log`` dans votre configuration
+    (``LoggingPack.DatabaseLog``). Ce n'est plus nécessaire maintenant.
+    Si vous avez utilisé un moteur de Log comme ```DatabaseLogger`` qui ne suit
+    pas la convention d'utiliser un suffixe ``Log`` pour votre nom de classe,
+    vous devez ajuster votre nom de classe en ``DatabaseLog``. Vous devez
+    aussi éviter les noms de classe comme ``SomeLogLog`` qui inclut le suffixe
+    deux fois à la fin.
+
 .. note::
 
     Toujours configurer les loggers dans ``app/Config/bootstrap.php``
     Essayer de configurer les loggers ou les loggers de plugin dans
     core.php provoquera des problèmes, les chemins d'applications
     n'étant pas encore configurés.
-    
+
+    Aussi nouveau dans 2.4: En mode debug, les répertoires manquants vont
+    maintenant être automatiquement créés pour éviter le lancement des erreurs
+    non nécessaires lors de l'utilisation de FileEngine.
+
 Journalisation des Erreurs et des Exception
 ===========================================
 
@@ -114,7 +147,7 @@ qui à pour effet d'écrire dans le log error. Le chemin par défaut est
 
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
-    
+
     // Aboutit à ce que cela soit ajouté à  app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
 
@@ -124,7 +157,7 @@ dans lequel vous voulez écrire les logs::
 
     // appelé de manière statique
     CakeLog::write('activity', 'Un message spécial pour l'activité de logging');
-    
+
     // Aboutit à ce que cela soit ajouté à app/tmp/logs/activity.log (au lieu de error.log)
     // 2007-11-02 10:22:02 Activity: Un message spécial pour l'activité de logging
 
@@ -139,6 +172,49 @@ chemins personnalisés d'être utilisés.::
         'engine' => 'FileLog',
         'path' => '/chemin/vers/endroit/perso/'
     ));
+
+.. _syslog-log:
+
+Logging to Syslog
+=================
+
+.. versionadded:: 2.4
+
+Dans les environnements de production, il est fortement recommandé que vous
+configuriez votre système pour utiliser syslog plutôt que le logger de
+fichiers. Cela va fonctionner bien mieux que ceux écrits et sera fait (presque)
+d'une manière  non-blocking et le logger de votre système d'exploitation peut
+être configuré séparément pour faire des rotations de fichier, pré-lancer
+les écritures ou utiliser un stockage complètement différent pour vos logs.
+
+Utiliser syslog est à peu près comme utiliser le moteur par défaut FileLog,
+vous devez juste spécifier `SysloLog` comme moteur à utiliser pour la
+journalisation. Le bout de configuration suivant va remplacer le logger
+par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`.
+
+::
+
+    CakeLog::config('default', array(
+        'engine' => 'Syslog'
+    ));
+
+Le tableau de configuration accepté pour le moteur de journalisation Syslog
+comprend les clés suivantes:
+
+* `format`: Un template de chaînes sprintf avec deux placeholders, le premier
+  pour le type d\'erreur, et le second pour le message lui-même. Cette clé est
+  utile pour ajouter des informations supplémentaires sur le serveur ou
+  la procédure dans le message de log. Par exemple:
+  ``%s - Web Server 1 - %s`` va ressembler à
+  ``error - Web Server 1 - An error occurred in this request`` après avoir
+  remplacé les placeholders.
+* `prefix`: Une chaine qui va être préfixée à tous les messages de log.
+* `flag`: Un drapeau entier utilisé pour l'ouverture de la connection à
+  logger, par défaut `LOG_ODELAY` sera utilisée. Regardez la documentation
+  de `openlog` pour plus d'options.
+* `facility`: Le slot de journalisation à utiliser dans syslog. Par défaut
+  `LOG_USER` est utilisé. Regardez la documentation de `syslog` pour plus
+  d'options.
 
 .. _writing-to-logs:
 
@@ -195,15 +271,14 @@ ce niveau de message va journaliser le message. Par exemple::
     // configurez tmp/logs/payments.log pour recevoir tous les types, mais seulement
     // ceux qui ont un scope `payments`
     CakeLog::config('payments', array(
-        'engine' => 'FileLog',
+        'engine' => 'SyslogLog',
         'types' => array('info', 'error', 'warning'),
-        'scopes' => array('payments'),
-        'file' => 'payments.log',
+        'scopes' => array('payments')
     ));
 
-    CakeLog::warning('this gets written only to shops.log', 'orders');
-    CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
-    CakeLog::warning('this gets written to both shops.log and payments.log', 'unknown');
+    CakeLog::warning('this gets written only to shops stream', 'orders');
+    CakeLog::warning('this gets written to both shops and payments streams', 'payments');
+    CakeLog::warning('this gets written to both shops and payments streams', 'unknown');
 
 Pour que les scope fonctionnent correctement, vous **devrez** définir les
 ``types`` acceptés sur tous les loggers avec lesquels vous voulez utiliser les scopes.

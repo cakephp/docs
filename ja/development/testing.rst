@@ -75,7 +75,7 @@ CakePHPにおけるほとんどのことがそうであるように、テスト�
 #. 他のクラスと同じく、テストケースのクラスを書いたファイル名もクラス名と同じにします。たとえば、 ``RouterTest.php`` は ``class RouterTest extends CakeTestCase`` を含んでいなければなりません。
 #. テストを含むメソッド(つまりアサーションを含むメソッド)はいずれも ``testPublished()`` といったように ``test`` で始まる名前にします。 ``@test`` という注釈をメソッドにマークすることでテストメソッドとすることもできます。
 
-テストケースを作成すると、ブラウザから ``http://localhost/you_app/test.php``
+テストケースを作成すると、ブラウザから ``http://localhost/your_app/test.php``
 (あなたの環境にしたがってURLを読み替えてください)を開き、そこからテストを実行することができます。
 アプリのテストケースをクリックしたあと、テストしたい内容のリンクをクリックします。
 以下のようなコマンドを実行すればシェルからテストすることができます。::
@@ -825,15 +825,21 @@ returnする値の選択
 
         $this->testAction('/posts/add', array(
             'data' => array(
-                'Post' => array('name' => 'New Post')
+                'Post' => array('title' => 'New Post')
             )
         ));
+        $this->assertContains('/posts', $this->headers['Location']);
+    }
 
-        $this->assertContains('/posts/index', $this->headers['Location']);
-        $this->assertEquals('New Post', $this->vars['post']['Post']['name']);
+    public function testAddGet() {
+        $this->testAction('/posts/add', array(
+            'method' => 'GET',
+            'return' => 'contents'
+        ));
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
+
 
 ここでは、 ``testAction()`` と ``generate()`` メソッドの少々複雑な使用例を示しています。
 まず、テストするコントローラーを作成し、 :php:class:`SessionComponent` をモックします。

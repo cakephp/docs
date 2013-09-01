@@ -264,6 +264,12 @@ en utilisant les méthodes familières dans notre model::
         'conditions' => array('name' => 'Some Person'),
     ));
 
+.. tip::
+
+    L'utilisation d'autres types de find que ``'all'`` peut avoir des résultats
+    inattendus si le résultat de votre méthode ``read`` n'est pas un tableau
+    indexé numériquement.
+
 De la même façon, nous pouvons sauvegarder un nouveau message::
 
     $this->MyModel->save(array(

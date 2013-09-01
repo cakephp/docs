@@ -8,12 +8,15 @@ introduced in each version and the migration path between versions.
 ===================
 
 3.0 is still under development, and any documented changes
-may only be available in the ``3.0`` branch in git.
+will only be available in the ``3.0`` branch in git.
 
 .. toctree::
     :maxdepth: 1
 
     appendices/3-0-migration-guide
+
+
+
 
 General Information
 ===================

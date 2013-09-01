@@ -19,9 +19,9 @@ Par exemple, lors de la suppression d'un enregistrement User
 lié à plusieurs enregistrements Recipe (User 'hasMany' ou
 'hasAndBelongsToMany' Recipes):
 
-    - si $cascade est fixé à true, les entrées Recipe liées sont aussi
+    - si $cascade est fixée à true, les entrées Recipe liées sont aussi
       supprimées si les valeurs "dependant" des models sont à true.
-    - si $cascade est fixé à false, les entrées Recipe resteront après
+    - si $cascade est fixée à false, les entrées Recipe resteront après
       que l'User ait été supprimé.
 
 Si votre base de données permet les clés étrangères et les suppressions en
@@ -54,7 +54,7 @@ tableau SQL.
   dépendent de cet enregistrement.
 * **callbacks** Booléen, Lance les callbacks
 
-Retourne un booléen True en cas de succès, false en cas d'échec.
+Retourne un booléen true en cas de succès, false en cas d'échec.
 
 Exemple::
 

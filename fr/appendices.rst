@@ -4,8 +4,16 @@ Annexes
 Les annexes contiennent des informations sur les nouvelles fonctionnalités
 de la version 2.0 ainsi qu’un guide de migration de la version 1.3 vers 2.0.
 
-2.3 Migration Guide
-===================
+2.4 Guide de Migration
+======================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-4-migration-guide
+
+2.3 Guide de Migration
+======================
 
 .. toctree::
     :maxdepth: 1

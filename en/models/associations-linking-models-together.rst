@@ -51,9 +51,9 @@ multidimensional array used to define association specifics.
         public $hasOne = 'Profile';
         public $hasMany = array(
             'Recipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
                 'conditions' => array('Recipe.approved' => '1'),
-                'order'      => 'Recipe.created DESC'
+                'order' => 'Recipe.created DESC'
             )
         );
     }
@@ -81,7 +81,7 @@ appropriate to have::
     class Group extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
             )
         );
         public $hasAndBelongsToMany = array(
@@ -109,7 +109,7 @@ but the following will not work well in all circumstances::
     class Group extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
             )
         );
         public $hasAndBelongsToMany = array(
@@ -194,9 +194,9 @@ to include only certain records.
     class User extends AppModel {
         public $hasOne = array(
             'Profile' => array(
-                'className'    => 'Profile',
-                'conditions'   => array('Profile.published' => '1'),
-                'dependent'    => true
+                'className' => 'Profile',
+                'conditions' => array('Profile.published' => '1'),
+                'dependent' => true
             )
         );
     }
@@ -288,8 +288,8 @@ syntax::
     class Profile extends AppModel {
         public $belongsTo = array(
             'User' => array(
-                'className'    => 'User',
-                'foreignKey'   => 'user_id'
+                'className' => 'User',
+                'foreignKey' => 'user_id'
             )
         );
     }
@@ -384,12 +384,12 @@ syntax::
     class User extends AppModel {
         public $hasMany = array(
             'Comment' => array(
-                'className'     => 'Comment',
-                'foreignKey'    => 'user_id',
-                'conditions'    => array('Comment.status' => '1'),
-                'order'         => 'Comment.created DESC',
-                'limit'         => '5',
-                'dependent'     => true
+                'className' => 'Comment',
+                'foreignKey' => 'user_id',
+                'conditions' => array('Comment.status' => '1'),
+                'order' => 'Comment.created DESC',
+                'limit' => '5',
+                'dependent' => true
             )
         );
     }
@@ -633,19 +633,18 @@ array syntax this time::
         public $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
-                    'className'              => 'Ingredient',
-                    'joinTable'              => 'ingredients_recipes',
-                    'foreignKey'             => 'recipe_id',
-                    'associationForeignKey'  => 'ingredient_id',
-                    'unique'                 => true,
-                    'conditions'             => '',
-                    'fields'                 => '',
-                    'order'                  => '',
-                    'limit'                  => '',
-                    'offset'                 => '',
-                    'finderQuery'            => '',
-                    'deleteQuery'            => '',
-                    'insertQuery'            => ''
+                    'className' => 'Ingredient',
+                    'joinTable' => 'ingredients_recipes',
+                    'foreignKey' => 'recipe_id',
+                    'associationForeignKey' => 'ingredient_id',
+                    'unique' => true,
+                    'conditions' => '',
+                    'fields' => '',
+                    'order' => '',
+                    'limit' => '',
+                    'offset' => '',
+                    'finderQuery' => '',
+                    'with' => ''
                 )
         );
     }
@@ -696,10 +695,9 @@ Possible keys for HABTM association arrays include:
    returned.
 -  **offset**: The number of associated rows to skip over (given
    the current conditions and order) before fetching and associating.
--  **finderQuery, deleteQuery, insertQuery**: A complete SQL query
-   CakePHP can use to fetch, delete, or create new associated model
-   records. This should be used in situations that require very custom
-   results.
+-  **finderQuery**: A complete SQL query CakePHP can use to fetch associated
+  model records. This should be used in situations that require very custom
+  results.
 
 Once this association has been defined, find operations on the
 Recipe model will also fetch related Tag records if they exist::
@@ -846,7 +844,7 @@ work. We'll start with two models::
         public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
-                'order'     => 'Follower.rank'
+                'order' => 'Follower.rank'
             )
         );
     }

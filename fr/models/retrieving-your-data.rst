@@ -21,7 +21,7 @@ tout autre fonction de recherche que vous définissez.
 Gardez à l'esprit que ``$type`` est sensible à la casse. Utiliser un
 caractère majuscule (par exemple ``All``) ne produira pas le résultat attendu.
 
-``$params`` est utilisé pour passer tous les paramètres aux différentes
+``$params`` est utilisée pour passer tous les paramètres aux différentes
 formes de find et il a les clés suivantes disponibles par défaut - qui sont
 toutes optionnelles::
 
@@ -46,7 +46,7 @@ il est fait usage dans quelques types de find, dans des behaviors
 find('first')
 =============
 
-``find('first', $params)`` retournera un résultat, vous devriez utiliser
+``find('first', $params)`` retournera UN résultat, vous devriez utiliser
 ceci dans tous les cas où vous attendez un seul résultat. Ci-dessous,
 quelques exemples simples (code du controller)::
 
@@ -175,7 +175,7 @@ find('list')
 
 ``find('list', $params)`` retourne un tableau indexé, pratique pour tous les
 cas où vous voudriez une liste telle que celles remplissant les champs select.
-Ci-dessous, une paire d'exemples simples (code du controller)::
+Ci-dessous, quelques exemples simples (code du controller)::
 
     public function une_function() {
         // ...
@@ -523,7 +523,7 @@ les résultats après qu'ils sont récupérés.
 Typiquement, la première chose à vérifier dans notre fonction find est l'état
 de la requête. L'état ``before`` est le moment de modifier la requête, de
 former les nouvelles associations, d'appliquer plus de behaviors, et
-d'interpreter toute clé spéciale qui est passé dans le deuxième argument de
+d'interpréter toute clé spéciale qui est passé dans le deuxième argument de
 ``find``. Cet état nécessite que vous retourniez l'argument $query
 (modifié ou non).
 
@@ -596,7 +596,7 @@ régler le compte de pagination:
 .. versionchanged:: 2.2
 
 Vous n'avez plus besoin de surcharger _findCount pour régler les problèmes des
-count de résultat incorrects. L'état ``'before'`` de vos finder personnalisés
+count de résultat incorrects. L'état ``'before'`` de vos finders personnalisés
 vous permettent maintenant d'être appelés à nouveaux avec
 $query['operation'] = 'count'. Le $query retourné va être utilisé dans
 ``_findCount()``. Si nécéssaire, vous pouvez distinguer en vérifiant pour
@@ -693,10 +693,10 @@ Les appels SQL que vous ne pouvez pas ou ne voulez pas faire grâce aux autres
 méthodes de model (attention, il y a très peu de circonstances où cela se
 vérifie), peuvent être exécutés en utilisant la méthode ``query()``.
 
-Si vous utilisez souvent cette méthode dans votre application, assurez-vous
-de connaître la librairie :doc:`/core-utility-libraries/sanitize` de CakePHP,
-qui vous aide à nettoyer les données provenant des users, des
-attaques par injection et cross-site scripting.
+Si vous utilisez cette méthode, assurez-vous d'échapper correctement tous les
+paramètres en utilisant la méthode ``value()`` sur le driver de la base de
+données. Ne pas échapper les paramètres va créer des vulnérabilités de type
+injection SQL.
 
 .. note::
 
@@ -798,8 +798,8 @@ courant (``Model::$data``) - comme lors des mises à jour - mais elle peut
 aussi être utilisée dans d'autres circonstances, pour récupérer un seul
 enregistrement depuis la base de données.
 
-``$fields`` est utilisé pour passer un seul nom de champ sous forme de
-chaîne ou un tableau de noms de champs ; si laissé vide, tous les champs
+``$fields`` est utilisée pour passer un seul nom de champ sous forme de
+chaîne ou un tableau de noms de champs ; si laissée vide, tous les champs
 seront retournés.
 
 ``$id`` précise l'ID de l'enregistrement à lire. Par défaut,
@@ -860,9 +860,9 @@ Disons que nous voulons trouver tous les posts dont le titre n’est pas
 Notez le '!=' qui précède l’expression. CakePHP peut parser tout opérateur
 de comparaison valide de SQL, même les expressions de correspondance
 utilisant LIKE, BETWEEN, ou REGEX, tant que vous laissez un espace entre
-l'opérateur et la valeur. La seule exception à ceci sont les correspondance
+l'opérateur et la valeur. Les seules exceptions à ceci sont les correspondances
 du genre IN(...). Admettons que vous vouliez trouver les posts dont le titre
-appartient à un ensemble de valeur données::
+appartient à un ensemble de valeurs données::
 
     array(
         "Post.titre" => array("Premier post", "Deuxième post", "Troisième post")
@@ -930,7 +930,7 @@ recherche aux posts écrits par Bob::
     )
 
 Si vous avez besoin de mettre plusieurs conditions sur le même champ, comme
-quand vous voulez faire une recherche LIKE avec des termses multiples, vous
+quand vous voulez faire une recherche LIKE avec des termes multiples, vous
 pouvez faire ceci en utilisant des conditions identiques à::
 
     array('OR' => array(
@@ -1032,7 +1032,7 @@ Sous requêtes
 
 Par exemple, imaginons que nous ayons une table "users" avec
 "id", "nom" et "statuts". Le statuts peut être "A", "B" ou "C". Et
-nous voulons récupérer tous les users qui ont un statuts différent
+nous voulons récupérer tous les users qui ont un statut différent
 de "B" en utilisant une sous requête.
 
 Pour pouvoir effectuer cela, nous allons appeler la source de données du
@@ -1086,6 +1086,8 @@ Ceci devrait générer la commande SQL suivante::
 Aussi, si vous devez passer juste une partie de votre requête en
 colonne SQL comme ci-dessus, la source de données **expressions** avec
 la colonne SQL fonctionne pour toute partie de requête find.
+
+.. _prepared-statements:
 
 Requêtes Préparées
 ------------------

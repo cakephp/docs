@@ -125,6 +125,26 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    The details of those changes will depend on your setup, and can
    include additional things that are not Cake related. Please refer
    to Apache's online documentation for more information.
+   
+#. (Optional) To improve production setup, you should prevent invalid assets
+   from being parsed by CakePHP. Modify your webroot .htaccess to something like::
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /path/to/cake/app
+           RewriteCond %{REQUEST_FILENAME} !-d
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^(.*)$ index.php [QSA,L]
+       </IfModule>
+       
+   The above will simply prevent incorrect assets from being sent to index.php
+   and instead display your webserver's 404 page.
+   
+   Additionally you can create a matching HTML 404 page, or use the default 
+   built-in CakePHP 404 by adding an ``ErrorDocument`` directive::
+       
+       ErrorDocument 404 /404-not-found
 
 Pretty URLs on nginx
 ====================
@@ -190,46 +210,26 @@ these steps:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <clear/>
-                    <rule name="Imported Rule 0" stopProcessing="true">
-                        <match url="^(img|css|files|js|favicon.ico)(.*)$"></match>
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
+                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                        <match url="^test.php(.*)$" ignoreCase="false" />
+                        <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Imported Rule 1" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                        <match url="^app/webroot/(.*)$" ignoreCase="false" />
+                        <action type="None" />
+                    </rule>
+                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                    </rule>
+                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <conditions logicalGrouping="MatchAll">
-                            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                        </conditions>
-                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
-                    </rule>
-                    <rule name="Imported Rule 2" stopProcessing="true">
-                        <match url="^$" ignoreCase="false" />
-                        <action type="Rewrite" url="app/webroot/" />
-                    </rule>
-                    <rule name="Imported Rule 3" stopProcessing="true">
-                        <match url="(.*)" ignoreCase="false" />
-                        <action type="Rewrite" url="app/webroot/{R:1}" />
-                    </rule>
-                    <rule name="Imported Rule 4" stopProcessing="true">
-                        <match url="^(.*)$" ignoreCase="false" />
-                        <conditions logicalGrouping="MatchAll">
-                            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                        </conditions>
-                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php" appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>
         </system.webServer>
     </configuration>
-
-It is also possible to use the Import functionality in IIS's URL
-Rewrite module to import rules directly from CakePHP's .htaccess
-files in root, /app/, and /app/webroot/ - although some editing
-within IIS may be necessary to get these to work. When Importing
-the rules this way, IIS will automatically create your web.config
-file for you (in the currently selected folder within IIS).
 
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work

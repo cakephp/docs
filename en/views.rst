@@ -12,8 +12,8 @@ common rendering scenarios:
 
 - To create XML or JSON webservices you can use the :doc:`views/json-and-xml-views`.
 - To serve protected files, or dynamically generated files, you can use
-  :doc:`views/media-view`
-- To create multiple themed views, you can use :doc:`views/themes`
+  :ref:`cake-response-file`.
+- To create multiple themed views, you can use :doc:`views/themes`.
 
 View Templates
 ==============
@@ -85,7 +85,7 @@ The above view file could be used as a parent view.  It expects that the view
 extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
 block is a special block that CakePHP creates. It will contain all the
 un-captured content from the extending view. Assuming our view file has a
-``$posts`` variable with the data about our post.  Our view could look like:
+``$post`` variable with the data about our post.  Our view could look like:
 
 .. code-block:: php
 
@@ -177,7 +177,9 @@ to prepend content to an existing block::
 The method ``startIfEmpty()`` can be used to start a block **only** if its empty
 or undefined. If the block already exists the captured content will be
 discarded. This is useful when you want to conditionally define default content for
-a block should it not already exist::
+a block should it not already exist:
+
+.. code-block:: php
 
     // In a view file.
     // Create a navbar block
@@ -186,16 +188,19 @@ a block should it not already exist::
     echo $this->element('notifications');
     $this->end();
 
-    // In a parent view/layout
-    $this->startIfEmpty('navbar');
-    Default content
-    $this->end();
+.. code-block:: php
 
+    // In a parent view/layout
+    <?php $this->startIfEmpty('navbar'); ?>
+    <p>If the block is not defined by now - show this instead</p>
+    <?php $this->end(); ?>
+
+    // Somewhere later in the parent view/layout
     echo $this->fetch('navbar');
 
 In the above example, the ``navbar`` block will only contain the content added
 in the first section.  Since the block was defined in the child view, the
-default content will be discarded.
+default content with the ``<p>`` tag will be discarded.
 
 .. versionadded: 2.3
     ``startIfEmpty()`` and ``prepend()`` were added in 2.3
@@ -291,14 +296,14 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-Layout files should be placed in ``/app/View/Layouts``. CakePHP's
-default layout can be overridden by creating a new default layout
-at ``/app/View/Layouts/default.ctp``. Once a new default layout has
-been created, controller-rendered view code is placed inside of the
-default layout when the page is rendered.
+CakePHP's default layout is located at ``/app/View/Layouts/default.ctp``.
+If you want to change the overall look of your application, then this is
+the right place to start, because controller-rendered view code is placed
+inside of the default layout when the page is rendered.
 
+Other layout files should be placed in ``/app/View/Layouts``.
 When you create a layout, you need to tell CakePHP where to place
-the code for your views. To do so, make sure your layout includes a
+the output of your views. To do so, make sure your layout includes a
 place for ``$this->fetch('content')`` Here's an example of what a default layout
 might look like:
 
@@ -733,10 +738,10 @@ To call any view method use ``$this->method()``
 
     .. versionadded:: 2.1
 
-.. php:method:: fetch($name)
+.. php:method:: fetch($name, $default = '')
 
-    Fetch the value of a block. '' Will be returned for blocks that are not
-    defined. See the section on :ref:`view-blocks` for examples.
+    Fetch the value of a block. If a block is empty or undefined '' will be returned.
+    See the section on :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
 

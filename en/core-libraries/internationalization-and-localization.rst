@@ -78,6 +78,11 @@ The three-character locale codes conform to the
 standard, although if you create regional locales (en\_US, en\_GB,
 etc.) cake will use them if appropriate.
 
+.. warning::
+
+    In 2.3 and 2.4 some language codes have been corrected to meet the ISO standard.
+    Please see the corresponding migration guides for details.
+
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g.::
@@ -95,6 +100,20 @@ or::
 
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos');
+
+.. _lc-time:
+
+For translation of strings of LC_TIME category CakePHP uses POSIX compliant LC_TIME
+files. The i18n functions of :php:class:`CakeTime` utility class and helper :php:class:`TimeHelper`
+use these LC_TIME files.
+
+Just place LC_TIME file in it's respective locale directory::
+
+    /app/Locale/fra/LC_TIME (French)
+    /app/Locale/por/LC_TIME (Portuguese)
+
+You can find these files for few popular languages from the official `Localized <https://github.com/cakephp/localized>`_
+repo.
 
 Internationalizing CakePHP Plugins
 ===================================

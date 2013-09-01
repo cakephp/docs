@@ -948,6 +948,12 @@ Les options de Datetime
 
   Créera 4 options dans la select box minute. Une toute les 15 minutes.
 
+* ``$options['round']`` Peut être défini à `up` ou `down` pour forcer l'arrondi
+  dans quelque soit la direction. Par défaut à null qui arrondit à la moitié
+  supérieure selon `interval`.
+
+  .. versionadded:: 2.4
+
 Éléments de Formulaire-Méthodes spécifiques
 ===========================================
 

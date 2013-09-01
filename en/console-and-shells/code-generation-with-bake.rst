@@ -92,7 +92,7 @@ your views
 Pass the skeleton path parameter to the project task
 ::
 
-    cake bake project -skel Console/Templates/skel
+    cake bake project --skel Console/Templates/skel
 
 .. note::
 
@@ -120,7 +120,7 @@ features and enhancements have been built in.
 -  All the different bake tasks now allow you to use connections
    other than default for baking. Using the ``-connection`` parameter.
 -  Plugin support has been greatly improved. You can use either
-   ``-plugin PluginName`` or ``Plugin.class``.
+   ``--plugin PluginName`` or ``Plugin.class``.
 -  Questions have been clarified, and made easier to understand.
 -  Multiple validations on models has been added.
 -  Self Associated models using ``parent_id`` are now detected. For
@@ -218,9 +218,9 @@ themes will be checked until the correct template is found.
 New in 1.3 are additional ways to specify plugin names when using
 bake. In addition to ``cake bake plugin Todo controller Posts``,
 there are two new forms. ``cake bake controller Todo.Posts`` and
-``cake bake controller Posts -plugin Todo``. The plugin parameter
+``cake bake controller Posts --plugin Todo``. The plugin parameter
 can be while using interactive bake as well.
-``cake bake controller -plugin Todo``, for example will allow you
+``cake bake controller --plugin Todo``, for example will allow you
 to use interactive bake to add controllers to your Todo plugin.
 Additional / multiple plugin paths are supported as well. In the
 past bake required your plugin to be in app/plugins. In 1.3 bake

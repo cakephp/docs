@@ -320,7 +320,7 @@ For example::
         }
     }
     
-This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp``
 
 Flow Control
 ------------
@@ -335,10 +335,9 @@ Flow Control
         public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
-                $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
-            } else {
-                $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+                return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             }
+            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
         }
 
     You can also use a relative or absolute URL as the $url argument::
@@ -367,6 +366,13 @@ Flow Control
     you can use::
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+
+    An example using query strings and hash would look like::
+
+        $this->redirect(array(
+            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+
+    The generated url would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
@@ -431,10 +437,9 @@ Other Useful Methods
             public function delete($id) {
                 // delete code goes here, and then...
                 if ($this->referer() != '/') {
-                    $this->redirect($this->referer());
-                } else {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect($this->referer());
                 }
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -443,7 +448,7 @@ Other Useful Methods
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
-                $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
@@ -590,7 +595,7 @@ Other Useful Methods
     above it's best to make use of element caching to prevent needless
     processing. By modifying the call to element to look like this::
 
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', array(), array('cache' => true));
 
     The ``requestAction`` call will not be made while the cached
     element view file exists and is valid.

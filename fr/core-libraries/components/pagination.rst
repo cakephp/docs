@@ -35,6 +35,8 @@ doit être défini dans une structure en tableau comme ci-dessous::
 
     class PostsController extends AppController {
 
+        public $components = array('Paginator');
+
         public $paginate = array(
             'limit' => 25,
             'order' => array(
@@ -47,6 +49,8 @@ Vous pouvez aussi inclure d'autres options :php:meth:`~Model::find()`,
 comme ``fields``::
 
     class PostsController extends AppController {
+
+        public $components = array('Paginator');
 
         public $paginate = array(
             'fields' => array('Post.id', 'Post.created'),
@@ -66,6 +70,8 @@ model. Ça devient alors très simple d'utiliser les component comme
 :php:class:`ContainableBehavior` avec la pagination::
 
     class RecipesController extends AppController {
+
+        public $components = array('Paginator');
 
         public $paginate = array(
             'limit' => 25,
@@ -89,36 +95,38 @@ Les valeurs des clés ``Post`` et ``Author`` pourraient contenir toutes
 les propriétés qu'un model/clé sans ``$paginate`` pourraient contenir.
 
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
-appeler la méthode ``paginate()`` dans l'action du controller.
-Cette méthode chargera dynamiquement :php:class:`PaginatorComponent`,
-et appellera sa méthode paginate(). Ceci retournera le résultat du ``find()``
-depuis le model. Ceci envoi également quelques statistiques de pagination,
-qui sont additionnées à l'objet de la requête. L'information supplémentaire
-est envoyée à ``$this->request->params['paging']``, et est utilisée par
-:php:class:`PaginatorHelper` pour la création de liens.
-``Controller::paginate()`` ajoute également PaginatorHelper à la liste
-des helpers de votre controller, si il n'a pas encore été additionné::
+utiliser la méthode ``paginate()`` du :php:class:`PaginatorComponent` de
+l'action de notre controller. Ceci retournera les résultats du ``find()``
+depuis le model. Il définit également quelques paramètres de pagination
+supplémentaires, qui sont ajoutés à l'objet request. L'information
+supplémentaire est définie dans ``$this->request->params['paging']``, et est
+utilisée par :php:class:`PaginatorHelper` pour la création des liens.
+:php:meth:`PaginatorComponent::paginate()` ajoute aussi
+:php:class:`PaginatorHelper` à la liste des helpers dans votre controller, si
+il n'a pas déjà été ajouté.::
 
     public function list_recipes() {
-        // similaire à un  findAll(), mais récupère les résultats paginés
-        $data = $this->paginate('Recipe');
+        $this->Paginator->settings = $this->paginate;
+
+        // similaire à un findAll(), mais récupère les résultats paginés
+        $data = $this->Paginator->paginate('Recipe');
         $this->set('data', $data);
     }
 
 Vous pouvez filtrer les enregistrements en passant des conditions
 en second paramètre à la fonction ``paginate()``.::
 
-    $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
+    $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
-Ou vous pouvez aussi définir des ``conditions`` et d'autres clés dans
-le tableau ``$paginate`` à l'intérieur de votre action.::
+Ou vous pouvez aussi définir des ``conditions`` et d'autres tableaux de
+configuration de pagination à l'intérieur de votre action.::
 
     public function list_recipes() {
-        $this->paginate = array(
+        $this->Paginator->settings = array(
             'conditions' => array('Recipe.title LIKE' => 'a%'),
             'limit' => 10
         );
-        $data = $this->paginate('Recipe');
+        $data = $this->Paginator->paginate('Recipe');
         $this->set(compact('data'));
     );
 
@@ -208,13 +216,14 @@ faire est d'ajouter le mot clé dans la variable de classe
      * Ou à la volée depuis l'intérieur de l'action 
      */
     public function index() {
-        $this->paginate = array(
+        $this->Paginator->settings = array(
             'MyModel' => array(
                 'limit' => 20,
                 'order' => array('week' => 'desc'),
                 'group' => array('week', 'home_team_id', 'away_team_id')
             )
         );
+    }
 
 Dans CakePHP 2.0, vous n'avez plus besoin d'implémenter ``paginateCount()``
 quand vous utilisez des clauses de groupe. Le ``find('count')`` du groupe
@@ -227,10 +236,10 @@ Par défaut le classement peut être effectué pour n'importe quelle colonne dan
 un model. C'est parfois indésirable comme permettre aux utilisateurs de trier
 des colonnes non indexées, ou des champs virtuels ce qui peut être coûteux en
 temps de calculs. Vous pouvez utiliser le 3ème paramètre de
-``Controller::paginate()`` pour restreindre les tris de colonnes qui pourront
-être effectués::
+``PaginatorComponent::paginate()`` pour restreindre les tris de colonnes qui
+pourront être effectués::
 
-    $this->paginate('Post', array(), array('title', 'slug'));
+    $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 
 Ceci permettrait le tri uniquement sur les colonnes title et slug.
 Un utilisateur qui paramètre le tri à d'autres valeurs sera ignoré.
@@ -326,10 +335,10 @@ quand une exception `NotFoundException` est attrapée::
 
     public function index() {
         try {
-            $this->paginate();
+            $this->Paginator->paginate();
         } catch (NotFoundException $e) {
             //Faire quelque chose ici comme rediriger à la première ou dernière page.
-            //$this->request->params['paging'] va vous donner une l'info nécessaire.
+            //$this->request->params['paging'] va vous donner l'info nécessaire.
         }
     }
 

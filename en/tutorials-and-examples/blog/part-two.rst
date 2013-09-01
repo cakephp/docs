@@ -290,11 +290,10 @@ PostsController::
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
-                    $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash('Unable to add your post.');
+                    $this->Session->setFlash(__('Your post has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
                 }
+                $this->Session->setFlash(__('Unable to add your post.'));
             }
         }
     }
@@ -446,11 +445,10 @@ like::
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash('Unable to update your post.');
+                $this->Session->setFlash(__('Your post has been updated.'));
+                return $this->redirect(array('action' => 'index'));
             }
+            $this->Session->setFlash(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -539,8 +537,8 @@ Next, let's make a way for users to delete posts. Start with a
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
-            $this->redirect(array('action' => 'index'));
+            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
@@ -670,9 +668,9 @@ Suggested Follow-up Reading
 These are common tasks people learning CakePHP usually want to study next:
 
 1. :ref:`view-layouts`: Customizing your website layout
-2. :ref:`view-elements` Including and reusing view snippets
+2. :ref:`view-elements`: Including and reusing view snippets
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
-4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+4. :doc:`/console-and-shells/code-generation-with-bake`: Generating basic CRUD code
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
 
 

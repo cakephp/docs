@@ -528,6 +528,17 @@ Other Methods
         )
         */
 
+.. php:method:: param(string $key, string $model = null)
+
+    Gets the specific paging parameter from the resultset for the given model::
+
+        debug($this->Paginator->param('count'));
+        /*
+        (int)43
+        */
+
+.. versionadded:: 2.4
+    The ``param()`` method was added in 2.4.
 
 .. meta::
     :title lang=en: PaginatorHelper

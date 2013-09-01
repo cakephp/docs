@@ -685,8 +685,8 @@ CakeSession est maintenant une classe complètement statique, les deux
 celui-ci. Il peut facilement être utilisé dans les models ou dans d'autres 
 contextes. Toutes ses méthodes sont appelées de façon statique.
 
-La configuration de Session a aussi changé :doc:`Voir la section session pour 
-plus d'informations </development/sessions>`
+La configuration de Session a aussi changé
+:doc:`Voir la section session pour plus d'informations </development/sessions>`
 
 HttpSocket
 ----------

@@ -112,8 +112,11 @@ tests:
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
 
-When you have created a test case, you can execute it using the test runner
-You can run tests from the command line using the test shell::
+When you have created a test case, you can execute it by browsing
+to ``http://localhost/your_app/test.php`` (depending on
+how your specific setup looks). Click App test cases, and
+then click the link to your specific file.  You can run tests from the command
+line using the test shell::
 
     ./Console/cake test app Model/Post
 
@@ -766,7 +769,7 @@ the redirect.  For example::
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 }
             }
             // more code
@@ -900,25 +903,32 @@ allowing you to check for redirects::
 
         $this->testAction('/posts/add', array(
             'data' => array(
-                'Post' => array('name' => 'New Post')
+                'Post' => array('title' => 'New Post')
             )
         ));
+        $this->assertContains('/posts', $this->headers['Location']);
+    }
 
-        $this->assertContains('/posts/index', $this->headers['Location']);
-        $this->assertEquals('New Post', $this->vars['post']['Post']['name']);
+    public function testAddGet() {
+        $this->testAction('/posts/add', array(
+            'method' => 'GET',
+            'return' => 'contents'
+        ));
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
 
+
 This example shows a slightly more complex use of the ``testAction()`` and
 ``generate()`` methods. First, we generate a testing controller and mock the
-:php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have the ability
-to run testing methods on it. Assuming ``PostsController::add()`` redirects us to
-index, sends an email and sets a flash message, the test will pass. For the sake
-of example, we also check to see if the layout was loaded by checking the entire
-rendered contents, and checks the view for a form tag. As you can see, your
-freedom to test controllers and easily mock its classes is greatly expanded with
-these changes.
+:php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have
+the ability to run testing methods on it. Assuming ``PostsController::add()``
+redirects us to index, sends an email and sets a flash message, the test will
+pass. A second test was added to do basic sanity testing when fetching the add
+form.  We check to see if the layout was loaded by checking the entire rendered
+contents, and checks the view for a form tag. As you can see, your freedom to
+test controllers and easily mock its classes is greatly expanded with these
+changes.
 
 When doing controller tests using mocks that use static methods you'll have to
 use a different method to register your mock expectations.  For example if you
@@ -969,6 +979,18 @@ and make sure our web service is returning the proper response::
             $this->assertEquals($expected, $result);
         }
     }
+
+Testing Views
+=============
+
+Generally most applications will not directly test their HTML code. Doing so is
+often results in fragile, difficult to maintain test suites that are prone to
+breaking. When writing functional tests using :php:class:`ControllerTestCase`
+you can inspect the rendered view content by setting the ``return`` option to
+'view'. While it is possible to test view content using ControllerTestCase,
+a more robust and maintable integration/view testing can be accomplished using
+tools like `Selenium webdriver <http://seleniumhq.org>`_.
+
 
 Testing Components
 ==================
@@ -1124,7 +1146,7 @@ Creating Test Suites
 ====================
 
 If you want several of your tests to run at the same time, you can
-creating a test suite. A testsuite is composed of several test cases.
+create a test suite. A test suite is composed of several test cases.
 ``CakeTestSuite`` offers a few methods for easily creating test suites based on
 the file system.  If we wanted to create a test suite for all our model tests we
 could would create ``app/Test/TestCase/AllModelTest.php``. Put the following in it::
@@ -1218,6 +1240,7 @@ database in a database server that jenkins can access (usually localhost).  Add
 a *shell script step* to the build that contains the following::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
+    <?php
     class DATABASE_CONFIG {
         public $test = array(
             'datasource' => 'Database/Mysql',

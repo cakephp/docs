@@ -66,6 +66,7 @@ Control structures are for example "``if``", "``for``", "``foreach``",
    structure. The statement included in curly brackets should begin on a
    new line, and code contained within it should gain a new level of
    indentation.
+*  Inline assignments should not be used inside of the control structures.
 
 ::
 
@@ -81,6 +82,17 @@ Control structures are for example "``if``", "``for``", "``foreach``",
         statement;
     }
 
+    // wrong = inline assignment
+    if ($variable = Class::function()) {
+        statement;
+    }
+
+    // good
+    $variable = Class::function();
+    if ($variable) {
+        statement;
+    }
+
 Ternary Operator
 ----------------
 
@@ -90,10 +102,10 @@ statements. Ternary operators should not ever be nested. Optionally
 parentheses can be used around the condition check of the ternary for
 clarity::
 
-    //Good, simple and readable
+    // Good, simple and readable
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    //Nested ternaries are bad
+    // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
@@ -115,6 +127,30 @@ tags::
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+
+Comparison
+==========
+
+Always try to be as strict as possible. If a none strict test is deliberate it might be wise to
+comment it as such to avoid confusing it for a mistake.
+
+For testing if a variable is null, it is recommended to use a strict check::
+
+    if ($value === null) {
+    	  // ...
+    }
+
+The value to check against should be placed on the right side::
+
+    // not recommended
+    if (null === $this->foo()) {
+        // ...
+    }
+
+    // recommended
+    if ($this->foo() === null) {
+        // ...
+    }
 
 Function Calls
 ==============
@@ -200,7 +236,7 @@ processed if they are the first thing in a DocBlock line, for example::
      */
     function bar() {
     }
-     
+
     /**
      * Foo function
      */
@@ -277,6 +313,10 @@ Private methods or variable names start with double underscore ("\_\_"). Example
             /*...*/
         }
     }
+
+Try to avoid private methods or variables, though, in favor of protected ones.
+The latter can be accessed or modified by subclasses, whereas private ones
+prevent extension or re-use. Private visibility also makes testing much more difficult.
 
 Method Chaining
 ---------------

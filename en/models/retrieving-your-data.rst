@@ -676,11 +676,9 @@ SQL calls that you can't or don't want to make via other model
 methods (this should only rarely be necessary) can be made using
 the model's ``query()`` method.
 
-If you’re ever using this method in your application, be sure to
-check out CakePHP’s
-:doc:`/core-utility-libraries/sanitize`, which aids in
-cleaning up user-provided data from injection and cross-site
-scripting attacks.
+If you use this method be sure to properly escape all parameters using the
+``value()`` method on the database driver. Failing to escape parameters
+will create SQL injection vulnerabilities.
 
 .. note::
 
@@ -1062,6 +1060,7 @@ Also, if you need to pass just part of your query as raw SQL as the
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
 
+.. _prepared-statements:
 
 Prepared Statements
 -------------------

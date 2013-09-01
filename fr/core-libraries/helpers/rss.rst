@@ -141,9 +141,6 @@ pour chaque pair de valeur de clé.
 
 ::
 
-    // Vous devez importer Sanitize
-    App::uses('Sanitize', 'Utility');
-
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
     
@@ -156,11 +153,8 @@ pour chaque pair de valeur de clé.
             $post['Post']['slug']
         );
 
-        // C\'est la partie où nous nettoyons le corps du teste pour la sortie en description
-        // de l\item de rss, cela nécessite d'avoir seulement le text pour s'assurer le validates de feed
-        $bodyText = preg_replace('=\(.*?\)=is', '', $post['Post']['body']);
-        $bodyText = $this->Text->stripLinks($bodyText);
-        $bodyText = Sanitize::stripAll($bodyText);
+        // Retire & échappe tout HTML pour être sûr que le contenu va être validé.
+        $bodyText = h(strip_tags($bodyText));
         $bodyText = $this->Text->truncate($bodyText, 400, array(
             'ending' => '...',
             'exact'  => true,
@@ -180,11 +174,10 @@ Vous pouvez voir ci-dessus que nous pouvons utiliser la boucle pour préparer
 les données devant être transformées en elements XML. Il est important de
 filtrer tout texte de caractères non brute en-dehors de la description,
 spécialement si vous utilisez un éditeur de texte riche pour le corps de votre
-blog. Dans le code ci-dessus nous utilisons la méthode
-:php:meth:`TextHelper::stripLinks()` et quelques méthodes de la classe
-Sanitize, mais nous recommandons d'écrire un helper propre compréhensible pour
-réellement capturer le texte propre. Une fois que nous avons défini les données
-pour le feed, nous pouvons ensuite utiliser la méthode
+blog. Dans le code ci-dessus nous utilisons ``strip_tags()`` et
+:php:func:`h()` pour retirer/échapper tout caractère spécial XML du contenu,
+puisqu'ils peuvent entraîner des erreurs de validation. Une fois que nous avons
+défini les données pour le feed, nous pouvons ensuite utiliser la méthode
 :php:meth:`RssHelper::item()` pour créer le XML dans le format RSS. Une fois
 que vous avez toutes ces configurations, vous pouvez tester votre feed RSS
 en allant à votre ``/posts/index.rss`` et que vous verrez votre nouveau feed.

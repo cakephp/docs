@@ -20,6 +20,12 @@ davantage de souplesse en matière de formatage des nombres.
     :start-after: start-cakenumber
     :end-before: end-cakenumber
 
+.. warning::
+
+    Depuis 2.4 les symboles sont maintenant en UTF-8. Merci de regarder le
+    guide de migration pour plus de détails si vous lancez une application
+    non-UTF-8.
+
 .. meta::
     :title lang=fr: NumberHelper
     :description lang=fr: NumberHelper contient des méthodes pratiques qui permettent d'afficher des nombres dans des formats communs dans les vues.

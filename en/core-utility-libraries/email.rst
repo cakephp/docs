@@ -61,10 +61,10 @@ Configuration
 
 Configuration for Email defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the file
-``App/Config/email.php``.  The ``App/Config/email.php.default`` has an example
-of this file. It is not required to create ``App/Config/email.php``. ``Email``
-can be used without it and use respective methods to set all configurations
-separately or load an array of configs.
+``App/Config/app.php``.  The ``App/Config/app.php.default`` has an example of
+this file. It is not required to define email configuratin in
+``App/Config/app.php``. ``Email`` can be used without it and use respective
+methods to set all configurations separately or load an array of configs.
 
 By defining profiles and transports you can keep your application code free of
 configuration data, and avoid duplication that makes maintenance and deployment
@@ -208,8 +208,8 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory.  Email views can also use layouts, and elements just like
-normal views::
+``View`` directory called ``Emails``.  Email views can also use layouts, 
+and elements just like normal views::
 
     $email = new Email();
     $email->template('welcome', 'fancy')
@@ -315,6 +315,10 @@ you want the filenames to appear in the recipient's mail client:
    ``Content-Disposition`` header for an attachment.  This is useful when
    sending ical invites to clients using outlook.
 
+   4.3 Instead of the ``file`` option you can provide the file contents as
+   a string using the ``data`` option. This allows you to attach files without
+   needing file paths to them.
+
 Using transports
 ================
 
@@ -363,6 +367,23 @@ Example::
     $yourInstance = $Email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
     $Email->send();
+
+Relaxing address validation rules
+---------------------------------
+
+.. php:method:: emailPattern($pattern = null)
+
+If you are having validation issues when sending to non compliant addresses, you
+can relax the pattern used to validate email addresses. This is sometimes
+necessary when dealing with some Japanese ISP's::
+
+    $email = new CakeEmail('default');
+
+    // Relax the email pattern, so you can send
+    // to non-conformant addresses.
+    $email->emailPattern($newPattern);
+
+.. versionadded:: 2.4
 
 
 Sending messages quickly

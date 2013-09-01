@@ -42,10 +42,10 @@ do not use the helper as well as help keep the controller better
 organized::
 
     class BakeriesController extends AppController {
-        public function bake {
+        public function bake() {
             $this->helpers[] = 'Time';
         }
-        public function mix {
+        public function mix() {
             // The Time helper is not loaded here and thus not available
         }
     }
@@ -103,13 +103,6 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
-
-.. tip::
-
-    Aliasing the Html or Session Helper while using the core PagesController
-    will not work. It is better to copy
-    ``lib/Cake/Controller/PagesController.php`` into your ``App/Controller/``
-    folder.
 
 Using helper settings allows you to declaratively configure your helpers and
 keep configuration logic out of your controller actions.  If you have

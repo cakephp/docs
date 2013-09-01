@@ -159,7 +159,7 @@ controller UsersController::
     public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('Vous êtes connecté!');
-            $this->redirect('/', null, false);
+            return $this->redirect('/');
         }
     }
 
@@ -176,7 +176,7 @@ vide, il est maintenant temps de la remplir. Dans
 ``UsersController::logout()`` ajoutez ce qui suit ::
 
     $this->Session->setFlash('Au-revoir');
-    $this->redirect($this->Auth->logout());
+    return $this->redirect($this->Auth->logout());
 
 Cela définit un message flash en Session et déconnecte l'User en
 utilisant la méthode logout de Auth. La méthode logout de Auth supprime tout

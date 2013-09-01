@@ -793,6 +793,23 @@ would look like:
         </arguments>
     </shell>
 
+Routing in shells / CLI
+=======================
+
+In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP_HOST')`` and
+other webbrowser specific environment variables are not set.
+
+If you generate reports or send emails that make use of ``Router::url()`` those will contain
+the default host ``http://localhost/``  and thus resulting in invalid urls. In this case you need to
+specify the domain manually.
+You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
+
+For sending emails, you should provide CakeEmail class with the host you want to send the email with:
+
+    $Email = new CakeEmail();
+    $Email->domain('www.example.org');
+
+This asserts that the generated message IDs are valid and fit to the domain the emails are sent from.
 
 Shell API
 =========

@@ -88,7 +88,7 @@ de génération de code fournis avec CakePHP::
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('L\'user a été sauvegardé'));
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
                 }
@@ -103,7 +103,7 @@ de génération de code fournis avec CakePHP::
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('L\'user a été sauvegardé'));
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
                 }
@@ -123,10 +123,10 @@ de génération de code fournis avec CakePHP::
             }
             if ($this->User->delete()) {
                 $this->Session->setFlash(__('User supprimé'));
-                $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'index'));
             }
             $this->Session->setFlash(__('L\'user n\'a pas été supprimé'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
 
 De la même façon, nous avons crée les vues pour nos posts de blog ou en
@@ -207,7 +207,7 @@ et de réaliser l'action connexion et deconnexion::
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash(__('Nom d\'user ou mot de passe invalide, réessayer'));
             }
@@ -215,7 +215,7 @@ et de réaliser l'action connexion et deconnexion::
     }
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
@@ -298,7 +298,7 @@ l'user connecté courant en référence pour le post créé::
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Ligne ajoutée
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Votre post a été sauvegardé.');
+                $this->Session->setFlash(__('Votre post a été sauvegardé.'));
                 $this->redirect(array('action' => 'index'));
             }
         }

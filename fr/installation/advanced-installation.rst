@@ -6,8 +6,8 @@ Installer CakePHP avec l'installeur PEAR
 
 CakePHP publie un package PEAR que vous pouvez installer en utilisant
 l'installeur pear. L'installation avec l'installeur PEAR peut simplifier
-le partage des librairies de CakePHP sur plusieurs applications. Pour installer
-CakePHP avec pear, vous devrez faire comme suit::
+le partage des librairies de CakePHP dans plusieurs applications. Pour
+installer CakePHP avec pear, vous devrez faire comme suit::
 
     pear channel-discover pear.cakephp.org
     pear install cakephp/CakePHP
@@ -50,8 +50,8 @@ application CakePHP ressemblerait à ce qui suit::
         }
     }
 
-Sauvegarder ce JSON dans ``composer.json`` dans le répetoire racine de votre
-projet. Ensuite, télécharger le fichier composer.phar dans votre projet. Après
+Sauvegardez ce JSON dans ``composer.json`` dans le répetoire racine de votre
+projet. Ensuite, téléchargez le fichier composer.phar dans votre projet. Après
 avoir téléchargé composer, installez CakePHP. Dans le même répertoire que votre
 fichier ``composer.json``, lancez ce qui suit::
 
@@ -136,8 +136,8 @@ Il y a trois constantes que vous devrez modifier: ``ROOT``,
 
 - ``ROOT`` doit être définie vers le chemin du répertoire qui contient le
   dossier app.
-- ``APP_DIR`` doit être définie vers le nom (de base) de votre dossier app.
-- ``CAKE_CORE_INCLUDE_PATH`` doit être définie vers le chemin du dossier
+- ``APP_DIR`` doit être définie comme le nom (de base) de votre dossier app.
+- ``CAKE_CORE_INCLUDE_PATH`` doit être définie comme le chemin du dossier
   des librairies de CakePHP.
 
 Testons cela avec un exemple pour que vous puissiez voir ce à quoi peut
@@ -148,8 +148,8 @@ configurer CakePHP pour travailler comme ce qui suit:
 -  Le répertoire webroot de l'application sera /var/www/monsite/.
 -  Le répertoire app de mon application sera /home/moi/monapp.
 
-Etant donné ce type de configuration, j'aurais besoin de modifier mon fichier
-webroot/index.php (ce qui finira dans /var/www/mysite/index.php, dans cet
+Etant donné ce type de configuration, j'aurai besoin de modifier mon fichier
+webroot/index.php (qui finira dans /var/www/mysite/index.php, dans cet
 exemple) pour ressembler à ce qui suit::
 
     // /app/webroot/index.php (partiel, commentaires retirés) 

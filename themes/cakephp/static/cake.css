@@ -199,6 +199,7 @@ dl.docutils {
 	font-weight: bold;
 	font-size: 14px;
 	font-size: 1.4rem;
+	margin-bottom: 0.5em;
 }
 .docutils dd {
 	border-left: 2px solid #ccc;

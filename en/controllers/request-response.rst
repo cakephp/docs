@@ -430,7 +430,7 @@ features of :php:class:`RequestHandlerComponent` if you are using it.
 .. _cake-response-file:
 
 Sending files
-===================
+=============
 
 There are times when you want to send files as responses for your requests.
 You can accomplish that by using :php:meth:`CakeResponse::file()`::
@@ -452,6 +452,23 @@ the browser by specifying the options::
 
     $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
 
+Sending a string as file
+========================
+
+To send a file as response which does not exist on disk, for instance when you generate pdf or ics on the fly and want
+to serve the generated string as file you can do that by using::
+
+    public function sendIcs() {
+        $icsString = $this->Calendar->generateIcs();
+        $this->response->body($icsString);
+        $this->response->type('ics');
+
+        //Optionally force file download
+        $this->response->download('filename_for_download.ics')
+
+        //Return response object to prevent controller from trying to render a view
+        return $this->response;
+    }
 
 Setting headers
 ===============
@@ -470,6 +487,11 @@ Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls.  Headers are not sent when
 :php:meth:`CakeResponse::header()` is called either.  They are just buffered
 until the response is actually sent.
+
+.. versionadded:: 2.4
+
+You can now use the convenience method :php:meth:`CakeResponse::location()` to directly set or get
+the redirect location header.
 
 Interacting with browser caching
 ================================
@@ -671,6 +693,18 @@ CakeResponse API
 .. php:method:: header($header = null, $value = null)
 
     Allows you to directly set one or many headers to be sent with the response.
+
+.. php:method:: location($url = null)
+
+    Allows you to directly set the redirect location header to be sent with the response.
+
+    // Set the redirect location
+    $this->response->location('http://example.com');
+
+    // Get the current redirect location header
+    $location = $this->response->location();
+
+    .. versionadded:: 2.4
 
 .. php:method:: charset($charset = null)
 

@@ -896,7 +896,8 @@ Classes de Route personnalisées
 
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
 façon dont certaines routes parsent les demandes et de traiter le routing
-inversé. Une classe de la route devrait hériter de la classe
+inversé. Une classe personnalisée  de route devrait être créée dans
+``app/Lib/Routing/Route`` et étendre
 :php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou 
 ``parse()``. ``parse()`` est utilisée pour
 analyser les demandes et correspondance et ``match()`` est utilisée pour
@@ -905,6 +906,8 @@ traiter les routes inversées.
 Vous pouvez utiliser une classe de route personnalisée lors d'un création
 d'une route à l'aide des options de la classe ``routeClass``, et en chargeant
 le fichier contenant votre routes avant d'essayer de l'utiliser::
+
+    App::uses('SlugRoute', 'Routing/Route');
 
     Router::connect(
          '/:slug', 
@@ -1050,8 +1053,8 @@ API du Router
       URLs Cake relative sont nécessaires quand on utilise requestAction.
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
-    * ``full_base`` - Si à true, la constante :php:const:`FULL_BASE_URL` va
-      être précédée des URLs générées.
+    * ``full_base`` - Si à true, la valeur de :php:meth:`Router::baseUrl()`
+      sera ajoutée avant aux urls générées.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
@@ -1077,6 +1080,17 @@ API du Router
 
     Définit la route par défaut à utiliser quand on connecte les routes
     dans le futur.
+
+.. php:staticmethod:: fullBaseUrl($url = null)
+
+    .. versionadded:: 2.4
+
+    Récupère ou définit la baseURL utilisée pour la génération d'URLs. Quand
+    vous définissez cette valeur, vous devez vous assurer d'inclure le nom de
+    domaine complètement compétent en incluant le protocole.
+
+    Définir les valeurs avec cette méthode va aussi mettre à jour
+    ``App.fullBaseUrl`` dans :php:class:`Configure`.
 
 .. php:class:: CakeRoute
 

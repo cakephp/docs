@@ -73,12 +73,29 @@ schema
 unix_socket
     Used by drivers that support it to connect via unix socket files. If you are
     using postgres and want to use unix sockets, leave the host key blank.
+ssl_key
+    The file path to the SSL key file. (Only supported by MySQL, requires PHP
+    5.3.7+).
+ssl_cert
+    The file path to the SSL certificate file. (Only supported by MySQL,
+    requires PHP 5.3.7+).
+ssl_ca
+    The file path to the SSL certificate authority. (Only supported by MySQL,
+    requires PHP 5.3.7+).
 settings
     An array of key/value pairs that should be sent to the database server as
     ``SET`` commands when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLserver at this time.
 dsn
     A full PDO compatible data source name.
+
+.. note::
+
+    The prefix setting is for tables, **not** models. For example, if
+    you create a join table for your Apple and Flavor models, you name
+    it prefix\_apples\_flavors (**not**
+    prefix\_apples\_prefix\_flavors), and set your prefix setting to
+    'prefix\_'.
 
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
