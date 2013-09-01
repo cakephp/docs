@@ -778,7 +778,7 @@ and will be ignored.
 You then create all the links as needed for your pagination
 features. Since the ``JsHelper`` automatically buffers all
 generated script content to reduce the number of ``<script>`` tags
-in your source code you **must** call write the buffer out. At the
+in your source code you **must** write the buffer out. At the
 bottom of your view file. Be sure to include::
 
     echo $this->Js->writeBuffer();
