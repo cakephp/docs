@@ -64,11 +64,11 @@ quelque chose comme ça::
         }
     }
 
-Laissez-moi vous expliquer un peu cette action. En définissant la fonction
-``index()`` dans notre PostsController, les utilisateurs peuvent maintenant
-accéder à cette logique en demandant www.exemple.com/posts/index. De la même
-façon, si nous devions définir une fonction appelée ``foobar()``, les
-utilisateurs pourrait y accéder en demandant www.exemple.com/posts/foobar.
+En définissant la fonction ``index()`` dans notre PostsController, les
+utilisateurs peuvent maintenant accéder à cette logique en demandant
+www.exemple.com/posts/index. De la même façon, si nous devions définir une
+fonction appelée ``foobar()``, les utilisateurs pourrait y accéder en demandant
+www.exemple.com/posts/foobar.
 
 .. warning::
 
