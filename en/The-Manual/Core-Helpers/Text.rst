@@ -69,9 +69,9 @@ Output:
 highlight
 =========
 
-``highlight(string $haystack, string $needle, array $options = array() )``
+``highlight(string $text, string $phrase, array $options = array() )``
 
-Highlights ``$needle`` in ``$haystack`` using the ``$options['format']``
+Highlights ``$phrase`` in ``$text`` using the ``$options['format']``
 string specified or a default string.
 
 Options
@@ -89,7 +89,7 @@ Output:
 
 ::
 
-    Highlights $needle in $haystack <span class="highlight">using</span>
+    Highlights $phrase in $text <span class="highlight">using</span>
     the $options['format'] string specified  or a default string.
 
 stripLinks
