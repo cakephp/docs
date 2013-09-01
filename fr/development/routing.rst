@@ -1053,7 +1053,7 @@ API du Router
       URLs Cake relative sont nécessaires quand on utilise requestAction.
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
-    * ``full_base`` - Si à true, la valeur de :php:meth:`Router::baseUrl()`
+    * ``full_base`` - Si à true, la valeur de :php:meth:`Router::fullBaseUrl()`
       sera ajoutée avant aux urls générées.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
