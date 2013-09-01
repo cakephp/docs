@@ -456,12 +456,12 @@ automatique de :php:class:`RequestHandlerComponent`, si vous l'utilisez.
 
 .. _cake-response-file:
 
-Envoyer des pièces jointes
-==========================
+Envoyer des fichiers
+====================
 
-Il y a des fois où vous voulez envoyer des réponses du Controller en fichier
-à télécharger. Avant la version 2.3, vous pouviez utiliser
-:doc:`/views/media-view` pour faire cela. Depuis 2.3 MediaView est déprécié
+Il y a des fois où vous voulez envoyer des fichiers en réponses de vos
+requêtes. Avant la version 2.3, vous pouviez utiliser
+:doc:`/views/media-view` pour faire cela. Depuis 2.3, MediaView est dépréciée
 et vous pouvez utiliser :php:meth:`CakeResponse::file()` pour envoyer un
 fichier en réponse::
 
@@ -483,6 +483,25 @@ Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au li
 d'être affiché dans le navigateur en spécifiant les options::
 
     $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+
+Envoyer une chaîne en fichier
+=============================
+
+Pour envoyer un fichier en réponse qui n'existe pas sur le disque, par exemple
+si vous voulez générer un pdf ou un ics à la volée et voulez servir la chaîne
+générée en fichier, vous pouvez faire cela en utilisant::
+
+    public function sendIcs() {
+        $icsString = $this->Calendar->generateIcs();
+        $this->response->body($icsString);
+        $this->response->type('ics');
+
+        //Force le téléchargement de fichier en option
+        $this->response->download('filename_for_download.ics')
+
+        //Retourne l'object pour éviter au controller d'essayer de rendre une vue
+        return $this->response;
+    }
 
 Définir les en-têtes
 ====================

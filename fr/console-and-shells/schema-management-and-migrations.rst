@@ -37,8 +37,8 @@ lancez::
 
     $ Console/cake schema dump --write filename.sql
 
-nomdufichier.sql est le nom souhaité pour le fichier contenant le dump sql.
-Si vous omettez nomdufichier.sql, le dump sql sera affiché sur la console,
+filename.sql est le nom souhaité pour le fichier contenant le dump sql.
+Si vous omettez filename.sql, le dump sql sera affiché sur la console,
 mais ne sera pas écrit dans un fichier.
 
 callbacks de CakeSchema

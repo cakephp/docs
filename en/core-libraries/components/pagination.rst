@@ -90,15 +90,15 @@ array after the model you wish to configure::
 The values of the ``Post`` and ``Author`` keys could contain all the properties
 that a model/key less ``$paginate`` array could.
 
-Once the ``$paginate`` variable has been defined, we can call the
-``paginate()`` method in a controller action. This method will dynamically load
-the :php:class:`PaginatorComponent`, and call its paginate() method. This will return
-``find()`` results from the model. It also sets some additional
-paging statistics, which are added to the request object. The additional
-information is set to ``$this->request->params['paging']``, and is used by
-:php:class:`PaginatorHelper` for creating links. ``Controller::paginate()`` also
-adds PaginatorHelper to the list of helpers in your controller, if it has not
-been added already.::
+Once the ``$paginate`` variable has been defined, we can use the
+:php:class:`PaginatorComponent`'s ``paginate()`` method from our controller
+action. This will return ``find()`` results from the model. It also sets some
+additional paging parameters, which are added to the request object. The
+additional information is set to ``$this->request->params['paging']``, and is
+used by :php:class:`PaginatorHelper` for creating links.
+:php:meth:`PaginatorComponent::paginate()` also adds
+:php:class:`PaginatorHelper` to the list of helpers in your controller, if it
+has not been added already.::
 
     public function list_recipes() {
         $this->Paginator->settings = $this->paginate;
@@ -113,8 +113,8 @@ parameter to the ``paginate()`` function.::
 
     $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
-Or you can also set ``conditions`` and other keys in the
-``$paginate`` array inside your action.::
+Or you can also set ``conditions`` and other pagination settings array inside
+your action.::
 
     public function list_recipes() {
         $this->Paginator->settings = array(

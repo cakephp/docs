@@ -103,13 +103,6 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
 
-.. tip::
-
-    Aliasing the Html or Session Helper while using the core PagesController
-    will not work. It is better to copy
-    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/``
-    folder.
-
 Using helper settings allows you to declaratively configure your helpers and
 keep configuration logic out of your controller actions.  If you have
 configuration options that cannot be included as part of a class declaration,

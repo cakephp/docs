@@ -17,7 +17,7 @@ Installer un Plugin
 ===================
 
 Pour installer un plugin, commencez par simplement déplacer le dossier du
-du plugin dans votre dossier app/Plugin. Si vous installez un plugin nommé
+plugin dans votre dossier app/Plugin. Si vous installez un plugin nommé
 'ContactManager' alors vous devez avoir un dossier dans app/Plugin
 appelé 'ContactManager' dans lequel vous aurez les Vues, les Models, les
 Controllers, webroot et tout autre répertoire du Plugin.
@@ -25,7 +25,7 @@ Controllers, webroot et tout autre répertoire du Plugin.
 Nouveau dans CakePHP 2.0, les plugins ont besoin d'être chargés manuellement
 dans app/Config/bootstrap.php.
 
-Vous pouvez soit les charger un par un, soit tous d'un coup dans un seul
+Vous pouvez soit les charger un par un, soit tous d'un coup en un seul
 appel::
 
     CakePlugin::loadAll(); // Charge tous les plugins d'un coup.
@@ -45,7 +45,7 @@ vous aider avec la configuration et le routing d'un plugin. Peut-être
 souhaiterez vous charger tous les plugins automatiquement, en spécifiant
 des routes et des fichiers de bootstrap pour certains plugins.
 
-Pas de problèmes::
+Pas de problème::
 
     CakePlugin::loadAll(array(
         'Blog' => array('routes' => true),
@@ -53,8 +53,8 @@ Pas de problèmes::
         'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
     ));
 
-Avec ce type de configuration, vous n'avez plus besoin d'include() ou de
-require() manuellement une configuration de plugin ou un fichier de
+Avec ce type de configuration, vous n'avez plus besoin de faire manuellement un
+include() ou un require() d'une configuration de plugin ou d'un fichier de
 routes--Cela arrive automatiquement au bon moment et à la bonne place. Un
 paramètre totalement identique peut avoir été fourni à la méthode load(),
 ce qui aurait chargé seulement ces trois plugins, et pas le reste.
@@ -89,7 +89,7 @@ plugins nécessiteront plus de configuration que d'autres.
 Aller plus loin avec le bootstrapping
 =====================================
 
-Si vous souhaitez charger plus d'un fichier bootstrap pour un plugin. Vous
+Si vous souhaitez charger plus d'un fichier bootstrap pour un plugin, vous
 pouvez spécifier un tableau de fichiers avec la clé de configuration
 bootstrap::
 
@@ -251,7 +251,7 @@ Models du Plugin
 
 Les Models pour le plugin sont stockés dans /app/Plugin/ContactManager/Model.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons le
-models pour ce controller, appelé Contact::
+model pour ce controller, appelé Contact::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
@@ -291,7 +291,7 @@ Vues du Plugin
 ==============
 
 Les Vues se comportent exactement comme elles le font dans les applications
-normales. Placez les juste dans le bon dossier à l'intérieur du dossier
+normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
 /app/Plugin/[PluginName]/View/. Pour notre plugin ContactManager, nous aurons
 besoin d'une vue pour notre action ContactsController::index(), ainsi incluons
 ceci aussi::
@@ -303,7 +303,7 @@ ceci aussi::
 
 .. note::
 
-    Pour des informations sur la façon d'utiliser les éléments à partir d'un
+    Pour des informations sur la façon d'utiliser les elements à partir d'un
     plugin, regardez :ref:`view-elements`.
 
 Redéfinition des vues de plugin à partir de l'intérieur de votre application
@@ -340,12 +340,11 @@ l'application principale::
                                         pdf/
 
 Vous pouvez mettre tout type de fichier dans tout répertoire, juste comme
-un webroot habituel. La seule restriction est que ``MediaView`` a besoin de
-connaître le mime-type de cet asset.
+un webroot habituel.
 
 Mais garder à l'esprit que la gestion des assets statiques, comme les images,
 le Javascript et les fichiers CSS des plugins à travers le Dispatcher est
-incroyablement innéficace. Il est grandement recommandé de les symlinker pour
+incroyablement inefficace. Il est grandement recommandé de les symlinker pour
 la production.
 Par exemple comme ceci:: 
 
@@ -359,13 +358,13 @@ un asset dans ce plugin, et cela fonctionnera comme si l'asset était dans le
 webroot de votre application.
 
 Par exemple, lier le '/contact_manager/js/some_file.js'
-servirait l'asset
+servira l'asset
 'app/Plugin/ContactManager/webroot/js/some_file.js'.
 
 .. note::
 
-    Il est important de noter que le préfixe de **/votre_plugin/** avant le
-    chemin de asset. Et la magie opére!
+    Il est important de noter le préfixe **/votre_plugin/** avant le
+    chemin de l'asset. Et la magie opére!
 
 .. versionchanged:: 2.1
     Utilisez :term:`plugin syntax` pour accéder aux assets. Par exemple dans
@@ -376,18 +375,18 @@ servirait l'asset
 Components, Helpers et Behaviors
 ================================
 
-Un plugin peut avoir des Components, Helpers et Behaviors tout comme un
-une appplication CakePHP classique. Vous pouvez soit créer des plugins
-qui sont composés seulement de Components, Helpers ou Behaviors qui
-peuvent être une bonne façon de construire des Components réutilisables
+Un plugin peut avoir des Components, Helpers et Behaviors tout comme
+une application CakePHP classique. Vous pouvez soit créer des plugins
+qui sont composés seulement de Components, Helpers ou Behaviors ce qui
+peut être une bonne façon de construire des Components réutilisables
 qui peuvent être facilement déplacés dans tout projet.
 
-Construire ces components est exactement le même chose que de les construire
+Construire ces components est exactement la même chose que de les construire
 à l'intérieur d'une application habituelle, avec aucune convention spéciale
 de nommage.
 
 Faire référence avec votre component, depuis l'intérieur ou l'extérieur de
-votre plugin nécessite seulement que le préfixe du nom du plugin avant le nom
+votre plugin nécessite seulement que vous préfixiez le nom du plugin avant le nom
 du component. Par exemple::
 
     // Component défini dans le plugin 'ContactManager'
@@ -401,7 +400,7 @@ La même technique s'applique aux Helpers et aux Behaviors.
 
 .. note::
 
-    A la création de Helpers, vous verrez que AppHelper n'est pas
+    À la création de Helpers, vous verrez que AppHelper n'est pas
     automatiquement disponible. Vous pouvez déclarer les ressources dont vous
     avez besoin avec les uses::
     
@@ -416,15 +415,15 @@ Cet exemple est un bon début pour un plugin, mais il y a beaucoup plus
 application, vous pouvez le faire à l'intérieur d'un plugin à la place.
 
 Continuez, incluez certaines librairies tierces dans 'Vendor', ajoutez
-des nouveaux shells à la console de cake, et n'oubliez pas de créez des cas
+de nouveaux shells à la console de cake, et n'oubliez pas de créer des cas
 de test ainsi les utilisateurs de votre plugin peuvent automatiquement tester
 les fonctionnalités de votre plugin!
 
 Dans notre exemple ContactManager, nous pourrions créer des actions
-add/remove/edit/delete dans le ContactsController, intégrez la validation
-dans le model Contact, et intégrez la fonctionnalité à laquelle on
+add/remove/edit/delete dans le ContactsController, intégrer la validation
+dans le model Contact, et intégrer la fonctionnalité à laquelle on
 pourrait s'attendre quand on gère ses contacts. A vous de décider ce qu'il
-fait intégrer dans vos plugins. N'oubliez juste pas de partager votre code
+faut intégrer dans vos plugins. N'oubliez juste pas de partager votre code
 avec la communauté afin que tout le monde puisse bénéficier de votre
 component génial et réutilisable!
 
@@ -436,14 +435,14 @@ Une fois qu'un plugin a été installé dans /app/Plugin, vous pouvez y accéder
 ContactManager, nous accédons à notre ContactsController à l'adresse
 /contact_manager/contacts.
 
-Quelques astuces de fin lorque l'on travaille avec les plugins dans vos
+Quelques astuces de fin lorque vous travaillez avec les plugins dans vos
 applications CakePHP:
 
 -  Si vous n'avez pas un [Plugin]AppController et
    [Plugin]AppModel, vous aurez des erreurs de type get missing Controller
    lorsque vous essayez d'accéder à un controller d'un plugin.
 -  Vous pouvez définir vos propres layouts pour les plugins, dans le dossier
-   de app/Plugin/[Plugin]/View/Layouts. Sinon, les plugins utiliseront les
+   app/Plugin/[Plugin]/View/Layouts. Sinon, les plugins utiliseront les
    layouts du dossier /app/View/Layouts par défaut.
 -  Vous pouvez établir une communication inter-plugin en utilisant
    ``$this->requestAction('/plugin_name/controller_name/action');`` dans vos

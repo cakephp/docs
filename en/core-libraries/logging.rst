@@ -73,7 +73,7 @@ your own types by using them when you call ``CakeLog::write``.
 
 .. versionadded:: 2.4
 
-As of 2.4 ``FileLog`` engine takes two new configurations:
+As of 2.4 ``FileLog`` engine takes a few new options:
 
 * ``size`` Used to implement basic log file rotation. If log file size
    reaches specified size the existing file is renamed by appending timestamp
@@ -81,6 +81,8 @@ As of 2.4 ``FileLog`` engine takes two new configurations:
    human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
 * ``rotate`` Log files are rotated specified times before being removed.
   If value is 0, old versions are removed rather then rotated. Defaults to 10.
+* ``mask`` Set the file permissions for created files. If left empty the default
+  permissions are used.
 
 .. warning::
 

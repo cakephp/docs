@@ -1,8 +1,9 @@
 Shell Testsuite
 ###############
 
-Une fois que vous avez commencé à écrire :doc:`Tests </development/testing>`
-vous pouvez les lancer en utilisant le shell testsuite.
+Une fois que vous avez commencé à écrire des
+:doc:`Tests </development/testing>`, vous pouvez les lancer en utilisant le
+shell testsuite.
 
 Pour plus d'informations sur les utilisations classiques du shell testsuite,
 allez voir :ref:`run-tests-from-command-line`.

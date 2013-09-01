@@ -75,7 +75,7 @@ De plus vous pouvez définir vos propres types par leur utilisation en appelant
 
 .. versionadded:: 2.4
 
-Depuis 2.4 le moteur de ``FileLog`` prend deux nouvelles configurations::
+Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations::
 
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
@@ -87,6 +87,8 @@ Depuis 2.4 le moteur de ``FileLog`` prend deux nouvelles configurations::
   avant d\'être retiré.
   Si la valeur est 0, les versions anciennes seront retirées plutôt que
   mises en rotation. Par défaut à 10.
+* ``mask`` Définit les permissions du fichier pour les fichiers créés. Si
+  laissé vide, les permissions par défaut sont utilisées.
 
 .. warning::
 

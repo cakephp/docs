@@ -2,10 +2,10 @@ Console et Shells
 #################
 
 CakePHP ne dispose pas seulement d'un framework web mais aussi d'une console
-de framework pour la création d'applications. Les applications par console
+de framework pour la création d'applications. Les applications par la console
 sont idéales pour la gestion d'une variété de tâches d'arrière-plan comme la
 maintenance et l'achèvement du travail en-dehors du cycle de requête-réponse.
-Les applications par la console CakePHP vous permettent de réutilise les
+Les applications par la console CakePHP vous permettent de réutiliser les
 classes de votre application à partir de lignes de commande.
 
 CakePHP dispose d'un certain nombre d'applications fournies pour la console.
@@ -36,7 +36,7 @@ la console CakePHP. Tout d'abord, vous devrez ouvrir un shell système. Les
 exemples présentés dans cette section sont issus du bash, mais la console
 CakePHP est également compatible Windows. Exécutons le programme Console
 depuis le bash. Cet exemple suppose que l'utilisateur est actuellement
-connecté dans l'invite bash et qu'il est root sur une installation CakePHP.
+connecté dans l'invite bash et qu'il en est root sur une installation CakePHP.
 
 Les applications CakePHP contiennent un répertoire ``Console`` qui contient
 tous les shells et les tâches pour une application. Il est aussi livré avec
@@ -88,12 +88,12 @@ endroits de votre système de fichier.
 
 Beaucoup d'utilisateurs ajoutent la console CakePHP à leur path système
 afin qu'elle puisse être facilement accessible. L'affichage des chemins de
-workdir, root, app et corevous permet de voir où la Console fera des
+workdir, root, app et core vous permet de voir où la Console fera des
 changements. Pour changer le dossier app par celui dans lequel vous souhaitez
 travailler, vous pouvez fournir son chemin comme premier argument de la ligne
 de commande cake. L'exemple suivant montre comment spécifier un dossier app,
 en supposant que vous avez déjà ajouté le dossier de la console à votre
-``PATH`` ::
+``PATH``::
 
     $ cake -app /path/to/cakephp/app
 
@@ -108,7 +108,7 @@ Ajouter cake à votre système path
 Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
 permettront de rendre cake executable dans votre système path.
 
-#. Localisez où se trouve votre installation de cakephp et le cake executable.
+#. Localisez où se trouve votre installation de cakephp et le cake exécutable.
    Par exemple ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Modifiez votre fichier ``.bashrc`` ou ``.bash_profile`` dans votre
    répertoire home, et ajoutez ce qui suit::
@@ -121,23 +121,23 @@ permettront de rendre cake executable dans votre système path.
 Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
 
 #. Localisez l'emplacement où se trouvent votre installation CakePHP et
-   l'executable cake. Par exemple
+   l'exécutable cake. Par exemple
    ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
 #. Ouvrez la fenêtre des propriétés du Système de votre ordinateur. Vous
    essaierez le raccourci clavier Windows Key + Pause ou Windows Key + Break.
-   Ou, à partir du Bureau, faîtes un click droit sur Mon Ordinateur, clickez
-   sur Propriétés et clickez sur le lien Paramètres avancés du système dans la
+   Ou, à partir du Bureau, faîtes un clique droit sur Mon Ordinateur, clickez
+   sur Propriétés et cliquez sur le lien Paramètres avancés du système dans la
    colonne de gauche.
-#. Allez sous l'onglet Avancé et clickez sur le bouton des Variables
+#. Allez sous l'onglet Avancé et cliquez sur le bouton des Variables
    d'Environnement.
 #. Dans la portion des Variables Sytèmes, cherchez le chemin de la variable
-   et double-clickez dessus pour la modifier.
+   et double-cliquez dessus pour la modifier.
 #. Ajoutez le chemin de l'installation de ``cake`` suivi par un point virgule.
    On pourrait avoir par exemple::
 
     %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
 
-#. Clickez Ok et ``cake`` devrait fonctionner partout.
+#. Cliquez Ok et ``cake`` devrait fonctionner partout.
 
 Créer un Shell
 ==============
@@ -202,7 +202,7 @@ variable ``$this->params``, mais nous verrons ça bientôt.
 
 Lorsque vous utilisez la méthode ``main()``, vous n'êtes pas capable d'utiliser
 les arguments de position ou les paramètres. Cela parce que le premier argument
-de position ou l'option est interprétée en tant que nom de commande. Si vous
+de position ou l'option est interprété en tant que nom de commande. Si vous
 voulez utiliser des arguments et des options, vous devriez utiliser un autre
 nom de méthode que ``main``.
 
@@ -243,7 +243,7 @@ shell en utilisant la propriété ``$tasks``::
     }
 
 Vous pouvez utiliser les tâches à partir de plugins en utilisant la
-:term:`plugin syntax` standard. Les tâches sont stockées dans
+:term:`syntaxe de plugin` standard. Les tâches sont stockées dans
 ``Console/Command/Task/`` dans les fichiers nommées d'après leur
 classe. Ainsi si vous étiez sur le point de créer une nouvelle
 tâche 'FileGenerator', vous pourriez créer
@@ -261,7 +261,7 @@ une classe de tâche ressemble à cela::
     }
 
 Un shell peut aussi accéder à ses tâches en tant que propriétés, ce qui
-rend les tâches meilleures pour la réutilisation de focntions identiques à
+rend les tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
     // trouvé dans Console/Command/SeaShell.php
@@ -282,7 +282,7 @@ commande::
     Afin d'accéder aux tâches directement à partir de ligne de commande, la
     tâche **doit** être inclue dans la propriété $tasks de la classe shell.
     Pour ce faire, soyez averti qu'une méthode appelée “sound” dans la classe
-    SeaShell redéfinira la capacité d'accès à la fonctionnalité dans la
+    SeaShell redéfinira la capacité d'accès à la fonctionnalité de la
     tâche Sound spécifiée dans le tableau $tasks.
 
 Chargement à la volée des tâches avec TaskCollection
@@ -365,10 +365,10 @@ votre sortie.
 ConsoleOutput remplacera ces tags avec la bonne séquence de code ansi, ou
 supprimera les tags si vous êtes sur une console qui ne supporte pas les
 codes ansi. Il y a plusieurs styles intégrés, et vous pouvez en créer plus.
-Ceux intégrés sont
+Ceux intégrés sont::
 
 * ``error`` Messages d'Erreur. Texte rouge souligné.
-* ``warning`` Warning messages. Texte jaune.
+* ``warning`` Messages d'avertissement. Texte jaune.
 * ``info`` Messages d'informations. Texte cyan.
 * ``comment`` Texte supplémentaire. Texte bleu.
 * ``question`` Texte qui est une question, ajouté automatiquement par shell.
@@ -396,7 +396,7 @@ les attributs `text` et `background`:
 * white
 
 Vous pouvez aussi utiliser les options suivantes en commutateurs boléens,
-en les définissant à une valeur true qui les activent.
+en les définissant à une valeur true qui les active.
 
 * bold
 * underline
@@ -404,7 +404,7 @@ en les définissant à une valeur true qui les activent.
 * reverse
 
 Ajouter un style le rend aussi disponible pour toutes les instances de
-ConsoleOutput, donc vous n'avez pas à redeclarer les styles pour les
+ConsoleOutput, donc vous n'avez pas à re-déclarer les styles pour les
 deux objets stdout et stderr.
 
 Enlever la coloration
@@ -417,7 +417,7 @@ voulez l'arrêter, ou forcer à l'avoir::
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
-que vous pouvez utiliser.
+que vous pouvez utiliser::
 
 * ``ConsoleOutput::RAW`` - Sortie en ligne, aucun style ou format ne sera fait
   C'est un bon mode à utiliser si vous sortez du XML ou si voulez débugger
@@ -441,9 +441,9 @@ par rapport aux autres consoles en ligne de commande. Dans 2.0,
 plus familier en ligne de commande.
 
 OptionParsers vous permet d'accomplir deux buts en même temps.
-Premièrement, ils vous permettent de définir les options et arguments, séparant
+Premièrement, il vous permet de définir les options et arguments, séparant
 la validation basique des entrées et votre code. Deuxièmement, il vous permet
-de fournir de la documentation, qui est utilisé pour bien générer le fichier
+de fournir de la documentation, qui est utilisée pour bien générer le fichier
 d'aide formaté.
 
 La console du framework récupère votre parser d'option du shell en appelant
@@ -512,7 +512,7 @@ Appeler sans arguments va retourner la valeur actuelle::
 Récupère ou définit l'epilog pour le parser d'option. L'epilog
 est affichée après l'argument et l'information d'option. En passant un tableau
 ou une chaîne, vous pouvez définir la valeur de epilog.
-Appeler avec aucun argument va retourner la valeur actuelle::
+L'appeler avec aucun argument va retourner la valeur actuelle::
 
     // Définit plusieurs lignes en une fois
     $parser->epilog(array('line one', 'line two'));
@@ -597,11 +597,12 @@ et créant des switches en boléen. Les options sont créées avec soit
         'default' => 'default'
     ));
 
-Ce qui est au-dessus vous permet l'utilisation soit d
-``cake myshell --connection=other``, soit ``cake myshell --connection other``,
-ou soit ``cake myshell -c other`` lors de l'appel au shell. Vous pouvez aussi
-créer des switches de boléen, ces switches ne consomment pas de valeurs, et
-leur présence les active juste dans les paramètres parsés.::
+Ce qui est au-dessus vous permet l'utilisation soit de
+``cake myshell --connection=other``, soit de
+``cake myshell --connection other``, ou soit de ``cake myshell -c other`` lors
+de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
+switches ne consomment pas de valeurs, et leur présence les active juste dans
+les paramètres parsés.::
 
     $parser->addOption('no-commit', array('boolean' => true));
 
@@ -669,13 +670,13 @@ false::
 
 L'option suivante fera que ``$this->params['verbose']`` sera toujours
 disponible. Cela vous permet d'oublier ``empty()`` ou ``isset()``
-vérifie pour les flags de boléens::
+pour vérifier les flags de boléens::
 
     if ($this->params['verbose']) {
         // faire quelque chose
     }
 
-Puisque les options boléennes sont toujours définies à ``true`` ou
+Puisque les options boléennes sont toujours définies à ``true`` ou à
 ``false``, vous pouvez omettre les méthodes de vérification supplémentaires.
 
 Ajouter des sous-commandes
@@ -699,8 +700,8 @@ les commandes pour ses tâches::
 Ce qui est au-dessus est un exemple de la façon dont vous pouvez fournir de
 l'aide et un parser d'option spécialisé pour une tâche du shell. En appelant
 le ``getOptionParser()`` de la tâche, nous n'avons pas à dupliquer la
-génération du parser d'option, ou mixer les concernés dans notre shell.
-Ajoutez des sous-commandes dans cette façon a deux avantages.
+génération du parser d'option, ou mixer les tâches concernés dans notre shell.
+Ajoutez des sous-commandes de cette façon a deux avantages.
 Premièrement, cela laisse votre shell documenter facilement ces sous-commandes
 dans l'aide générée, et cela vous permet aussi un accès facile à l'aide de
 la sous-commande. Avec la sous-commande créée ci-dessus, vous pouvez appeler
@@ -781,13 +782,13 @@ un ConsoleOptionParser::
     cake bake --help
     cake bake -h
 
-Les deux généreraient l'aide pour. Si le shell supporte les sous-commandes,
-vous pouvez obtenir l'aide pour ceux-là d'un façon similaire::
+Les deux généreraient l'aide pour bake. Si le shell supporte les sous-commandes,
+vous pouvez obtenir de l'aide pour ceux-là d'un façon similaire::
 
     cake bake model --help
     cake bake model -h
 
-Cela vous ramènerait l'aide spécifique pour la tâche model de bake.
+Cela vous ramènera l'aide spécifique pour la tâche model de bake.
 
 Obtenir de l'aide en XML
 ------------------------
@@ -854,9 +855,9 @@ un exemple de documentation:
 Routing dans shells / CLI
 =========================
 
-Dans l'interface en ligne de commande (CLI), spécialement vos shells et tasks,
-``env('HTTP_HOST')`` et les autres variables d'environnement spécifique à votre
-navigateur ne sont pas définis.
+Dans l'interface en ligne de commande (CLI), spécialement dans vos shells et
+tasks, ``env('HTTP_HOST')`` et les autres variables d'environnement spécifique
+à votre navigateur ne sont pas définis.
 
 Si vous générez des rapports ou envoyez des emails qui utilisent
 ``Router::url()``, ceux-ci vont contenir l'hôte par défaut
@@ -886,7 +887,7 @@ API de Shell
 .. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
 
     Shell est une classe de base pour tous les shells, et fournit un certain
-    nombre de fonctions pour l'intéraction avec l'entrée de l'utilisateur,
+    nombre de fonctions pour l'interaction avec l'entrée de l'utilisateur,
     sortant un texte d'erreurs générées.
 
 .. php:attr:: tasks
@@ -906,7 +907,7 @@ API de Shell
     :param string $path: Le chemin absolu du fichier que vous voulez créer.
     :param string $contents: Contenus à mettre dans le fichier.
 
-    Crée un fichier dans un chemin donné. Si le Shell est intéractif, un
+    Crée un fichier dans un chemin donné. Si le Shell est interactif, un
     avertissement sera généré, et il sera demandé à l'utilisateur si ils
     veulent écraser le fichier si il existe déjà. Si la propriété interactive
     du shell est à false, aucune question ne sera demandée et le fichier sera
@@ -931,8 +932,8 @@ API de Shell
 
 .. php:method:: error($title, $message = null)
 
-    :param string $title: Titre d'une erreur
-    :param string $message: Un message d'erreur en option
+    :param string $title: Titre d'une erreur.
+    :param string $message: Un message d'erreur en option.
 
     Affiche un message d'erreurs formaté et sort de l'application avec le code
     de statut à 1.
@@ -967,8 +968,8 @@ API de Shell
        Choisir une option non valide va forcer l'utilisateur à re-choisir.
     :param string $default: L'option par défaut si il y en a une.
 
-    Cette méthode vous aide à intéragir avec l'utilisateur, et crée des
-    shells intéractifs. Elle va retourner la réponse des utilisateurs au
+    Cette méthode vous aide à interagir avec l'utilisateur, et crée des
+    shells interactifs. Elle va retourner la réponse des utilisateurs au
     prompt, et vous permet de fournir une liste d'options valides dans laquelle
     l'utilisateur peut choisir::
 
@@ -1020,14 +1021,14 @@ API de Shell
 
     Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
     une sortie colorée.
-    Sur les systèmes windows, la sortie brute est las sortie par défaut sauf si
+    Sur les systèmes windows, la sortie brute est la sortie par défaut sauf si
     la variable d'environnement ``ANSICON`` est présente.
 
 .. php:method:: runCommand($command, $argv)
 
     Lance le Shell avec argv fourni.
 
-    Délégue les appels aux tâches et résoud les méthodes dans la classe. Les
+    Délègue les appels aux tâches et résoud les méthodes dans la classe. Les
     commandes sont regardées avec l'ordre suivant:
 
     - Méthode sur le shell.
@@ -1035,7 +1036,7 @@ API de Shell
     - méthode main().
 
     Si un shell intégre une méthode main(), toute appel de méthode perdu
-    sera envoyyé à main() avec le nom de méthode original dans argv.
+    sera envoyé à main() avec le nom de la méthode originale dans argv.
 
 .. php:method:: shortPath($file)
 
@@ -1043,7 +1044,7 @@ API de Shell
 
 .. php:method:: startup()
 
-    Démarre le Shell et affiche le message d'accueil. Permet de vérifier et
+    Démarre le Shell et affiche le message d'accueil. Permet de vérifier et de
     configurer avant de faire la commande ou l'exécution principale.
 
     Redéfinit cette méthode si vous voulez retirer l'information de bienvenue,
@@ -1054,7 +1055,7 @@ API de Shell
     Entoure un block de texte. Vous permet de configurer la largeur, et
     d'indenter un block de texte.
 
-    :param string $text: The text to format
+    :param string $text: Le text à formatter.
     :param array $options:
 
         * ``width`` La largeur à entourer. Par défaut à 72.

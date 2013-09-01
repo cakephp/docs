@@ -59,7 +59,7 @@ Améliorer les performances de votre application
 
 Comme la gestion des éléments statiques, comme les images, le Javascript et
 les fichiers CSS des plugins à travers le Dispatcher est incroyablement
-inéfficace, il est chaudement recommandé de les symlinker pour la
+inefficace, il est chaudement recommandé de les symlinker pour la
 production. Par exemple comme ceci::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css

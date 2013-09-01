@@ -56,7 +56,7 @@ Symlinking est aussi une bonne alternative pour copier,
 par exemple.: ``ln -s /var/www/cakephp/lib``. 
 
 Avant de lancer notre shell de mise à jour, nous avons aussi besoin des
-nouveaux scripts de console. Copier le dossier ``cakephp/app/Console`` dans le
+nouveaux scripts de console. Copiez le dossier ``cakephp/app/Console`` dans le
 dossier ``monsiteweb/app``, exemple.:
 ``cp -R ../cakephp/app/Console ./app``.
 

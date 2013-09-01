@@ -82,7 +82,7 @@ bakeのテーマ名はユニークである必要がありますので、'defaul
 projectタスクにスケルトンのパスをパラメータとして渡します。
 ::
 
-    cake bake project -skel Console/Templates/skel
+    cake bake project --skel Console/Templates/skel
 
 .. note::
 

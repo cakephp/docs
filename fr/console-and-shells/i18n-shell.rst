@@ -15,7 +15,7 @@ les traductions existantes pour aider la mise à jour de vos traductions.
 Générer les fichiers POT
 ========================
 
-Les fichiers POT peuvent être généres pour une application existante en
+Les fichiers POT peuvent être générés pour une application existante en
 utilisant la commande ``extract``. Cette commande va scaner toutes les
 fonctions de type ``__()`` de l'ensemble de votre application, et extraire les
 chaînes de caractères. Chaque chaîne unique dans votre application sera
@@ -24,8 +24,8 @@ combinée en un seul fichier POT::
     ./Console/cake i18n extract
 
 La commande du dessus va lancer le shell d'extraction. En plus de l'extraction
-des chaînes de caractères des méthodes ``__()``, Les messages de validation des
-modèles vont aussi être extraits. Le résultat de cette commande va être la
+des chaînes de caractères des méthodes ``__()``, les messages de validation des
+models vont aussi être extraits. Le résultat de cette commande va être la
 création du fichier ``app/Locale/default.pot``. Vous utilisez le fichier pot
 comme un template pour créer les fichiers po. Si vous créez manuellement les
 fichiers po à partir du fichier pot, pensez à bien corriger le ``Plural-Forms``

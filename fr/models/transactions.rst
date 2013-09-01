@@ -32,9 +32,7 @@ Les transactions imbriquées
 
 Il est possible de commencer une transaction plusieurs fois en utilisant la
 méthode :php:meth:`Datasource::begin()`. La transaction va seulement finir
-quand le nombre de correspondance de `commit` et `rollback` avec ceux du début.
-
-::
+quand le nombre de `commit` et de `rollback` correspond à ceux du début::
 
     $dataSource->begin();
     // Execute quelques tâches
@@ -50,8 +48,8 @@ quand le nombre de correspondance de `commit` et `rollback` avec ceux du début.
 
 Cela va réaliser une réelle transaction imbriquée si votre base de données le
 supporte et qu'elle est activée dans la source de données. Les méthodes vont
-toujours retourner true en mode transaction et quand l'imbrication n'est pas
-supportée ou désactivée.
+toujours retourner true quand on est en mode transaction et quand l'imbrication
+n'est pas supportée ou désactivée.
 
 Si vous voulez utiliser plusieurs démarrages mais ne pas utiliser la
 transaction imbriquée à partir de la base de données, désactivez-la en

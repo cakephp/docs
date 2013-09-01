@@ -21,7 +21,7 @@ Cette section vous expliquera quelles fonctionnalités du model peuvent
 être automatisées, comment outrepasser ces fonctionnalités, et quelles
 méthodes et propriétés un model peut avoir. Elle expliquera les différentes
 façons d'associer vos données. Elle décrira comment trouver, sauvegarder,
-et effacer des données. Au final, elle s'interessera aux sources de données.
+et effacer des données. Au final, elle s'intéressera aux sources de données.
 
 Comprendre les Models
 =====================
@@ -32,7 +32,7 @@ personne ou une maison. Un blog, par exemple, peut avoir plusieurs posts et
 chaque post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont
 tous des exemples de models, chacun étant associé avec un autre.
 
-Voici un simple exemple de définition de model dans CakePHP::
+Voici un exemple simple de définition de model dans CakePHP::
 
     App::uses('AppModel', 'Model');
     class Ingredient extends AppModel {
@@ -54,7 +54,7 @@ elle provient du répertoire du coeur de cakePHP. Ecraser AppModel vous permet
 de définir des fonctionnalités qui doivent être rendues disponibles pour tous
 les models de votre application. Pour faire cela, vous avez besoin de créer
 votre propre fichier ``AppModel.php`` qui se loge dans le dossier Model, comme
-tous les autres models dans votre application. A la création d'un projet en
+tous les autres models de votre application. À la création d'un projet en
 utilisant :doc:`Bake <console-and-shells/code-generation-with-bake>`, ce
 fichier sera automatiquement créé pour vous.
 
@@ -85,9 +85,9 @@ le même nom que la classe; pour cet exemple ``Ingredient.php``.
     Par exemple, "File" ne peut pas être utilisé puisque "File" est une classe
     existant déjà dans le coeur de CakePHP.
 
-Une fois votre model défini, il peut être accédé depuis vos
+Une fois que votre model est défini, il est accessible depuis vos
 :doc:`Controllers <controllers>`. CakePHP rend automatiquement un model
-disponible en accès, dès lors que son nom valide celui du controller. Par
+disponible en accès, dès lors que son nom correspond à celui du controller. Par
 exemple, un controller nommé IngredientsController initialisera
 automatiquement le model Ingredient et y accédera par ``$this->Ingredient``::
 
