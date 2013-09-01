@@ -48,7 +48,7 @@ directory. Here's what the basic controller should look like::
         public $helpers = array('Html', 'Form');
     }
 
-Now, lets add an action to our controller. Actions often represent
+Now, let's add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
