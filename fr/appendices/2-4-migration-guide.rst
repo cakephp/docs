@@ -47,6 +47,8 @@ Constantes
   remplacées par les variables de config respectivement ``App.imageBaseUrl``,
   ``App.jsBaseUrl``, ``App.cssBaseUrl``.
 
+- Les Constantes `IMAGES`, `JS`, `CSS` ont été dépréciées.
+
 Object
 ------
 
