@@ -16,7 +16,7 @@ completed file should look like this::
     class Post extends AppModel {
     }
 
-Naming convention is very important in CakePHP. By naming our model
+Naming conventions are very important in CakePHP. By naming our model
 Post, CakePHP can automatically infer that this model will be used
 in the PostsController, and will be tied to a database table called
 ``posts``.
@@ -62,7 +62,7 @@ posts. The code for that action would look something like this::
         }
     }
 
-Let me explain the action a bit. By defining function ``index()``
+By defining function ``index()``
 in our PostsController, users can now access the logic there by
 requesting www.example.com/posts/index. Similarly, if we were to
 define a function called ``foobar()``, users would be able to
