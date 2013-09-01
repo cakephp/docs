@@ -695,7 +695,7 @@ different formatting.
     // exits with status code 1
 
 ``ShellDispatcher::stderr()`` has been modified to not prepend
-Error: to the message anymore. It's signature is now similar to
+Error: to the message anymore. Its signature is now similar to
 ``Shell::stdout()``.
 
 **ShellDispatcher::shiftArgs()**
