@@ -997,7 +997,7 @@ Router API
       when using requestAction.
     * ``?`` - Takes an array of query string parameters
     * ``#`` - Allows you to set URL hash fragments.
-    * ``full_base`` - If true the value of :php:meth:`Router::baseUrl()` will
+    * ``full_base`` - If true the value of :php:meth:`Router::fullBaseUrl()` will
       be prepended to generated URLs.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
