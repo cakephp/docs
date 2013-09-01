@@ -82,12 +82,12 @@ Les noms des thèmes de Bake doivent être uniques, donc n'utilisez pas
 Pour baker des projets personnalisés
 ------------------------------------
 
-Allez dans : lib/Cake/Console/Templates/skel
-Trouvez-y la base des fichiers d'application.
-Copiez les dans votre: app/Console/Templates/skel
-Faîtes des changements vers la sortie HTML pour contrôler la façon dont "bake"
-va construire vos vues.
-Passez le paramètre de squelette du chemin à la tâche du projet.
+#. Allez dans : lib/Cake/Console/Templates/skel
+#. Trouvez-y la base des fichiers d'application.
+#. Copiez les dans votre: app/Console/Templates/skel
+#. Faîtes des changements vers la sortie HTML pour contrôler la façon dont "bake"
+   va construire vos vues.
+#. Passez le paramètre de squelette du chemin à la tâche du projet.
 ::
 
     cake bake project --skel Console/Templates/skel
