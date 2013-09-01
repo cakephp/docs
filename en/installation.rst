@@ -123,16 +123,16 @@ If you are developing a number of applications, it often makes sense to have
 them share the same CakePHP core checkout. There are a few ways in which you can
 accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
 off, clone CakePHP into a directory.  For this example, we'll use
-``/home/mark/projects``::
+``~/projects``::
 
-    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
+    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
 
-This will clone CakePHP into your ``/home/mark/projects`` directory.  If you don't want
+This will clone CakePHP into your ``~/projects`` directory.  If you don't want
 to use git, you can download a zipball and the remaining steps will be the
 same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
 this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
 Configuration File'.  Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``/home/mark/projects/cakephp/lib``.  An
+``include_path`` configuration to include ``~/projects/cakephp/lib``.  An
 example would look like::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
