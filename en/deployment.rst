@@ -49,6 +49,13 @@ things:
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
+.. tip::
+
+	Use and check against an environmental variable to set the debug level so
+	you can avoid accidently deploying an application to production with
+	debug > 0 and also save yourself from constantly having to change the debug
+	level between development and production environments.
+
 Improve your application's performance
 ======================================
 
