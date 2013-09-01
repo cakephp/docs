@@ -88,6 +88,7 @@ Pour baker des projets personnalisés
 #. Faîtes des changements vers la sortie HTML pour contrôler la façon dont "bake"
    va construire vos vues.
 #. Passez le paramètre de squelette du chemin à la tâche du projet.
+
 ::
 
     cake bake project --skel Console/Templates/skel
