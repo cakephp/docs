@@ -37,10 +37,10 @@ Utilisation de Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour voir comment Containable fonctionne, regardons quelques exemples.
-Premièrement, nous commencerons avec un appel find() sur un model nommé
-Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et
-appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données
-récupérées par un appel find() normal est assez étendue ::
+Premièrement, nous commencerons avec un appel ``find()`` sur un model nommé
+'Post'. Disons que ce 'Post' a plusieurs (hasMany) 'Comment', et 'Post' a et
+appartient à plusieurs (hasAndBelongsToMany) 'Tag'. La quantité de données
+récupérées par un appel ``find()`` normal est assez étendue ::
 
     debug($this->Post->find('all'));
     
