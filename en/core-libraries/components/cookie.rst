@@ -27,7 +27,7 @@ allows you to define how the CookieComponent works.
 |                 |              | the value written to the cookie.                     |
 |                 |              | This string should be random and difficult to guess. |
 |                 |              |                                                      |
-|                 |              | When using rijndael encryption this value            |
+|                 |              | When using rijndael or aes encryption this value     |
 |                 |              | must be longer than 32 bytes.                        |
 +-----------------+--------------+------------------------------------------------------+
 | string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
@@ -65,6 +65,7 @@ a secure connection, is available on the path
 ‘/bakers/preferences/’, expires in one hour and is HTTP only::
 
     public $components = array('Cookie');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
@@ -74,6 +75,7 @@ a secure connection, is available on the path
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
+        $this->Cookie->type('aes');
     }
 
 Next, let’s look at how to use the different methods of the Cookie
@@ -107,12 +109,9 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     All values in the cookie are encrypted by default. If you want to
     store the values as plain-text, set the third parameter of the
-    write() method to false. The encryption performed on cookie values
-    is fairly uncomplicated encryption system. It uses
-    ``Security.salt`` and a predefined Configure class var
-    ``Security.cipherSeed`` to encrypt values. To make your cookies
-    more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
+    write() method to false. You should remember to set
+    the encryption mode to 'aes' to ensure values are securely
+    encrypted::
 
         $this->Cookie->write('name', 'Larry', false);
 
@@ -168,12 +167,15 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: type($type)
 
-    Allows you to change the encryption scheme.  By default the 'cipher' scheme
-    is used. However, you should use the 'rijndael' scheme for improved
-    security.
+    Allows you to change the encryption scheme.  The 'cipher' scheme is used for
+    backwards compatibility. However, you should always use either the 'rijndael' or
+    'aes' schemes.
 
     .. versionchanged:: 2.2
         The 'rijndael' type was added.
+
+    .. versionadded:: 2.5
+        The 'aes' type was added.
 
 
 .. meta::

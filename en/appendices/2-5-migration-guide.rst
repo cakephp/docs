@@ -22,6 +22,16 @@ SchemaShell
   ``yes`` option allows you to skip the various interactive questions forcing
   a yes reply.
 
+Controller
+==========
+
+CookieComponent
+---------------
+
+- :php:class:`CookieComponent` can use the new AES-256 encryption offered by
+  :php:class:`Security`. You can enable this by calling
+  :php:meth:`CookieComponent::type()` with 'aes'.
+
 Network
 =======
 
@@ -48,3 +58,10 @@ Hash
 
 - :php:meth:`Hash::insert()` and :php:meth:`Hash::remove()` now support matcher
   expressions in their path selectors.
+
+Security
+--------
+
+- :php:meth:`Security::encrypt()` and :php:meth:`Security::decrypt()` were
+  added. These methods expose a very simple API to access AES-256 symmetric encryption.
+  They should be used in favour of the ``cipher()`` and ``rijndael()`` methods.
