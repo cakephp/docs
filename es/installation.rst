@@ -100,18 +100,18 @@ Si estás desarrollando varias aplicaciones a la vez, muchas veces tiene
 sentido compartir la misma versión del núcleo de CakePHP. Hay varias formas
 de conseguirlo. Una de las más sencillas es usar la directiva PHP 
 ``include_path``. Para empezar, clona CakePHP en un directorio. Por ejemplo,
-usaremos ``~/projects``::
+usaremos ``/home/mark/projects``::
 
-    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
+    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
-Este comando clonará CakePHP en tu directorio ``~/projects``. Si no quieres
+Este comando clonará CakePHP en tu directorio ``/home/mark/projects``. Si no quieres
 usar git, puedes descargar el archivo zip del repositorio, todos los demás 
 pasos serán los mismos. Lo siguiente es modificar tu archivo de configuración 
 de PHP ``php.ini``. En sistemas \*nix, este archivo suele estar ubicado en la 
 ruta ``/etc/php.ini``, pero puedes localizarlo fácilmente mediante el comando
 ``php -i``, busca la ruta bajo el epígrafe 'Loaded Configuration File'. Cuando 
 hayas localizado el fichero correcto, modifica el parámetro ``include_path`` y 
-añade el directorio ``~/projects/cakephp/lib``. Ejemplo::
+añade el directorio ``/home/mark/projects/cakephp/lib``. Ejemplo::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
