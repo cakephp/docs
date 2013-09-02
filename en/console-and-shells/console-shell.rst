@@ -7,7 +7,7 @@ as well as Router testing and debugging.
 
 Model Manipulation
 ==================
-To get a list of you models available:
+To get a list of you models available::
 
     > models
     
@@ -17,29 +17,29 @@ To get a list of you models available:
 
 To test model results, use the name of your model without a leading $
 
-    > Post->find("all")
-    > User->find("first", array('conditions' => array('User.id' => 1)))
+    Post->find("all")
+    User->find("first", array('conditions' => array('User.id' => 1)))
 
 To dynamically set associations, you can do the following: ``ModelA bind <association> ModelB``
 
-    > User bind hasMany Comment
-    > Comment bind belongsTo User
+    User bind hasMany Comment
+    Comment bind belongsTo User
     
 To dynamically remove associations you can do the following: ``ModelA unbind <association> ModelB``
 
-    > User unbind hasMany Comment
-    > Comment unbind belongsTo User
+    User unbind hasMany Comment
+    Comment unbind belongsTo User
 
 Supported associations are ``hasOne``, ``hasMany``, ``belongsTo``, ``hasAndBelongsToMany``.
 
 To save a new field in a model, you can do the following: where you are passing a hash of data to be saved in the format ``field => value`` pairs
 
-    > Post->save(array('Post.body' => 'CakePHP is Awesome'))
+    Post->save(array('Post.body' => 'CakePHP is Awesome'))
 
 You can also retrieve schema inforamation about any model by running ``ModelA columns``
 which returns a list of columns and their type.
 
-    > Post columns
+    Post columns
     
         id: integer
         body: text
@@ -53,7 +53,7 @@ Router Testing
 To test URLs against your app's route configuration run ``Route <url>`` where ``<url>``
 is the url you want to parse and see where it would be routed to in your application.
 
-    > Route /posts/view/1
+    Route /posts/view/1
     
        array(
           'controller' => 'posts',
@@ -65,13 +65,13 @@ is the url you want to parse and see where it would be routed to in your applica
           'plugin' => NULL
         )
 
-To reload your routes config (Config/routes.php), do the following:
+To reload your routes config (Config/routes.php), do the following::
 
-    > Routes reload
+    Routes reload
 
 To show all connected routes, do the following:
 
-    > Routes show
+    Routes show
     
     [/:controller/:action/*] => array(
        [plugin] => 
@@ -80,7 +80,7 @@ To show all connected routes, do the following:
 
 To exit the shell type ``exit``
 
-   > exit
+   exit
 
 
 .. meta::
