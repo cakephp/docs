@@ -69,7 +69,7 @@ To reload your routes config (Config/routes.php), do the following::
 
     Routes reload
 
-To show all connected routes, do the following:
+To show all connected routes, do the following::
 
     Routes show
     
