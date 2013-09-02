@@ -494,6 +494,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Sauvegarder le post');
+    ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
