@@ -107,12 +107,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     All values in the cookie are encrypted by default. If you want to
     store the values as plain-text, set the third parameter of the
-    write() method to false. The encryption performed on cookie values
-    is fairly uncomplicated encryption system. It uses
-    ``Security.salt`` and a predefined Configure class var
-    ``Security.cipherSeed`` to encrypt values. To make your cookies
-    more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
+    write() method to false::
 
         $this->Cookie->write('name', 'Larry', false);
 
