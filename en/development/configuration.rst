@@ -18,11 +18,27 @@ Database Configuration
 ======================
 
 By convention database connections are configured in
-``App/Config/datasources.php``. In this file
-:php:class:`Cake\\Database\\ConnectionManager` is used to define the various
-connection configuration your application will be using. A sample file is
-can be found at ``App/Config/datasources.default.php``. A sample connection
+``App/Config/app.php``. The connection information defined in this file,
+is fed into :php:class:`Cake\\Database\\ConnectionManager` creating connection
+configuration your application will be using. Sample connection information can
+be found in ``App/Config/app.default.php``. A sample connection
 configuration would look like::
+
+
+    'Datasources' => [
+        'default' => [
+            'className' => 'Mysql',
+            'database' => 'my_app',
+            'login' => 'my_app',
+            'password' => 'sekret',
+            'host' => 'localhost',
+            'encoding' => 'utf8',
+        ]
+    ],
+
+You can also define additional connections at runtime using
+:php:meth:`Cake\\Database\\ConnectionManager::config()`. An example of that
+would be::
 
     use Cake\Database\ConnectionManager;
 
@@ -33,7 +49,7 @@ configuration would look like::
         'password' => 'sekret',
         'host' => 'localhost',
         'encoding' => 'utf8',
-    ])
+    ]);
 
 The ``default`` connection is used unless another connection is
 specified by the ``$useDbConfig`` property in a model. For example, if
@@ -117,23 +133,21 @@ While CakePHP is a conventions over configuration framework, it still exposes
 a number of points that you might need to customize for your application.  We've
 tried to ship CakePHP useful defaults to get you developing more rapidly.
 
-Configuration in CakePHP is handled via the :php:class:`Cake\Core\Configure`
-class, and the ``config()`` methods on various classes. You should familiarize
-yourself with it before trying to dive to far into configuration.  ``Configure``
-stores most configuration data in a CakePHP application, and gives a simple,
-consistent way for applications and plugins to read/write and persist
-configuration data.
+General purpose configuration in CakePHP is done using the
+:php:class:`Cake\Core\Configure` class, and the ``config()`` methods on various
+classes. You should familiarize yourself with it before trying to dive to far
+into configuration. ``Configure`` stores most configuration data in a CakePHP
+application, and gives a simple, consistent way for applications and plugins to
+read/write and persist configuration data.
 
-Out of the box a CakePHP application comes with a number of configuration files
-that are loaded by ``App/Config/bootstrap.php``.  Feel free to remove/merge or
-add new file/sections as required by your application.
+Out of the box a CakePHP application comes with a single configuration file that
+is loaded in ``App/Config/bootstrap.php``. You should feel free to add/change
+the configuration files that are loaded to fit the needs of your application.
 
 General configuration
 ---------------------
 
-General configuration is stored by default in ``App/Config/app.php``.
-
-Below is a description of each variable and how it affects your CakePHP
+Below is a description of the variables and how they affects your CakePHP
 application.
 
 debug
@@ -158,11 +172,24 @@ App.webroot
     The webroot directory.
 App.www_root
     The file path to webroot.
+App.fullBaseUrl
+    The fully qualified domain name (including protocol) to your application's
+    root. This is used when generating absolute URLs. By default this is value
+    is generated using the $_SERVER environment. However, you should define it
+    manually to optimize performance or if you are concerned about people
+    manipulating the ``Host`` header.
+App.imageBaseUrl
+    Web path to the public images directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
+App.cssBaseUrl
+    Web path to the public css directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
+App.jsBaseUrl
+    Web path to the public js directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
 Security.salt
-    A random string used in security hashing.
-Security.cipherSeed
-    A random numeric string (digits only) used to encrypt/decrypt
-    strings.
+    A random string used in security hashing. This value is also used as the
+    HMAC salt when doing symetric encryption.
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files urls (CSS, JavaScript, Image) when
@@ -172,7 +199,7 @@ Asset.timestamp
     (bool) true - Appends the timestamp when debug > 0
     (string) 'force' - Appends the timestamp when debug >= 0
 Acl.classname, Acl.database
-    Constants used for CakePHP’s Access Control List functionality. See
+    Used for CakePHP’s Access Control List functionality. See
     the Access Control Lists chapter for more information.
 
 Caching Configuration
@@ -286,7 +313,6 @@ Loading custom inflections
 You can use :php:meth:`Inflector::rules()` in the file
 ``app/Config/bootstrap.php`` to load custom inflections::
 
-    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -295,7 +321,6 @@ You can use :php:meth:`Inflector::rules()` in the file
 
 or::
 
-    <?php
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 
 Will merge the supplied rules into the inflection sets defined in
@@ -392,6 +417,13 @@ context::
 .. php:staticmethod:: version()
 
     Returns the CakePHP version for the current application.
+
+.. php:staticmethod:: consume($key)
+
+    Read and delete a key from Configure. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
+    .. versionadded:: 3.0
 
 .. php:staticmethod:: config($name, $reader)
 
