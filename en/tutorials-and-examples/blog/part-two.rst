@@ -480,6 +480,7 @@ The edit view might look something like this:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
+    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
