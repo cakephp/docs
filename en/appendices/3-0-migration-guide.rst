@@ -31,12 +31,12 @@ Constants
 
 The following deprecated constants have been removed::
 
-* `IMAGES`
-* `CSS`
-* `JS`
-* `IMAGES_URL`
-* `JS_URL`
-* `CSS_URL`
+* ``IMAGES``
+* ``CSS``
+* ``JS``
+* ``IMAGES_URL``
+* ``JS_URL``
+* ``CSS_URL``
 
 Configuration
 =============
@@ -66,6 +66,15 @@ Cache
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
 
+Configure
+=========
+
+The config reader classes have been renamed::
+
+* ``Cake\\Configure\\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
+* ``Cake\\Configure\\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
+* ``Cake\\Configure\\ConfigReaderInterface`` renamed to :php:class:`Cake\\Configure\\ConfigEngineInterface`
+
 Console
 =======
 
@@ -77,7 +86,6 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code. Tasks no longer have
 access to callbacks, as there were never any callbacks to use.
-
 
 Event
 =====
