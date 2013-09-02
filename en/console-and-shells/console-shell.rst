@@ -73,7 +73,7 @@ To show all connected routes, do the following::
 
     Routes show
     
-    [/:controller/:action/*] => array(
+    [/::controller/::action/*] => array(
        [plugin] => 
        [action] => index
     )
