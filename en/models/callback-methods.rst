@@ -186,6 +186,14 @@ afterDelete
 Place any logic that you want to be executed after every deletion
 in this callback method.
 
+::
+
+    // perhaps after deleting a record from the database, you also want to delete an associated file
+    public function afterDelete() {
+        $file = new File($this->data['SomeModel']['file_path']);
+        $file->delete();
+    }
+
 onError
 =======
 
