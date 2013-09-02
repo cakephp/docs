@@ -36,9 +36,9 @@ Using Containable
 ~~~~~~~~~~~~~~~~~
 
 To see how Containable works, let's look at a few examples. First,
-we'll start off with a find() call on a model named Post. Let's say
-that Post hasMany Comment, and Post hasAndBelongsToMany Tag. The
-amount of data fetched in a normal find() call is rather
+we'll start off with a ``find()`` call on a model named 'Post'. Let's say
+that 'Post' hasMany 'Comment', and 'Post' hasAndBelongsToMany 'Tag'. The
+amount of data fetched in a normal ``find()`` call is rather
 extensive::
 
     debug($this->Post->find('all'));
