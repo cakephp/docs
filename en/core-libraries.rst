@@ -30,8 +30,9 @@ on :doc:`/models/behaviors`.
 
 .. toctree::
     :maxdepth: 2
+    :glob:
 
-    core-libraries/toc-behaviors
+    core-libraries/behaviors/*
 
 .. _core-components:
 
@@ -44,8 +45,9 @@ configure and use components.
 
 .. toctree::
     :maxdepth: 2
+    :glob:
 
-    core-libraries/toc-components
+    core-libraries/components/*
 
 .. _core-helpers:
 
@@ -62,8 +64,9 @@ can create and use your own helpers.
 
 .. toctree::
     :maxdepth: 2
+    :glob:
 
-    core-libraries/toc-helpers
+    core-libraries/helpers/*
 
 Utilities
 =========

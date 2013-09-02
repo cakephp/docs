@@ -3,12 +3,6 @@ Components
 
 .. toctree::
     :maxdepth: 2
+    :glob:
 
-    components/access-control-lists
-    components/authentication
-    components/cookie
-    components/email
-    components/request-handling
-    components/pagination
-    components/security-component
-    components/sessions
+    components/*

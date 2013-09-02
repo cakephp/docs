@@ -31,6 +31,15 @@ and how to create our own.
 In essence, Behaviors are
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ with callbacks.
 
+There are a number of Behaviors included in CakePHP. To find out more about each
+one, reference the chapters below:
+
+.. toctree::
+    :maxdepth: 1
+    :glob:
+
+    /core-libraries/behaviors/*
+
 Using Behaviors
 ===============
 
