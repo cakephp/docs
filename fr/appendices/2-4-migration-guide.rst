@@ -29,6 +29,8 @@ BakeShell
 - ``cake bake`` pour les views, models, controllers, tests et fixtures
   supportent maintenant les paramètres ``-f`` ou ``--force`` pour forcer
   l'écrasement de fichiers.
+- Les Tasks dans le coeur peuvent être maintenant aliasés de la même façon que
+  vous le faites avec les Helpers, Components et Behaviors.
 
 FixtureTask
 -----------
