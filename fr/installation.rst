@@ -127,18 +127,18 @@ Si vous développez un certain nombre d'applications il peut sembler être sens�
 de partager le même coeur de CakePHP. Il y a peu de façon d'accomplir cela.
 Souvent, le plus facile est d'utiliser le ``include_path`` de PHP. Pour
 commencer, copiez CakePHP dans un répertoire. Pour cet exemple, nous
-utiliserons ``~/projects``::
+utiliserons ``/home/mark/projects``::
 
-    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
+    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
-Cela copiera CakePHP dans votre répertoire de ``~/projects``. Si vous ne
+Cela copiera CakePHP dans votre répertoire ``/home/mark/projects``. Si vous ne
 voulez pas utiliser git, vous pouvez télécharger un zipball et les étapes
 restantes seront les mêmes. Ensuite, vous devrez localiser et modifier
 votre ``php.ini``.  Sur les systèmes \*nix, il se trouve souvent dans
 ``/etc/php.ini``, mais en utilisant ``php -i`` et en regardant 'Loaded
 Configuration File' (Fichier de Configuration Chargé). Une fois que
 vous avez trouvé le bon fichier ini, modifier la configuration de
-``include_path`` pour inclure ``~/projects/cakephp/lib``. Un
+``include_path`` pour inclure ``/home/mark/projects/cakephp/lib``. Un
 exemple ressemblerait à cela::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php

@@ -16,7 +16,7 @@ completed file should look like this::
     class Post extends AppModel {
     }
 
-Naming convention is very important in CakePHP. By naming our model
+Naming conventions are very important in CakePHP. By naming our model
 Post, CakePHP can automatically infer that this model will be used
 in the PostsController, and will be tied to a database table called
 ``posts``.
@@ -48,7 +48,7 @@ directory. Here's what the basic controller should look like::
         public $helpers = array('Html', 'Form');
     }
 
-Now, lets add an action to our controller. Actions often represent
+Now, let's add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
@@ -62,7 +62,7 @@ posts. The code for that action would look something like this::
         }
     }
 
-Let me explain the action a bit. By defining function ``index()``
+By defining function ``index()``
 in our PostsController, users can now access the logic there by
 requesting www.example.com/posts/index. Similarly, if we were to
 define a function called ``foobar()``, users would be able to
@@ -480,6 +480,7 @@ The edit view might look something like this:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
+    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
@@ -660,7 +661,7 @@ Now that you've created a basic Cake application you're ready for
 the real thing. Start your own project, read the rest of the
 :doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
 
-If you need help, come see us in #cakephp. Welcome to CakePHP!
+If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
 
 Suggested Follow-up Reading
 ---------------------------

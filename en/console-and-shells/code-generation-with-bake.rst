@@ -84,12 +84,14 @@ don't use 'default'.
 For baking custom projects
 --------------------------
 
-Go into: lib/Cake/Console/Templates/skel
-Notice the base application files there
-Copy them to your: app/Console/Templates/skel
-Make changes to the HTML output to control the way "bake" builds
-your views
-Pass the skeleton path parameter to the project task
+#. Go into: lib/Cake/Console/Templates/skel
+#. Notice the base application files there
+#. Copy them to your:
+   app/Console/Templates/skel
+#. Make changes to the HTML output to control the way "bake" builds
+   your views
+#. Pass the skeleton path parameter to the project task
+
 ::
 
     cake bake project --skel Console/Templates/skel

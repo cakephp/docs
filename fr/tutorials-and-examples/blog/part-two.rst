@@ -64,11 +64,11 @@ quelque chose comme ça::
         }
     }
 
-Laissez-moi vous expliquer un peu cette action. En définissant la fonction
-``index()`` dans notre PostsController, les utilisateurs peuvent maintenant
-accéder à cette logique en demandant www.exemple.com/posts/index. De la même
-façon, si nous devions définir une fonction appelée ``foobar()``, les
-utilisateurs pourrait y accéder en demandant www.exemple.com/posts/foobar.
+En définissant la fonction ``index()`` dans notre PostsController, les
+utilisateurs peuvent maintenant accéder à cette logique en demandant
+www.exemple.com/posts/index. De la même façon, si nous devions définir une
+fonction appelée ``foobar()``, les utilisateurs pourrait y accéder en demandant
+www.exemple.com/posts/foobar.
 
 .. warning::
 
@@ -494,6 +494,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Sauvegarder le post');
+    ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
@@ -677,7 +678,8 @@ Maintenant que vous avez créé une application Cake basique, vous êtes prêt
 pour les choses sérieuses. Commencez votre propre projet et lisez le reste
 du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
 
-Si vous avez besoin d'aide, venez nous voir sur le canal IRC #cakephp.
+Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
+merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`
 Bienvenue sur CakePHP !
 
 Prochaines lectures suggérées

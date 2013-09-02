@@ -29,6 +29,8 @@ BakeShell
 - ``cake bake`` pour les views, models, controllers, tests et fixtures
   supportent maintenant les paramètres ``-f`` ou ``--force`` pour forcer
   l'écrasement de fichiers.
+- Les Tasks dans le coeur peuvent être maintenant aliasés de la même façon que
+  vous le faites avec les Helpers, Components et Behaviors.
 
 FixtureTask
 -----------
@@ -46,6 +48,8 @@ Constantes
 - Les constantes ``IMAGES_URL``, ``JS_URL``, ``CSS_URL`` ont été dépréciées et
   remplacées par les variables de config respectivement ``App.imageBaseUrl``,
   ``App.jsBaseUrl``, ``App.cssBaseUrl``.
+
+- Les Constantes `IMAGES`, `JS`, `CSS` ont été dépréciées.
 
 Object
 ------

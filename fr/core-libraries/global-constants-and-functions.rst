@@ -223,6 +223,8 @@ dans votre application.
 
     Chemin vers le répertoire CSS publique.
 
+    .. deprecated:: 2.4
+
 .. php:const:: CSS_URL
 
     Chemin web vers le répertoire CSS.
@@ -247,6 +249,8 @@ dans votre application.
 
     Chemin vers le répertoire images publique.
 
+    .. deprecated:: 2.4
+
 .. php:const:: IMAGES_URL
 
     Chemin web vers le répertoire image publique.
@@ -257,6 +261,8 @@ dans votre application.
 .. php:const:: JS
 
     Chemin vers le répertoire Javascript publique.
+
+    .. deprecated:: 2.4
 
 .. php:const:: JS_URL
 
