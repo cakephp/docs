@@ -11,7 +11,102 @@ can easily add to the functionality inherited from the CakePHP
 core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
-.. index:: datasources.php, datasources.php.default
+.. index:: app.php, app.php.default
+
+.. index:: configuration
+
+Configuring your application
+============================
+
+While CakePHP is a conventions over configuration framework, it still exposes
+a number of configuration options that allow you to tailor CakePHP for your
+needs. We've tried to ship CakePHP useful defaults to get you developing more
+rapidly.
+
+Configuration is generally stored in either PHP or INI files, and loaded during
+the application bootstrap. CakePHP comes with one configuration file by default,
+but if required you can add additional configuration files and load them in
+``App/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` is used for
+general configuration, and the adapter based classes provide ``config()``
+methods to make configuration simple and transparent.
+
+Loading additional configuration files
+--------------------------------------
+
+If your application has many configuration options it can be helpful to split
+configuration into multiple files. After creating each of the files in your
+``App/Config/`` directory you can load them during bootstrap.php::
+
+    use Cake\Core\Configure;
+    use Cake\Configure\Engine\PhpConfig;
+
+    Configure::config('default', new PhpConfig());
+    Configure::load('app.php', 'default', false);
+    Configure::load('other_config.php', 'default');
+
+You can also use additional configuration files to provide enviroment specific
+overrides. Each file loaded after ``app.php`` can redefine previously declared
+values allowing you to customize configuration for development or staging
+environments.
+
+General configuration
+---------------------
+
+Below is a description of the variables and how they affects your CakePHP
+application.
+
+debug
+    Changes CakePHP debugging output. 0 = Production mode. No output. 1 = Show
+    errors and warnings. 2 = Show errors, warnings, and enable SQL logging. SQL
+    log is only shown when you add ``$this->element('sql_dump');`` to your view
+    or layout.
+App.namespace
+    The namespace to find app classes under.
+App.baseUrl
+    Un-comment this definition if you **don’t** plan to use Apache’s
+    mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
+    files too.
+App.base
+    The base directory the app resides in. If false this
+    will be auto detected.
+App.encoding
+    Define what encoding your application uses.  This encoding
+    is used to generate the charset in the layout, and encode entities.
+    It should match the encoding values specified for your database.
+App.webroot
+    The webroot directory.
+App.www_root
+    The file path to webroot.
+App.fullBaseUrl
+    The fully qualified domain name (including protocol) to your application's
+    root. This is used when generating absolute URLs. By default this is value
+    is generated using the $_SERVER environment. However, you should define it
+    manually to optimize performance or if you are concerned about people
+    manipulating the ``Host`` header.
+App.imageBaseUrl
+    Web path to the public images directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
+App.cssBaseUrl
+    Web path to the public css directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
+App.jsBaseUrl
+    Web path to the public js directory under webroot. If you are using
+    a :term:`CDN` you should set this value to the CDN's location.
+Security.salt
+    A random string used in security hashing. This value is also used as the
+    HMAC salt when doing symetric encryption.
+Asset.timestamp
+    Appends a timestamp which is last modified time of the particular
+    file at the end of asset files urls (CSS, JavaScript, Image) when
+    using proper helpers.
+    Valid values:
+    (bool) false - Doesn't do anything (default)
+    (bool) true - Appends the timestamp when debug > 0
+    (string) 'force' - Appends the timestamp when debug >= 0
+Acl.classname, Acl.database
+    Used for CakePHP’s Access Control List functionality. See
+    the Access Control Lists chapter for more information.
+
 .. _database-configuration:
 
 Database Configuration
@@ -36,7 +131,8 @@ configuration would look like::
         ]
     ],
 
-You can also define additional connections at runtime using
+The above will create a 'default' connection, with the provided parameters.  You
+can also define additional connections at runtime using
 :php:meth:`Cake\\Database\\ConnectionManager::config()`. An example of that
 would be::
 
@@ -123,84 +219,6 @@ together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
-
-.. index:: configuration
-
-Configuring your application
-============================
-
-While CakePHP is a conventions over configuration framework, it still exposes
-a number of points that you might need to customize for your application.  We've
-tried to ship CakePHP useful defaults to get you developing more rapidly.
-
-General purpose configuration in CakePHP is done using the
-:php:class:`Cake\Core\Configure` class, and the ``config()`` methods on various
-classes. You should familiarize yourself with it before trying to dive to far
-into configuration. ``Configure`` stores most configuration data in a CakePHP
-application, and gives a simple, consistent way for applications and plugins to
-read/write and persist configuration data.
-
-Out of the box a CakePHP application comes with a single configuration file that
-is loaded in ``App/Config/bootstrap.php``. You should feel free to add/change
-the configuration files that are loaded to fit the needs of your application.
-
-General configuration
----------------------
-
-Below is a description of the variables and how they affects your CakePHP
-application.
-
-debug
-    Changes CakePHP debugging output. 0 = Production mode. No output. 1 = Show
-    errors and warnings. 2 = Show errors, warnings, and enable SQL logging. SQL
-    log is only shown when you add ``$this->element('sql_dump');`` to your view
-    or layout.
-App.namespace
-    The namespace to find app classes under.
-App.baseUrl
-    Un-comment this definition if you **don’t** plan to use Apache’s
-    mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
-    files too.
-App.base
-    The base directory the app resides in. If false this
-    will be auto detected.
-App.encoding
-    Define what encoding your application uses.  This encoding
-    is used to generate the charset in the layout, and encode entities.
-    It should match the encoding values specified for your database.
-App.webroot
-    The webroot directory.
-App.www_root
-    The file path to webroot.
-App.fullBaseUrl
-    The fully qualified domain name (including protocol) to your application's
-    root. This is used when generating absolute URLs. By default this is value
-    is generated using the $_SERVER environment. However, you should define it
-    manually to optimize performance or if you are concerned about people
-    manipulating the ``Host`` header.
-App.imageBaseUrl
-    Web path to the public images directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
-App.cssBaseUrl
-    Web path to the public css directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
-App.jsBaseUrl
-    Web path to the public js directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
-Security.salt
-    A random string used in security hashing. This value is also used as the
-    HMAC salt when doing symetric encryption.
-Asset.timestamp
-    Appends a timestamp which is last modified time of the particular
-    file at the end of asset files urls (CSS, JavaScript, Image) when
-    using proper helpers.
-    Valid values:
-    (bool) false - Doesn't do anything (default)
-    (bool) true - Appends the timestamp when debug > 0
-    (string) 'force' - Appends the timestamp when debug >= 0
-Acl.classname, Acl.database
-    Used for CakePHP’s Access Control List functionality. See
-    the Access Control Lists chapter for more information.
 
 Caching Configuration
 ---------------------
