@@ -1,10 +1,17 @@
 Behaviors
 #########
 
-.. toctree::
-    :maxdepth: 2
+Behaviors add extra functionality to your models. CakePHP comes
+with a number of built-in behaviors such as :php:class:`TreeBehavior`
+and :php:class:`ContainableBehavior`.
 
-    behaviors/acl
-    behaviors/containable
-    behaviors/translate
-    behaviors/tree
+To learn about creating and using behaviors, read the section
+on :doc:`/models/behaviors`.
+
+.. toctree::
+    :maxdepth: 1
+
+    /core-libraries/behaviors/acl
+    /core-libraries/behaviors/containable
+    /core-libraries/behaviors/translate
+    /core-libraries/behaviors/tree
