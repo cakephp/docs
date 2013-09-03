@@ -8,11 +8,10 @@ configure and use components.
 .. toctree::
     :maxdepth: 1
 
-    /core-libraries/components/access-control-lists
-    /core-libraries/components/authentication
-    /core-libraries/components/cookie
-    /core-libraries/components/email
-    /core-libraries/components/request-handling
     /core-libraries/components/pagination
-    /core-libraries/components/security-component
     /core-libraries/components/sessions
+    /core-libraries/components/authentication
+    /core-libraries/components/security-component
+    /core-libraries/components/request-handling
+    /core-libraries/components/cookie
+    /core-libraries/components/access-control-lists
