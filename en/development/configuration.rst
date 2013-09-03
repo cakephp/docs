@@ -20,7 +20,7 @@ Configuring your application
 
 While CakePHP is a conventions over configuration framework, it still exposes
 a number of configuration options that allow you to tailor CakePHP for your
-needs. We've tried to ship CakePHP useful defaults to get you developing more
+needs. We've tried to ship CakePHP with useful defaults to get you developing more
 rapidly.
 
 Configuration is generally stored in either PHP or INI files, and loaded during
