@@ -340,16 +340,13 @@ I18n
 
 - Since having mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
 
-
 Utility
 =======
 
 Sanitize
 --------
 
-- ``Sanitize::escape()`` has been removed. It promotes bad practices. SQL
-  escaping should be done at time of query construction using the Database
-  layer.
+- ``Sanitize`` class has been removed.
 
 Security
 --------
