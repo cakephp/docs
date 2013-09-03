@@ -10,15 +10,15 @@ Read :doc:`/views/helpers` to learn more about helpers, their api, and how you
 can create and use your own helpers.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    helpers/cache
-    helpers/form
-    helpers/html
-    helpers/js
-    helpers/number
-    helpers/paginator
-    helpers/rss
-    helpers/session
-    helpers/text
-    helpers/time
+    /core-libraries/helpers/cache
+    /core-libraries/helpers/form
+    /core-libraries/helpers/html
+    /core-libraries/helpers/js
+    /core-libraries/helpers/number
+    /core-libraries/helpers/paginator
+    /core-libraries/helpers/rss
+    /core-libraries/helpers/session
+    /core-libraries/helpers/text
+    /core-libraries/helpers/time

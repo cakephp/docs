@@ -9,9 +9,9 @@ To learn about creating and using behaviors, read the section
 on :doc:`/models/behaviors`.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    behaviors/acl
-    behaviors/containable
-    behaviors/translate
-    behaviors/tree
+    /core-libraries/behaviors/acl
+    /core-libraries/behaviors/containable
+    /core-libraries/behaviors/translate
+    /core-libraries/behaviors/tree

@@ -14,11 +14,8 @@ in formatting text, times and numbers, and can even speed up Ajax
 functionality. For more information on the helpers included in CakePHP,
 check out the chapter for each helper:
 
-.. toctree::
-    :maxdepth: 1
-    :glob:
-
-    /core-libraries/helpers/*
+.. include:: /core-libraries/toc-helpers.rst
+    :start-line: 11
 
 .. _configuring-helpers:
 
