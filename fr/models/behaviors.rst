@@ -37,6 +37,12 @@ CakePHP et la manière de créer nos propres behaviors.
 Au final, les Behaviors sont 
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
 
+Il y a un certain nombre de Behaviors inclus dans CakePHP. Pour en savoir
+plus sur chacun, référencez-vous aux chapitres ci-dessous:
+
+.. include:: /core-libraries/toc-behaviors.rst
+    :start-line: 10
+
 Utiliser les Behaviors
 ======================
 
