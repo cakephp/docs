@@ -188,7 +188,7 @@ d'une manière  non-blocking et le logger de votre système d'exploitation peut
 les écritures ou utiliser un stockage complètement différent pour vos logs.
 
 Utiliser syslog est à peu près comme utiliser le moteur par défaut FileLog,
-vous devez juste spécifier `SysloLog` comme moteur à utiliser pour la
+vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
 par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`.
 
