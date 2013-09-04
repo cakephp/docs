@@ -156,7 +156,8 @@ afterSave
 ``afterSave(boolean $created, array $options = array())``
 
 If you have logic you need to be executed just after every save
-operation, place it in this callback method.
+operation, place it in this callback method. The saved data will
+be available in ``$this->data``.
 
 The value of ``$created`` will be true if a new record was created
 (rather than an update).
