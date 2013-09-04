@@ -144,6 +144,38 @@ operation, place it in this callback method.
 The value of ``$created`` will be true if a new record was created
 (rather than an update).
 
+The recently saved data is available in ``$this->Model->data``.
+Consider the follwoing code.
+
+::
+
+    // In the App/Model/User.php
+    public function afterSave($created) {
+        pr($this->data);
+        exit;
+    }
+		
+    // Produces the following output
+		
+    Array
+    (
+        [User] => Array
+            (
+                [verified] => 1
+                [email] => someone@somewhere.com
+                [password] => $2a$10$Z/AFjhC2MXVTeRl7WhIcVuztuJt3ALEo3N9l2QtCgtbe4x52Qld3i
+                [name] => First Last
+                [role_id] => 1
+                [last_login] => 
+                [modified] => 2013-09-04 15:38:50
+                [created] => 2013-09-04 15:38:50
+                [id] => 2
+            )
+    
+    )
+
+..
+
 beforeDelete
 ============
 
