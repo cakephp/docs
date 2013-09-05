@@ -142,9 +142,8 @@ If you have logic you need to be executed just after every save
 operation, place it in this callback method.
 
 The value of ``$created`` will be true if a new record was created
-(rather than an update) and the primary key will be appended.
-
-The recently saved data is available in ``$this->Model->data``.
+(rather than an update) and the primary key will be appended to
+``$this->Model->data`` if it was not present during ``Model::save()``.
 
 beforeDelete
 ============
