@@ -142,16 +142,9 @@ If you have logic you need to be executed just after every save
 operation, place it in this callback method.
 
 The value of ``$created`` will be true if a new record was created
-(rather than an update).
+(rather than an update) and the primary key will be appended.
 
 The recently saved data is available in ``$this->Model->data``.
-
-.. tip::
-
-    The primary key (typically `id`) will be the last key in the array 
-    if the record was created. However, if the record was updated the
-    primary key and other array keys will refeclt the order found in
-    the database.
 
 beforeDelete
 ============
