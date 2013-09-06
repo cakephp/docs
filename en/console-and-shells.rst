@@ -32,7 +32,7 @@ parameters.
     if you plan to use the Console.
 
 Before we get into specifics, let’s make sure we can run the
-CakePHP Console. First, you’ll need to bring up a system shell. The
+CakePHP console. First, you’ll need to bring up a system shell. The
 examples shown in this section will be in bash, but the CakePHP
 Console is Windows-compatible as well. Let’s execute the Console
 program from bash. This example assumes that the user is currently

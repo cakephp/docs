@@ -7,7 +7,6 @@ envoyer des newsletters::
 
       */5  *    *    *    *  cd /full/path/to/app && Console/cake myshell myparam
     # *    *    *    *    *  command to execute
-    # ┬    ┬    ┬    ┬    ┬
     # │    │    │    │    │
     # │    │    │    │    │
     # │    │    │    │    └───── day of week (0 - 6) (0 à 6 sont Dimanche à Samedi, ou utilisez les noms)
