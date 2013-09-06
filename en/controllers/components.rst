@@ -9,15 +9,8 @@ in a component.
 CakePHP also comes with a fantastic set of core components you can
 use to aid in:
 
-
-- Security
-- Sessions
-- Access control lists
-- Emails
-- Cookies
-- Authentication
-- Request handling
-- Pagination
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
 Each of these core components are detailed in their own chapters.
 For now, we’ll show you how to create your own components. Creating

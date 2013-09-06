@@ -188,7 +188,13 @@ afterDelete
 ``afterDelete()``
 
 Placez dans cette méthode de rappel, toute logique que vous souhaitez exécuter
-après chaque suppression.
+après chaque suppression::
+
+    // peut-être pour supprimer un enregistrement de la base de données, vous pouvez aussi supprimer un fichier associé
+    public function afterDelete() {
+        $file = new File($this->data['SomeModel']['file_path']);
+        $file->delete();
+    }
 
 onError
 =======

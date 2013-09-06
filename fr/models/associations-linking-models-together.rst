@@ -716,7 +716,7 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
 -  **limit**: Le nombre maximum de lignes associées que vous voulez retourner.
 -  **offset**: Le nombre de lignes associées à enlever (étant donnés les
    conditions et l'order courant) avant la récupération et l'association.
--  **finderQuery, deleteQuery, insertQuery**: Une requête SQL complète que
+-  **finderQuery**: Une requête SQL complète que
    CakePHP peut utiliser pour récupérer les enregistrements du model associé.
    Ceci doit être utilisé dans les situations qui nécessitent des résultats
    très personnalisés.

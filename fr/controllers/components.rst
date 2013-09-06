@@ -9,14 +9,8 @@ de regrouper plusieurs fonctionnalités dans un Component.
 CakePHP est également livré avec un fantastique ensemble de components,
 que vous pouvez utiliser pour vous aider :
 
-- Sécurité (SecurityComponent)
-- Sessions (SessionComponent)
-- Listes de contrôle d'accès (ACLComponent)
-- Emails (EmailComponent)
-- Cookies (CookieComponent)
-- Authentification (AuthComponent)
-- Traitement de requêtes (RequestHandlerComponent)
-- Pagination (PaginationComponent)
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
 Chacun de ces components d’origine est détaillé dans des chapitres
 spécifiques. Pour l’heure, nous allons vous montrer comment créer
