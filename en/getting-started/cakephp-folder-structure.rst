@@ -12,7 +12,7 @@ and folders you should see:
 - .htaccess
 - composer.json
 - index.php
-- README
+- README.md
 
 You'll notice three main folders:
 
@@ -22,8 +22,6 @@ You'll notice three main folders:
 - The *vendor* folder is where CakePHP and other application dependencies will
   be installed. Make a personal commitment **not** to edit files in this folder.
   We can’t help you if you’ve modified the core.
-- The *tmp* folder is where your applications temporary files for caching, and
-  logging are stored.
 - The *webroot* directory is public document root of your application. It
   contains all the files you want to be publically reachable.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it

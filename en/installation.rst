@@ -138,7 +138,7 @@ Your development setup will look like this on the file system::
             webroot/
             .htaccess
             index.php
-            README
+            README.md
 
 If your web server is configured correctly, you should now find
 your Cake application accessible at
@@ -153,9 +153,9 @@ example will help you install Cake anywhere on your filesystem and make it
 available at http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
 
-After installing your application using one of the methods above into
-the directory of your choosing. We'll assume you chose /cake\_install.
-Your production setup will look like this on the file system::
+After installing your application using one of the methods above into the
+directory of your choosing - we'll assume you chose /cake_install - your
+production setup will look like this on the file system::
 
     /cake_install/
         App/
@@ -165,7 +165,7 @@ Your production setup will look like this on the file system::
         vendor/
         .htaccess
         index.php
-        README
+        README.md
 
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::
@@ -196,7 +196,7 @@ Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
 Not working? If you're getting timezone related error from PHP
-uncomment one line in ``App/Config/bootstrap.php``::
+uncomment the related line in ``App/Config/bootstrap.php``::
 
    /**
     * Uncomment this line and correct your server timezone to fix 

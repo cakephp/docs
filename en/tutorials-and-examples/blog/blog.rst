@@ -51,12 +51,13 @@ Once finished, your directory setup should look something like the following::
 
     /path_to_document_root
         /App
+        /Plugin
         /tmp
         /webroot
         /vendor
         .htaccess
         index.php
-        README
+        README.md
 
 Now might be a good time to learn a bit about how Cake's directory
 structure works: check out the

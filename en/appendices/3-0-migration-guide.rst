@@ -27,9 +27,10 @@ project as a reference point when updating your application.
 CakePHP should be installed with composer
 =========================================
 
-CakePHP can no longer easily be installed via PEAR, or in a shared directory.
-Instead you should use `composer <http://getcomposer.org>`_ to install CakePHP
-into your application.
+
+Since CakePHP can no longer easily be installed via PEAR, or in a shared
+directory, those options are no longer supported.  Instead you should use
+`composer <http://getcomposer.org>`_ to install CakePHP into your application.
 
 Namespaces
 ==========
