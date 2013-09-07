@@ -1,24 +1,38 @@
 CakePHP Folder Structure
 ########################
 
-After you've downloaded and extracted CakePHP, these are the files
+After you've downloaded and extracted the CakePHP application, these are the files
 and folders you should see:
 
--  App
--  lib
--  .htaccess
--  index.php
--  README
+- App
+- Plugin
+- tmp
+- vendor
+- webroot
+- .htaccess
+- composer.json
+- index.php
+- README.md
 
 You'll notice three main folders:
 
--  The *App* folder will be where you work your magic: it’s where
-   your application’s files will be placed.
--  The *lib* folder is where we’ve worked our magic. Make a
-   personal commitment **not** to edit files in this folder. We can’t
-   help you if you’ve modified the core.
--  Finally, the *vendors* folder is where you’ll place third-party
-   PHP libraries you need to use with your CakePHP applications.
+- The *App* folder will be where you work your magic: it’s where
+  your application’s files will be placed.
+- The *Plugin* folder is where the :doc:`/plugins` your application uses are stored.
+- The *vendor* folder is where CakePHP and other application dependencies will
+  be installed. Make a personal commitment **not** to edit files in this folder.
+  We can’t help you if you’ve modified the core.
+- The *webroot* directory is public document root of your application. It
+  contains all the files you want to be publically reachable.
+- The *tmp* folder is where CakePHP stores temporary data. The actual data it
+  stores depends on how you have CakePHP configured, but this folder
+  is usually used to store model descriptions, logs, and sometimes
+  session information.
+
+  Make sure that this folder exists and that it is writable,
+  otherwise the performance of your application will be severely
+  impacted. In debug mode, CakePHP will warn you if it is not the
+  case.
 
 The App Folder
 ==============
@@ -45,29 +59,12 @@ Locale
     Stores string files for internationalization.
 Model
     Contains your application’s models, behaviors, and datasources.
-Plugin
-    Contains plugin packages.
 Test
     This directory contains all the test cases, and test fixtures for your
     application. The ``Test/Case`` directory should mirror your application and
     contain one or more test cases per class in your application. For more
     information on test cases and test fixtures refer to the :doc:`/development/testing`
     documentation.
-tmp
-    This is where CakePHP stores temporary data. The actual data it
-    stores depends on how you have CakePHP configured, but this folder
-    is usually used to store model descriptions, logs, and sometimes
-    session information.
-
-    Make sure that this folder exists and that it is writable,
-    otherwise the performance of your application will be severely
-    impacted. In debug mode, CakePHP will warn you if it is not the
-    case.
-
-vendor
-    Any third-party classes or libraries should be placed here. 
-    If you're using composer, it will install all your application's
-    dependencies there.
 View
     Presentational files are placed here: elements, error pages,
     helpers, layouts, and view files.

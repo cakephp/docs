@@ -9,8 +9,8 @@ creating a CakePHP model that will interact with our database,
 we'll have the foundation in place needed to do our view, add,
 edit, and delete operations later.
 
-CakePHP's model class files go in ``/app/Model``, and the file
-we'll be creating will be saved to ``/app/Model/Post.php``. The
+CakePHP's model class files go in ``/App/Model``, and the file
+we'll be creating will be saved to ``/App/Model/Post.php``. The
 completed file should look like this::
 
     class Post extends AppModel {
@@ -24,7 +24,7 @@ in the PostsController, and will be tied to a database table called
 .. note::
 
     CakePHP will dynamically create a model object for you if it
-    cannot find a corresponding file in /app/Model. This also means
+    cannot find a corresponding file in /App/Model. This also means
     that if you accidentally name your file wrong (i.e. post.php or
     posts.php), CakePHP will not recognize any of your settings and will
     use the defaults instead.
@@ -41,7 +41,7 @@ Next, we'll create a controller for our posts. The controller is
 where all the business logic for post interaction will happen. In a
 nutshell, it's the place where you play with the models and get
 post-related work done. We'll place this new controller in a file
-called ``PostsController.php`` inside the ``/app/Controller``
+called ``PostsController.php`` inside the ``/App/Controller``
 directory. Here's what the basic controller should look like::
 
     class PostsController extends AppController {
@@ -144,14 +144,14 @@ to the view that would look something like this::
             )
     )
 
-Cake's view files are stored in ``/app/View`` inside a folder
+Cake's view files are stored in ``/App/View`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
 nice table, our view code might look something like this
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: /App/View/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <table>
@@ -178,14 +178,13 @@ nice table, our view code might look something like this
 
 Hopefully this should look somewhat simple.
 
-You might have noticed the use of an object called ``$this->Html``.
-This is an instance of the CakePHP :php:class:`HtmlHelper` class. CakePHP
-comes with a set of view helpers that make things like linking,
-form output, JavaScript and Ajax a snap. You can learn more about
-how to use them in :doc:`/views/helpers`, but
-what's important to note here is that the ``link()`` method will
-generate an HTML link with the given title (the first parameter)
-and URL (the second parameter).
+You might have noticed the use of an object called ``$this->Html``.  This is an
+instance of the CakePHP :php:class:`Cake\\View\\Helper\\HtmlHelper` class.
+CakePHP comes with a set of view helpers that make things like linking, form
+output, JavaScript and Ajax a snap. You can learn more about how to use them in
+:doc:`/views/helpers`, but what's important to note here is that the ``link()``
+method will generate an HTML link with the given title (the first parameter) and
+URL (the second parameter).
 
 When specifying URLs in Cake, it is recommended that you use the
 array format. This is explained in more detail in the section on
@@ -242,11 +241,11 @@ also perform a similar check to make sure the user has accessed a
 record that exists.
 
 Now let's create the view for our new 'view' action and place it in
-``/app/View/Posts/view.ctp``
+``/App/View/Posts/view.ctp``
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/view.ctp -->
+    <!-- File: /App/View/Posts/view.ctp -->
 
     <h1><?php echo h($post['Post']['title']); ?></h1>
 
@@ -309,26 +308,28 @@ request was POST, try to save the data using the Post model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
 
-Every CakePHP request includes a ``CakeRequest`` object which is accessible using
+Every CakePHP request includes a ``Request`` object which is accessible using
 ``$this->request``. The request object contains useful information regarding the
-request that was just received, and can be used to control the flow of your application.
-In this case, we use the :php:meth:`CakeRequest::is()` method to check that the request is a HTTP POST request.
+request that was just received, and can be used to control the flow of your
+application.  In this case, we use the :php:meth:`Cake\\Network\\Request::is()`
+method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
 information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use the SessionComponent's :php:meth:`SessionComponent::setFlash()`
-method to set a message to a session variable to be displayed on the page after
+We use the SessionComponent's
+:php:meth:`Cake\\Controller\\Component\\SessionComponent::setFlash()` method to
+set a message to a session variable to be displayed on the page after
 redirection. In the layout we have
-:php:func:`SessionHelper::flash` which displays the
-message and clears the corresponding session variable. The
-controller's :php:meth:`Controller::redirect` function
+:php:func:`Cake\\View\Helper\\SessionHelper::flash` which displays the message
+and clears the corresponding session variable. The controller's
+:php:meth:`Cake\\Controller\\Controller::redirect` function
 redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
-You can refer to :php:func:`Router::url()` function on the
-`API <http://api20.cakephp.org>`_ to see the formats in which you can specify a
+You can refer to :php:func:`Cake\\Routing\\Router::url()` function on the
+`API <http://api.cakephp.org>`_ to see the formats in which you can specify a
 URL for various Cake functions.
 
 Calling the ``save()`` method will check for validation errors and
@@ -342,15 +343,15 @@ Cake goes a long way in taking the monotony out of form input
 validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
-To take advantage of the validation features, you'll need to use
-Cake's FormHelper in your views. The :php:class:`FormHelper` is available by
-default to all views at ``$this->Form``.
+To take advantage of the validation features, you'll need to use Cake's
+FormHelper in your views. The :php:class:`Cake\\View\\Helper\\FormHelper` is
+available by default to all views at ``$this->Form``.
 
 Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->
+    <!-- File: /App/View/Posts/add.ctp -->
 
     <h1>Add Post</h1>
     <?php
@@ -386,7 +387,7 @@ the form. If a string is supplied as the first parameter to
 along with the closing form tag. Again, refer to
 :doc:`/views/helpers` for more on helpers.
 
-Now let's go back and update our ``/app/View/Posts/index.ctp``
+Now let's go back and update our ``/App/View/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
 the following line::
 
@@ -418,11 +419,11 @@ validation engine is strong, with a number of pre-built rules
 adding your own validation rules. For more information on that
 setup, check the :doc:`/models/data-validation`.
 
-Now that you have your validation rules in place, use the app to
-try to add a post with an empty title or body to see how it works.
-Since we've used the :php:meth:`FormHelper::input()` method of the
-FormHelper to create our form elements, our validation error
-messages will be shown automatically.
+Now that you have your validation rules in place, use the app to try to add
+a post with an empty title or body to see how it works.  Since we've used the
+:php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
+create our form elements, our validation error messages will be shown
+automatically.
 
 Editing Posts
 =============
@@ -471,7 +472,7 @@ The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/edit.ctp -->
+    <!-- File: /App/View/Posts/edit.ctp -->
 
     <h1>Edit Post</h1>
     <?php
@@ -495,7 +496,7 @@ posts:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
+    <!-- File: /App/View/Posts/index.ctp  (edit links added) -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
@@ -558,7 +559,7 @@ links that allow users to delete posts, however:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: /App/View/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
@@ -594,10 +595,10 @@ links that allow users to delete posts, however:
 
     </table>
 
-Using :php:meth:`~FormHelper::postLink()` will create a link that uses
-Javascript to do a POST request deleting our post.  Allowing content to be
-deleted using GET requests is dangerous, as web crawlers could accidentally
-delete all your content.
+Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
+that uses Javascript to do a POST request deleting our post.  Allowing content
+to be deleted using GET requests is dangerous, as web crawlers could
+accidentally delete all your content.
 
 .. note::
 
@@ -622,7 +623,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 
-Cake's routing is found in ``/app/Config/routes.php``. You'll want
+Cake's routing is found in ``/App/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 
@@ -659,7 +660,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic Cake application you're ready for
 the real thing. Start your own project, read the rest of the
-:doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
+:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
 If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
 

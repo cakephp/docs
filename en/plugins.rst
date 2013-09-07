@@ -16,14 +16,11 @@ behaving much like it would if it were an application on its own.
 Installing a Plugin
 ===================
 
-To install a plugin, start by simply dropping the plugin folder in 
-your app/Plugin folder. If you're installing a plugin named 
-'ContactManager' then you should have a folder in app/Plugin
-named 'ContactManager' under which are the plugin's View, Model, 
+To install a plugin, start by simply dropping the plugin folder in
+your ``/Plugin`` folder. If you're installing a plugin named
+'ContactManager' then you should have a folder in ``/Plugin``
+named 'ContactManager' under which are the plugin's View, Model,
 Controller, webroot, and any other directories.
-
-New for CakePHP 2.0, plugins need to be loaded manually in 
-app/Config/bootstrap.php.
 
 You can either load them one by one or all of them in a single call::
 
@@ -45,7 +42,7 @@ certain plugins.
 
 No problem::
 
-    CakePlugin::loadAll(array(
+    Plugin::loadAll(array(
         'Blog' => array('routes' => true),
         'ContactManager' => array('bootstrap' => true),
         'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
@@ -62,7 +59,7 @@ every plugin that doesn't have a more specific configuration.
 
 Load the bootstrap file from all plugins, and the routes from the Blog plugin::
     
-    CakePlugin::loadAll(array(
+    Plugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
     ));
@@ -88,7 +85,7 @@ Advanced bootstrapping
 If you like to load more than one bootstrap file for a plugin. You can specify
 an array of files for the bootstrap configuration key::
 
-    CakePlugin::loadAll(array(
+    Plugin::loadAll(array(
         'Blog' => array(
             'bootstrap' => array(
                 'config1',
@@ -105,7 +102,7 @@ has been loaded::
         
     }
 
-    CakePlugin::loadAll(array(
+    Plugin::loadAll(array(
         'Blog' => array(
             'bootstrap' => 'aCallableFunction'
         )
@@ -138,16 +135,16 @@ As a working example, let's begin to create the ContactManager
 plugin referenced above. To start out, we'll set up our plugin's
 basic directory structure. It should look like this::
 
-    /app
-        /Plugin
-            /ContactManager
-                /Controller
-                    /Component
-                /Model
-                    /Behavior
-                /View
-                    /Helper
-                    /Layouts
+    /App
+    /Plugin
+        /ContactManager
+            /Controller
+                /Component
+            /Model
+                /Behavior
+            /View
+                /Helper
+                /Layouts
                     
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
@@ -171,13 +168,11 @@ application can, such as Config, Console, Lib, webroot, etc.
 
 ::
 
-    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
+    // /Plugin/ContactManager/Controller/ContactManagerAppController.php:
     class ContactManagerAppController extends AppController {
     }
 
-::
-
-    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
+    // /Plugin/ContactManager/Model/ContactManagerAppModel.php:
     class ContactManagerAppModel extends AppModel {
     }
 
@@ -205,14 +200,14 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-/app/Plugin/ContactManager/Controller/. Since the main thing we'll 
+/Plugin/ContactManager/Controller/. Since the main thing we'll 
 be doing is managing contacts, we'll need a ContactsController for 
 this plugin.
 
 So, we place our new ContactsController in
-/app/Plugin/ContactManager/Controller and it looks like so::
+/Plugin/ContactManager/Controller and it looks like so::
 
-    // app/Plugin/ContactManager/Controller/ContactsController.php
+    // /Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
 
@@ -249,13 +244,13 @@ Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's 
 create the model for that controller, called Contact::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
     }
 
-Visiting /contact_manager/contacts now (given you’ve got a table in your
-database called ‘contacts’) should give us a “Missing View” error. 
-Let’s create that next.
+Visiting /contact_manager/contacts now (given you've got a table in your
+database called 'contacts') should give us a "Missing View" error.
+Let's create that next.
 
 .. note::
 
@@ -264,7 +259,7 @@ Let’s create that next.
 
 For example::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
     }
@@ -272,7 +267,7 @@ For example::
 If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax::
 
-    // /app/Plugin/ContactManager/Model/Contact.php:
+    // /Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
         public $hasMany = array(
             'AltName' => array(
@@ -290,7 +285,7 @@ folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
 well::
 
-    // /app/Plugin/ContactManager/View/Contacts/index.ctp:
+    // /Plugin/ContactManager/View/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
@@ -310,10 +305,10 @@ specific view logic by creating files using the following template
 "app/View/Plugin/[Plugin]/[Controller]/[view].ctp". For the 
 Contacts controller you could make the following file::
 
-    /app/View/Plugin/ContactManager/Contacts/index.ctp
+    /App/View/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-"/app/Plugin/ContactManager/View/Contacts/index.ctp".
+``/Plugin/ContactManager/View/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
@@ -324,12 +319,12 @@ Plugin assets
 A plugin's web assets (but not PHP files) can be served through the 
 plugin's 'webroot' directory, just like the main application's assets::
 
-    app/Plugin/ContactManager/webroot/
-                                        css/
-                                        js/
-                                        img/
-                                        flash/
-                                        pdf/
+    /Plugin/ContactManager/webroot/
+                                   css/
+                                   js/
+                                   img/
+                                   flash/
+                                   pdf/
 
 You may put any type of file in any directory, just like a regular 
 webroot.
@@ -339,7 +334,7 @@ and CSS files of plugins, through the Dispatcher is incredibly inefficient.
 It is strongly recommended to symlink them for production.
 For example like this::
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 Linking to assets in plugins
 ----------------------------
@@ -350,7 +345,7 @@ in your application's webroot.
 
 For example, linking to '/contact_manager/js/some_file.js'
 would serve the asset 
-'app/Plugin/ContactManager/webroot/js/some_file.js'.
+'Plugin/ContactManager/webroot/js/some_file.js'.
 
 .. note::
 
@@ -416,7 +411,7 @@ that everyone can benefit from your awesome, reusable components!
 Plugin Tips
 ===========
 
-Once a plugin has been installed in /app/Plugin, you can access it
+Once a plugin has been installed in /Plugin, you can access it
 at the URL /plugin_name/controller_name/action. In our ContactManager
 plugin example, we'd access our ContactsController at
 /contact_manager/contacts.
@@ -424,13 +419,12 @@ plugin example, we'd access our ContactsController at
 Some final tips on working with plugins in your CakePHP
 applications:
 
-
 -  When you don't have a [Plugin]AppController and
    [Plugin]AppModel, you'll get missing Controller errors when trying
    to access a plugin controller.
 -  You can define your own layouts for plugins, inside
-   app/Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
-   layouts from the /app/View/Layouts folder by default.
+   /Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
+   layouts from the /App/View/Layouts folder by default.
 -  You can do inter-plugin communication by using
    ``$this->requestAction('/plugin_name/controller_name/action');`` in your
    controllers.
