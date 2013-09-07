@@ -34,22 +34,26 @@ Getting Cake
 ============
 
 To get a fresh download, visit the CakePHP project on GitHub:
-`http://github.com/cakephp/cakephp/tags <http://github.com/cakephp/cakephp/tags>`_
+`http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
 and download the latest release of 3.0
 
-You can also clone the repository using
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git`` or use composer to install
-CakePHP. For this tutorial we're just going to download the zip file as its the
-simplest option.
+You can also install CakePHP using ``composer``::
 
-Regardless of how you downloaded it, place the code inside of your
-DocumentRoot. Once finished, your directory setup should look
-something like the following::
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar create-project cakephp/cakephp-app
+
+This will download composer and install the CakePHP application skeleton. For
+this tutorial we're just going to download the zip file as its the simplest
+option.
+
+Regardless of how you downloaded it, place the code inside of your DocumentRoot.
+Once finished, your directory setup should look something like the following::
 
     /path_to_document_root
         /App
-        /lib
+        /tmp
+        /webroot
+        /vendor
         .htaccess
         index.php
         README
@@ -98,36 +102,40 @@ information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by Cake.
 
-Cake Database Configuration
-===========================
+Database Configuration
+======================
 
 Onward and upward: let's tell Cake where our database is and how to
 connect to it. For many, this is the first and last time you
 configure anything.
 
-A copy of CakePHP's database configuration file is found in
-``App/Config/database.php.default``. Make a copy of this file in
-the same directory, but name it ``database.php``.
+A copy of CakePHP's configuration file is found in
+``App/Config/app.php.default``. Make a copy of this file in
+the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
-values in the ``$default`` array with those that apply to your
+values in the ``Datatsources.default`` array with those that apply to your
 setup. A sample completed configuration array might look something
 like the following::
 
-    public $default = array(
-        'datasource' => 'Database/Mysql',
-        'persistent' => false,
-        'host' => 'localhost',
-        'port' => '',
-        'login' => 'cakeBlog',
-        'password' => 'c4k3-rUl3Z',
-        'database' => 'cake_blog_tutorial',
-        'schema' => '',
-        'prefix' => '',
-        'encoding' => 'utf8'
-    );
+    $config = [
+        // More configuration above.
+        'Datasources' => [
+            'default' => [
+                'className' => 'Cake\Database\Driver\Mysql',
+                'persistent' => 'false,',
+                'host' => 'localhost',
+                'login' => 'cake_blog',
+                'password' => 'AngelF00dC4k3~',
+                'database' => 'cake_blog',
+                'prefix' => false,
+                'encoding' => 'utf8',
+            ]
+        ],
+        // More configuration below.
+    ];
 
-Once you've saved your new ``database.php`` file, you should be
+Once you've saved your new ``app.php`` file, you should be
 able to open your browser and see the Cake welcome page. It should
 also tell you that your database connection file was found, and
 that Cake can successfully connect to the database.
@@ -137,46 +145,37 @@ that Cake can successfully connect to the database.
     Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
 
+Directory permissions on tmp
+============================
+
+You'll also need to set the proper permissions on the ``/tmp`` directory to make
+it writable by your webserver. The best way to do this is to find out what user
+your webserver runs as (``<?php echo `whoami`; ?>``) and change the ownership of
+the ``App/tmp`` directory to that user. The final command you run (in \*nix)
+might look something like this::
+
+    $ chown -R www-data App/tmp
+
+If for some reason CakePHP can't write to that directory, you'll be
+informed by a warning while not in production mode.
+
 Optional Configuration
 ======================
 
-There are three other items that can be configured. Most developers
+There are a few other items that can be configured. Most developers
 complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
-in security hashes. The second is defining a custom number (or
-"seed") for use in encryption. The third item is allowing CakePHP
-write access to its ``tmp`` folder.
+in security hashes.
 
 The security salt is used for generating hashes. Change the default
 salt value by editing ``/App/Config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+    'Security' => [
+        'salt' => 'something long and containing lots of different values.',
+    ],
 
-The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/App/Config/app.php``. It
-doesn't much matter what the new value is, as long as it's not
-easily guessed::
-
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
-
-The final task is to make the ``App/tmp`` directory web-writable.
-The best way to do this is to find out what user your webserver
-runs as (``<?php echo `whoami`; ?>``) and change the ownership of
-the ``App/tmp`` directory to that user. The final command you run
-(in \*nix) might look something like this::
-
-    $ chown -R www-data App/tmp
-
-If for some reason CakePHP can't write to that directory, you'll be
-informed by a warning while not in production mode.
 
 A Note on mod\_rewrite
 ======================
@@ -215,14 +214,17 @@ compatible module) up and running on your server, you'll need to
 use Cake's built in pretty URLs. In ``/App/Config/app.php``,
 uncomment the line that looks like::
 
-    Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+    'App' => [
+        // ...
+        // 'baseUrl' => env('SCRIPT_NAME'),
+    ]
 
 Also remove these .htaccess files::
 
     /.htaccess
     /App/.htaccess
     /App/webroot/.htaccess
-            
+
 
 This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather
@@ -232,7 +234,8 @@ If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
 servers under the :doc:`/installation/advanced-installation` section.
 
-Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
+Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building
+your first CakePHP application.
 
 
 .. meta::

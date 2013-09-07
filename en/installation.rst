@@ -132,6 +132,7 @@ Your development setup will look like this on the file system::
     /var/www/html/
         cake3/
             App/
+            Plugin/
             tmp/
             vendor/
             webroot/
@@ -158,6 +159,7 @@ Your production setup will look like this on the file system::
 
     /cake_install/
         App/
+        Plugin/
         tmp/
         webroot/ (this directory is set as DocumentRoot)
         vendor/
@@ -186,7 +188,7 @@ Fire It Up
 
 Alright, let's see CakePHP in action. Depending on which setup you
 used, you should point your browser to http://example.com/ or
-http://example.com/cake\_install/. At this point, you'll be
+http://example.com/cake3/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
