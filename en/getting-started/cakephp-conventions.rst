@@ -119,10 +119,9 @@ underscored. The underlying tables for the above mentioned models
 would be ``people``, ``big_people``, and ``really_big_people``,
 respectively.
 
-You can use the utility library :php:class:`Inflector` to check the
-singular/plural of words. See the
-:doc:`/core-utility-libraries/inflector` for more
-information.
+You can use the utility library :php:class:`Cake\\Utility\\Inflector` to check
+the singular/plural of words. See the :doc:`/core-utility-libraries/inflector`
+for more information.
 
 Field names with two or more words are underscored like,
 first\_name.
@@ -168,25 +167,25 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/app/View/People/get\_ready.ctp.
+/App/View/People/get\_ready.ctp.
 
 The basic pattern is
-/app/View/Controller/underscored\_function\_name.ctp.
+/App/View/Controller/underscored\_function\_name.ctp.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
 of configuration. Here’s a final example that ties the conventions
 
 -  Database table: "people"
--  Model class: "Person", found at /app/Model/Person.php
+-  Model class: "Person", found at /App/Model/Person.php
 -  Controller class: "PeopleController", found at
-   /app/Controller/PeopleController.php
--  View template, found at /app/View/People/index.ctp
+   /App/Controller/PeopleController.php
+-  View template, found at /App/View/People/index.ctp
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the index() function
 of the PeopleController, where the Person model is automatically
-available (and automatically tied to the ‘people’ table in the
+available (and automatically tied to the 'people' table in the
 database), and renders to a file. None of these relationships have
 been configured by any means other than by creating classes and
 files that you’d need to create anyway.

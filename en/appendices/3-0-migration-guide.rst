@@ -17,6 +17,20 @@ Requirements
 
     CakePHP 3.0 will not work if you do not meet the above requirements.
 
+Application directory layout
+============================
+
+The application directory layout has changed to better implement PSR-0. You
+should use the `cakephp-app <https://github.com/cakephp/cakephp-app`_ skeleton
+project as a reference point when updating your application.
+
+CakePHP should be installed with composer
+=========================================
+
+
+Since CakePHP can no longer easily be installed via PEAR, or in a shared
+directory, those options are no longer supported.  Instead you should use
+`composer <http://getcomposer.org>`_ to install CakePHP into your application.
 
 Namespaces
 ==========
