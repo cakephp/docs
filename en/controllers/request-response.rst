@@ -352,6 +352,14 @@ CakeRequest API
 
         CakeRequest::acceptLanguage('es-es');
 
+.. php:method:: param($name)
+
+    Safely read values in ``$request->params``. This removes the need to call
+    ``isset()`` or ``empty()`` before using param values.
+
+    .. versionadded:: 2.4
+
+
 .. php:attr:: data
 
     An array of POST data. You can use :php:meth:`CakeRequest::data()`
@@ -792,13 +800,6 @@ CakeResponse API
     Allows you to set a file for display or download
 
     .. versionadded:: 2.3
-
-.. php:method:: param($name)
-
-    Safely read values in ``$request->params``. This removes the need to call
-    ``isset()`` or ``empty()`` before using param values.
-
-    .. versionadded:: 2.4
 
 .. meta::
     :title lang=en: Request and Response objects
