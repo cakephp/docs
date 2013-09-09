@@ -390,6 +390,22 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/images/view/1?height=400&width=500">View image</a>
 
+    When using named parameters, use the array syntax and include names for ALL parameters in the URL. Using the string syntax for paramters (i.e. "recipes/view/6/comments:false" will result in the colon characters being HTML escaped and the link will not work as desired.
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+        );
+
+    Will output:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/id:6/comments:false">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
     HTML special characters in ``$title`` will be converted to HTML
     entities. To disable this conversion, set the escape option to
     false in the ``$options`` array.::
