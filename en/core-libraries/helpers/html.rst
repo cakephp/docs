@@ -390,7 +390,11 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/images/view/1?height=400&width=500">View image</a>
 
-    When using named parameters, use the array syntax and include names for ALL parameters in the URL. Using the string syntax for paramters (i.e. "recipes/view/6/comments:false" will result in the colon characters being HTML escaped and the link will not work as desired.
+    When using named parameters, use the array syntax and include
+    names for ALL parameters in the URL. Using the string syntax for
+    paramters (i.e. "recipes/view/6/comments:false" will result in
+    the colon characters being HTML escaped and the link will not work
+    as desired.
 
         <?php
         echo $this->Html->link(
