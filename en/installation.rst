@@ -59,7 +59,7 @@ are available at `Github tags <https://github.com/cakephp/cakephp/releases>`_.
 Using composer
 --------------
 
-You can use `composer`_ to install CakePHP using the ``cakephp-app`` package.
+You can use `composer`_ to install CakePHP using the ``cakephp/app`` package.
 First you'll need to download and install composer if you haven't done so
 already::
 
@@ -68,14 +68,14 @@ already::
 Assuming you've downloaded and installed composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project cakephp/cakephp-app
+    php composer.phar create-project cakephp/app
 
 This will download the CakePHP skeleton application and install CakePHP.
 
 Using git & github
 ------------------
 
-You can fork and or clone the ``cakephp-app`` project using git + github. This
+You can fork and or clone the ``cakephp/app`` project using git + github. This
 will allow you to easily contribute changes back to the application skeleton.
 
 Keeping up to date with the latest CakePHP changes
