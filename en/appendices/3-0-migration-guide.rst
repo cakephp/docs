@@ -21,7 +21,7 @@ Application directory layout
 ============================
 
 The application directory layout has changed to better implement PSR-0. You
-should use the `cakephp-app <https://github.com/cakephp/cakephp-app`_ skeleton
+should use the `app skeleton <https://github.com/cakephp/app`_
 project as a reference point when updating your application.
 
 CakePHP should be installed with composer
