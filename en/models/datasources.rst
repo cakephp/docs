@@ -297,4 +297,9 @@ and refer to it using the plugin notation::
 Connecting to SQL Server
 ==================
 
-If the SQL Server version is SQL Express the Sqlserver Datasource may error out. The SQL Server PHP Extensions and SQL Server Native Client are required in order to connect. Both are free downloads from Microsoft.
+If the Sqlserver Datasource errors out.
+
+    Error: Database connection "Sqlserver" is missing, or could not be created.
+
+The SQL Server PHP Extensions and SQL Server Native Client are required in order to connect. 
+Both are free downloads from Microsoft.
