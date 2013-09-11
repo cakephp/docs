@@ -297,9 +297,12 @@ and refer to it using the plugin notation::
 Connecting to SQL Server
 ==================
 
-If the Sqlserver Datasource errors out.
+If the Sqlserver Datasource errors out:
 
     Error: Database connection "Sqlserver" is missing, or could not be created.
 
-The SQL Server PHP Extensions and SQL Server Native Client are required in order to connect. 
+A potential cause may be the SQL Server PHP extensions or the SQL Server Native Client are not installed.
+
+The SQL Server PHP Extensions must be installed for the connection methods to be available.
+The SQL Server Native Client must be installed for the ODBC connector dependancies.
 Both are free downloads from Microsoft.
