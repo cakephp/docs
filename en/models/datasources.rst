@@ -293,3 +293,8 @@ and refer to it using the plugin notation::
 .. meta::
     :title lang=en: DataSources
     :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+
+Connecting to SQL Server
+==================
+
+If the SQL Server version is SQL Express the Sqlserver Datasource may error out. The SQL Server PHP Extensions and SQL Server Native Client are required in order to connect. Both are free downloads from Microsoft.
