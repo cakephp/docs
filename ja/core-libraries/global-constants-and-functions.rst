@@ -1,7 +1,7 @@
 .. Global Constants and Functions
 
 グローバル定数およびグローバル関数
-#############################
+##################################
 
 ..
     While most of your day-to-day work in CakePHP will be utilizing
@@ -21,10 +21,12 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     directories in your CakePHP application.
 
 また、CakePHP のアプリケーションで利用可能な定数も同時におさえておきましょう。
-これらの定数を用いることはよりスムースなアップグレードの助けになるだけでなく、CakePHPアプリケーション内の特定のファイルやディレクトリを指し示す便利なやり方にもなります。
+これらの定数を用いることはよりスムースなアップグレードの助けになるだけでなく、CakePHPアプリケーション内の特定のファイルやディレクトリを指し示す便利なやり方でもあります。
 
-Global Functions
-================
+.. Global Functions
+
+グローバル関数
+==============
 
 ..
     Here are CakePHP's globally available functions. Most of them
@@ -240,174 +242,269 @@ Global Functions
 
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
-    Convenience wrapper for ``htmlspecialchars()``.
+    .. Convenience wrapper for ``htmlspecialchars()``.
+
+    ``htmlspecialchars()`` の便利なラッパー。
 
 .. php:function:: LogError(string $message)
 
-    Shortcut to :php:meth:`Log::write()`.
+    .. Shortcut to :php:meth:`Log::write()`.
+
+    :php:meth:`Log::write()` へのショートカット
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and classname. If $name
-    does not have a dot, then index 0 will be null.
+    ..
+        Splits a dot syntax plugin name into its plugin and classname. If $name
+        does not have a dot, then index 0 will be null.
 
-    Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
+    ドット記法されたプラグイン名をプラグインとクラス名に分離します。
+    $name にドットが含まれない場合、インデクスが 0 の箇所は null になります。
+
+    .. Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
+
+    一般にこんな具合に使われます ``list($plugin, $name) = pluginSplit('Users.User');``
 
 .. php:function:: pr(mixed $var)
 
-    Convenience wrapper for ``print_r()``, with the addition of
-    wrapping <pre> tags around the output.
+    ..
+        Convenience wrapper for ``print_r()``, with the addition of
+        wrapping <pre> tags around the output.
+
+    出力を <pre> タグでラップする機能を追加した ``print_r()`` の便利なラッパー。
 
 .. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
 
-    Sorts given $array by key $sortby.
+    .. Sorts given $array by key $sortby.
+
+    与えられた $array を $sortby キーによってソートします。
 
 .. php:function:: stripslashes_deep(array $value)
 
-    Recursively strips slashes from the supplied ``$value``. Returns
-    the modified array.
+    ..
+        Recursively strips slashes from the supplied ``$value``. Returns
+        the modified array.
 
-Core Definition Constants
-=========================
+    与えられた ``$value`` から、再帰的にスラッシュを取り除きます。
+    変換された配列を返します。
 
-Most of the following constants refer to paths in your application.
+.. Core Definition Constants
+
+コア定義定数
+============
+
+.. Most of the following constants refer to paths in your application.
+
+以下のほとんどの定数はあなたのアプリケーション内部のパスへの参照です。
 
 .. php:const:: APP
 
-   Path to the application's directory.
+    ..
+        Path to the application's directory.
+
+    アプリケーションディレクトリへのパス。
 
 .. php:const:: APP_DIR
 
-    Equals ``app`` or the name of your application directory.
+    ..
+        Equals ``app`` or the name of your application directory.
+
+    あなたのアプリケーションのディレクトリ名。``app`` かも知れません。
 
 .. php:const:: APPLIBS
 
-    Path to the application's Lib directory.
+    ..
+        Path to the application's Lib directory.
+
+    アプリケーションの Lib ディレクトリへのパス
 
 .. php:const:: CACHE
 
-    Path to the cache files directory. It can be shared between hosts in a
-    multi-server setup.
+    ..
+        Path to the cache files directory. It can be shared between hosts in a
+        multi-server setup.
+
+    キャッシュファイルディレクトリへのパス。
+    複数サーバーをセットアップした際のホスト間で共有できます。
 
 .. php:const:: CAKE
 
-    Path to the cake directory.
+    ..
+        Path to the cake directory.
+
+    cake ディレクトリへのパス。
 
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
-    Path to the root lib directory.
+    ..
+        Path to the root lib directory.
+
+    ルートの lib ディレクトリへのパス。
 
 .. php:const:: CORE_PATH
 
-   Path to the root directory with ending directory slash.
+    ..
+        Path to the root directory with ending directory slash.
+
+    ルートディレクトリへの、末尾にディレクトリスラッシュを付加したパス。
 
 .. php:const:: CSS
 
-    Path to the public CSS directory.
+    ..
+        Path to the public CSS directory.
+
+    public CSS ディレクトリへのパス。
 
 .. php:const:: CSS_URL
 
-    Web path to the CSS files directory.
+    ..
+        Web path to the CSS files directory.
+
+    CSS ファイル・ディレクトリへの Webパス。
 
     .. deprecated:: 2.4
         Use config value ``App.cssBaseUrl`` instead.
 
 .. php:const:: DS
 
-    Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+    .. Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+
+    PHP の DIRECTORY\_SEPARATOR (Linux の場合は / windows の場合は \\) のショートカット。
 
 .. php:const:: FULL_BASE_URL
 
-    Full url prefix. Such as ``https://example.com``
+    .. Full url prefix. Such as ``https://example.com``
+
+    ``https://example.com`` のような完全なURLプリフィクス
 
     .. deprecated:: 2.4
         This constant is deprecated, you should use :php:meth:`Router::fullbaseUrl()` instead.
 
 .. php:const:: IMAGES
 
-    Path to the public images directory.
+    .. Path to the public images directory.
+
+    画像の公開ディレクトリへのパス。
 
 .. php:const:: IMAGES_URL
 
-    Web path to the public images directory.
+    .. Web path to the public images directory.
+
+    画像の公開ディレクトリへのWebパス。
 
     .. deprecated:: 2.4
         Use config value ``App.imageBaseUrl`` instead.
 
 .. php:const:: JS
 
-    Path to the public JavaScript directory.
+    .. Path to the public JavaScript directory.
+
+    JavaScript の公開ディレクトリへのパス。
 
 .. php:const:: JS_URL
 
-    Web path to the js files directory.
+    .. Web path to the js files directory.
+
+    JavaScript の公開ディレクトリへのWebパス。
 
     .. deprecated:: 2.4
         Use config value ``App.jsBaseUrl`` instead.
 
 .. php:const:: LOGS
 
-    Path to the logs directory.
+    .. Path to the logs directory.
+
+    ログディレクトリへのパス。
 
 .. php:const:: ROOT
 
-    Path to the root directory.
+    .. Path to the root directory.
+
+    ルートディレクトリへのパス。
 
 .. php:const:: TESTS
 
-    Path to the tests directory.
+    .. Path to the tests directory.
+
+    テストディレクトリへのパス。
 
 .. php:const:: TMP
 
-    Path to the temporary files directory.
+    .. Path to the temporary files directory.
+
+    一時ファイルディレクトリへのパス。
 
 .. php:const:: VENDORS
 
-    Path to the vendors directory.
+    .. Path to the vendors directory.
+
+    ベンダーディレクトリへのパス。
 
 .. php:const:: WEBROOT_DIR
 
-    Equals ``webroot`` or the name of your webroot directory.
+    .. Equals ``webroot`` or the name of your webroot directory.
+
+    あなたのウェブルートディレクトリの名前。``webroot`` かも知れません。
 
 .. php:const:: WWW\_ROOT
 
-    Full path to the webroot.
+    .. Full path to the webroot.
+
+    ウェブルートへのフルパス。
 
 
-Timing Definition Constants
-===========================
+.. Timing Definition Constants
+
+時間にまつわる定数
+==================
 
 .. php:const:: TIME_START
 
-    Unix timestamp in microseconds as a float from when the application started.
+    ..    Unix timestamp in microseconds as a float from when the application started.
+
+    アプリケーションが開始された時点の、浮動小数点マイクロ秒での UNIX タイムスタンプ
 
 .. php:const:: SECOND
 
-    Equals 1
+    ..    Equals 1
+
+    1 と等しい
 
 .. php:const:: MINUTE
 
-    Equals 60
+    ..    Equals 60
+
+    60 と等しい
 
 .. php:const:: HOUR
 
-    Equals 3600
+    ..    Equals 3600
+
+    3600 と等しい
 
 .. php:const:: DAY
 
-    Equals 86400
+    ..    Equals 86400
+
+    86400 と等しい
 
 .. php:const:: WEEK
 
-    Equals 604800
+    ..    Equals 604800
+
+    604800 と等しい
 
 .. php:const:: MONTH
 
-    Equals 2592000
+    ..    Equals 2592000
+
+    2592000 と等しい
 
 .. php:const:: YEAR
 
-    Equals 31536000
+    ..    Equals 31536000
+
+    31536000 と等しい
 
 
 .. meta::
