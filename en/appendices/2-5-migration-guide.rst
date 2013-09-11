@@ -65,3 +65,13 @@ Security
 - :php:meth:`Security::encrypt()` and :php:meth:`Security::decrypt()` were
   added. These methods expose a very simple API to access AES-256 symmetric encryption.
   They should be used in favour of the ``cipher()`` and ``rijndael()`` methods.
+
+
+View
+====
+
+View
+----
+
+- :php:meth:`View::get()` now accepts a second argument to provide a default
+  value.
