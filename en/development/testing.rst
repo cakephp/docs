@@ -747,7 +747,7 @@ the redirect.  For example::
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    return $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'index'));
                 }
             }
             // more code
