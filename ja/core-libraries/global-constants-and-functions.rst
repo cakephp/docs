@@ -63,7 +63,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
         より詳しい情報は
         :doc:`/core-libraries/internationalization-and-localization`
-        のセクションをチェックアウトして下さい。
+        のセクションを確認して下さい。
 
 .. php:function:: __c(string $msg, integer $category, mixed $args = null)
 
@@ -250,7 +250,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     .. Shortcut to :php:meth:`Log::write()`.
 
-    :php:meth:`Log::write()` へのショートカット
+    :php:meth:`Log::write()` へのショートカット。
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
@@ -316,7 +316,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     ..
         Path to the application's Lib directory.
 
-    アプリケーションの Lib ディレクトリへのパス
+    アプリケーションの Lib ディレクトリへのパス。
 
 .. php:const:: CACHE
 
@@ -363,7 +363,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     CSS ファイル・ディレクトリへの Webパス。
 
     .. deprecated:: 2.4
-        Use config value ``App.cssBaseUrl`` instead.
+        代わりに設定値の ``App.cssBaseUrl`` を使用して下さい。
 
 .. php:const:: DS
 
@@ -375,10 +375,10 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     .. Full url prefix. Such as ``https://example.com``
 
-    ``https://example.com`` のような完全なURLプリフィクス
+    ``https://example.com`` のような完全なURLプリフィクス。
 
     .. deprecated:: 2.4
-        This constant is deprecated, you should use :php:meth:`Router::fullbaseUrl()` instead.
+        この定数は廃止されたので、代わりに :php:meth:`Router::fullbaseUrl()` を使用する必要があります。
 
 .. php:const:: IMAGES
 
@@ -393,7 +393,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     画像の公開ディレクトリへのWebパス。
 
     .. deprecated:: 2.4
-        Use config value ``App.imageBaseUrl`` instead.
+        代わりに設定値の ``App.imageBaseUrl`` を使用して下さい。
 
 .. php:const:: JS
 
@@ -408,7 +408,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     JavaScript の公開ディレクトリへのWebパス。
 
     .. deprecated:: 2.4
-        Use config value ``App.jsBaseUrl`` instead.
+        代わりに設定値の ``App.jsBaseUrl`` を使用して下さい。
 
 .. php:const:: LOGS
 
@@ -455,14 +455,14 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
 .. Timing Definition Constants
 
-時間にまつわる定数
-==================
+時間定義定数
+============
 
 .. php:const:: TIME_START
 
     ..    Unix timestamp in microseconds as a float from when the application started.
 
-    アプリケーションが開始された時点の、浮動小数点マイクロ秒での UNIX タイムスタンプ
+    アプリケーションが開始された時点の、浮動小数点マイクロ秒での UNIX タイムスタンプ。
 
 .. php:const:: SECOND
 
