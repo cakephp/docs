@@ -43,7 +43,7 @@ application CakePHP ressemblerait à ce qui suit::
             }
         ],
         "require": {
-            "pear-cakephp/cakephp": ">=2.3.4"
+            "pear-cakephp/cakephp": ">=2.4.0"
         },
         "config": {
             "vendor-dir": "Vendor/"

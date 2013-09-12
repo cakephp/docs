@@ -31,6 +31,12 @@ and how to create our own.
 In essence, Behaviors are
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ with callbacks.
 
+There are a number of Behaviors included in CakePHP. To find out more about each
+one, reference the chapters below:
+
+.. include:: /core-libraries/toc-behaviors.rst
+    :start-line: 10
+
 Using Behaviors
 ===============
 
@@ -142,8 +148,9 @@ Creating Behaviors
 
 Behaviors that are attached to Models get their callbacks called
 automatically. The callbacks are similar to those found in Models:
-``beforeFind``, ``afterFind``, ``beforeSave``, ``afterSave``, ``beforeDelete``,
-``afterDelete`` and ``onError`` - see
+``beforeFind``, ``afterFind``, ``beforeValidate``, ``afterValidate``,
+``beforeSave``, ``afterSave``, ``beforeDelete``, ``afterDelete`` and
+``onError`` - see
 :doc:`/models/callback-methods`.
 
 Your behaviors should be placed in ``app/Model/Behavior``.  They are named in CamelCase and
@@ -254,9 +261,10 @@ and augment the parameters or splice in additional behavior.
 
 All behavior callbacks are fired **before** the model/behavior callbacks are:
 
--  ``beforeValidate``
 -  ``beforeFind``
 -  ``afterFind``
+-  ``beforeValidate``
+-  ``afterValidate``
 -  ``beforeSave``
 -  ``afterSave``
 -  ``beforeDelete``
@@ -290,11 +298,34 @@ model that the behavior method was invoked on.
     Returning an array will augment the query parameters used for the
     find operation.
 
-.. php:method:: afterFind(Model $Model, mixed $results, boolean $primary)
+.. php:method:: afterFind(Model $Model, mixed $results, boolean $primary = false)
 
     You can use the afterFind to augment the results of a find. The
     return value will be passed on as the results to either the next
     behavior in the chain or the model's afterFind.
+
+.. php:method:: beforeValidate(Model $Model, array $options = array())
+
+    You can use beforeValidate to modify a model's validate array or
+    handle any other pre-validation logic. Returning false from a
+    beforeValidate callback will abort the validation and cause it to
+    fail.
+
+.. php:method:: afterValidate(Model $Model)
+
+    You can use afterValidate to perform any data cleanup or preparation
+    if needed.
+
+.. php:method:: beforeSave(Model $Model, array $options = array())
+
+    You can return false from a behavior's beforeSave to abort the
+    save. Return true to allow it continue.
+
+.. php:method:: afterSave(Model $Model, boolean $created, array $options = array())
+
+    You can use afterSave to perform clean up operations related to
+    your behavior. $created will be true when a record is created, and
+    false when a record is updated.
 
 .. php:method:: beforeDelete(Model $Model, boolean $cascade = true)
 
@@ -305,24 +336,6 @@ model that the behavior method was invoked on.
 
     You can use afterDelete to perform clean up operations related to
     your behavior.
-
-.. php:method:: beforeSave(Model $Model)
-
-    You can return false from a behavior's beforeSave to abort the
-    save. Return true to allow it continue.
-
-.. php:method:: afterSave(Model $Model, boolean $created)
-
-    You can use afterSave to perform clean up operations related to
-    your behavior. $created will be true when a record is created, and
-    false when a record is updated.
-
-.. php:method:: beforeValidate(Model $Model)
-
-    You can use beforeValidate to modify a model's validate array or
-    handle any other pre-validation logic. Returning false from a
-    beforeValidate callback will abort the validation and cause it to
-    fail.
 
 
 

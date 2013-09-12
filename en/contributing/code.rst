@@ -2,7 +2,7 @@ Code
 ####
 
 Patches and pull requests are the best ways to contribute code back to CakePHP.
-Patches can be either attached to tickets in `lighthouse
+Patches can be attached to tickets in `lighthouse
 <http://cakephp.lighthouseapp.com>`_. Pull requests can be created in github,
 and are generally a better way to contribute code.
 

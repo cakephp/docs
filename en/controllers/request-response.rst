@@ -19,7 +19,7 @@ CakeRequest
 a number of features for interrogating and interacting with request data.
 On each request one CakeRequest is created and then passed by reference to the various
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
-``$this->request``, and is available in Controllers, Views and Helpers.  You can
+``$this->request``, and is available in Controllers, Views and Helpers. You can
 also access it in Components by using the controller reference. Some of the duties
 ``CakeRequest`` performs include:
 
@@ -351,6 +351,14 @@ CakeRequest API
     Check if a specific language is accepted::
 
         CakeRequest::acceptLanguage('es-es');
+
+.. php:method:: param($name)
+
+    Safely read values in ``$request->params``. This removes the need to call
+    ``isset()`` or ``empty()`` before using param values.
+
+    .. versionadded:: 2.4
+
 
 .. php:attr:: data
 
@@ -792,13 +800,6 @@ CakeResponse API
     Allows you to set a file for display or download
 
     .. versionadded:: 2.3
-
-.. php:method:: param($name)
-
-    Safely read values in ``$request->params``. This removes the need to call
-    ``isset()`` or ``empty()`` before using param values.
-
-    .. versionadded:: 2.4
 
 .. meta::
     :title lang=en: Request and Response objects

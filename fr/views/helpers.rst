@@ -12,7 +12,10 @@ CakePHP dispose d'un certain nombre de helpers qui aident à la création des
 vues. Ils aident à la création de balises bien-formatées (y compris les
 formulaires), aident à la mise en forme du texte, les durées et les nombres,
 et peuvent même accélérer la fonctionnalité Ajax. Pour plus d'informations sur
-les helpers inclus dans CakePHP, allez voir :ref:`core-helpers`.
+les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
+
+.. include:: /core-libraries/toc-helpers.rst
+    :start-line: 11
 
 .. _configuring-helpers:
 
@@ -302,38 +305,6 @@ Callbacks
 
     Est appelé après que le rendu du layout est fini. Reçoit le nom du fichier
     layout en argument.
-
-Helpers du coeur
-================
-
-:doc:`/core-libraries/helpers/cache`
-    Utilisé par le coeur pour mettre en cache le contenu de la vue.
-:doc:`/core-libraries/helpers/form`
-    Créé les formulaires HTML et les éléments du formulaire qui gèrent
-    eux-mêmes les problèmes de validation.
-:doc:`/core-libraries/helpers/html`
-    Méthodes bien pratiques pour des balises bien formatées. Les images,
-    les liens, les tables, les balises d'en-tête etc ....
-:doc:`/core-libraries/helpers/js`
-    Utilisé pour créer du Javascript compatible avec de nombreuses librairies
-    Javascript.
-:doc:`/core-libraries/helpers/number`
-    Formate les nombres et les monnaies.
-:doc:`/core-libraries/helpers/paginator`
-    Pagination et tri à partir des données de Models.
-:doc:`/core-libraries/helpers/rss`
-    Méthodes bien pratiques pour la sortie de contenu RSS et de données XML.
-:doc:`/core-libraries/helpers/session`
-    Accès pour la lecture des valeurs de session dans les vues.
-:doc:`/core-libraries/helpers/text`
-    Mise en lien intelligente, mise en évidence, truchement intelligent des
-    mots.
-:doc:`/core-libraries/helpers/time`
-    Détection de proximité (Est-ce l'année prochaine?), formatage sympa des
-    chaînes de caractère (Today, 10:30 am) et conversion entre les zones de
-    temps.
-
-
 
 .. meta::
     :title lang=fr: Helpers (Assistants)
