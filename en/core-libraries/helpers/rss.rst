@@ -152,7 +152,7 @@ associative array into an element for each key value pair.
         );
 
         // Remove & escape any HTML to make sure the feed content will validate.
-        $bodyText = h(strip_tags($bodyText));
+        $bodyText = h(strip_tags($post['Post']['body']));
         $bodyText = $this->Text->truncate($bodyText, 400, array(
             'ending' => '...',
             'exact'  => true,
