@@ -283,11 +283,8 @@ devrait ressembler à::
 
         // détruit une session.
         public function destroy($id) {
-            $result = Cache::delete($id, $this->cacheKey);
-            if ($result) {
-                return parent::destroy($id);
-            }
-            return false;
+            Cache::delete($id, $this->cacheKey);
+            return parent::destroy($id);
         }
 
         // retire les sessions expirées.
