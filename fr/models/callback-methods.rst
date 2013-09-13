@@ -13,15 +13,15 @@ les callbacks des behaviors sont lancés **avant** les callbacks des models.
 beforeFind
 ==========
 
-``beforeFind(array $queryData)``
+``beforeFind(array $query)``
 
-Appelée avant toute opération liée à la recherche. Les ``$queryData``
+Appelée avant toute opération liée à la recherche. Les ``$query``
 passées à cette méthode de callback contiennent des informations sur
 la requête courante : conditions, champs, etc.
 
 Si vous ne souhaitez pas que l'opération de recherche commence (par
-rapport à une décision liée aux options de ``$queryData``), retournez
-*false*. Autrement, retournez la variable ``$queryData`` éventuellement
+rapport à une décision liée aux options de ``$query``), retournez
+*false*. Autrement, retournez la variable ``$query`` éventuellement
 modifiée, ou tout ce que vous souhaitez voir passé à la méthode find()
 ou ses équivalents.
 
@@ -96,6 +96,14 @@ soient validées ou pour modifier les règles de validation si nécessaire.
 Cette fonction doit aussi retourner *true*, sinon l'exécution du save()
 courant sera annulée.
 
+afterValidate
+==============
+
+``afterValidate()``
+
+Appelée après que la donnée a été vérifiée pour les erreurs. Utilisez ce
+callback pour lancer un nettoyage de données ou préparer des données si besoin. 
+
 beforeSave
 ==========
 
@@ -140,13 +148,15 @@ facilement modifié. Utilisez le code ci-dessous dans le model approprié.
 afterSave
 =========
 
-``afterSave(boolean $created)``
+``afterSave(boolean $created, array $options = array())``
 
 Si vous avez besoin d'exécuter de la logique juste après chaque opération de
 sauvegarde, placez-la dans cette méthode de rappel.
 
 La valeur de ``$created`` sera true si un nouvel objet a été créé
-(plutôt qu'un objet mis à jour). 
+(plutôt qu'un objet mis à jour).
+
+Le tableau ``$options`` est le même que celui passé dans ``Model::save()``.
 
 beforeDelete
 ============
