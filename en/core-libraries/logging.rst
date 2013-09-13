@@ -223,11 +223,19 @@ CakeLog::write()::
     $this->log("Something did not work!", 'debug');
 
 All configured log streams are written to sequentially each time
-:php:meth:`CakeLog::write()` is called. You do not need to configure a
-stream in order to use logging. If no streams are configured when
-the log is written to, a ``default`` stream using the core
-``FileLog`` class will be configured to output into
-``app/tmp/logs/`` just as CakeLog did in previous versions.
+:php:meth:`CakeLog::write()` is called.
+
+... versionchanged:: 2.5
+
+CakeLog does not auto-configure itself anymore. As a result log files will not be
+auto-created anymore if no stream is listening.
+Make sure you got at least one ``default`` stream set up if you want to
+listen to all types and levels. Usually, you can just set the core ``FileLog`` class
+to output into ``app/tmp/logs/``::
+
+    CakeLog::config('default', array(
+        'engine' => 'File'
+    ));
 
 .. _logging-scopes:
 

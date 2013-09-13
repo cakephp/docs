@@ -66,6 +66,15 @@ Security
   added. These methods expose a very simple API to access AES-256 symmetric encryption.
   They should be used in favour of the ``cipher()`` and ``rijndael()`` methods.
 
+Logging
+=======
+
+FileLog
+-------
+
+- CakeLog does not auto-configure itself anymore. As a result log files will not be auto-created
+  anymore if no stream is listening. So make sure you got at least one default engine set up
+  if you want to listen to all types and levels.
 
 View
 ====
