@@ -247,26 +247,26 @@ the log messages will be directed to those loggers.  If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
-    // configure tmp/logs/shops.log to receive all types (log levels), but only
-    // those with `orders` and `payments` scope
-    CakeLog::config('shops', array(
+    // Configure tmp/logs/shop.log to receive the two configured types (log levels), but only
+    // those with `orders` and `payments` as scope
+    CakeLog::config('shop', array(
         'engine' => 'FileLog',
         'types' => array('warning', 'error'),
         'scopes' => array('orders', 'payments'),
-        'file' => 'shops.log',
+        'file' => 'shop.log',
     ));
 
-    // configure tmp/logs/payments.log to receive all types, but only
-    // those with `payments` scope
+    // Configure tmp/logs/payments.log to receive the two configured types, but only
+    // those with `payments` as scope
     CakeLog::config('payments', array(
         'engine' => 'SyslogLog',
         'types' => array('info', 'error', 'warning'),
         'scopes' => array('payments')
     ));
 
-    CakeLog::warning('this gets written only to shops stream', 'orders');
-    CakeLog::warning('this gets written to both shops and payments streams', 'payments');
-    CakeLog::warning('this gets written to both shops and payments streams', 'unknown');
+    CakeLog::warning('This gets written only to shops stream', 'orders');
+    CakeLog::warning('This gets written to both shops and payments streams', 'payments');
+    CakeLog::warning('This gets written to both shops and payments streams', 'unknown');
 
 In order for scopes to work correctly, you **must** define the accepted
 ``types`` on all loggers you want to use scopes with.
