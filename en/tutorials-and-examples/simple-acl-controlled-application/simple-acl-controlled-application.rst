@@ -164,8 +164,7 @@ AuthComponent will expect that your passwords are hashed.  In
     }
 
 Next we need to make some modifications to ``AppController``. If
-you don't have ``/app/Controller/AppController.php``, create it. Note that
-this goes in /app/Controller/, not /app/app_controllers.php. Since we want our entire
+you don't have ``/app/Controller/AppController.php``, create it. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
 ``AppController``::
 
