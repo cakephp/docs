@@ -298,10 +298,10 @@ to multiple directories with the following::
 View and plugin paths
 ---------------------
 
-View files and Plugins are classes themselves. Since they are not classes, they
-cannot have an autoloader configured. CakePHP provides two configure variables
-to setup additional paths for these resources. In your ``App/Config/app.php``
-you can set these variables::
+Since views and plugins are not classes, they cannot have an autoloader
+configured. CakePHP provides two configure variables to setup additional paths
+for these resources. In your ``App/Config/app.php`` you can set these
+variables::
 
     $config = [
         // More configuration

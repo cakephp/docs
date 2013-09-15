@@ -60,7 +60,7 @@ Configuration in CakePHP 3.0 is significantly different than in previous
 versions. You should read the :doc:`/development/configuration` documentation
 for how configuration is done in 3.0.
 
-You can no longer use ``App::build()`` to cobfigure additional class paths.
+You can no longer use ``App::build()`` to configure additional class paths.
 Instead you should map additional paths using your application's autoloader. See
 the section on :ref:`additional-class-paths` for more information.
 
