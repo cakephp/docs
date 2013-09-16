@@ -171,10 +171,10 @@ Doctor hasOne Mentor mentors.doctor\_id
     the use of any foreignKey in your associations definitions. Nevertheless sticking
     to conventions will make your code less repetitive, easier to read and to maintain.
 
-The User model file will be saved in /app/Model/User.php. To
+The User model file will be saved in /App/Model/User.php. To
 define the ‘User hasOne Profile’ association, add the $hasOne
 property to the model class. Remember to have a Profile model in
-/app/Model/Profile.php, or the association won’t work::
+/App/Model/Profile.php, or the association won’t work::
 
     class User extends AppModel {
         public $hasOne = 'Profile';
@@ -276,7 +276,7 @@ Mentor belongsTo Doctor mentors.doctor\_id
     model(table).
 
 We can define the belongsTo association in our Profile model at
-/app/Model/Profile.php using the string syntax as follows::
+/App/Model/Profile.php using the string syntax as follows::
 
     class Profile extends AppModel {
         public $belongsTo = 'User';
@@ -372,7 +372,7 @@ Product hasMany Option  Option.product\_id
 ======================= ==================
 
 We can define the hasMany association in our User model at
-/app/Model/User.php using the string syntax as follows::
+/App/Model/User.php using the string syntax as follows::
 
     class User extends AppModel {
         public $hasMany = 'Comment';

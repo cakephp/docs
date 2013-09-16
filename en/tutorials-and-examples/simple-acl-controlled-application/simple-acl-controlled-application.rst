@@ -164,8 +164,8 @@ AuthComponent will expect that your passwords are hashed.  In
     }
 
 Next we need to make some modifications to ``AppController``. If
-you don't have ``/app/Controller/AppController.php``, create it. Note that
-this goes in /app/Controller/, not /app/app_controllers.php. Since we want our entire
+you don't have ``/App/Controller/AppController.php``, create it. Note that
+this goes in /App/Controller/, not /App/app_controllers.php. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
 ``AppController``::
 
@@ -228,7 +228,7 @@ to dropping and creating the tables.
 
 If you don't have shell access, or are having trouble using the
 console, you can run the sql file found in
-/path/to/app/Config/Schema/db\_acl.sql.
+/path/to/App/Config/Schema/db\_acl.sql.
 
 With the controllers setup for data entry, and the Acl tables
 initialized we are ready to go right? Not entirely, we still have a

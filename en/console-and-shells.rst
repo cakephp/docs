@@ -53,23 +53,23 @@ available systemwide.
 
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP Console
     ---------------------------------------------------------------
-    App : app
-    Path: /path/to/cakephp/app/
+    App : App
+    Path: /path/to/cakephp/App/
     ---------------------------------------------------------------
     Current Paths:
 
-     -app: app
-     -working: /path/to/cakephp/app
-     -root: /path/to/cakephp/
-     -core: /path/to/cakephp/core
+     -app: App
+     -working: /path/to/cakephp/App
+     -root: /path/to/cakephp
+     -core: /path/to/cakephp/vendor/cakephp/cakephp
 
     Changing Paths:
 
     your working path should be the same as your application path
     to change your path use the '-app' param.
-    Example: -app relative/path/to/cakephp/app or -app /absolute/path/to/cakephp/app
+    Example: -app relative/path/to/cakephp/App or -app /absolute/path/to/cakephp/App
 
     Available Shells:
 
@@ -94,7 +94,7 @@ path as the first argument to the cake command. This next example
 shows how to specify an app folder, assuming you’ve already added
 the console folder to your ``PATH``::
 
-    $ cake -app /path/to/cakephp/app
+    $ cake -app /path/to/cakephp/App
 
 The path supplied can be relative to the current working directory
 or supplied as an absolute path.
@@ -153,10 +153,10 @@ directory, run::
 
 You should see the following output::
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/Sites/cake_dev/app/
+    Path: /Users/markstory/Sites/cake_dev/App/
     ---------------------------------------------------------------
     Hello world.
 
@@ -849,7 +849,7 @@ Shell API
 .. php:method:: dispatchShell()
 
     Dispatch a command to another Shell. Similar to
-    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` but intended for running shells 
+    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` but intended for running shells
     from other shells.
 
     See :ref:`invoking-other-shells-from-your-shell`.

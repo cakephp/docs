@@ -343,6 +343,18 @@ ControllerTestCase
 View
 ====
 
+View folders renamed
+-------------------------
+
+The following View folders have been renamed to avoid naming collisions with controller names:
+
+- ``Layouts`` is now ``Layout``
+- ``Elements`` is now ``Element``
+- ``Scaffolds`` is now ``Scaffold``
+- ``Errors`` is now ``Error``
+- ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
+
+
 HelperCollection replaced
 -------------------------
 

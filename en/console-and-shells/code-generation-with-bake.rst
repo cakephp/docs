@@ -17,9 +17,9 @@ execute rights on the cake bash script or call it using ./cake
 bake. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
-enabled (eg: MySQL) Users also might have issues if the 
+enabled (eg: MySQL) Users also might have issues if the
 database host is 'localhost' and should try '127.0.0.1' instead.
-This could cause issues with PHP CLI. 
+This could cause issues with PHP CLI.
 
 When running Bake for the first time, you'll be prompted to create
 a Database Configuration file, if you haven't created one already.
@@ -30,8 +30,8 @@ will present you with the following options:
 ::
 
     ---------------------------------------------------------------
-    App : app
-    Path: /path-to/project/app
+    App : App
+    Path: /path-to/project/App
     ---------------------------------------------------------------
     Interactive Bake Shell
     ---------------------------------------------------------------
@@ -44,7 +44,7 @@ will present you with the following options:
     [T]est case
     [Q]uit
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >  
+    >
 
 Alternatively, you can run any of these commands directly from the
 command line::

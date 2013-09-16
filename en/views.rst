@@ -31,11 +31,11 @@ serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP.
 
-View files are stored in ``/app/View/``, in a folder named after the
+View files are stored in ``/App/View/``, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
-``/app/View/Products/view.ctp``.
+``/App/View/Products/view.ctp``.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
@@ -227,7 +227,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // in app/View/Layouts/default.ctp
+    // in app/View/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -296,12 +296,12 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-CakePHP's default layout is located at ``/app/View/Layouts/default.ctp``.
+CakePHP's default layout is located at ``/App/View/Layout/default.ctp``.
 If you want to change the overall look of your application, then this is
 the right place to start, because controller-rendered view code is placed
 inside of the default layout when the page is rendered.
 
-Other layout files should be placed in ``/app/View/Layouts``.
+Other layout files should be placed in ``/App/View/Layout``.
 When you create a layout, you need to tell CakePHP where to place
 the output of your views. To do so, make sure your layout includes a
 place for ``$this->fetch('content')`` Here's an example of what a default layout
@@ -374,7 +374,7 @@ You can also set the title_for_layout variable from inside the view file::
     $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
-``app/View/Layouts`` directory, and switch between them inside of your
+``app/View/Layout`` directory, and switch between them inside of your
 controller actions using the controller or view's
 :php:attr:`~View::$layout` property::
 
@@ -447,7 +447,7 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the ``/app/View/Elements/`` folder, and have the .ctp
+Elements live in the ``/App/View/Element/`` folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 
@@ -466,10 +466,10 @@ argument::
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that :php:meth:`Controller::set()` in
 the controller works with view files). In the above example, the
-``/app/View/Elements/helpbox.ctp`` file can use the ``$helptext``
+``/App/View/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
-    // inside app/View/Elements/helpbox.ctp
+    // inside app/View/Element/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
@@ -686,8 +686,7 @@ To call any view method use ``$this->method()``
     directly to the layout. Keep in mind that scripts added from the
     layout, or elements in the layout will not be added to
     ``$scripts_for_layout``. This method is most often used from inside
-    helpers, like the :doc:`/core-libraries/helpers/js` and
-    :doc:`/core-libraries/helpers/html` Helpers.
+    helpers, like the :doc:`/core-libraries/helpers/html` Helper.
 
     .. deprecated:: 2.1
         Use the :ref:`view-blocks` features instead.
