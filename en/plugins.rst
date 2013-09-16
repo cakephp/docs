@@ -3,121 +3,124 @@ Plugins
 
 CakePHP allows you to set up a combination of controllers, models,
 and views and release them as a packaged application plugin that
-others can use in their CakePHP applications. Have a sweet user
+others can use in their CakePHP applications. Have a great user
 management module, simple blog, or web services module in one of
-your applications? Package it as a CakePHP plugin so you can pop it
-into other applications.
+your applications? Package it as a CakePHP plugin so you can reuse it
+in other applications and share with the community.
 
 The main tie between a plugin and the application it has been
 installed into, is the application's configuration (database
 connection, etc.). Otherwise, it operates in its own little space,
 behaving much like it would if it were an application on its own.
 
+In CakePHP 3.0 each plugin defines its own top-level namespace. For example
+``DebugKit``.
+
 Installing a Plugin
 ===================
 
-To install a plugin, start by simply dropping the plugin folder in
-your ``/Plugin`` folder. If you're installing a plugin named
-'ContactManager' then you should have a folder in ``/Plugin``
-named 'ContactManager' under which are the plugin's View, Model,
-Controller, webroot, and any other directories.
+Many plugins are available on the `packagist <http://packagist.org>`_
+and can be installed with ``composer``. To install DebugKit, you
+would do the following::
 
-You can either load them one by one or all of them in a single call::
+    php composer.phar require cakephp/debug_kit
 
-    CakePlugin::loadAll(); // Loads all plugins at once
-    CakePlugin::load('ContactManager'); //Loads a single plugin
+This would install the latest version of DebugKit and update your
+``composer.json``, ``composer.lock`` file, and update your autoloader. If
+the plugin you want to install is not available on packagist.org. You can clone
+or copy the plugin code into your ``/Plugin`` directory. Assuming you want to install
+a plugin named 'ContactManager', you should have a folder in ``/Plugin``
+named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
+webroot, and any other directories.
 
 
-loadAll loads all plugins available, while allowing you to set certain
-settings for specific plugins. ``load()`` works similarly, but only loads the 
+Loading a Plugin
+================
+
+After installing a plugin and setting up the autoloader, you may need to load
+the plugin. You can load plugins one by one, or all of them with a single
+method::
+
+    //Loads a single plugin
+    Plugin::load('ContactManager');
+
+    // Loads all plugins at once
+    Plugin::loadAll();
+
+``loadAll()`` loads all plugins available, while allowing you to set certain
+settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
+
+.. note::
+
+    You do *not* need to load a plugin to access components, behaviors or
+    helpers in a plugin. You *do* need to load a plugin if you need to access
+    its controllers, webroot assets or console commands.
+
 
 Plugin configuration
 ====================
 
-There is a lot you can do with the load and loadAll methods to help with
-plugin configuration and routing. Perhaps you want to load all plugins 
+There is a lot you can do with the ``load`` and ``loadAll`` methods to help with
+plugin configuration and routing. Perhaps you want to load all plugins
 automatically, while specifying custom routes and bootstrap files for
-certain plugins.
+certain plugins::
 
-No problem::
+    Plugin::loadAll([
+        'Blog' => ['routes' => true],
+        'ContactManager' => ['bootstrap' => true],
+        'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
+    ]);
 
-    Plugin::loadAll(array(
-        'Blog' => array('routes' => true),
-        'ContactManager' => array('bootstrap' => true),
-        'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
-    ));
-
-With this style of configuration, you no longer need to manually 
-include() or require() a plugin's configuration or routes file--It happens 
-automatically at the right time and place. The exact same parameters could 
+With this style of configuration, you no longer need to manually
+include() or require() a plugin's configuration or routes file--It happens
+automatically at the right time and place. The exact same parameters could
 have also been supplied to the load() method, which would have loaded only those
 three plugins, and not the rest.
 
-Finally, you can also specify a set of defaults for loadAll which will apply to
+Finally, you can also specify a set of defaults for ``loadAll`` which will apply to
 every plugin that doesn't have a more specific configuration.
 
 Load the bootstrap file from all plugins, and the routes from the Blog plugin::
-    
-    Plugin::loadAll(array(
-        array('bootstrap' => true),
-        'Blog' => array('routes' => true)
-    ));
 
+    Plugin::loadAll([
+        ['bootstrap' => true],
+        'Blog' => ['routes' => true]
+    ]);
 
 Note that all files specified should actually exist in the configured 
-plugin(s) or PHP will give warnings for each file it cannot load. This is
-especially important to remember when specifying defaults for all plugins.
+plugin(s) or PHP will give warnings for each file it cannot load. You can avoid
+potential warnings by using the ``ignoreMissing`` option::
 
-Some plugins additionally need to create one or more tables in your database. In
-those cases, they will often include a schema file which you can
-call from the cake shell like this::
+    Plugin::loadAll([
+        ['ignoreMissing' => true, 'bootstrap' => true],
+        'Blog' => ['routes' => true]
+    ]);
 
-    user@host$ cake schema create --plugin ContactManager
+By default the namespace of the Plugin should match the plugin name. If this is
+not the case, you can use the ``namespace`` option to provide a different
+namespace. For example you have a Users plugin that actually uses
+``Jose\\Users`` as its namespace::
+
+    Plugin::load('Users', ['namespace' => 'Jose\Users']);
+
+This will ensure that classnames are resolved properly when using
+:term:`plugin-syntax`.
 
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
 plugins will require more setup than others.
 
-Advanced bootstrapping
-======================
+Using plugins
+=============
 
-If you like to load more than one bootstrap file for a plugin. You can specify
-an array of files for the bootstrap configuration key::
-
-    Plugin::loadAll(array(
-        'Blog' => array(
-            'bootstrap' => array(
-                'config1',
-                'config2'
-            )
-        )
-    ));
-
-You can also specify a callable function that needs to be called when the plugin
-has been loaded::
-
-
-    function aCallableFunction($pluginName, $config) {
-        
-    }
-
-    Plugin::loadAll(array(
-        'Blog' => array(
-            'bootstrap' => 'aCallableFunction'
-        )
-    ));
-
-Using a Plugin
-==============
-
-You can reference a plugin's controllers, models, components, 
+You can reference a plugin's controllers, models, components,
 behaviors, and helpers by prefixing the name of the plugin before
 the class name.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output some pretty contact information in
-one of your views. In your controller, your $helpers array
+one of your views. In your controller, your ``$helpers`` array
 could look like this::
 
     public $helpers = array('ContactManager.ContactInfo');
@@ -145,51 +148,54 @@ basic directory structure. It should look like this::
             /View
                 /Helper
                 /Layouts
-                    
+
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
-application, and that's basically what it is. You don't actually have to
-include any of those folders if you do not use them. Some plugins might
+application, and that's basically what it is. You don't have to
+include any of the folders you are not using. Some plugins might
 only define a Component and a Behavior, and in that case they can completely
 omit the 'View' directory.
 
 A plugin can also have basically any of the other directories that your 
 application can, such as Config, Console, Lib, webroot, etc.
 
-.. note::
-
-    If you want to be able to access your plugin with a URL, defining
-    an AppController and AppModel for the plugin is required. These 
-    two special classes are named after the plugin, and extend the 
-    parent application's AppController and AppModel. Here's what they 
-    should look like for our ContactManager example:
-
-::
+If you want to be able to access your plugin with a URL, defining an
+AppController and AppModel for the plugin is required. These two special classes
+are named after the plugin, and extend the parent application's AppController
+and AppModel. Here's what they should look like for our ContactManager example::
 
     // /Plugin/ContactManager/Controller/ContactManagerAppController.php:
+    namespace ContactManager\Controller;
+
+    use App\Controller\Controller;
+
     class ContactManagerAppController extends AppController {
     }
 
     // /Plugin/ContactManager/Model/ContactManagerAppModel.php:
+    namespace ContactManager\Model;
+
+    use App\Model\AppModel;
+
     class ContactManagerAppModel extends AppModel {
     }
 
 If you forgot to define these special classes, CakePHP will hand
-you "Missing Controller" errors until you’ve done so.
+you "Missing Controller" errors until you've done so.
 
 Please note that the process of creating plugins can be greatly
 simplified by using the Cake shell.
 
 In order to bake a plugin please use the following command::
 
-    user@host$ cake bake plugin ContactManager
+    user@host$ Console/cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers::
 
-    user@host$ cake bake controller Contacts --plugin ContactManager
+    user@host$ Console/cake bake controller Contacts --plugin ContactManager
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
@@ -200,14 +206,18 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-/Plugin/ContactManager/Controller/. Since the main thing we'll 
+``/Plugin/ContactManager/Controller/``. Since the main thing we'll 
 be doing is managing contacts, we'll need a ContactsController for 
 this plugin.
 
 So, we place our new ContactsController in
-/Plugin/ContactManager/Controller and it looks like so::
+``/Plugin/ContactManager/Controller`` and it looks like so::
 
     // /Plugin/ContactManager/Controller/ContactsController.php
+    namespace ContactManager\Controller;
+
+    use ContactManager\Controller\ContactManagerAppController;
+
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
 
@@ -232,7 +242,7 @@ So, we place our new ContactsController in
     properly prepend the plugin name.
 
 If you want to access what we’ve got going thus far, visit
-/contact_manager/contacts. You should get a “Missing Model” error
+/contact_manager/contacts. You should get a "Missing Model" error
 because we don’t have a Contact model defined yet.
 
 .. _plugin-models:
@@ -240,11 +250,15 @@ because we don’t have a Contact model defined yet.
 Plugin Models
 =============
 
-Models for the plugin are stored in /app/Plugin/ContactManager/Model.
+Models for the plugin are stored in ``/Plugin/ContactManager/Model``.
 We've already defined a ContactsController for this plugin, so let's 
 create the model for that controller, called Contact::
 
     // /Plugin/ContactManager/Model/Contact.php:
+    namespace ContactManager;
+
+    use ContactManager\Model\ContactManagerAppModel;
+
     class Contact extends ContactManagerAppModel {
     }
 
@@ -260,6 +274,10 @@ Let's create that next.
 For example::
 
     // /Plugin/ContactManager/Model/Contact.php:
+    namespace ContactManager;
+
+    use ContactManager\Model\ContactManagerAppModel;
+
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
     }
@@ -268,6 +286,10 @@ If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax::
 
     // /Plugin/ContactManager/Model/Contact.php:
+    namespace ContactManager;
+
+    use ContactManager\Model\ContactManagerAppModel;
+
     class Contact extends ContactManagerAppModel {
         public $hasMany = array(
             'AltName' => array(
@@ -280,7 +302,7 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place
-them in the right folder inside of the /app/Plugin/[PluginName]/View/
+them in the right folder inside of the /Plugin/[PluginName]/View/
 folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
 well::
@@ -329,32 +351,36 @@ plugin's 'webroot' directory, just like the main application's assets::
 You may put any type of file in any directory, just like a regular 
 webroot.
 
-But keep in mind that handling static assets, such as images, Javascript
-and CSS files of plugins, through the Dispatcher is incredibly inefficient.
-It is strongly recommended to symlink them for production.
-For example like this::
+.. warning::
 
-    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+    Handling static assets, such as images, Javascript and CSS files,
+    through the Dispatcher is very inefficient. See :ref:`symlink-assets`
+    for more information.
+
 
 Linking to assets in plugins
 ----------------------------
 
-Simply prepend /plugin_name/ to the beginning of a request for an
-asset within that plugin, and it will work as if the asset were
-in your application's webroot.
+You can use the :term:`plugin-syntax` when linking to plugin assets using the
+:php:class:`Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods::
 
-For example, linking to '/contact_manager/js/some_file.js'
-would serve the asset 
-'Plugin/ContactManager/webroot/js/some_file.js'.
+    // Generates a url of /contact_manager/css/styles.css
+    echo $this->Html->css('ContactManager.styles');
 
-.. note::
+    // Generates a url of /contact_manager/js/widget.js
+    echo $this->Html->script('ContactManager.widget');
 
-    It is important to note the **/your_plugin/** prefix before the
-    asset path. That makes the magic happen!
+    // Generates a url of /contact_manager/img/logo.js
+    echo $this->Html->image('ContactManager.logo');
 
-.. versionchanged:: 2.1
-    Use :term:`plugin syntax` to request assets. For example in your View:
-    <?php echo $this->Html->css("ContactManager.style"); ?>
+Plugin assets are served using the ``AssetDispatcher`` middleware by default.
+This is only recommended for development. In production you should
+:ref:`symlink-assets <symlink plugin assets>` to improve performance.
+
+If you are not using the helpers, you can prepend /plugin_name/ to the beginning
+of a the URL for an asset within that plugin to serve it. Linking to
+'/contact_manager/js/some_file.js' would serve the asset
+``Plugin/ContactManager/webroot/js/some_file.js``.
 
 
 Components, Helpers and Behaviors
@@ -374,21 +400,18 @@ requires only that you prefix the plugin name before the name of the
 component. For example::
 
     // Component defined in 'ContactManager' plugin
+    namespace ContactManager\Controller\Component;
+
+    use Cake\Controller\Component;
+
     class ExampleComponent extends Component {
     }
     
     // within your controllers:
-    public $components = array('ContactManager.Example'); 
+    public $components = array('ContactManager.Example');
 
 The same technique applies to Helpers and Behaviors.
 
-.. note::
-
-    When creating Helpers you may find AppHelper is not automatically 
-    available. You should declare the resources you need with Uses::
-    
-        // Declare use of AppHelper for your Plugin's Helper
-        App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
 ==================
@@ -431,7 +454,6 @@ applications:
 -  If you use requestAction, make sure controller and model names
    are as unique as possible. Otherwise you might get PHP "redefined
    class ..." errors.
-
 
 
 .. meta::

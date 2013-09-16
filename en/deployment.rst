@@ -49,6 +49,8 @@ things:
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
+.. _symlink-assets:
+
 Improve your application's performance
 ======================================
 

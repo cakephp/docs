@@ -12,6 +12,7 @@ Requirements
 
 - CakePHP 3.x supports PHP Version 5.4.3 and above.
 - CakePHP 3.x requires the mbstring extension.
+- CakePHP 3.x requires the mcrypt extension.
 
 .. warning::
 
@@ -21,7 +22,7 @@ Application directory layout
 ============================
 
 The application directory layout has changed to better implement PSR-0. You
-should use the `app skeleton <https://github.com/cakephp/app`_
+should use the `app skeleton <https://github.com/cakephp/app>`_
 project as a reference point when updating your application.
 
 CakePHP should be installed with composer
@@ -40,8 +41,8 @@ filesystem directories.  For example ``Cake/Cache/Cache.php`` is named
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
-Constants
-=========
+Removed Constants
+=================
 
 The following deprecated constants have been removed::
 
@@ -58,6 +59,14 @@ Configuration
 Configuration in CakePHP 3.0 is significantly different than in previous
 versions. You should read the :doc:`/development/configuration` documentation
 for how configuration is done in 3.0.
+
+You can no longer use ``App::build()`` to configure additional class paths.
+Instead you should map additional paths using your application's autoloader. See
+the section on :ref:`additional-class-paths` for more information.
+
+Two new configure variables provide the path configuration for plugins, and
+views. You can add multiple paths to ``App.paths.views`` and
+``App.paths.plugins`` to configure multiple paths for plugins & view files.
 
 Basics
 ======
@@ -79,6 +88,30 @@ Cache
 * ``Cache::set()`` has been removed. It is recommended that you create multiple
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
+
+Core
+====
+
+App
+---
+
+- ``App::build()`` has been removed.
+- ``App::location()`` has been removed.
+- ``App::paths()`` has been removed.
+- ``App::load()`` has been removed.
+- ``App::RESET`` has been removed.
+- ``App::APPEND`` has been removed.
+- ``App::PREPEND`` has been removed.
+- ``App::REGISTER`` has been removed.
+
+Plugin
+------
+
+- :php:meth:`Cake\\Core\\Plugin::load()` does not setup an autoloader unless
+  you set the ``autoload`` option to ``true``.
+- When loading plugins you can no longer provide a callable.
+- When loading plugins you can no longer provide an array of config files to
+  load.
 
 Configure
 =========
