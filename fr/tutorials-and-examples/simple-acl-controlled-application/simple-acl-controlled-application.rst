@@ -160,8 +160,7 @@ passwords soient hashés. Dans ``app/Model/User.php`` ajoutez ce qui suit::
     }
 
 Ensuite nous devons faire quelques modifications dans ``AppController``. Si
-vous n'avez pas ``/app/Controller/AppController.php``, créez le. Notez que cela
-va dans /app/Controller/, pas dans /app/app_controllers.php. Puisque nous
+vous n'avez pas ``/app/Controller/AppController.php``, créez le. Puisque nous
 voulons que notre site entier soit contrôllé avec Auth et Acl, nous allons
 les définir en haut dans ``AppController``::
 
