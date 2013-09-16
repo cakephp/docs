@@ -51,9 +51,11 @@ method::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
-You do *not* need to load a plugin to access components, behaviors or helpers in
-a plugin. You *do* need to load a plugin if you need to access its controllers,
-webroot assets or console commands.
+.. note::
+
+    You do *not* need to load a plugin to access components, behaviors or
+    helpers in a plugin. You *do* need to load a plugin if you need to access
+    its controllers, webroot assets or console commands.
 
 
 Plugin configuration
@@ -351,29 +353,34 @@ webroot.
 
 .. warning::
 
-    Handling static assets, such as images, Javascript and CSS files of plugins,
-    through the Dispatcher is incredibly inefficient.
+    Handling static assets, such as images, Javascript and CSS files,
+    through the Dispatcher is very inefficient. See :ref:`symlink-assets`
+    for more information.
 
-It is strongly recommended to symlink them for production.
-For example like this::
-
-    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 Linking to assets in plugins
 ----------------------------
 
-Simply prepend /plugin_name/ to the beginning of a request for an
-asset within that plugin, and it will work as if the asset were
-in your application's webroot.
+You can use the :term:`plugin-syntax` when linking to plugin assets using the
+:php:class:`Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods::
 
-For example, linking to '/contact_manager/js/some_file.js'
-would serve the asset 
-'Plugin/ContactManager/webroot/js/some_file.js'.
+    // Generates a url of /contact_manager/css/styles.css
+    echo $this->Html->css('ContactManager.styles');
 
-.. note::
+    // Generates a url of /contact_manager/js/widget.js
+    echo $this->Html->script('ContactManager.widget');
 
-    It is important to include the **/your_plugin/** prefix before 
-    the asset path.
+    // Generates a url of /contact_manager/img/logo.js
+    echo $this->Html->image('ContactManager.logo');
+
+Plugin assets are served using the ``AssetDispatcher`` middleware by default.
+This is only recommended for development. In production you should
+:ref:`symlink-assets <symlink plugin assets>` to improve performance.
+
+If you are not using the helpers, you can prepend /plugin_name/ to the beginning
+of a the URL for an asset within that plugin to serve it. Linking to
+'/contact_manager/js/some_file.js' would serve the asset
+``Plugin/ContactManager/webroot/js/some_file.js``.
 
 
 Components, Helpers and Behaviors
