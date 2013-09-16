@@ -18,7 +18,7 @@ well.
 
 Your application's controllers extend ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The AppController
-class can be defined in ``/app/Controller/AppController.php`` and it should
+class can be defined in ``/App/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods which are called *actions*.  Actions are
@@ -38,7 +38,7 @@ As stated in the introduction, the AppController class is the
 parent class to all of your application's controllers.
 AppController itself extends the Controller class included in the
 CakePHP core library. As such, AppController is defined in
-``/app/Controller/AppController.php`` like so::
+``/App/Controller/AppController.php`` like so::
 
     class AppController extends Controller {
     }
@@ -97,9 +97,9 @@ to write.
 By convention CakePHP renders a view with an inflected version of the action
 name.  Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``/app/Controller/RecipesController.php`` and contain::
+in ``/App/Controller/RecipesController.php`` and contain::
 
-        # /app/Controller/RecipesController.php
+        # /App/Controller/RecipesController.php
 
         class RecipesController extends AppController {
             public function view($id) {
@@ -265,7 +265,7 @@ rendered from the controller.
 
     The default view file used by render is determined by convention.
     If the ``search()`` action of the RecipesController is requested,
-    the view file in /app/View/Recipes/search.ctp will be rendered::
+    the view file in /App/View/Recipes/search.ctp will be rendered::
 
         class RecipesController extends AppController {
         // ...
@@ -282,12 +282,12 @@ rendered from the controller.
     name in the controller using ``$action``.
 
     If ``$view`` starts with '/' it is assumed to be a view or
-    element file relative to the ``/app/View`` folder. This allows
+    element file relative to the ``/App/View`` folder. This allows
     direct rendering of elements, very useful in ajax calls.
     ::
 
-        // Render the element in /View/Elements/ajaxreturn.ctp
-        $this->render('/Elements/ajaxreturn');
+        // Render the element in /View/Element/ajaxreturn.ctp
+        $this->render('/Element/ajaxreturn');
 
     The ``$layout`` parameter allows you to specify the layout the
     view is rendered in.
@@ -577,7 +577,7 @@ Other Useful Methods
 
     If we now create a simple element to call that function::
 
-        // View/Elements/latest_comments.ctp
+        // View/Element/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
         foreach ($comments as $comment) {
@@ -742,7 +742,7 @@ given by ``$helpers`` to the view as an object reference variable
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
-    a controller will use.  Like ``$helpers`` and ``$uses`` components in your 
+    a controller will use.  Like ``$helpers`` and ``$uses`` components in your
     controllers are merged with those in parent classes.  As with
     ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
     for more information.

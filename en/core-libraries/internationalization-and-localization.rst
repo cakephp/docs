@@ -53,14 +53,14 @@ templates used to create or update your
 the translations. Cake will look for your po files in the following
 location::
 
-    /app/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /App/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 The default domain is 'default', therefore your locale folder would
 look something like this::
 
-    /app/Locale/eng/LC_MESSAGES/default.po (English)
-    /app/Locale/fra/LC_MESSAGES/default.po (French)
-    /app/Locale/por/LC_MESSAGES/default.po (Portuguese)
+    /App/Locale/eng/LC_MESSAGES/default.po (English)
+    /App/Locale/fra/LC_MESSAGES/default.po (French)
+    /App/Locale/por/LC_MESSAGES/default.po (Portuguese)
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -91,7 +91,7 @@ should consider implementing a different solution. e.g.::
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
-            // e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
+            // e.g. use /App/View/fra/Pages/tos.ctp instead of /App/View/Pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }
     }
@@ -109,8 +109,8 @@ use these LC_TIME files.
 
 Just place LC_TIME file in it's respective locale directory::
 
-    /app/Locale/fra/LC_TIME (French)
-    /app/Locale/por/LC_TIME (Portuguese)
+    /App/Locale/fra/LC_TIME (French)
+    /App/Locale/por/LC_TIME (Portuguese)
 
 You can find these files for few popular languages from the official `Localized <https://github.com/cakephp/localized>`_
 repo.
@@ -131,13 +131,13 @@ find your translation file.
 
 Your translation file for this example should go into::
 
-    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /App/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 And for other languages than the default::
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
-    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
+    /App/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+    /App/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
+    /App/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
 
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into

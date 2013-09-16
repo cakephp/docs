@@ -18,7 +18,7 @@ First grab a copy of the plugin and unzipped or clone it using git into
 `app/Plugin/AclExtras`. Then activate the plugin in your `app/Config/boostrap.php`
 file as shown below::
 
-    //app/Config/boostrap.php
+    //App/Config/boostrap.php
     // ...
     CakePlugin::load('AclExtras');
 
@@ -54,7 +54,7 @@ following code syntax in a custom method::
 We are going to add in a few allow/deny statements now. Add the
 following to a temporary function in your ``UsersController`` and
 visit the address in your browser to run them (e.g.
-http://localhost/cake/app/users/initdb). If you do a
+http://localhost/cake/App/users/initdb). If you do a
 ``SELECT * FROM aros_acos`` you should see a whole pile of 1's and
 -1's. Once you've confirmed your permissions are set, remove the
 function::

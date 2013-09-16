@@ -24,11 +24,9 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of
 components requiring configuration are
-:doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
-and :doc:`/core-libraries/components/email`. Configuration for these
-components, and for components in general, is usually done in the
-``$components`` array or your controller's ``beforeFilter()``
-method::
+:doc:`/core-libraries/components/authentication` and :doc:`/core-libraries/components/cookie`.
+Configuration for these components, and for components in general, is usually done in the
+``$components`` array or your controller's ``beforeFilter()`` method::
 
     class PostsController extends AppController {
         public $components = [

@@ -1120,7 +1120,7 @@ Router API
     If we now create a simple element to call that function::
 
         <?php
-        // View/Elements/latest_comments.ctp
+        // View/Element/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
         foreach ($comments as $comment) {

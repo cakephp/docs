@@ -121,8 +121,8 @@ To configure your Cake installation, you'll need to make some
 changes to the following files.
 
 
--  /app/webroot/index.php
--  /app/webroot/test.php (if you use the
+-  /App/webroot/index.php
+-  /App/webroot/test.php (if you use the
    :doc:`Testing </development/testing>` feature.)
 
 There are three constants that you'll need to edit: ``ROOT``,
@@ -371,7 +371,7 @@ these steps:
 
 It is also possible to use the Import functionality in IIS's URL
 Rewrite module to import rules directly from CakePHP's .htaccess
-files in root, /app/, and /app/webroot/ - although some editing
+files in root, /App/, and /App/webroot/ - although some editing
 within IIS may be necessary to get these to work. When Importing
 the rules this way, IIS will automatically create your web.config
 file for you.

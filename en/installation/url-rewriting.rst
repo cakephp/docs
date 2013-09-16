@@ -108,7 +108,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    (http://example.com/~username/cakephp/), or any other URL structure
    that already utilizes mod\_rewrite, you'll need to add RewriteBase
    statements to the .htaccess files CakePHP uses (/.htaccess,
-   /app/.htaccess, /app/webroot/.htaccess).
+   /App/.htaccess, /App/webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example your webroot .htaccess file would look
@@ -169,7 +169,7 @@ you will need PHP running as a FastCGI instance.
         server_name example.com;
     
         # root directive should be global
-        root   /var/www/example.com/public/app/webroot/;
+        root   /var/www/example.com/public/App/webroot/;
         index  index.php;
 
         access_log /var/www/example.com/log/access.log;

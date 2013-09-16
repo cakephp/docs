@@ -42,7 +42,7 @@ $scaffold variable::
     }
 
 Assuming you’ve created even the most basic Category model class
-file (in /app/Model/Category.php), you’re ready to go. Visit
+file (in /App/Model/Category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
 
 .. note::
@@ -124,15 +124,15 @@ such a customization may be useful during prototyping iterations.
 Custom scaffolding views for a specific controller
 (PostsController in this example) should be placed like so::
 
-    /app/View/Posts/scaffold.index.ctp
-    /app/View/Posts/scaffold.form.ctp
-    /app/View/Posts/scaffold.view.ctp
+    /App/View/Posts/scaffold.index.ctp
+    /App/View/Posts/scaffold.form.ctp
+    /App/View/Posts/scaffold.view.ctp
 
 Custom scaffolding views for all controllers should be placed like so::
 
-    /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/form.ctp
-    /app/View/Scaffolds/view.ctp
+    /App/View/Scaffold/index.ctp
+    /App/View/Scaffold/form.ctp
+    /App/View/Scaffold/view.ctp
 
 
 .. meta::
