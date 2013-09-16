@@ -268,44 +268,53 @@ are a few constants that CakePHP uses during runtime.
     Error constant. Used for differentiating error logging and
     debugging. Currently PHP supports LOG\_DEBUG.
 
+.. _additional-class-paths:
+
 Additional Class Paths
 ======================
 
-It’s occasionally useful to be able to share MVC classes between
-applications on the same system. If you want the same controller in
-both applications, you can use CakePHP’s bootstrap.php to bring
-these additional classes into view.
+Additional class paths are setup through the autoloaders your application uses.
+When using ``composer`` to generate your autoloader, you could do the following,
+to provide fallback paths for controllers in your application::
 
-By using :php:meth:`App::build()` in bootstrap.php we can define additional
-paths where CakePHP will look for classes::
+    "autoload": {
+        "psr-0": {
+            "App\\Controller": "/path/to/directory",
+            "App\": "."
+        }
+    }
 
-    <?php
-    App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
-    ));
+The above would setup paths for both the ``App`` and ``App\Controller``
+namespace. The first key will be searched, and if that path does not contain the
+class/file the second key will be searched. You can also map a single namespace
+to multiple directories with the following::
 
-.. note::
+    "autoload": {
+        "psr-0": {
+            "App\": [".", "/path/to/directory"]
+        }
+    }
 
-    All additional path configuration should be done at the top of your application's
-    bootstrap.php. This will ensure that the paths are available for the rest of your
-    application.
+View and plugin paths
+---------------------
+
+Since views and plugins are not classes, they cannot have an autoloader
+configured. CakePHP provides two configure variables to setup additional paths
+for these resources. In your ``App/Config/app.php`` you can set these
+variables::
+
+    $config = [
+        // More configuration
+        'App' => [
+            'paths' => [
+                'views' => [APP . 'View/', APP . 'View2/'],
+                'plugins' => [ROOT . '/Plugin/', '/path/to/other/plugins/']
+            ]
+        ]
+    ];
+
+Paths should be suffixed with ``/``, or they will not work properly.
+
 
 .. _inflection-configuration:
 
@@ -396,7 +405,7 @@ context::
 
     You can use ``Configure::write('debug', $int)`` to switch between
     debug and production modes on the fly. This is especially handy for
-    AMF or SOAP interactions where debugging information can cause
+    AMF or JSON interactions where debugging information can cause
     parsing problems.
 
 .. php:staticmethod:: read($key = null)
