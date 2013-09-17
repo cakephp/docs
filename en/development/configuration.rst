@@ -89,7 +89,7 @@ settings
     supported by MySQL, Postgres, and SQLserver at this time.
 
 .. versionchanged:: 2.4
-    The ``settings``, ``ssl_key``, ``ssl_cert`` and ``ssl_ca`` keys 
+    The ``settings``, ``ssl_key``, ``ssl_cert`` and ``ssl_ca`` keys
     was added in 2.4.
 
 .. note::
@@ -292,8 +292,8 @@ Asset.timestamp
     file at the end of asset files urls (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-    (bool) false - Doesn't do anything (default)
-    (bool) true - Appends the timestamp when debug > 0
+    (boolean) false - Doesn't do anything (default)
+    (boolean) true - Appends the timestamp when debug > 0
     (string) 'force' - Appends the timestamp when debug >= 0
 Acl.classname, Acl.database
     Constants used for CakePHP’s Access Control List functionality. See
