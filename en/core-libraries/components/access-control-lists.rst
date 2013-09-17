@@ -295,7 +295,7 @@ updating the following lines in app/Config/app.php::
         'classname' => 'IniAcl',
     ],
 
-ARO/ACO permissions are specified in **/app/Config/acl.ini.php**.
+ARO/ACO permissions are specified in **/App/Config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that
 has three properties: groups, allow, and deny.
 
@@ -382,7 +382,7 @@ retrieve nodes in tree format. The console application is used to
 initialize your database and interact with your ACO and ARO trees.
 
 To get started, first you'll need to make sure your
-``/app/Config/app.php`` is present and correctly configured.
+``/App/Config/app.php`` is present and correctly configured.
 See section 4.1 for more information on database configuration.
 
 Once you've done that, use the CakePHP console to create your ACL

@@ -294,7 +294,7 @@ Displaying auth related flash messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the ``app/View/Layouts/default.ctp`` file in the body section
+lines to the ``app/View/Layout/default.ctp`` file in the body section
 preferable before the content_for_layout line.::
 
     echo $this->Session->flash();
