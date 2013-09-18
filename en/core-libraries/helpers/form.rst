@@ -165,8 +165,6 @@ There are a number of options for create():
   the $options array. The supplied URL can be relative to your CakePHP
   application::
 
-    echo $this->Form->create(null, array('url' => '/recipes/add'));
-    // or
     echo $this->Form->create(null, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
     ));
