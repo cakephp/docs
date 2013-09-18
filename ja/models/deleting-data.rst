@@ -8,14 +8,14 @@ CakePHP の Model クラスではデータベースからレコードを削除�
 delete
 ======
 
-``delete(int $id = null, boolean $cascade = true);``
+``delete(integer $id = null, boolean $cascade = true);``
 
 $id で特定されるレコードを削除します。
 デフォルトでは、削除される該当レコードに依存しているレコードも削除されます。
 
 例えば複数の Recipe レコードとひも付いた User レコード (User 'hasMany'
 または 'hasAndBelongsToMany' Recipes) を削除する場合
- 
+
 -  $cascade が true の場合、モデルの dependent の値が
    true になっていれば関連する Recipe レコードも削除されます。
 -  $cascade が false の場合、User が削除されても

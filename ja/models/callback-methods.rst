@@ -66,7 +66,7 @@ afterFind によってデータをフォーマットする例を次に示しま�
         }
         return $results;
     }
-    
+
     public function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }
@@ -179,4 +179,3 @@ onError
 ``onError()``
 
 問題が起こった場合に呼び出されます。
-
