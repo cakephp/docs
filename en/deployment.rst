@@ -49,7 +49,7 @@ things:
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
-You can check against an environmental variable to set the debug level dynamically
+You can check against an environment variable to set the debug level dynamically
 between environments. This will avoid deploying an application with debug > 0 and
 also save yourself from having to change the debug level each time before deploying
 to a production environment.
