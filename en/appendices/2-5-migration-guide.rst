@@ -73,7 +73,7 @@ FileLog
 -------
 
 - CakeLog does not auto-configure itself anymore. As a result log files will not be auto-created
-  anymore if no stream is listening. So make sure you got at least one default engine set up
+  anymore if no stream is listening. Please make sure you got at least one default engine set up
   if you want to listen to all types and levels.
 
 View
