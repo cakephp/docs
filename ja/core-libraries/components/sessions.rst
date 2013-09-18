@@ -218,7 +218,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 
     エレメントファイル ``app/View/Elements/flash_custom.ctp`` を作成し、特別な表示がされるようにします::
 
-        <div id="myCustomFlash"><?php echo $message; ?></div>
+        <div id="myCustomFlash"><?php echo h($message); ?></div>
 
     ..
       ``$params`` allows you to pass additional view variables to the
@@ -248,3 +248,13 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 
         // /app/Plugin/Comment/View/Elements/flash_no_spam.ctp が使用されます
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+
+    .. note::
+        ..
+           By default CakePHP does not HTML escape flash messages. If you are using
+           any request or user data in your flash messages you should escape it
+           with :php:func:`h` when formatting your messages.
+
+        CakePHPは、デフォルトではフラッシュメッセージをHTMLエスケープしません。
+        もしリクエストやユーザーデータをフラッシュメッセージに含める場合は、
+        メッセージを整形するときにそれらを :php:func:`h` でエスケープするべきです。

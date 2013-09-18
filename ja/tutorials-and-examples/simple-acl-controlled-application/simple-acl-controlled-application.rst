@@ -109,10 +109,9 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
+                return $this->redirect($this->Auth->redirect());
             }
+            $this->Session->setFlash(__('Your username or password was incorrect.'));
         }
     }
 

@@ -158,7 +158,7 @@
     フェイルオーバー用 html ファイルは以下のようになります::
 
         <div class="flash flash-failure">
-            <?php echo $message; ?>
+            <?php echo h($message); ?>
         </div>
 
     ..
@@ -169,7 +169,7 @@
     これによってカスタマイズしたメッセージを生成することが出来ます::
 
         // In the controller
-        $this->Session->setFlash('Thanks for your payment %s');
+        $this->Session->setFlash('Thanks for your payment');
 
         // In the layout.
         echo $this->Session->flash('flash', array(
@@ -182,4 +182,12 @@
             <?php printf($message, h($name)); ?>
         </div>
 
+    .. note::
+        ..
+           By default CakePHP does not HTML escape flash messages. If you are using
+           any request or user data in your flash messages you should escape it
+           with :php:func:`h` when formatting your messages.
 
+        CakePHPは、デフォルトではフラッシュメッセージをHTMLエスケープしません。
+        もしリクエストやユーザーデータをフラッシュメッセージに含める場合は、
+        メッセージを整形するときにそれらを :php:func:`h` でエスケープするべきです。
