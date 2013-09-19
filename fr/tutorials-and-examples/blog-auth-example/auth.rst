@@ -264,7 +264,7 @@ que l'application vous redirige automatiquement vers la page de connexion.
 Et c'est tout! Cela semble trop simple pour être vrai. Retournons en arrière un
 peu pour expliquer ce qui s'est passé. La fonction ``beforeFilter`` dit au
 component AuthComponent de ne pas exiger de connexion pour l'action ``add``
-en plus des actions ``index`` and ``view`` qui étaient déjà autorisées dans
+en plus des actions ``index`` et ``view`` qui étaient déjà autorisées dans
 la fonction ``beforeFilter`` de l'AppController.
 
 L'action ``login`` appelle la fonction ``$this->Auth->login()`` dans

@@ -34,7 +34,7 @@ callbacks des behaviors et des Models::
 
 Vous pouvez brancher une logique personnalisée dans le processus de
 suppression à l'aide des callbacks ``beforeDelete`` et ``afterDelete``
-présents dans les deux Models et Bahaviors. Allez voir
+présents dans les deux Models et Behaviors. Allez voir
 :doc:`/models/callback-methods` pour plus d'informations.
 
 .. _model-deleteall:

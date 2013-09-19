@@ -251,7 +251,7 @@ d'une ``View``, utilisez la classe ``String``::
 
     Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
     avec un nombre de caractères de chaque côté determiné par ``$radius``,
-    and prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
+    et prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
     pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
     être montrés dans le document résultant.::
 

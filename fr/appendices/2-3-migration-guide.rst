@@ -138,7 +138,7 @@ Exceptions
 - CakeBaseException a été ajouté, auquel toutes les Exceptions du coeur
   étendent. La classe d'Exception de base introduit aussi la méthode
   ``responseHeader()`` qui peut être appelée sur les instances d'Exception
-  créees pour ajouter les headers à la réponse, puisque les Exceptions
+  créées pour ajouter les headers à la réponse, puisque les Exceptions
   ne réutilisent pas toute instance de réponse.
 
 Model

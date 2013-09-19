@@ -347,8 +347,8 @@ séparé par des lignes uniques::
 Le texte littéral n'est pas modifié ou formaté, la sauvegarde du niveau
 d'indentation est supprimée.
 
-Notes and avertissements
-------------------------
+Notes et avertissements
+-----------------------
 
 Il y a souvent des fois où vous voulez informer le lecteur d'une astuce
 importante, une note spécials ou un danger potentiel. Les avertissements

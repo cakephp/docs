@@ -633,7 +633,7 @@ Intégrité des données
     Options ``$mode`` permises:
 
     -  ``'parent'`` - utilise l'actuel``parent_id``pour mettre à jour les champs 
-       ``lft`` and ``rght``.
+       ``lft`` et ``rght``.
     -  ``'tree'`` - utilise  les champs actuels ``lft``et``rght``pour mettre à jour 
        le champ ``parent_id``
 

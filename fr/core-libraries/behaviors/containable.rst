@@ -159,7 +159,7 @@ Nous pouvons à nouveau utiliser la clé contain dans l'appel find()::
 
 Sans le behavior Containable, nous finirions par utiliser la méthode
 ``unbindModel()`` du model, plusieurs fois si nous épluchons des models
-multiples. Le ``behavior Containable`` fourni un moyen plus propre pour
+multiples. Le ``behavior Containable`` fournit un moyen plus propre pour
 accomplir cette même tâche.Contenant des associations plus profondes.
 
 Des associations plus profondes

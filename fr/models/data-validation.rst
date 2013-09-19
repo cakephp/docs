@@ -107,7 +107,7 @@ manière est::
 Où 'nomChamp' est le nom du champ pour lequel la règle est définie, et
 'nomRegle' est un nom prédéfini, comme 'alphaNumeric', 'email' ou 'isUnique'.
 
-Par exemple, pour s'assurer que l'user fourni une adresse email
+Par exemple, pour s'assurer que l'user fournit une adresse email
 correcte, vous pouvez utiliser cette règle::
 
     public $validate = array('user_email' => 'email');

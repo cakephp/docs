@@ -599,7 +599,7 @@ Vous n'avez plus besoin de surcharger _findCount pour régler les problèmes des
 count de résultat incorrects. L'état ``'before'`` de vos finders personnalisés
 vous permettent maintenant d'être appelés à nouveaux avec
 $query['operation'] = 'count'. Le $query retourné va être utilisé dans
-``_findCount()``. Si nécéssaire, vous pouvez distinguer en vérifiant pour
+``_findCount()``. Si nécessaire, vous pouvez distinguer en vérifiant pour
 la clé ``'operation'`` et retourner un ``$query`` différent::
 
     protected function _findAvailable($state, $query, $results = array()) {
@@ -814,7 +814,7 @@ champ.
 .. warning::
 
     Puisque la méthode ``read`` écrase toute information stockée dans les
-    propriétés ``data`` and ``id`` du model, vous devez faire très attention
+    propriétés ``data`` et ``id`` du model, vous devez faire très attention
     quand vous utilisez cete fonction en général, spécialement en l'utilisant
     dans les fonctions de callbacks du model comme ``beforeValidate`` et
     ``beforeSave``. Généralement la fonction ``find`` est une façon de faire

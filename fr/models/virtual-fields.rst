@@ -72,8 +72,8 @@ tout champ virtuel dans un Model::
 
     $this->User->getVirtualField('nom'); //retoune 'CONCAT(User.prenom, ' ', User.nom_famille)'
 
-Model::find() and virtual fields
---------------------------------
+Model::find() et virtual fields
+-------------------------------
 
 Comme écrit précédemment, ``Model::find()`` traitera les champs virtuels un peu
 comme tout autre champ dans un model. La valeur du champ virtuel sera placée

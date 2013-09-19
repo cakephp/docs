@@ -624,7 +624,7 @@ les fixtures qui vont avoir des requêtes lancées contre elles.
 
     Vous pouvez écraser la base de données du model test en spécifiant la
     propriété ``$useDbConfig``. Assurez-vous que la fixture utilise la même
-    valeur afin que la table soit créee dans la bonne base de données.
+    valeur afin que la table soit créée dans la bonne base de données.
 
 Créer une méthode de test
 -------------------------

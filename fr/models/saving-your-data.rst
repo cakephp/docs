@@ -168,7 +168,7 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
 Cette méthode initialise la classe du model pour sauvegarder de nouvelles
 informations.
 Cela ne crée pas réellement un enregistrement dans la base de données mais
-efface Model::$id et défini Model::$data basé sur les champs par défaut dans
+efface Model::$id et définit Model::$data basé sur les champs par défaut dans
 votre base de données. Si vous n'avez défini aucun champ par défaut dans votre
 base de données, Model::$data sera défini comme un tableau vide.
 
@@ -530,7 +530,7 @@ Voyons comment nous pouvons utiliser ``saveAssociated()`` pour sauvegarder les
 models Company et Account en même temps.
 
 Tout d'abord, vous avez besoin de construire votre formulaire pour les deux
-models Company and Account (nous supposerons que Company hasMany Account)::
+models Company et Account (nous supposerons que Company hasMany Account)::
 
     echo $this->Form->create('Company', array('action' => 'add'));
     echo $this->Form->input('Company.name', array('label' => 'Company name'));
@@ -935,7 +935,7 @@ de base de données, la plupart du temps, elles le sont. CakePHP est pensé pour
 être agnostique et va fonctionner avec MySQL, MSSQL, PostgreSQL et
 autres. Vous pouvez créer vos tables de base de données comme vous l'auriez
 fait normalement. Quand vous créez vos classes Model, elles seront
-automatiquement liées aux tables que vous avez créees. Les noms de table sont
+automatiquement liées aux tables que vous avez créées. Les noms de table sont
 par convention en minuscules et au pluriel avec tous les mots de la table
 séparés par des underscores. Par exemple, un nom de model Ingredient s'attendra
 à un nom de table ingredients. Un nom de Model de EventRegistration s'attendra

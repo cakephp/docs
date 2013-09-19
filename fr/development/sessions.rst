@@ -1,7 +1,7 @@
 Sessions
 ########
 
-CakePHP fournit des fonctionnalités de wrapper and suite of utility au-dessus
+CakePHP fournit des fonctionnalités de wrapper et suite of utility au-dessus
 de l'extension native ``session`` de PHP. Les Sessions vous permettent
 d'identifier les utilisateurs uniques pendant leurs requêtes et de stocker les
 données persistantes pour les utilisateurs spécifiques. Au contraire des

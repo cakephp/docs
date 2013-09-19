@@ -1062,5 +1062,5 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. meta::
     :title lang=fr: HtmlHelper
-    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, and more resilient to change.
+    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, et more resilient to change.
     :keywords lang=fr: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs
