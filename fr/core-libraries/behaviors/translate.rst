@@ -76,6 +76,13 @@ assurez-vous d'omettre les champs du schéma de model traduits.
 Si vous laissez les champs en place, il peut y avoir un problème de
 récupération de données avec les locales.
 
+.. note::
+
+    Si tous les champs dans votre model sont traduits, assurez-vous d'ajouter
+    les colonnes ``created`` et ``modified`` à votre table. CakePHP a besoin
+    d'au moins un champ différent d'une clé primaire avant d'enregister un
+    enregistrement.
+
 Conclusion
 ==========
 
