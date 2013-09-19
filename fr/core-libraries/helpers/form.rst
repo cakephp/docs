@@ -174,8 +174,6 @@ Il y plusieurs options pour create():
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
     L'URL ainsi fournie peut être relative à votre application CakePHP ::
 
-        echo $this->Form->create(null, array('url' => '/recipes/add'));
-        // ou
         echo $this->Form->create(null, array(
             'url' => array('controller' => 'recipes', 'action' => 'add')
         ));
