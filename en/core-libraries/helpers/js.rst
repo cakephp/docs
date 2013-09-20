@@ -5,7 +5,7 @@ JsHelper
 
 Since the beginning CakePHP's support for Javascript has been with
 Prototype/Scriptaculous. While we still think these are an
-excellent Javascript library, the community has been asking for
+excellent Javascript libraries, the community has been asking for
 support for other libraries. Rather than drop Prototype in favour
 of another Javascript library. We created an Adapter based helper,
 and included 3 of the most requested libraries.
