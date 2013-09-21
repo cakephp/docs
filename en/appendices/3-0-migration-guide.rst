@@ -76,6 +76,7 @@ Basics
 Cache
 =====
 
+* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\Engine\Memcached` instead.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 * :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
@@ -153,7 +154,8 @@ Log
   synchronization issues with configuration options.
 * Log engines are now lazily loaded upon the first write to the logs.
 * :php:meth:`Cake\\Log\\Log::engine()` has been added.
-* ``Log::defaultLevels()`` was removed.
+* The following methods have been removed from :php:class:`Cake\\Log\\Log` ::
+  ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
 * You can no longer create custom levels using ``Log::levels()``.
 * When configuring loggers you should use ``'levels'`` instead of 'types'.
 * You can no longer specify custom log levels.  You must use the default set of
@@ -282,6 +284,8 @@ Controller
 - The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
   with **all** parent classes not just ``AppController`` and the plugin
   app controller.
+- ``Controller::httpCodes()`` has been removed, use :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
+- ``Controller::disableCache()`` has been removed, use :php:meth::`Cake\\Network\\Response::disableCache()` instead.
 
 ComponentCollection replaced
 ----------------------------
@@ -309,6 +313,32 @@ CookieComponent
   are now un-readable because ``Security::cipher()`` has been removed. You will
   need to re-encrypt cookies with the ``rijndael`` method before upgrading.
 
+AuthComponent
+-------------
+
+- ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
+  class instead.
+- ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
+  with ``hashType`` set to ``Blowfish``.
+
+RequestHandlerComponent
+-----------------------
+
+- The following methods have been removed from RequestHandler component::
+  ``isAjax()``, ``isFlash()``, ``isSSL()``, ``isPut()``, ``isPost()``, ``isGet()``, ``isDelete()``.
+  Use the :php:meth:`Cake\\Network\\Request::is()` method instead with relevant argument.
+- ``RequestHandler::setContent()`` has removed, use :php:meth:`Cake\\Network\\Response::type()` instead.
+- ``RequestHandler::getReferer()`` has removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
+- ``RequestHandler::getClientIP()`` has removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
+- ``RequestHandler::mapType()`` has removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
+
+SecurityComponent
+-----------------
+
+- The following methods and their related properties have been removed from Security component::
+  ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
+  Use the :php:meth:`Cake\\Network\\Request::onlyAllow()`instead.
+- ``SecurityComponent::$disabledFields()`` has been removed, use ```SecurityComponent::$unlockedFields()``.
 
 Model
 =====
@@ -363,6 +393,18 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code.
 
+View
+====
+
+- Key ``plugin`` has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
+  Specify the element name as ``SomePlugin.element_name`` instead.
+- ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
+
+ViewBlock
+---------
+
+- ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead.
+
 
 View\\Helper
 ============
@@ -371,6 +413,12 @@ FormHelper
 ----------
 
 - The ``data[`` prefix was removed from all generated inputs.  The prefix served no real purpose anymore.
+
+PaginatorHelper
+---------------
+
+- The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
+  Use ``{:page}`` style placeholders instead.
 
 
 Core
