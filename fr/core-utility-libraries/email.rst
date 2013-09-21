@@ -76,7 +76,7 @@ pouvez utiliser le constructeur pour le faire::
         }
     }
 
-Il n'est pas nécéssaire de créer ``app/Config/email.php``, ``CakeEmail`` peut
+Il n'est pas nécessaire de créer ``app/Config/email.php``, ``CakeEmail`` peut
 être utilisé sans lui et utiliser les méthodes respectives pour définir toutes
 les configurations séparément ou charger un tableau de configs.
 

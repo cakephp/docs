@@ -53,7 +53,7 @@ récupérées par un appel ``find()`` normal est assez étendue ::
                         [contenu] => aaa
                         [created] => 2008-05-18 00:00:00
                     )
-                [Commentaire] => Array
+                [Comment] => Array
                     (
                         [0] => Array
                             (
@@ -159,18 +159,18 @@ Nous pouvons à nouveau utiliser la clé contain dans l'appel find()::
 
 Sans le behavior Containable, nous finirions par utiliser la méthode
 ``unbindModel()`` du model, plusieurs fois si nous épluchons des models
-multiples. Le ``behavior Containable`` fourni un moyen plus propre pour
+multiples. Le ``behavior Containable`` fournit un moyen plus propre pour
 accomplir cette même tâche.Contenant des associations plus profondes.
 
 Des associations plus profondes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le component Containable permet également d'aller un peu plus loin : vous
-pouvez filtrer les données des models associés . si vous regardez le résultats
+pouvez filtrer les données des models *associés*. si vous regardez le résultats
 d'un appel find() classique, notez le champ "auteur" dans le model
-"Commentaire". Si vous êtes interéssés dans les posts par les noms et les
+"Comment". Si vous êtes interéssés par les posts el les noms des
 commentaires des auteurs - et rien d'autre - vous devez faire quelque chose
-comme ::
+comme::
 
     $this->Post->contain('Comment.auteur');
     $this->Post->find('all');
@@ -180,7 +180,7 @@ comme ::
     $this->Post->find('all', array('contain' => 'Comment.auteur'));
 
 ici , nous avons dit au behavior Containable de nous donner l'informations
-de post, et uniquement le champs auteur du model Commentaire associé.
+de post, et uniquement le champs auteur du model Comment associé.
 Le résultat du find ressemble à::
 
     [0] => Array
@@ -192,7 +192,7 @@ Le résultat du find ressemble à::
                         [contenu] => aaa
                         [created] => 2008-05-18 00:00:00
                     )
-                [Commentaire] => Array
+                [Comment] => Array
                     (
                         [0] => Array
                             (
@@ -210,7 +210,7 @@ Le résultat du find ressemble à::
             (...
 
 Comme vous pouvez le voir, les tableaux de Comment ne contiennent
-uniquement que le champ auteur (avec le post_id qui est requit par
+uniquement que le champ auteur (avec le post\_id qui est requit par
 CakePHP pour présenter le résultat)
 
 Vous pouvez également filtrer les donneés associées à Comment en
@@ -223,7 +223,7 @@ spécifiant une condition ::
 
     $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
-Ceci nous donnes comme résultat les posts et commentaires dont daniel est
+Ceci nous donne comme résultat les posts et commentaires dont daniel est
 l'auteur::
 
     [0] => Array
@@ -250,7 +250,85 @@ l'auteur::
                     )
             )
 
-Des filtre supplémentaires peuvent être utilisées en utilisant les options
+Il y a un important caveat à utiliser Containable quand on filtre sur des
+associations plus profondes. Dans l'exemple précédent, imaginez que vous
+avez 3 posts dans votre base de données et que Daniel a commenté sur 2 de ces
+posts. L'opération
+$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
+retournerait TOUS les 3 posts, pas juste les 3 posts que Daniel a commenté.
+Cela ne va pas retourner tous les comments cependant, just les comments par
+Daniel.::
+
+    [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 1
+                        [title] => First article
+                        [content] => aaa
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 1
+                                [post_id] => 1
+                                [author] => Daniel
+                                [email] => dan@example.com
+                                [website] => http://example.com
+                                [comment] => First comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                    )
+            )
+    [1] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 2
+                        [title] => Second article
+                        [content] => bbb
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                    )
+            )
+    [2] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 3
+                        [title] => Third article
+                        [content] => ccc
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 22
+                                [post_id] => 3
+                                [author] => Daniel
+                                [email] => dan@example.com
+                                [website] => http://example.com
+                                [comment] => Another comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                    )
+            )
+
+Si vous voulez filtrer les posts selon les comments, pour que les posts non
+commentés par Daniel ne soient pas retournés, le chemin le plus facile est de
+trouver tous les comments de Daniel et contenir les Posts.::
+
+    $this->Comment->find('all', array(
+        'conditions' => 'Comment.author = "Daniel"',
+        'contain' => 'Post'
+    ));
+
+Des filtres supplémentaires peuvent être utilisées en utilisant les options
 de recherche standard :ref:`model-find`::
 
     $this->Post->find('all', array('contain' => array(

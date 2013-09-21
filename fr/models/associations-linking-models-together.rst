@@ -843,7 +843,7 @@ Le model join CourseMembership identifie de façon unique une participation
 d'un Student à un Course en plus d'ajouter des meta-informations.
 
 Les models Join sont des choses particulièrement pratiques à utiliser
-et Cake facilite cela avec les associations intégrées hasMany and belongsTo
+et Cake facilite cela avec les associations intégrées hasMany et belongsTo
 et la fonctionnalité de saveAll.
 
 .. _dynamic-associations:

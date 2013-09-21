@@ -109,10 +109,9 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
+                return $this->redirect($this->Auth->redirect());
             }
+            $this->Session->setFlash(__('Your username or password was incorrect.'));
         }
     }
 
@@ -147,7 +146,6 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
 
 次に行うことは、 ``AppController`` に変更を加えることです。
 ``/app/Controller/AppController.php`` が存在しない場合は、作成してください。
-/app/app_controllers.phpではなく、/app/Controller/に作成することに注意してください。
 コントローラ全体に認証とACLを行うなら、この ``AppController`` に対してセットアップを行います。
 次のコードを加えてください::
 

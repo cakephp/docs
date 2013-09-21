@@ -1029,7 +1029,7 @@ API du Router
 
     :param mixed $url: Une URL relative à Cake, comme "/products/edit/92" ou
         "/presidents/elect/4" ou un :term:`tableau routing`.
-    :param mixed $full: Si (bool) à true, l'URL entièrement basée sera précédée
+    :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera précédée
         au résultat. Si un tableau accèpte les clés suivantes.
         
            * escape - utilisé quand on fait les urls intégrées dans les

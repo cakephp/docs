@@ -75,6 +75,12 @@ omit those fields from the translated model's schema. If you leave
 the fields in, there can be issues when retrieving data with
 fallback locales.
 
+.. note::
+
+    If all the fields in your model are translated be sure to add ``created``
+    and ``modified`` columns to your table. CakePHP requires at least one non
+    primary key field before it will save a record.
+
 Conclusion
 ==========
 

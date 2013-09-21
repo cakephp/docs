@@ -36,7 +36,7 @@ longues étendues de texte.
 
     .. versionchanged:: 2.1
         Dans 2.1, cette méthode echappe automatiquement ces inputs. Utilisez
-        l'option ``escape`` pour la désactiver si nécéssaire.
+        l'option ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
@@ -64,7 +64,7 @@ longues étendues de texte.
 
     .. versionchanged:: 2.1
         Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
-        l'option ``escape`` pour la désactiver si nécéssaire.
+        l'option ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoParagraph(string $text)
 

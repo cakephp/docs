@@ -154,7 +154,7 @@ pour chaque pair de valeur de clé.
         );
 
         // Retire & échappe tout HTML pour être sûr que le contenu va être validé.
-        $bodyText = h(strip_tags($bodyText));
+        $bodyText = h(strip_tags($post['Post']['body']));
         $bodyText = $this->Text->truncate($bodyText, 400, array(
             'ending' => '...',
             'exact'  => true,

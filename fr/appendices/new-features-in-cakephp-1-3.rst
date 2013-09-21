@@ -3,7 +3,7 @@ Nouvelles caractéristiques dans CakePHP 1.3
 
 CakePHP 1.3 introduit un nombre de nouvelles fonctionnalités. Ce guide 
 tente de résumer ces changements et de pointer vers la documentation 
-nouvelle quand c'est nécéssaire.
+nouvelle quand c'est nécessaire.
 
 Components
 ~~~~~~~~~~
@@ -48,7 +48,7 @@ Controller.
    l'email rendu correspondant à son nom.
 -  Many of EmailComponent's private methods have been made
    protected for easier extension.
--  EmailComponent::$to can now be an array. Allowing easier setting
+-  EmailComponent::$to peut maintenant être un tableau. Allowing easier setting
    of multiple recipients, and consistency with other properties.
 -  ``EmailComponent::$messageId`` has been added, it allows control
    over the Message-ID header for email messages.

@@ -87,7 +87,14 @@ Les paramètres Querystring peuvent être lus en utilisant
     $this->request->query['page'];
 
     //  Vous pouvez aussi y accéder par un tableau
-    $this->request['url']['page'];
+    $this->request['url']['page']; // accesseur BC, va être déprécié dans les versions futures
+
+Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
+utiliser :php:meth:`CakeRequest::query()` pour lire l'url requêtée d'une
+manière sans erreur. Toute clé qui n'existe pas va retourner ``null``::
+
+    $foo = $this->request->query('value_that_does_not_exist');
+    // $foo === null
 
 Accéder aux données POST
 ========================
@@ -258,11 +265,11 @@ API de CakeRequest
     CakeRequest encapsule la gestion des paramètres de la requête, et son
     introspection.
 
-.. php:method:: domain()
+.. php:method:: domain($tldLength = 1)
 
     Retourne le nom de domaine sur lequel votre application tourne.
 
-.. php:method:: subdomains()
+.. php:method:: subdomains($tldLength = 1)
 
     Retourne un tableau avec le sous-domaine sur lequel votre application
     tourne.
@@ -366,6 +373,14 @@ API de CakeRequest
     Vérifier si une langue spécifique est acceptée::
 
         CakeRequest::acceptLanguage('es-es');
+
+.. php:method:: param($name)
+
+    Lit les valeurs en toute sécurité dans ``$request->params``. Celle-ci
+    enlève la nécessité d'appeler ``isset()`` ou ``empty()`` avant
+    l'utilisation des valeurs de param.
+
+    .. versionadded:: 2.4
 
 .. php:attr:: data
 
@@ -842,13 +857,6 @@ API de CakeResponse
 
     .. versionadded:: 2.3
 
-.. php:method:: param($name)
-
-    Lit les valeurs en toute sécurité dans ``$request->params``. Celle-ci
-    enlève la nécessité d'appeler ``isset()`` ou ``empty()`` avant
-    l'utilisation des valeurs de param.
-
-    .. versionadded:: 2.4
 
 .. meta::
     :title lang=fr: Objets Request et Response

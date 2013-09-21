@@ -372,7 +372,7 @@ pas documenté, et pas testé.
    déclenchera la fonctionnalité ``strip_tags`` de ``Sanitize::html()``,
    et doit être utilisé en conjonction avec le paramètre ``encode``.
 
-**Configure and App**
+**Configure et App**
 
 
 -  Configure::listObjects() remplacé par App::objects()
@@ -489,7 +489,7 @@ You can place this element anywhere in your layout or view. The
 customize or override this element in your app by creating
 ``app/views/elements/sql_dump.ctp``.
 
-View and Helpers
+View et Helpers
 ~~~~~~~~~~~~~~~~
 
 **View**

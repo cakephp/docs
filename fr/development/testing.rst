@@ -624,7 +624,7 @@ les fixtures qui vont avoir des requêtes lancées contre elles.
 
     Vous pouvez écraser la base de données du model test en spécifiant la
     propriété ``$useDbConfig``. Assurez-vous que la fixture utilise la même
-    valeur afin que la table soit créee dans la bonne base de données.
+    valeur afin que la table soit créée dans la bonne base de données.
 
 Créer une méthode de test
 -------------------------
@@ -793,7 +793,7 @@ existant, il va continuer de lancer le code suivant le redirect. Par exemple::
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    return $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'index'));
                 }
             }
             // plus de code

@@ -401,6 +401,26 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <a href="/images/view/1?height=400&width=500">View image</a>
 
+    Quand il y a utilisation de paramètres nommés, utilisez la syntaxe en
+    tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
+    utilisant la syntaxe en chaîne pour les paramètres (par ex 
+    "recipes/view/6/comments:false" va résulter à ce que les caractères
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+        );
+
+    Affichera:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/id:6/comments:false">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
     Les caractères spéciaux HTML de ``$title``seront convertis en entités
     HTML. Pour désactiver cette conversion, définissez l'option escape à
     false dans le tableau ``$options``.::
@@ -1042,5 +1062,5 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. meta::
     :title lang=fr: HtmlHelper
-    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, and more resilient to change.
+    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, et more resilient to change.
     :keywords lang=fr: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

@@ -257,4 +257,4 @@ Ce qui va faire l'appel interne suivant::
 
 .. meta::
     :title lang=fr: Internationalization & Localization
-    :keywords lang=fr: internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages
+    :keywords lang=fr: internationalization localization,internationalization et localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages

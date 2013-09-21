@@ -30,7 +30,7 @@ FormHelperを使っていれば、 ``$this->request->data`` で簡単にこの�
             if ($this->Recipe->save($this->request->data)) {
                 // メッセージをセットしてリダイレクトする
                 $this->Session->setFlash('Recipe Saved!');
-                $this->redirect('/recipes');
+                return $this->redirect('/recipes');
             }
         }
 
@@ -507,7 +507,7 @@ hasManyを保存する
        public function add() {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                   $this->redirect(array('action' => 'index'));
+                   return $this->redirect(array('action' => 'index'));
                }
            }
        }

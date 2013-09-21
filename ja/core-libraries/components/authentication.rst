@@ -705,7 +705,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
             $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
-            $this->redirect('/users/home');
+            return $this->redirect('/users/home');
         }
     }
 
