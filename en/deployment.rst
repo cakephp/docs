@@ -54,16 +54,16 @@ between environments. This will avoid deploying an application with debug > 0 an
 also save yourself from having to change the debug level each time before deploying
 to a production environment.
 
-For example, you can set an environmental variable in your Apache configuration::
+For example, you can set an environment variable in your Apache configuration::
 
-	SetEnv CAKEPHP_DEBUG production
+	SetEnv CAKEPHP_DEBUG 2
 
 And then you can set the debug level dynamically in ``core.php``::
 
-	if (getenv('CAKEPHP_DEBUG') == 'production') {
-		Configure::write('debug', 0);
-	} else {
+	if (getenv('CAKEPHP_DEBUG')) {
 		Configure::write('debug', 2);
+	} else {
+		Configure::write('debug', 0);
 	}
 
 Improve your application's performance
