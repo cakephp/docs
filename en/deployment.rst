@@ -49,6 +49,23 @@ things:
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
+You can check against an environment variable to set the debug level dynamically
+between environments. This will avoid deploying an application with debug > 0 and
+also save yourself from having to change the debug level each time before deploying
+to a production environment.
+
+For example, you can set an environment variable in your Apache configuration::
+
+	SetEnv CAKEPHP_DEBUG 2
+
+And then you can set the debug level dynamically in ``core.php``::
+
+	if (getenv('CAKEPHP_DEBUG')) {
+		Configure::write('debug', 2);
+	} else {
+		Configure::write('debug', 0);
+	}
+
 Improve your application's performance
 ======================================
 
