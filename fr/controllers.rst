@@ -360,7 +360,7 @@ Contrôle de Flux
 
     Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
-        $this->redirect('/paiements/remerciements'));
+        $this->redirect('/paiements/remerciements');
         $this->redirect('http://www.exemple.com');
 
     Vous pouvez aussi passer des données à l'action::
