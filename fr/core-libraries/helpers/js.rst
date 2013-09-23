@@ -5,13 +5,13 @@ JSHelper
 
 Depuis le début le support de CakePHP pour Javascript a été
 orienté vers Prototype/Scriptaculous (librairie javascript).
-Tandis que nous continuons de penser qu'il s'agit d'une excellente
-bibliothèque Javascript, il a été demandé à la communauté de
+Tandis que nous continuons de penser qu'il s'agit d'excellentes
+bibliothèques Javascript, il a été demandé à la communauté de
 supporter d'autres librairies. Plutôt que d'enlever Prototype en faveur
-d'une autre librairie javascript. Nous avons crées un adaptateur fonctionnant
+d'une autre librairie javascript. Nous avons créé un adaptateur fonctionnant
 sur le principe d'un Helper et avons inclu 3 des librairies les plus demandées.
 Prototype/scriptaculous, Mootools/Mootools-more, et jQuery/jQueryUI.
-Et bien que l'API n'est pas aussi vaste que le Helper Ajax, nous
+Bien que l'API n'est pas aussi vaste que le Helper Ajax, nous
 pensons que la solution basée sur l'adaptateur permet une solution
 plus extensible offrant aux développeurs la puissance et la
 flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
