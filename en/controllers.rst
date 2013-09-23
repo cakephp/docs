@@ -341,7 +341,7 @@ Flow Control
 
     You can also use a relative or absolute URL as the $url argument::
 
-        $this->redirect('/orders/thanks'));
+        $this->redirect('/orders/thanks');
         $this->redirect('http://www.example.com');
 
     You can also pass data to the action::
