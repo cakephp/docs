@@ -43,7 +43,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    After you make changes, restart Apache to make sure the settings
    are active.
 
-   Verify that you your .htaccess files are actually in the right
+   Verify that your .htaccess files are actually in the right
    directories.
 
    This can happen during copying because some operating systems treat
