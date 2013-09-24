@@ -53,6 +53,15 @@ Router
 Utility
 =======
 
+Validation
+----------
+
+- The third param for :php:meth:`Validation::inList()` and :php:meth:`Validation::multiple()` has been
+  modified from `$strict` to `$caseInsensitive`. `$strict` has been dropped as it was working incorrectly
+  and could easily backfire.
+  You can now set this param to true for case insensitive comparison. The default is false and
+  will compare the value and list case sensitive as before.
+
 Hash
 ----
 

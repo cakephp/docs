@@ -899,7 +899,7 @@ with usage examples.
     .. versionadded:: 2.3
         This method was added in 2.3
 
-.. php:staticmethod:: inList(string $check, array $list)
+.. php:staticmethod:: inList(string $check, array $list, boolean $caseInsensitive = false)
 
     This rule will ensure that the value is in a given set. It needs an
     array of values. The field is valid if the field's value matches
@@ -916,6 +916,8 @@ with usage examples.
              )
          );
 
+    Comparison is case sensitive by default. You can set ``$caseInsensitive`` to true
+    if you need case insensitive comparison.
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
 
@@ -975,7 +977,7 @@ with usage examples.
 
     .. versionadded:: 2.2
 
-    This rule checks for valid mimeType
+    This rule checks for valid mime types. Comparison is case sensitive.
 
     ::
 
@@ -1021,7 +1023,7 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: multiple(mixed $check, mixed $options = array())
+.. php:staticmethod:: multiple(mixed $check, mixed $options = array(), boolean $caseInsensitive = false)
 
     Use this for validating a multiple select input. It supports
     parameters "in", "max" and "min".
@@ -1039,6 +1041,8 @@ with usage examples.
             )
         );
 
+    Comparison is case sensitive by default. You can set ``$caseInsensitive`` to true
+    if you need case insensitive comparison.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
