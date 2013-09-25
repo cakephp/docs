@@ -20,7 +20,7 @@ But in general they stand for the major concepts around which you
 implement your application.
 
 In the case of a social network, the Model layer would take care of
-tasks such as Saving the user data, saving friends associations, storing
+tasks such as saving the user data, saving friends associations, storing
 and retrieving user photos, finding new friends for suggestions, etc.
 While the model objects can be thought as "Friend", "User", "Comment", or
 "Photo".
