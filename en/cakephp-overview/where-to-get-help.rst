@@ -27,7 +27,7 @@ The Bakery
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-The CakePHP Bakery is a clearing house for all things CakePHP.
+The CakePHP Bakery is a clearing house for all things regarding CakePHP.
 Check it out for tutorials, case studies, and code examples. Once
 you’re acquainted with CakePHP, log on and share your knowledge
 with the community and gain instant fame and fortune.
