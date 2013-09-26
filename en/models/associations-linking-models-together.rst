@@ -1097,7 +1097,7 @@ table::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.books_id'
+                'Books.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',
