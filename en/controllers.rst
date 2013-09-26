@@ -395,7 +395,7 @@ Flow Control
 Callbacks
 ---------
 
-In addition to the :ref:`controller-life-cycle`.
+In addition to the :ref:`controller-life-cycle`,
 CakePHP also supports callbacks related to scaffolding.
 
 .. php:method:: beforeScaffold($method)
