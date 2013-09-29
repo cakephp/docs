@@ -20,18 +20,18 @@ SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
 
     // Old method:
-    $xml = new Xml('http://bakery.cakephp.org/articles/rss');
+    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 
     // New method using SimpleXML
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
     //or
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
     // New method using DOMDocument
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml now is a instance of DOMDocument
 
 You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources.  You
@@ -52,7 +52,7 @@ files will be fetched with :php:class:`HttpSocket`::
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // remote file
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
 You can also build Xml objects using an array::
 
