@@ -1,4 +1,4 @@
-Qu'est ce que CakePHP? Pourquoi l'utiliser?
+Qu'est ce que CakePHP? Pourquoi l'Utiliser?
 ###########################################
 
 `CakePHP <http://www.cakephp.org/>`_ est un
@@ -11,13 +11,13 @@ C'est une structure fondamentale pour les programmeurs pour créer des
 applications web. Notre principal objectif est de vous permettre
 de travailler d'une manière structurée et rapide -sans perte de flexibilité.
 
-CakePHP rompt la monotonie du développement web. Nous vous offrons
+CakePHP rompt la monotonie du développement web. Il vous offre
 tous les outils nécessaires pour ne coder que ce dont vous avez
 réellement besoin : la logique spécifique de votre application.
 
 Au lieu de réinventer la roue à chaque fois que vous démarrez un
 nouveau projet, récupérez une copie de CakePHP et concentrez-vous
-sur les « entrailles » de votre application.
+sur la logique de votre application.
 
 CakePHP dispose
 `d’une équipe de développement <http://cakephp.lighthouseapp.com/contributors>`_
