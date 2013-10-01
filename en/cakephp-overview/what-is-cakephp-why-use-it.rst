@@ -11,7 +11,7 @@ programmers to create web applications. Our primary goal is to
 enable you to work in a structured and rapid manner–without loss of
 flexibility.
 
-CakePHP takes the monotony out of web development. CakePHP provides you
+CakePHP takes the monotony out of web development. It provides you
 with all the tools you need to get started coding and what you
 need to get done: the logic specific to your application. Instead
 of reinventing the wheel every time you begin a new project,
