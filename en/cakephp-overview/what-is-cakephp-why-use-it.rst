@@ -11,11 +11,11 @@ programmers to create web applications. Our primary goal is to
 enable you to work in a structured and rapid manner–without loss of
 flexibility.
 
-CakePHP takes the monotony out of web development. We provide you
-with all the tools you need to get started coding what you really
+CakePHP takes the monotony out of web development. CakePHP provides you
+with all the tools you need to get started coding and what you
 need to get done: the logic specific to your application. Instead
-of reinventing the wheel every time you sit down to a new project,
-check out a copy of CakePHP and get started with the real guts of
+of reinventing the wheel every time you begin a new project,
+check out a copy of CakePHP and get started with the logic of
 your application.
 
 CakePHP has an active
