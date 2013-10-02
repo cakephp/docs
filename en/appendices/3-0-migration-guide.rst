@@ -380,7 +380,7 @@ helps make CSS easier to write, and improves compatibility with popular CSS
 frameworks.
 
 Instead of the various options in each method, you should use the templates
-feature. See the :doc:`/core-libraries/helpers/paginator` documentation for
+feature. See the :ref:`paginator-templates` documentation for
 information on how to use templates.
 
 Core
