@@ -512,7 +512,7 @@ générée en fichier, vous pouvez faire cela en utilisant::
         $this->response->type('ics');
 
         //Force le téléchargement de fichier en option
-        $this->response->download('filename_for_download.ics')
+        $this->response->download('filename_for_download.ics');
 
         //Retourne l'object pour éviter au controller d'essayer de rendre une vue
         return $this->response;
