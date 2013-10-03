@@ -480,7 +480,7 @@ to serve the generated string as file you can do that by using::
         $this->response->type('ics');
 
         //Optionally force file download
-        $this->response->download('filename_for_download.ics')
+        $this->response->download('filename_for_download.ics');
 
         //Return response object to prevent controller from trying to render a view
         return $this->response;
