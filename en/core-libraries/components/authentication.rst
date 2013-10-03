@@ -437,7 +437,7 @@ class and need to implement the abstract methods ``hash()`` and ``check()``.
 In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
-    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
+    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
