@@ -248,6 +248,15 @@ Request
 * :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
   key, as that prefix has been removed.
 
+Response
+-------
+
+* The mapping of mimetype ``text/plain`` to extension ``csv`` has been removed.
+  As a consequence :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
+  doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
+  which was a common annoyance when receiving jquery's xhr requests.
+
+
 Network\Http
 ============
 
