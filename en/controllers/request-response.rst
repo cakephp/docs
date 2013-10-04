@@ -142,7 +142,7 @@ Accessing path information
 
 CakeRequest also provides useful information about the paths in your
 application.  :php:attr:`CakeRequest::$base` and
-:php:attr:`CakeRequest::$webroot` are useful for generating urls, and
+:php:attr:`CakeRequest::$webroot` are useful for generating URLs, and
 determining whether or not your application is in a subdirectory.
 
 .. _check-the-request:

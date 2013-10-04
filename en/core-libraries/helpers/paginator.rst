@@ -337,7 +337,7 @@ Sets all the options for the Paginator Helper. Supported options are:
   -  ``page`` The page number to display.
 
   The above mentioned options can be used to force particular pages/directions.
-  You can also append additional url content into all urls generated in the
+  You can also append additional url content into all URLs generated in the
   helper::
 
       $this->Paginator->options(array(

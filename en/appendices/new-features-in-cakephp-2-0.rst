@@ -91,10 +91,10 @@ of changes, see the session section for more information.
 Router
 ------
 
-Routes can return full urls
+Routes can return full URLs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Route objects can now return full urls, and :php:class:`Router` will not further
+Route objects can now return full URLs, and :php:class:`Router` will not further
 modify them beyond adding the query string and fragment elements. For example
 this could be used to create routes to handle subdomains, or enabling https/http
 flags. An example of a route class that supports subdomains would be::

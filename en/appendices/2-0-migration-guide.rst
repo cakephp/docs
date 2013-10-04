@@ -751,7 +751,7 @@ created. The effected methods are:
 -  FormHelper::minute()
 -  FormHelper::meridian()
 
-Default urls on forms is the current action
+Default URLs on forms is the current action
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The default url for all forms, is now the current url including passed, named,

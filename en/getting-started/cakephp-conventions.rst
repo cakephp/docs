@@ -74,7 +74,7 @@ equals the controller name so:
 -  /red\_apples
 
 will all resolve to the index of the RedApples controller. However,
-the convention is that your urls are lowercase and underscored,
+the convention is that your URLs are lowercase and underscored,
 therefore /red\_apples/go\_pick is the correct form to access the
 ``RedApplesController::go_pick`` action.
 
