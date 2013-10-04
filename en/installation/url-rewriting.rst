@@ -235,6 +235,18 @@ Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
 correctly.
 
+URL-Rewriting on lighttpd
+====================
+
+Lighttpd does not support .htaccess functions, therefore you can remove all .htaccess files. In the lighttpd configuration make sure you've activiated "mod_rewrite". Add a line:
+
+::
+
+url.rewrite-if-not-file =(
+            "^([^\?]*)(\?(.+))?$" =&gt; "/index.php?url=$1&amp;$3"
+        )
+
+
 I don't / can't use URL rewriting
 =================================
 
