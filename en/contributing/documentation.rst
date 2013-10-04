@@ -51,7 +51,7 @@ Line length
 -----------
 
 Lines of text should be wrapped at 80 columns.  The only exception should be
-long urls, and code snippets.
+long URLs, and code snippets.
 
 Headings and Sections
 ---------------------

@@ -189,7 +189,7 @@ There are a number of options for create():
     <form method="get" action="http://www.google.com/search">
 
   Also check :php:meth:`HtmlHelper::url()` method for more examples of
-  different types of urls.
+  different types of URLs.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
@@ -1660,7 +1660,7 @@ The effected methods are:
     * FormHelper::minute()
     * FormHelper::meridian()
 
-**Default urls on forms is the current action**
+**Default URLs on forms is the current action**
 
 The default url for all forms, is now the current url including
 passed, named, and querystring parameters. You can override
