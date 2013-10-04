@@ -103,7 +103,7 @@ opening form tag.
     key-value pairs that affect the way the form tag is generated.
 
     .. versionchanged:: 2.0
-        The default url for all forms, is now the current url including
+        The default URL for all forms, is now the current URL including
         passed, named, and querystring parameters. You can override this
         default by supplying ``$options['url']`` in the second parameter of
         ``$this->Form->create()``.
@@ -1378,7 +1378,7 @@ Creating buttons and submit elements
 
         <div class="submit"><input value="Submit" type="submit"></div>
 
-    You can also pass a relative or absolute url to an image for the
+    You can also pass a relative or absolute URL to an image for the
     caption parameter instead of caption text.::
 
         echo $this->Form->submit('ok.png');
@@ -1434,7 +1434,7 @@ Creating buttons and submit elements
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
-    Creates an HTML link, but access the url using method POST. Requires
+    Creates an HTML link, but access the URL using method POST. Requires
     javascript to be enabled in browser.
 
     This method creates a ``<form>`` element. So do not use this method inside
@@ -1662,7 +1662,7 @@ The effected methods are:
 
 **Default URLs on forms is the current action**
 
-The default url for all forms, is now the current url including
+The default URL for all forms, is now the current URL including
 passed, named, and querystring parameters. You can override
 this default by supplying ``$options['url']`` in the second
 parameter of ``$this->Form->create()``

@@ -227,7 +227,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: FULL_BASE_URL
 
-    Full url prefix. Such as ``https://example.com``
+    Full URL prefix. Such as ``https://example.com``
 
     .. deprecated:: 2.4
         This constant is deprecated, you should use :php:meth:`Router::fullbaseUrl()` instead.

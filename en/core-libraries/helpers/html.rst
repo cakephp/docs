@@ -125,7 +125,7 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: The type meta tag you want.
-    :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
+    :param mixed $url: The URL for the meta tag, either a string or a :term:`routing array`.
     :param array $options: An array of :term:`html attributes`.
 
     This method is handy for linking to external resources like RSS/Atom feeds
@@ -582,7 +582,7 @@ methods of the HtmlHelper and how to use them.
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Include a script file(s), contained either locally or as a remote url.
+    Include a script file(s), contained either locally or as a remote URL.
 
     By default, script tags are added to the document inline.  If you override
     this by setting ``$options['inline']`` to false, the script tags will instead
@@ -873,7 +873,7 @@ methods of the HtmlHelper and how to use them.
 
     Returns an URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it
-    generates the url for the controller and action combo. If full is
+    generates the URL for the controller and action combo. If full is
     true, the full base URL will be prepended to the result::
 
         echo $this->Html->url(array(

@@ -23,7 +23,7 @@ contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods which are called *actions*.  Actions are
 methods on a controller that handle requests.  By default all public methods on
-a controller are an action, and accessible from a url.  Actions are responsible
+a controller are an action, and accessible from a URL.  Actions are responsible
 for interpreting the request and creating the response.  Usually responses are
 in the form of a rendered view, but there are other ways to create responses as
 well.
@@ -371,7 +371,7 @@ Flow Control
         $this->redirect(array(
             'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
 
-    The generated url would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
+    The generated URL would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 

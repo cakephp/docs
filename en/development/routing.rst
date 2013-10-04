@@ -7,7 +7,7 @@ flexible. Using Apache’s mod\_rewrite is not required for using
 routes, but it will make your address bar look much more tidy.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
-where an array of parameters can be reversed into a string url.
+where an array of parameters can be reversed into a string URL.
 By using reverse routing, you can easily re-factor your applications
 url structure without having to update all your code.
 
@@ -234,14 +234,14 @@ the ApplesController. Inside the view() method, you would need to
 access the passed ID at ``$this->request->params['id']``.
 
 If you have a single controller in your application and you do not want
-the controller name to appear in the url, you can map all URLs to actions
+the controller name to appear in the URL, you can map all URLs to actions
 in your controller.  For example, to map all URLs to actions of the
 ``home`` controller, e.g have URLs like ``/demo`` instead of
 ``/home/demo``, you can do the following::
 
     Router::connect('/:action', array('controller' => 'home'));
 
-If you would like to provide a case insensitive url, you can use regular
+If you would like to provide a case insensitive URL, you can use regular
 expression inline modifiers::
 
     Router::connect(
@@ -351,7 +351,7 @@ parameters should be treated.  Lets go through each of the various rules
 one-by-one:
 
 * 'wibble' has no additional information.  This means it will always parse if
-  found in a url matching this route.
+  found in a URL matching this route.
 * 'fish' has an array of conditions, containing the 'action' key.  This means
   that fish will only be parsed as a named parameter if the action is also index.
 * 'fizz' also has an array of conditions.  However, it contains two controllers,
@@ -381,12 +381,12 @@ related to the router, are to be configured in
     Configure::write('Routing.prefixes', array('admin'));
 
 In your controller, any action with an ``admin_`` prefix will be
-called. Using our users example, accessing the url
+called. Using our users example, accessing the URL
 ``/admin/users/edit/5`` would call the method ``admin_edit`` of our
 ``UsersController`` passing 5 as the first parameter. The view file
 used would be ``app/View/Users/admin_edit.ctp``
 
-You can map the url /admin to your ``admin_index`` action of pages
+You can map the URL /admin to your ``admin_index`` action of pages
 controller using following route::
 
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
@@ -427,7 +427,7 @@ Plugin routing
 --------------
 
 Plugin routing uses the **plugin** key. You can create links that
-point to a plugin, but adding the plugin key to your url array::
+point to a plugin, but adding the plugin key to your URL array::
 
     echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
@@ -524,7 +524,7 @@ there is ``$this->passedArgs`` available in the same way as the
 second one. When using custom routes you can force particular
 parameters to go into the passed arguments as well.
 
-If you were to visit the previously mentioned url, and you
+If you were to visit the previously mentioned URL, and you
 had a controller action that looked like::
 
     CalendarsController extends AppController {
@@ -544,7 +544,7 @@ You would get the following output::
 This same data is also available at ``$this->request->params['pass']``
 and ``$this->passedArgs`` in your controllers, views, and helpers.
 The values in the pass array are numerically indexed based on the
-order they appear in the called url::
+order they appear in the called URL::
 
     debug($this->request->params['pass']);
     debug($this->passedArgs);
@@ -657,7 +657,7 @@ syntax::
         )
     ));
 
-The above would generate the url ``/posts/index/filter[published]:1/filter[frontpage]:1``.
+The above would generate the URL ``/posts/index/filter[published]:1/filter[frontpage]:1``.
 The parameters are then parsed and stored in your controller's passedArgs variable
 as an array, just as you sent them to :php:meth:`Router::url`::
 
@@ -768,7 +768,7 @@ Reverse routing
 ===============
 
 Reverse routing is a feature in CakePHP that is used to allow you to
-easily change your url structure without having to modify all your code.
+easily change your URL structure without having to modify all your code.
 By using :term:`routing arrays <routing array>` to define your URLs, you can
 later configure routes and the generated URLs will automatically update.
 
@@ -799,7 +799,7 @@ document fragments using special keys::
         '#' => 'top'
     ));
 
-    // will generate a url like.
+    // will generate a URL like.
     /posts/index?page=1#top
 
 .. _redirect-routing:
@@ -824,7 +824,7 @@ a destination within your application or an outside location::
 
 Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
 ``/posts/view``.  Using an array as the redirect destination allows
-you to use other routes to define where a url string should be
+you to use other routes to define where a URL string should be
 redirected to.  You can redirect to external locations using
 string URLs as the destination::
 
@@ -931,7 +931,7 @@ Router API
 
     * ``persist`` is used to define which route parameters should be automatically
       included when generating new URLs. You can override persistent parameters
-      by redefining them in a url or remove them by setting the parameter to
+      by redefining them in a URL or remove them by setting the parameter to
       ``false``.  Ex. ``'persist' => array('lang')``
 
     * ``routeClass`` is used to extend and change how individual routes parse
@@ -987,7 +987,7 @@ Router API
 
     * Empty - the method will find the address to the actual controller/action.
     * '/' - the method will find the base URL of application.
-    * A combination of controller/action - the method will find the url for it.
+    * A combination of controller/action - the method will find the URL for it.
 
     There are a few 'special' parameters that can change the final URL string that is generated:
 
@@ -1040,9 +1040,9 @@ Router API
 
 .. php:method:: parse($url)
 
-    :param string $url: The string url to parse.
+    :param string $url: The string URL to parse.
 
-    Parses an incoming url, and generates an array of request parameters
+    Parses an incoming URL, and generates an array of request parameters
     that Dispatcher can act upon. Extending this method allows you to customize
     how incoming URLs are converted into an array.  Return ``false`` from
     URL to indicate a match failure.

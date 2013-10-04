@@ -671,7 +671,7 @@ To call any view method use ``$this->method()``
 .. php:method:: uuid(string $object, mixed $url)
 
     Generates a unique non-random DOM ID for an object, based on the
-    object type and url. This method is often used by helpers that need
+    object type and URL. This method is often used by helpers that need
     to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
 
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
