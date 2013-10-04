@@ -452,7 +452,7 @@ methods of the HtmlHelper and how to use them.
         The ``escapeTitle`` option was added.
 
     Also check :php:meth:`HtmlHelper::url` method
-    for more examples of different types of urls.
+    for more examples of different types of URLs.
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -468,7 +468,7 @@ methods of the HtmlHelper and how to use them.
           or "video". If type is not provided media type is guessed based on
           file's mime type.
         - `text` Text to include inside the video tag
-        - `pathPrefix` Path prefix to use for relative urls, defaults to
+        - `pathPrefix` Path prefix to use for relative URLs, defaults to
           'files/'
         - `fullBase` If provided the src attribute will get a full address
           including domain name

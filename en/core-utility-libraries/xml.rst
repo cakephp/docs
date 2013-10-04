@@ -283,7 +283,7 @@ Xml API
 =======
 
 A factory and conversion class for creating SimpleXml or DOMDocument objects
-from a number of sources including strings, arrays and remote urls.
+from a number of sources including strings, arrays and remote URLs.
 
 .. php:staticmethod:: build($input, $options = array())
 

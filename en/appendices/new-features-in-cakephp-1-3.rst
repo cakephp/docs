@@ -302,7 +302,7 @@ Router and Dispatcher
 
 **Router**
 
-Generating urls with new style prefixes works exactly the same as
+Generating URLs with new style prefixes works exactly the same as
 admin routing did in 1.2. They use the same syntax and
 persist/behave in the same way. Assuming you have
 ``Configure::write('Routing.prefixes', array('admin', 'member'));``
@@ -456,7 +456,7 @@ updated to allow the scaffolding of any one prefix::
         var $scaffold = 'member';
     }
 
-Would use scaffolding for member prefixed urls.
+Would use scaffolding for member prefixed URLs.
 
 **Validation**
 

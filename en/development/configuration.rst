@@ -289,7 +289,7 @@ Security.cipherSeed
     strings.
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
-    file at the end of asset files urls (CSS, JavaScript, Image) when
+    file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
     (boolean) false - Doesn't do anything (default)

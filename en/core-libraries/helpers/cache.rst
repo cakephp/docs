@@ -135,7 +135,7 @@ view is cleared, and new content is generated on the next request.
 .. note::
 
     This automatic cache clearing requires the controller/model name to be part
-    of the URL. If you've used routing to change your urls this feature will not
+    of the URL. If you've used routing to change your URLs this feature will not
     work.
 
 If you need to manually clear the cache, you can do so by calling

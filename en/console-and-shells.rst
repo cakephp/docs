@@ -800,7 +800,7 @@ In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP
 other webbrowser specific environment variables are not set.
 
 If you generate reports or send emails that make use of ``Router::url()`` those will contain
-the default host ``http://localhost/``  and thus resulting in invalid urls. In this case you need to
+the default host ``http://localhost/``  and thus resulting in invalid URLs. In this case you need to
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 

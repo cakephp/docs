@@ -599,7 +599,7 @@ Other Useful Methods
     The ``requestAction`` call will not be made while the cached
     element view file exists and is valid.
 
-    In addition, requestAction now takes array based cake style urls::
+    In addition, requestAction now takes array based cake style URLs::
 
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
@@ -634,7 +634,7 @@ Other Useful Methods
 
     .. note::
 
-        Unlike other places where array urls are analogous to string urls,
+        Unlike other places where array URLs are analogous to string URLs,
         requestAction treats them differently.
 
     When using an array url in conjunction with requestAction() you

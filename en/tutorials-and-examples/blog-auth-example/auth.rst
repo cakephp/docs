@@ -2,7 +2,7 @@ Simple Authentication and Authorization Application
 ###################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
-secure the access to certain urls, based on the logged in
+secure the access to certain URLs, based on the logged in
 user. We also have another requirement, to allow our blog to have multiple authors
 so each one of them can create their own posts, edit and delete them at will
 disallowing other authors to make any changes on one's posts.
@@ -175,7 +175,7 @@ file and add the following lines::
     }
 
 There is not much to configure, as we used the conventions for the users table.
-We just set up the urls that will be loaded after the login and logout actions is
+We just set up the URLs that will be loaded after the login and logout actions is
 performed, in our case to ``/posts/`` and ``/`` respectively.
 
 What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
