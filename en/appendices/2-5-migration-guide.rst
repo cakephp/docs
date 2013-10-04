@@ -59,6 +59,12 @@ Hash
 - :php:meth:`Hash::insert()` and :php:meth:`Hash::remove()` now support matcher
   expressions in their path selectors.
 
+Folder
+------
+
+- :php:meth:`Folder::addPathElement()` now accepts an array for the ``$element``
+  parameter.
+
 Security
 --------
 
