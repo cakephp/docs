@@ -11,6 +11,7 @@ Cache
   ext/memcached instead of ext/memcache. It supports improved performance and
   shared persistent connections.
 - The ``Memcache`` adapter is now deprecated in favor of ``Memcached``.
+- :php:meth:`Cache::remember()` was added.
 
 Console
 =======
