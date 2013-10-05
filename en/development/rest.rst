@@ -200,6 +200,7 @@ this method you need to set *all* the defaults you want to use::
 By overwriting the default resource map, future calls to ``mapResources()`` will
 use the new values.
 
+.. _custom-rest-routing:
 
 Custom REST Routing
 ===================
@@ -208,6 +209,18 @@ If the default routes created by :php:meth:`Router::mapResources()` don't work
 for you, use the :php:meth:`Router::connect()` method to define a custom set of
 REST routes. The ``connect()`` method allows you to define a number of different
 options for a given URL. See the section on :ref:`route-conditions` for more information.
+
+.. versionadded:: 2.5
+
+You can provide ``connectOptions`` key in the ``$options`` array for
+:php:meth:`Router::mapResources()` to provide custom setting used by
+:php:meth:`Router::connect()`::
+
+    Router::mapResources('books', array(
+        'connectOptions' => array(
+            'routeClass' => 'ApiRoute',
+        )
+    ));
 
 .. meta::
     :title lang=en: REST

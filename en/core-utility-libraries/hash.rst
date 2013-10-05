@@ -37,10 +37,11 @@ elements.  You apply matchers to expression elements.
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
-All expression elements are supported by all methods.  In addition to expression
-elements, you can use attribute matching with certain methods. They are ``extract()``, 
-``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
-``apply()``, ``sort()`` and ``nest()``.
+All of the above expression elements are supported by all methods.  In addition
+to expression elements, you can use attribute matching with certain methods.
+They are ``extract()``, ``combine()``, ``format()``, ``check()``, ``map()``,
+``reduce()``, ``apply()``, ``sort()``, ``insert()``, ``remove()`` and
+``nest()``.
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -64,6 +65,9 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 | ``[text=/.../]``               | Match elements that have values matching   |
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
+
+.. versionchanged:: 2.5
+    Matcher support was added to ``insert()`` and ``remove()``.
 
 .. php:staticmethod:: get(array $data, $path)
 
@@ -93,8 +97,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path. This method **only** supports
-    the expression types of :ref:`hash-path-syntax`::
+    Inserts $data into an array as defined by ``$path``::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -119,12 +122,15 @@ elements, you can use attribute matching with certain methods. They are ``extrac
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
+    .. versionchanged:: 2.5
+        As of 2.5.0 attribute matching expressions work with insert().
+
+
 .. php:staticmethod:: remove(array $data, $path = null)
 
     :rtype: array
 
-    Removes all elements from an array that match $path. This method **only** supports
-    the expression types of :ref:`hash-path-syntax`::
+    Removes all elements from an array that match $path.::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -143,6 +149,9 @@ elements, you can use attribute matching with certain methods. They are ``extrac
         */
 
     Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+
+    .. versionchanged:: 2.5
+        As of 2.5.0 attribute matching expressions work with remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 

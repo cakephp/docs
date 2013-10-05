@@ -68,9 +68,16 @@ Folder API
 
     Returns $path with $element added, with correct slash in-between::
 
-        <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
         // $path equals /a/path/for/testing
+
+    $element can also be an array::
+
+        $path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+        // $path equals /a/path/for/testing/another
+
+    .. versionadded:: 2.5
+        $element parameter accepts an array as of 2.5
 
 
 .. php:method:: cd( $path )
