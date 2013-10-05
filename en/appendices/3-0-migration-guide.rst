@@ -375,7 +375,7 @@ PaginatorHelper
   'class', 'tag', 'ellipsis' options. These options are now facilitated through
   templates.
 
-By default all links and inactive text are wrapped in ``<li>`` elements. This
+By default all links and inactive text is wrapped in ``<li>`` elements. This
 helps make CSS easier to write, and improves compatibility with popular CSS
 frameworks.
 
