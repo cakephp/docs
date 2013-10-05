@@ -287,7 +287,7 @@ Callbacks
     returns false the controller will not continue on to redirect the
     request. The $url, $status and $exit variables have same meaning as
     for the controller's method. You can also return a string which
-    will be interpreted as the url to redirect to or return associative
+    will be interpreted as the URL to redirect to or return associative
     array with key 'url' and optionally 'status' and 'exit'.
 
 

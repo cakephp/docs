@@ -78,14 +78,14 @@ Accessing Querystring parameters
 
 Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
 
-    // url is /posts/index?page=1&sort=title
+    // URL is /posts/index?page=1&sort=title
     $this->request->query['page'];
 
     // You can also access it via array access
     $this->request['url']['page']; // BC accessor, will be deprecated in future versions
 
 You can either directly access the query property, or you can use
-:php:meth:`CakeRequest::query()` to read the url query array in an error free manner.
+:php:meth:`CakeRequest::query()` to read the URL query array in an error free manner.
 Any keys that do not exist will return ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -308,9 +308,9 @@ CakeRequest API
 
 .. php:method:: query($name)
 
-    Provides dot notation access to url query data::
+    Provides dot notation access to URL query data::
 
-        // url is /posts/index?page=1&sort=title
+        // URL is /posts/index?page=1&sort=title
         $value = $this->request->query('page');
 
     .. versionadded:: 2.3
@@ -667,7 +667,7 @@ included in your controller::
 The Vary header
 ---------------
 
-In some cases you might want to serve different contents using the same url.
+In some cases you might want to serve different contents using the same URL.
 This is often the case when you have a multilingual page or respond with
 different HTML according to the browser that is requesting the resource. For
 such circumstances, you use the Vary header::
