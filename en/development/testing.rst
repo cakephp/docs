@@ -33,7 +33,7 @@ your php.ini file and making sure that the PHPUnit files are in one of the
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
-    modifier if using the CLI or add ``&debug=1`` to the url if using the web
+    modifier if using the CLI or add ``&debug=1`` to the URL if using the web
     runner to display output.
 
 Test Database Setup

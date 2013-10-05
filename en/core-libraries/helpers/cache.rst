@@ -12,7 +12,7 @@ blocks of content should not be cached. The CacheHelper then uses helper
 callbacks to process the file and output to generate the cache file.
 
 When a URL is requested, CakePHP checks to see if that request string has already
-been cached. If it has, the rest of the url dispatching process is skipped. Any
+been cached. If it has, the rest of the URL dispatching process is skipped. Any
 nocache blocks are processed normally and the view is served. This creates a big
 savings in processing time for each request to a cached URL as minimal code is
 executed. If Cake doesn't find a cached view, or the cache has expired for the

@@ -540,7 +540,7 @@ styling easier.
 The disabled state of these methods now defaults to ``<span>`` tags
 instead of ``<div>`` tags.
 
-passedArgs are now auto merged with url options in paginator.
+passedArgs are now auto merged with URL options in paginator.
 
 ``sort()``, ``prev()``, ``next()`` now add additional class names
 to the generated html. ``prev()`` adds a class of prev. ``next()``
@@ -611,7 +611,7 @@ new features in the FormHelper.
 
 CacheHelper's interactions with ``Controller::$cacheAction`` has
 changed slightly. In the past if you used an array for
-``$cacheAction`` you were required to use the routed url as the
+``$cacheAction`` you were required to use the routed URL as the
 keys, this caused caching to break whenever routes were changed.
 You also could set different cache durations for different passed
 argument values, but not different named parameters or query string

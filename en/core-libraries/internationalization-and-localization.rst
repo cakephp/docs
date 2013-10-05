@@ -178,11 +178,11 @@ Doing this will ensure that both :php:class:`I18n` and
 :php:class:`TranslateBehavior` access the same language value.
 
 It's a good idea to serve up public content available in multiple
-languages from a unique url - this makes it easy for users (and
+languages from a unique URL - this makes it easy for users (and
 search engines) to find what they're looking for in the language
 they are expecting. There are several ways to do this, it can be by
 using language specific subdomains (en.example.com,
-fra.example.com, etc.), or using a prefix to the url such as is
+fra.example.com, etc.), or using a prefix to the URL such as is
 done with this application. You may also wish to glean the
 information from the browser’s user-agent, among other things.
 

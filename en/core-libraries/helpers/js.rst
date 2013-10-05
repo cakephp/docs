@@ -630,7 +630,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Options**
 
-    -  ``url`` - The url you wish the XHR request to submit to.
+    -  ``url`` - The URL you wish the XHR request to submit to.
     -  ``confirm`` - Confirm message displayed before sending the
        request. Using confirm, does not replace any ``before`` callback
        methods in the generated XmlHttpRequest.

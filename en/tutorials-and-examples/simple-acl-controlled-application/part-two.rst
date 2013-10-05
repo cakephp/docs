@@ -174,7 +174,7 @@ following::
 
 This sets a Session flash message and logs out the User using
 Auth's logout method. Auth's logout method basically deletes the
-Auth Session Key and returns a url that can be used in a redirect.
+Auth Session Key and returns a URL that can be used in a redirect.
 If there is other session data that needs to be deleted as well add
 that code here.
 
