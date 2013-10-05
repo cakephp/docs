@@ -147,7 +147,7 @@ basic directory structure. It should look like this::
                 /Behavior
             /View
                 /Helper
-                /Layouts
+                /Layout
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
@@ -446,8 +446,8 @@ applications:
    [Plugin]AppModel, you'll get missing Controller errors when trying
    to access a plugin controller.
 -  You can define your own layouts for plugins, inside
-   /Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
-   layouts from the /App/View/Layouts folder by default.
+   /Plugin/[Plugin]/View/Layout. Otherwise, plugins will use the
+   layouts from the /App/View/Layout folder by default.
 -  You can do inter-plugin communication by using
    ``$this->requestAction('/plugin_name/controller_name/action');`` in your
    controllers.

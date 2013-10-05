@@ -223,12 +223,12 @@ Folder API
         /*
         Array
         (
-            [0] => /var/www/cake/app/webroot/index.php
-            [1] => /var/www/cake/app/webroot/test.php
-            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
-            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
-            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
-            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
+            [0] => /var/www/cake/App/webroot/index.php
+            [1] => /var/www/cake/App/webroot/test.php
+            [2] => /var/www/cake/App/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/App/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/App/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/App/webroot/img/test-pass-icon.png
         )
         */
 
@@ -249,10 +249,10 @@ Folder API
         <?php
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
-        // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
+        // $result = true, /var/www/example/App/ is in /var/www/example/App/webroot/
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/app/webroot/ is in /var/www/example/app/webroot/img/
+        // $result = true, /var/www/example/App/webroot/ is in /var/www/example/App/webroot/img/
 
 
 .. php:staticmethod:: isAbsolute( $path )

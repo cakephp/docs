@@ -282,10 +282,10 @@ Exception Renderer
 The ExceptionRenderer class with the help of ``CakeErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
-The error page views are located at ``App/View/Errors/``. For all 4xx and 5xx errors
-the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can 
-customize them as per your needs. By default your ``App/Layouts/default.ctp`` is used
-for error pages too. If for example, you want to use another layout ``App/Layouts/my_error.ctp``
+The error page views are located at ``App/View/Error/``. For all 4xx and 5xx errors
+the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can
+customize them as per your needs. By default your ``App/Layout/default.ctp`` is used
+for error pages too. If for example, you want to use another layout ``App/Layout/my_error.ctp``
 for your error pages. Simply edit the error views and add the statement
 ``$this->layout = 'my_error';`` to the ``error400.ctp`` and ``error500.ctp``.
 
@@ -314,7 +314,7 @@ application contained the following exception::
     class MissingWidgetException extends Exception {};
 
 You could provide nice development errors, by creating
-``App/View/Errors/missing_widget.ctp``.  When in production mode, the above
+``App/View/Error/missing_widget.ctp``.  When in production mode, the above
 error would be treated as a 500 error.  The constructor for :php:exc:`Cake\\Error\\Exception`
 has been extended, allowing you to pass in hashes of data.  These hashes are
 interpolated into the the messageTemplate, as well as into the view that is used

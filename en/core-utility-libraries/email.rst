@@ -208,7 +208,7 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Emails``.  Email views can also use layouts, 
+``View`` directory called ``Emails``.  Email views can also use layouts,
 and elements just like normal views::
 
     $email = new Email();
@@ -218,8 +218,8 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``App/View/Emails/html/welcome.ctp`` for the view,
-and ``App/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
+The above would use ``App/View/Email/html/welcome.ctp`` for the view,
+and ``App/View/Layout/Email/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -231,10 +231,10 @@ send multipart templated email messages as well::
 
 This would use the following view files:
 
-* ``App/View/Emails/text/welcome.ctp``
-* ``App/View/Layouts/Emails/text/fancy.ctp``
-* ``App/View/Emails/html/welcome.ctp``
-* ``App/View/Layouts/Emails/html/fancy.ctp``
+* ``App/View/Email/text/welcome.ctp``
+* ``App/View/Layout/Email/text/fancy.ctp``
+* ``App/View/Email/html/welcome.ctp``
+* ``App/View/Layout/Email/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -275,7 +275,7 @@ You can do this using themes by telling Email to use appropriate theme using
 
 This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin.  The template file needs to be created in the following path:
-``App/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
+``App/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Sending attachments
 ===================

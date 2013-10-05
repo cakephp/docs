@@ -59,13 +59,13 @@ See also :doc:`Behaviors <models/behaviors>` for more information on
 how to apply similar logic to multiple models.
 
 Back to our Ingredient model, in order to work on it, create the PHP file in the
-``/app/Model/`` directory. By convention it should have the same name as the class;
+``/App/Model/`` directory. By convention it should have the same name as the class;
 for this example ``Ingredient.php``.
 
 .. note::
 
     CakePHP will dynamically create a model object for you if it cannot
-    find a corresponding file in /app/Model. This also means that if
+    find a corresponding file in /App/Model. This also means that if
     your model file isn't named correctly (i.e. ingredient.php or
     Ingredients.php) CakePHP will use an instance of AppModel rather
     than your missing (from CakePHP's perspective) model file. If

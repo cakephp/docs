@@ -76,6 +76,7 @@ Basics
 Cache
 =====
 
+* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\Engine\Memcached` instead.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 * :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
@@ -153,7 +154,8 @@ Log
   synchronization issues with configuration options.
 * Log engines are now lazily loaded upon the first write to the logs.
 * :php:meth:`Cake\\Log\\Log::engine()` has been added.
-* ``Log::defaultLevels()`` was removed.
+* The following methods have been removed from :php:class:`Cake\\Log\\Log` ::
+  ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
 * You can no longer create custom levels using ``Log::levels()``.
 * When configuring loggers you should use ``'levels'`` instead of 'types'.
 * You can no longer specify custom log levels.  You must use the default set of
@@ -246,6 +248,15 @@ Request
 * :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
   key, as that prefix has been removed.
 
+Response
+-------
+
+* The mapping of mimetype ``text/plain`` to extension ``csv`` has been removed.
+  As a consequence :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
+  doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
+  which was a common annoyance when receiving jquery's xhr requests.
+
+
 Network\Http
 ============
 
@@ -282,6 +293,8 @@ Controller
 - The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
   with **all** parent classes not just ``AppController`` and the plugin
   app controller.
+- ``Controller::httpCodes()`` has been removed, use :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
+- ``Controller::disableCache()`` has been removed, use :php:meth::`Cake\\Network\\Response::disableCache()` instead.
 
 ComponentCollection replaced
 ----------------------------
@@ -309,6 +322,32 @@ CookieComponent
   are now un-readable because ``Security::cipher()`` has been removed. You will
   need to re-encrypt cookies with the ``rijndael`` method before upgrading.
 
+AuthComponent
+-------------
+
+- ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
+  class instead.
+- ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
+  with ``hashType`` set to ``Blowfish``.
+
+RequestHandlerComponent
+-----------------------
+
+- The following methods have been removed from RequestHandler component::
+  ``isAjax()``, ``isFlash()``, ``isSSL()``, ``isPut()``, ``isPost()``, ``isGet()``, ``isDelete()``.
+  Use the :php:meth:`Cake\\Network\\Request::is()` method instead with relevant argument.
+- ``RequestHandler::setContent()`` has removed, use :php:meth:`Cake\\Network\\Response::type()` instead.
+- ``RequestHandler::getReferer()`` has removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
+- ``RequestHandler::getClientIP()`` has removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
+- ``RequestHandler::mapType()`` has removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
+
+SecurityComponent
+-----------------
+
+- The following methods and their related properties have been removed from Security component::
+  ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
+  Use the :php:meth:`Cake\\Network\\Request::onlyAllow()`instead.
+- ``SecurityComponent::$disabledFields()`` has been removed, use ```SecurityComponent::$unlockedFields()``.
 
 Model
 =====
@@ -343,6 +382,18 @@ ControllerTestCase
 View
 ====
 
+View folders renamed
+-------------------------
+
+The following View folders have been renamed to avoid naming collisions with controller names:
+
+- ``Layouts`` is now ``Layout``
+- ``Elements`` is now ``Element``
+- ``Scaffolds`` is now ``Scaffold``
+- ``Errors`` is now ``Error``
+- ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
+
+
 HelperCollection replaced
 -------------------------
 
@@ -350,6 +401,18 @@ This class has been renamed to :php:class:`Cake\\View\\HelperRegistry`.
 See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code.
+
+View
+====
+
+- Key ``plugin`` has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
+  Specify the element name as ``SomePlugin.element_name`` instead.
+- ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
+
+ViewBlock
+---------
+
+- ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead.
 
 
 View\\Helper
@@ -374,6 +437,8 @@ PaginatorHelper
 - ``numbers()`` no longer has 'separator', 'tag', 'currentTag', 'currentClass',
   'class', 'tag', 'ellipsis' options. These options are now facilitated through
   templates.
+- The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
+  Use ``{{page}}`` style placeholders instead.
 
 By default all links and inactive text is wrapped in ``<li>`` elements. This
 helps make CSS easier to write, and improves compatibility with popular CSS
