@@ -330,7 +330,7 @@ Modifying the options PaginatorHelper uses
 
 Sets all the options for the Paginator Helper. Supported options are:
 
-* ``url`` The URL of the paginating action. ‘url’ has a few sub options as well:
+* ``url`` The URL of the paginating action. 'url' has a few sub options as well:
 
   -  ``sort`` The key that the records are sorted by.
   -  ``direction`` The direction of the sorting. Defaults to 'ASC'.

@@ -161,7 +161,7 @@ There are a number of options for create():
      <form id="UserLoginForm" method="post" action="/users/login">
 
 * ``$options['url']`` If the desired form action isn’t in the current
-  controller, you can specify a URL for the form action using the ‘url’ key of
+  controller, you can specify a URL for the form action using the 'url' key of
   the $options array. The supplied URL can be relative to your CakePHP
   application::
 
