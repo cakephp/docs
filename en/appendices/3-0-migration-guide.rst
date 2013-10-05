@@ -426,9 +426,27 @@ FormHelper
 PaginatorHelper
 ---------------
 
+- ``link()`` has been removed. It was no longer used by the helper internally.
+  It had low usage in user land code, and no longer fit the goals of the helper.
+- ``next()`` no longer has 'class', or 'tag' options. It no longer has disabled
+  arguments. Instead templates are used.
+- ``prev()`` no longer has 'class', or 'tag' options. It no longer has disabled
+  arguments. Instead templates are used.
+- ``first()`` no longer has 'after', 'ellipsis', 'separator', 'class', or 'tag' options.
+- ``last()`` no longer has 'after', 'ellipsis', 'separator', 'class', or 'tag' options.
+- ``numbers()`` no longer has 'separator', 'tag', 'currentTag', 'currentClass',
+  'class', 'tag', 'ellipsis' options. These options are now facilitated through
+  templates.
 - The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
-  Use ``{:page}`` style placeholders instead.
+  Use ``{{page}}`` style placeholders instead.
 
+By default all links and inactive text is wrapped in ``<li>`` elements. This
+helps make CSS easier to write, and improves compatibility with popular CSS
+frameworks.
+
+Instead of the various options in each method, you should use the templates
+feature. See the :ref:`paginator-templates` documentation for
+information on how to use templates.
 
 Core
 =====
