@@ -13,7 +13,7 @@ use to aid in:
     :start-line: 7
 
 Each of these core components are detailed in their own chapters.
-For now, we’ll show you how to create your own components. Creating
+For now, we'll show you how to create your own components. Creating
 components keeps controller code clean and allows you to reuse code
 between projects.
 

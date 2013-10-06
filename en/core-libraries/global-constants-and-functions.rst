@@ -8,7 +8,7 @@ functions are for use with CakePHP classes (loading model or
 component classes), but many others make working with arrays or
 strings a little easier.
 
-We’ll also cover some of the constants available in CakePHP
+We'll also cover some of the constants available in CakePHP
 applications. Using these constants will help make upgrades more
 smooth, but are also convenient ways to point to certain files or
 directories in your CakePHP application.

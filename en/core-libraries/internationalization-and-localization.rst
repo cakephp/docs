@@ -6,7 +6,7 @@ audience is to cater for multiple languages. This can often prove
 to be a daunting task, but the internationalization and
 localization features in CakePHP make it much easier.
 
-First, it’s important to understand some terminology.
+First, it's important to understand some terminology.
 *Internationalization* refers to the ability of an application to
 be localized. The term *localization* refers to the adaptation of
 an application to meet specific language (or culture) requirements
@@ -184,7 +184,7 @@ they are expecting. There are several ways to do this, it can be by
 using language specific subdomains (en.example.com,
 fra.example.com, etc.), or using a prefix to the URL such as is
 done with this application. You may also wish to glean the
-information from the browser’s user-agent, among other things.
+information from the browser's user-agent, among other things.
 
 As mentioned in the previous section, displaying localized content
 is done using the :php:func:`__()` convenience function, or one of the other

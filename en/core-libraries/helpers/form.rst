@@ -13,7 +13,7 @@ only what you need.
 Creating Forms
 ==============
 
-The first method you’ll need to use in order to take advantage of
+The first method you'll need to use in order to take advantage of
 the FormHelper is ``create()``. This special method outputs an
 opening form tag.
 
@@ -26,7 +26,7 @@ opening form tag.
     The form element is also returned with a DOM ID. The ID is
     generated using the name of the model, and the name of the
     controller action, CamelCased. If I were to call ``create()``
-    inside a UsersController view, I’d see something like the following
+    inside a UsersController view, I'd see something like the following
     output in the rendered view:
 
     .. code-block:: html
@@ -148,7 +148,7 @@ There are a number of options for create():
   browsers.
 
 * ``$options['action']`` The action key allows you to point the form to a
-  specific action in your current controller. For example, if you’d like to
+  specific action in your current controller. For example, if you'd like to
   point the form to the login() action of the current controller, you would
   supply an $options array like the following::
 
@@ -160,7 +160,7 @@ There are a number of options for create():
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
-* ``$options['url']`` If the desired form action isn’t in the current
+* ``$options['url']`` If the desired form action isn't in the current
   controller, you can specify a URL for the form action using the 'url' key of
   the $options array. The supplied URL can be relative to your CakePHP
   application::
@@ -333,7 +333,7 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     for the input button you generate using :php:meth:`FormHelper::submit()` or
     set ``'novalidate' => true`` in options for :php:meth:`FormHelper::create()`.
 
-    For example, let’s assume that your User model includes fields for a
+    For example, let's assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
     quote (text). You can use the input() method of the FormHelper to
     create appropriate inputs for all of these form fields::
@@ -779,7 +779,7 @@ Options for select, checkbox and  radio inputs
 ----------------------------------------------
 
 * ``$options['selected']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set ‘selected’ to the value of the
+  For types select, date, time, datetime). Set 'selected' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->input('close_time', array(
@@ -1364,7 +1364,7 @@ Creating buttons and submit elements
 .. php:method:: submit(string $caption, array $options)
 
     Creates a submit button with caption ``$caption``. If the supplied
-    ``$caption`` is a URL to an image (it contains a ‘.’ character),
+    ``$caption`` is a URL to an image (it contains a '.' character),
     the submit button will be rendered as an image.
 
     It is enclosed between ``div`` tags by default; you can avoid this
@@ -1451,8 +1451,8 @@ Creating date and time inputs
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Creates a set of select inputs for date and time. Valid values for
-    $dateformat are ‘DMY’, ‘MDY’, ‘YMD’ or ‘NONE’. Valid values for
-    $timeFormat are ‘12’, ‘24’, and null.
+    $dateformat are 'DMY', 'MDY', 'YMD' or 'NONE'. Valid values for
+    $timeFormat are '12', '24', and null.
 
     You can specify not to display empty values by setting
     "array('empty' => false)" in the attributes parameter. It will also
@@ -1552,7 +1552,7 @@ Creating date and time inputs
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-    Creates a select element populated with ‘am’ and ‘pm’.
+    Creates a select element populated with 'am' and 'pm'.
 
 
 Displaying and checking errors

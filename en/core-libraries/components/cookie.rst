@@ -62,7 +62,7 @@ The following snippet of controller code shows how to include the
 CookieComponent and set up the controller variables needed to write
 a cookie named 'baker\_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only::
+'/bakers/preferences/', expires in one hour and is HTTP only::
 
     public $components = array('Cookie');
     public function beforeFilter() {
@@ -76,7 +76,7 @@ a secure connection, is available on the path
         $this->Cookie->httpOnly = true;
     }
 
-Next, let’s look at how to use the different methods of the Cookie
+Next, let's look at how to use the different methods of the Cookie
 Component.
 
 Using the Component

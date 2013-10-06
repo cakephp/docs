@@ -51,7 +51,7 @@ datasource
 persistent
     Whether or not to use a persistent connection to the database.
 host
-    The database server’s hostname (or IP address).
+    The database server's hostname (or IP address).
 login
     The username for the account.
 password
@@ -60,7 +60,7 @@ database
     The name of the database for this connection to use.
 prefix (*optional*)
     The string that prefixes every table name in the database. If your
-    tables don’t have prefixes, set this to an empty string.
+    tables don't have prefixes, set this to an empty string.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
 encoding
@@ -118,9 +118,9 @@ bakers, pastry\_stores, and savory\_cakes.
 Additional Class Paths
 ======================
 
-It’s occasionally useful to be able to share MVC classes between
+It's occasionally useful to be able to share MVC classes between
 applications on the same system. If you want the same controller in
-both applications, you can use CakePHP’s bootstrap.php to bring
+both applications, you can use CakePHP's bootstrap.php to bring
 these additional classes into view.
 
 By using :php:meth:`App::build()` in bootstrap.php we can define additional
@@ -164,7 +164,7 @@ determine CakePHP's internal behavior.
 ``app/Config/core.php``. This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
-variables, you’ll need to be familiar with :php:class:`Configure`, CakePHP’s
+variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
 configuration registry class.
 
 CakePHP Core Configuration
@@ -233,9 +233,9 @@ App.encoding
     is used to generate the charset in the layout, and encode entities.
     It should match the encoding values specified for your database.
 Routing.prefixes
-    Un-comment this definition if you’d like to take advantage of
+    Un-comment this definition if you'd like to take advantage of
     CakePHP prefixed routes like admin. Set this variable with an array
-    of prefix names of the routes you’d like to use. More on this
+    of prefix names of the routes you'd like to use. More on this
     later.
 Cache.disable
     When set to true, persistent caching is disabled site-wide.
@@ -296,11 +296,11 @@ Asset.timestamp
     (boolean) true - Appends the timestamp when debug > 0
     (string) 'force' - Appends the timestamp when debug >= 0
 Acl.classname, Acl.database
-    Constants used for CakePHP’s Access Control List functionality. See
+    Constants used for CakePHP's Access Control List functionality. See
     the Access Control Lists chapter for more information.
 
 .. note::
-    Cache configuration is also found in core.php — We’ll be covering
+    Cache configuration is also found in core.php — We'll be covering
     that later on, so stay tuned.
 
 The :php:class:`Configure` class can be used to read and write core
@@ -338,21 +338,21 @@ Configure Class
 
 .. php:class:: Configure
 
-Despite few things needing to be configured in CakePHP, it’s
+Despite few things needing to be configured in CakePHP, it's
 sometimes useful to have your own configuration rules for your
 application. In the past you may have defined custom configuration
 values by defining variable or constants in some files. Doing so
 forces you to include that configuration file every time you needed
 to use those values.
 
-CakePHP’s Configure class can be used to store and retrieve
+CakePHP's Configure class can be used to store and retrieve
 application or runtime specific values. Be careful, this class
 allows you to store anything in it, then use it in any other part
 of your code: a sure temptation to break the MVC pattern CakePHP
 was designed for. The main goal of Configure class is to keep
 centralized variables that can be shared between many objects.
 Remember to try to live by "convention over configuration" and you
-won't end up breaking the MVC structure we’ve set in place.
+won't end up breaking the MVC structure we've set in place.
 
 This class can be called from
 anywhere within your application, in a static context::
@@ -364,7 +364,7 @@ anywhere within your application, in a static context::
     :param string $key: The key to write, can use be a :term:`dot notation` value.
     :param mixed $value: The value to store.
 
-    Use ``write()`` to store data in the application’s configuration::
+    Use ``write()`` to store data in the application's configuration::
 
         Configure::write('Company.name','Pizza, Inc.');
         Configure::write('Company.slogan','Pizza for your body and soul');
@@ -390,7 +390,7 @@ anywhere within your application, in a static context::
     :param string $key: The key to read, can use be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
-    CakePHP’s important debug value. If a key is supplied, the data is
+    CakePHP's important debug value. If a key is supplied, the data is
     returned. Using our examples from write() above, we can read that
     data back::
 
@@ -417,7 +417,7 @@ anywhere within your application, in a static context::
 
     :param string $key: The key to delete, can use be a :term:`dot notation` value
 
-    Used to delete information from the application’s configuration::
+    Used to delete information from the application's configuration::
 
         Configure::delete('Company.name');
 
@@ -739,9 +739,9 @@ over the core rules.
 Bootstrapping CakePHP
 =====================
 
-If you have any additional configuration needs, use CakePHP’s
+If you have any additional configuration needs, use CakePHP's
 bootstrap file, found in app/Config/bootstrap.php. This file is
-executed just after CakePHP’s core bootstrapping.
+executed just after CakePHP's core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:
 
@@ -757,7 +757,7 @@ things to the bootstrap file: it might be tempting to place
 formatting functions there in order to use them in your
 controllers.
 
-Resist the urge. You’ll be glad you did later on down the line.
+Resist the urge. You'll be glad you did later on down the line.
 
 You might also consider placing things in the :php:class:`AppController` class.
 This class is a parent class to all of the controllers in your

@@ -16,7 +16,7 @@ The CakePHP console
 ===================
 
 This section provides an introduction into CakePHP at the
-command-line. If you’ve ever needed access to your CakePHP MVC
+command-line. If you've ever needed access to your CakePHP MVC
 classes in a cron job or other command-line script, this section is
 for you.
 
@@ -31,10 +31,10 @@ parameters.
     A command-line (CLI) build of PHP must be available on the system
     if you plan to use the Console.
 
-Before we get into specifics, let’s make sure we can run the
-CakePHP console. First, you’ll need to bring up a system shell. The
+Before we get into specifics, let's make sure we can run the
+CakePHP console. First, you'll need to bring up a system shell. The
 examples shown in this section will be in bash, but the CakePHP
-Console is Windows-compatible as well. Let’s execute the Console
+Console is Windows-compatible as well. Let's execute the Console
 program from bash. This example assumes that the user is currently
 logged into a bash prompt and is currently at the root of a CakePHP
 application.
@@ -91,7 +91,7 @@ be accessed easily. Printing out the working, root, app, and core
 paths allows you to see where the console will be making changes.
 To change the app folder you wish to work with, you can supply its
 path as the first argument to the cake command. This next example
-shows how to specify an app folder, assuming you’ve already added
+shows how to specify an app folder, assuming you've already added
 the console folder to your ``PATH``::
 
     $ cake -app /path/to/cakephp/app

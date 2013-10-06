@@ -26,7 +26,7 @@ to a remote application via SOAP, or output a CSV file for a user.
 By default CakePHP view files are written in plain PHP and have a default
 extension of .ctp (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
-controller in a format that is ready for the audience you’re
+controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP.
@@ -412,7 +412,7 @@ return, rather than a fully-rendered interface). The flash layout
 is used for messages shown by :php:meth:`Controller::flash()` method.
 
 Three other layouts, xml, js, and rss, exist in the core for a quick
-and easy way to serve up content that isn’t text/html.
+and easy way to serve up content that isn't text/html.
 
 Using layouts from plugins
 --------------------------

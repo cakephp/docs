@@ -110,7 +110,7 @@ application:
 
 #. The core CakePHP libraries, in /lib/Cake.
 #. Your application code, in /app.
-#. The application’s webroot, usually in /app/webroot.
+#. The application's webroot, usually in /app/webroot.
 
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
@@ -135,13 +135,13 @@ There are three constants that you'll need to edit: ``ROOT``,
 -  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your
    CakePHP libraries folder.
 
-Let’s run through an example so you can see what an advanced
+Let's run through an example so you can see what an advanced
 installation might look like in practice. Imagine that I wanted to
 set up CakePHP to work as follows:
 
 -  The CakePHP core libraries will be placed in /usr/lib/cake.
--  My application’s webroot directory will be /var/www/mysite/.
--  My application’s app directory will be /home/me/myapp.
+-  My application's webroot directory will be /var/www/mysite/.
+-  My application's app directory will be /home/me/myapp.
 
 Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
