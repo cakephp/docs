@@ -220,7 +220,7 @@ As of 2.5 you can accomplish the above much more simply using
 
         public function newest() {
             $model = $this;
-            return Cache::remember('newest_posts', function () use ($model){
+            return Cache::remember('newest_posts', function() use ($model){
                 return $model->find('all', array(
                     'order' => 'Post.updated DESC',
                     'limit' => 10
