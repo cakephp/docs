@@ -3,7 +3,7 @@ Routing
 
 Routing is a feature that maps URLs to controller actions. It was
 added to CakePHP to make pretty URLs more configurable and
-flexible. Using Apache’s mod\_rewrite is not required for using
+flexible. Using Apache's mod\_rewrite is not required for using
 routes, but it will make your address bar look much more tidy.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
@@ -42,7 +42,7 @@ Default Routing
 
 Before you learn about configuring your own routes, you should know
 that CakePHP comes configured with a default set of routes.
-CakePHP’s default routing will get you pretty far in any
+CakePHP's default routing will get you pretty far in any
 application. You can access an action directly via the URL by
 putting its name in the request. You can also pass parameters to
 your controller actions using the URL.::
@@ -579,7 +579,7 @@ Named parameters
 You can name parameters and send their values using the URL. A
 request for ``/posts/view/title:first/category:general`` would result
 in a call to the view() action of the PostsController. In that
-action, you’d find the values of the title and category parameters
+action, you'd find the values of the title and category parameters
 inside ``$this->params['named']``.  They are also available inside
 ``$this->passedArgs``. In both cases you can access named parameters using their
 name as an index.  If named parameters are omitted, they will not be set.

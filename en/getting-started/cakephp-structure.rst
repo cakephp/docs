@@ -6,7 +6,7 @@ features some additional classes and objects that make development
 in MVC a little quicker and more enjoyable. Components, Behaviors,
 and Helpers are classes that provide extensibility and reusability
 to quickly add functionality to the base MVC classes in your
-applications. Right now we’ll stay at a higher level, so look for
+applications. Right now we'll stay at a higher level, so look for
 the details on how to use these tools later on.
 
 Application Extensions
@@ -19,7 +19,7 @@ application-wide changes. AppController (located at
 ``/app/Model/AppModel.php``) are great places to put methods you want to share
 between all controllers, helpers or models.
 
-Although they aren’t classes or files, routes play a role in
+Although they aren't classes or files, routes play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the
 URL ``/controller/action/var1/var2`` maps to
@@ -46,14 +46,14 @@ shared.
 
 Controllers are also fitted with callbacks. These callbacks are
 available for your use, just in case you need to insert some logic
-between CakePHP’s core operations. Callbacks available include:
+between CakePHP's core operations. Callbacks available include:
 
 -  ``beforeFilter()``, executed before any controller action logic
 -  ``beforeRender()``, executed after controller logic, but before
    the view is rendered
 -  ``afterFilter()``, executed after all controller logic,
    including the view render. There may be no difference between
-   ``afterRender()`` and ``afterFilter()`` unless you’ve manually made
+   ``afterRender()`` and ``afterFilter()`` unless you've manually made
    a call to ``render()`` in your controller action and have included
    some logic after that call.
 

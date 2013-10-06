@@ -6,7 +6,7 @@ Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
 shared between many views, elements, or layouts. This chapter will
 show you how to create your own helpers, and outline the basic
-tasks CakePHP’s core helpers can help you accomplish.
+tasks CakePHP's core helpers can help you accomplish.
 
 CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
@@ -150,7 +150,7 @@ Creating Helpers
 ================
 
 If a core helper (or one showcased on github or the Bakery)
-doesn’t fit your needs, helpers are easy to create.
+doesn't fit your needs, helpers are easy to create.
 
 Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different

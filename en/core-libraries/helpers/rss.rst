@@ -20,7 +20,7 @@ be activated, this is done in ``app/Config/routes.php``::
 
     Router::parseExtensions('rss');
 
-In the call above we’ve activated the .rss extension. When using
+In the call above we've activated the .rss extension. When using
 :php:meth:`Router::parseExtensions()` you can pass as many arguments or
 extensions as you want. This will activate each
 extension/content-type for use in your application. Now when the

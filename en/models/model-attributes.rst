@@ -119,7 +119,7 @@ back from a $this->Group->find() call:
   Users' associated Articles
 
 Set it no higher than you need. Having CakePHP fetch data you
-aren’t going to use slows your app unnecessarily. Also note that
+aren't going to use slows your app unnecessarily. Also note that
 the default recursive level is 1.
 
 .. note::
@@ -156,7 +156,7 @@ values include::
 data
 ====
 
-The container for the model’s fetched data. While data returned
+The container for the model's fetched data. While data returned
 from a model class is normally used as returned from a find() call,
 you may need to access information stored in $data inside of model
 callbacks.
@@ -164,7 +164,7 @@ callbacks.
 \_schema
 ========
 
-Contains metadata describing the model’s database table fields.
+Contains metadata describing the model's database table fields.
 Each field is described by:
 
 -  name

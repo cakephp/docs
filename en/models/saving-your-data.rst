@@ -2,7 +2,7 @@ Saving Your Data
 ################
 
 CakePHP makes saving model data a snap. Data ready to be saved
-should be passed to the model’s ``save()`` method using the
+should be passed to the model's ``save()`` method using the
 following basic format::
 
     Array
@@ -14,7 +14,7 @@ following basic format::
         )
     )
 
-Most of the time you won’t even need to worry about this format:
+Most of the time you won't even need to worry about this format:
 CakePHP's :php:class:`FormHelper`, and model find methods all
 package data in this format. If you're using either of the helpers,
 the data is also conveniently available in ``$this->request->data`` for
@@ -475,7 +475,7 @@ associations, it's all about keying. The basic idea is to get the
 key from one model and place it in the foreign key field on the
 other. Sometimes this might involve using the ``$id`` attribute of
 the model class after a ``save()``, but other times it might just
-involve gathering the ID from a hidden input on a form that’s just
+involve gathering the ID from a hidden input on a form that's just
 been POSTed to a controller action.
 
 To supplement the basic approach used above, CakePHP also offers a
