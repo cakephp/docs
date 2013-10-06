@@ -282,7 +282,7 @@ arguments.
 
         $this->paginate['limit'] = 10;
 
-    will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
+    will throw the error "Notice: Indirect modification of overloaded property $paginate has no effect".
     Assigning an initial value to the property solves the issue::
 
         $this->paginate = array();

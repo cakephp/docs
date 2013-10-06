@@ -893,7 +893,7 @@ NOT, XOR, etc., and they can be upper or lower case, whichever you
 prefer. These conditions are also infinitely nest-able. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
-keyword (“magic”) or were created in the past two weeks, but you
+keyword ("magic") or were created in the past two weeks, but you
 want to restrict your search to posts written by Bob::
 
     array(

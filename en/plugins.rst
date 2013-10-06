@@ -237,7 +237,7 @@ So, we place our new ContactsController in
     properly prepend the plugin name.
 
 If you want to access what we've got going thus far, visit
-/contact_manager/contacts. You should get a “Missing Model” error
+/contact_manager/contacts. You should get a "Missing Model" error
 because we don't have a Contact model defined yet.
 
 .. _plugin-models:
@@ -254,7 +254,7 @@ create the model for that controller, called Contact::
     }
 
 Visiting /contact_manager/contacts now (given you've got a table in your
-database called 'contacts') should give us a “Missing View” error. 
+database called 'contacts') should give us a "Missing View" error. 
 Let's create that next.
 
 .. note::

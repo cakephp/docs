@@ -257,7 +257,7 @@ You can also access tasks directly from the command line::
 
     In order to access tasks directly from the command line, the task
     **must** be included in the shell class' $tasks property.
-    Therefore, be warned that a method called “sound” in the SeaShell
+    Therefore, be warned that a method called "sound" in the SeaShell
     class would override the ability to access the functionality in the
     Sound task specified in the $tasks array.
 

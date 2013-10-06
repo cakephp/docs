@@ -710,9 +710,9 @@ with usage examples.
 
 .. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
-    Comparison is used to compare numeric values. It supports “is
-    greater”, “is less”, “greater or equal”, “less or equal”, “equal
-    to”, and “not equal”. Some examples are shown below::
+    Comparison is used to compare numeric values. It supports "is
+    greater", "is less", "greater or equal", "less or equal", "equal
+    to", and "not equal". Some examples are shown below::
 
         public $validate = array(
             'age' => array(

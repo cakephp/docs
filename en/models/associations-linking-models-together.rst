@@ -319,7 +319,7 @@ Possible keys for belongsTo association arrays include:
    strings such as ``array('User.username' => 'ASC')``
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
-   “[singular\_model\_name]\_count” field in the foreign table
+   "[singular\_model\_name]\_count" field in the foreign table
    whenever you do a ``save()`` or ``delete()``. If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. You can also specify multiple counter caches
@@ -352,7 +352,7 @@ Profile model will also fetch a related User record if it exists::
 hasMany
 -------
 
-Next step: defining a “User hasMany Comment” association. A hasMany
+Next step: defining a "User hasMany Comment" association. A hasMany
 association will allow us to fetch a user's comments when we fetch
 a User record.
 
