@@ -446,7 +446,7 @@ Cache API
         class Articles extends AppModel {
             function all() {
                 $model = $this;
-                return Cache::remember('all_articles', function () use ($model){
+                return Cache::remember('all_articles', function() use ($model){
                     return $model->find('all');
                 });
             }
