@@ -182,7 +182,7 @@ application can, such as Config, Console, Lib, webroot, etc.
     }
 
 If you forgot to define these special classes, CakePHP will hand
-you "Missing Controller" errors until you’ve done so.
+you "Missing Controller" errors until you've done so.
 
 Please note that the process of creating plugins can be greatly
 simplified by using the Cake shell.
@@ -236,9 +236,9 @@ So, we place our new ContactsController in
     controller, however it is included to demonstrate how to
     properly prepend the plugin name.
 
-If you want to access what we’ve got going thus far, visit
-/contact_manager/contacts. You should get a “Missing Model” error
-because we don’t have a Contact model defined yet.
+If you want to access what we've got going thus far, visit
+/contact_manager/contacts. You should get a "Missing Model" error
+because we don't have a Contact model defined yet.
 
 .. _plugin-models:
 
@@ -253,9 +253,9 @@ create the model for that controller, called Contact::
     class Contact extends ContactManagerAppModel {
     }
 
-Visiting /contact_manager/contacts now (given you’ve got a table in your
-database called ‘contacts’) should give us a “Missing View” error. 
-Let’s create that next.
+Visiting /contact_manager/contacts now (given you've got a table in your
+database called 'contacts') should give us a "Missing View" error. 
+Let's create that next.
 
 .. note::
 

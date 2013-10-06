@@ -258,7 +258,7 @@ rendered from the controller.
 
     The ``render()`` method is automatically called at the end of each
     requested controller action. This method performs all the view
-    logic (using the data you’ve given in using the ``set()`` method),
+    logic (using the data you've given in using the ``set()`` method),
     places the view inside its layout and serves it back to the end
     user.
 
@@ -275,8 +275,8 @@ rendered from the controller.
         // ...
         }
 
-    Although CakePHP will automatically call it (unless you’ve set
-    ``$this->autoRender`` to false) after every action’s logic, you can
+    Although CakePHP will automatically call it (unless you've set
+    ``$this->autoRender`` to false) after every action's logic, you can
     use it to specify an alternate view file by specifying an action
     name in the controller using ``$action``.
 
@@ -326,7 +326,7 @@ Flow Control
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
-    The flow control method you’ll use most often is ``redirect()``.
+    The flow control method you'll use most often is ``redirect()``.
     This method takes its first parameter in the form of a
     CakePHP-relative URL. When a user has successfully placed an order,
     you might wish to redirect them to a receipt screen.::
@@ -389,7 +389,7 @@ Flow Control
     use, you may specify the name of that layout in the ``$layout``
     parameter.
 
-    For in-page flash messages, be sure to check out SessionComponent’s
+    For in-page flash messages, be sure to check out SessionComponent's
     setFlash() method.
 
 Callbacks
@@ -459,7 +459,7 @@ Other Useful Methods
 
 .. php:method:: disableCache
 
-    Used to tell the user’s **browser** not to cache the results of the
+    Used to tell the user's **browser** not to cache the results of the
     current request. This is different than view caching, covered in a
     later chapter.
 
@@ -517,8 +517,8 @@ Other Useful Methods
         $orders = $this->Order->find('all', compact('conditions'));
 
     The third parameter allows you to tell CakePHP what SQL boolean
-    operator to use between the find conditions. Strings like ‘AND’,
-    ‘OR’ and ‘XOR’ are all valid values.
+    operator to use between the find conditions. Strings like 'AND',
+    'OR' and 'XOR' are all valid values.
 
     Finally, if the last parameter is set to true, and the $op
     parameter is an array, fields not included in $op will not be
@@ -681,7 +681,7 @@ $components, $helpers and $uses
 -------------------------------
 
 The next most often used controller attributes tell CakePHP what
-helpers, components, and models you’ll be using in conjunction with
+helpers, components, and models you'll be using in conjunction with
 the current controller. Using these attributes make MVC classes
 given by ``$components`` and ``$uses`` available to the controller
 as class variables (``$this->ModelName``, for example) and those
@@ -722,7 +722,7 @@ given by ``$helpers`` to the view as an object reference variable
     in your Controllers. To learn more about these classes, be sure
     to check out their respective sections later in this manual.
 
-    Let’s look at how to tell a CakePHP controller that you plan to use
+    Let's look at how to tell a CakePHP controller that you plan to use
     additional MVC classes::
 
         class RecipesController extends AppController {

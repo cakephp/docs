@@ -25,7 +25,7 @@ Otherwise, return the possibly modified ``$query``, or anything
 you want to get passed to find and its counterparts.
 
 You might use this callback to restrict find operations based on a
-user’s role, or make caching decisions based on the current load.
+user's role, or make caching decisions based on the current load.
 
 afterFind
 =========

@@ -266,7 +266,7 @@ use the ``String`` class::
     :param string $and: The word used for the last join.
 
     Creates a comma-separated list where the last two items are joined
-    with ‘and’.::
+    with 'and'.::
 
         // called as TextHelper
         echo $this->Text->toList($colors);

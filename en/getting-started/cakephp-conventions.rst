@@ -2,13 +2,13 @@ CakePHP Conventions
 ###################
 
 We are big fans of convention over configuration. While it takes a
-bit of time to learn CakePHP’s conventions, you save time in the
+bit of time to learn CakePHP's conventions, you save time in the
 long run: by following convention, you get free functionality, and
 you free yourself from the maintenance nightmare of tracking config
 files. Convention also makes for a very uniform system development,
 allowing other developers to jump in and help more easily.
 
-CakePHP’s conventions have been distilled out of years of web
+CakePHP's conventions have been distilled out of years of web
 development experience and best practices. While we suggest you use
 these conventions while developing with CakePHP, we should mention
 that many of these tenets are easily overridden – something that is
@@ -175,7 +175,7 @@ The basic pattern is
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
-of configuration. Here’s a final example that ties the conventions
+of configuration. Here's a final example that ties the conventions
 
 -  Database table: "people"
 -  Model class: "Person", found at /app/Model/Person.php
@@ -186,10 +186,10 @@ of configuration. Here’s a final example that ties the conventions
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the index() function
 of the PeopleController, where the Person model is automatically
-available (and automatically tied to the ‘people’ table in the
+available (and automatically tied to the 'people' table in the
 database), and renders to a file. None of these relationships have
 been configured by any means other than by creating classes and
-files that you’d need to create anyway.
+files that you'd need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you
 might try a run through the
