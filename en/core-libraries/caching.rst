@@ -213,6 +213,21 @@ You could improve the above code by moving the cache reading logic into
 a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
+As of 2.5 you can accomplish the above much more simply using
+:php:meth:`Cache::remember()`. Using the new method the above would look like::
+
+    class Post extends AppModel {
+
+        public function newest() {
+            $model = $this;
+            return Cache::remember('newest_posts', function() use ($model){
+                return $model->find('all', array(
+                    'order' => 'Post.updated DESC',
+                    'limit' => 10
+                ));
+            }, 'longterm');
+        }
+    }
 
 Using Cache to store counters
 =============================
@@ -418,6 +433,27 @@ Cache API
     :return: Array of groups and its related configuration names.
 
     Retrieve group names to config mapping.
+
+.. php:staticmethod:: remember($key, $callable, $config = 'default')
+
+    Provides an easy way to do read-through caching. If the cache key exists
+    it will be returned. If the key does not exist, the callable will be invoked
+    and the results stored in the cache at the provided key.
+
+    For example, you often want to cache query results. You could use
+    ``remember()`` to make this simple. Assuming you were using PHP5.3 or more::
+
+        class Articles extends AppModel {
+            function all() {
+                $model = $this;
+                return Cache::remember('all_articles', function() use ($model){
+                    return $model->find('all');
+                });
+            }
+        }
+
+    .. versionadded:: 2.5
+        remember() was added in 2.5.
 
 .. meta::
     :title lang=en: Caching
