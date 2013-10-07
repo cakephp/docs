@@ -19,7 +19,7 @@ quelques conseils à propos de la migration.
    template et le layout devrons être paramétrés en utilisant la méthode
    :php:meth:`CakeEmail::template()`.
    La liste des pièces-jointes devront être un tableau de fichiers
-   (qui apparaîtrons dans l’email) comme clé et valeur le chemin complet du
+   (qui apparaîtrons dans l'email) comme clé et valeur le chemin complet du
    fichier réel.
 -  A chaque erreur, :php:class:`CakeEmail` enverra une exception au lieu de
    retourner false. Nous vous recommandons d'utiliser try/catch pour vous

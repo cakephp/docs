@@ -1,7 +1,7 @@
 Sauvegarder vos Données
 #######################
 
-CakePHP rend la sauvegarde des données d’un model très rapide. Les données
+CakePHP rend la sauvegarde des données d'un model très rapide. Les données
 prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du
 model en utilisant le format basique suivant::
 
@@ -14,13 +14,13 @@ model en utilisant le format basique suivant::
         )
     )
 
-La plupart du temps vous n’aurez même pas à vous préoccuper de ce format :
+La plupart du temps vous n'aurez même pas à vous préoccuper de ce format :
 le :php:class:`FormHelper` et les méthodes de recherche de CakePHP réunissent
 les données sous cette forme. Si vous utilisez un de ces helpers, les données
 sont également disponibles dans ``$this->request->data`` pour un usage rapide
 et pratique.
 
-Voici un exemple simple d’une action de controller qui utilise un model
+Voici un exemple simple d'une action de controller qui utilise un model
 CakePHP pour sauvegarder les données dans une table de la base de données ::
 
     public function edit($id) {
@@ -40,7 +40,7 @@ CakePHP pour sauvegarder les données dans une table de la base de données ::
 
 Quand save() est appelée, la donnée qui lui est passée en premier paramètre
 est validée en utilisant le mécanisme de validation de CakePHP (voir le
-chapitre :doc:`/models/data-validation` pour plus d’informations). Si pour une
+chapitre :doc:`/models/data-validation` pour plus d'informations). Si pour une
 raison quelconque vos données ne se sauvegardent pas, pensez à regarder si
 des règles de validation ne sont pas insatisfaites. Vous pouvez débugger cette
 situation en affichant :php:attr:`Model::$validationErrors`::
@@ -190,8 +190,8 @@ sera défini comme un tableau vide.
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
 
-Utilisée pour sauvegarder la valeur d’un seul champ. Fixez l’ID du model
-(``$this->ModelName->id = $id``) juste avant d’appeler ``saveField()``. Lors de
+Utilisée pour sauvegarder la valeur d'un seul champ. Fixez l'ID du model
+(``$this->ModelName->id = $id``) juste avant d'appeler ``saveField()``. Lors de
 l'utilisation de cette méthode, ``$fieldName`` ne doit contenir que le nom du
 champ, pas le nom du model et du champ.
 
@@ -228,7 +228,7 @@ devant être mis à jour, ainsi que leurs valeurs, sont identifiés par
 le tableau ``$fields``.
 
 Par exemple, si je voulais approuver tous les bakers qui sont membres
-depuis plus d’un an, l’appel à update devrait ressembler à quelque chose
+depuis plus d'un an, l'appel à update devrait ressembler à quelque chose
 du style:: 
 
     $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));

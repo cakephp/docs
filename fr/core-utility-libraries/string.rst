@@ -273,7 +273,7 @@ d'une ``View``, utilisez la classe ``String``::
     :param string $and: Le mot utilisé pour le dernier join.
 
     Crée une liste séparée avec des virgules, où les deux derniers items sont
-    joins avec ‘and’.::
+    joins avec 'and'.::
 
         // appelé avec TextHelper
         echo $this->Text->toList($colors);

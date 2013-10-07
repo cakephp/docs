@@ -1487,8 +1487,8 @@ Crée des inputs de date et d'heure (date and time inputs)
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Crée un jeu d'inputs pour la date et l'heure. Les valeurs valides pour
-    $dateformat sont ‘DMY’, ‘MDY’, ‘YMD’ ou ‘NONE. Les valeurs valides pour
-    $timeFormat sont ‘12’, ‘24’, et null.
+    $dateformat sont 'DMY', 'MDY', 'YMD' ou 'NONE'. Les valeurs valides pour
+    $timeFormat sont '12', '24', et null.
 
     Vous pouvez spécifier de ne pas afficher les valeurs vides en
     paramétrant "array('empty' => false)" dans les paramètres des attributs.
@@ -1592,7 +1592,7 @@ Crée des inputs de date et d'heure (date and time inputs)
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-    Crée un élément select (menu de sélection) rempli avec ‘am’ et ‘pm’.
+    Crée un élément select (menu de sélection) rempli avec 'am' et 'pm'.
 
 
 Afficher et vérifier les erreurs

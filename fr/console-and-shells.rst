@@ -281,7 +281,7 @@ commande::
 
     Afin d'accéder aux tâches directement à partir de ligne de commande, la
     tâche **doit** être inclue dans la propriété $tasks de la classe shell.
-    Pour ce faire, soyez averti qu'une méthode appelée “sound” dans la classe
+    Pour ce faire, soyez averti qu'une méthode appelée "sound" dans la classe
     SeaShell redéfinira la capacité d'accès à la fonctionnalité de la
     tâche Sound spécifiée dans le tableau $tasks.
 

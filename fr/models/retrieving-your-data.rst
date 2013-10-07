@@ -823,16 +823,16 @@ champ.
 Conditions de recherche complexes
 =================================
 
-La plupart des appels de recherche de models impliquent le passage d’un
-jeu de conditions d’une manière ou d’une autre. Le plus simple est
-d’utiliser un bout de clause WHERE SQL. Si vous vous avez besoin de plus
+La plupart des appels de recherche de models impliquent le passage d'un
+jeu de conditions d'une manière ou d'une autre. Le plus simple est
+d'utiliser un bout de clause WHERE SQL. Si vous vous avez besoin de plus
 de contrôle, vous pouvez utiliser des tableaux.
 
-L’utilisation de tableaux est plus claire et simple à lire, et rend également
+L'utilisation de tableaux est plus claire et simple à lire, et rend également
 la construction de requêtes très simple. Cette syntaxe sépare également les
 éléments de votre requête (champs, valeurs, opérateurs etc.) en parties
 manipulables et discrètes. Cela permet à CakePHP de générer les requêtes les
-plus efficaces possibles, d’assurer une syntaxe SQL correcte, et d’échapper
+plus efficaces possibles, d'assurer une syntaxe SQL correcte, et d'échapper
 convenablement chaque partie de la requête. Utiliser une syntaxe en tableau
 permet aussi à CakePHP de sécuriser vos requêtes contre toute attaque
 d'injection SQL.
@@ -846,18 +846,18 @@ ceci::
 
 La structure ici est assez significative : Tous les posts dont le
 titre à pour valeur « Ceci est un post » sont cherchés. Nous aurions
-pu uniquement utiliser « titre » comme nom de champ, mais lorsque l’on
+pu uniquement utiliser « titre » comme nom de champ, mais lorsque l'on
 construit des requêtes, il vaut mieux toujours spécifier le nom du model.
 Cela améliore la clarté du code, et évite des collisions futures, dans
 le cas où vous devriez changer votre schéma.
 
-Qu’en est-il des autres types de correspondances ? Elles sont aussi simples.
-Disons que nous voulons trouver tous les posts dont le titre n’est pas
+Qu'en est-il des autres types de correspondances ? Elles sont aussi simples.
+Disons que nous voulons trouver tous les posts dont le titre n'est pas
 "Ceci est un post":: 
 
     array("Post.titre !=" => "Il y a un post")
 
-Notez le '!=' qui précède l’expression. CakePHP peut parser tout opérateur
+Notez le '!=' qui précède l'expression. CakePHP peut parser tout opérateur
 de comparaison valide de SQL, même les expressions de correspondance
 utilisant LIKE, BETWEEN, ou REGEX, tant que vous laissez un espace entre
 l'opérateur et la valeur. Les seules exceptions à ceci sont les correspondances
@@ -901,11 +901,11 @@ toujours possible de la spécifier sous forme de chaîne comme ceci::
         // autres conditions habituellement utilisées
     )
 
-Par défaut, CakePHP fournit les conditions multiples avec l’opérateur booléen
+Par défaut, CakePHP fournit les conditions multiples avec l'opérateur booléen
 AND, ce qui signifie que le bout de code ci-dessus correspondra uniquement
 aux posts qui ont été créés durant les deux dernières semaines, et qui ont
 un titre correspondant à ceux donnés. Cependant, nous pouvons simplement
-trouver les posts qui correspondent à l’une ou l’autre des conditions::
+trouver les posts qui correspondent à l'une ou l'autre des conditions::
 
     array("OR" => array(
         "Post.titre" => array("Premier post", "Deuxième post", "Troisième post"),

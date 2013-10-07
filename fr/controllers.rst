@@ -545,7 +545,7 @@ Autres Méthodes utiles
 
     Le troisième paramètre vous permet de dire à CakePHP quel opérateur
     booléen SQL utiliser entre les conditions de recherche. Les chaînes
-    comme ‘AND’, ‘OR’ et ‘XOR’ sont des valeurs possibles.
+    comme 'AND', 'OR' et 'XOR' sont des valeurs possibles.
 
     Enfin, si le dernier paramètre est défini à vrai et que $op est un tableau,
     les champs non-inclus dans $op ne seront pas inclus dans les conditions

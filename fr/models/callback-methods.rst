@@ -2,7 +2,7 @@ Méthodes Callback
 #################
 
 Si vous voulez glisser un bout de logique applicative juste avant ou
-après une opération d’un model CakePHP, utilisez les callbacks de model.
+après une opération d'un model CakePHP, utilisez les callbacks de model.
 Ces fonctions peuvent être définies dans les classes de model (cela
 comprend également votre classe AppModel). Notez bien les valeurs de
 retour attendues pour chacune de ces méthodes spéciales.

@@ -298,8 +298,8 @@ arguments GET.
     
         $this->paginate['limit'] = 10;
 
-    Retournera l'erreur “Notice: Indirect modification of overloaded property 
-    $paginate has no effect” ("Notice: Une modification indirect d'une surcharge de
+    Retournera l'erreur "Notice: Indirect modification of overloaded property 
+    $paginate has no effect" ("Notice: Une modification indirect d'une surcharge de
     la propriété $paginate n'a aucun effet"). En assignant une valeur initiale à la
     propriété, cela résout le problème::
 

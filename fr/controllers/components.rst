@@ -12,8 +12,8 @@ que vous pouvez utiliser pour vous aider :
 .. include:: /core-libraries/toc-components.rst
     :start-line: 7
 
-Chacun de ces components d’origine est détaillé dans des chapitres
-spécifiques. Pour l’heure, nous allons vous montrer comment créer
+Chacun de ces components d'origine est détaillé dans des chapitres
+spécifiques. Pour l'heure, nous allons vous montrer comment créer
 vos propres components. La création de components vous permet de garder
 le code de vos controllers propres et vous permet de réutiliser
 du code entre vos projets.
@@ -171,8 +171,8 @@ le component ressemblerait à quelque chose comme cela::
 Inclure votre component dans vos controllers
 --------------------------------------------
 
-Une fois notre component terminé, nous pouvons l’utiliser au sein
-des controllers de l’application en plaçant son nom
+Une fois notre component terminé, nous pouvons l'utiliser au sein
+des controllers de l'application en plaçant son nom
 (sans la partie "Component") dans le tableau ``$components`` du controller.
 Le controller sera automatiquement pourvu d'un nouvel attribut nommé
 d'après le component, à travers lequel nous pouvons accéder à une instance

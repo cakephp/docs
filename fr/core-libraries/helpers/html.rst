@@ -1004,7 +1004,7 @@ Création d'un chemin de navigation avec le Helper Html
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
     CakePHP inclut la possibilité de créer automatiquement un chemin de
-    navigation (fil d’Ariane) dans votre application. Pour mettre cela en
+    navigation (fil d'Ariane) dans votre application. Pour mettre cela en
     service, ajouter cela dans votre template de layout::
 
         echo $this->Html->getCrumbs(' > ', 'Home');

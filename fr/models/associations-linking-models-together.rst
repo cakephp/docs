@@ -209,7 +209,7 @@ Les clés possibles pour les tableaux d'association incluent:
 
 -  **className**: le nom de la classe du model que l\'on souhaite
    associer au model actuel. Si l\'on souhaite définir la relation
-   'User a un Profile’, la valeur associée à la clé 'className'
+   ’User a un Profile’, la valeur associée à la clé 'className'
    devra être ‘Profile’.
 -  **foreignKey**: le nom de la clé etrangère que l'on trouve dans
    l'autre model. Ceci sera particulièrement pratique si vous avez
@@ -324,7 +324,7 @@ Les clés possibles pour les tableaux d'association belongsTo incluent:
 -  **order**: un tableau de clauses order qui sont compatibles avec find()
    ou des chaînes SQL comme ``array('User.username' => 'ASC')``
 -  **counterCache**: Si défini à true, le Model associé va automatiquement
-   augmenter ou diminuer le champ “[singular\_model\_name]\_count” dans la
+   augmenter ou diminuer le champ "[singular\_model\_name]\_count" dans la
    table étrangère quand vous faites un ``save()`` ou un ``delete()``. Si
    c'est une chaîne alors il s'agit du nom du champ à utiliser. La valeur
    dans le champ counter représente le nombre de lignes liées. Vous pouvez
@@ -358,7 +358,7 @@ model Profile vont aussi récupérer un enregistrement lié de User si il existe
 hasMany
 -------
 
-Prochaine étape : définir une association “User hasMany Comment”. Une
+Prochaine étape : définir une association "User hasMany Comment". Une
 association hasMany nous permettra de récupérer les comments d'un user
 lors de la récupération d'un enregistrement User.
 

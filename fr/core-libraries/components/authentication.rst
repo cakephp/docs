@@ -40,7 +40,7 @@ En général, vous aurez envie d'offrir l'authentification par formulaire.
 C'est le plus facile pour les utilisateurs utilisant un navigateur Web.
 Si vous construisez une API ou un service web, vous aurez peut-être à envisager
 l'utilisation de l'authentification de base ou l'authentification Digest.
-L’élément clé qui différencie l'authentification digest de l'authentification
+L'élément clé qui différencie l'authentification digest de l'authentification
 basic est la plupart du temps liée à la façon dont les mots de passe sont gérés.
 Avec l'authentification basic, le nom d'utilisateur et le mot de passe sont
 transmis en clair sur le serveur. Cela rend l'authentification de base non
@@ -822,7 +822,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:attr:: authenticate
 
-    Défini comme un tableau d'objets d’identifications que vous voulez utiliser
+    Défini comme un tableau d'objets d'identifications que vous voulez utiliser
     quand les utilisateurs de connectent. Il y a plusieurs objets
     d'authentification dans le noyau, cf la section
     :ref:`authentication-objects`
@@ -1000,7 +1000,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:method:: startup($Controller)
 
-    Méthode d’exécution principale. Gère la redirection des utilisateurs
+    Méthode d'exécution principale. Gère la redirection des utilisateurs
     invalides et traite les données des formulaires de connexion.
 
 .. php:staticmethod:: user($key = null)

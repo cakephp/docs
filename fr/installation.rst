@@ -81,10 +81,10 @@ que vous le souhaitez.
 Cette section couvrira les trois types principaux d'installation de CakePHP:
 développement, production, et avancé.
 
--  Développement: Facile à mettre en oeuvre, mais les URLs de l’application
-   contiennent le nom du répertoire d’installation de CakePHP et c’est moins
+-  Développement: Facile à mettre en oeuvre, mais les URLs de l'application
+   contiennent le nom du répertoire d'installation de CakePHP et c'est moins
    sécurisé.
--  Production: Nécessite d’être habilité à configurer le Document Root du
+-  Production: Nécessite d'être habilité à configurer le Document Root du
    serveur, URLs propres, très sécurisé.
 -  Avancé: Avec un peu de configuration, vous permet de placer les
    répertoires clés de CakePHP à différents endroits du système de fichiers,

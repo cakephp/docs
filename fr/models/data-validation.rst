@@ -136,8 +136,8 @@ correctement. C'est à cause du fait que 'required' n'est pas à proprement
 parlé une règle.
 
 Comme vous pouvez le voir ici, chaque champ (un seul est présenté ci-dessus)
-est associé à un tableau contenant cinq clés : ‘rule‘, ‘required‘,
-‘allowEmpty‘, ‘on‘ et ‘message‘. Toutes les clés sont optionnelles sauf
+est associé à un tableau contenant cinq clés : 'rule', 'required',
+'allowEmpty', 'on' et 'message'. Toutes les clés sont optionnelles sauf
 'rule'. Regardons en détail ces clés.
 
 La clé 'rule'
@@ -234,7 +234,7 @@ s'applique à la fois pendant la création et la mise à jour.
 La clé 'message'
 ----------------
 
-La clé ‘message’ vous permet de définir un message d'erreur de validation
+La clé 'message' vous permet de définir un message d'erreur de validation
 personnalisé pour la règle::
 
     public $validate = array(
@@ -277,7 +277,7 @@ voici basiquement comment il faudrait faire::
 
 Comme vous pouvez le voir, cela ressemble beaucoup à ce que nous avons vu
 dans la section précédente. Ici pour chaque champ, nous avons uniquement un
-tableau de paramètres de validation. Dans ce cas, chaque ‘nomChamp‘ est un
+tableau de paramètres de validation. Dans ce cas, chaque 'nomChamp' est un
 tableau de règles indexé. Chaque 'nomRegle' contient un tableau indépendant
 de paramètres de validation.
 
@@ -409,7 +409,7 @@ paramètre, sous la forme d'un tableau associatif avec le nom du champ
 comme clé et les données postées comme valeur.
 
 Si vous voulez passer des paramètres supplémentaires à votre fonction de
-validation, ajoutez des éléments dans le tableau ’rule’ et manipulez-les
+validation, ajoutez des éléments dans le tableau 'rule' et manipulez-les
 comme des paramètres supplémentaires (après le paramètre principal ``$check``)
 dans votre fonction.
 
@@ -679,10 +679,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 .. php:staticmethod:: cc(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
 
     Cette règle est utilisée pour vérifier si une donnée est un numéro de
-    carte de crédit valide. Elle prend trois paramètres : ‘type’, ‘deep’ et
-    ‘regex’.
+    carte de crédit valide. Elle prend trois paramètres : 'type', 'deep' et
+    'regex'.
 
-    Le paramètre ‘type‘ peut être assigné aux valeurs ‘fast’, ‘all’ ou à
+    Le paramètre 'type' peut être assigné aux valeurs 'fast', 'all' ou à
     l'une des suivantes :
 
     -  amex
@@ -699,18 +699,18 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     -  visa
     -  voyager
 
-    Si ‘type’ est défini à ‘fast’, cela valide les données de la majorité des
-    formats numériques de cartes de crédits. Définir ‘type’ à ‘all’ vérifiera
-    tous les types de cartes de crédits. Vous pouvez aussi définir 'type’
+    Si 'type' est défini à 'fast', cela valide les données de la majorité des
+    formats numériques de cartes de crédits. Définir 'type' à 'all' vérifiera
+    tous les types de cartes de crédits. Vous pouvez aussi définir 'type'
     comme un tableau des types que vous voulez détecter.
 
-    Le paramètre ‘deep’ devrait être défini comme une valeur booléenne. S'il
+    Le paramètre 'deep' devrait être défini comme une valeur booléenne. S'il
     est défini à true, la validation vérifiera l'algorithme Luhn de la carte
     de crédit
     (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
     Par défaut, elle est à false.
 
-    Le paramètre ‘regex’ vous permet de passer votre propre expression
+    Le paramètre 'regex' vous permet de passer votre propre expression
     régulière, laquelle sera utilisée pour valider le numéro de la carte de
     crédit::
 
@@ -724,8 +724,8 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 .. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
     Comparison est utilisé pour comparer des valeurs numériques. Il supporte
-    “est supérieur”, “est inférieur”, “supérieur ou égal”, “inférieur ou
-    égal”, “égal à” et “non égal”. Quelques exemples sont indiqués
+    "est supérieur", "est inférieur", "supérieur ou égal", "inférieur ou
+    égal", "égal à" et "non égal". Quelques exemples sont indiqués
     ci-dessous::
 
         public $validate = array(
@@ -760,17 +760,17 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     et sera utilisé pour vérifier le format de la date soumise. La valeur
     de ce paramètre peut être l'une des suivantes :
 
-    -  ‘dmy’, par exemple : 27-12-2006 ou 27-12-06 (les séparateurs peuvent
+    -  'dmy', par exemple : 27-12-2006 ou 27-12-06 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘mdy’, par exemple : 12-27-2006 ou 12-27-06 (les séparateurs peuvent
+    -  'mdy', par exemple : 12-27-2006 ou 12-27-06 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘ymd’, par exemple : 2006-12-27 ou 06-12-27 (les séparateurs peuvent
+    -  'ymd', par exemple : 2006-12-27 ou 06-12-27 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘dMy’, par exemple : 27 Décembre 2006 ou 27 Déc 2006
-    -  ‘Mdy’, par exemple : Décembre 27, 2006 ou Déc 27, 2006 (la virgule
+    -  'dMy', par exemple : 27 Décembre 2006 ou 27 Déc 2006
+    -  'Mdy', par exemple : Décembre 27, 2006 ou Déc 27, 2006 (la virgule
        est optionnelle)
-    -  ‘My’, par exemple : (Décembre 2006 ou Déc 2006)
-    -  ‘my’, par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être
+    -  'My', par exemple : (Décembre 2006 ou Déc 2006)
+    -  'my', par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être
        l'espace, le point, le tiret, le slash)
     -  'ym' par ex. 2006/12 ou 06/12 (les séparateurs peuvent être un espace,
        une période, un tiret, ou un slash)
@@ -803,21 +803,21 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     format de la date. La valeur du paramètre peut être une ou plusieurs des
     valeurs suivantes:
 
-    -  ‘dmy’, par exemple : 27-12-2006 or 27-12-06 (les séparateurs peuvent
+    -  'dmy', par exemple : 27-12-2006 or 27-12-06 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘mdy’, par exemple : 12-27-2006 or 12-27-06 (les séparateurs peuvent
+    -  'mdy', par exemple : 12-27-2006 or 12-27-06 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘ymd’, par exemple : 2006-12-27 or 06-12-27 (les séparateurs peuvent
+    -  'ymd', par exemple : 2006-12-27 or 06-12-27 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
-    -  ‘dMy’, par exemple : 27 December 2006 or 27 Dec 2006
-    -  ‘Mdy’, par exemple : December 27, 2006 or Dec 27, 2006 (le point est
+    -  'dMy', par exemple : 27 December 2006 or 27 Dec 2006
+    -  'Mdy', par exemple : December 27, 2006 or Dec 27, 2006 (le point est
        optionnel)
-    -  ‘My’, par exemple : (December 2006 or Dec 2006)
-    -  ‘my’, par exemple : 12/2006 or 12/06 (les séparateurs peuvent
+    -  'My', par exemple : (December 2006 or Dec 2006)
+    -  'my', par exemple : 12/2006 or 12/06 (les séparateurs peuvent
        être l'espace, le point, le tiret, le slash)
 
     Si aucune clé n'est fournie, la clé par défaut qui sera utilisée est
-    ‘ymd’::
+    'ymd'::
 
         public $validate = array(
             'birthday' => array(
