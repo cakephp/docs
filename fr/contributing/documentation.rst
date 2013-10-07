@@ -53,7 +53,7 @@ Longueur des lignes
 -------------------
 
 Les lignes de texte doivent être de 80 colonnes au maximum. Seules exceptions,
-pour les urls longues et les extraits de code.
+pour les URLs longues et les extraits de code.
 
 En-têtes et Sections
 --------------------

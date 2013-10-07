@@ -132,7 +132,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: Le type de balise meta désiré.
-    :param mixed $url: L'url de la balise meta, soit une chaîne ou un tableau
+    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un tableau
      :term:`routing array`.
     :param array $options: Un tableau d'attributs :term:`html attributes`.
 
@@ -463,7 +463,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         L'option ``escapeTitle`` a été ajoutée.
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url` pour
-    plus d'exemples des différents types d'urls.
+    plus d'exemples des différents types d'URLs.
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -479,7 +479,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
           "audio" ou "video". Si le type n'est pas fourni le type de média se
           basera sur le mime type du fichier.
         - `text` Texte à inclure dans la balise vidéo.
-        - `pathPrefix` Préfixe du chemin à utiliser pour les urls relatives,
+        - `pathPrefix` Préfixe du chemin à utiliser pour les URLs relatives,
           par défaut à 'files/'.
         - `fullBase` Si il est fourni l'attribut src prendra l'adresse complète
           incluant le nom de domaine.
@@ -594,7 +594,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
        tableau de chaînes pour plusieurs fichiers.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Inclus un(des) fichier(s), présent soit localement soit à une url
+    Inclus un(des) fichier(s), présent soit localement soit à une URL
     distante.
 
     Par défaut, les tags de script sont ajoutés au document inline. Si vous
@@ -899,7 +899,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une URL pointant vers une combinaison controller et action.
     Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la
-    combinaison d'une url pour le controller et d'une action. Si full est à
+    combinaison d'une URL pour le controller et d'une action. Si full est à
     true, la base complète de l'URL sera ajoutée en amont du résultat::
 
         echo $this->Html->url(array(

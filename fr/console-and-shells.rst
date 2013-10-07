@@ -861,7 +861,7 @@ tasks, ``env('HTTP_HOST')`` et les autres variables d'environnement spécifique
 
 Si vous générez des rapports ou envoyez des emails qui utilisent
 ``Router::url()``, ceux-ci vont contenir l'hôte par défaut
-``http://localhost/``  et cela va entrainer des urls invalides. Dans ce cas,
+``http://localhost/``  et cela va entrainer des URLs invalides. Dans ce cas,
 vous devrez spécifier le domaine manuellement. Vous pouvez faire cela en
 utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
 config, par exemple.

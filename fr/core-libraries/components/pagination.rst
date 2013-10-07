@@ -30,7 +30,7 @@ pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
 controller. 
 Ces conditions, vont servir de base à vos requêtes de pagination. Elles sont
 complétées par le tri, la direction, la limitation et les paramètres de page
-passés depuis l'url. Ici, il est important de noter que l'ordre des clés
+passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
 doit être défini dans une structure en tableau comme ci-dessous::
 
     class PostsController extends AppController {

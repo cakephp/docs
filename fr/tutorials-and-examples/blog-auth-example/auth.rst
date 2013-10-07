@@ -2,7 +2,7 @@ Authentification Simple et Autorisation de l'Application
 ########################################################
 
 Suivez notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons que
-nous souhaitions sécuriser l'accès de certaines urls, basées sur la connexion
+nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion
 de l'user. Nous avons aussi une autre condition requise, qui est
 d'autoriser notre blog à avoir des auteurs multiples, afin que chacun d'eux
 puisse créer ses propres posts, les modifier et les supprimer selon le besoin
@@ -181,8 +181,8 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     }
 
 Il n'y a pas grand chose à configurer, puisque nous avons utilisé les
-conventions pour la table des users. Nous avons juste configurer les
-urls qui seront chargées après que la connexion et la déconnexion des actions
+conventions pour la table des users. Nous avons juste configuré les
+URLs qui seront chargées après que la connexion et la déconnexion des actions
 sont effectuées, dans notre cas, respectivement à ``/posts/`` et ``/``.
 
 Ce que nous avons fait dans la fonction ``beforeFilter`` a été de dire au
@@ -255,9 +255,9 @@ fonction de connexion, et le voilà:
     <?php echo $this->Form->end(__('Connexion'));?>
     </div>
 
-Vous pouvez maintenant inscrire un nouvel user en rentrant l'url
+Vous pouvez maintenant inscrire un nouvel user en rentrant l'URL
 ``/users/add`` et vous connecter avec ce profil nouvellement créé en allant
-sur l'url ``/users/login``. Essayez aussi d'aller sur n'importe quel url
+sur l'URL ``/users/login``. Essayez aussi d'aller sur n'importe quel URL
 qui n'a pas été explicitement autorisée telle que ``/posts/add``, vous verrez
 que l'application vous redirige automatiquement vers la page de connexion.
 
@@ -273,12 +273,12 @@ conventions comme mentionnées plus tôt. C'est-à-dire, avoir un model
 User avec les colonnes username et password, et
 utiliser un formulaire posté à un controller avec les données d'user.
 Cette fonction retourne si la connexion a réussi ou non, et en cas de succès,
-alors nous redirigeons l'user vers l'url configuré de redirection que
+alors nous redirigeons l'user vers l'URL configuré de redirection que
 nous utilisions quand nous avons ajouté AuthComponent à notre application.
 
-La déconnexion fonctionne juste en allant à l'url ``/users/logout`` et
+La déconnexion fonctionne juste en allant à l'URL ``/users/logout`` et
 redirigera l'user vers l'Url de Déconnexion configurée décrite
-précedemment. Cette url est le résultat de la fonction
+précedemment. Cette URL est le résultat de la fonction
 ``AuthComponent::logout()`` en cas de succès.
 
 Autorisation (Qui est autorisé à accéder à quoi)
@@ -310,7 +310,7 @@ ajouter les données dans les infos requêtées qui sont sauvegardées.
 
 Sécurisons maintenant notre app pour empêcher certains auteurs de modifier ou
 supprimer les posts des autres. Des règles basiques pour notre app sont que les
-users admin peuvent accéder à tout url, alors que les users
+users admin peuvent accéder à tout URL, alors que les users
 normaux (le role auteur) peuvent seulement accéder aux actions permises.
 Ouvrez encore la classe AppController et ajoutez un peu plus d'options à la
 config de Auth::
@@ -337,7 +337,7 @@ config de Auth::
     }
 
 Nous venons de créer un mécanisme très simple d'autorisation. Dans ce cas, les
-users avec le role ``admin`` sera capable d'accéder à tout url dans le
+users avec le role ``admin`` sera capable d'accéder à tout URL dans le
 site quand ils sont connectés, mais les autres (par ex le role ``auteur``) ne
 peut rien faire d'autre par rapport aux users non connectés.
 

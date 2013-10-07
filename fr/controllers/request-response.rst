@@ -83,14 +83,14 @@ Accéder aux paramètres Querystring
 Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`CakeRequest::$query`::
 
-    // l\'url est /posts/index?page=1&sort=title
+    // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
     //  Vous pouvez aussi y accéder par un tableau
     $this->request['url']['page']; // accesseur BC, va être déprécié dans les versions futures
 
 Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
-utiliser :php:meth:`CakeRequest::query()` pour lire l'url requêtée d'une
+utiliser :php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une
 manière sans erreur. Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -151,7 +151,7 @@ Accéder aux informations du chemin
 
 CakeRequest fournit aussi des informations utiles sur les chemins dans votre
 application. :php:attr:`CakeRequest::$base` et
-:php:attr:`CakeRequest::$webroot` sont utiles pour générer des urls, et
+:php:attr:`CakeRequest::$webroot` sont utiles pour générer des URLs, et
 déterminer si votre application est ou n'est pas dans un sous-dossier.
 
 .. _check-the-request:
@@ -329,9 +329,9 @@ API de CakeRequest
 
 .. php:method:: query($name)
 
-    Fournit un accès aux données requêtées de l'url avec notation en point::
+    Fournit un accès aux données requêtées de l'URL avec notation en point::
 
-        // l\'url est /posts/index?page=1&sort=title
+        // l\'URL est /posts/index?page=1&sort=title
         $value = $this->request->query('page');
 
     .. versionadded:: 2.3
@@ -398,7 +398,7 @@ API de CakeRequest
 
 .. php:attr:: here
 
-    Retourne l'url requêtée courante.
+    Retourne l'URL requêtée courante.
 
 .. php:attr:: base
 
@@ -717,7 +717,7 @@ L'en-tête Vary
 --------------
 
 Dans certains cas, vous voudrez offrir différents contenus en utilisant la
-même url. C'est souvent le cas quand vous avez une page multilingue ou que
+même URL. C'est souvent le cas quand vous avez une page multilingue ou que
 vous répondez avec du HTML différent selon le navigateur qui requête la
 ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête Vary::
 

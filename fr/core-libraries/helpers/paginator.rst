@@ -270,7 +270,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     récupère la page actuelle pour le jeu d'enregistrement du model donné::
 
-        // Ou l'url est: http://example.com/comments/view/page:3
+        // Ou l'URL est: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
         // la sortie est 3
 
@@ -354,7 +354,7 @@ Modification des options que le Helper Paginator utilise
 Définit toutes les options pour le Helper Paginator Helper. Les options
 supportées sont:
 
-* ``url`` L'url de l'action de pagination. url comporte quelques sous options
+* ``url`` L'URL de l'action de pagination. 'url' comporte quelques sous options
   telles que:
 
   -  ``sort`` La clé qui décrit la façon de trier les enregistrements.
@@ -363,7 +363,7 @@ supportées sont:
   
   Les options mentionnées ci-dessus peuvent être utilisées pour forcer
   des pages/directions particulières. Vous pouvez aussi ajouter des contenu
-  d'url supplémentaires dans toutes les urls générées dans le helper::
+  d'URL supplémentaires dans toutes les URLs générées dans le helper::
   
       $this->Paginator->options(array(
           'url' => array(
@@ -532,7 +532,7 @@ D'autres Méthodes
 
     :param array $options: Tableau d'options Pagination/URL. Comme
         utilisé dans les méthodes ``options()`` ou ``link()``.
-    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une
+    :param boolean $asArray: Retourne l'URL comme dans un tableau, ou une
         chaîne URL. Par défaut à false.
     :param string $model: Le model sur lequel paginer.
 

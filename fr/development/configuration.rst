@@ -312,7 +312,7 @@ Security.cipherSeed
     crypter/décrypter les chaînes.
 Asset.timestamp
     Ajoute un timestamp de dernière modification du fichier particulier
-    à la fin des urls des asset fichiers (CSS, JavaScript, Image) lors de
+    à la fin des URLs des asset fichiers (CSS, JavaScript, Image) lors de
     l'utilisation de vos propres helpers.
     Valeurs valides:
     (boolean) false - Ne fait rien (par défaut).

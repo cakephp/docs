@@ -880,7 +880,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 .. php:attr:: unauthorizedRedirect
 
     Contrôle la gestion des accès non autorisés. Par défaut, un utilisateur
-    non autorisé est redirigé vers l'url référente ou vers
+    non autorisé est redirigé vers l'URL référente ou vers
     ``AuthComponent::$loginAction`` ou '/'.
     Si défini à false, une exception ForbiddenException est lancée au lieu de
     la redirection.
@@ -965,7 +965,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
    
 .. php:method:: logout()
 
-    :return: Une chaîne url où rediriger l'utilisateur déconnecté.
+    :return: Une chaîne URL où rediriger l'utilisateur déconnecté.
 
     Déconnecte l'utilisateur actuel.
 

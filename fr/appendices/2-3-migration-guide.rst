@@ -29,9 +29,9 @@ AuthComponent
 -------------
 - Une nouvelle propriété ``AuthComponent::$unauthorizedRedirect`` a été ajoutée.
 
-  - Par défaut la valeur est à ``true`` et l'user est redirigé à l'url de
+  - Par défaut la valeur est à ``true`` et l'user est redirigé à l'URL de
     référence lors des échecs d'authorisation.
-  - Si défini à une chaîne ou un tableau, l'user est redirigé à l'url.
+  - Si défini à une chaîne ou un tableau, l'user est redirigé à l'URL.
   - Si défini à false, une exception ForbiddenException est lancée à la place
     de la redirection.
 

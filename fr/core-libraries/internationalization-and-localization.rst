@@ -186,12 +186,12 @@ En faisant cela vous assurerez que :php:class:`I18n` et
 :php:class:`TranslateBehavior` accèdent aux même valeurs de langue.
 
 C'est une bonne idée de rendre du contenu public disponible dans
-plusieurs langues à partir d'une url unique - il deviendra plus
+plusieurs langues à partir d'une URL unique - il deviendra plus
 facile pour les utilisateurs (et les moteurs de recherches) de trouver
 ce qu'ils sont venus chercher dans la langue souhaitée.
 Il y a plusieurs moyens de faire cela, en utilisant un sous
 domaine de langue spécifique (en.exemple.com,fra.exemple.com, etc.),
-ou en utilisant un préfixe à l'url comme c'est le cas avec cette
+ou en utilisant un préfixe à l'URL comme c'est le cas avec cette
 application. Vous pourriez également souhaitez glaner l'information
 depuis l'agent de navigation (browser agent) de l'utilisateur, entre
 autres choses.

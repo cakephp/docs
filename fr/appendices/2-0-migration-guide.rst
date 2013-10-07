@@ -823,7 +823,7 @@ effectives sont:
 -  FormHelper::minute()
 -  FormHelper::meridian()
 
-Les urls par défaut dans les formulaires sont l'action courante
+Les URLs par défaut dans les formulaires sont l'action courante
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 L'url par défaut pour tous les formulaires est maintenant l'url courante, 

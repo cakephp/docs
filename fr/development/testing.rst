@@ -36,7 +36,7 @@ fichiers de PHPUnit sont dans un des répertoires de ``include_path``.
 
     Toute sortie est swallowed lors de l'utilisation de PHPUnit 3.6+. Ajoutez
     le modificateur ``--debug`` si vous utiliser le CLI ou ajoutez
-    ``&debug=1`` à l'url si vous utilisez le navigateur web pour afficher la
+    ``&debug=1`` à l'URL si vous utilisez le navigateur web pour afficher la
     sortie.
 
 Tester la Configuration de la Base de Données

@@ -314,20 +314,20 @@ Router and Dispatcher
 
 **Router**
 
-Generating urls with new style prefixes works exactly the same as
+Generating URLs with new style prefixes works exactly the same as
 admin routing did in 1.2. They use the same syntax and
 persist/behave in the same way. Assuming you have
 ``Configure::write('Routing.prefixes', array('admin', 'member'));``
 in your core.php you will be able to do the following from a
-non-prefixed url:
+non-prefixed URL:
 
 ::
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
-Likewise, if you are in a prefixed url and want to go to a
-non-prefixed url, do the following:
+Likewise, if you are in a prefixed URL and want to go to a
+non-prefixed URL, do the following:
 
 ::
 
@@ -482,7 +482,7 @@ updated to allow the scaffolding of any one prefix.
         var $scaffold = 'member';
     }
 
-Would use scaffolding for member prefixed urls.
+Would use scaffolding for member prefixed URLs.
 
 **Validation**
 

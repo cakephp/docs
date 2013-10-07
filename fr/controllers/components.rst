@@ -293,7 +293,7 @@ Les Callbacks
     méthode retourne false, le controller ne continuera pas de rediriger la
     requête. Les variables $url, $status et $exit ont la même signification
     que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
-    de caractère qui sera interpretée comme une url pour rediriger ou retourner
+    de caractère qui sera interpretée comme une URL pour rediriger ou retourner
     un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 

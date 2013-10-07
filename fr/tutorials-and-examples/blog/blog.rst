@@ -196,7 +196,7 @@ Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
 (pas d'images ou de styles css), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
-à la section suivante sur l'url rewriting pour que votre serveur
+à la section suivante sur l'URL rewriting pour que votre serveur
 web fonctionne:
 
 .. toctree::

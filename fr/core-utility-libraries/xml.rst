@@ -290,7 +290,7 @@ API de Xml
 
 Une classe usine de conversion pour créer des objets SimpleXML ou DOMDocument
 à partir d'un certain nombre de sources, y compris des chaînes, des tableaux
-et des urls distantes.
+et des URLs distantes.
 
 .. php:staticmethod:: build($input, $options = array())
 

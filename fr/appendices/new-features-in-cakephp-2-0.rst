@@ -100,10 +100,10 @@ nombre de changements, regardez la section session pour plus d'informations.
 Router
 ------
 
-Routes peuvent retourner des urls complètes
+Routes peuvent retourner des URLs complètes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les Objets Route peuvent maintenant retourner des urls complètes, et 
+Les Objets Route peuvent maintenant retourner des URLs complètes, et 
 :php:class:`Router` ne les modifiera plus au-delà de l'ajout de la 
 chaîne de requête et des éléments de fragments. Par exemple, ceci 
 pouvait être utilisé pour créer des routes pour la gestion de 
