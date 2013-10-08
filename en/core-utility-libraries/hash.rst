@@ -588,9 +588,8 @@ elements, you can use attribute matching with certain methods. They are ``extrac
         $result = Hash::dimensions($data);
         // $result == 1
 
-
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Hash::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 2
 
 .. php:staticmethod:: maxDimensions(array $data)
@@ -599,11 +598,11 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     the deepest number of dimensions of any element in the array::
 
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Hash::dimensions($data, true);
+        $result = Hash::maxDimensions($data, true);
         // $result == 2
 
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Hash::countDim($data, true);
+        $result = Hash::maxDimensions($data, true);
         // $result == 3
 
 .. php:staticmethod:: map(array $data, $path, $function)
