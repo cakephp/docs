@@ -197,7 +197,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'enter any meta keyword here'
         );
         ?>
-        // Output
+        // Sortie
         <meta name="keywords" content="enter any meta keyword here" />
 
         <?php
@@ -206,7 +206,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'enter any meta description here'
         );
         ?>
-        // Output
+        // Sortie
         <meta name="description" content="enter any meta description here" />
 
     Si vous voulez ajouter une balise personnalisée alors le premier
@@ -405,7 +405,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex 
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.:
 
         <?php
         echo $this->Html->link(
@@ -559,7 +559,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     défini à true, $text sera affiché en HTML-échappé.
 
     Si aucun texte n'est spécifié, seulement une balise div d'ouverture est
-    retournée::
+    retournée.:
 
     .. code-block:: php
 
@@ -577,7 +577,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
     Retourne un texte enveloppé dans une balise CSS <p>. Si aucun texte
-    CSS est fourni, un simple <p> de démarrage est retourné::
+    CSS est fourni, un simple <p> de démarrage est retourné.:
 
     .. code-block:: php
 
