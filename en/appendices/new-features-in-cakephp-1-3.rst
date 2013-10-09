@@ -510,8 +510,8 @@ native validation mechanisms if available::
 **Validation::uuid()**
 
 A uuid() pattern validation has been added to the ``Validation``
-class. It will check that a given string matches a uuid by pattern
-only. It does not ensure uniqueness of the given uuid.
+class. It will check that a given string matches a UUID by pattern
+only. It does not ensure uniqueness of the given UUID.
 
 
 .. meta::
