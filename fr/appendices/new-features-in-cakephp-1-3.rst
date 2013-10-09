@@ -529,8 +529,8 @@ off to another validator has been added.
 
 **IP Address Validation**
 
-La validation des adresses IP a été étendu pour autoriser une stricte 
-validation d'une Version d'IP spécifique. Cela utilisera aussi les 
+La validation des adresses IP a été étendu pour autoriser une stricte
+validation d'une Version d'IP spécifique. Cela utilisera aussi les
 méchanismes de validation natifs de PHP si ils sont disponibles.
 
 ::
@@ -541,9 +541,9 @@ méchanismes de validation natifs de PHP si ils sont disponibles.
 
 **Validation::uuid()**
 
-Un pattern de validation uuid() a été ajouté à la classe ``Validation``. 
-Cla vérifiera qu'une chaîne donnée correspondra à un uuid par pattern 
-uniquement. Cela ne garantit pas l'unicité du uuid donné.
+Un pattern de validation uuid() a été ajouté à la classe ``Validation``.
+Elle vérifiera qu'une chaîne donnée correspondra à un UUID par pattern
+uniquement. Cela ne garantit pas l'unicité du UUID donné.
 
 
 .. meta::

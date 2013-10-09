@@ -1204,7 +1204,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: uuid(string $check)
 
-    Vérifie que la valeur est une valeur uuid valide:
+    Vérifie que la valeur est une valeur UUID valide:
     http://tools.ietf.org/html/rfc4122
 
 Validation localisée

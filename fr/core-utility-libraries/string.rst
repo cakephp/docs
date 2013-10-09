@@ -31,8 +31,8 @@ d'une ``View``, utilisez la classe ``String``::
 
 .. php:staticmethod:: uuid()
 
-    La méthode uuid est utilisée pour générer des identificateurs uniques comme
-    per :rfc:`4122`. uuid est une chaîne de caractères de 128bit au format
+    La méthode UUID est utilisée pour générer des identificateurs uniques comme
+    per :rfc:`4122`. UUID est une chaîne de caractères de 128bit au format
     485fc381-e790-47a3-9794-1337c0a8fe68.
 
     ::
