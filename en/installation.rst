@@ -3,7 +3,7 @@ Installation
 
 CakePHP is fast and easy to install. The minimum requirements are a
 webserver and a copy of Cake, that's it! While this manual focuses
-primarily on setting up with Apache (because it's the most common),
+primarily on setting up on Apache (because it's the most commony used),
 you can configure Cake to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
 
@@ -25,7 +25,7 @@ database storage engines:
 
 .. note::
 
-    The built-in drivers all require PDO.  You should make sure you have the
+    All built-in drivers require PDO.  You should make sure you have the
     correct PDO extensions installed.
 
 License
@@ -40,7 +40,7 @@ Downloading CakePHP
 ===================
 
 There are two main ways to get a fresh copy of CakePHP. You can
-either download an archive copy (zip/tar.gz/tar.bz2) from the main
+either download an archived copy (zip/tar.gz/tar.bz2) from the main
 website, or check out the code from the git repository.
 
 To download the latest major release of CakePHP. Visit the main
@@ -65,8 +65,8 @@ Permissions
 ===========
 
 CakePHP uses the ``app/tmp`` directory for a number of different
-operations. Model descriptions, cached views, and session
-information are just a few examples.
+operations, a few examples would be Model descriptions, cached
+views and session information.
 
 As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
 are writable by the web server user.
@@ -158,7 +158,7 @@ http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
 
 Unpack the contents of the Cake archive into a directory of your
-choosing. For the purposes of this example, we assume you choose to
+choice. For the purposes of this example, we assume you chose to
 install Cake into /cake\_install. Your production setup will look
 like this on the filesystem::
 
