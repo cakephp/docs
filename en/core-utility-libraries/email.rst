@@ -6,11 +6,11 @@ CakeEmail
 ``CakeEmail`` is a new class to send email. With this
 class you can send email from any place in your application. In addition to
 using the EmailComponent from your controller, you can also send mail from
-Shells, and Models.
+Shells and Models.
 
 This class replaces the :php:class:`EmailComponent` and gives more flexibility
 in sending emails. For example, you can create your own transports to send
-email instead of using the provided smtp and mail.
+email instead of using the provided SMTP and Mail transports.
 
 Basic usage
 ===========
@@ -166,10 +166,10 @@ The following configuration keys are used:
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also ``CakeLog::write()``
 
-All these configurations are optional, except ``'from'``. If you put more
-configuration in this array, the configurations will be used in the
+All of these configurations are optional, except ``'from'``. If you put more
+configurations in this array, the configurations will be used in the
 :php:meth:`CakeEmail::config()` method and passed to the transport class ``config()``.
-For example, if you are using smtp transport, you should pass the host, port and
+For example, if you are using the SMTP transport, you should pass the host, port and
 other configurations.
 
 .. note::
@@ -177,7 +177,7 @@ other configurations.
     The values of above keys using Email or array, like from, to, cc, etc will be passed
     as first parameter of corresponding methods. The equivalent for:
     ``CakeEmail::from('my@example.com', 'My Site')``
-    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
+    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config.
 
 Setting headers
 ---------------
@@ -316,10 +316,10 @@ Using transports
 ----------------
 
 Transports are classes designed to send the e-mail over some protocol or method.
-CakePHP support the Mail (default), Debug and Smtp transports.
+CakePHP supports the Mail (default), Debug and SMTP transports.
 
 To configure your method, you must use the :php:meth:`CakeEmail::transport()`
-method or have the transport in your configuration
+method or have the transport in your configuration.
 
 Creating custom Transports
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -357,7 +357,7 @@ Relaxing address validation rules
 
 .. php:method:: emailPattern($pattern = null)
 
-If you are having validation issues when sending to non compliant addresses, you
+If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
 necessary when dealing with some Japanese ISP's::
 
