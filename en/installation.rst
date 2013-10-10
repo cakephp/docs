@@ -3,7 +3,7 @@ Installation
 
 CakePHP is fast and easy to install. The minimum requirements are a
 webserver and a copy of Cake, that's it! While this manual focuses
-primarily on setting up on Apache (because it's the most commony used),
+primarily on setting up on Apache (because it's the most commonly used),
 you can configure Cake to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
 
@@ -65,7 +65,7 @@ Permissions
 ===========
 
 CakePHP uses the ``app/tmp`` directory for a number of different
-operations, a few examples would be Model descriptions, cached
+operations. A few examples would be Model descriptions, cached
 views and session information.
 
 As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
