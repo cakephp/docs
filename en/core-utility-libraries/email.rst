@@ -169,7 +169,7 @@ The following configuration keys are used:
 All of these configurations are optional, except ``'from'``. If you put more
 configurations in this array, the configurations will be used in the
 :php:meth:`CakeEmail::config()` method and passed to the transport class ``config()``.
-For example, if you are using SMTP transport, you should pass the host, port and
+For example, if you are using the SMTP transport, you should pass the host, port and
 other configurations.
 
 .. note::
