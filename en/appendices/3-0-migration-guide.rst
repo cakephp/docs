@@ -374,8 +374,8 @@ ConnectionManager
 TestSuite
 =========
 
-CakeTestCase
-------------
+TestCase
+--------
 
 The following assertion methods have been removed as they have long been deprecated and replaced by
 their new PHPUnit counterpart:
