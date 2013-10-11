@@ -112,10 +112,10 @@ and have many Users which in turn have many Articles. You can set
 $recursive to different values based on the amount of data you want
 back from a $this->Group->find() call:
 
-* -1 Cake fetches Group data only, no joins.
-* 0  Cake fetches Group data and its domain
-* 1  Cake fetches a Group, its domain and its associated Users
-* 2  Cake fetches a Group, its domain, its associated Users, and the
+* -1 CakePHP fetches Group data only, no joins.
+* 0  CakePHP fetches Group data and its domain
+* 1  CakePHP fetches a Group, its domain and its associated Users
+* 2  CakePHP fetches a Group, its domain, its associated Users, and the
   Users' associated Articles
 
 Set it no higher than you need. Having CakePHP fetch data you

@@ -16,11 +16,11 @@ Here's what you'll need:
 #. A running web server. We're going to assume you're using Apache,
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
-   configuration, but most folks can get Cake up and running without
+   configuration, but most folks can get CakePHP up and running without
    any configuration at all. Make sure you have PHP 5.2.8 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.  Since we're using MySQL,
+   database: CakePHP will be taking the reins from there.  Since we're using MySQL,
    also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
@@ -33,7 +33,7 @@ Let's get started!
 Getting Cake
 ============
 
-First, let's get a copy of fresh Cake code.
+First, let's get a copy of fresh CakePHP code.
 
 To get a fresh download, visit the CakePHP project on GitHub:
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
@@ -88,22 +88,22 @@ statements into your database::
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
-follow Cake's database naming conventions, and Cake's class naming
+follow Cake's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
 :doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
-Cake is flexible enough to accommodate even the worst legacy
+CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
 Check out :doc:`/getting-started/cakephp-conventions` for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
-'modified' and 'created' will be automagically managed by Cake.
+'modified' and 'created' will be automagically managed by CakePHP.
 
-Cake Database Configuration
-===========================
+CakePHP Database Configuration
+==============================
 
-Onward and upward: let's tell Cake where our database is and how to
+Onward and upward: let's tell CakePHP where our database is and how to
 connect to it. For many, this is the first and last time you
 configure anything.
 
@@ -130,9 +130,9 @@ like the following::
     );
 
 Once you've saved your new ``database.php`` file, you should be
-able to open your browser and see the Cake welcome page. It should
+able to open your browser and see the CakePHP welcome page. It should
 also tell you that your database connection file was found, and
-that Cake can successfully connect to the database.
+that CakePHP can successfully connect to the database.
 
 .. note::
 

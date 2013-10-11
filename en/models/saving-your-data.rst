@@ -595,7 +595,7 @@ The data array will look like this when submitted.::
 
     )
 
-Cake will happily be able to save the lot together and assign
+CakePHP will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
 with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
@@ -668,7 +668,7 @@ And the resultant POST::
         )
     )
 
-Again Cake is good to us and pulls the Student id and Course id
+Again CakePHP is good to us and pulls the Student id and Course id
 into the CourseMembership with the `saveAssociated`.
 
 .. _saving-habtm:

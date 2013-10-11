@@ -13,7 +13,7 @@ CakePHP application's landing page.
    
    Flow diagram showing a typical CakePHP request
 
-Figure: 2. Typical Cake Request.
+Figure: 2. Typical CakePHP Request.
 
 Black = required element, Gray = optional element, Blue = callback
 

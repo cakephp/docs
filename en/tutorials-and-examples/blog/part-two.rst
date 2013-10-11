@@ -93,7 +93,7 @@ Now that we have our data flowing to our model, and our application
 logic and flow defined by our controller, let's create a view for
 the index action we created above.
 
-Cake views are just presentation-flavored fragments that fit inside
+CakePHP views are just presentation-flavored fragments that fit inside
 an application's layout. For most applications they're HTML mixed
 with PHP, but they may end up as XML, CSV, or even binary data.
 
@@ -329,7 +329,7 @@ redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the
 `API <http://api20.cakephp.org>`_ to see the formats in which you can specify a
-URL for various Cake functions.
+URL for various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
@@ -338,7 +338,7 @@ handled in the following sections.
 Data Validation
 ===============
 
-Cake goes a long way in taking the monotony out of form input
+CakePHP goes a long way in taking the monotony out of form input
 validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
@@ -487,7 +487,7 @@ with any necessary validation error messages.
 
 One thing to note here: CakePHP will assume that you are editing a
 model if the 'id' field is present in the data array. If no 'id' is
-present (look back at our add view), Cake will assume that you are
+present (look back at our add view), CakePHP will assume that you are
 inserting a new model when ``save()`` is called.
 
 You can now update your index view with links to edit specific
@@ -657,7 +657,7 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-Now that you've created a basic Cake application you're ready for
+Now that you've created a basic CakePHP application you're ready for
 the real thing. Start your own project, read the rest of the
 :doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
 
