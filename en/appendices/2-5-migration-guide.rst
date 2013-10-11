@@ -23,6 +23,13 @@ SchemaShell
   ``yes`` option allows you to skip the various interactive questions forcing
   a yes reply.
 
+CompletionShell
+---------------
+
+- The CompletionShell was added, this allows integration with autocompletion
+  libraries for shell environments like bash, or zsh. No shell scripts are
+  included in CakePHP, but the underlying tools are now available.
+
 Controller
 ==========
 
