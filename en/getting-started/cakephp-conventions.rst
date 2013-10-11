@@ -158,7 +158,7 @@ as a normal model. E.g.::
     PRIMARY KEY(id)); 
 
 Rather than using an auto-increment key as the primary key, you may
-also use char(36). Cake will then use a unique 36 character UUID
+also use char(36). CakePHP will then use a unique 36 character UUID
 (String::uuid) whenever you save a new record using the Model::save
 method.
 

@@ -314,7 +314,7 @@ elements should also be made available as passed arguments::
     );
 
 And now, thanks to the reverse routing capabilities, you can pass
-in the url array like below and Cake will know how to form the URL
+in the url array like below and CakePHP will know how to form the URL
 as defined in the routes::
 
     // view.ctp
@@ -396,7 +396,7 @@ adding additional values to ``Routing.prefixes``. If you set::
 
     Configure::write('Routing.prefixes', array('admin', 'manager'));
 
-Cake will automatically generate routes for both the admin and
+CakePHP will automatically generate routes for both the admin and
 manager prefixes. Each configured prefix will have the following
 routes generated for it::
 
@@ -993,7 +993,7 @@ Router API
 
     * ``base`` - Set to false to remove the base path from the generated URL.
       If your application is not in the root directory, this can be used to
-      generate URLs that are 'cake relative'. Cake relative URLs are required
+      generate URLs that are 'cake relative'. CakePHP relative URLs are required
       when using requestAction.
     * ``?`` - Takes an array of query string parameters
     * ``#`` - Allows you to set URL hash fragments.

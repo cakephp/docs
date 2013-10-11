@@ -124,7 +124,7 @@ because here we have the alias 'Member' referring to both the User
 Choosing non-unique names for model aliases across models can cause
 unexpected behavior.
 
-Cake will automatically create links between associated model
+CakePHP will automatically create links between associated model
 objects. So for example in your ``User`` model you can access the
 ``Recipe`` model as::
 

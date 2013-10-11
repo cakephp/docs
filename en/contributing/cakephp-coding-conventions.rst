@@ -1,7 +1,7 @@
 Coding Standards
 ################
 
-Cake Developers will use the following coding standards.
+CakePHP developers will use the following coding standards.
 
 It is recommended that others developing CakeIngredients follow the same
 standards.

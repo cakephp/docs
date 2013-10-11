@@ -50,7 +50,7 @@ your code.
 The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your
 `po files <http://en.wikipedia.org/wiki/Gettext>`_, which contain
-the translations. Cake will look for your po files in the following
+the translations. CakePHP will look for your po files in the following
 location::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
@@ -151,7 +151,7 @@ do is the following::
 
     Configure::write('Config.language', 'fra');
 
-This tells Cake which locale to use (if you use a regional locale, such as
+This tells CakePHP which locale to use (if you use a regional locale, such as
 fr\_FR, it will use the `ISO 639-2
 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
 if it doesn't exist), you can change the language at any time during a request.

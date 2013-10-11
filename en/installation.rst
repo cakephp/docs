@@ -4,7 +4,7 @@ Installation
 CakePHP is fast and easy to install. The minimum requirements are a
 webserver and a copy of Cake, that's it! While this manual focuses
 primarily on setting up on Apache (because it's the most commonly used),
-you can configure Cake to run on a variety of web servers such as
+you can configure CakePHP to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
 
 Requirements
@@ -97,7 +97,7 @@ it available at http://www.example.com/cake\_2\_0/. We assume for
 the purposes of this example that your document root is set to
 ``/var/www/html``.
 
-Unpack the contents of the Cake archive into ``/var/www/html``. You now
+Unpack the contents of the CakePHP archive into ``/var/www/html``. You now
 have a folder in your document root named after the release you've
 downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
 Your development setup will look like this on the file system::
@@ -113,7 +113,7 @@ Your development setup will look like this on the file system::
             README
 
 If your web server is configured correctly, you should now find
-your Cake application accessible at
+your CakePHP application accessible at
 http://www.example.com/cake\_2\_0/.
 
 Using one CakePHP checkout for multiple applications
@@ -157,9 +157,9 @@ anywhere on your filesystem and make it available at
 http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
 
-Unpack the contents of the Cake archive into a directory of your
+Unpack the contents of the CakePHP archive into a directory of your
 choice. For the purposes of this example, we assume you chose to
-install Cake into /cake\_install. Your production setup will look
+install CakePHP into /cake\_install. Your production setup will look
 like this on the filesystem::
 
     /cake_install/
@@ -179,7 +179,7 @@ for the domain to::
     DocumentRoot /cake_install/app/webroot
 
 If your web server is configured correctly, you should now find
-your Cake application accessible at http://www.example.com.
+your CakePHP application accessible at http://www.example.com.
 
 Advanced Installation and URL Rewriting
 =======================================

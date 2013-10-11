@@ -102,7 +102,7 @@ Sharing CakePHP libraries with multiple applications
 There may be some situations where you wish to place CakePHP's
 directories on different places on the filesystem. This may be due
 to a shared host restriction, or maybe you just want a few of your
-apps to share the same Cake libraries. This section describes how
+apps to share the same CakePHP libraries. This section describes how
 to spread your CakePHP directories across a filesystem.
 
 First, realize that there are three main parts to a Cake
@@ -115,10 +115,10 @@ application:
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
 accessible by your web server. You can even move the webroot folder
-out of the app folder as long as you tell Cake where you've put
+out of the app folder as long as you tell CakePHP where you've put
 it.
 
-To configure your Cake installation, you'll need to make some
+To configure your CakePHP installation, you'll need to make some
 changes to the following files.
 
 

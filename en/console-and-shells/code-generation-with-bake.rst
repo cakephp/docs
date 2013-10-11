@@ -104,7 +104,7 @@ For baking custom projects
        Line Interface.
     -  Since the full path to the skeleton needs to be manually
        entered, you can specify any directory holding your template build
-       you want, including using multiple templates. (Unless Cake starts
+       you want, including using multiple templates. (Unless CakePHP starts
        supporting overriding the skel folder like it does for views)
 
 
