@@ -331,7 +331,7 @@ To load **app/Vendor/geshi.php**::
 
 .. note::
 
-    The geshi file must be a lower-case file name as Cake will not
+    The geshi file must be a lower-case file name as CakePHP will not
     find it otherwise.
 
 To load **app/Vendor/flickr/flickr.php**::
@@ -351,7 +351,7 @@ To load **app/Plugin/Awesome/Vendor/services/well.named.php**::
     App::import('Vendor', 'Awesome.WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
 It wouldn't make a difference if your vendor files are inside your /vendors
-directory. Cake will automatically find it.
+directory. CakePHP will automatically find it.
 
 To load **vendors/vendorName/libFile.php**::
 

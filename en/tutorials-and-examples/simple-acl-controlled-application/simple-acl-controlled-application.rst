@@ -24,18 +24,18 @@ What you will need
 #. A running web server. We're going to assume you're using Apache,
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
-   configuration, but most folks can get Cake up and running without
+   configuration, but most folks can get CakePHP up and running without
    any configuration at all.
 #. A database server. We're going to be using MySQL in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.
+   database: CakePHP will be taking the reins from there.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
 
 Preparing our Application
 =========================
 
-First, let's get a copy of fresh Cake code.
+First, let's get a copy of fresh CakePHP code.
 
 To get a fresh download, visit the CakePHP project at GitHub:
 https://github.com/cakephp/cakephp/tags and download the stable

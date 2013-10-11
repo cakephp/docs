@@ -54,8 +54,8 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    the site or our GIT repository, and has been unpacked correctly by
    checking for .htaccess files.
 
-   Cake root directory (needs to be copied to your document, this
-   redirects everything to your Cake app)::
+   CakePHP root directory (needs to be copied to your document, this
+   redirects everything to your CakePHP app)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -63,7 +63,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Cake app directory (will be copied to the top directory of your
+   CakePHP app directory (will be copied to the top directory of your
    application by bake)::
 
        <IfModule mod_rewrite.c>
@@ -72,7 +72,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Cake webroot directory (will be copied to your application's web
+   CakePHP webroot directory (will be copied to your application's web
    root by bake)::
 
        <IfModule mod_rewrite.c>
@@ -123,7 +123,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </IfModule>
 
    The details of those changes will depend on your setup, and can
-   include additional things that are not Cake related. Please refer
+   include additional things that are not CakePHP related. Please refer
    to Apache's online documentation for more information.
    
 #. (Optional) To improve production setup, you should prevent invalid assets

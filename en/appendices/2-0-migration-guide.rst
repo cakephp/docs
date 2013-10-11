@@ -1038,8 +1038,8 @@ Or just declare the property in the model class::
 
 Either of these approaches will solve the notice errors.
 
-The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
-notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
+The notation of ``find()`` in CakePHP 1.2 is no longer supported. Finds should use
+notation ``$model->find('type', array(PARAMS))`` in CakePHP 1.3.
 
 - ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
   public and can be modified by behaviors.
@@ -1049,7 +1049,7 @@ notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
 Database objects
 ----------------
 
-Cake 2.0 introduces some changes to Database objects that should not greatly
+CakePHP 2.0 introduces some changes to Database objects that should not greatly
 affect backwards compatibility. The biggest one is the adoption of PDO for
 handling database connections. If you are using a vanilla installation of PHP 5
 you will already have installed the needed extensions, but you may need to

@@ -187,7 +187,7 @@ All of the standard Exceptions that CakePHP will throw also extend CakeException
 
     See :php:func:`CakeResponse::header()`
 
-All Http and Cake exceptions extend the CakeBaseException class, which has a method
+All Http and CakePHP exceptions extend the CakeBaseException class, which has a method
 to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
 the rfc2616 says:
 "The response MUST include an Allow header containing a list of valid methods for the requested resource."
