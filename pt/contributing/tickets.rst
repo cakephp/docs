@@ -3,7 +3,7 @@ Tickets
 
 Receber *feedback* e ajuda da comunidade em foma de ticket é uma parte
 muito importante no processo de desenvolvimento do CakePHP. Todos os tickets sobre
-o CakePHP estão no `lighthouse <http://cakephp.lighthouseapp.com>`_.
+o CakePHP estão no `Github <https://github.com/cakephp/cakephp/issues>`_.
 
 Informando Bugs
 ===============
@@ -11,7 +11,7 @@ Informando Bugs
 Informações bem escritas de bugs ajudam bastante. Você pode seguir alguns passos
 que vão te ajudar a descrever um bug:
 
-* **Faça** uma `busca <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
+* **Faça** uma `busca <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   por um ticket simular, tenha certeza que ninguém já informou seu problema e que
   não esteja corrigido no repositório.
 * **Faça** uma descrição detalhada de como **reproduzir o bug**.
