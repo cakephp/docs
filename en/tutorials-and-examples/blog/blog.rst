@@ -88,7 +88,7 @@ statements into your database::
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
-follow Cake's database naming conventions, and Cake's class naming
+follow Cake's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
 :doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
@@ -98,10 +98,10 @@ database schema, but adhering to convention will save you time.
 Check out :doc:`/getting-started/cakephp-conventions` for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
-'modified' and 'created' will be automagically managed by Cake.
+'modified' and 'created' will be automagically managed by CakePHP.
 
 CakePHP Database Configuration
-===========================
+==============================
 
 Onward and upward: let's tell CakePHP where our database is and how to
 connect to it. For many, this is the first and last time you
