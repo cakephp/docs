@@ -3,7 +3,7 @@ Tickets
 
 Getting feedback and help from the community in the form of tickets is an
 extremely important part of the CakePHP development process.  All of CakePHP's
-tickets are hosted on `lighthouse <http://cakephp.lighthouseapp.com>`_.
+tickets are hosted on `Github <https://github.com/cakephp/cakephp/issues>`_.
 
 Reporting bugs
 ==============
@@ -11,7 +11,7 @@ Reporting bugs
 Well written bug reports are very helpful.  There are a few steps to help create
 the best bug report possible:
 
-* **Do** `search <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
+* **Do** `search <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   for a similar existing ticket, and ensure someone hasn't already reported your
   issue, or that it hasn't already been fixed in the repository.
 * **Do** include detailed instructions on **how to reproduce the bug**.  This
