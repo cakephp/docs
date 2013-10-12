@@ -209,7 +209,7 @@ Exception
 App.baseUrl
     If you don't want or can't get mod\_rewrite (or some other
     compatible module) up and running on your server, you'll need to
-    use Cake's built in pretty URLs. In ``/app/Config/core.php``,
+    use CakePHP's built in pretty URLs. In ``/app/Config/core.php``,
     uncomment the line that looks like::
 
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -703,7 +703,7 @@ Built-in Configuration readers
 Inflection Configuration
 ========================
 
-Cake's naming conventions can be really nice - you can name your
+CakePHP's naming conventions can be really nice - you can name your
 database table big\_boxes, your model BigBox, your controller
 BigBoxesController, and everything just works together
 automatically. The way CakePHP knows how to tie things together is

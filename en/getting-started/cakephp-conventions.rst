@@ -87,7 +87,7 @@ File and Classname Conventions
 ==============================
 
 In general, filenames match the classnames, which are
-CamelCased. So if you have a class **MyNiftyClass**, then in Cake,
+CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
 the file should be named **MyNiftyClass.php**. Below are
 examples of how to name the file for each of the different types of
 classes you would typically use in a CakePHP application:

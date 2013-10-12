@@ -2,7 +2,7 @@ Installation
 ############
 
 CakePHP is fast and easy to install. The minimum requirements are a
-webserver and a copy of Cake, that's it! While this manual focuses
+webserver and a copy of CakePHP, that's it! While this manual focuses
 primarily on setting up on Apache (because it's the most commonly used),
 you can configure CakePHP to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
