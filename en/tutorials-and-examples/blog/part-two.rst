@@ -81,9 +81,9 @@ from the controller to the view (which we'll create next). The line
 sets the view variable called 'posts' equal to the return value of
 the ``find('all')`` method of the Post model. Our Post model is
 automatically available at ``$this->Post`` because we've followed
-Cake's naming conventions.
+CakePHP's naming conventions.
 
-To learn more about Cake's controllers, check out the
+To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
 
 Creating Post Views
@@ -144,7 +144,7 @@ to the view that would look something like this::
             )
     )
 
-Cake's view files are stored in ``/app/View`` inside a folder
+CakePHP's view files are stored in ``/app/View`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
 nice table, our view code might look something like this
@@ -187,7 +187,7 @@ what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)
 and URL (the second parameter).
 
-When specifying URLs in Cake, it is recommended that you use the
+When specifying URLs in CakePHP, it is recommended that you use the
 array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
@@ -343,7 +343,7 @@ validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use
-Cake's FormHelper in your views. The :php:class:`FormHelper` is available by
+CakePHP's FormHelper in your views. The :php:class:`FormHelper` is available by
 default to all views at ``$this->Form``.
 
 Here's our add view:
@@ -622,7 +622,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 
-Cake's routing is found in ``/app/Config/routes.php``. You'll want
+CakePHP's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 

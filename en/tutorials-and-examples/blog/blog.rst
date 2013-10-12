@@ -7,7 +7,7 @@ aim to increase productivity and make coding more enjoyable: we
 hope you'll see this as you dive into the code.
 
 This tutorial will walk you through the creation of a simple blog
-application. We'll be getting and installing Cake, creating and
+application. We'll be getting and installing CakePHP, creating and
 configuring a database, and creating enough application logic to
 list, add, edit, and delete blog posts.
 
@@ -30,8 +30,8 @@ Here's what you'll need:
 
 Let's get started!
 
-Getting Cake
-============
+Getting CakePHP
+===============
 
 First, let's get a copy of fresh CakePHP code.
 
@@ -56,7 +56,7 @@ something like the following::
         index.php
         README
 
-Now might be a good time to learn a bit about how Cake's directory
+Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
@@ -88,7 +88,7 @@ statements into your database::
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
-follow Cake's database naming conventions, and CakePHP's class naming
+follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
 :doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
