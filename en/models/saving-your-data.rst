@@ -844,7 +844,7 @@ Becomes this::
 What to do when HABTM becomes complicated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default when saving a HasAndBelongsToMany relationship, Cake
+By default when saving a HasAndBelongsToMany relationship, CakePHP
 will delete all rows on the join table before saving new ones. For
 example if you have a Club that has 10 Children associated. You
 then update the Club with 2 children. The Club will only have 2

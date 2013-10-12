@@ -815,7 +815,7 @@ The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Join models are pretty useful things to be able to use and Cake
+Join models are pretty useful things to be able to use and CakePHP
 makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
 
