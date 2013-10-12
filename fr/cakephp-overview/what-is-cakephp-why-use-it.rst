@@ -20,7 +20,7 @@ nouveau projet, récupérez une copie de CakePHP et concentrez-vous
 sur la logique de votre application.
 
 CakePHP dispose
-`d'une équipe de développement <http://cakephp.lighthouseapp.com/contributors>`_
+`d'une équipe de développement <http://github.com/cakephp/cakephp/contributors>`_
 et d'une communauté actives, qui donnent au projet une forte valeur ajoutée.
 En plus de vous éviter de ré-inventer la roue, l'utilisation de CakePHP
 implique que le coeur de votre application est bien testé et qu'il peut être

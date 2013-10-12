@@ -51,4 +51,4 @@ CakePHP team will take the following actions:
 
 .. meta::
     :title lang=en: Tickets
-    :keywords lang=en: bug reporting system,code snippet,reporting security,private mailing,release announcement,google,ticket system,core team,security issue,bug tracker,irc channel,test cases,support questions,bug report,security issues,bug reports,exploits,lighthouse,vulnerability,repository
+    :keywords lang=en: bug reporting system,code snippet,reporting security,private mailing,release announcement,google,ticket system,core team,security issue,bug tracker,irc channel,test cases,support questions,bug report,security issues,bug reports,exploits,vulnerability,repository

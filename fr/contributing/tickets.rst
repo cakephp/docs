@@ -53,4 +53,4 @@ suivantes:
 
 .. meta::
     :title lang=fr: Tickets
-    :keywords lang=fr: système de rapport de bug,code snippet,rapports de sécurité,mailing privé,annonce de publication,google,système de ticket,core team,problème de sécurité,bug tracker,irc channel,cas de test,support questions,bug report,security issues,rapports de bug,exploitations,lighthouse,vulnérabilité,répertoire
+    :keywords lang=fr: système de rapport de bug,code snippet,rapports de sécurité,mailing privé,annonce de publication,google,système de ticket,core team,problème de sécurité,bug tracker,irc channel,cas de test,support questions,bug report,security issues,rapports de bug,exploitations,vulnérabilité,répertoire

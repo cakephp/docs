@@ -2,7 +2,7 @@
 ######
 
 パッチとプルリクエストはCakePHPにコードを寄贈する最善の方法です。
-パッチは `lighthouse <http://cakephp.lighthouseapp.com>`_ でチケットに添付できます。
+パッチは `github <http://github.com/cakephp/cakephp>`_ でチケットに添付できます。
 プルリクエストはgithubで作ることができ、コードに貢献するための一般的により良い方法です。
 
 初期設定
