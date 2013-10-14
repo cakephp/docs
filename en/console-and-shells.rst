@@ -146,7 +146,7 @@ code inside it::
 The conventions for shell classes are that the class name should match
 the file name, with the suffix of Shell. In our shell we created a ``main()`` method.
 This method is called when a shell is called with no additional commands.  We'll add
-some more commands in a bit, but for now lets just run our shell.  From your application
+some more commands in a bit, but for now let's just run our shell.  From your application
 directory, run::
 
     Console/cake hello
@@ -165,7 +165,7 @@ whenever there are no other commands or arguments given to a shell.  You may hav
 noticed that HelloShell is extending ``AppShell``.  Much like :ref:`app-controller`, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
 by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the
-built-in one. Since our main method wasn't very interesting lets add another command
+built-in one. Since our main method wasn't very interesting let's add another command
 that does something::
 
     class HelloShell extends AppShell {
