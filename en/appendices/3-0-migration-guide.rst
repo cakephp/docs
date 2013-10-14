@@ -175,7 +175,7 @@ Named parameters are removed in 3.0. Named parameters were added in 1.2.0 as
 a 'pretty' version of query string parameters.  While the visual benefit is
 arguable, the problems named parameters created are not.
 
-Named parameters required special handling both in CakePHP as well as any PHP or
+Named parameters required special handling in CakePHP as well as any PHP or
 javascript library that needed to interact with them, as named parameters are
 not implemented or understood by any library *except* CakePHP.  The additional
 complexity and code required to support named parameters did not justify their
@@ -374,10 +374,29 @@ ConnectionManager
 TestSuite
 =========
 
+TestCase
+--------
+
+The following assertion methods have been removed as they have long been deprecated and replaced by
+their new PHPUnit counterpart:
+
+- ``assertEqual()`` in favor of assertEquals()``
+- ``assertNotEqual()`` in favor of assertNotEquals()``
+- ``assertIdentical()`` in favor of assertSame()``
+- ``assertNotIdentical()`` in favor of assertNotSame()``
+- ``assertPattern()`` in favor of assertRegExp()``
+- ``assertNoPattern()`` in favor of assertNotRegExp()``
+- ``assertReference()`` if favor of assertSame()``
+- ``assertIsA()`` in favor of assertInstanceOf()``
+
+Note that some methods have switched the order, e.g. ``assertEqual($is, $expected)`` should now be
+``assertEquals($expected, $is)``.
+There is an upgrade shell command ``cake upgrade tests`` to assist in upgrading your code.
+
 ControllerTestCase
 ------------------
 
-- You can now simulate both query string, post data and cookie values when using ``testAction()``
+- You can now simulate query string, post data and cookie values when using ``testAction()``.
 
 View
 ====
