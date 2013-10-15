@@ -774,7 +774,7 @@ own sections in the manual.
 
 .. todo::
 
-    This chapter should be less about the controller api and more about
+    This chapter should be less about the controller API and more about
     examples, the controller attributes section is overwhelming and difficult to
     understand at first. The chapter should start with some example controllers
     and what they do.
