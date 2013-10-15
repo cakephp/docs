@@ -466,7 +466,7 @@ Some examples on using :php:meth:`App::uses()` when migrating from
 
 All classes that were loaded in the past using ``App::import('Core', $class);``
 will need to be loaded using ``App::uses()`` referring to the correct package.
-See the api to locate the classes in their new folders. Some examples::
+See the API to locate the classes in their new folders. Some examples::
 
     App::import('Core', 'CakeRoute');
     // becomes
