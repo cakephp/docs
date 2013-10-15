@@ -40,7 +40,7 @@ En général, vous aurez envie d'offrir l'authentification par formulaire.
 C'est le plus facile pour les utilisateurs utilisant un navigateur Web.
 Si vous construisez une API ou un service web, vous aurez peut-être à envisager
 l'utilisation de l'authentification de base ou l'authentification Digest.
-L’élément clé qui différencie l'authentification digest de l'authentification
+L'élément clé qui différencie l'authentification digest de l'authentification
 basic est la plupart du temps liée à la façon dont les mots de passe sont gérés.
 Avec l'authentification basic, le nom d'utilisateur et le mot de passe sont
 transmis en clair sur le serveur. Cela rend l'authentification de base non
@@ -478,7 +478,7 @@ class and need to implement the abstract methods ``hash()`` and ``check()``.
 In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
-    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
+    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
@@ -822,7 +822,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:attr:: authenticate
 
-    Défini comme un tableau d'objets d’identifications que vous voulez utiliser
+    Défini comme un tableau d'objets d'identifications que vous voulez utiliser
     quand les utilisateurs de connectent. Il y a plusieurs objets
     d'authentification dans le noyau, cf la section
     :ref:`authentication-objects`
@@ -880,7 +880,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 .. php:attr:: unauthorizedRedirect
 
     Contrôle la gestion des accès non autorisés. Par défaut, un utilisateur
-    non autorisé est redirigé vers l'url référente ou vers
+    non autorisé est redirigé vers l'URL référente ou vers
     ``AuthComponent::$loginAction`` ou '/'.
     Si défini à false, une exception ForbiddenException est lancée au lieu de
     la redirection.
@@ -965,7 +965,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
    
 .. php:method:: logout()
 
-    :return: Une chaîne url où rediriger l'utilisateur déconnecté.
+    :return: Une chaîne URL où rediriger l'utilisateur déconnecté.
 
     Déconnecte l'utilisateur actuel.
 
@@ -1000,7 +1000,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:method:: startup($Controller)
 
-    Méthode d’exécution principale. Gère la redirection des utilisateurs
+    Méthode d'exécution principale. Gère la redirection des utilisateurs
     invalides et traite les données des formulaires de connexion.
 
 .. php:staticmethod:: user($key = null)

@@ -180,7 +180,7 @@ vide, il est maintenant temps de la remplir. Dans
 
 Cela définit un message flash en Session et déconnecte l'User en
 utilisant la méthode logout de Auth. La méthode logout de Auth supprime tout
-simplement la clé d'authentification en session et retourne une url qui peut
+simplement la clé d'authentification en session et retourne une URL qui peut
 être utilisée dans une redirection. Si il y a d'autres données en sessions
 qui doivent être également effacées, ajoutez le code ici.
 

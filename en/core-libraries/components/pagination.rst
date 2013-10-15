@@ -25,7 +25,7 @@ Query Setup
 In the controller, we start by defining the query conditions pagination will use
 by default in the ``$paginate`` controller variable. These conditions, serve as
 the basis of your pagination queries.  They are augmented by the sort, direction
-limit, and page parameters passed in from the url. It is important to note
+limit, and page parameters passed in from the URL. It is important to note
 here that the order key must be defined in an array structure like below::
 
     class PostsController extends AppController {
@@ -282,7 +282,7 @@ arguments.
 
         $this->paginate['limit'] = 10;
 
-    will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
+    will throw the error "Notice: Indirect modification of overloaded property $paginate has no effect".
     Assigning an initial value to the property solves the issue::
 
         $this->paginate = array();

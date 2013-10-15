@@ -1,7 +1,7 @@
 Sauvegarder vos Données
 #######################
 
-CakePHP rend la sauvegarde des données d’un model très rapide. Les données
+CakePHP rend la sauvegarde des données d'un model très rapide. Les données
 prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du
 model en utilisant le format basique suivant::
 
@@ -14,13 +14,13 @@ model en utilisant le format basique suivant::
         )
     )
 
-La plupart du temps vous n’aurez même pas à vous préoccuper de ce format :
+La plupart du temps vous n'aurez même pas à vous préoccuper de ce format :
 le :php:class:`FormHelper` et les méthodes de recherche de CakePHP réunissent
 les données sous cette forme. Si vous utilisez un de ces helpers, les données
 sont également disponibles dans ``$this->request->data`` pour un usage rapide
 et pratique.
 
-Voici un exemple simple d’une action de controller qui utilise un model
+Voici un exemple simple d'une action de controller qui utilise un model
 CakePHP pour sauvegarder les données dans une table de la base de données ::
 
     public function edit($id) {
@@ -40,7 +40,7 @@ CakePHP pour sauvegarder les données dans une table de la base de données ::
 
 Quand save() est appelée, la donnée qui lui est passée en premier paramètre
 est validée en utilisant le mécanisme de validation de CakePHP (voir le
-chapitre :doc:`/models/data-validation` pour plus d’informations). Si pour une
+chapitre :doc:`/models/data-validation` pour plus d'informations). Si pour une
 raison quelconque vos données ne se sauvegardent pas, pensez à regarder si
 des règles de validation ne sont pas insatisfaites. Vous pouvez débugger cette
 situation en affichant :php:attr:`Model::$validationErrors`::
@@ -168,7 +168,7 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
 Cette méthode initialise la classe du model pour sauvegarder de nouvelles
 informations.
 Cela ne crée pas réellement un enregistrement dans la base de données mais
-efface Model::$id et défini Model::$data basé sur les champs par défaut dans
+efface Model::$id et définit Model::$data basé sur les champs par défaut dans
 votre base de données. Si vous n'avez défini aucun champ par défaut dans votre
 base de données, Model::$data sera défini comme un tableau vide.
 
@@ -190,8 +190,8 @@ sera défini comme un tableau vide.
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
 
-Utilisée pour sauvegarder la valeur d’un seul champ. Fixez l’ID du model
-(``$this->ModelName->id = $id``) juste avant d’appeler ``saveField()``. Lors de
+Utilisée pour sauvegarder la valeur d'un seul champ. Fixez l'ID du model
+(``$this->ModelName->id = $id``) juste avant d'appeler ``saveField()``. Lors de
 l'utilisation de cette méthode, ``$fieldName`` ne doit contenir que le nom du
 champ, pas le nom du model et du champ.
 
@@ -228,7 +228,7 @@ devant être mis à jour, ainsi que leurs valeurs, sont identifiés par
 le tableau ``$fields``.
 
 Par exemple, si je voulais approuver tous les bakers qui sont membres
-depuis plus d’un an, l’appel à update devrait ressembler à quelque chose
+depuis plus d'un an, l'appel à update devrait ressembler à quelque chose
 du style:: 
 
     $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
@@ -530,7 +530,7 @@ Voyons comment nous pouvons utiliser ``saveAssociated()`` pour sauvegarder les
 models Company et Account en même temps.
 
 Tout d'abord, vous avez besoin de construire votre formulaire pour les deux
-models Company and Account (nous supposerons que Company hasMany Account)::
+models Company et Account (nous supposerons que Company hasMany Account)::
 
     echo $this->Form->create('Company', array('action' => 'add'));
     echo $this->Form->input('Company.name', array('label' => 'Company name'));
@@ -935,7 +935,7 @@ de base de données, la plupart du temps, elles le sont. CakePHP est pensé pour
 être agnostique et va fonctionner avec MySQL, MSSQL, PostgreSQL et
 autres. Vous pouvez créer vos tables de base de données comme vous l'auriez
 fait normalement. Quand vous créez vos classes Model, elles seront
-automatiquement liées aux tables que vous avez créees. Les noms de table sont
+automatiquement liées aux tables que vous avez créées. Les noms de table sont
 par convention en minuscules et au pluriel avec tous les mots de la table
 séparés par des underscores. Par exemple, un nom de model Ingredient s'attendra
 à un nom de table ingredients. Un nom de Model de EventRegistration s'attendra

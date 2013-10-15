@@ -241,7 +241,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     le nom du plugin.
    
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez
-/contact_manager/contacts. Vous devriez obtenir une erreur “Missing Model”
+/contact_manager/contacts. Vous devriez obtenir une erreur "Missing Model"
 parce que nous n'avons pas un model Contact déjà défini.
 
 .. _plugin-models:
@@ -258,8 +258,8 @@ model pour ce controller, appelé Contact::
     }
 
 Visiter /contact_manager/contacts maintenant (Etant donné, que vous avez une
-table dans votre base de données appelée ‘contacts’) devrait nous donner une
-erreur “Missing View”.
+table dans votre base de données appelée 'contacts') devrait nous donner une
+erreur "Missing View".
 Créons la ensuite.
 
 .. note::

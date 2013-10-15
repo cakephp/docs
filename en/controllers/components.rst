@@ -9,18 +9,11 @@ in a component.
 CakePHP also comes with a fantastic set of core components you can
 use to aid in:
 
-
-- Security
-- Sessions
-- Access control lists
-- Emails
-- Cookies
-- Authentication
-- Request handling
-- Pagination
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
 Each of these core components are detailed in their own chapters.
-For now, we’ll show you how to create your own components. Creating
+For now, we'll show you how to create your own components. Creating
 components keeps controller code clean and allows you to reuse code
 between projects.
 
@@ -294,7 +287,7 @@ Callbacks
     returns false the controller will not continue on to redirect the
     request. The $url, $status and $exit variables have same meaning as
     for the controller's method. You can also return a string which
-    will be interpreted as the url to redirect to or return associative
+    will be interpreted as the URL to redirect to or return associative
     array with key 'url' and optionally 'status' and 'exit'.
 
 

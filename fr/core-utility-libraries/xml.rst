@@ -22,18 +22,18 @@ options - par défault SimpleXMLElement). Ci-dessous les échantillons sur la
 façon d'importer des données depuis une URL::
 
     // Vieille méthode:
-    $xml = new Xml('http://bakery.cakephp.org/articles/rss');
+    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 
     // Nouvelle méthode en utilisant SimpleXML
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml est maintenant une instance de SimpleXMLElement
 
     //ou
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml est maintenant une instance de SimpleXMLElement
 
     // Nouvelle méthode en utilisant DOMDocument
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml est maintenant une instance de DOMDocument
 
 Vous pouvez utiliser :php:meth:`Xml::build()` pour construire les objets XML
@@ -56,7 +56,7 @@ ou de fichiers distants. Les fichiers distants seront récupérés avec
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // fichier distant
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
 Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
@@ -290,7 +290,7 @@ API de Xml
 
 Une classe usine de conversion pour créer des objets SimpleXML ou DOMDocument
 à partir d'un certain nombre de sources, y compris des chaînes, des tableaux
-et des urls distantes.
+et des URLs distantes.
 
 .. php:staticmethod:: build($input, $options = array())
 

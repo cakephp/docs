@@ -249,6 +249,79 @@ by Daniel::
                     )
             )
 
+There is an important caveat to using Containable when filtering on a deeper association. In the previous example,
+assume you had 3 posts in your database and Daniel had commented on 2 of those posts. The operation
+$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"')); would return ALL 3 posts, not
+just the 3 posts that Daniel had commented on. It won't return all comments however, just comments by Daniel.::
+
+    [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 1
+                        [title] => First article
+                        [content] => aaa
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 1
+                                [post_id] => 1
+                                [author] => Daniel
+                                [email] => dan@example.com
+                                [website] => http://example.com
+                                [comment] => First comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                    )
+            )
+    [1] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 2
+                        [title] => Second article
+                        [content] => bbb
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                    )
+            )
+    [2] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 3
+                        [title] => Third article
+                        [content] => ccc
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Comment] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 22
+                                [post_id] => 3
+                                [author] => Daniel
+                                [email] => dan@example.com
+                                [website] => http://example.com
+                                [comment] => Another comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                    )
+            )
+
+If you want to filter the posts by the comments, so that posts without a comment by Daniel won't be
+returned, the easiest way is to find all the comments by Daniel and contain the Posts.::
+
+    $this->Comment->find('all', array(
+        'conditions' => 'Comment.author = "Daniel"',
+        'contain' => 'Post'
+    ));
+
 Additional filtering can be performed by supplying the standard :ref:`model-find` options::
 
     $this->Post->find('all', array('contain' => array(

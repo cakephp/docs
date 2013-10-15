@@ -747,7 +747,7 @@ which returns::
 .. note::
 
     This syntax and the corresponding array structure is valid for
-    MySQL only. Cake does not provide any data abstraction when running
+    MySQL only. CakePHP does not provide any data abstraction when running
     queries manually, so exact results will vary between databases.
 
 :php:meth:`Model::field()`
@@ -888,12 +888,12 @@ that match either condition::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-Cake accepts all valid SQL boolean operations, including AND, OR,
+CakePHP accepts all valid SQL boolean operations, including AND, OR,
 NOT, XOR, etc., and they can be upper or lower case, whichever you
 prefer. These conditions are also infinitely nest-able. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
-keyword (“magic”) or were created in the past two weeks, but you
+keyword ("magic") or were created in the past two weeks, but you
 want to restrict your search to posts written by Bob::
 
     array(
@@ -913,7 +913,7 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
-Cake can also check for null fields. In this example, the query
+CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null::
 
     array("NOT" => array(

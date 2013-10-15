@@ -125,7 +125,7 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: The type meta tag you want.
-    :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
+    :param mixed $url: The URL for the meta tag, either a string or a :term:`routing array`.
     :param array $options: An array of :term:`html attributes`.
 
     This method is handy for linking to external resources like RSS/Atom feeds
@@ -390,6 +390,26 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/images/view/1?height=400&width=500">View image</a>
 
+    When using named parameters, use the array syntax and include
+    names for ALL parameters in the URL. Using the string syntax for
+    paramters (i.e. "recipes/view/6/comments:false" will result in
+    the colon characters being HTML escaped and the link will not work
+    as desired.::
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+        );
+
+    Will output:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/id:6/comments:false">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
     HTML special characters in ``$title`` will be converted to HTML
     entities. To disable this conversion, set the escape option to
     false in the ``$options`` array.::
@@ -432,7 +452,7 @@ methods of the HtmlHelper and how to use them.
         The ``escapeTitle`` option was added.
 
     Also check :php:meth:`HtmlHelper::url` method
-    for more examples of different types of urls.
+    for more examples of different types of URLs.
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -448,7 +468,7 @@ methods of the HtmlHelper and how to use them.
           or "video". If type is not provided media type is guessed based on
           file's mime type.
         - `text` Text to include inside the video tag
-        - `pathPrefix` Path prefix to use for relative urls, defaults to
+        - `pathPrefix` Path prefix to use for relative URLs, defaults to
           'files/'
         - `fullBase` If provided the src attribute will get a full address
           including domain name
@@ -562,7 +582,7 @@ methods of the HtmlHelper and how to use them.
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Include a script file(s), contained either locally or as a remote url.
+    Include a script file(s), contained either locally or as a remote URL.
 
     By default, script tags are added to the document inline.  If you override
     this by setting ``$options['inline']`` to false, the script tags will instead
@@ -853,7 +873,7 @@ methods of the HtmlHelper and how to use them.
 
     Returns an URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it
-    generates the url for the controller and action combo. If full is
+    generates the URL for the controller and action combo. If full is
     true, the full base URL will be prepended to the result::
 
         echo $this->Html->url(array(

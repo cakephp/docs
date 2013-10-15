@@ -55,7 +55,7 @@ pour l'utilisateur comme d'habitude, quelqu'un qui essaie d'aller sur la page
 http://www.example.com/news/\_findNewArticles/ aura une erreur,
 car la méthode est précédée d'un underscore. Vous pouvez aussi utiliser les
 mots-clés de visibilité de PHP pour indiquer si la méthode peut ou non être
-accessible à partir d'une url. Les méthodes non-publiques ne sont pas
+accessible à partir d'une URL. Les méthodes non-publiques ne sont pas
 accessibles.
 
 Considérations URL pour les noms de Controller
@@ -75,7 +75,7 @@ correspondent au nom du controller:
 -  /red\_apples
 
 iront tous vers l'index du controller RedApples. Cependant,
-la convention est que vos urls soient en minuscules et avec des underscores,
+la convention est que vos URLs soient en minuscules et avec des underscores,
 c'est pourquoi /red\_apples/go\_pick est la forme correcte pour
 accéder à l'action ``RedApplesController::go_pick``.
 
@@ -164,7 +164,7 @@ d'agir sur elle comme un model normal. Exemple :
     PRIMARY KEY(id)); 
 
 Plutôt que d'utiliser une clé auto-incrémentée comme clé primaire, vous pouvez
-aussi utiliser un champ char(36). Cake utilisera alors un uuid de 36 caractères
+aussi utiliser un champ char(36). Cake utilisera alors un UUID de 36 caractères
 (String::uuid) lorsque vous sauvegardez un nouvel enregistrement en utilisant
 la méthode Model::save.
 

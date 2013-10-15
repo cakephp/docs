@@ -37,6 +37,12 @@ CakePHP et la manière de créer nos propres behaviors.
 Au final, les Behaviors sont 
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
 
+Il y a un certain nombre de Behaviors inclus dans CakePHP. Pour en savoir
+plus sur chacun, référencez-vous aux chapitres ci-dessous:
+
+.. include:: /core-libraries/toc-behaviors.rst
+    :start-line: 10
+
 Utiliser les Behaviors
 ======================
 
@@ -148,9 +154,9 @@ Créer des Behaviors
 
 Les behaviors qui sont attachés aux Models voient leurs callbacks appelés
 automatiquement. Ces callbacks sont similaires à ceux qu'on trouve dans les
-Models : ``beforeFind``, ``afterFind``, ``beforeSave``, ``afterSave``,
-``beforeDelete``, ``afterDelete`` et ``onError``. Voir
-:doc:`/models/callback-methods`.
+Models : ``beforeFind``, ``afterFind``, ``beforeValidate``, ``afterValidate``,
+``beforeSave``, ``afterSave``, ``beforeDelete``, ``afterDelete`` et
+``onError``. Regardez :doc:`/models/callback-methods`.
 
 Vos behaviors devront être placés dans ``app/Model/Behavior``. Ils sont
 nommés en CamelCase et suffixés par ``Behavior``, par ex. NomBehavior.php.
@@ -264,11 +270,13 @@ du Behavior vous permettent de capturer des évènements dans les models
 attachés et d'augmenter les paramètres ou de les accoler dans un behavior
 supplémentaire.
 
-Les callbacks disponibles sont:
+Tous les callbacks des behaviors sont lancés **avant** les callbacks du
+model/behavior:
 
--  ``beforeValidate``
 -  ``beforeFind``
 -  ``afterFind``
+-  ``beforeValidate``
+-  ``afterValidate``
 -  ``beforeSave``
 -  ``afterSave``
 -  ``beforeDelete``
@@ -301,21 +309,23 @@ paramètre est le model pour lequel la méthode du behavior a été invoquée.
     Retourner un tableau augmentera les paramètres de requête utilisés
     pour l'opération find.
 
-.. php:method:: afterFind(Model $Model, mixed $results, boolean $primary)
+.. php:method:: afterFind(Model $Model, mixed $results, boolean $primary = false)
 
     Vous pouvez utiliser le afterFind pour augmenter les résultats d'un find.
     La valeur retournée sera passée en résultats soit au behavior suivant dans
     la chaîne, soit au afterFind du model.
 
-.. php:method:: beforeDelete(Model $Model, boolean $cascade = true)
+.. php:method:: beforeValidate(Model $Model, array $options = array())
 
-    Vous pouvez retourner false d'un beforeDelete d'un behavior pour annuler
-    la suppression. Retourne true pour autoriser la suite.
+    Vous pouvez utiliser beforeValidate pour modifier un tableau de validation
+    de model ou gérer tout autrre logique de pré-validation. Retourner false
+    d'un callback beforeValidate annulera la validation et entraînera son
+    echec.
 
-.. php:method:: afterDelete(Model $Model)
+.. php:method:: afterValidate(Model $Model)
 
-    Vous pouvez utiliser afterDelete pour effectuer des opérations de nettoyage
-    liées à votre behavior.
+    Vous pouvez utiliser afterValidate pour lancer un nettoyage de données ou
+    préparer des données si besoin.
 
 .. php:method:: beforeSave(Model $Model)
 
@@ -328,12 +338,15 @@ paramètre est le model pour lequel la méthode du behavior a été invoquée.
     liées au behavior. $created sera à true quand un enregistrement sera crée,
     et à false quand un enregistrement sera mis à jour.
 
-.. php:method:: beforeValidate(Model $Model)
+.. php:method:: beforeDelete(Model $Model, boolean $cascade = true)
 
-    Vous pouvez utiliser beforeValidate pour modifier un tableau de validation
-    de model ou gérer tout autrre logique de pré-validation. Retourner false
-    d'un callback beforeValidate annulera la validation et entraînera son
-    echec.
+    Vous pouvez retourner false d'un beforeDelete d'un behavior pour annuler
+    la suppression. Retourne true pour autoriser la suite.
+
+.. php:method:: afterDelete(Model $Model)
+
+    Vous pouvez utiliser afterDelete pour effectuer des opérations de nettoyage
+    liées à votre behavior.
 
 
 .. meta::

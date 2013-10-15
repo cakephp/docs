@@ -161,7 +161,7 @@ by much. Since you're providing an API that outputs XML, it's a
 natural choice to receive XML as input. Not to worry, the
 :php:class:`RequestHandler` and :php:class:`Router` classes make
 things much easier. If a POST or PUT request has an XML content-type,
-then the input is run through  Cake's :php:class:`Xml` class, and the
+then the input is run through  CakePHP's :php:class:`Xml` class, and the
 array representation of the data is assigned to `$this->request->data`.
 Because of this feature, handling XML and POST data in parallel
 is seamless: no changes are required to the controller or model code.

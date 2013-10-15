@@ -2,7 +2,7 @@ Saving Your Data
 ################
 
 CakePHP makes saving model data a snap. Data ready to be saved
-should be passed to the model’s ``save()`` method using the
+should be passed to the model's ``save()`` method using the
 following basic format::
 
     Array
@@ -14,7 +14,7 @@ following basic format::
         )
     )
 
-Most of the time you won’t even need to worry about this format:
+Most of the time you won't even need to worry about this format:
 CakePHP's :php:class:`FormHelper`, and model find methods all
 package data in this format. If you're using either of the helpers,
 the data is also conveniently available in ``$this->request->data`` for
@@ -475,7 +475,7 @@ associations, it's all about keying. The basic idea is to get the
 key from one model and place it in the foreign key field on the
 other. Sometimes this might involve using the ``$id`` attribute of
 the model class after a ``save()``, but other times it might just
-involve gathering the ID from a hidden input on a form that’s just
+involve gathering the ID from a hidden input on a form that's just
 been POSTed to a controller action.
 
 To supplement the basic approach used above, CakePHP also offers a
@@ -595,7 +595,7 @@ The data array will look like this when submitted.::
 
     )
 
-Cake will happily be able to save the lot together and assign
+CakePHP will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
 with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
@@ -668,7 +668,7 @@ And the resultant POST::
         )
     )
 
-Again Cake is good to us and pulls the Student id and Course id
+Again CakePHP is good to us and pulls the Student id and Course id
 into the CourseMembership with the `saveAssociated`.
 
 .. _saving-habtm:
@@ -844,7 +844,7 @@ Becomes this::
 What to do when HABTM becomes complicated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default when saving a HasAndBelongsToMany relationship, Cake
+By default when saving a HasAndBelongsToMany relationship, CakePHP
 will delete all rows on the join table before saving new ones. For
 example if you have a Club that has 10 Children associated. You
 then update the Club with 2 children. The Club will only have 2

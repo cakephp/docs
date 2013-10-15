@@ -83,11 +83,18 @@ Accéder aux paramètres Querystring
 Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`CakeRequest::$query`::
 
-    // l\'url est /posts/index?page=1&sort=title
+    // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
     //  Vous pouvez aussi y accéder par un tableau
-    $this->request['url']['page'];
+    $this->request['url']['page']; // accesseur BC, va être déprécié dans les versions futures
+
+Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
+utiliser :php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une
+manière sans erreur. Toute clé qui n'existe pas va retourner ``null``::
+
+    $foo = $this->request->query('value_that_does_not_exist');
+    // $foo === null
 
 Accéder aux données POST
 ========================
@@ -144,7 +151,7 @@ Accéder aux informations du chemin
 
 CakeRequest fournit aussi des informations utiles sur les chemins dans votre
 application. :php:attr:`CakeRequest::$base` et
-:php:attr:`CakeRequest::$webroot` sont utiles pour générer des urls, et
+:php:attr:`CakeRequest::$webroot` sont utiles pour générer des URLs, et
 déterminer si votre application est ou n'est pas dans un sous-dossier.
 
 .. _check-the-request:
@@ -258,11 +265,11 @@ API de CakeRequest
     CakeRequest encapsule la gestion des paramètres de la requête, et son
     introspection.
 
-.. php:method:: domain()
+.. php:method:: domain($tldLength = 1)
 
     Retourne le nom de domaine sur lequel votre application tourne.
 
-.. php:method:: subdomains()
+.. php:method:: subdomains($tldLength = 1)
 
     Retourne un tableau avec le sous-domaine sur lequel votre application
     tourne.
@@ -322,9 +329,9 @@ API de CakeRequest
 
 .. php:method:: query($name)
 
-    Fournit un accès aux données requêtées de l'url avec notation en point::
+    Fournit un accès aux données requêtées de l'URL avec notation en point::
 
-        // l\'url est /posts/index?page=1&sort=title
+        // l\'URL est /posts/index?page=1&sort=title
         $value = $this->request->query('page');
 
     .. versionadded:: 2.3
@@ -367,6 +374,14 @@ API de CakeRequest
 
         CakeRequest::acceptLanguage('es-es');
 
+.. php:method:: param($name)
+
+    Lit les valeurs en toute sécurité dans ``$request->params``. Celle-ci
+    enlève la nécessité d'appeler ``isset()`` ou ``empty()`` avant
+    l'utilisation des valeurs de param.
+
+    .. versionadded:: 2.4
+
 .. php:attr:: data
 
     Un tableau de données POST. Vous pouvez utiliser
@@ -383,7 +398,7 @@ API de CakeRequest
 
 .. php:attr:: here
 
-    Retourne l'url requêtée courante.
+    Retourne l'URL requêtée courante.
 
 .. php:attr:: base
 
@@ -497,7 +512,7 @@ générée en fichier, vous pouvez faire cela en utilisant::
         $this->response->type('ics');
 
         //Force le téléchargement de fichier en option
-        $this->response->download('filename_for_download.ics')
+        $this->response->download('filename_for_download.ics');
 
         //Retourne l'object pour éviter au controller d'essayer de rendre une vue
         return $this->response;
@@ -702,7 +717,7 @@ L'en-tête Vary
 --------------
 
 Dans certains cas, vous voudrez offrir différents contenus en utilisant la
-même url. C'est souvent le cas quand vous avez une page multilingue ou que
+même URL. C'est souvent le cas quand vous avez une page multilingue ou que
 vous répondez avec du HTML différent selon le navigateur qui requête la
 ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête Vary::
 
@@ -842,13 +857,6 @@ API de CakeResponse
 
     .. versionadded:: 2.3
 
-.. php:method:: param($name)
-
-    Lit les valeurs en toute sécurité dans ``$request->params``. Celle-ci
-    enlève la nécessité d'appeler ``isset()`` ou ``empty()`` avant
-    l'utilisation des valeurs de param.
-
-    .. versionadded:: 2.4
 
 .. meta::
     :title lang=fr: Objets Request et Response

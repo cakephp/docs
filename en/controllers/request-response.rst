@@ -19,7 +19,7 @@ CakeRequest
 a number of features for interrogating and interacting with request data.
 On each request one CakeRequest is created and then passed by reference to the various
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
-``$this->request``, and is available in Controllers, Views and Helpers.  You can
+``$this->request``, and is available in Controllers, Views and Helpers. You can
 also access it in Components by using the controller reference. Some of the duties
 ``CakeRequest`` performs include:
 
@@ -78,14 +78,14 @@ Accessing Querystring parameters
 
 Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
 
-    // url is /posts/index?page=1&sort=title
+    // URL is /posts/index?page=1&sort=title
     $this->request->query['page'];
 
     // You can also access it via array access
     $this->request['url']['page']; // BC accessor, will be deprecated in future versions
 
 You can either directly access the query property, or you can use
-:php:meth:`CakeRequest::query()` to read the url query array in an error free manner.
+:php:meth:`CakeRequest::query()` to read the URL query array in an error free manner.
 Any keys that do not exist will return ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -142,7 +142,7 @@ Accessing path information
 
 CakeRequest also provides useful information about the paths in your
 application.  :php:attr:`CakeRequest::$base` and
-:php:attr:`CakeRequest::$webroot` are useful for generating urls, and
+:php:attr:`CakeRequest::$webroot` are useful for generating URLs, and
 determining whether or not your application is in a subdirectory.
 
 .. _check-the-request:
@@ -308,9 +308,9 @@ CakeRequest API
 
 .. php:method:: query($name)
 
-    Provides dot notation access to url query data::
+    Provides dot notation access to URL query data::
 
-        // url is /posts/index?page=1&sort=title
+        // URL is /posts/index?page=1&sort=title
         $value = $this->request->query('page');
 
     .. versionadded:: 2.3
@@ -351,6 +351,14 @@ CakeRequest API
     Check if a specific language is accepted::
 
         CakeRequest::acceptLanguage('es-es');
+
+.. php:method:: param($name)
+
+    Safely read values in ``$request->params``. This removes the need to call
+    ``isset()`` or ``empty()`` before using param values.
+
+    .. versionadded:: 2.4
+
 
 .. php:attr:: data
 
@@ -451,7 +459,7 @@ to send a file as response::
     }
 
 As shown in above example as expected you have to pass the file path to the method.
-Cake will send proper content type header if it's a known file type listed in
+CakePHP will send proper content type header if it's a known file type listed in
 `CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
 by using the :php:meth:`CakeResponse::type()` method.
 
@@ -472,7 +480,7 @@ to serve the generated string as file you can do that by using::
         $this->response->type('ics');
 
         //Optionally force file download
-        $this->response->download('filename_for_download.ics')
+        $this->response->download('filename_for_download.ics');
 
         //Return response object to prevent controller from trying to render a view
         return $this->response;
@@ -659,7 +667,7 @@ included in your controller::
 The Vary header
 ---------------
 
-In some cases you might want to serve different contents using the same url.
+In some cases you might want to serve different contents using the same URL.
 This is often the case when you have a multilingual page or respond with
 different HTML according to the browser that is requesting the resource. For
 such circumstances, you use the Vary header::
@@ -792,13 +800,6 @@ CakeResponse API
     Allows you to set a file for display or download
 
     .. versionadded:: 2.3
-
-.. php:method:: param($name)
-
-    Safely read values in ``$request->params``. This removes the need to call
-    ``isset()`` or ``empty()`` before using param values.
-
-    .. versionadded:: 2.4
 
 .. meta::
     :title lang=en: Request and Response objects

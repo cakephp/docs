@@ -21,12 +21,9 @@ endroits de CakePHP.
 Behaviors (Comportements)
 =========================
 
-Les behaviors ajoutent des fonctionnalités supplémentaires à vos models.
-CakePHP offre un nombre de behaviors integrés tels que
-:php:class:`TreeBehavior` et :php:class:`ContainableBehavior`.
-
-Pour en apprendre plus sur la création et l'utilisation des behaviors, lire la
-section sur :doc:`/models/behaviors`.
+.. include:: /core-libraries/toc-behaviors.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
@@ -38,33 +35,28 @@ section sur :doc:`/models/behaviors`.
 Components (Composants)
 =======================
 
-CakePHP a une sélection de components pour aider à s'occuper de tâches basiques
-dans vos controllers. Regardez la section sur :doc:`/controllers/components`
-pour savoir comment configurer et utiliser les components.
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-components
+    /core-libraries/toc-components
 
 .. _core-helpers:
 
 Helpers (Assistants)
 ====================
 
-CakePHP dispose d'un certain nombre de helpers qui aident à la création de
-vues. Ils aident à la création d'un balisage bien formé (y compris les
-formulaires), l'aide au formatage du texte, des temps et des nombres, et
-peut même intégrer des bibliothèques javascript populaires. Voici un résumé
-des helpers intégrés.
-
-Lire :doc:`/views/helpers` pour en apprendre plus sur les helpers, leur api,
-et comment vous pouvez créer et utiliser vos propres helpers.
+.. include:: /core-libraries/toc-helpers.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-helpers
+    /core-libraries/toc-helpers
 
 Utilitaires
 ===========

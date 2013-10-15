@@ -30,8 +30,8 @@ use the ``String`` class::
 
 .. php:staticmethod:: uuid()
 
-    The uuid method is used to generate unique identifiers as per
-    :rfc:`4122`. The uuid is a
+    The UUID method is used to generate unique identifiers as per
+    :rfc:`4122`. The UUID is a
     128bit string in the format of
     485fc381-e790-47a3-9794-1337c0a8fe68.
 
@@ -266,7 +266,7 @@ use the ``String`` class::
     :param string $and: The word used for the last join.
 
     Creates a comma-separated list where the last two items are joined
-    with ‘and’.::
+    with 'and'.::
 
         // called as TextHelper
         echo $this->Text->toList($colors);

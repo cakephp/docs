@@ -13,19 +13,19 @@ fired **before** model callbacks are.
 beforeFind
 ==========
 
-``beforeFind(array $queryData)``
+``beforeFind(array $query)``
 
-Called before any find-related operation. The ``$queryData`` passed
+Called before any find-related operation. The ``$query`` passed
 to this callback contains information about the current query:
 conditions, fields, etc.
 
 If you do not wish the find operation to begin (possibly based on a
-decision relating to the ``$queryData`` options), return *false*.
-Otherwise, return the possibly modified ``$queryData``, or anything
+decision relating to the ``$query`` options), return *false*.
+Otherwise, return the possibly modified ``$query``, or anything
 you want to get passed to find and its counterparts.
 
 You might use this callback to restrict find operations based on a
-user’s role, or make caching decisions based on the current load.
+user's role, or make caching decisions based on the current load.
 
 afterFind
 =========
@@ -79,7 +79,7 @@ formatting::
         }
         return $results;
     }
-    
+
     public function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }
@@ -92,6 +92,14 @@ beforeValidate
 Use this callback to modify model data before it is validated, or
 to modify validation rules if required. This function must also
 return *true*, otherwise the current save() execution will abort.
+
+afterValidate
+==============
+
+``afterValidate()``
+
+Called after data has been checked for errors. Use this callback to perform
+any data cleanup or preparation if needed.
 
 beforeSave
 ==========
@@ -136,13 +144,15 @@ changed very easily. Use the code below in the appropriate model.
 afterSave
 =========
 
-``afterSave(boolean $created)``
+``afterSave(boolean $created, array $options = array())``
 
 If you have logic you need to be executed just after every save
 operation, place it in this callback method.
 
 The value of ``$created`` will be true if a new record was created
 (rather than an update).
+
+The ``$options`` array is the same one passed to ``Model::save()``.
 
 beforeDelete
 ============

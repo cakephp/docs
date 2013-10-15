@@ -62,7 +62,7 @@ The following snippet of controller code shows how to include the
 CookieComponent and set up the controller variables needed to write
 a cookie named 'baker\_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only::
+'/bakers/preferences/', expires in one hour and is HTTP only::
 
     public $components = array('Cookie');
 
@@ -78,7 +78,7 @@ a secure connection, is available on the path
         $this->Cookie->type('aes');
     }
 
-Next, let’s look at how to use the different methods of the Cookie
+Next, let's look at how to use the different methods of the Cookie
 Component.
 
 Using the Component
@@ -129,7 +129,7 @@ The CookieComponent offers a number of methods for working with Cookies.
     This method is used to read the value of a cookie variable with the
     name specified by $key.::
 
-        // Outputs “Larry”
+        // Outputs "Larry"
         echo $this->Cookie->read('name');
 
         // You can also use the dot notation for read

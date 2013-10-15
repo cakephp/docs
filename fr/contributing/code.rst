@@ -3,7 +3,7 @@ Code
 
 Les correctifs et les pull requests sont les meilleures façons de contribuer
 au code de CakePHP. Les correctifs peuvent être attachés aux tickets dans
-`lighthouse <http://cakephp.lighthouseapp.com>`_. Les pull requests peuvent
+`github <http://github.com/cakephp/cakephp/issues>`_. Les pull requests peuvent
 être crées dans github, et sont généralement la meilleure façon de contribuer
 au code.
 
@@ -149,4 +149,4 @@ fusionnés périodiquement à la version publiée par l'équipe centrale (core t
 
 .. meta::
     :title lang=fr: Code
-    :keywords lang=fr: cakephp source code,code correctifs patches,test ref,nom descriptif,bob barker,configuration initiale,utilisateur global,connexion base de données,clone,lighthouse,dépôt,information utilisateur,amélioration,back patches,checkout
+    :keywords lang=fr: cakephp source code,code correctifs patches,test ref,nom descriptif,bob barker,configuration initiale,utilisateur global,connexion base de données,clone,dépôt,information utilisateur,amélioration,back patches,checkout

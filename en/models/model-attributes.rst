@@ -112,14 +112,14 @@ and have many Users which in turn have many Articles. You can set
 $recursive to different values based on the amount of data you want
 back from a $this->Group->find() call:
 
-* -1 Cake fetches Group data only, no joins.
-* 0  Cake fetches Group data and its domain
-* 1  Cake fetches a Group, its domain and its associated Users
-* 2  Cake fetches a Group, its domain, its associated Users, and the
+* -1 CakePHP fetches Group data only, no joins.
+* 0  CakePHP fetches Group data and its domain
+* 1  CakePHP fetches a Group, its domain and its associated Users
+* 2  CakePHP fetches a Group, its domain, its associated Users, and the
   Users' associated Articles
 
 Set it no higher than you need. Having CakePHP fetch data you
-aren’t going to use slows your app unnecessarily. Also note that
+aren't going to use slows your app unnecessarily. Also note that
 the default recursive level is 1.
 
 .. note::
@@ -156,7 +156,7 @@ values include::
 data
 ====
 
-The container for the model’s fetched data. While data returned
+The container for the model's fetched data. While data returned
 from a model class is normally used as returned from a find() call,
 you may need to access information stored in $data inside of model
 callbacks.
@@ -164,7 +164,7 @@ callbacks.
 \_schema
 ========
 
-Contains metadata describing the model’s database table fields.
+Contains metadata describing the model's database table fields.
 Each field is described by:
 
 -  name

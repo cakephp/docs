@@ -437,7 +437,7 @@ class and need to implement the abstract methods ``hash()`` and ``check()``.
 In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
-    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
+    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
@@ -828,7 +828,7 @@ and authentication mechanics in CakePHP.
 .. php:attr:: unauthorizedRedirect
 
     Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer url or ``AuthComponent::$loginAction`` or '/'.
+    redirected to the referrer URL or ``AuthComponent::$loginAction`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 .. php:attr:: request
@@ -908,7 +908,7 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: logout()
 
-    :return: A string url to redirect the logged out user to.
+    :return: A string URL to redirect the logged out user to.
 
     Logs out the current user.
 
@@ -930,7 +930,7 @@ and authentication mechanics in CakePHP.
 .. php:method:: redirectUrl($url = null)
 
     If no parameter is passed, gets the authentication redirect URL. Pass a
-    url in to set the destination a user should be redirected to upon logging
+    URL in to set the destination a user should be redirected to upon logging
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
 

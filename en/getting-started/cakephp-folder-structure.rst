@@ -14,19 +14,19 @@ and folders you should see:
 
 You'll notice three main folders:
 
--  The *app* folder will be where you work your magic: it’s where
-   your application’s files will be placed.
--  The *lib* folder is where we’ve worked our magic. Make a
-   personal commitment **not** to edit files in this folder. We can’t
-   help you if you’ve modified the core.
--  Finally, the *vendors* folder is where you’ll place third-party
+-  The *app* folder will be where you work your magic: it's where
+   your application's files will be placed.
+-  The *lib* folder is where we've worked our magic. Make a
+   personal commitment **not** to edit files in this folder. We can't
+   help you if you've modified the core.
+-  Finally, the *vendors* folder is where you'll place third-party
    PHP libraries you need to use with your CakePHP applications.
 
 The App Folder
 ==============
 
-CakePHP’s app folder is where you will do most of your application
-development. Let’s look a little closer at the folders inside of
+CakePHP's app folder is where you will do most of your application
+development. Let's look a little closer at the folders inside of
 app.
 
 Config
@@ -38,7 +38,7 @@ Console
     This directory can also contain a ``Templates`` directory to customize the
     output of bake. For more information see :doc:`/console-and-shells`.
 Controller
-    Contains your application’s controllers and their components.
+    Contains your application's controllers and their components.
 Lib
     Contains 1st party libraries that do not come from 3rd parties or
     external vendors. This allows you to separate your organization's
@@ -46,7 +46,7 @@ Lib
 Locale
     Stores string files for internationalization.
 Model
-    Contains your application’s models, behaviors, and datasources.
+    Contains your application's models, behaviors, and datasources.
 Plugin
     Contains plugin packages.
 Test

@@ -31,8 +31,8 @@ d'une ``View``, utilisez la classe ``String``::
 
 .. php:staticmethod:: uuid()
 
-    La méthode uuid est utilisée pour générer des identificateurs uniques comme
-    per :rfc:`4122`. uuid est une chaîne de caractères de 128bit au format
+    La méthode UUID est utilisée pour générer des identificateurs uniques comme
+    per :rfc:`4122`. UUID est une chaîne de caractères de 128bit au format
     485fc381-e790-47a3-9794-1337c0a8fe68.
 
     ::
@@ -251,7 +251,7 @@ d'une ``View``, utilisez la classe ``String``::
 
     Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
     avec un nombre de caractères de chaque côté determiné par ``$radius``,
-    and prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
+    et prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
     pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
     être montrés dans le document résultant.::
 
@@ -273,7 +273,7 @@ d'une ``View``, utilisez la classe ``String``::
     :param string $and: Le mot utilisé pour le dernier join.
 
     Crée une liste séparée avec des virgules, où les deux derniers items sont
-    joins avec ‘and’.::
+    joins avec 'and'.::
 
         // appelé avec TextHelper
         echo $this->Text->toList($colors);

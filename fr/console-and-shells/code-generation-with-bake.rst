@@ -112,7 +112,7 @@ Amélioration de Bake dans la version 1.3
 Dans CakePHP 1.3, bake a connu une révision importante,
 avec le rajout de fonctionnalités et améliorations.
 
--  Deux nouvelles tâches (FixtureTask and TestTask) sont accessibles à partir
+-  Deux nouvelles tâches (FixtureTask et TestTask) sont accessibles à partir
    du menu principal de bake.
 -  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans
    vos shells.

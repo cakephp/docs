@@ -95,7 +95,7 @@
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
-                $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'index'));
             }
         }
 

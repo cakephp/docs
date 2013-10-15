@@ -16,7 +16,7 @@ The CakePHP console
 ===================
 
 This section provides an introduction into CakePHP at the
-command-line. If you’ve ever needed access to your CakePHP MVC
+command-line. If you've ever needed access to your CakePHP MVC
 classes in a cron job or other command-line script, this section is
 for you.
 
@@ -31,10 +31,10 @@ parameters.
     A command-line (CLI) build of PHP must be available on the system
     if you plan to use the Console.
 
-Before we get into specifics, let’s make sure we can run the
-CakePHP Console. First, you’ll need to bring up a system shell. The
+Before we get into specifics, let's make sure we can run the
+CakePHP console. First, you'll need to bring up a system shell. The
 examples shown in this section will be in bash, but the CakePHP
-Console is Windows-compatible as well. Let’s execute the Console
+Console is Windows-compatible as well. Let's execute the Console
 program from bash. This example assumes that the user is currently
 logged into a bash prompt and is currently at the root of a CakePHP
 application.
@@ -91,7 +91,7 @@ be accessed easily. Printing out the working, root, app, and core
 paths allows you to see where the console will be making changes.
 To change the app folder you wish to work with, you can supply its
 path as the first argument to the cake command. This next example
-shows how to specify an app folder, assuming you’ve already added
+shows how to specify an app folder, assuming you've already added
 the console folder to your ``PATH``::
 
     $ cake -app /path/to/cakephp/app
@@ -146,7 +146,7 @@ code inside it::
 The conventions for shell classes are that the class name should match
 the file name, with the suffix of Shell. In our shell we created a ``main()`` method.
 This method is called when a shell is called with no additional commands.  We'll add
-some more commands in a bit, but for now lets just run our shell.  From your application
+some more commands in a bit, but for now let's just run our shell.  From your application
 directory, run::
 
     Console/cake hello
@@ -165,7 +165,7 @@ whenever there are no other commands or arguments given to a shell.  You may hav
 noticed that HelloShell is extending ``AppShell``.  Much like :ref:`app-controller`, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
 by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the
-built-in one. Since our main method wasn't very interesting lets add another command
+built-in one. Since our main method wasn't very interesting let's add another command
 that does something::
 
     class HelloShell extends AppShell {
@@ -257,7 +257,7 @@ You can also access tasks directly from the command line::
 
     In order to access tasks directly from the command line, the task
     **must** be included in the shell class' $tasks property.
-    Therefore, be warned that a method called “sound” in the SeaShell
+    Therefore, be warned that a method called "sound" in the SeaShell
     class would override the ability to access the functionality in the
     Sound task specified in the $tasks array.
 
@@ -800,7 +800,7 @@ In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP
 other webbrowser specific environment variables are not set.
 
 If you generate reports or send emails that make use of ``Router::url()`` those will contain
-the default host ``http://localhost/``  and thus resulting in invalid urls. In this case you need to
+the default host ``http://localhost/``  and thus resulting in invalid URLs. In this case you need to
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 

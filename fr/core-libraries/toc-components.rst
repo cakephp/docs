@@ -1,14 +1,17 @@
 Components (Composants)
 #######################
 
-.. toctree::
-    :maxdepth: 2
+CakePHP a une sélection de components pour aider à s'occuper de tâches basiques
+dans vos controllers. Regardez la section sur :doc:`/controllers/components`
+pour savoir comment configurer et utiliser les components.
 
-    components/access-control-lists
-    components/authentication
-    components/cookie
-    components/email
-    components/request-handling
-    components/pagination
-    components/security-component
-    components/sessions
+.. toctree::
+    :maxdepth: 1
+
+    /core-libraries/components/pagination
+    /core-libraries/components/sessions
+    /core-libraries/components/authentication
+    /core-libraries/components/security-component
+    /core-libraries/components/request-handling
+    /core-libraries/components/cookie
+    /core-libraries/components/access-control-lists

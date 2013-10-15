@@ -8,7 +8,7 @@ aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
 
 Alors que d'autres solutions existent, REST est un bon moyen de fournir
-facilement un accès à la logique que vous avez créee dans votre application.
+facilement un accès à la logique que vous avez créée dans votre application.
 C'est simple, habituellement basé sur XML (nous parlons de XML simple, rien
 de semblable à une enveloppe SOAP), et dépend des headers HTTP pour la
 direction. Exposer une API via REST dans CakePHP est simple.
@@ -209,7 +209,7 @@ En écrivant par dessus la ressource map par défaut, les appels futurs à
 Routing REST Personnalisé
 =========================
 
-Si les routes créees par défaut par :php:meth:`Router::mapResources()` ne
+Si les routes créées par défaut par :php:meth:`Router::mapResources()` ne
 fonctionnent pas pour vous, utilisez la méthode :php:meth:`Router::connect()`
 pour définir un ensemble personnalisé de routes REST. La méthode ``connect()``
 vous permet de définir un certain nombre d'options différentes pour une URL

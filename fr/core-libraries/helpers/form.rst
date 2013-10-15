@@ -174,8 +174,6 @@ Il y plusieurs options pour create():
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
     L'URL ainsi fournie peut être relative à votre application CakePHP ::
 
-        echo $this->Form->create(null, array('url' => '/recipes/add'));
-        // ou
         echo $this->Form->create(null, array(
             'url' => array('controller' => 'recipes', 'action' => 'add')
         ));
@@ -200,7 +198,7 @@ Il y plusieurs options pour create():
         <form method="get" action="http://www.google.com/search">
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url()` pour plus
-    d'exemples sur les différents types d'Urls.
+    d'exemples sur les différents types d'URLs.
 
 *   ``$options['default']`` Si la variable 'default' est définie à false,
     l'action de soumission du formulaire est changée de telle manière que le
@@ -1416,7 +1414,7 @@ Création des boutons et des éléments submits
 
         <div class="submit"><input value="Submit" type="submit"></div>
 
-    Vous pouvez aussi passer une url relative ou absolue vers une image
+    Vous pouvez aussi passer une URL relative ou absolue vers une image
     pour le paramêtre caption au lieu d'un caption text::
     
         echo $this->Form->submit('ok.png');
@@ -1489,8 +1487,8 @@ Crée des inputs de date et d'heure (date and time inputs)
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Crée un jeu d'inputs pour la date et l'heure. Les valeurs valides pour
-    $dateformat sont ‘DMY’, ‘MDY’, ‘YMD’ ou ‘NONE. Les valeurs valides pour
-    $timeFormat sont ‘12’, ‘24’, et null.
+    $dateformat sont 'DMY', 'MDY', 'YMD' ou 'NONE'. Les valeurs valides pour
+    $timeFormat sont '12', '24', et null.
 
     Vous pouvez spécifier de ne pas afficher les valeurs vides en
     paramétrant "array('empty' => false)" dans les paramètres des attributs.
@@ -1594,7 +1592,7 @@ Crée des inputs de date et d'heure (date and time inputs)
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-    Crée un élément select (menu de sélection) rempli avec ‘am’ et ‘pm’.
+    Crée un élément select (menu de sélection) rempli avec 'am' et 'pm'.
 
 
 Afficher et vérifier les erreurs
@@ -1708,10 +1706,10 @@ Les méthodes sont:
     * FormHelper::minute()
     * FormHelper::meridian()
 
-**L'url par défaut des formulaires est l'action courante**
+**L'URL par défaut des formulaires est l'action courante**
 
-L'url par défaut pour tous les formulaires, est désormais
-l'url courante incluant passed, named, et les paramètres
+L'URL par défaut pour tous les formulaires, est désormais
+l'URL courante incluant passed, named, et les paramètres
 de la requête (querystring parameters). Vous pouvez redéfinir
 cette valeur par défaut en fournissant ``$options['url']`` dans
 le second paramètre de ``$this->Form->create()``.

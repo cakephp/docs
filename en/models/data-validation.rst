@@ -9,7 +9,7 @@ ensure that usernames are unique. Defining validation rules makes
 form handling much, much easier.
 
 There are many different aspects to the validation process. What
-we’ll cover in this section is the model side of things.
+we'll cover in this section is the model side of things.
 Essentially: what happens when you call the save() method of your
 model. For more information about how to handle the displaying of
 validation errors, check out
@@ -40,13 +40,13 @@ those fields::
 This last example shows how validation rules can be added to model
 fields. For the login field, only letters and numbers will be
 accepted, the email should be valid, and born should be a valid
-date. Defining validation rules enables CakePHP’s automagic showing
+date. Defining validation rules enables CakePHP's automagic showing
 of error messages in forms if the data submitted does not follow
 the defined rules.
 
 CakePHP has many validation rules and using them can be quite easy.
 Some of the built-in rules allow you to verify the formatting of
-emails, URLs, and credit card numbers – but we’ll cover these in
+emails, URLs, and credit card numbers – but we'll cover these in
 detail later on.
 
 Here is a more complex validation example that takes advantage of
@@ -90,7 +90,7 @@ validation rules. And if the built-in rules do not match your
 criteria, you can always add your own validation rules as
 required.
 
-Now that you’ve seen the big picture on how validation works, let’s
+Now that you've seen the big picture on how validation works, let's
 look at how these rules are defined in the model. There are three
 different ways that you can define validation rules: simple arrays,
 single rule per field, and multiple rules per field.
@@ -106,7 +106,7 @@ is::
     public $validate = array('fieldName' => 'ruleName');
 
 Where, 'fieldName' is the name of the field the rule is defined
-for, and ‘ruleName’ is a pre-defined rule name, such as
+for, and 'ruleName' is a pre-defined rule name, such as
 'alphaNumeric', 'email' or 'isUnique'.
 
 For example, to ensure that the user is giving a well formatted
@@ -119,7 +119,7 @@ One Rule Per Field
 ==================
 
 This definition technique allows for better control of how the
-validation rules work. But before we discuss that, let’s see the
+validation rules work. But before we discuss that, let's see the
 general usage pattern adding a rule for a single field::
 
     public $validate = array(
@@ -137,8 +137,8 @@ form validation will not function correctly. This is because
 'required' is not actually a rule.
 
 As you can see here, each field (only one field shown above) is
-associated with an array that contains five keys: ‘rule’,
-‘required’, ‘allowEmpty’, ‘on’ and ‘message’. Let’s have a closer
+associated with an array that contains five keys: 'rule',
+'required', 'allowEmpty', 'on' and 'message'. Let's have a closer
 look at these keys.
 
 rule
@@ -188,8 +188,8 @@ data array.  For example, if the validation rule has been defined as follows::
         )
     );
 
-The data sent to the model’s save() method must contain data for
-the login field. If it doesn’t, validation will fail. The default
+The data sent to the model's save() method must contain data for
+the login field. If it doesn't, validation will fail. The default
 value for this key is boolean false.
 
 ``required => true`` does not mean the same as the validation rule
@@ -254,9 +254,9 @@ Multiple Rules per Field
 ========================
 
 The technique outlined above gives us much more flexibility than
-simple rules assignment, but there’s an extra step we can take in
+simple rules assignment, but there's an extra step we can take in
 order to gain more fine-grained control of data validation. The
-next technique we’ll outline allows us to assign multiple
+next technique we'll outline allows us to assign multiple
 validation rules per model field.
 
 If you would like to assign multiple validation rules to a single
@@ -277,7 +277,7 @@ field, this is basically how it should look::
 
 As you can see, this is quite similar to what we did in the
 previous section. There, for each field we had only one array of
-validation parameters. In this case, each ‘fieldName’ consists of
+validation parameters. In this case, each 'fieldName' consists of
 an array of rule indices. Each 'ruleName' contains a separate array
 of validation parameters.
 
@@ -348,7 +348,7 @@ the ``message`` key is not set.
 Custom Validation Rules
 =======================
 
-If you haven’t found what you need thus far, you can always create
+If you haven't found what you need thus far, you can always create
 your own validation rules. There are two ways you can do this: by
 defining custom regular expressions, or by creating custom
 validation methods.
@@ -407,7 +407,7 @@ first parameter as an associated array with field name as key and
 posted data as value.
 
 If you want to pass extra parameters to your validation function,
-add elements onto the ‘rule’ array, and handle them as extra params
+add elements onto the 'rule' array, and handle them as extra params
 (after the main ``$check`` param) in your function.
 
 Your validation function can be in the model (as in the example
@@ -604,7 +604,7 @@ Core Validation Rules
 
 The Validation class in CakePHP contains many validation rules that
 can make model data validation much easier. This class contains
-many oft-used validation techniques you won’t need to write on your
+many oft-used validation techniques you won't need to write on your
 own. Below, you'll find a complete list of all the rules, along
 with usage examples.
 
@@ -667,9 +667,9 @@ with usage examples.
 .. php:staticmethod:: cc(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
 
     This rule is used to check whether the data is a valid credit card
-    number. It takes three parameters: ‘type’, ‘deep’ and ‘regex’.
+    number. It takes three parameters: 'type', 'deep' and 'regex'.
 
-    The ‘type’ key can be assigned to the values of ‘fast’, ‘all’ or
+    The 'type' key can be assigned to the values of 'fast', 'all' or
     any of the following:
 
     -  amex
@@ -686,18 +686,18 @@ with usage examples.
     -  visa
     -  voyager
 
-    If ‘type’ is set to ‘fast’, it validates the data against the major
-    credit cards’ numbering formats. Setting ‘type’ to ‘all’ will check
-    with all the credit card types. You can also set ‘type’ to an array
+    If 'type' is set to 'fast', it validates the data against the major
+    credit cards' numbering formats. Setting 'type' to 'all' will check
+    with all the credit card types. You can also set 'type' to an array
     of the types you wish to match.
 
-    The ‘deep’ key should be set to a boolean value. If it is set to
+    The 'deep' key should be set to a boolean value. If it is set to
     true, the validation will check the Luhn algorithm of the credit
     card
     (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
     It defaults to false.
 
-    The ‘regex’ key allows you to supply your own regular expression
+    The 'regex' key allows you to supply your own regular expression
     that will be used to validate the credit card number::
 
         public $validate = array(
@@ -710,9 +710,9 @@ with usage examples.
 
 .. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
-    Comparison is used to compare numeric values. It supports “is
-    greater”, “is less”, “greater or equal”, “less or equal”, “equal
-    to”, and “not equal”. Some examples are shown below::
+    Comparison is used to compare numeric values. It supports "is
+    greater", "is less", "greater or equal", "less or equal", "equal
+    to", and "not equal". Some examples are shown below::
 
         public $validate = array(
             'age' => array(
@@ -765,7 +765,7 @@ with usage examples.
        dash, forward slash)
 
     If no keys are supplied, the default key that will be used is
-    ‘ymd’::
+    'ymd'::
 
         public $validate = array(
             'born' => array(
@@ -792,20 +792,20 @@ with usage examples.
     of the date. The value of the parameter can be one or more of the
     following:
 
-    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
+    -  'dmy' e.g. 27-12-2006 or 27-12-06 (separators can be a space,
        period, dash, forward slash)
-    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
+    -  'mdy' e.g. 12-27-2006 or 12-27-06 (separators can be a space,
        period, dash, forward slash)
-    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
+    -  'ymd' e.g. 2006-12-27 or 06-12-27 (separators can be a space,
        period, dash, forward slash)
-    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
-    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
-    -  ‘My’ e.g. (December 2006 or Dec 2006)
-    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
+    -  'dMy' e.g. 27 December 2006 or 27 Dec 2006
+    -  'Mdy' e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
+    -  'My' e.g. (December 2006 or Dec 2006)
+    -  'my' e.g. 12/2006 or 12/06 (separators can be a space, period,
        dash, forward slash)
 
     If no keys are supplied, the default key that will be used is
-    ‘ymd’::
+    'ymd'::
 
         public $validate = array(
             'birthday' => array(
@@ -1209,7 +1209,7 @@ with usage examples.
 
 .. php:staticmethod:: uuid(string $check)
 
-    Checks that a value is a valid uuid: http://tools.ietf.org/html/rfc4122
+    Checks that a value is a valid UUID: http://tools.ietf.org/html/rfc4122
 
 
 Localized Validation

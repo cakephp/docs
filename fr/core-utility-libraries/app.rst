@@ -98,7 +98,7 @@ Trouver des chemins vers les packages en utilisant App::path()
         App::path('Model');
 
     Ceci peut être fait pour tous les packages qui font parti de votre
-    application. VOus pouvez aussi récupérer des chemins pour un plugin::
+    application. Vous pouvez aussi récupérer des chemins pour un plugin::
 
         // retourne les chemins de component dans DebugKit
         App::path('Component', 'DebugKit');

@@ -81,9 +81,9 @@ from the controller to the view (which we'll create next). The line
 sets the view variable called 'posts' equal to the return value of
 the ``find('all')`` method of the Post model. Our Post model is
 automatically available at ``$this->Post`` because we've followed
-Cake's naming conventions.
+CakePHP's naming conventions.
 
-To learn more about Cake's controllers, check out the
+To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
 
 Creating Post Views
@@ -93,7 +93,7 @@ Now that we have our data flowing to our model, and our application
 logic and flow defined by our controller, let's create a view for
 the index action we created above.
 
-Cake views are just presentation-flavored fragments that fit inside
+CakePHP views are just presentation-flavored fragments that fit inside
 an application's layout. For most applications they're HTML mixed
 with PHP, but they may end up as XML, CSV, or even binary data.
 
@@ -144,7 +144,7 @@ to the view that would look something like this::
             )
     )
 
-Cake's view files are stored in ``/app/View`` inside a folder
+CakePHP's view files are stored in ``/app/View`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
 nice table, our view code might look something like this
@@ -187,7 +187,7 @@ what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)
 and URL (the second parameter).
 
-When specifying URLs in Cake, it is recommended that you use the
+When specifying URLs in CakePHP, it is recommended that you use the
 array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
@@ -329,7 +329,7 @@ redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the
 `API <http://api20.cakephp.org>`_ to see the formats in which you can specify a
-URL for various Cake functions.
+URL for various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
@@ -338,12 +338,12 @@ handled in the following sections.
 Data Validation
 ===============
 
-Cake goes a long way in taking the monotony out of form input
+CakePHP goes a long way in taking the monotony out of form input
 validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use
-Cake's FormHelper in your views. The :php:class:`FormHelper` is available by
+CakePHP's FormHelper in your views. The :php:class:`FormHelper` is available by
 default to all views at ``$this->Form``.
 
 Here's our add view:
@@ -457,7 +457,7 @@ like::
     }
 
 This action first ensures that the user has tried to access an existing record.
-If they haven't passed in a passed in an ``$id`` parameter, or the post does not
+If they haven't passed in an ``$id`` parameter, or the post does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
 Next the action checks that the request is a POST request.  If it is, then we
@@ -475,11 +475,11 @@ The edit view might look something like this:
 
     <h1>Edit Post</h1>
     <?php
-        echo $this->Form->create('Post');
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden'));
-        echo $this->Form->end('Save Post');
+    echo $this->Form->create('Post');
+    echo $this->Form->input('title');
+    echo $this->Form->input('body', array('rows' => '3'));
+    echo $this->Form->input('id', array('type' => 'hidden'));
+    echo $this->Form->end('Save Post');
     ?>
 
 This view outputs the edit form (with the values populated), along
@@ -487,7 +487,7 @@ with any necessary validation error messages.
 
 One thing to note here: CakePHP will assume that you are editing a
 model if the 'id' field is present in the data array. If no 'id' is
-present (look back at our add view), Cake will assume that you are
+present (look back at our add view), CakePHP will assume that you are
 inserting a new model when ``save()`` is called.
 
 You can now update your index view with links to edit specific
@@ -503,7 +503,7 @@ posts:
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Action</th>
+            <th>Action</th>
             <th>Created</th>
         </tr>
 
@@ -622,7 +622,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 
-Cake's routing is found in ``/app/Config/routes.php``. You'll want
+CakePHP's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 
@@ -657,7 +657,7 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-Now that you've created a basic Cake application you're ready for
+Now that you've created a basic CakePHP application you're ready for
 the real thing. Start your own project, read the rest of the
 :doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
 

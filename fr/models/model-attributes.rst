@@ -138,7 +138,7 @@ est 1.
 
     Le niveau de recursive recommandé pour votre application devrait être -1.
     Cela évite de récupérer des données liés dans les cas où ce n'est pas
-    nécéssaire ou même non souhaité. C'est le plus souvent le cas pour la
+    nécessaire ou même non souhaité. C'est le plus souvent le cas pour la
     plupart de vos appels find().
     Augmenter le seulement quand cela est souhaité ou utilisez le behavior
     Containable.
@@ -209,7 +209,7 @@ autorisant le model à essayer de faire des correspondances.
 
 .. note::
 
-    Il n'est pas nécéssaire d'appeler validate() avant save() puisque save()
+    Il n'est pas nécessaire d'appeler validate() avant save() puisque save()
     va automatiquement valider vos données avant d'effectivement les
     sauvegarder.
 

@@ -27,8 +27,8 @@ AuthComponent
 -------------
 - A new property ``AuthComponent::$unauthorizedRedirect`` has been added.
 
-  - For default ``true`` value user is redirected to referrer url upon authorization failure.
-  - If set to a string or array user is redirected to that url.
+  - For default ``true`` value user is redirected to referrer URL upon authorization failure.
+  - If set to a string or array user is redirected to that URL.
   - If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
@@ -98,7 +98,7 @@ CakePlugin
   prevent file include errors when you try to load routes or bootstrap but they don't exist for a plugin.
   So essentially you can now use the following statement which will load all plugins and their routes and
   bootstrap for whatever plugin it can find::
-  ``CakePlugin::loadAll(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true))``
+  ``CakePlugin::loadAll(array(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)))``
 
 
 Configure

@@ -132,7 +132,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: Le type de balise meta désiré.
-    :param mixed $url: L'url de la balise meta, soit une chaîne ou un tableau
+    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un tableau
      :term:`routing array`.
     :param array $options: Un tableau d'attributs :term:`html attributes`.
 
@@ -197,7 +197,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'enter any meta keyword here'
         );
         ?>
-        // Output
+        // Sortie
         <meta name="keywords" content="enter any meta keyword here" />
 
         <?php
@@ -206,7 +206,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'enter any meta description here'
         );
         ?>
-        // Output
+        // Sortie
         <meta name="description" content="enter any meta description here" />
 
     Si vous voulez ajouter une balise personnalisée alors le premier
@@ -401,6 +401,26 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <a href="/images/view/1?height=400&width=500">View image</a>
 
+    Quand il y a utilisation de paramètres nommés, utilisez la syntaxe en
+    tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
+    utilisant la syntaxe en chaîne pour les paramètres (par ex 
+    "recipes/view/6/comments:false" va résulter à ce que les caractères
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.:
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+        );
+
+    Affichera:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/id:6/comments:false">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
     Les caractères spéciaux HTML de ``$title``seront convertis en entités
     HTML. Pour désactiver cette conversion, définissez l'option escape à
     false dans le tableau ``$options``.::
@@ -443,7 +463,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         L'option ``escapeTitle`` a été ajoutée.
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url` pour
-    plus d'exemples des différents types d'urls.
+    plus d'exemples des différents types d'URLs.
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -459,7 +479,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
           "audio" ou "video". Si le type n'est pas fourni le type de média se
           basera sur le mime type du fichier.
         - `text` Texte à inclure dans la balise vidéo.
-        - `pathPrefix` Préfixe du chemin à utiliser pour les urls relatives,
+        - `pathPrefix` Préfixe du chemin à utiliser pour les URLs relatives,
           par défaut à 'files/'.
         - `fullBase` Si il est fourni l'attribut src prendra l'adresse complète
           incluant le nom de domaine.
@@ -539,7 +559,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     défini à true, $text sera affiché en HTML-échappé.
 
     Si aucun texte n'est spécifié, seulement une balise div d'ouverture est
-    retournée::
+    retournée.:
 
     .. code-block:: php
 
@@ -557,7 +577,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
     Retourne un texte enveloppé dans une balise CSS <p>. Si aucun texte
-    CSS est fourni, un simple <p> de démarrage est retourné::
+    CSS est fourni, un simple <p> de démarrage est retourné.:
 
     .. code-block:: php
 
@@ -574,7 +594,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
        tableau de chaînes pour plusieurs fichiers.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Inclus un(des) fichier(s), présent soit localement soit à une url
+    Inclus un(des) fichier(s), présent soit localement soit à une URL
     distante.
 
     Par défaut, les tags de script sont ajoutés au document inline. Si vous
@@ -879,7 +899,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une URL pointant vers une combinaison controller et action.
     Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la
-    combinaison d'une url pour le controller et d'une action. Si full est à
+    combinaison d'une URL pour le controller et d'une action. Si full est à
     true, la base complète de l'URL sera ajoutée en amont du résultat::
 
         echo $this->Html->url(array(
@@ -984,7 +1004,7 @@ Création d'un chemin de navigation avec le Helper Html
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
     CakePHP inclut la possibilité de créer automatiquement un chemin de
-    navigation (fil d’Ariane) dans votre application. Pour mettre cela en
+    navigation (fil d'Ariane) dans votre application. Pour mettre cela en
     service, ajouter cela dans votre template de layout::
 
         echo $this->Html->getCrumbs(' > ', 'Home');
@@ -1042,5 +1062,5 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. meta::
     :title lang=fr: HtmlHelper
-    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, and more resilient to change.
+    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, et more resilient to change.
     :keywords lang=fr: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

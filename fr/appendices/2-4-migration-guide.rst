@@ -165,10 +165,8 @@ CakeRequest
 -----------
 
 - :php:meth:`CakeRequest::param()` a été ajoutée.
-
 - :php:meth:`CakeRequest::is()` a été modifiée pour supporte un tableau
   de types et va retourner true si la requête correspond à tout type.
-
 - :php:meth:`CakeRequest::isAll()` a été ajoutée pour vérifier qu'une requête
   correspond à tous les types donnés.
 

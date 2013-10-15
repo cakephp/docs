@@ -9,17 +9,11 @@ de regrouper plusieurs fonctionnalités dans un Component.
 CakePHP est également livré avec un fantastique ensemble de components,
 que vous pouvez utiliser pour vous aider :
 
-- Sécurité (SecurityComponent)
-- Sessions (SessionComponent)
-- Listes de contrôle d'accès (ACLComponent)
-- Emails (EmailComponent)
-- Cookies (CookieComponent)
-- Authentification (AuthComponent)
-- Traitement de requêtes (RequestHandlerComponent)
-- Pagination (PaginationComponent)
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
-Chacun de ces components d’origine est détaillé dans des chapitres
-spécifiques. Pour l’heure, nous allons vous montrer comment créer
+Chacun de ces components d'origine est détaillé dans des chapitres
+spécifiques. Pour l'heure, nous allons vous montrer comment créer
 vos propres components. La création de components vous permet de garder
 le code de vos controllers propres et vous permet de réutiliser
 du code entre vos projets.
@@ -177,8 +171,8 @@ le component ressemblerait à quelque chose comme cela::
 Inclure votre component dans vos controllers
 --------------------------------------------
 
-Une fois notre component terminé, nous pouvons l’utiliser au sein
-des controllers de l’application en plaçant son nom
+Une fois notre component terminé, nous pouvons l'utiliser au sein
+des controllers de l'application en plaçant son nom
 (sans la partie "Component") dans le tableau ``$components`` du controller.
 Le controller sera automatiquement pourvu d'un nouvel attribut nommé
 d'après le component, à travers lequel nous pouvons accéder à une instance
@@ -299,7 +293,7 @@ Les Callbacks
     méthode retourne false, le controller ne continuera pas de rediriger la
     requête. Les variables $url, $status et $exit ont la même signification
     que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
-    de caractère qui sera interpretée comme une url pour rediriger ou retourner
+    de caractère qui sera interpretée comme une URL pour rediriger ou retourner
     un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 

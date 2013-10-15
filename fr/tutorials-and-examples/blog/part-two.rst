@@ -489,11 +489,11 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 
     <h1>Editer le post</h1>
     <?php
-        echo $this->Form->create('Post', array('action' => 'edit'));
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden'));
-        echo $this->Form->end('Sauvegarder le post');
+    echo $this->Form->create('Post');
+    echo $this->Form->input('title');
+    echo $this->Form->input('body', array('rows' => '3'));
+    echo $this->Form->input('id', array('type' => 'hidden'));
+    echo $this->Form->end('Save Post');
     ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
@@ -516,9 +516,9 @@ Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
     <table>
         <tr>
             <th>Id</th>
-            <th>Titre</th>
+            <th>Title</th>
             <th>Action</th>
-            <th>Créé le</th>
+            <th>Created</th>
         </tr>
 
     <!-- Ici se trouve la boucle de notre tableau $posts, impression de l\'info du post -->
@@ -699,4 +699,4 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 
 .. meta::
     :title lang=fr: Blog Tutoriel Ajouter la logique
-    :keywords lang=fr: doc models,vérification validation,controller actions,model post,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
+    :keywords lang=fr: doc models,vérification validation,controller actions,model post,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread et butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression

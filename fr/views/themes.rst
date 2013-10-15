@@ -10,11 +10,11 @@ Pour utiliser les thèmes, spécifiez le nom du thème dans votre controller::
         public $theme = 'Exemple';
     }
 
-    .. versionchanged:: 2.1
-        Les versions antérieures à 2.1 ont besoin de définir
-        ``$this->viewClass = 'Theme'``.
-        2.1 enlève cette condition puisque la classe normale ``View``
-        supporte les thèmes.
+.. versionchanged:: 2.1
+   Les versions antérieures à 2.1 ont besoin de définir
+   ``$this->viewClass = 'Theme'``.
+   2.1 enlève cette condition puisque la classe normale ``View``
+   supporte les thèmes.
 
 Vous pouvez également définir ou modifier le nom du thème dans une action ou
 dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::

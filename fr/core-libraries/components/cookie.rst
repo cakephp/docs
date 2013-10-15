@@ -131,7 +131,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
     avec le nom spécifié dans $key.::    
 
-        // Sortie “Larry”
+        // Sortie "Larry"
         echo $this->Cookie->read('name');
 
         // Vous pouvez aussi utiliser la notation par point pour lire

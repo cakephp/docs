@@ -239,7 +239,7 @@ dans votre application.
 
 .. php:const:: FULL_BASE_URL
 
-    Préfix url complet. Comme ``https://example.com``
+    Préfix URL complet. Comme ``https://example.com``
 
     .. deprecated:: 2.4
         Cette constante est dépréciée, vous devriez utiliser

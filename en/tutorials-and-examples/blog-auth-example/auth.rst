@@ -2,7 +2,7 @@ Simple Authentication and Authorization Application
 ###################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
-secure the access to certain urls, based on the logged in
+secure the access to certain URLs, based on the logged in
 user. We also have another requirement, to allow our blog to have multiple authors
 so each one of them can create their own posts, edit and delete them at will
 disallowing other authors to make any changes on one's posts.
@@ -175,7 +175,7 @@ file and add the following lines::
     }
 
 There is not much to configure, as we used the conventions for the users table.
-We just set up the urls that will be loaded after the login and logout actions is
+We just set up the URLs that will be loaded after the login and logout actions is
 performed, in our case to ``/posts/`` and ``/`` respectively.
 
 What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
@@ -244,9 +244,9 @@ the login function, here it is:
     <?php echo $this->Form->end(__('Login')); ?>
     </div>
 
-You can now register a new user by accessing the ``/users/add`` url and log-in with the
-newly created credentials by going to ``/users/login`` url. Also try to access
-any other url that was not explicitly allowed such as ``/posts/add``, you will see
+You can now register a new user by accessing the ``/users/add`` URL and log-in with the
+newly created credentials by going to ``/users/login`` URL. Also try to access
+any other URL that was not explicitly allowed such as ``/posts/add``, you will see
 that the application automatically redirects you to the login page.
 
 And that's it! It looks too simple to be truth. Let's go back a bit to explain what
@@ -259,11 +259,11 @@ and it works without any further config because we are following conventions as
 mentioned earlier. That is, having a User model with a username and a password
 column, and use a form posted to a controller with the user data. This function
 returns whether the login was successful or not, and in the case it succeeds,
-then we redirect the user to the configured redirection url that we used when
+then we redirect the user to the configured redirection URL that we used when
 adding the AuthComponent to our application.
 
-The logout works by just accessing the ``/users/logout`` url and will redirect
-the user to the configured logoutUrl formerly described. This url is the result
+The logout works by just accessing the ``/users/logout`` URL and will redirect
+the user to the configured logoutUrl formerly described. This URL is the result
 of the ``AuthComponent::logout()`` function on success.
 
 Authorization (who's allowed to access what)
@@ -295,7 +295,7 @@ info that is saved.
 
 Let's secure our app to prevent some authors from editing or deleting the
 others' posts. Basic rules for our app are that admin users can access every
-url, while normal users (the author role) can only access the permitted actions.
+URL, while normal users (the author role) can only access the permitted actions.
 Open again the AppController class and add a few more options to the Auth
 config::
 
@@ -321,7 +321,7 @@ config::
     }
 
 We just created a very simple authorization mechanism. In this case the users
-with role ``admin`` will be able to access any url in the site when logged in,
+with role ``admin`` will be able to access any URL in the site when logged in,
 but the rest of them (i.e the role ``author``) can't do anything different from
 not logged in users.
 

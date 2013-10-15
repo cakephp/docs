@@ -131,7 +131,7 @@ PHP.
 .. warning::
 
     Si vous avez des variables de vues qui contiennent des contenus
-    inserialisable comme les  objets SimpleXML, des gestionnaires
+    inserialisable comme les objets SimpleXML, des gestionnaires
     de ressource (resource handles), ou des classes closures Il se
     peut que vous ne puissiez pas utiliser la mise en cache des vues.
 
@@ -148,8 +148,8 @@ requête.
 .. note::
 
     Ce système de nettoyage automatique requiert que le nom du
-    controller/model fasse partie de l'Url. Si vous avez utilisé
-    le routing pour changer vos Urls cela ne fonctionnera pas.
+    controller/model fasse partie de l'URL. Si vous avez utilisé
+    le routing pour changer vos URLs cela ne fonctionnera pas.
 
 Si vous avez besoin de nettoyer le cache manuellement, vous pouvez
 le faire en appelant Cache::clear(). Cela nettoiera **toutes** les

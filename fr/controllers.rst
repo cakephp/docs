@@ -27,7 +27,7 @@ méthodes partagées par tous les controllers de votre application.
 Les controllers peuvent inclure un certain nombre de méthodes qui sont
 généralement appelées *actions*. Les actions sont les méthodes d'un controller
 qui gèrent les requêtes. Par défaut, toutes les méthodes publiques d'un
-controller sont des actions accessibles via une url. Les actions sont
+controller sont des actions accessibles via une URL. Les actions sont
 responsables de l'interprétation des requêtes et de la création de
 la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
 il y a aussi d'autres façons de créer des réponses.
@@ -360,7 +360,7 @@ Contrôle de Flux
 
     Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
-        $this->redirect('/paiements/remerciements'));
+        $this->redirect('/paiements/remerciements');
         $this->redirect('http://www.exemple.com');
 
     Vous pouvez aussi passer des données à l'action::
@@ -394,7 +394,7 @@ Contrôle de Flux
         $this->redirect(array(
             'controller' => 'commandes', 'action' => 'confirmation', '?' => array('produit' => 'pizza', 'quantite' => 5), '#' => 'top'));
 
-    L'url généré serait: ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
+    L'URL généré serait: ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
@@ -545,7 +545,7 @@ Autres Méthodes utiles
 
     Le troisième paramètre vous permet de dire à CakePHP quel opérateur
     booléen SQL utiliser entre les conditions de recherche. Les chaînes
-    comme ‘AND’, ‘OR’ et ‘XOR’ sont des valeurs possibles.
+    comme 'AND', 'OR' et 'XOR' sont des valeurs possibles.
 
     Enfin, si le dernier paramètre est défini à vrai et que $op est un tableau,
     les champs non-inclus dans $op ne seront pas inclus dans les conditions
@@ -630,7 +630,7 @@ Autres Méthodes utiles
     L'appel à ``requestAction`` ne sera pas effectué tant que le fichier de vue
     de l'élément en cache existe et est valide.
 
-    De plus, ``requestAction`` prend désormais des urls basées sur des tableau
+    De plus, ``requestAction`` prend désormais des URLs basées sur des tableau
     dans le style de cake::
 
         echo $this->requestAction(
@@ -667,8 +667,8 @@ Autres Méthodes utiles
 
     .. note::
 
-        Contrairement aux autres places où les urls en tableau sont analogues
-        aux urls en chaîne de caractère, requestAction les traite différemment.
+        Contrairement aux autres places où les URLs en tableau sont analogues
+        aux URLs en chaîne de caractère, requestAction les traite différemment.
 
     Quand vous utilisez une url en tableau en conjonction avec requestAction(),
     vous devez spécifier **tous** les paramètres dont vous aurez besoin dans

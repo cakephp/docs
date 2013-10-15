@@ -20,7 +20,7 @@ be activated, this is done in ``app/Config/routes.php``::
 
     Router::parseExtensions('rss');
 
-In the call above we’ve activated the .rss extension. When using
+In the call above we've activated the .rss extension. When using
 :php:meth:`Router::parseExtensions()` you can pass as many arguments or
 extensions as you want. This will activate each
 extension/content-type for use in your application. Now when the
@@ -152,7 +152,7 @@ associative array into an element for each key value pair.
         );
 
         // Remove & escape any HTML to make sure the feed content will validate.
-        $bodyText = h(strip_tags($bodyText));
+        $bodyText = h(strip_tags($post['Post']['body']));
         $bodyText = $this->Text->truncate($bodyText, 400, array(
             'ending' => '...',
             'exact'  => true,

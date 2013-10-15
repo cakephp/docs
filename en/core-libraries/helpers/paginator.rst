@@ -252,7 +252,7 @@ pages in the paged data set.
 
     Gets the current page of the recordset for the given model::
 
-        // Our url is: http://example.com/comments/view/page:3
+        // Our URL is: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
         // Output is 3
 
@@ -330,14 +330,14 @@ Modifying the options PaginatorHelper uses
 
 Sets all the options for the Paginator Helper. Supported options are:
 
-* ``url`` The url of the paginating action. url has a few sub options as well:
+* ``url`` The URL of the paginating action. 'url' has a few sub options as well:
 
   -  ``sort`` The key that the records are sorted by.
   -  ``direction`` The direction of the sorting. Defaults to 'ASC'.
   -  ``page`` The page number to display.
 
   The above mentioned options can be used to force particular pages/directions.
-  You can also append additional url content into all urls generated in the
+  You can also append additional URL content into all URLs generated in the
   helper::
 
       $this->Paginator->options(array(
@@ -499,7 +499,7 @@ Other Methods
 
     :param array $options: Pagination/URL options array. As used on
         ``options()`` or ``link()`` method.
-    :param boolean $asArray: Return the url as an array, or a URI string.
+    :param boolean $asArray: Return the URL as an array, or a URI string.
         Defaults to false.
     :param string $model: Which model to paginate on
 

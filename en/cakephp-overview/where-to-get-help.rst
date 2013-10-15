@@ -27,9 +27,9 @@ The Bakery
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-The CakePHP Bakery is a clearing house for all things CakePHP.
+The CakePHP Bakery is a clearing house for all things regarding CakePHP.
 Check it out for tutorials, case studies, and code examples. Once
-you’re acquainted with CakePHP, log on and share your knowledge
+you're acquainted with CakePHP, log on and share your knowledge
 with the community and gain instant fame and fortune.
 
 The API
@@ -67,10 +67,10 @@ The IRC channel
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
    Bakery
 
-If you’re stumped, give us a holler in the CakePHP IRC channel.
+If you're stumped, give us a holler in the CakePHP IRC channel.
 Someone from the `development team <https://github.com/cakephp?tab=members>`_
 is usually there, especially during the daylight hours for North
-and South America users. We’d love to hear from you, whether you
+and South America users. We'd love to hear from you, whether you
 need some help, want to find users in your area, or would like to
 donate your brand new sports car.
 

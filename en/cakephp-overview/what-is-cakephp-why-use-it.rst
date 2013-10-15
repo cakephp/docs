@@ -1,4 +1,4 @@
-What is CakePHP? Why Use it?
+What is CakePHP? Why use it?
 ############################
 
 `CakePHP <http://www.cakephp.org/>`_ is a
@@ -6,26 +6,26 @@ What is CakePHP? Why Use it?
 `open-source <http://en.wikipedia.org/wiki/Open_source>`_,
 `rapid development <http://en.wikipedia.org/wiki/Rapid_application_development>`_
 `framework <http://en.wikipedia.org/wiki/Application_framework>`_
-for `PHP <http://www.php.net/>`_. It’s a foundational structure for
+for `PHP <http://www.php.net/>`_. It's a foundational structure for
 programmers to create web applications. Our primary goal is to
 enable you to work in a structured and rapid manner–without loss of
 flexibility.
 
-CakePHP takes the monotony out of web development. We provide you
-with all the tools you need to get started coding what you really
+CakePHP takes the monotony out of web development. It provides you
+with all the tools you need to get started coding and what you
 need to get done: the logic specific to your application. Instead
-of reinventing the wheel every time you sit down to a new project,
-check out a copy of CakePHP and get started with the real guts of
+of reinventing the wheel every time you begin a new project,
+check out a copy of CakePHP and get started with the logic of
 your application.
 
 CakePHP has an active
 `developer team <https://github.com/cakephp?tab=members>`_
 and community, bringing great value to the project. In addition to
 keeping you from wheel-reinventing, using CakePHP means your
-application’s core is well tested and is being constantly
+application's core is well tested and is being constantly
 improved.
 
-Here’s a quick list of features you’ll enjoy when using CakePHP:
+Here's a quick list of features you'll enjoy when using CakePHP:
 
 
 -  Active, friendly `community <http://cakephp.org/feeds>`_

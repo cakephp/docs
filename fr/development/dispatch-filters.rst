@@ -117,7 +117,7 @@ Classes Filter
 Les filtres de Dispatcher, quand définis en tant que noms de classe dans
 configuration, doivent étendre la classe ``DispatcherFilter`` fournie
 dans le répertoire `Routing` de CakePHP.
-Créeons un simple filtre pour répondre à une url spécifique avec un texte
+Créeons un simple filtre pour répondre à une URL spécifique avec un texte
 'Hello World'::
 
     App::uses('DispatcherFilter', 'Routing');
@@ -148,7 +148,7 @@ utilisant la propriété ``$priority`` dans la classe, la valeur par défaut est
 10 si la propriété est déclarée, cela signifie qu'il sera executé _après_ que
 la classe de Router a parsé la requête. Nous ne voulons pas que cela
 arrive dans notre exemple précédent, parce que probablement, vous n'avez pas
-de controller configuré pour répondre à cette url, donc nous avons choisi
+de controller configuré pour répondre à cette URL, donc nous avons choisi
 9 comme notre priorité.
 
 ``DispatcherFilter`` propose deux méthodes qui peuvent être écrasées dans des
@@ -236,7 +236,7 @@ certaines requêtes.
 Pour des raisons évidentes, ceci a le potentiel de rendre la maintenance de
 votre app très difficile. Les filtres sont un outil extrèmement puissant
 quand on les utilise sagement, ajoutez les gestionnaires de réponse
-pour chaque url dans votre app n'est pas une bonne utilisation pour cela. Mais
+pour chaque URL dans votre app n'est pas une bonne utilisation pour cela. Mais
 si vous avez une raison valide de le faire, alors vous avez une solution
 propre à portée de main. Gardez à l'esprit que tout ne doit pas être un
 filtre, les `Controllers` et les `Components` sont habituellement un choix

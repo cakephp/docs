@@ -312,11 +312,11 @@ Security.cipherSeed
     crypter/décrypter les chaînes.
 Asset.timestamp
     Ajoute un timestamp de dernière modification du fichier particulier
-    à la fin des urls des asset fichiers (CSS, JavaScript, Image) lors de
+    à la fin des URLs des asset fichiers (CSS, JavaScript, Image) lors de
     l'utilisation de vos propres helpers.
     Valeurs valides:
-    (bool) false - Ne fait rien (par défaut).
-    (bool) true - Ajoute le timestamp quand debug > 0.
+    (boolean) false - Ne fait rien (par défaut).
+    (boolean) true - Ajoute le timestamp quand debug > 0.
     (string) 'force' - Ajoute le timestamp quand debug >= 0.
 Acl.classname, Acl.database
     Constantes utilisées pour la fonctionnalité d'Access Control List de

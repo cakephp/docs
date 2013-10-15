@@ -8,9 +8,9 @@ utiliser les routes, mais cela rendra votre barre d'adresse beaucoup plus
 élégante.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé,
-où un tableau de paramètres peut être inversé en une chaîne url.
+où un tableau de paramètres peut être inversé en une chaîne URL.
 En utilisant le routing inversé, vous pouvez facilement reconstruire votre
-structure d'url des applications sans avoir mis à jour tous vos codes.
+structure d'URL des applications sans avoir mis à jour tous vos codes.
 
 .. index:: routes.php
 
@@ -157,9 +157,9 @@ pourriez considérer la création d'une route. Cela vous permet de vous lier
     
     Bien que vous puissiez connecter des routes alternatives, les routes par
     défaut vont continuer à fonctionner. Ceci pourrait créer des situations,
-    où le contenu pourrait finir avec 2 urls. Regardez
+    où le contenu pourrait finir avec 2 URLs. Regardez
     :ref:`disabling-default-routes` pour désactiver les routes par défaut,
-    et fournir seulement les urls que vous définissez.
+    et fournir seulement les URLs que vous définissez.
 
 Une autre utilisation ordinaire pour le Router est de définir un "alias" pour
 un controller. Disons qu'au lieu d'accéder à notre URL régulière à
@@ -170,7 +170,7 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
         '/cooks/:action/*', array('controller' => 'users')
     );
 
-Cela dit au Router que toute url commençant par ``/cooks/`` devrait être
+Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être
 envoyée au controller users. L'action appelée dépendra de la valeur du
 paramètre ``:action``. En utilisant :ref:`route-elements`, vous pouvez
 créer des routes variables, qui acceptent les entrées utilisateur ou les
@@ -179,15 +179,15 @@ L'étoile greedy indique au :php:class:`Router` que cette route devrait
 accepter tout argument de position supplémentaire donné. Ces arguments
 seront rendus disponibles dans le tableau :ref:`passed-arguments`.
 
-Quand on génére les urls, les routes sont aussi utilisées. Utiliser
+Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
 ``array('controller' => 'users', 'action' => 'some_action', 5)`` en
-url va sortir /cooks/some_action/5 si la route ci-dessus est la
+URL va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
 Si vous pensez utiliser des arguments nommés personnalisés avec votre route,
 vous devrez avertir le routeur de cela en utilisant la fonction
 :php:meth:`Router::connectNamed()`. Donc si vous voulez que la route ci-dessus
-matchent les urls comme ``/cooks/some_action/type:chef``, nous faisons::
+matchent les URLs comme ``/cooks/some_action/type:chef``, nous faisons::
 
     Router::connectNamed(array('type'));
     Router::connect(
@@ -241,14 +241,14 @@ de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
 d'accéder à l'ID passé à ``$this->request->params['id']``.
 
 Si vous avez un unique controller dans votre application et que vous ne ne
-voulez pas que le nom du controller apparaisse dans l'url, vous pouvez mapper
-tous les urls aux actions dans votre controller. Par exemple, pour mapper
-toutes les urls aux actions du controller ``home``, par ex avoir des urls
+voulez pas que le nom du controller apparaisse dans l'URL, vous pouvez mapper
+tous les URLs aux actions dans votre controller. Par exemple, pour mapper
+toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
     Router::connect('/:action', array('controller' => 'home')); 
 
-Si vous souhaitez fournir une url non sensible à la casse, vous pouvez utiliser
+Si vous souhaitez fournir une URL non sensible à la casse, vous pouvez utiliser
 les modificateurs en ligne d'expression régulière::
 
     Router::connect(
@@ -326,7 +326,7 @@ doivent aussi être rendus disponibles en arguments passés::
     );
 
 et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
-dans le tableau d'url comme ci-dessous et Cake sait comment former l'URL comme
+dans le tableau d'URL comme ci-dessous et Cake sait comment former l'URL comme
 définie dans les routes::
 
     // view.ctp
@@ -364,7 +364,7 @@ comment plusieurs paramètres nommés devraient être traitées. Regardons
 chacune des différentes règles une par une:
 
 * 'wibble' n'a pas d'information en plus. Cela signifie qu'il va toujours
-  parser si il est trouvé dans une url matchant cette route.
+  parser si il est trouvé dans une URL matchant cette route.
 * 'fish' a un tableau de conditions, contenant la clé 'action'. Cela signifie
   que fish va être seulement parsé en paramètre nommé si l'action est aussi
   indicée.
@@ -395,13 +395,13 @@ au routeur sont configurés dans ``app/Config/core.php``::
     Configure::write('Routing.prefixes', array('admin'));
 
 Dans votre controller, toute action avec le préfixe ``admin_`` sera appelée.
-En utilisant notre exemple des users, accéder à l'url
+En utilisant notre exemple des users, accéder à l'URL
 ``/admin/users/edit/5`` devrait appeler la méthode ``admin_edit``
 de notre ``UsersController`` en passant 5 comme premier paramètre.
 Le fichier de vue correspondant devra être
 ``app/View/Users/admin\_edit.ctp``.
 
-Vous pouvez faire correspondre l'url /admin à votre action ``admin_index``
+Vous pouvez faire correspondre l'URL /admin à votre action ``admin_index``
 du controller Pages en utilisant la route suivante::
 
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
@@ -445,7 +445,7 @@ Routing des Plugins
 
 Le routage des Plugins utilise la clé **plugin**. Vous pouvez créer des liens
 qui pointent vers un plugin, mais en ajoutant la clé plugin à votre tableau
-d'url::
+d'URL::
 
     echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
@@ -548,7 +548,7 @@ il est possible de forcer des paramètres particuliers comme étant des
 paramètres passés également. Voir passer des paramètres à une action pour plus
 d'informations.
 
-Si vous alliez visiter l'url mentionné précédemment, et que vous aviez une
+Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
 
     CalendarsController extends AppController{
@@ -568,7 +568,7 @@ Vous auriez la sortie suivante::
 La même donnée est aussi disponible dans ``$this->request->params['pass']``
 et dans ``$this->passedArgs`` dans vos controllers, vues, et helpers.
 Les valeurs dans le tableau pass sont indicées numériquement basé sur l'ordre
-dans lequel elles apparaissent dans l'url appelé::
+dans lequel elles apparaissent dans l'URL appelé::
 
     debug($this->request->params['pass']);
     debug($this->passedArgs); 
@@ -586,7 +586,7 @@ Les deux du dessus sortiraient::
     $this->passedArgs peut aussi contenir des paramètres nommés comme jun
     tableau mixte nommé avec des arguments passés.
 
-Quand vous générez des urls, en utilisant un :term:`tableau routing`, vous
+Quand vous générez des URLs, en utilisant un :term:`tableau routing`, vous
 ajoutez des arguments passés en valeurs sans clés de type chaîne dans le
 tableau::
 
@@ -657,7 +657,7 @@ utilisez :php:meth:`Router::connectNamed()`::
 Va s'assurer que votre chapitre et les paramètres de section inversent les
 routes correctement.
 
-Quand vous générez les urls, en utilisant un :term:`tableau routing`, vous
+Quand vous générez les URLs, en utilisant un :term:`tableau routing`, vous
 ajoutez les paramètres nommés en valeurs avec les clés en chaîne matchant
 le nom::
 
@@ -673,9 +673,9 @@ paramètre nommé.
     élément de route et paramètre nommé.
 
 Les paramètres nommés supportent aussi l'utilisation de tableaux pour
-générer et parser les urls. La syntaxe fonctionne de façon très similaire à
+générer et parser les URLs. La syntaxe fonctionne de façon très similaire à
 la syntaxe de tableau utilisée pour les paramètres GET. Quand vous générez les
-urls, vous pouvez utiliser la syntaxe suivante::
+URLs, vous pouvez utiliser la syntaxe suivante::
 
     $url = Router::url(array(
         'controller' => 'posts',
@@ -686,7 +686,7 @@ urls, vous pouvez utiliser la syntaxe suivante::
         )
     ));
 
-Ce qui est au-dessus générerait l'url
+Ce qui est au-dessus générerait l'URL
 ``/posts/index/filter[published]:1/filter[frontpage]:1``. Les paramètres
 sont ensuite parsés et stockés dans la variable passedArgs de votre
 controller en tableau, de la même façon que vous les envoyez au
@@ -720,7 +720,7 @@ Les tableaux peuvent aussi être imbriqués en profondeur, vous autorisant même
         'users' => array(1, 2, 3)
     ));
 
-Vous finiriez avec une longue et belle url comme ceci
+Vous finiriez avec une longue et belle URL comme ceci
 (entouré pour une lecture facile)::
 
     posts/search
@@ -805,30 +805,30 @@ Routing inversé
 ===============
 
 Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
-vous permettre de changer facilement votre structure d'url sans avoir à
+vous permettre de changer facilement votre structure d'URL sans avoir à
 modifier tout votre code. En utilisant
-:term:`routing arrays <tableau routing>` pour définir vos urls, vous pouvez
-configurer les routes plus tard et les urls générés vont automatiquement
+:term:`routing arrays <tableau routing>` pour définir vos URLs, vous pouvez
+configurer les routes plus tard et les URLs générés vont automatiquement
 être mises à jour.
 
-Si vous créez des urls en utilisant des chaînes de caractères comme::
+Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
     $this->Html->link('View', '/posts/view/' + $id);
 
 Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
 appelé 'articles' à la place, vous devrez aller dans toute votre application
-en renommant les urls. Cependant, si vous définissiez votre lien comme::
+en renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(
         'View', 
         array('controller' => 'posts', 'action' => 'view', $id)
     );
 
-Ensuite quand vous décidez de changer vos urls, vous pouvez le faire en
+Ensuite quand vous décidez de changer vos URLs, vous pouvez le faire en
 définissant une route. Cela changerait à la fois le mapping d'URL entrant,
-ainsi que les urls générés.
+ainsi que les URLs générés.
 
-Quand vous utilisez les urls en tableau, vous pouvez définir les paramètres
+Quand vous utilisez les URLs en tableau, vous pouvez définir les paramètres
 chaîne de la requête et les fragments de document en utilisant les clés
 spéciales::
 
@@ -839,7 +839,7 @@ spéciales::
         '#' => 'top'
     ));
     
-    // va générer une url comme.
+    // va générer une URL comme.
     /posts/index?page=1#top
 
 .. _redirect-routing:
@@ -848,9 +848,9 @@ Routing inversé
 ===============
 
 Rediriger le routing vous permet de délivrer des redirections à l'état HTTP
-30x pour les routes entrantes, et les pointent aux différentes urls. Ceci
+30x pour les routes entrantes, et les pointent aux différentes URLs. Ceci
 est utilisé quand vous voulez informer les applications clientes qu'une
-ressource a été déplacée et que vous ne voulez pas avoir deux urls pour le
+ressource a été déplacée et que vous ne voulez pas avoir deux URLs pour le
 même contenu.
 
 Les routes de redirection sont différentes des routes normales puisqu'elles
@@ -866,9 +866,9 @@ ou une localisation en-dehors::
 
 Redirige ``/home/*`` vers ``/posts/view`` et passe les paramètres vers
 ``/posts/view``. Utiliser un tableau en une destination de redirection
-vous permet d'utiliser d'autres routes pour définir où une chaîne url
+vous permet d'utiliser d'autres routes pour définir où une chaîne URL
 devrait être redirigée. Vous pouvez rediriger vers des localisations
-externes en utilisant les chaînes url en destination::
+externes en utilisant les chaînes URLs en destination::
 
     Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
 
@@ -886,7 +886,7 @@ pouvez retirer les routes par défaut que CakePHP offre en les supprimant
 de votre fichier d'application routes.php.
 
 Cela fera en sorte que CakePHP serve les erreurs, quand les utilisateurs
-essaient de visiter les urls qui seraient normalement fournies par CakePHP mais
+essaient de visiter les URLs qui seraient normalement fournies par CakePHP mais
 n'ont pas été connectée explicitement.
 
 .. _custom-route-classes:
@@ -923,8 +923,8 @@ API du Router
 
 .. php:class:: Router
 
-    Le Router gère la génération des urls sortants, et le parsing de la
-    requête url entrante dans les ensembles de paramètre que CakePHP
+    Le Router gère la génération des URLs sortants, et le parsing de la
+    requête URL entrante dans les ensembles de paramètre que CakePHP
     peut dispatcher.
 
 .. php:staticmethod:: connect($route, $defaults = array(), $options = array())
@@ -940,7 +940,7 @@ API du Router
         en fournissant les patterns pour les paramètres de routing et fournir
         le nom d'une classe de routing personnalisée.
 
-    Les routes ont une façon de connecter les requêtes urls aux objets dans
+    Les routes ont une façon de connecter les requêtes URLs aux objets dans
     votre application. Dans les routes du coeur, il y a un ensemble
     d'expressions régulières qui sont utilisées pour matcher les requêtes
     aux destinations.
@@ -979,9 +979,9 @@ API du Router
       du tableau de route régulière. Ex. ``'pass' => array('slug')``.
     
     * ``persist`` est utilisé pour définir lesquels des paramètres de route
-      devrait être automatiquement inclus quand on génére les nouvels urls.
+      devrait être automatiquement inclus quand on génére les nouvels URLs.
       Vous pouvez écraser les paramètres persistentes en les redéfinissant
-      dans une url ou les retirer en configurant le paramètre à ``false``.
+      dans une URL ou les retirer en configurant le paramètre à ``false``.
       Ex. ``'persist' => array('lang')``.
 
     * ``routeClass`` est utilisé pour étendre et changer la façon dont les
@@ -995,9 +995,9 @@ API du Router
     
 .. php:staticmethod:: redirect($route, $url, $options = array())
 
-    :param string $route: Un template de route qui dicte quels urls devraient
+    :param string $route: Un template de route qui dicte quels URLs devraient
         être redirigées.
-    :param mixed $url: Soit un :term:`tableau routing`, soit une chaîne url
+    :param mixed $url: Soit un :term:`tableau routing`, soit une chaîne URL
         pour la  destination du redirect.
     :param array $options: Un tableau d'options pour le redirect.
 
@@ -1012,7 +1012,7 @@ API du Router
     :param array $options: Permet le contrôle de toutes les configurations:
         separator, greedy, reset, default.
     
-    Spécifie quels paramètres nommés CakePHP devrait parsés en urls entrantes
+    Spécifie quels paramètres nommés CakePHP devrait parsés en URLs entrantes
     Par défaut, CakePHP va parser tout paramètre nommé en-dehors des URLS
     entrantes. Regardez :ref:`controlling-named-parameters` pour plus
     d'informations.
@@ -1029,10 +1029,10 @@ API du Router
 
     :param mixed $url: Une URL relative à Cake, comme "/products/edit/92" ou
         "/presidents/elect/4" ou un :term:`tableau routing`.
-    :param mixed $full: Si (bool) à true, l'URL entièrement basée sera précédée
+    :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera précédée
         au résultat. Si un tableau accèpte les clés suivantes.
         
-           * escape - utilisé quand on fait les urls intégrées dans les
+           * escape - utilisé quand on fait les URLs intégrées dans les
              chaînes de requête html échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
 
@@ -1041,7 +1041,7 @@ API du Router
 
     * Empty - la méthode trouve l'adresse du controller/de l'action actuel.
     * '/' - la méthode va trouver l'URL de base de l'application.
-    * Une combinaison de controller/action - la méthode va trouver l'url
+    * Une combinaison de controller/action - la méthode va trouver l'URL
       pour cela.
 
     Il y a quelques paramètres 'spéciaux' qui peuvent changer la chaîne d'URL
@@ -1054,7 +1054,7 @@ API du Router
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
     * ``full_base`` - Si à true, la valeur de :php:meth:`Router::fullBaseUrl()`
-      sera ajoutée avant aux urls générées.
+      sera ajoutée avant aux URLs générées.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
@@ -1098,9 +1098,9 @@ API du Router
 
 .. php:method:: parse($url)
 
-    :param string $url: La chaîne url à parser.
+    :param string $url: La chaîne URL à parser.
     
-    Parse une url entrante, et génére un tableau de paramètres requêtés sur
+    Parse une URL entrante, et génére un tableau de paramètres requêtés sur
     lequel le Dispatcher peut agir. Etendre cette méthode vous permet de
     personnaliser comment les URLs entrantes sont converties en un tableau.
     Retourne ``false`` à partir d'une URL pour indiquer un échec de match.
