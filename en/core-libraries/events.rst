@@ -205,73 +205,83 @@ supports::
         $eventManager->attach($callable, 'Model.Order.afterPlace');
     }
 
-.. todo::
-    Continue here.
-
 .. _event-priorities:
 
 Establishing priorities
 -----------------------
 
-In some cases you'd want to run a callback and make sure it gets executed before,
-or after all the other callbacks have been run. For instance, think again about
-our user statistics example. It would make sense to run this method only
-when we can make sure the event was not cancelled, there were no errors and the
-other callbacks did not change the state of the order itself. For those cases you
-use priorities.
+In some cases you might want to control the order that listeners are invoked.
+For instance, if we go back to our user statistics example. It would ideal if
+this listener was called at the end of the stack. By calling it at the end of
+the listener stack, we can ensure that the event was not canceled, and that no
+other listeners raised exceptions. We can also get the final state of the
+objects in the case that other listeners have modified the subject or event
+object. Event priorities allow you to handle these situations well.
 
-Priorities are handled using a number associated to the callback itself. The higher
-the number, the later the method will be fired. Default priority for all callbacks
-and listener methods are set to `10`. If you need your method to be run before, then
-using any value below this default will help you do it, even setting the priority
-to `1` or a negative value should work. On the other hand if you desire to run the
-callback after the others, using a number above `10` will do.
+Priorities are defined as an integer when adding a listener. The higher the
+number, the later the method will be fired. The default priority for all
+listeners is ``10``. If you need your method to be run earlier, using any value
+below this default will work. On the other hand if you desire to run the
+callback after the others, using a number above ``10`` will do.
 
-If two callbacks happen to be allocated in the same priority queue, they will be
-executed with a `FIFO` policy, the first listener method to be attached is called
-first and so on. You set priorities using the `attach` method for callbacks, and
-declaring it in the `implementedEvents` function for event listeners::
+If two callbacks happen to have the same priority value, they will be executed
+with a the order they were attached. You set priorities using the ``attach``
+method for callbacks, and declaring it in the ``implementedEvents`` function for
+event listeners::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
+    $this->getEventManager()->attach(
+        $callback,
+        'Model.Order.afterPlace',
+        array('priority' => 2)
+    );
 
     // Setting priority for a listener
     class UserStatistic implements CakeEventListener {
         public function implementedEvents() {
             return array(
-                'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'priority' => 100),
+                'Model.Order.afterPlace' => array(
+                    'callable' => 'updateBuyStatistic',
+                    'priority' => 100
+                ),
             );
         }
     }
 
-As you see, the main difference for `CakeEventListener` objects is that you need
+As you see, the main difference for ``CakeEventListener`` objects is that you need
 to use an array for specifying the callable method and the priority preference.
-The `callable` key is an special array entry that the manager will read to know
+The ``callable`` key is an special array entry that the manager will read to know
 what function in the class it should be calling.
 
-Getting event data as function params
--------------------------------------
+Getting event data as function parameters
+-----------------------------------------
 
-Some developers might prefer having the event data passed as function parameters
-instead of receiving the event object. While this is an odd preference and using
-the event object is a lot more powerful, this was needed to provide backwards
-compatibility with the previous event system and to offer seasoned developers an
-alternative to what they were used to.
+By default listeners receive the event object as their only parameter. If you
+are building an event that doesn't need access to the event object you may want
+to have the event data passed as function parameters. This feature is used by
+the callbacks CakePHP fires in order to preserve backwards compatibility.
 
-In order to toggle this option you have to add the `passParams` option to the
-third argument of the `attach` method, or declare it in the `implementedEvents`
+If you want to enable this feature, you have to add the ``passParams`` option to the
+third argument of the ``attach`` method, or declare it in the ``implementedEvents``
 returned array similar to what you do with priorities::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
+    $this->getEventManager()->attach(
+        $callback,
+        'Model.Order.afterPlace',
+        array('passParams' => true)
+    );
 
     // Setting priority for a listener
     class UserStatistic implements CakeEventListener {
         public function implementedEvents() {
             return array(
-                'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'passParams' => true),
+                'Model.Order.afterPlace' => array(
+                    'callable' => 'updateBuyStatistic',
+                    'passParams' => true
+                ),
             );
         }
 
@@ -280,13 +290,14 @@ returned array similar to what you do with priorities::
         }
     }
 
-In the above code the `doSomething` function and `updateBuyStatistic` method will
-receive `$orderData` instead of the `$event` object. This is so, because in our
-previous example we trigger the `Model.Order.afterPlace` event with some data::
+In the above code the ``doSomething`` function and ``updateBuyStatistic`` method will
+receive ``$orderData`` instead of the ``$event`` object. This is so, because in our
+previous example we trigger the ``Model.Order.afterPlace`` event with some data::
 
-    $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
+    $event = new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
-    )));
+    ));
+    $this->getEventManager()->dispatch($event);
 
 .. note::
 
@@ -297,13 +308,13 @@ previous example we trigger the `Model.Order.afterPlace` event with some data::
 Stopping events
 ---------------
 
-There are circumstances where you will need to stop events so the operation that
-started it is cancelled. You see examples of this in the model callbacks
+Much like DOM events, you may want to stop an event to prevent additional
+listeners from being notified. You can see this in action during model callbacks
 (e.g. beforeSave) in which it is possible to stop the saving operation if
 the code detects it cannot proceed any further.
 
-In order to stop events you can either return `false` in your callbacks or call
-the `stopPropagation` method on the event object::
+In order to stop events you can either return ``false`` in your callbacks or call
+the ``stopPropagation`` method on the event object::
 
     public function doSomething($event) {
         // ...
@@ -315,14 +326,13 @@ the `stopPropagation` method on the event object::
         $event->stopPropagation();
     }
 
-Stopping an event can have two different effects. The first one can always be
-expected: any callback after the event was stopped will not be called. The second
-consequence is optional and it depends on the code triggering the event, for
-instance, in our `afterPlace` example it would not make any sense to cancel the
-operation since the data was already saved and the cart emptied. Nevertheless, if
-we had a `beforePlace` stopping the event would have a valid meaning.
+Stopping an event will prevent any additional callbacks from being called.
+Additionally the code triggering the event may behave differently based on the
+event being stopped or not. Generally it does not make sense to stop 'after'
+events, but stopping 'before' events is often used to prevent the entire
+operation from occurring.
 
-To check if an event was stopped, you call the `isStopped()` method in the event object::
+To check if an event was stopped, you call the ``isStopped()`` method in the event object::
 
     public function place($order) {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
@@ -337,16 +347,15 @@ To check if an event was stopped, you call the `isStopped()` method in the event
     }
 
 In the previous example the order would not get saved if the event is stopped
-during the `beforePlace` process.
+during the ``beforePlace`` process.
 
 Getting event results
 ---------------------
 
-Every time a callback returns a value, it gets stored in the `$result` property
-of the event object. This is useful in some cases where letting callbacks modify
-the main process params enhances the ability of altering the execution aspect of
-any process. Let's take again our `beforePlace` example and let callbacks modify
-the $order data.
+Every time a callback returns a value, it gets stored in the ``$result``
+property of the event object. This is useful when you want to allow callbacks to
+modify the event execution. Let's take again our ``beforePlace`` example and let
+callbacks modify the $order data.
 
 Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::
@@ -377,11 +386,10 @@ directly or returning the value in the callback itself::
         // ...
     }
 
-As you also may have noticed it is possible to alter any event object property
-and be sure that this new data will get passed to the next callback. In most of
-the cases, providing objects as event data or result and directly altering the
-object is the best solution as the reference is kept the same and modifications
-are shared across all callback calls.
+It is possible to alter any event object property and have the new data passed
+to the next callback. In most of the cases, providing objects as event data or
+result and directly altering the object is the best solution as the reference is
+kept the same and modifications are shared across all callback calls.
 
 Removing callbacks and listeners
 --------------------------------
@@ -404,7 +412,7 @@ params you used for attaching it::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attaching a CakeEventListener
-    $listener = new MyCakeEventLister();
+    $listener = new MyEventLister();
     $this->getEventManager()->attach($listener);
 
     // Detaching a single event key from a listener
@@ -412,57 +420,6 @@ params you used for attaching it::
 
     // Detaching all callbacks implemented by a listener
     $this->getEventManager()->detach($listener);
-
-The global event manager
-========================
-
-As previously noted, it might get hard to attach observers to a particular
-event manager in an object. There are certain cases where having the ability
-to attach callbacks for an event is needed without having access to the object
-instance that will trigger it. Also, to prevent people from implementing each
-of them a different mechanism for loading callbacks into managers based on
-configuration, CakePHP provides the concept of the global event manager.
-
-The global manager is a singleton instance of a ``CakeEventManager`` class that
-receives every event that any event manager in the app dispatches. This is both
-powerful and flexible, but if you use it you need to take more precautions when
-dealing with events.
-
-To set the concept right once again, and using our `beforePlace` example let's
-recall that we were using the local event manager that is returned by the `getEventManager`
-function. Internally this local event manager dispatches the event into the global
-one before it triggers the internal attached callbacks. The priority for each manager is
-independent, the global callbacks will fire in their own priority queue and then
-the local callbacks will get called in the respective priority order.
-
-Accessing the global event manager is as easy as calling a static function,
-the following example will attach a global event to the `beforePlace` event::
-
-    // In any configuration file or piece of code that executes before the event
-    App::uses('CakeEventManager', 'Event');
-    CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
-
-As you can see, we just change how we get access to an event manager instance,
-and we can apply the same concepts we learned before about triggering, attaching,
-detaching, stopping events, etc.
-
-One important thing you should consider is that there are events that will be
-triggered having the same name but different subjects, so checking it in the event
-object is usually required in any function that gets attached globally in order
-to prevent some bugs. Remember that extreme flexibility implies extreme complexity.
-
-Consider this callback that wants to listen for all Model beforeFinds but in
-reality, it cannot do its logic if the model is the Cart::
-
-    App::uses('CakeEventManager', 'Event');
-    CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
-
-    public function myCallback($event) {
-        if ($event->subject() instanceof Cart) {
-            return;
-        }
-        return array('conditions' => ...);
-    }
 
 Conclusion
 ==========
