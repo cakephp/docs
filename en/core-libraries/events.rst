@@ -425,17 +425,11 @@ Conclusion
 ==========
 
 Events are a great way of separating concerns in your application and make
-classes both cohesive and decoupled from each other, nevertheless using events
-is not the solution to all problems. Most applications actually won't need this
-feature at all, we recommend looking into other options when it comes to
-implementing callbacks such as using behaviors, components or helpers.
+classes both cohesive and decoupled from each other. Events can be utilized to
+de-couple application code and make extensible plugins.
 
-Keep in mind that with great power comes great responsibility, decoupling your
-classes this way also means that you need to perform more and better integration
-testing on your code. Abusing this tool won't make your apps have a better architecture,
-quite the opposite, it will make the code harder to read. Whereas in contrast, if you
-use it wisely, only for the stuff your really need, it will make you code easier
-to work with, test and integrate.
+Keep in mind that with great power comes great responsibility. Using too many
+events can make debugging harder and require additional integration testing.
 
 Additional Reading
 ==================
