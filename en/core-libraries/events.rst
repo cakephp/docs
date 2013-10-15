@@ -14,67 +14,40 @@ to external objects, and how much that class is depending on them.
 While most of the CakePHP structure and default libraries will help you
 achieve this goal, there are certain cases where you need to cleanly communicate
 with other parts in the system without having to hard code those dependencies,
-thus losing cohesion and increasing class coupling. A very successful design
-pattern in software engineering is the Observer pattern, where objects can
-generate events and notify possibly anonymous listeners about changes in the
-internal state.
+thus losing cohesion and increasing class coupling. Using the Observer pattern,
+which allows objects to notify other objects and anonymous listeners about
+changes, is a successful pattern to acheive this goal.
 
-Listeners in the observer pattern can subscribe to such events and choose to act
-upon them, modify the subject state or simply log stuff. If you have used
-javascript in the past, the chances are that you are already familiar with event
-driven programming.
+Listeners in the observer pattern can subscribe to events and choose to act upon
+them if they are relevant. If you have used javascript in the past, the chances
+are that you are already familiar with event driven programming.
 
 CakePHP emulates several aspects of how events are triggered and managed in
-popular javascript frameworks such as jQuery, while remaining loyal to its
-object oriented design. In this implementation, an event object is carried
-across all listeners holding the information and the ability to stop the event
-propagation at any point. Listeners can register themselves or can delegate this
-task to other objects and have the chance to alter the state and the event itself
-for the rest of the callbacks.
+popular javascript libraries such as jQuery. In the CakePHP implementation, an event
+object is carried across all listeners holding the information and the ability
+to stop the event propagation at any point. Listeners can register themselves or
+can delegate this task to other objects and have the chance to alter the state
+and the event itself for the rest of the callbacks.
 
-Interacting with the event managers
-===================================
+The event subsystem is at the heart of Model, Behavior, Controller, View and
+Helper callbacks. If you've ever used any of them, you are already somewhat
+familiar with the events subsystem.
 
-Let's suppose you are building a Cart plugin, but you don't really want to mess with
-shipping logic, emailing the user or decrementing the item from the stock,
-it is your wish to handle those things separately in another plugin or in app code.
-Typically, when not directly using the observer pattern you would do this by attaching
-behaviors on the fly to your models, and perhaps some components to the controllers.
+Example event usage
+===================
 
-Doing so represents a challenge most of the time, since you would have to come up
-with the code for externally loading those behaviors or attaching hooks to your
-plugin controllers. Prior to CakePHP 2.1 some developers chose to implement generic
-event systems to solve this problem, and some of those systems were offered as plugins.
-Now, you can benefit from a standard general purpose event system that will let you
-cleanly separate the concerns of your plugins and application code with the built in
-events manager.
-
-Dispatching events
-------------------
-
-So back to our example, we would have an `Order` model that will manage the buying logic,
-and probably a `place` method to save the order details and do any other logic::
-
-    // Cart/Model/Order.php
-    class Order extends AppModel {
-
-        public function place($order) {
-            if ($this->save($order)) {
-                $this->Cart->remove($order);
-                $this->sendNotificationEmail();
-                $this->decrementFromStock();
-                $this->updateUserStatistics();
-                // ...
-                return true;
-            }
-            return false;
-        }
-    }
-
-Well, that does not look right at all. A plugin should not make any assumption
-about sending emails, and may not even have the inventory data to decrement the
-item from it, and definitely tracking usage statistics is not the best place to
-do it. So we need another solution, let's rewrite that using the event manager::
+Let's suppose you are building a Cart plugin, but you don't really want to
+include shipping logic, emailing the user or decrementing the item from the
+stock. Instead, you would prefer to handle those concerns separately elsewhere
+in your application. If you were not using events, you may try to implement this
+by attaching behaviors to models, or adding components to your controllers.
+Doing the above represents a challenge most of the time, since you would have to
+come up with the code for externally loading those behaviors or attaching hooks
+to your plugin controllers. Instead, you can use the events system to allow you
+to cleanly separate the concerns of your code and build in additional concerns
+using events. For example in your Cart plugin you have an Order model that deals
+with creating orders. You'd like to notify the rest of the application that an
+order has been created. To keep your Order model clean you could use events::
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
@@ -83,117 +56,108 @@ do it. So we need another solution, let's rewrite that using the event manager::
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
+                $event = new CakeEvent('Model.Order.afterPlace', $this, array(
                     'order' => $order
-                )));
+                ));
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
         }
     }
 
-That looks a lot cleaner, as it gives us the opportunity to introduce the event
-classes and methods. The first thing you may notice is the call to ``getEventManager()``,
-this is a method that is available by default in all Models, Controllers and Views.
-This method will not return the same manager instance across models, and it is not
-shared between controllers and models, but they are between controllers and views,
-nevertheless. We will review later how to overcome this implementation detail.
+The above code allows you to easily notify the other parts of the application
+that an order has been created allowing you to do tasks like send email
+notifications, update stock, log relevant statistics and other tasks separately.
 
-The ``getEventManager`` method returns an instance of :php:class:`CakeEventManager`,
-and to dispatch events you use :php:meth:`CakeEventManager::dispatch()` which
-receives an instance of the :php:class:`CakeEvent` class. Let's dissect now the
-process of dispatching an event::
+Accessing event managers
+========================
 
-    new CakeEvent('Model.Order.afterPlace', $this, array(
+In CakePHP events are triggered against event managers. Event managers are
+available in every Model, View and Controller using ``getEventManager()``::
+
+    $events = $this->getEventManager();
+
+Each model has a separate event manager, while the View and Controller
+share one. This allows model events to be self contained, and allow components
+or controllers to act upon events created in the view if necessary.
+
+Global event manager
+--------------------
+
+In addition to instance level event managers, CakePHP provides a global event
+manager that allows you to listen to any event fired in an application. This
+is useful when attaching listeners to a specific instance might be cumbersome or
+difficult. The global manager is a singleton instance of
+:php:class:`CakeEventManager` that receives every event **before** the instance
+managers do. In addition to receiving events first, the global manager also
+maintains a separate priority stack for listeners. Once an event has been
+dispatched to the global manager, it will be dispatched to the instance level
+manager. You can access the global manager using a static method::
+
+    // In any configuration file or piece of code that executes before the event
+    App::uses('CakeEventManager', 'Event');
+    CakeEventManager::instance()->attach(
+        $aCallback,
+        'Model.Order.beforePlace'
+    );
+
+One important thing you should consider is that there are events that will be
+triggered having the same name but different subjects, so checking it in the
+event object is usually required in any function that gets attached globally in
+order to prevent some bugs. Remember that with the flexibility of using the
+global manager, some additional complexity is incurred.
+
+
+Dispatching events
+==================
+
+Once you have obtained an instance of an event manager you can dispatch events
+using :php:meth:`~CakeEventManager::dispatch()`. This method takes an instance
+of the :php:class:`CakeEvent` class. Let's look at dispatching an event::
+
+    // Create a new event and dispatch it.
+    $event = new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
+    $this->getEventManager()->dispatch($event);
 
-:php:class:`CakeEvent` receives 3 arguments in its constructor. The first one
-is the event name, you should try to keep this name as unique as possible,
-while making it readable. We suggest a convention as follows: `Layer.eventName`
-for general events happening at a layer level (e.g. `Controller.startup`, `View.beforeRender`)
-and `Layer.Class.eventName` for events happening in specific classes on a layer,
-for example `Model.User.afterRegister` or `Controller.Courses.invalidAccess`.
+:php:class:`CakeEvent` receives 3 arguments in its constructor. The first one is
+the event name, you should try to keep this name as unique as possible, while
+making it readable. We suggest a convention as follows: ``Layer.eventName`` for
+general events happening at a layer level (e.g. ``Controller.startup``,
+``View.beforeRender``) and ``Layer.Class.eventName`` for events happening in
+specific classes on a layer, for example ``Model.User.afterRegister`` or
+``Controller.Courses.invalidAccess``.
 
-The second argument is the `subject`, meaning the object associated to the event,
-usually when it is the same class triggering events about itself, using `$this`
+The second argument is the ``subject``, meaning the object associated to the event,
+usually when it is the same class triggering events about itself, using ``$this``
 will be the most common case. Although a :php:class:`Component` could trigger
 controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.
 
-Finally, the third argument is the event's params. This can be any data you consider
+Finally, the third argument is any additional event data.This can be any data you consider
 useful to pass around so listeners can act upon it. While this can be an argument
-of any type, we recommend passing an associative array, to make inspection easier.
+of any type, we recommend passing an associative array.
 
-:php:meth:`CakeEventManager::dispatch()` method accepts the event object as argument
-and notifies all listener and callbacks passing this object along. So the listeners
-will handle all the extra logic around the `afterPlace` event, you can log the time,
-send emails, update user statistics possibly in separate objects and even delegating
-it to offline tasks if you have the need.
-
-Registering callbacks
----------------------
-
-How do we register callbacks or observers to our new `afterPlace` event? This
-is subject to a wide variety of different implementations, but they all have
-to call the :php:meth:`CakeEventManager::attach()` method to register new actors.
-For simplicity's sake, let's imagine we know in the plugin what the callbacks
-are available in the controller, and say this controller is responsible for
-attaching them. The possible code would look like this::
-
-    // Listeners configured somewhere else, maybe a config file:
-    Configure::write('Order.afterPlace', array(
-        'email-sending' => 'EmailSender::sendBuyEmail',
-        'inventory' => array($this->InventoryManager, 'decrement'),
-        'logger' => function($event) {
-            // Anonymous function are only available in PHP 5.3+
-            CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
-        }
-    ));
-
-    // Cart/Controller/OrdersController.php
-    class OrdersController extends AppController {
-
-        public function finish() {
-            foreach (Configure::read('Order.afterPlace') as $l) {
-                $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
-            }
-            if ($this->Order->place($this->Cart->items())) {
-                // ...
-            }
-        }
-    }
-
-This may not be the cleanest way to do it, so you can come up with your own ways
-for attaching listeners to an object's event manager. This simple way of defining
-them using the `Configure` class is intended for didactic purposes only. This
-little example allows us to showcase what type of callbacks can be attached to
-the manager. As you may already have figured out, the `attach` method takes any
-valid  PHP `callback` type, this is a string representing a static function call,
-an array having a class instance and a method, an anonymous function if you use
-PHP 5.3, etc. Attached callbacks will all receive the event object as first argument
-
-:php:meth:`CakeEventManager::attach()` Accepts three arguments. The leftmost one is
-the callback itself, anything that PHP can treat as a callable function. The second
-argument is the event name, and the callback will only get fired if the `CakeEvent`
-object dispatched has a matching name. The last argument is an array of options to
-configure the callback priority, and the preference of arguments to be passed.
+The :php:meth:`~CakeEventManager::dispatch()` method accepts an event object as an argument
+and notifies all subscribed listeners.
 
 Registering listeners
----------------------
+=====================
 
-Listeners are an alternative, and often cleaner way of registering callbacks for
-an event. This is done by implementing the :php:class:`CakeEventListener` interface
-in any class you wish to register some callbacks. Classes implementing it need to
-provide the ``implementedEvents()`` method and return an associative array with all
-event names that the class will handle.
+Listeners the preferred way to register callbacks for an event. This is done by
+implementing the :php:class:`CakeEventListener` interface in any class you wish
+to register some callbacks. Classes implementing it need to provide the
+``implementedEvents()`` method. This method must return an associative array
+with all event names that the class will handle.
 
-To keep up with our previous example, let's imagine we have a UserStatistic class
-responsible for calculating useful information and compiling into the global site
-statistics. It would be natural to pass an instance of this class as a callback,
-instead of implementing a custom static function or converting any other workaround
-to trigger methods in this class. A listener is created as follows::
+To continue our previous example, let's imagine we have a UserStatistic class
+responsible for calculating a user's purchasing history, and compiling into global site
+statistics. This is a great place to use a listener class. Doing so allows you concentrate the statistics
+logic in one place and react to events as necessary. Our ``UserStatistics``
+listener might start out like::
 
     App::uses('CakeEventListener', 'Event');
     class UserStatistic implements CakeEventListener {
@@ -213,9 +177,36 @@ to trigger methods in this class. A listener is created as follows::
     $statistics = new UserStatistic();
     $this->Order->getEventManager()->attach($statistics);
 
-As you can see in the above code, the `attach` function can handle instances of
-the `CakeEventListener` interface. Internally, the event manager will read the
-array returned by `implementedEvents` method and wire the callbacks accordingly.
+As you can see in the above code, the ``attach`` function will accept instances
+of the ``CakeEventListener`` interface. Internally, the event manager will use
+``implementedEvents`` to attach the correct callbacks.
+
+Registering anonymous listeners
+-------------------------------
+
+While event listener objects are generally a better way to implement listeners,
+you can also bind any ``callable`` as an event listener. For example if we
+wanted to put any orders into the log files, we could use a simple anonymous
+function to do so::
+
+    // Anonymous functions require PHP 5.3+
+    $this->Order->getEventManager()->attach(function($event) {
+        CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
+    }, 'Model.Order.afterPlace');
+
+In addition to anonymous functions you can use any other callable type that PHP
+supports::
+
+    $events = array(
+        'email-sending' => 'EmailSender::sendBuyEmail',
+        'inventory' => array($this->InventoryManager, 'decrement'),
+    );
+    foreach ($events as $callable) {
+        $eventManager->attach($callable, 'Model.Order.afterPlace');
+    }
+
+.. todo::
+    Continue here.
 
 .. _event-priorities:
 
