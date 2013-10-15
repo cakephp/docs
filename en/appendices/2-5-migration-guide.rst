@@ -26,9 +26,9 @@ SchemaShell
 CompletionShell
 ---------------
 
-- The CompletionShell was added, this allows integration with autocompletion
-  libraries for shell environments like bash, or zsh. No shell scripts are
-  included in CakePHP, but the underlying tools are now available.
+- The CompletionShell was added. It aims to assist in the creation of
+  autocompletion libraries for shell environments like bash, or zsh. No shell
+  scripts are included in CakePHP, but the underlying tools are now available.
 
 Controller
 ==========
