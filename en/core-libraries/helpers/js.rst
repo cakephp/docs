@@ -731,17 +731,17 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. _ajax-pagination:
 
-Ajax Pagination
+AJAX Pagination
 ===============
 
-Much like Ajax Pagination in 1.2, you can use the JsHelper to
-handle the creation of Ajax pagination links instead of plain HTML
+Much like AJAX Pagination in 1.2, you can use the JsHelper to
+handle the creation of AJAX pagination links instead of plain HTML
 links.
 
-Making Ajax Links
+Making AJAX Links
 -----------------
 
-Before you can create ajax links you must include the JavaScript
+Before you can create AJAX links you must include the JavaScript
 library that matches the adapter you are using with ``JsHelper``.
 By default the ``JsHelper`` uses jQuery. So in your layout include
 jQuery (or whichever library you are using). Also make sure to
@@ -783,7 +783,7 @@ bottom of your view file. Be sure to include::
 
     echo $this->Js->writeBuffer();
 
-If you omit this you will **not** be able to chain ajax pagination
+If you omit this you will **not** be able to chain AJAX pagination
 links. When you write the buffer, it is also cleared, so you don't
 have worry about the same JavaScript being output twice.
 

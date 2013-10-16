@@ -181,7 +181,7 @@ Hopefully this should look somewhat simple.
 You might have noticed the use of an object called ``$this->Html``.
 This is an instance of the CakePHP :php:class:`HtmlHelper` class. CakePHP
 comes with a set of view helpers that make things like linking,
-form output, JavaScript and Ajax a snap. You can learn more about
+form output, JavaScript and AJAX a snap. You can learn more about
 how to use them in :doc:`/views/helpers`, but
 what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)

@@ -406,8 +406,8 @@ using something like::
 
 CakePHP features two core layouts (besides CakePHP's default
 layout) you can use in your own application: 'ajax' and 'flash'.
-The Ajax layout is handy for crafting Ajax responses - it's an
-empty layout (most ajax calls only require a bit of markup in
+The Ajax layout is handy for crafting AJAX responses - it's an
+empty layout (most AJAX calls only require a bit of markup in
 return, rather than a fully-rendered interface). The flash layout
 is used for messages shown by :php:meth:`Controller::flash()` method.
 

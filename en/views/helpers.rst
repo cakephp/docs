@@ -10,7 +10,7 @@ tasks CakePHP's core helpers can help you accomplish.
 
 CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
-in formatting text, times and numbers, and can even speed up Ajax
+in formatting text, times and numbers, and can even speed up AJAX
 functionality. For more information on the helpers included in CakePHP,
 check out the chapter for each helper:
 

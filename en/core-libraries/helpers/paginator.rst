@@ -382,9 +382,9 @@ named parameters to be converted::
 Configuring the PaginatorHelper to use a javascript helper
 ----------------------------------------------------------
 
-By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do ajax
+By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do AJAX
 features. However, if you don't want that and want to use a custom helper
-for ajax links, you can do so by changing the ``$helpers`` array in your controller.
+for AJAX links, you can do so by changing the ``$helpers`` array in your controller.
 After running ``paginate()`` do the following::
 
     // In your controller action.
@@ -392,7 +392,7 @@ After running ``paginate()`` do the following::
     $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
 Will change the ``PaginatorHelper`` to use the ``CustomJs`` for
-ajax operations. You could also set the 'ajax' key to be any
+AJAX operations. You could also set the 'ajax' key to be any
 helper, as long as that class implements a ``link()`` method that
 behaves like :php:meth:`HtmlHelper::link()`
 
@@ -480,7 +480,7 @@ Other Methods
     Accepted keys for ``$options``:
 
     * ``update`` The Id of the DOM element you wish to update. Creates
-      Ajax enabled links.
+      AJAX enabled links.
     * ``escape`` Whether you want the contents html entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to
