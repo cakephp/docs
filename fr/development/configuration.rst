@@ -759,11 +759,11 @@ Readers de Configuration intégrés
 Configuration de Inflection
 ===========================
 
-Les conventions de nommage de Cake peuvent être vraiment sympas - vous pouvez
-nommer votre table de base de données big\_boxes, votre model BigBox, votre
-controller BigBoxesController, et tout fonctionne ensemble automatiquement.
-La façon dont CakePHP sait comment lier les choses ensemble est
-en *infléctant* les mots entre leurs formes singulière et plurielle.
+Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
+pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
+votre controller BigBoxesController, et tout fonctionne ensemble
+automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
+est en *infléctant* les mots entre leurs formes singulière et plurielle.
 
 Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
 vous pouvez être dans des situations où l'inflecteur de CakePHP (la classe

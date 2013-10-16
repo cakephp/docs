@@ -54,8 +54,8 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    téléchargements du site de notre dépôt GIT, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
-   Le répertoire root de Cake (a besoin d'être copié dans votre document, cela
-   redirige tout vers votre app Cake)::
+   Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
+   cela redirige tout vers votre app CakePHP)::
    
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -63,7 +63,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Le répertoire app de Cake (sera copié dans le répertoire supérieur de votre
+   Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
    application avec Bake)::
    
        <IfModule mod_rewrite.c>
@@ -72,7 +72,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Le répertoire webroot de Cake (sera copié dans le webroot de votre
+   Le répertoire webroot de CakePHP (sera copié dans le webroot de votre
    application avec Bake)::
 
        <IfModule mod_rewrite.c>

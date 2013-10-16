@@ -2,7 +2,7 @@ Migrer de CakePHP 1.2 vers 1.3
 ##############################
 
 Ce guide résume plusieurs des changements nécessaires quand on migre 
-du coeur de Cake 1.2 vers 1.3. Chaque section contient des informations 
+du coeur de CakePHP 1.2 vers 1.3. Chaque section contient des informations 
 pertinentes pour les modifications faîtes aux méthodes existantes 
 ainsi que toute méthode qui a été retirée/renommée.
 

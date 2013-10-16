@@ -1136,9 +1136,9 @@ Ou déclare juste la propriété dans la classe model::
 
 Chacune des ses approches résoudra les erreurs de notice.
 
-La notation de ``find()`` dans Cake 1.2 n'est plus supportée. Les Finds 
+La notation de ``find()`` dans CakePHP 1.2 n'est plus supportée. Les Finds 
 devront utiliser la notation ``$model->find('type', array(PARAMS))`` comme dans 
-Cake 1.3.
+CakePHP 1.3.
 
 - ``Model::$_findMethods`` est maintenant ``Model::$findMethods``.  Cette 
   propriété est maintenant publique et peut être modifiée par les behaviors.
@@ -1146,7 +1146,7 @@ Cake 1.3.
 Objets Database (Base de Données)
 ---------------------------------
 
-Cake 2.0 introduit quelques changements dans les objets Database qui ne 
+CakePHP 2.0 introduit quelques changements dans les objets Database qui ne 
 devraient pas affecter grandement la compatibilité rétro-active. Le plus 
 grand changement est l'adoption de PDO pour la gestion des connections aux 
 bases de données. Si vous utilisez une installation vanilla de PHP 5, vous 

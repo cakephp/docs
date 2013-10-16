@@ -52,7 +52,7 @@ que vous changez les chaînes traduisibles dans votre code.
 Le(s) fichier(s) pot eux mêmes ne sont pas utilisés par CakePHP, ils sont les
 templates utilisés pour créer ou mettre à jour vos fichiers po,
 `po files <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
-traductions. Cake cherchera vos fichiers po dans les dossiers suivants ::
+traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
 
@@ -78,7 +78,7 @@ nouvellement mis à jour.
 Les codes des locales en trois caractères suivent la norme
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 mais si vous créez des locales régionales (en\_US, en\_GB, etc.)
-Cake les utilisera dans les cas appropriés.
+CakePHP les utilisera dans les cas appropriés.
 
 .. warning::
 
@@ -158,7 +158,7 @@ vous avez à faire est dans la partie suivante::
 
     Configure::write('Config.language', 'fra'); 
 
-Ceci signale à Cake quelle locale utiliser (si vous utilisez une locale
+Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
 régionale, comme fr\_FR, la locale
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
 utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue

@@ -326,8 +326,8 @@ doivent aussi être rendus disponibles en arguments passés::
     );
 
 et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
-dans le tableau d'URL comme ci-dessous et Cake sait comment former l'URL comme
-définie dans les routes::
+dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
+comme définie dans les routes::
 
     // view.ctp
     // cela va retourner un lien vers /blog/3-CakePHP_Rocks
@@ -412,7 +412,7 @@ définissez::
 
     Configure::write('Routing.prefixes', array('admin', 'manager'));
 
-Cake va automatiquement générer les routes pour les deux prefixes admin et
+CakePHP va automatiquement générer les routes pour les deux prefixes admin et
 manager. Chaque préfixe configuré va avoir les routes générées suivantes
 pour cela::
 
@@ -1050,7 +1050,7 @@ API du Router
     * ``base`` - défini à false pour retirer le chemin de base à partir
       d'URL générée. Si votre application n'est pas le répertoire root, ceci
       peut être utilisé pour générer les URLs qui sont 'cake relative'. Les
-      URLs Cake relative sont nécessaires quand on utilise requestAction.
+      URLs CakePHP relative sont nécessaires quand on utilise requestAction.
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
     * ``full_base`` - Si à true, la valeur de :php:meth:`Router::fullBaseUrl()`

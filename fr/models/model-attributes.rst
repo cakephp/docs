@@ -116,10 +116,10 @@ Articles. vous pouvez définir $recursive à différentes valeurs basées sur
 la quantité de données que vous souhaitez retourner à partir d'un appel
 $this->Group->find():
 
-* -1 Cake récupère seulement les données de Group, pas de jointures.
-* 0  Cake récupère les données de Group et leur Domain.
-* 1  Cake récupère Group, son domaine et ses Users associés.
-* 2  Cake récupère un Group, son domain, ses Users associés, et les
+* -1 CakePHP récupère seulement les données de Group, pas de jointures.
+* 0  CakePHP récupère les données de Group et leur Domain.
+* 1  CakePHP récupère Group, son domaine et ses Users associés.
+* 2  CakePHP récupère un Group, son domain, ses Users associés, et les
   Articles associés des Users.
 
 Ne le définissez pas à plus que vous n'avez besoin. Faire que CakePHP

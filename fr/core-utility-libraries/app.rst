@@ -355,8 +355,8 @@ Pour charger **app/Vendor/geshi.php**::
 
 .. note::
 
-    Le nom du fichier geshi doit être en minuscule puisque Cake ne le trouvera
-    pas sinon.
+    Le nom du fichier geshi doit être en minuscule puisque CakePHP ne le
+    trouvera pas sinon.
 
 Pour charger **app/Vendor/flickr/flickr.php**::
 
@@ -371,7 +371,7 @@ Pour charger **app/Vendor/services/well.named.php**::
     App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
 Cela ne ferait pas de différence si vos fichiers vendor étaient à l'intérieur
-du répertoire /vendors. Cake le trouvera automatiquement.
+du répertoire /vendors. CakePHP le trouvera automatiquement.
 
 Pour charger **vendors/vendorName/libFile.php**::
 

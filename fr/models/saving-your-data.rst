@@ -578,7 +578,7 @@ Regardons comment les données stockées dans une table jointe pour deux models
 sont sauvegardées. Comme montré dans la section :ref:`hasMany-through`,
 la table jointe est associée pour chaque model en utilisant un type de relation
 `hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole
-Cake qui nous demande d'écrire une application qui lui permette de connecter
+CakePHP qui nous demande d'écrire une application qui lui permette de connecter
 la présence d'un étudiant à un cours avec les journées assistées et
 validées. Jettez un oeil au code suivant.::
 
@@ -634,9 +634,9 @@ Le tableau de données ressemblera à ceci quand il sera soumis.::
 
     )
 
-Cake va heureusement être capable de sauvegarder le lot ensemble et d'assigner
-les clés étrangères de Student et de Course dans CourseMembership avec
-un appel `saveAssociated` avec cette structure de données. Si nous lançons
+CakePHP va heureusement être capable de sauvegarder le lot ensemble et
+d'assigner les clés étrangères de Student et de Course dans CourseMembership
+avec un appel `saveAssociated` avec cette structure de données. Si nous lançons
 l'action index de notre CourseMembershipsController, la structure de données
 reçue maintenant par un find('all') est::
 
@@ -707,7 +707,7 @@ Et le POST résultant::
         )
     )
 
-Encore une fois, Cake est bon pour nous et envoie les id de Student et de
+Encore une fois, CakePHP est bon pour nous et envoie les id de Student et de
 Course dans CourseMembership avec `saveAssociated`.
 
 .. _saving-habtm:
@@ -885,7 +885,7 @@ Devient ceci::
 Que faire quand HABTM devient compliqué?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, Cake
+Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, CakePHP
 supprime toutes les lignes de la table jointe avant d'en sauvegarder de
 nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant)
 associés. Vous mettez ensuite à jour le Club avec 2 Children. Le Club aura

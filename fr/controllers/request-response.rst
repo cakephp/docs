@@ -488,7 +488,7 @@ fichier en réponse::
     }
 
 Comme montré dans l'exemple ci-dessus et comme prévu, vous devez passer le
-chemin du fichier à la méthode. Cake va envoyer le bon en-tête de type de
+chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
 contenu si c'est un type de fichier connu listé dans
 `CakeReponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types avant
 d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode

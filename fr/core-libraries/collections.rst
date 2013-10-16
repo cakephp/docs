@@ -2,7 +2,7 @@ Collections
 ###########
 
 Les Components, les Helpers, les Behaviors et les Tasks partagent tous
-une structure similaire et des comportements. Cake 2.0 fournit
+une structure similaire et des comportements. CakePHP 2.0 fournit
 maintenant une API unifiée pour interagir avec les objets collections
 similaires. L'objet collection dans cakePHP vous donne un moyen uniforme
 d'interagir avec différentes sortes d'objets dans votre application.

@@ -1148,7 +1148,7 @@ Les options de Datetime
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false 
     
     .. versionchanged:: 2.1
-        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans Cake 2.1.
+        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
