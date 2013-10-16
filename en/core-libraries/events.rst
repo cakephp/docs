@@ -11,43 +11,44 @@ itself and it is not trying to do the job other objects should be doing,
 while loosely coupling is the measure of how little a class is "wired"
 to external objects, and how much that class is depending on them.
 
-While most of the CakePHP structure and default libraries will help you
-achieve this goal, there are certain cases where you need to cleanly communicate
-with other parts in the system without having to hard code those dependencies,
-thus losing cohesion and increasing class coupling. Using the Observer pattern,
-which allows objects to notify other objects and anonymous listeners about
-changes, is a successful pattern to acheive this goal.
+There are certain cases where you need to cleanly communicate with other parts
+of an application, without having to hard code dependencies, thus losing
+cohesion and increasing class coupling. Using the Observer pattern, which allows
+objects to notify other objects and anonymous listeners about changes is
+a successful pattern to acheive this goal.
 
 Listeners in the observer pattern can subscribe to events and choose to act upon
-them if they are relevant. If you have used javascript in the past, the chances
-are that you are already familiar with event driven programming.
+them if they are relevant. If you have used javascript, there is a good chance
+that you are already familiar with event driven programming.
 
 CakePHP emulates several aspects of how events are triggered and managed in
-popular javascript libraries such as jQuery. In the CakePHP implementation, an event
-object is carried across all listeners holding the information and the ability
-to stop the event propagation at any point. Listeners can register themselves or
-can delegate this task to other objects and have the chance to alter the state
-and the event itself for the rest of the callbacks.
+popular javascript libraries such as jQuery. In the CakePHP implementation, an
+event object is dispatched to all listeners. The event object holds information
+about the event, and provides the ability to stop event propagation at any
+point. Listeners can register themselves or can delegate this task to other
+objects and have the chance to alter the state and the event itself for the rest
+of the callbacks.
 
 The event subsystem is at the heart of Model, Behavior, Controller, View and
 Helper callbacks. If you've ever used any of them, you are already somewhat
-familiar with the events subsystem.
+familiar with events in CakePHP.
 
 Example event usage
 ===================
 
-Let's suppose you are building a Cart plugin, but you don't really want to
-include shipping logic, emailing the user or decrementing the item from the
-stock. Instead, you would prefer to handle those concerns separately elsewhere
-in your application. If you were not using events, you may try to implement this
-by attaching behaviors to models, or adding components to your controllers.
-Doing the above represents a challenge most of the time, since you would have to
-come up with the code for externally loading those behaviors or attaching hooks
-to your plugin controllers. Instead, you can use the events system to allow you
-to cleanly separate the concerns of your code and build in additional concerns
-using events. For example in your Cart plugin you have an Order model that deals
-with creating orders. You'd like to notify the rest of the application that an
-order has been created. To keep your Order model clean you could use events::
+Let's suppose you are building a Cart plugin, and you'd like to focus on just
+handling order logic. You don't really want to include shipping logic, emailing
+the user or decrementing the item from the stock, but these are important tasks
+to the people using your plugin. If you were not using events, you may try to
+implement this by attaching behaviors to models, or adding components to your
+controllers.  Doing the above represents a challenge most of the time, since you
+would have to come up with the code for externally loading those behaviors or
+attaching hooks to your plugin controllers. Instead, you can use events to allow
+you to cleanly separate the concerns of your code and allow additional concerns
+to hook into your plugin using events. For example in your Cart plugin you have
+an Order model that deals with creating orders. You'd like to notify the rest of
+the application that an order has been created. To keep your Order model clean
+you could use events::
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
@@ -99,7 +100,7 @@ manager. You can access the global manager using a static method::
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach(
         $aCallback,
-        'Model.Order.beforePlace'
+        'Model.Order.afterPlace'
     );
 
 One important thing you should consider is that there are events that will be
@@ -122,7 +123,7 @@ of the :php:class:`CakeEvent` class. Let's look at dispatching an event::
     ));
     $this->getEventManager()->dispatch($event);
 
-:php:class:`CakeEvent` receives 3 arguments in its constructor. The first one is
+:php:class:`CakeEvent` accepts 3 arguments in its constructor. The first one is
 the event name, you should try to keep this name as unique as possible, while
 making it readable. We suggest a convention as follows: ``Layer.eventName`` for
 general events happening at a layer level (e.g. ``Controller.startup``,
@@ -216,7 +217,7 @@ this listener was called at the end of the stack. By calling it at the end of
 the listener stack, we can ensure that the event was not canceled, and that no
 other listeners raised exceptions. We can also get the final state of the
 objects in the case that other listeners have modified the subject or event
-object. Event priorities allow you to handle these situations well.
+object.
 
 Priorities are defined as an integer when adding a listener. The higher the
 number, the later the method will be fired. The default priority for all
