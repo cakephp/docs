@@ -282,7 +282,7 @@ order in which you specify the authenticate object in `AuthComponent::$authentic
 property matters.
 
 If authenticator returns null, `AuthComponent` redirects user to login action.
-If it's an ajax request and `AuthComponent::$ajaxLogin` is specified that element
+If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that element
 is rendered else a 403 http status code is returned.
 
 .. note::
@@ -765,7 +765,7 @@ and authentication mechanics in CakePHP.
 
 .. php:attr:: ajaxLogin
 
-    The name of an optional view element to render when an Ajax request is made
+    The name of an optional view element to render when an AJAX request is made
     with an invalid or expired session.
 
 .. php:attr:: allowedActions

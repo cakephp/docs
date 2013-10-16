@@ -6,11 +6,11 @@ Request Handling
 The Request Handler component is used in CakePHP to obtain
 additional information about the HTTP requests that are made to
 your applications. You can use it to inform your controllers about
-Ajax as well as gain additional insight into content types that the
+AJAX as well as gain additional insight into content types that the
 client accepts and automatically changes to the appropriate layout
 when file extensions are enabled.
 
-By default RequestHandler will automatically detect Ajax requests
+By default RequestHandler will automatically detect AJAX requests
 based on the HTTP-X-Requested-With header that many javascript
 libraries use. When used in conjunction with
 :php:meth:`Router::parseExtensions()` RequestHandler will automatically switch
@@ -113,9 +113,9 @@ Other request 'type' detection methods include:
 
 All of the above request detection methods can be used in a similar
 fashion to filter functionality intended for specific content
-types. For example when responding to Ajax requests, you often will
+types. For example when responding to AJAX requests, you often will
 want to disable browser caching, and change the debug level.
-However, you want to allow caching for non-ajax requests. The
+However, you want to allow caching for non-AJAX requests. The
 following would accomplish that::
 
         if ($this->request->is('ajax')) {
@@ -130,7 +130,7 @@ Obtaining Additional Client Information
 
 .. php:method:: getAjaxVersion()
 
-    Gets Prototype version if call is Ajax, otherwise empty string. The
+    Gets Prototype version if call is AJAX, otherwise empty string. The
     Prototype library sets a special "Prototype version" HTTP header.
 
 Automatically decoding request data
