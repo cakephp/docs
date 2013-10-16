@@ -812,7 +812,7 @@ leurs propres sections dans le manuel.
 
 .. todo::
 
-    Ce chapitre devrait être moins sur l'api de controller et plus sur les
+    Ce chapitre devrait être moins sur l'API de controller et plus sur les
     exemples, la section des attributs du controller est trop chargée et
     difficile à comprendre au premier abord. Le chapitre devrait commencer avec
     quelques exemples de controllers et ce qu'ils font.

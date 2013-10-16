@@ -503,7 +503,7 @@ Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de
 
 Toutes les classes qui ont été chargées dans le passé utilisant 
 ``App::import('Core', $class);`` auront besoin d'être chargées en utlisant 
-``App::uses()`` en référence au bon package. Voir l'api pour localiser les 
+``App::uses()`` en référence au bon package. Voir l'API pour localiser les 
 classes dans leurs nouveaux dossiers. Quelques exemples::
 
     App::import('Core', 'CakeRoute');
