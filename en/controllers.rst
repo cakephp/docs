@@ -10,19 +10,19 @@ controllers thin, and your models fat.  This will help you more easily reuse
 your code and makes your code easier to test.
 
 Commonly, controllers are used to manage the logic around a single model. For
-example, if you were building a site for an on-line bakery, you might have a
+example, if you were building a site for an online bakery, you might have a
 RecipesController and an IngredientsController managing your recipes and their
 ingredients.  In CakePHP, controllers are named after the primary model they
 handle. It's totally possible to have controllers work with more than one model as
 well.
 
-Your application's controllers extend ``AppController`` class, which in turn
+Your application's controllers extend the ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The AppController
 class can be defined in ``/app/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods which are called *actions*.  Actions are
-methods on a controller that handle requests.  By default all public methods on
+methods in a controller that handle requests.  By default all public methods in
 a controller are an action, and accessible from a URL.  Actions are responsible
 for interpreting the request and creating the response.  Usually responses are
 in the form of a rendered view, but there are other ways to create responses as
@@ -67,7 +67,7 @@ child class will always override those in AppController.
     -  $uses
 
 Remember to add the default Html and Form helpers, if you define
-var ``$helpers`` in your AppController
+the ``$helpers`` property in your AppController
 
 Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
@@ -117,7 +117,7 @@ in ``/app/Controller/RecipesController.php`` and contain::
 
 The view files for these actions would be ``app/View/Recipes/view.ctp``,
 ``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``.  The
-conventional view file name is the lower cased and underscored version of the
+conventional view file name is the lowercased and underscored version of the
 action name.
 
 Controller actions generally use :php:meth:`~Controller::set()` to create a
@@ -282,7 +282,7 @@ rendered from the controller.
 
     If ``$view`` starts with '/' it is assumed to be a view or
     element file relative to the ``/app/View`` folder. This allows
-    direct rendering of elements, very useful in ajax calls.
+    direct rendering of elements, very useful in AJAX calls.
     ::
 
         // Render the element in /View/Elements/ajaxreturn.ctp
