@@ -223,7 +223,7 @@ App.baseUrl
     Si vous ne souhaitez pas ou ne pouvez pas avoir le mod\_rewrite (ou
     un autre module compatible) et ne pouvez pas le lancer sur votre
     serveur, vous aurez besoin d'utiliser le système de belles URLs
-    construit dans Cake. Dans ``/app/Config/core.php``,
+    construit dans CakePHP. Dans ``/app/Config/core.php``,
     décommentez la ligne qui ressemble à cela::
     
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));

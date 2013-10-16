@@ -95,7 +95,7 @@ Développement
 =============
 
 Une installation "développement" est la méthode la plus rapide pour lancer
-Cake. Cet exemple vous aidera à installer une application CakePHP et à la
+CakePHP. Cet exemple vous aidera à installer une application CakePHP et à la
 rendre disponible à http://www.example.com/cake\_2\_0/. Nous considérons pour
 les besoins de cet exemple que votre document root pointe sur
 ``/var/www/html``.

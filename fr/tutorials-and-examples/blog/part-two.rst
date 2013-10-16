@@ -337,7 +337,7 @@ autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
 /posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
 Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()``
 pour voir les différents formats d'URL acceptés dans les différentes fonctions
-de Cake.
+de CakePHP.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
