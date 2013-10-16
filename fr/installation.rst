@@ -3,9 +3,9 @@ Installation
 
 CakePHP est rapide et facile à installer. Les conditions minimum requises sont
 un serveur web et une copie de Cake, c'est tout! Bien que ce manuel se focalise
-principalement sur la configuration avec Apache (parce que c'est le cas le plus
-commun), vous pouvez configurer Cake pour lancer une diversité de serveurs web
-tels que LightHTTPD ou Microsoft IIS.
+principalement sur la configuration avec Apache (parce que c'est le plus
+utilisé couramment), vous pouvez configurer Cake pour lancer une diversité de
+serveurs web tels que LightHTTPD ou Microsoft IIS.
 
 Conditions requises
 ===================
@@ -25,7 +25,7 @@ supporte une diversité de moteurs de stockage de données:
 
 .. note::
 
-    Les drivers intégrés requièrent tous PDO. Vous devez vous assurer que vous
+    Tous les drivers intégrés requièrent PDO. Vous devez vous assurer que vous
     avez les bonnes extensions PDO installées.
 
 Licence
@@ -167,7 +167,7 @@ droits pour modifier le ``DocumentRoot`` sur le serveur web Apache.
 Décompressez les contenus de l'archive Cake dans un répertoire de votre
 choix. Pour les besoins de cet exemple, nous considérons que vous avez choisi
 d'installer Cake dans /cake\_install. Votre installation de production devrait
-ressembler à quelque chose comme çà dans votre système de fichiers::
+ressembler à quelque chose comme ceci dans votre système de fichiers::
 
     /cake_install/
         app/
