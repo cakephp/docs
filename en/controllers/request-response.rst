@@ -224,7 +224,7 @@ Since many of the features ``CakeRequest`` offers used to be the realm of
 still fits into the picture.  For 2.0, :php:class:`RequestHandlerComponent`
 acts as a sugar daddy.  Providing a layer of sugar on top of the utility
 `CakeRequest` affords. Sugar like switching layout and views based on content
-types or ajax is the domain of :php:class:`RequestHandlerComponent`.
+types or AJAX is the domain of :php:class:`RequestHandlerComponent`.
 This separation of utility and sugar between the two classes lets you
 more easily pick and choose what you want and what you need.
 
