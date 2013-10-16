@@ -15,7 +15,7 @@ There are certain cases where you need to cleanly communicate with other parts
 of an application, without having to hard code dependencies, thus losing
 cohesion and increasing class coupling. Using the Observer pattern, which allows
 objects to notify other objects and anonymous listeners about changes is
-a successful pattern to acheive this goal.
+a useful pattern to achieve this goal.
 
 Listeners in the observer pattern can subscribe to events and choose to act upon
 them if they are relevant. If you have used javascript, there is a good chance
@@ -41,14 +41,15 @@ handling order logic. You don't really want to include shipping logic, emailing
 the user or decrementing the item from the stock, but these are important tasks
 to the people using your plugin. If you were not using events, you may try to
 implement this by attaching behaviors to models, or adding components to your
-controllers.  Doing the above represents a challenge most of the time, since you
+controllers.  Doing so represents a challenge most of the time, since you
 would have to come up with the code for externally loading those behaviors or
-attaching hooks to your plugin controllers. Instead, you can use events to allow
-you to cleanly separate the concerns of your code and allow additional concerns
-to hook into your plugin using events. For example in your Cart plugin you have
-an Order model that deals with creating orders. You'd like to notify the rest of
-the application that an order has been created. To keep your Order model clean
-you could use events::
+attaching hooks to your plugin controllers.
+
+Instead, you can use events to allow you to cleanly separate the concerns of
+your code and allow additional concerns to hook into your plugin using events.
+For example in your Cart plugin you have an Order model that deals with creating
+orders. You'd like to notify the rest of the application that an order has been
+created. To keep your Order model clean you could use events::
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
@@ -68,8 +69,9 @@ you could use events::
     }
 
 The above code allows you to easily notify the other parts of the application
-that an order has been created allowing you to do tasks like send email
-notifications, update stock, log relevant statistics and other tasks separately.
+that an order has been created. You can then do tasks like send email
+notifications, update stock, log relevant statistics and other tasks in separate
+objects that focus on those concerns.
 
 Accessing event managers
 ========================
@@ -148,7 +150,7 @@ and notifies all subscribed listeners.
 Registering listeners
 =====================
 
-Listeners the preferred way to register callbacks for an event. This is done by
+Listeners are the preferred way to register callbacks for an event. This is done by
 implementing the :php:class:`CakeEventListener` interface in any class you wish
 to register some callbacks. Classes implementing it need to provide the
 ``implementedEvents()`` method. This method must return an associative array
@@ -267,7 +269,7 @@ If you want to enable this feature, you have to add the ``passParams`` option to
 third argument of the ``attach`` method, or declare it in the ``implementedEvents``
 returned array similar to what you do with priorities::
 
-    // Setting priority for a callback
+    // Enabling passed parameters mode for an anonymous listener
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach(
         $callback,
@@ -275,7 +277,7 @@ returned array similar to what you do with priorities::
         array('passParams' => true)
     );
 
-    // Setting priority for a listener
+    // Enabling passed parameters mode for a listener
     class UserStatistic implements CakeEventListener {
         public function implementedEvents() {
             return array(
