@@ -69,8 +69,8 @@ surcharger celles dans AppController.
     -  $helpers
     -  $uses
 
-N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la var
-``$helpers`` dans votre classe AppController.
+N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la
+propriété ``$helpers`` dans votre classe AppController.
 
 Pensez à appeler les fonctions de rappel (callbacks) de AppController dans
 celles du controller enfant pour de meilleurs résultats::
