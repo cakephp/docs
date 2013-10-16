@@ -12,6 +12,9 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf).
 
+These files can vary on different distributions and apache versions.
+You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
+
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
