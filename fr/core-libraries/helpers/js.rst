@@ -180,7 +180,7 @@ Travailler avec des scripts bufferisés
 --------------------------------------
 
 Un inconvénient à la précédente implémentation des fonctionnalités de
-type d'Ajax était la dispersion des balises de script partout dans
+type d'AJAX était la dispersion des balises de script partout dans
 le document , et l'impossibilité de bufferiser les scripts ajoutés par
 les éléments dans la mise en page. Le nouveau Helper Js si il est
 utilisé correctement évite ces deux questions. Il est recommandé
@@ -735,14 +735,14 @@ méthode.
 
 .. _ajax-pagination:
 
-La Pagination Ajax
+La Pagination AJAX
 ==================
 
-Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
+Bien mieux qu'avec la pagination AJAX de la 1.2, vous pouvez utiliser
 le Helper JS pour gérer les liens de pagination AJAX au lieu de
 liens HTML.
 
-Fabriquer les liens Ajax
+Fabriquer les liens AJAX
 ------------------------
 
 Avant de pouvoir créer les liens ajax vous devez inclure la librairie
@@ -789,7 +789,7 @@ du buffer. A la fin de votre fichier de vue. Vérifiez l'inclusion de::
     echo $this->Js->writeBuffer();
 
 Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de 
-paginiation Ajax. Quand vous écrivez le buffer, cela l'efface également ,
+pagination AJAX. Quand vous écrivez le buffer, cela l'efface également ,
 et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 
 Ajouter des effets et des transitions

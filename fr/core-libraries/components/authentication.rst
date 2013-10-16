@@ -812,7 +812,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:attr:: ajaxLogin
 
-    Le nom d'une vue optionnelle d'un élément à rendre quand une requête Ajax
+    Le nom d'une vue optionnelle d'un élément à rendre quand une requête AJAX
     est faite avec une session expirée invalide.
     
 .. php:attr: allowedActions

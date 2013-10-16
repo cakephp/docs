@@ -6,11 +6,11 @@ Request Handling (Gestion des requêtes)
 Le component Request Handler est utilisé dans CakePHP pour obtenir des
 informations supplémentaires au sujet des requêtes HTTP qui sont faites à votre
 application. Vous pouvez l'utiliser pour informer vos controllers des processus
-Ajax, autant que pour obtenir des informations complémentaires sur les types de
+AJAX, autant que pour obtenir des informations complémentaires sur les types de
 contenu que le client accepte et modifie automatiquement dans le layout
 approprié, quand les extensions de fichier sont disponibles.
 
-Par défaut, le RequestHandler détectera automatiquement les requêtes Ajax
+Par défaut, le RequestHandler détectera automatiquement les requêtes AJAX
 basées sur le header HTTP-X-Requested-With, qui est utilisé par de nombreuses
 librairies javascript. Quand il est utilisé conjointement avec
 :php:meth:`Router::parseExtensions()`, RequestHandler changera automatiquement

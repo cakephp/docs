@@ -408,7 +408,7 @@ actions du controller en utilisant quelque chose comme::
 CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
 du layout default de CakePHP) que vous pouvez utiliser dans votre propre
 application: 'ajax' et 'flash'.
-Le layout Ajax est pratique pour élaborer des réponses Ajax - c'est un layout
+Le layout AJAX est pratique pour élaborer des réponses AJAX - c'est un layout
 vide (la plupart des appels ajax ne nécessitent qu'un peu de balise en retour,
 et pas une interface de rendu complète). Le layout flash est utilisé
 pour les messages montrés par la méthode :php:meth:`Controller::flash()`.

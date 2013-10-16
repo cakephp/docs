@@ -412,8 +412,8 @@ Configurer le Helper Paginator pour utiliser le Helper Javascript
 -----------------------------------------------------------------
 
 Par défaut le ``Helper Paginator`` utilise :php:class:`JsHelper` pour effectuer
-les fonctionnalités Ajax. Toutefois, si vous ne voulez pas cela et que vous
-voulez utiliser un Helper personnalisé pour les liens Ajax, vous pouvez le
+les fonctionnalités AJAX. Toutefois, si vous ne voulez pas cela et que vous
+voulez utiliser un Helper personnalisé pour les liens AJAX, vous pouvez le
 faire en changeant le tableau ``$helpers`` dans votre controller.
 Après avoir lancé ``paginate()`` faîtes ce qui suit::
 
@@ -422,7 +422,7 @@ Après avoir lancé ``paginate()`` faîtes ce qui suit::
     $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
 Changera le ``Helper Paginator`` pour utiliser ``CustomJs`` pour
-les opérations Ajax. Vous pourriez aussi définir la clé Ajax
+les opérations AJAX. Vous pourriez aussi définir la clé AJAX
 pour être un Helper, tant que la classe implémente la méthode
 ``link()`` qui se comporte comme :php:meth:`HtmlHelper::link()`.
 
@@ -513,13 +513,13 @@ D'autres Méthodes
     Les clés acceptées pour ``$options``:
 
         * **update** - L' Id de l'élément DOM que vous souhaitez actualiser.
-            Créé des liens près pour Ajax.
+            Créé des liens près pour AJAX.
         * **escape** Si vous voulez que le contenu soit encodé comme une
             entité html, par défaut à true.
         * **model** Le model à utiliser, par défaut à
             PaginatorHelper::defaultModel().
 
-    Créé un lien ordinaire ou Ajax avec des paramètres de pagination::
+    Créé un lien ordinaire ou AJAX avec des paramètres de pagination::
 
         echo $this->Paginator->link('Sort by title on page 5',
                 array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));

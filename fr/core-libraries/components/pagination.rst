@@ -345,9 +345,9 @@ quand une exception `NotFoundException` est attrapée::
 Pagination AJAX 
 ===============
 
-C'est très simple d'incorporer les fonctionnalités Ajax dans la pagination.
+C'est très simple d'incorporer les fonctionnalités AJAX dans la pagination.
 en utilisant :php:class:`JsHelper` et :php:class:`RequestHandlerComponent`
-vous pouvez facilement ajouter des paginations Ajax à votre application.
+vous pouvez facilement ajouter des paginations AJAX à votre application.
 Voir :ref:`ajax-pagination` pour plus d'information.
 
 Pagination dans la vue
