@@ -347,7 +347,7 @@ might look like:
 
 The ``script``, ``css`` and ``meta`` blocks contain any content defined
 in the views using the built-in HTML helper. Useful for including
-javascript and CSS files from views.
+JavaScript and CSS files from views.
 
 .. note::
 

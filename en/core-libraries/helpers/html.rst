@@ -359,7 +359,7 @@ methods of the HtmlHelper and how to use them.
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Specify ``$confirmMessage`` to display a javascript ``confirm()``
+    Specify ``$confirmMessage`` to display a JavaScript ``confirm()``
     dialog::
 
         echo $this->Html->link(
@@ -578,7 +578,7 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: script(mixed $url, mixed $options)
 
-    :param mixed $url: Either a string to a single Javascript file, or an
+    :param mixed $url: Either a string to a single JavaScript file, or an
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
@@ -598,8 +598,8 @@ methods of the HtmlHelper and how to use them.
     generated script tag. If an array of script tags is used, the
     attributes will be applied to all of the generated script tags.
 
-    This method of javascript file inclusion assumes that the
-    javascript file specified resides inside the ``/app/webroot/js``
+    This method of JavaScript file inclusion assumes that the
+    JavaScript file specified resides inside the ``/app/webroot/js``
     directory::
 
         echo $this->Html->script('scripts');

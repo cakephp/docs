@@ -18,11 +18,11 @@ objects to notify other objects and anonymous listeners about changes is
 a useful pattern to achieve this goal.
 
 Listeners in the observer pattern can subscribe to events and choose to act upon
-them if they are relevant. If you have used javascript, there is a good chance
+them if they are relevant. If you have used JavaScript, there is a good chance
 that you are already familiar with event driven programming.
 
 CakePHP emulates several aspects of how events are triggered and managed in
-popular javascript libraries such as jQuery. In the CakePHP implementation, an
+popular JavaScript libraries such as jQuery. In the CakePHP implementation, an
 event object is dispatched to all listeners. The event object holds information
 about the event, and provides the ability to stop event propagation at any
 point. Listeners can register themselves or can delegate this task to other
