@@ -379,7 +379,7 @@ named parameters to be converted::
 
     $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
 
-Configuring the PaginatorHelper to use a javascript helper
+Configuring the PaginatorHelper to use a JavaScript helper
 ----------------------------------------------------------
 
 By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do AJAX

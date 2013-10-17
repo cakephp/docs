@@ -595,7 +595,7 @@ links that allow users to delete posts, however:
     </table>
 
 Using :php:meth:`~FormHelper::postLink()` will create a link that uses
-Javascript to do a POST request deleting our post.  Allowing content to be
+JavaScript to do a POST request deleting our post.  Allowing content to be
 deleted using GET requests is dangerous, as web crawlers could accidentally
 delete all your content.
 
