@@ -70,7 +70,7 @@ methods of the HtmlHelper and how to use them.
 
     .. versionchanged:: 2.4
 
-    :param mixed $path: Either a string of the css file to link, or an array with multiple files
+    :param mixed $path: Either a string of the CSS file to link, or an array with multiple files
     :param array $options: An array of options or :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
@@ -106,13 +106,13 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    You can include css files from any loaded plugin using
+    You can include CSS files from any loaded plugin using
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     You could use the following::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
-    If you want to include a css file which shares a name with a loaded
+    If you want to include a CSS file which shares a name with a loaded
     plugin you can do the following.  For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 

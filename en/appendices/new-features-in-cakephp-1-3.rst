@@ -66,7 +66,7 @@ See :doc:`JsHelper documentation </core-libraries/helpers/js>` for more informat
 
 **Pagination Helper**
 
-Pagination helper provides additional css classes for styling and
+Pagination helper provides additional CSS classes for styling and
 you can set the default sort() direction.
 ``PaginatorHelper::next()`` and ``PaginatorHelper::prev()`` now
 generate span tags by default, instead of divs.

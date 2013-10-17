@@ -811,8 +811,8 @@ indicator effects yourself:
 
 Remember to place the indicator.gif file inside app/webroot/img
 folder. You may see a situation where the indicator.gif displays
-immediately upon the page load. You need to put in this css
-``#busy-indicator { display:none; }`` in your main css file.
+immediately upon the page load. You need to put in this CSS
+``#busy-indicator { display:none; }`` in your main CSS file.
 
 With the above layout, we've included an indicator image file, that
 will display a busy indicator animation that we will show and hide
