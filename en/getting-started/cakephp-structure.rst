@@ -19,7 +19,7 @@ application-wide changes. AppController (located at
 ``/app/Model/AppModel.php``) are great places to put methods you want to share
 between all controllers, helpers or models.
 
-Although they aren't classes or files, routes play a role in
+Although routes aren't classes or files, they play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the
 URL ``/controller/action/var1/var2`` maps to
