@@ -312,6 +312,8 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
         day, month, year, hour, minute, and meridian selects
     time
         hour, minute, and meridian selects
+    binary
+        file
 
     The ``$options`` parameter allows you to customize how ``input()`` works,
     and finely control what is generated.
@@ -321,6 +323,9 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     true``. One limitation of this behavior is the field's model must have
     been loaded during this request. Or be directly associated to the
     model supplied to :php:meth:`~FormHelper::create()`.
+
+    .. versionadded:: 2.5
+        The binary type now maps to a file input.
 
     .. versionadded:: 2.3
 

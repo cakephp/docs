@@ -107,3 +107,9 @@ View
 
 - :php:meth:`View::get()` now accepts a second argument to provide a default
   value.
+
+FormHelper
+----------
+
+- FormHelper will now generate file inputs for ``binary`` field types now.
+
