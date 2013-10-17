@@ -389,6 +389,26 @@ resource
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
     indiquer si il est inconnu, ou les types possibles.
 
+Casting
+-------
+
+Pour le casting, nous utilisons:
+
+Type
+    Description
+(bool)
+		Cast pour boolean.
+(int)
+		Cast pour integer.
+(float)
+		Cast pour float.
+(string)
+		Cast pour string.
+(array)
+		Cast pour array.
+(object)
+		Cast pour object.
+
 Constantes
 ----------
 
