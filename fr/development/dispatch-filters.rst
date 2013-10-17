@@ -35,7 +35,7 @@ Chacune de ces valeurs de tableaux sont des noms de classe qui seront
 instanciés et ajoutés en écouteurs des évènements générés au niveau du
 dispatcher. Le premier, ``AssetDispatcher`` est là pour vérifier si la
 requête se réfère au theme ou au fichier d'asset du plugin, comme le css,
-le javascript ou une image stockée dans soit un dossier du webroot du plugin,
+le JavaScript ou une image stockée dans soit un dossier du webroot du plugin,
 soit dans celui correspondant au Theme. Il servira le fichier selon s'il est
 trouvé ou non, stoppant le reste du cycle de dispatchement. Le filtre
 ``CacheDispatcher``, quand la variable de config ``Cache.check`` est

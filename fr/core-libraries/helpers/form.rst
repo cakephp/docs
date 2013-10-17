@@ -1470,7 +1470,7 @@ Création des boutons et des éléments submits
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que javascript  soit autorisé dans votre navigateur.
+    Requiert que JavaScript  soit autorisé dans votre navigateur.
     
     Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette
     méthode dans un formulaire existant. En remplacement vous devriez

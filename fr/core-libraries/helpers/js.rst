@@ -4,11 +4,11 @@ JSHelper
 .. php:class:: Helper Js(View $view, array $settings = array())
 
 Depuis le début le support de CakePHP pour Javascript a été
-orienté vers Prototype/Scriptaculous (librairie javascript).
+orienté vers Prototype/Scriptaculous (librairie JavaScript).
 Tandis que nous continuons de penser qu'il s'agit d'excellentes
 bibliothèques Javascript, il a été demandé à la communauté de
 supporter d'autres librairies. Plutôt que d'enlever Prototype en faveur
-d'une autre librairie javascript. Nous avons créé un adaptateur fonctionnant
+d'une autre librairie JavaScript. Nous avons créé un adaptateur fonctionnant
 sur le principe d'un Helper et avons inclu 3 des librairies les plus demandées.
 Prototype/scriptaculous, Mootools/Mootools-more, et jQuery/jQueryUI.
 Bien que l'API n'est pas aussi vaste que le Helper Ajax, nous
@@ -17,15 +17,15 @@ plus extensible offrant aux développeurs la puissance et la
 flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
 
 Les moteurs Javascript forment l'épine dorsale du nouveau Helper Js.
-Un moteur javascript traduit un élément Javascript abstrait dans
-un code javascript concret spécifique à la librairie en cours
+Un moteur JavaScript traduit un élément Javascript abstrait dans
+un code JavaScript concret spécifique à la librairie en cours
 d'utilisation. De plus ils créent un système extensible à utiliser
 pour les autres.
 
 Utilisation d'un moteur Javascript spécifique
 =============================================
 
-Avant tout, téléchargez votre librairie javascript préférée et placez la
+Avant tout, téléchargez votre librairie JavaScript préférée et placez la
 dans ``app/webroot/js``.
 
 Puis, vous devez inclure la librairie dans votre page. Pour l'inclure
@@ -92,10 +92,10 @@ Helper personnalisé::
 
 .. note::
 
-    Il n'est pas possible de déclarer le moteur javascript dans un
+    Il n'est pas possible de déclarer le moteur JavaScript dans un
     Helper personnalisé. Ceci n'aurait aucun effet.
 
-Si vous êtes prêt à utiliser un moteur javascript autre que celui
+Si vous êtes prêt à utiliser un moteur JavaScript autre que celui
 par défaut, faîtes le paramétrage du Helper dans votre controller
 comme ceci::
 
@@ -110,9 +110,9 @@ comme ceci::
     Assurez-vous de déclarer le Helper Js et son moteur **en haut**
     du tableau ``$helpers`` dans votre controller.
 
-Le moteur javascript séléctionné peut disparaître (remplacé par celui par
+Le moteur JavaScript séléctionné peut disparaître (remplacé par celui par
 défaut) de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
-et vous obtiendrez du code qui ne correspond pas à votre librairie javascript.
+et vous obtiendrez du code qui ne correspond pas à votre librairie JavaScript.
 
 Création d'un moteur Javascript
 ===============================
@@ -375,7 +375,7 @@ méthode.
 
 .. php:method:: set(mixed $one, mixed $two = null)
 
-    Passe des variables dans javascript. Vous permet de définir des variables
+    Passe des variables dans JavaScript. Vous permet de définir des variables
     qui seront retournées quand le buffer est extrait avec
     :php:meth:`Helper Js::getBuffer()` ou :php:meth:`Helper Js::writeBuffer()`.
     La variable Javascript utilisée pour retourner les variables peut être
@@ -607,7 +607,7 @@ méthode.
 
 .. php:method:: alert($message)
 
-    Créé un extrait de code javascript contenant un ``alert()``. Par
+    Créé un extrait de code JavaScript contenant un ``alert()``. Par
     défaut, ``alert`` ne bufferise pas, et retourne le morceau de script
     suivant.::
 

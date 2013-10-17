@@ -371,7 +371,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 
     Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de
-    confirmation ``confirm()`` javascript::
+    confirmation ``confirm()`` JavaScript::
 
         echo $this->Html->link(
             'Delete',
@@ -611,8 +611,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour la balise script générée. Si un tableau de balise script est utilisé,
     les attributs seront appliqués à toutes les balises script générées.
 
-    Cette méthode d'inclusion de fichier javascript suppose que les fichiers
-    javascript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
+    Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
+    JavaScript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
 
         echo $this->Html->script('scripts');
 
@@ -709,7 +709,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         $this->Html->scriptStart(array('inline' => false));
 
-        echo $this->Js->alert('je suis dans le javascript');
+        echo $this->Js->alert('je suis dans le JavaScript');
 
         $this->Html->scriptEnd();
 

@@ -58,4 +58,4 @@ CakePHP :
 
 .. meta::
     :title lang=fr: Qu'est-ce que CakePHP? Pourquoi l'utiliser?
-    :keywords lang=fr: urls personnalisées,syntaxe php,sécurité cookie,interaction avec base de données,sécurité session,rapid manner,equipe de programmeurs,gratuit open source,javascript html,apache configuration,répertoire site web,formulaires html,génération de code,développement framework,monotonie,développement rapide,scaffolding,dispatcher,communauté amicale,crud
+    :keywords lang=fr: urls personnalisées,syntaxe php,sécurité cookie,interaction avec base de données,sécurité session,rapid manner,equipe de programmeurs,gratuit open source,JavaScript html,apache configuration,répertoire site web,formulaires html,génération de code,développement framework,monotonie,développement rapide,scaffolding,dispatcher,communauté amicale,crud

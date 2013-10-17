@@ -23,12 +23,12 @@ possiblement anonymes des changements d'états internes.
 
 Les écouteurs (listener) dans le modèle observateur (Observer pattern) peuvent
 s'abonner à de tel événements et choisir d'interagir sur eux, modifier l'état
-du sujet ou simplement faire des logs. Si vous avez utilisez javascript dans
+du sujet ou simplement faire des logs. Si vous avez utilisez JavaScript dans
 le passé, vous avez la chance d'être déjà familier avec la programmation
 événementielle.
 
 CakePHP émule plusieurs aspects sur la façon dont les événements sont
-déclenchés et managés dans des frameworks javascript comme le populaire
+déclenchés et managés dans des frameworks JavaScript comme le populaire
 jQuery, tout en restant fidèle à sa conception orientée objet. Dans cette
 implémentation, un objet événement est transporté a travers tous les écouteurs
 qui détiennent l'information et la possibilité d'arrêter la propagation des

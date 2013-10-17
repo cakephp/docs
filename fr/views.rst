@@ -344,7 +344,7 @@ ressembler::
 
 Les blocks ``script``, ``css`` et ``meta`` contiennent tout contenu défini
 dans les vues en utilisant le helper HTML intégré. Il est utile pour inclure
-les fichiers javascript et les CSS à partir des vues.
+les fichiers JavaScript et les CSS à partir des vues.
 
 .. note::
 
@@ -692,7 +692,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
     Ajoute du contenu au buffer des scripts internes. Ce buffer est rendu
     disponible dans le layout dans ``$scripts_for_layout``. Cette méthode est
-    utile quand vous créez des helpers qui ont besoin d'ajouter du javascript
+    utile quand vous créez des helpers qui ont besoin d'ajouter du JavaScript
     ou du css directement au layout. Gardez à l'esprit que les scripts ajoutés
     à partir du layout, ou des elements du layout ne seront pas ajoutés à
     ``$scripts_for_layout``. Cette méthode est plus souvent utilisée de
