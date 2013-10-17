@@ -33,7 +33,7 @@ added::
 Each of those array values are class names that will be instantiated and added
 as listeners for the events generated at dispatcher level. The first one,
 ``AssetDispatcher`` is meant to check whether the request is referring to a theme
-or plugin asset file, such as a css, javascript or image stored on either a
+or plugin asset file, such as a CSS, JavaScript or image stored on either a
 plugin's webroot folder or the corresponding one for a Theme. It will serve the
 file accordingly if found, stopping the rest of the dispatching cycle. The ``CacheDispatcher``
 filter, when ``Cache.check`` config variable is enabled, will check if the

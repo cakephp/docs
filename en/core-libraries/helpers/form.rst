@@ -1435,7 +1435,7 @@ Creating buttons and submit elements
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
     Creates an HTML link, but access the URL using method POST. Requires
-    javascript to be enabled in browser.
+    JavaScript to be enabled in browser.
 
     This method creates a ``<form>`` element. So do not use this method inside
     an existing form. Instead you should add a submit button using
@@ -1627,7 +1627,7 @@ special ``_Token`` inputs are generated.
 .. php:method:: unlockField($name)
 
     Unlocks a field making it exempt from the ``SecurityComponent`` field
-    hashing.  This also allows the fields to be manipulated by Javascript.
+    hashing.  This also allows the fields to be manipulated by JavaScript.
     The ``$name`` parameter should be the entity name for the input::
 
         $this->Form->unlockField('User.id');
