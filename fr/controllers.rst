@@ -574,7 +574,7 @@ Autres Méthodes utiles
         'return' dans les options : ``requestAction($url, array('return'))``.
         Il est important de noter que faire un requestAction en utilisant
         'return' à partir d'une méthode d'un controller peut entraîner des
-        problèmes de fonctionnement dans les script et tags css.
+        problèmes de fonctionnement dans les script et tags CSS.
 
     .. warning::
 

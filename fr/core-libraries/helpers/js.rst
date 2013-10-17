@@ -816,7 +816,7 @@ Rappelez vous de placer le fichier indicator.gif dans le répertoire
 app/webroot/img. Vous devriez voir une situation où indicator.gif
 s'affiche immédiatement au chargement de la page. Vous avez
 besoin d'insérer cet indicateur  ``#busy-indicator { display:none; }``
-dans votre fichier css principal.
+dans votre fichier CSS principal.
 
 Avec le layout ci-dessus, nous avons inclus un indicateur, qui affichera
 une animation "occupé" que nous aurons à montrer et cacher

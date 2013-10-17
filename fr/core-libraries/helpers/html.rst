@@ -71,7 +71,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionchanged:: 2.4
 
-    :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau
+    :param mixed $path: Soit une chaîne du fichier CSS à lier, ou un tableau
        avec plusieurs fichiers.    
     :param array $options: Un tableau d'options ou :term:`attributs html`.
 
@@ -111,14 +111,14 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    Vous pouvez inclure un fichier css depuis un plugin chargé en utilisant
+    Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant
     :term:`syntaxe de plugin`. Pour inclure
     ``app/Plugin/DebugKit/webroot/css/toolbar.css``, vous pouvez utiliser ce
     qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
-    Si vous voulez inclure un fichier css qui partage un nom avec un plugin
+    Si vous voulez inclure un fichier CSS qui partage un nom avec un plugin
     chargé vous pouvez faire ce qui suit. Par exemple vous avez un plugin
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::

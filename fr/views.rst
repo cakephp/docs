@@ -249,7 +249,7 @@ une valeur par défaut en utilisant le 2ème argument::
 .. versionchanged:: 2.3
     L'argument ``$default`` a été ajouté dans 2.3.
 
-Utiliser des blocks pour les fichiers de script et les css
+Utiliser des blocks pour les fichiers de script et les CSS
 ----------------------------------------------------------
 
 .. versionadded:: 2.1
@@ -693,7 +693,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
     Ajoute du contenu au buffer des scripts internes. Ce buffer est rendu
     disponible dans le layout dans ``$scripts_for_layout``. Cette méthode est
     utile quand vous créez des helpers qui ont besoin d'ajouter du JavaScript
-    ou du css directement au layout. Gardez à l'esprit que les scripts ajoutés
+    ou du CSS directement au layout. Gardez à l'esprit que les scripts ajoutés
     à partir du layout, ou des elements du layout ne seront pas ajoutés à
     ``$scripts_for_layout``. Cette méthode est plus souvent utilisée de
     l'intérieur des helpers, comme pour les helpers
