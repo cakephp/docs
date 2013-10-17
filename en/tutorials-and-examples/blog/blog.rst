@@ -184,7 +184,7 @@ A Note on mod\_rewrite
 ======================
 
 Occasionally a new user will run into mod\_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or css styles),
+if the CakePHP welcome page looks a little funny (no images or CSS styles),
 it probably means mod\_rewrite isn't functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:

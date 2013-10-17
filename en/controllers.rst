@@ -545,7 +545,7 @@ Other Useful Methods
         by passing 'return' in the options:
         ``requestAction($url, array('return'));``. It is important to note
         that making a requestAction using 'return' from a controller method
-        can cause script and css tags to not work correctly.
+        can cause script and CSS tags to not work correctly.
 
     .. warning::
 
