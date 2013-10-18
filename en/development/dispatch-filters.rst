@@ -183,7 +183,7 @@ Inline Filters
 ==============
 
 Our last example will use an anonymous function (only available on PHP 5.3+) to
-serve a list of posts in json format, we encourage you to do so using
+serve a list of posts in JSON format, we encourage you to do so using
 controllers and the :php:class:`JsonView` class, but let's imagine you need to save a
 few milliseconds for this mission-critical API endpoint::
 

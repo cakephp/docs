@@ -110,7 +110,7 @@ default, do the helper setup in your controller as follows::
     ``$helpers`` array in your controller.
 
 The selected JavaScript engine may disappear (replaced by the
-default) from the jsHelper object in your helper, if you miss to do
+default) from the JsHelper object in your helper, if you miss to do
 so and you will get code that does not fit your JavaScript
 library.
 
@@ -156,7 +156,7 @@ in PHP4 and the above sample would be written like::
 Common options
 --------------
 
-In attempts to simplify development where Js libraries can change,
+In attempts to simplify development where JavaScript libraries can change,
 a common set of options is supported by ``JsHelper``, these common
 options will be mapped out to the library specific options
 internally. If you are not planning on switching JavaScript
