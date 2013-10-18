@@ -295,7 +295,7 @@ you want the filenames to appear in the recipient's mail client:
    Content ID (when set the content ID the attachment is transformed to inline).
    The mimetype and contentId are optional in this form.
 
-   4.1. When you are using the ``contentId``, you can use the file in the html
+   4.1. When you are using the ``contentId``, you can use the file in the HTML
    body like ``<img src="cid:my-content-id">``.
 
    4.2. You can use the ``contentDisposition`` option to disable the

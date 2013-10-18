@@ -158,7 +158,7 @@ text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
 debug()
 -------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes
+:php:func:`debug()` no longer outputs HTML in the console. Instead it makes
 output like the following::
 
     ########## DEBUG ##########

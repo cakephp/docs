@@ -681,7 +681,7 @@ available.
 
     :rtype: string
 
-    The enum method works well when using html select elements. It
+    The enum method works well when using HTML select elements. It
     returns a value from an array list if the key exists.
 
     If a comma separated $list is passed arrays are numeric with the

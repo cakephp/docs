@@ -352,7 +352,7 @@ JavaScript and CSS files from views.
 .. note::
 
     When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
-    in view files, specify 'false' for the 'inline' option to place the html
+    in view files, specify 'false' for the 'inline' option to place the HTML
     source in a block with the same name. (See API for more details on usage).
 
 The ``content`` block contains the contents of the rendered view.

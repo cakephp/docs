@@ -47,7 +47,7 @@ metadata in the controller action and pass it to your view using
 the :php:meth:`Controller::set()` method but this is inappropriate. That
 information can also go in the view. That will come later though,
 for now if you have a different set of logic for the data used to
-make the RSS feed and the data for the html view you can use the
+make the RSS feed and the data for the HTML view you can use the
 :php:meth:`RequestHandler::isRss()` method, otherwise your controller can stay
 the same::
 
