@@ -232,7 +232,7 @@ these steps:
     </configuration>
 
 Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, CSS, js, and rerouting should work
+rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
 correctly.
 
 I don't / can't use URL rewriting
