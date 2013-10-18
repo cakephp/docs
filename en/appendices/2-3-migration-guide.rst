@@ -239,7 +239,7 @@ FormHelper
 - The FormHelper now also adds the HTML5 ``required`` attribute to your input
   elements based on validation rules for a field. If you have a "Cancel" button
   in your form which submits the form then you should add ``'formnovalidate' => true``
-  to your button options to prevent the triggering of validation in html. You
+  to your button options to prevent the triggering of validation in HTML. You
   can also prevent the validation triggering for the whole form by adding
   ``'novalidate' => true`` in your FormHelper::create() options.
 - :php:meth:`FormHelper::input()` now generates input elements of type ``tel``
