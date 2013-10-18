@@ -64,7 +64,7 @@ Displaying notifications or flash messages
 
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html:
+    The above will output a simple message, with the following HTML:
 
     .. code-block:: html
 

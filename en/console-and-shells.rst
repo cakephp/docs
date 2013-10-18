@@ -329,7 +329,7 @@ output levels inside your CakePHP shells.
 Styling output
 ==============
 
-Styling output is done by including tags - just like html - in your output.
+Styling output is done by including tags - just like HTML - in your output.
 ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
 are several built in styles, and you can create more.  The built in ones are

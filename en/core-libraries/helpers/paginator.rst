@@ -28,7 +28,7 @@ the returned link will sort by 'desc'.
 
 Accepted keys for ``$options``:
 
-* ``escape`` Whether you want the contents html entity encoded, defaults to
+* ``escape`` Whether you want the contents HTML entity encoded, defaults to
   true.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 
@@ -160,7 +160,7 @@ pages in the paged data set.
     ``$options`` and ``$disabledOptions`` supports the following keys:
 
     * ``tag`` The tag wrapping tag you want to use, defaults to 'span'. Set this to ``false`` to disable this option.
-    * ``escape`` Whether you want the contents html entity encoded,
+    * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTag`` Tag to use instead of A tag when there is no previous page
@@ -481,7 +481,7 @@ Other Methods
 
     * ``update`` The Id of the DOM element you wish to update. Creates
       AJAX enabled links.
-    * ``escape`` Whether you want the contents html entity encoded,
+    * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to
       :php:meth:`PaginatorHelper::defaultModel()`.

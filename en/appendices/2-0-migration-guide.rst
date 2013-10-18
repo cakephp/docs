@@ -1239,9 +1239,9 @@ features for more information on new APIs that are available.
 Debugging
 =========
 
-The ``debug()`` function now defaults to outputting html safe strings. This is
+The ``debug()`` function now defaults to outputting HTML safe strings. This is
 disabled if being used in the console. The ``$showHtml`` option for ``debug()``
-can be set to false to disable html-safe output from debug.
+can be set to false to disable HTML-safe output from debug.
 
 ConnectionManager
 =================

@@ -658,7 +658,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Create an html anchor element that has a click event bound to it.
+    Create an HTML anchor element that has a click event bound to it.
     Options can include both those for :php:func:`HtmlHelper::link()` and
     :php:func:`JsHelper::request()`, :php:func:`JsHelper::event()`, ``$options``
     is a :term:`html attributes` array that are appended to the generated 
@@ -693,7 +693,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'htmlAttributes' => array('other' => 'value')
         ));
 
-    Outputs the following html:
+    Outputs the following HTML:
 
     .. code-block:: html
 

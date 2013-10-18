@@ -243,7 +243,7 @@ HtmlHelper
 - :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
 - The ``$startText`` parameter of :php:meth:`HtmlHelper::getCrumbs()` can now be
   an array.  This gives more control and flexibility over the first crumb link.
-- :php:meth:`HtmlHelper::docType()` now defaults to html5.
+- :php:meth:`HtmlHelper::docType()` now defaults to HTML5.
 - :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
 - :php:meth:`HtmlHelper::media()` has been added.  You can use this method to
   create HTML5 audio/video elements.

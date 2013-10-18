@@ -9,8 +9,8 @@ Glossary
         
             array('controller' => 'posts', 'action' => 'view', 5)
 
-    html attributes
-        An array of key => values that are composed into html attributes. For example::
+    HTML attributes
+        An array of key => values that are composed into HTML attributes. For example::
             
             // Given
             array('class' => 'my-class', 'target' => '_blank')
