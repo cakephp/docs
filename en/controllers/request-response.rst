@@ -291,8 +291,11 @@ CakeRequest API
 .. php:method:: input($callback, [$options])
 
     Retrieve the input data for a request, and optionally pass it through a
-    decoding function.  Additional parameters for the decoding function
-    can be passed as arguments to input().
+    decoding function. Useful when interacting with XML or JSON
+    request body content. Additional parameters for the decoding function
+    can be passed as arguments to input()::
+    
+        $this->request->input('json_decode');
 
 .. php:method:: data($name)
 
