@@ -249,6 +249,16 @@ always be preceded by a newline.
 Including files
 ===============
 
+``include``, ``require``, ``include_once`` and ``require_once`` do not have parentheses::
+
+    // wrong = parentheses
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // good = no parentheses
+    require_once 'ClassFileName.php';
+    require_once $class;
+
 When including files with classes or libraries, use only and always the
 `require\_once <http://php.net/require_once>`_ function.
 
