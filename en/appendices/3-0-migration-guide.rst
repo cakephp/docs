@@ -138,8 +138,8 @@ access to callbacks, as there were never any callbacks to use.
 ApiShell removed
 ----------------
 
-The ApiShell was removed as it doesn't provide any benefit over the file source itself
-and the online documentation/API. I can be continued as a plugin shell if desired.
+The ApiShell was removed as it didn't provide any benefit over the file source itself
+and the online documentation/API. It can be continued as a plugin shell if desired.
 
 Event
 =====
