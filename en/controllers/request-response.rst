@@ -152,13 +152,13 @@ determining whether or not your application is in a subdirectory.
 Inspecting the request
 ======================
 
-Detecting various request conditions used to require using
+In older versions detecting various request conditions used to require
 :php:class:`RequestHandlerComponent`. These methods have been moved to
-``CakeRequest``, and offer a new interface alongside a more backwards compatible
-usage::
+:php:class:`CakeRequest`, which offers a new interface alongside a more
+backwards compatible usage::
 
     $this->request->is('post');
-    $this->request->isPost();
+    $this->request->isPost(); // deprecated
 
 Both method calls will return the same value. For the time being the methods
 are still available on RequestHandler, but are deprecated and still might be
@@ -209,22 +209,22 @@ Some examples would be::
     );
 
 ``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
-:php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
-help applications with subdomains, have a slightly easier life.
+:php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` which makes
+life of applications with subdomains slightly easier.
 
 There are several built-in detectors that you can use:
 
-* ``is('get')`` Check to see if the current request is a GET.
-* ``is('put')`` Check to see if the current request is a PUT.
-* ``is('post')`` Check to see if the current request is a POST.
-* ``is('delete')`` Check to see if the current request is a DELETE.
-* ``is('head')`` Check to see if the current request is HEAD.
-* ``is('options')`` Check to see if the current request is OPTIONS.
-* ``is('ajax')`` Check to see of the current request came with
+* ``is('get')`` Checks if the current request is a GET.
+* ``is('put')`` Checks if the current request is a PUT.
+* ``is('post')`` Checks if the current request is a POST.
+* ``is('delete')`` Checks if the current request is a DELETE.
+* ``is('head')`` Checks if the current request is HEAD.
+* ``is('options')`` Checks if the current request is OPTIONS.
+* ``is('ajax')`` Checks if the current request came with
   X-Requested-with = XmlHttpRequest.
-* ``is('ssl')`` Check to see if the request is via SSL
-* ``is('flash')`` Check to see if the request has a User-Agent of Flash
-* ``is('mobile')`` Check to see if the request came from a common list
+* ``is('ssl')`` Checks if the current request is via SSL
+* ``is('flash')`` Checks if the current request has a User-Agent of Flash
+* ``is('mobile')`` Checks if the current request came from a common list
   of mobile agents.
 
 
@@ -533,8 +533,8 @@ until the response is actually sent.
 
 .. versionadded:: 2.4
 
-You can now use the convenience method :php:meth:`CakeResponse::location()` to directly set or get
-the redirect location header.
+You can now use the convenience method :php:meth:`CakeResponse::location()` to
+directly set or get the redirect location header.
 
 Interacting with browser caching
 ================================
