@@ -271,7 +271,7 @@ Merry                   Deny Ale         Denying ale.
 ======================= ================ =======================
 
 Defining Permissions: CakePHP's INI-based ACL
-==========================================
+=============================================
 
 CakePHP's first ACL implementation was based on INI files stored in
 the CakePHP installation. While it's useful and stable, we recommend
@@ -365,7 +365,7 @@ using the ACL component.
 
 
 Defining Permissions: CakePHP's Database ACL
-=========================================
+============================================
 
 Now that we've covered INI-based ACL permissions, let's move on to
 the (more commonly used) database ACL.
