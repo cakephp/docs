@@ -139,7 +139,7 @@ ApiShell removed
 ----------------
 
 The ApiShell was removed as it didn't provide any benefit over the file source itself
-and the online documentation/API.
+and the online documentation/`API <http://api.cakephp.org/>`_.
 
 Event
 =====
