@@ -316,7 +316,7 @@ Cache API
     config will be used. ``Cache::read()`` will return the cached value
     if it is a valid cache or ``false`` if the cache has expired or
     doesn't exist. The contents of the cache might evaluate false, so
-    make sure you use the strict comparison operator ``===`` or
+    make sure you use the strict comparison operators: ``===`` or
     ``!==``.
 
     For example::
