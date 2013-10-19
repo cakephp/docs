@@ -108,9 +108,8 @@ with CakePHP::
         }
 
         public function delete($id = null) {
-            if (!$this->request->is('post')) {
-                throw new MethodNotAllowedException();
-            }
+            $this->request->onlyAllow('post');
+
             $this->User->id = $id;
             if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
