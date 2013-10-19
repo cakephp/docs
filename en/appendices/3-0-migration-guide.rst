@@ -135,6 +135,12 @@ on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code. Tasks no longer have
 access to callbacks, as there were never any callbacks to use.
 
+ApiShell removed
+----------------
+
+The ApiShell was removed as it didn't provide any benefit over the file source itself
+and the online documentation/`API <http://api.cakephp.org/>`_.
+
 Event
 =====
 
