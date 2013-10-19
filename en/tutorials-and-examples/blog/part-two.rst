@@ -442,7 +442,7 @@ like::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -460,7 +460,7 @@ This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the post does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
-Next the action checks that the request is a POST request.  If it is, then we
+Next the action checks whether the request is either a POST or a PUT request.  If it is, then we
 use the POST data to update our Post record, or kick back and show the user
 validation errors.
 
