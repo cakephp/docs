@@ -139,7 +139,7 @@ ApiShell removed
 ----------------
 
 The ApiShell was removed as it didn't provide any benefit over the file source itself
-and the online documentation/API. It can be continued as a plugin shell if desired.
+and the online documentation/API.
 
 Event
 =====
