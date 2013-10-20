@@ -1123,8 +1123,8 @@ Form Element-Specific Methods
 
     Creates a select element, populated with the items in ``$options``,
     with the option specified by ``$attributes['value']`` shown as selected by
-    default. Set to false the the 'empty' key in the ``$attributes`` variable
-    to turn off the default empty option::
+    default.  Set the 'empty' key in the ``$attributes`` variable to false to
+    turn off the default empty option::
 
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options);
