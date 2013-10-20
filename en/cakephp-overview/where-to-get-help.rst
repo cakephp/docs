@@ -74,6 +74,7 @@ and South America users. We'd love to hear from you, whether you
 need some help, want to find users in your area, or would like to
 donate your brand new sports car.
 
+.. _cakephp-official-communities:
 
 CakePHP Official Communities
 ============================
