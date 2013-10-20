@@ -83,6 +83,14 @@ CakePHP also has a very active Google Group. It can be a great
 resource for finding archived answers, frequently asked questions,
 and getting answers to immediate problems.
 
+The Facebook Group
+==================
+`https://www.facebook.com/groups/cake.community <https://www.facebook.com/groups/cake.community>`_
+
+CakePHP has it's official group in Facebook. The Official CakePHP 
+Facebook Group is an open group for community discussions, sharing plugins 
+and framework related trends, as well as updates and announcements from the CakePHP project.
+
 CakePHP Questions
 =================
 
