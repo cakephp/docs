@@ -268,7 +268,7 @@ Before your request you'll need to change the responseClass property::
 
 .. versionchanged:: 2.3
     As of 2.3.0 you should extend ``HttpSocketResponse`` instead.  This
-    avoids a common issue with the http pecl extension.
+    avoids a common issue with the HTTP PECL extension.
 
 Downloading the results
 -----------------------
