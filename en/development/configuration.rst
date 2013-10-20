@@ -337,18 +337,20 @@ special cases.
 Loading custom inflections
 --------------------------
 
-You can use :php:meth:`Inflector::rules()` in the file
+You can use :php:meth:`Cake\Utility\Inflector::rules()` in the file
 ``app/Config/bootstrap.php`` to load custom inflections::
 
-    Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
-        'uninflected' => array('singulars'),
-        'irregular' => array('spins' => 'spinor')
-    ));
+    Inflector::rules('singular', [
+        'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
+        'uninflected' => ['singulars'],
+        'irregular' => ['spins' => 'spinor']
+    ]);
 
 or::
 
-    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
+    Inflector::rules('plural', [
+        'irregular' => ['phylum' => 'phyla']
+    ]);
 
 Will merge the supplied rules into the inflection sets defined in
 lib/Cake/Utility/Inflector.php, with the added rules taking precedence

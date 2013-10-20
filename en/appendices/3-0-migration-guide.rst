@@ -521,6 +521,28 @@ I18n
 Utility
 =======
 
+Inflector
+---------
+
+Transliterations for :php:meth:`Cake\Utility\Inflector::slug()` have changed. If
+you use custom transliterations you will need to update your code. Instead of
+regular expressions, transliterations use simple string replacement. This
+yielded significant performance improvements::
+
+    // Instead of
+    Inflector::rules('transliteration', array(
+        '/ä|æ/' => 'ae',
+        '/å/' => 'aa'
+    ));
+
+    // You should use
+    Inflector::rules('transliteration', [
+        'ä' => 'ae',
+        'æ' => 'ae',
+        'å' => 'aa'
+    ]);
+
+
 Sanitize
 --------
 
