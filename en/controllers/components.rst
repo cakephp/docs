@@ -12,7 +12,7 @@ use to aid in:
 .. include:: /core-libraries/toc-components.rst
     :start-line: 7
 
-Each of these core components are detailed in their own chapters.
+Each of these core components is detailed in its own chapter.
 For now, we'll show you how to create your own components. Creating
 components keeps controller code clean and allows you to reuse code
 between projects.
@@ -38,9 +38,10 @@ method::
             'Cookie' => array('name' => 'CookieMonster')
         );
 
-Would be an example of configuring a component with the
-``$components`` array. All core components allow their
-configuration settings to be set in this way. In addition you can
+The previous fragment of code would be an example of
+configuring a component with the ``$components`` array.
+All core components allow their
+configuration settings to be set in this way. In addition, you can
 configure components in your controller's ``beforeFilter()``
 method. This is useful when you need to assign the results of a
 function to a component property. The above could also be expressed
@@ -152,7 +153,7 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in ``/app/Controller/Component/MathComponent.php``. The basic
+the file in ``app/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     App::uses('Component', 'Controller');
@@ -171,7 +172,7 @@ Including your component in your controllers
 --------------------------------------------
 
 Once our component is finished, we can use it in the application's
-controllers by placing the component's name (minus the "Component"
+controllers by placing the component's name (without the "Component"
 part) in the controller's ``$components`` array. The controller will
 automatically be given a new attribute named after the component,
 through which we can access an instance of it::
@@ -199,9 +200,8 @@ the Component::
 
 The above would pass the array containing precision and
 randomGenerator to ``MathComponent::__construct()`` as the
-second parameter.  By convention, any settings that have been passed
-that are also public properties on your component will have the values
-set based on the settings.
+second parameter.  By convention, if array keys match component's public
+properties, the properties will be set to the values of these keys.
 
 
 Using other Components in your Component
@@ -235,7 +235,9 @@ way you include them in controllers - using the ``$components`` var::
         }
     }
 
-Note that in contrast to a component included in a controller no callbacks will be triggered on a component's component.
+.. note::
+    In contrast to a component included in a controller
+    no callbacks will be triggered on a component's component.
 
 .. _component-api:
 
@@ -260,34 +262,33 @@ Callbacks
 
 .. php:method:: initialize(Controller $controller)
 
-    The initialize method is called before the controller's
+    Is called before the controller's
     beforeFilter method.
 
 .. php:method:: startup(Controller $controller)
 
-    The startup method is called after the controller's beforeFilter
+    Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
 .. php:method:: beforeRender(Controller $controller)
 
-    The beforeRender method is called after the controller executes the
-    requested action's logic but before the controller's renders views
-    and layout.
+    Is called after the controller executes the requested action's logic,
+    but before the controller's renders views and layout.
 
 .. php:method:: shutdown(Controller $controller)
 
-    The shutdown method is called before output is sent to browser.
+    Is called before output is sent to the browser.
 
 .. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
 
-    The beforeRedirect method is invoked when the controller's redirect
+    Is invoked when the controller's redirect
     method is called but before any further action. If this method
     returns false the controller will not continue on to redirect the
     request. The $url, $status and $exit variables have same meaning as
     for the controller's method. You can also return a string which
-    will be interpreted as the URL to redirect to or return associative
-    array with key 'url' and optionally 'status' and 'exit'.
+    will be interpreted as the URL to redirect to or return an associative
+    array with the key 'url' and optionally 'status' and 'exit'.
 
 
 
