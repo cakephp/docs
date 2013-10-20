@@ -201,8 +201,8 @@ headers to receive the JSON version of that URL.
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` now supports http only cookies. You can enable
-their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
+:php:class:`CookieComponent` now supports HTTP only cookies. You can enable
+their use by setting ``$this->Cookie->httpOnly = true;``. Having HTTP only
 cookies will make them inaccessible from the browser.
 
 Security Component CSRF separation
