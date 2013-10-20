@@ -283,7 +283,7 @@ property matters.
 
 If authenticator returns null, `AuthComponent` redirects user to login action.
 If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that element
-is rendered else a 403 http status code is returned.
+is rendered else a 403 HTTP status code is returned.
 
 .. note::
 
