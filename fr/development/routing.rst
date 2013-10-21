@@ -433,10 +433,10 @@ utilisant le helper HTML pour construire vos liens va aider à maintenir les
 appels préfixés. Voici comment construire le lien en utilisant le helper HMTL::
 
     // Allez dans une route préfixée.
-    echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
+    echo $this->Html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
 
     // laissez un préfixe
-    echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
+    echo $this->Html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
 .. index:: plugin routing
 
@@ -447,13 +447,13 @@ Le routage des Plugins utilise la clé **plugin**. Vous pouvez créer des liens
 qui pointent vers un plugin, mais en ajoutant la clé plugin à votre tableau
 d'URL::
 
-    echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
+    echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
 Inversement, si la requête active est une requête de plugin et que vous
 voulez créer un lien qui ne pointe pas vers un plugin, vous pouvez faire
 ce qui suit::
 
-    echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
+    echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
 
 En définissant ``plugin => null``, vous indiquez au Routeur que vous souhaitez
 créer un lien qui n'est pas une partie d'un plugin.
@@ -485,8 +485,8 @@ créer votre route comme illustré ci-dessous::
 
 Ensuite pour créer des liens qui s'adapteront aux routes, utilisez simplement::
 
-    $html->link(
-        'Link title', 
+    $this->Html->link(
+        'Link title',
         array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
     );
 
