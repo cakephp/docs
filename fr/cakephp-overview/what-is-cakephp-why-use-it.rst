@@ -29,7 +29,7 @@ constamment amélioré.
 Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant
 CakePHP :
 
--  `Communauté active et sympathique <http://cakephp.org/feeds>`_.
+-  `Communauté active et sympathique :ref:`cakephp-official-communities`.
 -  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_.
 -  Compatible avec les versions PHP 5.2.8 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_.
