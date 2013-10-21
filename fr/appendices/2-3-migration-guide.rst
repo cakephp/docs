@@ -201,7 +201,7 @@ HttpSocket
   pour augmenter ce comportement. Regardez :ref:`http-socket-ssl-options`
   pour plus d'informations.
 - ``HttpResponse`` a été renommée en ``HttpSocketResponse``. Ceci évite
-  un problème commun avec l'extension pecl http. Il y a une classe
+  un problème commun avec l'extension HTTP PECL. Il y a une classe
   ``HttpResponse`` fournie ainsi que pour des raisons de compatibilité.
 
 Routing

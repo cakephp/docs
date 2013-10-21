@@ -313,7 +313,7 @@ l'objet d'authentification dans les propriétés de
 
 Si authenticator retourne null, `AuthComponent` redirige l'user vers l'action
 login. Si c'est une requête ajax et `AuthComponent::$ajaxLogin` est spécifiée,
-cet element est rendu, sinon un code de statut http 403 est retourné.
+cet element est rendu, sinon un code de statut HTTP 403 est retourné.
 
 .. note::
 

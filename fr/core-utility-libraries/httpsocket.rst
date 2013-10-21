@@ -276,7 +276,7 @@ Avant votre requête, vous devrez changer la propriété responseClass::
 
 .. versionchanged:: 2.3
     Depuis 2.3.0, vous devriez étendre ``HttpSocketResponse`` à la place. Cela
-    évite un problème commun avec l'extension pecl http.
+    évite un problème commun avec l'extension HTTP PECL.
 
 Télécharger les résultats
 -------------------------

@@ -219,9 +219,9 @@ URL.
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` supporte maintenant seulement les cookies http. 
+:php:class:`CookieComponent` supporte maintenant seulement les cookies HTTP. 
 Vous pouvez les activer en utilisant ``$this->Cookie->httpOnly = true;``. 
-Avoir seulement les cookies http les rendra inaccessible à partir du navigateur.
+Avoir seulement les cookies HTTP les rendra inaccessible à partir du navigateur.
 
 Security Component CSRF separation
 ----------------------------------
