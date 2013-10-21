@@ -96,8 +96,8 @@ Développement
 
 Une installation "développement" est la méthode la plus rapide pour lancer
 CakePHP. Cet exemple vous aidera à installer une application CakePHP et à la
-rendre disponible à http://www.example.com/cake\_2\_0/. Nous considérons pour
-les besoins de cet exemple que votre document root pointe sur
+rendre disponible à l'adresse http://www.example.com/cake\_2\_0/. Nous
+considérons pour les besoins de cet exemple que votre document root pointe sur
 ``/var/www/html``.
 
 Décompressez le contenu de l'archive CakePHP dans ``/var/www/html``. Vous avez
