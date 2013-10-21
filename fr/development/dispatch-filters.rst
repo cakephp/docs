@@ -199,7 +199,7 @@ Filtres Inline
 ==============
 
 Notre dernier exemple va utiliser une fonction anonyme (seulement disponible
-sur PHP 5.3+) pour servir une liste de posts dans un format json, nous
+sur PHP 5.3+) pour servir une liste de posts dans un format JSON, nous
 vous encourageons à faire ainsi l'utilisation des controllers et la classe
 :php:class:`JsonView`, mais imaginons que vous ayez besoin de gagner une tout
 petite milliseconde pour cette mission-critical API endpoint::

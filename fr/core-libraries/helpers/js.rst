@@ -111,7 +111,7 @@ comme ceci::
     du tableau ``$helpers`` dans votre controller.
 
 Le moteur JavaScript séléctionné peut disparaître (remplacé par celui par
-défaut) de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
+défaut) de l'objet JsHelper dans votre helper, si vous oubliez de faire cela
 et vous obtiendrez du code qui ne correspond pas à votre librairie JavaScript.
 
 Création d'un moteur Javascript
@@ -161,12 +161,12 @@ n'est pas possible dans PHP4 et l'exemple ci-dessus devrait être
 Options communes
 ----------------
 
-Dans le but de simplifier le développement et comme les librairies Js peuvent
-changer, un ensemble courant d'options est pris en charge par ``JsHelper``,
-Ces options courantes seront mappées en dehors des options spécifiques de la
-librairies en interne. Si vous ne prévoyez pas la commutation des librairies,
-chaque librairie supporte toutes les fonctions de callback natives et les
-options.
+Dans le but de simplifier le développement et comme les librairies JavaScript
+peuvent changer, un ensemble courant d'options est pris en charge par
+``JsHelper``, ces options courantes seront mappées en dehors des options
+spécifiques de la librairies en interne. Si vous ne prévoyez pas la commutation
+des librairies, chaque librairie supporte toutes les fonctions de callback
+natives et les options.
 
 Enveloppement de Callback
 -------------------------

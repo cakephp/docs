@@ -237,7 +237,7 @@ faire, suivez ces étapes:
     </configuration>
 
 Une fois que le fichier web.config est créé avec les bonnes règles de
-réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et
+réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
 
 Je ne veux / ne peux utiliser l'URL rewriting
