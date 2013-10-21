@@ -425,7 +425,7 @@ Helper
   to fully prevent XSS. Instead you should escape content with :php:func:`h` or
   use a dedicated libray like HTMLPurifier.
 - :php:meth:`Cake\\View\\Helper::output()` was removed. This method was
-  deprecated in 2.x and has been removed now.
+  deprecated in 2.x.
 - Magic accessors to deprecated properties has been removed. The following
   properties now need to be accessed on the request object:
 
