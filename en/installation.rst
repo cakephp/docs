@@ -201,7 +201,7 @@ the status of your current database connection.
 Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
-Not working? If you're getting timezone related error from PHP
+Not working? If you're getting timezone related errors from PHP
 uncomment one line in ``app/Config/core.php``::
 
    /**
