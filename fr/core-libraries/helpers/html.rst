@@ -410,7 +410,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            array('controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
         );
 
     Affichera:
