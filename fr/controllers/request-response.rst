@@ -310,9 +310,12 @@ API de CakeRequest
 .. php:method:: input($callback, [$options])
 
     Récupère les données d'entrée pour une requête, et les passe
-    optionnellement à travers une fonction qui décode. Les paramètres
-    supplémentaires pour la fonction décodant peuvent être passés comme des
-    arguments de input().
+    optionnellement à travers une fonction qui décode. Utile lors des
+    interactions avec une requête de contenu de corps XML ou JSON. Les
+    paramètres supplémentaires pour la fonction décodant peuvent être passés
+    comme des arguments de input()::
+
+        $this->request->input('json_decode');
 
 .. php:method:: data($name)
 
