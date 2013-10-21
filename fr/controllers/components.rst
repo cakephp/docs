@@ -25,9 +25,8 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication`,
-:doc:`/core-libraries/components/cookie`
-et :doc:`/core-libraries/components/email`.
+:doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
 de vos controllers::
