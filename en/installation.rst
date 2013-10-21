@@ -68,7 +68,7 @@ CakePHP uses the ``app/tmp`` directory for a number of different
 operations. A few examples would be Model descriptions, cached
 views and session information.
 
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
+As such, make sure the directory ``app/tmp`` and all its subdirectories in your CakePHP installation
 are writable by the web server user.
 
 Setup
@@ -152,7 +152,7 @@ Production
 
 A production installation is a more flexible way to setup CakePHP.
 Using this method allows an entire domain to act as a single
-CakePHP application. This example will help you install Cake
+CakePHP application. This example will help you install CakePHP
 anywhere on your filesystem and make it available at
 http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
