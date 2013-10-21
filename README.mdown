@@ -80,7 +80,7 @@ it is a good idea to go over the generated terms and clean-up whatever noise it 
 Making search work locally
 --------------------------
 
-* Install elasticesearch.  This varies based on your platform, but most
+* Install elasticsearch.  This varies based on your platform, but most
   package managers have a package for it.
 * Clone the [docs_search](https://github.com/cakephp/docs_search) into a
   web accessible directory directory.
