@@ -91,7 +91,7 @@ CakePHP: development, production, and advanced.
 Development
 ===========
 
-A development installation is the fastest method to setup Cake.
+A development installation is the fastest method to setup CakePHP.
 This example will help you install a CakePHP application and make
 it available at http://www.example.com/cake\_2\_0/. We assume for
 the purposes of this example that your document root is set to
@@ -150,7 +150,7 @@ find CakePHP automatically.
 Production
 ==========
 
-A production installation is a more flexible way to setup Cake.
+A production installation is a more flexible way to setup CakePHP.
 Using this method allows an entire domain to act as a single
 CakePHP application. This example will help you install Cake
 anywhere on your filesystem and make it available at
