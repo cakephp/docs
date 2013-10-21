@@ -254,6 +254,17 @@ fichier, doivent toujours être précédés par un retour à la ligne.
 Inclure les fichiers
 ====================
 
+``include``, ``require``, ``include_once`` et ``require_once`` n'ont pas de
+parenthèses::
+
+    // mauvais = parenthèses
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // bon = pas de parenthèses
+    require_once 'ClassFileName.php';
+    require_once $class;
+
 Quand on inclut les fichiers avec des classes ou librairies, utilisez seulement
 et toujours la fonction `require\_once <http://php.net/require_once>`_.
 
