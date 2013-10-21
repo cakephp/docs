@@ -455,7 +455,7 @@ ressembler::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -474,9 +474,10 @@ enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
 post n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
-Ensuite l'action vérifie que la requête est une requête POST. Si elle l'est,
-alors nous utilisons les données POST pour mettre à jour notre enregistrement
-Post, ou sortir et montrer les erreurs de validation à l'utilisateur.
+Ensuite l'action vérifie si la requête est une requête POST ou PUT. Si elle
+l'est, alors nous utilisons les données POST pour mettre à jour notre
+enregistrement Post, ou sortir et montrer les erreurs de validation à
+l'utilisateur.
 
 Si il n'y a pas de données définies dans ``$this->request->data``, nous le
 définissons simplement dans le post récupéré précédemment.
