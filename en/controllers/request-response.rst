@@ -267,7 +267,7 @@ CakeRequest API
 .. php:method:: onlyAllow($methods)
 
     Set allowed HTTP methods, if not matched will throw MethodNotAllowedException
-    The 405 response will include the required 'Allow' header with the passed methods
+    The 405 response will include the required ``Allow`` header with the passed methods
 
     .. versionadded:: 2.3
 
@@ -415,13 +415,13 @@ Changing the response class
 ===========================
 
 CakePHP uses ``CakeResponse`` by default. ``CakeResponse`` is a flexible and
-transparent to use class.  But if you need to replace it with an application
+transparent to use class. If you need to replace it with an application
 specific class, you can override and replace ``CakeResponse`` with
-your own class.  By replacing the CakeResponse used in index.php.
+your own class by replacing CakeResponse in app/webroot/index.php.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`.  You can also replace the response
-instance used by setting ``$this->response`` in your controllers. Overriding the
+instance by setting ``$this->response`` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
 out the methods that interact with ``header()``.  See the section on
 :ref:`cakeresponse-testing` for more information.
@@ -461,7 +461,7 @@ to send a file as response::
         return $this->response;
     }
 
-As shown in above example as expected you have to pass the file path to the method.
+As shown in the above example, you have to pass the file path to the method.
 CakePHP will send proper content type header if it's a known file type listed in
 `CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
 by using the :php:meth:`CakeResponse::type()` method.
@@ -474,8 +474,8 @@ the browser by specifying the options::
 Sending a string as file
 ========================
 
-To send a file as response which does not exist on disk, for instance when you generate pdf or ics on the fly and want
-to serve the generated string as file you can do that by using::
+You can respond with a file that does not exist on the disk, for instance with
+a pdf or an ics generated on the fly, and serve the generated string as a file by using::
 
     public function sendIcs() {
         $icsString = $this->Calendar->generateIcs();
@@ -504,7 +504,7 @@ can be called with a few different parameter configurations::
 
 Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls.  Headers are not sent when
-:php:meth:`CakeResponse::header()` is called either.  They are just buffered
+:php:meth:`CakeResponse::header()` is called; instead they are buffered
 until the response is actually sent.
 
 .. versionadded:: 2.4
@@ -515,7 +515,7 @@ the redirect location header.
 Interacting with browser caching
 ================================
 
-You sometimes need to force browsers to not cache the results of a controller
+You sometimes need to force browsers not to cache the results of a controller
 action.  :php:meth:`CakeResponse::disableCache()` is intended for just that::
 
     public function index() {
@@ -538,8 +538,9 @@ You can also tell clients that you want them to cache responses. By using
 
 The above would tell clients to cache the resulting response for 5 days,
 hopefully speeding up your visitors' experience. ``cache()`` sets the
-Last-Modified value to the first argument. Expires, and Max-age are set based on
-the second parameter. Cache-Control is set to public as well.
+Last-Modified value to the first argument.
+``Expires`` header and the ``max-age`` directive are set based on the second parameter.
+Cache-Control's ``public`` directive is set as well.
 
 
 .. _cake-response-caching:
@@ -553,7 +554,7 @@ they should use a cached copy of the response by setting a few headers such as
 modified time, response entity tag and others.
 
 Opposed to having to code the logic for caching and for invalidating (refreshing)
-it once the data has changed, HTTP uses two models, expiration and validation
+it once the data has changed, HTTP uses two models, expiration and validation,
 which usually are a lot simpler than having to manage the cache yourself.
 
 Apart from using :php:meth:`CakeResponse::cache()` you can also use many other
@@ -566,13 +567,13 @@ The Cache Control header
 .. versionadded:: 2.1
 
 Used under the expiration model, this header contains multiple indicators
-which can change the way browsers or proxies use the cached content. A
-Cache-Control header can look like this::
+that can change the way browsers or proxies use the cached content. A
+``Cache-Control`` header can look like this::
 
     Cache-Control: private, max-age=3600, must-revalidate
 
 ``CakeResponse`` class helps you set this header with some utility methods that
-will produce a final valid Cache-Control header. First of them is :php:meth:`CakeResponse::sharable()`
+will produce a final valid ``Cache-Control`` header. First of them is :php:meth:`CakeResponse::sharable()`
 method, which indicates whether a response in to be considered sharable across
 different users or clients or users. This method actually controls the `public`
 or `private` part of this header. Setting a response as private indicates that
@@ -580,8 +581,8 @@ all or part of it is intended for a single user. To take advantage of shared
 caches it is needed to set the control directive as public
 
 Second parameter of this method is used to specify a `max-age` for the cache,
-which is the number of seconds after which the response is no longer considered
-fresh.::
+which is the number of seconds, after which the response is no longer considered
+fresh::
 
     public function view() {
         ...
@@ -595,16 +596,15 @@ fresh.::
         $this->response->sharable(false, 3600);
     }
 
-``CakeResponse`` exposes separate methods for setting each of the components in
-the Cache-Control header.
+``CakeResponse`` exposes separate methods for setting each of the directives in
+the ``Cache-Control`` header.
 
 The Expiration header
 ---------------------
 
 .. versionadded:: 2.1
 
-Also under the cache expiration model, you can set the `Expires` header, which
-according to the HTTP specification is the date/time after which the response is
+You can set the ``Expires`` header to a date and time after which the response is
 no longer considered fresh. This header can be set using the
 :php:meth:`CakeResponse::expires()` method::
 
@@ -612,7 +612,7 @@ no longer considered fresh. This header can be set using the
         $this->response->expires('+5 days');
     }
 
-This method also accepts a DateTime or any string that can be parsed by the
+This method also accepts a DateTime instance or any string that can be parsed by the
 DateTime class.
 
 The Etag header
@@ -623,17 +623,17 @@ The Etag header
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
 longer fresh. Under this model, the client continues to store pages in the
-cache, but instead of using it directly, it asks the application every time
-whether the resources changed or not. This is commonly used with static
-resources such as images and other assets.
+cache, but it asks the application every time
+whether the resource has changed, instead of using it directly.
+This is commonly used with static resources such as images and other assets.
 
-The Etag header (called entity tag) is string that uniquely identifies the
-requested resource. It is very much like the checksum of a file, caching
+The ``Etag`` header (called entity tag) is a string that uniquely identifies the
+requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
-To actually get advantage of using this header you have to either call manually
-:php:meth:`CakeResponse::checkNotModified()` method or have the :php:class:`RequestHandlerComponent`
-included in your controller::
+To take advantage of this header you have to either call the 
+:php:meth:`CakeResponse::checkNotModified()` method manually or to have the
+:php:class:`RequestHandlerComponent` included in your controller::
 
     public function index() {
         $articles = $this->Article->find('all');
@@ -649,14 +649,14 @@ The Last Modified header
 
 .. versionadded:: 2.1
 
-Also under the HTTP cache validation model, you can set the `Last-Modified`
+Also, under the HTTP cache validation model, you can set the ``Last-Modified``
 header to indicate the date and time at which the resource was modified for the
-last time. Setting this header helps CakePHP respond to caching clients whether
-the response was modified or not based on the client cache.
+last time. Setting this header helps CakePHP to tell caching clients whether
+the response was modified or not based on the their cache.
 
 To actually get advantage of using this header you have to either call manually
-:php:meth:`CakeResponse::checkNotModified()` method or have the :php:class:`RequestHandlerComponent`
-included in your controller::
+:php:meth:`CakeResponse::checkNotModified()` method or have the
+:php:class:`RequestHandlerComponent` included in your controller::
 
     public function view() {
         $article = $this->Article->find('first');
@@ -671,9 +671,8 @@ The Vary header
 ---------------
 
 In some cases you might want to serve different contents using the same URL.
-This is often the case when you have a multilingual page or respond with
-different HTML according to the browser that is requesting the resource. For
-such circumstances, you use the Vary header::
+This is often the case if you have a multilingual page or respond with different 
+HTMLs depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');
     $this->response->vary('Accept-Encoding', 'User-Agent');
@@ -685,9 +684,9 @@ CakeResponse and testing
 ========================
 
 Probably one of the biggest wins from ``CakeResponse`` comes from how it makes
-testing controllers and components easier.  Instead of methods spread across
-several objects, you only have a single object to mock as controllers and
-components delegate to ``CakeResponse``.  This helps you get closer to a 'unit'
+testing controllers and components easier.  Instead of having methods spread across
+several objects, you only have to mock a single object, since controllers and
+components delegate to ``CakeResponse``.  This helps you to get closer to a 'unit'
 test and makes testing controllers easier::
 
     public function testSomething() {
@@ -696,8 +695,8 @@ test and makes testing controllers easier::
         // ...
     }
 
-Additionally you can more easily run tests from the command line, as you can use
-mocks to avoid the 'headers sent' errors that can come up from trying to set
+Additionally, you can run tests from the command line more easily, as you can use
+mocks to avoid the 'headers sent' errors, which can come up from trying to set
 headers in CLI.
 
 
@@ -711,17 +710,17 @@ CakeResponse API
 
 .. php:method:: header($header = null, $value = null)
 
-    Allows you to directly set one or many headers to be sent with the response.
+    Allows you to directly set one or more headers to be sent with the response.
 
 .. php:method:: location($url = null)
 
-    Allows you to directly set the redirect location header to be sent with the response.
+    Allows you to directly set the redirect location header to be sent with the response::
 
-    // Set the redirect location
-    $this->response->location('http://example.com');
+        // Set the redirect location
+        $this->response->location('http://example.com');
 
-    // Get the current redirect location header
-    $location = $this->response->location();
+        // Get the current redirect location header
+        $location = $this->response->location();
 
     .. versionadded:: 2.4
 
@@ -731,7 +730,7 @@ CakeResponse API
 
 .. php:method:: type($contentType = null)
 
-    Sets the content type for the response.  You can either use a known content
+    Sets the content type of the response.  You can either use a known content
     type alias or the full content type name.
 
 .. php:method:: cache($since, $time = '+1 day')
@@ -744,26 +743,26 @@ CakeResponse API
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Sets the Cache-Control header to be either `public` or `private` and
+    Sets the ``Cache-Control`` header to be either `public` or `private` and
     optionally sets a `max-age` directive of the resource
 
     .. versionadded:: 2.1
 
 .. php:method:: expires($time = null)
 
-    Allows to set the `Expires` header to a specific date.
+    Allows to set the ``Expires`` header to a specific date.
 
     .. versionadded:: 2.1
 
 .. php:method:: etag($tag = null, $weak = false)
 
-    Sets the `Etag` header to uniquely identify a response resource.
+    Sets the ``Etag`` header to uniquely identify a response resource.
 
     .. versionadded:: 2.1
 
 .. php:method:: modified($time = null)
 
-    Sets the `Last-Modified` header to a specific date and time in the correct
+    Sets the ``Last-Modified`` header to a specific date and time in the correct
     format.
 
     .. versionadded:: 2.1
@@ -771,8 +770,8 @@ CakeResponse API
 .. php:method:: checkNotModified(CakeRequest $request)
 
     Compares the cache headers for the request object with the cache header from
-    the response and determines if it can still be considered fresh. In that
-    case deletes any response contents and sends the `304 Not Modified` header.
+    the response and determines if it can still be considered fresh. If so,
+    deletes the response content, and sends the `304 Not Modified` header.
 
     .. versionadded:: 2.1
 
@@ -782,15 +781,15 @@ CakeResponse API
 
 .. php:method:: download($filename)
 
-    Allows you to send the response as an attachment and set the filename.
+    Allows you to send a response as an attachment, and to set its filename.
 
 .. php:method:: statusCode($code = null)
 
-    Allows you to set the status code for the response.
+    Allows you to set the status code of the response.
 
 .. php:method:: body($content = null)
 
-    Set the content body for the response.
+    Set the content body of the response.
 
 .. php:method:: send()
 
@@ -800,7 +799,7 @@ CakeResponse API
 
 .. php:method:: file($path, $options = array())
 
-    Allows you to set a file for display or download
+    Allows you to set the ``Content-Disposition`` header of a file either to display or to download.
 
     .. versionadded:: 2.3
 
