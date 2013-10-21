@@ -30,7 +30,7 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptée pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encoder en html, true par
+* ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
 
@@ -55,7 +55,7 @@ Sortie:
 
     <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
-Si vous utilisez du html comme des images dans vos liens rappelez-vous de
+Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
     echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
@@ -173,7 +173,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     * ``tag`` La balise enveloppante que vous voulez utiliser, 'span' par
       défaut.
-    * ``escape`` Si vous voulez que le contenu soit encodé en html,
+    * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
       par défaut à true.
     * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
         
@@ -515,7 +515,7 @@ D'autres Méthodes
         * **update** - L' Id de l'élément DOM que vous souhaitez actualiser.
             Créé des liens près pour AJAX.
         * **escape** Si vous voulez que le contenu soit encodé comme une
-            entité html, par défaut à true.
+            entité HTML, par défaut à true.
         * **model** Le model à utiliser, par défaut à
             PaginatorHelper::defaultModel().
 

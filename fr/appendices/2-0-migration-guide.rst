@@ -1349,10 +1349,10 @@ sur les nouvelles APIs qui sont disponibles.
 Debugger
 ========
 
-La fonction ``debug()`` va sortir par défaut les chaînes sans danger de html. 
+La fonction ``debug()`` va sortir par défaut les chaînes sans danger de HTML. 
 C'est désactivé si c'est utilisé dans la console. L'option ``$showHtml`` pour 
 ``debug()`` peut être mis sur false pour désactiver la sortie sans danger de 
-html du debug.
+HTML du debug.
 
 ConnectionManager
 =================

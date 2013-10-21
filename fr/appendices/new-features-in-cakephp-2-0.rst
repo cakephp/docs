@@ -172,7 +172,7 @@ largeur fixe des textes. Il est utilisé dans les Shells quand vous utilisez
 debug()
 -------
 
-:php:func:`debug()` ne sort plus de html dans la console. A la place, elle 
+:php:func:`debug()` ne sort plus de HTML dans la console. A la place, elle 
 donne des sorties comme ce qui suit::
 
     ########## DEBUG ##########

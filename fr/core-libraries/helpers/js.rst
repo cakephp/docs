@@ -664,7 +664,7 @@ méthode.
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Créé un élément ancre html qui a un événement clic rattaché.
+    Créé un élément ancre HTML qui a un événement clic rattaché.
     Les options peuvent inclure celle pour :php:func:`HtmlHelper::link()`
     et :php:func:`Helper Js::request()`, :php:func:`Helper Js::event()`,
     ``$options`` est un tableau d'attribut :term:`attributs html` qui sont
@@ -679,7 +679,7 @@ méthode.
     -  ``confirm`` - Génère une boite de dialogue de confirmation avant
        l'envoi de l'événement.
     -  ``id`` - utilise une id personnalisée .
-    -  ``htmlAttributes`` - attributs html non standard supplémentaires.
+    -  ``htmlAttributes`` - attributs HTML non standard supplémentaires.
        Les attributs standards sont class, id, rel, title, escape, onblur et
        onfocus.
     -  ``buffer`` - Désactive le buffering et retourne une balise script
@@ -700,7 +700,7 @@ méthode.
             'htmlAttributes' => array('other' => 'value')
         ));
 
-        // Créé le html suivant
+        // Créé le HTML suivant
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())

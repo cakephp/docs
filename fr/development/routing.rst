@@ -1033,7 +1033,7 @@ API du Router
         au résultat. Si un tableau accèpte les clés suivantes.
         
            * escape - utilisé quand on fait les URLs intégrées dans les
-             chaînes de requête html échappées '&'.
+             chaînes de requête HTML échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
 
     Génére une URL pour l'action spécfiée. Retourne une URL pointant vers

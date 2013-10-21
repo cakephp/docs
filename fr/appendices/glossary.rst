@@ -9,9 +9,9 @@ Glossaire
         
             array('controller' => 'posts', 'action' => 'view', 5)
 
-    attributs html
+    attributs HTML
         Un tableau de clé => valeurs qui sont composées dans les attributs 
-        html. Par exemple::
+        HTML. Par exemple::
             
             // Par exemple
             array('class' => 'ma-classe', '_target' => 'blank')

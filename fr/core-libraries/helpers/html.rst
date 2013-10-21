@@ -257,7 +257,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         // Affichera: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
-        La valeur par défaut de doctype est html5 avec la version 2.1.
+        La valeur par défaut de doctype est HTML5 avec la version 2.1.
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
