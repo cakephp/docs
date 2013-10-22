@@ -72,9 +72,9 @@ ressembler à ceci::
 
     // Controller/RecipesController.php
     class RecipesController extends AppController {
-    
+
         public $components = array('RequestHandler');
-    
+
         public function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(array(
@@ -82,7 +82,7 @@ ressembler à ceci::
                 '_serialize' => array('recipes')
             ));
         }
-    
+
         public function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(array(
@@ -90,7 +90,7 @@ ressembler à ceci::
                 '_serialize' => array('recipe')
             ));
         }
-    
+
         public function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
@@ -103,7 +103,7 @@ ressembler à ceci::
                 '_serialize' => array('message')
             ));
         }
-    
+
         public function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
