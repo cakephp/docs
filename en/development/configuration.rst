@@ -209,7 +209,7 @@ Exception
 App.baseUrl
     If you don't want or can't get mod\_rewrite (or some other
     compatible module) up and running on your server, you'll need to
-    use CakePHP's built in pretty URLs. In ``/app/Config/core.php``,
+    use CakePHP's built-in pretty URLs. In ``/app/Config/core.php``,
     uncomment the line that looks like::
 
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -268,7 +268,7 @@ Session
       See :php:attr:`CakeSession::$requestCountdown`.
     * ``ini`` - An associative array of additional ini values to set.
 
-    The built in defaults are:
+    The built-in defaults are:
 
     * 'php' - Uses settings defined in your php.ini.
     * 'cake' - Saves session files in CakePHP's /tmp directory.

@@ -17,7 +17,7 @@ Authentication
 Authentication is the process of identifying users by provided
 credentials and ensuring that users are who they say they are.
 Generally this is done through a username and password, that are checked
-against a known list of users. In CakePHP, there are several built in
+against a known list of users. In CakePHP, there are several built-in
 ways of authenticating users stored in your application.
 
 * ``FormAuthenticate`` allows you to authenticate users based on form POST
