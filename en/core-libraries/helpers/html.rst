@@ -871,7 +871,7 @@ methods of the HtmlHelper and how to use them.
     :param mixed $full: Either a boolean to indicate whether or not the base path should
         be included on an array of options for :php:meth:`Router::url()`
 
-    Returns an URL pointing to a combination of controller and action.
+    Returns a URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it
     generates the URL for the controller and action combo. If full is
     true, the full base URL will be prepended to the result::

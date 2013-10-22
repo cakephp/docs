@@ -982,7 +982,7 @@ Router API
              string '&'
            * full - if true the full base URL will be prepended.
 
-    Generate a URL for the specified action. Returns an URL pointing
+    Generate a URL for the specified action. Returns a URL pointing
     to a combination of controller and action. $url can be:
 
     * Empty - the method will find the address to the actual controller/action.
