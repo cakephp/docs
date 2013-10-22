@@ -14,7 +14,7 @@ trivial to setup, for example::
     # │    │    \─────────────── day of month (1 - 31)
     # │    \──────────────────── hour (0 - 23)
     # \───────────────────────── min (0 - 59)
-    
+
 You can see more info here: http://en.wikipedia.org/wiki/Cron
 
 .. meta::

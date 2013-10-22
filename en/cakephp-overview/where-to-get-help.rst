@@ -93,8 +93,8 @@ CakePHP Questions
 
 `http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
 
-Simply register/login and ask a question. Wait until you've got some answers 
-and pick the correct answer. You can view, comment and vote on previously asked 
+Simply register/login and ask a question. Wait until you've got some answers
+and pick the correct answer. You can view, comment and vote on previously asked
 and solved questions as well.
 
 

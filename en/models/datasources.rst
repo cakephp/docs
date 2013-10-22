@@ -50,7 +50,7 @@ Methods that must be implemented for all CRUD methods:
 -  ``listSources($data = null)``
 -  ``calculate($model, $func, $params)``
 -  At least one of:
-   
+
    -  ``create(Model $model, $fields = null, $values = null)``
    -  ``read(Model $model, $queryData = array(), $recursive = null)``
    -  ``update(Model $model, $fields = null, $values = null, $conditions = null)``
@@ -255,7 +255,7 @@ We can retrieve data from our remote source using the familiar model methods::
 
 .. tip::
 
-    Using find types other than ``'all'`` can have unexpected results if the 
+    Using find types other than ``'all'`` can have unexpected results if the
     result of your ``read`` method is not a numerically indexed array.
 
 Similarly we can save a new message::

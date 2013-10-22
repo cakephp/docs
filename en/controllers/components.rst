@@ -105,7 +105,7 @@ them like so::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');

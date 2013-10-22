@@ -13,7 +13,7 @@ used in context.
 
 .. toctree::
     :maxdepth: 1
-    
+
     cakephp-overview/what-is-cakephp-why-use-it
     cakephp-overview/understanding-model-view-controller
     cakephp-overview/where-to-get-help

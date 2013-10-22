@@ -75,7 +75,7 @@ single fields, in an ActiveRecord approach. You can also use
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save the 
+The above would update the title and published fields and save the
 record to the database.
 
 :php:meth:`Model::clear()`
@@ -225,7 +225,7 @@ year, the update call might look something like::
     );
 
 
-The ``$fields`` array accepts SQL expressions. Literal values should be 
+The ``$fields`` array accepts SQL expressions. Literal values should be
 quoted manually using :php:meth:`DboSource::value()`. For example if one of your
 model methods was calling ``updateAll()`` you would do the following::
 

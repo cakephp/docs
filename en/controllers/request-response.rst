@@ -294,7 +294,7 @@ CakeRequest API
     decoding function. Useful when interacting with XML or JSON
     request body content. Additional parameters for the decoding function
     can be passed as arguments to input()::
-    
+
         $this->request->input('json_decode');
 
 .. php:method:: data($name)
@@ -631,7 +631,7 @@ The ``Etag`` header (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
-To take advantage of this header you have to either call the 
+To take advantage of this header you have to either call the
 :php:meth:`CakeResponse::checkNotModified()` method manually or to have the
 :php:class:`RequestHandlerComponent` included in your controller::
 
@@ -671,7 +671,7 @@ The Vary header
 ---------------
 
 In some cases you might want to serve different contents using the same URL.
-This is often the case if you have a multilingual page or respond with different 
+This is often the case if you have a multilingual page or respond with different
 HTMLs depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');

@@ -92,7 +92,7 @@ you can also just load an array of configs::
     //or in constructor::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with 
+You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with
 ``'ssl://'`` and configure the port value accordingly. Example::
 
     class EmailConfig {
@@ -195,7 +195,7 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Emails``. Email views can also use layouts, 
+``View`` directory called ``Emails``. Email views can also use layouts,
 and elements just like normal views::
 
     $Email = new CakeEmail();

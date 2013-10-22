@@ -48,7 +48,7 @@ can be either a string or an array of view variables to serialize::
 
     class PostsController extends AppController {
         public $components = array('RequestHandler');
-        
+
         public function index() {
             $this->set('posts', $this->paginate());
             $this->set('_serialize', array('posts'));
@@ -59,7 +59,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
     class PostsController extends AppController {
         public $components = array('RequestHandler');
-        
+
         public function index() {
             // some code that created $posts and $comments
             $this->set(compact('posts', 'comments'));

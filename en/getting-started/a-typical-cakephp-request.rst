@@ -10,7 +10,7 @@ CakePHP application's landing page.
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
-   
+
    Flow diagram showing a typical CakePHP request
 
 Figure: 2. Typical CakePHP Request.
