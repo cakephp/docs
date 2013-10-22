@@ -418,6 +418,25 @@ The following View folders have been renamed to avoid naming collisions with con
 - ``Errors`` is now ``Error``
 - ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
 
+Helper
+------
+
+- :php:meth:`Cake\\View\\Helper::clean()` was removed. It was never robust enough
+  to fully prevent XSS. Instead you should escape content with :php:func:`h` or
+  use a dedicated libray like HTMLPurifier.
+- :php:meth:`Cake\\View\\Helper::output()` was removed. This method was
+  deprecated in 2.x.
+- Magic accessors to deprecated properties have been removed. The following
+  properties now need to be accessed from the request object:
+
+  - base
+  - here
+  - webroot
+  - data
+  - action
+  - params
+
+
 
 HelperCollection replaced
 -------------------------
