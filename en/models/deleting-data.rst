@@ -29,7 +29,7 @@ leverage behaviors and model callbacks::
     $this->Comment->delete($this->request->data('Comment.id'));
 
 You can hook custom logic into the delete process using the ``beforeDelete`` and
-``afterDelete`` callbacks present in both Models and Behaviors.  See
+``afterDelete`` callbacks present in both Models and Behaviors. See
 :doc:`/models/callback-methods` for more information.
 
 .. _model-deleteall:

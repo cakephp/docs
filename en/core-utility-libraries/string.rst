@@ -91,7 +91,7 @@ use the ``String`` class::
         This is the song
         that never ends.
 
-    You can provide an array of options that control how wrapping is done.  The
+    You can provide an array of options that control how wrapping is done. The
     supported options are:
 
     * ``width`` The width to wrap to. Defaults to 72.

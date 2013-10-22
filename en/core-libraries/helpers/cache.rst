@@ -21,7 +21,7 @@ requested URL it continues to process the request normally.
 Using the Helper
 ================
 
-There are two steps you have to take before you can use the CacheHelper.  First
+There are two steps you have to take before you can use the CacheHelper. First
 in your ``APP/Config/core.php`` uncomment the Configure write call for
 ``Cache.check``. This will tell CakePHP to check for, and generate view cache
 files when handling requests.
@@ -61,7 +61,7 @@ traffic that needs to be cached::
         'index'  => 48000
     );
 
-This will cache the view action 10 hours, and the index action 13 hours.  By
+This will cache the view action 10 hours, and the index action 13 hours. By
 making ``$cacheAction`` a ``strtotime()`` friendly value you can cache every action in the
 controller::
 
@@ -110,11 +110,11 @@ them in ``<!--nocache--> <!--/nocache-->`` like so:
 
 .. note::
 
-    You cannot use ``nocache`` tags in elements.  Since there are no callbacks
+    You cannot use ``nocache`` tags in elements. Since there are no callbacks
     around elements, they cannot be cached.
 
 It should be noted that once an action is cached, the controller method for the
-action will not be called.  When a cache file is created, the request object,
+action will not be called. When a cache file is created, the request object,
 and view variables are serialized with PHP's ``serialize()``.
 
 .. warning::

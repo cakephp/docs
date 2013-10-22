@@ -143,17 +143,17 @@ Restricting cross controller communication
 Form tampering prevention
 =========================
 
-By default ``SecurityComponent`` prevents users from tampering with forms.  It
-does this by working with FormHelper and tracking which files are in a form.  It
-also keeps track of the values of hidden input elements.  All of this data is
-combined and turned into a hash.  When a form is submitted, SecurityComponent
+By default ``SecurityComponent`` prevents users from tampering with forms. It
+does this by working with FormHelper and tracking which files are in a form. It
+also keeps track of the values of hidden input elements. All of this data is
+combined and turned into a hash. When a form is submitted, SecurityComponent
 will use the POST data to build the same structure and compare the hash.
 
 .. php:attr:: unlockedFields
 
     Set to a list of form fields to exclude from POST validation. Fields can be
     unlocked either in the Component, or with
-    :php:meth:`FormHelper::unlockField()`.  Fields that have been unlocked are
+    :php:meth:`FormHelper::unlockField()`. Fields that have been unlocked are
     not required to be part of the POST and hidden unlocked fields do not have
     their values checked.
 
@@ -174,13 +174,13 @@ CSRF configuration
 
    The duration from when a CSRF token is created that it will expire on.
    Each form/page request will generate a new token that can only
-   be submitted once unless it expires.  Can be any value compatible
+   be submitted once unless it expires. Can be any value compatible
    with ``strtotime()``. The default is +30 minutes.
 
 .. php:attr:: csrfUseOnce
 
-   Controls whether or not CSRF tokens are use and burn.  Set to
-   ``false`` to not generate new tokens on each request.  One token
+   Controls whether or not CSRF tokens are use and burn. Set to
+   ``false`` to not generate new tokens on each request. One token
    will be reused until it expires. This reduces the chances of
    users getting invalid requests because of token consumption.
    It has the side effect of making CSRF less secure, as tokens are reusable.
@@ -246,13 +246,13 @@ CSRF protection
 ===============
 
 CSRF or Cross Site Request Forgery is a common vulnerability in web
-applications.  It allows an attacker to capture and replay a previous request,
+applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
 domains.
 
 Double submission and replay attacks are handled by the SecurityComponent's CSRF
-features.  They work by adding a special token to each form request.  This token
-once used cannot be used again.  If an attempt is made to re-use an expired
+features. They work by adding a special token to each form request. This token
+once used cannot be used again. If an attempt is made to re-use an expired
 token the request will be blackholed.
 
 Using CSRF protection

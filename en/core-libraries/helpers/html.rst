@@ -40,8 +40,8 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: charset($charset=null)
 
-    :param string $charset: Desired character set.  If null, the value of
-       ``App.encoding`` will be used.
+    :param string $charset: Desired character set. If null, the value of
+        ``App.encoding`` will be used.
 
     Used to create a meta tag specifying the document's character.
     Defaults to UTF-8
@@ -79,7 +79,7 @@ methods of the HtmlHelper and how to use them.
     tag of the document.
 
     You can use the ``block`` option to control which block the link element
-    will be appended to.  By default it will append to the ``css`` block.
+    will be appended to. By default it will append to the ``css`` block.
 
     If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
@@ -107,13 +107,13 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
     You can include CSS files from any loaded plugin using
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
+    :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     You could use the following::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
     If you want to include a CSS file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
@@ -312,13 +312,13 @@ methods of the HtmlHelper and how to use them.
         <img src="http://example.com/img/logo.jpg" alt="" />
 
     You can include image files from any loaded plugin using
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/img/icon.png``
+    :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/img/icon.png``
     You could use the following::
 
         echo $this->Html->image('DebugKit.icon.png');
 
     If you want to include a image file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
@@ -584,7 +584,7 @@ methods of the HtmlHelper and how to use them.
 
     Include a script file(s), contained either locally or as a remote URL.
 
-    By default, script tags are added to the document inline.  If you override
+    By default, script tags are added to the document inline. If you override
     this by setting ``$options['inline']`` to false, the script tags will instead
     be added to the ``script`` block which you can print elsewhere in the document.
     If you wish to override which block name is used, you can do so by setting
@@ -647,13 +647,13 @@ methods of the HtmlHelper and how to use them.
         echo $this->fetch('scriptBottom');
 
     You can include script files from any loaded plugin using
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
+    :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
     You could use the following::
 
         echo $this->Html->script('DebugKit.toolbar.js');
 
     If you want to include a script file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
 
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
@@ -983,7 +983,7 @@ Creating breadcrumb trails with HtmlHelper
 
         echo $this->Html->getCrumbs(' > ', 'Home');
 
-    The ``$startText`` option can also accept an array.  This gives more control
+    The ``$startText`` option can also accept an array. This gives more control
     over the generated first link::
 
         echo $this->Html->getCrumbs(' > ', array(
@@ -1020,9 +1020,9 @@ Creating breadcrumb trails with HtmlHelper
 
     This method uses :php:meth:`HtmlHelper::tag()` to generate list and its
     elements. Works similar to :php:meth:`~HtmlHelper::getCrumbs()`, so it uses
-    options which every crumb was added with.  You can use the ``$startText``
-    parameter to provide the first breadcrumb link/text.  This is useful when
-    you always want to include a root link.  This option works the same as the
+    options which every crumb was added with. You can use the ``$startText``
+    parameter to provide the first breadcrumb link/text. This is useful when
+    you always want to include a root link. This option works the same as the
     ``$startText`` option for :php:meth:`~HtmlHelper::getCrumbs()`.
 
     .. versionchanged:: 2.1

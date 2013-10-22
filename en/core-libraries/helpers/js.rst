@@ -256,7 +256,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: object($data, $options = array())
 
-    Serializes ``$data`` into JSON.  This method is a proxy for ``json_encode()``
+    Serializes ``$data`` into JSON. This method is a proxy for ``json_encode()``
     with a few extra features added via the ``$options`` parameter.
 
     **Options:**

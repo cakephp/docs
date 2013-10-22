@@ -122,10 +122,10 @@ Folder API
     * ``Folder::SKIP`` skip copying/moving files & directories that exist in the
       destination directory.
     * ``Folder::MERGE`` merge the source/destination directories. Files in the
-      source directory will replace files in the target directory.  Directory
+      source directory will replace files in the target directory. Directory
       contents will be merged.
     * ``Folder::OVERWRITE`` overwrite existing files & directories in the target
-      directory with those in the source directory.  If both the target and
+      directory with those in the source directory. If both the target and
       destination contain the same subdirectory, the target directory's contents
       will be removed and replaced with the source's.
 

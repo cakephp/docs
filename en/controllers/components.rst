@@ -67,7 +67,7 @@ Consult the relevant documentation to determine what configuration
 options each component provides.
 
 One common setting to use is the ``className`` option, which allows you to
-alias components.  This feature is useful when you want to
+alias components. This feature is useful when you want to
 replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
@@ -98,8 +98,8 @@ Using Components
 ================
 
 Once you've included some components in your controller, using them is
-pretty simple.  Each component you use is exposed as a property on your
-controller.  If you had loaded up the :php:class:`SessionComponent` and
+pretty simple. Each component you use is exposed as a property on your
+controller. If you had loaded up the :php:class:`SessionComponent` and
 the :php:class:`CookieComponent` in your controller, you could access
 them like so::
 
@@ -116,7 +116,7 @@ them like so::
 .. note::
 
     Since both Models and Components are added to Controllers as
-    properties they share the same 'namespace'.  Be sure to not give a
+    properties they share the same 'namespace'. Be sure to not give a
     component and a model the same name.
 
 Loading components on the fly
@@ -141,7 +141,7 @@ Component Callbacks
 ===================
 
 Components also offer a few request life-cycle callbacks that allow them
-to augment the request cycle.  See the base :ref:`component-api` for
+to augment the request cycle. See the base :ref:`component-api` for
 more information on the callbacks components offer.
 
 Creating a Component
@@ -165,7 +165,7 @@ structure for the component would look something like this::
 
 .. note::
 
-    All components must extend :php:class:`Component`.  Failing to do this
+    All components must extend :php:class:`Component`. Failing to do this
     will trigger an exception.
 
 Including your component in your controllers
@@ -200,7 +200,7 @@ the Component::
 
 The above would pass the array containing precision and
 randomGenerator to ``MathComponent::__construct()`` as the
-second parameter.  By convention, if array keys match component's public
+second parameter. By convention, if array keys match component's public
 properties, the properties will be set to the values of these keys.
 
 
@@ -248,12 +248,12 @@ Component API
 
     The base Component class offers a few methods for lazily loading other
     Components through :php:class:`ComponentCollection` as well as dealing
-    with common handling of settings.  It also provides prototypes for all
+    with common handling of settings. It also provides prototypes for all
     the component callbacks.
 
 .. php:method:: __construct(ComponentCollection $collection, $settings = array())
 
-    Constructor for the base component class.  All ``$settings`` that
+    Constructor for the base component class. All ``$settings`` that
     are also public properties will have their values changed to the
     matching value in ``$settings``.
 

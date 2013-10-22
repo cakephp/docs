@@ -303,7 +303,7 @@ associate to the class the variable is an object of. Example::
 Member visibility
 -----------------
 
-Use PHP5's private and protected keywords for methods and variables.  Additionally,
+Use PHP5's private and protected keywords for methods and variables. Additionally,
 protected method or variable names start with a single underscore ("\_"). Example::
 
     class A {

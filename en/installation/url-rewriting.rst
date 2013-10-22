@@ -25,7 +25,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        # directory (and its subdirectories). 
        #
        # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # features. 
        #
        <Directory />
            Options FollowSymLinks
@@ -103,7 +103,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   make a virtual host to point to your folder. 
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
