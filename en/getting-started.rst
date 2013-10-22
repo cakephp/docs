@@ -23,7 +23,7 @@ Additional Reading
 ==================
 
 .. toctree::
-    
+
     getting-started/a-typical-cakephp-request
     getting-started/cakephp-conventions
     getting-started/cakephp-folder-structure

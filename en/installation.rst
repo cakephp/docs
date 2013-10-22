@@ -55,7 +55,7 @@ releases are available at
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.
-These can be accessed from GitHub by cloning the 
+These can be accessed from GitHub by cloning the
 `GitHub`_ repository::
 
     git clone git://github.com/cakephp/cakephp.git
@@ -205,7 +205,7 @@ Not working? If you're getting timezone related errors from PHP
 uncomment one line in ``app/Config/core.php``::
 
    /**
-    * Uncomment this line and correct your server timezone to fix 
+    * Uncomment this line and correct your server timezone to fix
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');

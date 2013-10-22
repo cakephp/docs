@@ -94,7 +94,7 @@ statements into your database::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     /* Then insert some posts for testing: */
     INSERT INTO posts (title,body,created)
         VALUES ('The title', 'This is the post body.', NOW());
