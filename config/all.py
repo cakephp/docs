@@ -51,8 +51,7 @@ release = '2.x'
 # directories to ignore when looking for source files.
 exclude_patterns = [
     'themes',
-    'core-libraries/components/email.rst',
-    'pdf-contents.rst'
+    'core-libraries/components/email.rst'
 ]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
