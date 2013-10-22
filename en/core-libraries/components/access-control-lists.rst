@@ -726,7 +726,7 @@ should end up looking something like the following:
 One nice thing about a CakePHP ACL setup is that each ACO
 automatically contains four properties related to CRUD (create,
 read, update, and delete) actions. You can create children nodes
-under each of these five main ACOs, but using CakePHP's built in
+under each of these five main ACOs, but using CakePHP's built-in
 action management covers basic CRUD operations on a given object.
 Keeping this in mind will make your ACO trees smaller and easier to
 maintain. We'll see how these are used later on when we discuss how

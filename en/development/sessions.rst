@@ -72,7 +72,7 @@ Session cookie paths default to ``/`` in 2.0, to change this you can use the
 Built-in Session handlers & configuration
 =========================================
 
-CakePHP comes with several built in session configurations.  You can either use
+CakePHP comes with several built-in session configurations.  You can either use
 these as the basis for your session configuration, or you can create a fully
 custom solution.  To use defaults, simply set the 'defaults' key to the name of
 the default you want to use.  You can then override any sub setting by declaring
@@ -99,8 +99,8 @@ configuration.  The built-in configurations are:
 * ``cake`` - Saves sessions as files inside ``app/tmp/sessions``.  This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
-* ``database`` - Use the built in database sessions. See below for more information.
-* ``cache`` - Use the built in cache sessions. See below for more information.
+* ``database`` - Use the built-in database sessions. See below for more information.
+* ``cache`` - Use the built-in cache sessions. See below for more information.
 
 Session Handlers
 ----------------
@@ -167,7 +167,7 @@ configuration as well as choose the database defaults::
         )
     ));
 
-The above will tell CakeSession to use the built in 'database' defaults, and
+The above will tell CakeSession to use the built-in 'database' defaults, and
 specify that a model called ``CustomSession`` will be the delegate for saving
 session information to the database.
 

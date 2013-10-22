@@ -26,7 +26,7 @@ If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
     //In app/Config/routes.php...
-    
+
     Router::mapResources('recipes');
     Router::parseExtensions();
 
@@ -71,9 +71,9 @@ this::
 
     // Controller/RecipesController.php
     class RecipesController extends AppController {
-    
+
         public $components = array('RequestHandler');
-    
+
         public function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(array(
@@ -81,7 +81,7 @@ this::
                 '_serialize' => array('recipes')
             ));
         }
-    
+
         public function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(array(
@@ -89,7 +89,7 @@ this::
                 '_serialize' => array('recipe')
             ));
         }
-    
+
         public function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
@@ -102,7 +102,7 @@ this::
                 '_serialize' => array('message')
             ));
         }
-    
+
         public function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
@@ -120,7 +120,7 @@ Since we've added a call to :php:meth:`Router::parseExtensions()`,
 the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
 requests, we'll be making XML views.  You can also easily make JSON views using
-CakePHP's built in :doc:`/views/json-and-xml-views`. By using the built in
+CakePHP's built-in :doc:`/views/json-and-xml-views`. By using the built in
 :php:class:`XmlView` we can define a ``_serialize`` view variable.  This special
 view variable is used to define which view variables ``XmlView`` should
 serialize into XML.

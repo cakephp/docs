@@ -332,7 +332,7 @@ Styling output
 Styling output is done by including tags - just like HTML - in your output.
 ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
-are several built in styles, and you can create more.  The built in ones are
+are several built-in styles, and you can create more. The built-in ones are
 
 * ``error`` Error messages. Red underlined text.
 * ``warning`` Warning messages. Yellow text.
@@ -340,7 +340,7 @@ are several built in styles, and you can create more.  The built in ones are
 * ``comment`` Additional text. Blue text.
 * ``question`` Text that is a question, added automatically by shell.
 
-You can create additional styles using `$this->stdout->styles()`.  To declare a
+You can create additional styles using `$this->stdout->styles()`. To declare a
 new output style you could do::
 
     $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
@@ -929,7 +929,7 @@ Shell API
     The primary method for generating output to the user. By using levels, you
     can limit how verbose a shell is.  out() also allows you to use colour formatting
     tags, which will enable coloured output on systems that support it.  There are
-    several built in styles for colouring text, and you can define your own.
+    several built-in styles for colouring text, and you can define your own.
 
     * ``error`` Error messages.
     * ``warning`` Warning messages.

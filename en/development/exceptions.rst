@@ -52,7 +52,7 @@ treated as an Internal Server Error.
 
 .. _built-in-exceptions:
 
-Built in Exceptions for CakePHP
+Built-in Exceptions for CakePHP
 ===============================
 
 There are several built-in exceptions inside CakePHP, outside of the
@@ -150,7 +150,7 @@ be thrown from a number of CakePHP core components:
     A model's table is missing from CakePHP's cache or the datasource. Upon adding
     a new table to a datasource, the model cache (found in tmp/cache/models by default)
     must be removed.
-    
+
 
 .. php:exception:: MissingActionException
 
@@ -221,7 +221,7 @@ The ExceptionRenderer class with the help of ``CakeErrorController`` takes care 
 the error pages for all the exceptions thrown by you application.
 
 The error page views are located at ``app/View/Errors/``. For all 4xx and 5xx errors
-the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can 
+the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can
 customize them as per your needs. By default your ``app/Layouts/default.ctp`` is used
 for error pages too. If for eg. you want to use another layout ``app/Layouts/my_error.ctp``
 for your error pages, then simply edit the error views and add the statement
@@ -265,7 +265,7 @@ template which allows the native ``__toString()`` methods to work as normal::
     throw new MissingWidgetException(array('widget' => 'Pointy'));
 
 
-When caught by the built in exception handler, you would get a ``$widget``
+When caught by the built-in exception handler, you would get a ``$widget``
 variable in your error view template. In addition if you cast the exception
 as a string or use its ``getMessage()`` method you will get
 ``Seems that Pointy is missing.``. This allows you easily and quickly create

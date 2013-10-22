@@ -953,7 +953,7 @@ Changing the tags output by HtmlHelper
 
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
-    The built in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
+    The built-in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
     however if you need to generate HTML for HTML5 you will need to
     create and load a new tags config file containing the tags you'd
     like to use. To change the tags used create ``app/Config/html5_tags.php``
@@ -977,7 +977,7 @@ Creating breadcrumb trails with HtmlHelper
 
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
-    CakePHP has the built in ability to automatically create a
+    CakePHP has the built-in ability to automatically create a
     breadcrumb trail in your app. To set this up, first add something
     similar to the following in your layout template::
 
