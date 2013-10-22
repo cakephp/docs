@@ -1,7 +1,7 @@
 2.3 Migration Guide
 ###################
 
-CakePHP 2.3 is a fully API compatible upgrade from 2.2.  This page outlines
+CakePHP 2.3 is a fully API compatible upgrade from 2.2. This page outlines
 the changes and improvements made in 2.3.
 
 Constants
@@ -13,7 +13,7 @@ as they are conditionally defined by CakePHP now.
 Caching
 =======
 
-- FileEngine is always the default cache engine.  In the past a number of people
+- FileEngine is always the default cache engine. In the past a number of people
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
@@ -32,7 +32,7 @@ AuthComponent
   - If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
-  passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
+  passwords. You can now use ``Blowfish`` in your ``$authenticate`` array to
   allow bcrypt passwords to be used.
 
 - :php:meth:`AuthComponent::redirect()` has been deprecated.
@@ -41,8 +41,8 @@ AuthComponent
 PaginatorComponent
 ------------------
 
-- PaginatorComponent now supports the ``findType`` option.  This can be used to
-  specify what find method you want used for pagination.  This is a bit easier
+- PaginatorComponent now supports the ``findType`` option. This can be used to
+  specify what find method you want used for pagination. This is a bit easier
   to manage and set than the 0'th index.
 
 - PaginatorComponent now throws a `NotFoundException` when trying to access a page
@@ -64,13 +64,13 @@ RequestHandlerComponent
 CookieComponent
 ---------------
 
-- :php:meth:`CookieComponent::check()` was added.  This method works the same as
+- :php:meth:`CookieComponent::check()` was added. This method works the same as
   :php:meth:`CakeSession::check()` does.
 
 Console
 =======
 
-- The ``server`` shell was added.  You can use this to start the PHP5.4
+- The ``server`` shell was added. You can use this to start the PHP5.4
   webserver for your CakePHP application.
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
@@ -104,7 +104,7 @@ CakePlugin
 Configure
 ---------
 
-- :php:meth:`Configure::check()` was added.  This method works the same as
+- :php:meth:`Configure::check()` was added. This method works the same as
   :php:meth:`CakeSession::check()` does.
 
 - :php:meth:`ConfigReaderInterface::dump()` was added. Please ensure any custom readers you have now
@@ -135,7 +135,7 @@ Models
 ------
 
 - ``Model::find('list')`` now sets the ``recursive`` based on the max
-  containment depth or recursive value.  When list is used with
+  containment depth or recursive value. When list is used with
   ContainableBehavior.
 - ``Model::find('first')`` will now return an empty array when no records are found.
 
@@ -170,7 +170,7 @@ CakeEmail
 ---------
 
 - The ``contentDisposition`` option was added to
-  :php:meth:`CakeEmail::attachments()`.  This allows you to disable the
+  :php:meth:`CakeEmail::attachments()`. This allows you to disable the
   Content-Disposition header added to attached files.
 
 HttpSocket
@@ -180,7 +180,7 @@ HttpSocket
   using self-signed certificates or connecting through proxies you may need to
   use some of the new options to augment this behavior. See
   :ref:`http-socket-ssl-options` for more information.
-- ``HttpResponse`` was renamed to ``HttpSocketResponse``.  This
+- ``HttpResponse`` was renamed to ``HttpSocketResponse``. This
   avoids a common issue with the HTTP PECL extension. There is an
   ``HttpResponse`` class provided as well for compatibility reasons.
 
@@ -231,7 +231,7 @@ FormHelper
 - :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
   attribute. Combined with ``'multiple' => 'checkbox'``, this allows you to
   provide a list of values you want disabled.
-- :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
+- :php:meth:`FormHelper::postLink()` now accepts a ``method`` key. This allows
   you to create link forms using HTTP methods other than POST.
 - When creating inputs with :php:meth:`FormHelper::input()` you can now set the
   ``errorMessage`` option to false. This will disable the error message display,
@@ -249,7 +249,7 @@ HtmlHelper
 ----------
 
 - :php:meth:`HtmlHelper::getCrumbList()` now has the ``separator``,
-  ``firstClass`` and ``lastClass`` options.  These allow you to better control
+  ``firstClass`` and ``lastClass`` options. These allow you to better control
   the HTML this method generates.
 
 TextHelper
@@ -310,7 +310,7 @@ Security
 --------
 
 - Support for `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
-  was added.  See the :php:class:`Security::hash()` documentation for more
+  was added. See the :php:class:`Security::hash()` documentation for more
   information on how to use bcrypt.
 
 Validation

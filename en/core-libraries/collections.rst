@@ -2,8 +2,8 @@ Collections
 ###########
 
 Components, Helpers, Behaviors and Tasks all share a similar structure and set
-of behaviors.  For 2.0, they were given a unified API for interacting with
-collections of similar objects.  The collection objects in CakePHP, give you 
+of behaviors. For 2.0, they were given a unified API for interacting with
+collections of similar objects. The collection objects in CakePHP, give you 
 a uniform way to interact with several different kinds of objects in your
 application.
 
@@ -20,22 +20,22 @@ method::
     $this->Prg->process();
 
 When loading a component, if the component is not currently loaded into the
-collection, a new instance will be created.  If the component is already loaded,
-another instance will not be created.  When loading components, you can also
+collection, a new instance will be created. If the component is already loaded,
+another instance will not be created. When loading components, you can also
 provide additional configuration for them::
 
     $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
 
-Any keys & values provided will be passed to the Component's constructor.  The
-one exception to this rule is ``className``.  ClassName is a special key that is
-used to alias objects in a collection.  This allows you to have component names
+Any keys & values provided will be passed to the Component's constructor. The
+one exception to this rule is ``className``. ClassName is a special key that is
+used to alias objects in a collection. This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
     $this->Auth = $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
-The inverse of loading an object, is unloading it.  Unloaded objects are removed
+The inverse of loading an object, is unloading it. Unloaded objects are removed
 from memory, and will not have additional callbacks triggered on them::
 
     $this->Components->unload('Cookie');
@@ -44,7 +44,7 @@ from memory, and will not have additional callbacks triggered on them::
 Triggering callbacks
 ====================
 
-Callbacks are supported by collection objects.  When a collection has a callback
+Callbacks are supported by collection objects. When a collection has a callback
 triggered, that method will be called on all enabled objects in the collection.
 You can pass parameters to the callback loop as well::
 
@@ -58,7 +58,7 @@ control how callbacks are fired:
   Can either be a scalar value, or an array of values to break on. Defaults to ``false``.
 
 - ``break`` Set to true to enabled breaking. When a trigger is broken, the last returned value
-  will be returned.  If used in combination with ``collectReturn`` the collected results will be returned.
+  will be returned. If used in combination with ``collectReturn`` the collected results will be returned.
   Defaults to ``false``.
 
 - ``collectReturn`` Set to true to collect the return of each object into an array.

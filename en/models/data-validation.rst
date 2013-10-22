@@ -175,11 +175,11 @@ definitions.
 required
 --------
 
-This key accepts either a boolean, or ``create`` or ``update``.  Setting this
-key to ``true`` will make the field always required.  While setting it to
+This key accepts either a boolean, or ``create`` or ``update``. Setting this
+key to ``true`` will make the field always required. While setting it to
 ``create`` or ``update`` will make the field required only for update or  create
 operations. If 'required' is evaluated to true, the field must be present in the
-data array.  For example, if the validation rule has been defined as follows::
+data array. For example, if the validation rule has been defined as follows::
 
     public $validate = array(
         'login' => array(
@@ -883,9 +883,9 @@ with usage examples.
 
 .. php:staticmethod:: fileSize($check, $operator = null, $size = null)
 
-    This rule allows you to check filesizes.  You can use ``$operator`` to
-    decide the type of comparison you want to use.  All the operators supported
-    by :php:func:`~Validation::comparison()` are supported here as well.  This
+    This rule allows you to check filesizes. You can use ``$operator`` to
+    decide the type of comparison you want to use. All the operators supported
+    by :php:func:`~Validation::comparison()` are supported here as well. This
     method will automatically handle array values from ``$_FILES`` by reading
     from the ``tmp_name`` key if ``$check`` is an array an contains that key::
 

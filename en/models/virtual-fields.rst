@@ -141,7 +141,7 @@ would return something like this::
     )
 
 If we want to group TotalHours into our Timelog array we should specify a
-virtual field for our aggregate column.  We can add this new virtual field on
+virtual field for our aggregate column. We can add this new virtual field on
 the fly rather than permanently declaring it in the model. We will provide a
 default value of ``0`` in case another query attempts to use this virtual field.
 If that were to occur, ``0`` would be returned in the TotalHours column::

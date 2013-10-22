@@ -184,7 +184,7 @@ debug
 
 Error
     Configure the Error handler used to handle errors for your application.
-    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display
+    By default :php:meth:`ErrorHandler::handleError()` is used. It will display
     errors using :php:class:`Debugger`, when debug > 0
     and log errors with :php:class:`CakeLog` when debug = 0.
 
@@ -196,10 +196,10 @@ Error
     * ``trace`` - boolean - Include stack traces for errors in log files.
 
 Exception
-    Configure the Exception handler used for uncaught exceptions.  By default,
+    Configure the Exception handler used for uncaught exceptions. By default,
     ErrorHandler::handleException() is used. It will display a HTML page for
     the exception, and while debug > 0, framework errors like
-    Missing Controller will be displayed.  When debug = 0,
+    Missing Controller will be displayed. When debug = 0,
     framework errors will be coerced into generic HTTP errors.
     For more information on Exception handling, see the :doc:`exceptions`
     section.
@@ -229,7 +229,7 @@ App.baseUrl
     can find instructions for getting URL rewriting working for other
     servers under the :doc:`/installation/url-rewriting` section.
 App.encoding
-    Define what encoding your application uses.  This encoding
+    Define what encoding your application uses. This encoding
     is used to generate the charset in the layout, and encode entities.
     It should match the encoding values specified for your database.
 Routing.prefixes
@@ -322,11 +322,11 @@ are a few constants that CakePHP uses during runtime.
 Core Cache Configuration
 ------------------------
 
-CakePHP uses two cache configurations internally.  ``_cake_model_`` and ``_cake_core_``.
-``_cake_core_`` is used to store file paths, and object locations.  ``_cake_model_`` is
-used to store schema descriptions, and source listings for datasources.  Using a fast
+CakePHP uses two cache configurations internally. ``_cake_model_`` and ``_cake_core_``.
+``_cake_core_`` is used to store file paths, and object locations. ``_cake_model_`` is
+used to store schema descriptions, and source listings for datasources. Using a fast
 cache storage like APC or Memcached is recommended for these configurations, as
-they are read on every request.  By default both of these configurations expire every
+they are read on every request. By default both of these configurations expire every
 10 seconds when debug is greater than 0.
 
 As with all cached data stored in :php:class:`Cache` you can clear data using
@@ -430,7 +430,7 @@ anywhere within your application, in a static context::
     :param string $name: The name of the reader being attached.
     :param ConfigReaderInterface $reader: The reader instance being attached.
 
-    Attach a configuration reader to Configure.  Attached readers can
+    Attach a configuration reader to Configure. Attached readers can
     then be used to load configuration files. See :ref:`loading-configuration-files`
     for more information on how to read configuration files.
 
@@ -452,8 +452,8 @@ Reading and writing configuration files
 
 CakePHP comes with two built-in configuration file readers.
 :php:class:`PhpReader` is able to read PHP config files, in the same
-format that Configure has historically read.  :php:class:`IniReader` is
-able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
+format that Configure has historically read. :php:class:`IniReader` is
+able to read ini config files. See the `PHP documentation <http://php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
@@ -467,7 +467,7 @@ using :php:meth:`Configure::config()`::
 
 You can have multiple readers attached to Configure, each reading
 different kinds of configuration files, or reading from
-different types of sources.  You can interact with attached readers
+different types of sources. You can interact with attached readers
 using a few other methods on Configure. To see check which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
@@ -477,7 +477,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
     // Check if a specific reader is attached
     Configure::configured('default');
 
-You can also remove attached readers.  ``Configure::drop('default')``
+You can also remove attached readers. ``Configure::drop('default')``
 would remove the default reader alias. Any future attempts to load configuration
 files with that reader would fail.
 
@@ -500,7 +500,7 @@ Once you've attached a config reader to Configure you can load configuration fil
     Configure::load('my_file', 'default');
 
 Loaded configuration files merge their data with the existing runtime configuration
-in Configure.  This allows you to overwrite and add new values
+in Configure. This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
@@ -511,12 +511,12 @@ Creating or modifying configuration files
 
     :param string $key: The name of the file/stored configuration to be created.
     :param string $config: The name of the reader to store the data with.
-    :param array $keys: The list of top-level keys to save.  Defaults to all
+    :param array $keys: The list of top-level keys to save. Defaults to all
         keys.
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config reader. The serialization format
-is decided by the config reader attached as $config.  For example, if the
+is decided by the config reader attached as $config. For example, if the
 'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP
 configuration file loadable by the :php:class:`PhpReader`
 
@@ -566,13 +566,13 @@ Restoring runtime configuration
     :param string $cacheConfig: The cache configuration to load the data from.
 
 Once you've stored runtime configuration, you'll probably need to restore it
-so you can access it again.  ``Configure::restore()`` does exactly that::
+so you can access it again. ``Configure::restore()`` does exactly that::
 
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it.  Restored
+the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
 Creating your own Configuration readers
@@ -652,8 +652,8 @@ Built-in Configuration readers
 
     Allows you to read configuration files that are stored as plain PHP files.
     You can read either files from your ``app/Config`` or from plugin configs
-    directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
-    variable.  An example configuration file would look like::
+    directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
+    variable. An example configuration file would look like::
 
         $config = array(
             'debug' => 0,
@@ -694,8 +694,8 @@ Built-in Configuration readers
         log = true
 
     The above ini file, would result in the same end configuration data
-    as the PHP example above.  Array structures can be created either
-    through dot separated values, or sections.  Sections can contain
+    as the PHP example above. Array structures can be created either
+    through dot separated values, or sections. Sections can contain
     dot separated keys for deeper nesting.
 
 .. _inflection-configuration:

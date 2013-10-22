@@ -16,7 +16,7 @@ headaches for developers. CakePHP eases the burden on the developer
 by providing a quick, easy way to paginate data.
 
 Pagination in CakePHP is offered by a Component in the controller, to make
-building paginated queries easier.  In the View :php:class:`PaginatorHelper` is
+building paginated queries easier. In the View :php:class:`PaginatorHelper` is
 used to make the generation of pagination links & buttons simple.
 
 Query Setup
@@ -24,7 +24,7 @@ Query Setup
 
 In the controller, we start by defining the query conditions pagination will use
 by default in the ``$paginate`` controller variable. These conditions, serve as
-the basis of your pagination queries.  They are augmented by the sort, direction
+the basis of your pagination queries. They are augmented by the sort, direction
 limit, and page parameters passed in from the URL. It is important to note
 here that the order key must be defined in an array structure like below::
 
@@ -60,7 +60,7 @@ Other keys that can be included in the ``$paginate`` array are
 similar to the parameters of the ``Model->find('all')`` method, that
 is: ``conditions``, ``fields``, ``order``, ``limit``, ``page``, ``contain``,
 ``joins``, and ``recursive``. In addition to the aforementioned keys, any
-additional keys will also be passed directly to the model find methods.  This
+additional keys will also be passed directly to the model find methods. This
 makes it very simple to use behaviors like :php:class:`ContainableBehavior` with
 pagination::
 
@@ -129,7 +129,7 @@ Custom Query Pagination
 =======================
 
 If you're not able to use the standard find options to create the query you need
-to display your data, there are a few options.  You can use a
+to display your data, there are a few options. You can use a
 :ref:`custom find type <model-custom-find>`. You can also implement the
 ``paginate()`` and ``paginateCount()`` methods on your model, or include them in
 a behavior attached to your model. Behaviors implementing ``paginate`` and/or
@@ -145,7 +145,7 @@ normal additional first parameter of ``$model``::
         // method body
     }
 
-It's seldom you'll need to implement paginate() and paginateCount().  You should
+It's seldom you'll need to implement paginate() and paginateCount(). You should
 make sure  you can't achieve your goal with the core model methods, or a custom
 finder. To paginate with a custom find type, you should set the ``0``'th
 element, or the ``findType`` key as of 2.3::
@@ -161,7 +161,7 @@ added::
         'findType' => 'popular'
     );
 
-The ``paginate()`` method should implement the following method signature.  To
+The ``paginate()`` method should implement the following method signature. To
 use your own method/logic override it in the model you wish to get the data
 from::
 
@@ -217,13 +217,13 @@ the keyword in controller's ``$paginate`` class variable::
     }
 
 In CakePHP 2.0, you no longer need to implement ``paginateCount()`` when using
-group clauses.  The core ``find('count')`` will correctly count the total number
+group clauses. The core ``find('count')`` will correctly count the total number
 of rows.
 
 Control which fields used for ordering
 ======================================
 
-By default sorting can be done with any column on a model.  This is sometimes
+By default sorting can be done with any column on a model. This is sometimes
 undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
 ``PaginatorComponent::paginate()`` to restrict the columns sorting will be done on::
@@ -237,9 +237,9 @@ Limit the maximum number of rows that can be fetched
 ====================================================
 
 The number of results that are fetched is exposed to the user as the
-``limit`` parameter.  It is generally undesirable to allow users to fetch all
-rows in a paginated set.  By default CakePHP limits the maximum number of rows
-that can be fetched to 100.  If this default is not appropriate for your
+``limit`` parameter. It is generally undesirable to allow users to fetch all
+rows in a paginated set. By default CakePHP limits the maximum number of rows
+that can be fetched to 100. If this default is not appropriate for your
 application, you can adjust it as part of the pagination options::
 
     public $paginate = array(
@@ -326,7 +326,7 @@ AJAX Pagination
 
 It's very easy to incorporate AJAX functionality into pagination.
 Using the :php:class:`JsHelper` and :php:class:`RequestHandlerComponent` you can
-easily add Ajax pagination to your application.  See :ref:`ajax-pagination` for
+easily add Ajax pagination to your application. See :ref:`ajax-pagination` for
 more information.
 
 Pagination in the view

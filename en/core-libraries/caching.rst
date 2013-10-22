@@ -2,21 +2,21 @@ Caching
 #######
 
 Caching is frequently used to reduce the time it takes to create or read from
-other resources.  Caching is often used to make reading from expensive
-resources less expensive.  You can easily store the results of expensive queries,
-or remote webservice access that doesn't frequently change in a cache.  Once
+other resources. Caching is often used to make reading from expensive
+resources less expensive. You can easily store the results of expensive queries,
+or remote webservice access that doesn't frequently change in a cache. Once
 in the cache, re-reading the stored resource from the cache is much cheaper
 than accessing the remote resource.
 
 Caching in CakePHP is primarily facilitated by the :php:class:`Cache` class.
 This class provides a set of static methods that provide a uniform API to
-dealing with all different types of Caching implementations.  CakePHP
+dealing with all different types of Caching implementations. CakePHP
 comes with several cache engines built-in, and provides an easy system
 to implement your own caching systems. The built-in caching engines are:
 
 * ``FileCache`` File cache is a simple cache that uses local files. It
   is the slowest cache engine, and doesn't provide as many features for
-  atomic operations.  However, since disk storage is often quite cheap,
+  atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files. This is the default Cache engine for 2.3+
 * ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
@@ -24,24 +24,24 @@ to implement your own caching systems. The built-in caching engines are:
   This makes it very fast, and able to provide atomic read/write features.
   By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-  extension.  Wincache is similar to APC in features and performance, but
+  extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
-  extension.  Memcache provides a very fast cache system that can be
+  extension. Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
 
 .. versionchanged:: 2.3
-    FileEngine is always the default cache engine.  In the past a number of people
+    FileEngine is always the default cache engine. In the past a number of people
     had difficulty setting up and deploying APC correctly both in cli + web.
     Using files should make setting up CakePHP simpler for new developers.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
+:php:class:`Cache` in a consistent manner. This means you can easily swap cache engines
 as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
@@ -51,16 +51,16 @@ Configuring Cache class
 =======================
 
 Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/Config/bootstrap.php``.  You
+you will want to configure Cache in ``app/Config/bootstrap.php``. You
 can configure as many cache configurations as you need, and use any
-mixture of cache engines.  CakePHP uses two cache configurations internally,
+mixture of cache engines. CakePHP uses two cache configurations internally,
 which are configured in ``app/Config/core.php``. If you are using APC or
-Memcache you should make sure to set unique keys for the core caches.  This will
+Memcache you should make sure to set unique keys for the core caches. This will
 prevent multiple applications from overwriting each other's cached data.
 
 Using multiple cache configurations can help reduce the
 number of times you need to use :php:func:`Cache::set()` as well as
-centralize all your cache settings.  Using multiple configurations
+centralize all your cache settings. Using multiple configurations
 also lets you incrementally change the storage as needed.
 
 .. note::
@@ -144,7 +144,7 @@ The required API for a CacheEngine is
 
     :return: The cached value or false for failure.
 
-    Read a key from the cache.  Return false to indicate
+    Read a key from the cache. Return false to indicate
     the entry has expired or does not exist.
 
 .. php:method:: delete($key)
@@ -158,7 +158,7 @@ The required API for a CacheEngine is
 
     :return: Boolean true on success.
 
-    Delete all keys from the cache.  If $check is true, you should
+    Delete all keys from the cache. If $check is true, you should
     validate that each value is actually expired.
 
 .. php:method:: clearGroup($group)
@@ -212,10 +212,10 @@ That is an exercise you can do though.
 Using Cache to store counters
 =============================
 
-Counters for various things are easily stored in a cache.  For example, a simple
+Counters for various things are easily stored in a cache. For example, a simple
 countdown for remaining 'slots' in a contest could be stored in Cache. The
 Cache class exposes atomic ways to increment/decrement counter values in an easy
-way.  Atomic operations are important for these values as it reduces the risk of
+way. Atomic operations are important for these values as it reduces the risk of
 contention, and ability for two users to simultaneously lower the value by one,
 resulting in an incorrect value.
 
@@ -390,9 +390,9 @@ Cache API
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-    Destroy all cached values for a cache configuration.  In engines like Apc,
+    Destroy all cached values for a cache configuration. In engines like Apc,
     Memcache and Wincache, the cache configuration's prefix is used to remove
-    cache entries.  Make sure that different cache configurations have different
+    cache entries. Make sure that different cache configurations have different
     prefixes.
 
 .. php:method:: clearGroup($group, $config = 'default')
@@ -403,7 +403,7 @@ Cache API
 
 .. php:staticmethod:: gc($config)
 
-    Garbage collects entries in the cache configuration.  This is primarily
+    Garbage collects entries in the cache configuration. This is primarily
     used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
 

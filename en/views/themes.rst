@@ -20,7 +20,7 @@ You can also set or change the theme name within an action or within the
 
     $this->theme = 'AnotherExample';
 
-Theme view files need to be within the ``/app/View/Themed/`` folder.  Within the
+Theme view files need to be within the ``/app/View/Themed/`` folder. Within the
 themed folder, create a folder using the same name as your theme name. For
 example, the above theme would be found in ``/app/View/Themed/AnotherExample``.
 Its important to remember that CakePHP expects CamelCase theme names. Beyond
@@ -38,10 +38,10 @@ and simply override them on a case-by-case basis within your theme folder.
 Theme assets
 ------------
 
-Themes can contain static assets as well as view files.  A theme can include any
+Themes can contain static assets as well as view files. A theme can include any
 necessary assets in its webroot directory. This allows for easy packaging and
-distribution of themes.  While in development, requests for theme assets will be
-handled by :php:class:`Dispatcher`.  To improve performance for production
+distribution of themes. While in development, requests for theme assets will be
+handled by :php:class:`Dispatcher`. To improve performance for production
 environments, it's recommended that you either symlink or copy theme assets into
 the application's webroot. See below for more information.
 

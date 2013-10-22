@@ -41,7 +41,7 @@ Choosing the sender
 -------------------
 
 When sending email on behalf of other people it's often a good idea to define the
-original sender using the Sender header.  You can do so using ``sender()``::
+original sender using the Sender header. You can do so using ``sender()``::
 
     $Email = new CakeEmail();
     $Email->sender('app@example.com', 'MyApp emailer');
@@ -49,7 +49,7 @@ original sender using the Sender header.  You can do so using ``sender()``::
 .. note::
 
     It's also a good idea to set the envelope sender when sending mail on another
-    person's behalf.  This prevents them from getting any messages about
+    person's behalf. This prevents them from getting any messages about
     deliverability.
 
 Configuration
@@ -93,7 +93,7 @@ you can also just load an array of configs::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
 You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with 
-``'ssl://'`` and configure the port value accordingly.  Example::
+``'ssl://'`` and configure the port value accordingly. Example::
 
     class EmailConfig {
         public $gmail = array(
@@ -190,12 +190,12 @@ See ``CakeEmail::setHeaders()`` and ``CakeEmail::addHeaders()``
 Sending templated emails
 ------------------------
 
-Emails are often much more than just a simple text message.  In order
+Emails are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Emails``.  Email views can also use layouts, 
+``View`` directory called ``Emails``. Email views can also use layouts, 
 and elements just like normal views::
 
     $Email = new CakeEmail();
@@ -236,7 +236,7 @@ In your email templates you can use these with::
     <p>Here is your value: <b><?php echo $value; ?></b></p>
 
 You can use helpers in emails as well, much like you can in normal view files.
-By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
+By default only the :php:class:`HtmlHelper` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
     $Email->helpers(array('Html', 'Custom', 'Text'));
@@ -261,7 +261,7 @@ You can do this using themes by telling CakeEmail to use appropriate theme using
     $Email->theme('TestTheme');
 
 This allows you to override the `new_comment` template in your theme without modifying
-the Blog plugin.  The template file needs to be created in the following path:
+the Blog plugin. The template file needs to be created in the following path:
 ``APP/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
 
 Sending attachments
@@ -269,7 +269,7 @@ Sending attachments
 
 .. php:method:: attachments($attachments = null)
 
-You can attach files to email messages as well.  There are a few
+You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
@@ -299,7 +299,7 @@ you want the filenames to appear in the recipient's mail client:
    body like ``<img src="cid:my-content-id">``.
 
    4.2. You can use the ``contentDisposition`` option to disable the
-   ``Content-Disposition`` header for an attachment.  This is useful when
+   ``Content-Disposition`` header for an attachment. This is useful when
    sending ical invites to clients using outlook.
 
    4.3 Instead of the ``file`` option you can provide the file contents as
@@ -340,7 +340,7 @@ transport). To start off your file should look like::
     }
 
 You must implement the method ``send(CakeEmail $Email)`` with your custom logic.
-Optionally, you can implement the ``config($config)`` method.  ``config()`` is
+Optionally, you can implement the ``config($config)`` method. ``config()`` is
 called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
@@ -387,7 +387,7 @@ This method will send an email to you@example.com, from me@example.com with
 subject Subject and content Message.
 
 The return of ``deliver()`` is a :php:class:`CakeEmail` instance with all
-configurations set.  If you do not want to send the email right away, and wish
+configurations set. If you do not want to send the email right away, and wish
 to configure a few things before sending, you can pass the 5th parameter as
 false.
 

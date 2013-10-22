@@ -3,7 +3,7 @@ Behaviors
 
 Model behaviors are a way to organize some of the functionality
 defined in CakePHP models. They allow us to separate and reuse logic that
-creates a type of behavior, and they do this without requiring inheritance.  For
+creates a type of behavior, and they do this without requiring inheritance. For
 example creating tree structures. By providing a simple yet powerful way to
 enhance models, behaviors allow us to attach functionality to models by defining
 a simple class variable. That's how behaviors allow models to get rid of all the
@@ -17,14 +17,14 @@ the table. Many records may need to be updated as things move around. Rather
 than creating those tree-manipulation methods on a per model basis (for every
 model that needs that functionality), we could simply tell our model to use the
 :php:class:`TreeBehavior`, or in more formal terms, we tell our model to behave
-as a Tree.  This is known as attaching a behavior to a model. With just one line
+as a Tree. This is known as attaching a behavior to a model. With just one line
 of code, our CakePHP model takes on a whole new set of methods that allow it to
 interact with the underlying structure.
 
 CakePHP already includes behaviors for tree structures, translated content,
 access control list interaction, not to mention the community-contributed
 behaviors already available in the CakePHP Bakery (`http://bakery.cakephp.org
-<http://bakery.cakephp.org>`_).  In this section, we'll cover the basic usage
+<http://bakery.cakephp.org>`_). In this section, we'll cover the basic usage
 pattern for adding behaviors to models, how to use CakePHP's built-in behaviors,
 and how to create our own.
 
@@ -153,7 +153,7 @@ automatically. The callbacks are similar to those found in Models:
 ``onError`` - see
 :doc:`/models/callback-methods`.
 
-Your behaviors should be placed in ``app/Model/Behavior``.  They are named in CamelCase and
+Your behaviors should be placed in ``app/Model/Behavior``. They are named in CamelCase and
 postfixed by ``Behavior``, ex. NameBehavior.php.
 It's often helpful to use a core behavior as a template when creating
 your own. Find them in ``lib/Cake/Model/Behavior/``.
@@ -178,7 +178,7 @@ passed from the model to the behavior::
 
 Since behaviors are shared across all the model instances that use them, it's a
 good practice to store the settings per alias/model name that is using the
-behavior.  When created behaviors will have their ``setup()`` method called::
+behavior. When created behaviors will have their ``setup()`` method called::
 
     public function setup(Model $Model, $settings = array()) {
         if (!isset($this->settings[$Model->alias])) {
@@ -225,10 +225,10 @@ Mapped methods
 --------------
 
 In addition to providing 'mixin' methods, behaviors can also provide pattern
-matching methods. Behaviors can also define mapped methods.  Mapped methods use
+matching methods. Behaviors can also define mapped methods. Mapped methods use
 pattern matching for method invocation. This allows you to create methods
-similar to ``Model::findAllByXXX`` methods on your behaviors.  Mapped methods need
-to be declared in your behaviors ``$mapMethods`` array.  The method signature for
+similar to ``Model::findAllByXXX`` methods on your behaviors. Mapped methods need
+to be declared in your behaviors ``$mapMethods`` array. The method signature for
 a mapped method is slightly different than a normal behavior mixin method::
 
     class MyBehavior extends ModelBehavior {
@@ -240,10 +240,10 @@ a mapped method is slightly different than a normal behavior mixin method::
         }
     }
 
-The above will map every ``doXXX()`` method call to the behavior.  As you can
+The above will map every ``doXXX()`` method call to the behavior. As you can
 see, the model is still the first parameter, but the called method name will be
-the 2nd parameter.  This allows you to munge the method name for additional
-information, much like ``Model::findAllByXX``.  If the above behavior was
+the 2nd parameter. This allows you to munge the method name for additional
+information, much like ``Model::findAllByXX``. If the above behavior was
 attached to a model the following would happen::
 
     $model->doReleaseTheHounds('homer', 'lenny');
@@ -283,12 +283,12 @@ model that the behavior method was invoked on.
 
 .. php:method:: setup(Model $Model, array $settings = array())
 
-    Called when a behavior is attached to a model.  The settings come from the
+    Called when a behavior is attached to a model. The settings come from the
     attached model's ``$actsAs`` property.
 
 .. php:method:: cleanup(Model $Model)
 
-    Called when a behavior is detached from a model.  The base method removes
+    Called when a behavior is detached from a model. The base method removes
     model settings based on ``$model->alias``. You can override this method and
     provide custom cleanup functionality.
 

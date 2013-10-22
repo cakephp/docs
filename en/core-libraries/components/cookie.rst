@@ -168,7 +168,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: type($type)
 
-    Allows you to change the encryption scheme.  By default the 'cipher' scheme
+    Allows you to change the encryption scheme. By default the 'cipher' scheme
     is used. However, you should use the 'rijndael' scheme for improved
     security.
 

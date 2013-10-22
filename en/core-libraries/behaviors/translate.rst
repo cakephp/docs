@@ -94,8 +94,8 @@ Reading translated content
 ==========================
 
 By default the TranslateBehavior will automatically fetch and add in data based
-on the current locale.  The current locale is read from ``Configure::read('Config.language')``
-which is assigned by the :php:class:`L10n` class.  You can override this
+on the current locale. The current locale is read from ``Configure::read('Config.language')``
+which is assigned by the :php:class:`L10n` class. You can override this
 default on the fly using ``$Model->locale``.
 
 Retrieve translated fields in a specific locale

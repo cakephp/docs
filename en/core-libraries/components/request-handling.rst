@@ -143,8 +143,8 @@ Automatically decoding request data
     :param array $handler: The handler information for the type.
 
     Add a request data decoder. The handler should contain a callback, and any
-    additional arguments for the callback.  The callback should return
-    an array of data contained in the request input.  For example adding a CSV
+    additional arguments for the callback. The callback should return
+    an array of data contained in the request input. For example adding a CSV
     handler in your controllers' beforeFilter could look like::
 
         $parser = function ($data) {
@@ -157,7 +157,7 @@ Automatically decoding request data
         $this->RequestHandler->addInputType('csv', array($parser));
 
     The above example requires PHP 5.3, however you can use any
-    `callable <http://php.net/callback>`_ for the handling function.  You can
+    `callable <http://php.net/callback>`_ for the handling function. You can
     also pass additional arguments to the callback, this is useful for callbacks
     like ``json_decode``::
 

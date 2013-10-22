@@ -119,9 +119,9 @@ this::
 Since we've added a call to :php:meth:`Router::parseExtensions()`,
 the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
-requests, we'll be making XML views.  You can also easily make JSON views using
+requests, we'll be making XML views. You can also easily make JSON views using
 CakePHP's built-in :doc:`/views/json-and-xml-views`. By using the built in
-:php:class:`XmlView` we can define a ``_serialize`` view variable.  This special
+:php:class:`XmlView` we can define a ``_serialize`` view variable. This special
 view variable is used to define which view variables ``XmlView`` should
 serialize into XML.
 
@@ -171,8 +171,8 @@ Accepting input in other formats
 ================================
 
 Typically REST applications not only output content in alternate data formats
-they also accept data in different formats.  In CakePHP, the
-:php:class:`RequestHandlerComponent` helps facilitate this.  By default
+they also accept data in different formats. In CakePHP, the
+:php:class:`RequestHandlerComponent` helps facilitate this. By default
 it will decode any incoming JSON/XML input data for POST/PUT requests
 and supply the array version of that data in `$this->request->data`.
 You can also wire in additional deserializers for alternate formats if you
@@ -184,8 +184,8 @@ Modifying the default REST routes
 .. versionadded:: 2.1
 
 If the default REST routes don't work for your application, you can modify them
-using :php:meth:`Router::resourceMap()`.  This method allows you to set the
-default routes that get set with :php:meth:`Router::mapResources()`.  When using
+using :php:meth:`Router::resourceMap()`. This method allows you to set the
+default routes that get set with :php:meth:`Router::mapResources()`. When using
 this method you need to set *all* the defaults you want to use::
 
     Router::resourceMap(array(

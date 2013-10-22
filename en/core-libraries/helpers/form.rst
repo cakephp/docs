@@ -93,7 +93,7 @@ opening form tag.
         override the default HTTP method.
 
     When creating forms for models in plugins, you should always use
-    :term:`plugin syntax` when creating a form.  This will ensure the form is
+    :term:`plugin syntax` when creating a form. This will ensure the form is
     correctly generated::
 
         echo $this->Form->create('ContactManager.Contact');
@@ -276,10 +276,10 @@ Closing the Form
 Creating form elements
 ======================
 
-There are a few ways to create form inputs with the FormHelper.  We'll start by
+There are a few ways to create form inputs with the FormHelper. We'll start by
 looking at ``input()``. This method will automatically inspect the model field it
 has been supplied in order to create an appropriate input for that
-field.  Internally ``input()`` delegates to other methods in FormHelper.
+field. Internally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: input(string $fieldName, array $options = array())
 
@@ -492,7 +492,7 @@ HTML attributes. The following will cover the options specific to
     </div>
 
 * ``$options['div']`` Use this option to set attributes of the input's
-  containing div.  Using a string value will set the div's class name. An array
+  containing div. Using a string value will set the div's class name. An array
   will set the div's attributes to those specified by the array's keys/values.
   Alternatively, you can set this key to false to disable the output of the div.
 
@@ -723,7 +723,7 @@ Generating specific types of inputs
 ===================================
 
 In addition to the generic ``input()`` method, ``FormHelper`` has specific
-methods for generating a number of different types of inputs.  These can be used
+methods for generating a number of different types of inputs. These can be used
 to generate just the input widget itself, and combined with other methods like
 :php:meth:`~FormHelper::label()` and :php:meth:`~FormHelper::error()` to
 generate fully custom form layouts.
@@ -733,7 +733,7 @@ generate fully custom form layouts.
 Common options
 --------------
 
-Many of the various input element methods support a common set of options.  All
+Many of the various input element methods support a common set of options. All
 of these options are also supported by ``input()``. To reduce repetition the
 common options shared by all input methods are as follows:
 
@@ -771,7 +771,7 @@ common options shared by all input methods are as follows:
     not set any value at all. Instead use ``'default' => 0``.
 
 In addition to the above options, you can mixin any HTML attribute you wish to
-use.  Any non-special option name will be treated as an HTML attribute, and
+use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
 
 
@@ -924,8 +924,8 @@ Form Element-Specific Methods
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-    Create a label element.  ``$fieldName`` is used for generating the
-    DOM id.  If ``$text`` is undefined, ``$fieldName`` will be used to inflect
+    Create a label element. ``$fieldName`` is used for generating the
+    DOM id. If ``$text`` is undefined, ``$fieldName`` will be used to inflect
     the label's text::
 
         echo $this->Form->label('User.name');
@@ -1094,7 +1094,7 @@ Form Element-Specific Methods
       will disable all of the generated radio buttons.
 
     * ``$attributes['legend']`` Radio elements are wrapped with a label and
-      fieldset by default.  Set ``$attributes['legend']`` to false to remove
+      fieldset by default. Set ``$attributes['legend']`` to false to remove
       them.::
 
         $options = array('M' => 'Male', 'F' => 'Female');
@@ -1123,7 +1123,7 @@ Form Element-Specific Methods
 
     Creates a select element, populated with the items in ``$options``,
     with the option specified by ``$attributes['value']`` shown as selected by
-    default.  Set the 'empty' key in the ``$attributes`` variable to false to
+    default. Set the 'empty' key in the ``$attributes`` variable to false to
     turn off the default empty option::
 
         $options = array('M' => 'Male', 'F' => 'Female');
@@ -1596,7 +1596,7 @@ Setting Defaults for all fields
 .. versionadded:: 2.2
 
 You can declare a set of default options for ``input()`` using
-:php:meth:`FormHelper::inputDefaults()`.  Changing the default options allows
+:php:meth:`FormHelper::inputDefaults()`. Changing the default options allows
 you to consolidate repeated options into a single method call::
 
     $this->Form->inputDefaults(array(
@@ -1617,17 +1617,17 @@ Working with SecurityComponent
 ==============================
 
 :php:meth:`SecurityComponent` offers several features that make your forms safer
-and more secure.  By simply including the ``SecurityComponent`` in your
+and more secure. By simply including the ``SecurityComponent`` in your
 controller, you'll automatically benefit from CSRF and form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
-your forms using :php:meth:`FormHelper::end()`.  This will ensure that the
+your forms using :php:meth:`FormHelper::end()`. This will ensure that the
 special ``_Token`` inputs are generated.
 
 .. php:method:: unlockField($name)
 
     Unlocks a field making it exempt from the ``SecurityComponent`` field
-    hashing.  This also allows the fields to be manipulated by JavaScript.
+    hashing. This also allows the fields to be manipulated by JavaScript.
     The ``$name`` parameter should be the entity name for the input::
 
         $this->Form->unlockField('User.id');

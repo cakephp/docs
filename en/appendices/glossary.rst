@@ -29,7 +29,7 @@ Glossary
     
     plugin syntax
         Plugin syntax refers to the dot separated classname indicating classes
-        are part of a plugin.  E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
+        are part of a plugin. E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
         and the classname is Toolbar.
     
     dot notation
@@ -49,7 +49,7 @@ Glossary
             )
 
     CSRF
-        Cross Site Request Forgery.  Prevents replay attacks, double
+        Cross Site Request Forgery. Prevents replay attacks, double
         submissions and forged requests from other domains.
 
     routes.php
@@ -60,7 +60,7 @@ Glossary
 
     DRY
         Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds.  In CakePHP DRY is used
+        reducing repetition of information of all kinds. In CakePHP DRY is used
         to allow you to code things once and re-use them across your
         application.
 
