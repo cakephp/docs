@@ -28,7 +28,7 @@ default.
 Output from this function is only shown if the core debug variable
 has been set to a value greater than 0.
 
-.. versionchanged:: 2.1 
+.. versionchanged:: 2.1
     The output of ``debug()`` more resembles ``var_dump()``, and uses
     :php:class:`Debugger` internally.
 
@@ -111,7 +111,7 @@ set to a value greater than 0.
 
         //In PostsController::index()
         pr(Debugger::trace());
-        
+
         //outputs
         PostsController::index() - APP/Controller/DownloadsController.php, line 48
         Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
@@ -134,14 +134,14 @@ set to a value greater than 0.
     lines around it.::
 
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
-        
+
         //will output the following.
         Array
         (
             [0] => <code><span style="color: #000000"> * @access public</span></code>
             [1] => <code><span style="color: #000000"> */</span></code>
             [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-         
+
             [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
             [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
         )
@@ -174,7 +174,7 @@ Using Logging to debug
 ======================
 
 Logging messages is another good way to debug applications, and you can use
-:php:class:`CakeLog` to do logging in your application. All objects that 
+:php:class:`CakeLog` to do logging in your application. All objects that
 extend :php:class:`Object` have an instance method `log()` which can be used
 to log messages::
 
@@ -195,8 +195,8 @@ Debug Kit
 =========
 
 DebugKit is a plugin that provides a number of good debugging tools. It primarily
-provides a toolbar in the rendered HTML, that provides a plethora of information about 
-your application and the current request. You can download 
+provides a toolbar in the rendered HTML, that provides a plethora of information about
+your application and the current request. You can download
 `DebugKit <https://github.com/cakephp/debug_kit>`_ from github.
 
 

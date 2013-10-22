@@ -55,12 +55,12 @@ folder, it will default to the main webroot folder::
 
     //When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
-     
+
     //creates a path like
     /theme/purple_cupcake/css/main.css
-     
+
     //and links to
-    app/View/Themed/PurpleCupcake/webroot/css/main.css 
+    app/View/Themed/PurpleCupcake/webroot/css/main.css
 
 Increasing performance of plugin and theme assets
 -------------------------------------------------

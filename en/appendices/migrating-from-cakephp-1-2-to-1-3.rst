@@ -98,25 +98,25 @@ issues):
 
 -  session.php -> cake\_session.php
 
-   
+
    -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
 -  socket.php -> cake\_socket.php
 
-   
+
    -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
 -  schema.php -> cake\_schema.php
 
-   
+
    -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
 -  behavior.php -> model\_behavior.php
 
-   
+
    -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
@@ -278,7 +278,7 @@ update simply change your core.php::
 
     //from:
     Configure::write('Routing.admin', 'admin');
-    
+
     //to:
     Configure::write('Routing.prefixes', array('admin'));
 
@@ -307,7 +307,7 @@ use a greedy star in the middle of a route::
 
     Router::connect(
         '/pages/*/:event',
-        array('controller' => 'pages', 'action' => 'display'), 
+        array('controller' => 'pages', 'action' => 'display'),
         array('event' => '[a-z0-9_-]+')
     );
 
@@ -579,7 +579,7 @@ being sorted, either asc or desc.
    create hidden fieldset elements. Instead they create hidden div
    elements. This improves validation with HTML4.
 
-Also be sure to check the :ref:`form-improvements-1-3` for additional changes and 
+Also be sure to check the :ref:`form-improvements-1-3` for additional changes and
 new features in the FormHelper.
 
 **HtmlHelper**

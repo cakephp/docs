@@ -173,7 +173,7 @@ the cases directory and use ``PHPUnit_Framework_TestSuite`` as a base class. An
 example Testsuite would look like::
 
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
-    
+
     /**
      * Suite define the tests for this suite
      *
@@ -181,7 +181,7 @@ example Testsuite would look like::
      */
         public static function suite() {
             $suite = new PHPUnit_Framework_TestSuite('JsHelper and all Engine Helpers');
-            
+
             $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
             $suite->addTestFile($helperTestPath . 'JsHelperTest.php');
             $suite->addTestFile($helperTestPath . 'JqueryEngineHelperTest.php');

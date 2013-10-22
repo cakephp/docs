@@ -100,7 +100,7 @@ this could be used to create routes to handle subdomains, or enabling https/http
 flags. An example of a route class that supports subdomains would be::
 
     class SubdomainRoute extends CakeRoute {
-        
+
         public function match($params) {
             $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
             unset($params['subdomain']);
@@ -252,27 +252,27 @@ and not need to replace every instance of ``$this->Html`` in your views. To do
 this, pass the 'className' key along with your class, like you would with
 models::
 
-    public $helpers = array( 
-        'Html' => array( 
-            'className' => 'MyHtml' 
+    public $helpers = array(
+        'Html' => array(
+            'className' => 'MyHtml'
         )
     );
 
 Similarly, you can alias components for use in your controllers::
 
-    public $components = array( 
-        'Email' => array( 
-            'className' => 'QueueEmailer' 
+    public $components = array(
+        'Email' => array(
+            'className' => 'QueueEmailer'
         )
     );
 
 Calls to the Email component would call the QueueEmailer component instead.
 Finally, you can alias behaviors as well::
 
-    public $actsAs = array( 
-        'Containable' => array( 
-            'className' => 'SuperContainable' 
-        ) 
+    public $actsAs = array(
+        'Containable' => array(
+            'className' => 'SuperContainable'
+        )
     );
 
 Because of the way 2.0 utilizes collections and shares them across the
