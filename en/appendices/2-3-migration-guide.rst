@@ -58,7 +58,7 @@ RequestHandlerComponent
 -----------------------
 
 - :php:meth:`RequestHandlerComponent::viewClassMap()` has been added, which is used to map a type
-  to view classname. You can add ``$settings['viewClassMap']`` for automatically setting
+  to view class name. You can add ``$settings['viewClassMap']`` for automatically setting
   the correct viewClass based on extension/content type.
 
 CookieComponent
@@ -235,7 +235,7 @@ FormHelper
   you to create link forms using HTTP methods other than POST.
 - When creating inputs with :php:meth:`FormHelper::input()` you can now set the
   ``errorMessage`` option to false. This will disable the error message display,
-  but leave the error classnames intact.
+  but leave the error class names intact.
 - The FormHelper now also adds the HTML5 ``required`` attribute to your input
   elements based on validation rules for a field. If you have a "Cancel" button
   in your form which submits the form then you should add ``'formnovalidate' => true``

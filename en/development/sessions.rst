@@ -129,7 +129,7 @@ are then applied to ``session_set_save_handler``::
         )
     ));
 
-The second mode is to define an 'engine' key. This key should be a classname
+The second mode is to define an 'engine' key. This key should be a class name
 that implements ``CakeSessionHandlerInterface``. Implementing this interface
 will allow CakeSession to automatically map the methods for the handler. Both
 the core Cache and Database session handlers use this method for saving
@@ -146,9 +146,9 @@ CakeSessionHandlerInterface
 
 This interface is used for all custom session handlers inside CakePHP, and can
 be used to create custom user land session handlers. Simply implement the
-interface in your class and set ``Session.handler.engine``  to the classname
+interface in your class and set ``Session.handler.engine``  to the class name
 you've created. CakePHP will attempt to load the handler from inside
-``app/Model/Datasource/Session/$classname.php``. So if your classname is
+``app/Model/Datasource/Session/$classname.php``. So if your class name is
 ``AppSessionHandler`` the file should be
 ``app/Model/Datasource/Session/AppSessionHandler.php``.
 

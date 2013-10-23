@@ -17,7 +17,7 @@ especially handy when working with legacy systems.
 Controller Conventions
 ======================
 
-Controller classnames are plural, CamelCased, and end in
+Controller class names are plural, CamelCased, and end in
 ``Controller``. ``PeopleController`` and
 ``LatestArticlesController`` are both examples of conventional
 controller names.
@@ -83,10 +83,10 @@ For more information on CakePHP URLs and parameter handling, see
 
 .. _file-and-classname-conventions:
 
-File and Classname Conventions
+File and Class Name Conventions
 ==============================
 
-In general, filenames match the classnames, which are
+In general, filenames match the class names, which are
 CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
 the file should be named **MyNiftyClass.php**. Below are
 examples of how to name the file for each of the different types of
@@ -111,7 +111,7 @@ Each file would be located in the appropriate folder in your app folder.
 Model and Database Conventions
 ==============================
 
-Model classnames are singular and CamelCased. Person, BigPerson,
+Model class names are singular and CamelCased. Person, BigPerson,
 and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and

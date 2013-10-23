@@ -155,7 +155,7 @@ such as debugging and translating content.
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and classname. If $name
+    Splits a dot syntax plugin name into its plugin and class name. If $name
     does not have a dot, then index 0 will be null.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``

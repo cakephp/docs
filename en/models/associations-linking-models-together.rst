@@ -182,7 +182,7 @@ property to the model class. Remember to have a Profile model in
 
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
-string containing the classname of the associated model, as we've
+string containing the class name of the associated model, as we've
 done above.
 
 If you need more control, you can define your associations using
@@ -204,7 +204,7 @@ to include only certain records.
 Possible keys for hasOne association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'User hasOne Profile'
    relationship, the className key should equal 'Profile.'
 -  **foreignKey**: the name of the foreign key found in the other
@@ -297,7 +297,7 @@ syntax::
 Possible keys for belongsTo association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Profile belongsTo User'
    relationship, the className key should equal 'User.'
 -  **foreignKey**: the name of the foreign key found in the current
@@ -397,7 +397,7 @@ syntax::
 Possible keys for hasMany association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'User hasMany Comment'
    relationship, the className key should equal 'Comment.'
 -  **foreignKey**: the name of the foreign key found in the other
@@ -653,7 +653,7 @@ Possible keys for HABTM association arrays include:
 
 .. _ref-habtm-arrays:
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Recipe HABTM Ingredient'
    relationship, the className key should equal 'Ingredient.'
 -  **joinTable**: The name of the join table used in this

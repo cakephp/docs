@@ -166,7 +166,7 @@ set to a value greater than 0.
 
 .. php:staticmethod:: Debugger::getType($var)
 
-    Get the type of a variable. Objects will return their classname
+    Get the type of a variable. Objects will return their class name
 
     .. versionadded:: 2.1
 

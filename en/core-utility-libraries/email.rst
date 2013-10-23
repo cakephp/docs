@@ -150,7 +150,7 @@ The following configuration keys are used:
 - ``'subject'``: Subject of the message. See ``CakeEmail::subject()``.
 - ``'message'``: Content of message. Do not set this field if you are using rendered content.
 - ``'headers'``: Headers to be included. See ``CakeEmail::setHeaders()``.
-- ``'viewRender'``: If you are using rendered content, set the view classname.
+- ``'viewRender'``: If you are using rendered content, set the view class name.
   See ``CakeEmail::viewRender()``.
 - ``'template'``: If you are using rendered content, set the template name. See
   ``CakeEmail::template()``.
