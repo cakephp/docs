@@ -316,7 +316,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     The ``$options`` parameter allows you to customize how ``input()`` works,
     and finely control what is generated.
 
-    The wrapping div will have a ``required`` classname appended if the
+    The wrapping div will have a ``required`` class name appended if the
     validation rules for the Model's field do not specify ``allowEmpty =>
     true``. One limitation of this behavior is the field's model must have
     been loaded during this request. Or be directly associated to the
@@ -415,7 +415,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     options.
 
     - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
-      it will be used as the classname for the fieldset element.
+      it will be used as the class name for the fieldset element.
     - ``legend`` Set to false to disable the legend for the generated input set.
       Or supply a string to customize the legend text.
 
@@ -737,7 +737,7 @@ Many of the various input element methods support a common set of options. All
 of these options are also supported by ``input()``. To reduce repetition the
 common options shared by all input methods are as follows:
 
-* ``$options['class']`` You can set the classname for an input::
+* ``$options['class']`` You can set the class name for an input::
 
     echo $this->Form->input('title', array('class' => 'custom-class'));
 
@@ -939,7 +939,7 @@ Form Element-Specific Methods
         <label for="UserName">Your username</label>
 
     ``$options`` can either be an array of HTML attributes, or a string that
-    will be used as a classname::
+    will be used as a class name::
 
         echo $this->Form->label('User.name', null, array('id' => 'user-label'));
         echo $this->Form->label('User.name', 'Your username', 'highlight');
@@ -994,7 +994,7 @@ Form Element-Specific Methods
     .. versionchanged:: 2.0
         Hidden fields no longer remove the class attribute. This means
         that if there are validation errors on hidden fields, the
-        error-field classname will be applied.
+        error-field class name will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -1569,7 +1569,7 @@ Displaying and checking errors
        error.
     -  'wrap' mixed Whether or not the error message should be wrapped
        in a div. If a string, will be used as the HTML tag to use.
-    -  'class' string The classname for the error message
+    -  'class' string The class name for the error message
 
 .. php:method:: isFieldError(string $fieldName)
 
@@ -1672,7 +1672,7 @@ parameter of ``$this->Form->create()``
 
 Hidden fields no longer remove the class attribute. This means
 that if there are validation errors on hidden fields,
-the error-field classname will be applied.
+the error-field class name will be applied.
 
 
 .. meta::

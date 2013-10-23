@@ -116,8 +116,8 @@ Supported options are:
   you wish.
 
 * ``ellipsis`` Ellipsis content, defaults to '...'
-* ``class`` The classname used on the wrapping tag.
-* ``currentClass`` The classname to use on the current/active link. Defaults to
+* ``class`` The class name used on the wrapping tag.
+* ``currentClass`` The class name to use on the current/active link. Defaults to
   *current*.
 * ``currentTag`` Tag to use for current page number, defaults to null.
   This allows you to generate for example Twitter Bootstrap like links with the

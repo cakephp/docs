@@ -212,7 +212,7 @@ AuthComponent
 AclComponent
 ------------
 
-- :php:class:`AclComponent` no longer lowercases and inflects the classname used for
+- :php:class:`AclComponent` no longer lowercases and inflects the class name used for
   ``Acl.classname``. Instead it uses the provided value as is.
 - Acl backend implementations should now be put in ``Controller/Component/Acl``.
 - Acl implementations should be moved into the Component/Acl directory from

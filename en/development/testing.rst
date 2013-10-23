@@ -84,7 +84,7 @@ tests:
    of just .php.
 #. The classes containing tests should extend ``CakeTestCase``,
    ``ControllerTestCase`` or ``PHPUnit_Framework_TestCase``.
-#. Like other classnames, the test case classnames should match the filename.
+#. Like other class names, the test case class names should match the filename.
    ``RouterTest.php`` should contain ``class RouterTest extends CakeTestCase``.
 #. The name of any method containing a test (i.e. containing an
    assertion) should begin with ``test``, as in ``testPublished()``.

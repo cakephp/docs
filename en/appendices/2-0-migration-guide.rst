@@ -41,7 +41,7 @@ for increasing the overall framework performance.
 
 Biggest roadblock for achieving this was maintaining some sort of backwards
 compatibility in the way the classes are loaded right now, and we definitely did
-not want to become a framework of huge class prefixes, having classnames like
+not want to become a framework of huge class prefixes, having class names like
 ``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
 clear migration path for future PHP 5.3 version of CakePHP. First let's
@@ -434,7 +434,7 @@ used to doing it. The biggest change is the introduction of a new method::
     App::uses('AuthComponent', 'Controller/Component');
 
 We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located. The first parameter of
+of declaring where a class name should be located. The first parameter of
 :php:meth:`App::uses()` is the complete name of the class you intend to load,
 and the second one, the package name (or namespace) where it belongs to. The
 main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
@@ -762,7 +762,7 @@ FormHelper::hidden()
 ~~~~~~~~~~~~~~~~~~~~
 
 Hidden fields no longer remove the class attribute. This means that if there are
-validation errors on hidden fields, the ``error-field`` classname will be
+validation errors on hidden fields, the ``error-field`` class name will be
 applied.
 
 CacheHelper
@@ -1248,7 +1248,7 @@ ConnectionManager
 
 ``ConnectionManager::enumConnectionObjects()`` will now return the current
 configuration for each connection created, instead of an array with filename,
-classname and plugin, which wasn't really useful.
+class name and plugin, which wasn't really useful.
 
 When defining database connections you will need to make some changes to the way
 configs were defined in the past. Basically in the database configuration class,

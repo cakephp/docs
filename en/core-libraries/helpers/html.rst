@@ -538,7 +538,7 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: div(string $class, string $text, array $options)
 
-    :param string $class: The classname for the div.
+    :param string $class: The class name for the div.
     :param string $text: The content inside the div.
     :param array $options: An array of :term:`html attributes`.
 
@@ -560,7 +560,7 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method::  para(string $class, string $text, array $options)
 
-    :param string $class: The classname for the paragraph.
+    :param string $class: The class name for the paragraph.
     :param string $text: The content inside the paragraph.
     :param array $options: An array of :term:`html attributes`.
 
