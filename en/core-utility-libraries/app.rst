@@ -294,14 +294,14 @@ Overriding classes in CakePHP
 You can override almost every class in the framework, exceptions are the
 :php:class:`App` and :php:class:`Configure` classes. Whenever you like to
 perform such overriding, just add your class to your app/Lib folder mimicking
-the internal structure of the framework. Some examples to follow
+the internal structure of the framework. Some examples to follow:
 
 * To override the :php:class:`Dispatcher` class, create ``app/Lib/Routing/Dispatcher.php``
 * To override the :php:class:`CakeRoute` class, create ``app/Lib/Routing/Route/CakeRoute.php``
 * To override the :php:class:`Model` class, create ``app/Lib/Model/Model.php``
 
-When you load the replaced files, the app/Lib files will be loaded instead of
-the built-in core classes.
+When you load the overridden classes now, the files in ``app/Lib`` will be loaded
+instead of the built-in core ones.
 
 Loading Vendor Files
 ====================
