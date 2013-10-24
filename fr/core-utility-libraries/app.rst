@@ -312,7 +312,7 @@ Surcharger les classes dans CakePHP
 Vous pouvez surcharger presque toute classe dans le framework, les exceptions
 sont les classes :php:class:`App` et :php:class:`Configure`. Quelque soit le
 moment où vous souhaitez effectuer l'écrasement, ajoutez seulement votre classe
-dans votre dossier app/Lib en imitant la structure interne du framework.
+dans votre dossier ``app/Lib`` en imitant la structure interne du framework.
 Quelques exemples suivants
 
 * Pour écraser la classe :php:class:`Dispatcher`, créer
