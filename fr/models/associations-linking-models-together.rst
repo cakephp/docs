@@ -541,7 +541,7 @@ cela::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // compte seulement si "Image" est active = 1
+                'counterScope' => array('ImageComment.active' => 1) // compte seulement si "ImageComment" est active = 1
             )
         );
     }
