@@ -113,3 +113,8 @@ FormHelper
 
 - FormHelper will now generate file inputs for ``binary`` field types now.
 
+PaginationHelper
+----------------
+
+- :php:meth:`PaginatorHelper::sort()` now has a ``lock`` option to create pagination sort links with
+  only the default direction.
