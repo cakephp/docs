@@ -278,7 +278,7 @@ numerically indexed array of records like this::
 
 .. note::
 
-    Note that we are passing numerical indices instead of usual
+    Note that we are passing numerical indexes instead of usual
     ``$data`` containing the Article key. When saving multiple records
     of same model the records arrays should be just numerically indexed
     without the model key.

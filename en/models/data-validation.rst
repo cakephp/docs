@@ -278,7 +278,7 @@ field, this is basically how it should look::
 As you can see, this is quite similar to what we did in the
 previous section. There, for each field we had only one array of
 validation parameters. In this case, each 'fieldName' consists of
-an array of rule indices. Each 'ruleName' contains a separate array
+an array of rule indexes. Each 'ruleName' contains a separate array
 of validation parameters.
 
 This is better explained with a practical example::
