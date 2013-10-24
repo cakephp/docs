@@ -28,7 +28,7 @@ also access it in Components by using the controller reference. Some of the duti
 * Provide environment introspection pertaining to the request. Things like the
   headers sent, the client's IP address, and the subdomain/domain information
   about the application the server is running on.
-* Provide access to request parameters both as array indices and object
+* Provide access to request parameters both as array indexes and object
   properties.
 
 Accessing request parameters
@@ -805,4 +805,4 @@ CakeResponse API
 
 .. meta::
     :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
+    :keywords lang=en: request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
