@@ -4,7 +4,7 @@ Pagination
 .. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
 
 One of the main obstacles of creating flexible and user-friendly
-web applications is designing an intuitive UI. Many applications
+web applications is designing an intuitive user interface. Many applications
 tend to grow in size and complexity quickly, and designers and
 programmers alike find they are unable to cope with displaying
 hundreds or thousands of records. Refactoring takes time, and
@@ -98,7 +98,7 @@ additional information is set to ``$this->request->params['paging']``, and is
 used by :php:class:`PaginatorHelper` for creating links.
 :php:meth:`PaginatorComponent::paginate()` also adds
 :php:class:`PaginatorHelper` to the list of helpers in your controller, if it
-has not been added already.::
+has not been added already::
 
     public function list_recipes() {
         $this->Paginator->settings = $this->paginate;
@@ -109,12 +109,12 @@ has not been added already.::
     }
 
 You can filter the records by passing conditions as second
-parameter to the ``paginate()`` function.::
+parameter to the ``paginate()`` function::
 
     $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
 Or you can also set ``conditions`` and other pagination settings array inside
-your action.::
+your action::
 
     public function list_recipes() {
         $this->Paginator->settings = array(
@@ -226,7 +226,8 @@ Control which fields used for ordering
 By default sorting can be done with any column on a model. This is sometimes
 undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
-``PaginatorComponent::paginate()`` to restrict the columns sorting will be done on::
+``PaginatorComponent::paginate()`` to restrict the columns that sorting will be
+done on::
 
     $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 
@@ -282,7 +283,7 @@ arguments.
 
         $this->paginate['limit'] = 10;
 
-    will throw the error "Notice: Indirect modification of overloaded property $paginate has no effect".
+    will throw the error "Notice: Indirect modification of overloaded property $paginate has no effect."
     Assigning an initial value to the property solves the issue::
 
         $this->paginate = array();
