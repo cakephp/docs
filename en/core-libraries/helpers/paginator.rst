@@ -35,6 +35,8 @@ Accepted keys for ``$options``:
 * ``lock`` Lock direction. Will only use the default direction then, defaults to false.
 
   .. versionadded:: 2.5
+    You can now set the lock option to true in order to lock the sorting direction into the
+    specified direction.
 
 Assuming you are paginating some posts, and are on page one::
 
