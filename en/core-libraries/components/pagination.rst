@@ -326,7 +326,7 @@ AJAX Pagination
 
 It's very easy to incorporate AJAX functionality into pagination.
 Using the :php:class:`JsHelper` and :php:class:`RequestHandlerComponent` you can
-easily add Ajax pagination to your application. See :ref:`ajax-pagination` for
+easily add AJAX pagination to your application. See :ref:`ajax-pagination` for
 more information.
 
 Pagination in the view
