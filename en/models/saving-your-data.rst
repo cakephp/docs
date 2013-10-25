@@ -112,7 +112,7 @@ as keys:
 
 * ``validate`` Set to true/false to enable disable validation.
 * ``fieldList`` An array of fields you want to allow for saving.
-* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
@@ -203,7 +203,7 @@ The saveField method also has an alternate syntax::
 as keys:
 
 * ``validate`` Set to true/false to enable disable validation.
-* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
@@ -278,7 +278,7 @@ numerically indexed array of records like this::
 
 .. note::
 
-    Note that we are passing numerical indices instead of usual
+    Note that we are passing numerical indexes instead of usual
     ``$data`` containing the Article key. When saving multiple records
     of same model the records arrays should be just numerically indexed
     without the model key.

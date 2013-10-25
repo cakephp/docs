@@ -19,7 +19,7 @@ application-wide changes. AppController (located at
 ``/app/Model/AppModel.php``) are great places to put methods you want to share
 between all controllers, helpers or models.
 
-Although they aren't classes or files, routes play a role in
+Although routes aren't classes or files, they play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the
 URL ``/controller/action/var1/var2`` maps to
@@ -95,7 +95,7 @@ View Extensions ("Helpers")
 A Helper is a class that aids in view logic. Much like a component
 used among controllers, helpers allow presentational logic to be
 accessed and shared between views. One of the core helpers,
-JsHelper, makes Ajax requests within views much easier and comes with support for jQuery (default), Prototype and Mootools.
+JsHelper, makes AJAX requests within views much easier and comes with support for jQuery (default), Prototype and Mootools.
 
 Most applications have pieces of view code that are used
 repeatedly. CakePHP facilitates view code reuse with layouts and

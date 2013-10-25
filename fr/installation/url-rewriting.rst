@@ -13,6 +13,9 @@ fonctionne correctement. Premièrement, regardez votre fichier
 httpd.conf (Assurez-vous que vous avez édité le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
+Ces fichiers peuvent varier selon les différentes distributions et les versions
+d'apache. Vous pouvez allez voir
+http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
    All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
@@ -54,8 +57,8 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    téléchargements du site de notre dépôt GIT, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
-   Le répertoire root de Cake (a besoin d'être copié dans votre document, cela
-   redirige tout vers votre app Cake)::
+   Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
+   cela redirige tout vers votre app CakePHP)::
    
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -63,7 +66,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Le répertoire app de Cake (sera copié dans le répertoire supérieur de votre
+   Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
    application avec Bake)::
    
        <IfModule mod_rewrite.c>
@@ -72,7 +75,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Le répertoire webroot de Cake (sera copié dans le webroot de votre
+   Le répertoire webroot de CakePHP (sera copié dans le webroot de votre
    application avec Bake)::
 
        <IfModule mod_rewrite.c>
@@ -237,7 +240,7 @@ faire, suivez ces étapes:
     </configuration>
 
 Une fois que le fichier web.config est créé avec les bonnes règles de
-réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et
+réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
 
 Je ne veux / ne peux utiliser l'URL rewriting

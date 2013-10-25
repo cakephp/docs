@@ -110,7 +110,7 @@ default, do the helper setup in your controller as follows::
     ``$helpers`` array in your controller.
 
 The selected JavaScript engine may disappear (replaced by the
-default) from the jsHelper object in your helper, if you miss to do
+default) from the JsHelper object in your helper, if you miss to do
 so and you will get code that does not fit your JavaScript
 library.
 
@@ -156,7 +156,7 @@ in PHP4 and the above sample would be written like::
 Common options
 --------------
 
-In attempts to simplify development where Js libraries can change,
+In attempts to simplify development where JavaScript libraries can change,
 a common set of options is supported by ``JsHelper``, these common
 options will be mapped out to the library specific options
 internally. If you are not planning on switching JavaScript
@@ -256,7 +256,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: object($data, $options = array())
 
-    Serializes ``$data`` into JSON.  This method is a proxy for ``json_encode()``
+    Serializes ``$data`` into JSON. This method is a proxy for ``json_encode()``
     with a few extra features added via the ``$options`` parameter.
 
     **Options:**
@@ -658,7 +658,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Create an html anchor element that has a click event bound to it.
+    Create an HTML anchor element that has a click event bound to it.
     Options can include both those for :php:func:`HtmlHelper::link()` and
     :php:func:`JsHelper::request()`, :php:func:`JsHelper::event()`, ``$options``
     is a :term:`html attributes` array that are appended to the generated 
@@ -693,7 +693,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'htmlAttributes' => array('other' => 'value')
         ));
 
-    Outputs the following html:
+    Outputs the following HTML:
 
     .. code-block:: html
 
@@ -731,17 +731,17 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. _ajax-pagination:
 
-Ajax Pagination
+AJAX Pagination
 ===============
 
-Much like Ajax Pagination in 1.2, you can use the JsHelper to
-handle the creation of Ajax pagination links instead of plain HTML
+Much like AJAX Pagination in 1.2, you can use the JsHelper to
+handle the creation of AJAX pagination links instead of plain HTML
 links.
 
-Making Ajax Links
+Making AJAX Links
 -----------------
 
-Before you can create ajax links you must include the JavaScript
+Before you can create AJAX links you must include the JavaScript
 library that matches the adapter you are using with ``JsHelper``.
 By default the ``JsHelper`` uses jQuery. So in your layout include
 jQuery (or whichever library you are using). Also make sure to
@@ -783,7 +783,7 @@ bottom of your view file. Be sure to include::
 
     echo $this->Js->writeBuffer();
 
-If you omit this you will **not** be able to chain ajax pagination
+If you omit this you will **not** be able to chain AJAX pagination
 links. When you write the buffer, it is also cleared, so you don't
 have worry about the same JavaScript being output twice.
 
@@ -811,8 +811,8 @@ indicator effects yourself:
 
 Remember to place the indicator.gif file inside app/webroot/img
 folder. You may see a situation where the indicator.gif displays
-immediately upon the page load. You need to put in this css
-``#busy-indicator { display:none; }`` in your main css file.
+immediately upon the page load. You need to put in this CSS
+``#busy-indicator { display:none; }`` in your main CSS file.
 
 With the above layout, we've included an indicator image file, that
 will display a busy indicator animation that we will show and hide

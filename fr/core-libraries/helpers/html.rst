@@ -71,7 +71,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionchanged:: 2.4
 
-    :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau
+    :param mixed $path: Soit une chaîne du fichier CSS à lier, ou un tableau
        avec plusieurs fichiers.    
     :param array $options: Un tableau d'options ou :term:`attributs html`.
 
@@ -111,14 +111,14 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    Vous pouvez inclure un fichier css depuis un plugin chargé en utilisant
+    Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant
     :term:`syntaxe de plugin`. Pour inclure
     ``app/Plugin/DebugKit/webroot/css/toolbar.css``, vous pouvez utiliser ce
     qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
-    Si vous voulez inclure un fichier css qui partage un nom avec un plugin
+    Si vous voulez inclure un fichier CSS qui partage un nom avec un plugin
     chargé vous pouvez faire ce qui suit. Par exemple vous avez un plugin
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::
@@ -257,7 +257,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         // Affichera: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
-        La valeur par défaut de doctype est html5 avec la version 2.1.
+        La valeur par défaut de doctype est HTML5 avec la version 2.1.
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
@@ -371,7 +371,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 
     Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de
-    confirmation ``confirm()`` javascript::
+    confirmation ``confirm()`` JavaScript::
 
         echo $this->Html->link(
             'Delete',
@@ -410,7 +410,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            array('controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
         );
 
     Affichera:
@@ -611,8 +611,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour la balise script générée. Si un tableau de balise script est utilisé,
     les attributs seront appliqués à toutes les balises script générées.
 
-    Cette méthode d'inclusion de fichier javascript suppose que les fichiers
-    javascript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
+    Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
+    JavaScript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
 
         echo $this->Html->script('scripts');
 
@@ -709,7 +709,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         $this->Html->scriptStart(array('inline' => false));
 
-        echo $this->Js->alert('je suis dans le javascript');
+        echo $this->Js->alert('je suis dans le JavaScript');
 
         $this->Html->scriptEnd();
 

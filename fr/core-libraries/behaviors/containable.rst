@@ -436,6 +436,18 @@ Voici un exemple pour limiter les associations en paginant::
 
     $users = $this->paginate('User');
 
+.. note::
+
+    Si vous contenez les associations à travers le model à la place,
+    il n'honorera pas l':ref:`recursive option <containableBehavior-options>`
+    de Containable. Donc si vous définissez à -1 par exemple pour le model,
+    cela ne marchera pas::
+
+        $this->User->recursive = -1;
+        $this->User->contain(array('Profile', 'Account'));
+
+        $users = $this->paginate('User');
+
 
 .. meta::
     :title lang=fr: Containable

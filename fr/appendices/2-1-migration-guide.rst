@@ -262,7 +262,7 @@ HtmlHelper
 - Le paramètre ``$startText`` de :php:meth:`HtmlHelper::getCrumbs()` peut 
   maintenant être un tableau. Cela donne plus de contrôle et de flexibilité 
   sur le premier lien crumb.
-- :php:meth:`HtmlHelper::docType()` est par défaut html5.
+- :php:meth:`HtmlHelper::docType()` est par défaut HTML5.
 - :php:meth:`HtmlHelper::image()` a maintenant une option ``fullBase``.
 - :php:meth:`HtmlHelper::media()` a été ajoutée. Vous pouvez utilisez cette 
   méthode pour créer des éléments audio/vidéo HTML5.

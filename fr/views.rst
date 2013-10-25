@@ -249,7 +249,7 @@ une valeur par défaut en utilisant le 2ème argument::
 .. versionchanged:: 2.3
     L'argument ``$default`` a été ajouté dans 2.3.
 
-Utiliser des blocks pour les fichiers de script et les css
+Utiliser des blocks pour les fichiers de script et les CSS
 ----------------------------------------------------------
 
 .. versionadded:: 2.1
@@ -344,7 +344,7 @@ ressembler::
 
 Les blocks ``script``, ``css`` et ``meta`` contiennent tout contenu défini
 dans les vues en utilisant le helper HTML intégré. Il est utile pour inclure
-les fichiers javascript et les CSS à partir des vues.
+les fichiers JavaScript et les CSS à partir des vues.
 
 .. note::
 
@@ -408,7 +408,7 @@ actions du controller en utilisant quelque chose comme::
 CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
 du layout default de CakePHP) que vous pouvez utiliser dans votre propre
 application: 'ajax' et 'flash'.
-Le layout Ajax est pratique pour élaborer des réponses Ajax - c'est un layout
+Le layout AJAX est pratique pour élaborer des réponses AJAX - c'est un layout
 vide (la plupart des appels ajax ne nécessitent qu'un peu de balise en retour,
 et pas une interface de rendu complète). Le layout flash est utilisé
 pour les messages montrés par la méthode :php:meth:`Controller::flash()`.
@@ -692,8 +692,8 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
     Ajoute du contenu au buffer des scripts internes. Ce buffer est rendu
     disponible dans le layout dans ``$scripts_for_layout``. Cette méthode est
-    utile quand vous créez des helpers qui ont besoin d'ajouter du javascript
-    ou du css directement au layout. Gardez à l'esprit que les scripts ajoutés
+    utile quand vous créez des helpers qui ont besoin d'ajouter du JavaScript
+    ou du CSS directement au layout. Gardez à l'esprit que les scripts ajoutés
     à partir du layout, ou des elements du layout ne seront pas ajoutés à
     ``$scripts_for_layout``. Cette méthode est plus souvent utilisée de
     l'intérieur des helpers, comme pour les helpers

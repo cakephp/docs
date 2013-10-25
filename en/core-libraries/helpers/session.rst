@@ -64,7 +64,7 @@ Displaying notifications or flash messages
 
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html:
+    The above will output a simple message, with the following HTML:
 
     .. code-block:: html
 
@@ -85,7 +85,7 @@ Displaying notifications or flash messages
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
-    This would use ``View/Elements/failure.ctp`` to render the message.  The 
+    This would use ``View/Elements/failure.ctp`` to render the message. The 
     message text would be available as ``$message`` in the element.
 
     Inside the failure element file would be something like

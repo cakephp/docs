@@ -102,7 +102,7 @@ Pour baker des projets personnalisés
     -  Puisque le chemin complet du squelette doit être entré manuellement,
        vous pouvez spécifier n'importe quel dossier avec le template que vous
        souhaitez construire, ainsi que l'utilisation de plusieurs templates.
-       (Sauf si Cake commence par outrepasser le dossier
+       (Sauf si CakePHP commence par outrepasser le dossier
        squelette comme il fait pour les vues)
 
 

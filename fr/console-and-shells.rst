@@ -359,7 +359,7 @@ de vos shells CakePHP.
 Style de sortie
 ===============
 
-La Style de sortie est fait en incluant les tags - juste comme le html - dans
+La Style de sortie est fait en incluant les tags - juste comme le HTML - dans
 votre sortie.
 
 ConsoleOutput remplacera ces tags avec la bonne séquence de code ansi, ou

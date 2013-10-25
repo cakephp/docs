@@ -126,7 +126,7 @@ User (dans Group) et Group (dans User) dans les associations
 HABTM. Choisir des noms non-uniques pour les alias de models à travers les
 models peut entraîner un comportement inattendu.
 
-Cake va créer automatiquement des liens entre les objets model associés.
+CakePHP va créer automatiquement des liens entre les objets model associés.
 Ainsi par exemple dans votre model ``User``, vous pouvez accéder
 au model ``Recipe`` comme ceci::
 
@@ -541,7 +541,7 @@ cela::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // compte seulement si "Image" est active = 1
+                'counterScope' => array('ImageComment.active' => 1) // compte seulement si "ImageComment" est active = 1
             )
         );
     }
@@ -696,12 +696,12 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
    cette clé est le nom de l'autre model (avec des underscores) suffixé
    avec ‘\_id'.
 -  **unique**: Un boléen ou une chaîne de caractères ``keepExisting``.
-    - Si true (valeur par défaut) Cake supprimera d'abord les enregistrements
+    - Si true (valeur par défaut) CakePHP supprimera d'abord les enregistrements
       des relations existantes dans la table des clés étrangères avant d'en
       insérer de nouvelles, lors de la mise à jour d'un enregistrement. Ainsi
       les associations existantes devront être passées encore une fois lors
       d'une mise à jour.
-    - Si false, Cake va insérer l'enregistrement lié, et aucun enregistrement
+    - Si false, CakePHP va insérer l'enregistrement lié, et aucun enregistrement
       joint n'est supprimé pendant une opération de sauvegarde.
     - Si ``keepExisting`` est définie, le behavior est similaire à `true`,
       mais les associations existantes ne sont pas supprimées.
@@ -843,7 +843,7 @@ Le model join CourseMembership identifie de façon unique une participation
 d'un Student à un Course en plus d'ajouter des meta-informations.
 
 Les models Join sont des choses particulièrement pratiques à utiliser
-et Cake facilite cela avec les associations intégrées hasMany et belongsTo
+et CakePHP facilite cela avec les associations intégrées hasMany et belongsTo
 et la fonctionnalité de saveAll.
 
 .. _dynamic-associations:

@@ -149,8 +149,8 @@ Then create the following view file for login at
     echo $this->Form->end('Login');
 
 Next we'll have to update our User model to hash passwords before they go into
-the database.  Storing plaintext passwords is extremely insecure and
-AuthComponent will expect that your passwords are hashed.  In
+the database. Storing plaintext passwords is extremely insecure and
+AuthComponent will expect that your passwords are hashed. In
 ``app/Model/User.php`` add the following::
 
     App::uses('AuthComponent', 'Controller/Component');

@@ -69,8 +69,8 @@ surcharger celles dans AppController.
     -  $helpers
     -  $uses
 
-N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la var
-``$helpers`` dans votre classe AppController.
+N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la
+propriété ``$helpers`` dans votre classe AppController.
 
 Pensez à appeler les fonctions de rappel (callbacks) de AppController dans
 celles du controller enfant pour de meilleurs résultats::
@@ -574,7 +574,7 @@ Autres Méthodes utiles
         'return' dans les options : ``requestAction($url, array('return'))``.
         Il est important de noter que faire un requestAction en utilisant
         'return' à partir d'une méthode d'un controller peut entraîner des
-        problèmes de fonctionnement dans les script et tags css.
+        problèmes de fonctionnement dans les script et tags CSS.
 
     .. warning::
 
@@ -812,7 +812,7 @@ leurs propres sections dans le manuel.
 
 .. todo::
 
-    Ce chapitre devrait être moins sur l'api de controller et plus sur les
+    Ce chapitre devrait être moins sur l'API de controller et plus sur les
     exemples, la section des attributs du controller est trop chargée et
     difficile à comprendre au premier abord. Le chapitre devrait commencer avec
     quelques exemples de controllers et ce qu'ils font.

@@ -8,9 +8,9 @@ plus agréable : nous espérons que vous le découvrirez au fur et à mesure que
 vous plongerez dans le code.
 
 Ce tutoriel vous accompagnera à travers la création d'une simple application
-de blog. Nous récupérerons et installerons Cake, créerons et configurerons une
-base de données et ajouterons suffisamment de logique applicative pour lister,
-ajouter, éditer et supprimer des posts.
+de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons
+une base de données et ajouterons suffisamment de logique applicative pour
+lister, ajouter, éditer et supprimer des posts.
 
 Voici ce dont vous aurez besoin :
 
@@ -18,10 +18,10 @@ Voici ce dont vous aurez besoin :
    bien que les instructions pour utiliser d'autres serveurs doivent
    être assez semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire
-   fonctionner Cake sans aucune configuration préalable.
+   fonctionner CakePHP sans aucune configuration préalable.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL.
    Vous aurez besoin d'un minimum de connaissance en SQL afin de créer une
-   base de données : Cake prendra les rênes à partir de là.
+   base de données : CakePHP prendra les rênes à partir de là.
 #. Des connaissances de base en PHP. Plus vous aurez d'expérience en
    programmation orienté objet, mieux ce sera ; mais n'ayez crainte, même
    si vous êtes adepte de la programmation procédurale.
@@ -32,10 +32,10 @@ Voici ce dont vous aurez besoin :
 
 Maintenant, lançons-nous !
 
-Obtenir Cake
-============
+Obtenir CakePHP
+===============
 
-Tout d'abord, récupérons une copie récente de Cake.
+Tout d'abord, récupérons une copie récente de CakePHP.
 
 Pour obtenir la dernière version, allez sur le site GitHub du projet CakePHP :
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
@@ -59,7 +59,7 @@ d'installation devrait ressembler à quelque chose comme cela::
         README
 
 A présent, il est peut-être temps de voir un peu comment fonctionne la
-structure de fichiers de Cake : lisez le chapitre
+structure de fichiers de CakePHP : lisez le chapitre
 :doc:`/getting-started/cakephp-folder-structure`.
 
 Créer la base de données du blog
@@ -92,11 +92,11 @@ de données :
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
 Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
-Si vous respectez les conventions de nommage de Cake pour les bases de données
-et les classes (toutes deux expliquées au chapitre
+Si vous respectez les conventions de nommage de CakePHP pour les bases de
+données et les classes (toutes deux expliquées au chapitre
 :doc:`/getting-started/cakephp-conventions`), vous tirerez profit d'un
 grand nombre de fonctionnalités automatiques et vous éviterez des étapes
-de configurations. Cake est suffisamment souple pour implémenter les pires
+de configurations. CakePHP est suffisamment souple pour implémenter les pires
 schémas de bases de données, mais respecter les conventions vous fera gagner
 du temps.
 
@@ -104,16 +104,16 @@ Consultez le chapitre :doc:`/getting-started/cakephp-conventions` pour plus
 d'informations, mais il suffit de comprendre que nommer notre table 'posts'
 permet de la relier automatiquement à notre model Post, et qu'avoir des
 champs 'modified' et 'created' permet de les avoir gérés automagiquement par
-Cake.
+CakePHP.
 
-Configurer la base de données Cake
-==================================
+Configurer la base de données CakePHP
+=====================================
 
-En avant : indiquons à Cake où se trouve notre base de données et comment s'y
+En avant : indiquons à CakePHP où se trouve notre base de données et comment s'y
 connecter. Pour la plupart d'entre vous, c'est la première et dernière fois que
 vous configurerez quelque chose.
 
-Une copie du fichier de configuration Cake pour la base de données se trouve
+Une copie du fichier de configuration CakePHP pour la base de données se trouve
 dans ``/app/Config/database.php.default``. Faites une copie de ce fichier dans
 le même répertoire mais nommez le ``database.php``.
 
@@ -137,8 +137,8 @@ ressembler à ce qui suit::
 
 Une fois votre nouveau fichier ``database.php`` sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
-de Cake. Elle devrait également vous indiquer que votre fichier de connexion a
-été trouvé, et que Cake peut s'y connecter avec succès.
+de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion a
+été trouvé, et que CakePHP peut s'y connecter avec succès.
 
 .. note::
 
@@ -194,7 +194,7 @@ Une note sur mod\_rewrite
 
 Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
-(pas d'images ou de styles css), cela signifie probablement que
+(pas d'images ou de styles CSS), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
 à la section suivante sur l'URL rewriting pour que votre serveur
 web fonctionne:

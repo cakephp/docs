@@ -20,7 +20,7 @@ Here's what you'll need:
    any configuration at all. Make sure you have PHP 5.2.8 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: CakePHP will be taking the reins from there.  Since we're using MySQL,
+   database: CakePHP will be taking the reins from there. Since we're using MySQL,
    also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
@@ -184,7 +184,7 @@ A Note on mod\_rewrite
 ======================
 
 Occasionally a new user will run into mod\_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or css styles),
+if the CakePHP welcome page looks a little funny (no images or CSS styles),
 it probably means mod\_rewrite isn't functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:

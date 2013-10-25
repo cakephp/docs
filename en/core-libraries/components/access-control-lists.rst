@@ -271,7 +271,7 @@ Merry                   Deny Ale         Denying ale.
 ======================= ================ =======================
 
 Defining Permissions: CakePHP's INI-based ACL
-==========================================
+=============================================
 
 CakePHP's first ACL implementation was based on INI files stored in
 the CakePHP installation. While it's useful and stable, we recommend
@@ -365,7 +365,7 @@ using the ACL component.
 
 
 Defining Permissions: CakePHP's Database ACL
-=========================================
+============================================
 
 Now that we've covered INI-based ACL permissions, let's move on to
 the (more commonly used) database ACL.
@@ -726,7 +726,7 @@ should end up looking something like the following:
 One nice thing about a CakePHP ACL setup is that each ACO
 automatically contains four properties related to CRUD (create,
 read, update, and delete) actions. You can create children nodes
-under each of these five main ACOs, but using CakePHP's built in
+under each of these five main ACOs, but using CakePHP's built-in
 action management covers basic CRUD operations on a given object.
 Keeping this in mind will make your ACO trees smaller and easier to
 maintain. We'll see how these are used later on when we discuss how

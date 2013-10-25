@@ -84,9 +84,9 @@ les données du controller à la vue (que nous créerons à la prochaine étape)
 La ligne définit la variable de vue appelée 'posts' qui est égale à la valeur
 de retour de la méthode ``find('all')`` du model Post. Notre model Post est
 automatiquement disponible via $this->Post, parce que nous avons suivi les
-conventions de nommage de Cake.
+conventions de nommage de CakePHP.
 
-Pour en apprendre plus sur les controllers de Cake, consultez le chapitre
+Pour en apprendre plus sur les controllers de CakePHP, consultez le chapitre
 :doc:`/controllers`.
 
 Créer les Vues des Posts
@@ -96,7 +96,7 @@ Maintenant que nous avons nos données en provenance du model, ainsi que la
 logique applicative et les flux définis par notre controller, nous allons créer
 une vue pour l'action "index" que nous avons créé ci-dessus.
 
-Les vues de Cake sont juste des fragments de présentation "assaisonnée",
+Les vues de CakePHP sont juste des fragments de présentation "assaisonnée",
 qui s'intègrent au sein d'un layout applicatif. Pour la plupart des
 applications, elles sont un mélange de HTML et PHP, mais les vues peuvent aussi
 être constituées de XML, CSV ou même de données binaires.
@@ -149,7 +149,7 @@ chose comme cela::
             )
     )
 
-Les fichiers des vues de Cake sont stockés dans ``/app/views`` à l'intérieur
+Les fichiers des vues de CakePHP sont stockés dans ``/app/views`` à l'intérieur
 d'un dossier dont le nom correspond à celui du controller (nous aurons à créer
 un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à
@@ -186,13 +186,13 @@ Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
 C'est une instance de la classe CakePHP :php:class:`HtmlHelper`.
 CakePHP est livré avec un ensemble de "helpers" (des assistants) pour les vues,
 qui réalisent en un clin d'oeil des choses comme le "linking" (mettre les liens
-dans un texte), l'affichage des formulaires, du JavaScript et de l'Ajax. Vous
+dans un texte), l'affichage des formulaires, du JavaScript et de l'AJAX. Vous
 pouvez en apprendre plus sur la manière de les utiliser dans le chapitre
 :doc:`/views/helpers`, mais ce qu'il est important de noter ici, c'est que la
 méthode ``link()`` génèrera un lien HTML à partir d'un titre (le premier
 paramètre) et d'une URL (le second paramètre).
 
-Lorsque vous indiquez des URLs dans Cake, il est recommandé d'utiliser les
+Lorsque vous indiquez des URLs dans CakePHP, il est recommandé d'utiliser les
 tableaux. Ceci est expliqué dans le chapitre des Routes. Utiliser les tableaux
 dans les URLs vous permet de tirer profit des capacités de CakePHP à
 ré-inverser les routes. Vous pouvez aussi utiliser les URLs relatives depuis
@@ -337,7 +337,7 @@ autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
 /posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
 Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()``
 pour voir les différents formats d'URL acceptés dans les différentes fonctions
-de Cake.
+de CakePHP.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
@@ -377,7 +377,7 @@ d'ouverture d'une formulaire HTML. Voici le code HTML généré par
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
-Si ``create()`` est appelée sans aucun paramètre, Cake suppose que vous
+Si ``create()`` est appelée sans aucun paramètre, CakePHP suppose que vous
 construisez un formulaire qui envoie les données en POST à l'action ``add()``
 (ou ``edit()`` quand ``id`` est dans les données du formulaire) du controller
 actuel.
@@ -455,7 +455,7 @@ ressembler::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -474,9 +474,10 @@ enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
 post n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
-Ensuite l'action vérifie que la requête est une requête POST. Si elle l'est,
-alors nous utilisons les données POST pour mettre à jour notre enregistrement
-Post, ou sortir et montrer les erreurs de validation à l'utilisateur.
+Ensuite l'action vérifie si la requête est une requête POST ou PUT. Si elle
+l'est, alors nous utilisons les données POST pour mettre à jour notre
+enregistrement Post, ou sortir et montrer les erreurs de validation à
+l'utilisateur.
 
 Si il n'y a pas de données définies dans ``$this->request->data``, nous le
 définissons simplement dans le post récupéré précédemment.
@@ -501,7 +502,7 @@ les messages d'erreur de validation nécessaires.
 
 Une chose à noter ici : CakePHP supposera que vous éditez un model si le champ
 'id' est présent dans le tableau de données. S'il n'est pas présent (ce qui
-revient à notre vue "add"), Cake supposera que vous insérez un nouveau model
+revient à notre vue "add"), CakePHP supposera que vous insérez un nouveau model
 lorsque ``save()`` sera appelée.
 
 Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
@@ -638,7 +639,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Posts
 (PostsController).
 
-Le routage de Cake se trouve dans ``/app/Config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans ``/app/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 
@@ -674,7 +675,7 @@ nous n'avons pas souhaité couvrir ici pour simplifier les choses. Utilisez
 le reste de ce manuel comme un guide pour développer des applications plus
 riches en fonctionnalités.
 
-Maintenant que vous avez créé une application Cake basique, vous êtes prêt
+Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
 pour les choses sérieuses. Commencez votre propre projet et lisez le reste
 du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
 

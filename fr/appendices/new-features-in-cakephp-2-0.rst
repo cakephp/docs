@@ -165,14 +165,14 @@ plus de puissance aux développeurs.
 String::wrap()
 --------------
 
-:php:meth:`String::wrap()` a été ajouté pour faciliter les formatages de 
-largeur fixe des textes. Il est utilisé dans les Shells quand vous utilisez 
+:php:meth:`String::wrap()` a été ajouté pour faciliter les formatages de
+largeur fixe des textes. Il est utilisé dans les Shells quand vous utilisez
 :php:meth:`Shell::wrapText()`.
 
 debug()
 -------
 
-:php:func:`debug()` ne sort plus de html dans la console. A la place, elle 
+:php:func:`debug()` ne sort plus de HTML dans la console. A la place, elle
 donne des sorties comme ce qui suit::
 
     ########## DEBUG ##########
@@ -188,40 +188,40 @@ Components
 ==========
 
 Components reçoit un traitement identique aux helpers et aux behaviors,
-:php:class:`Component` est maintenant la classe de base pour les components. 
+:php:class:`Component` est maintenant la classe de base pour les components.
 Lisez en plus sur les changements sur les components.
 
 RequestHandler
 --------------
 
-:php:class:`RequestHandler` a été fortement remaniée du fait de l'introduction 
-de :php:class:`CakeRequest`. Ces changements permettent à certaines nouvelles 
+:php:class:`RequestHandler` a été fortement remaniée du fait de l'introduction
+de :php:class:`CakeRequest`. Ces changements permettent à certaines nouvelles
 fonctionnalités d'être aussi introduites.
 
 Parsing automatique d'Acceptation des headers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si un client envoie un unique mime type Accept qui correspond à l'une  des 
-extensions activées dans :php:class`Router`, :php:class:`RequestHandler` 
-le traitera de la même façon qu'une extension. Cela étendra le support de 
-CakePHP pour les terminaux de type REST. Pour utiliser cette fonctionnalité, 
+Si un client envoie un unique mime type Accept qui correspond à l'une  des
+extensions activées dans :php:class`Router`, :php:class:`RequestHandler`
+le traitera de la même façon qu'une extension. Cela étendra le support de
+CakePHP pour les terminaux de type REST. Pour utiliser cette fonctionnalité,
 commencez par activer les extensions dans ``app/Config/routes.php``
 
 ::
 
     Router::parseExtensions('json', 'xml');
 
-Une fois que vous avez créé les layouts et les vues pour vos extensions, vous 
-pourrez visiter une url comme posts/view/1 et envoyer Accept: 
-``application/json`` dans les headers pour recevoir la version json de cette 
-url.
+Une fois que vous avez créé les layouts et les vues pour vos extensions, vous
+pourrez visiter une url comme posts/view/1 et envoyer Accept:
+``application/json`` dans les headers pour recevoir la version JSON de cette
+URL.
 
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` supporte maintenant seulement les cookies http. 
+:php:class:`CookieComponent` supporte maintenant seulement les cookies HTTP. 
 Vous pouvez les activer en utilisant ``$this->Cookie->httpOnly = true;``. 
-Avoir seulement les cookies http les rendra inaccessible à partir du navigateur.
+Avoir seulement les cookies HTTP les rendra inaccessible à partir du navigateur.
 
 Security Component CSRF separation
 ----------------------------------

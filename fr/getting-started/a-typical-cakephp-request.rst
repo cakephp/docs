@@ -14,7 +14,7 @@ CakePHP.
 
    Diagramme représentant une requête CakePHP typique.
 
-Figure: 2. Typical Cake Request.
+Figure: 2. Typical CakePHP Request.
 
 Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callback)
 

@@ -181,7 +181,7 @@ Hopefully this should look somewhat simple.
 You might have noticed the use of an object called ``$this->Html``.
 This is an instance of the CakePHP :php:class:`HtmlHelper` class. CakePHP
 comes with a set of view helpers that make things like linking,
-form output, JavaScript and Ajax a snap. You can learn more about
+form output, JavaScript and AJAX a snap. You can learn more about
 how to use them in :doc:`/views/helpers`, but
 what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)
@@ -442,7 +442,7 @@ like::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -460,7 +460,7 @@ This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the post does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
-Next the action checks that the request is a POST request.  If it is, then we
+Next the action checks whether the request is either a POST or a PUT request. If it is, then we
 use the POST data to update our Post record, or kick back and show the user
 validation errors.
 
@@ -545,10 +545,10 @@ Next, let's make a way for users to delete posts. Start with a
 
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
-message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a GET request, we throw an Exception.  Uncaught exceptions
+message after redirecting them on to ``/posts``. If the user attempts to
+do a delete using a GET request, we throw an Exception. Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is
-displayed.  There are many built-in :doc:`/development/exceptions` that can
+displayed. There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
 to generate.
 
@@ -595,7 +595,7 @@ links that allow users to delete posts, however:
     </table>
 
 Using :php:meth:`~FormHelper::postLink()` will create a link that uses
-Javascript to do a POST request deleting our post.  Allowing content to be
+JavaScript to do a POST request deleting our post. Allowing content to be
 deleted using GET requests is dangerous, as web crawlers could accidentally
 delete all your content.
 

@@ -30,7 +30,7 @@ Security API
 .. php:staticmethod:: rijndael($text, $key, $mode)
 
     :param string $text: The text to encrypt
-    :param string $key: The key to use for encryption.  This must be longer than
+    :param string $key: The key to use for encryption. This must be longer than
         32 bytes.
     :param string $mode: The mode to use, either 'encrypt' or 'decrypt'
 
@@ -44,7 +44,7 @@ Security API
         $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'decrypt');
 
     ``rijndael()`` can be used to store data you need to decrypt later, like the
-    contents of cookies.  It should **never** be used to store passwords.
+    contents of cookies. It should **never** be used to store passwords.
     Instead you should use the one way hashing methods provided by
     :php:meth:`~Security::hash()`
 
@@ -126,7 +126,7 @@ Security API
         // Using the default hash algorithm
         $hash = Security::hash('CakePHP Framework');
 
-    ``hash()`` also supports more secure hashing algorithms like bcrypt.  When
+    ``hash()`` also supports more secure hashing algorithms like bcrypt. When
     using bcrypt, you should be mindful of the slightly different usage.
     Creating an initial hash works the same as other algorithms::
 
@@ -141,7 +141,7 @@ Security API
         $newHash = Security::hash($newPassword, 'blowfish', $storedPassword);
 
     When comparing values hashed with bcrypt, the original hash should be
-    provided as the ``$salt`` parameter.  This allows bcrypt to reuse the same
+    provided as the ``$salt`` parameter. This allows bcrypt to reuse the same
     cost and salt values, allowing the generated hash to end up with the same
     resulting hash given the same input value.
 

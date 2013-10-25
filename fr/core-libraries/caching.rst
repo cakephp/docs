@@ -338,9 +338,9 @@ l'API de Cache
     configuration par défaut sera utilisée. ``Cache::read()`` retournera
     la valeur en cache si c'est un cache valide ou ``false`` si le
     cache a expiré ou n'existe pas. Le contenu du cache pourrait
-    évaluer false, donc soyez sûr que vous utilisez l'opérateur
+    évaluer false, donc assurez-vous que vous utilisez les opérateurs
     de comparaison stricte ``===`` ou ``!==``.
-    
+
     Par exemple::
 
         $cloud = Cache::read('cloud');

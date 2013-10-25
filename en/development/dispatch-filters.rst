@@ -33,7 +33,7 @@ added::
 Each of those array values are class names that will be instantiated and added
 as listeners for the events generated at dispatcher level. The first one,
 ``AssetDispatcher`` is meant to check whether the request is referring to a theme
-or plugin asset file, such as a css, javascript or image stored on either a
+or plugin asset file, such as a CSS, JavaScript or image stored on either a
 plugin's webroot folder or the corresponding one for a Theme. It will serve the
 file accordingly if found, stopping the rest of the dispatching cycle. The ``CacheDispatcher``
 filter, when ``Cache.check`` config variable is enabled, will check if the
@@ -183,7 +183,7 @@ Inline Filters
 ==============
 
 Our last example will use an anonymous function (only available on PHP 5.3+) to
-serve a list of posts in json format, we encourage you to do so using
+serve a list of posts in JSON format, we encourage you to do so using
 controllers and the :php:class:`JsonView` class, but let's imagine you need to save a
 few milliseconds for this mission-critical API endpoint::
 

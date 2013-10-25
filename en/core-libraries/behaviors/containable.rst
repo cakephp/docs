@@ -425,6 +425,17 @@ Here's an example of how to contain associations when paginating::
 
     $users = $this->paginate('User');
 
+.. note::
+
+    If you contained the associations through the model instead,
+    it will not honor Containable's :ref:`recursive option <containableBehavior-options>`.
+    So if you set recursive to -1 for example for the model, it won't work::
+
+        $this->User->recursive = -1;
+        $this->User->contain(array('Profile', 'Account'));
+
+        $users = $this->paginate('User');
+
 
 .. meta::
     :title lang=en: Containable

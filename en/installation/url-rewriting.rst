@@ -12,6 +12,9 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf).
 
+These files can vary on different distributions and apache versions.
+You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
+
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
@@ -22,7 +25,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        # directory (and its subdirectories). 
        #
        # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # features. 
        #
        <Directory />
            Options FollowSymLinks
@@ -100,7 +103,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   make a virtual host to point to your folder. 
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -232,7 +235,7 @@ these steps:
     </configuration>
 
 Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, css, js, and rerouting should work
+rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
 correctly.
 
 I don't / can't use URL rewriting

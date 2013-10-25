@@ -41,7 +41,7 @@ for increasing the overall framework performance.
 
 Biggest roadblock for achieving this was maintaining some sort of backwards
 compatibility in the way the classes are loaded right now, and we definitely did
-not want to become a framework of huge class prefixes, having classnames like
+not want to become a framework of huge class prefixes, having class names like
 ``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
 clear migration path for future PHP 5.3 version of CakePHP. First let's
@@ -227,7 +227,7 @@ your components and their constructors, as both have changed::
 
 As with helpers it is important to call ``parent::__construct()`` in components with
 overridden constructors. Settings for a component are also passed into the
-constructor now, and not the ``initialize()`` callback.  This makes getting well
+constructor now, and not the ``initialize()`` callback. This makes getting well
 constructed objects easier, and allows the base class to handle setting the
 properties up.
 
@@ -238,7 +238,7 @@ You should update your components to use the following method signature::
     public function initialize(Controller $controller) { }
 
 Additionally, the initialize() method is only called on components that are
-enabled.  This usually means components that are directly attached to the
+enabled. This usually means components that are directly attached to the
 controller object.
 
 Deprecated callbacks removed
@@ -246,7 +246,7 @@ Deprecated callbacks removed
 
 All the deprecated callbacks in Component have not been transferred to
 ComponentCollection. Instead you should use the `trigger()` method to interact
-with callbacks.  If you need to trigger a callback you could do so by calling::
+with callbacks. If you need to trigger a callback you could do so by calling::
 
     $this->Components->trigger('someCallback', array(&$this));
 
@@ -255,7 +255,7 @@ Changes in disabling components
 
 In the past you were able to disable components via `$this->Auth->enabled =
 false;` for example. In CakePHP 2.0 you should use the ComponentCollection's
-disable method, `$this->Components->disable('Auth');`.  Using the enabled
+disable method, `$this->Components->disable('Auth');`. Using the enabled
 property will not work.
 
 AclComponent
@@ -434,7 +434,7 @@ used to doing it. The biggest change is the introduction of a new method::
     App::uses('AuthComponent', 'Controller/Component');
 
 We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located. The first parameter of
+of declaring where a class name should be located. The first parameter of
 :php:meth:`App::uses()` is the complete name of the class you intend to load,
 and the second one, the package name (or namespace) where it belongs to. The
 main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
@@ -541,7 +541,7 @@ Router
 - ``Router::getNamedExpressions()`` is deprecated. Use the new router
   constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
   ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
-- ``Router::defaults()`` has been removed.  Delete the core routes file
+- ``Router::defaults()`` has been removed. Delete the core routes file
   inclusion from your applications routes.php file to disable default routing.
   Conversely if you want default routing, you will have to add an include to
   ``Cake/Config/routes.php`` in your routes file.
@@ -549,9 +549,9 @@ Router
   under ``$this->params['url']['ext']``. Instead it is available at
   ``$this->request->params['ext']``.
 - Default plugin routes have changed. Plugin short routes are no longer built
-  in for any actions other than index.  Previously ``/users`` and ``/users/add``
-  would map to the UsersController in the Users plugin.  In 2.0, only the
-  ``index`` action is given a short route.  If you wish to continue using short
+  in for any actions other than index. Previously ``/users`` and ``/users/add``
+  would map to the UsersController in the Users plugin. In 2.0, only the
+  ``index`` action is given a short route. If you wish to continue using short
   routes, you can add a route like::
 
     Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
@@ -570,8 +570,8 @@ Dispatcher
 
 - Dispatcher has been moved inside of cake/libs, you will have to update your
   ``app/webroot/index.php`` file.
-- ``Dispatcher::dispatch()`` now takes two parameters.  The request and
-  response objects.  These should be instances of ``CakeRequest`` &
+- ``Dispatcher::dispatch()`` now takes two parameters. The request and
+  response objects. These should be instances of ``CakeRequest`` &
   ``CakeResponse`` or a subclass thereof.
 - ``Dispatcher::parseParams()`` now only accepts a ``CakeRequest`` object.
 - ``Dispatcher::baseUrl()`` has been removed.
@@ -628,8 +628,8 @@ CakeSession
 -----------
 
 CakeSession is now a fully static class, both ``SessionHelper`` and
-``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
-in models or other contexts.  All of its methods are called statically.
+``SessionComponent`` are wrappers and sugar for it. It can now easily be used
+in models or other contexts. All of its methods are called statically.
 
 Session configuration has also changed :doc:`see the session section for more
 information </development/sessions>`
@@ -641,11 +641,11 @@ HttpSocket
   the HttpSocket does not change the headers. :rfc:`2616` says that headers are case
   insensitive, and HttpSocket preserves the values the remote host sends.
 - HttpSocket returns responses as objects now. Instead of arrays, HttpSocket
-  returns instances of HttpResponse.  See the :php:class:`HttpSocket`
+  returns instances of HttpResponse. See the :php:class:`HttpSocket`
   documentation for more information.
 - Cookies are stored internally by host, not per instance. This means that, if
   you make two requests to different servers, cookies from domain1 won't be sent
-  to domain2.  This was done to avoid possible security problems.
+  to domain2. This was done to avoid possible security problems.
 
 
 Helpers
@@ -655,14 +655,14 @@ Constructor changed
 -------------------
 
 In order to accommodate View being removed from the ClassRegistry, the signature
-of Helper::__construct() was changed.  You should update any subclasses to use
+of Helper::__construct() was changed. You should update any subclasses to use
 the following::
 
     public function __construct(View $View, $settings = array())
 
 When overriding the constructor you should always call `parent::__construct` as
-well.  `Helper::__construct` stores the view instance at `$this->_View` for
-later reference.  The settings are not handled by the parent constructor.
+well. `Helper::__construct` stores the view instance at `$this->_View` for
+later reference. The settings are not handled by the parent constructor.
 
 HelperCollection added
 ----------------------
@@ -671,16 +671,16 @@ After examining the responsibilities of each class involved in the View layer,
 it became clear that View was handling much more than a single task. The
 responsibility of creating helpers is not central to what View does, and was
 moved into HelperCollection. HelperCollection is responsible for loading and
-constructing helpers, as well as triggering callbacks on helpers.  By default,
+constructing helpers, as well as triggering callbacks on helpers. By default,
 View creates a HelperCollection in its constructor, and uses it for subsequent
-operations.  The HelperCollection for a view can be found at `$this->Helpers`
+operations. The HelperCollection for a view can be found at `$this->Helpers`
 
 The motivations for refactoring this functionality came from a few issues.
 
 * View being registered in ClassRegistry could cause registry poisoning issues
   when requestAction or the EmailComponent were used.
 * View being accessible as a global symbol invited abuse.
-* Helpers were not self contained.  After constructing a helper, you had to
+* Helpers were not self contained. After constructing a helper, you had to
   manually construct several other objects in order to get a functioning object.
 
 You can read more about HelperCollection in the
@@ -705,7 +705,7 @@ XmlHelper, AjaxHelper and JavascriptHelper removed
 
 The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
 version 1.3. The XmlHelper was removed, as it was made obsolete and redundant
-with the improvements to :php:class:`Xml`.  The ``Xml`` class should be used to
+with the improvements to :php:class:`Xml`. The ``Xml`` class should be used to
 replace previous usage of XmlHelper.
 
 The AjaxHelper, and JavascriptHelper are replaced with the JsHelper and HtmlHelper.
@@ -762,7 +762,7 @@ FormHelper::hidden()
 ~~~~~~~~~~~~~~~~~~~~
 
 Hidden fields no longer remove the class attribute. This means that if there are
-validation errors on hidden fields, the ``error-field`` classname will be
+validation errors on hidden fields, the ``error-field`` class name will be
 applied.
 
 CacheHelper
@@ -818,7 +818,7 @@ Controller
 - ``Controller::$here`` is deprecated, use the request object's here property.
 - ``Controller::$data`` is deprecated, use the request object's data property.
 - ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
-- ``Controller::$Component`` has been moved to ``Controller::$Components``.  See
+- ``Controller::$Component`` has been moved to ``Controller::$Components``. See
   the :doc:`/core-libraries/collections` documentation for more information.
 - ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
   ``Controller::$view`` is now used to change which view file is rendered.
@@ -851,9 +851,9 @@ View no longer registered in ClassRegistry
 ------------------------------------------
 
 The view being registered ClassRegistry invited abuse and affectively created a
-global symbol.  In 2.0 each Helper receives the current `View` instance in its
-constructor.  This allows helpers access to the view in a similar fashion as in
-the past, without creating global symbols.  You can access the view instance at
+global symbol. In 2.0 each Helper receives the current `View` instance in its
+constructor. This allows helpers access to the view in a similar fashion as in
+the past, without creating global symbols. You can access the view instance at
 `$this->_View` in any helper.
 
 Deprecated properties
@@ -890,7 +890,7 @@ Removed methods
 ---------------
 
 * ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.
-* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
+* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead. Helpers now lazy
   load their own helpers.
 
 Added methods
@@ -1041,7 +1041,7 @@ Either of these approaches will solve the notice errors.
 The notation of ``find()`` in CakePHP 1.2 is no longer supported. Finds should use
 notation ``$model->find('type', array(PARAMS))`` in CakePHP 1.3.
 
-- ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
+- ``Model::$_findMethods`` is now ``Model::$findMethods``. This property is now
   public and can be modified by behaviors.
 
 
@@ -1239,16 +1239,16 @@ features for more information on new APIs that are available.
 Debugging
 =========
 
-The ``debug()`` function now defaults to outputting html safe strings. This is
+The ``debug()`` function now defaults to outputting HTML safe strings. This is
 disabled if being used in the console. The ``$showHtml`` option for ``debug()``
-can be set to false to disable html-safe output from debug.
+can be set to false to disable HTML-safe output from debug.
 
 ConnectionManager
 =================
 
 ``ConnectionManager::enumConnectionObjects()`` will now return the current
 configuration for each connection created, instead of an array with filename,
-classname and plugin, which wasn't really useful.
+class name and plugin, which wasn't really useful.
 
 When defining database connections you will need to make some changes to the way
 configs were defined in the past. Basically in the database configuration class,

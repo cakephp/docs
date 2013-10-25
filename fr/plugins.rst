@@ -189,7 +189,7 @@ Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
 des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
 
 Merci de noter que le processus de création de plugins peut être méchamment
-simplifié en utilisant le shell de Cake.
+simplifié en utilisant le shell de CakePHP.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 

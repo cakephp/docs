@@ -376,7 +376,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
     Outre les options spécifique pour ``input()`` vu ci-dessus, vous pouvez
     spécifier n'importe quelle options pour le type d'input et n'importe quel
-    attribut html (actuellement dans le focus).
+    attribut HTML (actuellement dans le focus).
     Pour plus d'information sur les ``$options`` et ``$htmlAttributes`` voir
     :doc:`/core-libraries/helpers/html`.
 
@@ -795,7 +795,7 @@ répétitions les options communes partagées par toutes les méthodes input son
     ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
-En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut html
+En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera
 traité comme un attribut HTML, et appliqué a l'élément HTML input généré.
 NdT. celui qui capte cette phrase gagne un giroTermoOnduleur a double
@@ -971,7 +971,7 @@ Les options de Datetime
         <label for="UserName">Name</label>
         <label for="UserName">Your username</label>
 
-    ``$options`` peut soit être un tableau d'attributs html, ou une chaîne qui
+    ``$options`` peut soit être un tableau d'attributs HTML, ou une chaîne qui
     sera utilisée comme nom de classe::
 
         echo $this->Form->label('User.name', null, array('id' => 'user-label'));
@@ -1148,7 +1148,7 @@ Les options de Datetime
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false 
     
     .. versionchanged:: 2.1
-        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans Cake 2.1.
+        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
@@ -1470,7 +1470,7 @@ Création des boutons et des éléments submits
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que javascript  soit autorisé dans votre navigateur.
+    Requiert que JavaScript  soit autorisé dans votre navigateur.
     
     Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette
     méthode dans un formulaire existant. En remplacement vous devriez
@@ -1605,7 +1605,7 @@ Afficher et vérifier les erreurs
 
     Options:
 
-    -  'escape' booléen si il faut ou non que le html échappe le contenu de
+    -  'escape' booléen si il faut ou non que le HTML échappe le contenu de
        l'erreur.
     -  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
        soit envelopper d'une div. Si c'est une chaîne , sera utilisé comme le

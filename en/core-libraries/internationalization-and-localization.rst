@@ -157,7 +157,7 @@ fr\_FR, it will use the `ISO 639-2
 if it doesn't exist), you can change the language at any time during a request.
 e.g. in your bootstrap if you're setting the application default language, in
 your (app) controller beforeFilter if it's specific to the request or user, or
-in fact anytime at all before you want a message in a different language.  To
+in fact anytime at all before you want a message in a different language. To
 set the language for the current user, you can store the setting in the Session
 object, like this::
 
@@ -193,7 +193,7 @@ probably be best utilized in your views. The first parameter of the
 function is used as the msgid defined in the .po files.
 
 CakePHP will automatically assume that all model validation error messages in
-your ``$validate`` array are intended to be localized.  When running the i18n
+your ``$validate`` array are intended to be localized. When running the i18n
 shell these strings will also be extracted.
 
 There's one other aspect of localizing your application which is

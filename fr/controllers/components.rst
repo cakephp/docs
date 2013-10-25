@@ -12,8 +12,8 @@ que vous pouvez utiliser pour vous aider :
 .. include:: /core-libraries/toc-components.rst
     :start-line: 7
 
-Chacun de ces components d'origine est détaillé dans des chapitres
-spécifiques. Pour l'heure, nous allons vous montrer comment créer
+Chacun de ces components d'origine est détaillé dans son chapitre
+spécifique. Pour l'heure, nous allons vous montrer comment créer
 vos propres components. La création de components vous permet de garder
 le code de vos controllers propres et vous permet de réutiliser
 du code entre vos projets.
@@ -25,9 +25,8 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication`,
-:doc:`/core-libraries/components/cookie`
-et :doc:`/core-libraries/components/email`.
+:doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
 de vos controllers::
@@ -41,11 +40,12 @@ de vos controllers::
             'Cookie' => array('name' => 'CookieMonster')
         );
 
-Est un exemple de configuration d'un component avec le tableau
-``$components``. Tous les components du coeur permettent aux paramètres
-d'être configurés dans la méthode de votre controller ``beforeFilter()``.
-C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
-à la propriété d'un component. Ceci peut aussi être exprimé comme ceci::
+La portion de code précédente est un exemple de configuration d'un component
+avec le tableau ``$components``. Tous les components du coeur permettent aux
+paramètres d'être configurés dans la méthode de votre controller
+``beforeFilter()``. C'est utile quand vous avez besoin d'assigner les résultats
+d'une fonction à la propriété d'un component. Ceci peut aussi être exprimé
+comme ceci::
 
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
@@ -154,7 +154,7 @@ de l'utiliser dans plusieurs controllers différents.
 
 La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
-``/app/Controller/Component/MathComponent.php``. La structure de base pour
+``app/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
 
     class MathComponent extends Component {
@@ -201,9 +201,9 @@ pris en charge par le Component::
 
 L'exemple ci-dessus passerait le tableau contenant "precision"
 et "generateurAleatoire" comme second paramètre au
-``MathComponent::__construct()``. Par convention, tout paramètre passé
-qui est aussi une propriété publique sur votre component aura
-la valeur basée sur ces paramètres.
+``MathComponent::__construct()``. Par convention, si les clés du tableau
+correspondent aux propriétés publiques du component, les propriétés seront
+définies avec les valeurs de ces clés.
 
 Utiliser d'autres Components dans votre Component
 -------------------------------------------------
@@ -239,8 +239,9 @@ variable ``$components``::
         }
     }
 
-Notez qu'au contraire d'un component inclu dans un controller, aucun callback
-ne sera attrapé pour un component inclu dans un component.
+.. note::
+    Au contraire d'un component inclu dans un controller, aucun callback
+    ne sera attrapé pour un component inclu dans un component.
 
 .. _component-api:
 
@@ -267,28 +268,27 @@ Les Callbacks
 
 .. php:method:: initialize(Controller $controller)
 
-    La méthode initialize est appelée avant la méthode du controller
+    Est appelée avant la méthode du controller
     beforeFilter.
 
 .. php:method:: startup(Controller $controller)
 
-    La méthode startup est appelée après la méthode du controller
+    Est appelée après la méthode du controller
     beforeFilter mais avant que le controller n'exécute l'action prévue.
 
 .. php:method:: beforeRender(Controller $controller)
 
-    La méthode beforeRender est appelée après que le controller exécute la
+    Est appelée après que le controller exécute la
     logique de l'action requêtée, mais avant le rendu de la vue et le
     layout du controller.
 
 .. php:method:: shutdown(Controller $controller)
 
-    La méthode shutdown est appelée avant que la sortie soit envoyée au
-    navigateur.
+    Est appelée avant que la sortie soit envoyée au navigateur.
 
 .. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
 
-    La méthode beforeRedirect est invoquée quand la méthode de redirection
+    Est invoquée quand la méthode de redirection
     du controller est appelée, mais avant toute action qui suit. Si cette
     méthode retourne false, le controller ne continuera pas de rediriger la
     requête. Les variables $url, $status et $exit ont la même signification

@@ -121,7 +121,7 @@ Cake:
 Chacun de ces répertoires peut être situé n'importe où dans votre
 système de fichier, avec l'exception de webroot, qui a besoin d'être acessible
 pour votre serveur web. Vous pouvez même déplacer le dossier webroot en-dehors
-du dossier app tant que vous dîtes à Cake où vous le mettez.
+du dossier app tant que vous dîtes à CakePHP où vous le mettez.
 
 Pour configurer votre installation de Cake, vous aurez besoin de faire quelques
 changements aux fichiers suivants.

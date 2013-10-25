@@ -164,9 +164,9 @@ d'agir sur elle comme un model normal. Exemple :
     PRIMARY KEY(id)); 
 
 Plutôt que d'utiliser une clé auto-incrémentée comme clé primaire, vous pouvez
-aussi utiliser un champ char(36). Cake utilisera alors un UUID de 36 caractères
-(String::uuid) lorsque vous sauvegardez un nouvel enregistrement en utilisant
-la méthode Model::save.
+aussi utiliser un champ char(36). CakePHP utilisera alors un UUID de 36
+caractères (String::uuid) lorsque vous sauvegardez un nouvel enregistrement en
+utilisant la méthode Model::save.
 
 Conventions des vues
 ====================

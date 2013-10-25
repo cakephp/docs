@@ -158,7 +158,7 @@ text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
 debug()
 -------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes
+:php:func:`debug()` no longer outputs HTML in the console. Instead it makes
 output like the following::
 
     ########## DEBUG ##########
@@ -196,13 +196,13 @@ use this feature start off by enabling extensions in ``app/Config/routes.php``::
 
 Once you have created layouts and views for your extensions, you will be able to
 visit a url like posts/view/1 and send Accept: ``application/json`` in the
-headers to receive the json version of that url.
+headers to receive the JSON version of that URL.
 
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` now supports http only cookies. You can enable
-their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
+:php:class:`CookieComponent` now supports HTTP only cookies. You can enable
+their use by setting ``$this->Cookie->httpOnly = true;``. Having HTTP only
 cookies will make them inaccessible from the browser.
 
 Security Component CSRF separation

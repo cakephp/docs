@@ -765,7 +765,7 @@ ce qui retourne::
 .. note::
 
     Cette syntaxe et la structure de tableau correspondante est valide
-    seulement pour MySQL. Cake ne fournit pas de données d'abstraction quand
+    seulement pour MySQL. CakePHP ne fournit pas de données d'abstraction quand
     les requêtes sont lancées manuellement, donc les résultats exacts vont
     varier entre les bases de données.
 
@@ -912,7 +912,7 @@ trouver les posts qui correspondent à l'une ou l'autre des conditions::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-Cake accepte toute opération booléenne SQL valide, telles que AND, OR, NOT,
+CakePHP accepte toute opération booléenne SQL valide, telles que AND, OR, NOT,
 XOR, etc., et elles peuvent être en majuscule comme en minuscule, comme vous
 préférez. Ces conditions sont également infiniment "IMBRIQUABLES". Admettons
 que vous ayez une relation hasMany/belongsTo entre Posts et Auteurs, ce qui
@@ -938,7 +938,7 @@ pouvez faire ceci en utilisant des conditions identiques à::
         array('Post.titre LIKE' => '%two%')
     ))
 
-Cake peut aussi vérifier les champs null. Dans cet exemple, la requête
+CakePHP peut aussi vérifier les champs null. Dans cet exemple, la requête
 retournera les enregistrements où le titre du post n'est pas null::
 
     array("NOT" => array(

@@ -286,7 +286,7 @@ API de CakeRequest
 
     Définit les méthodes HTTP autorisées, si elles ne correspondent pas, elle
     va lancer une MethodNotAllowedException.
-    La réponse 405 va inclure l'en-tête 'Allow' nécessaire avec les méthodes
+    La réponse 405 va inclure l'en-tête ``Allow`` nécessaire avec les méthodes
     passées.
 
     .. versionadded:: 2.3
@@ -310,9 +310,12 @@ API de CakeRequest
 .. php:method:: input($callback, [$options])
 
     Récupère les données d'entrée pour une requête, et les passe
-    optionnellement à travers une fonction qui décode. Les paramètres
-    supplémentaires pour la fonction décodant peuvent être passés comme des
-    arguments de input().
+    optionnellement à travers une fonction qui décode. Utile lors des
+    interactions avec une requête de contenu de corps XML ou JSON. Les
+    paramètres supplémentaires pour la fonction décodant peuvent être passés
+    comme des arguments de input()::
+
+        $this->request->input('json_decode');
 
 .. php:method:: data($name)
 
@@ -422,7 +425,7 @@ qui vont être envoyés.
 Comme :php:class:`CakeRequest`, :php:class:`CakeResponse` consolide un certain
 nombre de méthodes qu'on pouvait trouver avant dans :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` et :php:class:`Dispatcher`. Les anciennes
-méthodes sont dépréciés en faveur de l'utilisation de
+méthodes sont dépréciées en faveur de l'utilisation de
 :php:class:`CakeResponse`.
 
 ``CakeResponse`` fournit une interface pour envelopper les tâches de réponse
@@ -437,14 +440,14 @@ Changer la classe de réponse
 ============================
 
 CakePHP utilise ``CakeResponse`` par défaut. ``CakeResponse`` est flexible et
-transparente pour l'utilisation de la classe. Mais si vous avez besoin de la
+transparente pour l'utilisation de la classe. Si vous avez besoin de la
 remplacer avec une classe spécifique de l'application, vous pouvez l'écraser
-et remplacer ``CakeResponse`` avec votre propre classe. En remplaçant la
+et remplacer ``CakeResponse`` avec votre propre classe en remplaçant la
 classe CakeResponse utilisée dans index.php.
 
 Cela fera que tous les controllers dans votre application utiliseront
 ``VotreResponse`` au lieu de :php:class:`CakeResponse`. Vous pouvez aussi
-remplacer l'instance de réponse utilisée par la configuration
+remplacer l'instance de réponse de la configuration
 ``$this->response`` dans vos controllers. Ecraser l'objet réponse
 est à portée de main pour les tests car il vous permet d'écraser les
 méthodes qui interragissent avec ``header()``. Voir la section sur
@@ -487,8 +490,8 @@ fichier en réponse::
         return $this->response;
     }
 
-Comme montré dans l'exemple ci-dessus et comme prévu, vous devez passer le
-chemin du fichier à la méthode. Cake va envoyer le bon en-tête de type de
+Comme montré dans l'exemple ci-dessus, vous devez passer le
+chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
 contenu si c'est un type de fichier connu listé dans
 `CakeReponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types avant
 d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode
@@ -502,9 +505,9 @@ d'être affiché dans le navigateur en spécifiant les options::
 Envoyer une chaîne en fichier
 =============================
 
-Pour envoyer un fichier en réponse qui n'existe pas sur le disque, par exemple
-si vous voulez générer un pdf ou un ics à la volée et voulez servir la chaîne
-générée en fichier, vous pouvez faire cela en utilisant::
+Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
+exemple si vous voulez générer un pdf ou un ics à la volée et voulez servir la
+chaîne générée en fichier, vous pouvez faire cela en utilisant::
 
     public function sendIcs() {
         $icsString = $this->Calendar->generateIcs();
@@ -534,9 +537,9 @@ paramètres de configurations::
 
 Régler le même en-tête de multiples fois entraînera l'écrasement des
 précédentes valeurs, un peu comme les appels réguliers d'en-tête. Les en-têtes
-ne sont aussi pas envoyés quand :php:meth:`CakeResponse::header()` est appelé.
-Ils sont simplement conservés jusqu'à ce que la réponse soit effectivement
-envoyée.
+ne sont aussi pas envoyés quand :php:meth:`CakeResponse::header()` est appelé;
+à la place, ils sont simplement conservés jusqu'à ce que la réponse soit
+effectivement envoyée.
 
 .. versionadded:: 2.4
 
@@ -573,8 +576,8 @@ des réponses. En utilisant :php:meth:`CakeResponse::cache()`::
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
 pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
 ``cache()`` définit la valeur dernièrement modifiée en premier argument. Expires,
-et Max-age sont définis en se basant sur le second paramètre. Le Cache-Control
-est défini aussi à public.
+et ``max-age`` sont définis en se basant sur le second paramètre. Le
+Cache-Control est défini aussi à ``public``.
 
 
 .. _cake-response-caching:
@@ -605,13 +608,13 @@ L'en-tête de Cache Control
 
 Utilisé sous le model d'expiration, cet en-tête contient de multiples
 indicateurs qui peuvent changer la façon dont les navigateurs ou les
-proxies utilisent le contenu mis en cache. Un en-tête Cache-Control peut
+proxies utilisent le contenu mis en cache. Un en-tête ``Cache-Control`` peut
 ressembler à ceci::
 
     Cache-Control: private, max-age=3600, must-revalidate
 
 La classe ``CakeResponse`` vous aide à configurer cet en-tête avec quelques
-méthodes utiles qui vont produire un en-tête final valide Cache Control.
+méthodes utiles qui vont produire un en-tête final valide ``Cache Control``.
 Premièrement il y a la méthode :php:meth:`CakeResponse::sharable()`, qui
 indique si une réponse peut être considerée comme partageable pour différents
 utilisateurs ou clients. Cette méthode contrôle généralement la partie `public`
@@ -622,7 +625,7 @@ contrôle en publique.
 
 Le deuxième paramètre de cette méthode est utilisé pour spécifier un `max-age`
 pour le cache, qui est le nombre de secondes après lesquelles la réponse n'est
-plus considérée comme récente.::
+plus considérée comme récente::
 
     public function view() {
         ...
@@ -637,7 +640,7 @@ plus considérée comme récente.::
     }
 
 ``CakeResponse`` expose des méthodes séparées pour la définition de chaque
-component dans l'en-tête de Cache-Control.
+component dans l'en-tête de ``Cache-Control``.
 
 L'en-tête d'Expiration
 ----------------------
@@ -645,7 +648,7 @@ L'en-tête d'Expiration
 .. versionadded:: 2.1
 
 Aussi sous le model d'expiration de cache, vous pouvez définir l'en-tête
-`Expires`, qui selon la spécification HTTP est la date/le temps après que
+``Expires``, qui selon la spécification HTTP est la date et le temps après que
 la réponse ne soit plus considerée comme récente. Cet en-tête peut être défini
 en utilisant la méthode :php:meth:`CakeResponse::expires()`::
 
@@ -653,8 +656,8 @@ en utilisant la méthode :php:meth:`CakeResponse::expires()`::
         $this->response->expires('+5 days');
     }
 
-Cette méthode accepte aussi un DateTime ou toute chaîne de caractère qui peut
-être parsée par la classe DateTime.
+Cette méthode accepte aussi une instance DateTime ou toute chaîne de caractère
+qui peut être parsée par la classe DateTime.
 
 L'en-tête Etag
 --------------
@@ -669,9 +672,9 @@ il demande à l'application à chaque fois si les ressources ont changé ou non.
 C'est utilisé couramment avec des ressources statiques comme les images et
 autres choses.
 
-L'en-tête Etag (appelé balise d'entité) est une chaîne de caractère qui
+L'en-tête ``Etag`` (appelé balise d'entité) est une chaîne de caractère qui
 identifie de façon unique les ressources requêtées. Il est très semblable
-à la somme de contrôle d'un fichier, la mise en cache permettra de comparer
+à la somme de contrôle d'un fichier; la mise en cache permettra de comparer
 les sommes de contrôle pour savoir si elles correspondent ou non.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
@@ -688,16 +691,16 @@ soit appeler manuellement la méthode
         ...
     }
 
-L'en-tête Dernier Modifié
--------------------------
+L'en-tête Last-Modified
+-----------------------
 
 .. versionadded:: 2.1
 
 Toujours dans le cadre du model de validation du cache HTTP, vous pouvez
-définir l'en-tête `Dernier-Modifié` pour indiquer la date et le temps pendant
+définir l'en-tête ``Last-Modified`` pour indiquer la date et le temps pendant
 lequel la ressource a été modifiée pour la dernière fois. Définir cet en-tête
 aide la réponse de CakePHP pour mettre en cache les clients si la réponse a été
-modifiée ou n'est pas basée sur le cache du client.
+modifiée ou n'est pas basée sur leur cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
@@ -718,8 +721,8 @@ L'en-tête Vary
 
 Dans certains cas, vous voudrez offrir différents contenus en utilisant la
 même URL. C'est souvent le cas quand vous avez une page multilingue ou que
-vous répondez avec du HTML différent selon le navigateur qui requête la
-ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête Vary::
+vous répondez avec différents HTMLs selon le navigateur qui requête la
+ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
 
         $this->response->vary('User-Agent');
         $this->response->vary('Accept-Encoding', 'User-Agent');
@@ -731,8 +734,8 @@ CakeResponse et les tests
 =========================
 
 Probablement l'une des plus grandes victoires de ``CakeResponse`` vient de
-comment il facilite les tests des controllers et des components. Au lieu de
-méthodes répandues à travers plusieurs objets, vous avez un seul objet pour
+comment il facilite les tests des controllers et des components. Au lieu d'avoir
+des méthodes répandues à travers plusieurs objets, vous avez un seul objet pour
 mocker pendant que les controllers et les components déleguent à
 ``CakeResponse``. Cela vous aide à rester plus près d'un test 'unit' et
 facilite les tests des controllers::
@@ -764,13 +767,13 @@ API de CakeResponse
 .. php:method:: location($url = null)
 
     Vous permet de définir directement l'en-tête de localisation du redirect
-    à envoyer avec la réponse.
+    à envoyer avec la réponse::
 
-    // Définit la localisation du redirect
-    $this->response->location('http://example.com');
+        // Définit la localisation du redirect
+        $this->response->location('http://example.com');
 
-    // Récupère l'en-tête de localisation du redirect actuel
-    $location = $this->response->location();
+        // Récupère l'en-tête de localisation du redirect actuel
+        $location = $this->response->location();
 
     .. versionadded:: 2.4
 
@@ -794,27 +797,27 @@ API de CakeResponse
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Configure l'en-tête de Cache-Control pour être soit `public` soit `private` 
+    Configure l'en-tête ``Cache-Control`` pour être soit `public` soit `private` 
     et configure optionnellement une directive de la ressource à un `max-age`.
 
     .. versionadded:: 2.1
 
 .. php:method:: expires($time = null)
 
-    Permet de configurer l'en-tête `Expires` à une date spécifique.
+    Permet de configurer l'en-tête ``Expires`` à une date spécifique.
 
     .. versionadded:: 2.1
 
 .. php:method:: etag($tag = null, $weak = false)
 
-    Configure l'en-tête `Etag` pour identifier de manière unique une ressource
+    Configure l'en-tête ``Etag`` pour identifier de manière unique une ressource
     de réponse.
 
     .. versionadded:: 2.1
 
 .. php:method:: modified($time = null)
 
-    Configure l'en-tête `Le-dernier-modifié` à une date et un temps donné dans
+    Configure l'en-tête ``Last-modified`` à une date et un temps donné dans
     le format correct.
 
     .. versionadded:: 2.1

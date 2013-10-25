@@ -74,14 +74,19 @@ and South America users. We'd love to hear from you, whether you
 need some help, want to find users in your area, or would like to
 donate your brand new sports car.
 
-The Google Group
-================
+.. _cakephp-official-communities:
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+CakePHP Official Communities
+============================
+CakePHP also has it's official group in most popular social networking sites like Facebook, Google Plus. There are
+thousands of people discussing CakePHP projects, helping each other, solving problems, building projects
+and sharing ideas. It can be a great resource for finding archived answers, frequently asked questions, and
+getting answers to immediate problems. Join other CakePHP users in the following communities.
 
-CakePHP also has a very active Google Group. It can be a great
-resource for finding archived answers, frequently asked questions,
-and getting answers to immediate problems.
+-   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
+-   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
+-   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
+
 
 CakePHP Questions
 =================

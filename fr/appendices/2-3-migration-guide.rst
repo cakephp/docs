@@ -201,7 +201,7 @@ HttpSocket
   pour augmenter ce comportement. Regardez :ref:`http-socket-ssl-options`
   pour plus d'informations.
 - ``HttpResponse`` a été renommée en ``HttpSocketResponse``. Ceci évite
-  un problème commun avec l'extension pecl http. Il y a une classe
+  un problème commun avec l'extension HTTP PECL. Il y a une classe
   ``HttpResponse`` fournie ainsi que pour des raisons de compatibilité.
 
 Routing
@@ -266,7 +266,7 @@ FormHelper
   d'input basé sur les règles de validation pour un champ. Si vous avez un
   bouton "Cancel" dans votre formulaire va soumettre le formulaire puis vous
   devriez ajouter ``'formnovalidate' => true`` à vos options de bouton pour
-  empêcher le déclenchement de la validation dans le html. Vous pouvez aussi
+  empêcher le déclenchement de la validation dans le HTML. Vous pouvez aussi
   empêcher le déclenchement de la validation pour l'ensemble du formulaire
   en ajoutant ``'novalidate' => true`` dans les options de FormHelper::create().
 - :php:meth:`FormHelper::input()` génère maintenant les elements d'input de

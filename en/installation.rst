@@ -25,15 +25,15 @@ database storage engines:
 
 .. note::
 
-    All built-in drivers require PDO.  You should make sure you have the
+    All built-in drivers require PDO. You should make sure you have the
     correct PDO extensions installed.
 
 License
 =======
 
-CakePHP is licensed under the MIT license.  This means that you are free to
+CakePHP is licensed under the MIT license. This means that you are free to
 modify, distribute and republish the source code on the condition that the
-copyright notices are left intact.  You are also free to incorporate CakePHP
+copyright notices are left intact. You are also free to incorporate CakePHP
 into any Commercial or closed source application.
 
 Downloading CakePHP
@@ -68,7 +68,7 @@ CakePHP uses the ``app/tmp`` directory for a number of different
 operations. A few examples would be Model descriptions, cached
 views and session information.
 
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
+As such, make sure the directory ``app/tmp`` and all its subdirectories in your CakePHP installation
 are writable by the web server user.
 
 Setup
@@ -91,7 +91,7 @@ CakePHP: development, production, and advanced.
 Development
 ===========
 
-A development installation is the fastest method to setup Cake.
+A development installation is the fastest method to setup CakePHP.
 This example will help you install a CakePHP application and make
 it available at http://www.example.com/cake\_2\_0/. We assume for
 the purposes of this example that your document root is set to
@@ -121,18 +121,18 @@ Using one CakePHP checkout for multiple applications
 
 If you are developing a number of applications, it often makes sense to have
 them share the same CakePHP core checkout. There are a few ways in which you can
-accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory.  For this example, we'll use
+accomplish this. Often the easiest is to use PHP's ``include_path``. To start
+off, clone CakePHP into a directory. For this example, we'll use
 ``/home/mark/projects``::
 
     git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
-This will clone CakePHP into your ``/home/mark/projects`` directory.  If you don't want
+This will clone CakePHP into your ``/home/mark/projects`` directory. If you don't want
 to use git, you can download a zipball and the remaining steps will be the
-same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
+same. Next you'll have to locate and modify your ``php.ini``. On \*nix systems
 this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
-Configuration File'.  Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``/home/mark/projects/cakephp/lib``.  An
+Configuration File'. Once you've found the correct ini file, modify the
+``include_path`` configuration to include ``/home/mark/projects/cakephp/lib``. An
 example would look like::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
@@ -150,9 +150,9 @@ find CakePHP automatically.
 Production
 ==========
 
-A production installation is a more flexible way to setup Cake.
+A production installation is a more flexible way to setup CakePHP.
 Using this method allows an entire domain to act as a single
-CakePHP application. This example will help you install Cake
+CakePHP application. This example will help you install CakePHP
 anywhere on your filesystem and make it available at
 http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
@@ -201,7 +201,7 @@ the status of your current database connection.
 Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
-Not working? If you're getting timezone related error from PHP
+Not working? If you're getting timezone related errors from PHP
 uncomment one line in ``app/Config/core.php``::
 
    /**
