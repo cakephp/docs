@@ -31,6 +31,10 @@ Accepted keys for ``$options``:
 * ``escape`` Whether you want the contents html entity encoded, defaults to
   true.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
+* ``direction`` The default direction to use when this link isn't active.
+* ``lock`` Lock direction. Will only use the default direction then, defaults to false.
+
+  .. versionadded:: 2.5
 
 Assuming you are paginating some posts, and are on page one::
 
@@ -72,6 +76,10 @@ Output:
 .. code-block:: html
 
     <a href="/posts/index/page:1/sort:user_id/direction:desc/">User Id</a>
+
+The lock option can be used to lock sorting into the specified direction::
+
+    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
 
 .. php:method:: sortDir(string $model = null, mixed $options = array())
 
