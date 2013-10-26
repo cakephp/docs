@@ -609,6 +609,14 @@ File API
 
     Get the file's mimetype, returns false on failure.
 
+.. versionadded:: 2.5 ``File::replaceText()``
+
+.. php:method:: replaceText( $search, $replace )
+
+    :rtype: boolean
+
+    Replaces text in a file. Returns false on failure and true on success.
+
 
 .. todo::
 
