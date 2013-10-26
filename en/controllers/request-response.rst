@@ -457,7 +457,7 @@ to send a file as response::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Return reponse object to prevent controller from trying to render a view
+        //Return response object to prevent controller from trying to render a view
         return $this->response;
     }
 
