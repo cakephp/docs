@@ -7,7 +7,7 @@ aim to increase productivity and make coding more enjoyable: we
 hope you'll see this as you dive into the code.
 
 This tutorial will walk you through the creation of a simple blog
-application. We'll be getting and installing Cake, creating and
+application. We'll be getting and installing CakePHP, creating and
 configuring a database, and creating enough application logic to
 list, add, edit, and delete blog posts.
 
@@ -16,11 +16,11 @@ Here's what you'll need:
 #. A running web server. We're going to assume you're using Apache,
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
-   configuration, but most folks can get Cake up and running without
+   configuration, but most folks can get CakePHP up and running without
    any configuration at all. Make sure you have PHP 5.2.8 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.  Since we're using MySQL,
+   database: CakePHP will be taking the reins from there. Since we're using MySQL,
    also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
@@ -30,8 +30,8 @@ Here's what you'll need:
 
 Let's get started!
 
-Getting Cake
-============
+Getting CakePHP
+===============
 
 To get a fresh download, visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
@@ -59,7 +59,7 @@ Once finished, your directory setup should look something like the following::
         index.php
         README.md
 
-Now might be a good time to learn a bit about how Cake's directory
+Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
@@ -91,22 +91,22 @@ statements into your database::
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
-follow Cake's database naming conventions, and Cake's class naming
+follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
 :doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
-Cake is flexible enough to accommodate even the worst legacy
+CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
 Check out :doc:`/getting-started/cakephp-conventions` for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
-'modified' and 'created' will be automagically managed by Cake.
+'modified' and 'created' will be automagically managed by CakePHP.
 
 Database Configuration
 ======================
 
-Onward and upward: let's tell Cake where our database is and how to
+Onward and upward: let's tell CakePHP where our database is and how to
 connect to it. For many, this is the first and last time you
 configure anything.
 
@@ -137,9 +137,9 @@ like the following::
     ];
 
 Once you've saved your new ``app.php`` file, you should be
-able to open your browser and see the Cake welcome page. It should
+able to open your browser and see the CakePHP welcome page. It should
 also tell you that your database connection file was found, and
-that Cake can successfully connect to the database.
+that CakePHP can successfully connect to the database.
 
 .. note::
 
@@ -182,9 +182,9 @@ A Note on mod\_rewrite
 ======================
 
 Occasionally a new user will run into mod\_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or css styles),
+if the CakePHP welcome page looks a little funny (no images or CSS styles),
 it probably means mod\_rewrite isn't functioning on your system. Please refer
-to one of the sections below about url rewriting for your webserver to get
+to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
 .. toctree::

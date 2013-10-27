@@ -12,6 +12,9 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf).
 
+These files can vary on different distributions and apache versions.
+You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
+
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
@@ -22,7 +25,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        # directory (and its subdirectories). 
        #
        # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # features. 
        #
        <Directory />
            Options FollowSymLinks
@@ -43,7 +46,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    After you make changes, restart Apache to make sure the settings
    are active.
 
-   Verify that you your .htaccess files are actually in the right
+   Verify that your .htaccess files are actually in the right
    directories.
 
    This can happen during copying because some operating systems treat
@@ -54,8 +57,8 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    the site or our GIT repository, and has been unpacked correctly by
    checking for .htaccess files.
 
-   Cake root directory (needs to be copied to your document, this
-   redirects everything to your Cake app)::
+   CakePHP root directory (needs to be copied to your document, this
+   redirects everything to your CakePHP app)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -63,7 +66,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Cake app directory (will be copied to the top directory of your
+   CakePHP app directory (will be copied to the top directory of your
    application by bake)::
 
        <IfModule mod_rewrite.c>
@@ -72,7 +75,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Cake webroot directory (will be copied to your application's web
+   CakePHP webroot directory (will be copied to your application's web
    root by bake)::
 
        <IfModule mod_rewrite.c>
@@ -100,7 +103,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   make a virtual host to point to your folder. 
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -123,7 +126,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </IfModule>
 
    The details of those changes will depend on your setup, and can
-   include additional things that are not Cake related. Please refer
+   include additional things that are not CakePHP related. Please refer
    to Apache's online documentation for more information.
    
 #. (Optional) To improve production setup, you should prevent invalid assets
@@ -232,7 +235,7 @@ these steps:
     </configuration>
 
 Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, css, js, and rerouting should work
+rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
 correctly.
 
 I don't / can't use URL rewriting

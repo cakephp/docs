@@ -6,7 +6,7 @@ audience is to cater for multiple languages. This can often prove
 to be a daunting task, but the internationalization and
 localization features in CakePHP make it much easier.
 
-First, it’s important to understand some terminology.
+First, it's important to understand some terminology.
 *Internationalization* refers to the ability of an application to
 be localized. The term *localization* refers to the adaptation of
 an application to meet specific language (or culture) requirements
@@ -50,7 +50,7 @@ your code.
 The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your
 `po files <http://en.wikipedia.org/wiki/Gettext>`_, which contain
-the translations. Cake will look for your po files in the following
+the translations. CakePHP will look for your po files in the following
 location::
 
     /App/Locale/<locale>/LC_MESSAGES/<domain>.po
@@ -151,13 +151,13 @@ do is the following::
 
     Configure::write('Config.language', 'fra');
 
-This tells Cake which locale to use (if you use a regional locale, such as
+This tells CakePHP which locale to use (if you use a regional locale, such as
 fr\_FR, it will use the `ISO 639-2
 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
 if it doesn't exist), you can change the language at any time during a request.
 e.g. in your bootstrap if you're setting the application default language, in
 your (app) controller beforeFilter if it's specific to the request or user, or
-in fact anytime at all before you want a message in a different language.  To
+in fact anytime at all before you want a message in a different language. To
 set the language for the current user, you can store the setting in the Session
 object, like this::
 
@@ -178,13 +178,13 @@ Doing this will ensure that both :php:class:`I18n` and
 :php:class:`TranslateBehavior` access the same language value.
 
 It's a good idea to serve up public content available in multiple
-languages from a unique url - this makes it easy for users (and
+languages from a unique URL - this makes it easy for users (and
 search engines) to find what they're looking for in the language
 they are expecting. There are several ways to do this, it can be by
 using language specific subdomains (en.example.com,
-fra.example.com, etc.), or using a prefix to the url such as is
+fra.example.com, etc.), or using a prefix to the URL such as is
 done with this application. You may also wish to glean the
-information from the browser’s user-agent, among other things.
+information from the browser's user-agent, among other things.
 
 As mentioned in the previous section, displaying localized content
 is done using the :php:func:`__()` convenience function, or one of the other
@@ -193,7 +193,7 @@ probably be best utilized in your views. The first parameter of the
 function is used as the msgid defined in the .po files.
 
 CakePHP will automatically assume that all model validation error messages in
-your ``$validate`` array are intended to be localized.  When running the i18n
+your ``$validate`` array are intended to be localized. When running the i18n
 shell these strings will also be extracted.
 
 There's one other aspect of localizing your application which is

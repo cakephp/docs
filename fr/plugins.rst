@@ -189,7 +189,7 @@ Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
 des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
 
 Merci de noter que le processus de création de plugins peut être méchamment
-simplifié en utilisant le shell de Cake.
+simplifié en utilisant le shell de CakePHP.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 
@@ -241,7 +241,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     le nom du plugin.
    
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez
-/contact_manager/contacts. Vous devriez obtenir une erreur “Missing Model”
+/contact_manager/contacts. Vous devriez obtenir une erreur "Missing Model"
 parce que nous n'avons pas un model Contact déjà défini.
 
 .. _plugin-models:
@@ -258,8 +258,8 @@ model pour ce controller, appelé Contact::
     }
 
 Visiter /contact_manager/contacts maintenant (Etant donné, que vous avez une
-table dans votre base de données appelée ‘contacts’) devrait nous donner une
-erreur “Missing View”.
+table dans votre base de données appelée 'contacts') devrait nous donner une
+erreur "Missing View".
 Créons la ensuite.
 
 .. note::

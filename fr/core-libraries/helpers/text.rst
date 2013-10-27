@@ -4,7 +4,7 @@ TextHelper
 .. php:class:: TextHelper(View $view, array $settings = array())
 
 TextHelper possède des méthodes pour rendre le texte plus utilisable et sympa
-dans vos vues. Il aide à activer les liens, à formater les urls, à créer
+dans vos vues. Il aide à activer les liens, à formater les URLs, à créer
 des extraits de texte autour des mots ou des phrases choisies, mettant en
 évidence des mots clés dans des blocs de texte et tronquer élegamment de 
 longues étendues de texte.
@@ -36,7 +36,7 @@ longues étendues de texte.
 
     .. versionchanged:: 2.1
         Dans 2.1, cette méthode echappe automatiquement ces inputs. Utilisez
-        l'option ``escape`` pour la désactiver si nécéssaire.
+        l'option ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
@@ -64,7 +64,7 @@ longues étendues de texte.
 
     .. versionchanged:: 2.1
         Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
-        l'option ``escape`` pour la désactiver si nécéssaire.
+        l'option ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoParagraph(string $text)
 

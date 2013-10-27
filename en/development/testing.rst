@@ -1,8 +1,8 @@
 Testing
 #######
 
-CakePHP comes with comprehensive testing support built-in.  CakePHP comes with
-integration for `PHPUnit <http://phpunit.de>`_.  In addition to the features
+CakePHP comes with comprehensive testing support built-in. CakePHP comes with
+integration for `PHPUnit <http://phpunit.de>`_. In addition to the features
 offered by PHPUnit, CakePHP offers some additional features to make testing
 easier. This section will cover installing PHPUnit, and getting started with
 Unit Testing, and how you can use the extensions that CakePHP offers.
@@ -54,25 +54,27 @@ directory::
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``App/Config/core.php``
+Remember to have a debug level of at least 1 in your ``App/Config/app.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
-``test`` datasource configuration to ``App/Config/datasources.php``.  This 
+``test`` datasource configuration to ``App/Config/app.php``.  This 
 configuration is used by CakePHP for fixture tables and data::
 
-    Configure::write('Datasource.test', [
-        'datasource' => 'Cake\Database\Driver\Mysql',
-        'persistent' => false,
-        'host' => 'dbhost',
-        'login' => 'dblogin',
-        'password' => 'dbpassword',
-        'database' => 'test_database'
-    ]);
+    'Datasources' => [
+        'test' => [
+            'datasource' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'dbhost',
+            'login' => 'dblogin',
+            'password' => 'dbpassword',
+            'database' => 'test_database'
+        ],
+    ],
 
 .. note::
 
     It's a good idea to make the test database and your actual database
-    different databases.  This will prevent embarrassing mistakes later.
+    different databases. This will prevent embarrassing mistakes later.
 
 Checking the Test Setup
 =======================
@@ -115,7 +117,7 @@ tests:
 When you have created a test case, you can execute it by browsing
 to ``http://localhost/your_app/test.php`` (depending on
 how your specific setup looks). Click App test cases, and
-then click the link to your specific file.  You can run tests from the command
+then click the link to your specific file. You can run tests from the command
 line using the test shell::
 
     ./Console/cake test app Model/Post
@@ -126,7 +128,7 @@ Creating Your First Test Case
 =============================
 
 In the following example, we'll create a test case for a very simple helper
-method.  The helper we're going to test will be formatting progress bar HTML.
+method. The helper we're going to test will be formatting progress bar HTML.
 Our helper looks like::
 
     namespace App\View\Helper;
@@ -142,8 +144,8 @@ Our helper looks like::
     }
 
 This is a very simple example, but it will be useful to show how you can create
-a simple test case.  After creating and saving our helper, we'll create the test
-case file in ``app/Test/TestCase/View/Helper/ProgressHelperTest.php``.  In that file
+a simple test case. After creating and saving our helper, we'll create the test
+case file in ``App/Test/TestCase/View/Helper/ProgressHelperTest.php``. In that file
 we'll start with the following::
 
     namespace App\Test\TestCase\View\Helper;
@@ -163,10 +165,10 @@ we'll start with the following::
         }
     }
 
-We'll flesh out this skeleton in a minute.  We've added two methods to start
-with.  First is ``setUp()``.  This method is called before every *test* method
-in a test case class.  Setup methods should initialize the objects needed for the
-test, and do any configuration needed.  In our setup method we'll add the
+We'll flesh out this skeleton in a minute. We've added two methods to start
+with. First is ``setUp()``. This method is called before every *test* method
+in a test case class. Setup methods should initialize the objects needed for the
+test, and do any configuration needed. In our setup method we'll add the
 following::
 
     public function setUp() {
@@ -180,7 +182,7 @@ Calling the parent method is important in test cases, as TestCase::setUp()
 does a number things like backing up the values in :php:class:`Configure` and,
 storing the paths in :php:class:`App`.
 
-Next, we'll fill out the test method.  We'll use some assertions to ensure that
+Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
 
     public function testBar() {
@@ -193,16 +195,16 @@ our code creates the output we expect::
     }
 
 The above test is a simple one but shows the potential benefit of using test
-cases.  We use ``assertContains()`` to ensure that our helper is returning a
-string that contains the content we expect.  If the result did not contain the
+cases. We use ``assertContains()`` to ensure that our helper is returning a
+string that contains the content we expect. If the result did not contain the
 expected content the test would fail, and we would know that our code is
 incorrect.
 
 By using test cases you can easily describe the relationship between a set of
-known inputs and their expected output.  This helps you be more confident of the
+known inputs and their expected output. This helps you be more confident of the
 code you're writing as you can easily check that the code you wrote fulfills the
-expectations and assertions your tests make.  Additionally because tests are
-code, they are easy to re-run whenever you make a change.  This helps prevent
+expectations and assertions your tests make. Additionally because tests are
+code, they are easy to re-run whenever you make a change. This helps prevent
 the creation of new bugs.
 
 .. _running-tests:
@@ -218,20 +220,20 @@ Running tests from a browser
 ----------------------------
 
 CakePHP provides a web interface for running tests, so you can execute your
-tests through a browser if you're more comfortable in that environment.  You can
-access the web runner by going to ``http://localhost/your_app/test.php``.  The
-exact location of test.php will change depending on your setup.  But the file is
+tests through a browser if you're more comfortable in that environment. You can
+access the web runner by going to ``http://localhost/your_app/test.php``. The
+exact location of test.php will change depending on your setup. But the file is
 at the same level as ``index.php``.
 
 Once you've loaded up the test runner, you can navigate App, Core and Plugin test
-suites.  Clicking an individual test case will run that test and display the
+suites. Clicking an individual test case will run that test and display the
 results.
 
 Viewing code coverage
 ~~~~~~~~~~~~~~~~~~~~~
 
 If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
-results.  Code coverage is useful for telling you what parts of your code your
+results. Code coverage is useful for telling you what parts of your code your
 tests do not reach. Coverage is useful for determining where you should add
 tests in the future, and gives you one measurement to track your testing
 progress with.
@@ -242,7 +244,7 @@ progress with.
 
 The inline code coverage uses green lines to indicate lines that have been run.
 If you hover over a green line a tooltip will indicate which tests covered the
-line. Lines in red did not run, and have not been exercised by your tests.  Grey
+line. Lines in red did not run, and have not been exercised by your tests. Grey
 lines are considered unexecutable code by xdebug.
 
 .. _run-tests-from-command-line:
@@ -267,7 +269,7 @@ your app directory you can do the following to run tests::
 .. note::
 
     If you are running tests that interact with the session it's generally a good
-    idea to use the ``--stderr`` option.  This will fix issues with tests
+    idea to use the ``--stderr`` option. This will fix issues with tests
     failing because of headers_sent warnings.
 
 You can also run ``test`` shell in the project root directory. This shows
@@ -297,12 +299,12 @@ Generating code coverage
 
 You can generate code coverage reports from the command line using PHPUnit's
 built-in code coverage tools. PHPUnit will generate a set of static HTML files
-containing the coverage results.  You can generate coverage for a test case by
+containing the coverage results. You can generate coverage for a test case by
 doing the following::
 
     ./Console/cake test app Model/Article --coverage-html webroot/coverage
 
-This will put the coverage results in your application's webroot directory.  You
+This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
@@ -395,8 +397,8 @@ The ``$connection`` property defines the datasource of which the fixture will
 use.  If your application uses multiple datasources, you should make the
 fixtures match the model's datasources but prefixed with ``test_``.
 For example if your model uses the ``mydb`` datasource, your fixture should use
-the ``test_mydb`` datasource.  If the ``test_mydb`` connection doesn't exist,
-your models will use the default ``test`` datasource.  Fixture datasources must
+the ``test_mydb`` datasource. If the ``test_mydb`` connection doesn't exist,
+your models will use the default ``test`` datasource. Fixture datasources must
 be prefixed with ``test`` to reduce the possibility of accidentally truncating
 all your application's data when running tests.
 
@@ -431,8 +433,8 @@ definition are:
 
 We can define a set of records that will be populated after the fixture table is
 created. The format is fairly straight forward, ``$records`` is an array of
-records.  Each item in ``$records`` should be a single row.  Inside each row,
-should be an associative array of the columns and values for the row.  Just keep
+records. Each item in ``$records`` should be a single row. Inside each row,
+should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the $records array must have a key for **every**
 field specified in the ``$fields`` array. If a field for a particular record needs
 to have a ``null`` value, just specify the value of that key as ``null``.
@@ -441,7 +443,7 @@ Dynamic data and fixtures
 -------------------------
 
 Since records for a fixture are declared as a class property, you cannot easily
-use functions or other dynamic data to define fixtures.  To solve this problem,
+use functions or other dynamic data to define fixtures. To solve this problem,
 you can define ``$records`` in the init() function of your fixture. For example
 if you wanted all the created and updated timestamps to reflect today's date you
 could do the following::
@@ -529,8 +531,8 @@ Loading fixtures in your test cases
 -----------------------------------
 
 After you've created your fixtures, you'll want to use them in your test cases.
-In each test case you should load the fixtures you will need.  You should load a
-fixture for every model that will have a query run against it.  To load fixtures
+In each test case you should load the fixtures you will need. You should load a
+fixture for every model that will have a query run against it. To load fixtures
 you define the ``$fixtures`` property in your model::
 
     class ArticleTest extends TestCase {
@@ -538,7 +540,7 @@ you define the ``$fixtures`` property in your model::
     }
 
 The above will load the Article and Comment fixtures from the application's
-Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
+Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticleTest extends TestCase {
         public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
@@ -580,7 +582,7 @@ Let's say we already have our Article model defined on
     }
 
 We now want to set up a test that will use this model definition, but through
-fixtures, to test some functionality in the model.  CakePHP test suite loads a
+fixtures, to test some functionality in the model. CakePHP test suite loads a
 very minimum set of files (to keep tests isolated), so we have to start by
 loading our model - in this case the Article model which we already defined.
 
@@ -597,7 +599,7 @@ Let's now create a file named ``ArticleTest.php`` in your
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
-we'll use.  You should remember to include all the fixtures that will have
+we'll use. You should remember to include all the fixtures that will have
 queries run against them.
 
 .. note::
@@ -656,8 +658,8 @@ information on how to run your test case.
 Mocking model methods
 ---------------------
 
-There will be times you'll want to mock methods on models when testing them.  You should
-use ``getMockForModel`` to create testing mocks of models.  It avoids issues
+There will be times you'll want to mock methods on models when testing them. You should
+use ``getMockForModel`` to create testing mocks of models. It avoids issues
 with reflected properties that normal mocks have::
 
     public function testSendingEmails() {
@@ -675,7 +677,7 @@ Testing Controllers
 While you can test controller classes in a similar fashion to Helpers, Models,
 and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
 Using this class as the base class for your controller test cases allows you to
-use ``testAction()`` for simpler test cases.  ``ControllerTestCase`` allows you
+use ``testAction()`` for simpler test cases. ``ControllerTestCase`` allows you
 to easily mock out components and models, as well as potentially difficult to
 test methods like :php:meth:`~Controller::redirect()`.
 
@@ -755,21 +757,21 @@ Create a file named ``ArticlesControllerTest.php`` in your
     }
 
 This example shows a few of the ways you can use testAction to test your
-controllers.  The first parameter of ``testAction`` should always be the URL you
-want to test.  CakePHP will create a request and dispatch the controller and
+controllers. The first parameter of ``testAction`` should always be the URL you
+want to test. CakePHP will create a request and dispatch the controller and
 action.
 
 When testing actions that contain ``redirect()`` and other code following the
-redirect it is generally a good idea to return when redirecting.  The reason for
+redirect it is generally a good idea to return when redirecting. The reason for
 this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal.  And instead of your code exiting, it will continue to run code following
-the redirect.  For example::
+normal. And instead of your code exiting, it will continue to run code following
+the redirect. For example::
 
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    return $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'index'));
                 }
             }
             // more code
@@ -777,7 +779,7 @@ the redirect.  For example::
     }
 
 When testing the above code, you will still run ``// more code`` even when the
-redirect is reached.  Instead, you should write the code like::
+redirect is reached. Instead, you should write the code like::
 
     class ArticlesController extends AppController {
         public function add() {
@@ -797,9 +799,9 @@ Simulating GET requests
 -----------------------
 
 As seen in the ``testIndexPostData()`` example above, you can use
-``testAction()`` to test POST actions as well as GET actions.  By supplying the
-``data`` key, the request made to the controller will be POST.  By default all
-requests will be POST requests.  You can simulate a GET request by setting the
+``testAction()`` to test POST actions as well as GET actions. By supplying the
+``data`` key, the request made to the controller will be POST. By default all
+requests will be POST requests. You can simulate a GET request by setting the
 method key::
 
     public function testAdding() {
@@ -843,7 +845,7 @@ Using mocks with testAction
 ---------------------------
 
 There will be times when you want to replace components or models with either
-partially mocked objects or completely mocked objects.  You can do this by using
+partially mocked objects or completely mocked objects. You can do this by using
 :php:meth:`ControllerTestCase::generate()`. ``generate()`` takes the hard work
 out of generating mocks on your controller. If you decide to generate a
 controller to be used in testing, you can generate mocked versions of its models
@@ -925,13 +927,13 @@ This example shows a slightly more complex use of the ``testAction()`` and
 the ability to run testing methods on it. Assuming ``PostsController::add()``
 redirects us to index, sends an email and sets a flash message, the test will
 pass. A second test was added to do basic sanity testing when fetching the add
-form.  We check to see if the layout was loaded by checking the entire rendered
+form. We check to see if the layout was loaded by checking the entire rendered
 contents, and checks the view for a form tag. As you can see, your freedom to
 test controllers and easily mock its classes is greatly expanded with these
 changes.
 
 When doing controller tests using mocks that use static methods you'll have to
-use a different method to register your mock expectations.  For example if you
+use a different method to register your mock expectations. For example if you
 wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
 following::
 
@@ -1149,7 +1151,7 @@ If you want several of your tests to run at the same time, you can
 create a test suite. A test suite is composed of several test cases.
 ``CakeTestSuite`` offers a few methods for easily creating test suites based on
 the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``app/Test/TestCase/AllModelTest.php``. Put the following in it::
+could would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1217,12 +1219,12 @@ Integration with Jenkins
 ========================
 
 `Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
-help you automate the running of your test cases.  This helps ensure that all
+help you automate the running of your test cases. This helps ensure that all
 your tests stay passing and your application is always ready.
 
-Integrating a CakePHP application with Jenkins is fairly straightforward.  The
+Integrating a CakePHP application with Jenkins is fairly straightforward. The
 following assumes you've already installed Jenkins on \*nix system, and are able
-to administer it.  You also know how to create jobs, and run builds.  If you are
+to administer it. You also know how to create jobs, and run builds. If you are
 unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
 
 Create a job
@@ -1235,8 +1237,8 @@ Add test database config
 ------------------------
 
 Using a separate database just for Jenkins is generally a good idea, as it stops
-bleed through and avoids a number of basic problems.  Once you've created a new
-database in a database server that jenkins can access (usually localhost).  Add
+bleed through and avoids a number of basic problems. Once you've created a new
+database in a database server that jenkins can access (usually localhost). Add
 a *shell script step* to the build that contains the following::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
@@ -1265,7 +1267,7 @@ following::
 Add your tests
 --------------
 
-Add another *shell script step* to your build.  In this step run the tests for
+Add another *shell script step* to your build. In this step run the tests for
 your application. Creating a junit log file, or clover coverage is often a nice
 bonus, as it gives you a nice graphical view of your testing results::
 
@@ -1280,7 +1282,7 @@ in Jenkins as well. Failing to configure those steps will mean you won't see the
 Run a build
 -----------
 
-You should be able to run a build now.  Check the console output and make any
+You should be able to run a build now. Check the console output and make any
 necessary changes to get a passing build.
 
 

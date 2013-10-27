@@ -2,13 +2,13 @@ CakePHP Conventions
 ###################
 
 We are big fans of convention over configuration. While it takes a
-bit of time to learn CakePHP’s conventions, you save time in the
+bit of time to learn CakePHP's conventions, you save time in the
 long run: by following convention, you get free functionality, and
 you free yourself from the maintenance nightmare of tracking config
 files. Convention also makes for a very uniform system development,
 allowing other developers to jump in and help more easily.
 
-CakePHP’s conventions have been distilled out of years of web
+CakePHP's conventions have been distilled out of years of web
 development experience and best practices. While we suggest you use
 these conventions while developing with CakePHP, we should mention
 that many of these tenets are easily overridden – something that is
@@ -17,7 +17,7 @@ especially handy when working with legacy systems.
 Controller Conventions
 ======================
 
-Controller classnames are plural, CamelCased, and end in
+Controller class names are plural, CamelCased, and end in
 ``Controller``. ``PeopleController`` and
 ``LatestArticlesController`` are both examples of conventional
 controller names.
@@ -54,7 +54,7 @@ accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
 because the method is preceded with an underscore. You can also use
 PHP's visibility keywords to indicate whether or not a method can be 
-accessed from a url. Non-public methods cannot be accessed.
+accessed from a URL. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -74,7 +74,7 @@ equals the controller name so:
 -  /red\_apples
 
 will all resolve to the index of the RedApples controller. However,
-the convention is that your urls are lowercase and underscored,
+the convention is that your URLs are lowercase and underscored,
 therefore /red\_apples/go\_pick is the correct form to access the
 ``RedApplesController::go_pick`` action.
 
@@ -83,11 +83,11 @@ For more information on CakePHP URLs and parameter handling, see
 
 .. _file-and-classname-conventions:
 
-File and Classname Conventions
+File and Class Name Conventions
 ==============================
 
-In general, filenames match the classnames, which are
-CamelCased. So if you have a class **MyNiftyClass**, then in Cake,
+In general, filenames match the class names, which are
+CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
 the file should be named **MyNiftyClass.php**. Below are
 examples of how to name the file for each of the different types of
 classes you would typically use in a CakePHP application:
@@ -111,7 +111,7 @@ Each file would be located in the appropriate folder in your app folder.
 Model and Database Conventions
 ==============================
 
-Model classnames are singular and CamelCased. Person, BigPerson,
+Model class names are singular and CamelCased. Person, BigPerson,
 and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
@@ -157,7 +157,7 @@ as a normal model. E.g.::
     PRIMARY KEY(id)); 
 
 Rather than using an auto-increment key as the primary key, you may
-also use char(36). Cake will then use a unique 36 character uuid
+also use char(36). CakePHP will then use a unique 36 character UUID
 (String::uuid) whenever you save a new record using the Model::save
 method.
 
@@ -174,7 +174,7 @@ The basic pattern is
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
-of configuration. Here’s a final example that ties the conventions
+of configuration. Here's a final example that ties the conventions
 
 -  Database table: "people"
 -  Model class: "Person", found at /App/Model/Person.php
@@ -188,7 +188,7 @@ of the PeopleController, where the Person model is automatically
 available (and automatically tied to the 'people' table in the
 database), and renders to a file. None of these relationships have
 been configured by any means other than by creating classes and
-files that you’d need to create anyway.
+files that you'd need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you
 might try a run through the

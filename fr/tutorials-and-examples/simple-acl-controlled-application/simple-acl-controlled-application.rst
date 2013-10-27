@@ -25,7 +25,7 @@ Ce dont vous aurez besoin
    fonctionner sans qu'aucune configuration soit nécessaire.
 #. Un serveur de base de données. Nous utiliserons MySQL dans ce tutoriel.
    Vous aurez besoin de connaître suffisamment de chose en SQL, notamment
-   pour pouvoir créer une base de données : Cake prendra les rènes à partir
+   pour pouvoir créer une base de données : CakePHP prendra les rènes à partir
    d'ici.
 #. Une connaissance des bases PHP. Plus vous aurez pratiqué la programmation
    orientée objet, mieux ça vaudra : mais n'ayez pas peur si vous êtes un fan
@@ -44,7 +44,7 @@ Vous pouvez aussi dupliquer le dépôt en utilisant
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``.
 
-Une fois que vous avez votre copie toute récente de Cake, configurez votre
+Une fois que vous avez votre copie toute récente de CakePHP, configurez votre
 fichier "app/Config/database.php" et changez la valeur du Security.salt
 ("grain" de sécurité) dans votre fichier "app/Config/core.php". A ce stade,
 nous construirons un schéma simple de base de données sur lequel bâtir notre
@@ -98,7 +98,7 @@ affectée si vous cuisinez les controllers avec la fonctionnalité Scaffold.
 
 Pendant la cuisson des Models, cake détectera auto-magiquement les
 associations entre vos Models (ou relations entre vos tables). Laissez
-Cake remplir les bonnes associations hasMany et belongsTo. Si vous êtes invité
+CakePHP remplir les bonnes associations hasMany et belongsTo. Si vous êtes invité
 à choisir hasOne ou hasMany, d'une manière générale, vous aurez besoin d'une
 relation hasMany (seulement) pour ce tutoriel.
 
@@ -160,8 +160,7 @@ passwords soient hashés. Dans ``app/Model/User.php`` ajoutez ce qui suit::
     }
 
 Ensuite nous devons faire quelques modifications dans ``AppController``. Si
-vous n'avez pas ``/app/Controller/AppController.php``, créez le. Notez que cela
-va dans /app/Controller/, pas dans /app/app_controllers.php. Puisque nous
+vous n'avez pas ``/app/Controller/AppController.php``, créez le. Puisque nous
 voulons que notre site entier soit contrôllé avec Auth et Acl, nous allons
 les définir en haut dans ``AppController``::
 
@@ -196,10 +195,10 @@ et users. Dans les **deux**, votre ``GroupsController`` et votre
     public function beforeFilter() {
         parent::beforeFilter();
 
-        // For CakePHP 2.0
+        // Pour CakePHP 2.0
         $this->Auth->allow('*');
 
-        // For CakePHP 2.1 and up
+        // Pour CakePHP 2.1 et supérieurs
         $this->Auth->allow();
     }
 

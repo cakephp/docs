@@ -102,7 +102,7 @@ Pour baker des projets personnalisés
     -  Puisque le chemin complet du squelette doit être entré manuellement,
        vous pouvez spécifier n'importe quel dossier avec le template que vous
        souhaitez construire, ainsi que l'utilisation de plusieurs templates.
-       (Sauf si Cake commence par outrepasser le dossier
+       (Sauf si CakePHP commence par outrepasser le dossier
        squelette comme il fait pour les vues)
 
 
@@ -112,7 +112,7 @@ Amélioration de Bake dans la version 1.3
 Dans CakePHP 1.3, bake a connu une révision importante,
 avec le rajout de fonctionnalités et améliorations.
 
--  Deux nouvelles tâches (FixtureTask and TestTask) sont accessibles à partir
+-  Deux nouvelles tâches (FixtureTask et TestTask) sont accessibles à partir
    du menu principal de bake.
 -  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans
    vos shells.

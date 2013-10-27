@@ -8,7 +8,7 @@ aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
 
 Alors que d'autres solutions existent, REST est un bon moyen de fournir
-facilement un accès à la logique que vous avez créee dans votre application.
+facilement un accès à la logique que vous avez créée dans votre application.
 C'est simple, habituellement basé sur XML (nous parlons de XML simple, rien
 de semblable à une enveloppe SOAP), et dépend des headers HTTP pour la
 direction. Exposer une API via REST dans CakePHP est simple.
@@ -72,9 +72,9 @@ ressembler à ceci::
 
     // Controller/RecipesController.php
     class RecipesController extends AppController {
-    
+
         public $components = array('RequestHandler');
-    
+
         public function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(array(
@@ -82,7 +82,7 @@ ressembler à ceci::
                 '_serialize' => array('recipes')
             ));
         }
-    
+
         public function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(array(
@@ -90,7 +90,7 @@ ressembler à ceci::
                 '_serialize' => array('recipe')
             ));
         }
-    
+
         public function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
@@ -103,7 +103,7 @@ ressembler à ceci::
                 '_serialize' => array('message')
             ));
         }
-    
+
         public function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
@@ -163,7 +163,7 @@ Puisque nous fournissons un API qui sort du XML, c'est un chois naturel pour
 recevoir le XML en entrée. Ne vous inquiétez pas, les classes
 :php:class:`RequestHandler` et :php:class:`Router` facilitent beaucoup les
 choses. Si une requête POST ou PUT a un content-type XML,
-alors l'entrée est lancée à travers la classe :php:class:`Xml` de Cake, et la
+alors l'entrée est lancée à travers la classe :php:class:`Xml` de CakePHP, et la
 représentation en tableau des données est assignée à `$this->request->data`.
 A cause de cette fonctionnalité, gérer les données en XML et POST en parallèle
 est transparente : aucun changement n'est requis dans le code du controller
@@ -209,7 +209,7 @@ En écrivant par dessus la ressource map par défaut, les appels futurs à
 Routing REST Personnalisé
 =========================
 
-Si les routes créees par défaut par :php:meth:`Router::mapResources()` ne
+Si les routes créées par défaut par :php:meth:`Router::mapResources()` ne
 fonctionnent pas pour vous, utilisez la méthode :php:meth:`Router::connect()`
 pour définir un ensemble personnalisé de routes REST. La méthode ``connect()``
 vous permet de définir un certain nombre d'options différentes pour une URL

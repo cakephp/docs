@@ -12,8 +12,8 @@ use to aid in:
 .. include:: /core-libraries/toc-components.rst
     :start-line: 7
 
-Each of these core components are detailed in their own chapters.
-For now, we’ll show you how to create your own components. Creating
+Each of these core components is detailed in its own chapter.
+For now, we'll show you how to create your own components. Creating
 components keeps controller code clean and allows you to reuse code
 between projects.
 
@@ -37,9 +37,10 @@ Configuration for these components, and for components in general, is usually do
             'Cookie' => ['name' => 'CookieMonster']
         ];
 
-Would be an example of configuring a component with the
-``$components`` array. All core components allow their
-configuration settings to be set in this way. In addition you can
+The previous fragment of code would be an example of
+configuring a component with the ``$components`` array.
+All core components allow their
+configuration settings to be set in this way. In addition, you can
 configure components in your controller's ``beforeFilter()``
 method. This is useful when you need to assign the results of a
 function to a component property. The above could also be expressed
@@ -65,7 +66,7 @@ Consult the relevant documentation to determine what configuration
 options each component provides.
 
 One common setting to use is the ``className`` option, which allows you to
-alias components.  This feature is useful when you want to
+alias components. This feature is useful when you want to
 replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
@@ -97,7 +98,7 @@ Using Components
 ================
 
 Once you've included some components in your controller, using them is pretty
-simple.  Each component you use is exposed as a property on your controller.  If
+simple. Each component you use is exposed as a property on your controller. If
 you had loaded up the :php:class:`Cake\\Controller\\Component\\SessionComponent`
 and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
@@ -115,7 +116,7 @@ controller, you could access them like so::
 .. note::
 
     Since both Models and Components are added to Controllers as
-    properties they share the same 'namespace'.  Be sure to not give a
+    properties they share the same 'namespace'. Be sure to not give a
     component and a model the same name.
 
 Loading components on the fly
@@ -140,7 +141,7 @@ Component Callbacks
 ===================
 
 Components also offer a few request life-cycle callbacks that allow them to
-augment the request cycle.  See the base :ref:`component-api` and
+augment the request cycle. See the base :ref:`component-api` and
 :doc:`/core-libraries/events` for more information on the callbacks components
 offer.
 
@@ -166,14 +167,14 @@ structure for the component would look something like this::
 
 .. note::
 
-    All components must extend :php:class:`Component`.  Failing to do this
+    All components must extend :php:class:`Component`. Failing to do this
     will trigger an exception.
 
 Including your component in your controllers
 --------------------------------------------
 
 Once our component is finished, we can use it in the application's
-controllers by placing the component's name (minus the "Component"
+controllers by placing the component's name (without the "Component"
 part) in the controller's ``$components`` array. The controller will
 automatically be given a new attribute named after the component,
 through which we can access an instance of it::
@@ -201,9 +202,8 @@ the Component::
 
 The above would pass the array containing precision and
 randomGenerator to ``MathComponent::__construct()`` as the
-second parameter.  By convention, any settings that have been passed
-that are also public properties on your component will have the values
-set based on the settings.
+second parameter. By convention, if array keys match component's public
+properties, the properties will be set to the values of these keys.
 
 
 Using other Components in your Component
@@ -239,7 +239,9 @@ way you include them in controllers - using the ``$components`` var::
         }
     }
 
-Note that in contrast to a component included in a controller no callbacks will be triggered on a component's component.
+.. note::
+    In contrast to a component included in a controller
+    no callbacks will be triggered on a component's component.
 
 .. _component-api:
 
@@ -250,12 +252,12 @@ Component API
 
     The base Component class offers a few methods for lazily loading other
     Components through :php:class:`Cake\\Controller\\ComponentRegistry` as well
-    as dealing with common handling of settings.  It also provides prototypes
+    as dealing with common handling of settings. It also provides prototypes
     for all the component callbacks.
 
 .. php:method:: __construct(ComponentRegistry $registry, $settings = [])
 
-    Constructor for the base component class.  All ``$settings`` that
+    Constructor for the base component class. All ``$settings`` that
     are also public properties will have their values changed to the
     matching value in ``$settings``.
 
@@ -264,33 +266,31 @@ Callbacks
 
 .. php:method:: initialize(Event $event, Controller $controller)
 
-    The initialize method is called before the controller's
+    Is called before the controller's
     beforeFilter method.
 
 .. php:method:: startup(Event $event, Controller $controller)
 
-    The startup method is called after the controller's beforeFilter
+    Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
 .. php:method:: beforeRender(Event $event, Controller $controller)
 
-    The beforeRender method is called after the controller executes the
-    requested action's logic but before the controller's renders views
-    and layout.
+    Is called after the controller executes the requested action's logic,
+    but before the controller's renders views and layout.
 
 .. php:method:: shutdown(Event $event, Controller $controller)
 
-    The shutdown method is called before output is sent to browser.
+    Is called before output is sent to the browser.
 
 .. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
 
-    The beforeRedirect method is invoked when the controller's redirect
+    Is invoked when the controller's redirect
     method is called but before any further action. If this method
     returns false the controller will not continue on to redirect the
-    request. The $url, ane $response paramaters allow you to inspect and modify
+    request. The $url, and $response paramaters allow you to inspect and modify
     the location or any other headers in the response.
-
 
 .. meta::
     :title lang=en: Components

@@ -17,7 +17,7 @@ se constrói um novo projeto, pegue uma cópia do CakePHP e comece com o interio
 de sua aplicação.
 
 O CakePHP possui uma `equipe de desenvolvedores
-<http://cakephp.lighthouseapp.com/contributors>`_ ativa e uma grande comunidade,
+<http://github.com/cakephp/cakephp/contributors>`_ ativa e uma grande comunidade,
 trazendo grande valor ao projeto. Além de manter você fora da reinvenção da roda,
 usando o CakePHP significa que o núcleo da sua aplicação é bem testado e está em
 constante aperfeiçoamento.

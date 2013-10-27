@@ -54,6 +54,26 @@ le debug change les types de choses suivantes:
 En plus des éléments ci-desssus, beaucoup de plugins et d'extensions
 d'application utilisent ``debug`` pour modifier leur comportement.
 
+Vous pouvez créer une variable d'environnement pour définir le niveau de
+debug dynamiquement entre plusieurs environnements. Cela va éviter de déployer
+une application avec debug > 0 et vous permet de ne pas avoir à changer de
+niveau de debug chaque fois avant de déployer vers un environnement de
+production.
+
+Par exemple, vous pouvez définir une variable d'environment dans votre
+configuration Apache::
+
+	SetEnv CAKEPHP_DEBUG 2
+
+Et ensuite vous pouvez définir le niveau de debug dynamiquement dans
+``core.php``::
+
+	if (getenv('CAKEPHP_DEBUG')) {
+		Configure::write('debug', 2);
+	} else {
+		Configure::write('debug', 0);
+	}
+
 Améliorer les performances de votre application
 ===============================================
 

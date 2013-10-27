@@ -28,7 +28,7 @@ Nous maintenons 4 versions de CakePHP.
    numéro de version pour lesquels ils sont faits. Par ex: *1.3*. Une fois que 
    les branches de développement ont atteint un niveau de version stable, elles 
    deviennent des branches de maintenance, et plus aucune fonctionnalité 
-   nouvelle n'est introduite, à moins que ce soit absolument nécéssaire.
+   nouvelle n'est introduite, à moins que ce soit absolument nécessaire.
 -  **Branches de fonctionnalité** : Les branches de fonctionnalité contiennent 
    des fonctionnalités non-finies, possiblement instable et sont recommandées 
    uniquement pour les utilisateurs avertis interessés dans la fonctionnalité 

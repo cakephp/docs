@@ -1,7 +1,7 @@
 Coding Standards
 ################
 
-Cake Developers will use the following coding standards.
+CakePHP developers will use the following coding standards.
 
 It is recommended that others developing CakeIngredients follow the same
 standards.
@@ -249,6 +249,16 @@ always be preceded by a newline.
 Including files
 ===============
 
+``include``, ``require``, ``include_once`` and ``require_once`` do not have parentheses::
+
+    // wrong = parentheses
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // good = no parentheses
+    require_once 'ClassFileName.php';
+    require_once $class;
+
 When including files with classes or libraries, use only and always the
 `require\_once <http://php.net/require_once>`_ function.
 
@@ -293,7 +303,7 @@ associate to the class the variable is an object of. Example::
 Member visibility
 -----------------
 
-Use PHP5's private and protected keywords for methods and variables.  Additionally,
+Use PHP5's private and protected keywords for methods and variables. Additionally,
 protected method or variable names start with a single underscore ("\_"). Example::
 
     class A {
@@ -377,6 +387,26 @@ resource
     Resource type (returned by for example mysql\_connect()).
     Remember that when you specify the type as mixed, you should indicate
     whether it is unknown, or what the possible types are.
+
+Casting
+-------
+
+For casting we use:
+
+Type
+    Description
+(bool)
+		Cast to boolean.
+(int)
+		Cast to integer.
+(float)
+		Cast to float.
+(string)
+		Cast to string.
+(array)
+		Cast to array.
+(object)
+		Cast to object.
 
 Constants
 ---------

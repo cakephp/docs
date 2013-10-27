@@ -29,9 +29,9 @@ AuthComponent
 -------------
 - Une nouvelle propriété ``AuthComponent::$unauthorizedRedirect`` a été ajoutée.
 
-  - Par défaut la valeur est à ``true`` et l'user est redirigé à l'url de
+  - Par défaut la valeur est à ``true`` et l'user est redirigé à l'URL de
     référence lors des échecs d'authorisation.
-  - Si défini à une chaîne ou un tableau, l'user est redirigé à l'url.
+  - Si défini à une chaîne ou un tableau, l'user est redirigé à l'URL.
   - Si défini à false, une exception ForbiddenException est lancée à la place
     de la redirection.
 
@@ -138,7 +138,7 @@ Exceptions
 - CakeBaseException a été ajouté, auquel toutes les Exceptions du coeur
   étendent. La classe d'Exception de base introduit aussi la méthode
   ``responseHeader()`` qui peut être appelée sur les instances d'Exception
-  créees pour ajouter les headers à la réponse, puisque les Exceptions
+  créées pour ajouter les headers à la réponse, puisque les Exceptions
   ne réutilisent pas toute instance de réponse.
 
 Model
@@ -201,7 +201,7 @@ HttpSocket
   pour augmenter ce comportement. Regardez :ref:`http-socket-ssl-options`
   pour plus d'informations.
 - ``HttpResponse`` a été renommée en ``HttpSocketResponse``. Ceci évite
-  un problème commun avec l'extension pecl http. Il y a une classe
+  un problème commun avec l'extension HTTP PECL. Il y a une classe
   ``HttpResponse`` fournie ainsi que pour des raisons de compatibilité.
 
 Routing
@@ -266,7 +266,7 @@ FormHelper
   d'input basé sur les règles de validation pour un champ. Si vous avez un
   bouton "Cancel" dans votre formulaire va soumettre le formulaire puis vous
   devriez ajouter ``'formnovalidate' => true`` à vos options de bouton pour
-  empêcher le déclenchement de la validation dans le html. Vous pouvez aussi
+  empêcher le déclenchement de la validation dans le HTML. Vous pouvez aussi
   empêcher le déclenchement de la validation pour l'ensemble du formulaire
   en ajoutant ``'novalidate' => true`` dans les options de FormHelper::create().
 - :php:meth:`FormHelper::input()` génère maintenant les elements d'input de

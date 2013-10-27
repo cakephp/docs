@@ -24,18 +24,18 @@ What you will need
 #. A running web server. We're going to assume you're using Apache,
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
-   configuration, but most folks can get Cake up and running without
+   configuration, but most folks can get CakePHP up and running without
    any configuration at all.
 #. A database server. We're going to be using MySQL in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.
+   database: CakePHP will be taking the reins from there.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
 
 Preparing our Application
 =========================
 
-First, let's get a copy of fresh Cake code.
+First, let's get a copy of fresh CakePHP code.
 
 To get a fresh download, visit the CakePHP project at GitHub:
 https://github.com/cakephp/cakephp/tags and download the stable
@@ -149,8 +149,8 @@ Then create the following view file for login at
     echo $this->Form->end('Login');
 
 Next we'll have to update our User model to hash passwords before they go into
-the database.  Storing plaintext passwords is extremely insecure and
-AuthComponent will expect that your passwords are hashed.  In
+the database. Storing plaintext passwords is extremely insecure and
+AuthComponent will expect that your passwords are hashed. In
 ``app/Model/User.php`` add the following::
 
     App::uses('AuthComponent', 'Controller/Component');
@@ -165,7 +165,7 @@ AuthComponent will expect that your passwords are hashed.  In
 
 Next we need to make some modifications to ``AppController``. If
 you don't have ``/App/Controller/AppController.php``, create it. Note that
-this goes in /App/Controller/, not /App/app_controllers.php. Since we want our entire
+this goes in /App/Controller/. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
 ``AppController``::
 

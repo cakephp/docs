@@ -8,7 +8,7 @@ functions are for use with CakePHP classes (loading model or
 component classes), but many others make working with arrays or
 strings a little easier.
 
-We’ll also cover some of the constants available in CakePHP
+We'll also cover some of the constants available in CakePHP
 applications. Using these constants will help make upgrades more
 smooth, but are also convenient ways to point to certain files or
 directories in your CakePHP application.
@@ -23,9 +23,9 @@ such as debugging and translating content.
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation.  Strings
+    ``$string_id`` identifies the ID for a translation. Strings
     used for translations are treated as format strings for
-    ``sprintf()``.  You can supply additional arguments to replace
+    ``sprintf()``. You can supply additional arguments to replace
     placeholders in your string::
 
         __('You have %s unread messages', $number);
@@ -155,7 +155,7 @@ such as debugging and translating content.
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and classname. If $name
+    Splits a dot syntax plugin name into its plugin and class name. If $name
     does not have a dot, then index 0 will be null.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``

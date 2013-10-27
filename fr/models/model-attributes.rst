@@ -116,10 +116,10 @@ Articles. vous pouvez définir $recursive à différentes valeurs basées sur
 la quantité de données que vous souhaitez retourner à partir d'un appel
 $this->Group->find():
 
-* -1 Cake récupère seulement les données de Group, pas de jointures.
-* 0  Cake récupère les données de Group et leur Domain.
-* 1  Cake récupère Group, son domaine et ses Users associés.
-* 2  Cake récupère un Group, son domain, ses Users associés, et les
+* -1 CakePHP récupère seulement les données de Group, pas de jointures.
+* 0  CakePHP récupère les données de Group et leur Domain.
+* 1  CakePHP récupère Group, son domaine et ses Users associés.
+* 2  CakePHP récupère un Group, son domain, ses Users associés, et les
   Articles associés des Users.
 
 Ne le définissez pas à plus que vous n'avez besoin. Faire que CakePHP
@@ -138,7 +138,7 @@ est 1.
 
     Le niveau de recursive recommandé pour votre application devrait être -1.
     Cela évite de récupérer des données liés dans les cas où ce n'est pas
-    nécéssaire ou même non souhaité. C'est le plus souvent le cas pour la
+    nécessaire ou même non souhaité. C'est le plus souvent le cas pour la
     plupart de vos appels find().
     Augmenter le seulement quand cela est souhaité ou utilisez le behavior
     Containable.
@@ -209,7 +209,7 @@ autorisant le model à essayer de faire des correspondances.
 
 .. note::
 
-    Il n'est pas nécéssaire d'appeler validate() avant save() puisque save()
+    Il n'est pas nécessaire d'appeler validate() avant save() puisque save()
     va automatiquement valider vos données avant d'effectivement les
     sauvegarder.
 

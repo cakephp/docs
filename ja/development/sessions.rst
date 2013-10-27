@@ -418,11 +418,8 @@ ini 指示子の設定
 
         // セッションの破棄
         public function destroy($id) {
-            $result = Cache::delete($id, $this->cacheKey);
-            if ($result) {
-                return parent::destroy($id);
-            }
-            return false;
+            Cache::delete($id, $this->cacheKey);
+            return parent::destroy($id);
         }
 
         // 期限切れセッションの削除

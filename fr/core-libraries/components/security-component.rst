@@ -190,7 +190,7 @@ configuration CSRF (Cross site request forgery)
 
    Contrôle si oui ou non  les jetons CSRF sont utilisés et brûlés.
    Définit à ``false`` pour ne pas générer de nouveau jetons sur chaque
-   requête. Un jeton pourra être réutilisé jusqu’à ce qu'il expire.
+   requête. Un jeton pourra être réutilisé jusqu'à ce qu'il expire.
    Ceci réduit les chances des utilisateurs d'avoir des requêtes invalides
    en raison de la consommation de jeton. Cela à pour effet de rendre
    CSRF moins sécurisé, et les jetons réutilisables.

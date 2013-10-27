@@ -2,9 +2,9 @@ Installation
 ############
 
 CakePHP is fast and easy to install. The minimum requirements are a
-webserver and a copy of Cake, that's it! While this manual focuses
-primarily on setting up with Apache (because it's the most common),
-you can configure Cake to run on a variety of web servers such as
+webserver and a copy of CakePHP, that's it! While this manual focuses
+primarily on setting up on Apache (because it's the most commonly used),
+you can configure CakePHP to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
 
 Requirements
@@ -26,15 +26,15 @@ database storage engines:
 
 .. note::
 
-    The built-in drivers all require PDO.  You should make sure you have the
+    All built-in drivers require PDO. You should make sure you have the
     correct PDO extensions installed.
 
 License
 =======
 
-CakePHP is licensed under the MIT license.  This means that you are free to
+CakePHP is licensed under the MIT license. This means that you are free to
 modify, distribute and republish the source code on the condition that the
-copyright notices are left intact.  You are also free to incorporate CakePHP
+copyright notices are left intact. You are also free to incorporate CakePHP
 into any Commercial or closed source application.
 
 Downloading CakePHP
@@ -99,26 +99,26 @@ CakePHP uses the ``tmp`` directory for a number of different
 operations. Model descriptions, cached views, and session
 information are just a few examples.
 
-As such, make sure the directory ``tmp`` and all its subdirectories in your cake
-installation are writable by the web server user.
+As such, make sure the directory ``tmp`` and all its subdirectories in your
+CakePHP installation are writable by the web server user.
 
 Setup
 =====
 
 Setting up CakePHP can be as simple as slapping it in your web
-server’s document root, or as complex and flexible as you wish.
+server's document root, or as complex and flexible as you wish.
 This section will cover the three main installation types for
 CakePHP: development, production, and advanced.
 
 -  Development: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
--  Production: Requires the ability to configure the web server’s
+-  Production: Requires the ability to configure the web server's
    document root, clean URLs, very secure.
 
 Development
 ===========
 
-A development installation is the fastest method to setup Cake.
+A development installation is the fastest method to setup CakePHP.
 This example will help you install a CakePHP application and make
 it available at http://www.example.com/cake3/. We assume for
 the purposes of this example that your document root is set to
@@ -141,15 +141,15 @@ Your development setup will look like this on the file system::
             README.md
 
 If your web server is configured correctly, you should now find
-your Cake application accessible at
+your CakePHP application accessible at
 http://www.example.com/cake3/.
 
 Production
 ==========
 
-A production installation is a more flexible way to setup Cake.  Using this
+A production installation is a more flexible way to setup CakePHP.  Using this
 method allows an entire domain to act as a single CakePHP application. This
-example will help you install Cake anywhere on your filesystem and make it
+example will help you install CakePHP anywhere on your filesystem and make it
 available at http://www.example.com. Note that this installation may require the
 rights to change the ``DocumentRoot`` on Apache webservers.
 
@@ -173,7 +173,7 @@ for the domain to::
     DocumentRoot /cake_install/webroot
 
 If your web server is configured correctly, you should now find
-your Cake application accessible at http://www.example.com.
+your CakePHP application accessible at http://www.example.com.
 
 Advanced Installation and URL Rewriting
 =======================================

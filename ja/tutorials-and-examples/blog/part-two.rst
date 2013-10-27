@@ -53,8 +53,7 @@ www.example.com/posts/index(www.example.com/posts/と同じです)
         }
     }
 
-このアクションについて少し説明しましょう。
-PostsControllerの中にindex()という関数を定義することによって、ユーザは、www.example.com/posts/indexというリクエストで、そのロジックにアクセスできるようになります。
+PostsControllerの中に ``index()`` という関数を定義することによって、ユーザは、www.example.com/posts/indexというリクエストで、そのロジックにアクセスできるようになります。
 同様に、 ``foobar()`` という関数を定義すると、ユーザは、www.example.com/posts/foobarでアクセスできるようになります。
 
 .. warning::
@@ -257,11 +256,10 @@ CakePHPのErrorHandlerに処理が引き継がれます。
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
-                    $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash('Unable to add your post.');
+                    $this->Session->setFlash(__('Your post has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
                 }
+                $this->Session->setFlash(__('Unable to add your post.'));
             }
         }
     }
@@ -393,11 +391,10 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash('Unable to update your post.');
+                $this->Session->setFlash(__('Your post has been updated.'));
+                return $this->redirect(array('action' => 'index'));
             }
+            $this->Session->setFlash(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -427,6 +424,7 @@ editビューは以下のようになるでしょう:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
+    ?>
 
 （値が入力されている場合、）このビューは、編集フォームを出力します。
 必要であれば、バリデーションのエラーメッセージも表示します。
@@ -481,8 +479,8 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
-            $this->redirect(array('action' => 'index'));
+            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
@@ -590,8 +588,7 @@ CakePHPには、もっともっと *多くの* 機能があります。
 基本的なアプリケーションの作成が終わったので、現実世界のアプリを作る準備が整いました。
 自分のプロジェクトを始めて、 :doc:`Cookbook </index>` の残りと `API <http://api20.cakephp.org>`_ を使いましょう。
 
-助けが必要なら、#cakephpに来てください（ただし英語。日本語なら、cakephp.jpへどうぞ）。
-CakePHPにようこそ！
+もし困ったときは、いろんな方法で助けを得ることができます。 :doc:`/cakephp-overview/where-to-get-help` を見てみてください。CakePHPにようこそ！
 
 お勧めの参考文献
 ----------------

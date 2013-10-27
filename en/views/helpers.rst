@@ -6,11 +6,11 @@ Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
 shared between many views, elements, or layouts. This chapter will
 show you how to create your own helpers, and outline the basic
-tasks CakePHP’s core helpers can help you accomplish.
+tasks CakePHP's core helpers can help you accomplish.
 
 CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
-in formatting text, times and numbers, and can even speed up Ajax
+in formatting text, times and numbers, and can even speed up AJAX
 functionality. For more information on the helpers included in CakePHP,
 check out the chapter for each helper:
 
@@ -22,9 +22,9 @@ check out the chapter for each helper:
 Configuring Helpers
 ===================
 
-You enable helpers in CakePHP by making a controller aware of them.  Each
+You enable helpers in CakePHP by making a controller aware of them. Each
 controller has a :php:attr:`~Controller::$helpers` property that lists the
-helpers to be made available in the view.  To enable a helper in your view, add
+helpers to be made available in the view. To enable a helper in your view, add
 the name of the helper to the controller's ``$helpers`` array::
 
     class BakeriesController extends AppController {
@@ -80,7 +80,7 @@ As of 2.3 the options are merged with the :php:attr:`~Cake\View\Helper::$setting
 the helper.
 
 One common setting to use is the ``className`` option, which allows you to
-create aliased helpers in your views.  This feature is useful when you want to
+create aliased helpers in your views. This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
 implementation::
 
@@ -108,7 +108,7 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     including inside other Helpers.
 
 Using helper settings allows you to declaratively configure your helpers and
-keep configuration logic out of your controller actions.  If you have
+keep configuration logic out of your controller actions. If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::
 
@@ -123,13 +123,13 @@ Using Helpers
 =============
 
 Once you've configured which helpers you want to use in your controller,
-each helper is exposed as a public property in the view.  For example, if you
+each helper is exposed as a public property in the view. For example, if you
 were using the :php:class:`HtmlHelper` you would be able to access it by
 doing the following::
 
     echo $this->Html->css('styles');
 
-The above would call the ``css`` method on the HtmlHelper.  You can
+The above would call the ``css`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
 Loading helpers on the fly
@@ -149,14 +149,14 @@ Callback methods
 ================
 
 Helpers feature several callbacks that allow you to augment the
-view rendering process.  See the :ref:`helper-api` and the
+view rendering process. See the :ref:`helper-api` and the
 :doc:`/core-libraries/events` documentation for more information.
 
 Creating Helpers
 ================
 
 If a core helper (or one showcased on github or the Bakery)
-doesn’t fit your needs, helpers are easy to create.
+doesn't fit your needs, helpers are easy to create.
 
 Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different
@@ -279,13 +279,13 @@ does not implement any of the callback methods.
 
 .. php:method:: beforeRenderFile(Event $event, $viewFile)
 
-    Is called before each view file is rendered.  This includes elements,
+    Is called before each view file is rendered. This includes elements,
     views, parent views and layouts.
 
 .. php:method:: afterRenderFile(Event $event, $viewFile, $content)
 
-    Is called after each view file is rendered.  This includes elements, views,
-    parent views and layouts.  A callback can modify and return ``$content`` to
+    Is called after each view file is rendered. This includes elements, views,
+    parent views and layouts. A callback can modify and return ``$content`` to
     change how the rendered content will be displayed in the browser.
 
 .. php:method:: beforeRender(Event $event, $viewFile)

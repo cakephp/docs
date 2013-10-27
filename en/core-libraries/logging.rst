@@ -135,9 +135,9 @@ As of 2.4 ``FileLog`` engine takes a few new options:
 Error and Exception logging
 ===========================
 
-Errors and Exceptions can also be logged.  By configuring the co-responding
+Errors and Exceptions can also be logged. By configuring the co-responding
 values in your app.php file.  Errors will be displayed when debug > 0 and logged
-when debug == 0. Set ``Exception.log`` to true to log uncaught exceptions. See
+when debug == 0. To log uncaugh exceptions, set the ``log`` option to true. See
 :doc:`/development/configuration` for more information.
 
 Interacting with log streams
@@ -269,13 +269,13 @@ Logging Scopes
 --------------
 
 Often times you'll want to configure different logging behavior for different
-subsystems or parts of your application.  Take for example an e-commerce shop.
+subsystems or parts of your application. Take for example an e-commerce shop.
 You'll probably want to handle logging for orders and payments differently than
 you do other less critical logs.
 
-CakePHP exposes this concept as logging scopes.  When log messages are written
-you can include a scope name.  If there is a configured logger for that scope,
-the log messages will be directed to those loggers.  If a log message is written
+CakePHP exposes this concept as logging scopes. When log messages are written
+you can include a scope name. If there is a configured logger for that scope,
+the log messages will be directed to those loggers. If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 

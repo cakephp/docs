@@ -4,7 +4,7 @@ Tickets
 Avoir des retours et de l'aide de la communauté sous forme de tickets est une
 partie extrêmement importante dans le processus de développement de CakePHP.
 Tous les tickets CakePHP sont hébérgés sur
-`lighthouse <http://cakephp.lighthouseapp.com>`_.
+`Github <https://github.com/cakephp/cakephp/issues>`_.
 
 Rapporter des bugs
 ==================
@@ -13,7 +13,7 @@ Bien écrits, les rapports de bug sont très utiles. Il y a quelques étapes pou
 faire le meilleur rapport de bug possible:
 
 * **A Faire** des `recherches
-  <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
+  <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   pour un ticket similaire éventuellement existant, et s'assurer que personne
   n'a déjà reporté le bug ou qu'il n'a pas déjà été résolu dans le répertoire.
 * **A Faire** Inlcure des instructions détaillées de la manière de **reproduire
@@ -53,4 +53,4 @@ suivantes:
 
 .. meta::
     :title lang=fr: Tickets
-    :keywords lang=fr: système de rapport de bug,code snippet,rapports de sécurité,mailing privé,annonce de publication,google,système de ticket,core team,problème de sécurité,bug tracker,irc channel,cas de test,support questions,bug report,security issues,rapports de bug,exploitations,lighthouse,vulnérabilité,répertoire
+    :keywords lang=fr: système de rapport de bug,code snippet,rapports de sécurité,mailing privé,annonce de publication,google,système de ticket,core team,problème de sécurité,bug tracker,irc channel,cas de test,support questions,bug report,security issues,rapports de bug,exploitations,vulnérabilité,répertoire

@@ -180,7 +180,7 @@ example Testsuite would look like::
      * @return void
      */
         public static function suite() {
-            $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
+            $suite = new PHPUnit_Framework_TestSuite('JsHelper and all Engine Helpers');
             
             $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
             $suite->addTestFile($helperTestPath . 'JsHelperTest.php');

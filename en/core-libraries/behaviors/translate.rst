@@ -75,6 +75,12 @@ omit those fields from the translated model's schema. If you leave
 the fields in, there can be issues when retrieving data with
 fallback locales.
 
+.. note::
+
+    If all the fields in your model are translated be sure to add ``created``
+    and ``modified`` columns to your table. CakePHP requires at least one non
+    primary key field before it will save a record.
+
 Conclusion
 ==========
 
@@ -88,8 +94,8 @@ Reading translated content
 ==========================
 
 By default the TranslateBehavior will automatically fetch and add in data based
-on the current locale.  The current locale is read from ``Configure::read('Config.language')``
-which is assigned by the :php:class:`L10n` class.  You can override this
+on the current locale. The current locale is read from ``Configure::read('Config.language')``
+which is assigned by the :php:class:`L10n` class. You can override this
 default on the fly using ``$Model->locale``.
 
 Retrieve translated fields in a specific locale

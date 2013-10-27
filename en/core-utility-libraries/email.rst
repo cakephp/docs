@@ -8,11 +8,11 @@ Email
 ``Email`` is a new class to send email. With this
 class you can send email from any place of your application. In addition to
 using the EmailComponent from your controller, you can also send mail from
-Shells, and Models.
+Shells and Models.
 
 This class replaces the :php:class:`EmailComponent` and gives more flexibility
 in sending emails. For example, you can create your own transports to send
-email instead of using the provided smtp and mail.
+email instead of using the provided SMTP and Mail transports.
 
 Basic usage
 ===========
@@ -43,7 +43,7 @@ Choosing the sender
 -------------------
 
 When sending email on behalf of other people it's often a good idea to define the
-original sender using the Sender header.  You can do so using ``sender()``::
+original sender using the Sender header. You can do so using ``sender()``::
 
     $email = new Email();
     $email->sender('app@example.com', 'MyApp emailer');
@@ -51,7 +51,7 @@ original sender using the Sender header.  You can do so using ``sender()``::
 .. note::
 
     It's also a good idea to set the envelope sender when sending mail on another
-    person's behalf.  This prevents them from getting any messages about
+    person's behalf. This prevents them from getting any messages about
     deliverability.
 
 .. _email-configuration:
@@ -203,12 +203,12 @@ See ``Email::setHeaders()`` and ``Email::addHeaders()``
 Sending templated emails
 ========================
 
-Emails are often much more than just a simple text message.  In order
+Emails are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Emails``.  Email views can also use layouts,
+``View`` directory called ``Email``.  Email views can also use layouts,
 and elements just like normal views::
 
     $email = new Email();
@@ -249,7 +249,7 @@ In your email templates you can use these with::
     <p>Here is your value: <b><?php echo $value; ?></b></p>
 
 You can use helpers in emails as well, much like you can in normal view files.
-By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
+By default only the :php:class:`HtmlHelper` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
     $Email->helpers(array('Html', 'Custom', 'Text'));
@@ -274,7 +274,7 @@ You can do this using themes by telling Email to use appropriate theme using
     $email->theme('TestTheme');
 
 This allows you to override the `new_comment` template in your theme without modifying
-the Blog plugin.  The template file needs to be created in the following path:
+the Blog plugin. The template file needs to be created in the following path:
 ``App/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Sending attachments
@@ -282,7 +282,7 @@ Sending attachments
 
 .. php:method:: attachments($attachments = null)
 
-You can attach files to email messages as well.  There are a few
+You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
@@ -308,11 +308,11 @@ you want the filenames to appear in the recipient's mail client:
    Content ID (when set the content ID the attachment is transformed to inline).
    The mimetype and contentId are optional in this form.
 
-   4.1. When you are using the ``contentId``, you can use the file in the html
+   4.1. When you are using the ``contentId``, you can use the file in the HTML
    body like ``<img src="cid:my-content-id">``.
 
    4.2. You can use the ``contentDisposition`` option to disable the
-   ``Content-Disposition`` header for an attachment.  This is useful when
+   ``Content-Disposition`` header for an attachment. This is useful when
    sending ical invites to clients using outlook.
 
    4.3 Instead of the ``file`` option you can provide the file contents as
@@ -323,7 +323,7 @@ Using transports
 ================
 
 Transports are classes designed to send the e-mail over some protocol or method.
-CakePHP support the Mail (default), Debug and Smtp transports.
+CakePHP supports the Mail (default), Debug and SMTP transports.
 
 To configure your method, you must use the :php:meth:`Cake\\Network\Email\\Email::transport()`
 method or have the transport in your configuration::
@@ -356,7 +356,7 @@ transport). To start off your file should look like::
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.
-Optionally, you can implement the ``config($config)`` method.  ``config()`` is
+Optionally, you can implement the ``config($config)`` method. ``config()`` is
 called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
@@ -373,7 +373,7 @@ Relaxing address validation rules
 
 .. php:method:: emailPattern($pattern = null)
 
-If you are having validation issues when sending to non compliant addresses, you
+If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
 necessary when dealing with some Japanese ISP's::
 
@@ -403,8 +403,8 @@ Example::
 This method will send an email to you@example.com, from me@example.com with
 subject Subject and content Message.
 
-The return of ``deliver()`` is a :php:class:`Email` instance with all
-configurations set.  If you do not want to send the email right away, and wish
+The return of ``deliver()`` is a :php:class:`Cake\\Email\\Email` instance with all
+configurations set. If you do not want to send the email right away, and wish
 to configure a few things before sending, you can pass the 5th parameter as
 false.
 

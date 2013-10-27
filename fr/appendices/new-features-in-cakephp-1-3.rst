@@ -3,7 +3,7 @@ Nouvelles caractéristiques dans CakePHP 1.3
 
 CakePHP 1.3 introduit un nombre de nouvelles fonctionnalités. Ce guide 
 tente de résumer ces changements et de pointer vers la documentation 
-nouvelle quand c'est nécéssaire.
+nouvelle quand c'est nécessaire.
 
 Components
 ~~~~~~~~~~
@@ -48,7 +48,7 @@ Controller.
    l'email rendu correspondant à son nom.
 -  Many of EmailComponent's private methods have been made
    protected for easier extension.
--  EmailComponent::$to can now be an array. Allowing easier setting
+-  EmailComponent::$to peut maintenant être un tableau. Allowing easier setting
    of multiple recipients, and consistency with other properties.
 -  ``EmailComponent::$messageId`` has been added, it allows control
    over the Message-ID header for email messages.
@@ -67,7 +67,7 @@ pour plus d'informations.
 
 **Pagination Helper**
 
-Le helper Pagination fournit des classes css supplémentaires pour le style et
+Le helper Pagination fournit des classes CSS supplémentaires pour le style et
 vous pouvez configurer la direction de sort() par défaut.
 ``PaginatorHelper::next()`` et ``PaginatorHelper::prev()`` générent maintenant
 des tags span par défaut, au lieu de divs.
@@ -314,20 +314,20 @@ Router and Dispatcher
 
 **Router**
 
-Generating urls with new style prefixes works exactly the same as
+Generating URLs with new style prefixes works exactly the same as
 admin routing did in 1.2. They use the same syntax and
 persist/behave in the same way. Assuming you have
 ``Configure::write('Routing.prefixes', array('admin', 'member'));``
 in your core.php you will be able to do the following from a
-non-prefixed url:
+non-prefixed URL:
 
 ::
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
-Likewise, if you are in a prefixed url and want to go to a
-non-prefixed url, do the following:
+Likewise, if you are in a prefixed URL and want to go to a
+non-prefixed URL, do the following:
 
 ::
 
@@ -482,7 +482,7 @@ updated to allow the scaffolding of any one prefix.
         var $scaffold = 'member';
     }
 
-Would use scaffolding for member prefixed urls.
+Would use scaffolding for member prefixed URLs.
 
 **Validation**
 
@@ -529,8 +529,8 @@ off to another validator has been added.
 
 **IP Address Validation**
 
-La validation des adresses IP a été étendu pour autoriser une stricte 
-validation d'une Version d'IP spécifique. Cela utilisera aussi les 
+La validation des adresses IP a été étendu pour autoriser une stricte
+validation d'une Version d'IP spécifique. Cela utilisera aussi les
 méchanismes de validation natifs de PHP si ils sont disponibles.
 
 ::
@@ -541,9 +541,9 @@ méchanismes de validation natifs de PHP si ils sont disponibles.
 
 **Validation::uuid()**
 
-Un pattern de validation uuid() a été ajouté à la classe ``Validation``. 
-Cla vérifiera qu'une chaîne donnée correspondra à un uuid par pattern 
-uniquement. Cela ne garantit pas l'unicité du uuid donné.
+Un pattern de validation uuid() a été ajouté à la classe ``Validation``.
+Elle vérifiera qu'une chaîne donnée correspondra à un UUID par pattern
+uniquement. Cela ne garantit pas l'unicité du UUID donné.
 
 
 .. meta::

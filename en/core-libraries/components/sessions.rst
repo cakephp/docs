@@ -8,7 +8,7 @@ between page requests. It acts as a wrapper for ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
 related functions.
 
-Sessions can be configured in a number of ways in CakePHP.  For more
+Sessions can be configured in a number of ways in CakePHP. For more
 information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
 
@@ -88,7 +88,7 @@ Creating notification messages
 
     Often in web applications, you will need to display a one-time notification
     message to the user after processing a form or acknowledging data.
-    In CakePHP, these are referred to as "flash messages".  You can set flash
+    In CakePHP, these are referred to as "flash messages". You can set flash
     message with the SessionComponent and display them with the
     :php:meth:`SessionHelper::flash()`. To set a message, use ``setFlash``::
 
@@ -107,8 +107,8 @@ Creating notification messages
         </div>
 
     You can use the additional parameters of ``setFlash()`` to create
-    different kinds of flash messages.  For example, error and positive
-    notifications may look differently.  CakePHP gives you a way to do that.
+    different kinds of flash messages. For example, error and positive
+    notifications may look differently. CakePHP gives you a way to do that.
     Using the ``$key`` parameter you can store multiple messages, which can be
     output separately::
 

@@ -604,9 +604,8 @@ certaines méthodes. Il y a ``extract()``,
         $result = Hash::dimensions($data);
         // $result == 1
 
-
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Hash::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 2
 
 .. php:staticmethod:: maxDimensions(array $data)
@@ -616,11 +615,11 @@ certaines méthodes. Il y a ``extract()``,
     le tableau::
 
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Hash::dimensions($data, true);
+        $result = Hash::maxDimensions($data, true);
         // $result == 2
 
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Hash::countDim($data, true);
+        $result = Hash::maxDimensions($data, true);
         // $result == 3
 
 .. php:staticmethod:: map(array $data, $path, $function)

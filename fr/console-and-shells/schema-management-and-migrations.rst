@@ -175,7 +175,7 @@ un état précédent à votre dernière mise à jour, vous devez être informé 
 n'est pas pour l'instant pas possible avec cake schema.
 
 Plus précisemment, vous ne pouvez pas supprimer automatiquement vos tables
-une fois qu'elles ont été créees.
+une fois qu'elles ont été créées.
 
 L'utilisation de ``update`` supprimera, au contraire, n'importe quel champ
 qui différera de votre fichier schema::

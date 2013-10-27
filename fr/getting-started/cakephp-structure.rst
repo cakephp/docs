@@ -104,7 +104,7 @@ Un Helper (Assistant) est une classe d'assistance pour les vues. De même
 que les components sont utilisés par plusieurs controllers, les helpers
 permettent à différentes vues d'accéder et de partager une même logique de
 présentation. L'un des helpers intégrés à Cake, AjaxHelper, facilite les
-requêtes Ajax dans les vues.
+requêtes AJAX dans les vues.
 
 La plupart des applications ont des portions de code pour les vues qui sont
 répétitives. CakePHP facilite la réutilisabilité de ce code grâce aux Layouts

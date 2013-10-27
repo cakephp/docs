@@ -241,9 +241,9 @@ So, we place our new ContactsController in
     controller, however it is included to demonstrate how to
     properly prepend the plugin name.
 
-If you want to access what we’ve got going thus far, visit
+If you want to access what we've got going thus far, visit
 /contact_manager/contacts. You should get a "Missing Model" error
-because we don’t have a Contact model defined yet.
+because we don't have a Contact model defined yet.
 
 .. _plugin-models:
 

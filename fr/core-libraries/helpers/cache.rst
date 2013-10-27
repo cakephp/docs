@@ -5,20 +5,20 @@ CacheHelper
 
 Le helper Cache permet la mise en cache des layouts (mises en page)
 et des vues permettant de gagner du temps pour la récupération de données
-répétitives. Le système de cache des vues de Cake parse les layout et les vues
-comme de simple fichier PHP + HTML. Il faut noter que le helper Cache
+répétitives. Le système de cache des vues de CakePHP parse les layout et les
+vues comme de simple fichier PHP + HTML. Il faut noter que le helper Cache
 fonctionne de façon assez différente des autres helpers. Il ne possède pas
 de méthodes appelées directement. A la place, une vue est marquée de tags,
 indiquant quels blocs de contenus ne doivent pas être mis en cache. Le
 Helper Cache utilise alors les callbacks du helper pour traiter le fichier
 et ressortir pour générer le fichier de cache.
 
-Quand une URL est appelée, Cake vérifie si cette requête a déjà été mise en
+Quand une URL est appelée, CakePHP vérifie si cette requête a déjà été mise en
 cache. Si c'est le cas, le processus de distribution de l'URL est abandonné.
 Chacun des blocs non mis en cache sont rendus selon le processus normal,
 et la vue est servie. Cela permet de gagner beaucoup de temps pour chaque
 requête vers une URL mise en cache, puisqu'un minimum de code est exécuté.
-Si Cake ne trouve pas une vue mise en cache, ou si le cache a expiré pour
+Si CakePHP ne trouve pas une vue mise en cache, ou si le cache a expiré pour
 l'URL appelée, le processus de requête normal se poursuit.
 
 Utilisation du Helper
@@ -131,14 +131,14 @@ PHP.
 .. warning::
 
     Si vous avez des variables de vues qui contiennent des contenus
-    inserialisable comme les  objets SimpleXML, des gestionnaires
+    inserialisable comme les objets SimpleXML, des gestionnaires
     de ressource (resource handles), ou des classes closures Il se
     peut que vous ne puissiez pas utiliser la mise en cache des vues.
 
 Nettoyer le Cache
 ==================
 
-Il est important de se rappeler que Cake va nettoyer le cache si un
+Il est important de se rappeler que CakePHP va nettoyer le cache si un
 model utilisé dans la vue mise en cache a été modifié. Par exemple,
 si une vue mise en cache utilise des données du model Post et qu'il
 y a eu une requête INSERT, UPDATE, ou DELETE sur Post, le cache de
@@ -148,8 +148,8 @@ requête.
 .. note::
 
     Ce système de nettoyage automatique requiert que le nom du
-    controller/model fasse partie de l'Url. Si vous avez utilisé
-    le routing pour changer vos Urls cela ne fonctionnera pas.
+    controller/model fasse partie de l'URL. Si vous avez utilisé
+    le routing pour changer vos URLs cela ne fonctionnera pas.
 
 Si vous avez besoin de nettoyer le cache manuellement, vous pouvez
 le faire en appelant Cache::clear(). Cela nettoiera **toutes** les

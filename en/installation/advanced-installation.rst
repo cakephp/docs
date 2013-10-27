@@ -27,7 +27,7 @@ Installing CakePHP with composer
 
 Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
-libraries.  Since CakePHP publishes a PEAR package you can install CakePHP using
+libraries. Since CakePHP publishes a PEAR package you can install CakePHP using
 `composer <http://getcomposer.org>`_. Before installing CakePHP you'll need to
 setup a ``composer.json`` file. A composer.json file for a CakePHP applications
 would look like the following::
@@ -109,15 +109,15 @@ application:
 
 #. The core CakePHP libraries, in /lib/Cake.
 #. Your application code, in /App.
-#. The application’s webroot, usually in /App/webroot.
+#. The application's webroot, usually in /App/webroot.
 
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
 accessible by your web server. You can even move the webroot folder
-out of the app folder as long as you tell Cake where you've put
+out of the app folder as long as you tell CakePHP where you've put
 it.
 
-To configure your Cake installation, you'll need to make some
+To configure your CakePHP installation, you'll need to make some
 changes to the following files.
 
 
@@ -136,12 +136,12 @@ There are three constants that you'll need to edit: ``ROOT``,
   libraries folder. Generally you will not need to change this if you use any of
   the :doc:`suggested installation </installation>` methods.
 
-Let’s run through an example so you can see what an advanced
+Let's run through an example so you can see what an advanced
 installation might look like in practice. Imagine that I wanted to
 set up CakePHP to work as follows:
 
-- My application’s webroot directory will be /var/www/mysite/.
-- My application’s app directory will be /home/me/myapp.
+- My application's webroot directory will be /var/www/mysite/.
+- My application's app directory will be /home/me/myapp.
 - CakePHP is installed via composer.
 
 Given this type of setup, I would need to edit my webroot/index.php

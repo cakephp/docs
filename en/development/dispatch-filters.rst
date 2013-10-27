@@ -31,7 +31,7 @@ added::
 Each of those array values are class names that will be instantiated and added
 as listeners for the events generated at dispatcher level. The first one,
 ``AssetDispatcher`` is meant to check whether the request is referring to a theme
-or plugin asset file, such as a css, javascript or image stored on either a
+or plugin asset file, such as a CSS, JavaScript or image stored on either a
 plugin's webroot folder or the corresponding one for a Theme. It will serve the
 file accordingly if found, stopping the rest of the dispatching cycle. The ``CacheDispatcher``
 filter, when ``Cache.check`` config variable is enabled, will check if the
@@ -103,8 +103,8 @@ Filter Classes
 ==============
 
 Dispatcher filters, when defined as class names in configuration, should extend
-the class ``DispatcherFilter`` provided in the ``Routing`` CakePHP's directory.
-Let's create a simple filter to respond to a specific url with a 'Hello World'
+the class ``DispatcherFilter`` provided in the `Routing` CakePHP's directory.
+Let's create a simple filter to respond to a specific URL with a 'Hello World'
 text::
 
     use Cake\Routing\DispatcherFilter;
@@ -135,7 +135,7 @@ which they are run using the ``$priority`` property in the class, default value 
 10 if the property is declared, this means that it will get executed _after_ the
 Router class has parsed the request. We do not want this to happen in our
 previous example, because most probably you do not have any controller set up
-for answering to that url, hence we chose 9 as our priority.
+for answering to that URL, hence we chose 9 as our priority.
 
 ``DispatcherFilter`` exposes two methods that can be overridden in subclasses,
 they are ``beforeDispatch`` and ``afterDispatch``, and are executed before or after
@@ -183,7 +183,7 @@ Inline Filters
 ==============
 
 Our last example will use an anonymous function (only available on PHP 5.3+) to
-serve a list of posts in json format, we encourage you to do so using
+serve a list of posts in JSON format, we encourage you to do so using
 controllers and the :php:class:`JsonView` class, but let's imagine you need to save a
 few milliseconds for this mission-critical API endpoint::
 
@@ -215,7 +215,7 @@ code run first in case you need to trim as much fat as possible from some reques
 
 For obvious reasons this has the potential of making your app very difficult
 to maintain. Filters are an extremely powerful tool when used wisely, adding
-response handlers for each url in your app is not a good use for it. But if you
+response handlers for each URL in your app is not a good use for it. But if you
 got a valid reason to do so, then you have a clean solution at hand. Keep in
 mind that not everything needs to be a filter, `Controllers` and `Components` are
 usually a more accurate choice for adding any request handling code to your app.

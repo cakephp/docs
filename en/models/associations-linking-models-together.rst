@@ -124,7 +124,7 @@ because here we have the alias 'Member' referring to both the User
 Choosing non-unique names for model aliases across models can cause
 unexpected behavior.
 
-Cake will automatically create links between associated model
+CakePHP will automatically create links between associated model
 objects. So for example in your ``User`` model you can access the
 ``Recipe`` model as::
 
@@ -145,7 +145,7 @@ simply by following your model associations::
 hasOne
 ------
 
-Let’s set up a User model with a hasOne relationship to a Profile
+Let's set up a User model with a hasOne relationship to a Profile
 model.
 
 First, your database tables need to be keyed correctly. For a
@@ -172,7 +172,7 @@ Doctor hasOne Mentor mentors.doctor\_id
     to conventions will make your code less repetitive, easier to read and to maintain.
 
 The User model file will be saved in /App/Model/User.php. To
-define the ‘User hasOne Profile’ association, add the $hasOne
+define the 'User hasOne Profile' association, add the $hasOne
 property to the model class. Remember to have a Profile model in
 /App/Model/Profile.php, or the association won’t work::
 
@@ -182,7 +182,7 @@ property to the model class. Remember to have a Profile model in
 
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
-string containing the classname of the associated model, as we’ve
+string containing the class name of the associated model, as we've
 done above.
 
 If you need more control, you can define your associations using
@@ -204,14 +204,14 @@ to include only certain records.
 Possible keys for hasOne association arrays include:
 
 
--  **className**: the classname of the model being associated to
-   the current model. If you’re defining a ‘User hasOne Profile’
-   relationship, the className key should equal ‘Profile.’
+-  **className**: the class name of the model being associated to
+   the current model. If you're defining a 'User hasOne Profile'
+   relationship, the className key should equal 'Profile.'
 -  **foreignKey**: the name of the foreign key found in the other
    model. This is especially handy if you need to define multiple
    hasOne relationships. The default value for this key is the
    underscored, singular name of the current model, suffixed with
-   ‘\_id’. In the example above it would default to 'user\_id'.
+   '\_id'. In the example above it would default to 'user\_id'.
 -  **conditions**: an array of find() compatible conditions or SQL
    strings such as array('Profile.approved' => true)
 -  **fields**: A list of fields to be retrieved when the associated
@@ -219,7 +219,7 @@ Possible keys for hasOne association arrays include:
 -  **order**: an array of find() compatible order clauses or SQL
    strings such as array('Profile.last_name' => 'ASC')
 -  **dependent**: When the dependent key is set to true, and the
-   model’s delete() method is called with the cascade parameter set to
+   model's delete() method is called with the cascade parameter set to
    true, associated model records are also deleted. In this case we
    set it true so that deleting a User will also delete her associated
    Profile.
@@ -249,7 +249,7 @@ model will also fetch a related Profile record if it exists::
 belongsTo
 ---------
 
-Now that we have Profile data access from the User model, let’s
+Now that we have Profile data access from the User model, let's
 define a belongsTo association in the Profile model in order to get
 access to related User data. The belongsTo association is a natural
 complement to the hasOne and hasMany associations: it allows us to
@@ -297,9 +297,9 @@ syntax::
 Possible keys for belongsTo association arrays include:
 
 
--  **className**: the classname of the model being associated to
-   the current model. If you’re defining a ‘Profile belongsTo User’
-   relationship, the className key should equal ‘User.’
+-  **className**: the class name of the model being associated to
+   the current model. If you're defining a 'Profile belongsTo User'
+   relationship, the className key should equal 'User.'
 -  **foreignKey**: the name of the foreign key found in the current
    model. This is especially handy if you need to define multiple
    belongsTo relationships. The default value for this key is the
@@ -319,7 +319,7 @@ Possible keys for belongsTo association arrays include:
    strings such as ``array('User.username' => 'ASC')``
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
-   “[singular\_model\_name]\_count” field in the foreign table
+   "[singular\_model\_name]\_count" field in the foreign table
    whenever you do a ``save()`` or ``delete()``. If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. You can also specify multiple counter caches
@@ -352,8 +352,8 @@ Profile model will also fetch a related User record if it exists::
 hasMany
 -------
 
-Next step: defining a “User hasMany Comment” association. A hasMany
-association will allow us to fetch a user’s comments when we fetch
+Next step: defining a "User hasMany Comment" association. A hasMany
+association will allow us to fetch a user's comments when we fetch
 a User record.
 
 When keying your database tables for a hasMany relationship, follow
@@ -397,14 +397,14 @@ syntax::
 Possible keys for hasMany association arrays include:
 
 
--  **className**: the classname of the model being associated to
-   the current model. If you’re defining a ‘User hasMany Comment’
-   relationship, the className key should equal ‘Comment.’
+-  **className**: the class name of the model being associated to
+   the current model. If you're defining a 'User hasMany Comment'
+   relationship, the className key should equal 'Comment.'
 -  **foreignKey**: the name of the foreign key found in the other
    model. This is especially handy if you need to define multiple
    hasMany relationships. The default value for this key is the
    underscored, singular name of the actual model, suffixed with
-   ‘\_id’.
+   '\_id'.
 -  **conditions**: an array of find() compatible conditions or SQL
    strings such as array('Comment.visible' => true)
 -  **order**:  an array of find() compatible order clauses or SQL
@@ -458,19 +458,19 @@ model will also fetch related Comment records if they exist::
                         [id] => 124
                         [user_id] => 121
                         [title] => More on Gwoo
-                        [body] => But what of the ‘Nut?
+                        [body] => But what of the 'Nut?
                         [created] => 2006-05-01 10:41:01
                     )
             )
     )
 
-One thing to remember is that you’ll need a complimentary Comment
+One thing to remember is that you'll need a complimentary Comment
 belongsTo User association in order to get the data from both
-directions. What we’ve outlined in this section empowers you to get
+directions. What we've outlined in this section empowers you to get
 Comment data from the User. Adding the Comment belongsTo User
 association in the Comment model empowers you to get User data from
 the Comment model - completing the connection and allowing the flow
-of information from either model’s perspective.
+of information from either model's perspective.
 
 counterCache - Cache your count()
 ---------------------------------
@@ -531,7 +531,7 @@ Using our Image model example, we can specify it like so::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+                'counterScope' => array('ImageComment.active' => 1) // only count if "ImageComment" is active = 1
             )
         );
     }
@@ -653,9 +653,9 @@ Possible keys for HABTM association arrays include:
 
 .. _ref-habtm-arrays:
 
--  **className**: the classname of the model being associated to
-   the current model. If you're defining a ‘Recipe HABTM Ingredient'
-   relationship, the className key should equal ‘Ingredient.'
+-  **className**: the class name of the model being associated to
+   the current model. If you're defining a 'Recipe HABTM Ingredient'
+   relationship, the className key should equal 'Ingredient.'
 -  **joinTable**: The name of the join table used in this
    association (if the current table doesn't adhere to the naming
    convention for HABTM join tables).
@@ -670,12 +670,12 @@ Possible keys for HABTM association arrays include:
    model. This is especially handy if you need to define multiple
    HABTM relationships. The default value for this key is the
    underscored, singular name of the current model, suffixed with
-   ‘\_id'.
+   '\_id'.
 -  **associationForeignKey**: the name of the foreign key found in
    the other model. This is especially handy if you need to define
    multiple HABTM relationships. The default value for this key is the
    underscored, singular name of the other model, suffixed with
-   ‘\_id'.
+   '\_id'.
 -  **unique**: boolean or string ``keepExisting``.
     - If true (default value) cake will first delete existing relationship
       records in the foreign keys table before inserting new ones.
@@ -685,7 +685,7 @@ Possible keys for HABTM association arrays include:
     - When set to ``keepExisting``, the behavior is similar to `true`,
       but existing associations are not deleted.
 -  **conditions**: an array of find() compatible conditions or SQL
-   string.  If you have conditions on an associated table, you should use a
+   string. If you have conditions on an associated table, you should use a
    'with' model, and define the necessary belongsTo associations on it.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
@@ -780,7 +780,7 @@ the columns as it is not replaced in the new insert.
     .. versionchanged:: 2.1
 
     You can set ``unique`` setting to ``keepExisting`` circumvent
-    losing extra data during the save operation.  See ``unique``
+    losing extra data during the save operation. See ``unique``
     key in :ref:`HABTM association arrays <ref-habtm-arrays>`.
 
 The way to implement our requirement is to use a **join model**,
@@ -815,7 +815,7 @@ The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Join models are pretty useful things to be able to use and Cake
+Join models are pretty useful things to be able to use and CakePHP
 makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
 
@@ -891,7 +891,7 @@ controller action::
     set to *false*, the bind remains in place for the remainder of the
     request.
 
-Here’s the basic usage pattern for unbindModel()::
+Here's the basic usage pattern for unbindModel()::
 
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
@@ -1097,7 +1097,7 @@ table::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.books_id'
+                'Books.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',

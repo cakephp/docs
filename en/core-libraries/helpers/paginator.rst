@@ -108,7 +108,7 @@ resultset is sorted 'asc' by the specified key the returned link will sort by
 
 Accepted keys for ``$options``:
 
-* ``escape`` Whether you want the contents html entity encoded, defaults to
+* ``escape`` Whether you want the contents HTML entity encoded, defaults to
   true.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 
@@ -142,7 +142,7 @@ Output:
 
     <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc"><em>User account</em></a>
 
-The direction option can be used to set the default direction for a link.  Once a
+The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal::
 
     echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
@@ -169,7 +169,7 @@ Creating page number links
 Returns a set of numbers for the paged result set. Uses a modulus to
 decide how many numbers to show on each side of the current page  By default
 8 links on either side of the current page will be created if those pages exist.
-Links will not be generated for pages that do not exist.  The current page is
+Links will not be generated for pages that do not exist. The current page is
 also not a link.
 
 Supported options are:
@@ -181,14 +181,14 @@ Supported options are:
 * ``modulus`` how many numbers to include on either side of the current page,
   defaults to 8.
 * ``first`` Whether you want first links generated, set to an integer to
-  define the number of 'first' links to generate. Defaults to false.  If a
+  define the number of 'first' links to generate. Defaults to false. If a
   string is set a link to the first page will be generated with the value as the
   title::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
 * ``last`` Whether you want last links generated, set to an integer to define
-  the number of 'last' links to generate. Defaults to false.  Follows the same
+  the number of 'last' links to generate. Defaults to false. Follows the same
   logic as the ``first`` option. There is a
   :php:meth:`~PaginatorHelper::last()`` method to be used separately as well if
   you wish.
@@ -220,7 +220,7 @@ pages in the paged data set.
 
     ``$options`` supports the following keys:
 
-    * ``escape`` Whether you want the contents html entity encoded,
+    * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTitle`` The text to use when the link is disabled. Defaults to
@@ -247,7 +247,7 @@ pages in the paged data set.
 .. php:method:: next($title = 'Next >>', $options = [])
 
     This method is identical to :php:meth:`~PagintorHelper::prev()` with a few exceptions. It
-    creates links pointing to the next page instead of the previous one.  It also
+    creates links pointing to the next page instead of the previous one. It also
     uses ``next`` as the rel attribute value instead of ``prev``
 
 .. php:method:: first($first = '<< first', $options = [])
@@ -257,8 +257,8 @@ pages in the paged data set.
 
         echo $this->Paginator->first('< first');
 
-    The above creates a single link for the first page.  Will output nothing if you
-    are on the first page.  You can also use an integer to indicate how many first
+    The above creates a single link for the first page. Will output nothing if you
+    are on the first page. You can also use an integer to indicate how many first
     paging links you want generated::
 
         echo $this->Paginator->first(3);
@@ -275,8 +275,8 @@ pages in the paged data set.
 .. php:method:: last($last = 'last >>', $options = [])
 
     This method works very much like the :php:meth:`~PaginatorHelper::first()`
-    method.  It has a few differences though.  It will not generate any links if you
-    are on the last page for a string values of ``$last``.  For an integer value of
+    method. It has a few differences though. It will not generate any links if you
+    are on the last page for a string values of ``$last``. For an integer value of
     ``$last`` no links will be generated once the user is inside the range of last
     pages.
 
@@ -287,7 +287,7 @@ Checking the pagination state
 
     Gets the current page of the recordset for the given model::
 
-        // Our url is: http://example.com/comments/view/page:3
+        // Our URL is: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
         // Output is 3
 
@@ -312,10 +312,10 @@ Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
 specific indicators of where a user is in the paged data set.
 
-There are a number of options for ``counter()``.  The supported ones are:
+There are a number of options for ``counter()``. The supported ones are:
 
 * ``format`` Format of the counter. Supported formats are 'range', 'pages'
-  and custom. Defaults to pages which would output like '1 of 10'.  In the
+  and custom. Defaults to pages which would output like '1 of 10'. In the
   custom mode the supplied string is parsed and tokens are replaced with
   actual values. The available tokens are:
 
@@ -356,14 +356,14 @@ Modifying the options PaginatorHelper uses
 
 Sets all the options for the Paginator Helper. Supported options are:
 
-* ``url`` The url of the paginating action. url has a few sub options as well:
+* ``url`` The URL of the paginating action. 'url' has a few sub options as well:
 
   -  ``sort`` The key that the records are sorted by.
   -  ``direction`` The direction of the sorting. Defaults to 'ASC'.
   -  ``page`` The page number to display.
 
   The above mentioned options can be used to force particular pages/directions.
-  You can also append additional url content into all urls generated in the
+  You can also append additional URL content into all URLs generated in the
   helper::
 
       $this->Paginator->options([

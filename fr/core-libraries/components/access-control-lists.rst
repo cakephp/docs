@@ -28,7 +28,7 @@ trucs (le plus souvent les utilisateurs) sont appelées access request objects
 (le plus souvent les actions ou les données) sont appelées access control
 objects (objets contrôle d'accès) ou ACOs. Les entités sont appelées "objets",
 parce que parfois, l'objet demandé n'est pas une personne - des fois, vous
-pourriez vouloir limiter l'accès à certains controllers de Cake qui doivent
+pourriez vouloir limiter l'accès à certains controllers de CakePHP qui doivent
 initier leur logique dans d'autres parties de votre application. Les ACOs
 pourraient être n'importe quoi que vous voudriez contrôler, d'une action de
 controller à un service Web, en passant par une case de l'agenda en ligne de
@@ -271,11 +271,11 @@ Hobbits                 Autorise la bière              Autoriser l'accès à la
 Merry                   Refuse la bière                Refuser la bière. 
 ======================= ============================== ===============================
 
-Définir les permissions : ACL de Cake basées sur des fichiers INI
-=================================================================
+Définir les permissions : ACL de CakePHP basées sur des fichiers INI
+====================================================================
 
-La première implémentation d'ACL sur Cake était basée sur des fichiers
-INI stockés dans l'installation de Cake. Bien qu'elle soit stable et pratique,
+La première implémentation d'ACL sur CakePHP était basée sur des fichiers
+INI stockés dans l'installation de CakePHP. Bien qu'elle soit stable et pratique,
 nous recommandons d'utiliser plutôt les solutions d'ACL basées sur les bases
 de données, surtout pour leur capacité à créer de nouveaux ACOs et AROs à la
 volée. Nous recommandons son utilisation dans de simples applications - et
@@ -364,8 +364,8 @@ Maintenant que vous avez défini vos permissions, vous pouvez passer à la
 section sur la :ref:`vérification des permissions <verification-permissions>`
 en utilisant le component ACL.
 
-Définir les permissions : ACL de Cake via une base de données
-=============================================================
+Définir les permissions : ACL de CakePHP via une base de données
+================================================================
 
 Maintenant que nous avons vu les permissions ACL basées sur les fichiers INI,
 voyons les ACL via une base de données (les plus communément utilisées).
@@ -374,10 +374,10 @@ Pour commencer
 --------------
 
 L'implémentation par défaut des permissions ACL est propulsé par les
-bases de données. La base de données Cake pour les ACL est composé
+bases de données. La base de données CakePHP pour les ACL est composée
 d'un ensemble de models du cœur et d'une application en mode console
-qui sont créés lors de votre installation de Cake. Les models sont utilisés
-par Cake pour interagir avec votre base de données, afin de stocker et de
+qui sont créés lors de votre installation de CakePHP. Les models sont utilisés
+par CakePHP pour interagir avec votre base de données, afin de stocker et de
 retrouver les nœuds sous forme d'arbre. L'application en mode console est
 utilisée pour initialiser votre base de données et interagir avec vos arbres
 d'ACO et d'ARO.
@@ -443,7 +443,7 @@ pour créer les permissions entre les deux arbres).
 
 .. note::
 
-    Si vous êtes curieux de connaitre la façon dont Cake stocke l'information
+    Si vous êtes curieux de connaitre la façon dont CakePHP stocke l'information
     de l'arbre dans ces tables, étudiez l'arbre transversal sur la base de
     données modifiée. Le component ACL utilise le comportement en arbre de
     CakePHP pour gérer les héritages d'arbres. Les fichiers de model de
@@ -496,7 +496,8 @@ Il fournit l'ID du noeud parent dans l'arbre pour créer un nouvel enfant.
 
 Avant que vous ne puissiez créer de nouveaux objets ACL, nous devront
 charger leurs classes respectives. La façon la plus facile de le faire est
-d'inclure les components ACL de Cake dans le tableau $composents du controller :
+d'inclure les components ACL de CakePHP dans le tableau $composents du
+controller :
 
 ::
 
@@ -713,15 +714,15 @@ Maintenant que nous avons notre arbre d'ARO configuré proprement,
 revenons sur une possible approche de structure d'arbre d'ACO. Alors que
 nous pouvons structurer plus d'une représentation abstraite de nos ACOs,
 il est parfois plus pratique de modéliser un arbre ACO après le
-paramètrage du Controller/Action de Cake. Nous avons cinq principaux
+paramètrage du Controller/Action de CakePHP. Nous avons cinq principaux
 objets à manipuler dans le scénario de la Communauté, et la configuration
-naturelle pour cela dans une application Cake est un groupe de models,
+naturelle pour cela dans une application CakePHP est un groupe de models,
 et tout à la fin les controllers qui les manipulent. A côté des controllers
 eux-mêmes, nous allons vouloir contrôler l'accès à des actions spécifiques
 dans ces controllers.
 
 En partant de cette idée, nous allons configurer un arbre d'ACO qui va imiter
-une configuration d'application Cake. Depuis nos cinq ACOs, nous allons créer
+une configuration d'application CakePHP. Depuis nos cinq ACOs, nous allons créer
 un arbre d'ACO qui devra ressembler à ça :
 
 -    Armes
@@ -734,7 +735,7 @@ Une bonne chose concernant la configuration des ACL et que chaque ACO
 va automatiquement contenir quatre propriétés relatives aux actions CRUD
 (créer, lire, mettre à jour et supprimer). Vous pouvez créer des noeuds enfants
 sous chacun de ces cinq principaux ACOs, mais l'utilisation des actions de
-management intégrées à Cake permet d'aborder les opérations basiques de
+management intégrées à CakePHP permet d'aborder les opérations basiques de
 CRUD sur un objet donné.
 Gardez à l'esprit qu'il faudra faire vos arbres d'ACO plus petits et plus
 faciles à maintenir. Nous allons voir comment ils sont utilisés plus tard
@@ -788,7 +789,7 @@ ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement
 les ACOs et AROs d'après leurs alias.
 
 Avez-vous noté l'usage du troisième paramètre? C'est là où nous utilisons
-ces actions bien pratiques qui sont intégrées à tous les ACOs de Cake.
+ces actions bien pratiques qui sont intégrées à tous les ACOs de CakePHP.
 Les options par défaut pour ce paramètre sont ``create``, ``read``, ``update``
 et ``delete``, mais vous pouvez ajouter une colonne dans la table ``aros_acos``
 de la base de données (préfixée avec \_ - par exemple ``_admin``) et l'utiliser

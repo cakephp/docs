@@ -503,7 +503,7 @@ Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de
 
 Toutes les classes qui ont été chargées dans le passé utilisant 
 ``App::import('Core', $class);`` auront besoin d'être chargées en utlisant 
-``App::uses()`` en référence au bon package. Voir l'api pour localiser les 
+``App::uses()`` en référence au bon package. Voir l'API pour localiser les 
 classes dans leurs nouveaux dossiers. Quelques exemples::
 
     App::import('Core', 'CakeRoute');
@@ -823,7 +823,7 @@ effectives sont:
 -  FormHelper::minute()
 -  FormHelper::meridian()
 
-Les urls par défaut dans les formulaires sont l'action courante
+Les URLs par défaut dans les formulaires sont l'action courante
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 L'url par défaut pour tous les formulaires est maintenant l'url courante, 
@@ -1136,9 +1136,9 @@ Ou déclare juste la propriété dans la classe model::
 
 Chacune des ses approches résoudra les erreurs de notice.
 
-La notation de ``find()`` dans Cake 1.2 n'est plus supportée. Les Finds 
+La notation de ``find()`` dans CakePHP 1.2 n'est plus supportée. Les Finds 
 devront utiliser la notation ``$model->find('type', array(PARAMS))`` comme dans 
-Cake 1.3.
+CakePHP 1.3.
 
 - ``Model::$_findMethods`` est maintenant ``Model::$findMethods``.  Cette 
   propriété est maintenant publique et peut être modifiée par les behaviors.
@@ -1146,7 +1146,7 @@ Cake 1.3.
 Objets Database (Base de Données)
 ---------------------------------
 
-Cake 2.0 introduit quelques changements dans les objets Database qui ne 
+CakePHP 2.0 introduit quelques changements dans les objets Database qui ne 
 devraient pas affecter grandement la compatibilité rétro-active. Le plus 
 grand changement est l'adoption de PDO pour la gestion des connections aux 
 bases de données. Si vous utilisez une installation vanilla de PHP 5, vous 
@@ -1349,10 +1349,10 @@ sur les nouvelles APIs qui sont disponibles.
 Debugger
 ========
 
-La fonction ``debug()`` va sortir par défaut les chaînes sans danger de html. 
+La fonction ``debug()`` va sortir par défaut les chaînes sans danger de HTML. 
 C'est désactivé si c'est utilisé dans la console. L'option ``$showHtml`` pour 
 ``debug()`` peut être mis sur false pour désactiver la sortie sans danger de 
-html du debug.
+HTML du debug.
 
 ConnectionManager
 =================

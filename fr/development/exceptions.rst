@@ -198,7 +198,7 @@ Toutes les Exceptions standardes que CakePHP va aussi lancer les CakeException
 
     Voir :php:func:`CakeResponse::header()`.
 
-Toutes les exceptions Http et Cake étendent la classe CakeBaseException, qui
+Toutes les exceptions Http et CakePHP étendent la classe CakeBaseException, qui
 a une méthode pour ajouter les en-têtes à la réponse. Par exemple quand vous
 lancez une MethodNotAllowedException 405,
 le rfc2616 dit:

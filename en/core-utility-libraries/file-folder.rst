@@ -68,10 +68,13 @@ Folder API
 
     Returns $path with $element added, with correct slash in-between::
 
-        <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
         // $path equals /a/path/for/testing
 
+    $element can also be an array::
+
+        $path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+        // $path equals /a/path/for/testing/another
 
 .. php:method:: cd( $path )
 
@@ -132,8 +135,6 @@ Folder API
       destination contain the same subdirectory, the target directory's contents
       will be removed and replaced with the source's.
 
-    .. versionchanged:: 2.3
-        The merge, skip and overwrite schemes were added to ``copy()``
 
 .. php:staticmethod:: correctSlashFor( $path )
 
@@ -223,12 +224,12 @@ Folder API
         /*
         Array
         (
-            [0] => /var/www/cake/App/webroot/index.php
-            [1] => /var/www/cake/App/webroot/test.php
-            [2] => /var/www/cake/App/webroot/img/test-skip-icon.png
-            [3] => /var/www/cake/App/webroot/img/test-fail-icon.png
-            [4] => /var/www/cake/App/webroot/img/test-error-icon.png
-            [5] => /var/www/cake/App/webroot/img/test-pass-icon.png
+            [0] => /var/www/cake/app/webroot/index.php
+            [1] => /var/www/cake/app/webroot/test.php
+            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
         )
         */
 
@@ -249,10 +250,10 @@ Folder API
         <?php
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
-        // $result = true, /var/www/example/App/ is in /var/www/example/App/webroot/
+        // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/App/webroot/ is in /var/www/example/App/webroot/img/
+        // $result = true, /var/www/example/app/webroot/ is in /var/www/example/app/webroot/img/
 
 
 .. php:staticmethod:: isAbsolute( $path )
@@ -479,9 +480,6 @@ File API
 
     Returns the File info.
 
-    .. versionchanged:: 2.1
-        ``File::info()`` now includes filesize & mimetype information.
-
 .. php:method:: lastAccess( )
 
     :rtype: integer
@@ -594,7 +592,6 @@ File API
 
     Write given data to this File.
 
-.. versionadded:: 2.1 ``File::mime()``
 
 .. php:method:: mime()
 
@@ -611,3 +608,4 @@ File API
     :title lang=en: Folder & File
     :description lang=en: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
     :keywords lang=en: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file
+>>>>>>> 2.5

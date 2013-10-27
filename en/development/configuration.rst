@@ -165,7 +165,7 @@ className
 persistent
     Whether or not to use a persistent connection to the database.
 host
-    The database server’s hostname (or IP address).
+    The database server's hostname (or IP address).
 login
     The username for the account.
 password
@@ -363,21 +363,21 @@ Configure Class
 
 .. php:class:: Configure
 
-Despite few things needing to be configured in CakePHP, it’s
+Despite few things needing to be configured in CakePHP, it's
 sometimes useful to have your own configuration rules for your
 application. In the past you may have defined custom configuration
 values by defining variable or constants in some files. Doing so
 forces you to include that configuration file every time you needed
 to use those values.
 
-CakePHP’s Configure class can be used to store and retrieve
+CakePHP's Configure class can be used to store and retrieve
 application or runtime specific values. Be careful, this class
 allows you to store anything in it, then use it in any other part
 of your code: a sure temptation to break the MVC pattern CakePHP
 was designed for. The main goal of Configure class is to keep
 centralized variables that can be shared between many objects.
 Remember to try to live by "convention over configuration" and you
-won't end up breaking the MVC structure we’ve set in place.
+won't end up breaking the MVC structure we've set in place.
 
 This class can be called from anywhere within your application, in a static
 context::
@@ -389,7 +389,7 @@ context::
     :param string $key: The key to write, can use be a :term:`dot notation` value.
     :param mixed $value: The value to store.
 
-    Use ``write()`` to store data in the application’s configuration::
+    Use ``write()`` to store data in the application's configuration::
 
         Configure::write('Company.name','Pizza, Inc.');
         Configure::write('Company.slogan','Pizza for your body and soul');
@@ -415,7 +415,7 @@ context::
     :param string $key: The key to read, can use be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
-    CakePHP’s important debug value. If a key is supplied, the data is
+    CakePHP's important debug value. If a key is supplied, the data is
     returned. Using our examples from write() above, we can read that
     data back::
 
@@ -439,7 +439,7 @@ context::
 
     :param string $key: The key to delete, can use be a :term:`dot notation` value
 
-    Used to delete information from the application’s configuration::
+    Used to delete information from the application's configuration::
 
         Configure::delete('Company.name');
 
@@ -459,7 +459,7 @@ context::
     :param string $name: The name of the engine being attached.
     :param ConfigEngineInterface $engine: The engine instance being attached.
 
-    Attach a configuration engine to Configure.  Attached engines can
+    Attach a configuration reader to Configure. Attached readers can
     then be used to load configuration files. See :ref:`loading-configuration-files`
     for more information on how to read configuration files.
 
@@ -481,7 +481,7 @@ Reading and writing configuration files
 
 CakePHP comes with two built-in configuration file engines.
 :php:class:`Cake\\Configure\\Engine\\PhpConfig` is able to read PHP config files, in the same
-format that Configure has historically read.  :php:class:`Cake\\Configure\\Engine\\IniConfig` is
+format that Configure has historically read. :php:class:`Cake\\Configure\\Engine\\IniConfig` is
 able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config engine, you'll need to attach it to Configure
@@ -496,7 +496,7 @@ using :php:meth:`Configure::config()`::
 
 You can have multiple engines attached to Configure, each reading
 different kinds of configuration files, or reading from
-different types of sources.  You can interact with attached engines
+different types of sources. You can interact with attached engines
 using a few other methods on Configure. To see check which engine
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
@@ -506,7 +506,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
     // Check if a specific engine is attached
     Configure::configured('default');
 
-You can also remove attached engines.  ``Configure::drop('default')``
+You can also remove attached engines. ``Configure::drop('default')``
 would remove the default engine alias. Any future attempts to load configuration
 files with that engine would fail.
 
@@ -529,7 +529,7 @@ Once you've attached a config engine to Configure you can load configuration fil
     Configure::load('my_file', 'default');
 
 Loaded configuration files merge their data with the existing runtime configuration
-in Configure.  This allows you to overwrite and add new values
+in Configure. This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
@@ -545,7 +545,7 @@ Creating or modifying configuration files
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format
-is decided by the config engine attached as $config.  For example, if the
+is decided by the config engine attached as $config. For example, if the
 'default' engine is a :php:class:`Cake\\Configure\\Engine\\PhpConfig`, the generated file will be a PHP
 configuration file loadable by the :php:class:`Cake\\Configure\\Engine\\PhpConfig`
 
@@ -593,13 +593,13 @@ Restoring runtime configuration
     :param string $cacheConfig: The cache configuration to load the data from.
 
 Once you've stored runtime configuration, you'll probably need to restore it
-so you can access it again.  ``Configure::restore()`` does exactly that::
+so you can access it again. ``Configure::restore()`` does exactly that::
 
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it.  Restored
+the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
 Creating your own Configuration engines
@@ -679,8 +679,8 @@ Built-in Configuration engines
 
     Allows you to read configuration files that are stored as plain PHP files.
     You can read either files from your ``app/Config`` or from plugin configs
-    directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
-    variable.  An example configuration file would look like::
+    directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
+    variable. An example configuration file would look like::
 
         $config = [
             'debug' => 0,
@@ -719,16 +719,16 @@ Built-in Configuration engines
         namespace = App
 
     The above ini file, would result in the same end configuration data
-    as the PHP example above.  Array structures can be created either
-    through dot separated values, or sections.  Sections can contain
+    as the PHP example above. Array structures can be created either
+    through dot separated values, or sections. Sections can contain
     dot separated keys for deeper nesting.
 
 Bootstrapping CakePHP
 =====================
 
-If you have any additional configuration needs, use CakePHP’s
+If you have any additional configuration needs, use CakePHP's
 bootstrap file, found in app/Config/bootstrap.php. This file is
-executed just after CakePHP’s core bootstrapping.
+executed just after CakePHP's core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:
 
@@ -744,7 +744,7 @@ things to the bootstrap file: it might be tempting to place
 formatting functions there in order to use them in your
 controllers.
 
-Resist the urge. You’ll be glad you did later on down the line.
+Resist the urge. You'll be glad you did later on down the line.
 
 You might also consider placing things in the :php:class:`AppController` class.
 This class is a parent class to all of the controllers in your

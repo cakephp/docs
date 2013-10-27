@@ -174,8 +174,6 @@ Il y plusieurs options pour create():
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
     L'URL ainsi fournie peut être relative à votre application CakePHP ::
 
-        echo $this->Form->create(null, array('url' => '/recipes/add'));
-        // ou
         echo $this->Form->create(null, array(
             'url' => array('controller' => 'recipes', 'action' => 'add')
         ));
@@ -200,7 +198,7 @@ Il y plusieurs options pour create():
         <form method="get" action="http://www.google.com/search">
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url()` pour plus
-    d'exemples sur les différents types d'Urls.
+    d'exemples sur les différents types d'URLs.
 
 *   ``$options['default']`` Si la variable 'default' est définie à false,
     l'action de soumission du formulaire est changée de telle manière que le
@@ -378,7 +376,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
     Outre les options spécifique pour ``input()`` vu ci-dessus, vous pouvez
     spécifier n'importe quelle options pour le type d'input et n'importe quel
-    attribut html (actuellement dans le focus).
+    attribut HTML (actuellement dans le focus).
     Pour plus d'information sur les ``$options`` et ``$htmlAttributes`` voir
     :doc:`/core-libraries/helpers/html`.
 
@@ -797,7 +795,7 @@ répétitions les options communes partagées par toutes les méthodes input son
     ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
-En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut html
+En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera
 traité comme un attribut HTML, et appliqué a l'élément HTML input généré.
 NdT. celui qui capte cette phrase gagne un giroTermoOnduleur a double
@@ -973,7 +971,7 @@ Les options de Datetime
         <label for="UserName">Name</label>
         <label for="UserName">Your username</label>
 
-    ``$options`` peut soit être un tableau d'attributs html, ou une chaîne qui
+    ``$options`` peut soit être un tableau d'attributs HTML, ou une chaîne qui
     sera utilisée comme nom de classe::
 
         echo $this->Form->label('User.name', null, array('id' => 'user-label'));
@@ -1150,7 +1148,7 @@ Les options de Datetime
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false 
     
     .. versionchanged:: 2.1
-        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans Cake 2.1.
+        L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
@@ -1416,7 +1414,7 @@ Création des boutons et des éléments submits
 
         <div class="submit"><input value="Submit" type="submit"></div>
 
-    Vous pouvez aussi passer une url relative ou absolue vers une image
+    Vous pouvez aussi passer une URL relative ou absolue vers une image
     pour le paramêtre caption au lieu d'un caption text::
     
         echo $this->Form->submit('ok.png');
@@ -1472,7 +1470,7 @@ Création des boutons et des éléments submits
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que javascript  soit autorisé dans votre navigateur.
+    Requiert que JavaScript  soit autorisé dans votre navigateur.
     
     Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette
     méthode dans un formulaire existant. En remplacement vous devriez
@@ -1489,8 +1487,8 @@ Crée des inputs de date et d'heure (date and time inputs)
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Crée un jeu d'inputs pour la date et l'heure. Les valeurs valides pour
-    $dateformat sont ‘DMY’, ‘MDY’, ‘YMD’ ou ‘NONE. Les valeurs valides pour
-    $timeFormat sont ‘12’, ‘24’, et null.
+    $dateformat sont 'DMY', 'MDY', 'YMD' ou 'NONE'. Les valeurs valides pour
+    $timeFormat sont '12', '24', et null.
 
     Vous pouvez spécifier de ne pas afficher les valeurs vides en
     paramétrant "array('empty' => false)" dans les paramètres des attributs.
@@ -1594,7 +1592,7 @@ Crée des inputs de date et d'heure (date and time inputs)
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-    Crée un élément select (menu de sélection) rempli avec ‘am’ et ‘pm’.
+    Crée un élément select (menu de sélection) rempli avec 'am' et 'pm'.
 
 
 Afficher et vérifier les erreurs
@@ -1607,7 +1605,7 @@ Afficher et vérifier les erreurs
 
     Options:
 
-    -  'escape' booléen si il faut ou non que le html échappe le contenu de
+    -  'escape' booléen si il faut ou non que le HTML échappe le contenu de
        l'erreur.
     -  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
        soit envelopper d'une div. Si c'est une chaîne , sera utilisé comme le
@@ -1708,10 +1706,10 @@ Les méthodes sont:
     * FormHelper::minute()
     * FormHelper::meridian()
 
-**L'url par défaut des formulaires est l'action courante**
+**L'URL par défaut des formulaires est l'action courante**
 
-L'url par défaut pour tous les formulaires, est désormais
-l'url courante incluant passed, named, et les paramètres
+L'URL par défaut pour tous les formulaires, est désormais
+l'URL courante incluant passed, named, et les paramètres
 de la requête (querystring parameters). Vous pouvez redéfinir
 cette valeur par défaut en fournissant ``$options['url']`` dans
 le second paramètre de ``$this->Form->create()``.

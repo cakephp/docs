@@ -52,7 +52,7 @@ line (``debug`` enabled).
 Creating your own error handler
 ===============================
 
-You can create an error handler out of any callback type.  For example you could
+You can create an error handler out of any callback type. For example you could
 use a class called ``AppError`` to handle your errors. By extending the
 ``BaseErrorHandler`` you can supply custom logic for handling errors. An example would be::
 

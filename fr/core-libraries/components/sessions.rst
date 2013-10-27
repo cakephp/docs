@@ -159,7 +159,7 @@ Création de messages de notification
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 
     .. note::
-        Par défaut, CakePHP n'échappe pas le html des messages flash. Si vous
+        Par défaut, CakePHP n'échappe pas le HTML des messages flash. Si vous
         utilisez une requête ou une donnée d'utilisateur dans vos messages
         flash, vous devrez les échapper avec :php:func:`h` quand vous formatez
         vos messages.

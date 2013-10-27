@@ -30,7 +30,7 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptée pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encoder en html, true par
+* ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
 
@@ -55,7 +55,7 @@ Sortie:
 
     <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
-Si vous utilisez du html comme des images dans vos liens rappelez-vous de
+Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
     echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
@@ -173,7 +173,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     * ``tag`` La balise enveloppante que vous voulez utiliser, 'span' par
       défaut.
-    * ``escape`` Si vous voulez que le contenu soit encodé en html,
+    * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
       par défaut à true.
     * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
         
@@ -270,7 +270,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     récupère la page actuelle pour le jeu d'enregistrement du model donné::
 
-        // Ou l'url est: http://example.com/comments/view/page:3
+        // Ou l'URL est: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
         // la sortie est 3
 
@@ -354,7 +354,7 @@ Modification des options que le Helper Paginator utilise
 Définit toutes les options pour le Helper Paginator Helper. Les options
 supportées sont:
 
-* ``url`` L'url de l'action de pagination. url comporte quelques sous options
+* ``url`` L'URL de l'action de pagination. 'url' comporte quelques sous options
   telles que:
 
   -  ``sort`` La clé qui décrit la façon de trier les enregistrements.
@@ -363,7 +363,7 @@ supportées sont:
   
   Les options mentionnées ci-dessus peuvent être utilisées pour forcer
   des pages/directions particulières. Vous pouvez aussi ajouter des contenu
-  d'url supplémentaires dans toutes les urls générées dans le helper::
+  d'URL supplémentaires dans toutes les URLs générées dans le helper::
   
       $this->Paginator->options(array(
           'url' => array(
@@ -412,8 +412,8 @@ Configurer le Helper Paginator pour utiliser le Helper Javascript
 -----------------------------------------------------------------
 
 Par défaut le ``Helper Paginator`` utilise :php:class:`JsHelper` pour effectuer
-les fonctionnalités Ajax. Toutefois, si vous ne voulez pas cela et que vous
-voulez utiliser un Helper personnalisé pour les liens Ajax, vous pouvez le
+les fonctionnalités AJAX. Toutefois, si vous ne voulez pas cela et que vous
+voulez utiliser un Helper personnalisé pour les liens AJAX, vous pouvez le
 faire en changeant le tableau ``$helpers`` dans votre controller.
 Après avoir lancé ``paginate()`` faîtes ce qui suit::
 
@@ -422,7 +422,7 @@ Après avoir lancé ``paginate()`` faîtes ce qui suit::
     $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
 Changera le ``Helper Paginator`` pour utiliser ``CustomJs`` pour
-les opérations Ajax. Vous pourriez aussi définir la clé Ajax
+les opérations AJAX. Vous pourriez aussi définir la clé AJAX
 pour être un Helper, tant que la classe implémente la méthode
 ``link()`` qui se comporte comme :php:meth:`HtmlHelper::link()`.
 
@@ -513,13 +513,13 @@ D'autres Méthodes
     Les clés acceptées pour ``$options``:
 
         * **update** - L' Id de l'élément DOM que vous souhaitez actualiser.
-            Créé des liens près pour Ajax.
+            Créé des liens près pour AJAX.
         * **escape** Si vous voulez que le contenu soit encodé comme une
-            entité html, par défaut à true.
+            entité HTML, par défaut à true.
         * **model** Le model à utiliser, par défaut à
             PaginatorHelper::defaultModel().
 
-    Créé un lien ordinaire ou Ajax avec des paramètres de pagination::
+    Créé un lien ordinaire ou AJAX avec des paramètres de pagination::
 
         echo $this->Paginator->link('Sort by title on page 5',
                 array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));
@@ -532,7 +532,7 @@ D'autres Méthodes
 
     :param array $options: Tableau d'options Pagination/URL. Comme
         utilisé dans les méthodes ``options()`` ou ``link()``.
-    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une
+    :param boolean $asArray: Retourne l'URL comme dans un tableau, ou une
         chaîne URL. Par défaut à false.
     :param string $model: Le model sur lequel paginer.
 

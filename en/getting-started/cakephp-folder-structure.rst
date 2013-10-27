@@ -14,7 +14,7 @@ and folders you should see:
 - index.php
 - README.md
 
-You'll notice three main folders:
+You'll notice a few top level folders:
 
 - The *App* folder will be where you work your magic: it’s where
   your application’s files will be placed.
@@ -37,8 +37,8 @@ You'll notice three main folders:
 The App Folder
 ==============
 
-CakePHP’s app folder is where you will do most of your application
-development. Let’s look a little closer at the folders inside of
+CakePHP's app folder is where you will do most of your application
+development. Let's look a little closer at the folders inside of
 app.
 
 Config
@@ -50,7 +50,7 @@ Console
     This directory can also contain a ``Templates`` directory to customize the
     output of bake. For more information see :doc:`/console-and-shells`.
 Controller
-    Contains your application’s controllers and their components.
+    Contains your application's controllers and their components.
 Lib
     Contains 1st party libraries that do not come from 3rd parties or
     external vendors. This allows you to separate your organization's
@@ -58,7 +58,7 @@ Lib
 Locale
     Stores string files for internationalization.
 Model
-    Contains your application’s models, behaviors, and datasources.
+    Contains your application's models, behaviors, and datasources.
 Test
     This directory contains all the test cases, and test fixtures for your
     application. The ``Test/Case`` directory should mirror your application and

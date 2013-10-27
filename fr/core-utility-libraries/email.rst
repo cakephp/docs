@@ -11,7 +11,7 @@ Models.
 
 Cette classe remplace :php:class:`EmailComponent` et donne plus de flexibilité
 dans l'envoi d'emails. Par exemple, vous pouvez créer vos propres transports
-pour envoyer l'email au lieu d'utiliser les smtp et mail fournis.
+pour envoyer l'email au lieu d'utiliser les transports SMTP et Mail fournis.
 
 Utilisation basique
 ===================
@@ -76,7 +76,7 @@ pouvez utiliser le constructeur pour le faire::
         }
     }
 
-Il n'est pas nécéssaire de créer ``app/Config/email.php``, ``CakeEmail`` peut
+Il n'est pas nécessaire de créer ``app/Config/email.php``, ``CakeEmail`` peut
 être utilisé sans lui et utiliser les méthodes respectives pour définir toutes
 les configurations séparément ou charger un tableau de configs.
 
@@ -185,10 +185,10 @@ La clés de configuration suivantes sont utilisées:
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``. Si vous mettez
-plus de configuration dans ce tableau, les configurations seront utilisées dans
-la méthode :php:meth:`CakeEmail::config()` et passées à la classe de transport
-``config()``.
-Par exemple, si vous utilisez le transport smtp, vous devez passer le host,
+plus de configurations dans ce tableau, les configurations seront utilisées
+dans la méthode :php:meth:`CakeEmail::config()` et passées à la classe de
+transport ``config()``.
+Par exemple, si vous utilisez le transport SMTP, vous devez passer le host,
 port et autres configurations.
 
 .. note::
@@ -309,7 +309,7 @@ client:
    dans ce formulaire.
 
   4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans
-       corps html comme ``<img src="cid:my-content-id">``.
+       corps HTML comme ``<img src="cid:my-content-id">``.
 
   4.2. Vous pouvez utiliser l'option ``contentDisposition`` pour désactiver le
        header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
@@ -328,12 +328,13 @@ client:
 Utiliser les transports
 -----------------------
 
-Les Transports sont des classes destinés à envoyer l'email selon certain
+Les Transports sont des classes destinées à envoyer l'email selon certain
 protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut),
-Debug et Smtp.
+Debug et SMTP.
 
 Pour configurer votre méthode, vous devez utiliser la méthode
-:php:meth:`CakeEmail::transport()` ou avoir transport dans votre configuration.
+:php:meth:`CakeEmail::transport()` ou avoir le transport dans votre
+configuration.
 
 Créer des Transports personnalisés
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -34,8 +34,8 @@ filtre déjà activées pour toutes les requêtes, allons voir comment elles ont
 Chacune de ces valeurs de tableaux sont des noms de classe qui seront
 instanciés et ajoutés en écouteurs des évènements générés au niveau du
 dispatcher. Le premier, ``AssetDispatcher`` est là pour vérifier si la
-requête se réfère au theme ou au fichier d'asset du plugin, comme le css,
-le javascript ou une image stockée dans soit un dossier du webroot du plugin,
+requête se réfère au theme ou au fichier d'asset du plugin, comme le CSS,
+le JavaScript ou une image stockée dans soit un dossier du webroot du plugin,
 soit dans celui correspondant au Theme. Il servira le fichier selon s'il est
 trouvé ou non, stoppant le reste du cycle de dispatchement. Le filtre
 ``CacheDispatcher``, quand la variable de config ``Cache.check`` est
@@ -117,7 +117,7 @@ Classes Filter
 Les filtres de Dispatcher, quand définis en tant que noms de classe dans
 configuration, doivent étendre la classe ``DispatcherFilter`` fournie
 dans le répertoire `Routing` de CakePHP.
-Créeons un simple filtre pour répondre à une url spécifique avec un texte
+Créeons un simple filtre pour répondre à une URL spécifique avec un texte
 'Hello World'::
 
     App::uses('DispatcherFilter', 'Routing');
@@ -148,7 +148,7 @@ utilisant la propriété ``$priority`` dans la classe, la valeur par défaut est
 10 si la propriété est déclarée, cela signifie qu'il sera executé _après_ que
 la classe de Router a parsé la requête. Nous ne voulons pas que cela
 arrive dans notre exemple précédent, parce que probablement, vous n'avez pas
-de controller configuré pour répondre à cette url, donc nous avons choisi
+de controller configuré pour répondre à cette URL, donc nous avons choisi
 9 comme notre priorité.
 
 ``DispatcherFilter`` propose deux méthodes qui peuvent être écrasées dans des
@@ -199,7 +199,7 @@ Filtres Inline
 ==============
 
 Notre dernier exemple va utiliser une fonction anonyme (seulement disponible
-sur PHP 5.3+) pour servir une liste de posts dans un format json, nous
+sur PHP 5.3+) pour servir une liste de posts dans un format JSON, nous
 vous encourageons à faire ainsi l'utilisation des controllers et la classe
 :php:class:`JsonView`, mais imaginons que vous ayez besoin de gagner une tout
 petite milliseconde pour cette mission-critical API endpoint::
@@ -236,7 +236,7 @@ certaines requêtes.
 Pour des raisons évidentes, ceci a le potentiel de rendre la maintenance de
 votre app très difficile. Les filtres sont un outil extrèmement puissant
 quand on les utilise sagement, ajoutez les gestionnaires de réponse
-pour chaque url dans votre app n'est pas une bonne utilisation pour cela. Mais
+pour chaque URL dans votre app n'est pas une bonne utilisation pour cela. Mais
 si vous avez une raison valide de le faire, alors vous avez une solution
 propre à portée de main. Gardez à l'esprit que tout ne doit pas être un
 filtre, les `Controllers` et les `Components` sont habituellement un choix

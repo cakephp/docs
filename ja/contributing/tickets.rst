@@ -2,7 +2,7 @@
 ########
 
 チケットの形式でコミュニティからのフィードバックと助けを得ることは、CakePHPの開発プロセスの極めて重要な部分です。
-CakePHPのチケットの全ては `lighthouse <http://cakephp.lighthouseapp.com>`_ にホストされています。
+CakePHPのチケットの全ては `Github <https://github.com/cakephp/cakephp/issues>`_ にホストされています。
 
 バグの報告
 ==========
@@ -11,7 +11,7 @@ CakePHPのチケットの全ては `lighthouse <http://cakephp.lighthouseapp.com
 可能な限り最善のバグレポートを作成するのに役立ついくつかのステップがあります:
 
 * 既存のよく似ているチケットを
-  `検索 <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
+  `検索 <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   して、誰かが既にあなたの問題を報告してるかを、またはレポジトリ内でまだバグが修正されていないかを確認 **してください** 。
 * **バグを再現する方法** についての詳細な手順を必ず **書いてください** 。
   これは問題の実例を示すテストケースかコードスニペットの形式となるでしょう。

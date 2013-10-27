@@ -52,7 +52,7 @@ que vous changez les chaînes traduisibles dans votre code.
 Le(s) fichier(s) pot eux mêmes ne sont pas utilisés par CakePHP, ils sont les
 templates utilisés pour créer ou mettre à jour vos fichiers po,
 `po files <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
-traductions. Cake cherchera vos fichiers po dans les dossiers suivants ::
+traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
 
@@ -78,7 +78,7 @@ nouvellement mis à jour.
 Les codes des locales en trois caractères suivent la norme
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 mais si vous créez des locales régionales (en\_US, en\_GB, etc.)
-Cake les utilisera dans les cas appropriés.
+CakePHP les utilisera dans les cas appropriés.
 
 .. warning::
 
@@ -158,7 +158,7 @@ vous avez à faire est dans la partie suivante::
 
     Configure::write('Config.language', 'fra'); 
 
-Ceci signale à Cake quelle locale utiliser (si vous utilisez une locale
+Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
 régionale, comme fr\_FR, la locale
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
 utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue
@@ -186,12 +186,12 @@ En faisant cela vous assurerez que :php:class:`I18n` et
 :php:class:`TranslateBehavior` accèdent aux même valeurs de langue.
 
 C'est une bonne idée de rendre du contenu public disponible dans
-plusieurs langues à partir d'une url unique - il deviendra plus
+plusieurs langues à partir d'une URL unique - il deviendra plus
 facile pour les utilisateurs (et les moteurs de recherches) de trouver
 ce qu'ils sont venus chercher dans la langue souhaitée.
 Il y a plusieurs moyens de faire cela, en utilisant un sous
 domaine de langue spécifique (en.exemple.com,fra.exemple.com, etc.),
-ou en utilisant un préfixe à l'url comme c'est le cas avec cette
+ou en utilisant un préfixe à l'URL comme c'est le cas avec cette
 application. Vous pourriez également souhaitez glaner l'information
 depuis l'agent de navigation (browser agent) de l'utilisateur, entre
 autres choses.
@@ -257,4 +257,4 @@ Ce qui va faire l'appel interne suivant::
 
 .. meta::
     :title lang=fr: Internationalization & Localization
-    :keywords lang=fr: internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages
+    :keywords lang=fr: internationalization localization,internationalization et localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages

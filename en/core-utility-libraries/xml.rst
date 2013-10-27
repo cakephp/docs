@@ -20,21 +20,21 @@ SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
 
     // Old method:
-    $xml = new Xml('http://bakery.cakephp.org/articles/rss');
+    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 
     // New method using SimpleXML
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
     //or
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
     // New method using DOMDocument
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml now is a instance of DOMDocument
 
-You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources.  You
+You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources. You
 can use XML to build objects from string data::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
@@ -45,14 +45,14 @@ can use XML to build objects from string data::
     </post>';
     $xml = Xml::build($text);
 
-You can also build Xml objects from either local files, or remote files.  Remote
+You can also build Xml objects from either local files, or remote files. Remote
 files will be fetched with :php:class:`HttpSocket`::
 
     // local file
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // remote file
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
 You can also build Xml objects using an array::
 
@@ -84,7 +84,7 @@ If your input is invalid the Xml class will throw a Exception::
 Transforming a XML string in array
 ==================================
 
-Converting XML strings into arrays is simple with the Xml class as well.  By
+Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back::
 
     //Old method:
@@ -132,10 +132,10 @@ Examples of invalid arrays::
 
     The default format option was changed from `attributes` to `tags`. This was
     done to make the Xml that the Xml class generates more compatible with XML
-    in the wild.  Be careful if you depend of this. In the new version you can
+    in the wild. Be careful if you depend of this. In the new version you can
     create a mixed array with tags, attributes and value, just use format as
     tags (or do not say anything, because it is the default value) and prefix
-    keys that are supposed to be attributes with `@`.  For value text, use `@`
+    keys that are supposed to be attributes with `@`. For value text, use `@`
     as the key.
 
 ::
@@ -283,7 +283,7 @@ Xml API
 =======
 
 A factory and conversion class for creating SimpleXml or DOMDocument objects
-from a number of sources including strings, arrays and remote urls.
+from a number of sources including strings, arrays and remote URLs.
 
 .. php:staticmethod:: build($input, $options = array())
 

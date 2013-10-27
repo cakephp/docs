@@ -46,7 +46,7 @@ $scaffold dans votre controller ::
     }
     
 En supposant que vous avez bien crée un model Category dans le bon
-dossier (/app/Model/Category.php), vous pouvez aller sur
+dossier (app/Model/Category.php), vous pouvez aller sur
 http://exemple.com/categories pour voir votre nouveau scaffold.
 
 .. note::
@@ -65,8 +65,9 @@ entre models, vous ne verrez pas d'enregistrements liés dans les vues via
 scaffold jusqu'à ce que vous ajoutiez manuellement un code d'association
 au model. Par exemple, si le model Group hasMany User et que
 User belongsTo Group, vous devrez ajouter manuellement le code suivant
-dans vos models User et Group. Avant d'ajouter le code suivant, la
-vue affiche un select pour le Group dans le nouveau formulaire User::
+dans vos models User et Group. Avant de faire cela, la vue affiche un select
+vide pour le Group dans le Nouveau formulaire User; after – populated avec les
+IDs ou noms à partir de la table du Group dans le Nouveau formulaire User::
 
     // Dans Group.php
     public $hasMany = 'User';
@@ -89,7 +90,7 @@ Créer une interface admin simplifiée avec scaffolding
 =====================================================
 
 Si vous avez activé le routage admin dans votre app/config/core.php,
-avec ``Configure::write('Routing.prefixes', array('admin'));`` vous pouvez
+avec ``Configure::write('Routing.prefixes', array('admin'));``, vous pouvez
 utiliser le scaffolding (échafaudage) pour générer une interface
 d'administration.
 
@@ -132,16 +133,16 @@ leur développement.
 La personnalisation des vues scaffoldées pour un controller spécifique
 (PostsController dans notre exemple) doit être placée comme ceci::
 
-    /app/View/Posts/scaffold.index.ctp
-    /app/View/Posts/scaffold.form.ctp
-    /app/View/Posts/scaffold.view.ctp
+    app/View/Posts/scaffold.index.ctp
+    app/View/Posts/scaffold.form.ctp
+    app/View/Posts/scaffold.view.ctp
 
 Les vues scaffoldées personnalisées pour tous les controllers doivent être
 placées comme ceci::
 
-    /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/form.ctp
-    /app/View/Scaffolds/view.ctp
+    app/View/Scaffolds/index.ctp
+    app/View/Scaffolds/form.ctp
+    app/View/Scaffolds/view.ctp
 
 
 .. meta::

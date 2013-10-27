@@ -223,7 +223,7 @@ App.baseUrl
     Si vous ne souhaitez pas ou ne pouvez pas avoir le mod\_rewrite (ou
     un autre module compatible) et ne pouvez pas le lancer sur votre
     serveur, vous aurez besoin d'utiliser le système de belles URLs
-    construit dans Cake. Dans ``/app/Config/core.php``,
+    construit dans CakePHP. Dans ``/app/Config/core.php``,
     décommentez la ligne qui ressemble à cela::
     
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -312,11 +312,11 @@ Security.cipherSeed
     crypter/décrypter les chaînes.
 Asset.timestamp
     Ajoute un timestamp de dernière modification du fichier particulier
-    à la fin des urls des asset fichiers (CSS, JavaScript, Image) lors de
+    à la fin des URLs des asset fichiers (CSS, JavaScript, Image) lors de
     l'utilisation de vos propres helpers.
     Valeurs valides:
-    (bool) false - Ne fait rien (par défaut).
-    (bool) true - Ajoute le timestamp quand debug > 0.
+    (boolean) false - Ne fait rien (par défaut).
+    (boolean) true - Ajoute le timestamp quand debug > 0.
     (string) 'force' - Ajoute le timestamp quand debug >= 0.
 Acl.classname, Acl.database
     Constantes utilisées pour la fonctionnalité d'Access Control List de
@@ -759,11 +759,11 @@ Readers de Configuration intégrés
 Configuration de Inflection
 ===========================
 
-Les conventions de nommage de Cake peuvent être vraiment sympas - vous pouvez
-nommer votre table de base de données big\_boxes, votre model BigBox, votre
-controller BigBoxesController, et tout fonctionne ensemble automatiquement.
-La façon dont CakePHP sait comment lier les choses ensemble est
-en *infléctant* les mots entre leurs formes singulière et plurielle.
+Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
+pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
+votre controller BigBoxesController, et tout fonctionne ensemble
+automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
+est en *infléctant* les mots entre leurs formes singulière et plurielle.
 
 Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
 vous pouvez être dans des situations où l'inflecteur de CakePHP (la classe

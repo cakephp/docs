@@ -12,8 +12,8 @@ Basic Debugging
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    :param mixed $var: The contents to print out.  Arrays and objects work well.
-    :param boolean $showHTML: Set to true, to enable escaping.  Escaping is enabled
+    :param mixed $var: The contents to print out. Arrays and objects work well.
+    :param boolean $showHTML: Set to true, to enable escaping. Escaping is enabled
         by default in 2.0 when serving web requests.
     :param boolean $showFrom: Show the line and file the debug() occurred on.
 
@@ -166,7 +166,7 @@ set to a value greater than 0.
 
 .. php:staticmethod:: Debugger::getType($var)
 
-    Get the type of a variable.  Objects will return their classname
+    Get the type of a variable. Objects will return their class name
 
     .. versionadded:: 2.1
 
@@ -174,15 +174,15 @@ Using Logging to debug
 ======================
 
 Logging messages is another good way to debug applications, and you can use
-:php:class:`CakeLog` to do logging in your application.  All objects that 
+:php:class:`CakeLog` to do logging in your application. All objects that 
 extend :php:class:`Object` have an instance method `log()` which can be used
 to log messages::
 
     $this->log('Got here', 'debug');
 
-The above would write ``Got here`` into the debug log.  You can use log entries
+The above would write ``Got here`` into the debug log. You can use log entries
 to help debug methods that involve redirects or complicated loops. You can also
-use :php:meth:`CakeLog::write()` to write log messages.  This method can be called
+use :php:meth:`CakeLog::write()` to write log messages. This method can be called
 statically anywhere in your application one CakeLog has been loaded::
 
     // in app/Config/bootstrap.php

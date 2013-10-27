@@ -56,7 +56,7 @@ permet de définir la façon dont le Component cookie fonctionne.
 +-----------------+--------------+------------------------------------------------------+
 | boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
 | $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
-|                 |              | disponibles en javascript                            |
+|                 |              | disponibles en JavaScript                            |
 +-----------------+--------------+------------------------------------------------------+
 
 Les extraits de code de controller suivants montrent comment inclure le
@@ -131,7 +131,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
     avec le nom spécifié dans $key.::    
 
-        // Sortie “Larry”
+        // Sortie "Larry"
         echo $this->Cookie->read('name');
 
         // Vous pouvez aussi utiliser la notation par point pour lire

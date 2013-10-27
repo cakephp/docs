@@ -27,9 +27,9 @@ The Bakery
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-The CakePHP Bakery is a clearing house for all things CakePHP.
+The CakePHP Bakery is a clearing house for all things regarding CakePHP.
 Check it out for tutorials, case studies, and code examples. Once
-you’re acquainted with CakePHP, log on and share your knowledge
+you're acquainted with CakePHP, log on and share your knowledge
 with the community and gain instant fame and fortune.
 
 The API
@@ -67,21 +67,26 @@ The IRC channel
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
    Bakery
 
-If you’re stumped, give us a holler in the CakePHP IRC channel.
+If you're stumped, give us a holler in the CakePHP IRC channel.
 Someone from the `development team <https://github.com/cakephp?tab=members>`_
 is usually there, especially during the daylight hours for North
-and South America users. We’d love to hear from you, whether you
+and South America users. We'd love to hear from you, whether you
 need some help, want to find users in your area, or would like to
 donate your brand new sports car.
 
-The Google Group
-================
+.. _cakephp-official-communities:
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+CakePHP Official Communities
+============================
+CakePHP also has it's official group in most popular social networking sites like Facebook, Google Plus. There are
+thousands of people discussing CakePHP projects, helping each other, solving problems, building projects
+and sharing ideas. It can be a great resource for finding archived answers, frequently asked questions, and
+getting answers to immediate problems. Join other CakePHP users in the following communities.
 
-CakePHP also has a very active Google Group. It can be a great
-resource for finding archived answers, frequently asked questions,
-and getting answers to immediate problems.
+-   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
+-   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
+-   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
+
 
 CakePHP Questions
 =================

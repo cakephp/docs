@@ -319,7 +319,7 @@ l'API de CakeLog
 
     .. versionchanged:: 2.2 ``$scope`` a été ajouté.
 
-.. versionadded:: 2.2 Log levels and scopes
+.. versionadded:: 2.2 Log levels et scopes
 
 .. php:staticmethod:: levels()
 
