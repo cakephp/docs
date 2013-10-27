@@ -61,9 +61,8 @@ similar to the parameters of the ``Model->find('all')`` method, that
 is: ``conditions``, ``fields``, ``order``, ``limit``, ``page``, ``contain``,
 ``joins``, and ``recursive``. In addition to the aforementioned keys, any
 additional keys will also be passed directly to the model find methods. This
-makes it very simple to use behaviors like :php:class:`ContainableBehavior` with
-pagination::
-
+makes it very simple to use behaviors that use beforeFind callbacks
+to add query conditions in::
 
     class RecipesController extends AppController {
 

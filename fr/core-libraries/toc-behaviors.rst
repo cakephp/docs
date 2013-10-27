@@ -12,6 +12,5 @@ section sur :doc:`/models/behaviors`.
     :maxdepth: 1
 
     /core-libraries/behaviors/acl
-    /core-libraries/behaviors/containable
     /core-libraries/behaviors/translate
     /core-libraries/behaviors/tree

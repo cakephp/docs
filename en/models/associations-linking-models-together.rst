@@ -834,9 +834,7 @@ associations on the fly. This may be for any number of reasons:
    sort or filter associated data.
 
 This association creation and destruction is done using the CakePHP
-model bindModel() and unbindModel() methods. (There is also a very
-helpful behavior called "Containable", please refer to manual
-section about Built-in behaviors for more information). Let's set
+model bindModel() and unbindModel() methods. Let's set
 up a few models so we can see how bindModel() and unbindModel()
 work. We'll start with two models::
 
@@ -1117,8 +1115,8 @@ table::
 
 Using joins allows you to have a maximum flexibility in how CakePHP handles associations
 and fetch the data, however in most cases you can use other tools to achieve the same results
-such as correctly defining associations, binding models on the fly and using the Containable
-behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
+such as correctly defining associations, binding models on the fly and using the contain()
+method. This feature should be used with care because it could lead, in a few cases, into bad formed
 SQL queries if combined with any of the former techniques described for associating models.
 
 

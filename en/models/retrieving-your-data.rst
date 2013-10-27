@@ -387,13 +387,9 @@ return the row before and after the one you request. Below is a simple
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
 
-You can see in this example the two required elements of the
-``$params`` array: field and value. Other elements are still
-allowed as with any other find (Ex: If your model acts as
-containable, then you can specify 'contain' in ``$params``). The
-format returned from a ``find('neighbors')`` call is in the form:
-
-::
+You can see in this example the two required elements of the ``$params`` array:
+field and value. Other elements are still allowed as with any other find. The
+format returned from a ``find('neighbors')`` call is in the form::
 
     Array
     (
