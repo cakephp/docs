@@ -104,7 +104,7 @@ Formatage
     :rtype: string
 
     Va retourner une chaîne formatée avec le format donné en utilisant les
-    `options de formatage de la fonction PHP date() <http://www.php.net/manual/en/function.date.php>`_::
+    `options de formatage de la fonction PHP strftime() <http://www.php.net/manual/en/function.strftime.php>`_::
 
         // appel via TimeHelper
         echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
