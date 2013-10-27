@@ -103,7 +103,7 @@ supplémentaire est définie dans ``$this->request->params['paging']``, et est
 utilisée par :php:class:`PaginatorHelper` pour la création des liens.
 :php:meth:`PaginatorComponent::paginate()` ajoute aussi
 :php:class:`PaginatorHelper` à la liste des helpers dans votre controller, si
-il n'a pas déjà été ajouté.::
+il n'a pas déjà été ajouté::
 
     public function list_recipes() {
         $this->Paginator->settings = $this->paginate;
@@ -114,12 +114,12 @@ il n'a pas déjà été ajouté.::
     }
 
 Vous pouvez filtrer les enregistrements en passant des conditions
-en second paramètre à la fonction ``paginate()``.::
+en second paramètre à la fonction ``paginate()``::
 
     $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
 Ou vous pouvez aussi définir des ``conditions`` et d'autres tableaux de
-configuration de pagination à l'intérieur de votre action.::
+configuration de pagination à l'intérieur de votre action::
 
     public function list_recipes() {
         $this->Paginator->settings = array(
@@ -236,8 +236,8 @@ Par défaut le classement peut être effectué pour n'importe quelle colonne dan
 un model. C'est parfois indésirable comme permettre aux utilisateurs de trier
 des colonnes non indexées, ou des champs virtuels ce qui peut être coûteux en
 temps de calculs. Vous pouvez utiliser le 3ème paramètre de
-``PaginatorComponent::paginate()`` pour restreindre les tris de colonnes qui
-pourront être effectués::
+``PaginatorComponent::paginate()`` pour restreindre les colonnes à trier
+en faisant ceci::
 
     $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 
@@ -299,8 +299,8 @@ arguments GET.
         $this->paginate['limit'] = 10;
 
     Retournera l'erreur "Notice: Indirect modification of overloaded property 
-    $paginate has no effect" ("Notice: Une modification indirect d'une surcharge de
-    la propriété $paginate n'a aucun effet"). En assignant une valeur initiale à la
+    $paginate has no effect." ("Notice: Une modification indirect d'une surcharge de
+    la propriété $paginate n'a aucun effet."). En assignant une valeur initiale à la
     propriété, cela résout le problème::
 
         $this->paginate = array();
