@@ -43,7 +43,7 @@ Constants
   replaced with config variables ``App.imageBaseUrl``, ``App.jsBaseUrl``,
   ``App.cssBaseUrl`` respectively.
 
-- Constants `IMAGES`, `JS`, `CSS` have been deprecated.
+- Constants ``IMAGES``, ``JS``, ``CSS`` have been deprecated.
 
 Object
 ------
@@ -56,11 +56,11 @@ Components
 
 AuthComponent
 -------------
-- AuthComponent now supports proper stateless mode when using `Basic` or `Digest`
+- AuthComponent now supports proper stateless mode when using 'Basic' or 'Digest'
   authenticators. Starting of session can be prevented by setting :php:attr:`AuthComponent::$sessionKey`
-  to false. Also now when using only `Basic` or `Digest` you are no longer
+  to false. Also now when using only 'Basic' or 'Digest' you are no longer
   redirected to login page. For more info check the :php:class:`AuthComponent` page.
-- Property :php:attr:`AuthComponent::$authError` can be set to boolean `false` to suppress flash message from being displayed.
+- Property :php:attr:`AuthComponent::$authError` can be set to boolean ``false`` to suppress flash message from being displayed.
 
 PasswordHasher
 --------------
@@ -135,8 +135,8 @@ PaginatorHelper
 FormHelper
 ----------
 
-- The ``round`` option was added to :php:meth:`FormHelper::dateTime()`. Can be set to `up` or `down`
-  to force rounding in either direction. Defaults to null which rounds half up according to `interval`.
+- The ``round`` option was added to :php:meth:`FormHelper::dateTime()`. Can be set to ``up`` or ``down``
+  to force rounding in either direction. Defaults to null which rounds half up according to ``interval``.
 
 Network
 =======
