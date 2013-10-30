@@ -184,7 +184,7 @@ L10n
   The locale folders have to be adjusted accordingly (from `/Locale/per/` to `/Locale/fas/`).
 - ``sme`` is now the default locale for Sami as specified by ISO 639-3 and ``smi`` its alias.
   The locale folders have to be adjusted accordingly (from `/Locale/smi/` to `/Locale/sme/`).
-- ``mkd`` replaces ```mk`` as default locale for Macedonian as specified by ISO 639-3.
+- ``mkd`` replaces ``mk`` as default locale for Macedonian as specified by ISO 639-3.
   The corresponding locale folders have to be adjusted, as well.
 - Catalog code ``in`` has been dropped in favor of ``id`` (Indonesian),
   ``e`` has been dropped in favor of ``el`` (Greek),
@@ -201,7 +201,7 @@ Logging
 - Log engines do not need the suffix ``Log`` anymore in their setup configuration. So for the
   FileLog engine it suffices to define ``'engine' => 'File'`` now. This unifies the way engines
   are named in configuration (see Cache engines for example).
-  Note: If you have a Log engine like ```DatabaseLogger`` that does not follow the convention to
+  Note: If you have a Log engine like ``DatabaseLogger`` that does not follow the convention to
   use a suffix ``Log`` for your class name you have to adjust your class name to ``DatabaseLog``.
   You should also avoid class names like ``SomeLogLog`` which include the suffix twice at the end.
 
@@ -230,7 +230,7 @@ Utility
 General
 -------
 
-- :php:func:`pr` no longer outputs HTML when running in cli mode.
+- :php:func:`pr()` no longer outputs HTML when running in cli mode.
 
 Sanitize
 --------
