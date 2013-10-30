@@ -899,7 +899,7 @@ with usage examples.
     .. versionadded:: 2.3
         This method was added in 2.3
 
-.. php:staticmethod:: inList(string $check, array $list)
+.. php:staticmethod:: inList(string $check, array $list, $strict = true)
 
     This rule will ensure that the value is in a given set. It needs an
     array of values. The field is valid if the field's value matches
