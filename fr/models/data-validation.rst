@@ -910,7 +910,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     .. versionadded:: 2.3
         Cette méthode a été ajoutée dans 2.3
 
-.. php:staticmethod:: inList(string $check, array $list)
+.. php:staticmethod:: inList(string $check, array $list, $strict = true)
 
     Cette règle s'assurera que la valeur est dans un ensemble donné. Elle
     nécessite un tableau des valeurs. Le champ est valide si sa valeur
