@@ -49,7 +49,7 @@ Constantes
   remplacées par les variables de config respectivement ``App.imageBaseUrl``,
   ``App.jsBaseUrl``, ``App.cssBaseUrl``.
 
-- Les Constantes `IMAGES`, `JS`, `CSS` ont été dépréciées.
+- Les Constantes ``IMAGES``, ``JS``, ``CSS`` ont été dépréciées.
 
 Object
 ------
@@ -64,13 +64,13 @@ AuthComponent
 -------------
 
 - AuthComponent supporte maintenant le mode proper stateless lors de
-  l'utilisation des authentifieurs `Basic` ou `Digest`. Partir de session
+  l'utilisation des authentifieurs 'Basic' ou 'Digest'. Partir de session
   peut être empêché en configurant :php:attr:`AuthComponent::$sessionKey`
-  à false. Aussi maintenant lors de l'utilisation uniquement de `Basic` ou
-  `Digest`, vous n'êtes plus redirigé vers la page de login. Pour plus d'infos,
+  à false. Aussi maintenant lors de l'utilisation uniquement de 'Basic' ou
+  'Digest', vous n'êtes plus redirigé vers la page de login. Pour plus d'infos,
   vérifiez la page :php:class:`AuthComponent`.
 - La propriété :php:attr:`AuthComponent::$authError` peut être définie au
-  boléen `false` pour supprimer l'affichage du message flash.
+  boléen ``false`` pour supprimer l'affichage du message flash.
 
 PasswordHasher
 --------------
@@ -154,9 +154,9 @@ FormHelper
 ----------
 
 - L'option ``round`` a été ajoutée à :php:meth:`FormHelper::dateTime()`. Peut
-  être définie à `up` ou `down` pour forcer l'arrondi quelque soit la
+  être définie à ``up`` ou ``down`` pour forcer l'arrondi quelque soit la
   direction. Par défaut à null qui arrondit à la moitié supérieure selon
-  `interval`.
+  ``interval``.
 
 Network
 =======
