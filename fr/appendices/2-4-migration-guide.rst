@@ -214,7 +214,7 @@ L10n
 - ``sme`` est maintenant la locale par défaut pour le Sami comme spécifié par
   ISO 639-3 et ``smi`` son alias. Les dossiers de locale ont été ajustés en
   conséquence (de `/Locale/smi/` en `/Locale/sme/`).
-- ``mkd`` remplace ```mk`` comme locale par défaut pour le Macedonien comme
+- ``mkd`` remplace ``mk`` comme locale par défaut pour le Macedonien comme
   spécifié par ISO 639-3. Les dossiers de locale ont aussi été ajustés.
 - Le code de Catalog ``in`` a été supprimé et remplacé par ``id`` (Indonesian),
   ``e`` a été supprimé et remplacé par ``el`` (Greek),
@@ -234,7 +234,7 @@ Logging
   configuration. Donc pour le moteur de FileLog; il suffit maintenant de
   définir ``'engine' => 'File'``. Cela unifie la façon dont les moteurs sont
   nommés dans la configuration (regardez les moteurs de Cache par exemple).
-  Note: Si vous avez un moteur de Log de type ```DatabaseLogger`` qui ne
+  Note: Si vous avez un moteur de Log de type ``DatabaseLogger`` qui ne
   suit pas les conventions, utilisez un suffix ``Log`` pour votre nom de
   classe, vous devez ajuster votre nom de classe en ``DatabaseLog``.
   Vous devez aussi éviter les noms de classe comme ``SomeLogLog`` ce qui inclut
@@ -269,7 +269,7 @@ Utility
 General
 -------
 
-- :php:func:`pr` ne sort plus le HTML lors du lancement en mode cli.
+- :php:func:`pr()` ne sort plus le HTML lors du lancement en mode cli.
 
 Sanitize
 --------
