@@ -399,7 +399,7 @@ are a few more tree-orientated permutations at your disposal.
 
     This method will return data similar to
     :ref:`model-find-list` but with a nested prefix that is specified
-    in the``spacer`` option to show the structure of your data. Below is
+    in the ``spacer`` option to show the structure of your data. Below is
     an example of what you can expect this method to return::
 
       $treelist = $this->Category->generateTreeList();
