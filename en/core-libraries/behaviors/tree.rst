@@ -398,7 +398,7 @@ are a few more tree-orientated permutations at your disposal.
     :param $recursive: The number of levels deep to fetch associated records
 
     This method will return data similar to
-    :ref:`model-find-list`, with an indented prefix
+    :ref:`model-find-list`, with an underscored prefix
     to show the structure of your data. Below is an example of what you
     can expect this method to return::
 
