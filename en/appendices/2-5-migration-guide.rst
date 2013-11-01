@@ -12,6 +12,8 @@ Cache
   shared persistent connections.
 - The ``Memcache`` adapter is now deprecated in favor of ``Memcached``.
 - :php:meth:`Cache::remember()` was added.
+- :php:meth:`Cache::config()` now accepts ``database`` key when used with
+  :php:class:`RedisEngine` in order to use non-default database number.
 
 Console
 =======
