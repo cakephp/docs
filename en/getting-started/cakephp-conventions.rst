@@ -84,7 +84,7 @@ For more information on CakePHP URLs and parameter handling, see
 .. _file-and-classname-conventions:
 
 File and Class Name Conventions
-==============================
+===============================
 
 In general, filenames match the class names, which are
 CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
