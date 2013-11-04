@@ -388,7 +388,7 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -406,8 +406,8 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
 もし ``$id`` パラメータが渡されてないか、ポストが存在しない場合、
 ``NotFoundException`` を送出してCakePHPのErrorHandlerに処理を委ねます。
 
-次に、リクエストがPOSTであるかをチェックします。
-もしリクエストがPOSTなら、POSTデータでレコードを更新したり、バリデーションエラーを表示したりします。
+次に、リクエストがPOSTかPUTであるかをチェックします。
+もしリクエストがPOSTかPUTなら、POSTデータでレコードを更新したり、バリデーションエラーを表示したりします。
 
 もし ``$this->request->data`` が空っぽだったら、取得していたポストレコードをそのままセットしておきます。
 
