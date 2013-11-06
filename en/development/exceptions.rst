@@ -241,7 +241,7 @@ in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception`
 itself, or :php:exc:`CakeException`. Application exceptions that extend
 Exception or the SPL exceptions will be treated as 500 error in production mode.
 :php:exc:`CakeException` is special in that all :php:exc:`CakeException` objects
-are coerced into into either 500 or 404 errors depending on the code they use.
+are coerced into either 500 or 404 errors depending on the code they use.
 When in development mode :php:exc:`CakeException` objects simply need a new template
 that matches the class name in order to provide useful information. If your
 application contained the following exception::
