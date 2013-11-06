@@ -55,7 +55,7 @@ releases are available at
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.
-These can be accessed from github by cloning the 
+These can be accessed from GitHub by cloning the 
 `GitHub`_ repository::
 
     git clone git://github.com/cakephp/cakephp.git
