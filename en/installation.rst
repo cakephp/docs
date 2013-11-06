@@ -34,7 +34,7 @@ License
 CakePHP is licensed under the MIT license. This means that you are free to
 modify, distribute and republish the source code on the condition that the
 copyright notices are left intact. You are also free to incorporate CakePHP
-into any Commercial or closed source application.
+into any commercial or closed source application.
 
 Downloading CakePHP
 ===================
@@ -48,15 +48,15 @@ website `http://cakephp.org <http://cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on
-`Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
+`GitHub <http://github.com/cakephp/cakephp>`_. GitHub houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
-`Github tags <https://github.com/cakephp/cakephp/tags>`_.
+`GitHub tags <https://github.com/cakephp/cakephp/tags>`_.
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.
 These can be accessed from github by cloning the 
-`Github`_ repository::
+`GitHub`_ repository::
 
     git clone git://github.com/cakephp/cakephp.git
 
@@ -116,7 +116,7 @@ If your web server is configured correctly, you should now find
 your CakePHP application accessible at
 http://www.example.com/cake\_2\_0/.
 
-Using one CakePHP checkout for multiple applications
+Using one CakePHP Checkout for multiple Applications
 ----------------------------------------------------
 
 If you are developing a number of applications, it often makes sense to have
