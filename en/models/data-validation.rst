@@ -329,7 +329,7 @@ fails::
         )
     );
 
-When specifying validation rules in this array form its possible to avoid
+When specifying validation rules in this array form it's possible to avoid
 providing the ``message`` key. Consider this example::
 
     public $validate = array(
