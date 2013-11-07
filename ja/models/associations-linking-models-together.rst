@@ -1024,7 +1024,7 @@ books\_tagsテーブルを使うように定義してみます。 ::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.books_id'
+                'Books.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',
