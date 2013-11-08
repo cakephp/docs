@@ -523,7 +523,7 @@ Imageモデルのサンプルでは、次のようになるでしょう。 ::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
+                'counterScope' => array('ImageComment.active' => 1) // "ImageComment" が active なデータのみカウントします
             )
         );
     }
