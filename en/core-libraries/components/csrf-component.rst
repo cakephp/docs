@@ -31,8 +31,10 @@ The available settings are:
 
  - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
  - ``expiry`` How long the CSRF token should last. Defaults to browser session.
- - ``secure`` Whether or not the cookie will be set with the Secure flag. Defaults to false.
- - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this will also require configuring FormHelper.
+ - ``secure`` Whether or not the cookie will be set with the Secure flag.
+   Defaults to false.
+ - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
+   will also require configuring FormHelper.
 
 When enabled, you can access the current CSRF token on the request object::
 
