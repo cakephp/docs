@@ -9,9 +9,9 @@ controllers and actions into the Acl. However, we all hate doing
 repetitive things like typing in what could be hundreds of actions
 in a large application.
 
-For this purpose exists a very handy plugin available at github, called
+For this purpose exists a very handy plugin available on GitHub, called
 `AclExtras <https://github.com/markstory/acl_extras/>`_ which can
-be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/master>`_.
+be downloaded in `The GitHub Downloads page <https://github.com/markstory/acl_extras/zipball/master>`_.
 We're going to briefly describe how to use it to generate all our ACO's
 
 First grab a copy of the plugin and unzipped or clone it using git into
