@@ -149,7 +149,7 @@ view rendering process. See the :ref:`helper-api` and the
 Creating Helpers
 ================
 
-If a core helper (or one showcased on github or the Bakery)
+If a core helper (or one showcased on GitHub or the Bakery)
 doesn't fit your needs, helpers are easy to create.
 
 Let's say we wanted to create a helper that could be used to output
