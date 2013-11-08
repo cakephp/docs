@@ -523,7 +523,7 @@ Imageモデルのサンプルでは、次のようになるでしょう。 ::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
+                'counterScope' => array('ImageComment.active' => 1) // "ImageComment" が active なデータのみカウントします
             )
         );
     }
@@ -1024,7 +1024,7 @@ books\_tagsテーブルを使うように定義してみます。 ::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.books_id'
+                'Books.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',

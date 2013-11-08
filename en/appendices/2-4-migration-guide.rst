@@ -43,7 +43,7 @@ Constants
   replaced with config variables ``App.imageBaseUrl``, ``App.jsBaseUrl``,
   ``App.cssBaseUrl`` respectively.
 
-- Constants `IMAGES`, `JS`, `CSS` have been deprecated.
+- Constants ``IMAGES``, ``JS``, ``CSS`` have been deprecated.
 
 Object
 ------
@@ -56,11 +56,11 @@ Components
 
 AuthComponent
 -------------
-- AuthComponent now supports proper stateless mode when using `Basic` or `Digest`
+- AuthComponent now supports proper stateless mode when using 'Basic' or 'Digest'
   authenticators. Starting of session can be prevented by setting :php:attr:`AuthComponent::$sessionKey`
-  to false. Also now when using only `Basic` or `Digest` you are no longer
+  to false. Also now when using only 'Basic' or 'Digest' you are no longer
   redirected to login page. For more info check the :php:class:`AuthComponent` page.
-- Property :php:attr:`AuthComponent::$authError` can be set to boolean `false` to suppress flash message from being displayed.
+- Property :php:attr:`AuthComponent::$authError` can be set to boolean ``false`` to suppress flash message from being displayed.
 
 PasswordHasher
 --------------
@@ -135,8 +135,8 @@ PaginatorHelper
 FormHelper
 ----------
 
-- The ``round`` option was added to :php:meth:`FormHelper::dateTime()`. Can be set to `up` or `down`
-  to force rounding in either direction. Defaults to null which rounds half up according to `interval`.
+- The ``round`` option was added to :php:meth:`FormHelper::dateTime()`. Can be set to ``up`` or ``down``
+  to force rounding in either direction. Defaults to null which rounds half up according to ``interval``.
 
 Network
 =======
@@ -184,7 +184,7 @@ L10n
   The locale folders have to be adjusted accordingly (from `/Locale/per/` to `/Locale/fas/`).
 - ``sme`` is now the default locale for Sami as specified by ISO 639-3 and ``smi`` its alias.
   The locale folders have to be adjusted accordingly (from `/Locale/smi/` to `/Locale/sme/`).
-- ``mkd`` replaces ```mk`` as default locale for Macedonian as specified by ISO 639-3.
+- ``mkd`` replaces ``mk`` as default locale for Macedonian as specified by ISO 639-3.
   The corresponding locale folders have to be adjusted, as well.
 - Catalog code ``in`` has been dropped in favor of ``id`` (Indonesian),
   ``e`` has been dropped in favor of ``el`` (Greek),
@@ -201,7 +201,7 @@ Logging
 - Log engines do not need the suffix ``Log`` anymore in their setup configuration. So for the
   FileLog engine it suffices to define ``'engine' => 'File'`` now. This unifies the way engines
   are named in configuration (see Cache engines for example).
-  Note: If you have a Log engine like ```DatabaseLogger`` that does not follow the convention to
+  Note: If you have a Log engine like ``DatabaseLogger`` that does not follow the convention to
   use a suffix ``Log`` for your class name you have to adjust your class name to ``DatabaseLog``.
   You should also avoid class names like ``SomeLogLog`` which include the suffix twice at the end.
 
@@ -230,7 +230,7 @@ Utility
 General
 -------
 
-- :php:func:`pr` no longer outputs HTML when running in cli mode.
+- :php:func:`pr()` no longer outputs HTML when running in cli mode.
 
 Sanitize
 --------

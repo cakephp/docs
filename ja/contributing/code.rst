@@ -24,7 +24,7 @@ CakePHPのパッチの作業に入る前に、環境を整えることをお勧�
 
     もしGitの初心者なら、優秀かつ無料である `ProGit <http://progit.org>`_ のbook(訳注: `日本語版のbook <http://progit.org/book/ja>`_)を読むことを強くお勧めします。
 
-githuからCakePHPのソースコードのクローンを取得してください:
+githubからCakePHPのソースコードのクローンを取得してください:
 
 * `github <http://github.com>`_ のアカウントを持っていないなら、作成しましょう。
 * `CakePHP repository <http://github.com/cakephp/cakephp>`_ を、 **Fork** ボタンをクリックして、Forkしてください。

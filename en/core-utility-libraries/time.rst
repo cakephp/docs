@@ -101,7 +101,7 @@ Formatting
     :rtype: string
 
     Will return a string formatted to the given format using the
-    `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
+    `PHP strftime() formatting options <http://www.php.net/manual/en/function.strftime.php>`_::
 
         // called via TimeHelper
         echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');

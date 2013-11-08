@@ -3,7 +3,7 @@ Tickets
 
 Getting feedback and help from the community in the form of tickets is an
 extremely important part of the CakePHP development process. All of CakePHP's
-tickets are hosted on `Github <https://github.com/cakephp/cakephp/issues>`_.
+tickets are hosted on `GitHub <https://github.com/cakephp/cakephp/issues>`_.
 
 Reporting bugs
 ==============

@@ -445,8 +445,8 @@ CakePHP のクラスをオーバーライドする
 
 フレームワークのほぼすべてのクラスはオーバーライドすることができます。
 例外は :php:class:`App` と :php:class:`Configure` クラスです。
-そのようにオーバーライドを実行したいならばどんな場合であれ、フレームワークの内部構造を真似て app/Lib フォルダにクラスを追加する、ただそれだけです。
-いくつかの例を挙げます
+そのようにオーバーライドを実行したいならばどんな場合であれ、フレームワークの内部構造を真似て ``app/Lib`` フォルダにクラスを追加する、ただそれだけです。
+いくつかの例を挙げます:
 
 ..
     * To override the :php:class:`Dispatcher` class, create ``app/Lib/Routing/Dispatcher.php``
@@ -461,7 +461,7 @@ CakePHP のクラスをオーバーライドする
     When you load the replaced files, the app/Lib files will be loaded instead of
     the built-in core classes.
 
-置き換えたファイルをロードすると、 app/Lib のファイルが組み込みのコアクラスの代わりにロードされます。
+置き換えたファイルをロードすると、 ``app/Lib`` のファイルが組み込みのコアクラスの代わりにロードされます。
 
 .. Loading Vendor Files
 

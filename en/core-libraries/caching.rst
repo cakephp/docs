@@ -283,7 +283,7 @@ remove all entries associated to the ``post`` group::
 
     // Model/Post.php
 
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
         }
@@ -300,7 +300,7 @@ group and configurations, i.e.: having the same group::
      * A variation of previous example that clears all Cache configurations
      * having the same group
      */
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             $configs = Cache::groupConfigs('post');
             foreach ($configs['post'] as $config) {

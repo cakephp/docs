@@ -2,7 +2,7 @@ Code
 ####
 
 Patches and pull requests are a great way to contribute code back to CakePHP.
-Pull requests can be created in github, and are prefered over patch files in
+Pull requests can be created in GitHub, and are prefered over patch files in
 ticket comments.
 
 Initial setup
@@ -25,9 +25,9 @@ Set up your user information with your name/handle and working email address::
     If you are new to Git, we highly recommend you to read the excellent and free 
     `ProGit <http://progit.org>`_ book.
 
-Get a clone of the CakePHP source code from github:
+Get a clone of the CakePHP source code from GitHub:
 
-* If you don't have a `github <http://github.com>`_ account, create one.
+* If you don't have a `GitHub <http://github.com>`_ account, create one.
 * Fork the `CakePHP repository <http://github.com/cakephp/cakephp>`_ by clicking
   the **Fork** button.
 
@@ -102,9 +102,9 @@ fork::
 
     git push origin <branch-name>
 
-Once your branch is on github, you can discuss it on the
+Once your branch is on GitHub, you can discuss it on the
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
-submit a pull request on github. 
+submit a pull request on GitHub. 
 
 Choosing where your changes will be merged into
 -----------------------------------------------
