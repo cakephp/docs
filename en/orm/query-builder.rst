@@ -8,19 +8,41 @@ Query builder
 Selecting data
 ==============
 
+* Selecting specific fields
+* Ordering
+* Limit and offset
+* Using distinct
+* Grouping and having
+* Choosing the entity class to hydrate
 
-Loading associations
-====================
+Aggregates - Group and having
+-----------------------------
 
-Adding Joins
-------------
-
+* Applying group and having.
+* Disabling hydration.
 
 Advanced conditions
 ===================
 
-Aggregates - Group and having
------------------------------
+* Using methods to build comparisons.
+* Using expression objects.
+
+Raw expressions
+---------------
+
+
+Loading associations
+====================
+
+* Using contain()
+* Using 'matching'
+* Choosing eager loading strategy.
+
+Adding Joins
+------------
+
+* Using join()
+
 
 Inserting data
 ==============
@@ -32,12 +54,16 @@ Deleting data
 More complex queries
 ====================
 
-Raw expressions
----------------
-
 Unions
 ------
 
 Subqueries
 ----------
+
+
+Modifying results with Map/Reduce
+==================================
+
+* Creating aggregate fields.
+* Replacing afterFind
 
