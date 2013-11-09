@@ -38,7 +38,7 @@ The available settings are:
 
 When enabled, you can access the current CSRF token on the request object::
 
-    $token = $this->request->params['_csrfToken'];
+    $token = $this->request->param('_csrfToken');
 
 Integration with FormHelper
 ===========================
