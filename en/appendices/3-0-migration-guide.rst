@@ -354,6 +354,9 @@ SecurityComponent
   ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
   Use the :php:meth:`Cake\\Network\\Request::onlyAllow()`instead.
 - ``SecurityComponent::$disabledFields()`` has been removed, use ```SecurityComponent::$unlockedFields()``.
+- The CSRF related features in SecurityComponent have been extracted and moved
+  into a separate CsrfComponent. This allows you more easily use CSRF protection
+  without having to use form tampering prevention.
 
 Model
 =====
