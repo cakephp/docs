@@ -1,6 +1,10 @@
 DataSources
 ###########
 
+.. todo::
+
+    Remove/update this.
+
 DataSources are the link between models and the source of data that
 models represent. In many cases, the data is retrieved from a
 relational database such as MySQL, PostgreSQL or MSSQL. CakePHP is

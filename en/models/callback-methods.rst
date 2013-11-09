@@ -1,6 +1,10 @@
 Callback Methods
 ################
 
+.. todo::
+
+    Redo this page/section
+
 If you want to sneak in some logic just before or after a CakePHP
 model operation, use model callbacks. These functions can be
 defined in model classes (including your AppModel) class. Be sure
