@@ -1,6 +1,10 @@
 Associations: Linking Models Together
 #####################################
 
+.. todo::
+
+    Redo this section.
+
 One of the most powerful features of CakePHP is the ability to link
 relational mapping provided by the model. In CakePHP, the links
 between models are handled through associations.

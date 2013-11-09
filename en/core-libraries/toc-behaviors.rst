@@ -11,5 +11,6 @@ on :doc:`/models/behaviors`.
     :maxdepth: 1
 
     /core-libraries/behaviors/acl
+    /core-libraries/behaviors/timestamp
     /core-libraries/behaviors/translate
     /core-libraries/behaviors/tree
