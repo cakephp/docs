@@ -5,12 +5,28 @@ Query builder
 
     Introduction to builder.
 
-Fetching data
+Selecting data
+==============
+
+
+Loading associations
+====================
+
+Adding Joins
+------------
+
+
+Advanced conditions
+===================
+
+Aggregates - Group and having
+-----------------------------
+
+Inserting data
+==============
+
+Deleting data
 =============
-
-
-Fetching associations
-=====================
 
 
 More complex queries
