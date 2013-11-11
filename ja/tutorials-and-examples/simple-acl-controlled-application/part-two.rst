@@ -9,7 +9,7 @@ ACOの作成を自動化するツール
 
 この目的のために、 `AclExtras <https://github.com/markstory/acl_extras/>`_
 という名のとても便利なプラグインが存在し、
-`Githubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/master>`_ からダウンロードすることで、githubで入手することができます。
+`GitHubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/master>`_ からダウンロードすることで、入手することができます。
 全てのACOを生成するための使用方法を簡単に説明しましょう。
 
 まず、プラグインのコピーを入手し、 `app/Plugin/AclExtras`
