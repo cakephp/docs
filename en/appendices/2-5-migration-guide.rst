@@ -42,6 +42,20 @@ CookieComponent
   :php:class:`Security`. You can enable this by calling
   :php:meth:`CookieComponent::type()` with 'aes'.
 
+Event
+=====
+
+EventManager
+------------
+
+Events bound to the global manager are now fired in priority order with events
+bound to a local manager. This can cause listeners to be fired in a different
+order than they were in previous releases. Instead of all global listeners being triggered,
+and then instance listeners being fired afterwards, the two sets of listeners
+are combined into one list of listeners based on their priorities and then fired
+as one set. Global listeners of a given priority are still fired before instance
+listeners.
+
 Network
 =======
 
