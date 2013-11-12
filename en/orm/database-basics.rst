@@ -87,9 +87,9 @@ ssl_cert
     The file path to the SSL certificate file. (Only supported by MySQL).
 ssl_ca
     The file path to the SSL certificate authority. (Only supported by MySQL).
-settings
-    An array of key/value pairs that should be sent to the database server as
-    ``SET`` commands when the connection is created. This option is only
+init
+    An list of queries that should be sent to the database server as
+    when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLserver at this time.
 dsn
     A full PDO compatible data source name.
@@ -102,6 +102,10 @@ quoteIdentifiers
     :ref:`query-builder` having identifiers quoted when creating SQL. It should be
     noted that this decreases performance because each query needs to be traversed
     and manipulated before being executed.
+flags
+    An associative array of PDO constants that should be passed to the
+    underlying PDO instance. See the PDO documentation for the flags supported
+    by the driver you are using.
 
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
