@@ -1,3 +1,5 @@
+.. _query-builder:
+
 Query builder
 #############
 
