@@ -111,8 +111,8 @@ At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
 naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
-example, if you name your database table big\_boxes, your model
-BigBoxes, your controller BigBoxesController, everything just works
+example, if you name your database table big\_boxes, your table
+BigBoxesTable, your controller BigBoxesController, everything just works
 together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
@@ -212,7 +212,7 @@ handles, and generate file handles when reading data.
 Adding custom types
 -------------------
 
-.. php:staticmethod:: type($name, $class)
+.. php:staticmethod:: map($name, $class)
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to
