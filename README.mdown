@@ -1,7 +1,7 @@
 CakePHP Documentation
 =====================
 
-This documentation is planned to replace the existing cookbook.  Hopefully enabling community contributions and enabling multiple format documentation generation.
+This is the official documentation for the CakePHP project. It is available online in HTML, PDF and EPUB formats at http://book.cakephp.org.
 
 Requirements
 ------------
@@ -89,5 +89,4 @@ Making search work locally
 * Start elasticsearch with the default configuration.
 * Populate the search index using `make populate-index`.
 * You should now be able to search the docs using elasticsearch.
-
 
