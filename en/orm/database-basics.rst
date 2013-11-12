@@ -1,6 +1,8 @@
 Database basics
 ###############
 
+.. php:namespace:: Cake\Database
+
 The ORM and database access in CakePHP has been totally rebuilt for 3.0.
 It features a new fluent API for building queries, improved schema
 reflection/generation, a flexible type system and more.
@@ -16,7 +18,6 @@ connection information defined in this file, is fed into
 your application will be using. Sample connection information can be found in
 ``App/Config/app.default.php``. A sample connection configuration would look
 like::
-
 
     'Datasources' => [
         'default' => [
@@ -113,8 +114,19 @@ and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
 
-Getting connections
+Managing connections
 ===================
+
+.. php:class:: ConnectionManager
+
+The ``ConnectionManager`` class acts as a registry to access database connections your
+application has. It provides a place that other objects can get references to
+existing connections.
+
+Accessing connections
+---------------------
+
+.. php:staticmethod:: get($name)
 
 Once configured connections can be fetched using
 :php:meth:`Cake\\Database\\ConnectionManager::get()`. This method will
@@ -127,47 +139,135 @@ existing known connection::
 
 Attempting to load connections that do not exist will throw an exception.
 
+Creating connections at runtime
+-------------------------------
+
+.. php:staticmethod:: create($name, $config)
+
+The ``create`` method allows you to define new connections that are not defined
+in your configuration files at runtime::
+
+    $conn = ConnectionManager::create('my_connection', $config);
+
+See the :ref:`database-configuration` for more information on the configuration
+data used when creating connections.
+
+
 Data types
 ==========
 
-Since not every database vendor includes the same set of data types, or even
-uses similar names for similar data types. CakePHP provides a set of abstracted
+.. php:class:: Type
+
+Since not every database vendor includes the same set of data types, or
+the same names for similar data types. CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
     Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
     will force a CHAR column.
 text
+    Maps to TEXT types
 uuid
-    UUID
+    Maps to the UUID type if a database provides one, otherwise this will
+    generate a CHAR(36) field.
 integer
+    Maps to the INTEGER type provided by the database.
 biginteger
+    Maps to the BIGINT type provided by the database.
 float
+    Maps to either DOUBLE or FLOAT depending on the database. The ``precision``
+    option can be used to define the precision used.
 decimal
+    Maps to the DECIMAL type. Supports the ``length`` and  ``precision``
+    options.
 boolean
+    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
+    booleans.
 binary
+    Maps to the BLOB or BYTEA type provided by the database.
 date
+    Maps to a timezone naive DATE column type.
 datetime
+    Maps to a timezone naive DATETIME column type. In postgres this turns into
+    a TIMESTAMP type.
 timestamp
+    Maps to the TIMESTAMP type.
 time
+    Maps to a TIME type in all databases.
 
+These types are used in both the schema reflection features that CakePHP
+provides, and schema generation features CakePHP uses when using test fixtures.
 
-Each type also provides translation
-functions between PHP and SQL representations. This allows for ``DateTime``
-instances to be accepted/returned when dealing with ``date``, ``datetime``, or
-``timestamp`` column types.
+Each type can also provide translation functions between PHP and SQL
+representations. These methods are invoked based on the type hints provided when
+doing queries. For example a column that is marked as 'datetime' will
+automatically convert input parameters from ``DateTime`` instances into
+timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
+handles, and generate file handles when reading data.
 
-Creating custom types
----------------------
+Adding custom types
+-------------------
+
+.. php:staticmethod:: type($name, $class)
 
 If you need to use vendor specific types that are not built into CakePHP you can
-add additional new types to CakePHP's type system.
+add additional new types to CakePHP's type system. Type classes are expected to
+implement the following methods:
 
-.. todo:: Complete
+* toPHP
+* toDatabase
+* toStatement
 
+An easy way to fulfil the basic interface is to extend
+:php:class:`Cake\Database\Type`. For example if we wanted to add an json type,
+we could make the following type class::
+
+    namespace App\Database\Type;
+
+    use Cake\Database\Driver;
+    use Cake\Database\Type;
+
+    class JsonType extends Type {
+
+        public function toPHP($value, Driver $driver) {
+            if ($value === null) {
+                return null;
+            }
+            return json_decode($value, true);
+        }
+
+        public function toDatabase($value, Driver $driver) {
+            return json_encode($value);
+        }
+
+    }
+
+By default the ``toStatement`` method will treat values as strings which will
+work for our new type. Once we've created our new type, we need to add it into
+the type mapping. During our application bootstrap we should do the following::
+
+    use Cake\Database\Type;
+
+    Type::map('json', 'App\Database\Type\JsonType');
+
+We can then overload the reflected schema data to use our new type, and
+CakePHP's database layer will automatically convert our JSON data when creating
+queries.
+
+Connection classes
+==================
+
+.. php:class:: Connection
+
+Connection classes provide a simple interface to interact with database
+connections in a consistent way. They are intended as a more abstract interface to
+the driver layer and provide features for executing queries, logging queries, and doing
+transactional operations.
 
 Executing queries
-=================
+-----------------
+
+.. php:method:: query($sql)
 
 Once you've gotten a connection object, you'll probably want to issue some
 queries with it. CakePHP's database abstraction layer provides wrapper features
@@ -177,6 +277,8 @@ query you need to run and what kind of results you need back. The most basic
 method is ``query()`` which allows you to run already completed SQL queries::
 
     $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+
+.. php:method:: execute($sql, $params, $types)
 
 The ``query`` method does not allow for additional parameters. If you need
 additional parameters you should use the ``execute()`` method, which allows for
@@ -197,6 +299,8 @@ abstract type names when creating a query::
         ['date', 'integer']
     );
 
+.. php:method:: newQuery()
+
 This allows you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
 to use the :ref:`query-builder`. This apporach allows you to build complex and
@@ -212,7 +316,6 @@ When using the query builder, no SQL will be sent to the database server until
 the ``execute()`` method is called, or the query is iterated. Iterating a query
 will first execute it and then start iterating over the result set::
 
-
     $query = $conn->newQuery();
     $query->select('*')
         ->from('posts')
@@ -222,13 +325,12 @@ will first execute it and then start iterating over the result set::
         // Do something with the row.
     }
 
+Using transactions
+-------------------
+
 Interacting with statements
 ===========================
 
-
-
-Using transactions
-===================
 
 Query logging
 =============
