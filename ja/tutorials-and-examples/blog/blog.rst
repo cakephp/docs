@@ -33,7 +33,7 @@ Cakeのダウンロード
 
 まずは、最新のCakeのコードをダウンロードしてきましょう。
 
-最新のCakeをダウンロードするには、githubにあるCakePHPプロジェクトを見てみましょう:
+最新のCakeをダウンロードするには、GitHubにあるCakePHPプロジェクトを見てみましょう:
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 そして、2.0の最新リリースをダウンロードします。
 

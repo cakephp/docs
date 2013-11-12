@@ -33,7 +33,7 @@ CakePHPのある程度の経験と、MVCの概念についての理解、
 
 まず、最新のCakePHPのコピーを取得しましょう。
 
-最新版をダウンロードするにはGithubのCakePHPプロジェクト(https://github.com/cakephp/cakephp/tags)にアクセスし、安定版のリリースをダウンロードしてください。
+最新版をダウンロードするにはGitHubのCakePHPプロジェクト(https://github.com/cakephp/cakephp/tags)にアクセスし、安定版のリリースをダウンロードしてください。
 このチュートリアルで必要なバージョンは最新の2.0リリースです。
 
 `git <http://git-scm.com/>`_ を使ってレポジトリを複製(*clone*)することもできます。
