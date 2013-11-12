@@ -104,13 +104,13 @@ Formatage
     :rtype: string
 
     Va retourner une chaîne formatée avec le format donné en utilisant les
-    `options de formatage de la fonction PHP strftime() <http://www.php.net/manual/en/function.strftime.php>`_::
+    `options de formatage de la fonction PHP date() <http://php.net/manual/en/function.date.php>`_::
 
         // appel via TimeHelper
-        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
+        echo $this->Time->format('F jS, Y h:i A', '2011-08-22 11:53:00');
         // August 22nd, 2011 11:53 AM
 
-        echo $this->Time->format('%r', '+2 days');
+        echo $this->Time->format('r', '+2 days');
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
         // appel avec CakeTime
