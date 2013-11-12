@@ -619,9 +619,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
                 $this->Article->save($this->request->data);
             }
             if (!empty($short)) {
-                $result = $this->Article->findAll(null, array('id', 'title'));
+                $result = $this->Article->find('all', array('id', 'title'));
             } else {
-                $result = $this->Article->findAll();
+                $result = $this->Article->find('all');
             }
 
             if (isset($this->params['requested'])) {
