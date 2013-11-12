@@ -95,6 +95,12 @@ dsn
 log
     Set to true to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
+quoteIdentifiers
+    Set to true if you are using reserved words or special characters in your
+    table or column names. Enabling this setting will result in queries built using the
+    :ref:`query-builder` having identifiers quoted when creating SQL. It should be
+    noted that this decreases performance because each query needs to be traversed
+    and manipulated before being executed.
 
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
@@ -121,9 +127,43 @@ existing known connection::
 
 Attempting to load connections that do not exist will throw an exception.
 
-Type system
-===========
+Data types
+==========
 
+Since not every database vendor includes the same set of data types, or even
+uses similar names for similar data types. CakePHP provides a set of abstracted
+data types for use with the database layer. The types CakePHP supports are:
+
+string
+    Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
+    will force a CHAR column.
+text
+uuid
+    UUID
+integer
+biginteger
+float
+decimal
+boolean
+binary
+date
+datetime
+timestamp
+time
+
+
+Each type also provides translation
+functions between PHP and SQL representations. This allows for ``DateTime``
+instances to be accepted/returned when dealing with ``date``, ``datetime``, or
+``timestamp`` column types.
+
+Creating custom types
+---------------------
+
+If you need to use vendor specific types that are not built into CakePHP you can
+add additional new types to CakePHP's type system.
+
+.. todo:: Complete
 
 
 Executing queries
