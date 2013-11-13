@@ -481,9 +481,46 @@ same as the ones provided by PDO::
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
 
-
 Query logging
 =============
+
+Query logging can be enabled when configuring your connection by setting the
+``log`` option to true. You can also toggle query logging at runtime, using
+``logQueries``::
+
+    // Turn query logging on.
+    $conn->logQueries(true);
+
+    // Turn query logging off
+    $conn->logQueries(false);
+
+When query logging is enabled, queries will be logged to
+:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+You will need to have a logger configured to capture this level & scope. Logging
+to ``stderr`` can be useful when working on unit tests, and logging to
+files/syslog can be useful when working with webrequests::
+
+    use Cake\Log\Log;
+
+    // Console logging
+    Log::config('queries', [
+        'clasName' => 'Console',
+        'stream' => 'php://stderr',
+        'scopes' => ['queriesLog']
+    ]);
+
+    // File logging
+    Log::config('queries', [
+        'clasName' => 'File',
+        'file' => 'queries.log',
+        'scopes' => ['queriesLog']
+    ]);
+
+.. note::
+
+    Query logging is only intended for debugging/development uses. You should
+    never leave query logging on in production as it will negatively impact the
+    performance of your application.
 
 Identifier quoting
 ==================
