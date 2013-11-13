@@ -112,6 +112,21 @@ request body data will automatically be parsed and set to ``$this->data`` for
 ``PUT`` and ``DELETE`` requests. If you are accepting JSON or XML data, see
 below for how you can access those request bodies.
 
+Accessing / setting environment variables (from $_SERVER and $_ENV)
+==========================
+
+.. versionadded:: 3.0
+
+:php:meth:`Cake\\Network\\Request::env()` is a wrapper for ``env()`` global function and
+acts as a getter/setter for enviroment variables without having to modify globals
+``$_SERVER`` and ``$_ENV``.
+
+    //Get a value
+    $value = $this->request->env('HTTP_HOST');
+
+    //Set a value. Generally helpful in testing.
+    $this->request->env('REQUEST_METHOD', 'POST');
+
 Accessing XML or JSON data
 ==========================
 
@@ -242,6 +257,10 @@ CakeRequest API
 
     CakeRequest encapsulates request parameter handling, and introspection.
 
+.. php:method:: env($key, $value = null)
+
+    Getter / setter for environment variables.
+
 .. php:method:: domain($tldLength = 1)
 
     Returns the domain name your application is running on.
@@ -288,7 +307,7 @@ CakeRequest API
     decoding function. Useful when interacting with XML or JSON
     request body content. Additional parameters for the decoding function
     can be passed as arguments to input()::
-    
+
         $this->request->input('json_decode');
 
 .. php:method:: data($name)
@@ -336,7 +355,7 @@ CakeRequest API
 
         $this->request->accepts('application/json');
 
-.. php:staticmethod:: acceptLanguage($language = null)
+.. php:method:: acceptLanguage($language = null)
 
     Get either all the languages accepted by the client,
     or check if a specific language is accepted.
@@ -623,7 +642,7 @@ The ``Etag`` header (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
-To take advantage of this header you have to either call the 
+To take advantage of this header you have to either call the
 :php:meth:`CakeResponse::checkNotModified()` method manually or to have the
 :php:class:`RequestHandlerComponent` included in your controller::
 
@@ -663,7 +682,7 @@ The Vary header
 ---------------
 
 In some cases you might want to serve different contents using the same URL.
-This is often the case if you have a multilingual page or respond with different 
+This is often the case if you have a multilingual page or respond with different
 HTMLs depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');

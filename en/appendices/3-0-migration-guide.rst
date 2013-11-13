@@ -253,6 +253,9 @@ Request
   CakePHP applications behind load balancers.
 * :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
   key, as that prefix has been removed.
+* :php:meth:`Cake\\Network\\Request::env()` was added.
+* :php:meth:`Cake\\Network\\Request::acceptLanguage()` was changed from static method
+  to non-static.
 
 Response
 -------
@@ -513,6 +516,8 @@ Object
 I18n
 ====
 
+- :php:class:`Cake\I18n\I18n`'s constructor now takes a :php:class:`Cake\Network\Request` instance as argument.
+
 - The methods below has been moved:
 
   - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
@@ -520,6 +525,12 @@ I18n
   - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
 - Since having mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
+
+L10n
+====
+
+- :php:class:`Cake\I18n\L10n`'s constructor now takes a :php:class:`Cake\Network\Request` instance as argument.
+
 
 Utility
 =======
