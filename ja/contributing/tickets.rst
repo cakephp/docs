@@ -2,7 +2,7 @@
 ########
 
 チケットの形式でコミュニティからのフィードバックと助けを得ることは、CakePHPの開発プロセスの極めて重要な部分です。
-CakePHPのチケットの全ては `Github <https://github.com/cakephp/cakephp/issues>`_ にホストされています。
+CakePHPのチケットの全ては `GitHub <https://github.com/cakephp/cakephp/issues>`_ にホストされています。
 
 バグの報告
 ==========
