@@ -352,7 +352,9 @@ much simpler::
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
-The transactional method will do the following:
+In addition to basic queries, you can execute more complex queries using either
+the :ref:`query-builder` or :ref:`table-objects`. The transactional method will
+do the following:
 
 - Call ``begin``.
 - Call the provided closure.
@@ -364,6 +366,120 @@ The transactional method will do the following:
 Interacting with statements
 ===========================
 
+When using the lower level database API, you will often encounter statement
+objects. These objects allow you to manipulate the underlying prepared statement
+from the driver. After creating and executing a query object, or using
+``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
+underlying basic statement object and provides a few additional features.
+
+Preparing a statement
+---------------------
+
+You can create an statement object using ``execute()``, or ``prepare()``. The
+``execute()`` method returns a statement with all the values bound to it. While
+``prepare()`` returns an incomplete statement::
+
+    // Statements from execute will have values bound to them already.
+    $stmt = $conn->execute(
+        'SELECT * FROM articles WHERE published = ?',
+        [true]
+    );
+
+    // Statements from prepare will be incomplete.
+    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+
+Once you've prepared a statement you can bind additional data and execute it.
+
+Binding values
+--------------
+
+Once you've created a prepared statement, you may need to bind additional data.
+You can bind multiple values at once using the ``bind`` method, or bind
+individual elements using ``bindValue``::
+
+    $stmt = $conn->prepare(
+        'SELECT * FROM articles WHERE published = ? AND created > ?'
+    );
+
+    // Bind multiple values
+    $stmt->bind(
+        [true, new DateTime('2013-01-01')],
+        ['boolean', 'date']
+    );
+
+    // Bind a single value
+    $stmt->bindValue(0, true, 'boolean');
+    $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+
+When creating statements you can also used named parameters instead of
+positional ones::
+
+    $stmt = $conn->prepare(
+        'SELECT * FROM articles WHERE published = :published AND created > :created'
+    );
+
+    // Bind multiple values
+    $stmt->bind(
+        ['published' => true, 'created' => new DateTime('2013-01-01')],
+        ['published' => 'boolean', 'created' => 'date']
+    );
+
+    // Bind a single value
+    $stmt->bindValue('published', true, 'boolean');
+    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+
+.. warning::
+
+    You cannot mix positional and named parameters in the same statement.
+
+Executing & fetching rows
+-------------------------
+
+After preparing a statement and binding data to it, you can execute it and fetch
+rows. Statements should be executed using the ``execute()`` method. Once
+executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
+the statement::
+
+    $stmt->execute();
+
+    // Read one row.
+    $row = $stmt->fetch('assoc');
+
+    // Read all rows.
+    $rows = $stmt->fetchAll('assoc');
+
+    // Read rows through iteration.
+    foreach ($stmt as $row) {
+        // Do work
+    }
+
+.. note::
+
+    Reading rows through iteration will fetch rows in 'both' mode. This means
+    you will get both the numerically indexed and associatively indexed results.
+
+
+Getting row counts
+------------------
+
+After executing a statement, you can fetch the number of affected rows::
+
+    $rowCount = count($stmt);
+    $rowCount = $stmt->rowCount();
+
+
+Checking error codes
+--------------------
+
+If your query was not successful, you can check get related error information
+using the ``errorCode()`` and ``errorInfo()`` methods. These method work the
+same as the ones provided by PDO::
+
+    $code = $stmt->errorCode();
+    $info = $stmt->errorInfo();
+
+.. todo::
+    Possibly document CallbackStatement and BufferedStatement
 
 
 Query logging
