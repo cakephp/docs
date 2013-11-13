@@ -332,8 +332,38 @@ will first execute it and then start iterating over the result set::
 Using transactions
 -------------------
 
+The connection objects provide you a few simple ways you do database
+transactions. The most basic way of doing transactions is through the ``begin``,
+``commit`` and ``rollback`` methods, which map to their SQL equivalents::
+
+    $conn->begin();
+    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $conn->commit();
+
+.. php:method:: transactional(callable $callback)
+
+In addition to this interface connection instances also provide the
+``transactional`` method which makes handling the begin/commit/rollback calls
+much simpler::
+
+    $conn->transactional(function($conn) {
+        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    });
+
+The transactional method will do the following:
+
+- Call ``begin``.
+- Call the provided closure.
+- If the closure raises an exception, a rollback will be issued. The original
+  exception will be re-thrown.
+- If the closure returns ``false``, a rollback will be issued.
+- If the closure executes successfully, the transaction will be committed.
+
 Interacting with statements
 ===========================
+
 
 
 Query logging
