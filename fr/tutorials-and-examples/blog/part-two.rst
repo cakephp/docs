@@ -231,7 +231,7 @@ tarder dans le Controller Posts::
     }
 
 L'appel de ``set()`` devrait vous être familier. Notez que nous utilisons
-``read()`` plutôt que ``find('all')`` parce que nous voulons seulement
+``findById()`` plutôt que ``find('all')`` parce que nous voulons seulement
 récupérer les informations d'un seul post.
 
 Notez que notre action "view" prend un paramètre : l'ID du post que nous
