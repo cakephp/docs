@@ -64,9 +64,9 @@ l'objet request::
     $this->request->named;
     $this->request->params['named'];
 
-Il vous fournira un accès aux arguments passés et aux paramètres nommés.
-Il y a de nombreux paramètres importants et utiles que CakePHP utilise en
-interne, il sont aussi trouvables dans les paramètres de la requête:
+Tous ceux-ci vous fourniront un accès aux arguments passés et aux paramètres
+nommés. Il y a de nombreux paramètres importants et utiles que CakePHP utilise
+en interne, il sont aussi trouvables dans les paramètres de la requête:
 
 * ``plugin`` Le plugin gérant la requête, va être nul pour les non-plugins.
 * ``controller`` Le controller gère la requête courante.
