@@ -59,7 +59,7 @@ on the request object as well::
     $this->request['named'];
     $this->request->params['named'];
 
-Will all provide you access to the passed arguments and named parameters. There
+All of these will provide you access to the passed arguments and named parameters. There
 are several important/useful parameters that CakePHP uses internally, these
 are also all found in the request parameters:
 
@@ -670,9 +670,9 @@ To actually get advantage of using this header you have to either call manually
 The Vary header
 ---------------
 
-In some cases you might want to serve different contents using the same URL.
+In some cases you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different 
-HTMLs depending on the browser. Under such circumstances you can use the ``Vary`` header::
+HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');
     $this->response->vary('Accept-Encoding', 'User-Agent');
