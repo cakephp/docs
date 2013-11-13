@@ -1,6 +1,11 @@
 Table objects
 #############
 
+.. _configuring-table-connections:
+
+Configuring connections
+=======================
+
 Building associations
 =====================
 
