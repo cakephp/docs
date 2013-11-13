@@ -44,7 +44,7 @@ exécuter Bake vous présentera les options suivantes ::
     [T]est case
     [Q]uit
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >  
+    >
 
 Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la
 ligne de commande ::
@@ -117,7 +117,7 @@ avec le rajout de fonctionnalités et améliorations.
 -  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans
    vos shells.
 -  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser
-   d'autres connections de bake que le 'default'.
+   d'autres connexions de bake que le 'default'.
    Utilisez le paramètre ``-connection``.
 -  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant
    utiliser ``--plugin NomDuPlugin`` ou ``Plugin.class``.

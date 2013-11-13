@@ -153,7 +153,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingConnectionException
 
-    Une connection à un model n'existe pas.
+    Une connexion à un model n'existe pas.
 
 .. php:exception:: MissingTableException
 

@@ -103,8 +103,8 @@ Datasource
 ----------
 
 - Mysql, Postgres, et SQLserver supportent maintenant un tableau 'settings'
-  dans la définition de connection. Cette paire de clé => valeur émettra des
-  commandes ``SET`` lorque la connection est créée.
+  dans la définition de connexion. Cette paire de clé => valeur émettra des
+  commandes ``SET`` lorque la connexion est créée.
 - Mysql driver supporte maintenant les options SSL.
 
 View
