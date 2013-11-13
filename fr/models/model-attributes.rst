@@ -12,13 +12,13 @@ useDbConfig
 ===========
 
 La propriété ``useDbConfig`` est une chaîne de caractère qui spécifie le nom
-de la connection à la base de données à utiliser pour lier votre classe model
+de la connexion à la base de données à utiliser pour lier votre classe model
 à la table de la base de données liée. Vous pouvez la configurer
 pour n'importe quelles connexions de base de données définies dans votre
 fichier de configuration database. Le fichier de configuration database
 est placé dans /app/Config/database.php.
 
-La propriété ``useDbConfig`` est par défaut la connection à la base de
+La propriété ``useDbConfig`` est par défaut la connexion à la base de
 données 'default'.
 
 Exemple d'utilisation:
@@ -54,7 +54,7 @@ tablePrefix
 ===========
 
 Le nom du préfixe de la table utilisé pour le model. Le préfixe de la table
-est initialement configuré dans le fichier de connection à la base de données
+est initialement configuré dans le fichier de connexion à la base de données
 dans /app/Config/database.php. Par défaut il n'y a pas de prefix. Vous pouvez
 écraser la valeur par défaut en configurant l'attribut ``tablePrefix`` dans le
 model.
@@ -80,7 +80,7 @@ Exemple d'utilisation::
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id est le nom du champ dans la base de données
     }
-    
+
 
 .. _model-displayField:
 
@@ -185,11 +185,11 @@ Exemple d'utilisation::
 
     public $_schema = array(
         'first_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'last_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'email' => array(

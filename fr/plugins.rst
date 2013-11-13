@@ -64,7 +64,7 @@ loadAll qui s'applique à chaque plugin qui n'a pas de configuration spécifique
 
 Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
 partir du plugin Blog::
-    
+
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
@@ -107,7 +107,7 @@ plugin est chargé::
 
 
     function aCallableFunction($pluginName, $config) {
-        
+
     }
 
     CakePlugin::loadAll(array(
@@ -152,7 +152,7 @@ de répertoire basique. Cela devrait ressembler à ceci::
                 /View
                     /Helper
                     /Layouts
-                    
+
 Notez que le nom du dossier du plugin, '**ContactManager**'. Il est important
 que ce dossier ait le même nom que le plugin.
 
@@ -239,7 +239,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     ContactManager. Contact sera le model par défaut pour ce controller,
     cependant, il est inclu pour démontrer comment faire préceder proprement
     le nom du plugin.
-   
+
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez
 /contact_manager/contacts. Vous devriez obtenir une erreur "Missing Model"
 parce que nous n'avons pas un model Contact déjà défini.
@@ -346,7 +346,7 @@ Mais garder à l'esprit que la gestion des assets statiques, comme les images,
 le Javascript et les fichiers CSS des plugins à travers le Dispatcher est
 incroyablement inefficace. Il est grandement recommandé de les symlinker pour
 la production.
-Par exemple comme ceci:: 
+Par exemple comme ceci::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
@@ -392,7 +392,7 @@ du component. Par exemple::
     // Component défini dans le plugin 'ContactManager'
     class ExampleComponent extends Component {
     }
-    
+
     // dans vos controllers:
     public $components = array('ContactManager.Exemple');
 
@@ -403,7 +403,7 @@ La même technique s'applique aux Helpers et aux Behaviors.
     À la création de Helpers, vous verrez que AppHelper n'est pas
     automatiquement disponible. Vous pouvez déclarer les ressources dont vous
     avez besoin avec les uses::
-    
+
         // Déclarez le use de AppHelper pour le Helper de votre Plugin
         App::uses('AppHelper', 'View/Helper');
 
@@ -455,4 +455,4 @@ applications CakePHP:
 
 .. meta::
     :title lang=fr: Plugins
-    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connection base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications
+    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connexion base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications

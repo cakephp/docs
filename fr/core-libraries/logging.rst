@@ -39,7 +39,7 @@ pourrait ressembler à ceci::
         'model' => 'LogEntry',
         // ...
     ));
-    
+
     // pour un plugin appelé LoggingPack
     CakeLog::config('otherFile', array(
         'engine' => 'LoggingPack.Database',
@@ -209,7 +209,7 @@ comprend les clés suivantes:
   ``error - Web Server 1 - An error occurred in this request`` après avoir
   remplacé les placeholders.
 * `prefix`: Une chaine qui va être préfixée à tous les messages de log.
-* `flag`: Un drapeau entier utilisé pour l'ouverture de la connection à
+* `flag`: Un drapeau entier utilisé pour l'ouverture de la connexion à
   logger, par défaut `LOG_ODELAY` sera utilisée. Regardez la documentation
   de `openlog` pour plus d'options.
 * `facility`: Le slot de journalisation à utiliser dans syslog. Par défaut
