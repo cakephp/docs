@@ -522,6 +522,28 @@ files/syslog can be useful when working with webrequests::
     never leave query logging on in production as it will negatively impact the
     performance of your application.
 
+.. _identifier-quoting:
+
 Identifier quoting
 ==================
+
+By default CakePHP does **not** quote identifiers in generated SQL queries. The
+reason for this is identifier quoting has a few drawbacks:
+
+* Performance overhead - Quoting identifiers is much slower and complex than not doing it.
+* Not necessary in most cases - In non-legacy databases that follow CakePHP's
+  conventions there is no reason to quote identifiers.
+
+If you are using a legacy schema that requires identifier quoting you can enable
+it using the ``quoteIdentifiers`` setting in your
+:ref:`database-configuration`. You can also enable this feature at runtime::
+
+    $conn->quoteIdentifiers(true);
+
+When enabled, identifier quoting will cause additional query traversal that
+converts all identifiers into ``IdentifierExpression`` objects.
+
+.. note::
+
+    SQL snippets contained in QueryExpression objects will not be modified.
 
