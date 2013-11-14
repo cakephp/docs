@@ -28,7 +28,6 @@ project as a reference point when updating your application.
 CakePHP should be installed with composer
 =========================================
 
-
 Since CakePHP can no longer easily be installed via PEAR, or in a shared
 directory, those options are no longer supported.  Instead you should use
 `composer <http://getcomposer.org>`_ to install CakePHP into your application.
@@ -67,6 +66,15 @@ the section on :ref:`additional-class-paths` for more information.
 Two new configure variables provide the path configuration for plugins, and
 views. You can add multiple paths to ``App.paths.views`` and
 ``App.paths.plugins`` to configure multiple paths for plugins & view files.
+
+New ORM
+=======
+
+CakePHP 3.0 features a new ORM that has been re-built from the ground up. This
+represents are large break in backwards compatibility, and will require
+extensive changes in any application that is being upgraded. See the new
+:doc:`/orm` documentation for information on how to use the new ORM.
+
 
 Basics
 ======
