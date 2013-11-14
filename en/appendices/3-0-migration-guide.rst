@@ -262,6 +262,14 @@ Response
   doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
   which was a common annoyance when receiving jquery's xhr requests.
 
+Network\Session
+===============
+
+* :php:class:`Cake\\Network\\Session` and related session classes have been
+  moved under the ``Cake\Network`` namespace.
+
+* ``SessionHandlerInterface`` has been removed in favor of the one provided by
+  PHP itself.
 
 Network\Http
 ============
