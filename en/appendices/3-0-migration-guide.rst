@@ -423,7 +423,7 @@ View
 ====
 
 View folders renamed
--------------------------
+--------------------
 
 The following View folders have been renamed to avoid naming collisions with controller names:
 
@@ -507,6 +507,12 @@ Instead of the various options in each method, you should use the templates
 feature. See the :ref:`paginator-templates` documentation for
 information on how to use templates.
 
+TimeHelper
+----------
+
+- ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were 
+  removed. These were magic methods for deprecated attributes.
+
 Core
 =====
 
@@ -583,3 +589,9 @@ Security
   to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
   version of CakePHP 2.x before migrating.
 
+Time
+----
+
+- ``CakeTime`` was renamed to :php:class:`Cake\\Utility\\Time`.
+- ``Time::__set()`` and - ``Time::__get()`` were removed. These were
+  magic setter/getter methods for backwards compatibility.
