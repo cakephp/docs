@@ -2,7 +2,7 @@ Annexes
 #######
 
 Les annexes contiennent des informations sur les nouvelles fonctionnalités
-de la version 2.0 ainsi qu'un guide de migration de la version 1.3 vers 2.0.
+de la version 2.x ainsi qu'un guide de migration de la version 1.3 vers 2.0.
 
 2.4 Guide de Migration
 ======================
