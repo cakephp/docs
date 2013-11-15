@@ -177,21 +177,21 @@ Routing
 Named Parameters
 -----------------
 
-Named parameters are removed in 3.0. Named parameters were added in 1.2.0 as
+Named parameters were removed in 3.0. Named parameters were added in 1.2.0 as
 a 'pretty' version of query string parameters.  While the visual benefit is
 arguable, the problems named parameters created are not.
 
 Named parameters required special handling in CakePHP as well as any PHP or
-javascript library that needed to interact with them, as named parameters are
+JavaScript library that needed to interact with them, as named parameters are
 not implemented or understood by any library *except* CakePHP.  The additional
 complexity and code required to support named parameters did not justify their
 existance, and they have been removed.  In their place you should use standard
 query string parameters or passed arguments.  By default ``Router`` will treat
 any additional parameters to ``Router::url()`` as querystring arguments.
 
-Since many applications will still need to parse incoming URL's containing named
+Since many applications will still need to parse incoming URLs containing named
 parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
-been added to allow backwards compatiblity with existing URL's.
+been added to allow backwards compatiblity with existing URLs.
 
 
 RequestActionTrait
@@ -210,7 +210,7 @@ Router
 * The ``full_base`` option has been replaced with the ``_full`` option.
 * The ``ext`` option has been replaced with the ``_ext`` option.
 * `_scheme`, `_port`, `_host`, `_base`, `_full`, `_ext` options added.
-* String urls are no longer modified by adding the plugin/controller/prefix names.
+* String URLs are no longer modified by adding the plugin/controller/prefix names.
 * The default fallback route handling was removed.  If no routes
   match a parameter set `/` will be returned.
 * Route classes are responsible for *all* url generation including
@@ -234,7 +234,7 @@ Filter\AssetFilter
 
 * Plugin & theme assets handled by the AssetFilter are no longer read via
   ``include`` instead they are treated as plain text files.  This fixes a number
-  of issues with javascript libraries like TinyMCE and environments with
+  of issues with JavaScript libraries like TinyMCE and environments with
   short_tags enabled.
 * Support for the ``Asset.filter`` configuration and hooks were removed. This
   feature can easily be replaced with a plugin or dispatcher filter.
@@ -260,7 +260,7 @@ Response
 * The mapping of mimetype ``text/plain`` to extension ``csv`` has been removed.
   As a consequence :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
   doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
-  which was a common annoyance when receiving jquery's xhr requests.
+  which was a common annoyance when receiving a jQuery XHR request.
 
 Network\Session
 ===============
@@ -277,7 +277,7 @@ Network\Http
 * ``HttpSocket`` is now :php:class:`Cake\\Network\\Http\\Client`.
 * Http\Client has been re-written from the ground up. It has a simpler/easy to
   use API, support for new authentication systems like Oauth, and file uploads.
-  It uses PHP's stream API's so there is no requirement for curl. See the
+  It uses PHP's stream APIs so there is no requirement for curl. See the
   :doc:`/core-utility-libraries/httpclient` documentation for more information.
 
 Network\Email
