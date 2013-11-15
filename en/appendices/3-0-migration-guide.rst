@@ -52,6 +52,7 @@ The following deprecated constants have been removed::
 * ``IMAGES_URL``
 * ``JS_URL``
 * ``CSS_URL``
+* ``DEFAULT_LANGUAGE``
 
 Configuration
 =============
