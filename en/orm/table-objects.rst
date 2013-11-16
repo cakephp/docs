@@ -32,28 +32,38 @@ relational databases. The most basic table class would look like::
 Note that we did not tell the ORM which table to use for our class. By
 convention table objects will use a table that matches the lower cased and
 underscored version of the class name. In the above example the ``articles``
-table will be used. You can specify the table to use with the ``_table``
-property::
+table will be used. You can specify the table to using the ``table()``
+method::
 
     namespace App\Model\Repository;
 
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        protected $_table = 'my_articles';
+
+        public function intitalize(array $config) {
+            $this->table('my_table');
+        }
+
     }
 
 No inflection conventions will be applied when specifying a table. By convention
 the ORM also expects each table to have a primary key with the name of ``id``.
-If you need to modify this you should define the ``_primaryKey`` property::
+If you need to modify this you can use the ``primaryKey()`` method::
 
     namespace App\Model\Repository;
 
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        protected $_primaryKey = 'my_id';
+        public function initialize(array $config) {
+            $this->primaryKey('my_id');
+        }
     }
+
+As seen in the examples above Table objects have an ``initialize()`` method
+which is called at the end of the constructor. It is recommended that you use
+this method to do initialization logic instead of overriding the constructor.
 
 Getting instances of a table class
 ----------------------------------
@@ -67,7 +77,8 @@ and do this using the ``TableRegistry`` class::
 
 The TableRegistry class provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed Table instances making
-it easier to build relations and configure the ORM.
+it easier to build relations and configure the ORM. See
+:ref:`table-registry-usage` for more information.
 
 Fetching all entities
 ---------------------
@@ -156,3 +167,54 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 .. note::
 
     The ``defaultConnectionName`` method **must** be static.
+
+.. _table-registry-usage:
+
+Using the TableRegistry
+=======================
+
+.. php:class:: TableRegistry
+
+As we've seen earlier, the TableRegistry class provides an easy to use
+factory/registry for accessing your applications table instances. It provides a
+few other useful features as well.
+
+Configuring table objects
+-------------------------
+
+When loading tables from the registry you can customize their dependencies, or
+use mock objects by providing an ``$options`` array::
+
+    $articles = TableRegistry::get('Articles', [
+        'className' => 'App\Custom\ArticlesTable',
+        'table' => 'my_articles',
+        'connection' => $connection,
+        'schema' => $schemaObject,
+        'entityClass' => 'Custom\EntityClass',
+        'eventManager' => $eventManager,
+        'behaviors' => $behaviorRegistry
+    ]);
+
+If your table also does additional configuration in its ``initialize()`` method,
+those values will overwrite the ones provided to the registry.
+
+You can also pre-configure the registry using the ``config()`` method.
+Configuration data is stored *per alias*, and can be overridden by an object's
+``initialize()`` method::
+
+    TableRegistry::config('Users', ['table' => 'my_users']);
+
+.. note::
+
+    You can only configure a table before, or during the **first** time you
+    create that alias.  Doing it after the registry is populated will have no
+    effect.
+
+Flushing the registry
+---------------------
+
+During test cases you may want to flush the registry. Doing so is often useful
+when you are using mock objects, or modifing a table's dependencies::
+
+    TableRegistry::clear();
+
