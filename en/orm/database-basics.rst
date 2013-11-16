@@ -412,7 +412,7 @@ individual elements using ``bindValue``::
     $stmt->bindValue(0, true, 'boolean');
     $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
 
-When creating statements you can also used named parameters instead of
+When creating statements you can also use named parameters instead of
 positional ones::
 
     $stmt = $conn->prepare(
@@ -472,9 +472,9 @@ After executing a statement, you can fetch the number of affected rows::
 Checking error codes
 --------------------
 
-If your query was not successful, you can check get related error information
-using the ``errorCode()`` and ``errorInfo()`` methods. These method work the
-same as the ones provided by PDO::
+If your query was not successful, you can get related error information
+using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
+same way as the ones provided by PDO::
 
     $code = $stmt->errorCode();
     $info = $stmt->errorInfo();
@@ -499,7 +499,7 @@ When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
 You will need to have a logger configured to capture this level & scope. Logging
 to ``stderr`` can be useful when working on unit tests, and logging to
-files/syslog can be useful when working with webrequests::
+files/syslog can be useful when working with web requests::
 
     use Cake\Log\Log;
 

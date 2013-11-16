@@ -7,7 +7,7 @@ Table objects
 
 .. php:class:: Table
 
-Table objects provide a access to the collection of entities stored in
+Table objects provide access to the collection of entities stored in
 a specific table. Each table in your application should have an associated Table
 class which is used to interact with a given table. If you do not need to
 customize the behavior of a given table CakePHP will generate a Table instance for you to use.
@@ -69,7 +69,7 @@ Getting instances of a table class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
-and do this using the ``TableRegistry`` class::
+and do this by using the ``TableRegistry`` class::
 
     use Cake\ORM\TableRegistry;
 
@@ -84,8 +84,8 @@ Fetching all entities
 ---------------------
 
 The best way to fetch entities from a table object is to use the ``find`` method. It
-allows you to access the various built-in finder methods and provide your own
-:ref:`custom-find-methods`::
+allows you to access the various built-in finder methods and your own custom
+ones. See :ref:`custom-find-methods` for more information::
 
     $query = $articles->find('all');
     foreach ($query as $row) {
@@ -160,7 +160,7 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
     class ArticlesTable extends Table {
         public static function defaultConnectionName() {
-            return 'second';
+            return 'slavedb';
         }
     }
 
@@ -195,8 +195,10 @@ use mock objects by providing an ``$options`` array::
         'behaviors' => $behaviorRegistry
     ]);
 
-If your table also does additional configuration in its ``initialize()`` method,
-those values will overwrite the ones provided to the registry.
+.. note::
+
+    If your table also does additional configuration in its ``initialize()`` method,
+    those values will overwrite the ones provided to the registry.
 
 You can also pre-configure the registry using the ``config()`` method.
 Configuration data is stored *per alias*, and can be overridden by an object's
@@ -206,8 +208,8 @@ Configuration data is stored *per alias*, and can be overridden by an object's
 
 .. note::
 
-    You can only configure a table before, or during the **first** time you
-    create that alias.  Doing it after the registry is populated will have no
+    You can only configure a table before or during the **first** time you
+    access that alias. Doing it after the registry is populated will have no
     effect.
 
 Flushing the registry
