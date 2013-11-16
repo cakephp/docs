@@ -71,7 +71,7 @@ New ORM
 =======
 
 CakePHP 3.0 features a new ORM that has been re-built from the ground up. The
-new ORM is a significantly different and incompatible with the previous one.
+new ORM is significantly different and incompatible with the previous one.
 Upgrading to the new ORM will require extensive changes in any application that
 is being upgraded. See the new :doc:`/orm` documentation for information on how
 to use the new ORM.

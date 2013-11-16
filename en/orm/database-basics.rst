@@ -375,8 +375,8 @@ underlying basic statement object and provides a few additional features.
 Preparing a statement
 ---------------------
 
-You can create an statement object using ``execute()``, or ``prepare()``. The
-``execute()`` method returns a statement with all the values bound to it. While
+You can create a statement object using ``execute()``, or ``prepare()``. The
+``execute()`` method returns a statement with the provided values bound to it. While
 ``prepare()`` returns an incomplete statement::
 
     // Statements from execute will have values bound to them already.
@@ -385,7 +385,8 @@ You can create an statement object using ``execute()``, or ``prepare()``. The
         [true]
     );
 
-    // Statements from prepare will be incomplete.
+    // Statements from prepare will be parameters for placeholders.
+    // You need to bind parameters before attempting to execute it.
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
 Once you've prepared a statement you can bind additional data and execute it.
