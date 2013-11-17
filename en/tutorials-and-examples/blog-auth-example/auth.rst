@@ -211,23 +211,24 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
-    App::uses('AuthComponent', 'Controller/Component');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
     class User extends AppModel {
 
     // ...
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
     }
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the default hashing
-provided by the AuthComponent class. We're just missing a template view file for
-the login function, here it is:
+So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
+We're just missing a template view file for the login function:
 
 .. code-block:: php
 
