@@ -352,7 +352,9 @@ much simpler::
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
-The transactional method will do the following:
+In addition to basic queries, you can execute more complex queries using either
+the :ref:`query-builder` or :ref:`table-objects`. The transactional method will
+do the following:
 
 - Call ``begin``.
 - Call the provided closure.
@@ -364,11 +366,185 @@ The transactional method will do the following:
 Interacting with statements
 ===========================
 
+When using the lower level database API, you will often encounter statement
+objects. These objects allow you to manipulate the underlying prepared statement
+from the driver. After creating and executing a query object, or using
+``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
+underlying basic statement object and provides a few additional features.
 
+Preparing a statement
+---------------------
+
+You can create a statement object using ``execute()``, or ``prepare()``. The
+``execute()`` method returns a statement with the provided values bound to it. While
+``prepare()`` returns an incomplete statement::
+
+    // Statements from execute will have values bound to them already.
+    $stmt = $conn->execute(
+        'SELECT * FROM articles WHERE published = ?',
+        [true]
+    );
+
+    // Statements from prepare will be parameters for placeholders.
+    // You need to bind parameters before attempting to execute it.
+    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+
+Once you've prepared a statement you can bind additional data and execute it.
+
+Binding values
+--------------
+
+Once you've created a prepared statement, you may need to bind additional data.
+You can bind multiple values at once using the ``bind`` method, or bind
+individual elements using ``bindValue``::
+
+    $stmt = $conn->prepare(
+        'SELECT * FROM articles WHERE published = ? AND created > ?'
+    );
+
+    // Bind multiple values
+    $stmt->bind(
+        [true, new DateTime('2013-01-01')],
+        ['boolean', 'date']
+    );
+
+    // Bind a single value
+    $stmt->bindValue(0, true, 'boolean');
+    $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+
+When creating statements you can also use named parameters instead of
+positional ones::
+
+    $stmt = $conn->prepare(
+        'SELECT * FROM articles WHERE published = :published AND created > :created'
+    );
+
+    // Bind multiple values
+    $stmt->bind(
+        ['published' => true, 'created' => new DateTime('2013-01-01')],
+        ['published' => 'boolean', 'created' => 'date']
+    );
+
+    // Bind a single value
+    $stmt->bindValue('published', true, 'boolean');
+    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+
+.. warning::
+
+    You cannot mix positional and named parameters in the same statement.
+
+Executing & fetching rows
+-------------------------
+
+After preparing a statement and binding data to it, you can execute it and fetch
+rows. Statements should be executed using the ``execute()`` method. Once
+executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
+the statement::
+
+    $stmt->execute();
+
+    // Read one row.
+    $row = $stmt->fetch('assoc');
+
+    // Read all rows.
+    $rows = $stmt->fetchAll('assoc');
+
+    // Read rows through iteration.
+    foreach ($stmt as $row) {
+        // Do work
+    }
+
+.. note::
+
+    Reading rows through iteration will fetch rows in 'both' mode. This means
+    you will get both the numerically indexed and associatively indexed results.
+
+
+Getting row counts
+------------------
+
+After executing a statement, you can fetch the number of affected rows::
+
+    $rowCount = count($stmt);
+    $rowCount = $stmt->rowCount();
+
+
+Checking error codes
+--------------------
+
+If your query was not successful, you can get related error information
+using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
+same way as the ones provided by PDO::
+
+    $code = $stmt->errorCode();
+    $info = $stmt->errorInfo();
+
+.. todo::
+    Possibly document CallbackStatement and BufferedStatement
 
 Query logging
 =============
 
+Query logging can be enabled when configuring your connection by setting the
+``log`` option to true. You can also toggle query logging at runtime, using
+``logQueries``::
+
+    // Turn query logging on.
+    $conn->logQueries(true);
+
+    // Turn query logging off
+    $conn->logQueries(false);
+
+When query logging is enabled, queries will be logged to
+:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+You will need to have a logger configured to capture this level & scope. Logging
+to ``stderr`` can be useful when working on unit tests, and logging to
+files/syslog can be useful when working with web requests::
+
+    use Cake\Log\Log;
+
+    // Console logging
+    Log::config('queries', [
+        'clasName' => 'Console',
+        'stream' => 'php://stderr',
+        'scopes' => ['queriesLog']
+    ]);
+
+    // File logging
+    Log::config('queries', [
+        'clasName' => 'File',
+        'file' => 'queries.log',
+        'scopes' => ['queriesLog']
+    ]);
+
+.. note::
+
+    Query logging is only intended for debugging/development uses. You should
+    never leave query logging on in production as it will negatively impact the
+    performance of your application.
+
+.. _identifier-quoting:
+
 Identifier quoting
 ==================
+
+By default CakePHP does **not** quote identifiers in generated SQL queries. The
+reason for this is identifier quoting has a few drawbacks:
+
+* Performance overhead - Quoting identifiers is much slower and complex than not doing it.
+* Not necessary in most cases - In non-legacy databases that follow CakePHP's
+  conventions there is no reason to quote identifiers.
+
+If you are using a legacy schema that requires identifier quoting you can enable
+it using the ``quoteIdentifiers`` setting in your
+:ref:`database-configuration`. You can also enable this feature at runtime::
+
+    $conn->quoteIdentifiers(true);
+
+When enabled, identifier quoting will cause additional query traversal that
+converts all identifiers into ``IdentifierExpression`` objects.
+
+.. note::
+
+    SQL snippets contained in QueryExpression objects will not be modified.
 
