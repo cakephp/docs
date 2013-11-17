@@ -352,6 +352,9 @@ CookieComponent
 AuthComponent
 -------------
 
+- ``Blowfish`` is now the default password hasher used by authenticate classes.
+  If you want to continue using SHA1 hashing used in 2.x use
+  ``'passwordHasher' => 'Simple'`` in your authenticator configuration.
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
@@ -519,7 +522,7 @@ information on how to use templates.
 TimeHelper
 ----------
 
-- ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were 
+- ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were
   removed. These were magic methods for deprecated attributes.
 
 Core

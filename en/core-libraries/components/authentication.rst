@@ -68,8 +68,8 @@ array::
 
     // Pass settings in
     $this->Auth->authenticate = array(
-        'Basic' => array('userModel' => 'Member'),
-        'Form' => array('userModel' => 'Member')
+        'Basic' => array('userModel' => 'Members'),
+        'Form' => array('userModel' => 'Members')
     );
 
 In the second example you'll notice that we had to declare the
@@ -80,7 +80,7 @@ to every attached object. The all key is also exposed as
 
     // Pass settings in using 'all'
     $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Member'),
+        AuthComponent::ALL => array('userModel' => 'Members'),
         'Basic',
         'Form'
     );
@@ -95,8 +95,7 @@ keys.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``array('User.is_active' => 1)``.
-- ``contain`` Association containment options for when the user record is loaded.
-- ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
+- ``passwordHasher`` Password hasher class. Defaults to ``Blowfish``.
 
 To configure different fields for user in ``$components`` array::
 
@@ -326,18 +325,11 @@ In your controller's beforeFilter(), or component settings::
 Hashing passwords
 -----------------
 
-AuthComponent no longer automatically hashes every password it can find.
-This was removed because it made a number of common tasks like
-validation difficult. You should **never** store plain text passwords,
-and before saving a user record you should always hash the password.
-
-As of 2.4 the generation and checking of password hashes has been delegated to
-password hasher classes. Authenticating objects use a new setting ``passwordHasher``
-which specifies the password hasher class to use. It can be a string specifying class
-name or an array with key ``className`` stating the class name and any extra keys
-will be passed to password hasher constructor as config. The default hasher
-class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
-type set in Security class will be used. You can use specific hash type like this::
+Authenticating objects use a new setting ``passwordHasher`` which specifies the
+password hasher class to use. It can be a string specifying class name or an
+array with key ``className`` stating the class name and any extra keys will be
+passed to password hasher constructor as config. As of 3.0 the default hasher
+class is ``Blowfish``. You can use alternate hashing schemes like this::
 
     public $components = array(
         'Auth' => array(
@@ -355,12 +347,12 @@ type set in Security class will be used. You can use specific hash type like thi
 When creating new user records you can hash a password in the beforeSave
 callback of your model using appropriate password hasher class::
 
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
             if (!$this->id) {
-                $passwordHasher = new SimplePasswordHasher();
+                $passwordHasher = new BlowfishPasswordHasher();
                 $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
             }
             return true;
@@ -369,29 +361,6 @@ callback of your model using appropriate password hasher class::
 
 You don't need to hash passwords before calling ``$this->Auth->login()``.
 The various authentication objects will hash passwords individually.
-
-Using bcrypt for passwords
---------------------------
-
-In CakePHP 2.3 the ``BlowfishAuthenticate`` class was introduced to allow
-using `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ a.k.a Blowfish for hash passwords.
-Bcrypt hashes are much harder to brute force than passwords stored with sha1.
-But ``BlowfishAuthenticate`` has been deprecated in 2.4 and instead ``BlowfishPasswordHasher``
-has been added.
-
-A blowfish password hasher can be used with any authentication class. All you have
-to do with specify ``passwordHasher`` setting for the authenticating object::
-
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Blowfish'
-                )
-            )
-        )
-    );
-
 
 Hashing passwords for digest authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
