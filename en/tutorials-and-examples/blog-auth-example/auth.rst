@@ -218,7 +218,7 @@ and add the following::
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $this->data[$this->alias]['password'] = Security::hash($this->data[$this->alias]['password'], null, true);
         }
         return true;
     }
@@ -226,7 +226,7 @@ and add the following::
     // ...
 
 So, now every time a user is saved, the password is hashed using the default hashing
-provided by the AuthComponent class. We're just missing a template view file for
+provided by the Security utility. We're just missing a template view file for
 the login function, here it is:
 
 .. code-block:: php
