@@ -100,7 +100,70 @@ creating and customizing your entity objects.
 Building associations
 =====================
 
-* Types of associations
+Defining relations between different objects in your application should be
+a natural process. For example, an article may have many comments, and belongs
+to a author. Authors may have many articles, and comments. CakePHP makes
+managing these associations easy. The four association types in CakePHP are:
+hasOne, hasMany, belongsTo, and belongsToMany.
+
+============= ===================== =======================================
+Relationship  Association Type      Example
+============= ===================== =======================================
+one to one    hasOne                A user has one profile.
+------------- --------------------- ---------------------------------------
+one to many   hasMany               A user can have multiple articles.
+------------- --------------------- ---------------------------------------
+many to one   belongsTo             Many articles belong to a user.
+------------- --------------------- ---------------------------------------
+many to many  belongsToMany         Tags belong to many Articles.
+============= ===================== =======================================
+
+Associations are defined during the ``inititalize()`` method of your table
+object. Methods that match the association types allow you to define the
+associations in your application. For example if we wanted to define a belongsTo
+association in our ArticlesTable::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsTo('Authors');
+        }
+
+    }
+
+The simplest form of any association setup takes the table alias you want to
+associate with. By default all of the details of an association will use the
+CakePHP conventions. If you want to customize how your associations are handled
+you can do so with an additional $config argument::
+
+    class ArticlesTable extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsTo('Authors', [
+                'className' => 'Plugin.Authors',
+                'foreignKey' => 'authorid',
+                'property' => 'person'
+            ]);
+        }
+
+    }
+
+HasOne associations
+-------------------
+
+BelongsTo associations
+----------------------
+
+HasMany associations
+--------------------
+
+BelongsToMany associations
+--------------------------
+
 * Configuring the property name
 * Building your own associations.
 * Adding conditions
