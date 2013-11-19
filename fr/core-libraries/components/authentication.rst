@@ -76,7 +76,7 @@ d'authentification en utilisant un tableau::
     // Configuration de base
     $this->Auth->authenticate = array('Form');
 
-    // Passer la configuration 
+    // Passer la configuration
     $this->Auth->authenticate = array(
         'Basic' => array('userModel' => 'Membre'),
         'Form' => array('userModel' => 'Membre')
@@ -96,7 +96,7 @@ La cle ``all`` est aussi utilisée comme cela
         'Form'
     );
 
-Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendront
+Dans l'exemple ci-dessus, à la fois ``Form`` et ``Basic`` prendront
 les paramétrages définis dans la clé "all".
 Tous les paramètres transmis à un objet d'authentification particulier
 remplaceront la clé correspondante dans la clé 'all'.
@@ -132,7 +132,7 @@ Ne mettez pas d'autre clés de configuration de Auth(comme authError,
 loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
 ressemblerait à quelque chose comme.::
-    
+
         // Passage de paramètre dans le tableau $components
         public $components = array(
             'Auth' => array(
@@ -206,7 +206,7 @@ flash est défini.
     d'identifier l'utilisateur en premier et le connectera seulement en cas
     de succès.
 
-Utilisation de l'authentification Digest et Basic pour la connexion    
+Utilisation de l'authentification Digest et Basic pour la connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Puisque les authentifications basic et digest ne nécessitent pas un POST
@@ -264,7 +264,7 @@ Une fois votre objet d'authentification créer, vous pouvez les utiliser
 en les incluant dans le tableau d'authentification AuthComponents::
 
     $this->Auth->authenticate = array(
-        'Openid', // objet d'authentification app 
+        'Openid', // objet d'authentification app
         'AuthBag.Combo', // plugin objet d'identification.
     );
 
@@ -511,7 +511,7 @@ utilisateur que vous voulez pour la 'connexion'::
 
     Soyez certain d'ajouter manuellement le nouveau User id au tableau passé
     à la méthode de login. Sinon vous n'aurez pas l'id utilisateur disponible.
-    
+
 Accéder à l'utilisateur connecté
 --------------------------------
 
@@ -591,7 +591,7 @@ d'autorisation, en utilisant un tableau::
     // paramétrage Basique
     $this->Auth->authorize = array('Controller');
 
-    // passage de paramètre 
+    // passage de paramètre
     $this->Auth->authorize = array(
         'Actions' => array('actionPath' => 'controllers/'),
         'Controller'
@@ -640,7 +640,7 @@ cela::
         }
     }
 
-L'objet Authorize devrait retourner `false ` si l'utilisateur se voit refuser
+L'objet Authorize devrait retourner ``false`` si l'utilisateur se voit refuser
 l'accès, ou si l'objet est incapable de faire un contrôle. Si l'objet est
 capable de vérifier les accès de l'utilisateur, ``true`` devrait être retourné.
 Ça n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut simplement que
@@ -651,7 +651,7 @@ sont communément utilisées.
 Utilisation d'objets Authorize personnalisés
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez 
+Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez
 l'utiliser en l'incluant dans le tableau authorize::
 
     $this->Auth->authorize = array(
@@ -779,8 +779,8 @@ l'utilisation du mapping CRUD. Les résultats mappés sont alors vérifiés dans
 le component Acl comme des permissions spécifiques.
 
 Par exemple, en prenant la requête ``/posts/index``. Le mapping
-par défaut pour `index` est une vérification de la permission de ``read``.
-La vérification d'Acl se ferait alors avec les permissions de ``read``pour le
+par défaut pour ``index`` est une vérification de la permission de ``read``.
+La vérification d'Acl se ferait alors avec les permissions de ``read`` pour le
 controller ``posts``. Ceci vous permet de créer un système de permission
 qui met d'avantage l'accent sur ce qui est en train d'être fait aux ressources,
 plutôt que sur l'action spécifique en cours de visite.
@@ -814,7 +814,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Le nom d'une vue optionnelle d'un élément à rendre quand une requête AJAX
     est faite avec une session expirée invalide.
-    
+
 .. php:attr: allowedActions
 
     Les actions du controller pour qui la validation de l'utilisateur n'est pas
@@ -826,7 +826,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     quand les utilisateurs de connectent. Il y a plusieurs objets
     d'authentification dans le noyau, cf la section
     :ref:`authentication-objects`
-    
+
 .. php:attr:: authError
 
     Erreur à afficher quand les utilisateurs font une tentative d'accès à un
@@ -909,7 +909,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 .. php:method:: constructAuthenticate()
 
     Charge les objets d'authentification configurés.
-    
+
 .. php:method:: constructAuthorize()
 
     Charge les objets d'autorisation configurés.
@@ -924,7 +924,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Définit un message flash. Utilise le component Session, et prend les
     valeurs depuis :php:attr:`AuthComponent::$flash`.
-    
+
 .. php:method:: identify($request, $response)
 
     :param CakeRequest $request: La requête à utiliser.
@@ -934,7 +934,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     Cette méthode est utilisée par le component Auth pour identifier un
     utilisateur en se basant sur les informations contenues dans la requête
     courante.
-   
+
 .. php:method:: initialize($Controller)
 
    Initialise le component Auth pour une utilisation dans le controller.
@@ -945,12 +945,12 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     qu'un utilisateur est configuré ou non. Chaque adaptateur sera vérifié dans
     l'ordre, si chacun d'eux retourne true, alors l'utilisateur sera autorisé
     pour la requête.
-  
+
 .. php:method:: loggedIn()
 
     Retourne true si le client actuel est un utilisateur connecté, ou false
     si il ne l'est pas.
-    
+
 .. php:method:: login($user)
 
     :param array $user: Un tableau de données d'utilisateurs connectés.
@@ -962,7 +962,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     component Auth essaiera d'identifier un utilisateur en utilisant les
     informations de la requête en cours. cf
     :php:meth:`AuthComponent::identify()`.
-   
+
 .. php:method:: logout()
 
     :return: Une chaîne URL où rediriger l'utilisateur déconnecté.
