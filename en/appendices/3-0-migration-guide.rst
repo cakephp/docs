@@ -100,6 +100,12 @@ Cache
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
 
+All :php:class:`Cake\\Cache\\Cache\CacheEngine` methods now honor/are responsible for handling the
+configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
+the duration on write - the duration is taken from the cache engine's runtime config. Calling a
+cache method with an empty key will now throw an `:php:class:`InvalidArgumentException`, instead
+of returning false.
+
 Core
 ====
 
