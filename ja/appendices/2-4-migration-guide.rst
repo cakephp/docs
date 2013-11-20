@@ -48,7 +48,7 @@ Constants
 - ``IMAGES_URL`` 、 ``JS_URL`` 、 ``CSS_URL`` の各定数は非推奨となり、
   ``App.imageBaseUrl`` 、 ``App.jsBaseUrl`` 、 ``App.cssBaseUrl``
   のコンフィグ変数の利用が推奨されます。
-- ``IMAGES`` 、 ``JS`` 、 ``CSS`` は各定数は非推奨となりました。
+- ``IMAGES`` 、 ``JS`` 、 ``CSS`` の各定数は非推奨となりました。
 
 
 Object
@@ -94,7 +94,7 @@ Models
 - :php:meth:`Model::save()` 、 :php:meth:`Model::saveField()` 、 :php:meth:`Model::saveAll()` 、
   :php:meth:`Model::saveAssociated()` 、 :php:meth:`Model::saveMany()` は
   新しく ``counterCache`` オプションを持つようになりました。
-  この値を false にセットすることで特定の保存時にカウンタキャッシュを更新を抑制できます。
+  この値を false にセットすることで特定の保存時にカウンタキャッシュの更新を抑制できます。
 - :php:meth:`Model::clear()` が追加されました。
 
 

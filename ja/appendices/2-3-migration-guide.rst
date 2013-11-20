@@ -153,7 +153,7 @@ Models
 ------
 
 - ``Model::find('list')`` は ContainableBehavior で利用する場合、最大包括深度
-  もしくは再帰値を元にした ``recursive``をセットするようになりました。
+  もしくは再帰値を元にした ``recursive`` をセットするようになりました。
 
 - ``Model::find('first')`` は、ひとつもレコードが見つからなかった場合に、
   空の配列を返すようになりました。
