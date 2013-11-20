@@ -464,7 +464,6 @@ Helper
   - params
 
 
-
 HelperCollection replaced
 -------------------------
 
@@ -484,6 +483,15 @@ ViewBlock
 ---------
 
 - ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead.
+
+JsonView
+--------
+
+- By default JSON data will have HTML entities encoded now. This prevents
+  possible XSS issues when JSON view content is embedded in HTML files.
+- :php:class:`Cake\\View\\JsonView` now supports the ``_jsonOptions`` view
+  variable. This allows you to configure the bit-mask options used when generating
+  JSON.
 
 
 View\\Helper
