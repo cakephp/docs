@@ -226,7 +226,7 @@ Possible keys for hasOne association arrays include:
   triggered.
 - **property**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
-  the assoication so ``address`` in our example.
+  the association so ``address`` in our example.
 
 Once this association has been defined, find operations on the User table can
 contain the Address record if it exists::
@@ -307,7 +307,7 @@ Possible keys for belongsTo association arrays include:
    models or nothing at all.
 - **property**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
-  the assoication so ``user`` in our example.
+  the association so ``user`` in our example.
 
 Once this association has been defined, find operations on the User table can
 contain the Address record if it exists::
@@ -443,7 +443,7 @@ Flushing the registry
 ---------------------
 
 During test cases you may want to flush the registry. Doing so is often useful
-when you are using mock objects, or modifing a table's dependencies::
+when you are using mock objects, or modifying a table's dependencies::
 
     TableRegistry::clear();
 
