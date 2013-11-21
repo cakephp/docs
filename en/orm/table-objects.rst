@@ -7,10 +7,11 @@ Table objects
 
 .. php:class:: Table
 
-Table objects provide access to the collection of entities stored in
-a specific table. Each table in your application should have an associated Table
-class which is used to interact with a given table. If you do not need to
-customize the behavior of a given table CakePHP will generate a Table instance for you to use.
+Table objects provide access to the collection of entities stored in a specific
+table. Each table in your application should have an associated Table class
+which is used to interact with a given table. If you do not need to customize
+the behavior of a given table CakePHP will generate a Table instance for you to
+use.
 
 Before trying to use Table objects and the ORM, you should ensure that you have
 configured your :ref:`database connection <database-configuration>`.
@@ -19,8 +20,9 @@ Basic Usage
 ===========
 
 To get started, create a Table class. These classes live in
-``App/Model/Repository`` as tables are a type of Repository specific to
-relational databases. The most basic table class would look like::
+``App/Model/Repository``. Tables are a type of Repository specific to relational
+databases, and the main interface to your database in CakePHP's ORM. The most
+basic table class would look like::
 
     namespace App\Model\Repository;
 
@@ -32,7 +34,8 @@ relational databases. The most basic table class would look like::
 Note that we did not tell the ORM which table to use for our class. By
 convention table objects will use a table that matches the lower cased and
 underscored version of the class name. In the above example the ``articles``
-table will be used. You can specify the table to using the ``table()``
+table will be used. If our table class was named ``BlogPosts`` you table should
+be named ``blog_posts``. You can specify the table to using the ``table()``
 method::
 
     namespace App\Model\Repository;
@@ -119,7 +122,7 @@ many to many  belongsToMany         Tags belong to many Articles.
 ============= ===================== =======================================
 
 Associations are defined during the ``inititalize()`` method of your table
-object. Methods that match the association types allow you to define the
+object. Methods matching the association type allow you to define the
 associations in your application. For example if we wanted to define a belongsTo
 association in our ArticlesTable::
 
@@ -138,7 +141,7 @@ association in our ArticlesTable::
 The simplest form of any association setup takes the table alias you want to
 associate with. By default all of the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
-you can do so with an additional $config argument::
+you can do so with the second parameter::
 
     class ArticlesTable extends Table {
 
@@ -155,13 +158,12 @@ you can do so with an additional $config argument::
 HasOne associations
 -------------------
 
-Let's set up a User model with a hasOne relationship to an Address
-Table.
+Let's set up a User model with a hasOne relationship to an Address Table.
 
-First, your database tables need to be keyed correctly. For a
-hasOne relationship to work, one table has to contain a foreign key
-that points to a record in the other. In this case the addresses
-table will contain a field called user\_id. The basic pattern is:
+First, your database tables need to be keyed correctly. For a hasOne
+relationship to work, one table has to contain a foreign key that points to
+a record in the other. In this case the addresses table will contain a field
+called user\_id. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
@@ -228,7 +230,7 @@ Possible keys for hasOne association arrays include:
   table into the source table results. By default this is the underscored & singular name of
   the association so ``address`` in our example.
 
-Once this association has been defined, find operations on the User table can
+Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
 
     $query = $users->find('all')->contain('Addresses');
