@@ -155,6 +155,89 @@ you can do so with an additional $config argument::
 HasOne associations
 -------------------
 
+Let's set up a User model with a hasOne relationship to an Address
+Table.
+
+First, your database tables need to be keyed correctly. For a
+hasOne relationship to work, one table has to contain a foreign key
+that points to a record in the other. In this case the addresses
+table will contain a field called user\_id. The basic pattern is:
+
+**hasOne:** the *other* model contains the foreign key.
+
+==================== ==================
+Relation             Schema
+==================== ==================
+User hasOne Address  addresses.user\_id
+-------------------- ------------------
+Doctor hasOne Mentor mentors.doctor\_id
+==================== ==================
+
+.. note::
+
+    It is not mandatory to follow CakePHP conventions, you can easily override
+    the use of any foreignKey in your associations definitions. Nevertheless sticking
+    to conventions will make your code less repetitive, easier to read and to maintain.
+
+If we had the ``UsersTable`` and ``AddressesTable`` classes made we could make
+the association with the following code::
+
+    class UsersTable extends Table {
+        public function initialize(array $config) {
+            $this->hasOne('Addresses');
+        }
+    }
+
+If you need more control, you can define your associations using
+array syntax. For example, you might want to limit the association
+to include only certain records::
+
+    class UsersTable extends Table {
+        public function initialize(array $config) {
+            $this->hasOne('Addresses', [
+                'className' => 'ProfilesTable',
+                'conditions' => ['Profiles.published' => '1'],
+                'dependent' => true
+            ]);
+        }
+    }
+
+Possible keys for hasOne association arrays include:
+
+-  **className**: the class name of the table being associated to
+   the current model. If you're defining a 'User hasOne Address'
+   relationship, the className key should equal 'Addresses.'
+-  **foreignKey**: the name of the foreign key found in the other
+   model. This is especially handy if you need to define multiple
+   hasOne relationships. The default value for this key is the
+   underscored, singular name of the current model, suffixed with
+   '\_id'. In the example above it would default to 'user\_id'.
+-  **conditions**: an array of find() compatible conditions
+   such as ``['Addresses.primary' => true]``
+-  **dependent**: When the dependent key is set to true, and an
+   entity is deleted, the associated model records are also deleted. In this
+   case we set it true so that deleting a User will also delete her associated
+   Address.
+- **cascadeCallbacks**: When this and dependent are true cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When false,
+  ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & singular name of
+  the assoication so ``address`` in our example.
+
+Once this association has been defined, find operations on the User table can
+contain the Address record if it exists::
+
+    $query = $users->find('all')->contain('Addresses');
+    foreach ($query as $user) {
+        echo $user->address->street;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
+
 BelongsTo associations
 ----------------------
 
