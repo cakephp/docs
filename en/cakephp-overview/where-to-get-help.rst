@@ -88,15 +88,13 @@ getting answers to immediate problems. Join other CakePHP users in the following
 -   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
 
 
-CakePHP Questions
-=================
+Stackoverflow
+=============
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Simply register/login and ask a question. Wait until you've got some answers 
-and pick the correct answer. You can view, comment and vote on previously asked 
-and solved questions as well.
-
+Tag your questions with ``cakephp`` and the specific version you are using to enable
+existing users of stackoverflow to find your questions.
 
 .. meta::
     :title lang=en: Where to Get Help
