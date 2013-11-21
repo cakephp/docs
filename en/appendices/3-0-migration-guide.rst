@@ -284,6 +284,10 @@ Network\Session
 * ``SessionHandlerInterface`` has been removed in favor of the one provided by
   PHP itself.
 
+* The property ``Session::$requestCountdown`` has been changed to protected.
+  To specify the request countdown value you can now use the ``Session.requestCountdown``
+  config variable.
+
 Network\Http
 ============
 

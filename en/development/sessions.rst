@@ -32,8 +32,11 @@ level ``Session`` key, and a number of options are available:
   value will use the session's ``Config.countdown`` value to keep track of requests.
   Once the countdown reaches 0, the session id will be regenerated. This is a
   good option to use for applications that need frequently
-  changing session ids for security reasons. You can control the number of requests
-  needed to regenerate the session by modifying :php:attr:`CakeSession::$requestCountdown`.
+  changing session ids for security reasons.
+
+* ``Session.requestCountdown`` - Number of requests that can occur during a
+  session time without the session being renewed. Only used when config value
+  ``Session.autoRegenerate`` is set to true. Defaults to 10.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration. See below for the
