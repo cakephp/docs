@@ -165,13 +165,13 @@ table will contain a field called user\_id. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
-==================== ==================
-Relation             Schema
-==================== ==================
-User hasOne Address  addresses.user\_id
--------------------- ------------------
-Doctor hasOne Mentor mentors.doctor\_id
-==================== ==================
+====================== ==================
+Relation               Schema
+====================== ==================
+Users hasOne Addresses addresses.user\_id
+---------------------- ------------------
+Doctors hasOne Mentors mentors.doctor\_id
+====================== ==================
 
 .. note::
 
@@ -195,7 +195,7 @@ to include only certain records::
     class UsersTable extends Table {
         public function initialize(array $config) {
             $this->hasOne('Addresses', [
-                'className' => 'ProfilesTable',
+                'className' => 'Profiles',
                 'conditions' => ['Profiles.published' => '1'],
                 'dependent' => true
             ]);
@@ -214,6 +214,8 @@ Possible keys for hasOne association arrays include:
    '\_id'. In the example above it would default to 'user\_id'.
 -  **conditions**: an array of find() compatible conditions
    such as ``['Addresses.primary' => true]``
+-  **joinType**: the type of the join to use in the SQL query, default
+   is INNER. You may want to use LEFT if your hasOne association is optional.
 -  **dependent**: When the dependent key is set to true, and an
    entity is deleted, the associated model records are also deleted. In this
    case we set it true so that deleting a User will also delete her associated
@@ -240,6 +242,85 @@ The above would emit SQL that is similar to::
 
 BelongsTo associations
 ----------------------
+
+Now that we have Address data access from the User table, let's
+define a belongsTo association in the Addresses table in order to get
+access to related User data. The belongsTo association is a natural
+complement to the hasOne and hasMany associations.
+
+When keying your database tables for a belongsTo relationship,
+follow this convention:
+
+**belongsTo:** the *current* model contains the foreign key.
+
+========================= ==================
+Relation                  Schema
+========================= ==================
+Addresses belongsTo Users addresses.user\_id
+------------------------- ------------------
+Mentors belongsTo Doctors mentors.doctor\_id
+========================= ==================
+
+.. tip::
+
+    If a model(table) contains a foreign key, it belongsTo the other
+    model(table).
+
+We can define the belongsTo association in our Addresses table as follows::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsTo('Users');
+        }
+    }
+
+We can also define a more specific relationship using array
+syntax::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsTo('Users', [
+                'foreignKey' => 'userid',
+                'joinType' => 'INNER',
+            ]);
+        }
+    }
+
+Possible keys for belongsTo association arrays include:
+
+
+-  **className**: the class name of the model being associated to
+   the current model. If you're defining a 'Profile belongsTo User'
+   relationship, the className key should equal 'Users'.
+-  **foreignKey**: the name of the foreign key found in the current
+   model. This is especially handy if you need to define multiple
+   belongsTo relationships. The default value for this key is the
+   underscored, singular name of the other model, suffixed with
+   ``_id``.
+-  **conditions**: an array of find() compatible conditions or SQL
+   strings such as ``['Users.active' => true]``
+-  **joinType**: the type of the join to use in the SQL query, default
+   is LEFT which may not fit your needs in all situations, INNER may
+   be helpful when you want everything from your main and associated
+   models or nothing at all.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & singular name of
+  the assoication so ``user`` in our example.
+
+Once this association has been defined, find operations on the User table can
+contain the Address record if it exists::
+
+    $query = $addresses->find('all')->contain('Users');
+    foreach ($query as $address) {
+        echo $address->user->username;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
+
 
 HasMany associations
 --------------------
