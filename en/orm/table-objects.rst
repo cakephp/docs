@@ -20,7 +20,7 @@ Basic Usage
 ===========
 
 To get started, create a Table class. These classes live in
-``App/Model/Repository``. Tables are a type of Repository specific to relational
+``App/Model/Repository``. Tables are a type of repository specific to relational
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like::
 
@@ -104,8 +104,8 @@ Building associations
 =====================
 
 Defining relations between different objects in your application should be
-a natural process. For example, an article may have many comments, and belongs
-to a author. Authors may have many articles, and comments. CakePHP makes
+a natural process. For example, an article may have many comments, and belong
+to a author. Authors may have many articles and comments. CakePHP makes
 managing these associations easy. The four association types in CakePHP are:
 hasOne, hasMany, belongsTo, and belongsToMany.
 
@@ -147,7 +147,7 @@ you can do so with the second parameter::
 
         public function intitalize(array $config) {
             $this->belongsTo('Authors', [
-                'className' => 'Plugin.Authors',
+                'className' => 'Publishing.Authors',
                 'foreignKey' => 'authorid',
                 'property' => 'person'
             ]);
@@ -163,7 +163,7 @@ Let's set up a User model with a hasOne relationship to an Address Table.
 First, your database tables need to be keyed correctly. For a hasOne
 relationship to work, one table has to contain a foreign key that points to
 a record in the other. In this case the addresses table will contain a field
-called user\_id. The basic pattern is:
+called ``user_id``. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
@@ -198,7 +198,7 @@ to include only certain records::
         public function initialize(array $config) {
             $this->hasOne('Addresses', [
                 'className' => 'Profiles',
-                'conditions' => ['Profiles.published' => '1'],
+                'conditions' => ['Addresses.primary' => '1'],
                 'dependent' => true
             ]);
         }
@@ -206,23 +206,23 @@ to include only certain records::
 
 Possible keys for hasOne association arrays include:
 
--  **className**: the class name of the table being associated to
-   the current model. If you're defining a 'User hasOne Address'
-   relationship, the className key should equal 'Addresses.'
--  **foreignKey**: the name of the foreign key found in the other
-   model. This is especially handy if you need to define multiple
-   hasOne relationships. The default value for this key is the
-   underscored, singular name of the current model, suffixed with
-   '\_id'. In the example above it would default to 'user\_id'.
--  **conditions**: an array of find() compatible conditions
-   such as ``['Addresses.primary' => true]``
--  **joinType**: the type of the join to use in the SQL query, default
-   is INNER. You may want to use LEFT if your hasOne association is optional.
--  **dependent**: When the dependent key is set to true, and an
-   entity is deleted, the associated model records are also deleted. In this
-   case we set it true so that deleting a User will also delete her associated
-   Address.
-- **cascadeCallbacks**: When this and dependent are true cascaded deletes will
+- **className**: the class name of the table being associated to
+  the current model. If you're defining a 'User hasOne Address'
+  relationship, the className key should equal 'Addresses.'
+- **foreignKey**: the name of the foreign key found in the other
+  model. This is especially handy if you need to define multiple
+  hasOne relationships. The default value for this key is the
+  underscored, singular name of the current model, suffixed with
+  '\_id'. In the example above it would default to 'user\_id'.
+- **conditions**: an array of find() compatible conditions
+  such as ``['Addresses.primary' => true]``
+- **joinType**: the type of the join to use in the SQL query, default
+  is INNER. You may want to use LEFT if your hasOne association is optional.
+- **dependent**: When the dependent key is set to true, and an
+  entity is deleted, the associated model records are also deleted. In this
+  case we set it true so that deleting a User will also delete her associated
+  Address.
+- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
   load and delete entities so that callbacks are properly triggered. When false,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
@@ -265,8 +265,8 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
 .. tip::
 
-    If a model(table) contains a foreign key, it belongsTo the other
-    model(table).
+    If a Table contains a foreign key, it belongs to the other
+    Table.
 
 We can define the belongsTo association in our Addresses table as follows::
 
@@ -292,21 +292,19 @@ syntax::
 
 Possible keys for belongsTo association arrays include:
 
-
--  **className**: the class name of the model being associated to
-   the current model. If you're defining a 'Profile belongsTo User'
-   relationship, the className key should equal 'Users'.
--  **foreignKey**: the name of the foreign key found in the current
-   model. This is especially handy if you need to define multiple
-   belongsTo relationships. The default value for this key is the
-   underscored, singular name of the other model, suffixed with
-   ``_id``.
--  **conditions**: an array of find() compatible conditions or SQL
-   strings such as ``['Users.active' => true]``
--  **joinType**: the type of the join to use in the SQL query, default
-   is LEFT which may not fit your needs in all situations, INNER may
-   be helpful when you want everything from your main and associated
-   models or nothing at all.
+- **className**: the class name of the model being associated to
+  the current model. If you're defining a 'Profile belongsTo User'
+  relationship, the className key should equal 'Users'.
+- **foreignKey**: the name of the foreign key found in the current model. This
+  is especially handy if you need to define multiple belongsTo relationships to
+  the same model. The default value for this key is the underscored, singular
+  name of the other model, suffixed with ``_id``.
+- **conditions**: an array of find() compatible conditions or SQL
+  strings such as ``['Users.active' => true]``
+- **joinType**: the type of the join to use in the SQL query, default
+  is LEFT which may not fit your needs in all situations, INNER may
+  be helpful when you want everything from your main and associated
+  models or nothing at all.
 - **property**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``user`` in our example.
