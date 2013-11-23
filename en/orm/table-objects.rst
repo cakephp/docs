@@ -390,6 +390,9 @@ Possible keys for hasMany association arrays include:
 - **property**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
   the association so ``comments`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
+  subquery.
 
 Once this association has been defined, find operations on the Articles table can
 contain the Comment records if they exists::
@@ -404,6 +407,19 @@ The above would emit SQL that is similar to::
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
+When the subquery strategy is used, SQL similar to the following will be
+generated::
+
+    SELECT * FROM articles;
+    SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
+
+You may want to cache the counts for your hasMany associations. This is useful
+when you often need to show the number of associated records, but don't want to
+load all the records just to count them. For example, the comment count on any
+given article is often cached to make generating lists of articles more
+efficient. You can use the :doc:`CounterCacheBehvaior
+</core-libraries/behaviors/counter-cache>` to cache counts of associated
+records.
 
 BelongsToMany associations
 --------------------------
