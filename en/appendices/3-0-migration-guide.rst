@@ -330,8 +330,15 @@ Controller
 - The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
   with **all** parent classes not just ``AppController`` and the plugin
   app controller.
-- ``Controller::httpCodes()`` has been removed, use :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
-- ``Controller::disableCache()`` has been removed, use :php:meth::`Cake\\Network\\Response::disableCache()` instead.
+- ``Controller::httpCodes()`` has been removed, use
+  :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
+- ``Controller::disableCache()`` has been removed, use
+  :php:meth::`Cake\\Network\\Response::disableCache()` instead.
+- ``Controller::flash()`` has been removed. This method was rarely used in real
+  applications and served no purpose anymore.
+- ``Controller::validate()`` and ``Controller::validationErrors()`` have been
+  removed. They were left over methods from the 1.x days where the concerns of
+  models + controllers were far more intertwined.
 
 ComponentCollection replaced
 ----------------------------

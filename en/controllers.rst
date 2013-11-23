@@ -374,25 +374,6 @@ Flow Control
 
     The generated URL would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
 
-.. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
-
-    Like ``redirect()``, the ``flash()`` method is used to direct a
-    user to a new page after an operation. The ``flash()`` method is
-    different in that it shows a message before passing the user on to
-    another URL.
-
-    The first parameter should hold the message to be displayed, and
-    the second parameter is a CakePHP-relative URL. CakePHP will
-    display the ``$message`` for ``$pause`` seconds before forwarding
-    the user on.
-
-    If there's a particular template you'd like your flashed message to
-    use, you may specify the name of that layout in the ``$layout``
-    parameter.
-
-    For in-page flash messages, be sure to check out SessionComponent's
-    setFlash() method.
-
 Callbacks
 ---------
 
@@ -471,59 +452,6 @@ Other Useful Methods
         Cache-Control: no-store, no-cache, must-revalidate
         Cache-Control: post-check=0, pre-check=0
         Pragma: no-cache
-
-.. php:method:: postConditions(array $data, mixed $op, string $bool, boolean $exclusive)
-
-    Use this method to turn a set of POSTed model data (from
-    HtmlHelper-compatible inputs) into a set of find conditions for a
-    model. This function offers a quick shortcut on building search
-    logic. For example, an administrative user may want to be able to
-    search orders in order to know which items need to be shipped. You
-    can use CakePHP's :php:class:`FormHelper` and :php:class:`HtmlHelper`
-    to create a quick form based on the Order model. Then a controller action
-    can use the data posted from that form to craft find conditions::
-
-        public function index() {
-            $conditions = $this->postConditions($this->request->data);
-            $orders = $this->Order->find('all', compact('conditions'));
-            $this->set('orders', $orders);
-        }
-
-    If ``$this->request->data['Order']['destination']`` equals "Old Towne Bakery",
-    postConditions converts that condition to an array compatible for
-    use in a Model->find() method. In this case,
-    ``array('Order.destination' => 'Old Towne Bakery')``.
-
-    If you want to use a different SQL operator between terms, supply them
-    using the second parameter::
-
-        /*
-        Contents of $this->request->data
-        array(
-            'Order' => array(
-                'num_items' => '4',
-                'referrer' => 'Ye Olde'
-            )
-        )
-        */
-
-        // Let's get orders that have at least 4 items and contain 'Ye Olde'
-        $conditions = $this->postConditions(
-            $this->request->data,
-            array(
-                'num_items' => '>=',
-                'referrer' => 'LIKE'
-            )
-        );
-        $orders = $this->Order->find('all', compact('conditions'));
-
-    The third parameter allows you to tell CakePHP what SQL boolean
-    operator to use between the find conditions. Strings like 'AND',
-    'OR' and 'XOR' are all valid values.
-
-    Finally, if the last parameter is set to true, and the $op
-    parameter is an array, fields not included in $op will not be
-    included in the returned conditions.
 
 .. php:method:: paginate()
 
