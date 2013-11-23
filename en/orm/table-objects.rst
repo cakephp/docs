@@ -325,6 +325,86 @@ The above would emit SQL that is similar to::
 HasMany associations
 --------------------
 
+An example of a hasMany association is "Article hasMany Comments".
+Defining this association will allow us to fetch an article's comments
+when the article is loaded.
+
+When creating your database tables for a hasMany relationship, follow
+this convention:
+
+**hasMany:** the *other* model contains the foreign key.
+
+========================== ===================
+Relation                   Schema
+========================== ===================
+Article hasMany Comment     Comment.user\_id
+-------------------------- -------------------
+Product hasMany Option      Option.product\_id
+-------------------------- -------------------
+Doctor hasMany Appointment  Patient.doctor_id
+========================== ===================
+
+We can define the hasMany association in our Articles model as follows::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->hasMany('Comments');
+        }
+    }
+
+We can also define a more specific relationship using array
+syntax::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->hasMany('Comments', [
+                'foreignKey' => 'articleid',
+                'dependent' => true,
+            ]);
+        }
+    }
+
+Possible keys for hasMany association arrays include:
+
+- **className**: the class name of the model being associated to
+  the current model. If you're defining a 'User hasMany Comment'
+  relationship, the className key should equal 'Comment.'
+- **foreignKey**: the name of the foreign key found in the other
+  model. This is especially handy if you need to define multiple
+  hasMany relationships. The default value for this key is the
+  underscored, singular name of the actual model, suffixed with
+  '\_id'.
+- **conditions**: an array of find() compatible conditions or SQL
+  strings such as ``['Comments.visible' => true]``
+- **sort**  an array of find() compatible order clauses or SQL
+  strings such as ``['Comments.created' => 'ASC']``
+- **dependent**: When dependent is set to true, recursive model
+  deletion is possible. In this example, Comment records will be
+  deleted when their associated Article record has been deleted.
+- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When false,
+  ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & plural name of
+  the association so ``comments`` in our example.
+
+Once this association has been defined, find operations on the Articles table can
+contain the Comment records if they exists::
+
+    $query = $articles->find('all')->contain('Comments');
+    foreach ($query as $article) {
+        echo $article->comments[0]->text;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM articles;
+    SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
+
+
 BelongsToMany associations
 --------------------------
 
