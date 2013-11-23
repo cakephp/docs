@@ -200,7 +200,7 @@ Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
 have any problems with using the command line.
 
-.. Warning::
+.. warning::
 
     Plugins do not work as namespacing to seperate code.
     Due to PHP lacking namespaces in older versions 
