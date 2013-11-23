@@ -202,7 +202,7 @@ have any problems with using the command line.
 
 .. warning::
 
-    Plugins do not work as namespacing to seperate code.
+    Plugins do not work as namespacing to separate code.
     Due to PHP lacking namespaces in older versions 
     you cannot have the same class,
     or same filename, in your plugins.
