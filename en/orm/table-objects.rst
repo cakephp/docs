@@ -337,11 +337,11 @@ this convention:
 ========================== ===================
 Relation                   Schema
 ========================== ===================
-Article hasMany Comment     Comment.user\_id
+Article hasMany Comment    Comment.user\_id
 -------------------------- -------------------
-Product hasMany Option      Option.product\_id
+Product hasMany Option     Option.product\_id
 -------------------------- -------------------
-Doctor hasMany Appointment  Patient.doctor_id
+Doctor hasMany Appointment Patient.doctor_id
 ========================== ===================
 
 We can define the hasMany association in our Articles model as follows::
@@ -424,10 +424,188 @@ records.
 BelongsToMany associations
 --------------------------
 
-* Configuring the property name
-* Building your own associations.
-* Adding conditions
-* Choosing fields + ordering conditions.
+An example of a BelongsToMany association is "Article BelongsToMany Tags", where
+the tags from one article are shared with others.  BelongToMany is often
+referred to as "has and belongs to many", and is a "many to many" association.
+
+The main difference between hasMany and BelongsToMany is that a link between
+models in BelongsToMany is not exclusive. For example, we are joining our
+Article model with an Tag model. Using 'funny' as a Tag for my Article, doesn't
+"use up" the tag. I can also use it on the next article I write.
+
+Three database tables are required for a BelongsToMany association. In the
+example above we would need tables for ``articles``, ``tags`` and
+``articles_tags``.  The ``articles_tags`` table contains the data that joins
+tags and articles together. The joining table is named after the two tables
+involved, separated with an underscore by convention. In its simplest form, this
+table consists of ``article_id`` and ``tag_id``.
+
+**belongsToMany** requires a separate join table that includes both *model*
+names.
+
+============================ ================================================================
+Relationship                 HABTM Table Fields
+============================ ================================================================
+Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
+---------------------------- ----------------------------------------------------------------
+Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
+                             doctors_patients.patient_id.
+============================ ================================================================
+
+We can define the belongsToMany association in our Articles model as follows::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsToMany('Tags');
+        }
+    }
+
+We can also define a more specific relationship using array
+syntax::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsToMany('Tags', [
+                'foreignKey' => 'articleid',
+            ]);
+        }
+    }
+
+Possible keys for belongsToMany association arrays include:
+
+.. _ref-habtm-arrays:
+
+- **className**: the class name of the model being associated to
+  the current model. If you're defining a 'Article belongsToMany Tag'
+  relationship, the className key should equal 'Tags.'
+- **joinTable**: The name of the join table used in this
+  association (if the current table doesn't adhere to the naming
+  convention for belongsToMany join tables). By default this table
+  name will be used to load the Table instance for the join or pivot table.
+- **foreignKey**: the name of the foreign key found in the current
+  model. This is especially handy if you need to define multiple
+  HABTM relationships. The default value for this key is the
+  underscored, singular name of the current model, suffixed with
+  '\_id'.
+- **conditions**: an array of find() compatible conditions or SQL
+  string. If you have conditions on an associated table, you should use a
+  'with' model, and define the necessary belongsTo associations on it.
+- **sort** an array of find() compatible order clauses.
+- **through** Allows you to provide a either the name of the Table instance you
+  want used on the join table, or the instance itself. This makes customizing
+  the join table keys possible.
+- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered on join
+  table records. When false, ``deleteAll()`` is used to remove associated data
+  and no callbacks are triggered.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & plural name of
+  the association so ``tags`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
+  subquery.
+
+Once this association has been defined, find operations on the Articles table can
+contain the Tag records if they exists::
+
+    $query = $articles->find('all')->contain('Tags');
+    foreach ($query as $article) {
+        echo $article->tags[0]->text;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM articles;
+    SELECT * FROM tags
+    INNER JOIN articles_tags ON (
+      tags.id = article_tags.tag_id
+      AND article_id IN (1, 2, 3, 4, 5)
+    );
+
+When the subquery strategy is used, SQL similar to the following will be
+generated::
+
+    SELECT * FROM articles;
+    SELECT * FROM tags
+    INNER JOIN articles_tags ON (
+      tags.id = article_tags.tag_id
+      AND article_id IN (SELECT id FROM tasks)
+    );
+
+Using the 'through' option
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you plan to add any extra information to the join or pivot table, or if you
+need to use join columns outside of the conventions, you will need to define the
+``through`` option. The ``through`` option allows you full control over how the
+belongsToMany association will be created.
+
+It is sometimes desirable to store additional data with a many to
+many association. Consider the following::
+
+    Student hasAndBelongsToMany Course
+    Course hasAndBelongsToMany Student
+
+In other words, a Student can take many Courses and a Course can be
+taken by many Students. This is a simple many to many association
+demanding a table such as this::
+
+    id | student_id | course_id
+
+Now what if we want to store the number of days that were attended
+by the student on the course and their final grade? The table we'd
+want would be::
+
+    id | student_id | course_id | days_attended | grade
+
+The trouble is, a simple belongsToMany will not support this type of
+scenario because when belongsToMany associations are saved,
+the association is deleted first. You would lose the extra data in
+the columns as it is not replaced in the new insert.
+
+The way to implement our requirement is to use a **join model**,
+otherwise known as a **hasMany through** association.
+That is, the association is a model itself. So, we can create a new
+model CourseMembership. Take a look at the following models.::
+
+    class StudentsTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsToMany('Courses', [
+                'through' => 'CourseMemberships',
+            ]);
+        }
+    }
+
+    class CoursesTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsToMany('Students', [
+                'through' => 'CourseMemberships',
+            ]);
+        }
+    }
+
+    class CourseMembershipsTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsTo('Students');
+            $this->belongsTo('Courses');
+        }
+    }
+
+The CourseMembership join model uniquely identifies a given
+Student's participation on a Course in addition to extra
+meta-information.
+
+Saving belongsToMany data
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. TODO:: This relies on saving actually working, which it doesn't right now.
+
+Building your own association types
+-----------------------------------
+
+.. TODO:: Finish this. Need a reasonable example that fits into the docs..
 
 Loading entities
 ================
@@ -435,6 +613,7 @@ Loading entities
 * Using finders
 * Magic finders
 * Eager loading associations
+* Using the 'matching' option with belongsToMany associations.
 
 
 Saving entities
@@ -505,6 +684,8 @@ few other useful features as well.
 Configuring table objects
 -------------------------
 
+.. php:staticmethod:: get($alias, $config)
+
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
@@ -537,6 +718,8 @@ Configuration data is stored *per alias*, and can be overridden by an object's
 
 Flushing the registry
 ---------------------
+
+.. php:staticmethod:: clear()
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
