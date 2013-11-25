@@ -615,8 +615,62 @@ objects, when you query for individual records you get 'entity' objects. While
 this section discusses the different ways you can find and load entities, you
 should read the :doc:`/orm/entities` section for more information on entities.
 
-Using finders
--------------
+Using finders to load data
+--------------------------
+
+Before you can work with entities, you'll need to load them. The easiset way to
+do this is using the ``find`` method. The find method provides an easy and
+extensible way to find the data you are interested in and start working with
+it::
+
+    // Find all the articles
+    $query = $articles->find('all');
+
+The return value of any ``find`` method is always a ``Query`` object. This
+allows you to further refine the query after creating it evaluate it only if
+necessary. Query objects are evaluated as soon as you start fetching rows or if
+you manually call the ``execute()`` method::
+
+    // Find all the articles.
+    // At this point the query has not run.
+    $query = $articles->find('all');
+
+    // Iteration will execute the query.
+    foreach ($query as $row) {
+    }
+
+    // Calling execute will execute the query.
+    $results = $query->execute();
+
+Once you've started a query you can use the :doc:`/orm/query-builder` interface
+to build more complex queries adding additional conditions, limits, or include
+associations using the fluent interface::
+
+    $query = $articles->find('all')
+        ->where(['Articles.created >' => new DateTime('-10 days')])
+        ->contain('Comments', 'Author')
+        ->limit(10);
+
+You can also provide many commonly used options to ``find()``. This can help
+with testing as there are fewer methods to mock::
+
+    $query = $articles->find('all', [
+        'conditions' => ['Articles.created >' => new DateTime('-10 days')],
+        'contain' => ['Authors', 'Comments']
+        'limit' => 10
+
+    ]);
+
+
+Getting just the first result
+-----------------------------
+
+Finding key/value pairs
+-----------------------
+
+Creating finder methods
+-----------------------
+
 
 Magic finders
 -------------
