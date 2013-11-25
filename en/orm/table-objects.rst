@@ -610,10 +610,27 @@ Building your own association types
 Loading entities
 ================
 
-* Using finders
-* Magic finders
-* Eager loading associations
-* Using the 'matching' option with belongsToMany associations.
+While table objects provide an abstraction around a 'repository' or table of
+objects, when you query for individual records you get 'entity' objects. While
+this section discusses the different ways you can find and load entities, you
+should read the :doc:`/orm/entities` section for more information on entities.
+
+Using finders
+-------------
+
+Magic finders
+-------------
+
+.. TODO::
+    There is no code for this yet. This section will need to be written
+    when the code exists.
+
+Eager loading associations
+--------------------------
+
+Using the 'matching' option with belongsToMany associations.
+------------------------------------------------------------
+
 
 
 Saving entities
