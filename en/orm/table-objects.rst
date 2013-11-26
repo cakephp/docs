@@ -534,7 +534,7 @@ generated::
     SELECT * FROM tags
     INNER JOIN articles_tags ON (
       tags.id = article_tags.tag_id
-      AND article_id IN (SELECT id FROM tasks)
+      AND article_id IN (SELECT id FROM articles)
     );
 
 Using the 'through' option
@@ -561,11 +561,6 @@ by the student on the course and their final grade? The table we'd
 want would be::
 
     id | student_id | course_id | days_attended | grade
-
-The trouble is, a simple belongsToMany will not support this type of
-scenario because when belongsToMany associations are saved,
-the association is deleted first. You would lose the extra data in
-the columns as it is not replaced in the new insert.
 
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
