@@ -341,7 +341,7 @@ Article hasMany Comment    Comment.user\_id
 -------------------------- -------------------
 Product hasMany Option     Option.product\_id
 -------------------------- -------------------
-Doctor hasMany Appointment Patient.doctor_id
+Doctor hasMany Appointment Patient.doctor\_id
 ========================== ===================
 
 We can define the hasMany association in our Articles model as follows::
@@ -370,7 +370,7 @@ Possible keys for hasMany association arrays include:
 
 - **className**: the class name of the model being associated to
   the current model. If you're defining a 'User hasMany Comment'
-  relationship, the className key should equal 'Comment.'
+  relationship, the className key should equal 'Comment'.
 - **foreignKey**: the name of the foreign key found in the other
   model. This is especially handy if you need to define multiple
   hasMany relationships. The default value for this key is the
@@ -620,7 +620,7 @@ should read the :doc:`/orm/entities` section for more information on entities.
 Using finders to load data
 --------------------------
 
-.. php:staticmethod:: find($type, $options = [])
+.. php:method:: find($type, $options = [])
 
 Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the ``find`` method. The find method provides an easy and
@@ -632,7 +632,7 @@ extensible way to find the data you are interested in::
 The return value of any ``find`` method is always
 a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
 refine a query after creating it. Query objects are evaluated lazily, and do not
-execute until you start fetching rows, convert it to an array, or when th
+execute until you start fetching rows, convert it to an array, or when the
 ``execute()`` method is called::
 
     // Find all the articles.
@@ -647,7 +647,7 @@ execute until you start fetching rows, convert it to an array, or when th
     $results = $query->execute();
 
     // Converting the query to an array will execute it.
-    $results = $query->execute();
+    $results = $query->toArray();
 
 Once you've started a query you can use the :doc:`/orm/query-builder` interface
 to build more complex queries, adding additional conditions, limits, or include
@@ -684,7 +684,8 @@ The list of options supported by find() are:
 - ``order`` order the result set.
 
 Any options that are not in this list will be passed to beforeFind listeners
-where they can be used to modify the query object.
+where they can be used to modify the query object. You can use the
+``getOptions`` method on a query object to retrieve the options used.
 
 .. _table-find-first::
 
@@ -749,7 +750,7 @@ Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     $query = $articles->find('list', [
-        'fields' => ['slug', 'title']
+        'fields' => ['author_id', 'slug', 'title']
         'groupField' => ['author_id']
     ]);
     $data = $query->toArray();
@@ -843,7 +844,7 @@ result set. You can also contain nested associations by separating the
 associations with ``.``::
 
     $query = $articles->find('all', [
-        'contain' => ['Authors.Addresses', 'Comments.Authors']
+        'contain' => ['Authors' => ['Addresses'], 'Comments' => ['Authors']]
     ]);
 
 If you need to reset the containments on a query you can set the second argument
@@ -852,6 +853,9 @@ to ``true``::
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments'], true);
 
+.. TODO::
+    Expand this section to include fields, sorting and conditions on
+    associations.
 
 Lazy loading associations
 -------------------------
