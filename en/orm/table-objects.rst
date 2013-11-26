@@ -233,7 +233,7 @@ Possible keys for hasOne association arrays include:
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
 
-    $query = $users->find('all')->contain('Addresses');
+    $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
     }
@@ -312,7 +312,7 @@ Possible keys for belongsTo association arrays include:
 Once this association has been defined, find operations on the User table can
 contain the Address record if it exists::
 
-    $query = $addresses->find('all')->contain('Users');
+    $query = $addresses->find('all')->contain(['Users']);
     foreach ($query as $address) {
         echo $address->user->username;
     }
@@ -397,7 +397,7 @@ Possible keys for hasMany association arrays include:
 Once this association has been defined, find operations on the Articles table can
 contain the Comment records if they exists::
 
-    $query = $articles->find('all')->contain('Comments');
+    $query = $articles->find('all')->contain(['Comments']);
     foreach ($query as $article) {
         echo $article->comments[0]->text;
     }
@@ -425,7 +425,7 @@ BelongsToMany associations
 --------------------------
 
 An example of a BelongsToMany association is "Article BelongsToMany Tags", where
-the tags from one article are shared with others.  BelongToMany is often
+the tags from one article are shared with others.  BelongsToMany is often
 referred to as "has and belongs to many", and is a "many to many" association.
 
 The main difference between hasMany and BelongsToMany is that a link between
@@ -444,7 +444,7 @@ table consists of ``article_id`` and ``tag_id``.
 names.
 
 ============================ ================================================================
-Relationship                 HABTM Table Fields
+Relationship                 Pivot Table Fields
 ============================ ================================================================
 Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
 ---------------------------- ----------------------------------------------------------------
@@ -486,7 +486,7 @@ Possible keys for belongsToMany association arrays include:
   name will be used to load the Table instance for the join or pivot table.
 - **foreignKey**: the name of the foreign key found in the current
   model. This is especially handy if you need to define multiple
-  HABTM relationships. The default value for this key is the
+  belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with
   '\_id'.
 - **conditions**: an array of find() compatible conditions or SQL
@@ -510,7 +510,7 @@ Possible keys for belongsToMany association arrays include:
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exists::
 
-    $query = $articles->find('all')->contain('Tags');
+    $query = $articles->find('all')->contain(['Tags']);
     foreach ($query as $article) {
         echo $article->tags[0]->text;
     }
@@ -568,7 +568,7 @@ the columns as it is not replaced in the new insert.
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models.::
+model CoursesMemberships. Take a look at the following models.::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {
@@ -586,14 +586,14 @@ model CourseMembership. Take a look at the following models.::
         }
     }
 
-    class CourseMembershipsTable extends Table {
+    class CoursesMembershipsTable extends Table {
         public function initialize(array $config) {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');
         }
     }
 
-The CourseMembership join model uniquely identifies a given
+The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
@@ -618,7 +618,7 @@ should read the :doc:`/orm/entities` section for more information on entities.
 Using finders to load data
 --------------------------
 
-Before you can work with entities, you'll need to load them. The easiset way to
+Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the ``find`` method. The find method provides an easy and
 extensible way to find the data you are interested in and start working with
 it::
@@ -651,7 +651,7 @@ associations using the fluent interface::
 
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
-        ->contain('Comments', 'Author')
+        ->contain(['Comments', 'Author'])
         ->limit(10);
 
 You can also provide many commonly used options to ``find()``. This can help
@@ -798,12 +798,44 @@ Magic finders
     There is no code for this yet. This section will need to be written
     when the code exists.
 
-Eager loading associations
---------------------------
-
 Using the 'matching' option with belongsToMany associations.
 ------------------------------------------------------------
 
+Eager loading associations
+--------------------------
+
+By default CakePHP does not load **any** associated data. You need to 'contain'
+or eager load each association you want loaded in your results. Eager loading
+helps avoid many of the potential performance problems surrounding lazy-loaded
+associations, as queries can leverage joins better. In CakePHP you define eager
+loaded associations using the 'contain' method::
+
+    // As an option to find()
+    $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
+
+    // As a method on the query objecy
+    $query = $articles->find('all');
+    $query->contain(['Authors', 'Comments']);
+
+The above will load the related author and comments for each article in the
+result set. You can also contain nested associations by separating the
+associations with ``.``::
+
+    $query = $articles->find('all', [
+        'contain' => ['Authors.Addresses', 'Comments.Authors']
+    ]);
+
+If you need to reset the containments on a query you can set the second argument
+to ``true``::
+
+    $query = $articles->find('all');
+    $query->contain(['Authors', 'Comments'], true);
+
+
+Lazy loading associations
+-------------------------
+
+.. TODO:: Link to relevant section in entity docs.
 
 
 Saving entities
