@@ -628,8 +628,8 @@ it::
 
 The return value of any ``find`` method is always a ``Query`` object. This
 allows you to further refine the query after creating it evaluate it only if
-necessary. Query objects are evaluated as soon as you start fetching rows or if
-you manually call the ``execute()`` method::
+necessary. Query objects are evaluated as soon as you start fetching rows,
+convert it to an array,  or if you manually call the ``execute()`` method::
 
     // Find all the articles.
     // At this point the query has not run.
@@ -640,6 +640,9 @@ you manually call the ``execute()`` method::
     }
 
     // Calling execute will execute the query.
+    $results = $query->execute();
+
+    // Converting the query to an array will execute it.
     $results = $query->execute();
 
 Once you've started a query you can use the :doc:`/orm/query-builder` interface
@@ -661,16 +664,132 @@ with testing as there are fewer methods to mock::
 
     ]);
 
+The list of supported options is:
 
-Getting just the first result
------------------------------
+- ``conditions`` build WHERE clauses for your queries.
+- ``limit`` Set the number of rows you want.
+- ``offset`` Set the page offset you want. You can also use ``page`` to make
+  the calculation simpler.
+- ``contain`` define the associations to eager load.
+- ``fields`` limit the fields loaded into the entity. Only loading some fields
+  can cause entities to behave incorrectly.
+- ``group`` add a GROUP BY clause to your query. This is useful when using
+  aggregating functions.
+- ``having`` add a HAVING clause to your query.
+- ``join`` define additional manual joins.
+- ``order`` order the result set.
+
+Any options that are not in this list will be passed to beforeFind listeners
+where they can be used to modify the query object.
+
+.. _table-find-first::
+
+Getting the first result
+------------------------
+
+The ``first()`` method allows you to fetch only the first row from a query. If
+the query has not been executed, a ``LIMIT 1`` clause will be applied::
+
+    $query = $articles->find('all', [
+        'order' => ['Article.created' => 'DESC']
+    ]);
+    $row = $query->first();
+
+This approach replaces ``find('first')`` in previous versions of CakePHP.
+
+.. _table-find-list:
 
 Finding key/value pairs
 -----------------------
 
+It is often useful to generate an associative array of data from application
+data. This is very useful when creating `<select>` elements for example. CakePHP
+provides a simple to use method for generating 'lists' of data::
+
+    $query = $articles->find('list');
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        1 => 'First post',
+        2 => 'Second article I wrote',
+    ];
+
+With no additional options the keys of ``$data`` will be the primary key of your
+table, while the values will be the 'displayField' of the table. You can use the
+``displayField()`` method on a table object to configure the display field on
+a table::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->displayField('title');
+        }
+    }
+
+When calling list you can configure the fields used for the key and value with
+the ``fields`` option::
+
+    $query = $articles->find('list', [
+        'fields' => ['slug', 'title']
+    ]);
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        'first-post' => 'First post',
+        'second-article-i-wrote' => 'Second article I wrote',
+    ];
+
+Results can also be grouped into nested sets. This is useful when you want
+bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
+
+    $query = $articles->find('list', [
+        'fields' => ['slug', 'title']
+        'groupField' => ['author_id']
+    ]);
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        1 => [
+            'first-post' => 'First post',
+            'second-article-i-wrote' => 'Second article I wrote',
+        ],
+        2 => [
+            // More data.
+        ]
+    ];
+
 Creating finder methods
 -----------------------
 
+The examples above have show how to use the built-in ``all`` and ``list``
+finders. However, it is also possible and recommended to implement your own
+finder methods. Finder methods are the ideal way to package up commonly used
+queries. Finder methods are defined by creating methods following the convention
+of ``findFoo`` where ``Foo`` is the name of the finder you want to create. For
+example if you wanted to add a finder to our articles table for finding
+published articles we would do the following::
+
+    use Cake\ORM\Query;
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+
+        public function findPublished(Query $query, array $options = []) {
+            $query->where(['published' => true]);
+            return $query;
+        }
+
+    }
+
+Finder methods can modify the query in any way they want, or use the
+``$options`` to customize the finder operation with relevant application logic.
+Finder methods can also be defined on :doc:`/orm/behaviors`.
+
+If you need to modify the results after they have been fetched you should use
+a :ref:`map-reduce` function to modify the results.
 
 Magic finders
 -------------
@@ -706,7 +825,6 @@ Lifecycle callbacks
 ===================
 
 * Find callbacks
-* Link to map reduce.
 * Delete callbacks
 * Save callbacks
 
