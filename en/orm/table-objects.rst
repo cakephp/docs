@@ -395,7 +395,7 @@ Possible keys for hasMany association arrays include:
   subquery.
 
 Once this association has been defined, find operations on the Articles table can
-contain the Comment records if they exists::
+contain the Comment records if they exist::
 
     $query = $articles->find('all')->contain(['Comments']);
     foreach ($query as $article) {
@@ -417,7 +417,7 @@ You may want to cache the counts for your hasMany associations. This is useful
 when you often need to show the number of associated records, but don't want to
 load all the records just to count them. For example, the comment count on any
 given article is often cached to make generating lists of articles more
-efficient. You can use the :doc:`CounterCacheBehvaior
+efficient. You can use the :doc:`CounterCacheBehavior
 </core-libraries/behaviors/counter-cache>` to cache counts of associated
 records.
 
@@ -476,8 +476,6 @@ syntax::
     }
 
 Possible keys for belongsToMany association arrays include:
-
-.. _ref-habtm-arrays:
 
 - **className**: the class name of the model being associated to
   the current model. If you're defining a 'Article belongsToMany Tag'
