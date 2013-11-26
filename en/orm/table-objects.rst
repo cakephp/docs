@@ -425,17 +425,19 @@ BelongsToMany associations
 --------------------------
 
 An example of a BelongsToMany association is "Article BelongsToMany Tags", where
-the tags from one article are shared with others.  BelongsToMany is often
-referred to as "has and belongs to many", and is a "many to many" association.
+the tags from one article are shared with other articles.  BelongsToMany is
+often referred to as "has and belongs to many", and is a classic "many to many"
+association.
 
-The main difference between hasMany and BelongsToMany is that a link between
-models in BelongsToMany is not exclusive. For example, we are joining our
-Article model with an Tag model. Using 'funny' as a Tag for my Article, doesn't
-"use up" the tag. I can also use it on the next article I write.
+The main difference between hasMany and BelongsToMany is that the link between
+the models in a BelongsToMany association are not exclusive. For example, we are
+joining our Articles table with a Tags table. Using 'funny' as a Tag for my
+Article, doesn't "use up" the tag. I can also use it on the next article
+I write.
 
 Three database tables are required for a BelongsToMany association. In the
 example above we would need tables for ``articles``, ``tags`` and
-``articles_tags``.  The ``articles_tags`` table contains the data that joins
+``articles_tags``.  The ``articles_tags`` table contains the data that links
 tags and articles together. The joining table is named after the two tables
 involved, separated with an underscore by convention. In its simplest form, this
 table consists of ``article_id`` and ``tag_id``.
@@ -468,7 +470,7 @@ syntax::
 
         public function intitalize(array $config) {
             $this->belongsToMany('Tags', [
-                'foreignKey' => 'articleid',
+                'joinTable' => 'article_tag',
             ]);
         }
     }
@@ -483,32 +485,33 @@ Possible keys for belongsToMany association arrays include:
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
   convention for belongsToMany join tables). By default this table
-  name will be used to load the Table instance for the join or pivot table.
+  name will be used to load the Table instance for the join/pivot table.
 - **foreignKey**: the name of the foreign key found in the current
   model. This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with
   '\_id'.
-- **conditions**: an array of find() compatible conditions or SQL
-  string. If you have conditions on an associated table, you should use a
-  'with' model, and define the necessary belongsTo associations on it.
+- **conditions**: an array of find() compatible conditions.  If you have
+  conditions on an associated table, you should use a 'through' model, and
+  define the necessary belongsTo associations on it.
 - **sort** an array of find() compatible order clauses.
 - **through** Allows you to provide a either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
-  the join table keys possible.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered on join
-  table records. When false, ``deleteAll()`` is used to remove associated data
-  and no callbacks are triggered.
+  the join table keys possible, and allows you to customize the behavior of the
+  pivot table.
+- **cascadeCallbacks**: When this is true, cascaded deletes will load and delete
+  entities so that callbacks are properly triggered on join table records. When
+  false, ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered. This defaults to false to help reduce overhead.
 - **property**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
-  the association so ``tags`` in our example.
+  the association, so ``tags`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
 
 Once this association has been defined, find operations on the Articles table can
-contain the Tag records if they exists::
+contain the Tag records if they exist::
 
     $query = $articles->find('all')->contain(['Tags']);
     foreach ($query as $article) {
@@ -537,9 +540,9 @@ generated::
 Using the 'through' option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you plan to add any extra information to the join or pivot table, or if you
+If you plan on adding extra information to the join/pivot table, or if you
 need to use join columns outside of the conventions, you will need to define the
-``through`` option. The ``through`` option allows you full control over how the
+``through`` option. The ``through`` option provides you full control over how the
 belongsToMany association will be created.
 
 It is sometimes desirable to store additional data with a many to
@@ -548,9 +551,8 @@ many association. Consider the following::
     Student hasAndBelongsToMany Course
     Course hasAndBelongsToMany Student
 
-In other words, a Student can take many Courses and a Course can be
-taken by many Students. This is a simple many to many association
-demanding a table such as this::
+A Student can take many Courses and a Course can be taken by many Students. This
+is a simple many to many association. The following table would suffice::
 
     id | student_id | course_id
 
@@ -618,18 +620,20 @@ should read the :doc:`/orm/entities` section for more information on entities.
 Using finders to load data
 --------------------------
 
+.. php:staticmethod:: find($type, $options = [])
+
 Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the ``find`` method. The find method provides an easy and
-extensible way to find the data you are interested in and start working with
-it::
+extensible way to find the data you are interested in::
 
     // Find all the articles
     $query = $articles->find('all');
 
-The return value of any ``find`` method is always a ``Query`` object. This
-allows you to further refine the query after creating it evaluate it only if
-necessary. Query objects are evaluated as soon as you start fetching rows,
-convert it to an array,  or if you manually call the ``execute()`` method::
+The return value of any ``find`` method is always
+a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
+refine a query after creating it. Query objects are evaluated lazily, and do not
+execute until you start fetching rows, convert it to an array, or when th
+``execute()`` method is called::
 
     // Find all the articles.
     // At this point the query has not run.
@@ -646,7 +650,7 @@ convert it to an array,  or if you manually call the ``execute()`` method::
     $results = $query->execute();
 
 Once you've started a query you can use the :doc:`/orm/query-builder` interface
-to build more complex queries adding additional conditions, limits, or include
+to build more complex queries, adding additional conditions, limits, or include
 associations using the fluent interface::
 
     $query = $articles->find('all')
@@ -664,9 +668,9 @@ with testing as there are fewer methods to mock::
 
     ]);
 
-The list of supported options is:
+The list of options supported by find() are:
 
-- ``conditions`` build WHERE clauses for your queries.
+- ``conditions`` provide conditions for the WHERE clause of your query.
 - ``limit`` Set the number of rows you want.
 - ``offset`` Set the page offset you want. You can also use ``page`` to make
   the calculation simpler.
@@ -676,7 +680,7 @@ The list of supported options is:
 - ``group`` add a GROUP BY clause to your query. This is useful when using
   aggregating functions.
 - ``having`` add a HAVING clause to your query.
-- ``join`` define additional manual joins.
+- ``join`` define additional custom joins.
 - ``order`` order the result set.
 
 Any options that are not in this list will be passed to beforeFind listeners
@@ -702,8 +706,8 @@ This approach replaces ``find('first')`` in previous versions of CakePHP.
 Finding key/value pairs
 -----------------------
 
-It is often useful to generate an associative array of data from application
-data. This is very useful when creating `<select>` elements for example. CakePHP
+It is often useful to generate an associative array of data from your application's
+data. For example, this is very useful when creating `<select>` elements. CakePHP
 provides a simple to use method for generating 'lists' of data::
 
     $query = $articles->find('list');
@@ -741,7 +745,7 @@ the ``fields`` option::
         'second-article-i-wrote' => 'Second article I wrote',
     ];
 
-Results can also be grouped into nested sets. This is useful when you want
+Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     $query = $articles->find('list', [
@@ -764,13 +768,14 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 Creating finder methods
 -----------------------
 
-The examples above have show how to use the built-in ``all`` and ``list``
-finders. However, it is also possible and recommended to implement your own
-finder methods. Finder methods are the ideal way to package up commonly used
-queries. Finder methods are defined by creating methods following the convention
-of ``findFoo`` where ``Foo`` is the name of the finder you want to create. For
-example if you wanted to add a finder to our articles table for finding
-published articles we would do the following::
+The examples above show how to use the built-in ``all`` and ``list`` finders.
+However, it is possible and recommended that you implement your own finder
+methods. Finder methods are the ideal way to package up commonly used queries,
+allowing you to abstract query details into a simple to use method. Finder
+methods are defined by creating methods following the convention of ``findFoo``
+where ``Foo`` is the name of the finder you want to create. For example if we
+wanted to add a finder to our articles table for finding published articles we
+would do the following::
 
     use Cake\ORM\Query;
     use Cake\ORM\Table;
@@ -778,18 +783,33 @@ published articles we would do the following::
     class ArticlesTable extends Table {
 
         public function findPublished(Query $query, array $options = []) {
-            $query->where(['published' => true]);
+            $query->where([
+                'Articles.published' => true,
+                'Articles.moderated' => true
+            ]);
             return $query;
         }
 
     }
 
-Finder methods can modify the query in any way they want, or use the
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find('published');
+
+Finder methods can modify the query as required, or use the
 ``$options`` to customize the finder operation with relevant application logic.
-Finder methods can also be defined on :doc:`/orm/behaviors`.
+You can also 'stack' finders, allowing you to express complex queries
+effortlessly. Assuming you have both the 'published' and 'recent' finders, you
+could do the following::
+
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find('publshed')->find('recent');
+
+While all the examples so far have show finder methods on table classes, finder
+methods can also be defined on :doc:`/orm/behaviors`.
 
 If you need to modify the results after they have been fetched you should use
-a :ref:`map-reduce` function to modify the results.
+a :ref:`map-reduce` function to modify the results. The map reduce features
+replace the 'afterFind' callback found in previous versions of CakePHP.
 
 Magic finders
 -------------
@@ -804,11 +824,12 @@ Using the 'matching' option with belongsToMany associations.
 Eager loading associations
 --------------------------
 
-By default CakePHP does not load **any** associated data. You need to 'contain'
-or eager load each association you want loaded in your results. Eager loading
-helps avoid many of the potential performance problems surrounding lazy-loaded
-associations, as queries can leverage joins better. In CakePHP you define eager
-loaded associations using the 'contain' method::
+By default CakePHP does not load **any** associated data when using ``find()``.
+You need to 'contain' or eager-load each association you want loaded in your
+results. Eager loading helps avoid many of the potential performance problems
+surrounding lazy-loading in an ORM. The queries generated by eager loading can
+better leverage joins, allowing more efficient queries to be made. In CakePHP
+you define eager loaded associations using the 'contain' method::
 
     // As an option to find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
