@@ -904,6 +904,23 @@ Lazy loading associations
 Saving entities
 ===============
 
+Once you've loaded some entities you'll probably want to modify them and update
+your database. This is a pretty simple exercise in CakePHP::
+
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->find('all')->where(['id' => 2])->first();
+
+    $article->title = 'My new title';
+    $articles->save($article);
+
+By default CakePHP will apply your validation rules, and wrap the save operation
+in a database transaction. It will also only update properties that have
+changed. The above save() call would generate SQL like::
+
+    UPDATE articles SET title = 'My new title' WHERE id = 2;
+
+
+
 Bulk updates
 ------------
 
