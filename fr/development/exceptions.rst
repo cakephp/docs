@@ -405,7 +405,7 @@ utiliser ``Configure::write('Exception.renderer','AppExceptionRenderer');``
 pour choisir une classe qui va rendre les pages d'exception.
 Par défaut :php:class`ExceptionRenderer` est utilisée. Votre classe de rendu
 d'exception personnalisée doit être placée dans ``app/Lib/Error``. Ou un
-répertoire ``Error``` dans tout chemin bootstrapped Lib. Dans une classe
+répertoire ``Error`` dans tout chemin bootstrapped Lib. Dans une classe
 de rendu d'exception, vous pouvez fournir une gestion spécialisée pour les
 erreurs spécifiques de l'application::
 

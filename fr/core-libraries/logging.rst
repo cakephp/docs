@@ -94,7 +94,7 @@ Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations::
 
     Avant 2.4 vous deviez inclure le suffixe ``Log`` dans votre configuration
     (``LoggingPack.DatabaseLog``). Ce n'est plus nécessaire maintenant.
-    Si vous avez utilisé un moteur de Log comme ```DatabaseLogger`` qui ne suit
+    Si vous avez utilisé un moteur de Log comme ``DatabaseLogger`` qui ne suit
     pas la convention d'utiliser un suffixe ``Log`` pour votre nom de classe,
     vous devez ajuster votre nom de classe en ``DatabaseLog``. Vous devez
     aussi éviter les noms de classe comme ``SomeLogLog`` qui inclut le suffixe

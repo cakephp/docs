@@ -54,7 +54,7 @@ souvent une simple fonction ou une interface dans une application. Par exemple,
 quand les utilisateurs requêtent www.exemple.com/posts/index (qui est
 également la même chose que www.exemple.com/posts/), ils pourraient s'attendre
 à voir une liste de posts. Le code pour cette action devrait ressembler à
-quelque chose comme ça::
+quelque chose comme ça ::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -108,7 +108,7 @@ utilisons juste celui par défaut.
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'posts' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
-chose comme cela::
+chose comme cela ::
 
     // print_r($posts) sort:
 
@@ -151,9 +151,9 @@ chose comme cela::
 
 Les fichiers des vues de CakePHP sont stockés dans ``/app/views`` à l'intérieur
 d'un dossier dont le nom correspond à celui du controller (nous aurons à créer
-un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de
+un dossier appelé 'Posts' dans ce cas). Pour mettre en forme les données de
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à
-quelque chose comme cela::
+quelque chose comme cela ::
 
     <!-- File: /app/View/Posts/index.ctp -->
 
@@ -161,8 +161,8 @@ quelque chose comme cela::
     <table>
         <tr>
             <th>Id</th>
-            <th>Title</th>
-            <th>Created</th>
+            <th>Titre</th>
+            <th>Créé le</th>
         </tr>
 
         <!-- Here is where we loop through our $posts array, printing out post info -->
@@ -208,7 +208,7 @@ cette vue (le lien sur le titre d'un post mène à l'URL :
 l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
-tarder dans le Controller Posts::
+tarder dans le Controller Posts ::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -269,7 +269,7 @@ Lire depuis la base de données et nous afficher les posts est un bon début,
 mais lançons-nous dans l'ajout de nouveaux posts.
 
 Premièrement, commençons par créer une action ``add()`` dans le
-PostsController::
+PostsController ::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
@@ -320,7 +320,7 @@ Chaque requête de CakePHP contient un objet ``CakeRequest`` qui est accessible
 en utilisant ``$this->request``. Cet objet contient des informations utiles
 sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre
 application. Dans ce cas, nous utilisons la méthode
-:php:meth:`CakeRequest::is()`` pour vérifier que la requête est de type POST.
+:php:meth:`CakeRequest::is()` pour vérifier que la requête est de type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre
 application, ces informations sont disponibles dans ``$this->request->data``.
@@ -332,10 +332,10 @@ Session (SessionComponent) pour définir un message dans une variable session
 et qui sera affiché dans la page juste après la redirection. Dans le layout,
 nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet
 d'afficher et de nettoyer la variable correspondante. La méthode
-:php:meth:`Controller::redirect`` du controller permet de rediriger vers une
+:php:meth:`Controller::redirect` du controller permet de rediriger vers une
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
 /posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
-Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()``
+Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()`
 pour voir les différents formats d'URL acceptés dans les différentes fonctions
 de CakePHP.
 
@@ -371,7 +371,7 @@ Voici le code de notre vue "add" (ajout)
 
 Nous utilisons ici le :php:class:`FormHelper` pour générer la balise
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par
-``$this->Form->create()``::
+``$this->Form->create()`` ::
 
 .. code-block:: html
 
@@ -408,7 +408,7 @@ la ligne suivante avant ``<table>`` ::
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
 exigences de validation ? Les règles de validation sont définies dans le
 model. Retournons donc à notre model Post et procédons à quelques
-ajustements::
+ajustements ::
 
     class Post extends AppModel {
         public $validate = array(
@@ -433,7 +433,7 @@ plus d'informations sur cette configuration, consultez le chapitre
 Maintenant que vos règles de validation sont en place, utilisez l'application
 pour essayer d'ajouter un post avec un titre et un contenu vide afin de voir
 comment cela fonctionne. Puisque que nous avons utilisé la méthode
-:php:meth:`FormHelper::input()`` du helper "Form" pour créer nos éléments
+:php:meth:`FormHelper::input()` du helper "Form" pour créer nos éléments
 de formulaire, nos messages d'erreurs de validation seront affichés
 automatiquement.
 
@@ -443,7 +443,7 @@ Editer des Posts
 L'édition de posts : nous y voilà. Vous êtes un pro de CakePHP maintenant, vous
 devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
 Voici à quoi l'action ``edit()`` du controller Posts (PostsController) devrait
-ressembler::
+ressembler ::
 
     public function edit($id = null) {
         if (!$id) {
@@ -470,7 +470,7 @@ ressembler::
     }
 
 Cette action s'assure d'abord que l'utilisateur a essayé d'accéder à un
-enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
+enregistrement existant. S'il n'y a pas de paramètre ``$id`` passé, ou si le
 post n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
@@ -479,7 +479,7 @@ l'est, alors nous utilisons les données POST pour mettre à jour notre
 enregistrement Post, ou sortir et montrer les erreurs de validation à
 l'utilisateur.
 
-Si il n'y a pas de données définies dans ``$this->request->data``, nous le
+S'il n'y a pas de données définies dans ``$this->request->data``, nous le
 définissons simplement dans le post récupéré précédemment.
 
 La vue d'édition devrait ressembler à quelque chose comme cela:
@@ -531,7 +531,7 @@ Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
                 <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link('Editer', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -546,14 +546,14 @@ Supprimer des Posts
 
 A présent, mettons en place un moyen de supprimer les posts pour les
 utilisateurs. Démarrons avec une action ``delete()`` dans le controller
-Posts (PostsController)::
+Posts (PostsController) ::
 
     public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('Le post avec id: %s a été supprimé.', h($id)));
+            $this->Session->setFlash(__('Le post avec id : %s a été supprimé.', h($id)));
             return $this->redirect(array('action' => 'index'));
         }
     }
@@ -598,7 +598,7 @@ ainsi :
             <td>
                 <?php echo $this->Form->postLink(
                     'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
+                    array('action' => 'Supprimer', $post['Post']['id']),
                     array('confirm' => 'Etes-vous sûr ?'));
                 ?>
                 <?php echo $this->Html->link('Editer', array('action' => 'edit', $post['Post']['id'])); ?>
