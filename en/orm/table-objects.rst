@@ -233,7 +233,7 @@ Possible keys for hasOne association arrays include:
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
 
-    $query = $users->find('all')->contain('Addresses');
+    $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
     }
@@ -312,7 +312,7 @@ Possible keys for belongsTo association arrays include:
 Once this association has been defined, find operations on the User table can
 contain the Address record if it exists::
 
-    $query = $addresses->find('all')->contain('Users');
+    $query = $addresses->find('all')->contain(['Users']);
     foreach ($query as $address) {
         echo $address->user->username;
     }
@@ -325,20 +325,535 @@ The above would emit SQL that is similar to::
 HasMany associations
 --------------------
 
+An example of a hasMany association is "Article hasMany Comments".
+Defining this association will allow us to fetch an article's comments
+when the article is loaded.
+
+When creating your database tables for a hasMany relationship, follow
+this convention:
+
+**hasMany:** the *other* model contains the foreign key.
+
+========================== ===================
+Relation                   Schema
+========================== ===================
+Article hasMany Comment    Comment.user\_id
+-------------------------- -------------------
+Product hasMany Option     Option.product\_id
+-------------------------- -------------------
+Doctor hasMany Appointment Patient.doctor\_id
+========================== ===================
+
+We can define the hasMany association in our Articles model as follows::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->hasMany('Comments');
+        }
+    }
+
+We can also define a more specific relationship using array
+syntax::
+
+    class Addresses extends Table {
+
+        public function intitalize(array $config) {
+            $this->hasMany('Comments', [
+                'foreignKey' => 'articleid',
+                'dependent' => true,
+            ]);
+        }
+    }
+
+Possible keys for hasMany association arrays include:
+
+- **className**: the class name of the model being associated to
+  the current model. If you're defining a 'User hasMany Comment'
+  relationship, the className key should equal 'Comment'.
+- **foreignKey**: the name of the foreign key found in the other
+  model. This is especially handy if you need to define multiple
+  hasMany relationships. The default value for this key is the
+  underscored, singular name of the actual model, suffixed with
+  '\_id'.
+- **conditions**: an array of find() compatible conditions or SQL
+  strings such as ``['Comments.visible' => true]``
+- **sort**  an array of find() compatible order clauses or SQL
+  strings such as ``['Comments.created' => 'ASC']``
+- **dependent**: When dependent is set to true, recursive model
+  deletion is possible. In this example, Comment records will be
+  deleted when their associated Article record has been deleted.
+- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When false,
+  ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & plural name of
+  the association so ``comments`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
+  subquery.
+
+Once this association has been defined, find operations on the Articles table can
+contain the Comment records if they exist::
+
+    $query = $articles->find('all')->contain(['Comments']);
+    foreach ($query as $article) {
+        echo $article->comments[0]->text;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM articles;
+    SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
+
+When the subquery strategy is used, SQL similar to the following will be
+generated::
+
+    SELECT * FROM articles;
+    SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
+
+You may want to cache the counts for your hasMany associations. This is useful
+when you often need to show the number of associated records, but don't want to
+load all the records just to count them. For example, the comment count on any
+given article is often cached to make generating lists of articles more
+efficient. You can use the :doc:`CounterCacheBehavior
+</core-libraries/behaviors/counter-cache>` to cache counts of associated
+records.
+
 BelongsToMany associations
 --------------------------
 
-* Configuring the property name
-* Building your own associations.
-* Adding conditions
-* Choosing fields + ordering conditions.
+An example of a BelongsToMany association is "Article BelongsToMany Tags", where
+the tags from one article are shared with other articles.  BelongsToMany is
+often referred to as "has and belongs to many", and is a classic "many to many"
+association.
+
+The main difference between hasMany and BelongsToMany is that the link between
+the models in a BelongsToMany association are not exclusive. For example, we are
+joining our Articles table with a Tags table. Using 'funny' as a Tag for my
+Article, doesn't "use up" the tag. I can also use it on the next article
+I write.
+
+Three database tables are required for a BelongsToMany association. In the
+example above we would need tables for ``articles``, ``tags`` and
+``articles_tags``.  The ``articles_tags`` table contains the data that links
+tags and articles together. The joining table is named after the two tables
+involved, separated with an underscore by convention. In its simplest form, this
+table consists of ``article_id`` and ``tag_id``.
+
+**belongsToMany** requires a separate join table that includes both *model*
+names.
+
+============================ ================================================================
+Relationship                 Pivot Table Fields
+============================ ================================================================
+Article belongsToMany Tag    articles_tags.id, articles_tags.tag_id, articles_tags.article_id
+---------------------------- ----------------------------------------------------------------
+Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
+                             doctors_patients.patient_id.
+============================ ================================================================
+
+We can define the belongsToMany association in our Articles model as follows::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsToMany('Tags');
+        }
+    }
+
+We can also define a more specific relationship using array
+syntax::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->belongsToMany('Tags', [
+                'joinTable' => 'article_tag',
+            ]);
+        }
+    }
+
+Possible keys for belongsToMany association arrays include:
+
+- **className**: the class name of the model being associated to
+  the current model. If you're defining a 'Article belongsToMany Tag'
+  relationship, the className key should equal 'Tags.'
+- **joinTable**: The name of the join table used in this
+  association (if the current table doesn't adhere to the naming
+  convention for belongsToMany join tables). By default this table
+  name will be used to load the Table instance for the join/pivot table.
+- **foreignKey**: the name of the foreign key found in the current
+  model. This is especially handy if you need to define multiple
+  belongsToMany relationships. The default value for this key is the
+  underscored, singular name of the current model, suffixed with
+  '\_id'.
+- **conditions**: an array of find() compatible conditions.  If you have
+  conditions on an associated table, you should use a 'through' model, and
+  define the necessary belongsTo associations on it.
+- **sort** an array of find() compatible order clauses.
+- **through** Allows you to provide a either the name of the Table instance you
+  want used on the join table, or the instance itself. This makes customizing
+  the join table keys possible, and allows you to customize the behavior of the
+  pivot table.
+- **cascadeCallbacks**: When this is true, cascaded deletes will load and delete
+  entities so that callbacks are properly triggered on join table records. When
+  false, ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered. This defaults to false to help reduce overhead.
+- **property**: The property name that should be filled with data from the associated
+  table into the source table results. By default this is the underscored & plural name of
+  the association, so ``tags`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
+  subquery.
+
+Once this association has been defined, find operations on the Articles table can
+contain the Tag records if they exist::
+
+    $query = $articles->find('all')->contain(['Tags']);
+    foreach ($query as $article) {
+        echo $article->tags[0]->text;
+    }
+
+The above would emit SQL that is similar to::
+
+    SELECT * FROM articles;
+    SELECT * FROM tags
+    INNER JOIN articles_tags ON (
+      tags.id = article_tags.tag_id
+      AND article_id IN (1, 2, 3, 4, 5)
+    );
+
+When the subquery strategy is used, SQL similar to the following will be
+generated::
+
+    SELECT * FROM articles;
+    SELECT * FROM tags
+    INNER JOIN articles_tags ON (
+      tags.id = article_tags.tag_id
+      AND article_id IN (SELECT id FROM articles)
+    );
+
+Using the 'through' option
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you plan on adding extra information to the join/pivot table, or if you
+need to use join columns outside of the conventions, you will need to define the
+``through`` option. The ``through`` option provides you full control over how the
+belongsToMany association will be created.
+
+It is sometimes desirable to store additional data with a many to
+many association. Consider the following::
+
+    Student hasAndBelongsToMany Course
+    Course hasAndBelongsToMany Student
+
+A Student can take many Courses and a Course can be taken by many Students. This
+is a simple many to many association. The following table would suffice::
+
+    id | student_id | course_id
+
+Now what if we want to store the number of days that were attended
+by the student on the course and their final grade? The table we'd
+want would be::
+
+    id | student_id | course_id | days_attended | grade
+
+The way to implement our requirement is to use a **join model**,
+otherwise known as a **hasMany through** association.
+That is, the association is a model itself. So, we can create a new
+model CoursesMemberships. Take a look at the following models.::
+
+    class StudentsTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsToMany('Courses', [
+                'through' => 'CourseMemberships',
+            ]);
+        }
+    }
+
+    class CoursesTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsToMany('Students', [
+                'through' => 'CourseMemberships',
+            ]);
+        }
+    }
+
+    class CoursesMembershipsTable extends Table {
+        public function initialize(array $config) {
+            $this->belongsTo('Students');
+            $this->belongsTo('Courses');
+        }
+    }
+
+The CoursesMemberships join table uniquely identifies a given
+Student's participation on a Course in addition to extra
+meta-information.
+
+Saving belongsToMany data
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. TODO:: This relies on saving actually working, which it doesn't right now.
+
+Building your own association types
+-----------------------------------
+
+.. TODO:: Finish this. Need a reasonable example that fits into the docs..
 
 Loading entities
 ================
 
-* Using finders
-* Magic finders
-* Eager loading associations
+While table objects provide an abstraction around a 'repository' or table of
+objects, when you query for individual records you get 'entity' objects. While
+this section discusses the different ways you can find and load entities, you
+should read the :doc:`/orm/entities` section for more information on entities.
+
+Using finders to load data
+--------------------------
+
+.. php:method:: find($type, $options = [])
+
+Before you can work with entities, you'll need to load them. The easiest way to
+do this is using the ``find`` method. The find method provides an easy and
+extensible way to find the data you are interested in::
+
+    // Find all the articles
+    $query = $articles->find('all');
+
+The return value of any ``find`` method is always
+a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
+refine a query after creating it. Query objects are evaluated lazily, and do not
+execute until you start fetching rows, convert it to an array, or when the
+``execute()`` method is called::
+
+    // Find all the articles.
+    // At this point the query has not run.
+    $query = $articles->find('all');
+
+    // Iteration will execute the query.
+    foreach ($query as $row) {
+    }
+
+    // Calling execute will execute the query.
+    $results = $query->execute();
+
+    // Converting the query to an array will execute it.
+    $results = $query->toArray();
+
+Once you've started a query you can use the :doc:`/orm/query-builder` interface
+to build more complex queries, adding additional conditions, limits, or include
+associations using the fluent interface::
+
+    $query = $articles->find('all')
+        ->where(['Articles.created >' => new DateTime('-10 days')])
+        ->contain(['Comments', 'Author'])
+        ->limit(10);
+
+You can also provide many commonly used options to ``find()``. This can help
+with testing as there are fewer methods to mock::
+
+    $query = $articles->find('all', [
+        'conditions' => ['Articles.created >' => new DateTime('-10 days')],
+        'contain' => ['Authors', 'Comments']
+        'limit' => 10
+
+    ]);
+
+The list of options supported by find() are:
+
+- ``conditions`` provide conditions for the WHERE clause of your query.
+- ``limit`` Set the number of rows you want.
+- ``offset`` Set the page offset you want. You can also use ``page`` to make
+  the calculation simpler.
+- ``contain`` define the associations to eager load.
+- ``fields`` limit the fields loaded into the entity. Only loading some fields
+  can cause entities to behave incorrectly.
+- ``group`` add a GROUP BY clause to your query. This is useful when using
+  aggregating functions.
+- ``having`` add a HAVING clause to your query.
+- ``join`` define additional custom joins.
+- ``order`` order the result set.
+
+Any options that are not in this list will be passed to beforeFind listeners
+where they can be used to modify the query object. You can use the
+``getOptions`` method on a query object to retrieve the options used.
+
+.. _table-find-first::
+
+Getting the first result
+------------------------
+
+The ``first()`` method allows you to fetch only the first row from a query. If
+the query has not been executed, a ``LIMIT 1`` clause will be applied::
+
+    $query = $articles->find('all', [
+        'order' => ['Article.created' => 'DESC']
+    ]);
+    $row = $query->first();
+
+This approach replaces ``find('first')`` in previous versions of CakePHP.
+
+.. _table-find-list:
+
+Finding key/value pairs
+-----------------------
+
+It is often useful to generate an associative array of data from your application's
+data. For example, this is very useful when creating `<select>` elements. CakePHP
+provides a simple to use method for generating 'lists' of data::
+
+    $query = $articles->find('list');
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        1 => 'First post',
+        2 => 'Second article I wrote',
+    ];
+
+With no additional options the keys of ``$data`` will be the primary key of your
+table, while the values will be the 'displayField' of the table. You can use the
+``displayField()`` method on a table object to configure the display field on
+a table::
+
+    class Articles extends Table {
+
+        public function intitalize(array $config) {
+            $this->displayField('title');
+        }
+    }
+
+When calling list you can configure the fields used for the key and value with
+the ``fields`` option::
+
+    $query = $articles->find('list', [
+        'fields' => ['slug', 'title']
+    ]);
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        'first-post' => 'First post',
+        'second-article-i-wrote' => 'Second article I wrote',
+    ];
+
+Results can be grouped into nested sets. This is useful when you want
+bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
+
+    $query = $articles->find('list', [
+        'fields' => ['author_id', 'slug', 'title']
+        'groupField' => ['author_id']
+    ]);
+    $data = $query->toArray();
+
+    // Data now looks like
+    $data = [
+        1 => [
+            'first-post' => 'First post',
+            'second-article-i-wrote' => 'Second article I wrote',
+        ],
+        2 => [
+            // More data.
+        ]
+    ];
+
+Creating finder methods
+-----------------------
+
+The examples above show how to use the built-in ``all`` and ``list`` finders.
+However, it is possible and recommended that you implement your own finder
+methods. Finder methods are the ideal way to package up commonly used queries,
+allowing you to abstract query details into a simple to use method. Finder
+methods are defined by creating methods following the convention of ``findFoo``
+where ``Foo`` is the name of the finder you want to create. For example if we
+wanted to add a finder to our articles table for finding published articles we
+would do the following::
+
+    use Cake\ORM\Query;
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+
+        public function findPublished(Query $query, array $options = []) {
+            $query->where([
+                'Articles.published' => true,
+                'Articles.moderated' => true
+            ]);
+            return $query;
+        }
+
+    }
+
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find('published');
+
+Finder methods can modify the query as required, or use the
+``$options`` to customize the finder operation with relevant application logic.
+You can also 'stack' finders, allowing you to express complex queries
+effortlessly. Assuming you have both the 'published' and 'recent' finders, you
+could do the following::
+
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find('publshed')->find('recent');
+
+While all the examples so far have show finder methods on table classes, finder
+methods can also be defined on :doc:`/orm/behaviors`.
+
+If you need to modify the results after they have been fetched you should use
+a :ref:`map-reduce` function to modify the results. The map reduce features
+replace the 'afterFind' callback found in previous versions of CakePHP.
+
+Magic finders
+-------------
+
+.. TODO::
+    There is no code for this yet. This section will need to be written
+    when the code exists.
+
+Using the 'matching' option with belongsToMany associations.
+------------------------------------------------------------
+
+Eager loading associations
+--------------------------
+
+By default CakePHP does not load **any** associated data when using ``find()``.
+You need to 'contain' or eager-load each association you want loaded in your
+results. Eager loading helps avoid many of the potential performance problems
+surrounding lazy-loading in an ORM. The queries generated by eager loading can
+better leverage joins, allowing more efficient queries to be made. In CakePHP
+you define eager loaded associations using the 'contain' method::
+
+    // As an option to find()
+    $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
+
+    // As a method on the query objecy
+    $query = $articles->find('all');
+    $query->contain(['Authors', 'Comments']);
+
+The above will load the related author and comments for each article in the
+result set. You can also contain nested associations by separating the
+associations with ``.``::
+
+    $query = $articles->find('all', [
+        'contain' => ['Authors' => ['Addresses'], 'Comments' => ['Authors']]
+    ]);
+
+If you need to reset the containments on a query you can set the second argument
+to ``true``::
+
+    $query = $articles->find('all');
+    $query->contain(['Authors', 'Comments'], true);
+
+.. TODO::
+    Expand this section to include fields, sorting and conditions on
+    associations.
+
+Lazy loading associations
+-------------------------
+
+.. TODO:: Link to relevant section in entity docs.
 
 
 Saving entities
@@ -360,7 +875,6 @@ Lifecycle callbacks
 ===================
 
 * Find callbacks
-* Link to map reduce.
 * Delete callbacks
 * Save callbacks
 
@@ -409,6 +923,8 @@ few other useful features as well.
 Configuring table objects
 -------------------------
 
+.. php:staticmethod:: get($alias, $config)
+
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
@@ -441,6 +957,8 @@ Configuration data is stored *per alias*, and can be overridden by an object's
 
 Flushing the registry
 ---------------------
+
+.. php:staticmethod:: clear()
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
