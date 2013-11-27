@@ -597,8 +597,8 @@ ainsi :
             </td>
             <td>
                 <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'Supprimer', $post['Post']['id']),
+                    'Supprimer',
+                    array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Etes-vous sûr ?'));
                 ?>
                 <?php echo $this->Html->link('Editer', array('action' => 'edit', $post['Post']['id'])); ?>
