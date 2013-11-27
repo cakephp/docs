@@ -597,6 +597,7 @@ Saving belongsToMany data
 
 .. TODO:: This relies on saving actually working, which it doesn't right now.
 
+
 Building your own association types
 -----------------------------------
 
@@ -812,8 +813,6 @@ Magic finders
     There is no code for this yet. This section will need to be written
     when the code exists.
 
-Using the 'matching' option with belongsToMany associations.
-------------------------------------------------------------
 
 Eager loading associations
 --------------------------
@@ -849,6 +848,34 @@ to ``true``::
 .. TODO::
     Expand this section to include fields, sorting and conditions on
     associations.
+
+Using the 'matching' option when finding results
+------------------------------------------------
+
+A fairly common query case with associations is finding records 'matching'
+specific associated data. For example if you have 'Articles belongsToMany Tags'
+you will probably want to find Articles that have the CakePHP tag. This is
+extremely simple to do with the ORM in CakePHP::
+
+    $query = $articles->find('all')
+    $query->contain([
+        'Tags' => [
+            'matching' => true,
+            'conditions' => ['Tags.name' => 'CakePHP']
+        ]
+    ]);
+
+You can apply this strategy to HasMany associations as well. For example if
+'Authors HasMany Articles', you could find all the authors with recently
+published articles using the following::
+
+    $query = $authors->find('all')
+    $query->contain([
+        'Articles' => [
+            'matching' => true,
+            'conditions' => ['Articles.created >=' => new DateTime('-10 days')]
+        ]
+    ]);
 
 Lazy loading associations
 -------------------------
