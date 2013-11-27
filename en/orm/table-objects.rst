@@ -845,9 +845,27 @@ to ``true``::
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments'], true);
 
-.. TODO::
-    Expand this section to include fields, sorting and conditions on
-    associations.
+When containing associations you can pass additional options to control how much
+data is fetched from the associations. The following keys can be used:
+
+* ``fields`` A list of fields you want to load from the association.
+* ``sort`` The sort conditions for the associated data. These sort criteria will
+  replace those defined in the association.
+* ``conditions`` Additional conditions for the associated data. These conditions
+  will be merged with the conditions defined in the association.
+
+A more complete example of this would be::
+
+    $query = $articles->find('all', [
+        'contain' => [
+            'Authors' => [
+                'fields' => ['username', 'author_id']
+                'conditions' => ['Authors.is_admin' => true],
+                'sort' => ['Authors.id' => 'DESC']
+            ]
+        ]
+    ]);
+
 
 Using the 'matching' option when finding results
 ------------------------------------------------
