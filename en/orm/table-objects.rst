@@ -921,7 +921,27 @@ changed. The above save() call would generate SQL like::
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-You can disable validation or transcations using the ``$options`` argument for
+If however, you had a new entity, the following SQL would be generated::
+
+    UPDATE INTO articles (title) VALUES ('My new title');
+
+The ORM uses the ``isNew()`` method on an entity to determine whether or not an
+insert or update should be performed. If the ``isNew()`` method returns ``null``
+an 'exists' query will be issued.
+
+When an entity is saved a few things happen:
+
+1. Validation will be started if necessary.
+2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
+   stopped the save operation will fail.
+3. Validation will be applied. If validation fails, the save will be aborted.
+4. The ``Model.afterValidate`` event will be triggered.
+5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
+   not continue.
+6. The modified fields on the entity will be saved.
+7. The ``Model.afterSave`` event will be dispatched.
+
+You can disable validation or transactions using the ``$options`` argument for
 save::
 
     $articles->save($article, ['validate' => false, 'atomic' => false]);
@@ -932,27 +952,122 @@ want applied to this save::
     $articles->save($article, ['validate' => 'update']);
 
 The above would call an ``validationUpdate`` method to build the required rules.
-By default the ``validationDefault`` method will be used.
+By default the ``validationDefault`` method will be used. A sample validator
+method for our articles table would be::
 
+    class ArticlesTable extends Table {
+        public function validationUpdate($validator) {
+            $validator
+                ->add('title', 'notEmpty', [
+                    'rule' => 'notEmpty'
+                    'message' => 'You need to provide a title',
+                ])
+                ->add('body', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => 'A body is required'
+                ]);
+            return $validator;
+        }
+    }
 
+See the :doc:`validation chapter </core-utility-libraries/validation>` for more information on
+building validation rule-sets.
 
 Bulk updates
 ------------
 
 .. php:method::updateAll($fields, $conditions)
 
+There may be times when updating rows one by one is not efficient or required.
+In these cases it is more performant to use a bulk-update to modify many rows at
+once::
+
+    // Publish all the unpublished articles.
+    function publishAllUnpublished() {
+        $this->updateAll(['published' => true], ['published' => false]);
+    }
+
+If you need to do bulk updates and use SQL expressions, you will need to use an
+expression object as ``updateAll()`` uses prepared statements under the hood::
+
+    function incrementCounters() {
+        $expression = new QueryExpression('view_count = view_count + 1');
+        $this->updateAll([$expression], ['published' => true]);
+    }
+
+A bulk-update will be considered successful if 1 or more rows are updated.
+
+.. warning::
+
+    updateAll will *not* trigger beforeSave/afterSave events. If you need those
+    first load a collection of records and update them.
+
 Deleting entities
 =================
 
 .. php:method::delete(Entity $entity, $options = [])
 
+Once you've loaded an entity you can delete it by calling the originating
+table's delete method::
+
+    $entity = $articles->find('all')->where(['id' => 2]);
+    $result = $articles->delete($entity);
+
+When deleting entities a few things happen:
+
+1. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
+   delete will be aborted and the event's result will be returned.
+2. The entity will be deleted.
+3. All dependent associations will be deleted. If associations are being deleted
+   as entities, additional events will be dispatched.
+4. Any junction table records for BelongsToMany associations will be removed.
+5. The ``Model.afterDelete`` event will be triggered.
+
+By default all deletes happen within a transaction. You can disable the
+transaction with the atomic option::
+
+    $result = $articles->delete($entity, ['atomic' => false]);
+
 Cascading deletes
 -----------------
+
+When deleting entities, associated data can also be deleted. If your HasOne and
+HasMany associations are configured as ``dependent``, delete operations will
+'cascade' to those entities as well. By default entities in associated tables
+are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
+have the ORM load related entities, and delete them individually by setting the
+``cascadeCallbacks`` option to true. A sample HasMany association with both
+these options enabled would be::
+
+    $this->hasMany('Comments', [
+        'dependent' => true,
+        'cascadeCallbacks' => true,
+    ]);
+
+Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+than bulk deletions. It should only be enabled when your application has
+important work handled in the events attached to those tables.
 
 Bulk deletes
 ------------
 
 .. php:method::deleteAll($conditions)
+
+There may be times when deleting rows one by one is not efficient or useful.
+In these cases it is more performant to use a bulk-delete to remove many rows at
+once::
+
+    // Delete all the spam
+    function destroySpam() {
+        return $this->deleteAll(['is_spam' => true]);
+    }
+
+A bulk-delete will be considered successful if 1 or more rows are deleted.
+
+.. warning::
+
+    deleteAll will *not* trigger beforeSave/afterSave events. If you need those
+    first load a collection of records and update them.
 
 Lifecycle callbacks
 ===================
