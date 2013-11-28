@@ -149,7 +149,7 @@ you can do so with the second parameter::
             $this->belongsTo('Authors', [
                 'className' => 'Publishing.Authors',
                 'foreignKey' => 'authorid',
-                'property' => 'person'
+                'propertyName' => 'person'
             ]);
         }
 
@@ -226,7 +226,7 @@ Possible keys for hasOne association arrays include:
   load and delete entities so that callbacks are properly triggered. When false,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
-- **property**: The property name that should be filled with data from the associated
+- **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``address`` in our example.
 
@@ -305,7 +305,7 @@ Possible keys for belongsTo association arrays include:
   is LEFT which may not fit your needs in all situations, INNER may
   be helpful when you want everything from your main and associated
   models or nothing at all.
-- **property**: The property name that should be filled with data from the associated
+- **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``user`` in our example.
 
@@ -387,7 +387,7 @@ Possible keys for hasMany association arrays include:
   load and delete entities so that callbacks are properly triggered. When false,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
-- **property**: The property name that should be filled with data from the associated
+- **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
   the association so ``comments`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
@@ -501,7 +501,7 @@ Possible keys for belongsToMany association arrays include:
   entities so that callbacks are properly triggered on join table records. When
   false, ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered. This defaults to false to help reduce overhead.
-- **property**: The property name that should be filled with data from the associated
+- **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
   the association, so ``tags`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
