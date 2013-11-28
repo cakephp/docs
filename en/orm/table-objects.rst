@@ -904,6 +904,8 @@ Lazy loading associations
 Saving entities
 ===============
 
+.. php:method::save(Entity $entity, array $options = [])
+
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
 
@@ -919,19 +921,38 @@ changed. The above save() call would generate SQL like::
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
+You can disable validation or transcations using the ``$options`` argument for
+save::
+
+    $articles->save($article, ['validate' => false, 'atomic' => false]);
+
+In addition to disabling validation you can choose which validation rule set you
+want applied to this save::
+
+    $articles->save($article, ['validate' => 'update']);
+
+The above would call an ``validationUpdate`` method to build the required rules.
+By default the ``validationDefault`` method will be used.
+
 
 
 Bulk updates
 ------------
 
+.. php:method::updateAll($fields, $conditions)
+
 Deleting entities
 =================
+
+.. php:method::delete(Entity $entity, $options = [])
 
 Cascading deletes
 -----------------
 
 Bulk deletes
 ------------
+
+.. php:method::deleteAll($conditions)
 
 Lifecycle callbacks
 ===================
