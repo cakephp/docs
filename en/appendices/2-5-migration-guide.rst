@@ -56,6 +56,13 @@ are combined into one list of listeners based on their priorities and then fired
 as one set. Global listeners of a given priority are still fired before instance
 listeners.
 
+Model
+=====
+
+- Unsigned integers are now supported by datasources that provide them (MySQL).
+  You can set the ``unsigned`` option to true in your schema/fixture files to
+  start using this feature.
+
 Network
 =======
 
