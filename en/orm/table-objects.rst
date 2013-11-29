@@ -915,45 +915,46 @@ your database. This is a pretty simple exercise in CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-By default CakePHP will apply your validation rules, and wrap the save operation
+When saving, CakePHP will apply your validation rules, and wrap the save operation
 in a database transaction. It will also only update properties that have
-changed. The above save() call would generate SQL like::
+changed. The above ``save()`` call would generate SQL like::
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-If however, you had a new entity, the following SQL would be generated::
+If you had a new entity, the following SQL would be generated::
 
-    UPDATE INTO articles (title) VALUES ('My new title');
+    INSERT INTO articles (title) VALUES ('My new title');
 
 The ORM uses the ``isNew()`` method on an entity to determine whether or not an
 insert or update should be performed. If the ``isNew()`` method returns ``null``
-an 'exists' query will be issued.
+and the entity has a primary key value, an 'exists' query will be issued.
 
 When an entity is saved a few things happen:
 
-1. Validation will be started if necessary.
+1. Validation will be started if not disabled.
 2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
-   stopped the save operation will fail.
-3. Validation will be applied. If validation fails, the save will be aborted.
+   stopped the save operation will fail and return false.
+3. Validation will be applied. If validation fails, the save will be aborted,
+   and save() will return false.
 4. The ``Model.afterValidate`` event will be triggered.
 5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
-   not continue.
+   be aborted, and save() will return false.
 6. The modified fields on the entity will be saved.
 7. The ``Model.afterSave`` event will be dispatched.
 
-You can disable validation or transactions using the ``$options`` argument for
+You can disable validation and/or transactions using the ``$options`` argument for
 save::
 
     $articles->save($article, ['validate' => false, 'atomic' => false]);
 
 In addition to disabling validation you can choose which validation rule set you
-want applied to this save::
+want applied::
 
     $articles->save($article, ['validate' => 'update']);
 
-The above would call an ``validationUpdate`` method to build the required rules.
-By default the ``validationDefault`` method will be used. A sample validator
-method for our articles table would be::
+The above would call the ``validationUpdate`` method on the table instance to
+build the required rules.  By default the ``validationDefault`` method will be
+used. A sample validator method for our articles table would be::
 
     class ArticlesTable extends Table {
         public function validationUpdate($validator) {
@@ -970,17 +971,18 @@ method for our articles table would be::
         }
     }
 
-See the :doc:`validation chapter </core-utility-libraries/validation>` for more information on
-building validation rule-sets.
+You can have as many validation sets as you need. See the :doc:`validation
+chapter </core-utility-libraries/validation>` for more information on building
+validation rule-sets.
 
 Bulk updates
 ------------
 
 .. php:method::updateAll($fields, $conditions)
 
-There may be times when updating rows one by one is not efficient or required.
-In these cases it is more performant to use a bulk-update to modify many rows at
-once::
+There may be times when updating rows individually is not efficient or
+necessary.  In these cases it is more efficient to use a bulk-update to modify
+many rows at once::
 
     // Publish all the unpublished articles.
     function publishAllUnpublished() {
@@ -1044,9 +1046,11 @@ these options enabled would be::
         'cascadeCallbacks' => true,
     ]);
 
-Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
-than bulk deletions. It should only be enabled when your application has
-important work handled in the events attached to those tables.
+.. note::
+
+    Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+    when compared to bulk deletes. The cascadeCallbacks option should only be
+    enabled when your application has important work handled by event listeners.
 
 Bulk deletes
 ------------
@@ -1066,8 +1070,8 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
 
 .. warning::
 
-    deleteAll will *not* trigger beforeSave/afterSave events. If you need those
-    first load a collection of records and update them.
+    deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
+    first load a collection of records and delete them.
 
 Lifecycle callbacks
 ===================
