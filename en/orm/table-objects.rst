@@ -942,7 +942,8 @@ When an entity is saved a few things happen:
 6. The modified fields on the entity will be saved.
 7. The ``Model.afterSave`` event will be dispatched.
 
-You can disable validation and/or transactions using the ``$options`` argument for
+The ``save()`` method will return the modified entity on success, and ``false``
+on failure. You can disable validation and/or transactions using the ``$options`` argument for
 save::
 
     $articles->save($article, ['validate' => false, 'atomic' => false]);
