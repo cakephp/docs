@@ -121,6 +121,7 @@ with CakePHP::
             $this->Session->setFlash(__('User was not deleted'));
             return $this->redirect(array('action' => 'index'));
         }
+
     }
 
 In the same way we created the views for our blog posts or by using the code
@@ -191,7 +192,8 @@ the users add function and implement the login and logout action::
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Letting users register themselves
+        // Allow users to register and logout.
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
