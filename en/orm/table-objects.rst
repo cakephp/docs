@@ -597,6 +597,7 @@ Saving belongsToMany data
 
 .. TODO:: This relies on saving actually working, which it doesn't right now.
 
+
 Building your own association types
 -----------------------------------
 
@@ -812,8 +813,6 @@ Magic finders
     There is no code for this yet. This section will need to be written
     when the code exists.
 
-Using the 'matching' option with belongsToMany associations.
-------------------------------------------------------------
 
 Eager loading associations
 --------------------------
@@ -846,9 +845,55 @@ to ``true``::
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments'], true);
 
-.. TODO::
-    Expand this section to include fields, sorting and conditions on
-    associations.
+When containing associations you can pass additional options to control how much
+data is fetched from the associations. The following keys can be used:
+
+* ``fields`` A list of fields you want to load from the association.
+* ``sort`` The sort conditions for the associated data. These sort criteria will
+  replace those defined in the association.
+* ``conditions`` Additional conditions for the associated data. These conditions
+  will be merged with the conditions defined in the association.
+
+A more complete example of this would be::
+
+    $query = $articles->find('all', [
+        'contain' => [
+            'Authors' => [
+                'fields' => ['username', 'author_id']
+                'conditions' => ['Authors.is_admin' => true],
+                'sort' => ['Authors.id' => 'DESC']
+            ]
+        ]
+    ]);
+
+
+Using the 'matching' option when finding results
+------------------------------------------------
+
+A fairly common query case with associations is finding records 'matching'
+specific associated data. For example if you have 'Articles belongsToMany Tags'
+you will probably want to find Articles that have the CakePHP tag. This is
+extremely simple to do with the ORM in CakePHP::
+
+    $query = $articles->find('all')
+    $query->contain([
+        'Tags' => [
+            'matching' => true,
+            'conditions' => ['Tags.name' => 'CakePHP']
+        ]
+    ]);
+
+You can apply this strategy to HasMany associations as well. For example if
+'Authors HasMany Articles', you could find all the authors with recently
+published articles using the following::
+
+    $query = $authors->find('all')
+    $query->contain([
+        'Articles' => [
+            'matching' => true,
+            'conditions' => ['Articles.created >=' => new DateTime('-10 days')]
+        ]
+    ]);
 
 Lazy loading associations
 -------------------------
@@ -859,17 +904,175 @@ Lazy loading associations
 Saving entities
 ===============
 
+.. php:method::save(Entity $entity, array $options = [])
+
+Once you've loaded some entities you'll probably want to modify them and update
+your database. This is a pretty simple exercise in CakePHP::
+
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->find('all')->where(['id' => 2])->first();
+
+    $article->title = 'My new title';
+    $articles->save($article);
+
+When saving, CakePHP will apply your validation rules, and wrap the save operation
+in a database transaction. It will also only update properties that have
+changed. The above ``save()`` call would generate SQL like::
+
+    UPDATE articles SET title = 'My new title' WHERE id = 2;
+
+If you had a new entity, the following SQL would be generated::
+
+    INSERT INTO articles (title) VALUES ('My new title');
+
+The ORM uses the ``isNew()`` method on an entity to determine whether or not an
+insert or update should be performed. If the ``isNew()`` method returns ``null``
+and the entity has a primary key value, an 'exists' query will be issued.
+
+When an entity is saved a few things happen:
+
+1. Validation will be started if not disabled.
+2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
+   stopped the save operation will fail and return false.
+3. Validation will be applied. If validation fails, the save will be aborted,
+   and save() will return false.
+4. The ``Model.afterValidate`` event will be triggered.
+5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
+   be aborted, and save() will return false.
+6. The modified fields on the entity will be saved.
+7. The ``Model.afterSave`` event will be dispatched.
+
+The ``save()`` method will return the modified entity on success, and ``false``
+on failure. You can disable validation and/or transactions using the ``$options`` argument for
+save::
+
+    $articles->save($article, ['validate' => false, 'atomic' => false]);
+
+In addition to disabling validation you can choose which validation rule set you
+want applied::
+
+    $articles->save($article, ['validate' => 'update']);
+
+The above would call the ``validationUpdate`` method on the table instance to
+build the required rules.  By default the ``validationDefault`` method will be
+used. A sample validator method for our articles table would be::
+
+    class ArticlesTable extends Table {
+        public function validationUpdate($validator) {
+            $validator
+                ->add('title', 'notEmpty', [
+                    'rule' => 'notEmpty'
+                    'message' => 'You need to provide a title',
+                ])
+                ->add('body', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => 'A body is required'
+                ]);
+            return $validator;
+        }
+    }
+
+You can have as many validation sets as you need. See the :doc:`validation
+chapter </core-utility-libraries/validation>` for more information on building
+validation rule-sets.
+
 Bulk updates
 ------------
+
+.. php:method::updateAll($fields, $conditions)
+
+There may be times when updating rows individually is not efficient or
+necessary.  In these cases it is more efficient to use a bulk-update to modify
+many rows at once::
+
+    // Publish all the unpublished articles.
+    function publishAllUnpublished() {
+        $this->updateAll(['published' => true], ['published' => false]);
+    }
+
+If you need to do bulk updates and use SQL expressions, you will need to use an
+expression object as ``updateAll()`` uses prepared statements under the hood::
+
+    function incrementCounters() {
+        $expression = new QueryExpression('view_count = view_count + 1');
+        $this->updateAll([$expression], ['published' => true]);
+    }
+
+A bulk-update will be considered successful if 1 or more rows are updated.
+
+.. warning::
+
+    updateAll will *not* trigger beforeSave/afterSave events. If you need those
+    first load a collection of records and update them.
 
 Deleting entities
 =================
 
+.. php:method::delete(Entity $entity, $options = [])
+
+Once you've loaded an entity you can delete it by calling the originating
+table's delete method::
+
+    $entity = $articles->find('all')->where(['id' => 2]);
+    $result = $articles->delete($entity);
+
+When deleting entities a few things happen:
+
+1. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
+   delete will be aborted and the event's result will be returned.
+2. The entity will be deleted.
+3. All dependent associations will be deleted. If associations are being deleted
+   as entities, additional events will be dispatched.
+4. Any junction table records for BelongsToMany associations will be removed.
+5. The ``Model.afterDelete`` event will be triggered.
+
+By default all deletes happen within a transaction. You can disable the
+transaction with the atomic option::
+
+    $result = $articles->delete($entity, ['atomic' => false]);
+
 Cascading deletes
 -----------------
 
+When deleting entities, associated data can also be deleted. If your HasOne and
+HasMany associations are configured as ``dependent``, delete operations will
+'cascade' to those entities as well. By default entities in associated tables
+are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
+have the ORM load related entities, and delete them individually by setting the
+``cascadeCallbacks`` option to true. A sample HasMany association with both
+these options enabled would be::
+
+    $this->hasMany('Comments', [
+        'dependent' => true,
+        'cascadeCallbacks' => true,
+    ]);
+
+.. note::
+
+    Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+    when compared to bulk deletes. The cascadeCallbacks option should only be
+    enabled when your application has important work handled by event listeners.
+
 Bulk deletes
 ------------
+
+.. php:method::deleteAll($conditions)
+
+There may be times when deleting rows one by one is not efficient or useful.
+In these cases it is more performant to use a bulk-delete to remove many rows at
+once::
+
+    // Delete all the spam
+    function destroySpam() {
+        return $this->deleteAll(['is_spam' => true]);
+    }
+
+A bulk-delete will be considered successful if 1 or more rows are deleted.
+
+.. warning::
+
+    deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
+    first load a collection of records and delete them.
 
 Lifecycle callbacks
 ===================
