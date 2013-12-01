@@ -760,8 +760,10 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
         ]
     ];
 
-Creating finder methods
------------------------
+.. _custom-find-methods:
+
+Custom finder methods
+---------------------
 
 The examples above show how to use the built-in ``all`` and ``list`` finders.
 However, it is possible and recommended that you implement your own finder
@@ -806,12 +808,54 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
-Magic finders
--------------
+Dynamic finders
+---------------
 
-.. TODO::
-    There is no code for this yet. This section will need to be written
-    when the code exists.
+CakePHP's ORM provides dynamically constructed finder methods which allow you to
+easily express simple queries with no additional code. For example if you wanted
+to find a user by username you could do::
+
+    $query = $users->findByUsername('joebob');
+
+The above would start a find operation that added the equivalent of ``WHERE username = 'joebob'
+LIMIT 1``. You can create queries to find multiple entities using::
+
+    $query = $users->findAllByUsername('joebob');
+
+When using dynamic finders you can constrain on multiple fields::
+
+    $query = $users->findAllByUsernameAndApproved('joebob', 1);
+
+You can also create ``OR`` conditions::
+
+    $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
+
+You can use order conditions with your dynamic finders::
+
+    $query = $users->findAllByUsernameOrEmail(
+        'joebob',
+        'joe@example.com',
+        ['created' => 'DESC']
+    );
+
+While you can use either OR or AND conditions, you cannot combine the two in
+a single dynamic finder. Other query options like ``contain`` are also not
+supported with dynamic finders. You should use :ref:`custom-find-methods` to
+encapsulate more complex queries.  Lastly, you can also combine dynamic finders
+with custom finders::
+
+    $query = $users->findTrollsByUsername('joebob');
+
+The above would translate into the following::
+
+    $users->find('trolls', [
+        'conditions' => ['username' => 'joebob']
+    ]);
+
+.. note::
+
+    While dynamic finders make it simple to express queries, they come with some
+    additional performance overhead.
 
 
 Eager loading associations
