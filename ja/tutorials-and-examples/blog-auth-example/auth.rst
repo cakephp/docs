@@ -116,6 +116,7 @@ UsersControllerもまた作成しましょう。
             $this->Session->setFlash(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
+
     }
 
 以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。
@@ -179,7 +180,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // ユーザーに自身で登録させる
+	// ユーザー自身による登録とログアウトを許可する
+	$this->Auth->allow('add', 'logout');
     }
 
     public function login() {
