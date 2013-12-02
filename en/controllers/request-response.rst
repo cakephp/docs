@@ -82,7 +82,8 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
     $this->request->query['page'];
 
     // You can also access it via array access
-    $this->request['url']['page']; // BC accessor, will be deprecated in future versions
+    // Note: BC accessor, will be deprecated in future versions
+    $this->request['url']['page'];
 
 You can either directly access the query property, or you can use
 :php:meth:`CakeRequest::query()` to read the URL query array in an error free manner.
@@ -97,7 +98,8 @@ Accessing POST data
 All POST data can be accessed using :php:attr:`CakeRequest::$data`. Any form data
 that contains a ``data`` prefix, will have that data prefix removed. For example::
 
-    // An input with a name attribute equal to 'data[MyModel][title]' is accessible at
+    // An input with a name attribute equal to 'data[MyModel][title]'
+    // is accessible at
     $this->request->data['MyModel']['title'];
 
 You can either directly access the data property, or you can use
@@ -294,7 +296,7 @@ CakeRequest API
     decoding function. Useful when interacting with XML or JSON
     request body content. Additional parameters for the decoding function
     can be passed as arguments to input()::
-    
+
         $this->request->input('json_decode');
 
 .. php:method:: data($name)
@@ -631,7 +633,7 @@ The ``Etag`` header (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
-To take advantage of this header you have to either call the 
+To take advantage of this header you have to either call the
 :php:meth:`CakeResponse::checkNotModified()` method manually or to have the
 :php:class:`RequestHandlerComponent` included in your controller::
 
@@ -671,7 +673,7 @@ The Vary header
 ---------------
 
 In some cases you might want to serve different content using the same URL.
-This is often the case if you have a multilingual page or respond with different 
+This is often the case if you have a multilingual page or respond with different
 HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');
