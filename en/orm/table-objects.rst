@@ -830,14 +830,6 @@ You can also create ``OR`` conditions::
 
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
-You can use order conditions with your dynamic finders::
-
-    $query = $users->findAllByUsernameOrEmail(
-        'joebob',
-        'joe@example.com',
-        ['created' => 'DESC']
-    );
-
 While you can use either OR or AND conditions, you cannot combine the two in
 a single dynamic finder. Other query options like ``contain`` are also not
 supported with dynamic finders. You should use :ref:`custom-find-methods` to
