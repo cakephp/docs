@@ -86,8 +86,10 @@ the autoloader, and work around an issue in Composer's autoloader. In your
     // Load Composer autoload.
     require APP . '/Vendor/autoload.php';
 
-    // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the most important.
-    // See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
+    // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
+    // most important.
+    // See: https://github.com/composer/
+    //      composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
