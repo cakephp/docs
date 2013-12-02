@@ -182,10 +182,16 @@ that you can create:
 Some examples would be::
 
     // Add an environment detector.
-    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    $this->request->addDetector(
+        'post',
+        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    );
 
     // Add a pattern value detector.
-    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    $this->request->addDetector(
+        'iphone',
+        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    );
 
     // Add an option detector
     $this->request->addDetector('internalIp', array(
@@ -193,10 +199,14 @@ Some examples would be::
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
 
-    // Add a callback detector. Can either be an anonymous function or a regular callable.
-    $this->request->addDetector('awesome', array('callback' => function ($request) {
-        return isset($request->awesome);
-    }));
+    // Add a callback detector. Can either be an anonymous function
+    // or a regular callable.
+    $this->request->addDetector(
+        'awesome',
+        array('callback' => function ($request) {
+            return isset($request->awesome);
+        })
+    );
 
 ``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
 :php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
@@ -459,7 +469,8 @@ to send a file as response::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Return response object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -471,7 +482,10 @@ by using the :php:meth:`CakeResponse::type()` method.
 If you want you can also force a file to be downloaded instead of being displayed in
 the browser by specifying the options::
 
-    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+    $this->response->file(
+        $file['path'],
+        array('download' => true, 'name' => 'foo')
+    );
 
 Sending a string as file
 ========================
@@ -487,7 +501,8 @@ a pdf or an ics generated on the fly, and serve the generated string as a file b
         //Optionally force file download
         $this->response->download('filename_for_download.ics');
 
-        //Return response object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -501,8 +516,15 @@ can be called with a few different parameter configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Set multiple headers
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    $this->response->header(array(
+        'Location' => 'http://example.com',
+        'X-Extra' => 'My header')
+    );
+
+    $this->response->header(array(
+        'WWW-Authenticate: Negotiate',
+        'Content-type: application/pdf')
+    );
 
 Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when
