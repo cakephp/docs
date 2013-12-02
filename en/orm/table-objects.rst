@@ -1119,10 +1119,11 @@ overriding methods. Event listeners can be defined in table or behavior classes.
 You can also use a table's event manager to bind listeners in.
 
 When using callback methods you should remember that behavior listeners are
-fired before model callbacks are.
+fired after table callbacks are.
 
 To add an event listener to a Table class or Behavior simply implement the
-method signatures as described below.
+method signatures as described below. See the :doc:`/core-libraries/events` for
+more detail on how to use the events subsystem.
 
 beforeFind
 ----------
