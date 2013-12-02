@@ -1113,9 +1113,75 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
 Lifecycle callbacks
 ===================
 
-* Find callbacks
-* Delete callbacks
-* Save callbacks
+As you have seen above table objects trigger a number of events. Events are
+useful if you want to hook into the ORM and add logic in without subclassing or
+overriding methods. Event listeners can be defined in table or behavior classes.
+You can also use a table's event manager to bind listeners in.
+
+When using callback methods you should remember that behavior listeners are
+fired before model callbacks are.
+
+To add an event listener to a Table class or Behavior simply implement the
+method signatures as described below.
+
+beforeFind
+----------
+
+.. php:method:: beforeFind(Event $event, Query $query, array $options)
+
+The ``Model.beforeFind`` event is fired before each find operation. By stopping
+the event and supplying a return value you can bypass the find operation
+entirely. Any changes done to the $query instance will be retained for the rest
+of the find.
+
+You might use this callback to restrict find operations based on a user's role,
+or make caching decisions based on the current load.
+
+beforeValidate
+--------------
+
+.. php:method:: beforeValidate(Event $event, Entity $entity, array $options, Validator $validator)
+
+The ``Model.beforeValidate`` method is fired before an entity is validated. By
+stopping this event, you can abort the validate + save operations.
+
+afterValidate
+-------------
+
+.. php:method:: afterValidate(Event $event, Entity $entity, array $options, Validator $validator)
+
+The ``Model.afterValidate`` event is fired after an entity is validated.
+
+beforeSave
+----------
+
+.. php:method:: beforeSave(Event $event, Entity $entity, array $options)
+
+The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
+this event will abort the save operation. When the event is stopped the result
+of the event will be returned.
+
+afterSave
+---------
+
+.. php:method:: afterSave(Event $event, Entity $entity, array $options)
+
+The ``Model.afterSave`` event is fired after an entity is saved.
+
+beforeDelete
+------------
+
+.. php:method:: beforeDelete(Event $event, Entity $entity, array $options)
+
+The ``Model.beforeDelete`` event is fired before an entity is deleted. By
+stopping this event you will abort the delete operation.
+
+afterDelete
+-----------
+
+.. php:method:: afterDelete(Event $event, Entity $entity, array $options)
+
+Fired after an entity has been deleted.
 
 Behaviors
 =========
