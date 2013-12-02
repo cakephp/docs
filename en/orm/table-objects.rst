@@ -1120,10 +1120,48 @@ Lifecycle callbacks
 Behaviors
 =========
 
-* Adding behaviors
-* Configuring behaviors
-* Link to behavior docs.
+.. php:method:: addBehavior($name, $config = [])
 
+Behaviors provide an easy way to create horizonally re-usable pieces of logic
+related to table classes. You may be wondering why behaviors are regular classes
+and not traits. The primary reason for this is event listeners. While traits
+would allow for re-usable pieces of logic, they would complicate binding events.
+
+To add a behavior to your table you can call the ``addBehavior`` method.
+Generally the best place to do this is in the ``initialize`` method::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
+    }
+
+As with associations, you can use :term:`plugin-syntax` and provide additional
+configuration options::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp', [
+                'events' => [
+                    'Model.beforeSave' => [
+                        'created_at' => 'new',
+                        'modified_at' => 'always'
+                    ]
+                ]
+            ]);
+        }
+    }
+
+You can find out more about behaviors, including the behaviors provided by
+CakePHP in the chapter on :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
