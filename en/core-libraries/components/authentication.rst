@@ -169,9 +169,15 @@ working with a login form could look like::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
-                // Prior to 2.3 use `return $this->redirect($this->Auth->redirect());`
+                // Prior to 2.3 use
+                // `return $this->redirect($this->Auth->redirect());`
             } else {
-                $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+                $this->Session->setFlash(
+                    __('Username or password is incorrect'),
+                    'default',
+                    array(),
+                    'auth'
+                );
             }
         }
     }
@@ -313,7 +319,8 @@ messages AuthComponent uses. In your controller's beforeFilter, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
+    $this->Auth->authError = "This error shows up with the user tries to access a
+                                part of the website that is protected.";
 
 .. versionchanged:: 2.4
    Sometimes, you want to display the authorization error only after
@@ -366,7 +373,9 @@ callback of your model using appropriate password hasher class::
         public function beforeSave($options = array()) {
             if (!$this->id) {
                 $passwordHasher = new SimplePasswordHasher();
-                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
+                $this->data['User']['password'] = $passwordHasher->hash(
+                    $this->data['User']['password']
+                );
             }
             return true;
         }
@@ -413,7 +422,9 @@ from the normal password hash::
         public function beforeSave($options = array()) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
+                $this->data['User']['username'],
+                $this->data['User']['password'],
+                env('SERVER_NAME')
             );
             return true;
         }
