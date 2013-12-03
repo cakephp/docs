@@ -128,6 +128,8 @@ de génération de code fournis avec CakePHP::
             return $this->redirect(array('action' => 'index'));
         }
 
+    }
+
 De la même façon, nous avons crée les vues pour nos posts de blog ou en
 utilisant l'outil de génération de code, nous exécutons les vues. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
@@ -200,7 +202,8 @@ et de réaliser l'action connexion et deconnexion::
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Laissons les users d'enregistrer eux-memes
+        // Permet aux utilisateurs de s'enregistrer et de se déconnecter
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
