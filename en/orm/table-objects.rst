@@ -1115,8 +1115,10 @@ useful if you want to hook into the ORM and add logic in without subclassing or
 overriding methods. Event listeners can be defined in table or behavior classes.
 You can also use a table's event manager to bind listeners in.
 
-When using callback methods you should remember that behavior listeners are
-fired after table callbacks are.
+When using callback methods behaviors attached in the
+``initialize`` method will have their listeners fired **before** the table
+callback methods are triggered. This follows the same sequencing as controllers
+& components.
 
 To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the :doc:`/core-libraries/events` for
