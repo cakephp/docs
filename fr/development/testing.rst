@@ -1184,7 +1184,7 @@ Mettez ce qui suit dedans::
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            $suite->addTestDirectory(TESTS . 'Case/Model');
             return $suite;
         }
     }
@@ -1194,10 +1194,23 @@ Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
 un répertoire pour tous les tests en utilisant::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 
 Ajouterait de façon récursive tous les cas de test dans le répertoire
-``app/Test/Case/``.
+``app/Test/Case/Model``. Vous pouvez utiliser les suites de test pour
+construire une suite qui exécute tous les tests de votre application::
+
+    class AllTestsTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All tests');
+            $suite->addTestDirectory(TESTS . 'Case');
+            return $suite;
+        }
+    }
+
+Vous pouvez ensuite lancer ce test en ligne de commande en utilisant::
+
+    $ Console/cake test app AllTests
 
 Créer des Tests pour les Plugins
 ================================
