@@ -815,11 +815,8 @@ CakePHP's ORM provides dynamically constructed finder methods which allow you to
 easily express simple queries with no additional code. For example if you wanted
 to find a user by username you could do::
 
+    // The following two calls are equal.
     $query = $users->findByUsername('joebob');
-
-The above would start a find operation that added the equivalent of ``WHERE username = 'joebob'
-LIMIT 1``. You can create queries to find multiple entities using::
-
     $query = $users->findAllByUsername('joebob');
 
 When using dynamic finders you can constrain on multiple fields::
@@ -841,7 +838,7 @@ with custom finders::
 The above would translate into the following::
 
     $users->find('trolls', [
-        'conditions' => ['username' => 'joebob']
+        'conditions' => ['username' => 'bro']
     ]);
 
 .. note::
