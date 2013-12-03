@@ -334,9 +334,13 @@ Flow Control
         public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
-                return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
+                return $this->redirect(
+                    array('controller' => 'orders', 'action' => 'thanks')
+                );
             }
-            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+            return $this->redirect(
+                array('controller' => 'orders', 'action' => 'confirm')
+            );
         }
 
     You can also use a relative or absolute URL as the $url argument::
@@ -364,14 +368,28 @@ Flow Control
     to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
     you can use::
 
-        $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+        $this->redirect(array(
+            'controller' => 'orders',
+            'action' => 'confirm',
+            'product' => 'pizza',
+            'quantity' => 5)
+        );
 
     An example using query strings and hash would look like::
 
         $this->redirect(array(
-            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+            'controller' => 'orders',
+            'action' => 'confirm',
+            '?' => array(
+                'product' => 'pizza',
+                'quantity' => 5
+            ),
+            '#' => 'top')
+        );
 
-    The generated URL would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
+    The generated URL would be::
+
+        http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
@@ -447,7 +465,9 @@ Other Useful Methods
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
-                return $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect(
+                    $this->referer(array('action' => 'index'))
+                );
             }
         }
 
@@ -565,7 +585,10 @@ Other Useful Methods
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }
-                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+                return $this->Comment->find(
+                    'all',
+                    array('order' => 'Comment.created DESC', 'limit' => 10)
+                );
             }
         }
 
@@ -651,7 +674,10 @@ Other Useful Methods
     model::
 
         $this->loadModel('Article');
-        $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
+        $recentArticles = $this->Article->find(
+            'all',
+            array('limit' => 5, 'order' => 'Article.created DESC')
+        );
 
         $this->loadModel('User', 2);
         $user = $this->User->read();
