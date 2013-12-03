@@ -1127,7 +1127,7 @@ would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            $suite->addTestDirectory(TESTS . 'Case/Model');
             return $suite;
         }
     }
@@ -1137,10 +1137,23 @@ The code above will group all test cases found in the
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 
-Would recursively add all test cases in the ``app/Test/Case/``
-directory.
+Would recursively add all test cases in the ``app/Test/Case/Model``
+directory. You can use test suites to build a suite that runs all your
+application's tests::
+
+    class AllTestsTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All tests');
+            $suite->addTestDirectory(TESTS . 'Case');
+            return $suite;
+        }
+    }
+
+You can then run this test on the command line using::
+
+    $ Console/cake test app AllTests
 
 Creating Tests for Plugins
 ==========================
