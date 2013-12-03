@@ -223,8 +223,8 @@ these steps:
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets
-                      (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
                         <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
                           appendQueryString="false" />

@@ -518,13 +518,13 @@ can be called with a few different parameter configurations::
     // Set multiple headers
     $this->response->header(array(
         'Location' => 'http://example.com',
-        'X-Extra' => 'My header')
-    );
+        'X-Extra' => 'My header'
+    ));
 
     $this->response->header(array(
         'WWW-Authenticate: Negotiate',
-        'Content-type: application/pdf')
-    );
+        'Content-type: application/pdf'
+    ));
 
 Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when

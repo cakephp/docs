@@ -388,7 +388,8 @@ Flow Control
         );
 
     The generated URL would be::
-    http://www.example.com/orders/confirm?product=pizza&quantity=5#top
+
+        http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 

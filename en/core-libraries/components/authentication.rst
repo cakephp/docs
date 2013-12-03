@@ -319,8 +319,8 @@ messages AuthComponent uses. In your controller's beforeFilter, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->authError = "This error shows up with the user tries to access a
-                                part of the website that is protected.";
+    $this->Auth->authError = "This error shows up with the user tries to access" .
+                                "a part of the website that is protected.";
 
 .. versionchanged:: 2.4
    Sometimes, you want to display the authorization error only after
