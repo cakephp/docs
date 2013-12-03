@@ -1135,6 +1135,9 @@ of the find.
 You might use this callback to restrict find operations based on a user's role,
 or make caching decisions based on the current load.
 
+In previous versions of CakePHP there was an ``afterFind`` callback, this has
+been replaced with the :ref:`map-reduce` features and entity constructors.
+
 beforeValidate
 --------------
 
