@@ -833,7 +833,7 @@ supported with dynamic finders. You should use :ref:`custom-find-methods` to
 encapsulate more complex queries.  Lastly, you can also combine dynamic finders
 with custom finders::
 
-    $query = $users->findTrollsByUsername('joebob');
+    $query = $users->findTrollsByUsername('bro');
 
 The above would translate into the following::
 
