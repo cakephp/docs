@@ -87,7 +87,8 @@ Les paramètres Querystring peuvent être lus en utilisant
     $this->request->query['page'];
 
     //  Vous pouvez aussi y accéder par un tableau
-    $this->request['url']['page']; // accesseur BC, va être déprécié dans les versions futures
+    // accesseur BC, va être déprécié dans les versions futures
+    $this->request['url']['page'];
 
 Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
 utiliser :php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une
@@ -103,7 +104,8 @@ Toutes les données POST peuvent être atteintes à travers
 :php:attr:`CakeRequest::$data`. N'importe quelle forme de tableau qui contient
 un prefixe ``data``, va avoir sa donnée prefixée retirée. Par exemple::
 
-    // Un input avec un nom attribute égal à 'data[MyModel][title]' est accessible
+    // Un input avec un nom attribute égal à 'data[MyModel][title]'
+    // est accessible
     $this->request->data['MyModel']['title'];
 
 Vous pouvez soit accéder directement à la propriété des données, soit vous
@@ -193,10 +195,16 @@ pouvez créer:
 Quelques exemples seraient::
 
     // Ajouter un détecteur d'environment.
-    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    $this->request->addDetector(
+        'post',
+        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    );
     
     // Ajouter un détecteur de valeur model.
-    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    $this->request->addDetector(
+        'iphone',
+        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    );
     
     // Ajouter un détecteur d'options
     $this->request->addDetector('internalIp', array(
@@ -204,10 +212,14 @@ Quelques exemples seraient::
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
     
-    // Ajouter un détecteur de callback. Peut soit être une fonction anonyme ou un callback régulier.
-    $this->request->addDetector('awesome', array('callback' => function ($request) {
-        return isset($request->awesome);
-    }));
+    // Ajouter un détecteur de callback. Peut soit être une fonction anonyme
+    // ou un callback régulier.
+    $this->request->addDetector(
+        'awesome',
+        array('callback' => function ($request) {
+            return isset($request->awesome);
+        })
+    );
 
 ``CakeRequest`` inclut aussi des méthodes comme
 :php:meth:`CakeRequest::domain()`, :php:meth:`CakeRequest::subdomains()`
@@ -486,7 +498,8 @@ fichier en réponse::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Retourne un objet reponse pour éviter que le controller n'essaie de rendre la vue
+        //Retourne un objet reponse pour éviter que le controller n'essaie de
+        // rendre la vue
         return $this->response;
     }
 
@@ -500,7 +513,10 @@ d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode
 Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au lieu
 d'être affiché dans le navigateur en spécifiant les options::
 
-    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+    $this->response->file(
+        $file['path'],
+        array('download' => true, 'name' => 'foo')
+    );
 
 Envoyer une chaîne en fichier
 =============================
@@ -517,7 +533,8 @@ chaîne générée en fichier, vous pouvez faire cela en utilisant::
         //Force le téléchargement de fichier en option
         $this->response->download('filename_for_download.ics');
 
-        //Retourne l'object pour éviter au controller d'essayer de rendre une vue
+        //Retourne l'object pour éviter au controller d'essayer de rendre
+        // une vue
         return $this->response;
     }
 
@@ -532,8 +549,14 @@ paramètres de configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Régler plusieurs en-têtes
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    $this->response->header(array(
+        'Location' => 'http://example.com',
+        'X-Extra' => 'My header'
+    ));
+    $this->response->header(array(
+        'WWW-Authenticate: Negotiate',
+        'Content-type: application/pdf'
+    ));
 
 Régler le même en-tête de multiples fois entraînera l'écrasement des
 précédentes valeurs, un peu comme les appels réguliers d'en-tête. Les en-têtes

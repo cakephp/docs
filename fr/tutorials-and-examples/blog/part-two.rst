@@ -528,10 +528,16 @@ Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link(
+                    $post['Post']['title'],
+                    array('action' => 'view', $post['Post']['id'])
+                ); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Editer', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link(
+                    'Editer',
+                    array('action' => 'edit', $post['Post']['id'])
+                ); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -553,7 +559,9 @@ Posts (PostsController) ::
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('Le post avec id : %s a été supprimé.', h($id)));
+            $this->Session->setFlash(
+                __('Le post avec id : %s a été supprimé.', h($id))
+            );
             return $this->redirect(array('action' => 'index'));
         }
     }
@@ -578,7 +586,10 @@ ainsi :
     <!-- Fichier: /app/View/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link('Ajouter un Post', array('action' => 'add')); ?></p>
+    <p><?php echo $this->Html->link(
+        'Ajouter un Post',
+        array('action' => 'add')
+    ); ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -593,7 +604,10 @@ ainsi :
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link(
+                    $post['Post']['title'],
+                    array('action' => 'view', $post['Post']['id'])
+                ); ?>
             </td>
             <td>
                 <?php echo $this->Form->postLink(
@@ -601,7 +615,10 @@ ainsi :
                     array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Etes-vous sûr ?'));
                 ?>
-                <?php echo $this->Html->link('Editer', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link(
+                    'Editer',
+                    array('action' => 'edit', $post['Post']['id'])
+                ); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -643,7 +660,10 @@ Le routage de CakePHP se trouve dans ``/app/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+    Router::connect(
+        '/',
+        array('controller' => 'pages', 'action' => 'display', 'home')
+    );
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous
 voulons que cette URL soit connectée à notre propre controller, remplacez donc

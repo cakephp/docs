@@ -185,9 +185,15 @@ Une simple fonction de connexion pourrait ressembler à cela ::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
-                // Avant 2.3, utilisez `return $this->redirect($this->Auth->redirect());`
+                // Avant 2.3, utilisez
+                // `return $this->redirect($this->Auth->redirect());`
             } else {
-                $this->Session->setFlash(__('Username ou password est incorrect'), 'default', array(), 'auth');
+                $this->Session->setFlash(
+                    __('Username ou password est incorrect'),
+                    'default',
+                    array(),
+                    'auth'
+                );
             }
         }
     }
@@ -401,7 +407,9 @@ callback of your model using appropriate password hasher class::
         public function beforeSave($options = array()) {
             if (!$this->id) {
                 $passwordHasher = new SimplePasswordHasher();
-                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
+                $this->data['User']['password'] = $passwordHasher->hash(
+                    $this->data['User']['password']
+                );
             }
             return true;
         }

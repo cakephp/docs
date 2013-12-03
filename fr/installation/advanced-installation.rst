@@ -91,8 +91,9 @@ fichier ``Config/bootstrap.php``, ajoutez ce qui suit::
     // Charger l'autoload de composer.
     require APP . '/Vendor/autoload.php';
 
-    // Retire et re-prepend l'autoloader de CakePHP puisque composer pense que c'est le plus important.
-    // See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
+    // Retire et re-prepend l'autoloader de CakePHP puisque composer pense que
+    // c'est le plus important.
+    // See http://goo.gl/kKVJO7
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
