@@ -760,8 +760,10 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
         ]
     ];
 
-Creating finder methods
------------------------
+.. _custom-find-methods:
+
+Custom finder methods
+---------------------
 
 The examples above show how to use the built-in ``all`` and ``list`` finders.
 However, it is possible and recommended that you implement your own finder
@@ -806,12 +808,43 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
-Magic finders
--------------
+Dynamic finders
+---------------
 
-.. TODO::
-    There is no code for this yet. This section will need to be written
-    when the code exists.
+CakePHP's ORM provides dynamically constructed finder methods which allow you to
+easily express simple queries with no additional code. For example if you wanted
+to find a user by username you could do::
+
+    // The following two calls are equal.
+    $query = $users->findByUsername('joebob');
+    $query = $users->findAllByUsername('joebob');
+
+When using dynamic finders you can constrain on multiple fields::
+
+    $query = $users->findAllByUsernameAndApproved('joebob', 1);
+
+You can also create ``OR`` conditions::
+
+    $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
+
+While you can use either OR or AND conditions, you cannot combine the two in
+a single dynamic finder. Other query options like ``contain`` are also not
+supported with dynamic finders. You should use :ref:`custom-find-methods` to
+encapsulate more complex queries.  Lastly, you can also combine dynamic finders
+with custom finders::
+
+    $query = $users->findTrollsByUsername('bro');
+
+The above would translate into the following::
+
+    $users->find('trolls', [
+        'conditions' => ['username' => 'bro']
+    ]);
+
+.. note::
+
+    While dynamic finders make it simple to express queries, they come with some
+    additional performance overhead.
 
 
 Eager loading associations
@@ -1077,17 +1110,127 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
 Lifecycle callbacks
 ===================
 
-* Find callbacks
-* Delete callbacks
-* Save callbacks
+As you have seen above table objects trigger a number of events. Events are
+useful if you want to hook into the ORM and add logic in without subclassing or
+overriding methods. Event listeners can be defined in table or behavior classes.
+You can also use a table's event manager to bind listeners in.
+
+When using callback methods behaviors attached in the
+``initialize`` method will have their listeners fired **before** the table
+callback methods are triggered. This follows the same sequencing as controllers
+& components.
+
+To add an event listener to a Table class or Behavior simply implement the
+method signatures as described below. See the :doc:`/core-libraries/events` for
+more detail on how to use the events subsystem.
+
+beforeFind
+----------
+
+.. php:method:: beforeFind(Event $event, Query $query, array $options)
+
+The ``Model.beforeFind`` event is fired before each find operation. By stopping
+the event and supplying a return value you can bypass the find operation
+entirely. Any changes done to the $query instance will be retained for the rest
+of the find.
+
+You might use this callback to restrict find operations based on a user's role,
+or make caching decisions based on the current load.
+
+In previous versions of CakePHP there was an ``afterFind`` callback, this has
+been replaced with the :ref:`map-reduce` features and entity constructors.
+
+beforeValidate
+--------------
+
+.. php:method:: beforeValidate(Event $event, Entity $entity, array $options, Validator $validator)
+
+The ``Model.beforeValidate`` method is fired before an entity is validated. By
+stopping this event, you can abort the validate + save operations.
+
+afterValidate
+-------------
+
+.. php:method:: afterValidate(Event $event, Entity $entity, array $options, Validator $validator)
+
+The ``Model.afterValidate`` event is fired after an entity is validated.
+
+beforeSave
+----------
+
+.. php:method:: beforeSave(Event $event, Entity $entity, array $options)
+
+The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
+this event will abort the save operation. When the event is stopped the result
+of the event will be returned.
+
+afterSave
+---------
+
+.. php:method:: afterSave(Event $event, Entity $entity, array $options)
+
+The ``Model.afterSave`` event is fired after an entity is saved.
+
+beforeDelete
+------------
+
+.. php:method:: beforeDelete(Event $event, Entity $entity, array $options)
+
+The ``Model.beforeDelete`` event is fired before an entity is deleted. By
+stopping this event you will abort the delete operation.
+
+afterDelete
+-----------
+
+.. php:method:: afterDelete(Event $event, Entity $entity, array $options)
+
+Fired after an entity has been deleted.
 
 Behaviors
 =========
 
-* Adding behaviors
-* Configuring behaviors
-* Link to behavior docs.
+.. php:method:: addBehavior($name, $config = [])
 
+Behaviors provide an easy way to create horizonally re-usable pieces of logic
+related to table classes. You may be wondering why behaviors are regular classes
+and not traits. The primary reason for this is event listeners. While traits
+would allow for re-usable pieces of logic, they would complicate binding events.
+
+To add a behavior to your table you can call the ``addBehavior`` method.
+Generally the best place to do this is in the ``initialize`` method::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
+    }
+
+As with associations, you can use :term:`plugin-syntax` and provide additional
+configuration options::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp', [
+                'events' => [
+                    'Model.beforeSave' => [
+                        'created_at' => 'new',
+                        'modified_at' => 'always'
+                    ]
+                ]
+            ]);
+        }
+    }
+
+You can find out more about behaviors, including the behaviors provided by
+CakePHP in the chapter on :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
