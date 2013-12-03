@@ -681,7 +681,7 @@ URLs, vous pouvez utiliser la syntaxe suivante::
         'controller' => 'posts',
         'action' => 'index',
         'filter' => array(
-            'published' => 1
+            'published' => 1,
             'frontpage' => 1
         )
     ));
@@ -693,7 +693,7 @@ controller en tableau, de la même façon que vous les envoyez au
 :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
-        'published' => 1
+        'published' => 1,
         'frontpage' => 1
     );
 
