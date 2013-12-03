@@ -180,8 +180,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     public function beforeFilter() {
         parent::beforeFilter();
-	// ユーザー自身による登録とログアウトを許可する
-	$this->Auth->allow('add', 'logout');
+        // ユーザー自身による登録とログアウトを許可する
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
