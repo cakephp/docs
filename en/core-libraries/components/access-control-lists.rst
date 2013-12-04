@@ -798,8 +798,16 @@ yourself. What we have above is equivalent to this:
     // 6342 = Legolas
     // 1564 = Gimli
 
-    $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
-    $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 6342),
+      'Weapons',
+      'delete'
+    );
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 1564),
+      'Weapons',
+      'delete'
+    );
 
 .. note::
 
