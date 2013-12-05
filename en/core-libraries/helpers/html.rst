@@ -238,13 +238,17 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->docType();
-        // Outputs: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        // Outputs:
+        // <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        //    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
         echo $this->Html->docType('html5');
         // Outputs: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // Outputs:
+        // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        //    "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
         The default doctype is html5 in 2.1.
@@ -337,7 +341,11 @@ methods of the HtmlHelper and how to use them.
     specify attributes for the element and whether or not the
     ``$title`` should be escaped.::
 
-        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+        echo $this->Html->link(
+            'Enter',
+            '/pages/home',
+            array('class' => 'button', 'target' => '_blank')
+        );
 
     Will output:
 
@@ -349,7 +357,11 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->link(
             'Dashboard',
-            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+            array(
+                'controller' => 'dashboards',
+                'action' => 'index',
+                'full_base' => true
+            )
         );
 
     Will output:
@@ -373,7 +385,12 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
+        <a href="/recipes/delete/6"
+            onclick="return confirm(
+                'Are you sure you wish to delete this recipe?'
+            );">
+            Delete
+        </a>
 
     Query strings can also be created with ``link()``.::
 
@@ -399,7 +416,12 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            array(
+                'controller' => 'recipes',
+                'action' => 'view',
+                'id' => 6,
+                'comments' => false
+            )
         );
 
     Will output:
@@ -493,14 +515,21 @@ methods of the HtmlHelper and how to use them.
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
        <?php echo $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+            array(
+                'video.mp4',
+                array(
+                    'src' => 'video.ogg',
+                    'type' => "video/ogg; codecs='theora, vorbis'"
+                )
+            ),
             array('autoplay')
         ); ?>
 
         // Output
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
-            <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+            <source src="/files/video.ogg" type="video/ogg;
+                codecs='theora, vorbis'"/>
         </video>
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
@@ -623,7 +652,8 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js">
+            </script>
 
     The first parameter can be an array to include multiple files.::
 
@@ -833,18 +863,57 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->tableCells(array(
-            array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
+            array(
+                'Jul 7th, 2007',
+                array(
+                    'Best Brownies',
+                    array('class' => 'highlight')
+                ),
+                'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
-            array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
+            array(
+                'Aug 1st, 2006',
+                'Anti-Java Cake',
+                array('No', array('id' => 'special'))
+            ),
         ));
 
     Output:
 
     .. code-block:: html
 
-        <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
-        <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
-        <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
+        <tr>
+            <td>Jul 7th, 2007</td>
+                <td class="highlight">
+                    Best Brownies
+                </td>
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jun 21st, 2007
+            </td>
+            <td>
+                Smart Cookies
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Aug 1st, 2006
+            </td>
+            <td>
+                Anti-Java Cake
+            </td>
+            <td id="special">
+                No
+            </td>
+        </tr>
 
     ::
 
