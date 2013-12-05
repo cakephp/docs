@@ -883,10 +883,11 @@ methods of the HtmlHelper and how to use them.
     .. code-block:: html
 
         <tr>
-            <td>Jul 7th, 2007</td>
-                <td class="highlight">
-                    Best Brownies
-                </td>
+            <td>
+                Jul 7th, 2007
+            </td>
+            <td class="highlight">
+                Best Brownies
             </td>
             <td>
                 Yes

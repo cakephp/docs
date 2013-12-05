@@ -215,10 +215,11 @@ There are a number of options for create():
   defaultOptions by declaring the option in the input() call::
 
     echo $this->Form->input('password'); // No div, no label
+    // has a label element
     echo $this->Form->input(
         'username',
         array('label' => 'Username')
-    ); // has a label element
+    );
 
 Closing the Form
 ================
@@ -1664,10 +1665,11 @@ inputDefaults. You can override the default options by declaring the option in t
 input() call::
 
     echo $this->Form->input('password'); // No div, no label with class 'fancy'
+    // has a label element same defaults
     echo $this->Form->input(
         'username',
         array('label' => 'Username')
-    ); // has a label element same defaults
+    );
 
 Working with SecurityComponent
 ==============================
