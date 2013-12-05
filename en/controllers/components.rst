@@ -33,7 +33,10 @@ method::
         public $components = array(
             'Auth' => array(
                 'authorize' => array('controller'),
-                'loginAction' => array('controller' => 'users', 'action' => 'login')
+                'loginAction' => array(
+                    'controller' => 'users',
+                    'action' => 'login'
+                )
             ),
             'Cookie' => array('name' => 'CookieMonster')
         );
@@ -49,7 +52,10 @@ as::
 
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->loginAction = array(
+            'controller' => 'users',
+            'action' => 'login'
+        );
 
         $this->Cookie->name = 'CookieMonster';
     }
@@ -105,7 +111,7 @@ them like so::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');

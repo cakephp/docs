@@ -45,9 +45,12 @@ handled by :php:class:`Dispatcher`. To improve performance for production
 environments, it's recommended that you either symlink or copy theme assets into
 the application's webroot. See below for more information.
 
-To use the new theme webroot create directories like
-``app/View/Themed/<themeName>/webroot<path_to_file>`` in your theme. The
-Dispatcher will handle finding the correct theme assets in your view paths.
+To use the new theme webroot create directories like::
+
+  app/View/Themed/<themeName>/webroot<path_to_file>
+
+in your theme. The Dispatcher will handle finding the correct theme assets in
+your view paths.
 
 All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like view files, if a file isn't in the theme
@@ -55,12 +58,12 @@ folder, it will default to the main webroot folder::
 
     //When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
-     
+
     //creates a path like
     /theme/purple_cupcake/css/main.css
-     
+
     //and links to
-    app/View/Themed/PurpleCupcake/webroot/css/main.css 
+    app/View/Themed/PurpleCupcake/webroot/css/main.css
 
 Increasing performance of plugin and theme assets
 -------------------------------------------------
