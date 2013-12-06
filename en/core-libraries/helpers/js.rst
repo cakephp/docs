@@ -412,7 +412,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     .. code-block:: javascript
 
-        $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
+        $("#element").draggable({
+            containment:"#content",
+            drag:onDrag,
+            grid:[10,10],
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: drop($options = array())
 
@@ -449,7 +455,12 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     .. code-block:: javascript
 
-        $("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});
+        $("#element").droppable({
+            accept:".items",
+            drop:onDrop,
+            out:onExit,
+            over:onHover
+        });
 
     .. note::
 
@@ -498,7 +509,14 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     .. code-block:: javascript
 
-        $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
+        $("#element").slider({
+            change:onChange,
+            max:10,
+            min:0,
+            orientation:"vertical",
+            stop:onComplete,
+            value:2
+        });
 
 .. php:method:: effect($name, $options = array())
 
@@ -565,7 +583,11 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     ``stop`` option to false::
 
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
+        $this->Js->event(
+            'click',
+            $this->Js->alert('hey you!'),
+            array('stop' => false)
+        );
 
     If you were using the jQuery library you would the following
     JavaScript code would be added to the buffer. Note that the default
@@ -686,7 +708,11 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
+        echo $this->Js->link(
+            'Page 2',
+            array('page' => 2),
+            array('update' => '#content')
+        );
 
     Will create a link pointing to ``/page:2`` and updating #content
     with the response.
@@ -811,7 +837,12 @@ indicator effects yourself:
         <div id="content">
             <?php echo $content_for_layout; ?>
         </div>
-        <?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>
+        <?php
+            echo $this->Html->image(
+                'indicator.gif',
+                array('id' => 'busy-indicator')
+            );
+        ?>
         </body>
     </html>
 
@@ -828,8 +859,14 @@ with the ``JsHelper``. To do that we need to update our
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,
-        'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
-        'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
+        'before' => $this->Js->get('#busy-indicator')->effect(
+            'fadeIn',
+            array('buffer' => false)
+        ),
+        'complete' => $this->Js->get('#busy-indicator')->effect(
+            'fadeOut',
+            array('buffer' => false)
+        ),
     ));
 
 This will show/hide the busy-indicator element before and after the
