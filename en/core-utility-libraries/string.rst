@@ -120,11 +120,19 @@ use the ``String`` class::
     Example::
 
         // called as TextHelper
-        echo $this->Text->highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo $this->Text->highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
         // called as String
         App::uses('String', 'Utility');
-        echo String::highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo String::highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
     Output::
 
@@ -205,14 +213,17 @@ use the ``String`` class::
             'ellipsis' => '...',
             'exact' => true
         )
-        
+
     .. versionadded:: 2.3
 
     Example::
 
+        $sampleText = 'I packed my bag and in it I put a PSP, a PS3, a TV, ' .
+            'a C# program that can divide by zero, death metal t-shirts'
+
         // called as TextHelper
         echo $this->Text->tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -223,7 +234,7 @@ use the ``String`` class::
         // called as String
         App::uses('String', 'Utility');
         echo String::tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -234,7 +245,7 @@ use the ``String`` class::
     Output::
 
         ...a TV, a C# program that can divide by zero, death metal t-shirts
-        
+
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
     :param string $haystack: The string to search.
