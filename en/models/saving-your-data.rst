@@ -75,7 +75,7 @@ single fields, in an ActiveRecord approach. You can also use
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save the 
+The above would update the title and published fields and save the
 record to the database.
 
 :php:meth:`Model::clear()`
@@ -225,7 +225,7 @@ year, the update call might look something like::
     );
 
 
-The ``$fields`` array accepts SQL expressions. Literal values should be 
+The ``$fields`` array accepts SQL expressions. Literal values should be
 quoted manually using :php:meth:`DboSource::value()`. For example if one of your
 model methods was calling ``updateAll()`` you would do the following::
 
@@ -297,7 +297,10 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
         array('title' => 'title 2'),
     );
     $data = array(
-        array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
+        array(
+            'Article' => array('title' => 'title 1'),
+            'Assoc' => array('field' => 'value')
+        ),
         array('Article' => array('title' => 'title 2')),
     );
     $Model->saveMany($data, array('deep' => true));
@@ -306,8 +309,12 @@ Keep in mind that if you want to update a record instead of creating a new
 one you just need to add the primary key index to the data row::
 
     $data = array(
-        array('Article' => array('title' => 'New article')), // This creates a new row
-        array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
+        array(
+            // This creates a new row
+            'Article' => array('title' => 'New article')),
+        array(
+            // This updates an existing row
+            'Article' => array('id' => 2, 'title' => 'title 2')),
     );
 
 
@@ -392,7 +399,10 @@ the data array should be like this::
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder')),
+            array(
+                'body' => 'Save a new user as well',
+                'User' => array('first' => 'mad', 'last' => 'coder')
+            ),
         ),
     );
 
@@ -548,7 +558,10 @@ a look at the following code.::
        public $uses = array('CourseMembership');
 
        public function index() {
-           $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
+           $this->set(
+                'courseMembershipsList',
+                $this->CourseMembership->find('all')
+            );
        }
 
        public function add() {
@@ -640,8 +653,26 @@ then the two meta-fields for the CourseMembership, e.g.::
         // View/CourseMemberships/add.ctp
 
         <?php echo $this->Form->create('CourseMembership'); ?>
-            <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
-            <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
+            <?php
+                echo $this->Form->input(
+                    'Student.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Student ID',
+                        'default' => 1
+                    )
+                );
+            ?>
+            <?php
+                echo $this->Form->input(
+                    'Course.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Course ID',
+                        'default' => 1
+                    )
+                );
+            ?>
             <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
             <?php echo $this->Form->input('CourseMembership.grade'); ?>
             <button type="submit">Save</button>
