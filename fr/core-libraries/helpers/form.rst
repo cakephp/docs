@@ -81,8 +81,9 @@ pleinement avantage du Helper Form (Helper Formulaire) est
         }
 
         // View/Recipes/edit.ctp:
-        // Puisque $this->request->data['Recipe']['id'] = 5, nous aurons un formulaire d'édition
-        echo $this->Form->create('Recipe');
+        // Puisque $this->request->data['Recipe']['id'] = 5,
+        // nous aurons un formulaire d'édition
+        <?php echo $this->Form->create('Recipe'); ?>
 
     Affichera:
 
@@ -146,7 +147,8 @@ Il y plusieurs options pour create():
 
     .. code-block:: html
 
-      <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
+     <form id="UserAddForm" enctype="multipart/form-data"
+        method="post" action="/users/add">
 
     Quand vous utilisez 'put' ou 'delete', votre formulaire aura un
     fonctionnement équivalent à un formulaire de type 'post',
@@ -224,8 +226,10 @@ Il y plusieurs options pour create():
     redéfinir le defaultOptions en déclarant l'option dans
     l'appel input()::
 
-        echo $this->Form->input('password'); // Pas de div, Pas de label
-        echo $this->Form->input('username', array('label' => 'Username')); // a un élément label 
+        // Pas de div, Pas de label
+        echo $this->Form->input('password');
+        // a un élément label 
+        echo $this->Form->input('username', array('label' => 'Username'));
 
 Fermer le Formulaire
 ====================
@@ -408,7 +412,10 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
         $this->set('userGroups', $this->UserGroup->find('list'));
         // ou bien
-        $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
+        $this->set(
+            'reallyInappropriateModelNames',
+            $this->ReallyInappropriateModelName->find('list')
+        );
 
     .. note::
 
@@ -472,8 +479,11 @@ Affichera:
 
 .. code-block:: html
 
-    <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
-    <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
+    <input type="text" id="Modelname0Fieldname"
+        name="data[Modelname][0][fieldname]">
+    <input type="text" id="Modelname1Fieldname"
+        name="data[Modelname][1][fieldname]">
+
 
 Le Helper Form utilise plusieurs suffixes de champ en interne pour la
 création de champ input datetime.
@@ -506,16 +516,16 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
     Affichera:
 
-    .. code-block:: html
+  .. code-block:: html
 
-        <div class="input file">
-            <label for="UserField">Field</label>
-            <input type="file" name="data[User][field]" value="" id="UserField" />
-        </div>
-        <div class="input email">
-            <label for="UserEmail">Email</label>
-            <input type="email" name="data[User][email]" value="" id="UserEmail" />
-        </div>
+    <div class="input file">
+        <label for="UserField">Field</label>
+        <input type="file" name="data[User][field]" value="" id="UserField" />
+    </div>
+    <div class="input email">
+        <label for="UserEmail">Email</label>
+        <input type="email" name="data[User][email]" value="" id="UserEmail" />
+    </div>
 
 *   ``$options['div']`` Utilisez cette option pour définir les attributs de la
     div contentant l'input. En utilisant une valeur chaîne configurera le nom
@@ -552,10 +562,11 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
     .. code-block:: html
 
-        <div class="input text" id="mainDiv" title="Div Title" style="display:block">
-            <label for="UserName">Name</label>
-            <input name="data[User][name]" type="text" value="" id="UserName" />
-        </div>
+    <div class="input text" id="mainDiv" title="Div Title"
+        style="display:block">
+        <label for="UserName">Name</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
+    </div>
 
     Désactiver le rendu de la div ::
 
@@ -1299,13 +1310,16 @@ Les options de Datetime
 
         <div class="input select">
            <label for="ModelField">Field</label>
-           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <input name="data[Model][field]" value="" id="ModelField"
+            type="hidden">
            <div class="checkbox">
-              <input name="data[Model][field][]" disabled="disabled" value="Value 1" id="ModelField1" type="checkbox">
+              <input name="data[Model][field][]" disabled="disabled"
+                value="Value 1" id="ModelField1" type="checkbox">
               <label for="ModelField1">Label 1</label>
            </div>
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <input name="data[Model][field][]" value="Value 2"
+                id="ModelField2" type="checkbox">
               <label for="ModelField2">Label 2</label>
            </div>
         </div>
@@ -1320,12 +1334,14 @@ Les options de Datetime
     enctype du formulaire est définit a  "multipart/form-data", donc commençons
     avec une fonction create comme ci-dessous::
 
-        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data'));
+        echo $this->Form->create('Document', array(
+            'enctype' => 'multipart/form-data'
+        ));
         // OU
         echo $this->Form->create('Document', array('type' => 'file'));
 
-    Ensuite ajoutons l'une ou l'autre des deux lignes dans le fichier de vue de votre
-    formulaire::
+    Ensuite ajoutons l'une ou l'autre des deux lignes dans le fichier de
+    vue de votre formulaire::
 
         echo $this->Form->input('Document.submittedfile', array(
             'between' => '<br />',
