@@ -54,13 +54,19 @@ Output:
 
 If you are using HTML like images in your links remember to set escaping off::
 
-    echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
+    echo $this->Paginator->sort(
+      'user_id',
+      '<em>User account</em>',
+      array('escape' => false)
+    );
 
 Output:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/"><em>User account</em></a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">
+      <em>User account</em>
+    </a>
 
 The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal::
@@ -167,13 +173,22 @@ pages in the paged data set.
 
     A simple example would be::
 
-        echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->prev(
+          ' << ' . __('previous'),
+          array(),
+          null,
+          array('class' => 'prev disabled')
+        );
 
     If you were currently on the second page of posts, you would get the following:
 
     .. code-block:: html
 
-        <span class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc"><< previous</a></span>
+        <span class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            << previous
+          </a>
+        </span>
 
     If there were no previous pages you would get:
 
@@ -189,7 +204,11 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a></li>
+        <li class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            previous
+          </a>
+        </li>
 
     You can also disable the wrapping tag::
 
@@ -199,7 +218,10 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <a class="prev" rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a>
+        <a class="prev" rel="prev"
+          href="/posts/index/page:1/sort:title/order:desc">
+          previous
+        </a>
 
 .. versionchanged:: 2.3
     For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
@@ -377,7 +399,9 @@ this feature is in :php:class:`PaginatorComponent`, you have some additional
 control in the view. You can use ``options()`` to indicate that you want other
 named parameters to be converted::
 
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
+    $this->Paginator->options(array(
+      'convertKeys' => array('your', 'keys', 'here')
+    ));
 
 Configuring the PaginatorHelper to use a JavaScript helper
 ----------------------------------------------------------
@@ -454,8 +478,18 @@ of page navigation, also supplied by the PaginationHelper::
     echo $this->Paginator->numbers();
 
     // Shows the next and previous links
-    echo $this->Paginator->prev('« Previous', null, null, array('class' => 'disabled'));
-    echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled'));
+    echo $this->Paginator->prev(
+      '« Previous',
+      null,
+      null,
+      array('class' => 'disabled')
+    );
+    echo $this->Paginator->next(
+      'Next »',
+      null,
+      null,
+      array('class' => 'disabled')
+    );
 
     // prints X of Y, where X is current page and Y is number of pages
     echo $this->Paginator->counter();
