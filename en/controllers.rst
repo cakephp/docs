@@ -576,18 +576,34 @@ Other Useful Methods
     :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` for more
     information.
 
-.. php:method:: loadModel(string $modelClass, mixed $id)
+.. php:method:: repository(string $modelClass, string $type)
 
-    The ``loadModel`` function comes handy when you need to use a model
-    which is not the controller's default model or its associated
-    model::
+    The ``repository`` function comes handy when you need to use a repository
+    that is not the controller's default one::
 
-        $this->loadModel('Article');
-        $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
+        $this->repository('Articles');
+        $recentArticles = $this->Articles->find('all', [
+            'limit' => 5,
+            'order' => 'Articles.created DESC'
+        ]);
 
-        $this->loadModel('User', 2);
-        $user = $this->User->read();
+    If you are using a repository provider other than the built-in ORM you can
+    link that repository system into CakePHP's controllers by connecting its
+    factory method::
 
+        $this->repositoryFactory(
+            'ElasticIndex',
+            ['ElasticRepository', 'factory']
+        );
+
+    After registering a repository factory, you can use ``repository`` to load
+    instances::
+
+        $this->repository('Locations', 'ElasticIndex');
+
+    .. note::
+
+        The built-in ORM's TableRegistry is the connected by default.
 
 Controller Attributes
 =====================
