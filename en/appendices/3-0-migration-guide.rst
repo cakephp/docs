@@ -218,6 +218,7 @@ RequestActionTrait
 
   - ``options[url]`` is now ``options[query]``.
   - ``options[data]`` is now ``options[post]``.
+  - Named parameters are no longer supported.
 
 Router
 ------
@@ -339,6 +340,8 @@ Controller
 - ``Controller::validate()`` and ``Controller::validationErrors()`` have been
   removed. They were left over methods from the 1.x days where the concerns of
   models + controllers were far more intertwined.
+- ``Controller::loadModel()`` has been replaced with
+  :php:class:`~Cake\\Controller\\Controller::repository()`.
 
 ComponentCollection replaced
 ----------------------------
