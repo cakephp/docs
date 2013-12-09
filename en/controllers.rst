@@ -493,7 +493,8 @@ Other Useful Methods
 
     .. note::
 
-        The built-in ORM's TableRegistry is the connected by default.
+        The built-in ORM's TableRegistry is connected by default as the 'Table'
+        provider.
 
 Controller Attributes
 =====================
