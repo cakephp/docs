@@ -51,8 +51,10 @@ the first parameter. By setting the second parameter of `hasField()` to true,
 virtualFields will also be checked when checking if a model has a field.
 Using the example field above::
 
-    $this->User->hasField('name'); // Will return false, as there is no concrete field called name
-    $this->User->hasField('name', true); // Will return true as there is a virtual field called name
+    // Will return false, as there is no concrete field called name
+    $this->User->hasField('name');
+    // Will return true as there is a virtual field called name
+    $this->User->hasField('name', true);
 
 Model::isVirtualField()
 -----------------------
@@ -71,7 +73,8 @@ This method can be used to access the SQL expression that comprises
 a virtual field. If no argument is supplied it will return all
 virtual fields in a Model::
 
-    $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
+    //returns 'CONCAT(User.first_name, ' ', User.last_name)'
+    $this->User->getVirtualField('name');
 
 Model::find() and virtual fields
 --------------------------------
@@ -109,7 +112,9 @@ best to define the virtualFields in your model's constructor::
 
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
-        $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
+        $this->virtualFields['name'] = sprintf(
+            'CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias
+        );
     }
 
 This will allow your virtualFields to work for any alias you give a
@@ -118,13 +123,22 @@ model.
 Virtual fields in SQL queries
 =============================
 
-Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
+Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data.
 For example this::
 
-    $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
+    $this->Timelog->query(
+        "SELECT
+            project_id, SUM(id) as TotalHours
+        FROM
+            timelogs
+        AS
+            Timelog
+        GROUP BY
+            project_id;"
+    );
 
 would return something like this::
-	
+
    Array
    (
        [0] => Array
@@ -151,7 +165,16 @@ If that were to occur, ``0`` would be returned in the TotalHours column::
 In addition to adding the virtual field we also need to alias our column using
 the form of ``MyModel__MyField`` like this::
 
-    $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
+    $this->Timelog->query(
+        "SELECT
+            project_id, SUM(id) as Timelog__TotalHours
+        FROM
+            timelogs
+        AS
+            Timelog
+        GROUP BY
+            project_id;"
+    );
 
 Running the query again after specifying the virtual field should result in a
 cleaner grouping of values::
@@ -167,7 +190,7 @@ cleaner grouping of values::
                     )
             )
     )
-	
+
 Limitations of virtualFields
 ============================
 
