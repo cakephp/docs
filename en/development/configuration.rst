@@ -127,24 +127,78 @@ By using :php:meth:`App::build()` in bootstrap.php we can define additional
 paths where CakePHP will look for classes::
 
     App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
+        'Model'                     => array(
+                                            '/path/to/models',
+                                            '/next/path/to/models'
+                                        ),
+        'Model/Behavior'            => array(
+                                            '/path/to/behaviors',
+                                            '/next/path/to/behaviors'
+                                        ),
+        'Model/Datasource'          => array(
+                                            '/path/to/datasources',
+                                            '/next/path/to/datasources'
+                                        ),
+        'Model/Datasource/Database' => array(
+                                            '/path/to/databases',
+                                            '/next/path/to/database'
+                                        ),
+        'Model/Datasource/Session'  => array(
+                                            '/path/to/sessions',
+                                            '/next/path/to/sessions'
+                                        ),
+        'Controller'                => array(
+                                            '/path/to/controllers',
+                                            '/next/path/to/controllers'
+                                        ),
+        'Controller/Component'      => array(
+                                            '/path/to/components',
+                                            '/next/path/to/components'
+                                        ),
+        'Controller/Component/Auth' => array(
+                                            '/path/to/auths',
+                                            '/next/path/to/auths'
+                                        ),
+        'Controller/Component/Acl'  => array(
+                                            '/path/to/acls',
+                                            '/next/path/to/acls'
+                                        ),
+        'View'                      => array(
+                                            '/path/to/views',
+                                            '/next/path/to/views'
+                                        ),
+        'View/Helper'               => array(
+                                            '/path/to/helpers',
+                                            '/next/path/to/helpers'
+                                        ),
+        'Console'                   => array(
+                                            '/path/to/consoles',
+                                            '/next/path/to/consoles'
+                                        ),
+        'Console/Command'           => array(
+                                            '/path/to/commands',
+                                            '/next/path/to/commands'
+                                        ),
+        'Console/Command/Task'      => array(
+                                            '/path/to/tasks',
+                                            '/next/path/to/tasks'
+                                        ),
+        'Lib'                       => array(
+                                            '/path/to/libs',
+                                            '/next/path/to/libs'
+                                        ),
+        'Locale'                    => array(
+                                            '/path/to/locales',
+                                            '/next/path/to/locales'
+                                        ),
+        'Vendor'                    => array(
+                                            '/path/to/vendors',
+                                            '/next/path/to/vendors'
+                                        ),
+        'Plugin'                    => array(
+                                            '/path/to/plugins',
+                                            '/next/path/to/plugins'
+                                        ),
     ));
 
 .. note::
@@ -377,7 +431,11 @@ anywhere within your application, in a static context::
     The above example could also be written in a single call::
 
         Configure::write(
-            'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
+            'Company',
+            array(
+                'name' => 'Pizza, Inc.',
+                'slogan' => 'Pizza for your body and soul'
+            )
         );
 
     You can use ``Configure::write('debug', $int)`` to switch between
@@ -395,7 +453,8 @@ anywhere within your application, in a static context::
     data back::
 
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+        Configure::read('Company.slogan');  //yields: 'Pizza for your body
+                                            //and soul'
 
         Configure::read('Company');
 
@@ -723,7 +782,10 @@ You can use :php:meth:`Inflector::rules()` in the file
 ``app/Config/bootstrap.php`` to load custom inflections::
 
     Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
+        'rules' => array(
+            '/^(bil)er$/i' => '\1',
+            '/^(inflec|contribu)tors$/i' => '\1ta'
+        ),
         'uninflected' => array('singulars'),
         'irregular' => array('spins' => 'spinor')
     ));
