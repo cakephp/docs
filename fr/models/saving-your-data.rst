@@ -284,6 +284,8 @@ une fois. Les options suivantes peuvent être utilisées:
 * ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 * ``deep``: (since 2.1) Si défini à true, les données associées sont aussi
   sauvegardées, regardez aussi saveAssociated.
+* ``callbacks`` Défini à false pour désactiver les callbacks. En utilisant
+  'before' ou 'after' va activer seulement ces callbacks.
 * ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
   counter caches (si il y en a).
 
