@@ -26,15 +26,19 @@ formes de find et il a les clés suivantes disponibles par défaut - qui sont
 toutes optionnelles::
 
     array(
-        'conditions' => array('Model.field' => $cetteValeur), //tableau de conditions
+        //tableau de conditions
+        'conditions' => array('Model.field' => $cetteValeur),
         'recursive' => 1, //int
-        'fields' => array('Model.champ1', 'DISTINCT Model.champ2'), //tableau de champs nommés
-        'order' => array('Model.created', 'Model.champ3 DESC'), //chaîne de caractère ou tableau définissant order
+        //tableau de champs nommés
+        'fields' => array('Model.champ1', 'DISTINCT Model.champ2'),
+        //chaîne de caractère ou tableau définissant order
+        'order' => array('Model.created', 'Model.champ3 DESC'),
         'group' => array('Model.champ'), //champs en GROUP BY
         'limit' => n, //int
         'page' => n, //int
         'offset' => n, //int
-        'callbacks' => true //autres valeurs possible sont false, 'before', 'after'
+        //autres valeurs possibles sont false, 'before', 'after'
+        'callbacks' => true
     )
 
 Il est possible également, d'ajouter et d'utiliser d'autres paramètres, dont
@@ -384,8 +388,11 @@ Ci-dessous, un exemple simple (code du controller):
 
 ::
 
-    public function une_function() {
-       $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
+    public function some_function() {
+        $neighbors = $this->Article->find(
+            'neighbors',
+            array('field' => 'id', 'value' => 3)
+        );
     }
 
 Vous pouvez voir dans cet exemple, les deux éléments requis par le
@@ -565,21 +572,23 @@ régler le compte de pagination:
     class AppModel extends Model {
 
     /**
-     * Retire la clé 'fields' du compte de la requête find personnalisée 
-     * quand c'est un tableau, comme il cassera entièrement l'appel 
-     * Model::_findCount() call
+     * Removes 'fields' key from count query on custom finds when it is an array,
+     * as it will completely break the Model::_findCount() call
      *
-     * @param string $state Soit "before" soit "after"
+     * @param string $state Either "before" or "after"
      * @param array $query
      * @param array $results
-     * @return int Le nombre d'enregistrements trouvés, ou false
+     * @return int The number of records found, or false
      * @access protected
      * @see Model::find()
      */
         protected function _findCount($state, $query, $results = array()) {
             if ($state === 'before') {
-                if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
-                    $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
+                if (isset($query['type']) &&
+                    isset($this->findMethods[$query['type']])) {
+                    $query = $this->{
+                        '_find' . ucfirst($query['type'])
+                    }('before', $query);
                     if (!empty($query['fields']) && is_array($query['fields'])) {
                         if (!preg_match('/^count/i', current($query['fields']))) {
                             unset($query['fields']);
@@ -591,6 +600,7 @@ régler le compte de pagination:
         }
 
     }
+    ?>
 
 
 .. versionchanged:: 2.2
@@ -785,8 +795,12 @@ Si aucun enregistrement correspondant n'est trouvé cela retournera false.
     $this->Post->id = 22;
     echo $this->Post->field('name'); // affiche le nom pour la ligne avec l'id 22
 
-    echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
     // affiche le nom de la dernière instance créée
+    echo $this->Post->field(
+        'name',
+        array('created <' => date('Y-m-d H:i:s')),
+        'created DESC'
+    );
 
 :php:meth:`Model::read()`
 =========================
@@ -872,7 +886,9 @@ Faire un NOT IN(...) correspond à trouver les posts dont le titre n'est pas
 dans le jeu de données passé::
 
     array(
-        "NOT" => array("Post.titre" => array("Premier post", "Deuxième post", "Troisième post"))
+        "NOT" => array(
+            "Post.titre" => array("First post", "Second post", "Third post")
+        )
     )
 
 Ajouter des filtres supplémentaires aux conditions est aussi simple que

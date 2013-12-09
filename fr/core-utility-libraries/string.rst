@@ -125,11 +125,19 @@ d'une ``View``, utilisez la classe ``String``::
     Exemple::
 
         // appelé avec TextHelper
-        echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo $this->Text->highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
         // appelé avec String
         App::uses('String', 'Utility');
-        echo String::highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo String::highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
     Sortie::
 
@@ -215,9 +223,12 @@ d'une ``View``, utilisez la classe ``String``::
 
     Exemple::
 
+        $sampleText = 'I packed my bag and in it I put a PSP, a PS3, a TV, ' .
+            'a C# program that can divide by zero, death metal t-shirts'
+
         // appelé avec TextHelper
         echo $this->Text->tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -228,7 +239,7 @@ d'une ``View``, utilisez la classe ``String``::
         // appelé avec String
         App::uses('String', 'Utility');
         echo String::tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -256,11 +267,11 @@ d'une ``View``, utilisez la classe ``String``::
     être montrés dans le document résultant.::
 
         // appelé avec TextHelper
-        echo $this->Text->excerpt($last_paragraph, 'method', 50, '...');
+        echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
         // appelé avec String
         App::uses('String', 'Utility');
-        echo String::excerpt($last_paragraph, 'method', 50, '...');
+        echo String::excerpt($lastParagraph, 'method', 50, '...');
 
     Sortie::
 

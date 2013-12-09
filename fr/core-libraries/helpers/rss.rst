@@ -59,13 +59,19 @@ le même::
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
-            $posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));
+            $posts = $this->Post->find(
+                'all',
+                array('limit' => 20, 'order' => 'Post.created DESC')
+            );
             return $this->set(compact('posts'));
         }
 
         // ceci n'est pas une requête RSS
         // donc on retourne les données utilisées par l'interface du site web
-        $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
+        $this->paginate['Post'] = array(
+            'order' => 'Post.created DESC',
+            'limit' => 10
+        );
         
         $posts = $this->paginate();
         $this->set(compact('posts'));
@@ -143,7 +149,7 @@ pour chaque pair de valeur de clé.
 
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
-    
+
         $postLink = array(
             'controller' => 'posts',
             'action' => 'view',
@@ -160,7 +166,7 @@ pour chaque pair de valeur de clé.
             'exact'  => true,
             'html'   => true,
         ));
-         
+
         echo  $this->Rss->item(array(), array(
             'title' => $post['Post']['title'],
             'link' => $postLink,

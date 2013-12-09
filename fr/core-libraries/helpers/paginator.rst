@@ -58,13 +58,19 @@ Sortie:
 Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
-    echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
+    echo $this->Paginator->sort(
+      'user_id',
+      '<em>User account</em>',
+      array('escape' => false)
+    );
 
 Sortie:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/"><em>User account</em></a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">
+      <em>User account</em>
+    </a>
 
 L'option de direction peut être utilisée pour paramétrer la direction par
 défaut pour un lien. Une fois qu'un lien est activé, il changera
@@ -179,14 +185,23 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
         
     Un simple exemple serait::
 
-        echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->prev(
+          ' << ' . __('previous'),
+          array(),
+          null,
+          array('class' => 'prev disabled')
+        );
 
     Si vous étiez actuellement sur la secondes pages des posts (articles),
     vous obtenez le résultat suivant:
 
     .. code-block:: html
 
-        <span class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc"><< previous</a></span>
+        <span class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            << previous
+          </a>
+        </span>
 
     Si il n'y avait pas de page précédente vous obtenez:
 
@@ -202,7 +217,11 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a></li>
+        <li class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            previous
+          </a>
+        </li>
 
     Vous pouvez aussi désactiver la balise enroulante::
 
@@ -212,7 +231,10 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <a class="prev" rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a>
+        <a class="prev" rel="prev"
+          href="/posts/index/page:1/sort:title/order:desc">
+          previous
+        </a>
 
 .. versionchanged:: 2.3
     Pour les méthodes: :php:meth:`PaginatorHelper::prev()` et
@@ -406,7 +428,9 @@ que la principale option de configuration pour cette fonctionnalité est dans
 les vues. Vous pouvez utiliser `options()`` pour indiquer que vous voulez la
 conversion d'autres paramètres nommés::
 
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
+    $this->Paginator->options(array(
+      'convertKeys' => array('your', 'keys', 'here')
+    ));
 
 Configurer le Helper Paginator pour utiliser le Helper Javascript
 -----------------------------------------------------------------
