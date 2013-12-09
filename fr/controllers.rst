@@ -352,9 +352,13 @@ Contrôle de Flux
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
-                return $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
+                return $this->redirect(
+                    array('controller' => 'paiements', 'action' => 'remerciements')
+                );
             } else {
-                return $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
+                return $this->redirect(
+                    array('controller' => 'paiements', 'action' => 'confirmations')
+                );
             }
         }
 
@@ -386,15 +390,28 @@ Contrôle de Flux
     ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
     vous pouvez utiliser::
 
-        $this->redirect(array('controller' => 'commandes', 'action' => 'confirmation', 'produit' => 'pizza', 'quantite' => 5));
+        $this->redirect(array(
+            'controller' => 'commandes',
+            'action' => 'confirmation',
+            'produit' => 'pizza',
+            'quantite' => 5
+        ));
 
     Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
     à ceci::
 
         $this->redirect(array(
-            'controller' => 'commandes', 'action' => 'confirmation', '?' => array('produit' => 'pizza', 'quantite' => 5), '#' => 'top'));
+            'controller' => 'commandes',
+            'action' => 'confirmation',
+            '?' => array(
+                'produit' => 'pizza',
+                'quantite' => 5
+            ),
+            '#' => 'top'
+        ));
 
-    L'URL généré serait: ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
+    L'URL généré serait:
+        ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
@@ -594,7 +611,10 @@ Autres Méthodes utiles
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }
-                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+                return $this->Comment->find(
+                    'all',
+                    array('order' => 'Comment.created DESC', 'limit' => 10)
+                );
             }
         }
 
@@ -684,7 +704,10 @@ Autres Méthodes utiles
     ou un de ses models associés::
     
         $this->loadModel('Article');
-        $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
+        $recentArticles = $this->Article->find(
+            'all',
+            array('limit' => 5, 'order' => 'Article.created DESC')
+        );
 
         $this->loadModel('User', 2);
         $user = $this->User->read();

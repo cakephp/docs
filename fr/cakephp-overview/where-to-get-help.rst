@@ -92,19 +92,15 @@ Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
 -   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
 -   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
 
-CakePHP dispose également d'un Groupe Google très actif.
-Il peut être une ressource de choix pour trouver des réponses archivées,
-des questions fréquemment posées et obtenir des réponses aux problèmes urgents.
 
-Les Questions CakePHP
-=====================
+Stackoverflow
+=============
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Simplement s'inscrire/se connecter et poser une question. Attendez jusqu'à ce
-que vous ayez quelques réponses et choisissez la réponse correcte. Vous pouvez
-aussi voir, commenter et voter pour les questions précédemment demandées et
-aussi les questions résolues.
+Tagge vos questions avec ``cakephp`` et la version sépcifique que vous utilisez
+pour permettre aux utilisateurs existant de stackoverflow de trouver vos
+questions.
 
 
 .. meta::

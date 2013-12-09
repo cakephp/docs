@@ -83,11 +83,11 @@ Le balisage interne
 * Un astérisque: *text* pour une accentuation (italiques)
 
   * ``*text*``
- 
+
 * Two asterisks: **text** pour une forte accentuation (caractères gras)
 
   * ``**text**``
- 
+
 * Two backquotes: ``text`` pour les exemples de code
 
   * ````text````
@@ -167,9 +167,9 @@ Lien vers les autres pages
     modèle ``:doc:``. Vous pouvez faire un lien à un document spécifique en
     utilisant, soit un chemin de référence absolu ou relatif. Vous pouvez
     omettre l'extension ``.rst``. Par exemple, si la référence
-    ``:doc:`form`` apparait dans le document ``core-helpers/html``, alors le
+    ``:doc:`form``` apparait dans le document ``core-helpers/html``, alors le
     lien de référence ``core-helpers/form``. Si la référence était
-    ``:doc:`/core-helpers`` il serait en référence avec ``/core-helpers`` sans
+    ``:doc:`/core-helpers``` il serait en référence avec ``/core-helpers`` sans
     soucis de où il a été utilisé.
 
 Les liens croisés de référencement
@@ -224,7 +224,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
    Cette directive déclare une nouvelle constante PHP, vous pouvez aussi
    l'utiliser imbriquée à l'intérieur d'une directive de classe pour créer
    les constantes de classe.
-   
+
 .. rst:directive:: .. php:exception:: name
 
    Cette directive déclare un nouvelle Exception dans l'espace de noms
@@ -260,16 +260,16 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
 .. rst:directive:: .. php:method:: name(signature)
 
-   Décrire une méthode de classe, ses arguments, les valeurs retournées et 
+   Décrire une méthode de classe, ses arguments, les valeurs retournées et
    les exceptions::
-   
+
         .. php:method:: instanceMethod($one, $two)
-        
+
             :param string $un: Le premier param\ètre.
             :param string $deux: Le deuxième param\ètre.
             :returns: Un tableau de trucs.
             :throws: InvalidArgumentException
-        
+
            C\'est un m\éthode d\'instanciation.
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
@@ -337,7 +337,7 @@ Le block littéral doit être indenté, et comme pour tous les paragraphes, êtr
 séparé par des lignes uniques::
 
     C'est un paragraphe::
-        
+
         while ($i--) {
             faireDesTrucs()
         }

@@ -530,8 +530,8 @@ le faisons toujours :
 
     public function touteslesActions() {
         $aro =& $this->Acl->Aro;
-        //Ici ce sont toutes les informations sur le tableau de notre groupe que nous
-        //pouvons itérer comme ceci
+        // Ici ce sont toutes les informations sur le tableau de notre groupe
+        // que nous pouvons itérer comme ceci
         $groups = array(
             0 => array(
             'alias' => 'guerriers'
@@ -807,8 +807,16 @@ AROs ci-dessus, mais vous pourriez utiliser votre propre syntaxe model/clé
     // 6342 = Legolas
     // 1564 = Gimli
 
-    $this->Acl->deny(array('model' => 'Utilisateur', 'foreign_key' => 6342), 'Armes', 'delete');
-    $this->Acl->deny(array('model' => 'Utilisateur', 'foreign_key' => 1564), 'Armes', 'delete');
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 6342),
+      'Weapons',
+      'delete'
+    );
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 1564),
+      'Weapons',
+      'delete'
+    );
 
 .. note::
 
@@ -816,7 +824,7 @@ AROs ci-dessus, mais vous pourriez utiliser votre propre syntaxe model/clé
     chaîne délimitée par des slashs ('/utilisateurs/salaries/developpeurs').
     L'adressage d'un nœud en utilisant la syntaxe model/clé étrangère
     nécessite un tableau avec deux paramètres :
-    ``array('model' => 'Utilisateur', 'foreign_key' => 8282)``.
+    ``array('model' => 'User', 'foreign_key' => 8282)``.
 
 La prochaine section nous aidera à valider notre configuration, en utilisant
 le component Acl pour contrôler les permissions que nous venons de définir.

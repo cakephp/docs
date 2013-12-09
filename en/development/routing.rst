@@ -652,7 +652,7 @@ syntax::
         'controller' => 'posts',
         'action' => 'index',
         'filter' => array(
-            'published' => 1
+            'published' => 1,
             'frontpage' => 1
         )
     ));
@@ -662,7 +662,7 @@ The parameters are then parsed and stored in your controller's passedArgs variab
 as an array, just as you sent them to :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
-        'published' => 1
+        'published' => 1,
         'frontpage' => 1
     );
 

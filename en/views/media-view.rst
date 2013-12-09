@@ -5,7 +5,7 @@ Media Views
 
 .. deprecated:: 2.3
    Use :ref:`cake-response-file` instead.
-   
+
 Media views allow you to send binary files to the user. For example, you may
 wish to have a directory of files outside of the webroot to prevent users from
 direct linking them. You can use the Media view to pull the file from a special
@@ -32,7 +32,7 @@ parameters to specify where your file is located::
     }
 
 Here's an example of rendering a file whose mime type is not included in the
-MediaView's ``$mimeType`` array. We are also using a relative path which will 
+MediaView's ``$mimeType`` array. We are also using a relative path which will
 default to your ``app/webroot`` folder::
 
     public function download() {
@@ -43,7 +43,8 @@ default to your ``app/webroot`` folder::
             'name'      => 'example',
             'extension' => 'docx',
             'mimeType'  => array(
-                'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                'docx' => 'application/vnd.openxmlformats-officedocument' .
+                    '.wordprocessingml.document'
             ),
             'path'      => 'files' . DS
         );

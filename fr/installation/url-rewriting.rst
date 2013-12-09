@@ -218,21 +218,27 @@ faire, suivez ces étapes:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                    <rule name="Rewrite requests to test.php"
+                      stopProcessing="true">
                         <match url="^test.php(.*)$" ignoreCase="false" />
                         <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*"
+                      stopProcessing="true">
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
                     </rule>
-                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>

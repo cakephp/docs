@@ -50,10 +50,12 @@ production, il est recommandé, soit que vous fassiez un lien symbolique, soit
 que vous copiez les assets du thème dans le webroot de application. Voir
 ci-dessous pour plus d'informations.
 
-Pour utiliser le nouveau thème, créez des répertoires de type
-``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>`` dans votre thème.
-Le Dispatcher se chargera de trouver les assets du thème corrects dans vos
-chemins de vue.
+Pour utiliser le nouveau webroot du thème, créez des répertoires comme::
+
+``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>``
+
+dans votre thème. Le Dispatcher se chargera de trouver les assets du thème
+corrects dans vos chemins de vue.
 
 Tous les helpers integrés dans CakePHP ont intégrés l'existence des thèmes
 et vont créer des chemins d'accès corrects automatiquement. Comme pour les
@@ -90,4 +92,4 @@ cakephp.
 
 .. meta::
     :title lang=fr: Thèmes
-    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,lien symbolique,cas de base,layouts,assets,cakephp,thèmes,avantage
+    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,lien symbolique,cas de base,layouts,assets,cakephp,thèmes,themes,avantage

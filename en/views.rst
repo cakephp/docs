@@ -480,8 +480,10 @@ The options supported are 'cache' and 'callbacks'. An example::
             "foobar" => "This is passed to the element as $foobar",
         ),
         array(
-            "cache" => "long_view", // uses the "long_view" cache configuration
-            "callbacks" => true // set to true to have before/afterRender called for the element
+            // uses the "long_view" cache configuration
+            "cache" => "long_view",
+            // set to true to have before/afterRender called for the element
+            "callbacks" => true
         )
     );
 
@@ -527,7 +529,11 @@ like the following:
 .. code-block:: php
 
     <h2>Latest Posts</h2>
-    <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
+    <?php
+      $posts = $this->requestAction(
+        'posts/index/sort:created/direction:asc/limit:5'
+      );
+    ?>
     <ol>
     <?php foreach ($posts as $post): ?>
           <li><?php echo $post['Post']['title']; ?></li>
@@ -687,7 +693,10 @@ To call any view method use ``$this->method()``
     object type and URL. This method is often used by helpers that need
     to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
 
-        $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
+        $uuid = $this->uuid(
+          'form',
+          array('controller' => 'posts', 'action' => 'index')
+        );
         //$uuid contains 'form0425fe3bad'
 
 .. php:method:: addScript(string $name, string $content)

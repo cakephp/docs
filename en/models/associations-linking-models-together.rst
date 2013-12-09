@@ -531,7 +531,10 @@ Using our Image model example, we can specify it like so::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('ImageComment.active' => 1) // only count if "ImageComment" is active = 1
+                // only count if "ImageComment" is active = 1
+                'counterScope' => array(
+                  'ImageComment.active' => 1
+                )
             )
         );
     }

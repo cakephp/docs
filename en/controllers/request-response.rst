@@ -82,7 +82,8 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
     $this->request->query['page'];
 
     // You can also access it via array access
-    $this->request['url']['page']; // BC accessor, will be deprecated in future versions
+    // Note: BC accessor, will be deprecated in future versions
+    $this->request['url']['page'];
 
 You can either directly access the query property, or you can use
 :php:meth:`CakeRequest::query()` to read the URL query array in an error free manner.
@@ -97,7 +98,8 @@ Accessing POST data
 All POST data can be accessed using :php:attr:`CakeRequest::$data`. Any form data
 that contains a ``data`` prefix, will have that data prefix removed. For example::
 
-    // An input with a name attribute equal to 'data[MyModel][title]' is accessible at
+    // An input with a name attribute equal to 'data[MyModel][title]'
+    // is accessible at
     $this->request->data['MyModel']['title'];
 
 You can either directly access the data property, or you can use
@@ -180,10 +182,16 @@ that you can create:
 Some examples would be::
 
     // Add an environment detector.
-    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    $this->request->addDetector(
+        'post',
+        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    );
 
     // Add a pattern value detector.
-    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    $this->request->addDetector(
+        'iphone',
+        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    );
 
     // Add an option detector
     $this->request->addDetector('internalIp', array(
@@ -191,10 +199,14 @@ Some examples would be::
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
 
-    // Add a callback detector. Can either be an anonymous function or a regular callable.
-    $this->request->addDetector('awesome', array('callback' => function ($request) {
-        return isset($request->awesome);
-    }));
+    // Add a callback detector. Can either be an anonymous function
+    // or a regular callable.
+    $this->request->addDetector(
+        'awesome',
+        array('callback' => function ($request) {
+            return isset($request->awesome);
+        })
+    );
 
 ``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
 :php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
@@ -294,7 +306,7 @@ CakeRequest API
     decoding function. Useful when interacting with XML or JSON
     request body content. Additional parameters for the decoding function
     can be passed as arguments to input()::
-    
+
         $this->request->input('json_decode');
 
 .. php:method:: data($name)
@@ -457,7 +469,8 @@ to send a file as response::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Return response object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -469,7 +482,10 @@ by using the :php:meth:`CakeResponse::type()` method.
 If you want you can also force a file to be downloaded instead of being displayed in
 the browser by specifying the options::
 
-    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+    $this->response->file(
+        $file['path'],
+        array('download' => true, 'name' => 'foo')
+    );
 
 Sending a string as file
 ========================
@@ -485,7 +501,8 @@ a pdf or an ics generated on the fly, and serve the generated string as a file b
         //Optionally force file download
         $this->response->download('filename_for_download.ics');
 
-        //Return response object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -499,8 +516,15 @@ can be called with a few different parameter configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Set multiple headers
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    $this->response->header(array(
+        'Location' => 'http://example.com',
+        'X-Extra' => 'My header'
+    ));
+
+    $this->response->header(array(
+        'WWW-Authenticate: Negotiate',
+        'Content-type: application/pdf'
+    ));
 
 Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when
@@ -631,7 +655,7 @@ The ``Etag`` header (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
-To take advantage of this header you have to either call the 
+To take advantage of this header you have to either call the
 :php:meth:`CakeResponse::checkNotModified()` method manually or to have the
 :php:class:`RequestHandlerComponent` included in your controller::
 
@@ -671,7 +695,7 @@ The Vary header
 ---------------
 
 In some cases you might want to serve different content using the same URL.
-This is often the case if you have a multilingual page or respond with different 
+This is often the case if you have a multilingual page or respond with different
 HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');

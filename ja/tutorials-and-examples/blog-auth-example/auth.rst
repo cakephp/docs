@@ -116,6 +116,7 @@ UsersControllerもまた作成しましょう。
             $this->Session->setFlash(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
+
     }
 
 以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。
@@ -179,7 +180,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // ユーザーに自身で登録させる
+        // ユーザー自身による登録とログアウトを許可する
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
@@ -200,23 +202,26 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 ``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
 
     // app/Model/User.php
-    App::uses('AuthComponent', 'Controller/Component');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
     class User extends AppModel {
 
     // ...
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
     }
 
     // ...
 
-これで、ユーザーが保存されるときは毎回、AuthComponentクラスが提供するデフォルトのハッシュ方法を用いてパスワードがハッシュ化されます。
-あとはログイン関数のビューテンプレートファイルだけです。
-以下のものを使ってください:
+これで、ユーザーが保存されるときは毎回 SimplePasswordHasher
+クラスを用いてパスワードがハッシュ化されます。
+あとはログイン関数用のビューテンプレートファイルだけです:
+
 
 .. code-block:: php
 
@@ -344,6 +349,5 @@ UsersControllerをセキュアにするためには、PostsControllerでした�
 お勧めの参考資料
 ----------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` 基本的なCRUDコードの生成 
+1. :doc:`/console-and-shells/code-generation-with-bake` 基本的なCRUDコードの生成
 2. :doc:`/core-libraries/components/authentication`: ユーザーの登録とログイン
-

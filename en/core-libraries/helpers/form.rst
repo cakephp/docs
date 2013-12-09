@@ -77,7 +77,8 @@ opening form tag.
         }
 
         // View/Recipes/edit.ctp:
-        // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
+        // Since $this->request->data['Recipe']['id'] = 5,
+        // we will get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
     Output:
@@ -139,7 +140,8 @@ There are a number of options for create():
 
   .. code-block:: html
 
-     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
+     <form id="UserAddForm" enctype="multipart/form-data"
+        method="post" action="/users/add">
 
   When using 'put' or 'delete', your form will be functionally
   equivalent to a 'post' form, but when submitted, the HTTP request
@@ -213,7 +215,11 @@ There are a number of options for create():
   defaultOptions by declaring the option in the input() call::
 
     echo $this->Form->input('password'); // No div, no label
-    echo $this->Form->input('username', array('label' => 'Username')); // has a label element
+    // has a label element
+    echo $this->Form->input(
+        'username',
+        array('label' => 'Username')
+    );
 
 Closing the Form
 ================
@@ -262,7 +268,8 @@ Closing the Form
 
     .. code-block:: html
 
-        <div class="glass-pill"><input type="submit" value="Update" name="Update"></div>
+        <div class="glass-pill"><input type="submit" value="Update" name="Update">
+        </div>
 
     See the `API <http://api20.cakephp.org>`_ for further details.
 
@@ -347,7 +354,8 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
 
         echo $this->Form->input('username');   //text
         echo $this->Form->input('password');   //password
-        echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
+        echo $this->Form->input('approved');   //day, month, year, hour, minute,
+                                               //meridian
         echo $this->Form->input('quote');      //textarea
 
         echo $this->Form->end('Add');
@@ -394,7 +402,10 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
 
         $this->set('userGroups', $this->UserGroup->find('list'));
         // or
-        $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
+        $this->set(
+            'reallyInappropriateModelNames',
+            $this->ReallyInappropriateModelName->find('list')
+        );
 
     .. note::
 
@@ -452,8 +463,10 @@ Output:
 
 .. code-block:: html
 
-    <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
-    <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
+    <input type="text" id="Modelname0Fieldname"
+        name="data[Modelname][0][fieldname]">
+    <input type="text" id="Modelname1Fieldname"
+        name="data[Modelname][1][fieldname]">
 
 
 FormHelper uses several field-suffixes internally for datetime input creation.
@@ -530,7 +543,8 @@ HTML attributes. The following will cover the options specific to
 
   .. code-block:: html
 
-    <div class="input text" id="mainDiv" title="Div Title" style="display:block">
+    <div class="input text" id="mainDiv" title="Div Title"
+        style="display:block">
         <label for="UserName">Name</label>
         <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
@@ -614,7 +628,9 @@ HTML attributes. The following will cover the options specific to
   following format::
 
     $this->Form->input('Model.field', array(
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
+        'error' => array(
+            'attributes' => array('wrap' => 'span', 'class' => 'bzzz')
+        )
     ));
 
   To prevent HTML being automatically escaped in the error message
@@ -760,7 +776,10 @@ common options shared by all input methods are as follows:
   default)::
 
     $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
-    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm'));
+    echo $this->Form->input(
+        'size',
+        array('options' => $sizes, 'default' => 'm')
+    );
 
   .. note::
 
@@ -838,8 +857,10 @@ Options for select, checkbox and  radio inputs
 
   .. code-block:: html
 
-    <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="data[Post][Published]" id="PostPublished_"
+        value="0" />
+    <input type="checkbox" name="data[Post][Published]" value="1"
+        id="PostPublished" />
 
   This can be disabled by setting the ``$options['hiddenField'] = false``::
 
@@ -849,7 +870,8 @@ Options for select, checkbox and  radio inputs
 
   .. code-block:: html
 
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+    <input type="checkbox" name="data[Post][Published]" value="1"
+        id="PostPublished" />
 
   If you want to create multiple blocks of inputs on a form that are
   all grouped together, you should use this parameter on all inputs
@@ -863,20 +885,26 @@ Options for select, checkbox and  radio inputs
 
     <h2>Primary Colors</h2>
     <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsRed" />
+    <input type="checkbox" name="data[Color][Color][]" value="5"
+        id="ColorsRed" />
     <label for="ColorsRed">Red</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsBlue" />
+    <input type="checkbox" name="data[Color][Color][]" value="5"
+        id="ColorsBlue" />
     <label for="ColorsBlue">Blue</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsYellow" />
+    <input type="checkbox" name="data[Color][Color][]" value="5"
+        id="ColorsYellow" />
     <label for="ColorsYellow">Yellow</label>
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsGreen" />
+    <input type="checkbox" name="data[Color][Color][]" value="5"
+        id="ColorsGreen" />
     <label for="ColorsGreen">Green</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsPurple" />
+    <input type="checkbox" name="data[Color][Color][]" value="5"
+        id="ColorsPurple" />
     <label for="ColorsPurple">Purple</label>
-    <input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />
+    <input type="checkbox" name="data[Addon][Addon][]" value="5"
+        id="ColorsOrange" />
     <label for="ColorsOrange">Orange</label>
 
   Disabling the ``'hiddenField'`` on the second input group would
@@ -970,7 +998,8 @@ Form Element-Specific Methods
 
     .. code-block:: html
 
-        <input name="data[User][username]" type="text" class="users" id="UserUsername" />
+        <input name="data[User][username]" type="text" class="users"
+            id="UserUsername" />
 
 .. php:method:: password(string $fieldName, array $options)
 
@@ -982,7 +1011,8 @@ Form Element-Specific Methods
 
     .. code-block:: html
 
-        <input name="data[User][password]" value="" id="UserPassword" type="password" />
+        <input name="data[User][password]" value="" id="UserPassword"
+            type="password" />
 
 .. php:method:: hidden(string $fieldName, array $options)
 
@@ -1023,7 +1053,10 @@ Form Element-Specific Methods
 
         echo $this->Form->textarea('notes', array('escape' => false);
         // OR....
-        echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
+        echo $this->Form->input(
+            'notes',
+            array('type' => 'textarea', 'escape' => false)
+        );
 
 
     **Options**
@@ -1034,7 +1067,10 @@ Form Element-Specific Methods
     * ``$options['rows'], $options['cols']`` These two keys specify the number of
       rows and columns::
 
-        echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
+        echo $this->Form->textarea(
+            'textarea',
+            array('rows' => '5', 'cols' => '5')
+        );
 
       Output:
 
@@ -1110,10 +1146,13 @@ Form Element-Specific Methods
 
       .. code-block:: html
 
-        <input name="data[User][gender]" id="UserGender_" value="" type="hidden" />
-        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio" />
+        <input name="data[User][gender]" id="UserGender_" value=""
+            type="hidden" />
+        <input name="data[User][gender]" id="UserGenderM" value="M"
+            type="radio" />
         <label for="UserGenderM">Male</label>
-        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio" />
+        <input name="data[User][gender]" id="UserGenderF" value="F"
+            type="radio" />
         <label for="UserGenderF">Female</label>
 
     If for some reason you don't want the hidden input, setting
@@ -1220,7 +1259,11 @@ Form Element-Specific Methods
     * ``$attributes['multiple']`` If 'multiple' has been set to true for an input that
       outputs a select, the select will allow multiple selections::
 
-        echo $this->Form->select('Model.field', $options, array('multiple' => true));
+        echo $this->Form->select(
+            'Model.field',
+            $options,
+            array('multiple' => true)
+        );
 
       Alternatively set 'multiple' to 'checkbox' to output a list of
       related check boxes::
@@ -1239,13 +1282,16 @@ Form Element-Specific Methods
 
         <div class="input select">
            <label for="ModelField">Field</label>
-           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <input name="data[Model][field]" value="" id="ModelField"
+            type="hidden">
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 1" id="ModelField1" type="checkbox">
+              <input name="data[Model][field][]" value="Value 1"
+                id="ModelField1" type="checkbox">
               <label for="ModelField1">Label 1</label>
            </div>
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <input name="data[Model][field][]" value="Value 2"
+                id="ModelField2" type="checkbox">
               <label for="ModelField2">Label 2</label>
            </div>
         </div>
@@ -1269,13 +1315,16 @@ Form Element-Specific Methods
 
         <div class="input select">
            <label for="ModelField">Field</label>
-           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <input name="data[Model][field]" value="" id="ModelField"
+            type="hidden">
            <div class="checkbox">
-              <input name="data[Model][field][]" disabled="disabled" value="Value 1" id="ModelField1" type="checkbox">
+              <input name="data[Model][field][]" disabled="disabled"
+                value="Value 1" id="ModelField1" type="checkbox">
               <label for="ModelField1">Label 1</label>
            </div>
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <input name="data[Model][field][]" value="Value 2"
+                id="ModelField2" type="checkbox">
               <label for="ModelField2">Label 2</label>
            </div>
         </div>
@@ -1289,7 +1338,9 @@ Form Element-Specific Methods
     the form enctype is set to "multipart/form-data", so start off with
     a create function such as the following::
 
-        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data'));
+        echo $this->Form->create('Document', array(
+            'enctype' => 'multipart/form-data'
+        ));
         // OR
         echo $this->Form->create('Document', array('type' => 'file'));
 
@@ -1426,7 +1477,10 @@ Creating buttons and submit elements
     bool and determines whether to HTML entity encode the $title of the button.
     Defaults to false::
 
-        echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
+        echo $this->Form->button('Submit Form', array(
+            'type' => 'submit',
+            'escape' => true
+        ));
 
 .. php:method:: postButton(string $title, mixed $url, array $options = array ())
 
@@ -1616,7 +1670,11 @@ inputDefaults. You can override the default options by declaring the option in t
 input() call::
 
     echo $this->Form->input('password'); // No div, no label with class 'fancy'
-    echo $this->Form->input('username', array('label' => 'Username')); // has a label element same defaults
+    // has a label element same defaults
+    echo $this->Form->input(
+        'username',
+        array('label' => 'Username')
+    );
 
 Working with SecurityComponent
 ==============================

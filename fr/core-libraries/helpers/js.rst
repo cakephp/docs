@@ -77,7 +77,7 @@ Pour redéfinir le raccourci "$", utilisez la variable jQueryObject::
 
     $this->Js->JqueryEngine->jQueryObject = '$j';
     echo $this->Html->scriptBlock(
-        'var $j = jQuery.noConflict();', 
+        'var $j = jQuery.noConflict();',
         array('inline' => false)
     );
     // Demande à jQuery de se placer dans un mode noconflict
@@ -148,7 +148,7 @@ avec une sélection d'éléments dans le DOM, ``$this->Js->get()``
 retourne un $this, vous permettent d'enchaîner les méthodes en
 utilisant la selection.  Le chaînage de méthode vous permet
 d'écrire moins, et de rendre votre code plus expressif .::
- 
+
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Est un exemple de chaînage de méthode. Le chaînage de méthode
@@ -319,10 +319,16 @@ méthode.
 
     En imaginant que vous étiez en train d'utiliser le moteur Jquery, vous
     devriez avoir le code suivant dans votre block Javascript généré.
-    
+
     .. code-block:: javascript
 
-        $("#maListe").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
+        $("#myList").sortable({
+            containment:"parent",
+            distance:5,
+            sort:onSort,
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: request($url, $options = array())
 
@@ -729,7 +735,7 @@ méthode.
 
 .. php:method:: value($value)
 
-    Converti une variable native PHP d'un type dans une représentation
+    Convertit une variable native PHP d'un type dans une représentation
     JSON équivalente. Échappe une valeur de chaîne dans une chaîne 
     compatible JSON. Les caractère UTF-8 seront échappés .
 

@@ -513,10 +513,20 @@ posts:
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        $post['Post']['title'],
+                        array('action' => 'view', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        'Edit',
+                        array('action' => 'edit', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -538,7 +548,9 @@ Next, let's make a way for users to delete posts. Start with a
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
+            $this->Session->setFlash(
+                __('The post with id: %s has been deleted.', h($id))
+            );
             return $this->redirect(array('action' => 'index'));
         }
     }
@@ -576,15 +588,26 @@ links that allow users to delete posts, however:
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        $post['Post']['title'],
+                        array('action' => 'view', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
-                <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?'));
+                <?php
+                    echo $this->Form->postLink(
+                        'Delete',
+                        array('action' => 'delete', $post['Post']['id']),
+                        array('confirm' => 'Are you sure?')
+                    );
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        'Edit', array('action' => 'edit', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -624,9 +647,14 @@ PostsController by creating a routing rule.
 
 CakePHP's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
-route. It looks like this::
+route. It looks like this:
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+.. code-block:: php
+
+    Router::connect(
+        '/',
+        array('controller' => 'pages', 'action' => 'display', 'home')
+    );
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line

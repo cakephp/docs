@@ -1,3 +1,4 @@
+
 CakeTime
 ########
 
@@ -61,7 +62,8 @@ Formatting
 
         // called via TimeHelper
         echo $this->Time->dayAsSql('Aug 22, 2011', 'modified');
-        // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
+        // (modified >= '2011-08-22 00:00:00') AND
+        // (modified <= '2011-08-22 23:59:59')
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
@@ -84,7 +86,8 @@ Formatting
 
         // called via TimeHelper
         echo $this->Time->daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
-        // (created >= '2011-08-22 00:00:00') AND (created <= '2011-08-25 23:59:59')
+        // (created >= '2011-08-22 00:00:00') AND
+        // (created <= '2011-08-25 23:59:59')
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
@@ -243,23 +246,35 @@ Formatting
         echo $this->Time->timeAgoInWords('Aug 22, 2011');
         // on 22/8/11
 
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
         // on August 22nd, 2011
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y')
+        );
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
         echo CakeTime::timeAgoInWords('Aug 22, 2011');
-        echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
+        echo CakeTime::timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y')
+        );
 
     Use the 'end' option to determine the cutoff point to no longer will use words; default '+1 month'::
 
         // called via TimeHelper
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y', 'end' => '+1 year')
+        );
         // On Nov 10th, 2011 it would display: 2 months, 2 weeks, 6 days ago
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+        echo CakeTime::timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y', 'end' => '+1 year')
+        );
 
     Use the 'accuracy' option to determine how precise the output should be.
     You can use this to limit the output::

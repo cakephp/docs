@@ -111,7 +111,10 @@ has not been added already::
 You can filter the records by passing conditions as second
 parameter to the ``paginate()`` function::
 
-    $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
+    $data = $this->Paginator->paginate(
+        'Recipe',
+        array('Recipe.title LIKE' => 'a%')
+    );
 
 Or you can also set ``conditions`` and other pagination settings array inside
 your action::
@@ -137,11 +140,13 @@ a behavior attached to your model. Behaviors implementing ``paginate`` and/or
 normal additional first parameter of ``$model``::
 
     // paginate and paginateCount implemented on a behavior.
-    public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate(Model $model, $conditions, $fields, $order, $limit,
+        $page = 1, $recursive = null, $extra = array()) {
         // method content
     }
 
-    public function paginateCount(Model $model, $conditions = null, $recursive = 0, $extra = array()) {
+    public function paginateCount(Model $model, $conditions = null, $recursive = 0,
+        $extra = array()) {
         // method body
     }
 
@@ -168,10 +173,15 @@ from::
     /**
      * Overridden paginate method - group by week, away_team_id and home_team_id
      */
-    public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate($conditions, $fields, $order, $limit, $page = 1,
+        $recursive = null, $extra = array()) {
+
         $recursive = -1;
         $group = $fields = array('week', 'away_team_id', 'home_team_id');
-        return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
+        return $this->find(
+            'all',
+            compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
+        );
     }
 
 You also need to override the core ``paginateCount()``, this method
@@ -182,8 +192,15 @@ accordingly depending on what database you are using::
     /**
      * Overridden paginateCount method
      */
-    public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
-        $sql = "SELECT DISTINCT ON(week, home_team_id, away_team_id) week, home_team_id, away_team_id FROM games";
+    public function paginateCount($conditions = null, $recursive = 0,
+                                    $extra = array()) {
+        $sql = "SELECT
+            DISTINCT ON(
+                week, home_team_id, away_team_id
+            )
+                week, home_team_id, away_team_id
+            FROM
+                games";
         $this->recursive = $recursive;
         $results = $this->query($sql);
         return count($results);

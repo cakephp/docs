@@ -748,9 +748,9 @@ puisque tout est un tableau::
         )
     ));
 
-A l'intérieur du parser spec, vous pouvez définir les clés pour ``definition``,
-``arguments``, ``options``, et ``epilog``. Vous ne pouvez pas définir les
-sous-commandes dans un constructeur de type tableau. Les valeurs pour les
+A l'intérieur du parser spec, vous pouvez définir les clés pour `arguments``,
+``options``, ``description`` et ``epilog``. Vous ne pouvez pas définir les
+``sous-commandes`` dans un constructeur de type tableau. Les valeurs pour les
 arguments, et les options, doivent suivre le format que
 :php:func:`ConsoleOptionParser::addArguments()` et
 :php:func:`ConsoleOptionParser::addOptions()` utilisent. Vous pouvez aussi

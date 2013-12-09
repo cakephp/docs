@@ -344,8 +344,8 @@ de l'application qui tourne. De plus, vous pouvez commencer à tester
 votre code avant dee développer réellement en live le contenu pour
 une application.
 
-CakePHP utilise la connection nommée ``$test`` dans votre fichier de
-configuration ``app/Config/database.php`` Si la connection n'est pas
+CakePHP utilise la connexion nommée ``$test`` dans votre fichier de
+configuration ``app/Config/database.php`` Si la connexion n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -368,31 +368,31 @@ première fixture, qui sera utilisée pour tester notre propre model Article.
 Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
 ``app/Test/Fixture`` avec le contenu suivant::
 
-    class ArticleFixture extends CakeTestFixture { 
+    class ArticleFixture extends CakeTestFixture {
 
           /* Optionel. Définir cette propriété pour charger les fixtures dans une source de données de test différente */
           public $useDbConfig = 'test';
-          public $fields = array( 
-              'id' => array('type' => 'integer', 'key' => 'primary'), 
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-              'body' => 'text', 
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-              'created' => 'datetime', 
-              'updated' => 'datetime' 
-          ); 
-          public $records = array( 
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
-          ); 
-     } 
+          public $fields = array(
+              'id' => array('type' => 'integer', 'key' => 'primary'),
+              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'body' => 'text',
+              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'created' => 'datetime',
+              'updated' => 'datetime'
+          );
+          public $records = array(
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+          );
+     }
 
 La propriété ``$useDbConfig`` définit la source de données que la fixture
 va utiliser. Si votre application utilise plusieurs sources de données, vous
 devriez faire correspondre les fixtures avec les sources de données du model,
 mais préfixé avec ``test_``.
 Par exemple, si votre model utilise la source de données ``mydb``, votre
-fixture devra utiliser la source de données ``test_mydb``. Si la connection
+fixture devra utiliser la source de données ``test_mydb``. Si la connexion
 ``test_mydb`` n'existe pas, vos models vont utiliser la source de données
 ``test`` par défaut. Les sources de données de fixture doivent être préfixées
 par ``test`` pour réduire la possibilité de trucher accidentellement toutes
@@ -447,13 +447,13 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     class ArticleFixture extends CakeTestFixture {
 
-        public $fields = array( 
-            'id' => array('type' => 'integer', 'key' => 'primary'), 
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-            'body' => 'text', 
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-            'created' => 'datetime', 
-            'updated' => 'datetime' 
+        public $fields = array(
+            'id' => array('type' => 'integer', 'key' => 'primary'),
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+            'body' => 'text',
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+            'created' => 'datetime',
+            'updated' => 'datetime'
         );
 
         public function init() {
@@ -514,14 +514,14 @@ de la table à la place. Par exemple::
     }
 
 Va importer la définition de la table à partir de la table appelée 'articles'
-en utilisant la connection à la base de donnée CakePHP nommée 'default'.
-Si vous voulez utiliser une connection différente, utilisez::
+en utilisant la connexion à la base de donnée CakePHP nommée 'default'.
+Si vous voulez utiliser une connexion différente, utilisez::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
-Puisqu'on utilise votre connection à la base de données CakePHP, si il y a un
+Puisqu'on utilise votre connexion à la base de données CakePHP, si il y a un
 préfixe de table déclaré, il sera automatiquement utilisé quand on récupère
 l'information de la table. Pour forcer la fixture et aussi importer ses
 enregistrements, changez l'importation en ::
@@ -669,7 +669,7 @@ sur la façon de lancer les cas de test.
 
     Quand vous configurez votre Model pour le test, assurez-vous d'utiliser
     ``ClassRegistry::init('YourModelName');`` puisqu'il sait comment utiliser
-    la connection à la base de données de votre test.
+    la connexion à la base de données de votre test.
 
 Méthodes de Mocking des models
 ------------------------------
@@ -1184,7 +1184,7 @@ Mettez ce qui suit dedans::
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            $suite->addTestDirectory(TESTS . 'Case/Model');
             return $suite;
         }
     }
@@ -1194,10 +1194,23 @@ Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
 un répertoire pour tous les tests en utilisant::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 
 Ajouterait de façon récursive tous les cas de test dans le répertoire
-``app/Test/Case/``.
+``app/Test/Case/Model``. Vous pouvez utiliser les suites de test pour
+construire une suite qui exécute tous les tests de votre application::
+
+    class AllTestsTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All tests');
+            $suite->addTestDirectory(TESTS . 'Case');
+            return $suite;
+        }
+    }
+
+Vous pouvez ensuite lancer ce test en ligne de commande en utilisant::
+
+    $ Console/cake test app AllTests
 
 Créer des Tests pour les Plugins
 ================================
@@ -1229,7 +1242,7 @@ les fixtures de votre plugin avec ``plugin.blog.blog_post``::
         public $BlogPost;
 
         public function testSomething() {
-            // ClassRegistry dit au model d'utiliser la connection à la base de données test
+            // ClassRegistry dit au model d'utiliser la connexion à la base de données test
             $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
             // faire des tests utiles ici

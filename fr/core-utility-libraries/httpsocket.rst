@@ -25,7 +25,7 @@ les différentes méthodes HTTP.
 
         // requête chaîne
         $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
-        
+
         // requête tableau
         $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
 
@@ -47,7 +47,7 @@ les différentes méthodes HTTP.
             'http://example.com/add',
             'name=test&type=user'
         );
-        
+
         // donnée en tableau
         $data = array('name' => 'test', 'type' => 'user');
         $results = $HttpSocket->post('http://example.com/add', $data);
@@ -197,7 +197,7 @@ Quand la réponse a un code de statut de redirection valide (voir
 ``HttpResponse::isRedirect``), une requête supplémentaire peut être
 automatiquement faîte selon le header *Location* reçu::
 
-    <?php 
+    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $HttpSocket = new HttpSocket();
@@ -223,7 +223,7 @@ Gérer les certificats SSL
 Quand vous faites des requêtes vers des services en SSL, HttpSocket va
 s'attendre à valider le certicat SSL en utilisant la validation peer. Si le
 certificat échoue la validation peer ou ne correspond pas au nom d'hôte
-qu'on souhaite accéder, la connection va échouer, et une exception va être
+qu'on souhaite accéder, la connexion va échouer, et une exception va être
 lancée. Par défaut HttpSocket va utiliser le fichier d'autorité du certificat
 mozilla pour vérifier les certificats SSL. Vous pouvez utiliser les options
 suivantes pour configurer la façon dont les certificats sont gérés:

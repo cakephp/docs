@@ -121,6 +121,7 @@ with CakePHP::
             $this->Session->setFlash(__('User was not deleted'));
             return $this->redirect(array('action' => 'index'));
         }
+
     }
 
 In the same way we created the views for our blog posts or by using the code
@@ -191,7 +192,8 @@ the users add function and implement the login and logout action::
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Letting users register themselves
+        // Allow users to register and logout.
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
@@ -211,23 +213,24 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
-    App::uses('AuthComponent', 'Controller/Component');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
     class User extends AppModel {
 
     // ...
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
     }
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the default hashing
-provided by the AuthComponent class. We're just missing a template view file for
-the login function, here it is:
+So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
+We're just missing a template view file for the login function:
 
 .. code-block:: php
 

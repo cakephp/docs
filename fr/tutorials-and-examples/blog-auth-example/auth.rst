@@ -128,6 +128,8 @@ de génération de code fournis avec CakePHP::
             return $this->redirect(array('action' => 'index'));
         }
 
+    }
+
 De la même façon, nous avons crée les vues pour nos posts de blog ou en
 utilisant l'outil de génération de code, nous exécutons les vues. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
@@ -200,7 +202,8 @@ et de réaliser l'action connexion et deconnexion::
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Laissons les users d'enregistrer eux-memes
+        // Permet aux utilisateurs de s'enregistrer et de se déconnecter
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
@@ -208,7 +211,7 @@ et de réaliser l'action connexion et deconnexion::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('Nom d\'user ou mot de passe invalide, réessayer'));
+                $this->Session->setFlash(__("Nom d'user ou mot de passe invalide, réessayer"));
             }
         }
     }
@@ -221,14 +224,15 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
 ``app/Model/User.php`` et ajoutez ce qui suit::
 
     // app/Model/User.php
-    App::uses('AuthComponent', 'Controller/Component');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
     class User extends AppModel {
 
     // ...
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
     }
@@ -236,9 +240,8 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
     // ...
 
 Ainsi, maintenant à chaque fois qu'un user est sauvegardé, le mot de
-passe est hashé en utilisant le hashing fourni par défaut par la classe
-AuthComponent. Il nous manque juste un fichier template de vue pour la
-fonction de connexion, et le voilà:
+passe est hashé en utilisant la classe SimplePasswordHasher. Il nous manque
+juste un fichier template de vue pour la fonction de connexion:
 
 .. code-block:: php
 

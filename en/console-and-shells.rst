@@ -691,12 +691,12 @@ make building subcommand parsers easier, as everything is an array::
         )
     ));
 
-Inside the parser spec, you can define keys for ``definition``,
-``arguments``, ``options``, and ``epilog``. You cannot define
-subcommands inside an array style builder. The values for
-arguments, and options, should follow the format that
-:php:func:`ConsoleOptionParser::addArguments()` and :php:func:`ConsoleOptionParser::addOptions()`
-use. You can also use buildFromArray on its own, to build an option parser::
+Inside the parser spec, you can define keys for ``arguments``, ``options``,
+``description`` and ``epilog``. You cannot define ``subcommands`` inside an
+array style builder. The values for arguments, and options, should follow the
+format that :php:func:`ConsoleOptionParser::addArguments()` and
+:php:func:`ConsoleOptionParser::addOptions()` use. You can also use
+buildFromArray on its own, to build an option parser::
 
     public function getOptionParser() {
         return ConsoleOptionParser::buildFromArray(array(
