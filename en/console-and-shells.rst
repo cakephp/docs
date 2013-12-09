@@ -679,9 +679,9 @@ make building subcommand parsers easier, as everything is an array::
         'help' => __('Check the permissions between an ACO and ARO.'),
         'parser' => array(
             'description' => array(
-                __("Use this command to grant ACL permissions. Once executed, the ARO "),
-                __("specified (and its children, if any) will have ALLOW access to the"),
-                __("specified ACO action (and the ACO's children, if any).")
+                __("Use this command to grant ACL permissions. Once executed, the "),
+                __("ARO specified (and its children, if any) will have ALLOW access "),
+                __("to the specified ACO action (and the ACO's children, if any).")
             ),
             'arguments' => array(
                 'aro' => array('help' => __('ARO to check.'), 'required' => true),
@@ -701,9 +701,9 @@ buildFromArray on its own, to build an option parser::
     public function getOptionParser() {
         return ConsoleOptionParser::buildFromArray(array(
             'description' => array(
-                __("Use this command to grant ACL permissions. Once executed, the ARO "),
-                __("specified (and its children, if any) will have ALLOW access to the"),
-                __("specified ACO action (and the ACO's children, if any).")
+                __("Use this command to grant ACL permissions. Once executed, the "),
+                __("ARO specified (and its children, if any) will have ALLOW access "),
+                __("to the specified ACO action (and the ACO's children, if any).")
             ),
             'arguments' => array(
                 'aro' => array('help' => __('ARO to check.'), 'required' => true),
@@ -753,7 +753,10 @@ would look like:
         <command>bake fixture</command>
         <description>Generate fixtures for use with the test suite. You can use
             `bake fixture all` to bake all fixtures.</description>
-        <epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
+        <epilog>
+            Omitting all arguments and options will enter into an interactive
+            mode.
+        </epilog>
         <subcommands/>
         <options>
             <option name="--help" short="-h" boolean="1">
@@ -939,7 +942,9 @@ Shell API
 
     By formatting messages with style tags you can display styled output::
 
-        $this->out('<warning>This will remove data from the filesystems.</warning>');
+        $this->out(
+            '<warning>This will remove data from the filesystems.</warning>'
+        );
 
     By default on \*nix systems ConsoleOutput objects default to colour output.
     On windows systems, plain output is the default unless the ``ANSICON`` environment
