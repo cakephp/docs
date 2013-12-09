@@ -558,7 +558,8 @@ Advanced Usage
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
                 $this->Session->setFlash(
-                  'Please provide the number of positions the field should be moved down.'
+                  'Please provide the number of positions the field should be' .
+                  'moved down.'
                 );
             }
 
@@ -587,7 +588,10 @@ Advanced Usage
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
+                $this->Session->setFlash(
+                  'Please provide a number of positions the category should' .
+                  'be moved up.'
+                );
             }
 
             return $this->redirect(array('action' => 'index'));
@@ -670,10 +674,14 @@ Advanced Usage
     not change the parent of any node.::
 
         $model->reorder(array(
-            'id' => ,    //id of record to use as top node for reordering, default: $Model->id
-            'field' => , //which field to use in reordering, default: $Model->displayField
-            'order' => , //direction to order, default: 'ASC'
-            'verify' =>  //whether or not to verify the tree before reorder, default: true
+            //id of record to use as top node for reordering, default: $Model->id
+            'id' => ,
+            //which field to use in reordering, default: $Model->displayField
+            'field' => ,
+            //direction to order, default: 'ASC'
+            'order' => ,
+            //whether or not to verify the tree before reorder, default: true
+            'verify' =>
         ));
 
     .. note::

@@ -14,7 +14,8 @@ the fat model.
     class Example extends AppModel {
         public function getRecent() {
             $conditions = array(
-                'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
+                'created BETWEEN (curdate() - interval 7 day)' .
+                ' and (curdate() - interval 0 day))'
             );
             return $this->find('all', compact('conditions'));
         }

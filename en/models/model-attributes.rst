@@ -76,7 +76,8 @@ setting CakePHP to use an existing database table.
 Example usage::
 
     class Example extends AppModel {
-        public $primaryKey = 'example_id'; // example_id is the field name in the database
+        // example_id is the field name in the database
+        public $primaryKey = 'example_id';
     }
 
 
