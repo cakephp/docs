@@ -185,7 +185,9 @@ Log
   specific handling for different sections of your application.
 * :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
   add the ``log()`` method.
-
+* The logging scope passed to :php:method:`Cake\\Log\\Log::write()` is now forwarded
+  to the log engines' ``write()`` method in order to provide better context to
+  the engines.
 
 Routing
 =======
