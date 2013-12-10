@@ -92,7 +92,7 @@ properties are passed to the log adapter's constructor as an array.::
             // ...
         }
 
-        public function write($type, $message, $scope = []) {
+        public function write($level, $message, $scope = []) {
             // write to the database.
         }
     }
@@ -153,9 +153,9 @@ dropped it will no longer receive messages.
 Using the FileLog adapter
 =========================
 
-As its name implies FileLog writes log messages to files. The type of log
+As its name implies FileLog writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
-If a type is not supplied, :php:const:`LOG_ERROR` is used which writes to the
+If a level is not supplied, :php:const:`LOG_ERROR` is used which writes to the
 error log. The default log location is ``app/tmp/logs/$level.log``::
 
     // Executing this inside a CakePHP class
@@ -207,7 +207,7 @@ The configuration array accepted for the Syslog logging engine understands the
 following keys:
 
 * `format`: An sprintf template strings with two placeholders, the first one
-  for the error type, and the second for the message itself. This key is
+  for the error level, and the second for the message itself. This key is
   useful to add additional information about the server or process in the
   logged message. For example: ``%s - Web Server 1 - %s`` will look like
   ``error - Web Server 1 - An error occurred in this request`` after
@@ -376,9 +376,9 @@ Log adapter interface
     This interface is required for logging adapters. When creating a new logging
     adapter you'll need to implement this interface.
 
-.. php:method:: write($type, $message, $scope = [])
+.. php:method:: write($level, $message, $scope = [])
 
-    Write a message to the log storage system. ``$type`` will be the level of
+    Write a message to the log storage system. ``$level`` will be the level of
     the log message.  ``$message`` will be the content of the log message.
     ``$scope`` is the scope(s) a log message is being created in.
 
@@ -391,7 +391,7 @@ Logging Trait
 
     .. versionadded:: 3.0
 
-.. php:method:: log($msg, $type = LOG_ERR)
+.. php:method:: log($msg, $level = LOG_ERR)
 
     Log a message to the logs.  By default messages are logged as
     ERROR messages.  If ``$msg`` isn't isn't a string it will be converted with
