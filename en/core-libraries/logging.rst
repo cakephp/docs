@@ -73,7 +73,7 @@ configuring our DatabaseLog would look like::
         'model' => 'LogEntry',
         // ...
     ]);
-    
+
     // for plugin called LoggingPack
     Log::config('otherFile', [
         'className' => 'LoggingPack.DatabaseLog',
@@ -92,7 +92,7 @@ properties are passed to the log adapter's constructor as an array.::
             // ...
         }
 
-        public function write($type, $message) {
+        public function write($type, $message, $scope = []) {
             // write to the database.
         }
     }
@@ -301,6 +301,10 @@ message. For example::
     Log::warning('this gets written to both shops.log and payments.log', 'payments');
     Log::warning('this gets written to both shops.log and payments.log', 'unknown');
 
+As of 3.0 the logging scope passed to :php:method:`Cake\\Log\\Log::write()` is
+forwarded to the log engines' ``write()`` method in order to provide better
+context to the engines.
+
 Log API
 =======
 
@@ -334,8 +338,9 @@ Log API
 .. php:staticmethod:: write($level, $message, $scope = array())
 
     Write a message into all the configured loggers.
-    $level indicates the level of log message being created.
-    $message is the message of the log entry being written to.
+    ``$level`` indicates the level of log message being created.
+    ``$message`` is the message of the log entry being written to.
+    ``$scope`` is the scope(s) a log message is being created in.
 
 .. php:staticmethod:: levels()
 
@@ -371,10 +376,11 @@ Log adapter interface
     This interface is required for logging adapters. When creating a new logging
     adapter you'll need to implement this interface.
 
-.. php:method:: write($type, $message)
+.. php:method:: write($type, $message, $scope = [])
 
     Write a message to the log storage system. ``$type`` will be the level of
     the log message.  ``$message`` will be the content of the log message.
+    ``$scope`` is the scope(s) a log message is being created in.
 
 Logging Trait
 =============
