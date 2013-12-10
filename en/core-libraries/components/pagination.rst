@@ -180,7 +180,7 @@ from::
         $group = $fields = array('week', 'away_team_id', 'home_team_id');
         return $this->find(
             'all',
-            compact(F'conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
+            compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
         );
     }
 
