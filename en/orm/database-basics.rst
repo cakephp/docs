@@ -14,7 +14,7 @@ Configuration
 
 By convention database connections are configured in ``App/Config/app.php``. The
 connection information defined in this file, is fed into
-:php:class:`Cake\\Database\\ConnectionManager` creating connection configuration
+:php:class:`Cake\\Database\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
 ``App/Config/app.default.php``. A sample connection configuration would look
 like::
@@ -57,7 +57,7 @@ className
     The class name of the driver used to power the connection. This can either
     be a short classname using :ref:`plugin-syntax`, a fully namespaced name, or
     a constructed driver instance. Examples of short classnames are Mysql,
-    Sqlite, Postgres, Sqlserver.
+    Sqlite, Postgres, and Sqlserver.
 persistent
     Whether or not to use a persistent connection to the database.
 host
@@ -79,8 +79,8 @@ encoding
 schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
-    Used by drivers that support it to connect via unix socket files. If you are
-    using postgres and want to use unix sockets, leave the host key blank.
+    Used by drivers that support it to connect via Unix socket files. If you are
+    using Postgres and want to use Unix sockets, leave the host key blank.
 ssl_key
     The file path to the SSL key file. (Only supported by MySQL).
 ssl_cert
@@ -88,9 +88,9 @@ ssl_cert
 ssl_ca
     The file path to the SSL certificate authority. (Only supported by MySQL).
 init
-    An list of queries that should be sent to the database server as
+    A list of queries that should be sent to the database server as
     when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQLserver at this time.
+    supported by MySQL, Postgres, and SQL Server at this time.
 dsn
     A full PDO compatible data source name.
 log
@@ -112,7 +112,7 @@ At this point, you might want to take a look at the
 naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
 example, if you name your database table big\_boxes, your table
-BigBoxesTable, your controller BigBoxesController, everything just works
+BigBoxesTable, and your controller BigBoxesController, everything will
 together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
@@ -222,8 +222,8 @@ implement the following methods:
 * toDatabase
 * toStatement
 
-An easy way to fulfil the basic interface is to extend
-:php:class:`Cake\Database\Type`. For example if we wanted to add an json type,
+An easy way to fulfill the basic interface is to extend
+:php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
     namespace App\Database\Type;
