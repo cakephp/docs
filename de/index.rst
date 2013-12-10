@@ -1,15 +1,15 @@
 Das Handbuch
 ############
 
-**`Hier klicken um zur CakePHP 1.2.x Version des Handbuchs zu
-gelangen </de/view/3/das-handbuch>`_**
+`Hier klicken um zur CakePHP 1.2.x Version des Handbuchs zu
+gelangen </1.2/de/index.html>`_
 
 Willkommen zum "Cookbook", der neuen wiki-ähnlichen CakePHP
 Dokumentationsanwendung. Wir hoffen, dass diese neue Anwendung
 Dokumentationsbeiträge leichter machen wird, während gleichzeitig ein
 hoher Qualitätsstandard für Veröffentlichung eingehalten wird.
 
-Ein ***großer*** Dank geht an `AD7six <http://www.ad7six.com/>`_, den
+Ein **großer** Dank geht an `AD7six <http://www.ad7six.com/>`_, den
 Vorkämpfer der "Kochbuch"-Idee. Er hat endlose Stunden mit der
 Entwicklung und dem Testen und Verbessern dieser Anwendung zugebracht.
 
