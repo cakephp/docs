@@ -64,6 +64,8 @@ When using ``set()`` you can update multiple properties at once using an array::
 Accessors & Mutators
 ====================
 
+.. php:method:: set($field = null, $value = null)
+
 In addition to the simple get/set interface, entities allow you to provide
 accessor and mutator methods. These methods let you customize how properties are
 read or set. For example::
@@ -123,16 +125,69 @@ name will be the lower case and underscored version of the accessor method::
 Validation errors
 =================
 
+.. php:method:: errors($field = null, $errors = null)
 
+After you :ref:`save an entity <saving-entities>` any validation errors will be
+stored on the entity itself. You can access any validation errors using the
+``errors()`` method::
+
+    // Get all the errors
+    $errors = $user->errors();
+
+    // Get the errors for a single field.
+    $errors = $user->errors('password');
+
+The ``errors()`` method can also be used to set the errors on an entity::
+
+    $user->errors('password', ['Password is required.']);
 
 Mass assignment
 ===============
+
+.. TODO:: Waiting on code to be written for this.
+
+.. _lazy-load-associations:
 
 Lazy loading associations
 =========================
 
 Creating re-usable code with traits
 ===================================
+
+You may find yourself needing the same logic in multiple entity classes. PHP's
+traits are a great fit for this. You can put your application's traits in
+``App/Model/Entity``. By convention traits in CakePHP are suffixed with
+``Trait`` so they are easily discernable from classes or interfaces. Traits are
+often a good compliment to behaviors, allowing you to provide functionality for
+the table and entity objects.
+
+For example if we had SoftDeletable plugin, it could provide a trait. This trait
+could give methods for marking entities as 'deleted', the method ``softDelete``
+could be provided by a trait::
+
+    // SoftDelete/Model/Entity/SoftDeleteTrait.php
+
+    namespace SoftDelete\Model\Entity;
+
+    trait SoftDeleteTrait {
+
+        public function softDelete() {
+            $this->_properties['deleted'] = true;
+        }
+
+    }
+
+You could then use this trait in your entity class by importing it and including
+it::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+    use SoftDelete\Model\Entity\SoftDeleteTrait;
+
+    class Article extends Entity {
+        use SoftDeleteTrait;
+    }
 
 Converting to Arrays/JSON
 =========================
