@@ -562,202 +562,6 @@ arguments as values without string keys in the array::
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
 
-.. index:: named parameters
-
-.. _named-parameters:
-
-Named parameters
-================
-
-You can name parameters and send their values using the URL. A
-request for ``/posts/view/title:first/category:general`` would result
-in a call to the view() action of the PostsController. In that
-action, you'd find the values of the title and category parameters
-inside ``$this->params['named']``. They are also available inside
-``$this->passedArgs``. In both cases you can access named parameters using their
-name as an index. If named parameters are omitted, they will not be set.
-
-
-.. note::
-
-    What is parsed as a named parameter is controlled by
-    :php:meth:`Router::connectNamed()`. If your named parameters are not
-    reverse routing, or parsing correctly, you will need to inform
-    :php:class:`Router` about them.
-
-Some summarizing examples for default routes might prove helpful::
-
-    URL to controller action mapping using default routes:
-
-    URL: /monkeys/jump
-    Mapping: MonkeysController->jump();
-
-    URL: /products
-    Mapping: ProductsController->index();
-
-    URL: /tasks/view/45
-    Mapping: TasksController->view(45);
-
-    URL: /donations/view/recent/2001
-    Mapping: DonationsController->view('recent', '2001');
-
-    URL: /contents/view/chapter:models/section:associations
-    Mapping: ContentsController->view();
-    $this->passedArgs['chapter'] = 'models';
-    $this->passedArgs['section'] = 'associations';
-    $this->params['named']['chapter'] = 'models';
-    $this->params['named']['section'] = 'associations';
-
-When making custom routes, a common pitfall is that using named
-parameters will break your custom routes. In order to solve this
-you should inform the Router about which parameters are intended to
-be named parameters. Without this knowledge the Router is unable to
-determine whether named parameters are intended to actually be
-named parameters or routed parameters, and defaults to assuming you
-intended them to be routed parameters. To connect named parameters
-in the router use :php:meth:`Router::connectNamed()`::
-
-    Router::connectNamed(array('chapter', 'section'));
-
-Will ensure that your chapter and section parameters reverse route
-correctly.
-
-When generating URLs, using a :term:`routing array` you add named
-parameters as values with string keys matching the name::
-
-    array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
-
-Since 'chapter' doesn't match any defined route elements, it's treated
-as a named parameter.
-
-.. note::
-
-    Both named parameters and route elements share the same key-space.
-    It's best to avoid re-using a key for both a route element and a named
-    parameter.
-
-Named parameters also support using arrays to generate and parse
-URLs. The syntax works very similar to the array syntax used
-for GET parameters. When generating URLs you can use the following
-syntax::
-
-    $url = Router::url(array(
-        'controller' => 'posts',
-        'action' => 'index',
-        'filter' => array(
-            'published' => 1
-            'frontpage' => 1
-        )
-    ));
-
-The above would generate the URL ``/posts/index/filter[published]:1/filter[frontpage]:1``.
-The parameters are then parsed and stored in your controller's passedArgs variable
-as an array, just as you sent them to :php:meth:`Router::url`::
-
-    $this->passedArgs['filter'] = array(
-        'published' => 1
-        'frontpage' => 1
-    );
-
-Arrays can be deeply nested as well, allowing you even more flexibility in
-passing arguments::
-
-    $url = Router::url(array(
-        'controller' => 'posts',
-        'action' => 'search',
-        'models' => array(
-            'post' => array(
-                'order' => 'asc',
-                'filter' => array(
-                    'published' => 1
-                )
-            ),
-            'comment' => array(
-                'order' => 'desc',
-                'filter' => array(
-                    'spam' => 0
-                )
-            ),
-        ),
-        'users' => array(1, 2, 3)
-    ));
-
-You would end up with a pretty long url like this (wrapped for easy reading)::
-
-    posts/search
-      /models[post][order]:asc/models[post][filter][published]:1
-      /models[comment][order]:desc/models[comment][filter][spam]:0
-      /users[]:1/users[]:2/users[]:3
-
-And the resulting array that would be passed to the controller would match that
-which you passed to the router::
-
-    $this->passedArgs['models'] = array(
-        'post' => array(
-            'order' => 'asc',
-            'filter' => array(
-                'published' => 1
-            )
-        ),
-        'comment' => array(
-            'order' => 'desc',
-            'filter' => array(
-                'spam' => 0
-            )
-        ),
-    );
-
-.. _controlling-named-parameters:
-
-Controlling named parameters
-----------------------------
-
-You can control named parameter configuration at the per-route-level
-or control them globally. Global control is done through ``Router::connectNamed()``
-The following gives some examples of how you can control named parameter parsing
-with connectNamed().
-
-Do not parse any named parameters::
-
-    Router::connectNamed(false);
-
-Parse only default parameters used for CakePHP's pagination::
-
-    Router::connectNamed(false, array('default' => true));
-
-Parse only the page parameter if its value is a number::
-
-    Router::connectNamed(array('page' => '[\d]+'), array('default' => false, 'greedy' => false));
-
-Parse only the page parameter no matter what::
-
-    Router::connectNamed(array('page'), array('default' => false, 'greedy' => false));
-
-Parse only the page parameter if the current action is 'index'::
-
-    Router::connectNamed(
-        array('page' => array('action' => 'index')),
-        array('default' => false, 'greedy' => false)
-    );
-
-Parse only the page parameter if the current action is 'index' and the controller is 'pages'::
-
-    Router::connectNamed(
-        array('page' => array('action' => 'index', 'controller' => 'pages')),
-        array('default' => false, 'greedy' => false)
-    );
-
-
-connectNamed() supports a number of options:
-
-* ``greedy`` Setting this to true will make Router parse all named params.
-  Setting it to false will parse only the connected named params.
-* ``default`` Set this to true to merge in the default set of named parameters.
-* ``reset`` Set to true to clear existing rules and start fresh.
-* ``separator`` Change the string used to separate the key & value in a named
-  parameter. Defaults to `:`
-
->>>>>>> master
 Reverse routing
 ===============
 
@@ -1086,7 +890,7 @@ Router API
 
         You can use ``requestAction()`` to retrieve a fully rendered view
         by passing 'return' in the options:
-        ``requestAction($url, array('return'));``. It is important to note
+        ``requestAction($url, ['return']);``. It is important to note
         that making a requestAction using 'return' from a controller method
         can cause script and css tags to not work correctly.
 
@@ -1108,7 +912,10 @@ Router API
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }
-                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+                return $this->Comments->find('all', [
+                    'order' => 'Comment.created DESC',
+                    'limit' => 10
+               ]);
             }
         }
 
@@ -1124,7 +931,7 @@ Router API
 
         $comments = $this->requestAction('/comments/latest');
         foreach ($comments as $comment) {
-            echo $comment['Comment']['title'];
+            echo $comment->title;
         }
 
     We can then place that element anywhere to get the output
@@ -1140,7 +947,7 @@ Router API
     processing. By modifying the call to element to look like this::
 
         <?php
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', [], ['cache' => '+1 hour']);
 
     The ``requestAction`` call will not be made while the cached
     element view file exists and is valid.
@@ -1149,8 +956,8 @@ Router API
 
         <?php
         echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'featured'),
-            array('return')
+            ['controller' => 'articles', 'action' => 'featured'],
+            ['return']
         );
 
     The url based array are the same as the ones that :php:meth:`HtmlHelper::link()`
@@ -1168,8 +975,7 @@ Router API
 
         <?php
         echo $this->requestAction(
-            ['controller' => 'articles', 'action' => 'view'],
-            ['pass' => [5]]
+            ['controller' => 'articles', 'action' => 'view', 5],
         );
 
     You can also pass querystring arguments, post data or cookies using the
