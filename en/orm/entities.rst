@@ -73,13 +73,14 @@ are read or set. For example::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        public function getTitle() {
-            return ucwords($this->_properties['title']);
+        public function getTitle($title) {
+            return ucwords($title);
         }
     }
 
-Accessors use the convention of ``get`` followed by the CamelCased
-version of the field name. You can customize how properties get set by defining
+Accessors use the convention of ``get`` followed by the CamelCased version of
+the field name. They receive the basic value stored in the ``_properties`` array
+as their only argument. You can customize how properties get set by defining
 a mutator::
 
     use Cake\ORM\Entity;
@@ -88,15 +89,19 @@ a mutator::
     class Article extends Entity {
 
         public function setTitle($title) {
-            $this->_properties['title'] = $title;
-            $this->_properties['slug'] = Inflector::slug($title);
+            $this->set('slug', Inflector::slug($title));
+            return $title;
         }
 
     }
 
-Mutators allow you easily convert properties as they are set, or create
-calculated data. Mutators and accessors are applied when properties are read
-using object notation, or using get() and set().
+Mutator methods should always return the value that should be stored in the
+property. As you can see above, you can also use mutators to set other
+calculated properties. When doing this, be careful to not introduce any loops,
+as CakePHP will not prevent infinitely looping mutator methods. Mutators allow
+you easily convert properties as they are set, or create calculated data.
+Mutators and accessors are applied when properties are read using object
+notation, or using get() and set().
 
 Creating virtual properties
 ---------------------------
@@ -110,7 +115,7 @@ actually exist. For example if your users table has ``first_name`` and
 
     class User extends Entity {
 
-        public function getFullName($title) {
+        public function getFullName() {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -193,7 +198,7 @@ could be provided by a trait::
     trait SoftDeleteTrait {
 
         public function softDelete() {
-            $this->_properties['deleted'] = true;
+            $this->set('deleted', true);
         }
 
     }
