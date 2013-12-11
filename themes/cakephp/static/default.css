@@ -197,6 +197,9 @@ body {
 	.root-link {
 		display: none;
 	}
+	.breadcrumb {
+		margin-left: 10px;
+	}
 	.dropdown {
 		display: none;
 	}
@@ -615,8 +618,8 @@ dt tt {
 @media only screen and (max-width: 767px) {
 	.footer .columns,
 	.row .document {
-		margin-left: 5px;
-		margin-right: 5px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 
 	.related-pages,
