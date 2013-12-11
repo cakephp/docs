@@ -61,18 +61,20 @@ Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
-File permissions
-----------------
+Tmp directory permissions
+-------------------------
 
-You should make sure to set the proper permissions on the application's tmp
-directory. If you're on a windows system you can probably skip this step, but if
-you using \*nix or MacOS you should run::
+Next we'll need to make the ``app/tmp`` directory writable by the webserver.
+The best way to do this is to find out what user your webserver
+runs as. You can run ``<?php echo `whoami`; ?>`` inside any PHP file your
+webserver can execute. You should see a username printed. Change the ownership of
+the ``app/tmp`` directory to that user. The final command you run
+(in \*nix) might look something like this::
 
-    $ chmod -R 0777 app/tmp
+    $ chown -R www-data app/tmp
 
-This will recursively set the the tmp directory to be world writable. While
-these permissions are generally not a good idea in production environments, they
-will work great for development.
+If for some reason CakePHP can't write to that directory, you'll see
+warnings and uncaught exceptions that cache data cannot be written.
 
 Creating the Blog Database
 ==========================
@@ -156,50 +158,36 @@ that CakePHP can successfully connect to the database.
 Optional Configuration
 ======================
 
-There are three other items that can be configured. Most developers
+There are a few other items that can be configured. Most developers
 complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
 in security hashes. The second is defining a custom number (or
-"seed") for use in encryption. The third item is allowing CakePHP
-write access to its ``tmp`` folder.
+"seed") for use in encryption.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/app/Config/core.php`` line 187. It doesn't
-much matter what the new value is, as long as it's not easily
-guessed::
+``Security.salt`` value in ``/app/Config/core.php``. The replacement value
+should be long, hard to guess and be as random as you can make it::
 
     /**
      * A random string used in security hashing methods.
      */
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
-The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/app/Config/core.php`` line 192. It
-doesn't much matter what the new value is, as long as it's not
-easily guessed::
+The cipher seed is used for encrypt/decrypt strings. Change the default
+``Security.cipherSeed`` value by editing ``/app/Config/core.php``. The
+replacement value should be a large random integer::
 
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
-The final task is to make the ``app/tmp`` directory web-writable.
-The best way to do this is to find out what user your webserver
-runs as (``<?php echo `whoami`; ?>``) and change the ownership of
-the ``app/tmp`` directory to that user. The final command you run
-(in \*nix) might look something like this::
-
-    $ chown -R www-data app/tmp
-
-If for some reason CakePHP can't write to that directory, you'll be
-informed by a warning while not in production mode.
-
 A Note on mod\_rewrite
 ======================
 
-Occasionally a new user will run into mod\_rewrite issues. For example
+Occasionally new users will run into mod\_rewrite issues. For example
 if the CakePHP welcome page looks a little funny (no images or CSS styles),
-it probably means mod\_rewrite isn't functioning on your system. Please refer
+it probably means mod\_rewrite is not functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
