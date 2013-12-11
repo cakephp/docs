@@ -200,7 +200,7 @@ Controller Methods
 
 For a complete list of controller methods and their descriptions
 visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+`http://api.cakephp.org/2.4/class-Controller.html <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 Interacting with Views
 ----------------------
