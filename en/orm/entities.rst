@@ -7,7 +7,7 @@ Entities
 
 While :doc:`/orm/table-objects` represent and provide access to a collection of
 objects, entities represent individual rows or domain objects in your
-application. Entities contain persitent properties and methods to manipulate and
+application. Entities contain persistent properties and methods to manipulate and
 access the data they contain.
 
 Entities are created for you by CakePHP each time you use ``find()`` on a table
@@ -28,12 +28,12 @@ our application had an ``articles`` table we could create the following entity::
     class Article extends Entity {
     }
 
-Right now this entity doesn't do very much. However, when we load data off our
+Right now this entity doesn't do very much. However, when we load data from our
 articles table, we'll get instances of this class.
 
 .. note::
 
-    If you don't define an entity class the base class will be used.
+    If you don't define an entity class CakePHP will use the basic Entity class.
 
 Accessing entity data
 =====================
@@ -67,8 +67,8 @@ Accessors & Mutators
 .. php:method:: set($field = null, $value = null)
 
 In addition to the simple get/set interface, entities allow you to provide
-accessor and mutator methods. These methods let you customize how properties are
-read or set. For example::
+accessors and mutator methods. These methods let you customize how properties
+are read or set. For example::
 
     use Cake\ORM\Entity;
 
@@ -78,7 +78,7 @@ read or set. For example::
         }
     }
 
-Accessor methods use the convention of ``get`` followed by the CamelCased
+Accessors use the convention of ``get`` followed by the CamelCased
 version of the field name. You can customize how properties get set by defining
 a mutator::
 
@@ -101,9 +101,9 @@ using object notation, or using get() and set().
 Creating virtual properties
 ---------------------------
 
-By defining an accessor method you can provide access to properties that do not
+By defining accessors you can provide access to properties that do not
 actually exist. For example if your users table has ``first_name`` and
-``last_name`` you could create an accessor for the full name::
+``last_name`` you could create a method for the full name::
 
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
@@ -118,7 +118,7 @@ actually exist. For example if your users table has ``first_name`` and
     }
 
 You can access virtual properties as if they existed on the entity. The property
-name will be the lower case and underscored version of the accessor method::
+name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
@@ -137,7 +137,8 @@ stored on the entity itself. You can access any validation errors using the
     // Get the errors for a single field.
     $errors = $user->errors('password');
 
-The ``errors()`` method can also be used to set the errors on an entity::
+The ``errors()`` method can also be used to set the errors on an entity, making
+it easier to test code that works with error messages::
 
     $user->errors('password', ['Password is required.']);
 
@@ -169,7 +170,7 @@ Lazy loading
     will frequently emit N queries where N is the number of articles being
     iterated.
 
-
+.. TODO:: finish this
 
 Creating re-usable code with traits
 ===================================
@@ -177,7 +178,7 @@ Creating re-usable code with traits
 You may find yourself needing the same logic in multiple entity classes. PHP's
 traits are a great fit for this. You can put your application's traits in
 ``App/Model/Entity``. By convention traits in CakePHP are suffixed with
-``Trait`` so they are easily discernable from classes or interfaces. Traits are
+``Trait`` so they are easily discernible from classes or interfaces. Traits are
 often a good compliment to behaviors, allowing you to provide functionality for
 the table and entity objects.
 
@@ -249,7 +250,8 @@ Hiding properties
 
 There are often fields you do not want exported in JSON or array formats. For
 example it is often unwise to expose password hashes or account recovery
-questions. When defining an entity class you can hide properties::
+questions. When defining an entity class define which properties should be
+hidden::
 
     class User extends Entity {
 
@@ -260,3 +262,4 @@ questions. When defining an entity class you can hide properties::
 This list can be modified at runtime using ``hiddenProperties``::
 
     $user->hiddenProperties(['password', 'recovery_question']);
+
