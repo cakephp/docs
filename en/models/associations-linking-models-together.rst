@@ -1100,7 +1100,7 @@ table::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.book_id'
+                'Book.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',
