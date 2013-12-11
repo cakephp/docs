@@ -282,7 +282,7 @@ Fermer le Formulaire
 
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    Voir l'`API <http://api20.cakephp.org>`_ pour plus de détails.
+    Voir `l'API <http://api20.cakephp.org>`_ pour plus de détails.
 
     .. note::
 
@@ -360,14 +360,20 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
    Vous pouvez utiliser la méthode input() de l'Helper Formulaire (Formhelper)
    pour créer une entrée appropriée pour tous les champs du formulaire.::
 
-        echo $this->Form->create();
+       echo $this->Form->create();
+       // text
+       echo $this->Form->input('username');
 
-        echo $this->Form->input('username');   //text
-        echo $this->Form->input('password');   //password
-        echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
-        echo $this->Form->input('quote');      //textarea
+       // password
+       echo $this->Form->input('password');
 
-        echo $this->Form->end('Add');
+       // day, month, year, hour, minute, meridian
+       echo $this->Form->input('approved');
+
+       //textarea
+       echo $this->Form->input('quote');
+
+       echo $this->Form->end('Add');
 
     Un exemple plus complet montrant quelques options pour le champ de date ::
 
@@ -427,7 +433,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Génère un ensemble d'inputs (entrées) pour ``$fields``. Si $fields est
     null, le model courant sera utilisé.
 
-    En plus de l' affichage des champs de controller, ``$fields`` peut
+    En plus de l'affichage des champs de controller, ``$fields`` peut
     être utilisé pour contrôler legend et fieldset (jeu de champs) rendus
     avec les clés ``fieldset`` et ``legend``.
     ``$form->inputs(array('legend' => 'Ma légende'));``
@@ -485,13 +491,11 @@ Affichera:
         name="data[Modelname][1][fieldname]">
 
 
-Le Helper Form utilise plusieurs suffixes de champ en interne pour la
-création de champ input datetime.
-Si vous utilisez des champs nommés
-``year``, ``month``, ``day``, ``hour``, ``minute``, or ``meridian`` et
-rencontrez des problèmes pour obtenir un input correct, vous pouvez définir
-le nom ``name`` de l'attribut pour remplacer le behavior par
-défaut::
+Le Helper Form utilise plusieurs suffixes de champ en interne pour la création
+de champ input datetime.  Si vous utilisez des champs nommés ``year``,
+``month``, ``day``, ``hour``, ``minute``, or ``meridian`` et rencontrez des
+problèmes pour obtenir un input correct, vous pouvez définir le nom ``name`` de
+l'attribut pour remplacer le behavior par défaut::
 
     echo $this->Form->input('Model.year', array(
         'type' => 'text',
@@ -656,18 +660,18 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
     Pour surcharger les messages d'erreurs du model utilisez un tableau
     avec les clés respectant les règles de validation::
-  
+
         $this->Form->input('Model.field', array(
-            'error' => array('tooShort' => __('Ceci n'est pas assez long'))
+            'error' => array('tooShort' => __("Ceci n'est pas assez long"))
         ));
 
     Comme vu ci-dessus vous pouvez définir les messages d'erreurs
     pour chacune des règles de validation de vos models.
     Vous pouvez de plus fournir des messages i18n pour vos formulaires.
 
-  .. versionadded:: 2.3
-    Support pour l'option ``errorMessage`` a été ajouté dans 2.3
-    
+    .. versionadded:: 2.3
+        Support pour l'option ``errorMessage`` a été ajouté dans 2.3
+
 *   ``$options['before']``, ``$options['between']``, ``$options['separator']``,
     et ``$options['after']``
 
