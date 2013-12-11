@@ -22,7 +22,7 @@ d'une ``View``, utilisez la classe ``CakeTime``::
 .. versionadded:: 2.1
    ``CakeTime`` a été ajouté à partir de :php:class:`TimeHelper`.
 
-.. start-caketime
+.. start-time
 
 Formatage
 =========
@@ -432,7 +432,7 @@ Tester Time
     ce sera par défaut à days.
 
 
-.. end-caketime
+.. end-time
 
 .. meta::
     :title lang=fr: CakeTime

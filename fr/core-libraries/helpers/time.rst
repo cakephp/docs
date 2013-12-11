@@ -44,8 +44,8 @@ Le paramètre $timezone accepte une chaîne identifiante de timezone valide ou
 une instance de la classe `DateTimeZone`.
 
 .. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-caketime
-    :end-before: end-caketime
+    :start-after: start-time
+    :end-before: end-time
 
 .. meta::
     :title lang=fr: TimeHelper
