@@ -1,5 +1,5 @@
 Blog Tutorial
-*************
+#############
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -24,9 +24,10 @@ Here's what you'll need:
    also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
-#. Finally, you'll need a basic knowledge of the MVC programming
-   pattern. A quick overview can be found in :doc:`/cakephp-overview/understanding-model-view-controller`.
-   Don't worry, it's only a half a page or so.
+#. Finally, you'll need a basic knowledge of the MVC programming pattern.
+   A quick overview can be found in
+   :doc:`/cakephp-overview/understanding-model-view-controller`.  Don't worry,
+   it's only a half a page or so.
 
 Let's get started!
 
@@ -59,6 +60,19 @@ something like the following::
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
+
+File permissions
+----------------
+
+You should make sure to set the proper permissions on the application's tmp
+directory. If you're on a windows system you can probably skip this step, but if
+you using \*nix or MacOS you should run::
+
+    $ chmod -R 0777 app/tmp
+
+This will recursively set the the tmp directory to be world writable. While
+these permissions are generally not a good idea in production environments, they
+will work great for development.
 
 Creating the Blog Database
 ==========================
