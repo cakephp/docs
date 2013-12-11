@@ -88,6 +88,7 @@ fonctions de rappel (callbacks) :
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()
