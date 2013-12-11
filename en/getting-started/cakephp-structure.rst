@@ -81,6 +81,7 @@ Just like controllers, models are featured with callbacks as well:
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()
