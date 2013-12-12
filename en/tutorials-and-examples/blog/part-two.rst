@@ -328,7 +328,7 @@ controller's :php:meth:`Controller::redirect` function
 redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the
-`API <http://api20.cakephp.org>`_ to see the formats in which you can specify a
+`API <http://api.cakephp.org>`_ to see the formats in which you can specify a
 URL for various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
@@ -687,7 +687,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application you're ready for
 the real thing. Start your own project, read the rest of the
-:doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
+:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
 If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
 
