@@ -592,11 +592,6 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Saving belongsToMany data
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. TODO:: This relies on saving actually working, which it doesn't right now.
-
 
 Building your own association types
 -----------------------------------
@@ -931,8 +926,11 @@ published articles using the following::
 Lazy loading associations
 -------------------------
 
-.. TODO:: Link to relevant section in entity docs.
+While CakePHP makes it easy to eager load your associations, there may be cases
+where you need to lazy-load associations. You should refer to the
+:ref:`lazy-load-associations` section for more information.
 
+.. _saving-entities:
 
 Saving entities
 ===============
@@ -1008,6 +1006,12 @@ used. A sample validator method for our articles table would be::
 You can have as many validation sets as you need. See the :doc:`validation
 chapter </core-utility-libraries/validation>` for more information on building
 validation rule-sets.
+
+Saving associations
+-------------------
+
+.. TODO:: Needs completion, pending remaining work on saving associations.
+
 
 Bulk updates
 ------------
