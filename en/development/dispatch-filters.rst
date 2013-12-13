@@ -6,7 +6,7 @@ Dispatcher Filters
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,
 such as response caching, header tuning, special authentication or just to
-provide access to a mission-critical 
+provide access to a mission-critical
 API response in lesser time than a complete
 request dispatching cycle would take.
 
@@ -49,7 +49,10 @@ executed in the order they were defined. There is also an alternative way for
 attaching filters that do not involve the special ``DispatcherFilter`` classes::
 
     Configure::write('Dispatcher.filters', array(
-        'my-filter' => array('callable' => array($classInstance, 'methodName'), 'on' => 'after')
+        'my-filter' => array(
+            'callable' => array($classInstance, 'methodName'),
+            'on' => 'after'
+        )
     ));
 
 As shown above, you can pass any valid PHP `callback <http://php.net/callback>`_
