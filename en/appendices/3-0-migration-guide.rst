@@ -182,7 +182,8 @@ Log
 * When configuring loggers you should use ``'levels'`` instead of 'types'.
 * You can no longer specify custom log levels.  You must use the default set of
   log levels.  You should use logging scopes to create custom log files or
-  specific handling for different sections of your application.
+  specific handling for different sections of your application. Using
+  a non-standard log level will now throw an exception.
 * :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
   add the ``log()`` method.
 * The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now forwarded

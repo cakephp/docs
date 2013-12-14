@@ -259,9 +259,10 @@ an increasing level of severity:
 * Debug: debug-level messages
 
 You can refer to these levels by name when configuring loggers, and when writing
-log messages.  Alternatively, you can use convenience methods like
+log messages. Alternatively, you can use convenience methods like
 :php:meth:`Cake\\Log\\Log::error()` to clearly and easily indicate the logging
-level.
+level. Using a level that is not in the above levels will result in an
+exception.
 
 .. _logging-scopes:
 
