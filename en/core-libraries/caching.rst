@@ -39,21 +39,8 @@ to implement your own caching systems. The built-in caching engines are:
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
 
-<<<<<<< HEAD
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cake\\Cache\\Cache` in a consistent manner.  This means you can easily swap cache engines
-=======
-.. versionchanged:: 2.3
-    FileEngine is always the default cache engine. In the past a number of people
-    had difficulty setting up and deploying APC correctly both in cli + web.
-    Using files should make setting up CakePHP simpler for new developers.
-
-.. versionchanged:: 2.5
-    The Memcached engine was added. And the Memecache engine was deprecated.
-
-Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cache` in a consistent manner. This means you can easily swap cache engines
->>>>>>> 2.5
 as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
@@ -63,7 +50,6 @@ can greatly improve performance as well.
 Configuring Cache class
 =======================
 
-<<<<<<< HEAD
 Configuring the Cache class can be done anywhere, but generally you will want to
 configure Cache during bootstrapping.  The ``app/Config/app.php`` file is the
 conventional location to do this.  You can configure as many cache
@@ -80,28 +66,6 @@ Using multiple configurations also lets you incrementally change the storage as
 needed. Example::
 
     // Using a short name
-=======
-Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/Config/bootstrap.php``. You
-can configure as many cache configurations as you need, and use any
-mixture of cache engines. CakePHP uses two cache configurations internally,
-which are configured in ``app/Config/core.php``. If you are using APC or
-Memcache you should make sure to set unique keys for the core caches. This will
-prevent multiple applications from overwriting each other's cached data.
-
-Using multiple cache configurations can help reduce the
-number of times you need to use :php:func:`Cache::set()` as well as
-centralize all your cache settings. Using multiple configurations
-also lets you incrementally change the storage as needed.
-
-.. note::
-
-    You must specify which engine to use. It does **not** default to
-    File.
-
-Example::
-
->>>>>>> 2.5
     Cache::config('short', array(
         'className' => 'File',
         'duration' => '+1 hours',

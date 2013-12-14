@@ -1213,7 +1213,7 @@ Generally the best place to do this is in the ``initialize`` method::
         }
     }
 
-As with associations, you can use :term:`plugin-syntax` and provide additional
+As with associations, you can use :term:`plugin syntax` and provide additional
 configuration options::
 
     namespace App\Model\Repository;
