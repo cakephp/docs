@@ -1,6 +1,6 @@
-.. _table-objects:
-
 .. php:namespace:: Cake\ORM
+
+.. _table-objects:
 
 Table objects
 #############

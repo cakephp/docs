@@ -38,7 +38,7 @@ customize multiple templates and keep your code DRY::
 
 This will load the file located at ``App/Config/paginator-templates.php`` and
 read templates from the ``$config`` variable within that file. You can also load
-templates from a plugin using :term:`plugin-syntax`::
+templates from a plugin using :term:`plugin syntax`::
 
     // In a controller.
     public $helpers = [

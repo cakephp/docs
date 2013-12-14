@@ -105,7 +105,7 @@ namespace. For example you have a Users plugin that actually uses
     Plugin::load('Users', ['namespace' => 'Jose\Users']);
 
 This will ensure that classnames are resolved properly when using
-:term:`plugin-syntax`.
+:term:`plugin syntax`.
 
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
@@ -361,7 +361,7 @@ webroot.
 Linking to assets in plugins
 ----------------------------
 
-You can use the :term:`plugin-syntax` when linking to plugin assets using the
+You can use the :term:`plugin syntax` when linking to plugin assets using the
 :php:class:`Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods::
 
     // Generates a url of /contact_manager/css/styles.css
