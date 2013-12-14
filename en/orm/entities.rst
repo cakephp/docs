@@ -175,7 +175,32 @@ Lazy loading
     will frequently emit N queries where N is the number of articles being
     iterated.
 
-.. TODO:: finish this
+While lazy loading is not include by CakePHP's ORM it is not hard to implement
+it yourself when and where you need it. But implementing an accessor method you
+can lazily load associated data::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+    use Cake\ORM\TableRegistry;
+
+    class Article extends Entity {
+
+        public function getComments() {
+            $comments = TableRegistry::get('Comments');
+            return $comments->find('all')
+                ->where(['article_id' => $this->id])
+                ->execute();
+        }
+
+    }
+
+Implementing the above method will enable you to do the following::
+
+    $article = $this->Articles->findById($id);
+    foreach ($article->comments as $comment) {
+        echo $comment->body;
+    }
 
 Creating re-usable code with traits
 ===================================
