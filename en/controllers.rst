@@ -199,8 +199,7 @@ Controller Methods
 ==================
 
 For a complete list of controller methods and their descriptions
-visit the CakePHP API. Check out
-`http://api.cakephp.org/2.4/class-Controller.html <http://api.cakephp.org/2.4/class-Controller.html>`_.
+visit the `CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 Interacting with Views
 ----------------------
@@ -687,8 +686,7 @@ Controller Attributes
 =====================
 
 For a complete list of controller attributes and their descriptions
-visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+visit the `CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 .. php:attr:: name
 
