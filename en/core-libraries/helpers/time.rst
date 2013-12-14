@@ -41,8 +41,8 @@ Most of the Time Helper methods have a $timezone parameter. The $timezone parame
 accepts a valid timezone identifier string or an instance of `DateTimeZone` class.
 
 .. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-caketime
-    :end-before: end-caketime
+    :start-after: start-time
+    :end-before: end-time
 
 .. meta::
     :title lang=en: TimeHelper

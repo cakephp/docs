@@ -36,8 +36,8 @@ Timeヘルパーのメソッドは多くが $timezone パラメーターを持�
 タイムゾーンを表す文字列か、 `DateTimeZone` クラスのインスタンスを渡すことができます。
 
 .. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-caketime
-    :end-before: end-caketime
+    :start-after: start-time
+    :end-before: end-time
 
 .. meta::
     :title lang=en: TimeHelper
