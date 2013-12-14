@@ -541,7 +541,10 @@ cela::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('ImageComment.active' => 1) // compte seulement si "ImageComment" est active = 1
+                // compte seulement si "ImageComment" est active = 1
+                'counterScope' => array(
+                    'ImageComment.active' => 1
+                )
             )
         );
     }
@@ -1125,7 +1128,7 @@ tags::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.book_id'
+                'Book.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',

@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-******************
+##################
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
@@ -61,6 +61,23 @@ d'installation devrait ressembler à quelque chose comme cela::
 A présent, il est peut-être temps de voir un peu comment fonctionne la
 structure de fichiers de CakePHP : lisez le chapitre
 :doc:`/getting-started/cakephp-folder-structure`.
+
+Permissions du répertoire Tmp
+-----------------------------
+
+Ensuite vous devrez mettre le répertoire ``app/tmp`` en écriture pour le
+serveur web. La meilleur façon de le faire est de trouver sous quel utilisateur
+votre serveur web tourne. Vous pouver mettre ``<?php echo `whoami`; ?>``
+à l'intérieur de tout fichier php que votre serveur web execute. Vous devriez
+voir afficher un nom d'utilisateur. Changez le possesseur du répertoire
+``app/tmp`` pour cet utilisateur. La commande finale que vous pouvez lancer
+(dans \*nix) pourrait ressembler à ceci::
+
+    $ chown -R www-data app/tmp
+
+Si pour une raison ou une autre, CakePHP ne peut écrire dans ce répertoire,
+vous verrez des avertissements et des exceptions attrapées vous disant que les
+données de cache n'ont pas pu être écrites.
 
 Créer la base de données du blog
 ================================
@@ -148,18 +165,17 @@ de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion
 Configuration facultative
 =========================
 
-Il y a trois autres élements qui peuvent être configurés. La plupart des
+Il y a quelques autres élements qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs. Le second consiste à définir un nombre personnalisé (ou "graine") à
-utiliser pour le chiffrage. Le troisième est de permettre l'accès en écriture
-à CakePHP pour son dossier ``tmp``.
+utiliser pour le chiffrage.
 
-Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/app/Config/core.php`` à la ligne 187.
-La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
-difficile à deviner::
+Le "grain de sel" est utilisé pour générer des hashes. Changez la valeur par
+défaut de ``Security.salt`` dans ``/app/Config/core.php`` à la ligne 187.
+La valeur de remplacement doit être longue, difficile à deviner et aussi
+aléatoire que possible::
 
     /**
      * Une chaîne aléatoire utilisée dans les méthodes de hachage sécurisées.
@@ -167,9 +183,9 @@ difficile à deviner::
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 La "graine cipher" est utilisée pour le chiffrage/déchiffrage des chaînes de
-caractères. Changez sa valeur par défaut en modifiant
-``/app/Config/core.php`` à la ligne 192. La nouvelle valeur n'a pas beaucoup
-d'importance du moment qu'elle est difficile à deviner::
+caractères. Changez la valeur par défaut de ``Security.cipherSeed`` dans
+``/app/Config/core.php`` à la ligne 192. La valeur de remplacement doit être
+un grand nombre entier aléatoire::
 
     /**
      * Une chaîne aléatoire de chiffre utilisée pour le chiffrage/déchiffrage
@@ -177,22 +193,10 @@ d'importance du moment qu'elle est difficile à deviner::
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
-La dernière étape consiste à rendre le dossier ``/app/tmp`` accessible en
-écriture. Le meilleur moyen de faire cela est de trouver sous quel utilisateur
-votre serveur web s'exécute (``<?php echo `whoami`; ?>``) et de modifier le
-propriétaire du dossier ``/app/tmp`` pour cet utilisateur. La commande à
-exécuter (sous \*nix) devrait ressembler à quelque chose comme cela ::
-
-    $ chown -R www-data app/tmp
-
-Si pour une raison quelconque CakePHP ne peut pas écrire dans ce répertoire,
-vous en serez informé par un message d'avertissement tant que vous n'êtes pas
-en mode production.
-
 Une note sur mod\_rewrite
 =========================
 
-Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
+Occasionnellement, les nouveaux utilisateurs peuvent avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
 (pas d'images ou de styles CSS), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer

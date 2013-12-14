@@ -266,6 +266,8 @@ options may be used:
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 *  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
+  will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving multiple records of single model, $data needs to be a

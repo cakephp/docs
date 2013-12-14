@@ -124,10 +124,12 @@ general usage pattern adding a rule for a single field::
 
     public $validate = array(
         'fieldName1' => array(
-            'rule'       => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+            // or: array('ruleName', 'param1', 'param2' ...)
+            'rule'       => 'ruleName',
             'required'   => true,
             'allowEmpty' => false,
-            'on'         => 'create', // or: 'update'
+            // or: 'update'
+            'on'         => 'create',
             'message'    => 'Your Error Message'
         )
     );
@@ -431,7 +433,8 @@ stored in $this->data member variable::
         public $validate = array(
             'slug' => array(
                 'rule'    => 'alphaNumericDashUnderscore',
-                'message' => 'Slug can only be letters, numbers, dash and underscore'
+                'message' => 'Slug can only be letters,' .
+                    ' numbers, dash and underscore'
             )
         );
 
@@ -876,7 +879,10 @@ with usage examples.
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule'    => array(
+                    'extension',
+                    array('gif', 'jpeg', 'png', 'jpg')
+                ),
                 'message' => 'Please supply a valid image.'
             )
         );

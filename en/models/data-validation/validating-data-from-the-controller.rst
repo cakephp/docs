@@ -58,7 +58,9 @@ actually saving.
 To validate multiple models, the following approach should be
 used::
 
-    if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
+    if ($this->ModelName->saveAll(
+        $this->request->data, array('validate' => 'only')
+    )) {
       // validates
     } else {
       // does not validate
@@ -67,9 +69,11 @@ used::
 If you have validated data before save, you can turn off validation
 to avoid second check::
 
-    if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
+    if ($this->ModelName->saveAll(
+        $this->request->data, array('validate' => false)
+    )) {
         // saving without validation
-    } 
+    }
 
 
 .. meta::

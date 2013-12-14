@@ -74,7 +74,9 @@ formatting::
     public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
-                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);
+                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
+                    $val['Event']['begindate']
+                );
             }
         }
         return $results;
@@ -125,9 +127,16 @@ changed very easily. Use the code below in the appropriate model.
 ::
 
     public function beforeSave($options = array()) {
-        if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
-            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
-            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+        if (!empty($this->data['Event']['begindate']) &&
+            !empty($this->data['Event']['enddate'])
+        ) {
+
+            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['begindate']
+            );
+            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['enddate']
+            );
         }
         return true;
     }
@@ -174,9 +183,12 @@ on this record will also be deleted.
 ::
 
     // using app/Model/ProductCategory.php
-    // In the following example, do not let a product category be deleted if it still contains products.
-    // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
-    // Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.
+    // In the following example, do not let a product category be deleted if it
+    // still contains products.
+    // A call of $this->Product->delete($id) from ProductsController.php has set
+    // $this->id .
+    // Assuming 'ProductCategory hasMany Product', we can access $this->Product
+    // in the model.
     public function beforeDelete($cascade = true) {
         $count = $this->Product->find("count", array(
             "conditions" => array("product_category_id" => $this->id)
@@ -198,7 +210,8 @@ in this callback method.
 
 ::
 
-    // perhaps after deleting a record from the database, you also want to delete an associated file
+    // perhaps after deleting a record from the database, you also want to delete
+    // an associated file
     public function afterDelete() {
         $file = new File($this->data['SomeModel']['file_path']);
         $file->delete();

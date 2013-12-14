@@ -284,6 +284,8 @@ une fois. Les options suivantes peuvent être utilisées:
 * ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 * ``deep``: (since 2.1) Si défini à true, les données associées sont aussi
   sauvegardées, regardez aussi saveAssociated.
+* ``callbacks`` Défini à false pour désactiver les callbacks. En utilisant
+  'before' ou 'after' va activer seulement ces callbacks.
 * ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
   counter caches (si il y en a).
 
@@ -316,11 +318,14 @@ Pour sauvegarder les données associées avec ``$options['deep'] = true``
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
-    )
+    );
     $data = array(
-        array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
+        array(
+            'Article' => array('title' => 'title 1'),
+            'Assoc' => array('field' => 'value')
+        ),
         array('Article' => array('title' => 'title 2')),
-    )
+    );
     $Model->saveMany($data, array('deep' => true));
 
 Gardez à l'esprit que si vous souhaitez mettre à jour un enregistrement au lieu
@@ -328,8 +333,10 @@ d'en créer un nouveau, vous devez juste ajouter en index la clé primaire à la
 ligne de donnée::
 
     array(
-        array('Article' => array('title' => 'New article')), // Ceci crée une nouvelle ligne
-        array('Article' => array('id' => 2, 'title' => 'title 2')), // Ceci met à jour une ligne existante
+        // Ceci crée une nouvelle ligne
+        array('Article' => array('title' => 'New article')),
+        // Ceci met à jour une ligne existante
+        array('Article' => array('id' => 2, 'title' => 'title 2')),
     )
 
 
@@ -423,9 +430,12 @@ ceci::
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Sauvegarder aussi un nouveau user', 'User' => array('first' => 'mad', 'last' => 'coder'))
+            array(
+                'body' => 'Save a new user as well',
+                'User' => array('first' => 'mad', 'last' => 'coder')
+            ),
         ),
-    )
+    );
 
 Et sauvegarder cette donnée avec::
 
@@ -587,7 +597,10 @@ validées. Jettez un oeil au code suivant.::
        public $uses = array('CourseMembership');
 
        public function index() {
-           $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
+           $this->set(
+                'courseMembershipsList',
+                $this->CourseMembership->find('all')
+            );
        }
 
        public function add() {
@@ -678,9 +691,27 @@ et ensuite les deux meta-champs pour CourseMembership, par ex.::
 
         // View/CourseMemberships/add.ctp
 
-        <?php echo $form->create('CourseMembership'); ?>
-            <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
-            <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
+        <?php echo $this->Form->create('CourseMembership'); ?>
+            <?php
+                echo $this->Form->input(
+                    'Student.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Student ID',
+                        'default' => 1
+                    )
+                );
+            ?>
+            <?php
+                echo $this->Form->input(
+                    'Course.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Course ID',
+                        'default' => 1
+                    )
+                );
+            ?>
             <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
             <?php echo $this->Form->input('CourseMembership.grade'); ?>
             <button type="submit">Save</button>

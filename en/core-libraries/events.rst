@@ -198,7 +198,10 @@ function to do so::
 
     // Anonymous functions require PHP 5.3+
     $this->Order->getEventManager()->attach(function($event) {
-        CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
+        CakeLog::write(
+            'info',
+            'A new order was placed with id: ' . $event->subject()->id
+        );
     }, 'Model.Order.afterPlace');
 
 In addition to anonymous functions you can use any other callable type that PHP
@@ -342,7 +345,10 @@ operation from occurring.
 To check if an event was stopped, you call the ``isStopped()`` method in the event object::
 
     public function place($order) {
-        $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
+        $event = new CakeEvent(
+            'Model.Order.beforePlace',
+            $this, array('order' => $order)
+        );
         $this->getEventManager()->dispatch($event);
         if ($event->isStopped()) {
             return false;
@@ -382,7 +388,10 @@ directly or returning the value in the callback itself::
 
     // Using the event result
     public function place($order) {
-        $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
+        $event = new CakeEvent(
+            'Model.Order.beforePlace',
+            $this, array('order' => $order)
+        );
         $this->getEventManager()->dispatch($event);
         if (!empty($event->result['order'])) {
             $order = $event->result['order'];

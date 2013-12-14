@@ -264,8 +264,9 @@ méthode.
 
 .. php:method:: object($data, $options = array())
 
-    Sérialise ``$data`` vers JSON.  Cette méthode est un proxy pour ``json_encode()``
-    avec quelques fonctionnalités supplémentaires ajoutée avec le paramètre ``$options``.
+    Sérialise ``$data`` vers JSON.  Cette méthode est un proxy pour
+    ``json_encode()`` avec quelques fonctionnalités supplémentaires ajoutée
+    avec le paramètre ``$options``.
 
     **Options:**
 
@@ -423,7 +424,13 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
+        $("#element").draggable({
+            containment:"#content",
+            drag:onDrag,
+            grid:[10,10],
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: drop($options = array())
 
@@ -460,7 +467,12 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});
+        $("#element").droppable({
+            accept:".items",
+            drop:onDrop,
+            out:onExit,
+            over:onHover
+        });
 
     .. note::
 
@@ -511,7 +523,14 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
+        $("#element").slider({
+            change:onChange,
+            max:10,
+            min:0,
+            orientation:"vertical",
+            stop:onComplete,
+            value:2
+        });
 
 .. php:method:: effect($name, $options = array())
 
@@ -578,7 +597,11 @@ méthode.
     ``stop`` à false::
 
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('saperlipopette!'), array('stop' => false));
+        $this->Js->event(
+            'click',
+            $this->Js->alert('saperlipopette!'),
+            array('stop' => false)
+        );
 
     Si vous employiez la librairie jQuery vous devriez avoir le code 
     Javascript suivant ajouté au buffer. Notez que l'événement du navigateur
@@ -663,10 +686,16 @@ méthode.
     Va créé un bouton submit et un événement onclick attaché. 
     L'événement click sera bufferisé par défaut.::
 
-        echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
+        echo $this->Js->submit('Save', array(
+            'update' => '#content',
+            'div' => false,
+            'type' => 'json',
+            'async' => false
+        ));
 
     Montre comment vous pouvez combiner les options de 
-    :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à l'utilisation des submits.
+    :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à
+    l'utilisation des submits.
 
 .. php:method:: link($title, $url = null, $options = array())
 
@@ -693,7 +722,11 @@ méthode.
 
     **Exemple d'utilisation**::
 
-        echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
+        echo $this->Js->link(
+            'Page 2',
+            array('page' => 2),
+            array('update' => '#content')
+        );
 
     Va créé un lien pointant vers ``/page:2`` et mettre à jour  #content
     avec la réponse.
@@ -707,6 +740,9 @@ méthode.
         ));
 
         // Créé le HTML suivant
+
+    .. code-block:: html
+
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())
@@ -804,17 +840,24 @@ Ajouter des effets et des transitions
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter
 les effets d'indicator vous même.::
 
+.. code-block:: php
+
     <!DOCTYPE html>
     <html>
         <head>
             <?php echo $this->Html->script('jquery'); ?>
-            //plus de trucs ici.
+            //more stuff here.
         </head>
         <body>
         <div id="content">
             <?php echo $content_for_layout; ?>
         </div>
-        <?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>
+        <?php
+            echo $this->Html->image(
+                'indicator.gif',
+                array('id' => 'busy-indicator')
+            );
+        ?>
         </body>
     </html>
 
@@ -832,8 +875,14 @@ avec le ``Helper Js``. Pour faire cela, nous avons besoin de mettre
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,
-        'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
-        'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
+        'before' => $this->Js->get('#busy-indicator')->effect(
+            'fadeIn',
+            array('buffer' => false)
+        ),
+        'complete' => $this->Js->get('#busy-indicator')->effect(
+            'fadeOut',
+            array('buffer' => false)
+        ),
     ));
 
 Ceci montrera/cachera l'élément 'indicateur occupé' avant et après

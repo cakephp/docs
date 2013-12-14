@@ -386,10 +386,10 @@ return the row before and after the one you request. Below is a simple
 ::
 
     public function some_function() {
-       $neighbors = $this->Article->find(
-        'neighbors',
-        array('field' => 'id', 'value' => 3)
-    );
+        $neighbors = $this->Article->find(
+            'neighbors',
+            array('field' => 'id', 'value' => 3)
+        );
     }
 
 You can see in this example the two required elements of the

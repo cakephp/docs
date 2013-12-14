@@ -76,7 +76,8 @@ from::
     // Load the class Comment in app/Plugin/PluginName/Model/Comment.php
     App::uses('Comment', 'PluginName.Model');
 
-    // Load the class CommentComponent in app/Plugin/PluginName/Controller/Component/CommentComponent.php
+    // Load the class CommentComponent in
+    // app/Plugin/PluginName/Controller/Component/CommentComponent.php
     App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 
@@ -146,7 +147,9 @@ Adding paths for App to find packages in
         App::build(array('Model' => array('/path/to/models/')), App::RESET);
 
         //will setup multiple search paths for helpers
-        App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/')));
+        App::build(array(
+            'View/Helper' => array('/path/to/helpers/', '/another/path/')
+        ));
 
 
     If reset is set to true, all loaded plugins will be forgotten and they will
@@ -315,7 +318,8 @@ the same conventions as loading other files::
 To load classes in subdirectories, you'll need to add those paths
 with ``App::build()``::
 
-    // Load the class ClassInSomePackage in app/Vendor/SomePackage/ClassInSomePackage.php
+    // Load the class ClassInSomePackage in
+    // app/Vendor/SomePackage/ClassInSomePackage.php
     App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
     App::uses('ClassInSomePackage', 'Vendor');
 
@@ -344,18 +348,30 @@ To load **app/Vendor/some.name.php**::
 
 To load **app/Vendor/services/well.named.php**::
 
-    App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
+    App::import(
+        'Vendor',
+        'WellNamed',
+        array('file' => 'services' . DS . 'well.named.php')
+    );
 
 To load **app/Plugin/Awesome/Vendor/services/well.named.php**::
 
-    App::import('Vendor', 'Awesome.WellNamed', array('file' => 'services' . DS . 'well.named.php'));
+    App::import(
+        'Vendor',
+        'Awesome.WellNamed',
+        array('file' => 'services' . DS . 'well.named.php')
+    );
 
 It wouldn't make a difference if your vendor files are inside your /vendors
 directory. CakePHP will automatically find it.
 
 To load **vendors/vendorName/libFile.php**::
 
-    App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' . DS . 'libFile.php'));
+    App::import(
+        'Vendor',
+        'aUniqueIdentifier',
+        array('file' => 'vendorName' . DS . 'libFile.php')
+    );
 
 App Init/Load/Shutdown Methods
 ==============================

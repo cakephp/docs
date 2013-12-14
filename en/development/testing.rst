@@ -1146,7 +1146,7 @@ application's tests::
     class AllTestsTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All tests');
-            $suite->addTestDirectory(TESTS . 'Case');
+            $suite->addTestDirectoryRecursive(TESTS . 'Case');
             return $suite;
         }
     }

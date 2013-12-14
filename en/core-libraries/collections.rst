@@ -3,7 +3,7 @@ Collections
 
 Components, Helpers, Behaviors and Tasks all share a similar structure and set
 of behaviors. For 2.0, they were given a unified API for interacting with
-collections of similar objects. The collection objects in CakePHP, give you 
+collections of similar objects. The collection objects in CakePHP, give you
 a uniform way to interact with several different kinds of objects in your
 application.
 
@@ -32,7 +32,10 @@ used to alias objects in a collection. This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
-    $this->Auth = $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
+    $this->Auth = $this->Components->load(
+        'Auth',
+        array('className' => 'MyCustomAuth')
+    );
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
 The inverse of loading an object, is unloading it. Unloaded objects are removed
@@ -79,8 +82,8 @@ Using the ``break`` and ``breakOn`` options you can cancel a callback loop
 midway similar to stopping event propagation in JavaScript::
 
     $this->Behaviors->trigger(
-        'beforeFind', 
-        array($this, $query), 
+        'beforeFind',
+        array($this, $query),
         array('break' => true, 'breakOn' => false)
     );
 
@@ -97,7 +100,7 @@ on that object unless the ``triggerDisabled`` option is used::
 
     // Disable the HtmlHelper
     $this->Helpers->disable('Html');
-    
+
     // Re-enable the helper later on
     $this->Helpers->enable('Html');
 
@@ -124,14 +127,16 @@ Here's how you can specify priority at declaration time::
     class SomeController {
         public $components = array(
             'Foo', //Foo gets default priority 10
-            'Bar' => array('priority' => 9) //Bar's callbacks are triggered before Foo's    
+            //Bar's callbacks are triggered before Foo's
+            'Bar' => array('priority' => 9)
         );
 
-	public $helpers = array(
-            'Cache' => array('priority' => 12), //Cache's callbacks will be triggered last 
+	   public $helpers = array(
+            //Cache's callbacks will be triggered last
+            'Cache' => array('priority' => 12),
             'Asset',
-            'Utility' //Utility has priority 10 same as Asset and its callbacks are trigger
-                      //after Asset's
+            'Utility' //Utility has priority 10 same as Asset and its callbacks
+                      //are triggered after Asset's
         );
     }
 
@@ -145,7 +150,10 @@ Here's how you can specify priority at declaration time::
 
 When dynamically loading objects to a collection you can specify the priority like this::
 
-    $this->MyComponent = $this->Components->load('MyComponent', array('priority' => 9));
+    $this->MyComponent = $this->Components->load(
+        'MyComponent',
+        array('priority' => 9)
+    );
 
 
 You can also change priorities at run time using the ``ObjectCollection::setPriority()`` function::
