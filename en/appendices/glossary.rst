@@ -52,6 +52,11 @@ Glossary
         Cross Site Request Forgery. Prevents replay attacks, double
         submissions and forged requests from other domains.
 
+    CDN
+        Content Delivery Network. A 3rd party vendor you can pay to help
+        distribute your content to data centers around the world. This helps
+        put your static assets closer to geographically distributed users.
+
     routes.php
         A file in APP/Config that contains routing configuration.
         This file is included before each request is processed.

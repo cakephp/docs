@@ -55,7 +55,7 @@ as follows:
 
 className
     The class name of the driver used to power the connection. This can either
-    be a short classname using :ref:`plugin-syntax`, a fully namespaced name, or
+    be a short classname using :term:`plugin syntax`, a fully namespaced name, or
     a constructed driver instance. Examples of short classnames are Mysql,
     Sqlite, Postgres, and Sqlserver.
 persistent
@@ -119,7 +119,7 @@ bakers, pastry\_stores, and savory\_cakes.
 
 
 Managing connections
-===================
+====================
 
 .. php:class:: ConnectionManager
 

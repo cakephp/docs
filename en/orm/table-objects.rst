@@ -1,6 +1,6 @@
-.. _table-objects:
-
 .. php:namespace:: Cake\ORM
+
+.. _table-objects:
 
 Table objects
 #############
@@ -935,7 +935,7 @@ where you need to lazy-load associations. You should refer to the
 Saving entities
 ===============
 
-.. php:method::save(Entity $entity, array $options = [])
+.. php:method:: save(Entity $entity, array $options = [])
 
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
@@ -1016,7 +1016,7 @@ Saving associations
 Bulk updates
 ------------
 
-.. php:method::updateAll($fields, $conditions)
+.. php:method:: updateAll($fields, $conditions)
 
 There may be times when updating rows individually is not efficient or
 necessary.  In these cases it is more efficient to use a bulk-update to modify
@@ -1045,7 +1045,7 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 Deleting entities
 =================
 
-.. php:method::delete(Entity $entity, $options = [])
+.. php:method:: delete(Entity $entity, $options = [])
 
 Once you've loaded an entity you can delete it by calling the originating
 table's delete method::
@@ -1093,7 +1093,7 @@ these options enabled would be::
 Bulk deletes
 ------------
 
-.. php:method::deleteAll($conditions)
+.. php:method:: deleteAll($conditions)
 
 There may be times when deleting rows one by one is not efficient or useful.
 In these cases it is more performant to use a bulk-delete to remove many rows at
@@ -1213,7 +1213,7 @@ Generally the best place to do this is in the ``initialize`` method::
         }
     }
 
-As with associations, you can use :term:`plugin-syntax` and provide additional
+As with associations, you can use :term:`plugin syntax` and provide additional
 configuration options::
 
     namespace App\Model\Repository;

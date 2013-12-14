@@ -113,7 +113,7 @@ request body data will automatically be parsed and set to ``$this->data`` for
 below for how you can access those request bodies.
 
 Accessing / setting environment variables (from $_SERVER and $_ENV)
-==========================
+===================================================================
 
 .. versionadded:: 3.0
 

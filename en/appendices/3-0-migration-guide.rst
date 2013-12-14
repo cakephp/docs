@@ -185,7 +185,7 @@ Log
   specific handling for different sections of your application.
 * :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
   add the ``log()`` method.
-* The logging scope passed to :php:method:`Cake\\Log\\Log::write()` is now forwarded
+* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now forwarded
   to the log engines' ``write()`` method in order to provide better context to
   the engines.
 
@@ -277,7 +277,7 @@ Request
   to non-static.
 
 Response
--------
+--------
 
 * The mapping of mimetype ``text/plain`` to extension ``csv`` has been removed.
   As a consequence :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
@@ -396,10 +396,11 @@ RequestHandlerComponent
 SecurityComponent
 -----------------
 
-- The following methods and their related properties have been removed from Security component::
+- The following methods and their related properties have been removed from Security component:
   ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
-  Use the :php:meth:`Cake\\Network\\Request::onlyAllow()`instead.
-- ``SecurityComponent::$disabledFields()`` has been removed, use ```SecurityComponent::$unlockedFields()``.
+  Use the :php:meth:`Cake\\Network\\Request::onlyAllow()` instead.
+- ``SecurityComponent::$disabledFields()`` has been removed, use
+  ``SecurityComponent::$unlockedFields()``.
 - The CSRF related features in SecurityComponent have been extracted and moved
   into a separate CsrfComponent. This allows you more easily use CSRF protection
   without having to use form tampering prevention.
@@ -410,7 +411,7 @@ Model
 ConnectionManager
 -----------------
 
-- ConnectionManager has been moved to the ``Cake\Database`` namespace.
+- ConnectionManager has been moved to the ``Cake\\Database`` namespace.
 - ConnectionManager has had the following methods removed:
 
     - ``sourceList``
