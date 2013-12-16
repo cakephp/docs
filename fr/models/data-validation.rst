@@ -1198,6 +1198,11 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
+    Cette méthode de validation utilise une expression régulière complexe qui
+    peut parfois entraîner des problèmes avec Apache2 sur Windows en utilisant
+    mod\_php.
+
+
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
     Lance une validation de définition d'user.
