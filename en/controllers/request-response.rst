@@ -337,11 +337,11 @@ Request API
 
     Get the list of accepted languages::
 
-        Request::acceptLanguage();
+        $this->request->acceptLanguage();
 
     Check if a specific language is accepted::
 
-        Request::acceptLanguage('es-es');
+        $this->request->acceptLanguage('es-es');
 
 .. php:method:: param($name)
 
