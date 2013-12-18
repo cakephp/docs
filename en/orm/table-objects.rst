@@ -236,7 +236,7 @@ contain the Address record if it exists::
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
-    }
+   }
 
 The above would emit SQL that is similar to::
 
@@ -592,11 +592,55 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
+Building entities from request data
+===================================
 
-Building your own association types
------------------------------------
+Before editing and saving data back into the database, you'll need to convert
+the request data from the array format held in the request, and the entities
+that the ORM uses. The Table class provides an easy way to convert one or many
+entities from request data. You can convert a single entity using::
 
-.. TODO:: Finish this. Need a reasonable example that fits into the docs..
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data());
+
+The request data should follow the structure of your entities. For example if
+you had the an article, which belonged to a user, and had many comments, your
+request data should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1
+        'user' => [
+            'username' => 'mark'
+        ],
+        'comments' => [
+            ['body' => 'First comment'],
+            ['body' => 'Second comment'],
+        ]
+    ];
+
+You can convert multiple entities using::
+
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+
+When converting multiple entities, the request data for multiple articles should
+look like::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+
+Once you've converted request data into entities you can ``save()`` or
+``delete()`` them.
 
 Loading entities
 ================
