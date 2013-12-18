@@ -9,6 +9,8 @@ to quickly add functionality to the base MVC classes in your
 applications. Right now we'll stay at a higher level, so look for
 the details on how to use these tools later on.
 
+.. _application-extensions:
+
 Application Extensions
 ======================
 
