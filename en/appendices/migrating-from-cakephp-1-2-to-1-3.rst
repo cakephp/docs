@@ -47,18 +47,54 @@ There is a new way to add those paths. As of 1.3 RC1 the
 ::
 
     App::build(array(
-        'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
-        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
-        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
-        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
-        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
-        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
-        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
-        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
-        'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
-        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
-        'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
-        'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
+        'plugins' => array(
+          '/full/path/to/plugins/',
+          '/next/full/path/to/plugins/'
+        ),
+        'models' =>  array(
+          '/full/path/to/models/',
+          '/next/full/path/to/models/'
+        ),
+        'views' => array(
+          '/full/path/to/views/',
+          '/next/full/path/to/views/'
+        ),
+        'controllers' => array(
+          '/full/path/to/controllers/',
+          '/next/full/path/to/controllers/'
+        ),
+        'datasources' => array(
+          '/full/path/to/datasources/',
+          '/next/full/path/to/datasources/'
+        ),
+        'behaviors' => array(
+          '/full/path/to/behaviors/',
+          '/next/full/path/to/behaviors/'
+        ),
+        'components' => array(
+          '/full/path/to/components/',
+          '/next/full/path/to/components/'
+        ),
+        'helpers' => array(
+          '/full/path/to/helpers/',
+          '/next/full/path/to/helpers/'
+        ),
+        'vendors' => array(
+          '/full/path/to/vendors/',
+          '/next/full/path/to/vendors/'
+        ),
+        'shells' => array(
+          '/full/path/to/shells/',
+          '/next/full/path/to/shells/'
+        ),
+        'locales' => array(
+          '/full/path/to/locale/',
+          '/next/full/path/to/locale/'
+        ),
+        'libs' => array(
+          '/full/path/to/libs/',
+          '/next/full/path/to/libs/'
+        )
     ));
 
 Also changed is the order in which bootstrapping occurs. In the
@@ -76,7 +112,10 @@ increase their flexibility. You now use ``Inflector::rules()`` to
 load custom inflections::
 
     Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
+        'rules' => array(
+          '/^(bil)er$/i' => '\1',
+          '/^(inflec|contribu)tors$/i' => '\1ta'
+        ),
         'uninflected' => array('singulars'),
         'irregular' => array('spins' => 'spinor')
     ));
@@ -98,25 +137,25 @@ issues):
 
 -  session.php -> cake\_session.php
 
-   
+
    -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
 -  socket.php -> cake\_socket.php
 
-   
+
    -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
 -  schema.php -> cake\_schema.php
 
-   
+
    -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
 -  behavior.php -> model\_behavior.php
 
-   
+
    -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
@@ -278,7 +317,7 @@ update simply change your core.php::
 
     //from:
     Configure::write('Routing.admin', 'admin');
-    
+
     //to:
     Configure::write('Routing.prefixes', array('admin'));
 
@@ -297,7 +336,10 @@ problematic and buggy even with the existing code base. First path
 segments using full regular expressions was removed. You can no
 longer create routes like::
 
-    Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
+    Router::connect(
+      '/([0-9]+)-p-(.*)/',
+      array('controller' => 'products', 'action' => 'show')
+    );
 
 These routes complicated route compilation and impossible to
 reverse route. If you need routes like this, it is recommended that
@@ -307,7 +349,7 @@ use a greedy star in the middle of a route::
 
     Router::connect(
         '/pages/*/:event',
-        array('controller' => 'pages', 'action' => 'display'), 
+        array('controller' => 'pages', 'action' => 'display'),
         array('event' => '[a-z0-9_-]+')
     );
 
@@ -579,7 +621,7 @@ being sorted, either asc or desc.
    create hidden fieldset elements. Instead they create hidden div
    elements. This improves validation with HTML4.
 
-Also be sure to check the :ref:`form-improvements-1-3` for additional changes and 
+Also be sure to check the :ref:`form-improvements-1-3` for additional changes and
 new features in the FormHelper.
 
 **HtmlHelper**

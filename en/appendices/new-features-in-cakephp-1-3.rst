@@ -233,7 +233,12 @@ You use ``tableParameters`` just as you would any other key in a
 schema file. Much like ``indexes``::
 
     var $comments => array(
-        'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
+        'id' => array(
+          'type' => 'integer',
+          'null' => false,
+          'default' => 0,
+          'key' => 'primary'
+        ),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
         'comment' => array('type' => 'text'),
         'indexes' => array(
@@ -309,14 +314,34 @@ persist/behave in the same way. Assuming you have
 in your core.php you will be able to do the following from a
 non-prefixed URL::
 
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
+    $this->Html->link(
+      'Go',
+      array('controller' => 'posts', 'action' => 'index', 'member' => true)
+    );
+    $this->Html->link(
+      'Go',
+      array('controller' => 'posts', 'action' => 'index', 'admin' => true)
+    );
 
 Likewise, if you are in a prefixed URL and want to go to a
 non-prefixed URL, do the following::
 
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
+    $this->Html->link(
+      'Go',
+      array(
+        'controller' => 'posts',
+        'action' => 'index',
+        'member' => false
+      )
+    );
+    $this->Html->link(
+      'Go',
+      array(
+        'controller' => 'posts',
+        'action' => 'index',
+        'admin' => false
+      )
+    );
 
 **Route classes**
 
