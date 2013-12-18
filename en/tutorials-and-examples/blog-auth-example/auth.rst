@@ -86,7 +86,9 @@ with CakePHP::
                     $this->Session->setFlash(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(
+                    __('The user could not be saved. Please, try again.')
+                );
             }
         }
 
@@ -100,7 +102,9 @@ with CakePHP::
                     $this->Session->setFlash(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(
+                    __('The user could not be saved. Please, try again.')
+                );
             } else {
                 $this->request->data = $this->User->read(null, $id);
                 unset($this->request->data['User']['password']);
@@ -163,8 +167,15 @@ file and add the following lines::
         public $components = array(
             'Session',
             'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+                'loginRedirect' => array(
+                    'controller' => 'posts', 
+                    'action' => 'index'
+                ),
+                'logoutRedirect' => array(
+                    'controller' => 'pages', 
+                    'action' => 'display', 
+                    'home'
+                )
             )
         );
 
@@ -222,7 +233,9 @@ and add the following::
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+            $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                $this->data[$this->alias]['password']
+            );
         }
         return true;
     }
@@ -238,7 +251,9 @@ We're just missing a template view file for the login function:
     <?php echo $this->Session->flash('auth'); ?>
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
-            <legend><?php echo __('Please enter your username and password'); ?></legend>
+            <legend>
+                <?php echo __('Please enter your username and password'); ?>
+            </legend>
             <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
@@ -283,7 +298,8 @@ logged in user as a reference for the created post::
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
+            //Added this line
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); 
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -307,7 +323,11 @@ config::
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+            'logoutRedirect' => array(
+                'controller' => 'pages', 
+                'action' => 'display', 
+                'home'
+            ),
             'authorize' => array('Controller') // Added this line
         )
     );
