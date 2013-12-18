@@ -177,8 +177,7 @@ insert logic around the request life-cycle:
 
     .. note::
 
-        The beforeFilter() method will be called for missing actions,
-        and scaffolded actions.
+        The beforeFilter() method will be called for missing actions.
 
 .. php:method:: beforeRender()
 
@@ -373,28 +372,6 @@ Flow Control
             'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
 
     The generated URL would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
-
-Callbacks
----------
-
-In addition to the :ref:`controller-life-cycle`,
-CakePHP also supports callbacks related to scaffolding.
-
-.. php:method:: beforeScaffold($method)
-
-    $method name of method called example index, edit, etc.
-
-.. php:method:: afterScaffoldSave($method)
-
-    $method name of method called either edit or update.
-
-.. php:method:: afterScaffoldSaveError($method)
-
-    $method name of method called either edit or update.
-
-.. php:method:: scaffoldError($method)
-
-    $method name of method called example index, edit, etc.
 
 Other Useful Methods
 --------------------
@@ -624,7 +601,6 @@ More on controllers
 .. toctree::
 
     controllers/request-response
-    controllers/scaffolding
     controllers/pages-controller
     controllers/components
 

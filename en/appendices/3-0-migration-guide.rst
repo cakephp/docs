@@ -345,6 +345,16 @@ Controller
   models + controllers were far more intertwined.
 - ``Controller::loadModel()`` has been replaced with
   :php:class:`~Cake\\Controller\\Controller::repository()`.
+- The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
+  has been removed from CakePHP core, and will be provided as a standalone
+  plugin.
+
+Scaffold Removed
+----------------
+
+The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
+infrequently used, and never intended for production use. It will be replaced by
+a standalone plugin that people requiring that feature can use.
 
 ComponentCollection replaced
 ----------------------------
