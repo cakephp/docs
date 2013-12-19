@@ -158,7 +158,9 @@ AuthComponent will expect that your passwords are hashed. In
         // other code.
 
         public function beforeSave($options = array()) {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            $this->data['User']['password'] = AuthComponent::password(
+              $this->data['User']['password']
+            );
             return true;
         }
     }
@@ -182,9 +184,18 @@ site controlled with Auth and Acl, we will set them up in
 
         public function beforeFilter() {
             //Configure AuthComponent
-            $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+            $this->Auth->loginAction = array(
+              'controller' => 'users', 
+              'action' => 'login'
+            );
+            $this->Auth->logoutRedirect = array(
+              'controller' => 'users', 
+              'action' => 'login'
+            );
+            $this->Auth->loginRedirect = array(
+              'controller' => 'posts', 
+              'action' => 'add'
+            );
         }
     }
 
