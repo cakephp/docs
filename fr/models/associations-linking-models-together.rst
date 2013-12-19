@@ -61,7 +61,7 @@ spécificité de l'association.
         );
     }
 
-Dans l'exemple ci-dessus, la première instance du mot 'Recipe' est ce que
+Dans l'exemple ci-dessus, la première occurence du mot 'Recipe' est ce que
 l'on appelle un 'Alias'. C'est un identifiant pour la relation et cela peut
 être ce que vous souhaitez. En règle générale, on choisit le même nom que la
 classe qu'il référence. Toutefois, **les alias pour chaque model doivent être
