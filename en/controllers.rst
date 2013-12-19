@@ -275,7 +275,7 @@ rendered from the controller.
         }
 
     Although CakePHP will automatically call it (unless you've set
-    ``$this->$autoRender`` to false) after every action's logic, you can
+    ``$this->autoRender`` to false) after every action's logic, you can
     use it to specify an alternate view file by specifying an action
     name in the controller using ``$action``.
 
