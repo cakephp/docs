@@ -1014,7 +1014,11 @@ When an entity is saved a few things happen:
 4. The ``Model.afterValidate`` event will be triggered.
 5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
    be aborted, and save() will return false.
-6. The modified fields on the entity will be saved.
+6. Parent associations are saved. For example, any listed belongsTo
+   associations will be saved.
+7. The modified fields on the entity will be saved.
+8. Child associations are saved. For example, any listed hasMany, hasOne, or
+   belongsToMany associations will be saved.
 7. The ``Model.afterSave`` event will be dispatched.
 
 The ``save()`` method will return the modified entity on success, and ``false``
@@ -1054,7 +1058,29 @@ validation rule-sets.
 Saving associations
 -------------------
 
-.. TODO:: Needs completion, pending remaining work on saving associations.
+When you are saving an entity, you can also elect to save some or all of the
+associated entities. By default all first level entities will be saved. For
+example saving an Article, will also automatically update any dirty entities
+that are directly related to articles table.
+
+You can fine tune which associations are saved by using the ``associated``
+option::
+
+    // Only save the comments association
+    $articles->save($entity, ['associated' => ['Comments']);
+
+You can also recursively define this option, to save distant associations::
+
+    // Save the company, the employees and related addresses for each of them.
+    // For employees use the 'special' validation group
+    $companies->save($entity, [
+      'associated' => [
+        'Employees' => [
+          'associated' => ['Addresses'],
+        ]
+      ]
+    ]);
+
 
 
 Bulk updates
