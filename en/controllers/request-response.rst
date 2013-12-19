@@ -17,11 +17,11 @@ CakeRequest
 
 :php:class:`CakeRequest` is the default request object used in CakePHP. It centralizes
 a number of features for interrogating and interacting with request data.
-On each request one CakeRequest is created and then passed by reference to the various
-layers of an application that use request data. By default ``CakeRequest`` is assigned to
+On each request one :php:class:`CakeRequest` is created and then passed by reference to the various
+layers of an application that use request data. By default :php:class:`CakeRequest` is assigned to
 ``$this->request``, and is available in Controllers, Views and Helpers. You can
 also access it in Components by using the controller reference. Some of the duties
-``CakeRequest`` performs include:
+:php:class:`CakeRequest` performs include:
 
 * Process the GET, POST, and FILES arrays into the data structures you are
   familiar with.
@@ -34,7 +34,7 @@ also access it in Components by using the controller reference. Some of the duti
 Accessing request parameters
 ============================
 
-CakeRequest exposes several interfaces for accessing request parameters. The first is as object
+:php:class:`CakeRequest` exposes several interfaces for accessing request parameters. The first is as object
 properties, the second is array indexes, and the third is through ``$this->request->params``::
 
     $this->request->controller;
@@ -68,9 +68,9 @@ are also all found in the request parameters:
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
   more information.
-* ``bare`` Present when the request came from requestAction() and included the
+* ``bare`` Present when the request came from :php:meth:`~Controller::requestAction()` and included the
   bare option. Bare requests do not have layouts rendered.
-* ``requested`` Present and set to true when the action came from requestAction.
+* ``requested`` Present and set to true when the action came from :php:meth:`~Controller::requestAction()`.
 
 
 Accessing Querystring parameters
@@ -85,7 +85,7 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
     // Note: BC accessor, will be deprecated in future versions
     $this->request['url']['page'];
 
-You can either directly access the query property, or you can use
+You can either directly access the :php:attr:`~CakeRequest::$query` property, or you can use
 :php:meth:`CakeRequest::query()` to read the URL query array in an error free manner.
 Any keys that do not exist will return ``null``::
 
@@ -102,7 +102,7 @@ that contains a ``data`` prefix, will have that data prefix removed. For example
     // is accessible at
     $this->request->data['MyModel']['title'];
 
-You can either directly access the data property, or you can use
+You can either directly access the :php:attr:`~CakeRequest::$data` property, or you can use
 :php:meth:`CakeRequest::data()` to read the data array in an error free manner.
 Any keys that do not exist will return ``null``::
 
@@ -142,7 +142,7 @@ in additional parameters as well::
 Accessing path information
 ==========================
 
-CakeRequest also provides useful information about the paths in your
+:php:class:`CakeRequest` also provides useful information about the paths in your
 application. :php:attr:`CakeRequest::$base` and
 :php:attr:`CakeRequest::$webroot` are useful for generating URLs, and
 determining whether or not your application is in a subdirectory.
@@ -154,14 +154,14 @@ Inspecting the request
 
 Detecting various request conditions used to require using
 :php:class:`RequestHandlerComponent`. These methods have been moved to
-``CakeRequest``, and offer a new interface alongside a more backwards compatible
+:php:class:`CakeRequest`, and offer a new interface alongside a more backwards compatible
 usage::
 
     $this->request->is('post');
     $this->request->isPost();
 
 Both method calls will return the same value. For the time being the methods
-are still available on RequestHandler, but are deprecated and still might be
+are still available on :php:class:`RequestHandlerComponent`, but are deprecated and still might be
 removed before the final release. You can also easily extend the request
 detectors that are available, by using :php:meth:`CakeRequest::addDetector()`
 to create new kinds of detectors. There are four different types of detectors
@@ -208,7 +208,7 @@ Some examples would be::
         })
     );
 
-``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
+:php:class:`CakeRequest` also includes methods like :php:meth:`CakeRequest::domain()`,
 :php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
 help applications with subdomains, have a slightly easier life.
 
@@ -231,11 +231,11 @@ There are several built-in detectors that you can use:
 CakeRequest and RequestHandlerComponent
 =======================================
 
-Since many of the features ``CakeRequest`` offers used to be the realm of
+Since many of the features :php:class:`CakeRequest` offers used to be the realm of
 :php:class:`RequestHandlerComponent` some rethinking was required to figure out how it
 still fits into the picture. For 2.0, :php:class:`RequestHandlerComponent`
 acts as a sugar daddy providing a layer of sugar on top of the utility
-`CakeRequest` affords. Sugar like switching layout and views based on content
+:php:class:`CakeRequest` affords. Sugar like switching layout and views based on content
 types or AJAX is the domain of :php:class:`RequestHandlerComponent`.
 This separation of utility and sugar between the two classes lets you
 more easily pick and choose what you want and what you need.
@@ -243,14 +243,14 @@ more easily pick and choose what you want and what you need.
 Interacting with other aspects of the request
 =============================================
 
-You can use `CakeRequest` to introspect a variety of things about the request.
+You can use :php:class:`CakeRequest` to introspect a variety of things about the request.
 Beyond the detectors, you can also find out other information from various
 properties and methods.
 
-* ``$this->request->webroot`` contains the webroot directory.
-* ``$this->request->base`` contains the base path.
-* ``$this->request->here`` contains the full address to the current request
-* ``$this->request->query`` contains the query string parameters.
+* :php:attr:`CakeRequest::$webroot` contains the webroot directory.
+* :php:attr:`CakeRequest::$base` contains the base path.
+* :php:attr:`CakeRequest::$here` contains the full address to the current request
+* :php:attr:`CakeRequest::$query` contains the query string parameters.
 
 
 CakeRequest API
@@ -338,7 +338,7 @@ CakeRequest API
 
 .. php:method:: addDetector($name, $options)
 
-    Add a detector to be used with is(). See :ref:`check-the-request`
+    Add a detector to be used with :php:meth:`CakeRequest::is()`. See :ref:`check-the-request`
     for more information.
 
 .. php:method:: accepts($type = null)
@@ -369,7 +369,7 @@ CakeRequest API
 
 .. php:method:: param($name)
 
-    Safely read values in ``$request->params``. This removes the need to call
+    Safely read values in :php:attr:`CakeRequest::$params`. This removes the need to call
     ``isset()`` or ``empty()`` before using param values.
 
     .. versionadded:: 2.4
@@ -415,7 +415,7 @@ of methods previously found on :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
 methods are deprecated in favour of using :php:class:`CakeResponse`.
 
-``CakeResponse`` provides an interface to wrap the common response related
+:php:class:`CakeResponse` provides an interface to wrap the common response related
 tasks such as:
 
 * Sending headers for redirects.
@@ -426,16 +426,16 @@ tasks such as:
 Changing the response class
 ===========================
 
-CakePHP uses ``CakeResponse`` by default. ``CakeResponse`` is a flexible and
+CakePHP uses :php:class:`CakeResponse` by default. :php:class:`CakeResponse` is a flexible and
 transparent to use class. If you need to replace it with an application
-specific class, you can override and replace ``CakeResponse`` with
-your own class by replacing CakeResponse in app/webroot/index.php.
+specific class, you can override and replace :php:class:`CakeResponse` with
+your own class by replacing :php:class:`CakeResponse` in ``app/webroot/index.php``.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`. You can also replace the response
 instance by setting ``$this->response`` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with ``header()``. See the section on
+out the methods that interact with :php:meth:`~CakeResponse::header()`. See the section on
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with content types
@@ -443,8 +443,8 @@ Dealing with content types
 
 You can control the Content-Type of your application's responses with using
 :php:meth:`CakeResponse::type()`. If your application needs to deal with
-content types that are not built into CakeResponse, you can map those types
-with ``type()`` as well::
+content types that are not built into :php:class:`CakeResponse`, you can map those types
+with :php:meth:`CakeResponse::type()` as well::
 
     // Add a vCard type
     $this->response->type(array('vcf' => 'text/v-card'));
@@ -453,7 +453,7 @@ with ``type()`` as well::
     $this->response->type('vcf');
 
 Usually you'll want to map additional content types in your controller's
-``beforeFilter`` callback, so you can leverage the automatic view switching
+:php:meth:`~Controller::beforeFilter()` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
 .. _cake-response-file:
@@ -462,8 +462,8 @@ Sending files
 =============
 
 There are times when you want to send files as responses for your requests.
-Prior to version 2.3 you could use :doc:`/views/media-view` to accomplish that.
-As of 2.3 MediaView is deprecated and you can use :php:meth:`CakeResponse::file()`
+Prior to version 2.3 you could use :php:class:`MediaView` to accomplish that.
+As of 2.3 :php:class:`MediaView` is deprecated and you can use :php:meth:`CakeResponse::file()`
 to send a file as response::
 
     public function sendFile($id) {
@@ -476,7 +476,7 @@ to send a file as response::
 
 As shown in the above example, you have to pass the file path to the method.
 CakePHP will send proper content type header if it's a known file type listed in
-`CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
+:php:attr:`CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
 by using the :php:meth:`CakeResponse::type()` method.
 
 If you want you can also force a file to be downloaded instead of being displayed in
@@ -526,7 +526,7 @@ can be called with a few different parameter configurations::
         'Content-type: application/pdf'
     ));
 
-Setting the same header multiple times will result in overwriting the previous
+Setting the same :php:meth:`~CakeResponse::header()` multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when
 :php:meth:`CakeResponse::header()` is called; instead they are buffered
 until the response is actually sent.
@@ -561,8 +561,8 @@ You can also tell clients that you want them to cache responses. By using
     }
 
 The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors' experience. ``cache()`` sets the
-Last-Modified value to the first argument.
+hopefully speeding up your visitors' experience. :php:meth:`CakeResponse::cache()` sets the
+``Last-Modified`` value to the first argument.
 ``Expires`` header and the ``max-age`` directive are set based on the second parameter.
 Cache-Control's ``public`` directive is set as well.
 
@@ -596,15 +596,15 @@ that can change the way browsers or proxies use the cached content. A
 
     Cache-Control: private, max-age=3600, must-revalidate
 
-``CakeResponse`` class helps you set this header with some utility methods that
+:php:class:`CakeResponse` class helps you set this header with some utility methods that
 will produce a final valid ``Cache-Control`` header. First of them is :php:meth:`CakeResponse::sharable()`
 method, which indicates whether a response in to be considered sharable across
-different users or clients or users. This method actually controls the `public`
-or `private` part of this header. Setting a response as private indicates that
+different users or clients or users. This method actually controls the ``public``
+or ``private`` part of this header. Setting a response as private indicates that
 all or part of it is intended for a single user. To take advantage of shared
 caches it is needed to set the control directive as public
 
-Second parameter of this method is used to specify a `max-age` for the cache,
+Second parameter of this method is used to specify a ``max-age`` for the cache,
 which is the number of seconds, after which the response is no longer considered
 fresh::
 
@@ -620,7 +620,7 @@ fresh::
         $this->response->sharable(false, 3600);
     }
 
-``CakeResponse`` exposes separate methods for setting each of the directives in
+:php:class:`CakeResponse` exposes separate methods for setting each of the directives in
 the ``Cache-Control`` header.
 
 The Expiration header
@@ -636,8 +636,8 @@ no longer considered fresh. This header can be set using the
         $this->response->expires('+5 days');
     }
 
-This method also accepts a DateTime instance or any string that can be parsed by the
-DateTime class.
+This method also accepts a :php:class:`DateTime` instance or any string that can be parsed by the
+:php:class:`DateTime` class.
 
 The Etag header
 ---------------
@@ -651,7 +651,7 @@ cache, but it asks the application every time
 whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.
 
-The ``Etag`` header (called entity tag) is a string that uniquely identifies the
+The :php:meth:`~CakeResponse::etag()` header (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
@@ -707,10 +707,10 @@ HTML depending on the browser. Under such circumstances you can use the ``Vary``
 CakeResponse and testing
 ========================
 
-Probably one of the biggest wins from ``CakeResponse`` comes from how it makes
+Probably one of the biggest wins from :php:class:`CakeResponse` comes from how it makes
 testing controllers and components easier. Instead of having methods spread across
 several objects, you only have to mock a single object, since controllers and
-components delegate to ``CakeResponse``. This helps you to get closer to a 'unit'
+components delegate to :php:class:`CakeResponse`. This helps you to get closer to a 'unit'
 test and makes testing controllers easier::
 
     public function testSomething() {
@@ -767,8 +767,8 @@ CakeResponse API
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Sets the ``Cache-Control`` header to be either `public` or `private` and
-    optionally sets a `max-age` directive of the resource
+    Sets the ``Cache-Control`` header to be either ``public`` or ``private`` and
+    optionally sets a ``max-age`` directive of the resource
 
     .. versionadded:: 2.1
 
@@ -817,7 +817,7 @@ CakeResponse API
 
 .. php:method:: send()
 
-    Once you are done creating a response, calling send() will send all
+    Once you are done creating a response, calling :php:meth:`~CakeResponse::send()` will send all
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 
