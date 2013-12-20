@@ -592,14 +592,15 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Building entities from request data
-===================================
+Converting request data into entities
+=====================================
 
 Before editing and saving data back into the database, you'll need to convert
 the request data from the array format held in the request, and the entities
 that the ORM uses. The Table class provides an easy way to convert one or many
 entities from request data. You can convert a single entity using::
 
+    // In a controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data());
 
@@ -1069,7 +1070,8 @@ option::
     // Only save the comments association
     $articles->save($entity, ['associated' => ['Comments']);
 
-You can also recursively define this option, to save distant associations::
+You can define nested ``associated`` options to save distant or deeply nested
+associations::
 
     // Save the company, the employees and related addresses for each of them.
     // For employees use the 'special' validation group
@@ -1081,7 +1083,94 @@ You can also recursively define this option, to save distant associations::
       ]
     ]);
 
+Your entities should be in the structured in the same way as they are when
+loaded from the database.
 
+Saving BelongsTo associations
+-----------------------------
+
+When saving belongsTo associations, the ORM expects a single nested entity at
+the singular, lowercased and underscored version the association name. For
+example::
+
+    use App\Model\Entity\Article;
+    use App\Model\Entity\User;
+
+    $article = new Article(['title' => 'First post']);
+    $article->user = new User(['id' => 1, 'username' => 'mark']);
+
+    $articles = TableRegistry::get('Articles');
+    $articles->save($article);
+
+Saving HasOne associations
+--------------------------
+
+When saving hasOne associations, the ORM expects a single nested entity at the
+singular, lowercased and underscored version the association name. For example::
+
+
+    use App\Model\Entity\User;
+    use App\Model\Entity\Profile;
+
+    $user = new User(['id' => 1, 'username' => 'cakephp']);
+    $user->profile = new Profile(['twitter' => '@cakephp']);
+
+    $users = TableRegistry::get('Users');
+    $users->save($user);
+
+Saving HasMany associations
+---------------------------
+
+When saving hasOne associations, the ORM expects an array of entities at the
+plural, lowercased and underscored version the association name. For example::
+
+    use App\Model\Entity\Article;
+    use App\Model\Entity\Comment;
+
+    $article = new Article(['title' => 'First post']);
+    $article->comments = [
+        new Comment(['body' => 'Best post ever']),
+        new Comment(['body' => 'I really like this.']),
+    ];
+
+    $articles = TableRegistry::get('Articles');
+    $articles->save($article);
+
+When saving hasMany associations, associated records will either be updated, or
+inserted. The ORM will not remove or 'sync' a hasMany association.
+
+Saving BelongsToMany associations
+---------------------------------
+
+When saving hasOne associations, the ORM expects an array of entities at the
+plural, lowercased and underscored version the association name. For example::
+
+    use App\Model\Entity\Article;
+    use App\Model\Entity\Tag;
+
+    $article = new Article(['title' => 'First post']);
+    $article->tags = [
+        new Tag(['tag' => 'CakePHP']),
+        new Tag(['tag' => 'Framework']),
+    ];
+
+    $articles = TableRegistry::get('Articles');
+    $articles->save($article);
+
+When saving belongsToMany associations, you have the choice between 2 saving
+strategies:
+
+append
+    Only new links will be created between each side of this association. It
+    will not destroy existing links even though they may not be present in the
+    array of entities to be saved.
+replace
+    When saving, existing links will be removed and new links will be created in
+    the joint table. If there are existing link in the database to some of the
+    entities intended to be saved, those links will be updated, not deleted and
+    then re-saved.
+
+By default the ``replace`` strategy is used.
 
 Bulk updates
 ------------
