@@ -1095,7 +1095,7 @@ Saving BelongsTo associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, lowercased and underscored version the association name. For
+the singular, camel cased version the association name. For
 example::
 
     use App\Model\Entity\Article;
@@ -1111,7 +1111,7 @@ Saving HasOne associations
 --------------------------
 
 When saving hasOne associations, the ORM expects a single nested entity at the
-singular, lowercased and underscored version the association name. For example::
+singular, camel cased version the association name. For example::
 
 
     use App\Model\Entity\User;
@@ -1127,7 +1127,7 @@ Saving HasMany associations
 ---------------------------
 
 When saving hasOne associations, the ORM expects an array of entities at the
-plural, lowercased and underscored version the association name. For example::
+plural, camel cased version the association name. For example::
 
     use App\Model\Entity\Article;
     use App\Model\Entity\Comment;
@@ -1148,7 +1148,7 @@ Saving BelongsToMany associations
 ---------------------------------
 
 When saving hasOne associations, the ORM expects an array of entities at the
-plural, lowercased and underscored version the association name. For example::
+plural, camel cased version the association name. For example::
 
     use App\Model\Entity\Article;
     use App\Model\Entity\Tag;
