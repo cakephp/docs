@@ -247,10 +247,10 @@ You can use :php:class:`CakeRequest` to introspect a variety of things about the
 Beyond the detectors, you can also find out other information from various
 properties and methods.
 
-* :php:attr:`CakeRequest::$webroot` contains the webroot directory.
-* :php:attr:`CakeRequest::$base` contains the base path.
-* :php:attr:`CakeRequest::$here` contains the full address to the current request
-* :php:attr:`CakeRequest::$query` contains the query string parameters.
+* ``$this->request->webroot`` contains the webroot directory.
+* ``$this->request->base`` contains the base path.
+* ``$this->request->here`` contains the full address to the current request
+* ``$this->request->query`` contains the query string parameters.
 
 
 CakeRequest API
@@ -369,7 +369,7 @@ CakeRequest API
 
 .. php:method:: param($name)
 
-    Safely read values in :php:attr:`CakeRequest::$params`. This removes the need to call
+    Safely read values in ``$request->params``. This removes the need to call
     ``isset()`` or ``empty()`` before using param values.
 
     .. versionadded:: 2.4
