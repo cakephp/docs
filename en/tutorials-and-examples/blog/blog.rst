@@ -66,7 +66,7 @@ Tmp directory permissions
 
 Next we'll need to make the ``app/tmp`` directory writable by the webserver.
 The best way to do this is to find out what user your webserver
-runs as. You can run ``<?php echo `whoami`; ?>`` inside any PHP file your
+runs as. You can run ``<?php echo exec('whoami'); ?>`` inside any PHP file your
 webserver can execute. You should see a username printed. Change the ownership of
 the ``app/tmp`` directory to that user. The final command you run
 (in \*nix) might look something like this::
