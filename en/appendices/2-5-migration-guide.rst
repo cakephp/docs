@@ -42,6 +42,10 @@ CookieComponent
   :php:class:`Security`. You can enable this by calling
   :php:meth:`CookieComponent::type()` with 'aes'.
 
+Scaffold
+--------
+- Dyanmic Scaffold is now deprecated and will be removed in 3.0.
+
 Event
 =====
 
@@ -141,3 +145,8 @@ PaginationHelper
 
 - :php:meth:`PaginatorHelper::sort()` now has a ``lock`` option to create pagination sort links with
   the default direction only.
+
+ScaffoldView
+------------
+
+- Dyanmic Scaffold is now deprecated and will be removed in 3.0.
