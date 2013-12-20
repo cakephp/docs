@@ -507,6 +507,11 @@ Possible keys for belongsToMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
+- **saveStrategy**: Either 'append' or 'replace'. Indicates the mode to be used
+  for saving associated entities. The former will only create new links
+  between both side of the relation and the latter will do a wipe and
+  replace to create the links between the passed entities when saving.
+
 
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exist::
@@ -546,8 +551,8 @@ belongsToMany association will be created.
 It is sometimes desirable to store additional data with a many to
 many association. Consider the following::
 
-    Student hasAndBelongsToMany Course
-    Course hasAndBelongsToMany Student
+    Student BelongsToMany Course
+    Course BelongsToMany Student
 
 A Student can take many Courses and a Course can be taken by many Students. This
 is a simple many to many association. The following table would suffice::
@@ -1171,6 +1176,29 @@ replace
     then re-saved.
 
 By default the ``replace`` strategy is used.
+
+Saving additional data to the joint table
+-----------------------------------------
+
+In some situations the table joining your BelongsToMany association, will have
+additional columns on it. CakePHP makes it simple to save properties into these
+columns. Each entity in a belongsToMany association has a ``_joinData`` property
+that contains the additional columns on the joint table. This data can be either
+an array or an Entity instance. For example if Students BelongsToMany Courses,
+we could have a joint table that looks like::
+
+    id | student_id | course_id | days_attended | grade
+
+When saving data you can populate the additional columns on the joint table by
+setting data to the ``_joinData`` property::
+
+    $student->courses[0]->_joinData->grade = 80.12;
+    $student->courses[0]->_joinData->days_attended = 30;
+
+    $studentsTable->save($student);
+
+The ``_joinData`` property can be either an entity, or an array of data if you
+are saving entities built from request data.
 
 Bulk updates
 ------------
