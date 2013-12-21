@@ -152,7 +152,7 @@ CakePHPのデータベース設定ファイルの元は、
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
 最後の作業は、 ``app/tmp`` ディレクトリをWebで書き込めるようにすることです。
-いちばん良い方法は、Webサーバのユーザ名を調べて、(``<?php echo `whoami`; ?>``) ``app/tmp`` ディレクトリの所有権をそのユーザにすることです。
+いちばん良い方法は、Webサーバのユーザ名を調べて、(``<?php echo exec('whoami'); ?>``) ``app/tmp`` ディレクトリの所有権をそのユーザにすることです。
 この最後の（\*nixでの）コマンドは次のようなものです::
 
     $ chown -R www-data app/tmp
