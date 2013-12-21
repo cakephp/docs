@@ -626,7 +626,17 @@ request data should look like::
         ]
     ];
 
-You can convert multiple entities using::
+When building forms that save nested associations, you need to define which
+associations should be marshalled::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'Tags', 'Comments' => ['associated' => ['Users']]
+    ]);
+
+The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
+should be marshalled. You can convert multiple entities using::
 
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
@@ -655,6 +665,11 @@ While table objects provide an abstraction around a 'repository' or table of
 objects, when you query for individual records you get 'entity' objects. While
 this section discusses the different ways you can find and load entities, you
 should read the :doc:`/orm/entities` section for more information on entities.
+
+Getting a single entity by primary key
+--------------------------------------
+
+.. TODO:: Finish this.
 
 Using finders to load data
 --------------------------
@@ -739,7 +754,9 @@ the query has not been executed, a ``LIMIT 1`` clause will be applied::
     ]);
     $row = $query->first();
 
-This approach replaces ``find('first')`` in previous versions of CakePHP.
+This approach replaces ``find('first')`` in previous versions of CakePHP. You
+may also want to use the ``get()`` method if you are loading entities by primary
+key.
 
 .. _table-find-list:
 
