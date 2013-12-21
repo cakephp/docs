@@ -55,6 +55,7 @@ CakePHPアプリケーションの主なソースは、通常データベース�
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()
