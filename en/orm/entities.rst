@@ -153,11 +153,11 @@ Mass assignment
 While setting properties to entites in bulk is simple and convenient, it can
 create signifcant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. By default CakePHP
-protects agains mass-assignment and allows you to whitelist which fields
+protects against mass-assignment and makes you whitelist which fields
 are mass-assignable.
 
-The ``_accessible`` property allows you to provide a map of properties
-and whether or not they can be mass-assigned. The values ``true`` and ``false``
+The ``_accessible`` property allows you to provide a map of properties and
+whether or not they can be mass-assigned. The values ``true`` and ``false``
 indicate whether a field can or cannot be mass-assigned::
 
     namespace App\Model\Entity;
@@ -198,7 +198,8 @@ method::
 
 .. note::
 
-    Modifying accessible fields is **per entity instance**.
+    Modifying accessible fields effects only the instance the method is called
+    on.
 
 
 Bypassing field guarding
