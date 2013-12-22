@@ -150,7 +150,69 @@ it easier to test code that works with error messages::
 Mass assignment
 ===============
 
-.. TODO:: Waiting on code to be written for this.
+While setting properties to entites in bulk is simple and convenient, it can
+create signifcant security issues. Bulk assigning user data from the request
+into an entity allows the user to modify any and all columns. By default CakePHP
+protects against mass-assignment and makes you whitelist which fields
+are mass-assignable.
+
+The ``_accessible`` property allows you to provide a map of properties and
+whether or not they can be mass-assigned. The values ``true`` and ``false``
+indicate whether a field can or cannot be mass-assigned::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+
+    class Article extends Entity {
+        protected $_accessible => [
+            'title' => true,
+            'body' => true,
+        ];
+    }
+
+In addition to concrete fields there is a special ``*`` field which defines the
+fallback behavior if a field is not specifically named::
+
+    class Article extends Entity {
+        protected $_accessible => [
+            'title' => true,
+            'body' => true,
+            '*' => false,
+        ];
+    }
+
+If the ``*`` property is not defined it will default to ``false``.
+
+Modifying the guarded fields at runtime
+---------------------------------------
+
+You can modify the list of guarded fields at runtime using the ``accessible``
+method::
+
+    // Make user_id accessible.
+    $article->accessible('user_id', true);
+
+    // Make title guarded.
+    $article->accessible('title', false);
+
+.. note::
+
+    Modifying accessible fields effects only the instance the method is called
+    on.
+
+
+Bypassing field guarding
+------------------------
+
+There are sometimes situations when you want to allow mass-assignment to guarded
+fields::
+
+    $article->set($properties, ['guard' => false]);
+
+By setting the ``guard`` option to false, you can ignore the accessible field
+list for a single call to ``set()``.
+
 
 .. _lazy-load-associations:
 
