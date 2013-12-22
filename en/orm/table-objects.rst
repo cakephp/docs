@@ -669,7 +669,23 @@ should read the :doc:`/orm/entities` section for more information on entities.
 Getting a single entity by primary key
 --------------------------------------
 
-.. TODO:: Finish this.
+.. php:method:: get($id, $options = [])
+
+It is often convienent to load a single entity from the database when editing or
+view entities and their related data. You can do this easily by using
+``get()``::
+
+    // Get a single article
+    $article = $articles->get($id);
+
+    // Get a single article, and related comments
+    $article = $articles->get($id, [
+        'contain' => ['Comments']
+    ]);
+
+If the get operation does not find any results
+a ``Cake\ORM\Error\RecordNotFoundException`` will be raised. You can either
+catch this exception yourself, or allow CakePHP to convert it into a 404 error.
 
 Using finders to load data
 --------------------------
