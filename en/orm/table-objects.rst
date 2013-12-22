@@ -1117,6 +1117,7 @@ associations::
       'associated' => [
         'Employees' => [
           'associated' => ['Addresses'],
+          'validate' => 'special',
         ]
       ]
     ]);
