@@ -1026,7 +1026,10 @@ all the error messages for an entity and its related data::
     // In a controller
     $articles = TableRegistry::get('Articles');
     $article = $articles->newEntity($this->request->data());
-    if ($articles->validate($article)) {
+    $valid = $articles->validate($article, [
+        'associated' => ['Comments', 'Author']
+    ]);
+    if ($valid) {
         $articles->save($article, ['validate' => false]);
     } else {
         // Do work to show error messages.
@@ -1050,8 +1053,9 @@ You can validate multiple entities at a time using the ``validateMany`` method::
         // Do work to show error messages.
     }
 
-Much like the ``newEntity()`` method you can specify which associations to
-validate, and which validation sets to apply using the ``options`` parameter::
+Much like the ``newEntity()`` method, ``validate`` and ``validateMany`` allow
+you can specify which associations to validate, and which validation sets to
+apply using the ``options`` parameter::
 
     $valid = $articles->validate($article, [
       'associated' => [
