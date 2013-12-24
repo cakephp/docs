@@ -757,7 +757,7 @@ Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
 ``getOptions`` method on a query object to retrieve the options used.
 
-.. _table-find-first::
+.. _table-find-first:
 
 Getting the first result
 ------------------------
@@ -1107,7 +1107,7 @@ When an entity is saved a few things happen:
 7. The modified fields on the entity will be saved.
 8. Child associations are saved. For example, any listed hasMany, hasOne, or
    belongsToMany associations will be saved.
-7. The ``Model.afterSave`` event will be dispatched.
+9. The ``Model.afterSave`` event will be dispatched.
 
 The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable validation and/or transactions using the ``$options`` argument for
@@ -1465,6 +1465,8 @@ Behaviors
 
 .. php:method:: addBehavior($name, $config = [])
 
+.. start-behaviors
+
 Behaviors provide an easy way to create horizonally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
@@ -1502,6 +1504,8 @@ configuration options::
             ]);
         }
     }
+
+.. end-behaviors
 
 You can find out more about behaviors, including the behaviors provided by
 CakePHP in the chapter on :doc:`/orm/behaviors`.
