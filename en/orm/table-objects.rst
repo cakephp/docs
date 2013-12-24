@@ -1013,6 +1013,55 @@ While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
+Validating entities
+===================
+
+.. php:method:: validate(Entity $entity, array $options = [])
+
+While entities are validated as they are saved, you may also want to validate
+entities before attempting to do any saving. Validating entities before
+saving is often useful from the context of a controller, where you want to show
+all the error messages for an entity and its related data::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($this->request->data());
+    if ($articles->validate($article)) {
+        $articles->save($article, ['validate' => false]);
+    } else {
+        // Do work to show error messages.
+    }
+
+The ``validate`` method returns a boolean indicating whether or not the entity
+& related entities are valid. If they are not valid, any validation erros will
+be set on each and every entity that had validation errors. You can use
+:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+
+You can validate multiple entities at a time using the ``validateMany`` method::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+    if ($articles->validateMany($entities)) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['validate' => false]);
+        }
+    } else {
+        // Do work to show error messages.
+    }
+
+Much like the ``newEntity()`` method you can specify which associations to
+validate, and which validation sets to apply using the ``options`` parameter::
+
+    $valid = $articles->validate($article, [
+      'associated' => [
+        'Comments' => [
+          'associated' => ['User'],
+          'validate' => 'special',
+        ]
+      ]
+    ]);
+
 .. _saving-entities:
 
 Saving entities
