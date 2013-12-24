@@ -28,5 +28,6 @@ More information
 
     orm/database-basics
     orm/table-objects
+    orm/behaviors
     orm/query-builder
     orm/schema-system
