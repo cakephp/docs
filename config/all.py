@@ -1,14 +1,15 @@
-# Global configuration information used across all the 
+# Global configuration information used across all the
 # translations of documentation.
 #
 
-# -- General configuration -----------------------------------------------------
+# -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
-# Add any Sphinx extension module names here, as strings. They can be extensions
-# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions coming with Sphinx
+# (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx.ext.todo',
     'sphinxcontrib.phpdomain',
@@ -54,7 +55,8 @@ exclude_patterns = [
     'core-libraries/components/email.rst'
 ]
 
-# The reST default role (used for this markup: `text`) to use for all documents.
+# The reST default role (used for this markup: `text`) to
+# use for all documents.
 #default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
@@ -77,7 +79,7 @@ pygments_style = 'sphinx'
 highlight_language = 'phpinline'
 
 
-# -- Options for HTML output ---------------------------------------------------
+# -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -97,7 +99,7 @@ html_theme_path = ['../themes']
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
-html_short_title = u'Cookbook 2.x'
+html_short_title = u'Cookbook 3.x'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
@@ -123,7 +125,7 @@ html_static_path = []
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
- '**' : ['globaltoc.html', 'localtoc.html']
+    '**': ['globaltoc.html', 'localtoc.html']
 }
 
 # Additional templates that should be rendered to pages, maps page names to
@@ -160,7 +162,7 @@ html_sidebars = {
 htmlhelp_basename = 'CakePHPCookbookdoc'
 
 
-# -- Options for LaTeX output --------------------------------------------------
+# -- Options for LaTeX output ------------------------------------------------
 
 # The paper size ('letter' or 'a4').
 #latex_paper_size = 'letter'
@@ -169,10 +171,11 @@ htmlhelp_basename = 'CakePHPCookbookdoc'
 latex_font_size = '11pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass [howto/manual]).
+# (source start file, target name, title, author,
+# documentclass [howto/manual]).
 latex_documents = [
-  ('pdf-contents', 'CakePHPCookbook.tex', u'CakePHP Cookbook Documentation',
-   u'Cake Software Foundation', 'manual'),
+    ('pdf-contents', 'CakePHPCookbook.tex', u'CakePHP Cookbook Documentation',
+     u'Cake Software Foundation', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -221,13 +224,13 @@ preamb = ur'''
 \definecolor{VerbatimBorderColor}{RGB}{230,230,230}
 '''
 
-latex_elements ={
+latex_elements = {
     'preamble': preamb,
     'fncychap': '\\usepackage[Sonny]{fncychap}'
 }
 
 
-# -- Options for manual page output --------------------------------------------
+# -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
@@ -237,7 +240,7 @@ man_pages = [
 ]
 
 
-# -- Options for Epub output ---------------------------------------------------
+# -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
 epub_title = u'CakePHP Cookbook'
