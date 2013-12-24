@@ -725,7 +725,7 @@ associations using the fluent interface::
 
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
-        ->contain(['Comments', 'Author'])
+        ->contain(['Comments', 'Authors'])
         ->limit(10);
 
 You can also provide many commonly used options to ``find()``. This can help
