@@ -757,7 +757,7 @@ Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
 ``getOptions`` method on a query object to retrieve the options used.
 
-.. _table-find-first::
+.. _table-find-first:
 
 Getting the first result
 ------------------------
@@ -1013,6 +1013,59 @@ While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
+Validating entities
+===================
+
+.. php:method:: validate(Entity $entity, array $options = [])
+
+While entities are validated as they are saved, you may also want to validate
+entities before attempting to do any saving. Validating entities before
+saving is often useful from the context of a controller, where you want to show
+all the error messages for an entity and its related data::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($this->request->data());
+    $valid = $articles->validate($article, [
+        'associated' => ['Comments', 'Author']
+    ]);
+    if ($valid) {
+        $articles->save($article, ['validate' => false]);
+    } else {
+        // Do work to show error messages.
+    }
+
+The ``validate`` method returns a boolean indicating whether or not the entity
+& related entities are valid. If they are not valid, any validation erros will
+be set on each and every entity that had validation errors. You can use
+:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+
+You can validate multiple entities at a time using the ``validateMany`` method::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+    if ($articles->validateMany($entities)) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['validate' => false]);
+        }
+    } else {
+        // Do work to show error messages.
+    }
+
+Much like the ``newEntity()`` method, ``validate`` and ``validateMany`` allow
+you can specify which associations to validate, and which validation sets to
+apply using the ``options`` parameter::
+
+    $valid = $articles->validate($article, [
+      'associated' => [
+        'Comments' => [
+          'associated' => ['User'],
+          'validate' => 'special',
+        ]
+      ]
+    ]);
+
 .. _saving-entities:
 
 Saving entities
@@ -1058,7 +1111,7 @@ When an entity is saved a few things happen:
 7. The modified fields on the entity will be saved.
 8. Child associations are saved. For example, any listed hasMany, hasOne, or
    belongsToMany associations will be saved.
-7. The ``Model.afterSave`` event will be dispatched.
+9. The ``Model.afterSave`` event will be dispatched.
 
 The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable validation and/or transactions using the ``$options`` argument for
@@ -1416,6 +1469,8 @@ Behaviors
 
 .. php:method:: addBehavior($name, $config = [])
 
+.. start-behaviors
+
 Behaviors provide an easy way to create horizonally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
@@ -1453,6 +1508,8 @@ configuration options::
             ]);
         }
     }
+
+.. end-behaviors
 
 You can find out more about behaviors, including the behaviors provided by
 CakePHP in the chapter on :doc:`/orm/behaviors`.

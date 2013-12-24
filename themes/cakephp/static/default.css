@@ -131,6 +131,17 @@ body {
 	text-decoration: underline;
 }
 
+.dev-release {
+	font-family: MuseoSlab500, Helvetica, Arial;
+	background: #C92434;
+	color: #fff;
+	font-size: 15px;
+	padding: 10px 0;
+}
+.dev-release a {
+	color: #003D4C;
+}
+
 /* Searchbox */
 #searchform {
 	margin: 24px 0;

@@ -54,14 +54,13 @@ Models
 ------
 
 Models are the heart of your application, they handle the validation,
-storage and retrieval of your data. Read more about :doc:`/models`
+storage and retrieval of your data. Read more about :doc:`/orm`
 
 Getting Help
 ============
 
 If you're stuck, there are a number of places :doc:`you can get help
 </cakephp-overview/where-to-get-help>`
-
 
 
 .. meta::

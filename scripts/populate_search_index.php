@@ -6,9 +6,9 @@
  */
 
 // Elastic search config
-define('ES_DEFAULT_HOST', 'http://localhost:9200');
+define('ES_DEFAULT_HOST', 'http://ci.cakephp.org:9200');
 define('ES_INDEX', 'documentation');
-define('CAKEPHP_VERSION', '2-2');
+define('CAKEPHP_VERSION', '3-0');
 
 
 function main($argv) {
