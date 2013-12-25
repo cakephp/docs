@@ -109,15 +109,43 @@ portable::
 
 A number of commonly used functions can be created with the ``func()`` method:
 
-- ``sum()``
-- ``avg()``
-- ``min()``
-- ``max()``
-- ``count()``
-- ``concat()``
-- ``coalesce()``
-- ``dateDiff()``
-- ``now()``
+- ``sum()`` Calculate a sum. The arguments will be treated as literal values.
+- ``avg()`` Calculate an average. The arguments will be treated as literal values.
+- ``min()`` Calculate the min of a column. The arguments will be treated as
+  literal values.
+- ``max()`` Calculate the max of a column. The arguments will be treated as
+  literal values.
+- ``count()`` Calculate the count. The arguments will be treated as literal
+  values.
+- ``concat()`` Concatenate two values together. The arguments are treated as
+  bound parameters unless marked as literal.
+- ``coalesce()`` Coalesce values. The arguments are treated as bound parameters
+  unless marked as literal.
+- ``dateDiff()`` Get the difference between two dates/times. The arguments are
+  treated as bound parameters unless marked as literal.
+- ``now()`` Take either 'time' or 'date' as an argument allowing you to get
+  either the current time, or current date.
+
+When providing arguments for SQL functions there are two kinds of parameters you
+can use; literal arguments and bound parameters. Literal parameters allow you to
+reference columns or other SQL literals. Bound parameters can be used to safely
+add user data to SQL functions. For example::
+
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'literal',
+        ' NEW'
+    ]);
+    $query->select(['title' => $concat]);
+
+By making arguments with a value of ``literal`` the ORM will know that
+the key should be treated as a literal SQL value. The above would generate the
+following SQL on MySQL::
+
+    SELECT CONCAT(title, :c0) FROM articles;
+
+The ``:c0`` value will have the ``' NEW'`` text bound when the query is
+executed.
 
 Aggregates - Group and having
 -----------------------------
