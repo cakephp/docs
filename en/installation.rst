@@ -161,8 +161,8 @@ production setup will look like this on the file system::
         App/
         Plugin/
         tmp/
-        webroot/ (this directory is set as DocumentRoot)
         vendor/
+        webroot/ (this directory is set as DocumentRoot)
         .htaccess
         index.php
         README.md
