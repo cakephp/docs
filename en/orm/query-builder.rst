@@ -79,15 +79,20 @@ To set some basic conditions you can use ``where``::
 See the :ref:`advanced-query-conditions` section to find out how to construct more
 complex ``WHERE`` conditions. To apply ordering you can use the ``order`` method::
 
-    $articles->find();
-    $query->order(['title' => 'ASC', 'id' => 'ASC']);
+    $query = $articles->find()
+        ->order(['title' => 'ASC', 'id' => 'ASC']);
 
 To limit the number of rows or set the row offset you can use the ``limit`` and ``page``
 methods::
 
     // Fetch rows 50 to 100
-    $query = $articles->find();
-    $query->limit(50)->page(2);
+    $query = $articles->find()
+        ->limit(50)
+        ->page(2);
+
+As you can see from the examples above, all the methods that modify the query
+provide a fluent interface allowing you to build a query though chained method
+calls.
 
 Using SQL functions
 -------------------
