@@ -62,13 +62,19 @@ To select distict fields you can use the ``distinct()`` method::
 
     // Results in SELECT DISTINCT country FROM ...
     $query = $articles->find();
-    $query->distinct(['country']);
+    $query->select(['country'])
+        ->distinct(['country']);
 
 To set some basic conditions you can use ``where``::
 
     // Conditions are combined with AND
     $query = $articles->find();
     $query->where(['title' => 'First Post', 'published' => true]);
+
+    // You can call where() multiple times
+    $query = $articles->find();
+    $query->where(['title' => 'First Post'])
+        ->where(['published' => true]);
 
 See the :ref:`advanced-query-conditions` section to find out how to construct more
 complex ``WHERE`` conditions. To apply ordering you can use the ``order`` method::
