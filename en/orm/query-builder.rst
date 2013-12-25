@@ -8,31 +8,33 @@ Query builder
 .. php:class:: Query
 
 The ORM query builder provides a simple to use fluent interface to creating and
-running queries. It allows you to compose queries easily, allowing subqueries
-and unions to be built with ease.
+running queries. By composing queries together you can create advanced queries
+using unions and subqueries with ease.
 
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
-Query objects are lazily evaluated, meaning they are not executed until one of
-the following conditions is met:
+Query objects are lazily evaluated. This means a query is not executed until one of
+the following things occurs:
 
 - The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called.
 - The query's ``toArray()`` method is called.
 
-Until one of these conditions is met the query can be modified. Once executed,
-modifying and re-evaluating a query will result in additional SQL being run.
+Until one of these conditions is met the query can be modified with additional
+SQL being sent to the database. It also means that if a Query is never evaluated
+no SQL is ever sent to the database. Once executed, modifying and re-evaluating
+a query will result in additional SQL being run.
 
 Creating a query object
 =======================
 
-The easiest way to create a query object is to use ``find()``. This method will
-return an incomplete query that can be modified. You can also use a tables
-connection object to access the lower level Query builder that does not include
-ORM features. See the :ref:`database-queries` section for more information.  For
-the remaining examples, assume that ``$articles`` is
-a :php:class:`~Cake\\ORM\\Table`::
+The easiest way to create a query object is to use ``find()`` from a table
+object. This method will return an incomplete query ready to be modified. You
+can also use a table's connection object to access the lower level Query builder
+that does not include ORM features if necessary. See the :ref:`database-queries`
+section for more information.  For the remaining examples, assume that
+``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
 
     // Start a new query.
     $query = $articles->find();
@@ -52,21 +54,24 @@ method::
 
 You can set aliases for fields by providing fields as an associative array::
 
+    // Results in SELECT id pk, title aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
 To select distict fields you can use the ``distinct()`` method::
 
+    // Results in SELECT DISTINCT country FROM ...
     $query = $articles->find();
     $query->distinct(['country']);
 
 To set some basic conditions you can use ``where``::
 
+    // Conditions are combined with AND
     $query = $articles->find();
     $query->where(['title' => 'First Post', 'published' => true]);
 
 See the :ref:`advanced-query-conditions` section to find out how to construct more
-complex where conditions. To apply ordering you can use the ``order`` method::
+complex ``WHERE`` conditions. To apply ordering you can use the ``order`` method::
 
     $articles->find();
     $query->order(['title' => 'ASC', 'id' => 'ASC']);
@@ -74,6 +79,7 @@ complex where conditions. To apply ordering you can use the ``order`` method::
 To limit the number of rows or set the row offset you can use the ``limit`` and ``page``
 methods::
 
+    // Fetch rows 50 to 100
     $query = $articles->find();
     $query->limit(50)->page(2);
 
@@ -86,6 +92,7 @@ function you are want. For example ``concat`` is implemented differently on
 MySQL and Postgres, so using the abstraction allows your code to remain
 portable::
 
+    // Results in SELECT COUNT(*) count FROM ...
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
