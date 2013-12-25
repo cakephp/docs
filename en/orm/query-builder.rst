@@ -211,8 +211,57 @@ Loading associations
 Adding Joins
 ------------
 
-* Using join()
+In addition to loading related data with ``contain()`` you can also add
+additional joins with the query builder::
 
+    $query = $articles->find()
+        ->hydrate(false)
+        ->join([
+            'table' => 'comments',
+            'alias' => 'c',
+            'type' => 'LEFT',
+            'conditions' => 'c.article_id = articles.id',
+        ]);
+
+You can append multiple joins at the same time by passing an associative array
+with multiple joins::
+
+    $query = $articles->find()
+        ->hydrate(false)
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => 'c.article_id = articles.id',
+            ],
+            'u' => [
+                'table' => 'users',
+                'type' => 'INNER',
+                'conditions' => 'u.id = articles.user_id',
+            ]
+        ]);
+
+As seen above when adding joins the alias can be the outer array key. Join
+conditions can also be expressed as an array of conditions::
+
+    $query = $articles->find()
+        ->hydrate(false)
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => [
+                    'c.created >' => new DateTime('-5 days')
+                    'c.moderated' => true,
+                    'c.article_id = articles.id'
+                ]
+            ],
+        ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
+
+When creating joins by hand and using array based conditions, you need to
+provide the datatypes for each column in the join conditions. By providing
+datatypes for the join conditions, the ORM can correctly convert data types into
+SQL.
 
 Inserting data
 ==============
