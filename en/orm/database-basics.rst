@@ -268,6 +268,8 @@ connections in a consistent way. They are intended as a more abstract interface 
 the driver layer and provide features for executing queries, logging queries, and doing
 transactional operations.
 
+.. _database-queries:
+
 Executing queries
 -----------------
 
