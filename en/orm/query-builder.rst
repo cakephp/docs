@@ -140,13 +140,27 @@ Advanced conditions
 Raw expressions
 ---------------
 
+When you cannot construct the SQL you need using the query builder, you can use
+expression objects to add snippets of SQL to your queries::
+
+    $query = $articles->find();
+    $expr = $query->newExpr()->add('1 + 1');
+    $query->select(['two' => $expr]);
+
+Expression objects can be used with any query builder methods like ``where``,
+``limit``, ``group``, ``select`` and many other methods.
+
+.. warning::
+
+    Using expression objects leaves you vulnerable to SQL injection. You should
+    avoid interpolating user data into expressions.
 
 Loading associations
 ====================
 
-* Using contain()
-* Using 'matching'
-* Choosing eager loading strategy.
+.. include:: ./table-objects.rst
+    :start-after: start-contain
+    :end-before: end-contain
 
 Adding Joins
 ------------
