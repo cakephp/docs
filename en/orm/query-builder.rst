@@ -189,7 +189,7 @@ combining operator for the current and previous condition. For example::
         ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3]);
 
-The above will output the following SQL::
+The above will output SQL similar to::
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
 
@@ -204,7 +204,7 @@ easily compose conditions together with the expression objects::
             ]);
         });
 
-The above would create the following SQL::
+The above would create SQL like::
 
     SELECT *
     FROM articles
@@ -213,13 +213,13 @@ The above would create the following SQL::
 
 The expression object that is passed into where functions has two kinds of
 methods. The first type of methods are **combinators**. The ``and_`` & ``or_``
-methods create new expression objects that change **how** other operations are
+methods create new expression objects that change **how** conditions are
 combined. The second type of methods are **conditions**. Conditions are added
 into an expression where they are combined with the current combinator. For
-example calling ``$exp->and_()`` will create a new expression object that
-combines all conditions with ``AND``. While ``$exp->or_()`` will create a new
-expression object that combines all conditions added to it with ``OR``. An
-example of adding conditions with an expression object would be::
+example calling ``$exp->and_(...)`` will create a new expression object that
+combines all conditions it contains with ``AND``. While ``$exp->or_()`` will
+create a new expression object that combines all conditions added to it with
+``OR``. An example of adding conditions with an expression object would be::
 
     $query = $articles->find()
         ->where(function($exp) {
@@ -230,9 +230,10 @@ example of adding conditions with an expression object would be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where`` we don't need to call ``and_``.
-The above shows a few new condition methods being combined with ``AND``. The
-resulting SQL would look like::
+Since we started off using ``where`` we don't need to call ``and_``, as that
+happens implicitly. Much like how we would not need to call ``or_`` had we
+started our query with ``orWhere``. The above shows a few new condition methods
+being combined with ``AND``. The resulting SQL would look like::
 
     SELECT *
     FROM articles
@@ -242,7 +243,7 @@ resulting SQL would look like::
     AND spam != 1
     AND view_count > 10)
 
-If however we wanted to combine ``AND`` & ``OR`` conditions we could do the
+If however we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
 
     $query = $articles->find()
@@ -255,7 +256,7 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the following SQL::
+Which would generate the SQL similar to::
 
     SELECT *
     FROM articles
@@ -263,25 +264,6 @@ Which would generate the following SQL::
     (author_id = 2 OR author_id = 5)
     AND published = 1
     AND view_count > 10)
-
-You can negate sub expressions using ``not()``::
-
-    $query = $articles->find()
-        ->where(function($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
-                ->eq('author_id', 5);
-            return $exp
-                ->not($orConditions)
-                ->lte('view_count', 10);
-        });
-
-Which will generate the following SQL::
-
-    SELECT *
-    FROM articles
-    WHERE (
-    NOT (author_id = 2 OR author_id = 5)
-    AND view_count <= 10)
 
 The ``or_`` & ``and_`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
@@ -296,6 +278,26 @@ parameters. This is often easier to read than method chaining::
                 ->not($orConditions)
                 ->lte('view_count', 10);
         });
+
+You can negate sub-expressions using ``not()``::
+
+    $query = $articles->find()
+        ->where(function($exp) {
+            $orConditions = $exp->or_(['author_id' => 2])
+                ->eq('author_id', 5);
+            return $exp
+                ->not($orConditions)
+                ->lte('view_count', 10);
+        });
+
+Which will generate the following SQL looking like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    NOT (author_id = 2 OR author_id = 5)
+    AND view_count <= 10)
+
 
 When using the expression objects you can use the following methods to create
 conditions:
