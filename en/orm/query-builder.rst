@@ -180,8 +180,138 @@ not make sense. In these situations you may want to disable entity hydration::
 Advanced conditions
 ===================
 
-* Using methods to build comparisons.
-* Using expression objects.
+The query builder makes it simple to build complex where clauses.
+Grouped conditions can be expressed by providing combining ``where``,
+``andWhere`` and ``orWhere``. The ``orWhere`` and ``andWhere`` methods set the
+combining operator for the current and previous condition. For example::
+
+    $query = $articles->find()
+        ->where(['author_id' => 2])
+        ->orWhere(['author_id' => 3]);
+
+The above will output the following SQL::
+
+    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+
+By using functions as the parameters to ``orWhere`` & ``andWhere`` you can
+easily compose conditions together with the expression objects::
+
+    $query = $articles->find()
+        ->where(['title LIKE' => '%First%'])
+        ->orWhere(function($exp) {
+            return $exp->or_(['author_id' => 1])
+                ->eq('author_id', 2);
+            ]);
+        });
+
+The above would create the following SQL::
+
+    SELECT *
+    FROM articles
+    WHERE ((author_id = 1 OR author_id = 2)
+    OR title LIKE '%First%')
+
+The expression object that is passed into where functions has two kinds of
+methods. The first type of methods are **combinators**. The ``and_`` & ``or_``
+methods create new expression objects that change **how** other operations are
+combined. The second type of methods are **conditions**. Conditions are added
+into an expression where they are combined with the current combinator. For
+example calling ``$exp->and_()`` will create a new expression object that
+combines all conditions with ``AND``. While ``$exp->or_()`` will create a new
+expression object that combines all conditions added to it with ``OR``. An
+example of adding conditions with an expression object would be::
+
+    $query = $articles->find()
+        ->where(function($exp) {
+            return $exp
+                ->eq('author_id', 2)
+                ->eq('published', true)
+                ->notEq('spam', true)
+                ->gt('view_count', 10);
+        });
+
+Since we started off using ``where`` we don't need to call ``and_``.
+The above shows a few new condition methods being combined with ``AND``. The
+resulting SQL would look like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    author_id = 2
+    AND published = 1
+    AND spam != 1
+    AND view_count > 10)
+
+If however we wanted to combine ``AND`` & ``OR`` conditions we could do the
+following::
+
+    $query = $articles->find()
+        ->where(function($exp) {
+            $orConditions = $exp->or_(['author_id' => 2])
+                ->eq('author_id', 5);
+            return $exp
+                ->add($orConditions)
+                ->eq('published', true)
+                ->gte('view_count', 10);
+        });
+
+Which would generate the following SQL::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    (author_id = 2 OR author_id = 5)
+    AND published = 1
+    AND view_count > 10)
+
+You can negate sub expressions using ``not()``::
+
+    $query = $articles->find()
+        ->where(function($exp) {
+            $orConditions = $exp->or_(['author_id' => 2])
+                ->eq('author_id', 5);
+            return $exp
+                ->not($orConditions)
+                ->lte('view_count', 10);
+        });
+
+Which will generate the following SQL::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    NOT (author_id = 2 OR author_id = 5)
+    AND view_count <= 10)
+
+The ``or_`` & ``and_`` methods also allow you to use functions as their
+parameters. This is often easier to read than method chaining::
+
+    $query = $articles->find()
+        ->where(function($exp) {
+            $orConditions = $exp->or_(function ($or) {
+                return $or->eq('author_id', 2)
+                    ->eq('author_id', 5);
+            });
+            return $exp
+                ->not($orConditions)
+                ->lte('view_count', 10);
+        });
+
+When using the expression objects you can use the following methods to create
+conditions:
+
+- ``eq()`` Creates an equality condition.
+- ``notEq()`` Create an inequality condition
+- ``like()`` Create a condition using the ``LIKE`` operator.
+- ``notLike()`` Create a negated ``LIKE`` condition.
+- ``in()`` Create a condition using ``IN``.
+- ``notIn()`` Create a negated condition using ``IN``.
+- ``gt()`` Create a ``>`` condition.
+- ``gte()`` Create a ``>=`` condition.
+- ``lt()`` Create a ``<`` condition.
+- ``lte()`` Create a ``<=`` condition.
+- ``isNull()`` Create an ``IS NULL`` condition.
+- ``isNotNull()`` Create a negated ``IS NULL`` condition.
 
 Raw expressions
 ---------------
