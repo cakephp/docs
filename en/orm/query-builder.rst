@@ -470,8 +470,7 @@ Unions are created by composing one or more select queries together::
 
     $unpublished->union($inReview);
 
-You can create ``UNION ALL`` queries using the ``union`` method and setting the
-``$all`` option to ``true``::
+You can create ``UNION ALL`` queries using the ``unionAll`` method::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -479,7 +478,7 @@ You can create ``UNION ALL`` queries using the ``union`` method and setting the
     $unpublished = $articles->find()
         ->where(['published' => false]);
 
-    $unpublished->union($inReview, true);
+    $unpublished->unionAll($inReview);
 
 Subqueries
 ----------
