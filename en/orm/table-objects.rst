@@ -1020,7 +1020,84 @@ where you need to lazy-load associations. You should refer to the
 Caching loaded results
 ----------------------
 
-.. TODO:: Write this.
+When fetching entities that don't change often you may want to cache the
+results. By using the :php:class:`~Cake\Cache\Cache` class you can store the
+resultset in a persistent cache like Memcache. By adding caching around your finder
+methods you can easily cache results::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Query;
+    use Cake\ORM\Table;
+    use Cake\Cache\Cache;
+
+    class ArticlesTable extends Table {
+
+        public function findRecent(Query $query, array $options) {
+            $query->where(['created >=' => new DateTime('-5 days')])
+                ->where(['published' => true]);
+            return $query;
+        }
+
+        public function getRecent() {
+            return Cache::remember('recent_articles', function() {
+                return $this->find('recent')->toArray();
+            });
+        }
+    }
+
+You can also cache results using the ``Model.beforeFind`` callback::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Query;
+    use Cake\ORM\Table;
+    use Cake\Cache\Cache;
+
+    class ArticlesTable extends Table {
+
+        public function initialize(array $config) {
+
+            // Use an event listener to cache results.
+            // (could also be in a behavior to do caching.)
+            $this->getEventManager()->attach(function ($event, $query, $options) {
+                if (empty($options['cacheKey'])) {
+                    return;
+                }
+
+                // Check the cache and store the query
+                // results.
+                $results = Cache::read($options['cacheKey']);
+                if ($results) {
+                    $query->setResult($results);
+                    return false;
+                }
+
+                // Turn on buffered results so we can
+                // cache and iterates the results.
+                $query->bufferResults(true);
+                $results = $query->getResults();
+
+                // Store the results in the cache and skip future
+                // query execution with setResult()
+                Cache::write($options['cacheKey'], $results);
+                $query->setResult($results);
+                return false;
+            }, 'Model.beforeFind');
+
+        }
+
+        public function findRecent(Query $query, array $options) {
+            $query->where(['created >=' => new DateTime('-5 days')])
+                ->where(['published' => true]);
+            return $query;
+        }
+    }
+
+In the above example any time a find is done with the ``cacheKey`` option it
+will automatically become a cached find. By combining some advanced features in
+the query builder with event listeners and caching you can build advanced
+functionality easily.
 
 Validating entities
 ===================
