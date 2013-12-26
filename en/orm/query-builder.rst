@@ -266,19 +266,105 @@ SQL.
 Inserting data
 ==============
 
+Unlike earlier examples, you should not use ``find()`` to create insert queries.
+Instead, create new query objects using ``query()``::
+
+    $query = $articles->query();
+    $query->insert($articles->table(), ['title', 'body'])
+        ->values([
+            'title' => 'First post',
+            'body' => 'Some body text'
+        ])
+        ->execute();
+
+Generally it is easier to insert data using entities and
+:php:method:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
+``INSERT`` query together you can create ``INSERT INTO ... SELECT`` style
+queries::
+
+    $select = $articles->find()
+        ->select(['title', 'body', 'published'])
+        ->where(['id' => 3]);
+
+    $query = $articles->query()
+        ->insert($articles->table(), ['title', 'body', 'published'])
+        ->values($select)
+        ->execute();
+
+Updating data
+=============
+
+As with insert queries, you should not use ``find()`` to create delete queries.
+Instead,create new query objects using ``query()``::
+
+    $query = $articles->query();
+    $query->delete($articles->table())
+        ->where(['id' => $id])
+        ->execute();
+
+Generally it is easier to delete data using entities and
+:php:method:`~Cake\\ORM\\Table::delete()`.
+
 Deleting data
 =============
 
+As with insert queries, you should not use ``find()`` to create delete queries.
+Instead, create new query objects using ``query()``::
+
+    $query = $articles->query();
+    $query->delete($articles->table())
+        ->where(['id' => $id])
+        ->execute();
+
+Generally it is easier to delete data using entities and
+:php:method:`~Cake\\ORM\\Table::delete()`.
 
 More complex queries
 ====================
 
+The query builder is capable of building complex queries like ``UNION`` queries,
+and sub-queries.
+
 Unions
 ------
+
+Unions are created by composing one or more select queries together::
+
+    $inReview = $articles->find()
+        ->where(['need_review' => true]);
+
+    $unpublished = $articles->find()
+        ->where(['published' => false]);
+
+    $unpublished->union($inReview);
+
+You can create ``UNION ALL`` queries using the ``union`` method and setting the
+``$all`` option to ``true``::
+
+    $inReview = $articles->find()
+        ->where(['need_review' => true]);
+
+    $unpublished = $articles->find()
+        ->where(['published' => false]);
+
+    $unpublished->union($inReview, true);
 
 Subqueries
 ----------
 
+Subqueries are a powerful feature in relational databases and building them in
+CakePHP is fairly intuitive. By composing queries together you can make
+subqueries::
+
+    $matchingComment = $articles->association('Comments')->find()
+        ->select(['article_id'])
+        ->distinct('article_id')
+        ->where(['comment LIKE' => '%CakePHP%']);
+
+    $query = $articles->find()
+        ->where(['id' => $matchingComment]);
+
+Subqueries are accepted anywhere a query expression can be used.
 
 Modifying results with Map/Reduce
 ==================================
