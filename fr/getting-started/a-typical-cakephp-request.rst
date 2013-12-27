@@ -46,9 +46,9 @@ Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callbac
    appliquées avant l'envoi des données. La logique de la vue est exécutée,
    laquelle peut inclure l'utilisation d'elements et/ou de helpers.
    Par défaut, la vue est rendue à travers un layout (mise en page).
-#. D'autres fonctions de rappel (callbacks) du controller (comme afterFilter)
-   peuvent être exécutées. La vue complète et finale est envoyée au navigateur
-   de Ricardo.
+#. D'autres fonctions de rappel (callbacks) du controller (comme
+   :php:meth:`~Controller::afterFilter`) peuvent être exécutées. La vue
+   complète et finale est envoyée au navigateur de Ricardo.
 
 
 .. meta::

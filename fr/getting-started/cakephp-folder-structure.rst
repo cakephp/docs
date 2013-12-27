@@ -19,7 +19,8 @@ Vous remarquerez trois dossiers principaux :
 -  Le dossier *lib* est l'endroit où nous avons exercé notre propre magie.
    Engagez-vous personnellement à ne **pas** modifier les fichiers dans ce
    dossier. Nous ne pourrons pas vous aider si vous avez modifié le cœur
-   du framework.
+   du framework. A la place, regardez dans les :ref:`application-extensions`
+   modifiées.
 -  Enfin, le dossier *vendors* est l'endroit où vous placerez vos librairies
    PHP tierces dont vous avez besoin pour vos applications CakePHP.
 

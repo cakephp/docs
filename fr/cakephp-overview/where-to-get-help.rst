@@ -37,7 +37,7 @@ et obtenez en un instant la gloire et la fortune.
 L'API
 =====
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
 Allez droit au but et atteignez le graal des développeurs,
 l'API CakePHP (Application Programming Interface) est la documentation

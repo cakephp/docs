@@ -11,6 +11,8 @@ de base de vos applications. A ce stade de lecture, nous survolerons ces
 concepts, mais vous pourrez découvrir comment utiliser ces outils en
 détails plus tard.
 
+.. _application-extensions:
+
 Extensions de l'Application
 ===========================
 

@@ -335,9 +335,9 @@ d'afficher et de nettoyer la variable correspondante. La méthode
 :php:meth:`Controller::redirect` du controller permet de rediriger vers une
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
 /posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
-Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()`
-pour voir les différents formats d'URL acceptés dans les différentes fonctions
-de CakePHP.
+Vous pouvez vous référer à la fonction :php:func:`Router::url()` dans
+`l'API <http://api.cakephp.org>`_ pour voir les différents formats d'URL
+acceptés dans les différentes fonctions de CakePHP.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
@@ -696,8 +696,8 @@ le reste de ce manuel comme un guide pour développer des applications plus
 riches en fonctionnalités.
 
 Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
-pour les choses sérieuses. Commencez votre propre projet et lisez le reste
-du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
+pour les choses sérieuses. Commencez votre propre projet et lisez le reste du
+:doc:`Cookbook </index>` et l'`API <http://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
 merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`

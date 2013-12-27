@@ -8,11 +8,6 @@ seulement des squelettes de classes : Bake peut créer une application
 fonctionnelle complète en seulement quelques minutes. En réalité, Bake est
 une étape naturelle à suivre une fois qu'une application a été prototypée.
 
-Ceux qui sont novices avec Bake (spécialement les utilisateurs de Windows)
-pourront trouver le
-`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
-utile pour paramétrer les choses avant de continuer.
-
 Suivant la configuration de votre installation, vous devrez peut être donner
 les droits d'exécution au script bash cake ou l'appeler avec la commande
 ./cake bake.

@@ -212,8 +212,8 @@ Les Méthodes du Controller
 ==========================
 
 Pour une liste complète des méthodes de controller avec leurs descriptions,
-consultez l'API CakePHP
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+consultez
+`l'API de CakePHP <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 Interactions avec les vues
 --------------------------
@@ -717,8 +717,7 @@ Les attributs du Controller
 ===========================
 
 Pour une liste complète des attributs du controller et ses descriptions,
-visitez l'API de CakePHP. Regardez
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+regardez `l'API de CakePHP <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 .. php:attr:: name
 
@@ -731,7 +730,7 @@ visitez l'API de CakePHP. Regardez
         class RecipesController extends AppController {
            public $name = 'Recipes';
         }
-        
+
 
 $components, $helpers et $uses
 ------------------------------
