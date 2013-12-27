@@ -211,7 +211,7 @@ By combining ``orWhere`` & ``andWhere`` you can express complex conditions that
 use a mixture of operators::
 
     $query = $articles->find()
-        ->andWhere(['author_id' => 2])
+        ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3])
         ->andWhere([
             'published' => true,
