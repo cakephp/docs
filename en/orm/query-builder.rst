@@ -182,8 +182,22 @@ Advanced conditions
 
 The query builder makes it simple to build complex where clauses.
 Grouped conditions can be expressed by providing combining ``where``,
-``andWhere`` and ``orWhere``. The ``orWhere`` and ``andWhere`` methods set the
-combining operator for the current and previous condition. For example::
+``andWhere`` and ``orWhere``. The ``where`` method works similar to the
+conditions arrays in previous versions of CakePHP::
+
+    $query = $articles->find()
+        ->where([
+            'author_id' => 3,
+            'OR' => ['author_id' => 2],
+        ]);
+
+The above would generate SQL like::
+
+    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+
+If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere`` and
+``andWhere`` methods to build your queries. Each method sets the combining
+operator used between the current and previous condition. For example::
 
     $query = $articles->find()
         ->where(['author_id' => 2])
@@ -192,6 +206,26 @@ combining operator for the current and previous condition. For example::
 The above will output SQL similar to::
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+
+By combining ``orWhere`` & ``andWhere`` you can express complex conditions that
+use a mixture of operators::
+
+    $query = $articles->find()
+        ->andWhere(['author_id' => 2])
+        ->orWhere(['author_id' => 3])
+        ->andWhere([
+            'published' => true,
+            'view_count >' => 10
+        ])
+        ->orWhere(['promoted' => true]);
+
+The above generates SQL similar to::
+
+    SELECT *
+    FROM articles
+    WHERE (promoted = 1
+    OR (published = true AND view_count > 10)
+    AND (author_id = 2 OR author_id = 3))
 
 By using functions as the parameters to ``orWhere`` & ``andWhere`` you can
 easily compose conditions together with the expression objects::
