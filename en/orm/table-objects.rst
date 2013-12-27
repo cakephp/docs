@@ -597,6 +597,8 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
+.. _converting-request-data:
+
 Converting request data into entities
 =====================================
 
@@ -625,6 +627,34 @@ request data should look like::
             ['body' => 'Second comment'],
         ]
     ];
+
+If you are saving belongsToMany associations you can either use a list of
+entity data or a list of ids. When using a list of entity data your request data
+should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Internet'],
+        ]
+    ];
+
+When using a list of ids, your request data should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1
+        'tags' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+The marshaller will handle both of these forms correctly, but only for
+belongsToMany associations.
 
 When building forms that save nested associations, you need to define which
 associations should be marshalled::
@@ -1334,6 +1364,12 @@ plural, camel cased version the association name. For example::
 
     $articles = TableRegistry::get('Articles');
     $articles->save($article);
+
+When converting request data into entities, the ``newEntity`` and
+``newEntities`` methods will handle both arrays of properties, as well as a list
+of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build select
+box or checkbox based form controls for belongs to many associations. See the
+:ref:`converting-request-data` section for more information.
 
 When saving belongsToMany associations, you have the choice between 2 saving
 strategies:
