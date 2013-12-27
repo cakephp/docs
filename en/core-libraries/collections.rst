@@ -127,12 +127,12 @@ Here's how you can specify priority at declaration time::
     class SomeController {
         public $components = array(
             'Foo', //Foo gets default priority 10
-            //Bar's callbacks are triggered before Foo's
+            // Bar's callbacks are triggered before Foo's
             'Bar' => array('priority' => 9)
         );
 
-	   public $helpers = array(
-            //Cache's callbacks will be triggered last
+        public $helpers = array(
+            // Cache's callbacks will be triggered last
             'Cache' => array('priority' => 12),
             'Asset',
             'Utility' //Utility has priority 10 same as Asset and its callbacks

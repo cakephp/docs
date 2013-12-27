@@ -7,7 +7,7 @@ Welcome
 #######
 
 The CakePHP cookbook is an openly developed and community editable documentation
-project. We hope to maintain a high level of quality, validity and accuracy for 
+project. We hope to maintain a high level of quality, validity and accuracy for
 the documentation.
 
 .. container:: offline-download
