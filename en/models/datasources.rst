@@ -295,19 +295,25 @@ and refer to it using the plugin notation::
         'apiKey'     => 'abcd1234',
     );
 
-.. meta::
-    :title lang=en: DataSources
-    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
-
 Connecting to SQL Server
 ==================
 
-If the Sqlserver Datasource errors out:
+The Sqlserver datasource depends on Microsoft's PHP extension called pdo_sqlsrv.
+This PHP Extension is not included in the base installation of PHP and must be
+installed separately.
+
+Also the SQL Server Native Client must be installed for the extension to work.
+As the Native Client is available only for Windows you will not be able to
+install it on Linux, Mac OS X or FreeBSD.
+
+So if the Sqlserver Datasource errors out with::
 
     Error: Database connection "Sqlserver" is missing, or could not be created.
 
-A potential cause may be the SQL Server PHP extensions or the SQL Server Native Client are not installed.
+First check if the SQL Server PHP extension pdo_sqlsrv and the SQL Server Native
+Client.
 
-The SQL Server PHP Extensions must be installed for the connection methods to be available.
-The SQL Server Native Client must be installed for the ODBC connector dependancies.
-Both are free downloads from Microsoft.
+.. meta::
+    :title lang=en: DataSources
+    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+Client are installed properly.
