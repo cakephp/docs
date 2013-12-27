@@ -296,7 +296,7 @@ and refer to it using the plugin notation::
     );
 
 Connecting to SQL Server
-==================
+========================
 
 The Sqlserver datasource depends on Microsoft's PHP extension called pdo_sqlsrv.
 This PHP Extension is not included in the base installation of PHP and must be
