@@ -298,3 +298,16 @@ and refer to it using the plugin notation::
 .. meta::
     :title lang=en: DataSources
     :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+
+Connecting to SQL Server
+==================
+
+If the Sqlserver Datasource errors out:
+
+    Error: Database connection "Sqlserver" is missing, or could not be created.
+
+A potential cause may be the SQL Server PHP extensions or the SQL Server Native Client are not installed.
+
+The SQL Server PHP Extensions must be installed for the connection methods to be available.
+The SQL Server Native Client must be installed for the ODBC connector dependancies.
+Both are free downloads from Microsoft.
