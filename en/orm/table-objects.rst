@@ -79,7 +79,7 @@ and do this by using the ``TableRegistry`` class::
     $articles = TableRegistry::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
-a table, and maintains a registry of all the constructed Table instances making
+a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
 :ref:`table-registry-usage` for more information.
 
@@ -97,8 +97,23 @@ ones. See :ref:`custom-find-methods` for more information::
 
 Entity objects represent a single record or row in your database. Entities allow
 you to define custom behavior on a per-record basis and model the domain of your
-application. See the :doc:`/orm/entities` documentation for more information on
-creating and customizing your entity objects.
+application. See the :ref:`entities` documentation for more information on
+creating your entity objects.
+
+Customizing the entity class a table uses
+-----------------------------------------
+
+By default table objects use an entity class based on naming conventions. For
+example if your table class is called ``ArticlesTable`` the entity would be
+``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
+``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
+conventions you can use the ``entityClass`` method to change things up::
+
+    class PurchaseOrdersTable extends Table {
+        public function initialize(array $config) {
+            $this->entityClass('App\Model\PO');
+        }
+    }
 
 Building associations
 =====================
