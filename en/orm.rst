@@ -29,8 +29,8 @@ database connections <database-configuration>`.
     :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
     and older versions of CakePHP.
 
-Basic usage
-===========
+Quick example
+=============
 
 To get started you don't have to write any code. If you've followed the CakePHP
 conventions for your database tables you can just start using the ORM. For
