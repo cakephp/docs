@@ -1167,11 +1167,12 @@ all the error messages for an entity and its related data::
     }
 
 The ``validate`` method returns a boolean indicating whether or not the entity
-& related entities are valid. If they are not valid, any validation erros will
-be set on each and every entity that had validation errors. You can use
+& related entities are valid. If they are not valid, any validation errors will
+be set on the entities that had validation errors. You can use the
 :php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
 
-You can validate multiple entities at a time using the ``validateMany`` method::
+When you need to pre-validate multiple entities at a time, you can use the
+``validateMany`` method::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
@@ -1184,9 +1185,9 @@ You can validate multiple entities at a time using the ``validateMany`` method::
         // Do work to show error messages.
     }
 
-Much like the ``newEntity()`` method, ``validate`` and ``validateMany`` allow
-you can specify which associations to validate, and which validation sets to
-apply using the ``options`` parameter::
+Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
+methods allow you to specify which associations are validated, and which
+validation sets to apply using the ``options`` parameter::
 
     $valid = $articles->validate($article, [
       'associated' => [
