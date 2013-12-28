@@ -79,7 +79,7 @@ and do this by using the ``TableRegistry`` class::
     $articles = TableRegistry::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
-a table, and maintains a registry of all the constructed Table instances making
+a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
 :ref:`table-registry-usage` for more information.
 
@@ -97,8 +97,23 @@ ones. See :ref:`custom-find-methods` for more information::
 
 Entity objects represent a single record or row in your database. Entities allow
 you to define custom behavior on a per-record basis and model the domain of your
-application. See the :doc:`/orm/entities` documentation for more information on
-creating and customizing your entity objects.
+application. See the :ref:`entities` documentation for more information on
+creating your entity objects.
+
+Customizing the entity class a table uses
+-----------------------------------------
+
+By default table objects use an entity class based on naming conventions. For
+example if your table class is called ``ArticlesTable`` the entity would be
+``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
+``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
+conventions you can use the ``entityClass`` method to change things up::
+
+    class PurchaseOrdersTable extends Table {
+        public function initialize(array $config) {
+            $this->entityClass('App\Model\PO');
+        }
+    }
 
 Building associations
 =====================
@@ -1152,11 +1167,12 @@ all the error messages for an entity and its related data::
     }
 
 The ``validate`` method returns a boolean indicating whether or not the entity
-& related entities are valid. If they are not valid, any validation erros will
-be set on each and every entity that had validation errors. You can use
+& related entities are valid. If they are not valid, any validation errors will
+be set on the entities that had validation errors. You can use the
 :php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
 
-You can validate multiple entities at a time using the ``validateMany`` method::
+When you need to pre-validate multiple entities at a time, you can use the
+``validateMany`` method::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
@@ -1169,9 +1185,9 @@ You can validate multiple entities at a time using the ``validateMany`` method::
         // Do work to show error messages.
     }
 
-Much like the ``newEntity()`` method, ``validate`` and ``validateMany`` allow
-you can specify which associations to validate, and which validation sets to
-apply using the ``options`` parameter::
+Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
+methods allow you to specify which associations are validated, and which
+validation sets to apply using the ``options`` parameter::
 
     $valid = $articles->validate($article, [
       'associated' => [
@@ -1262,6 +1278,34 @@ used. A sample validator method for our articles table would be::
 You can have as many validation sets as you need. See the :doc:`validation
 chapter </core-utility-libraries/validation>` for more information on building
 validation rule-sets.
+
+Validation rules can use functions defined on any known providers. By default
+CakePHP sets up a few providers:
+
+1. Methods on the table class, or its behaviors are available on the ``table``
+   provider.
+2. Methods on the entity class, are available on the ``entity`` provider.
+3. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
+   ``default`` provider.
+
+When a validation rule is created you can name the provider of that rule. For
+example, if your entity had a 'isValidRole' method you could use it as
+a validation rule::
+
+    class UsersTable extends Table {
+
+        public function validationDefault($validator) {
+            $validator
+                ->add('role', 'validRole', [
+                    'rule' => 'isValidRole'
+                    'message' => 'You need to provide a valid role',
+                    'provider' => 'entity',
+                ]);
+            return $validator;
+        }
+
+    }
+
 
 Saving associations
 -------------------
