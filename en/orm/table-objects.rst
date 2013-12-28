@@ -1278,6 +1278,34 @@ You can have as many validation sets as you need. See the :doc:`validation
 chapter </core-utility-libraries/validation>` for more information on building
 validation rule-sets.
 
+Validation rules can use functions defined on any known providers. By default
+CakePHP sets up a few providers:
+
+1. Methods on the table class, or its behaviors are available on the ``table``
+   provider.
+2. Methods on the entity class, are available on the ``entity`` provider.
+3. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
+   ``default`` provider.
+
+When a validation rule is created you can name the provider of that rule. For
+example, if your entity had a 'isValidRole' method you could use it as
+a validation rule::
+
+    class UsersTable extends Table {
+
+        public function validationDefault($validator) {
+            $validator
+                ->add('role', 'validRole', [
+                    'rule' => 'isValidRole'
+                    'message' => 'You need to provide a valid role',
+                    'provider' => 'entity',
+                ]);
+            return $validator;
+        }
+
+    }
+
+
 Saving associations
 -------------------
 
