@@ -23,6 +23,12 @@ both patterns to create a fast, simple to use ORM.
 Before we get started exploring the ORM, make sure you :ref:`configure your
 database connections <database-configuration>`.
 
+.. note::
+
+    If you are familiar with previous versions of CakePHP, you should read the
+    :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
+    and older versions of CakePHP.
+
 Basic usage
 ===========
 
@@ -94,21 +100,8 @@ CakePHP uses naming conventions to link the Table and Entity class together. If
 you need to customize which entity a table uses you can use the
 ``entityClass()`` method to set a specific classname.
 
-See the chapters on :ref:`table-objects` and ref:`entities` for more information on how to use table
-objects and entities in your application.
-
-Tables & Entities
-=================
-
-* Differences between the two.
-* Row vs. Colllection.
-
-Basic Usage
-===========
-
-* Defining a table class
-* Defining an entity class
-* Doing simple queries (loading all rows, find by pk)
+See the chapters on :ref:`table-objects` and ref:`entities` for more information
+on how to use table objects and entities in your application.
 
 More information
 ================
