@@ -51,6 +51,37 @@ There were a few methods called in the example above, so lets go over each one.
 The ``add()`` method allows you to add new rules to a validator. You can either
 add rules individually or in groups as seen above.
 
+Defining conditions for validator
+---------------------------------
+
+When defining validation rules, you can use the ``on`` key to define when
+a validation rule should apply. If left undefined the rule will always be
+defined. Other valid values are ``create`` and ``update``.
+
+Marking rules as the last to run
+--------------------------------
+
+In case of multiple rules per field each validation rule will be run by default.
+If however, you want to stop execution after a specific rule has failed you can
+set the ``last`` option to ``true``::
+
+    $validator = new Validator();
+    $validator
+        ->add('body', [
+            'minLength' => [
+                'rule' => ['minLength', 10],
+                'last' => true,
+                'message' => 'Comments must have a substantial body.'
+            ],
+            'maxLength' => [
+                'rule' => ['maxLength', 250],
+                'message' => 'Comments cannot be too long.'
+            ]
+        ]);
+
+In the above example if the minLength rule fails, the maxLength rule will not be
+run.
+
 Validating field presence
 -------------------------
 
@@ -85,6 +116,7 @@ array) will cause validation errors when fields are not allowed to be empty.
 When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
 ``[]``, ``0``, ``'0'`` are accepted.
 
+
 Adding validation providers
 ---------------------------
 
@@ -105,7 +137,33 @@ objects. Use the ``provider`` method to add new providers::
     $validator->provider('custom', 'App\Model\Validation');
 
 Validation providers can be objects, or class names. If a class name is used the
-methods must be static.
+methods must be static. When defining rules, you will need to define the
+provider when it is not ``default``::
+
+    // Use a rule from the table provider
+    $validator->add('title', 'unique', [
+        'rule' => 'uniqueTitle',
+        'provider' => 'table'
+    ]);
+
+Creating re-usable validators
+-----------------------------
+
+While defining validators inline where they are used makes for good example
+code, it doesn't lead to easily maintainable applications. You can make
+re-usable validators by creating ``Validator`` sub-classes::
+
+    <?php
+    // In App/Model/Validation/ContactValidator.php
+    namespace App\Model\Validation;
+
+    use Cake\Validation\Validator;
+
+    class ContactValidator extends Validator {
+        public function __construct() {
+            // Add validation rules here.
+        }
+    }
 
 Validating data
 ===============
@@ -140,21 +198,15 @@ sending an email you could do the following::
         // Send an email.
     }
 
-While defining validators inline where they are used makes for good example
-code, it doesn't lead to easily maintainable applications. You can make
-re-usable validators by creating ``Validator`` sub-classes::
+The ``errors()`` method will return an non-empty array when there are validation
+failures. The returnned array of errors will be structured like::
 
-    <?php
-    // In App/Model/Validator/ContactValidator.php
-    namespace App\Model\Validator;
+    $errors = [
+        'email' => ['E-mail must be valid']
+    ];
 
-    use Cake\Validation\Validator;
-
-    class ContactValidator extends Validator {
-        public function __construct() {
-            // Add validation rules here.
-        }
-    }
+If you have multiple errors on a single field, an array of error messages will
+be returned per field.
 
 .. note::
 
@@ -162,8 +214,31 @@ re-usable validators by creating ``Validator`` sub-classes::
     :php:method:`~Cake\\ORM\\Table::validate()` or
     :php:method:`~Cake\\ORM\\Table::save()` as they are designed for that.
 
-
 Core Validation rules
 =====================
 
-* Core validation class.
+CakePHP provides a set of Validation methods in the ``Validation`` class. It is
+a collection of static methods that provide validators for a number of common
+validation situations.
+
+The `API documentation
+<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
+``Validation`` class provides a good list of the validation rules that are
+available.
+
+Some of the validation methods accept additional parameters to define boundary
+conditions or valid options. You can provide these boundary conditions & options
+as follows::
+
+    $validator = new Validator();
+    $validator
+        ->add('title', 'minLength', [
+            'rule' => ['minLength', 10]
+        ])
+        ->add('rating', 'validValue', [
+            'rule' => ['between', 1, 5]
+        ]);
+
+Rules that take additional parameters should have an array for the ``rule`` key
+that contains the rule as the first element, and the additional parameters as
+the remaining parameters.
