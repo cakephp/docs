@@ -56,7 +56,8 @@ Defining conditions for validator
 
 When defining validation rules, you can use the ``on`` key to define when
 a validation rule should apply. If left undefined the rule will always be
-defined. Other valid values are ``create`` and ``update``.
+defined. Other valid values are ``create`` and ``update``. Using one of these
+values will make the rule only apply to either create or update operations.
 
 Marking rules as the last to run
 --------------------------------
@@ -115,7 +116,6 @@ By default ``true`` is used. The values ``''``, ``null`` and ``[]`` (empty
 array) will cause validation errors when fields are not allowed to be empty.
 When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
 ``[]``, ``0``, ``'0'`` are accepted.
-
 
 Adding validation providers
 ---------------------------
@@ -206,7 +206,13 @@ failures. The returnned array of errors will be structured like::
     ];
 
 If you have multiple errors on a single field, an array of error messages will
-be returned per field.
+be returned per field. By default the ``errors()`` method applies rules for
+'create' mode. If you'd like to apply 'update' rules you can do the following::
+
+    $errors = $validator->errors($this->request->data(), false);
+    if (!empty($errors)) {
+        // Send an email.
+    }
 
 .. note::
 
