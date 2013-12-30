@@ -331,6 +331,11 @@ will first execute it and then start iterating over the result set::
         // Do something with the row.
     }
 
+.. note::
+
+    When you have an instance of :php:class:`Cake\\ORM\\Query` you can use
+    ``all()`` to get the result set for SELECT queries.
+
 Using transactions
 -------------------
 

@@ -18,7 +18,10 @@ Query objects are lazily evaluated. This means a query is not executed until one
 the following things occurs:
 
 - The query is iterated with ``foreach``.
-- The query's ``execute()`` method is called.
+- The query's ``execute()`` method is called. This will return the underlying
+  statement object, and is to be used with insert/update/delete queries.
+- The query's ``all()`` method is called.. This will return the result set and
+  can only be used with select statements.
 - The query's ``toArray()`` method is called.
 
 Until one of these conditions is met the query can be modified with additional
@@ -433,10 +436,10 @@ Inserting data
 ==============
 
 Unlike earlier examples, you should not use ``find()`` to create insert queries.
-Instead, create new query objects using ``query()``::
+Instead, create a new query objects using ``query()``::
 
     $query = $articles->query();
-    $query->insert($articles->table(), ['title', 'body'])
+    $query->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
             'body' => 'Some body text'
@@ -453,18 +456,19 @@ queries::
         ->where(['id' => 3]);
 
     $query = $articles->query()
-        ->insert($articles->table(), ['title', 'body', 'published'])
+        ->insert(['title', 'body', 'published'])
         ->values($select)
         ->execute();
 
 Updating data
 =============
 
-As with insert queries, you should not use ``find()`` to create delete queries.
-Instead,create new query objects using ``query()``::
+As with insert queries, you should not use ``find()`` to create update queries.
+Instead, create new a query object using ``query()``::
 
     $query = $articles->query();
-    $query->delete($articles->table())
+    $query->update()
+        ->set(['published' => true])
         ->where(['id' => $id])
         ->execute();
 
@@ -475,10 +479,10 @@ Deleting data
 =============
 
 As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new query objects using ``query()``::
+Instead, create new a query object using ``query()``::
 
     $query = $articles->query();
-    $query->delete($articles->table())
+    $query->delete()
         ->where(['id' => $id])
         ->execute();
 

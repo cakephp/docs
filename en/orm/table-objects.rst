@@ -748,7 +748,7 @@ The return value of any ``find`` method is always
 a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
 refine a query after creating it. Query objects are evaluated lazily, and do not
 execute until you start fetching rows, convert it to an array, or when the
-``execute()`` method is called::
+``all()`` method is called::
 
     // Find all the articles.
     // At this point the query has not run.
@@ -758,8 +758,9 @@ execute until you start fetching rows, convert it to an array, or when the
     foreach ($query as $row) {
     }
 
-    // Calling execute will execute the query.
-    $results = $query->execute();
+    // Calling execute will execute the query
+    // and return the result set.
+    $results = $query->all();
 
     // Converting the query to an array will execute it.
     $results = $query->toArray();
