@@ -152,6 +152,29 @@ the ``provider`` key in your rule::
         'provider' => 'table'
     ]);
 
+Custom validation rules
+-----------------------
+
+In addition to using methods coming from providers, you can also use any
+callable including anonymous functions as validation rules::
+
+    // Use a global function
+    $validator->add('title', 'custom', [
+        'rule' => 'validate_title'
+    ]);
+
+    // Use an array callable that is not in a provider
+    $validator->add('title', 'custom', [
+        'rule' => [$this, 'method']
+    ]);
+
+    // Use a closure
+    $validator->add('title', 'custom', [
+        'rule' => function($value, $providers) {
+            // Custom logic that returns true/false
+        }
+    ]);
+
 .. _reusable-validators:
 
 Creating re-usable validators
@@ -206,7 +229,7 @@ sending an email you could do the following::
         // Send an email.
     }
 
-The ``errors()`` method will return an non-empty array when there are validation
+The ``errors()`` method will return a non-empty array when there are validation
 failures. The returned array of errors will be structured like::
 
     $errors = [
@@ -253,6 +276,6 @@ as follows::
             'rule' => ['between', 1, 5]
         ]);
 
-Rules that take additional parameters should have an array for the ``rule`` key
+Core rules that take additional parameters should have an array for the ``rule`` key
 that contains the rule as the first element, and the additional parameters as
 the remaining parameters.
