@@ -67,9 +67,9 @@ child class will always override those in ``AppController.``
     -  :php:attr:`~Controller::$uses`
 
 Remember to add the default Html and Form helpers, if you define
-the :php:attr:`~Controller::$helpers` property in your ``AppController``
+the :php:attr:`~Controller::$helpers` property in your ``AppController``.
 
-Please also remember to call ``AppController's`` callbacks within child
+Please, also remember to call ``AppController``'s callbacks within child
 controller callbacks for best results::
 
     public function beforeFilter() {
