@@ -531,9 +531,60 @@ subqueries::
 
 Subqueries are accepted anywhere a query expression can be used.
 
+.. _map-reduce:
+
 Modifying results with Map/Reduce
 ==================================
 
-* Creating aggregate fields.
-* Replacing afterFind
+More often than not, find operations require post-processing the data that is
+found in the database. While entities' getter methods can take care of most of
+the virtual properties generation or special data formatting, sometimes you
+need to change the data structure in a more fundamental way.
+
+On common example of changing the data structure is grouping results together
+based on certain conditions::
+
+    $mapper = function($key, $article, $mapReduce) {
+        $status = 'published';
+        if ($article->isDraft() || $article->isInReview()) {
+            $status = 'unpublished';
+        }
+        $mapReduce->emitIntermediate($status, $article);
+    };
+
+    $reducer = function($status, $articles, $mapReduce) {
+        $mapReduce->emit($articles, $status);
+    }
+
+    $articlesByStatus = $articles->find()
+        ->where(['author_id' => 1])
+        ->mapReduce($mapper, $reducer);
+
+    foreach ($articlesByStatus as $status => $articles) {
+        echo sprintf("The are %d %s articles", count($articles), $status);
+    }
+
+    // The above will ouput the following lines:
+
+    // There are 4 published articles
+    // There are 5 unpublished articles
+
+Let's explain bit by bit what ``mapReduce`` does. We need two callable functions
+for it to work, the ``$mapper`` and the ``$reducer``, although ``$reducer`` can be
+omitted sometimes. The ``$mapper`` callable receives the iteration key as first
+argument, the current result form the database as second and finally it receives
+an instance of the ``MapReduce`` routine it is running.
+
+In the above example ``$mapper`` is calculating the status of an article, either
+published or unpublished, then it calls ``emitIntermediate`` on the
+``MapReduce`` instance. What this functions does is basically to store the
+article in the list of articles labelled as either published or unpublished.
+
+The next step in the map-reduce process is to consolidate the final results. For
+each status created in the mapper, the ``$reducer`` function will be called so
+you can do any extra processing. This function will receive  the name of the
+``bucket`` it needs to process as first param, the list of articles in that
+bucket as second parameter and again, as in the ``mapper`` function the instance
+of the ``MapReduce`` routine. In our example, we did not have to do any extra
+processing, so we just ``emit`` the final results.
 
