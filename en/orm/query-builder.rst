@@ -436,7 +436,7 @@ Inserting data
 ==============
 
 Unlike earlier examples, you should not use ``find()`` to create insert queries.
-Instead, create a new query objects using ``query()``::
+Instead, create a new query object using ``query()``::
 
     $query = $articles->query();
     $query->insert(['title', 'body'])
