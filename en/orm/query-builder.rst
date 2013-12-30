@@ -436,7 +436,7 @@ Inserting data
 ==============
 
 Unlike earlier examples, you should not use ``find()`` to create insert queries.
-Instead, create new query objects using ``query()``::
+Instead, create a new query objects using ``query()``::
 
     $query = $articles->query();
     $query->insert(['title', 'body'])
@@ -463,8 +463,8 @@ queries::
 Updating data
 =============
 
-As with insert queries, you should not use ``find()`` to create delete queries.
-Instead,create new query objects using ``query()``::
+As with insert queries, you should not use ``find()`` to create update queries.
+Instead, create new a query object using ``query()``::
 
     $query = $articles->query();
     $query->update()
@@ -479,7 +479,7 @@ Deleting data
 =============
 
 As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new query objects using ``query()``::
+Instead, create new a query object using ``query()``::
 
     $query = $articles->query();
     $query->delete()
