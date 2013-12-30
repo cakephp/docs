@@ -650,7 +650,12 @@ better said, people that do not follow each other. Let's start with our
     };
 
 We just duplicated out data, to have a list of users each other user follows.
-Now it's time to reduce it::
+Now it's time to reduce it. For ach call to the reducer, it will receive a list
+of followers per user::
+
+    // $friends list will look like
+    // repeated numbers mean that the relationship existed in both directions
+    [2, 5, 100, 2, 4]
 
     $reducer = function($user, $friendsList, $mr) {
         $fiends = array_count_values($friendsList);
@@ -665,7 +670,8 @@ And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
         ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
 
 This would return an array similar to this::
 
@@ -675,5 +681,5 @@ This would return an array similar to this::
         ...
     ]
 
-The resulting array means, for example, that user with id ``1`` is follows users
+The resulting array means, for example, that user with id ``1`` follows users
 ``2`` and ``4``, but those do not follow ``1`` back.
