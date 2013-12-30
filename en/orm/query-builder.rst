@@ -541,6 +541,9 @@ found in the database. While entities' getter methods can take care of most of
 the virtual properties generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
+For those cases, the query object offers the method ``mapReduce``, which is
+a way of processing results once they are fetched from the database.
+
 On common example of changing the data structure is grouping results together
 based on certain conditions. For this task we can use the ``mapReduce``
 function. We need two callable functions the ``$mapper`` and the ``$reducer``.
@@ -596,7 +599,16 @@ just emitting the results.
 Calculating the most common mentioned words, where the articles contain
 information about CakePHP. as usual we need a mapper function::
 
+    $mapper = function($key, $article, $mapReduce) {
+        if (stripos('cakephp', $article['body']) === false) {
+            return;
+        }
 
+        $words = array_map('strtolower', explode(' ', $article['body']));
+        foreach ($words as $word) {
+            $mapReduce->emitIntermediate($word, $article['id']);
+        }
+    };
 
 It first checks for whether the "cakephp" word in in the article's body, and
 then breaks the body into individual words. Each word will create its own
