@@ -542,7 +542,11 @@ the virtual properties generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
 On common example of changing the data structure is grouping results together
-based on certain conditions::
+based on certain conditions. For this task we can use the ``mapReduce``
+function. We need two callable functions the ``$mapper`` and the ``$reducer``.
+The ``$mapper`` callable receives the iteration key as first argument, the current
+result from the database as second argument and finally it receives an instance
+of the ``MapReduce`` routine it is running::
 
     $mapper = function($key, $article, $mapReduce) {
         $status = 'published';
@@ -551,29 +555,6 @@ based on certain conditions::
         }
         $mapReduce->emitIntermediate($status, $article);
     };
-
-    $reducer = function($status, $articles, $mapReduce) {
-        $mapReduce->emit($articles, $status);
-    }
-
-    $articlesByStatus = $articles->find()
-        ->where(['author_id' => 1])
-        ->mapReduce($mapper, $reducer);
-
-    foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
-    }
-
-    // The above will ouput the following lines:
-
-    // There are 4 published articles
-    // There are 5 unpublished articles
-
-Let's explain bit by bit what ``mapReduce`` does. We need two callable functions
-for it to work, the ``$mapper`` and the ``$reducer``, although ``$reducer`` can be
-omitted sometimes. The ``$mapper`` callable receives the iteration key as first
-argument, the current result form the database as second and finally it receives
-an instance of the ``MapReduce`` routine it is running.
 
 In the above example ``$mapper`` is calculating the status of an article, either
 published or unpublished, then it calls ``emitIntermediate`` on the
@@ -586,5 +567,101 @@ you can do any extra processing. This function will receive  the name of the
 ``bucket`` it needs to process as first param, the list of articles in that
 bucket as second parameter and again, as in the ``mapper`` function the instance
 of the ``MapReduce`` routine. In our example, we did not have to do any extra
-processing, so we just ``emit`` the final results.
+processing, so we just ``emit`` the final results::
 
+    $reducer = function($status, $articles, $mapReduce) {
+        $mapReduce->emit($articles, $status);
+    };
+
+Finally, we can put this two functions together to do the grouping::
+
+    $articlesByStatus = $articles->find()
+        ->where(['author_id' => 1])
+        ->mapReduce($mapper, $reducer);
+
+    foreach ($articlesByStatus as $status => $articles) {
+        echo sprintf("The are %d %s articles", count($articles), $status);
+    }
+
+The above will ouput the following lines::
+
+    There are 4 published articles
+    There are 5 unpublished articles
+
+Of course, this is a simplistic example that could actually be solved in another
+way without the help of a map-reduce process. Now let's take a look at another
+example in which the reducer function will be needed to do something more than
+just emitting the results.
+
+Calculating the most common mentioned words, where the articles contain
+information about CakePHP. as usual we need a mapper function::
+
+
+
+It first checks for whether the "cakephp" word in in the article's body, and
+then breaks the body into individual words. Each word will create its own
+``bucket`` where each article id will be stored. Now let's reduce our results to
+only extract the count::
+
+    $reducer = function($word, $occurrences, $mapReduce) {
+        $mapReduce->emit(count($occurrences), $word);
+    }
+
+That was easy, again. We just count the list of articles per each word bucket.
+Finally we put everything together::
+
+    $articlesByStatus = $articles->find()
+        ->where(['published' => true])
+        ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer);
+
+This could return a very large array if we don't clean stop words, but it could
+look something like like this::
+
+    [
+        'cakephp' => 100,
+        'awesome' => 39,
+        'impressive' => 57,
+        'outstanding' => 10,
+        'mind-blowing' => 83
+    ]
+
+A last example an you will be a map-reduce expert. Imagine you have
+a ``friends`` table and you want to find "fake friends" in our database, or
+better said, people that do not follow each other. Let's start with our
+``mapper`` function::
+
+    $mapper = function($key, $rel, $mr) {
+        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+    };
+
+We just duplicated out data, to have a list of users each other user follows.
+Now it's time to reduce it::
+
+    $reducer = function($user, $friendsList, $mr) {
+        $fiends = array_count_values($friendsList);
+        foreach ($friends as $friend => $count) {
+            if ($count < 2) {
+                $mr->emit($friend), $user;
+            }
+        }
+    }
+
+And we supply our functions to a query::
+
+    $fakeFriends = $friends->find()
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer);
+
+This would return an array similar to this::
+
+    [
+        1 => [2, 4],
+        3 => [6]
+        ...
+    ]
+
+The resulting array means, for example, that user with id ``1`` is follows users
+``2`` and ``4``, but those do not follow ``1`` back.
