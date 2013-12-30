@@ -254,7 +254,7 @@ can lazily load associated data::
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
-                ->execute();
+                ->all();
         }
 
     }
