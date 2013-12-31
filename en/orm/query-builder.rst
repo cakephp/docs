@@ -523,13 +523,14 @@ subqueries::
 
     $matchingComment = $articles->association('Comments')->find()
         ->select(['article_id'])
-        ->distinct('article_id')
+        ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);
 
     $query = $articles->find()
         ->where(['id' => $matchingComment]);
 
-Subqueries are accepted anywhere a query expression can be used.
+Subqueries are accepted anywhere a query expression can be used, for example in
+the ``select`` and ``join`` methods.
 
 .. _map-reduce:
 
@@ -660,7 +661,7 @@ of followers per user::
         $friends = array_count_values($friendsList);
         foreach ($friends as $friend => $count) {
             if ($count < 2) {
-                $mr->emit($friend), $user;
+                $mr->emit($friend, $user);
             }
         }
     }
@@ -682,3 +683,55 @@ This would return an array similar to this::
 
 The resulting array means, for example, that user with id ``1`` follows users
 ``2`` and ``4``, but those do not follow ``1`` back.
+
+
+Stacking multiple operations
+----------------------------
+
+Using `mapReduce` in a query will not execute it immediately, the operation will
+be registered to be run as soon as the first result is attempted to be fetched.
+This allows you to keep chaining additional method and filters to the query even
+after adding a map-reduce routine::
+
+   $query = $articles->find()
+        ->where(['published' => true])
+        ->mapReduce($mapper, $reducer);
+
+    // At a later point in your app:
+    $query->where(['created >=' => new DateTime('1 day ago')]);
+
+This is particularly useful for building custom finder methods as described in the
+:ref:`custom-find-methods` section::
+
+    public function findPublished($query, $options = []) {
+        return $query->where(['published' => true]);
+    }
+
+    public function findRecent($query, $options = []) {
+        return $query->>where(['created >=' => new DateTime('1 day ago')]);
+    }
+
+    public function findCommnWords($query, $options = []) {
+        // Same as in the common words example in the previous section
+        $mapper = ...;
+        $reducer = ...;
+        return $query->mapReduce($mapper, $reducer);
+    }
+
+    $commonWords = $articles
+        ->find('commonWords')
+        ->find('published')
+        ->find('recent');
+
+Moreover, it is also possible to stack more than one ``mapReduce`` operation for
+a single query. For example, if we wanted to have the most commonly used words
+for articles, but then filter it to only return words that were mentioned more
+than 20 times across all articles::
+
+    $mapper = function($word, $count, $mr) {
+        if ($count > 20) {
+            $mr->emit($count, $word);
+        }
+    };
+
+    $articles->find('commonWords')->mapReduce($mapper);
