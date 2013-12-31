@@ -548,16 +548,16 @@ a way of processing results once they are fetched from the database.
 A common example of changing the data structure is grouping results together
 based on certain conditions. For this task we can use the ``mapReduce``
 function. We need two callable functions the ``$mapper`` and the ``$reducer``.
-The ``$mapper`` callable receives the iteration key as first argument, the current
-result from the database as second argument and finally it receives an instance
+The ``$mapper`` callable receives the current result from the database as first
+argument, the iteration key as second argument and finally it receives an instance
 of the ``MapReduce`` routine it is running::
 
-    $mapper = function($key, $article, $mapReduce) {
+    $mapper = function($article, $key, $mapReduce) {
         $status = 'published';
         if ($article->isDraft() || $article->isInReview()) {
             $status = 'unpublished';
         }
-        $mapReduce->emitIntermediate($status, $article);
+        $mapReduce->emitIntermediate($article, $status);
     };
 
 In the above example ``$mapper`` is calculating the status of an article, either
@@ -567,13 +567,13 @@ labelled as either published or unpublished.
 
 The next step in the map-reduce process is to consolidate the final results. For
 each status created in the mapper, the ``$reducer`` function will be called so
-you can do any extra processing. This function will receive  the name of the
-``bucket`` it needs to process as first parameter, the list of articles in that
-bucket as second parameter and again, as in the ``mapper`` function the instance
-of the ``MapReduce`` routine. In our example, we did not have to do any extra
-processing, so we just ``emit`` the final results::
+you can do any extra processing. This function will receive the list of articles
+in a particular ``bucket`` as first parameter, the name of the ``bucket`` it needs
+to process as second parameter and again, as in the ``mapper`` function, the instance
+of the ``MapReduce`` routine as third parameter. In our example, we did not have
+to do any extra processing, so we just ``emit`` the final results::
 
-    $reducer = function($status, $articles, $mapReduce) {
+    $reducer = function($articles, $status, $mapReduce) {
         $mapReduce->emit($articles, $status);
     };
 
@@ -600,14 +600,14 @@ just emitting the results.
 Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP. as usual we need a mapper function::
 
-    $mapper = function($key, $article, $mapReduce) {
+    $mapper = function($article, $key, $mapReduce) {
         if (stripos('cakephp', $article['body']) === false) {
             return;
         }
 
         $words = array_map('strtolower', explode(' ', $article['body']));
         foreach ($words as $word) {
-            $mapReduce->emitIntermediate($word, $article['id']);
+            $mapReduce->emitIntermediate($article['id'], $word);
         }
     };
 
@@ -616,7 +616,7 @@ then breaks the body into individual words. Each word will create its own
 ``bucket`` where each article id will be stored. Now let's reduce our results to
 only extract the count::
 
-    $reducer = function($word, $occurrences, $mapReduce) {
+    $reducer = function($occurrences, $word, $mapReduce) {
         $mapReduce->emit(count($occurrences), $word);
     }
 
@@ -644,7 +644,7 @@ a ``friends`` table and you want to find "fake friends" in our database, or
 better said, people that do not follow each other. Let's start with our
 ``mapper`` function::
 
-    $mapper = function($key, $rel, $mr) {
+    $mapper = function($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
         $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
     };
@@ -657,7 +657,7 @@ of followers per user::
     // repeated numbers mean that the relationship existed in both directions
     [2, 5, 100, 2, 4]
 
-    $reducer = function($user, $friendsList, $mr) {
+    $reducer = function($friendsList, $user, $mr) {
         $friends = array_count_values($friendsList);
         foreach ($friends as $friend => $count) {
             if ($count < 2) {
@@ -728,7 +728,7 @@ a single query. For example, if we wanted to have the most commonly used words
 for articles, but then filter it to only return words that were mentioned more
 than 20 times across all articles::
 
-    $mapper = function($word, $count, $mr) {
+    $mapper = function($count, $word, $mr) {
         if ($count > 20) {
             $mr->emit($count, $word);
         }
