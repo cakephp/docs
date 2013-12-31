@@ -538,13 +538,13 @@ Modifying results with Map/Reduce
 
 More often than not, find operations require post-processing the data that is
 found in the database. While entities' getter methods can take care of most of
-the virtual properties generation or special data formatting, sometimes you
+the virtual property generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
-For those cases, the query object offers the method ``mapReduce``, which is
+For those cases, the query object offers the ``mapReduce`` method, which is
 a way of processing results once they are fetched from the database.
 
-On common example of changing the data structure is grouping results together
+A common example of changing the data structure is grouping results together
 based on certain conditions. For this task we can use the ``mapReduce``
 function. We need two callable functions the ``$mapper`` and the ``$reducer``.
 The ``$mapper`` callable receives the iteration key as first argument, the current
@@ -561,13 +561,13 @@ of the ``MapReduce`` routine it is running::
 
 In the above example ``$mapper`` is calculating the status of an article, either
 published or unpublished, then it calls ``emitIntermediate`` on the
-``MapReduce`` instance. What this functions does is basically to store the
-article in the list of articles labelled as either published or unpublished.
+``MapReduce`` instance. The method stores the article in the list of articles
+labelled as either published or unpublished.
 
 The next step in the map-reduce process is to consolidate the final results. For
 each status created in the mapper, the ``$reducer`` function will be called so
 you can do any extra processing. This function will receive  the name of the
-``bucket`` it needs to process as first param, the list of articles in that
+``bucket`` it needs to process as first parameter, the list of articles in that
 bucket as second parameter and again, as in the ``mapper`` function the instance
 of the ``MapReduce`` routine. In our example, we did not have to do any extra
 processing, so we just ``emit`` the final results::
@@ -596,7 +596,7 @@ way without the help of a map-reduce process. Now let's take a look at another
 example in which the reducer function will be needed to do something more than
 just emitting the results.
 
-Calculating the most common mentioned words, where the articles contain
+Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP. as usual we need a mapper function::
 
     $mapper = function($key, $article, $mapReduce) {
@@ -619,7 +619,6 @@ only extract the count::
         $mapReduce->emit(count($occurrences), $word);
     }
 
-That was easy, again. We just count the list of articles per each word bucket.
 Finally we put everything together::
 
     $articlesByStatus = $articles->find()
@@ -639,7 +638,7 @@ look something like like this::
         'mind-blowing' => 83
     ]
 
-A last example an you will be a map-reduce expert. Imagine you have
+One last example and you will be a map-reduce expert. Imagine you have
 a ``friends`` table and you want to find "fake friends" in our database, or
 better said, people that do not follow each other. Let's start with our
 ``mapper`` function::
@@ -649,8 +648,8 @@ better said, people that do not follow each other. Let's start with our
         $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
     };
 
-We just duplicated out data, to have a list of users each other user follows.
-Now it's time to reduce it. For ach call to the reducer, it will receive a list
+We just duplicated our data to have a list of users each other user follows.
+Now it's time to reduce it. For each call to the reducer, it will receive a list
 of followers per user::
 
     // $friends list will look like
@@ -658,7 +657,7 @@ of followers per user::
     [2, 5, 100, 2, 4]
 
     $reducer = function($user, $friendsList, $mr) {
-        $fiends = array_count_values($friendsList);
+        $friends = array_count_values($friendsList);
         foreach ($friends as $friend => $count) {
             if ($count < 2) {
                 $mr->emit($friend), $user;
