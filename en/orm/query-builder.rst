@@ -741,6 +741,6 @@ Removing all stacked map-reduce operations
 
 Under some circumstances you may want to modify a query object so that no
 ``maprReduce`` operation are executed at all. This can be easily done may
-calling the method with both paramenters as null::
+calling the method with both parameters as null::
 
     $query->mapReduce(null, null);
