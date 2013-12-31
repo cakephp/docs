@@ -1,10 +1,39 @@
+.. _collection-objects:
+
+.. php:namespace:: Cake\Collection
+
 Collections
 ###########
 
-In 3.0 the Collection objects used in 2.x were subdivided into
-:doc:`/core-libraries/registry-objects` and the :doc:`/core-libraries/events`
-subsystem. The registry classes provide factory and registry features, while the
-event system handles callbacks.
+* Collection intro
+* Immutable objects
+
+Iterating
+=========
+
+* each, map
+
+Filtering
+=========
+
+* filter, reject, every, some, match, firstMatch,
+
+
+Aggregation
+===========
+
+* min, max, reduce, extract, groupBy, indexBy, countBy,
+
+Sorting
+=======
+
+* sortBy
+
+Other methods
+=============
+
+* contains, reduce, shuffle, sample, take, append, compile
+
 
 .. meta::
     :title lang=en: Collections
