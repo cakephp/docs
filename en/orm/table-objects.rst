@@ -1149,7 +1149,7 @@ Working with result sets
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from you queries.
+the resulting data from your queries.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
