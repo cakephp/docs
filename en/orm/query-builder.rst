@@ -61,7 +61,7 @@ You can set aliases for fields by providing fields as an associative array::
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
-To select distict fields you can use the ``distinct()`` method::
+To select distinct fields you can use the ``distinct()`` method::
 
     // Results in SELECT DISTINCT country FROM ...
     $query = $articles->find();
