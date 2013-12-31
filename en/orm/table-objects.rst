@@ -1154,15 +1154,15 @@ the resulting data from you queries.
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
 set multiple times, or cache and iterate the results. If you need to disable
-buffering because you are working with data sets that do not fit in memory you
+buffering because you are working with a data set that does not fit into memory you
 can disable buffering on the query to stream results::
 
     $query->bufferResults(false);
 
 .. warning::
 
-    Streaming results is not possible with SQLite, or queries with eager loaded
-    hasMany or belongsToMany associations.
+    Streaming results is not possible when using SQLite, or queries with eager
+    loaded hasMany or belongsToMany associations.
 
 Result sets allow you to easily cache/serialize or JSON encode results for API results::
 
@@ -1178,13 +1178,13 @@ Result sets allow you to easily cache/serialize or JSON encode results for API r
     $json = json_encode($results);
 
 Both serializing and JSON encoding result sets work as you would expect. The
-serialized data can be unserialized into a functioning object, and the JSON
-output respects hidden & virtual field settings on all entity objects within
-a result set.
+serialized data can be unserialized into a working result set. Converting to
+JSON respects hidden & virtual field settings on all entity objects
+within a result set.
 
-In addition to making serialization easy, result sets are a 'Collection' and
-support the same methods that all :ref:`collection objects<collection-objects>`
-do. For example you can extract a list of unique tags on a collection of
+In addition to making serialization easy, result sets are a 'Collection' object and
+support the same methods that :ref:`collection objects<collection-objects>`
+do. For example, you can extract a list of unique tags on a collection of
 articles quite easily::
 
     $articles = TableRegistry::get('Articles');
@@ -1203,7 +1203,6 @@ articles quite easily::
 
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
-
 
 Validating entities
 ===================
