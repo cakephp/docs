@@ -61,7 +61,7 @@ associations or defining some additional methods we would add the following to
 
 Table classes use the CamelCased version of the table name with the ``Table``
 suffix as the class name. Once your class has been created you get a reference
-to is using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
+to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
 
     use Cake\ORM\TableRegistry;
     // Now $articles is an instance of our ArticlesTable class.
@@ -83,7 +83,7 @@ following to ``App/Model/Entity/Article.php``::
 
 Entities use the singular CamelCase version of the table name as their class
 name by default. Now that we have created our entity class, when we
-load entities from the database we'll instances of our new Article class::
+load entities from the database we'll get instances of our new Article class::
 
     use Cake\ORM\TableRegistry;
 
