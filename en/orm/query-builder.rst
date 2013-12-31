@@ -711,7 +711,7 @@ This is particularly useful for building custom finder methods as described in t
         return $query->>where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommnWords($query, $options = []) {
+    public function findCommonWords($query, $options = []) {
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;
@@ -740,7 +740,8 @@ Removing all stacked map-reduce operations
 ------------------------------------------
 
 Under some circumstances you may want to modify a query object so that no
-``maprReduce`` operation are executed at all. This can be easily done may
-calling the method with both parameters as null::
+``mapReduce`` operation are executed at all. This can be easily done by
+calling the method with both parameters as null and the third parameter
+(overwrite) as true::
 
-    $query->mapReduce(null, null);
+    $query->mapReduce(null, null, true);
