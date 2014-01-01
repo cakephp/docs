@@ -99,7 +99,7 @@ of another one, you can use ``sortBy``::
     $sorted = $people->sortBy('age');
 
 As seen above, you can sort by passing the name of a column or property that
-it's present in the collection values. You are also able to specify a property
+is present in the collection values. You are also able to specify a property
 path instead using the dot notation. The next example will sort articles by
 their author's name::
 
