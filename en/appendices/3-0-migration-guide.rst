@@ -419,6 +419,16 @@ SecurityComponent
 Model
 =====
 
+The Model layer in 2.x has been entirely re-written and replaced. You should
+review the :doc:`/appendices/orm-migration` for information on how to use the
+new ORM.
+
+- The ``Model`` class has been removed.
+- The ``BehaviorCollection`` class has been removed.
+- The ``DboSource`` class has been removed.
+- The ``Datasource`` class has been removed.
+- The various datasource classes have been removed.
+
 ConnectionManager
 -----------------
 
