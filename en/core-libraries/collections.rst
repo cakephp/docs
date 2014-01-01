@@ -5,6 +5,8 @@
 Collections
 ###########
 
+.. php:class:: Collection
+
 The collection classes provide a set of tools to manipulate arrays or
 ``Traversable`` objects. If you have ever used underscore.js you have an idea of
 what you can expect from the collection classes.
@@ -80,8 +82,49 @@ collection of elements matching a criteria callback::
         return $person->gender === 'male';
     });
 
-* reject, every, some, match, firstMatch,
+The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
+removing elements that match the filter function::
 
+    $collection = new Collection($people);
+    $ladies = $collection->reject(function($person, $key) {
+        return $person->gender === 'male';
+    });
+
+You can do truth tests with filter functions. To see if every element in
+a collection matches a test you can use ``every()``::
+
+    $collection = new Collection($people);
+    $allYoungPeople = $collection->every(function($person) {
+        return $person->age < 21;
+    });
+
+You can see if the collection contains at least one element matching a filter
+function using the ``some()`` method::
+
+    $collection = new Collection($people);
+    $hasYoungPeople = $collection->some(function($person) {
+        return $person->age < 21;
+    });
+
+If you need to extract a new collection containing only the elements that
+contain a given set of properties you should use the ``match()`` method::
+
+    $collection = new Collection($comments);
+    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
+
+The property name can be a dot separated path. You can traverse into nested
+entities and match the values they contain. When you only need the first
+matching element from a collection, you can use ``firstMatch()``::
+
+    $collection = new Collection($comments);
+    $comment = $collection->firstMatch([
+        'user.name' => 'Mark',
+        'active' => true
+    ]);
+
+As you can see from the above, both ``match()`` and ``firstMatch()`` allow you to provide multiple conditions
+to match on. In addition the conditions can be for different paths allowing you
+to express complex conditions to match against.
 
 Aggregation
 ===========
