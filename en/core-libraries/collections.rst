@@ -5,6 +5,8 @@
 Collections
 ###########
 
+.. php:class:: Collection
+
 The collection classes provide a set of tools to manipulate arrays or
 ``Traversable`` objects. If you have ever used underscore.js you have an idea of
 what you can expect from the collection classes.
@@ -115,7 +117,14 @@ entities and match the values they contain. When you only need the first
 matching element from a collection, you can use ``firstMatch()``::
 
     $collection = new Collection($comments);
-    $comment = $collection->firstMatch(['user.name' => 'Mark']);
+    $comment = $collection->firstMatch([
+        'user.name' => 'Mark',
+        'active' => true
+    ]);
+
+As you can see from the above, both ``match()`` and ``firstMatch()`` allow you to provide multiple conditions
+to match on. In addition the conditions can be for different paths allowing you
+to express complex conditions to match against.
 
 Aggregation
 ===========
