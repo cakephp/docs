@@ -87,14 +87,6 @@ array) will cause validation errors when fields are not allowed to be empty.
 When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
 ``[]``, ``0``, ``'0'`` are accepted.
 
-Defining conditions for validator
----------------------------------
-
-When defining validation rules, you can use the ``on`` key to define when
-a validation rule should be applied. If left undefined the rule will always be
-applied. Other valid values are ``create`` and ``update``. Using one of these
-values will make the rule apply to only create or update operations.
-
 Marking rules as the last to run
 --------------------------------
 
@@ -119,7 +111,6 @@ a specific rule has failed you can set the ``last`` option to ``true``::
 
 In the above example if the minLength rule fails, the maxLength rule will not be
 run.
-
 
 Adding validation providers
 ---------------------------
@@ -174,6 +165,28 @@ callable including anonymous functions as validation rules::
             // Custom logic that returns true/false
         }
     ]);
+
+Defining conditions for validator
+---------------------------------
+
+When defining validation rules, you can use the ``on`` key to define when
+a validation rule should be applied. If left undefined the rule will always be
+applied. Other valid values are ``create`` and ``update``. Using one of these
+values will make the rule apply to only create or update operations.
+
+Additionally you can provide a callable function that will determine whether or
+not a particular rule should be applied::
+
+    $data = $this->request->data();
+    $validator->add('picture', 'file', [
+            'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+            'on' => function($providers) use ($data) {
+                return !empty($data['show_profile_picture']);
+            }
+        ]);
+
+The above example will make the rule for 'picture' optional depending on whether
+the value for ``show_profile_picture`` is empty.
 
 .. _reusable-validators:
 
