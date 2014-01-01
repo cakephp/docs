@@ -512,14 +512,14 @@ files/syslog can be useful when working with web requests::
 
     // Console logging
     Log::config('queries', [
-        'clasName' => 'Console',
+        'className' => 'Console',
         'stream' => 'php://stderr',
         'scopes' => ['queriesLog']
     ]);
 
     // File logging
     Log::config('queries', [
-        'clasName' => 'File',
+        'className' => 'File',
         'file' => 'queries.log',
         'scopes' => ['queriesLog']
     ]);
