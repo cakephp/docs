@@ -712,7 +712,7 @@ This is particularly useful for building custom finder methods as described in t
     }
 
     public function findRecent($query, $options = []) {
-        return $query->>where(['created >=' => new DateTime('1 day ago')]);
+        return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
     public function findCommonWords($query, $options = []) {
