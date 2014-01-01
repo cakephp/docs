@@ -91,7 +91,58 @@ Aggregation
 Sorting
 =======
 
-* sortBy
+Collection values can be sorted in ascending or descending order based on
+a column or custom function. To create a new sorted collection out of the values
+of another one, you can use ``sortBy``::
+
+    $collection = new Collection($people);
+    $sorted = $people->sortBy('age');
+
+As seen above, you can sort by passing the name of a column or property that
+it's present in the collection values. You are also able to specify a property
+path instead using the dot notation. The next example will sort articles by
+their author's name::
+
+    $collection = new Collection($articles);
+    $sorted = $articles->sortBy('author.name');
+
+The ``sortBy`` method is flexible enough to let you specify an extractor
+function that will let you select dynamically the value to use for comparing two
+different values in the collection::
+
+    $collection = new Collection($articles);
+    $sorted = $articles->sortBy(function($article) {
+        return $article->author->name . '-' . $article->title;
+    });
+
+In order to specify in which direction the collection should be sorted, you need
+to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
+sorting in ascending or descending direction respectively. By default,
+collections are sorted in ascending direction::
+
+    $collection = new Collection($people);
+    $sorted = $people->sortBy('age', SORT_ASC);
+
+Sometimes you will need to specify which type of data you are trying to compare
+so that you get consistent results. For this purpose you should supply as third
+argument in the ``sortBy`` function one of the following constants:
+
+- **SORT_NUMERIC**: For comparing numbers
+- **SORT_STRING**: For comparing string values
+- **SORT_NATURAL**: For sorting string containing numbers and you'd like those
+  numbers to be order in a natural way. For example showing "10" after "2".
+- **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
+
+By default ``SORT_NUMERIC`` is used::
+
+    $collection = new Collection($articles);
+    $sorted = $articles->sortBy('title', SORT_ASC, SORT_NATURAL);
+
+.. warning::
+
+    If is often expensive to iterate sorted collections more than once, if you
+    plan to do so, consider converting the collection to an array or simply use
+    the ``compile`` method on it.
 
 Other methods
 =============
