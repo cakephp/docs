@@ -148,7 +148,7 @@ Other methods
 =============
 
 Collections allow you to quickly check if they contain one particular
-value: by using the ``constains`` method::
+value: by using the ``contains`` method::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
