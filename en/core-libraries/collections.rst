@@ -147,8 +147,134 @@ By default ``SORT_NUMERIC`` is used::
 Other methods
 =============
 
-* contains, reduce, shuffle, sample, take, append, compile
+Collections allow you to quickly check if they contain one particular
+value: by using the ``contains`` method::
 
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+    $hasThree = $collection->contains(3);
+
+Comparisons are performed using the ``===`` operator. If you wish to do looser
+comparison types you can use the ``some`` method.
+
+Sometimes you may wish to show a collection of values in a random order. In
+order to create a new collection that will return each value in a randomized
+position, use the ``shuffle``::
+
+    $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
+
+    // This could return ['b' => 2, 'c' => 3, 'a' => 1]
+    $collection->shuffle()->toArray();
+
+Withdrawing elements
+--------------------
+
+Shuffling a collection is often useful when doing quick statistical analysis,
+another common operation when doing this sort of tasks is withdrawing a few
+random values out of a collection so that more tests can be performed on those.
+For example, if you wanted to select 5 random users to which you'd like to apply
+some A/B tests to, you can use the ``sample`` function::
+
+    $collection = new Colllection($people);
+
+    // withdraw maximum 20 random users from this collection
+    $testSubjects = $collection->sample(20);
+
+``sample`` will take at most the number of values you specify in the first argument,
+if there are not enough elements in the collection to satisfy the sample, the
+full collection in a random order is returned.
+
+Whenever you want to take a slice of a collection use the ``take`` function, it
+will create a new collection with at most the number of values you specify in the
+first argument, starting from the position passed in the second argument::
+
+    $topFive = $collection->sortBy('age')->take(5);
+
+    // Take 5 people from the collection starting from position 4
+    $nextTopFive = $collection->sortBy('age')->take(5, 4);
+
+Positions are zero-based, therefore the first position number is ``0``.
+
+Expanding collections
+---------------------
+
+You can compose multiple collections into a single one. This enables you to
+gather data from various sources, concatenate it and apply other collection
+functions to it very smoothly. The ``append`` method will return a new
+collection containing the values from both sources::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->append($phpTweets);
+
+    // Tweets containing cakefest from both sources
+    $myTimeline->filter(function($tweet) {
+        return strpos($tweet, 'cakefest');
+    });
+
+.. warning::
+
+    When appending from different sources you can expect some keys from both
+    collections to be the same, for example when appending two simple arrays.
+    This can present a problem when converting a collection to an array using
+    ``toArray``. If you do not want values from one collection to override
+    others in the previous one based on their key, make sure that you call
+    ``toArray(false)`` in order to drop the keys and preserve all values.
+
+Optimizing collections
+----------------------
+
+Collections often perform most operations that you create using its functions in
+a lazy way. This means that even though you can call a function, it does not
+mean it is executed right away. This is true for a great deal of functions in
+this class. Lazy evaluation allows allows you to save resources in situations
+where you don't use all the values in a collection. You might not use all the
+values when iteration stops early, or when an exception/failure case is reached
+early.
+
+Additionally lazy evaluation helps speed up some operations, consider the
+following example::
+
+    $collection = new Collection($oneMillionItems);
+    $collection->map(function($item) {
+        return $item * 2;
+    });
+    $itemsToShow = $collection->take(30);
+
+Had collections not being lazy, we would have executed one million operations,
+even though we only wanted to show 30 elements out of it. Instead, our map
+operation was only applied to the 30 elements we used. We can also
+derive benefits from this lazy evaluation even for smaller collections when we
+do more than one operation on them, for example calling ``map`` twice and then
+``filter``.
+
+Lazy evaluation comes with its downside too, you could be doing the same
+operations more than once if you optimize it first. Consider now this example::
+
+    $ages = $collection->extract('age');
+
+    $youngerThan30 = $ages->filter(function($item) {
+        return $item < 30;
+    });
+
+    $olderThan30 = $ages->filter(function($item) {
+        return $item > 30;
+    });
+
+If we iterate both ``youngerThan30`` and ``olderThan30`` collection we would be,
+unfortunately, executing the ``extract`` operation twice. This is because
+collections are immutable and the lazy extracting operation would be done for
+both filters.
+
+Luckily we can overcome this issue with a single function. If you plan to reuse
+the values from certain operations more than once, you can compile the results
+into another collection using the ``compile`` function::
+
+    $ages = $collection->extract('age')->compile();
+    $youngerThan30 = ...
+    $olderThan30 = ...
+
+Now when the those 2 collections are iterated, they will only call the
+extracting operation once.
 
 .. meta::
     :title lang=en: Collections
