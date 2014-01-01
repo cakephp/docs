@@ -214,10 +214,10 @@ collection containing the values from both sources::
 .. warning::
 
     When appending from different sources you can expect some keys from both
-    collections to be the same, for example wehn appending two simple arrays.
+    collections to be the same, for example when appending two simple arrays.
     This can present a problem when converting a collection to an array using
     ``toArray``. If you do not want values from one collection to override
-    others in the previous one based on ther key, make sure that you call
+    others in the previous one based on their key, make sure that you call
     ``toArray(false)`` in order to drop the keys and preserve all values.
 
 Optimizing collections
@@ -225,10 +225,11 @@ Optimizing collections
 
 Collections often perform most operations that you create using its functions in
 a lazy way. This means that even though you can call a function, it does not
-mean it is executing right away. This is true for a great deal of functions in
-this class. Lazy evaluation allows you save resources in case you don't use some
-collection values, don't iterate completely over them or simply don't use it
-where you were supposed to because of caching or any exception.
+mean it is executed right away. This is true for a great deal of functions in
+this class. Lazy evaluation allows allows you to save resources in situations
+where you don't use all the values in a collection. You might not use all the
+values when iteration stops early, or when an exception/failure case is reached
+early.
 
 Additionally lazy evaluation helps speed up some operations, consider the
 following example::
@@ -240,8 +241,8 @@ following example::
     $itemsToShow = $collection->take(30);
 
 Had collections not being lazy, we would have executed one million operations,
-even though we only wanted to show 30 elements out of it. Instead, we only did
-30 operations, only for those elements that we took out of it. We can also
+even though we only wanted to show 30 elements out of it. Instead, our map
+operation was only applied to the 30 elements we used. We can also
 derive benefits from this lazy evaluation even for smaller collections when we
 do more than one operation on them, for example calling ``map`` twice and then
 ``filter``.
