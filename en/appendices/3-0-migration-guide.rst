@@ -43,7 +43,7 @@ and :php:meth:`debug()` are not namespaced for convenience sake.
 Removed Constants
 =================
 
-The following deprecated constants have been removed::
+The following deprecated constants have been removed:
 
 * ``IMAGES``
 * ``CSS``
@@ -86,7 +86,7 @@ Basics
 Cache
 =====
 
-* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\Engine\Memcached` instead.
+* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached` instead.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 * :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
@@ -100,10 +100,10 @@ Cache
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
 
-All :php:class:`Cake\\Cache\\Cache\CacheEngine` methods now honor/are responsible for handling the
+All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
 configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
 the duration on write - the duration is taken from the cache engine's runtime config. Calling a
-cache method with an empty key will now throw an `:php:class:`InvalidArgumentException`, instead
+cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
 of returning false.
 
 Core
@@ -133,7 +133,7 @@ Plugin
 Configure
 =========
 
-The config reader classes have been renamed::
+The config reader classes have been renamed:
 
 * ``Cake\\Configure\\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
 * ``Cake\\Configure\\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
@@ -179,7 +179,7 @@ Log
 * The following methods have been removed from :php:class:`Cake\\Log\\Log` ::
   ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
 * You can no longer create custom levels using ``Log::levels()``.
-* When configuring loggers you should use ``'levels'`` instead of 'types'.
+* When configuring loggers you should use ``'levels'`` instead of ``'types'``.
 * You can no longer specify custom log levels.  You must use the default set of
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application. Using
@@ -435,10 +435,10 @@ ConnectionManager
 - ConnectionManager has been moved to the ``Cake\\Database`` namespace.
 - ConnectionManager has had the following methods removed:
 
-    - ``sourceList``
-    - ``getSourceName``
-    - ``loadDataSource``
-    - ``enumConnectionObjects``
+  - ``sourceList``
+  - ``getSourceName``
+  - ``loadDataSource``
+  - ``enumConnectionObjects``
 
 - :php:meth:`~Cake\\Database\\ConnectionManager::config()` has been added and is
   now the only way to configure connections.
@@ -457,14 +457,14 @@ TestCase
 The following assertion methods have been removed as they have long been deprecated and replaced by
 their new PHPUnit counterpart:
 
-- ``assertEqual()`` in favor of assertEquals()``
-- ``assertNotEqual()`` in favor of assertNotEquals()``
-- ``assertIdentical()`` in favor of assertSame()``
-- ``assertNotIdentical()`` in favor of assertNotSame()``
-- ``assertPattern()`` in favor of assertRegExp()``
-- ``assertNoPattern()`` in favor of assertNotRegExp()``
-- ``assertReference()`` if favor of assertSame()``
-- ``assertIsA()`` in favor of assertInstanceOf()``
+- ``assertEqual()`` in favor of ``assertEquals()``
+- ``assertNotEqual()`` in favor of ``assertNotEquals()``
+- ``assertIdentical()`` in favor of ``assertSame()``
+- ``assertNotIdentical()`` in favor of ``assertNotSame()``
+- ``assertPattern()`` in favor of ``assertRegExp()``
+- ``assertNoPattern()`` in favor of ``assertNotRegExp()``
+- ``assertReference()`` if favor of ``assertSame()``
+- ``assertIsA()`` in favor of ``assertInstanceOf()``
 
 Note that some methods have switched the order, e.g. ``assertEqual($is, $expected)`` should now be
 ``assertEquals($expected, $is)``.
@@ -578,7 +578,7 @@ TimeHelper
   removed. These were magic methods for deprecated attributes.
 
 Core
-=====
+====
 
 Configure
 ---------
@@ -595,7 +595,7 @@ Object
 I18n
 ====
 
-- :php:class:`Cake\I18n\I18n`'s constructor now takes a :php:class:`Cake\Network\Request` instance as argument.
+- :php:class:`Cake\\I18n\\I18n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
 
 - The methods below has been moved:
 
@@ -608,7 +608,7 @@ I18n
 L10n
 ====
 
-- :php:class:`Cake\I18n\L10n`'s constructor now takes a :php:class:`Cake\Network\Request` instance as argument.
+- :php:class:`Cake\\I18n\\L10n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
 
 
 Utility
@@ -617,7 +617,7 @@ Utility
 Inflector
 ---------
 
-Transliterations for :php:meth:`Cake\Utility\Inflector::slug()` have changed. If
+Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed. If
 you use custom transliterations you will need to update your code. Instead of
 regular expressions, transliterations use simple string replacement. This
 yielded significant performance improvements::
