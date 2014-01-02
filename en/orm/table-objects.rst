@@ -147,7 +147,7 @@ association in our ArticlesTable::
 
     class ArticlesTable extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsTo('Authors');
         }
 
@@ -160,7 +160,7 @@ you can do so with the second parameter::
 
     class ArticlesTable extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsTo('Authors', [
                 'className' => 'Publishing.Authors',
                 'foreignKey' => 'authorid',
@@ -287,7 +287,7 @@ We can define the belongsTo association in our Addresses table as follows::
 
     class Addresses extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsTo('Users');
         }
     }
@@ -297,7 +297,7 @@ syntax::
 
     class Addresses extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsTo('Users', [
                 'foreignKey' => 'userid',
                 'joinType' => 'INNER',
@@ -363,7 +363,7 @@ We can define the hasMany association in our Articles model as follows::
 
     class Addresses extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->hasMany('Comments');
         }
     }
@@ -373,7 +373,7 @@ syntax::
 
     class Addresses extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->hasMany('Comments', [
                 'foreignKey' => 'articleid',
                 'dependent' => true,
@@ -473,7 +473,7 @@ We can define the belongsToMany association in our Articles model as follows::
 
     class Articles extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsToMany('Tags');
         }
     }
@@ -483,7 +483,7 @@ syntax::
 
     class Articles extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->belongsToMany('Tags', [
                 'joinTable' => 'article_tag',
             ]);
@@ -845,7 +845,7 @@ a table::
 
     class Articles extends Table {
 
-        public function intitalize(array $config) {
+        public function initialize(array $config) {
             $this->displayField('title');
         }
     }

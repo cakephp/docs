@@ -27,6 +27,7 @@ like::
             'password' => 'sekret',
             'host' => 'localhost',
             'encoding' => 'utf8',
+            'timezone' => 'UTC'
         ]
     ],
 
@@ -45,6 +46,7 @@ would be::
         'password' => 'sekret',
         'host' => 'localhost',
         'encoding' => 'utf8',
+        'timezone' => 'UTC'
     ]);
 
 By default, all Table objects will use the ``default`` connection. To
@@ -76,6 +78,8 @@ encoding
     all databases other than DB2. If you wish to use UTF-8 encoding
     with mysql/mysqli connections you must use 'utf8' without the
     hyphen.
+timezone
+    Server timezone to set.
 schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
