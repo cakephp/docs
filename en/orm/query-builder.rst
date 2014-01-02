@@ -447,7 +447,7 @@ Instead, create a new query object using ``query()``::
         ->execute();
 
 Generally it is easier to insert data using entities and
-:php:method:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
+:php:meth:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
 ``INSERT`` query together you can create ``INSERT INTO ... SELECT`` style
 queries::
 
@@ -473,7 +473,7 @@ Instead, create new a query object using ``query()``::
         ->execute();
 
 Generally it is easier to delete data using entities and
-:php:method:`~Cake\\ORM\\Table::delete()`.
+:php:meth:`~Cake\\ORM\\Table::delete()`.
 
 Deleting data
 =============
@@ -487,7 +487,7 @@ Instead, create new a query object using ``query()``::
         ->execute();
 
 Generally it is easier to delete data using entities and
-:php:method:`~Cake\\ORM\\Table::delete()`.
+:php:meth:`~Cake\\ORM\\Table::delete()`.
 
 More complex queries
 ====================
