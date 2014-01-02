@@ -31,13 +31,12 @@ in a database. This object is returned by the schema reflection features::
       'length' => 11,
       'null' => false,
       'default' => null,
-    ]);
-    $t->addColumn('title', [
+    ])->addColumn('title', [
       'type' => 'string',
       'length' => 255,
-      'fixed' => true // Create a fixed length (char field)
-    ]);
-    $t->addConstraint('primary', [
+      // Create a fixed length (char field)
+      'fixed' => true
+    ])->addConstraint('primary', [
       'type' => 'primary',
       'columns' => ['id']
     ]);
@@ -45,7 +44,7 @@ in a database. This object is returned by the schema reflection features::
     // Schema\Table classes could also be created with array data
     $t = new Table('posts', $columns);
 
-Schema\Table objects allow you build up information about a table's schema. It helps to
+``Schema\Table`` objects allow you build up information about a table's schema. It helps to
 normalize and validate the data used to describe a table. For example, the
 following two forms are equivalent::
 
@@ -110,6 +109,43 @@ methods. An example of both methods is::
       'delete' => 'cascade'
     ]);
 
+If you add a primary key constraint to a single integer column it will automatically
+be converted into a auto-increment/serial column depending on the database
+platform::
+
+    $t = new Table('posts');
+    $t->addColumn('id', 'integer')
+        ->addConstraint('primary', [
+            'type' => 'primary',
+            'columns' => ['id']
+        ]);
+
+In the above example the ``id`` column would generate the following SQL in
+MySQL::
+
+    CREATE TABLE `posts` (
+        `id` INTEGER AUTO_INCREMENT,
+        PRIMARY KEY (`id`)
+    )
+
+If your primary key contains more than one column, none of them will
+automatically be converted to an auto-increment value. Instead you will need to
+tell the table object which column in the composite key you want to
+auto-increment::
+
+    $t = new Table('posts');
+    $t->addColumn('id', [
+        'type' => 'integer',
+        'autoIncrement' => true,
+    ])
+    ->addColumn('account_id', 'integer')
+    ->addConstraint('primary', [
+        'type' => 'primary',
+        'columns' => ['id', 'account_id']
+    ]);
+
+The ``autoIncrement`` option only works with ``integer`` and ``biginteger``
+columns.
 
 Reading indexes and constraints
 -------------------------------
