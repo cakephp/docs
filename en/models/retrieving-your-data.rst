@@ -364,7 +364,7 @@ returned first.
 .. warning::
 
     If you specify ``fields``, you need to always include the
-    parent_id (or its current alias)::
+    id & parent_id (or their current aliases)::
 
         public function some_function() {
             $categories = $this->Category->find('threaded', array(
