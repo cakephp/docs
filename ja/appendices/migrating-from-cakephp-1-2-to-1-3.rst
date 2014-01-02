@@ -83,25 +83,25 @@ app/config/bootstrap.php に、 ``$pluginPaths`` や ``$controllerPaths`` のよ
 
 -  session.php -> cake\_session.php
 
-  
+
    -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
 -  socket.php -> cake\_socket.php
 
-  
+
    -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
 -  schema.php -> cake\_schema.php
 
-  
+
    -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
 -  behavior.php -> model\_behavior.php
 
-  
+
    -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
@@ -245,7 +245,7 @@ Sessionヘルパーと Sessionコンポーネントは他のコンポーネン�
 
     // このような書き方から:
     Configure::write('Routing.admin', 'admin');
-   
+
     // このような書き方へ:
     Configure::write('Routing.prefixes', array('admin'));
 

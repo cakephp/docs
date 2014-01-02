@@ -164,7 +164,7 @@ PHPUnitが個々のテストケースとテストスイートをテストラン�
 テストスイートの例は以下のようになります::
 
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
-    
+
     /**
      * このスイートのためのテストの定義を組み立て
      *
@@ -172,7 +172,7 @@ PHPUnitが個々のテストケースとテストスイートをテストラン�
      */
         public static function suite() {
             $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
-            
+
             $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
             $suite->addTestFile($helperTestPath . 'JsHelperTest.php');
             $suite->addTestFile($helperTestPath . 'JqueryEngineHelperTest.php');

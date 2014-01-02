@@ -173,7 +173,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
 
    /**
-    * Uncomment this line and correct your server timezone to fix 
+    * Uncomment this line and correct your server timezone to fix
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');

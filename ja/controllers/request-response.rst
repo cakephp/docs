@@ -511,7 +511,7 @@ Last Modifiedヘッダ
 HTTPキャッシュのvalidationモデルのもとでは、リソースが最後に変更された日時を示すために `Last-Modified` ヘッダを設定することができます。
 このヘッダを設定するとCakePHPがキャッシュしているクライアントにレスポンスが変更されたのかどうかを返答する手助けとなります。
 
-実際にこのヘッダを使うメリットを得るためには、 :php:meth:`CakeResponse::checkNotModified()` 
+実際にこのヘッダを使うメリットを得るためには、 :php:meth:`CakeResponse::checkNotModified()`
 メソッドを呼び出すかコントローラに :php:class:`RequestHandlerComponent` を読み込まなければなりません。::
 
     public function view() {
@@ -633,5 +633,3 @@ CakeResponse API
 .. meta::
     :title lang=en: Request and Response objects
     :keywords lang=en: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
-
-
