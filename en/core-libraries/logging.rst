@@ -302,7 +302,7 @@ message. For example::
     Log::warning('this gets written to both shops.log and payments.log', 'payments');
     Log::warning('this gets written to both shops.log and payments.log', 'unknown');
 
-As of 3.0 the logging scope passed to :php:method:`Cake\\Log\\Log::write()` is
+As of 3.0 the logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is
 forwarded to the log engines' ``write()`` method in order to provide better
 context to the engines.
 

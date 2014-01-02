@@ -159,8 +159,6 @@ methods.
 
 The required API for a CacheEngine is
 
-.. php:namespace:: Cake\Cache
-
 .. php:class:: CacheEngine
 
     The base class for all cache engines used with Cache.
