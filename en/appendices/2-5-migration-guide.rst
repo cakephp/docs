@@ -126,6 +126,15 @@ FileLog
   anymore if no stream is listening. Please make sure you got at least one default engine set up
   if you want to listen to all types and levels.
 
+Error
+=====
+
+ExceptionRenderer
+-----------------
+
+The ExceptionRenderer now populates the error templates with "code", "message" and "url" variables.
+"name" has been deprecated but is still available. This unifies the variables across all error templates.
+
 View
 ====
 
