@@ -34,7 +34,7 @@ basic table class would look like::
 Note that we did not tell the ORM which table to use for our class. By
 convention table objects will use a table that matches the lower cased and
 underscored version of the class name. In the above example the ``articles``
-table will be used. If our table class was named ``BlogPosts`` you table should
+table will be used. If our table class was named ``BlogPosts`` your table should
 be named ``blog_posts``. You can specify the table to using the ``table()``
 method::
 
@@ -72,7 +72,7 @@ Getting instances of a table class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
-and do this by using the ``TableRegistry`` class::
+can do this by using the ``TableRegistry`` class::
 
     use Cake\ORM\TableRegistry;
 
@@ -120,7 +120,7 @@ Building associations
 
 Defining relations between different objects in your application should be
 a natural process. For example, an article may have many comments, and belong
-to a author. Authors may have many articles and comments. CakePHP makes
+to an author. Authors may have many articles and comments. CakePHP makes
 managing these associations easy. The four association types in CakePHP are:
 hasOne, hasMany, belongsTo, and belongsToMany.
 
@@ -133,7 +133,7 @@ one to many   hasMany               A user can have multiple articles.
 ------------- --------------------- ---------------------------------------
 many to one   belongsTo             Many articles belong to a user.
 ------------- --------------------- ---------------------------------------
-many to many  belongsToMany         Tags belong to many Articles.
+many to many  belongsToMany         Tags belong to many articles.
 ============= ===================== =======================================
 
 Associations are defined during the ``inititalize()`` method of your table
@@ -627,7 +627,7 @@ entities from request data. You can convert a single entity using::
     $entity = $articles->newEntity($this->request->data());
 
 The request data should follow the structure of your entities. For example if
-you had the an article, which belonged to a user, and had many comments, your
+you had an article, which belonged to a user, and had many comments, your
 request data should look like::
 
     $data = [
@@ -850,7 +850,7 @@ a table::
         }
     }
 
-When calling list you can configure the fields used for the key and value with
+When calling ``list`` you can configure the fields used for the key and value with
 the ``fields`` option::
 
     $query = $articles->find('list', [
@@ -1068,7 +1068,7 @@ Caching loaded results
 
 When fetching entities that don't change often you may want to cache the
 results. By using the :php:class:`~Cake\Cache\Cache` class you can store the
-resultset in a persistent cache like Memcache. By adding caching around your finder
+result set in a persistent cache like Memcache. By adding caching around your finder
 methods you can easily cache results::
 
     namespace App\Model\Repository;
@@ -1472,9 +1472,9 @@ plural, camel cased version the association name. For example::
 
 When converting request data into entities, the ``newEntity`` and
 ``newEntities`` methods will handle both arrays of properties, as well as a list
-of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build select
-box or checkbox based form controls for belongs to many associations. See the
-:ref:`converting-request-data` section for more information.
+of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a 
+select box or checkbox based form controls for belongs to many associations. See
+the :ref:`converting-request-data` section for more information.
 
 When saving belongsToMany associations, you have the choice between 2 saving
 strategies:
