@@ -66,5 +66,5 @@ a record. In CakePHP you can use the ``touch()`` method to do exactly this::
     $orders->touch($order, 'Orders.completed');
 
 Touching records can be useful when you want to signal that a parent resource
-has changed when a child resource is added/updated. For example updating an
+has changed when a child resource is added/updated. For example: updating an
 article when a new comment is added.

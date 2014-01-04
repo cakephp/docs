@@ -15,8 +15,8 @@ Basic usage
 ===========
 
 You enable the CounterCache behavior like any other behavior, but it won't do
-anything until you configure some relations and fields counts should
-be stored in. Using our example above, we could cache the comment count each
+anything until you configure some relations and field counts that should
+be stored. Using our example above, we could cache the comment count each
 article with the following::
 
     class ArticlesTable extends Table {
