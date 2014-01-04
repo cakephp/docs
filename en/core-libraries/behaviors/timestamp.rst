@@ -7,8 +7,8 @@ Timestamp behavior
 
 The timestamp behavior allows your table objects to update one or more timestamp
 on each model event. This is primarily used to populate data into ``created``
-and ``updated`` fields. With some additional configuration, you can update any
-timestamp/datetime column on any event the table publishes.
+and ``updated`` fields. However, with some additional configuration, you can update any
+timestamp/datetime column on any event a table publishes.
 
 Basic usage
 ===========
@@ -25,14 +25,13 @@ The default configuration will do the following:
 
 - When a new entity is saved the ``created`` and ``updated`` fields will be set
   to the current time.
-- When an entity is updated, the ``updated`` field is updated.
+- When an entity is updated, the ``updated`` field is set to the current time.
 
 Using and configuring the behavior
 ==================================
 
 If you need to modify fields with different names, or want to update additional
-timestamp fields on custom events you can add the TimestampBehavior with some
-additional configuration::
+timestamp fields on custom events you can use some additional configuration::
 
     class OrdersTable extends Table {
         public function initialize(array $config) {
@@ -50,14 +49,14 @@ additional configuration::
         }
     }
 
-The above shows how you can use customized column names and subscribe to
-additional events as well.
+As you can see above, in addition to the standard ``Model.beforeSave`` event, we
+are also updating the ``completed_at`` column when orders are completed.
 
 Updating timestamps on entities
 ===============================
 
 Sometimes you'll want to update the just the timestamps on an entity without
-changing any other properties. This is sometimes refered to as 'touching'
+changing any other properties. This is sometimes referred to as 'touching'
 a record. In CakePHP you can use the ``touch()`` method to do exactly this::
 
     // Touch based on the Model.beforeSave event.
