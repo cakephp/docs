@@ -111,6 +111,7 @@ More information
 
     orm/database-basics
     orm/table-objects
+    orm/entities
     orm/behaviors
     orm/query-builder
     orm/schema-system

@@ -125,9 +125,8 @@ CakePHP.
 Error and Exception handling configuration
 ------------------------------------------
 
-See the sections on :ref:`error-configuration` and
-:ref:`exception-configuration` for information on configuring error and
-exception handlers.
+See the sections on :ref:`error-configuration` for information on configuring
+error and exception handlers.
 
 Logging configuration
 ---------------------
