@@ -15,9 +15,9 @@ Basic usage
 ===========
 
 You enable the CounterCache behavior like any other behavior, but it won't do
-anything until you configure some relations and field counts that should
-be stored. Using our example above, we could cache the comment count each
-article with the following::
+anything until you configure some relations and the field counts that should be
+stored on each of them. Using our example above, we could cache the comment
+count for each article with the following::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
@@ -67,8 +67,8 @@ a callback method. This callable must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
         'Comments' => [
-            'comment_count' => function($event, $entity, $table) {
-                return 42;
+            'rating_avg' => function($event, $entity, $table) {
+                return 4.5;
             }
         ]
     ]);
