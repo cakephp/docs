@@ -1,7 +1,9 @@
 Pagination
 ##########
 
-.. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
+.. php:namespace:: Cake\Controller\Component
+
+.. php:class:: PaginatorComponent
 
 One of the main obstacles of creating flexible and user-friendly
 web applications is designing an intuitive user interface. Many applications
@@ -305,12 +307,13 @@ arguments.
 
 Out of range page requests
 ==========================
-As of 2.3 the PaginatorComponent will throw a `NotFoundException` when trying to
+
+As of 2.3 the PaginatorComponent will throw a ``NotFoundException`` when trying to
 access a non-existent page, i.e. page number requested is greater than total
 page count.
 
 So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a `NotFoundException` is caught::
+block and take appropriate action when a ``NotFoundException`` is caught::
 
     public function index() {
         try {
@@ -321,19 +324,11 @@ block and take appropriate action when a `NotFoundException` is caught::
         }
     }
 
-AJAX Pagination
-===============
-
-It's very easy to incorporate AJAX functionality into pagination.
-Using the :php:class:`JsHelper` and :php:class:`RequestHandlerComponent` you can
-easily add Ajax pagination to your application. See :ref:`ajax-pagination` for
-more information.
-
 Pagination in the view
 ======================
 
-Check the :php:class:`PaginatorHelper` documentation for how to create links for
-pagination navigation.
+Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for
+how to create links for pagination navigation.
 
 
 .. meta::
