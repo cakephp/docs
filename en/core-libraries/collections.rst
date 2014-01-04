@@ -182,8 +182,8 @@ just the least value found::
 
     echo $yougest->name;
 
-You are also able to express the property to use for extracting the minimum by
-providing a property path or a callback function::
+You are also able to express the property to compare by providing a path or a
+callback function::
 
     $collection = new Collection($people);
     $personYougestChild = $collection->min(function($person) {
@@ -192,7 +192,86 @@ providing a property path or a callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-* max, groupBy, indexBy, countBy
+The same can be applied to the ``max`` function, which will returna single
+element from the collection having the highest property value::
+
+    $collection = new Collection($people);
+    $oldest = $collection->max('age');
+
+    $personOldestChild = $collection->max(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithOldestDad = $collection->min('dad.age');
+
+Grouping and counting
+---------------------
+
+Collection values can be grouped by different keys in a new collection when they
+share the same value for a property::
+
+    $students = [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy' 'grade' => 10],
+        ['name' => 'Barbara', 'grade' => 9]
+    ];
+    $collection = new Collection($students);
+    $studentsByGrade = $collection->groupBy('grade');
+
+    //Result will look like this when converted to array:
+    [
+      10 => [
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy' 'grade' => 10]
+      ],
+      9 => [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Barbara', 'grade' => 9]
+      ]
+    ]
+
+As usual, it is possible to provide either a dot separated path for nested
+properties or your own callback function to generate the groups dynamically::
+
+    $commentsByUserId = $comments->groupBy('user.id');
+
+    $classResults = $students->groupBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+I you only wish to know the number of occurrences per group, you can do so by
+using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
+should be already familiar to you::
+
+    $classResults = $students->groupBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+    //Result could look like this when converted to array:
+    ['approved' => 70, 'reproved' => 20]
+
+There will be certain cases where you know an element is unique for the property
+you want to group by. If you wish a single result per group, you can use the
+function ``indexBy``::
+
+    $usersById = $users->indexBy('id');
+
+    //When converted to array result could look like
+    [
+        1 => 'markstory',
+        3 => 'jose_zap'
+        4 => 'jrbasso'
+    ]
+
+As with the ``groupBy`` function oyu can also use a property path or
+a callback::
+
+    $articlesByAuthorId = $articles->indexBy('author.id');
+
+    $filesByHash = $files->indexBy(function($file) {
+        return md5($file);
+    });
 
 Sorting
 =======
