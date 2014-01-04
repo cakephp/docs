@@ -173,7 +173,26 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-* min, max, groupBy, indexBy, countBy,
+To extract the minimum value for a collection, based on a property, just use the
+``min`` function, this will return the full element from the collection and not
+just the least value found::
+
+    $collection = new Collection($people);
+    $youngest = $collection->min('age');
+
+    echo $yougest->name;
+
+You are also able to express the property to use for extracting the minimum by
+providing a property path or a callback function::
+
+    $collection = new Collection($people);
+    $personYougestChild = $collection->min(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithYoungestDad = $collection->min('dad.age');
+
+* max, groupBy, indexBy, countBy
 
 Sorting
 =======
