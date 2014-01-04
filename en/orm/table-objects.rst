@@ -1067,83 +1067,46 @@ Caching loaded results
 ----------------------
 
 When fetching entities that don't change often you may want to cache the
-results. By using the :php:class:`~Cake\Cache\Cache` class you can store the
-result set in a persistent cache like Memcache. By adding caching around your finder
-methods you can easily cache results::
+results. The ``Query`` class makes this simple::
 
-    namespace App\Model\Repository;
+    $query->cache('recent_articles');
 
-    use Cake\ORM\Query;
-    use Cake\ORM\Table;
-    use Cake\Cache\Cache;
+Will enable caching on the query's result set. If only one argument is provided
+to ``cache()`` then the 'default' cache configuration will be used. You can
+control which caching configuration is used with the second parameter::
 
-    class ArticlesTable extends Table {
+    // String config name.
+    $query->cache('recent_articles', 'dbResults');
 
-        public function findRecent(Query $query, array $options) {
-            $query->where(['created >=' => new DateTime('-5 days')])
-                ->where(['published' => true]);
-            return $query;
-        }
+    // Instance of CacheEngine
+    $query->cache('recent_articles', $memcache);
 
-        public function getRecent() {
-            return Cache::remember('recent_articles', function() {
-                return $this->find('recent')->toArray();
-            });
-        }
-    }
+In addition to supporting static keys, the ``cache()`` method accepts a function
+to generate the key. The function you give it will receive the query as an
+argument. You can then read aspects of the query to dynamically generate the
+cache key::
 
-You can also cache results using the ``Model.beforeFind`` callback::
+    // Generate a key based on a simple checksum
+    // of the query's where clause
+    $query->cache(function($q) {
+        return 'articles-' . md5(serialize($q->clause('where')));
+    });
 
-    namespace App\Model\Repository;
+The cache method makes it simple to add cached results to your custom finders or
+through event listeners.
 
-    use Cake\ORM\Query;
-    use Cake\ORM\Table;
-    use Cake\Cache\Cache;
+When the results for a cached query are fetched the following happens:
 
-    class ArticlesTable extends Table {
+1. The ``Model.beforeFind`` event is triggered.
+2. If the query has results set, those will be returned.
+3. The cache key will be resolved and cache data will be read. If the cache data
+   is not empty, those results will be returned.
+4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
+   created. This ``ResultSet`` will be written to the cache and returned.
 
-        public function initialize(array $config) {
+.. note::
 
-            // Use an event listener to cache results.
-            // (could also be in a behavior to do caching.)
-            $this->getEventManager()->attach(function ($event, $query, $options) {
-                if (empty($options['cacheKey'])) {
-                    return;
-                }
-
-                // Check the cache and store the query
-                // results.
-                $results = Cache::read($options['cacheKey']);
-                if ($results) {
-                    $query->setResult($results);
-                    return false;
-                }
-
-                // Turn on buffered results so we can
-                // cache and iterates the results.
-                $query->bufferResults(true);
-                $results = $query->getResults();
-
-                // Store the results in the cache and skip future
-                // query execution with setResult()
-                Cache::write($options['cacheKey'], $results);
-                $query->setResult($results);
-                return false;
-            }, 'Model.beforeFind');
-
-        }
-
-        public function findRecent(Query $query, array $options) {
-            $query->where(['created >=' => new DateTime('-5 days')])
-                ->where(['published' => true]);
-            return $query;
-        }
-    }
-
-In the above example any time a find is done with the ``cacheKey`` option it
-will automatically become a cached find. By combining some advanced features in
-the query builder with event listeners and caching you can build advanced
-functionality easily.
+    You cannot cache a streaming query result.
 
 Working with result sets
 ------------------------
