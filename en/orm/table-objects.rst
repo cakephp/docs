@@ -1337,7 +1337,7 @@ used. A sample validator method for our articles table would be::
     }
 
 You can have as many validation sets as you need. See the :doc:`validation
-chapter </core-utility-libraries/validation>` for more information on building
+chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
 
 Validation rules can use functions defined on any known providers. By default

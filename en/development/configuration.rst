@@ -107,8 +107,6 @@ Acl.classname, Acl.database
     Used for CakePHP’s Access Control List functionality. See
     the Access Control Lists chapter for more information.
 
-.. _database-configuration:
-
 Database Configuration
 ======================
 

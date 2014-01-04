@@ -14,9 +14,7 @@ will only be available in the ``3.0`` branch in git.
     :maxdepth: 1
 
     appendices/3-0-migration-guide
-
-
-
+    appendices/orm-migration
 
 General Information
 ===================
