@@ -66,10 +66,9 @@ deleted. This will often result in more queries being issued.
 
 .. note::
 
-   Associations will be reset before the matched records are deleted. If you
-   call bindModel() or unbindModel() to set the associations, you should set
-   *reset* to *false*.
-
+   Associations will be reset before the matched records are deleted in
+   deleteAll(). If you use bindModel() or unbindModel() to change the
+   associations, you should set *reset* to *false*.
 
 .. meta::
     :title lang=en: Deleting Data
