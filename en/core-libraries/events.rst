@@ -419,7 +419,7 @@ Additional Reading
 
 .. toctree::
 
-    /models/behaviors
+    /orm/behaviors
     /controllers/components
     /views/helpers
 

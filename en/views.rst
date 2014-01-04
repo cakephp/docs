@@ -800,7 +800,6 @@ More about Views
 .. toctree::
 
     views/themes
-    views/media-view
     views/json-and-xml-views
     views/helpers
 
