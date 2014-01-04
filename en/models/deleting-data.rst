@@ -64,6 +64,11 @@ deleted. This will often result in more queries being issued.
     deleteAll() will return true even if no records are deleted, as the conditions
     for the delete query were successful and no matching records remain.
 
+.. note::
+
+   Associations will be reset before the matched records are deleted in
+   deleteAll(). If you use bindModel() or unbindModel() to change the
+   associations, you should set *reset* to *false*.
 
 .. meta::
     :title lang=en: Deleting Data
