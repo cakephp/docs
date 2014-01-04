@@ -2,7 +2,7 @@
 ###################
 
 This page summarizes the changes from CakePHP 2.x that will assist in migrating
-a project to 3.0, as well as reference to get up to date with the changes made
+a project to 3.0, as well as a reference to get up to date with the changes made
 to the core since the CakePHP 2.x branch. Be sure to read the other pages in
 this guide for all the new features and API changes.
 
@@ -204,9 +204,9 @@ Named parameters required special handling in CakePHP as well as any PHP or
 JavaScript library that needed to interact with them, as named parameters are
 not implemented or understood by any library *except* CakePHP.  The additional
 complexity and code required to support named parameters did not justify their
-existance, and they have been removed.  In their place you should use standard
+existence, and they have been removed.  In their place you should use standard
 query string parameters or passed arguments.  By default ``Router`` will treat
-any additional parameters to ``Router::url()`` as querystring arguments.
+any additional parameters to ``Router::url()`` as query string arguments.
 
 Since many applications will still need to parse incoming URLs containing named
 parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
@@ -233,7 +233,7 @@ Router
 * String URLs are no longer modified by adding the plugin/controller/prefix names.
 * The default fallback route handling was removed.  If no routes
   match a parameter set `/` will be returned.
-* Route classes are responsible for *all* url generation including
+* Route classes are responsible for *all* URL generation including
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
@@ -302,9 +302,9 @@ Network\Http
 ============
 
 * ``HttpSocket`` is now :php:class:`Cake\\Network\\Http\\Client`.
-* Http\Client has been re-written from the ground up. It has a simpler/easy to
-  use API, support for new authentication systems like Oauth, and file uploads.
-  It uses PHP's stream APIs so there is no requirement for curl. See the
+* Http\Client has been re-written from the ground up. It has a simpler/easier to
+  use API, support for new authentication systems like OAuth, and file uploads.
+  It uses PHP's stream APIs so there is no requirement for cURL. See the
   :doc:`/core-utility-libraries/httpclient` documentation for more information.
 
 Network\Email
@@ -385,7 +385,7 @@ CookieComponent
 AuthComponent
 -------------
 
-- ``Blowfish`` is now the default password hasher used by authenticate classes.
+- ``Blowfish`` is now the default password hasher used by authentication classes.
   If you want to continue using SHA1 hashing used in 2.x use
   ``'passwordHasher' => 'Simple'`` in your authenticator configuration.
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
@@ -544,7 +544,7 @@ View\\Helper
 FormHelper
 ----------
 
-- The ``data[`` prefix was removed from all generated inputs.  The prefix served no real purpose anymore.
+- The ``data[`` prefix was removed from all generated inputs.  The prefix serves no real purpose anymore.
 
 PaginatorHelper
 ---------------
@@ -648,7 +648,7 @@ Security
   cryptographic practices. You should use :php:meth:`Security::rijndael()`
   instead.
 - The Configure value ``Security.cipherSeed`` is no longer required. With the
-  removal of ``Security::cipher()`` it served no use.
+  removal of ``Security::cipher()`` it serves no use.
 - Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
   to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
   version of CakePHP 2.x before migrating.
