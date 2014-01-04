@@ -131,13 +131,21 @@ Plugin
   load.
 
 Configure
-=========
+---------
 
 The config reader classes have been renamed:
 
-* ``Cake\\Configure\\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
-* ``Cake\\Configure\\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
-* ``Cake\\Configure\\ConfigReaderInterface`` renamed to :php:class:`Cake\\Configure\\ConfigEngineInterface`
+- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
+- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
+- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Configure\\ConfigEngineInterface`
+- :php:meth:`Cake\\Core\\Configure::consume()` was added.
+
+Object
+------
+
+- ``Object::log()`` was removed from Object and added to the :php:trait:`Cake\\Log\\LogTrait` class.
+- ``Object::requestAction()`` was removed from Object and added to the
+  :php:trait:`Cake\\Routing\\RequestActionTrait`.
 
 Console
 =======
@@ -285,8 +293,8 @@ Response
   doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
   which was a common annoyance when receiving a jQuery XHR request.
 
-Network\Session
-===============
+Network\\Session
+================
 
 * :php:class:`Cake\\Network\\Session` and related session classes have been
   moved under the ``Cake\Network`` namespace.
@@ -298,8 +306,8 @@ Network\Session
   To specify the request countdown value you can now use the ``Session.requestCountdown``
   config variable.
 
-Network\Http
-============
+Network\\Http
+=============
 
 * ``HttpSocket`` is now :php:class:`Cake\\Network\\Http\\Client`.
 * Http\Client has been re-written from the ground up. It has a simpler/easier to
@@ -307,8 +315,8 @@ Network\Http
   It uses PHP's stream APIs so there is no requirement for cURL. See the
   :doc:`/core-utility-libraries/httpclient` documentation for more information.
 
-Network\Email
-=============
+Network\\Email
+==============
 
 * :php:meth:`Cake\\Network\\Email\\Email::config()` is now used to define
   configuration profiles. This replaces the ``EmailConfig`` classes in previous
@@ -516,10 +524,10 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code.
 
-View
-====
+View class
+----------
 
-- Key ``plugin`` has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
+- The ``plugin`` key has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
   Specify the element name as ``SomePlugin.element_name`` instead.
 - ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
 
@@ -576,21 +584,6 @@ TimeHelper
 
 - ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were
   removed. These were magic methods for deprecated attributes.
-
-Core
-====
-
-Configure
----------
-
-- :php:meth:`Cake\\Core\\Configure::consume()` was added.
-
-Object
-------
-
-- ``Object::log()`` was removed from Object and added to the :php:trait:`Cake\\Log\\LogTrait` class.
-- ``Object::requestAction()`` was removed from Object and added to the
-  :php:trait:`Cake\\Routing\\RequestActionTrait`.
 
 I18n
 ====
