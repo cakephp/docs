@@ -129,7 +129,51 @@ to express complex conditions to match against.
 Aggregation
 ===========
 
-* min, max, reduce, extract, groupBy, indexBy, countBy,
+One of the most common uses for a ``map`` function is to extract a single column
+from a collection. If you are looking to build a list of elements containing the
+values for a particular property, you can use the ``extract`` method::
+
+    $collection = new Collection($people);
+    $names = $people->extract('name');
+
+    // $result contains ['mark', 'jose', 'barbara'];
+    $result = $new->toArray();
+
+As with many other function in the collection class, you are allowed to specify
+a dot separated path for extracting columns, this example will return
+a collection containing the author names for a list of articles::
+
+    $collection = new Collection($articles);
+    $names = $people->extract('author.name');
+
+    // $result contains ['Maria', 'Stacy', 'Larry'];
+    $result = $new->toArray();
+
+Finally, if the property you are looking after cannot be expressed as a path,
+you can use a callback function to return it::
+
+    $collection = new Collection($articles);
+    $names = $people->extract(function($article) {
+        return $article->author->name ', ' . $article->author->last_name;
+    });
+
+The counterpart of a ``map`` operation is usually a ``reduce``, this function
+will help you build a single result out of all the elements in a collection::
+
+    $totalPrice = $collection->reduce(function($orderLine, $accumulated) {
+        return $accumulated + $orderLine->price;
+    }, 0);
+
+In the above example, ``$totalPrice`` will be the sum of all single prices
+contained in the collection. Note the second argument for the ``reduce``
+function, it takes the initial value for the reduce operation you are
+performing::
+
+    $allTags = $collection->reduce(function($article, $accumulated) {
+        return array_merge($accumulated, $article->tags);
+    }, []);
+
+* min, max, groupBy, indexBy, countBy,
 
 Sorting
 =======
