@@ -33,27 +33,27 @@ The new ORM solves several problems by having more specialized and focused
 classes. In the past you would use ``Model`` and a Datasource for all
 operations. Now the ORM is split into more layers:
 
-* ``Cake\\Database\\Connection`` - Provides a platform independent way to create
+* ``Cake\Database\Connection`` - Provides a platform independent way to create
   and use connections. This class provides a way to use transactions,
   execute queries and access schema data.
-* ``Cake\\Database\\Dialect`` - The classes in this namespace provide platform
+* ``Cake\Database\Dialect`` - The classes in this namespace provide platform
   specific SQL and transform queries to work around platform specific
   limitations.
-* ``Cake\\Database\\Type`` - Is the gateway class to CakePHP database type
+* ``Cake\Database\Type`` - Is the gateway class to CakePHP database type
   conversion system. It is a pluggable framework for adding abstract column
   types and providing mappings between database,  PHP representations and PDO
   bindings for each data type. For example datetime columns are represented as
   ``DateTime`` instances in your code now.
-* ``Cake\\ORM\\Table`` - The main entry point into the new ORM. Provides access
+* ``Cake\ORM\Table`` - The main entry point into the new ORM. Provides access
   to a single table. Handles the definition of assocation, use of behaviors and
   creation of entities and query objects.
-* ``Cake\\ORM\\Behavior`` - The base class for behaviors, which act very similar
+* ``Cake\ORM\Behavior`` - The base class for behaviors, which act very similar
   to behaviors in previous versions of CakePHP.
-* ``Cake\\ORM\\Query`` - A fluent object based query builder that replaces
+* ``Cake\ORM\Query`` - A fluent object based query builder that replaces
   the deeply nested arrays used in previous versions of CakePHP.
-* ``Cake\\ORM\\ResultSet`` - A collection of results that gives powerful tools
+* ``Cake\ORM\ResultSet`` - A collection of results that gives powerful tools
   for manipulating data in aggregate.
-* ``Cake\\ORM\\Entity`` - Represents a single row result. Makes accessing data
+* ``Cake\ORM\Entity`` - Represents a single row result. Makes accessing data
   and serializing to various formats a snap.
 
 Now that you are more familiar with some of the classes you'll interact with
