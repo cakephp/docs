@@ -219,7 +219,7 @@ fields gave::
 
     class ReviewsTable extends Table {
         function findAverage(Query $query, array $options = []) {
-            $avg = $query->newExpr()->add('AVG(rating)');
+            $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;
         }
