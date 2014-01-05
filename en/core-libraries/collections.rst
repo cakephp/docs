@@ -139,9 +139,9 @@ values for a particular property, you can use the ``extract`` method::
     // $result contains ['mark', 'jose', 'barbara'];
     $result = $new->toArray();
 
-As with many other function in the collection class, you are allowed to specify
+As with many other functions in the collection class, you are allowed to specify
 a dot separated path for extracting columns, this example will return
-a collection containing the author names for a list of articles::
+a collection containing the author names from a list of articles::
 
     $collection = new Collection($articles);
     $names = $people->extract('author.name');
@@ -175,7 +175,7 @@ performing::
 
 To extract the minimum value for a collection, based on a property, just use the
 ``min`` function, this will return the full element from the collection and not
-just the least value found::
+just the smallest value found::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
@@ -192,7 +192,7 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-The same can be applied to the ``max`` function, which will returna single
+The same can be applied to the ``max`` function, which will return a single
 element from the collection having the highest property value::
 
     $collection = new Collection($people);
@@ -240,7 +240,7 @@ properties or your own callback function to generate the groups dynamically::
         retrun $student->grade > 6 ? 'approved' : 'reproved';
     });
 
-I you only wish to know the number of occurrences per group, you can do so by
+If you only wish to know the number of occurrences per group, you can do so by
 using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
@@ -264,7 +264,7 @@ function ``indexBy``::
         4 => 'jrbasso'
     ]
 
-As with the ``groupBy`` function oyu can also use a property path or
+As with the ``groupBy`` function you can also use a property path or
 a callback::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
