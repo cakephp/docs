@@ -1047,8 +1047,8 @@ notation::
 If you have defined some custom finder methods in your associated table, you can
 use them inside ``contain``::
 
-    //Bring all articles, but only bring the comments that are approved and
-    //popular
+    // Bring all articles, but only bring the comments that are approved and
+    // popular
     $query = $articles->find()->contain([
         'Comments' => function($q) {
            return $q->find('approved')->find('popular');
@@ -1097,7 +1097,7 @@ published articles using the following::
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtering by deep associations is surprisingly easy, yet the syntax should be
+Filtering by deep associations is surprisingly easy, and the syntax should be
 already familiar to you::
 
     $query = $products->find()->matching([
