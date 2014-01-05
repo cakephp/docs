@@ -202,10 +202,15 @@ on the fly::
         }
     }
 
-Once defined you can access your new property using ``$user->full_name``. While
-virtual fields are no longer an explicit feature of the ORM, adding calculated
-fields is easy to do in your finder methods. By using the query builder and
-expression objects you can achieve the same results that virtual fields gave::
+Once defined you can access your new property using ``$user->full_name``.
+Using the :ref:`map-reduce` features of the ORM allow you to build aggregated
+data from your results, which is another use case that the ``afterFind``
+callback was often used for.
+
+While virtual fields are no longer an explicit feature of the ORM, adding
+calculated fields is easy to do in your finder methods. By using the query
+builder and expression objects you can achieve the same results that virtual
+fields gave::
 
     namespace App\Model\Repository;
 
