@@ -120,15 +120,65 @@ The new ORM is a large departure from the existing ``Model`` layer, there are
 many important differences that are important in understanding how the new ORM
 operates and how to update your code.
 
-Recursive and ContainableBeahvior removed.
+Inflection rules updated
+------------------------
+
+You may have noticed that table classes have a pluralized name. In addition to
+tables having pluralized names, associations are also referred to in the plural
+form. This is in contrast to Model where names and associations were singular.
+There were a few reasons for this change:
+
+* Table classes represent **collections** of data, not single rows.
+* Associations link tables together, describing the relations between many
+  things.
+
+While the conventions for table objects are to always use plural forms, your
+entities will have their association properties populated based on the
+association type. BelongsTo and HasOne associations will use the singular form,
+while HasMany and BelongsToMany (HABTM) will use plural forms. The convention
+change for table objects is most apparent when building queries. Instead of
+expressing queries like::
+
+    // Wrong
+    $query->where(['User.active' => 1]);
+
+You need to use the plural form::
+
+    // Correct
+    $query->where(['Users.active' => 1]);
+
+Find returns a query object
+---------------------------
+
+TODO
+
+Finder method changes
+---------------------
+
+TODO
+
+
+Recursive and ContainableBehavior removed.
 ------------------------------------------
 
-TODO
+In previous versions of CakePHP you needed to use ``recursive``,
+``bindModel()``, ``unbindModel()`` and ``ContainableBehavior`` to reduce the
+loaded data to the set of associations you were interested in. A common tactic
+to manage associations was to set ``recursive`` to ``-1`` and use Containable to
+manage all associations. In CakePHP 3.0 ContainableBehavior, recursive,
+bindModel, and unbindModel have all been removed. Instead the ``contain()``
+method has been promoted to be a core feature of the query builder. Associations
+are only loaded if they are explicitly turned on. For example::
 
-Finder methods
---------------
+    $query = $this->Articles->find('all');
 
-TODO
+Will **only** load data from the ``articles`` table as no associations have been
+included. To load articles and their related authors you would do::
+
+    $query = $this->Articles->find('all')->contain(['Authors']);
+
+By only loading associated data that has been specifically requested you spend
+less time fighting the ORM trying to get only the data you want.
 
 No afterFind event
 ------------------
