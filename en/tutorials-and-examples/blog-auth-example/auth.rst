@@ -243,9 +243,11 @@ and add the following::
     // ...
 
 So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
-We're just missing a template view file for the login function:
+We're just missing a template view file for the login function. Open up your ``app/View/Users/login.ctp`` file and add the following lines:
 
 .. code-block:: php
+
+    //app/View/Users/login.ctp
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
