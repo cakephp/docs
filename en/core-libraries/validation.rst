@@ -161,10 +161,20 @@ callable including anonymous functions as validation rules::
 
     // Use a closure
     $validator->add('title', 'custom', [
-        'rule' => function($value, $providers) {
+        'rule' => function($value, $context) {
             // Custom logic that returns true/false
         }
     ]);
+
+Closures or callable methods will receive as last argument a ``$context`` array,
+it will contain values related to the validation process:
+
+    - **data**: The original data passed to the validation method, useful if you
+      plan to to create rules comparing values.
+    - **providers**: The complete list of rule provider objects, useful if you
+      need to create complex rules by calling multiple providers.
+    - **newRecord**: Whether the validation call is for a new record or
+      a pre-existent one.
 
 Defining conditions for validator
 ---------------------------------
@@ -177,11 +187,10 @@ values will make the rule apply to only create or update operations.
 Additionally you can provide a callable function that will determine whether or
 not a particular rule should be applied::
 
-    $data = $this->request->data();
     $validator->add('picture', 'file', [
             'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-            'on' => function($providers) use ($data) {
-                return !empty($data['show_profile_picture']);
+            'on' => function($context) {
+                return !empty($context['data']['show_profile_picture']);
             }
         ]);
 
