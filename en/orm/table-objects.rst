@@ -1058,13 +1058,13 @@ use them inside ``contain``::
 .. note::
 
     For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
-    ``select`` clauses are taken inconsideration when loading the associated
-    records. For the rest of the association type you can use every clause the
-    query object provides.
+    ``select`` clauses are used when loading the associated records. For the
+    rest of the association type you can use every clause that the query object
+    provides.
 
 If you need full control over the query that is generated, you can tell ``contain``
 to not append the ``foreignKey`` constraints to the generated query. In that
-case you may use an array and pass ``foreignKey`` and ``queryBuilder``::
+case you should use an array passing ``foreignKey`` and ``queryBuilder``::
 
     $query = $articles->find()->contain([
         'Authors' => [
@@ -1100,23 +1100,23 @@ published articles using the following::
 Filtering by deep associations is surprisingly easy, yet the syntax should be
 already familiar to you::
 
-    $query = $products->find()matching([
+    $query = $products->find()->matching([
         'Shops.Cities.Countries' => function($q) {
             return $q->where(['Country.name' => 'Japan'])
         }
     ]);
 
     // Bring unique articles that were commented by 'markstory'
-    $query = $articles->matching('Comments.Users', function($q) {
+    $query = $articles->find()->matching('Comments.Users', function($q) {
         return $q->where(['username' => 'markstory'])
     });
 
 .. note::
 
- As this function will create ``INNER JOIN``, you might want to consider
- calling ``distinct`` on the find query as you might get duplicate rows if
- your conditions don't filter them already. This might be the case, for example,
- of the same user commenting more than once in the same article.
+    As this function will create ``INNER JOIN``, you might want to consider
+    calling ``distinct`` on the find query as you might get duplicate rows if
+    your conditions don't filter them already. This might be the case, for example,
+    when the same users comments more than once on a single article.
 
 .. end-contain
 
