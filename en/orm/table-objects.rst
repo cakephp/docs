@@ -1103,8 +1103,20 @@ already familiar to you::
     $query = $products->find()matching([
         'Shops.Cities.Countries' => function($q) {
             return $q->where(['Country.name' => 'Japan'])
-        },
+        }
     ]);
+
+    // Bring unique articles that were commented by 'markstory'
+    $query = $articles->matching('Comments.Users', function($q) {
+        return $q->where(['username' => 'markstory'])
+    });
+
+.. note::
+
+ As this function will create ``INNER JOIN``, you might want to consider
+ calling ``distinct`` on the find query as you might get duplicate rows if
+ your conditions don't filter them already. This might be the case, for example,
+ of the same user commenting more than once in the same article.
 
 .. end-contain
 
