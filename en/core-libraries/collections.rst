@@ -129,7 +129,149 @@ to express complex conditions to match against.
 Aggregation
 ===========
 
-* min, max, reduce, extract, groupBy, indexBy, countBy,
+One of the most common uses for a ``map`` function is to extract a single column
+from a collection. If you are looking to build a list of elements containing the
+values for a particular property, you can use the ``extract`` method::
+
+    $collection = new Collection($people);
+    $names = $people->extract('name');
+
+    // $result contains ['mark', 'jose', 'barbara'];
+    $result = $new->toArray();
+
+As with many other functions in the collection class, you are allowed to specify
+a dot separated path for extracting columns, this example will return
+a collection containing the author names from a list of articles::
+
+    $collection = new Collection($articles);
+    $names = $people->extract('author.name');
+
+    // $result contains ['Maria', 'Stacy', 'Larry'];
+    $result = $new->toArray();
+
+Finally, if the property you are looking after cannot be expressed as a path,
+you can use a callback function to return it::
+
+    $collection = new Collection($articles);
+    $names = $people->extract(function($article) {
+        return $article->author->name ', ' . $article->author->last_name;
+    });
+
+The counterpart of a ``map`` operation is usually a ``reduce``, this function
+will help you build a single result out of all the elements in a collection::
+
+    $totalPrice = $collection->reduce(function($orderLine, $accumulated) {
+        return $accumulated + $orderLine->price;
+    }, 0);
+
+In the above example, ``$totalPrice`` will be the sum of all single prices
+contained in the collection. Note the second argument for the ``reduce``
+function, it takes the initial value for the reduce operation you are
+performing::
+
+    $allTags = $collection->reduce(function($article, $accumulated) {
+        return array_merge($accumulated, $article->tags);
+    }, []);
+
+To extract the minimum value for a collection, based on a property, just use the
+``min`` function, this will return the full element from the collection and not
+just the smallest value found::
+
+    $collection = new Collection($people);
+    $youngest = $collection->min('age');
+
+    echo $yougest->name;
+
+You are also able to express the property to compare by providing a path or a
+callback function::
+
+    $collection = new Collection($people);
+    $personYougestChild = $collection->min(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithYoungestDad = $collection->min('dad.age');
+
+The same can be applied to the ``max`` function, which will return a single
+element from the collection having the highest property value::
+
+    $collection = new Collection($people);
+    $oldest = $collection->max('age');
+
+    $personOldestChild = $collection->max(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithOldestDad = $collection->min('dad.age');
+
+Grouping and counting
+---------------------
+
+Collection values can be grouped by different keys in a new collection when they
+share the same value for a property::
+
+    $students = [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy' 'grade' => 10],
+        ['name' => 'Barbara', 'grade' => 9]
+    ];
+    $collection = new Collection($students);
+    $studentsByGrade = $collection->groupBy('grade');
+
+    //Result will look like this when converted to array:
+    [
+      10 => [
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy' 'grade' => 10]
+      ],
+      9 => [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Barbara', 'grade' => 9]
+      ]
+    ]
+
+As usual, it is possible to provide either a dot separated path for nested
+properties or your own callback function to generate the groups dynamically::
+
+    $commentsByUserId = $comments->groupBy('user.id');
+
+    $classResults = $students->groupBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+If you only wish to know the number of occurrences per group, you can do so by
+using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
+should be already familiar to you::
+
+    $classResults = $students->groupBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+    //Result could look like this when converted to array:
+    ['approved' => 70, 'reproved' => 20]
+
+There will be certain cases where you know an element is unique for the property
+you want to group by. If you wish a single result per group, you can use the
+function ``indexBy``::
+
+    $usersById = $users->indexBy('id');
+
+    //When converted to array result could look like
+    [
+        1 => 'markstory',
+        3 => 'jose_zap'
+        4 => 'jrbasso'
+    ]
+
+As with the ``groupBy`` function you can also use a property path or
+a callback::
+
+    $articlesByAuthorId = $articles->indexBy('author.id');
+
+    $filesByHash = $files->indexBy(function($file) {
+        return md5($file);
+    });
 
 Sorting
 =======
@@ -321,4 +463,7 @@ extracting operation once.
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :keywords collections, cakephp, append, sort, compile, contains, countBy,
+    each, every, extract, filter, first, firstMatch, groupBy, indexBy,
+    jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some,
+    random, sortBy, take, toArray
