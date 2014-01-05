@@ -1035,24 +1035,18 @@ you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP::
 
     $query = $articles->find('all')
-    $query->contain([
-        'Tags' => [
-            'matching' => true,
-            'conditions' => ['Tags.name' => 'CakePHP']
-        ]
-    ]);
+    $query->matching('Tags', function($q) {
+        return $q->where(['Tags.name' => 'CakePHP']);
+    });
 
 You can apply this strategy to HasMany associations as well. For example if
 'Authors HasMany Articles', you could find all the authors with recently
 published articles using the following::
 
     $query = $authors->find('all')
-    $query->contain([
-        'Articles' => [
-            'matching' => true,
-            'conditions' => ['Articles.created >=' => new DateTime('-10 days')]
-        ]
-    ]);
+    $query->matching('Articles', function($q) {
+        return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
+    });
 
 .. end-contain
 
