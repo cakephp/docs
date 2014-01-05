@@ -1000,41 +1000,90 @@ associations to be loaded::
         'Authors' => ['Addresses'], 'Comments' => ['Authors']
     ]);
 
+Alternatively, you can express nested associations using the dot notation::
+
+    $query = $articles->find()->contain([
+        'Authors.Addresses',
+        'Comments.Authors'
+    ]);
+
+You can eager load associations as deep as you like::
+
+    $query = $products->find()->contain([
+        'Shops.Cities.Countries',
+        'Shops.Managers'
+    ]);
+
 If you need to reset the containments on a query you can set the second argument
 to ``true``::
 
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
 
-When containing associations you can pass additional options to control how much
-data is fetched from the associations. The following keys can be used:
+Passing conditions to contain
+-----------------------------
 
-* ``fields`` A list of fields you want to load from the association.
-* ``sort`` The sort conditions for the associated data. These sort criteria will
-  replace those defined in the association.
-* ``conditions`` Additional conditions for the associated data. These conditions
-  will be merged with the conditions defined in the association.
+When using ``contain`` you are able to restrict the data returned by the
+associations and filter them by conditions::
 
-A more complete example of this would be::
+    $query = $articles->find()->contain([
+        'Comments' => function($q) {
+           return $q
+                ->select(['body', 'author_id'])
+                ->where(['Comments.approved' => true])
+        }
+    ]);
+
+Is is also possible to restrict deeply nested associations using the dot
+notation::
+
+    $query = $articles->find()->contain([
+        'Comments'
+        'Authors.Profiles' => function($q) {
+            return $q->where(['Profiles.is_published' => true]);
+        }
+    ]);
+
+If you have defined some custom finder methods in your associated table, you can
+use them inside ``contain``::
+
+    //Bring all articles, but only bring the comments that are approved and
+    //popular
+    $query = $articles->find()->contain([
+        'Comments' => function($q) {
+           return $q->find('approved')->find('popular');
+        }
+    ]);
+
+.. note::
+
+    For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
+    ``select`` clauses are taken inconsideration when loading the associated
+    records. For the rest of the association type you can use every clause the
+    query object provides.
+
+If you need full control over the query that is generated, you can tell ``contain``
+to not append the ``foreignKey`` constraints to the generated query. In that
+case you may use an array and pass ``foreignKey`` and ``queryBuilder``::
 
     $query = $articles->find()->contain([
         'Authors' => [
-            'fields' => ['username', 'author_id']
-            'conditions' => ['Authors.is_admin' => true],
-            'sort' => ['Authors.id' => 'DESC']
+            'foreignKey' => false,
+            'queryBuilder' => funtction($q) {
+                return $q->where(...) // Full conditions for filtering
+            }
         ]
     ]);
 
-
-Using the 'matching' option when finding results
-------------------------------------------------
+Using 'matching' when finding results
+-------------------------------------
 
 A fairly common query case with associations is finding records 'matching'
 specific associated data. For example if you have 'Articles belongsToMany Tags'
 you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP::
 
-    $query = $articles->find('all')
+    $query = $articles->find()
     $query->matching('Tags', function($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
@@ -1043,10 +1092,19 @@ You can apply this strategy to HasMany associations as well. For example if
 'Authors HasMany Articles', you could find all the authors with recently
 published articles using the following::
 
-    $query = $authors->find('all')
+    $query = $authors->find()
     $query->matching('Articles', function($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
+
+Filtering by deep associations is surprisingly easy, yet the syntax should be
+already familiar to you::
+
+    $query = $products->find()matching([
+        'Shops.Cities.Countries' => function($q) {
+            return $q->where(['Country.name' => 'Japan'])
+        },
+    ]);
 
 .. end-contain
 
