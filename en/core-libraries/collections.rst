@@ -463,4 +463,7 @@ extracting operation once.
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :keywords collections, cakephp, append, sort, compile, contains, countBy,
+    each, every, extract, filter, first, firstMatch, groupBy, indexBy,
+    jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some,
+    random, sortBy, take, toArray
