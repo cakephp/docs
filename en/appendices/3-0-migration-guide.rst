@@ -597,6 +597,10 @@ I18n
   - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
 - Since having mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
+- Error messages through out CakePHP are no longer passed throught I18n
+  functions. This was done to simplify the internals of CakePHP and reduce
+  overhead. The developer facing messages are rarely if ever actually translated
+  so the additional overhead reaps very little benefit.
 
 L10n
 ====
