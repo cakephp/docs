@@ -180,10 +180,45 @@ included. To load articles and their related authors you would do::
 By only loading associated data that has been specifically requested you spend
 less time fighting the ORM trying to get only the data you want.
 
-No afterFind event
-------------------
+No afterFind event or virtual fields
+------------------------------------
 
-TODO
+In previous versions of CakePHP you needed to make extensive use of the
+``afterFind`` callback and virtual fields in order to create generated data
+properties. These features have been removed in 3.0. Because of how ResultSets
+iteratively generate entities, the ``afterFind`` callback was not possible.
+Both afterFind and virtual fields can largely be replaced with virtual
+properies on entities. For example if your User entity has both first and last
+name columns you can add an accessor for `full_name` and generate the property
+on the fly::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+
+    class User extends Entitiy {
+        public function getFullName() {
+            return $this->first_name . '  ' $this->last_name;
+        }
+    }
+
+Once defined you can access your new property using ``$user->full_name``. While
+virtual fields are no longer an explicit feature of the ORM, adding calculated
+fields is easy to do in your finder methods. By using the query builder and
+expression objects you can achieve the same results that virtual fields gave::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
+
+    class ReviewsTable extends Table {
+        function findAverage(Query $query, array $options = []) {
+            $avg = $query->newExpr()->add('AVG(rating)');
+            $query->select(['average' => $avg]);
+            return $query;
+        }
+    }
 
 Validation and associations no longer properties
 ------------------------------------------------
@@ -201,7 +236,4 @@ Updating behaviors
 * Base class changed.
 * Mixin method signature changes.
 * Event method signature changes.
-
-Updating datasources
-====================
 
