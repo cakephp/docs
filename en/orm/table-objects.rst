@@ -1030,7 +1030,7 @@ associations and filter them by conditions::
         'Comments' => function($q) {
            return $q
                 ->select(['body', 'author_id'])
-                ->where(['Comments.approved' => true])
+                ->where(['Comments.approved' => true]);
         }
     ]);
 
@@ -1038,7 +1038,7 @@ Is is also possible to restrict deeply nested associations using the dot
 notation::
 
     $query = $articles->find()->contain([
-        'Comments'
+        'Comments',
         'Authors.Profiles' => function($q) {
             return $q->where(['Profiles.is_published' => true]);
         }
