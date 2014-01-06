@@ -150,13 +150,117 @@ You need to use the plural form::
 Find returns a query object
 ---------------------------
 
-TODO
+One important difference in the new ORM is that calling find on a table will
+not return the results immediately, but will return a Query object, this serves
+several purposes.
+
+It is possible to alter queries further, after calling ``find``::
+
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find();
+    $query->where(['author_id' => 1])->order(['title' => 'DESC']);
+
+It is possible to stack custom finders to append conditions, sorting, limit and
+any other clause to the same query before it is executed::
+
+    $query = $articles->find('approved')->find('popular');
+    $query->find('latest');
+
+You can compose queries one into the other to create subqueries easier than
+ever::
+
+    $query = $articles->find('approved');
+    $favoritesQuery =  $article->find('favorites', ['for' => $user]);
+    $query->where(['id' => $favoritesQuery->select(['id'])]);
+
+You can decorate queries with iterators and call methods without even touching
+the database, this is great when you have parts of your view cached and having
+the results taken from the database is not actually required::
+
+    // No queries made in this example!
+    $results = $articles->find()
+        ->order(['title' => 'DESC'])
+        ->extract('title');
+
+Queries can be seen as the result object, trying to iterate the query, calling
+``toArray`` or any method inherited from ref:`collection<collection-objects>`,
+will result in the query being executed and results returned to you.
+
+The biggest different you will find when coming from CakePHP 2.x is that
+``find('first')`` does not exist anymore. There is a trivial replacement for it,
+and it is the ``first`` method::
+
+    // Before
+    $article = $this->Article->find('first');
+
+    // Now
+    $article = $this->Articles->find()->first();
+
+    // Before
+    $article = $this->Article->find('first', [
+        'conditions' => ['author_id' => 1]
+    ]);
+
+    // Now
+    $article = $this->Articles->find('all', [
+        'conditions' => ['author_id' => 1]
+    ])->first();
+
+If you are a loading a single record by its primary key, it will be better to
+just call ``get``::
+
+    $article = $this->Articles->get(10);
 
 Finder method changes
 ---------------------
 
-TODO
+Returning a query object from a find method has several advantages, but comes at
+a cost for people migrating from 2.x. If you had some custom find methods in
+your models, they will need some modifications. This is how you create custom
+finder methods in 3.0::
 
+    class ArticlesTable {
+
+        public function findPopular($query, $options = []) {
+            return $query->where(['times_viewed' > 1000]);
+        }
+
+        public function findFavorites($query, $options = []) {
+            $for = $options['for'];
+            return $query->matching('Users.Favorites' => function($q) use ($for) {
+                return $q->where(['Favorites.user_id' => $for]);
+            });
+        }
+    }
+
+As you can see, they are pretty straightforward, they get a Query object instead
+of an array and they should return a Query object back. For 2.x users that
+implemented afterFind logic in custom finders, you can check the :ref:`map-reduce`
+section, or just use the collection functions.
+
+You may have noticed that custom finders receive an options array, you can pass
+any extra information to your finder using this parameter, but it also means
+good news for people migrating from 2.x. Any of the query keys that were used in
+previous versions will be converted automatically for you in 3.x to the correct
+functions::
+
+    // This works in both CakePHP 2.x and 3.0
+    $articles = $this->Articles->find('all', [
+        'fields' => ['id', 'title'],
+        'conditions' => [
+            'OR' => ['title' => 'Cake', 'author_id' => 1],
+            'published' => true
+        ],
+        'contain' => ['Authors'], // The only change! (notice plural)
+        'order' => ['title' => 'DESC'],
+        'limit' => 10,
+    ]);
+
+Hopefully, migrating from older versions is not as daunting as it first seems,
+much of the features we have added helps you remove code as you can better
+express your requirements using the new ORM and at the same time the
+compatibility wrappers will help you rewrite those tiny differences in a fast
+and painless way.
 
 Recursive and ContainableBehavior removed.
 ------------------------------------------
