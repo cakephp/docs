@@ -641,7 +641,7 @@ Sanitize
 Security
 --------
 
-- ``Security::cipher()`` has been removed. It is insecure and promotes bad
+- ``Security::cipher()`` has been removed. It is insecure and promoted bad
   cryptographic practices. You should use :php:meth:`Security::rijndael()`
   instead.
 - The Configure value ``Security.cipherSeed`` is no longer required. With the
@@ -656,3 +656,4 @@ Time
 - ``CakeTime`` was renamed to :php:class:`Cake\\Utility\\Time`.
 - ``Time::__set()`` and - ``Time::__get()`` were removed. These were
   magic setter/getter methods for backwards compatibility.
+- ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
