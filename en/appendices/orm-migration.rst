@@ -196,7 +196,7 @@ on the fly::
 
     use Cake\ORM\Entity;
 
-    class User extends Entitiy {
+    class User extends Entity {
         public function getFullName() {
             return $this->first_name . '  ' $this->last_name;
         }
