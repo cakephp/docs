@@ -1059,7 +1059,7 @@ use them inside ``contain``::
 
     For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
     ``select`` clauses are used when loading the associated records. For the
-    rest of the association type you can use every clause that the query object
+    rest of the association types you can use every clause that the query object
     provides.
 
 If you need full control over the query that is generated, you can tell ``contain``
@@ -1083,7 +1083,7 @@ specific associated data. For example if you have 'Articles belongsToMany Tags'
 you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP::
 
-    $query = $articles->find()
+    $query = $articles->find();
     $query->matching('Tags', function($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
@@ -1092,7 +1092,7 @@ You can apply this strategy to HasMany associations as well. For example if
 'Authors HasMany Articles', you could find all the authors with recently
 published articles using the following::
 
-    $query = $authors->find()
+    $query = $authors->find();
     $query->matching('Articles', function($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
@@ -1113,7 +1113,7 @@ already familiar to you::
 
 .. note::
 
-    As this function will create ``INNER JOIN``, you might want to consider
+    As this function will create an ``INNER JOIN``, you might want to consider
     calling ``distinct`` on the find query as you might get duplicate rows if
     your conditions don't filter them already. This might be the case, for example,
     when the same users comments more than once on a single article.
