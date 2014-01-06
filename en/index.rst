@@ -24,12 +24,6 @@ the documentation.
 Getting started
 ===============
 
-Build a blog
-------------
-
-Get started with the :doc:`blog tutorial</tutorials-and-examples/blog/blog>`.
-You'll learn the basics of CakePHP, and build a basic blog in the process.
-
 Conventions
 -----------
 

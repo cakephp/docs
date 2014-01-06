@@ -16,7 +16,6 @@ Contents
    console-and-shells
    development
    deployment
-   tutorials-and-examples
    contributing
    appendices
 
