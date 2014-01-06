@@ -170,7 +170,7 @@ You can compose queries one into the other to create subqueries easier than
 ever::
 
     $query = $articles->find('approved');
-    $favoritesQuery =  $article->find('favorites', ['for' => $user]);
+    $favoritesQuery = $article->find('favorites', ['for' => $user]);
     $query->where(['id' => $favoritesQuery->select(['id'])]);
 
 You can decorate queries with iterators and call methods without even touching
@@ -186,7 +186,7 @@ Queries can be seen as the result object, trying to iterate the query, calling
 ``toArray`` or any method inherited from ref:`collection<collection-objects>`,
 will result in the query being executed and results returned to you.
 
-The biggest different you will find when coming from CakePHP 2.x is that
+The biggest difference you will find when coming from CakePHP 2.x is that
 ``find('first')`` does not exist anymore. There is a trivial replacement for it,
 and it is the ``first`` method::
 
