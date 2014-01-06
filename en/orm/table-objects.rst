@@ -923,7 +923,7 @@ effortlessly. Assuming you have both the 'published' and 'recent' finders, you
 could do the following::
 
     $articles = TableRegistry::get('Articles');
-    $query = $articles->find('publshed')->find('recent');
+    $query = $articles->find('published')->find('recent');
 
 While all the examples so far have show finder methods on table classes, finder
 methods can also be defined on :doc:`/orm/behaviors`.
