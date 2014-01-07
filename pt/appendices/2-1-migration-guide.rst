@@ -114,7 +114,7 @@ App
 - :php:meth:`App::build()` agora tem a capacidade de registrar novos pacotes usando
   ``App::REGISTER``. Veja :ref:`app-build-register` para mais informações.
 - As classes que não podem ser encontradas nos caminhos configurados serão pesquisados
-  ​dentro de ``APP``, como um caminho alternativo. Isso torna o carregamento automático
+  dentro de ``APP``, como um caminho alternativo. Isso torna o carregamento automático
   dos diretórios aninhados em ``app/Vendedor`` mais fácil.
 
 Console
@@ -317,7 +317,7 @@ FormHelper
   como 'N' ao invés de apenas 0.
 - O atributo ``for`` para campos datetime agora reflete o primeiro campo gerado. Isso pode
   resultar na mudança do atributo ``for`` de acordo com os campo geradas.
-- O atributo ``type`` para :php:meth:`FormHelper::button()` pode ​​ser removido agora. O padrão
+- O atributo ``type`` para :php:meth:`FormHelper::button()` pode ser removido agora. O padrão
   ainda é 'submit'.
 - :php:meth:`FormHelper::radio()` agora permite que você desabilite todas as opções. Você pode fazer
   isso definindo ``'disabled' => true`` ou ``'disabled' => 'disabled'`` no array ``$attributes``.
