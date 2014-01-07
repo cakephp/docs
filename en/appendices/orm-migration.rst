@@ -234,13 +234,13 @@ finder methods in 3.0::
     }
 
 As you can see, they are pretty straightforward, they get a Query object instead
-of an array and they should return a Query object back. For 2.x users that
-implemented afterFind logic in custom finders, you can check the :ref:`map-reduce`
+of an array and must return a Query object back. For 2.x users that implemented
+afterFind logic in custom finders, you should check out the :ref:`map-reduce`
 section, or just use the collection functions.
 
 You may have noticed that custom finders receive an options array, you can pass
-any extra information to your finder using this parameter, but it also means
-good news for people migrating from 2.x. Any of the query keys that were used in
+any extra information to your finder using this parameter. This is great
+news for people migrating from 2.x. Any of the query keys that were used in
 previous versions will be converted automatically for you in 3.x to the correct
 functions::
 
@@ -261,6 +261,11 @@ much of the features we have added helps you remove code as you can better
 express your requirements using the new ORM and at the same time the
 compatibility wrappers will help you rewrite those tiny differences in a fast
 and painless way.
+
+One of the other nice improvements in 3.x around finder methods is that
+behaviors can implement finder methods with no fuss. By simply defining a method
+with a matching name and signature on a Behavior the finder will automatically
+be available on any tables the behavior is attached to.
 
 Recursive and ContainableBehavior removed.
 ------------------------------------------
