@@ -78,6 +78,10 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
         'CAKE_CORE_INCLUDE_PATH',
         ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
+    
+.. note::
+
+    If you are planning to create unit tests for your application you'll also need to make the above change to ``webroot/test.php``
 
 If you're installing any other libraries with Composer, you'll need to setup
 the autoloader, and work around an issue in Composer's autoloader. In your
