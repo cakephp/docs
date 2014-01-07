@@ -35,6 +35,10 @@ CompletionShell
 Controller
 ==========
 
+AuthComponent
+-------------
+- ``loggedIn()`` is now deprecated and will be removed in 3.0.
+
 CookieComponent
 ---------------
 
