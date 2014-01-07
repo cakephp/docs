@@ -161,13 +161,13 @@ déterminer si votre application est ou n'est pas dans un sous-dossier.
 Inspecter la requête
 ====================
 
-Détecter les différentes conditions de la requête utilisée en utilisant
-:php:class:`RequestHandlerComponent`. Ces méthodes ont été déplacées dans
-``CakeRequest``, et offrent une nouvelle interface compatible avec les
-utilisations anciennes::
+Dans les anciennes versions, détecter les différentes conditions de la requête
+nécéssitait :php:class:`RequestHandlerComponent`. Ces méthodes ont été déplacées
+dans ``CakeRequest``, ce qui offre une nouvelle interface tout le long,
+compatible avec les utilisations anciennes::
 
     $this->request->is('post');
-    $this->request->isPost();
+    $this->request->isPost(); // déprécié
 
 Les deux méthodes appelées vont retourner la même valeur. Pour l'instant,
 les méthodes sont toujours disponibles dans RequestHandler, mais sont
