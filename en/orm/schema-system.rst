@@ -5,14 +5,14 @@ Schema System
 
 CakePHP features a schema system that is capable of reflecting and generating
 schema information for tables in SQL datastores. The schema system can
-generate/reflect schema for any SQL platform that CakePHP supports.
+generate/reflect a schema for any SQL platform that CakePHP supports.
 
 The main pieces of the schema system are ``Cake\Database\Schema\Table`` and
 ``Cake\Database\Schema\Collection``. These classes give you access to
-database wide and individual table object features respectively.
+database-wide and individual Table object features respectively.
 
 The primary use of the schema system is for :ref:`test-fixtures`. However, it
-can also be used in your applications if required.
+can also be used in your application if required.
 
 Schema\\Table objects
 =====================
@@ -55,7 +55,7 @@ following two forms are equivalent::
     ]);
 
 While equivalent, the 2nd form allows more detail and control. This emulates
-the existing features available in Schema files + fixture schema in 2.x.
+the existing features available in Schema files + the fixture schema in 2.x.
 
 Accessing column data
 ---------------------
@@ -207,7 +207,7 @@ platform specific SQL for creating or dropping a specific table::
 By using a connection's driver the schema data can be converted into platform
 specific SQL. The return of ``createSql`` and ``dropSql`` is a list of SQL
 queries required to create a table and the required indexes. Some platforms may
-require multiple statements to create tables with comments, and or indexes. An
+require multiple statements to create tables with comments and/or indexes. An
 array of queries is always returned.
 
 
@@ -217,7 +217,7 @@ Schema Collections
 .. php:class:: Collection
 
 ``Collection`` provides access to the various tables available on a connection.
-You an use it to get the list of tables or reflect tables into
+You can use it to get the list of tables or reflect tables into
 :php:class:`Table` objects. Basic usage of the class looks like::
 
     $db = ConnectionManager::get('default');
