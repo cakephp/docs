@@ -249,6 +249,19 @@ Une fois que le fichier web.config est créé avec les bonnes règles de
 réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
 
+URL-Rewriting sur lighttpd
+==========================
+
+Lighttpd ne supporte pas les fonctions .htaccess, par conséquent vous pouvez
+retirer tous les fichiers .htaccess. Dans la configuration lighttpd,
+assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
+
+::
+
+    url.rewrite-if-not-file =(
+        "^([^\?]*)(\?(.+))?$" =&gt; "/index.php?url=$1&amp;$3"
+    )
+
 Je ne veux / ne peux utiliser l'URL rewriting
 =============================================
 
