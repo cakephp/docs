@@ -693,7 +693,7 @@ methods of the HtmlHelper and how to use them.
 
         $this->Html->scriptStart(array('inline' => false));
 
-        echo $this->Js->alert('I am in the javascript');
+        echo $this->Js->alert('I am in the JavaScript');
 
         $this->Html->scriptEnd();
 

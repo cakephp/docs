@@ -58,7 +58,7 @@ Sending data through the X-CSRF-Token header
 
 In addition to request data parameters, CSRF tokens can be submitted through
 a special ``X-CSRF-Token`` header. Using a header often makes it easier to
-integrate a CSRF token with javascript heavy applications, or XML/JSON based API
+integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
 Disabling the CSRF Component for specific actions

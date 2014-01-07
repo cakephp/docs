@@ -694,7 +694,7 @@ To call any view method use ``$this->method()``
 
     Adds content to the internal scripts buffer. This buffer is made
     available in the layout as ``$scripts_for_layout``. This method is
-    helpful when creating helpers that need to add javascript or css
+    helpful when creating helpers that need to add JavaScript or CSS
     directly to the layout. Keep in mind that scripts added from the
     layout, or elements in the layout will not be added to
     ``$scripts_for_layout``. This method is most often used from inside
