@@ -61,7 +61,7 @@ a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with javascript heavy applications, or XML/JSON based API
 endpoints.
 
-Disabling the CSRF Component For Specific Actions
+Disabling the CSRF Component for specific actions
 =================================================
 
 While not recommended, you may want to disable the CsrfComponent on certain
