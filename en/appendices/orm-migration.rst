@@ -5,7 +5,7 @@ CakePHP 3.0 features a new ORM that has been re-written from the ground up.
 While the ORM used in 1.x and 2.x has served us well for a long time it had
 a few issues that we wanted to fix.
 
-* Frankenstein - is it a record, or a table? Currently its both.
+* Frankenstein - is it a record, or a table? Currently it's both.
 * Inconsistent API - Model::read() for example.
 * No query object - Queries are always defined as arrays, this has some
   limitations and restrictions. For example it makes doing unions and
@@ -19,7 +19,7 @@ a few issues that we wanted to fix.
   are included, not a level of recursiveness.
 * DboSource - It is a beast, and Model relies on it more than datasource.  That
   separation could be cleaner and simpler.
-* Validation - Should be separate, its a giant crazy function right now.  Making
+* Validation - Should be separate, it's a giant crazy function right now.  Making
   it a reusable bit would make the framework more extensible.
 
 The ORM in CakePHP 3.0 solves these and many more problems. The new ORM
@@ -150,8 +150,8 @@ You need to use the plural form::
 Find returns a query object
 ---------------------------
 
-One important difference in the new ORM is that calling find on a table will
-not return the results immediately, but will return a Query object, this serves
+One important difference in the new ORM is that calling ``find`` on a table will
+not return the results immediately, but will return a Query object; this serves
 several purposes.
 
 It is possible to alter queries further, after calling ``find``::
