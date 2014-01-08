@@ -13,7 +13,7 @@ Configuration
 =============
 
 By convention database connections are configured in ``App/Config/app.php``. The
-connection information defined in this file, is fed into
+connection information defined in this file is fed into
 :php:class:`Cake\\Database\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
 ``App/Config/app.default.php``. A sample connection configuration would look
@@ -117,7 +117,7 @@ naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
 example, if you name your database table big\_boxes, your table
 BigBoxesTable, and your controller BigBoxesController, everything will
-together automatically. By convention, use underscores, lower case,
+work together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
@@ -167,7 +167,7 @@ Data types
 .. php:class:: Type
 
 Since not every database vendor includes the same set of data types, or
-the same names for similar data types. CakePHP provides a set of abstracted
+the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
@@ -209,7 +209,7 @@ provides, and schema generation features CakePHP uses when using test fixtures.
 Each type can also provide translation functions between PHP and SQL
 representations. These methods are invoked based on the type hints provided when
 doing queries. For example a column that is marked as 'datetime' will
-automatically convert input parameters from ``DateTime`` instances into
+automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
@@ -423,7 +423,7 @@ individual elements using ``bindValue``::
     $stmt->bindValue(0, true, 'boolean');
     $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
 
-When creating statements you can also use named parameters instead of
+When creating statements you can also use named array keys instead of
 positional ones::
 
     $stmt = $conn->prepare(
@@ -442,7 +442,7 @@ positional ones::
 
 .. warning::
 
-    You cannot mix positional and named parameters in the same statement.
+    You cannot mix positional and named array keys in the same statement.
 
 Executing & fetching rows
 -------------------------
