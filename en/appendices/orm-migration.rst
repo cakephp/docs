@@ -334,15 +334,38 @@ fields gave::
         }
     }
 
-Validation and associations no longer properties
-------------------------------------------------
+Associations no longer defined as properties
+--------------------------------------------
+
+TODO
+
+Validation no longer defined as a property
+------------------------------------------
 
 TODO
 
 Identifier quoting disabled by default
 --------------------------------------
 
-TODO
+In the past CakePHP has always quoted identifiers. Parsing SQL snippets and
+attempting to quote identifiers was both error prone and expensive. If you are
+following the conventions CakePHP sets out, the cost of identifier quoting far
+outweighs any benefit. For these reasons identifier quoting has been disabled by
+default in 3.0. You should only need to enable identifier quoting if you are
+using column or table names that contain special characters or are reserved
+words. You can enable identifier quoting when configuring a connection::
+
+    // in App/Config/app.php
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Driver\Mysql',
+            'login' => 'root',
+            'password' => 'super_secret',
+            'host' => 'localhost',
+            'database' => 'cakephp',
+            'quoteIdentifiers' => true
+        ]
+    ],
 
 Updating behaviors
 ==================
