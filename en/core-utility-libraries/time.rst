@@ -166,23 +166,6 @@ Formatting
         use Cake\Utility\Time;
         echo Time::nice('2011-08-22 11:53:00');
 
-.. php:method:: niceShort($dateString = NULL, $timezone = NULL)
-
-    :rtype: string
-
-    Takes a date string and outputs it in the format "Jan
-    1st 2008, 19:25". If the date object is today, the format will be
-    "Today, 19:25". If the date object is yesterday, the format will be
-    "Yesterday, 19:25"::
-
-        // called via TimeHelper
-        echo $this->Time->niceShort('2011-08-22 11:53:00');
-        // Aug 22nd, 11:53
-
-        // called as Time
-        use Cake\Utility\Time;
-        echo Time::niceShort('2011-08-22 11:53:00');
-
 .. php:method:: timeAgoInWords($dateString, $options = array())
 
     :rtype: string
