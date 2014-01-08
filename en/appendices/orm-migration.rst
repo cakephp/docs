@@ -337,12 +337,76 @@ fields gave::
 Associations no longer defined as properties
 --------------------------------------------
 
-TODO
+In previous versions of CakePHP the various associations your models had were
+defined in properties like ``$belongsTo`` and ``$hasMany``. In CakePHP 3.0,
+associations are created with methods. Using methods allows us to sidestep the
+limitations class definitions have, and create only one way to define
+associations. Whether in your initialize method or anywhere else associations
+are always created with the same methods::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
+
+    class ReviewsTable extends Table {
+
+        public function initialize(array $config) {
+            $this->belongsTo('Movies');
+            $this->hasOne('Rating');
+            $this->hasMany('Comments')
+            $this->belongsToMany('Tags')
+        }
+
+    }
+
+As you can see from the example above each of the association types has a method
+used to create the association. One other difference is that
+``hasAndBelongsToMany`` has been renamed to ``belongsToMany``. To find out more
+about creating associations in 3.0 see the section on :ref:`table-associations`.
+
+Another welcome improvement to CakePHP is the ability to create your own
+association classes. If you have association types that are not covered by the
+built-in relation types you can create a custom ``Association`` subclass and
+define the association logic you need.
 
 Validation no longer defined as a property
 ------------------------------------------
 
-TODO
+Like associations, validation was defined as class property in previous versions
+of CakePHP. This array would then be lazily transformed into
+a ``ModelValidator`` object. This transformation step added a layer of
+indirection and the rules being defined as a property made it difficult for
+a Model to have multiple sets of validation rules. In CakePHP 3.0 both these
+problems have been remedied. Validation rules are always built with a Validator
+object, and it is trivial to have multiple sets of rules::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
+
+    class ReviewsTable extends Table {
+
+        public function validationDefault($validator) {
+            $validator->requirePrescence('body')
+                ->add('body', 'length', [
+                    'rule' => ['minLength', 20],
+                    'message' => 'Reviews must be 20 characters or more',
+                ])
+                ->add('user_id', 'exists', [
+                    'rule' => function($value, $context) {
+                        $q = $this->association('Users')
+                            ->find()
+                            ->where(['id' => $value]);
+                        return $q->count() === 1;
+                    },
+                    'message' => 'A valid user is required.'
+                ]);
+            return $validator;
+        }
+
+    }
 
 Identifier quoting disabled by default
 --------------------------------------

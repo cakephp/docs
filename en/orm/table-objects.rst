@@ -115,6 +115,8 @@ conventions you can use the ``entityClass`` method to change things up::
         }
     }
 
+.. _table-associations:
+
 Building associations
 =====================
 
