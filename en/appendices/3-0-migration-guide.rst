@@ -658,3 +658,4 @@ Time
 - ``Time::__set()`` and - ``Time::__get()`` were removed. These were
   magic setter/getter methods for backwards compatibility.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
+- ``CakeTime::niceShort()`` has been removed.
