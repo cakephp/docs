@@ -316,7 +316,7 @@ for when authorization fails::
 
 In your controller's beforeFilter(), or component settings::
 
-    if (!$this->Auth->loggedIn()) {
+    if (!$this->Auth->user()) {
         $this->Auth->authError = false;
     }
 
@@ -854,11 +854,6 @@ and authentication mechanics in CakePHP.
     Uses the configured Authorization adapters to check whether or not a user
     is authorized. Each adapter will be checked in sequence, if any of them
     return true, then the user will be authorized for the request.
-
-.. php:method:: loggedIn()
-
-    Returns true if the current client is a logged in user, or false if
-    they are not.
 
 .. php:method:: login($user)
 

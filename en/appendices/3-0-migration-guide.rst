@@ -400,6 +400,7 @@ AuthComponent
   class instead.
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
   with ``hashType`` set to ``Blowfish``.
+- The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 
 RequestHandlerComponent
 -----------------------
