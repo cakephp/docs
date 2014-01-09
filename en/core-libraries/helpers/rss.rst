@@ -90,7 +90,7 @@ An Rss layout is very simple, put the following contents in
         $channelData = array();
     }
     if (!isset($channelData['title'])) {
-        $channelData['title'] = $title_for_layout;
+        $channelData['title'] = $this->fetch('title');
     }
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData, $channel);
