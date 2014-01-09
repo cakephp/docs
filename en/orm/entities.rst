@@ -239,8 +239,8 @@ Lazy loading
     will frequently emit N queries where N is the number of articles being
     iterated.
 
-While lazy loading is not include by CakePHP's ORM it is not hard to implement
-it yourself when and where you need it. But implementing an accessor method you
+While lazy loading is not include by CakePHP's ORM, it is not hard to implement
+it yourself when and where you need it. When implementing an accessor method you
 can lazily load associated data::
 
     namespace App\Model\Entity;
@@ -344,7 +344,7 @@ Hiding properties
 
 There are often fields you do not want exported in JSON or array formats. For
 example it is often unwise to expose password hashes or account recovery
-questions. When defining an entity class define which properties should be
+questions. When defining an entity class, define which properties should be
 hidden::
 
     class User extends Entity {
