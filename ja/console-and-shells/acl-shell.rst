@@ -54,7 +54,7 @@ ACLで許可を与えるには grant コマンドを使用してください。�
 権限のチェック
 =================
 
-ACLでの権限をチェックするには check コマンドを使用して下さい。
+ACLでの権限をチェックするには check コマンドを使用して下さい。 ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
