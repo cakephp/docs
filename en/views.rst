@@ -312,7 +312,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?php echo $title_for_layout?></title>
+   <title><?php echo $this->fetch('title'); ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -662,7 +662,7 @@ To call any view method use ``$this->method()``
 .. php:method:: get(string $var, $default = null)
 
     Get the value of a viewVar with the name of ``$var``.
-    
+
     As of 2.5 you can provide a default value in case the variable is not
     already set.
 
