@@ -47,6 +47,7 @@ Cakeスキーマのコールバック
         if (isset($event['create'])) {
             switch ($event['create']) {
                 case 'posts':
+                    App::uses('ClassRegistry', 'Utility');
                     $post = ClassRegistry::init('Post');
                     $post->create();
                     $post->save(
