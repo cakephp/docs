@@ -301,6 +301,35 @@ dl.docutils {
 #cakephp-global-navigation .nav-select {
 	display: none;
 }
+a.edit-button {
+	float: right;
+	font-family: MuseoSlab500, Helvetica, Arial;
+	font-weight: normal;
+	font-size: 14px;
+	color: #fff;
+	padding: 5px 10px;
+	
+	-webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
+	-moz-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
+	-o-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
+	
+	border: 1px solid #a61e2b;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+
+	background: #C92434;
+
+	background-image: -webkit-linear-gradient(top, #e01b2f, #c92434);
+	background-image: -moz-linear-gradient(top, #e01b2f, #c92434);
+	background-image: -o-linear-gradient(top, #e01b2f, #c92434);
+	background-image: linear-gradient(top, #e01b2f, #c92434);
+}
+a.edit-button:hover {
+	text-decoration: none;
+}
 /**
  * Responsive CSF navbar override.
  */
