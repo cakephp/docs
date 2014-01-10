@@ -334,15 +334,114 @@ fields gave::
         }
     }
 
-Validation and associations no longer properties
-------------------------------------------------
+Associations no longer defined as properties
+--------------------------------------------
 
-TODO
+In previous versions of CakePHP the various associations your models had were
+defined in properties like ``$belongsTo`` and ``$hasMany``. In CakePHP 3.0,
+associations are created with methods. Using methods allows us to sidestep the
+many limitations class definitions have, and provide only one way to define
+associations. Your ``initialize`` method and all other parts of your application
+code, interact with the same API when manipulating associations::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
+
+    class ReviewsTable extends Table {
+
+        public function initialize(array $config) {
+            $this->belongsTo('Movies');
+            $this->hasOne('Rating');
+            $this->hasMany('Comments')
+            $this->belongsToMany('Tags')
+        }
+
+    }
+
+As you can see from the example above each of the association types uses
+a method to create the association. One other difference is that
+``hasAndBelongsToMany`` has been renamed to ``belongsToMany``. To find out more
+about creating associations in 3.0 see the section on :ref:`table-associations`.
+
+Another welcome improvement to CakePHP is the ability to create your own
+association classes. If you have association types that are not covered by the
+built-in relation types you can create a custom ``Association`` sub-class and
+define the association logic you need.
+
+Validation no longer defined as a property
+------------------------------------------
+
+Like associations, validation rules were defined as a class property in previous
+versions of CakePHP. This array would then be lazily transformed into
+a ``ModelValidator`` object. This transformation step added a layer of
+indirection, complicating rule changes at runtime. Futhermore, validation rules
+being defined as a property made it difficult for a model to have multiple sets
+of validation rules. In CakePHP 3.0, both these problems have been remedied.
+Validation rules are always built with a ``Validator`` object, and it is trivial to
+have multiple sets of rules::
+
+    namespace App\Model\Repository;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
+
+    class ReviewsTable extends Table {
+
+        public function validationDefault($validator) {
+            $validator->validatePrescence('body')
+                ->add('body', 'length', [
+                    'rule' => ['minLength', 20],
+                    'message' => 'Reviews must be 20 characters or more',
+                ])
+                ->add('user_id', 'exists', [
+                    'rule' => function($value, $context) {
+                        $q = $this->association('Users')
+                            ->find()
+                            ->where(['id' => $value]);
+                        return $q->count() === 1;
+                    },
+                    'message' => 'A valid user is required.'
+                ]);
+            return $validator;
+        }
+
+    }
+
+You can define as many validation methods as you need. Each method should be
+prefixed with ``validation`` and accept a ``$validator`` argument. You can then
+use your validators when saving using the ``validate`` option. See the
+documentation on :ref:`saving-entities` for more information.
 
 Identifier quoting disabled by default
 --------------------------------------
 
-TODO
+In the past CakePHP has always quoted identifiers. Parsing SQL snippets and
+attempting to quote identifiers was both error prone and expensive. If you are
+following the conventions CakePHP sets out, the cost of identifier quoting far
+outweighs any benefit it provides. Because of this identifier quoting has been
+disabled by default in 3.0. You should only need to enable identifier quoting if
+you are using column names or table names that contain special characters or are
+reserved words. If required, you can enable identifier quoting when configuring
+a connection::
+
+    // in App/Config/app.php
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Driver\Mysql',
+            'login' => 'root',
+            'password' => 'super_secret',
+            'host' => 'localhost',
+            'database' => 'cakephp',
+            'quoteIdentifiers' => true
+        ]
+    ],
+
+.. note::
+
+    Identifiers in ``QueryExpression`` objects will not be quoted, and you will
+    need to quote them manually or use IdentifierExpression objects.
 
 Updating behaviors
 ==================
