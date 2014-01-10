@@ -1019,7 +1019,7 @@ Form Element-Specific Methods
 
     .. code-block:: html
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
         Hidden fields no longer remove the class attribute. This means
