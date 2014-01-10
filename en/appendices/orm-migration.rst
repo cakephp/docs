@@ -390,7 +390,7 @@ have multiple sets of rules::
     class ReviewsTable extends Table {
 
         public function validationDefault($validator) {
-            $validator->requirePrescence('body')
+            $validator->validatePrescence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
                     'message' => 'Reviews must be 20 characters or more',
@@ -441,7 +441,7 @@ a connection::
 .. note::
 
     Identifiers in ``QueryExpression`` objects will not be quoted, and you will
-    need to quote them manually.
+    need to quote them manually or use IdentifierExpression objects.
 
 Updating behaviors
 ==================
