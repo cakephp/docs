@@ -36,10 +36,10 @@ copyright = u'2013, Cake Software Foundation, Inc'
 # built documents.
 #
 # The short X.Y version.
-version = '2.x'
+version = 'master'
 
 # The full version, including alpha/beta/rc tags.
-release = 'master'
+release = '2.x'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
