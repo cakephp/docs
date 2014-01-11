@@ -171,9 +171,9 @@ When using ``composer`` to generate your autoloader, you could do the following,
 to provide fallback paths for controllers in your application::
 
     "autoload": {
-        "psr-0": {
-            "App\\Controller": "/path/to/directory",
-            "App\": "."
+        "psr-4": {
+            "App\\Controller": "/path/to/directory/with/controller/folders",
+            "App\": "src"
         }
     }
 
@@ -183,8 +183,8 @@ class/file the second key will be searched. You can also map a single namespace
 to multiple directories with the following::
 
     "autoload": {
-        "psr-0": {
-            "App\": [".", "/path/to/directory"]
+        "psr-4": {
+            "App\": ["src", "/path/to/directory"]
         }
     }
 

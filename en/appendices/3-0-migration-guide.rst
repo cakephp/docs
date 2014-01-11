@@ -21,9 +21,10 @@ Requirements
 Application directory layout
 ============================
 
-The application directory layout has changed to better implement PSR-0. You
-should use the `app skeleton <https://github.com/cakephp/app>`_
-project as a reference point when updating your application.
+The application directory layout has changed and now follows
+`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. You should use the
+`app skeleton <https://github.com/cakephp/app>`_ project as a reference point
+when updating your application.
 
 CakePHP should be installed with composer
 =========================================
@@ -35,8 +36,8 @@ directory, those options are no longer supported.  Instead you should use
 Namespaces
 ==========
 
-All of CakePHP's core classes are now namespaced under names matching the
-filesystem directories.  For example ``Cake/Cache/Cache.php`` is named
+All of CakePHP's core classes are now namespaced and follow PSR-4 autoloading
+specifications. For example ``src/Cache/Cache.php`` is namespaced as
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
