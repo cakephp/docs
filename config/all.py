@@ -39,7 +39,7 @@ copyright = u'2013, Cake Software Foundation, Inc'
 version = '2.x'
 
 # The full version, including alpha/beta/rc tags.
-release = '2.x'
+release = 'master'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
