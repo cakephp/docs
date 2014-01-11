@@ -160,7 +160,8 @@ afterSave
 ``afterSave(boolean $created, array $options = array())``
 
 Si vous avez besoin d'exécuter de la logique juste après chaque opération de
-sauvegarde, placez-la dans cette méthode de rappel.
+sauvegarde, placez-la dans cette méthode de rappel. Les données sauvegardées
+seront disponibles dans ``$this->data``.
 
 La valeur de ``$created`` sera true si un nouvel objet a été créé
 (plutôt qu'un objet mis à jour).
