@@ -325,6 +325,13 @@ prefix on them, use the alternative syntax::
         }
     }
 
+You can use ``TableRegistry`` to load your plugin tables using the familiar
+:term:`plugin syntax`::
+
+    use Cake\ORM\TableRegistry;
+
+    $contacts = TableRegistry::get('ContactManager.Contacts');
+
 Visiting ``/contact_manager/contacts`` now (given you've got a table in your
 database called 'contacts') should give us a "Missing View" error.  Let's create
 that next.
