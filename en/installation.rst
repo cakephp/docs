@@ -2,10 +2,10 @@ Installation
 ############
 
 CakePHP is fast and easy to install. The minimum requirements are a
-webserver and a copy of CakePHP, that's it! While this manual focuses
+web server and a copy of CakePHP, that's it! While this manual focuses
 primarily on setting up on Apache (because it's the most commonly used),
 you can configure CakePHP to run on a variety of web servers such as
-LightHTTPD or Microsoft IIS.
+nginx, LightHTTPD, or Microsoft IIS.
 
 Requirements
 ============
@@ -14,6 +14,7 @@ Requirements
   by no means required.
 - PHP 5.4.3 or greater.
 - mbstring extension
+- mcrypt extension
 
 Technically a database engine isn't required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
@@ -32,51 +33,73 @@ database storage engines:
 License
 =======
 
-CakePHP is licensed under the MIT license. This means that you are free to
-modify, distribute and republish the source code on the condition that the
-copyright notices are left intact. You are also free to incorporate CakePHP
-into any Commercial or closed source application.
+CakePHP is licensed under the
+`MIT license <http://www.opensource.org/licenses/mit-license.php>`_. This means
+that you are free to modify, distribute and republish the source code on the
+condition that the copyright notices are left intact. You are also free to
+incorporate CakePHP into any commercial or closed source application.
 
-Downloading CakePHP
+Installing CakePHP
 ===================
 
 There are a few ways to get a fresh copy of CakePHP. You can
-either download an archive copy (zip/tar.gz/tar.bz2) from a github release.
-Check out the applications skeleton from git repository, or use composer.
+either download an archived copy (zip/tar.gz/tar.bz2) from a GitHub release,
+use Composer, or clone the application skeleton from the GitHub repository.
 
-Downloading a zip file
+Downloading a Zip File
 ----------------------
 
-To download a pre-built release of CakePHP. Visit the main
+To download a pre-built release of CakePHP, visit the main
 website `http://cakephp.org <http://cakephp.org>`_ and
 follow the "Download Now" link.
 
-All current releases of CakePHP are hosted on `Github`_. Github houses both
+All current releases of CakePHP are hosted on `GitHub`_. GitHub houses both
 CakePHP itself as well as many other plugins for CakePHP. The CakePHP releases
-are available at `Github tags <https://github.com/cakephp/cakephp/releases>`_.
+are available as `GitHub tags <https://github.com/cakephp/cakephp/releases>`_.
 
+Installing with Composer
+------------------------
 
-Using composer
---------------
+`Composer <http://getcomposer.org>`_ is a dependency management tool for
+PHP 5.3+. It solves many of the problems the PEAR installer has, and
+simplifies managing multiple versions of libraries. Since CakePHP publishes
+a PEAR package you can install CakePHP via Composer using the ``cakephp/app``
+package.
 
-You can use `composer`_ to install CakePHP using the ``cakephp/app`` package.
-First you'll need to download and install composer if you haven't done so
-already::
+First, you'll need to download and install Composer if you haven't
+done so already. If you have cURL installed, it's as easy as running the
+following::
 
     curl -s https://getcomposer.org/installer | php
 
-Assuming you've downloaded and installed composer, you can get a new CakePHP
+Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project cakephp/app
+    php composer.phar create-project -s dev cakephp/app
 
-This will download the CakePHP skeleton application and install CakePHP.
+Once Composer finishes downloading the application skeleton and the core
+CakePHP library, you should now have a functioning CakePHP application
+installed via Composer. Be sure to keep the composer.json and composer.lock
+files with the rest of your source code.
 
-Using git & github
-------------------
 
-You can fork and or clone the ``cakephp/app`` project using git + github. This
-will allow you to easily contribute changes back to the application skeleton.
+Installing with Git & GitHub
+----------------------------
+
+In CakePHP 3.0, the `application skeleton <https://github.com/cakephp/app>`_
+and the `core CakePHP library <https://github.com/cakephp/cakephp>`_ has been
+split into two seperate repositories. You can fork and/or clone the application
+skeleton project using Git + GitHub. This will also allow you to easily
+contribute changes back to the application skeleton.
+
+Once you've cloned the application skeleton, you will need to clone the core
+CakePHP library into ``vendor/cakephp/cakephp``. After cloning the core
+CakePHP library, uncomment the section using ``Cake\Core\ClassLoader`` in
+``App/Config/bootstrap.php``, and copy ``App/Config/app.default.php`` to
+``App/Config/app.php``.
+
+You should now be able to visit the path to where you installed your CakePHP
+application and see the setup traffic lights.
 
 Keeping up to date with the latest CakePHP changes
 --------------------------------------------------
