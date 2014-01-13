@@ -801,7 +801,6 @@ En savoir plus sur les vues
 .. toctree::
 
     views/themes
-    views/media-view
     views/json-and-xml-views
     views/helpers
 
