@@ -62,9 +62,7 @@ Installing with Composer
 
 `Composer <http://getcomposer.org>`_ is a dependency management tool for
 PHP 5.3+. It solves many of the problems the PEAR installer has, and
-simplifies managing multiple versions of libraries. Since CakePHP publishes
-a PEAR package you can install CakePHP via Composer using the ``cakephp/app``
-package.
+simplifies managing multiple versions of libraries.
 
 First, you'll need to download and install Composer if you haven't
 done so already. If you have cURL installed, it's as easy as running the
