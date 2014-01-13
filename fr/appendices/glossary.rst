@@ -4,8 +4,8 @@ Glossaire
 .. glossary::
 
     tableau routing
-        Un tableau d'attributs qui sont passés au :php:meth:`Router::url()`.
-        Typiquement, ils ressemblent à ça::
+        Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
+        Typiquement, ils ressemblent à cela::
         
             array('controller' => 'posts', 'action' => 'view', 5)
 
@@ -39,28 +39,33 @@ Glossaire
         niveaux imbriqués avec ``.``
         Par exemple::
         
-            Asset.filtre.css
+            Cache.default.engine
         
         Pointerait vers la valeur suivante::
         
-            array(
-                'Asset' => array(
-                    'filtre' => array(
-                        'css' => 'vous m avez eu'
-                    )
-                )
-            )
+            [
+                'Cache' => [
+                    'default' => [
+                        'engine' => 'File'
+                    ]
+                ]
+            ]
 
     CSRF
         Les Reqûetes de site croisées de Contrefaçon. Emêche les attaques de 
         replay, les soumissions doubles et les requêtes contrefaîtes provenant 
         d'autres domaines.
 
+    CDN
+        Content Delivery Network. A 3rd party vendor you can pay to help
+        distribute your content to data centers around the world. This helps
+        put your static assets closer to geographically distributed users.
+
     routes.php
         Un fichier dans APP/Config qui contient la configuration de routing.
         Ce fichier est inclus avant que chaque requête soit traitée.
-        Il devrait connecter toutes les routes dont votre applications a besoin 
-        afin que les requêtes puissent être routées aux contrôleur + action 
+        Il devrait connecter toutes les routes dont votre application a besoin 
+        afin que les requêtes puissent être routées aux controller + action 
         corrects.
 
     DRY

@@ -4,10 +4,12 @@ Le processus de développement CakePHP
 Ici, nous tenterons d'expliquer le processus que nous utilisons lors de 
 l'élaboration du CakePHP. Nous comptons beaucoup sur l'interaction 
 communautaire par le biais billets et par le chat IRC. IRC est le meilleur 
-endroit pour trouver des membres de l'équipe de développement et pour discuter 
-d'idées, du dernier code, et de faire des commentaires généraux. Si quelque 
-chose de plus formel doit être proposé ou s'il y a un problème avec une version 
-sortie, le système de ticket est le meilleur endroit pour partager vos idées.
+endroit pour trouver des membres de
+`l'équipe de développement <https://github.com/cakephp?tab=members>`_  et pour
+discuter d'idées, du dernier code, et de faire des commentaires généraux. Si
+quelque chose de plus formel doit être proposé ou s'il y a un problème avec une
+version sortie, le système de ticket est le meilleur endroit pour partager vos
+idées.
 
 Nous maintenons 4 versions de CakePHP.
 
@@ -37,7 +39,7 @@ Nous maintenons 4 versions de CakePHP.
    *version-fonctionnalité*. Un exemple serait *1.3-routeur* qui contiendrait 
    de nouvelles fonctionnalités pour le Routeur dans 1.3.
 
-Espèrons que cela vous aide à comprendre quel version est bonne pour vous.
+Espèrons que cela vous aide à comprendre quelle version est bonne pour vous.
 Une fois que vous choisissez votre version, vous vous sentirez peut-être 
 contraints de contribuer à un report de bug ou de faire des commentaires 
 généraux sur le code.
@@ -46,15 +48,15 @@ généraux sur le code.
    soumettre des tickets ou discuter avec nous sur IRC.
 -  Si vous utilisez la branche de développement ou la branche de 
    fonctionnalité, le premier endroit où aller est IRC. Si vous avez un 
-   commentaire et ne pouvez pas nous atteindre  sur IRC après un jour ou deux, 
+   commentaire et ne pouvez pas nous atteindre sur IRC après un jour ou deux, 
    merci de nnous soumettre un ticket.
 
-Si vous trouvez un problème, la meilleure réponse es d'écrire un test. Le 
+Si vous trouvez un problème, la meilleure réponse est d'écrire un test. Le 
 meilleur conseil que nous pouvons offrir dans l'écriture des tests est de 
 regarder ceux qui sont inclus dans le coeur.
 
-Comme toujours, si vous avez n'importe quelle question ou commentaire, visitez 
-nous sur #cakephp sur irc.freenode.net.
+Comme toujours, si vous avez n'importe quelle question ou commentaire,
+rendez-nous une visite sur #cakephp sur irc.freenode.net.
 
 
 .. meta::
