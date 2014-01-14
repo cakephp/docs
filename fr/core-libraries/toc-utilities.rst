@@ -8,13 +8,12 @@ Utilitaires
     ../core-utility-libraries/email
     ../core-utility-libraries/file-folder
     ../core-utility-libraries/hash
-    ../core-utility-libraries/httpsocket
+    ../core-utility-libraries/httpclient
     ../core-utility-libraries/inflector
     internationalization-and-localization
     logging
     ../core-utility-libraries/number
     ../core-utility-libraries/router
-    ../core-utility-libraries/sanitize
     ../core-utility-libraries/security
     ../core-utility-libraries/set
     ../core-utility-libraries/string

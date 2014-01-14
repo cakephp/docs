@@ -11,7 +11,9 @@ pour savoir comment configurer et utiliser les components.
     /core-libraries/components/pagination
     /core-libraries/components/sessions
     /core-libraries/components/authentication
+    /core-libraries/components/csrf-component
     /core-libraries/components/security-component
     /core-libraries/components/request-handling
     /core-libraries/components/cookie
     /core-libraries/components/access-control-lists
+

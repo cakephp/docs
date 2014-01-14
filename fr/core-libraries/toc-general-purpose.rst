@@ -6,5 +6,7 @@ Usage Général
 
     global-constants-and-functions
     ../core-utility-libraries/app
-    events
     collections
+    events
+    registry-objects
+    validation

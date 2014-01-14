@@ -16,7 +16,6 @@ et comment vous pouvez créer et utiliser vos propres helpers.
     /core-libraries/helpers/cache
     /core-libraries/helpers/form
     /core-libraries/helpers/html
-    /core-libraries/helpers/js
     /core-libraries/helpers/number
     /core-libraries/helpers/paginator
     /core-libraries/helpers/rss
