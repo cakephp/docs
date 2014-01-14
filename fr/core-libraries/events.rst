@@ -550,7 +550,7 @@ Lecture Supplémentaire
 .. toctree::
     
     /core-libraries/collections
-    /models/behaviors
+    /orm/behaviors
     /controllers/components
     /views/helpers
 
