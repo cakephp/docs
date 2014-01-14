@@ -37,7 +37,7 @@ copyright = u'2013, Cake Software Foundation, Inc'
 # built documents.
 #
 # The short X.Y version.
-version = 'master'
+version = '2.x'
 
 # The full version, including alpha/beta/rc tags.
 release = '2.x'
