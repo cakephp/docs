@@ -19,13 +19,6 @@ qualité.
 Mise en route
 =============
 
-Créer un blog
--------------
-
-Débutez avec le tutoriel sur
-:doc:`la création d'un blog</tutorials-and-examples/blog/blog>`.
-Vous apprendrez les bases de CakePHP et développerez un blog simple.
-
 Conventions
 -----------
 
