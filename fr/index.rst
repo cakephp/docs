@@ -12,8 +12,8 @@ qualité.
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
     EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
 
-    - `format PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
-    - `format EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
+    - `PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
+    - `EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
     - `Source originale <http://github.com/cakephp/docs>`_.
 
 Mise en route
@@ -44,7 +44,7 @@ Models (modèles)
 
 Les modèles (Models) sont le coeur de votre application, ils gèrent la
 validation, le stockage et la récupération de vos données. En savoir plus
-sur les :doc:`/models`.
+sur les :doc:`/orm`.
 
 Obtenir de l'aide
 =================

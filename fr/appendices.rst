@@ -2,59 +2,19 @@ Annexes
 #######
 
 Les annexes contiennent des informations sur les nouvelles fonctionnalités
-de la version 2.0 ainsi qu'un guide de migration de la version 1.3 vers 2.0.
+introduites dans chaque version et le chemin de migration entre les versions.
 
-2.4 Guide de Migration
+3.0 Guide de Migration
 ======================
 
-.. toctree::
-    :maxdepth: 1
-
-    appendices/2-4-migration-guide
-
-2.3 Guide de Migration
-======================
+3.0 est toujours en développement, et tous les changements documentés seront
+seulement disponibles dans la branche ``3.0`` dans git.
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/2-3-migration-guide
-
-2.2 Guide de Migration
-======================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/2-2-migration-guide
-
-2.1 Guide de Migration
-======================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/2-1-migration-guide
-    appendices/new-features-in-cakephp-2-1
-
-2.0 Guide de Migration
-======================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/2-0-migration-guide
-    appendices/new-features-in-cakephp-2-0
-    appendices/phpunit-migration-hints
-
-Migration de la version 1.2 vers la 1.3
-=======================================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/migrating-from-cakephp-1-2-to-1-3
-    appendices/new-features-in-cakephp-1-3
+    appendices/3-0-migration-guide
+    appendices/orm-migration
 
 Informations générales
 ======================
@@ -68,4 +28,4 @@ Informations générales
 
 .. meta::
     :title lang=fr: Annexes
-    :keywords lang=fr: guide de migration,nouvelles fonctionnalités,glossaire
+    :keywords lang=fr: guide de migration,nouvelles fonctionnalités,glossaire,chemin de migration
