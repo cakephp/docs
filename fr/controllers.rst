@@ -104,7 +104,7 @@ RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
 ``/app/Controller/RecettesController.php`` et contiendrait::
 
-        # /app/Controller/RecettesController.php
+        # /App/Controller/RecettesController.php
         
         class RecettesController extends AppController {
             public function view($id) {
@@ -149,8 +149,8 @@ vous devrez vérifier le type de requête avant de retourner::
 
     class RecipesController extends AppController {
         public function popular() {
-            $popular = $this->Recipe->popular();
-            if (!empty($this->request->params['requested'])) {
+            $popular = $this->Recipes->find('popular');
+            if (!$this->request->is('requested')) {
                 return $popular;
             }
             $this->set('popular', $popular);
@@ -187,8 +187,7 @@ ou juste après que les actions du controller soient effectuées:
 
     .. note::
 
-        La méthode beforeFilter() sera appelée pour les actions manquantes et
-        les actions de scaffolding.
+        La méthode beforeFilter() sera appelée pour les actions manquantes.
 
 .. php:method:: beforeRender()
 
@@ -413,28 +412,6 @@ Contrôle de Flux
     
     Pour définir des messages flash dans une page, regardez du côté de la
     méthode setFlash() du component Session (SessionComponent).
-
-Callbacks
----------
-
-En plus des :ref:`controller-life-cycle`, CakePHP supporte aussi les
-callbacks liés au scaffolding.
-
-.. php:method:: beforeScaffold($method)
-
-    $method nom de la méthode appelée, par exemple index, edit, etc.
-
-.. php:method:: afterScaffoldSave($method)
-
-    $method nom de la méthode appelée, soit edit soit update.
-
-.. php:method:: afterScaffoldSaveError($method)
-
-    $method nom de la méthode appelée, soit edit soit update.
-
-.. php:method:: scaffoldError($method)
-
-    $method nom de la méthode appelée, par exemple index, edit, etc...
 
 Autres Méthodes utiles
 ----------------------
@@ -823,7 +800,6 @@ En savoir plus sur les controllers
 .. toctree::
 
     controllers/request-response
-    controllers/scaffolding
     controllers/pages-controller
     controllers/components
 
