@@ -107,7 +107,7 @@ certain plugins::
     ]);
 
 With this style of configuration, you no longer need to manually
-``include()`` or ``require()`` a plugin's configuration or routes file--It happens
+``include()`` or ``require()`` a plugin's configuration or routes file -- it happens
 automatically at the right time and place. The exact same parameters could
 have also been supplied to the ``load()`` method, which would have loaded only those
 three plugins, and not the rest.
