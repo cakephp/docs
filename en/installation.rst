@@ -196,25 +196,25 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your CakePHP application accessible at http://www.example.com.
 
-Sharing CakePHP libraries with multiple applications
-====================================================
+Sharing CakePHP with Multiple Applications
+==========================================
 
 There may be some situations where you wish to place CakePHP's
 directories on different places on the filesystem. This may be due
 to a shared host restriction. This section describes how
 to spread your CakePHP directories across a filesystem.
 
-First, realize that there are three main parts to a Cake
+First, realize that there are three main parts to a CakePHP
 application:
 
-#. The core CakePHP libraries, in /lib/Cake.
+#. The core CakePHP library, in /vendor/cakephp/cakephp.
 #. Your application code, in /App.
 #. The application's webroot, usually in /App/webroot.
 
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
 accessible by your web server. You can even move the webroot folder
-out of the app folder as long as you tell CakePHP where you've put
+out of the App folder as long as you tell CakePHP where you've put
 it.
 
 To configure your CakePHP installation, you'll need to make some
@@ -242,7 +242,7 @@ set up CakePHP to work as follows:
 
 - My application's webroot directory will be /var/www/mysite/.
 - My application's app directory will be /home/me/myapp.
-- CakePHP is installed via composer.
+- CakePHP is installed via Composer.
 
 Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
@@ -250,7 +250,7 @@ example) to look like the following::
 
     // App/Config/paths.php (partial, comments removed)
     define('ROOT', '/home/me');
-    define ('APP_DIR', 'myapp');
+    define('APP_DIR', 'myapp');
     define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
 
 URL Rewriting
