@@ -92,10 +92,6 @@ Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
 -   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
 -   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
 
-CakePHP dispose également d'un Groupe Google très actif.
-Il peut être une ressource de choix pour trouver des réponses archivées,
-des questions fréquemment posées et obtenir des réponses aux problèmes urgents.
-
 Les Questions CakePHP
 =====================
 
