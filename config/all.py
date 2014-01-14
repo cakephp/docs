@@ -286,6 +286,9 @@ epub_tocdup = False
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
 
+# The GitHub branch name for this version of the docs
+branch = 'master'
+
 # Hack to render the php source code without the <?php tag
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
