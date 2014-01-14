@@ -78,14 +78,19 @@ method::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
-.. note::
+When to load plugins
+--------------------
 
-    You do **not** need to load a plugin to access components, behaviors or
-    helpers in a plugin with a conventional namespace. You **do** need to load
-    a plugin if you need to access its controllers, webroot assets or console
-    commands. You will also need to load a plugin if it uses a non-conventional
-    namespace.
+You do not need to load every plugin your application uses. If your plugins use
+the conventional namespace and filesystem layout you **do not** need to use
+``Plugin::load()`` in order to load and use components, helpers, behaviors,
+other class based code, or render views from the plugin.
 
+You **do** need to load a plugin when you want to access its controllers,
+webroot assets, or consoole commands. You will also need to load a plugin if the
+plugin is using a non-conventional namespace.
+
+.. _plugin-configuration:
 
 Plugin configuration
 ====================
@@ -269,6 +274,24 @@ If you want to access what we've got going thus far, visit
 ``/contact_manager/contacts``. You should get a "Missing Model" error
 because we don't have a Contact model defined yet.
 
+If your application includes the default routing CakePHP provides you will be
+able to access your plugin controllers using URLs like::
+
+    // Access the index route of a plugin controller.
+    /contact_manager/contacts
+
+    // Any action on a plugin controller.
+    /contact_manager/contacts/view/1
+
+If your application defines routing prefixes, CakePHP's default routing will
+also connect routes that use the following pattern::
+
+    /:prefix/:plugin/:controller
+    /:prefix/:plugin/:controller/:action
+
+See the section on :ref:`plugin-configuration` for information on how to load
+plugin specific route files.
+
 .. _plugin-models:
 
 Plugin Models
@@ -349,6 +372,14 @@ action, so let's include that as well::
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
+
+Plugins can provide their own layouts. Add plugin layouts, inside
+``/Plugin/[PluginName]/View/Layout``. To use a plugin layout in your controller
+you can do the following::
+
+    public $layout = 'ContactManager.admin';
+
+If the plugin prefix is omitted, the layout/view file will be located normally.
 
 .. note::
 
@@ -463,25 +494,6 @@ model, and implement the functionality one might expect when managing
 their contacts. It's up to you to decide what to implement in your
 plugins. Just don't forget to share your code with the community so
 that everyone can benefit from your awesome, reusable components!
-
-Plugin Tips
-===========
-
-Once a plugin has been installed in /Plugin, you can access it at the URL
-``/plugin_name/controller_name/action``. In our ContactManager plugin example,
-we'd access our ContactsController at ``/contact_manager/contacts``.
-
-Some final tips on working with plugins in your CakePHP applications:
-
--  When you don't have a [Plugin]AppController and
-   [Plugin]AppModel, you'll get missing Controller errors when trying
-   to access a plugin controller.
--  You can define your own layouts for plugins, inside
-   ``/Plugin/[Plugin]/View/Layout``. Otherwise, plugins will use the
-   layouts from the /App/View/Layout folder by default.
--  You can do inter-plugin communication by using
-   ``$this->requestAction('/plugin_name/controller_name/action');`` in your
-   controllers.
 
 .. meta::
     :title lang=en: Plugins
