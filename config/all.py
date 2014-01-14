@@ -12,7 +12,8 @@
 extensions = [
     'sphinx.ext.todo',
     'sphinxcontrib.phpdomain',
-    'config.cakei18n'
+    'config.cakei18n',
+    'config.cakebranch'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
