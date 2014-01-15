@@ -30,7 +30,7 @@ CakePHP2.0 の変更点として、プラグインは app/Config/bootstrap.php �
     CakePlugin::load('ContactManager'); //一つだけ読み込み
 
 
-設定で記述されたプラグインは、 loadAll ですべてのプラグインで利用できます。
+設定で記述されたプラグインは、 ``loadAll()`` ですべてのプラグインで利用できます。
 ``load()`` も同様の働きですが、明示的に指定したプラグインだけロードします。
 
 プラグイン設定
