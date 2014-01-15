@@ -9,27 +9,27 @@ your applications? Package it as a CakePHP plugin so you can reuse it
 in other applications and share with the community.
 
 The main tie between a plugin and the application it has been
-installed into, is the application's configuration (database
+installed into is the application's configuration (database
 connection, etc.). Otherwise, it operates in its own space,
 behaving much like it would if it were an application on its own.
 
-In CakePHP 3.0 each plugin defines its own top-level namespace. For example
-``DebugKit``. By conventions plugins use their package name as their namespace.
+In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
+``DebugKit``. By convention, plugins use their package name as their namespace.
 If you'd like to use a different namespace, you can configure how plugins are
 loaded.
 
 Installing a Plugin
 ===================
 
-Many plugins are available on the `packagist <http://packagist.org>`_
-and can be installed with ``composer``. To install DebugKit, you
+Many plugins are available on `Packagist <http://packagist.org>`_
+and can be installed with ``Composer``. To install DebugKit, you
 would do the following::
 
     php composer.phar require cakephp/debug_kit
 
 This would install the latest version of DebugKit and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
-the plugin you want to install is not available on packagist.org. You can clone
+the plugin you want to install is not available on packagist.org, you can clone
 or copy the plugin code into your ``/Plugin`` directory. Assuming you want to install
 a plugin named 'ContactManager', you should have a folder in ``/Plugin``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
@@ -87,7 +87,7 @@ the conventional namespace and filesystem layout you **do not** need to use
 other class based code, or render views from the plugin.
 
 You **do** need to load a plugin when you want to access its controllers,
-webroot assets, or consoole commands. You will also need to load a plugin if the
+webroot assets, or console commands. You will also need to load a plugin if the
 plugin is using a non-conventional namespace.
 
 .. _plugin-configuration:
