@@ -16,7 +16,7 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
     どこでもCakePHPのレシピをお楽しみ頂けます。PDFとEPUBをご用意しましたので、\
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
-    - `PDF(英語) <../_downloads/en/CakePHPCookbook.pdf>`_
+    - `PDF <../_downloads/ja/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/ja/CakePHPCookbook.epub>`_
     - `オリジナルソース <http://github.com/cakephp/docs>`_
 
