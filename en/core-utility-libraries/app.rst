@@ -127,12 +127,12 @@ the built-in core classes.
 Loading Vendor Files
 ====================
 
-Ideally vendor files should be autoloaded with ``composer``, if you have vendor
-files that cannot be autoloaded or installed with composer you will need to use
+Ideally vendor files should be autoloaded with ``Composer``, if you have vendor
+files that cannot be autoloaded or installed with Composer you will need to use
 ``require`` to load them.
 
-If you cannot install a library with composer, it is best to install each library in
-a directory following composer's convention of ``vendor/$author/$package``.
+If you cannot install a library with Composer, it is best to install each library in
+a directory following Composer's convention of ``vendor/$author/$package``.
 If you had a library called AcmeLib, you could install it into
 ``/vendor/Acme/AcmeLib``. Assuming it did not use PSR-0 compatible classnames
 you could autoload the classes within it using ``classmap`` in your
@@ -149,7 +149,7 @@ application's ``composer.json``::
     }
 
 If your vendor library does not use classes, and instead provides functions, you
-can configure composer to load these files at the beginning of each request
+can configure Composer to load these files at the beginning of each request
 using the ``files`` autoloading strategy::
 
     "autoload": {
@@ -167,7 +167,7 @@ application's autoloader using::
 
     $ php composer.phar dump-autoload
 
-If you happen to not be using composer in your application, you will need to
+If you happen to not be using Composer in your application, you will need to
 manually load all vendor libraries yourself.
 
 

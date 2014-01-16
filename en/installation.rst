@@ -282,8 +282,8 @@ uncomment the related line in ``App/Config/bootstrap.php``::
        date_default_timezone_set('UTC');
 
 
-.. _Github: http://github.com/cakephp/cakephp
-.. _composer: http://getcomposer.com
+.. _GitHub: http://github.com/cakephp/cakephp
+.. _Composer: http://getcomposer.com
 
 .. meta::
     :title lang=en: Installation

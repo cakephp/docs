@@ -167,7 +167,7 @@ Additional Class Paths
 ======================
 
 Additional class paths are setup through the autoloaders your application uses.
-When using ``composer`` to generate your autoloader, you could do the following,
+When using ``Composer`` to generate your autoloader, you could do the following,
 to provide fallback paths for controllers in your application::
 
     "autoload": {

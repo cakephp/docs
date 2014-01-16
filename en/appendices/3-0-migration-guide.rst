@@ -26,12 +26,12 @@ The application directory layout has changed and now follows
 `app skeleton <https://github.com/cakephp/app>`_ project as a reference point
 when updating your application.
 
-CakePHP should be installed with composer
+CakePHP should be installed with Composer
 =========================================
 
 Since CakePHP can no longer easily be installed via PEAR, or in a shared
 directory, those options are no longer supported.  Instead you should use
-`composer <http://getcomposer.org>`_ to install CakePHP into your application.
+`Composer <http://getcomposer.org>`_ to install CakePHP into your application.
 
 Namespaces
 ==========

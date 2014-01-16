@@ -37,12 +37,12 @@ To get a fresh download, visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
 and download the latest release of 3.0
 
-You can also install CakePHP using ``composer``::
+You can also install CakePHP using ``Composer``::
 
     curl -s https://getcomposer.org/installer | php
     php composer.phar create-project cakephp/app
 
-This will download composer and install the CakePHP application skeleton. For
+This will download Composer and install the CakePHP application skeleton. For
 this tutorial we're just going to download the zip file as its the simplest
 option.
 
