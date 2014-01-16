@@ -6,7 +6,7 @@ Installing CakePHP with PEAR Installer
 
 CakePHP publishes a PEAR package that you can install using the PEAR installer.
 Installing with the PEAR installer can simplify sharing CakePHP libraries
-across multiple applications. To install CakePHP with pear you'll need to do the
+across multiple applications. To install CakePHP with PEAR you'll need to do the
 following::
 
     pear channel-discover pear.cakephp.org

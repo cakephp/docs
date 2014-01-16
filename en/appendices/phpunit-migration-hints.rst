@@ -12,7 +12,7 @@ Installing PHPUnit
 Installing from PEAR (Recommended)
 ----------------------------------
 
-PHPUnit recommends it be installed via the pear installer, to do so run the
+PHPUnit recommends it be installed via the PEAR installer, to do so run the
 following commands::
 
     pear channel-discover pear.phpunit.de
@@ -27,10 +27,10 @@ can be used to install packages from the PHPUnit channel::
 Installing manually
 -------------------
 
-In addition to pear, CakePHP also supports placing the PHPUnit directory inside
+In addition to PEAR, CakePHP also supports placing the PHPUnit directory inside
 one of your vendors directories along with all its dependencies. Doing so is
 generally not recommended as PHPUnit is complicated to install as it is composed
-of many pear packages. Installing with the pear installer is easier and faster.
+of many PEAR packages. Installing with the PEAR installer is easier and faster.
 
 If you do wish to install PHPUnit manually, you'll need to place it and all of
 its dependencies inside your applications ``Vendor`` directory.
