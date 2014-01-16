@@ -7,7 +7,7 @@ App Class
 
 The App class is responsible for resource location and path management.
 
-Finding classes
+Finding Classes
 ===============
 
 .. php:staticmethod:: classname($name, $type = '', $suffix = '')
@@ -31,7 +31,7 @@ Finding classes
     class does not exist the ``Cake`` namespace will be attempted. If both
     classnames do not exist, ``false`` will be returned.
 
-Finding paths to namespaces
+Finding Paths to Namespaces
 ===========================
 
 .. php:staticmethod:: path(string $package, string $plugin = null)
@@ -63,7 +63,7 @@ Finding paths to namespaces
         App::core('Cache/Engine');
 
 
-Finding which objects CakePHP knows about
+Finding Which Objects CakePHP Knows About
 =========================================
 
 .. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
@@ -88,7 +88,7 @@ Finding which objects CakePHP knows about
         App::objects('MyPlugin.Model');
 
 
-Locating plugins
+Locating Plugins
 ================
 
 .. php:staticmethod:: pluginPath(string $plugin)
@@ -100,7 +100,7 @@ Locating plugins
 
         $path = App::pluginPath('DebugKit');
 
-Locating themes
+Locating Themes
 ===============
 
 .. php:staticmethod:: themePath(string $theme)
@@ -110,7 +110,7 @@ Locating themes
     Themes can be found ``App::themePath('purple');``, would give the full path to the
     `purple` theme.
 
-Overriding classes in CakePHP
+Overriding Classes in CakePHP
 =============================
 
 You can override almost every class in the framework, exceptions are the

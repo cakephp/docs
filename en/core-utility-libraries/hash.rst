@@ -15,7 +15,7 @@ the same way Inflector is called. Example: :php:meth:`Hash::combine()`.
 
 .. _hash-path-syntax:
 
-Hash path syntax
+Hash Path Syntax
 ================
 
 The path syntax described below is used by all the methods in ``Hash``. Not all

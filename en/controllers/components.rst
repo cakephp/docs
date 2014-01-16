@@ -119,7 +119,7 @@ controller, you could access them like so::
     properties they share the same 'namespace'. Be sure to not give a
     component and a model the same name.
 
-Loading components on the fly
+Loading Components on the Fly
 -----------------------------
 
 You might not need all of your components available on every controller
@@ -170,7 +170,7 @@ structure for the component would look something like this::
     All components must extend :php:class:`Component`. Failing to do this
     will trigger an exception.
 
-Including your component in your controllers
+Including your Component in your Controllers
 --------------------------------------------
 
 Once our component is finished, we can use it in the application's
@@ -206,7 +206,7 @@ second parameter. By convention, if array keys match component's public
 properties, the properties will be set to the values of these keys.
 
 
-Using other Components in your Component
+Using Other Components in your Component
 ----------------------------------------
 
 Sometimes one of your components may need to use another component.

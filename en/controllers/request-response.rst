@@ -1,4 +1,4 @@
-Request and Response objects
+Request and Response Objects
 ############################
 
 .. php:namespace:: Cake\Network
@@ -30,7 +30,7 @@ also access it in Components by using the controller reference. Some of the duti
 * Provide access to request parameters both as array indexes and object
   properties.
 
-Accessing request parameters
+Accessing Request Parameters
 ============================
 
 Request exposes several interfaces for accessing request parameters. The first is as object
@@ -66,7 +66,7 @@ are also all found in the request parameters:
 * ``requested`` Present and set to true when the action came from requestAction.
 
 
-Accessing Querystring parameters
+Accessing Querystring Parameters
 ================================
 
 Querystring parameters can be read from using :php:attr:`~Cake\\Network\\Request::$query`::
@@ -84,7 +84,7 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
 
-Accessing POST data
+Accessing POST Data
 ===================
 
 All POST data can be accessed using :php:meth:`Cake\\Network\\Request::data()`. Any form data
@@ -98,7 +98,7 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
-Accessing PUT, PATCH or DELETE data
+Accessing PUT, PATCH or DELETE Data
 ===================================
 
 When building REST services you often accept request data on ``PUT`` and
@@ -107,7 +107,7 @@ request body data will automatically be parsed and set to ``$this->data`` for
 ``PUT`` and ``DELETE`` requests. If you are accepting JSON or XML data, see
 below for how you can access those request bodies.
 
-Accessing / setting environment variables (from $_SERVER and $_ENV)
+Accessing / Setting Environment Variables (from $_SERVER and $_ENV)
 ===================================================================
 
 .. versionadded:: 3.0
@@ -122,7 +122,7 @@ acts as a getter/setter for enviroment variables without having to modify global
     //Set a value. Generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-Accessing XML or JSON data
+Accessing XML or JSON Data
 ==========================
 
 Applications employing :doc:`/development/rest` often exchange data in non
@@ -141,7 +141,7 @@ in additional parameters as well::
     // Get Xml encoded data submitted to a PUT/POST action
     $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
 
-Accessing path information
+Accessing Path Information
 ==========================
 
 The request object also provides useful information about the paths in your
@@ -151,7 +151,7 @@ determining whether or not your application is in a subdirectory.
 
 .. _check-the-request:
 
-Inspecting the request
+Inspecting the Request
 ======================
 
 The request object provides an easy way to inspect certain conditions in a given
@@ -216,7 +216,7 @@ There are several built-in detectors that you can use:
 * ``is('mobile')`` Check to see if the request came from a common list
   of mobile agents.
 
-Interacting with other aspects of the request
+Interacting with Other Aspects of the Request
 =============================================
 
 You can use `Request` to introspect a variety of things about the request.
@@ -230,7 +230,7 @@ properties and methods.
 
 
 Request API
-===============
+===========
 
 .. php:class:: Request
 
@@ -396,7 +396,7 @@ tasks such as:
 * Sending any header.
 * Sending the response body.
 
-Changing the response class
+Changing the Response Class
 ===========================
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
@@ -411,7 +411,7 @@ response object is handy during testing, as it allows you to stub
 out the methods that interact with ``header()``. See the section on
 :ref:`cakeresponse-testing` for more information.
 
-Dealing with content types
+Dealing with Content Types
 ==========================
 
 You can control the Content-Type of your application's responses with using
@@ -431,7 +431,7 @@ features of :php:class:`RequestHandlerComponent` if you are using it.
 
 .. _cake-response-file:
 
-Sending files
+Sending Files
 =============
 
 There are times when you want to send files as responses for your requests.
@@ -455,7 +455,7 @@ the browser by specifying the options::
 
     $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
 
-Sending a string as file
+Sending a String as File
 ========================
 
 You can respond with a file that does not exist on the disk, for instance with
@@ -473,7 +473,7 @@ a pdf or an ics generated on the fly, and serve the generated string as a file b
         return $this->response;
     }
 
-Setting headers
+Setting Headers
 ===============
 
 Setting headers is done with the :php:meth:`Cake\\Network\\Response::header()` method. It
@@ -494,7 +494,7 @@ until the response is actually sent.
 You can now use the convenience method :php:meth:`Cake\\Network\\Response::location()` to directly set or get
 the redirect location header.
 
-Interacting with browser caching
+Interacting with Browser Caching
 ================================
 
 You sometimes need to force browsers not to cache the results of a controller
@@ -527,7 +527,7 @@ Cache-Control's ``public`` directive is set as well.
 
 .. _cake-response-caching:
 
-Fine tuning HTTP cache
+Fine Tuning HTTP Cache
 ======================
 
 One of the best and easiest ways of speeding up your application is using HTTP
@@ -543,7 +543,7 @@ Apart from using :php:meth:`Cake\\Network\\Response::cache()` you can also use m
 methods to fine tune HTTP cache headers to take advantage of browser or reverse
 proxy caching.
 
-The Cache Control header
+The Cache Control Header
 ------------------------
 
 Used under the expiration model, this header contains multiple indicators
@@ -579,7 +579,7 @@ fresh::
 ``Response`` exposes separate methods for setting each of the directives in
 the ``Cache-Control`` header.
 
-The Expiration header
+The Expiration Header
 ---------------------
 
 You can set the ``Expires`` header to a date and time after which the response is
@@ -593,7 +593,7 @@ no longer considered fresh. This header can be set using the
 This method also accepts a DateTime instance or any string that can be parsed by the
 DateTime class.
 
-The Etag header
+The Etag Header
 ---------------
 
 Cache validation in HTTP is often used when content is constantly changing, and
@@ -620,7 +620,7 @@ To take advantage of this header you have to either call the
         ...
     }
 
-The Last Modified header
+The Last Modified Header
 ------------------------
 
 Also, under the HTTP cache validation model, you can set the ``Last-Modified``
@@ -641,7 +641,7 @@ To actually get advantage of using this header you have to either call manually
         ...
     }
 
-The Vary header
+The Vary Header
 ---------------
 
 In some cases you might want to serve different contents using the same URL.
@@ -654,7 +654,7 @@ HTMLs depending on the browser. Under such circumstances you can use the ``Vary`
 
 .. _cakeresponse-testing:
 
-Response and testing
+Response and Testing
 ====================
 
 Probably one of the biggest wins from ``Response`` comes from how it makes
@@ -675,7 +675,7 @@ headers in CLI.
 
 
 Response API
-================
+============
 
 .. php:class:: Response
 

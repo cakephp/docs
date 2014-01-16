@@ -9,7 +9,7 @@ CakePHP includes a basic but powerful HTTP client which can be easily used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 
-Doing requests
+Doing Requests
 ==============
 
 Doing requests is simple and straight forward.  Doing a get request looks like::
@@ -49,7 +49,7 @@ Doing post and put requests is equally simple::
     $http->head(...);
     $http->patch(...);
 
-Creating multipart requests with files
+Creating Multipart Requests with Files
 ======================================
 
 You can include files in request bodies by including them in the data array::
@@ -64,7 +64,7 @@ By prefixing data values with ``@`` or including a filehandle in the data.  If
 a filehandle is used, the filehandle will be read until its end, it will not be
 rewound before being read.
 
-Sending request bodies
+Sending Request Bodies
 ======================
 
 When dealing with REST API's you often need to send request bodies that are not
@@ -93,7 +93,7 @@ you can do the following::
 
 .. _http_client_request_options:
 
-Request method options
+Request Method Options
 =======================
 
 Each HTTP method takes an ``$options`` parameter which is used to provide
@@ -126,7 +126,7 @@ authentication strategies can be added by developers. Auth strategies are called
 before the request is sent, and allow headers to be added to the request
 context.
 
-Using basic authentication
+Using Basic Authentication
 --------------------------
 
 An example of basic authentication::
@@ -140,7 +140,7 @@ By default Http\\Client will use basic authentication is there is no ``'type'`` 
 in the auth option.
 
 
-Using digest authentication
+Using Digest Authentication
 ---------------------------
 
 An example of basic authentication::
@@ -161,7 +161,7 @@ An example of basic authentication::
 By setting the 'type' key to 'digest', you tell the authentication subsystem to
 use digest authentication.
 
-Oauth 1 authentication
+OAuth 1 Authentication
 ----------------------
 
 Many modern web-services require OAuth authentication to access their API's.
@@ -180,7 +180,7 @@ key and consumer secret::
       ]
     ]);
 
-Proxy authentication
+Proxy Authentication
 --------------------
 
 Some proxies require authentication to use them. Generally this authentication
@@ -198,7 +198,7 @@ Http\\Client will assume Basic authentication, unless the type key is set::
 
 .. _http_client_scoped_client:
 
-Creating scoped clients
+Creating Scoped Clients
 =======================
 
 Having to re-type the domain name, authentication and proxy settings can become
@@ -240,7 +240,7 @@ See :ref:`http_client_request_options` for more information on the options
 supported.
 
 
-Setting and managing cookies
+Setting and Managing Cookies
 ============================
 
 Http\\Client can also accept cookies when making requests. In addition to
@@ -270,7 +270,7 @@ request's ``$options`` parameters::
     ]);
 
 
-Response objects
+Response Objects
 ================
 
 .. php:class:: Response
@@ -338,7 +338,7 @@ from the following properties:
     debug($response->status);
     debug($response->headers);
 
-Reading JSON and XML response bodies
+Reading JSON and XML Response Bodies
 ------------------------------------
 
 Since JSON and XML responses are commonly used, response objects provide easy to

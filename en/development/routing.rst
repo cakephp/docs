@@ -36,7 +36,7 @@ CakePHP comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them.
 See :ref:`disabling-default-routes` on how to disable the default routing.
 
-General configuration
+General Configuration
 ---------------------
 
 In addition to the actual routes there are a few general configuration options
@@ -189,7 +189,7 @@ first match found.
 
 .. _route-elements:
 
-Route elements
+Route Elements
 --------------
 
 You can specify your own route elements and doing so gives you the
@@ -292,7 +292,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``#`` Allows you to set url hash fragments.
 * ``ssl`` Set to true to convert the generated url to https, or false to force http.
 
-Passing parameters to action
+Passing Parameters to Action
 ----------------------------
 
 When connecting routes using :ref:`route-elements` you may want
@@ -331,7 +331,7 @@ as defined in the routes::
 
 .. _named-routes:
 
-Using named routes
+Using Named Routes
 ------------------
 
 Sometimes you'll find typing out all the url parameters for a route too verbose,
@@ -440,7 +440,7 @@ create a link that is not part of a plugin.
 .. index:: file extensions
 .. _file-extensions:
 
-File extensions
+File Extensions
 ---------------
 
 To handle different file extensions with your routes, you need one
@@ -475,7 +475,7 @@ more information.
 
 .. _route-conditions:
 
-Using additional conditions when matching routes
+Using Additional Conditions When Matching Routes
 ------------------------------------------------
 
 When creating routes you might want to restrict certain URL's based on specific
@@ -504,7 +504,7 @@ you can create custom REST routing, or other request data dependent information.
 .. index:: passed arguments
 .. _passed-arguments:
 
-Passed arguments
+Passed Arguments
 ================
 
 Passed arguments are additional arguments or path segments that are
@@ -562,7 +562,7 @@ arguments as values without string keys in the array::
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
 
-Reverse routing
+Reverse Routing
 ===============
 
 Reverse routing is a feature in CakePHP that is used to allow you to
@@ -604,7 +604,7 @@ Router will also convert any unknown parameters in a routing array to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
 older versions of CakePHP.
 
-Improving performance of routing
+Improving Performance of Routing
 --------------------------------
 
 After connecting many routes, or if you're reverse routing a higher than average
@@ -616,7 +616,7 @@ single route is fetched and used for generating a URL.
 
 .. _redirect-routing:
 
-Redirect routing
+Redirect Routing
 ================
 
 Redirect routing allows you to issue HTTP status 30x redirects for
@@ -647,7 +647,7 @@ HTTP status of 302.
 
 .. _disabling-default-routes:
 
-Disabling the default routes
+Disabling the default Routes
 ============================
 
 If you have fully customized all your routes, and want to avoid any
@@ -661,7 +661,7 @@ been connected explicitly.
 
 .. _custom-route-classes:
 
-Custom Route classes
+Custom Route Classes
 ====================
 
 Custom route classes allow you to extend and change how individual

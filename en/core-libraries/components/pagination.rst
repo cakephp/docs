@@ -109,7 +109,7 @@ its name to the paginate method::
     // Using a table object.
     $comments = $this->paginate($commentTable);
 
-Using the paginator directly
+Using the Paginator Directly
 ============================
 
 If you need to paginate data from another component you may want to use the
@@ -123,7 +123,7 @@ from. The second parameter should be the array of settings to use for
 pagination. This array should have the same structure as the ``$paginate``
 property on a controller.
 
-Control which fields used for ordering
+Control which Fields Used for Ordering
 ======================================
 
 By default sorting can be done on any non-virtual column a table has. This is
@@ -142,7 +142,7 @@ pagination query::
 Any requests that attempt to sort on fields not in the whitelist will be
 ignored.
 
-Limit the maximum number of rows that can be fetched
+Limit the Maximum Number of Rows that can be Fetched
 ====================================================
 
 The number of results that are fetched is exposed to the user as the
@@ -159,7 +159,7 @@ application, you can adjust it as part of the pagination options::
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
 
-Out of range page requests
+Out of Range Page Requests
 ==========================
 
 The PaginatorComponent will throw a ``NotFoundException`` when trying to
@@ -178,7 +178,7 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         }
     }
 
-Pagination in the view
+Pagination in the View
 ======================
 
 Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for

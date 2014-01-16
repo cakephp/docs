@@ -1,4 +1,4 @@
-New ORM upgrade guide
+New ORM Upgrade Guide
 #####################
 
 CakePHP 3.0 features a new ORM that has been re-written from the ground up.
@@ -26,7 +26,7 @@ The ORM in CakePHP 3.0 solves these and many more problems. The new ORM
 focuses on relational data stores right now. In the future and through plugins
 we will add non relational stores like ElasticSearch and others.
 
-Design of the new ORM
+Design of the New ORM
 =====================
 
 The new ORM solves several problems by having more specialized and focused
@@ -61,7 +61,7 @@ most frequently in the new ORM it is good to look at the three most important
 classes. The ``Table``, ``Query`` and ``Entity`` classes do much of the heavy
 lifting in the new ORM, and each serves a different purpose.
 
-Table objects
+Table Objects
 -------------
 
 Table objects are the gateway into your data. They handle many of the tasks that
@@ -82,7 +82,7 @@ any platform dependent SQL. Instead they collaborate with entities and the query
 builder to do their work. Table objects also interact with behaviors and other
 interested parties through published events.
 
-Query objects
+Query Objects
 -------------
 
 While these are not classes you will build yourself, your application code will
@@ -97,7 +97,7 @@ data to make a query without executing the query itself. It collaborates with
 the connection/dialect to generate platform specific SQL which is executed
 creating a ``ResultSet`` as the output.
 
-Entity objects
+Entity Objects
 --------------
 
 In previous versions of CakePHP the ``Model`` class returned dumb arrays that
@@ -113,14 +113,14 @@ database, or converting request data into entities. Once created entities allow
 you to manipulate the data they contain and persist their data by collaborating
 with table objects.
 
-Key differences
+Key Differences
 ===============
 
 The new ORM is a large departure from the existing ``Model`` layer, there are
 many important differences that are important in understanding how the new ORM
 operates and how to update your code.
 
-Inflection rules updated
+Inflection Rules Updated
 ------------------------
 
 You may have noticed that table classes have a pluralized name. In addition to
@@ -147,7 +147,7 @@ You need to use the plural form::
     // Correct
     $query->where(['Users.active' => 1]);
 
-Find returns a query object
+Find returns a Query Object
 ---------------------------
 
 One important difference in the new ORM is that calling ``find`` on a table will
@@ -211,7 +211,7 @@ just call ``get``::
 
     $article = $this->Articles->get(10);
 
-Finder method changes
+Finder Method Changes
 ---------------------
 
 Returning a query object from a find method has several advantages, but comes at
@@ -267,8 +267,8 @@ behaviors can implement finder methods with no fuss. By simply defining a method
 with a matching name and signature on a Behavior the finder will automatically
 be available on any tables the behavior is attached to.
 
-Recursive and ContainableBehavior removed.
-------------------------------------------
+Recursive and ContainableBehavior Removed
+-----------------------------------------
 
 In previous versions of CakePHP you needed to use ``recursive``,
 ``bindModel()``, ``unbindModel()`` and ``ContainableBehavior`` to reduce the
@@ -289,7 +289,7 @@ included. To load articles and their related authors you would do::
 By only loading associated data that has been specifically requested you spend
 less time fighting the ORM trying to get only the data you want.
 
-No afterFind event or virtual fields
+No afterFind Event or Virtual Fields
 ------------------------------------
 
 In previous versions of CakePHP you needed to make extensive use of the
@@ -334,7 +334,7 @@ fields gave::
         }
     }
 
-Associations no longer defined as properties
+Associations No Longer Defined as Properties
 --------------------------------------------
 
 In previous versions of CakePHP the various associations your models had were
@@ -370,7 +370,7 @@ association classes. If you have association types that are not covered by the
 built-in relation types you can create a custom ``Association`` sub-class and
 define the association logic you need.
 
-Validation no longer defined as a property
+Validation No Longer Defined as a Property
 ------------------------------------------
 
 Like associations, validation rules were defined as a class property in previous
@@ -414,7 +414,7 @@ prefixed with ``validation`` and accept a ``$validator`` argument. You can then
 use your validators when saving using the ``validate`` option. See the
 documentation on :ref:`saving-entities` for more information.
 
-Identifier quoting disabled by default
+Identifier Quoting Disabled by Default
 --------------------------------------
 
 In the past CakePHP has always quoted identifiers. Parsing SQL snippets and
@@ -443,7 +443,7 @@ a connection::
     Identifiers in ``QueryExpression`` objects will not be quoted, and you will
     need to quote them manually or use IdentifierExpression objects.
 
-Updating behaviors
+Updating Behaviors
 ==================
 
 * Base class changed.

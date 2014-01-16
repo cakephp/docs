@@ -1,4 +1,4 @@
-Timestamp behavior
+Timestamp Behavior
 ##################
 
 .. php:namespace:: Cake\Model\Behavior
@@ -11,7 +11,7 @@ timestamps on each model event. This is primarily used to populate data into
 configuration, you can update any timestamp/datetime column on any event a table
 publishes.
 
-Basic usage
+Basic Usage
 ===========
 
 You enable the timestamp behavior like any other behavior::
@@ -28,7 +28,7 @@ The default configuration will do the following:
   to the current time.
 - When an entity is updated, the ``modified`` field is set to the current time.
 
-Using and configuring the behavior
+Using and Xonfiguring the Behavior
 ==================================
 
 If you need to modify fields with different names, or want to update additional
@@ -53,7 +53,7 @@ timestamp fields on custom events you can use some additional configuration::
 As you can see above, in addition to the standard ``Model.beforeSave`` event, we
 are also updating the ``completed_at`` column when orders are completed.
 
-Updating timestamps on entities
+Updating Timestamps on Entities
 ===============================
 
 Sometimes you'll want to update just the timestamps on an entity without

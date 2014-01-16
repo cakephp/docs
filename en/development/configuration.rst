@@ -15,7 +15,7 @@ define additional/different inflections.
 
 .. index:: configuration
 
-Configuring your application
+Configuring your Application
 ============================
 
 While CakePHP is a conventions over configuration framework, it still exposes
@@ -30,7 +30,7 @@ but if required you can add additional configuration files and load them in
 general configuration, and the adapter based classes provide ``config()``
 methods to make configuration simple and transparent.
 
-Loading additional configuration files
+Loading Additional Configuration Files
 --------------------------------------
 
 If your application has many configuration options it can be helpful to split
@@ -49,7 +49,7 @@ overrides. Each file loaded after ``app.php`` can redefine previously declared
 values allowing you to customize configuration for development or staging
 environments.
 
-General configuration
+General Configuration
 ---------------------
 
 Below is a description of the variables and how they affects your CakePHP
@@ -120,25 +120,25 @@ Caching Configuration
 See the :ref:`cache-configuration` for information on configuring caching in
 CakePHP.
 
-Error and Exception handling configuration
+Error and Exception Handling Configuration
 ------------------------------------------
 
 See the sections on :ref:`error-configuration` for information on configuring
 error and exception handlers.
 
-Logging configuration
+Logging Configuration
 ---------------------
 
 See the :ref:`log-configuration` for information on configuring logging in
 CakePHP.
 
-Email configuration
+Email Configuration
 -------------------
 
 See the :ref:`email-configuration` for information on configuring email presets in
 CakePHP.
 
-Session configuration
+Session Configuration
 ---------------------
 
 See the :ref:`session-configuration` for information on configuring session
@@ -188,7 +188,7 @@ to multiple directories with the following::
         }
     }
 
-View and plugin paths
+View and Plugin Paths
 ---------------------
 
 Since views and plugins are not classes, they cannot have an autoloader
@@ -227,7 +227,7 @@ under\_scores) might not work as you'd like. If CakePHP won't
 recognize your Foci or Fish, you can tell CakePHP about your
 special cases.
 
-Loading custom inflections
+Loading Custom Inflections
 --------------------------
 
 You can use :php:meth:`Cake\Utility\Inflector::rules()` in the file
@@ -406,7 +406,7 @@ files with that engine would fail.
 
 .. _loading-configuration-files:
 
-Loading configuration files
+Loading Configuration Files
 ---------------------------
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
@@ -426,7 +426,7 @@ in Configure. This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
-Creating or modifying configuration files
+Creating or Modifying Configuration Files
 -----------------------------------------
 
 .. php:staticmethod:: dump($key, $config = 'default', $keys = array())
@@ -455,7 +455,7 @@ Save only the error handling configuration::
 configuration files that are readable with :php:meth:`Configure::load()`
 
 
-Storing runtime configuration
+Storing Runtime Configuration
 -----------------------------
 
 .. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
@@ -477,7 +477,7 @@ use it in subsequent requests::
 Stored configuration data is persisted in the :php:class:`Cache` class. This allows
 you to store Configuration information in any storage engine that :php:class:`Cache` can talk to.
 
-Restoring runtime configuration
+Restoring Runtime Configuration
 -------------------------------
 
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
@@ -495,7 +495,7 @@ When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
-Creating your own Configuration engines
+Creating your Own Configuration Engines
 =======================================
 
 Since configuration engines are an extensible part of CakePHP,
@@ -565,7 +565,7 @@ that the resource named ``$key`` contains.
     :php:interface:`ConfigEngineInterface` implementations should throw this
     error when they encounter an error.
 
-Built-in Configuration engines
+Built-in Configuration Engines
 ------------------------------
 
 .. php:class:: PhpConfig

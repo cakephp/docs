@@ -207,7 +207,7 @@ If you pass a locale that doesn't exist on your computer to
 effect. You can find the list of available locales by running the
 command ``locale -a`` in a terminal.
 
-Translating model validation errors
+Translating Model Validation Errors
 ===================================
 CakePHP will automatically extract the validation error when you are using the
 :doc:`i18n console task </console-and-shells>`. By default, the default domain is used.

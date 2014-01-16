@@ -25,7 +25,7 @@ and retrieving user photos, finding new friends for suggestions, etc.
 While the model objects can be thought as "Friend", "User", "Comment", or
 "Photo".
 
-The View layer
+The View Layer
 ==============
 
 The View renders a presentation of modeled data. Being separated from the
@@ -40,7 +40,7 @@ The View layer is not only limited to HTML or text representation of the data,
 it can be used to deliver a wide variety of formats depending on your needs,
 such as videos, music, documents and any other format you can think of.
 
-The Controller layer
+The Controller Layer
 ====================
 
 The Controller layer handles requests from users. It's responsible for rendering
@@ -54,7 +54,7 @@ type of presentational data that the client is accepting, to finally delegate
 this rendering process to the View layer.
 
 
-CakePHP request cycle
+CakePHP Request Cycle
 =====================
 
 |Figure 1|

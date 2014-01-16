@@ -39,7 +39,7 @@ components in your ``$components`` array.
     of the request. See the ``$validatePost`` or ``$disabledFields``
     configuration parameters.
 
-Handling blackhole callbacks
+Handling Blackhole Callbacks
 ============================
 
 If an action is restricted by the Security Component it is
@@ -75,7 +75,7 @@ in the controller.
       error.
     * 'secure' Indicates an SSL method restriction failure.
 
-Restrict actions to SSL
+Restrict Actions to SSL
 =======================
 
 .. php:method:: requireSecure()
@@ -90,7 +90,7 @@ Restrict actions to SSL
     token. Takes any number of arguments. Can be called with no
     arguments to force all actions to require a valid authentication.
 
-Restricting cross controller communication
+Restricting Cross Controller Communication
 ==========================================
 
 .. php:attr:: allowedControllers
@@ -105,7 +105,7 @@ Restricting cross controller communication
     receive requests. This can be used to control cross controller
     requests.
 
-Form tampering prevention
+Form Tampering Prevention
 =========================
 
 By default ``SecurityComponent`` prevents users from tampering with forms. It
@@ -183,7 +183,7 @@ non-secure requests to secure requests automatically.
 
 .. _security-csrf:
 
-CSRF protection
+CSRF Protection
 ===============
 
 CSRF or Cross Site Request Forgery is a common vulnerability in web
@@ -196,7 +196,7 @@ features. They work by adding a special token to each form request. This token
 once used cannot be used again. If an attempt is made to re-use an expired
 token the request will be blackholed.
 
-Disabling Security Component For Specific Actions
+Disabling Security Component for Specific Actions
 =================================================
 
 There may be cases where you want to disable all security checks for an action (ex. AJAX requests).

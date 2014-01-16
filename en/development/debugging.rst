@@ -170,7 +170,7 @@ set to a value greater than 0.
 
     .. versionadded:: 2.1
 
-Using Logging to debug
+Using Logging to Debug
 ======================
 
 Logging messages is another good way to debug applications, and you can use

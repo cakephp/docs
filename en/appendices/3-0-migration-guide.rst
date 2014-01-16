@@ -18,7 +18,7 @@ Requirements
 
     CakePHP 3.0 will not work if you do not meet the above requirements.
 
-Application directory layout
+Application Directory Layout
 ============================
 
 The application directory layout has changed and now follows
@@ -151,7 +151,7 @@ Object
 Console
 =======
 
-TaskCollection replaced
+TaskCollection Replaced
 -----------------------
 
 This class has been renamed to :php:class:`Cake\\Console\\TaskRegistry`.
@@ -160,7 +160,7 @@ on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code. Tasks no longer have
 access to callbacks, as there were never any callbacks to use.
 
-ApiShell removed
+ApiShell Removed
 ----------------
 
 The ApiShell was removed as it didn't provide any benefit over the file source itself
@@ -365,7 +365,7 @@ The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
 infrequently used, and never intended for production use. It will be replaced by
 a standalone plugin that people requiring that feature can use.
 
-ComponentCollection replaced
+ComponentCollection Replaced
 ----------------------------
 
 This class has been renamed to :php:class:`Cake\\Controller\\ComponentRegistry`.
@@ -488,7 +488,7 @@ ControllerTestCase
 View
 ====
 
-View folders renamed
+View Folders Renamed
 --------------------
 
 The following View folders have been renamed to avoid naming collisions with controller names:
@@ -518,7 +518,7 @@ Helper
   - params
 
 
-HelperCollection replaced
+HelperCollection Replaced
 -------------------------
 
 This class has been renamed to :php:class:`Cake\\View\\HelperRegistry`.
@@ -526,7 +526,7 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code.
 
-View class
+View Class
 ----------
 
 - The ``plugin`` key has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.

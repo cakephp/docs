@@ -10,7 +10,7 @@ You can use the `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ to check that your code
 follows required standards.
 
-Adding new features
+Adding New Features
 ===================
 
 No new features should be added, without having their own tests – which
@@ -109,7 +109,7 @@ clarity::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
-View files
+View Files
 ----------
 
 In view files (.ctp files) developers should use keyword control structures.
@@ -164,7 +164,7 @@ function call::
 As you can see above there should be one space on both sides of equals
 sign (=).
 
-Method definition
+Method Definition
 =================
 
 Example of a function definition::
@@ -196,7 +196,7 @@ successful::
 
 There are spaces on both side of the equals sign.
 
-Commenting code
+Commenting Code
 ===============
 
 All comments should be written in English, and should in a clear way
@@ -246,7 +246,7 @@ processed if they are the first thing in a DocBlock line, for example::
 Comment blocks, with the exception of the first block in a file, should
 always be preceded by a newline.
 
-Including files
+Including Files
 ===============
 
 ``include``, ``require``, ``include_once`` and ``require_once`` do not have parentheses::
@@ -262,12 +262,12 @@ Including files
 When including files with classes or libraries, use only and always the
 `require\_once <http://php.net/require_once>`_ function.
 
-PHP tags
+PHP Tags
 ========
 
 Always use long tags (``<?php ?>``) Instead of short tags (<? ?>).
 
-Naming convention
+Naming Convention
 =================
 
 Functions
@@ -300,7 +300,7 @@ associate to the class the variable is an object of. Example::
 
     $Dispatcher = new Dispatcher();
 
-Member visibility
+Member Visibility
 -----------------
 
 Use PHP5's private and protected keywords for methods and variables. Additionally,
@@ -339,7 +339,7 @@ indented with one tab::
         ->subject('A great message')
         ->send();
 
-Example addresses
+Example Addresses
 -----------------
 
 For all example URL and mail addresses use "example.com", "example.org"
@@ -362,7 +362,7 @@ example:
 
     long_file_name.php
 
-Variable types
+Variable Types
 --------------
 
 Variable types for use in DocBlocks:

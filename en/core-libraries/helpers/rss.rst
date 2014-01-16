@@ -5,7 +5,7 @@ RSS
 
 The RSS helper makes generating XML for RSS feeds easy.
 
-Creating an RSS feed with the RssHelper
+Creating an RSS Feed with the RssHelper
 =======================================
 
 This example assumes you have a Posts Controller and Post Model

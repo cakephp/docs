@@ -49,7 +49,7 @@ used.
 
     Used to check is a session is valid in a view.
 
-Displaying notifications or flash messages
+Displaying Notifications or Flash Messages
 ==========================================
 
 .. php:method:: flash(string $key = 'flash', array $params = array())

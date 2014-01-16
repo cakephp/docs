@@ -216,7 +216,7 @@ Once you have PHPUnit installed and some test cases written, you'll want to run
 the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
-Running tests from a browser
+Running Tests from a Browser
 ----------------------------
 
 CakePHP provides a web interface for running tests, so you can execute your
@@ -229,7 +229,7 @@ Once you've loaded up the test runner, you can navigate App, Core and Plugin tes
 suites. Clicking an individual test case will run that test and display the
 results.
 
-Viewing code coverage
+Viewing Code Coverage
 ~~~~~~~~~~~~~~~~~~~~~
 
 If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
@@ -249,7 +249,7 @@ lines are considered unexecutable code by xdebug.
 
 .. _run-tests-from-command-line:
 
-Running tests from command line
+Running Tests from Command Line
 -------------------------------
 
 CakePHP provides a ``test`` shell for running tests. You can run app, core
@@ -282,7 +282,7 @@ choose what test(s) to run::
     # Run test in project root directory for an application in ./myapp
     lib/Cake/Console/cake test --app myapp app
 
-Filtering test cases
+Filtering Test Cases
 ~~~~~~~~~~~~~~~~~~~~
 
 When you have larger test cases, you will often want to run a subset of the test
@@ -294,7 +294,7 @@ CLI runner you can use an option to filter test methods::
 The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
 
-Generating code coverage
+Generating Code Coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can generate code coverage reports from the command line using PHPUnit's
@@ -308,7 +308,7 @@ This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-Running tests that use sessions
+Running Tests that Use Sessions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When running tests on the command line that use sessions you'll need to include
@@ -357,7 +357,7 @@ test case:
 #. Empties the fixture tables.
 #. Removes fixture tables from database.
 
-Creating fixtures
+Creating Fixtures
 -----------------
 
 When creating a fixture you will mainly define two things: how the table is
@@ -439,7 +439,7 @@ in mind that each record in the $records array must have a key for **every**
 field specified in the ``$fields`` array. If a field for a particular record needs
 to have a ``null`` value, just specify the value of that key as ``null``.
 
-Dynamic data and fixtures
+Dynamic Data and Fixtures
 -------------------------
 
 Since records for a fixture are declared as a class property, you cannot easily
@@ -483,7 +483,7 @@ could do the following::
 
 When overriding ``init()`` just remember to always call ``parent::init()``.
 
-Importing table information
+Importing Table Information
 ---------------------------
 
 Defining the schema in fixture files can be really handy when creating plugins
@@ -527,7 +527,7 @@ already have a test database setup with all the empty tables created. By
 defining neither ``$fields`` or ``$import`` a fixture will only insert its
 records and truncate the records on each test method.
 
-Loading fixtures in your test cases
+Loading Fixtures in your Test Cases
 -----------------------------------
 
 After you've created your fixtures, you'll want to use them in your test cases.
@@ -608,7 +608,7 @@ queries run against them.
     property. Ensure that the relevant fixture uses the same value so that the
     table is created in the correct database.
 
-Creating a test method
+Creating a Test Method
 ----------------------
 
 Let's now add a method to test the function published() in the
@@ -655,7 +655,7 @@ information on how to run your test case.
     ``ClassRegistry::init('YourModelName');`` as it knows to use your test
     database connection.
 
-Mocking model methods
+Mocking Model Methods
 ---------------------
 
 There will be times you'll want to mock methods on models when testing them. You should
@@ -795,7 +795,7 @@ redirect is reached. Instead, you should write the code like::
 In this case ``// more code`` will not be executed as the method will return
 once the redirect is reached.
 
-Simulating GET requests
+Simulating GET Requests
 -----------------------
 
 As seen in the ``testIndexPostData()`` example above, you can use
@@ -818,7 +818,7 @@ method key::
 The data key will be used as query string parameters when simulating a GET
 request.
 
-Choosing the return type
+Choosing the Return Type
 ------------------------
 
 You can choose from a number of ways to inspect the success of your controller
@@ -841,7 +841,7 @@ case::
     }
 
 
-Using mocks with testAction
+Using Mocks with testAction
 ---------------------------
 
 There will be times when you want to replace components or models with either
@@ -878,7 +878,7 @@ The response object in the generated controller is always replaced with a mock
 that does not send headers. After using ``generate()`` or ``testAction()`` you
 can access the controller object at ``$this->controller``.
 
-A more complex example
+A More Complex Example
 ----------------------
 
 In its simplest form, ``testAction()`` will run ``PostsController::index()`` on
@@ -1227,13 +1227,13 @@ following assumes you've already installed Jenkins on \*nix system, and are able
 to administer it. You also know how to create jobs, and run builds. If you are
 unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
 
-Create a job
+Create a Job
 ------------
 
 Start off by creating a job for your application, and connect your repository
 so that jenkins can access your code.
 
-Add test database config
+Add Test Database Config
 ------------------------
 
 Using a separate database just for Jenkins is generally a good idea, as it stops
@@ -1264,7 +1264,7 @@ following::
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
-Add your tests
+Add your Tests
 --------------
 
 Add another *shell script step* to your build. In this step run the tests for
@@ -1279,7 +1279,7 @@ bonus, as it gives you a nice graphical view of your testing results::
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
 
-Run a build
+Run a Build
 -----------
 
 You should be able to run a build now. Check the console output and make any

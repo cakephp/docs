@@ -10,7 +10,7 @@ re-implement an XML parser. The new XML class will basically transform an array
 into SimpleXMLElement or DOMDocument objects, and vice versa.
 
 
-Importing data to Xml class
+Importing Data to Xml Class
 ===========================
 
 In CakePHP 1.3 you can pass array, XML as string, URL or file path to the
@@ -81,7 +81,7 @@ If your input is invalid the Xml class will throw a Exception::
     Be sure to use the correct methods on the object you request from Xml.
 
 
-Transforming a XML string in array
+Transforming a XML String in Array
 ==================================
 
 Converting XML strings into arrays is simple with the Xml class as well. By
@@ -98,7 +98,7 @@ default you'll get a SimpleXml object back::
 
 If your XML is invalid it will throw a Exception.
 
-Transforming an array into a string of XML
+Transforming an Array into a String of XML
 ==========================================
 
 ::
@@ -250,7 +250,7 @@ The value of ``$xml1`` and ``$xml2`` will be, respectively::
     <?xml version="1.0"?>
     <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
-Creating a child
+Creating a Child
 ----------------
 
 The Xml class of CakePHP 2.0 doesn't provide the manipulation of content, this

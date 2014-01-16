@@ -12,7 +12,7 @@ Sessions can be configured in a number of ways in CakePHP. For more
 information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
 
-Interacting with Session data
+Interacting with Session Data
 =============================
 
 The Session component is used to interact with session information.
@@ -79,7 +79,7 @@ all Session component methods wherever a name/key is used.
 
 .. _creating-notification-messages:
 
-Creating notification messages
+Creating Notification Messages
 ==============================
 
 .. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')

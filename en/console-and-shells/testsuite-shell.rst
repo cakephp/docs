@@ -1,4 +1,4 @@
-Test shell
+Test Shell
 ##########
 
 Once you've started writing :doc:`Tests </development/testing>` you can run them

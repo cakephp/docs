@@ -38,7 +38,7 @@ Translator tips:
 - If the original content is missing some info, submit an edit for
   that first.
 
-Documentation formatting guide
+Documentation Formatting Guide
 ==============================
 
 The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
@@ -47,7 +47,7 @@ textile. To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
 structure your text.
 
-Line length
+Line Length
 -----------
 
 Lines of text should be wrapped at 80 columns. The only exception should be
@@ -74,7 +74,7 @@ Paragraphs
 Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
 Paragraphs should be separated by more than one empty line.
 
-Inline markup
+Inline Markup
 -------------
 
 * One asterisk: *text* for emphasis (italics)
@@ -142,7 +142,7 @@ Links
 
 There are several kinds of links, each with their own uses.
 
-External links
+External Links
 ~~~~~~~~~~~~~~
 
 Links to external documents can be with the following::
@@ -151,7 +151,7 @@ Links to external documents can be with the following::
 
 The above would generate a link pointing to http://example.com
 
-Links to other pages
+Links to Other Pages
 ~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
@@ -164,7 +164,7 @@ Links to other pages
     ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
     regardless of where it was used.
 
-Cross referencing links
+Cross Referencing Links
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
@@ -187,7 +187,7 @@ Cross referencing links
     The link's text would be the title that the link preceded. You can also
     provide custom link text using ``:ref:`Link text <label-name>```.
 
-Describing classes and their contents
+Describing Classes and their Contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
@@ -195,7 +195,7 @@ The CakePHP documentation uses the `phpdomain
 directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 
-Describing classes and constructs
+Describing Classes and Constructs
 ---------------------------------
 
 Each directive populates the index, and or the namespace index.
@@ -313,7 +313,7 @@ matching directive is found:
    Reference an exception.
 
 
-Source code
+Source Code
 -----------
 
 Literal code blocks are created by ending a paragraph with ``::``. The literal
@@ -330,7 +330,7 @@ block must be indented, and like all paragraphs be separated by single lines::
 Literal text is not modified or formatted, save that one level of indentation is removed.
 
 
-Notes and warnings
+Notes and Warnings
 ------------------
 
 There are often times when you want to inform the reader of an important tip,

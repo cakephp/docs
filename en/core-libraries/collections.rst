@@ -204,7 +204,7 @@ element from the collection having the highest property value::
 
     $personWithOldestDad = $collection->min('dad.age');
 
-Grouping and counting
+Grouping and Counting
 ---------------------
 
 Collection values can be grouped by different keys in a new collection when they
@@ -329,7 +329,7 @@ By default ``SORT_NUMERIC`` is used::
     plan to do so, consider converting the collection to an array or simply use
     the ``compile`` method on it.
 
-Other methods
+Other Methods
 =============
 
 Collections allow you to quickly check if they contain one particular
@@ -351,7 +351,7 @@ position, use the ``shuffle``::
     // This could return ['b' => 2, 'c' => 3, 'a' => 1]
     $collection->shuffle()->toArray();
 
-Withdrawing elements
+Withdrawing Elements
 --------------------
 
 Shuffling a collection is often useful when doing quick statistical analysis,
@@ -380,7 +380,7 @@ first argument, starting from the position passed in the second argument::
 
 Positions are zero-based, therefore the first position number is ``0``.
 
-Expanding collections
+Expanding Collections
 ---------------------
 
 You can compose multiple collections into a single one. This enables you to
@@ -405,7 +405,7 @@ collection containing the values from both sources::
     others in the previous one based on their key, make sure that you call
     ``toArray(false)`` in order to drop the keys and preserve all values.
 
-Optimizing collections
+Optimizing Collections
 ----------------------
 
 Collections often perform most operations that you create using its functions in

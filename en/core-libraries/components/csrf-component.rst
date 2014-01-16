@@ -53,7 +53,7 @@ token.
     FormHelper. If you do not, you will need to manually create hidden inputs in
     each of your forms.
 
-Sending data through the X-CSRF-Token header
+Sending Data through the X-CSRF-Token Header
 ============================================
 
 In addition to request data parameters, CSRF tokens can be submitted through
@@ -61,7 +61,7 @@ a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
-Disabling the CSRF Component for specific actions
+Disabling the CSRF Component for Specific Actions
 =================================================
 
 While not recommended, you may want to disable the CsrfComponent on certain

@@ -29,7 +29,7 @@ are a few examples of how to use the $htmlAttributes parameter:
     due to its name being missing from a manually configured $helpers
     controller variable.
 
-Inserting Well-Formatted elements
+Inserting Well-Formatted Elements
 =================================
 
 The most important task the HtmlHelper accomplishes is creating
@@ -948,7 +948,7 @@ methods of the HtmlHelper and how to use them.
 
         <form action="http://example.com" method="post" class="myform">
 
-Changing the tags output by HtmlHelper
+Changing the Tags Output by HtmlHelper
 ======================================
 
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
@@ -972,7 +972,7 @@ Changing the tags output by HtmlHelper
     You can then load this tag set by calling
     ``$this->Html->loadConfig('html5_tags');``
 
-Creating breadcrumb trails with HtmlHelper
+Creating Breadcrumb Trails with HtmlHelper
 ==========================================
 
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)

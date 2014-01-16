@@ -54,7 +54,7 @@ data member usage for a class.::
 
     lib/Cake/Test/Case
 
-The IRC channel
+The IRC Channel
 ===============
 
 **IRC Channels on irc.freenode.net:**
