@@ -28,7 +28,7 @@ The default configuration will do the following:
   to the current time.
 - When an entity is updated, the ``modified`` field is set to the current time.
 
-Using and Xonfiguring the Behavior
+Using and Configuring the Behavior
 ==================================
 
 If you need to modify fields with different names, or want to update additional
