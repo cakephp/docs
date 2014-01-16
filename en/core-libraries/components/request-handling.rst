@@ -133,7 +133,7 @@ Obtaining Additional Client Information
     Gets Prototype version if call is AJAX, otherwise empty string. The
     Prototype library sets a special "Prototype version" HTTP header.
 
-Automatically decoding request data
+Automatically Decoding Request Data
 ===================================
 
 .. php:method:: addInputType($type, $handler)
@@ -254,7 +254,7 @@ application.
     one has yet to be set.
 
 
-Taking advantage of HTTP cache validation
+Taking Advantage of HTTP Cache Validation
 =========================================
 
 .. versionadded:: 2.1

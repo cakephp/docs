@@ -60,13 +60,13 @@ command line::
     $ cake bake all
 
 
-Modify default HTML produced by "baked" templates
+Modify Default HTML Produced by "baked" Templates
 =================================================
 
 If you wish to modify the default HTML output produced by the
 "bake" command, follow these simple steps:
 
-For baking custom views
+For Baking Custom Views
 ------------------------
 
 
@@ -81,7 +81,7 @@ The ``[themename]`` path segment should be the name of the bake
 theme that you are creating. Bake theme names need to be unique, so
 don't use 'default'.
 
-For baking custom projects
+For Baking Custom Projects
 --------------------------
 
 #. Go into: lib/Cake/Console/Templates/skel
@@ -108,7 +108,7 @@ For baking custom projects
        supporting overriding the skel folder like it does for views)
 
 
-Bake improvements in 1.3
+Bake Improvements in 1.3
 ========================
 
 For 1.3 bake has had a significant overhaul, and a number of

@@ -29,7 +29,7 @@ ways of authenticating users stored in your application.
 
 By default ``AuthComponent`` uses ``FormAuthenticate``.
 
-Choosing an Authentication type
+Choosing an Authentication Type
 -------------------------------
 
 Generally you'll want to offer form based authentication. It is the easiest for
@@ -46,7 +46,7 @@ applications without SSL encryption.
 You can also use authentication systems like openid as well, however openid is
 not part of CakePHP core.
 
-Configuring Authentication handlers
+Configuring Authentication Handlers
 -----------------------------------
 
 You configure authentication handlers using ``$this->Auth->authenticate``.
@@ -146,7 +146,7 @@ the following keys:
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
   to ``md5($settings['realm'])``
 
-Identifying users and logging them in
+Identifying Users and Logging Them In
 -------------------------------------
 
 In the past ``AuthComponent`` auto-magically logged users in. This was
@@ -180,7 +180,7 @@ or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful, a fl
     whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in
     when successful.
 
-Using Digest and Basic Authentication for logging in
+Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because basic and digest authentication don't require an initial POST or a form
@@ -198,7 +198,7 @@ using cookies.
   only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
   will cause an error prior to 2.4.
 
-Creating Custom Authentication objects
+Creating Custom Authentication Objects
 --------------------------------------
 
 Because authentication objects are pluggable, you can create custom
@@ -226,7 +226,7 @@ also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
 basic and digest authentication below for more information.
 
-Using custom authentication objects
+Using Custom Authentication Objects
 -----------------------------------
 
 Once you've created your custom authentication object, you can use them
@@ -237,7 +237,7 @@ by including them in AuthComponents authenticate array::
         'AuthBag.Combo', // plugin authentication object.
     );
 
-Creating stateless authentication systems
+Creating Stateless Authentication Systems
 -----------------------------------------
 
 Authentication objects can implement a ``getUser()`` method that can be
@@ -265,7 +265,7 @@ The above is how you could implement getUser method for HTTP basic
 authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
-Handling unauthenticated requests
+Handling Unauthenticated Requests
 ---------------------------------
 
 When an unauthenticated user tries to access a protected page first the
@@ -283,7 +283,7 @@ is rendered else a 403 HTTP status code is returned.
 
   Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
 
-Displaying auth related flash messages
+Displaying Auth Related Flash Messages
 --------------------------------------
 
 In order to display the session error messages that Auth generates, you
@@ -322,7 +322,7 @@ In your controller's beforeFilter(), or component settings::
 
 .. _hashing-passwords:
 
-Hashing passwords
+Hashing Passwords
 -----------------
 
 Authenticating objects use a new setting ``passwordHasher`` which specifies the
@@ -362,7 +362,7 @@ callback of your model using appropriate password hasher class::
 You don't need to hash passwords before calling ``$this->Auth->login()``.
 The various authentication objects will hash passwords individually.
 
-Hashing passwords for digest authentication
+Hashing Passwords for Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
@@ -394,7 +394,7 @@ other password hashes, based on the RFC for digest authentication.
     ``env('SCRIPT_NAME)``. You may wish to use a static string if you
     want consistent hashes in multiple environments.
 
-Creating custom password hasher classes
+Creating Custom Password Hasher Classes
 ---------------------------------------
 Custom password hasher classes need to extend the ``AbstractPasswordHasher``
 class and need to implement the abstract methods ``hash()`` and ``check()``.
@@ -413,7 +413,7 @@ the following::
         }
     }
 
-Manually logging users in
+Manually Logging Users In
 -------------------------
 
 Sometimes the need arises where you need to manually log a user in, such
@@ -434,7 +434,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     Be sure to manually add the new User id to the array passed to the login
     method. Otherwise you won't have the user id available.
 
-Accessing the logged in user
+Accessing the Logged In User
 ----------------------------
 
 Once a user is logged in, you will often need some particular
@@ -450,7 +450,7 @@ it both as an instance method or as a static method::
     $this->Auth->user('id');
 
 
-Logging users out
+Logging Users Out
 -----------------
 
 Eventually you'll want a quick way to de-authenticate someone, and
@@ -489,7 +489,7 @@ application, or as part of a plugin.
   and uses the return of that to authorize a user. This is often the
   most simple way to authorize users.
 
-Configuring Authorization handlers
+Configuring Authorization Handlers
 ----------------------------------
 
 You configure authorization handlers using ``$this->Auth->authorize``.
@@ -543,7 +543,7 @@ The core authorize objects support the following configuration keys.
   under. Used with ActionsAuthorize.
 
 
-Creating Custom Authorize objects
+Creating Custom Authorize Objects
 ---------------------------------
 
 Because authorize objects are pluggable, you can create custom authorize
@@ -567,7 +567,7 @@ that you extend ``BaseAuthorize``, only that your authorize object
 implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
 a number of helpful methods that are commonly used.
 
-Using custom authorize objects
+Using Custom Authorize Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
@@ -578,7 +578,7 @@ including them in your AuthComponent's authorize array::
         'AuthBag.Combo', // plugin authorize object.
     );
 
-Using no authorization
+Using No Authorization
 ----------------------
 
 If you'd like to not use any of the built-in authorization objects, and
@@ -589,7 +589,7 @@ make sure to check authorization yourself in your controller's
 beforeFilter, or with another component.
 
 
-Making actions public
+Making Actions Public
 ---------------------
 
 There are often times controller actions that you wish to remain
@@ -619,7 +619,7 @@ user, nor will authorize objects be checked::
 You can provide as many action names as you need to ``allow()``. You can
 also supply an array containing all the action names.
 
-Making actions require authorization
+Making Actions Require Authorization
 ------------------------------------
 
 By default all actions require authorization. However, after making actions
@@ -703,7 +703,7 @@ then be for the ``posts`` controller with the ``read`` permission. This
 allows you to create permission systems that focus more on what is being
 done to resources, rather than the specific actions being visited.
 
-Mapping actions when using CrudAuthorize
+Mapping Actions When Using CrudAuthorize
 ----------------------------------------
 
 When using CrudAuthorize or any other authorize objects that use action

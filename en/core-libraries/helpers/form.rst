@@ -273,7 +273,7 @@ Closing the Form
 
 .. _automagic-form-elements:
 
-Creating form elements
+Creating Form Elements
 ======================
 
 There are a few ways to create form inputs with the FormHelper. We'll start by
@@ -424,7 +424,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     - ``legend`` Set to false to disable the legend for the generated input set.
       Or supply a string to customize the legend text.
 
-Field naming conventions
+Field Naming Conventions
 ------------------------
 
 The Form helper is pretty smart. Whenever you specify a field name
@@ -724,7 +724,7 @@ HTML attributes. The following will cover the options specific to
   If you need to later change the defaults you can use
   :php:meth:`FormHelper::inputDefaults()`.
 
-Generating specific types of inputs
+Generating Specific Types of Inputs
 ===================================
 
 In addition to the generic ``input()`` method, ``FormHelper`` has specific
@@ -735,7 +735,7 @@ generate fully custom form layouts.
 
 .. _general-input-options:
 
-Common options
+Common Options
 --------------
 
 Many of the various input element methods support a common set of options. All
@@ -780,8 +780,8 @@ use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
 
 
-Options for select, checkbox and  radio inputs
-----------------------------------------------
+Options for Select, Checkbox and Radio Inputs
+---------------------------------------------
 
 * ``$options['selected']`` Used in combination with a select-type input (i.e.
   For types select, date, time, datetime). Set 'selected' to the value of the
@@ -889,7 +889,7 @@ Options for select, checkbox and  radio inputs
           'hiddenField' => 'N',
       ));
 
-Datetime options
+Datetime Options
 ----------------
 
 * ``$options['timeFormat']`` Used to specify the format of the select inputs for
@@ -1363,7 +1363,7 @@ Will output:
     ``$this->Form->create()``
 
 
-Creating buttons and submit elements
+Creating Buttons and Submit Elements
 ====================================
 
 .. php:method:: submit(string $caption, array $options)
@@ -1450,7 +1450,7 @@ Creating buttons and submit elements
     .. versionchanged:: 2.3
         The ``method`` option was added.
 
-Creating date and time inputs
+Creating Date and Time Inputs
 =============================
 
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
@@ -1560,7 +1560,7 @@ Creating date and time inputs
     Creates a select element populated with 'am' and 'pm'.
 
 
-Displaying and checking errors
+Displaying and Checking Errors
 ==============================
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
@@ -1595,7 +1595,7 @@ Displaying and checking errors
     errors. Otherwise it returns the validation message.
 
 
-Setting Defaults for all fields
+Setting Defaults for All Fields
 ===============================
 
 .. versionadded:: 2.2

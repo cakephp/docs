@@ -14,7 +14,7 @@ create paginated datasets and do paginated queries.
 
 .. _paginator-templates:
 
-PaginatorHelper templates
+PaginatorHelper Templates
 =========================
 
 Internally PaginatorHelper uses a series of simple HTML templates to generate
@@ -24,7 +24,7 @@ PaginatorHelper.
 Templates use ``{{var}}`` style placeholders. It is important to not add any
 spaces around the `{{}}` or the replacements will not work.
 
-Loading templates from a file
+Loading Templates from a File
 -----------------------------
 
 When adding the PaginatorHelper in your controller, you can define the
@@ -52,7 +52,7 @@ templates file should look something like::
         'number' => '<a href="{{url}}">{{text}}</a>',
     ];
 
-Changing templates at run-time
+Changing Templates at Run-time
 ------------------------------
 
 .. php:method:: templates($templates = null)
@@ -69,7 +69,7 @@ a particular method call::
         'number' => '<em><a href="{{url}}">{{text}}</a></em>'
     ]);
 
-Template names
+Template Names
 --------------
 
 PaginatorHelper uses the following templates:
@@ -90,7 +90,7 @@ PaginatorHelper uses the following templates:
 - ``sortDesc`` The template for a sort link with a descending direction.
 
 
-Creating sort links
+Creating Sort Links
 ===================
 
 .. php:method:: sort($key, $title = null, $options = [])
@@ -280,7 +280,7 @@ pages in the paged data set.
     ``$last`` no links will be generated once the user is inside the range of last
     pages.
 
-Checking the pagination state
+Checking the Pagination State
 =============================
 
 .. php:method:: current(string $model = null)
@@ -303,7 +303,7 @@ Checking the pagination state
 
     Returns true if the given result set has the page number given by ``$page``.
 
-Creating a page counter
+Creating a Page Counter
 =======================
 
 .. php:method:: counter($options = [])
@@ -346,7 +346,7 @@ There are a number of options for ``counter()``. The supported ones are:
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
   conjunction with the custom string on 'format' option.
 
-Modifying the options PaginatorHelper uses
+Modifying the Options PaginatorHelper Uses
 ==========================================
 
 .. php:method:: options($options = [])

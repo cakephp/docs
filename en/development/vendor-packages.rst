@@ -1,9 +1,9 @@
-Vendor packages
+Vendor Packages
 ###############
 
 Vendor file information goes here.
 
-Vendor assets
+Vendor Assets
 =============
 
 Support for vendor assets have been removed for 1.3. It is

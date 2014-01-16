@@ -47,7 +47,7 @@ can greatly improve performance as well.
 
 .. _cache-configuration:
 
-Configuring Cache class
+Configuring Cache Class
 =======================
 
 Configuring the Cache class can be done anywhere, but generally you will want to
@@ -109,7 +109,7 @@ Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
 :php:meth:`Cake\\Cache\\Cache::config()`.
 
-Other cache related configuration
+Other Cache Related Configuration
 ---------------------------------
 
 Other than configuring caching adapters, there are a few other cache related
@@ -136,7 +136,7 @@ Cache.check
     In debug mode missing directories will now be automatically created to avoid unnecessary
     errors thrown when using the FileEngine.
 
-Creating a storage engine for Cache
+Creating a Storage Engine for Cache
 ===================================
 
 You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
@@ -214,7 +214,7 @@ The required API for a CacheEngine is
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
 
-Using Cache to store common query results
+Using Cache to Store Common Query Results
 =========================================
 
 You can greatly improve the performance of your application by putting
@@ -254,7 +254,7 @@ As of 2.5 you can accomplish the above much more simply using
         }
     }
 
-Using Cache to store counters
+Using Cache to Store Counters
 =============================
 
 Counters for various things are easily stored in a cache. For example, a simple
@@ -281,7 +281,7 @@ After setting an integer value you can manipulate it using
     APC, Redis or Memcached instead.
 
 
-Using groups
+Using Groups
 ============
 
 Sometimes you will want to mark multiple cache entries to belong to certain

@@ -1,6 +1,6 @@
 .. _upgrade-shell:
 
-Upgrade shell
+Upgrade Shell
 #############
 
 The upgrade shell will do most of the work to upgrade your CakePHP application

@@ -31,7 +31,7 @@ The event subsystem is at the heart of Model, Behavior, Controller, View and
 Helper callbacks. If you've ever used any of them, you are already somewhat
 familiar with events in CakePHP.
 
-Example event usage
+Example Event Usage
 ===================
 
 Let's suppose you are building a Cart plugin, and you'd like to focus on just
@@ -71,7 +71,7 @@ that an order has been created. You can then do tasks like send email
 notifications, update stock, log relevant statistics and other tasks in separate
 objects that focus on those concerns.
 
-Accessing event managers
+Accessing Event Managers
 ========================
 
 In CakePHP events are triggered against event managers. Event managers are
@@ -83,7 +83,7 @@ Each model has a separate event manager, while the View and Controller
 share one. This allows model events to be self contained, and allow components
 or controllers to act upon events created in the view if necessary.
 
-Global event manager
+Global Event Manager
 --------------------
 
 In addition to instance level event managers, CakePHP provides a global event
@@ -117,7 +117,7 @@ along. The listeners will handle all the extra logic around the
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
 
-Dispatching events
+Dispatching Events
 ==================
 
 Once you have obtained an instance of an event manager you can dispatch events
@@ -152,7 +152,7 @@ of any type, we recommend passing an associative array.
 The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event object as an argument
 and notifies all subscribed listeners.
 
-Registering listeners
+Registering Listeners
 =====================
 
 Listeners are the preferred way to register callbacks for an event. This is done by
@@ -190,7 +190,7 @@ As you can see in the above code, the ``attach`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents`` to attach the correct callbacks.
 
-Registering anonymous listeners
+Registering Anonymous Listeners
 -------------------------------
 
 While event listener objects are generally a better way to implement listeners,
@@ -215,7 +215,7 @@ supports::
 
 .. _event-priorities:
 
-Establishing priorities
+Establishing Priorities
 -----------------------
 
 In some cases you might want to control the order that listeners are invoked.
@@ -262,7 +262,7 @@ to use an array for specifying the callable method and the priority preference.
 The ``callable`` key is an special array entry that the manager will read to know
 what function in the class it should be calling.
 
-Getting event data as function parameters
+Getting Event Data as Function Parameters
 -----------------------------------------
 
 When events have data provided in their constructor, the provided data is
@@ -288,7 +288,7 @@ order.
     behavior and cannot be disabled.
 
 
-Stopping events
+Stopping Events
 ---------------
 
 Much like DOM events, you may want to stop an event to prevent additional
@@ -332,7 +332,7 @@ To check if an event was stopped, you call the ``isStopped()`` method in the eve
 In the previous example the order would not get saved if the event is stopped
 during the ``beforePlace`` process.
 
-Getting event results
+Getting Event Results
 ---------------------
 
 Every time a callback returns a value, it gets stored in the ``$result``
@@ -374,7 +374,7 @@ to the next callback. In most of the cases, providing objects as event data or
 result and directly altering the object is the best solution as the reference is
 kept the same and modifications are shared across all callback calls.
 
-Removing callbacks and listeners
+Removing Callbacks and Listeners
 --------------------------------
 
 If for any reason you want to remove any callback from the event manager just call

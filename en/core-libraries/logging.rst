@@ -56,7 +56,7 @@ Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
 :php:meth:`Cake\\Log\\Log::config()`.
 
-Creating log adapters
+Creating Log Adapters
 ---------------------
 
 Log adapters can be part of your application, or part of
@@ -132,7 +132,7 @@ As of 2.4 ``FileLog`` engine takes a few new options:
     Also new in 2.4: In debug mode missing directories will now be automatically created to avoid unnecessary
     errors thrown when using the FileEngine.
 
-Error and Exception logging
+Error and Exception Logging
 ===========================
 
 Errors and Exceptions can also be logged. By configuring the co-responding
@@ -140,7 +140,7 @@ values in your app.php file.  Errors will be displayed when debug > 0 and logged
 when debug == 0. To log uncaugh exceptions, set the ``log`` option to true. See
 :doc:`/development/configuration` for more information.
 
-Interacting with log streams
+Interacting with Log Streams
 ============================
 
 You can introspect the configured streams with
@@ -150,7 +150,7 @@ streams using :php:meth:`Cake\\Log\\Log::drop()`. Once a log stream has been
 dropped it will no longer receive messages.
 
 
-Using the FileLog adapter
+Using the FileLog Adapter
 =========================
 
 As its name implies FileLog writes log messages to files. The level of log
@@ -221,7 +221,7 @@ following keys:
 
 .. _writing-to-logs:
 
-Writing to logs
+Writing to Logs
 ===============
 
 Writing to the log files can be done in 2 different ways. The first
@@ -243,7 +243,7 @@ written.
 
 .. _logging-levels:
 
-Using levels
+Using Levels
 ------------
 
 CakePHP supports the standard POSIX set of logging levels. Each level represents
@@ -354,7 +354,7 @@ level configuration.
 
     .. versionadded: 3.0
 
-Convenience methods
+Convenience Methods
 -------------------
 
 The following convenience methods were added to log `$message` with the
@@ -369,7 +369,7 @@ appropriate log level.
 .. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
 
-Log adapter interface
+Log Adapter Interface
 =====================
 
 .. php:interface:: LogInterface

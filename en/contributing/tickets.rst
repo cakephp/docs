@@ -5,7 +5,7 @@ Getting feedback and help from the community in the form of tickets is an
 extremely important part of the CakePHP development process. All of CakePHP's
 tickets are hosted on `GitHub <https://github.com/cakephp/cakephp/issues>`_.
 
-Reporting bugs
+Reporting Bugs
 ==============
 
 Well written bug reports are very helpful. There are a few steps to help create
@@ -25,7 +25,7 @@ the best bug report possible:
   for that.
 
 
-Reporting security issues
+Reporting Security Issues
 =========================
 
 If you've found a security issue in CakePHP, please use the following procedure

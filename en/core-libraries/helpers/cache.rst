@@ -43,7 +43,7 @@ You will also need to add the CacheDispatcher to your dispatcher filters in your
   If you have a setup with multiple domains or languages you can use
   `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` to store the view cache files prefixed.
 
-Additional configuration options
+Additional Configuration Options
 --------------------------------
 
 CacheHelper has a few additional configuration options you can use to tune and

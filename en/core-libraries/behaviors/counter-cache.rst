@@ -11,7 +11,7 @@ comments it has. Or when showing a user you might want to show how many
 friends/followers she has. The CounterCache behavior is intended for these
 situations.
 
-Basic usage
+Basic Usage
 ===========
 
 You enable the CounterCache behavior like any other behavior, but it won't do
@@ -34,7 +34,7 @@ The counter's value will be updated each time an entity is saved or deleted. The
 counter **will not** be updated when you use ``updateAll()`` or ``deleteAll()``,
 or execute SQL you have written.
 
-Advanced usage
+Advanced Usage
 ==============
 
 If you need to keep a cached counter for less than all of the related records,

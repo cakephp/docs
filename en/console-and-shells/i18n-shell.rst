@@ -1,4 +1,4 @@
-I18N shell
+I18N Shell
 ##########
 
 The i18n features of CakePHP use `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
@@ -10,7 +10,7 @@ These templates files can then be given to translators so they can translate the
 strings in your application. Once you have translations done, pot files can be
 merged with existing translations to help update your translations.
 
-Generating POT files
+Generating POT Files
 ====================
 
 POT files can be generated for an existing application using the ``extract``
@@ -26,7 +26,7 @@ this command will be the file ``app/Locale/default.pot``. You use the pot file
 as a template for creating po files. If you are manually creating po files from
 the pot file, be sure to correctly set the ``Plural-Forms`` header line.
 
-Generating POT files for plugins
+Generating POT Files for Plugins
 --------------------------------
 
 You can generate a POT file for a specific plugin using::
@@ -35,7 +35,7 @@ You can generate a POT file for a specific plugin using::
 
 This will generate the required POT files used in the plugins.
 
-Model validation messages
+Model Validation Messages
 -------------------------
 
 You can set the domain to be used for extracted validation messages in your models.
@@ -49,7 +49,7 @@ You can also prevent the shell from extracting validation messages::
     ./Console/cake i18n extract --ignore-model-validation
 
 
-Excluding folders
+Excluding Folders
 -----------------
 
 You can pass a comma separated list of folders that you wish to be excluded.
@@ -57,7 +57,7 @@ Any path containing a path segment with the provided values will be ignored::
 
     ./Console/cake i18n extract --exclude Test,Vendor
 
-Skipping overwrite warnings for existing POT files
+Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------
 .. versionadded:: 2.2
 
@@ -66,7 +66,7 @@ already exists and will overwrite by default::
 
     ./Console/cake i18n extract --overwrite
 
-Extracting messages from the CakePHP core libraries
+Extracting Messages from the CakePHP Core Libraries
 ---------------------------------------------------
 .. versionadded:: 2.2
 
@@ -85,7 +85,7 @@ no to set the default behavior.
 
 
 
-Create the tables used by TranslateBehavior
+Create the Tables used by TranslateBehavior
 ===========================================
 
 The i18n shell can also be used to initialize the default tables used by the

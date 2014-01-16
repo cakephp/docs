@@ -5,7 +5,7 @@ The Folder and File utilities are convenience classes to help you read, write,
 and append to files; list files within a folder and other common directory
 related tasks.
 
-Basic usage
+Basic Usage
 ===========
 
 Ensure the classes are loaded using :php:meth:`App::uses()`::

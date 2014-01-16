@@ -74,7 +74,7 @@ Session cookie paths default to ``/`` in 2.0, to change this you can use the
         )
     ));
 
-Built-in Session handlers & configuration
+Built-in Session Handlers & Configuration
 =========================================
 
 CakePHP comes with several built-in session configurations. You can either use
@@ -157,7 +157,7 @@ you've created. CakePHP will attempt to load the handler from inside
 ``AppSessionHandler`` the file should be
 ``app/Model/Datasource/Session/AppSessionHandler.php``.
 
-Database sessions
+Database Sessions
 -----------------
 
 The changes in session configuration change how you define database sessions.
@@ -216,7 +216,7 @@ it to control settings like ``session.gc_divisor``::
     ));
 
 
-Creating a custom session handler
+Creating a Custom Session Handler
 =================================
 
 Creating a custom session handler is straightforward in CakePHP. In this
@@ -292,7 +292,7 @@ writing session data.
 
 .. php:class:: CakeSession
 
-Reading & writing session data
+Reading & Writing Session Data
 ==============================
 
 Depending on the context you are in, your application has different classes

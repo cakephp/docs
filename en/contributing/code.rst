@@ -5,7 +5,7 @@ Patches and pull requests are a great way to contribute code back to CakePHP.
 Pull requests can be created in github, and are prefered over patch files in
 ticket comments.
 
-Initial setup
+Initial Setup
 =============
 
 Before working on patches for CakePHP, it's a good idea to get your environment
@@ -46,7 +46,7 @@ Now that you have CakePHP setup you should be able to define a ``$test``
 :ref:`database connection <database-configuration>`, and 
 :ref:`run all the tests <running-tests>`.
 
-Working on a patch
+Working on a Patch
 ==================
 
 Each time you want to work on a bug, feature or enhancement create a topic
@@ -76,7 +76,7 @@ following:
 * Keep your commits logical, and write good clear and concise commit messages.
 
 
-Submitting a pull request
+Submitting a Pull Request
 =========================
 
 Once your changes are done and you're ready for them to be merged into CakePHP,
@@ -106,7 +106,7 @@ Once your branch is on github, you can discuss it on the
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
 submit a pull request on github. 
 
-Choosing where your changes will be merged into
+Choosing Where Your Changes will be Merged Into
 -----------------------------------------------
 
 When making pull requests you should make sure you select the correct base

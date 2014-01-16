@@ -8,7 +8,7 @@ Helpers, Tasks, and Behaviors.
 While the examples below, will use Components, the same behavior can be expected
 for Helpers, Behaviors, and Tasks in addition to Components.
 
-Loading objects
+Loading Objects
 ===============
 
 Loading objects on every kind of registry can be done using the ``load()``
@@ -33,14 +33,14 @@ components::
     $this->Auth = $this->Components->load('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
-Triggering callbacks
+Triggering Callbacks
 ====================
 
 Callbacks are not provided by registry objects. You should use the
 :doc:`events system </core-libraries/events>` to dispatch any events/callbacks
 for your application.
 
-Disabling callbacks
+Disabling Callbacks
 ===================
 
 In previous versions collection objects provided a ``disable`` method to disable

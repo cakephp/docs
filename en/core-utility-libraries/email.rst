@@ -14,7 +14,7 @@ This class replaces the :php:class:`EmailComponent` and gives more flexibility
 in sending emails. For example, you can create your own transports to send
 email instead of using the provided SMTP and Mail transports.
 
-Basic usage
+Basic Usage
 ===========
 
 First of all, you should ensure the class is loaded::
@@ -39,7 +39,7 @@ You can re-write the above code as::
         ->subject('About')
         ->send('My message');
 
-Choosing the sender
+Choosing the Sender
 -------------------
 
 When sending email on behalf of other people it's often a good idea to define the
@@ -88,7 +88,7 @@ also just load an array of options::
     //or in constructor::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-Configuring transports
+Configuring Transports
 ----------------------
 
 .. php:staticmethod:: configTransport($key, $config = null)
@@ -192,7 +192,7 @@ All these configurations are optional, except ``'from'``.
     ``Email::from('my@example.com', 'My Site')``
     would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
 
-Setting headers
+Setting Headers
 ===============
 
 In ``Email`` you are free to set whatever headers you want. When migrating
@@ -200,7 +200,7 @@ to use Email, do not forget to put the ``X-`` prefix in your headers.
 
 See ``Email::setHeaders()`` and ``Email::addHeaders()``
 
-Sending templated emails
+Sending Templated Emails
 ========================
 
 Emails are often much more than just a simple text message. In order
@@ -277,7 +277,7 @@ This allows you to override the `new_comment` template in your theme without mod
 the Blog plugin. The template file needs to be created in the following path:
 ``App/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
 
-Sending attachments
+Sending Attachments
 ===================
 
 .. php:method:: attachments($attachments = null)
@@ -319,7 +319,7 @@ you want the filenames to appear in the recipient's mail client:
    a string using the ``data`` option. This allows you to attach files without
    needing file paths to them.
 
-Using transports
+Using Transports
 ================
 
 Transports are classes designed to send the e-mail over some protocol or method.
@@ -337,7 +337,7 @@ method or have the transport in your configuration::
     $transport = new DebugTransport();
     $email->transport($transport);
 
-Creating custom Transports
+Creating Custom Transports
 --------------------------
 
 You are able to create your custom transports to integrate with others email
@@ -368,7 +368,7 @@ Example::
     $yourInstance->myCustomMethod();
     $Email->send();
 
-Relaxing address validation rules
+Relaxing Address Validation Rules
 ---------------------------------
 
 .. php:method:: emailPattern($pattern = null)
@@ -386,7 +386,7 @@ necessary when dealing with some Japanese ISP's::
 .. versionadded:: 2.4
 
 
-Sending messages quickly
+Sending Messages Quickly
 ========================
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
@@ -419,7 +419,7 @@ configurations in the 4th parameter (as array or using ``Configure``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
 
 
-Sending emails from CLI
+Sending Emails from CLI
 ========================
 
 .. versionchanged:: 2.2

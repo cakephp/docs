@@ -9,7 +9,7 @@ application.
 
 .. _error-configuration:
 
-Error & exception configuration
+Error & Exception Configuration
 ================================
 
 Error configuration is done inside your application's ``app/Config/error.php``
@@ -49,7 +49,7 @@ line (``debug`` enabled).
     If you use a custom error handler, the supported options will
     depend on your handler.
 
-Creating your own error handler
+Creating your Own Error Handler
 ===============================
 
 You can create an error handler out of any callback type. For example you could
@@ -81,7 +81,7 @@ are triggered. The ``_displayException`` method is called when there is an
 uncaught exception.
 
 
-Changing fatal error behavior
+Changing Fatal Error Behavior
 =============================
 
 The default error handlers convert fatal errors into exceptions and re-use the
@@ -109,7 +109,7 @@ standard error page, you can override it like::
 
 .. php:namespace:: Cake\Error
 
-Exception classes
+Exception Classes
 =================
 
 There are a number of exception classes in CakePHP. The built in exception
@@ -254,7 +254,7 @@ the rfc2616 says:
 
     "The response MUST include an Allow header containing a list of valid methods for the requested resource."
 
-Using HTTP exceptions in your controllers
+Using HTTP Exceptions in your Controllers
 =========================================
 
 You can throw any of the HTTP related exceptions from your controller actions
@@ -295,7 +295,7 @@ With debug turned off all framework layer exceptions are converted to ``Internal
 
 .. index:: application exceptions
 
-Creating your own application exceptions
+Creating your own Application Exceptions
 ========================================
 
 You can create your own application exceptions using any of the built in `SPL
@@ -339,7 +339,7 @@ as a string or use its ``getMessage()`` method you will get
 your own rich development errors, just like CakePHP uses internally.
 
 
-Creating custom status codes
+Creating Custom Status Codes
 ----------------------------
 
 You can create custom HTTP status codes by changing the code used when
@@ -357,7 +357,7 @@ If you'd like your own exception handling logic even in production,
 see the next section.
 
 
-Extending and implementing your own Exception handlers
+Extending and Implementing your own Exception Handlers
 ======================================================
 
 You can implement application specific exception handling in one of a
@@ -370,7 +370,7 @@ the exception handling process.
 
 In the next few sections, we will detail the various approaches and the benefits each has.
 
-Create and register your own exception handler
+Create and Register your own Exception Handler
 ==============================================
 
 Creating your own exception handler gives you full control over the exception
@@ -381,7 +381,7 @@ Extend the BaseErrorHandler
 
 The :ref:`error-configuration` section has an example of this.
 
-Using the exceptionRenderer option of the default handler
+Using the exceptionRenderer Option of the Default Handler
 =========================================================
 
 If you don't want to take control of the exception handling, but want to change
@@ -417,7 +417,7 @@ their argument.
     If you are using a custom exception handling this setting will have
     no effect. Unless you reference it inside your implementation.
 
-Creating a custom controller to handle exceptions
+Creating a Custom Controller to Handle Exceptions
 -------------------------------------------------
 
 In your ExceptionRenderer sub-class, you can use the ``_getController``
@@ -446,7 +446,7 @@ in your constructor, or the render method.  As those are the only methods
 that the built-in ``ErrorHandler`` class directly call.
 
 
-Logging exceptions
+Logging Exceptions
 ------------------
 
 Using the built-in exception handling, you can log all the exceptions that are

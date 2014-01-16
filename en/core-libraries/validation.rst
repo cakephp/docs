@@ -6,7 +6,7 @@ Validation
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease.
 
-Creating validators
+Creating Validators
 ===================
 
 .. php:class:: Validator
@@ -51,7 +51,7 @@ There were a few methods called in the example above, so lets go over the
 various features. The ``add()`` method allows you to add new rules to
 a validator. You can either add rules individually or in groups as seen above.
 
-Validating field presence
+Validating Field Presence
 -------------------------
 
 The ``validatePresence()`` method requires the field to be present in any
@@ -70,7 +70,7 @@ mode using the second parameter::
 
     $validator->validatePresence('author_id', 'create');
 
-Allowing empty fields
+Allowing Empty Fields
 ---------------------
 
 The ``allowEmpty`` method will skip other valiation rules if the field is
@@ -87,7 +87,7 @@ array) will cause validation errors when fields are not allowed to be empty.
 When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
 ``[]``, ``0``, ``'0'`` are accepted.
 
-Marking rules as the last to run
+Marking Rules as the Last to Run
 --------------------------------
 
 When fields have multiple rules, each validation rule will be run even if the
@@ -112,7 +112,7 @@ a specific rule has failed you can set the ``last`` option to ``true``::
 In the above example if the minLength rule fails, the maxLength rule will not be
 run.
 
-Adding validation providers
+Adding Validation Providers
 ---------------------------
 
 The ``Validator``, ``ValidationSet`` and ``ValidationRule`` classes do not
@@ -143,7 +143,7 @@ the ``provider`` key in your rule::
         'provider' => 'table'
     ]);
 
-Custom validation rules
+Custom Validation Rules
 -----------------------
 
 In addition to using methods coming from providers, you can also use any
@@ -177,7 +177,7 @@ containing data related to the validation process:
 - **newRecord**: Whether the validation call is for a new record or
   a pre-existent one.
 
-Defining conditions for validator
+Defining Donditions for Validator
 ---------------------------------
 
 When defining validation rules, you can use the ``on`` key to define when
@@ -200,7 +200,7 @@ the value for ``show_profile_picture`` is empty.
 
 .. _reusable-validators:
 
-Creating re-usable validators
+Creating Re-usable Validators
 -----------------------------
 
 While defining validators inline where they are used makes for good example
@@ -219,7 +219,7 @@ create ``Validator`` sub-classes for your re-usable validation logic::
         }
     }
 
-Validating data
+Validating Data
 ===============
 
 Now that you've created a validator and added the rules you want to it, you can
@@ -274,7 +274,7 @@ the 'create' mode. If you'd like to apply 'update' rules you can do the followin
     :php:meth:`~Cake\\ORM\\Table::validate()` or
     :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
 
-Core Validation rules
+Core Validation Rules
 =====================
 
 CakePHP provides a basic suite of validation methods in the ``Validation``
