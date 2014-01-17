@@ -31,7 +31,7 @@ If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the ``/App/View/`` folder. This way, you can create master view files
 and simply override them on a case-by-case basis within your theme folder.
 
-Theme assets
+Theme Assets
 ------------
 
 Themes can contain static assets as well as view files. A theme can include any
@@ -58,7 +58,7 @@ folder, it will default to the main webroot folder::
     //and links to
     app/View/Themed/PurpleCupcake/webroot/css/main.css
 
-Increasing performance of plugin and theme assets
+Increasing Performance of Plugin and Theme Assets
 -------------------------------------------------
 
 It's a well known fact that serving assets through PHP is guaranteed to be slower

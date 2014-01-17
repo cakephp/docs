@@ -15,7 +15,7 @@ access the data they contain.
 Entities are created for you by CakePHP each time you use ``find()`` on a table
 object.
 
-Creating entity classes
+Creating Entity Classes
 =======================
 
 You don't need to create entity classes to get started with the ORM in CakePHP.
@@ -37,7 +37,7 @@ articles table, we'll get instances of this class.
 
     If you don't define an entity class CakePHP will use the basic Entity class.
 
-Accessing entity data
+Accessing Entity Data
 =====================
 
 Entities provide a few ways to access the data they contain. Most commonly you
@@ -105,7 +105,7 @@ you easily convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
 notation, or using get() and set().
 
-Creating virtual properties
+Creating Virtual Properties
 ---------------------------
 
 By defining accessors you can provide access to properties that do not
@@ -129,7 +129,7 @@ name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
-Validation errors
+Validation Errors
 =================
 
 .. php:method:: errors($field = null, $errors = null)
@@ -149,7 +149,7 @@ it easier to test code that works with error messages::
 
     $user->errors('password', ['Password is required.']);
 
-Mass assignment
+Mass Assignment
 ===============
 
 While setting properties to entites in bulk is simple and convenient, it can
@@ -186,7 +186,7 @@ fallback behavior if a field is not specifically named::
 
 If the ``*`` property is not defined it will default to ``false``.
 
-Modifying the guarded fields at runtime
+Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
 You can modify the list of guarded fields at runtime using the ``accessible``
@@ -204,7 +204,7 @@ method::
     on.
 
 
-Bypassing field guarding
+Bypassing Field Guarding
 ------------------------
 
 There are sometimes situations when you want to allow mass-assignment to guarded
@@ -218,7 +218,7 @@ list for a single call to ``set()``.
 
 .. _lazy-load-associations:
 
-Lazy loading associations
+Lazy Loading Associations
 =========================
 
 While eager loading associations is generally the most efficient way to access
@@ -266,7 +266,7 @@ Implementing the above method will enable you to do the following::
         echo $comment->body;
     }
 
-Creating re-usable code with traits
+Creating Re-usable Code with Traits
 ===================================
 
 You may find yourself needing the same logic in multiple entity classes. PHP's
@@ -321,7 +321,7 @@ applied. Entities are converted recursively as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 
-Exposing virtual properties
+Exposing Virtual Properties
 ---------------------------
 
 By default virtual properties are not exported when converting entities to
@@ -339,7 +339,7 @@ This list can be modified at runtime using ``virtualProperties``::
 
     $user->virtualProperties(['full_name', 'is_admin']);
 
-Hiding properties
+Hiding Properties
 -----------------
 
 There are often fields you do not want exported in JSON or array formats. For

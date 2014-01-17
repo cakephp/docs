@@ -76,7 +76,7 @@ controller callbacks for best results::
         parent::beforeFilter();
     }
 
-Request parameters
+Request Parameters
 ==================
 
 When a request is made to a CakePHP application, CakePHP's :php:class:`Router` and
@@ -86,7 +86,7 @@ object. CakePHP puts all of the important request information into the
 ``$this->request`` property. See the section on
 :ref:`cake-request` for more information on the CakePHP request object.
 
-Controller actions
+Controller Actions
 ==================
 
 Controller actions are responsible for converting the request parameters into a
@@ -161,7 +161,7 @@ cover some of the core attributes and methods provided by CakePHP's controllers.
 
 .. _controller-life-cycle:
 
-Request Life-cycle callbacks
+Request Life-cycle Callbacks
 ============================
 
 .. php:class:: Controller
@@ -291,7 +291,7 @@ rendered from the controller.
     The ``$layout`` parameter allows you to specify the layout the
     view is rendered in.
 
-Rendering a specific view
+Rendering a Specific View
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your controller you may want to render a different view than
@@ -595,7 +595,7 @@ own sections in the manual.
     understand at first. The chapter should start with some example controllers
     and what they do.
 
-More on controllers
+More on Controllers
 ===================
 
 .. toctree::

@@ -12,7 +12,7 @@ Some of these applications are used in concert with other CakePHP
 features (like ACL or i18n), and others are for general use in
 getting you working faster.
 
-The CakePHP console
+The CakePHP Console
 ===================
 
 This section provides an introduction into CakePHP at the
@@ -102,7 +102,7 @@ or supplied as an absolute path.
 
 .. _adding-cake-to-your-path:
 
-Adding cake to your system path
+Adding Cake to Your System Path
 -------------------------------
 
 If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
@@ -129,7 +129,7 @@ If you are on Windows Vista or 7, you should follow the steps below.
 
 #. Click Ok and ``cake`` should work anywhere.
 
-Creating a shell
+Creating a Shell
 ================
 
 Let's create a shell for use in the Console. For this example,
@@ -190,7 +190,7 @@ or parameters. This is because the first positional argument or option is
 interpreted as the command name. If you want to use arguments and options, you
 should use method names other than ``main``.
 
-Using Models in your shells
+Using Models in Your Shells
 ---------------------------
 
 You'll often need access to your application's business logic in shell utilities;
@@ -211,7 +211,7 @@ models attached to it::
 The above shell, will fetch a user by username and display the information
 stored in the database.
 
-Shell tasks
+Shell Tasks
 ===========
 
 There will be times when building more advanced console applications, you'll want
@@ -261,7 +261,7 @@ You can also access tasks directly from the command line::
     class would override the ability to access the functionality in the
     Sound task specified in the $tasks array.
 
-Loading tasks on the fly with TaskCollection
+Loading Tasks on the Fly With TaskCollection
 --------------------------------------------
 
 You can load tasks on the fly using the Task collection object. You can load tasks that
@@ -275,7 +275,7 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 
 .. _invoking-other-shells-from-your-shell:
 
-Invoking other shells from your shell
+Invoking Other Shells from Your Shell
 =====================================
 
 Shells no longer have direct access to the ShellDispatcher any more through `$this->Dispatch`.
@@ -295,7 +295,7 @@ from inside your plugin's shell.
 
 .. _shell-output-level:
 
-Console output levels
+Console Output Levels
 =====================
 
 Shells often need different levels of verbosity. When running as cron jobs,
@@ -326,7 +326,7 @@ You can control the output level of shells, by using the ``--quiet`` and ``--ver
 options. These options are added by default, and allow you to consistently control
 output levels inside your CakePHP shells.
 
-Styling output
+Styling Output
 ==============
 
 Styling output is done by including tags - just like HTML - in your output.
@@ -370,7 +370,7 @@ truthy value enables them.
 Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
 
-Turning off colouring
+Turning Off Colouring
 ---------------------
 
 Although colouring is pretty awesome, there may be times when you want to turn it off,
@@ -392,7 +392,7 @@ By default on \*nix systems ConsoleOutput objects default to colour output.
 On windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
 
-Configuring options and generating help
+Configuring Options and Generating Help
 =======================================
 
 .. php:class:: ConsoleOptionParser
@@ -420,7 +420,7 @@ methods for easily setting multiple options/arguments at once.::
         return $parser;
     }
 
-Configuring an option parser with the fluent interface
+Configuring an Option Parser with the Fluent Interface
 ------------------------------------------------------
 
 All of the methods that configure an option parser can be chained,
@@ -477,7 +477,7 @@ Calling with no arguments will return the current value::
     // read the current value
     $parser->epilog();
 
-Adding arguments
+Adding Arguments
 ----------------
 
 .. php:method:: addArgument($name, $params = array())
@@ -518,7 +518,7 @@ to add multiple arguments at once.::
 As with all the builder methods on ConsoleOptionParser, addArguments
 can be used as part of a fluent method chain.
 
-Validating arguments
+Validating Arguments
 --------------------
 
 When creating positional arguments, you can use the ``required`` flag, to
@@ -591,7 +591,7 @@ to add multiple options at once.::
 As with all the builder methods on ConsoleOptionParser, addOptions is can be used
 as part of a fluent method chain.
 
-Validating options
+Validating Options
 ------------------
 
 Options can be provided with a set of choices much like positional arguments
@@ -603,7 +603,7 @@ for an option. All other values will raise an ``InvalidArgumentException``::
         'choices' => array('working', 'theirs', 'mine')
     ));
 
-Using boolean options
+Using Boolean Options
 ---------------------
 
 Options can be defined as boolean options, which are useful when you need to create
@@ -627,7 +627,7 @@ checks for boolean flags::
 Since the boolean options are always defined as ``true`` or
 ``false`` you can omit additional check methods.
 
-Adding subcommands
+Adding Subcommands
 ------------------
 
 .. php:method:: addSubcommand($name, $options = array())
@@ -666,7 +666,7 @@ When defining a subcommand you can use the following options:
 
 Adding subcommands can be done as part of a fluent method chain.
 
-Building a ConsoleOptionParser from an array
+Building a ConsoleOptionParser from an Array
 --------------------------------------------
 
 .. php:method:: buildFromArray($spec)
@@ -713,7 +713,7 @@ use. You can also use buildFromArray on its own, to build an option parser::
         ));
     }
 
-Getting help from shells
+Getting Help from Shells
 ------------------------
 
 With the addition of ConsoleOptionParser getting help from shells is done
@@ -731,7 +731,7 @@ you can get help for those in a similar fashion::
 
 This would get you the help specific to bake's model task.
 
-Getting help as XML
+Getting Help as XML
 -------------------
 
 When building automated tools or development tools that need to interact
@@ -793,7 +793,7 @@ would look like:
         </arguments>
     </shell>
 
-Routing in shells / CLI
+Routing in Shells / CLI
 =======================
 
 In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP_HOST')`` and
@@ -983,7 +983,7 @@ Shell API
         * ``wordWrap`` Only wrap on words breaks (spaces) Defaults to true.
         * ``indent`` Indent the text with the string provided. Defaults to null.
 
-More topics
+More Topics
 ===========
 
 .. toctree::

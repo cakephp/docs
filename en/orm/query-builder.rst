@@ -2,7 +2,7 @@
 
 .. _query-builder:
 
-Query builder
+Query Builder
 #############
 
 .. php:class:: Query
@@ -29,7 +29,7 @@ SQL being sent to the database. It also means that if a Query is never evaluated
 no SQL is ever sent to the database. Once executed, modifying and re-evaluating
 a query will result in additional SQL being run.
 
-Creating a query object
+Creating a Query Object
 =======================
 
 The easiest way to create a query object is to use ``find()`` from a table
@@ -42,7 +42,7 @@ section for more information.  For the remaining examples, assume that
     // Start a new query.
     $query = $articles->find();
 
-Selecting data
+Selecting Data
 ==============
 
 Most web applications make heavy use of ``SELECT`` queries. CakePHP makes
@@ -97,7 +97,7 @@ As you can see from the examples above, all the methods that modify the query
 provide a fluent interface allowing you to build a query though chained method
 calls.
 
-Using SQL functions
+Using SQL Functions
 -------------------
 
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
@@ -150,7 +150,7 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
-Aggregates - Group and having
+Aggregates - Group and Having
 -----------------------------
 
 When using aggregate functions like ``count`` and ``sum`` you may want to use
@@ -164,7 +164,7 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Disabling hydration
+Disabling Hydration
 -------------------
 
 While ORMs and object result sets are powerful, hydrating entities is sometimes
@@ -180,7 +180,7 @@ not make sense. In these situations you may want to disable entity hydration::
 
 .. _advanced-query-conditions:
 
-Advanced conditions
+Advanced Conditions
 ===================
 
 The query builder makes it simple to build complex where clauses.
@@ -352,7 +352,7 @@ conditions:
 - ``isNull()`` Create an ``IS NULL`` condition.
 - ``isNotNull()`` Create a negated ``IS NULL`` condition.
 
-Raw expressions
+Raw Expressions
 ---------------
 
 When you cannot construct the SQL you need using the query builder, you can use
@@ -370,7 +370,7 @@ Expression objects can be used with any query builder methods like ``where``,
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
 
-Loading associations
+Loading Associations
 ====================
 
 .. include:: ./table-objects.rst
@@ -432,7 +432,7 @@ provide the datatypes for each column in the join conditions. By providing
 datatypes for the join conditions, the ORM can correctly convert data types into
 SQL.
 
-Inserting data
+Inserting Data
 ==============
 
 Unlike earlier examples, you should not use ``find()`` to create insert queries.
@@ -460,7 +460,7 @@ queries::
         ->values($select)
         ->execute();
 
-Updating data
+Updating Data
 =============
 
 As with insert queries, you should not use ``find()`` to create update queries.
@@ -489,7 +489,7 @@ Instead, create new a query object using ``query()``::
 Generally it is easier to delete data using entities and
 :php:meth:`~Cake\\ORM\\Table::delete()`.
 
-More complex queries
+More Complex Queries
 ====================
 
 The query builder is capable of building complex queries like ``UNION`` queries,
@@ -538,7 +538,7 @@ the ``select`` and ``join`` methods.
 
 .. _map-reduce:
 
-Modifying results with Map/Reduce
+Modifying Results with Map/Reduce
 ==================================
 
 More often than not, find operations require post-processing the data that is
@@ -689,7 +689,7 @@ The resulting array means, for example, that user with id ``1`` follows users
 ``2`` and ``4``, but those do not follow ``1`` back.
 
 
-Stacking multiple operations
+Stacking Multiple Operations
 ----------------------------
 
 Using `mapReduce` in a query will not execute it immediately, the operation will
@@ -740,7 +740,7 @@ than 20 times across all articles::
 
     $articles->find('commonWords')->mapReduce($mapper);
 
-Removing all stacked map-reduce operations
+Removing All Stacked Map-reduce Operations
 ------------------------------------------
 
 Under some circumstances you may want to modify a query object so that no

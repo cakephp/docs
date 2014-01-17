@@ -1,4 +1,4 @@
-Database basics
+Database Basics
 ###############
 
 .. php:namespace:: Cake\Database
@@ -122,7 +122,7 @@ and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
 
-Managing connections
+Managing Connections
 ====================
 
 .. php:class:: ConnectionManager
@@ -131,7 +131,7 @@ The ``ConnectionManager`` class acts as a registry to access database connection
 application has. It provides a place that other objects can get references to
 existing connections.
 
-Accessing connections
+Accessing Connections
 ---------------------
 
 .. php:staticmethod:: get($name)
@@ -147,7 +147,7 @@ existing known connection::
 
 Attempting to load connections that do not exist will throw an exception.
 
-Creating connections at runtime
+Creating Connections at Runtime
 -------------------------------
 
 .. php:staticmethod:: create($name, $config)
@@ -161,7 +161,7 @@ See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
 
 
-Data types
+Data Types
 ==========
 
 .. php:class:: Type
@@ -213,7 +213,7 @@ automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
-Adding custom types
+Adding Custom Types
 -------------------
 
 .. php:staticmethod:: map($name, $class)
@@ -262,7 +262,7 @@ We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
 queries.
 
-Connection classes
+Connection Classes
 ==================
 
 .. php:class:: Connection
@@ -274,7 +274,7 @@ transactional operations.
 
 .. _database-queries:
 
-Executing queries
+Executing Queries
 -----------------
 
 .. php:method:: query($sql)
@@ -340,7 +340,7 @@ will first execute it and then start iterating over the result set::
     When you have an instance of :php:class:`Cake\\ORM\\Query` you can use
     ``all()`` to get the result set for SELECT queries.
 
-Using transactions
+Using Transactions
 -------------------
 
 The connection objects provide you a few simple ways you do database
@@ -374,7 +374,7 @@ do the following:
 - If the closure returns ``false``, a rollback will be issued.
 - If the closure executes successfully, the transaction will be committed.
 
-Interacting with statements
+Interacting with Statements
 ===========================
 
 When using the lower level database API, you will often encounter statement
@@ -383,7 +383,7 @@ from the driver. After creating and executing a query object, or using
 ``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
 underlying basic statement object and provides a few additional features.
 
-Preparing a statement
+Preparing a Statement
 ---------------------
 
 You can create a statement object using ``execute()``, or ``prepare()``. The
@@ -402,7 +402,7 @@ You can create a statement object using ``execute()``, or ``prepare()``. The
 
 Once you've prepared a statement you can bind additional data and execute it.
 
-Binding values
+Binding Values
 --------------
 
 Once you've created a prepared statement, you may need to bind additional data.
@@ -444,7 +444,7 @@ positional ones::
 
     You cannot mix positional and named array keys in the same statement.
 
-Executing & fetching rows
+Executing & Fetching Rows
 -------------------------
 
 After preparing a statement and binding data to it, you can execute it and fetch
@@ -471,7 +471,7 @@ the statement::
     you will get both the numerically indexed and associatively indexed results.
 
 
-Getting row counts
+Getting Row Counts
 ------------------
 
 After executing a statement, you can fetch the number of affected rows::
@@ -480,7 +480,7 @@ After executing a statement, you can fetch the number of affected rows::
     $rowCount = $stmt->rowCount();
 
 
-Checking error codes
+Checking Error Codes
 --------------------
 
 If your query was not successful, you can get related error information
@@ -493,7 +493,7 @@ same way as the ones provided by PDO::
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
 
-Query logging
+Query Logging
 =============
 
 Query logging can be enabled when configuring your connection by setting the
@@ -536,7 +536,7 @@ files/syslog can be useful when working with web requests::
 
 .. _identifier-quoting:
 
-Identifier quoting
+Identifier Quoting
 ==================
 
 By default CakePHP does **not** quote identifiers in generated SQL queries. The
