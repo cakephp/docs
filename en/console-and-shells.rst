@@ -261,7 +261,7 @@ You can also access tasks directly from the command line::
     class would override the ability to access the functionality in the
     Sound task specified in the $tasks array.
 
-Loading Tasks on the Fly With TaskCollection
+Loading Tasks On The Fly with TaskCollection
 --------------------------------------------
 
 You can load tasks on the fly using the Task collection object. You can load tasks that

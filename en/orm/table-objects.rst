@@ -705,7 +705,7 @@ look like::
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them.
 
-Loading Wntities
+Loading Entities
 ================
 
 While table objects provide an abstraction around a 'repository' or table of

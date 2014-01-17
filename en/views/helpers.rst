@@ -132,7 +132,7 @@ doing the following::
 The above would call the ``css`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
-Loading Helpers on the Fly
+Loading Helpers On The Fly
 --------------------------
 
 There may be situations where you need to dynamically load a helper from inside
