@@ -321,7 +321,7 @@ calculated fields is easy to do in your finder methods. By using the query
 builder and expression objects you can achieve the same results that virtual
 fields gave::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
@@ -344,7 +344,7 @@ many limitations class definitions have, and provide only one way to define
 associations. Your ``initialize`` method and all other parts of your application
 code, interact with the same API when manipulating associations::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
@@ -382,7 +382,7 @@ of validation rules. In CakePHP 3.0, both these problems have been remedied.
 Validation rules are always built with a ``Validator`` object, and it is trivial to
 have multiple sets of rules::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;

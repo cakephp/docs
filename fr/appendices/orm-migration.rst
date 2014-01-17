@@ -353,7 +353,7 @@ l'ajout des champs calculés est facile à faire dans les méthodes finder. En
 utilisant le query builder et les objets expression que vous pouvez atteindre
 les mêmes résultats que les champs virtuels donnent::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
@@ -378,7 +378,7 @@ associations. Votre méthode ``initialize`` et toutes les autres parties de
 votre code d'application, intéragit avec la même API lors de la
 manipulation des associations::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
@@ -420,7 +420,7 @@ deux de ces problèmes. Les règles de validation sont toujours construites
 avec un objet ``Validator``, et il est trivial d'avoir plusieurs ensembles de
 règles::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
