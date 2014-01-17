@@ -6,13 +6,16 @@
 Welcome
 #######
 
-The CakePHP cookbook, is an openly developed community editable documentation
-project. We hope to maintain a high level of quality, validity and accuracy for 
-the documentation.
+The CakePHP cookbook is an openly developed and community editable
+documentation project. We hope to maintain a high level of quality, validity
+and accuracy for the documentation. Notice the "Improve this Doc" button in
+the upper right-hand corner; it will direct you to the GitHub online editor of
+the active page, allowing you easily contribute any additions, deletions, or
+corrections to the documentation.
 
 .. container:: offline-download
 
-    **Read the book anywhere**
+    **Read the Book Anywhere**
 
     Enjoy the CakePHP cookbook almost anywhere. Available, as both a PDF and
     EPUB, you can now read the docs on more devices and offline.
