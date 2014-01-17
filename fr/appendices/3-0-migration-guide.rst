@@ -390,8 +390,6 @@ Controller
   retirées. Il y avait d'autres méthodes laissées depuis les jours de 1.x days,
   où les préoccupations des models + controllers étaient bien plus étroitement
   liées.
-- ``Controller::loadModel()`` a été remplacée par
-  :php:class:`~Cake\\Controller\\Controller::repository()`.
 - La propriété ``Controller::$scaffold`` a été retirée. Le scaffolding dynamique
   a été retiré du coeur de CakePHP, et sera fourni en tant que plugin autonome.
 

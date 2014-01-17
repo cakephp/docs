@@ -352,8 +352,7 @@ Controller
 - ``Controller::validate()`` and ``Controller::validationErrors()`` have been
   removed. They were left over methods from the 1.x days where the concerns of
   models + controllers were far more intertwined.
-- ``Controller::loadModel()`` has been replaced with
-  :php:class:`~Cake\\Controller\\Controller::repository()`.
+- ``Controller::loadModel()`` now loads table objects.
 - The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
   has been removed from CakePHP core, and will be provided as a standalone
   plugin.

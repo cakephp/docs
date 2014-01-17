@@ -177,7 +177,7 @@ basic directory structure. It should look like this::
             /Controller
                 /Component
             /Model
-                /Repository
+                /Table
                 /Entity
                 /Behavior
             /View
@@ -309,8 +309,8 @@ create the table and entity for that controller::
     class Contact extends Entity {
     }
 
-    // /Plugin/ContactManager/Model/Repository/ContactsTable.php:
-    namespace ContactManager\Model\Repository;
+    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -321,8 +321,8 @@ If you need to reference a model within your plugin when building associations,
 or defining entitiy classes, you need to include the plugin name with the class
 name, separated with a dot. For example::
 
-    // /Plugin/ContactManager/Model/Repository/ContactsTable.php:
-    namespace ContactManager\Model\Repository;
+    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -335,12 +335,12 @@ name, separated with a dot. For example::
 If you would prefer that the array keys for the association not have the plugin
 prefix on them, use the alternative syntax::
 
-    // /Plugin/ContactManager/Model/Repository/ContactsTable.php:
-    namespace ContactManager\Model\Repository;
+    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Repository {
+    class ContactsTable extends Table {
         public function initialize(array $config) {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',

@@ -20,11 +20,11 @@ Basic Usage
 ===========
 
 To get started, create a Table class. These classes live in
-``App/Model/Repository``. Tables are a type of repository specific to relational
+``App/Model/Table``. Tables are a type model collection specific to relational
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -38,7 +38,7 @@ table will be used. If our table class was named ``BlogPosts`` your table should
 be named ``blog_posts``. You can specify the table to using the ``table()``
 method::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -54,7 +54,7 @@ No inflection conventions will be applied when specifying a table. By convention
 the ORM also expects each table to have a primary key with the name of ``id``.
 If you need to modify this you can use the ``primaryKey()`` method::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -143,7 +143,7 @@ object. Methods matching the association type allow you to define the
 associations in your application. For example if we wanted to define a belongsTo
 association in our ArticlesTable::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -708,7 +708,7 @@ Once you've converted request data into entities you can ``save()`` or
 Loading Entities
 ================
 
-While table objects provide an abstraction around a 'repository' or table of
+While table objects provide an abstraction around a 'repository' or collection of
 objects, when you query for individual records you get 'entity' objects. While
 this section discusses the different ways you can find and load entities, you
 should read the :doc:`/orm/entities` section for more information on entities.
@@ -1735,7 +1735,7 @@ would allow for re-usable pieces of logic, they would complicate binding events.
 To add a behavior to your table you can call the ``addBehavior`` method.
 Generally the best place to do this is in the ``initialize`` method::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -1748,7 +1748,7 @@ Generally the best place to do this is in the ``initialize`` method::
 As with associations, you can use :term:`plugin syntax` and provide additional
 configuration options::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -1779,7 +1779,7 @@ By default all table instances use the ``default`` database connection. If your
 application uses multiple database connections you will want to configure which
 tables use which connections. This is the ``defaultConnectionName`` method::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
