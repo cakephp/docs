@@ -14,7 +14,7 @@ database-wide and individual Table object features respectively.
 The primary use of the schema system is for :ref:`test-fixtures`. However, it
 can also be used in your application if required.
 
-Schema\\Table objects
+Schema\\Table Objects
 =====================
 
 .. php:class:: Table
@@ -57,7 +57,7 @@ following two forms are equivalent::
 While equivalent, the 2nd form allows more detail and control. This emulates
 the existing features available in Schema files + the fixture schema in 2.x.
 
-Accessing column data
+Accessing Column Data
 ---------------------
 
 Columns are either added as constructor arguments, or via `addColumn()`. Once
@@ -70,7 +70,7 @@ fields are added information can be fetched using `column()` or `columns()`::
     $cols = $t->columns();
 
 
-Indexes and constraints
+Indexes and Constraints
 -----------------------
 
 Indexes are added using the ``addIndex()``. Constraints are added using
@@ -147,7 +147,7 @@ auto-increment::
 The ``autoIncrement`` option only works with ``integer`` and ``biginteger``
 columns.
 
-Reading indexes and constraints
+Reading Indexes and Constraints
 -------------------------------
 
 Indexes and constraints can be read out of a table object using accessor
@@ -169,7 +169,7 @@ following::
     $index = $t->index('author_id_idx')
 
 
-Adding table options
+Adding Table Options
 --------------------
 
 Some drivers (primarily MySQL) support & require additional table metadata. In

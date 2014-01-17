@@ -78,7 +78,7 @@ method::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
-When to load plugins
+When to Load Plugins
 --------------------
 
 You do not need to load every plugin your application uses. If your plugins use
@@ -92,7 +92,7 @@ plugin is using a non-conventional namespace.
 
 .. _plugin-configuration:
 
-Plugin configuration
+Plugin Configuration
 ====================
 
 There is a lot you can do with the ``load`` and ``loadAll`` methods to help with
@@ -145,7 +145,7 @@ Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
 plugins will require more setup than others.
 
-Using plugins
+Using Plugins
 =============
 
 You can reference a plugin's controllers, models, components,
@@ -386,7 +386,7 @@ If the plugin prefix is omitted, the layout/view file will be located normally.
     For information on how to use elements from a plugin, look up
     :ref:`view-elements`
 
-Overriding plugin views from inside your application
+Overriding Plugin Views from Inside Your Application
 ----------------------------------------------------
 
 You can override any plugin views from inside your app using special paths. If
@@ -403,7 +403,7 @@ Creating this file, would allow you to override
 .. _plugin-assets:
 
 
-Plugin assets
+Plugin Assets
 =============
 
 A plugin's web assets (but not PHP files) can be served through the plugin's
@@ -425,7 +425,7 @@ You may put any type of file in any directory, just like a regular webroot.
     for more information.
 
 
-Linking to assets in plugins
+Linking to Assets in Plugins
 ----------------------------
 
 You can use the :term:`plugin syntax` when linking to plugin assets using the

@@ -1,4 +1,4 @@
-Simple Acl controlled Application
+Simple ACL Controlled Application
 #################################
 
 .. note::
@@ -211,7 +211,7 @@ actions. This is only temporary and will be removed once we get a
 few users and groups into our database. Don't add any users or
 groups just yet though.
 
-Initialize the Db Acl tables
+Initialize the DB ACL Tables
 ============================
 
 Before we create any users or groups we will want to connect them

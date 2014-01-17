@@ -4,7 +4,7 @@ Deployment
 Once your application is complete, or even before that you'll want to deploy it.
 There are a few things you should do when deploying a CakePHP application.
 
-Check your security
+Check Your Security
 ===================
 
 If you're throwing your application out into the wild, it's a good idea to make
@@ -16,7 +16,7 @@ and ensuring data consistency/integrity. Check that only your ``webroot`` direct
 publicly visible, and that your secrets (such as your app salt, and any security
 keys) are private and unique as well!
 
-Set document root
+Set Document Root
 =================
 
 Setting the document root correctly on your application is an important step to
@@ -69,7 +69,7 @@ And then you can set the debug level dynamically in ``core.php``::
 
 .. _symlink-assets:
 
-Improve your application's performance
+Improve Your Application's Performance
 ======================================
 
 Since handling static assets, such as images, JavaScript and CSS files of plugins,

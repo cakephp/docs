@@ -99,7 +99,7 @@ CakePHP library, uncomment the section using ``Cake\Core\ClassLoader`` in
 You should now be able to visit the path to where you installed your CakePHP
 application and see the setup traffic lights.
 
-Keeping up to date with the latest CakePHP changes
+Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
 
 If you want to keep current with the latest changes in CakePHP you can

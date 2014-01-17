@@ -13,7 +13,7 @@ as data views for the rest of this page.
 There are two ways you can generate data views. The first is by using the
 ``_serialize`` key, and the second is by creating normal view files.
 
-Enabling data views in your application
+Enabling Data Views in Your Application
 =======================================
 
 Before you can use the data view classes, you'll need to do a bit of setup:
@@ -34,7 +34,7 @@ After adding ``Router::parseExtensions('json');`` to your routes file, CakePHP
 will automatically switch view classes when a request is done with the ``.json``
 extension, or the Accept header is ``application/json``.
 
-Using data views with the serialize key
+Using Data Views with the Serialize Key
 =======================================
 
 The ``_serialize`` key is a special view variable that indicates which other view
@@ -73,7 +73,7 @@ If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
 element the Xml will fail to generate.
 
-Using a data view with view files
+Using a Data View with View Files
 =================================
 
 You should use view files if you need to do some manipulation of your view
@@ -124,7 +124,7 @@ well.
     `http://php.net/json_encode <json_encode>`_ documentation for how the valid
     values of this option.
 
-JSONP response
+JSONP Response
 ==============
 
 .. versionadded:: 2.4

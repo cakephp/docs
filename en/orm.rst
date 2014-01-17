@@ -29,7 +29,7 @@ database connections <database-configuration>`.
     :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
     and older versions of CakePHP.
 
-Quick example
+Quick Example
 =============
 
 To get started you don't have to write any code. If you've followed the CakePHP
@@ -103,7 +103,7 @@ you need to customize which entity a table uses you can use the
 See the chapters on :ref:`table-objects` and :ref:`entities` for more information
 on how to use table objects and entities in your application.
 
-More information
+More Information
 ================
 
 .. toctree::

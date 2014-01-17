@@ -146,7 +146,7 @@ that CakePHP can successfully connect to the database.
     Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
 
-Directory permissions on tmp
+Directory Permissions on tmp
 ============================
 
 You'll also need to set the proper permissions on the ``/tmp`` directory to make

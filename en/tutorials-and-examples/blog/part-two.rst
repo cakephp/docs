@@ -1,4 +1,4 @@
-Blog Tutorial - Adding a layer
+Blog Tutorial - Adding a Layer
 ******************************
 
 Create a Post Model

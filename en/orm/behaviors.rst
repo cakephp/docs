@@ -3,14 +3,14 @@ Behaviors
 
 .. TODO:: Introduction/overview
 
-Using behaviors
+Using Behaviors
 ===============
 
 .. include:: ./table-objects.rst
     :start-after: start-behaviors
     :end-before: end-behaviors
 
-Core behaviors
+Core Behaviors
 ==============
 
 
@@ -18,7 +18,7 @@ Core behaviors
     :start-after: start-toc
     :end-before: end-toc
 
-Creating a behavior
+Creating a Behavior
 ===================
 
 * Where behaviors live
@@ -27,17 +27,17 @@ Creating a behavior
 * Taking options/configuration
 
 
-Defining mixin methods
+Defining Mixin Methods
 ----------------------
 
 * Simple public method - slug
 
-Defining finders
+Defining Finders
 ----------------
 
 * Find by slug
 
-Defining event listeners
+Defining Event Listeners
 ------------------------
 
 * BeforeSave - convert field -> slug.

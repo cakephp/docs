@@ -7,7 +7,7 @@ user. We also have another requirement, to allow our blog to have multiple autho
 so each one of them can create their own posts, edit and delete them at will
 disallowing other authors to make any changes on one's posts.
 
-Creating all users' related code
+Creating All Users' Related Code
 ================================
 
 First, let's create a new table in our blog database to hold our users' data::

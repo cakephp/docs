@@ -136,7 +136,7 @@ as the ``content`` block.
 
 .. _view-blocks:
 
-Using view blocks
+Using View Blocks
 =================
 
 .. versionadded:: 2.1
@@ -211,7 +211,7 @@ default content with the ``<p>`` tag will be discarded.
     internally for extended views, and view content in the layout.
 
 
-Displaying blocks
+Displaying Blocks
 -----------------
 
 .. versionadded:: 2.1
@@ -249,7 +249,7 @@ states. You can provide a default value using the 2nd argument:
 .. versionchanged:: 2.3
     The ``$default`` argument was added in 2.3.
 
-Using blocks for script and CSS files
+Using Blocks for Script and CSS Files
 -------------------------------------
 
 .. versionadded:: 2.1
@@ -413,7 +413,7 @@ return, rather than a fully-rendered interface).
 Three other layouts, xml, js, and rss, exist in the core for a quick
 and easy way to serve up content that isn't text/html.
 
-Using layouts from plugins
+Using Layouts from Plugins
 --------------------------
 
 .. versionadded:: 2.1
@@ -603,7 +603,7 @@ Are equivalent and will result in the same element being rendered.
     ``Plugin.element`` was added.
 
 
-Creating your own view classes
+Creating Your Own View Classes
 ==============================
 
 You may need to create custom view classes to enable new types of data views, or
@@ -794,7 +794,7 @@ To call any view method use ``$this->method()``
 
     .. versionadded:: 2.1
 
-More about Views
+More About Views
 ================
 
 .. toctree::

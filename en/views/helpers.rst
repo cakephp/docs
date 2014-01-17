@@ -132,7 +132,7 @@ doing the following::
 The above would call the ``css`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
-Loading helpers on the fly
+Loading Helpers On The Fly
 --------------------------
 
 There may be situations where you need to dynamically load a helper from inside
@@ -145,7 +145,7 @@ The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
 supports the registry API used elsewhere in CakePHP.
 
 
-Callback methods
+Callback Methods
 ================
 
 Helpers feature several callbacks that allow you to augment the
@@ -178,7 +178,7 @@ actual PHP class file would look something like this::
 
     Helpers should extend either ``AppHelper`` or :php:class:`Helper`
 
-Including other Helpers
+Including Other Helpers
 -----------------------
 
 You may wish to use some functionality already existing in another
@@ -204,7 +204,7 @@ helper. To do so, you can specify helpers you wish to use with a
 
 .. _using-helpers:
 
-Using your Helper
+Using Your Helper
 -----------------
 
 Once you've created your helper and placed it in

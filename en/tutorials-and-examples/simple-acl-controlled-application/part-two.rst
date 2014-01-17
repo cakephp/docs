@@ -1,7 +1,7 @@
-Simple Acl controlled Application - part 2
+Simple ACL Controlled Application - Part 2
 ##########################################
 
-An Automated tool for creating ACOs
+An Automated Tool for Creating ACOs
 ===================================
 
 As mentioned before, there is no pre-built way to input all of our
@@ -34,7 +34,7 @@ You can get a complete guide for all available commands like this::
 
 Once populated your `acos` table proceed to create your application permissions.
 
-Setting up permissions
+Setting Up Permissions
 ======================
 
 Creating permissions much like creating ACO's has no magic solution, nor will I
@@ -129,7 +129,7 @@ PagesController::display() public. This is important as often the
 default routing has this action as the home page for your
 application.
 
-Logging in
+Logging In
 ==========
 
 Our application is now under access control, and any attempt to
@@ -178,7 +178,7 @@ Auth Session Key and returns a URL that can be used in a redirect.
 If there is other session data that needs to be deleted as well add
 that code here.
 
-All done
+All Done
 ========
 
 You should now have an application controlled by Auth and Acl.

@@ -2,7 +2,7 @@
 
 .. _table-objects:
 
-Table objects
+Table Objects
 #############
 
 .. php:class:: Table
@@ -68,7 +68,7 @@ As seen in the examples above Table objects have an ``initialize()`` method
 which is called at the end of the constructor. It is recommended that you use
 this method to do initialization logic instead of overriding the constructor.
 
-Getting instances of a table class
+Getting Instances of a Table Class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
@@ -83,7 +83,7 @@ a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
 :ref:`table-registry-usage` for more information.
 
-Fetching all entities
+Fetching All Entities
 ---------------------
 
 The best way to fetch entities from a table object is to use the ``find`` method. It
@@ -100,7 +100,7 @@ you to define custom behavior on a per-record basis and model the domain of your
 application. See the :ref:`entities` documentation for more information on
 creating your entity objects.
 
-Customizing the entity class a table uses
+Customizing the Entity Class a Table Uses
 -----------------------------------------
 
 By default table objects use an entity class based on naming conventions. For
@@ -117,7 +117,7 @@ conventions you can use the ``entityClass`` method to change things up::
 
 .. _table-associations:
 
-Building associations
+Building Associations
 =====================
 
 Defining relations between different objects in your application should be
@@ -172,7 +172,7 @@ you can do so with the second parameter::
 
     }
 
-HasOne associations
+HasOne Associations
 -------------------
 
 Let's set up a User model with a hasOne relationship to an Address Table.
@@ -259,7 +259,7 @@ The above would emit SQL that is similar to::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
-BelongsTo associations
+BelongsTo Associations
 ----------------------
 
 Now that we have Address data access from the User table, let's
@@ -339,7 +339,7 @@ The above would emit SQL that is similar to::
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
 
-HasMany associations
+HasMany Associations
 --------------------
 
 An example of a hasMany association is "Article hasMany Comments".
@@ -438,7 +438,7 @@ efficient. You can use the :doc:`CounterCacheBehavior
 </core-libraries/behaviors/counter-cache>` to cache counts of associated
 records.
 
-BelongsToMany associations
+BelongsToMany Associations
 --------------------------
 
 An example of a BelongsToMany association is "Article BelongsToMany Tags", where
@@ -557,7 +557,7 @@ generated::
       AND article_id IN (SELECT id FROM articles)
     );
 
-Using the 'through' option
+Using the 'through' Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you plan on adding extra information to the join/pivot table, or if you
@@ -616,7 +616,7 @@ meta-information.
 
 .. _converting-request-data:
 
-Converting request data into entities
+Converting Request Data into Entities
 =====================================
 
 Before editing and saving data back into the database, you'll need to convert
@@ -705,7 +705,7 @@ look like::
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them.
 
-Loading entities
+Loading Entities
 ================
 
 While table objects provide an abstraction around a 'repository' or table of
@@ -713,7 +713,7 @@ objects, when you query for individual records you get 'entity' objects. While
 this section discusses the different ways you can find and load entities, you
 should read the :doc:`/orm/entities` section for more information on entities.
 
-Getting a single entity by primary key
+Getting a Single Entity by Primary Key
 --------------------------------------
 
 .. php:method:: get($id, $options = [])
@@ -734,7 +734,7 @@ If the get operation does not find any results
 a ``Cake\ORM\Error\RecordNotFoundException`` will be raised. You can either
 catch this exception yourself, or allow CakePHP to convert it into a 404 error.
 
-Using finders to load data
+Using Finders to Load Data
 --------------------------
 
 .. php:method:: find($type, $options = [])
@@ -807,7 +807,7 @@ where they can be used to modify the query object. You can use the
 
 .. _table-find-first:
 
-Getting the first result
+Getting the First Result
 ------------------------
 
 The ``first()`` method allows you to fetch only the first row from a query. If
@@ -824,7 +824,7 @@ key.
 
 .. _table-find-list:
 
-Finding key/value pairs
+Finding Key/Value Pairs
 -----------------------
 
 It is often useful to generate an associative array of data from your application's
@@ -888,7 +888,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
 .. _custom-find-methods:
 
-Custom finder methods
+Custom Finder Methods
 ---------------------
 
 The examples above show how to use the built-in ``all`` and ``list`` finders.
@@ -934,7 +934,7 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
-Dynamic finders
+Dynamic Finders
 ---------------
 
 CakePHP's ORM provides dynamically constructed finder methods which allow you to
@@ -973,7 +973,7 @@ The above would translate into the following::
     additional performance overhead.
 
 
-Eager loading associations
+Eager Loading Associations
 --------------------------
 
 By default CakePHP does not load **any** associated data when using ``find()``.
@@ -1022,7 +1022,7 @@ to ``true``::
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
 
-Passing conditions to contain
+Passing Conditions to Contain
 -----------------------------
 
 When using ``contain`` you are able to restrict the data returned by the
@@ -1077,7 +1077,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         ]
     ]);
 
-Using 'matching' when finding results
+Using 'matching' when Finding Results
 -------------------------------------
 
 A fairly common query case with associations is finding records 'matching'
@@ -1122,14 +1122,14 @@ already familiar to you::
 
 .. end-contain
 
-Lazy loading associations
+Lazy Loading Associations
 -------------------------
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
-Caching loaded results
+Caching Loaded Results
 ----------------------
 
 When fetching entities that don't change often you may want to cache the
@@ -1174,7 +1174,7 @@ When the results for a cached query are fetched the following happens:
 
     You cannot cache a streaming query result.
 
-Working with result sets
+Working with Result Sets
 ------------------------
 
 Once a query is executed with ``all()``, you will get an instance of
@@ -1234,7 +1234,7 @@ articles quite easily::
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
 
-Validating entities
+Validating Entities
 ===================
 
 .. php:method:: validate(Entity $entity, array $options = [])
@@ -1290,7 +1290,7 @@ validation sets to apply using the ``options`` parameter::
 
 .. _saving-entities:
 
-Saving entities
+Saving Entities
 ===============
 
 .. php:method:: save(Entity $entity, array $options = [])
@@ -1397,7 +1397,7 @@ a validation rule::
     }
 
 
-Saving associations
+Saving Associations
 -------------------
 
 When you are saving an entity, you can also elect to save some or all of the
@@ -1428,7 +1428,7 @@ associations::
 Your entities should be in the structured in the same way as they are when
 loaded from the database.
 
-Saving BelongsTo associations
+Saving BelongsTo Associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity at
@@ -1444,7 +1444,7 @@ example::
     $articles = TableRegistry::get('Articles');
     $articles->save($article);
 
-Saving HasOne associations
+Saving HasOne Associations
 --------------------------
 
 When saving hasOne associations, the ORM expects a single nested entity at the
@@ -1460,7 +1460,7 @@ singular, camel cased version the association name. For example::
     $users = TableRegistry::get('Users');
     $users->save($user);
 
-Saving HasMany associations
+Saving HasMany Associations
 ---------------------------
 
 When saving hasOne associations, the ORM expects an array of entities at the
@@ -1481,7 +1481,7 @@ plural, camel cased version the association name. For example::
 When saving hasMany associations, associated records will either be updated, or
 inserted. The ORM will not remove or 'sync' a hasMany association.
 
-Saving BelongsToMany associations
+Saving BelongsToMany Associations
 ---------------------------------
 
 When saving hasOne associations, the ORM expects an array of entities at the
@@ -1520,7 +1520,7 @@ replace
 
 By default the ``replace`` strategy is used.
 
-Saving additional data to the joint table
+Saving Additional Data to the Joint Table
 -----------------------------------------
 
 In some situations the table joining your BelongsToMany association, will have
@@ -1543,7 +1543,7 @@ setting data to the ``_joinData`` property::
 The ``_joinData`` property can be either an entity, or an array of data if you
 are saving entities built from request data.
 
-Bulk updates
+Bulk Updates
 ------------
 
 .. php:method:: updateAll($fields, $conditions)
@@ -1572,7 +1572,7 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
 
-Deleting entities
+Deleting Entities
 =================
 
 .. php:method:: delete(Entity $entity, $options = [])
@@ -1598,7 +1598,7 @@ transaction with the atomic option::
 
     $result = $articles->delete($entity, ['atomic' => false]);
 
-Cascading deletes
+Cascading Deletes
 -----------------
 
 When deleting entities, associated data can also be deleted. If your HasOne and
@@ -1620,7 +1620,7 @@ these options enabled would be::
     when compared to bulk deletes. The cascadeCallbacks option should only be
     enabled when your application has important work handled by event listeners.
 
-Bulk deletes
+Bulk Deletes
 ------------
 
 .. php:method:: deleteAll($conditions)
@@ -1641,7 +1641,7 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
     deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
     first load a collection of records and delete them.
 
-Lifecycle callbacks
+Lifecycle Callbacks
 ===================
 
 As you have seen above table objects trigger a number of events. Events are
@@ -1772,7 +1772,7 @@ CakePHP in the chapter on :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
-Configuring connections
+Configuring Connections
 =======================
 
 By default all table instances use the ``default`` database connection. If your
@@ -1804,7 +1804,7 @@ As we've seen earlier, the TableRegistry class provides an easy to use
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 
-Configuring table objects
+Configuring Table Objects
 -------------------------
 
 .. php:staticmethod:: get($alias, $config)
@@ -1839,7 +1839,7 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     access that alias. Doing it after the registry is populated will have no
     effect.
 
-Flushing the registry
+Flushing the Registry
 ---------------------
 
 .. php:staticmethod:: clear()
