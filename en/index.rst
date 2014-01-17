@@ -21,7 +21,7 @@ the documentation.
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
-Getting started
+Getting Started
 ===============
 
 Conventions
@@ -35,26 +35,26 @@ Controllers
 -----------
 
 Controllers handle requests, and help co-ordinate and prepare
-the response for the client. Read more about :doc:`/controllers`
+the response for the client. Read more about :doc:`/controllers`.
 
 Views
 -----
 
 Views are the presentation layer in CakePHP. They convert
 the data fetched from Models, into the output format the client
-requested. Read more about :doc:`/views`
+requested. Read more about :doc:`/views`.
 
 Models
 ------
 
 Models are the heart of your application, they handle the validation,
-storage and retrieval of your data. Read more about :doc:`/orm`
+storage and retrieval of your data. Read more about :doc:`/orm`.
 
 Getting Help
 ============
 
 If you're stuck, there are a number of places :doc:`you can get help
-</cakephp-overview/where-to-get-help>`
+</cakephp-overview/where-to-get-help>`.
 
 
 .. meta::
