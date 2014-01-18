@@ -365,8 +365,8 @@ cette méthode pour que le meilleur résultat soit retourné en premier.
 
 .. warning::
 
-    Si vous spécifiez ``fields``, vous aurez besoin de toujours inclure le
-    parent_id (ou son alias courant)::
+    Si vous spécifiez ``fields``, vous aurez besoin de toujours inclure
+    id & parent_id (ou leurs alias courants)::
 
         public function some_function() {
             $categories = $this->Category->find('threaded', array(

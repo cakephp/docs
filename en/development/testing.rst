@@ -25,7 +25,7 @@ following::
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
-Once PHPUnit is installed with the pear installer, you should confirm that the
+Once PHPUnit is installed with the PEAR installer, you should confirm that the
 PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
 your php.ini file and making sure that the PHPUnit files are in one of the
 ``include_path`` directories.
@@ -340,20 +340,50 @@ model. Create a file named ``ArticleFixture.php`` in your
 
     class ArticleFixture extends CakeTestFixture {
 
-          /* Optional. Set this property to load fixtures to a different test datasource */
+          // Optional.
+          // Set this property to load fixtures to a different test datasource
           public $useDbConfig = 'test';
           public $fields = array(
               'id' => array('type' => 'integer', 'key' => 'primary'),
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'title' => array(
+                'type' => 'string',
+                'length' => 255,
+                'null' => false
+              ),
               'body' => 'text',
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'published' => array(
+                'type' => 'integer',
+                'default' => '0',
+                'null' => false
+              ),
               'created' => 'datetime',
               'updated' => 'datetime'
           );
           public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array(
+                'id' => 1,
+                'title' => 'First Article',
+                'body' => 'First Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:39:23',
+                'updated' => '2007-03-18 10:41:31'
+              ),
+              array(
+                'id' => 2,
+                'title' => 'Second Article',
+                'body' => 'Second Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:41:23',
+                'updated' => '2007-03-18 10:43:31'
+              ),
+              array(
+                'id' => 3,
+                'title' => 'Third Article',
+                'body' => 'Third Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:43:23',
+                'updated' => '2007-03-18 10:45:31'
+              )
           );
      }
 
@@ -500,9 +530,30 @@ as it was shown on previous section. For example::
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+            array(
+              'id' => 1,
+              'title' => 'First Article',
+              'body' => 'First Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:39:23',
+              'updated' => '2007-03-18 10:41:31'
+            ),
+            array(
+              'id' => 2,
+              'title' => 'Second Article',
+              'body' => 'Second Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:41:23',
+              'updated' => '2007-03-18 10:43:31'
+            ),
+            array(
+              'id' => 3,
+              'title' => 'Third Article',
+              'body' => 'Third Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:43:23',
+              'updated' => '2007-03-18 10:45:31'
+            )
         );
     }
 
@@ -1105,7 +1156,10 @@ Now we create our tests::
             $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
 
             // Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
+            $this->assertEquals(
+              'USD 12,000.70',
+              $this->CurrencyRenderer->usd(12000.70)
+            );
         }
     }
 

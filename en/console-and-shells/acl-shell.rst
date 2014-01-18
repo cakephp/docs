@@ -47,7 +47,7 @@ Use the grant command to grant ACL permissions. Once executed, the ARO
 specified (and its children, if any) will have ALLOW access to the
 specified ACO action (and the ACO's children, if any)::
 
-    ./Console/cake acl grant Group.1 controllers/Posts 
+    ./Console/cake acl grant Group.1 controllers/Posts
 
 The above would grant all privileges. You could grant only the read privilege
 using the following::
@@ -60,9 +60,7 @@ switch 'deny' in for 'grant'.
 Check permissions
 =================
 
-Use this command to grant ACL permissions. Once executed, the ARO
-specified (and its children, if any) will have ALLOW access to the
-specified ACO action (and the ACO's children, if any)::
+Use this command to check ACL permissions.::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 

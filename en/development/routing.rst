@@ -307,7 +307,8 @@ elements should also be made available as passed arguments::
         '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
         array('controller' => 'blog', 'action' => 'view'),
         array(
-            // order matters since this will simply map ":id" to $articleId in your action
+            // order matters since this will simply map ":id" to
+            // $articleId in your action
             'pass' => array('id', 'slug'),
             'id' => '[0-9]+'
         )
@@ -389,7 +390,10 @@ used would be ``app/View/Users/admin_edit.ctp``
 You can map the URL /admin to your ``admin_index`` action of pages
 controller using following route::
 
-    Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
+    Router::connect(
+        '/admin',
+        array('controller' => 'pages', 'action' => 'index', 'admin' => true)
+    );
 
 You can configure the Router to use multiple prefixes too. By
 adding additional values to ``Routing.prefixes``. If you set::
@@ -400,10 +404,22 @@ CakePHP will automatically generate routes for both the admin and
 manager prefixes. Each configured prefix will have the following
 routes generated for it::
 
-    Router::connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
+    Router::connect(
+        "/{$prefix}/:plugin/:controller",
+        array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    );
+    Router::connect(
+        "/{$prefix}/:plugin/:controller/:action/*",
+        array('prefix' => $prefix, $prefix => true)
+    );
+    Router::connect(
+        "/{$prefix}/:controller",
+        array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    );
+    Router::connect(
+        "/{$prefix}/:controller/:action/*",
+        array('prefix' => $prefix, $prefix => true)
+    );
 
 Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
@@ -416,10 +432,16 @@ helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
 
     // Go into a prefixed route.
-    echo $this->Html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
+    echo $this->Html->link(
+        'Manage posts',
+        array('manager' => true, 'controller' => 'posts', 'action' => 'add')
+    );
 
     // leave a prefix
-    echo $this->Html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
+    echo $this->Html->link(
+        'View Post',
+        array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5)
+    );
 
 .. index:: plugin routing
 
@@ -429,12 +451,18 @@ Plugin routing
 Plugin routing uses the **plugin** key. You can create links that
 point to a plugin, but adding the plugin key to your URL array::
 
-    echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
+    echo $this->Html->link(
+        'New todo',
+        array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create')
+    );
 
 Conversely if the active request is a plugin request and you want
 to create a link that has no plugin you can do the following::
 
-    echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
+    echo $this->Html->link(
+        'New todo',
+        array('plugin' => null, 'controller' => 'users', 'action' => 'profile')
+    );
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
@@ -468,7 +496,12 @@ Then to create links which map back to the routes simply use::
 
     $this->Html->link(
         'Link title',
-        array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
+        array(
+            'controller' => 'pages',
+            'action' => 'view',
+            'title' => 'super-article',
+            'ext' => 'html'
+        )
     );
 
 File extensions are used by :php:class:`RequestHandlerComponent` to do automatic
@@ -734,11 +767,17 @@ Parse only default parameters used for CakePHP's pagination::
 
 Parse only the page parameter if its value is a number::
 
-    Router::connectNamed(array('page' => '[\d]+'), array('default' => false, 'greedy' => false));
+    Router::connectNamed(
+        array('page' => '[\d]+'),
+        array('default' => false, 'greedy' => false)
+    );
 
 Parse only the page parameter no matter what::
 
-    Router::connectNamed(array('page'), array('default' => false, 'greedy' => false));
+    Router::connectNamed(
+        array('page'),
+        array('default' => false, 'greedy' => false)
+    );
 
 Parse only the page parameter if the current action is 'index'::
 
@@ -819,7 +858,9 @@ a destination within your application or an outside location::
     Router::redirect(
         '/home/*',
         array('controller' => 'posts', 'action' => 'view'),
-        array('persist' => true) // or array('persist'=>array('id')) for default routing where the view action expects $id as an argument
+        // or array('persist'=>array('id')) for default routing where the
+        // view action expects $id as an argument
+        array('persist' => true)
     );
 
 Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
@@ -907,7 +948,10 @@ Router API
     it will match requests like `/posts/index` as well as requests like
     ``/posts/edit/1/foo/bar`` .::
 
-        Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
+        Router::connect(
+            '/home-page',
+            array('controller' => 'pages', 'action' => 'display', 'home')
+        );
 
     The above shows the use of route parameter defaults. And providing routing
     parameters for a static route.::

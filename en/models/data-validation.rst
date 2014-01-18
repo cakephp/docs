@@ -1207,6 +1207,9 @@ with usage examples.
             )
         );
 
+    This validation method uses a complex regular expression that can sometimes
+    cause issues with Apache2 on Windows using mod\_php.
+
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 

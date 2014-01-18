@@ -72,7 +72,8 @@ need to be done::
 
     //in app/Lib/AppError.php
     class AppError {
-        public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+        public static function handleError($code, $description, $file = null,
+            $line = null, $context = null) {
             echo 'There has been an error!';
         }
     }
@@ -81,7 +82,8 @@ This class/method will print out 'There has been an error!' each time an error
 occurs. Since you can define an error handler as any callback type, you could
 use an anonymous function if you are using PHP5.3 or greater.::
 
-    Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
+    Configure::write('Error.handler', function($code, $description, $file = null,
+        $line = null, $context = null) {
         echo 'Oh no something bad happened';
     });
 
@@ -104,13 +106,20 @@ If you do not want to show the cake error page, you can override it like::
 
     //in app/Lib/AppError.php
     class AppError {
-        public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+        public static function handleError($code, $description, $file = null,
+            $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
             if ($level === LOG_ERROR) {
                 // Ignore fatal error. It will keep the PHP error message only
                 return false;
             }
-            return ErrorHandler::handleError($code, $description, $file, $line, $context);
+            return ErrorHandler::handleError(
+                $code,
+                $description,
+                $file,
+                $line,
+                $context
+            );
         }
     }
 

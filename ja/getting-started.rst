@@ -19,9 +19,8 @@ CakePHPを体験し学ぶ最良の方法は腰を据えて何かを作ること�
 ============
 
 .. toctree::
-    
+
     getting-started/a-typical-cakephp-request
     getting-started/cakephp-conventions
     getting-started/cakephp-folder-structure
     getting-started/cakephp-structure
-

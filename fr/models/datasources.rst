@@ -302,6 +302,23 @@ y référence en utilisant la syntaxe pour les plugins::
         'apiKey'     => 'abcd1234',
     );
 
+Se connecter à un serveur SQL
+=============================
+
+La source de données Sqlserver dépend de l'extension PHP de Microsoft appelée
+pdo_sqlsrv. Cette extension PHP n'est pas inclue dans l'installation de base
+de PHP et doit être installée séparément.
+
+Le Client Native du Serveur SQL doit aussi être installé pour que l'extension
+fonctionne. Puisque le Client Native est disponible seulement pour windows,
+vous ne serez pas capable de l'installer sur Linux, Mac OS X ou FreeBSD.
+
+Donc si les erreurs de la source de données Sqlserver sortent::
+
+    Error: Database connection "Sqlserver" is missing, or could not be created.
+
+Vérifiez d'abord l'extension PHP du Serveur SQL pdo_sqlsrv et le Client Native
+du Serveur SQL.
 
 .. meta::
     :title lang=fr: DataSources (Sources de Données)

@@ -327,12 +327,12 @@ paramètre est le model pour lequel la méthode du behavior a été invoquée.
     Vous pouvez utiliser afterValidate pour lancer un nettoyage de données ou
     préparer des données si besoin.
 
-.. php:method:: beforeSave(Model $Model)
+.. php:method:: beforeSave(Model $Model, array $options = array())
 
     Vous pouvez retourner false d'un beforeSave d'un behavior pour annuler
     la sauvegarde. Retourner true pour permettre de continuer.
 
-.. php:method:: afterSave(Model $Model, boolean $created)
+.. php:method:: afterSave(Model $Model, boolean $created, array $options = array())
 
     Vous pouvez utiliser afterSave pour effectuer des opérations de nettoyage
     liées au behavior. $created sera à true quand un enregistrement sera crée,

@@ -43,7 +43,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
   Error configuration is done inside your application's ``app/Config/core.php``
   file.  You can define a callback to be fired each time your application triggers
   any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
-  The callback can be any PHP callable, including an anonymous function.  The 
+  The callback can be any PHP callable, including an anonymous function.  The
   default error handling configuration looks like::
 
 エラーのハンドラを設定する際に使えるオプションが５つあります:
@@ -57,11 +57,11 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
   You have 5 built-in options when configuring error handlers:
   * ``handler`` - callback - The callback to handle errors. You can set this to any
     callable type, including anonymous functions.
-  * ``level`` - int - The level of errors you are interested in capturing. Use the 
-    built-in php error constants, and bitmasks to select the level of error you 
+  * ``level`` - int - The level of errors you are interested in capturing. Use the
+    built-in php error constants, and bitmasks to select the level of error you
     are interested in.
-  * ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces 
-    will be included in the log after each error.  This is helpful for finding 
+  * ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces
+    will be included in the log after each error.  This is helpful for finding
     where/when errors are being raised.
   * ``consoleHandler`` - callback - The callback used to handle errors when
     running in the console.  If undefined, CakePHP's default handlers will be
@@ -72,7 +72,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 致命的なエラーのハンドラは、``debug`` レベルや ``Error.level`` の設定に関係なく呼び出されますが、その結果は ``debug`` レベルに基づいて変わります。
 
 ..
-  ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
+  ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when
   debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
   The fatal error handler will be called independent of ``debug`` level or ``Error.level``
   configuration, but the result will be different based on ``debug`` level.
@@ -82,7 +82,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
     独自のエラーハンドラを使う場合は、トレースの設定をしても（エラーをハンドルする関数内でそれを扱わない限り）何も起こりません。
 
 ..
-    If you use a custom error handler, the trace setting will have no effect, 
+    If you use a custom error handler, the trace setting will have no effect,
     unless you refer to it in your error handling function.
 
 .. versionadded:: 2.2
@@ -122,8 +122,8 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
     }
 
 ..
-  You can create an error handler out of any callback type.  For example you could 
-  use a class called ``AppError`` to handle your errors.  The following would 
+  You can create an error handler out of any callback type.  For example you could
+  use a class called ``AppError`` to handle your errors.  The following would
   need to be done::
 
 このクラス／メソッドはエラーが発生するたびに「エラー発生！」と表示します。
@@ -134,7 +134,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
     });
 
 ..
-  This class/method will print out 'There has been an error!' each time an error 
+  This class/method will print out 'There has been an error!' each time an error
   occurs.  Since you can define an error handler as any callback type, you could
   use an anonymous function if you are using PHP5.3 or greater.::
 

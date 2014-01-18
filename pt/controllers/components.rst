@@ -155,7 +155,7 @@ controllers. Então não há necessidade de redeclarar o mesmo componente duas
 vezes.
 
 Ao incluir componentes em um controller você também pode declarar um conjunto de
-parâmetros que serão passados ​​para o construtor do componente. Estes parâmetros
+parâmetros que serão passados para o construtor do componente. Estes parâmetros
 podem ser usados pelo componente.
 
 ::

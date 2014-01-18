@@ -6,7 +6,7 @@ Installing CakePHP with PEAR Installer
 
 CakePHP publishes a PEAR package that you can install using the PEAR installer.
 Installing with the PEAR installer can simplify sharing CakePHP libraries
-across multiple applications. To install CakePHP with pear you'll need to do the
+across multiple applications. To install CakePHP with PEAR you'll need to do the
 following::
 
     pear channel-discover pear.cakephp.org
@@ -78,6 +78,11 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
         'CAKE_CORE_INCLUDE_PATH',
         ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
+
+.. note::
+
+    If you are planning to create unit tests for your application you'll also
+    need to make the above change to ``webroot/test.php``
 
 If you're installing any other libraries with Composer, you'll need to setup
 the autoloader, and work around an issue in Composer's autoloader. In your

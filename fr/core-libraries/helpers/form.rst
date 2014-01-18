@@ -282,7 +282,8 @@ Fermer le Formulaire
 
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    Voir `l'API <http://api20.cakephp.org>`_ pour plus de détails.
+    Voir `l'API du Helper Form
+    <http://api.cakephp.org/2.4/class-FormHelper.html>`_ pour plus de détails.
 
     .. note::
 

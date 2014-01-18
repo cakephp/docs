@@ -220,7 +220,8 @@ Component is now the required base class for all components. You should update
 your components and their constructors, as both have changed::
 
     class PrgComponent extends Component {
-        public function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection,
+          $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -554,7 +555,10 @@ Router
   ``index`` action is given a short route. If you wish to continue using short
   routes, you can add a route like::
 
-    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+    Router::connect(
+      '/users/:action',
+      array('controller' => 'users', 'plugin' => 'users')
+    );
 
   To your routes file for each plugin you need short routes on.
 
@@ -1088,8 +1092,24 @@ List of Changes
 * DboSource::fetchAll() now accepts an array as second parameter, to pass values
   to be bound to the query, third parameter was dropped. Example::
 
-    $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
-    $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+        username = ?
+      AND
+        password = ?',
+      array('jhon', '12345')
+    );
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+          username = :username
+      AND
+        password = :password',
+      array('username' => 'jhon', 'password' => '12345')
+    );
 
 The PDO driver will automatically escape those values for you.
 

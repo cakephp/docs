@@ -63,10 +63,7 @@ La seule différence est le remplacement de 'grant' en 'deny'.
 Vérification des permissions
 ============================
 
-Utilisez les commandes pour accorder les permissions ACL.
-Une fois exécutées, l'ARO spécifié (et ses enfants, s'il en a) aura un accès
-AUTORISÉ pour l'action ACO spécifiée (et les enfants de l'ACO, si ils
-existent)::
+Utilisez cette commande pour accorder les permissions ACL.::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 

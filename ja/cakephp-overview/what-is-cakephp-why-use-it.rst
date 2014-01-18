@@ -21,7 +21,7 @@ CakePHPを使用する、ということは、車輪の再開発を避けるだ�
 CakePHPの使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります：
 
 
--  アクティブ、フレンドリーな `コミュニティ <http://cakephp.org/feeds>`_
+-  アクティブ、フレンドリーな :ref:`cakephp-official-communities`
 -  フレキシブルな `ライセンス <http://ja.wikipedia.org/wiki/MIT_License>`_
 -  PHP5.2.8以上との互換性をもつ
 -  データベースとのやり取りのための、

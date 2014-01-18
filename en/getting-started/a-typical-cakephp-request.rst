@@ -10,7 +10,7 @@ CakePHP application's landing page.
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
-   
+
    Flow diagram showing a typical CakePHP request
 
 Figure: 2. Typical CakePHP Request.
@@ -46,7 +46,7 @@ Black = required element, Gray = optional element, Blue = callback
    before the data is sent. The view logic is performed, which may
    include the use of elements and/or helpers. By default, the view is
    rendered inside of a layout.
-#. Additional controller callbacks (like afterFilter) may be
+#. Additional controller callbacks (like :php:meth:`~Controller::afterFilter`) may be
    applied. The complete, rendered view code is sent to Ricardo's
    browser.
 

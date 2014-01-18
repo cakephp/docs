@@ -12,7 +12,8 @@
 extensions = [
     'sphinx.ext.todo',
     'sphinxcontrib.phpdomain',
-    'config.cakei18n'
+    'config.cakei18n',
+    'config.cakebranch'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -284,6 +285,9 @@ epub_tocdup = False
 
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
+
+# The GitHub branch name for this version of the docs
+branch = 'master'
 
 # Hack to render the php source code without the <?php tag
 from sphinx.highlighting import lexers

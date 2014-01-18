@@ -1,8 +1,8 @@
 Folder & File
 #############
 
-The Folder and File utilities are convenience classes to help you read, write,
-and append to files; list files within a folder and other common directory
+The Folder and File utilities are convenience classes to help you read from and
+write/append to files; list files within a folder and other common directory
 related tasks.
 
 Basic usage
@@ -24,7 +24,7 @@ and search for all *.ctp* files within that folder using regex::
     <?php
     $files = $dir->find('.*\.ctp');
 
-Now we can loop through the files and read, write or append to the contents or
+Now we can loop through the files and read from or write/append to the contents or
 simply delete the file::
 
     <?php
@@ -40,7 +40,7 @@ simply delete the file::
 Folder API
 ==========
 
-.. php:class:: Folder(string $path = false, boolean $create = false, mixed $mode = false)
+.. php:class:: Folder(string $path = false, boolean $create = false, string|boolean $mode = false)
 
 ::
 
@@ -50,7 +50,7 @@ Folder API
 
 .. php:attr:: path
 
-    Current path to the folder. :php:meth:`Folder::pwd()` will return the same
+    Path of the current folder. :php:meth:`Folder::pwd()` will return the same
     information.
 
 .. php:attr:: sort
@@ -62,7 +62,7 @@ Folder API
     Mode to be used when creating folders. Defaults to ``0755``. Does nothing on
     windows machines.
 
-.. php:staticmethod:: addPathElement( $path, $element )
+.. php:staticmethod:: addPathElement(string $path, string $element)
 
     :rtype: string
 
@@ -80,7 +80,7 @@ Folder API
         $element parameter accepts an array as of 2.5
 
 
-.. php:method:: cd( $path )
+.. php:method:: cd(string $path)
 
     :rtype: string
 
@@ -93,8 +93,7 @@ Folder API
         echo $folder->path; // Prints /bar
         $false = $folder->cd('/non-existent-folder');
 
-
-.. php:method:: chmod( $path, $mode = false, $recursive = true, $exceptions = array ( ) )
+.. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
 
     :rtype: boolean
 
@@ -105,8 +104,7 @@ Folder API
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, array('skip_me.php'));
 
-
-.. php:method:: copy( $options = array ( ) )
+.. php:method:: copy(array|string $options = array())
 
     :rtype: boolean
 
@@ -132,25 +130,24 @@ Folder API
     * ``Folder::SKIP`` skip copying/moving files & directories that exist in the
       destination directory.
     * ``Folder::MERGE`` merge the source/destination directories. Files in the
-      source directory will replace files in the target directory.  Directory
+      source directory will replace files in the target directory. Directory
       contents will be merged.
     * ``Folder::OVERWRITE`` overwrite existing files & directories in the target
-      directory with those in the source directory.  If both the target and
+      directory with those in the source directory. If both the target and
       destination contain the same subdirectory, the target directory's contents
       will be removed and replaced with the source's.
 
     .. versionchanged:: 2.3
         The merge, skip and overwrite schemes were added to ``copy()``
 
-.. php:staticmethod:: correctSlashFor( $path )
+.. php:staticmethod:: correctSlashFor(string $path)
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for
-    Windows paths and / for other paths.)
+    Returns a correct set of slashes for given $path ('\\' for
+    Windows paths and '/' for other paths).
 
-
-.. php:method:: create( $pathname, $mode = false )
+.. php:method:: create(string $pathname, integer $mode = false)
 
     :rtype: boolean
 
@@ -163,7 +160,7 @@ Folder API
             // Successfully created the nested folders
         }
 
-.. php:method:: delete( $path = NULL )
+.. php:method:: delete(string $path = null)
 
     :rtype: boolean
 
@@ -172,28 +169,26 @@ Folder API
         <?php
         $folder = new Folder('foo');
         if ($folder->delete()) {
-            // Successfully deleted foo its nested folders
+            // Successfully deleted foo and its nested folders
         }
 
-.. php:method:: dirsize( )
+.. php:method:: dirsize()
 
     :rtype: integer
 
     Returns the size in bytes of this Folder and its contents.
 
-
-.. php:method:: errors( )
-
-    :rtype: array
-
-    Get error from latest method.
-
-
-.. php:method:: find( $regexpPattern = '.*', $sort = false )
+.. php:method:: errors()
 
     :rtype: array
 
-    Returns an array of all matching files in current directory::
+    Get the error from latest method.
+
+.. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
+
+    :rtype: array
+
+    Returns an array of all matching files in the current directory::
 
         <?php
         // Find all .png in your app/webroot/img/ folder and sort the results
@@ -216,12 +211,11 @@ Folder API
     would like to get folders and files see :php:meth:`Folder::read()` or
     :php:meth:`Folder::tree()`
 
-
-.. php:method:: findRecursive( $pattern = '.*', $sort = false )
+.. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
 
     :rtype: array
 
-    Returns an array of all matching files in and below current directory::
+    Returns an array of all matching files in and below the current directory::
 
         <?php
         // Recursively find files beginning with test or index
@@ -239,19 +233,17 @@ Folder API
         )
         */
 
-
-.. php:method:: inCakePath( $path = '' )
-
-    :rtype: boolean
-
-    Returns true if the File is in a given CakePath.
-
-
-.. php:method:: inPath( $path = '', $reverse = false )
+.. php:method:: inCakePath(string $path = '')
 
     :rtype: boolean
 
-    Returns true if the File is in given path::
+    Returns true if the file is in a given CakePath.
+
+.. php:method:: inPath(string $path = '', boolean $reverse = false)
+
+    :rtype: boolean
+
+    Returns true if the file is in the given path::
 
         <?php
         $Folder = new Folder(WWW_ROOT);
@@ -261,15 +253,13 @@ Folder API
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
         // $result = true, /var/www/example/app/webroot/ is in /var/www/example/app/webroot/img/
 
-
-.. php:staticmethod:: isAbsolute( $path )
+.. php:staticmethod:: isAbsolute(string $path)
 
     :rtype: boolean
 
-    Returns true if given $path is an absolute path.
+    Returns true if the given $path is an absolute path.
 
-
-.. php:staticmethod:: isSlashTerm( $path )
+.. php:staticmethod:: isSlashTerm(string $path)
 
     :rtype: boolean
 
@@ -281,44 +271,38 @@ Folder API
         $result = Folder::isSlashTerm('/my/test/path/');
         // $result = true
 
-
-.. php:staticmethod:: isWindowsPath( $path )
+.. php:staticmethod:: isWindowsPath(string $path)
 
     :rtype: boolean
 
-    Returns true if given $path is a Windows path.
+    Returns true if the given $path is a Windows path.
 
-
-.. php:method:: messages( )
+.. php:method:: messages()
 
     :rtype: array
 
-    Get messages from latest method.
+    Get the messages from the latest method.
 
-
-.. php:method:: move( $options )
+.. php:method:: move(array $options)
 
     :rtype: boolean
 
     Recursive directory move.
 
-
-.. php:staticmethod:: normalizePath( $path )
+.. php:staticmethod:: normalizePath(string $path)
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for
-    Windows paths and / for other paths.)
+    Returns a correct set of slashes for given $path ('\\' for
+    Windows paths and '/' for other paths).
 
-
-.. php:method:: pwd( )
+.. php:method:: pwd()
 
     :rtype: string
 
     Return current path.
 
-
-.. php:method:: read( $sort = true, $exceptions = false, $fullPath = false )
+.. php:method:: read(boolean $sort = true, array|boolean $exceptions = false, boolean $fullPath = false)
 
     :rtype: mixed
 
@@ -328,7 +312,7 @@ Folder API
     :param boolean $fullPath: If true will return results using absolute paths.
 
     Returns an array of the contents of the current directory. The
-    returned array holds two arrays: One of directories and one of files::
+    returned array holds two sub arrays: One of directories and one of files::
 
         <?php
         $dir = new Folder(WWW_ROOT);
@@ -336,13 +320,13 @@ Folder API
         /*
         Array
         (
-            [0] => Array
+            [0] => Array // folders
                 (
                     [0] => css
                     [1] => img
                     [2] => js
                 )
-            [1] => Array
+            [1] => Array // files
                 (
                     [0] => .htaccess
                     [1] => favicon.ico
@@ -351,33 +335,29 @@ Folder API
         )
         */
 
-
-.. php:method:: realpath( $path )
+.. php:method:: realpath(string $path)
 
     :rtype: string
 
     Get the real path (taking ".." and such into account).
 
-
-.. php:staticmethod:: slashTerm( $path )
+.. php:staticmethod:: slashTerm(string $path)
 
     :rtype: string
 
     Returns $path with added terminating slash (corrected for
     Windows or other OS).
 
-
-.. php:method:: tree( $path = NULL, $exceptions = true, $type = NULL )
+.. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
 
     :rtype: mixed
 
     Returns an array of nested directories and files in each directory.
 
-
 File API
 ========
 
-.. php:class:: File(string $path, boolean $create = false, integer $mode = 493)
+.. php:class:: File(string $path, boolean $create = false, integer $mode = 755)
 
 ::
 
@@ -408,198 +388,175 @@ File API
 
 .. php:attr:: path
 
-    Current file's absolute path.
+    The current file's absolute path.
 
-.. php:method:: append( $data, $force = false )
+.. php:method:: append(string $data, boolean $force = false)
 
     :rtype: boolean
 
-    Append given data string to this File.
+    Append the given data string to the current file.
 
-
-.. php:method:: close( )
+.. php:method:: close()
 
     :rtype: boolean
 
     Closes the current file if it is opened.
 
-
-.. php:method:: copy( $dest, $overwrite = true )
-
-    :rtype: boolean
-
-    Copy the File to $dest
-
-
-.. php:method:: create( )
+.. php:method:: copy(string $dest, boolean $overwrite = true)
 
     :rtype: boolean
 
-    Creates the File.
+    Copy the file to $dest.
 
-
-.. php:method:: delete( )
-
-    :rtype: boolean
-
-    Deletes the File.
-
-
-.. php:method:: executable( )
+.. php:method:: create()
 
     :rtype: boolean
 
-    Returns true if the File is executable.
+    Creates the file.
 
-
-.. php:method:: exists( )
+.. php:method:: delete()
 
     :rtype: boolean
 
-    Returns true if the File exists.
+    Deletes the file.
 
+.. php:method:: executable()
 
-.. php:method:: ext( )
+    :rtype: boolean
+
+    Returns true if the file is executable.
+
+.. php:method:: exists()
+
+    :rtype: boolean
+
+    Returns true if the file exists.
+
+.. php:method:: ext()
 
     :rtype: string
 
-    Returns the File extension.
+    Returns the file extension.
 
-
-.. php:method:: Folder( )
+.. php:method:: Folder()
 
     :rtype: Folder
 
     Returns the current folder.
 
+.. php:method:: group()
 
-.. php:method:: group( )
+    :rtype: integer|false
 
-    :rtype: integer
+    Returns the file's group, or false in case of an error.
 
-    Returns the File's group.
+.. php:method:: info()
 
+    :rtype: array
 
-.. php:method:: info( )
-
-    :rtype: string
-
-    Returns the File info.
+    Returns the file info.
 
     .. versionchanged:: 2.1
         ``File::info()`` now includes filesize & mimetype information.
 
-.. php:method:: lastAccess( )
+.. php:method:: lastAccess()
 
-    :rtype: integer
+    :rtype: integer|false
 
-    Returns last access time.
+    Returns last access time, or false in case of an error.
 
+.. php:method:: lastChange()
 
-.. php:method:: lastChange( )
+    :rtype: integer|false
 
-    :rtype: integer
+    Returns last modified time, or false in case of an error.
 
-    Returns last modified time.
-
-
-.. php:method:: md5( $maxsize = 5 )
+.. php:method:: md5(integer|boolean $maxsize = 5)
 
     :rtype: string
 
-    Get md5 Checksum of file with previous check of Filesize
+    Get the MD5 Checksum of file with previous check of filesize,
+    or false in case of an error.
 
-
-.. php:method:: name( )
+.. php:method:: name()
 
     :rtype: string
 
-    Returns the File name without extension.
+    Returns the file name without extension.
 
-
-.. php:method:: offset( $offset = false, $seek = 0 )
+.. php:method:: offset(integer|boolean $offset = false, integer $seek = 0)
 
     :rtype: mixed
 
     Sets or gets the offset for the currently opened file.
 
-
-.. php:method:: open( $mode = 'r', $force = false )
+.. php:method:: open(string $mode = 'r', boolean $force = false)
 
     :rtype: boolean
 
-    Opens the current file with a given $mode
+    Opens the current file with the given $mode.
 
-.. php:method:: owner( )
+.. php:method:: owner()
 
     :rtype: integer
 
-    Returns the File's owner.
+    Returns the file's owner.
 
-
-.. php:method:: perms( )
+.. php:method:: perms()
 
     :rtype: string
 
-    Returns the "chmod" (permissions) of the File.
+    Returns the "chmod" (permissions) of the file.
 
-
-.. php:staticmethod:: prepare( $data, $forceWindows = false )
+.. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
 
     :rtype: string
 
     Prepares a ascii string for writing. Converts line endings to the
-    correct terminator for the current platform. If windows "\r\n"
-    will be used all other platforms will use "\n"
+    correct terminator for the current platform. For Windows "\r\n"
+    will be used, "\n" for all other platforms.
 
-
-.. php:method:: pwd( )
+.. php:method:: pwd()
 
     :rtype: string
 
-    Returns the full path of the File.
+    Returns the full path of the file.
 
+.. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
 
-.. php:method:: read( $bytes = false, $mode = 'rb', $force = false )
+    :rtype: string|boolean
 
-    :rtype: mixed
+    Return the contents of the current file as a string or return false on failure.
 
-    Return the contents of this File as a string or return false on failure.
-
-
-.. php:method:: readable( )
+.. php:method:: readable()
 
     :rtype: boolean
 
-    Returns true if the File is readable.
+    Returns true if the file is readable.
 
-
-.. php:method:: safe( $name = NULL, $ext = NULL )
+.. php:method:: safe(string $name = null, string $ext = null)
 
     :rtype: string
 
     Makes filename safe for saving.
 
-
-.. php:method:: size( )
+.. php:method:: size()
 
     :rtype: integer
 
-    Returns the Filesize.
+    Returns the filesize.
 
-
-.. php:method:: writable( )
-
-    :rtype: boolean
-
-    Returns true if the File is writable.
-
-
-.. php:method:: write( $data, $mode = 'w', $force = false )
+.. php:method:: writable()
 
     :rtype: boolean
 
-    Write given data to this File.
+    Returns true if the file is writable.
+
+.. php:method:: write(string $data, string $mode = 'w', boolean$force = false)
+
+    :rtype: boolean
+
+    Write given data to the current file.
 
 .. versionadded:: 2.1 ``File::mime()``
 
@@ -609,7 +566,6 @@ File API
 
     Get the file's mimetype, returns false on failure.
 
-.. versionadded:: 2.5 ``File::replaceText()``
 
 .. php:method:: replaceText( $search, $replace )
 
@@ -617,6 +573,8 @@ File API
 
     Replaces text in a file. Returns false on failure and true on success.
 
+    .. versionadded::
+        2.5 ``File::replaceText()``
 
 .. todo::
 

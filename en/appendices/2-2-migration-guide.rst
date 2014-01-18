@@ -111,11 +111,11 @@ Configure
 - :php:meth:`Configure::dump()` was added. It is used to persist configuration
   data in durable storage like files. Both :php:class:`PhpReader` and
   :php:class:`IniReader` work with it.
-- A new config parameter 'Config.timezone' is available which you can set to
-  user's timezone string. eg. You can do ``Configure::write('Config.timezone',
+- A new config parameter 'Config.timezone' is available in which you can set
+  users' timezone string. eg. You can do ``Configure::write('Config.timezone',
   'Europe/Paris')``. If a method of ``CakeTime`` class is called with
   ``$timezone`` parameter as null and 'Config.timezone' is set, then the value
-  of 'Config.timezone' will be used. This feature allows you to set user's
+  of 'Config.timezone' will be used. This feature allows you to set users'
   timezone just once instead of passing it each time in function calls.
 
 

@@ -84,6 +84,11 @@ relatif::
         ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
 
+.. note::
+
+    Si vous pensez créer des tests unitaires pour votre application, vous
+    devrez aussi faire les changements ci-dessus dans ``webroot/test.php``.
+
 Si vous installez d'autres librairies avec composer, vous devrez configurer
 l'autoloader, et régler un problème dans l'autoloader de composer. Dans votre
 fichier ``Config/bootstrap.php``, ajoutez ce qui suit::

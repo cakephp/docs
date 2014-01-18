@@ -6,40 +6,40 @@ Glossary
     routing array
         An array of attributes that are passed to :php:meth:`Router::url()`.
         They typically look like::
-        
+
             array('controller' => 'posts', 'action' => 'view', 5)
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::
-            
+
             // Given
             array('class' => 'my-class', 'target' => '_blank')
 
             // Would generate
             class="my-class" target="_blank"
 
-        If an option can be minimized or accepts it's name as the value, then ``true`` 
+        If an option can be minimized or accepts it's name as the value, then ``true``
         can be used::
-        
+
             // Given
             array('checked' => true)
-            
+
             // Would generate
             checked="checked"
-    
+
     plugin syntax
         Plugin syntax refers to the dot separated class name indicating classes
         are part of a plugin. E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
         and the class name is Toolbar.
-    
+
     dot notation
         Dot notation defines an array path, by separating nested levels with ``.``
         For example::
-        
+
             Asset.filter.css
-        
+
         Would point to the following value::
-        
+
             array(
                 'Asset' => array(
                     'filter' => array(
@@ -55,7 +55,7 @@ Glossary
     routes.php
         A file in APP/Config that contains routing configuration.
         This file is included before each request is processed.
-        It should connect all the routes your application needs so 
+        It should connect all the routes your application needs so
         requests can be routed to the correct controller + action.
 
     DRY

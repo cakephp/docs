@@ -11,7 +11,7 @@ Pour lancer la mise à jour::
     ./Console/cake upgrade all
 
 Si vous voulez voir ce que le shell va faire sans modifier les fichiers,
-faites d'abord une exécution à blanc avec --dry-run::
+faîtes d'abord une exécution à blanc avec --dry-run::
 
     ./Console/cake upgrade all --dry-run
 
@@ -20,12 +20,13 @@ Pour mettre à jour vos Plugins, lancer la commande::
     ./Console/cake upgrade all --plugin YourPluginName
 
 Il est aussi possible de lancer chaque mise à jour individuellement. Pour voir
-toutes les étapes possibles, lancer la commande::
+toutes les étapes possibles, lancez la commande::
 
     ./Console/cake upgrade --help
 
-Ou visiter les docs de l'api pour plus d'informations:
-http://api20.cakephp.org/class/upgrade-shell
+Ou allez voir les
+`docs de l'API <http://api.cakephp.org/2.4/class-UpgradeShell.html>`_
+pour plus d'informations:
 
 Mise à jour de votre App
 ------------------------

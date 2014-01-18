@@ -76,7 +76,9 @@ pour formater des dates::
     public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
-                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);
+                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
+                    $val['Event']['begindate']
+                );
             }
         }
         return $results;
@@ -129,9 +131,16 @@ facilement modifié. Utilisez le code ci-dessous dans le model approprié.
 ::
 
     public function beforeSave($options = array()) {
-        if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
-            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
-            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+        if (!empty($this->data['Event']['begindate']) &&
+            !empty($this->data['Event']['enddate'])
+        ) {
+
+            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['begindate']
+            );
+            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['enddate']
+            );
         }
         return true;
     }
@@ -151,7 +160,8 @@ afterSave
 ``afterSave(boolean $created, array $options = array())``
 
 Si vous avez besoin d'exécuter de la logique juste après chaque opération de
-sauvegarde, placez-la dans cette méthode de rappel.
+sauvegarde, placez-la dans cette méthode de rappel. Les données sauvegardées
+seront disponibles dans ``$this->data``.
 
 La valeur de ``$created`` sera true si un nouvel objet a été créé
 (plutôt qu'un objet mis à jour).
@@ -177,10 +187,12 @@ dépendent de cet enregistrement soient aussi supprimés.
 
 ::
 
-    // using app/Model/ProduitCategory.php
-    // Dans l'exemple suivant, ne laissez pas une catégorie être supprimée si elle contient des produits.
-    // Un appel de $this->Produit->delete($id) de ProduitsController.php a défini $this->id .
-    // En admettant que 'ProduitCategory hasMany Produit', nous pouvons accéder à $this->Produit dans le model.
+    // en utilisant app/Model/ProduitCategory.php
+    // Dans l'exemple suivant, ne laissez pas une catégorie être supprimée si
+    // elle contient des produits. Un appel de $this->Produit->delete($id) de
+    // ProduitsController.php a défini $this->id. En admettant que
+    // 'ProduitCategory hasMany Produit', nous pouvons accéder à $this->Produit
+    // dans le model.
     public function beforeDelete() {
         $count = $this->Product->find("count", array(
             "conditions" => array("produit_category_id" => $this->id)
@@ -200,7 +212,8 @@ afterDelete
 Placez dans cette méthode de rappel, toute logique que vous souhaitez exécuter
 après chaque suppression::
 
-    // peut-être pour supprimer un enregistrement de la base de données, vous pouvez aussi supprimer un fichier associé
+    // peut-être pour supprimer un enregistrement de la base de données,
+    // vous pouvez aussi supprimer un fichier associé
     public function afterDelete() {
         $file = new File($this->data['SomeModel']['file_path']);
         $file->delete();

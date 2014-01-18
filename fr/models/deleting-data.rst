@@ -62,7 +62,11 @@ Exemple::
     $this->Comment->deleteAll(array('Comment.spam' => true), false);
 
 Si vous supprimez avec soit callbacks et/ou cascade, les lignes seront trouvées
-et ensuite supprimées. Cela impliquera souvent plus de requêtes faîtes.
+et ensuite supprimées. Cela impliquera souvent plus de requêtes faîtes. Les
+associations vont être réinitialisées avant que les enregistrements
+correspondants ne soient supprimés dans deleteAll(). Si vous utilisez
+bindModel() ou unbindModel() pour changer les associations, vous devrez définir
+**reset** à ``false``.
 
 .. note::
 

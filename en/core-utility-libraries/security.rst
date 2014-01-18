@@ -3,7 +3,7 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api.cakephp.org/2.3/class-Security.html>`_
+The `security library <http://api.cakephp.org/2.4/class-Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
@@ -162,7 +162,7 @@ Security API
 
     :rtype: void
 
-    Sets the default hash method for the Security object. This 
+    Sets the default hash method for the Security object. This
     affects all objects using Security::hash().
 
 .. php:staticmethod:: validateAuthKey( $authKey )

@@ -18,7 +18,8 @@ You'll notice three main folders:
    your application's files will be placed.
 -  The *lib* folder is where we've worked our magic. Make a
    personal commitment **not** to edit files in this folder. We can't
-   help you if you've modified the core.
+   help you if you've modified the core. Instead, look into modifying
+   :ref:`application-extensions`.
 -  Finally, the *vendors* folder is where you'll place third-party
    PHP libraries you need to use with your CakePHP applications.
 
