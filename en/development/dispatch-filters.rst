@@ -104,6 +104,21 @@ Feel free to remove the default attached filters if you choose to use a more
 advanced/faster way of serving theme and plugin assets or if you do not wish to
 use built-in full page caching, or just implement your own.
 
+If you need to pass constructor parameters or settings to you dispatch filter
+classes you can do that by providing an array of settings::
+
+    Configure::write('Dispatcher.filters', array(
+        'MyAssetFilter' => array('service' => 'google.com')
+    ));
+
+When the filter key is a valid classname, the value can be an array of
+parameters that are passed to the dispatch filter. By default the base class
+will assign these settings to the ``$settings`` property after merging them with
+the defaults in the class.
+
+.. versionchanged:: 2.5
+    You can now provide constructor settings to dispatch filters in 2.5.
+
 Filter Classes
 ==============
 
