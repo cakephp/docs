@@ -115,8 +115,8 @@ in ``/App/Controller/RecipesController.php`` and contain::
             }
         }
 
-The view files for these actions would be ``app/View/Recipes/view.ctp``,
-``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``. The
+The view files for these actions would be ``app/Template/Recipes/view.ctp``,
+``app/Template/Recipes/share.ctp``, and ``app/Template/Recipes/search.ctp``. The
 conventional view file name is the lowercased and underscored version of the
 action name.
 
@@ -264,12 +264,12 @@ rendered from the controller.
 
     The default view file used by render is determined by convention.
     If the ``search()`` action of the RecipesController is requested,
-    the view file in /App/View/Recipes/search.ctp will be rendered::
+    the view file in /App/Template/Recipes/search.ctp will be rendered::
 
         class RecipesController extends AppController {
         // ...
             public function search() {
-                // Render the view in /View/Recipes/search.ctp
+                // Render the view in /Template/Recipes/search.ctp
                 $this->render();
             }
         // ...
@@ -281,18 +281,18 @@ rendered from the controller.
     name in the controller using ``$action``.
 
     If ``$view`` starts with '/' it is assumed to be a view or
-    element file relative to the ``/App/View`` folder. This allows
+    element file relative to the ``/App/Template`` folder. This allows
     direct rendering of elements, very useful in AJAX calls.
     ::
 
-        // Render the element in /View/Element/ajaxreturn.ctp
+        // Render the element in /Template/Element/ajaxreturn.ctp
         $this->render('/Element/ajaxreturn');
 
     The ``$layout`` parameter allows you to specify the layout the
     view is rendered in.
 
-Rendering a Specific View
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Rendering a Specific Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your controller you may want to render a different view than
 what would conventionally be done. You can do this by calling
@@ -305,8 +305,8 @@ will not try to re-render the view::
         }
     }
 
-This would render ``app/View/Posts/custom_file.ctp`` instead of
-``app/View/Posts/my_action.ctp``
+This would render ``app/Template/Posts/custom_file.ctp`` instead of
+``app/Template/Posts/my_action.ctp``
 
 
 You can also render views inside plugins using the following syntax:
@@ -319,7 +319,7 @@ For example::
         }
     }
     
-This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp``
+This would render ``app/Plugin/Users/Template/UserDetails/custom_file.ctp``
 
 Flow Control
 ------------

@@ -122,7 +122,7 @@ Load the bootstrap file from all plugins, and the routes from the Blog plugin::
         'Blog' => ['routes' => true]
     ]);
 
-Note that all files specified should actually exist in the configured 
+Note that all files specified should actually exist in the configured
 plugin(s) or PHP will give warnings for each file it cannot load. You can avoid
 potential warnings by using the ``ignoreMissing`` option::
 
@@ -182,6 +182,7 @@ basic directory structure. It should look like this::
                 /Behavior
             /View
                 /Helper
+            /Template
                 /Layout
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
@@ -364,17 +365,17 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place them in the
-right folder inside of the ``/Plugin/[PluginName]/View/`` folder. For our
+right folder inside of the ``/Plugin/[PluginName]/Template/`` folder. For our
 ContactManager plugin, we'll need a view for our ``ContactsController::index()``
 action, so let's include that as well::
 
-    // /Plugin/ContactManager/View/Contacts/index.ctp:
+    // /Plugin/ContactManager/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. Add plugin layouts, inside
-``/Plugin/[PluginName]/View/Layout``. To use a plugin layout in your controller
+``/Plugin/[PluginName]/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -392,13 +393,13 @@ Overriding Plugin Views from Inside Your Application
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the view files of the
 plugin with more application specific view logic by creating files using the
-following template ``App/View/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
+following template ``App/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 
-    /App/View/Plugin/ContactManager/Contacts/index.ctp
+    /App/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``/Plugin/ContactManager/View/Contacts/index.ctp``.
+``/Plugin/ContactManager/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
@@ -484,8 +485,8 @@ This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
 application, you can do inside of a plugin instead.
 
-Go ahead, include some third-party libraries in 'Vendor', add some 
-new shells to the cake console, and don't forget to create test cases 
+Go ahead, include some third-party libraries in 'Vendor', add some
+new shells to the cake console, and don't forget to create test cases
 so your plugin users can automatically test your plugin's functionality!
 
 In our ContactManager example, we might create add/remove/edit/delete
