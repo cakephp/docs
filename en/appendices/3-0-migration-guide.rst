@@ -490,6 +490,9 @@ View
 View Folders Renamed
 --------------------
 
+The folders containing view files now go under `App/Template` instead of `App/View`.
+This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
+
 The following View folders have been renamed to avoid naming collisions with controller names:
 
 - ``Layouts`` is now ``Layout``

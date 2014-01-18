@@ -144,14 +144,14 @@ to the view that would look something like this::
             )
     )
 
-CakePHP's view files are stored in ``/App/View`` inside a folder
+CakePHP's view files are stored in ``/App/Template`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
 nice table, our view code might look something like this
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/index.ctp -->
+    <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <table>
@@ -241,11 +241,11 @@ also perform a similar check to make sure the user has accessed a
 record that exists.
 
 Now let's create the view for our new 'view' action and place it in
-``/App/View/Posts/view.ctp``
+``/App/Template/Posts/view.ctp``
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/view.ctp -->
+    <!-- File: /App/Template/Posts/view.ctp -->
 
     <h1><?php echo h($post['Post']['title']); ?></h1>
 
@@ -351,7 +351,7 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/add.ctp -->
+    <!-- File: /App/Template/Posts/add.ctp -->
 
     <h1>Add Post</h1>
     <?php
@@ -387,7 +387,7 @@ the form. If a string is supplied as the first parameter to
 along with the closing form tag. Again, refer to
 :doc:`/views/helpers` for more on helpers.
 
-Now let's go back and update our ``/App/View/Posts/index.ctp``
+Now let's go back and update our ``/App/Template/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
 the following line::
 
@@ -472,7 +472,7 @@ The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/edit.ctp -->
+    <!-- File: /App/Template/Posts/edit.ctp -->
 
     <h1>Edit Post</h1>
     <?php
@@ -496,7 +496,7 @@ posts:
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/index.ctp  (edit links added) -->
+    <!-- File: /App/Template/Posts/index.ctp  (edit links added) -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
@@ -559,7 +559,7 @@ links that allow users to delete posts, however:
 
 .. code-block:: php
 
-    <!-- File: /App/View/Posts/index.ctp -->
+    <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
