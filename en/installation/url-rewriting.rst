@@ -253,7 +253,7 @@ In the lighttpd configuration make sure you've activiated "mod_rewrite". Add a l
 ::
 
     url.rewrite-if-not-file =(
-        "^([^\?]*)(\?(.+))?$" =&gt; "/index.php?url=$1&amp;$3"
+        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
     )
 
 
