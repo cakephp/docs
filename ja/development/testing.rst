@@ -21,7 +21,7 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
     システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
-一旦pear installerによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
+一旦PEARインストーラーによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
 ライブラリがあるか確認してください。PHPUnitのファイルが、php.iniファイルで設定されている
 ``include_path`` のディレクトリ以下にあるかどうか確かめることで調べられます。
 
