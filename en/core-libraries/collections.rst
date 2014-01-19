@@ -244,7 +244,7 @@ If you only wish to know the number of occurrences per group, you can do so by
 using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
-    $classResults = $students->groupBy(function($student) {
+    $classResults = $students->countBy(function($student) {
         retrun $student->grade > 6 ? 'approved' : 'reproved';
     });
 
