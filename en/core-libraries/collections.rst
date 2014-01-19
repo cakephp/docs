@@ -223,7 +223,7 @@ share the same value for a property::
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
-        ['name' => 'Stacy' 'grade' => 10]
+        ['name' => 'Stacy', 'grade' => 10]
       ],
       9 => [
         ['name' => 'Mark', 'grade' => 9],
