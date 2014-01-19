@@ -31,8 +31,7 @@ appel::
     CakePlugin::loadAll(); // Charge tous les plugins d'un coup.
     CakePlugin::load('ContactManager'); //Charge un seul plugin.
 
-
-loadAll charge tous les plugins disponibles, bien que vous autorisant à
+``loadAll()`` charge tous les plugins disponibles, bien que vous autorisant à
 configurer certains paramètres pour des plugins spécifiques. ``load()``
 fonctionne de la même manière, mais charge seulement les plugins que vous avez
 explicitement spécifiés.
