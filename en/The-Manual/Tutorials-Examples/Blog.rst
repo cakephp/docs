@@ -25,9 +25,9 @@ Here's what you'll need:
    done, the better: but fear not if you're a procedural fan.
 #. Finally, you'll need a basic knowledge of the MVC programming
    pattern. A quick overview can be found in Chapter "Beginning With
-   CakePHP", Section : `Understanding
-   Model-View-Controller </view/10/>`_. Don't worry: its only a half a
-   page or so.
+   CakePHP", Section : 
+   :doc:`/The-Manual/Beginning-With-CakePHP/Understanding-Model-View-Controller`.
+   Don't worry: its only a half a page or so.
 
 Let's get started!
 
@@ -245,8 +245,7 @@ www.example.com/controllername/actionname/param.
 
 If you are installing CakePHP on a webserver besides Apache, you can
 find instructions for getting URL rewriting working for other servers
-under the
-`Installation <http://book.cakephp.org/view/912/Installation>`_ section.
+under the :doc:`/The-Manual/Developing-with-CakePHP/Installation` section.
 
 Create a Post Model
 ===================
