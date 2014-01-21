@@ -949,10 +949,10 @@ Datetime options
 
 Form Element-Specific Methods
 =============================
-.. note::
-    All elements are created under a form for the ``User`` model as in the examples above. 
-    For this reason, the HTML code generated will contain attributes that reference to the User model.
-    Ex: name=data[User][username], id=UserUsername
+
+ All elements are created under a form for the ``User`` model as in the examples above.
+For this reason, the HTML code generated will contain attributes that reference to the User model.
+Ex: name=data[User][username], id=UserUsername
     
 .. php:method:: label(string $fieldName, string $text, array $options)
 
