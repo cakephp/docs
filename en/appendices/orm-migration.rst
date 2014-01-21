@@ -446,12 +446,14 @@ a connection::
 Updating Behaviors
 ==================
 
-Behaviors have changed a bit in 3.0 as well. They now attach to Table objects
-which are the conceptual descendent from the previous ORM. There are a few key
+Like most ORM related features, behaviors have changed in 3.0 as well. They now
+attach to ``Table`` instances which are the conceptual descendent of the
+``Model`` class in previous versions of CakePHP. There are a few key
 differences from behaviors in CakePHP 2.x:
 
 - Behaviors are no longer shared across multiple tables. This means you no
-  longer have to 'namespace' settings stored in a behavior.
+  longer have to 'namespace' settings stored in a behavior. Each table using
+  a behavior will get its own instance.
 - The method signatures for mixin methods have changed.
 - The method signatures for callback methods have changed.
 - The base class for behaviors have changed.
@@ -464,8 +466,8 @@ The base class for behaviors has changed. Behaviors should now extend
 ``Cake\ORM\Behavior`` if a behavior does not extend this class an exception
 will be raised. In addition to the base class changing, the constructor for
 behaviors has been modified, and the ``startup`` method has been removed.
-Behaviors that need access to the table they are attached to should override
-their constructor::
+Behaviors that need access to the table they are attached to should define
+a constructor::
 
     namespace App\Model\Behavior;
 
@@ -499,7 +501,6 @@ method signature should look like::
     public function slug($value) {
         // code here.
     }
-
 
 Callback Method Signature Changes
 ---------------------------------
