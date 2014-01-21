@@ -300,6 +300,14 @@ PostsController::
 
 .. note::
 
+    ``$this->request->is()`` takes a single argument, which can be the
+    request METHOD (``get``, ``put``, ``post``, ``delete``) or some request
+    identifier (``ajax``). It is **not** a way to check for specific posted
+    data. For instance, ``$this->request->is('book')`` will not return true
+    if book data was posted.
+
+.. note::
+
     You need to include the SessionComponent - and SessionHelper - in
     any controller where you will use it. If necessary, include it in
     your AppController.
