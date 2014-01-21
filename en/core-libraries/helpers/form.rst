@@ -1025,8 +1025,9 @@ Ex: name=data[User][username], id=UserUsername
 
         <input name="data[User][id]" id="UserId" type="hidden" />
         
-    If the form is edited (that is, the array ``$this->request->data`` will contain the information saved for the 
-    ``User`` model), the value corresponding to ``id`` field will automatically be added to the HTML 
+    If the form is edited (that is, the array ``$this->request->data`` will
+    contain the information saved for the ``User`` model), the value
+    corresponding to ``id`` field will automatically be added to the HTML
     generated. Example for data[User][id] = 10:
     
     .. code-block:: html
@@ -1050,10 +1051,11 @@ Ex: name=data[User][username], id=UserUsername
 
         <textarea name="data[User][notes]" id="UserNotes"></textarea>
 
-    If the form is edited (that is, the array ``$this->request->data`` will contain the information saved for the 
-    ``User`` model), the value corresponding to ``notes`` field will automatically be added to the HTML 
+    If the form is edited (that is, the array ``$this->request->data`` will
+    contain the information saved for the ``User`` model), the value
+    corresponding to ``notes`` field will automatically be added to the HTML 
     generated. Example:
-    
+
     .. code-block:: html
         <textarea name="data[User][notes]" id="UserNotes">
         This text is to be edited.
