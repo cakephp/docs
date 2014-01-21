@@ -1641,6 +1641,8 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
     deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
     first load a collection of records and delete them.
 
+.. _table-callbacks:
+
 Lifecycle Callbacks
 ===================
 
