@@ -446,7 +446,71 @@ a connection::
 Updating Behaviors
 ==================
 
-* Base class changed.
-* Mixin method signature changes.
-* Event method signature changes.
+Behaviors have changed a bit in 3.0 as well. They now attach to Table objects
+which are the conceptual descendent from the previous ORM. There are a few key
+differences from behaviors in CakePHP 2.x:
 
+- Behaviors are no longer shared across multiple tables. This means you no
+  longer have to 'namespace' settings stored in a behavior.
+- The method signatures for mixin methods have changed.
+- The method signatures for callback methods have changed.
+- The base class for behaviors have changed.
+- Behaviors can easily add finder methods.
+
+New Base Class
+--------------
+
+The base class for behaviors has changed. Behaviors should now extend
+``Cake\ORM\Behavior`` if a behavior does not extend this class an exception
+will be raised. In addition to the base class changing, the constructor for
+behaviors has been modified, and the ``startup`` method has been removed.
+Behaviors that need access to the table they are attached to should override
+their constructor::
+
+    namespace App\Model\Behavior;
+
+    use Cake\ORM\Behavior;
+
+    class SluggableBehavior extends Behavior {
+
+        protected $_table;
+
+        public function __construct(Table $table, array $config) {
+            parent::__construct($table, $config);
+            $this->_table = $table;
+        }
+
+    }
+
+Mixin Methods Signature Changes
+-------------------------------
+
+Behaviors continue to offer the ability to add 'mixin' methods to Table objects,
+however the method signature for these methods has changed. In CakePHP 3.0,
+behavior mixin methods can expect the **same** arguments provided to the table
+'method'. For example::
+
+    // Assume table has a slug() method provided by a behavior.
+    $table->slug($someValue);
+
+The behavior providing the ``slug`` method will receive only 1 argument, and its
+method signature should look like::
+
+    public function slug($value) {
+        // code here.
+    }
+
+
+Callback Method Signature Changes
+---------------------------------
+
+Behavior callbacks have been unified with all other listener methods. Instead of
+their previous arguments they need to expect an event object as their first
+argument::
+
+    public function beforeFind(Event $event, Query $query, array $options) {
+        // code.
+    }
+
+See :ref:`table-callbacks` for the signatures of all the callbacks a behavior
+can subscribe to.
