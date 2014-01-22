@@ -3,13 +3,14 @@ Behaviors
 
 Behaviors are a way to organize and enable horizontal re-use of Model layer
 logic. Conceptually they are similar to traits. However, behaviors are
-implemented as separate class objects. This allows them to hook into the
+implemented as separate classes. This allows them to hook into the
 life-cycle callbacks that models emit, while providing trait-like features.
 
 Behaviors provide a convenient way to package up behavior that is common across
-many models. For example, CakePHP includes a ``TimestampBehavior`` as many
-models will want timestamps, and the logic to create and update timestamps is
-not specific to any one model.
+many models. For example, CakePHP includes a ``TimestampBehavior``. Many
+models will want timestamp fields, and the logic to manage these fields is
+not specific to any one model. It is these kinds of scenarios that behaviors are
+a perfect fit for.
 
 Using Behaviors
 ===============
@@ -20,7 +21,6 @@ Using Behaviors
 
 Core Behaviors
 ==============
-
 
 .. include:: ../core-libraries/toc-behaviors.rst
     :start-after: start-toc
@@ -33,18 +33,18 @@ In the following examples we will create a very simple ``SluggableBehavior``.
 This behavior will allow us to populate a slug field with the results of
 ``Inflector::slug()`` based on another field.
 
-Before we can create our behavior we should understand the conventions for
+Before we create our behavior we should understand the conventions for
 behaviors:
 
 - Behavior files are located in ``App/Model/Behavior``, or
   ``MyPlugin\Model\Behavior``.
 - Behavior classes should be in the ``App\Model\Behavior`` namespace, or
   ``MyPlugin\Model\Behavior`` namespace.
-- Behavior classnames end in ``Behavior``.
+- Behavior class names end in ``Behavior``.
 - Behaviors extend ``Cake\ORM\Behavior``.
 
-Now we can create our sluggable behavior. Create the file
-``App/Model/Behavior/SluggableBehavior.php``. In it put the following::
+To create our sluggable behavior. Put the following into
+``App/Model/Behavior/SluggableBehavior.php``::
 
     <?php
     namespace App\Model\Behavior;
@@ -55,8 +55,8 @@ Now we can create our sluggable behavior. Create the file
     }
 
 We can now add this behavior to one of our table classes. In this example we'll
-use an ``ArticlesTable``, as articles often have slug properties to generate
-readable URLs::
+use an ``ArticlesTable``, as articles often have slug properties for creating
+friendly URLs::
 
     namespace App\Model\Table;
 
@@ -72,13 +72,17 @@ readable URLs::
 Our new behavior doesn't do much of anything right now. Next, we'll add a mixin
 method, and an event listener so that when we save entities we can automatically
 slug a field.
+
 Defining Mixin Methods
 ----------------------
 
-Any public method defined on a behavior will be exposed as a 'mixin' method on
-the table objects it is attached to. Behavior mixin methods will receive the
-exact same arguments that are provided to the table. For example, if our
-SluggableBehavior defined the following method::
+Any public method defined on a behavior will be added as a 'mixin' method on the
+table object it is attached to. If you attach two behaviors that provide the
+same methods an exception will be raised. If a behavior provides the same method
+as a table class, the behavior method will not be callable from the table.
+Behavior mixin methods will receive the exact same arguments that are provided
+to the table. For example, if our SluggableBehavior defined the following
+method::
 
     public function slug($value) {
         return Inflector::slug($value, $this->_config['replacement']);
@@ -88,11 +92,33 @@ It could be invoked using::
 
     $slug = $articles->slug('My article name');
 
+Limiting or renaming exposed mixin methods
+------------------------------------------
+
+When creating behaviors, there may be situations where you don't want to expose
+public methods as mixin methods. In these cases you can use the
+``implementedMethods`` configuration key to rename or exclude mixin methods. For
+example if we wanted to prefix our slug() method we could do the following::
+
+    public static $_defaultConfig = [
+        'implementedMethods' => [
+            'slug' => 'superSlug',
+        ]
+    ];
+
+Applying this configuration will make ``slug()`` not callable, however it will
+add a ``superSlug()`` mixin method to the table. Notably if our behavior
+implemented other public methods they would **not** be available as mixin
+methods with the above configuration.
+
+Since the exposed methods are decided by configuration you can also
+rename/remove mixin methods when adding a behavior to a table.
+
 Defining Event Listeners
 ------------------------
 
 Now that our behavior has a mixin method to slug fields, we can implement
-a callback listener to automatically slug fields when entities are saved. Our
+a callback listener to automatically slug a field when entities are saved. Our
 behavior should look like::
 
     namespace App\Model\Behavior;
@@ -125,8 +151,6 @@ The above code shows a few interesting features of behaviors:
 
 - Behaviors can define callback methods by defining methods that follow the
   :ref:`table-callbacks` conventions.
-- Any public method defined on a behavior can be accessed as a 'mixin' method on
-  the tables it is attached to.
 - Behaviors can define a default configuration property. This property is merged
   with the overrides when a behavior is attached to the table.
 
@@ -145,4 +169,27 @@ methods, use the same conventions as :ref:`custom-find-methods` do. Our
 Once our behavior has the above method we can call it::
 
     $article = $articles->find('slug', ['slug' => $value])->first();
+
+Limiting or renaming exposed finder methods
+-------------------------------------------
+
+When creating behaviors, there may be situations where you don't want to expose
+finder methods, or you need to rename finders to avoid duplicated methods. In
+these cases you can use the ``implementedFinders`` configuration key to rename
+or exclude finder methods. For example if we wanted to rename our ``find(slug)``
+method we could do the following::
+
+    public static $_defaultConfig = [
+        'implementedFinders' => [
+            'slugged' => 'findSlug',
+        ]
+    ];
+
+Applying this configuration will make ``find('slug')`` trigger an error. However
+it will make ``find('slugged')`` availble. Notably if our behavior implemented
+other finder methods they would **not** be available, as they are not included
+in the configuration.
+
+Since the exposed methods are decided by configuration you can also
+rename/remove finder methods when adding a behavior to a table.
 
