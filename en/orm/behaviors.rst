@@ -70,7 +70,7 @@ friendly URLs::
     }
 
 Our new behavior doesn't do much of anything right now. Next, we'll add a mixin
-method, and an event listener so that when we save entities we can automatically
+method and an event listener so that when we save entities we can automatically
 slug a field.
 
 Defining Mixin Methods
@@ -112,7 +112,14 @@ implemented other public methods they would **not** be available as mixin
 methods with the above configuration.
 
 Since the exposed methods are decided by configuration you can also
-rename/remove mixin methods when adding a behavior to a table.
+rename/remove mixin methods when adding a behavior to a table. For example::
+
+    // In a table's initialize() method.
+    $this->addBehavior('Sluggable', [
+        'implementedMethods' => [
+            'slug' => 'superSlug',
+        ]
+    ]);
 
 Defining Event Listeners
 ------------------------
@@ -191,5 +198,11 @@ other finder methods they would **not** be available, as they are not included
 in the configuration.
 
 Since the exposed methods are decided by configuration you can also
-rename/remove finder methods when adding a behavior to a table.
+rename/remove finder methods when adding a behavior to a table. For example::
 
+    // In a table's initialize() method.
+    $this->addBehavior('Sluggable', [
+        'implementedFinders' => [
+            'slugged' => 'findSlug',
+        ]
+    ]);
