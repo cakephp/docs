@@ -463,7 +463,7 @@ New Base Class
 --------------
 
 The base class for behaviors has changed. Behaviors should now extend
-``Cake\ORM\Behavior`` if a behavior does not extend this class an exception
+``Cake\ORM\Behavior``; if a behavior does not extend this class an exception
 will be raised. In addition to the base class changing, the constructor for
 behaviors has been modified, and the ``startup`` method has been removed.
 Behaviors that need access to the table they are attached to should define
@@ -506,7 +506,7 @@ Callback Method Signature Changes
 ---------------------------------
 
 Behavior callbacks have been unified with all other listener methods. Instead of
-their previous arguments they need to expect an event object as their first
+their previous arguments, they need to expect an event object as their first
 argument::
 
     public function beforeFind(Event $event, Query $query, array $options) {
