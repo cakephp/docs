@@ -193,7 +193,7 @@ method we could do the following::
     ];
 
 Applying this configuration will make ``find('slug')`` trigger an error. However
-it will make ``find('slugged')`` availble. Notably if our behavior implemented
+it will make ``find('slugged')`` available. Notably if our behavior implemented
 other finder methods they would **not** be available, as they are not included
 in the configuration.
 
