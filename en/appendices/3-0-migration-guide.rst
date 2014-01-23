@@ -588,6 +588,8 @@ TimeHelper
 
 - ``TimeHelper::__set()``, ``TimeHelper::__get()``, and  ``TimeHelper::__isset()`` were
   removed. These were magic methods for deprecated attributes.
+- ``TimeHelper::serverOffset()`` has been removed.  It promoted incorrect time math practices.
+- ``TimeHelper::niceShort()`` has been removed.
 
 I18n
 ====
