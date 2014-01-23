@@ -109,9 +109,9 @@ More Information
 .. toctree::
     :maxdepth: 2
 
-    orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/behaviors
-    orm/query-builder
+    orm/database-basics
     orm/schema-system
