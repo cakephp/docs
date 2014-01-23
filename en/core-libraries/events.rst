@@ -418,6 +418,7 @@ Additional Reading
 ==================
 
 .. toctree::
+    :maxdepth: 1
 
     /orm/behaviors
     /controllers/components
