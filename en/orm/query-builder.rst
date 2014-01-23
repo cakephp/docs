@@ -235,9 +235,10 @@ easily compose conditions together with the expression objects::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
-        ->orWhere(function($exp) {
-            return $exp->or_(['author_id' => 1])
-                ->eq('author_id', 2);
+        ->andWhere(function($exp) {
+            return $exp->or_([
+                'author_id' => 2,
+                'is_highlighted' => true
             ]);
         });
 
@@ -245,15 +246,16 @@ The above would create SQL like::
 
     SELECT *
     FROM articles
-    WHERE ((author_id = 1 OR author_id = 2)
-    OR title LIKE '%First%')
+    WHERE ((author_id = 2 OR is_highlighted = 1)
+    AND title LIKE '%First%')
 
 The expression object that is passed into where functions has two kinds of
 methods. The first type of methods are **combinators**. The ``and_`` & ``or_``
 methods create new expression objects that change **how** conditions are
 combined. The second type of methods are **conditions**. Conditions are added
-into an expression where they are combined with the current combinator. For
-example calling ``$exp->and_(...)`` will create a new expression object that
+into an expression where they are combined with the current combinator.
+
+For example calling ``$exp->and_(...)`` will create a new expression object that
 combines all conditions it contains with ``AND``. While ``$exp->or_()`` will
 create a new expression object that combines all conditions added to it with
 ``OR``. An example of adding conditions with an expression object would be::
@@ -372,6 +374,12 @@ Expression objects can be used with any query builder methods like ``where``,
 
 Loading Associations
 ====================
+
+The builder can help you retrieve data from multiple tables at the same time
+with the minimum amount of queries possible. To be able to fetch associated
+data, you first need to setup associations between the tables as described in
+the :ref:`table-associations` section. This technique of combining queries
+to fetch associated data from other tables is called ``Eager Loading``.
 
 .. include:: ./table-objects.rst
     :start-after: start-contain
