@@ -125,8 +125,9 @@ Defining Event Listeners
 ------------------------
 
 Now that our behavior has a mixin method to slug fields, we can implement
-a callback listener to automatically slug a field when entities are saved. Our
-behavior should look like::
+a callback listener to automatically slug a field when entities are saved. We'll
+also modify our slug method to accept an entity instead of just a plain value. Our
+behavior should now look like::
 
     namespace App\Model\Behavior;
 
@@ -142,14 +143,14 @@ behavior should look like::
             'replacement' => '-',
         ];
 
-        public function slug($value) {
-            return Inflector::slug($value, $this->_config['replacement']);
+        public function slug(Entity $entity) {
+            $config = $this->_config;
+            $value = $entity->get($config['field']);
+            $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
         }
 
         public function beforeSave(Event $event, Entity $entity) {
-            $config = $this->_config;
-            $slug = $this->slug($entity->get($config['field']));
-            $entity->set($config['slug'], $slug);
+            $this->slug($entity);
         }
 
     }
