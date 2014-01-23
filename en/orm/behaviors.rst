@@ -92,7 +92,7 @@ It could be invoked using::
 
     $slug = $articles->slug('My article name');
 
-Limiting or renaming exposed mixin methods
+Limiting or Renaming Exposed Mixin Methods
 ------------------------------------------
 
 When creating behaviors, there may be situations where you don't want to expose
@@ -178,7 +178,7 @@ Once our behavior has the above method we can call it::
 
     $article = $articles->find('slug', ['slug' => $value])->first();
 
-Limiting or renaming exposed finder methods
+Limiting or Renaming Exposed Finder Methods
 -------------------------------------------
 
 When creating behaviors, there may be situations where you don't want to expose
