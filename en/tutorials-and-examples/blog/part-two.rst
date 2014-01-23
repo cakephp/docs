@@ -13,6 +13,8 @@ CakePHP's model class files go in ``/App/Model``, and the file
 we'll be creating will be saved to ``/App/Model/Post.php``. The
 completed file should look like this::
 
+    namespace App\Model;
+
     class Post extends AppModel {
     }
 
@@ -44,6 +46,8 @@ related to posts done. We'll place this new controller in a file called
 ``PostsController.php`` inside the ``/App/Controller`` directory. Here's what
 the basic controller should look like::
 
+    namespace App\Controller;
+
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
     }
@@ -53,6 +57,8 @@ a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
 posts. The code for that action would look something like this::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -205,6 +211,8 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 PostsController now::
 
+    namespace App\Controller;
+
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -264,6 +272,8 @@ start, but let's allow for the adding of new posts.
 
 First, start by creating an ``add()`` action in the
 PostsController::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
@@ -399,6 +409,8 @@ the following line::
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
+
+    namespace App\Model;
 
     class Post extends AppModel {
         public $validate = array(
