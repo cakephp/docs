@@ -376,9 +376,9 @@ Loading Associations
 ====================
 
 The builder can help you retrieve data from multiple tables at the same time
-with the minimum amount of queries possible. To be able to fetch associations
+with the minimum amount of queries possible. To be able to fetch associated
 data, you first need to setup associations between the tables as described in
-the :ref:`.. _table-associations` section. This technique of combining queries
+the :ref:`table-associations` section. This technique of combining queries
 to fetch associated data from other tables is called ``Eager Loading``.
 
 .. include:: ./table-objects.rst
