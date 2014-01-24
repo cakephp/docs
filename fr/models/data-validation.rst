@@ -396,11 +396,11 @@ propre méthode de validation, comme indiqué ci-dessous::
         public function limiteUtilisations($check, $limit) {
             // $check aura comme valeur : array('code_promo' => 'une valeur')
             // $limit aura comme valeur : 25
-             $compteur_code_actuel = $this->find( 'count', array(
+             $compteurCodeActuel = $this->find('count', array(
                 'conditions' => $check,
                 'recursive' => -1
             ));
-            return $compteur_code_actuel < $limit;
+            return $compteurCodeActuel < $limit;
         }
     }
 

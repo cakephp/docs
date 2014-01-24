@@ -396,11 +396,11 @@ function, as shown below::
         public function limitDuplicates($check, $limit) {
             // $check will have value: array('promotion_code' => 'some-value')
             // $limit will have value: 25
-            $existing_promo_count = $this->find('count', array(
+            $existingPromoCount = $this->find('count', array(
                 'conditions' => $check,
                 'recursive' => -1
             ));
-            return $existing_promo_count < $limit;
+            return $existingPromoCount < $limit;
         }
     }
 
