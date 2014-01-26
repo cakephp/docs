@@ -351,6 +351,12 @@ L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
 la façon dont les erreurs sont traitées dans les sections suivantes.
 
+La raison pour laquelle nous appelons la méthode ``create()`` en premier est
+pour réinitialiser l'état du model pour sauvegarder les nouvelles informations.
+Cela ne crée pas réellement un enregistrement dans la base de données mais
+réinitialise Model::$id et définit Model::$data en se basant sur le champ par
+défaut dans votre base de données.
+
 Valider les données
 ===================
 
