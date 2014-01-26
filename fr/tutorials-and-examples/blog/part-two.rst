@@ -305,6 +305,14 @@ PostsController ::
 
 .. note::
 
+    ``$this->request->is()`` prend un unique argument, qui peut être la METHOD
+    request (``get``, ``put``, ``post``, ``delete``) ou toute identifier de
+    request (``ajax``). Ce **n'est pas** une façon de vérifier une data postée
+    spécifique. Par exemple, ``$this->request->is('book')`` ne retournera pas
+    true si les data du book ont été postées.
+
+.. note::
+
    Vous avez besoin d'inclure le component Session (SessionComponent) et
    le helper Session (SessionHelper) dans chaque controller que vous
    utiliserez. Si nécessaire, incluez-les dans le controller principal
