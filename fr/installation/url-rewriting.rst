@@ -182,7 +182,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
