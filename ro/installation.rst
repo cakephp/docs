@@ -2,10 +2,10 @@ Instalarea
 ##########
 
 CakePHP se repede si usor. Cerintele minime sunt un webserver si o 
-copie de CakePHP. Doar atat! While this manual focuses
-primarily on setting up on Apache (because it's the most commonly used),
-you can configure CakePHP to run on a variety of web servers such as
-LightHTTPD or Microsoft IIS.
+copie de CakePHP. Doar atat! Desi acest manual se concentreaza mai ales
+pe instalarea pe Apache (deoarece este cel mai folosit), puteti configura
+CakePHP sa functioneze pe o varietate de web servere cum ar fi 
+LightHTTPD sau Microsoft IIS.
 
 Cerinte
 =======
@@ -14,27 +14,28 @@ Cerinte
    nu este in mod obligatoriu necesar.
 -  PHP cu versiunea 5.2.8 sau mai mare.
 
-Technically a database engine isn't required, but we imagine that
-most applications will utilize one. CakePHP supports a variety of
-database storage engines:
+Dpdv tehnic nu este necesar un motor de baza de date, dar ne imaginam ca
+majoritatea aplicatiilor vor utiliza una. CakePHP suporta o varietate de
+baze de date:
 
--  MySQL (4 or greater)
+-  MySQL (4 sau mai mare)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite
 
-.. note::
+.. atentie::
 
-    All built-in drivers require PDO. You should make sure you have the
-    correct PDO extensions installed.
+    Toate driverele incluse in distributiile de servere necesita PDO. 
+    Prin urmare ar trebui sa va asigurati ca aveti instalate extensiile 
+    PDO corecte.
 
 Licenta
 =======
 
-CakePHP is licensed under the MIT license. This means that you are free to
-modify, distribute and republish the source code on the condition that the
-copyright notices are left intact. You are also free to incorporate CakePHP
-into any commercial or closed source application.
+CakePHP este licentiata MIT. Aceasta inseamna ca sunteti liber/a sa modificati,
+sa distribuiti si sa republicati codul sursa cu conditia ca notele de copyright
+sa ramana intacte. De asemenea, sunteti liberi/libere sa incorporati CakePHP
+in orice aplicatie comerciala sau cu sursa inchisa.
 
 Download-area CakePHP
 =====================
@@ -64,12 +65,13 @@ These can be accessed from GitHub by cloning the
 Permisiuni
 ==========
 
-CakePHP uses the ``app/tmp`` directory for a number of different
-operations. A few examples would be Model descriptions, cached
-views and session information.
+CakePHP foloseste folderul ``app/tmp`` pentru diferite operatii. 
+Cateva exemple ar fi descrierile Modelelor, cached view-uri si informatii 
+despre sesiune.
 
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your CakePHP installation
-are writable by the web server user.
+Prin urmare, asigurati-va ca folderul ``app/tmp`` si toate subfolderele 
+sale din instalarea dvs de CakePHP sunt *writable* de catre utilizatorul 
+pe care functioneaza web server-ul.
 
 Configurare
 ===========
@@ -79,11 +81,11 @@ server's document root, or as complex and flexible as you wish.
 This section will cover the three main installation types for
 CakePHP: development, production, and advanced.
 
--  Development: easy to get going, URLs for the application include
+-  Dezvooltare: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
--  Production: Requires the ability to configure the web server's
+-  Productie: Requires the ability to configure the web server's
    document root, clean URLs, very secure.
--  Advanced: With some configuration, allows you to place key
+-  Avansat: With some configuration, allows you to place key
    CakePHP directories in different parts of the filesystem, possibly
    sharing a single CakePHP core library folder amongst many CakePHP
    applications.
@@ -189,8 +191,8 @@ Instalare avansata si URL Rewriting
     installation/advanced-installation
     installation/url-rewriting
 
-Fire It Up
-==========
+Dati-i drumul
+=============
 
 Alright, let's see CakePHP in action. Depending on which setup you
 used, you should point your browser to http://example.com/ or
@@ -198,11 +200,11 @@ http://example.com/cake\_install/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
-Felicitari! You are ready to :doc:`create your first CakePHP
-application </getting-started>`.
+Felicitari! Sunteti gata sa :doc:`creati prima dvs aplicatie CakePHP
+</getting-started>`.
 
-Tot nu functioneaza? If you're getting timezone related errors from PHP
-uncomment one line in ``app/Config/core.php``::
+Tot nu functioneaza? Dacă obtineți erori de fus orar legate de PHP
+decomentați o linie în ``app/Config/core.php``::
 
    /**
     * Uncomment this line and correct your server timezone to fix
@@ -212,5 +214,5 @@ uncomment one line in ``app/Config/core.php``::
 
 
 .. meta::
-    :title lang=en: Installation
+    :title lang=en: Instalare
     :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
