@@ -1,5 +1,5 @@
-Contents
-########
+Cuprins
+#######
 
 .. toctree::
     :maxdepth: 3
