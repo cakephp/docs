@@ -48,7 +48,7 @@ CookieComponent
 
 Scaffold
 --------
-- Dyanmic Scaffold is now deprecated and will be removed in 3.0.
+- Dynamic Scaffold is now deprecated and will be removed in 3.0.
 
 Event
 =====
@@ -163,4 +163,4 @@ PaginationHelper
 ScaffoldView
 ------------
 
-- Dyanmic Scaffold is now deprecated and will be removed in 3.0.
+- Dynamic Scaffold is now deprecated and will be removed in 3.0.
