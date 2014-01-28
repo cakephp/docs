@@ -53,7 +53,7 @@ opening form tag.
 
     Output:
 
-    .. code-block:: php
+    .. code-block:: html
 
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 

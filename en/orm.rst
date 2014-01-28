@@ -50,7 +50,6 @@ a concrete class. If we wanted to customize our ArticlesTable class adding some
 associations or defining some additional methods we would add the following to
 ``App/Model/Table/ArticlesTable.php``::
 
-    <?php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -72,7 +71,6 @@ entity class. Entity classes let you define accessor and mutator methods, define
 custom logic for individual records and much more. We'll start off by adding the
 following to ``App/Model/Entity/Article.php``::
 
-    <?php
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;

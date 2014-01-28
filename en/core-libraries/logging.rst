@@ -29,7 +29,6 @@ The ``App/Config/app.php`` file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
-    <?php
     use Cake\Log\Log;
 
     // Short classname
