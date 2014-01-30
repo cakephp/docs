@@ -139,9 +139,10 @@ you could autoload the classes within it using ``classmap`` in your
 application's ``composer.json``::
 
     "autoload": {
-        "psr-0": {
-            "App\\": ".",
-            ".": "./Plugin"
+        "psr-4": {
+            "App\\": "App",
+            "App\\Test\\": "Test",
+            "": "./Plugin"
         },
         "classmap": [
             "vendor/Acme/AcmeLib"
@@ -153,9 +154,10 @@ can configure Composer to load these files at the beginning of each request
 using the ``files`` autoloading strategy::
 
     "autoload": {
-        "psr-0": {
-            "App\\": ".",
-            ".": "./Plugin"
+        "psr-4": {
+            "App\\": "App",
+            "App\\Test\\": "Test",
+            "": "./Plugin"
         },
         "files": [
             "vendor/Acme/AcmeLib/functions.php"
