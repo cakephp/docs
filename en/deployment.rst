@@ -21,20 +21,20 @@ Set Document Root
 
 Setting the document root correctly on your application is an important step to
 keeping your code secure and your application safer. CakePHP applications
-should have the document root set to the application's ``app/webroot``. This
+should have the document root set to the application's ``webroot``. This
 makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers. See the
 :doc:`/installation/url-rewriting` documentation for webserver specific
 information.
 
 In all cases you will want to set the virtual host/domain's document to be
-``app/webroot/``. This removes the possibility of files outside of the webroot
+``webroot/``. This removes the possibility of files outside of the webroot
 directory being executed.
 
-Update core.php
+Update Config/app.php
 ===============
 
-Updating core.php, specifically the value of ``debug`` is extremely important.
+Updating app.php, specifically the value of ``debug`` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
 exposed to the Internet at large. Disabling debug changes the following types of
 things:
@@ -59,13 +59,18 @@ For example, you can set an environment variable in your Apache configuration::
 
 	SetEnv CAKEPHP_DEBUG 2
 
-And then you can set the debug level dynamically in ``core.php``::
+And then you can set the debug level dynamically in ``app.php``::
 
 	if (getenv('CAKEPHP_DEBUG')) {
-		Configure::write('debug', 2);
+		$debug = 2;
 	} else {
-		Configure::write('debug', 0);
+		$debug = 0;
 	}
+
+	$config = [
+	    'debug' => $debug,
+	    .....
+	]
 
 .. _symlink-assets:
 
@@ -76,7 +81,7 @@ Since handling static assets, such as images, JavaScript and CSS files of plugin
 through the Dispatcher is incredibly inefficient, it is strongly recommended to symlink
 them for production. For example like this::
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 .. meta::
     :title lang=en: Deployment
