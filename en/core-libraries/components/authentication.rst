@@ -96,6 +96,8 @@ keys.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``array('User.is_active' => 1)``.
 - ``contain`` Containable options for when the user record is loaded.
+  If you want to use this option, you'll need to make sure your model
+  has the containable behavior attached.
 
   .. versionadded:: 2.2
 
