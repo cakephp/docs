@@ -22,10 +22,10 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # directory (and its subdirectories).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features. 
+       # First, we configure the "default" to be a very restrictive set of
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -53,18 +53,9 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
    files that start with '.' as hidden and therefore won't see them to
    copy.
 
-#. Make sure your copy of CakePHP is from the downloads section of
-   the site or our GIT repository, and has been unpacked correctly by
-   checking for .htaccess files.
-
-   CakePHP root directory (needs to be copied to your document, this
-   redirects everything to your CakePHP app)::
-
-       <IfModule mod_rewrite.c>
-          RewriteEngine on
-          RewriteRule    ^$ app/webroot/    [L]
-          RewriteRule    (.*) app/webroot/$1 [L]
-       </IfModule>
+#. Make sure your copy of CakePHP app is from the downloads section of
+   the site, through composer or our GIT repository, and has been unpacked
+   correctly by checking for .htaccess files.
 
    CakePHP app directory (will be copied to the top directory of your
    application by bake)::
@@ -82,13 +73,13 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php [QSA,L]
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
 
-   If your CakePHP site still has problems with mod\_rewrite you might 
-   want to try and modify settings for virtualhosts. If on ubuntu, 
-   edit the file /etc/apache2/sites-available/default (location is 
-   distribution dependent). In this file, ensure that 
+   If your CakePHP site still has problems with mod\_rewrite you might
+   want to try and modify settings for virtualhosts. If on ubuntu,
+   edit the file /etc/apache2/sites-available/default (location is
+   distribution dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
        <Directory />
@@ -103,7 +94,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder. 
+   make a virtual host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -122,13 +113,13 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php [QSA,L]
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
 
    The details of those changes will depend on your setup, and can
    include additional things that are not CakePHP related. Please refer
    to Apache's online documentation for more information.
-   
+
 #. (Optional) To improve production setup, you should prevent invalid assets
    from being parsed by CakePHP. Modify your webroot .htaccess to something like::
 
@@ -137,16 +128,16 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
-           RewriteRule ^(.*)$ index.php [QSA,L]
+           RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
-       
+
    The above will simply prevent incorrect assets from being sent to index.php
    and instead display your webserver's 404 page.
-   
-   Additionally you can create a matching HTML 404 page, or use the default 
+
+   Additionally you can create a matching HTML 404 page, or use the default
    built-in CakePHP 404 by adding an ``ErrorDocument`` directive::
-       
+
        ErrorDocument 404 /404-not-found
 
 Pretty URLs on nginx
@@ -170,7 +161,7 @@ you will need PHP running as a FastCGI instance.
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/App/webroot/;
         index  index.php;
