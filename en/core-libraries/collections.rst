@@ -134,26 +134,26 @@ from a collection. If you are looking to build a list of elements containing the
 values for a particular property, you can use the ``extract`` method::
 
     $collection = new Collection($people);
-    $names = $people->extract('name');
+    $names = $collection->extract('name');
 
     // $result contains ['mark', 'jose', 'barbara'];
-    $result = $new->toArray();
+    $result = $names->toArray();
 
 As with many other functions in the collection class, you are allowed to specify
 a dot separated path for extracting columns, this example will return
 a collection containing the author names from a list of articles::
 
     $collection = new Collection($articles);
-    $names = $people->extract('author.name');
+    $names = $collection->extract('author.name');
 
     // $result contains ['Maria', 'Stacy', 'Larry'];
-    $result = $new->toArray();
+    $result = $names->toArray();
 
 Finally, if the property you are looking after cannot be expressed as a path,
 you can use a callback function to return it::
 
     $collection = new Collection($articles);
-    $names = $people->extract(function($article) {
+    $names = $collection->extract(function($article) {
         return $article->author->name ', ' . $article->author->last_name;
     });
 
@@ -281,7 +281,7 @@ a column or custom function. To create a new sorted collection out of the values
 of another one, you can use ``sortBy``::
 
     $collection = new Collection($people);
-    $sorted = $people->sortBy('age');
+    $sorted = $collection->sortBy('age');
 
 As seen above, you can sort by passing the name of a column or property that
 is present in the collection values. You are also able to specify a property
@@ -289,14 +289,14 @@ path instead using the dot notation. The next example will sort articles by
 their author's name::
 
     $collection = new Collection($articles);
-    $sorted = $articles->sortBy('author.name');
+    $sorted = $collection->sortBy('author.name');
 
 The ``sortBy`` method is flexible enough to let you specify an extractor
 function that will let you select dynamically the value to use for comparing two
 different values in the collection::
 
     $collection = new Collection($articles);
-    $sorted = $articles->sortBy(function($article) {
+    $sorted = $collection->sortBy(function($article) {
         return $article->author->name . '-' . $article->title;
     });
 
@@ -306,7 +306,7 @@ sorting in ascending or descending direction respectively. By default,
 collections are sorted in ascending direction::
 
     $collection = new Collection($people);
-    $sorted = $people->sortBy('age', SORT_ASC);
+    $sorted = $collection->sortBy('age', SORT_ASC);
 
 Sometimes you will need to specify which type of data you are trying to compare
 so that you get consistent results. For this purpose you should supply as third
@@ -321,7 +321,7 @@ argument in the ``sortBy`` function one of the following constants:
 By default ``SORT_NUMERIC`` is used::
 
     $collection = new Collection($articles);
-    $sorted = $articles->sortBy('title', SORT_ASC, SORT_NATURAL);
+    $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 .. warning::
 
