@@ -97,7 +97,7 @@ Security.salt
     HMAC salt when doing symetric encryption.
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
-    file at the end of asset files urls (CSS, JavaScript, Image) when
+    file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
     (bool) false - Doesn't do anything (default)

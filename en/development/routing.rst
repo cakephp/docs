@@ -8,8 +8,8 @@ routes, but it will make your address bar look much more tidy.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
 where an array of parameters can be reversed into a string URL.
-By using reverse routing, you can easily re-factor your applications
-url structure without having to update all your code.
+By using reverse routing, you can easily re-factor your application's
+URL structure without having to update all your code.
 
 .. index:: routes.php
 
@@ -172,7 +172,7 @@ that::
         '/cooks/:action/*', ['controller' => 'users']
     );
 
-This is telling the Router that any url beginning with ``/cooks/``
+This is telling the Router that any URL beginning with ``/cooks/``
 should be sent to the users controller. The action called will
 depend on the value of the ``:action`` parameter. By using
 :ref:`route-elements`, you can create variable routes, that accept
@@ -281,16 +281,16 @@ CakePHP, and should not be used unless you want the special meaning
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated url. If your application
-  is not in the root directory, this can be used to generate urls that are 'cake relative'.
-  cake relative urls are required when using requestAction.
+* ``_base`` Set to false to remove the base path from the generated URL. If your application
+  is not in the root directory, this can be used to generate URLs that are 'cake relative'.
+  cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated urls.
-* ``#`` Allows you to set url hash fragments.
-* ``ssl`` Set to true to convert the generated url to https, or false to force http.
+* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``#`` Allows you to set URL hash fragments.
+* ``ssl`` Set to true to convert the generated URL to https, or false to force http.
 
 Passing Parameters to Action
 ----------------------------
@@ -317,7 +317,7 @@ elements should also be made available as passed arguments::
     );
 
 And now, thanks to the reverse routing capabilities, you can pass
-in the url array like below and CakePHP will know how to form the URL
+in the URL array like below and CakePHP will know how to form the URL
 as defined in the routes::
 
     // view.ctp
@@ -334,7 +334,7 @@ as defined in the routes::
 Using Named Routes
 ------------------
 
-Sometimes you'll find typing out all the url parameters for a route too verbose,
+Sometimes you'll find typing out all the URL parameters for a route too verbose,
 or you'd like to take advantage of the performance improvements that named routes
 have. When connecting routes you can specifiy a ``_name`` option, this option
 can be used in reverse routing to identify the route you want to use::
@@ -380,7 +380,7 @@ namespace. By having prefixes as separate controllers you can create smaller,
 simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
-the url ``/admin/users/edit/5`` would call the ``edit`` method of our
+the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
 ``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
 view file used would be ``app/View/Admin/Users/edit.ctp``
 
@@ -771,7 +771,7 @@ Router API
 
     :param string $route: A route template that dictates which URLs should
         be redirected.
-    :param mixed $url: Either a :term:`routing array` or a string url
+    :param mixed $url: Either a :term:`routing array` or a string URL
         for the destination of the redirect.
     :param array $options: An array of options for the redirect.
 
@@ -800,16 +800,16 @@ Router API
 
     There are a few 'special' parameters that can change the final URL string that is generated
 
-    * ``_base`` - Set to false to remove the base path from the generated url. If your application
-      is not in the root directory, this can be used to generate urls that are 'cake relative'.
-      cake relative urls are required when using requestAction.
+    * ``_base`` - Set to false to remove the base path from the generated URL. If your application
+      is not in the root directory, this can be used to generate URLs that are 'cake relative'.
+      cake relative URLs are required when using requestAction.
     * ``_scheme`` - Set to create links on different schemes like ``webcal`` or ``ftp``. Defaults
       to the current scheme.
     * ``_host`` - Set the host to use for the link.  Defaults to the current host.
     * ``_port`` - Set the port if you need to create links on non-standard ports.
-    * ``_full`` - If true the value of :php:meth:`Router::baseUrl` will be prepended to generated urls.
-    * ``#`` - Allows you to set url hash fragments.
-    * ``ssl`` - Set to true to convert the generated url to https, or false to force http.
+    * ``_full`` - If true the value of :php:meth:`Router::baseUrl` will be prepended to generated URLs.
+    * ``#`` - Allows you to set URL hash fragments.
+    * ``ssl`` - Set to true to convert the generated URL to https, or false to force http.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
@@ -947,14 +947,14 @@ Router API
     The ``requestAction`` call will not be made while the cached
     element view file exists and is valid.
 
-    In addition, requestAction now takes array based cake style urls::
+    In addition, requestAction now takes array based cake style URLs::
 
         echo $this->requestAction(
             ['controller' => 'articles', 'action' => 'featured'],
             ['return']
         );
 
-    The url based array are the same as the ones that :php:meth:`HtmlHelper::link()`
+    The URL based array are the same as the ones that :php:meth:`HtmlHelper::link()`
     uses with one difference - if you are using passed parameters, you must put them
     in a second array and wrap them with the correct key. This is because
     requestAction merges the extra parameters (requestAction's 2nd parameter)
@@ -982,10 +982,10 @@ Router API
 
     .. note::
 
-        Unlike other places where array urls are analogous to string urls,
+        Unlike other places where array URLs are analogous to string URLs,
         requestAction treats them differently.
 
-    When using an array url in conjunction with requestAction() you
+    When using an array URL in conjunction with requestAction() you
     must specify **all** parameters that you will need in the requested
     action. This includes parameters like ``$this->request->data``.  In addition
     to passing all required parameters, passed arguments must be done

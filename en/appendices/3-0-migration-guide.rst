@@ -246,7 +246,7 @@ Router
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
-  a more flexible way to mutate urls being reverse routed.
+  a more flexible way to mutate URLs being reverse routed.
 * Calling :php:meth:`Cake\\Routing\\Router::parseExtensions()` with no
   parameters no longer parses all extensions.  You need to
   whitelist the extensions your application supports.
