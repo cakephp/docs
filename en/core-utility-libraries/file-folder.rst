@@ -10,24 +10,20 @@ Basic Usage
 
 Ensure the classes are loaded using :php:meth:`App::uses()`::
 
-    <?php
     App::uses('Folder', 'Utility');
     App::uses('File', 'Utility');
 
 Then we can setup a new folder instance::
 
-    <?php
     $dir = new Folder('/path/to/folder');
 
 and search for all *.ctp* files within that folder using regex::
 
-    <?php
     $files = $dir->find('.*\.ctp');
 
 Now we can loop through the files and read, write or append to the contents or
 simply delete the file::
 
-    <?php
     foreach ($files as $file) {
         $file = new File($dir->pwd() . DS . $file);
         $contents = $file->read();
@@ -44,7 +40,6 @@ Folder API
 
 ::
 
-    <?php
     // Create a new folder with 0755 permissions
     $dir = new Folder('/path/to/folder', true, 0755);
 
@@ -82,7 +77,6 @@ Folder API
 
     Change directory to $path. Returns false on failure::
 
-        <?php
         $folder = new Folder('/foo');
         echo $folder->path; // Prints /foo
         $folder->cd('/bar');
@@ -97,7 +91,6 @@ Folder API
     Change the mode on a directory structure recursively. This includes
     changing the mode on files as well::
 
-        <?php
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, array('skip_me.php'));
 
@@ -109,7 +102,6 @@ Folder API
     Recursively copy a directory. The only parameter $options can either
     be a path into copy to or an array of options::
 
-        <?php
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
         // Will put folder1 and all its contents into folder2
@@ -151,7 +143,6 @@ Folder API
     Create a directory structure recursively. Can be used to create
     deep path structures like `/foo/bar/baz/shoe/horn`::
 
-        <?php
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
             // Successfully created the nested folders
@@ -163,7 +154,6 @@ Folder API
 
     Recursively remove directories if the system allows::
 
-        <?php
         $folder = new Folder('foo');
         if ($folder->delete()) {
             // Successfully deleted foo its nested folders
@@ -189,7 +179,6 @@ Folder API
 
     Returns an array of all matching files in current directory::
 
-        <?php
         // Find all .png in your app/webroot/img/ folder and sort the results
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
@@ -217,7 +206,6 @@ Folder API
 
     Returns an array of all matching files in and below current directory::
 
-        <?php
         // Recursively find files beginning with test or index
         $dir = new Folder(WWW_ROOT);
         $files = $dir->findRecursive('(test|index).*');
@@ -247,7 +235,6 @@ Folder API
 
     Returns true if the File is in given path::
 
-        <?php
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
         // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
@@ -269,7 +256,6 @@ Folder API
 
     Returns true if given $path ends in a slash (i.e. is slash-terminated)::
 
-        <?php
         $result = Folder::isSlashTerm('/my/test/path');
         // $result = false
         $result = Folder::isSlashTerm('/my/test/path/');
@@ -324,7 +310,6 @@ Folder API
     Returns an array of the contents of the current directory. The
     returned array holds two arrays: One of directories and one of files::
 
-        <?php
         $dir = new Folder(WWW_ROOT);
         $files = $dir->read(true, array('files', 'index.php'));
         /*
@@ -375,7 +360,6 @@ File API
 
 ::
 
-    <?php
     // Create a new file with 0644 permissions
     $file = new File('/path/to/file.php', true, 0644);
 

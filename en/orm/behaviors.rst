@@ -46,7 +46,6 @@ behaviors:
 To create our sluggable behavior. Put the following into
 ``App/Model/Behavior/SluggableBehavior.php``::
 
-    <?php
     namespace App\Model\Behavior;
 
     use Cake\ORM\Behavior;

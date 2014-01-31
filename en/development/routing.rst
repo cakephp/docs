@@ -696,7 +696,6 @@ In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
 arguments::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
         Router::parseNamedParams($this->request);
@@ -905,7 +904,6 @@ Router API
     layout. First we need to create a controller function that will
     return the data::
 
-        <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             public function latest() {
@@ -926,7 +924,6 @@ Router API
 
     If we now create a simple element to call that function::
 
-        <?php
         // View/Element/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
@@ -937,7 +934,6 @@ Router API
     We can then place that element anywhere to get the output
     using::
 
-        <?php
         echo $this->element('latest_comments');
 
     Written in this way, whenever the element is rendered, a request
@@ -946,7 +942,6 @@ Router API
     above it's best to make use of element caching to prevent needless
     processing. By modifying the call to element to look like this::
 
-        <?php
         echo $this->element('latest_comments', [], ['cache' => '+1 hour']);
 
     The ``requestAction`` call will not be made while the cached
@@ -954,7 +949,6 @@ Router API
 
     In addition, requestAction now takes array based cake style urls::
 
-        <?php
         echo $this->requestAction(
             ['controller' => 'articles', 'action' => 'featured'],
             ['return']
@@ -968,12 +962,10 @@ Router API
     under the ``pass`` key. Any additional keys in the ``$option`` array will
     be made available in the requested action's ``request->params`` property::
 
-        <?php
         echo $this->requestAction('/articles/view/5');
 
     As an array in the requestAction would then be::
 
-        <?php
         echo $this->requestAction(
             ['controller' => 'articles', 'action' => 'view', 5],
         );
@@ -983,7 +975,6 @@ Router API
     Get parameters can be set with ``query`` and post data can be sent
     using the ``post`` key::
 
-        <?php
         $vars = $this->requestAction('/articles/popular', [
           'query' => ['page' = > 1],
           'cookies' => ['remember_me' => 1],

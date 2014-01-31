@@ -589,7 +589,6 @@ Built-in Configuration Engines
 
     Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
 
-        <?php
         Configure::load('customConfig');
 
 .. php:class:: IniConfig
