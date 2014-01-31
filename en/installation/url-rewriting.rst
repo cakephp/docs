@@ -54,7 +54,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
    copy.
 
 #. Make sure your copy of CakePHP app is from the downloads section of
-   the site, through composer or our GIT repository, and has been unpacked
+   the site, through composer or our Git repository, and has been unpacked
    correctly by checking for .htaccess files.
 
    CakePHP app directory (will be copied to the top directory of your
@@ -77,7 +77,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </IfModule>
 
    If your CakePHP site still has problems with mod\_rewrite you might
-   want to try and modify settings for virtualhosts. If on ubuntu,
+   want to try and modify settings for Virtual Hosts. If on Ubuntu,
    edit the file /etc/apache2/sites-available/default (location is
    distribution dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
@@ -93,8 +93,9 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            Allow from all
        </Directory>
 
-   If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.
+   If on Mac OSX, another solution is to use the tool
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   to make a Virtual Host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
