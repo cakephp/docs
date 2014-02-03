@@ -783,7 +783,6 @@ with testing as there are fewer methods to mock::
         'conditions' => ['Articles.created >' => new DateTime('-10 days')],
         'contain' => ['Authors', 'Comments'],
         'limit' => 10
-
     ]);
 
 The list of options supported by find() are:
