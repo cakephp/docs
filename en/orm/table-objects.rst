@@ -781,7 +781,7 @@ with testing as there are fewer methods to mock::
 
     $query = $articles->find('all', [
         'conditions' => ['Articles.created >' => new DateTime('-10 days')],
-        'contain' => ['Authors', 'Comments']
+        'contain' => ['Authors', 'Comments'],
         'limit' => 10
 
     ]);
