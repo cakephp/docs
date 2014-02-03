@@ -158,7 +158,7 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
 
     $query = $articles->find()
     $query->select([
-        'count' => $query->func()->count('view_count')
+        'count' => $query->func()->count('view_count'),
         'published_date' => 'DATE(created)'
     ])
     ->group('published_date')
@@ -428,7 +428,7 @@ conditions can also be expressed as an array of conditions::
                 'table' => 'comments',
                 'type' => 'LEFT',
                 'conditions' => [
-                    'c.created >' => new DateTime('-5 days')
+                    'c.created >' => new DateTime('-5 days'),
                     'c.moderated' => true,
                     'c.article_id = articles.id'
                 ]
