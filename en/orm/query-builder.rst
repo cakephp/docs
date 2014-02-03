@@ -354,6 +354,30 @@ conditions:
 - ``isNull()`` Create an ``IS NULL`` condition.
 - ``isNotNull()`` Create a negated ``IS NULL`` condition.
 
+Automatically creating IN clauses
+---------------------------------
+
+When building queries using the ORM you will generally not have to indicate the
+data types of the columns you are interacting with as CakePHP can infer the
+types based on the schema data. If in your queries you'd like CakePHP to
+automatically convert equality to ``IN`` comparisions you'll need to indicate
+the column data type::
+
+    $query = $articles->find()
+        ->where(['id' => $ids], ['id' => 'integer[]']);
+
+The above will automatically create ``id IN (...)`` instead of ``id = ?``. This
+can be useful when you do not know whether you will get a scalar or array of
+parameters. The ``[]`` suffix on any data type name indicates to the query
+builder that you want the data handled as an array. If the data is not an array,
+it will first be cast to an array. After that, each value in the array will
+be cast using the :ref:`database-data-types <type system>`. This works with
+complex types as well, for example you could take a list of DateTime objects
+using::
+
+    $query = $articles->find()
+        ->where(['post_date' => $dates], ['post_date' => 'date[]']);
+
 Raw Expressions
 ---------------
 

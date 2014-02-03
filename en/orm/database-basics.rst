@@ -161,6 +161,8 @@ See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
 
 
+.. _database-data-types:
+
 Data Types
 ==========
 
