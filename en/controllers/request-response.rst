@@ -565,13 +565,13 @@ which is the number of seconds, after which the response is no longer considered
 fresh::
 
     public function view() {
-        ...
+        // ...
         // set the Cache-Control as public for 3600 seconds
         $this->response->sharable(true, 3600);
     }
 
     public function my_data() {
-        ...
+        // ...
         // set the Cache-Control as private for 3600 seconds
         $this->response->sharable(false, 3600);
     }
@@ -617,7 +617,7 @@ To take advantage of this header you have to either call the
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
-        ...
+        // ...
     }
 
 The Last Modified Header
@@ -638,7 +638,7 @@ To actually get advantage of using this header you have to either call manually
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
-        ...
+        // ...
     }
 
 The Vary Header
