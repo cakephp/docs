@@ -90,6 +90,16 @@ cache after each table is created. Cache can be disable by setting
         return true;
     }
 
+If you use models in your callbacks make sure to initialize them with the
+correct datasource, lest they fallback to their default datasources::
+
+    public function before($event = array()) {
+        $articles = ClassRegistry::init('Articles', array(
+            'ds' => $this->connection
+        ));
+        // Do things with articles.
+    }
+
 Migrations with CakePHP schema shell
 ====================================
 
