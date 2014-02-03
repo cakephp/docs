@@ -158,7 +158,7 @@ Detecting various request conditions used to require using
 usage::
 
     $this->request->is('post');
-    $this->request->isPost();
+    $this->request->isPost(); // deprecated
 
 Both method calls will return the same value. For the time being the methods
 are still available on :php:class:`RequestHandlerComponent`, but are deprecated and still might be
@@ -651,7 +651,7 @@ cache, but it asks the application every time
 whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.
 
-The :php:meth:`~CakeResponse::etag()` header (called entity tag) is a string that uniquely identifies the
+The :php:meth:`~CakeResponse::etag()` method (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
