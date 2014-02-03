@@ -16,10 +16,9 @@ Tehnički, baza podataka nije potrebna, ali naslućujemo da će svaka aplikacija
 -  Microsoft SQL Server
 -  SQLite
 
-.. note::
-
-    All built-in drivers require PDO. You should make sure you have the
-    correct PDO extensions installed.
+Upozorenje
+=======
+    Svi drajveri se zasnivaju na PDO ekstenzijama. Trebalo bi da već imate PDO ekstenzije instalirane.
 
 License
 =======
