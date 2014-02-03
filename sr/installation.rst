@@ -1,22 +1,15 @@
-Installation
+Instalacija
 ############
 
-CakePHP is fast and easy to install. The minimum requirements are a
-webserver and a copy of CakePHP, that's it! While this manual focuses
-primarily on setting up on Apache (because it's the most commonly used),
-you can configure CakePHP to run on a variety of web servers such as
-LightHTTPD or Microsoft IIS.
+CakePHP je brz i lako se instalira. Sve što vam treba je radeći webserver(online ili lokalni), i kopija CakePHP-a, to je to! Dok se ovo uputstvo fokusira na instaliranje CakePHP-a na Apache servere, slobodno možete konfigurisati CakePHP da radi na LightHTTPD ili Microsoft IIS serverima.
 
-Requirements
+Uslovi za instaliranje
 ============
 
--  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
-   by no means required.
--  PHP 5.2.8 or greater.
+-  HTTP server je potreban. Na primer: Apache server. mod\_rewrite je preferiran, ali uopšte nije obavezan.
+-  PHP 5.2.8 ili viši.
 
-Technically a database engine isn't required, but we imagine that
-most applications will utilize one. CakePHP supports a variety of
-database storage engines:
+Tehnički, baza podataka nije potrebna, ali naslućujemo da će svaka aplikacija koristiti po jednu. CakePHP podržava najrazličitije vrste baza podataka:
 
 -  MySQL (4 or greater)
 -  PostgreSQL
