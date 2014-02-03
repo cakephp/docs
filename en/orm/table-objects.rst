@@ -635,7 +635,7 @@ request data should look like::
     $data = [
         'title' => 'My title',
         'body' => 'The text',
-        'user_id' => 1
+        'user_id' => 1,
         'user' => [
             'username' => 'mark'
         ],
@@ -652,7 +652,7 @@ should look like::
     $data = [
         'title' => 'My title',
         'body' => 'The text',
-        'user_id' => 1
+        'user_id' => 1,
         'tags' => [
             ['tag' => 'CakePHP'],
             ['tag' => 'Internet'],
@@ -664,7 +664,7 @@ When using a list of ids, your request data should look like::
     $data = [
         'title' => 'My title',
         'body' => 'The text',
-        'user_id' => 1
+        'user_id' => 1,
         'tags' => [
             '_ids' => [1, 2, 3, 4]
         ]
@@ -870,7 +870,7 @@ Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     $query = $articles->find('list', [
-        'fields' => ['author_id', 'slug', 'title']
+        'fields' => ['author_id', 'slug', 'title'],
         'groupField' => ['author_id']
     ]);
     $data = $query->toArray();
