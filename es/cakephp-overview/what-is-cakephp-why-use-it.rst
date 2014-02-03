@@ -16,7 +16,7 @@ En lugar de reinventar la rueda cada vez que te sientas a hacer un nuevo proyect
 obten una copia de CakePHP y empieza con el verdadero corazón de tu aplicación.
 
 CakePHP tiene un 
-`equido de desarollo ativo <http://github.com/cakephp/cakephp/contributors>`_
+`equido de desarollo activo <http://github.com/cakephp/cakephp/contributors>`_
 y una comunidad muy viva, lo que le da un gran valor al proyecto. Además de
 no tener que reinventar la rueda, usar CakePHP significa que el 
 núcleo de la aplicación estará bien probado y está siendo constantemente

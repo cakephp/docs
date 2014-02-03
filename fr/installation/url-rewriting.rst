@@ -182,7 +182,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
@@ -259,7 +259,7 @@ assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
 ::
 
     url.rewrite-if-not-file =(
-        "^([^\?]*)(\?(.+))?$" =&gt; "/index.php?url=$1&amp;$3"
+        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
     )
 
 Je ne veux / ne peux utiliser l'URL rewriting

@@ -955,6 +955,10 @@ Datetime options
 Form Element-Specific Methods
 =============================
 
+ All elements are created under a form for the ``User`` model as in the examples above.
+For this reason, the HTML code generated will contain attributes that reference to the User model.
+Ex: name=data[User][username], id=UserUsername
+    
 .. php:method:: label(string $fieldName, string $text, array $options)
 
     Create a label element. ``$fieldName`` is used for generating the
@@ -1024,7 +1028,16 @@ Form Element-Specific Methods
 
     .. code-block:: html
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" />
+        
+    If the form is edited (that is, the array ``$this->request->data`` will
+    contain the information saved for the ``User`` model), the value
+    corresponding to ``id`` field will automatically be added to the HTML
+    generated. Example for data[User][id] = 10:
+    
+    .. code-block:: html
+        
+        <input name="data[User][id]" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
         Hidden fields no longer remove the class attribute. This means
@@ -1043,6 +1056,16 @@ Form Element-Specific Methods
 
         <textarea name="data[User][notes]" id="UserNotes"></textarea>
 
+    If the form is edited (that is, the array ``$this->request->data`` will
+    contain the information saved for the ``User`` model), the value
+    corresponding to ``notes`` field will automatically be added to the HTML 
+    generated. Example:
+
+    .. code-block:: html
+        <textarea name="data[User][notes]" id="UserNotes">
+        This text is to be edited.
+        </textarea>
+
     .. note::
 
         The ``textarea`` input type allows for the ``$options`` attribute
@@ -1050,7 +1073,7 @@ Form Element-Specific Methods
         textarea should be escaped. Defaults to ``true``.
 
     ::
-
+        
         echo $this->Form->textarea('notes', array('escape' => false);
         // OR....
         echo $this->Form->input(

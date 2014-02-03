@@ -8,10 +8,10 @@ ES_HOST =
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
 # Languages that can be built.
-LANGS = en es fr ja pt ru
+LANGS = en es fr ja pt ru ro sr
 
 # pdflatex does not like ja or ru for some reason.
-PDF_LANGS = en es fr pt
+PDF_LANGS = en es fr pt ro sr
 
 DEST = website
 

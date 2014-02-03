@@ -300,6 +300,14 @@ PostsController::
 
 .. note::
 
+    ``$this->request->is()`` takes a single argument, which can be the
+    request METHOD (``get``, ``put``, ``post``, ``delete``) or some request
+    identifier (``ajax``). It is **not** a way to check for specific posted
+    data. For instance, ``$this->request->is('book')`` will not return true
+    if book data was posted.
+
+.. note::
+
     You need to include the SessionComponent - and SessionHelper - in
     any controller where you will use it. If necessary, include it in
     your AppController.
@@ -334,6 +342,11 @@ URL for various CakePHP functions.
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
 handled in the following sections.
+
+The reason why we call the ``create()`` method first is to resets the model
+state for saving new information. It does not actually create a record in the
+database but clears Model::$id and sets Model::$data based on your database
+field defaults. 
 
 Data Validation
 ===============

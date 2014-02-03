@@ -971,6 +971,11 @@ Les options de Datetime
 Éléments de Formulaire-Méthodes spécifiques
 ===========================================
 
+Tous les elements sont créés dans un form pour le model ``User`` comme dans les
+exemples ci-dessous. Pour cette raison, le code HTML généré contiendra des
+attributs qui font référence au model User
+Ex: name=data[User][username], id=UserUsername
+
 .. php:method:: label(string $fieldName, string $text, array $options)
 
     Crée un élément label. ``$fieldName`` est utilisé pour générer le
@@ -1041,8 +1046,17 @@ Les options de Datetime
 
         <input name="data[User][id]" value="10" id="UserId" type="hidden">
 
+    Si le form est édité (qui est le tableau ``$this->request->data`` va
+    contenir les informations sauvegardées pour le model ``User``), la valeur
+    correspondant au champ ``id`` sera automatiquement ajoutée au HTML généré.
+    Exemple pour data[User][id] = 10:
+    
+    .. code-block:: html
+        
+        <input name="data[User][id]" id="UserId" type="hidden" />
+
     .. versionchanged:: 2.0
-        Les champs cachés n'enlève plus la classe attribute. Cela signifie
+        Les champs cachés n'enlèvent plus la classe attribute. Cela signifie
         que si il y a des erreurs de validation sur les champs cachés, le
         nom de classe error-field sera appliqué.
 
@@ -1058,11 +1072,21 @@ Les options de Datetime
 
         <textarea name="data[User][notes]" id="UserNotes"></textarea>
 
+    Si le form est édité (ainsi, le tableau ``$this->request->data`` va contenir
+    les informations sauvegardées pour le model ``User``), la valeur
+    correspondant au champs ``notes`` sera automatiquement ajoutée au HTML 
+    généré. Exemple:
+    
+    .. code-block:: html
+        <textarea name="data[User][notes]" id="UserNotes">
+        Ce texte va être édité.
+        </textarea>
+
     .. note::
 
-        Le input ``textarea`` permet pour ``$options`` l'attribut
+        Le type d'input ``textarea`` permet à l'attribut ``$options`` d'échapper
         ``'escape'`` lequel détermine si oui ou non le contenu du textarea
-        pourrait être échappé. Par défaut à ``true``.
+        doit être échappé. Par défaut à ``true``.
 
     ::
 

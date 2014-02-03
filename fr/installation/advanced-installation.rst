@@ -5,19 +5,19 @@ Installer CakePHP avec l'installeur PEAR
 ========================================
 
 CakePHP publie un package PEAR que vous pouvez installer en utilisant
-l'installeur pear. L'installation avec l'installeur PEAR peut simplifier
+l'installeur PEAR. L'installation avec l'installeur PEAR peut simplifier
 le partage des librairies de CakePHP dans plusieurs applications. Pour
-installer CakePHP avec pear, vous devrez faire comme suit::
+installer CakePHP avec PEAR, vous devrez faire comme suit::
 
     pear channel-discover pear.cakephp.org
     pear install cakephp/CakePHP
 
 .. note::
 
-    Sur certains systèmes, l'installation de librairies avec pear nécessitera
+    Sur certains systèmes, l'installation de librairies avec PEAR nécessitera
     la commande ``sudo``.
 
-Après avoir installé CakePHP avec pear, si pear est configuré correctement,
+Après avoir installé CakePHP avec PEAR, si PEAR est configuré correctement,
 vous devriez pouvoir utiliser la commande ``cake`` pour créer une nouvelle
 application. Puisque CakePHP sera localisé dans l'``include_path`` de PHP,
 vous n'aurez pas besoin de faire d'autres changements.
