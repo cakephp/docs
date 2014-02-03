@@ -1354,7 +1354,7 @@ used. A sample validator method for our articles table would be::
         public function validationUpdate($validator) {
             $validator
                 ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty'
+                    'rule' => 'notEmpty',
                     'message' => 'You need to provide a title',
                 ])
                 ->add('body', 'notEmpty', [
@@ -1387,7 +1387,7 @@ a validation rule::
         public function validationDefault($validator) {
             $validator
                 ->add('role', 'validRole', [
-                    'rule' => 'isValidRole'
+                    'rule' => 'isValidRole',
                     'message' => 'You need to provide a valid role',
                     'provider' => 'entity',
                 ]);
