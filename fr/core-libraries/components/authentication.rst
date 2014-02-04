@@ -703,7 +703,7 @@ n'autorisera la vérification des objets ::
 
 .. warning::
 
-  Si vous utilisez le scaffolding, permettre tout ne vas identifier et
+  Si vous utilisez le scaffolding, permettre tout ne va identifier et
   autoriser les méthodes scaffoldées. Vous devez spécifier les noms des
   actions.
 
