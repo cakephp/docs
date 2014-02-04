@@ -353,7 +353,7 @@ code, interact with the same API when manipulating associations::
 
         public function initialize(array $config) {
             $this->belongsTo('Movies');
-            $this->hasOne('Rating');
+            $this->hasOne('Ratings');
             $this->hasMany('Comments')
             $this->belongsToMany('Tags')
         }
