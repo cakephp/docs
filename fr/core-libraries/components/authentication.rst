@@ -109,7 +109,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
   est chargé.
 
-.. versionadded:: 2.2
+.. versionadded:: 2.2permettre tout ne vas identifier
 
 - ``passwordHasher`` Classe de hash de mot de passe. Par défaut à ``Simple``.
 
@@ -703,7 +703,7 @@ n'autorisera la vérification des objets ::
 
 .. warning::
 
-  Si vous utilisez le scaffolding, permettre tout ne vas identifier et
+  Si vous utilisez le scaffolding, permettre tout ne va identifier et
   autoriser les méthodes scaffoldées. Vous devez spécifier les noms des
   actions.
 
