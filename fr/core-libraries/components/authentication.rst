@@ -109,7 +109,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
   est chargé.
 
-.. versionadded:: 2.2permettre tout ne vas identifier
+.. versionadded:: 2.2
 
 - ``passwordHasher`` Classe de hash de mot de passe. Par défaut à ``Simple``.
 
