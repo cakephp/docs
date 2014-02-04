@@ -335,6 +335,10 @@ implement ``bindNode()`` in ``User`` model::
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
+Modify the ``actsAs`` for the model ``User`` and disable the requester directive:
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
 This method will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
 
