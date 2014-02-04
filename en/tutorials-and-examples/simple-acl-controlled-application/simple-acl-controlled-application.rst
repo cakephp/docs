@@ -339,7 +339,7 @@ Modify the ``actsAs`` for the model ``User`` and disable the requester directive
 
     public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 
-This method will tell ACL to skip checking ``User`` Aro's and to
+This method along with configuration change will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
 
 Every user has to have assigned ``group_id`` for this to work.
