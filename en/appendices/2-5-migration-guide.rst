@@ -28,7 +28,7 @@ SchemaShell
 CompletionShell
 ---------------
 
-- The CompletionShell was added. It aims to assist in the creation of
+- The :doc:`CompletionShell </console-and-shells/completion-shell>` was added. It aims to assist in the creation of
   autocompletion libraries for shell environments like bash, or zsh. No shell
   scripts are included in CakePHP, but the underlying tools are now available.
 
