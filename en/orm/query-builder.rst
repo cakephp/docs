@@ -360,7 +360,7 @@ Automatically creating IN clauses
 When building queries using the ORM you will generally not have to indicate the
 data types of the columns you are interacting with as CakePHP can infer the
 types based on the schema data. If in your queries you'd like CakePHP to
-automatically convert equality to ``IN`` comparisions you'll need to indicate
+automatically convert equality to ``IN`` comparisons you'll need to indicate
 the column data type::
 
     $query = $articles->find()
