@@ -236,7 +236,22 @@ finder methods in 3.0::
 As you can see, they are pretty straightforward, they get a Query object instead
 of an array and must return a Query object back. For 2.x users that implemented
 afterFind logic in custom finders, you should check out the :ref:`map-reduce`
-section, or just use the collection functions.
+section, or use the features found on the :ref:`collection-objects`. If in your
+models you used to rely on having an afterFind for all find operations you can
+migrate this code in one of a few ways:
+
+1. Override your entity constructor method and do additional formatting there.
+2. Create accessor methods in your entity to create the virtual properties.
+3. Redefine ``findAll()`` and attach a map/reduce function.
+
+In the 3rd case above your code would look like::
+
+    public function findAll(Query $query, array $options = []) {
+        $mapper = function ($row, $key, $mr) {
+            // Your afterFind logic
+        };
+        return $query->mapReduce($mapper);
+    }
 
 You may have noticed that custom finders receive an options array, you can pass
 any extra information to your finder using this parameter. This is great
