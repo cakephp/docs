@@ -1,10 +1,10 @@
 Instalarea
 ##########
 
-CakePHP se repede si usor. Cerintele minime sunt un webserver si o 
-copie de CakePHP. Doar atat! Desi acest manual se concentreaza mai ales
-pe instalarea pe Apache (deoarece este cel mai folosit), puteti configura
-CakePHP sa functioneze pe o varietate de web servere cum ar fi 
+CakePHP se instaleaza repede si usor. Cerintele minime sunt un webserver 
+si o copie de CakePHP. Doar atat! Desi acest manual se concentreaza mai 
+ales pe instalarea pe Apache (deoarece este cel mai folosit), puteti 
+configura CakePHP sa functioneze pe o varietate de web servere cum ar fi 
 LightHTTPD sau Microsoft IIS.
 
 Cerinte
@@ -76,12 +76,12 @@ pe care functioneaza web server-ul.
 Configurare
 ===========
 
-Setting up CakePHP can be as simple as slapping it in your web
-server's document root, or as complex and flexible as you wish.
+Confgurarea mediului CakePHP poate fi la fel de simpla ca slapping it 
+in your web server's document root, or as complex and flexible as you wish.
 This section will cover the three main installation types for
 CakePHP: development, production, and advanced.
 
--  Dezvooltare: easy to get going, URLs for the application include
+-  Dezvoltare: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
 -  Productie: Requires the ability to configure the web server's
    document root, clean URLs, very secure.
@@ -99,10 +99,11 @@ it available at http://www.example.com/cake\_2\_0/. We assume for
 the purposes of this example that your document root is set to
 ``/var/www/html``.
 
-Unpack the contents of the CakePHP archive into ``/var/www/html``. You now
-have a folder in your document root named after the release you've
-downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
-Your development setup will look like this on the file system::
+Despachetati continutul arhivei CakePHP in ``/var/www/html``. Acum aveti 
+un folder in radacina serverului dvs numit dupa versiunea pe care ati 
+descarcat-o (de.ex. cake\_2.0.0). Redenumiti acest folder in cake\_2\_0.
+Configurarea dvs pentru programare va arata astfel in sistemul dvs de 
+fisiere::
 
     /var/www/html/
         cake_2_0/
