@@ -366,6 +366,10 @@ the column data type::
     $query = $articles->find()
         ->where(['id' => $ids], ['id' => 'integer[]']);
 
+    // Or include IN to automatically cast to an array.
+    $query = $articles->find()
+        ->where(['id IN' => $ids]);
+
 The above will automatically create ``id IN (...)`` instead of ``id = ?``. This
 can be useful when you do not know whether you will get a scalar or array of
 parameters. The ``[]`` suffix on any data type name indicates to the query
@@ -377,6 +381,7 @@ using::
 
     $query = $articles->find()
         ->where(['post_date' => $dates], ['post_date' => 'date[]']);
+
 
 Raw Expressions
 ---------------
