@@ -17,12 +17,12 @@ CakeRequest
 
 :php:class:`CakeRequest` est l'objet requête utilisé par défaut dans CakePHP.
 Il centralise un certain nombre de fonctionnalités pour interroger et interagir
-avec les données demandées. Pour chaque requête, une CakeRequest est créée et
-passée en référence aux différentes couches de l'application que la requête de
-données utilise. Par défaut ``CakeRequest`` est assignée à ``$this->request``,
-et est disponible dans les Controllers, Vues et Helpers. Vous pouvez aussi y
-accéder dans les Components en utilisant la référence du controller. Certaines
-des tâches incluses que ``CakeRequest`` permet :
+avec les données demandées. Pour chaque requête, un :php:class:`CakeRequest`
+est créée et passée en référence aux différentes couches de l'application que
+la requête de données utilise. Par défaut :php:class:`CakeRequest` est assignée
+à ``$this->request``, et est disponible dans les Controllers, Vues et Helpers.
+Vous pouvez aussi y accéder dans les Components en utilisant la référence du
+controller. Certaines des tâches incluses que :php:class:`CakeRequest` permet :
 
 * Transformer les tableaux GET, POST, et FILES en structures de données avec
   lesquelles vous êtes familiers.
@@ -36,9 +36,10 @@ des tâches incluses que ``CakeRequest`` permet :
 Accéder aux paramètres de la requête
 ====================================
 
-CakeRequest propose plusieurs interfaces pour accéder aux paramètres de la
-requête. La première est par des tableaux indexés, la seconde est à travers
-``$this->request->params``, et la troisième est par des propriétés d'objets::
+:php:class:`CakeRequest` propose plusieurs interfaces pour accéder aux
+paramètres de la requête. La première est par des tableaux indexés, la seconde
+est à travers ``$this->request->params``, et la troisième est par des
+propriétés d'objets::
 
     $this->request['controller'];
     $this->request->controller;
@@ -73,9 +74,11 @@ en interne, il sont aussi trouvables dans les paramètres de la requête:
 * ``action`` L'action gère la requête courante.
 * ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
-* ``bare`` Présent quand la requête vient de requestAction() et inclut l'option
-  bare. Les requêtes vides n'ont pas de layout de rendu.
-* ``requested`` Présent et mis à true quand l'action vient de requestAction.
+* ``bare`` Présent quand la requête vient de
+  :php:meth:`~Controller::requestAction()` et inclut l'option bare. Les requêtes
+  vides n'ont pas de layout de rendu.
+* ``requested`` Présent et mis à true quand l'action vient de
+  :php:meth:`~Controller::requestAction()`.
 
 Accéder aux paramètres Querystring
 ==================================
@@ -90,9 +93,10 @@ Les paramètres Querystring peuvent être lus en utilisant
     // accesseur BC, va être déprécié dans les versions futures
     $this->request['url']['page'];
 
-Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
-utiliser :php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une
-manière sans erreur. Toute clé qui n'existe pas va retourner ``null``::
+Vous pouvez soit directement accéder à la propriété
+:php:attr:`~CakeRequest::$query`, soit vous pouvez utiliser
+:php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une manière sans
+erreur. Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
@@ -108,9 +112,10 @@ un prefixe ``data``, va avoir sa donnée prefixée retirée. Par exemple::
     // est accessible
     $this->request->data['MyModel']['title'];
 
-Vous pouvez soit accéder directement à la propriété des données, soit vous
-pouvez utiliser :php:meth:`CakeRequest::data()` pour lire le tableau de données
-sans erreurs. Toute clé n'existant pas va retourner ``null``::
+Vous pouvez soit accéder directement à la propriété
+:php:attr:`~CakeRequest::$data`, soit vous pouvez utiliser
+:php:meth:`CakeRequest::data()` pour lire le tableau de données sans erreurs.
+Toute clé n'existant pas va retourner ``null``::
 
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
@@ -151,8 +156,8 @@ supporte aussi le passement dans des paramètres supplémentaires::
 Accéder aux informations du chemin
 ==================================
 
-CakeRequest fournit aussi des informations utiles sur les chemins dans votre
-application. :php:attr:`CakeRequest::$base` et
+:php:class:`CakeRequest` fournit aussi des informations utiles sur les chemins
+dans votre application. :php:attr:`CakeRequest::$base` et
 :php:attr:`CakeRequest::$webroot` sont utiles pour générer des URLs, et
 déterminer si votre application est ou n'est pas dans un sous-dossier.
 
@@ -170,12 +175,12 @@ compatible avec les utilisations anciennes::
     $this->request->isPost(); // déprécié
 
 Les deux méthodes appelées vont retourner la même valeur. Pour l'instant,
-les méthodes sont toujours disponibles dans RequestHandler, mais sont
-depréciées et pourraient être retirées avant la version finale. Vous pouvez
-aussi facilement étendre les détecteurs de la requête qui sont disponibles,
-en utilisant :php:meth:`CakeRequest::addDetector()` pour créer de nouveaux
-types de détecteurs. Il y a quatre différents types de détecteurs que vous
-pouvez créer:
+les méthodes sont toujours disponibles dans
+:php:class:`RequestHandlerComponent`, mais sont depréciées et pourraient être
+retirées avant la version finale. Vous pouvez aussi facilement étendre les
+détecteurs de la requête qui sont disponibles, en utilisant
+:php:meth:`CakeRequest::addDetector()` pour créer de nouveaux types de
+détecteurs. Il y a quatre différents types de détecteurs que vous pouvez créer:
 
 * Comparaison avec valeur d'environnement - Une comparaison de la valeur
   d'environnement, compare une valeur attrapée à partir de :php:func:`env()`
@@ -221,7 +226,7 @@ Quelques exemples seraient::
         })
     );
 
-``CakeRequest`` inclut aussi des méthodes comme
+:php:class:`CakeRequest` inclut aussi des méthodes comme
 :php:meth:`CakeRequest::domain()`, :php:meth:`CakeRequest::subdomains()`
 et :php:meth:`CakeRequest::host()` qui facilitent la vie des applications avec
 sous-domaines.
@@ -246,21 +251,21 @@ Vous pouvez utiliser plusieurs détecteurs intégrés:
 CakeRequest et RequestHandlerComponent
 =======================================
 
-Puisque plusieurs des fonctionnalités offertes par ``CakeRequest`` étaient
-l'apanage de :php:class:`RequestHandlerComponent`, une reflexion était
+Puisque plusieurs des fonctionnalités offertes par :php:class:`CakeRequest`
+étaient l'apanage de :php:class:`RequestHandlerComponent`, une reflexion était
 nécessaire pour savoir si il était toujours nécessaire. Dans 2.0,
 :php:class:`RequestHandlerComponent` agit comme un sugar daddy en fournissant
-une couche de facilité au-dessus de l'offre utilitaire de `CakeRequest`.
-:php:class:`RequestHandlerComponent` permet par exemple de changer les layouts
-et vues basés sur les types de contenu ou ajax. Cette séparation des
-utilitaires entre les deux classes vous permet de plus facilement choisir ce
-dont vous avez besoin.
+une couche de facilité au-dessus de l'offre utilitaire de
+:php:class:`CakeRequest`. :php:class:`RequestHandlerComponent` permet par
+exemple de changer les layouts et vues basés sur les types de contenu ou ajax.
+Cette séparation des utilitaires entre les deux classes vous permet de plus
+facilement choisir ce dont vous avez besoin.
 
 Interagir avec les autres aspects de la requête
 ===============================================
 
-Vous pouvez utiliser `CakeRequest` pour voir une quantité de choses sur la
-requête. Au-delà des détecteurs, vous pouvez également trouver d'autres
+Vous pouvez utiliser :php:class:`CakeRequest` pour voir une quantité de choses
+sur la requête. Au-delà des détecteurs, vous pouvez également trouver d'autres
 informations sur les diverses propriétés et méthodes.
 
 * ``$this->request->webroot`` contient le répertoire webroot.
@@ -359,8 +364,8 @@ API de CakeRequest
 
 .. php:method:: addDetector($name, $options)
 
-    Ajoute un détecteur pour être utilisé avec is().  Voir 
-    :ref:`check-the-request` pour plus d'informations.
+    Ajoute un détecteur pour être utilisé avec :php:meth:`CakeRequest::is()`.
+    Voir :ref:`check-the-request` pour plus d'informations.
 
 .. php:method:: accepts($type = null)
 
@@ -451,27 +456,29 @@ communes liées, telles que:
 Changer la classe de réponse
 ============================
 
-CakePHP utilise ``CakeResponse`` par défaut. ``CakeResponse`` est flexible et
-transparente pour l'utilisation de la classe. Si vous avez besoin de la
-remplacer avec une classe spécifique de l'application, vous pouvez l'écraser
-et remplacer ``CakeResponse`` avec votre propre classe en remplaçant la
-classe CakeResponse utilisée dans index.php.
+CakePHP utilise :php:class:`CakeResponse` par défaut. :php:class:`CakeResponse`
+est flexible et transparente pour l'utilisation de la classe. Si vous avez
+besoin de la remplacer avec une classe spécifique de l'application, vous pouvez
+l'écraser et remplacer :php:class:`CakeResponse` avec votre propre classe en
+remplaçant la classe :php:class:`CakeResponse` utilisée dans
+``app/webroot/index.php``.
 
 Cela fera que tous les controllers dans votre application utiliseront
 ``VotreResponse`` au lieu de :php:class:`CakeResponse`. Vous pouvez aussi
 remplacer l'instance de réponse de la configuration
 ``$this->response`` dans vos controllers. Ecraser l'objet réponse
 est à portée de main pour les tests car il vous permet d'écraser les
-méthodes qui interragissent avec ``header()``. Voir la section sur
-:ref:`cakeresponse-testing` pour plus d'informations.
+méthodes qui interragissent avec :php:meth:`~CakeResponse::header()`. Voir la
+section sur :ref:`cakeresponse-testing` pour plus d'informations.
 
 Gérer les types de contenu
 ==========================
 
 Vous pouvez contrôler le Content-Type des réponses de votre application
 en utilisant :php:meth:`CakeResponse::type()`. Si votre application a besoin
-de gérer les types de contenu qui ne sont pas construits dans CakeResponse,
-vous pouvez faire correspondre ces types avec ``type()`` comme ceci::
+de gérer les types de contenu qui ne sont pas construits dans
+:php:class:`CakeResponse`, vous pouvez faire correspondre ces types avec
+:php:meth:`CakeResponse::type()` comme ceci::
 
     // Ajouter un type vCard
     $this->response->type(array('vcf' => 'text/v-card'));
@@ -480,9 +487,10 @@ vous pouvez faire correspondre ces types avec ``type()`` comme ceci::
     $this->response->type('vcf');
 
 Habituellement, vous voudrez faire correspondre des types de contenu
-supplémentaires dans le callback ``beforeFilter`` de votre controller,
-afin que vous puissiez tirer parti de la fonctionnalité de vue de commutation
-automatique de :php:class:`RequestHandlerComponent`, si vous l'utilisez.
+supplémentaires dans le callback :php:meth:`~Controller::beforeFilter()` de
+votre controller, afin que vous puissiez tirer parti de la fonctionnalité de
+vue de commutation automatique de :php:class:`RequestHandlerComponent`, si vous
+l'utilisez.
 
 .. _cake-response-file:
 
@@ -490,10 +498,10 @@ Envoyer des fichiers
 ====================
 
 Il y a des fois où vous voulez envoyer des fichiers en réponses de vos
-requêtes. Avant la version 2.3, vous pouviez utiliser
-:doc:`/views/media-view` pour faire cela. Depuis 2.3, MediaView est dépréciée
-et vous pouvez utiliser :php:meth:`CakeResponse::file()` pour envoyer un
-fichier en réponse::
+requêtes. Avant la version 2.3, vous pouviez utiliser :php:class:`MediaView`
+pour faire cela. Depuis 2.3, :php:class:`MediaView` est dépréciée et vous
+pouvez utiliser :php:meth:`CakeResponse::file()` pour envoyer un fichier en
+réponse::
 
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
@@ -506,8 +514,8 @@ fichier en réponse::
 Comme montré dans l'exemple ci-dessus, vous devez passer le
 chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
 contenu si c'est un type de fichier connu listé dans
-`CakeReponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types avant
-d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode
+:php:attr:`CakeReponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types
+avant d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode
 :php:meth:`CakeResponse::type()`.
 
 Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au lieu
@@ -558,11 +566,11 @@ paramètres de configurations::
         'Content-type: application/pdf'
     ));
 
-Régler le même en-tête de multiples fois entraînera l'écrasement des
-précédentes valeurs, un peu comme les appels réguliers d'en-tête. Les en-têtes
-ne sont aussi pas envoyés quand :php:meth:`CakeResponse::header()` est appelé;
-à la place, ils sont simplement conservés jusqu'à ce que la réponse soit
-effectivement envoyée.
+Régler le même :php:meth:`~CakeResponse::header()` de multiples fois entraînera
+l'écrasement des précédentes valeurs, un peu comme les appels réguliers
+d'en-tête. Les en-têtes ne sont aussi pas envoyés quand
+:php:meth:`CakeResponse::header()` est appelée; à la place, ils sont simplement
+conservés jusqu'à ce que la réponse soit effectivement envoyée.
 
 .. versionadded:: 2.4
 
@@ -598,9 +606,9 @@ des réponses. En utilisant :php:meth:`CakeResponse::cache()`::
 
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
 pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
-``cache()`` définit la valeur dernièrement modifiée en premier argument. Expires,
-et ``max-age`` sont définis en se basant sur le second paramètre. Le
-Cache-Control est défini aussi à ``public``.
+:php:meth:`CakeResponse::cache()` définit valeur ``Last-Modified`` en
+premier argument. Expires, et ``max-age`` sont définis en se basant sur le
+second paramètre. Le Cache-Control est défini aussi à ``public``.
 
 
 .. _cake-response-caching:
@@ -636,17 +644,18 @@ ressembler à ceci::
 
     Cache-Control: private, max-age=3600, must-revalidate
 
-La classe ``CakeResponse`` vous aide à configurer cet en-tête avec quelques
-méthodes utiles qui vont produire un en-tête final valide ``Cache Control``.
-Premièrement il y a la méthode :php:meth:`CakeResponse::sharable()`, qui
-indique si une réponse peut être considerée comme partageable pour différents
-utilisateurs ou clients. Cette méthode contrôle généralement la partie `public`
-ou `private` de cet en-tête. Définir une réponse en privé indique que tout ou
-une partie de celle-ci est prévue pour un unique utilisateur. Pour tirer profit
+La classe :php:class:`CakeResponse` vous aide à configurer cet en-tête avec
+quelques méthodes utiles qui vont produire un en-tête final valide
+``Cache Control``. Premièrement il y a la méthode
+:php:meth:`CakeResponse::sharable()`, qui indique si une réponse peut être
+considerée comme partageable pour différents utilisateurs ou clients. Cette
+méthode contrôle généralement la partie ``public`` ou ``private`` de
+cet en-tête. Définir une réponse en privé indique que tout ou une partie de
+celle-ci est prévue pour un unique utilisateur. Pour tirer profit
 des mises en cache partagées, il est nécessaire de définir la directive de
 contrôle en publique.
 
-Le deuxième paramètre de cette méthode est utilisé pour spécifier un `max-age`
+Le deuxième paramètre de cette méthode est utilisé pour spécifier un ``max-age``
 pour le cache, qui est le nombre de secondes après lesquelles la réponse n'est
 plus considérée comme récente::
 
@@ -662,8 +671,8 @@ plus considérée comme récente::
         $this->response->sharable(false, 3600);
     }
 
-``CakeResponse`` expose des méthodes séparées pour la définition de chaque
-component dans l'en-tête de ``Cache-Control``.
+:php:class:`CakeResponse` expose des méthodes séparées pour la définition de
+chaque component dans l'en-tête ``Cache-Control``.
 
 L'en-tête d'Expiration
 ----------------------
@@ -679,8 +688,8 @@ en utilisant la méthode :php:meth:`CakeResponse::expires()`::
         $this->response->expires('+5 days');
     }
 
-Cette méthode accepte aussi une instance DateTime ou toute chaîne de caractère
-qui peut être parsée par la classe DateTime.
+Cette méthode accepte aussi une instance :php:class:`DateTime` ou toute chaîne
+de caractère qui peut être parsée par la classe :php:class:`DateTime`.
 
 L'en-tête Etag
 --------------
@@ -695,10 +704,11 @@ il demande à l'application à chaque fois si les ressources ont changé ou non.
 C'est utilisé couramment avec des ressources statiques comme les images et
 autres choses.
 
-L'en-tête ``Etag`` (appelé balise d'entité) est une chaîne de caractère qui
-identifie de façon unique les ressources requêtées. Il est très semblable
-à la somme de contrôle d'un fichier; la mise en cache permettra de comparer
-les sommes de contrôle pour savoir si elles correspondent ou non.
+L'en-tête :php:meth:`~CakeResponse::etag()` (appelé balise d'entité) est une
+chaîne de caractère qui identifie de façon unique les ressources requêtées. Il
+est très semblable à la somme de contrôle d'un fichier; la mise en cache
+permettra de comparer les sommes de contrôle pour savoir si elles correspondent
+ou non.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
@@ -756,11 +766,11 @@ ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
 CakeResponse et les tests
 =========================
 
-Probablement l'une des plus grandes victoires de ``CakeResponse`` vient de
-comment il facilite les tests des controllers et des components. Au lieu d'avoir
-des méthodes répandues à travers plusieurs objets, vous avez un seul objet pour
-mocker pendant que les controllers et les components déleguent à
-``CakeResponse``. Cela vous aide à rester plus près d'un test 'unit' et
+Probablement l'une des plus grandes victoires de :php:class:`CakeResponse` vient
+de comment il facilite les tests des controllers et des components. Au lieu
+d'avoir des méthodes répandues à travers plusieurs objets, vous avez un seul
+objet pour mocker pendant que les controllers et les components déleguent à
+:php:class:`CakeResponse`. Cela vous aide à rester plus près d'un test 'unit' et
 facilite les tests des controllers::
 
     public function testSomething() {
@@ -820,8 +830,9 @@ API de CakeResponse
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Configure l'en-tête ``Cache-Control`` pour être soit `public` soit `private` 
-    et configure optionnellement une directive de la ressource à un `max-age`.
+    Configure l'en-tête ``Cache-Control`` pour être soit ``public`` soit
+    ``private`` et configure optionnellement une directive de la ressource à un
+    ``max-age``.
 
     .. versionadded:: 2.1
 
