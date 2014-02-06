@@ -30,7 +30,7 @@ CakePHP should be installed with Composer
 =========================================
 
 Since CakePHP can no longer easily be installed via PEAR, or in a shared
-directory, those options are no longer supported.  Instead you should use
+directory, those options are no longer supported. Instead you should use
 `Composer <http://getcomposer.org>`_ to install CakePHP into your application.
 
 Namespaces
