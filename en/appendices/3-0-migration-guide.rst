@@ -482,7 +482,7 @@ There is an upgrade shell command ``cake upgrade tests`` to assist in upgrading 
 ControllerTestCase
 ------------------
 
-- You can now simulate query string, post data and cookie values when using ``testAction()``.
+- You can now simulate query strings, POST data and cookie values when using ``testAction()``.
 
 View
 ====
@@ -594,18 +594,18 @@ TimeHelper
 I18n
 ====
 
-- :php:class:`Cake\\I18n\\I18n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
+- :php:class:`Cake\\I18n\\I18n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as an argument.
 
-- The methods below has been moved:
+- The methods below have been moved:
 
   - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
   - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
   - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
-- Since having mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
-- Error messages through out CakePHP are no longer passed throught I18n
+- Since having the mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
+- Error messages throughout CakePHP are no longer passed through I18n
   functions. This was done to simplify the internals of CakePHP and reduce
-  overhead. The developer facing messages are rarely if ever actually translated
+  overhead. The developer facing messages are rarely, if ever, actually translated -
   so the additional overhead reaps very little benefit.
 
 L10n
