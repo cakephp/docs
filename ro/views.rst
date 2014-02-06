@@ -23,17 +23,17 @@ utilizatorii dvs. Majoritatea timpului viewurile dvs vor arata documente
 date AMF unui obiect Flash, sa raspunda unei aplicatii de la distanta 
 folosind SOAP, sau sa genereze un fisier CSV pentru un utilizator.
 
-By default CakePHP view files are written in plain PHP and have a default
-extension of .ctp (CakePHP Template). These files contain all the
+Implicit fisierele view din CakePHP sunt scrse in PHP simplu su au o 
+extensie .ctp (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP.
 
-View files are stored in ``/app/View/``, in a folder named after the
-controller that uses the files, and named after the action it
-corresponds to. For example, the view file for the Products
+Fisierele view sunt stocate in ``/app/View/``, intr-un folder numit dupa
+controller-ul ce foloseste fisierele, si sunt numite dupa actiunea care ii
+corespunde. For example, the view file for the Products
 controller's "view()" action, would normally be found in
 ``/app/View/Products/view.ctp``.
 
@@ -56,8 +56,8 @@ chapter:
 
 .. _extending-views:
 
-Extending Views
----------------
+Cum se extind View-urile
+------------------------
 
 .. versionadded:: 2.1
 
