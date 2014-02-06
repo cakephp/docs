@@ -107,7 +107,8 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
 - ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
-  est chargé.
+  est chargé. Si vous souhaitez utiliser cette option, vous devrez vous assurer
+  que votre model a le behavior Containable attaché.
 
 .. versionadded:: 2.2
 
