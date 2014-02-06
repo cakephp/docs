@@ -92,6 +92,17 @@ peut être désactivé en configurant
         return true;
     }
 
+Si vous utilisez les models dans vos callbacks, assurez-vous de les initialiser
+avec la bonne source de données, pour ne pas qu'ils fallback sur leurs sources
+de données par défaut::
+
+    public function before($event = array()) {
+        $articles = ClassRegistry::init('Articles', array(
+            'ds' => $this->connection
+        ));
+        // Do things with articles.
+    }
+
 Migrations avec le shell schema de CakePHP
 ==========================================
 
