@@ -3,16 +3,25 @@ Completion Shell
 
 .. versionadded:: 2.5
 
-Working with the console gives the developer a lot of possibilities but having to completely know and write those commands can be tedious. Especially when developing new shells where the commands differ per minute iteration. The Completion Shells aids in this matter by providing an API to write completion scripts for shells like bash, zsh, fish etc.
+Working with the console gives the developer a lot of possibilities but having
+to completely know and write those commands can be tedious. Especially when
+developing new shells where the commands differ per minute iteration. The
+Completion Shells aids in this matter by providing an API to write completion
+scripts for shells like bash, zsh, fish etc.
 
 Sub Commands
 ============
 
-The Completion Shell consists of a number of sub commands to assist the developer creating it's completion script. Each for a different step in the autocompletion process.
+The Completion Shell consists of a number of sub commands to assist the
+developer creating it's completion script. Each for a different step in the
+autocompletion process.
 
 commands
 --------
-For the first step commands outputs the available Shell Commands, including plugin name when applicable. (All returned possibilities, for this and the other sub commands, are separated by a space.) For example::
+
+For the first step commands outputs the available Shell Commands, including
+plugin name when applicable. (All returned possibilities, for this and the other
+sub commands, are separated by a space.) For example::
 
     ./Console/cake Completion commands
 
@@ -20,11 +29,15 @@ Returns::
 
     acl api bake command_list completion console i18n schema server test testsuite upgrade
 
-Your completion script can select the relevant commands from that list to continue with. (For this and the following sub commands.)
+Your completion script can select the relevant commands from that list to
+continue with. (For this and the following sub commands.)
 
 subCommands
 -----------
-Once the preferred command has been chosen subCommands comes in as the second step and outputs the possible sub command for the given shell command. For example::
+
+Once the preferred command has been chosen subCommands comes in as the second
+step and outputs the possible sub command for the given shell command. For
+example::
 
     ./Console/cake Completion subcommands bake
 
@@ -34,7 +47,10 @@ Returns::
 
 options
 --------
-As the third and final options outputs options for the given (sub) command as set in getOptionParser. (Including the default options inherited from Shell.) For example::
+
+As the third and final options outputs options for the given (sub) command as
+set in getOptionParser. (Including the default options inherited from Shell.)
+For example::
 
     ./Console/cake Completion options bake
 
