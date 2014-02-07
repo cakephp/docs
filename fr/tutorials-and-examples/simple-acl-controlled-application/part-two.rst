@@ -72,17 +72,17 @@ configurées, retirez la fonction::
 
     public function initDB() {
         $group = $this->User->Group;
-        //Allow admins to everything
+        // Autorise l'accès à tout pour les admins
         $group->id = 1;
         $this->Acl->allow($group, 'controllers');
 
-        //allow managers to posts and widgets
+        // Autorise l'accès aux posts et widgets pour les managers
         $group->id = 2;
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Posts');
         $this->Acl->allow($group, 'controllers/Widgets');
 
-        //allow users to only add and edit on posts and widgets
+        // Autorise l'accès aux actions add et edit des posts widgets pour les utilisateurs de ce groupe
         $group->id = 3;
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Posts/add');
@@ -90,10 +90,10 @@ configurées, retirez la fonction::
         $this->Acl->allow($group, 'controllers/Widgets/add');
         $this->Acl->allow($group, 'controllers/Widgets/edit');
 
-        // permet aux utilisateurs classiques de se déconnecter
+        // Permet aux utilisateurs classiques de se déconnecter
         $this->Acl->allow($group, 'controllers/users/logout');
 
-        //nous ajoutons un exit pour éviter d'avoir un message d'erreur affreux "missing views" (manque une vue)
+        // Nous ajoutons un exit pour éviter d'avoir un message d'erreur affreux "missing views" (manque une vue)
         echo "tout est ok";
         exit;
     }
