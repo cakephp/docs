@@ -273,8 +273,8 @@ against the original request to determine whether the response was not modified
 since the last time the client asked for it.
 
 If response is evaluated as not modified, then the view rendering process is
-stopped, saving processing time an  no content is returned to the client, saving
-bandwidth. The response status code is then set to `304 Not Modified`.
+stopped, saving processing time, saving bandwidth and no content is returned to
+the client. The response status code is then set to `304 Not Modified`.
 
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to false::
