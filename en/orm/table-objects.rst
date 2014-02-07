@@ -709,7 +709,7 @@ Once you've converted request data into entities you can ``save()`` or
 
     If you are using newEntity() and the resulting entities are missing some or
     all of the data they were passed, you should double check that the columns
-    you want to set can be mass-assigned. By default no fields can be modified
+    you want to set can be mass-assigned. By default fields cannot be modified
     through mass-assignment.
 
 Loading Entities
