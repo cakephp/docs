@@ -23,35 +23,33 @@ utilizatorii dvs. Majoritatea timpului viewurile dvs vor arata documente
 date AMF unui obiect Flash, sa raspunda unei aplicatii de la distanta 
 folosind SOAP, sau sa genereze un fisier CSV pentru un utilizator.
 
-Implicit fisierele view din CakePHP sunt scrse in PHP simplu su au o 
-extensie .ctp (CakePHP Template). These files contain all the
-presentational logic needed to get the data it received from the
-controller in a format that is ready for the audience you're
-serving to. If you'd prefer using a templating language like
-Twig, or Smarty, a subclass of View will bridge your templating
-language and CakePHP.
+Implicit fisierele view din CakePHP sunt scrise in PHP simplu si au o 
+extensie .ctp (CakePHP Template). Aceste fisiere contin toata logica de
+prezentare necesara pentru a receptiona datele de la controller intr-un
+format ce este pregatit pentru audienta pe care o deserviti. Daca veti prefera 
+sa folositi un limbaj de templating cum ar fi Twig sau Smarty, o subclasa a View 
+va conecta limbajul dvs de templating cu CakePHP.
 
 Fisierele view sunt stocate in ``/app/View/``, intr-un folder numit dupa
 controller-ul ce foloseste fisierele, si sunt numite dupa actiunea care ii
-corespunde. For example, the view file for the Products
-controller's "view()" action, would normally be found in
-``/app/View/Products/view.ctp``.
+corespunde. De exemple, fisierul view pentru actiunea "view" a controller-ului
+Products, se va gasi in mod normal in ``/app/View/Products/view.ctp``.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
 chapter:
 
-- **views**: Views are the part of the page that is unique to the
-  action being run. They form the meat of your application's response.
-- **elements**: smaller, reusable bits of view code. Elements are
-  usually rendered inside of views.
-- **layouts**: view files that contain presentational code that is
-  found wrapping many interfaces in your application. Most views are
-  rendered inside of a layout.
-- **helpers**: these classes encapsulate view logic that is needed
-  in many places in the view layer. Among other things, helpers in
-  CakePHP can help you build forms, build AJAX functionality,
-  paginate model data, or serve RSS feeds.
+- **views**: View-urile fac parte din pagina care este unica pentru
+   acțiunea ce se executa. ELe formeaza baza raspunsului aplicatiei dvs.
+- **elements**: sunt parti mai mici, reutilizabile ale codului unei view. 
+   Elementele sunt de obicei redate in interiorul unor view-uri.
+- **layouts**: sunt fisiere view ce contin cod de prezentare ce impacheteaza 
+   mai multe interfete din aplicatia dvs. Majoritatea view-urilor sunt redate
+  in interiorul unui layout.
+- **helpers**: Aceste clase incapsuleaza codul (logica) unui view ce este 
+   necesar/a in multe locuri dintr-un view. Printre altele helper-ii in
+   CakePHP pot ajuta sa construiesti formulare, sa construiesti functionalitate 
+   AJAX, sa paginezi datele dintr-un model, sau sa servesti RSS feeds.
 
 
 .. _extending-views:
@@ -61,31 +59,32 @@ Cum se extind View-urile
 
 .. versionadded:: 2.1
 
-View extending allows you to wrap one view in another. Combining this with
-:ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
-:term:`DRY`. For example, your application has a sidebar that needs to change depending
-on the specific view being rendered. By extending a common view file you can
-avoid repeating the common markup for your sidebar, and only define the parts
-that change:
+Extinderea view-urilor va permite sa impachetati o view intr-alta. Daca veti 
+combina aceasta cu :ref:`view blocks <view-blocks>` veti obtine un mod puternic de 
+a va pastra view-urile :term:`DRY`. De exemplu, aplicatia dvs are o bara laterala 
+ce trebuie sa se schimbe in functie de un anumit view ce este afisat. Prin 
+extinderea unui fisier obisnuit de view puteti evita sa repetati marcajele uzuale 
+pentru bara dvs laterala, si doar sa definiti partile care se modifica:
 
 .. code-block:: php
 
     // app/View/Common/view.ctp
-    <h1><?php echo $this->fetch('title'); ?></h1>
-    <?php echo $this->fetch('content'); ?>
+    <h1><?php echo $this->fetch('titlu'); ?></h1>
+    <?php echo $this->fetch('continut'); ?>
 
     <div class="actions">
-        <h3>Related actions</h3>
+        <h3>Actiuni inrudite</h3>
         <ul>
-        <?php echo $this->fetch('sidebar'); ?>
+        <?php echo $this->fetch('baralaterala'); ?>
         </ul>
     </div>
 
-The above view file could be used as a parent view. It expects that the view
-extending it will define the ``sidebar`` and ``title`` blocks. The ``content``
-block is a special block that CakePHP creates. It will contain all the
-un-captured content from the extending view. Assuming our view file has a
-``$post`` variable with the data about our post. Our view could look like:
+Fișierul view de mai sus ar putea fi folosit ca view părinte. Este de 
+asteptat ca view-ul extins sa defineasca blocurile ``baralaterala`` si 
+``titlu``. Blocul ``continut`` este un bloc special pe care il creaza 
+CakePHP. Va contine tot continutul ne-capturat din view-ul extins. Daca 
+presupunem ca fisierul dvs view are o variabila ``$post`` cu datele 
+despre post-ul (articolul) nostru. View-ul nostru ar putea arata astfel:
 
 .. code-block:: php
 
@@ -93,9 +92,9 @@ un-captured content from the extending view. Assuming our view file has a
     // app/View/Posts/view.ctp
     $this->extend('/Common/view');
 
-    $this->assign('title', $post);
+    $this->assign('titlu', $post);
 
-    $this->start('sidebar');
+    $this->start('baralaterala');
     ?>
     <li>
     <?php
