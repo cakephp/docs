@@ -878,7 +878,7 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: deny($action, [$action, ...])
 
-    Toggle one more more actions previously declared as public actions,
+    Toggle one or more actions previously declared as public actions,
     as non-public methods. These methods will now require
     authorization. Best used inside your controller's beforeFilter
     method.
