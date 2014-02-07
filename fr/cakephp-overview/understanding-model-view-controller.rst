@@ -25,7 +25,7 @@ d'enregistrer et de récupérer les photos des utilisateurs,
 de trouver des suggestions de nouveaux amis, etc ...
 Tandis que les objets Models seront "Ami", "User", "Commentaire", "Photo".
 
-Le couche Vue
+La couche Vue
 =============
 
 La Vue retourne une présentation des données venant du model. Etant séparée par
