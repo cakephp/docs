@@ -39,7 +39,7 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'user::
             'username' => array(
                 'required' => array(
                     'rule' => array('notEmpty'),
-                    'message' => 'Un nom d\'user est requis'
+                    'message' => 'Un nom d\'utilisateur est requis'
                 )
             ),
             'password' => array(
