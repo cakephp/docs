@@ -89,6 +89,10 @@ configurées, retirez la fonction::
         $this->Acl->allow($group, 'controllers/Posts/edit');
         $this->Acl->allow($group, 'controllers/Widgets/add');
         $this->Acl->allow($group, 'controllers/Widgets/edit');
+
+        // permet aux utilisateurs classiques de se déconnecter
+        $this->Acl->allow($group, 'controllers/users/logout');
+
         //nous ajoutons un exit pour éviter d'avoir un message d'erreur affreux "missing views" (manque une vue)
         echo "tout est ok";
         exit;
