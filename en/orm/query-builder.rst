@@ -183,7 +183,7 @@ not make sense. In these situations you may want to disable entity hydration::
 Advanced Conditions
 ===================
 
-The query builder makes it simple to build complex where clauses.
+The query builder makes it simple to build complex ``where`` clauses.
 Grouped conditions can be expressed by providing combining ``where``,
 ``andWhere`` and ``orWhere``. The ``where`` method works similar to the
 conditions arrays in previous versions of CakePHP::
@@ -249,7 +249,7 @@ The above would create SQL like::
     WHERE ((author_id = 2 OR is_highlighted = 1)
     AND title LIKE '%First%')
 
-The expression object that is passed into where functions has two kinds of
+The expression object that is passed into ``where`` functions has two kinds of
 methods. The first type of methods are **combinators**. The ``and_`` & ``or_``
 methods create new expression objects that change **how** conditions are
 combined. The second type of methods are **conditions**. Conditions are added
