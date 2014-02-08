@@ -156,7 +156,7 @@ Aggregates - Group and Having
 When using aggregate functions like ``count`` and ``sum`` you may want to use
 ``group by`` and ``having`` clauses::
 
-    $query = $articles->find()
+    $query = $articles->find();
     $query->select([
         'count' => $query->func()->count('view_count'),
         'published_date' => 'DATE(created)'
