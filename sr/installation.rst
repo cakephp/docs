@@ -4,9 +4,9 @@ Instalacija
 CakePHP je brz i lako se instalira. Sve što vam treba je radeći webserver(online ili lokalni), i kopija CakePHP-a, to je to! Dok se ovo uputstvo fokusira na instaliranje CakePHP-a na Apache servere, slobodno možete konfigurisati CakePHP da radi na LightHTTPD ili Microsoft IIS serverima.
 
 Uslovi za instaliranje
-============
+================
 
--  HTTP server je potreban. Na primer: Apache server. mod\_rewrite je preferiran, ali uopšte nije obavezan.
+-  HTTP server je potreban. Na primer: Apache server. mod_rewrite je opcionalan, ali uopšte nije obavezan.
 -  PHP 5.2.8 ili viši.
 
 Tehnički, baza podataka nije potrebna, ali naslućujemo da će svaka aplikacija koristiti po jednu. CakePHP podržava najrazličitije vrste baza podataka:
@@ -16,14 +16,13 @@ Tehnički, baza podataka nije potrebna, ali naslućujemo da će svaka aplikacija
 -  Microsoft SQL Server
 -  SQLite
 
-Upozorenje
-=======
+.. note::
     Svi drajveri se zasnivaju na PDO ekstenzijama. Trebalo bi da već imate PDO ekstenzije instalirane.
 
-License
+Licenca
 =======
 
-CakePHP is licensed under the MIT license. This means that you are free to
+CakePHP koristi MIT licencu. Ovo znači da slobodno možete menjati, distribuirati i ponovo This means that you are free to
 modify, distribute and republish the source code on the condition that the
 copyright notices are left intact. You are also free to incorporate CakePHP
 into any commercial or closed source application.
