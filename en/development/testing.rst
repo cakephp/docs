@@ -10,10 +10,10 @@ Unit Testing, and how you can use the extensions that CakePHP offers.
 Installing PHPUnit
 ==================
 
-CakePHP uses PHPUnit as its underlying test framework.  PHPUnit is the de-facto
+CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP.  It offers a deep and powerful set of features
-for making sure your code does what you think it does.  PHPUnit can be installed
-through the `PEAR installer <http://pear.php.net>`_ or `Composer
+for making sure your code does what you think it does. PHPUnit can be installed
+through using either the `PEAR installer <http://pear.php.net>`_ or `Composer
 <http://getcomposer.org>`_.
 
 Install PHPUnit with PEAR
@@ -50,7 +50,6 @@ directory::
 
     $ php composer.phar install
 
-
 Test Database Setup
 ===================
 
@@ -82,10 +81,15 @@ Checking the Test Setup
 After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running one of
 the core tests. There are two built-in runners for testing, we'll start off by
-using the cli runner. We'll start off by running one of the core tests to ensure
-everything is setup correctly::
+using the cli runner. By using the test shell, we can ensure everything is
+working::
 
-    $ Console/cake test core Core/Configure
+    $ Console/cake test app
+
+The above should print out a list of runnable test cases in your application. If
+for example you had a test case for ArticlesTable class you could run it with::
+
+    $ Console/cake test app Model/Table/ArticlesTable
 
 You should see a green bar with some additional information about the tests run,
 and number passed.
@@ -263,9 +267,6 @@ your app directory you can do the following to run tests::
     # Run a component test in a plugin
     ./Console/cake test DebugKit Controller/Component/ToolbarComponent
 
-    # Run the configure class test in CakePHP
-    ./Console/cake test core Core/Configure
-
 .. note::
 
     If you are running tests that interact with the session it's generally a good
@@ -277,10 +278,7 @@ you a full list of all the tests that you currently have. You can then freely
 choose what test(s) to run::
 
     # Run test in project root directory for application folder called app
-    lib/Cake/Console/cake test app
-
-    # Run test in project root directory for an application in ./myapp
-    lib/Cake/Console/cake test --app myapp app
+    ./Console/cake test app
 
 Filtering Test Cases
 ~~~~~~~~~~~~~~~~~~~~
@@ -302,7 +300,7 @@ built-in code coverage tools. PHPUnit will generate a set of static HTML files
 containing the coverage results. You can generate coverage for a test case by
 doing the following::
 
-    ./Console/cake test app Model/Article --coverage-html webroot/coverage
+    ./Console/cake test app Model/Table/ArticlesTable --coverage-html webroot/coverage
 
 This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
@@ -372,7 +370,7 @@ in your ``App/Test/Fixture`` directory, with the following content::
 
     class ArticleFixture extends TestFixture {
 
-          /* Optional. Set this property to load fixtures to a different test datasource */
+          // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
 
           public $fields = [
@@ -387,9 +385,30 @@ in your ``App/Test/Fixture`` directory, with the following content::
               ]
           ];
           public $records = [
-              ['id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'],
-              ['id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'],
-              ['id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31']
+              [
+                  'id' => 1,
+                  'title' => 'First Article',
+                  'body' => 'First Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:39:23',
+                  'updated' => '2007-03-18 10:41:31'
+              ],
+              [
+                  'id' => 2,
+                  'title' => 'Second Article',
+                  'body' => 'Second Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:41:23',
+                  'updated' => '2007-03-18 10:43:31'
+              ],
+              [
+                  'id' => 3,
+                  'title' => 'Third Article',
+                  'body' => 'Third Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:43:23',
+                  'updated' => '2007-03-18 10:45:31'
+              ]
           ];
      }
 
@@ -565,6 +584,8 @@ You can control when your fixtures are loaded by setting
 Testing Models
 ==============
 
+.. TODO:: rewrite this section.
+
 Let's say we already have our Article model defined on
 ``app/Model/Article.php``, which looks like this::
 
@@ -689,12 +710,15 @@ model. The controller code looks like::
 
         public function index($short = null) {
             if (!empty($this->request->data)) {
-                $this->Article->save($this->request->data);
+                $article = $this->Articles->newEntity($this->request->data);
+                $this->Articles->save($article);
             }
             if (!empty($short)) {
-                $result = $this->Article->findAll(null, array('id', 'title'));
+                $result = $this->Article->find('all', [
+                    'fields' => 'id', 'title']
+                ]);
             } else {
-                $result = $this->Article->findAll();
+                $result = $this->Article->find();
             }
 
             if (isset($this->params['requested'])) {
@@ -740,13 +764,11 @@ Create a file named ``ArticlesControllerTest.php`` in your
 
         public function testIndexPostData() {
             $data = array(
-                'Article' => array(
-                    'user_id' => 1,
-                    'published' => 1,
-                    'slug' => 'new-article',
-                    'title' => 'New Article',
-                    'body' => 'New Body'
-                )
+                'user_id' => 1,
+                'published' => 1,
+                'slug' => 'new-article',
+                'title' => 'New Article',
+                'body' => 'New Body'
             );
             $result = $this->testAction(
                 '/articles/index',
@@ -764,36 +786,20 @@ action.
 When testing actions that contain ``redirect()`` and other code following the
 redirect it is generally a good idea to return when redirecting. The reason for
 this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal. And instead of your code exiting, it will continue to run code following
-the redirect. For example::
+normal. You should always return after calling ``redirect`` to prevent unwanted
+code from executing::
 
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
-                if ($this->Article->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
-                }
-            }
-            // more code
-        }
-    }
-
-When testing the above code, you will still run ``// more code`` even when the
-redirect is reached. Instead, you should write the code like::
-
-    class ArticlesController extends AppController {
-        public function add() {
-            if ($this->request->is('post')) {
-                if ($this->Article->save($this->request->data)) {
+                $article = $this->Articles->newEntity($this->request->data);
+                if ($this->Articles->save($article)) {
                     return $this->redirect(array('action' => 'index'));
                 }
             }
             // more code
         }
     }
-
-In this case ``// more code`` will not be executed as the method will return
-once the redirect is reached.
 
 Simulating GET Requests
 -----------------------
@@ -806,10 +812,8 @@ method key::
 
     public function testAdding() {
         $data = array(
-            'Post' => array(
-                'title' => 'New post',
-                'body' => 'Secret sauce'
-            )
+            'title' => 'New post',
+            'body' => 'Secret sauce'
         );
         $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
         // some assertions.
@@ -837,7 +841,7 @@ case::
 
     public function testIndex() {
         $this->testAction('/posts/index');
-        $this->assertInternalType('array', $this->vars['posts']);
+        $this->assertInstanceOf('Cake\ORM\Query', $this->vars['posts']);
     }
 
 
@@ -851,12 +855,12 @@ out of generating mocks on your controller. If you decide to generate a
 controller to be used in testing, you can generate mocked versions of its models
 and components along with it::
 
-    $Posts = $this->generate('Posts', array(
+    $Posts = $this->generate('Articles', array(
         'methods' => array(
             'isAuthorized'
         ),
         'models' => array(
-            'Post' => array('save')
+            'Articles' => array('save')
         ),
         'components' => array(
             'RequestHandler' => array('isPut'),
@@ -865,7 +869,7 @@ and components along with it::
         )
     ));
 
-The above would create a mocked ``PostsController``, stubbing out the ``isAuthorized``
+The above would create a mocked ``ArticlesController``, stubbing out the ``isAuthorized``
 method. The attached Post model will have ``save()`` stubbed, and the attached
 components would have their respective methods stubbed. You can choose to stub
 an entire class by not passing methods to it, like Session in the example above.
@@ -881,7 +885,7 @@ can access the controller object at ``$this->controller``.
 A More Complex Example
 ----------------------
 
-In its simplest form, ``testAction()`` will run ``PostsController::index()`` on
+In its simplest form, ``testAction()`` will run ``ArticlesController::index()`` on
 your testing controller (or an automatically generated one), including all of the
 mocked models and components. The results of the test are stored in the ``vars``,
 ``contents``, ``view``, and ``return`` properties. Also available is a headers
@@ -889,30 +893,30 @@ property which gives you access to the ``headers`` that would have been sent,
 allowing you to check for redirects::
 
     public function testAdd() {
-        $Posts = $this->generate('Posts', array(
+        $Articles = $this->generate('Articles', array(
             'components' => array(
                 'Session',
                 'Email' => array('send')
             )
         ));
-        $Posts->Session
+        $Articles->Session
             ->expects($this->once())
             ->method('setFlash');
-        $Posts->Email
+        $Articles->Email
             ->expects($this->once())
             ->method('send')
             ->will($this->returnValue(true));
 
-        $this->testAction('/posts/add', array(
+        $this->testAction('/articles', array(
             'data' => array(
-                'Post' => array('title' => 'New Post')
+                'title' => 'New Article'
             )
         ));
-        $this->assertContains('/posts', $this->headers['Location']);
+        $this->assertContains('/articles', $this->headers['Location']);
     }
 
     public function testAddGet() {
-        $this->testAction('/posts/add', array(
+        $this->testAction('/articles', array(
             'method' => 'GET',
             'return' => 'contents'
         ));
@@ -924,7 +928,7 @@ allowing you to check for redirects::
 This example shows a slightly more complex use of the ``testAction()`` and
 ``generate()`` methods. First, we generate a testing controller and mock the
 :php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have
-the ability to run testing methods on it. Assuming ``PostsController::add()``
+the ability to run testing methods on it. Assuming ``ArticlesController::add()``
 redirects us to index, sends an email and sets a flash message, the test will
 pass. A second test was added to do basic sanity testing when fetching the add
 form. We check to see if the layout was loaded by checking the entire rendered
@@ -938,13 +942,13 @@ wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
 following::
 
     public function testAdd() {
-        $Posts = $this->generate('Posts', array(
+        $Articles = $this->generate('Articles', array(
             'components' => array(
                 'Session',
                 'Auth' => array('user')
             )
         ));
-        $Posts->Auth->staticExpects($this->any())
+        $Articles->Auth->staticExpects($this->any())
             ->method('user')
             ->with('id')
             ->will($this->returnValue(2));
