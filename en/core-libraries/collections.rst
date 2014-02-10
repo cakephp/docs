@@ -405,6 +405,69 @@ collection containing the values from both sources::
     others in the previous one based on their key, make sure that you call
     ``toArray(false)`` in order to drop the keys and preserve all values.
 
+Modifiying Elements
+-------------------
+
+At times, you may have two separate sets of data that you would like to insert
+the elements of one set into each of the elements of the other set. This is
+a very common case when you fetch data from a data source that does not support
+data merging or joins natively.
+
+Collections offer an ``insert`` method that will allow you to insert each of the
+elements in one collection into a property inside each of elements of another
+collection::
+
+    $users = [
+        ['username' => 'mark'],
+        ['username' => 'juan'],
+        ['username' => 'jose']
+    ];
+
+    $languages = [
+        ['PHP', 'Python', 'Ruby'],
+        ['Bash', 'PHP', 'Javascript'],
+        [Javascript', 'Prolog'],
+    ];
+
+    $merged = (new Collection($users))->insert('skills', $languages);
+
+When converted to an array, the ``$merged`` collection will look like this::
+
+    [
+        ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
+        ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
+        ['username' => 'jose', 'skills' => [Javascript', 'Prolog']]
+    ];
+
+The first parameter for the ``insert`` method is a dot separated path of
+properties to follow so that the elements can be inserted at that position. The
+second argument is anything that can be converted to a collection object.
+
+Please observe that elements are inserted by the position they are found, thus,
+the first element of the second collection is merged into the first
+element of the first collection.
+
+If there are not enough elements in the second collection to insert into the
+first one, then the target property will be filled with ``null`` values::
+
+    $languages = [
+        ['PHP', 'Python', 'Ruby'],
+        ['Bash', 'PHP', 'Javascript'],
+    ];
+
+    $merged = (new Collection($users))->insert('skills', $languages);
+
+    // Will yield
+
+    [
+        ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
+        ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
+        ['username' => 'jose', 'skills' => null]
+    ];
+
+The ``insert`` method can operate array elements or objects implementing the
+``ArrayAccess`` interface.
+
 Optimizing Collections
 ----------------------
 
@@ -466,4 +529,4 @@ extracting operation once.
     :keywords collections, cakephp, append, sort, compile, contains, countBy,
     each, every, extract, filter, first, firstMatch, groupBy, indexBy,
     jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some,
-    random, sortBy, take, toArray
+    random, sortBy, take, toArray, insert
