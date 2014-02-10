@@ -408,12 +408,12 @@ collection containing the values from both sources::
 Modifiying Elements
 -------------------
 
-At times, you may have to separate sets of data that you would like to insert
+At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
 a very common case when you fetch data from a data source that does not support
 data merging or joins natively.
 
-Collections offer an `insert` method that will allow you to insert each of the
+Collections offer an ``insert`` method that will allow you to insert each of the
 elements in one collection into a property inside each of elements of another
 collection::
 
@@ -431,7 +431,7 @@ collection::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-When converted to an array, the `$merged` collection will look like this::
+When converted to an array, the ``$merged`` collection will look like this::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
@@ -439,7 +439,7 @@ When converted to an array, the `$merged` collection will look like this::
         ['username' => 'jose', 'skills' => [Javascript', 'Prolog']]
     ];
 
-The first parameter for the `insert` method is a dot separated path of
+The first parameter for the ``insert`` method is a dot separated path of
 properties to follow so that the elements can be inserted at that position. The
 second argument is anything that can be converted to a collection object.
 
@@ -448,7 +448,7 @@ the first element of the second collection is merged into the first
 element of the first collection.
 
 If there are not enough elements in the second collection to insert into the
-first one, then the target property will be filled with `null` values::
+first one, then the target property will be filled with ``null`` values::
 
     $languages = [
         ['PHP', 'Python', 'Ruby'],
