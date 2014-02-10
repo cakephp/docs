@@ -465,6 +465,9 @@ first one, then the target property will be filled with ``null`` values::
         ['username' => 'jose', 'skills' => null]
     ];
 
+The ``insert`` method can operate array elements or objects implementing the
+``ArrayAccess`` interface.
+
 Optimizing Collections
 ----------------------
 
@@ -526,4 +529,4 @@ extracting operation once.
     :keywords collections, cakephp, append, sort, compile, contains, countBy,
     each, every, extract, filter, first, firstMatch, groupBy, indexBy,
     jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some,
-    random, sortBy, take, toArray
+    random, sortBy, take, toArray, insert
