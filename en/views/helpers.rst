@@ -38,7 +38,7 @@ CakePHP::
         public $helpers = array('Blog.Comment');
     }
 
-You can also add helpers from within an action, so they will only
+You can also add helpers within an action, so they will only
 be available to that action and not the other actions in the
 controller. This saves processing power for the other actions that
 do not use the helper as well as help keep the controller better
