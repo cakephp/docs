@@ -81,7 +81,7 @@ Checking the Test Setup
 After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running one of
 the core tests. There are two built-in runners for testing, we'll start off by
-using the cli runner. By using the test shell, we can ensure everything is
+using the CLI runner. By using the test shell, we can ensure everything is
 working::
 
     $ Console/cake test app
