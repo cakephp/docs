@@ -342,10 +342,10 @@ Modify the ``actsAs`` for the model ``User`` and disable the requester directive
 This method along with configuration change will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
 
-Every user has to have assigned ``group_id`` for this to work. Besides, you have 
-to change in ``User`` model::
+Every user has to have assigned ``group_id`` for this to work. In addition, you have 
+to change the following in ``User`` model::
 
-    var $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 
 this avoids the afterSave to be called.
 
