@@ -24,6 +24,7 @@ made of any number of tokens. Tokens are composed of two groups. Expressions,
 are used to traverse the array data, while matchers are used to qualify
 elements. You apply matchers to expression elements.
 
+#### Expression Types
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
 +================================+============================================+
@@ -42,6 +43,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()`` and ``nest()``.
 
+#### Attribute Matching Types
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
 +================================+============================================+
