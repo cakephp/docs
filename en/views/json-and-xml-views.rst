@@ -94,7 +94,7 @@ JSON response. This is a situation where a view file would be useful::
     }
     echo json_encode(compact('posts', 'comments'));
 
-You can do more more complex manipulations, or use helpers to do formatting as
+You can do more complex manipulations, or use helpers to do formatting as
 well.
 
 .. note::
