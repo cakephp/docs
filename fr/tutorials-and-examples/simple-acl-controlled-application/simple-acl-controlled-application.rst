@@ -334,7 +334,11 @@ vérifier les Aros des ``User`` Aro's et de vérifier seulement les Aros de
 ``Group``.
 
 Chaque user devra être assigné à un ``group_id`` pour que ceci fontionne
-correctement.
+correctement. De plus, vous devrez changer ce qui suit dans le model ``User``::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+ceci évite que le callback afterSave soit appelé.
 
 Dans ce cas, notre table `aros`` va ressembler à ceci ::
 
