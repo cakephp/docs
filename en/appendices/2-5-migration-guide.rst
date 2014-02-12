@@ -81,6 +81,10 @@ CakeRequest
 - :php:meth:`CakeRequest::addDetector()` now supports ``options`` which
   accepts an array of valid options when creating param based detectors.
 
+- ``CakeRequest::onlyAllow()`` has been deprecated and new method
+  :php:meth:`CakeRequest::allowMethod()` has been added with identical functionality.
+  The new method name is more intuitive and better conveys what the method does.
+
 Routing
 =======
 
