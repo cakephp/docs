@@ -27,6 +27,9 @@ groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
 appliquez les matchers aux élements de l'expression.
 
+Types d'expression
+------------------
+
 +--------------------------------+--------------------------------------------+
 | Expression                     | Définition                                 |
 +================================+============================================+
@@ -46,6 +49,9 @@ Tous les éléments d'expression supportent toutes les méthodes. En plus des
 certaines méthodes. Il y a ``extract()``,
 ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()`` et ``nest()``.
+
+Les Types d'Attribut Correspondants
+-----------------------------------
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
