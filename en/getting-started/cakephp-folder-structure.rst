@@ -68,10 +68,6 @@ Test
 View
     Presentational files are placed here: elements, error pages,
     helpers, layouts, and view files.
-webroot
-    In a production setup, this folder should serve as the document
-    root for your application. Folders here also serve as holding
-    places for CSS stylesheets, images, and JavaScript files.
 
 
 .. meta::
