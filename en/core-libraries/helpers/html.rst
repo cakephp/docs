@@ -115,6 +115,8 @@ methods of the HtmlHelper and how to use them.
     If you want to include a CSS file which shares a name with a loaded
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
+    
+    .. versionchanged:: 2.4
 
         echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
