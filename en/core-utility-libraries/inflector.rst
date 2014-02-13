@@ -15,8 +15,8 @@ normally accessed statically. Example:
 
 .. php:staticmethod:: singularize($plural)
 
-    **Input:** Apples, Oranges, People, Men
-    **Output:** Apple, Orange, Person, Man
+    * **Input:** Apples, Oranges, People, Men
+    * **Output:** Apple, Orange, Person, Man
 
 .. php:staticmethod:: camelize($underscored)
 
