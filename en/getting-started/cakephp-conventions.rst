@@ -17,7 +17,7 @@ especially handy when working with legacy systems.
 Controller Conventions
 ======================
 
-Controller class names are plural, CamelCased, and end in
+Controller class names are plural, PascalCased, and end in
 ``Controller``. ``PeopleController`` and
 ``LatestArticlesController`` are both examples of conventional
 controller names.
@@ -111,7 +111,7 @@ Each file would be located in the appropriate folder in your app folder.
 Model and Database Conventions
 ==============================
 
-Model class names are singular and CamelCased. Person, BigPerson,
+Model class names are singular and PascalCased. Person, BigPerson,
 and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
