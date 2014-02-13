@@ -1593,7 +1593,7 @@ Creating date and time inputs
     passing false. (Note: the default months are internationalized and
     can be translated using localization.)::
 
-        echo $this->Form->month('mob', null, array('monthNames' => false));
+        echo $this->Form->month('mob', array('monthNames' => false));
 
 .. php:method:: day(string $fieldName, array $attributes)
 
