@@ -34,7 +34,7 @@ Expression Types
 |                                | any string or numeric key.                 |
 +--------------------------------+--------------------------------------------+
 | ``{s}``                        | Represents a string. Will match any        |
-|                                | any string value including numeric string  |
+|                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
