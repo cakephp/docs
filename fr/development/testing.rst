@@ -105,7 +105,7 @@ Cliquez sur les cas de test de App, et cliquez ensuite sur le lien de votre
 fichier spécifique. Vous pouvez lancer les tests à partir des lignes de
 commande en utilisant le shell de test::
 
-    ./Console/cake testsuite app Model/Post
+    ./Console/cake test app Model/Post
 
 Par exemple, lancerait les tests pour votre model Post.
 
@@ -240,7 +240,7 @@ Lancer les tests à partir d'une ligne de commande
 
 CakePHP fournit un shell ``test`` pour lancer les tests. Vous pouvez
 lancer les tests de app, core et plugin facilement en utilisant le shell
-testsuite. Il accepte aussi tous les arguments que vous vous attendez à trouver
+test. Il accepte aussi tous les arguments que vous vous attendez à trouver
 sur l'outil de ligne de commnde du PHPUnit normal. A partir de votre répertoire
 app, vous pouvez faire ce qui suit pour lancer les tests::
 
