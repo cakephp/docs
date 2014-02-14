@@ -1599,7 +1599,7 @@ Crée des inputs de date et d'heure (date and time inputs)
     sont internationalisés et peuvent être traduits en utilisant la
     localisation)::
 
-        echo $this->Form->month('mob', null, array('monthNames' => false));
+        echo $this->Form->month('mob', array('monthNames' => false));
 
 .. php:method:: day(string $fieldName, array $attributes)
 
