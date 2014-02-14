@@ -30,8 +30,7 @@ dans ``app/webroot/js``.
 
 Puis, vous devez inclure la librairie dans votre page. Pour l'inclure
 dans toutes les pages, ajoutez cette ligne dans la section <head>
-de ``app/View/Layouts/default.ctp`` (copiez ce fichier depuis
-``lib/Cake/View/Layouts/default.ctp`` si vous n'avez pas créé le votre)::
+de ``app/View/Layouts/default.ctp``::
 
     echo $this->Html->script('jquery'); // Inclut la librairie Jquery
 
