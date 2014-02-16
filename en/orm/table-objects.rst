@@ -1674,7 +1674,7 @@ beforeFind
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
 entirely. Any changes done to the $query instance will be retained for the rest
-of the find. The ``$primary`` parameter indicates whether or not this root
+of the find. The ``$primary`` parameter indicates whether or not this is the root
 query, or an associated query. All associations participating in a query will
 have a ``Model.beforeFind`` event triggered. For associations that use joins,
 a dummy query will be provided. In your event listener you can set additional
