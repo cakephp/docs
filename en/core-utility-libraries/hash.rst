@@ -623,6 +623,10 @@ Attribute Matching Types
     results with $function. You can use both expression and matching elements
     with this method.
 
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Apply a callback to a set of extracted values using $function. The function will get the extracted values as the first argument.
+
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
     :rtype: array
