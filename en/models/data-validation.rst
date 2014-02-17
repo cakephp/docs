@@ -979,17 +979,25 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: mimeType(mixed $check, array $mimeTypes)
+.. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
     .. versionadded:: 2.2
 
     This rule checks for valid mime types. Comparison is case sensitive.
+
+    .. versionchanged:: 2.5
+
+    Since 2.5 ``$mimeTypes`` can be a regex string.
 
     ::
 
         public $validate = array(
             'image' => array(
                 'rule'    => array('mimeType', array('image/gif')),
+                'message' => 'Invalid mime type.'
+            ),
+            'logo' => array(
+                'rule'    => array('mimeType', '#image/.+#'),
                 'message' => 'Invalid mime type.'
             ),
         );
