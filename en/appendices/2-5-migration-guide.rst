@@ -106,6 +106,9 @@ Validation
   You can now set this param to true for case insensitive comparison. The default is false and
   will compare the value and list case sensitive as before.
 
+- ``$mimeTypes`` parameter of :php:meth:`Validation::mimeType()` can also be a
+  regex string. Also now when ``$mimeTypes`` is an array it's values are lowercased.
+
 Hash
 ----
 
