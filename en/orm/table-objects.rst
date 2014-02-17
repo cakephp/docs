@@ -1669,12 +1669,17 @@ more detail on how to use the events subsystem.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, array $options)
+.. php:method:: beforeFind(Event $event, Query $query, array $options, boolean $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
 entirely. Any changes done to the $query instance will be retained for the rest
-of the find.
+of the find. The ``$primary`` parameter indicates whether or not this is the root
+query, or an associated query. All associations participating in a query will
+have a ``Model.beforeFind`` event triggered. For associations that use joins,
+a dummy query will be provided. In your event listener you can set additional
+fields, conditions, joins or result formatters. These options/features will be
+copied onto the root query.
 
 You might use this callback to restrict find operations based on a user's role,
 or make caching decisions based on the current load.
