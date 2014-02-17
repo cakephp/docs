@@ -20,7 +20,7 @@ d'une ``View``, utilisez la classe ``CakeTime``::
     }
 
 .. versionadded:: 2.1
-   ``CakeTime`` a été ajouté à partir de :php:class:`TimeHelper`.
+   ``CakeTime`` a été créé à partir de :php:class:`TimeHelper`.
 
 .. start-caketime
 
@@ -109,16 +109,16 @@ Formatage
     `options de formatage de la fonction PHP strftime() <http://www.php.net/manual/en/function.strftime.php>`_::
 
         // appel via TimeHelper
-        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
+        echo $this->Time->format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');
         // August 22nd, 2011 11:53 AM
 
         echo $this->Time->format('%r', '+2 days');
-        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
+        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 AM EET
 
         // appel avec CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::format('2011-08-22 11:53:00', '%F %jS, %Y %h:%i %A');
-        echo CakeTime::format('+2 days', '%r');
+        echo CakeTime::format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');
+        echo CakeTime::format('+2 days', '%c');
 
     Vous pouvez aussi fournir la date/time en premier argument. En faisant cela
     vous devrez utiliser le format ``strftime`` compatible. Cette signature

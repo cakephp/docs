@@ -54,7 +54,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    coup ne les voient pas pour les copier.
 
 #. Assurez-vous que votre copie de CakePHP vient de la section des
-   téléchargements du site de notre dépôt GIT, et a été dézippé correctement
+   téléchargements du site de notre dépôt Git, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
    Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
@@ -86,8 +86,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </IfModule>
 
    Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
-   essayez de modifier les paramètres pour les virtualhosts. Si vous
-   êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default
+   essayez de modifier les paramètres pour les Hôtes Virtuels. Si vous
+   êtes sur Ubuntu, modifiez le fichier /etc/apache2/sites-available/default
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
    devez avoir::
@@ -104,7 +104,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
    Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil
-   virtualhostx pour faire un hôte virtuel pour pointer vers votre dossier.
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
+   Virtuel pour pointer vers votre dossier.
 
    Pour beaucoup de services d'hébergement (GoDaddy, 1and1), votre serveur web
    est en fait déjà distribué à partir d'un répertoire utilisateur qui

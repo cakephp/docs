@@ -824,7 +824,7 @@ with usage examples.
     Note that unlike date(), datetime() will validate a date and a time.
 
 
-.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
+.. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
 
     This rule ensures that the data is a valid decimal number. A
     parameter can be passed to specify the number of digits required

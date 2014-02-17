@@ -123,7 +123,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::
 
-        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
+    .. versionchanged:: 2.4
+
+        echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
     .. versionchanged:: 2.1
         L'option ``block`` a été ajoutée.

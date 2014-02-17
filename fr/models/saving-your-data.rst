@@ -786,7 +786,7 @@ celui qui suit::
             (
                 [Recipe] => Array
                     (
-                        [id] => 42
+                        [id] => 43
                     )
                 [Tag] => Array
                     (
@@ -876,7 +876,7 @@ légèrement différemment. Le nom du Tag est défini en utilisant la convention
     $this->Form->input('Tag');
 
 En utilisant le code précédent, un liste déroulante est créée, permettant aux
-multiples choix d'être automatiquement sauvegarder au Recipe existant en étant
+multiples choix d'être automatiquement sauvegardés au Recipe existant en étant
 ajouté à la base de données.
 
 Self HABTM

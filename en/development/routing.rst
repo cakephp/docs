@@ -180,15 +180,9 @@ When generating URLs, routes are used too. Using
 a url will output /cooks/some_action/5 if the above route is the
 first match found.
 
-If you are planning to use custom named arguments with your route,
-you have to make the router aware of it using the
-:php:meth:`Router::connectNamed()` function. So if you want the above route
-to match URLs like ``/cooks/some_action/type:chef`` we do::
-
-    Router::connectNamed(array('type'));
-    Router::connect(
-        '/cooks/:action/*', array('controller' => 'users')
-    );
+By default all named passed and arguments are extracted from URLs matching
+greedy templates. However, you can configure how and which named arguments are
+parsed using :php:meth:`Router::connectNamed()` if you need to.
 
 .. _route-elements:
 

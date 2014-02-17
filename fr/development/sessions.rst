@@ -161,7 +161,6 @@ En configurant le moteur avec quelque chose comme
 ``PluginSessionHandler`` à partir de l'intérieur du MyPlugin de votre
 application.
 
-
 CakeSessionHandlerInterface
 ---------------------------
 
@@ -194,6 +193,30 @@ choisir la base de données par défaut::
 Ce qui est au-dessus va dire à CakeSession d'utiliser le 'database' intégré
 par défaut, et spécifier qu'un model appelé ``CustomSession`` sera celui
 délégué pour la sauvegarde d'information de session dans la base de données.
+
+Si vous n'avez pas besoin d'un gestionnaire de session complètement
+personnalisable, mais que vous avez tout de même besoin de stockage de session
+en base de donnée-backed, vous pouvez simplifier le code du dessus par
+celui-ci::
+
+    Configure::write('Session', array(
+        'defaults' => 'database'
+    ));
+
+Cette configuration nécessitera qu'une table de base de données soit ajoutée
+avec au moins ces champs::
+
+    CREATE TABLE `cake_sessions` (
+      `id` varchar(255) NOT NULL DEFAULT '',
+      `data` text,
+      `expires` int(11) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    );
+
+Vous pouvez aussi utiliser le schema shell pour créer cette table en utilisant
+le fichier de schema fourni dans le squelette app par défaut::
+
+    $ Console/cake schema create sessions
 
 Les Sessions de Cache
 ---------------------
