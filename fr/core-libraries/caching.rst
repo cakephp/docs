@@ -214,7 +214,7 @@ Une méthode qui utilise Le Cache pour stocker les résultats pourrait ressemble
     
         public function newest() {
             $result = Cache::read('newest_posts', 'longterm');
-            if (!$result) {
+            if ($result === false) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
                 Cache::write('newest_posts', $result, 'longterm');
             }
