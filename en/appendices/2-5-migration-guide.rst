@@ -158,6 +158,9 @@ FormHelper
 ----------
 
 - FormHelper will now generate file inputs for ``binary`` field types now.
+- :php:meth:`FormHelper::end()` had a second parameter added. This parameter
+  lets you pass additional properties to the fields used for securing forms in
+  conjunction with SecurityComponent.
 
 PaginationHelper
 ----------------

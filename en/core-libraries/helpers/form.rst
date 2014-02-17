@@ -224,7 +224,7 @@ There are a number of options for create():
 Closing the Form
 ================
 
-.. php:method:: end($options = null)
+.. php:method:: end($options = null, $secureAttributes = array())
 
     The FormHelper includes an ``end()`` method that completes the
     form. Often, ``end()`` only outputs a closing form tag, but
@@ -277,6 +277,9 @@ Closing the Form
 
         If you are using :php:class:`SecurityComponent` in your application you
         should always end your forms with ``end()``.
+
+    .. versionchanged:: 2.5
+        The ``$secureAttributes`` parameter was added in 2.5.
 
 .. _automagic-form-elements:
 
