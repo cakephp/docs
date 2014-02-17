@@ -600,7 +600,30 @@ be traversed and modified as necessary.
 
 Result formatters are required to return an iterator object, which will be used
 as the return value for the query. Formatter functions are applied after all the
-Map/Reduce routines have been executed.
+Map/Reduce routines have been executed. Result formatters can be applied from
+within contained associations as well. CakePHP will ensure that your formatters
+are properly scoped. For example, doing the following would work as you may
+expect::
+
+    // In a method in the Articles table
+    $query->contain(['Authors' => function($q) {
+        return $q->formatResults(function($authors) {
+            return $authors->map(function($author) {
+                $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+                return $author;
+            });
+        });
+    });
+
+    // Get results
+    $results = $query->all();
+
+    // Outputs 29
+    echo $results['0']->author->age;
+
+As seen above the formatters attached to associated query builders are scoped to
+operate only on the data in the association. CakePHP will ensure that computed
+values are inserted into the correct entity.
 
 .. _map-reduce:
 
