@@ -152,7 +152,7 @@ Otherwise a new record is created::
 
 
 If you want to update a value, rather than create a new one, make sure
-your are passing the primary key field into the data array::
+you are passing the primary key field into the data array::
 
     $data = array('id' => 10, 'title' => 'My new title');
     // This will update Recipe with id 10
