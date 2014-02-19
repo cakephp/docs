@@ -1038,7 +1038,7 @@ Qui produira la requête SQL suivante::
     WHERE
        ((`Entreprise`.`nom` = 'Futurs Gains')
        OR
-       (`Entreprise`.`nom` = 'Le truc qui marche bien'))
+       (`Entreprise`.`ville` = 'CA'))
     AND
        ((`Entreprise`.`status` = 'active')
        OR (NOT (`Entreprise`.`status` IN ('inactive', 'suspendue'))))
