@@ -832,7 +832,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     
     Notez que au contraire de date(), datetime() validera une date et un time.
 
-.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
+.. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
 
     Cette règle s'assure que la donnée est un nombre décimal valide. Un
     paramètre peut être passé pour spécifier le nombre de décimales requises
