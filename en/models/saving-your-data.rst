@@ -40,7 +40,7 @@ model to save data to a database table::
     }
 
 When save is called, the data passed to it in the first parameter is validated
-using CakePHP validation mechanism (see :doc:`/models/data-validation` chapter for more
+using CakePHP's validation mechanism (see :doc:`/models/data-validation` chapter for more
 information). If for some reason your data isn't saving, be sure to check to see
 if some validation rules are being broken. You can debug this situation by
 outputting :php:attr:`Model::$validationErrors`::
@@ -110,7 +110,7 @@ The save method also has an alternate syntax::
 ``$params`` array can have any of the following available options
 as keys:
 
-* ``validate`` Set to true/false to enable disable validation.
+* ``validate`` Set to true/false to enable/disable validation.
 * ``fieldList`` An array of fields you want to allow for saving.
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
