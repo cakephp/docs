@@ -640,6 +640,12 @@ Les Types d'Attribut Correspondants
     extraits avec $function. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
 
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    $function. La fonction va récupérer les valeurs extraites en premier
+    argument.
+
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
     :rtype: array
