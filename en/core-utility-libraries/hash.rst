@@ -99,7 +99,7 @@ Attribute Matching Types
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path. This method **only** supports
+    Inserts $values into an array as defined by $path. This method **only** supports
     the expression types of :ref:`hash-path-syntax`::
 
         $a = array(
