@@ -260,7 +260,7 @@ function ``indexBy``::
     //When converted to array result could look like
     [
         1 => 'markstory',
-        3 => 'jose_zap'
+        3 => 'jose_zap',
         4 => 'jrbasso'
     ]
 
@@ -426,7 +426,7 @@ collection::
     $languages = [
         ['PHP', 'Python', 'Ruby'],
         ['Bash', 'PHP', 'Javascript'],
-        [Javascript', 'Prolog'],
+        ['Javascript', 'Prolog'],
     ];
 
     $merged = (new Collection($users))->insert('skills', $languages);
@@ -436,7 +436,7 @@ When converted to an array, the ``$merged`` collection will look like this::
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
-        ['username' => 'jose', 'skills' => [Javascript', 'Prolog']]
+        ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
     ];
 
 The first parameter for the ``insert`` method is a dot separated path of
