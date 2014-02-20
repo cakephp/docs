@@ -110,7 +110,7 @@ Les Types d'Attribut Correspondants
 
     :rtype: array
 
-    Insère $data dans un tableau comme défini par $path. Cette méthode
+    Insère $values dans un tableau tel que défini dans $path. Cette méthode
     supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
