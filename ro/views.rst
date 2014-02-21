@@ -40,16 +40,16 @@ parts. Each part has different uses, and will be covered in this
 chapter:
 
 - **views**: View-urile fac parte din pagina care este unica pentru
-   acțiunea ce se executa. ELe formeaza baza raspunsului aplicatiei dvs.
-- **elements**: sunt parti mai mici, reutilizabile ale codului unei view. 
-   Elementele sunt de obicei redate in interiorul unor view-uri.
+  acțiunea ce se executa. ELe formeaza baza raspunsului aplicatiei dvs.
+- **elements**: sunt parti mai mici, reutilizabile ale codului unei view.
+  Elementele sunt de obicei redate in interiorul unor view-uri.
 - **layouts**: sunt fisiere view ce contin cod de prezentare ce impacheteaza 
-   mai multe interfete din aplicatia dvs. Majoritatea view-urilor sunt redate
+  mai multe interfete din aplicatia dvs. Majoritatea view-urilor sunt redate
   in interiorul unui layout.
 - **helpers**: Aceste clase incapsuleaza codul (logica) unui view ce este 
-   necesar/a in multe locuri dintr-un view. Printre altele helper-ii in
-   CakePHP pot ajuta sa construiesti formulare, sa construiesti functionalitate 
-   AJAX, sa paginezi datele dintr-un model, sau sa servesti RSS feeds.
+  necesar/a in multe locuri dintr-un view. Printre altele helper-ii in
+  CakePHP pot ajuta sa construiesti formulare, sa construiesti functionalitate 
+  AJAX, sa paginezi datele dintr-un model, sau sa servesti RSS feeds.
 
 
 .. _extending-views:
