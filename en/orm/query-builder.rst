@@ -575,8 +575,8 @@ the ``select`` and ``join`` methods.
 
 .. _format-results:
 
-Adding calculated fields
-=========================
+Adding Calculated Fields
+========================
 
 After your queries you may need to do some post processing. If you need to add
 a few calculated fields, or derived data you can use the ``formatResults()``
