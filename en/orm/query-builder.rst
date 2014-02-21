@@ -619,7 +619,7 @@ expect::
     $results = $query->all();
 
     // Outputs 29
-    echo $results['0']->author->age;
+    echo $results->first()->author->age;
 
 As seen above the formatters attached to associated query builders are scoped to
 operate only on the data in the association. CakePHP will ensure that computed
