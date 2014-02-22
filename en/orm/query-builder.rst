@@ -833,7 +833,7 @@ Removing All Stacked Map-reduce Operations
 ------------------------------------------
 
 Under some circumstances you may want to modify a query object so that no
-``mapReduce`` operation are executed at all. This can be easily done by
+``mapReduce`` operations are executed at all. This can be easily done by
 calling the method with both parameters as null and the third parameter
 (overwrite) as true::
 
