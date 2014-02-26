@@ -1,112 +1,103 @@
 FormHelper
 ##########
 
-.. php:class:: FormHelper(View $view, array $settings = array())
+.. php:namespace:: Cake\View\Helper
 
-The FormHelper does most of the heavy lifting in form creation.
-The FormHelper focuses on creating forms quickly, in a way that
-will streamline validation, re-population and layout. The
-FormHelper is also flexible - it will do almost everything for
-you using conventions, or you can use specific methods to get
+.. php:class:: FormHelper(View $view, array $settings = [])
+
+The FormHelper does most of the heavy lifting in form creation.  The FormHelper
+focuses on creating forms quickly, in a way that will streamline validation,
+re-population and layout. The FormHelper is also flexible - it will do almost
+everything for you using conventions, or you can use specific methods to get
 only what you need.
 
-Creating Forms
-==============
+Starting a Form
+===============
 
-The first method you'll need to use in order to take advantage of
-the FormHelper is ``create()``. This special method outputs an
-opening form tag.
+.. php:method:: create(mixed $model = null, array $options = [])
 
-.. php:method:: create(string $model = null, array $options = array())
+The first method you'll need to use in order to take advantage of the FormHelper
+is ``create()``. This method outputs an opening form tag.
 
-    All parameters are optional. If ``create()`` is called with no
-    parameters supplied, it assumes you are building a form that
-    submits to the current controller, via the current URL.
-    The default method for form submission is POST.
-    The form element is also returned with a DOM ID. The ID is
-    generated using the name of the model, and the name of the
-    controller action, CamelCased. If I were to call ``create()``
-    inside a UsersController view, I'd see something like the following
-    output in the rendered view:
+All parameters are optional. If ``create()`` is called with no parameters
+supplied, it assumes you are building a form that submits to the current
+controller, via the current URL. The default method for form submission is POST.
+If you were to call ``create()`` inside the view for UsersController::add(), you would see
+something like the following output in the rendered view:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <form id="UserAddForm" method="post" action="/users/add">
+    <form method="post" action="/users/add">
 
-    .. note::
+The ``$model`` argument is used as the form's 'context'. There are several
+built-in form contexts and you can add your own, which we'll cover in the next
+section. The built-in providers map to the following values of ``$model``:
 
-        You can also pass ``false`` for ``$model``. This will place your
-        form data into the array: ``$this->request->data`` (instead of in the
-        sub-array: ``$this->request->data['Model']``). This can be handy for short
-        forms that may not represent anything in your database.
+* An ``Entity`` instance or, an iterator map to the ``EntityContext``, this
+  context allows FormHelper to work with results from the built-in ORM.
+* An array containing the ``schema`` key, maps to ``ArrayContext`` which allows
+  you to create simple data structures to build forms against.
+* ``null`` and ``false`` map to the ``NullContext`` this context class simply
+  satisifies the interface FormHelper requires. This context is useful if you
+  want to build a short form that doesn't require ORM persistence.
 
-    The ``create()`` method allows us to customize much more using the
-    parameters, however. First, you can specify a model name. By
-    specifying a model for a form, you are creating that form's
-    *context*. All fields are assumed to belong to this model (unless
-    otherwise specified), and all models referenced are assumed to be
-    associated with it. If you do not specify a model, then it assumes
-    you are using the default model for the current controller::
+All contexts classes also have access to the request data, making it simpler to
+build forms.
 
-        // If you are on /recipes/add
-        echo $this->Form->create('Recipe');
+Once a form has been created with a context, all inputs you create will use the
+active context. In the case of an ORM backed form, FormHelper can access
+associated data, validation errors and schema metadata easily making building
+forms simple.  You can close the active context using the ``end()`` method, or
+by calling ``create()`` again. To create a form for an entity, do the
+following::
 
-    Output:
+    // If you are on /articles/add
+    // $article should be an empty Article entity.
+    echo $this->Form->create($article);
 
-    .. code-block:: html
+Output:
 
-        <form id="RecipeAddForm" method="post" action="/recipes/add">
+.. code-block:: html
 
-    This will POST the form data to the ``add()`` action of
-    RecipesController. However, you can also use the same logic to
-    create an edit form. The FormHelper uses the ``$this->request->data``
-    property to automatically detect whether to create an add or edit
-    form. If ``$this->request->data`` contains an array element named after the
-    form's model, and that array contains a non-empty value of the
-    model's primary key, then the FormHelper will create an edit form
-    for that record. For example, if we browse to
-    http://site.com/recipes/edit/5, we would get the following::
+    <form method="post" action="/articles/add">
 
-        // Controller/RecipesController.php:
-        public function edit($id = null) {
-            if (empty($this->request->data)) {
-                $this->request->data = $this->Recipe->findById($id);
-            } else {
-                // Save logic goes here
-            }
+This will POST the form data to the ``add()`` action of ArticlesController.
+However, you can also use the same logic to create an edit form. The FormHelper
+uses the ``$this->request->data`` property to automatically detect whether to
+create an add or edit form. If the provided entity is not 'new', the form will
+be created as an edit form.  For example, if we browse to
+http://example.org/articles/edit/5, we could do the following::
+
+    // App/Controller/ArticlesController.php:
+    public function edit($id = null) {
+        if (empty($id)) {
+            throw new NotFoundException;
         }
+        $article = $this->Articles->get($id);
+        // Save logic goes here
+        $this->set('article', $article);
+    }
 
-        // View/Recipes/edit.ctp:
-        // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
-        <?php echo $this->Form->create('Recipe'); ?>
+    // View/Articles/edit.ctp:
+    // Since $article->isNew() is false, we will get an edit form
+    <?php echo $this->Form->create($article); ?>
 
-    Output:
+Output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
-        <input type="hidden" name="_method" value="PUT" />
+    <form method="post" action="/articles/edit/5">
+    <input type="hidden" name="_method" value="PUT" />
 
-    .. note::
+.. note::
 
-        Since this is an edit form, a hidden input field is generated to
-        override the default HTTP method.
+    Since this is an edit form, a hidden input field is generated to
+    override the default HTTP method.
 
-    When creating forms for models in plugins, you should always use
-    :term:`plugin syntax` when creating a form. This will ensure the form is
-    correctly generated::
+The ``$options`` array is where most of the form configuration
+happens. This special array can contain a number of different
+key-value pairs that affect the way the form tag is generated.
 
-        echo $this->Form->create('ContactManager.Contact');
-
-    The ``$options`` array is where most of the form configuration
-    happens. This special array can contain a number of different
-    key-value pairs that affect the way the form tag is generated.
-
-    .. versionchanged:: 2.0
-        The default URL for all forms, is now the current URL including
-        passed, named, and querystring parameters. You can override this
-        default by supplying ``$options['url']`` in the second parameter of
-        ``$this->Form->create()``.
 
 Options for create()
 --------------------
@@ -114,18 +105,18 @@ Options for create()
 There are a number of options for create():
 
 * ``$options['type']`` This key is used to specify the type of form to be created. Valid
-  values include 'post', 'get', 'file', 'put' and 'delete'.
+  values include 'post', 'get', 'file', 'patch', 'put' and 'delete'.
 
   Supplying either 'post' or 'get' changes the form submission method
   accordingly::
 
-      echo $this->Form->create('User', array('type' => 'get'));
+      echo $this->Form->create($article, ['type' => 'get']);
 
   Output:
 
   .. code-block:: html
 
-     <form id="UserAddForm" method="get" action="/users/add">
+     <form method="get" action="/articles/edit/5">
 
   Specifying 'file' changes the form submission method to 'post', and
   includes an enctype of "multipart/form-data" on the form tag. This
@@ -133,26 +124,25 @@ There are a number of options for create():
   absence of the proper enctype attribute will cause the file uploads
   not to function::
 
-      echo $this->Form->create('User', array('type' => 'file'));
+      echo $this->Form->create($article, ['type' => 'file']);
 
   Output:
 
   .. code-block:: html
 
-     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
+     <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-  When using 'put' or 'delete', your form will be functionally
-  equivalent to a 'post' form, but when submitted, the HTTP request
-  method will be overridden with 'PUT' or 'DELETE', respectively.
-  This allows CakePHP to emulate proper REST support in web
-  browsers.
+  When using 'put' or 'delete', your form will be functionally equivalent to
+  a 'post' form, but when submitted, the HTTP request method will be overridden
+  with 'PUT' or 'DELETE', respectively.  This allows CakePHP to emulate proper
+  REST support in web browsers.
 
 * ``$options['action']`` The action key allows you to point the form to a
   specific action in your current controller. For example, if you'd like to
   point the form to the login() action of the current controller, you would
   supply an $options array like the following::
 
-    echo $this->Form->create('User', array('action' => 'login'));
+    echo $this->Form->create($article, ['action' => 'login']);
 
   Output:
 
@@ -165,22 +155,22 @@ There are a number of options for create():
   the $options array. The supplied URL can be relative to your CakePHP
   application::
 
-    echo $this->Form->create(null, array(
-        'url' => array('controller' => 'recipes', 'action' => 'add')
-    ));
+    echo $this->Form->create(null, [
+        'url' => ['controller' => 'articles', 'action' => 'publish']
+    ]);
 
   Output:
 
   .. code-block:: html
 
-     <form method="post" action="/recipes/add">
+     <form method="post" action="/articles/publish">
 
   or can point to an external domain::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(null, [
         'url' => 'http://www.google.com/search',
         'type' => 'get'
-    ));
+    ]);
 
   Output:
 
@@ -188,8 +178,8 @@ There are a number of options for create():
 
     <form method="get" action="http://www.google.com/search">
 
-  Also check :php:meth:`HtmlHelper::url()` method for more examples of
-  different types of URLs.
+  Also check :php:meth:`Cake\\View\\Helper\\HtmlHelper::url()` method for more
+  examples of different types of URLs.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
@@ -197,79 +187,53 @@ There are a number of options for create():
   false suppresses the form's default behavior so you can grab the data and
   submit it via AJAX instead.
 
-* ``$options['inputDefaults']`` You can declare a set of default options for
-  ``input()`` with the ``inputDefaults`` key to customize your default input
-  creation::
+Creating context classes
+------------------------
 
-    echo $this->Form->create('User', array(
-        'inputDefaults' => array(
-            'label' => false,
-            'div' => false
-        )
-    ));
+While the built-in context classes are intended to cover the basic cases you'll
+encounter you may need to build a new context class if you are using a differnt
+ORM. In these situations you need to implement the
+`Cake\\View\\Form\\ContextInterface
+<http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Once
+you have implemented this interface you can wire your new context into the
+FormHelper. It is often best to do this in a ``View.beforeRender`` event
+listener, or in an application view class::
 
-  All inputs created from that point forward would inherit the
-  options declared in inputDefaults. You can override the
-  defaultOptions by declaring the option in the input() call::
+    $this->Form->addContextProvider('myprovider', function($request, $data) {
+        if ($data['entity'] instanceof MyOrmClass) {
+            return new MyProvider($request, $data['entity']);
+        }
+    });
 
-    echo $this->Form->input('password'); // No div, no label
-    echo $this->Form->input('username', array('label' => 'Username')); // has a label element
+Context factory functions are where you can add logic for checking the form
+options for the correct type of entity. If matching input data is found you can
+return an object. If there is no match return null.
 
 Closing the Form
 ================
 
-.. php:method:: end($options = null)
+.. php:method:: end($secureAttributes = [])
 
-    The FormHelper includes an ``end()`` method that completes the
-    form. Often, ``end()`` only outputs a closing form tag, but
-    using ``end()`` also allows the FormHelper to insert needed hidden
-    form elements that :php:class:`SecurityComponent` requires:
+The ``end()`` method closes and completes a form. Often, ``end()`` will only output
+a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
+hidden form elements that :php:class:`SecurityComponent` requires:
 
-    .. code-block:: php
+.. code-block:: php
 
-        <?php echo $this->Form->create(); ?>
+    <?php echo $this->Form->create(); ?>
 
-        <!-- Form elements go here -->
+    <!-- Form elements go here -->
 
-        <?php echo $this->Form->end(); ?>
+    <?php echo $this->Form->end(); ?>
 
-    If a string is supplied as the first parameter to ``end()``, the
-    FormHelper outputs a submit button named accordingly along with the
-    closing form tag::
+The ``$secureAttributes`` parameter allows you to pass additional HTML
+attributes to the hidden inputs that are generated when your application is
+using ``SecurityComponent``.
 
-        <?php echo $this->Form->end('Finish'); ?>
+.. note::
 
-    Will output:
-
-    .. code-block:: html
-
-        <div class="submit">
-            <input type="submit" value="Finish" />
-        </div>
-        </form>
-
-    You can specify detail settings by passing an array to ``end()``::
-
-        $options = array(
-            'label' => 'Update',
-            'div' => array(
-                'class' => 'glass-pill',
-            )
-        );
-        echo $this->Form->end($options);
-
-    Will output:
-
-    .. code-block:: html
-
-        <div class="glass-pill"><input type="submit" value="Update" name="Update"></div>
-
-    See the `API <http://api20.cakephp.org>`_ for further details.
-
-    .. note::
-
-        If you are using :php:class:`SecurityComponent` in your application you
-        should always end your forms with ``end()``.
+    If you are using :php:class:`SecurityComponent` in your application you
+    should always end your forms with ``end()``.
 
 .. _automagic-form-elements:
 
