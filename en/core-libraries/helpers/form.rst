@@ -1423,7 +1423,7 @@ Creates a set of select inputs for date and time. This method accepts a number
 of options:
 
 * ``monthNames`` If false, 2 digit numbers will be used instead of text.
-  If a array, the given array will be used.
+  If an array, the given array will be used.
 * ``minYear`` The lowest year to use in the year select
 * ``maxYear`` The maximum year to use in the year select
 * ``interval`` The interval for the minutes select. Defaults to 1
