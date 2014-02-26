@@ -1417,111 +1417,154 @@ Creating Buttons and Submit Elements
 Creating Date and Time Inputs
 =============================
 
-.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
+.. php:method:: dateTime($fieldName, $options = [])
 
-    Creates a set of select inputs for date and time. Valid values for
-    $dateformat are 'DMY', 'MDY', 'YMD' or 'NONE'. Valid values for
-    $timeFormat are '12', '24', and null.
+Creates a set of select inputs for date and time. This method accepts a number
+of options:
 
-    You can specify not to display empty values by setting
-    "array('empty' => false)" in the attributes parameter. It will also
-    pre-select the fields with the current datetime.
+* ``monthNames`` If false, 2 digit numbers will be used instead of text.
+  If a array, the given array will be used.
+* ``minYear`` The lowest year to use in the year select
+* ``maxYear`` The maximum year to use in the year select
+* ``interval`` The interval for the minutes select. Defaults to 1
+* ``empty`` - If true, the empty select option is shown. If a string,
+  that string is displayed as the empty element.
+* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
+* ``default`` The default value to be used by the input. A value in ``$this->request->data``
+  matching the field name will override this value. If no default is provided ``time()`` will be used.
+* ``timeFormat`` The time format to use, either 12 or 24.
+* ``second`` Set to true to enable seconds drop down.
 
-.. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
+To control the order of inputs, and any elements/content between the inputs you
+can override the ``dateWidget`` template. By default the ``dateWidget`` template
+is::
 
-    Creates a select element populated with the years from ``$minYear``
-    to ``$maxYear``. HTML attributes may be supplied in $attributes. If
-    ``$attributes['empty']`` is false, the select will not include an
-    empty option::
+    {{month}}{{day}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-        echo $this->Form->year('purchased', 2000, date('Y'));
+.. php:method:: year(string $fieldName, array $options = [])
 
-    Will output:
+Creates a select element populated with the years from ``minYear``
+to ``maxYear``. Additional, HTML attributes may be supplied in $options. If
+``$options['empty']`` is false, the select will not include an
+empty option:
 
-    .. code-block:: html
+* ``empty`` - If true, the empty select option is shown. If a string,
+  that string is displayed as the empty element.
+* ``orderYear`` - Ordering of year values in select options.
+  Possible values 'asc', 'desc'. Default 'desc'
+* ``value`` The selected value of the input.
+* ``maxYear`` The max year to appear in the select element.
+* ``minYear`` The min year to appear in the select element.
 
-        <select name="User[purchased][year]" id="UserPurchasedYear">
-        <option value=""></option>
-        <option value="2009">2009</option>
-        <option value="2008">2008</option>
-        <option value="2007">2007</option>
-        <option value="2006">2006</option>
-        <option value="2005">2005</option>
-        <option value="2004">2004</option>
-        <option value="2003">2003</option>
-        <option value="2002">2002</option>
-        <option value="2001">2001</option>
-        <option value="2000">2000</option>
-        </select>
+For example, to create a year range range from 2000 to the current year you
+would do the following::
+
+    echo $this->Form->year('purchased', [
+        'minYear' => 2000,
+        'maxYear' => date('Y')
+    ]);
+
+If it was 2009, you would get the following:
+
+.. code-block:: html
+
+    <select name="purchased[year]">
+    <option value=""></option>
+    <option value="2009">2009</option>
+    <option value="2008">2008</option>
+    <option value="2007">2007</option>
+    <option value="2006">2006</option>
+    <option value="2005">2005</option>
+    <option value="2004">2004</option>
+    <option value="2003">2003</option>
+    <option value="2002">2002</option>
+    <option value="2001">2001</option>
+    <option value="2000">2000</option>
+    </select>
 
 .. php:method:: month(string $fieldName, array $attributes)
 
-    Creates a select element populated with month names::
+Creates a select element populated with month names::
 
-        echo $this->Form->month('mob');
+    echo $this->Form->month('mob');
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <select name="User[mob][month]" id="UserMobMonth">
-        <option value=""></option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-        </select>
+    <select name="mob[month]">
+    <option value=""></option>
+    <option value="01">January</option>
+    <option value="02">February</option>
+    <option value="03">March</option>
+    <option value="04">April</option>
+    <option value="05">May</option>
+    <option value="06">June</option>
+    <option value="07">July</option>
+    <option value="08">August</option>
+    <option value="09">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+    </select>
 
-    You can pass in your own array of months to be used by setting the
-    'monthNames' attribute, or have months displayed as numbers by
-    passing false. (Note: the default months are internationalized and
-    can be translated using localization.)::
+You can pass in your own array of months to be used by setting the
+'monthNames' attribute, or have months displayed as numbers by
+passing false. (Note: the default months are internationalized and
+can be translated using localization.)::
 
-        echo $this->Form->month('mob', null, array('monthNames' => false));
+    echo $this->Form->month('mob', ['monthNames' => false]);
 
 .. php:method:: day(string $fieldName, array $attributes)
 
-    Creates a select element populated with the (numerical) days of the
-    month.
+Creates a select element populated with the (numerical) days of the
+month.
 
-    To create an empty option with prompt text of your choosing (e.g.
-    the first option is 'Day'), you can supply the text as the final
-    parameter as follows::
+To create an empty option with prompt text of your choosing (e.g.
+the first option is 'Day'), you can supply the text as the final
+parameter as follows::
 
-        echo $this->Form->day('created');
+    echo $this->Form->day('created');
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <select name="User[created][day]" id="UserCreatedDay">
-        <option value=""></option>
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        ...
-        <option value="31">31</option>
-        </select>
+    <select name="created[day]">
+    <option value=""></option>
+    <option value="01">1</option>
+    <option value="02">2</option>
+    <option value="03">3</option>
+    ...
+    <option value="31">31</option>
+    </select>
 
-.. php:method:: hour(string $fieldName, boolean $format24Hours, array $attributes)
+.. php:method:: hour(string $fieldName, array $attributes)
 
-    Creates a select element populated with the hours of the day.
+Creates a select element populated with the hours of the day. You can
+create either 12 or 24 hour pickers using the format option::
+
+    echo $this->Form->hour('created', [
+        'format' => 12
+    ]);
+    echo $this->Form->hour('created', [
+        'format' => 24
+    ]);
 
 .. php:method:: minute(string $fieldName, array $attributes)
 
-    Creates a select element populated with the minutes of the hour.
+Creates a select element populated with the minutes of the hour. You
+can create a select that only contains specific values using the ``interval``
+option. For example, if you wanted 10 minute increments you would do the
+following::
+
+    echo $this->Form->minute('created', [
+        'interval' => 10
+    ]);
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-    Creates a select element populated with 'am' and 'pm'.
+Creates a select element populated with 'am' and 'pm'.
 
 
 Displaying and Checking Errors
