@@ -37,7 +37,7 @@ section. The built-in providers map to the following values of ``$model``:
   context allows FormHelper to work with results from the built-in ORM.
 * An array containing the ``schema`` key, maps to ``ArrayContext`` which allows
   you to create simple data structures to build forms against.
-* ``null`` and ``false`` map to the ``NullContext`` this context class simply
+* ``null`` and ``false`` map to the ``NullContext``, this context class simply
   satisifies the interface FormHelper requires. This context is useful if you
   want to build a short form that doesn't require ORM persistence.
 
@@ -191,7 +191,7 @@ Creating context classes
 ------------------------
 
 While the built-in context classes are intended to cover the basic cases you'll
-encounter you may need to build a new context class if you are using a differnt
+encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
 <http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Once
@@ -1444,7 +1444,7 @@ is::
 .. php:method:: year(string $fieldName, array $options = [])
 
 Creates a select element populated with the years from ``minYear``
-to ``maxYear``. Additional, HTML attributes may be supplied in $options. If
+to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
 ``$options['empty']`` is false, the select will not include an
 empty option:
 
