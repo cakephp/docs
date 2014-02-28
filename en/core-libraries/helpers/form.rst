@@ -363,29 +363,6 @@ data in a pluralised and camelCased format as follows::
     You should not use ``FormHelper::input()`` to generate submit buttons. Use
     :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` instead.
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
-
-    Generate a set of inputs for ``$fields``. If $fields is null the current model
-    will be used.
-
-    In addition to controller fields output, ``$fields`` can be used to control
-    legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-    ``$this->Form->inputs(array('legend' => 'My legend'));``
-    Would generate an input set with a custom legend. You can customize
-    individual inputs through ``$fields`` as well.::
-
-        echo $this->Form->inputs(array(
-            'name' => array('label' => 'custom label')
-        ));
-
-    In addition to fields control, inputs() allows you to use a few additional
-    options.
-
-    - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
-      it will be used as the class name for the fieldset element.
-    - ``legend`` Set to false to disable the legend for the generated input set.
-      Or supply a string to customize the legend text.
-
 Field Naming Conventions
 ------------------------
 
@@ -1564,64 +1541,61 @@ following::
 
 Creates a select element populated with 'am' and 'pm'.
 
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+
+Generate a set of inputs for ``$fields``. If $fields is null the current model
+will be used.
+
+In addition to controller fields output, ``$fields`` can be used to control
+legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
+``$this->Form->inputs(array('legend' => 'My legend'));``
+Would generate an input set with a custom legend. You can customize
+individual inputs through ``$fields`` as well.::
+
+    echo $this->Form->inputs(array(
+        'name' => array('label' => 'custom label')
+    ));
+
+In addition to fields control, inputs() allows you to use a few additional
+options.
+
+- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
+  it will be used as the class name for the fieldset element.
+- ``legend`` Set to false to disable the legend for the generated input set.
+  Or supply a string to customize the legend text.
 
 Displaying and Checking Errors
 ==============================
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-    Shows a validation error message, specified by $text, for the given
-    field, in the event that a validation error has occurred.
+Shows a validation error message, specified by $text, for the given
+field, in the event that a validation error has occurred.
 
-    Options:
+Options:
 
-    -  'escape' bool Whether or not to HTML escape the contents of the
-       error.
-    -  'wrap' mixed Whether or not the error message should be wrapped
-       in a div. If a string, will be used as the HTML tag to use.
-    -  'class' string The class name for the error message
+-  'escape' bool Whether or not to HTML escape the contents of the
+   error.
+-  'wrap' mixed Whether or not the error message should be wrapped
+   in a div. If a string, will be used as the HTML tag to use.
+-  'class' string The class name for the error message
+
+
+.. TODO:: Add examples.
 
 .. php:method:: isFieldError(string $fieldName)
 
-    Returns true if the supplied $fieldName has an active validation
-    error.::
+Returns true if the supplied $fieldName has an active validation
+error.::
 
-        if ($this->Form->isFieldError('gender')) {
-            echo $this->Form->error('gender');
-        }
+    if ($this->Form->isFieldError('gender')) {
+        echo $this->Form->error('gender');
+    }
 
-    .. note::
+.. note::
 
-        When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
 
-.. php:method:: tagIsInvalid()
-
-    Returns false if given form field described by the current entity has no
-    errors. Otherwise it returns the validation message.
-
-
-Setting Defaults for All Fields
-===============================
-
-.. versionadded:: 2.2
-
-You can declare a set of default options for ``input()`` using
-:php:meth:`FormHelper::inputDefaults()`. Changing the default options allows
-you to consolidate repeated options into a single method call::
-
-    $this->Form->inputDefaults(array(
-            'label' => false,
-            'div' => false,
-            'class' => 'fancy'
-        )
-    );
-
-All inputs created from that point forward will inherit the options declared in
-inputDefaults. You can override the default options by declaring the option in the
-input() call::
-
-    echo $this->Form->input('password'); // No div, no label with class 'fancy'
-    echo $this->Form->input('username', array('label' => 'Username')); // has a label element same defaults
 
 Working with SecurityComponent
 ==============================
@@ -1646,43 +1620,6 @@ special ``_Token`` inputs are generated.
 
     Generates a hidden field with a security hash based on the fields used
     in the form.
-
-.. _form-improvements-1-3:
-
-2.0 updates
-===========
-
-**$selected parameter removed**
-
-The ``$selected`` parameter was removed from several methods in
-FormHelper. All methods now support a ``$attributes['value']`` key
-now which should be used in place of ``$selected``. This change
-simplifies the FormHelper methods, reducing the number of
-arguments, and reduces the duplication that ``$selected`` created.
-The effected methods are:
-
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
-
-**Default URLs on forms is the current action**
-
-The default URL for all forms, is now the current URL including
-passed, named, and querystring parameters. You can override
-this default by supplying ``$options['url']`` in the second
-parameter of ``$this->Form->create()``
-
-
-**FormHelper::hidden()**
-
-Hidden fields no longer remove the class attribute. This means
-that if there are validation errors on hidden fields,
-the error-field class name will be applied.
 
 
 .. meta::
