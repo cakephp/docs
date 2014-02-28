@@ -134,8 +134,8 @@ There were a few reasons for this change:
 
 While the conventions for table objects are to always use plural forms, your
 entities will have their association properties populated based on the
-association type. BelongsTo and HasOne associations will use the singular form,
-while HasMany and BelongsToMany (HABTM) will use plural forms. The convention
+association type. **BelongsTo and HasOne associations will use the singular form,
+while HasMany and BelongsToMany (HABTM) will use plural forms.** The convention
 change for table objects is most apparent when building queries. Instead of
 expressing queries like::
 
