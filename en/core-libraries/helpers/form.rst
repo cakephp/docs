@@ -241,129 +241,127 @@ Creating Form Elements
 ======================
 
 There are a few ways to create form inputs with the FormHelper. We'll start by
-looking at ``input()``. This method will automatically inspect the model field it
-has been supplied in order to create an appropriate input for that
+looking at ``input()``. This method will automatically inspect the model
+meta-data supplied to ``create()``, and choose an appropriate input for that
 field. Internally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: input(string $fieldName, array $options = array())
 
-    Creates the following elements given a particular ``Model.field``:
+Creates the following elements given a particular field name:
 
-    * Wrapping div.
-    * Label element
-    * Input element(s)
-    * Error element with message if applicable.
+* Wrapping markup.
+* Label element
+* Input element(s)
+* Error element with message if applicable.
 
-    The type of input created depends on the column datatype:
+The type of input created depends on the column datatype:
 
-    Column Type
-        Resulting Form Field
-    string (char, varchar, etc.)
-        text
-    boolean, tinyint(1)
-        checkbox
+Column Type
+    Resulting Form Field
+string, uuid (char, varchar, etc.)
     text
-        textarea
-    text, with name of password, passwd, or psword
-        password
-    text, with name of email
-        email
-    text, with name of tel, telephone, or phone
-        tel
-    date
-        day, month, and year selects
-    datetime, timestamp
-        day, month, year, hour, minute, and meridian selects
-    time
-        hour, minute, and meridian selects
-    binary
-        file
+boolean, tinyint(1)
+    checkbox
+decimal
+    number
+float
+    number
+integer
+    number
+text
+    textarea
+text, with name of password, passwd
+    password
+text, with name of email
+    email
+text, with name of tel, telephone, or phone
+    tel
+date
+    day, month, and year selects
+datetime, timestamp
+    day, month, year, hour, minute, and meridian selects
+time
+    hour, minute, and meridian selects
+binary
+    file
 
-    The ``$options`` parameter allows you to customize how ``input()`` works,
-    and finely control what is generated.
+The ``$options`` parameter allows you to choose a specific input type if
+you need to::
 
-    The wrapping div will have a ``required`` class name appended if the
-    validation rules for the Model's field do not specify ``allowEmpty =>
-    true``. One limitation of this behavior is the field's model must have
-    been loaded during this request. Or be directly associated to the
-    model supplied to :php:meth:`~FormHelper::create()`.
+    echo $this->Form->input('published', ['type' => 'checkbox']);
 
-    .. versionadded:: 2.5
-        The binary type now maps to a file input.
+.. _html5-required:
 
-    .. versionadded:: 2.3
+The wrapping div will have a ``required`` class name appended if the
+validation rules for the model's field indicate that it is required and not
+allowed to be empty. You can disable automatic required flagging using the
+required option::
 
-    .. _html5-required:
+    echo $this->Form->input('title', ['required' => false]);
 
-    Since 2.3 the HTML5 ``required`` attribute will also be added to the input
-    based on validation rules. You can explicitly set ``required`` key in
-    options array to override it for a field. To skip browser validation
-    triggering for the whole form you can set option ``'formnovalidate' => true``
-    for the input button you generate using :php:meth:`FormHelper::submit()` or
-    set ``'novalidate' => true`` in options for :php:meth:`FormHelper::create()`.
+To skip browser validation triggering for the whole form you can set option
+``'formnovalidate' => true`` for the input button you generate using
+:php:meth:`FormHelper::submit()` or set ``'novalidate' => true`` in options for
+:php:meth:`FormHelper::create()`.
 
-    For example, let's assume that your User model includes fields for a
-    username (varchar), password (varchar), approved (datetime) and
-    quote (text). You can use the input() method of the FormHelper to
-    create appropriate inputs for all of these form fields::
+For example, let's assume that your User model includes fields for a
+username (varchar), password (varchar), approved (datetime) and
+quote (text). You can use the input() method of the FormHelper to
+create appropriate inputs for all of these form fields::
 
-        echo $this->Form->create();
+    echo $this->Form->create($user);
 
-        echo $this->Form->input('username');   //text
-        echo $this->Form->input('password');   //password
-        echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
-        echo $this->Form->input('quote');      //textarea
+    echo $this->Form->input('username');   //text
+    echo $this->Form->input('password');   //password
+    echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
+    echo $this->Form->input('quote');      //textarea
 
-        echo $this->Form->end('Add');
+    echo $this->Form->button('Add');
+    echo $this->Form->end();
 
-    A more extensive example showing some options for a date field::
+A more extensive example showing some options for a date field::
 
-        echo $this->Form->input('birth_dt', array(
-            'label' => 'Date of birth',
-            'dateFormat' => 'DMY',
-            'minYear' => date('Y') - 70,
-            'maxYear' => date('Y') - 18,
-        ));
+    echo $this->Form->input('birth_dt', array(
+        'label' => 'Date of birth',
+        'minYear' => date('Y') - 70,
+        'maxYear' => date('Y') - 18,
+    ));
 
-    Besides the specific options for ``input()`` found below, you can specify
-    any option for the input type & any HTML attribute (for instance onfocus).
-    For more information on ``$options`` and ``$htmlAttributes`` see
-    :doc:`/core-libraries/helpers/html`.
+Besides the specific options for ``input()`` found below, you can specify
+any option for the input type & any HTML attribute (for instance ``onfocus``).
 
-    Assuming that User hasAndBelongsToMany Group. In your controller, set a
-    camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
-    -> extraFunkyModels) with the select options. In the controller action you
-    would put the following::
+Assuming that User BelongsToMany Group. In your controller, set a
+camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
+-> extraFunkyModels) with the select options. In the controller action you
+would put the following::
 
-        $this->set('groups', $this->User->Group->find('list'));
+    $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-    And in the view a multiple select can be created with this simple
-    code::
+And in the view a multiple select can be created with this simple
+code::
 
-        echo $this->Form->input('Group');
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
 
-    If you want to create a select field while using a belongsTo - or
-    hasOne - Relation, you can add the following to your Users-controller
-    (assuming your User belongsTo Group)::
+If you want to create a select field while using a belongsTo - or
+hasOne - Relation, you can add the following to your Users-controller
+(assuming your User belongsTo Group)::
 
-        $this->set('groups', $this->User->Group->find('list'));
+    $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-    Afterwards, add the following to your form-view::
+Afterwards, add the following to your form-view::
 
-        echo $this->Form->input('group_id');
+    echo $this->Form->input('group_id', ['options' => $groups]);
 
-    If your model name consists of two or more words, e.g.,
-    "UserGroup", when passing the data using set() you should name your
-    data in a pluralised and camelCased format as follows::
+If your model name consists of two or more words, e.g.,
+"UserGroup", when passing the data using set() you should name your
+data in a pluralised and camelCased format as follows::
 
-        $this->set('userGroups', $this->UserGroup->find('list'));
-        // or
-        $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
+    $this->set('userGroups', $this->UserGroups->find('list'));
 
-    .. note::
+.. note::
 
-        Try to avoid using `FormHelper::input()` to generate submit buttons. Use
-        :php:meth:`FormHelper::submit()` instead.
+    You should not use ``FormHelper::input()`` to generate submit buttons. Use
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` instead.
 
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null)
 
