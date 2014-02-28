@@ -32,7 +32,7 @@ In all cases you will want to set the virtual host/domain's document to be
 directory being executed.
 
 Update Config/app.php
-===============
+=====================
 
 Updating app.php, specifically the value of ``debug`` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
