@@ -183,7 +183,7 @@ the results taken from the database is not actually required::
         ->extract('title');
 
 Queries can be seen as the result object, trying to iterate the query, calling
-``toArray`` or any method inherited from ref:`collection<collection-objects>`,
+``toArray`` or any method inherited from :ref:`collection<collection-objects>`,
 will result in the query being executed and results returned to you.
 
 The biggest difference you will find when coming from CakePHP 2.x is that
