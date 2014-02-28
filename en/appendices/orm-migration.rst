@@ -88,7 +88,7 @@ Query Objects
 While these are not classes you will build yourself, your application code will
 make extensive use of the :doc:`/orm/query-builder` which is central to the new
 ORM. The query builder makes it easy to build simple or complex queries
-including those that were previosuly very difficult in CakePHP like ``HAVING``,
+including those that were previously very difficult in CakePHP like ``HAVING``,
 ``UNION`` and sub-queries.
 
 The various find() calls your application has currently will need to be updated
@@ -109,7 +109,7 @@ feature. The chapter on :doc:`/orm/entities` covers the various tasks you can
 accomplish with entities.
 
 Entities are created in one of two ways. Either by loading data from the
-database, or converting request data into entities. Once created entities allow
+database, or converting request data into entities. Once created, entities allow
 you to manipulate the data they contain and persist their data by collaborating
 with table objects.
 
