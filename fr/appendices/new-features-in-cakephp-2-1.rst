@@ -213,7 +213,7 @@ classe dans votre dossier ``APP/Utility``, par exemple:
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
         // mon truchement est meilleur que les votres
-        public function static truncate($text, $length = 100, $options = array()) {
+        public static function truncate($text, $length = 100, $options = array()) {
             return null;
         }
     }
