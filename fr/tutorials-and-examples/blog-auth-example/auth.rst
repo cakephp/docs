@@ -361,7 +361,7 @@ l'édition des posts si l'auteur ne correspond pas. Ouvrez le fichier
 
         // Le propriétaire du post peut l'éditer et le supprimer
         if (in_array($this->action, array('edit', 'delete'))) {
-            $postId = $this->request->params['pass'][0];
+            $postId = (int) $this->request->params['pass'][0];
             if ($this->Post->isOwnedBy($postId, $user['id'])) {
                 return true;
             }
