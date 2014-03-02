@@ -1,8 +1,8 @@
 Le Manuel
 #########
 
-**`Cliquez ici pour voir la version CakePHP 1.2.x du
-manuel </fr/view/2/the-manual>`_**
+`Cliquez ici pour voir la version CakePHP 1.2.x du
+manuel </fr/view/2/the-manual>`_
 
 Bienvenue dans le *Cookbook* (Livre de cuisine), la documentation
 CakePHP. Le Cookbook est un système wiki, permettant les contributions
