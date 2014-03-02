@@ -1254,7 +1254,7 @@ environment::
         'name' => 'conference_schedule.pdf',
         'type' => 'application/pdf',
         'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
-        'error' => 0,
+        'error' => 0, // On windows this can be a string.
         'size' => 41737,
     );
 
@@ -1345,7 +1345,7 @@ opened form. Instead use :php:meth:`FormHelper::submit()` or
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
-Creates an HTML link, but access the URL using method POST. Requires
+Creates an HTML link, but accesses the URL using method POST. Requires
 JavaScript to be enabled in browser.
 
 This method creates a ``<form>`` element. So do not use this method inside
@@ -1507,7 +1507,7 @@ Creates a select element populated with 'am' and 'pm'.
 
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null)
 
-Generate a set of inputs for ``$fields``. If $fields is null the current model
+Generates a set of inputs for ``$fields``. If $fields is null the current model
 will be used.
 
 In addition to controller fields output, ``$fields`` can be used to control
