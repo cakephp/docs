@@ -2,7 +2,7 @@ Das Handbuch
 ############
 
 `Hier klicken um zur CakePHP 1.2.x Version des Handbuchs zu
-gelangen </1.2/de/index.html>`_
+gelangen </1.2/de/>`_
 
 Willkommen zum "Cookbook", der neuen wiki-ähnlichen CakePHP
 Dokumentationsanwendung. Wir hoffen, dass diese neue Anwendung
