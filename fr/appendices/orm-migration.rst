@@ -487,7 +487,73 @@ configuration d'une connection::
 Mise à jour des behaviors
 =========================
 
-* La classe de Base change.
-* Méthode Mixin signature change.
-* Méthode Event signature change.
+Comme la plupart des fonctionnalités liées à l'ORM, les behaviors ont aussi
+changé dans 3.0. Ils attachent maintenant les instances à ``Table`` qui sont
+les descendants conceptuels de la classe ``Model`` dans les versions précédentes
+de CakePHP. Il y a quelques petites différences clés par rapport aux behaviors
+de CakePHP 2.x:
 
+- Les Behaviors ne sont plus partagés par plusieurs tables. Cela signifie
+  que vous n'avez plus à 'donner un namespace' aux configurations stockés dans
+  behavior. Chaque table utilisant un behavior va créer sa propre instance.
+- La méthode signatures pour les méthodes mixin ont changé.
+- La méthode signatures pour les méthodes de callback ont changé.
+- La classe de base pour les behaviors ont changé.
+- Les Behaviors peuvent facilement ajouter des méthodes find.
+
+Nouvelle classe de Base
+-----------------------
+
+La classe de base pour les behaviors a changé. Les Behaviors doivent maintenant
+étendre ``Cake\ORM\Behavior``; si un behavior n'étend pas cette classe, une
+exception sera lancée. En plus du changement de classe de base, le contructeur
+pour les behaviors a été modifié, et la méthode ``startup`` a été retirée.
+Les Behaviors qui ont besoin d'accéder à la table à laquelle ils sont attachés,
+doivent définir un constructeur::
+
+    namespace App\Model\Behavior;
+
+    use Cake\ORM\Behavior;
+
+    class SluggableBehavior extends Behavior {
+
+        protected $_table;
+
+        public function __construct(Table $table, array $config) {
+            parent::__construct($table, $config);
+            $this->_table = $table;
+        }
+
+    }
+
+Changements de Signature des Méthodes Mixin
+-------------------------------------------
+
+Les Behaviors continuent d'offir la possibilité d'ajouter les méthodes
+'mixin' à des objets Table, cependant la méthode signature pour ces méthodes a
+changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
+**mêmes** arguments fournis à la table 'method'. Par exemple::
+
+    // Supposons que table a une méthode slug() fournie par un behavior.
+    $table->slug($someValue);
+
+Le behavior qui fournit la méthode ``slug`` va recevoir seulement 1 argument,
+et ses méthodes signature doivent ressembler à ceci::
+
+    public function slug($value) {
+        // code here.
+    }
+
+Callback Method Signature Changes
+---------------------------------
+
+Les callbacks de Behavior ont été unifiés avec les autres méthodes listener.
+Au lieu de leurs arguments précédants, ils attendent un objet event en premier
+argument::
+
+    public function beforeFind(Event $event, Query $query, array $options) {
+        // code.
+    }
+
+Regardez :ref:`table-callbacks` pour les signatures de tous les callbacks
+auquel un behavior peut souscrire.
