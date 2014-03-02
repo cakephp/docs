@@ -526,7 +526,4 @@ extracting operation once.
 
 .. meta::
     :title lang=en: Collections
-    :keywords collections, cakephp, append, sort, compile, contains, countBy,
-    each, every, extract, filter, first, firstMatch, groupBy, indexBy,
-    jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some,
-    random, sortBy, take, toArray, insert
+    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert

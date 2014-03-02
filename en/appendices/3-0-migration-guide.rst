@@ -556,7 +556,50 @@ View\\Helper
 FormHelper
 ----------
 
+FormHelper has been entirely rewritten for 3.0. It features a few large changes:
+
+* FormHelper works with the new ORM. But has an extensible system for
+  integrating with other ORMs or datasources.
+* FormHelper features an extensible widget system that allows you to create new
+  custom input widgets and easily augment the built-in ones.
+* String templates are the foundation of the helper. Instead of munging arrays
+  together everywhere, most of the HTML FormHelper generates can be customized
+  in one central place using template sets.
+
+In addition to these larger changes, some smaller breaking changes have been
+made as well. These changes should help streamline the HTML FormHelper generates
+and reduce the problems people had in the past:
+
 - The ``data[`` prefix was removed from all generated inputs.  The prefix serves no real purpose anymore.
+- The various standalone input methods like ``text()``, ``select()`` and others
+  no longer generate id attributes.
+- The ``inputDefaults`` option has been removed from ``create()``.
+- ``end()`` can no longer make buttons. You should create buttons with
+  ``button()`` or ``submit()``.
+- ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
+  instead.
+- ``FormHelper::inputDefaults()`` has been removed. You can use ``templates()``
+  to define/augment the templates FormHelper uses.
+- The ``wrap`` and ``class`` options have been removed from the ``error()``
+  method.
+- The ``showParents`` option has been removed from select().
+- The ``div``, ``before``, ``after``, ``between`` and ``errorMessage`` options
+  have been removed from ``input()``.  You can use templates to update the
+  wrapping HTML. The ``templates`` option allows you to override the loaded
+  templates for one input.
+- The ``separator``, ``between``, and ``legend`` options have been removed from
+  ``radio()``. You can use templates to change the wrapping HTML now.
+- The ``format24Hours`` parameter has been removed from ``hour()``.
+  It has been replaced with the ``format`` option.
+- The ``minYear``, and ``maxYear`` parameters have been removed from ``year()``.
+  Both of these parameters can now be provided as options.
+- The ``dateFormat`` and ``timeFormat`` parameters have been removed from
+  ``datetime()``. You can use the template to define the order the inputs should
+  be displayed in.
+
+It is recommended that you review the :doc:`/core-libraries/helpers/form`
+documentation for more details on how to use the FormHelper in 3.0.
+
 
 PaginatorHelper
 ---------------

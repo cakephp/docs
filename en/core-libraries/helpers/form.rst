@@ -241,152 +241,127 @@ Creating Form Elements
 ======================
 
 There are a few ways to create form inputs with the FormHelper. We'll start by
-looking at ``input()``. This method will automatically inspect the model field it
-has been supplied in order to create an appropriate input for that
+looking at ``input()``. This method will automatically inspect the model
+meta-data supplied to ``create()``, and choose an appropriate input for that
 field. Internally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: input(string $fieldName, array $options = array())
 
-    Creates the following elements given a particular ``Model.field``:
+Creates the following elements given a particular field name:
 
-    * Wrapping div.
-    * Label element
-    * Input element(s)
-    * Error element with message if applicable.
+* Wrapping markup.
+* Label element
+* Input element(s)
+* Error element with message if applicable.
 
-    The type of input created depends on the column datatype:
+The type of input created depends on the column datatype:
 
-    Column Type
-        Resulting Form Field
-    string (char, varchar, etc.)
-        text
-    boolean, tinyint(1)
-        checkbox
+Column Type
+    Resulting Form Field
+string, uuid (char, varchar, etc.)
     text
-        textarea
-    text, with name of password, passwd, or psword
-        password
-    text, with name of email
-        email
-    text, with name of tel, telephone, or phone
-        tel
-    date
-        day, month, and year selects
-    datetime, timestamp
-        day, month, year, hour, minute, and meridian selects
-    time
-        hour, minute, and meridian selects
-    binary
-        file
+boolean, tinyint(1)
+    checkbox
+decimal
+    number
+float
+    number
+integer
+    number
+text
+    textarea
+text, with name of password, passwd
+    password
+text, with name of email
+    email
+text, with name of tel, telephone, or phone
+    tel
+date
+    day, month, and year selects
+datetime, timestamp
+    day, month, year, hour, minute, and meridian selects
+time
+    hour, minute, and meridian selects
+binary
+    file
 
-    The ``$options`` parameter allows you to customize how ``input()`` works,
-    and finely control what is generated.
+The ``$options`` parameter allows you to choose a specific input type if
+you need to::
 
-    The wrapping div will have a ``required`` class name appended if the
-    validation rules for the Model's field do not specify ``allowEmpty =>
-    true``. One limitation of this behavior is the field's model must have
-    been loaded during this request. Or be directly associated to the
-    model supplied to :php:meth:`~FormHelper::create()`.
+    echo $this->Form->input('published', ['type' => 'checkbox']);
 
-    .. versionadded:: 2.5
-        The binary type now maps to a file input.
+.. _html5-required:
 
-    .. versionadded:: 2.3
+The wrapping div will have a ``required`` class name appended if the
+validation rules for the model's field indicate that it is required and not
+allowed to be empty. You can disable automatic required flagging using the
+required option::
 
-    .. _html5-required:
+    echo $this->Form->input('title', ['required' => false]);
 
-    Since 2.3 the HTML5 ``required`` attribute will also be added to the input
-    based on validation rules. You can explicitly set ``required`` key in
-    options array to override it for a field. To skip browser validation
-    triggering for the whole form you can set option ``'formnovalidate' => true``
-    for the input button you generate using :php:meth:`FormHelper::submit()` or
-    set ``'novalidate' => true`` in options for :php:meth:`FormHelper::create()`.
+To skip browser validation triggering for the whole form you can set option
+``'formnovalidate' => true`` for the input button you generate using
+:php:meth:`FormHelper::submit()` or set ``'novalidate' => true`` in options for
+:php:meth:`FormHelper::create()`.
 
-    For example, let's assume that your User model includes fields for a
-    username (varchar), password (varchar), approved (datetime) and
-    quote (text). You can use the input() method of the FormHelper to
-    create appropriate inputs for all of these form fields::
+For example, let's assume that your User model includes fields for a
+username (varchar), password (varchar), approved (datetime) and
+quote (text). You can use the input() method of the FormHelper to
+create appropriate inputs for all of these form fields::
 
-        echo $this->Form->create();
+    echo $this->Form->create($user);
 
-        echo $this->Form->input('username');   //text
-        echo $this->Form->input('password');   //password
-        echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
-        echo $this->Form->input('quote');      //textarea
+    echo $this->Form->input('username');   //text
+    echo $this->Form->input('password');   //password
+    echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
+    echo $this->Form->input('quote');      //textarea
 
-        echo $this->Form->end('Add');
+    echo $this->Form->button('Add');
+    echo $this->Form->end();
 
-    A more extensive example showing some options for a date field::
+A more extensive example showing some options for a date field::
 
-        echo $this->Form->input('birth_dt', array(
-            'label' => 'Date of birth',
-            'dateFormat' => 'DMY',
-            'minYear' => date('Y') - 70,
-            'maxYear' => date('Y') - 18,
-        ));
+    echo $this->Form->input('birth_dt', array(
+        'label' => 'Date of birth',
+        'minYear' => date('Y') - 70,
+        'maxYear' => date('Y') - 18,
+    ));
 
-    Besides the specific options for ``input()`` found below, you can specify
-    any option for the input type & any HTML attribute (for instance onfocus).
-    For more information on ``$options`` and ``$htmlAttributes`` see
-    :doc:`/core-libraries/helpers/html`.
+Besides the specific options for ``input()`` found below, you can specify
+any option for the input type & any HTML attribute (for instance ``onfocus``).
 
-    Assuming that User hasAndBelongsToMany Group. In your controller, set a
-    camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
-    -> extraFunkyModels) with the select options. In the controller action you
-    would put the following::
+Assuming that User BelongsToMany Group. In your controller, set a
+camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
+-> extraFunkyModels) with the select options. In the controller action you
+would put the following::
 
-        $this->set('groups', $this->User->Group->find('list'));
+    $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-    And in the view a multiple select can be created with this simple
-    code::
+And in the view a multiple select can be created with this simple
+code::
 
-        echo $this->Form->input('Group');
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
 
-    If you want to create a select field while using a belongsTo - or
-    hasOne - Relation, you can add the following to your Users-controller
-    (assuming your User belongsTo Group)::
+If you want to create a select field while using a belongsTo - or
+hasOne - Relation, you can add the following to your Users-controller
+(assuming your User belongsTo Group)::
 
-        $this->set('groups', $this->User->Group->find('list'));
+    $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-    Afterwards, add the following to your form-view::
+Afterwards, add the following to your form-view::
 
-        echo $this->Form->input('group_id');
+    echo $this->Form->input('group_id', ['options' => $groups]);
 
-    If your model name consists of two or more words, e.g.,
-    "UserGroup", when passing the data using set() you should name your
-    data in a pluralised and camelCased format as follows::
+If your model name consists of two or more words, e.g.,
+"UserGroup", when passing the data using set() you should name your
+data in a pluralised and camelCased format as follows::
 
-        $this->set('userGroups', $this->UserGroup->find('list'));
-        // or
-        $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
+    $this->set('userGroups', $this->UserGroups->find('list'));
 
-    .. note::
+.. note::
 
-        Try to avoid using `FormHelper::input()` to generate submit buttons. Use
-        :php:meth:`FormHelper::submit()` instead.
-
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
-
-    Generate a set of inputs for ``$fields``. If $fields is null the current model
-    will be used.
-
-    In addition to controller fields output, ``$fields`` can be used to control
-    legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-    ``$this->Form->inputs(array('legend' => 'My legend'));``
-    Would generate an input set with a custom legend. You can customize
-    individual inputs through ``$fields`` as well.::
-
-        echo $this->Form->inputs(array(
-            'name' => array('label' => 'custom label')
-        ));
-
-    In addition to fields control, inputs() allows you to use a few additional
-    options.
-
-    - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
-      it will be used as the class name for the fieldset element.
-    - ``legend`` Set to false to disable the legend for the generated input set.
-      Or supply a string to customize the legend text.
+    You should not use ``FormHelper::input()`` to generate submit buttons. Use
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` instead.
 
 Field Naming Conventions
 ------------------------
@@ -1244,81 +1219,48 @@ Form Element-Specific Methods
            </div>
         </div>
 
-    .. versionchanged:: 2.3
-        Support for arrays in ``$attributes['disabled']`` was added in 2.3.
-
 .. php:method:: file(string $fieldName, array $options)
 
-    To add a file upload field to a form, you must first make sure that
-    the form enctype is set to "multipart/form-data", so start off with
-    a create function such as the following::
+To add a file upload field to a form, you must first make sure that
+the form enctype is set to "multipart/form-data", so start off with
+a create function such as the following::
 
-        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data'));
-        // OR
-        echo $this->Form->create('Document', array('type' => 'file'));
+    echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
+    // OR
+    echo $this->Form->create($document, ['type' => 'file']);
 
-    Next add either of the two lines to your form view file::
+Next add either of the two lines to your form view file::
 
-        echo $this->Form->input('Document.submittedfile', array(
-            'between' => '<br />',
-            'type' => 'file'
-        ));
+    echo $this->Form->input('submittedfile', [
+        'type' => 'file'
+    ]);
 
-        // OR
+    // OR
+    echo $this->Form->file('submittedfile');
 
-        echo $this->Form->file('Document.submittedfile');
+Due to the limitations of HTML itself, it is not possible to put
+default values into input fields of type 'file'. Each time the form
+is displayed, the value inside will be empty.
 
-    Due to the limitations of HTML itself, it is not possible to put
-    default values into input fields of type 'file'. Each time the form
-    is displayed, the value inside will be empty.
+Upon submission, file fields provide an expanded data array to the
+script receiving the form data.
 
-    Upon submission, file fields provide an expanded data array to the
-    script receiving the form data.
+For the example above, the values in the submitted data array would
+be organized as follows, if the CakePHP was installed on a Windows
+server. 'tmp\_name' will have a different path in a Unix
+environment::
 
-    For the example above, the values in the submitted data array would
-    be organized as follows, if the CakePHP was installed on a Windows
-    server. 'tmp\_name' will have a different path in a Unix
-    environment::
+    $this->request->data['submittedfile'] = array(
+        'name' => 'conference_schedule.pdf',
+        'type' => 'application/pdf',
+        'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
+        'error' => 0,
+        'size' => 41737,
+    );
 
-        $this->request->data['Document']['submittedfile'] = array(
-            'name' => 'conference_schedule.pdf',
-            'type' => 'application/pdf',
-            'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
-            'error' => 0,
-            'size' => 41737,
-        );
-
-    This array is generated by PHP itself, so for more detail on the
-    way PHP handles data passed via file fields
-    `read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
-
-Validating Uploads
-------------------
-
-Below is an example validation method you could define in your
-model to validate whether a file has been successfully uploaded::
-
-    public function isUploadedFile($params) {
-        $val = array_shift($params);
-        if ((isset($val['error']) && $val['error'] == 0) ||
-            (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
-        ) {
-            return is_uploaded_file($val['tmp_name']);
-        }
-        return false;
-    }
-
-Creates a file input::
-
-    echo $this->Form->create('User', array('type' => 'file'));
-    echo $this->Form->file('avatar');
-
-Will output:
-
-.. code-block:: html
-
-    <form enctype="multipart/form-data" method="post" action="/users/add">
-    <input name="User[avatar]" value="" id="UserAvatar" type="file">
+This array is generated by PHP itself, so for more detail on the
+way PHP handles data passed via file fields
+`read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
 
 .. note::
 
@@ -1360,59 +1302,56 @@ Creating Buttons and Submit Elements
 
 .. php:method:: button(string $title, array $options = array())
 
-    Creates an HTML button with the specified title and a default type
-    of "button". Setting ``$options['type']`` will output one of the
-    three possible button types:
+Creates an HTML button with the specified title and a default type
+of "button". Setting ``$options['type']`` will output one of the
+three possible button types:
 
-    #. submit: Same as the ``$this->Form->submit`` method - (the
-       default).
-    #. reset: Creates a form reset button.
-    #. button: Creates a standard push button.
+#. submit: Same as the ``$this->Form->submit`` method - (the
+   default).
+#. reset: Creates a form reset button.
+#. button: Creates a standard push button.
 
-    ::
+::
 
-        echo $this->Form->button('A Button');
-        echo $this->Form->button('Another Button', array('type' => 'button'));
-        echo $this->Form->button('Reset the Form', array('type' => 'reset'));
-        echo $this->Form->button('Submit Form', array('type' => 'submit'));
+    echo $this->Form->button('A Button');
+    echo $this->Form->button('Another Button', array('type' => 'button'));
+    echo $this->Form->button('Reset the Form', array('type' => 'reset'));
+    echo $this->Form->button('Submit Form', array('type' => 'submit'));
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <button type="submit">A Button</button>
-        <button type="button">Another Button</button>
-        <button type="reset">Reset the Form</button>
-        <button type="submit">Submit Form</button>
+    <button type="submit">A Button</button>
+    <button type="button">Another Button</button>
+    <button type="reset">Reset the Form</button>
+    <button type="submit">Submit Form</button>
 
 
-    The ``button`` input type supports the ``escape`` option, which accepts a
-    bool and determines whether to HTML entity encode the $title of the button.
-    Defaults to false::
+The ``button`` input type supports the ``escape`` option, which accepts a
+bool and determines whether to HTML entity encode the $title of the button.
+Defaults to false::
 
-        echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
+    echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
 
 .. php:method:: postButton(string $title, mixed $url, array $options = array ())
 
-    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
-    POST.
+Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
+POST.
 
-    This method creates a ``<form>`` element. So do not use this method in some
-    opened form. Instead use :php:meth:`FormHelper::submit()` or
-    :php:meth:`FormHelper::button()` to create buttons inside opened forms.
+This method creates a ``<form>`` element. So do not use this method in some
+opened form. Instead use :php:meth:`FormHelper::submit()` or
+:php:meth:`FormHelper::button()` to create buttons inside opened forms.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
-    Creates an HTML link, but access the URL using method POST. Requires
-    JavaScript to be enabled in browser.
+Creates an HTML link, but access the URL using method POST. Requires
+JavaScript to be enabled in browser.
 
-    This method creates a ``<form>`` element. So do not use this method inside
-    an existing form. Instead you should add a submit button using
-    :php:meth:`FormHelper::submit()`
+This method creates a ``<form>`` element. So do not use this method inside
+an existing form. Instead you should add a submit button using
+:php:meth:`FormHelper::submit()`
 
-
-    .. versionchanged:: 2.3
-        The ``method`` option was added.
 
 Creating Date and Time Inputs
 =============================
@@ -1566,64 +1505,61 @@ following::
 
 Creates a select element populated with 'am' and 'pm'.
 
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+
+Generate a set of inputs for ``$fields``. If $fields is null the current model
+will be used.
+
+In addition to controller fields output, ``$fields`` can be used to control
+legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
+``$this->Form->inputs(array('legend' => 'My legend'));``
+Would generate an input set with a custom legend. You can customize
+individual inputs through ``$fields`` as well.::
+
+    echo $this->Form->inputs(array(
+        'name' => array('label' => 'custom label')
+    ));
+
+In addition to fields control, inputs() allows you to use a few additional
+options.
+
+- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
+  it will be used as the class name for the fieldset element.
+- ``legend`` Set to false to disable the legend for the generated input set.
+  Or supply a string to customize the legend text.
 
 Displaying and Checking Errors
 ==============================
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-    Shows a validation error message, specified by $text, for the given
-    field, in the event that a validation error has occurred.
+Shows a validation error message, specified by $text, for the given
+field, in the event that a validation error has occurred.
 
-    Options:
+Options:
 
-    -  'escape' bool Whether or not to HTML escape the contents of the
-       error.
-    -  'wrap' mixed Whether or not the error message should be wrapped
-       in a div. If a string, will be used as the HTML tag to use.
-    -  'class' string The class name for the error message
+-  'escape' bool Whether or not to HTML escape the contents of the
+   error.
+-  'wrap' mixed Whether or not the error message should be wrapped
+   in a div. If a string, will be used as the HTML tag to use.
+-  'class' string The class name for the error message
+
+
+.. TODO:: Add examples.
 
 .. php:method:: isFieldError(string $fieldName)
 
-    Returns true if the supplied $fieldName has an active validation
-    error.::
+Returns true if the supplied $fieldName has an active validation
+error.::
 
-        if ($this->Form->isFieldError('gender')) {
-            echo $this->Form->error('gender');
-        }
+    if ($this->Form->isFieldError('gender')) {
+        echo $this->Form->error('gender');
+    }
 
-    .. note::
+.. note::
 
-        When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
 
-.. php:method:: tagIsInvalid()
-
-    Returns false if given form field described by the current entity has no
-    errors. Otherwise it returns the validation message.
-
-
-Setting Defaults for All Fields
-===============================
-
-.. versionadded:: 2.2
-
-You can declare a set of default options for ``input()`` using
-:php:meth:`FormHelper::inputDefaults()`. Changing the default options allows
-you to consolidate repeated options into a single method call::
-
-    $this->Form->inputDefaults(array(
-            'label' => false,
-            'div' => false,
-            'class' => 'fancy'
-        )
-    );
-
-All inputs created from that point forward will inherit the options declared in
-inputDefaults. You can override the default options by declaring the option in the
-input() call::
-
-    echo $this->Form->input('password'); // No div, no label with class 'fancy'
-    echo $this->Form->input('username', array('label' => 'Username')); // has a label element same defaults
 
 Working with SecurityComponent
 ==============================
@@ -1648,43 +1584,6 @@ special ``_Token`` inputs are generated.
 
     Generates a hidden field with a security hash based on the fields used
     in the form.
-
-.. _form-improvements-1-3:
-
-2.0 updates
-===========
-
-**$selected parameter removed**
-
-The ``$selected`` parameter was removed from several methods in
-FormHelper. All methods now support a ``$attributes['value']`` key
-now which should be used in place of ``$selected``. This change
-simplifies the FormHelper methods, reducing the number of
-arguments, and reduces the duplication that ``$selected`` created.
-The effected methods are:
-
-    * FormHelper::select()
-    * FormHelper::dateTime()
-    * FormHelper::year()
-    * FormHelper::month()
-    * FormHelper::day()
-    * FormHelper::hour()
-    * FormHelper::minute()
-    * FormHelper::meridian()
-
-**Default URLs on forms is the current action**
-
-The default URL for all forms, is now the current URL including
-passed, named, and querystring parameters. You can override
-this default by supplying ``$options['url']`` in the second
-parameter of ``$this->Form->create()``
-
-
-**FormHelper::hidden()**
-
-Hidden fields no longer remove the class attribute. This means
-that if there are validation errors on hidden fields,
-the error-field class name will be applied.
 
 
 .. meta::
