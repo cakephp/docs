@@ -1,8 +1,8 @@
 Récupérer vos données
 #####################
 
-Comme mentionné avant, un des rôles de la couche Model est d'obtenir les
-données à partir de multiples types de stockage. La classe Model de CakePHP
+Comme mentionné précédemment, un des rôles de la couche Model est d'obtenir les
+données à partir de plusieurs types de stockage. La classe Model de CakePHP
 est livrée avec quelques fonctions qui vous aident à chercher ces données, à
 les trier, les paginer, et les filtrer. La fonction la plus courante que
 vous utiliserez dans les models est :php:meth:`Model::find()`.
@@ -41,9 +41,12 @@ toutes optionnelles::
         'callbacks' => true
     )
 
-Il est possible également, d'ajouter et d'utiliser d'autres paramètres, dont
+Il est également possible d'ajouter et d'utiliser d'autres paramètres, dont
 il est fait usage dans quelques types de find, dans des behaviors
 (comportements) et, bien sûr, dans vos propres méthodes de model.
+
+Si votre opération de find n'arrive pas à récupérer des données, vous aurez
+un tableau vide.
 
 .. _model-find-first:
 
