@@ -1,34 +1,38 @@
 Blog Tutorial - Adding a Layer
 ******************************
 
-Create a Post Model
-===================
+Create an Article Model
+=======================
 
-The Model class is the bread and butter of CakePHP applications. By
+Models are the bread and butter of CakePHP applications. By
 creating a CakePHP model that will interact with our database,
 we'll have the foundation in place needed to do our view, add,
 edit, and delete operations later.
 
-CakePHP's model class files go in ``/App/Model``, and the file
-we'll be creating will be saved to ``/App/Model/Post.php``. The
-completed file should look like this::
+CakePHP's model class files are split between ``Table`` and ``Entity`` objects.
+``Table`` objects provide access to the collection of entities stored in a
+specific table and go in ``/App/Model/Table``. The file we'll be creating will
+be saved to ``/App/Model/Table/ArticlesTable.php``. The completed file should
+look like this::
 
-    namespace App\Model;
+    namespace App\Model\Table;
 
-    class Post extends AppModel {
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
     }
 
-Naming conventions are very important in CakePHP. By naming our model
-Post, CakePHP can automatically infer that this model will be used
-in the PostsController, and will be tied to a database table called
-``posts``.
+Naming conventions are very important in CakePHP. By naming our Table object
+``ArticlesTable``, CakePHP can automatically infer that this Table object will
+be used in the ArticlesController, and will be tied to a database table called
+``articles``.
 
 .. note::
 
     CakePHP will dynamically create a model object for you if it
-    cannot find a corresponding file in /App/Model. This also means
-    that if you accidentally name your file wrong (i.e. post.php or
-    posts.php), CakePHP will not recognize any of your settings and will
+    cannot find a corresponding file in /App/Model/Table. This also means
+    that if you accidentally name your file wrong (i.e. articlestable.php or
+    ArticleTable.php), CakePHP will not recognize any of your settings and will
     use the defaults instead.
 
 For more on models, such as table prefixes, callbacks, and
@@ -36,20 +40,19 @@ validation, check out the :doc:`/models` chapter of the
 Manual.
 
 
-Create a Posts Controller
-=========================
+Create a Articles Controller
+============================
 
-Next, we'll create a controller for our posts. The controller is
+Next, we'll create a controller for our articles. The controller is
 where all interaction with posts will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to posts done. We'll place this new controller in a file called
-``PostsController.php`` inside the ``/App/Controller`` directory. Here's what
-the basic controller should look like::
+``ArticlesController.php`` inside the ``/App/Controller`` directory. Here's
+what the basic controller should look like::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
+    class ArticlesController extends AppController {
     }
 
 Now, let's add an action to our controller. Actions often represent
@@ -60,19 +63,18 @@ posts. The code for that action would look something like this::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
+    class ArticlesController extends AppController {
 
         public function index() {
-            $this->set('posts', $this->Post->find('all'));
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
         }
     }
 
-By defining function ``index()``
-in our PostsController, users can now access the logic there by
-requesting www.example.com/posts/index. Similarly, if we were to
-define a function called ``foobar()``, users would be able to
-access that at www.example.com/posts/foobar.
+By defining function ``index()`` in our ArticlesController, users can now
+access the logic there by requesting www.example.com/articles/index. Similarly,
+if we were to define a function called ``foobar()``, users would be able to
+access that at www.example.com/articles/foobar.
 
 .. warning::
 
@@ -84,10 +86,8 @@ access that at www.example.com/posts/foobar.
 
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
-sets the view variable called 'posts' equal to the return value of
-the ``find('all')`` method of the Post model. Our Post model is
-automatically available at ``$this->Post`` because we've followed
-CakePHP's naming conventions.
+sets the view variable called 'articles' equal to the return value of
+the ``find('all')`` method of the Articles table object.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
