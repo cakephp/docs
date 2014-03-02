@@ -1,9 +1,6 @@
 Das Handbuch
 ############
 
-**`Hier klicken um zur CakePHP 1.1.x Version des Handbuchs zu
-gelangen </de/view/305/the-manual>`_**
-
 Willkommen zum "Cookbook", der neuen wiki-ähnlichen CakePHP
 Dokumentations Anwendung. Wir hoffen, daß diese neue Anwendung
 Dokumentations Beiträge leichter machen wird, während gleichzeitig ein
