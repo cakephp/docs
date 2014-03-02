@@ -167,7 +167,7 @@ Request Life-cycle Callbacks
 CakePHP controllers come fitted with callbacks you can use to
 insert logic around the request life-cycle:
 
-.. php:method:: beforeFilter()
+.. php:method:: beforeFilter(Event $event)
 
     This function is executed before every action in the controller.
     It's a handy place to check for an active session or inspect user
@@ -177,13 +177,13 @@ insert logic around the request life-cycle:
 
         The beforeFilter() method will be called for missing actions.
 
-.. php:method:: beforeRender()
+.. php:method:: beforeRender(Event $event)
 
     Called after controller action logic, but before the view is
     rendered. This callback is not used often, but may be needed if you
     are calling render() manually before the end of a given action.
 
-.. php:method:: afterFilter()
+.. php:method:: afterFilter(Event $event)
 
     Called after every controller action, and after rendering is
     complete. This is the last controller method to run.
