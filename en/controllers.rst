@@ -43,19 +43,18 @@ CakePHP core library. As such, AppController is defined in
     class AppController extends Controller {
     }
 
-Controller attributes and methods created in your AppController
-will be available to all of your application's controllers. It is
-the ideal place to create code that is common to all of your
-controllers. Components (which you'll learn about later) are best
-used for code that is used in many (but not necessarily all)
-controllers.
+Controller attributes and methods created in your AppController will be
+available to all of your application's controllers. It is the ideal place to
+create code that is common to all of your controllers. Components (which you'll
+learn about later) are best used for code that is used in many (but not
+necessarily all) controllers.
 
-While normal object-oriented inheritance rules apply, CakePHP
-does a bit of extra work when it comes to special controller
-attributes. The list of components and helpers used by a
-controller are treated specially. In these cases, AppController
-value arrays are merged with child controller class arrays. The values in the
-child class will always override those in the parent classes.
+While normal object-oriented inheritance rules apply, CakePHP does a bit of
+extra work when it comes to special controller attributes. The list of
+components and helpers used by a controller are treated specially. The values of
+these properties is merged with the properties defined in parent classes.  The
+configuration values in the child class will always override those in the parent
+classes.
 
 .. note::
 
@@ -64,16 +63,15 @@ child class will always override those in the parent classes.
 
     -  $components
     -  $helpers
-    -  $uses
 
-Remember to add the default Html and Form helpers, if you define
-the ``$helpers`` property in your AppController
+Remember to add the default Html and Form helpers, if you define the
+``$helpers`` property in your AppController
 
-Please also remember to call AppController's callbacks within child
-controller callbacks for best results::
+Remember to call AppController's callbacks within child controller callbacks for
+best results::
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
     }
 
 Request Parameters
