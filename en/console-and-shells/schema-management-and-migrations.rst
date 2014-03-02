@@ -105,7 +105,7 @@ Writing CakePHP Schema by Hand
 
 The CakeSchema class is the base class for all database schemas. 
 Each schema class is able to generate a set of tables.
-The schema shell console class ``Cake::Console::Command::SchemaShell``
+The schema shell console class ``SchemaShell`` in the ``lib/Cake/Console/Command`` directory
 interprets command line, and base schema class can read from the database, or
 generate the database table.
 
@@ -152,77 +152,86 @@ Example column ::
         'key' => 'primary'
      ),
 
-**key** `primary` for the primary key
+key
+    primary
+        for the primary key
 
-**null** Is the field nullable?
+null
+    Is the field nullable?
 
-**default** What is the default value of the field?
+default
+    What is the default value of the field?
 
-**limit**
+limit
+    The limit of the type of the field.    
 
-**length** What is the length of the field?
+length
+    What is the length of the field?
 
-**type** One of the following types :
+type
+    One of the following types
 
-* `integer`
+    integer
 
-* `date`
+    date
 
-* `time`
+    time
 
-* `datetime`
+    datetime
 
-* `timestamp`
+    timestamp
 
-* `boolean`
+    boolean
 
-* `biginteger`
+    biginteger
 
-* `float`
+    float
 
-* `string`
+    string
 
-* `text`
+    text
 
-* `binary`
+    binary
 
 
 Table key `indexes`
 ===================
 The key name `indexes` is put in the table array instead of a field name.
 
-**column** This is either a single column name or an array of columns.
+column
+    This is either a single column name or an array of columns.
 
-e.g. Single ::
+    e.g. Single ::
 
-    'indexes' => array(
-    'PRIMARY' => array(
-         'column' => 'id',
-         'unique' => 1
+        'indexes' => array(
+        'PRIMARY' => array(
+             'column' => 'id',
+             'unique' => 1
+            )
         )
-    )
 
-e.g. Multiple ::
+    e.g. Multiple ::
 
-    'indexes' => array(
-    'AB_KEY' => array(
-        'column' => array(
-             'a_id', 
-             'b_id'), 
-         'unique' => 1
+        'indexes' => array(
+        'AB_KEY' => array(
+            'column' => array(
+                 'a_id', 
+                 'b_id'), 
+             'unique' => 1
+            )
         )
-    )
 
 
-**unique** If the index is unique, set this to 1
+unique
+    If the index is unique, set this to 1, otherwise 0.
+
 
 Table key `tableParameters`
 ===========================
 
-**tableParameters in MySQL**
+tableParameters are supported only in MySQL.
 
-MySQL supports the greatest number of tableParameters; You can use
-tableParameters to set a variety of MySQL specific settings.
+You can use tableParameters to set a variety of MySQL specific settings.
 
 
 -  ``engine`` Control the storage engine used for your tables.
@@ -239,14 +248,6 @@ specific settings per column.
 
 See below for examples on how to use table and field parameters in
 your schema files.
-
-**tableParameters in Postgres**
-
-....
-
-**tableParameters in SQLite**
-
-....
 
 **Using tableParameters in schema files**
 
@@ -276,9 +277,7 @@ schema file. Much like ``indexes``::
 is an example of a table using ``tableParameters`` to set some
 database specific settings. If you use a schema file that contains
 options and features your database does not implement, those
-options will be ignored. For example if you imported the above
-schema to a PostgreSQL server, all of the tableParameters would be
-ignore as PostgreSQL does not support any of the included options.
+options will be ignored. 
 
 Migrations with CakePHP schema shell
 ====================================
