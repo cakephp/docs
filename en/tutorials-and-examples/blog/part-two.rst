@@ -20,10 +20,6 @@ look like this::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-
-        public function initialize(array $config) {
-            $this->table('articles');
-        }
     }
 
 Naming conventions are very important in CakePHP. By naming our Table object
@@ -47,7 +43,7 @@ Manual.
 Create a Articles Controller
 ============================
 
-Next, we'll create a controller for our artices. The controller is
+Next, we'll create a controller for our articles. The controller is
 where all interaction with posts will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to posts done. We'll place this new controller in a file called
@@ -55,8 +51,6 @@ related to posts done. We'll place this new controller in a file called
 what the basic controller should look like::
 
     namespace App\Controller;
-
-    use Cake\ORM\TableRegistry;
 
     class ArticlesController extends AppController {
     }
@@ -69,14 +63,11 @@ posts. The code for that action would look something like this::
 
     namespace App\Controller;
 
-    use Cake\ORM\TableRegistry;
-
     class ArticlesController extends AppController {
-    
+
         public function index() {
-            $articles = TableRegistry::get('Articles');
-            $query = $articles->find('all');
-            $this->set(compact('query'));
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
         }
     }
 
@@ -95,8 +86,8 @@ access that at www.example.com/articles/foobar.
 
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
-sets the view variable called 'query' equal to the return value of
-the ``find('all')`` method of the Articles table.
+sets the view variable called 'articles' equal to the return value of
+the ``find('all')`` method of the Articles table object.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
