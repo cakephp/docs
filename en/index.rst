@@ -2,7 +2,7 @@ The Manual
 ##########
 
 `Click here for the CakePHP 1.2.x version of the
-manual </view/3/the-manual>`_
+manual </1.2/en/>`_
 
 Welcome to the Cookbook, the CakePHP documentation. The Cookbook is a
 wiki-like system allowing contributions from the public. With an open
