@@ -103,13 +103,13 @@ correct datasource, lest they fallback to their default datasources::
 Writing CakePHP Schema by Hand
 ==============================
 
-The CakeSchema class is the base class for all database schemas.  Each schema
+The CakeSchema class is the base class for all database schemas. Each schema
 class is able to generate a set of tables.  The schema shell console class
 ``SchemaShell`` in the ``lib/Cake/Console/Command`` directory interprets command
 line, and base schema class can read from the database, or generate the database
 table.
 
-CakeSchema can now locate, read and write schema files to plugins.  The
+CakeSchema can now locate, read and write schema files to plugins. The
 SchemaShell also exposes this functionality.
 
 CakeSchema also supports ``tableParameters``. Table Parameters are non column
@@ -188,7 +188,7 @@ default
     What is the default value of the field?
 
 limit
-    The limit of the type of the field.    
+    The limit of the type of the field.
 
 length
     What is the length of the field?
