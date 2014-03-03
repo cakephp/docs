@@ -491,6 +491,31 @@ HTML attributes. The following will cover the options specific to
 Customizing the templates FormHelper uses
 =========================================
 
+Like many helpers in CakePHP, FormHelper uses string templates to format the
+HTML it creates. While the default templates are intended to be a reasonable set
+of defaults. You may need to customize the templates to suit your application.
+
+To change the templates when the helper is loaded you can set the ``templates``
+option when including the helper in your controller::
+
+    public $helpers = [
+        'Form' => [
+            'templates' => 'app_form.php',
+        ]
+    ];
+
+This would load the tags in ``App/Config/app_form.php``. This file should
+contain an array of templates indexed by name::
+
+    $config = [
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
+    ];
+
+Any templates you define will replace the default ones included in the helper.
+You can also change the templates at runtime using the ``templates()`` method::
+
+    $this->Form->templates($myTemplates);
+
 
 Generating Specific Types of Inputs
 ===================================
