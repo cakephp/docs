@@ -400,8 +400,8 @@ HTML attributes. The following will cover the options specific to
   the :ref:`automagic-form-elements`, you can also create 'file', 'password',
   and any type supported by HTML5::
 
-    echo $this->Form->input('field', array('type' => 'file'));
-    echo $this->Form->input('email', array('type' => 'email'));
+    echo $this->Form->input('field', ['type' => 'file']);
+    echo $this->Form->input('email', ['type' => 'email']);
 
   Output:
 
@@ -419,52 +419,51 @@ HTML attributes. The following will cover the options specific to
 * ``$options['label']`` Set this key to the string you would like to be
   displayed within the label that usually accompanies the input::
 
-    echo $this->Form->input('User.name', array(
+    echo $this->Form->input('name', [
         'label' => 'The User Alias'
-    ));
+    ]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <label for="user-name">The User Alias</label>
-        <input name="User[name]" type="text" value="" id="user-name" />
+        <label for="name">The User Alias</label>
+        <input name="name" type="text" value="" id="name" />
     </div>
 
   Alternatively, set this key to false to disable the output of the
   label::
 
-    echo $this->Form->input('User.name', array('label' => false));
+    echo $this->Form->input('name', ['label' => false]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <input name="User[name]" type="text" value="" id="user-name" />
+        <input name="name" type="text" value="" id="name" />
     </div>
 
   Set this to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``text`` key in
   the array to customize the label text::
 
-    echo $this->Form->input('User.name', array(
-        'label' => array(
+    echo $this->Form->input('name', [
+        'label' => [
             'class' => 'thingy',
             'text' => 'The User Alias'
-        )
-    ));
+        ]
+    ]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <label for="user-name" class="thingy">The User Alias</label>
-        <input name="User[name]" type="text" value="" id="user-name" />
+        <label for="name" class="thingy">The User Alias</label>
+        <input name="name" type="text" value="" id="name" />
     </div>
-
 
 * ``$options['error']`` Using this key allows you to override the default model
   error messages and can be used, for example, to set i18n messages. It has a
@@ -473,16 +472,14 @@ HTML attributes. The following will cover the options specific to
 
   To disable error message output & field classes set the error key to false::
 
-    echo $this->Form->input('Model.field', array('error' => false));
-
-  .. TODO:: Continue here.
+    echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
   the keys matching the validation rule names::
 
-    $this->Form->input('Model.field', array(
-        'error' => array('tooShort' => __('This is not long enough'))
-    ));
+    $this->Form->input('name', [
+        'error' => ['tooShort' => __('This is not long enough')]
+    ]);
 
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
