@@ -366,44 +366,25 @@ data in a pluralised and camelCased format as follows::
 Field Naming Conventions
 ------------------------
 
-The Form helper is pretty smart. Whenever you specify a field name
-with the form helper methods, it'll automatically use the current
-model name to build an input with a format like the following:
+When creating input widgets you should name your fields after the matching
+attributes in the form's entity. For example, if you created a form for an
+``$article``, you would create fields named after the properities. E.g
+``title``, ``body`` and ``published``.
 
-.. code-block:: html
+You can create inputs for associated models, or arbitrary models by passing in
+``association.fieldname`` as the first parameter::
 
-    <input type="text" id="ModelnameFieldname" name="Modelname[fieldname]">
+    echo $this->Form->input('association.fieldname');
 
-This allows you to omit the model name when generating inputs for the model that
-the form was created for. You can create inputs for associated models, or
-arbitrary models by passing in Modelname.fieldname as the first parameter::
+Any dots in your field names will be converted into nested request data. For
+example, if you created a field with a name ``0.comments.body`` you would get
+a name attribute that looks like ``0[comments][body]``. This convention makes it
+easy to save data with the ORM.
 
-    echo $this->Form->input('Modelname.fieldname');
-
-If you need to specify multiple fields using the same field name,
-thus creating an array that can be saved in one shot with
-saveAll(), use the following convention::
-
-    echo $this->Form->input('Modelname.0.fieldname');
-    echo $this->Form->input('Modelname.1.fieldname');
-
-Output:
-
-.. code-block:: html
-
-    <input type="text" id="Modelname0Fieldname" name="Modelname[0][fieldname]">
-    <input type="text" id="Modelname1Fieldname" name="Modelname[1][fieldname]">
-
-
-FormHelper uses several field-suffixes internally for datetime input creation.
-If you are using fields named ``year``, ``month``, ``day``, ``hour``,
-``minute``, or ``meridian`` and having issues getting the correct input, you can
-set the ``name`` attribute to override the default behavior::
-
-    echo $this->Form->input('Model.year', array(
-        'type' => 'text',
-        'name' => 'Model[year]'
-    ));
+When creating datetime related inputs, FormHelper will append a field-suffix.
+You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
+``minute``, or ``meridian`` being added. These fields will be automatically converted into 
+``DateTime`` objects when entities are marshalled.
 
 
 Options
@@ -419,121 +400,70 @@ HTML attributes. The following will cover the options specific to
   the :ref:`automagic-form-elements`, you can also create 'file', 'password',
   and any type supported by HTML5::
 
-    echo $this->Form->input('field', array('type' => 'file'));
-    echo $this->Form->input('email', array('type' => 'email'));
+    echo $this->Form->input('field', ['type' => 'file']);
+    echo $this->Form->input('email', ['type' => 'email']);
 
   Output:
 
   .. code-block:: html
 
     <div class="input file">
-        <label for="UserField">Field</label>
-        <input type="file" name="User[field]" value="" id="UserField" />
+        <label for="field">Field</label>
+        <input type="file" name="field" value="" id="field" />
     </div>
     <div class="input email">
-        <label for="UserEmail">Email</label>
-        <input type="email" name="User[email]" value="" id="UserEmail" />
+        <label for="email">Email</label>
+        <input type="email" name="email" value="" id="email" />
     </div>
-
-* ``$options['div']`` Use this option to set attributes of the input's
-  containing div. Using a string value will set the div's class name. An array
-  will set the div's attributes to those specified by the array's keys/values.
-  Alternatively, you can set this key to false to disable the output of the div.
-
-  Setting the class name::
-
-    echo $this->Form->input('User.name', array(
-        'div' => 'class_name'
-    ));
-
-  Output:
-
-  .. code-block:: html
-
-    <div class="class_name">
-        <label for="UserName">Name</label>
-        <input name="User[name]" type="text" value="" id="UserName" />
-    </div>
-
-  Setting multiple attributes::
-
-    echo $this->Form->input('User.name', array(
-        'div' => array(
-            'id' => 'mainDiv',
-            'title' => 'Div Title',
-            'style' => 'display:block'
-        )
-    ));
-
-  Output:
-
-  .. code-block:: html
-
-    <div class="input text" id="mainDiv" title="Div Title" style="display:block">
-        <label for="UserName">Name</label>
-        <input name="User[name]" type="text" value="" id="UserName" />
-    </div>
-
-  Disabling div output::
-
-    echo $this->Form->input('User.name', array('div' => false)); ?>
-
-  Output:
-
-  .. code-block:: html
-
-    <label for="UserName">Name</label>
-    <input name="User[name]" type="text" value="" id="UserName" />
 
 * ``$options['label']`` Set this key to the string you would like to be
   displayed within the label that usually accompanies the input::
 
-    echo $this->Form->input('User.name', array(
+    echo $this->Form->input('name', [
         'label' => 'The User Alias'
-    ));
+    ]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <label for="UserName">The User Alias</label>
-        <input name="User[name]" type="text" value="" id="UserName" />
+        <label for="name">The User Alias</label>
+        <input name="name" type="text" value="" id="name" />
     </div>
 
   Alternatively, set this key to false to disable the output of the
   label::
 
-    echo $this->Form->input('User.name', array('label' => false));
+    echo $this->Form->input('name', ['label' => false]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <input name="User[name]" type="text" value="" id="UserName" />
+        <input name="name" type="text" value="" id="name" />
     </div>
 
   Set this to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``text`` key in
   the array to customize the label text::
 
-    echo $this->Form->input('User.name', array(
-        'label' => array(
+    echo $this->Form->input('name', [
+        'label' => [
             'class' => 'thingy',
             'text' => 'The User Alias'
-        )
-    ));
+        ]
+    ]);
 
   Output:
 
   .. code-block:: html
 
     <div class="input">
-        <label for="UserName" class="thingy">The User Alias</label>
-        <input name="User[name]" type="text" value="" id="UserName" />
+        <label for="name" class="thingy">The User Alias</label>
+        <input name="name" type="text" value="" id="name" />
     </div>
-
 
 * ``$options['error']`` Using this key allows you to override the default model
   error messages and can be used, for example, to set i18n messages. It has a
@@ -542,126 +472,77 @@ HTML attributes. The following will cover the options specific to
 
   To disable error message output & field classes set the error key to false::
 
-    $this->Form->input('Model.field', array('error' => false));
-
-  To disable only the error message, but retain the field classes, set the
-  errorMessage key to false::
-
-    $this->Form->input('Model.field', array('errorMessage' => false));
-
-  To modify the wrapping element type and its class, use the
-  following format::
-
-    $this->Form->input('Model.field', array(
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
-    ));
-
-  To prevent HTML being automatically escaped in the error message
-  output, set the escape suboption to false::
-
-    $this->Form->input('Model.field', array(
-        'error' => array(
-            'attributes' => array('escape' => false)
-        )
-    ));
+    echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
   the keys matching the validation rule names::
 
-    $this->Form->input('Model.field', array(
-        'error' => array('tooShort' => __('This is not long enough'))
-    ));
+    $this->Form->input('name', [
+        'error' => ['tooShort' => __('This is not long enough')]
+    ]);
 
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
 
-  .. versionadded:: 2.3
-    Support for the ``errorMessage`` option was added in 2.3
+Customizing the templates FormHelper uses
+=========================================
 
-* ``$options['before']``, ``$options['between']``, ``$options['separator']``,
-  and ``$options['after']``
+Like many helpers in CakePHP, FormHelper uses string templates to format the
+HTML it creates. While the default templates are intended to be a reasonable set
+of defaults. You may need to customize the templates to suit your application.
 
-  Use these keys if you need to inject some markup inside the output
-  of the input() method::
+To change the templates when the helper is loaded you can set the ``templates``
+option when including the helper in your controller::
 
-      echo $this->Form->input('field', array(
-          'before' => '--before--',
-          'after' => '--after--',
-          'between' => '--between---'
-      ));
+    public $helpers = [
+        'Form' => [
+            'templates' => 'app_form.php',
+        ]
+    ];
 
-  Output:
+This would load the tags in ``App/Config/app_form.php``. This file should
+contain an array of templates indexed by name::
 
-  .. code-block:: html
+    $config = [
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
+    ];
 
-      <div class="input">
-      --before--
-      <label for="UserField">Field</label>
-      --between---
-      <input name="User[field]" type="text" value="" id="UserField" />
-      --after--
-      </div>
+Any templates you define will replace the default ones included in the helper.
+You can also change the templates at runtime using the ``templates()`` method::
 
-  For radio inputs the 'separator' attribute can be used to
-  inject markup to separate each input/label pair::
+    $this->Form->templates($myTemplates);
 
-      echo $this->Form->input('field', array(
-          'before' => '--before--',
-          'after' => '--after--',
-          'between' => '--between---',
-          'separator' => '--separator--',
-          'options' => array('1', '2')
-      ));
+List of templates
+-----------------
 
-  Output:
+A list of the default templates and the variables they can expect are:
 
-  .. code-block:: html
+* ``button`` {{attrs}}, {{text}}
+* ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxContainer`` {{input}}, {{label}}
+* ``dateWidget`` {{month}}, {{day}}, {{year}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
+* ``error`` {{content}}
+* ``errorList`` {{content}}
+* ``errorItem`` {{text}}
+* ``file`` {{name}}, {{attrs}}
+* ``formstart`` {{attrs}}
+* ``formend`` No variables are provided.
+* ``hiddenblock`` {{content}}
+* ``input`` {{type}}, {{name}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioContainer``  {{input}}, {{label}},
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``formGroup`` {{label}}, {{input}},
+* ``checkboxFormGroup`` {{input}}, {{label}},
+* ``groupContainer`` {{type}}, {{required}}, {{content}}
+* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 
-      <div class="input">
-      --before--
-      <input name="User[field]" type="radio" value="1" id="UserField1" />
-      <label for="UserField1">1</label>
-      --separator--
-      <input name="User[field]" type="radio" value="2" id="UserField2" />
-      <label for="UserField2">2</label>
-      --between---
-      --after--
-      </div>
-
-  For ``date`` and ``datetime`` type elements the 'separator'
-  attribute can be used to change the string between select elements.
-  Defaults to '-'.
-
-* ``$options['format']`` The ordering of the HTML generated by FormHelper is
-  controllable as well. The 'format' options supports an array of strings
-  describing the template you would like said element to follow. The supported
-  array keys are:
-  ``array('before', 'input', 'between', 'label', 'after','error')``.
-
-
-* ``$options['inputDefaults']`` If you find yourself repeating the same options
-  in multiple input() calls, you can use `inputDefaults`` to keep your code dry::
-
-    echo $this->Form->create('User', array(
-        'inputDefaults' => array(
-            'label' => false,
-            'div' => false
-        )
-    ));
-
-  All inputs created from that point forward would inherit the
-  options declared in inputDefaults. You can override the
-  defaultOptions by declaring the option in the input() call::
-
-    // No div, no label
-    echo $this->Form->input('password');
-
-    // has a label element
-    echo $this->Form->input('username', array('label' => 'Username'));
-
-  If you need to later change the defaults you can use
-  :php:meth:`FormHelper::inputDefaults()`.
 
 Generating Specific Types of Inputs
 ===================================
