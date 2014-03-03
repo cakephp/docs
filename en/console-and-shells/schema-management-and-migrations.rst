@@ -103,18 +103,18 @@ correct datasource, lest they fallback to their default datasources::
 Writing CakePHP Schema by Hand
 ==============================
 
-The CakeSchema class is the base class for all database schemas. 
-Each schema class is able to generate a set of tables.
-The schema shell console class ``SchemaShell`` in the ``lib/Cake/Console/Command`` directory
-interprets command line, and base schema class can read from the database, or
-generate the database table.
+The CakeSchema class is the base class for all database schemas.  Each schema
+class is able to generate a set of tables.  The schema shell console class
+``SchemaShell`` in the ``lib/Cake/Console/Command`` directory interprets command
+line, and base schema class can read from the database, or generate the database
+table.
 
-CakeSchema can now locate, read and write schema files to plugins.
-The SchemaShell also exposes this functionality.
+CakeSchema can now locate, read and write schema files to plugins.  The
+SchemaShell also exposes this functionality.
 
-CakeSchema also supports ``tableParameters``. Table Parameters are non column specific table
-information such as collation, charset, comments, and table engine
-type. Each Dbo implements the tableParameters they support.
+CakeSchema also supports ``tableParameters``. Table Parameters are non column
+specific table information such as collation, charset, comments, and table
+engine type. Each Dbo implements the tableParameters they support.
 
 Example
 -------
@@ -125,13 +125,39 @@ Here is a full example from the acl class ::
      * ACO - Access Control Object - Something that is wanted
      */
         public $acos = array(
-            'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
-            'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+            'id' => array(
+                'type' => 'integer',
+                'null' => false,
+                'default' => null,
+                'length' => 10,
+                'key' => 'primary'
+            ),
+            'parent_id' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
             'model' => array('type' => 'string', 'null' => true),
-            'foreign_key' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+            'foreign_key' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
             'alias' => array('type' => 'string', 'null' => true),
-            'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
-            'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+            'lft' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'rght' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
             'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
         );
 
@@ -153,8 +179,7 @@ Example column ::
      ),
 
 key
-    primary
-        for the primary key
+    The ``primary`` key defines the primary key index.
 
 null
     Is the field nullable?
@@ -171,27 +196,17 @@ length
 type
     One of the following types
 
-    integer
-
-    date
-
-    time
-
-    datetime
-
-    timestamp
-
-    boolean
-
-    biginteger
-
-    float
-
-    string
-
-    text
-
-    binary
+    * integer
+    * date
+    * time
+    * datetime
+    * timestamp
+    * boolean
+    * biginteger
+    * float
+    * string
+    * text
+    * binary
 
 
 Table key `indexes`
