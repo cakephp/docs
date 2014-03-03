@@ -52,7 +52,7 @@ necessarily all) controllers.
 While normal object-oriented inheritance rules apply, CakePHP does a bit of
 extra work when it comes to special controller attributes. The list of
 components and helpers used by a controller are treated specially. The values of
-these properties is merged with the properties defined in parent classes.  The
+these properties are merged with the properties defined in parent classes.  The
 configuration values in the child class will always override those in the parent
 classes.
 
