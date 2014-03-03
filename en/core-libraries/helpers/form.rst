@@ -516,6 +516,36 @@ You can also change the templates at runtime using the ``templates()`` method::
 
     $this->Form->templates($myTemplates);
 
+List of templates
+-----------------
+
+A list of the default templates and the variables they can expect are:
+
+* ``button`` {{attrs}}, {{text}}
+* ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxContainer`` {{input}}, {{label}}
+* ``dateWidget`` {{month}}, {{day}}, {{year}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
+* ``error`` {{content}}
+* ``errorList`` {{content}}
+* ``errorItem`` {{text}}
+* ``file`` {{name}}, {{attrs}}
+* ``formstart`` {{attrs}}
+* ``formend`` No variables are provided.
+* ``hiddenblock`` {{content}}
+* ``input`` {{type}}, {{name}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioContainer``  {{input}}, {{label}},
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``formGroup`` {{label}}, {{input}},
+* ``checkboxFormGroup`` {{input}}, {{label}},
+* ``groupContainer`` {{type}}, {{required}}, {{content}}
+* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+
 
 Generating Specific Types of Inputs
 ===================================
