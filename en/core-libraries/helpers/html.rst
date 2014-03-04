@@ -1085,7 +1085,7 @@ Creating breadcrumb trails with HtmlHelper
 
     :param array $options: An array of :term:`html attributes` for the
         containing ``<ul>`` element. Can also contain the 'separator',
-        'firstClass' and 'lastClass' options.
+        'firstClass', 'lastClass' and 'escape' options.
     :param string|array $startText: The text or element that precedes the ul.
 
     Returns breadcrumbs as a (x)html list.
@@ -1102,6 +1102,9 @@ Creating breadcrumb trails with HtmlHelper
 
     .. versionchanged:: 2.3
         The 'separator', 'firstClass' and 'lastClass' options were added.
+        
+    .. versionchanged:: 2.5
+        The 'escape' option were added.
 
 
 .. meta::
