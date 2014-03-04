@@ -1104,7 +1104,7 @@ Creating breadcrumb trails with HtmlHelper
         The 'separator', 'firstClass' and 'lastClass' options were added.
         
     .. versionchanged:: 2.5
-        The 'escape' option were added.
+        The 'escape' option was added.
 
 
 .. meta::
