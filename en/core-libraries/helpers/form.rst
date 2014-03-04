@@ -509,8 +509,12 @@ contain an array of templates indexed by name::
     ];
 
 Any templates you define will replace the default ones included in the helper.
+Templates that are not replaced, will continue to use the default values.
 You can also change the templates at runtime using the ``templates()`` method::
 
+    $myTemplates = [
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
+    ];
     $this->Form->templates($myTemplates);
 
 List of templates
