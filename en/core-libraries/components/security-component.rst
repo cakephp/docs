@@ -144,7 +144,7 @@ Form tampering prevention
 =========================
 
 By default ``SecurityComponent`` prevents users from tampering with forms. It
-does this by working with FormHelper and tracking which files are in a form. It
+does this by working with FormHelper and tracking which fields are in a form. It
 also keeps track of the values of hidden input elements. All of this data is
 combined and turned into a hash. When a form is submitted, SecurityComponent
 will use the POST data to build the same structure and compare the hash.

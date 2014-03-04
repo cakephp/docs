@@ -153,7 +153,7 @@ Prévention de la falsification de formulaire
 
 Par défaut le component Security ``SecurityComponent`` prévient les
 utilisateurs de la falsification de formulaire. Il fait cela en travaillant
-avec le Helper Form et en traquant quels fichiers sont dans un formulaire. il
+avec le Helper Form et en traquant quels champs sont dans un formulaire. il
 assure le suivi des éléments d'entrée cachés. Toutes ces données sont combinées
 et hachées. Quand un formulaire est soumis, le component de sécurité utilisera
 les données POSTé pour construire la même structure et comparer le hachage.

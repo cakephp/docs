@@ -318,7 +318,7 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
 
         // 投稿のオーナーは編集や削除ができる
         if (in_array($this->action, array('edit', 'delete'))) {
-            $postId = $this->request->params['pass'][0];
+            $postId = (int) $this->request->params['pass'][0];
             if ($this->Post->isOwnedBy($postId, $user['id'])) {
                 return true;
             }

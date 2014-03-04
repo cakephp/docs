@@ -40,6 +40,7 @@ It's also possible to add and use other parameters, as is made use
 of by some find types, behaviors and of course possibly with your
 own model methods.
 
+If your find operation fails to match any records you will get an empty array.
 
 .. _model-find-first:
 
