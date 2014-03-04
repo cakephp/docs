@@ -376,6 +376,8 @@ model, you don't need to use 'contain' again for related models
     all models used in containment, you may consider attaching it to
     your AppModel.
 
+.. _containablebehavior-options:
+
 ContainableBehavior options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -428,7 +430,7 @@ Here's an example of how to contain associations when paginating::
 .. note::
 
     If you contained the associations through the model instead,
-    it will not honor Containable's :ref:`recursive option <containableBehavior-options>`.
+    it will not honor Containable's :ref:`recursive option <containablebehavior-options>`.
     So if you set recursive to -1 for example for the model, it won't work::
 
         $this->User->recursive = -1;

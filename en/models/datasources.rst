@@ -311,9 +311,9 @@ So if the Sqlserver Datasource errors out with::
     Error: Database connection "Sqlserver" is missing, or could not be created.
 
 First check if the SQL Server PHP extension pdo_sqlsrv and the SQL Server Native
-Client.
+Client are installed properly.
 
 .. meta::
     :title lang=en: DataSources
     :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
-Client are installed properly.
+
