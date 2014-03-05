@@ -950,7 +950,7 @@ Datetime options
 Form Element-Specific Methods
 =============================
 
- All elements are created under a form for the ``User`` model as in the examples above.
+All elements are created under a form for the ``User`` model as in the examples above.
 For this reason, the HTML code generated will contain attributes that reference to the User model.
 Ex: name=data[User][username], id=UserUsername
     
@@ -1057,6 +1057,7 @@ Ex: name=data[User][username], id=UserUsername
     generated. Example:
 
     .. code-block:: html
+
         <textarea name="data[User][notes]" id="UserNotes">
         This text is to be edited.
         </textarea>

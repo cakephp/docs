@@ -126,7 +126,7 @@ such as debugging and translating content.
     If ``$showHTML`` is true or left as null, the data is rendered to be
     browser-friendly.
     If $showFrom is not set to false, the debug output will start with the line from
-    which it was called
+    which it was called.
     Also see :doc:`/development/debugging`
 
 .. php:function:: env(string $key)
