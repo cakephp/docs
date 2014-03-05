@@ -616,104 +616,6 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-.. _converting-request-data:
-
-Converting Request Data into Entities
-=====================================
-
-Before editing and saving data back into the database, you'll need to convert
-the request data from the array format held in the request, and the entities
-that the ORM uses. The Table class provides an easy way to convert one or many
-entities from request data. You can convert a single entity using::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data());
-
-The request data should follow the structure of your entities. For example if
-you had an article, which belonged to a user, and had many comments, your
-request data should look like::
-
-    $data = [
-        'title' => 'My title',
-        'body' => 'The text',
-        'user_id' => 1,
-        'user' => [
-            'username' => 'mark'
-        ],
-        'comments' => [
-            ['body' => 'First comment'],
-            ['body' => 'Second comment'],
-        ]
-    ];
-
-If you are saving belongsToMany associations you can either use a list of
-entity data or a list of ids. When using a list of entity data your request data
-should look like::
-
-    $data = [
-        'title' => 'My title',
-        'body' => 'The text',
-        'user_id' => 1,
-        'tags' => [
-            ['tag' => 'CakePHP'],
-            ['tag' => 'Internet'],
-        ]
-    ];
-
-When using a list of ids, your request data should look like::
-
-    $data = [
-        'title' => 'My title',
-        'body' => 'The text',
-        'user_id' => 1,
-        'tags' => [
-            '_ids' => [1, 2, 3, 4]
-        ]
-    ];
-
-The marshaller will handle both of these forms correctly, but only for
-belongsToMany associations.
-
-When building forms that save nested associations, you need to define which
-associations should be marshalled::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
-    ]);
-
-The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. You can convert multiple entities using::
-
-    $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
-
-When converting multiple entities, the request data for multiple articles should
-look like::
-
-    $data = [
-        [
-            'title' => 'First post',
-            'published' => 1
-        ],
-        [
-            'title' => 'Second post',
-            'published' => 1
-        ],
-    ];
-
-Once you've converted request data into entities you can ``save()`` or
-``delete()`` them.
-
-.. note::
-
-    If you are using newEntity() and the resulting entities are missing some or
-    all of the data they were passed, you should double check that the columns
-    you want to set can be mass-assigned. By default fields cannot be modified
-    through mass-assignment.
-
 Loading Entities
 ================
 
@@ -1863,4 +1765,102 @@ During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
     TableRegistry::clear();
+
+.. _converting-request-data:
+
+Converting Request Data into Entities
+=====================================
+
+Before editing and saving data back into the database, you'll need to convert
+the request data from the array format held in the request, and the entities
+that the ORM uses. The Table class provides an easy way to convert one or many
+entities from request data. You can convert a single entity using::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data());
+
+The request data should follow the structure of your entities. For example if
+you had an article, which belonged to a user, and had many comments, your
+request data should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'user' => [
+            'username' => 'mark'
+        ],
+        'comments' => [
+            ['body' => 'First comment'],
+            ['body' => 'Second comment'],
+        ]
+    ];
+
+If you are saving belongsToMany associations you can either use a list of
+entity data or a list of ids. When using a list of entity data your request data
+should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Internet'],
+        ]
+    ];
+
+When using a list of ids, your request data should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+The marshaller will handle both of these forms correctly, but only for
+belongsToMany associations.
+
+When building forms that save nested associations, you need to define which
+associations should be marshalled::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'Tags', 'Comments' => ['associated' => ['Users']]
+    ]);
+
+The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
+should be marshalled. You can convert multiple entities using::
+
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+
+When converting multiple entities, the request data for multiple articles should
+look like::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+
+Once you've converted request data into entities you can ``save()`` or
+``delete()`` them.
+
+.. note::
+
+    If you are using newEntity() and the resulting entities are missing some or
+    all of the data they were passed, you should double check that the columns
+    you want to set can be mass-assigned. By default fields cannot be modified
+    through mass-assignment.
 
