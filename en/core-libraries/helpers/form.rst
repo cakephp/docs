@@ -132,10 +132,10 @@ There are a number of options for create():
 
      <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-  When using 'put' or 'delete', your form will be functionally equivalent to
-  a 'post' form, but when submitted, the HTTP request method will be overridden
-  with 'PUT' or 'DELETE', respectively.  This allows CakePHP to emulate proper
-  REST support in web browsers.
+  When using 'put', 'patch' or 'delete', your form will be functionally
+  equivalent to a 'post' form, but when submitted, the HTTP request method will
+  be overridden with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows
+  CakePHP to emulate proper REST support in web browsers.
 
 * ``$options['action']`` The action key allows you to point the form to a
   specific action in your current controller. For example, if you'd like to
@@ -177,9 +177,6 @@ There are a number of options for create():
   .. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
-
-  Also check :php:meth:`Cake\\View\\Helper\\HtmlHelper::url()` method for more
-  examples of different types of URLs.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
@@ -348,7 +345,7 @@ hasOne - Relation, you can add the following to your Users-controller
 
     $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-Afterwards, add the following to your form-view::
+Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
@@ -383,8 +380,8 @@ easy to save data with the ORM.
 
 When creating datetime related inputs, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
-``minute``, or ``meridian`` being added. These fields will be automatically converted into 
-``DateTime`` objects when entities are marshalled.
+``minute``, or ``meridian`` being added. These fields will be automatically
+converted into ``DateTime`` objects when entities are marshalled.
 
 
 Options
@@ -485,7 +482,7 @@ HTML attributes. The following will cover the options specific to
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
 
-Customizing the templates FormHelper uses
+Customizing the Templates FormHelper Uses
 =========================================
 
 Like many helpers in CakePHP, FormHelper uses string templates to format the
@@ -517,7 +514,7 @@ You can also change the templates at runtime using the ``templates()`` method::
     ];
     $this->Form->templates($myTemplates);
 
-List of templates
+List of Templates
 -----------------
 
 A list of the default templates and the variables they can expect are:
@@ -748,10 +745,8 @@ Datetime Options
 * ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
   Defaults to null which rounds half up according to `interval`.
 
-  .. versionadded:: 2.4
-
-Form Element-Specific Methods
-=============================
+Creating Labels
+===============
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
@@ -781,6 +776,9 @@ Form Element-Specific Methods
 
         <label for="UserName" id="user-label">Name</label>
         <label for="UserName" class="highlight">Your username</label>
+
+Creating Input Elements
+=======================
 
 .. php:method:: text(string $name, array $options)
 
@@ -945,9 +943,6 @@ Form Element-Specific Methods
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
-
-    .. versionchanged:: 2.1
-        The ``$attributes['disabled']`` option was added in 2.1.
 
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
@@ -1389,6 +1384,42 @@ following::
 
 Creates a select element populated with 'am' and 'pm'.
 
+Displaying and Checking Errors
+==============================
+
+.. php:method:: error(string $fieldName, mixed $text, array $options)
+
+Shows a validation error message, specified by $text, for the given
+field, in the event that a validation error has occurred.
+
+Options:
+
+-  'escape' bool Whether or not to HTML escape the contents of the
+   error.
+-  'wrap' mixed Whether or not the error message should be wrapped
+   in a div. If a string, will be used as the HTML tag to use.
+-  'class' string The class name for the error message
+
+
+.. TODO:: Add examples.
+
+.. php:method:: isFieldError(string $fieldName)
+
+Returns true if the supplied $fieldName has an active validation
+error.::
+
+    if ($this->Form->isFieldError('gender')) {
+        echo $this->Form->error('gender');
+    }
+
+.. note::
+
+    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+
+
+Generating Entire Forms
+=======================
+
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = [])
 
 Generates a set of inputs for the given context. By default, all fields for the
@@ -1428,39 +1459,6 @@ For example::
     );
 
 If you disable the fieldset, the legend will not print.
-
-Displaying and Checking Errors
-==============================
-
-.. php:method:: error(string $fieldName, mixed $text, array $options)
-
-Shows a validation error message, specified by $text, for the given
-field, in the event that a validation error has occurred.
-
-Options:
-
--  'escape' bool Whether or not to HTML escape the contents of the
-   error.
--  'wrap' mixed Whether or not the error message should be wrapped
-   in a div. If a string, will be used as the HTML tag to use.
--  'class' string The class name for the error message
-
-
-.. TODO:: Add examples.
-
-.. php:method:: isFieldError(string $fieldName)
-
-Returns true if the supplied $fieldName has an active validation
-error.::
-
-    if ($this->Form->isFieldError('gender')) {
-        echo $this->Form->error('gender');
-    }
-
-.. note::
-
-    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
-
 
 Working with SecurityComponent
 ==============================
