@@ -1864,3 +1864,107 @@ Once you've converted request data into entities you can ``save()`` or
     you want to set can be mass-assigned. By default fields cannot be modified
     through mass-assignment.
 
+Merging Request Data Into Entities
+----------------------------------
+
+In order to update entities you may choose to apply request data directly to an
+existing entity. This has the advantage that only the fields that actually
+changed will be saved, as opposed of sending all fields to the database to be
+persisted. You can merge an array of raw data into an existing entity using the
+``patchEntity`` method::
+
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->get(1);
+    $articles->patchEntity($article, $this->request->data());
+
+As explained in the previous section, the request data should follow the
+structure of your entity. The ``patchEntity`` method is equally capable of
+merging associations, by default only the first level of associations are
+merged, but if you wish to control the list of associations to be merged or
+merge deeper to deeper levels, you can use the second parameter of the method::
+
+    $entity = $articles->get(1);
+    $articles->patchEntity($article, $this->request->data(), [
+        'Tags', 'Comments' => ['associated' => ['Users']]
+    ]);
+
+Associations are merged by matching the primary key field in the source entities
+to the corresponding fields in the data array. For belongsTo and hasOne
+associations, new entities will be constructed if no previous entity is found
+for the target property.
+
+For example give some request data like the following::
+
+    $data = [
+        'title' => 'My title',
+        'user' => [
+            'username' => 'mark'
+        ]
+    ];
+
+Trying to patch an entity without an entity in the user property will create
+a new user entity::
+
+    $entity = $articles->patchEntity(new Article, $data);
+    echo $entity->user->username; // Echoes 'mark'
+
+The same can be said about hasMany and belongsToMany associations, but an
+important note should be made.
+
+.. note::
+    For  hasMany and belongsToMany associations, if tehre were any entities that
+    could not be matched by primary key to any record in the data array, then
+    those records will be discarded from the resulting entity.
+
+For example, consider the following case::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'comments' => [
+            ['body' => 'First comment', 'id' => 1],
+            ['body' => 'Second comment', 'id' => 2],
+        ]
+    ];
+    $entity = $articles->newEntity($data);
+
+    $newData = [
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new comment'],
+        ]
+    ];
+    $articles->patchEntity($entity, $newData);
+
+At the end, if the entity is converted back to an array you will obtain the
+following result::
+
+    [
+        'title' => 'My title',
+        'body' => 'The text',
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new'],
+        ]
+    ];
+
+As you can see, the comment with id 2 is no longer there, as it could not be
+matched to anything in the ``$newData`` array. This is done this way to better
+capture the intention of a request data post, The sent data is reflecting the
+new state that the entity should have.
+
+Some additional advantages of this approach is that it reduces the number of
+operations to be executed when persisting the entity again.
+
+Please note that this does not mean that the comment with id 2 was removed from
+the database, if you wish to remove the comments for that article that are not
+present in the entity, you can collect the primary keys and execute a batch
+delete for those not in the list::
+
+    $present = (new Collection($entity->comments))->extract('id');
+    TableRegistry::get('Comments')->deleteAll([
+        'conditions' => ['article_id' => $article->id, 'id NOT IN' => $present]
+    ]);
+
+As you can see, this also helps creating solutions where an association needs to
+be implemented like a single set.
