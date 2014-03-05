@@ -534,6 +534,7 @@ A list of the default templates and the variables they can expect are:
 * ``formend`` No variables are provided.
 * ``hiddenblock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
+* ``inputsubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
@@ -546,6 +547,7 @@ A list of the default templates and the variables they can expect are:
 * ``checkboxFormGroup`` {{input}}, {{label}},
 * ``groupContainer`` {{type}}, {{required}}, {{content}}
 * ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``submitContainer`` {{content}}
 
 
 Generating Specific Types of Inputs
@@ -1161,10 +1163,7 @@ Creating Buttons and Submit Elements
 
     Creates a submit button with caption ``$caption``. If the supplied
     ``$caption`` is a URL to an image (it contains a '.' character),
-    the submit button will be rendered as an image.
-
-    It is enclosed between ``div`` tags by default; you can avoid this
-    by declaring ``$options['div'] = false``::
+    the submit button will be rendered as an image. The following::
 
         echo $this->Form->submit();
 
@@ -1390,28 +1389,45 @@ following::
 
 Creates a select element populated with 'am' and 'pm'.
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = [])
 
-Generates a set of inputs for ``$fields``. If $fields is null the current model
-will be used.
+Generates a set of inputs for the given context. By default, all fields for the
+current top level entity are generated. By setting ``$fields`` to a string you
+can provide custom legend element content::
 
-In addition to controller fields output, ``$fields`` can be used to control
-legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-``$this->Form->inputs(array('legend' => 'My legend'));``
-Would generate an input set with a custom legend. You can customize
-individual inputs through ``$fields`` as well.::
+    echo $this->Form->inputs('Update news post');
+
+You can configure the generated inputs by defining additional options in the
+``$fields`` parameter::
 
     echo $this->Form->inputs(array(
         'name' => array('label' => 'custom label')
     ));
 
-In addition to fields control, inputs() allows you to use a few additional
-options.
+To exclude specific fields from the generated inputs, use the ``$blacklist``
+parameter::
+
+    echo $this->Form->inputs([], ['password']);
+
+When customizing, or using a blacklist fields, you can use the ``$options``
+parameter to control the generated legend/fieldset.
 
 - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
   it will be used as the class name for the fieldset element.
 - ``legend`` Set to false to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
+
+For example::
+
+    echo $this->Form->inputs(
+        [
+            'name' => array('label' => 'custom label')
+        ],
+        [],
+        ['legend' => 'Update your post']
+    );
+
+If you disable the fieldset, the legend will not print.
 
 Displaying and Checking Errors
 ==============================
