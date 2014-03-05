@@ -1968,3 +1968,20 @@ delete for those not in the list::
 
 As you can see, this also helps creating solutions where an association needs to
 be implemented like a single set.
+
+You can also patch multiple entities at once. The consideration made for
+patching hasMany and belongsToMany associations apply form patching multiple
+entities: Matches are done by the primary key field value and missing matches in
+the original entities array will be removed and not present in the result::
+
+    $articles = TableRegistry::get('Articles');
+    $list = $articles->find('popular')->toArray();
+    $patched = $articles->patchEntities($list, $this->request->data());
+
+Similarly to using ``patchEntity``, you can use the third argument for
+controlling the associations that will be merged in each of the entities in the
+array::
+
+    $patched = $articles->patchEntities($list, $this->request->data(), [
+        'Tags', 'Comments' => ['associated' => ['Users']]
+    ]);
