@@ -557,6 +557,25 @@ JsonView
 View\\Helper
 ============
 
+Helper
+------
+
+Helper has had the following methods removed:
+
+* Helper::setEntity()
+* Helper::entity() 
+* Helper::model()
+* Helper::field()
+* Helper::value()
+* Helper::_name()
+* Helper::_initInputField()
+* Helper::_selectedArray()
+
+These methods were part used only by FormHelper, and part of the persistent
+field features that have proven to be problematic over time. FormHelper no
+longer relies on these methods and the complexity they provide is not necessary
+anymore.
+
 FormHelper
 ----------
 
