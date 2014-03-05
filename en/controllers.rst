@@ -43,19 +43,18 @@ CakePHP core library. As such, AppController is defined in
     class AppController extends Controller {
     }
 
-Controller attributes and methods created in your AppController
-will be available to all of your application's controllers. It is
-the ideal place to create code that is common to all of your
-controllers. Components (which you'll learn about later) are best
-used for code that is used in many (but not necessarily all)
-controllers.
+Controller attributes and methods created in your AppController will be
+available to all of your application's controllers. It is the ideal place to
+create code that is common to all of your controllers. Components (which you'll
+learn about later) are best used for code that is used in many (but not
+necessarily all) controllers.
 
-While normal object-oriented inheritance rules apply, CakePHP
-does a bit of extra work when it comes to special controller
-attributes. The list of components and helpers used by a
-controller are treated specially. In these cases, AppController
-value arrays are merged with child controller class arrays. The values in the
-child class will always override those in the parent classes.
+While normal object-oriented inheritance rules apply, CakePHP does a bit of
+extra work when it comes to special controller attributes. The list of
+components and helpers used by a controller are treated specially. The values of
+these properties are merged with the properties defined in parent classes.  The
+configuration values in the child class will always override those in the parent
+classes.
 
 .. note::
 
@@ -64,16 +63,15 @@ child class will always override those in the parent classes.
 
     -  $components
     -  $helpers
-    -  $uses
 
-Remember to add the default Html and Form helpers, if you define
-the ``$helpers`` property in your AppController
+Remember to add the default Html and Form helpers, if you define the
+``$helpers`` property in your AppController
 
-Please also remember to call AppController's callbacks within child
-controller callbacks for best results::
+Remember to call AppController's callbacks within child controller callbacks for
+best results::
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
     }
 
 Request Parameters
@@ -169,7 +167,7 @@ Request Life-cycle Callbacks
 CakePHP controllers come fitted with callbacks you can use to
 insert logic around the request life-cycle:
 
-.. php:method:: beforeFilter()
+.. php:method:: beforeFilter(Event $event)
 
     This function is executed before every action in the controller.
     It's a handy place to check for an active session or inspect user
@@ -179,13 +177,13 @@ insert logic around the request life-cycle:
 
         The beforeFilter() method will be called for missing actions.
 
-.. php:method:: beforeRender()
+.. php:method:: beforeRender(Event $event)
 
     Called after controller action logic, but before the view is
     rendered. This callback is not used often, but may be needed if you
     are calling render() manually before the end of a given action.
 
-.. php:method:: afterFilter()
+.. php:method:: afterFilter(Event $event)
 
     Called after every controller action, and after rendering is
     complete. This is the last controller method to run.

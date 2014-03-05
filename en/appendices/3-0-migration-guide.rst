@@ -342,7 +342,11 @@ Controller
 
 - The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
   with **all** parent classes not just ``AppController`` and the plugin
-  app controller.
+  AppController. The properties are merged differently now as well. Instead of
+  all settings in all classes being merged together, the configuration defined
+  in the child class will be used. This means that if you have some
+  configuration defined in your AppController, and some configuration defined in
+  a subclass, only the configuration in the subclass will be used.
 - ``Controller::httpCodes()`` has been removed, use
   :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
 - ``Controller::disableCache()`` has been removed, use
