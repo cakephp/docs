@@ -257,17 +257,7 @@ Helper API
 
 .. php:method:: url($url, $full = false)
 
-    Generates an HTML escaped URL, delegates to :php:meth:`Router::url()`.
-
-.. php:method:: value($options = [], $field = null, $key = 'value')
-
-    Get the value for a given input name.
-
-.. php:method:: domId($options = null, $id = 'id')
-
-    Generate a CamelCased id value for the currently selected field.
-    Overriding this method in your AppHelper will allow you to change
-    how CakePHP generates ID attributes.
+    Generates an HTML escaped URL, delegates to :php:meth:`Cake\\Routing\\Router::url()`.
 
 Callbacks
 ---------
