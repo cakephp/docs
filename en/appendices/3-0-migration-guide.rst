@@ -600,6 +600,11 @@ and reduce the problems people had in the past:
 - The ``dateFormat`` and ``timeFormat`` parameters have been removed from
   ``datetime()``. You can use the template to define the order the inputs should
   be displayed in.
+- The ``submit()`` has had the ``div``, ``before`` and ``after`` options
+  removed. You can customize the ``submitContainer`` template to modify this
+  content.
+- The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
+  ``$fields`` parameter, you must use the ``$options`` parameter.
 
 It is recommended that you review the :doc:`/core-libraries/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
