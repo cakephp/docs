@@ -298,8 +298,8 @@ required option::
 
 To skip browser validation triggering for the whole form you can set option
 ``'formnovalidate' => true`` for the input button you generate using
-:php:meth:`FormHelper::submit()` or set ``'novalidate' => true`` in options for
-:php:meth:`FormHelper::create()`.
+:php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` or set ``'novalidate' =>
+true`` in options for :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 For example, let's assume that your User model includes fields for a
 username (varchar), password (varchar), approved (datetime) and
@@ -553,7 +553,7 @@ Generating Specific Types of Inputs
 In addition to the generic ``input()`` method, ``FormHelper`` has specific
 methods for generating a number of different types of inputs. These can be used
 to generate just the input widget itself, and combined with other methods like
-:php:meth:`~FormHelper::label()` and :php:meth:`~FormHelper::error()` to
+:php:meth:`~Cake\\View\\Helper\\FormHelper::label()` and :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` to
 generate fully custom form layouts.
 
 .. _general-input-options:
@@ -819,11 +819,6 @@ Creating Input Elements
     .. code-block:: html
 
         <input name="User[id]" value="10" id="UserId" type="hidden" />
-
-    .. versionchanged:: 2.0
-        Hidden fields no longer remove the class attribute. This means
-        that if there are validation errors on hidden fields, the
-        error-field class name will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -1219,8 +1214,8 @@ Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
 POST.
 
 This method creates a ``<form>`` element. So do not use this method in some
-opened form. Instead use :php:meth:`FormHelper::submit()` or
-:php:meth:`FormHelper::button()` to create buttons inside opened forms.
+opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
@@ -1229,7 +1224,7 @@ JavaScript to be enabled in browser.
 
 This method creates a ``<form>`` element. So do not use this method inside
 an existing form. Instead you should add a submit button using
-:php:meth:`FormHelper::submit()`
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
 
 
 Creating Date and Time Inputs
@@ -1414,7 +1409,8 @@ error.::
 
 .. note::
 
-    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+    When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
+    rendered by default.
 
 
 Generating Entire Forms
@@ -1463,13 +1459,13 @@ If you disable the fieldset, the legend will not print.
 Working with SecurityComponent
 ==============================
 
-:php:meth:`SecurityComponent` offers several features that make your forms safer
+:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several features that make your forms safer
 and more secure. By simply including the ``SecurityComponent`` in your
 controller, you'll automatically benefit from CSRF and form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
-your forms using :php:meth:`FormHelper::end()`. This will ensure that the
-special ``_Token`` inputs are generated.
+your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will
+ensure that the special ``_Token`` inputs are generated.
 
 .. php:method:: unlockField($name)
 
