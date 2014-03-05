@@ -1869,7 +1869,7 @@ Merging Request Data Into Entities
 
 In order to update entities you may choose to apply request data directly to an
 existing entity. This has the advantage that only the fields that actually
-changed will be saved, as opposed of sending all fields to the database to be
+changed will be saved, as opposed to sending all fields to the database to be
 persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity`` method::
 
@@ -1912,7 +1912,7 @@ The same can be said about hasMany and belongsToMany associations, but an
 important note should be made.
 
 .. note::
-    For  hasMany and belongsToMany associations, if tehre were any entities that
+    For  hasMany and belongsToMany associations, if there were any entities that
     could not be matched by primary key to any record in the data array, then
     those records will be discarded from the resulting entity.
 
@@ -1944,7 +1944,7 @@ following result::
         'body' => 'The text',
         'comments' => [
             ['body' => 'Changed comment', 'id' => 1],
-            ['body' => 'A new'],
+            ['body' => 'A new comment'],
         ]
     ];
 
