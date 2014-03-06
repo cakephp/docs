@@ -440,7 +440,7 @@ a cached value or an estimate of the total rows, or to alter the query to remove
 expensive unneeded parts such as left joins. This becomes particularly handy
 when using the CakePHP built-in pagination system which calls the count method::
 
-    $query = $query->where(['is_active' => true])->count(function($query) {
+    $query = $query->where(['is_active' => true])->counter(function($query) {
         return 100000;
     });
     $query->count(); // Returns 100000
