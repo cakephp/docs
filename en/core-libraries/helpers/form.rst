@@ -1436,8 +1436,8 @@ parameter::
 
     echo $this->Form->inputs([], ['password']);
 
-When customizing, or using a blacklist fields, you can use the ``$options``
-parameter to control the generated legend/fieldset.
+When customizing, ``fields`` or using the ``blacklist`` parameter, you can use
+the ``$options`` parameter to control the generated legend/fieldset.
 
 - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
   it will be used as the class name for the fieldset element.
@@ -1448,9 +1448,9 @@ For example::
 
     echo $this->Form->inputs(
         [
-            'name' => array('label' => 'custom label')
+            'name' => ['label' => 'custom label']
         ],
-        [],
+        null,
         ['legend' => 'Update your post']
     );
 
