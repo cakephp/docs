@@ -435,9 +435,9 @@ records::
     $list = $query->all();
 
 Sometimes, you may want to provide an alternate method for counting the total
-records of a query. One common use case for this feature is wanting to provide
+records of a query. One common use case for this is providing
 a cached value or an estimate of the total rows, or to alter the query to remove
-expensive an unneeded parts such as left joins. This becomes particularly handy
+expensive unneeded parts such as left joins. This becomes particularly handy
 when using the CakePHP built-in pagination system which calls the count method::
 
     $query = $query->where(['is_active' => true])->count(function($query) {
