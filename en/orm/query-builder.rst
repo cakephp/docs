@@ -15,7 +15,7 @@ Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
 Query objects are lazily evaluated. This means a query is not executed until one of
-the following things occurs:
+the following things occur:
 
 - The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called. This will return the underlying
