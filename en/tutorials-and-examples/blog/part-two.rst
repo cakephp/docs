@@ -137,7 +137,7 @@ nice table, our view code might look something like this:
                 <?php echo $this->Html->link($article->title,
                 [controller' => 'articles', 'action' => 'view', $article->id]); ?>
             </td>
-            <td><?php echo $article->created; ?></td>
+            <td><?php echo $article->created->format(DATE_RFC850); ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -185,10 +185,8 @@ ArticlesController now::
                 throw new NotFoundException(__('Invalid article'));
             }
 
-            $article = $this->Articles->findById($id);
-            if (!$article) {
-                throw new NotFoundException(__('Invalid articles'));
-            }
+            $article = $this->Articles->get($id)
+
             $this->set(compact('article'));
         }
     }
@@ -217,7 +215,7 @@ Now let's create the view for our new 'view' action and place it in
 
     <h1><?php echo h($article->title); ?></h1>
 
-    <p><small>Created: <?php echo $article->created; ?></small></p>
+    <p><small>Created: <?php echo $article->created->format(DATE_RFC850); ?></small></p>
 
     <p><?php echo h($article->body); ?></p>
 
@@ -248,10 +246,8 @@ ArticlesController::
                 throw new NotFoundException(__('Invalid article'));
             }
 
-            $article = $this->Articles->findById($id);
-            if (!$article) {
-                throw new NotFoundException(__('Invalid article'));
-            }
+            $article = $this->Articles->->get($id)
+
             $this->set(compact('article'));
         }
 
@@ -328,7 +324,8 @@ Here's our add view:
     echo $this->Form->create('Articles');
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->end('Save Article');
+    echo $this->Form->button('Save Article');
+    echo $this->Form->end();
     ?>
 
 Here, we use the FormHelper to generate the opening tag for an HTML
@@ -336,7 +333,7 @@ form. Here's the HTML that ``$this->Form->create()`` generates:
 
 .. code-block:: html
 
-    <form id="ArticleAddForm" method="post" action="/articles/add">
+    <form method="post" action="/articles/add">
 
 If ``create()`` is called with no parameters supplied, it assumes
 you are building a form that submits to the current controller's
