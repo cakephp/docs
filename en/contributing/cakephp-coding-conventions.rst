@@ -266,12 +266,12 @@ PHP Tags
 ========
 
 Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short echo
-should be used in view files (``.ctp``) where appropirate.
+should be used in view files (``.ctp``) where appropriate.
 
 Short Echo
 ----------
 
-The short echo should be used in view files in place of ``<?php echo``.  it should be
+The short echo should be used in view files in place of ``<?php echo``. It should be
 immediately followed by a single space, the variable or function value to ``echo``, a
 single space, and the php closing tag.
 
@@ -279,10 +279,10 @@ single space, and the php closing tag.
     <?=$name;?>
     
     // good = spaces, no semicolon
-    <?= $recepie ?>
+    <?= $name ?>
 
 As of PHP 5.4 the short echo tag (``<?=``) is no longer to be consider a 'short tag'
-is always avaalbe regardless of the ``short_open_tag`` ini directive.  
+is always available regardless of the ``short_open_tag`` ini directive.  
 
 Naming Convention
 =================
