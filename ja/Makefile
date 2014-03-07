@@ -88,7 +88,7 @@ devhelp:
 	@echo "# devhelp"
 
 epub:
-	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(LANG)
+	$(SPHINXBUILD) -b epub -D master_doc='epub-contents' $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(LANG)
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub/$(LANG)."
 

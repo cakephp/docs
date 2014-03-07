@@ -110,7 +110,7 @@ Les Types d'Attribut Correspondants
 
     :rtype: array
 
-    Insère $data dans un tableau comme défini par $path. Cette méthode
+    Insère $values dans un tableau tel que défini dans $path. Cette méthode
     supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
@@ -639,6 +639,12 @@ Les Types d'Attribut Correspondants
     Crée une valeur unique, en extrayant $path, et en réduisant les résultats
     extraits avec $function. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
+
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    $function. La fonction va récupérer les valeurs extraites en premier
+    argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

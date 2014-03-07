@@ -193,7 +193,7 @@ it in ``engine`` key::
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
         // my truncate is better than yours
-        public function static truncate($text, $length = 100, $options = array()) {
+        public static function truncate($text, $length = 100, $options = array()) {
             return null;
         }
     }
