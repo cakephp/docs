@@ -132,10 +132,10 @@ There are a number of options for create():
 
      <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-  When using 'put' or 'delete', your form will be functionally equivalent to
-  a 'post' form, but when submitted, the HTTP request method will be overridden
-  with 'PUT' or 'DELETE', respectively.  This allows CakePHP to emulate proper
-  REST support in web browsers.
+  When using 'put', 'patch' or 'delete', your form will be functionally
+  equivalent to a 'post' form, but when submitted, the HTTP request method will
+  be overridden with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows
+  CakePHP to emulate proper REST support in web browsers.
 
 * ``$options['action']`` The action key allows you to point the form to a
   specific action in your current controller. For example, if you'd like to
@@ -177,9 +177,6 @@ There are a number of options for create():
   .. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
-
-  Also check :php:meth:`Cake\\View\\Helper\\HtmlHelper::url()` method for more
-  examples of different types of URLs.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
@@ -301,8 +298,8 @@ required option::
 
 To skip browser validation triggering for the whole form you can set option
 ``'formnovalidate' => true`` for the input button you generate using
-:php:meth:`FormHelper::submit()` or set ``'novalidate' => true`` in options for
-:php:meth:`FormHelper::create()`.
+:php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` or set ``'novalidate' =>
+true`` in options for :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 For example, let's assume that your User model includes fields for a
 username (varchar), password (varchar), approved (datetime) and
@@ -348,7 +345,7 @@ hasOne - Relation, you can add the following to your Users-controller
 
     $this->set('groups', $this->Users->association('Groups')->find('list'));
 
-Afterwards, add the following to your form-view::
+Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
@@ -383,8 +380,8 @@ easy to save data with the ORM.
 
 When creating datetime related inputs, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
-``minute``, or ``meridian`` being added. These fields will be automatically converted into 
-``DateTime`` objects when entities are marshalled.
+``minute``, or ``meridian`` being added. These fields will be automatically
+converted into ``DateTime`` objects when entities are marshalled.
 
 
 Options
@@ -485,7 +482,7 @@ HTML attributes. The following will cover the options specific to
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
 
-Customizing the templates FormHelper uses
+Customizing the Templates FormHelper Uses
 =========================================
 
 Like many helpers in CakePHP, FormHelper uses string templates to format the
@@ -517,7 +514,7 @@ You can also change the templates at runtime using the ``templates()`` method::
     ];
     $this->Form->templates($myTemplates);
 
-List of templates
+List of Templates
 -----------------
 
 A list of the default templates and the variables they can expect are:
@@ -534,6 +531,7 @@ A list of the default templates and the variables they can expect are:
 * ``formend`` No variables are provided.
 * ``hiddenblock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
+* ``inputsubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
@@ -546,6 +544,7 @@ A list of the default templates and the variables they can expect are:
 * ``checkboxFormGroup`` {{input}}, {{label}},
 * ``groupContainer`` {{type}}, {{required}}, {{content}}
 * ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``submitContainer`` {{content}}
 
 
 Generating Specific Types of Inputs
@@ -554,7 +553,7 @@ Generating Specific Types of Inputs
 In addition to the generic ``input()`` method, ``FormHelper`` has specific
 methods for generating a number of different types of inputs. These can be used
 to generate just the input widget itself, and combined with other methods like
-:php:meth:`~FormHelper::label()` and :php:meth:`~FormHelper::error()` to
+:php:meth:`~Cake\\View\\Helper\\FormHelper::label()` and :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` to
 generate fully custom form layouts.
 
 .. _general-input-options:
@@ -746,10 +745,8 @@ Datetime Options
 * ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
   Defaults to null which rounds half up according to `interval`.
 
-  .. versionadded:: 2.4
-
-Form Element-Specific Methods
-=============================
+Creating Labels
+===============
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
@@ -779,6 +776,9 @@ Form Element-Specific Methods
 
         <label for="UserName" id="user-label">Name</label>
         <label for="UserName" class="highlight">Your username</label>
+
+Creating Input Elements
+=======================
 
 .. php:method:: text(string $name, array $options)
 
@@ -819,11 +819,6 @@ Form Element-Specific Methods
     .. code-block:: html
 
         <input name="User[id]" value="10" id="UserId" type="hidden" />
-
-    .. versionchanged:: 2.0
-        Hidden fields no longer remove the class attribute. This means
-        that if there are validation errors on hidden fields, the
-        error-field class name will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -943,9 +938,6 @@ Form Element-Specific Methods
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
-
-    .. versionchanged:: 2.1
-        The ``$attributes['disabled']`` option was added in 2.1.
 
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
@@ -1161,10 +1153,7 @@ Creating Buttons and Submit Elements
 
     Creates a submit button with caption ``$caption``. If the supplied
     ``$caption`` is a URL to an image (it contains a '.' character),
-    the submit button will be rendered as an image.
-
-    It is enclosed between ``div`` tags by default; you can avoid this
-    by declaring ``$options['div'] = false``::
+    the submit button will be rendered as an image. The following::
 
         echo $this->Form->submit();
 
@@ -1225,8 +1214,8 @@ Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
 POST.
 
 This method creates a ``<form>`` element. So do not use this method in some
-opened form. Instead use :php:meth:`FormHelper::submit()` or
-:php:meth:`FormHelper::button()` to create buttons inside opened forms.
+opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
@@ -1235,7 +1224,7 @@ JavaScript to be enabled in browser.
 
 This method creates a ``<form>`` element. So do not use this method inside
 an existing form. Instead you should add a submit button using
-:php:meth:`FormHelper::submit()`
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
 
 
 Creating Date and Time Inputs
@@ -1390,29 +1379,6 @@ following::
 
 Creates a select element populated with 'am' and 'pm'.
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
-
-Generates a set of inputs for ``$fields``. If $fields is null the current model
-will be used.
-
-In addition to controller fields output, ``$fields`` can be used to control
-legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-``$this->Form->inputs(array('legend' => 'My legend'));``
-Would generate an input set with a custom legend. You can customize
-individual inputs through ``$fields`` as well.::
-
-    echo $this->Form->inputs(array(
-        'name' => array('label' => 'custom label')
-    ));
-
-In addition to fields control, inputs() allows you to use a few additional
-options.
-
-- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
-  it will be used as the class name for the fieldset element.
-- ``legend`` Set to false to disable the legend for the generated input set.
-  Or supply a string to customize the legend text.
-
 Displaying and Checking Errors
 ==============================
 
@@ -1443,19 +1409,63 @@ error.::
 
 .. note::
 
-    When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+    When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
+    rendered by default.
 
+
+Generating Entire Forms
+=======================
+
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = [])
+
+Generates a set of inputs for the given context. By default, all fields for the
+current top level entity are generated. By setting ``$fields`` to a string you
+can provide custom legend element content::
+
+    echo $this->Form->inputs('Update news post');
+
+You can configure the generated inputs by defining additional options in the
+``$fields`` parameter::
+
+    echo $this->Form->inputs(array(
+        'name' => array('label' => 'custom label')
+    ));
+
+To exclude specific fields from the generated inputs, use the ``$blacklist``
+parameter::
+
+    echo $this->Form->inputs([], ['password']);
+
+When customizing, ``fields`` or using the ``blacklist`` parameter, you can use
+the ``$options`` parameter to control the generated legend/fieldset.
+
+- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
+  it will be used as the class name for the fieldset element.
+- ``legend`` Set to false to disable the legend for the generated input set.
+  Or supply a string to customize the legend text.
+
+For example::
+
+    echo $this->Form->inputs(
+        [
+            'name' => ['label' => 'custom label']
+        ],
+        null,
+        ['legend' => 'Update your post']
+    );
+
+If you disable the fieldset, the legend will not print.
 
 Working with SecurityComponent
 ==============================
 
-:php:meth:`SecurityComponent` offers several features that make your forms safer
+:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several features that make your forms safer
 and more secure. By simply including the ``SecurityComponent`` in your
 controller, you'll automatically benefit from CSRF and form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
-your forms using :php:meth:`FormHelper::end()`. This will ensure that the
-special ``_Token`` inputs are generated.
+your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will
+ensure that the special ``_Token`` inputs are generated.
 
 .. php:method:: unlockField($name)
 
