@@ -38,7 +38,10 @@ Controller
 
 AuthComponent
 -------------
+
 - ``loggedIn()`` is now deprecated and will be removed in 3.0.
+- When using ``ajaxLogin``, AuthComponent will now return a ``403`` status code
+  instead of a ``200`` when the user is un-authenticated.
 
 CookieComponent
 ---------------
