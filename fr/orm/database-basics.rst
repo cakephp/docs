@@ -3,21 +3,21 @@ Database Basics
 
 .. php:namespace:: Cake\Database
 
-The ORM and database access in CakePHP has been totally rebuilt for 3.0.
-It features a new fluent API for building queries, improved schema
-reflection/generation, a flexible type system and more.
+L'ORM et l'accès à la base de données dans CakePHP a été totalement reconstruit
+pour 3.0. Il amène une nouvelle API pour la construction des requêtes, améliore
+le schéma reflection/génération, un type de système flexible et plus.
 
 .. _database-configuration:
 
 Configuration
 =============
 
-By convention database connections are configured in ``App/Config/app.php``. The
-connection information defined in this file is fed into
-:php:class:`Cake\\Database\\ConnectionManager` creating the connection configuration
-your application will be using. Sample connection information can be found in
-``App/Config/app.default.php``. A sample connection configuration would look
-like::
+Par convention, les connections de la base de données sont configurées dans
+``App/Config/app.php``. L'information de la connection définie dans ce fichier
+se trouve dans :php:class:`Cake\\Database\\ConnectionManager` en créant la
+configuration de la connection de votre application sera utilisée. L'information
+de la connection d'Exemple peut être trouvé dans ``App/Config/app.default.php``.
+Une configuration de connection d'exemple ressemblera à ceci::
 
     'Datasources' => [
         'default' => [
@@ -31,11 +31,12 @@ like::
         ]
     ],
 
-The above will create a 'default' connection, with the provided parameters. You
-can define as many connections as you want in your configuration file. You can
-also define additional connections at runtime using
-:php:meth:`Cake\\Database\\ConnectionManager::config()`. An example of that
-would be::
+Ce qui est au-dessus va créer une connection 'default', avec les paramètres
+fournies. Vous pouvez définir autant de connections que vous le souhaitez dans
+votre fichier de configuration. Vous pouvez aussi définir le connections
+supplémentaires à la volée en utilisant
+:php:meth:`Cake\\Database\\ConnectionManager::config()`. Un exemple de ceci
+serait::
 
     use Cake\Database\ConnectionManager;
 
@@ -49,81 +50,87 @@ would be::
         'timezone' => 'UTC'
     ]);
 
-By default, all Table objects will use the ``default`` connection. To
-use a non-default connection, see :ref:`configuring-table-connections`.
+Par défaut, tous les objets Table vont utiliser la connection ``default``. Pour
+utiliser une connection non-default, regardez
+:ref:`configuring-table-connections`.
 
-There are a number of keys supported in database configuration. A full list is
-as follows:
+Il y a un certain nombre de clés supportés dans la configuration de la base
+de données. Une liste complète est comme suit:
 
 className
-    The class name of the driver used to power the connection. This can either
-    be a short classname using :term:`plugin syntax`, a fully namespaced name, or
-    a constructed driver instance. Examples of short classnames are Mysql,
-    Sqlite, Postgres, and Sqlserver.
+    Le nom de la classe du driver utilisé pour faire fonctionner la connection.
+    Ceci peut être soit un nom de classe court en utilisant
+    :term:`plugin syntax`, un nom complet en namespace, soit être une instance
+    de driver construite. Les exemples de noms de classe court sont Mysql,
+    Sqlite, Postgres, et Sqlserver.
 persistent
-    Whether or not to use a persistent connection to the database.
+    S'il faut utiliser ou non une connection persistente à la base de données.
 host
-    The database server's hostname (or IP address).
+    Le nom d'hôte du serveur de base de données (ou une adresse IP).
 login
-    The username for the account.
+    L'username pour votre compte.
 password
-    The password for the account.
+    Le mot de passe pour le compte.
 database
-    The name of the database for this connection to use.
+    Le nom de la base de données pour cette connection à utiliser.
 port (*optional*)
-    The TCP port or Unix socket used to connect to the server.
+    Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
-    Indicates the character set to use when sending SQL statements to
-    the server. This defaults to the database's default encoding for
-    all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql/mysqli connections you must use 'utf8' without the
-    hyphen.
+    Indique le character set à utiliser lors de l'envoi de statements SQL au
+    serveur. Ceci est par défaut à l'encodage par défaut de la base de données
+    pout toutes les bases de données autres que DB2. Si vous souhaitez utiliser
+    l'encodage UTF-8 avec les connections mysql/mysqli, vous devez utiliser
+    'utf8' sans trait d'union.
 timezone
-    Server timezone to set.
+    La définition du timezone du Serveur.
 schema
-    Used in PostgreSQL database setups to specify which schema to use.
+    Utilisé dans la base de données dans les configurations de la base de
+    données PostgreSQL pour spécifier le schema à utiliser.
 unix_socket
-    Used by drivers that support it to connect via Unix socket files. If you are
-    using Postgres and want to use Unix sockets, leave the host key blank.
+    Utilisé par les drivers qui le supportent pour se connecter via les fichiers
+    socket Unix. Si vous utilisez Postgres et voulez utiliser les sockets Unix,
+    laissez clé host vide.
 ssl_key
-    The file path to the SSL key file. (Only supported by MySQL).
+    Le chemin du fichier vers la clé du fichier SSL. (supporté seulement par MySQL).
 ssl_cert
-    The file path to the SSL certificate file. (Only supported by MySQL).
+    Le chemin du fichier vers le fichier du certificat SSL. (supporté seulement par MySQL).
 ssl_ca
-    The file path to the SSL certificate authority. (Only supported by MySQL).
+    Le chemin du fichier vers l'autorité de certification SSL. (supporté seulement par MySQL).
 init
-    A list of queries that should be sent to the database server as
-    when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQL Server at this time.
+    Une liste de requêtes qui doivent être envoyées au serveur de la base de
+    données lorsque la connection est créée. Cette options est seulement
+    supportée seuelemement par le Serveur MySQL, Postgres, et SQL cette fois-ci.
 dsn
-    A full PDO compatible data source name.
+    Un nom de source de données compatible totalement avec PDO.
 log
-    Set to true to enable query logging. When enabled queries will be logged
-    at a ``debug`` level with the ``queriesLog`` scope.
+    Défini à true pour activer les logs des requêtes. Quand les requêtes sont
+    activées, elles seront écrites à un niveau ``debug`` avec le scope
+    ``queriesLog``.
 quoteIdentifiers
-    Set to true if you are using reserved words or special characters in your
-    table or column names. Enabling this setting will result in queries built using the
-    :ref:`query-builder` having identifiers quoted when creating SQL. It should be
-    noted that this decreases performance because each query needs to be traversed
-    and manipulated before being executed.
+    Défini à true si vous utilisez les mots réservés ou les caractères spéciaux
+    avec les noms de votre table ou les noms de colonnes. Activer cette
+    configuration va entraîner la construction des requêtes en utilisant
+    :ref:`query-builder` avec les identifiers quotés lors de la création de SQL.
+    Cela devrait être noté que ceci diminue la performance parce que chaque
+    requête a besoin d'être traversée et manipulée avant d'être executée.
 flags
-    An associative array of PDO constants that should be passed to the
-    underlying PDO instance. See the PDO documentation for the flags supported
-    by the driver you are using.
+    Un tableau associatif de constantes PDO qui doivent être passées
+    à l'instance PDO soulignée. Regardez la documentation de PDO pour les flags
+    supportés par le driver que vous utilisez.
 
-At this point, you might want to take a look at the
-:doc:`/getting-started/cakephp-conventions`. The correct
-naming for your tables (and the addition of some columns) can score
-you some free functionality and help you avoid configuration. For
-example, if you name your database table big\_boxes, your table
-BigBoxesTable, and your controller BigBoxesController, everything will
-work together automatically. By convention, use underscores, lower case,
-and plural forms for your database table names - for example:
-bakers, pastry\_stores, and savory\_cakes.
+A ce moment-là, vous pouvez aller voir
+:doc:`/getting-started/cakephp-conventions`. Le nommage correct pour vos
+tables (et l'ajout de quelques colonnes) peut vous faire gagner une
+fonctionnalité gratuite et vous aider à éviter la configuration. Par
+exemple, si vous nommez votre table de base de données big\_boxes, votre table
+BigBoxesTable, et votre controller BigBoxesController, tout fonctionnera
+ensemble automatiquement. Par convention, utiliser les underscores, les
+minuscules et les formes pluriels pour vos noms de table de la base de données
+) par exemple: bakers, pastry\_stores, et savory\_cakes.
 
 
-Managing Connections
-====================
+Gérer les Connections
+=====================
 
 .. php:class:: ConnectionManager
 

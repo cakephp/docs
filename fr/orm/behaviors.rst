@@ -30,21 +30,21 @@ Behaviors du Coeur
 Créer un Behavior
 =================
 
-In the following examples we will create a very simple ``SluggableBehavior``.
-This behavior will allow us to populate a slug field with the results of
-``Inflector::slug()`` based on another field.
+Dans les exemples suivants, nous allons créer un ``SluggableBehavior`` très
+simple. Ce behavior va nous autoriser à remplir un champ slug avec les
+résultats de ``Inflector::slug()`` basé sur un autre champ.
 
-Before we create our behavior we should understand the conventions for
-behaviors:
+Avant de créer notre behavior, nous devrions comprendre les conventions pour
+les behaviors:
 
-- Behavior files are located in ``App/Model/Behavior``, or
+- Les fichiers Behavior sont localisés dans ``App/Model/Behavior``, ou dans
   ``MyPlugin\Model\Behavior``.
-- Behavior classes should be in the ``App\Model\Behavior`` namespace, or
-  ``MyPlugin\Model\Behavior`` namespace.
-- Behavior class names end in ``Behavior``.
-- Behaviors extend ``Cake\ORM\Behavior``.
+- Les classes de Behavior devraient être dans le namespace
+  ``App\Model\Behavior``, ou le namespace ``MyPlugin\Model\Behavior``.
+- Les noms de classe de Behavior finissent par ``Behavior``.
+- Les Behaviors étendent ``Cake\ORM\Behavior``.
 
-To create our sluggable behavior. Put the following into
+Pour créer notre behavior sluggable. Mettez ce qui suit dans
 ``App/Model/Behavior/SluggableBehavior.php``::
 
     namespace App\Model\Behavior;
@@ -54,9 +54,9 @@ To create our sluggable behavior. Put the following into
     class SluggableBehavior extends Behavior {
     }
 
-We can now add this behavior to one of our table classes. In this example we'll
-use an ``ArticlesTable``, as articles often have slug properties for creating
-friendly URLs::
+Nous pouvons maintenant ajouter ce behavior à l'une de nos classes de table.
+Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque articles
+ont souvent des propriétés slug pour créer de belles URLs::
 
     namespace App\Model\Table;
 
@@ -69,20 +69,20 @@ friendly URLs::
         }
     }
 
-Our new behavior doesn't do much of anything right now. Next, we'll add a mixin
-method and an event listener so that when we save entities we can automatically
-slug a field.
+Notre nouveau behavior ne fait pas beaucoup plus en ce moment. Ensuite, nous
+allons ajouter une méthode mixin et un event listener pour que lorque nous
+sauvegardons les entities, nous puissions automatiquement slugger un champ.
 
 Définir les Méthodes Mixin
 --------------------------
 
-Any public method defined on a behavior will be added as a 'mixin' method on the
-table object it is attached to. If you attach two behaviors that provide the
-same methods an exception will be raised. If a behavior provides the same method
-as a table class, the behavior method will not be callable from the table.
-Behavior mixin methods will receive the exact same arguments that are provided
-to the table. For example, if our SluggableBehavior defined the following
-method::
+Toute méthode public définie sur un behavior sera ajoutée en méthode 'mixin'
+sur l'objet table sur laquelle elle est attachée. Si vous attachez deux
+behaviors qui fournissent les mêmes méthodes, une exception sera levée.
+Si un behavior fournit la même méthode en classe de table, la méthode du
+behavior ne sera pas appelable à partir de la table. Les méthodes mixin de
+Behavior vont recevoir exactement les mêmes arguments qui sont fournies à la
+table. Par exemple, si notre SluggableBehavior définit la méthode suivante::
 
     public function slug($value) {
         return Inflector::slug($value, $this->_config['replacement']);
@@ -95,10 +95,11 @@ It could be invoked using::
 Limiter ou renommer les Méthodes Mixin Exposed
 ----------------------------------------------
 
-When creating behaviors, there may be situations where you don't want to expose
-public methods as mixin methods. In these cases you can use the
-``implementedMethods`` configuration key to rename or exclude mixin methods. For
-example if we wanted to prefix our slug() method we could do the following::
+Lors de la création de behaviors, il peut y avoir des situations où vous ne
+voulez pas montrer les méthodes public en méthodes mixin. Dans ces cas, vous
+pouvez utiliser la clé de configuration ``implementedMethods`` pour renommer
+ou exclure les méthodes mixin. Par exemple si vous voulez préfixer notre méthode
+slug(), nous pourrions faire ce qui suit::
 
     public static $_defaultConfig = [
         'implementedMethods' => [
@@ -106,15 +107,16 @@ example if we wanted to prefix our slug() method we could do the following::
         ]
     ];
 
-Applying this configuration will make ``slug()`` not callable, however it will
-add a ``superSlug()`` mixin method to the table. Notably if our behavior
-implemented other public methods they would **not** be available as mixin
-methods with the above configuration.
+Appliquer cette configuration rendra votre ``slug()`` non appelable, cependant
+elle va ajouter une méthode mixin ``superSlug()`` à la table. Notablement, si
+notre behavior implémentait d'autres méthodes public, ils **n'auraient** pas
+été disponible en méthodes mixin avec la configuration ci-dessus.
 
-Since the exposed methods are decided by configuration you can also
-rename/remove mixin methods when adding a behavior to a table. For example::
+Depuis que les méthodes montrées sont décidées par configuration, vous pouvez
+aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
+table. Par exemple::
 
-    // In a table's initialize() method.
+    // Dans une méhode initialize() de la table.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
             'slug' => 'superSlug',
@@ -124,10 +126,11 @@ rename/remove mixin methods when adding a behavior to a table. For example::
 Définir des Event Listeners
 ---------------------------
 
-Now that our behavior has a mixin method to slug fields, we can implement
-a callback listener to automatically slug a field when entities are saved. We'll
-also modify our slug method to accept an entity instead of just a plain value. Our
-behavior should now look like::
+Maintenant que notre behavior a une méthode mixin pour slugger les champs, nous
+pouvons implémenter un listener de callback pour slugger automatiquement un
+champ quand les entities sont sauvegardées. Nous allons aussi modifier notre
+méthode slug pour accepter une entity plutôt que juste une valeur plain. Notre
+behavior devrait maintenant ressembler à ceci::
 
     namespace App\Model\Behavior;
 
@@ -155,37 +158,40 @@ behavior should now look like::
 
     }
 
-The above code shows a few interesting features of behaviors:
+Le code ci-dessus montre quelques fonctionnalités intéréssentes des behaviors:
 
-- Behaviors can define callback methods by defining methods that follow the
-  :ref:`table-callbacks` conventions.
-- Behaviors can define a default configuration property. This property is merged
-  with the overrides when a behavior is attached to the table.
+- Les Behaviors peuvent définir des méthodes callback en définissant des
+  méthodes qui suivent les conventions :ref:`table-callbacks`.
+- Les Behaviors peuvent définir une propriété de configuration par défaut. Cette
+  propriété est fusionnée avec les overrides lorqu'un behavior est attaché à
+  la table.
 
 Définir des Finders
 -------------------
 
-Now that we are able to save articles with slug values, we should implement
-a finder method so we can easily fetch articles by their slug. Behavior finder
-methods, use the same conventions as :ref:`custom-find-methods` do. Our
-``find('slug')`` method would look like::
+Maintenant que nous sommes capable de sauvegarder les articles avec les valeurs
+de slug, nous allons implémenter une méthode de find afin de pouvoir
+facilement récupérer les articles par leur slug. Les méthodes find de behavior
+utilisent les mêmes conventions que les :ref:`custom-find-methods`. Notre
+méthode ``find('slug')`` ressemblerait à ceci::
 
     public function findSlug(Query $query, array $options = []) {
         return $query->where(['slug' => $options['slug']]);
     }
 
-Once our behavior has the above method we can call it::
+Une fois que notre behavior a la méthode ci-dessus, nous pouvons l'appeler::
 
     $article = $articles->find('slug', ['slug' => $value])->first();
 
 Limiter ou renommer les Méthodes de Exposed Finder
 --------------------------------------------------
 
-When creating behaviors, there may be situations where you don't want to expose
-finder methods, or you need to rename finders to avoid duplicated methods. In
-these cases you can use the ``implementedFinders`` configuration key to rename
-or exclude finder methods. For example if we wanted to rename our ``find(slug)``
-method we could do the following::
+Lors de la création de behaviors, il peut y avoir des situations où vous ne
+voulez pas montrer les méthodes find, ou vous avez besoin de renommer les
+finders pour éviter les méthodes dupliquées. Dans ces cas, vous pouvez utiliser
+la clé de configuration ``implementedFinders`` pour renommer ou exclure les
+méthodes find. Par exemple, si vous voulez renommer notre méthode
+``find(slug)``, nous pourrions faire ce qui suit::
 
     public static $_defaultConfig = [
         'implementedFinders' => [
@@ -193,15 +199,16 @@ method we could do the following::
         ]
     ];
 
-Applying this configuration will make ``find('slug')`` trigger an error. However
-it will make ``find('slugged')`` available. Notably if our behavior implemented
-other finder methods they would **not** be available, as they are not included
-in the configuration.
+Utliser cette configuration fera que ``find('slug')`` attrapera une erreur.
+Cepedant, cela rendra ``find('slugged')`` disponible. Notamment si notre
+behavior implémente d'autres méthodes find, elles **ne** seront pas disponible
+puisqu'elles ne sont pas inclues dans la configuration.
 
-Since the exposed methods are decided by configuration you can also
-rename/remove finder methods when adding a behavior to a table. For example::
+Depuis que les méthodes montrées sont décidées par configuration, vous pouvez
+aussi renommer/retirer les méthodes find lors de l'ajout d'un behavior à la
+table. Par exemple::
 
-    // In a table's initialize() method.
+    // Dans la méthode initialize() de la table.
     $this->addBehavior('Sluggable', [
         'implementedFinders' => [
             'slugged' => 'findSlug',
