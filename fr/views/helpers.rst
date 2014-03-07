@@ -19,8 +19,8 @@ les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 
 .. _configuring-helpers:
 
-Utiliser et configurer les Helpers
-==================================
+Configurer les Helpers
+======================
 
 Vous activez les helpers dans CakePHP, en faisant "prendre conscience" à un
 controller qu'ils existent. Chaque controller a une propriété
@@ -29,14 +29,14 @@ vue. Pour activer un helper dans votre vue, ajoutez son nom au tableau
 ``$helpers`` du controller::
 
     class BakeriesController extends AppController {
-        public $helpers = array('Form', 'Html', 'Js', 'Time');
+        public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
 L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
 utilisée partout ailleurs dans CakePHP::
 
     class BakeriesController extends AppController {
-        public $helpers = array('Blog.Comment');
+        public $helpers = ['Blog.Comment'];
     }
     
 Vous pouvez aussi ajouter les helpers depuis une action, dans ce cas,
@@ -61,7 +61,7 @@ son nom dans le tableau ``$helpers`` du fichier
 d'inclure les helpers par défaut Html et Form::
 
     class AppController extends Controller {
-        public $helpers = array('Form', 'Html', 'Js', 'Time');
+        public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
 Vous pouvez passer des options dans les helpers. Ces options peuvent être
@@ -69,35 +69,36 @@ utilisées pour définir les valeurs d'attributs ou modifier le comportement du
 helper::
 
     class AwesomeHelper extends AppHelper {
-        public function __construct(View $view, $settings = array()) {
+        public function __construct(View $view, $settings = []) {
             parent::__construct($view, $settings);
-            debug($options);
+            debug($settings);
         }
     }
 
     class AwesomeController extends AppController {
-        public $helpers = array('Awesome' => array('option1' => 'valeur1'));
+        public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-Depuis 2.3 les options sont fusionnées avec la propriété ``Helper::$settings``
-du helper.
+Depuis 2.3 les options sont fusionnées avec la propriété
+:php:attr:`~Cake\View\Helper::$settings` du helper.
 
 Une configuration courante est d'utiliser l'option ``className``, qui vous
 permet de créer des alias de helper dans vos vues. Cette fonctionnalité est
 utile quand vous voulez remplacer ``$this->Html`` ou tout autre Helper de
 référence avec une mise en oeuvre personnalisée::
 
-    // app/Controller/PostsController.php
+    // App/Controller/PostsController.php
     class PostsController extends AppController {
-        public $helpers = array(
-            'Html' => array(
+        public $helpers = [
+            'Html' => [
                 'className' => 'MyHtml'
-            )
-        );
+            ]
+        ];
     }
 
-    // app/View/Helper/MyHtmlHelper.php
-    App::uses('HtmlHelper', 'View/Helper');
+    // App/View/Helper/MyHtmlHelper.php
+    use Cake\View\Helper\HtmlHelper;
+
     class MyHtmlHelper extends HtmlHelper {
         // Ajouter votre code pour écraser le HtmlHelper du coeur
     }
@@ -135,14 +136,18 @@ d'y accéder en faisant ce qui suit::
 
 Ce qui est au-dessus appelera la méthode ``css`` du HtmlHelper. Vous pouvez
 accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``.
+
+Charger les Helpers à la volée
+------------------------------
+
 Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
 à partir d'une vue. Vous pouvez utiliser la vue du
-:php:class:`HelperCollection` pour le faire::
+:php:class:`Cake\\View\\HelperRegistry` pour le faire::
 
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-Le HelperCollection est une :doc:`collection </core-libraries/collections>` et
-supporte l'API collection utilisée partout ailleurs dans CakePHP.
+Le HelperCollection est une :doc:`registry </core-libraries/registry-objects>`
+et supporte l'API collection utilisée partout ailleurs dans CakePHP.
 
 Méthodes de Callback
 ====================
@@ -161,23 +166,21 @@ Mettons que nous voulions créer un helper, qui pourra être utilisé pour
 produire un lien CSS, façonné spécialement selon vos besoins, à différents
 endroits de votre application. Afin de trouver une place à votre logique dans
 la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
-classe dans ``/app/View/Helper``. Appelons notre helper LienHelper. Le
+classe dans ``/App/View/Helper``. Appelons notre helper LinkHelper. Le
 fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
-    /* /app/View/Helper/LienHelper.php */
-    App::uses('AppHelper', 'View/Helper');
-    
-    class LienHelper extends AppHelper {
-        public function lancerEdition($titre, $url) {
-            // La logique pour créer le lien spécialement formaté se place
-            ici...
+    /* /App/View/Helper/LinkHelper.php */
+    use Cake\View\Helper;
+
+    class LinkHelper extends AppHelper {
+        public function makeEdit($title, $url) {
+            // La logique pour créer le lien spécialement formaté se place ici
         }
     }
 
 .. note::
 
-    Les Helpers doivent étendre soit ``AppHelper`` soit :php:class:`Helper` ou
-    implémenter tous les callbacks dans l':ref:`helper-api`.
+    Les Helpers doivent étendre soit ``AppHelper`` soit :php:class:`Helper`.
 
 Inclure d'autres Helpers
 ------------------------
@@ -187,17 +190,17 @@ un autre helper. Pour faire cela, vous pouvez spécifier les helpers que
 vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le
 feriez dans un controller::
 
-    /* /app/View/Helper/LienHelper.php (Utilisant d'autres helpers) */
-    App::uses('AppHelper', 'View/Helper');
-    
-    class LienHelper extends AppHelper {
-        public $helpers = array('Html');
-    
-        public function lancerEdition($titre, $url) {
-            // Utilisation du helper HTML pour sortir une donnée formatée
-    
-            $link = $this->Html->link($titre, $url, array('class' => 'edit'));
-    
+    /* /App/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
+    use App\View\Helper\AppHelper;
+
+    class LinkHelper extends AppHelper {
+        public $helpers = ['Html'];
+
+        public function makeEdit($title, $url) {
+            // utilise le helper HTML pour sortir des données formatées
+
+            $link = $this->Html->link($title, $url, ['class' => 'edit']);
+
             return '<div class="editOuter">' . $link . '</div>';
         }
     }
@@ -209,11 +212,11 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créez votre helper et l'avez placé dans
-``/app/View/Helper/``, vous serez capable de l'inclure dans vos controllers
+``/App/View/Helper/``, vous serez capable de l'inclure dans vos controllers
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController {
-        public $helpers = array('Lien');
+        public $helpers = ['Link'];
     }
 
 Une fois que votre controller est au courant de cette nouvelle classe, vous
@@ -221,21 +224,21 @@ pouvez l'utiliser dans vos vues en accédant à un objet nommé d'après le
 helper::
 
     <!-- fait un lien en utilisant le nouveau helper -->
-    <?php echo $this->Lien->lancerEdition('Changer cette recette', '/recipes/edit/5'); ?>
+   <?php echo $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5'); ?>
 
 
-Créer des fonctionnalités à vos Helpers
-=======================================
+Créer des fonctionnalités pour Tous les Helpers
+===============================================
 
 Tous les helpers étendent une classe spéciale, AppHelper (comme les models
 étendent AppModel et les controllers étendent AppController). Pour créer une
 fonctionnalité disponible pour tous les helpers, créez
-``/app/View/Helper/AppHelper.php``::
+``/App/View/Helper/AppHelper.php``::
 
-    App::uses('Helper', 'View');
-    
+    use App\View\Helper\AppHelper;
+
     class AppHelper extends Helper {
-        public function customMethod () {
+        public function customMethod() {
         }
     }
 
@@ -258,50 +261,47 @@ API de Helper
     
 .. php:method:: url($url, $full = false)
 
-    Génère une URL échappée de HTML, qui délégue à :php:meth:`Router::url()`.
-
-.. php:method:: value($options = array(), $field = null, $key = 'value')
-
-    Récupère la valeur pour un nom d'input donné.
-
-.. php:method:: domId($options = null, $id = 'id')
-
-    Génère une valeur id en CamelCase pour le champ sélectionné courant.
-    Ecraser cette méthode dans votre AppHelper vous permettra de changer la
-    façon dont CakePHP génère les attributs ID.
+    Génère une URL échappée de HTML, qui délégue à
+    :php:meth:`Cake\\Routing\\Router::url()`.
 
 Callbacks
 ---------
 
-.. php:method:: beforeRenderFile($viewFile)
+En implémentant une méthode de callback dans un helper, CakePHP va
+automatiquement inscrire votre helper à l'évenement correspondant. A la
+différence des versions précédentes de CakePHP, vous *ne* devriez pas appeler
+``parent`` dans vos callbacks, puisque la classe Helper de base n'implémente
+aucune des méthodes de callback.
+
+.. php:method:: beforeRenderFile(Event $event, $viewFile)
 
     Est appelé avant que tout fichier de vue soit rendu. Cela inclut les
     elements, les vues, les vues parentes et les layouts.
 
-.. php:method:: afterRenderFile($viewFile, $content)
+.. php:method:: afterRenderFile(Event $event, $viewFile, $content)
 
     Est appelé après que tout fichier de vue est rendu. Cela inclut les
     elements, les vues, les vues parentes et les layouts. Un callback
     peut modifier et retourner ``$content`` pour changer la manière dont
     le contenu rendu est affiché dans le navigateur.
 
-.. php:method:: beforeRender($viewFile)
+.. php:method:: beforeRender(Event $event, $viewFile)
 
     La méthode beforeRender est appelé après la méthode beforeRender du
     controller, mais avant les rendus du controller de la vue et du layout
     Reçoit le fichier à rendre en argument.
 
-.. php:method:: afterRender($viewFile)
+.. php:method:: afterRender(Event $event, $viewFile)
 
     Est appelé après que la vue est rendu, mais avant que le rendu du
     layout ait commencé.
 
-.. php:method:: beforeLayout($layoutFile)
+.. php:method:: beforeLayout(Event $event, $layoutFile)
 
     Est appelé avant que le rendu du layout commence. Reçoit le nom du fichier
     layout en argument.
 
-.. php:method:: afterLayout($layoutFile)
+.. php:method:: afterLayout(Event $event, $layoutFile)
 
     Est appelé après que le rendu du layout est fini. Reçoit le nom du fichier
     layout en argument.
