@@ -265,7 +265,24 @@ When including files with classes or libraries, use only and always the
 PHP Tags
 ========
 
-Always use long tags (``<?php ?>``) Instead of short tags (<? ?>).
+Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short echo
+should be used in view files (``.ctp``) where appropriate.
+
+Short Echo
+----------
+
+The short echo should be used in view files in place of ``<?php echo``. It should be
+immediately followed by a single space, the variable or function value to ``echo``, a
+single space, and the php closing tag.
+
+    // wrong = semicolon, no spaces
+    <?=$name;?>
+    
+    // good = spaces, no semicolon
+    <?= $name ?>
+
+As of PHP 5.4 the short echo tag (``<?=``) is no longer to be consider a 'short tag'
+is always available regardless of the ``short_open_tag`` ini directive.  
 
 Naming Convention
 =================
