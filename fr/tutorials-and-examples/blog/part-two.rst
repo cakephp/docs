@@ -1,30 +1,37 @@
 Blog Tutoriel - Ajouter la logique
 **********************************
 
-Créer un model Post
-===================
+Créer un Article Post
+=====================
 
-La classe Model est le pain quotidien des applications CakePHP. En
+Les Models sont le pain quotidien des applications CakePHP. En
 créant un model CakePHP qui interagira avec notre base de données,
 nous aurons mis en place les fondations nécessaires pour faire plus
 tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 
-Les fichiers des classes Model de CakePHP se trouvent dans ``/app/Model``,
-et le fichier que nous allons créer maintenant sera enregistré dans
-``/app/Model/Post.php``. Le fichier complet devrait ressembler à ceci ::
+Les fichiers des classes de model de CakePHP sont séparés entre des objets
+``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
+collection des entities stockées dans une table spécifique et vont dans
+``/App/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
+``/App/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
+à ceci::
 
-    class Post extends AppModel {
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
     }
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant
-notre model Post, CakePHP peut automatiquement déduire que ce model sera
-utilisé dans le controller PostsController, et sera lié à la table ``posts``
-de la base de données.
+notre objet Table ``ArticlesTable``, CakePHP va automatiquement supposer que
+cet objet Table sera utilisé dans le ArticlesController, et sera lié à une table
+de la base de données appelée ``articles``.
 
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans /app/Model. Cela veut aussi dire que
+    pas le fichier correspondant dans /App/Model/Table. Cela veut aussi dire que
     si vous n'avez pas nommé correctement votre fichier (par ex. post.php ou
     posts.php). CakePHP ne reconnaîtra pas votre configuration et utilisera
     ses objets model par défaut.
@@ -34,19 +41,20 @@ les callbacks, et la validation, consultez le chapitre :doc:`/models` du
 manuel.
 
 
-Créer un controller Posts
-=========================
+Créer un controller Articles
+============================
 
-Nous allons maintenant créer un controller pour nos posts. Le controller est
+Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où s'exécutera toute la logique métier pour l'intéraction du
 processus de post. En un mot, c'est l'endroit où vous jouerez avec les models
 et où les tâches liées aux posts s'exécutent. Nous placerons ce nouveau
-controller dans un fichier appelé ``PostsController.php`` à l'intérieur du
-dossier ``/app/Controller``. Voici à quoi devrait ressembler le controller
+controller dans un fichier appelé ``ArticlesController.php`` à l'intérieur du
+dossier ``/App/Controller``. Voici à quoi devrait ressembler le controller
 de base ::
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
     }
 
 Maintenant, ajoutons une action à notre controller. Les actions représentent
@@ -56,19 +64,21 @@ quand les utilisateurs requêtent www.exemple.com/posts/index (qui est
 à voir une liste de posts. Le code pour cette action devrait ressembler à
 quelque chose comme ça::
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
 
         public function index() {
-            $this->set('posts', $this->Post->find('all'));
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
         }
     }
 
-En définissant la fonction ``index()`` dans notre PostsController, les
+En définissant la fonction ``index()`` dans notre ArticlesController, les
 utilisateurs peuvent maintenant accéder à cette logique en demandant
-www.exemple.com/posts/index. De la même façon, si nous devions définir une
+www.exemple.com/articles/index. De la même façon, si nous devions définir une
 fonction appelée ``foobar()``, les utilisateurs pourrait y accéder en demandant
-www.exemple.com/posts/foobar.
+www.exemple.com/articles/foobar.
 
 .. warning::
 
@@ -149,13 +159,15 @@ chose comme cela::
             )
     )
 
-Les fichiers des vues de CakePHP sont stockés dans ``/app/views`` à l'intérieur
-d'un dossier dont le nom correspond à celui du controller (nous aurons à créer
-un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de
-ces posts dans un joli tableau, le code de notre vue devrait ressembler à
-quelque chose comme cela::
+Les fichiers des vues de CakePHP sont stockés dans ``/App/Template`` à
+l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
+aurons à créer un dossier appelé 'Posts' dans ce cas). Pour mettre en forme les
+données de ces posts dans un joli tableau, le code de notre vue devrait
+ressembler à quelque chose comme cela::
 
-    <!-- File: /app/View/Posts/index.ctp -->
+.. code-block:: php
+
+    <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <table>
@@ -165,14 +177,14 @@ quelque chose comme cela::
             <th>Created</th>
         </tr>
 
-        <!-- Here is where we loop through our $posts array, printing out post info -->
+        <!-- C'est ici que nous bouclons sur notre tableau $posts , affichant l'info de post -->
 
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
                 <?php echo $this->Html->link($post['Post']['title'],
-                array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
@@ -183,14 +195,15 @@ quelque chose comme cela::
 Bien entendu, cela donnera quelque chose de simple.
 
 Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
-C'est une instance de la classe CakePHP :php:class:`HtmlHelper`.
-CakePHP est livré avec un ensemble de "helpers" (des assistants) pour les vues,
-qui réalisent en un clin d'oeil des choses comme le "linking" (mettre les liens
-dans un texte), l'affichage des formulaires, du JavaScript et de l'AJAX. Vous
-pouvez en apprendre plus sur la manière de les utiliser dans le chapitre
-:doc:`/views/helpers`, mais ce qu'il est important de noter ici, c'est que la
-méthode ``link()`` génèrera un lien HTML à partir d'un titre (le premier
-paramètre) et d'une URL (le second paramètre).
+C'est une instance de la classe CakePHP
+:php:class:`Cake\\View\\Helper\\HtmlHelper`. CakePHP est livré avec un ensemble
+de "helpers" (des assistants) pour les vues, qui réalisent en un clin d'oeil
+des choses comme le "linking" (mettre les liens dans un texte), l'affichage des
+formulaires, du JavaScript et de l'AJAX. Vous pouvez en apprendre plus sur la
+manière de les utiliser dans le chapitre :doc:`/views/helpers`, mais ce qu'il
+est important de noter ici, c'est que la méthode ``link()`` génèrera un
+lien HTML à partir d'un titre (le premier paramètre) et d'une URL (le second
+paramètre).
 
 Lorsque vous indiquez des URLs dans CakePHP, il est recommandé d'utiliser les
 tableaux. Ceci est expliqué dans le chapitre des Routes. Utiliser les tableaux
@@ -209,6 +222,8 @@ l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
 tarder dans le Controller Posts::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -231,12 +246,12 @@ tarder dans le Controller Posts::
     }
 
 L'appel de ``set()`` devrait vous être familier. Notez que nous utilisons
-``read()`` plutôt que ``find('all')`` parce que nous voulons seulement
+``findById()`` plutôt que ``find('all')`` parce que nous voulons seulement
 récupérer les informations d'un seul post.
 
 Notez que notre action "view" prend un paramètre : l'ID du post que nous
 aimerions voir. Ce paramètre est transmis à l'action grâce à l'URL demandée.
-Si un utilisateur demande /posts/view/3, alors la valeur '3' est transmise
+Si un utilisateur demande ``/posts/view/3``, alors la valeur '3' est transmise
 à la variable ``$id``.
 
 Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
@@ -246,20 +261,20 @@ le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. Nous
 exécutons aussi une vérification similaire pour nous assurer que l'utilisateur
 a accède à un enregistrement qui existe.
 
-Maintenant, créons la vue pour notre nouvelle action "view" et plaçons-la
-dans ``/app/View/Posts/view.ctp``.
+Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
+dans ``/App/Template/Posts/view.ctp``.
 
 .. code-block:: php
 
-    <!-- Fichier : /app/View/Posts/view.ctp -->
+    <!-- File: /App/Template/Posts/view.ctp -->
 
     <h1><?php echo h($post['Post']['title']); ?></h1>
 
-    <p><small>Créé le : <?php echo $post['Post']['created']; ?></small></p>
+    <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
 
     <p><?php echo h($post['Post']['body']); ?></p>
 
-Vérifiez que cela fonctionne en testant les liens de la page /posts/index
+Vérifiez que cela fonctionne en testant les liens de la page ``/posts/index``
 ou en affichant manuellement un post via ``/posts/view/1``.
 
 Ajouter des Posts
@@ -270,6 +285,8 @@ mais lançons-nous dans l'ajout de nouveaux posts.
 
 Premièrement, commençons par créer une action ``add()`` dans le
 PostsController::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
@@ -306,8 +323,8 @@ PostsController::
 .. note::
 
    Vous avez besoin d'inclure le component Session (SessionComponent) et
-   le helper Session (SessionHelper) dans chaque controller que vous
-   utiliserez. Si nécessaire, incluez-les dans le controller principal
+   le helper Session (SessionHelper) dans chaque controller où vous voulez
+   les utiliser. Si nécessaire, incluez-les dans le controller principal
    (AppController) pour qu'ils soient accessibles à tous les controllers.
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST,
@@ -320,24 +337,27 @@ Chaque requête de CakePHP contient un objet ``CakeRequest`` qui est accessible
 en utilisant ``$this->request``. Cet objet contient des informations utiles
 sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre
 application. Dans ce cas, nous utilisons la méthode
-:php:meth:`CakeRequest::is()`` pour vérifier que la requête est de type POST.
+:php:meth:`Cake\\Network\\Request::is()` pour vérifier que la requête est de
+type POST.
 
 Lorsqu'un utilisateur utilise un formulaire pour poster des données dans votre
 application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode :php:meth:`SessionComponent::setFlash()` du component
-Session (SessionComponent) pour définir un message dans une variable session
-et qui sera affiché dans la page juste après la redirection. Dans le layout,
-nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet
+Nous utilisons la méthode
+:php:meth:`Cake\\Controller\\Component\\SessionComponent::setFlash()` pour
+définir un message dans une variable session et qui sera affiché dans la page
+juste après la redirection. Dans le layout, nous trouvons la fonction
+:php:func:`Cake\\View\Helper\\SessionHelper::flash` qui permet
 d'afficher et de nettoyer la variable correspondante. La méthode
-:php:meth:`Controller::redirect`` du controller permet de rediriger vers une
-autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
-/posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
-Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()``
-pour voir les différents formats d'URL acceptés dans les différentes fonctions
-de CakePHP.
+:php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
+rediriger vers une autre URL. Le paramètre ``array('action' => 'index')`` sera
+traduit vers l'URL /posts, c'est à dire l'action "index" du controller "Posts"
+(PostsController). Vous pouvez vous référer à l'
+`API<http://api.cakephp.org>`_ de la fonction
+:php:func:`Cake\\Routing\\Router::url()` pour voir les différents formats
+d'URL acceptés dans les différentes fonctions de CakePHP.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
@@ -352,8 +372,9 @@ interminables et leurs routines de validations. Cake rend tout cela plus facile
 et plus rapide.
 
 Pour tirer profit des fonctionnalités de validation, vous devez utiliser
-le helper "Form" (FormHelper) dans vos vues. :php:class:`FormHelper` est
-disponible par défaut dans toutes les vues avec la variables ``$this->Form``.
+le helper "Form" (FormHelper) dans vos vues.
+:php:class:`Cake\\View\\Helper\\FormHelper` est disponible par défaut dans
+toutes les vues avec la variables ``$this->Form``.
 
 Voici le code de notre vue "add" (ajout)
 
@@ -397,8 +418,8 @@ une fois, référez-vous au chapitre :doc:`/views/helpers` pour en savoir plus
 sur les helpers.
 
 A présent, revenons en arrière et modifions notre vue
-``/app/View/Posts/index.ctp`` pour ajouter un lien "Ajouter un post". Ajoutez
-la ligne suivante avant ``<table>`` ::
+``/App/Template/Posts/index.ctp`` pour ajouter un lien "Ajouter un post".
+Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?php echo $this->Html->link(
         'Ajouter un Post',
@@ -409,6 +430,8 @@ Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
 exigences de validation ? Les règles de validation sont définies dans le
 model. Retournons donc à notre model Post et procédons à quelques
 ajustements::
+
+    namespace App\Model;
 
     class Post extends AppModel {
         public $validate = array(
@@ -433,9 +456,9 @@ plus d'informations sur cette configuration, consultez le chapitre
 Maintenant que vos règles de validation sont en place, utilisez l'application
 pour essayer d'ajouter un post avec un titre et un contenu vide afin de voir
 comment cela fonctionne. Puisque que nous avons utilisé la méthode
-:php:meth:`FormHelper::input()`` du helper "Form" pour créer nos éléments
-de formulaire, nos messages d'erreurs de validation seront affichés
-automatiquement.
+:php:meth:`Cake\\View\\Helper\\FormHelper::input()` du helper "Form" pour
+créer nos éléments de formulaire, nos messages d'erreurs de validation seront
+affichés automatiquement.
 
 Editer des Posts
 ================
@@ -510,7 +533,7 @@ Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
 
 .. code-block:: php
 
-    <!-- Fichier: /app/View/Posts/index.ctp  (lien d\'édition ajouté) -->
+    <!-- File: /App/Template/Posts/index.ctp  (lien d\'édition ajouté) -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link("Ajouter un Post", array('action' => 'add')); ?></p>
@@ -575,7 +598,7 @@ ainsi :
 
 .. code-block:: php
 
-    <!-- Fichier: /app/View/Posts/index.ctp -->
+    <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Ajouter un Post', array('action' => 'add')); ?></p>
@@ -611,10 +634,10 @@ ainsi :
 
     </table>
 
-Utiliser :php:meth:`~FormHelper::postLink()` permet de créer un lien qui
-utilise du Javascript pour supprimer notre post en faisant une requête POST.
-Autoriser la suppression par une requête GET est dangereux à cause des robots
-d'indexation qui peuvent tous les supprimer.
+Utiliser :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` permet de
+créer un lien qui utilise du Javascript pour supprimer notre post en faisant
+une requête POST. Autoriser la suppression par une requête GET est dangereux à
+cause des robots d'indexation qui peuvent tous les supprimer.
 
 .. note::
 
@@ -639,7 +662,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Posts
 (PostsController).
 
-Le routage de CakePHP se trouve dans ``/app/Config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans ``/App/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 
@@ -677,7 +700,7 @@ riches en fonctionnalités.
 
 Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
 pour les choses sérieuses. Commencez votre propre projet et lisez le reste
-du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
+du `Manuel </index>`_ et de `l'API <http://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
 merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`

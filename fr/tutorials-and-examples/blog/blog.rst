@@ -35,28 +35,32 @@ Maintenant, lançons-nous !
 Obtenir CakePHP
 ===============
 
-Tout d'abord, récupérons une copie récente de CakePHP.
-
 Pour obtenir la dernière version, allez sur le site GitHub du projet CakePHP :
-`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
-et téléchargez la dernière version de la 2.0.
+`http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
+et téléchargez la dernière version de la 3.0.
 
-Vous pouvez aussi cloner le dépôt en utilisant
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``
+Vous pouvez aussi installer CakePHP en utilisant ``Composer``::
+
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar create-project cakephp/app
+
+Ceci va télécharge Composer et installer le squelette de l'application
+de CakePHP. Pour ce tutoriel, nous allons télécharger le fichier zip puisque
+c'est l'options la plus simple.
 
 Peu importe comment vous l'avez téléchargé, placez le code à l'intérieur du
 "DocumentRoot" de votre serveur. Une fois terminé, votre répertoire
 d'installation devrait ressembler à quelque chose comme cela::
 
     /chemin_du_document_root
-        /app
-        /lib
-        /plugins
-        /vendors
+        /App
+        /Plugin
+        /tmp
+        /webroot
+        /vendor
         .htaccess
         index.php
-        README
+        README.md
 
 A présent, il est peut-être temps de voir un peu comment fonctionne la
 structure de fichiers de CakePHP : lisez le chapitre
@@ -70,9 +74,7 @@ ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
 choix pour l'utiliser dans ce tutoriel. Pour le moment, nous allons juste créer
 une simple table pour stocker nos posts. Nous allons également insérer quelques
 posts à des fins de tests. Exécutez les requêtes SQL suivantes dans votre base
-de données :
-
-::
+de données::
 
     /* D'abord, créons la table des posts : */
     CREATE TABLE posts (
@@ -91,7 +93,7 @@ de données :
     INSERT INTO posts (title,body,created)
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
-Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
+Les choix des noms pour les tables et les colonnes ne sont pas arbitraires.
 Si vous respectez les conventions de nommage de CakePHP pour les bases de
 données et les classes (toutes deux expliquées au chapitre
 :doc:`/getting-started/cakephp-conventions`), vous tirerez profit d'un
@@ -106,44 +108,65 @@ permet de la relier automatiquement à notre model Post, et qu'avoir des
 champs 'modified' et 'created' permet de les avoir gérés automagiquement par
 CakePHP.
 
-Configurer la base de données CakePHP
-=====================================
+Configurer la base de données
+=============================
 
 En avant : indiquons à CakePHP où se trouve notre base de données et comment s'y
 connecter. Pour la plupart d'entre vous, c'est la première et dernière fois que
 vous configurerez quelque chose.
 
 Une copie du fichier de configuration CakePHP pour la base de données se trouve
-dans ``/app/Config/database.php.default``. Faites une copie de ce fichier dans
-le même répertoire mais nommez le ``database.php``.
+dans ``App/Config/app.php.default``. Faites une copie de ce fichier dans
+le même répertoire mais nommez le ``app.php``.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
-les valeurs du tableau ``$default`` par celles qui correspondent à votre
-installation. Un exemple de tableau de configuration complet pourrait
+les valeurs du tableau ``Datatsources.default`` par celles qui correspondent à
+votre installation. Un exemple de tableau de configuration complet pourrait
 ressembler à ce qui suit::
 
-    public $default = array(
-        'datasource' => 'Database/Mysql',
-        'persistent' => false,
-        'host' => 'localhost',
-        'port' => '',
-        'login' => 'cakeBlog',
-        'password' => 'c4k3-rUl3Z',
-        'database' => 'cake_blog_tutorial',
-        'schema' => '',
-        'prefix' => '',
-        'encoding' => 'utf8'
-    );
+    $config = [
+        // Plus de configuration ci-dessus.
+        'Datasources' => [
+            'default' => [
+                'className' => 'Cake\Database\Driver\Mysql',
+                'persistent' => 'false,',
+                'host' => 'localhost',
+                'login' => 'cake_blog',
+                'password' => 'AngelF00dC4k3~',
+                'database' => 'cake_blog',
+                'prefix' => false,
+                'encoding' => 'utf8',
+            ]
+        ],
+        // Plus de configuration ci-dessous.
+    ];
 
-Une fois votre nouveau fichier ``database.php`` sauvegardé, vous devriez
+Une fois votre nouveau fichier ``app.php`` sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
-de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion a
-été trouvé, et que CakePHP peut s'y connecter avec succès.
+de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion
+a été trouvé, et que CakePHP peut s'y connecter avec succès.
 
 .. note::
 
     Rappelez-vous que vous aurez besoin d'avoir PDO, et pdo_mysql activés dans
     votre php.ini.
+
+Les Permissions du Répertoire tmp
+=================================
+
+Ensuite vous devrez mettre le répertoire ``/tmp`` en écriture pour le serveur
+web. La meilleur façon de le faire est de trouver sous quel utilisateur votre
+serveur web tourne. Vous pouver mettre <?php echo exec('whoami'); ?> à
+l’intérieur de tout fichier php que votre serveur web execute. Vous devriez voir
+afficher un nom d’utilisateur. Changez le possesseur du répertoire ``App/tmp``
+pour cet utilisateur. La commande finale que vous pouvez lancer (dans \*nix)
+pourrait ressembler à ceci::
+
+    $ chown -R www-data App/tmp
+
+Si pour une raison ou une autre, CakePHP ne peut écrire dans ce répertoire, vous
+verrez des avertissements et des exceptions attrapées vous disant que les
+données de cache n’ont pas pu être écrites.
 
 Configuration facultative
 =========================
@@ -152,42 +175,17 @@ Il y a trois autres élements qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
-hashs. Le second consiste à définir un nombre personnalisé (ou "graine") à
-utiliser pour le chiffrage. Le troisième est de permettre l'accès en écriture
-à CakePHP pour son dossier ``tmp``.
+hashs.
 
 Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/app/Config/core.php`` à la ligne 187.
+défaut en modifiant ``/App/Config/app.php``.
 La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
 difficile à deviner::
 
-    /**
-     * Une chaîne aléatoire utilisée dans les méthodes de hachage sécurisées.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+    'Security' => [
+        'salt' => 'something long and containing lots of different values.',
+    ],
 
-La "graine cipher" est utilisée pour le chiffrage/déchiffrage des chaînes de
-caractères. Changez sa valeur par défaut en modifiant
-``/app/Config/core.php`` à la ligne 192. La nouvelle valeur n'a pas beaucoup
-d'importance du moment qu'elle est difficile à deviner::
-
-    /**
-     * Une chaîne aléatoire de chiffre utilisée pour le chiffrage/déchiffrage
-     * des chaînes de caractères.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
-
-La dernière étape consiste à rendre le dossier ``/app/tmp`` accessible en
-écriture. Le meilleur moyen de faire cela est de trouver sous quel utilisateur
-votre serveur web s'exécute (``<?php echo `whoami`; ?>``) et de modifier le
-propriétaire du dossier ``/app/tmp`` pour cet utilisateur. La commande à
-exécuter (sous \*nix) devrait ressembler à quelque chose comme cela ::
-
-    $ chown -R www-data app/tmp
-
-Si pour une raison quelconque CakePHP ne peut pas écrire dans ce répertoire,
-vous en serez informé par un message d'avertissement tant que vous n'êtes pas
-en mode production.
 
 Une note sur mod\_rewrite
 =========================
@@ -203,8 +201,52 @@ web fonctionne:
 
     /installation/url-rewriting
 
-Maintenant continuez sur :doc:`/tutorials-and-examples/blog/part-two` pour
-commencer à construire votre première application CakePHP.
+#. Pour une raison ou une autre, vous avez peut-être obtenu une copie de CakePHP
+   sans les fichiers .htaccess souhaités. Ceci arrive parfois parce que
+   certains systèmes d'exploitation traitent les fichiers qui commencent par
+   '.' comme des fichiers cachés, et ne les copient pas. Assurez-vous que votre
+   copie de CakePHP provient de la section downloads du site ou de notre dépôt
+   git.
+
+#. Assurez-vous qu'Apache charge mod\_rewrite correctement! Vous devriez voir
+   quelque chose comme::
+
+       LoadModule rewrite_module             libexec/httpd/mod_rewrite.so
+
+   ou (pour Apache 1.3)::
+
+       AddModule             mod_rewrite.c
+   
+   dans votre httpd.conf.
+
+
+Si vous ne voulez pas ou ne pouvez pas obtenir mod\_rewrite (ou d'autres modules
+compatibles) et le lancer sur votre serveur, vous aurez besoin d'utiliser les
+belles URLs intégrées à Cake. Dans ``/App/Config/app.php``, décommentez la ligne
+qui ressemble à::
+
+    'App' => [
+        // ...
+        // 'baseUrl' => env('SCRIPT_NAME'),
+    ]
+
+Retirez aussi ces fichiers .htaccess::
+
+    /.htaccess
+    /App/.htaccess
+    /App/webroot/.htaccess
+
+
+Ceci va faire que vos URLs ressembleront à
+www.example.com/index.php/controllername/actionname/param plutôt que
+www.example.com/controllername/actionname/param.
+
+Si vous installez CakePHP sur un serveur web autre que Apache, vous pouvez
+trouver des instructions pour obtenir l'URL réécrite fonctionnant pour d'autres
+serveurs sous la section :doc:`/installation/url-rewriting`.
+
+Maintenant continuez vers :doc:`/tutorials-and-examples/blog/part-two` pour
+commencer la construction de votre première application CakePHP.
 
 
 .. meta::

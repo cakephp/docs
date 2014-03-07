@@ -20,7 +20,7 @@ Premièrement prenez une copie du plugin et dézipper le ou dupliquer le en
 utilisant git dans `app/Plugin/AclExtras`. Ensuite, activez le plugin dans
 votre fichier `app/Config/boostrap.php` comme montré ci-dessus::
 
-    //app/Config/boostrap.php
+    //App/Config/boostrap.php
     // ...
     CakePlugin::load('AclExtras');
 
