@@ -255,9 +255,9 @@ Now let's create the view for our new 'view' action and place it in
 
     <!-- File: /App/Template/Posts/view.ctp -->
 
-    <h1><? h($post['Post']['title']) ?></h1>
+    <h1><?= h($post['Post']['title']) ?></h1>
 
-    <p><small>Created: <? $post['Post']['created'] ?></small></p>
+    <p><small>Created: <?= $post['Post']['created'] ?></small></p>
 
     <p><?= h($post['Post']['body']) ?></p>
 
@@ -524,15 +524,15 @@ posts:
 
     <?php foreach ($posts as $post): ?>
         <tr>
-            <td><? $post['Post']['id'] ?></td>
+            <td><?= $post['Post']['id'] ?></td>
             <td>
-                <? $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])) ?>
+                <?= $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])) ?>
             </td>
             <td>
-                <? $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])) ?>
+                <?= $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])) ?>
             </td>
             <td>
-                <? $post['Post']['created'] ?>
+                <?= $post['Post']['created'] ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -574,7 +574,7 @@ links that allow users to delete posts, however:
     <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
-    <p><? $this->Html->link('Add Post', array('action' => 'add')) ?></p>
+    <p><?= $this->Html->link('Add Post', array('action' => 'add')) ?></p>
     <table>
         <tr>
             <th>Id</th>
