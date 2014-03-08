@@ -479,23 +479,23 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php echo $this->Html->media('audio.mp3'); ?>
+        <?= $this->Html->media('audio.mp3') ?>
 
         // Output
         <audio src="/files/audio.mp3"></audio>
 
-        <?php echo $this->Html->media('video.mp4', array(
+        <?= $this->Html->media('video.mp4', array(
             'fullBase' => true,
             'text' => 'Fallback text'
-        )); ?>
+        )) ?>
 
         // Output
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
-       <?php echo $this->Html->media(
+       <?= $this->Html->media(
             array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
             array('autoplay')
-        ); ?>
+        ) ?>
 
         // Output
         <video autoplay="autoplay">
