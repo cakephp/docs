@@ -272,9 +272,9 @@ when used with the ``inline = false`` option:
     <!DOCTYPE html>
     <html lang="en">
         <head>
-        <title><? $this->fetch('title') ?></title>
-        <? $this->fetch('script') ?>
-        <? $this->fetch('css') ?>
+        <title><?= $this->fetch('title') ?></title>
+        <?= $this->fetch('script') ?>
+        <?= $this->fetch('css') ?>
         </head>
         // rest of the layout follows
 
