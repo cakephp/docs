@@ -404,13 +404,13 @@ which can be easily integrated into your table column headers:
     // App/View/Posts/index.ctp
     <table>
         <tr>
-            <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th>
-            <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th>
+            <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+            <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
            <?php foreach ($data as $recipe): ?>
         <tr>
-            <td><?php echo $recipe['Recipe']['id']; ?> </td>
-            <td><?php echo h($recipe['Recipe']['title']); ?> </td>
+            <td><?= $recipe['Recipe']['id'] ?> </td>
+            <td><?= h($recipe['Recipe']['title']) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -425,13 +425,13 @@ It is also possible to sort a column based on associations:
 
     <table>
         <tr>
-            <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th>
-            <th><?php echo $this->Paginator->sort('Author.name', 'Author'); ?></th>
+            <th><?= $this->Paginator->sort('title', 'Title') ?></th>
+            <th><?= $this->Paginator->sort('Author.name', 'Author') ?></th>
         </tr>
            <?php foreach ($data as $recipe): ?>
         <tr>
-            <td><?php echo h($recipe['Recipe']['title']); ?> </td>
-            <td><?php echo h($recipe['Author']['name']); ?> </td>
+            <td><?= h($recipe['Recipe']['title']) ?> </td>
+            <td><?= h($recipe['Author']['name']) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -440,22 +440,22 @@ The final ingredient to pagination display in views is the addition
 of page navigation, also supplied by the PaginationHelper::
 
     // Shows the page numbers
-    echo $this->Paginator->numbers();
+    <?= $this->Paginator->numbers() ?>
 
     // Shows the next and previous links
-    echo $this->Paginator->prev('« Previous');
-    echo $this->Paginator->next('Next »');
+    <?= $this->Paginator->prev('« Previous') ?>
+    <?= $this->Paginator->next('Next »') ?>
 
     // prints X of Y, where X is current page and Y is number of pages
-    echo $this->Paginator->counter();
+    <?= $this->Paginator->counter() ?>
 
 The wording output by the counter() method can also be customized
 using special markers::
 
-    echo $this->Paginator->counter(array(
+    <?= $this->Paginator->counter(array(
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
-    ));
+    )) ?>
 
 Other Methods
 =============

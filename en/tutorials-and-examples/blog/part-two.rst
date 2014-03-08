@@ -171,12 +171,12 @@ nice table, our view code might look something like this
 
         <?php foreach ($posts as $post): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $post['Post']['id'] ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                <?= $this->Html->link($post['Post']['title'],
+    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td><?= $post['Post']['created'] ?></td>
         </tr>
         <?php endforeach; ?>
         <?php unset($post); ?>
@@ -255,11 +255,11 @@ Now let's create the view for our new 'view' action and place it in
 
     <!-- File: /App/Template/Posts/view.ctp -->
 
-    <h1><?php echo h($post['Post']['title']); ?></h1>
+    <h1><? h($post['Post']['title']) ?></h1>
 
-    <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
+    <p><small>Created: <? $post['Post']['created'] ?></small></p>
 
-    <p><?php echo h($post['Post']['body']); ?></p>
+    <p><?= h($post['Post']['body']) ?></p>
 
 Verify that this is working by trying the links at ``/posts/index`` or
 manually requesting a post by accessing ``/posts/view/1``.
@@ -401,10 +401,10 @@ Now let's go back and update our ``/App/Template/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
 the following line::
 
-    <?php echo $this->Html->link(
+    <?= $this->Html->link(
         'Add Post',
         array('controller' => 'posts', 'action' => 'add')
-    ); ?>
+    ) ?>
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
@@ -511,7 +511,7 @@ posts:
     <!-- File: /App/Template/Posts/index.ctp  (edit links added) -->
 
     <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+    <p><?= $this->Html->link("Add Post", array('action' => 'add')) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -524,15 +524,15 @@ posts:
 
     <?php foreach ($posts as $post): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><? $post['Post']['id'] ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <? $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])) ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <? $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])) ?>
             </td>
             <td>
-                <?php echo $post['Post']['created']; ?>
+                <? $post['Post']['created'] ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -574,7 +574,7 @@ links that allow users to delete posts, however:
     <!-- File: /App/Template/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+    <p><? $this->Html->link('Add Post', array('action' => 'add')) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -587,20 +587,20 @@ links that allow users to delete posts, however:
 
         <?php foreach ($posts as $post): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $post['Post']['id'] ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?= $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])) ?>
             </td>
             <td>
-                <?php echo $this->Form->postLink(
+                <?= $this->Form->postLink(
                     'Delete',
                     array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?'));
+                    array('confirm' => 'Are you sure?'))
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?= $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])) ?>
             </td>
             <td>
-                <?php echo $post['Post']['created']; ?>
+                <?= $post['Post']['created'] ?>
             </td>
         </tr>
         <?php endforeach; ?>

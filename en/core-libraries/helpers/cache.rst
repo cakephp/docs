@@ -102,9 +102,9 @@ them in ``<!--nocache--> <!--/nocache-->`` like so:
 
     <!--nocache-->
     <?php if ($this->Session->check('User.name')): ?>
-        Welcome, <?php echo h($this->Session->read('User.name')); ?>.
+        Welcome, <?= h($this->Session->read('User.name')) ?>.
     <?php else: ?>
-        <?php echo $this->Html->link('Login', 'users/login'); ?>
+        <?= $this->Html->link('Login', 'users/login') ?>
     <?php endif; ?>
     <!--/nocache-->
 
