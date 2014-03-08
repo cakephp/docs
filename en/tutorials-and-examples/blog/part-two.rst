@@ -213,10 +213,9 @@ Now let's create the view for our new 'view' action and place it in
 
     <!-- File: /App/Template/Articles/view.ctp -->
     <h1><?= h($article->title) ?></h1>
-
+    <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-    <p><?= h($article->body) ?></p>
 
 Verify that this is working by trying the links at ``/articles/index`` or
 manually requesting an article by accessing ``/articles/view/1``.
@@ -490,7 +489,7 @@ articles:
                 <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
             <td>
-                <?= $article->created ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
         </tr>
     <?php endforeach; ?>
