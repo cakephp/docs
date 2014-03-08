@@ -360,6 +360,9 @@ Controller
 - The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
   has been removed from CakePHP core, and will be provided as a standalone
   plugin.
+- The ``Controller::$ext`` property has been removed. You now have to extend and
+  overide the ``View::$_ext`` property if you want to use a non-default view file
+  extension.
 
 Scaffold Removed
 ----------------
@@ -538,6 +541,8 @@ View Class
 - The ``plugin`` key has been removed from ``$options`` argument of :php:meth:`Cake\\View\\View::element()`.
   Specify the element name as ``SomePlugin.element_name`` instead.
 - ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
+- ``View::$ext`` has been removed and instead a protected property ``View::$_ext``
+  has been added.
 
 ViewBlock
 ---------
@@ -563,7 +568,7 @@ Helper
 Helper has had the following methods removed:
 
 * Helper::setEntity()
-* Helper::entity() 
+* Helper::entity()
 * Helper::model()
 * Helper::field()
 * Helper::value()
