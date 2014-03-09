@@ -73,7 +73,7 @@ plugin(s) or PHP will give warnings for each file it cannot load. This is
 especially important to remember when specifying defaults for all plugins.
 
 Cake 2.3 added an `ignoreMissing` option, that allows you to ignore any missing
-routes and boostrap files when loading plugins. You can shorten the code needed
+routes and bootstrap files when loading plugins. You can shorten the code needed
 to load all plugins using this.::
 
     CakePlugin::loadAll(array(
