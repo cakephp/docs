@@ -581,6 +581,15 @@ field features that have proven to be problematic over time. FormHelper no
 longer relies on these methods and the complexity they provide is not necessary
 anymore.
 
+The following methods have been removed:
+
+* Helper::_parseAttributes()
+* Helper::_formatAttribute()
+
+These methods can now be found on the ``StringTemplate`` class that helpers
+frequently use. See the ``StringTemplateTrait`` for an easy way to integrate
+string templates into your own helpers.
+
 FormHelper
 ----------
 
@@ -634,6 +643,13 @@ and reduce the problems people had in the past:
 
 It is recommended that you review the :doc:`/core-libraries/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
+
+HtmlHelper
+----------
+
+- ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
+- ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
+  done using ``templates()`` or the ``templates`` setting.
 
 
 PaginatorHelper
