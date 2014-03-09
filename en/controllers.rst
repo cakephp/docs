@@ -221,7 +221,7 @@ rendered from the controller.
         // Then, in the view, you can utilize the data:
         ?>
 
-        You have selected <?php echo $color; ?> icing for the cake.
+        You have selected <?= $color ?> icing for the cake.
 
     The ``set()`` method also takes an associative array as its first
     parameter. This can often be a quick way to assign a set of
