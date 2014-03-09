@@ -40,13 +40,13 @@ validation, check out the :doc:`/models` chapter of the
 Manual.
 
 
-Create a Articles Controller
-============================
+Create an Articles Controller
+=============================
 
 Next, we'll create a controller for our articles. The controller is
-where all interaction with posts will happen. In a nutshell, it's the place
+where all interaction with articles will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
-related to posts done. We'll place this new controller in a file called
+related to articles done. We'll place this new controller in a file called
 ``ArticlesController.php`` inside the ``/App/Controller`` directory. Here's
 what the basic controller should look like::
 
@@ -57,9 +57,9 @@ what the basic controller should look like::
 
 Now, let's add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
-users request www.example.com/posts/index (which is also the same
-as www.example.com/posts/), they might expect to see a listing of
-posts. The code for that action would look something like this::
+users request www.example.com/articles/index (which is also the same
+as www.example.com/articles/), they might expect to see a listing of
+articles. The code for that action would look something like this::
 
     namespace App\Controller;
 
@@ -92,8 +92,8 @@ the ``find('all')`` method of the Articles table object.
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
 
-Creating Post Views
-===================
+Creating Article Views
+======================
 
 Now that we have our data flowing to our model, and our application
 logic and flow defined by our controller, let's create a view for
@@ -107,59 +107,20 @@ Layouts are presentation code that is wrapped around a view, and
 can be defined and switched between, but for now, let's just use
 the default.
 
-Remember in the last section how we assigned the 'posts' variable
-to the view using the ``set()`` method? That would hand down data
-to the view that would look something like this::
-
-    // print_r($posts) output:
-
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => The title
-                        [body] => This is the post body.
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => A title once again
-                        [body] => And the post body follows.
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Title strikes back
-                        [body] => This is really exciting! Not.
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
+Remember in the last section how we assigned the 'articles' variable
+to the view using the ``set()`` method? That would hand down the query
+object to the view to be invoked with a ``foreach`` iteration.
 
 CakePHP's view files are stored in ``/App/Template`` inside a folder
 named after the controller they correspond to (we'll have to create
-a folder named 'Posts' in this case). To format this post data in a
-nice table, our view code might look something like this
+a folder named 'Articles' in this case). To format this article data in a
+nice table, our view code might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/index.ctp -->
+    <!-- File: /App/Template/Articles/index.ctp -->
 
-    <h1>Blog posts</h1>
+    <h1>Blog articles</h1>
     <table>
         <tr>
             <th>Id</th>
@@ -167,19 +128,18 @@ nice table, our view code might look something like this
             <th>Created</th>
         </tr>
 
-        <!-- Here is where we loop through our $posts array, printing out post info -->
+        <!-- Here is where we iterate through our $articles query object, printing out article info -->
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?php echo $article->id; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link($article->title,
+                [controller' => 'articles', 'action' => 'view', $article->id]); ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td><?php echo $article->created->format(DATE_RFC850); ?></td>
         </tr>
         <?php endforeach; ?>
-        <?php unset($post); ?>
     </table>
 
 Hopefully this should look somewhat simple.
@@ -200,109 +160,105 @@ specify URLs relative to the base of the application in the form of
 /controller/action/param1/param2.
 
 At this point, you should be able to point your browser to
-http://www.example.com/posts/index. You should see your view,
-correctly formatted with the title and table listing of the posts.
+http://www.example.com/articles/index. You should see your view,
+correctly formatted with the title and table listing of the articles.
 
 If you happened to have clicked on one of the links we created in
-this view (that link a post's title to a URL /posts/view/some\_id),
+this view (that link a article's title to a URL /articles/view/some\_id),
 you were probably informed by CakePHP that the action hasn't yet
 been defined. If you were not so informed, either something has
 gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
-PostsController now::
+ArticlesController now::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
+    class ArticlesController extends AppController {
+        public $helpers = ['Html', 'Form'];
 
         public function index() {
-             $this->set('posts', $this->Post->find('all'));
+             $this->set('articles', $this->Articles->find('all'));
         }
 
         public function view($id = null) {
             if (!$id) {
-                throw new NotFoundException(__('Invalid post'));
+                throw new NotFoundException(__('Invalid article'));
             }
 
-            $post = $this->Post->findById($id);
-            if (!$post) {
-                throw new NotFoundException(__('Invalid post'));
-            }
-            $this->set('post', $post);
+            $article = $this->Articles->get($id);
+
+            $this->set(compact('article'));
         }
     }
 
 The ``set()`` call should look familiar. Notice we're using
 ``findById()`` rather than ``find('all')`` because we only really want
-a single post's information.
+a single article's information.
 
-Notice that our view action takes a parameter: the ID of the post
+Notice that our view action takes a parameter: the ID of the article
 we'd like to see. This parameter is handed to the action through
-the requested URL. If a user requests ``/posts/view/3``, then the value
+the requested URL. If a user requests ``/articles/view/3``, then the value
 '3' is passed as ``$id``.
 
 We also do a bit of error checking to ensure a user is actually
-accessing a record. If a user requests ``/posts/view``, we will throw a
+accessing a record. If a user requests ``/articles/view``, we will throw a
 ``NotFoundException`` and let the CakePHP ErrorHandler take over. We
 also perform a similar check to make sure the user has accessed a
 record that exists.
 
 Now let's create the view for our new 'view' action and place it in
-``/App/Template/Posts/view.ctp``
+``/App/Template/Articles/view.ctp``
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/view.ctp -->
+    <!-- File: /App/Template/Articles/view.ctp -->
 
-    <h1><?php echo h($post['Post']['title']); ?></h1>
+    <h1><?php echo h($article->title); ?></h1>
 
-    <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
+    <p><small>Created: <?php echo $article->created->format(DATE_RFC850); ?></small></p>
 
-    <p><?php echo h($post['Post']['body']); ?></p>
+    <p><?php echo h($article->body); ?></p>
 
-Verify that this is working by trying the links at ``/posts/index`` or
-manually requesting a post by accessing ``/posts/view/1``.
+Verify that this is working by trying the links at ``/articles/index`` or
+manually requesting an article by accessing ``/articles/view/1``.
 
-Adding Posts
-============
+Adding Articles
+===============
 
-Reading from the database and showing us the posts is a great
-start, but let's allow for the adding of new posts.
+Reading from the database and showing us the articles is a great
+start, but let's allow for the adding of new articles.
 
 First, start by creating an ``add()`` action in the
-PostsController::
+ArticlesController::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Session');
-        public $components = array('Session');
+    class ArticlesController extends AppController {
+        public $helpers = ['Html', 'Form', 'Session'];
+        public $components = ['Session'];
 
         public function index() {
-            $this->set('posts', $this->Post->find('all'));
+            $this->set('articles', $this->Articles->find('all'));
         }
 
         public function view($id) {
             if (!$id) {
-                throw new NotFoundException(__('Invalid post'));
+                throw new NotFoundException(__('Invalid article'));
             }
 
-            $post = $this->Post->findById($id);
-            if (!$post) {
-                throw new NotFoundException(__('Invalid post'));
-            }
-            $this->set('post', $post);
+            $article = $this->Articles->->get($id);
+
+            $this->set(compact('article'));
         }
 
         public function add() {
             if ($this->request->is('post')) {
-                $this->Post->create();
-                if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your post has been saved.'));
-                    return $this->redirect(array('action' => 'index'));
+                $this->Articles->create();
+                if ($this->Articles->save($this->request->data)) {
+                    $this->Session->setFlash(__('Your article has been saved.'));
+                    return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__('Unable to add your post.'));
+                $this->Session->setFlash(__('Unable to add your article.'));
             }
         }
     }
@@ -314,7 +270,7 @@ PostsController::
     your AppController.
 
 Here's what the ``add()`` action does: if the HTTP method of the
-request was POST, try to save the data using the Post model. If for some
+request was POST, try to save the data using the Articles model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
 
@@ -336,8 +292,8 @@ redirection. In the layout we have
 :php:func:`Cake\\View\Helper\\SessionHelper::flash` which displays the message
 and clears the corresponding session variable. The controller's
 :php:meth:`Cake\\Controller\\Controller::redirect` function
-redirects to another URL. The param ``array('action' => 'index')``
-translates to URL /posts i.e the index action of posts controller.
+redirects to another URL. The param ``['action' => 'index']``
+translates to URL /articles i.e the index action of articles controller.
 You can refer to :php:func:`Cake\\Routing\\Router::url()` function on the
 `API <http://api.cakephp.org>`_ to see the formats in which you can specify a
 URL for various CakePHP functions.
@@ -361,14 +317,15 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/add.ctp -->
+    <!-- File: /App/Template/Articles/add.ctp -->
 
-    <h1>Add Post</h1>
+    <h1>Add Article</h1>
     <?php
-    echo $this->Form->create('Post');
+    echo $this->Form->create('Articles');
     echo $this->Form->input('title');
-    echo $this->Form->input('body', array('rows' => '3'));
-    echo $this->Form->end('Save Post');
+    echo $this->Form->input('body', ['rows' => '3']);
+    echo $this->Form->button('Save Article');
+    echo $this->Form->end();
     ?>
 
 Here, we use the FormHelper to generate the opening tag for an HTML
@@ -376,7 +333,7 @@ form. Here's the HTML that ``$this->Form->create()`` generates:
 
 .. code-block:: html
 
-    <form id="PostAddForm" method="post" action="/posts/add">
+    <form method="post" action="/articles/add">
 
 If ``create()`` is called with no parameters supplied, it assumes
 you are building a form that submits to the current controller's
@@ -397,30 +354,32 @@ the form. If a string is supplied as the first parameter to
 along with the closing form tag. Again, refer to
 :doc:`/views/helpers` for more on helpers.
 
-Now let's go back and update our ``/App/Template/Posts/index.ctp``
-view to include a new "Add Post" link. Before the ``<table>``, add
+Now let's go back and update our ``/App/Template/Articles/index.ctp``
+view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
     <?php echo $this->Html->link(
-        'Add Post',
-        array('controller' => 'posts', 'action' => 'add')
+        'Add Article',
+        ['controller' => 'articles', 'action' => 'add']
     ); ?>
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
-back at our Post model and make a few adjustments::
+back at our Articles model and make a few adjustments::
 
-    namespace App\Model;
+    namespace App\Model\Table;
 
-    class Post extends AppModel {
-        public $validate = array(
-            'title' => array(
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public $validate = [
+            'title' => [
                 'rule' => 'notEmpty'
-            ),
-            'body' => array(
+            ],
+            'body' => [
                 'rule' => 'notEmpty'
-            )
-        );
+            ]
+        ];
     }
 
 The ``$validate`` array tells CakePHP how to validate your data
@@ -432,67 +391,67 @@ adding your own validation rules. For more information on that
 setup, check the :doc:`/models/data-validation`.
 
 Now that you have your validation rules in place, use the app to try to add
-a post with an empty title or body to see how it works.  Since we've used the
+a article with an empty title or body to see how it works.  Since we've used the
 :php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
 automatically.
 
-Editing Posts
-=============
+Editing Articles
+================
 
 Post editing: here we go. You're a CakePHP pro by now, so you
 should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the PostsController would look
+Here's what the ``edit()`` action of the ArticlesController would look
 like::
 
     public function edit($id = null) {
         if (!$id) {
-            throw new NotFoundException(__('Invalid post'));
+            throw new NotFoundException(__('Invalid article'));
         }
 
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException(__('Invalid post'));
+        $article = $this->Articles->findById($id);
+        if (!$article) {
+            throw new NotFoundException(__('Invalid article'));
         }
 
-        if ($this->request->is(array('post', 'put'))) {
-            $this->Post->id = $id;
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
-                return $this->redirect(array('action' => 'index'));
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->id = $id;
+            if ($this->Articles->save($this->request->data)) {
+                $this->Session->setFlash(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__('Unable to update your post.'));
+            $this->Session->setFlash(__('Unable to update your article.'));
         }
 
         if (!$this->request->data) {
-            $this->request->data = $post;
+            $this->request->data = $article;
         }
     }
 
 This action first ensures that the user has tried to access an existing record.
-If they haven't passed in an ``$id`` parameter, or the post does not
+If they haven't passed in an ``$id`` parameter, or the article does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If it is, then we
-use the POST data to update our Post record, or kick back and show the user
+use the POST data to update our article record, or kick back and show the user
 validation errors.
 
 If there is no data set to ``$this->request->data``, we simply set it to the
-previously retrieved post.
+previously retrieved article.
 
 The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/edit.ctp -->
+    <!-- File: /App/Template/Articles/edit.ctp -->
 
-    <h1>Edit Post</h1>
+    <h1>Edit Article</h1>
     <?php
-    echo $this->Form->create('Post');
+    echo $this->Form->create('Articles');
     echo $this->Form->input('title');
-    echo $this->Form->input('body', array('rows' => '3'));
-    echo $this->Form->input('id', array('type' => 'hidden'));
-    echo $this->Form->end('Save Post');
+    echo $this->Form->input('body', ['rows' => '3']);
+    echo $this->Form->input('id', ['type' => 'hidden']);
+    echo $this->Form->end('Save Article');
     ?>
 
 This view outputs the edit form (with the values populated), along
@@ -504,14 +463,14 @@ present (look back at our add view), CakePHP will assume that you are
 inserting a new model when ``save()`` is called.
 
 You can now update your index view with links to edit specific
-posts:
+articles:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/index.ctp  (edit links added) -->
+    <!-- File: /App/Template/Articles/index.ctp  (edit links added) -->
 
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+    <h1>Blog articles</h1>
+    <p><?php echo $this->Html->link("Add Article", ['action' => 'add']); ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -520,45 +479,45 @@ posts:
             <th>Created</th>
         </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Here's where we iterate through our $articles query object, printing out article info -->
 
-    <?php foreach ($posts as $post): ?>
+    <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?php echo $article->id; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link($article->title, ['action' => 'view', $article->id']); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link('Edit', ['action' => 'edit', $article->id]); ?>
             </td>
             <td>
-                <?php echo $post['Post']['created']; ?>
+                <?php echo $article->created; ?>
             </td>
         </tr>
     <?php endforeach; ?>
 
     </table>
 
-Deleting Posts
-==============
+Deleting Articles
+=================
 
-Next, let's make a way for users to delete posts. Start with a
-``delete()`` action in the PostsController::
+Next, let's make a way for users to delete articles. Start with a
+``delete()`` action in the ArticlesController::
 
     public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
 
-        if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
-            return $this->redirect(array('action' => 'index'));
+        if ($this->Articles->delete($id)) {
+            $this->Session->setFlash(__('The article with id: %s has been deleted.', h($id)));
+            return $this->redirect(['action' => 'index']);
         }
     }
 
-This logic deletes the post specified by $id, and uses
+This logic deletes the article specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
-message after redirecting them on to ``/posts``. If the user attempts to
+message after redirecting them on to ``/articles``. If the user attempts to
 do a delete using a GET request, we throw an Exception. Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is
 displayed. There are many built-in :doc:`/development/exceptions` that can
@@ -567,14 +526,14 @@ to generate.
 
 Because we're just executing some logic and redirecting, this
 action has no view. You might want to update your index view with
-links that allow users to delete posts, however:
+links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Posts/index.ctp -->
+    <!-- File: /App/Template/Articles/index.ctp -->
 
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+    <h1>Blog articles</h1>
+    <p><?php echo $this->Html->link('Add Article', ['action' => 'add']); ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -583,24 +542,24 @@ links that allow users to delete posts, however:
             <th>Created</th>
         </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Here's where we loop through our $articles query object, printing out article info -->
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?php echo $article->id; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link($article->title, ['action' => 'view', $article->id]); ?>
             </td>
             <td>
                 <?php echo $this->Form->postLink(
                     'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?'));
+                    ['action' => 'delete', $article->id],
+                    ['confirm' => 'Are you sure?']);
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link('Edit', ['action' => 'edit', $article->id]); ?>
             </td>
             <td>
-                <?php echo $post['Post']['created']; ?>
+                <?php echo $article->created; ?>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -608,15 +567,15 @@ links that allow users to delete posts, however:
     </table>
 
 Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
-that uses JavaScript to do a POST request deleting our post.  Allowing content
+that uses JavaScript to do a POST request deleting our article.  Allowing content
 to be deleted using GET requests is dangerous, as web crawlers could
 accidentally delete all your content.
 
 .. note::
 
     This view code also uses the FormHelper to prompt the user with a
-    JavaScript confirmation dialog before they attempt to delete a
-    post.
+    JavaScript confirmation dialog before they attempt to delete an
+    article.
 
 Routes
 ======
@@ -633,28 +592,28 @@ For more information on advanced routing techniques, see
 By default, CakePHP responds to a request for the root of your site
 (i.e. http://www.example.com) using its PagesController, rendering
 a view called "home". Instead, we'll replace this with our
-PostsController by creating a routing rule.
+ArticlesController by creating a routing rule.
 
 CakePHP's routing is found in ``/App/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+    Router::connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one::
 
-    Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
+    Router::connect('/', ['controller' => 'articles', 'action' => 'index']);
 
 This should connect users requesting '/' to the index() action of
-our PostsController.
+our ArticlesController.
 
 .. note::
 
     CakePHP also makes use of 'reverse routing' - if with the above
     route defined you pass
-    ``array('controller' => 'posts', 'action' => 'index')`` to a
+    ``['controller' => 'articles', 'action' => 'index']`` to a
     function expecting an array, the resultant URL used will be '/'.
     It's therefore a good idea to always use arrays for URLs as this
     means your routes define where a URL goes, and also ensures that
