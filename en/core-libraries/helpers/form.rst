@@ -178,12 +178,6 @@ There are a number of options for create():
 
     <form method="get" action="http://www.google.com/search">
 
-* ``$options['default']`` If 'default' has been set to boolean false, the form's
-  submit action is changed so that pressing the submit button does not submit
-  the form. If the form is meant to be submitted via AJAX, setting 'default' to
-  false suppresses the form's default behavior so you can grab the data and
-  submit it via AJAX instead.
-
 Creating context classes
 ------------------------
 

@@ -602,6 +602,8 @@ and reduce the problems people had in the past:
 - The various standalone input methods like ``text()``, ``select()`` and others
   no longer generate id attributes.
 - The ``inputDefaults`` option has been removed from ``create()``.
+- Options ``default`` and ``onsubmit`` of ``create()`` have been removed. Instead
+  one should use javascript event binding or set all required js code for ``onsubmit``.
 - ``end()`` can no longer make buttons. You should create buttons with
   ``button()`` or ``submit()``.
 - ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
