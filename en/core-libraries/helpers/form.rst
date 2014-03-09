@@ -200,50 +200,18 @@ Context factory functions are where you can add logic for checking the form
 options for the correct type of entity. If matching input data is found you can
 return an object. If there is no match return null.
 
-Closing the Form
-================
-
-.. php:method:: end($secureAttributes = [])
-
-The ``end()`` method closes and completes a form. Often, ``end()`` will only output
-a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
-hidden form elements that :php:class:`SecurityComponent` requires:
-
-.. code-block:: php
-
-    <?= $this->Form->create() ?>
-
-    <!-- Form elements go here -->
-
-    <?= $this->Form->end() ?>
-
-The ``$secureAttributes`` parameter allows you to pass additional HTML
-attributes to the hidden inputs that are generated when your application is
-using ``SecurityComponent``.
-
-.. note::
-
-    If you are using :php:class:`SecurityComponent` in your application you
-    should always end your forms with ``end()``.
-
 .. _automagic-form-elements:
 
-Creating Form Elements
-======================
-
-There are a few ways to create form inputs with the FormHelper. We'll start by
-looking at ``input()``. This method will automatically inspect the model
-meta-data supplied to ``create()``, and choose an appropriate input for that
-field. Internally ``input()`` delegates to other methods in FormHelper.
+Creating Form Inputs
+====================
 
 .. php:method:: input(string $fieldName, array $options = array())
 
-Creates the following elements given a particular field name:
-
-* Wrapping markup.
-* Label element
-* Input element(s)
-* Error element with message if applicable.
+The ``input()`` method lets you easily generate complete form inputs. These
+inputs will include a wrapping div, label, input widget, and validation error if
+necessary. By using the metadata in the form context, this method will choose an
+appropriate input type for each field. Internally ``input()`` uses the other
+methods of FormHelper.
 
 The type of input created depends on the column datatype:
 
@@ -1125,87 +1093,6 @@ way PHP handles data passed via file fields
     ``$this->Form->create()``
 
 
-Creating Buttons and Submit Elements
-====================================
-
-.. php:method:: submit(string $caption, array $options)
-
-    Creates a submit button with caption ``$caption``. If the supplied
-    ``$caption`` is a URL to an image (it contains a '.' character),
-    the submit button will be rendered as an image. The following::
-
-        echo $this->Form->submit();
-
-    Will output:
-
-    .. code-block:: html
-
-        <div class="submit"><input value="Submit" type="submit"></div>
-
-    You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text.::
-
-        echo $this->Form->submit('ok.png');
-
-    Will output:
-
-    .. code-block:: html
-
-        <div class="submit"><input type="image" src="/img/ok.png"></div>
-
-.. php:method:: button(string $title, array $options = array())
-
-Creates an HTML button with the specified title and a default type
-of "button". Setting ``$options['type']`` will output one of the
-three possible button types:
-
-#. submit: Same as the ``$this->Form->submit`` method - (the
-   default).
-#. reset: Creates a form reset button.
-#. button: Creates a standard push button.
-
-::
-
-    echo $this->Form->button('A Button');
-    echo $this->Form->button('Another Button', array('type' => 'button'));
-    echo $this->Form->button('Reset the Form', array('type' => 'reset'));
-    echo $this->Form->button('Submit Form', array('type' => 'submit'));
-
-Will output:
-
-.. code-block:: html
-
-    <button type="submit">A Button</button>
-    <button type="button">Another Button</button>
-    <button type="reset">Reset the Form</button>
-    <button type="submit">Submit Form</button>
-
-
-The ``button`` input type supports the ``escape`` option, which accepts a
-bool and determines whether to HTML entity encode the $title of the button.
-Defaults to false::
-
-    echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
-
-.. php:method:: postButton(string $title, mixed $url, array $options = array ())
-
-Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
-POST.
-
-This method creates a ``<form>`` element. So do not use this method in some
-opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
-:php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
-
-.. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
-
-Creates an HTML link, but accesses the URL using method POST. Requires
-JavaScript to be enabled in browser.
-
-This method creates a ``<form>`` element. So do not use this method inside
-an existing form. Instead you should add a submit button using
-:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
-
-
 Creating Date and Time Inputs
 =============================
 
@@ -1390,6 +1277,112 @@ error.::
 
     When using :php:meth:`~Cake\\View\\Helper\\FormHelper::input()`, errors are
     rendered by default.
+
+Creating Buttons and Submit Elements
+====================================
+
+.. php:method:: submit(string $caption, array $options)
+
+    Creates a submit button with caption ``$caption``. If the supplied
+    ``$caption`` is a URL to an image (it contains a '.' character),
+    the submit button will be rendered as an image. The following::
+
+        echo $this->Form->submit();
+
+    Will output:
+
+    .. code-block:: html
+
+        <div class="submit"><input value="Submit" type="submit"></div>
+
+    You can also pass a relative or absolute URL to an image for the
+    caption parameter instead of caption text.::
+
+        echo $this->Form->submit('ok.png');
+
+    Will output:
+
+    .. code-block:: html
+
+        <div class="submit"><input type="image" src="/img/ok.png"></div>
+
+.. php:method:: button(string $title, array $options = array())
+
+Creates an HTML button with the specified title and a default type
+of "button". Setting ``$options['type']`` will output one of the
+three possible button types:
+
+#. submit: Same as the ``$this->Form->submit`` method - (the
+   default).
+#. reset: Creates a form reset button.
+#. button: Creates a standard push button.
+
+::
+
+    echo $this->Form->button('A Button');
+    echo $this->Form->button('Another Button', array('type' => 'button'));
+    echo $this->Form->button('Reset the Form', array('type' => 'reset'));
+    echo $this->Form->button('Submit Form', array('type' => 'submit'));
+
+Will output:
+
+.. code-block:: html
+
+    <button type="submit">A Button</button>
+    <button type="button">Another Button</button>
+    <button type="reset">Reset the Form</button>
+    <button type="submit">Submit Form</button>
+
+
+The ``button`` input type supports the ``escape`` option, which accepts a
+bool and determines whether to HTML entity encode the $title of the button.
+Defaults to false::
+
+    echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
+
+.. php:method:: postButton(string $title, mixed $url, array $options = array ())
+
+Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
+POST.
+
+This method creates a ``<form>`` element. So do not use this method in some
+opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
+
+.. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
+
+Creates an HTML link, but accesses the URL using method POST. Requires
+JavaScript to be enabled in browser.
+
+This method creates a ``<form>`` element. So do not use this method inside
+an existing form. Instead you should add a submit button using
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+
+Closing the Form
+================
+
+.. php:method:: end($secureAttributes = [])
+
+The ``end()`` method closes and completes a form. Often, ``end()`` will only output
+a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
+hidden form elements that :php:class:`SecurityComponent` requires:
+
+.. code-block:: php
+
+    <?= $this->Form->create(); ?>
+
+    <!-- Form elements go here -->
+
+    <?= $this->Form->end(); ?>
+
+The ``$secureAttributes`` parameter allows you to pass additional HTML
+attributes to the hidden inputs that are generated when your application is
+using ``SecurityComponent``.
+
+.. note::
+
+    If you are using :php:class:`SecurityComponent` in your application you
+    should always end your forms with ``end()``.
 
 
 Generating Entire Forms
