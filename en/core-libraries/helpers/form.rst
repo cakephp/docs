@@ -571,13 +571,13 @@ common options shared by all input methods are as follows:
 
   Example usage::
 
-    echo $this->Form->input('ingredient', array('default' => 'Sugar'));
+    echo $this->Form->text('ingredient', array('default' => 'Sugar'));
 
   Example with select field (Size "Medium" will be selected as
   default)::
 
-    $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
-    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm'));
+    $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+    echo $this->Form->select('size', $sizes, ['default' => 'm']);
 
   .. note::
 
@@ -600,19 +600,18 @@ applied to the generated HTML input element.
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
-* ``$options['selected']`` Used in combination with a select-type input (i.e.
+* ``$options['value']`` Used in combination with a select-type input (i.e.
   For types select, date, time, datetime). Set 'selected' to the value of the
   item you wish to be selected by default when the input is rendered::
 
-    echo $this->Form->input('close_time', array(
-        'type' => 'time',
-        'selected' => '13:30:00'
-    ));
+    echo $this->Form->time('close_time', [
+        'value' => '13:30:00'
+    ]);
 
   .. note::
 
-    The selected key for date and datetime inputs may also be a UNIX
-    timestamp.
+    The value key for date and datetime inputs may also be a UNIX
+    timestamp, or a DateTime object.
 
 * ``$options['empty']`` If set to true, forces the input to remain empty.
 
@@ -621,18 +620,19 @@ Options for Select, Checkbox and Radio Inputs
   value with text displayed instead of just a blank option, pass in a
   string to empty::
 
-      echo $this->Form->input('field', array(
-          'options' => array(1, 2, 3, 4, 5),
-          'empty' => '(choose one)'
-      ));
+      echo $this->Form->select(
+          'field',
+          [1, 2, 3, 4, 5],
+          ['empty' => '(choose one)']
+      );
 
   Output:
 
   .. code-block:: html
 
-      <div class="input">
-          <label for="UserField">Field</label>
-          <select name="User[field]" id="UserField">
+      <div class="input select">
+          <label for="field">Field</label>
+          <select name="field" id="field">
               <option value="">(choose one)</option>
               <option value="0">1</option>
               <option value="1">2</option>
@@ -666,7 +666,7 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="checkbox" name="published" value="1">
 
   If you want to create multiple blocks of inputs on a form that are
   all grouped together, you should use this parameter on all inputs
@@ -679,22 +679,22 @@ Options for Select, Checkbox and Radio Inputs
   .. code-block:: html
 
     <h2>Primary Colors</h2>
-    <input type="hidden" name="Color[Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsRed" />
-    <label for="ColorsRed">Red</label>
-    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsBlue" />
-    <label for="ColorsBlue">Blue</label>
-    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsYellow" />
-    <label for="ColorsYellow">Yellow</label>
+    <input type="hidden" name="color" value="0" />
+    <input type="checkbox" name="color[]" value="5" id="color-red" />
+    <label for="color-red">Red</label>
+    <input type="checkbox" name="color[]" value="5" id="color-blue" />
+    <label for="color-blue">Blue</label>
+    <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+    <label for="color-yellow">Yellow</label>
 
     <h2>Tertiary Colors</h2>
-    <input type="hidden" name="Color[Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsGreen" />
+    <input type="hidden" name="color" value="0" />
+    <input type="checkbox" name="color[]" value="5" id="color-green" />
     <label for="ColorsGreen">Green</label>
-    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsPurple" />
-    <label for="ColorsPurple">Purple</label>
-    <input type="checkbox" name="Addon[Addon][]" value="5" id="ColorsOrange" />
-    <label for="ColorsOrange">Orange</label>
+    <input type="checkbox" name="color[]" value="5" id="color-purple" />
+    <label for="color-purple">Purple</label>
+    <input type="checkbox" name="color[]" value="5" id="color-orange" />
+    <label for="color-orange">Orange</label>
 
   Disabling the ``'hiddenField'`` on the second input group would
   prevent this behavior.
@@ -711,11 +711,6 @@ Datetime Options
 
 * ``$options['timeFormat']`` Used to specify the format of the select inputs for
   a time-related set of inputs. Valid values include ``12``, ``24``, and ``null``.
-
-* ``$options['dateFormat']`` Used to specify the format of the select inputs for
-  a date-related set of inputs. Valid values include any combination of 'D',
-  'M' and 'Y' or ``null``. The inputs will be put in the order defined by the
-  dateFormat option.
 
 * ``$options['minYear'], $options['maxYear']`` Used in combination with a
   date/datetime input. Defines the lower and/or upper end of values shown in the
@@ -739,6 +734,9 @@ Datetime Options
 * ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
   Defaults to null which rounds half up according to `interval`.
 
+* ``$options['monthNames']`` If false, 2 digit numbers will be used instead of text.
+  If a array, the given array will be used.
+
 Creating Labels
 ===============
 
@@ -755,8 +753,8 @@ Creating Labels
 
     .. code-block:: html
 
-        <label for="UserName">Name</label>
-        <label for="UserName">Your username</label>
+        <label for="user-name">Name</label>
+        <label for="user-name">Your username</label>
 
     ``$options`` can either be an array of HTML attributes, or a string that
     will be used as a class name::
@@ -768,8 +766,8 @@ Creating Labels
 
     .. code-block:: html
 
-        <label for="UserName" id="user-label">Name</label>
-        <label for="UserName" class="highlight">Your username</label>
+        <label for="user-name" id="user-label">Name</label>
+        <label for="user-name" class="highlight">Your username</label>
 
 Creating Input Elements
 =======================
@@ -788,7 +786,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input name="User[username]" type="text" class="users" id="UserUsername" />
+        <input name="username" type="text" class="users">
 
 .. php:method:: password(string $fieldName, array $options)
 
@@ -800,7 +798,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input name="User[password]" value="" id="UserPassword" type="password" />
+        <input name="password" value="" type="password">
 
 .. php:method:: hidden(string $fieldName, array $options)
 
@@ -812,7 +810,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input name="User[id]" value="10" id="UserId" type="hidden" />
+        <input name="id" value="10" type="hidden" />
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -824,7 +822,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <textarea name="User[notes]" id="UserNotes"></textarea>
+        <textarea name="notes"></textarea>
 
     .. note::
 
@@ -853,7 +851,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <textarea name="Form[textarea]" cols="5" rows="5" id="FormTextarea">
+        <textarea name="textarea" cols="5" rows="5">
         </textarea>
 
 .. php:method:: checkbox(string $fieldName, array $options)
@@ -868,8 +866,8 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input type="hidden" name="User[done]" value="0" id="UserDone_" />
-        <input type="checkbox" name="User[done]" value="1" id="UserDone" />
+        <input type="hidden" name="done" value="0">
+        <input type="checkbox" name="done" value="1">
 
     It is possible to specify the value of the checkbox by using the
     $options array::
@@ -880,8 +878,8 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input type="hidden" name="User[done]" value="0" id="UserDone_" />
-        <input type="checkbox" name="User[done]" value="555" id="UserDone" />
+        <input type="hidden" name="done" value="0">
+        <input type="checkbox" name="done" value="555">
 
     If you don't want the Form helper to create a hidden input::
 
@@ -891,7 +889,7 @@ Creating Input Elements
 
     .. code-block:: html
 
-        <input type="checkbox" name="User[done]" value="1" id="UserDone" />
+        <input type="checkbox" name="done" value="1">
 
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
@@ -902,12 +900,6 @@ Creating Input Elements
 
     * ``$attributes['value']`` to set which value should be selected default.
 
-    * ``$attributes['separator']`` to specify HTML in between radio
-      buttons (e.g. <br />).
-
-    * ``$attributes['between']`` specify some content to be inserted between the
-      legend and first element.
-
     * ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
       will disable all of the generated radio buttons.
 
@@ -915,24 +907,23 @@ Creating Input Elements
       fieldset by default. Set ``$attributes['legend']`` to false to remove
       them.::
 
-        $options = array('M' => 'Male', 'F' => 'Female');
-        $attributes = array('legend' => false);
+        $options = ['M' => 'Male', 'F' => 'Female'];
+        $attributes = ['legend' => false];
         echo $this->Form->radio('gender', $options, $attributes);
 
       Will output:
 
       .. code-block:: html
 
-        <input name="User[gender]" id="UserGender_" value="" type="hidden" />
-        <input name="User[gender]" id="UserGenderM" value="M" type="radio" />
-        <label for="UserGenderM">Male</label>
-        <input name="User[gender]" id="UserGenderF" value="F" type="radio" />
-        <label for="UserGenderF">Female</label>
+        <input name="gender" value="" type="hidden">
+        <input name="gender" id="gender-M" value="M" type="radio">
+        <label for="gender-m">Male</label>
+        <input name="gender" id="gender-F" value="F" type="radio">
+        <label for="gender-F">Female</label>
 
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
-
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
@@ -941,14 +932,14 @@ Creating Input Elements
     default. Set the 'empty' key in the ``$attributes`` variable to false to
     turn off the default empty option::
 
-        $options = array('M' => 'Male', 'F' => 'Female');
+        $options = ['M' => 'Male', 'F' => 'Female'];
         echo $this->Form->select('gender', $options);
 
     Will output:
 
     .. code-block:: html
 
-        <select name="User[gender]" id="UserGender">
+        <select name="gender">
         <option value=""></option>
         <option value="M">Male</option>
         <option value="F">Female</option>
@@ -959,20 +950,20 @@ Creating Input Elements
     whether to HTML entity encode the contents of the select options.
     Defaults to true::
 
-        $options = array('M' => 'Male', 'F' => 'Female');
-        echo $this->Form->select('gender', $options, array('escape' => false));
+        $options = ['M' => 'Male', 'F' => 'Female'];
+        echo $this->Form->select('gender', $options, ['escape' => false]);
 
     * ``$attributes['options']`` This key allows you to manually specify options for a
       select input, or for a radio group. Unless the 'type' is specified as 'radio',
       the FormHelper will assume that the target output is a select input::
 
-        echo $this->Form->select('field', array(1,2,3,4,5));
+        echo $this->Form->select('field', [1,2,3,4,5]);
 
       Output:
 
       .. code-block:: html
 
-        <select name="User[field]" id="UserField">
+        <select name="field">
             <option value="0">1</option>
             <option value="1">2</option>
             <option value="2">3</option>
@@ -982,17 +973,17 @@ Creating Input Elements
 
       Options can also be supplied as key-value pairs::
 
-        echo $this->Form->select('field', array(
+        echo $this->Form->select('field', [
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2',
             'Value 3' => 'Label 3'
-        ));
+        ]);
 
       Output:
 
       .. code-block:: html
 
-        <select name="User[field]" id="UserField">
+        <select name="field">
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>
@@ -1002,22 +993,22 @@ Creating Input Elements
       data in hierarchical format. This works on multiple checkboxes and radio
       buttons too, but instead of optgroups wraps elements in fieldsets::
 
-        $options = array(
-           'Group 1' => array(
+        $options = [
+           'Group 1' => [
               'Value 1' => 'Label 1',
               'Value 2' => 'Label 2'
-           ),
-           'Group 2' => array(
+           ],
+           'Group 2' => [
               'Value 3' => 'Label 3'
-           )
-        );
+           ]
+        ];
         echo $this->Form->select('field', $options);
 
       Output:
 
       .. code-block:: html
 
-        <select name="User[field]" id="UserField">
+        <select name="field">
             <optgroup label="Group 1">
                 <option value="Value 1">Label 1</option>
                 <option value="Value 2">Label 2</option>
@@ -1030,7 +1021,7 @@ Creating Input Elements
     * ``$attributes['multiple']`` If 'multiple' has been set to true for an input that
       outputs a select, the select will allow multiple selections::
 
-        echo $this->Form->select('Model.field', $options, array('multiple' => true));
+        echo $this->Form->select('Model.field', $options, ['multiple' => true]);
 
       Alternatively set 'multiple' to 'checkbox' to output a list of
       related check boxes::
@@ -1039,56 +1030,50 @@ Creating Input Elements
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2'
         );
-        echo $this->Form->select('Model.field', $options, array(
+        echo $this->Form->select('Model.field', $options, [
             'multiple' => 'checkbox'
-        ));
+        ]);
 
       Output:
 
       .. code-block:: html
 
-        <div class="input select">
-           <label for="ModelField">Field</label>
-           <input name="Model[field]" value="" id="ModelField" type="hidden">
-           <div class="checkbox">
-              <input name="Model[field][]" value="Value 1" id="ModelField1" type="checkbox">
-              <label for="ModelField1">Label 1</label>
-           </div>
-           <div class="checkbox">
-              <input name="Model[field][]" value="Value 2" id="ModelField2" type="checkbox">
-              <label for="ModelField2">Label 2</label>
-           </div>
-        </div>
+          <input name="field" value="" type="hidden">
+          <div class="checkbox">
+             <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+             <label for="field-1">Label 1</label>
+          </div>
+          <div class="checkbox">
+             <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+             <label for="field-2">Label 2</label>
+          </div>
 
     * ``$attributes['disabled']`` When creating checkboxes, this option can be set
       to disable all or some checkboxes. To disable all checkboxes set disabled
       to ``true``::
 
-        $options = array(
+        $options = [
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2'
-        );
-        echo $this->Form->select('Model.field', $options, array(
+        ];
+        echo $this->Form->select('Model.field', $options, [
             'multiple' => 'checkbox',
-            'disabled' => array('Value 1')
-        ));
+            'disabled' => ['Value 1']
+        ]);
 
       Output:
 
       .. code-block:: html
 
-        <div class="input select">
-           <label for="ModelField">Field</label>
-           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <input name="data[Model][field]" value="" type="hidden">
            <div class="checkbox">
-              <input name="data[Model][field][]" disabled="disabled" value="Value 1" id="ModelField1" type="checkbox">
-              <label for="ModelField1">Label 1</label>
+              <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+              <label for="field-1">Label 1</label>
            </div>
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
-              <label for="ModelField2">Label 2</label>
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              <label for="field-2">Label 2</label>
            </div>
-        </div>
 
 .. php:method:: file(string $fieldName, array $options)
 
@@ -1121,13 +1106,13 @@ be organized as follows, if the CakePHP was installed on a Windows
 server. 'tmp\_name' will have a different path in a Unix
 environment::
 
-    $this->request->data['submittedfile'] = array(
+    $this->request->data['submittedfile'] = [
         'name' => 'conference_schedule.pdf',
         'type' => 'application/pdf',
         'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
         'error' => 0, // On windows this can be a string.
         'size' => 41737,
-    );
+    ];
 
 This array is generated by PHP itself, so for more detail on the
 way PHP handles data passed via file fields
@@ -1453,9 +1438,10 @@ If you disable the fieldset, the legend will not print.
 Working with SecurityComponent
 ==============================
 
-:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several features that make your forms safer
-and more secure. By simply including the ``SecurityComponent`` in your
-controller, you'll automatically benefit from CSRF and form tampering features.
+:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several
+features that make your forms safer and more secure. By simply including the
+``SecurityComponent`` in your controller, you'll automatically benefit from CSRF
+and form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
 your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will
