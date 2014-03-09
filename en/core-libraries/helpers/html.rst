@@ -1,7 +1,9 @@
 HtmlHelper
 ##########
 
-.. php:class:: HtmlHelper(View $view, array $settings = array())
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: HtmlHelper(View $view, array $settings = [])
 
 The role of the HtmlHelper in CakePHP is to make HTML-related
 options easier, faster, and more resilient to change. Using this
@@ -68,8 +70,6 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: css(mixed $path, array $options = array())
 
-    .. versionchanged:: 2.4
-
     :param mixed $path: Either a string of the CSS file to link, or an array with multiple files
     :param array $options: An array of options or :term:`html attributes`.
 
@@ -117,10 +117,6 @@ methods of the HtmlHelper and how to use them.
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
-
-    .. versionchanged:: 2.1
-        The ``block`` option was added.
-        Support for :term:`plugin syntax` was added.
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
@@ -177,9 +173,7 @@ methods of the HtmlHelper and how to use them.
         />
 
     This method can also be used to add the meta keywords and
-    descriptions. Example:
-
-    .. code-block:: php
+    descriptions. Example::
 
         <?php
         echo $this->Html->meta(
@@ -205,10 +199,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));
 
-    .. versionchanged:: 2.1
-        The ``block`` option was added.
-
-.. php:method:: docType(string $type = 'xhtml-strict')
+.. php:method:: docType(string $type = 'html5')
 
     :param string $type: The type of doctype being made.
 
@@ -238,16 +229,10 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->docType();
-        // Outputs: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-        echo $this->Html->docType('html5');
         // Outputs: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
         // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-    .. versionchanged:: 2.1
-        The default doctype is html5 in 2.1.
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
@@ -322,10 +307,6 @@ methods of the HtmlHelper and how to use them.
     and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
-
-    .. versionchanged:: 2.1
-        The ``fullBase`` option was added.
-        Support for :term:`plugin syntax` was added.
 
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
@@ -448,9 +429,6 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-   .. versionchanged:: 2.4
-        The ``escapeTitle`` option was added.
-
     Also check :php:meth:`HtmlHelper::url` method
     for more examples of different types of URLs.
 
@@ -462,18 +440,16 @@ methods of the HtmlHelper and how to use them.
         `src` and `type`.
     :param array $options: Array of HTML attributes, and special options.
 
-        Options:
+    Options:
 
-        - `type` Type of media element to generate, valid values are "audio"
-          or "video". If type is not provided media type is guessed based on
-          file's mime type.
-        - `text` Text to include inside the video tag
-        - `pathPrefix` Path prefix to use for relative URLs, defaults to
-          'files/'
-        - `fullBase` If provided the src attribute will get a full address
-          including domain name
-
-    .. versionadded:: 2.1
+    - `type` Type of media element to generate, valid values are "audio"
+      or "video". If type is not provided media type is guessed based on
+      file's mime type.
+    - `text` Text to include inside the video tag
+    - `pathPrefix` Path prefix to use for relative URLs, defaults to
+      'files/'
+    - `fullBase` If provided the src attribute will get a full address
+      including domain name
 
     Returns a formatted audio/video tag:
 
@@ -608,7 +584,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script type="text/javascript" href="/js/scripts.js"></script>
+        <script href="/js/scripts.js"></script>
 
     You can link to files with absolute paths as well to link files
     that are not in ``app/webroot/js``::
@@ -623,7 +599,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
+        <script href="http://code.jquery.com/jquery.min.js"></script>
 
     The first parameter can be an array to include multiple files.::
 
@@ -633,9 +609,9 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script type="text/javascript" href="/js/jquery.js"></script>
-        <script type="text/javascript" href="/js/wysiwyg.js"></script>
-        <script type="text/javascript" href="/js/scripts.js"></script>
+        <script href="/js/jquery.js"></script>
+        <script href="/js/wysiwyg.js"></script>
+        <script href="/js/scripts.js"></script>
 
     You can append the script tag to a specific block using the ``block``
     option::
@@ -657,10 +633,6 @@ methods of the HtmlHelper and how to use them.
     and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
 
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
-
-    .. versionchanged:: 2.1
-        The ``block`` option was added.
-        Support for :term:`plugin syntax` was added.
 
 .. php:method::  scriptBlock($code, $options = array())
 
@@ -781,10 +753,7 @@ methods of the HtmlHelper and how to use them.
              <th class="product_table">Active</th>
         </tr>
 
-    .. versionchanged:: 2.2
-        ``tableHeaders()`` now accepts attributes per cell, see below.
-
-    As of 2.2 you can set attributes per column, these are used instead of the
+    You can set attributes per column, these are used instead of the
     defaults provided in the ``$thOptions``::
 
         echo $this->Html->tableHeaders(array(
@@ -951,26 +920,26 @@ methods of the HtmlHelper and how to use them.
 Changing the Tags Output by HtmlHelper
 ======================================
 
-.. php:method:: loadConfig(mixed $configFile, string $path = null)
+.. php:method:: templates($templates)
 
-    The built-in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
-    however if you need to generate HTML for HTML5 you will need to
-    create and load a new tags config file containing the tags you'd
-    like to use. To change the tags used create ``app/Config/html5_tags.php``
-    containing::
+    The ``$templates`` parameter can be either a string file path to the PHP
+    file containing the tags you want to load, or an array of templates to
+    add/replace::
 
-        $config = array('tags' => array(
-            'css' => '<link rel="%s" href="%s" %s>',
-            'style' => '<style%s>%s</style>',
-            'charset' => '<meta charset="%s">',
-            'javascriptblock' => '<script%s>%s</script>',
-            'javascriptstart' => '<script>',
-            'javascriptlink' => '<script src="%s"%s></script>',
-            // ...
-        ));
+        // Load templates from App/Config/my_html.php
+        $this->Html->templates('my_html.php');
 
-    You can then load this tag set by calling
-    ``$this->Html->loadConfig('html5_tags');``
+        // Load specific templates.
+        $this->Html->templates([
+            'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
+        ]);
+
+    When loading files of templates, your file should look like::
+
+        <?php
+        $config = [
+            'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
+        ];
 
 Creating Breadcrumb Trails with HtmlHelper
 ==========================================
@@ -994,9 +963,6 @@ Creating Breadcrumb Trails with HtmlHelper
 
     Any keys that are not ``text`` or ``url`` will be passed to
     :php:meth:`~HtmlHelper::link()` as the ``$options`` parameter.
-
-    .. versionchanged:: 2.1
-        The ``$startText`` parameter now accepts an array.
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
@@ -1024,12 +990,6 @@ Creating Breadcrumb Trails with HtmlHelper
     parameter to provide the first breadcrumb link/text. This is useful when
     you always want to include a root link. This option works the same as the
     ``$startText`` option for :php:meth:`~HtmlHelper::getCrumbs()`.
-
-    .. versionchanged:: 2.1
-        The ``$startText`` parameter was added.
-
-    .. versionchanged:: 2.3
-        The 'separator', 'firstClass' and 'lastClass' options were added.
 
 
 .. meta::
