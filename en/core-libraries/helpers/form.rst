@@ -1034,7 +1034,7 @@ Creating Input Elements
 
       .. code-block:: html
 
-           <input name="data[Model][field]" value="" type="hidden">
+           <input name="field" value="" type="hidden">
            <div class="checkbox">
               <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
               <label for="field-1">Label 1</label>
