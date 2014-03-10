@@ -1378,7 +1378,21 @@ hidden form elements that :php:class:`SecurityComponent` requires:
 
 The ``$secureAttributes`` parameter allows you to pass additional HTML
 attributes to the hidden inputs that are generated when your application is
-using ``SecurityComponent``.
+using ``SecurityComponent``. If you need to add additional attributes to the
+generated hidden inputs you can use the ``$secureAttributes`` argument::
+
+    echo $this->Form->end(['data-type' => 'hidden']);
+
+Will output::
+
+.. code-block:: html
+
+    <div style="display:none;">
+        <input type="hidden" name="_Token[fields]" data-type="hidden"
+            value="2981c38990f3f6ba935e6561dc77277966fabd6d%3AAddresses.id">
+        <input type="hidden" name="_Token[unlocked]" data-type="hidden"
+            value="address%7Cfirst_name">
+    </div>
 
 .. note::
 
