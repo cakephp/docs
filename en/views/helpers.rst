@@ -220,7 +220,7 @@ use it in your views by accessing an object named after the
 helper::
 
     <!-- make a link using the new helper -->
-    <?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>
+    <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 
 
 Creating Functionality for All Helpers

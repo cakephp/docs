@@ -132,12 +132,12 @@ nice table, our view code might look something like this:
 
         <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $article->id; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($article->title,
+                <?= $this->Html->link($article->title,
                 [controller' => 'articles', 'action' => 'view', $article->id]); ?>
             </td>
-            <td><?php echo $article->created->format(DATE_RFC850); ?></td>
+            <td><?= $article->created->format(DATE_RFC850) ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -212,12 +212,10 @@ Now let's create the view for our new 'view' action and place it in
 .. code-block:: php
 
     <!-- File: /App/Template/Articles/view.ctp -->
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-    <h1><?php echo h($article->title); ?></h1>
-
-    <p><small>Created: <?php echo $article->created->format(DATE_RFC850); ?></small></p>
-
-    <p><?php echo h($article->body); ?></p>
 
 Verify that this is working by trying the links at ``/articles/index`` or
 manually requesting an article by accessing ``/articles/view/1``.
@@ -358,10 +356,10 @@ Now let's go back and update our ``/App/Template/Articles/index.ctp``
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
-    <?php echo $this->Html->link(
+    <?= $this->Html->link(
         'Add Article',
         ['controller' => 'articles', 'action' => 'add']
-    ); ?>
+    ) ?>
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
@@ -470,7 +468,7 @@ articles:
     <!-- File: /App/Template/Articles/index.ctp  (edit links added) -->
 
     <h1>Blog articles</h1>
-    <p><?php echo $this->Html->link("Add Article", ['action' => 'add']); ?></p>
+    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -483,15 +481,15 @@ articles:
 
     <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $article->id; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($article->title, ['action' => 'view', $article->id']); ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id']) ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', ['action' => 'edit', $article->id]); ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
             <td>
-                <?php echo $article->created; ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -533,7 +531,7 @@ links that allow users to delete articles, however:
     <!-- File: /App/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
-    <p><?php echo $this->Html->link('Add Article', ['action' => 'add']); ?></p>
+    <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -546,20 +544,20 @@ links that allow users to delete articles, however:
 
         <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $article->id; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($article->title, ['action' => 'view', $article->id]); ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
-                <?php echo $this->Form->postLink(
+                <?= $this->Form->postLink(
                     'Delete',
                     ['action' => 'delete', $article->id],
-                    ['confirm' => 'Are you sure?']);
+                    ['confirm' => 'Are you sure?'])
                 ?>
-                <?php echo $this->Html->link('Edit', ['action' => 'edit', $article->id]); ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
             <td>
-                <?php echo $article->created; ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
         </tr>
         <?php endforeach; ?>

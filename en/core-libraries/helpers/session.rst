@@ -94,7 +94,7 @@ Displaying Notifications or Flash Messages
     .. code-block:: php
 
         <div class="flash flash-failure">
-            <?php echo h($message); ?>
+            <?= h($message) ?>
         </div>
 
     You can also pass additional parameters into the ``flash()`` method, which
@@ -104,10 +104,10 @@ Displaying Notifications or Flash Messages
         $this->Session->setFlash('Thanks for your payment.');
 
         // In the layout.
-        echo $this->Session->flash('flash', array(
+        <?= $this->Session->flash('flash', array(
             'params' => array('name' => $user['User']['name'])
             'element' => 'payment'
-        ));
+        )) ?>
 
         // View/Element/payment.ctp
         <div class="flash payment">

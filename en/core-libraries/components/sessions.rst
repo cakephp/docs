@@ -134,7 +134,7 @@ Creating Notification Messages
     Then we create the file ``app/View/Element/flash_custom.ctp`` and build our
     custom flash element::
 
-        <div id="myCustomFlash"><?php echo h($message); ?></div>
+        <div id="myCustomFlash"><?= h($message) ?></div>
 
     ``$params`` allows you to pass additional view variables to the
     rendered layout. Parameters can be passed affecting the rendered div, for

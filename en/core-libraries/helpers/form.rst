@@ -80,7 +80,7 @@ http://example.org/articles/edit/5, we could do the following::
 
     // View/Articles/edit.ctp:
     // Since $article->isNew() is false, we will get an edit form
-    <?php echo $this->Form->create($article); ?>
+    <?= $this->Form->create($article) ?>
 
 Output:
 
@@ -217,11 +217,11 @@ hidden form elements that :php:class:`SecurityComponent` requires:
 
 .. code-block:: php
 
-    <?php echo $this->Form->create(); ?>
+    <?= $this->Form->create() ?>
 
     <!-- Form elements go here -->
 
-    <?php echo $this->Form->end(); ?>
+    <?= $this->Form->end() ?>
 
 The ``$secureAttributes`` parameter allows you to pass additional HTML
 attributes to the hidden inputs that are generated when your application is

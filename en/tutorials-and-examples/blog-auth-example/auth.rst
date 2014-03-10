@@ -131,17 +131,17 @@ will show just the add.ctp:
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
-    <?php echo $this->Form->create('User'); ?>
+    <?= $this->Form->create('User') ?>
         <fieldset>
-            <legend><?php echo __('Add User'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('role', array(
+            <legend><?= __('Add User') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
+            <?= $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'author' => 'Author')
-            ));
+            )) ?>
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?= $this->Form->end(__('Submit')) ?>
     </div>
 
 Authentication (login and logout)
@@ -232,15 +232,15 @@ the login function, here it is:
 .. code-block:: php
 
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User'); ?>
+    <?= $this->Session->flash('auth') ?>
+    <?= $this->Form->create('User') ?>
         <fieldset>
-            <legend><?php echo __('Please enter your username and password'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
+            <legend><?= __('Please enter your username and password') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Login')); ?>
+    <?= $this->Form->end(__('Login')) ?>
     </div>
 
 You can now register a new user by accessing the ``/users/add`` URL and log-in with the

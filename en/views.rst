@@ -71,13 +71,13 @@ that change:
 .. code-block:: php
 
     // app/Template/Common/view.ctp
-    <h1><?php echo $this->fetch('title'); ?></h1>
-    <?php echo $this->fetch('content'); ?>
+    <h1><?= $this->fetch('title') ?></h1>
+    <?= $this->fetch('content') ?>
 
     <div class="actions">
         <h3>Related actions</h3>
         <ul>
-        <?php echo $this->fetch('sidebar'); ?>
+        <?= $this->fetch('sidebar') ?>
         </ul>
     </div>
 
@@ -108,7 +108,7 @@ un-captured content from the extending view. Assuming our view file has a
 
     // The remaining content will be available as the 'content' block
     // in the parent view.
-    <?php echo h($post['Post']['body']);
+    <?= h($post['Post']['body']) ?>
 
 The post view above shows how you can extend a view, and populate a set of
 blocks. Any content not already in a defined block will be captured and put
@@ -219,7 +219,7 @@ Displaying Blocks
 You can display blocks using the ``fetch()`` method. ``fetch()`` will safely
 output a block, returning '' if a block does not exist::
 
-    echo $this->fetch('sidebar');
+    <?= $this->fetch('sidebar') ?>
 
 You can also use fetch to conditionally show content that should surround a
 block should it exist. This is helpful in layouts, or extended views where you
@@ -231,7 +231,7 @@ want to conditionally show headings or other markup:
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
-        <?php echo $this->fetch('menu'); ?>
+        <?= $this->fetch('menu') ?>
     </div>
     <?php endif; ?>
 
@@ -243,7 +243,7 @@ states. You can provide a default value using the 2nd argument:
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
-        <?php echo $this->fetch('cart', 'Your cart is empty'); ?>
+        <?= $this->fetch('cart', 'Your cart is empty') ?>
     </div>
 
 .. versionchanged:: 2.3
@@ -272,9 +272,9 @@ when used with the ``inline = false`` option:
     <!DOCTYPE html>
     <html lang="en">
         <head>
-        <title><?php echo $this->fetch('title'); ?></title>
-        <?php echo $this->fetch('script'); ?>
-        <?php echo $this->fetch('css'); ?>
+        <title><?= $this->fetch('title') ?></title>
+        <?= $this->fetch('script') ?>
+        <?= $this->fetch('css') ?>
         </head>
         // rest of the layout follows
 
@@ -285,7 +285,7 @@ and CSS go to::
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
 
     // in your layout
-    echo $this->fetch('scriptBottom');
+    <?= $this->fetch('scriptBottom') ?>
 
 .. _view-layouts:
 
@@ -312,7 +312,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?php echo $title_for_layout?></title>
+   <title><?= $title_for_layout ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -330,7 +330,7 @@ might look like:
    </div>
 
    <!-- Here's where I want my views to be displayed -->
-   <?php echo $this->fetch('content'); ?>
+   <?= $this->fetch('content') ?>
 
    <!-- Add a footer to each displayed page -->
    <div id="footer">...</div>
@@ -530,7 +530,7 @@ like the following:
     <?php foreach ($posts as $post): ?>
     <ol>
     <?php foreach ($posts as $post): ?>
-          <li><?php echo $post['Post']['title']; ?></li>
+          <li><?= $post['Post']['title'] ?></li>
     <?php endforeach; ?>
     </ol>
 

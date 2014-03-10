@@ -246,7 +246,7 @@ You can set view variables with ``Email::viewVars()``::
 
 In your email templates you can use these with::
 
-    <p>Here is your value: <b><?php echo $value; ?></b></p>
+    <p>Here is your value: <b><?= $value ?></b></p>
 
 You can use helpers in emails as well, much like you can in normal view files.
 By default only the :php:class:`HtmlHelper` is loaded. You can load additional
