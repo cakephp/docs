@@ -205,7 +205,7 @@ return an object. If there is no match return null.
 Creating Form Inputs
 ====================
 
-.. php:method:: input(string $fieldName, array $options = array())
+.. php:method:: input(string $fieldName, array $options = [])
 
 The ``input()`` method lets you easily generate complete form inputs. These
 inputs will include a wrapping div, label, input widget, and validation error if
@@ -280,11 +280,11 @@ create appropriate inputs for all of these form fields::
 
 A more extensive example showing some options for a date field::
 
-    echo $this->Form->input('birth_dt', array(
+    echo $this->Form->input('birth_dt', [
         'label' => 'Date of birth',
         'minYear' => date('Y') - 70,
         'maxYear' => date('Y') - 18,
-    ));
+    ]);
 
 Besides the specific options for ``input()`` found below, you can specify
 any option for the input type & any HTML attribute (for instance ``onfocus``).
@@ -529,9 +529,10 @@ common options shared by all input methods are as follows:
 
 * ``$options['class']`` You can set the class name for an input::
 
-    echo $this->Form->input('title', array('class' => 'custom-class'));
+    echo $this->Form->input('title', ['class' => 'custom-class']);
 
 * ``$options['id']`` Set this key to force the value of the DOM id for the input.
+  This will override the idPrefix that may be set.
 
 * ``$options['default']`` Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
@@ -539,7 +540,7 @@ common options shared by all input methods are as follows:
 
   Example usage::
 
-    echo $this->Form->text('ingredient', array('default' => 'Sugar'));
+    echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
   Example with select field (Size "Medium" will be selected as
   default)::
@@ -628,7 +629,7 @@ Options for Select, Checkbox and Radio Inputs
 
   This can be disabled by setting the ``$options['hiddenField'] = false``::
 
-    echo $this->Form->checkbox('published', array('hiddenField' => false));
+    echo $this->Form->checkbox('published', ['hiddenField' => false]);
 
   Which outputs:
 
@@ -669,10 +670,10 @@ Options for Select, Checkbox and Radio Inputs
 
   You can set a different hidden field value other than 0 such as 'N'::
 
-      echo $this->Form->checkbox('published', array(
+      echo $this->Form->checkbox('published', ]
           'value' => 'Y',
           'hiddenField' => 'N',
-      ));
+      ]);
 
 Datetime Options
 ----------------
@@ -691,10 +692,10 @@ Datetime Options
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    echo $this->Form->input('Model.time', array(
+    echo $this->Form->input('Model.time', [
         'type' => 'time',
         'interval' => 15
-    ));
+    ]);
 
   Would create 4 options in the minute select. One for each 15
   minutes.
@@ -703,7 +704,7 @@ Datetime Options
   Defaults to null which rounds half up according to `interval`.
 
 * ``$options['monthNames']`` If false, 2 digit numbers will be used instead of text.
-  If a array, the given array will be used.
+  If an array, the given array will be used.
 
 Creating Labels
 ===============
@@ -727,7 +728,7 @@ Creating Labels
     ``$options`` can either be an array of HTML attributes, or a string that
     will be used as a class name::
 
-        echo $this->Form->label('User.name', null, array('id' => 'user-label'));
+        echo $this->Form->label('User.name', null, ['id' => 'user-label']);
         echo $this->Form->label('User.name', 'Your username', 'highlight');
 
     Output:
@@ -748,7 +749,7 @@ Creating Input Elements
     $options is used primarily to specify HTML tag attributes (such as
     the value or DOM id of an element in the form)::
 
-        echo $this->Form->text('username', array('class' => 'users'));
+        echo $this->Form->text('username', ['class' => 'users']);
 
     Will output:
 
@@ -800,9 +801,9 @@ Creating Input Elements
 
     ::
 
-        echo $this->Form->textarea('notes', array('escape' => false);
+        echo $this->Form->textarea('notes', ['escape' => false]);
         // OR....
-        echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
+        echo $this->Form->input('notes', ['type' => 'textarea', 'escape' => false]);
 
 
     **Options**
@@ -813,7 +814,7 @@ Creating Input Elements
     * ``$options['rows'], $options['cols']`` These two keys specify the number of
       rows and columns::
 
-        echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
+        echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
 
       Output:
 
@@ -840,7 +841,7 @@ Creating Input Elements
     It is possible to specify the value of the checkbox by using the
     $options array::
 
-        echo $this->Form->checkbox('done', array('value' => 555));
+        echo $this->Form->checkbox('done', ['value' => 555]);
 
     Will output:
 
@@ -851,7 +852,7 @@ Creating Input Elements
 
     If you don't want the Form helper to create a hidden input::
 
-        echo $this->Form->checkbox('done', array('hiddenField' => false));
+        echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
     Will output:
 
@@ -1306,7 +1307,7 @@ Creating Buttons and Submit Elements
 
         <div class="submit"><input type="image" src="/img/ok.png"></div>
 
-.. php:method:: button(string $title, array $options = array())
+.. php:method:: button(string $title, array $options = [])
 
 Creates an HTML button with the specified title and a default type
 of "button". Setting ``$options['type']`` will output one of the
@@ -1320,9 +1321,9 @@ three possible button types:
 ::
 
     echo $this->Form->button('A Button');
-    echo $this->Form->button('Another Button', array('type' => 'button'));
-    echo $this->Form->button('Reset the Form', array('type' => 'reset'));
-    echo $this->Form->button('Submit Form', array('type' => 'submit'));
+    echo $this->Form->button('Another Button', ['type' => 'button']);
+    echo $this->Form->button('Reset the Form', ['type' => 'reset']);
+    echo $this->Form->button('Submit Form', ['type' => 'submit']);
 
 Will output:
 
@@ -1338,9 +1339,9 @@ The ``button`` input type supports the ``escape`` option, which accepts a
 bool and determines whether to HTML entity encode the $title of the button.
 Defaults to false::
 
-    echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
+    echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
 
-.. php:method:: postButton(string $title, mixed $url, array $options = array ())
+.. php:method:: postButton(string $title, mixed $url, array $options = [])
 
 Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
 POST.
@@ -1399,9 +1400,9 @@ can provide custom legend element content::
 You can configure the generated inputs by defining additional options in the
 ``$fields`` parameter::
 
-    echo $this->Form->inputs(array(
-        'name' => array('label' => 'custom label')
-    ));
+    echo $this->Form->inputs([
+        'name' => ['label' => 'custom label']
+    ]);
 
 To exclude specific fields from the generated inputs, use the ``$blacklist``
 parameter::
@@ -1448,10 +1449,10 @@ ensure that the special ``_Token`` inputs are generated.
 
         $this->Form->unlockField('User.id');
 
-.. php:method:: secure(array $fields = array())
+.. php:method:: secure(array $fields = [])
 
     Generates a hidden field with a security hash based on the fields used
-    in the form.
+    in the form. 
 
 
 .. meta::
