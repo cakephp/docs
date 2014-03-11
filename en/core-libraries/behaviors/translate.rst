@@ -17,7 +17,7 @@ Table object you want to make translatable::
     class Articles extends Table {
     
         public function initialize(array $config) {
-            $this->addBehavior('Translate');
+            $this->addBehavior('Translate', ['fields' => ['title']]);
         }
     }
 
@@ -88,3 +88,68 @@ running the following SQL script in your database
         INDEX I18N_FIELD(model, foreign_key, field)
     );
 
+
+Attaching the Translate Behavior to your Tables
+===============================================
+
+Attaching the bahavior can be done in the ``initialize`` method in your Table
+class::
+
+    class Articles extends Table {
+    
+        public function initialize(array $config) {
+            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
+        }
+    }
+
+The first thing to note is that you are required to pass the ``fields`` key in
+the configuration array. This list of fields is needed to tell the behavior what
+columns will be able to store translations.
+
+Using a Separate Translations Table
+-----------------------------------
+
+If you wish to use a table other than ``i18n`` for translating a particular
+repository, you can specify it in the behavior's configuration. This is common to
+do when you have multiple tables to translate and you want a cleaner separation
+of the data that is stored for each different table::
+
+
+    class Articles extends Table {
+    
+        public function initialize(array $config) {
+            $this->addBehavior('Translate', [
+                'fields' => ['title', 'body'],
+                translationTable' => 'articles_i18n'
+            ]);
+        }
+    }
+
+You need to make sure that any custom table you use has the columns ``field``,
+``foreign_key``, ``locale`` and ``model``.
+
+
+Reading translated content
+==========================
+
+...
+
+Retrieve all translations for an entity
+---------------------------------------
+
+...
+
+Limiting the translations to be retrieved
+-----------------------------------------
+
+...
+
+Saving in another language
+==========================
+
+...
+
+Saving Multiple Translations
+============================
+
+...
