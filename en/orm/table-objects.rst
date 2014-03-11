@@ -1205,6 +1205,20 @@ Saving Entities
 
 .. php:method:: save(Entity $entity, array $options = [])
 
+When saving request data to your database you need to first hydrate a new entity
+using ``newEntity()`` for passing into ``save()``. For example::
+  
+  // In a controller
+  $articles = TableRegistry::get('Articles');
+  $article = $articles->newEntity($this->request->data);
+  if ($articles->save($article)) {
+      // ...
+  }
+
+The ORM uses the ``isNew()`` method on an entity to determine whether or not an
+insert or update should be performed. If the ``isNew()`` method returns ``null``
+and the entity has a primary key value, an 'exists' query will be issued.
+
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
 
@@ -1223,10 +1237,6 @@ changed. The above ``save()`` call would generate SQL like::
 If you had a new entity, the following SQL would be generated::
 
     INSERT INTO articles (title) VALUES ('My new title');
-
-The ORM uses the ``isNew()`` method on an entity to determine whether or not an
-insert or update should be performed. If the ``isNew()`` method returns ``null``
-and the entity has a primary key value, an 'exists' query will be issued.
 
 When an entity is saved a few things happen:
 
