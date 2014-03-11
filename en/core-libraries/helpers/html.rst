@@ -92,19 +92,19 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <link rel="stylesheet" type="text/css" href="/css/forms.css" />
+        <link rel="stylesheet" href="/css/forms.css" />
 
     The first parameter can be an array to include multiple files.::
 
-        echo $this->Html->css(array('forms', 'tables', 'menu'));
+        echo $this->Html->css(['forms', 'tables', 'menu']);
 
     Will output:
 
     .. code-block:: html
 
-        <link rel="stylesheet" type="text/css" href="/css/forms.css" />
-        <link rel="stylesheet" type="text/css" href="/css/tables.css" />
-        <link rel="stylesheet" type="text/css" href="/css/menu.css" />
+        <link rel="stylesheet" href="/css/forms.css" />
+        <link rel="stylesheet" href="/css/tables.css" />
+        <link rel="stylesheet" href="/css/menu.css" />
 
     You can include CSS files from any loaded plugin using
     :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
@@ -116,7 +116,7 @@ methods of the HtmlHelper and how to use them.
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
-        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
+        echo $this->Html->css('Blog.common.css', null, ['plugin' => false]);
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
@@ -144,8 +144,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php
-        echo $this->Html->meta(
+        <?= $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
             array('type' => 'icon')
@@ -157,8 +156,7 @@ methods of the HtmlHelper and how to use them.
             title="favicon.ico" type="image/x-icon"
             rel="alternate"
         />
-        <?php
-        echo $this->Html->meta(
+        <?= $this->Html->meta(
             'Comments',
             '/comments/index.rss',
             array('type' => 'rss')
@@ -175,8 +173,7 @@ methods of the HtmlHelper and how to use them.
     This method can also be used to add the meta keywords and
     descriptions. Example::
 
-        <?php
-        echo $this->Html->meta(
+        <?= $this->Html->meta(
             'keywords',
             'enter any meta keyword here'
         );
@@ -184,8 +181,7 @@ methods of the HtmlHelper and how to use them.
         // Output
         <meta name="keywords" content="enter any meta keyword here" />
 
-        <?php
-        echo $this->Html->meta(
+        <?= $this->Html->meta(
             'description',
             'enter any meta description here'
         );
@@ -197,7 +193,7 @@ methods of the HtmlHelper and how to use them.
     should be set to an array. To output a robots noindex tag use the
     following code::
 
-        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));
+        echo $this->Html->meta(['name' => 'robots', 'content' => 'noindex']);
 
 .. php:method:: docType(string $type = 'html5')
 
@@ -243,11 +239,11 @@ methods of the HtmlHelper and how to use them.
     array passed to the method. Especially handy if your CSS file is
     dynamic.::
 
-        echo $this->Html->style(array(
+        echo $this->Html->style([
             'background' => '#633',
             'border-bottom' => '1px solid #000',
             'padding' => '10px'
-        ));
+        ]);
 
     Will output::
 
@@ -261,7 +257,7 @@ methods of the HtmlHelper and how to use them.
     Creates a formatted image tag. The path supplied should be relative
     to /App/webroot/img/.::
 
-        echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
+        echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
     Will output:
 
@@ -272,10 +268,10 @@ methods of the HtmlHelper and how to use them.
     To create an image link specify the link destination using the
     ``url`` option in ``$htmlAttributes``.::
 
-        echo $this->Html->image("recipes/6.jpg", array(
+        echo $this->Html->image("recipes/6.jpg", [
             "alt" => "Brownies",
-            'url' => array('controller' => 'recipes', 'action' => 'view', 6)
-        ));
+            'url' => ['controller' => 'recipes', 'action' => 'view', 6]
+        ]);
 
     Will output:
 
@@ -288,7 +284,7 @@ methods of the HtmlHelper and how to use them.
     If you are creating images in emails, or want absolute paths to images you
     can use the ``fullBase`` option::
 
-        echo $this->Html->image("logo.png", array('fullBase' => true));
+        echo $this->Html->image("logo.png", ['fullBase' => true]);
 
     Will output:
 
@@ -318,7 +314,11 @@ methods of the HtmlHelper and how to use them.
     specify attributes for the element and whether or not the
     ``$title`` should be escaped.::
 
-        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+        echo $this->Html->link(
+            'Enter',
+            '/pages/home',
+            ['class' => 'button', 'target' => '_blank']
+        );
 
     Will output:
 
@@ -326,11 +326,11 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-    Use ``'full_base'=>true`` option for absolute URLs::
+    Use ``'_full'=>true`` option for absolute URLs::
 
         echo $this->Html->link(
             'Dashboard',
-            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+            ['controller' => 'dashboards', 'action' => 'index', '_full' => true]
         );
 
     Will output:
@@ -345,8 +345,8 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->link(
             'Delete',
-            array('controller' => 'recipes', 'action' => 'delete', 6),
-            array(),
+            ['controller' => 'recipes', 'action' => 'delete', 6],
+            [],
             "Are you sure you wish to delete this recipe?"
         );
 
@@ -358,12 +358,12 @@ methods of the HtmlHelper and how to use them.
 
     Query strings can also be created with ``link()``.::
 
-        echo $this->Html->link('View image', array(
+        echo $this->Html->link('View image', [
             'controller' => 'images',
             'action' => 'view',
             1,
-            '?' => array('height' => 400, 'width' => 500))
-        );
+            '?' => ['height' => 400, 'width' => 500]
+        ]);
 
     Will output:
 
@@ -379,8 +379,8 @@ methods of the HtmlHelper and how to use them.
 
         <?php
         echo $this->Html->link(
-            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
+            ['controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false]
         );
 
     Will output:
@@ -395,11 +395,10 @@ methods of the HtmlHelper and how to use them.
     entities. To disable this conversion, set the escape option to
     false in the ``$options`` array.::
 
-        <?php
         echo $this->Html->link(
-            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
             "recipes/view/6",
-            array('escape' => false)
+            ['escape' => false]
         );
 
     Will output:
@@ -411,14 +410,13 @@ methods of the HtmlHelper and how to use them.
         </a>
 
     Setting ``escape`` to false will also disable escaping of attributes of the
-    link. As of 2.4 you can use the option ``escapeTitle`` to disable just
+    link. You can use the option ``escapeTitle`` to disable just
     escaping of title and not the attributes.::
 
-        <?php
         echo $this->Html->link(
-            $this->Html->image('recipes/6.jpg', array('alt' => 'Brownies')),
+            $this->Html->image('recipes/6.jpg', ['alt' => 'Brownies']),
             'recipes/view/6',
-            array('escapeTitle' => false, 'title' => 'hi "howdy"')
+            ['escapeTitle' => false, 'title' => 'hi "howdy"']
         );
 
     Will output:
@@ -460,17 +458,17 @@ methods of the HtmlHelper and how to use them.
         // Output
         <audio src="/files/audio.mp3"></audio>
 
-        <?= $this->Html->media('video.mp4', array(
+        <?= $this->Html->media('video.mp4', [
             'fullBase' => true,
             'text' => 'Fallback text'
-        )) ?>
+        ]) ?>
 
         // Output
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
        <?= $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
-            array('autoplay')
+            ['video.mp4', ['src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'"]],
+            ['autoplay']
         ) ?>
 
         // Output
@@ -490,17 +488,13 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php
-        echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
-        ?>
+        <?= $this->Html->tag('span', 'Hello World.', ['class' => 'welcome']) ?>
 
         // Output
         <span class="welcome">Hello World</span>
 
         // No text specified.
-        <?php
-        echo $this->Html->tag('span', null, array('class' => 'welcome'));
-        ?>
+        <?= $this->Html->tag('span', null, ['class' => 'welcome']) ?>
 
         // Output
         <span class="welcome">
@@ -527,9 +521,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php
-        echo $this->Html->div('error', 'Please enter your credit card number.');
-        ?>
+        <?= $this->Html->div('error', 'Please enter your credit card number.') ?>
 
         // Output
         <div class="error">Please enter your credit card number.</div>
@@ -545,9 +537,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php
-        echo $this->Html->para(null, 'Hello World.');
-        ?>
+        <?= $this->Html->para(null, 'Hello World.') ?>
 
         // Output
         <p>Hello World.</p>
@@ -584,7 +574,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script href="/js/scripts.js"></script>
+        <script src="/js/scripts.js"></script>
 
     You can link to files with absolute paths as well to link files
     that are not in ``app/webroot/js``::
@@ -599,7 +589,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script href="http://code.jquery.com/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
 
     The first parameter can be an array to include multiple files.::
 
@@ -609,9 +599,9 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <script href="/js/jquery.js"></script>
-        <script href="/js/wysiwyg.js"></script>
-        <script href="/js/scripts.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/wysiwyg.js"></script>
+        <script src="/js/scripts.js"></script>
 
     You can append the script tag to a specific block using the ``block``
     option::
@@ -632,7 +622,7 @@ methods of the HtmlHelper and how to use them.
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
 
-        echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
+        echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 
 .. php:method::  scriptBlock($code, $options = array())
 
@@ -643,7 +633,7 @@ methods of the HtmlHelper and how to use them.
     ``$options['inline']`` to false to have the script block appear in
     the ``script`` view block. Other options defined will be added as attributes
     to script tags.
-    ``$this->Html->scriptBlock('stuff', array('defer' => true));`` will
+    ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will
     create a script tag with ``defer="defer"`` attribute.
 
 .. php:method:: scriptStart($options = array())
@@ -663,7 +653,7 @@ methods of the HtmlHelper and how to use them.
     An example of using ``scriptStart()`` and ``scriptEnd()`` would
     be::
 
-        $this->Html->scriptStart(array('inline' => false));
+        $this->Html->scriptStart(['inline' => false]);
 
         echo $this->Js->alert('I am in the JavaScript');
 
@@ -680,17 +670,17 @@ methods of the HtmlHelper and how to use them.
 
     Build a nested list (UL/OL) out of an associative array::
 
-        $list = array(
-            'Languages' => array(
-                'English' => array(
+        $list = [
+            'Languages' => [
+                'English' => [
                     'American',
                     'Canadian',
                     'British',
-                ),
+                [,
                 'Spanish',
                 'German',
-            )
-        );
+            ]
+        ];
         echo $this->Html->nestedList($list);
 
     Output:
@@ -723,7 +713,7 @@ methods of the HtmlHelper and how to use them.
     Creates a row of table header cells to be placed inside of <table>
     tags.::
 
-        echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
+        echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
 
     Output:
 
@@ -738,9 +728,9 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->tableHeaders(
-            array('Date','Title','Active'),
-            array('class' => 'status'),
-            array('class' => 'product_table')
+            ['Date','Title','Active'],
+            ['class' => 'status'],
+            ['class' => 'product_table']
         );
 
     Output:
@@ -756,11 +746,11 @@ methods of the HtmlHelper and how to use them.
     You can set attributes per column, these are used instead of the
     defaults provided in the ``$thOptions``::
 
-        echo $this->Html->tableHeaders(array(
+        echo $this->Html->tableHeaders([
             'id',
-            array('Name' => array('class' => 'highlight')),
-            array('Date' => array('class' => 'sortable'))
-        ));
+            ['Name' => ['class' => 'highlight']],
+            ['Date' => ['class' => 'sortable']]
+        ]);
 
     Output:
 
@@ -785,11 +775,11 @@ methods of the HtmlHelper and how to use them.
     for odd- and even-numbered rows. Wrap a single table cell within an
     array() for specific <td>-attributes. ::
 
-        echo $this->Html->tableCells(array(
-            array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
-            array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
-            array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
-        ));
+        echo $this->Html->tableCells([
+            ['Jul 7th, 2007', 'Best Brownies', 'Yes'],
+            ['Jun 21st, 2007', 'Smart Cookies', 'Yes'],
+            ['Aug 1st, 2006', 'Anti-Java Cake', 'No'],
+        ]);
 
     Output:
 
@@ -801,11 +791,11 @@ methods of the HtmlHelper and how to use them.
 
     ::
 
-        echo $this->Html->tableCells(array(
-            array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
-            array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
-            array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
-        ));
+        echo $this->Html->tableCells([
+            ['Jul 7th, 2007', ['Best Brownies', ['class' => 'highlight']] , 'Yes'],
+            ['Jun 21st, 2007', 'Smart Cookies', 'Yes'],
+            ['Aug 1st, 2006', 'Anti-Java Cake', ['No', ['id' => 'special']]],
+        ]);
 
     Output:
 
@@ -818,12 +808,12 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->tableCells(
-            array(
-                array('Red', 'Apple'),
-                array('Orange', 'Orange'),
-                array('Yellow', 'Banana'),
-            ),
-            array('class' => 'darker')
+            [
+                ['Red', 'Apple'],
+                ['Orange', 'Orange'],
+                ['Yellow', 'Banana'],
+            ],
+            ['class' => 'darker']
         );
 
     Output:
@@ -845,11 +835,11 @@ methods of the HtmlHelper and how to use them.
     generates the URL for the controller and action combo. If full is
     true, the full base URL will be prepended to the result::
 
-        echo $this->Html->url(array(
+        echo $this->Html->url([
             "controller" => "posts",
             "action" => "view",
             "bar"
-        ));
+        ]);
 
         // Output
         /posts/view/bar
@@ -858,22 +848,22 @@ methods of the HtmlHelper and how to use them.
 
     URL with named parameters::
 
-        echo $this->Html->url(array(
+        echo $this->Html->url([
             "controller" => "posts",
             "action" => "view",
             "foo" => "bar"
-        ));
+        ]);
 
         // Output
         /posts/view/foo:bar
 
     URL with extension::
 
-        echo $this->Html->url(array(
+        echo $this->Html->url([
             "controller" => "posts",
             "action" => "list",
             "ext" => "rss"
-        ));
+        ]);
 
         // Output
         /posts/list.rss
@@ -887,12 +877,12 @@ methods of the HtmlHelper and how to use them.
 
     URL with GET params and named anchor::
 
-        echo $this->Html->url(array(
+        echo $this->Html->url([
             "controller" => "posts",
             "action" => "search",
-            "?" => array("foo" => "bar"),
+            "?" => ["foo" => "bar"],
             "#" => "first"
-        ));
+        ]);
 
         // Output
         /posts/search?foo=bar#first
@@ -908,7 +898,7 @@ methods of the HtmlHelper and how to use them.
         $this->Html->useTag(
             'form',
             'http://example.com',
-            array('method' => 'post', 'class' => 'myform')
+            ['method' => 'post', 'class' => 'myform']
         );
 
     Output:
@@ -955,11 +945,11 @@ Creating Breadcrumb Trails with HtmlHelper
     The ``$startText`` option can also accept an array. This gives more control
     over the generated first link::
 
-        echo $this->Html->getCrumbs(' > ', array(
+        echo $this->Html->getCrumbs(' > ', [
             'text' => $this->Html->image('home.png'),
-            'url' => array('controller' => 'pages', 'action' => 'display', 'home'),
+            'url' => ['controller' => 'pages', 'action' => 'display', 'home'],
             'escape' => false
-        ));
+        ]);
 
     Any keys that are not ``text`` or ``url`` will be passed to
     :php:meth:`~HtmlHelper::link()` as the ``$options`` parameter.
