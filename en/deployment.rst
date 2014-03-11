@@ -11,7 +11,7 @@ If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any leaks. Check the
 :doc:`/core-libraries/components/security-component` to guard against CSRF
 attacks, form field tampering, and others. Doing
-:doc:`/core-librares/validation` is a great idea, for protecting your database
+:doc:`/core-libraries/validation` is a great idea, for protecting your database
 and ensuring data consistency/integrity. Check that only your ``webroot`` directory is
 publicly visible, and that your secrets (such as your app salt, and any security
 keys) are private and unique as well!

@@ -1319,7 +1319,7 @@ Closing the Form
 
         echo $this->Form->end(['data-type' => 'hidden']);
 
-    Will output::
+    Will output:
 
     .. code-block:: html
 
@@ -1398,8 +1398,6 @@ A list of the default templates and the variables they can expect are:
 * ``groupContainer`` {{type}}, {{required}}, {{content}}
 * ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``submitContainer`` {{content}}
-
-
 
 Generating Entire Forms
 =======================
