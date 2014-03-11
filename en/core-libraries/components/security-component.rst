@@ -142,7 +142,7 @@ Form tampering prevention
 =========================
 
 By default ``SecurityComponent`` prevents users from tampering with forms in
-specific ways. The ``SecurityComponen`` will prevent the following things:
+specific ways. The ``SecurityComponent`` will prevent the following things:
 
 * Unknown fields cannot be added to the form.
 * Fields cannot be removed from the form.

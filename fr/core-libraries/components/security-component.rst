@@ -18,8 +18,8 @@ configurables.
 Toutes ces propriétés peuvent être définies directement ou au travers de
 "méthodes setter" du même nom dans la partie beforeFilter de votre controller.
 
-En utilisant le Component Security vous faites automatiquement
-un  get `CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
+En utilisant le Component Security vous obtenez automatiquement une protection
+`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
 et une protection contre la falsification de formulaire.
 Des jetons de champs cachés seront automatiquement insérés dans les
 formulaires et vérifiés par le component Security. En outre, une
@@ -27,14 +27,15 @@ soumission par formulaire ne sera pas acceptée après une certaine
 période d'inactivité, qui est contrôler par le temps ``csrfExpires``.
 
 Si vous utilisez la fonctionnalité de protection des formulaires
-par le component Security et que d'autre components traitent des données
+par le component Security et que d'autres components traitent des données
 de formulaire dans les callbacks ``startup()``, assurez-vous de placer
 le component Security avant ces components dans le tableau ``$components``.
 
 .. note::
 
     Quand vous utilisez le component Security vous **devez** utiliser
-    le Helper Form (FormHelper) pour créer vos formulaires.
+    le Helper Form (FormHelper) pour créer vos formulaires. De plus, vous
+    **ne** devez surcharger **aucun** des attributs des champs ' "name".
     Le component Security regarde certains indicateurs qui sont créés et
     gérés par le Helper form.
     (spécialement ceux créés dans :php:meth:`~FormHelper::create()`)
@@ -152,11 +153,31 @@ Prévention de la falsification de formulaire
 ============================================
 
 Par défaut le component Security ``SecurityComponent`` prévient les
-utilisateurs de la falsification de formulaire. Il fait cela en travaillant
+utilisateurs de la falsification de formulaire dans certains cas.
+``SecurityComponent`` va éviter les choses suivantes:
+
 avec le Helper Form et en traquant quels champs sont dans un formulaire. il
 assure le suivi des éléments d'entrée cachés. Toutes ces données sont combinées
 et hachées. Quand un formulaire est soumis, le component de sécurité utilisera
 les données POSTé pour construire la même structure et comparer le hachage.
+
+* Les champs inconnus ne peuvent être ajoutés au formulaire.
+* Les champs ne peuvent être retirés du formulaire.
+* Les valeurs dans les inputs cachés ne peuvent être modifiées.
+
+La prévention de falsification de ces formulaires est faite de concert avec
+FormHelper et en recherchant les champs qui sont dans un formulaire. Les valeurs
+pour les champs cachés sont aussi utilisés. Toutes ces données sont combinées
+et il en ressort un hash. Quand un formulaire est soumis, SecurityComponent
+va utiliser les données POSTées pour construire la même structure et
+comparer le hash.
+
+
+.. note::
+
+    SecurityComponent **ne** va **pas** empêcher aux options sélectionnées
+    d'être ajoutées/changées. Ni ne va empêcher les options radio d'être
+    ajoutées/changées.
 
 .. php:attr:: unlockedFields
 
