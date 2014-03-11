@@ -1309,96 +1309,95 @@ Creating Buttons and Submit Elements
 
 .. php:method:: button(string $title, array $options = [])
 
-Creates an HTML button with the specified title and a default type
-of "button". Setting ``$options['type']`` will output one of the
-three possible button types:
+    Creates an HTML button with the specified title and a default type
+    of "button". Setting ``$options['type']`` will output one of the
+    three possible button types:
 
-#. submit: Same as the ``$this->Form->submit`` method - (the
-   default).
-#. reset: Creates a form reset button.
-#. button: Creates a standard push button.
+    #. submit: Same as the ``$this->Form->submit`` method - (the
+       default).
+    #. reset: Creates a form reset button.
+    #. button: Creates a standard push button.
 
-::
+    ::
 
-    echo $this->Form->button('A Button');
-    echo $this->Form->button('Another Button', ['type' => 'button']);
-    echo $this->Form->button('Reset the Form', ['type' => 'reset']);
-    echo $this->Form->button('Submit Form', ['type' => 'submit']);
+        echo $this->Form->button('A Button');
+        echo $this->Form->button('Another Button', ['type' => 'button']);
+        echo $this->Form->button('Reset the Form', ['type' => 'reset']);
+        echo $this->Form->button('Submit Form', ['type' => 'submit']);
 
-Will output:
+    Will output:
 
-.. code-block:: html
+    .. code-block:: html
 
-    <button type="submit">A Button</button>
-    <button type="button">Another Button</button>
-    <button type="reset">Reset the Form</button>
-    <button type="submit">Submit Form</button>
+        <button type="submit">A Button</button>
+        <button type="button">Another Button</button>
+        <button type="reset">Reset the Form</button>
+        <button type="submit">Submit Form</button>
 
 
-The ``button`` input type supports the ``escape`` option, which accepts a
-bool and determines whether to HTML entity encode the $title of the button.
-Defaults to false::
+    The ``button`` input type supports the ``escape`` option, which accepts a
+    bool and determines whether to HTML entity encode the $title of the button.
+    Defaults to false::
 
-    echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
+        echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
 
 .. php:method:: postButton(string $title, mixed $url, array $options = [])
 
-Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
-POST.
+    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
+    POST.
 
-This method creates a ``<form>`` element. So do not use this method in some
-opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
-:php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
+    This method creates a ``<form>`` element. So do not use this method in some
+    opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
+    :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
-Creates an HTML link, but accesses the URL using method POST. Requires
-JavaScript to be enabled in browser.
+    Creates an HTML link, but accesses the URL using method POST. Requires
+    JavaScript to be enabled in browser.
 
-This method creates a ``<form>`` element. So do not use this method inside
-an existing form. Instead you should add a submit button using
-:php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+    This method creates a ``<form>`` element. So do not use this method inside
+    an existing form. Instead you should add a submit button using
+    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
 
 Closing the Form
 ================
 
 .. php:method:: end($secureAttributes = [])
 
-The ``end()`` method closes and completes a form. Often, ``end()`` will only output
-a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
-hidden form elements that :php:class:`SecurityComponent` requires:
+    The ``end()`` method closes and completes a form. Often, ``end()`` will only output
+    a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
+    hidden form elements that :php:class:`SecurityComponent` requires:
 
-.. code-block:: php
+    .. code-block:: php
 
-    <?= $this->Form->create(); ?>
+        <?= $this->Form->create(); ?>
 
-    <!-- Form elements go here -->
+        <!-- Form elements go here -->
 
-    <?= $this->Form->end(); ?>
+        <?= $this->Form->end(); ?>
 
-The ``$secureAttributes`` parameter allows you to pass additional HTML
-attributes to the hidden inputs that are generated when your application is
-using ``SecurityComponent``. If you need to add additional attributes to the
-generated hidden inputs you can use the ``$secureAttributes`` argument::
+    The ``$secureAttributes`` parameter allows you to pass additional HTML
+    attributes to the hidden inputs that are generated when your application is
+    using ``SecurityComponent``. If you need to add additional attributes to the
+    generated hidden inputs you can use the ``$secureAttributes`` argument::
 
-    echo $this->Form->end(['data-type' => 'hidden']);
+        echo $this->Form->end(['data-type' => 'hidden']);
 
-Will output::
+    Will output::
 
-.. code-block:: html
+    .. code-block:: html
 
-    <div style="display:none;">
-        <input type="hidden" name="_Token[fields]" data-type="hidden"
-            value="2981c38990f3f6ba935e6561dc77277966fabd6d%3AAddresses.id">
-        <input type="hidden" name="_Token[unlocked]" data-type="hidden"
-            value="address%7Cfirst_name">
-    </div>
+        <div style="display:none;">
+            <input type="hidden" name="_Token[fields]" data-type="hidden"
+                value="2981c38990f3f6ba935e6561dc77277966fabd6d%3AAddresses.id">
+            <input type="hidden" name="_Token[unlocked]" data-type="hidden"
+                value="address%7Cfirst_name">
+        </div>
 
-.. note::
+    .. note::
 
-    If you are using :php:class:`SecurityComponent` in your application you
-    should always end your forms with ``end()``.
-
+        If you are using :php:class:`SecurityComponent` in your application you
+        should always end your forms with ``end()``.
 
 Generating Entire Forms
 =======================
