@@ -444,71 +444,6 @@ HTML attributes. The following will cover the options specific to
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
 
-Customizing the Templates FormHelper Uses
-=========================================
-
-Like many helpers in CakePHP, FormHelper uses string templates to format the
-HTML it creates. While the default templates are intended to be a reasonable set
-of defaults. You may need to customize the templates to suit your application.
-
-To change the templates when the helper is loaded you can set the ``templates``
-option when including the helper in your controller::
-
-    public $helpers = [
-        'Form' => [
-            'templates' => 'app_form.php',
-        ]
-    ];
-
-This would load the tags in ``App/Config/app_form.php``. This file should
-contain an array of templates indexed by name::
-
-    $config = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
-    ];
-
-Any templates you define will replace the default ones included in the helper.
-Templates that are not replaced, will continue to use the default values.
-You can also change the templates at runtime using the ``templates()`` method::
-
-    $myTemplates = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
-    ];
-    $this->Form->templates($myTemplates);
-
-List of Templates
------------------
-
-A list of the default templates and the variables they can expect are:
-
-* ``button`` {{attrs}}, {{text}}
-* ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxContainer`` {{input}}, {{label}}
-* ``dateWidget`` {{month}}, {{day}}, {{year}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
-* ``error`` {{content}}
-* ``errorList`` {{content}}
-* ``errorItem`` {{text}}
-* ``file`` {{name}}, {{attrs}}
-* ``formstart`` {{attrs}}
-* ``formend`` No variables are provided.
-* ``hiddenblock`` {{content}}
-* ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputsubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioContainer``  {{input}}, {{label}},
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``formGroup`` {{label}}, {{input}},
-* ``checkboxFormGroup`` {{input}}, {{label}},
-* ``groupContainer`` {{type}}, {{required}}, {{content}}
-* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
-* ``submitContainer`` {{content}}
-
-
 Generating Specific Types of Inputs
 ===================================
 
@@ -705,38 +640,6 @@ Datetime Options
 
 * ``$options['monthNames']`` If false, 2 digit numbers will be used instead of text.
   If an array, the given array will be used.
-
-Creating Labels
-===============
-
-.. php:method:: label(string $fieldName, string $text, array $options)
-
-    Create a label element. ``$fieldName`` is used for generating the
-    DOM id. If ``$text`` is undefined, ``$fieldName`` will be used to inflect
-    the label's text::
-
-        echo $this->Form->label('User.name');
-        echo $this->Form->label('User.name', 'Your username');
-
-    Output:
-
-    .. code-block:: html
-
-        <label for="user-name">Name</label>
-        <label for="user-name">Your username</label>
-
-    ``$options`` can either be an array of HTML attributes, or a string that
-    will be used as a class name::
-
-        echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-        echo $this->Form->label('User.name', 'Your username', 'highlight');
-
-    Output:
-
-    .. code-block:: html
-
-        <label for="user-name" id="user-label">Name</label>
-        <label for="user-name" class="highlight">Your username</label>
 
 Creating Input Elements
 =======================
@@ -1046,52 +949,52 @@ Creating Input Elements
 
 .. php:method:: file(string $fieldName, array $options)
 
-To add a file upload field to a form, you must first make sure that
-the form enctype is set to "multipart/form-data", so start off with
-a create function such as the following::
+    To add a file upload field to a form, you must first make sure that
+    the form enctype is set to "multipart/form-data", so start off with
+    a create function such as the following::
 
-    echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
-    // OR
-    echo $this->Form->create($document, ['type' => 'file']);
+        echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
+        // OR
+        echo $this->Form->create($document, ['type' => 'file']);
 
-Next add either of the two lines to your form view file::
+    Next add either of the two lines to your form view file::
 
-    echo $this->Form->input('submittedfile', [
-        'type' => 'file'
-    ]);
+        echo $this->Form->input('submittedfile', [
+            'type' => 'file'
+        ]);
 
-    // OR
-    echo $this->Form->file('submittedfile');
+        // OR
+        echo $this->Form->file('submittedfile');
 
-Due to the limitations of HTML itself, it is not possible to put
-default values into input fields of type 'file'. Each time the form
-is displayed, the value inside will be empty.
+    Due to the limitations of HTML itself, it is not possible to put
+    default values into input fields of type 'file'. Each time the form
+    is displayed, the value inside will be empty.
 
-Upon submission, file fields provide an expanded data array to the
-script receiving the form data.
+    Upon submission, file fields provide an expanded data array to the
+    script receiving the form data.
 
-For the example above, the values in the submitted data array would
-be organized as follows, if the CakePHP was installed on a Windows
-server. 'tmp\_name' will have a different path in a Unix
-environment::
+    For the example above, the values in the submitted data array would
+    be organized as follows, if the CakePHP was installed on a Windows
+    server. 'tmp\_name' will have a different path in a Unix
+    environment::
 
-    $this->request->data['submittedfile'] = [
-        'name' => 'conference_schedule.pdf',
-        'type' => 'application/pdf',
-        'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
-        'error' => 0, // On windows this can be a string.
-        'size' => 41737,
-    ];
+        $this->request->data['submittedfile'] = [
+            'name' => 'conference_schedule.pdf',
+            'type' => 'application/pdf',
+            'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
+            'error' => 0, // On windows this can be a string.
+            'size' => 41737,
+        ];
 
-This array is generated by PHP itself, so for more detail on the
-way PHP handles data passed via file fields
-`read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
+    This array is generated by PHP itself, so for more detail on the
+    way PHP handles data passed via file fields
+    `read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
 
-.. note::
+    .. note::
 
-    When using ``$this->Form->file()``, remember to set the form
-    encoding-type, by setting the type option to 'file' in
-    ``$this->Form->create()``
+        When using ``$this->Form->file()``, remember to set the form
+        encoding-type, by setting the type option to 'file' in
+        ``$this->Form->create()``
 
 
 Creating Date and Time Inputs
@@ -1099,152 +1002,185 @@ Creating Date and Time Inputs
 
 .. php:method:: dateTime($fieldName, $options = [])
 
-Creates a set of select inputs for date and time. This method accepts a number
-of options:
+    Creates a set of select inputs for date and time. This method accepts a number
+    of options:
 
-* ``monthNames`` If false, 2 digit numbers will be used instead of text.
-  If an array, the given array will be used.
-* ``minYear`` The lowest year to use in the year select
-* ``maxYear`` The maximum year to use in the year select
-* ``interval`` The interval for the minutes select. Defaults to 1
-* ``empty`` - If true, the empty select option is shown. If a string,
-  that string is displayed as the empty element.
-* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
-* ``default`` The default value to be used by the input. A value in ``$this->request->data``
-  matching the field name will override this value. If no default is provided ``time()`` will be used.
-* ``timeFormat`` The time format to use, either 12 or 24.
-* ``second`` Set to true to enable seconds drop down.
+    * ``monthNames`` If false, 2 digit numbers will be used instead of text.
+      If an array, the given array will be used.
+    * ``minYear`` The lowest year to use in the year select
+    * ``maxYear`` The maximum year to use in the year select
+    * ``interval`` The interval for the minutes select. Defaults to 1
+    * ``empty`` - If true, the empty select option is shown. If a string,
+      that string is displayed as the empty element.
+    * ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
+    * ``default`` The default value to be used by the input. A value in ``$this->request->data``
+      matching the field name will override this value. If no default is provided ``time()`` will be used.
+    * ``timeFormat`` The time format to use, either 12 or 24.
+    * ``second`` Set to true to enable seconds drop down.
 
-To control the order of inputs, and any elements/content between the inputs you
-can override the ``dateWidget`` template. By default the ``dateWidget`` template
-is::
+    To control the order of inputs, and any elements/content between the inputs you
+    can override the ``dateWidget`` template. By default the ``dateWidget`` template
+    is::
 
-    {{month}}{{day}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}
+        {{month}}{{day}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}
 
 .. php:method:: year(string $fieldName, array $options = [])
 
-Creates a select element populated with the years from ``minYear``
-to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
-``$options['empty']`` is false, the select will not include an
-empty option:
+    Creates a select element populated with the years from ``minYear``
+    to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
+    ``$options['empty']`` is false, the select will not include an
+    empty option:
 
-* ``empty`` - If true, the empty select option is shown. If a string,
-  that string is displayed as the empty element.
-* ``orderYear`` - Ordering of year values in select options.
-  Possible values 'asc', 'desc'. Default 'desc'
-* ``value`` The selected value of the input.
-* ``maxYear`` The max year to appear in the select element.
-* ``minYear`` The min year to appear in the select element.
+    * ``empty`` - If true, the empty select option is shown. If a string,
+      that string is displayed as the empty element.
+    * ``orderYear`` - Ordering of year values in select options.
+      Possible values 'asc', 'desc'. Default 'desc'
+    * ``value`` The selected value of the input.
+    * ``maxYear`` The max year to appear in the select element.
+    * ``minYear`` The min year to appear in the select element.
 
-For example, to create a year range range from 2000 to the current year you
-would do the following::
+    For example, to create a year range range from 2000 to the current year you
+    would do the following::
 
-    echo $this->Form->year('purchased', [
-        'minYear' => 2000,
-        'maxYear' => date('Y')
-    ]);
+        echo $this->Form->year('purchased', [
+            'minYear' => 2000,
+            'maxYear' => date('Y')
+        ]);
 
-If it was 2009, you would get the following:
+    If it was 2009, you would get the following:
 
-.. code-block:: html
+    .. code-block:: html
 
-    <select name="purchased[year]">
-    <option value=""></option>
-    <option value="2009">2009</option>
-    <option value="2008">2008</option>
-    <option value="2007">2007</option>
-    <option value="2006">2006</option>
-    <option value="2005">2005</option>
-    <option value="2004">2004</option>
-    <option value="2003">2003</option>
-    <option value="2002">2002</option>
-    <option value="2001">2001</option>
-    <option value="2000">2000</option>
-    </select>
+        <select name="purchased[year]">
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
+        </select>
 
 .. php:method:: month(string $fieldName, array $attributes)
 
-Creates a select element populated with month names::
+    Creates a select element populated with month names::
 
-    echo $this->Form->month('mob');
+        echo $this->Form->month('mob');
 
-Will output:
+    Will output:
 
-.. code-block:: html
+    .. code-block:: html
 
-    <select name="mob[month]">
-    <option value=""></option>
-    <option value="01">January</option>
-    <option value="02">February</option>
-    <option value="03">March</option>
-    <option value="04">April</option>
-    <option value="05">May</option>
-    <option value="06">June</option>
-    <option value="07">July</option>
-    <option value="08">August</option>
-    <option value="09">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-    </select>
+        <select name="mob[month]">
+        <option value=""></option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+        </select>
 
-You can pass in your own array of months to be used by setting the
-'monthNames' attribute, or have months displayed as numbers by
-passing false. (Note: the default months are internationalized and
-can be translated using localization.)::
+    You can pass in your own array of months to be used by setting the
+    'monthNames' attribute, or have months displayed as numbers by
+    passing false. (Note: the default months are internationalized and
+    can be translated using localization.)::
 
-    echo $this->Form->month('mob', ['monthNames' => false]);
+        echo $this->Form->month('mob', ['monthNames' => false]);
 
 .. php:method:: day(string $fieldName, array $attributes)
 
-Creates a select element populated with the (numerical) days of the
-month.
+    Creates a select element populated with the (numerical) days of the
+    month.
 
-To create an empty option with prompt text of your choosing (e.g.
-the first option is 'Day'), you can supply the text as the final
-parameter as follows::
+    To create an empty option with prompt text of your choosing (e.g.
+    the first option is 'Day'), you can supply the text as the final
+    parameter as follows::
 
-    echo $this->Form->day('created');
+        echo $this->Form->day('created');
 
-Will output:
+    Will output:
 
-.. code-block:: html
+    .. code-block:: html
 
-    <select name="created[day]">
-    <option value=""></option>
-    <option value="01">1</option>
-    <option value="02">2</option>
-    <option value="03">3</option>
-    ...
-    <option value="31">31</option>
-    </select>
+        <select name="created[day]">
+        <option value=""></option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        ...
+        <option value="31">31</option>
+        </select>
 
 .. php:method:: hour(string $fieldName, array $attributes)
 
-Creates a select element populated with the hours of the day. You can
-create either 12 or 24 hour pickers using the format option::
+    Creates a select element populated with the hours of the day. You can
+    create either 12 or 24 hour pickers using the format option::
 
-    echo $this->Form->hour('created', [
-        'format' => 12
-    ]);
-    echo $this->Form->hour('created', [
-        'format' => 24
-    ]);
+        echo $this->Form->hour('created', [
+            'format' => 12
+        ]);
+        echo $this->Form->hour('created', [
+            'format' => 24
+        ]);
 
 .. php:method:: minute(string $fieldName, array $attributes)
 
-Creates a select element populated with the minutes of the hour. You
-can create a select that only contains specific values using the ``interval``
-option. For example, if you wanted 10 minute increments you would do the
-following::
+    Creates a select element populated with the minutes of the hour. You
+    can create a select that only contains specific values using the ``interval``
+    option. For example, if you wanted 10 minute increments you would do the
+    following::
 
-    echo $this->Form->minute('created', [
-        'interval' => 10
-    ]);
+        echo $this->Form->minute('created', [
+            'interval' => 10
+        ]);
 
 .. php:method:: meridian(string $fieldName, array $attributes)
 
-Creates a select element populated with 'am' and 'pm'.
+    Creates a select element populated with 'am' and 'pm'.
+
+Creating Labels
+===============
+
+.. php:method:: label(string $fieldName, string $text, array $options)
+
+    Create a label element. ``$fieldName`` is used for generating the
+    DOM id. If ``$text`` is undefined, ``$fieldName`` will be used to inflect
+    the label's text::
+
+        echo $this->Form->label('User.name');
+        echo $this->Form->label('User.name', 'Your username');
+
+    Output:
+
+    .. code-block:: html
+
+        <label for="user-name">Name</label>
+        <label for="user-name">Your username</label>
+
+    ``$options`` can either be an array of HTML attributes, or a string that
+    will be used as a class name::
+
+        echo $this->Form->label('User.name', null, ['id' => 'user-label']);
+        echo $this->Form->label('User.name', 'Your username', 'highlight');
+
+    Output:
+
+    .. code-block:: html
+
+        <label for="user-name" id="user-label">Name</label>
+        <label for="user-name" class="highlight">Your username</label>
+
 
 Displaying and Checking Errors
 ==============================
@@ -1398,6 +1334,72 @@ Closing the Form
 
         If you are using :php:class:`SecurityComponent` in your application you
         should always end your forms with ``end()``.
+
+Customizing the Templates FormHelper Uses
+=========================================
+
+Like many helpers in CakePHP, FormHelper uses string templates to format the
+HTML it creates. While the default templates are intended to be a reasonable set
+of defaults. You may need to customize the templates to suit your application.
+
+To change the templates when the helper is loaded you can set the ``templates``
+option when including the helper in your controller::
+
+    public $helpers = [
+        'Form' => [
+            'templates' => 'app_form.php',
+        ]
+    ];
+
+This would load the tags in ``App/Config/app_form.php``. This file should
+contain an array of templates indexed by name::
+
+    $config = [
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
+    ];
+
+Any templates you define will replace the default ones included in the helper.
+Templates that are not replaced, will continue to use the default values.
+You can also change the templates at runtime using the ``templates()`` method::
+
+    $myTemplates = [
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
+    ];
+    $this->Form->templates($myTemplates);
+
+List of Templates
+-----------------
+
+A list of the default templates and the variables they can expect are:
+
+* ``button`` {{attrs}}, {{text}}
+* ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxContainer`` {{input}}, {{label}}
+* ``dateWidget`` {{month}}, {{day}}, {{year}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
+* ``error`` {{content}}
+* ``errorList`` {{content}}
+* ``errorItem`` {{text}}
+* ``file`` {{name}}, {{attrs}}
+* ``formstart`` {{attrs}}
+* ``formend`` No variables are provided.
+* ``hiddenblock`` {{content}}
+* ``input`` {{type}}, {{name}}, {{attrs}}
+* ``inputsubmit`` {{type}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioContainer``  {{input}}, {{label}},
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``formGroup`` {{label}}, {{input}},
+* ``checkboxFormGroup`` {{input}}, {{label}},
+* ``groupContainer`` {{type}}, {{required}}, {{content}}
+* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``submitContainer`` {{content}}
+
+
 
 Generating Entire Forms
 =======================
