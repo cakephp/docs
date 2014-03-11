@@ -443,7 +443,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
 
 Plugin assets are served using the ``AssetDispatcher`` middleware by default.
 This is only recommended for development. In production you should
-:ref:`symlink-assets <symlink plugin assets>` to improve performance.
+:ref:`symlink plugin assets <symlink-assets>` to improve performance.
 
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
 of a the URL for an asset within that plugin to serve it. Linking to

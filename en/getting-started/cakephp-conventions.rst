@@ -138,29 +138,6 @@ between models should be named after the model tables they will
 join in alphabetical order (apples\_zebras rather than
 zebras\_apples).
 
-All tables with which CakePHP models interact (with the exception
-of join tables), require a singular primary key to uniquely
-identify each row. If you wish to model a table which does not have
-a single-field primary key, CakePHP's convention is that a
-single-field primary key is added to the table. You have to add a
-single-field primary key if you want to use that table's model.
-
-CakePHP does not support composite primary keys. If you want to
-directly manipulate your join table data, use direct
-:ref:`query <model-query>` calls or add a primary key to act on it
-as a normal model. E.g.::
-
-    CREATE TABLE posts_tags (
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    post_id INT(10) NOT NULL,
-    tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
-
-Rather than using an auto-increment key as the primary key, you may
-also use char(36). CakePHP will then use a unique 36 character UUID
-(String::uuid) whenever you save a new record using the Model::save
-method.
-
 View Conventions
 ================
 

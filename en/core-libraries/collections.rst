@@ -1,6 +1,6 @@
-.. _collection-objects:
-
 .. php:namespace:: Cake\Collection
+
+.. _collection-objects:
 
 Collections
 ###########

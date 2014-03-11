@@ -375,7 +375,7 @@ can be useful when you do not know whether you will get a scalar or array of
 parameters. The ``[]`` suffix on any data type name indicates to the query
 builder that you want the data handled as an array. If the data is not an array,
 it will first be cast to an array. After that, each value in the array will
-be cast using the :ref:`database-data-types <type system>`. This works with
+be cast using the :ref:`type system <database-data-types>`. This works with
 complex types as well, for example you could take a list of DateTime objects
 using::
 
@@ -629,7 +629,7 @@ After your queries you may need to do some post processing. If you need to add
 a few calculated fields, or derived data you can use the ``formatResults()``
 method. This is a lightweight way to map over the result sets. If you need more
 control over the process, or want to reduce results you should use
-the :ref:`map-reduce <Map/Reduce>` feature instead. If you were querying a list
+the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.

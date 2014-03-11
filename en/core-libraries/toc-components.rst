@@ -15,4 +15,3 @@ configure and use components.
     /core-libraries/components/security-component
     /core-libraries/components/request-handling
     /core-libraries/components/cookie
-    /core-libraries/components/access-control-lists
