@@ -653,7 +653,7 @@ HtmlHelper
 - ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
 - ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
   done using ``templates()`` or the ``templates`` setting.
-- The ``inline`` parameter has been removed from css(), script(), scriptBlock()
+- The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
   methods. You should use the ``block`` option instead. Setting ``block =>
   true`` will emulate the previous behavior.
 
