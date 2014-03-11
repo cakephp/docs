@@ -73,10 +73,9 @@ methods of the HtmlHelper and how to use them.
     :param mixed $path: Either a string of the CSS file to link, or an array with multiple files
     :param array $options: An array of options or :term:`html attributes`.
 
-    Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
-    false in ``$options`` parameter, the link tags are added to the
-    ``css`` block which you can print inside the head
-    tag of the document.
+    Creates a link(s) to a CSS style-sheet. If the ``block`` option is set to
+    true, the link tags are added to the ``css`` block which you can print
+    inside the head tag of the document.
 
     You can use the ``block`` option to control which block the link element
     will be appended to. By default it will append to the ``css`` block.
@@ -126,8 +125,8 @@ methods of the HtmlHelper and how to use them.
 
     This method is handy for linking to external resources like RSS/Atom feeds
     and favicons. Like css(), you can specify whether or not you'd like this tag
-    to appear inline or appended to the ``meta`` block by setting the 'inline'
-    key in the $attributes parameter to false, ie - ``array('inline' => false)``.
+    to appear inline or appended to the ``meta`` block by setting the 'block'
+    key in the $attributes parameter to true, ie - ``array('block' => true)``.
 
     If you set the "type" attribute using the $attributes parameter,
     CakePHP contains a few shortcuts:
@@ -551,7 +550,7 @@ methods of the HtmlHelper and how to use them.
     Include a script file(s), contained either locally or as a remote URL.
 
     By default, script tags are added to the document inline. If you override
-    this by setting ``$options['inline']`` to false, the script tags will instead
+    this by setting ``$options['block']`` to true, the script tags will instead
     be added to the ``script`` block which you can print elsewhere in the document.
     If you wish to override which block name is used, you can do so by setting
     ``$options['block']``.
@@ -629,12 +628,11 @@ methods of the HtmlHelper and how to use them.
     :param string $code: The code to go in the script tag.
     :param array $options: An array of :term:`html attributes`.
 
-    Generate a code block containing ``$code`` set
-    ``$options['inline']`` to false to have the script block appear in
-    the ``script`` view block. Other options defined will be added as attributes
-    to script tags.
-    ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will
-    create a script tag with ``defer="defer"`` attribute.
+    Generate a code block containing ``$code`` set ``$options['block']`` to true
+    to have the script block appear in the ``script`` view block. Other options
+    defined will be added as attributes to script tags.
+    ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will create
+    a script tag with ``defer="defer"`` attribute.
 
 .. php:method:: scriptStart($options = array())
 
@@ -648,12 +646,12 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: scriptEnd()
 
     End a buffering script block, returns the generated script element
-    or null if the script block was opened with inline = false.
+    or null if the script block was opened with block = true.
 
     An example of using ``scriptStart()`` and ``scriptEnd()`` would
     be::
 
-        $this->Html->scriptStart(['inline' => false]);
+        $this->Html->scriptStart(['block' => true]);
 
         echo $this->Js->alert('I am in the JavaScript');
 
