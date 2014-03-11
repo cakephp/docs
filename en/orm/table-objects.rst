@@ -1205,8 +1205,8 @@ Saving Entities
 
 .. php:method:: save(Entity $entity, array $options = [])
 
-When saving a new entity, you need to check if the request data merits a new
-record via the ``newEntity()`` method. For example::
+When saving request data to your database you need to first hydrate a new entity
+using ``newEntity()`` for passing into ``save()``. For example::
   
   // In a controller
   $articles = TableRegistry::get('Articles');
