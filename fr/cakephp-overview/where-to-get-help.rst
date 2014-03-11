@@ -80,17 +80,14 @@ voiture sportive.
 
 Communautés Officiels CakePHP
 =============================
-CakePHP a aussi son groupe officiel dans la plupart des sites de réseaux
-sociaux les plus populaires comme Facebook, Google Plus. Il y a des centaines
-de personne discutant des projets CakePHP, s'aidant les uns les autres,
-résolvant des problèmes, construisant les projets et partageant leurs idées.
+`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
+
+CakePHP a aussi son groupe officiel sur Google Groups. Il y a des centaines
+de personne qui discutent des projets CakePHP, qui s'aident les uns les autres,
+résolvent des problèmes, qui construisent des projets et partagent leurs idées.
 Cela peut être une grande ressource pour trouver des réponses archivées, des
 questions fréquemment posées et obtenir des réponses aux problèmes urgents.
 Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
-
--   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
--   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
--   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
 
 
 Stackoverflow
