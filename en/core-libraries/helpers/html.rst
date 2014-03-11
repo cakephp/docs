@@ -115,7 +115,7 @@ methods of the HtmlHelper and how to use them.
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
-        echo $this->Html->css('Blog.common.css', null, ['plugin' => false]);
+        echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
@@ -146,7 +146,7 @@ methods of the HtmlHelper and how to use them.
         <?= $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
-            array('type' => 'icon')
+            ['type' => 'icon']
         );
         ?>
         // Output (line breaks added)
@@ -158,7 +158,7 @@ methods of the HtmlHelper and how to use them.
         <?= $this->Html->meta(
             'Comments',
             '/comments/index.rss',
-            array('type' => 'rss')
+            ['type' => 'rss']
         );
         ?>
         // Output (line breaks added)
