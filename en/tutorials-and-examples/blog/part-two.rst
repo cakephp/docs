@@ -507,7 +507,7 @@ Next, let's make a way for users to delete articles. Start with a
             throw new MethodNotAllowedException();
         }
 
-        $article = $this->Articles->find('all')->where(['id' => $id])->first();
+        $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Session->setFlash(__('The article with id: %s has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
