@@ -75,6 +75,16 @@ plugin(s) configurés ou PHP vous donnera des avertissements pour chaque
 fichier qu'il ne peut pas charger. C'est particulèrement important à
 retenir quand on spécifie defaults pour tous les plugins.
 
+CakePHP 2.3.0 ajoute une option ``ignoreMissing```, qui vous permet d'ignorer
+toute route manquante et les fichiers de bootstrap quand vous chargez les
+plugins. Vous pouvez raccourcir le code en chargeant tous les plugins en
+utilisant ceci::
+
+    // Charge tous les plugins y compris les possibles routes et les fichiers de bootstrap
+    CakePlugin::loadAll(array(
+        array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
+    ));
+
 Certains plugins ont besoin en supplément de créer une ou plusieurs tables
 dans votre base de données. Dans ces cas, ils incluent souvent un fichier
 de schéma que vous appelez à partir du shell de cake comme ceci::
