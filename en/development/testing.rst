@@ -79,17 +79,24 @@ Checking the Test Setup
 =======================
 
 After installing PHPUnit and setting up your ``test`` datasource configuration
-you can make sure you're ready to write and run your own tests by running one of
-the core tests. There are two built-in runners for testing, we'll start off by
-using the CLI runner. By using the test shell, we can ensure everything is
-working::
+you can make sure you're ready to write and run your own tests by running your
+application's tests::
 
-    $ Console/cake test app
+    // For system wide PHPUnit
+    $ phpunit
 
-The above should print out a list of runnable test cases in your application. If
-for example you had a test case for ArticlesTable class you could run it with::
+    // For phpunit.phar
+    $ php phpunit.phar
 
-    $ Console/cake test app Model/Table/ArticlesTable
+    // For composer installed phpunit
+    $ vendor/bin/phpunit
+
+The above should run any tests you have, or let you know that no tests were run.
+To run a specific test you can supply the path to the test as a parameter to
+PHPUnit. For example, if you had a test case for ArticlesTable class you could
+run it with::
+
+    $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
 
 You should see a green bar with some additional information about the tests run,
 and number passed.
@@ -117,16 +124,6 @@ tests:
 #. The name of any method containing a test (i.e. containing an
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
-
-When you have created a test case, you can execute it by browsing
-to ``http://localhost/your_app/test.php`` (depending on
-how your specific setup looks). Click App test cases, and
-then click the link to your specific file. You can run tests from the command
-line using the test shell::
-
-    ./Console/cake test app Model/Post
-
-For example, would run the tests for your Post model.
 
 Creating Your First Test Case
 =============================
@@ -183,8 +180,8 @@ following::
     }
 
 Calling the parent method is important in test cases, as TestCase::setUp()
-does a number things like backing up the values in :php:class:`Configure` and,
-storing the paths in :php:class:`App`.
+does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
+storing the paths in :php:class:`~Cake\\Core\\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
@@ -220,52 +217,13 @@ Once you have PHPUnit installed and some test cases written, you'll want to run
 the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
-Running Tests from a Browser
-----------------------------
+By using ``phpunit`` you can run your application and plugin tests. To run your
+application's tests you can simply run::
 
-CakePHP provides a web interface for running tests, so you can execute your
-tests through a browser if you're more comfortable in that environment. You can
-access the web runner by going to ``http://localhost/your_app/test.php``. The
-exact location of test.php will change depending on your setup. But the file is
-at the same level as ``index.php``.
+    $ phpunit
 
-Once you've loaded up the test runner, you can navigate App, Core and Plugin test
-suites. Clicking an individual test case will run that test and display the
-results.
-
-Viewing Code Coverage
-~~~~~~~~~~~~~~~~~~~~~
-
-If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
-results. Code coverage is useful for telling you what parts of your code your
-tests do not reach. Coverage is useful for determining where you should add
-tests in the future, and gives you one measurement to track your testing
-progress with.
-
-.. |Code Coverage| image:: /_static/img/code-coverage.png
-
-|Code Coverage|
-
-The inline code coverage uses green lines to indicate lines that have been run.
-If you hover over a green line a tooltip will indicate which tests covered the
-line. Lines in red did not run, and have not been exercised by your tests. Grey
-lines are considered unexecutable code by xdebug.
-
-.. _run-tests-from-command-line:
-
-Running Tests from Command Line
--------------------------------
-
-CakePHP provides a ``test`` shell for running tests. You can run app, core
-and plugin tests easily using the test shell. It accepts all the arguments
-you would expect to find on the normal PHPUnit command line tool as well. From
-your app directory you can do the following to run tests::
-
-    # Run a model tests in the app
-    ./Console/cake test app Model/Article
-
-    # Run a component test in a plugin
-    ./Console/cake test DebugKit Controller/Component/ToolbarComponent
+From your application's root directory. To run a plugin's tests, first ``cd``
+into the plugin directory, then use ``phpunit`` to run the tests.
 
 .. note::
 
@@ -273,41 +231,34 @@ your app directory you can do the following to run tests::
     idea to use the ``--stderr`` option. This will fix issues with tests
     failing because of headers_sent warnings.
 
-You can also run ``test`` shell in the project root directory. This shows
-you a full list of all the tests that you currently have. You can then freely
-choose what test(s) to run::
-
-    # Run test in project root directory for application folder called app
-    ./Console/cake test app
-
 Filtering Test Cases
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 When you have larger test cases, you will often want to run a subset of the test
 methods when you are trying to work on a single failing case. With the
 CLI runner you can use an option to filter test methods::
 
-    ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
+    $ phpunit --filter testSave Test/TestCase/Model/Table/ArticlesTableTest
 
 The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
 
 Generating Code Coverage
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 You can generate code coverage reports from the command line using PHPUnit's
 built-in code coverage tools. PHPUnit will generate a set of static HTML files
 containing the coverage results. You can generate coverage for a test case by
 doing the following::
 
-    ./Console/cake test app Model/Table/ArticlesTable --coverage-html webroot/coverage
+    $ phpunit --coverage-html webroot/coverage Test/TestCase/Model/Table/ArticlesTableTest
 
 This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
 Running Tests that Use Sessions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 When running tests on the command line that use sessions you'll need to include
 the ``--stderr`` flag. Failing to do so will cause sessions to not work.
@@ -315,6 +266,27 @@ PHPUnit outputs test progress to stdout by default, this causes PHP to assume
 that headers have been sent which prevents sessions from starting. By switching
 PHPUnit to output on stderr, this issue is avoided.
 
+Combining Test Suites for plugins
+---------------------------------
+
+Often times your application will be composed of several plugins. In these
+situations it can be pretty tedious to run tests for each plugin. You can make
+running tests for each of the plugins that compose your application by adding
+additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
+
+    <testsuites>
+        <testsuite name="App Test Suite">
+            <directory>./Test/TestCase</directory>
+        </testsuite>
+
+        <!-- Add your plugin suites -->
+        <testsuite name="Forum plugin">
+            <directory>./Plugin/Forum/Test/TestCase</directory>
+        </testsuite>
+    </testsuites>
+
+Any additional test suites added to the ``<testsuites>`` element will
+automatically be run when you use ``phpunit``.
 
 Test Case Lifecycle Callbacks
 =============================

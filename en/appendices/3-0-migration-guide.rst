@@ -708,6 +708,19 @@ L10n
 - :php:class:`Cake\\I18n\\L10n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
 
 
+Testing
+=======
+
+- The ``TestShell`` has been removed. CakePHP, the application skeleton and
+  newly baked plugins all use ``phpunit`` to run tests.
+- The webrunner (webroot/test.php) has been removed. CLI adoption has greatly
+  increased since the initial release of 2.x. Additionaly, CLI runners offer
+  superior integration with IDE's and other automated tooling.
+
+  If you find yourself in need of a way to run tests from a browser you should
+  checkout `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. It
+  offers many additional features over the old webrunner.
+
 Utility
 =======
 
