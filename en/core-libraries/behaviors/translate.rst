@@ -7,13 +7,13 @@ Translate
 
 The Translate behavior allows you to create and retrieve translated copies
 of your entities in multiple languages. It does so by using a separate
-`i18n` table where it stores the translation for each of the field of any
+``i18n`` table where it stores the translation for each of the field of any
 giving Table object that is bound to
 
 A Quick Tour
 ============
 
-After creating the `i18n` table in your database attach the behavior to any
+After creating the ``i18n`` table in your database attach the behavior to any
 Table object you want to make translatable::
 
     class Articles extends Table {
@@ -72,8 +72,8 @@ behavior for your needs, keep on reading the rest of this chapter.
 Initializing the i18n Database Table
 ====================================
 
-In order to use the behavior, you need to create a `i18n` table with the correct
-schema, Currently the only way of loading the `i18n` table is by manually
+In order to use the behavior, you need to create a ``i18n`` table with the correct
+schema, Currently the only way of loading the ``i18n`` table is by manually
 running the following SQL script in your database
 
 .. code-block:: sql
