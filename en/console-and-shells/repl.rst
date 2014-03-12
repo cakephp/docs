@@ -24,3 +24,27 @@ application's models::
     // )
     [2] app > $articles->find();
 
+Since your application has been bootstrapped you can also test routing using the
+REPL::
+
+    [1] app > Cake\Routing\Router::parse('/articles/view/1');
+    // array(
+    //   'controller' => 'articles',
+    //   'action' => 'view',
+    //   'pass' => array(
+    //     0 => '1'
+    //   ),
+    //   'plugin' => NULL
+    // )
+
+You can also test generating URL's::
+
+    [1] app > Cake\Routing\Router::url(['controller' => 'articles', 'action' => 'edit', 99]);
+    // '/articles/edit/99'
+
+To quit the REPL you can use ``CTRL-D``.
+
+.. warning::
+
+    The REPL does not work properly on windows systems due to issues with
+    readline and POSIX extensions.
