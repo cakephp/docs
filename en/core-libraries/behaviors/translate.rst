@@ -1,7 +1,9 @@
 Translate
 #########
 
-.. php:class:: TranslateBehavior()
+.. php:namespace:: Cake\Model\Behavior
+
+.. php:class:: TranslateBehavior
 
 The Translate behavior allows you to create and retrieve translated copies
 of your entities in multiple languages. It does so by using a separate
