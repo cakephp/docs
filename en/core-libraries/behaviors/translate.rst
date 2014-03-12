@@ -122,7 +122,7 @@ of the data that is stored for each different table::
         public function initialize(array $config) {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                translationTable' => 'articles_i18n'
+                'translationTable' => 'articles_i18n'
             ]);
         }
     }
@@ -130,16 +130,52 @@ of the data that is stored for each different table::
 You need to make sure that any custom table you use has the columns ``field``,
 ``foreign_key``, ``locale`` and ``model``.
 
-
 Reading translated content
 ==========================
 
-...
+As shown above you can use the ``locale`` method to choose the active
+translation for entities that are loaded::
+
+    $articles = TableRegistry::get('Articles');
+    $articles->locale('spa');
+
+    // All entities in results will contain spanish translation
+    $results = $articles->find('all')->all();
+
+The locale method with the any finder in your tables. For example, you can
+use TranslateBehavior with ``find('list')``::
+
+    $articles->locale('spa');
+    $data = $articles->find('list');
 
 Retrieve all translations for an entity
 ---------------------------------------
 
-...
+When building interfaces for updating translated content, it is often helpful to
+show one or more translations at the same time. You can use the ``translations``
+finder for this::
+
+    // Find all translations
+    $results = $articles->find('translations');
+
+    // Get only english and spanish
+    $results = $articles->find('translations', ['locales' => ['eng', 'spa']]);
+
+In both of the above examples you will get a list of entities back that have a
+``_translations`` property set. This property will contain a list of translation
+data entities. For example the following properties would be acessible::
+
+    $results = $articles->find('translations', ['locales' => ['eng', 'spa']]);
+    $article = $results->first();
+
+    // Outputs 'eng'
+    echo $article->_translations[0]->locale;
+
+    // Outputs 'title'
+    echo $article->_translations[0]->field;
+
+    // Outputs 'My awesome post!'
+    echo $article->_translations[0]->body;
 
 Limiting the translations to be retrieved
 -----------------------------------------
