@@ -1444,6 +1444,51 @@ For example::
 
 If you disable the fieldset, the legend will not print.
 
+Adding Custom Widgets
+=====================
+
+CakePHP makes it easy to add custom input widgets in your application, and use
+them like any other input type. All of the core input types are implemented as
+wigets, which means you can easily override any core widget with your own
+implemenation as well.
+
+Building a Widget Class
+-----------------------
+
+Using Widgets
+-------------
+
+You can load custom widgets either in the ``$helpers`` array or using the
+``addWidget()`` method. In your helpers array, widgets are defined as
+a setting::
+
+    public $helpers = [
+        'Form' => [
+            'widgets' => [
+                'autocomplete' => ['App\View\Widget\Autocomplete']
+            ]
+        ]
+    ];
+
+Using the ``addWidget()`` method would look like::
+
+    // Using a classname.
+    $this->Form->addWidget('autocomplete', ['App\View\Widget\Autocomplete']);
+
+    // Using an instance.
+    $autocomplete = new Autocomplete($this->Form->getTemplater());
+    $this->Form->addWidget('autocomplete', $autocomplete);
+
+Once added/replaced, widgets can be used as the input 'type'::
+
+    echo $this->Form->input('search', ['type' => 'autocomplete']);
+
+This will create the custom widget with a label and wrapping div just like
+``input()`` always does. Alternatively, you can create just the input widget
+using the magic method::
+
+    echo $this->Form->autocomplete('search', $options);
+
 Working with SecurityComponent
 ==============================
 
@@ -1467,7 +1512,7 @@ ensure that the special ``_Token`` inputs are generated.
 .. php:method:: secure(array $fields = [])
 
     Generates a hidden field with a security hash based on the fields used
-    in the form. 
+    in the form.
 
 
 .. meta::
