@@ -640,6 +640,9 @@ and reduce the problems people had in the past:
   content.
 - The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
+- The ``inline`` parameter has been removed from postLink() method.
+  You should use the ``block`` option instead. Setting ``block => true`` will
+  emulate the previous behavior.
 
 It is recommended that you review the :doc:`/core-libraries/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
@@ -650,6 +653,9 @@ HtmlHelper
 - ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
 - ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
   done using ``templates()`` or the ``templates`` setting.
+- The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
+  methods. You should use the ``block`` option instead. Setting ``block =>
+  true`` will emulate the previous behavior.
 
 
 PaginatorHelper
