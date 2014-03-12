@@ -819,6 +819,8 @@ Shell API
     AppShell can be used as a base class for all your shells. It should extend
     :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
 
+.. php:namespace:: Cake\Console
+
 .. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
 
     Shell is the base class for all shells, and provides a number of functions for
@@ -828,13 +830,14 @@ Shell API
 
     An array of tasks you want loaded for this shell/task.
 
-.. php:attr:: uses
-
-    An array of models that should be loaded for this shell/task.
-
 .. php:method:: clear()
 
     Clears the current output being displayed.
+
+.. php:method:: loadModel($modelClass, $type = 'Table')
+
+    Load a model of the given ``$type`` into a property with the same name. This
+    is the console counterpart to :php:meth:`Cake\\Controller\\Controller::loadModel()`.
 
 .. php:method:: createFile($path, $contents)
 
@@ -989,11 +992,11 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/cron-jobs
     console-and-shells/code-generation-with-bake
     console-and-shells/i18n-shell
-    console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
+    console-and-shells/repl
+    console-and-shells/cron-jobs
 
 
 .. meta::
