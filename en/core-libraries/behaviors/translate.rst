@@ -140,13 +140,16 @@ translation for entities that are loaded::
     $articles->locale('spa');
 
     // All entities in results will contain spanish translation
-    $results = $articles->find('all')->all();
+    $results = $articles->find()->all();
 
-The locale method with the any finder in your tables. For example, you can
+The locale method works with any finder in your tables. For example, you can
 use TranslateBehavior with ``find('list')``::
 
     $articles->locale('spa');
-    $data = $articles->find('list');
+    $data = $articles->find('list')->toArray();
+
+    // Data will contain
+    [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
 Retrieve All Translations For An Entity
 ---------------------------------------
@@ -155,34 +158,53 @@ When building interfaces for updating translated content, it is often helpful to
 show one or more translation(s) at the same time. You can use the
 ``translations`` finder for this::
 
-    // Find all translations
-    $results = $articles->find('translations');
+    // Find the first article with all corresponding translations
+    $article = $articles->find('translations')->first();
 
-    // Get only english and spanish
-    $results = $articles->find('translations', ['locales' => ['eng', 'spa']]);
-
-In both of the above examples you will get a list of entities back that have a
+In the example above you will get a list of entities back that have a
 ``_translations`` property set. This property will contain a list of translation
-data entities. For example the following properties would be acessible::
+data entities. For example the following properties would be accessible::
+
+    // Outputs 'eng'
+    echo $article->_translations['eng']->locale;
+
+    // Outputs 'title'
+    echo $article->_translations['eng']->field;
+
+    // Outputs 'My awesome post!'
+    echo $article->_translations['eng']->body;
+
+A more elegant way for dealing with this data is by adding a trait to the entity
+class that is used for your table::
+
+    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Entity;
+
+    class Article extends Entity {
+        use TranslateTrait;
+    }
+
+This trait contains a single method called ``translation``, which lets you
+access or create new translation entities on the fly::
+
+    // Outputs 'title'
+    echo $article->translation('eng')->title; 
+
+    // Adds a new translation data entity to the article
+    $article->translation('deu')->title = 'Wunderbar';
+
+Limiting the Translations to be Retrieved
+-----------------------------------------
+
+You can limit the languages that are fetched from the database for a particular
+set of records::
 
     $results = $articles->find('translations', ['locales' => ['eng', 'spa']]);
     $article = $results->first();
+    $spanishTranslation = $article->translation('spa');
+    $englishTranslation = $article->translation('eng');
 
-    // Outputs 'eng'
-    echo $article->_translations[0]->locale;
-
-    // Outputs 'title'
-    echo $article->_translations[0]->field;
-
-    // Outputs 'My awesome post!'
-    echo $article->_translations[0]->body;
-
-Limiting the translations to be retrieved
------------------------------------------
-
-...
-
-Saving in another language
+Saving in Another Language
 ==========================
 
 ...
