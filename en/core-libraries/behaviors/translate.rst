@@ -204,12 +204,111 @@ set of records::
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
 
+Retrieving All Translations For Associations
+--------------------------------------------
+
+It is also possible to find translations for any association in a single find
+operation::
+
+    $article = $articles->find('translations')->contain([
+        'Categories' => function($query) {
+            return $query->find('translations');
+        }
+    ])->first();
+
+    // Outputs 'Programación'
+    echo $article->categories[0]->translation('spa')->name;
+
+This assumes that ``Categories`` has the TranslateBehavior attached to it. It
+simply uses the query builder function for the ``contain`` clause to use the
+``translations`` custom finder in the association.
+
 Saving in Another Language
 ==========================
 
-...
+The philosophy behind the TranslateBehavior is that you have an entity
+representing the default language, and multiple translations that can override
+certain fields in such entity. Keeping this in mind, you can intuitively save
+translations for any given entity. For example, given the following setup::
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
+        }
+    }
+
+    class Article extends Entity {
+        use TranslateTrait;
+    }
+
+    $articles = TableRegistry::get('Articles');
+    $article = new Article([
+        'title' => 'My First Article',
+        'body' => 'This is the content',
+        'footnote' => 'Some afterwords'
+    ]);
+
+    $articles->save($article);
+
+So, after you save your first article, you can now save a translation for it,
+there are a couple ways to do it. The first one is setting the language directly
+into the entity::
+
+    $article->_locale = 'spa';
+    $article->title = 'Mi primer Artículo';
+
+    $articles->save($article);
+
+After the entity has been saved, the translated field will be persisted as well,
+one thing to note is that values from the default language that were not
+overridden will be preserved::
+
+    // Outputs 'This is the content'
+    echo $article->body;
+
+    // Outputs 'Mi primer Artículo'
+    echo $article->title;
+
+Once you override the value, the translation for that field will be saved and
+can be retrieved as usual::
+
+    $article->body = 'El contendio';
+    $articles->save($article);
+
+The second way to use for saving entities in another language is to set the
+default language directly to the table::
+
+    $articles->locale('spa');
+    $article->title = 'Mi Primer Artículo';
+    $articles->save($article);
+
+Setting the language directly in the table is useful when you need to both
+retrieve and save entities for the same language or when you need to save
+multiple entities at once.
 
 Saving Multiple Translations
 ============================
 
-...
+It is a common requirement to be able to add or edit multiple translations to
+any database record at the same time. This can be easily done using the
+``TranslateTrait``::
+
+    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Entity;
+
+    class Article extends Entity {
+        use TranslateTrait;
+    }
+
+Now, You can populate translations before saving them::
+
+    $translations = [
+        'fra' => ['title' => "Un article"],
+        'spa' => ['title' => 'Un artículo']
+    ];
+
+    foreach ($translations as $lang => $data) {
+        $article->translation($lang)->set($data, ['guard' => false]);
+    }
+
+    $articles->save($article);
