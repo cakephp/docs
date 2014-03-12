@@ -1300,9 +1300,10 @@ Closing the Form
 
 .. php:method:: end($secureAttributes = [])
 
-    The ``end()`` method closes and completes a form. Often, ``end()`` will only output
-    a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
-    hidden form elements that :php:class:`SecurityComponent` requires:
+    The ``end()`` method closes and completes a form. Often, ``end()`` will only
+    output a closing form tag, but using ``end()`` is a good practice as it
+    enables FormHelper to insert hidden form elements that
+    :php:class:`Cake\\Controller\\Component\\SecurityComponent` requires:
 
     .. code-block:: php
 
@@ -1332,8 +1333,9 @@ Closing the Form
 
     .. note::
 
-        If you are using :php:class:`SecurityComponent` in your application you
-        should always end your forms with ``end()``.
+        If you are using
+        :php:class:`Cake\\Controller\\Component\\SecurityComponent` in your
+        application you should always end your forms with ``end()``.
 
 Customizing the Templates FormHelper Uses
 =========================================
