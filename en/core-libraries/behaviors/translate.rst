@@ -23,22 +23,22 @@ Table object you want to make translatable::
         }
     }
 
-Select a language to be used for retrieving entities::
+Now, select a language to be used for retrieving entities::
 
     $articles = TableRegistry::get('Articles');
     $articles->locale('spa');
 
-Get an existing entity::
+Then, get an existing entity::
 
     $article = $articles->get(12);
     echo $article->title; // Echoes 'A title', not translated yet
 
-Translate your entity::
+Next, translate your entity::
 
     $article->title = 'Un Artículo';
     $articles->save($article);
 
-You can try getting your entity again::
+You can try now getting your entity again::
 
     $article = $articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
