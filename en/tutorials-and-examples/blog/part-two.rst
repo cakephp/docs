@@ -135,7 +135,7 @@ nice table, our view code might look something like this:
             <td><?= $article->id ?></td>
             <td>
                 <?= $this->Html->link($article->title,
-                [controller' => 'articles', 'action' => 'view', $article->id]); ?>
+                ['controller' => 'articles', 'action' => 'view', $article->id]); ?>
             </td>
             <td><?= $article->created->format(DATE_RFC850) ?></td>
         </tr>
