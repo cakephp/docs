@@ -723,14 +723,11 @@ should end up looking something like the following:
 -  DiplomaticEfforts
 -  Ales
 
-One nice thing about a CakePHP ACL setup is that each ACO
-automatically contains four properties related to CRUD (create,
-read, update, and delete) actions. You can create children nodes
-under each of these five main ACOs, but using CakePHP's built-in
-action management covers basic CRUD operations on a given object.
-Keeping this in mind will make your ACO trees smaller and easier to
-maintain. We'll see how these are used later on when we discuss how
-to assign permissions.
+You can create children nodes under each of these five main ACOs,
+but using CakePHP's built-in action management covers basic CRUD
+operations on a given object. Keeping this in mind will make your
+ACO trees smaller and easier to maintain. We'll see how these are
+used later on when we discuss how to assign permissions.
 
 Since you're now a pro at adding AROs, use those same techniques to
 create this ACO tree. Create these upper level groups using the
@@ -743,35 +740,30 @@ After creating our ACOs and AROs, we can finally assign permissions
 between the two groups. This is done using CakePHP's core Acl
 component. Let's continue on with our example.
 
-Here we'll work in the context of a controller action. We do that
-because permissions are managed by the Acl Component.
+Here we'll manipulate the Acl permisions in the context of a controller
+action. Let's set up some basic permissions using the AclComponent in 
+an action inside our controller.
 
 ::
 
     class SomethingsController extends AppController {
+        
         // You might want to place this in the AppController
         // instead, but here works great too.
-
         public $components = array('Acl');
 
-    }
+        public function index() {
+            // Allow warriors complete access to weapons
+            // Both these examples use the alias syntax
+            $this->Acl->allow('warriors', 'Weapons');
 
-Let's set up some basic permissions using the AclComponent in an
-action inside this controller.
+            // Though the King may not want to let everyone
+            // have unfettered access
+            $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
+            $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
 
-::
-
-    public function index() {
-        // Allow warriors complete access to weapons
-        // Both these examples use the alias syntax
-        $this->Acl->allow('warriors', 'Weapons');
-
-        // Though the King may not want to let everyone
-        // have unfettered access
-        $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
-        $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
-
-        die(print_r('done', 1));
+            die(print_r('done', 1));
+        }
     }
 
 The first call we make to the AclComponent allows any user under
@@ -779,9 +771,10 @@ the 'warriors' ARO group full access to anything under the
 'Weapons' ACO group. Here we're just addressing ACOs and AROs by
 their aliases.
 
-Notice the usage of the third parameter? That's where we use those
-handy actions that are in-built for all CakePHP ACOs. The default
-options for that parameter are ``create``, ``read``, ``update``,
+Notice the usage of the third parameter? One nice thing about the CakePHP
+ACL setup is that permissions contain four built-in properties related
+to CRUD (create, read, update, and delete) actions for convenience. The 
+default options for that parameter are ``create``, ``read``, ``update``,
 and ``delete`` but you can add a column in the ``aros_acos``
 database table (prefixed with \_ - for example ``_admin``) and use
 it alongside the defaults.
