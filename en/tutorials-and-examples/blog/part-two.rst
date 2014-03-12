@@ -251,8 +251,8 @@ ArticlesController::
 
         public function add() {
             if ($this->request->is('post')) {
-                $this->Articles->create();
-                if ($this->Articles->save($this->request->data)) {
+                $article = $this->Articles->newEntity($this->request->data);
+                if ($this->Articles->save($article)) {
                     $this->Session->setFlash(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }
@@ -507,7 +507,8 @@ Next, let's make a way for users to delete articles. Start with a
             throw new MethodNotAllowedException();
         }
 
-        if ($this->Articles->delete($id)) {
+        $article = $this->Articles->get($id);
+        if ($this->Articles->delete($article)) {
             $this->Session->setFlash(__('The article with id: %s has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
