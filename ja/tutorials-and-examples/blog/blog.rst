@@ -173,6 +173,7 @@ mod\_rewriteについて
 以下のいずれかの項目を参照して、URLリライティングが有効になるように設定してください。
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

@@ -794,6 +794,7 @@ Mai multe despre View-uri
 =========================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/media-view

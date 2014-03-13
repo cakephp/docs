@@ -809,6 +809,7 @@ Mai multe despre controlleri
 ============================
 
 .. toctree::
+    :maxdepth: 1
 
     controllers/request-response
     controllers/scaffolding

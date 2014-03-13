@@ -810,6 +810,7 @@ En savoir plus sur les vues
 ===========================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/media-view

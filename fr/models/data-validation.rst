@@ -1256,6 +1256,7 @@ validateur a été ajouté.
     localisées.
 
 .. toctree::
+    :maxdepth: 1
 
     data-validation/validating-data-from-the-controller
 

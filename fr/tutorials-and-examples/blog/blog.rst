@@ -204,6 +204,7 @@ mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
 web fonctionne:
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

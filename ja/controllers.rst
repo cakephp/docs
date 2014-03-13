@@ -646,6 +646,7 @@ More on controllers
 ===================
 
 .. toctree::
+    :maxdepth: 1
 
     controllers/request-response
     controllers/scaffolding

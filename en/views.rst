@@ -795,6 +795,7 @@ More about Views
 ================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/media-view

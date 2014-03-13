@@ -109,16 +109,17 @@ CakePHP автоматически сделает модель доступно�
 ===================
 
 .. toctree::
+   :maxdepth: 1
 
-    models/associations-linking-models-together
-    models/retrieving-your-data
-    models/saving-your-data
-    models/deleting-data
-    models/data-validation
-    models/callback-methods
-    models/behaviors
-    models/datasources
-    models/model-attributes
-    models/additional-methods-and-properties
-    models/virtual-fields
-    models/transactions
+   models/associations-linking-models-together
+   models/retrieving-your-data
+   models/saving-your-data
+   models/deleting-data
+   models/data-validation
+   models/callback-methods
+   models/behaviors
+   models/datasources
+   models/model-attributes
+   models/additional-methods-and-properties
+   models/virtual-fields
+   models/transactions
