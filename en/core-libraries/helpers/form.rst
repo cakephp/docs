@@ -1455,6 +1455,42 @@ implemenation as well.
 Building a Widget Class
 -----------------------
 
+Widget classes have a very simple required interface. They must implement the
+:php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
+a the ``render(array $data)`` method to be implemented. The render method
+expects an array of data to build the widget and is expected to return an string
+of HTML for the widget. If CakePHP is constructing your widget you can expect to
+get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
+any dependencies you define. If we wanted to build an Autocomplete widget you
+could do the following::
+
+    namespace App\View\Widget;
+
+    use Cake\View\Widget\WidgetInterface;
+
+    class Autocomplete implements WidgetInterface {
+
+        protected $_templates;
+
+        public function __construct($templates) {
+            $this->_templates = $templates;
+        }
+
+        public function render(array $data) {
+            $data += [
+                'name' => '',
+            ];
+            return $this->_templates->format('autocomplete', [
+                'name' => $data['name'],
+                'attrs' => $this->_templates->formatAttributes($data, ['name'])
+            ]);
+        }
+
+    }
+
+Obviously, this is a very simple example, but it demonstrates how a custom
+widget could be built.
+
 Using Widgets
 -------------
 
@@ -1470,7 +1506,23 @@ a setting::
         ]
     ];
 
-Using the ``addWidget()`` method would look like::
+If your widget requires other widgets, you can have FormHelper populate those
+dependencies by declaring them::
+
+    public $helpers = [
+        'Form' => [
+            'widgets' => [
+                'autocomplete' => [
+                    'App\View\Widget\Autocomplete',
+                    'text',
+                    'label'
+                ]
+            ]
+        ]
+    ];
+
+In the above example, the autocomplete widget would depend on the ``text`` and
+``label`` widgets. To add widgets using the ``addWidget()`` method would look like::
 
     // Using a classname.
     $this->Form->addWidget('autocomplete', ['App\View\Widget\Autocomplete']);
