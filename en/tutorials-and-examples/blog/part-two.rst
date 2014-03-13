@@ -244,7 +244,7 @@ ArticlesController::
                 throw new NotFoundException(__('Invalid article'));
             }
 
-            $article = $this->Articles->->get($id);
+            $article = $this->Articles->get($id);
 
             $this->set(compact('article'));
         }
