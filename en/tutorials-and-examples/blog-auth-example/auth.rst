@@ -30,6 +30,8 @@ Next step is to create our User model, responsible for finding, saving and
 validating any user data::
 
     // app/Model/User.php
+    App::uses('AppModel', 'Model');
+    
     class User extends AppModel {
         public $validate = array(
             'username' => array(
