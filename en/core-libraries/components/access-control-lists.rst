@@ -740,7 +740,7 @@ After creating our ACOs and AROs, we can finally assign permissions
 between the two groups. This is done using CakePHP's core Acl
 component. Let's continue on with our example.
 
-Here we'll manipulate the Acl permisions in the context of a controller
+Here we'll work with Acl permisions in the context of a controller
 action. Let's set up some basic permissions using the AclComponent in 
 an action inside our controller.
 
