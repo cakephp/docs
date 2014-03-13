@@ -1522,13 +1522,22 @@ dependencies by declaring them::
     ];
 
 In the above example, the autocomplete widget would depend on the ``text`` and
-``label`` widgets. To add widgets using the ``addWidget()`` method would look like::
+``label`` widgets. When the autocomplete widget is created, it will be passed
+the widget objects that are related to the ``text`` and ``label`` names. To add
+widgets using the ``addWidget()`` method would look like::
 
     // Using a classname.
-    $this->Form->addWidget('autocomplete', ['App\View\Widget\Autocomplete']);
+    $this->Form->addWidget(
+        'autocomplete',
+        ['App\View\Widget\Autocomplete', 'text' 'label']
+    );
 
-    // Using an instance.
-    $autocomplete = new Autocomplete($this->Form->getTemplater());
+    // Using an instance - requires you to resolve dependencies.
+    $autocomplete = new Autocomplete(
+        $this->Form->getTemplater(),
+        $this->Form->widgetRegistry()->get('text'),
+        $this->Form->widgetRegistry()->get('label'),
+    );
     $this->Form->addWidget('autocomplete', $autocomplete);
 
 Once added/replaced, widgets can be used as the input 'type'::
