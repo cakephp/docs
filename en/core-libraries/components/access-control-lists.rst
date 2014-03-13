@@ -747,7 +747,6 @@ an action inside our controller.
 ::
 
     class SomethingsController extends AppController {
-        
         // You might want to place this in the AppController
         // instead, but here works great too.
         public $components = array('Acl');
