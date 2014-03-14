@@ -18,10 +18,12 @@ following::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+    pear install pear.phpunit.de/PHPUnit-3.7.32
 
 .. note::
 
+    PHPUnit 4 is not compatible with CakePHP's Unit Testing.
+    
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
