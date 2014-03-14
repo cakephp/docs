@@ -88,7 +88,7 @@ that a model/key less ``$paginate`` array could.
 Once the ``$paginate`` property has been defined, we can use the
 :php:meth:`~Cake\\Controller\Controller::paginate()` method to create the
 pagination data, and add the ``PaginatorHelper`` if it hasn't already been
-added.. The controller's paginate method will return the result set of the
+added. The controller's paginate method will return the result set of the
 paginated query, and set pagination metadata to the request. You can access the
 pagination metadata at ``$this->request->params['paging']``. A more complete
 example of using ``paginate()`` would be::
@@ -98,10 +98,21 @@ example of using ``paginate()`` would be::
         public function index() {
             $this->set('articles', $this->paginate());
         }
+    }
 
 By default the ``paginate()`` method will use the default model for
-a controller. If you want to paginate a different model you can provide it or
-its name to the paginate method::
+a controller. You can also pass the resulting query of a find method::
+
+     public function index() {
+        $query = $this->Articles->find('popular')->where(['author_id' => 1]);
+        $this->set('articles', $this->paginate($query));
+    }
+
+If you want to paginate a different model you can provide a query for it, the
+table object itself, or its name::
+
+    //Using a query
+    $comments = $this->paginate($commentsTable->find());
 
     // Using the model name.
     $comments = $this->paginate('Comments');
@@ -116,10 +127,14 @@ If you need to paginate data from another component you may want to use the
 PaginatorComponent directly. It features a similar API to the controller
 method::
 
+    $articles = $this->Paginator->paginate($articleTable->find(), $settings);
+
+    //Or just
     $articles = $this->Paginator->paginate($articleTable, $settings);
 
-The first parameter should be the table object you wish to paginate results
-from. The second parameter should be the array of settings to use for
+The first parameter should be the query object from a find on table object you wish
+to paginate results from. Optionally, you can pass the table object and let the query
+be constructed for you. The second parameter should be the array of settings to use for
 pagination. This array should have the same structure as the ``$paginate``
 property on a controller.
 
