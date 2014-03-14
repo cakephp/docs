@@ -58,7 +58,7 @@ Il y a un certain nombre de clés supportés dans la configuration de la base
 de données. Une liste complète est comme suit:
 
 className
-    Le nom de la classe du driver utilisé pour faire fonctionner la connection.
+    Le nom de la classe du driver utilisée pour faire fonctionner la connection.
     Ceci peut être soit un nom de classe court en utilisant
     :term:`plugin syntax`, un nom complet en namespace, soit être une instance
     de driver construite. Les exemples de noms de classe court sont Mysql,
@@ -134,110 +134,115 @@ Gérer les Connections
 
 .. php:class:: ConnectionManager
 
-The ``ConnectionManager`` class acts as a registry to access database connections your
-application has. It provides a place that other objects can get references to
-existing connections.
+La classe ``ConnectionManager`` agit comme un registry pour accéder aux
+connections à base de données que votre application fait. Elle fournit un
+endroit où les autres objets peuvent obtenir des références à des connections
+existantes.
 
-Accessing Connections
----------------------
+Accéder à des Connections
+-------------------------
 
 .. php:staticmethod:: get($name)
 
-Once configured connections can be fetched using
-:php:meth:`Cake\\Database\\ConnectionManager::get()`. This method will
-construct and load a connection if it has not been built before, or return the
-existing known connection::
+Une fois configurées, les connections peuvent être récupérées en utilisant
+:php:meth:`Cake\\Database\\ConnectionManager::get()`. Cette méthode va
+construire et charger une connection si elle n'a pas été déjà construite
+avant, ou retourner la connextion connue existante::
 
     use Cake\Database\ConnectionManager;
 
     $conn = ConnectionManager::get('default');
 
-Attempting to load connections that do not exist will throw an exception.
+La tentative de chargement de connections qui n'existent pas va lancer une
+exception.
 
-Creating Connections at Runtime
--------------------------------
+Créer des Connections à l'execution
+-----------------------------------
 
 .. php:staticmethod:: create($name, $config)
 
-The ``create`` method allows you to define new connections that are not defined
-in your configuration files at runtime::
+La méthode ``create`` vous permet de définir des nouvelles connections qui
+ne sont pas définies dans vos fichiers de configuration à l'execution::
 
     $conn = ConnectionManager::create('my_connection', $config);
 
-See the :ref:`database-configuration` for more information on the configuration
-data used when creating connections.
+Regarder :ref:`database-configuration` pour plus d'informations sur la
+configuration de données utilisée lors de la création de connections.
 
 
 .. _database-data-types:
 
-Data Types
-==========
+Types de Données
+================
 
 .. php:class:: Type
 
-Since not every database vendor includes the same set of data types, or
-the same names for similar data types, CakePHP provides a set of abstracted
-data types for use with the database layer. The types CakePHP supports are:
+Puisque tout vendor de base de données n'inclut pas la même définition des types
+de données, ou les mêmes noms pour des types de données similaires, CakePHP
+fournit un ensemble de types de données abstraites à utiliser avec la
+couche de la base de données. Les types que CakePHP supporte sont:
 
 string
-    Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column.
+    Généralement backed by CHAR or VARCHAR columns. Utiliser l'option ``fixed``
+    va forcer une colonne CHAR.
 text
-    Maps to TEXT types
+    Maps vers les types TEXT
 uuid
-    Maps to the UUID type if a database provides one, otherwise this will
-    generate a CHAR(36) field.
+    Maps vers le type UUID si une base de données en fournit un, sinon cela
+    générera un champ CHAR(36).
 integer
-    Maps to the INTEGER type provided by the database.
+    Maps vers le type INTEGER fourni par la base de données.
 biginteger
-    Maps to the BIGINT type provided by the database.
+    Maps vers le type BIGINT fourni par la base de données.
 float
-    Maps to either DOUBLE or FLOAT depending on the database. The ``precision``
-    option can be used to define the precision used.
+    Maps soit vers DOUBLE, soit vers FLOAT selon la base de données.
+    L'option ``precision`` peut être utilisée pour définir la précision utilisée.
 decimal
-    Maps to the DECIMAL type. Supports the ``length`` and  ``precision``
-    options.
+    Maps vers le type DECIMAL. Supporte les options ``length`` et  ``precision``.
 boolean
-    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans.
+    Maps vers BOOLEAN à part pour MySQL, où TINYINT(1) est utilisé pour
+    représenter les boléens.
 binary
-    Maps to the BLOB or BYTEA type provided by the database.
+    Maps vers le type BLOB ou BYTEA fourni par la base de données.
 date
-    Maps to a timezone naive DATE column type.
+    Maps vers un type de colonne DATE sans timezone.
 datetime
-    Maps to a timezone naive DATETIME column type. In postgres this turns into
-    a TIMESTAMP type.
+    Maps vers un type de colonne DATETIME sans timezone. Dans postgres, ceci
+    retourne un type TIMESTAMP.
 timestamp
-    Maps to the TIMESTAMP type.
+    Maps vers le type TIMESTAMP.
 time
-    Maps to a TIME type in all databases.
+    Maps vers un type TIME dans toutes les bases de données.
 
-These types are used in both the schema reflection features that CakePHP
-provides, and schema generation features CakePHP uses when using test fixtures.
+Ces types sont utilisés pour les fonctionnalités de reflection de schema que
+CakePHP fournit, et les fonctionnalités de génération de schema que CakePHP
+utilise lors des fixtures de test.
 
-Each type can also provide translation functions between PHP and SQL
-representations. These methods are invoked based on the type hints provided when
-doing queries. For example a column that is marked as 'datetime' will
-automatically convert input parameters from ``DateTime`` instances into a
-timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
-handles, and generate file handles when reading data.
+Chaque type peut aussi fournir des fonctions de traduction entre les
+représentations PHP et SQL. Ces méthodes sont invoquées selon le type hints
+fourni lorsque les queries sont faites. Par exemple une colonne qui est marquée
+en 'datetime' va automatiquement convertir les paramètres d'input d'instances
+``DateTime`` en timestamp ou chaines de dates formatées. Egalement, les
+colonnes 'binary' vont accepter un fichier qui gère, et génère le fichier lors
+de la lecture des données.
 
-Adding Custom Types
--------------------
+Ajouter des types personnalisés
+-------------------------------
 
 .. php:staticmethod:: map($name, $class)
 
-If you need to use vendor specific types that are not built into CakePHP you can
-add additional new types to CakePHP's type system. Type classes are expected to
-implement the following methods:
+Si vous avez besoin d'utiliser des types de vendor spécifiques qui ne sont pas
+construit dans CakePHP, vous pouvez ajouter des nouveaux types supplémentaires
+au système de type de CakePHP. Ces classes de type s'attendent à implémenter
+les méthodes suivantes:
 
 * toPHP
 * toDatabase
 * toStatement
 
-An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
-we could make the following type class::
+Une façon facile de remplir l'interface basique est d'étendre
+:php:class:`Cake\Database\Type`. Par exemple, si vous souhaitez ajouter un type
+JSON, nous pourrions faire la classe type suivante::
 
     namespace App\Database\Type;
 
@@ -259,49 +264,52 @@ we could make the following type class::
 
     }
 
-By default the ``toStatement`` method will treat values as strings which will
-work for our new type. Once we've created our new type, we need to add it into
-the type mapping. During our application bootstrap we should do the following::
+Par défaut, la méthode ``toStatement`` va traiter les valeurs en chaines qui
+vont fonctionner pour notre nouveau type. Une fois que nous avons créé notre
+nouveau type, nous avons besoin de l'ajouter dans le mapping de type. Pendant
+le bootstrap de notre application, nous devrions faire ce qui suit::
 
     use Cake\Database\Type;
 
     Type::map('json', 'App\Database\Type\JsonType');
 
-We can then overload the reflected schema data to use our new type, and
-CakePHP's database layer will automatically convert our JSON data when creating
-queries.
+Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
+notre nouveau type, et la couche de base de données de CakePHP va
+automatiquement convertir notre données JSON lors de la création de queries.
 
-Connection Classes
-==================
+Les Classes de Connection
+=========================
 
 .. php:class:: Connection
 
-Connection classes provide a simple interface to interact with database
-connections in a consistent way. They are intended as a more abstract interface to
-the driver layer and provide features for executing queries, logging queries, and doing
-transactional operations.
+Les classes de Connection fournissent une interface simple pour intéragir avec
+les connections à la base de données d'une façon pratique. Elles ont pour
+objectif d'être une interface plus abstraite à la couche de driver et de fournir
+des fonctionnalités pour l'execution des queries, le logging des queries, et
+de faire des opérations transactionnelles.
 
 .. _database-queries:
 
-Executing Queries
------------------
+L'execution de Queries
+----------------------
 
 .. php:method:: query($sql)
 
-Once you've gotten a connection object, you'll probably want to issue some
-queries with it. CakePHP's database abstraction layer provides wrapper features
-on top of PDO and native drivers. These wrappers provide a similar interface to
-PDO. There are a few different ways you can run queries depending on the type of
-query you need to run and what kind of results you need back. The most basic
-method is ``query()`` which allows you to run already completed SQL queries::
+Une fois que vous avez un objet connection, vous voudrez probablement réaliser
+quelques queries avec. La couche d'abstraction de CakePHP fournit des
+fonctionnalités de wrapper au-dessus de PDO et des drivers natifs. Ces wrappers
+fournissent une interface similaire à PDO. Il y a quelques différentes façons
+de lancer les queries selon le type de query que vous souhaitez lancer et
+selon le type de résultats que vous souhaitez en retour. La méthode la plus
+basique est ``query()`` qui vous permet de lancer des queries SQL déjà complètes::
 
     $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
-The ``query`` method does not allow for additional parameters. If you need
-additional parameters you should use the ``execute()`` method, which allows for
-placeholders to be used::
+La méthode ``query`` ne permet pas des paramètres supplémentaires. Si vous
+avez besoin de paramètres supplémentaires, vous devriez utiliser la méthode
+``execute()``, ce qui permet aux placeholders d'être utilisés::
 
     $stmt = $conn->execute(
         'UPDATE posts SET published = ? WHERE id = ?',

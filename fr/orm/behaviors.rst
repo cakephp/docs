@@ -7,11 +7,11 @@ Cependant, les behaviors sont implémentés en classes séparées. Ceci leur per
 de hook dans le cycle de vie des callbacks que les models emettent, tout en
 fournissant des fonctionnalités de type trait.
 
-Behaviors provide a convenient way to package up behavior that is common across
-many models. For example, CakePHP includes a ``TimestampBehavior``. Many
-models will want timestamp fields, and the logic to manage these fields is
-not specific to any one model. It is these kinds of scenarios that behaviors are
-a perfect fit for.
+Les Behaviors fournissent une façon pratique de packager un behavior qui est
+commun à plusieurs models. Par exemple, CakePHP inclut un ``TimestampBehavior``.
+Plusieurs models voudront des champs timestamp, et la logique pour gérer ces
+champs n'est pas spécifique à un seul model. C'est dans ce genre de scénario
+que les behaviors sont utiles.
 
 Utiliser les Behaviors
 ======================

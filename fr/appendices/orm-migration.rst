@@ -5,29 +5,29 @@ CakePHP 3.0 apporte un nouvel ORM qui a été réécrit de zéro.
 Alors que l'ORM utilisé dans 1.x et 2.x nous a bien servi pendant un long
 moment, il avait quelques problèmes que nous souhaitions régler.
 
-* Frankenstein - est-ce un enregistrement, ou une table? Couramment c'est les
+* Frankenstein - est-ce un enregistrement, ou une table? Actuellement c'est les
   deux.
 * API incohérente - Model::read() par exemple.
-* Pas d'objet query - Queries sont toujours définies comme des tableaux, ceci
-  amène quelques limitations et restrictions. Par exemple, cela rend les unions
-  et les sous-requêtes plus compliquées.
-* Retourne des tableaux. C'est une plainte courante au sujet de CakePHP, et a
-  probablement réduit le passage à certains niveaux.
-* Pas d'objet d'enregistrement - Ceci rend les méthodes de format d'attache
+* Pas d'objet query - Les queries sont toujours définies comme des tableaux,
+  ceci amène quelques limitations et restrictions. Par exemple, cela rend les
+  unions et les sous-requêtes plus compliquées.
+* Retourne des tableaux. C'est une plainte courante au sujet de CakePHP, et
+  ceci a probablement réduit le passage à certains niveaux.
+* Pas d'objet d'enregistrement - Ceci rend l'attachement de méthodes de format
   difficile/impossible.
-* Containable - Devrait être une partie de l'ORM, pas un behaviour de cinglé.
+* Containable - Devrait être une partie de l'ORM, pas un behaviour compliqué.
 * Recursive - Ceci devrait être mieux controllé en définissant quelles
   associations sont inclues, et pas un niveau de récursivité.
 * DboSource - C'est un calvaire, et le Model repose dessus plus que sur la
   source de données. Cette séparation pourrait être plus propre et plus simple.
-* Validation - Devrait être séparé, c'est une grande fonction folle
-  maintenant. La rendre un peu plus réutilisable rendrait le framework plus
+* Validation - Devrait être séparée, c'est actuellement une énorme fonction
+  ingérable. La rendre un peu plus réutilisable rendrait le framework plus
   extensible.
 
-L'ORM dans CakePHP 3.0 résoud ces problèmes et beaucoup d'autres. Le nouvel ORM
-se focalise sur les stockages des données relationnelles maintenant. Dans le
-future et à travers les plugins, nous ajouterons des stockages non relationnels
-comme ElasticSearch et les autres.
+L'ORM dans CakePHP 3.0 résoud ces problèmes et beaucoup d'autres encore. Le
+nouvel ORM se focalise actuellement sur les stockages des données
+relationnelles. Dans le future et à travers les plugins, nous ajouterons des
+stockages non relationnels comme ElasticSearch et d'autres encore.
 
 Design du nouvel ORM
 ====================
@@ -40,35 +40,35 @@ séparé en plus de couches:
 * ``Cake\Database\Connection`` - Fournit une façon de créer une plateforme
   indépendante et utilise les connections. Cette classe fournit une façon
   d'utiliser les transactions, d'exécuter les queries et d'accéder aux données
-  du schéma.
+  du schema.
 * ``Cake\Database\Dialect`` - Les classes dans ce namespace fournissent la
-  plateforme spécifique à SQL et transforme les queries pour fonctionner autour
-  des limitations de plateforme spécifique.
-* ``Cake\Database\Type`` - Est-ce que la classe de passerelle vers le système
+  plateforme spécifique à SQL et transforme les queries pour fonctionner selon
+  les limitations spécifiques de plateforme.
+* ``Cake\Database\Type`` - Est la classe de passerelle vers le système
   de conversion de type de base de données de CakePHP. C'est un framework
-  modulable pour l'ajout des types de colonnes abstraites et fournir des
+  modulable pour l'ajout des types de colonnes abstraites et pour fournir des
   mappings entre base de données, les représentations de PHP et les liens PDO
   pour chaque type de données. Par exemple, les colonnes datetime sont
   maintenant représentées comme des instances ``DateTime`` dans votre code.
 * ``Cake\ORM\Table`` - Le point d'entrée principal dans le nouvel ORM. Fournit
-  l'accès à une table unique. Gère la définition d'assocation, utilise les
+  l'accès à une table unique. Gère la définition d'association, utilise les
   behaviors et la création d'entités et les objets query.
 * ``Cake\ORM\Behavior`` - La classe de base pour les behaviors, qui agit de
-  façon très similaire des behaviors dans les versions précédentes de CakePHP.
-* ``Cake\ORM\Query`` - Un objet courant basé sur query builder qui remplace
+  façon très similaire aux behaviors dans les versions précédentes de CakePHP.
+* ``Cake\ORM\Query`` - Un objet courant basé sur un query builder qui remplace
   les tableaux imbriqués profondément utilisés dans les versions précédentes de
   CakePHP.
-* ``Cake\ORM\ResultSet`` - Une collection de résultats qui donne les outils
+* ``Cake\ORM\ResultSet`` - Une collection de résultats qui donne des outils
   puissants pour manipuler les données dans l'ensemble.
 * ``Cake\ORM\Entity`` - Représente un résultat d'une colonne unique. Rend
   les données accessibles et sérialise vers des formats divers en un tour de
   main.
 
 Maintenant que vous êtes plus familier avec certaines des classes avec
-lesquelles vous intéragissez avec plus fréquemment dans le nouvel ORM, il est
+lesquelles vous intéragissez le plus fréquemment dans le nouvel ORM, il est
 bon de regarder les trois plus importantes classes. Les classes
-``Table``, ``Query`` et ``Entity`` font plus du nouveau lifting du nouvel
-ORM, et chacun sert un objectif différent.
+``Table``, ``Query`` et ``Entity`` sont les grandes nouveautés du lifting du
+nouvel ORM, et chacun sert un objectif différent.
 
 Les objets Table
 ----------------
@@ -82,32 +82,32 @@ Table gèrent les tâches comme:
 - Validation et sauvegarde des entités.
 - Suppression des entités.
 - Définir & accéder aux associations.
-- Triggering callback events.
+- Attraper les évènements de callback.
 - Intéragir avec les behaviors.
 
 Le chapitre de la documentation sur :doc:`/orm/table-objects` fournit bien plus
 de détails sur la façon d'utiliser les objets de table que ce guide.
 Généralement quand on déplace le code du model existant au-dessus de lui,
-il va finir dans un objet table. Les objets table ne contiennent aucune
+il va finir dans un objet Table. Les objets Table ne contiennent aucune
 plateforme dépendant de SQL. A la place, ils collaborent avec les entités et le
 query builder pour faire leur travail. Les objets table intéragissent aussi
-avec les behaviors et d'autres parties à travert les évènements publiés.
+avec les behaviors et d'autres parties à travers les évènements publiés.
 
 Query objects
 -------------
 
-Alors celles-ci ne sont pas des classes que vous allez construire vous-même,
+Alors que celles-ci ne sont pas des classes que vous allez construire vous-même,
 votre code d'application rendra l'utilisation extensive de
 :doc:`/orm/query-builder` ce qui est central dans le nouvel ORM.
 Le query builder facilite la construction de queries simple ou complexes
 incluant celles qui étaient précédemment très difficiles dans CakePHP comme
 ``HAVING``, ``UNION`` et les sous-requêtes.
 
-Les différents appels de find() que votre application a couramment auront
-besoin d'être mis à jour pour utiliser le nouveau query builder. L'objet Query
-est responsable de la façon de contenir les données pour faire une query sans
-exécuter la query elle-même. Elle collabore avec la connection/dialect pour
-générer la plateforme spécifique pour SQL qui est exécuté en créant un
+Les différents appels de find() que votre application utilise couramment
+auront besoin d'être mis à jour pour utiliser le nouveau query builder. L'objet
+Query est responsable de la façon de contenir les données pour faire une query
+sans exécuter la query elle-même. Elle collabore avec la connection/dialect pour
+générer la plateforme spécifique pour SQL qui est exécutée en créant un
 ``ResultSet`` en sortie.
 
 Les objets Entity
@@ -115,46 +115,46 @@ Les objets Entity
 
 Dans les versions précédentes de CakePHP la classe ``Model`` retournait
 des tableaux de dumb qui ne contenaient pas de logique ou de behavior. Alors
-que la communité faisait cela plus rapide à venir et moins douloureux avec les
-projets comme CakeEntity, le tableau de résulats était souvent une façon courte
+que la communauté rendait cela accessible et moins douloureux avec les
+projets comme CakeEntity, le tableau de résulats était souvent une façon
 qui causait des troubles à beaucoup de développeurs. Pour CakePHP 3.0, l'ORM
-retourne toujours l'ensemble des résultats de l'objet à moins que vous ne
+retourne toujours l'ensemble des résultats en objet à moins que vous ne
 désactiviez explicitement cette fonctionnalité. Le chapitre sur
 :doc:`/orm/entities` couvre les différentes tâches que vous pouvez accomplir
 avec les entities.
 
-Les entities sont créés d'une des deux façons. Soit en chargeant les données
-à partir de la base de données, soit en convertissant les données de requête
-en entities. Une fois créées, les entities vous permettent de manipuler
-les données qu'elles contiennent et font persister leurs données en collaborant
-avec les objets table.
+Les entities sont créées en choississant l'une des deux façons suivantes. Soit
+en chargeant les données à partir de la base de données, soit en convertissant
+les données de requête en entities. Une fois créées, les entities vous
+permettent de manipuler les données qu'elles contiennent et font persister leurs
+données en collaborant avec les objets Table.
 
 Différences de Clé
 ==================
 
 Le nouvel ORM est un grand renouveau par rapport à la couche ``Model``
-existante, plusieurs différences importantes qui sont importantes dans la
-compréhension dont le nouvel ORM opère et comment mettre à jour votre code.
+existante. Plusieurs différences importantes à comprendre sur la façon
+dont le nouvel ORM opère et comment mettre à jour votre code.
 
 Les règles d'Inflection mises à jour
 ------------------------------------
 
 Vous avez peut-être noté que les classes de table ont un nom pluralisé. En plus
 d'avoir les noms pluralisés, les associations se réfèrent aussi à la forme
-plurielle. C'est en opposition au Model où les noms et associations étaient
-singulières. Il y avait plusieurs raisons pour ce changement:
+plurielle. C'est en opposition par rapport au Model où les noms et associations
+étaient singulières. Il y avait plusieurs raisons pour ce changement:
 
-* Les classes de Table représentent **collections** de données, pas les colonnes
-  uniques.
+* Les classes de Table représentent des **collections** de données, pas des
+  colonnes uniques.
 * Les associations lient les tables ensemble, décrivant les relations entre
   plusieurs choses.
 
-Alors que les conventions pour les objets table sont de toujours utiliser
-les fomres plurielles, vos entities auront leurs propriétés d'association
+Alors que les conventions pour les objets Table sont de toujours utiliser
+les formes plurielles, vos entities auront leurs propriétés d'association
 peuplées basées sur le type d'association. Les associations BelongsTo et HasOne
 utiliseront la forme au singulier, tandis que HasMany et BelongsToMany (HABTM)
-utiliseront les formes pluriel. Le changement de convention
-pour les objects table est plus apparent lors de la construction de queries. A
+utiliseront la forme plurielle. Le changement de convention
+pour les objects Table est plus apparent lors de la construction de queries. A
 la place d'expressions de requêtes comme::
 
     // Faux
@@ -165,7 +165,7 @@ Vous avez besoin d'utiliser la forme au pluriel::
     // Correct
     $query->where(['Users.active' => 1]);
 
-Find retourne un objet query
+Find retourne un objet Query
 ----------------------------
 
 Une différence importante dans le nouvel ORM est qu'appeler ``find`` sur une
@@ -181,7 +181,7 @@ Il est possible de modifier les requêtes plus tard, après avoir appeler
 
 Il est possible d'empiler les finders personnalisés pour ajouter les conditions
 à la suite, pour trier, limiter et toute autre clause pour la même requête
-avant qu'elle soit exécutée::
+avant qu'elle ne soit exécutée::
 
     $query = $articles->find('approved')->find('popular');
     $query->find('latest');
@@ -193,7 +193,7 @@ sous-requêtes plus facilement que jamais::
     $favoritesQuery = $article->find('favorites', ['for' => $user]);
     $query->where(['id' => $favoritesQuery->select(['id'])]);
 
-Vous pouvez décorer les requeêtes avec des itérateurs et des méthodes d'appel
+Vous pouvez décorer les requêtes avec des itérateurs et des méthodes d'appel
 sans même toucher à la base de données, c'est bien quand vous avez des parties
 de votre view mise en cache et avez les résultats pris à partir de la base de
 données qui n'est en fait pas nécessaire::
@@ -236,11 +236,11 @@ de juste appeler ``get``::
 Changements de la méthode Finder
 --------------------------------
 
-Retourner un objet query à partir d'une méthode find a plusieurs avantages,
+Retourner un objet Query à partir d'une méthode find a plusieurs avantages,
 mais vient avec un coût pour les gens migrant de 2.x. Si vous aviez quelques
 méthodes find personnalisées dans vos models, elles auront besoin de quelques
-modifications. C'est la façon dont vous créez les méthodes finder personnalisées
-dans 3.0::
+modifications. C'est de cette façon que vous créez les méthodes finder
+personnalisées dans 3.0::
 
     class ArticlesTable {
 
@@ -265,8 +265,8 @@ juste les fonctions de collection.
 Vous pouvez peut-être noter que les finders personnalisés recoivent
 un tableau d'options, vous pouvez passer toute information supplémentaire
 à votre finder en utilisant ce paramètre. C'est une bonne nouvelle pour la
-migration de gens à partir de 2.x. Chacune des clés requêtées qui ont été
-utilisées dans les versions précédentes sera convertie automatiquement pour
+migration de gens à partir de 2.x. Chacune des clés requêtées qui a été
+utilisée dans les versions précédentes sera convertie automatiquement pour
 vous dans 3.x vers les bonnes fonctions::
 
     // Ceci fonctionne dans les deux CakePHP 2.x et 3.0
@@ -350,8 +350,8 @@ après le callback ``afterFind``.
 
 Alors que les champs virtuels ne sont plus une fonctionnalité de l'ORM,
 l'ajout des champs calculés est facile à faire dans les méthodes finder. En
-utilisant le query builder et les objets expression que vous pouvez atteindre
-les mêmes résultats que les champs virtuels donnent::
+utilisant le query builder et les objets expression, vous pouvez atteindre
+les mêmes résultats que les champs virtuels, cela donne::
 
     namespace App\Model\Table;
 
@@ -369,8 +369,8 @@ les mêmes résultats que les champs virtuels donnent::
 Les associations ne sont plus définies en propriétés
 ----------------------------------------------------
 
-Dans les précéentes versions de CakePHP, les diverses associations que vos
-models avez, ont été défini dans les propriétés comme ``$belongsTo`` et
+Dans les précédentes versions de CakePHP, les diverses associations que vos
+models avaient, ont été définies dans les propriétés comme ``$belongsTo`` et
 ``$hasMany``. Dans CakePHP 3.0, les associations sont créées avec les méthodes.
 L'utilisation de méthodes vous permet de mettre de côté plusieurs définitions
 de classes de limitations, et fournissent seulement une façon de définir les
@@ -448,7 +448,7 @@ règles::
     }
 
 Vous pouvez définir autant de méthodes de validation que vous souhaitez. Chaque
-méthode devrait être préfixée avec ``validation`` et accèpte un argument
+méthode devrait être préfixée avec ``validation`` et accepte un argument
 ``$validator``. Vous pouvez ensuite utiliser vos validateurs lors de la
 sauvegarde de l'utilisation de l'option ``validate``. Regardez la
 documentation sur :ref:`saving-entities` pour plus d'informations.
@@ -496,9 +496,9 @@ de CakePHP 2.x:
 - Les Behaviors ne sont plus partagés par plusieurs tables. Cela signifie
   que vous n'avez plus à 'donner un namespace' aux configurations stockés dans
   behavior. Chaque table utilisant un behavior va créer sa propre instance.
-- La méthode signatures pour les méthodes mixin ont changé.
-- La méthode signatures pour les méthodes de callback ont changé.
-- La classe de base pour les behaviors ont changé.
+- La méthode signatures pour les méthodes mixin a changé.
+- La méthode signatures pour les méthodes de callback a changé.
+- La classe de base pour les behaviors a changé.
 - Les Behaviors peuvent facilement ajouter des méthodes find.
 
 Nouvelle classe de Base
@@ -548,7 +548,7 @@ Callback Method Signature Changes
 ---------------------------------
 
 Les callbacks de Behavior ont été unifiés avec les autres méthodes listener.
-Au lieu de leurs arguments précédants, ils attendent un objet event en premier
+Au lieu de leurs arguments précédents, ils attendent un objet event en premier
 argument::
 
     public function beforeFind(Event $event, Query $query, array $options) {
