@@ -491,41 +491,20 @@ visit the CakePHP API. Check out
         }
 
 
-$components, $helpers and $uses
--------------------------------
+$components, $helpers
+---------------------
 
-The next most often used controller attributes tell CakePHP what
-helpers, components, and models you'll be using in conjunction with
-the current controller. Using these attributes make MVC classes
-given by ``$components`` and ``$uses`` available to the controller
-as class variables (``$this->ModelName``, for example) and those
-given by ``$helpers`` to the view as an object reference variable
-(``$this->{$helpername}``).
+The next most often used controller attributes tell CakePHP what helpers,
+components, and models you'll be using in conjunction with the current
+controller. Using these attributes make MVC classes given by ``$components``
+available to the controller as class variables (``$this->ComponentName``, for
+example) and those given by ``$helpers`` to the view as an object reference
+variable (``$this->{$helpername}``).
 
 .. note::
 
     Each controller has some of these classes available by default, so
     you may not need to configure your controller at all.
-
-.. php:attr:: uses
-
-    Controllers have access to their primary model available by
-    default. Our RecipesController will have the Recipe model class
-    available at ``$this->Recipe``, and our ProductsController also
-    features the Product model at ``$this->Product``. However, when
-    allowing a controller to access additional models through the
-    ``$uses`` variable, the name of the current controller's model must
-    also be included. This is illustrated in the example below.
-
-    If you do not wish to use a Model in your controller, set
-    ``public $uses = array()``. This will allow you to use a controller
-    without a need for a corresponding Model file. However, the models
-    defined in the ``AppController`` will still be loaded. You can also use
-    ``false`` to not load any models at all. Even those defined in the
-    ``AppController``.
-
-    .. versionchanged:: 2.1
-        Uses now has a new default value, it also handles ``false`` differently.
 
 .. php:attr:: helpers
 
@@ -540,7 +519,6 @@ given by ``$helpers`` to the view as an object reference variable
     additional MVC classes::
 
         class RecipesController extends AppController {
-            public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
             public $components = array('RequestHandler');
         }
@@ -552,10 +530,10 @@ given by ``$helpers`` to the view as an object reference variable
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
-    a controller will use. Like ``$helpers`` and ``$uses`` components in your
-    controllers are merged with those in parent classes.  As with
-    ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
-    for more information.
+    a controller will use. Like ``$helpers`` components in your controllers are
+    merged with those in parent classes.  As with ``$helpers`` you can pass
+    settings into components.  See :ref:`configuring-components` for more
+    information.
 
 Other Attributes
 ----------------

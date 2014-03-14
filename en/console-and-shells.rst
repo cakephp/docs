@@ -193,17 +193,20 @@ should use method names other than ``main``.
 Using Models in Your Shells
 ---------------------------
 
-You'll often need access to your application's business logic in shell utilities;
-CakePHP makes that super easy. By setting a ``$uses`` property, you can define an
-array of models you want to have access to in your shell. The defined models
-are loaded in as properties attached to your shell, just like a controller gets
-models attached to it::
+You'll often need access to your application's business logic in shell
+utilities; CakePHP makes that super easy. You can load models in shells, just as
+you would in a controller using ``loadModel()``. The loaded models are set as
+properties attached to your shell::
 
     class UserShell extends AppShell {
-        public $uses = array('User');
+
+        public function initialize() {
+            parent::initialize();
+            $this->loadModel('Users');
+        }
 
         public function show() {
-            $user = $this->User->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
     }
@@ -232,7 +235,6 @@ Each task must at least implement an ``execute()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
 
     class FileGeneratorTask extends Shell {
-        public $uses = array('User');
         public function execute() {
 
         }

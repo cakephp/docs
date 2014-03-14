@@ -340,7 +340,7 @@ Controller
 Controller
 ----------
 
-- The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
+- The ``$helpers``, ``$components`` properties are now merged
   with **all** parent classes not just ``AppController`` and the plugin
   AppController. The properties are merged differently now as well. Instead of
   all settings in all classes being merged together, the configuration defined
