@@ -408,7 +408,7 @@ like::
             throw new NotFoundException(__('Invalid article'));
         }
 
-        $article = $this->get($id);
+        $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
