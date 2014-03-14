@@ -250,14 +250,15 @@ ArticlesController::
         }
 
         public function add() {
+            $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
-                $article = $this->Articles->newEntity($this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Session->setFlash(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Session->setFlash(__('Unable to add your article.'));
             }
+            $this->set('article', $article);
         }
     }
 
@@ -319,7 +320,7 @@ Here's our add view:
 
     <h1>Add Article</h1>
     <?php
-    echo $this->Form->create('Articles');
+    echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->button('Save Article');
@@ -407,23 +408,17 @@ like::
             throw new NotFoundException(__('Invalid article'));
         }
 
-        $article = $this->Articles->findById($id);
-        if (!$article) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-
+        $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->id = $id;
-            if ($this->Articles->save($this->request->data)) {
+            $this->Articles->patchEntity($article, $this->request->data);
+            if ($this->Articles->save($article)) {
                 $this->Session->setFlash(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Session->setFlash(__('Unable to update your article.'));
         }
 
-        if (!$this->request->data) {
-            $this->request->data = $article;
-        }
+        $this->set('article', $article);
     }
 
 This action first ensures that the user has tried to access an existing record.
@@ -431,11 +426,9 @@ If they haven't passed in an ``$id`` parameter, or the article does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If it is, then we
-use the POST data to update our article record, or kick back and show the user
+use the POST data to update our article entity by using the 'patchEntity' method.
+Finally we use the table object to save the entity back or kick back and show the user
 validation errors.
-
-If there is no data set to ``$this->request->data``, we simply set it to the
-previously retrieved article.
 
 The edit view might look something like this:
 
@@ -445,7 +438,7 @@ The edit view might look something like this:
 
     <h1>Edit Article</h1>
     <?php
-    echo $this->Form->create('Articles');
+    echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->input('id', ['type' => 'hidden']);
