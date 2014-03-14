@@ -377,7 +377,7 @@ Controller
 Controller
 ----------
 
-- Les propriétés ``$helpers``, ``$components``, et ``$uses`` sont maintenant
+- Les propriétés ``$helpers``, ``$components`` sont maintenant
   fusionnées avec **toutes** les classes parentes, pas seulement
   ``AppController`` et le app controller du plugin.
 - ``Controller::httpCodes()`` a été retirée, utilisez
