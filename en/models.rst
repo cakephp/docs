@@ -75,11 +75,6 @@ for this example ``Ingredient.php``.
     CakePHP can't find your model and you either need to check the file
     names, your application cache, or both.
 
-.. note::
-
-    Some class names are not usable for model names. For instance
-    "File" cannot be used as "File" is a class already existing in the
-    CakePHP core.
 
 
 With your model defined, it can be accessed from within your
