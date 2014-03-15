@@ -1300,9 +1300,10 @@ Closing the Form
 
 .. php:method:: end($secureAttributes = [])
 
-    The ``end()`` method closes and completes a form. Often, ``end()`` will only output
-    a closing form tag, but using ``end()`` is a good practice as it enables FormHelper to insert
-    hidden form elements that :php:class:`SecurityComponent` requires:
+    The ``end()`` method closes and completes a form. Often, ``end()`` will only
+    output a closing form tag, but using ``end()`` is a good practice as it
+    enables FormHelper to insert hidden form elements that
+    :php:class:`Cake\\Controller\\Component\\SecurityComponent` requires:
 
     .. code-block:: php
 
@@ -1332,8 +1333,9 @@ Closing the Form
 
     .. note::
 
-        If you are using :php:class:`SecurityComponent` in your application you
-        should always end your forms with ``end()``.
+        If you are using
+        :php:class:`Cake\\Controller\\Component\\SecurityComponent` in your
+        application you should always end your forms with ``end()``.
 
 Customizing the Templates FormHelper Uses
 =========================================
@@ -1442,6 +1444,112 @@ For example::
 
 If you disable the fieldset, the legend will not print.
 
+Adding Custom Widgets
+=====================
+
+CakePHP makes it easy to add custom input widgets in your application, and use
+them like any other input type. All of the core input types are implemented as
+wigets, which means you can easily override any core widget with your own
+implemenation as well.
+
+Building a Widget Class
+-----------------------
+
+Widget classes have a very simple required interface. They must implement the
+:php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
+a the ``render(array $data)`` method to be implemented. The render method
+expects an array of data to build the widget and is expected to return an string
+of HTML for the widget. If CakePHP is constructing your widget you can expect to
+get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
+any dependencies you define. If we wanted to build an Autocomplete widget you
+could do the following::
+
+    namespace App\View\Widget;
+
+    use Cake\View\Widget\WidgetInterface;
+
+    class Autocomplete implements WidgetInterface {
+
+        protected $_templates;
+
+        public function __construct($templates) {
+            $this->_templates = $templates;
+        }
+
+        public function render(array $data) {
+            $data += [
+                'name' => '',
+            ];
+            return $this->_templates->format('autocomplete', [
+                'name' => $data['name'],
+                'attrs' => $this->_templates->formatAttributes($data, ['name'])
+            ]);
+        }
+
+    }
+
+Obviously, this is a very simple example, but it demonstrates how a custom
+widget could be built.
+
+Using Widgets
+-------------
+
+You can load custom widgets either in the ``$helpers`` array or using the
+``addWidget()`` method. In your helpers array, widgets are defined as
+a setting::
+
+    public $helpers = [
+        'Form' => [
+            'widgets' => [
+                'autocomplete' => ['App\View\Widget\Autocomplete']
+            ]
+        ]
+    ];
+
+If your widget requires other widgets, you can have FormHelper populate those
+dependencies by declaring them::
+
+    public $helpers = [
+        'Form' => [
+            'widgets' => [
+                'autocomplete' => [
+                    'App\View\Widget\Autocomplete',
+                    'text',
+                    'label'
+                ]
+            ]
+        ]
+    ];
+
+In the above example, the autocomplete widget would depend on the ``text`` and
+``label`` widgets. When the autocomplete widget is created, it will be passed
+the widget objects that are related to the ``text`` and ``label`` names. To add
+widgets using the ``addWidget()`` method would look like::
+
+    // Using a classname.
+    $this->Form->addWidget(
+        'autocomplete',
+        ['App\View\Widget\Autocomplete', 'text' 'label']
+    );
+
+    // Using an instance - requires you to resolve dependencies.
+    $autocomplete = new Autocomplete(
+        $this->Form->getTemplater(),
+        $this->Form->widgetRegistry()->get('text'),
+        $this->Form->widgetRegistry()->get('label'),
+    );
+    $this->Form->addWidget('autocomplete', $autocomplete);
+
+Once added/replaced, widgets can be used as the input 'type'::
+
+    echo $this->Form->input('search', ['type' => 'autocomplete']);
+
+This will create the custom widget with a label and wrapping div just like
+``input()`` always does. Alternatively, you can create just the input widget
+using the magic method::
+
+    echo $this->Form->autocomplete('search', $options);
+
 Working with SecurityComponent
 ==============================
 
@@ -1465,7 +1573,7 @@ ensure that the special ``_Token`` inputs are generated.
 .. php:method:: secure(array $fields = [])
 
     Generates a hidden field with a security hash based on the fields used
-    in the form. 
+    in the form.
 
 
 .. meta::
