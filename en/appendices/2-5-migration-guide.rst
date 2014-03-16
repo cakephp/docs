@@ -50,6 +50,12 @@ CookieComponent
   :php:class:`Security`. You can enable this by calling
   :php:meth:`CookieComponent::type()` with 'aes'.
 
+RequestHandlerComponent
+-----------------------
+
+- :php:meth:`RequestHandlerComponent::renderAs()` no longer sets ``Controller::$ext``.
+  It caused problems when using a non default extension for views.
+
 Scaffold
 --------
 - Dynamic Scaffold is now deprecated and will be removed in 3.0.
