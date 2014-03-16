@@ -150,10 +150,6 @@ There are a number of options for create():
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
-* ``$options['table']`` This option lets you specify which table you are
-  creating/editing entities for. This option is useful when you do not have a
-  concrete entity class and are relying on the generated class.
-
 * ``$options['url']`` If the desired form action isn't in the current
   controller, you can specify a URL for the form action using the 'url' key of
   the $options array. The supplied URL can be relative to your CakePHP

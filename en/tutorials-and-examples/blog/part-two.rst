@@ -320,7 +320,7 @@ Here's our add view:
 
     <h1>Add Article</h1>
     <?php
-    echo $this->Form->create($article, ['table' => 'Articles']);
+    echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->button('Save Article');
@@ -334,11 +334,10 @@ form. Here's the HTML that ``$this->Form->create()`` generates:
 
     <form method="post" action="/articles/add">
 
-When creating forms you can pass the entity you want to edit. In this view,
-we'll pass our empty article entity. Since we have not made a concrete class for
-our ``ArticlesTable`` to use we need to provide the ``table`` option. Since we
-have not provided a ``url`` or ``action`` option, our form will submit to the
-current URL via POST.
+If ``create()`` is called with no parameters supplied, it assumes
+you are building a form that submits to the current controller's
+``add()`` action (or ``edit()`` action when ``id`` is included in
+the form data), via POST.
 
 The ``$this->Form->input()`` method is used to create form elements
 of the same name. The first parameter tells CakePHP which field
@@ -439,7 +438,7 @@ The edit view might look something like this:
 
     <h1>Edit Article</h1>
     <?php
-    echo $this->Form->create($article, ['table' => 'Articles']);
+    echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->input('id', ['type' => 'hidden']);
