@@ -192,7 +192,7 @@ ArticlesController now::
     }
 
 The ``set()`` call should look familiar. Notice we're using
-``findById()`` rather than ``find('all')`` because we only really want
+``get()`` rather than ``find('all')`` because we only really want
 a single article's information.
 
 Notice that our view action takes a parameter: the ID of the article
@@ -347,11 +347,8 @@ textarea. There's a bit of introspection and automagic here:
 ``input()`` will output different form elements based on the model
 field specified.
 
-The ``$this->Form->end()`` call generates a submit button and ends
-the form. If a string is supplied as the first parameter to
-``end()``, the FormHelper outputs a submit button named accordingly
-along with the closing form tag. Again, refer to
-:doc:`/views/helpers` for more on helpers.
+The ``$this->Form->end()`` call ends
+the form. Again, refer to :doc:`/views/helpers` for more on helpers.
 
 Now let's go back and update our ``/App/Template/Articles/index.ctp``
 view to include a new "Add Article" link. Before the ``<table>``, add
@@ -442,7 +439,8 @@ The edit view might look something like this:
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->input('id', ['type' => 'hidden']);
-    echo $this->Form->end('Save Article');
+    echo $this->Form->button('Save Article');
+    echo $this->Form->end();
     ?>
 
 This view outputs the edit form (with the values populated), along
