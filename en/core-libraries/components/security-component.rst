@@ -329,12 +329,13 @@ some reason. If you do want to disable this feature, you can set
 components array. By default CSRF protection is enabled, and configured to use
 one-use tokens.
 
-Disabling Security Component For Specific Actions
-=================================================
+Disabling CSRF and Post Data Validation For Specific Actions
+============================================================
 
 There may be cases where you want to disable all security checks for an action (ex. AJAX requests).
 You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your
-``beforeFilter``.
+``beforeFilter``. The ``unlockedActions`` property will **not** effect other
+features of ``SecurityComponent``.
 
 .. versionadded:: 2.3
 
