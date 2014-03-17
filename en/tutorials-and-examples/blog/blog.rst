@@ -149,13 +149,13 @@ that CakePHP can successfully connect to the database.
 Directory Permissions on tmp
 ============================
 
-You'll also need to set the proper permissions on the ``/tmp`` directory to make
+You'll also need to set the proper permissions on the ``tmp`` directory to make
 it writable by your webserver. The best way to do this is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``App/tmp`` directory to that user. The final command you run (in \*nix)
+the ``tmp`` directory to that user. The final command you run (in \*nix)
 might look something like this::
 
-    $ chown -R www-data App/tmp
+    $ chown -R www-data tmp
 
 If for some reason CakePHP can't write to that directory, you'll be
 informed by a warning while not in production mode.

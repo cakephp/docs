@@ -173,8 +173,9 @@ ArticlesController now::
 
     namespace App\Controller;
 
+    use Cake\Error\NotFoundException;
+
     class ArticlesController extends AppController {
-        public $helpers = ['Html', 'Form'];
 
         public function index() {
              $this->set('articles', $this->Articles->find('all'));
@@ -231,8 +232,9 @@ ArticlesController::
 
     namespace App\Controller;
 
+    use Cake\Error\NotFoundException;
+
     class ArticlesController extends AppController {
-        public $helpers = ['Html', 'Form', 'Session'];
         public $components = ['Session'];
 
         public function index() {
@@ -264,7 +266,7 @@ ArticlesController::
 
 .. note::
 
-    You need to include the SessionComponent - and SessionHelper - in
+    You need to include the SessionComponent in
     any controller where you will use it. If necessary, include it in
     your AppController.
 
@@ -323,7 +325,7 @@ Here's our add view:
     echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->button('Save Article');
+    echo $this->Form->submit('Save Article');
     echo $this->Form->end();
     ?>
 
@@ -438,8 +440,7 @@ The edit view might look something like this:
     echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->input('id', ['type' => 'hidden']);
-    echo $this->Form->button('Save Article');
+    echo $this->Form->submit('Save Article');
     echo $this->Form->end();
     ?>
 
@@ -494,9 +495,7 @@ Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ArticlesController::
 
     public function delete($id) {
-        if ($this->request->is('get')) {
-            throw new MethodNotAllowedException();
-        }
+        $this->request->allowMethod(['post', 'delete']));
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
@@ -508,8 +507,8 @@ Next, let's make a way for users to delete articles. Start with a
 This logic deletes the article specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
 message after redirecting them on to ``/articles``. If the user attempts to
-do a delete using a GET request, we throw an Exception. Uncaught exceptions
-are captured by CakePHP's exception handler, and a nice error page is
+do a delete using a GET request, the 'allowMethod' will throw an Exception.
+Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is
 displayed. There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
 to generate.
