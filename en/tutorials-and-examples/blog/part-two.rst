@@ -495,7 +495,7 @@ Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ArticlesController::
 
     public function delete($id) {
-        $this->request->allowMethod(['post', 'delete']));
+        $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
