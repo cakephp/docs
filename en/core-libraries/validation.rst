@@ -56,12 +56,13 @@ Validating Field Presence
 
 The ``validatePresence()`` method requires the field to be present in any
 validated array. If the field is absent, validation will fail. The
-``validatePresence()`` method has 3 modes:
+``validatePresence()`` method has 4 modes:
 
-* ``true`` The field is always required.
-* ``create`` The field is required when validation is for a **create**
+* ``true`` The field's presence is always required.
+* ``false`` The field's presence is not required.
+* ``create`` The field's presence is required when validating a **create**
   operation.
-* ``update`` The field is require when validation is for an **update**
+* ``update`` The field's presence is required when validating an **update**
   operation.
 
 By default ``true`` is used. Key presence is checked for using
@@ -74,12 +75,13 @@ Allowing Empty Fields
 ---------------------
 
 The ``allowEmpty`` method will skip other valiation rules if the field is
-'empty', as empty values are accepted. The ``allowEmpty()`` method has 3 modes:
+'empty', as empty values are accepted. The ``allowEmpty()`` method has 4 modes:
 
-* ``true`` The field is always required.
-* ``create`` The field is required when validation is for a **create**
+* ``true`` The field is allowed to be empty.
+* ``false`` The field is not allowed to be empty.
+* ``create`` The field is required when validating a **create**
   operation.
-* ``update`` The field is require when validation is for an **update**
+* ``update`` The field is required when validating an **update**
   operation.
 
 By default ``true`` is used. The values ``''``, ``null`` and ``[]`` (empty
