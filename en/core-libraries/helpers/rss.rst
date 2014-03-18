@@ -184,7 +184,7 @@ site at http://validator.w3.org/feed/.
 .. note::
 
     You may need to set the value of 'debug' in your core configuration
-    to 1 or to 0 to get a valid feed, because of the various debug
+    to ``false`` to get a valid feed, because of the various debug
     information added automagically under higher debug settings that
     break XML syntax or feed validation rules.
 

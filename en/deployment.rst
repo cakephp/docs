@@ -35,7 +35,7 @@ Update Config/app.php
 =====================
 
 Updating app.php, specifically the value of ``debug`` is extremely important.
-Turning debug = 0 disables a number of development features that should never be
+Turning debug = ``false`` disables a number of development features that should never be
 exposed to the Internet at large. Disabling debug changes the following types of
 things:
 
@@ -51,21 +51,17 @@ In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
 You can check against an environment variable to set the debug level dynamically
-between environments. This will avoid deploying an application with debug > 0 and
+between environments. This will avoid deploying an application with debug ``true`` and
 also save yourself from having to change the debug level each time before deploying
 to a production environment.
 
 For example, you can set an environment variable in your Apache configuration::
 
-	SetEnv CAKEPHP_DEBUG 2
+	SetEnv CAKEPHP_DEBUG 1
 
 And then you can set the debug level dynamically in ``app.php``::
 
-	if (getenv('CAKEPHP_DEBUG')) {
-		$debug = 2;
-	} else {
-		$debug = 0;
-	}
+	$debug = (bool)getenv('CAKEPHP_DEBUG');
 
 	$config = [
 	    'debug' => $debug,
