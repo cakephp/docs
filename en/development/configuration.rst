@@ -296,7 +296,7 @@ context::
             'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
 
-    You can use ``Configure::write('debug', $int)`` to switch between
+    You can use ``Configure::write('debug', $bool)`` to switch between
     debug and production modes on the fly. This is especially handy for
     AMF or JSON interactions where debugging information can cause
     parsing problems.
