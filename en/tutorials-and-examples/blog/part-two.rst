@@ -370,18 +370,18 @@ back at our Articles model and make a few adjustments::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        public $validate = [
-            'title' => [
-                'rule' => 'notEmpty'
-            ],
-            'body' => [
-                'rule' => 'notEmpty'
-            ]
-        ];
+
+        public function validationDefault(Validator $validator) {
+            $validator
+                ->allowEmpty('title', false)
+                ->allowEmpty('body', false);
+
+            return $validator;
+        }
     }
 
-The ``$validate`` array tells CakePHP how to validate your data
-when the ``save()`` method is called. Here, I've specified that
+The ``valdiationDefault`` method tells CakePHP how to validate your data
+when the ``save()`` method is called. Here, we've specified that
 both the body and title fields must not be empty. CakePHP's
 validation engine is strong, with a number of pre-built rules
 (credit card numbers, email addresses, etc.) and flexibility for
@@ -389,7 +389,7 @@ adding your own validation rules. For more information on that
 setup, check the :doc:`/models/data-validation`.
 
 Now that you have your validation rules in place, use the app to try to add
-a article with an empty title or body to see how it works.  Since we've used the
+an article with an empty title or body to see how it works.  Since we've used the
 :php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
 automatically.
@@ -436,13 +436,11 @@ The edit view might look something like this:
     <!-- File: /App/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
-    <?php
-    echo $this->Form->create($article);
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->submit('Save Article');
-    echo $this->Form->end();
-    ?>
+    <?= $this->Form->create($article) ?>
+    <?= $this->Form->input('title') ?>
+    <?= $this->Form->input('body', ['rows' => '3']) ?>
+    <?= $this->Form->submit('Save Article') ?>
+    <?= $this->Form->end() ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
