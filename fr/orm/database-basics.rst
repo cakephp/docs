@@ -316,9 +316,10 @@ avez besoin de paramètres supplémentaires, vous devriez utiliser la méthode
         [1, 2]
     );
 
-Without any type hinting information, ``execute`` will assume all placeholders
-are string values. If you need to bind specific types of data, you can use their
-abstract type names when creating a query::
+Sans aucune typage des informations, ``execute`` va supposer que tous les
+placeholders sont des chaînes de valeur. Si vous avez besoin de lier des types
+spécifiques de données, vous pouvez utiliser leur nom de type abstrait lors
+de la création d'une requête::
 
     $stmt = $conn->execute(
         'UPDATE posts SET published_date = ? WHERE id = ?',
@@ -328,10 +329,11 @@ abstract type names when creating a query::
 
 .. php:method:: newQuery()
 
-This allows you to use rich data types in your applications and properly convert
-them into SQL statements. The last and most flexible way of creating queries is
-to use the :ref:`query-builder`. This apporach allows you to build complex and
-expressive queries without having to use platform specific SQL::
+Cela vous permet d'utiliser des types de données riches dans vos applications
+et de les convertir convenablement en instructions SQL. La dernière manière
+la plus flexible de créer des requêtes est d'utiliser :ref:`query-builder`.
+Cette approche vous permet de construire des requêtes expressive complexes sans
+avoir à utiliser une plateforme SQL spécifique::
 
     $query = $conn->newQuery();
     $query->update('posts')
@@ -339,9 +341,10 @@ expressive queries without having to use platform specific SQL::
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-When using the query builder, no SQL will be sent to the database server until
-the ``execute()`` method is called, or the query is iterated. Iterating a query
-will first execute it and then start iterating over the result set::
+Quand vous utilisez le query builder, aucun SQL ne sera envoyé au serveur
+de base de données jusqu'à ce que la méthode ``execute()`` soit appelée, ou
+que la requête soit itérée. Itérer une requête va d'abord l'exécuter et ensuite
+démarrer l'itération sur l'ensemble des résultats::
 
     $query = $conn->newQuery();
     $query->select('*')
@@ -349,20 +352,22 @@ will first execute it and then start iterating over the result set::
         ->where(['published' => true]);
 
     foreach ($query as $row) {
-        // Do something with the row.
+        // Faire quelque chose avec la ligne.
     }
 
 .. note::
 
-    When you have an instance of :php:class:`Cake\\ORM\\Query` you can use
-    ``all()`` to get the result set for SELECT queries.
+    Quand vous avez une instance de :php:class:`Cake\\ORM\\Query`, vous pouvez
+    utiliser ``all()`` pour récupérer l'ensemble de résultats pour les requêtes
+    SELECT.
 
-Using Transactions
--------------------
+Utiliser les Transactions
+-------------------------
 
-The connection objects provide you a few simple ways you do database
-transactions. The most basic way of doing transactions is through the ``begin``,
-``commit`` and ``rollback`` methods, which map to their SQL equivalents::
+Les objets de connection vous fournissent quelques manières simples pour que
+vous fassiez des transactions de base de données. La façon la plus basique de
+faire des transactions est via les méthodes ``begin``, ``commit`` et
+``rollback``, qui correspondent à leurs equivalents SQL::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
@@ -371,138 +376,145 @@ transactions. The most basic way of doing transactions is through the ``begin``,
 
 .. php:method:: transactional(callable $callback)
 
-In addition to this interface connection instances also provide the
-``transactional`` method which makes handling the begin/commit/rollback calls
-much simpler::
+En plus de cette interface, les instances de connection fournissent aussi la
+méthode ``transactional`` ce qui simplifie la gestion des appels
+begin/commit/rollback::
 
     $conn->transactional(function($conn) {
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
-In addition to basic queries, you can execute more complex queries using either
-the :ref:`query-builder` or :ref:`table-objects`. The transactional method will
-do the following:
+En plus des requêtes basiques, vous pouvez executer des requêtes plus complexes
+en utilisant soit :ref:`query-builder`, soit :ref:`table-objects`. La méthode
+transactional fera ce qui suit:
 
-- Call ``begin``.
-- Call the provided closure.
-- If the closure raises an exception, a rollback will be issued. The original
-  exception will be re-thrown.
-- If the closure returns ``false``, a rollback will be issued.
-- If the closure executes successfully, the transaction will be committed.
+- Appel de ``begin``.
+- Appelle la fermeture fournie.
+- Si la fermeture lance une exception, un rollback sera délivré. L'exception
+  originelle sera relancée.
+- Si la fermeture retourne ``false``, un rollback sera délivré.
+- Si la fermeture s'exécute avec succès, la transaction sera réalisée.
 
-Interacting with Statements
+Interagir avec les Requêtes
 ===========================
 
-When using the lower level database API, you will often encounter statement
-objects. These objects allow you to manipulate the underlying prepared statement
-from the driver. After creating and executing a query object, or using
-``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
-underlying basic statement object and provides a few additional features.
+Lors de l'utilisation de bas niveau de l'API, vous rencontrerez souvent des
+objets statement (requête). Ces objets vous permettent de manipuler les
+requêtes préparées sous-jacentes du driver. Après avoir créé et executé un objet
+query, ou en utilisant ``execute()``, vous devriez avoir une instance
+``StatementDecorator``. Elle enveloppe l'objet statement basique sous-jacent
+et fournit quelques fonctionnalités supplémentaires.
 
-Preparing a Statement
----------------------
+Préparer une Requête
+--------------------
 
-You can create a statement object using ``execute()``, or ``prepare()``. The
-``execute()`` method returns a statement with the provided values bound to it. While
-``prepare()`` returns an incomplete statement::
+Vous pouvez créer un objet statement (requête) en utilisant ``execute()``, ou
+``prepare()``. La méthode ``execute()`` retourne une requête avec les valeurs
+fournies en les liant à lui. Alors que ``prepare()`` retourne une requête
+incomplet::
 
-    // Statements from execute will have values bound to them already.
+    // Les requêtes à partir de execute auront des valeurs leur étant déjà liées.
     $stmt = $conn->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
-    // Statements from prepare will be parameters for placeholders.
-    // You need to bind parameters before attempting to execute it.
+    // Les Requêtes à partir de prepare seront des paramètres pour les placeholders.
+    // Vous avez besoin de lier les paramètres avant d'essayer de l'executer.
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
-Once you've prepared a statement you can bind additional data and execute it.
+Une fois que vous avez préparé une requête, vous pouvez lier les données
+supplémentaires et l'executer.
 
-Binding Values
---------------
+Lier les Valeurs
+----------------
 
-Once you've created a prepared statement, you may need to bind additional data.
-You can bind multiple values at once using the ``bind`` method, or bind
-individual elements using ``bindValue``::
+Une fois que vous avez créé une requête préparée, vous voudrez peut-être
+lier des données supplémentaires. Vous pouvez lier plusieurs valeurs en une
+fois en utilisant la méthode ``bind``, ou lier les éléments individuels
+en utilisant ``bindValue``::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
-    // Bind multiple values
+    // Lier plusieurs valeurs
     $stmt->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
-    // Bind a single value
+    // Lier une valeur unique
     $stmt->bindValue(0, true, 'boolean');
     $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
 
-When creating statements you can also use named array keys instead of
-positional ones::
+Lors de la création de requêtes, vous pouvez aussi utiliser les clés nommées
+de tableau plutôt que des clés de position::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
-    // Bind multiple values
+    // Lier plusieurs valeurs
     $stmt->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
-    // Bind a single value
+    // Lier une valeur unique
     $stmt->bindValue('published', true, 'boolean');
     $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
-    You cannot mix positional and named array keys in the same statement.
+    Vous ne pouvez pas mixer les clés de position et les clés nommées de tableau
+    dans la même requête.
 
-Executing & Fetching Rows
--------------------------
+Executer & Récupérer les Colonnes
+---------------------------------
 
-After preparing a statement and binding data to it, you can execute it and fetch
-rows. Statements should be executed using the ``execute()`` method. Once
-executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
-the statement::
+Après la préparation d'une requête et après avoir lié les données à celle-ci,
+vous pouvez l'executer et récupérer les lignes. Les requêtes devront être
+executées en utilisant la méthode ``execute()``. Une fois executée, les
+résultats peuvent être récupérés en utilisant ``fetch()``, ``fetchAll()`` ou
+en faisant une itération de la requête::
 
     $stmt->execute();
 
-    // Read one row.
+    // Lire une ligne.
     $row = $stmt->fetch('assoc');
 
-    // Read all rows.
+    // Lire toutes les lignes.
     $rows = $stmt->fetchAll('assoc');
 
-    // Read rows through iteration.
+    // Lire les lignes en faisant une itération.
     foreach ($stmt as $row) {
-        // Do work
+        // Faire quelque chose
     }
 
 .. note::
 
-    Reading rows through iteration will fetch rows in 'both' mode. This means
-    you will get both the numerically indexed and associatively indexed results.
+    Lire les lignes avec une itération va récupérer les lignes dans les 'deux'
+    modes. Cela signifie que vous aurez à la fois les résultats indexés
+    numériquement et de manière associative.
 
+Récupérer les Compteurs de Ligne
+--------------------------------
 
-Getting Row Counts
-------------------
-
-After executing a statement, you can fetch the number of affected rows::
+Après avoir executé une requête, vous pouvez récupérer le nombre de lignes
+affectées::
 
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
 
 
-Checking Error Codes
---------------------
+Vérifier les Codes d'Erreur
+---------------------------
 
-If your query was not successful, you can get related error information
-using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
-same way as the ones provided by PDO::
+Si votre requête n'est pas réussie, vous pouvez obtenir des informations liées
+à l'erreur en utilisant les méthodes ``errorCode()`` et ``errorInfo()``. Ces
+méthodes fonctionnent de la même façon que celles fournies par PDO::
 
     $code = $stmt->errorCode();
     $info = $stmt->errorInfo();
@@ -510,24 +522,25 @@ same way as the ones provided by PDO::
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
 
-Query Logging
-=============
+Logging de Query
+================
 
-Query logging can be enabled when configuring your connection by setting the
-``log`` option to true. You can also toggle query logging at runtime, using
-``logQueries``::
+Le logging de Query peut être activé lors de la configuration de votre
+connection en définissant l'option ``log`` à true. Vous pouvez changer le
+logging de query à la volée, en utlisant ``logQueries``::
 
-    // Turn query logging on.
+    // Active le logging de query.
     $conn->logQueries(true);
 
-    // Turn query logging off
+    // Stoppe le logging de query
     $conn->logQueries(false);
 
-When query logging is enabled, queries will be logged to
-:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
-You will need to have a logger configured to capture this level & scope. Logging
-to ``stderr`` can be useful when working on unit tests, and logging to
-files/syslog can be useful when working with web requests::
+Quand le logging de query est activé, les requêtes seront logged dans
+:php:class:`Cake\\Log\\Log` en utilisant le niveau de 'debug', et le scope
+de 'queriesLog'. Vous aurez besoin d'avoir un logger configuré pour capter
+ces niveau & scope. Logging vers ``stderr`` peut être utile lorsque vous
+travaillez sur les tests unitaires, et le logging de fichiers/syslog peut être
+utile lorsque vous travaillez avec des requêtes web::
 
     use Cake\Log\Log;
 
@@ -547,32 +560,38 @@ files/syslog can be useful when working with web requests::
 
 .. note::
 
-    Query logging is only intended for debugging/development uses. You should
-    never leave query logging on in production as it will negatively impact the
-    performance of your application.
+    Query logging est seulement à utiliser pour le debuggage/development. Vous
+    ne devriez jamais laisser le query loggind activé en production puisque
+    cela va avoir un impact négatif sur les performances de votre application.
 
 .. _identifier-quoting:
 
 Identifier Quoting
 ==================
 
-By default CakePHP does **not** quote identifiers in generated SQL queries. The
-reason for this is identifier quoting has a few drawbacks:
+Par défaut CakePHP **ne** quote pas les identifiers dans les requêtes SQL
+générées. La raison pour ceci est que identifier quoting a quelques
+inconvénients:
 
-* Performance overhead - Quoting identifiers is much slower and complex than not doing it.
-* Not necessary in most cases - In non-legacy databases that follow CakePHP's
-  conventions there is no reason to quote identifiers.
+* Par dessus tout la Performance - Quoting identifiers est bien plus lent et
+  complexe que de ne pas le faire.
+* Pas nécessaire dans la plupart des cas - Dans des bases de données non-legacy
+  qui suivent les conventions de CakePHP, il n'y a pas de raison de quoter les
+  identifiers.
 
-If you are using a legacy schema that requires identifier quoting you can enable
-it using the ``quoteIdentifiers`` setting in your
-:ref:`database-configuration`. You can also enable this feature at runtime::
+Si vous n'utilisez pas un schema legacy qui nécessite l'identifier quoting, vous
+pouvez l'activer en utilisant le paramètre ``quoteIdentifiers`` dans votre
+:ref:`database-configuration`. Vous pouvez aussi activer cette fonctionnalité
+à la volée::
 
     $conn->quoteIdentifiers(true);
 
-When enabled, identifier quoting will cause additional query traversal that
-converts all identifiers into ``IdentifierExpression`` objects.
+Quand elle est activée, l'identifier quoting va entrainer des requêtes
+supplémentaires traversal qui convertissent tous les identifiers en objets
+``IdentifierExpression``.
 
 .. note::
 
-    SQL snippets contained in QueryExpression objects will not be modified.
+    Les portions de code SQL contenues dans les objets QueryExpression ne seront
+    pas modifiées.
 
