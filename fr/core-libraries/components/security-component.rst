@@ -358,13 +358,15 @@ pouvez définir ``$this->Security->csrfCheck = false;`` dans votre
 ``beforeFilter`` ou utiliser le tableau components. Par défaut la protection
 CSRF est activée, et paramétrée pour l'utilisation de jetons à usage unique.
 
-Désactiver le Component Security pour des Actions Spécifiques
-=============================================================
+Désactiver CSRF et la Validation des Données Post pour des Actions Spécifiques
+==============================================================================
 
 Il peut arriver que vous souhaitiez désactiver toutes les vérifications de
 sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
-``$this->Security->unlockedActions`` dans votre ``beforeFilter``.
+``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
+``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
+fonctionnalités de ``SecurityComponent``.
 
 .. versionadded:: 2.3
 
