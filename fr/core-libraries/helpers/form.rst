@@ -429,10 +429,11 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
         Essayez d'éviter l'utilisation de `FormHelper::input()` pour générer
         les boutons submit. Utilisez plutôt :php:meth:`FormHelper::submit()`.
      
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = array())
 
     Génère un ensemble d'inputs (entrées) pour ``$fields``. Si $fields est
-    null, le model courant sera utilisé.
+    null, tous les champs, sauf ceux définis dans ``$blacklist``, du model
+    courant seront utilisés.
 
     En plus de l'affichage des champs de controller, ``$fields`` peut
     être utilisé pour contrôler legend et fieldset (jeu de champs) rendus
