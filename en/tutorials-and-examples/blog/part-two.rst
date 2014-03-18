@@ -455,6 +455,15 @@ like::
             throw new NotFoundException(__('Invalid post'));
         }
 
+        /* 
+            CakeRequest::is() has only been able to take an array as of CakePHP 2.4.0, 
+            earlier versions are expecting a string.
+            so for user using CakePHP < 2.4, 
+            please use the following 
+                $this->request->is('post') || $this->request->is('put')
+            instead of 
+                $this->request->is(array('post', 'put'))
+        */
         if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
