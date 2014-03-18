@@ -52,7 +52,7 @@ environments.
 General Configuration
 ---------------------
 
-Below is a description of the variables and how they affects your CakePHP
+Below is a description of the variables and how they affect your CakePHP
 application.
 
 debug
