@@ -18,5 +18,6 @@ each one, view the relevant chapters below.
 
     /core-libraries/behaviors/timestamp
     /core-libraries/behaviors/counter-cache
+    /core-libraries/behaviors/translate
 
 .. end-toc
