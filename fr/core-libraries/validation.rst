@@ -3,25 +3,27 @@
 Validation
 ##########
 
-The validation package in CakePHP provides features to build validators that can
-validate arbitrary arrays of data with ease.
+Le package de validation dans CakePHP fournit des fonctionnalités pour
+construire des validators qui peuvent valider des tableaux arbitraires de
+données avec simplicité.
 
-Creating Validators
-===================
+Créer les Validators
+====================
 
 .. php:class:: Validator
 
-Validator objects define the rules that apply to a set of fields.
-Validator objects contain a mapping between fields and validation sets. In turn the
-validation sets contain a collection of rules that apply to the field they are
-attached to. Creating a validator is simple::
+Les objets Validator définissent les valeurs qui s'appliquent à un ensemble de
+champs. Les objets Validator contiennent un mapping entre les champs et les
+ensembles de validation. A son tour l'ensemble de validation contient une
+collection de règles qui s'appliquent au champ auquel elles sont attachées.
+Créer un validator est simple::
 
     use Cake\Validation\Validator;
 
     $validator = new Validator();
 
-Once created, you can start defining sets of rules for the fields you want to
-validate::
+Une fois créé, vous pouvez commencer à définir des ensembles de règle pour les
+champs que vous souhaitez valider::
 
     $validator
         ->validatePresence('title')
@@ -44,56 +46,64 @@ validate::
             'message' => 'Articles must have a substantial body.'
         ]);
 
-As seen in the example above, validators are built with a fluent interface that
-allows you to define rules for each field you want to validate.
+Comme vu dans l'exemple ci-dessus, les validators sont construits avec une
+interface facile qui vous permet de définir les règles pour chaque champ que
+vous souhaitez valider.
 
-There were a few methods called in the example above, so lets go over the
-various features. The ``add()`` method allows you to add new rules to
-a validator. You can either add rules individually or in groups as seen above.
+Il y a quelques méthodes appelées dans l'exemple ci-dessus, alors regardons
+les différentes fonctionnalités. La méthode ``add()`` vous permet d'ajouter
+les nouvelles règles au validator. Vous pouvez soit ajouter des règles
+individuellement, soit dans en groupe comme vu ci-dessus.
 
-Validating Field Presence
--------------------------
+Valider la Présence d'un champ
+------------------------------
 
-The ``validatePresence()`` method requires the field to be present in any
-validated array. If the field is absent, validation will fail. The
-``validatePresence()`` method has 3 modes:
+La méthode ``validatePresence()`` oblige le champ à être présent dans tout
+tableau de validation. Si le champ est absent, la validation va échouer. La
+méthode ``validatePresence()`` a 4 modes:
 
-* ``true`` The field is always required.
-* ``create`` The field is required when validation is for a **create**
-  operation.
-* ``update`` The field is require when validation is for an **update**
-  operation.
+* ``true`` La présence du champ est toujours requise.
+* ``false`` La présence du champ n'est pas requise.
+* ``create`` La présence du champ est requise lorsque vous validez une
+  opération **create**.
+* ``update`` La présence du champ est requise lorque vous validez une
+  opération **update**.
 
-By default ``true`` is used. Key presence is checked for using
-``array_key_exists()`` so null values will count as present. You can set the
-mode using the second parameter::
+Par défaut ``true`` est utilisée. La présence de la clé est vérifiée pour
+l'utilisation de ``array_key_exists()`` donc les valeurs null vont être
+comptabilisées comme étant présentes. Vous pouvez définir le mode en utilisant
+le deuxième paramètre::
 
     $validator->validatePresence('author_id', 'create');
 
-Allowing Empty Fields
----------------------
+Permettre aux Champs d'être Vides
+---------------------------------
 
-The ``allowEmpty`` method will skip other valiation rules if the field is
-'empty', as empty values are accepted. The ``allowEmpty()`` method has 3 modes:
+La méthode ``allowEmpty`` va sauter les autres règles de validation si le
+champ est à 'empty', puisque les valeurs vides sont acceptées. La méthode
+``allowEmpty()`` a 4 modes:
 
-* ``true`` The field is always required.
-* ``create`` The field is required when validation is for a **create**
-  operation.
-* ``update`` The field is require when validation is for an **update**
-  operation.
+* ``true`` Le champ peut être vide.
+* ``false`` Le champ ne peut pas être vide.
+* ``create`` Le champ est nécessaire lors de la validation d'une opération
+  **create**.
+* ``update`` Le champ est nécessaire lors de la validation d'une opération
+  **update**.
 
-By default ``true`` is used. The values ``''``, ``null`` and ``[]`` (empty
-array) will cause validation errors when fields are not allowed to be empty.
-When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
-``[]``, ``0``, ``'0'`` are accepted.
+Par défaut, ``true`` est utilisée. Les valeurs ``''``, ``null`` et ``[]``
+(tableau vide) va entraîner des erreurs de validation quand les champs n'ont
+pas l'autorisation d'être vide.
+Quand les champs ont l'autorisation d'être vide, les valeurs ``''``, ``null``,
+``false``, ``[]``, ``0``, ``'0'`` sont acceptées.
 
-Marking Rules as the Last to Run
---------------------------------
+Marquer les Règles comme étant les Dernières à être executées
+-------------------------------------------------------------
 
-When fields have multiple rules, each validation rule will be run even if the
-previous one has failed. This allows you to collect as many validation errors as
-you can in a single pass. If however, you want to stop execution after
-a specific rule has failed you can set the ``last`` option to ``true``::
+Quand les champs ont plusieurs règles, chaque règle de validation sera executée
+même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
+de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
+stopper l'execution après qu'une règle spécifique a échoué, vous pouvez définir
+l'option ``last`` à ``true``::
 
     $validator = new Validator();
     $validator
@@ -109,84 +119,90 @@ a specific rule has failed you can set the ``last`` option to ``true``::
             ]
         ]);
 
-In the above example if the minLength rule fails, the maxLength rule will not be
-run.
+Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
+la règle maxLength ne sera pas executée.
 
-Adding Validation Providers
----------------------------
+Ajouter des Providers de Validation
+-----------------------------------
 
-The ``Validator``, ``ValidationSet`` and ``ValidationRule`` classes do not
-provide any validation methods themselves. Validation rules come from
-'providers'. You can bind any number of providers to a Validator object.
-Validator instances come with a 'default' provider setup automatically. The
-default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
-class. This makes it simple to use the methods on that class as validation
-rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``provider`` method
-to add any additional providers your application needs::
+Les classes ``Validator``, ``ValidationSet`` et ``ValidationRule`` ne
+fournissent elles-mêmes aucune méthode de validation. Les règles de validation
+viennent de 'providers'. Vous pouvez lier tout nombre de providers à un objet
+Validator. Les instances de Validator sont automatiquement fournies avec une
+configuration de provider à 'default'. Le provider par défaut est mappé à la
+classe :php:class:`~Cake\\Validation\\Validation`. Cela facilite l'utilisation
+des méthodes de cette classe en règles de validation. Lors de l'utilisation
+conjointe de Validators et de l'ORM, des providers supplémentaires sont
+configurés pour la table et les objets entity. Vous pouvez utiliser la méthode
+``provider`` pour ajouter un provider supplémentaire que votre application
+a besoin d'utiliser::
 
     $validator = new Validator();
 
-    // Use an object instance.
+    // Utilise une instance de l'object.
     $validator->provider('custom', $myObject);
 
-    // Use a class name. Methods must be static.
+    // Utilise un nom de classe. Les méthodes doivent être static.
     $validator->provider('custom', 'App\Model\Validation');
 
-Validation providers can be objects, or class names. If a class name is used the
-methods must be static. To use a provider other than 'default', be sure to set
-the ``provider`` key in your rule::
+Les providers de Validation peuvnt être des objets, ou des noms de classe. Si
+un nom de classe est utilisé, les méthodes doivent être static. Pour utiliser
+un provider autre que 'default', assurez-vous de définir la clé ``provider``
+dans votre règle::
 
-    // Use a rule from the table provider
+    // Utilise une règle à partir du provider de la table
     $validator->add('title', 'unique', [
         'rule' => 'uniqueTitle',
         'provider' => 'table'
     ]);
 
-Custom Validation Rules
------------------------
+Règles de Validation Personnalisées
+-----------------------------------
 
-In addition to using methods coming from providers, you can also use any
-callable including anonymous functions as validation rules::
+En plus de l'utilisation des méthodes venant des providers, vous pouvez aussi
+utiliser toute fonction appellable inclue de façon anonyme en règle de
+validation::
 
-    // Use a global function
+    // Utilise une fonction globale
     $validator->add('title', 'custom', [
         'rule' => 'validate_title'
     ]);
 
-    // Use an array callable that is not in a provider
+    // Utilise un tableau appelable qui n'est pas un provider
     $validator->add('title', 'custom', [
         'rule' => [$this, 'method']
     ]);
 
-    // Use a closure
+    // Utilise une closure
     $validator->add('title', 'custom', [
         'rule' => function($value, $context) {
             // Custom logic that returns true/false
         }
     ]);
 
-Closures or callable methods will receive 2 arguments when called. The first
-will be the value for the field being validated. The second is a context array
-containing data related to the validation process:
+Les Closures ou les méthodes appelables vont recevoir 2 arguments lors de leur
+appel. Le premier va être la valeur pour le champ étant validé. Le second est
+un tableau contextuel contenant des données liées au processus de validation:
 
-- **data**: The original data passed to the validation method, useful if you
-  plan to to create rules comparing values.
-- **providers**: The complete list of rule provider objects, useful if you
-  need to create complex rules by calling multiple providers.
-- **newRecord**: Whether the validation call is for a new record or
-  a pre-existent one.
+- **data**: Les données originelles passées à la méthode de validation, utile
+  si vous planifiez de créer les règles comparant les valeurs.
+- **providers**: La liste complète de règle des objets provider, utile si vous
+  avez besoin de créer des règles complexes en appelant plusieurs providers.
+- **newRecord**: Selon si l'appel de la validation est pour un nouvel
+  enregistrement ou pour un enregistrement existant.
 
-Defining Donditions for Validator
----------------------------------
+Définir des conditions pour Validator
+-------------------------------------
 
-When defining validation rules, you can use the ``on`` key to define when
-a validation rule should be applied. If left undefined the rule will always be
-applied. Other valid values are ``create`` and ``update``. Using one of these
-values will make the rule apply to only create or update operations.
+Lors de la définition des règles de validation, vous pouvez utiliser la clé
+``on`` pour définir quand une règle de validation doit être appliquée. Si
+elle est laissée non définie, la règle va toujours être appliquée. Les autres
+valeurs valides sont ``create`` et ``update``. L'utilisation d'une de ces
+valeurs va faire que la règle va s'appliquer seulement pour les opérations
+create ou update.
 
-Additionally you can provide a callable function that will determine whether or
-not a particular rule should be applied::
+En plus, vous pouvez fournir une fonction appelable qui va determiner si oui
+ou non, une règle particulière doit être appliquée::
 
     $validator->add('picture', 'file', [
             'rule' => ['mimeType', ['image/jpeg', 'image/png']],
@@ -195,19 +211,20 @@ not a particular rule should be applied::
             }
         ]);
 
-The above example will make the rule for 'picture' optional depending on whether
-the value for ``show_profile_picture`` is empty.
+L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
+valeur pour ``show_profile_picture`` est vide.
 
 .. _reusable-validators:
 
-Creating Re-usable Validators
------------------------------
+Créer des Validators Ré-utilisables
+-----------------------------------
 
-While defining validators inline where they are used makes for good example
-code, it doesn't lead to easily maintainable applications. Instead you should
-create ``Validator`` sub-classes for your re-usable validation logic::
+Bien que définir des validators inline, là où ils sont utilisés, permet de
+donner un bon exemple de code, cela ne conduit pas à avoir des applications
+facilement maintenable. A la place, vous devriez créer des sous-classes
+de ``Validator`` pour votre logique de validation réutilisable::
 
-    // In App/Model/Validation/ContactValidator.php
+    // Dans App/Model/Validation/ContactValidator.php
     namespace App\Model\Validation;
 
     use Cake\Validation\Validator;
@@ -218,13 +235,14 @@ create ``Validator`` sub-classes for your re-usable validation logic::
         }
     }
 
-Validating Data
-===============
+Valides les Données
+===================
 
-Now that you've created a validator and added the rules you want to it, you can
-start using it to validate data. Validators are able to validate array based
-data. For example, if you wanted to validate a contact form before creating and
-sending an email you could do the following::
+Maintenant que vous avez créé un validator et que vous lui avez ajouté les
+règles que vous souhaitiez, vous pouvez commencer à l'utiliser pour valider les
+données. Les Validators sont capables de valider un tableau de données. Par
+exemple, si vous voulez valider un formulaire de contact avant de créer et
+d'envoyer un email, vous pouvez faire ce qui suit::
 
     use Cake\Validation\Validator;
 
@@ -248,46 +266,48 @@ sending an email you could do the following::
 
     $errors = $validator->errors($this->request->data());
     if (!empty($errors)) {
-        // Send an email.
+        // Envoi d'un email.
     }
 
-The ``errors()`` method will return a non-empty array when there are validation
-failures. The returned array of errors will be structured like::
+La méthode ``errors()`` va retourner un tableau non-vide quand il y a des échecs
+de validation. Le tableau retourné d'erreurs sera structuré comme ceci::
 
     $errors = [
         'email' => ['E-mail must be valid']
     ];
 
-If you have multiple errors on a single field, an array of error messages will
-be returned per field. By default the ``errors()`` method applies rules for
-the 'create' mode. If you'd like to apply 'update' rules you can do the following::
+Si vous avez plusieurs erreurs pour un seul champ, un tableau de messages
+d'erreur va être retourné par champ. Par défaut la méthode ``errors()`` applique
+les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
+'update' vous pouvez faire ce qui suit::
 
     $errors = $validator->errors($this->request->data(), false);
     if (!empty($errors)) {
-        // Send an email.
+        // Envoi d'un email.
     }
 
 .. note::
 
-    If you need to validate entities you should use methods like
-    :php:meth:`~Cake\\ORM\\Table::validate()` or
-    :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
+    Si vous avez besoin de valider les entities, vous devez utiliser les
+    méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
+    :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
 
-Core Validation Rules
-=====================
+Règles de Validation du Coeur
+=============================
 
-CakePHP provides a basic suite of validation methods in the ``Validation``
-class. The Validation class contains a variety of  static methods that provide
-validators for a several common validation situations.
+CakePHP fournit une suite basique de méthodes de validation dans la classe
+``Validation``. La classe Validation contient un ensemble de méthodes static
+qui fournissent des validators pour plusieurs situations de validation
+habituelles.
 
-The `API documentation
-<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
-``Validation`` class provides a good list of the validation rules that are
-available, and their basic usage.
+La `documentaition de l'API
+<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
+classe ``Validation`` fournit une bonne liste de règles de validation qui sont
+disponibles, et leur utilisation basique.
 
-Some of the validation methods accept additional parameters to define boundary
-conditions or valid options. You can provide these boundary conditions & options
-as follows::
+Certaines des méthodes de validation acceptent des paramètres supplémentaires
+pour définir des conditions limites ou des options valides. Vous pouvez fournir
+ces conditions limite & options comme suit::
 
     $validator = new Validator();
     $validator
@@ -298,6 +318,6 @@ as follows::
             'rule' => ['between', 1, 5]
         ]);
 
-Core rules that take additional parameters should have an array for the ``rule`` key
-that contains the rule as the first element, and the additional parameters as
-the remaining parameters.
+Les règles du Coeur qui prennnent des paramètres supplémentaires doivent avoir
+un tableau pour la clé ``rule`` qui contient la règle comme premier élément, et
+les paramètres supplémentaires en paramètres restants.
