@@ -476,7 +476,7 @@ to send a file as response::
 
 As shown in the above example, you have to pass the file path to the method.
 CakePHP will send proper content type header if it's a known file type listed in
-:php:attr:`CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
+:php:attr:`CakeResponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
 by using the :php:meth:`CakeResponse::type()` method.
 
 If you want you can also force a file to be downloaded instead of being displayed in
