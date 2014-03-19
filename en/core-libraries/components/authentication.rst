@@ -163,7 +163,6 @@ working with a login form could look like::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
-                // Prior to 2.3 use `return $this->redirect($this->Auth->redirect());`
             } else {
                 $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
             }
@@ -176,9 +175,8 @@ or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful, a fl
 
 .. warning::
 
-    In 2.x ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
-    whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in
-    when successful.
+    ``$this->Auth->login($data)`` will log the user in with whatever data is passed
+    to the method. It won't actually check the credentials against an authenticate class.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,13 +188,6 @@ ensure AuthComponent doesn't try to read user info from session. Stateless
 authentication will re-verify the user's credentials on each request, this creates
 a small amount of additional overhead, but allows clients that to login in without
 using cookies.
-
-.. note::
-
-  Prior to 2.4 you still need the login action as you are redirected to login
-  when an unauthenticated user tries to access a protected page even when using
-  only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
-  will cause an error prior to 2.4.
 
 Creating Custom Authentication Objects
 --------------------------------------
@@ -279,10 +270,6 @@ If authenticator returns null, `AuthComponent` redirects user to login action.
 If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that element
 is rendered else a 403 HTTP status code is returned.
 
-.. note::
-
-  Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
-
 Displaying Auth Related Flash Messages
 --------------------------------------
 
@@ -309,7 +296,6 @@ for when authorization fails::
 
     $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 
-.. versionchanged:: 2.4
    Sometimes, you want to display the authorization error only after
    the user has already logged-in. You can suppress this message by setting
    its value to boolean `false`
@@ -599,10 +585,7 @@ mark actions as public actions by using ``AuthComponent::allow()``. By
 marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
-    // Allow all actions. CakePHP 2.0
-    $this->Auth->allow('*');
-
-    // Allow all actions. CakePHP 2.1
+    // Allow all actions
     $this->Auth->allow();
 
     // Allow only the view and index actions.
@@ -610,11 +593,6 @@ user, nor will authorize objects be checked::
 
     // Allow only the view and index actions.
     $this->Auth->allow(array('view', 'index'));
-
-.. warning::
-
-  If you're using scaffolding, allow all will not identify and allow the
-  scaffolded methods. You have to specify their action names.
 
 You can provide as many action names as you need to ``allow()``. You can
 also supply an array containing all the action names.
@@ -747,9 +725,8 @@ and authentication mechanics in CakePHP.
     Error to display when user attempts to access an object or action to which
     they do not have access.
 
-    .. versionchanged:: 2.4
-       You can suppress authError message from being displayed by setting this
-       value to boolean `false`.
+    You can suppress authError message from being displayed by setting this
+    value to boolean `false`.
 
 .. php:attr:: authorize
 
@@ -878,22 +855,12 @@ and authentication mechanics in CakePHP.
     calling this method. As it delegates $map to all the attached authorize
     objects.
 
-.. php:staticmethod:: password($pass)
-
-.. deprecated:: 2.4
-
-.. php:method:: redirect($url = null)
-
-.. deprecated:: 2.3
-
 .. php:method:: redirectUrl($url = null)
 
     If no parameter is passed, gets the authentication redirect URL. Pass a
     URL in to set the destination a user should be redirected to upon logging
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
-
-.. versionadded:: 2.3
 
 .. php:method:: shutdown($Controller)
 
