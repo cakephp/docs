@@ -1,60 +1,63 @@
-Registry objects
-################
+Objets Registry
+###############
 
-The registry classes provide a simple way to create and retrieve loaded
-instances of a given object type. There are registry classes for Components,
-Helpers, Tasks, and Behaviors.
+Les classes registry fournissent une façon simple pour créer et récupérer les
+instances chargées d'un type d'objet donné. Il y a des classes registry pour les
+Components, les Helpers, les Tasks, et les Behaviors.
 
-While the examples below, will use Components, the same behavior can be expected
-for Helpers, Behaviors, and Tasks in addition to Components.
+Dans les exemples ci-dessous, on va utiliser les Components, le même behavior
+peut être attendu pour les Helpers, les Behaviors, et les Tasks en plus des
+Components.
 
-Loading Objects
-===============
+Charger les Objets
+===================
 
-Loading objects on every kind of registry can be done using the ``load()``
-method::
+Le chargement des objets sur chaque type de registry peut être fait en utilisant
+la méthode ``load()``::
 
     $this->Prg = $this->Components->load('Prg');
     $this->Prg->process();
 
-When loading a component, if the component is not currently loaded into the
-registry, a new instance will be created.  If the component is already loaded,
-another instance will not be created.  When loading components, you can also
-provide additional configuration for them::
+Lors du chargement d'un component, si le component n'est pas actuellement
+chargé dans le registry, une nouvelle instance va être créée. Si le component
+est déjà chargé, une autre instance ne va pas être créée. Lors du chargement
+des components, vous pouvez aussi leur fournir une configuration
+supplémentaire::
 
     $this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
 
-Any keys & values provided will be passed to the Component's constructor.  The
-one exception to this rule is ``className``.  Classname is a special key that is
-used to alias objects in a registry.  This allows you to have component names
-that do not reflect the classnames, which can be helpful when extending core
-components::
+Toute clés & valeurs fournies vont être passées au constructeur du Component
+La seule exception à cette règle est ``className``. Classname est une clé
+spéciale qui est utilisée pour faire des alias des objets dans un registry. Cela
+vous permet d'avoir des noms de component qui ne correspondent pas aux noms de
+classes, ce qui peut être utile quand vous étendez les components du coeur::
 
     $this->Auth = $this->Components->load('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
-Triggering Callbacks
-====================
+Attraper les Callbacks
+======================
 
-Callbacks are not provided by registry objects. You should use the
-:doc:`events system </core-libraries/events>` to dispatch any events/callbacks
-for your application.
+Les Callbacks ne sont pas fournis par les objets registry. Vous devez utiliser
+les :doc:`events system </core-libraries/events>` pour dispatcher tout
+events/callbacks dans votre application.
 
-Disabling Callbacks
-===================
+Désactiver les Callbacks
+========================
 
-In previous versions collection objects provided a ``disable`` method to disable
-objects from recieving callbacks. To do this now, you should use the features in
-the events system. For example you could disable component callbacks in the
-following way::
+Dans les versions précédentes, les objets collection fournissent une méthode
+``disable`` pour désactiver les objets à partir des callbacks reçus. Pour le
+faire maintenant, vous devez utiliser les fonctionnalités dans le système
+d'evènements. Par exemple, vous pouvez désactiver les callbacks du component
+de la façon suivante::
 
-    // Remove Auth from callbacks.
+    // Retire Auth des callbacks.
     $this->getEventManager()->detach($this->Auth);
 
-    // Re-enable Auth for callbacks.
+    // Re-active Auth pour les callbacks.
     $this->getEventManager()->attach($this->Auth);
 
 
 .. meta::
-    :title lang=en: Object Registry
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :title lang=fr: Objet Registry
+    :keywords lang=fr: nom tableau,chargement components,plusieurs types différents,api uni,charger objects,noms component,clé speciale,components coeur,callbacks,prg,callback,alias,fatal error,collections,memoire,priorité,priorités

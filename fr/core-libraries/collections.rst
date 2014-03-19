@@ -1,129 +1,531 @@
+.. php:namespace:: Cake\Collection
+
+.. _collection-objects:
+
 Collections
 ###########
 
-Les Components, les Helpers, les Behaviors et les Tasks partagent tous
-une structure similaire et des comportements. CakePHP 2.0 fournit
-maintenant une API unifiée pour interagir avec les objets collections
-similaires. L'objet collection dans cakePHP vous donne un moyen uniforme
-d'interagir avec différentes sortes d'objets dans votre application.
+.. php:class:: Collection
 
-Même si les exemples ci-dessous utiliseront des Components, le même
-comportement peut être envisagé pour les Helpers, Behaviors, et des Tasks en
-plus des components.
+Les classe collection fournissent un ensemble d'outils pour manipuler les
+tableaux ou les objets ``Traversable``. Si vous avez déjà utilisé
+underscore.js, vous avez une idée de ce que vous pouvez attendre des classes
+collection.
 
-Charger et Décharger les objets
-===============================
+Les instances Collection sont immutables, en modifiant une collection va
+générer will instead generate
+a new collection. This makes working with collection objects more predictable as
+operations are side-effect free.
 
-Le chargement d'objets sur n'importe quelle collection peut être effectué
-en utilisant la méthode ``load()``::
+Quick Example
+=============
 
-    $this->Prg = $this->Components->load('Prg');
-    $this->Prg->process();
+Collections can be created using an array or Traversable object. You'll also
+interact with collections every time you interact with the ORM in CakePHP.
+A simple use of a Collection would be::
 
-Au chargement du component, si il n'est pas chargé dans la collection, une
-nouvelle instance sera créée. Si le component est déjà chargé, une autre
-instance ne sera pas créée. Au chargement des components, vous pouvez aussi
-leurs fournir des configurations additionnelles::
+    use Cake\Collection\Collection;
 
-    $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
 
-Tout couple clé/valeur fourni sera passée au constructeur de
-Component. Une exception à cette règle est ``className``. ClassName est une
-clé spéciale qui est utilisée pour créer des alias d'objets dans une
-collection. Ceci permet d'avoir des noms de component qui ne reflètent pas
-les noms de classes, ce qui peut être utile quand on étend les components du
-noyau::
+    // Create a new collection containing elements
+    // with a value greater than one.
+    $overOne = $collection->filter(function($value, $key, $iterator) {
+        return $value > 1;
+    });
 
-    $this->Auth = $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
-    $this->Auth->user(); // Utilise réellement MyCustomAuth::user();
+The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
+collection like features into any Traversable object you have in your
+application as well.
 
-L'inverse du chargement d'un objet, est son déchargement. Les objets déchargés
-sont retirés de la mémoire, et n'auront pas de callbacks supplémentaires
-déclenchés sur eux::
+Iterating
+=========
 
-    $this->Components->unload('Cookie');
-    $this->Cookie->read(); // Fatal error.
+Collections can be iterated and or transformed into new collections with the
+``each`` and ``map`` methods. The ``each`` method will not create a new
+collection, but will allow you to modify any objects within the collection::
 
-Déclenchement de callbacks
-==========================
+    $collection = new Collection($items);
+    $collection = $collection->each(function($value, $key) {
+        echo "Element $key: $value";
+    });
 
-Les callbacks sont supportés par les collections d'objets. Quand une collection
-a un callback déclenché, cette méthode sera appelée sur tous les objets activés
-dans la collection. Vous pouvez passer des paramètres au boucle de callback 
-comme ceci ::
+The return of ``each()`` will be the collection object. Each will iterate the
+collection immediately applying the callback to each value in the collection.
+The ``map()`` method will create a new collection based on the output of the
+callback being applied to each object in the original collection::
 
-    $this->Behaviors->trigger('afterFind', array($this, $results, $primary));
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
 
-Ci-dessus ``$this`` sera passé comme premier argument à toutes les méthodes
-afterFind des helpers. Il y a plusieurs options qui peuvent être utilisées
-pour contrôler comment les callbacks sont tués:
+    $new = $collection->map(function($value, $key) {
+        return $value * 2;
+    });
 
-- ``breakOn`` Défini à la valeur ou aux valeurs pour lesquels vous voulez
-  stopper la propagation. Peut être une valeur scalaire, ou un tableau de
-  valeur à stopper. ``False`` par défaut.
+    // $result contains [2, 4, 6];
+    $result = $new->toArray();
 
-- ``break`` Défini à true pour valider l'arrêt. Quand un déclancheur est
-  cassé, la dernière valeur sera retournée. Si utilisé en combinaison avec
-  ``collectReturn` les résultats collectés seront retournés. ``False`` par
-  défaut.
+The ``map()`` method will create a new iterator, that lazily creates
+the resulting items when iterated.
 
-- ``collectReturn`` Défini à true pour collecter le retour de chaque objet
-  dans un tableau. Ce tableau de données retournées sera retourné depuis
-  l'appel trigger(). ``False`` par défaut.
+Filtering
+=========
 
-- ``triggerDisabled`` Déclenchera le callback sur tous les objets dans la
-  collection même ceux qui sont non-activés. ``False`` par défaut.
+Collections make it easy to filter and create new collections based on
+the result of callback functions. You can use ``filter()`` to create a new
+collection of elements matching a criteria callback::
 
-- ``modParams`` Permet à chacun des objets auquel le callback à fait des
-  demandes de modifier les paramètres de l'objet suivant. Paramétrer
-  modParams en valeur entière vous permettra de modifier le paramètre avec cet
-  index. N'importe quelle valeur non-nulle modifiera l'index de paramètre
-  indiqué. ``False`` par défaut.
+    $collection = new Collection($people);
+    $ladies = $collection->filter(function($person, $key) {
+        return $person->gender === 'female';
+    });
+    $guys = $collection->filter(function($person, $key) {
+        return $person->gender === 'male';
+    });
 
-Effacer des boucles de callback
--------------------------------
+The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
+removing elements that match the filter function::
 
-En utilisant les options ``break`` et ``breakOn`` vous pouvez annuler une
-boucle de callback à mi-chemin semblable à interrompre la propagation
-événementielle en JavaScript ::
+    $collection = new Collection($people);
+    $ladies = $collection->reject(function($person, $key) {
+        return $person->gender === 'male';
+    });
 
-    $this->Behaviors->trigger(
-        'beforeFind', 
-        array($this, $query), 
-        array('break' => true, 'breakOn' => false)
-    );
+You can do truth tests with filter functions. To see if every element in
+a collection matches a test you can use ``every()``::
 
-Dans l'exemple ci-dessus, si n'importe quel behavior retourne ``false``
-depuis sa méthode beforeFind, il n'y aura pas d'autres callback appelés. Le
-retour de ``trigger()`` sera false.
+    $collection = new Collection($people);
+    $allYoungPeople = $collection->every(function($person) {
+        return $person->age < 21;
+    });
 
-Activation et désactivation des objets
-======================================
+You can see if the collection contains at least one element matching a filter
+function using the ``some()`` method::
 
-Une fois qu'un objet est chargé dans une collection vous pourriez avoir
-besoin de le déactiver. Désactiver un objet dans une collection empêche
-aux futurs callbacks d'être tués sur l'objet à moins que l'option
-``triggerDisabled`` soit utilisée::
+    $collection = new Collection($people);
+    $hasYoungPeople = $collection->some(function($person) {
+        return $person->age < 21;
+    });
 
-    // Désactive le Helper HTML
-    $this->Helpers->disable('Html');
-    
-    // Ré-active le Helper plus tard
-    $this->Helpers->enable('Html');
+If you need to extract a new collection containing only the elements that
+contain a given set of properties you should use the ``match()`` method::
 
-Les objets désactivés peuvent toujours avoir leur méthodes et propriétés
-normales utilisées. La différence majeure entre un objet activé et désactivé
-se fait en regard des callbacks. Vous pouvez interroger une collection pour
-connaître les objets activés, ou vérifier si un objet spécifique
-est toujours activé en utilisant ``enabled()``::
+    $collection = new Collection($comments);
+    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-    // Vérifie si oui ou on un Helper spécifique est activé.
-    $this->Helpers->enabled('Html');
+The property name can be a dot separated path. You can traverse into nested
+entities and match the values they contain. When you only need the first
+matching element from a collection, you can use ``firstMatch()``::
 
-    // $enabled contiendra un tableau des helpers actuellement activés.
-    $enabled = $this->Helpers->enabled();
+    $collection = new Collection($comments);
+    $comment = $collection->firstMatch([
+        'user.name' => 'Mark',
+        'active' => true
+    ]);
 
+As you can see from the above, both ``match()`` and ``firstMatch()`` allow you to provide multiple conditions
+to match on. In addition the conditions can be for different paths allowing you
+to express complex conditions to match against.
+
+Aggregation
+===========
+
+One of the most common uses for a ``map`` function is to extract a single column
+from a collection. If you are looking to build a list of elements containing the
+values for a particular property, you can use the ``extract`` method::
+
+    $collection = new Collection($people);
+    $names = $collection->extract('name');
+
+    // $result contains ['mark', 'jose', 'barbara'];
+    $result = $names->toArray();
+
+As with many other functions in the collection class, you are allowed to specify
+a dot separated path for extracting columns, this example will return
+a collection containing the author names from a list of articles::
+
+    $collection = new Collection($articles);
+    $names = $collection->extract('author.name');
+
+    // $result contains ['Maria', 'Stacy', 'Larry'];
+    $result = $names->toArray();
+
+Finally, if the property you are looking after cannot be expressed as a path,
+you can use a callback function to return it::
+
+    $collection = new Collection($articles);
+    $names = $collection->extract(function($article) {
+        return $article->author->name ', ' . $article->author->last_name;
+    });
+
+The counterpart of a ``map`` operation is usually a ``reduce``, this function
+will help you build a single result out of all the elements in a collection::
+
+    $totalPrice = $collection->reduce(function($orderLine, $accumulated) {
+        return $accumulated + $orderLine->price;
+    }, 0);
+
+In the above example, ``$totalPrice`` will be the sum of all single prices
+contained in the collection. Note the second argument for the ``reduce``
+function, it takes the initial value for the reduce operation you are
+performing::
+
+    $allTags = $collection->reduce(function($article, $accumulated) {
+        return array_merge($accumulated, $article->tags);
+    }, []);
+
+To extract the minimum value for a collection, based on a property, just use the
+``min`` function, this will return the full element from the collection and not
+just the smallest value found::
+
+    $collection = new Collection($people);
+    $youngest = $collection->min('age');
+
+    echo $yougest->name;
+
+You are also able to express the property to compare by providing a path or a
+callback function::
+
+    $collection = new Collection($people);
+    $personYougestChild = $collection->min(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithYoungestDad = $collection->min('dad.age');
+
+The same can be applied to the ``max`` function, which will return a single
+element from the collection having the highest property value::
+
+    $collection = new Collection($people);
+    $oldest = $collection->max('age');
+
+    $personOldestChild = $collection->max(function($person) {
+        return $person->child->age;
+    });
+
+    $personWithOldestDad = $collection->min('dad.age');
+
+Grouping and Counting
+---------------------
+
+Collection values can be grouped by different keys in a new collection when they
+share the same value for a property::
+
+    $students = [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy' 'grade' => 10],
+        ['name' => 'Barbara', 'grade' => 9]
+    ];
+    $collection = new Collection($students);
+    $studentsByGrade = $collection->groupBy('grade');
+
+    //Result will look like this when converted to array:
+    [
+      10 => [
+        ['name' => 'Andrew', 'grade' => 10],
+        ['name' => 'Stacy', 'grade' => 10]
+      ],
+      9 => [
+        ['name' => 'Mark', 'grade' => 9],
+        ['name' => 'Barbara', 'grade' => 9]
+      ]
+    ]
+
+As usual, it is possible to provide either a dot separated path for nested
+properties or your own callback function to generate the groups dynamically::
+
+    $commentsByUserId = $comments->groupBy('user.id');
+
+    $classResults = $students->groupBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+If you only wish to know the number of occurrences per group, you can do so by
+using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
+should be already familiar to you::
+
+    $classResults = $students->countBy(function($student) {
+        retrun $student->grade > 6 ? 'approved' : 'reproved';
+    });
+
+    //Result could look like this when converted to array:
+    ['approved' => 70, 'reproved' => 20]
+
+There will be certain cases where you know an element is unique for the property
+you want to group by. If you wish a single result per group, you can use the
+function ``indexBy``::
+
+    $usersById = $users->indexBy('id');
+
+    //When converted to array result could look like
+    [
+        1 => 'markstory',
+        3 => 'jose_zap',
+        4 => 'jrbasso'
+    ]
+
+As with the ``groupBy`` function you can also use a property path or
+a callback::
+
+    $articlesByAuthorId = $articles->indexBy('author.id');
+
+    $filesByHash = $files->indexBy(function($file) {
+        return md5($file);
+    });
+
+Sorting
+=======
+
+Collection values can be sorted in ascending or descending order based on
+a column or custom function. To create a new sorted collection out of the values
+of another one, you can use ``sortBy``::
+
+    $collection = new Collection($people);
+    $sorted = $collection->sortBy('age');
+
+As seen above, you can sort by passing the name of a column or property that
+is present in the collection values. You are also able to specify a property
+path instead using the dot notation. The next example will sort articles by
+their author's name::
+
+    $collection = new Collection($articles);
+    $sorted = $collection->sortBy('author.name');
+
+The ``sortBy`` method is flexible enough to let you specify an extractor
+function that will let you select dynamically the value to use for comparing two
+different values in the collection::
+
+    $collection = new Collection($articles);
+    $sorted = $collection->sortBy(function($article) {
+        return $article->author->name . '-' . $article->title;
+    });
+
+In order to specify in which direction the collection should be sorted, you need
+to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
+sorting in ascending or descending direction respectively. By default,
+collections are sorted in ascending direction::
+
+    $collection = new Collection($people);
+    $sorted = $collection->sortBy('age', SORT_ASC);
+
+Sometimes you will need to specify which type of data you are trying to compare
+so that you get consistent results. For this purpose you should supply as third
+argument in the ``sortBy`` function one of the following constants:
+
+- **SORT_NUMERIC**: For comparing numbers
+- **SORT_STRING**: For comparing string values
+- **SORT_NATURAL**: For sorting string containing numbers and you'd like those
+  numbers to be order in a natural way. For example showing "10" after "2".
+- **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
+
+By default ``SORT_NUMERIC`` is used::
+
+    $collection = new Collection($articles);
+    $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
+
+.. warning::
+
+    If is often expensive to iterate sorted collections more than once, if you
+    plan to do so, consider converting the collection to an array or simply use
+    the ``compile`` method on it.
+
+Other Methods
+=============
+
+Collections allow you to quickly check if they contain one particular
+value: by using the ``contains`` method::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+    $hasThree = $collection->contains(3);
+
+Comparisons are performed using the ``===`` operator. If you wish to do looser
+comparison types you can use the ``some`` method.
+
+Sometimes you may wish to show a collection of values in a random order. In
+order to create a new collection that will return each value in a randomized
+position, use the ``shuffle``::
+
+    $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
+
+    // This could return ['b' => 2, 'c' => 3, 'a' => 1]
+    $collection->shuffle()->toArray();
+
+Withdrawing Elements
+--------------------
+
+Shuffling a collection is often useful when doing quick statistical analysis,
+another common operation when doing this sort of tasks is withdrawing a few
+random values out of a collection so that more tests can be performed on those.
+For example, if you wanted to select 5 random users to which you'd like to apply
+some A/B tests to, you can use the ``sample`` function::
+
+    $collection = new Colllection($people);
+
+    // withdraw maximum 20 random users from this collection
+    $testSubjects = $collection->sample(20);
+
+``sample`` will take at most the number of values you specify in the first argument,
+if there are not enough elements in the collection to satisfy the sample, the
+full collection in a random order is returned.
+
+Whenever you want to take a slice of a collection use the ``take`` function, it
+will create a new collection with at most the number of values you specify in the
+first argument, starting from the position passed in the second argument::
+
+    $topFive = $collection->sortBy('age')->take(5);
+
+    // Take 5 people from the collection starting from position 4
+    $nextTopFive = $collection->sortBy('age')->take(5, 4);
+
+Positions are zero-based, therefore the first position number is ``0``.
+
+Expanding Collections
+---------------------
+
+You can compose multiple collections into a single one. This enables you to
+gather data from various sources, concatenate it and apply other collection
+functions to it very smoothly. The ``append`` method will return a new
+collection containing the values from both sources::
+
+    $cakephpTweets = new Collection($tweets);
+    $myTimeline = $cakephpTweets->append($phpTweets);
+
+    // Tweets containing cakefest from both sources
+    $myTimeline->filter(function($tweet) {
+        return strpos($tweet, 'cakefest');
+    });
+
+.. warning::
+
+    When appending from different sources you can expect some keys from both
+    collections to be the same, for example when appending two simple arrays.
+    This can present a problem when converting a collection to an array using
+    ``toArray``. If you do not want values from one collection to override
+    others in the previous one based on their key, make sure that you call
+    ``toArray(false)`` in order to drop the keys and preserve all values.
+
+Modifiying Elements
+-------------------
+
+At times, you may have two separate sets of data that you would like to insert
+the elements of one set into each of the elements of the other set. This is
+a very common case when you fetch data from a data source that does not support
+data merging or joins natively.
+
+Collections offer an ``insert`` method that will allow you to insert each of the
+elements in one collection into a property inside each of elements of another
+collection::
+
+    $users = [
+        ['username' => 'mark'],
+        ['username' => 'juan'],
+        ['username' => 'jose']
+    ];
+
+    $languages = [
+        ['PHP', 'Python', 'Ruby'],
+        ['Bash', 'PHP', 'Javascript'],
+        ['Javascript', 'Prolog'],
+    ];
+
+    $merged = (new Collection($users))->insert('skills', $languages);
+
+When converted to an array, the ``$merged`` collection will look like this::
+
+    [
+        ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
+        ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
+        ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
+    ];
+
+The first parameter for the ``insert`` method is a dot separated path of
+properties to follow so that the elements can be inserted at that position. The
+second argument is anything that can be converted to a collection object.
+
+Please observe that elements are inserted by the position they are found, thus,
+the first element of the second collection is merged into the first
+element of the first collection.
+
+If there are not enough elements in the second collection to insert into the
+first one, then the target property will be filled with ``null`` values::
+
+    $languages = [
+        ['PHP', 'Python', 'Ruby'],
+        ['Bash', 'PHP', 'Javascript'],
+    ];
+
+    $merged = (new Collection($users))->insert('skills', $languages);
+
+    // Will yield
+
+    [
+        ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
+        ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
+        ['username' => 'jose', 'skills' => null]
+    ];
+
+The ``insert`` method can operate array elements or objects implementing the
+``ArrayAccess`` interface.
+
+Optimizing Collections
+----------------------
+
+Collections often perform most operations that you create using its functions in
+a lazy way. This means that even though you can call a function, it does not
+mean it is executed right away. This is true for a great deal of functions in
+this class. Lazy evaluation allows allows you to save resources in situations
+where you don't use all the values in a collection. You might not use all the
+values when iteration stops early, or when an exception/failure case is reached
+early.
+
+Additionally lazy evaluation helps speed up some operations, consider the
+following example::
+
+    $collection = new Collection($oneMillionItems);
+    $collection->map(function($item) {
+        return $item * 2;
+    });
+    $itemsToShow = $collection->take(30);
+
+Had collections not being lazy, we would have executed one million operations,
+even though we only wanted to show 30 elements out of it. Instead, our map
+operation was only applied to the 30 elements we used. We can also
+derive benefits from this lazy evaluation even for smaller collections when we
+do more than one operation on them, for example calling ``map`` twice and then
+``filter``.
+
+Lazy evaluation comes with its downside too, you could be doing the same
+operations more than once if you optimize it first. Consider now this example::
+
+    $ages = $collection->extract('age');
+
+    $youngerThan30 = $ages->filter(function($item) {
+        return $item < 30;
+    });
+
+    $olderThan30 = $ages->filter(function($item) {
+        return $item > 30;
+    });
+
+If we iterate both ``youngerThan30`` and ``olderThan30`` collection we would be,
+unfortunately, executing the ``extract`` operation twice. This is because
+collections are immutable and the lazy extracting operation would be done for
+both filters.
+
+Luckily we can overcome this issue with a single function. If you plan to reuse
+the values from certain operations more than once, you can compile the results
+into another collection using the ``compile`` function::
+
+    $ages = $collection->extract('age')->compile();
+    $youngerThan30 = ...
+    $olderThan30 = ...
+
+Now when the those 2 collections are iterated, they will only call the
+extracting operation once.
 
 .. meta::
-    :title lang=fr: Collections
-    :keywords lang=fr: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory
+    :title lang=en: Collections
+    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert

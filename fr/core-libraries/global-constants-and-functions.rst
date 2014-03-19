@@ -140,9 +140,9 @@ CakePHP, comme le débogage et la traduction de contenu.
 .. php:function:: env(string $key)
 
     Récupère une variable d'environnement depuis les sources disponibles.
-    Utilisé en secours si $_SERVER ou $_ENV sont désactivés.
+    Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.
 
-    Cette fonction émule également PHP_SELF et DOCUMENT_ROOT sur
+    Cette fonction émule également PHP\_SELF et DOCUMENT\_ROOT sur
     les serveurs ne les supportant pas. En fait, c'est une bonne idée
     de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()`
     (notamment si vous prévoyez de distribuer le code), puisque
@@ -219,57 +219,10 @@ dans votre application.
 
    Chemin vers le répertoire racine avec un slash à la fin.
 
-.. php:const:: CSS
-
-    Chemin vers le répertoire CSS publique.
-
-    .. deprecated:: 2.4
-
-.. php:const:: CSS_URL
-
-    Chemin web vers le répertoire CSS.
-
-    .. deprecated:: 2.4
-        Utilisez la valeur de config ``App.cssBaseUrl`` à la place.
-   
 .. php:const:: DS
 
     Raccourci pour la constante PHP DIRECTORY\_SEPARATOR, qui est égale à /
     pour Linux et \\ pour Windows.
-
-.. php:const:: FULL_BASE_URL
-
-    Préfix URL complet. Comme ``https://example.com``
-
-    .. deprecated:: 2.4
-        Cette constante est dépréciée, vous devriez utiliser
-        :php:meth:`Router::fullbaseUrl()` à la place.
-
-.. php:const:: IMAGES
-
-    Chemin vers le répertoire images publique.
-
-    .. deprecated:: 2.4
-
-.. php:const:: IMAGES_URL
-
-    Chemin web vers le répertoire image publique.
-
-    .. deprecated:: 2.4
-        Utilisez la valeur de config ``App.imageBaseUrl`` à la place.
-
-.. php:const:: JS
-
-    Chemin vers le répertoire Javascript publique.
-
-    .. deprecated:: 2.4
-
-.. php:const:: JS_URL
-
-    Chemin web vers le répertoire Javascript publique.
-
-    .. deprecated:: 2.4
-        Utilisez la valeur de config ``App.jsBaseUrl`` à la place.
 
 .. php:const:: LOGS
 

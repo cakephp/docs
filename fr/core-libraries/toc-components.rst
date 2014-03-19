@@ -1,7 +1,7 @@
 Components (Composants)
 #######################
 
-CakePHP a une sélection de components pour aider à s'occuper de tâches basiques
+CakePHP a une sélection de components pour prendre en charge des tâches basiques
 dans vos controllers. Regardez la section sur :doc:`/controllers/components`
 pour savoir comment configurer et utiliser les components.
 
@@ -15,5 +15,3 @@ pour savoir comment configurer et utiliser les components.
     /core-libraries/components/security-component
     /core-libraries/components/request-handling
     /core-libraries/components/cookie
-    /core-libraries/components/access-control-lists
-
