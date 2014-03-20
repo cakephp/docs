@@ -50,10 +50,11 @@ When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.::
 
-    App::uses('CakeLogInterface', 'Log');
+    App::uses('BaseLog', 'Log');
 
-    class DatabaseLog implements CakeLogInterface {
+    class DatabaseLog extends BaseLog {
         public function __construct($options = array()) {
+            parent::__construct($options);
             // ...
         }
 
@@ -62,12 +63,18 @@ properties are passed to the log stream's constructor as an array.::
         }
     }
 
-CakePHP has no requirements for Log streams other than that they
-must implement a ``write`` method. This write method must take two
-parameters ``$type, $message`` in that order. ``$type`` is the
-string type of the logged message, core values are ``error``,
-``warning``, ``info`` and ``debug``. In addition you can define
-your own types by using them when you call ``CakeLog::write``.
+While CakePHP has no requirements for Log streams other than that they
+must implement a ``write`` method, extending the ``BaseLog`` class has a few
+benefits:
+
+- It automatically handles the scope and type argument casting.
+- It implements the ``config()`` method which is required to make scoped logging
+  work.
+
+Each logger's write method must take two parameters ``$type, $message`` in that
+order. ``$type`` is the string type of the logged message, core values are
+``error``, ``warning``, ``info`` and ``debug``. In addition you can define your
+own types by using them when you call ``CakeLog::write``.
 
 .. _file-log:
 
@@ -76,9 +83,9 @@ your own types by using them when you call ``CakeLog::write``.
 As of 2.4 ``FileLog`` engine takes a few new options:
 
 * ``size`` Used to implement basic log file rotation. If log file size
-   reaches specified size the existing file is renamed by appending timestamp
-   to filename and new log file is created. Can be integer bytes value or
-   human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
+  reaches specified size the existing file is renamed by appending timestamp
+  to filename and new log file is created. Can be integer bytes value or
+  human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
 * ``rotate`` Log files are rotated specified times before being removed.
   If value is 0, old versions are removed rather then rotated. Defaults to 10.
 * ``mask`` Set the file permissions for created files. If left empty the default
@@ -86,7 +93,7 @@ As of 2.4 ``FileLog`` engine takes a few new options:
 
 .. warning::
 
-    Prior to 2.4 you had to include the suffix ``Log``` in your configuration
+    Prior to 2.4 you had to include the suffix ``Log`` in your configuration
     (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
     If you have been using a Log engine like ```DatabaseLogger`` that does not follow
     the convention to use a suffix ``Log`` for your class name you have to adjust your
@@ -181,9 +188,7 @@ a completely different storage for your logs.
 Using syslog is pretty much like using the default FileLog engine, you just need
 to specify `Syslog` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
-be done in the `bootstrap.php` file.
-
-::
+be done in the `bootstrap.php` file::
 
     CakeLog::config('default', array(
         'engine' => 'Syslog'
@@ -268,8 +273,11 @@ message. For example::
     CakeLog::warning('This gets written to both shops and payments streams', 'payments');
     CakeLog::warning('This gets written to both shops and payments streams', 'unknown');
 
-In order for scopes to work correctly, you **must** define the accepted
-``types`` on all loggers you want to use scopes with.
+In order for scopes to work, you **must** do a few things:
+
+#. Define the accepted ``types`` on loggers that use scopes.
+#. Loggers using scopes must implement a ``config()`` method. Extending the
+   ``BaseLog`` class is the easiest way to get a compatible method.
 
 CakeLog API
 ===========
