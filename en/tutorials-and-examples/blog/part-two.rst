@@ -380,13 +380,13 @@ back at our Articles model and make a few adjustments::
         }
     }
 
-The ``valdiationDefault`` method tells CakePHP how to validate your data
+The ``validationDefault()`` method tells CakePHP how to validate your data
 when the ``save()`` method is called. Here, we've specified that
 both the body and title fields must not be empty. CakePHP's
 validation engine is strong, with a number of pre-built rules
 (credit card numbers, email addresses, etc.) and flexibility for
 adding your own validation rules. For more information on that
-setup, check the :doc:`/models/data-validation`.
+setup, check the :doc:`/core-libraries/validation` documentation.
 
 Now that you have your validation rules in place, use the app to try to add
 an article with an empty title or body to see how it works.  Since we've used the
