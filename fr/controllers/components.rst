@@ -32,13 +32,13 @@ se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
 de vos controllers::
 
     class PostsController extends AppController {
-        public $components = array(
-            'Auth' => array(
-                'authorize' => array('controller'),
-                'loginAction' => array('controller' => 'users', 'action' => 'login')
-            ),
-            'Cookie' => array('name' => 'CookieMonster')
-        );
+        public $components = [
+            'Auth' => [
+                'authorize' => ['controller'],
+                'loginAction' => ['controller' => 'users', 'action' => 'login']
+            ],
+            'Cookie' => ['name' => 'CookieMonster']
+        ];
 
 La portion de code précédente est un exemple de configuration d'un component
 avec le tableau ``$components``. Tous les components du coeur permettent aux
@@ -48,8 +48,8 @@ d'une fonction à la propriété d'un component. Ceci peut aussi être exprimé
 comme ceci::
 
     public function beforeFilter() {
-        $this->Auth->authorize = array('controller');
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->authorize = ['controller'];
+        $this->Auth->loginAction = ['controller' => 'users', 'action' => 'login'];
 
         $this->Cookie->name = 'CookieMonster';
     }
@@ -59,9 +59,9 @@ configuration avant que le controller ``beforeFilter()`` soit lancé.
 Pour cela, certains components permettent aux options de configuration
 d'être définies dans le tableau ``$components``::
 
-    public $components = array(
-        'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
-    );
+    public $components = [
+        'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
+    ];
 
 Consultez la documentation appropriée pour connaître les options de
 configuration que chaque component fournit.
@@ -71,19 +71,20 @@ les alias des components. Cette fonctionnalité est utile quand vous voulez
 remplacer ``$this->Auth`` ou une autre référence de Component commun avec
 une implémentation sur mesure::
 
-    // app/Controller/PostsController.php
+    // App/Controller/PostsController.php
     class PostsController extends AppController {
-        public $components = array(
-            'Auth' => array(
+        public $components = [
+            'Auth' => [
                 'className' => 'MyAuth'
-            )
-        );
+            ]
+        ];
     }
 
-    // app/Controller/Component/MyAuthComponent.php
-    App::uses('AuthComponent', 'Controller/Component');
+    // App/Controller/Component/MyAuthComponent.php
+    use Cake\Controller\Component\AuthComponent;
+
     class MyAuthComponent extends AuthComponent {
-        // Ajouter votre code pour surcharger le AuthComponent du coeur
+        // Add your code to override the core AuthComponent
     }
 
 Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
@@ -104,12 +105,12 @@ comme propriété dans votre controller. Si vous avez chargé la
 controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController {
-        public $components = array('Session', 'Cookie');
-        
+        public $components = ['Session', 'Cookie'];
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
 
@@ -141,8 +142,8 @@ Callbacks des Components
 
 Les components vous offrent aussi quelques callbacks durant leur cycle de vie
 qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api
-:ref:`component-api` pour plus d'informations sur les callbacks possibles
-des components.
+:ref:`component-api` et :doc:`/core-libraries/events` pour plus d'informations
+sur les callbacks possibles des components.
 
 Créer un Component
 ==================
@@ -154,12 +155,14 @@ de l'utiliser dans plusieurs controllers différents.
 
 La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
-``app/Controller/Component/MathComponent.php``. La structure de base pour
+``/App/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
 
+    use Cake\Controller\Component;
+
     class MathComponent extends Component {
-        public function faireDesOperationsComplexes($montant1, $montant2) {
-            return $montant1 + $montant2;
+        public function doComplexOperation($amount1, $amount2) {
+            return $amount1 + $amount2;
         }
     }
 
@@ -180,24 +183,24 @@ de celui-ci::
 
     /* Rend le nouveau component disponible par $this->Math
     ainsi que le component standard $this->Session */
-    public $components = array('Math', 'Session');
+    public $components = ['Math', 'Session'];;
 
 Les Components déclarés dans ``AppController`` seront fusionnés avec ceux
 déclarés dans vos autres controllers. Donc il n'y a pas besoin de re-déclarer
 le même component deux fois.
 
 Quand vous incluez des Components dans un Controller, vous pouvez
-aussi déclarer un ensemble de paramètres qui seront passés à la
-méthode initialize() du Component. Ces paramètres peuvent alors être
-pris en charge par le Component::
+aussi déclarer un ensemble de paramètres qui seront passés au constructeur
+du Component. Ces paramètres peuvent alors être pris en charge par le
+Component::
 
-    public $components = array(
-        'Math' => array(
+    public $components = [
+        'Math' => [
             'precision' => 2,
-            'generateurAleatoire' => 'srand'
-        ),
+            'randomGenerator' => 'srand'
+        ],
         'Session', 'Auth'
-    );
+    ];
 
 L'exemple ci-dessus passerait le tableau contenant "precision"
 et "generateurAleatoire" comme second paramètre au
@@ -213,12 +216,14 @@ Dans ce cas, vous pouvez inclure d'autres components dans votre component
 exactement de la même manière que dans vos controllers - en utilisant la
 variable ``$components``::
 
-    // app/Controller/Component/CustomComponent.php
-    class CustomComponent extends Component {
-        // l'autre component que votre component utilise
-        public $components = array('Existing'); 
+    // App/Controller/Component/CustomComponent.php
+    use Cake\Controller\Component;
 
-        public function initialize($controller) {
+    class CustomComponent extends Component {
+        // the other component your component uses
+        public $components = ['Existing'];
+
+        public function initialize(Controller $controller) {
             $this->Existing->foo();
         }
 
@@ -227,12 +232,10 @@ variable ``$components``::
        }
     }
 
-    // app/Controller/Component/ExistingComponent.php
-    class ExistingComponent extends Component {
+    // App/Controller/Component/ExistingComponent.php
+    use Cake\Controller\Component;
 
-        public function initialize($controller) {
-            $this->Parent->bar();
-        }
+    class ExistingComponent extends Component {
 
         public function foo() {
             // ...
@@ -252,11 +255,11 @@ API de Component
 
     La classe de base de Component vous offre quelques méthodes pour le
     chargement facile des autres Components à travers
-    :php:class:`ComponentCollection` comme nous l'avons traité avec la gestion
-    habituelle des paramètres. Elle fournit aussi des prototypes pour tous
-    les callbacks des components.
+    :php:class:`Cake\\Controller\\ComponentRegistry` comme nous l'avons traité
+    avec la gestion habituelle des paramètres. Elle fournit aussi des prototypes
+    pour tous les callbacks des components.
 
-.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+.. php:method:: __construct(ComponentRegistry $registry, $settings = [])
 
     Les Constructeurs pour la classe de base du component. Tous les
     paramètres se trouvent dans ``$settings`` et ont des propriétés publiques.
@@ -266,35 +269,33 @@ API de Component
 Les Callbacks
 -------------
 
-.. php:method:: initialize(Controller $controller)
+.. php:method:: initialize(Event $event, Controller $controller)
 
     Est appelée avant la méthode du controller
     beforeFilter.
 
-.. php:method:: startup(Controller $controller)
+.. php:method:: startup(Event $event, Controller $controller)
 
     Est appelée après la méthode du controller
     beforeFilter mais avant que le controller n'exécute l'action prévue.
 
-.. php:method:: beforeRender(Controller $controller)
+.. php:method:: beforeRender(Event $event, Controller $controller)
 
     Est appelée après que le controller exécute la
     logique de l'action requêtée, mais avant le rendu de la vue et le
     layout du controller.
 
-.. php:method:: shutdown(Controller $controller)
+.. php:method:: shutdown(Event $event, Controller $controller)
 
     Est appelée avant que la sortie soit envoyée au navigateur.
 
-.. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
 
-    Est invoquée quand la méthode de redirection
-    du controller est appelée, mais avant toute action qui suit. Si cette
-    méthode retourne false, le controller ne continuera pas de rediriger la
-    requête. Les variables $url, $status et $exit ont la même signification
-    que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
-    de caractère qui sera interpretée comme une URL pour rediriger ou retourner
-    un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
+    Est invoquée quand la méthode de redirection du controller est appelée,
+    mais avant toute action qui suit. Si cette méthode retourne false, le
+    controller ne continuera pas de rediriger la requête. Les paramètres $url et
+    $response vous permettent d'inspecter et de modifier la localisation de tout
+    autre header dans la réponse.
 
 
 .. meta::
