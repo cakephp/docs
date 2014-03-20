@@ -15,7 +15,7 @@ Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
 Query objects are lazily evaluated. This means a query is not executed until one of
-the following things occurs:
+the following things occur:
 
 - The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called. This will return the underlying
@@ -375,7 +375,7 @@ can be useful when you do not know whether you will get a scalar or array of
 parameters. The ``[]`` suffix on any data type name indicates to the query
 builder that you want the data handled as an array. If the data is not an array,
 it will first be cast to an array. After that, each value in the array will
-be cast using the :ref:`database-data-types <type system>`. This works with
+be cast using the :ref:`type system <database-data-types>`. This works with
 complex types as well, for example you could take a list of DateTime objects
 using::
 
@@ -400,6 +400,53 @@ Expression objects can be used with any query builder methods like ``where``,
 
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
+
+Returning the Total Count of Records
+------------------------------------
+
+Using a single query object it is possible to obtain the total number of rows
+found for a set of conditions::
+
+    $total = $articles->find()->where(['is_active' => true])->count();
+
+The count method will ignore the ``limit``, ``offset`` and ``page`` clauses,
+thus the following will return the same result::
+
+    $total = $articles->find()->where(['is_active' => true])->limit(10)->count();
+
+This is useful when you need to know the total result set size in advance
+without having to construct another query object. Likewise, all result
+formatting and map-reduce routines are ignored when using the ``count``.
+
+Moreover, it is possible to return the total count for a query containing group
+by clauses without having to rewrite the query in any way. For example consider
+this query for retrieving article ids and their comments count::
+
+    $query = $articles->find();
+    $query->find()
+        ->select(['Articles.id', $query->func()->count('Comments.id')])
+        ->matching('Comments')
+        ->groupBy(['Articles.id']);
+    $total = $query->count();
+
+After counting, the query can still be used for fetching the associated
+records::
+
+    $list = $query->all();
+
+Sometimes, you may want to provide an alternate method for counting the total
+records of a query. One common use case for this is providing
+a cached value or an estimate of the total rows, or to alter the query to remove
+expensive unneeded parts such as left joins. This becomes particularly handy
+when using the CakePHP built-in pagination system which calls the count method::
+
+    $query = $query->where(['is_active' => true])->counter(function($query) {
+        return 100000;
+    });
+    $query->count(); // Returns 100000
+
+In the example above, when the pagination component calls the count method, it
+will receive the estimated hard-coded number of rows.
 
 Loading Associations
 ====================
@@ -582,7 +629,7 @@ After your queries you may need to do some post processing. If you need to add
 a few calculated fields, or derived data you can use the ``formatResults()``
 method. This is a lightweight way to map over the result sets. If you need more
 control over the process, or want to reduce results you should use
-the :ref:`map-reduce <Map/Reduce>` feature instead. If you were querying a list
+the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
