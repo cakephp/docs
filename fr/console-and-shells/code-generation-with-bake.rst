@@ -27,11 +27,13 @@ En exécutant Bake la première fois, vous serez invité à créer un fichier de
 configuration de la base de données, si vous n'en avez pas créé un auparavant.
 
 Après que vous avez créé un fichier de configuration de la base de données,
-exécuter Bake vous présentera les options suivantes ::
+exécuter Bake vous présentera les options suivantes:
+
+::
 
     ---------------------------------------------------------------
-    App : app
-    Path: /path-to/project/app (Chemin: /chemin/vers/app/du/projet)
+    App : App
+    Path: /path-to/project/App (Chemin: /chemin/vers/App/du/projet)
     ---------------------------------------------------------------
     Interactive Bake Shell
     ---------------------------------------------------------------
@@ -44,7 +46,7 @@ exécuter Bake vous présentera les options suivantes ::
     [T]est case
     [Q]uit
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >  
+    >
 
 Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la
 ligne de commande ::
