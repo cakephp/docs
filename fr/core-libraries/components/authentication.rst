@@ -78,8 +78,8 @@ d'authentification en utilisant un tableau::
 
     // Passer la configuration 
     $this->Auth->authenticate = array(
-        'Basic' => array('userModel' => 'Membre'),
-        'Form' => array('userModel' => 'Membre')
+        'Basic' => array('userModel' => 'Members'),
+        'Form' => array('userModel' => 'Members')
     );
 
 Dans le deuxième exemple vous pourrez noter que nous avons à déclarer
@@ -91,7 +91,7 @@ La cle ``all`` est aussi utilisée comme cela
 
     // Passer la configuration en utilisant 'all'
     $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Membre'),
+        AuthComponent::ALL => array('userModel' => 'Members'),
         'Basic',
         'Form'
     );
@@ -106,14 +106,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
-- ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
-  est chargé.
-
-.. versionadded:: 2.2
-
-- ``passwordHasher`` Classe de hash de mot de passe. Par défaut à ``Simple``.
-
-  .. versionadded:: 2.4
+- ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Blowfish``.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
 
@@ -185,7 +178,6 @@ Une simple fonction de connexion pourrait ressembler à cela ::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
-                // Avant 2.3, utilisez `return $this->redirect($this->Auth->redirect());`
             } else {
                 $this->Session->setFlash(__('Username ou password est incorrect'), 'default', array(), 'auth');
             }
@@ -200,11 +192,9 @@ flash est défini.
 
 .. warning::
 
-    Dans la version 2.0 ``$this->Auth->login($this->request->data)``
-    connectera l'utilisateur avec les données postées., tandis que avec la
-    version 1.3 ``$this->Auth->login($this->data)`` tentera
-    d'identifier l'utilisateur en premier et le connectera seulement en cas
-    de succès.
+    ``$this->Auth->login($this->request->data)`` connectera l'utilisateur avec
+    les données postées. Elle ne va pas réellement vérifier les certificats avec
+    une classe d'authentification.
 
 Utilisation de l'authentification Digest et Basic pour la connexion    
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -218,14 +208,6 @@ assurer que AuthComponent n'essaie pas de lire les infos de l'user
 certificats de l'user à chaque requête, cela crée un petit montant de charges
 supplémentaires, mais permet aux clients de se connecter sans utiliser les
 cookies.
-
-.. note::
-
-  Avant 2.4, vous avez toujours besoin de l'action login puisque vous êtes
-  redirigés vers login quand un user non authentifié essaie d'accéder à une
-  page protégée même en utilisant seulement l'auth basic ou digest. Aussi
-  configurer ``AuthComponent::$sessionKey`` à false va causer une erreur avant
-  2.4.
 
 Créer des objets d'authentification personnalisés
 -------------------------------------------------
@@ -315,11 +297,6 @@ Si authenticator retourne null, `AuthComponent` redirige l'user vers l'action
 login. Si c'est une requête ajax et `AuthComponent::$ajaxLogin` est spécifiée,
 cet element est rendu, sinon un code de statut HTTP 403 est retourné.
 
-.. note::
-
-  Avant 2.4, les objets d'authentification ne fournissent pas de méthode
-  `unauthenticated()`.
-
 Afficher les messages flash de Auth
 -----------------------------------
 
@@ -348,7 +325,6 @@ l'authentification échoue ::
 
     $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente d'accéder à une partie du site qui est protégé.";
 
-.. versionchanged:: 2.4
    Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
    l'user se soit déja connecté. Vous pouvez supprimer ce message en
    configurant sa valeur avec le boléen `false`.
@@ -364,20 +340,12 @@ Dans le beforeFilter() de votre controller, ou les configurations du component::
 Hachage des mots de passe
 -------------------------
 
-Le component Auth ne fait fait plus automatiquement le hachage de tous les mots
-de passe qu'il rencontre.
-Ceci à été enlevé parce qu'il rendait un certain nombre de tâches communes
-comme la validation difficile. Vous ne devriez **jamais** stocker un mot de
-passe en clair, et avant de sauvegarder un utilisateur vous devez toujours
-hacher le mot de passe.
-
-As of 2.4 the generation and checking of password hashes has been delegated to
-password hasher classes. Authenticating objects use a new setting ``passwordHasher``
-which specifies the password hasher class to use. It can be a string specifying class
-name or an array with key ``className`` stating the class name and any extra keys
-will be passed to password hasher constructor as config. The default hasher
-class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
-type set in Security class will be used. You can use specific hash type like this::
+Authenticating objects use a new setting ``passwordHasher`` which specifies the
+password hasher class to use. It can be a string specifying class name or an
+array with key ``className`` stating the class name and any extra keys will be
+passed to password hasher constructor as config. The default hasher class
+``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash type
+set in Security class will be used. You can use specific hash type like this::
 
     public $components = array(
         'Auth' => array(
@@ -395,12 +363,12 @@ type set in Security class will be used. You can use specific hash type like thi
 When creating new user records you can hash a password in the beforeSave
 callback of your model using appropriate password hasher class::
 
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
             if (!$this->id) {
-                $passwordHasher = new SimplePasswordHasher();
+                $passwordHasher = new BlowfishPasswordHasher();
                 $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
             }
             return true;
@@ -411,31 +379,6 @@ Vous n'avez pas besoin de hacher le mot de passe avant d'appeler
 ``$this->Auth->login()``.
 Les différents objets d'authentification hacherons les mots de passe
 individuellement.
-
-Utiliser bcrypt pour les mots de passe
---------------------------------------
-
-Dans CakePHP 2.3, la classe ``BlowfishAuthenticate`` a été introduite pour
-permettre l'utilisation de `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_
-c'est-à-dire Blowfish pour les mots de passe hashés.
-Les hashes Bcrypt sont plus difficiles à forcer sauvagement par rapport aux
-mots de passe stockés avec sha1. Mais ``BlowfishAuthenticate`` a été déprécié
-dans 2.4 et à la place ``BlowfishPasswordHasher`` a été ajoutée.
-
-Un hasher de mot de passe blowfish peut être utilisé avec toute classe
-d'authentification. Tout ce que vous avez à faire est de spécifier la
-configuration ``passwordHasher`` pour l'objet d'authentification::
-
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Blowfish'
-                )
-            )
-        )
-    );
-
 
 Hachage de mots de passe pour l'authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -615,7 +558,6 @@ les paramètres définis pour la clé 'all'. Chaque paramètres passés a un obj
 d'autorisation spécifique remplacera la clé correspondante dans la clé 'all'.
 Le noyau authorize objects supporte les clés de configuration suivantes.
 
-
 - ``actionPath`` Utilisé par ``ActionsAuthorize`` pour localiser le controller
   action ACO's dans l'arborescence ACO.
 - ``actionMap`` Action -> CRUD mappings. Utilisé par ``CrudAuthorize`` et
@@ -681,10 +623,7 @@ l'accès. Vous pouvez marquer des actions comme publique en utilisant
 component Auth ne vérifiera pas la connexion d'un utilisateur, ni
 n'autorisera la vérification des objets ::
 
-    // Permet toutes les actions. CakePHP 2.0
-    $this->Auth->allow('*');
-
-    // Permet toutes les actions. CakePHP 2.1
+    // Permet toutes les actions
     $this->Auth->allow();
 
     // Ne permet que les actions view et index.
@@ -692,12 +631,6 @@ n'autorisera la vérification des objets ::
 
     // Ne permet que les actions view et index.
     $this->Auth->allow(array('view', 'index'));
-
-.. warning::
-
-  Si vous utilisez le scaffolding, permettre tout ne vas identifier et
-  autoriser les méthodes scaffoldées. Vous devez spécifier les noms des
-  actions.
 
 Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``allow()``.
 Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
@@ -832,9 +765,8 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     Erreur à afficher quand les utilisateurs font une tentative d'accès à un
     objet ou une action à laquelle ils n'ont pas accès.
 
-    .. versionchanged:: 2.4
-       You can suppress authError message from being displayed by setting this
-       value to boolean `false`.
+    You can suppress authError message from being displayed by setting this
+    value to boolean `false`.
 
 .. php:attr:: authorize
 
@@ -976,14 +908,6 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     configurée la propriété authorize avant d'appeler cette méthode. Ainsi
     cela déléguera $map à tous les objets autorize attachés.
 
-.. php:staticmethod:: password($pass)
-
-.. deprecated:: 2.4
-
-.. php:method:: redirect($url = null)
-
-.. deprecated:: 2.3
-
 .. php:method:: redirectUrl($url = null)
 
     Si il n'y a pas de paramètre passé, elle obtient l'authentification de
@@ -991,8 +915,6 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     utilisateur devrait être redirigé lors de la connexion. Se repliera vers
     :php:attr:`AuthComponent::$loginRedirect` si il n'y a pas de valeur de
     redirection stockée.
-
-.. versionadded:: 2.3
 
 .. php:method:: shutdown($Controller)
 
