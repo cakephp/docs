@@ -97,10 +97,6 @@ tables you inserted into mySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
 
-Avoid using Scaffold here. The generation of the ACOs will be
-seriously affected if you bake the controllers with the Scaffold
-feature.
-
 While baking the Models cake will automagically detect the
 associations between your Models (or relations between your
 tables). Let cake supply the correct hasMany and belongsTo
