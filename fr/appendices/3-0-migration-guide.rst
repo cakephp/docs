@@ -324,6 +324,9 @@ Request
 * :php:meth:`Cake\\Network\\Request::env()` a été ajoutée.
 * :php:meth:`Cake\\Network\\Request::acceptLanguage()` a été changée d'une
   méthode static en non static.
+* Le detecteur de Request pour "mobile" a été retiré du coeur. A la place
+  le template de app ajoute des detecteurs pour "mobile" et "tablet" en
+  utilisant la lib `MobileDetect`.
 
 Response
 --------
