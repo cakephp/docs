@@ -17,7 +17,7 @@ Here's what you'll need:
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
    configuration, but most folks can get CakePHP up and running without
-   any configuration at all. Make sure you have PHP 5.2.8 or greater.
+   any configuration at all. Make sure you have PHP 5.4.3 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
    database: CakePHP will be taking the reins from there. Since we're using MySQL,
@@ -35,7 +35,7 @@ Getting CakePHP
 
 To get a fresh download, visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
-and download the latest release of 3.0
+and download the latest release of CakePHP 3.0.
 
 You can also install CakePHP using ``Composer``::
 
@@ -43,7 +43,7 @@ You can also install CakePHP using ``Composer``::
     php composer.phar create-project cakephp/app
 
 This will download Composer and install the CakePHP application skeleton. For
-this tutorial we're just going to download the zip file as its the simplest
+this tutorial we're just going to download the zip file as it's the simplest
 option.
 
 Regardless of how you downloaded it, place the code inside of your DocumentRoot.
@@ -52,12 +52,17 @@ Once finished, your directory setup should look something like the following::
     /path_to_document_root
         /App
         /Plugin
+        /Test
         /tmp
-        /webroot
         /vendor
+        /webroot
+        .gitignore
         .htaccess
-        index.php
+        .travis.yml
         README.md
+        composer.json
+        index.php
+        phpunit.xml.dist
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
@@ -99,8 +104,8 @@ CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
 Check out :doc:`/getting-started/cakephp-conventions` for more
-information, but suffice it to say that naming our table 'posts'
-automatically hooks it to our Post model, and having fields called
+information, but suffice it to say that naming our table 'articles'
+automatically hooks it to our Articles model, and having fields called
 'modified' and 'created' will be automagically managed by CakePHP.
 
 Database Configuration
@@ -196,7 +201,7 @@ you up and running:
    CakePHP without the needed .htaccess files. This sometimes happens
    because some operating systems treat files that start with '.' as
    hidden, and don't copy them. Make sure your copy of CakePHP is from
-   the downloads section of the site or our git repository.
+   the downloads section of the site or our GitHub repository.
 
 #. Make sure Apache is loading up mod\_rewrite correctly! You
    should see something like::
@@ -212,7 +217,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use Cake's built in pretty URLs. In ``/App/Config/app.php``,
+use CakePHP's built in pretty URLs. In ``/App/Config/app.php``,
 uncomment the line that looks like::
 
     'App' => [
@@ -223,7 +228,6 @@ uncomment the line that looks like::
 Also remove these .htaccess files::
 
     /.htaccess
-    /App/.htaccess
     /App/webroot/.htaccess
 
 
