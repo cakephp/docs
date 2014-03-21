@@ -18,10 +18,13 @@ Voici ce dont vous aurez besoin :
    bien que les instructions pour utiliser d'autres serveurs doivent
    être assez semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire
-   fonctionner CakePHP sans aucune configuration préalable.
+   fonctionner CakePHP sans aucune configuration préalable. Assurez-vous
+   d'avoir PHP 5.4.3 ou supérieur.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL.
    Vous aurez besoin d'un minimum de connaissance en SQL afin de créer une
-   base de données : CakePHP prendra les rênes à partir de là.
+   base de données : CakePHP prendra les rênes à partir de là. Puisque nous
+   utilisons MySQL, assurez-vous aussi que vous avez ``pdo_mysql`` activé
+   dans PHP.
 #. Des connaissances de base en PHP. Plus vous aurez d'expérience en
    programmation orienté objet, mieux ce sera ; mais n'ayez crainte, même
    si vous êtes adepte de la programmation procédurale.
@@ -55,12 +58,17 @@ d'installation devrait ressembler à quelque chose comme cela::
     /chemin_du_document_root
         /App
         /Plugin
+        /Test
         /tmp
-        /webroot
         /vendor
+        /webroot
+        .gitignore
         .htaccess
-        index.php
+        .travis.yml
         README.md
+        composer.json
+        index.php
+        phpunit.xml.dist
 
 A présent, il est peut-être temps de voir un peu comment fonctionne la
 structure de fichiers de CakePHP : lisez le chapitre
@@ -103,8 +111,8 @@ schémas de bases de données, mais respecter les conventions vous fera gagner
 du temps.
 
 Consultez le chapitre :doc:`/getting-started/cakephp-conventions` pour plus
-d'informations, mais il suffit de comprendre que nommer notre table 'posts'
-permet de la relier automatiquement à notre model Post, et qu'avoir des
+d'informations, mais il suffit de comprendre que nommer notre table 'articles'
+permet de la relier automatiquement à notre model Articles, et qu'avoir des
 champs 'modified' et 'created' permet de les avoir gérés automagiquement par
 CakePHP.
 
@@ -206,7 +214,7 @@ web fonctionne:
    certains systèmes d'exploitation traitent les fichiers qui commencent par
    '.' comme des fichiers cachés, et ne les copient pas. Assurez-vous que votre
    copie de CakePHP provient de la section downloads du site ou de notre dépôt
-   git.
+   Github.
 
 #. Assurez-vous qu'Apache charge mod\_rewrite correctement! Vous devriez voir
    quelque chose comme::
@@ -222,8 +230,8 @@ web fonctionne:
 
 Si vous ne voulez pas ou ne pouvez pas obtenir mod\_rewrite (ou d'autres modules
 compatibles) et le lancer sur votre serveur, vous aurez besoin d'utiliser les
-belles URLs intégrées à Cake. Dans ``/App/Config/app.php``, décommentez la ligne
-qui ressemble à::
+belles URLs intégrées à CakePHP. Dans ``/App/Config/app.php``, décommentez la
+ligne qui ressemble à::
 
     'App' => [
         // ...
@@ -233,7 +241,6 @@ qui ressemble à::
 Retirez aussi ces fichiers .htaccess::
 
     /.htaccess
-    /App/.htaccess
     /App/webroot/.htaccess
 
 
