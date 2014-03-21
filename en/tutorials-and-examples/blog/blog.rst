@@ -104,7 +104,7 @@ CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
 Check out :doc:`/getting-started/cakephp-conventions` for more
-information, but suffice it to say that naming our table 'articles'
+information, but it's suffice to say that naming our table 'articles'
 automatically hooks it to our Articles model, and having fields called
 'modified' and 'created' will be automagically managed by CakePHP.
 
