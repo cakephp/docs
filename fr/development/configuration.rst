@@ -315,7 +315,7 @@ contexte statique::
             'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
 
-    Vous pouvez utiliser ``Configure::write('debug', $int)`` pour intervertir
+    Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
     les modes de debug et de production à la volée. C'est particulièrement
     pratique pour les intéractions AMF et SOAP quand les informations de debug
     peuvent entraîner des problèmes de parsing.

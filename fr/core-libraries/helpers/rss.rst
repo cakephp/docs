@@ -188,7 +188,7 @@ Le Validateur de Feed ou le site de w3c à http://validator.w3.org/feed/.
 .. note::
 
     Vous aurez besoin de définir la valeur de 'debug' dans votre configuration
-    du coeur à 1 ou à 0 pour obtenir un flux valide, à cause des différentes
+    du coeur à ``false`` pour obtenir un flux valide, à cause des différentes
     informations de debug ajoutées automatiquement sous des paramètres de
     debug plus haut qui cassent la syntaxe XML ou les règles de validation du
     flux.

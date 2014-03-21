@@ -12,11 +12,10 @@ Si vous sortez votre application dans la nature, il est bon de vous assurer
 qu'elle n'a pas de fuites. Allez voir
 :doc:`/core-libraries/components/security-component` pour vous sécuriser contre
 les attaques CSRF, form field tampering, etc... Utiliser
-:doc:`/models/data-validation`, et/ou :doc:`/core-utility-libraries/sanitize`
-est aussi une bonne idée, pour protéger votre base de données et aussi contre
-les attaques XSS. Vérifiez que seul votre répertoire ``webroot`` est visible
-publiquement, et que vos secrets (comme le salt de votre app, et les clés de
-sécurité) sont privés et uniques aussi!
+:doc:`/models/data-validation` est aussi une bonne idée, pour protéger votre
+base de données et aussi contre les attaques XSS. Vérifiez que seul votre
+répertoire ``webroot`` est visible publiquement, et que vos secrets (comme
+le salt de votre app, et les clés de sécurité) sont privés et uniques aussi!
 
 Définir le document root
 ========================
@@ -31,16 +30,16 @@ la documentation :doc:`/installation/url-rewriting` pour une
 information sur la spécificité de chaque webserveur.
 
 Dans tous les cas, vous devez définir le document de l'hôte/domaine virtuel
-pour qu'il soit ``app/webroot/``. Cela retire la possibilité que des fichiers
+pour qu'il soit ``webroot/``. Cela retire la possibilité que des fichiers
 soient executés en-dehors du répertoire webroot.
 
 Mise à jour de core.php
 =======================
 
 Mettre à jour core.php, spécialement la valeur de ``debug`` est extrêmement
-important. Mettre debug = 0 désactive un certain nombre de fonctionnalités de
-développement qui ne devraient jamais être exposées sur internet. Désactiver
-le debug change les types de choses suivantes:
+important. Mettre debug = ``false`` désactive un certain nombre de
+fonctionnalités de développement qui ne devraient jamais être exposées sur
+internet. Désactiver le debug change les types de choses suivantes:
 
 * Les messages de Debug, créés avec :php:func:`pr()` et :php:func:`debug()`
   sont désactivés.
@@ -56,23 +55,26 @@ d'application utilisent ``debug`` pour modifier leur comportement.
 
 Vous pouvez créer une variable d'environnement pour définir le niveau de
 debug dynamiquement entre plusieurs environnements. Cela va éviter de déployer
-une application avec debug > 0 et vous permet de ne pas avoir à changer de
-niveau de debug chaque fois avant de déployer vers un environnement de
+une application avec debug à ``true`` et vous permet de ne pas avoir à changer
+de niveau de debug chaque fois avant de déployer vers un environnement de
 production.
 
 Par exemple, vous pouvez définir une variable d'environment dans votre
 configuration Apache::
 
-	SetEnv CAKEPHP_DEBUG 2
+	SetEnv CAKEPHP_DEBUG 1
 
 Et ensuite vous pouvez définir le niveau de debug dynamiquement dans
 ``core.php``::
 
-	if (getenv('CAKEPHP_DEBUG')) {
-		Configure::write('debug', 2);
-	} else {
-		Configure::write('debug', 0);
-	}
+	$debug = (bool)getenv('CAKEPHP_DEBUG');
+
+	$config = [
+	    'debug' => $debug,
+	    .....
+	]
+
+.. _symlink-assets:
 
 Améliorer les performances de votre application
 ===============================================
@@ -82,7 +84,7 @@ les fichiers CSS des plugins à travers le Dispatcher est incroyablement
 inefficace, il est chaudement recommandé de les symlinker pour la
 production. Par exemple comme ceci::
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 .. meta::
     :title lang=fr: Déploiement

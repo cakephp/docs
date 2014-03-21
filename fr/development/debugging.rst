@@ -30,7 +30,7 @@ aussi la ligne et le fichier dont ils sont originaires par défaut.
 La sortie de cette fonction est seulement montrée si la variable de debug du
 coeur a été définie à une valeur supérieure à 0.
 
-.. versionchanged:: 2.1 
+.. versionchanged:: 2.1
     La sortie de ``debug()`` ressemble plus ``var_dump()``, et utilise
     :php:class:`Debugger` en interne.
 
@@ -59,7 +59,7 @@ Utiliser la Classe Debugger
 .. php:class:: Debugger
 
 Pour utiliser le debugger, assurez-vous d'abord que Configure::read('debug')
-est défini à une valeur supérieure à 0.
+est défini à une valeur supérieure à ``true``.
 
 .. php:staticmethod:: Debugger::dump($var)
 
@@ -112,7 +112,7 @@ est défini à une valeur supérieure à 0.
 
         //Dans PostsController::index()
         pr( Debugger::trace() );
-        
+
         //sorties
         PostsController::index() - APP/Controller/DownloadsController.php, line 48
         Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
@@ -135,14 +135,14 @@ est défini à une valeur supérieure à 0.
     de lignes $context autour.::
 
         pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
-        
+
         //sortira ce qui suit.
         Array
         (
             [0] => <code><span style="color: #000000"> * @access public</span></code>
             [1] => <code><span style="color: #000000"> */</span></code>
             [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-         
+
             [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
             [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
         )
