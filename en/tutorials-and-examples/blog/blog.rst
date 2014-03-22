@@ -128,15 +128,17 @@ like the following::
         // More configuration above.
         'Datasources' => [
             'default' => [
-                'className' => 'Cake\Database\Driver\Mysql',
-                'persistent' => 'false,',
+                'className' => 'Cake\Database\Connection',
+                'driver' => 'Cake\Database\Driver\Mysql',
+                'persistent' => false,
                 'host' => 'localhost',
                 'login' => 'cake_blog',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
                 'prefix' => false,
                 'encoding' => 'utf8',
-            ]
+                'timezone' => 'UTC'
+            ],
         ],
         // More configuration below.
     ];
