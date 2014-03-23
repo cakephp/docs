@@ -1065,7 +1065,7 @@ Création d'un chemin de navigation avec le Helper Html
 
     :param array $options: Un tableau de :term:`html attributes` pour les
         elements contenant ``<ul>``. Peut aussi contenir les options
-        'separator', 'firstClass' et 'lastClass'.
+        'separator', 'firstClass', 'lastClass' et 'escape'.
     :param string|array $startText: Le texte ou l'elément qui précède ul.
 
     Retourne le fil d'Ariane comme une liste (x)html.
@@ -1085,6 +1085,8 @@ Création d'un chemin de navigation avec le Helper Html
     .. versionchanged:: 2.3
         Les options 'separator', 'firstClass' et 'lastClass' ont été ajoutées.
 
+    .. versionchanged:: 2.5
+        L'option 'escape' a été ajoutée.
 
 .. meta::
     :title lang=fr: HtmlHelper
