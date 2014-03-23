@@ -154,12 +154,17 @@ Your development setup will look like this on the file system::
         cake3/
             App/
             Plugin/
+            Test/
             tmp/
             vendor/
             webroot/
+            .gitignore
             .htaccess
-            index.php
+            .travis.yml
             README.md
+            composer.json
+            index.php
+            phpunit.xml.dist
 
 If your web server is configured correctly, you should now find
 your CakePHP application accessible at
@@ -181,12 +186,17 @@ production setup will look like this on the file system::
     /cake_install/
         App/
         Plugin/
+        Test/
         tmp/
         vendor/
         webroot/ (this directory is set as DocumentRoot)
+        .gitignore
         .htaccess
-        index.php
+        .travis.yml
         README.md
+        composer.json
+        index.php
+        phpunit.xml.dist
 
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::
@@ -271,15 +281,6 @@ the status of your current database connection.
 
 Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
-
-Not working? If you're getting timezone related error from PHP
-uncomment the related line in ``App/Config/bootstrap.php``::
-
-   /**
-    * Uncomment this line and correct your server timezone to fix 
-    * any date & time related errors.
-    */
-       date_default_timezone_set('UTC');
 
 
 .. _GitHub: http://github.com/cakephp/cakephp
