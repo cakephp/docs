@@ -180,7 +180,7 @@ When generating URLs, routes are used too. Using
 a url will output /cooks/some_action/5 if the above route is the
 first match found.
 
-By default all named passed and arguments are extracted from URLs matching
+By default all named and passed arguments are extracted from URLs matching
 greedy templates. However, you can configure how and which named arguments are
 parsed using :php:meth:`Router::connectNamed()` if you need to.
 

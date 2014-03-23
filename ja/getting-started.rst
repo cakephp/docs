@@ -19,6 +19,7 @@ CakePHPを体験し学ぶ最良の方法は腰を据えて何かを作ること�
 ============
 
 .. toctree::
+    :maxdepth: 1
 
     getting-started/a-typical-cakephp-request
     getting-started/cakephp-conventions

@@ -193,6 +193,7 @@ Installation avancée et URL Rewriting
 =====================================
 
 .. toctree::
+    :maxdepth: 1
 
     installation/advanced-installation
     installation/url-rewriting

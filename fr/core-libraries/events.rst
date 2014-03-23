@@ -548,6 +548,7 @@ Lecture Supplémentaire
 ======================
 
 .. toctree::
+    :maxdepth: 1
     
     /core-libraries/collections
     /models/behaviors

@@ -154,6 +154,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 =====================================
 
 .. toctree::
+    :maxdepth: 1
 
     installation/advanced-installation
     installation/url-rewriting

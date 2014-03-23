@@ -72,6 +72,15 @@ Note that all files specified should actually exist in the configured
 plugin(s) or PHP will give warnings for each file it cannot load. This is
 especially important to remember when specifying defaults for all plugins.
 
+CakePHP 2.3.0 added an ``ignoreMissing``` option, that allows you to ignore any
+missing routes and bootstrap files when loading plugins. You can shorten the
+code needed to load all plugins using this::
+
+    // Loads all plugins including any possible routes and bootstrap files
+    CakePlugin::loadAll(array(
+        array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
+    ));
+
 Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this::

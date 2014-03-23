@@ -514,7 +514,7 @@ réponse::
 Comme montré dans l'exemple ci-dessus, vous devez passer le
 chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
 contenu si c'est un type de fichier connu listé dans
-:php:attr:`CakeReponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types
+:php:attr:`CakeResponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types
 avant d'appeler :php:meth:`CakeResponse::file()` en utilisant la méthode
 :php:meth:`CakeResponse::type()`.
 

@@ -76,16 +76,15 @@ donate your brand new sports car.
 
 .. _cakephp-official-communities:
 
-CakePHP Official Communities
-============================
-CakePHP also has it's official group in most popular social networking sites like Facebook, Google Plus. There are
-thousands of people discussing CakePHP projects, helping each other, solving problems, building projects
-and sharing ideas. It can be a great resource for finding archived answers, frequently asked questions, and
-getting answers to immediate problems. Join other CakePHP users in the following communities.
+Official CakePHP discussion group
+=================================
+`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
--   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
--   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
--   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
+CakePHP also has its official discusson group on Google Groups.
+There are thousands of people discussing CakePHP projects, helping each other,
+solving problems, building projects and sharing ideas.
+It can be a great resource for finding archived answers, frequently asked questions, and
+getting answers to immediate problems. Join other CakePHP users and start discussing.
 
 
 Stackoverflow

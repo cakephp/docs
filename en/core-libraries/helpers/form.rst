@@ -415,10 +415,10 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
         Try to avoid using `FormHelper::input()` to generate submit buttons. Use
         :php:meth:`FormHelper::submit()` instead.
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = array())
 
-    Generate a set of inputs for ``$fields``. If $fields is null the current model
-    will be used.
+    Generate a set of inputs for ``$fields``. If ``$fields`` is null all fields,
+    except of those defined in ``$blacklist``, of the current model will be used.
 
     In addition to controller fields output, ``$fields`` can be used to control
     legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.

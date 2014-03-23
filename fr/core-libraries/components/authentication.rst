@@ -378,13 +378,16 @@ comme la validation difficile. Vous ne devriez **jamais** stocker un mot de
 passe en clair, et avant de sauvegarder un utilisateur vous devez toujours
 hacher le mot de passe.
 
-As of 2.4 the generation and checking of password hashes has been delegated to
-password hasher classes. Authenticating objects use a new setting ``passwordHasher``
-which specifies the password hasher class to use. It can be a string specifying class
-name or an array with key ``className`` stating the class name and any extra keys
-will be passed to password hasher constructor as config. The default hasher
-class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
-type set in Security class will be used. You can use specific hash type like this::
+Depuis 2.4, la génération et la vérification des hashs de mot de passe a été
+déléguée à des classes de hasher de mot de passe. Les objets d'authentification
+utilisent un nouveau paramètre ``passwordHasher`` qui spécifie la classe de
+hasher de mot de passe à utiliser. Cela peut être une chaîne en spécifiant
+un nom de classe ou un tableau avec la clé ``className`` faisant état du nom
+de la classe et toutes autres clés supplémentaires seront passées au
+constructeur de hasher de mot de passe en configuration. Le classe de hasher
+par défaut ``Simple`` peut être utilisée pour le hashage sha1, sha256, md5. Par
+défaut, le type de hash défini dans la classe Security sera utilisé. Vous
+pouvez utiliser un type de hash spécifique comme ceci::
 
     public $components = array(
         'Auth' => array(
@@ -399,14 +402,15 @@ type set in Security class will be used. You can use specific hash type like thi
         )
     );
 
-When creating new user records you can hash a password in the beforeSave
-callback of your model using appropriate password hasher class::
+Lors de la création de nouveaux enregistrements d'utilisateurs, vous pouvez
+hasher un mot de passe dans le callback beforeSave de votre model en utilisant
+la classe de hasher de mot de passe appropriée::
 
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            if (!$this->id) {
+            if (!empty($this->data['User']['password'])) {
                 $passwordHasher = new SimplePasswordHasher();
                 $this->data['User']['password'] = $passwordHasher->hash(
                     $this->data['User']['password']

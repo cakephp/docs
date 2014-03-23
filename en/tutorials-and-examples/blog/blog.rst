@@ -192,6 +192,7 @@ to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

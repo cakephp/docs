@@ -2,21 +2,18 @@ Components (Composants)
 #######################
 
 Les Components (Composants) sont des regroupements de logique applicative
-qui sont partagés entre les controllers. Si vous vous surprenez à vouloir
-copier et coller des choses entre vos controllers, alors vous devriez envisager
-de regrouper plusieurs fonctionnalités dans un Component.
-
-CakePHP est également livré avec un fantastique ensemble de components,
-que vous pouvez utiliser pour vous aider :
-
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 7
+qui sont partagés entre les controllers. CakePHP est également livré avec un
+fantastique ensemble de components, que vous pouvez utiliser pour vous aider.
+Si vous vous surprenez à vouloir copier et coller des choses entre vos
+controllers, alors vous devriez envisager de regrouper plusieurs
+fonctionnalités dans un Component. Créer des components permettent de garder
+un code de controller propre et vous permet de réutiliser du code entre des
+projets.
 
 Chacun de ces components d'origine est détaillé dans son chapitre
-spécifique. Pour l'heure, nous allons vous montrer comment créer
-vos propres components. La création de components vous permet de garder
-le code de vos controllers propres et vous permet de réutiliser
-du code entre vos projets.
+spécifique. Regardez :doc:`/core-libraries/toc-components`. Cette section
+décrit la façon de configurer et d'utiliser les components et la façon de
+créer vos propres components.
 
 .. _configuring-components:
 
@@ -149,6 +146,8 @@ Les components vous offrent aussi quelques callbacks durant leur cycle de vie
 qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api
 :ref:`component-api` pour plus d'informations sur les callbacks possibles
 des components.
+
+.. _creating-a-component:
 
 Créer un Component
 ==================

@@ -1270,6 +1270,7 @@ ability to pass off to another validator has been added.
     Also feel free to contribute with your localized validation rules.
 
 .. toctree::
+    :maxdepth: 1
 
     data-validation/validating-data-from-the-controller
 
