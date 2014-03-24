@@ -86,7 +86,7 @@ statements into your database::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     /* Then insert some articles for testing: */
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
@@ -116,7 +116,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's configuration file is found in
-``App/Config/app.php.default``. Make a copy of this file in
+``App/Config/app.default.php``. Make a copy of this file in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -213,7 +213,7 @@ you up and running:
    or (for Apache 1.3)::
 
        AddModule             mod_rewrite.c
-   
+
    in your httpd.conf.
 
 
