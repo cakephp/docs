@@ -156,6 +156,15 @@ ExceptionRenderer
 The ExceptionRenderer now populates the error templates with "code", "message" and "url" variables.
 "name" has been deprecated but is still available. This unifies the variables across all error templates.
 
+Testing
+=======
+
+- Fixture files can now be placed in sub-directories. You can use fixtures in
+  subdirectories by including the directory name after the ``.``. For example,
+  `app.my_dir/article` will load ``App/Test/Fixture/my_dir/ArticleFixture``. It
+  should be noted that the fixture directory will not be inflected or modified
+  in any way.
+
 View
 ====
 
