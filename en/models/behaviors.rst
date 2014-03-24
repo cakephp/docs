@@ -259,7 +259,7 @@ before the model callbacks of the same name. Behavior
 callbacks allow your behaviors to capture events in attached models
 and augment the parameters or splice in additional behavior.
 
-All behavior callbacks are fired **before** the model/behavior callbacks are:
+All behavior callbacks are fired **before** the model callbacks are:
 
 -  ``beforeFind``
 -  ``afterFind``
