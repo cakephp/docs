@@ -20,7 +20,7 @@ Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
 supporte une diversité de moteurs de stockage de données:
 
--  MySQL (4 ou plus)
+-  MySQL (4 ou supérieur)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite
@@ -162,12 +162,17 @@ ressembler à quelque chose comme cela dans votre système de fichiers::
         cake3/
             App/
             Plugin/
+            Test/
             tmp/
             vendor/
             webroot/
+            .gitignore
             .htaccess
-            index.php
+            .travis.yml
             README.md
+            composer.json
+            index.php
+            phpunit.xml.dist
 
 Si votre serveur web est configuré correctement, vous devriez trouver
 maintenant votre application CakePHP accessible à l'adresse
@@ -284,14 +289,6 @@ connection de votre base de données courante.
 Félicitations! Vous êtes prêt à :doc:`créer votre première application CakePHP
 </getting-started>`.
 
-Cela ne fonctionne pas? Si vous avez une erreur liée au timezone de PHP,
-décommentez la ligne dans ``App/Config/bootstrap.php``::
-
-   /**
-    * Décommentez cette ligne et corrigez votre serveur de timezone pour régler
-    * toute erreur liée à la date & au temps.
-    */
-       date_default_timezone_set('UTC');
 
 .. _Github: http://github.com/cakephp/cakephp
 .. _composer: http://getcomposer.com
