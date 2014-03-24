@@ -74,6 +74,14 @@ are combined into one list of listeners based on their priorities and then fired
 as one set. Global listeners of a given priority are still fired before instance
 listeners.
 
+I18n
+====
+
+- The :php:class:`I18n` class has several new constants. These constants allow you
+  to replace hardcoded integers with readable values. e.g.
+  ``I18n::LC_MESSAGES``.
+
+
 Model
 =====
 
@@ -105,6 +113,13 @@ Router
 
 Utility
 =======
+
+Debugger
+--------
+
+- ``Debugger::dump()`` and ``Debugger::log()`` now support a ``$depth``
+  parameter. This new parameter makes it easy to output more deeply nested
+  object structures.
 
 Validation
 ----------
@@ -182,6 +197,9 @@ FormHelper
 - :php:meth:`FormHelper::end()` had a second parameter added. This parameter
   lets you pass additional properties to the fields used for securing forms in
   conjunction with SecurityComponent.
+- :php:meth:`FormHelper::end()` and :php:meth:`FormHelper::secure()` allow you
+  to pass additional options that are turned into attributes on the generated
+  hidden inputs. This is useful when you want to use the HTML5 ``form`` attribute.
 
 PaginationHelper
 ----------------
