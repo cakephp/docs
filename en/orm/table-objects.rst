@@ -214,7 +214,7 @@ to include only certain records::
     class UsersTable extends Table {
         public function initialize(array $config) {
             $this->hasOne('Addresses', [
-                'className' => 'Profiles',
+                'className' => 'Addresses',
                 'conditions' => ['Addresses.primary' => '1'],
                 'dependent' => true
             ]);
