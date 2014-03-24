@@ -61,7 +61,8 @@ les différentes méthodes HTTP.
 
 .. php:method:: delete($uri, $query, $request)
 
-    La méthode put fait une requête simple HTTP PUT retournant les résultats.
+    La méthode delete fait une requête simple HTTP DELETE retournant les
+    résultats.
 
     Les paramètres pour la méthode ``delete`` sont les mêmes que pour la
     méthode :php:meth:`~HttpSocket::get()`. Le paramètre ``$query`` peut soit
