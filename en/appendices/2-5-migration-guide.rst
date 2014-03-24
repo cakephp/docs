@@ -94,6 +94,9 @@ Model
 - Unsigned integers are now supported by datasources that provide them (MySQL).
   You can set the ``unsigned`` option to true in your schema/fixture files to
   start using this feature.
+- Joins included in queries are now added **after** joins from associations are
+  added. This makes it easier to join tables that depend on generated
+  associations.
 
 Network
 =======
