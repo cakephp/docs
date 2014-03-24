@@ -56,6 +56,12 @@ RequestHandlerComponent
 - :php:meth:`RequestHandlerComponent::renderAs()` no longer sets ``Controller::$ext``.
   It caused problems when using a non default extension for views.
 
+AclComponent
+------------
+
+- ACL node lookup failures are now logged directly. The call to
+  ``trigger_error()`` has been removed.
+
 Scaffold
 --------
 - Dynamic Scaffold is now deprecated and will be removed in 3.0.
@@ -74,6 +80,14 @@ are combined into one list of listeners based on their priorities and then fired
 as one set. Global listeners of a given priority are still fired before instance
 listeners.
 
+I18n
+====
+
+- The :php:class:`I18n` class has several new constants. These constants allow you
+  to replace hardcoded integers with readable values. e.g.
+  ``I18n::LC_MESSAGES``.
+
+
 Model
 =====
 
@@ -84,6 +98,13 @@ Model
 Network
 =======
 
+CakeEmail
+---------
+
+- Email addresses in CakeEmail are now validated with ``filter_var`` by default.
+  This relaxes the email address rules allowing internal email addresses like
+  ``root@localhost`` for example.
+
 CakeRequest
 -----------
 
@@ -93,6 +114,14 @@ CakeRequest
 - ``CakeRequest::onlyAllow()`` has been deprecated. As replacement a new method named
   :php:meth:`CakeRequest::allowMethod()` has been added with identical functionality.
   The new method name is more intuitive and better conveys what the method does.
+
+CakeSession
+-----------
+
+- Sessions will not be started if they are known to be empty. If the session
+  cookie cannot be found, a session will not be started until a write operation
+  is done.
+
 
 Routing
 =======
@@ -106,23 +135,25 @@ Router
 Utility
 =======
 
-Validation
-----------
+Debugger
+--------
 
-- The third param for :php:meth:`Validation::inList()` and :php:meth:`Validation::multiple()` has been
-  modified from `$strict` to `$caseInsensitive`. `$strict` has been dropped as it was working incorrectly
-  and could easily backfire.
-  You can now set this param to true for case insensitive comparison. The default is false and
-  will compare the value and list case sensitive as before.
-
-- ``$mimeTypes`` parameter of :php:meth:`Validation::mimeType()` can also be a
-  regex string. Also now when ``$mimeTypes`` is an array it's values are lowercased.
+- ``Debugger::dump()`` and ``Debugger::log()`` now support a ``$depth``
+  parameter. This new parameter makes it easy to output more deeply nested
+  object structures.
 
 Hash
 ----
 
 - :php:meth:`Hash::insert()` and :php:meth:`Hash::remove()` now support matcher
   expressions in their path selectors.
+
+File
+----
+
+- :php:meth:`File::replaceText()` was added. This method allows you to easily
+  replace text in a file using ``str_replace``.
+
 
 Folder
 ------
@@ -136,6 +167,19 @@ Security
 - :php:meth:`Security::encrypt()` and :php:meth:`Security::decrypt()` were
   added. These methods expose a very simple API to access AES-256 symmetric encryption.
   They should be used in favour of the ``cipher()`` and ``rijndael()`` methods.
+
+Validation
+----------
+
+- The third param for :php:meth:`Validation::inList()` and :php:meth:`Validation::multiple()` has been
+  modified from `$strict` to `$caseInsensitive`. `$strict` has been dropped as it was working incorrectly
+  and could easily backfire.
+  You can now set this param to true for case insensitive comparison. The default is false and
+  will compare the value and list case sensitive as before.
+
+- ``$mimeTypes`` parameter of :php:meth:`Validation::mimeType()` can also be a
+  regex string. Also now when ``$mimeTypes`` is an array it's values are lowercased.
+
 
 Logging
 =======
@@ -156,6 +200,15 @@ ExceptionRenderer
 The ExceptionRenderer now populates the error templates with "code", "message" and "url" variables.
 "name" has been deprecated but is still available. This unifies the variables across all error templates.
 
+Testing
+=======
+
+- Fixture files can now be placed in sub-directories. You can use fixtures in
+  subdirectories by including the directory name after the ``.``. For example,
+  `app.my_dir/article` will load ``App/Test/Fixture/my_dir/ArticleFixture``. It
+  should be noted that the fixture directory will not be inflected or modified
+  in any way.
+
 View
 ====
 
@@ -173,6 +226,9 @@ FormHelper
 - :php:meth:`FormHelper::end()` had a second parameter added. This parameter
   lets you pass additional properties to the fields used for securing forms in
   conjunction with SecurityComponent.
+- :php:meth:`FormHelper::end()` and :php:meth:`FormHelper::secure()` allow you
+  to pass additional options that are turned into attributes on the generated
+  hidden inputs. This is useful when you want to use the HTML5 ``form`` attribute.
 
 PaginationHelper
 ----------------
