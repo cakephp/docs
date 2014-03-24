@@ -133,20 +133,22 @@ votre installation. Un exemple de tableau de configuration complet pourrait
 ressembler à ce qui suit::
 
     $config = [
-        // Plus de configuration ci-dessus.
+        // Plus de configuration au-dessus.
         'Datasources' => [
             'default' => [
-                'className' => 'Cake\Database\Driver\Mysql',
-                'persistent' => 'false,',
+                'className' => 'Cake\Database\Connection',
+                'driver' => 'Cake\Database\Driver\Mysql',
+                'persistent' => false,
                 'host' => 'localhost',
                 'login' => 'cake_blog',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
                 'prefix' => false,
                 'encoding' => 'utf8',
-            ]
+                'timezone' => 'UTC'
+            ],
         ],
-        // Plus de configuration ci-dessous.
+        // Plus de configuration en-dessous.
     ];
 
 Une fois votre nouveau fichier ``app.php`` sauvegardé, vous devriez
