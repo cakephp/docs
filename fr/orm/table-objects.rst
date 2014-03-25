@@ -2,27 +2,29 @@
 
 .. _table-objects:
 
-Table Objects
-#############
+Les Objets Table
+################
 
 .. php:class:: Table
 
-Table objects provide access to the collection of entities stored in a specific
-table. Each table in your application should have an associated Table class
-which is used to interact with a given table. If you do not need to customize
-the behavior of a given table CakePHP will generate a Table instance for you to
-use.
+Les objets Table fournissent un accès à la collection des entities stockées
+dans une table spécifique. Chaque table dans votre application devra avoir une
+classe Table associée qui est sera utilisée pour interagir avec une table
+donnée. Si vous n'avez pas besoin de personnaliser le behavior d'une table
+donnée, CakePHP va générer une instance Table à utiliser pour vous.
 
-Before trying to use Table objects and the ORM, you should ensure that you have
-configured your :ref:`database connection <database-configuration>`.
+Avant d'essayer d'utiliser les objets Table et l'ORM, vous devriez vous assurer
+que vous avez configuré votre
+:ref:`database connection <database-configuration>`.
 
-Basic Usage
-===========
+Utilisation Basique
+===================
 
-To get started, create a Table class. These classes live in
-``App/Model/Table``. Tables are a type model collection specific to relational
-databases, and the main interface to your database in CakePHP's ORM. The most
-basic table class would look like::
+Pour commencer, créez une classe Table. Ces classes se trouvent dans
+``App/Model/Table``. Les Tables sont une collection de type model spécifique
+aux bases de données relationnelles, et sont l'interface principal pour
+votre base de données dans l'ORM de CakePHP. La classe table la plus
+basique devrait ressembler à ceci::
 
     namespace App\Model\Table;
 
@@ -31,12 +33,12 @@ basic table class would look like::
     class ArticlesTable extends Table {
     }
 
-Note that we did not tell the ORM which table to use for our class. By
-convention table objects will use a table that matches the lower cased and
-underscored version of the class name. In the above example the ``articles``
-table will be used. If our table class was named ``BlogPosts`` your table should
-be named ``blog_posts``. You can specify the table to using the ``table()``
-method::
+Notez que nous ne disons pas à l'ORM quelle table utiliser pour notre class. Par
+convention, les objets table vont utiliser une table avec la notation en
+minuscule et avec des underscores pour le nom de la classe. Dans l'exemple du
+dessus, la table ``articles`` va être utilisée. Si notre classe table était
+nommée ``BlogPosts``, votre table serait nommée ``blog_posts``. Vous pouvez
+spécifier la table en utilisant la méthode ``table()``::
 
     namespace App\Model\Table;
 
@@ -50,9 +52,10 @@ method::
 
     }
 
-No inflection conventions will be applied when specifying a table. By convention
-the ORM also expects each table to have a primary key with the name of ``id``.
-If you need to modify this you can use the ``primaryKey()`` method::
+Aucune convention d'inflection ne sera appliquée quand on spécifie une table.
+Par convention, l'ORM s'attend aussi à ce que chaque table ait une clé primaire
+avec le nom de ``id``. Si vous avez besoin de modifier ceci, vous pouvez
+utiliser la méthode ``primaryKey()``::
 
     namespace App\Model\Table;
 
@@ -64,50 +67,55 @@ If you need to modify this you can use the ``primaryKey()`` method::
         }
     }
 
-As seen in the examples above Table objects have an ``initialize()`` method
-which is called at the end of the constructor. It is recommended that you use
-this method to do initialization logic instead of overriding the constructor.
+Comme vu dans les exemples ci-dessus, les objets Table ont une méthode
+``initialize()`` qui est appelé à la fin du constructeur. Il est recommandé que
+vous utilisiez cette méthode pour faire la logique d'initialisation au lieu
+de surcharger le constructeur.
 
-Getting Instances of a Table Class
-----------------------------------
+Obtenir les Instances d'une Classe Table
+----------------------------------------
 
-Before you can query a table, you'll need to get an instance of the table. You
-can do this by using the ``TableRegistry`` class::
+Avant de pouvoir requêter sur une table, vous aurez besoin d'obtenir une
+instance de la table. Vous pouvez faire ceci en utilisant la classe
+``TableRegistry``::
 
     use Cake\ORM\TableRegistry;
 
     $articles = TableRegistry::get('Articles');
 
-The TableRegistry class provides the various dependencies for constructing
-a table, and maintains a registry of all the constructed table instances making
-it easier to build relations and configure the ORM. See
-:ref:`table-registry-usage` for more information.
+La classe TableRegistry fournit les divers dépendances pour construire la table,
+et maintenir un registry de toutes les instances de table construites en
+le facilitant pour construire les relations et configurer l'ORM. Regardez
+:ref:`table-registry-usage` pour plus d'informations.
 
-Fetching All Entities
----------------------
+Récupérer Toutes les Entities
+-----------------------------
 
-The best way to fetch entities from a table object is to use the ``find`` method. It
-allows you to access the various built-in finder methods and your own custom
-ones. See :ref:`custom-find-methods` for more information::
+Le meilleur moyen de récupérer les entities à partir d'un objet table est
+d'utiliser la méthode ``find``. Elle vous permet d'accéder aux divers méthodes
+finder intégrées et à vos propres méthodes personnalisées. Regardez
+:ref:`custom-find-methods` pour plus d'informations::
 
     $query = $articles->find('all');
     foreach ($query as $row) {
-        // Do work
+        // Faire quelque chose
     }
 
-Entity objects represent a single record or row in your database. Entities allow
-you to define custom behavior on a per-record basis and model the domain of your
-application. See the :ref:`entities` documentation for more information on
-creating your entity objects.
+Les objets Entity représentent un enregitrement unique ou une ligne dans votre
+base de données. Les Entities vous permettent de définir un comportement
+personnalisé pour un enregistrement et le model  du domaine de votre
+application. Regardez la documentation sur les :ref:`entities` pour plus
+d'informations sur la création de vos objets entity.
 
-Customizing the Entity Class a Table Uses
------------------------------------------
+Personnalisaliser la Classe Entity qu'une Table Utilise
+-------------------------------------------------------
 
-By default table objects use an entity class based on naming conventions. For
-example if your table class is called ``ArticlesTable`` the entity would be
-``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
-``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
-conventions you can use the ``entityClass`` method to change things up::
+Par défaut, les objets table utilisent une classe entity basée sur les
+conventions de nommage. Par exemple, si votre classe de table est appelée
+``ArticlesTable`` l'entity sera ``Article``. Si la classe table ést
+``PurchaseOrdersTable`` l'entity sera ``PurchaseOrder``. Cependant si vous
+souhaitez utiliser une entity qui ne suit pas les conventions, vous pouvez
+utiliser la méthode ``entityClass`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table {
         public function initialize(array $config) {
@@ -117,31 +125,32 @@ conventions you can use the ``entityClass`` method to change things up::
 
 .. _table-associations:
 
-Building Associations
-=====================
+Construire les Associations
+===========================
 
-Defining relations between different objects in your application should be
-a natural process. For example, an article may have many comments, and belong
-to an author. Authors may have many articles and comments. CakePHP makes
-managing these associations easy. The four association types in CakePHP are:
+Définir les relations entre les différents objets dans votre application
+devra être un processus naturel. Par exemple, un article peut avoir plusieurs
+comments, et belong to à un author. Les Authors peuvent avoir many articles et
+les comments. CakePHP rend la gestion de ces associations facilement. Les
+quatres types d'association dans CakePHP sont:
 hasOne, hasMany, belongsTo, and belongsToMany.
 
 ============= ===================== =======================================
 Relationship  Association Type      Example
 ============= ===================== =======================================
-one to one    hasOne                A user has one profile.
+one to one    hasOne                Un user a un profile.
 ------------- --------------------- ---------------------------------------
-one to many   hasMany               A user can have multiple articles.
+one to many   hasMany               Un user peut avoir plusieurs articles.
 ------------- --------------------- ---------------------------------------
-many to one   belongsTo             Many articles belong to a user.
+many to one   belongsTo             Plusieurs articles appartiennent à un user.
 ------------- --------------------- ---------------------------------------
-many to many  belongsToMany         Tags belong to many articles.
+many to many  belongsToMany         Les Tags appartiennent aux articles.
 ============= ===================== =======================================
 
-Associations are defined during the ``inititalize()`` method of your table
-object. Methods matching the association type allow you to define the
-associations in your application. For example if we wanted to define a belongsTo
-association in our ArticlesTable::
+Les Associations sont définis durant la méthode ``inititalize()`` de votre objet
+table. Les méthodes matchant le type d'association vous permet de définir les
+associations dans votre application. Par exemple, si vous voulez définir une
+association belongsTo dans notre ArticlesTable::
 
     namespace App\Model\Table;
 
@@ -175,14 +184,16 @@ you can do so with the second parameter::
 HasOne Associations
 -------------------
 
-Let's set up a User model with a hasOne relationship to an Address Table.
+Mettons en place un model User avec une relation de type hasOne vers un model
+Address.
 
-First, your database tables need to be keyed correctly. For a hasOne
-relationship to work, one table has to contain a foreign key that points to
-a record in the other. In this case the addresses table will contain a field
-called ``user_id``. The basic pattern is:
+Tout d’abord, les tables de votre base de données doivent être saisies
+correctement. Pour qu’une relation de type hasOne fonctionne, une table doit
+contenir une clé étrangère qui pointe vers un enregistrement de l’autre. Dans
+notre cas la table profiles contiendra un champ nommé ``user_id``. Le motif de
+base est :
 
-**hasOne:** the *other* model contains the foreign key.
+**hasOne:** l'*autre* model contient la clé étrangère.
 
 ====================== ==================
 Relation               Schema
@@ -194,12 +205,13 @@ Doctors hasOne Mentors mentors.doctor\_id
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can easily override
-    the use of any foreignKey in your associations definitions. Nevertheless sticking
-    to conventions will make your code less repetitive, easier to read and to maintain.
+    Il n’est pas obligatoire de suivre les conventions de CakePHP, vous pouvez
+    facilement outrepasser l’utilisation de toute clé étrangère dans les
+    définitions de vos associations. Néanmoins, coller aux conventions donnera
+    un code moins répétitif, plus facile à lire et à maintenir.
 
-If we had the ``UsersTable`` and ``AddressesTable`` classes made we could make
-the association with the following code::
+Si nous avions les classes ``UsersTable`` et ``AddressesTable`` faites, nous
+pourrions faire l'association avec le code suivant::
 
     class UsersTable extends Table {
         public function initialize(array $config) {
@@ -207,65 +219,68 @@ the association with the following code::
         }
     }
 
-If you need more control, you can define your associations using
-array syntax. For example, you might want to limit the association
-to include only certain records::
+Si vous avez besoin de plus de contrôle, vous pouvez définir vos associations
+en utilisant la syntaxe des tableaux. Par exemple, vous voudrez peut-être
+limiter l’association pour inclure seulement certains enregistrements::
 
     class UsersTable extends Table {
         public function initialize(array $config) {
             $this->hasOne('Addresses', [
-                'className' => 'Profiles',
+                'className' => 'Addresses',
                 'conditions' => ['Addresses.primary' => '1'],
                 'dependent' => true
             ]);
         }
     }
 
-Possible keys for hasOne association arrays include:
+Les clés possibles pour les tableaux d’association incluent:
 
-- **className**: the class name of the table being associated to
-  the current model. If you're defining a 'User hasOne Address'
-  relationship, the className key should equal 'Addresses.'
-- **foreignKey**: the name of the foreign key found in the other
-  model. This is especially handy if you need to define multiple
-  hasOne relationships. The default value for this key is the
-  underscored, singular name of the current model, suffixed with
-  '\_id'. In the example above it would default to 'user\_id'.
-- **conditions**: an array of find() compatible conditions
-  such as ``['Addresses.primary' => true]``
-- **joinType**: the type of the join to use in the SQL query, default
-  is INNER. You may want to use LEFT if your hasOne association is optional.
-- **dependent**: When the dependent key is set to true, and an
-  entity is deleted, the associated model records are also deleted. In this
-  case we set it true so that deleting a User will also delete her associated
-  Address.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When false,
-  ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered.
-- **propertyName**: The property name that should be filled with data from the associated
-  table into the source table results. By default this is the underscored & singular name of
-  the association so ``address`` in our example.
+- **className**: le nom de la classe de la table que l’on souhaite associer au
+  model actuel. Si l’on souhaite définir la relation 'User a une Address', la
+  valeur associée à la clé ‘className’ devra être ‘Addresses’.
+- **foreignKey**: le nom de la clé etrangère que l’on trouve dans l’autre model.
+  Ceci sera particulièrement pratique si vous avez besoin de définir des
+  relations hasOne multiples. La valeur par défaut de cette clé est le nom du
+  model actuel (avec des underscores) suffixé avec '\_id'. Dans l’exemple
+  ci-dessus la valeur par défaut aurait été 'user\_id'.
+- **conditions**: un tableau des conditions compatibles avec find() ou un
+  fragment de code SQL tel que ``['Addresses.primary' => true]``.
+- **joinType**: le type de join à utiliser dans la requête SQL, par défaut
+  à INNER. Vous voulez peut-être utiliser LEFT si votre association hasOne est
+  optionnelle.
+- **dependent**: Quand la clé dependent est définie à true, et qu'une
+  entity est supprimée, les enregistrements du model associé sont aussi
+  supprimés. Dans ce cas, nous le définissons à true pour que la suppression
+  d'un User supprime aussi son Address associée.
+- **cascadeCallbacks**: Quand ceci et **dependent** sont à true, les
+  suppressions en cascade vont charger et supprimer les entities pour que les
+  callbacks soient attrapés correctement. Quand il est à false, ``deleteAll()``
+  est utilisée pour retirer les données associées et que aucun callbacks ne soit
+  récupéré.
+- **propertyName**: Le nom de la propriété qui doit être rempli avec les données
+  d'une table associée dans les résultats d'une table source. Par défaut, c'est
+  un nom en underscore et singulier de l'association, donc ``address`` dans
+  notre exemple.
 
-Once this association has been defined, find operations on the Users table can
-contain the Address record if it exists::
+Une fois que cette association a été définie, les opérations find sur la table
+Users peut contenir l'enregistrement Address, si il existe::
 
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
    }
 
-The above would emit SQL that is similar to::
+Ce qui est au-dessus rendra un SQL qui est similaire à::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
-BelongsTo Associations
+Associations BelongsTo
 ----------------------
 
-Now that we have Address data access from the User table, let's
-define a belongsTo association in the Addresses table in order to get
-access to related User data. The belongsTo association is a natural
-complement to the hasOne and hasMany associations.
+Maintenant que nous avons un accès des données Address à partir de la table
+User, définissons une association belongsTo dans la table Addresses afin
+d'avoir un accès aux données liés de l'User. L'association belongsTo est un
+complément naturel aux associations hasOne et hasMany.
 
 When keying your database tables for a belongsTo relationship,
 follow this convention:
