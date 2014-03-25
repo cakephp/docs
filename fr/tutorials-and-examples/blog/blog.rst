@@ -124,7 +124,7 @@ connecter. Pour la plupart d'entre vous, c'est la première et dernière fois qu
 vous configurerez quelque chose.
 
 Une copie du fichier de configuration CakePHP pour la base de données se trouve
-dans ``App/Config/app.php.default``. Faites une copie de ce fichier dans
+dans ``App/Config/app.default.php``. Faites une copie de ce fichier dans
 le même répertoire mais nommez le ``app.php``.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
@@ -226,7 +226,7 @@ web fonctionne:
    ou (pour Apache 1.3)::
 
        AddModule             mod_rewrite.c
-   
+
    dans votre httpd.conf.
 
 
