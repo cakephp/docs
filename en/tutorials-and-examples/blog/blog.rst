@@ -33,21 +33,29 @@ Let's get started!
 Getting CakePHP
 ===============
 
-To get a fresh download, visit the CakePHP project on GitHub:
+The easiest way to get up and running is by downloading or cloning a fresh copy from GitHub.
+To do this simply visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
 and download the latest release of CakePHP 3.0.
 
-You can also install CakePHP using ``Composer``::
+You can also install CakePHP using ``Composer``.
+``Composer`` is an simple way of installing CakePHP from your terminal or command line prompt.
+Simply type the following two lines in your terminal from your webroot directory::
 
     curl -s https://getcomposer.org/installer | php
-    php composer.phar create-project cakephp/app
+    php composer.phar create-project -s dev cakephp/app
 
-This will download Composer and install the CakePHP application skeleton. For
-this tutorial we're just going to download the zip file as it's the simplest
-option.
+This will download Composer and install the CakePHP application skeleton.
+By default Compsoser will save your new project into a directory called ``app``.
+Feel free to rename this directory to something which relates to your project, e.g. ``blog``.
 
-Regardless of how you downloaded it, place the code inside of your DocumentRoot.
-Once finished, your directory setup should look something like the following::
+The advantage to using Composer is that it will automatically complete some important set up tasks, such as setting the correct file permissions and creating your app/Config/app.php file for you.
+
+There are other ways to install CakePHP if you are uncomfortable with ``Composer``.
+For more information: check out the
+:doc:`/installation` section.
+
+Regardless of how you downloaded and installed CakePHP, once your set up is completed, your directory setup should look something like the following::
 
     /path_to_document_root
         /App
@@ -67,6 +75,24 @@ Once finished, your directory setup should look something like the following::
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
+
+Directory Permissions on tmp
+============================
+
+You'll also need to set the proper permissions on the ``/tmp`` directory to make
+it writable by your webserver. The best way to do this is to find out what user
+your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
+the ``App/tmp`` directory to that user. The final command you run (in \*nix)
+might look something like this::
+
+    $ chown -R www-data tmp
+
+If for some reason CakePHP can't write to that directory, you'll be
+informed by a warning while not in production mode.
+
+While not recommended, if you are unable to set the permissions to the same as your webserver, you can simply set write permissions on the folder by running a command such as::
+
+    $ chmod 777 -R tmp
 
 Creating the Blog Database
 ==========================
@@ -152,20 +178,6 @@ that CakePHP can successfully connect to the database.
 
     Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
-
-Directory Permissions on tmp
-============================
-
-You'll also need to set the proper permissions on the ``tmp`` directory to make
-it writable by your webserver. The best way to do this is to find out what user
-your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``tmp`` directory to that user. The final command you run (in \*nix)
-might look something like this::
-
-    $ chown -R www-data tmp
-
-If for some reason CakePHP can't write to that directory, you'll be
-informed by a warning while not in production mode.
 
 Optional Configuration
 ======================
