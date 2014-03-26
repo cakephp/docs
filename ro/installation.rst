@@ -23,7 +23,7 @@ baze de date:
 -  Microsoft SQL Server
 -  SQLite
 
-.. atentie::
+.. note::
 
     Toate driverele incluse in distributiile de servere necesita PDO. 
     Prin urmare ar trebui sa va asigurati ca aveti instalate extensiile 

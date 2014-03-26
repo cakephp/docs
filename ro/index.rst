@@ -16,11 +16,12 @@ corecții la documentație.
 
 .. container:: offline-download
 
-**Citiți cartea oriunde**
+    **Citiți cartea oriunde**
 
-Bucurați-vă de documentația CakePHP aproape oriunde. Fiind disponibilă atât ca
-un PDF cat și ca EPUB, o puteți citi acum pe mai multe dispozitive și chiar
-offline.
+    Bucurați-vă de documentația CakePHP aproape oriunde. Fiind disponibilă atât ca
+    un PDF cat și ca EPUB, o puteți citi acum pe mai multe dispozitive și chiar
+    offline.
+
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
     - `Sursa originala <http://github.com/cakephp/docs>`_
