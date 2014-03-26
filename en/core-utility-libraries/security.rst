@@ -22,8 +22,10 @@ Security API
         // Later decrypt your text
         $nosecret = Security::cipher($secret, 'my_key');
 
-    ``cipher()`` uses a **weak** XOR cipher and should **not** be used for
-    important or sensitive data.
+    .. warning::
+
+        ``cipher()`` uses a **weak** XOR cipher and should **not** be used.
+        It is only included for backwards compatibility.
 
 .. php:staticmethod:: rijndael($text, $key, $mode)
 
@@ -48,6 +50,51 @@ Security API
 
     .. versionadded:: 2.2
         ``Security::rijndael()`` was added in 2.2.
+
+.. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
+
+    :param string $plain: The value to encrypt.
+    :param string $key: The 256 bit/32 byte key to use as a cipher key.
+    :param string $hmacSalt: The salt to use for the HMAC process. Leave null to use Security.salt.
+
+    Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
+    lots of variance in the data much like a good password. The returned result
+    will be the encrypted value with an HMAC checksum.
+
+    This method should **never** be used to store passwords.  Instead you should
+    use the one way hashing methods provided by :php:meth:`~Security::hash()`.
+    An example use would be::
+
+        // Assuming key is stored somewhere it can be re-used for
+        // decryption later.
+        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+        $result = Security::encrypt($value, $key);
+
+    Encrypted values can be decrypted using :php:meth:`Security::decrypt()`.
+
+    .. versionadded:: 2.5
+
+.. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
+
+    :param string $cipher: The ciphertext to decrypt.
+    :param string $key: The 256 bit/32 byte key to use as a cipher key.
+    :param string $hmacSalt: The salt to use for the HMAC process. Leave null to use Security.salt.
+
+    Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
+    parameters must match the values used to encrypt or decryption will fail. An
+    example use would be::
+
+        // Assuming key is stored somewhere it can be re-used for
+        // decryption later.
+        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+
+        $cipher = $user['User']['secrets'];
+        $result = Security::decrypt($cipher, $key);
+
+    If the value cannot be decrypted due to changes in the key or HMAC salt
+    ``false`` will be returned.
+
+    .. versionadded:: 2.5
 
 .. php:staticmethod:: generateAuthKey( )
 

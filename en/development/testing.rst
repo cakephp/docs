@@ -335,10 +335,11 @@ test case:
 Creating fixtures
 -----------------
 
-When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
-create our first fixture, that will be used to test our own Article
-model. Create a file named ``ArticleFixture.php`` in your
-``app/Test/Fixture`` directory, with the following content::
+When creating a fixture you will mainly define two things: how the table is
+created (which fields are part of the table), and which records will be
+initially populated to the table. Let's create our first fixture, that will be
+used to test our own Article model. Create a file named ``ArticleFixture.php``
+in your ``app/Test/Fixture`` directory, with the following content::
 
     class ArticleFixture extends CakeTestFixture {
 
@@ -593,6 +594,21 @@ You can control when your fixtures are loaded by setting
             $this->loadFixtures('Article', 'Comment');
         }
     }
+
+As of 2.5.0, you can load fixtures in subdirectories. Using multiple directories
+can make it easier to organize your fixtures if you have a larger application.
+To load fixtures in subdirectories, simply include the subdirectory name in the
+fixture name::
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.blog/article', 'app.blog/comment');
+    }
+
+In the above example, both fixtures would be loaded from
+``App/Test/Fixture/blog/``.
+
+.. versionchanged:: 2.5
+    As of 2.5.0 you can load fixtures in subdirectories.
 
 Testing Models
 ==============

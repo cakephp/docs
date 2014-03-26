@@ -905,7 +905,7 @@ with usage examples.
     .. versionadded:: 2.3
         This method was added in 2.3
 
-.. php:staticmethod:: inList(string $check, array $list, $strict = true)
+.. php:staticmethod:: inList(string $check, array $list, boolean $caseInsensitive = false)
 
     This rule will ensure that the value is in a given set. It needs an
     array of values. The field is valid if the field's value matches
@@ -922,6 +922,8 @@ with usage examples.
              )
          );
 
+    Comparison is case sensitive by default. You can set ``$caseInsensitive`` to true
+    if you need case insensitive comparison.
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
 
@@ -977,17 +979,25 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: mimeType(mixed $check, array $mimeTypes)
+.. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
     .. versionadded:: 2.2
 
-    This rule checks for valid mimeType
+    This rule checks for valid mime types. Comparison is case sensitive.
+
+    .. versionchanged:: 2.5
+
+    Since 2.5 ``$mimeTypes`` can be a regex string.
 
     ::
 
         public $validate = array(
             'image' => array(
                 'rule'    => array('mimeType', array('image/gif')),
+                'message' => 'Invalid mime type.'
+            ),
+            'logo' => array(
+                'rule'    => array('mimeType', '#image/.+#'),
                 'message' => 'Invalid mime type.'
             ),
         );
@@ -1027,7 +1037,7 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: multiple(mixed $check, mixed $options = array())
+.. php:staticmethod:: multiple(mixed $check, mixed $options = array(), boolean $caseInsensitive = false)
 
     Use this for validating a multiple select input. It supports
     parameters "in", "max" and "min".
@@ -1045,6 +1055,8 @@ with usage examples.
             )
         );
 
+    Comparison is case sensitive by default. You can set ``$caseInsensitive`` to true
+    if you need case insensitive comparison.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 

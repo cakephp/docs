@@ -312,7 +312,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?php echo $title_for_layout?></title>
+   <title><?php echo $this->fetch('title'); ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -659,9 +659,22 @@ To call any view method use ``$this->method()``
     Then in your layout the ``$activeMenuButton`` variable will be
     available and contain the value 'posts'.
 
+.. php:method:: get(string $var, $default = null)
+
+    Get the value of a viewVar with the name of ``$var``.
+
+    As of 2.5 you can provide a default value in case the variable is not
+    already set.
+
+    .. versionchanged:: 2.5
+        The ``$default`` argument was added in 2.5.
+
 .. php:method:: getVar(string $var)
 
     Gets the value of the viewVar with the name $var
+
+    .. deprecated:: 2.3
+        Use :php:meth:`View::get()` instead.
 
 .. php:method:: getVars()
 
