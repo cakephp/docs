@@ -1077,8 +1077,9 @@ Ex: name=data[User][username], id=UserUsername
     les informations sauvegardées pour le model ``User``), la valeur
     correspondant au champs ``notes`` sera automatiquement ajoutée au HTML 
     généré. Exemple:
-    
+
     .. code-block:: html
+
         <textarea name="data[User][notes]" id="UserNotes">
         Ce texte va être édité.
         </textarea>

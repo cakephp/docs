@@ -144,7 +144,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Cette fonction émule également PHP_SELF et DOCUMENT_ROOT sur
     les serveurs ne les supportant pas. En fait, c'est une bonne idée
-    de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()`
+    de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
     (notamment si vous prévoyez de distribuer le code), puisque
     c'est un wrapper d'émulation totale.
 

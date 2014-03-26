@@ -189,7 +189,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         />
 
     Cette méthode peut aussi être utilisée pour ajouter les balise de mots clés
-    et les descriptions. Exemple::
+    et les descriptions. Exemple:
 
     .. code-block:: php
 
@@ -419,7 +419,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex 
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.:
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.::
 
         <?php
         echo $this->Html->link(
@@ -440,9 +440,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    Les caractères spéciaux HTML de ``$title``seront convertis en entités
+    Les caractères spéciaux HTML de ``$title`` seront convertis en entités
     HTML. Pour désactiver cette conversion, définissez l'option escape à
-    false dans le tableau ``$options``.::
+    false dans le tableau ``$options``::
 
         <?php
         echo $this->Html->link(
@@ -505,7 +505,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionadded:: 2.1
 
-    Retourne une balise formatée audio/video::
+    Retourne une balise formatée audio/video:
 
     .. code-block:: php
 
@@ -522,7 +522,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         // Sortie
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
-       <?php echo $this->Html->media(
+        <?php echo $this->Html->media(
             array(
                 'video.mp4',
                 array(

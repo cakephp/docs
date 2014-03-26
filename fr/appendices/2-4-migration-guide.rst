@@ -8,7 +8,7 @@ Console
 =======
 
 - Les messages de log de type notice seront maintenant en couleur dans les
-terminaux qui supportent les couleurs.
+  terminaux qui supportent les couleurs.
 - ConsoleShell est maintenant dépréciée.
 
 SchemaShell
@@ -16,7 +16,7 @@ SchemaShell
 
 - ``cake schema generate`` supporte maintenant le paramètre ``--exclude``.
 - La constante ``CAKEPHP_SHELL`` est maintenant dépréciée et sera retirée dans
-CakePHP 3.0.
+  CakePHP 3.0.
 
 BakeShell
 ---------
@@ -83,7 +83,7 @@ DbAcl
 -----
 
 - DbAcl utilise maintenant les jointures ``INNER`` au lieu des jointures
-``LEFT``. Ceci améliore les performances pour certaines bases de données
+  ``LEFT``. Ceci améliore les performances pour certaines bases de données
   externes.
 
 Model
@@ -174,7 +174,7 @@ CakeResponse
 ------------
 
 - :php:meth:`CakeResponse::location()` a été ajoutée pour récupérer ou définir
-l'en-tête de localisation du redirect.
+  l'en-tête de localisation du redirect.
 
 CakeEmail
 ---------

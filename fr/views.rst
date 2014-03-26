@@ -526,7 +526,7 @@ en reprenant l'exemple du Post::
 
 Et ensuite dans l'element, nous pouvons accéder au model des posts paginés.
 Pour obtenir les cinq derniers posts dans une liste ordonnée, nous ferions
-ce qui suit::
+ce qui suit:
 
 .. code-block:: php
 

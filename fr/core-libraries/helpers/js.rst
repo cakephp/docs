@@ -837,7 +837,7 @@ Ajouter des effets et des transitions
 -------------------------------------
 
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter
-les effets d'indicator vous même.::
+les effets d'indicator vous même.:
 
 .. code-block:: php
 

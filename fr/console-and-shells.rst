@@ -417,7 +417,7 @@ voulez l'arrêter, ou forcer à l'avoir::
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
-que vous pouvez utiliser::
+que vous pouvez utiliser:
 
 * ``ConsoleOutput::RAW`` - Sortie en ligne, aucun style ou format ne sera fait
   C'est un bon mode à utiliser si vous sortez du XML ou si voulez débugger
