@@ -25,8 +25,9 @@ permet de définir la façon dont le Component cookie fonctionne.
 | string $key     | null         | Cette chaîne de caractère est utilisée pour chiffrer |
 |                 |              | la valeur écrite dans le cookie. Cette chaîne devrait|
 |                 |              | être aléatoire et difficile à deviner.               |
-|                 |              | Quand on utilise le chiffrement rijndael, cette      |
-|                 |              | valeur doit être plus grande que 32 bytes.           |
+|                 |              | Quand on utilise le chiffrement rijndael ou le       |
+|                 |              | chiffrement aes, cette valeur doit être plus grande  |
+|                 |              | que 32 bytes.                                        |
 +-----------------+--------------+------------------------------------------------------+
 | string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
 |                 |              | Utiliser '.votredomaine.com' pour autoriser les      |
@@ -68,6 +69,7 @@ d'une connexion sécurisée, qui est disponible au chemin
 ::
 
     public $components = array('Cookie');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
@@ -77,6 +79,7 @@ d'une connexion sécurisée, qui est disponible au chemin
         $this->Cookie->secure = true;  // ex. seulement envoyé si on utilise un HTTPS sécurisé
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
+        $this->Cookie->type('aes');
     }
 
 Ensuite, regardons comment utiliser les différentes méthodes du Component
@@ -109,11 +112,9 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
     Toutes les valeurs dans le cookie sont chiffrées par défaut. Si vous voulez
     stocker vos valeurs en texte clair, definissez le troisème paramètre de la
-    méthode write() à false. Le chiffrement utilisé sur les valeurs de cookie
-    est un système de chiffrement très simple. Il utilise ``Security.salt`` et
-    une variable de classe de configuration prédéfinie ``Security.cipherSeed``
-    pour chiffrer les valeurs. Vous devriez changer ``Security.cipherSeed``
-    dans app/Config/core.php pour assurer un meilleur chiffrement.::
+    méthode write() à false. Vous devriez vous rappeler de définir le mode de
+    chiffrement à 'aes' pour s'assurer que les valeurs sont chiffrées de façon
+    sécurisée::
 
         $this->Cookie->write('name', 'Larry', false);
 
@@ -170,11 +171,14 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 .. php:method:: type($type)
 
     Vous permet de changer le schéma de chiffrement. Par défaut, le schéma
-    'cipher' est utilisé. Cependant, vous devriez utiliser le schéma 'rijndael'
-    pour une sécurité améliorée.
+    'cipher' est utilisé pour une compatibilité rétroactive. Cependant, vous
+    devriez toujours utiliser les schémas 'rijndael' ou 'aes'.
 
     .. versionchanged:: 2.2
         Le type 'rijndael' a été ajouté.
+
+    .. versionadded:: 2.5
+        Le type 'aes' a été ajouté.
 
 
 .. meta::

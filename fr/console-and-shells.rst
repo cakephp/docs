@@ -1071,6 +1071,7 @@ Plus de sujets
     :maxdepth: 1
 
     console-and-shells/cron-jobs
+    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell

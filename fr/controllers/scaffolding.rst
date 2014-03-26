@@ -1,6 +1,9 @@
 Scaffolding
 ###########
 
+.. deprecated:: 2.5
+    Le scaffolding dynamique sera retiré et remplacé dans 3.0 
+
 Une application scaffolding (échafaudage en Français) est une technique
 permettant au développeur de définir et créer une application qui peut
 construire, afficher, modifier et détruire facilement des objets.

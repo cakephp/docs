@@ -234,7 +234,7 @@ Il y plusieurs options pour create():
 Fermer le Formulaire
 ====================
 
-.. php:method:: end($options = null)
+.. php:method:: end($options = null, $secureAttributes = array())
 
     Le FormHelper inclut également une méthode ``end()`` qui
     complète le marquage du formulaire. Souvent, ``end()`` affiche juste
@@ -291,6 +291,9 @@ Fermer le Formulaire
         dans votre application vous devez toujours terminer vos formulaires
         avec  ``end()``.
 
+    .. versionchanged:: 2.5
+        Le paramètre ``$secureAttributes`` a été ajouté dans 2.5.
+
 .. _automagic-form-elements:
 
 Création d'éléments de Formulaire
@@ -332,6 +335,8 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
         day, month, year, hour, minute, et meridian selects
     time
         hour, minute, et meridian selects
+    binary
+        file
 
     Le paramètre ``$options`` vous permet de personnaliser le
     fonctionnement de ``input()``, et contrôle finement ce qui est généré.
@@ -341,6 +346,9 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     ``allowEmpty => true``. Une limitation de ce comportement est que le champ
     du model doit avoir été chargé pendant la requête. Ou être directement
     associé au model fourni par :php:meth:`~FormHelper::create()`.
+
+    .. versionadded:: 2.5
+        Le type binaire mappe maintenant vers un input de fichier.
 
     .. versionadded:: 2.3
 

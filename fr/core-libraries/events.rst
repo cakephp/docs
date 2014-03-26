@@ -36,55 +36,27 @@ qui détiennent l'information et la possibilité d'arrêter la propagation des
 peuvent déléguer cette tâche a d'autres objets et avoir la chance de modifier
 l'état et l'événement lui-même pour le reste des callbacks.
 
-Interagir avec le gestionnaire d'événement
-==========================================
+Le sous-système d'event est au coeur des callbacks de Model, de Behavior, de
+Controller, de View et de Helper. Si vous avez jamais utilisé aucun d'eux,
+vous êtes déjà quelque part familier avec les events dans CakePHP.
 
-Imaginons que vous être en train de construire un plugin Caddie, mais vous ne
-voulez pas vraiment l'encombrer avec une logique d'expédition, expédier un mail
-à l'utilisateur ou décrémenter les articles depuis le stock, c'est votre
-souhait de traiter tout cela séparément dans un autre plugin ou dans le code de
-l'application. Typiquement, quand vous n'utilisez pas directement le modèle
-observateur(observer pattern) vous voudriez faire cela en attachant des
-behaviors à la volée à vos modèles, et peut être quelques components aux
-controllers.
+Example event usage
+===================
 
-Faire cela représente un challenge la plupart du temps, puisque vous allez
-devoir aborder du code pour charger de manière externe ces behaviors ou
-d'attacher des hooks aux controllers de votre plugin. Avant CakePHP 2.1
-quelques développeurs choisissaient d'implémenter des événements systèmes
-génériques pour résoudre ce problème, et certain de ces systèmes étaient
-offerts comme plugins. Maintenant, vous pouvez bénéficier en standard d'un
-système d'événements qui vous laissera proprement séparer ce qui concerne vos
-plugins et le code de l'application avec le gestionnaire d'événements intégré.
+Let's suppose you are building a Cart plugin, and you'd like to focus on just
+handling order logic. You don't really want to include shipping logic, emailing
+the user or decrementing the item from the stock, but these are important tasks
+to the people using your plugin. If you were not using events, you may try to
+implement this by attaching behaviors to models, or adding components to your
+controllers. Doing so represents a challenge most of the time, since you
+would have to come up with the code for externally loading those behaviors or
+attaching hooks to your plugin controllers.
 
-Distribution des événements
----------------------------
-
-Revenons à notre exemple, nous aurions un model `Order` qui gèrera la logique
-d'achat, et probablement une méthode `place` pour enregistrer les détails de
-la commande et faire d'autres logiques::
-
-    // Cart/Model/Order.php
-    class Order extends AppModel {
-
-        public function place($order) {
-            if ($this->save($order)) {
-                $this->Cart->remove($order);
-                $this->sendNotificationEmail();
-                $this->decrementFromStock();
-                $this->updateUserStatistics();
-                // ...
-                return true;
-            }
-            return false;
-        }
-    }
-
-Bien, cela ne semble pas correct du tout. Un plugin ne devrait pas faire
-d'hypothèse sur l'envoi d'email, et devrait même ne pas avoir à décrémenter
-les données d'inventaire, et finalement le suivi statistique n'est pas le
-meilleur endroit pour le faire. Nous avons donc besoin d'une autre solution,
-ré-écrivons en utilisant le gestionnaire d'événements. ::
+Instead, you can use events to allow you to cleanly separate the concerns of
+your code and allow additional concerns to hook into your plugin using events.
+For example in your Cart plugin you have an Order model that deals with creating
+orders. You'd like to notify the rest of the application that an order has been
+created. To keep your Order model clean you could use events::
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
@@ -93,33 +65,75 @@ ré-écrivons en utilisant le gestionnaire d'événements. ::
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
+                $event = new CakeEvent('Model.Order.afterPlace', $this, array(
                     'order' => $order
-                )));
+                ));
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
         }
     }
 
-Cela semble beaucoup plus clair, puisque cela nous donne l'opportunité
-d'introduire des classes d'événement et des méthodes. La première chose que
-vous devriez noter c'est l'appel à ``getEventManager()`` qui est une méthode
-disponible par défaut dans tous les Models, Controllers, et les Vues. Cette
-méthode ne retournera pas la même instance du gestionnaire aux travers des
-models, et n'est pas partagée entre les controllers et les models, mais elle
-l'est entre les controllers et les vues, cependant. Nous reverrons plus tard
-comment surmonter ce détail d'implémentation.
+The above code allows you to easily notify the other parts of the application
+that an order has been created. You can then do tasks like send email
+notifications, update stock, log relevant statistics and other tasks in separate
+objects that focus on those concerns.
 
-La méthode ``getEventManager`` retourne une instance de
-:php:class:`CakeEventManager`, et pour dispatcher les événements vous utilisez
-:php:meth:`CakeEventManager::dispatch()` qui reçoit une instance de la classe
-:php:class:`CakeEvent`. Disséquons maintenant le processus de dispatching
-d'un événement::
+Accéder aux gestionnaires d'event
+=================================
 
-    new CakeEvent('Model.Order.afterPlace', $this, array(
+In CakePHP events are triggered against event managers. Event managers are
+available in every Model, View and Controller using ``getEventManager()``::
+
+    $events = $this->getEventManager();
+
+Each model has a separate event manager, while the View and Controller
+share one. This allows model events to be self contained, and allow components
+or controllers to act upon events created in the view if necessary.
+
+Le gestionnaire d'événement global
+----------------------------------
+
+In addition to instance level event managers, CakePHP provides a global event
+manager that allows you to listen to any event fired in an application. This
+is useful when attaching listeners to a specific instance might be cumbersome or
+difficult. The global manager is a singleton instance of
+:php:class:`CakeEventManager`.  When an event is
+dispatched, it will be dispatched to the both the global and instance level
+listeners in priority order. You can access the global manager using a static method::
+
+    // Dans n'importe quel fichier de config ou morceau de code qui s'exécute avant l'événement
+    App::uses('CakeEventManager', 'Event');
+    CakeEventManager::instance()->attach(
+        $aCallback,
+        'Model.Order.afterPlace'
+    );
+
+Un élément important que vous devriez considérer est qu'il y a des événements
+qui seront déclenchés en ayant le même nom mais différents sujets, donc les
+vérifier dans l'objet événement est généralement requis dans chacune des
+fonctions qui sont attachées globalement pour éviter quelques bugs.
+Souvenez-vous qu'une extrême flexibilité implique une extrême complexité.
+
+.. versionchanged:: 2.5
+
+    Avant 2.5, les listeners du gestionnaire global étaient gardés dans une
+    liste séparée et déclenchés **avant** que les instances de listeners le
+    soient.
+
+Distribution des événements
+===========================
+
+Once you have obtained an instance of an event manager you can dispatch events
+using :php:meth:`~CakeEventManager::dispatch()`. This method takes an instance
+of the :php:class:`CakeEvent` class. Let's look at dispatching an event::
+
+    // Create a new event and dispatch it.
+    $event = new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
+    $this->getEventManager()->dispatch($event);
 
 :php:class:`CakeEvent` reçoit 3 arguments dans son constructeur. Le premier
 est le nom de l'événement, vous devrez essayer de garder ce nom aussi unique
@@ -151,58 +165,6 @@ de l'événement `afterPlace`, vous pouvez enregistrer l'heure, envoyer des
 emails, éventuellement mettre à jour les statistiques de l'utilisateur dans
 des objets séparés et même déléguer cela à des tâches hors-ligne si vous
 en avez besoin.
-
-Enregistrement des callbacks
-----------------------------
-
-Comment allons nous enregistrer les callbacks ou les observateurs
-(observers) dans notre nouvel événement `afterPlace`? Ceci est sujet à
-une grande variété d'implémentation, mais elles ont toutes à appeler la méthode
-:php:meth:`CakeEventManager::attach()` pour enregistrer les nouveaux acteurs.
-Par souci de simplicité, imaginons que nous savons dans le plugin de quoi les
-callbacks sont capables dans le controller, et disons que ce controller
-est responsable de leur attachement. Le code possible pourrait être cela ::
-
-    // Les écouteurs (Listeners) configurés quelque part ailleurs, un fichier de config par ex:
-    Configure::write('Order.afterPlace', array(
-        'email-sending' => 'EmailSender::sendBuyEmail',
-        'inventory' => array($this->InventoryManager, 'decrement'),
-        'logger' => function($event) {
-            // Les fonction Anonyme ne sont permises que dans PHP 5.3+
-            CakeLog::write('info', 'Un nouvel achat à été placé avec l\'id: ' . $event->subject()->id);
-        }
-    ));
-
-    // Cart/Controller/OrdersController.php
-    class OrdersController extends AppController {
-
-        public function finish() {
-            foreach (Configure::read('Order.afterPlace') as $l) {
-                $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
-            }
-            if ($this->Order->place($this->Cart->items())) {
-                // ...
-            }
-        }
-    }
-
-Ce ne sera pas la façon la plus propre de la faire, ainsi nous pouvons arriver
-avec nos propres moyens pour attacher des écouteurs au gestionnaire d'événement
-d'un objet. Cette façon simple de les définir en utilisant la classe
-`Configure` est destinée a des fins didactiques seulement. Ce petit exemple
-nous permet de montrer quel type de callbacks peuvent être attachés au
-gestionnaire (manager). Comme vous vous en doutiez, la méthode `attach` prend
-n'importe quel type de `callback` PHP valide, c'est une chaîne représentant
-l'appel à une fonction statique, un tableau ayant une instance de classe et une
-méthode, une fonction anonyme si vous utilisez PHP 5.3 ,etc...
-Les callbacks attachés recevront l'objet événement comme premier argument.
-
-:php:meth:`CakeEventManager::attach()` accepte trois arguments. Le plus à
-gauche est le callback lui même, n'importe quoi que PHP peut traiter comme
-une fonction appelable. Le second argument est le nom de l'événement, et le
-callback ne sera envoyé que si l'objet `CakeEvent` envoyé a un nom
-correspondant. Le dernier argument est un tableau d'options pour configurer
-la priorité du callback,et les arguments préférentiels à envoyer.
 
 Enregistrer les écouteurs
 -------------------------
@@ -244,6 +206,35 @@ Comme vous pouvez le voir dans le code ci-dessus, la fonction `attach` peut
 manipuler les instances de l'interface `CakeEventListener`. En interne, le
 gestionnaire d'événement lira le tableau retourné par la méthode
 `implementedEvents` et relie les callbacks en conséquence.
+
+Registering anonymous listeners
+-------------------------------
+
+While event listener objects are generally a better way to implement listeners,
+you can also bind any ``callable`` as an event listener. For example if we
+wanted to put any orders into the log files, we could use a simple anonymous
+function to do so::
+
+    // Anonymous functions require PHP 5.3+
+    $this->Order->getEventManager()->attach(function($event) {
+        CakeLog::write(
+            'info',
+            'A new order was placed with id: ' . $event->subject()->id
+        );
+    }, 'Model.Order.afterPlace');
+
+In addition to anonymous functions you can use any other callable type that PHP
+supports::
+
+    $events = array(
+        'email-sending' => 'EmailSender::sendBuyEmail',
+        'inventory' => array($this->InventoryManager, 'decrement'),
+    );
+    foreach ($events as $callable) {
+        $eventManager->attach($callable, 'Model.Order.afterPlace');
+    }
+
+.. _event-priorities:
 
 Établir des priorités
 ---------------------
@@ -440,7 +431,7 @@ Retirer des callbacks et écouteurs (listeners)
 Si pour quelque raison que ce soit, vous voulez retirer certains callbacks
 depuis le gestionnaire d'événement, appelez juste la méthode
 :php:meth:`CakeEventManager::detach()` en utilisant comme arguments les
-deux premiers paramètres que vous avez utilisés pour les attacher ::
+deux premiers paramètres que vous avez utilisés pour les attacher::
 
     // Attacher une fonction
     $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
@@ -456,73 +447,14 @@ deux premiers paramètres que vous avez utilisés pour les attacher ::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attacher un écouteur Cake (CakeEventListener)
-    $listener = new MyCakeEventLister();
+    $listener = new MyEventLister();
     $this->getEventManager()->attach($listener);
         
     // Détacher une simple clé d'événement depuis un écouteur (listener)
     $this->getEventManager()->detach($listener, 'My.event');
 
     // Détacher tous les callbacks implémentés par un écouteur (listener)
-    $this->getEventManager()->attach($listener);
-
-Le gestionnaire d'événement global
-==================================
-
-Comme noté précédemment, cela pourrait être difficile d'attacher les
-observateurs à un gestionnaire d'événement particulier dans un objet. il y
-a certains cas où avoir la possibilité d'attacher des callbacks à un événement
-est nécessaire sans avoir accès à l'instance objet qui le déclenchera. Aussi,
-pour empêcher les gens d'implémenter pour chacun d'eux un mécanisme différent
-pour le chargement des callbacks dans les gestionnaires en fonction de la
-configuration, CakePHP fournit le concept du gestionnaire d'événement global
-`global event manager`.
-
-Le gestionnaire global est une instance singleton de la classe
-``CakeEventManager`` qui reçoit tous les événements que n'importe quel
-gestionnaire d'événement dans l'application dispatches. C'est à la fois
-flexible et puissant, mais si vous l'utilisez vous devez prendre plus
-de précautions avec le traitement des événements.
-
-Pour définir le concept une fois de plus, et utiliser notre exemple
-`beforePlace` souvenons nous que nous utilisions le gestionnaire d'événement
-local qui est retourné par la fonction `getEventManager`. En interne ce
-gestionnaire d'événement local dispatche l'événement dans le gestionnaire
-d'événement global avant de déclencher les callbacks internes attachés. La
-priorité de chacun des managers est indépendante, le callback global se
-lancera dans leur propre file d'attente et ainsi les callbacks locaux
-seront appelés dans l'ordre de priorité respectifs.
-
-Accéder au gestionnaire d'événement global est aussi simple que d'appeler une
-fonction statique, l'exemple suivant va attacher un événement global à
-l'événement `beforePlace` ::
-
-    // Dans n'importe quel fichier de config ou morceau de code qui s'exécute avant l'événement
-    App::uses('CakeEventManager', 'Event');
-    CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
-
-Comme vous pouvez le voir, nous avons juste changé comment nous avons accès à
-l'instance du gestionnaire d'événement, et nous pouvons appliquer les mêmes
-concepts que nous avons appris précédemment à propos du déclenchement, de
-l'attachement, du détachement, du stoppage d'événement, etc...
-
-Un élément important que vous devriez considérer est qu'il y a des événements
-qui seront déclenchés en ayant le même nom mais différents sujets, donc les
-vérifier dans l'objet événement est généralement requis dans chacune des
-fonctions qui sont attachées globalement pour éviter quelques bugs.
-Souvenez-vous qu'une extrême flexibilité implique une extrême complexité.
-
-Examinez ce callback qui veut écouter tous les models beforeFind mais en
-réalité, il ne peut pas faire sa logique si le model est le caddie::
-
-    App::uses('CakeEventManager', 'Event');
-    CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
-
-    public function myCallback($event) {
-        if ($event->subject() instanceof Cart) {
-            return;
-        }
-        return array('conditions' => ...);
-    }
+    $this->getEventManager()->detach($listener);
 
 Conclusion
 ==========
@@ -530,19 +462,12 @@ Conclusion
 Les événements sont une bonne façon de séparer les préoccupations dans
 votre application et rend les classes a la fois cohérentes et découplées des
 autres, néanmoins l'utilisation des événements n'est pas la solution
-à tous les problèmes. La plupart des applications n'auront pas réellement
-besoin de cette fonctionnalité, nous vous recommandons d'examiner d'autres
-options quand vous implémentez les callbacks comme
-l'utilisation des behaviors, des components et des helpers.
+à tous les problèmes. Les Events peuvent être utilisés pour découpler le code
+de l'application et rendre les plugins extensibles.
 
-Gardez à l'esprit que beaucoup de pouvoir implique beaucoup de responsabilité,
-découpler vos classes par ce moyen signifie également que vous avez besoin
-d'effectuer une plus grande et meilleur intégration en testant votre code.
-Abuser de cet outil ne donnera pas à votre application une meilleure
-architecture, bien au contraire, cela sera beaucoup plus difficile à lire. En
-revanche si vous utilisez cet option à bon escient, seulement pour les choses
-dont vous avez besoin, Ce sera plus simple de travailler avec votre code, de
-le tester et de l'intégrer.
+Gardez à l'esprit que beaucoup de pouvoir implique beaucoup de responsabilité.
+Utiliser trop d'events peut rendre le debug plus difficile et nécessite des
+tests d'intégration supplémentaires.
 
 Lecture Supplémentaire
 ======================

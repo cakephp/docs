@@ -43,7 +43,7 @@ Expression Types
 All expression elements are supported by all methods. In addition to expression
 elements, you can use attribute matching with certain methods. They are ``extract()``, 
 ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
-``apply()``, ``sort()``, ``insert()``, ``remove()``and ``nest()``.
+``apply()``, ``sort()``, ``insert()``, ``remove()`` and ``nest()``.
 
 Attribute Matching Types
 ------------------------

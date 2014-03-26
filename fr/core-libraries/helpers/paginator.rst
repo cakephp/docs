@@ -33,6 +33,13 @@ Les clés acceptée pour ``$options``:
 * ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
+* ``direction`` La direction par défaut à utiliser quand ce lien n'est pas actif.
+* ``lock`` Verrouiller la direction. Va seulement utiliser la direction par
+  défaut, par défaut à false.
+
+  .. versionadded:: 2.5
+    Vous pouvez maintenant définir l'option lock à true afin de verrouiller
+    la direction du tri dans la direction spécifiée.
 
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
@@ -83,6 +90,11 @@ Sortie
 .. code-block:: html
 
     <a href="/posts/index/page:1/sort:user_id/direction:desc/">User Id</a>
+
+L'option lock peut être utilisée pour verrouiller le tri dans la direction
+spécifiée::
+
+    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
 
 .. php:method:: sortDir(string $model = null, mixed $options = array())
 

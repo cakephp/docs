@@ -910,7 +910,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     .. versionadded:: 2.3
         Cette méthode a été ajoutée dans 2.3
 
-.. php:staticmethod:: inList(string $check, array $list, $strict = true)
+.. php:staticmethod:: inList(string $check, array $list, boolean $caseInsensitive = false)
 
     Cette règle s'assurera que la valeur est dans un ensemble donné. Elle
     nécessite un tableau des valeurs. Le champ est valide si sa valeur
@@ -926,6 +926,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
                  )
              )
          );
+
+    La comparaison est non sensible à la casse par défaut. Vous pouvez définir
+    ``$caseInsensitive`` à true si vous avez besoin d'une comparaison sensible
+    à la casse.
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
 
@@ -978,17 +982,26 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     de la donnée". Faites attention car elle pourrait être plus grande
     que le nombre de caractères en manipulant des caractères non-ASCII.
 
-.. php:staticmethod:: mimeType(mixed $check, array $mimeTypes)
+.. php:staticmethod:: mimeType(mixed $check, array|string $mimeTypes)
 
     .. versionadded:: 2.2
 
-    Cette règle vérifie la validité d'un mimeType.
+    Cette règle vérifie la validité d'un mimeType. La comparaison est sensible à
+    la casse.
+
+    .. versionchanged:: 2.5
+
+    Depuis 2.5 ``$mimeTypes`` peut être une chaîne regex.
 
     ::
 
         public $validate = array(
             'image' => array(
                 'rule'    => array('mimeType', array('image/gif')),
+                'message' => 'Invalid mime type.'
+            ),
+            'logo' => array(
+                'rule'    => array('mimeType', '#image/.+#'),
                 'message' => 'Invalid mime type.'
             ),
         );
@@ -1025,7 +1038,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
-.. php:staticmethod:: multiple(mixed $check, mixed $options = array())
+.. php:staticmethod:: multiple(mixed $check, mixed $options = array(), boolean $caseInsensitive = false)
 
     Utilisez cette règle pour valider un champ select multiple. Elle
     accepte les paramètres "in", "max" et "min".
@@ -1042,6 +1055,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
                 'message' => 'Merci de choisir une, deux ou trois options'
             )
         );
+
+    La comparaison est sensible à la casse par défaut. Vous pouvez définir
+    ``$caseInsensitive`` à true si vous avez besoin d'une comparaison insensible
+    à la casse.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 

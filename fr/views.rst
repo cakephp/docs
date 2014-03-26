@@ -14,7 +14,7 @@ rendu les plus communs:
   :doc:`views/json-and-xml-views`.
 - Pour servir des fichiers protégés, ou générer des fichiers dynamiquement,
   vous pouvez utiliser :ref:`cake-response-file`.
-- Pour créer des vues multiples par thème, vous pouvez utliser
+- Pour créer plusieurs vues pour un thème, vous pouvez utiliser
   :doc:`views/themes`.
 
 Templates de Views
@@ -310,7 +310,7 @@ ressembler::
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?php echo $title_for_layout?></title>
+   <title><?php echo $this->fetch('title'); ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    echo $this->fetch('meta');
@@ -672,9 +672,22 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
     Ensuite dans votre fichier de layout la variable ``$activeMenuButton``
     sera disponible et contiendra la valeur 'posts'.
 
+.. php:method:: get(string $var, $default = null)
+
+    Récupère la valeur d'une viewVar avec le nom de ``$var``.
+
+    Depuis 2.5 vous pouvez fournir une valeur par défaut dans le cas où la
+    variable n'est pas déjà définie.
+
+    .. versionchanged:: 2.5
+        L'argument ``$default`` a été ajouté dans 2.5.
+
 .. php:method:: getVar(string $var)
 
     Récupère la valeur de viewVar avec le nom $var.
+
+    .. deprecated:: 2.3
+        Utilisez :php:meth:`View::get()` à la place.
 
 .. php:method:: getVars()
 

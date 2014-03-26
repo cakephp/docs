@@ -240,11 +240,19 @@ interne CakeLog::write()::
     $this->log("Quelque chose qui ne fonctionne pas!", 'debug');
 
 Tous les flux de log configurés sont écrits séquentiellement à chaque fois
-que :php:meth:`CakeLog::write()` est appelée. Vous n'avez pas besoin de
-configurer un flux pour utiliser la journalisation. Si il n'y a pas de flux
-configuré quand le log est écrit, un flux par ``défaut`` utilisant la classe
-de noyau ``FileLog`` sera configuré pour envoyer en sortie vers
-``app/tmp/logs/`` juste comme CakeLog le faisait dans les précédentes versions.
+que :php:meth:`CakeLog::write()` est appelée.
+
+... versionchanged:: 2.5
+
+CakeLog ne s'auto-configure plus lui-même. En résultat, les fichiers de log,
+ne seront plus auto-créés si aucun flux n'est écouté. Assurez-vous que vous
+ayez au moins un flux ``default`` configuré si vous souhaitez écouter tous
+les types et les niveaux. Habituellement, vous pouvez juste définir la classe
+``FileLog`` du coeur pour le sortir dans ``app/tmp/logs/``::
+
+    CakeLog::config('default', array(
+        'engine' => 'File'
+    ));
 
 .. _logging-scopes:
 

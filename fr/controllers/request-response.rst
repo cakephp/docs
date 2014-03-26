@@ -308,6 +308,18 @@ API de CakeRequest
 
     .. versionadded:: 2.3
 
+    .. deprecated:: 2.5
+        Utilisez :php:meth:`CakeRequest::allowMethod()` à la place.
+
+.. php:method:: allowMethod($methods)
+
+    Définit les méthodes HTTP autorisées, si cela ne correspond pas, une
+    exception MethodNotAllowedException sera lancée.
+    La réponse 405 va inclure l'en-tête nécessaire ``Allow`` avec les méthodes
+    passées.
+
+    .. versionadded:: 2.5
+
 .. php:method:: referer($local = false)
 
     Retourne l'adresse de référence de la requête.

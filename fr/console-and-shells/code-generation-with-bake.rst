@@ -54,6 +54,12 @@ ligne de commande ::
     $ cake bake plugin plugin_name
     $ cake bake all
 
+.. versionchanged:: 2.5
+    Les fichiers Test créés par ``bake test`` incluent les appels vers
+    `PHPunit's markTestIncomplete() <http://phpunit.de/manual/3.7/en/incomplete-and-skipped-tests.html>`_
+    pour attirer votre attention sur les méthodes de test vides. Avant 2.5, les
+    tests vides passaient sans messages.
+
 
 Modifier le HTML par défaut produit par les templates de bake
 =============================================================

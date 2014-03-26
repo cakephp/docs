@@ -372,7 +372,9 @@ Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
 
     class ArticleFixture extends CakeTestFixture {
 
-          /* Optionel. Définir cette propriété pour charger les fixtures dans une source de données de test différente */
+          // Optionel
+          // Définir cette propriété pour charger les fixtures dans une source
+          // de données de test différente
           public $useDbConfig = 'test';
           public $fields = array(
               'id' => array('type' => 'integer', 'key' => 'primary'),
@@ -583,6 +585,22 @@ en utilisant :php:meth:`CakeTestCase::loadFixtures()`::
             $this->loadFixtures('Article', 'Comment');
         }
     }
+
+Depuis 2.5.0, vous pouvez charger les fixtures dans les sous-répertoires.
+Utiliser plusieurs répertoires peut faciliter l'organisation de vos fixtures si
+vous avez une application plus grande. Pour charger les fixtures dans les
+sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
+la fixture::
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.blog/article', 'app.blog/comment');
+    }
+
+Dans l'exemple ci-dessus, les deux fixtures seront chargés à partir de
+``App/Test/Fixture/blog/``.
+
+.. versionchanged:: 2.5
+    Depuis 2.5.0 vous pouvez charger les fixtures dans des sous-répertoires.
 
 Tester les Models
 =================
