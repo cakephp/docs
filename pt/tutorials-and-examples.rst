@@ -10,7 +10,6 @@ plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ ou a
 existentes.
 
 .. toctree::
-    :glob:
     :maxdepth: 1
 
     tutorials-and-examples/blog/blog
