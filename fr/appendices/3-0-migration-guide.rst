@@ -11,7 +11,7 @@ fonctionnalités et les changements de l'API.
 Pré-requis
 ==========
 
-- CakePHP 3.x a besoin de la Version 5.4.3 ou supérieur de PHP.
+- CakePHP 3.x a besoin de la Version 5.4.19 ou supérieur de PHP.
 - CakePHP 3.x a besoin de l'extension mbstring.
 - CakePHP 3.x a besoin de l'extension mcrypt.
 

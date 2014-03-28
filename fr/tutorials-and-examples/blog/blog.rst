@@ -19,7 +19,7 @@ Voici ce dont vous aurez besoin :
    être assez semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire
    fonctionner CakePHP sans aucune configuration préalable. Assurez-vous
-   d'avoir PHP 5.4.3 ou supérieur.
+   d'avoir PHP 5.4.19 ou supérieur.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL.
    Vous aurez besoin d'un minimum de connaissance en SQL afin de créer une
    base de données : CakePHP prendra les rênes à partir de là. Puisque nous
