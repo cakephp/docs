@@ -12,11 +12,11 @@ code et facilitera le test de votre code.
 
 Habituellement, les controllers sont utilisés pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une
-boulangerie en-ligne, vous aurez sans doute un RecettesController et un
-IngredientsController qui gérent les recettes et leurs ingrédients. Dans
-CakePHP, les controllers sont nommés d'après le model principal qu'ils
-gèrent. Il est aussi totalement possible d'avoir des controllers qui
-travaillent avec plus d'un model.
+boulangerie en-ligne, vous aurez sans doute un RecettesController qui gère
+vos recettes et un IngredientsController qui gére vos ingrédients. Cependant,
+il est aussi possible d'avoir des controllers qui fonctionnent avec plus qu'un
+model. Dans CakePHP, un controller est nommé d'après le model principal qu'il
+gère.
 
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
@@ -24,11 +24,10 @@ CakePHP ``AppController``, qui hérite elle-même de la classe
 dans ``/app/Controller/AppController.php`` et elle devrait contenir les
 méthodes partagées par tous les controllers de votre application.
 
-Les controllers peuvent inclure un certain nombre de méthodes qui sont
-généralement appelées *actions*. Les actions sont les méthodes d'un controller
-qui gèrent les requêtes. Par défaut, toutes les méthodes publiques d'un
-controller sont des actions accessibles via une URL. Les actions sont
-responsables de l'interprétation des requêtes et de la création de
+Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
+requête. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
+publique dans un controller est une action accessible via une URL. Une action
+est responsable de l'interprétation des requêtes et de la création de
 la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
 il y a aussi d'autres façons de créer des réponses.
 
@@ -40,21 +39,20 @@ Le Controller App
 Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Controller` incluse dans la librairie du cœur
-de CakePHP. Ainsi, ``AppController`` est définie dans
+de CakePHP. ``AppController`` est définie dans
 ``/app/Controller/AppController.php`` comme ceci::
 
     class AppController extends Controller {
     }
 
 Les attributs et méthodes de controller créés dans ``AppController`` seront
-disponibles dans tous les controllers de votre application. C'est l'endroit
-idéal pour créer du code commun à tous vos controllers. Les Components (que
+disponibles dans tous les controllers de votre application. Les Components (que
 vous découvrirez plus loin) sont mieux appropriés pour du code utilisé dans
 la plupart (mais pas nécessairement tous) des controllers.
 
 Bien que les règles habituelles d'héritage de la programmation orientée objet
 soient appliquées, CakePHP exécute également un travail supplémentaire si des
-attributs spécifiques des controllers sont fournis, comme la liste des
+attributs spécifiques des controllers sont fournis, comme les
 components ou helpers utilisés par un controller. Dans ces situations, les
 valeurs des tableaux de ``AppController`` sont fusionnées avec les tableaux de
 la classe controller enfant. Les valeurs dans la classe enfant vont toujours
@@ -72,7 +70,7 @@ surcharger celles dans ``AppController``.
 N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la
 propriété :php:attr:`~Controller::$helpers` dans votre classe ``AppController``.
 
-Pensez à appeler les fonctions de rappel (callbacks) de AppController dans
+Pensez aussi à appeler les fonctions de rappel (callbacks) de AppController dans
 celles du controller enfant pour de meilleurs résultats::
 
     public function beforeFilter() {
@@ -131,9 +129,9 @@ fait des conventions que CakePHP utilise, vous n'avez pas à créer et rendre
 la vue manuellement. Au lieu de ça, une fois qu'une action du controller est
 terminée, CakePHP va gérer le rendu et la livraison de la Vue.
 
-Si pour certaines raisons, vous voulez échapper au comportement par défaut. Les
-deux techniques suivantes vont échapper le comportement de rendu par défaut de
-la vue.
+Si pour certaines raisons, vous voulez éviter le comportement par défaut, les
+deux techniques suivantes ne vont pas appliquer le comportement de rendu par
+défaut de la vue.
 
 * Si vous retournez une chaîne de caractères, ou un objet qui peut être
   converti en une chaîne de caractères à partir d'une action du controller,
@@ -141,7 +139,7 @@ la vue.
 * Vous pouvez retourner un objet :php:class:`CakeResponse` avec la réponse
   complètement créée.
 
-Quand les méthodes du controller sont utilisées avec
+Quand vous utilisez les méthodes du controller avec
 :php:meth:`~Controller::requestAction()`, vous voudrez souvent retourner les
 données qui ne sont pas des chaînes de caractère. Si vous avez des méthodes
 du controller qui sont utilisées pour des requêtes web normales + requestAction,
@@ -218,7 +216,7 @@ consultez
 Interactions avec les vues
 --------------------------
 
-Les Controllers interagissent avec la vue de plusieurs façons.
+Les Controllers interagissent avec les vues de plusieurs façons.
 Premièrement, ils sont capables de passer des données aux vues, en utilisant
 :php:meth:`~Controller::set()`. Vous pouvez aussi décider quelle classe de vue
 utiliser, et quel fichier de vue doit être rendu à partir du controller.
@@ -262,7 +260,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
         $this->set($data);  
 
 
-    L'attribut ``$pageTitle`` n'existe plus, utilisez
+    L'attribut ``$pageTitle`` n'existe plus. Utilisez
     :php:meth:`~Controller::set()` pour définir le titre::
 
         $this->set('title_for_layout', 'Ceci est la page titre');
@@ -291,25 +289,23 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
         // ...
         }
 
-    Bien que CakePHP appellera cette fonction automatiquement à la
+    Bien que CakePHP appelle cette fonction automatiquement à la
     fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
     à false), vous pouvez l'utiliser pour spécifier un fichier de vue
     alternatif en précisant le nom d'une action dans le controller, via
     le paramètre ``$action``.
 
-    Si ``$action`` commence avec un '/' on suppose que c'est un fichier de
+    Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
     vue ou un élément dont le chemin est relatif au dossier ``/app/View``. Cela
     permet un affichage direct des éléments, ce qui est très pratique lors
-    d'appels ajax.
+    d'appels AJAX.
     ::
 
         // Rend un élément dans /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
-    Vous pouvez aussi spécifier une vue alternative ou un fichier element en
-    utilisant le troisième paramètre, ``$file``. Le paramètre
-    :php:attr:`~View::$layout` vous permet de spécifier le layout de la vue
-    qui est rendue.
+    Le paramètre :php:attr:`~View::$layout` vous permet de spécifier le layout
+    de la vue qui est rendue.
 
 Rendre une vue spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
