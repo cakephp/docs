@@ -51,7 +51,7 @@ available for your use, just in case you need to insert some logic
 between CakePHP's core operations. Callbacks available include:
 
 -  :php:meth:`~Controller::afterFilter()`, executed after all controller logic,
-   including the view render.
+   including the rendering of the view
 -  :php:meth:`~Controller::beforeFilter()`, executed before any controller action logic
 -  :php:meth:`~Controller::beforeRender()`, executed after controller logic, but before
    the view is rendered
@@ -65,7 +65,7 @@ structure, you can specify your User model as behaving like a tree,
 and gain free functionality for removing, adding, and shifting
 nodes in your underlying tree structure.
 
-Models also are supported by another class called a DataSource.
+Models are also supported by another class called a DataSource.
 DataSources are an abstraction that enable models to manipulate
 different types of data consistently. While the main source of data
 in a CakePHP application is often a database, you might write
@@ -73,9 +73,9 @@ additional DataSources that allow your models to represent RSS
 feeds, CSV files, LDAP entries, or iCal events. DataSources allow
 you to associate records from different sources: rather than being
 limited to SQL joins, DataSources allow you to tell your LDAP model
-that it is associated to many iCal events.
+that it is associated with many iCal events.
 
-Just like controllers, models are featured with callbacks as well:
+Like controllers, models have callbacks:
 
 -  beforeFind()
 -  afterFind()
@@ -95,7 +95,8 @@ View Extensions ("Helpers")
 A Helper is a class that aids in view logic. Much like a component
 used among controllers, helpers allow presentational logic to be
 accessed and shared between views. One of the core helpers,
-JsHelper, makes AJAX requests within views much easier and comes with support for jQuery (default), Prototype and Mootools.
+JsHelper, makes AJAX requests within views much easier and comes with 
+support for jQuery (default), Prototype and Mootools.
 
 Most applications have pieces of view code that are used
 repeatedly. CakePHP facilitates view code reuse with layouts and
