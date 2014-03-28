@@ -21,11 +21,14 @@ like::
 
     'Datasources' => [
         'default' => [
-            'className' => 'Mysql',
-            'database' => 'my_app',
-            'login' => 'my_app',
-            'password' => 'sekret',
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
             'host' => 'localhost',
+            'login' => 'cake_blog',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_blog',
+            'prefix' => false,
             'encoding' => 'utf8',
             'timezone' => 'UTC'
         ]
@@ -40,11 +43,14 @@ would be::
     use Cake\Database\ConnectionManager;
 
     ConnectionManager::config('default', [
-        'className' => 'Mysql',
-        'database' => 'my_app',
-        'login' => 'my_app',
-        'password' => 'sekret',
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
         'host' => 'localhost',
+        'login' => 'cake_blog',
+        'password' => 'AngelF00dC4k3~',
+        'database' => 'cake_blog',
+        'prefix' => false,
         'encoding' => 'utf8',
         'timezone' => 'UTC'
     ]);
