@@ -33,29 +33,33 @@ Let's get started!
 Getting CakePHP
 ===============
 
-The easiest way to get up and running is by downloading or cloning a fresh copy from GitHub.
-To do this simply visit the CakePHP project on GitHub:
+The easiest way to get up and running is by downloading or cloning a fresh copy
+from GitHub. To do this simply visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
 and download the latest release of CakePHP 3.0.
 
 You can also install CakePHP using ``Composer``.
-``Composer`` is an simple way of installing CakePHP from your terminal or command line prompt.
-Simply type the following two lines in your terminal from your webroot directory::
+``Composer`` is an simple way of installing CakePHP from your terminal or
+command line prompt. Simply type the following two lines in your terminal from
+your webroot directory::
 
     curl -s https://getcomposer.org/installer | php
     php composer.phar create-project -s dev cakephp/app
 
 This will download Composer and install the CakePHP application skeleton.
-By default Compsoser will save your new project into a directory called ``app``.
-Feel free to rename this directory to something which relates to your project, e.g. ``blog``.
+By default Composer will save your new project into a directory called ``app``.
+Feel free to rename this directory to something which relates to your project,
+e.g. ``blog``.
 
-The advantage to using Composer is that it will automatically complete some important set up tasks, such as setting the correct file permissions and creating your app/Config/app.php file for you.
+The advantage to using Composer is that it will automatically complete some
+important set up tasks, such as setting the correct file permissions and
+creating your app/Config/app.php file for you.
 
-There are other ways to install CakePHP if you are uncomfortable with ``Composer``.
-For more information: check out the
-:doc:`/installation` section.
+There are other ways to install CakePHP if you are uncomfortable with
+``Composer``. For more information: check out the :doc:`/installation` section.
 
-Regardless of how you downloaded and installed CakePHP, once your set up is completed, your directory setup should look something like the following::
+Regardless of how you downloaded and installed CakePHP, once your set up is
+completed, your directory setup should look something like the following::
 
     /path_to_document_root
         /App
@@ -90,7 +94,9 @@ might look something like this::
 If for some reason CakePHP can't write to that directory, you'll be
 informed by a warning while not in production mode.
 
-While not recommended, if you are unable to set the permissions to the same as your webserver, you can simply set write permissions on the folder by running a command such as::
+While not recommended, if you are unable to set the permissions to the same as
+your webserver, you can simply set write permissions on the folder by running a
+command such as::
 
     $ chmod 777 -R tmp
 
