@@ -167,9 +167,9 @@ sign (=).
 Method definition
 =================
 
-Example of a function definition::
+Example of a method definition::
 
-    function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
         }
@@ -177,8 +177,8 @@ Example of a function definition::
     }
 
 Parameters with a default value, should be placed last in function
-definition. Try to make your functions return something, at least true
-or false = so it can be determined whether the function call was
+definition. Try to make your functions return something, at least ``true``
+or ``false``, so it can be determined whether the function call was
 successful::
 
     public function connection($dns, $persistent = false) {
@@ -265,7 +265,7 @@ When including files with classes or libraries, use only and always the
 PHP tags
 ========
 
-Always use long tags (``<?php ?>``) Instead of short tags (<? ?>).
+Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``).
 
 Naming convention
 =================
@@ -304,7 +304,7 @@ Member visibility
 -----------------
 
 Use PHP5's private and protected keywords for methods and variables. Additionally,
-protected method or variable names start with a single underscore ("\_"). Example::
+protected method or variable names start with a single underscore (``_``). Example::
 
     class A {
         protected $_iAmAProtectedVariable;
@@ -314,7 +314,7 @@ protected method or variable names start with a single underscore ("\_"). Exampl
         }
     }
 
-Private methods or variable names start with double underscore ("\_\_"). Example::
+Private methods or variable names start with double underscore (``__``). Example::
 
     class A {
         private $__iAmAPrivateVariable;
@@ -349,7 +349,7 @@ and "example.net", for example:
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-The ``example.com`` domain name has been reserved for this (see :rfc:`2606`) and is recommended
+The "example.com" domain name has been reserved for this (see :rfc:`2606`) and is recommended
 for use in documentation or as examples.
 
 Files
