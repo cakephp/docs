@@ -72,6 +72,8 @@ In addition to the simple get/set interface, entities allow you to provide
 accessors and mutator methods. These methods let you customize how properties
 are read or set. For example::
 
+    namespace App\Model\Entity;
+
     use Cake\ORM\Entity;
 
     class Article extends Entity {
@@ -84,6 +86,8 @@ Accessors use the convention of ``get`` followed by the CamelCased version of
 the field name. They receive the basic value stored in the ``_properties`` array
 as their only argument. You can customize how properties get set by defining
 a mutator::
+
+    namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
@@ -112,8 +116,9 @@ By defining accessors you can provide access to properties that do not
 actually exist. For example if your users table has ``first_name`` and
 ``last_name`` you could create a method for the full name::
 
+    namespace App\Model\Entity;
+
     use Cake\ORM\Entity;
-    use Cake\Utility\Inflector;
 
     class User extends Entity {
 
@@ -175,6 +180,10 @@ indicate whether a field can or cannot be mass-assigned::
 
 In addition to concrete fields there is a special ``*`` field which defines the
 fallback behavior if a field is not specifically named::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
 
     class Article extends Entity {
         protected $_accessible => [
@@ -329,6 +338,10 @@ arrays or JSON. In order to expose virtual properties you need to make them
 visible. When defining your entity class you can provide a list of virtual
 fields that should be exposed::
 
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+
     class User extends Entity {
 
         protected $_virtual = ['full_name'];
@@ -346,6 +359,10 @@ There are often fields you do not want exported in JSON or array formats. For
 example it is often unwise to expose password hashes or account recovery
 questions. When defining an entity class, define which properties should be
 hidden::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
 
     class User extends Entity {
 
