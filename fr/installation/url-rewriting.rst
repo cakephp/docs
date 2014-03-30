@@ -39,9 +39,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   Dans la plupart des systèmes, ceux-ci vont être commentés (en étant
-   précédé par un #) par défaut, donc vous aurez juste besoin de retirer
-   les symboles # du début.
+   Dans la plupart des systèmes, ceux-ci vont être commentés donc vous aurez
+   juste besoin de retirer les symboles # en début de ligne.
 
    Après que vous avez fait des changements, re-démarrez Apache pour être sûr
    que les paramètres soient actifs.
