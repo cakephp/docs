@@ -171,9 +171,9 @@ signes égal (=).
 Définition des méthodes
 =======================
 
-Exemple d'un définition de fonction::
+Exemple d'un définition de méthode::
 
-    function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
         }
@@ -182,8 +182,8 @@ Exemple d'un définition de fonction::
 
 Les paramètres avec une valeur par défaut, devraient être placés en dernier
 dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions
-retournent quelque chose, au moins true ou false = ainsi cela peut déterminer
-si l'appel de la fonction est un succès::
+retournent quelque chose, au moins ``true`` ou ``false`` = ainsi cela peut
+déterminer si l'appel de la fonction est un succès::
 
     function connection($dns, $persistent = false) {
         if (is_array($dns)) {
@@ -272,7 +272,7 @@ Les tags PHP
 ============
 
 Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts
-(<? ?>).
+(``<? ?>``).
 
 Convention de nommage
 =====================
@@ -313,7 +313,7 @@ Visibilité des membres
 
 Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
 variables. De plus les noms des méthodes et variables protégées commencent
-avec un underscore simple ("\_"). Exemple::
+avec un underscore simple (``_``). Exemple::
 
     class A {
         protected $_jeSuisUneVariableProtegee;
@@ -324,7 +324,7 @@ avec un underscore simple ("\_"). Exemple::
     }
 
 Les noms de méthodes et variables privées commencent avec un underscore double
-("\_\_"). Exemple::
+(``__``). Exemple::
 
     class A {
         private $__iAmAPrivateVariable;
@@ -361,7 +361,7 @@ Pour tous les exemples d'URL et d'adresse email, utilisez "example.com",
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-Le nom de domaine ``example.com`` est réservé à cela (voir :rfc:`2606`) et est
+Le nom de domaine "example.com" est réservé à cela (voir :rfc:`2606`) et est
 recommandé pour l'utilisation dans la documentation ou comme exemples.
 
 Fichiers
