@@ -10,7 +10,7 @@ Vous pouvez utilisez le `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 
-Ajout de nouvelles fonctionnalités
+Ajout de Nouvelles Fonctionnalités
 ==================================
 
 Aucune nouvelle fonctionnalité ne devrait être ajoutée, sans avoir fait ses
@@ -40,7 +40,7 @@ Ou::
         }
     }
 
-Structures de contrôle
+Structures de Contrôle
 ======================
 
 Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
@@ -156,7 +156,7 @@ La valeur avec laquelle on vérifie devra être placée sur le côté droit::
         // ...
     }
 
-Appels des fonctions
+Appels des Fonctions
 ====================
 
 Les fonctions doivent être appelées sans espace entre le nom de la fonction et
@@ -168,7 +168,7 @@ d'un appel de fonction::
 Comme vous pouvez le voir, il devrait y avoir un espace des deux côtés des
 signes égal (=).
 
-Définition des méthodes
+Définition des Méthodes
 =======================
 
 Exemple d'un définition de méthode::
@@ -200,7 +200,7 @@ déterminer si l'appel de la fonction est un succès::
 
 Il y a des espaces des deux côtés du signe égal.
 
-Commenter le code
+Commenter le Code
 =================
 
 Tous les commentaires doivent être écrits en anglais, et doivent clairement
@@ -251,7 +251,7 @@ DocBlock, par exemple::
 Les blocks de commentaires, avec une exception du premier block dans le
 fichier, doivent toujours être précédés par un retour à la ligne.
 
-Inclure les fichiers
+Inclure les Fichiers
 ====================
 
 ``include``, ``require``, ``include_once`` et ``require_once`` n'ont pas de
@@ -268,13 +268,13 @@ parenthèses::
 Quand on inclut les fichiers avec des classes ou librairies, utilisez seulement
 et toujours la fonction `require\_once <http://php.net/require_once>`_.
 
-Les tags PHP
+Les Tags PHP
 ============
 
 Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts
 (``<? ?>``).
 
-Convention de nommage
+Convention de Nommage
 =====================
 
 Fonctions
@@ -308,7 +308,7 @@ elles proviennent. Exemple::
 
     $Dispatcher = new Dispatcher();
 
-Visibilité des membres
+Visibilité des Membres
 ----------------------
 
 Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
@@ -340,7 +340,7 @@ Ce qui suivra peut être accessible ou modifié en sous-classes, tandis que
 celles privées évitent l'extension ou la réutilisation. La visibilité privée
 rend aussi le test beaucoup plus difficile.
 
-Chaînage des méthodes
+Chaînage des Méthodes
 ---------------------
 
 Le chaînage des méthodes doit avoir des méthodes multiples réparties dans des
@@ -351,7 +351,7 @@ lignes distinctes, et indentées avec une tabulation::
         ->subject('Un super message')
         ->send();
 
-Exemple d'adresses
+Exemple d'Adresses
 ------------------
 
 Pour tous les exemples d'URL et d'adresse email, utilisez "example.com",
@@ -374,7 +374,7 @@ minuscules et soulignés, par exemple:
 
     nom_de_fichier_long.php
 
-Types de variables
+Types de Variables
 ------------------
 
 Les types de variables pour l'utilisation dans DocBlocks:
