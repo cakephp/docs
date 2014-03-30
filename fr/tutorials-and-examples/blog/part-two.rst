@@ -26,8 +26,8 @@ de la base de données.
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
     pas le fichier correspondant dans /app/Model. Cela veut aussi dire que
     si vous n'avez pas nommé correctement votre fichier (par ex. post.php ou
-    posts.php). CakePHP ne reconnaîtra pas votre configuration et utilisera
-    ses objets model par défaut.
+    posts.php au lieu de Post.php), CakePHP ne reconnaîtra pas votre
+    configuration et utilisera ses objets model par défaut.
 
 Pour plus d'informations sur les models, comme les préfixes des tables,
 les callbacks, et la validation, consultez le chapitre :doc:`/models` du
@@ -52,9 +52,9 @@ de base ::
 Maintenant, ajoutons une action à notre controller. Les actions représentent
 souvent une simple fonction ou une interface dans une application. Par exemple,
 quand les utilisateurs requêtent www.exemple.com/posts/index (qui est
-également la même chose que www.exemple.com/posts/), ils pourraient s'attendre
-à voir une liste de posts. Le code pour cette action devrait ressembler à
-quelque chose comme ça ::
+la même chose que www.exemple.com/posts/), ils pourraient s'attendre à voir une
+liste de posts. Le code pour cette action devrait ressembler à quelque chose
+comme ça ::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -65,7 +65,7 @@ quelque chose comme ça ::
     }
 
 En définissant la fonction ``index()`` dans notre PostsController, les
-utilisateurs peuvent maintenant accéder à cette logique en demandant
+utilisateurs peuvent accéder à cette logique en demandant
 www.exemple.com/posts/index. De la même façon, si nous devions définir une
 fonction appelée ``foobar()``, les utilisateurs pourrait y accéder en demandant
 www.exemple.com/posts/foobar.
@@ -101,9 +101,9 @@ qui s'intègrent au sein d'un layout applicatif. Pour la plupart des
 applications, elles sont un mélange de HTML et PHP, mais les vues peuvent aussi
 être constituées de XML, CSV ou même de données binaires.
 
-Les Layouts sont du code de présentation, encapsulé autour d'une vue,
-ils peuvent être définis et interchangés, mais pour le moment,
-utilisons juste celui par défaut.
+Un Layout est un code de présentation, encapsulé autour d'une vue. Ils peuvent
+être définis et interchangés, mais pour le moment, utilisons juste celui par
+défaut.
 
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'posts' à la vue en utilisant la méthode ``set()`` ?
@@ -179,8 +179,6 @@ quelque chose comme cela ::
         <?php endforeach; ?>
         <?php unset($post); ?>
     </table>
-
-Bien entendu, cela donnera quelque chose de simple.
 
 Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
 C'est une instance de la classe CakePHP :php:class:`HtmlHelper`.
@@ -342,7 +340,7 @@ nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet
 d'afficher et de nettoyer la variable correspondante. La méthode
 :php:meth:`Controller::redirect` du controller permet de rediriger vers une
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
-/posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
+/posts (dans notre cas l'action "index" du controller "Posts").
 Vous pouvez vous référer à la fonction :php:func:`Router::url()` dans
 `l'API <http://api.cakephp.org>`_ pour voir les différents formats d'URL
 acceptés dans les différentes fonctions de CakePHP.
@@ -351,8 +349,8 @@ L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
 la façon dont les erreurs sont traitées dans les sections suivantes.
 
-La raison pour laquelle nous appelons la méthode ``create()`` en premier est
-pour réinitialiser l'état du model pour sauvegarder les nouvelles informations.
+Nous appelons la méthode ``create()`` en premier afin
+de réinitialiser l'état du model pour sauvegarder les nouvelles informations.
 Cela ne crée pas réellement un enregistrement dans la base de données mais
 réinitialise Model::$id et définit Model::$data en se basant sur le champ par
 défaut dans votre base de données.
@@ -383,7 +381,7 @@ Voici le code de notre vue "add" (ajout)
     echo $this->Form->end('Sauvegarder le post');
     ?>
 
-Nous utilisons ici le :php:class:`FormHelper` pour générer la balise
+Nous utilisons le :php:class:`FormHelper` pour générer la balise
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par
 ``$this->Form->create()`` ::
 
