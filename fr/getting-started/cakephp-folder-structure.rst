@@ -27,9 +27,9 @@ Vous remarquerez trois dossiers principaux :
 Le dossier App
 ==============
 
-Le répertoire app de CakePHP est l'endroit où vous réaliserez la majorité
-du développement de votre application. Regardons de plus près le contenu de
-ce répertoire.
+Le répertoire *app* de CakePHP est l'endroit où vous réaliserez la majorité
+du développement de votre application. Regardons de plus près les dossier à
+l'intérieur de *app*.
 
 Config
     Contient les (quelques) fichiers de configuration utilisés par CakePHP.
@@ -44,7 +44,7 @@ Console
 Controller
     Contient vos Controllers et leurs Components.
 Lib
-    Contient les librairies internes qui ne proviennent pas de librairies
+    Contient les librairies qui ne proviennent pas de librairies
     externes. Cela vous permet de séparer les librairies internes de votre
     organisme des librairies externes.
 Locale
@@ -75,7 +75,7 @@ Vendor
     Toute classe ou librairie tierce doit être mise ici, de sorte qu'il
     sera facile d'y accéder par la fonction App::import('vendor','name'). Les
     observateurs avisés noteront que cela semble redondant avec le répertoire
-    "vendors" à la racine de l'arborescence. Nous aborderons les différences
+    *vendors* à la racine de l'arborescence. Nous aborderons les différences
     entre les deux lorsque nous discuterons de la gestion multi-applications
     et des configurations systèmes plus complexes.
 
