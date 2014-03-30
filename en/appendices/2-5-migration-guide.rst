@@ -211,6 +211,8 @@ Testing
   `app.my_dir/article` will load ``App/Test/Fixture/my_dir/ArticleFixture``. It
   should be noted that the fixture directory will not be inflected or modified
   in any way.
+- Fixtures can now set ``$canUseMemory`` to false to disable the memory storage
+  engine being used in MySQL.
 
 View
 ====
