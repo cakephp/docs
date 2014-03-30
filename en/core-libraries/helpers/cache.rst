@@ -1,7 +1,7 @@
 CacheHelper
 ###########
 
-.. php:class:: CacheHelper(View $view, array $settings = array())
+.. php:class:: CacheHelper(View $view, array $config = array())
 
 The Cache helper assists in caching entire layouts and views, saving time
 repetitively retrieving data. View Caching in CakePHP temporarily stores parsed

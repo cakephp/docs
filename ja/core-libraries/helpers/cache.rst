@@ -1,7 +1,7 @@
 キャッシュヘルパー
 #########################
 
-.. php:class:: CacheHelper(View $view, array $settings = array())
+.. php:class:: CacheHelper(View $view, array $config = array())
 
 キャッシュヘルパーはレイアウトやビューをキャッシュするのを助けてくれ、繰り返しデータを取得する際に時間を節約できます。\
 CakePHP のビューキャッシングは一時的に解析したレイアウトやビューをシンプルな PHP + HTML ファイルとして保存します。\

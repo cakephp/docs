@@ -1,7 +1,7 @@
 RSS
 ###
 
-.. php:class:: RssHelper(View $view, array $settings = array())
+.. php:class:: RssHelper(View $view, array $config = array())
 
 The RSS helper makes generating XML for RSS feeds easy.
 

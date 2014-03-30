@@ -1,7 +1,7 @@
 Cookie
 ######
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: CookieComponent(ComponentCollection $collection, array $config = array())
 
 Le component Cookie est un conteneur de la méthode native de PHP
 ``setcookie``. Il inclut également toutes sortes de fonctionnalités pour
@@ -73,7 +73,7 @@ d'une connexion sécurisée, qui est disponible au chemin
         $this->Cookie->name = 'baker_id';
         $this->Cookie->time = 3600;  // ou '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
-        $this->Cookie->domain = 'example.com';   
+        $this->Cookie->domain = 'example.com';
         $this->Cookie->secure = true;  // ex. seulement envoyé si on utilise un HTTPS sécurisé
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
@@ -129,7 +129,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 .. php:method:: read(mixed $key = null)
 
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
-    avec le nom spécifié dans $key.::    
+    avec le nom spécifié dans $key.::
 
         // Sortie "Larry"
         echo $this->Cookie->read('name');

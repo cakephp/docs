@@ -3,7 +3,7 @@ FormHelper
 
 .. php:namespace:: Cake\View\Helper
 
-.. php:class:: FormHelper(View $view, array $settings = [])
+.. php:class:: FormHelper(View $view, array $config = [])
 
 The FormHelper does most of the heavy lifting in form creation.  The FormHelper
 focuses on creating forms quickly, in a way that will streamline validation,

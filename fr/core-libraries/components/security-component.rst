@@ -1,7 +1,7 @@
 Security (Sécurité)
 ###################
 
-.. php:class:: SecurityComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = array())
 
 Le component Security offre une manière simple d'inclure une sécurité
 renforcée à votre application. Il fournit des méthodes pour diverses tâches
@@ -61,7 +61,7 @@ dans le controller.
     sera abandonnée. Si un callback de controller est défini pour
     SecurityComponent::blackHoleCallback, il sera appelé et passera
     toute information sur l'erreur.
- 
+
 .. php:attr:: blackHoleCallback
 
     La fonction de rappel (callback) du controller qui va gérer et requéter
@@ -70,7 +70,7 @@ dans le controller.
     n'importe quelle méthode publique d'un controller.
     La fonction de rappel doit s'attendre a un paramètre indiquant le type
     d'erreur::
-    
+
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
@@ -98,13 +98,13 @@ Restreindre les méthodes HTTP
     Définit les actions qui nécessitent une requête POST. Prend un
     nombre indéfini de paramètres. Peut être appelé sans argument,
     pour forcer toutes les actions à requérir un POST.
-    
+
 .. php:method:: requireGet()
 
     Définit les actions qui nécessitent une requête GET. Prend un
     nombre indéfini de paramètres. Peut-être appelé sans argument,
     pour forcer toutes les actions à requérir un GET.
-    
+
 .. php:method:: requirePut()
 
     Définit les actions qui nécessitent une requête PUT. Prend un
@@ -116,7 +116,7 @@ Restreindre les méthodes HTTP
     Définit les actions qui nécessitent une requête DELETE. Prend un
     nombre indéfini de paramètres. Peut-être appelé sans argument,
     pour forcer toutes les actions à requérir un DELETE.
-   
+
 Restreindre les actions à SSL
 =============================
 
@@ -132,7 +132,7 @@ Restreindre les actions à SSL
     le component Security. Prend un nombre indéfini de paramètres.
     Peut-être appelé sans argument, pour forcer toutes les actions
     à requérir une authentification valide.
-    
+
 Restreindre les demandes croisées de controller
 ===============================================
 
@@ -147,7 +147,7 @@ Restreindre les demandes croisées de controller
     Les actions parmi celles du controller courant qui sont autorisées
     à recevoir des requêtes. Ceci peut être utilisé pour contrôler les
     demandes croisées de controller.
-   
+
 Prévention de la falsification de formulaire
 ============================================
 
@@ -178,7 +178,7 @@ configuration CSRF (Cross site request forgery)
 
     Si vous utilisez les formulaires de protection CSRF. Définit à
     ``false`` pour désactiver la protection CSRF sur les formulaires.
-    
+
 .. php:attr:: csrfExpires
 
    La durée avant expiration d'un jeton CSRF.
@@ -204,9 +204,9 @@ de sécurité que vous voulez et le component Security les forcera
 au démarrage::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             $this->Security->requirePost('delete');
         }
@@ -216,9 +216,9 @@ Dans cette exemple, l'action delete peut être effectuée
 avec succès si celui ci reçoit une requête POST::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
@@ -230,16 +230,16 @@ Cette exemple forcera toutes les actions qui proviennent de la
 "route" Admin à être effectuées via des requêtes sécurisées SSL::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
-    
+
         public function forceSSL() {
             $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
@@ -326,7 +326,7 @@ partie ``beforeFilter`` de votre controller::
 Cela dira au component que vous voulez ré-utiliser un jeton CSRF jusqu'à
 ce qu'il expire - C'est contrôlé par les valeurs de ``csrfExpires``.
 Si vous avez des problèmes avec les jetons expirés, ceci peut être une
-bon équilibrage entre la sécurité et la facilité d'utilisation. 
+bon équilibrage entre la sécurité et la facilité d'utilisation.
 
 Désactiver la protection CSRF
 -----------------------------

@@ -216,9 +216,9 @@
     コンポーネントの基底クラスは :php:class:`ComponentCollection` を通して共通のハンドリング設定を扱うように他のコンポーネントを遅延読み込みするためのメソッドをいくつか提供しています。
     また、コンポーネントのすべてのコールバックのプロトタイプを提供します。
 
-.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+.. php:method:: __construct(ComponentCollection $collection, $config = array())
 
-    基底コンポーネントクラスのコンストラクタです。すべての ``$settings`` 、またはパブリックプロパティは ``$settings`` の中で一致した値に変更されます。
+    基底コンポーネントクラスのコンストラクタです。すべての ``$config`` 、またはパブリックプロパティは ``$config`` の中で一致した値に変更されます。
 
 コールバック
 ------------

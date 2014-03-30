@@ -1,10 +1,10 @@
 Компоненты
 ##########
 
-Компоненты - это "пакеты" логики, которые доступны разным контроллерам.    
-Если вы часто делаете "копи паст" из контроллера в контроллер, то стоит 
+Компоненты - это "пакеты" логики, которые доступны разным контроллерам.
+Если вы часто делаете "копи паст" из контроллера в контроллер, то стоит
 задуматься над созданием  компонентам, в котором будет описана часто используемая логика.
-В CakePHP есть фантастический набор основных компонентов, которые упрощают 
+В CakePHP есть фантастический набор основных компонентов, которые упрощают
 работу с такими задачами:
 
 - Безопастность(Security)
@@ -15,8 +15,8 @@
 - Аутентификация(Authentication)
 - Обработка запроса(Request handling)
 
-Каждый из этих компонентов подробно описан в своей главе. А сейчас посмотрим, как создавать 
-свои собственные компоненты. Создание компонентов сохраняет код контроллера чистым и 
+Каждый из этих компонентов подробно описан в своей главе. А сейчас посмотрим, как создавать
+свои собственные компоненты. Создание компонентов сохраняет код контроллера чистым и
 позволяет повторно  использовать в разных проектах.
 
 .. _configuring-components:
@@ -25,8 +25,8 @@
 ========================
 
 Для многих компонентов доступна(или требуется) конфигурация.
-Например, компоненты :doc:`/core-libraries/components/authentication`, 
-:doc:`/core-libraries/components/cookie` и :doc:`/core-libraries/components/email` 
+Например, компоненты :doc:`/core-libraries/components/authentication`,
+:doc:`/core-libraries/components/cookie` и :doc:`/core-libraries/components/email`
 требуют конфигурации. Конфигурация для этих компонентов и компонентов в целом обычно делается в
 ``$components`` массиве или в вашем методе контроллера ``beforeFilter()``::
 
@@ -75,7 +75,7 @@ them like so::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
@@ -96,7 +96,7 @@ You might not need all of your components available on every controller action.
 In situations like this you can load a component at runtime using the
 :doc:`Component Collection </core-libraries/collections>`.  From inside a
 controller you can do the following::
-    
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -129,7 +129,7 @@ structure for the component would look something like this::
 .. note::
 
     All components must extend :php:class:`Component`.  Failing to do this
-    will trigger an exception. 
+    will trigger an exception.
 
 Including your component in your controllers
 --------------------------------------------
@@ -178,7 +178,7 @@ way you include them in controllers - using the ``$components`` var::
     // app/Controller/Component/CustomComponent.php
     class CustomComponent extends Component {
         // the other component your component uses
-        public $components = array('Existing'); 
+        public $components = array('Existing');
 
         function initialize($controller) {
             $this->Existing->foo();
@@ -213,11 +213,11 @@ Component API
     with common handling of settings.  It also provides prototypes for all
     the component callbacks.
 
-.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+.. php:method:: __construct(ComponentCollection $collection, $config = array())
 
-    Constructor for the base component class.  All ``$settings`` that
+    Constructor for the base component class.  All ``$config`` that
     are also public properties will have their values changed to the
-    matching value in ``$settings``.
+    matching value in ``$config``.
 
 Callbacks
 ---------

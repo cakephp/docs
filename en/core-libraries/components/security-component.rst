@@ -1,7 +1,7 @@
 Security
 ########
 
-.. php:class:: SecurityComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = array())
 
 The Security Component creates an easy way to integrate tighter
 security in your application. It provides methods for various tasks like:

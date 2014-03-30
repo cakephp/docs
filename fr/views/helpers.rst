@@ -38,7 +38,7 @@ utilisée partout ailleurs dans CakePHP::
     class BakeriesController extends AppController {
         public $helpers = ['Blog.Comment'];
     }
-    
+
 Vous pouvez aussi ajouter les helpers depuis une action, dans ce cas,
 ils seront uniquement accessibles pour cette action et dans aucune autre action
 du controller. Ceci économise de la puissance de calcul pour les autres actions
@@ -69,9 +69,9 @@ utilisées pour définir les valeurs d'attributs ou modifier le comportement du
 helper::
 
     class AwesomeHelper extends AppHelper {
-        public function __construct(View $view, $settings = []) {
-            parent::__construct($view, $settings);
-            debug($settings);
+        public function __construct(View $view, $config = []) {
+            parent::__construct($view, $config);
+            debug($config);
         }
     }
 
@@ -80,7 +80,7 @@ helper::
     }
 
 Depuis 2.3 les options sont fusionnées avec la propriété
-:php:attr:`~Cake\View\Helper::$settings` du helper.
+:php:attr:`~Cake\View\Helper::$config` du helper.
 
 Une configuration courante est d'utiliser l'option ``className``, qui vous
 permet de créer des alias de helper dans vos vues. Cette fonctionnalité est
@@ -258,7 +258,7 @@ API de Helper
     Décide du nom de fichier du webroot de l'application. Si un thème est actif
     et que le fichier existe dans le webroot du thème courant, le chemin du
     fichier du thème sera retourné.
-    
+
 .. php:method:: url($url, $full = false)
 
     Génère une URL échappée de HTML, qui délégue à

@@ -1,7 +1,7 @@
 セッション
 ##########
 
-.. php:class:: SessionComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: SessionComponent(ComponentCollection $collection, array $config = array())
 
 ..
   The CakePHP SessionComponent provides a way to persist client data
@@ -201,7 +201,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
         echo $this->Session->flash('bad');
 
     ..
-      The ``$element`` parameter allows you to control which element 
+      The ``$element`` parameter allows you to control which element
       (located in ``/app/View/Elements``) should be used to render the
       message in. In the element the message is available as ``$message``.
       First we set the flash in our controller::
@@ -222,7 +222,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 
     ..
       ``$params`` allows you to pass additional view variables to the
-      rendered layout. Parameters can be passed affecting the rendered div, for 
+      rendered layout. Parameters can be passed affecting the rendered div, for
       example adding "class" in the $params array will apply a class to the
       ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
@@ -241,7 +241,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
         <div id="flashMessage" class="example_class">Example message text</div>
 
     ..
-      To use an element from a plugin just specify the plugin in the 
+      To use an element from a plugin just specify the plugin in the
       ``$params``::
 
     ``$params`` 内でプラグインの使用を明示し、プラグイン内のエレメントを使用するには次のようにします。::

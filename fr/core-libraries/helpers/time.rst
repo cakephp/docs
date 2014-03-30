@@ -1,7 +1,7 @@
 TimeHelper
 ##########
 
-.. php:class:: TimeHelper(View $view, array $settings = array())
+.. php:class:: TimeHelper(View $view, array $config = array())
 
 Le Helper Time vous permet, comme il l'indique de gagner du temps. Il permet
 le traitement rapide des informations se rapportant au temps. Le Helper

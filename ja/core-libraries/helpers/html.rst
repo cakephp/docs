@@ -1,7 +1,7 @@
 HtmlHelper
 ##########
 
-.. php:class:: HtmlHelper(View $view, array $settings = array())
+.. php:class:: HtmlHelper(View $view, array $config = array())
 
 CakePHP における HtmlHelper の役割は、 HTML に関連するオプションを
 より簡単、高速に作成し、より弾力的なものに変えることです。

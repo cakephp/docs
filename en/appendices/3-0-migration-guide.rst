@@ -90,6 +90,13 @@ Debugging
 * ``Configure::write('debug'`, $bool)`` does not support 0/1/2 anymore. A simple boolean
   is used instead to switch debug mode on or off.
 
+Object settings/configuration
+=============================
+
+* Objects used in CakePHP now have a consistent instance-configuration storage/retrieval
+  system. Code which previously accessed for example: `$object->settings` should instead
+  be updated to use `$object->config()`.
+
 Cache
 =====
 

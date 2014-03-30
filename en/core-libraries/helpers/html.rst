@@ -3,7 +3,7 @@ HtmlHelper
 
 .. php:namespace:: Cake\View\Helper
 
-.. php:class:: HtmlHelper(View $view, array $settings = [])
+.. php:class:: HtmlHelper(View $view, array $config = [])
 
 The role of the HtmlHelper in CakePHP is to make HTML-related
 options easier, faster, and more resilient to change. Using this

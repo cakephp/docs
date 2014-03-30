@@ -1,7 +1,7 @@
 SessionHelper
 #############
 
-.. php:class:: SessionHelper(View $view, array $settings = array())
+.. php:class:: SessionHelper(View $view, array $config = array())
 
 As a natural counterpart to the Session Component, the Session
 Helper replicates most of the components functionality and makes it

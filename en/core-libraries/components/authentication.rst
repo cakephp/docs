@@ -1,7 +1,7 @@
 Authentication
 ##############
 
-.. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: AuthComponent(ComponentCollection $collection, array $config = array())
 
 Identifying, authenticating and authorizing users is a common part of
 almost every web application. In CakePHP AuthComponent provides a
@@ -144,7 +144,7 @@ the following keys:
 - ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
 - ``qop`` Defaults to auth, no other values are supported at this time.
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
-  to ``md5($settings['realm'])``
+  to ``md5($config['realm'])``
 
 Identifying Users and Logging Them In
 -------------------------------------

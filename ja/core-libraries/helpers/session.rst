@@ -5,7 +5,7 @@
 セッションヘルパー
 ##################
 
-.. php:class:: SessionHelper(View $view, array $settings = array())
+.. php:class:: SessionHelper(View $view, array $config = array())
 
 ..
   As a natural counterpart to the Session Component, the Session
@@ -100,9 +100,9 @@
 
     ..
       As explained in :ref:`creating-notification-messages` you can
-      create one-time notifications for feedback. After creating messages 
-      with :php:meth:`SessionComponent::setFlash()` you will want to 
-      display them. Once a message is displayed, it will be removed and 
+      create one-time notifications for feedback. After creating messages
+      with :php:meth:`SessionComponent::setFlash()` you will want to
+      display them. Once a message is displayed, it will be removed and
       not displayed again::
 
     :ref:`creating-notification-messages` で述べたように、フィードバック\
@@ -124,7 +124,7 @@
 
     ..
       As with the component method you can set additional properties
-      and customize which element is used. In the controller you might 
+      and customize which element is used. In the controller you might
       have code like::
 
     コンポーネントメソッドと同じく、追加プロパティをセットし使用する \
@@ -145,7 +145,7 @@
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
     ..
-      This would use ``View/Elements/failure.ctp`` to render the message.  The 
+      This would use ``View/Elements/failure.ctp`` to render the message.  The
       message text would be available as ``$message`` in the element.
 
     これは ``View/Elements/failure.ctp`` を使ってメッセージを書きます。\
@@ -176,7 +176,7 @@
             'params' => array('name' => $user['User']['name'])
             'element' => 'payment'
         ));
-        
+
         // View/Elements/payment.ctp
         <div class="flash payment">
             <?php printf($message, h($name)); ?>

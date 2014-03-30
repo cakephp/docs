@@ -127,7 +127,7 @@ Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
 action. Dans ce cas là, vous pouvez charger à la volée en utilisant la
 :doc:`Component Collection </core-libraries/collections>`. A partir de
 l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
-    
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -259,12 +259,12 @@ API de Component
     avec la gestion habituelle des paramètres. Elle fournit aussi des prototypes
     pour tous les callbacks des components.
 
-.. php:method:: __construct(ComponentRegistry $registry, $settings = [])
+.. php:method:: __construct(ComponentRegistry $registry, $config = [])
 
     Les Constructeurs pour la classe de base du component. Tous les
-    paramètres se trouvent dans ``$settings`` et ont des propriétés publiques.
+    paramètres se trouvent dans ``$config`` et ont des propriétés publiques.
     Ils vont avoir leur valeur changée pour correspondre aux valeurs de
-    ``$settings``.
+    ``$config``.
 
 Les Callbacks
 -------------
