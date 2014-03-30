@@ -127,10 +127,10 @@ If you need to paginate data from another component you may want to use the
 PaginatorComponent directly. It features a similar API to the controller
 method::
 
-    $articles = $this->Paginator->paginate($articleTable->find(), $settings);
+    $articles = $this->Paginator->paginate($articleTable->find(), $config);
 
     //Or just
-    $articles = $this->Paginator->paginate($articleTable, $settings);
+    $articles = $this->Paginator->paginate($articleTable, $config);
 
 The first parameter should be the query object from a find on table object you wish
 to paginate results from. Optionally, you can pass the table object and let the query

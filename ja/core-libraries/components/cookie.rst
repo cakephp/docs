@@ -1,7 +1,7 @@
 Cookie
 ######
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: CookieComponent(ComponentCollection $collection, array $config = array())
 
 Cookie コンポーネントは PHP に組み込まれている ``setcookie`` メソッドに関連するラッパーです。
 コントローラーで Cookie を使ったコーディングをするのにとても便利な糖衣構文も多数含んでいます。

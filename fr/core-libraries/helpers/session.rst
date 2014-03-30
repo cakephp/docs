@@ -1,7 +1,7 @@
 SessionHelper
 #############
 
-.. php:class:: SessionHelper(View $view, array $settings = array())
+.. php:class:: SessionHelper(View $view, array $config = array())
 
 Équivalent du Component Session, le Helper Session offre la majorité des
 fonctionnalités du component et les rend disponible dans votre vue.
@@ -15,7 +15,7 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec des :term:`dot notation`,
 comme ci-dessous::
 
-    array('User' => 
+    array('User' =>
         array('username' => 'super@example.com')
     );
 

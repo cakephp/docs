@@ -1,7 +1,7 @@
 リクエストハンドリング
 ######################
 
-.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = array())
 
 ..
   The Request Handler component is used in CakePHP to obtain

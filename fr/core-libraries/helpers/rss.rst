@@ -1,7 +1,7 @@
 RSS
 ###
 
-.. php:class:: RssHelper(View $view, array $settings = array())
+.. php:class:: RssHelper(View $view, array $config = array())
 
 Le Helper RSS permet de générer facilement des XML pour les flux RSS.
 
@@ -66,7 +66,7 @@ le même::
         // ceci n'est pas une requête RSS
         // donc on retourne les données utilisées par l'interface du site web
         $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
-        
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
@@ -88,7 +88,7 @@ Un layout Rss est très simple, mettez les contenus suivants dans
     }
     if (!isset($channelData['title'])) {
         $channelData['title'] = $title_for_layout;
-    } 
+    }
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData,$channel);
 
@@ -143,7 +143,7 @@ pour chaque pair de valeur de clé.
 
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
-    
+
         $postLink = array(
             'controller' => 'posts',
             'action' => 'view',
@@ -160,7 +160,7 @@ pour chaque pair de valeur de clé.
             'exact'  => true,
             'html'   => true,
         ));
-         
+
         echo  $this->Rss->item(array(), array(
             'title' => $post['Post']['title'],
             'link' => $postLink,
@@ -260,14 +260,14 @@ API de Rss Helper
 
     :rtype: string
 
-    Transforme un tableau de données en utilisant un callback optionnel, et le 
+    Transforme un tableau de données en utilisant un callback optionnel, et le
     map pour un ensemble de tags ``<item />``.
 
 .. php:method:: time(mixed $time)
 
     :rtype: string
 
-    Convertit un time de tout format en time de RSS. Regardez 
+    Convertit un time de tout format en time de RSS. Regardez
     :php:meth:`TimeHelper::toRSS()`.
 
 

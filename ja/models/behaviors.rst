@@ -143,7 +143,7 @@ loadメソッドを使用して、ビヘイビアの設定を上書きできま�
 ビヘイビアを使うモデルのインスタンス全てにわたってビヘイビアが共有されることから、ビヘイビアを使っているエイリアス・モデルの名前ごとに設定を保持することは良い習慣となります。
 ビヘイビアが生成されたときに、ビヘイビアの ``setup()`` メソッドが呼ばれます。::
 
-    public function setup(Model $Model, $settings = array()) {
+    public function setup(Model $Model, $config = array()) {
         if (!isset($this->settings[$Model->alias])) {
             $this->settings[$Model->alias] = array(
                 'option1_key' => 'option1_default_value',
@@ -152,7 +152,7 @@ loadメソッドを使用して、ビヘイビアの設定を上書きできま�
             );
         }
         $this->settings[$Model->alias] = array_merge(
-            $this->settings[$Model->alias], (array)$settings);
+            $this->settings[$Model->alias], (array)$config);
     }
 
 ビヘイビアのメソッドの作成
@@ -235,7 +235,7 @@ Duckモデルにメソッドあるかのように ``FlyingBehavior`` のメソ�
 標準のビヘイビアのメソッドと同じく、 ``$Model`` パラメータを第一引数として受け取ります。
 この引数はビヘイビアのメソッドが呼び出されたモデルにあたります。
 
-.. php:method:: setup(Model $Model, array $settings = array())
+.. php:method:: setup(Model $Model, array $config = array())
 
     モデルにビヘイビアが割り当てられたときに呼ばれます。
     settingsは割り当てられるモデルの ``$actsAs`` プロパティからもたらされます。

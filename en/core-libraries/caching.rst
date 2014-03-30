@@ -82,7 +82,7 @@ needed. Example::
     ));
 
     // Using a constructed object.
-    $object = new FileEngine($settings);
+    $object = new FileEngine($config);
     Cache::config('other', $object);
 
 .. note::

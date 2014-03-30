@@ -1,7 +1,7 @@
 Pagination
 ##########
 
-.. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: PaginatorComponent(ComponentCollection $collection, array $config = array())
 
 Un des principaux obstacles à la création d'une application flexible et
 ergonomique est le design et une interface utilisateur intuitive.
@@ -27,7 +27,7 @@ Paramétrage des requêtes
 
 Dans le controller, nous commençons par définir les conditions de la requête de
 pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
-controller. 
+controller.
 Ces conditions, vont servir de base à vos requêtes de pagination. Elles sont
 complétées par le tri, la direction, la limitation et les paramètres de page
 passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
@@ -213,7 +213,7 @@ faire est d'ajouter le mot clé dans la variable de classe
         )
     );
     /**
-     * Ou à la volée depuis l'intérieur de l'action 
+     * Ou à la volée depuis l'intérieur de l'action
      */
     public function index() {
         $this->Paginator->settings = array(
@@ -275,7 +275,7 @@ Pour la version 2.0, nous avons décidés de rendre la façon de générer les
 paramètres de pagination plus contrôlable et plus cohérente. Vous pouvez
 choisir d'utiliser une chaîne de requête ou bien des paramètre nommés dans le
 component. Les requêtes entrantes devront accepter le type choisi, et
-:php:class:`PaginatorHelper` générera les liens avec les paramètres choisis:: 
+:php:class:`PaginatorHelper` générera les liens avec les paramètres choisis::
 
     public $paginate = array(
         'paramType' => 'querystring'
@@ -283,7 +283,7 @@ component. Les requêtes entrantes devront accepter le type choisi, et
 
 Ce qui est au-dessus permet à un paramètre de recherche sous forme de chaîne de
 caractères, d'être parsé et d'être généré. Vous pouvez aussi modifier les
-propriétés de ``$settings`` du Component Paginator (PaginatorComponent)::
+propriétés de ``$config`` du Component Paginator (PaginatorComponent)::
 
     $this->Paginator->settings['paramType'] = 'querystring';
 
@@ -295,10 +295,10 @@ arguments GET.
 
     Vous pouvez rentrer dans une situation où assigner une valeur dans une
     propriété inexistante retournera des erreurs::
-    
+
         $this->paginate['limit'] = 10;
 
-    Retournera l'erreur "Notice: Indirect modification of overloaded property 
+    Retournera l'erreur "Notice: Indirect modification of overloaded property
     $paginate has no effect" ("Notice: Une modification indirect d'une surcharge de
     la propriété $paginate n'a aucun effet"). En assignant une valeur initiale à la
     propriété, cela résout le problème::
@@ -315,10 +315,10 @@ arguments GET.
         }
 
     Ou en utilisant ``$this->Paginator->setting = array('limit' => 10);``
-    
+
     Assurez-vous d'avoir ajouté le component Paginator dans votre tableau
-    $components si vous voulez modifier la propriété ``$settings`` du
-    Component Paginator. 
+    $components si vous voulez modifier la propriété ``$config`` du
+    Component Paginator.
 
     L'une ou l'autre de ces approches résoudra les erreurs rencontrés.
 
@@ -342,7 +342,7 @@ quand une exception `NotFoundException` est attrapée::
         }
     }
 
-Pagination AJAX 
+Pagination AJAX
 ===============
 
 C'est très simple d'incorporer les fonctionnalités AJAX dans la pagination.

@@ -255,11 +255,11 @@ Component API
     as dealing with common handling of settings. It also provides prototypes
     for all the component callbacks.
 
-.. php:method:: __construct(ComponentRegistry $registry, $settings = [])
+.. php:method:: __construct(ComponentRegistry $registry, $config = [])
 
-    Constructor for the base component class. All ``$settings`` that
+    Constructor for the base component class. All ``$config`` that
     are also public properties will have their values changed to the
-    matching value in ``$settings``.
+    matching value in ``$config``.
 
 Callbacks
 ---------

@@ -66,9 +66,9 @@ You can pass options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends AppHelper {
-        public function __construct(View $view, $settings = []) {
-            parent::__construct($view, $settings);
-            debug($settings);
+        public function __construct(View $view, $config = []) {
+            parent::__construct($view, $config);
+            debug($config);
         }
     }
 
@@ -76,7 +76,7 @@ attribute values or modify behavior of a helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-As of 2.3 the options are merged with the :php:attr:`~Cake\View\Helper::$settings` property of
+As of 2.3 the options are merged with the :php:attr:`~Cake\View\Helper::$config` property of
 the helper.
 
 One common setting to use is the ``className`` option, which allows you to

@@ -1,7 +1,7 @@
 Request Handling (Gestion des requêtes)
 #######################################
 
-.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = array())
 
 Le component Request Handler est utilisé dans CakePHP pour obtenir des
 informations supplémentaires au sujet des requêtes HTTP qui sont faites à votre
@@ -49,7 +49,7 @@ contenu que le client accepte. Par exemple::
 
         public function beforeFilter () {
             if ($this->RequestHandler->accepts('html')) {
-                // Ce code est exécuté uniquement si le client accepte les réponses HTML (text/html) 
+                // Ce code est exécuté uniquement si le client accepte les réponses HTML (text/html)
             } elseif ($this->RequestHandler->accepts('xml')) {
                 // exécuté seulement si le client accepte seulement les réponse XML
             }
@@ -239,7 +239,7 @@ corresponde à votre application.
     Change le mode de rendu d'un controller pour le type spécifié.
     Ajoutera aussi le helper approprié au tableau des helpers du controller,
     s'il est disponible et qu'il n'est pas déjà dans le tableau.
-    
+
 .. php:method:: respondAs($type, $options)
 
     :param string $type: nom simplifié du type de contenu à rendre, par
@@ -286,7 +286,7 @@ Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
-    
+
 Utiliser les ViewClasses personnalisées
 =======================================
 
@@ -301,7 +301,7 @@ personnalisées.
 
 .. php:method:: viewClassMap($type, $viewClass)
 
-    :param string|array $type: Le type string ou un tableau map avec le 
+    :param string|array $type: Le type string ou un tableau map avec le
       format ``array('json' => 'MyJson')``.
     :param string $viewClass: La viewClass à utiliser pour le type sans `View`
       en suffixe.
