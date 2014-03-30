@@ -227,6 +227,8 @@ Testing
   `app.my_dir/article` va charger ``App/Test/Fixture/my_dir/ArticleFixture``.
   On notera que le répertoire de fixture ne sera pas inflecté ou modifié dans
   tous les cas.
+- Les Fixtures peuvent maintenant définir ``$canUseMemory`` à false pour
+  désactiver le moteur de stockage de la mémoire utilisée dans MySQL.
 
 View
 ====
