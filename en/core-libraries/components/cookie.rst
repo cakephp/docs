@@ -13,73 +13,70 @@ in your controllers' $components array.
 Controller Setup
 ================
 
-There are a number of controller variables that allow you to
-configure the way cookies are created and managed. Defining these
-special variables in the beforeFilter() method of your controller
-allows you to define how the CookieComponent works.
+There are a number of controller variables that allow you to configure the way
+cookies are created and managed. Defining these special configuration values in
+the beforeFilter() method of your controller allows you to define how the
+CookieComponent works.
 
-+-----------------+--------------+------------------------------------------------------+
-| Cookie variable | default      | description                                          |
-+=================+==============+======================================================+
-| string $name    |'CakeCookie'  | The name of the cookie.                              |
-+-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | This string is used to encrypt                       |
-|                 |              | the value written to the cookie.                     |
-|                 |              | This string should be random and difficult to guess. |
-|                 |              |                                                      |
-|                 |              | When using rijndael or aes encryption this value     |
-|                 |              | must be longer than 32 bytes.                        |
-+-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
-|                 |              | Use '.yourdomain.com' to allow access from all your  |
-|                 |              | subdomains.                                          |
-+-----------------+--------------+------------------------------------------------------+
-| int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
-| $time           |              | Interpreted as seconds and a value of 0 is equivalent|
-|                 |              | to a 'session cookie': i.e. the cookie expires when  |
-|                 |              | the browser is closed. If a string is set, this will |
-|                 |              | be interpreted with PHP function strtotime(). You can|
-|                 |              | set this directly within the write() method.         |
-+-----------------+--------------+------------------------------------------------------+
-| string $path    | '/'          | The server path on which the cookie will be applied. |
-|                 |              | If $path is set to '/foo/', the cookie will          |
-|                 |              | only be available within the /foo/ directory and all |
-|                 |              | sub-directories such as /foo/bar/ of your domain. The|
-|                 |              | default value is the entire domain. You can set this |
-|                 |              | directly within the write() method.                  |
-+-----------------+--------------+------------------------------------------------------+
-| boolean $secure | false        | Indicates that the cookie should only be transmitted |
-|                 |              | over a secure HTTPS connection. When set to true, the|
-|                 |              | cookie will only be set if a secure connection       |
-|                 |              | exists. You can set this directly within the write() |
-|                 |              | method.                                              |
-+-----------------+--------------+------------------------------------------------------+
-| boolean         | false        | Set to true to make HTTP only cookies. Cookies that  |
-| $httpOnly       |              | are HTTP only are not accessible in Javascript.      |
-+-----------------+--------------+------------------------------------------------------+
++---------------------+--------------+------------------------------------------------------+
+| Configuration value | default      | description                                          |
++=====================+==============+======================================================+
+| string name         |'CakeCookie'  | The name of the cookie.                              |
++---------------------+--------------+------------------------------------------------------+
+| string key          | null         | This string is used to encrypt                       |
+|                     |              | the value written to the cookie.                     |
+|                     |              | This string should be random and difficult to guess. |
+|                     |              |                                                      |
+|                     |              | When using rijndael or aes encryption this value     |
+|                     |              | must be longer than 32 bytes.                        |
++---------------------+--------------+------------------------------------------------------+
+| string domain       | ''           | The domain name allowed to access the cookie. e.g.   |
+|                     |              | Use '.yourdomain.com' to allow access from all your  |
+|                     |              | subdomains.                                          |
++---------------------+--------------+------------------------------------------------------+
+| int or string       | '5 Days'     | The time when your cookie will expire. Integers are  |
+| time                |              | Interpreted as seconds and a value of 0 is equivalent|
+|                     |              | to a 'session cookie': i.e. the cookie expires when  |
+|                     |              | the browser is closed. If a string is set, this will |
+|                     |              | be interpreted with PHP function strtotime(). You can|
+|                     |              | set this directly within the write() method.         |
++---------------------+--------------+------------------------------------------------------+
+| string path         | '/'          | The server path on which the cookie will be applied. |
+|                     |              | If $path is set to '/foo/', the cookie will          |
+|                     |              | only be available within the /foo/ directory and all |
+|                     |              | sub-directories such as /foo/bar/ of your domain. The|
+|                     |              | default value is the entire domain. You can set this |
+|                     |              | directly within the write() method.                  |
++---------------------+--------------+------------------------------------------------------+
+| boolean secure      | false        | Indicates that the cookie should only be transmitted |
+|                     |              | over a secure HTTPS connection. When set to true, the|
+|                     |              | cookie will only be set if a secure connection       |
+|                     |              | exists. You can set this directly within the write() |
+|                     |              | method.                                              |
++---------------------+--------------+------------------------------------------------------+
+| boolean             | false        | Set to true to make HTTP only cookies. Cookies that  |
+| httpOnly            |              | are HTTP only are not accessible in Javascript.      |
++---------------------+--------------+------------------------------------------------------+
 
 The following snippet of controller code shows how to include the
-CookieComponent and set up the controller variables needed to write
-a cookie named 'baker\_id' for the domain 'example.com' which needs
-a secure connection, is available on the path
-'/bakers/preferences/', expires in one hour and is HTTP only::
+CookieComponent and set up the controller variables needed to write a cookie
+named 'baker\_id' for the domain 'example.com' which needs a secure connection,
+is available on the path '/bakers/preferences/', expires in one hour and is HTTP
+only::
 
     public $components = array('Cookie');
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Cookie->name = 'baker_id';
-        $this->Cookie->time = 3600;  // or '1 hour'
-        $this->Cookie->path = '/bakers/preferences/';
-        $this->Cookie->domain = 'example.com';
-        $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
-        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
-        $this->Cookie->httpOnly = true;
+        $this->Cookie->config('name', 'baker_id');
+        $this->Cookie->config('time', 3600);  // or '1 hour'
+        $this->Cookie->config('path', '/bakers/preferences/');
+        $this->Cookie->config('domain', 'example.com');
+        $this->Cookie->config('secure', true);  // i.e. only sent if using secure HTTPS
+        $this->Cookie->config('key, 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^');
+        $this->Cookie->config('httpOnly', true);
         $this->Cookie->type('aes');
     }
-
-Next, let's look at how to use the different methods of the Cookie
-Component.
 
 Using the Component
 ===================
@@ -147,9 +144,6 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     Used to check if a key/path exists and has not-null value.
 
-    .. versionadded:: 2.3
-        ``CookieComponent::check()`` was added in 2.3
-
 .. php:method:: delete(mixed $key)
 
     Deletes a cookie variable of the name in $key. Works with dot
@@ -170,12 +164,6 @@ The CookieComponent offers a number of methods for working with Cookies.
     Allows you to change the encryption scheme. By default the 'cipher' scheme is used for
     backwards compatibility. However, you should always use either the 'rijndael' or
     'aes' schemes.
-
-    .. versionchanged:: 2.2
-        The 'rijndael' type was added.
-
-    .. versionadded:: 2.5
-        The 'aes' type was added.
 
 
 .. meta::

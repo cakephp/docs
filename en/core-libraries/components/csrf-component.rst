@@ -27,7 +27,7 @@ you can benefit from the CSRF protection it provides::
     ];
 
 Settings can be passed into the component through your component's settings.
-The available settings are:
+The available configuration options are:
 
  - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
  - ``expiry`` How long the CSRF token should last. Defaults to browser session.

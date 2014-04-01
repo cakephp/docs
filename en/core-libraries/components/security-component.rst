@@ -45,7 +45,7 @@ Handling Blackhole Callbacks
 If an action is restricted by the Security Component it is
 black-holed as an invalid request which will result in a 400 error
 by default. You can configure this behavior by setting the
-``$this->Security->blackHoleCallback`` property to a callback function
+``blackHoleCallback`` configuration option to a callback function
 in the controller.
 
 .. php:method:: blackHole(object $controller, string $error)
@@ -55,14 +55,12 @@ in the controller.
     controller callback is set to SecurityComponent::blackHoleCallback,
     it will be called and passed any error information.
 
-.. php:attr:: blackHoleCallback
-
     A Controller callback that will handle and requests that are
     blackholed. A blackhole callback can be any public method on a controllers.
     The callback should expect an parameter indicating the type of error::
 
         public function beforeFilter() {
-            $this->Security->blackHoleCallback = 'blackhole';
+            $this->Security->config('blackHoleCallback', 'blackhole');
         }
 
         public function blackhole($type) {
@@ -93,17 +91,17 @@ Restrict Actions to SSL
 Restricting Cross Controller Communication
 ==========================================
 
-.. php:attr:: allowedControllers
-
+allowedControllers
     A List of Controller from which the actions of the current
     controller are allowed to receive requests from. This can be used
     to control cross controller requests.
-
-.. php:attr:: allowedActions
-
+allowedActions
     Actions from which actions of the current controller are allowed to
     receive requests. This can be used to control cross controller
     requests.
+
+These configuration options allow you to restrict cross controller
+communication. Set them with the ``config()`` method.
 
 Form Tampering Prevention
 =========================
