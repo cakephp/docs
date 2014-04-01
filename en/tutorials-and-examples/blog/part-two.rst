@@ -325,7 +325,7 @@ Here's our add view:
     echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->submit('Save Article');
+    echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
     ?>
 
@@ -439,7 +439,7 @@ The edit view might look something like this:
     <?= $this->Form->create($article) ?>
     <?= $this->Form->input('title') ?>
     <?= $this->Form->input('body', ['rows' => '3']) ?>
-    <?= $this->Form->submit('Save Article') ?>
+    <?= $this->Form->button(__('Save Article')) ?>
     <?= $this->Form->end() ?>
 
 This view outputs the edit form (with the values populated), along
