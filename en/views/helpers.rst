@@ -23,9 +23,9 @@ Configuring Helpers
 ===================
 
 You enable helpers in CakePHP by making a controller aware of them. Each
-controller has a :php:attr:`~Controller::$helpers` property that lists the
-helpers to be made available in the view. To enable a helper in your view, add
-the name of the helper to the controller's ``$helpers`` array::
+controller has a :php:attr:`~Cake\\Controller\\Controller::$helpers` property
+that lists the helpers to be made available in the view. To enable a helper in
+your view, add the name of the helper to the controller's ``$helpers`` array::
 
     class BakeriesController extends AppController {
         public $helpers = ['Form', 'Html', 'Js', 'Time'];
@@ -62,7 +62,10 @@ Form helpers::
         public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
-You can pass options to helpers. These options can be used to set
+Configuration options
+---------------------
+
+You can pass configuration options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends AppHelper {
@@ -76,8 +79,53 @@ attribute values or modify behavior of a helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-As of 2.3 the options are merged with the :php:attr:`~Cake\View\Helper::$config` property of
-the helper.
+By default all configuration options will be merged with the ``$_defaultConfig``
+property. This property should define the default values of any configuration
+your helper requires. For example::
+
+    namespace App\View\Helper;
+
+    use Cake\View\StringTemplateTrait;
+
+    class AwesomeHelper extends AppHelper {
+
+        use StringTemplateTrait;
+
+        protected $_defaultConfig = [
+            'errorClass' => 'error',
+            'templates' => [
+                'label' => '<label for="{{for}}">{{content}}</label>',
+            ],
+        ];
+
+        public function __construct(View $view, $config = []) {
+            parent::__construct($view, $config);
+            $this->initStringTemplates();
+        }
+    }
+
+Any configuration provided to your helper's constructor will be merged with the
+default values during construction and the merged data will be set to
+``_config``. You can use the ``config()`` method to read runtime configuration::
+
+    // Read the errorClass config option.
+    $class = $this->Awesome->config('errorClass');
+
+Using helper configuration allows you to declaratively configure your helpers and
+keep configuration logic out of your controller actions. If you have
+configuration options that cannot be included as part of a class declaration,
+you can set those in your controller's beforeRender callback::
+
+    class PostsController extends AppController {
+        public function beforeRender() {
+            parent::beforeRender();
+            $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
+        }
+    }
+
+
+Aliasing Helpers
+----------------
 
 One common setting to use is the ``className`` option, which allows you to
 create aliased helpers in your views. This feature is useful when you want to
@@ -107,18 +155,6 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
 
-Using helper settings allows you to declaratively configure your helpers and
-keep configuration logic out of your controller actions. If you have
-configuration options that cannot be included as part of a class declaration,
-you can set those in your controller's beforeRender callback::
-
-    class PostsController extends AppController {
-        public function beforeRender() {
-            parent::beforeRender();
-            $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
-        }
-    }
-
 Using Helpers
 =============
 
@@ -139,7 +175,7 @@ There may be situations where you need to dynamically load a helper from inside
 a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
 do this::
 
-    $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
+    $mediaHelper = $this->Helpers->load('Media', $mediaConfig);
 
 The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
 supports the registry API used elsewhere in CakePHP.

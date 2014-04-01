@@ -99,7 +99,7 @@ public methods as mixin methods. In these cases you can use the
 ``implementedMethods`` configuration key to rename or exclude mixin methods. For
 example if we wanted to prefix our slug() method we could do the following::
 
-    public static $_defaultConfig = [
+    public $_defaultConfig = [
         'implementedMethods' => [
             'slug' => 'superSlug',
         ]
@@ -136,14 +136,14 @@ behavior should now look like::
     use Cake\Utility\Inflector;
 
     class SluggableBehavior extends Behavior {
-        proteted static $_defaultConfig = [
+        proteted $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',
         ];
 
         public function slug(Entity $entity) {
-            $config = $this->_config;
+            $config = $this->config();
             $value = $entity->get($config['field']);
             $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
         }
@@ -186,7 +186,7 @@ these cases you can use the ``implementedFinders`` configuration key to rename
 or exclude finder methods. For example if we wanted to rename our ``find(slug)``
 method we could do the following::
 
-    public static $_defaultConfig = [
+    public $_defaultConfig = [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]

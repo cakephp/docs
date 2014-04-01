@@ -64,13 +64,13 @@ configuration information into each authentication object, using an
 array::
 
     // Basic setup
-    $this->Auth->authenticate = array('Form');
+    $this->Auth->config('authenticate', ['Form']);
 
     // Pass settings in
-    $this->Auth->authenticate = array(
-        'Basic' => array('userModel' => 'Members'),
-        'Form' => array('userModel' => 'Members')
-    );
+    $this->Auth->config('authenticate', [
+        'Basic' => ['userModel' => 'Members'],
+        'Form' => ['userModel' => 'Members']
+    ]);
 
 In the second example you'll notice that we had to declare the
 ``userModel`` key twice. To help you keep your code DRY, you can use the
@@ -79,11 +79,11 @@ to every attached object. The all key is also exposed as
 ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Members'),
+    $this->Auth->config('authenticate', [
+        AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
-    );
+    ]);
 
 In the above example, both ``Form`` and ``Basic`` will get the settings
 defined for the 'all' key. Any settings passed to a specific
@@ -100,15 +100,15 @@ keys.
 To configure different fields for user in ``$components`` array::
 
     // Pass settings in $components array
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array('username' => 'email')
-                )
-            )
-        )
-    );
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]
+    ];
 
 Do not put other Auth configuration keys (like authError, loginAction etc)
 within the authenticate or Form element. They should be at the same level as
@@ -116,21 +116,21 @@ the authenticate key. The setup above with other Auth configuration
 should look like::
 
     // Pass settings in $components array
-    public $components = array(
-        'Auth' => array(
-            'loginAction' => array(
+    public $components = [
+        'Auth' => [
+            'loginAction' => [
                 'controller' => 'users',
                 'action' => 'login',
                 'plugin' => 'users'
-            ),
+            ],
             'authError' => 'Did you really think you are allowed to see that?',
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array('username' => 'email')
-                )
-            )
-        )
-    );
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]
+    ];
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -496,25 +496,25 @@ configuration information into each authorization object, using an
 array::
 
     // Basic setup
-    $this->Auth->authorize = array('Controller');
+    $this->Auth->config('authorize', ['Controller']);
 
     // Pass settings in
-    $this->Auth->authorize = array(
-        'Actions' => array('actionPath' => 'controllers/'),
+    $this->Auth->config('authorize', [
+        'Actions' => ['actionPath' => 'controllers/'],
         'Controller'
-    );
+    ]);
 
-Much like ``Auth->authenticate``, ``Auth->authorize``, helps you
+Much like ``authenticate``, ``authorize``, helps you
 keep your code DRY, by using the ``all`` key. This special key allows you
 to set settings that are passed to every attached object. The all key
 is also exposed as ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->authorize = array(
-        AuthComponent::ALL => array('actionPath' => 'controllers/'),
+    $this->Auth->config('authorize', [
+        AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
-    );
+    ]);
 
 In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
@@ -535,13 +535,16 @@ Creating Custom Authorize Objects
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the
+``App/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
 
-    App::uses('BaseAuthorize', 'Controller/Component/Auth');
+    namespace App\Controller\Component\Auth;
+
+    use Cake\Controller\Component\Auth\BaseAuthorize;
+    use Cake\Network\Request;
 
     class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, CakeRequest $request) {
+        public function authorize($user, Request $request) {
             // Do things for ldap here.
         }
     }
@@ -559,17 +562,17 @@ Using Custom Authorize Objects
 Once you've created your custom authorize object, you can use them by
 including them in your AuthComponent's authorize array::
 
-    $this->Auth->authorize = array(
+    $this->Auth->config('authorize', [
         'Ldap', // app authorize object.
         'AuthBag.Combo', // plugin authorize object.
-    );
+    ]);
 
 Using No Authorization
 ----------------------
 
 If you'd like to not use any of the built-in authorization objects, and
 want to handle things entirely outside of AuthComponent you can set
-``$this->Auth->authorize = false;``. By default AuthComponent starts off
+``$this->Auth->config('authorize', false);``. By default AuthComponent starts off
 with ``authorize = false``. If you don't use an authorization scheme,
 make sure to check authorization yourself in your controller's
 beforeFilter, or with another component.
@@ -705,41 +708,29 @@ AuthComponent API
 AuthComponent is the primary interface to the built-in authorization
 and authentication mechanics in CakePHP.
 
-.. php:attr:: ajaxLogin
+Configuration options
+---------------------
 
+ajaxLogin
     The name of an optional view element to render when an AJAX request is made
     with an invalid or expired session.
-
-.. php:attr:: allowedActions
-
+allowedActions
     Controller actions for which user validation is not required.
-
-.. php:attr:: authenticate
-
+authenticate
     Set to an array of Authentication objects you want to use when
     logging users in. There are several core authentication objects,
     see the section on :ref:`authentication-objects`.
-
-.. php:attr:: authError
-
+authError
     Error to display when user attempts to access an object or action to which
     they do not have access.
 
     You can suppress authError message from being displayed by setting this
     value to boolean `false`.
-
-.. php:attr:: authorize
-
+authorize
     Set to an array of Authorization objects you want to use when
     authorizing users on each request, see the section on
     :ref:`authorization-objects`.
-
-.. php:attr:: components
-
-    Other components utilized by AuthComponent
-
-.. php:attr:: flash
-
+flash
     Settings to use when Auth needs to do a flash message with
     :php:meth:`SessionComponent::setFlash()`.
     Available keys are:
@@ -748,37 +739,26 @@ and authentication mechanics in CakePHP.
     - ``key`` - The key to use, defaults to 'auth'
     - ``params`` - The array of additional params to use, defaults to array()
 
-.. php:attr:: loginAction
-
+loginAction
     A URL (defined as a string or array) to the controller action that handles
     logins. Defaults to `/users/login`
-
-.. php:attr:: loginRedirect
-
+loginRedirect
     The URL (defined as a string or array) to the controller action users
     should be redirected to after logging in. This value will be ignored if the
     user has an ``Auth.redirect`` value in their session.
-
-.. php:attr:: logoutRedirect
-
+logoutRedirect
     The default action to redirect to after the user is logged out. While
     AuthComponent does not handle post-logout redirection, a redirect URL will
     be returned from :php:meth:`AuthComponent::logout()`. Defaults to
-    :php:attr:`AuthComponent::$loginAction`.
-
-.. php:attr:: unauthorizedRedirect
-
+    ``loginAction``.
+unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer URL or ``AuthComponent::$loginAction`` or '/'.
+    redirected to the referrer URL or ``loginAction`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
 
-.. php:attr:: request
+.. php:attr:: components
 
-    Request object
-
-.. php:attr:: response
-
-    Response object
+    Other components utilized by AuthComponent
 
 .. php:attr:: sessionKey
 

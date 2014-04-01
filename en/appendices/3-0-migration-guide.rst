@@ -113,12 +113,14 @@ Cache
 * ``Cache::set()`` has been removed. It is recommended that you create multiple
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
+* All ``CacheEngine`` subclasses now implement a ``config()`` method.
 
 All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
 configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
 the duration on write - the duration is taken from the cache engine's runtime config. Calling a
 cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
 of returning false.
+
 
 Core
 ====
@@ -399,6 +401,12 @@ Component
 
 * The ``_Collection`` property is now ``_registry``. It contains an instance
   of :php:class:`Cake\\Controller\\ComponentRegistry` now.
+* All components should now use the ``config()`` method to get/set
+  configuration.
+* Default configuration for components should be defined in the
+  ``$_defaultConfig`` property. This property is automatically merged with any
+  configuration provided to the constructor.
+* Configuration options are no longer set as public properties.
 
 Controller\\Components
 ======================
@@ -411,6 +419,7 @@ CookieComponent
 - Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
   need to re-encrypt cookies with the ``rijndael`` method before upgrading.
+- Configuration options are no longer set as public properties.
 
 AuthComponent
 -------------
@@ -423,6 +432,7 @@ AuthComponent
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
   with ``hashType`` set to ``Blowfish``.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
+- Configuration options are no longer set as public properties.
 
 RequestHandlerComponent
 -----------------------
@@ -434,6 +444,7 @@ RequestHandlerComponent
 - ``RequestHandler::getReferer()`` has removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
 - ``RequestHandler::getClientIP()`` has removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
 - ``RequestHandler::mapType()`` has removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
+- Configuration options are no longer set as public properties.
 
 SecurityComponent
 -----------------
@@ -446,6 +457,7 @@ SecurityComponent
 - The CSRF related features in SecurityComponent have been extracted and moved
   into a separate CsrfComponent. This allows you more easily use CSRF protection
   without having to use form tampering prevention.
+- Configuration options are no longer set as public properties.
 
 Model
 =====
@@ -524,25 +536,6 @@ The following View folders have been renamed to avoid naming collisions with con
 - ``Errors`` is now ``Error``
 - ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
 
-Helper
-------
-
-- :php:meth:`Cake\\View\\Helper::clean()` was removed. It was never robust enough
-  to fully prevent XSS. Instead you should escape content with :php:func:`h` or
-  use a dedicated libray like HTMLPurifier.
-- :php:meth:`Cake\\View\\Helper::output()` was removed. This method was
-  deprecated in 2.x.
-- Magic accessors to deprecated properties have been removed. The following
-  properties now need to be accessed from the request object:
-
-  - base
-  - here
-  - webroot
-  - data
-  - action
-  - params
-
-
 HelperCollection Replaced
 -------------------------
 
@@ -577,6 +570,25 @@ JsonView
 
 View\\Helper
 ============
+
+- The ``$settings`` property is now called ``$_config`` and should be accessed
+  through the ``config()`` method.
+- Configuration options are no longer set as public properties.
+- :php:meth:`Cake\\View\\Helper::clean()` was removed. It was never robust enough
+  to fully prevent xss. instead you should escape content with :php:func:`h` or
+  use a dedicated libray like htmlPurifier.
+- :php:meth:`Cake\\View\\Helper::output()` was removed. This method was
+  deprecated in 2.x.
+- Magic accessors to deprecated properties have been removed. The following
+  properties now need to be accessed from the request object:
+
+  - base
+  - here
+  - webroot
+  - data
+  - action
+  - params
+
 
 Helper
 ------

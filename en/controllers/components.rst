@@ -37,33 +37,33 @@ Configuration for these components, and for components in general, is usually do
             'Cookie' => ['name' => 'CookieMonster']
         ];
 
-The previous fragment of code would be an example of
-configuring a component with the ``$components`` array.
-All core components allow their
-configuration settings to be set in this way. In addition, you can
-configure components in your controller's ``beforeFilter()``
-method. This is useful when you need to assign the results of a
-function to a component property. The above could also be expressed
-as::
+The previous fragment of code would be an example of configuring a component
+with the ``$components`` array. You can configure components at runtime using
+the ``config()`` method. Often, this is done in your controller's
+``beforeFilter()`` method. The above could also be expressed as::
 
     public function beforeFilter() {
-        $this->Auth->authorize = ['controller'];
-        $this->Auth->loginAction = ['controller' => 'users', 'action' => 'login'];
+        $this->Auth->config('authorize', ['controller']);
+        $this->Auth->config('loginAction', ['controller' => 'users', 'action' => 'login']);
 
-        $this->Cookie->name = 'CookieMonster';
+        $this->Cookie->config('name', 'CookieMonster');
     }
 
-It's possible, however, that a component requires certain
-configuration options to be set before the controller's
-``beforeFilter()`` is run. To this end, some components allow
-configuration options be set in the ``$components`` array::
+Like helpers, components implement a ``config()`` method that is used to get and
+set any configuration data for a component::
 
-    public $components = [
-        'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
-    ];
+    // Read config data.
+    $this->Auth->config('loginAction');
 
-Consult the relevant documentation to determine what configuration
-options each component provides.
+    // Set config
+    $this->Csrf->config('cookieName', 'token');
+
+As with helpers, components will automatically merge their ``$_defaultConfig``
+property with constructor configuration to create the ``$_config`` property
+which is accessible with ``config()``.
+
+Aliasing Components
+-------------------
 
 One common setting to use is the ``className`` option, which allows you to
 alias components. This feature is useful when you want to
