@@ -505,6 +505,7 @@ ControllerTestCase
 ------------------
 
 - You can now simulate query strings, POST data and cookie values when using ``testAction()``.
+  The default method for ``testAction()`` is now ``GET``.
 
 View
 ====
