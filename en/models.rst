@@ -51,34 +51,35 @@ created your own, is taken from within the CakePHP core folder. Overriding
 the AppModel allows you to define functionality that should be made
 available to all models within your application. To do so, you need
 to create your own ``AppModel.php`` file that resides in the Model folder,
-as all other models in your application. Creating a project using
+as do all other models in your application. Creating a project using
 :doc:`Bake <console-and-shells/code-generation-with-bake>` will automatically
 generate this file for you.
 
 See also :doc:`Behaviors <models/behaviors>` for more information on
 how to apply similar logic to multiple models.
 
-Back to our Ingredient model, in order to work on it, create the PHP file in the
-``/app/Model/`` directory. By convention it should have the same name as the class;
-for this example ``Ingredient.php``.
+Back to our Ingredient model. In order to work on it, create the PHP file in the
+``/app/Model/`` directory. By convention it should have the same name as the class,
+which for this example will be ``Ingredient.php``.
 
 .. note::
 
     CakePHP will dynamically create a model object for you if it cannot
     find a corresponding file in /app/Model. This also means that if
-    your model file isn't named correctly (i.e. ingredient.php or
-    Ingredients.php) CakePHP will use an instance of AppModel rather
-    than your missing (from CakePHP's perspective) model file. If
+    your model file isn't named correctly (for instance, if it is named 
+    ingredient.php or Ingredients.php rather than Ingredient.php), 
+    CakePHP will use an instance of AppModel rather
+    than your model file (which CakePHP's assumes is missing). If
     you're trying to use a method you've defined in your model, or a
-    behavior attached to your model and you're getting SQL errors that
-    are the name of the method you're calling - it's a sure sign
-    CakePHP can't find your model and you either need to check the file
+    behavior attached to your model, and you're getting SQL errors that
+    are the name of the method you're calling, it's a sure sign that
+    CakePHP can't find your model and you need to check the file
     names, your application cache, or both.
 
 .. note::
 
-    Some class names are not usable for model names. For instance
-    "File" cannot be used as "File" is a class already existing in the
+    Some class names are not usable for model names. For instance,
+    "File" cannot be used, since "File" is a class that already exists in the
     CakePHP core.
 
 
@@ -110,7 +111,7 @@ model::
     }
 
 This shows how to use models that are already linked. To understand how associations are
-defined take a look at the :doc:`Associations section <models/associations-linking-models-together>`
+defined, take a look at the :doc:`Associations section <models/associations-linking-models-together>`
 
 More on models
 ==============
