@@ -14,9 +14,17 @@ Installer PHPUnit
 CakePHP utilise PHPUnit as its underlying test framework. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait
-ce que vous pensez qu'il doit faire. PHPUnit peut être installé à travers
-le `pear installer <http://pear.php.net>`_. Pour installer PHPUnit, lancez
-ce qui suit::
+ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
+le `pear installer <http://pear.php.net>`_ ou avec
+`Composer <http://getcomposer.org>`_.
+
+Installer PHPUnit avec PEAR
+---------------------------
+
+L'installeur PEAR peut être utilisé pour installer PHPUnit au niveau du système
+sur votre machine. Il est recommandé que vous utilisiez Composer, mais pour des
+raisons de compatibilité, l'installeur PEAR est aussi supporté. Pour installer
+PHPUnit, lancez ce qui suit::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
@@ -24,39 +32,47 @@ ce qui suit::
 
 .. note::
 
-    Selon la configuration de votre système, vous devrez lancer les commandes
-    précédentes avec ``sudo``.
+    Selon votre configuration de système, vous aurez peut-être besoin de lancer
+    les commandes précédentes avec ``sudo``
 
-Une fois que PHPUnit est installé avec l'installeur pear, vous devrez confirmer
-que les librairies PHPUnit sont sur le ``include_path`` de PHP. Vous pouvez
-faire cela en vérifiant votre fichier php.ini et en vous assurant que les
-fichiers de PHPUnit sont dans un des répertoires de ``include_path``.
+Une fois que PHPUnit est installé avec l'installeur PEAR, vous devrez
+confirmer que les librairies PHPUnit sont dans l'``include_path`` de PHP. Vous
+pouvez faire ceci en vérifiant votre fichier php.ini et en vous assurant que les
+fichiers PHPUnit files sont dans un des répertoires de l'``include_path``.
 
-.. tip::
+Installer PHPUnit avec Composer
+-------------------------------
 
-    Toute sortie est swallowed lors de l'utilisation de PHPUnit 3.6+. Ajoutez
-    le modificateur ``--debug`` si vous utiliser le CLI ou ajoutez
-    ``&debug=1`` à l'URL si vous utilisez le navigateur web pour afficher la
-    sortie.
+Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
+``require`` de votre application dans son ``package.json``::
+
+    "phpunit/PHPUnit": ">=3.7.0",
+
+Après avoir mis à jour votre package.json, lancez à nouveau Composer dans votre
+répertoire d'application::
+
+    $ php composer.phar install
 
 Tester la Configuration de la Base de Données
 =============================================
 
 Souvenez-vous qu'il faut avoir un niveau de debug d'au moins 1 dans votre
-fichier ``app/Config/core.php`` avant de lancer des tests. Les tests ne sont
+fichier ``App/Config/app.php`` avant de lancer des tests. Les tests ne sont
 pas accessibles via le navigateur quand le debug est égal à 0. Avant de lancer
 des tests, vous devrez vous assurer d'ajouter une configuration de base de
-données ``$test``. Cette configuration est utilisée par CakePHP pour les tables
-fixture et les données::
+données ``test`` dans ``App/Config/app.php``. Cette configuration est utilisée
+par CakePHP pour les tables fixture et les données::
 
-    public $test = array(
-        'datasource' => 'Database/Mysql',
-        'persistent' => false,
-        'host'       => 'dbhost',
-        'login'      => 'dblogin',
-        'password'   => 'dbpassword',
-        'database'   => 'test_database'
-    );
+    'Datasources' => [
+        'test' => [
+            'datasource' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'dbhost',
+            'login' => 'dblogin',
+            'password' => 'dbpassword',
+            'database' => 'test_database'
+        ],
+    ],
 
 .. note::
 
@@ -67,15 +83,33 @@ fixture et les données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré le ``$test`` de la configuration de
+Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lancant un de ceux présents dans le coeur. Il y a
-deux exécuteurs integrés pour le test, nous commencerons en utilisant
-l'exécution par le navigateur. Les tests peuvent être accessibles par le
-navigateur à http://localhost/votre_app/test.php. Vous devriez voir une liste
-des cas de test du coeur. Cliquez sur le test 'AllConfigure'. Vous devriez voir
-une barre verte avec quelques informations supplémentaires sur les tests
-lancés, et les nombres passés.
+lancer vos propres tests en lancant un de ceux présents dans le coeur::
+
+    // Pour un PHPunit installé sur l'ensemble du système
+    $ phpunit
+
+    // Pour phpunit.phar
+    $ php phpunit.phar
+
+    // Pour un PHPUnit installé avec composer
+    $ vendor/bin/phpunit
+
+Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
+qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fournir
+le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
+de test pour la classe ArticlesTable, vous pourriez le lancer avec::
+
+    $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
+
+Vous devriez voir une barre verte avec quelques informations supplémentaires sur
+les tests executés et le nombre qui a été passé.
+
+.. note::
+
+    Si vous êtes sur un système windows, vous ne verrez probablement pas les
+    couleurs.
 
 Félicitations, vous êtes maintenant prêt à commencer à écrire des tests!
 
@@ -89,32 +123,24 @@ conventions. En ce qui concerne les tests:
    ``app/Test/Case/[Type]``.
 #. Les noms de fichier de ces fichiers devraient finir avec ``Test.php`` à la
    place de .php.
-#. Les classes contenant les tests devraient étendre ``CakeTestCase``,
-   ``ControllerTestCase`` ou ``PHPUnit_Framework_TestCase``.
+#. Les classes contenant les tests devraient étendre ``Cake\TestSuite\TestCase``,
+   ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
    correspondre au nom de fichier. ``RouterTest.php`` doit contenir
-   ``class RouterTest extends CakeTestCase``.
+   ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
    devrait commencer par ``test``, comme dans ``testPublished()``.
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
-
-Quand vous avez crée un cas de test, vous pouvez l'exécuter en naviguant sur
-``http://localhost/votre_app/test.php`` (selon votre configuration spécifique)
-Cliquez sur les cas de test de App, et cliquez ensuite sur le lien de votre
-fichier spécifique. Vous pouvez lancer les tests à partir des lignes de
-commande en utilisant le shell de test::
-
-    ./Console/cake testsuite app Model/Post
-
-Par exemple, lancerait les tests pour votre model Post.
 
 Créer Votre Premier Cas de Test
 ===============================
 
 Dans l'exemple suivant, nous allons créer un cas de test pour une méthode de
 helper très simple. Le helper que nous allons tester sera formaté en progress
-bar HTML. Notre helper ressemblerait à cela::
+bar HTML. Notre helper ressemblera à cela::
+
+    namespace App\View\Helper;
 
     class ProgressHelper extends AppHelper {
         public function bar($value) {
@@ -129,14 +155,17 @@ bar HTML. Notre helper ressemblerait à cela::
 C'est un exemple très simple, mais ce sera utile pour montrer comment vous
 pouvez créer un cas de test simple. Après avoir créer et sauvegardé notre
 helper, nous allons créer le fichier de cas de tests dans
-``app/Test/Case/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous
+``App/Test/TestCase/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous
 allons commencer avec ce qui suit::
 
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('ProgressHelper', 'View/Helper');
+    namespace App\Test\TestCase\View\Helper;
 
-    class ProgressHelperTest extends CakeTestCase {
+    use App\View\Helper\ProgressHelper;
+    use Cake\Controller\Controller;
+    use Cake\TestSuite\TestCase;
+    use Cake\View\View;
+
+    class ProgressHelperTest extends TestCase {
         public function setUp() {
 
         }
@@ -161,8 +190,9 @@ nous ajouterons ce qui suit::
     }
 
 Appeler la méthode parente est importante dans les cas de test, puisque
-CakeTestCase::setUp() fait un nombre de choses comme fabriquer les valeurs
-dans :php:class:`Configure` et, stocker les chemins dans :php:class:`App`.
+TestCase::setUp() fait un nombre de choses comme fabriquer les valeurs
+dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
+:php:class:`~Cake\\Core\\App`.
 
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
 assertions pour nous assurer que notre code crée la sortie que nous attendions::
@@ -200,96 +230,37 @@ Une fois que vous avez installé PHPUnit et que quelques cas de tests sont
 bonne idée de lancer les tests avant de committer tout changement pour aider
 à s'assurer que vous n'avez rien cassé.
 
-Lancer les tests à partir d'un navigateur
------------------------------------------
+En utilisant ``phpunit``, vous pouvez lancer votre application et les tests de
+plugin. Pour lancer vos tests d'application, vous pouvez simplement lancer::
 
-CakePHP fournit une interface web pour lancer les tests, donc vous pouvez
-exécuter vos tests par le navigateur si vous êtes plus habitué à cet
-environnement. Vous pouvez accéder au web runner en allant sur
-``http://localhost/votre_app/test.php``. La localisation exacte du
-test.php va changer en fonction de votre configuration. Mais le fichier est
-au même niveau que ``index.php``.
+    $ phpunit
 
-Une fois que vous chargé les test runner, vous pouvez naviguer dans les
-suites test de App, Core et Plugin. Cliquer sur un cas de test individuel
-va lancer ce test et afficher les résultats.
-
-Voir la couverture du code
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Si vous avez `XDebug <http://xdebug.org>`_ installé, vous pouvez voir les
-résultats de la couverture du code. La couverture du Code est utile pour vous
-dire quelles parties de votre code vos tests n'atteignent pas. La couverture
-est utile pour déterminer où vous devriez ajouter les tests dans le futur,
-et vous donne une mesure pour marquer la progression de vos tests.
-
-.. |Code Coverage| image:: /_static/img/code-coverage.png
-
-|Code Coverage|
-
-La couverture du code inline utilise les lignes vertes pour indiquer les
-lignes qui ont été exécutées. Si vous vous placez sur une ligne verte, une
-info-bulle indiquera quels tests couvre la ligne. Les lignes en rouge n'ont
-pas été lancées, et n'ont pas été testées par vos tests. Les lignes grises
-sont considerées comme du code non exécuté par xdebug.
-
-.. _run-tests-from-command-line:
-
-Lancer les tests à partir d'une ligne de commande
--------------------------------------------------
-
-CakePHP fournit un shell ``test`` pour lancer les tests. Vous pouvez
-lancer les tests de app, core et plugin facilement en utilisant le shell
-testsuite. Il accepte aussi tous les arguments que vous vous attendez à trouver
-sur l'outil de ligne de commnde du PHPUnit normal. A partir de votre répertoire
-app, vous pouvez faire ce qui suit pour lancer les tests::
-
-    # Lancer un test de model dans app
-    ./Console/cake test app Model/Article
-
-    # Lancer un test de component dans un plugin
-    ./Console/cake test DebugKit Controller/Component/ToolbarComponent
-
-    # Lancer le test de la classe de configuration dans CakePHP
-    ./Console/cake test core Core/Configure
+A partir du répertoire racine de votre application. Pour lancer les tests pour
+les plugin, faîtes d'abord ``cd`` vers le répertoire du plugin, et ensuite
+utilisez ``phpunit`` pour lancer les tests.
 
 .. note::
 
     Si vous lancez des tests qui intéragissent avec la session, c'est
-    généralement une bonne idée d'utiliser l'option ``--stderr``. Cela
-    réglera les problèmes des échecs de test dûs aux avertissements
-    des headers_sent.
-
-.. versionchanged:: 2.1
-    Le shell ``test`` a été ajouté dans 2.1. Le shell ``testsuite`` de 2.0 est
-    toujours disponible mais la nouvelle syntaxe est préférable.
-
-Vous pouvez aussi lancer le shell ``test`` dans le répertoire de projet
-racine. Cela vous montre une liste complète de tous les tests que vous avez
-actuellement. Vous pouvez ainsi choisir librement quel(s) test(s) lancer::
-
-    # Lancer test dans le réperoire de projet racine pour le dossier applicaton appelé app
-    lib/Cake/Console/cake test app
-
-    # Lancer test dans le repértoire de projets racine pour une application dans ./myapp
-    lib/Cake/Console/cake test -app myapp app
-
+    généralement une bonne idée d'utiliser l'option ``--stderr``. Cela va régler
+    des problèmes avec les tests en échec à cause des avertissements
+    headers_sent.
 
 Filtrer les cas de test
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Quand vous avez des cas de test plus larges, vous voulez souvent lancer
 un sous-ensemble de méthodes de test quand vous essayez de travailler sur un
 cas unique d'échec. Avec l'exécuteur cli vous pouvez utiliser une option pour
 filtrer les méthodes de test::
 
-    ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
+    $ phpunit --filter testSave Test/TestCase/Model/Table/ArticlesTableTest
 
 Le paramètre filter est utilisé commme une expression régulière sensible à la
 casse pour filtrer les méthodes de test à lancer.
 
 Générer une couverture de code
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 Vous pouvez générer un rapport de couverture de code à partir d'une ligne de
 commande en utilisant les outils de couverture de code intégrés dans PHPUnit.
@@ -297,14 +268,14 @@ PHPUnit va générer un ensemble de fichiers en HTML statique contenant les
 résultats de la couverture. Vous pouvez générer une couverture pour un cas de
 test en faisant ce qui suit::
 
-    ./Console/cake test app Model/Article --coverage-html webroot/coverage
+    $ phpunit --coverage-html webroot/coverage Test/TestCase/Model/Table/ArticlesTableTest
 
 Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
 
 Lancer les tests qui utilisent des sessions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
 
 Quand vous lancez des tests en ligne de commande qui utilisent des sessions,
 vous devrez inclure le flag ``--stderr``. Ne pas le faire ne fera pas
@@ -312,6 +283,28 @@ fonctionner les sessions. PHPUnit outputs test progress to stdout par défaut,
 cela entraine le fait que PHP suppose que les headers ont été envoyés ce qui
 empêche les sessions de démarrer. En changeant PHPUnit pour qu'il output on
 stderr, ce problème sera évité.
+
+Combiner les Suites de Test pour les plugins
+--------------------------------------------
+
+Often times your application will be composed of several plugins. In these
+situations it can be pretty tedious to run tests for each plugin. You can make
+running tests for each of the plugins that compose your application by adding
+additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
+
+    <testsuites>
+        <testsuite name="App Test Suite">
+            <directory>./Test/TestCase</directory>
+        </testsuite>
+
+        <!-- Add your plugin suites -->
+        <testsuite name="Forum plugin">
+            <directory>./Plugin/Forum/Test/TestCase</directory>
+        </testsuite>
+    </testsuites>
+
+Any additional test suites added to the ``<testsuites>`` element will
+automatically be run when you use ``phpunit``.
 
 Les Callbacks du Cycle de vie des cas de Test
 =============================================
@@ -332,6 +325,8 @@ pouvez utiliser quand vous faîtes les tests:
   ont commencé dans un cas.
   Cette méthode doit être *statique*.
 
+.. _test-fixtures:
+
 Fixtures
 ========
 
@@ -344,8 +339,8 @@ de l'application qui tourne. De plus, vous pouvez commencer à tester
 votre code avant dee développer réellement en live le contenu pour
 une application.
 
-CakePHP utilise la connection nommée ``$test`` dans votre fichier de
-configuration ``app/Config/database.php`` Si la connection n'est pas
+CakePHP utilise la connection nommée ``test`` dans votre fichier de
+configuration ``App/Config/datasources.php`` Si la connection n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -366,28 +361,57 @@ comment la table est créée (quels champs font parti de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
 Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
-``app/Test/Fixture`` avec le contenu suivant::
+``App/Test/Fixture`` avec le contenu suivant::
 
-    class ArticleFixture extends CakeTestFixture { 
+    namespace App\Test\Fixture;
 
-          /* Optionel. Définir cette propriété pour charger les fixtures dans une source de données de test différente */
-          public $useDbConfig = 'test';
-          public $fields = array( 
-              'id' => array('type' => 'integer', 'key' => 'primary'), 
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-              'body' => 'text', 
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-              'created' => 'datetime', 
-              'updated' => 'datetime' 
-          ); 
-          public $records = array( 
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
-          ); 
-     } 
+    use Cake\Test\TestFixture;
 
-La propriété ``$useDbConfig`` définit la source de données que la fixture
+    class ArticleFixture extends TestFixture {
+
+          // Optional. Set this property to load fixtures to a different test datasource
+          public $connection = 'test';
+
+          public $fields = [
+              'id' => ['type' => 'integer'],
+              'title' => ['type' => 'string', 'length' => 255, 'null' => false],
+              'body' => 'text',
+              'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
+              'created' => 'datetime',
+              'updated' => 'datetime',
+              '_constraints' => [
+                'primary' => ['type' => 'primary', 'columns' => ['id']]
+              ]
+          ];
+          public $records = [
+              [
+                  'id' => 1,
+                  'title' => 'First Article',
+                  'body' => 'First Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:39:23',
+                  'updated' => '2007-03-18 10:41:31'
+              ],
+              [
+                  'id' => 2,
+                  'title' => 'Second Article',
+                  'body' => 'Second Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:41:23',
+                  'updated' => '2007-03-18 10:43:31'
+              ],
+              [
+                  'id' => 3,
+                  'title' => 'Third Article',
+                  'body' => 'Third Article Body',
+                  'published' => '1',
+                  'created' => '2007-03-18 10:43:23',
+                  'updated' => '2007-03-18 10:45:31'
+              ]
+          ];
+     }
+
+La propriété ``$connection`` définit la source de données que la fixture
 va utiliser. Si votre application utilise plusieurs sources de données, vous
 devriez faire correspondre les fixtures avec les sources de données du model,
 mais préfixé avec ``test_``.
@@ -408,17 +432,20 @@ la définition de la table sont:
         - ``string``: redirige vers ``VARCHAR``.
         - ``text``: redirige vers ``TEXT``.
         - ``integer``: redirige vers ``INT``.
+        - ``decimal``: redirige vers ``DECIMAL``
         - ``float``: redirige vers ``FLOAT``.
         - ``datetime``: redirige vers ``DATETIME``.
         - ``timestamp``: redirige vers ``TIMESTAMP``.
         - ``time``: redirige vers ``TIME``.
         - ``date``: redirige vers ``DATE``.
         - ``binary``: redirige vers ``BLOB``.
-``key``
-    Défini à ``primary`` pour que le champ soit en AUTO\_INCREMENT, et une
-    PRIMARY KEY pour la table.
+``fixed``
+    Used with string types to create CHAR columns in platforms that support
+    them. Also used to force UUID types in Postgres when the length is also 36.
 ``length``
     Défini à la longueur spécifique que le champ doit prendre.
+``precision``
+    Set the number of decimal places used on float & decimal fields.
 ``null``
     Défini soit à ``true`` (pour permettre les NULLs) soit à ``false`` (pour
     ne pas permettre les NULLs).
@@ -445,35 +472,41 @@ vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
 exemple, si vous voulez tous les timestamps crées et mis à jours pour
 refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
-    class ArticleFixture extends CakeTestFixture {
+    namespace App\Test\Fixture;
 
-        public $fields = array( 
-            'id' => array('type' => 'integer', 'key' => 'primary'), 
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-            'body' => 'text', 
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-            'created' => 'datetime', 
-            'updated' => 'datetime' 
-        );
+    use Cake\TestSuite\Fixture\TestFixture;
+
+    class ArticleFixture extends TestFixture {
+
+        public $fields = [
+            'id' => ['type' => 'integer'],
+            'title' => ['type' => 'string', 'length' => 255, 'null' => false],
+            'body' => 'text',
+            'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
+            'created' => 'datetime',
+            'updated' => 'datetime',
+            '_constraints' => [
+                'primary' => ['type' => 'primary', 'columns' => ['id']],
+            ]
+        ];
 
         public function init() {
-            $this->records = array(
-                array(
+            $this->records = [
+                [
                     'id' => 1,
                     'title' => 'First Article',
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
                     'updated' => date('Y-m-d H:i:s'),
-                ),
-            );
+                ],
+            ];
             parent::init();
         }
     }
 
 Quand vous surchargez ``init()``, rappelez-vous juste de toujours appeler
 ``parent::init()``.
-
 
 Importer les informations de table et les enregistrements
 ---------------------------------------------------------
@@ -491,43 +524,14 @@ disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente
 (``app/Test/Fixture/ArticleFixture.php``) en ce qui suit::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = 'Article';
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles']
     }
 
-Cette déclaration dit à la suite test d'importer la définition de votre table
-à partir de la table liée au model appelé Article. Vous pouvez utiliser tout
-model disponible dans votre application. La déclaration va seulement importer
-le schéma Article, et n'importe pas d'enregistrements. Pour importer les
-enregistrements, vous pouvez faire ce qui suit::
+Si vous voulez utiliser une autre connection, utilisez::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('model' => 'Article', 'records' => true);
-    }
-
-Si d'un autre côté vous avez une table créée mais pas de model disponible pour
-elle, vous pouvez spécifier que votre import se fera en lisant l'information
-de la table à la place. Par exemple::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles');
-    }
-
-Va importer la définition de la table à partir de la table appelée 'articles'
-en utilisant la connection à la base de donnée CakePHP nommée 'default'.
-Si vous voulez utiliser une connection différente, utilisez::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'connection' => 'other');
-    }
-
-Puisqu'on utilise votre connection à la base de données CakePHP, si il y a un
-préfixe de table déclaré, il sera automatiquement utilisé quand on récupère
-l'information de la table. Pour forcer la fixture et aussi importer ses
-enregistrements, changez l'importation en ::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'records' => true);
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
 Vous pouvez naturellement importer la définition de votre table à partir d'un
@@ -535,14 +539,19 @@ model/d'une table existante, mais vous avez vos enregistrements directement
 définis dans le fixture comme il a été montré dans la section précédente.
 Par exemple::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = 'Article';
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles'];
         public $records = array(
             array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
             array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
             array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
         );
     }
+
+Finally, you can not load/create any schema in a fixture. This is useful if you
+already have a test database setup with all the empty tables created. By
+defining neither ``$fields`` or ``$import`` a fixture will only insert its
+records and truncate the records on each test method.
 
 Charger les fixtures dans vos cas de test
 -----------------------------------------
@@ -553,16 +562,16 @@ besoin. Vous devriez charger une fixture pour chaque model qui aura une requête
 lancée contre elle. Pour charger les fixtures, vous définissez la propriété
 ``$fixtures`` dans votre model::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['app.article', 'app.comment'];
     }
 
 Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
 du répertoire de fixture de l'application. Vous pouvez aussi charger les
 fixtures à partir du coeur de CakePHP ou des plugins::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
     }
 
 Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
@@ -570,11 +579,11 @@ utiliser un nom de plugin en préfixe chargera le fixture à partir d'un plugin
 nommé.
 
 Vous pouvez contrôler quand vos fixtures sont chargés en configurant
-:php:attr:`CakeTestCase::$autoFixtures` à ``false`` et plus tard les charger
-en utilisant :php:meth:`CakeTestCase::loadFixtures()`::
+:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` à ``false`` et plus tard
+les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['app.article', 'app.comment'];
         public $autoFixtures = false;
 
         public function testMyFunction() {
@@ -735,7 +744,7 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
         public $fixtures = array('app.article');
 
         public function testIndex() {
-            $result = $this->testAction('/articles/index');
+            $result = $this->testAction('/articles');
             debug($result);
         }
 
@@ -771,7 +780,7 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
                 )
             );
             $result = $this->testAction(
-                '/articles/index',
+                '/articles',
                 array('data' => $data, 'method' => 'post')
             );
             debug($result);
@@ -822,19 +831,24 @@ Simuler les requêtes GET
 ------------------------
 
 Comme vu dans l'exemple ``testIndexPostData()`` ci-dessus, vous pouvez utiliser
-``testAction()`` pour tester les actions POST ainsi que les actions GET. En
-fournissant la clé ``data``, la requête faite par le controller sera POST. Par
-défaut, toutes les requêtes seront des requêtes POST. Vous pouvez simuler une
+``testAction()`` pour tester les actions POST ainsi que les actions GET. Par
+défaut, toutes les requêtes seront des requêtes GET. Vous pouvez simuler une
 requête GET en configurant la  méthode clé::
 
     public function testAdding() {
         $data = array(
-            'Post' => array(
-                'title' => 'New post',
-                'body' => 'Secret sauce'
-            )
+            'title' => 'New post'
         );
         $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        // some assertions.
+    }
+
+    public function testAddingPost() {
+        $data = array(
+            'title' => 'New post',
+            'body' => 'Secret sauce'
+        );
+        $this->testAction('/posts/add', array('data' => $data, 'method' => 'post'));
         // some assertions.
     }
 
@@ -859,7 +873,7 @@ La valeur par défaut est ``result``. Tant que votre type de retour n'est pas
 dans les cas de test::
 
     public function testIndex() {
-        $this->testAction('/posts/index');
+        $this->testAction('/posts');
         $this->assertInternalType('array', $this->vars['posts']);
     }
 

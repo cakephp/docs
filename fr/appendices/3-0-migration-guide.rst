@@ -19,7 +19,7 @@ Pré-requis
 
     CakePHP 3.0 ne fonctionnera pas si vous n'avez pas les pré-requis ci-dessus.
 
-Organisation des répertoires de l'application
+Organisation des Répertoires de l'Application
 =============================================
 
 L'organisation des répertoires de l'application a changé et suit maintenant
@@ -409,6 +409,9 @@ Controller
   liées.
 - La propriété ``Controller::$scaffold`` a été retirée. Le scaffolding dynamique
   a été retiré du coeur de CakePHP, et sera fourni en tant que plugin autonome.
+- La propriété ``Controller::$ext`` a été retirée. Vous devez maintenant étendre
+  et surcharger la propriété ``View::$_ext`` si vous voulez utiliser une
+  extension de fichier de view autre que celle par défaut.
 
 Scaffold retiré
 ---------------
@@ -551,7 +554,8 @@ ControllerTestCase
 ------------------
 
 - Vous pouvez maintenant simuler un query string, une post data et les valeurs
-de cookie lors de l'utilisation ``testAction()``.
+  de cookie lors de l'utilisation ``testAction()``. La méthode par défaut pour
+  ``testAction()`` est maintenant ``GET``.
 
 View
 ====
@@ -632,7 +636,7 @@ View\\Helper
 Helper
 ------
 
-Helper has had the following methods removed:
+Les méthodes suivantes de Helper ont été retirées:
 
 * Helper::setEntity()
 * Helper::entity()
@@ -643,86 +647,91 @@ Helper has had the following methods removed:
 * Helper::_initInputField()
 * Helper::_selectedArray()
 
-These methods were part used only by FormHelper, and part of the persistent
-field features that have proven to be problematic over time. FormHelper no
-longer relies on these methods and the complexity they provide is not necessary
-anymore.
+Ces méthodes étaient des parties uniquement utilisées par FormHelper, et
+faisaient parti des continuelles fonctionnalités des champs qui devenaient
+problématiques au fil du temps. FormHelper ne s'appuie plus sur ces méthodes
+et leur complexité n'est plus nécessaire.
 
-The following methods have been removed:
+Les méthodes suivantes ont été retirées:
 
 * Helper::_parseAttributes()
 * Helper::_formatAttribute()
 
-These methods can now be found on the ``StringTemplate`` class that helpers
-frequently use. See the ``StringTemplateTrait`` for an easy way to integrate
-string templates into your own helpers.
+Ces méthodes se trouvent dans la classe ``StringTemplate`` que les helpers
+utilisent fréquemment. Regardez ``StringTemplateTrait`` pour intégrer facilement
+les templates de chaîne dans vos propres helpers.
 
 FormHelper
 ----------
 
-FormHelper has been entirely rewritten for 3.0. It features a few large changes:
+FormHelper a été entièrement réécrite pour 3.0. Il amène quelques grands
+changements:
 
-* FormHelper works with the new ORM. But has an extensible system for
-  integrating with other ORMs or datasources.
-* FormHelper features an extensible widget system that allows you to create new
-  custom input widgets and easily augment the built-in ones.
-* String templates are the foundation of the helper. Instead of munging arrays
-  together everywhere, most of the HTML FormHelper generates can be customized
-  in one central place using template sets.
+* FormHelper fonctionne avec le nouvel ORM. Mais il a un système extensible pour
+  être intégré avec d'autres ORMs ou sources de données.
+* FormHelper dispose d'une fonctionnalité de système de widget extensible qui
+  vous permet de créer de nouveaux input widgets personnalisés et de facilement
+  améliorer ceux intégrés.
+* Les templates de chaîne sont un élément fondateur du helper. Au lieu de
+  tableaux imbriqués ensemble partout, la plupart du HTML que FormHelper génère
+  peut être personnalisé dans un endroit central en utilisant les ensembles de
+  template.
 
-In addition to these larger changes, some smaller breaking changes have been
-made as well. These changes should help streamline the HTML FormHelper generates
-and reduce the problems people had in the past:
+En plus de ces grands changements, quelques plus petits changements finaux
+ont été aussi faits. Ces changements devraient aider le streamline HTML que le
+FormHelper génère et réduire les problèmes que les gens ont eu dans le passé:
 
-- The ``data[`` prefix was removed from all generated inputs.  The prefix serves no real purpose anymore.
-- The various standalone input methods like ``text()``, ``select()`` and others
-  no longer generate id attributes.
-- The ``inputDefaults`` option has been removed from ``create()``.
-- Options ``default`` and ``onsubmit`` of ``create()`` have been removed. Instead
-  one should use javascript event binding or set all required js code for ``onsubmit``.
-- ``end()`` can no longer make buttons. You should create buttons with
-  ``button()`` or ``submit()``.
-- ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
-  instead.
-- ``FormHelper::inputDefaults()`` has been removed. You can use ``templates()``
-  to define/augment the templates FormHelper uses.
-- The ``wrap`` and ``class`` options have been removed from the ``error()``
-  method.
-- The ``showParents`` option has been removed from select().
-- The ``div``, ``before``, ``after``, ``between`` and ``errorMessage`` options
-  have been removed from ``input()``.  You can use templates to update the
-  wrapping HTML. The ``templates`` option allows you to override the loaded
-  templates for one input.
-- The ``separator``, ``between``, and ``legend`` options have been removed from
-  ``radio()``. You can use templates to change the wrapping HTML now.
-- The ``format24Hours`` parameter has been removed from ``hour()``.
-  It has been replaced with the ``format`` option.
-- The ``minYear``, and ``maxYear`` parameters have been removed from ``year()``.
-  Both of these parameters can now be provided as options.
-- The ``dateFormat`` and ``timeFormat`` parameters have been removed from
-  ``datetime()``. You can use the template to define the order the inputs should
-  be displayed in.
-- The ``submit()`` has had the ``div``, ``before`` and ``after`` options
-  removed. You can customize the ``submitContainer`` template to modify this
-  content.
-- The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
-  ``$fields`` parameter, you must use the ``$options`` parameter.
-- The ``inline`` parameter has been removed from postLink() method.
-  You should use the ``block`` option instead. Setting ``block => true`` will
-  emulate the previous behavior.
+- Le prefix ``data[`` a été retiré de tous les inputs générés. Le prefix n'a
+  plus de réel utilité.
+- Les diverses méthodes d'input autonomes comme ``text()``, ``select()`` et
+  autres ne genèrent plus d'attributs id.
+- L'option ``inputDefaults`` a été retirée de ``create()``.
+- Les options ``default`` et ``onsubmit`` de ``create()`` ont été retirées. A la
+  place, vous devriez utiliser le binding d'event javascript ou définir tout le
+  code js nécessaire pour ``onsubmit``.
+- ``end()`` ne peut plus faire des boutons. Vous devez créer des buttons avec
+  ``button()`` ou ``submit()``.
+- ``FormHelper::tagIsInvalid()`` a été retirée. Utilisez ``isFieldError()`` à la
+  place.
+- ``FormHelper::inputDefaults()`` a été retirée. Vous pouvez utiliser
+  ``templates()`` pour définir/améliorer les templates que FormHelper utilise.
+- Les options ``wrap`` et ``class`` ont été retirées de la méthode ``error()``.
+- L'option ``showParents`` a été retirée de select().
+- Les options ``div``, ``before``, ``after``, ``between`` et ``errorMessage``
+  ont été retirées de ``input()``. Vous pouvez utiliser les templates pour
+  mettre à jour le HTML qui l'entoure. L'option ``templates`` vous permet de surcharger
+  les templates chargés pour un input.
+- Les options ``separator``, ``between``, et ``legend`` ont été retirées de
+  ``radio()``. Vous pouvez maintenant utiliser les templates pour changer le
+  HTML qui l'entoure.
+- Le paramètre ``format24Hours`` a été retiré de ``hour()``.
+  Il a été remplacé par l'option ``format``.
+- Les paramètres ``minYear`` et ``maxYear`` ont été retirés de ``year()``.
+  Ces deux paramètres peuvent maintenant être fournis en options.
+- Les paramètres ``dateFormat`` et ``timeFormat`` ont été retirés de
+  ``datetime()``. Vous pouvez maintenant utiliser les templates pour définir
+  l'ordre dans lequel les inputs doivent être affichés.
+- ``submit()`` a eu les options ``div``, ``before`` and ``after`` retirées. Vous
+  pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
+- La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
+  paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
+- Le paramètre ``inline`` a été retiré de la méthode postLink().
+  Vous devriez utiliser l'option ``block`` à la place. Définir ``block => true``
+  va émuler le comportement précédent.
 
-It is recommended that you review the :doc:`/core-libraries/helpers/form`
-documentation for more details on how to use the FormHelper in 3.0.
+Il est recommandé que vous regardiez la documentation
+:doc:`/core-libraries/helpers/form` pour plus de détails sur la façon d'utiliser
+le FormHelper dans 3.0.
 
 HtmlHelper
 ----------
 
-- ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
-- ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
-  done using ``templates()`` or the ``templates`` setting.
-- The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
-  methods. You should use the ``block`` option instead. Setting ``block =>
-  true`` will emulate the previous behavior.
+- ``HtmlHelper::useTag()`` a été retirée, utilisez ``tag()`` à la place.
+- ``HtmlHelper::loadConfig()`` a été retirée. La personnalisation des tags peut
+  être faîte en utilisant ``templates()`` ou la configuration ``templates``.
+- Le paramètre ``inline`` a été retiré des méthodes meta(), css(), script(),
+  scriptBlock(). Vous devrez utiliser l'option ``block`` à la place. Définir
+  ``block => true`` va émuler le comportement précédent.
 
 PaginatorHelper
 ---------------
@@ -759,8 +768,9 @@ TimeHelper
 - ``TimeHelper::__set()``, ``TimeHelper::__get()``, et
   ``TimeHelper::__isset()`` ont été retirées. Celles-ci étaient des
   méthodes magiques pour des attributs dépréciés.
-- ``TimeHelper::serverOffset()`` has been removed.  It promoted incorrect time math practices.
-- ``TimeHelper::niceShort()`` has been removed.
+- ``TimeHelper::serverOffset()`` a été retirée. Elle entraînait de mauvaises
+  utilisations mathématiques de time.
+- ``TimeHelper::niceShort()`` a été retirée.
 
 I18n
 ====
@@ -792,15 +802,18 @@ L10n
 Testing
 =======
 
-- The ``TestShell`` has been removed. CakePHP, the application skeleton and
-  newly baked plugins all use ``phpunit`` to run tests.
-- The webrunner (webroot/test.php) has been removed. CLI adoption has greatly
-  increased since the initial release of 2.x. Additionaly, CLI runners offer
-  superior integration with IDE's and other automated tooling.
+- ``TestShell`` a été retiré. CakePHP, le squelette d'application et les plugins
+  nouvellement créés utilisent tous ``phpunit`` pour executer les tests.
+- L'executeur via le navigateur (webroot/test.php) a été retiré. L'adoption
+  de CLI a beaucoup amélioré depuis les premières versions de 2.x. De plus,
+  les executeurs CLI ont une intégration meilleur avec les outils des IDE et
+  autres outils automatisés.
 
-  If you find yourself in need of a way to run tests from a browser you should
-  checkout `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. It
-  offers many additional features over the old webrunner.
+  Si vous cherchez un moyen de lancer les tests à partir d'un navigateur, vous
+  devriez allez voir
+  `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. Il dispose de
+  plusieurs fonctionnalités supplémentaires par rapport au vieil executeur via
+  le navigateur.
 
 Utility
 =======
