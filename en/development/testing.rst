@@ -56,7 +56,7 @@ Test Database Setup
 Remember to have a debug level of at least 1 in your ``App/Config/app.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
-``test`` datasource configuration to ``App/Config/app.php``.  This 
+``test`` datasource configuration to ``App/Config/app.php``.  This
 configuration is used by CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -440,7 +440,7 @@ if you wanted all the created and updated timestamps to reflect today's date you
 could do the following::
 
     namespace App\Test\Fixture;
-    
+
     use Cake\TestSuite\Fixture\TestFixture;
 
     class ArticleFixture extends TestFixture {
@@ -709,7 +709,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
         public $fixtures = array('app.article');
 
         public function testIndex() {
-            $result = $this->testAction('/articles/index');
+            $result = $this->testAction('/articles');
             debug($result);
         }
 
@@ -743,7 +743,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
                 'body' => 'New Body'
             );
             $result = $this->testAction(
-                '/articles/index',
+                '/articles',
                 array('data' => $data, 'method' => 'post')
             );
             debug($result);
@@ -777,17 +777,24 @@ Simulating GET Requests
 -----------------------
 
 As seen in the ``testIndexPostData()`` example above, you can use
-``testAction()`` to test POST actions as well as GET actions. By supplying the
-``data`` key, the request made to the controller will be POST. By default all
-requests will be POST requests. You can simulate a GET request by setting the
+``testAction()`` to test POST actions as well as GET actions. By default all
+requests will be GET requests. You can simulate a GET or POST request by setting the
 method key::
 
     public function testAdding() {
         $data = array(
+            'title' => 'New post'
+        );
+        $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        // some assertions.
+    }
+
+    public function testAddingPost() {
+        $data = array(
             'title' => 'New post',
             'body' => 'Secret sauce'
         );
-        $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        $this->testAction('/posts/add', array('data' => $data, 'method' => 'post'));
         // some assertions.
     }
 
@@ -812,7 +819,7 @@ you can also access the various other return types as properties in the test
 case::
 
     public function testIndex() {
-        $this->testAction('/posts/index');
+        $this->testAction('/posts');
         $this->assertInstanceOf('Cake\ORM\Query', $this->vars['posts']);
     }
 
@@ -880,6 +887,7 @@ allowing you to check for redirects::
             ->will($this->returnValue(true));
 
         $this->testAction('/articles', array(
+            'method' => 'post',
             'data' => array(
                 'title' => 'New Article'
             )
