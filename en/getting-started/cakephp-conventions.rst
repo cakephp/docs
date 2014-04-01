@@ -8,7 +8,7 @@ you free yourself from the maintenance nightmare of tracking config
 files. Convention also makes for a very uniform system development,
 allowing other developers to jump in and help more easily.
 
-CakePHP's conventions have been distilled out of years of web
+CakePHP's conventions have been distilled from years of web
 development experience and best practices. While we suggest you use
 these conventions while developing with CakePHP, we should mention
 that many of these tenets are easily overridden – something that is
@@ -124,32 +124,32 @@ singular/plural of words. See the
 :doc:`/core-utility-libraries/inflector` for more
 information.
 
-Field names with two or more words are underscored like,
+Field names with two or more words are underscored:
 first\_name.
 
 Foreign keys in hasMany, belongsTo or hasOne relationships are
 recognized by default as the (singular) name of the related table
 followed by \_id. So if a Baker hasMany Cake, the cakes table will
 refer to the bakers table via a baker\_id foreign key. For a
-multiple worded table like category\_types, the foreign key would
-be category\_type\_id.
+table like category\_types whose name contains multiple words, 
+the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
-between models should be named after the model tables they will
-join in alphabetical order (apples\_zebras rather than
+between models, should be named after the model tables they will
+join, arranged in alphabetical order (apples\_zebras rather than
 zebras\_apples).
 
 All tables with which CakePHP models interact (with the exception
-of join tables), require a singular primary key to uniquely
-identify each row. If you wish to model a table which does not have
+of join tables) require a singular primary key to uniquely
+identify each row. If you wish to model a table that does not already have
 a single-field primary key, CakePHP's convention is that a
-single-field primary key is added to the table. You have to add a
+single-field primary key is added to the table. You must add a
 single-field primary key if you want to use that table's model.
 
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
 :ref:`query <model-query>` calls or add a primary key to act on it
-as a normal model. E.g.::
+as a normal model. For example:
 
     CREATE TABLE posts_tags (
     id INT(10) NOT NULL AUTO_INCREMENT,
@@ -176,6 +176,7 @@ The basic pattern is
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
 of configuration. Here's a final example that ties the conventions
+together:
 
 -  Database table: "people"
 -  Model class: "Person", found at /app/Model/Person.php
