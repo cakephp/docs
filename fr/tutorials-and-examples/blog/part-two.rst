@@ -91,7 +91,7 @@ www.exemple.com/articles/foobar.
 La seule instruction que cette action utilise est ``set()``, pour transmettre
 les données du controller à la vue (que nous créerons à la prochaine étape).
 La ligne définit la variable de vue appelée 'articles' qui est égale à la valeur
-de retour de la méthode ``find('all')`` de l'objet table Article.
+de retour de la méthode ``find('all')`` de l'objet table Articles.
 
 Pour en apprendre plus sur les controllers de CakePHP, consultez le chapitre
 :doc:`/controllers`.
@@ -340,7 +340,7 @@ Voici le code de notre vue "add" (ajout)
     echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->submit('Save Article');
+    echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
     ?>
 
@@ -460,7 +460,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
     <?= $this->Form->create($article) ?>
     <?= $this->Form->input('title') ?>
     <?= $this->Form->input('body', ['rows' => '3']) ?>
-    <?= $this->Form->submit('Save Article') ?>
+    <?= $this->Form->button(__('Save Article')) ?>
     <?= $this->Form->end() ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
