@@ -131,11 +131,6 @@ Cache.check
     When using the FileEngine you might need to use the ``mask`` option to
     ensure cache files are made with the correct permissions.
 
-.. versionadded:: 2.4
-
-    In debug mode missing directories will now be automatically created to avoid unnecessary
-    errors thrown when using the FileEngine.
-
 Creating a Storage Engine for Cache
 ===================================
 
