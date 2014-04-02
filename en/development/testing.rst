@@ -814,6 +814,8 @@ this, is that ``redirect()`` is mocked in testing, and does not exit like
 normal. And instead of your code exiting, it will continue to run code following
 the redirect. For example::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -828,6 +830,8 @@ the redirect. For example::
 When testing the above code, you will still run ``// more code`` even when the
 redirect is reached. Instead, you should write the code like::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
