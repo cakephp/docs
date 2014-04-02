@@ -107,12 +107,6 @@ pour :php:func:`Cache::write()` et :php:func:`Cache::read()`.
     l'option ``mask`` pour vous assurer que les fichiers cachés sont
     créés avec les bonnes permissions.
 
-.. versionadded:: 2.4
-
-    En mode debug, les répertoires manquants vont être maintenant
-    automatiquement créés pour éviter le lancement des erreurs non nécessaires
-    lors de l'utilisation de FileEngine.
-
 Création d'un moteur de stockage pour le Cache
 ==============================================
 

@@ -19,6 +19,8 @@ Component... n'importe quoi d'autre), vous pouvez loguer (journaliser) vos
 données. Vous pouvez aussi utiliser ``CakeLog::write()`` directement.
 voir :ref:`writing-to-logs`
 
+.. _log-configuration:
+
 Configuration des flux d'un log (journal)
 =========================================
 

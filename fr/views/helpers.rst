@@ -24,9 +24,9 @@ Configurer les Helpers
 
 Vous activez les helpers dans CakePHP, en faisant "prendre conscience" à un
 controller qu'ils existent. Chaque controller a une propriété
-:php:attr:`~Controller::$helpers`, qui liste les helpers disponibles dans la
-vue. Pour activer un helper dans votre vue, ajoutez son nom au tableau
-``$helpers`` du controller::
+:php:attr:`~Cake\\Controller\\Controller::$helpers`, qui liste les helpers
+disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez son nom
+au tableau ``$helpers`` du controller::
 
     class BakeriesController extends AppController {
         public $helpers = ['Form', 'Html', 'Js', 'Time'];
@@ -64,9 +64,12 @@ d'inclure les helpers par défaut Html et Form::
         public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
-Vous pouvez passer des options dans les helpers. Ces options peuvent être
-utilisées pour définir les valeurs d'attributs ou modifier le comportement du
-helper::
+Options de Configuration
+------------------------
+
+Vous pouvez passer des options de configuration dans les helpers. Ces options
+peuvent être utilisées pour définir les valeurs d'attributs ou modifier le
+comportement du helper::
 
     class AwesomeHelper extends AppHelper {
         public function __construct(View $view, $config = []) {
@@ -79,13 +82,58 @@ helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-Depuis 2.3 les options sont fusionnées avec la propriété
-:php:attr:`~Cake\View\Helper::$config` du helper.
+Par défaut, les options de configuration sont fusionnées avec la propriété
+``$_defaultConfig``. Cette propriété doit définir les valeurs par défaut de
+toute configuration dont votre helper a besoin. Par exemple::
 
-Une configuration courante est d'utiliser l'option ``className``, qui vous
-permet de créer des alias de helper dans vos vues. Cette fonctionnalité est
-utile quand vous voulez remplacer ``$this->Html`` ou tout autre Helper de
-référence avec une mise en oeuvre personnalisée::
+    namespace App\View\Helper;
+
+    use Cake\View\StringTemplateTrait;
+
+    class AwesomeHelper extends AppHelper {
+
+        use StringTemplateTrait;
+
+        protected $_defaultConfig = [
+            'errorClass' => 'error',
+            'templates' => [
+                'label' => '<label for="{{for}}">{{content}}</label>',
+            ],
+        ];
+
+        public function __construct(View $view, $config = []) {
+            parent::__construct($view, $config);
+            $this->initStringTemplates();
+        }
+    }
+
+Any configuration provided to your helper's constructor will be merged with the
+default values during construction and the merged data will be set to
+``_config``. You can use the ``config()`` method to read runtime configuration::
+
+    // Read the errorClass config option.
+    $class = $this->Awesome->config('errorClass');
+
+Using helper configuration allows you to declaratively configure your helpers and
+keep configuration logic out of your controller actions. If you have
+configuration options that cannot be included as part of a class declaration,
+you can set those in your controller's beforeRender callback::
+
+    class PostsController extends AppController {
+        public function beforeRender() {
+            parent::beforeRender();
+            $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
+        }
+    }
+
+
+Aliasing Helpers
+----------------
+
+One common setting to use is the ``className`` option, which allows you to
+create aliased helpers in your views. This feature is useful when you want to
+replace ``$this->Html`` or another common Helper reference with a custom
+implementation::
 
     // App/Controller/PostsController.php
     class PostsController extends AppController {
@@ -100,29 +148,15 @@ référence avec une mise en oeuvre personnalisée::
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper {
-        // Ajouter votre code pour écraser le HtmlHelper du coeur
+        // Add your code to override the core HtmlHelper
     }
 
-Ce qui est au-dessus fera un *alias* de ``MyHtmlHelper`` vers ``$this->Html``
-dans vos vues.
+The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
 .. note::
 
-    Faire un alias d'un helper remplace cette instance partout où le helper
-    est utilisé, y compris dans les autres Helpers.
-
-L'utilisation des configurations du helper vous permet de configurer de manière
-déclarative vos helpers et de garder la logique de configuration de vos actions
-des controllers. Si vous avez des options de configuration qui ne peuvent pas
-être inclues comme des parties de déclaration de classe, vous pouvez les
-définir dans le callback beforeRender de votre controller::
-
-    class PostsController extends AppController {
-        public function beforeRender() {
-            parent::beforeRender();
-            $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
-        }
-    }
+    Aliasing a helper replaces that instance anywhere that helper is used,
+    including inside other Helpers.
 
 Utiliser les Helpers
 ====================
@@ -154,7 +188,7 @@ Méthodes de Callback
 
 Les Helpers disposent de plusieurs callbacks qui vous permettent d'augmenter
 le processus de rendu de vue. Allez voir la documentation de :ref:`helper-api`
-et :doc:`/core-libraries/collections` pour plus d'informations.
+et :doc:`/core-libraries/events` pour plus d'informations.
 
 Créer des Helpers
 =================

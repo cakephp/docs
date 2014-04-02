@@ -123,6 +123,8 @@ Cache
 * ``Cache::set()`` a été retirée. Il est recommandé que vous créiez des
   configurations de cache multiples pour remplacer les réglages de configuration
   d'exécution, ce qui était auparavant possible avec ``Cache::set()``.
+* Toutes les sous-classes ``CacheEngine`` integrent maintenant une méthode
+  ``config()``.
 
 Toutes les méthodes de :php:class:`Cake\\Cache\\Cache\\CacheEngine` sont
 maintenant responsables de la gestion du préfix de clé configuré.
@@ -130,6 +132,7 @@ maintenant responsables de la gestion du préfix de clé configuré.
 durée d'écriture - la durée est prise par la configuration d'éxecution du
 moteur de cache. Appeler une méthode de cache avec une clé vide va maintenant
 lancer :php:class:`InvalidArgumentException`, au lieu de retourner false.
+
 
 Core
 ====
@@ -435,6 +438,12 @@ Component
 
 * La propriété ``_Collection`` est maintenant ``_registry``. Elle contient
   maintenant une instance de :php:class:`Cake\\Controller\\ComponentRegistry`.
+* Tous les components doivent maintenant utiliser la méthode ``config()`` pour
+  récupérer/définir la configuration.
+* La configuration par défaut pour les components doit être définie dans la
+  propriété ``$_defaultConfig``. Cette propriété est automatiquement fusionnée
+  avec toute configuration fournie au constructeur.
+* Les options de configuration ne sont plus définie en propriété public.
 
 Controller\\Components
 ======================
@@ -449,6 +458,7 @@ CookieComponent
   méthode ``cipher`` sont maintenant illisible parce que ``Security::cipher()``
   a été retirée. Vous aurez besoin de re-crypter les cookies avec la méthode
   ``rijndael`` avant mise à niveau.
+- Les options de configuration ne sont plus définie en propriété public.
 
 AuthComponent
 -------------
@@ -462,6 +472,7 @@ AuthComponent
 - La classe ``BlowfishAuthenticate`` a été retirée. Utilisez juste
   ``FormAuthenticate`` avec ``hashType`` défini à ``Blowfish``.
 - La méthode ``loggedIn()`` a été retirée. Utilisez ``user()`` à la place.
+- Les options de configuration ne sont plus définie en propriété public.
 
 RequestHandlerComponent
 -----------------------
@@ -478,6 +489,7 @@ RequestHandlerComponent
   :php:meth:`Cake\\Network\\Request::clientIp()` à la place.
 - ``RequestHandler::mapType()`` a été retirée, utilisez
   :php:meth:`Cake\\Network\\Response::mapType()` à la place.
+- Les options de configuration ne sont plus définie en propriété public.
 
 SecurityComponent
 -----------------
@@ -572,27 +584,6 @@ avec les noms de controller:
 - ``Errors`` est maintenant ``Error``
 - ``Emails`` est maintenant ``Email`` (idem pour ``Email`` dans ``Layout``)
 
-Helper
-------
-
-- :php:meth:`Cake\\View\\Helper::clean()` a été retirée. Il n'était jamais assez
-  robuste pour complètement empêcher XSS. A la place, vous devriez echapper
-  le contenu avec :php:func:`h` ou utiliser une librairie dédiée comme
-  HTMLPurifier.
-- :php:meth:`Cake\\View\\Helper::output()` a été retirée. Cette méthode a été
-  dépréciée dans 2.x.
-- Les accesseurs magiques pour les propriétés dépréciées ont été retirés. Les
-  propriétés suivantes ont maintenant besoin d'être accédées à partir de l'objet
-  request:
-
-  - base
-  - here
-  - webroot
-  - data
-  - action
-  - params
-
-
 HelperCollection remplacée
 --------------------------
 
@@ -632,6 +623,27 @@ JsonView
 
 View\\Helper
 ============
+
+- La propriété ``$settings`` est maintenant appelée ``$_config`` et peut être
+  accesible via la méthode ``config()``.
+- Les options de configuration ne sont plus définies en propriété public.
+- :php:meth:`Cake\\View\\Helper::clean()` a été retirée. Il n'était jamais assez
+  robuste pour complètement empêcher XSS. A la place, vous devriez echapper
+  le contenu avec :php:func:`h` ou utiliser une librairie dédiée comme
+  HTMLPurifier.
+- :php:meth:`Cake\\View\\Helper::output()` a été retirée. Cette méthode a été
+  dépréciée dans 2.x.
+- Les accesseurs magiques pour les propriétés dépréciées ont été retirés. Les
+  propriétés suivantes ont maintenant besoin d'être accédées à partir de l'objet
+  request:
+
+  - base
+  - here
+  - webroot
+  - data
+  - action
+  - params
+
 
 Helper
 ------

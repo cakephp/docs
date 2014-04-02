@@ -20,27 +20,27 @@ permet de définir la façon dont le Component cookie fonctionne.
 +-----------------+--------------+------------------------------------------------------+
 | variable Cookie | par défaut   | description                                          |
 +=================+==============+======================================================+
-| string $name    |'CakeCookie'  | Le nom du cookie                                     |
+| string name     |'CakeCookie'  | Le nom du cookie                                     |
 +-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | Cette chaîne de caractère est utilisée pour chiffrer |
+| string key      | null         | Cette chaîne de caractère est utilisée pour chiffrer |
 |                 |              | la valeur écrite dans le cookie. Cette chaîne devrait|
 |                 |              | être aléatoire et difficile à deviner.               |
 |                 |              | Quand on utilise le chiffrement rijndael, cette      |
 |                 |              | valeur doit être plus grande que 32 bytes.           |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
+| string domain   | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
 |                 |              | Utiliser '.votredomaine.com' pour autoriser les      |
 |                 |              | accès depuis tout vos sous-domaines                  |
 +-----------------+--------------+------------------------------------------------------+
 | int or string   | '5 Days'     | Le moment ou votre cookie expirera. Les entiers sont |
-| $time           |              | Interpretés comme des secondes et une valeur de 0 est|
+| time            |              | Interpretés comme des secondes et une valeur de 0 est|
 |                 |              | équivalente à une 'session cookie':ex. le cookie     |
 |                 |              | expire quand le navigateur est fermé. Si une chaîne  |
 |                 |              | est définie ce sera interprété avec la fonction PHP  |
 |                 |              | strtotime(). Vous pouvez définir cela a l'intérieur  |
 |                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| string $path    | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
+| string path     | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
 |                 |              | appliqué. Si $path est paramétré à '/foo/', il       |
 |                 |              | ne sera disponible que dans le repertoires /foo/     |
 |                 |              | et tous les sous repertoires comme /foo/bar/ de votre|
@@ -48,14 +48,14 @@ permet de définir la façon dont le Component cookie fonctionne.
 |                 |              | Vous pouvez définir cela directement  à l'intérieur  |
 |                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| boolean $secure | false        | Indique que le cookie ne devrait être transmis qu'au |
+| boolean secure  | false        | Indique que le cookie ne devrait être transmis qu'au |
 |                 |              | travers une connexion HTTPS sécurisée. Quand cela est|
 |                 |              | défini à true, le cookie ne sera défini que si une   |
 |                 |              | connexion sécurisé existe.Vous pouvez définir cela   |
 |                 |              | directement à l'intérieur de la méthode write()      |
 +-----------------+--------------+------------------------------------------------------+
 | boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
-| $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
+| httpOnly        |              | HTTP. Les cookies seulement HTTP ne sont pas         |
 |                 |              | disponibles en JavaScript                            |
 +-----------------+--------------+------------------------------------------------------+
 
@@ -68,19 +68,18 @@ d'une connexion sécurisée, qui est disponible au chemin
 ::
 
     public $components = array('Cookie');
+
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Cookie->name = 'baker_id';
-        $this->Cookie->time = 3600;  // ou '1 hour'
-        $this->Cookie->path = '/bakers/preferences/';
-        $this->Cookie->domain = 'example.com';
-        $this->Cookie->secure = true;  // ex. seulement envoyé si on utilise un HTTPS sécurisé
-        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
-        $this->Cookie->httpOnly = true;
+        $this->Cookie->config('name', 'baker_id');
+        $this->Cookie->config('time', 3600);  // or '1 hour'
+        $this->Cookie->config('path', '/bakers/preferences/');
+        $this->Cookie->config('domain', 'example.com');
+        $this->Cookie->config('secure', true);  // i.e. only sent if using secure HTTPS
+        $this->Cookie->config('key, 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^');
+        $this->Cookie->config('httpOnly', true);
+        $this->Cookie->type('aes');
     }
-
-Ensuite, regardons comment utiliser les différentes méthodes du Component
-Cookie.
 
 Utiliser le Component
 =====================
@@ -149,9 +148,6 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
     Utilisé pour vérifier si une clé/chemin existe et a une valeur non null.
 
-    .. versionadded:: 2.3
-        ``CookieComponent::check()`` a été ajoutée dans la versoin 2.3
-
 .. php:method:: delete(mixed $key)
 
     Efface une variable de cookie du nom défini dans $key. Fonctionne avec la
@@ -170,11 +166,8 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 .. php:method:: type($type)
 
     Vous permet de changer le schéma de chiffrement. Par défaut, le schéma
-    'cipher' est utilisé. Cependant, vous devriez utiliser le schéma 'rijndael'
-    pour une sécurité améliorée.
-
-    .. versionchanged:: 2.2
-        Le type 'rijndael' a été ajouté.
+    'cipher' est utilisé. Cependant, vous devriez toujours utiliser les schémas
+    'rijndael' ou 'aes'.
 
 
 .. meta::

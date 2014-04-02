@@ -41,30 +41,33 @@ de vos controllers::
         ];
 
 La portion de code précédente est un exemple de configuration d'un component
-avec le tableau ``$components``. Tous les components du coeur permettent aux
-paramètres d'être configurés dans la méthode de votre controller
-``beforeFilter()``. C'est utile quand vous avez besoin d'assigner les résultats
-d'une fonction à la propriété d'un component. Ceci peut aussi être exprimé
+avec le tableau ``$components``. Vous pouvez configurer les components à la
+volée en utilisant la méthode ``config()``. Souvent, ceci est fait dans la
+méthode ``beforeFilter()`` de votre controller. Ceci peut aussi être exprimé
 comme ceci::
 
     public function beforeFilter() {
-        $this->Auth->authorize = ['controller'];
-        $this->Auth->loginAction = ['controller' => 'users', 'action' => 'login'];
+        $this->Auth->config('authorize', ['controller']);
+        $this->Auth->config('loginAction', ['controller' => 'users', 'action' => 'login']);
 
-        $this->Cookie->name = 'CookieMonster';
+        $this->Cookie->config('name', 'CookieMonster');
     }
 
-C'est possible, cependant, que le component nécessite certaines options de
-configuration avant que le controller ``beforeFilter()`` soit lancé.
-Pour cela, certains components permettent aux options de configuration
-d'être définies dans le tableau ``$components``::
+Comme les helpers, les components ont une méthode ``config()`` qui est utilisée
+pour récupérer et définir toutes les configurations pour un component::
 
-    public $components = [
-        'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
-    ];
+    // Lire des données de config.
+    $this->Auth->config('loginAction');
 
-Consultez la documentation appropriée pour connaître les options de
-configuration que chaque component fournit.
+    // Définir la config
+    $this->Csrf->config('cookieName', 'token');
+
+Comme avec les helpers, les components vont automatiquement fusionner leur
+propriété ``$_defaultConfig`` avec le configuration du constructeur pour créer
+la propriété ``$_config`` qui est accessible avec ``config()``.
+
+Faire des alias avec les Components
+-----------------------------------
 
 Un paramètre commun à utiliser est l'option ``className``, qui vous autorise
 les alias des components. Cette fonctionnalité est utile quand vous voulez
