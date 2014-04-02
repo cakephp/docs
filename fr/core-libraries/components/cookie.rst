@@ -78,7 +78,7 @@ d'une connexion sécurisée, qui est disponible au chemin
         $this->Cookie->config('secure', true);  // i.e. only sent if using secure HTTPS
         $this->Cookie->config('key, 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^');
         $this->Cookie->config('httpOnly', true);
-        $this->Cookie->type('aes');
+        $this->Cookie->encryption('aes');
     }
 
 Utiliser le Component
@@ -163,11 +163,10 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
     Detruit le cookie actuel.
 
-.. php:method:: type($type)
+.. php:method:: encryption($type)
 
-    Vous permet de changer le schéma de chiffrement. Par défaut, le schéma
-    'cipher' est utilisé. Cependant, vous devriez toujours utiliser les schémas
-    'rijndael' ou 'aes'.
+    Vous permet de changer le schéma de chiffrement. Vous pouvez utiliser soit
+    le schema 'rijndael', soit le schema 'aes'. Par défaut à 'aes'.
 
 
 .. meta::
