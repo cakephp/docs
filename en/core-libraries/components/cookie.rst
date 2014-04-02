@@ -75,7 +75,7 @@ only::
         $this->Cookie->config('secure', true);  // i.e. only sent if using secure HTTPS
         $this->Cookie->config('key, 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^');
         $this->Cookie->config('httpOnly', true);
-        $this->Cookie->type('aes');
+        $this->Cookie->encryption('aes');
     }
 
 Using the Component
@@ -159,11 +159,10 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     Destroys the current cookie.
 
-.. php:method:: type($type)
+.. php:method:: encryption($type)
 
-    Allows you to change the encryption scheme. By default the 'cipher' scheme is used for
-    backwards compatibility. However, you should always use either the 'rijndael' or
-    'aes' schemes.
+    Allows you to change the encryption scheme. You can use either the 'rijndael'
+    or 'aes' schemes. Default is 'aes'.
 
 
 .. meta::

@@ -419,6 +419,8 @@ CookieComponent
 - Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
   need to re-encrypt cookies with the ``rijndael`` method before upgrading.
+- ``CookieComponent::type()`` has been renamed to more intuitive
+  :php:meth:`Cake\\Controller\\Component\CookieComponent::encryption()`.
 - Configuration options are no longer set as public properties.
 
 AuthComponent
