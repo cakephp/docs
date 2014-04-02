@@ -771,7 +771,7 @@ quelles options sont disponibles.
     testExtract() dans ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
-.. php:staticmethod:: filter($var, $isArray=null)
+.. php:staticmethod:: filter($var)
 
     :rtype: array
 
