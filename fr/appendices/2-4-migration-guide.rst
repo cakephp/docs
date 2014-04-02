@@ -139,13 +139,13 @@ HtmlHelper
 TextHelper
 ----------
 
-- :php:meth::`TextHelper::autoParagraph()` a été ajoutée. Elle permet de
+- :php:meth:`TextHelper::autoParagraph()` a été ajoutée. Elle permet de
   convertir automatiquement les paragraphes de test en HTML.
 
 PaginatorHelper
 ---------------
 
-- :php:meth::`PaginatorHelper::param()` a été ajoutée.
+- :php:meth:`PaginatorHelper::param()` a été ajoutée.
 - La première page ne contient plus ``/page:1`` ou ``?page=1`` dans l'URL. Cela
   évite les problèmes de contenu dupliqué, où vous avez besoin d'utiliser
   canonical ou noindex de toute façon.
