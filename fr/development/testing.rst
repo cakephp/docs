@@ -726,6 +726,8 @@ tester les méthodes comme :php:meth:`~Controller::redirect()`.
 Disons que vous avez un controller typique Articles, et son model
 correspondant. Le code du controller ressemble à ceci::
 
+    App::uses('AppController', 'Controller');
+
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -809,6 +811,8 @@ redirection. La raison pour cela est que ``redirect()`` est mocked dans les
 tests, et n'échappe pas comme à la normale. Et à la place de votre code
 existant, il va continuer de lancer le code suivant le redirect. Par exemple::
 
+    App::uses('AppController', 'Controller');
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -823,6 +827,8 @@ existant, il va continuer de lancer le code suivant le redirect. Par exemple::
 Quand vous testez le code ci-dessus, vous allez toujours lancer
 ``// plus de code`` même si le redirect est atteint. A la place, vous
 devriez écrire le code comme ceci::
+
+    App::uses('AppController', 'Controller');
 
     class ArticlesController extends AppController {
         public function add() {
