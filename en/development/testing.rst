@@ -729,6 +729,8 @@ test methods like :php:meth:`~Controller::redirect()`.
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
