@@ -460,7 +460,7 @@ using special markers::
 Other Methods
 =============
 
-.. php:method:: url($options = [], $model = null)
+.. php:method:: url(array $options = [], $model = null, $full = false)
 
     :param array $options: Pagination/URL options array. As used on
         ``options()`` or ``link()`` method.
@@ -469,7 +469,7 @@ Other Methods
     By default returns a full pagination URL string for use in non-standard
     contexts (i.e. JavaScript).::
 
-        echo $this->Paginator->url(array('sort' => 'title'));
+        echo $this->Paginator->generateUrl(array('sort' => 'title'));
 
 .. php:method:: defaultModel()
 
