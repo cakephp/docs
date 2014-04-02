@@ -365,9 +365,9 @@ Controller
   configuration defined in your AppController, and some configuration defined in
   a subclass, only the configuration in the subclass will be used.
 - ``Controller::httpCodes()`` has been removed, use
-  :php:meth::`Cake\\Network\\Response::httpCodes()` instead.
+  :php:meth:`Cake\\Network\\Response::httpCodes()` instead.
 - ``Controller::disableCache()`` has been removed, use
-  :php:meth::`Cake\\Network\\Response::disableCache()` instead.
+  :php:meth:`Cake\\Network\\Response::disableCache()` instead.
 - ``Controller::flash()`` has been removed. This method was rarely used in real
   applications and served no purpose anymore.
 - ``Controller::validate()`` and ``Controller::validationErrors()`` have been
