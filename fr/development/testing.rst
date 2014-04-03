@@ -28,10 +28,11 @@ PHPUnit, lancez ce qui suit::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+    pear install pear.phpunit.de/PHPUnit-3.7.32
 
 .. note::
 
+    PHPUnit 4 n'est pas compatible avec les Tests Unitaires de CakePHP.
     Selon votre configuration de système, vous aurez peut-être besoin de lancer
     les commandes précédentes avec ``sudo``
 
@@ -46,7 +47,7 @@ Installer PHPUnit avec Composer
 Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
 ``require`` de votre application dans son ``package.json``::
 
-    "phpunit/PHPUnit": ">=3.7.0",
+    "phpunit/phpunit": "3.7.*",
 
 Après avoir mis à jour votre package.json, lancez à nouveau Composer dans votre
 répertoire d'application::
