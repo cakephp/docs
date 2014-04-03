@@ -69,7 +69,7 @@ which for this example will be ``Ingredient.php``.
     your model file isn't named correctly (for instance, if it is named 
     ingredient.php or Ingredients.php rather than Ingredient.php), 
     CakePHP will use an instance of AppModel rather
-    than your model file (which CakePHP's assumes is missing). If
+    than your model file (which CakePHP assumes is missing). If
     you're trying to use a method you've defined in your model, or a
     behavior attached to your model, and you're getting SQL errors that
     are the name of the method you're calling, it's a sure sign that
