@@ -401,9 +401,9 @@ Controller
   fusionnées avec **toutes** les classes parentes, pas seulement
   ``AppController`` et le app controller du plugin.
 - ``Controller::httpCodes()`` a été retirée, utilisez
-  :php:meth::`Cake\\Network\\Response::httpCodes()` à la place.
+  :php:meth:`Cake\\Network\\Response::httpCodes()` à la place.
 - ``Controller::disableCache()`` a été retirée, utilisez
-  :php:meth::`Cake\\Network\\Response::disableCache()` à la place.
+  :php:meth:`Cake\\Network\\Response::disableCache()` à la place.
 - ``Controller::flash()`` a été retirée. Cette méthode était rarement utilisée
   dans les vraies applications et ne n'avait plus aucun intérêt.
 - ``Controller::validate()`` et ``Controller::validationErrors()`` ont été
