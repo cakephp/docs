@@ -368,6 +368,7 @@ back at our Articles model and make a few adjustments::
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
+    use Cake\Validation\Validator;
 
     class ArticlesTable extends Table {
 
