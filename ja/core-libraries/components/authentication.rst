@@ -673,7 +673,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 抽象メソッドの ``hash()`` と ``check()`` を実装する必要があります。
 ``app/Controller/Component/Auth/CustomPasswordHasher.php`` に次のように記述します::
 
-    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
+    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {

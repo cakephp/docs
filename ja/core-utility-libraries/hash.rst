@@ -122,7 +122,7 @@ Hash パス構文
 
     :rtype: mixed
 
-    ``get()`` は ``extract()`` のシンプル版で、直接的に指定するパス式のみがサポートされます。 
+    ``get()`` は ``extract()`` のシンプル版で、直接的に指定するパス式のみがサポートされます。
     ``{n}`` や ``{s}`` 、マッチャを使ったパスはサポートされません。
     配列から１つの値だけを取り出したい場合に ``get()`` を使ってください。
 
@@ -175,7 +175,7 @@ Hash パス構文
                 )
         )
 
-    
+
     ``{n}`` や ``{s}`` を使ったパスを使うことで、複数のポイントにデータを挿入することができます::
 
         $users = $this->User->find('all');
@@ -710,7 +710,7 @@ Hash パス構文
         // $result == 2
 
 ..
-    Counts the dimensions of an array. This method will only 
+    Counts the dimensions of an array. This method will only
     consider the dimension of the first element in the array::
 
 .. php:staticmethod:: maxDimensions(array $data)

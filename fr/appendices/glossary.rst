@@ -12,7 +12,7 @@ Glossaire
     attributs HTML
         Un tableau de clé => valeurs qui sont composées dans les attributs 
         HTML. Par exemple::
-            
+
             // Par exemple
             array('class' => 'ma-classe', '_target' => 'blank')
 
@@ -21,19 +21,19 @@ Glossaire
 
         Si une option peut être minimisée ou a le même nom que sa valeur, alors 
         ``true`` peut être utilisée::
-        
+
             // Par exemple
             array('checked' => true)
             
             // Générerait
             checked="checked"
-    
+
     syntaxe de plugin
         La syntaxe de Plugin fait référence au nom de la classe avec un point 
         en séparation indiquant que les classes sont une partie d'un plugin.
         Par ex: ``DebugKit.Toolbar``, le plugin est DebugKit,
         et le nom de classe est Toolbar.
-    
+
     notation avec points
         La notation avec points définit un chemin de tableau, en séparant les 
         niveaux imbriqués avec ``.``

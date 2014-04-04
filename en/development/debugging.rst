@@ -60,7 +60,7 @@ Using the Debugger Class
 To use the debugger, first ensure that Configure::read('debug') is
 set to ``true``.
 
-.. php:staticmethod:: Debugger::dump($var)
+.. php:staticmethod:: Debugger::dump($var, $depth = 3)
 
     Dump prints out the contents of a variable. It will print out all
     properties and methods (if any) of the supplied variable::
@@ -95,13 +95,19 @@ set to ``true``.
         In 2.1 forward the output was updated for readability. See
         :php:func:`Debugger::exportVar()`
 
-.. php:staticmethod:: Debugger::log($var, $level = 7)
+    .. versionchanged:: 2.5.0
+        The ``depth`` parameter was added.
+
+.. php:staticmethod:: Debugger::log($var, $level = 7, $depth = 3)
 
     Creates a detailed stack trace log at the time of invocation. The
     log() method prints out data similar to that done by
     Debugger::dump(), but to the debug.log instead of the output
     buffer. Note your app/tmp directory (and its contents) must be
     writable by the web server for log() to work correctly.
+
+    .. versionchanged:: 2.5.0
+        The ``depth`` parameter was added.
 
 .. php:staticmethod:: Debugger::trace($options)
 
@@ -194,11 +200,10 @@ statically anywhere in your application one CakeLog has been loaded::
 Debug Kit
 =========
 
-DebugKit is a plugin that provides a number of good debugging tools. It primarily
-provides a toolbar in the rendered HTML, that provides a plethora of information about
-your application and the current request. You can download
-`DebugKit <https://github.com/cakephp/debug_kit>`_ from github.
-
+DebugKit is a plugin that provides a number of good debugging tools. It
+primarily provides a toolbar in the rendered HTML, that provides a plethora of
+information about your application and the current request. You can download
+`DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
 
 .. meta::
     :title lang=en: Debugging

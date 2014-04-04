@@ -23,16 +23,16 @@ CakePHPでの開発にはこれらの規約の利用をお勧めしますが、�
 アンダースコアが付けられたコントローラメソッドは web 上では見えないように設定され、内部での利用のみ可能になります。例えば::
 
     class NewsController extends AppController {
-    
+
         public function latest() {
             $this->_findNewArticles();
         }
-        
+
         protected function _findNewArticles() {
             //最新のニュース記事を取得するロジック
         }
     }
-    
+
 
 http://www.example.com/news/latest/ のページにユーザーがアクセス可能であっても、 http://www.example.com/news/\_findNewArticles/ を取得しようとするとエラーになるでしょう。
 なぜなら、メソッドの先頭にアンダースコアが付いているからです。
@@ -69,14 +69,14 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 -  **KissesAndHugsController** というコントローラのクラスは、
    **KissesAndHugsController.php** という名前にします。
 -  **MyHandyComponent** というコンポーネントのクラスは、
-   **MyHandyComponent.php** というファイル名にします。 
--  **OptionValue** というモデルのクラスは、 
+   **MyHandyComponent.php** というファイル名にします。
+-  **OptionValue** というモデルのクラスは、
    **OptionValue.php** というファイル名にします。
 -  **EspeciallyFunkableBehavior** というビヘイビアのクラスは、
    **EspeciallyFunkableBehavior.php** というファイル名にします。
 -  **SuperSimpleView** というビューのクラスは、
    **SuperSimpleView.php** というファイル名にします。
--  **BestEverHelper** というヘルパーのクラスは、 
+-  **BestEverHelper** というヘルパーのクラスは、
    **BestEverHelper.php** というファイル名にします。
 
 各ファイルは、 app フォルダ内のそれぞれ適切なフォルダの中に配置します。
@@ -113,7 +113,7 @@ join テーブルのデータを直接操作したい場合は、直接 :ref:`qu
     id INT(10) NOT NULL AUTO_INCREMENT,
     post_id INT(10) NOT NULL,
     tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
+    PRIMARY KEY(id));
 
 また、主キーをオートインクリメントとしてではなく、char(36)として使用しても構いません。
 そうすると、Model::save メソッドを使って新規レコードを保存するとき、Cakeはユニークな36文字のuuid (String::uuid) を用いようとします。
@@ -141,4 +141,3 @@ PeopleControllerクラスのgetReady()関数は、ビューテンプレートと
 
 さて、これでCakePHPの基本について一通り理解できました。
 物事がどう組み合わせられるかを確かめるために、 :doc:`/tutorials-and-examples/blog/blog` を体験することができるでしょう。
-

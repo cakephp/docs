@@ -3,11 +3,14 @@ Bienvenue
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Nous espérons maintenir une documentation pointue et de
-qualité. 
+qualité. Remarquez le bouton "Improve this Doc" dans le coin en haut à droite;
+il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
+vous permettant de facilement contribuer, d'ajouter, de supprimer ou corriger
+la documentation.
 
 .. container:: offline-download
 
-    **Lire le livre partout**
+    **Lire le Livre partout**
 
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
     EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
@@ -35,14 +38,14 @@ plus sur les :doc:`/controllers`.
 Views (vues)
 ------------
 
-Les vues (views) sont la représentation graphique des données dans CakePHP.
+Les views (vues) sont la représentation graphique des données dans CakePHP.
 Elles permettent de convertir les données extraites de models, dans le format
 de sortie demandé par le client. En savoir plus sur les :doc:`/views`.
 
 Models (modèles)
 ----------------
 
-Les modèles (Models) sont le coeur de votre application, ils gèrent la
+Les models (Modèles) sont le coeur de votre application. Ils gèrent la
 validation, le stockage et la récupération de vos données. En savoir plus
 sur les :doc:`/orm`.
 

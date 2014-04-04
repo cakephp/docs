@@ -30,6 +30,8 @@ Next step is to create our User model, responsible for finding, saving and
 validating any user data::
 
     // app/Model/User.php
+    App::uses('AppModel', 'Model');
+    
     class User extends AppModel {
         public $validate = array(
             'username' => array(
@@ -86,7 +88,9 @@ with CakePHP::
                     $this->Session->setFlash(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(
+                    __('The user could not be saved. Please, try again.')
+                );
             }
         }
 
@@ -100,7 +104,9 @@ with CakePHP::
                     $this->Session->setFlash(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(
+                    __('The user could not be saved. Please, try again.')
+                );
             } else {
                 $this->request->data = $this->User->read(null, $id);
                 unset($this->request->data['User']['password']);
@@ -121,6 +127,7 @@ with CakePHP::
             $this->Session->setFlash(__('User was not deleted'));
             return $this->redirect(array('action' => 'index'));
         }
+
     }
 
 In the same way we created the views for our blog posts or by using the code
@@ -162,8 +169,15 @@ file and add the following lines::
         public $components = array(
             'Session',
             'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+                'loginRedirect' => array(
+                    'controller' => 'posts', 
+                    'action' => 'index'
+                ),
+                'logoutRedirect' => array(
+                    'controller' => 'pages', 
+                    'action' => 'display', 
+                    'home'
+                )
             )
         );
 
@@ -191,7 +205,8 @@ the users add function and implement the login and logout action::
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Letting users register themselves
+        // Allow users to register and logout.
+        $this->Auth->allow('add', 'logout');
     }
 
     public function login() {
@@ -211,25 +226,30 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
-    App::uses('AuthComponent', 'Controller/Component');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
     class User extends AppModel {
 
     // ...
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                $this->data[$this->alias]['password']
+            );
         }
         return true;
     }
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the default hashing
-provided by the AuthComponent class. We're just missing a template view file for
-the login function, here it is:
+So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
+We're just missing a template view file for the login function. Open up your ``app/View/Users/login.ctp`` file and add the following lines:
 
 .. code-block:: php
+
+    //app/View/Users/login.ctp
 
     <div class="users form">
     <?= $this->Session->flash('auth') ?>
@@ -280,7 +300,8 @@ logged in user as a reference for the created post::
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
+            //Added this line
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); 
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -304,7 +325,11 @@ config::
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+            'logoutRedirect' => array(
+                'controller' => 'pages', 
+                'action' => 'display', 
+                'home'
+            ),
             'authorize' => array('Controller') // Added this line
         )
     );
@@ -341,7 +366,7 @@ and add the following content::
 
         // The owner of a post can edit and delete it
         if (in_array($this->action, array('edit', 'delete'))) {
-            $postId = $this->request->params['pass'][0];
+            $postId = (int) $this->request->params['pass'][0];
             if ($this->Post->isOwnedBy($postId, $user['id'])) {
                 return true;
             }

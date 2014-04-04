@@ -267,6 +267,7 @@ URL Rewriting
 =============
 
 .. toctree::
+    :maxdepth: 1
 
     installation/url-rewriting
 

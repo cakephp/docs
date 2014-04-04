@@ -8,10 +8,6 @@ just talking skeleton classes: Bake can create a fully functional
 application in just a few minutes. In fact, Bake is a natural step
 to take once an application has been scaffolded.
 
-Those new to Bake (especially Windows users) may find the
-`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
-helpful in setting things up before continuing.
-
 Depending on the configuration of your setup, you may have to set
 execute rights on the cake bash script or call it using ./cake
 bake. The cake console is run using the PHP CLI (command line

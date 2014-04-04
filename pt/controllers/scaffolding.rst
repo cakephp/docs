@@ -130,7 +130,7 @@ pode criar templates. Continuamos a não recomendar o uso desta técnica para
 aplicações em produção, mas tal customização pode ser útil durante o período de
 prototipação.
 
-A customização é feita criando templates de view::
+A customização é feita criando templates de view:
 
 Views de `scaffold` customizadas para um controller específico (PostsController
 neste example) devem ser colocadas no diretório das views desta maneira::

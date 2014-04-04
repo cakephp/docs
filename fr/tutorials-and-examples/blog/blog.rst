@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-******************
+##################
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
@@ -201,7 +201,7 @@ a été trouvé, et que CakePHP peut s'y connecter avec succès.
 Configuration facultative
 =========================
 
-Il y a trois autres élements qui peuvent être configurés. La plupart des
+Il y a quelques autres élements qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
@@ -220,7 +220,7 @@ difficile à deviner::
 Une note sur mod\_rewrite
 =========================
 
-Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
+Occasionnellement, les nouveaux utilisateurs peuvent avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
 (pas d'images ou de styles CSS), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
@@ -228,6 +228,7 @@ mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
 web fonctionne:
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

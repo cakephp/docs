@@ -61,7 +61,9 @@ afterFind によってデータをフォーマットする例を次に示しま�
     public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
-                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);
+                $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
+                    $val['Event']['begindate']
+                );
             }
         }
         return $results;
@@ -80,6 +82,15 @@ beforeValidate
 必要に応じてバリデーションルールを変更するために、このコールバックを使用します。
 この関数は *true* を返さなければなりません。
 そうでない場合、現在のsave()の実行が中断されます。
+
+afterValidate
+==============
+
+``afterValidate()``
+
+データのエラーチェックを行った後に呼ばれます。
+任意のデータのクリーンナップや準備をする必要がある場合には、このコールバックを使用して下さい。
+
 
 beforeSave
 ==========
@@ -104,9 +115,16 @@ beforeSaveによってどのように日付を加工するかの例を次に示�
 ::
 
     public function beforeSave($options = array()) {
-        if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
-            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
-            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+        if (!empty($this->data['Event']['begindate']) &&
+            !empty($this->data['Event']['enddate'])
+	) {
+
+            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['begindate']
+            );
+            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave(
+                $this->data['Event']['enddate']
+            );
         }
         return true;
     }
@@ -126,6 +144,7 @@ afterSave
 ``afterSave(boolean $created)``
 
 各save操作の後に実行する必要のあるロジックがある場合、このコールバックメソッドに置きます。
+保存したデータは ``$this->data`` で参照することができます。
 
 新しいオブジェクトが（更新ではなく）生成された場合、 ``$created`` はtrueになります。
 

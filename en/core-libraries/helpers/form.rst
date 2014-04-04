@@ -200,6 +200,9 @@ Context factory functions are where you can add logic for checking the form
 options for the correct type of entity. If matching input data is found you can
 return an object. If there is no match return null.
 
+    .. versionchanged:: 2.5
+        The ``$secureAttributes`` parameter was added in 2.5.
+
 .. _automagic-form-elements:
 
 Creating Form Inputs
@@ -695,6 +698,17 @@ Creating Input Elements
     .. code-block:: html
 
         <textarea name="notes"></textarea>
+
+    If the form is edited (that is, the array ``$this->request->data`` will
+    contain the information saved for the ``User`` model), the value
+    corresponding to ``notes`` field will automatically be added to the HTML 
+    generated. Example:
+
+    .. code-block:: html
+
+        <textarea name="data[User][notes]" id="UserNotes">
+        This text is to be edited.
+        </textarea>
 
     .. note::
 

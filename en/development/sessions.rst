@@ -176,6 +176,28 @@ The above will tell CakeSession to use the built-in 'database' defaults, and
 specify that a model called ``CustomSession`` will be the delegate for saving
 session information to the database.
 
+If you do not need a fully custom session handler, but still require
+database-backed session storage, you can simplify the above code to::
+
+    Configure::write('Session', array(
+        'defaults' => 'database'
+    ));
+
+This configuration will require a database table to be added with
+at least these fields::
+
+    CREATE TABLE `cake_sessions` (
+      `id` varchar(255) NOT NULL DEFAULT '',
+      `data` text,
+      `expires` int(11) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    );
+
+You can also use the schema shell to create this table using the schema file
+provided in the default app skeleton::
+
+    $ Console/cake schema create sessions
+
 Cache Sessions
 --------------
 

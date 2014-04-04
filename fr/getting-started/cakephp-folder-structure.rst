@@ -55,7 +55,7 @@ Console
 Controller
     Contient vos Controllers et leurs Components.
 Lib
-    Contient les librairies internes qui ne proviennent pas de librairies
+    Contient les librairies qui ne proviennent pas de librairies
     externes. Cela vous permet de séparer les librairies internes de votre
     organisme des librairies externes.
 Locale
@@ -76,4 +76,4 @@ View
 
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
-    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connection,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp
+    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connexion,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

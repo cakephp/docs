@@ -184,15 +184,10 @@ Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
 URL va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
-Si vous pensez utiliser des arguments nommés personnalisés avec votre route,
-vous devrez avertir le routeur de cela en utilisant la fonction
-:php:meth:`Router::connectNamed()`. Donc si vous voulez que la route ci-dessus
-matchent les URLs comme ``/cooks/some_action/type:chef``, nous faisons::
-
-    Router::connectNamed(array('type'));
-    Router::connect(
-        '/cooks/:action/*', array('controller' => 'users')
-    );
+Par défaut tous les paramètres nommés passés et les arguments sont extraits
+des URLs qui matchent ces templates gourmands. Cependant, vous pouvez configurer
+comment et quels arguments nommés sont parsés en utilisant
+:php:meth:`Router::connectNamed()` si vous en avez besoin.
 
 .. _route-elements:
 
@@ -681,7 +676,7 @@ URLs, vous pouvez utiliser la syntaxe suivante::
         'controller' => 'posts',
         'action' => 'index',
         'filter' => array(
-            'published' => 1
+            'published' => 1,
             'frontpage' => 1
         )
     ));
@@ -693,7 +688,7 @@ controller en tableau, de la même façon que vous les envoyez au
 :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
-        'published' => 1
+        'published' => 1,
         'frontpage' => 1
     );
 

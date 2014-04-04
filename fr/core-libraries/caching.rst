@@ -37,6 +37,9 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``MemcacheEngine`` Utilise l'extension `Memcache <http://php.net/memcache>`_.
   Memcache fournit un cache très rapide qui peut être distribué au travers
   de nombreux serveurs, et fournit les opérations atomiques.
+* ``MemcachedEngine`` Utilise l'extension
+  `Memcached <http://php.net/memcached>`_. Elle est aussi une interface avec
+  memcache mais fournit une meilleur performance.
 * ``RedisEngine`` Utilise l'extension
   `phpredis <https://github.com/nicolasff/phpredis>`_. Redis fournit un système
   de cache cohérent et rapide similaire à memcached, et fournit aussi des
@@ -47,6 +50,9 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
     certain nombre de personnes avait des difficultés à configurer et déployer
     APC correctement dans les deux cli + web. Utiliser les fichiers devrait
     faciliter la configuration de CakePHP pour les nouveaux développeurs.
+
+.. versionchanged:: 2.5
+    Le moteur Memcached a été ajouté. Et le moteur Memecache a été déprécié.
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
 application interagit avec :php:class:`Cache` de manière cohérente. Cela
@@ -208,7 +214,7 @@ Une méthode qui utilise Le Cache pour stocker les résultats pourrait ressemble
 
         public function newest() {
             $result = Cache::read('newest_posts', 'longterm');
-            if (!$result) {
+            if ($result === false) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
                 Cache::write('newest_posts', $result, 'longterm');
             }
@@ -219,6 +225,23 @@ Une méthode qui utilise Le Cache pour stocker les résultats pourrait ressemble
 Vous pouvez améliorer le code ci-dessus en déplaçant la lecture du cache
 dans un comportement, qui lit depuis le cache, ou qui exécute les méthodes
 de model. C'est un exercice que vous pouvez faire.
+
+Depuis 2.5, vous pouvez accomplir ce qui est au-dessus de façon bien plus simple
+en utilisant :php:meth:`Cache::remember()`. Utiliser la nouvelle
+méthode ci-dessous ressemblerait à ceci::
+
+    class Post extends AppModel {
+
+        public function newest() {
+            $model = $this;
+            return Cache::remember('newest_posts', function() use ($model){
+                return $model->find('all', array(
+                    'order' => 'Post.updated DESC',
+                    'limit' => 10
+                ));
+            }, 'longterm');
+        }
+    }
 
 Utilisation du Cache pour stocker les compteurs
 ===============================================
@@ -245,7 +268,7 @@ Après avoir défini une valeur entière vous pouvez la manipuler en utilisant
 .. note::
 
     L'incrémentation et la décrémentation ne fonctionne pas avec le moteur
-    FileEngine. Vous devez utiliser APC ou Memcache en remplacement.
+    FileEngine. Vous devez utiliser APC ou Memcached en remplacement.
 
 Utilisation des groupes
 =======================
@@ -276,7 +299,7 @@ Cache de retirer toutes les entrées associées au groupe ``post``::
 
     // Model/Post.php
 
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
         }
@@ -294,7 +317,7 @@ même groupe::
      * Une variation de l\'exemple précédent qui nettoie toutes les
      * configurations de Cache ayant le même groupe
      */
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             $configs = Cache::groupConfigs('post');
             foreach ($configs['post'] as $config) {
@@ -430,7 +453,30 @@ l'API de Cache
 
     :return: Tableau de groups et leurs noms de configuration liés.
 
-    Récupère les noms de group pour configurer la coorespondance.
+    Récupère les noms de group pour configurer la correspondance.
+
+.. php:staticmethod:: remember($key, $callable, $config = 'default')
+
+    Fournit une manière facile pour faire la lecture à travers la mise en cache.
+    Si la clé cache existe, elle sera retournée. Si la clé n'existe pas, la
+    callable sera invoquée et les résultats stockés dans le cache au niveau de
+    la clé fournie.
+
+    Par exemple, vous voulez souvent mettre en cache les résultats de requête.
+    Vous pouvez utiliser ``remember()`` pour faciliter ceci. En estimant
+    que vous utilisiez PHP5.3 ou supérieur::
+
+        class Articles extends AppModel {
+            function all() {
+                $model = $this;
+                return Cache::remember('all_articles', function() use ($model){
+                    return $model->find('all');
+                });
+            }
+        }
+
+    .. versionadded:: 2.5
+        remember() a été ajoutée dans 2.5.
 
 .. meta::
     :title lang=fr: Mise en cache

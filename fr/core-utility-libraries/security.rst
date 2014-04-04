@@ -3,8 +3,8 @@ Security
 
 .. php:class:: Security
 
-La `librairie security <http://api.cakephp.org/2.3/class-Security.html>`_
-gère les mesures basiques de sécurité comme les méthodes fournies pour
+La `librairie security <http://api.cakephp.org/2.4/class-Security.html>`_
+gère les mesures basiques de sécurité telles que les méthodes fournies pour
 le hashage et les données chiffrées.
 
 L'API de Security
@@ -22,8 +22,10 @@ L'API de Security
         // Plus tard, déchiffrez votre mot de passe secret
         $nosecret = Security::cipher($secret, 'my_key');
 
-    ``cipher()`` utilise un cipher XOR **faible** et **ne** doit **pas** être
-    utilisé pour des données importantes ou sensibles.
+    .. warning::
+
+        ``cipher()`` utilise un cipher XOR **faible** et **ne** doit **pas**
+        être utilisé pour des données importantes ou sensibles.
 
 .. php:staticmethod:: rijndael($text, $key, $mode)
 
@@ -50,6 +52,53 @@ L'API de Security
 
     .. versionadded:: 2.2
         ``Security::rijndael()`` a été ajoutée pour la version 2.2.
+
+.. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
+
+    :param string $plain: La valeur à chiffrer.
+    :param string $key: La clé 256 bit/32 byte à utiliser en clé cipher.
+    :param string $hmacSalt: Le sel à utiliser pour le processus HMAC. Laissez null pour utiliser Security.salt.
+
+    Chiffre ``$text`` en utilisant AES-256. La ``$key`` devrait être une valeur
+    avec beaucoup de différence dans les données un peu comme un bon mot de
+    passe. Le résultat retourné sera la valeur chiffrée avec un checksum HMAC.
+
+    Cette méthode **ne** devrait **jamais** être utilisée pour stocker des mots
+    de passe. A la place, vous devriez utiliser la manière de hasher les mots
+    de passe fournie par :php:meth:`~Security::hash()`.
+    Un exemple d'utilisation serait::
+
+        // En supposant que la clé est stockée quelque part, elle peut être
+        // réutilisée pour le déchiffrement plus tard.
+        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+        $result = Security::encrypt($value, $key);
+
+    Les valeurs chiffrés peuvent être déchiffrées en utilisant
+    :php:meth:`Security::decrypt()`.
+
+    .. versionadded:: 2.5
+
+.. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
+
+    :param string $cipher: Le ciphertext à déchiffrer.
+    :param string $key: La clé 256 bit/32 byte à utiliser pour une clé cipher.
+    :param string $hmacSalt: Le sel à utiliser pour un processus HMAC. Laissez null pour utiliser Security.salt.
+
+    Déchiffre une valeur chiffrée au préalable. Les paramètres ``$key`` et
+    ``$hmacSalt`` doivent correspondre aux valeurs utilisées pour chiffrer ou
+    alors le déchiffrement sera un échec. Un exemple d'utilisation serait::
+
+        // En supposant que la clé est stockée quelque part, elle peut être
+        // réutilisée pour le déchiffrement plus tard.
+        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+
+        $cipher = $user['User']['secrets'];
+        $result = Security::decrypt($cipher, $key);
+
+    Si la valeurne peut pas être déchiffrée à cause de changements dans la
+    clé ou le sel HMAC à ``false`` sera retournée.
+
+    .. versionadded:: 2.5
 
 .. php:staticmethod:: generateAuthKey( )
 

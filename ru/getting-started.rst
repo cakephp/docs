@@ -25,6 +25,7 @@ CakePHP фреймворк предоставляет надежную осно�
 ========================
 
 .. toctree::
+    :maxdepth: 1
     
     getting-started/a-typical-cakephp-request
     getting-started/cakephp-conventions

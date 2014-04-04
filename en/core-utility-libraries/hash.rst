@@ -24,6 +24,9 @@ made of any number of tokens. Tokens are composed of two groups. Expressions,
 are used to traverse the array data, while matchers are used to qualify
 elements. You apply matchers to expression elements.
 
+Expression Types
+----------------
+
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
 +================================+============================================+
@@ -31,7 +34,7 @@ elements. You apply matchers to expression elements.
 |                                | any string or numeric key.                 |
 +--------------------------------+--------------------------------------------+
 | ``{s}``                        | Represents a string. Will match any        |
-|                                | any string value including numeric string  |
+|                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
@@ -40,7 +43,10 @@ elements. You apply matchers to expression elements.
 All expression elements are supported by all methods. In addition to expression
 elements, you can use attribute matching with certain methods. They are ``extract()``, 
 ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
-``apply()``, ``sort()``, ``insert()``, ``remove()``and ``nest()``.
+``apply()``, ``sort()``, ``insert()``, ``remove()`` and ``nest()``.
+
+Attribute Matching Types
+------------------------
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -577,7 +583,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: integer
 
-    Counts the dimensions of an array. This method will only 
+    Counts the dimensions of an array. This method will only
     consider the dimension of the first element in the array::
 
         $data = array('one', '2', 'three');
@@ -624,6 +630,11 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     Creates a single value, by extracting $path, and reducing the extracted
     results with $function. You can use both expression and matching elements
     with this method.
+
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Apply a callback to a set of extracted values using $function. The function
+    will get the extracted values as the first argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

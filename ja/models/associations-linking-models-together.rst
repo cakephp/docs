@@ -163,9 +163,9 @@ hasOne用のテーブルは、以下の規約に従います。
 ==================== ==================
 リレーション         スキーマ
 ==================== ==================
-Apple hasOne Banana  bananas.apple\_id 
+Apple hasOne Banana  bananas.apple\_id
 -------------------- ------------------
-User hasOne Profile  profiles.user\_id 
+User hasOne Profile  profiles.user\_id
 -------------------- ------------------
 Doctor hasOne Mentor mentors.doctor\_id
 ==================== ==================
@@ -232,7 +232,7 @@ hasOneアソシエーションの配列に指定できるキーは以下の通�
 関連するProfileが存在すればそのレコードも一緒に取得してくるようになります。 ::
 
     //$this->User->find() を呼び出した時の戻り値
-    
+
     Array
     (
         [User] => Array
@@ -338,7 +338,7 @@ belongsToアソシエーションの配列に指定できるキーは以下の�
 関連するUserが存在すればそのレコードも一緒に取得してくるようになります。 ::
 
     //$this->Profile->find() を呼び出した時の戻り値
-    
+
     Array
     (
        [Profile] => Array
@@ -347,7 +347,7 @@ belongsToアソシエーションの配列に指定できるキーは以下の�
                 [user_id] => 121
                 [skill] => Baking Cakes
                 [created] => 2007-05-01 10:31:01
-            )    
+            )
         [User] => Array
             (
                 [id] => 121
@@ -398,7 +398,7 @@ Userモデル(/app/Model/Profile.php)に文字列でhasManyアソシエーショ
                 'limit'         => '5',
                 'dependent'     => true
             )
-        );  
+        );
     }
 
 hasManyアソシエーションの配列に指定できるキーは以下の通りです。
@@ -433,9 +433,9 @@ hasManyアソシエーションの配列に指定できるキーは以下の通�
 関連するCommentが存在すればそのレコードも一緒に取得してくるようになります。 ::
 
     //$this->User->find() を呼び出した時の戻り値
-    
+
     Array
-    (  
+    (
         [User] => Array
             (
                 [id] => 121
@@ -523,7 +523,7 @@ Imageモデルのサンプルでは、次のようになるでしょう。 ::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
+                'counterScope' => array('ImageComment.active' => 1) // "ImageComment" が active なデータのみカウントします
             )
         );
     }
@@ -582,7 +582,7 @@ Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.
 新しいテーブルを作れば、モデルにHABTMアソシエーションを定義できます。 ::
 
     class Recipe extends AppModel {
-        public $name = 'Recipe';   
+        public $name = 'Recipe';
         public $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
@@ -647,9 +647,9 @@ HABTMアソシエーションは次のキーを含ませることができます
 関連するIngredientが存在すればそのレコードも一緒に取得してくるようになります。 ::
 
     //$this->Recipe->find() を呼び出した時の戻り値
-    
+
     Array
-    (  
+    (
         [Recipe] => Array
             (
                 [id] => 2745
@@ -736,23 +736,23 @@ CourseMembershipモデルを作ります。以下のモデルを見てくださ�
                 public $hasMany = array(
                     'CourseMembership'
                 );
-            }      
-            
+            }
+
             // Course.php
-            
+
             class Course extends AppModel {
                 public $hasMany = array(
                     'CourseMembership'
                 );
             }
-            
+
             // CourseMembership.php
-    
+
             class CourseMembership extends AppModel {
                 public $belongsTo = array(
                     'Student', 'Course'
                 );
-            }   
+            }
 
 CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加しているかどうかを
 一意に識別します。
@@ -780,7 +780,7 @@ CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加して�
 
     class Leader extends AppModel {
         public $name = 'Leader';
-        
+
         public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
@@ -788,7 +788,7 @@ CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加して�
             )
         );
     }
-    
+
     class Follower extends AppModel {
         public $name = 'Follower';
     }
@@ -802,18 +802,18 @@ Followerを取得できます。上記のコードでは、Leaderモデルのア
     public function some_action() {
         // Leaderとそれに関連するFollowerを取得します。
         $this->Leader->find('all');
-      
+
         // ここでhasManyを削除してみます
         $this->Leader->unbindModel(
             array('hasMany' => array('Follower'))
         );
-      
+
         // これでfindメソッドはLeaderは返すけど、Followerは返さなくなります
         $this->Leader->find('all');
-      
+
         // 注: unbindModelは次に実行するfindにだけ影響します。
         // それ以上のfind呼び出しはモデルに設定したアソシエーション情報が再度使われます。
-      
+
         // この時のfindでは既に、Leaderとそれに関連するFollowerを
         // 返すようになります。
         $this->Leader->find('all');
@@ -849,7 +849,7 @@ LeadersControllerで次のようにします。 ::
         // leader.phpモデルファイルでは、hasManyアソシエーションは定義されていません。
         // ここでのfindはLeaderのみ取得します。
         $this->Leader->find('all');
-     
+
         // bindModel()を使ってLeaderモデルにアソシエーションを追加します。
         $this->Leader->bindModel(
             array('hasMany' => array(
@@ -859,7 +859,7 @@ LeadersControllerで次のようにします。 ::
                 )
             )
         );
-     
+
         // アソシエーションが正しく追加されました。
         // これでLeaderと、それに関連するPrincipleを取得することができます。
         $this->Leader->find('all');
@@ -927,14 +927,14 @@ RecipientはUserモデルに対するエイリアスです。Userモデルの方
 
     class Post extends AppModel {
         public $name = 'Post';
-        
+
         public $belongsTo = array(
             'Parent' => array(
                 'className' => 'Post',
                 'foreignKey' => 'parent_id'
             )
         );
-    
+
         public $hasMany = array(
             'Children' => array(
                 'className' => 'Post',
@@ -975,7 +975,7 @@ $options配列の'joins'というキーを追加します。以下の例を見�
             )
         )
     );
-    
+
     $Item->find('all', $options);
 
 .. note::
@@ -1006,11 +1006,11 @@ joinsと共に、joinsで指定した関連モデルに関する条件をconditi
             )
         )
     );
-    
+
     $options['conditions'] = array(
         'Channel.private' => 1
     );
-    
+
     $privateItems = $Item->find('all', $options);
 
 必要に応じてhasAndBelongsToManyでも、joinsを指定できます。
@@ -1024,7 +1024,7 @@ books\_tagsテーブルを使うように定義してみます。 ::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.books_id'
+                'Book.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',
@@ -1035,11 +1035,11 @@ books\_tagsテーブルを使うように定義してみます。 ::
             )
         )
     );
-    
+
     $options['conditions'] = array(
         'Tag.tag' => 'Novel'
     );
-    
+
     $books = $Book->find('all', $options);
 
 joinsオプションを使えばCakePHPのアソシエーションとデータの取得を、\

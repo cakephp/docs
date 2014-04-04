@@ -417,7 +417,7 @@ va utiliser. Si votre application utilise plusieurs sources de données, vous
 devriez faire correspondre les fixtures avec les sources de données du model,
 mais préfixé avec ``test_``.
 Par exemple, si votre model utilise la source de données ``mydb``, votre
-fixture devra utiliser la source de données ``test_mydb``. Si la connection
+fixture devra utiliser la source de données ``test_mydb``. Si la connexion
 ``test_mydb`` n'existe pas, vos models vont utiliser la source de données
 ``test`` par défaut. Les sources de données de fixture doivent être préfixées
 par ``test`` pour réduire la possibilité de trucher accidentellement toutes
@@ -592,6 +592,22 @@ les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
         }
     }
 
+Depuis 2.5.0, vous pouvez charger les fixtures dans les sous-répertoires.
+Utiliser plusieurs répertoires peut faciliter l'organisation de vos fixtures si
+vous avez une application plus grande. Pour charger les fixtures dans les
+sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
+la fixture::
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.blog/article', 'app.blog/comment');
+    }
+
+Dans l'exemple ci-dessus, les deux fixtures seront chargés à partir de
+``App/Test/Fixture/blog/``.
+
+.. versionchanged:: 2.5
+    Depuis 2.5.0 vous pouvez charger les fixtures dans des sous-répertoires.
+
 Tester les Models
 =================
 
@@ -679,7 +695,7 @@ sur la façon de lancer les cas de test.
 
     Quand vous configurez votre Model pour le test, assurez-vous d'utiliser
     ``ClassRegistry::init('YourModelName');`` puisqu'il sait comment utiliser
-    la connection à la base de données de votre test.
+    la connexion à la base de données de votre test.
 
 Méthodes de Mocking des models
 ------------------------------
@@ -716,6 +732,8 @@ tester les méthodes comme :php:meth:`~Controller::redirect()`.
 Disons que vous avez un controller typique Articles, et son model
 correspondant. Le code du controller ressemble à ceci::
 
+    App::uses('AppController', 'Controller');
+
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -724,9 +742,9 @@ correspondant. Le code du controller ressemble à ceci::
                 $this->Article->save($this->request->data);
             }
             if (!empty($short)) {
-                $result = $this->Article->findAll(null, array('id', 'title'));
+                $result = $this->Article->find('all', array('id', 'title'));
             } else {
-                $result = $this->Article->findAll();
+                $result = $this->Article->find('all');
             }
 
             if (isset($this->params['requested'])) {
@@ -799,6 +817,8 @@ redirection. La raison pour cela est que ``redirect()`` est mocked dans les
 tests, et n'échappe pas comme à la normale. Et à la place de votre code
 existant, il va continuer de lancer le code suivant le redirect. Par exemple::
 
+    App::uses('AppController', 'Controller');
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -813,6 +833,8 @@ existant, il va continuer de lancer le code suivant le redirect. Par exemple::
 Quand vous testez le code ci-dessus, vous allez toujours lancer
 ``// plus de code`` même si le redirect est atteint. A la place, vous
 devriez écrire le code comme ceci::
+
+    App::uses('AppController', 'Controller');
 
     class ArticlesController extends AppController {
         public function add() {
@@ -1199,7 +1221,7 @@ Mettez ce qui suit dedans::
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            $suite->addTestDirectory(TESTS . 'Case/Model');
             return $suite;
         }
     }
@@ -1209,10 +1231,23 @@ Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
 un répertoire pour tous les tests en utilisant::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 
 Ajouterait de façon récursive tous les cas de test dans le répertoire
-``app/Test/Case/``.
+``app/Test/Case/Model``. Vous pouvez utiliser les suites de test pour
+construire une suite qui exécute tous les tests de votre application::
+
+    class AllTestsTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All tests');
+            $suite->addTestDirectoryRecursive(TESTS . 'Case');
+            return $suite;
+        }
+    }
+
+Vous pouvez ensuite lancer ce test en ligne de commande en utilisant::
+
+    $ Console/cake test app AllTests
 
 Créer des Tests pour les Plugins
 ================================
@@ -1244,7 +1279,7 @@ les fixtures de votre plugin avec ``plugin.blog.blog_post``::
         public $BlogPost;
 
         public function testSomething() {
-            // ClassRegistry dit au model d'utiliser la connection à la base de données test
+            // ClassRegistry dit au model d'utiliser la connexion à la base de données test
             $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
             // faire des tests utiles ici

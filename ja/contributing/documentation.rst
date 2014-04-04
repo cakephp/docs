@@ -4,7 +4,7 @@
 ドキュメントへの貢献の方法はシンプルです。
 ファイルは https://github.com/cakephp/docs にホストされています。
 自由にレポジトリをフォークして、変更・改善・翻訳を追加し、プルリクエストを発行してください。
-またファイルをダウンロードせず、githubを使ってオンラインでドキュメントを編集することもできます。
+またファイルをダウンロードせず、GitHubを使ってオンラインでドキュメントを編集することもできます。
 
 翻訳
 ====
@@ -90,10 +90,10 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     * これは中黒(*bullet*)です
     * これも同じです。しかしこの行は
       2行あります。
-      
+
     1. 一番目の行
     2. 二番目の行
-    
+
     #. 自動的なナンバリング
     #. は時間の節約をもたらします。
 
@@ -101,10 +101,10 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
 
     * 一番目の行
     * 二番目の行
-    
+
         * 深くなってる
         * ワーオ！
-    
+
     * 最初のレベルに戻った。
 
 定義リストは以下のようにして作成できます::
@@ -149,16 +149,16 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     ``:ref:`` ロールを使って任意のドキュメントに任意のタイトルを相互参照することができます。
     リンクのラベルはドキュメント全体に渡って一意のものに向けられる必要があります。
     クラスのメソッドのラベルを作る時は、リンクのラベルのフォーマットとして ``class-method`` を使うのがベストです。
-    
+
     ラベルの最も一般的な使い方は上記のタイトルです。例::
-    
+
         .. _ラベル名:
-        
+
         セクションの見出し
         ------------------
-        
+
         続きの内容..
-    
+
     他の場所で、 ``:ref:`ラベル名``` を用いて上記のセクションを参照することができます。
     リンクのテキストはリンクの先にあるタイトルになります。
     また、 ``:ref:`リンクテキスト <ラベル名>``` として自由にリンクのテキストを指定することができます。
@@ -188,7 +188,7 @@ CakePHPのドキュメントは `phpdomain
 
    このディレクティブは新規の定数を定義します。
    これをclassディレクティブの中でネストして使うことにより、クラス定数を作成することもできます。
-   
+
 .. rst:directive:: .. php:exception:: name
 
    このディレクティブは現在の名前空間内で新規の例外(*Exception*)を定義します。
@@ -200,11 +200,11 @@ CakePHPのドキュメントは `phpdomain
    クラスに属するメソッド、属性、定数はこのディレクティブの本文の中にある必要があります::
 
         .. php:class:: MyClass
-        
+
             クラスの説明
-        
+
            .. php:method:: method($argument)
-        
+
            メソッドの説明
 
 
@@ -212,27 +212,27 @@ CakePHPのドキュメントは `phpdomain
    これらは単にクラス定義の後につけることができます::
 
         .. php:class:: MyClass
-        
+
             クラスについての文
-        
+
         .. php:method:: methodName()
-        
+
             メソッドについての文
-        
+
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
 
    クラスのメソッドと、その引数、返り値、例外を記述します::
-   
+
         .. php:method:: instanceMethod($one, $two)
-        
+
             :param string $one: 第一引数。
             :param string $two: 第二引数。
             :returns: なんらかの配列。
             :throws: InvalidArgumentException
-        
+
            これはインスタンスメソッドです。
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
@@ -256,32 +256,32 @@ CakePHPのドキュメントは `phpdomain
 .. rst:role:: php:global
 
    ``$`` 接頭辞を持つグローバル変数を参照します。
-   
+
 .. rst:role:: php:const
 
    グローバル定数、またはクラス定数のどちらかを参照します。
    クラス定数はそのクラスが先に付けられる必要があります::
-   
+
         DateTimeは :php:const:`DateTime::ATOM` 定数を持ちます。
 
 .. rst:role:: php:class
 
    名前でクラスを参照します::
-   
+
      :php:class:`ClassName`
 
 .. rst:role:: php:meth
 
    クラスのメソッドを参照します。
    このロールは両方の種類のメソッドをサポートします::
-   
+
      :php:meth:`DateTime::setDate`
      :php:meth:`Classname::staticMethod`
 
 .. rst:role:: php:attr
 
    オブジェクトの属性を参照します::
-   
+
       :php:attr:`ClassName::$propertyName`
 
 .. rst:role:: php:exc
@@ -296,11 +296,11 @@ CakePHPのドキュメントは `phpdomain
 リテラルブロックはインデントされる必要があり、各段落のように単一の行で区切られる必要があります::
 
     これは段落です::
-        
+
         while ($i--) {
             doStuff()
         }
-    
+
     これは普通のテキストの再開です。
 
 リテラルテキストは変更やフォーマットがされず、1レベル分のインデントが削除されたものが残ります。
@@ -319,14 +319,14 @@ sphinxの警告(*Admonitions*)は、まさにそのために使われます。
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
 * ``.. warning::`` warningは潜在的な障害、またはセキュリティに関する情報を文書化するために使用されています。
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
-  
+
 全ての警告は同じようになります::
 
     .. note::
-    
+
         インデントされ空の行に挟まれます。
         段落と一緒です。
-    
+
     この文はnoteの一部ではありません。
 
 サンプル

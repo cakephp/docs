@@ -227,7 +227,9 @@ methods of the HtmlHelper and how to use them.
         // Outputs: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // Outputs:
+        // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        //    "http://www.w3.org/TR/html4/loose.dtd">
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
@@ -353,7 +355,12 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
+        <a href="/recipes/delete/6"
+            onclick="return confirm(
+                'Are you sure you wish to delete this recipe?'
+            );">
+            Delete
+        </a>
 
     Query strings can also be created with ``link()``.::
 
@@ -473,7 +480,8 @@ methods of the HtmlHelper and how to use them.
         // Output
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
-            <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+            <source src="/files/video.ogg" type="video/ogg;
+                codecs='theora, vorbis'"/>
         </video>
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
@@ -799,9 +807,39 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
-        <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
-        <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
+        <tr>
+            <td>
+                Jul 7th, 2007
+            </td>
+            <td class="highlight">
+                Best Brownies
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jun 21st, 2007
+            </td>
+            <td>
+                Smart Cookies
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Aug 1st, 2006
+            </td>
+            <td>
+                Anti-Java Cake
+            </td>
+            <td id="special">
+                No
+            </td>
+        </tr>
 
     ::
 
@@ -886,7 +924,7 @@ methods of the HtmlHelper and how to use them.
         /posts/search?foo=bar#first
 
     For further information check
-    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
+    `Router::url <http://api.cakephp.org/2.4/class-Router.html#_url>`_
     in the API.
 
 .. php:method:: useTag(string $tag)
@@ -967,7 +1005,7 @@ Creating Breadcrumb Trails with HtmlHelper
 
     :param array $options: An array of :term:`html attributes` for the
         containing ``<ul>`` element. Can also contain the 'separator',
-        'firstClass' and 'lastClass' options.
+        'firstClass', 'lastClass' and 'escape' options.
     :param string|array $startText: The text or element that precedes the ul.
 
     Returns breadcrumbs as a (x)html list.

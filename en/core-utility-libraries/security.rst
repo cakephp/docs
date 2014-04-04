@@ -140,7 +140,7 @@ Security API
 
     :rtype: void
 
-    Sets the default hash method for the Security object. This 
+    Sets the default hash method for the Security object. This
     affects all objects using Security::hash().
 
 .. php:staticmethod:: validateAuthKey( $authKey )

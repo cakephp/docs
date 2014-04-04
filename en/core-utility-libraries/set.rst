@@ -115,7 +115,7 @@ available.
 
 .. php:staticmethod:: classicExtract($data, $path = null)
 
-    :rtype: array
+    :rtype: mixed
 
     Gets a value from an array or object that is contained in a given
     path using an array path syntax, i.e.:
@@ -705,7 +705,7 @@ available.
 
 .. php:staticmethod:: extract($path, $data = null, $options = array())
 
-    :rtype: array
+    :rtype: mixed
 
     Set::extract uses basic XPath 2.0 syntax to return subsets of your
     data from a find or a find all. This function allows you to
@@ -763,7 +763,7 @@ available.
     in ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
-.. php:staticmethod:: filter($var, $isArray = null)
+.. php:staticmethod:: filter($var)
 
     :rtype: array
 

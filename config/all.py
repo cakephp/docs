@@ -251,19 +251,22 @@ epub_copyright = u'2013, Cake Software Foundation, Inc.'
 
 epub_theme = 'cakephp-epub'
 
+# The cover page information.
+epub_cover = ('_static/epub-logo.png', 'epub-cover.html')
+
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
 #epub_language = ''
 
 # The scheme of the identifier. Typical schemes are ISBN or URL.
-#epub_scheme = ''
+epub_scheme = 'URL'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
-#epub_identifier = ''
+epub_identifier = 'http://cakephp.org'
 
 # A unique identification for the text.
-#epub_uid = ''
+epub_uid = 'cakephpcookbook1393624653'
 
 # HTML files that should be inserted before the pages created by sphinx.
 # The format is a list of tuples containing the path and title.
@@ -278,6 +281,7 @@ epub_exclude_files = [
     'index.html',
     'pdf-contents.html',
     'search.html',
+    'contents.html'
 ]
 
 # The depth of the table of contents in toc.ncx.
@@ -285,6 +289,9 @@ epub_tocdepth = 2
 
 # Allow duplicate toc entries.
 epub_tocdup = False
+
+# If true, add an index to the epub document.
+epub_use_index = False
 
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']

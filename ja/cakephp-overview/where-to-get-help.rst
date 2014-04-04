@@ -62,19 +62,36 @@ IRC チャンネル
 北アメリカと南アメリカの昼間の時間帯であれば、たいていは開発チームのだれかがそこにいます。
 助けが必要な場合でも、同じ地域での知り合いが必要でも、最新のスポーツカーを寄付したいという場合でも、喜んで聞いてくれるはずです。
 
-Google グループ
-===============
+.. _cakephp-official-communities:
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+CakePHP 公式コミュニティ
+============================
+CakePHP は Facebook や Google Plus などのよく知られたソーシャルネットワーク上にも
+公式グループがあります。
 
-CakePHP には、非常にアクティブな Google グループがあります。
-過去に話し合われた解決策、よくある質問、直近の問題に対する解答などを見つけることのできる、優れたリソースセンターになるでしょう。（注：日本語では、 http://cakephp.jp もどうぞ。）
+そこでは、たくさんの人々が CakePHP プロジェクトのディスカッションをしたり、
+お互いに助けあったり、問題解決をしたり、プロジェクトを作ったり、
+アイデアの交換を行ったりしています。
 
-CakePHP Questions
-=================
+また、以前に行なわれた回答や、よくある質問と答え、差し迫った問題に対する回答などが
+存在している素晴らしい場所となっています。
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+CakePHP ユーザーであれば、以下のコミュニティに参加しましょう。
 
-シンプルに、登録・ログインして質問を投稿します。
-いくつか質問が返ってくるまで待ち、正確な答えを選び出しましょう。
-既に投稿された、または解決された質問を、見る、コメント、投票をすることができます。
+-   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
+-   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
+-   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
+
+（訳注: 日本語が主体のコミュニティとしては下記もあります）
+
+-   `cakephp.jp <http://cakephp.jp>`_
+-   `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
+
+
+Stackoverflow
+=============
+
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+
+Stack Overflow の既存ユーザーが質問を見つけやすくするために、質問の際には
+``cakephp`` タグと利用中のバージョンを明記して下さい。

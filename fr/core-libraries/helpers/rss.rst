@@ -59,14 +59,20 @@ le même::
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
-            $posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));
+            $posts = $this->Post->find(
+                'all',
+                array('limit' => 20, 'order' => 'Post.created DESC')
+            );
             return $this->set(compact('posts'));
         }
 
         // ceci n'est pas une requête RSS
         // donc on retourne les données utilisées par l'interface du site web
-        $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
-
+        $this->paginate['Post'] = array(
+            'order' => 'Post.created DESC',
+            'limit' => 10
+        );
+        
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
@@ -87,10 +93,10 @@ Un layout Rss est très simple, mettez les contenus suivants dans
         $channelData = array();
     }
     if (!isset($channelData['title'])) {
-        $channelData['title'] = $title_for_layout;
+        $channelData['title'] = $this->fetch('title');
     }
-    $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
-    echo $this->Rss->document($documentData,$channel);
+    $channel = $this->Rss->channel(array(), $channelData, $this->fetch('content'));
+    echo $this->Rss->document($documentData, $channel);
 
 Il ne ressemble pas à plus mais grâce à la puissance du ``RssHelper``
 il fait beaucoup pour améliorer le visuel pour nous. Nous n'avons pas défini

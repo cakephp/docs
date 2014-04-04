@@ -61,7 +61,7 @@ Utiliser la Classe Debugger
 Pour utiliser le debugger, assurez-vous d'abord que Configure::read('debug')
 est défini à une valeur supérieure à ``true``.
 
-.. php:staticmethod:: Debugger::dump($var)
+.. php:staticmethod:: Debugger::dump($var, $depth = 3)
 
     Dump prints out the contents of a variable. Elle affiche toutes les
     propriétés et méthodes (si il y en a) de la variable fournie::
@@ -96,7 +96,10 @@ est défini à une valeur supérieure à ``true``.
         Dans 2.1 forward, la sortie a été modifiée pour la lisibilité. Regardez
         :php:func:`Debugger::exportVar()`.
 
-.. php:staticmethod:: Debugger::log($var, $level = 7)
+    .. versionchanged:: 2.5.0
+        Le paramètre ``depth`` a été ajouté.
+
+.. php:staticmethod:: Debugger::log($var, $level = 7, $depth = 3)
 
     Crée un stack trace log détaillé au moment de l'invocation. La
     méthode log() affiche les données identiques à celles faites par
@@ -104,6 +107,9 @@ est défini à une valeur supérieure à ``true``.
     buffer. Notez que votre répertoire app/tmp directory (et son contenu) doit
     être ouvert en écriture par le serveur web pour que le
     log() fonctionne correctement.
+
+    .. versionchanged:: 2.5.0
+        Le paramètre ``depth`` a été ajouté.
 
 .. php:staticmethod:: Debugger::trace($options)
 

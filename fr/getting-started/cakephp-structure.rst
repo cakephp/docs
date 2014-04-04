@@ -11,6 +11,8 @@ de base de vos applications. A ce stade de lecture, nous survolerons ces
 concepts, mais vous pourrez découvrir comment utiliser ces outils en
 détails plus tard.
 
+.. _application-extensions:
+
 Extensions de l'Application
 ===========================
 
@@ -52,14 +54,12 @@ Ces fonctions sont à votre disposition au cas où vous avez besoin d'ajouter
 du code entre les différentes opérations internes de CakePHP. Les callbacks
 disponibles sont :
 
--  ``beforeFilter()``, exécutée avant toute action d'un controller.
--  ``beforeRender()``, exécutée après le traitement du controller, mais avant
-    l'affichage de la vue.
--  ``afterFilter()``, exécutée après la logique du controller, y compris
-    l'affichage de la vue. Il peut n'y avoir aucune différence entre
-    ``beforeRender()`` et ``afterFilter()``, à moins que vous n'ayez effectué
-    un appel manuel à ``render()`` dans les actions de votre controller et
-    que vous ayez inclus du code après cet appel.
+-  :php:meth:`~Controller::afterFilter()`, exécutée après la logique du
+    controller, y compris l'affichage de la vue.
+-  :php:meth:`~Controller::beforeFilter()`, exécutée avant toute action d'un
+    controller.
+-  :php:meth:`~Controller::beforeRender()`, exécutée après toute action d'un
+    controller mais avant que la vue soit rendue.
 
 Extensions du Model ("Behaviors")
 =================================
@@ -82,12 +82,12 @@ enregistrements issus de sources différentes : plutôt que d'être limité à d
 jointures SQL, les Sources de Données vous permettent de dire à votre model
 LDAP qu'il est associé à plusieurs événements iCal.
 
-Tout comme les controllers, les models sont également caractérisés par des
-fonctions de rappel (callbacks) :
+Tout comme les controllers, les models ont des callbacks:
 
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()

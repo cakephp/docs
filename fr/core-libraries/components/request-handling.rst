@@ -50,8 +50,10 @@ contenu que le client accepte. Par exemple::
         public function beforeFilter () {
             if ($this->RequestHandler->accepts('html')) {
                 // Ce code est exécuté uniquement si le client accepte les réponses HTML (text/html)
+                // les réponses HTML (text/html)
             } elseif ($this->RequestHandler->accepts('xml')) {
-                // exécuté seulement si le client accepte seulement les réponse XML
+                // executé seulement si le client accepte seulement
+                // les réponse XML
             }
             if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {
                 // Executé si le client accepte l'un des suivants: XML, RSS ou Atom

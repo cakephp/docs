@@ -147,6 +147,7 @@ Instalação Avançada e Configuração Específica por Servidor
 ==========================================================
 
 .. toctree::
+    :maxdepth: 1
 
    installation/advanced-installation
 

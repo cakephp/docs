@@ -199,7 +199,10 @@ wanted to put any orders into the log files, we could use a simple anonymous
 function to do so::
 
     $this->Order->getEventManager()->attach(function($event) {
-        CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
+        CakeLog::write(
+            'info',
+            'A new order was placed with id: ' . $event->subject()->id
+        );
     }, 'Model.Order.afterPlace');
 
 In addition to anonymous functions you can use any other callable type that PHP

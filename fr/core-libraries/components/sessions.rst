@@ -3,14 +3,14 @@ Sessions
 
 .. php:class:: SessionComponent(ComponentCollection $collection, array $config = array())
 
-Le component` session de CakePHP fournit le moyen de faire persister les données
-client entre les pages requêtées. Il agit comme une interface pour
-``$_SESSION`` et offre aussi des méthodes pratiques pour de nombreuses
-fonctions relatives à ``$_SESSION`.
+Le component session de CakePHP fournit le moyen de faire persister les données
+client entre les pages requêtées. Il agit comme une interface pour ``$_SESSION``
+et offre aussi des méthodes pratiques pour de nombreuses fonctions relatives
+à ``$_SESSION``.
 
-Les sessions peuvent être paramétrées de différentes façons dans CakePHP.
-Pour plus d'information, vous devriez lire la documentation
-:doc:`Session configuration </development/sessions>`
+Les sessions peuvent être paramétrées de différentes façons dans CakePHP.  Pour
+plus d'information, vous devriez lire la documentation :doc:`Session
+configuration </development/sessions>`
 
 Interagir avec les données de Session
 =====================================
@@ -145,7 +145,11 @@ Création de messages de notification
     $params qui appliquera une classe à la div de sortie en utilisant
     ``$this->Session->flash()`` dans votre layout ou vue.::
 
-        $this->Session->setFlash('Message Exemple', 'default', array('class' => 'classe_exemple'));
+        $this->Session->setFlash(
+            'Message Exemple',
+            'default',
+            array('class' => 'classe_exemple')
+        );
 
     La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci-dessus
     sera::
@@ -156,7 +160,11 @@ Création de messages de notification
     dans le ``$params``::
 
         // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
-        $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+        $this->Session->setFlash(
+            'Message!',
+            'flash_no_spam',
+            array('plugin' => 'Comment')
+        );
 
     .. note::
         Par défaut, CakePHP n'échappe pas le HTML des messages flash. Si vous

@@ -92,18 +92,14 @@ internes du framework, il y a plusieurs exceptions pour les méthodes HTTP.
     Utilisé pour faire une Erreur 501 Non Implémentée.
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
-les états d'échec, ou les erreurs HTTP. Un exemple d'utilisation des exceptions
-HTTP pourraient rendre les pages 404 pour les items qui n'ont pas été trouvés
-
-Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
 les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
 exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
-    public function view ($id) {
+    public function view($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
-            throw new NotFoundException('N a pas trouvé ce post');
+            throw new NotFoundException('Impossible de trouver ce poste');
         }
         $this->set('post', $post);
     }
@@ -153,7 +149,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingConnectionException
 
-    Une connection à un model n'existe pas.
+    Une connexion à un model n'existe pas.
 
 .. php:exception:: MissingTableException
 
@@ -226,7 +222,7 @@ d'erreur et enregistrer l'exception.
 .. _error-views:
 
 Exception Renderer
-==================s
+==================
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
@@ -282,7 +278,7 @@ aussi fournir un template de message qui permet les méthodes natives
 
 
     class MissingWidgetException extends CakeException {
-        protected $_messageTemplate = 'Seems that %s is missing.';
+        protected $_messageTemplate = 'Il semblerait que %s soit manquant.';
     }
 
     throw new MissingWidgetException(array('widget' => 'Pointy'));
@@ -291,7 +287,7 @@ aussi fournir un template de message qui permet les méthodes natives
 Quand attrapé par le gestionnaire d'exception intégré, vous obtiendriez
 une variable ``$widget`` dans votre template de vue d'erreur. De plus,
 si vous attrapez l'exception en chaîne ou utilisez sa méthode ``getMessage()``,
-vous auriez ``Il semble que Pointy soit manquant.``. Cela vous permet de
+vous auriez ``Il semblerait que Pointy soit manquant.``. Cela vous permet de
 créer facilement et rapidement vos propres erreurs de développement riche,
 juste comme CakePHP en interne.
 
@@ -301,7 +297,7 @@ Créer des codes de statut personnalisés
 Vous pouvez créer des codes de statut HTTP personnalisés en changeant le code
 utilisé quand vous créez une exception::
 
-    throw new MissingWidgetHelperException('Its not here', 501);
+    throw new MissingWidgetHelperException('Widget manquant', 501);
 
 Va créer un code de réponse ``501``, vous pouvez utiliser le code de statut
 HTTP que vous souhaitez. En développement, si votre exception n'a pas
@@ -405,7 +401,7 @@ utiliser ``Configure::write('Exception.renderer','AppExceptionRenderer');``
 pour choisir une classe qui va rendre les pages d'exception.
 Par défaut :php:class`ExceptionRenderer` est utilisée. Votre classe de rendu
 d'exception personnalisée doit être placée dans ``app/Lib/Error``. Ou un
-répertoire ``Error``` dans tout chemin bootstrapped Lib. Dans une classe
+répertoire ``Error`` dans tout chemin bootstrapped Lib. Dans une classe
 de rendu d'exception, vous pouvez fournir une gestion spécialisée pour les
 erreurs spécifiques de l'application::
 

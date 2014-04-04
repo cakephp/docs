@@ -39,9 +39,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   Dans la plupart des systèmes, ceux-ci vont être commentés (en étant
-   précédé par un #) par défaut, donc vous aurez juste besoin de retirer
-   les symboles # du début.
+   Dans la plupart des systèmes, ceux-ci vont être commentés donc vous aurez
+   juste besoin de retirer les symboles # en début de ligne.
 
    Après que vous avez fait des changements, re-démarrez Apache pour être sûr
    que les paramètres soient actifs.
@@ -54,7 +53,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    coup ne les voient pas pour les copier.
 
 #. Assurez-vous que votre copie de CakePHP vient de la section des
-   téléchargements du site de notre dépôt GIT, et a été dézippé correctement
+   téléchargements du site de notre dépôt Git, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
    Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
@@ -86,8 +85,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </IfModule>
 
    Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
-   essayez de modifier les paramètres pour les virtualhosts. Si vous
-   êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default
+   essayez de modifier les paramètres pour les Hôtes Virtuels. Si vous
+   êtes sur Ubuntu, modifiez le fichier /etc/apache2/sites-available/default
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
    devez avoir::
@@ -104,7 +103,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
    Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil
-   virtualhostx pour faire un hôte virtuel pour pointer vers votre dossier.
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
+   Virtuel pour pointer vers votre dossier.
 
    Pour beaucoup de services d'hébergement (GoDaddy, 1and1), votre serveur web
    est en fait déjà distribué à partir d'un répertoire utilisateur qui
@@ -182,7 +182,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
@@ -218,21 +218,27 @@ faire, suivez ces étapes:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                    <rule name="Rewrite requests to test.php"
+                      stopProcessing="true">
                         <match url="^test.php(.*)$" ignoreCase="false" />
                         <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*"
+                      stopProcessing="true">
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
                     </rule>
-                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>
@@ -242,6 +248,19 @@ faire, suivez ces étapes:
 Une fois que le fichier web.config est créé avec les bonnes règles de
 réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
+
+URL-Rewriting sur lighttpd
+==========================
+
+Lighttpd ne supporte pas les fonctions .htaccess, par conséquent vous pouvez
+retirer tous les fichiers .htaccess. Dans la configuration lighttpd,
+assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
+
+::
+
+    url.rewrite-if-not-file =(
+        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
+    )
 
 Je ne veux / ne peux utiliser l'URL rewriting
 =============================================

@@ -41,16 +41,16 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: __c(string $msg, integer $category, mixed $args = null)
 
-    Notez que la catégorie doit être spécifiée avec une valeur numérique,
-    au lieu d'un nom de constante. Les valeurs sont:
+    Notez que la catégorie doit être spécifiée avec une constante de classe
+    I18n, au lieu d'un nom de constante. Les valeurs sont:
 
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
@@ -65,16 +65,16 @@ CakePHP, comme le débogage et la traduction de contenu.
     Vous permet de remplacer le domaine courant pour la recherche d'un message.
     Permet également de spécifier une catégorie.
     
-    Notez que la catégorie doit être spécifiée avec une valeur numérique,
+    Notez que la catégorie doit être spécifiée avec une constante de classe I18n
     au lieu du nom de la constante. Les valeurs sont:
    
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
 
 .. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
 
@@ -84,16 +84,16 @@ CakePHP, comme le débogage et la traduction de contenu.
     pour le compteur $count depuis le domaine $domain. Certaines langues ont
     plus d'une forme de pluriel dépendant du compteur.
 
-    Notez que la catégorie doit être spécifiée avec des valeurs numériques,
-    au lieu des noms de constantes. Les valeurs sont:
+    Notez que la catégorie doit être spécifiée avec des une constante de classe
+    I18n, au lieu des noms de constantes. Les valeurs sont:
    
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
+    - I18n::LC_ALL - LC_ALL
+    - I18n::LC_COLLATE - LC_COLLATE
+    - I18n::LC_CTYPE - LC_CTYPE
+    - I18n::LC_MONETARY - LC_MONETARY
+    - I18n::LC_NUMERIC - LC_NUMERIC
+    - I18n::LC_TIME - LC_TIME
+    - I18n::LC_MESSAGES - LC_MESSAGES
 
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
@@ -144,7 +144,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Cette fonction émule également PHP\_SELF et DOCUMENT\_ROOT sur
     les serveurs ne les supportant pas. En fait, c'est une bonne idée
-    de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()`
+    de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
     (notamment si vous prévoyez de distribuer le code), puisque
     c'est un wrapper d'émulation totale.
 

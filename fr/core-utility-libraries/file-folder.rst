@@ -70,10 +70,16 @@ API de Folder
 
     Retourne $path avec $element ajouté, avec le bon slash entre-deux::
 
-        <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
         // $path égal /a/path/for/testing
 
+    $element peut aussi être un tableau::
+
+        $path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+        // $path égal à /a/path/for/testing/another
+
+    .. versionadded:: 2.5
+        Le paramètre $element accepte un tableau depuis 2.5
 
 .. php:method:: cd(string $path)
 
@@ -115,11 +121,11 @@ API de Folder
 
         $folder = new Folder('/path/to/folder');
         $folder->copy(array(
-            'from' => '/path/to/copy/from', // va causer un cd() to occur
             'to' => '/path/to/new/folder',
+            'from' => '/path/to/copy/from', // va entraîner l'execution de cd()
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP  // Skip directories/files qui existe déjà.
+            'scheme' => Folder::SKIP // Passe les répertoires/fichiers qui existent déjà.
         ));
 
     y a 3 schémas supportés:
@@ -589,7 +595,16 @@ L'API de File
     :rtype: mixed
 
     Récupère le mimetype du Fichier, retourne false en cas d'échec.
-    
+
+.. php:method:: replaceText( $search, $replace )
+
+    :rtype: boolean
+
+    Remplace le texte dans un fichier. Retourne false en cas d'échec et true en cas de succès.
+
+    .. versionadded::
+        2.5 ``File::replaceText()``
+
 .. meta::
     :title lang=fr: Folder & File
     :description lang=fr: Les utilitaires Folder et File sont des classes pratiques pour aider à la lecture, l'écriture; et l'ajout de fichiers; Lister les fichiers d'un dossier et autres tâches habituelles liées aux répertoires.

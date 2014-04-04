@@ -312,7 +312,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?= $title_for_layout ?></title>
+   <title><?php echo $this->fetch('title'); ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -479,8 +479,10 @@ The options supported are 'cache' and 'callbacks'. An example::
             "foobar" => "This is passed to the element as $foobar",
         ),
         array(
-            "cache" => "long_view", // uses the "long_view" cache configuration
-            "callbacks" => true // set to true to have before/afterRender called for the element
+            // uses the "long_view" cache configuration
+            "cache" => "long_view",
+            // set to true to have before/afterRender called for the element
+            "callbacks" => true
         )
     );
 
@@ -687,7 +689,10 @@ To call any view method use ``$this->method()``
     object type and URL. This method is often used by helpers that need
     to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
 
-        $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
+        $uuid = $this->uuid(
+          'form',
+          array('controller' => 'posts', 'action' => 'index')
+        );
         //$uuid contains 'form0425fe3bad'
 
 .. php:method:: addScript(string $name, string $content)
@@ -798,6 +803,7 @@ More About Views
 ================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/json-and-xml-views

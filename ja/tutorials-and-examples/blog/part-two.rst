@@ -1,5 +1,5 @@
 ブログチュートリアル - レイヤーの追加
-*************************************
+#####################################
 
 Postモデルの作成
 ================
@@ -163,7 +163,7 @@ CakePHPには一連のビューヘルパーがあり、リンクの作成、フ�
 Cake内でURLを指定する場合、配列フォーマットの使用が推奨されます。
 これはルーティングの章で詳しく説明されます。
 URLに配列フォーマットを用いることによって、CakePHPのリバースルーティング機能を活用することができます。
-また、/コントロ>ーラ/アクション/パラメータ1/パラメータ2という形のアプリケーションの基本パスに対する相対パスを単に書くこともできます。
+また、/コントローラ/アクション/パラメータ1/パラメータ2という形のアプリケーションの基本パスに対する相対パスを単に書くこともできます。
 
 この時点で、ブラウザから
 http://www.example.com/posts/index
@@ -388,7 +388,7 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -406,8 +406,8 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
 もし ``$id`` パラメータが渡されてないか、ポストが存在しない場合、
 ``NotFoundException`` を送出してCakePHPのErrorHandlerに処理を委ねます。
 
-次に、リクエストがPOSTであるかをチェックします。
-もしリクエストがPOSTなら、POSTデータでレコードを更新したり、バリデーションエラーを表示したりします。
+次に、リクエストがPOSTかPUTであるかをチェックします。
+もしリクエストがPOSTかPUTなら、POSTデータでレコードを更新したり、バリデーションエラーを表示したりします。
 
 もし ``$this->request->data`` が空っぽだったら、取得していたポストレコードをそのままセットしておきます。
 
@@ -419,11 +419,11 @@ editビューは以下のようになるでしょう:
 
     <h1>Edit Post</h1>
     <?php
-        echo $this->Form->create('Post');
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden'));
-        echo $this->Form->end('Save Post');
+    echo $this->Form->create('Post');
+    echo $this->Form->input('title');
+    echo $this->Form->input('body', array('rows' => '3'));
+    echo $this->Form->input('id', array('type' => 'hidden'));
+    echo $this->Form->end('Save Post');
     ?>
 
 （値が入力されている場合、）このビューは、編集フォームを出力します。
@@ -444,7 +444,7 @@ editビューは以下のようになるでしょう:
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Action</th>
+            <th>Action</th>
             <th>Created</th>
         </tr>
 
@@ -533,7 +533,7 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
     </table>
 
 :php:meth:`~FormHelper::postLink()` を使うと、投稿記事の削除を行うPOSTリクエストをするためのJavascriptを使うリンクが生成されます。
-WEBクローラーが不意にコンテンツ全てを削除できてしまうように、GETリクエストを用いたコンテンツの削除を許可することは危険です。
+WEBクローラーが不意にコンテンツ全てを削除できてしまうので、GETリクエストを用いたコンテンツの削除を許可することは危険です。
 
 .. note::
 
@@ -578,7 +578,7 @@ Cakeのルーティングは、 ``/app/Config/routes.php`` の中にあります
 まとめ
 ======
 
-この方法に乗っ取ったアプリケーションの作成により、平和、賞賛、女性、お金までもが、あなたが考えうる以上にもたらされるでしょう。
+この方法に乗っ取ったアプリケーションの作成により、平和、賞賛、愛、お金までもが、あなたが考えうる以上にもたらされるでしょう。
 シンプルですよね。
 ですが、気をつけてほしいのは、このチュートリアルは、非常に基本的な点しか扱っていない、ということです。
 CakePHPには、もっともっと *多くの* 機能があります。

@@ -44,7 +44,7 @@
 PostgreSQLだと、以下のようになります。 ::
 
     public $virtualFields = array(
-        'name' => 'User.first_name || \' \' || User.last_name'
+        'name' => 'User.first_name || ' ' || User.last_name'
     );
 
 ..
@@ -204,7 +204,7 @@ SQLクエリ内でのバーチャルフィールドの利用
 =========================================
 
 ..
-   Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
+   Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data.
    For example this::
 
 SQLクエリ中で直接使用される関数は、返されるデータがモデルのデータと同じ配列に格納されるのを防ぎます。\
@@ -216,7 +216,7 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
    would return something like this::
 
 戻り値はこのようになります。 ::
-	
+
    Array
    (
        [0] => Array
@@ -271,7 +271,7 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
                     )
             )
     )
-	
+
 ..
    Limitations of virtualFields
    ============================

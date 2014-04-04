@@ -39,7 +39,7 @@ Model Validation Messages
 -------------------------
 
 You can set the domain to be used for extracted validation messages in your models.
-If the model already has a ``$validationDomain`` property, the given validation 
+If the model already has a ``$validationDomain`` property, the given validation
 domain will be ignored::
 
     ./Console/cake i18n extract --validation-domain validation_errors

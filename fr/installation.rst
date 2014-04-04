@@ -274,6 +274,7 @@ URL Rewriting
 =============
 
 .. toctree::
+    :maxdepth: 1
 
     installation/url-rewriting
 
@@ -284,7 +285,7 @@ Ok, voyons voir CakePHP en action. Selon la configuration que vous utilisez,
 vous pouvez pointer votre navigateur vers http://exemple.com/ ou
 http://exemple.com/cake3/. A ce niveau, vous serez sur la page home
 par défaut de CakePHP, et un message qui vous donnera le statut de la
-connection de votre base de données courante.
+connexion de votre base de données courante.
 
 Félicitations! Vous êtes prêt à :doc:`créer votre première application CakePHP
 </getting-started>`.

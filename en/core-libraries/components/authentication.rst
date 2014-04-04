@@ -164,7 +164,12 @@ working with a login form could look like::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+                $this->Session->setFlash(
+                    __('Username or password is incorrect'),
+                    'default',
+                    array(),
+                    'auth'
+                );
             }
         }
     }
@@ -294,7 +299,8 @@ messages AuthComponent uses. In your controller's beforeFilter, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
+    $this->Auth->authError = "This error shows up with the user tries to access" .
+                                "a part of the website that is protected.";
 
    Sometimes, you want to display the authorization error only after
    the user has already logged-in. You can suppress this message by setting
@@ -363,7 +369,9 @@ from the normal password hash::
         public function beforeSave($options = array()) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
+                $this->data['User']['username'],
+                $this->data['User']['password'],
+                env('SERVER_NAME')
             );
             return true;
         }
@@ -409,7 +417,10 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
+            $this->request->data['User'] = array_merge(
+                $this->request->data['User'],
+                array('id' => $id)
+            );
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
         }
@@ -783,7 +794,7 @@ unauthorizedRedirect
 
 .. php:method:: deny($action, [$action, ...])
 
-    Toggle one more more actions previously declared as public actions,
+    Toggle one or more actions previously declared as public actions,
     as non-public methods. These methods will now require
     authorization. Best used inside your controller's beforeFilter
     method.

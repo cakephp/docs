@@ -1,5 +1,5 @@
 Blog Tutorial
-*************
+#############
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -25,9 +25,10 @@ Here's what you'll need:
    also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
-#. Finally, you'll need a basic knowledge of the MVC programming
-   pattern. A quick overview can be found in :doc:`/cakephp-overview/understanding-model-view-controller`.
-   Don't worry, it's only a half a page or so.
+#. Finally, you'll need a basic knowledge of the MVC programming pattern.
+   A quick overview can be found in
+   :doc:`/cakephp-overview/understanding-model-view-controller`.  Don't worry,
+   it's only a half a page or so.
 
 Let's get started!
 
@@ -207,13 +208,14 @@ guessed::
 A Note on mod\_rewrite
 ======================
 
-Occasionally a new user will run into mod\_rewrite issues. For example
+Occasionally new users will run into mod\_rewrite issues. For example
 if the CakePHP welcome page looks a little funny (no images or CSS styles),
-it probably means mod\_rewrite isn't functioning on your system. Please refer
+it probably means mod\_rewrite is not functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

@@ -2,8 +2,8 @@
 ######
 
 パッチとプルリクエストはCakePHPにコードを寄贈する最善の方法です。
-パッチは `github <http://github.com/cakephp/cakephp>`_ でチケットに添付できます。
-プルリクエストはgithubで作ることができ、コードに貢献するための一般的により良い方法です。
+パッチは `GitHub <http://github.com/cakephp/cakephp>`_ でチケットに添付できます。
+プルリクエストはGitHubで作ることができ、コードに貢献するための一般的により良い方法です。
 
 初期設定
 ========
@@ -24,9 +24,9 @@ CakePHPのパッチの作業に入る前に、環境を整えることをお勧�
 
     もしGitの初心者なら、優秀かつ無料である `ProGit <http://progit.org>`_ のbook(訳注: `日本語版のbook <http://progit.org/book/ja>`_)を読むことを強くお勧めします。
 
-githuからCakePHPのソースコードのクローンを取得してください:
+GitHubからCakePHPのソースコードのクローンを取得してください:
 
-* `github <http://github.com>`_ のアカウントを持っていないなら、作成しましょう。
+* `GitHub <http://github.com>`_ のアカウントを持っていないなら、作成しましょう。
 * `CakePHP repository <http://github.com/cakephp/cakephp>`_ を、 **Fork** ボタンをクリックして、Forkしてください。
 
 forkがされた後に、ローカルマシーンにforkをクローンしてください::
@@ -98,9 +98,9 @@ CakePHPのセットアップを済ませたなら、 ``$test``
 
     git push origin <branch-name>
 
-一旦githubにブランチが配置されたら、
+一旦GitHubにブランチが配置されたら、
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_
-メーリングリストで議論、またはgithubでプルリクエストを送ることができます。
+メーリングリストで議論、またはGitHubでプルリクエストを送ることができます。
 
 変更のマージ先を選択する
 --------------------------------

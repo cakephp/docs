@@ -103,7 +103,7 @@ supplémentaire est définie dans ``$this->request->params['paging']``, et est
 utilisée par :php:class:`PaginatorHelper` pour la création des liens.
 :php:meth:`PaginatorComponent::paginate()` ajoute aussi
 :php:class:`PaginatorHelper` à la liste des helpers dans votre controller, si
-il n'a pas déjà été ajouté.::
+il n'a pas déjà été ajouté::
 
     public function list_recipes() {
         $this->Paginator->settings = $this->paginate;
@@ -114,12 +114,15 @@ il n'a pas déjà été ajouté.::
     }
 
 Vous pouvez filtrer les enregistrements en passant des conditions
-en second paramètre à la fonction ``paginate()``.::
+en second paramètre à la fonction ``paginate()``::
 
-    $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
+    $data = $this->Paginator->paginate(
+        'Recipe',
+        array('Recipe.title LIKE' => 'a%')
+    );
 
 Ou vous pouvez aussi définir des ``conditions`` et d'autres tableaux de
-configuration de pagination à l'intérieur de votre action.::
+configuration de pagination à l'intérieur de votre action::
 
     public function list_recipes() {
         $this->Paginator->settings = array(
@@ -143,11 +146,13 @@ implémenter les signatures de méthode définies ci-dessous avec le premier
 paramètre normal supplémentaire de ``$model``::
 
     // paginate et paginateCount implémentés dans le behavior.
-    public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate(Model $model, $conditions, $fields, $order, $limit,
+        $page = 1, $recursive = null, $extra = array()) {
         // contenu de la méthode
     }
 
-    public function paginateCount(Model $model, $conditions = null, $recursive = 0, $extra = array()) {
+    public function paginateCount(Model $model, $conditions = null,
+        $recursive = 0, $extra = array()) {
         // corps (body) de la méthode
     }
 
@@ -175,10 +180,12 @@ dans le model dans lequel vous voulez récupérer des données::
     /**
      * Surcharge de la méthode paginate - groupée par week, away_team_id et home_team_id
      */
-    public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate($conditions, $fields, $order, $limit, $page = 1,
+        $recursive = null, $extra = array()) {
         $recursive = -1;
         $group = $fields = array('week', 'away_team_id', 'home_team_id');
-         return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
+         return $this->find('all', compact('conditions', 'fields', 'order',
+             'limit', 'page', 'recursive', 'group'));
     }
 
 Vous aurez aussi besoin de surcharger le ``paginateCount()`` du noyau,
@@ -190,8 +197,15 @@ utilisez::
     /**
      * Surcharge de la méthode paginateCount
      */
-    public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
-        $sql = "SELECT DISTINCT ON(week, home_team_id, away_team_id) week, home_team_id, away_team_id FROM games";
+    public function paginateCount($conditions = null, $recursive = 0,
+        $extra = array()) {
+         $sql = "SELECT
+            DISTINCT ON(
+                week, home_team_id, away_team_id
+            )
+                week, home_team_id, away_team_id
+            FROM
+                games";
         $this->recursive = $recursive;
         $results = $this->query($sql);
         return count($results);
@@ -236,8 +250,8 @@ Par défaut le classement peut être effectué pour n'importe quelle colonne dan
 un model. C'est parfois indésirable comme permettre aux utilisateurs de trier
 des colonnes non indexées, ou des champs virtuels ce qui peut être coûteux en
 temps de calculs. Vous pouvez utiliser le 3ème paramètre de
-``PaginatorComponent::paginate()`` pour restreindre les tris de colonnes qui
-pourront être effectués::
+``PaginatorComponent::paginate()`` pour restreindre les colonnes à trier
+en faisant ceci::
 
     $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 

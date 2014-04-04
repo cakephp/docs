@@ -61,9 +61,9 @@ are also all found in the request parameters:
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
   more information.
-* ``bare`` Present when the request came from requestAction() and included the
+* ``bare`` Present when the request came from :php:meth:`~Controller::requestAction()` and included the
   bare option. Bare requests do not have layouts rendered.
-* ``requested`` Present and set to true when the action came from requestAction.
+* ``requested`` Present and set to true when the action came from :php:meth:`~Controller::requestAction()`.
 
 
 Accessing Querystring Parameters
@@ -75,7 +75,8 @@ Querystring parameters can be read from using :php:attr:`~Cake\\Network\\Request
     $this->request->query['page'];
 
     // You can also access it via array access
-    $this->request['url']['page']; // BC accessor, will be deprecated in future versions
+    // Note: BC accessor, will be deprecated in future versions
+    $this->request['url']['page'];
 
 You can either directly access the query property, or you can use
 :php:meth:`~Cake\\Network\\Request::query()` to read the URL query array in an error free manner.
@@ -179,10 +180,16 @@ detectors. There are four different types of detectors that you can create:
 Some examples would be::
 
     // Add an environment detector.
-    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    $this->request->addDetector(
+        'post',
+        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    );
 
     // Add a pattern value detector.
-    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    $this->request->addDetector(
+        'iphone',
+        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    );
 
     // Add an option detector
     $this->request->addDetector('internalIp', array(
@@ -190,10 +197,14 @@ Some examples would be::
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
 
-    // Add a callback detector. Can either be an anonymous function or a regular callable.
-    $this->request->addDetector('awesome', array('callback' => function ($request) {
-        return isset($request->awesome);
-    }));
+    // Add a callback detector. Can either be an anonymous function
+    // or a regular callable.
+    $this->request->addDetector(
+        'awesome',
+        array('callback' => function ($request) {
+            return isset($request->awesome);
+        })
+    );
 
 ``Request`` also includes methods like
 :php:meth:`Cake\\Network\\Request::domain()`,
@@ -314,7 +325,7 @@ Request API
 
 .. php:method:: addDetector($name, $options)
 
-    Add a detector to be used with is(). See :ref:`check-the-request`
+    Add a detector to be used with :php:meth:`CakeRequest::is()`. See :ref:`check-the-request`
     for more information.
 
 .. php:method:: accepts($type = null)
@@ -408,7 +419,7 @@ This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
 instance by setting ``$this->response`` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with ``header()``. See the section on
+out the methods that interact with :php:meth:`~CakeResponse::header()`. See the section on
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with Content Types
@@ -426,7 +437,7 @@ with ``type()`` as well::
     $this->response->type('vcf');
 
 Usually you'll want to map additional content types in your controller's
-``beforeFilter`` callback, so you can leverage the automatic view switching
+:php:meth:`~Controller::beforeFilter()` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
 .. _cake-response-file:
@@ -440,7 +451,8 @@ You can accomplish that by using :php:meth:`Cake\\Network\\Response::file()`::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Return reponse object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -453,7 +465,10 @@ CakePHP will send proper content type header if it's a known file type listed in
 If you want you can also force a file to be downloaded instead of being displayed in
 the browser by specifying the options::
 
-    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+    $this->response->file(
+        $file['path'],
+        array('download' => true, 'name' => 'foo')
+    );
 
 Sending a String as File
 ========================
@@ -469,7 +484,8 @@ a pdf or an ics generated on the fly, and serve the generated string as a file b
         //Optionally force file download
         $this->response->download('filename_for_download.ics');
 
-        //Return response object to prevent controller from trying to render a view
+        // Return response object to prevent controller from trying to render
+        // a view
         return $this->response;
     }
 
@@ -483,10 +499,17 @@ can be called with a few different parameter configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Set multiple headers
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    $this->response->header(array(
+        'Location' => 'http://example.com',
+        'X-Extra' => 'My header'
+    ));
 
-Setting the same header multiple times will result in overwriting the previous
+    $this->response->header(array(
+        'WWW-Authenticate: Negotiate',
+        'Content-type: application/pdf'
+    ));
+
+Setting the same :php:meth:`~CakeResponse::header()` multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when
 :php:meth:`Cake\\Network\\Response::header()` is called; instead they are buffered
 until the response is actually sent.
@@ -519,8 +542,8 @@ You can also tell clients that you want them to cache responses. By using
     }
 
 The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors' experience. ``cache()`` sets the
-Last-Modified value to the first argument.
+hopefully speeding up your visitors' experience. :php:meth:`CakeResponse::cache()` sets the
+``Last-Modified`` value to the first argument.
 ``Expires`` header and the ``max-age`` directive are set based on the second parameter.
 Cache-Control's ``public`` directive is set as well.
 
@@ -555,12 +578,12 @@ that can change the way browsers or proxies use the cached content. A
 ``Response`` class helps you set this header with some utility methods that
 will produce a final valid ``Cache-Control`` header. First of them is :php:meth:`Cake\\Network\\Response::sharable()`
 method, which indicates whether a response in to be considered sharable across
-different users or clients or users. This method actually controls the `public`
-or `private` part of this header. Setting a response as private indicates that
+different users or clients or users. This method actually controls the ``public``
+or ``private`` part of this header. Setting a response as private indicates that
 all or part of it is intended for a single user. To take advantage of shared
 caches it is needed to set the control directive as public
 
-Second parameter of this method is used to specify a `max-age` for the cache,
+Second parameter of this method is used to specify a ``max-age`` for the cache,
 which is the number of seconds, after which the response is no longer considered
 fresh::
 
@@ -590,8 +613,8 @@ no longer considered fresh. This header can be set using the
         $this->response->expires('+5 days');
     }
 
-This method also accepts a DateTime instance or any string that can be parsed by the
-DateTime class.
+This method also accepts a :php:class:`DateTime` instance or any string that can be parsed by the
+:php:class:`DateTime` class.
 
 The Etag Header
 ---------------
@@ -603,7 +626,7 @@ cache, but it asks the application every time
 whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.
 
-The ``Etag`` header (called entity tag) is a string that uniquely identifies the
+The :php:meth:`~CakeResponse::etag()` method (called entity tag) is a string that uniquely identifies the
 requested resource. It is very much like a checksum of a file; caching
 will compare checksums to tell whether they match or not.
 
@@ -644,9 +667,9 @@ To actually get advantage of using this header you have to either call manually
 The Vary Header
 ---------------
 
-In some cases you might want to serve different contents using the same URL.
+In some cases you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
-HTMLs depending on the browser. Under such circumstances you can use the ``Vary`` header::
+HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
     $this->response->vary('User-Agent');
     $this->response->vary('Accept-Encoding', 'User-Agent');
@@ -715,8 +738,8 @@ Response API
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Sets the ``Cache-Control`` header to be either `public` or `private` and
-    optionally sets a `max-age` directive of the resource
+    Sets the ``Cache-Control`` header to be either ``public`` or ``private`` and
+    optionally sets a ``max-age`` directive of the resource
 
 .. php:method:: expires($time = null)
 
@@ -755,7 +778,7 @@ Response API
 
 .. php:method:: send()
 
-    Once you are done creating a response, calling send() will send all
+    Once you are done creating a response, calling :php:meth:`~CakeResponse::send()` will send all
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 

@@ -4,7 +4,7 @@ Documentation
 Contributing to the documentation is simple. The files are hosted on
 https://github.com/cakephp/docs. Feel free to fork the repo, add your
 changes/improvements/translations and give back by issuing a pull request.
-You can even edit the docs online with github, without ever downloading the
+You can even edit the docs online with GitHub, without ever downloading the
 files -- the "Improve this Doc" button on any given page will direct you to
 GitHub's online editor for that page.
 

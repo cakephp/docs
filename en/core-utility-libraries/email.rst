@@ -208,7 +208,7 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Email``.  Email views can also use layouts,
+``View`` directory called ``Emails``. Email views can also use layouts,
 and elements just like normal views::
 
     $email = new Email();

@@ -20,7 +20,7 @@ d'une ``View``, utilisez la classe ``CakeTime``::
     }
 
 .. versionadded:: 2.1
-   ``CakeTime`` a été ajouté à partir de :php:class:`TimeHelper`.
+   ``CakeTime`` a été créé à partir de :php:class:`TimeHelper`.
 
 .. start-time
 
@@ -62,7 +62,8 @@ Formatage
 
         // Appelé avec TimeHelper
         echo $this->Time->dayAsSql('Aug 22, 2011', 'modified');
-        // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
+        // (modified >= '2011-08-22 00:00:00') AND
+        // (modified <= '2011-08-22 23:59:59')
 
         // Appelé avec CakeTime
         App::uses('CakeTime', 'Utility');
@@ -86,7 +87,8 @@ Formatage
 
         // Appelé avec TimeHelper
         echo $this->Time->daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
-        // (created >= '2011-08-22 00:00:00') AND (created <= '2011-08-25 23:59:59')
+        // (created >= '2011-08-22 00:00:00') AND
+        // (created <= '2011-08-25 23:59:59')
 
         // Appelé avec CakeTime
         App::uses('CakeTime', 'Utility');
@@ -104,19 +106,19 @@ Formatage
     :rtype: string
 
     Va retourner une chaîne formatée avec le format donné en utilisant les
-    `options de formatage de la fonction PHP date() <http://www.php.net/manual/en/function.date.php>`_::
+    `options de formatage de la fonction PHP strftime() <http://www.php.net/manual/en/function.strftime.php>`_::
 
         // appel via TimeHelper
-        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
+        echo $this->Time->format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');
         // August 22nd, 2011 11:53 AM
 
         echo $this->Time->format('%r', '+2 days');
-        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
+        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 AM EET
 
         // appel avec CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::format('2011-08-22 11:53:00', '%F %jS, %Y %h:%i %A');
-        echo CakeTime::format('+2 days', '%r');
+        echo CakeTime::format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');
+        echo CakeTime::format('+2 days', '%c');
 
     Vous pouvez aussi fournir la date/time en premier argument. En faisant cela
     vous devrez utiliser le format ``strftime`` compatible. Cette signature
@@ -252,25 +254,37 @@ Formatage
         // Appelé avec TimeHelper
         echo $this->Time->timeAgoInWords('Aug 22, 2011');
         // on 22/8/11
-        
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
+
         // on August 22nd, 2011
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y')
+        );
 
         // Appelé avec CakeTime
         App::uses('CakeTime', 'Utility');
         echo CakeTime::timeAgoInWords('Aug 22, 2011');
-        echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
+        echo CakeTime::timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y')
+        );
 
     Utilisez l'option 'end' pour déterminer le point de cutoff pour ne plus
     utiliser de mots; par défaut à '+1 month'::
 
         // Appelé avec TimeHelper
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y', 'end' => '+1 year')
+        );
         // On Nov 10th, 2011 it would display: 2 months, 2 weeks, 6 days ago
 
         // Appelé avec CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+        echo CakeTime::timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y', 'end' => '+1 year')
+        );
 
     Utilisez l'option 'accuracy' pour déterminer la précision de la sortie.
     Vous pouvez utiliser ceci pour limiter la sortie::

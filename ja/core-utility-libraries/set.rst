@@ -670,7 +670,7 @@ Set互換のパス記法
 
     enumメソッドは、HTMLのselect要素を使う時にうまく機能します。
     これは配列のリストから、キーが存在するものの値を返します。
-    
+
     もし $list にカンマ区切りで値を渡すと、0から始まる配列として構成されます。
     たとえば $list に「no, yes」を渡すと、 $list = array(0 => 'no', 1 => 'yes') となります。
 
@@ -746,7 +746,7 @@ Set互換のパス記法
     より詳しくSet::extract()について学ぶには、``/lib/Cake/Test/Case/Utility/SetTest.php`` の中のtextExcract()関数を参照してください。
 
 
-.. php:staticmethod:: filter($var, $isArray = null)
+.. php:staticmethod:: filter($var)
 
     :rtype: array
 
@@ -1271,7 +1271,7 @@ Set互換のパス記法
                 [5] => Transactional
             )
         */
-        $result = Set::normalize(Set::merge($a, $b)); // 2つをマージして正規化します 
+        $result = Set::normalize(Set::merge($a, $b)); // 2つをマージして正規化します
         /* $result は現段階で次のようになります。:
             Array
             (
@@ -1567,4 +1567,3 @@ Set互換のパス記法
             0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
         );
         */
-
