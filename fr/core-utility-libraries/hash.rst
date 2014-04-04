@@ -136,7 +136,7 @@ Les Types d'Attribut Correspondants
     insérer des données dans des points multiples::
 
         $users = $this->User->find('all');
-        $users = Set::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.User.new', 'value');
 
     .. versionchanged:: 2.5
         Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec

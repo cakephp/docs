@@ -67,7 +67,7 @@ use the ``String`` class::
     depending on the 'clean' key in $options. The default method used
     is text but html is also available. The goal of this function is to
     replace all whitespace and unneeded markup around placeholders that
-    did not get replaced by Set::insert.
+    did not get replaced by String::insert.
 
     You can use the following options in the options array::
 
