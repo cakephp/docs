@@ -704,6 +704,7 @@ PaginatorHelper
   templates.
 - The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
   Use ``{{page}}`` style placeholders instead.
+- ``url()`` has been renamed to ``generateUrl()`` to avoid method declaration clashes with ``Helper::url()``.
 
 By default all links and inactive text is wrapped in ``<li>`` elements. This
 helps make CSS easier to write, and improves compatibility with popular CSS
