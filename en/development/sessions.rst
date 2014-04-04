@@ -326,7 +326,7 @@ session, ``CakeSession`` provides a simple CRUD interface.
 
 .. php:staticmethod:: read($key)
 
-You can read values from the session using :php:meth:`Set::classicExtract()`
+You can read values from the session using :php:meth:`Hash::extract()`
 compatible syntax::
 
     CakeSession::read('Config.language');

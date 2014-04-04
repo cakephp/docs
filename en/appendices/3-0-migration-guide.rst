@@ -761,6 +761,11 @@ Testing
 Utility
 =======
 
+Set Class Removed
+-----------------
+
+The Set class has been removed, you should use the Hash class instead now.
+
 Inflector
 ---------
 
