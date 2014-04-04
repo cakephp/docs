@@ -21,7 +21,7 @@ des associations distantes. Pour cela, vous devriez voir les
 :ref:`joining-tables`.
 
 Pour utiliser le nouveau behavior, vous pouvez l'ajouter à la propriété
-$actAs de votre model::
+$actsAs de votre model::
 
     class Post extends AppModel {
         public $actsAs = array('Containable');
