@@ -169,8 +169,9 @@ Instalación avanzada y configuración flexible
 =============================================
 
 .. toctree::
+    :maxdepth: 1
 
-   installation/advanced-installation
+    installation/advanced-installation
 
 ¡ A por todas !
 ===============

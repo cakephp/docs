@@ -8,7 +8,6 @@ También puedes ver otros ejemplos en:
 `Bakery <http://bakery.cakephp.org/>`_ encontrarás también componentes listos para usar. No olvides que puedes ver el `código fuente del manual de CakePHP <http://thechaw.com/cakebook/>`_.
 
 .. toctree::
-    :glob:
     :maxdepth: 1
 
     tutorials-and-examples/blog/blog

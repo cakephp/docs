@@ -417,7 +417,7 @@ voulez l'arrêter, ou forcer à l'avoir::
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
-que vous pouvez utiliser::
+que vous pouvez utiliser:
 
 * ``ConsoleOutput::RAW`` - Sortie en ligne, aucun style ou format ne sera fait
   C'est un bon mode à utiliser si vous sortez du XML ou si voulez débugger
@@ -748,9 +748,9 @@ puisque tout est un tableau::
         )
     ));
 
-A l'intérieur du parser spec, vous pouvez définir les clés pour ``definition``,
-``arguments``, ``options``, et ``epilog``. Vous ne pouvez pas définir les
-sous-commandes dans un constructeur de type tableau. Les valeurs pour les
+A l'intérieur du parser spec, vous pouvez définir les clés pour `arguments``,
+``options``, ``description`` et ``epilog``. Vous ne pouvez pas définir les
+``sous-commandes`` dans un constructeur de type tableau. Les valeurs pour les
 arguments, et les options, doivent suivre le format que
 :php:func:`ConsoleOptionParser::addArguments()` et
 :php:func:`ConsoleOptionParser::addOptions()` utilisent. Vous pouvez aussi
@@ -1071,6 +1071,7 @@ Plus de sujets
     :maxdepth: 1
 
     console-and-shells/cron-jobs
+    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/i18n-shell
     console-and-shells/testsuite-shell

@@ -24,8 +24,8 @@
 ====================
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
-:doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie` や
-:doc:`/core-libraries/components/email` などにあります。これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
+:doc:`/core-libraries/components/authentication` や :doc:`/core-libraries/components/cookie` などにあります。
+これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
 ``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。::
 
     class PostsController extends AppController {

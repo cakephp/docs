@@ -47,7 +47,7 @@ debug() 関数は PHP 関数の print\_r() と同様に、グローバルに利�
   Output from this function is only shown if the core debug variable
   has been set to a value greater than 0.
 
-.. versionchanged:: 2.1 
+.. versionchanged:: 2.1
     ``debug()`` の出力は ``var_dump()`` のものと多くの点で似ており、内部的には :php:class:`Debugger` を使っています。
 
 ..
@@ -159,7 +159,7 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 
         //PostsController::index() の中で
         pr(Debugger::trace());
-        
+
         //出力
         PostsController::index() - APP/Controller/DownloadsController.php, line 48
         Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
@@ -192,14 +192,14 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
     $path （絶対パス） にあるファイルからの抜粋を取得します。$line 行目をハイライトし、$line 行目の前後 $context 行もあわせて取得します::
 
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
-        
+
         //下記のように出力されます
         Array
         (
             [0] => <code><span style="color: #000000"> * @access public</span></code>
             [1] => <code><span style="color: #000000"> */</span></code>
             [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-         
+
             [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
             [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
         )
@@ -263,7 +263,7 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 
 ..
   Logging messages is another good way to debug applications, and you can use
-  :php:class:`CakeLog` to do logging in your application.  All objects that 
+  :php:class:`CakeLog` to do logging in your application.  All objects that
   extend :php:class:`Object` have an instance method `log()` which can be used
   to log messages::
 
@@ -290,13 +290,13 @@ Debug Kit
 
 DebugKit は便利なデバッグツールをたくさん提供してくれるプラグインです。
 まずは、レンダリングされた HTML 内にツールバーを表示して、あなたのアプリケーションや現在のリクエストについての情報を大量に提供してくれます。
-github の `DebugKit <https://github.com/cakephp/debug_kit>`_ からダウンロードが可能です。
+GitHub の `DebugKit <https://github.com/cakephp/debug_kit>`_ からダウンロードが可能です。
 
 ..
   DebugKit is a plugin that provides a number of good debugging tools. It primarily
-  provides a toolbar in the rendered HTML, that provides a plethora of information about 
-  your application and the current request. You can download 
-  `DebugKit <https://github.com/cakephp/debug_kit>`_ from github.
+  provides a toolbar in the rendered HTML, that provides a plethora of information about
+  your application and the current request. You can download
+  `DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
 
 
 .. meta::

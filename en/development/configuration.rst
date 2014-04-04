@@ -293,7 +293,11 @@ context::
     The above example could also be written in a single call::
 
         Configure::write(
-            'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
+            'Company',
+            array(
+                'name' => 'Pizza, Inc.',
+                'slogan' => 'Pizza for your body and soul'
+            )
         );
 
     You can use ``Configure::write('debug', $bool)`` to switch between
@@ -311,7 +315,8 @@ context::
     data back::
 
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+        Configure::read('Company.slogan');  //yields: 'Pizza for your body
+                                            //and soul'
 
         Configure::read('Company');
 

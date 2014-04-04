@@ -80,7 +80,7 @@ access that at www.example.com/articles/foobar.
 
     You may be tempted to name your controllers and actions a certain
     way to obtain a certain URL. Resist that temptation. Follow CakePHP
-    conventions (plural controller names, etc.) and create readable,
+    conventions (capitalization, plural names, etc.) and create readable,
     understandable action names. You can map URLs to your code using
     "routes" covered later on.
 
@@ -100,12 +100,12 @@ logic and flow defined by our controller, let's create a view for
 the index action we created above.
 
 CakePHP views are just presentation-flavored fragments that fit inside
-an application's layout. For most applications they're HTML mixed
+an application's layout. For most applications, they're HTML mixed
 with PHP, but they may end up as XML, CSV, or even binary data.
 
-Layouts are presentation code that is wrapped around a view, and
-can be defined and switched between, but for now, let's just use
-the default.
+A layout is presentation code that is wrapped around a view.
+Multiple layouts can be defined, and you can switch between
+them, but for now, let's just use the default.
 
 Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
@@ -303,10 +303,15 @@ Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
 handled in the following sections.
 
+We call the ``create()`` method first in order to reset the model
+state for saving new information. It does not actually create a record in the
+database, but clears Model::$id and sets Model::$data based on your database
+field defaults. 
+
 Data Validation
 ===============
 
-CakePHP goes a long way in taking the monotony out of form input
+CakePHP goes a long way toward taking the monotony out of form input
 validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
@@ -329,7 +334,7 @@ Here's our add view:
     echo $this->Form->end();
     ?>
 
-Here, we use the FormHelper to generate the opening tag for an HTML
+We use the FormHelper to generate the opening tag for an HTML
 form. Here's the HTML that ``$this->Form->create()`` generates:
 
 .. code-block:: html
@@ -337,9 +342,9 @@ form. Here's the HTML that ``$this->Form->create()`` generates:
     <form method="post" action="/articles/add">
 
 If ``create()`` is called with no parameters supplied, it assumes
-you are building a form that submits to the current controller's
+you are building a form that submits via POST to the current controller's
 ``add()`` action (or ``edit()`` action when ``id`` is included in
-the form data), via POST.
+the form data).
 
 The ``$this->Form->input()`` method is used to create form elements
 of the same name. The first parameter tells CakePHP which field
@@ -578,13 +583,15 @@ For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
 By default, CakePHP responds to a request for the root of your site
-(i.e. http://www.example.com) using its PagesController, rendering
+(e.g., http://www.example.com) using its PagesController, rendering
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
 CakePHP's routing is found in ``/App/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
-route. It looks like this::
+route. It looks like this:
+
+.. code-block:: php
 
     Router::connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
 
@@ -599,13 +606,13 @@ our ArticlesController.
 
 .. note::
 
-    CakePHP also makes use of 'reverse routing' - if with the above
-    route defined you pass
+    CakePHP also makes use of 'reverse routing'. If, with the above
+    route defined, you pass
     ``['controller' => 'articles', 'action' => 'index']`` to a
-    function expecting an array, the resultant URL used will be '/'.
+    function expecting an array, the resulting URL used will be '/'.
     It's therefore a good idea to always use arrays for URLs as this
     means your routes define where a URL goes, and also ensures that
-    links point to the same place too.
+    links point to the same place.
 
 Conclusion
 ==========
@@ -617,11 +624,12 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-Now that you've created a basic CakePHP application you're ready for
-the real thing. Start your own project, read the rest of the
+Now that you've created a basic CakePHP application, you're ready for
+the real thing. Start your own project and read the rest of the
 :doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
-If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
+If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. 
+Welcome to CakePHP!
 
 Suggested Follow-up Reading
 ---------------------------

@@ -26,7 +26,7 @@ Example:
 .. php:staticmethod:: underscore($camelCase)
 
     underscoreはキャメルケースの文字列をアンダースコア(_)に変換します。
-    
+
     * **入力:** applePie, someThing
     * **出力:** apple\_pie, some\_thing
 
@@ -53,14 +53,14 @@ Example:
 .. php:staticmethod:: slug($word, $replacement = '_')
 
     slugは特殊文字をラテン文字に変換したり、スペースをアンダースコアに変換します。slugはUTF-8を前提とします。
-    
+
     * **入力:** apple purée
     * **出力:** apple\_puree
 
 .. php:staticmethod:: reset()
 
     resetは文字列を変更前の状態に戻します。テストでの利用を想定しています。
-    
+
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
     rulesはInflectorに対して新しい変換ルールを定義します。

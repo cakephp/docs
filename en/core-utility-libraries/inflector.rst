@@ -15,8 +15,8 @@ normally accessed statically. Example:
 
 .. php:staticmethod:: singularize($plural)
 
-    **Input:** Apples, Oranges, People, Men
-    **Output:** Apple, Orange, Person, Man
+    * **Input:** Apples, Oranges, People, Men
+    * **Output:** Apple, Orange, Person, Man
 
 .. php:staticmethod:: camelize($underscored)
 
@@ -28,7 +28,7 @@ normally accessed statically. Example:
     It should be noted that underscore will only convert camelCase
     formatted words. Words that contains spaces will be lower-cased,
     but will not contain an underscore.
-    
+
     * **Input:** applePie, someThing
     * **Output:** apple\_pie, some\_thing
 
@@ -57,14 +57,14 @@ normally accessed statically. Example:
     Slug converts special characters into latin versions and converting
     unmatched characters and spaces to underscores. The slug method
     expects UTF-8 encoding.
-    
+
     * **Input:** apple purée
     * **Output:** apple\_puree
 
 .. php:staticmethod:: reset()
 
     Resets Inflector back to its initial state, useful in testing.
-    
+
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
     Define new inflection and transliteration rules for Inflector to use.

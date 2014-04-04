@@ -237,6 +237,16 @@ Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
 have any problems with using the command line.
 
+.. warning::
+
+    Plugins do not work as namespacing to separate code.
+    Due to PHP lacking namespaces in older versions 
+    you cannot have the same class,
+    or same filename, in your plugins.
+    Even if it is two different plugins.
+    So use unique classes and filenames, possible prefixing
+    the class and filename with the plugin name.
+    
 
 Plugin Controllers
 ==================

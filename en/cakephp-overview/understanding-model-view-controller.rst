@@ -20,9 +20,9 @@ But in general they stand for the major concepts around which you
 implement your application.
 
 In the case of a social network, the Model layer would take care of
-tasks such as saving the user data, saving friends associations, storing
-and retrieving user photos, finding new friends for suggestions, etc.
-While the model objects can be thought as "Friend", "User", "Comment", or
+tasks such as saving the user data, saving friends' associations, storing
+and retrieving user photos, finding suggestions for new friends, etc.
+The model objects can be thought as "Friend", "User", "Comment", or
 "Photo".
 
 The View Layer
@@ -33,25 +33,25 @@ Model objects, it is responsible for using the information it has available
 to produce any presentational interface your application might need.
 
 For example, as the Model layer returns a set of data, the view would use it
-to render a HTML page containing it. Or a XML formatted result for others to
+to render a HTML page containing it, or a XML formatted result for others to
 consume.
 
-The View layer is not only limited to HTML or text representation of the data,
-it can be used to deliver a wide variety of formats depending on your needs,
+The View layer is not only limited to HTML or text representation of the data.
+It can be used to deliver a wide variety of formats depending on your needs,
 such as videos, music, documents and any other format you can think of.
 
 The Controller Layer
 ====================
 
-The Controller layer handles requests from users. It's responsible for rendering
-back a response with the aid of both the Model and the View Layer.
+The Controller layer handles requests from users. It is responsible for rendering
+a response with the aid of both the Model and the View layer.
 
-Controllers can be seen as managers taking care that all needed resources for
+A controller can be seen as a manager that ensures that all resources needed for
 completing a task are delegated to the correct workers. It waits for petitions
 from clients, checks their validity according to authentication or authorization rules,
-delegates data fetching or processing to the model, and selects the correct
-type of presentational data that the client is accepting, to finally delegate
-this rendering process to the View layer.
+delegates data fetching or processing to the model, selects the 
+type of presentational data that the clients are accepting, and finally delegates
+the rendering process to the View layer.
 
 
 CakePHP Request Cycle
@@ -66,12 +66,12 @@ resource in your application. This request is first processed by a dispatcher
 which will select the correct controller object to handle it.
 
 Once the request arrives at the controller, it will communicate with the Model layer
-to process any data fetching or saving operation that might be needed.
-After this communication is over, the controller will proceed at delegating to the
-correct view object the task of generating an output resulting from the data
+to process any data-fetching or -saving operation that might be needed.
+After this communication is over, the controller will proceed to delegate to the
+correct view object the task of generating output resulting from the data
 provided by the model.
 
-Finally, when this output is generated, it is immediately rendered to the user
+Finally, when this output is generated, it is immediately rendered to the user.
 
 Almost every request to your application will follow this basic
 pattern. We'll add some details later on which are specific to

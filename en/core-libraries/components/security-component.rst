@@ -15,11 +15,13 @@ Like all components it is configured through several configurable parameters.
 All of these properties can be set directly or through setter methods of the
 same name in your controller's beforeFilter.
 
-By using the Security Component you automatically get
+By using the Security Component you automatically get `CSRF
+<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and
 form tampering protection. Hidden token fields will
 automatically be inserted into forms and checked by the Security
-component. Among other things, a form submission will not be
-accepted if form fields have been modified.
+component. Among other things, a form submission will not be accepted after a
+certain period of inactivity, which is controlled by the
+``csrfExpires`` time.
 
 If you are using Security component's form protection features and
 other components that process form data in their ``startup()``
@@ -106,11 +108,24 @@ communication. Set them with the ``config()`` method.
 Form Tampering Prevention
 =========================
 
-By default ``SecurityComponent`` prevents users from tampering with forms. It
-does this by working with FormHelper and tracking which files are in a form. It
-also keeps track of the values of hidden input elements. All of this data is
-combined and turned into a hash. When a form is submitted, SecurityComponent
-will use the POST data to build the same structure and compare the hash.
+By default ``SecurityComponent`` prevents users from tampering with forms in
+specific ways. The ``SecurityComponent`` will prevent the following things:
+
+* Unknown fields cannot be added to the form.
+* Fields cannot be removed from the form.
+* Values in hidden inputs cannot be modified.
+
+Preventing these forms of tampering is accomplished by working with FormHelper
+and tracking which fields are in a form. The values for hidden fields are
+tracked as well. All of this data is combined and turned into a hash. When
+a form is submitted, SecurityComponent will use the POST data to build the same
+structure and compare the hash.
+
+
+.. note::
+
+    SecurityComponent will **not** prevent select options from being
+    added/changed. Nor will it prevent radio options from being added/changed.
 
 .. php:attr:: unlockedFields
 
@@ -199,7 +214,8 @@ Disabling Security Component for Specific Actions
 
 There may be cases where you want to disable all security checks for an action (ex. AJAX requests).
 You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your
-``beforeFilter``.
+``beforeFilter``. The ``unlockedActions`` property will **not** effect other
+features of ``SecurityComponent``.
 
 .. versionadded:: 2.3
 

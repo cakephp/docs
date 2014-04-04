@@ -1,7 +1,7 @@
 CakePHP Documentation
 =====================
 
-This documentation is planned to replace the existing cookbook.  Hopefully enabling community contributions and enabling multiple format documentation generation.
+This is the official documentation for the CakePHP project. It is available online in HTML, PDF and EPUB formats at http://book.cakephp.org.
 
 Requirements
 ------------
@@ -43,9 +43,20 @@ After installing the required packages, you can build the documentation using `M
 	# Populate the search index
 	make populate-index
 
-This will generate all the documentation in an html form.  Other output such as 'pdf' and 'htmlhelp' are not fully complete at this time.
+This will generate all the documentation in an html form.  Other output such as 'htmlhelp' are not fully complete at this time.
 
 After making changes to the documentation, you can build the html version of the docs by using `make html` again.  This will build only the html files that have had changes made to them.
+
+Building the PDF
+----------------
+
+Building the PDF is a non-trivial task.
+
+1. Install Latex - This varies by distribution/OS so refer to your package manager. You should install the full LaTeX package. The basic one requires many additional packages to be installed with `tlmgr`
+2. Run `make latex-en`.
+3. Run `make pdf-en`.
+
+At this point the completed PDF should be in build/latex/en/CakePHPCookbook.pdf.
 
 
 Contributing
@@ -89,5 +100,4 @@ Making search work locally
 * Start elasticsearch with the default configuration.
 * Populate the search index using `make populate-index`.
 * You should now be able to search the docs using elasticsearch.
-
 

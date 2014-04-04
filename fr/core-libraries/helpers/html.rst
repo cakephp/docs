@@ -123,7 +123,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::
 
-        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
+    .. versionchanged:: 2.4
+
+        echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
     .. versionchanged:: 2.1
         L'option ``block`` a été ajoutée.
@@ -187,7 +189,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         />
 
     Cette méthode peut aussi être utilisée pour ajouter les balise de mots clés
-    et les descriptions. Exemple::
+    et les descriptions. Exemple:
 
     .. code-block:: php
 
@@ -248,13 +250,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     ::
 
         echo $this->Html->docType();
-        // Affichera: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        // Sortie:
+        // <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        //    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
         echo $this->Html->docType('html5');
-        // Affichera: <!DOCTYPE html>
+        // Sortie: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // Affichera: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // Sortie:
+        // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        //    "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
         La valeur par défaut de doctype est HTML5 avec la version 2.1.
@@ -348,7 +354,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour spécifier les attributs des éléments et si le ``$title`` devra ou
     non être échappé.::
 
-        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+        echo $this->Html->link(
+            'Enter',
+            '/pages/home',
+            array('class' => 'button', 'target' => '_blank')
+        );
 
     Affichera:
 
@@ -360,7 +370,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->link(
             'Dashboard',
-            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+            array(
+                'controller' => 'dashboards',
+                'action' => 'index',
+                'full_base' => true
+            )
         );
 
     Affichera:
@@ -405,12 +419,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.:
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.::
 
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            array(
+                'controller' => 'recipes',
+                'action' => 'view',
+                'id' => 6,
+                'comments' => false
+            )
         );
 
     Affichera:
@@ -421,9 +440,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    Les caractères spéciaux HTML de ``$title``seront convertis en entités
+    Les caractères spéciaux HTML de ``$title`` seront convertis en entités
     HTML. Pour désactiver cette conversion, définissez l'option escape à
-    false dans le tableau ``$options``.::
+    false dans le tableau ``$options``::
 
         <?php
         echo $this->Html->link(
@@ -486,32 +505,39 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionadded:: 2.1
 
-    Retourne une balise formatée audio/video::
+    Retourne une balise formatée audio/video:
 
-        .. code-block:: php
+    .. code-block:: php
 
         <?php echo $this->Html->media('audio.mp3'); ?>
 
-        // Affichera
+        // Sortie
         <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
-            'text' => 'Texte de remplacement'
+            'text' => 'Fallback text'
         )); ?>
 
-        // Affichera
-        <video src="http://www.somehost.com/files/video.mp4">Texte de remplacement</video>
+        // Sortie
+        <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
         <?php echo $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+            array(
+                'video.mp4',
+                array(
+                    'src' => 'video.ogg',
+                    'type' => "video/ogg; codecs='theora, vorbis'"
+                )
+            ),
             array('autoplay')
         ); ?>
 
-        // Affichera
+        // Sortie
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
-            <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+            <source src="/files/video.ogg" type="video/ogg;
+                codecs='theora, vorbis'"/>
         </video>
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
@@ -953,8 +979,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         // Restituera
         /posts/search?foo=bar#first
 
-    Pour plus d'information voir
-    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
+    Pour plus d'information voir 
+    `Router::url <http://api.cakephp.org/2.4/class-Router.html#_url>`_
     dans l' API.
 
 .. php:method:: useTag(string $tag)
@@ -1039,7 +1065,7 @@ Création d'un chemin de navigation avec le Helper Html
 
     :param array $options: Un tableau de :term:`html attributes` pour les
         elements contenant ``<ul>``. Peut aussi contenir les options
-        'separator', 'firstClass' et 'lastClass'.
+        'separator', 'firstClass', 'lastClass' et 'escape'.
     :param string|array $startText: Le texte ou l'elément qui précède ul.
 
     Retourne le fil d'Ariane comme une liste (x)html.
@@ -1059,6 +1085,8 @@ Création d'un chemin de navigation avec le Helper Html
     .. versionchanged:: 2.3
         Les options 'separator', 'firstClass' et 'lastClass' ont été ajoutées.
 
+    .. versionchanged:: 2.5
+        L'option 'escape' a été ajoutée.
 
 .. meta::
     :title lang=fr: HtmlHelper

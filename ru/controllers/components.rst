@@ -7,7 +7,7 @@
 В CakePHP есть фантастический набор основных компонентов, которые упрощают
 работу с такими задачами:
 
-- Безопастность(Security)
+- Безопасность(Security)
 - Сессии(Sessions)
 - Уровни доступа(Access control lists)
 - Почта(Emails)
@@ -64,14 +64,13 @@ configuration options be set in the ``$components`` array::
 Consult the relevant documentation to determine what configuration
 options each component provides.
 
-Using Components
-================
+Использование компонентов
+=========================
 
-Once you've included some components in your controller, using them is
-pretty simple.  Each component you use is exposed as a property on your
-controller.  If you had loaded up the :php:class:`SessionComponent` and
-the :php:class:`CookieComponent` in your controller, you could access
-them like so::
+После того, как вы включили некоторые компоненты в контроллере, их использование
+довольно просто. Каждый компонент используется как свойство вашего
+контроллера. Если вы загрузили :php:class:`SessionComponent` и
+:php:class:`CookieComponent` в контроллер, вы можете использовать их вот так::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
@@ -85,12 +84,16 @@ them like so::
 
 .. note::
 
-    Since both Models and Components are added to Controllers as
-    properties they share the same 'namespace'.  Be sure to not give a
-    component and a model the same name.
+    Так как и Модели и Компоненты добавляются к контроллеру как свойства, они имеюо одно и тоже 'пространство имен'.
+    Необходимо проследить чтобы Компонент и Модель имели разные имена.
 
-Loading components on the fly
------------------------------
+Загрузка компонентов 'на лету'
+------------------------------
+
+Часто бывает, что Компонент не требуется в каждом контроллере. В данной ситуации
+вы можете загрузить компонент 'на лету' используя
+:doc:`Component Collection </core-libraries/collections>`. 
+Внутри контроллера вы должны сделать следующее::
 
 You might not need all of your components available on every controller action.
 In situations like this you can load a component at runtime using the

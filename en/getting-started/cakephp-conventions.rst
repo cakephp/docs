@@ -8,7 +8,7 @@ you free yourself from the maintenance nightmare of tracking config
 files. Convention also makes for a very uniform system development,
 allowing other developers to jump in and help more easily.
 
-CakePHP's conventions have been distilled out of years of web
+CakePHP's conventions have been distilled from years of web
 development experience and best practices. While we suggest you use
 these conventions while developing with CakePHP, we should mention
 that many of these tenets are easily overridden – something that is
@@ -38,22 +38,22 @@ will not be accessible directly from the web but is available for
 internal use. For example::
 
     class NewsController extends AppController {
-    
+
         public function latest() {
             $this->_findNewArticles();
         }
-        
+
         protected function _findNewArticles() {
             // Logic to find latest news articles
         }
     }
-    
+
 
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
 because the method is preceded with an underscore. You can also use
-PHP's visibility keywords to indicate whether or not a method can be 
+PHP's visibility keywords to indicate whether or not a method can be
 accessed from a URL. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names
@@ -94,7 +94,7 @@ classes you would typically use in a CakePHP application:
 
 
 -  The Controller class **KissesAndHugsController** would be found
-   in a file named **KissesAndHugsController.php** 
+   in a file named **KissesAndHugsController.php**
 -  The Component class **MyHandyComponent** would be found in a
    file named **MyHandyComponent.php**
 -  The Model class **OptionValue** would be found in a file named
@@ -123,19 +123,19 @@ You can use the utility library :php:class:`Cake\\Utility\\Inflector` to check
 the singular/plural of words. See the :doc:`/core-utility-libraries/inflector`
 for more information.
 
-Field names with two or more words are underscored like,
+Field names with two or more words are underscored:
 first\_name.
 
 Foreign keys in hasMany, belongsTo or hasOne relationships are
 recognized by default as the (singular) name of the related table
 followed by \_id. So if a Baker hasMany Cake, the cakes table will
 refer to the bakers table via a baker\_id foreign key. For a
-multiple worded table like category\_types, the foreign key would
-be category\_type\_id.
+table like category\_types whose name contains multiple words, 
+the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
-between models should be named after the model tables they will
-join in alphabetical order (apples\_zebras rather than
+between models, should be named after the model tables they will
+join, arranged in alphabetical order (apples\_zebras rather than
 zebras\_apples).
 
 View Conventions
@@ -152,6 +152,7 @@ The basic pattern is
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
 of configuration. Here's a final example that ties the conventions
+together:
 
 -  Database table: "people"
 -  Model class: "Person", found at /App/Model/Person.php

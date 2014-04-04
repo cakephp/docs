@@ -9,10 +9,10 @@ usually does–we've noticed that a few users struggle with getting
 everything to play nicely on their systems.
 
 Here are a few things you might try to get it running correctly.
-First look at your httpd.conf (Make sure you are editing the system
-httpd.conf rather than a user- or site-specific httpd.conf).
+First look at your httpd.conf. (Make sure you are editing the system
+httpd.conf rather than a user- or site-specific httpd.conf.)
 
-These files can vary on different distributions and apache versions.
+These files can vary between different distributions and Apache versions.
 You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
 
 
@@ -34,28 +34,28 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        #    Deny from all
        </Directory>
 
-#. Make sure you are loading up mod\_rewrite correctly. You should
+#. Make sure you are loading mod\_rewrite correctly. You should
    see something like::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   In many systems these will be commented out (by being prepended
-   with a #) by default, so you may just need to remove those leading
-   # symbols.
+   In many systems these will be commented out by default, so you may 
+   just need to remove the leading # symbols.
 
    After you make changes, restart Apache to make sure the settings
    are active.
 
    Verify that your .htaccess files are actually in the right
-   directories.
+   directories. Some operating systems treat files that start 
+   with '.' as hidden and therefore won't copy them.
 
    This can happen during copying because some operating systems treat
    files that start with '.' as hidden and therefore won't see them to
    copy.
 
-#. Make sure your copy of CakePHP app is from the downloads section of
-   the site, through composer or our Git repository, and has been unpacked
-   correctly by checking for .htaccess files.
+#. Make sure your copy of CakePHP comes from the downloads section of
+   the site or our Git repository, and has been unpacked correctly, by
+   checking for .htaccess files.
 
    CakePHP app directory (will be copied to the top directory of your
    application by bake)::
@@ -76,10 +76,10 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            RewriteRule ^ index.php [QSA,L]
        </IfModule>
 
-   If your CakePHP site still has problems with mod\_rewrite you might
-   want to try and modify settings for Virtual Hosts. If on Ubuntu,
+   If your CakePHP site still has problems with mod\_rewrite, you might
+   want to try modifying settings for Virtual Hosts. On Ubuntu,
    edit the file /etc/apache2/sites-available/default (location is
-   distribution dependent). In this file, ensure that
+   distribution-dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
        <Directory />
@@ -93,7 +93,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            Allow from all
        </Directory>
 
-   If on Mac OSX, another solution is to use the tool
+   On Mac OSX, another solution is to use the tool
    `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    to make a Virtual Host to point to your folder.
 
@@ -106,7 +106,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
    /App/.htaccess, /App/webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
-   directive, so for example your webroot .htaccess file would look
+   directive, so for example, your webroot .htaccess file would look
    like::
 
        <IfModule mod_rewrite.c>
@@ -118,7 +118,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </IfModule>
 
    The details of those changes will depend on your setup, and can
-   include additional things that are not CakePHP related. Please refer
+   include additional things that are not related to CakePHP. Please refer
    to Apache's online documentation for more information.
 
 #. (Optional) To improve production setup, you should prevent invalid assets
@@ -171,7 +171,7 @@ you will need PHP running as a FastCGI instance.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
@@ -194,8 +194,8 @@ these steps:
 
 #. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
-#. Create a new file in your CakePHP root folder, called web.config.
-#. Using Notepad or any XML-safe editor and copy the following
+#. Create a new file called web.config in your CakePHP root folder.
+#. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file...
 
 ::
@@ -205,21 +205,27 @@ these steps:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                    <rule name="Rewrite requests to test.php"
+                      stopProcessing="true">
                         <match url="^test.php(.*)$" ignoreCase="false" />
                         <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*"
+                      stopProcessing="true">
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
                     </rule>
-                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>

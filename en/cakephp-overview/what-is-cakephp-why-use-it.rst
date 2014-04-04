@@ -36,23 +36,23 @@ Here's a quick list of features you'll enjoy when using CakePHP:
    for database interaction.
 -  Code generation.
 -  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
-   architecture.
--  Request dispatcher with clean, custom URLs and routes.
+   architecture
+-  Request dispatcher with clean, custom URLs and routes
 -  Built-in
-   `validation <http://en.wikipedia.org/wiki/Data_validation>`_.
+   `validation <http://en.wikipedia.org/wiki/Data_validation>`_
 -  Fast and flexible
    `templating <http://en.wikipedia.org/wiki/Web_template_system>`_
-   (PHP syntax, with helpers).
--  View Helpers for AJAX, JavaScript, HTML Forms and more.
--  Email, Cookie, Security, Session, and Request Handling
-   Components.
+   (PHP syntax, with helpers)
+-  View helpers for AJAX, JavaScript, HTML forms and more
+-  Email, cookie, security, session, and request handling
+   Components
 -  Flexible
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_.
--  Data Sanitization.
--  Flexible `Caching <http://en.wikipedia.org/wiki/Web_cache>`_.
--  Localization.
+   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_
+-  Data sanitization
+-  Flexible `caching <http://en.wikipedia.org/wiki/Web_cache>`_
+-  Localization
 -  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved.
+   `Apache <http://httpd.apache.org/>`_ configuration involved
 
 
 .. meta::

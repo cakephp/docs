@@ -110,7 +110,7 @@ CakePHP a besoin que tous les adaptateurs de logging intégrent
 
 .. versionadded:: 2.4
 
-Depuis 2.4 le moteur ``FileLog`` a quelques nouvelles configurations::
+Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
@@ -129,7 +129,7 @@ Depuis 2.4 le moteur ``FileLog`` a quelques nouvelles configurations::
 
     Avant 2.4 vous deviez inclure le suffixe ``Log`` dans votre configuration
     (``LoggingPack.DatabaseLog``). Ce n'est plus nécessaire maintenant.
-    Si vous avez utilisé un moteur de Log comme ```DatabaseLogger`` qui ne suit
+    Si vous avez utilisé un moteur de Log comme ``DatabaseLogger`` qui ne suit
     pas la convention d'utiliser un suffixe ``Log`` pour votre nom de classe,
     vous devez ajuster votre nom de classe en ``DatabaseLog``. Vous devez
     aussi éviter les noms de classe comme ``SomeLogLog`` qui inclut le suffixe
@@ -218,9 +218,7 @@ les écritures ou utiliser un stockage complètement différent pour vos logs.
 Utiliser syslog est à peu près comme utiliser le moteur par défaut FileLog,
 vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
-par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`.
-
-::
+par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`::
 
     CakeLog::config('default', array(
         'engine' => 'Syslog'
@@ -237,7 +235,7 @@ comprend les clés suivantes:
   ``error - Web Server 1 - An error occurred in this request`` après avoir
   remplacé les placeholders.
 * `prefix`: Une chaine qui va être préfixée à tous les messages de log.
-* `flag`: Un drapeau entier utilisé pour l'ouverture de la connection à
+* `flag`: Un drapeau entier utilisé pour l'ouverture de la connexion à
   logger, par défaut `LOG_ODELAY` sera utilisée. Regardez la documentation
   de `openlog` pour plus d'options.
 * `facility`: Le slot de journalisation à utiliser dans syslog. Par défaut

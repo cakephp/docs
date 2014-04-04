@@ -111,6 +111,12 @@ Accepted keys for ``$options``:
 * ``escape`` Whether you want the contents HTML entity encoded, defaults to
   true.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
+* ``direction`` The default direction to use when this link isn't active.
+* ``lock`` Lock direction. Will only use the default direction then, defaults to false.
+
+  .. versionadded:: 2.5
+    You can now set the lock option to true in order to lock the sorting direction into the
+    specified direction.
 
 Assuming you are paginating some posts, and are on page one::
 
@@ -134,7 +140,11 @@ Output:
 
 If you are using HTML like images in your links remember to set escaping off::
 
-    echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
+    echo $this->Paginator->sort(
+      'user_id',
+      '<em>User account</em>',
+      array('escape' => false)
+    );
 
 Output:
 
@@ -153,7 +163,11 @@ Output:
 
     <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=desc">User Id</a>
 
-.. php:method:: sortDir(string $model = null, mixed $options = [])
+The lock option can be used to lock sorting into the specified direction::
+
+    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
+
+.. php:method:: sortDir(string $model = null, mixed $options = array())
 
     Gets the current direction the recordset is sorted.
 

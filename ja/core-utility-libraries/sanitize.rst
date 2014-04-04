@@ -12,7 +12,7 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 (例：コントローラの定義の前に設置する場合) ::
 
     App::uses('Sanitize', 'Utility');
-    
+
     class MyController extends AppController {
         ...
         ...

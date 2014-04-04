@@ -313,8 +313,8 @@ Cela nous montre que nous avons 3 groups et 3 users. Les users
 sont imbriqués dans les groups, ce qui signifie que nous pouvons définir des
 permissions sur une base par groupe ou par user.
 
-ACL basé sur les groupe uniquement
-----------------------------------
+ACL basé uniquement sur les groupes
+-----------------------------------
 
 Dans la cas où nous souhaiterions simplifier en utilisant les permissions
 par groups, nous avons besoin d'implémenter ``bindNode()`` dans le model
@@ -324,11 +324,21 @@ par groups, nous avons besoin d'implémenter ``bindNode()`` dans le model
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
-Cette méthode va demander à ACL de ne pas vérifier les AROs de ``User``
-mais de seulement vérifier les AROs de ``Group``.
+Modifiez le ``actsAs`` pour le model ``User`` et désactivez la directive
+requester::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+Cette méthode, avec le changement de configuration, va dire à ACL de ne pas
+vérifier les Aros des ``User`` Aro's et de vérifier seulement les Aros de
+``Group``.
 
 Chaque user devra être assigné à un ``group_id`` pour que ceci fontionne
-correctement.
+correctement. De plus, vous devrez changer ce qui suit dans le model ``User``::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+ceci évite que le callback afterSave soit appelé.
 
 Dans ce cas, notre table `aros`` va ressembler à ceci ::
 
@@ -374,7 +384,7 @@ configuration de ``AuthComponent``. L'``AuthComponent`` doit être renseigné su
 l'existence de ce nœud root, de sorte que lors des contrôles de l'ACL, le
 component puisse utiliser le bon chemin de nœud lors de la recherche
 controllers/actions. Dans l'``AppController``, assurez vous que le tableau
-``$components`` contient l'``actionPath`` défini avant.
+``$components`` contient l'``actionPath`` défini avant::
 
     class AppController extends Controller {
         public $components = array(
@@ -388,7 +398,6 @@ controllers/actions. Dans l'``AppController``, assurez vous que le tableau
         );
 
 Continuez à :doc:`part-two` pour continuer le tutoriel.
-
 
 .. meta::
     :title lang=fr: Application Simple contrôlée par Acl

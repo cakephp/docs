@@ -66,9 +66,11 @@ interne, on peut auusi les trouver dans les paramètres de la requête:
 * ``action`` L'action gère la requête courante.
 * ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
-* ``bare`` Présent quand la requête vient de requestAction() et inclut l'option
-  bare. Les requêtes vides n'ont pas de layout de rendu.
-* ``requested`` Présent et mis à true quand l'action vient de requestAction.
+* ``bare`` Présent quand la requête vient de
+  :php:meth:`~Controller::requestAction()` et inclut l'option bare. Les requêtes
+  vides n'ont pas de layout de rendu.
+* ``requested`` Présent et mis à true quand l'action vient de
+  :php:meth:`~Controller::requestAction()`.
 
 Accéder aux paramètres Querystring
 ==================================
@@ -80,7 +82,8 @@ Les paramètres Querystring peuvent être lus en utilisant
     $this->request->query['page'];
 
     //  Vous pouvez aussi y accéder par un tableau
-    $this->request['url']['page']; // accesseur BC, va être déprécié dans les versions futures
+    // accesseur BC, va être déprécié dans les versions futures
+    $this->request['url']['page'];
 
 Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
 utiliser php:meth:`~Cake\\Network\\Request::query()` pour lire l'URL requêtée
@@ -197,10 +200,16 @@ de detecteurs que vous pouvez créer:
 Quelques exemples seraient::
 
     // Ajouter un détecteur d'environment.
-    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    $this->request->addDetector(
+        'post',
+        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    );
     
     // Ajouter un détecteur de valeur model.
-    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    $this->request->addDetector(
+        'iphone',
+        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    );
     
     // Ajouter un détecteur d'options
     $this->request->addDetector('internalIp', array(
@@ -339,8 +348,8 @@ API de Request
 
 .. php:method:: addDetector($name, $options)
 
-    Ajoute un détecteur pour être utilisé avec is().  Voir 
-    :ref:`check-the-request` pour plus d'informations.
+    Ajoute un détecteur pour être utilisé avec :php:meth:`CakeRequest::is()`.
+    Voir :ref:`check-the-request` pour plus d'informations.
 
 .. php:method:: accepts($type = null)
 
@@ -440,8 +449,8 @@ Cela fera que tous les controllers dans votre application utiliseront
 aussi remplacer l'instance de réponse de la configuration
 ``$this->response`` dans vos controllers. Ecraser l'objet réponse
 est à portée de main pour les tests car il vous permet d'écraser les
-méthodes qui interragissent avec ``header()``. Voir la section sur
-:ref:`cakeresponse-testing` pour plus d'informations.
+méthodes qui interragissent avec :php:meth:`~CakeResponse::header()`. Voir la
+section sur :ref:`cakeresponse-testing` pour plus d'informations.
 
 Gérer les types de contenu
 ==========================
@@ -458,9 +467,10 @@ vous pouvez faire correspondre ces types avec ``type()`` comme ceci::
     $this->response->type('vcf');
 
 Habituellement, vous voudrez faire correspondre des types de contenu
-supplémentaires dans le callback ``beforeFilter`` de votre controller,
-afin que vous puissiez tirer parti de la fonctionnalité de vue de commutation
-automatique de :php:class:`RequestHandlerComponent`, si vous l'utilisez.
+supplémentaires dans le callback :php:meth:`~Controller::beforeFilter()` de
+votre controller, afin que vous puissiez tirer parti de la fonctionnalité de
+vue de commutation automatique de :php:class:`RequestHandlerComponent`, si vous
+l'utilisez.
 
 .. _cake-response-file:
 
@@ -474,7 +484,8 @@ requêtes. Vous pouvez faire cela en utilisant
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Retourne un objet reponse pour éviter que le controller n'essaie de rendre la vue
+        //Retourne un objet reponse pour éviter que le controller n'essaie de
+        // rendre la vue
         return $this->response;
     }
 
@@ -488,7 +499,10 @@ méthode :php:meth:`Cake\\Network\\Response::type()`.
 Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au lieu
 d'être affiché dans le navigateur en spécifiant les options::
 
-    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+    $this->response->file(
+        $file['path'],
+        array('download' => true, 'name' => 'foo')
+    );
 
 Envoyer une chaîne en fichier
 =============================
@@ -505,7 +519,8 @@ chaîne générée en fichier, vous pouvez faire cela en utilisant::
         //Force le téléchargement de fichier en option
         $this->response->download('filename_for_download.ics');
 
-        //Retourne l'object pour éviter au controller d'essayer de rendre une vue
+        //Retourne l'object pour éviter au controller d'essayer de rendre
+        // une vue
         return $this->response;
     }
 
@@ -520,8 +535,14 @@ quelques paramètres de configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Régler plusieurs en-têtes
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    $this->response->header(array(
+        'Location' => 'http://example.com',
+        'X-Extra' => 'My header'
+    ));
+    $this->response->header(array(
+        'WWW-Authenticate: Negotiate',
+        'Content-type: application/pdf'
+    ));
 
 Régler le même en-tête de multiples fois entraînera l'écrasement des
 précédentes valeurs, un peu comme les appels réguliers d'en-tête. Les en-têtes
@@ -562,9 +583,9 @@ des réponses. En utilisant :php:meth:`Cake\\Network\\Response::cache()`::
 
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
 pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
-``cache()`` définit la valeur dernièrement modifiée en premier argument. Expires,
-et ``max-age`` sont définis en se basant sur le second paramètre. Le
-Cache-Control est défini aussi à ``public``.
+:php:meth:`CakeResponse::cache()` définit valeur ``Last-Modified`` en
+premier argument. Expires, et ``max-age`` sont définis en se basant sur le
+second paramètre. Le Cache-Control est défini aussi à ``public``.
 
 
 .. _cake-response-caching:
@@ -610,7 +631,7 @@ indique que tout ou une partie de celle-ci est prévue pour un unique
 utilisateur. Pour tirer profit des mises en cache partagées, il est nécessaire
 de définir la directive de contrôle en publique.
 
-Le deuxième paramètre de cette méthode est utilisé pour spécifier un `max-age`
+Le deuxième paramètre de cette méthode est utilisé pour spécifier un ``max-age``
 pour le cache, qui est le nombre de secondes après lesquelles la réponse n'est
 plus considérée comme récente::
 
@@ -641,8 +662,8 @@ en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`::
         $this->response->expires('+5 days');
     }
 
-Cette méthode accepte aussi une instance DateTime ou toute chaîne de caractère
-qui peut être parsée par la classe DateTime.
+Cette méthode accepte aussi une instance :php:class:`DateTime` ou toute chaîne
+de caractère qui peut être parsée par la classe :php:class:`DateTime`.
 
 L'en-tête Etag
 --------------
@@ -655,10 +676,11 @@ il demande à l'application à chaque fois si les ressources ont changé ou non.
 C'est utilisé couramment avec des ressources statiques comme les images et
 autres choses.
 
-L'en-tête ``Etag`` (appelé balise d'entité) est une chaîne de caractère qui
-identifie de façon unique les ressources requêtées. Il est très semblable
-à la somme de contrôle d'un fichier; la mise en cache permettra de comparer
-les sommes de contrôle pour savoir si elles correspondent ou non.
+L'en-tête :php:meth:`~CakeResponse::etag()` (appelé balise d'entité) est une
+chaîne de caractère qui identifie de façon unique les ressources requêtées. Il
+est très semblable à la somme de contrôle d'un fichier; la mise en cache
+permettra de comparer les sommes de contrôle pour savoir si elles correspondent
+ou non.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
@@ -776,8 +798,9 @@ API de Response
 
 .. php:method:: sharable($public = null, $time = null)
 
-    Configure l'en-tête ``Cache-Control`` pour être soit `public` soit `private` 
-    et configure optionnellement une directive de la ressource à un `max-age`.
+    Configure l'en-tête ``Cache-Control`` pour être soit ``public`` soit
+    ``private`` et configure optionnellement une directive de la ressource à un
+    ``max-age``.
 
 .. php:method:: expires($time = null)
 

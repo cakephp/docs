@@ -48,7 +48,7 @@ can be either a string or an array of view variables to serialize::
 
     class PostsController extends AppController {
         public $components = array('RequestHandler');
-        
+
         public function index() {
             $this->set('posts', $this->paginate());
             $this->set('_serialize', array('posts'));
@@ -59,7 +59,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
     class PostsController extends AppController {
         public $components = array('RequestHandler');
-        
+
         public function index() {
             // some code that created $posts and $comments
             $this->set(compact('posts', 'comments'));
@@ -94,7 +94,7 @@ JSON response. This is a situation where a view file would be useful::
     }
     echo json_encode(compact('posts', 'comments'));
 
-You can do more more complex manipulations, or use helpers to do formatting as
+You can do more complex manipulations, or use helpers to do formatting as
 well.
 
 .. note::
@@ -132,5 +132,5 @@ JSONP Response
 When using JsonView you can use the special view variable ``_jsonp`` to enable
 returning a JSONP response. Setting it to ``true`` makes the view class check if query
 string parameter named "callback" is set and if so wrap the json response in the
-function name provided. If you want to use a custom query string paramer name
+function name provided. If you want to use a custom query string parameter name
 instead of "callback" set ``_jsonp`` to required name instead of ``true``.

@@ -335,7 +335,7 @@ contexte statique::
 
         Configure::read('Company');
 
-        //yields: 
+        //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     Si $key est laissé à null, toutes les valeurs dans Configure seront

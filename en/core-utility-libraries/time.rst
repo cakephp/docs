@@ -55,7 +55,8 @@ Formatting
 
         // called via TimeHelper
         echo $this->Time->dayAsSql('Aug 22, 2011', 'modified');
-        // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
+        // (modified >= '2011-08-22 00:00:00') AND
+        // (modified <= '2011-08-22 23:59:59')
 
         // called as Time
         use Cake\Utility\Time;
@@ -72,7 +73,8 @@ Formatting
 
         // called via TimeHelper
         echo $this->Time->daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
-        // (created >= '2011-08-22 00:00:00') AND (created <= '2011-08-25 23:59:59')
+        // (created >= '2011-08-22 00:00:00') AND
+        // (created <= '2011-08-25 23:59:59')
 
         // called as Time
         use Cake\Utility\Time;
@@ -83,14 +85,14 @@ Formatting
     :rtype: string
 
     Will return a string formatted to the given format using the
-    `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
+    `PHP strftime() formatting options <http://www.php.net/manual/en/function.strftime.php>`_::
 
         // called via TimeHelper
-        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
-        // August 22nd, 2011 11:53 AM
+        echo $this->Time->format('2011-08-22 11:53:00', '%B %e, %Y %H:%M %p');
+        // August 22, 2011 11:53 AM
 
-        echo $this->Time->format('%r', '+2 days');
-        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
+        echo $this->Time->format('+2 days', '%c');
+        // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 AM EET
 
         // called as Time
         use Cake\Utility\Time;
@@ -179,8 +181,11 @@ Formatting
         echo $this->Time->timeAgoInWords('Aug 22, 2011');
         // on 22/8/11
 
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
         // on August 22nd, 2011
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y')
+        );
 
         // called as Time
         use Cake\Utility\Time;
@@ -190,7 +195,10 @@ Formatting
     Use the 'end' option to determine the cutoff point to no longer will use words; default '+1 month'::
 
         // called via TimeHelper
-        echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+        echo $this->Time->timeAgoInWords(
+            'Aug 22, 2011',
+            array('format' => 'F jS, Y', 'end' => '+1 year')
+        );
         // On Nov 10th, 2011 it would display: 2 months, 2 weeks, 6 days ago
 
         // called as Time

@@ -390,7 +390,7 @@ ExceptionRenderer クラスは ``CakeErrorController`` を活用して、あな�
 
 ..
   The error page views are located at ``app/View/Errors/``. For all 4xx and 5xx errors
-  the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can 
+  the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can
   customize them as per your needs. By default your ``app/Layouts/default.ctp`` is used
   for error pages too. If for eg. you want to use another layout ``app/Layouts/my_error.ctp``
   for your error pages, then simply edit the error views and add the statement

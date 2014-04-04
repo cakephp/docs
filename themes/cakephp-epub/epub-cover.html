@@ -1,0 +1,33 @@
+{#
+    epub/epub-cover.html
+    ~~~~~~~~~~~~~~~~~~~~
+
+    Sample template for the html cover page.
+
+    :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
+#}
+{% extends "layout.html" %}
+{%- block rootrellink %}{% endblock %}
+{%- block relbaritems %}{% endblock %}
+{%- block sidebarlogo %}{% endblock %}
+{%- block linktags %}{% endblock %}
+{%- block relbar1 %}{% endblock %}
+{%- block sidebar1 %}{% endblock %}
+{%- block sidebar2 %}{% endblock %}
+{%- block footer %}{% endblock %}
+
+{% block content %}
+  {# 
+     Ultimately, this should probably just be an image of a nice 
+     cover like a real book instead of building it like a web page
+     with a bunch of text elements.
+  #}
+  <div class="epub-cover">
+    <img src="{{ image }}" alt="Cover image" />
+    <p><h1 style="text-align:right">{{ title }}</h1></p>
+    <p style="text-align:right; font-style:italic; font-weight:bold">Release {{ release }}</p>
+    <p style="text-align:right; font-weight:bold">Cake Software Foundation</p>
+  </div>
+{% endblock %}
+

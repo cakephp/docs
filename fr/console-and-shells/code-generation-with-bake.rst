@@ -8,11 +8,6 @@ seulement des squelettes de classes : Bake peut créer une application
 fonctionnelle complète en seulement quelques minutes. En réalité, Bake est
 une étape naturelle à suivre une fois qu'une application a été prototypée.
 
-Ceux qui sont novices avec Bake (spécialement les utilisateurs de Windows)
-pourront trouver le
-`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
-utile pour paramétrer les choses avant de continuer.
-
 Suivant la configuration de votre installation, vous devrez peut être donner
 les droits d'exécution au script bash cake ou l'appeler avec la commande
 ./cake bake.
@@ -60,6 +55,12 @@ ligne de commande ::
     $ cake bake test
     $ cake bake plugin plugin_name
     $ cake bake all
+
+.. versionchanged:: 2.5
+    Les fichiers Test créés par ``bake test`` incluent les appels vers
+    `PHPunit's markTestIncomplete() <http://phpunit.de/manual/3.7/en/incomplete-and-skipped-tests.html>`_
+    pour attirer votre attention sur les méthodes de test vides. Avant 2.5, les
+    tests vides passaient sans messages.
 
 
 Modifier le HTML par défaut produit par les templates de bake
@@ -119,7 +120,7 @@ avec le rajout de fonctionnalités et améliorations.
 -  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans
    vos shells.
 -  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser
-   d'autres connections de bake que le 'default'.
+   d'autres connexions de bake que le 'default'.
    Utilisez le paramètre ``-connection``.
 -  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant
    utiliser ``--plugin NomDuPlugin`` ou ``Plugin.class``.

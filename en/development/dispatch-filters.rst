@@ -4,7 +4,7 @@ Dispatcher Filters
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,
 such as response caching, header tuning, special authentication or just to
-provide access to a mission-critical 
+provide access to a mission-critical
 API response in lesser time than a complete
 request dispatching cycle would take.
 
@@ -47,7 +47,10 @@ executed in the order they were defined. There is also an alternative way for
 attaching filters that do not involve the special ``DispatcherFilter`` classes::
 
     Configure::write('Dispatcher.filters', array(
-        'my-filter' => array('callable' => array($classInstance, 'methodName'), 'on' => 'after')
+        'my-filter' => array(
+            'callable' => array($classInstance, 'methodName'),
+            'on' => 'after'
+        )
     ));
 
 As shown above, you can pass any valid PHP `callback <http://php.net/callback>`_
@@ -98,6 +101,21 @@ plugins::
 Feel free to remove the default attached filters if you choose to use a more
 advanced/faster way of serving theme and plugin assets or if you do not wish to
 use built-in full page caching, or just implement your own.
+
+If you need to pass constructor parameters or settings to you dispatch filter
+classes you can do that by providing an array of settings::
+
+    Configure::write('Dispatcher.filters', array(
+        'MyAssetFilter' => array('service' => 'google.com')
+    ));
+
+When the filter key is a valid classname, the value can be an array of
+parameters that are passed to the dispatch filter. By default the base class
+will assign these settings to the ``$settings`` property after merging them with
+the defaults in the class.
+
+.. versionchanged:: 2.5
+    You can now provide constructor settings to dispatch filters in 2.5.
 
 Filter Classes
 ==============

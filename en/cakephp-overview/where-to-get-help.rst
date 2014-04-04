@@ -35,7 +35,7 @@ with the community and gain instant fame and fortune.
 The API
 =======
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
 Straight to the point and straight from the core developers, the
 CakePHP API (Application Programming Interface) is the most
@@ -76,27 +76,24 @@ donate your brand new sports car.
 
 .. _cakephp-official-communities:
 
-CakePHP Official Communities
-============================
-CakePHP also has it's official group in most popular social networking sites like Facebook, Google Plus. There are
-thousands of people discussing CakePHP projects, helping each other, solving problems, building projects
-and sharing ideas. It can be a great resource for finding archived answers, frequently asked questions, and
-getting answers to immediate problems. Join other CakePHP users in the following communities.
+Official CakePHP discussion group
+=================================
+`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
--   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
--   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
--   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
+CakePHP also has its official discusson group on Google Groups.
+There are thousands of people discussing CakePHP projects, helping each other,
+solving problems, building projects and sharing ideas.
+It can be a great resource for finding archived answers, frequently asked questions, and
+getting answers to immediate problems. Join other CakePHP users and start discussing.
 
 
-CakePHP Questions
-=================
+Stackoverflow
+=============
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Simply register/login and ask a question. Wait until you've got some answers 
-and pick the correct answer. You can view, comment and vote on previously asked 
-and solved questions as well.
-
+Tag your questions with ``cakephp`` and the specific version you are using to enable
+existing users of stackoverflow to find your questions.
 
 .. meta::
     :title lang=en: Where to Get Help

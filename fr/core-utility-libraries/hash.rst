@@ -27,6 +27,9 @@ groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
 appliquez les matchers aux élements de l'expression.
 
+Types d'expression
+------------------
+
 +--------------------------------+--------------------------------------------+
 | Expression                     | Définition                                 |
 +================================+============================================+
@@ -43,9 +46,12 @@ appliquez les matchers aux élements de l'expression.
 
 Tous les éléments d'expression supportent toutes les méthodes. En plus des
 éléments d'expression, vous pouvez utiliser les attributs qui matchent avec
-certaines méthodes. Il y a ``extract()``,
-``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
-``apply()``, ``sort()`` et ``nest()``.
+certaines méthodes. Il y a ``extract()``, ``combine()``, ``format()``,
+``check()``, ``map()``, ``reduce()``, ``apply()``, ``sort()``, ``insert()``,
+``remove()`` et ``nest()``.
+
+Les Types d'Attribut Correspondants
+-----------------------------------
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -73,6 +79,9 @@ certaines méthodes. Il y a ``extract()``,
 |                                | matchant avec l'expression régulière       |
 |                                | à l'intérieur de ``...``.                  |
 +--------------------------------+--------------------------------------------+
+
+.. versionchanged:: 2.5
+    Le support des matcher a été ajouté dans ``insert()`` et ``remove()``.
 
 .. php:staticmethod:: get(array $data, $path)
 
@@ -104,8 +113,7 @@ certaines méthodes. Il y a ``extract()``,
 
     :rtype: array
 
-    Insère $data dans un tableau comme défini par $path. Cette méthode
-    supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
+    Insère $data dans un tableau tel que défini dans ``$path``::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -130,13 +138,15 @@ certaines méthodes. Il y a ``extract()``,
         $users = $this->User->find('all');
         $users = Set::insert($users, '{n}.User.new', 'value');
 
+    .. versionchanged:: 2.5
+        Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
+        insert().
+
 .. php:staticmethod:: remove(array $data, $path = null)
 
     :rtype: array
 
-    Retire tous les éléments d'un tableau qui matche avec $path. Cette
-    méthode supporte **seulement** tous les éléments d'expression de
-    :ref:`hash-path-syntax`::
+    Retire tous les éléments d'un tableau qui matche avec $path.::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -156,6 +166,10 @@ certaines méthodes. Il y a ``extract()``,
 
     L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs
     multiples en une fois.
+
+    .. versionchanged:: 2.5
+        Depuis 2.5.0, les expressions matchant l'attribut fonctionnenent avec
+        remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
@@ -633,6 +647,12 @@ certaines méthodes. Il y a ``extract()``,
     Crée une valeur unique, en extrayant $path, et en réduisant les résultats
     extraits avec $function. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
+
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    $function. La fonction va récupérer les valeurs extraites en premier
+    argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

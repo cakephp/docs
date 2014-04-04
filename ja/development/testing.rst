@@ -21,7 +21,7 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
     システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
-一旦pear installerによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
+一旦PEARインストーラーによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
 ライブラリがあるか確認してください。PHPUnitのファイルが、php.iniファイルで設定されている
 ``include_path`` のディレクトリ以下にあるかどうか確かめることで調べられます。
 
@@ -242,11 +242,11 @@ CakePHPはテストを実行するために ``test`` シェルを提供します
 
 実行したいテストメソッドは、大文字小文字を区別する正規表現を使ってフィルタリングすることができます。
 
-コードカバレッジの作成
+コードカバレッジの生成
 ~~~~~~~~~~~~~~~~~~~~~~
 
 コマンドラインからPHPUnitに組み込まれたコードカバレッジツールを用いて、コードカバレッジの
-レポートを作成することができます。PHPUnitはカバレッジの結果を含む静的なHTMLファイルを
+レポートを生成することができます。PHPUnitはカバレッジの結果を含む静的なHTMLファイルを
 いくつか生成します。テストケースのカバレッジを生成するには以下のようにします。::
 
     ./Console/cake test app Model/Article --coverage-html webroot/coverage
@@ -298,7 +298,7 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 フィクスチャを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持った
 テーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
 それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。
-``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、
+``app/Test/Fixture`` というディレクトリに ``ArticleFixture.php`` という名前のファイルを作成し、
 以下のとおりに記述してください。::
 
     class ArticleFixture extends CakeTestFixture {
@@ -619,9 +619,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
                 $this->Article->save($this->request->data);
             }
             if (!empty($short)) {
-                $result = $this->Article->findAll(null, array('id', 'title'));
+                $result = $this->Article->find('all', array('id', 'title'));
             } else {
-                $result = $this->Article->findAll();
+                $result = $this->Article->find('all');
             }
 
             if (isset($this->params['requested'])) {
@@ -901,6 +901,17 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
         }
     }
 
+ビューのテスト
+==============
+
+一般的に、ほとんどのアプリケーションは、直接HTMLコードをテストしません。
+そのため、多くの場合、テストは壊れやすく、メンテナンスが困難になっています。
+:php:class:`ControllerTestCase` を使用して機能テストを書くときに 'view' に ``return`` オプションを設定することで、\
+レンダリングされたビューの内容を調べることができます。
+これによりビューの内容をテストすることは可能ですが、\
+より堅牢でメンテナンスしやすい統合/ビューテストは
+`Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます。
+
 コンポーネントのテスト
 ======================
 
@@ -1056,7 +1067,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            $suite->addTestDirectory(TESTS . 'Case/Model');
             return $suite;
         }
     }
@@ -1065,9 +1076,22 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 個別にファイルを追加するときは ``$suite->addTestFile($filename);`` を使います。
 あるディレクトリから再帰的にすべてのテストをグループ化する場合は以下のようにします。::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 
-この例では、 ``app/Test/Case/`` のディレクトリ以下のすべてのテストをグループ化します。
+この例では、 ``app/Test/Case/Model`` のディレクトリ以下のすべてのテストをグループ化します。
+アプリケーションのテストをすべて実行するスイートを構築するためにテストスイートを使用することができます。::
+
+    class AllTestsTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All tests');
+            $suite->addTestDirectoryRecursive(TESTS . 'Case');
+            return $suite;
+        }
+    }
+
+そして、コマンドライン上でこのテストを実行することができます。::
+
+    $ Console/cake test app AllTests
 
 プラグインのテスト作成
 ======================
@@ -1107,8 +1131,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 アプリケーションのテストでプラグインのフィクスチャを使いたいときは、 ``$fixtures`` の
 配列で ``plugin.pluginName.fixtureName`` という構文を使うことで参照できます。
 
-Jenkinsとのインテグレーション
-=============================
+Jenkinsによるインテグレーション
+===============================
 
 `Jenkins <http://jenkins-ci.org>`_ は継続的インテグレーションサービスで、テストケースの自動化を手助けしてくれます。
 これにより、すべてのテストをパスし続けていることを保証し、あなたのアプリケーションをいつでもデプロイできる

@@ -26,8 +26,9 @@ longues étendues de texte.
     les options définies dans ``$htmlOptions`` (regardez
     :php:meth:`HtmlHelper::link()`).::
 
-        $my_text = 'Pour plus d'informations sur nos pâtes et desserts fameux, contactez info@example.com';
-        $linked_text = $this->Text->autoLinkEmails($my_text);
+        $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
+            contactez info@example.com';
+        $linkedText = $this->Text->autoLinkEmails($myText);
 
     Sortie::
 

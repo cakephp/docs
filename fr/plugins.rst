@@ -206,6 +206,14 @@ Merci de vous référer au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande.
 
+.. warning::
+
+    Les Plugins ne fonctionnent pas en namespace pour séparer le code.
+    A cause du manque de namespaces de PHP dans les versions plus vieilles, vous
+    ne pouvez pas avoir la même classe ou le même nom de fichier dans vos
+    plugins. Même si il s'agit de deux plugins différents. Donc utilisez des
+    classes et des noms de fichier uniques, en préfixant si possible la classe
+    et le nom de fichier par le nom du plugin.
 
 Controllers du Plugin
 =====================
@@ -245,7 +253,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     ContactManager. Contact sera le model par défaut pour ce controller,
     cependant, il est inclu pour démontrer comment faire préceder proprement
     le nom du plugin.
-   
+
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez
 /contact_manager/contacts. Vous devriez obtenir une erreur "Missing Model"
 parce que nous n'avons pas un model Contact déjà défini.
@@ -470,4 +478,4 @@ applications CakePHP:
 
 .. meta::
     :title lang=fr: Plugins
-    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connection base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications
+    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connexion base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications

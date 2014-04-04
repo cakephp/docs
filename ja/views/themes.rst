@@ -53,10 +53,10 @@ CakePHPのすべての組み込みヘルパーはテーマに対応しており�
 
     //'purple_cupcake'という名前のテーマの時
     $this->Html->css('main.css');
-    
+
     //パスの作成は以下の通り
     /theme/purple_cupcake/css/main.css
-    
+
     //リンク
     app/View/Themed/PurpleCupcake/webroot/css/main.css
 
@@ -71,11 +71,9 @@ CakePHPによって使われている ``app/webroot`` のパスに一致する�
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` は
    ``app/webroot/debug_kit/js/my_file.js`` になります。
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` は
-   ``app/webroot/theme/Navy/css/navy.css`` になります。
+   ``app/webroot/themed/Navy/css/navy.css`` になります。
 
 
 .. meta::
     :title lang=en: Themes
     :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
-
-

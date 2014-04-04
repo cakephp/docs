@@ -40,12 +40,12 @@ CakePHP の最新版を手に入れるには、主に二つの方法がありま
 
 最新のアーカイブをダウンロードするには、 `http://cakephp.org <http://cakephp.org>`_ のウェブサイトに行き、"Download Now!" という大きなリンクに従って進みます。
 
-CakePHP の最新のリリースは `Github <http://github.com/cakephp/cakephp>`_ でホスティングされています。
-GithubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
-CakePHPのリリースは `Github tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
+CakePHP の最新のリリースは `GitHub <http://github.com/cakephp/cakephp>`_ でホスティングされています。
+GitHubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
+CakePHPのリリースは `GitHub tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
-これらは `Github`_ からレポジトリを複製することでアクセスすることができます::
+これらは `GitHub`_ からレポジトリを複製することでアクセスすることができます::
 
     git clone git://github.com/cakephp/cakephp.git
 
@@ -154,6 +154,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 =====================================
 
 .. toctree::
+    :maxdepth: 1
 
     installation/advanced-installation
     installation/url-rewriting
@@ -173,7 +174,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
 
    /**
-    * Uncomment this line and correct your server timezone to fix 
+    * Uncomment this line and correct your server timezone to fix
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');

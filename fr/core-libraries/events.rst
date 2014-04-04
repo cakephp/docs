@@ -423,19 +423,12 @@ Conclusion
 Les événements sont une bonne façon de séparer les préoccupations dans
 votre application et rend les classes a la fois cohérentes et découplées des
 autres, néanmoins l'utilisation des événements n'est pas la solution
-à tous les problèmes. La plupart des applications n'auront pas réellement
-besoin de cette fonctionnalité, nous vous recommandons d'examiner d'autres
-options quand vous implémentez les callbacks comme
-l'utilisation des behaviors, des components et des helpers.
+à tous les problèmes. Les Events peuvent être utilisés pour découpler le code
+de l'application et rendre les plugins extensibles.
 
-Gardez à l'esprit que beaucoup de pouvoir implique beaucoup de responsabilité,
-découpler vos classes par ce moyen signifie également que vous avez besoin
-d'effectuer une plus grande et meilleur intégration en testant votre code.
-Abuser de cet outil ne donnera pas à votre application une meilleure
-architecture, bien au contraire, cela sera beaucoup plus difficile à lire. En
-revanche si vous utilisez cet option à bon escient, seulement pour les choses
-dont vous avez besoin, Ce sera plus simple de travailler avec votre code, de
-le tester et de l'intégrer.
+Gardez à l'esprit que beaucoup de pouvoir implique beaucoup de responsabilité.
+Utiliser trop d'events peut rendre le debug plus difficile et nécessite des
+tests d'intégration supplémentaires.
 
 Lecture Supplémentaire
 ======================

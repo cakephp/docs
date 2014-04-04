@@ -16,7 +16,7 @@ Xml クラスへのデータのインポート
 CakePHP 1.3 では、 Xml クラスへデータをインポートするために、コンストラクタへ
 配列、 XML 文字列、 URL やファイルパスを渡すことができました。
 CakePHP 2.0 では、 :php:meth:`Xml::build()` を使うことで可能になります。
-Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDocument 
+Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDocument
 オブジェクトを返します。オブジェクトのクラスはオプションのパラメータに依存し、
 既定では SimpleEMLElement を返します。以下のサンプルは URL から
 データをインポートする方法を示しています。::
@@ -82,7 +82,7 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ と 
+    `DOMDocument <http://php.net/domdocument>`_ と
     `SimpleXML <http://php.net/simplexml>`_ は異なる API を実装しています。
     必ずXmlから要求されたオブジェクトの正しいメソッドを使用してください。
 
@@ -345,7 +345,7 @@ factory クラスまたは変換クラスです。
         $xml = Xml::build($value);
 
     配列から XML を作成する時は、トップレベルの要素が唯一であることを確認しましょう。
-    
+
 .. php:staticmethod:: toArray($obj)
 
     SimpleXml または DOMDocument クラスのオブジェクトを配列に変換します。

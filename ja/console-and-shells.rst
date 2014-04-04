@@ -47,7 +47,7 @@ executable::
     $ Console/cake
 
 It's often wise to add the core cake executable to your system path
-so you can use the cake command anywhere.  This comes in handy when you are 
+so you can use the cake command anywhere.  This comes in handy when you are
 creating new projects. See :ref:`adding-cake-to-your-path` for how to make ``cake``
 available systemwide.
 
@@ -73,10 +73,10 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-     acl [CORE]                              i18n [CORE]                             
-     api [CORE]                              import [app]                            
-     bake [CORE]                             schema [CORE]                           
-     command_list [CORE]                     testsuite [CORE]                        
+     acl [CORE]                              i18n [CORE]
+     api [CORE]                              import [app]
+     bake [CORE]                             schema [CORE]
+     command_list [CORE]                     testsuite [CORE]
      console [CORE]                          upgrade [CORE]
 
     To run a command, type 'cake shell_name [args]'
@@ -105,7 +105,7 @@ or supplied as an absolute path.
 Adding cake to your system path
 -------------------------------
 
-If you are on a \*nix system (linux, MacOSX) the following steps will let you add the 
+If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
 cake executable to your system path.
 
 #. Locate where your CakePHP install, and cake executable are.  For example
@@ -133,11 +133,11 @@ Creating a shell
 ================
 
 Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell.  In you applications 
+we'll create a simple Hello world shell.  In you applications
 ``Console/Command`` directory create ``HelloShell.php``.  Put the following
 code inside it::
 
-    <?php 
+    <?php
     class HelloShell extends AppShell {
         public function main() {
             $this->out('Hello world.');
@@ -145,7 +145,7 @@ code inside it::
     }
 
 The conventions for shell classes are that the class name should match
-the file name, with the suffix of Shell. In our shell we created a ``main()`` method.  
+the file name, with the suffix of Shell. In our shell we created a ``main()`` method.
 This method is called when a shell is called with no additional commands.  We'll add
 some more commands in a bit, but for now lets just run our shell.  From your application
 directory, run::
@@ -165,11 +165,11 @@ As mentioned before, the ``main()`` method in shells is a special method called
 whenever there are no other commands or arguments given to a shell.  You may have also
 noticed that HelloShell is extending ``AppShell``.  Much like :ref:`app-controller`, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
-by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the 
+by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the
 built-in one. Since our main method wasn't very interesting lets add another command
 that does something::
 
-    <?php 
+    <?php
     class HelloShell extends AppShell {
         public function main() {
             $this->out('Hello world.');
@@ -180,10 +180,10 @@ that does something::
         }
     }
 
-After saving this file you should be able to run ``Console/cake hello hey_there your-name`` 
+After saving this file you should be able to run ``Console/cake hello hey_there your-name``
 and see your name printed out.  Any public method not prefixed by an ``_`` is allowed to be
-called from the command line.  In our ``hey_there`` method we also used ``$this->args``, this 
-property contains an array of all the positional arguments provided to a command.  You can 
+called from the command line.  In our ``hey_there`` method we also used ``$this->args``, this
+property contains an array of all the positional arguments provided to a command.  You can
 also use switches or options on shell applications, these are available at ``$this->params``,
 but we'll cover that in a bit.
 
@@ -222,7 +222,7 @@ to compose functionality into re-usable classes that can be shared across many s
 Tasks allow you to extract commands into classes.  For example the ``bake`` is made
 almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` property::
 
-    <?php 
+    <?php
     class UserShell extends AppShell {
         public $tasks = array('Template');
     }
@@ -232,7 +232,7 @@ Tasks are stored in ``Console/Command/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
 ``Console/Command/Task/FileGeneratorTask.php``.
 
-Each task must at least implement an ``execute()`` method.  The ShellDispatcher, 
+Each task must at least implement an ``execute()`` method.  The ShellDispatcher,
 will call this method when the task is invoked.  A task class looks like::
 
     <?php
@@ -246,7 +246,7 @@ will call this method when the task is invoked.  A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    <?php 
+    <?php
     // found in Console/Command/SeaShell.php
     class SeaShell extends AppShell {
         public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
@@ -286,10 +286,10 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 Invoking other shells from your shell
 =====================================
 
-Shells no longer have direct access to the ShellDispatcher any more through `$this->Dispatch`. 
-There are still many cases where you will want to invoke one shell from another though.  
+Shells no longer have direct access to the ShellDispatcher any more through `$this->Dispatch`.
+There are still many cases where you will want to invoke one shell from another though.
 `Shell::dispatchShell()` gives you the ability to call other shells by providing the
-`argv` for the sub shell.  You can provide arguments and options either 
+`argv` for the sub shell.  You can provide arguments and options either
 as var args or as a string::
 
     <?php
@@ -299,7 +299,7 @@ as var args or as a string::
     // As an array
     $this->dispatchShell('schema', 'create', 'Blog', '--plugin', 'Blog');
 
-The above shows how you can call the schema shell to create the schema for a plugin 
+The above shows how you can call the schema shell to create the schema for a plugin
 from inside your plugin's shell.
 
 .. _shell-output-level:
@@ -332,16 +332,16 @@ You can mark output as follows::
     // would only appear when verbose output is enabled.
     $this->out('extra message', 1, Shell::VERBOSE);
 
-You can control the output level of shells, by using the ``--quiet`` and ``--verbose`` 
-options. These options are added by default, and allow you to consistently control 
+You can control the output level of shells, by using the ``--quiet`` and ``--verbose``
+options. These options are added by default, and allow you to consistently control
 output levels inside your CakePHP shells.
 
 Styling output
 ==============
 
-Styling output is done by including tags - just like html - in your output.  
-ConsoleOutput will replace these tags with the correct ansi code sequence, or 
-remove the tags if you are on a console that doesn't support ansi codes. There 
+Styling output is done by including tags - just like html - in your output.
+ConsoleOutput will replace these tags with the correct ansi code sequence, or
+remove the tags if you are on a console that doesn't support ansi codes. There
 are several built in styles, and you can create more.  The built in ones are
 
 * ``error`` Error messages. Red underlined text.
@@ -350,15 +350,15 @@ are several built in styles, and you can create more.  The built in ones are
 * ``comment`` Additional text. Blue text.
 * ``question`` Text that is a question, added automatically by shell.
 
-You can create additional styles using `$this->stdout->styles()`.  To declare a 
+You can create additional styles using `$this->stdout->styles()`.  To declare a
 new output style you could do::
 
     <?php
     $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
 
-This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi 
-colours are enabled, the following would be rendered as blinking magenta text 
-``$this->out('<flashy>Whoooa</flashy> Something went wrong');``.  When defining 
+This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi
+colours are enabled, the following would be rendered as blinking magenta text
+``$this->out('<flashy>Whoooa</flashy> Something went wrong');``.  When defining
 styles you can use the following colours for the `text` and `background` attributes:
 
 * black
@@ -370,7 +370,7 @@ styles you can use the following colours for the `text` and `background` attribu
 * cyan
 * white
 
-You can also use the following options as boolean switches, setting them to a 
+You can also use the following options as boolean switches, setting them to a
 truthy value enables them.
 
 * bold
@@ -378,30 +378,30 @@ truthy value enables them.
 * blink
 * reverse
 
-Adding a style makes it available on all instances of ConsoleOutput as well, 
+Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
 
 Turning off colouring
 ---------------------
 
-Although colouring is pretty awesome, there may be times when you want to turn it off, 
+Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
     <?php
     $this->output->outputAs(ConsoleOutput::RAW);
 
-The above will put the output object into raw output mode.  In raw output mode, 
+The above will put the output object into raw output mode.  In raw output mode,
 no styling is done at all.  There are three modes you can use.
 
-* ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done. 
-  This is a good mode to use if you are outputting XML or, want to debug why 
+* ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done.
+  This is a good mode to use if you are outputting XML or, want to debug why
   your styling isn't working.
 * ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be stripped
   from the output.
 * ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
 
-By default on \*nix systems ConsoleOutput objects default to colour output.  
-On windows systems, plain output is the default unless the ``ANSICON`` environment 
+By default on \*nix systems ConsoleOutput objects default to colour output.
+On windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
 
 Configuring options and generating help
@@ -409,8 +409,8 @@ Configuring options and generating help
 
 .. php:class:: ConsoleOptionParser
 
-Console option parsing in CakePHP has always been a little bit different 
-from everything else on the command line.  In 2.0 ``ConsoleOptionParser`` 
+Console option parsing in CakePHP has always been a little bit different
+from everything else on the command line.  In 2.0 ``ConsoleOptionParser``
 helps provide a more familiar command line option and argument parser.
 
 OptionParsers allow you to accomplish two goals at the same time.
@@ -418,12 +418,12 @@ First they allow you to define the options and arguments, separating
 basic input validation and your code.  Secondly, it allows you to provide
 documentation, that is used to generate well formatted help file.
 
-The console framework gets your shell's option parser by calling 
-``$this->getOptionParser()``.  Overriding this method allows you to 
-configure the OptionParser to match the expected inputs of your shell.  
-You can also configure subcommand option parsers, which allow you to 
-have different option parsers for subcommands and tasks.  
-The ConsoleOptionParser implements a fluent interface and includes 
+The console framework gets your shell's option parser by calling
+``$this->getOptionParser()``.  Overriding this method allows you to
+configure the OptionParser to match the expected inputs of your shell.
+You can also configure subcommand option parsers, which allow you to
+have different option parsers for subcommands and tasks.
+The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once.::
 
     <?php
@@ -436,7 +436,7 @@ methods for easily setting multiple options/arguments at once.::
 Configuring an option parser with the fluent interface
 ------------------------------------------------------
 
-All of the methods that configure an option parser can be chained, 
+All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
     <?php
@@ -494,10 +494,10 @@ Adding arguments
 
 .. php:method:: addArgument($name, $params = array())
 
-Positional arguments are frequently used in command line tools, 
-and ``ConsoleOptionParser`` allows you to define positional 
-arguments as well as make them required.  You can add arguments 
-one at a time with ``$parser->addArgument();`` or multiple at once 
+Positional arguments are frequently used in command line tools,
+and ``ConsoleOptionParser`` allows you to define positional
+arguments as well as make them required.  You can add arguments
+one at a time with ``$parser->addArgument();`` or multiple at once
 with ``$parser->addArguments();``::
 
     <?php
@@ -508,19 +508,19 @@ You can use the following options when creating an argument:
 * ``help`` The help text to display for this argument.
 * ``required`` Whether this parameter is required.
 * ``index`` The index for the arg, if left undefined the argument will be put
-   onto the end of the arguments. If you define the same index twice the 
+   onto the end of the arguments. If you define the same index twice the
    first option will be overwritten.
 * ``choices`` An array of valid choices for this argument.  If left empty all
    values are valid. An exception will be raised when parse() encounters an
    invalid value.
 
-Arguments that have been marked as required will throw an exception when 
-parsing the command if they have been omitted. So you don't have to 
+Arguments that have been marked as required will throw an exception when
+parsing the command if they have been omitted. So you don't have to
 handle that in your shell.
 
 .. php:method:: addArguments(array $args)
 
-If you have an array with multiple arguments you can use ``$parser->addArguments()`` 
+If you have an array with multiple arguments you can use ``$parser->addArguments()``
 to add multiple arguments at once.::
 
     <?php
@@ -536,8 +536,8 @@ Validating arguments
 --------------------
 
 When creating positional arguments, you can use the ``required`` flag, to
-indicate that an argument must be present when a shell is called. 
-Additionally you can use ``choices`` to force an argument to 
+indicate that an argument must be present when a shell is called.
+Additionally you can use ``choices`` to force an argument to
 be from a list of valid choices::
 
     <?php
@@ -547,8 +547,8 @@ be from a list of valid choices::
         'choices' => array('aro', 'aco')
     ));
 
-The above will create an argument that is required and has validation 
-on the input.  If the argument is either missing, or has an incorrect 
+The above will create an argument that is required and has validation
+on the input.  If the argument is either missing, or has an incorrect
 value an exception will be raised and the shell will be stopped.
 
 Adding Options
@@ -556,10 +556,10 @@ Adding Options
 
 .. php:method:: addOption($name, $options = array())
 
-Options or flags are also frequently used in command line tools.  
-``ConsoleOptionParser`` supports creating options 
-with both verbose and short aliases, supplying defaults 
-and creating boolean switches. Options are created with either 
+Options or flags are also frequently used in command line tools.
+``ConsoleOptionParser`` supports creating options
+with both verbose and short aliases, supplying defaults
+and creating boolean switches. Options are created with either
 ``$parser->addOption()`` or ``$parser->addOptions()``.::
 
     <?php
@@ -569,35 +569,35 @@ and creating boolean switches. Options are created with either
         'default' => 'default'
     ));
 
-The above would allow you to use either ``cake myshell --connection=other``, 
-``cake myshell --connection other``, or ``cake myshell -c other`` 
-when invoking the shell. You can also create boolean switches, these switches do not 
-consume values, and their presence just enables them in the 
+The above would allow you to use either ``cake myshell --connection=other``,
+``cake myshell --connection other``, or ``cake myshell -c other``
+when invoking the shell. You can also create boolean switches, these switches do not
+consume values, and their presence just enables them in the
 parsed parameters.::
 
     <?php
     $parser->addOption('no-commit', array('boolean' => true));
 
-With this option, when calling a shell like ``cake myshell --no-commit something`` 
-the no-commit param would have a value of true, and 'something' 
-would be a treated as a positional argument.  
-The built-in ``--help``, ``--verbose``, and ``--quiet`` options 
+With this option, when calling a shell like ``cake myshell --no-commit something``
+the no-commit param would have a value of true, and 'something'
+would be a treated as a positional argument.
+The built-in ``--help``, ``--verbose``, and ``--quiet`` options
 use this feature.
 
-When creating options you can use the following options to 
+When creating options you can use the following options to
 define the behavior of the option:
 
 * ``short`` - The single letter variant for this option, leave undefined for none.
 * ``help`` - Help text for this option.  Used when generating help for the option.
 * ``default`` - The default value for this option.  If not defined the default will be true.
-* ``boolean`` - The option uses no value, it's just a boolean switch. 
+* ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to false.
 * ``choices`` An array of valid choices for this option.  If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
 .. php:method:: addOptions(array $options)
 
-If you have an array with multiple options you can use ``$parser->addOptions()`` 
+If you have an array with multiple options you can use ``$parser->addOptions()``
 to add multiple options at once.::
 
     <?php
@@ -606,7 +606,7 @@ to add multiple options at once.::
         'parent' => array('short' => 'p', 'help' => 'The parent node')
     ));
 
-As with all the builder methods on ConsoleOptionParser, addOptions is can be used 
+As with all the builder methods on ConsoleOptionParser, addOptions is can be used
 as part of a fluent method chain.
 
 Validating options
@@ -625,9 +625,9 @@ for an option.  All other values will raise an ``InvalidArgumentException``::
 Using boolean options
 ---------------------
 
-Options can be defined as boolean options, which are useful when you need to create 
-some flag options.  Like options with defaults, boolean options always include 
-themselves into the parsed parameters.  When the flags are present they are set 
+Options can be defined as boolean options, which are useful when you need to create
+some flag options.  Like options with defaults, boolean options always include
+themselves into the parsed parameters.  When the flags are present they are set
 to true, when they are absent false::
 
     <?php
@@ -636,8 +636,8 @@ to true, when they are absent false::
         'boolean' => true
     ));
 
-The following option would result in ``$this->params['verbose']`` always 
-being available.  This lets you omit ``empty()`` or ``isset()`` 
+The following option would result in ``$this->params['verbose']`` always
+being available.  This lets you omit ``empty()`` or ``isset()``
 checks for boolean flags::
 
     <?php
@@ -645,7 +645,7 @@ checks for boolean flags::
         // do something
     }
 
-Since the boolean options are always defined as ``true`` or 
+Since the boolean options are always defined as ``true`` or
 ``false`` you can omit additional check methods.
 
 Adding subcommands
@@ -653,11 +653,11 @@ Adding subcommands
 
 .. php:method:: addSubcommand($name, $options = array())
 
-Console applications are often made of subcommands, and these subcommands 
-may require special option parsing and have their own help.  A perfect 
-example of this is ``bake``.  Bake is made of many separate tasks that all 
-have their own help and options. ``ConsoleOptionParser`` allows you to 
-define subcommands and provide command specific option parsers so the 
+Console applications are often made of subcommands, and these subcommands
+may require special option parsing and have their own help.  A perfect
+example of this is ``bake``.  Bake is made of many separate tasks that all
+have their own help and options. ``ConsoleOptionParser`` allows you to
+define subcommands and provide command specific option parsers so the
 shell knows how to parse commands for its tasks::
 
     <?php
@@ -666,24 +666,24 @@ shell knows how to parse commands for its tasks::
         'parser' => $this->Model->getOptionParser()
     ));
 
-The above is an example of how you could provide help and a specialized 
-option parser for a shell's task. By calling the Task's ``getOptionParser()`` 
-we don't have to duplicate the option parser generation, or mix concerns 
-in our shell.  Adding subcommands in this way has two advantages.  
-First it lets your shell easily document its subcommands in the 
-generated help, and it also allows easy access to the subcommand 
-help.  With the above subcommand created you could call 
-``cake myshell --help`` and see the list of subcommands, and 
-also run ``cake myshell model --help`` to view the help for 
+The above is an example of how you could provide help and a specialized
+option parser for a shell's task. By calling the Task's ``getOptionParser()``
+we don't have to duplicate the option parser generation, or mix concerns
+in our shell.  Adding subcommands in this way has two advantages.
+First it lets your shell easily document its subcommands in the
+generated help, and it also allows easy access to the subcommand
+help.  With the above subcommand created you could call
+``cake myshell --help`` and see the list of subcommands, and
+also run ``cake myshell model --help`` to view the help for
 just the model task.
 
 When defining a subcommand you can use the following options:
 
 * ``help`` - Help text for the subcommand.
-* ``parser`` - A ConsoleOptionParser for the subcommand.  This allows you 
-  to create method specific option parsers.  When help is generated for a 
-  subcommand, if a parser is present it will be used. You can also 
-  supply the parser as an array that is compatible with 
+* ``parser`` - A ConsoleOptionParser for the subcommand.  This allows you
+  to create method specific option parsers.  When help is generated for a
+  subcommand, if a parser is present it will be used. You can also
+  supply the parser as an array that is compatible with
   :php:meth:`ConsoleOptionParser::buildFromArray()`
 
 Adding subcommands can be done as part of a fluent method chain.
@@ -694,7 +694,7 @@ Building a ConsoleOptionParser from an array
 .. php:method:: buildFromArray($spec)
 
 As previously mentioned, when creating subcommand option parsers,
-you can define the parser spec as an array for that method. This can help 
+you can define the parser spec as an array for that method. This can help
 make building subcommand parsers easier, as everything is an array::
 
     <?php
@@ -714,10 +714,10 @@ make building subcommand parsers easier, as everything is an array::
         )
     ));
 
-Inside the parser spec, you can define keys for ``definition``, 
-``arguments``, ``options``, and ``epilog``.  You cannot define 
-subcommands inside an array style builder.  The values for 
-arguments, and options, should follow the format that 
+Inside the parser spec, you can define keys for ``definition``,
+``arguments``, ``options``, and ``epilog``.  You cannot define
+subcommands inside an array style builder.  The values for
+arguments, and options, should follow the format that
 :php:func:`ConsoleOptionParser::addArguments()` and :php:func:`ConsoleOptionParser::addOptions()`
 use.  You can also use buildFromArray on its own, to build an option parser::
 
@@ -740,8 +740,8 @@ use.  You can also use buildFromArray on its own, to build an option parser::
 Getting help from shells
 ------------------------
 
-With the addition of ConsoleOptionParser getting help from shells is done 
-in a consistent and uniform way. By using the ``--help`` or -``h`` option you 
+With the addition of ConsoleOptionParser getting help from shells is done
+in a consistent and uniform way. By using the ``--help`` or -``h`` option you
 can view the help for any core shell, and any shell that implements a ConsoleOptionParser::
 
     cake bake --help
@@ -758,16 +758,16 @@ This would get you the help specific to bake's model task.
 Getting help as XML
 -------------------
 
-When building automated tools or development tools that need to interact 
-with CakePHP shells, its nice to have help available in a machine parse-able 
-format.  The ConsoleOptionParser can provide help in xml by setting an 
+When building automated tools or development tools that need to interact
+with CakePHP shells, its nice to have help available in a machine parse-able
+format.  The ConsoleOptionParser can provide help in xml by setting an
 additional argument::
 
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options, 
-arguments and subcommands for the selected shell.  A sample XML document 
+The above would return an XML document with the generated help, options,
+arguments and subcommands for the selected shell.  A sample XML document
 would look like:
 
 .. code-block:: xml
@@ -828,7 +828,7 @@ Shell API
 
 .. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
 
-    Shell is the base class for all shells, and provides a number of functions for 
+    Shell is the base class for all shells, and provides a number of functions for
     interacting with user input, outputting text a generating errors.
 
 .. php:attr:: tasks
@@ -850,13 +850,13 @@ Shell API
 
     Creates a file at a given path.  If the Shell is interactive, a warning will be
     generated, and the user asked if they want to overwrite the file if it already exists.
-    If the shell's interactive property is false, no question will be asked and the file 
+    If the shell's interactive property is false, no question will be asked and the file
     will simply be overwritten.
 
 .. php:method:: dispatchShell()
 
-    Dispatch a command to another Shell. Similar to 
-    :php:meth:`Controller::requestAction()` but intended for running shells 
+    Dispatch a command to another Shell. Similar to
+    :php:meth:`Controller::requestAction()` but intended for running shells
     from other shells.
 
     See :ref:`invoking-other-shells-from-your-shell`.
@@ -873,12 +873,12 @@ Shell API
     :param string $title: Title of the error
     :param string $message: An optional error message
 
-    Displays a formatted error message and exits the application with status 
+    Displays a formatted error message and exits the application with status
     code 1
 
 .. php:method:: getOptionParser()
 
-    Should return a :php:class:`ConsoleOptionParser` object, with any 
+    Should return a :php:class:`ConsoleOptionParser` object, with any
     sub-parsers for the shell.
 
 .. php:method:: hasMethod($name)
@@ -892,7 +892,7 @@ Shell API
 .. php:method:: hr($newlines = 0, $width = 63)
 
     :param int $newlines: The number of newlines to precede and follow the line.
-    :param int $width: The width of the line to draw. 
+    :param int $width: The width of the line to draw.
 
     Create a horizontal line preceded and followed by a number of newlines.
 
@@ -904,7 +904,7 @@ Shell API
     :param string $default: The default option if there is one.
 
     This method helps you interact with the user, and create interactive shells.
-    It will return the users answer to the prompt, and allows you to provide a 
+    It will return the users answer to the prompt, and allows you to provide a
     list of valid options the user can choose from::
 
         <?php
@@ -914,7 +914,7 @@ Shell API
 
 .. php:method:: initialize()
 
-    Initializes the Shell acts as constructor for subclasses allows 
+    Initializes the Shell acts as constructor for subclasses allows
     configuration of tasks prior to shell execution.
 
 .. php:method:: loadTasks()
@@ -929,12 +929,12 @@ Shell API
 
     :param string $method: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
-    :param integer $level: The highest :ref:`shell-output-level` this message 
+    :param integer $level: The highest :ref:`shell-output-level` this message
         should display at.
 
     The primary method for generating output to the user. By using levels, you
     can limit how verbose a shell is.  out() also allows you to use colour formatting
-    tags, which will enable coloured output on systems that support it.  There are 
+    tags, which will enable coloured output on systems that support it.  There are
     several built in styles for colouring text, and you can define your own.
 
     * ``error`` Error messages.
@@ -948,22 +948,22 @@ Shell API
         <?php
         $this->out('<warning>This will remove data from the filesystems.</warning>');
 
-    By default on \*nix systems ConsoleOutput objects default to colour output. 
-    On windows systems, plain output is the default unless the ``ANSICON`` environment 
+    By default on \*nix systems ConsoleOutput objects default to colour output.
+    On windows systems, plain output is the default unless the ``ANSICON`` environment
     variable is present.
 
 .. php:method:: runCommand($command, $argv)
 
     Runs the Shell with the provided argv.
 
-    Delegates calls to Tasks and resolves methods inside the class. Commands 
+    Delegates calls to Tasks and resolves methods inside the class. Commands
     are looked up with the following order:
 
     - Method on the shell.
     - Matching task name.
     - main() method.
 
-    If a shell implements a main() method, all missing method calls will be 
+    If a shell implements a main() method, all missing method calls will be
     sent to main() with the original method name in the argv.
 
 .. php:method:: shortPath($file)
@@ -972,15 +972,15 @@ Shell API
 
 .. php:method:: startup()
 
-    Starts up the Shell and displays the welcome message. Allows for checking 
+    Starts up the Shell and displays the welcome message. Allows for checking
     and configuring prior to command or main execution
 
-    Override this method if you want to remove the welcome information, or 
+    Override this method if you want to remove the welcome information, or
     otherwise modify the pre-command flow.
 
 .. php:method:: wrapText($text, $options = array())
 
-    Wrap a block of text. Allows you to set the width, and indenting on a 
+    Wrap a block of text. Allows you to set the width, and indenting on a
     block of text.
 
     :param string $text: The text to format

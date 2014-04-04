@@ -8,7 +8,7 @@ CakePHPの基本的な構成要素について既に考えました。
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
-   
+
    典型的なCakePHPのリクエストを示すフローダイアグラム
 
 図２ 典型的なCakeリクエスト
@@ -34,4 +34,3 @@ CakePHPの基本的な構成要素について既に考えました。
    デフォルトでは、ビューは、レイアウト（layout）の内側に表示されます。
 #. コントローラのその他のコールバック（afterFilterなど）があれば、実行されます。
    完全に表示されたコードは、リカルドさんのブラウザに表示されることになります。
-

@@ -96,7 +96,7 @@ La cle ``all`` est aussi utilisée comme cela
         'Form'
     ]);
 
-Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendront
+Dans l'exemple ci-dessus, à la fois ``Form`` et ``Basic`` prendront
 les paramétrages définis dans la clé "all".
 Tous les paramètres transmis à un objet d'authentification particulier
 remplaceront la clé correspondante dans la clé 'all'.
@@ -179,7 +179,12 @@ Une simple fonction de connexion pourrait ressembler à cela ::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(__('Username ou password est incorrect'), 'default', array(), 'auth');
+                $this->Session->setFlash(
+                    __('Username ou password est incorrect'),
+                    'default',
+                    array(),
+                    'auth'
+                );
             }
         }
     }
@@ -360,8 +365,9 @@ set in Security class will be used. You can use specific hash type like this::
         )
     );
 
-When creating new user records you can hash a password in the beforeSave
-callback of your model using appropriate password hasher class::
+Lors de la création de nouveaux enregistrements d'utilisateurs, vous pouvez
+hasher un mot de passe dans le callback beforeSave de votre model en utilisant
+la classe de hasher de mot de passe appropriée::
 
     App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
@@ -584,7 +590,7 @@ cela::
         }
     }
 
-L'objet Authorize devrait retourner `false ` si l'utilisateur se voit refuser
+L'objet Authorize devrait retourner ``false`` si l'utilisateur se voit refuser
 l'accès, ou si l'objet est incapable de faire un contrôle. Si l'objet est
 capable de vérifier les accès de l'utilisateur, ``true`` devrait être retourné.
 Ça n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut simplement que
@@ -714,8 +720,8 @@ l'utilisation du mapping CRUD. Les résultats mappés sont alors vérifiés dans
 le component Acl comme des permissions spécifiques.
 
 Par exemple, en prenant la requête ``/posts/index``. Le mapping
-par défaut pour `index` est une vérification de la permission de ``read``.
-La vérification d'Acl se ferait alors avec les permissions de ``read``pour le
+par défaut pour ``index`` est une vérification de la permission de ``read``.
+La vérification d'Acl se ferait alors avec les permissions de ``read`` pour le
 controller ``posts``. Ceci vous permet de créer un système de permission
 qui met d'avantage l'accent sur ce qui est en train d'être fait aux ressources,
 plutôt que sur l'action spécifique en cours de visite.
