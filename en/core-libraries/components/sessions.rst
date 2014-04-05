@@ -155,7 +155,7 @@ Creating Notification Messages
     To use an element from a plugin just specify the plugin in the
     ``$params``::
 
-        // Will use /App/Plugin/Comment/Template/Element/flash_no_spam.ctp
+        // Will use /Plugin/Comment/Template/Element/flash_no_spam.ctp
         $this->Session->setFlash(
             'Message!',
             'flash_no_spam',
