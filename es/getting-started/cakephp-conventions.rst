@@ -131,7 +131,7 @@ el singular de la tabla con la que se relaciona y terminando en \_id.
 Por ejemplo en el modelo Baker tenemos una relación hasMany con el modelo
 Cake, en la tabla cakes escribiremos un campo con el nombre baker_id. En 
 caso de que el nombre de la tabla tenga varias palabras, como en 
-category\_types, la clave sería category\_types\_id.
+category\_types, la clave sería category\_type\_id.
 
 Cuando se trata de relaciones HABTM hasAndBelongsToMany, la tabla que hace de
 unión entre las tablas de ambos modelos debe nombrarse utilizando a su vez el
@@ -187,10 +187,10 @@ Si usas estas convenciones, CakePHP sabrá que una llamada a
 http://example.com/people/ se mapeará a una llamada al método index() del 
 controlador PeopleController, donde el modelo Person será instanciado 
 automáticamente para su uso (leerá los datos de la tabla 'people' en la base 
-de datos). Ninguna de estas relaciones necesita ser creada ni configurada de
-ninguna otra forma que creando los nombres correctos y los ficheros que tienes
-que crear de todos modos para que tu aplicación funcione.
+de datos). Ninguna de estas relaciones necesita ser creada ni configurada s
+nombras de la forma correcta los los ficheros que de todos modos tienes que
+crear para que tu aplicación funcione.
 
-Ahora ya sabes los fundamentos y cómo utilizar las convenciones de CakePHP, 
+Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP, 
 te recomendamos que le eches un vistazo al :doc:`tutorial para hacer un blog</tutorials-and-examples/blog/blog>`
 para ver cómo encajan estas piezas en una aplicación completa.
