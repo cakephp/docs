@@ -134,10 +134,9 @@ Cake. En la tabla cakes escribiremos un campo con el nombre baker_id. En
 caso de que el nombre de la tabla tenga varias palabras, como en 
 category\_types, la clave sería category\_type\_id.
 
-Cuando se trata de relaciones 'muchos a muchos' (HABTM o hasAndBelongsToMany),
-la tabla que hace de unión entre las tablas de ambos modelos debe nombrarse
-utilizando a su vez el nombre de cada tabla en orden alfabético y plural.
-Por ejemplo usaremos apples\_zebras en lugar de zebras\_apples.
+Cuando la tabla es el resultado de una relación de 'muchos a muchos' (HABTM o hasAndBelongsToMany),
+se nombrará utilizando el nombre de cada tabla de la relación, en orden alfabético y plural.
+Por ejemplo se usará apples\_zebras en lugar de zebras\_apples.
 
 Todas las tablas que utilicemos en CakePHP, salvo las tablas de unión de las 
 relaciones 'muchos a muchos', requieren una clave primaria en un único campo para 
