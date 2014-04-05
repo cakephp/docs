@@ -125,7 +125,7 @@ Creating Notification Messages
         echo $this->Session->flash('bad');
 
     The ``$element`` parameter allows you to control which element
-    (located in ``/App/View/Elements``) should be used to render the
+    (located in ``/App/View/Element``) should be used to render the
     message in. In the element the message is available as ``$message``.
     First we set the flash in our controller::
 
@@ -155,7 +155,7 @@ Creating Notification Messages
     To use an element from a plugin just specify the plugin in the
     ``$params``::
 
-        // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
+        // Will use /app/Plugin/Comment/View/Element/flash_no_spam.ctp
         $this->Session->setFlash(
             'Message!',
             'flash_no_spam',
