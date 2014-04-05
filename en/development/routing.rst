@@ -62,14 +62,14 @@ your controller actions using the URL.::
         URL pattern default routes:
         http://example.com/controller/action/param1/param2/param3
 
-The URL /posts/view maps to the view() action of the
-PostsController, and /products/view\_clearance maps to the
+The URL /articles/view maps to the view() action of the
+ArticlesController, and /products/view\_clearance maps to the
 view\_clearance() action of the ProductsController. If no action is
 specified in the URL, the index() method is assumed.
 
 The default routing setup also allows you to pass parameters to
-your actions using the URL. A request for /posts/view/25 would be
-equivalent to calling view(25) on the PostsController, for
+your actions using the URL. A request for /articles/view/25 would be
+equivalent to calling view(25) on the ArticlesController, for
 example. The default routing also provides routes for plugins,
 and prefix routes should you choose to use those features.
 
@@ -269,7 +269,7 @@ are not supported in the regular expressions. You can still specify
 alternates, as above, but not grouped with parenthesis.
 
 Once defined, this route will match ``/articles/2007/02/01``,
-``/posts/2004/11/16``, handing the requests to
+``/articles/2004/11/16``, handing the requests to
 the index() actions of their respective controllers, with the date
 parameters in ``$this->request->params``.
 
@@ -401,10 +401,10 @@ CakePHP will automatically generate routes for both the admin and
 manager prefixes. Each configured prefix will have the following
 routes generated for it::
 
-    Router::connect("/{$prefix}/:plugin/:controller", ['action' => 'index', 'prefix' => $prefix);
-    Router::connect("/{$prefix}/:plugin/:controller/:action/*", ['prefix' => $prefix);
-    Router::connect("/{$prefix}/:controller", ['action' => 'index', 'prefix' => $prefix);
-    Router::connect("/{$prefix}/:controller/:action/*", ['prefix' => $prefix);
+    Router::connect("/{$prefix}/:plugin/:controller", ['action' => 'index', 'prefix' => $prefix]);
+    Router::connect("/{$prefix}/:plugin/:controller/:action/*", ['prefix' => $prefix]);
+    Router::connect("/{$prefix}/:controller", ['action' => 'index', 'prefix' => $prefix]);
+    Router::connect("/{$prefix}/:controller/:action/*", ['prefix' => $prefix]);
 
 Additionally, the current prefix will be available from the controller methods
 through ``$this->request->prefix``
@@ -414,10 +414,10 @@ helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
 
     // Go into a prefixed route.
-    echo $this->Html->link('Manage posts', ['prefix' => 'manager', 'controller' => 'posts', 'action' => 'add']);
+    echo $this->Html->link('Manage articles', ['prefix' => 'manager', 'controller' => 'articles', 'action' => 'add']);
 
     // leave a prefix
-    echo $this->Html->link('View Post', ['prefix' => false, 'controller' => 'posts', 'action' => 'view', 5]);
+    echo $this->Html->link('View Post', ['prefix' => false, 'controller' => 'articles', 'action' => 'view', 5]);
 
 .. index:: plugin routing
 
@@ -558,7 +558,7 @@ Either of the above would output::
 When generating URLs, using a :term:`routing array` you add passed
 arguments as values without string keys in the array::
 
-    ['controller' => 'posts', 'action' => 'view', 5]
+    ['controller' => 'articles', 'action' => 'view', 5]
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
 
@@ -572,15 +572,15 @@ later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/articles/view/' + $id);
 
-And then later decide that ``/posts`` should really be called
+And then later decide that ``/articles`` should really be called
 'articles' instead, you would have to go through your entire
 application renaming URLs. However, if you defined your link like::
 
     $this->Html->link(
         'View',
-        ['controller' => 'posts', 'action' => 'view', $id]
+        ['controller' => 'articles', 'action' => 'view', $id]
     );
 
 Then when you decided to change your URLs, you could do so by defining a
@@ -591,14 +591,14 @@ When using array URLs, you can define both query string parameters and
 document fragments using special keys::
 
     Router::url([
-        'controller' => 'posts',
+        'controller' => 'articles',
         'action' => 'index',
         '?' => ['page' => 1],
         '#' => 'top'
     ]);
 
     // will generate a URL like.
-    /posts/index?page=1#top
+    /articles/index?page=1#top
 
 Router will also convert any unknown parameters in a routing array to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
@@ -630,19 +630,19 @@ a destination within your application or an outside location::
 
     Router::redirect(
         '/home/*',
-        ['controller' => 'posts', 'action' => 'view'],
+        ['controller' => 'articles', 'action' => 'view'],
         ['persist' => true] // or ['persist'=>['id']] for default routing where the view action expects $id as an argument
     );
 
-Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
-``/posts/view``. Using an array as the redirect destination allows
+Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to
+``/articles/view``. Using an array as the redirect destination allows
 you to use other routes to define where a URL string should be
 redirected to. You can redirect to external locations using
 string URLs as the destination::
 
-    Router::redirect('/posts/*', 'http://google.com', ['status' => 302]);
+    Router::redirect('/articles/*', 'http://google.com', ['status' => 302]);
 
-This would redirect ``/posts/*`` to ``http://google.com`` with a
+This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
 
 .. _disabling-default-routes:
@@ -678,7 +678,7 @@ before trying to use it::
 
     Router::connect(
          '/:slug',
-         ['controller' => 'posts', 'action' => 'view'],
+         ['controller' => 'articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
     );
 
@@ -737,8 +737,8 @@ Router API
 
     The first parameter will be used as a controller name while the second is
     used as the action name. The '/\*' syntax makes this route greedy in that
-    it will match requests like `/posts/index` as well as requests like
-    ``/posts/edit/1/foo/bar`` .::
+    it will match requests like `/articles/index` as well as requests like
+    ``/articles/edit/1/foo/bar`` .::
 
         Router::connect('/home-page', ['controller' => 'pages', 'action' => 'display', 'home']);
 

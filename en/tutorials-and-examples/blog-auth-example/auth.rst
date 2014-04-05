@@ -258,7 +258,6 @@ We're just missing a template view file for the login function. Open up your ``a
             <legend><?= __('Please enter your username and password') ?></legend>
             <?= $this->Form->input('username') ?>
             <?= $this->Form->input('password') ?>
-        ?>
         </fieldset>
     <?= $this->Form->end(__('Login')) ?>
     </div>

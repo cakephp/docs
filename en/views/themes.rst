@@ -69,10 +69,10 @@ recommended that you either symlink or copy out plugin/theme assets to
 directories in ``app/webroot`` with paths matching those used by CakePHP.
 
 
--  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
-   ``app/webroot/debug_kit/js/my_file.js``
--  ``app/Template/Themed/Navy/webroot/css/navy.css`` becomes
-   ``app/webroot/theme/Navy/css/navy.css``
+-  ``App/Plugin/DebugKit/webroot/js/my_file.js`` becomes
+   ``App/webroot/debug_kit/js/my_file.js``
+-  ``App/Template/Themed/Navy/webroot/css/navy.css`` becomes
+   ``App/webroot/theme/Navy/css/navy.css``
 
 
 .. meta::
