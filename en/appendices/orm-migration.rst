@@ -125,21 +125,20 @@ Inflection Rules Updated
 
 You may have noticed that table classes have a pluralized name. In addition to
 tables having pluralized names, associations are also referred to in the plural
-form. This is in contrast to Model where names and associations were singular.
-There were a few reasons for this change:
+form. This is in contrast to ``Model`` where class names and association aliases
+were singular. There are a few reasons for this change:
 
 * Table classes represent **collections** of data, not single rows.
 * Associations link tables together, describing the relations between many
   things.
 
 While the conventions for table objects are to always use plural forms, your
-entities will have their association properties populated based on the association
-type.
+entity association properties will be populated based on the association type.
 
 .. note::
 
-    BelongsTo and HasOne associations will use the singular form,
-    while HasMany and BelongsToMany (HABTM) will use plural forms.
+    BelongsTo and HasOne associations will use the singular form in entity
+    properties, while HasMany and BelongsToMany (HABTM) will use plural forms.
 
 The convention change for table objects is most apparent when building queries.
 Instead of expressing queries like::
