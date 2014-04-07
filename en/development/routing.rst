@@ -198,7 +198,7 @@ actions should lie. When a request is made, the values for these
 route elements are found in ``$this->request->params`` on the controller.
 When you define a custom route element, you can optionally specify a regular
 expression - this tells CakePHP how to know if the URL is correctly formed or
-not.  If you choose to not provide a regular expression, any non ``/`` will be
+not. If you choose to not provide a regular expression, any non ``/`` will be
 treated as part of the parameter::
 
     Router::connect(
@@ -239,8 +239,8 @@ expression inline modifiers::
 
     Router::connect(
         '/:userShortcut',
-        array('controller' => 'teachers', 'action' => 'profile', 1),
-        array('userShortcut' => '(?i:principal)')
+        ['controller' => 'teachers', 'action' => 'profile', 1],
+        ['userShortcut' => '(?i:principal)']
     );
 
 One more example, and you'll be a routing pro::

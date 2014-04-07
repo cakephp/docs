@@ -76,10 +76,10 @@ fassiez une copie sur les assets du plug-in/theme vers des répertoires
 dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par
 cakephp.
 
--  ``app/Plugin/DebugKit/webroot/js/my_file.js`` devient
-   ``app/webroot/DebugKit/js/my_file.js``.
--  ``app/View/Themed/Navy/webroot/css/navy.css`` devient
-   ``app/webroot/themed/Navy/css/navy.css``.
+-  ``App/Plugin/DebugKit/webroot/js/my_file.js`` devient
+   ``App/webroot/DebugKit/js/my_file.js``.
+-  ``App/View/Themed/Navy/webroot/css/navy.css`` devient
+   ``App/webroot/themed/Navy/css/navy.css``.
 
 
 .. meta::

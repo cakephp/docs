@@ -34,13 +34,24 @@ Les Routes sont parsées et matchées dans l'ordre dans lequel elles sont
 connectées. Si vous définissez deux routes similaires, la première route
 définie va avoir une priorité plus haute sur celle définie plus tard. Après
 avoir connecté les routes, vous pouvez manipuler l'ordre des routes en
-utilisant :php:meth:`Router::promote()`.
+utilisant :php:meth:`Cake\\Routing\\Router::promote()`.
 
 CakePHP vient aussi avec quelques routes par défaut pour commencer. Celles-ci
 peuvent être désactivées plus tard une fois que vous êtes sûr que vous n'en
 aurez pas besoin. Regardez :ref:`disabling-default-routes` sur la façon de
 désactiver le routing par défaut.
 
+Configuration Générale
+----------------------
+
+En plus des routes habituelles, il y a quelques options de configuration
+générales concernant le routing:
+
+Routing.prefixes
+    Décommentez cette définition si voulez tirer avantage des routes préfixées
+    de CakePHP comme admin. Définissez cette variable avec un tableau de noms
+    préfixés des routes que vous souhaitez utiliser. Regardez la section sur
+    :ref:`prefix-routing` pour plus d'informations.
 
 Routing par défaut
 ==================
@@ -55,8 +66,8 @@ actions de votre controller en utilisant l'URL.::
         modèle URL des routes par défaut: 
         http://example.com/controller/action/param1/param2/param3
 
-L'URL /posts/view mappe à l'action view() de
-PostsController, et /products/view\_clearance mappe vers l'action
+L'URL /articles/view lance l'action view() de
+ArticlesController, et /products/view\_clearance lance l'action
 view\_clearance() de ProductsController. Si aucune action n'est spécifiée
 dans l'URL, la méthode index() est supposée.
 
@@ -89,9 +100,9 @@ faire correspondre les éléments dans l'URL.
 Le format basique pour une définition de route est::
 
     Router::connect(
-        'URL',
-        array('default' => 'defaultValue'),
-        array('option' => 'matchingRegex')
+        'URL template',
+        ['default' => 'defaultValue'],
+        ['option' => 'matchingRegex']
     );
 
 Le premier paramètre est utilisé pour dire au routeur quelle sorte d'URL
@@ -112,7 +123,7 @@ le troisième paramètre de connect()::
 
     Router::connect(
         '/pages/*',
-        array('controller' => 'pages', 'action' => 'display')
+        ['controller' => 'pages', 'action' => 'display']
     );
 
 Cette route est trouvée dans le fichier routes.php distribué avec CakePHP.
@@ -128,15 +139,11 @@ un argument qui incluait un ``/`` dedans::
 
     Router::connect(
         '/pages/**',
-        array('controller' => 'pages', 'action' => 'show')
+        ['controller' => 'pages', 'action' => 'show']
     );
 
 L'URL entrante de ``/pages/the-example-/-and-proof`` résulterait en un argument
 unique passé de ``the-example-/-and-proof``.
-
-.. versionadded:: 2.1
-
-    L'étoile double trailing a été ajoutée dans 2.1.
 
 Vous pouvez utiliser le deuxième paramètre de :php:meth:`Router::connect()`
 pour fournir tout paramètre de routing qui est composé des valeurs par défaut
@@ -144,7 +151,7 @@ de la route::
 
     Router::connect(
         '/government',
-        array('controller' => 'products', 'action' => 'display', 5)
+        ['controller' => 'pages', 'action' => 'display', 5]
     );
 
 Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
@@ -167,7 +174,7 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
 ``/cooks/some_action/5``. La route suivante s'occupe facilement de cela::
 
     Router::connect(
-        '/cooks/:action/*', array('controller' => 'users')
+        '/cooks/:action/*', ['controller' => 'users']
     );
 
 Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être
@@ -184,11 +191,6 @@ Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
 URL va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
-Par défaut tous les paramètres nommés passés et les arguments sont extraits
-des URLs qui matchent ces templates gourmands. Cependant, vous pouvez configurer
-comment et quels arguments nommés sont parsés en utilisant
-:php:meth:`Router::connectNamed()` si vous en avez besoin.
-
 .. _route-elements:
 
 Les éléments de Route
@@ -196,23 +198,19 @@ Les éléments de Route
 
 Vous pouvez spécifier vos propres éléments de route et ce faisant
 cela vous donne le pouvoir de définir des places dans l'URL où les
-paramètres pour les actions du controller doivent reposer. Quand
-une requête est faite, les valeurs pour ces éléments de route sont
-trouvées dans ``$this->request->params`` dans le controller.
-Ceci est différent de la façon dont les paramètres sont gérés, donc notez
-la différence: les paramètres nommés (/controller/action/name:value) sont
-trouvés dans ``$this->request->params['named']``, alors que la donnée de
-l'élément de route personnalisé est trouvé dans ``$this->request->params``.
-quand vous définissez un élément de route personnalisé, vous pouvez
-spécifier en option une expression régulière - cela dit à CakePHP comment
-savoir si l'URL est correctement formée ou non. Si vous choisissez de ne
-pas fournir une expression régulière, toute expression non ``/`` sera
-traitée comme une partie du paramètre::
+paramètres pour les actions du controller doivent se trouver. Quand
+une requête est faite, les valeurs pour ces éléments de route se
+trouvent dans ``$this->request->params`` dans le controller. Quand vous
+définissez un element de route personnalisé, vous pouvez spécifier en option
+une expression régulière - ceci dit à CakePHP comment savoir si l'URL est
+correctement formé ou non. Si vous choisissez de ne pas fournir une expression
+régulière, toute expression non ``/`` sera traitée comme une partie du
+paramètre::
 
     Router::connect(
         '/:controller/:id',
-        array('action' => 'view'),
-        array('id' => '[0-9]+')
+        ['action' => 'view'],
+        ['id' => '[0-9]+']
     );
 
 Cet exemple simple montre comment créer une manière rapide de voir les models
@@ -241,27 +239,27 @@ tous les URLs aux actions dans votre controller. Par exemple, pour mapper
 toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
-    Router::connect('/:action', array('controller' => 'home')); 
+    Router::connect('/:action', ['controller' => 'home']);
 
 Si vous souhaitez fournir une URL non sensible à la casse, vous pouvez utiliser
 les modificateurs en ligne d'expression régulière::
 
     Router::connect(
         '/:userShortcut',
-        array('controller' => 'teachers', 'action' => 'profile', 1),
-        array('userShortcut' => '(?i:principal)')
+        ['controller' => 'teachers', 'action' => 'profile', 1],
+        ['userShortcut' => '(?i:principal)']
     );
 
 Un exemple de plus, et vous serez un routing pro::
 
     Router::connect(
         '/:controller/:year/:month/:day',
-        array('action' => 'index'),
-        array(
+        ['action' => 'index'],
+        [
             'year' => '[12][0-9]{3}',
             'month' => '0[1-9]|1[012]',
             'day' => '0[1-9]|[12][0-9]|3[01]'
-        )
+        ]
     );
 
 C'est assez complexe, mais montre comme les routes peuvent vraiment
@@ -293,7 +291,21 @@ spécifiquement la signification.
 * ``action`` Utilisé pour nommer l'action de controller pour une route.
 * ``plugin`` Utilisé pour nommer le plugin dans lequel un controller est localisé.
 * ``prefix`` Utilisé pour :ref:`prefix-routing`.
-* ``ext`` Utilisé pour le routing :ref:`file-extensions`.
+* ``_ext`` Utilisé pour le routing des :ref:`file-extensions`.
+* ``_base`` Défini à false pour retirer le chemin de base de l'URL générée. Si
+  votre application n'est pas dans le répertoire racine, cette option peut être
+  utilisée pour générer les URLs qui sont 'liée à cake'.
+  Les URLs liées à cake sont nécessaires pour utiliser requestAction.
+* ``_scheme`` Défini pour créer les liens sur les schémas différents comme
+  `webcal` ou `ftp`. Par défaut, au schéma courant.
+* ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
+* ``_port`` Définit le port si vous avez besoin de créer les liens sur des ports
+  non-standard.
+* ``_full`` Si à true, la constante `FULL_BASE_URL` va être ajoutée devant les
+  URLS générées.
+* ``#`` Vous permet de définir les fragments de hash d'URL.
+* ``ssl`` Défini à true pour convertir l'URL générée à https, ou false pour
+  forcer http.
 
 Passer des paramètres à l'action
 --------------------------------
@@ -312,12 +324,12 @@ doivent aussi être rendus disponibles en arguments passés::
     // routes.php
     Router::connect(
         '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-        array('controller' => 'blog', 'action' => 'view'),
-        array(
+        ['controller' => 'blog', 'action' => 'view'].
+        [
             // order matters since this will simply map ":id" to $articleId in your action
-            'pass' => array('id', 'slug'),
+            'pass' => ['id', 'slug'],
             'id' => '[0-9]+'
-        )
+        ]
     );
 
 et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
@@ -325,53 +337,44 @@ dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
 comme définie dans les routes::
 
     // view.ctp
-    // cela va retourner un lien vers /blog/3-CakePHP_Rocks
-    echo $this->Html->link('CakePHP Rocks', array(
+    // ceci va retourner un lien vers /blog/3-CakePHP_Rocks
+    echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'blog',
         'action' => 'view',
         'id' => 3,
         'slug' => 'CakePHP_Rocks'
-    ));
+    ]);
 
-Paramètres nommées Per-route
-----------------------------
+.. _named-routes:
 
-Alors que vous pouvez contrôler les paramètres nommés à une grande échelle
-en utilisant :php:meth:`Router::connectNamed()`, vous pouvez aussi contrôler
-le comportement des paramètres nommés au niveau de la route en utilisant
-le 3ème argument de ``Router::connect()``::
+Utiliser les Routes Nommées
+---------------------------
 
+Parfois vous trouvez que taper tous les paramètres de l'URL pour une route est
+trop verbeux, ou que vous souhaitiez tirer avantage des améliorations de la
+performance que les routes nommées permettent. Lorque vous connectez les routes,
+vous pouvez spécifier une option ``_name``, cette option peut être utilisée
+pour le routing inversé pour identifier la route que vous souhaitez utiliser::
+
+    // Connecter une route avec un nom.
     Router::connect(
-        '/:controller/:action/*',
-        array(),
-        array(
-            'named' => array(
-                'wibble',
-                'fish' => array('action' => 'index'),
-                'fizz' => array('controller' => array('comments', 'other')),
-                'buzz' => 'val-[\d]+'
-            )
-        )
+        '/login',
+        ['controller' => 'users', 'action' => 'login'],
+        ['_name' => 'login']
     );
 
-La définition de la route ci-dessus utilise la clé ``named`` pour définir
-comment plusieurs paramètres nommés devraient être traitées. Regardons
-chacune des différentes règles une par une:
+    // Generer une URL en utilisant une route nommée.
+    $url = Router::url('login');
 
-* 'wibble' n'a pas d'information en plus. Cela signifie qu'il va toujours
-  parser si il est trouvé dans une URL matchant cette route.
-* 'fish' a un tableau de conditions, contenant la clé 'action'. Cela signifie
-  que fish va être seulement parsé en paramètre nommé si l'action est aussi
-  indicée.
-* 'fizz' a aussi un tableau de conditions. Cependant, il contient deux
-  controllers, cela signifie que 'fizz' va seulement être parsé si le
-  controller matche un des noms dans le tableau.
-* 'buzz' a une condition de type chaîne de caractères. Les conditions en chaîne
-  sont traitées comme des fragments d'expression régulière. Seules les valeurs
-  pour buzz matchant le pattern vont être parsées.
+    // Génere une URL en utilisant une route nommée,
+    // avec certains args query string
+    $url = Router::url('login', ['username' => 'jimmy']);
 
-Si un paramètre nommé est utilisé et qu'il ne matche pas le critère fourni, il
-sera traité comme un argument passé au lieu d'un paramètre nommé.
+Si votre template de route contient des elements de route comme ``:controller``,
+vous aurez besoin de fournir ceux-ci comme options de ``Router::url()``.
+
+.. versionadded:: 3.0.0
+    Les routes nommées ont été ajoutées dans 3.0.0
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
@@ -384,41 +387,43 @@ laquelle les utilisateurs privilégiés peuvent faire des modifications.
 Ceci est souvent réalisé grâce à une URL spéciale telle que
 ``/admin/users/edit/5``. Dans CakePHP, les préfixes de routage peuvent être
 activés depuis le fichier de configuration du cœur en configurant les
-préfixes avec Routing.prefixes. Notez que les prefixes, bien que liés
-au routeur sont configurés dans ``app/Config/core.php``::
+préfixes avec Routing.prefixes. Les Prefixes peuvent être soit activés en
+utilisant la valeur de configuration ``Routing.prefixes``, soit en définissant
+la clé ``prefix`` avec un appel de ``Router::connect()``::
 
-    Configure::write('Routing.prefixes', array('admin'));
+    Configure::write('Routing.prefixes', ['admin']);
 
-Dans votre controller, toute action avec le préfixe ``admin_`` sera appelée.
-En utilisant notre exemple des users, accéder à l'URL
-``/admin/users/edit/5`` devrait appeler la méthode ``admin_edit``
-de notre ``UsersController`` en passant 5 comme premier paramètre.
-Le fichier de vue correspondant devra être
-``app/View/Users/admin\_edit.ctp``.
+Prefixes are mapped to sub-namespaces in your applications ``Controller``
+namespace. By having prefixes as separate controllers you can create smaller,
+simpler controllers. Behavior that is common to the prefixed and non-prefixed
+controllers can be encapsulated using inheritance,
+:doc:`/controllers/components`, or traits.  Using our users example, accessing
+the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
+``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
+view file used would be ``app/View/Admin/Users/edit.ctp``
 
-Vous pouvez faire correspondre l'URL /admin à votre action ``admin_index``
+Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::
 
-    Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
+    Router::connect(
+        '/admin',
+        ['controller' => 'pages', 'action' => 'index', 'prefix' => 'admin']
+    );
 
 Vous pouvez aussi configurer le Router pour utiliser plusieurs préfixes.
 En ajoutant des valeurs supplémentaires dans ``Routing.prefixes``. Si vous
 définissez::
 
-    Configure::write('Routing.prefixes', array('admin', 'manager'));
+    Configure::write('Routing.prefixes', ['admin', 'manager']);
 
 CakePHP va automatiquement générer les routes pour les deux prefixes admin et
 manager. Chaque préfixe configuré va avoir les routes générées suivantes
 pour cela::
 
-    Router::connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
-    Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
-
-Un peu comme le routing admin, toutes les actions préfixées doivent être
-préfixées avec le nom du préfixe. Ainsi ``/manager/posts/add`` map vers
-``PostsController::manager_add()``.
+    Router::connect("/{$prefix}/:plugin/:controller", ['action' => 'index', 'prefix' => $prefix]);
+    Router::connect("/{$prefix}/:plugin/:controller/:action/*", ['prefix' => $prefix]);
+    Router::connect("/{$prefix}/:controller", ['action' => 'index', 'prefix' => $prefix]);
+    Router::connect("/{$prefix}/:controller/:action/*", ['prefix' => $prefix]);
 
 De plus, le préfixe courant sera disponible à partir des méthodes du controller
 avec ``$this->request->prefix``
@@ -428,10 +433,10 @@ utilisant le helper HTML pour construire vos liens va aider à maintenir les
 appels préfixés. Voici comment construire le lien en utilisant le helper HMTL::
 
     // Allez dans une route préfixée.
-    echo $this->Html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
+    echo $this->Html->link('Manage articles', ['prefix' => 'manager', 'controller' => 'articles', 'action' => 'add']);
 
     // laissez un préfixe
-    echo $this->Html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
+    echo $this->Html->link('View Post', ['prefix' => false, 'controller' => 'articles', 'action' => 'view', 5]);
 
 .. index:: plugin routing
 
@@ -442,13 +447,13 @@ Le routage des Plugins utilise la clé **plugin**. Vous pouvez créer des liens
 qui pointent vers un plugin, mais en ajoutant la clé plugin à votre tableau
 d'URL::
 
-    echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
+    echo $this->Html->link('New todo', ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create']);
 
 Inversement, si la requête active est une requête de plugin et que vous
 voulez créer un lien qui ne pointe pas vers un plugin, vous pouvez faire
 ce qui suit::
 
-    echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
+    echo $this->Html->link('New todo', ['plugin' => null, 'controller' => 'users', 'action' => 'profile']);
 
 En définissant ``plugin => null``, vous indiquez au Routeur que vous souhaitez
 créer un lien qui n'est pas une partie d'un plugin.
@@ -472,17 +477,17 @@ créer votre route comme illustré ci-dessous::
 
     Router::connect(
         '/page/:title',
-        array('controller' => 'pages', 'action' => 'view'),
-        array(
-            'pass' => array('title')
-        )
+        ['controller' => 'pages', 'action' => 'view'],
+        [
+            'pass' => ['title']
+        ]
     );
 
 Ensuite pour créer des liens qui s'adapteront aux routes, utilisez simplement::
 
     $this->Html->link(
         'Link title',
-        array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
+        ['controller' => 'pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
 Les extensions de Fichier sont utilisées par

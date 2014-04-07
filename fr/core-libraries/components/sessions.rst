@@ -1,7 +1,7 @@
 Sessions
 ########
 
-.. php:class:: SessionComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: SessionComponent(ComponentCollection $collection, array $config = [])
 
 Le component session de CakePHP fournit le moyen de faire persister les données
 client entre les pages requêtées. Il agit comme une interface pour ``$_SESSION``
@@ -23,9 +23,9 @@ Il est important de noter que ces structures en tableaux peuvent être créées
 dans la session en utilisant la notation avec un point :term:`dot notation`.
 Par exemple, ``User.username`` se référera au tableau suivant ::
 
-    array('User' =>
-        array('username' => 'clark-kent@dailyplanet.com')
-    );
+    ['User' =>
+        ['username' => 'clark-kent@dailyplanet.com']
+    ];
 
 Les points sont utilisés pour indiquer les tableaux imbriqués. Cette notation
 est utilisée pour toutes les méthodes du component Session quelques soient
@@ -78,10 +78,10 @@ le nom/la clé utilisé.
 
 .. _creating-notification-messages:
 
-Création de messages de notification
+Création de Messages de Notification
 ====================================
 
-.. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
+.. php:method:: setFlash(string $message, string $element = 'default', array $params = [], string $key = 'flash')
 
     :rtype: void
 
@@ -115,10 +115,10 @@ Création de messages de notification
     qui peuvent être séparément récupérer en sortie.::
 
         // définit le message que ca va mal
-        $this->Session->setFlash('Ca va mal.', 'default', array(), 'mal');
+        $this->Session->setFlash('Ca va mal.', 'default', [], 'mal');
 
         // définit le message que ca va bien
-        $this->Session->setFlash('Ca va bien', 'default', array(), 'bien');
+        $this->Session->setFlash('Ca va bien', 'default', [], 'bien');
 
     Dans la vue, ces messages peuvent être ressortis et stylisés différemment::
 
@@ -127,17 +127,17 @@ Création de messages de notification
         echo $this->Session->flash('mal');
 
     Le paramètre ``$element`` vous permet de contrôler quel élément
-    (localisé dans ``/app/View/Elements``) devra être utilisé pour
+    (localisé dans ``/App/Template/Element``) devra être utilisé pour
     rendre le message. Dans l'élément le message est disponible en
     tant que ``$message``. D'abord nous paramétrons le flash dans notre
     controller::
 
         $this->Session->setFlash('truc customisés', 'flash_custom');
 
-    Ensuite nous créons le fichier ``app/View/Elements/flash_custom.ctp`` et
+    Ensuite nous créons le fichier ``/App/Template/Element/flash_custom.ctp`` et
     créons notre élément flash personnalisé::
 
-        <div id="myCustomFlash"><?php echo h($message); ?></div>
+        <div id="myCustomFlash"><?= h($message) ?></div>
 
     ``$params`` vous permet de passer des variables de vue supplémentaires
     au layout de rendu. Les paramètres peuvent être passés en affectant
@@ -148,7 +148,7 @@ Création de messages de notification
         $this->Session->setFlash(
             'Message Exemple',
             'default',
-            array('class' => 'classe_exemple')
+            ['class' => 'classe_exemple']
         );
 
     La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci-dessus
@@ -159,11 +159,11 @@ Création de messages de notification
     Pour utiliser un élément depuis un plugin spécifiez le plugin
     dans le ``$params``::
 
-        // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
+        // Utilisera /Plugin/Comment/Template/Element/flash_no_spam.ctp
         $this->Session->setFlash(
             'Message!',
             'flash_no_spam',
-            array('plugin' => 'Comment')
+            ['plugin' => 'Comment']
         );
 
     .. note::

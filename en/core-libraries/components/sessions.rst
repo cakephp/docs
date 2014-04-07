@@ -1,7 +1,7 @@
 Sessions
 ########
 
-.. php:class:: SessionComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: SessionComponent(ComponentCollection $collection, array $config = [])
 
 The CakePHP SessionComponent provides a way to persist client data
 between page requests. It acts as a wrapper for ``$_SESSION`` as
@@ -23,9 +23,9 @@ It should be noted that Array structures can be created in the
 Session by using :term:`dot notation`. So ``User.username`` would
 reference the following::
 
-    array('User' => array(
+    ['User' => [
         'username' => 'clark-kent@dailyplanet.com'
-    ));
+    ]];
 
 Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a name/key is used.
@@ -82,7 +82,7 @@ all Session component methods wherever a name/key is used.
 Creating Notification Messages
 ==============================
 
-.. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
+.. php:method:: setFlash(string $message, string $element = 'default', array $params = [], string $key = 'flash')
 
     :rtype: void
 
@@ -113,10 +113,10 @@ Creating Notification Messages
     output separately::
 
         // set a bad message.
-        $this->Session->setFlash('Something bad.', 'default', array(), 'bad');
+        $this->Session->setFlash('Something bad.', 'default', [], 'bad');
 
         // set a good message.
-        $this->Session->setFlash('Something good.', 'default', array(), 'good');
+        $this->Session->setFlash('Something good.', 'default', [], 'good');
 
     In the view, these messages can be output and styled differently::
 
@@ -144,7 +144,7 @@ Creating Notification Messages
         $this->Session->setFlash(
             'Example message text',
             'default',
-            array('class' => 'example_class')
+            ['class' => 'example_class']
         );
 
     The output from using ``$this->Session->flash()`` with the above example
@@ -159,7 +159,7 @@ Creating Notification Messages
         $this->Session->setFlash(
             'Message!',
             'flash_no_spam',
-            array('plugin' => 'Comment')
+            ['plugin' => 'Comment']
         );
 
     .. note::
