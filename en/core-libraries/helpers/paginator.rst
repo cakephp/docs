@@ -167,7 +167,7 @@ The lock option can be used to lock sorting into the specified direction::
 
     echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
 
-.. php:method:: sortDir(string $model = null, mixed $options = array())
+.. php:method:: sortDir(string $model = null, mixed $options = [])
 
     Gets the current direction the recordset is sorted.
 
@@ -391,7 +391,7 @@ Sets all the options for the Paginator Helper. Supported options are:
 
   The above adds the ``en`` route parameter to all links the helper will
   generate. It will also create links with specific sort, direction and page
-  values.  By default PaginatorHelper will merge in all of the current passed
+  values. By default PaginatorHelper will merge in all of the current passed
   arguments and query string parameters.
 
 * ``escape`` Defines if the title field for links should be HTML escaped.
@@ -483,7 +483,7 @@ Other Methods
     By default returns a full pagination URL string for use in non-standard
     contexts (i.e. JavaScript).::
 
-        echo $this->Paginator->generateUrl(array('sort' => 'title'));
+        echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. php:method:: defaultModel()
 
