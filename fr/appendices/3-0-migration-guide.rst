@@ -833,6 +833,12 @@ Testing
 Utility
 =======
 
+Classe Set Retirée
+------------------
+
+La classe Set a été retirée, vous devriez maintenant utiliser la classe Hash
+à la place.
+
 Inflector
 ---------
 
