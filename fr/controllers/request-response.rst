@@ -69,7 +69,8 @@ Tous ceux-ci vous fourniront un accès aux arguments passés et aux paramètres
 nommés. Il y a de nombreux paramètres importants et utiles que CakePHP utilise
 en interne, il sont aussi trouvables dans les paramètres de la requête:
 
-* ``plugin`` Le plugin gérant la requête, va être nul pour les non-plugins.
+* ``plugin`` Le plugin gérant la requête, va être nul quand il n'y a pas de
+  plugins.
 * ``controller`` Le controller gère la requête courante.
 * ``action`` L'action gère la requête courante.
 * ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
@@ -95,7 +96,7 @@ Les paramètres Querystring peuvent être lus en utilisant
 
 Vous pouvez soit directement accéder à la propriété
 :php:attr:`~CakeRequest::$query`, soit vous pouvez utiliser
-:php:meth:`CakeRequest::query()` pour lire l'URL requêtée d'une manière sans
+:php:meth:`CakeRequest::query()` pour lire l'URL requêtée sans
 erreur. Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -782,8 +783,8 @@ Probablement l'une des plus grandes victoires de :php:class:`CakeResponse` vient
 de comment il facilite les tests des controllers et des components. Au lieu
 d'avoir des méthodes répandues à travers plusieurs objets, vous avez un seul
 objet pour mocker pendant que les controllers et les components déleguent à
-:php:class:`CakeResponse`. Cela vous aide à rester plus près d'un test 'unit' et
-facilite les tests des controllers::
+:php:class:`CakeResponse`. Cela vous aide à rester plus près d'un test unitaire
+et facilite les tests des controllers::
 
     public function testSomething() {
         $this->controller->response = $this->getMock('CakeResponse');
