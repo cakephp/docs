@@ -66,6 +66,16 @@ Scaffold
 --------
 - Dynamic Scaffold is now deprecated and will be removed in 3.0.
 
+
+Core
+====
+
+CakePlugin
+----------
+
+- :php:meth:`CakePlugin::loadAll()` now merges the defaults and plugin specific options as
+  intuitively expected. See the test cases for details.
+
 Event
 =====
 
