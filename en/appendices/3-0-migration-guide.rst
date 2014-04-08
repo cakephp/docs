@@ -683,6 +683,8 @@ HtmlHelper
 - ``HtmlHelper::useTag()`` has been removed, use ``tag()`` instead.
 - ``HtmlHelper::loadConfig()`` has been removed. Customizing the tags can now be
   done using ``templates()`` or the ``templates`` setting.
+- The second parameter ``$options`` for ``HtmlHelper::css()`` now always requires an array as documented.
+- The first parameter ``$data`` for ``HtmlHelper::style()`` now always requires an array as documented.
 - The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
   methods. You should use the ``block`` option instead. Setting ``block =>
   true`` will emulate the previous behavior.
@@ -701,7 +703,7 @@ PaginatorHelper
 - ``last()`` no longer has 'after', 'ellipsis', 'separator', 'class', or 'tag' options.
 - ``numbers()`` no longer has 'separator', 'tag', 'currentTag', 'currentClass',
   'class', 'tag', 'ellipsis' options. These options are now facilitated through
-  templates.
+  templates. It also requires the ``$options`` parameter to be an array now.
 - The ``%page%`` style placeholders have been removed from :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
   Use ``{{page}}`` style placeholders instead.
 - ``url()`` has been renamed to ``generateUrl()`` to avoid method declaration clashes with ``Helper::url()``.
