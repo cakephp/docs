@@ -87,7 +87,7 @@ Basics
 Debugging
 =========
 
-* ``Configure::write('debug'`, $bool)`` does not support 0/1/2 anymore. A simple boolean
+* ``Configure::write('debug', $bool)`` does not support 0/1/2 anymore. A simple boolean
   is used instead to switch debug mode on or off.
 
 Object settings/configuration
