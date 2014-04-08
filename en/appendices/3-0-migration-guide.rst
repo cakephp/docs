@@ -499,6 +499,9 @@ TestSuite
 TestCase
 --------
 
+- ``_normalizePath()`` has been added to allow path comparison tests to run across all
+  operation systems regarding their DS settings (``\`` in Windows vs ``/`` in UNIX, for example).
+
 The following assertion methods have been removed as they have long been deprecated and replaced by
 their new PHPUnit counterpart:
 
@@ -708,7 +711,7 @@ PaginatorHelper
   Use ``{{page}}`` style placeholders instead.
 - ``url()`` has been renamed to ``generateUrl()`` to avoid method declaration clashes with ``Helper::url()``.
 
-By default all links and inactive text is wrapped in ``<li>`` elements. This
+By default all links and inactive texts are wrapped in ``<li>`` elements. This
 helps make CSS easier to write, and improves compatibility with popular CSS
 frameworks.
 
