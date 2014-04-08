@@ -93,7 +93,7 @@ Notions de base
 Debugging
 =========
 
-* ``Configure::write('debug'`, $bool)`` ne supporte plus 0/1/2. Un simple
+* ``Configure::write('debug', $bool)`` n'accepte plus 0/1/2. Un simple
   boléen est utilisé à la place pour changer entre le mode debug on et off.
 
 Object settings/configuration
@@ -546,6 +546,10 @@ TestSuite
 TestCase
 --------
 
+- ``_normalizePath()`` a été ajoutée pour permettre aux tests de comparaison
+  de chemin de se lancer pour tous les systèmes d'exploitation selon la
+  configuration de leur DS (``\`` dans Windows vs ``/`` dans UNIX, par exemple).
+
 Les méthodes d'assertion suivantes ont été retirées puisque cela faisait
 longtemps qu'elles étaient dépréciées et remplacées par leurs nouvelles
 homologues de PHPUnit:
@@ -744,6 +748,10 @@ HtmlHelper
 - ``HtmlHelper::useTag()`` a été retirée, utilisez ``tag()`` à la place.
 - ``HtmlHelper::loadConfig()`` a été retirée. La personnalisation des tags peut
   être faîte en utilisant ``templates()`` ou la configuration ``templates``.
+- Le deuxième paramètre ``$options`` pour ``HtmlHelper::css()`` doit maintenant
+  toujours être un tableau comme c'est écrit dans la documentation.
+- Le premier paramètre ``$data`` pour ``HtmlHelper::style()`` doit maintenant
+  toujours être un tableau comme c'est écrit dans la documentation.
 - Le paramètre ``inline`` a été retiré des méthodes meta(), css(), script(),
   scriptBlock(). Vous devrez utiliser l'option ``block`` à la place. Définir
   ``block => true`` va émuler le comportement précédent.
@@ -764,12 +772,15 @@ PaginatorHelper
   'tag'.
 - ``numbers()`` n'a plus les options 'separator', 'tag', 'currentTag',
   'currentClass', 'class', 'tag', 'ellipsis'. Ces options sont maintenant
-  accessibles à travers des templates.
+  accessibles à travers des templates. Le paramètre ``$options`` doit maintenant
+  être un tableau.
 - Les placeholders de style ``%page%`` ont été retirés de
   :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
   Utilisez les placeholders de style ``{{page}}`` à la place.
+- ``url()`` a été renommée en ``generateUrl()`` pour éviter des clashes de
+  déclaration de méthode avec ``Helper::url()``.
 
-Par défaut, tous les liens et le text inactifsont entourés d'elements ``<li>``.
+Par défaut, tous les liens et le text inactif sont entourés d'elements ``<li>``.
 Ceci aide à écrire plus facilement du CSS, et améliore la compatibilité avec
 des frameworks populaires.
 
