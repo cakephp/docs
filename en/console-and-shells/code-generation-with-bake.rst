@@ -50,6 +50,69 @@ availble using the ``--help`` option::
 
     $ Console/cake bake model --help
 
+Create New Tasks for Bake
+=========================
+
+Bake features an extensible architecture that allows your application or plugins
+to easily provide new tasks, or replace tasks provided by CakePHP. By extending
+``Cake\Console\Command\Task\BakeTask``, bake will find your new task and include
+it as part of bake. You should see any tasks you create in the menu output by
+``Console/cake bake``.
+
+As an example, we'll make a task that creates shell classes. First, create
+the task file ``App/Console/Command/Task/ShellTask.php``. We'll extend the
+``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
+is abstract and requires us to define 4 methods that tell bake what the task is
+called, where the files it generates should go, and what template to use. Our
+ShellTask.php file should look like::
+
+    <?php
+    namespace App\Console\Command\Task;
+
+    use Cake\Console\Command\Task\SimpleBakeTask;
+
+    class ShellTask extends SimpleBakeTask {
+        public $pathFragment = 'View/Helper/';
+
+        public function name() {
+            return 'shell';
+        }
+
+        public function fileName($name) {
+            return $name . 'Shell.php';
+        }
+
+        public function template() {
+            return 'shell';
+        }
+
+    }
+
+Once this file has been created, we need to create a template that bake can use
+when generating code. Create
+``App/Console/Command/Template/app/classes/shell.ctp``. In this file we'll add
+the following content::
+
+    <?php
+    echo "<?php\n"; ?>
+    namespace <?= $namespace ?>\Console\Command;
+
+    use Cake\Console\Shell;
+
+    /**
+     * <?= $name ?> shell
+     */
+    class <?= $name ?>Shell extends Shell {
+
+        public function main() {
+            // Add code.
+        }
+    }
+
+You should now see your new task in the output of ``Console/cake bake``. You can
+run your new task by running ``Console/cake bake shell Example --theme app``.
+This will generate a new ``ExampleShell`` class for your application to use.
+
 Modify Default HTML/Code Produced by bake
 =========================================
 
