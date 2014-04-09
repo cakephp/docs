@@ -1275,11 +1275,11 @@ used. A sample validator method for our articles table would be::
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => 'You need to provide a title',
+                    'message' => __('You need to provide a title'),
                 ])
                 ->add('body', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => 'A body is required'
+                    'message' => __('A body is required')
                 ]);
             return $validator;
         }
@@ -1308,7 +1308,7 @@ a validation rule::
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
-                    'message' => 'You need to provide a valid role',
+                    'message' => __('You need to provide a valid role'),
                     'provider' => 'entity',
                 ]);
             return $validator;
