@@ -121,7 +121,7 @@ Les fichiers des vues de CakePHP sont stockés dans ``/App/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
 aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
 données de ces articles dans un joli tableau, le code de notre vue devrait
-ressembler à quelque chose comme cela::
+ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
@@ -131,8 +131,8 @@ ressembler à quelque chose comme cela::
     <table>
         <tr>
             <th>Id</th>
-            <th>Titre</th>
-            <th>Créé le</th>
+            <th>Title</th>
+            <th>Created</th>
         </tr>
 
         <!-- Here is where we iterate through our $articles query object, printing out article info -->
