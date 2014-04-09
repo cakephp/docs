@@ -692,7 +692,6 @@ HtmlHelper
   methods. You should use the ``block`` option instead. Setting ``block =>
   true`` will emulate the previous behavior.
 
-
 PaginatorHelper
 ---------------
 
@@ -726,6 +725,11 @@ TimeHelper
   removed. These were magic methods for deprecated attributes.
 - ``TimeHelper::serverOffset()`` has been removed.  It promoted incorrect time math practices.
 - ``TimeHelper::niceShort()`` has been removed.
+
+NumberHelper
+------------
+
+- :php:meth:`NumberHelper::format()` now requires options to be an array.
 
 I18n
 ====
@@ -818,3 +822,9 @@ Time
   magic setter/getter methods for backwards compatibility.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
 - ``CakeTime::niceShort()`` has been removed.
+- :php:meth:`Time::timeAgoInWords()` now requires options to be an array.
+
+Number
+------
+
+- :php:meth:`Number::format()` now requires options to be an array.
