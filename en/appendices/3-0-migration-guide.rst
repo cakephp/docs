@@ -692,6 +692,8 @@ HtmlHelper
 - The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
   methods. You should use the ``block`` option instead. Setting ``block =>
   true`` will emulate the previous behavior.
+- ``HtmlHelper::meta()`` now requires ``$type`` to be a string. Additional options can
+  further on be passed as ``$options``.
 
 PaginatorHelper
 ---------------
