@@ -673,6 +673,7 @@ and reduce the problems people had in the past:
   content.
 - The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
+  It now also requires ``$fields`` parameter to be an array.
 - The ``inline`` parameter has been removed from postLink() method.
   You should use the ``block`` option instead. Setting ``block => true`` will
   emulate the previous behavior.
