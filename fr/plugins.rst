@@ -61,8 +61,8 @@ ce qui aurait chargé seulement ces trois plugins, et pas le reste.
 Au final, vous pouvez aussi spécifier un ensemble de valeurs dans defaults pour
 loadAll qui s'applique à chaque plugin qui n'a pas de configuration spécifique.
 
-Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
-partir du plugin Blog::
+Chargez le fichier bootstrap à partir de tous les plugins, et aussi les routes
+du plugin Blog::
 
     CakePlugin::loadAll(array(
         array('bootstrap' => true),

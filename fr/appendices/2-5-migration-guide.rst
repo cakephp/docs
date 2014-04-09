@@ -69,6 +69,17 @@ Scaffold
 --------
 - Le scaffold dynamique est maintenant déprécié et sera retiré dans 3.0.
 
+
+Core
+====
+
+CakePlugin
+----------
+
+- :php:meth:`CakePlugin::loadAll()` fusionne maintenant les options par défaut
+  et celles spécifiques au plugin comme on peut s'y attendre intuitivement.
+  Regardez les cas de test pour plus de détails.
+
 Event
 =====
 
