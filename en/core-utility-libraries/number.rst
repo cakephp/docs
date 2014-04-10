@@ -252,7 +252,7 @@ automatically echo the output into the view.
         echo CakeNumber::toReadableSize(1321205.76); // 1.26 MB
         echo CakeNumber::toReadableSize(5368709120); // 5.00 GB
 
-.. php:method:: format(mixed $number, mixed $options=false)
+.. php:method:: format(mixed $number, array $options = [])
 
     This method gives you much more control over the formatting of
     numbers for use in your views (and is used as the main method by

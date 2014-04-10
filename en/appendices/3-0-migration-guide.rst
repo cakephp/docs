@@ -673,6 +673,7 @@ and reduce the problems people had in the past:
   content.
 - The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
+  It now also requires ``$fields`` parameter to be an array.
 - The ``inline`` parameter has been removed from postLink() method.
   You should use the ``block`` option instead. Setting ``block => true`` will
   emulate the previous behavior.
@@ -691,7 +692,8 @@ HtmlHelper
 - The ``inline`` parameter has been removed from meta(), css(), script(), scriptBlock()
   methods. You should use the ``block`` option instead. Setting ``block =>
   true`` will emulate the previous behavior.
-
+- ``HtmlHelper::meta()`` now requires ``$type`` to be a string. Additional options can
+  further on be passed as ``$options``.
 
 PaginatorHelper
 ---------------
@@ -726,6 +728,11 @@ TimeHelper
   removed. These were magic methods for deprecated attributes.
 - ``TimeHelper::serverOffset()`` has been removed.  It promoted incorrect time math practices.
 - ``TimeHelper::niceShort()`` has been removed.
+
+NumberHelper
+------------
+
+- :php:meth:`NumberHelper::format()` now requires options to be an array.
 
 I18n
 ====
@@ -818,3 +825,9 @@ Time
   magic setter/getter methods for backwards compatibility.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
 - ``CakeTime::niceShort()`` has been removed.
+- :php:meth:`Time::timeAgoInWords()` now requires options to be an array.
+
+Number
+------
+
+- :php:meth:`Number::format()` now requires options to be an array.
