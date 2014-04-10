@@ -8,8 +8,8 @@ plugins. And we aren't just talking skeleton classes: Bake can create a fully
 functional application in just a few minutes. In fact, Bake is a natural step to
 take once an application has been scaffolded.
 
-Depending on the configuration of your setup, you may have to set
-execute rights on the cake bash script or call it using ``./Console/cake
+Depending on how your computer is configured, you may have to set
+execute rights on the cake bash script to call it using ``./Console/cake
 bake``. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
@@ -54,10 +54,9 @@ Create New Tasks for Bake
 =========================
 
 Bake features an extensible architecture that allows your application or plugins
-to easily provide new tasks, or replace tasks provided by CakePHP. By extending
+to provide new tasks, or replace tasks provided by CakePHP. By extending
 ``Cake\Console\Command\Task\BakeTask``, bake will find your new task and include
-it as part of bake. You should see any tasks you create in the menu output by
-``Console/cake bake``.
+it as part of bake.
 
 As an example, we'll make a task that creates shell classes. First, create
 the task file ``App/Console/Command/Task/ShellTask.php``. We'll extend the
@@ -72,7 +71,7 @@ ShellTask.php file should look like::
     use Cake\Console\Command\Task\SimpleBakeTask;
 
     class ShellTask extends SimpleBakeTask {
-        public $pathFragment = 'View/Helper/';
+        public $pathFragment = 'Console/Command/';
 
         public function name() {
             return 'shell';
