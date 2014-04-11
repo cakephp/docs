@@ -19,7 +19,7 @@ structure d'URL des applications sans avoir mis à jour tous vos codes.
 Configuration des Routes
 ========================
 
-Les Routes dans une application sont configurées dans ``app/Config/routes.php``.
+Les Routes dans une application sont configurées dans ``App/Config/routes.php``.
 Ce fichier est inclu par le :php:class:`Dispatcher` quand on gère les routes et
 vous permet de définir des routes spécifiques d'application que vous voulez
 utiliser. Les Routes déclarées dans ce fichier sont traitées de haut en bas
@@ -89,7 +89,7 @@ Connecter les Routes
 
 Définir vos propres routes vous permet de définir la façon dont votre
 application va répondre à une URL donnée. Définir vos propres routes
-dans le fichier ``app/Config/routes.php`` en utilisant la méthode
+dans le fichier ``App/Config/routes.php`` en utilisant la méthode
 :php:meth:`Router::connect()`.
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
@@ -400,7 +400,7 @@ controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
 ``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
-view file used would be ``app/View/Admin/Users/edit.ctp``
+view file used would be ``App/Template/Admin/Users/edit.ctp``
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::
@@ -897,7 +897,7 @@ Classes de Route personnalisées
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
 façon dont certaines routes parsent les demandes et de traiter le routing
 inversé. Une classe personnalisée  de route devrait être créée dans
-``app/Lib/Routing/Route`` et étendre
+``App/Lib/Routing/Route`` et étendre
 :php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou 
 ``parse()``. ``parse()`` est utilisée pour
 analyser les demandes et correspondance et ``match()`` est utilisée pour
