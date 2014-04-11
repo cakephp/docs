@@ -176,8 +176,7 @@ following::
 
     public function setUp() {
         parent::setUp();
-        $Controller = new Controller();
-        $View = new View($Controller);
+        $View = new View();
         $this->Progress = new ProgressHelper($View);
     }
 
@@ -1146,8 +1145,7 @@ Now we create our tests::
         // Here we instantiate our helper
         public function setUp() {
             parent::setUp();
-            $Controller = new Controller();
-            $View = new View($Controller);
+            $View = new View();
             $this->CurrencyRenderer = new CurrencyRendererHelper($View);
         }
 
@@ -1170,7 +1168,7 @@ Now we create our tests::
 Here, we call ``usd()`` with different parameters and tell the test suite to
 check if the returned values are equal to what is expected.
 
-Save this in and execute the test. You should see a green bar and messaging
+Save this and execute the test. You should see a green bar and messaging
 indicating 1 pass and 4 assertions.
 
 Creating Test Suites
