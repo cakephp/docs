@@ -24,10 +24,6 @@ use the ``String`` class::
         }
     }
 
-.. versionchanged:: 2.1
-   Several methods from :php:class:`TextHelper` have been moved to
-   ``String`` class.
-
 .. php:staticmethod:: uuid()
 
     The UUID method is used to generate unique identifiers as per
@@ -143,7 +139,7 @@ use the ``String`` class::
 
     Strips the supplied ``$text`` of any HTML links.
 
-.. php:method:: truncate(string $text, int $length=100, array $options)
+.. php:method:: truncate(string $text, int $length = 100, array $options)
 
     :param string $text: The text to truncate.
     :param int $length:  The length to trim to.
@@ -191,11 +187,8 @@ use the ``String`` class::
 
         The killer crept...
 
-.. versionchanged:: 2.3
-   ``ending`` has been replaced by ``ellipsis``. ``ending`` is still used in 2.2.1
 
-
-.. php:method:: tail(string $text, int $length=100, array $options)
+.. php:method:: tail(string $text, int $length = 100, array $options)
 
     :param string $text: The text to truncate.
     :param int $length:  The length to trim to.
@@ -213,8 +206,6 @@ use the ``String`` class::
             'ellipsis' => '...',
             'exact' => true
         )
-
-    .. versionadded:: 2.3
 
     Example::
 

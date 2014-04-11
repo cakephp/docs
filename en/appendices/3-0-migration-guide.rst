@@ -732,7 +732,7 @@ TimeHelper
 NumberHelper
 ------------
 
-- :php:meth:`NumberHelper::format()` now requires options to be an array.
+- :php:meth:`NumberHelper::format()` now requires ``$options`` to be an array.
 
 I18n
 ====
@@ -825,9 +825,14 @@ Time
   magic setter/getter methods for backwards compatibility.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
 - ``CakeTime::niceShort()`` has been removed.
-- :php:meth:`Time::timeAgoInWords()` now requires options to be an array.
+- :php:meth:`Time::timeAgoInWords()` now requires ``$options`` to be an array.
 
 Number
 ------
 
-- :php:meth:`Number::format()` now requires options to be an array.
+- :php:meth:`Number::format()` now requires ``$options`` to be an array.
+
+Xml
+---
+
+- :php:meth:`Xml::build()` now requires ``$options`` to be an array.
