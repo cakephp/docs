@@ -43,7 +43,7 @@ to implement your own caching systems. The built-in caching engines are:
     Using files should make setting up CakePHP simpler for new developers.
 
 .. versionchanged:: 2.5
-    The Memcached engine was added. And the Memecache engine was deprecated.
+    The Memcached engine was added. And the Memcache engine was deprecated.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner. This means you can easily swap cache engines
