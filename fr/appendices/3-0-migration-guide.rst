@@ -734,6 +734,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
 - La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
+  Elle nécessite aussi que le paramètre ``$fields`` soit un tableau.
 - Le paramètre ``inline`` a été retiré de la méthode postLink().
   Vous devriez utiliser l'option ``block`` à la place. Définir ``block => true``
   va émuler le comportement précédent.
@@ -755,6 +756,9 @@ HtmlHelper
 - Le paramètre ``inline`` a été retiré des méthodes meta(), css(), script(),
   scriptBlock(). Vous devrez utiliser l'option ``block`` à la place. Définir
   ``block => true`` va émuler le comportement précédent.
+- ``HtmlHelper::meta()`` necessite maintenant que ``$type`` soit une chaîne de
+  caractère. Les options supplémentaires peuvent en outre être passées dans
+  ``$options``.
 
 PaginatorHelper
 ---------------
@@ -797,6 +801,12 @@ TimeHelper
 - ``TimeHelper::serverOffset()`` a été retirée. Elle entraînait de mauvaises
   utilisations mathématiques de time.
 - ``TimeHelper::niceShort()`` a été retirée.
+
+NumberHelper
+------------
+
+- :php:meth:`NumberHelper::format()` nécessite maintenant que les options soient
+  un tableau.
 
 I18n
 ====
@@ -900,3 +910,9 @@ Time
 - ``CakeTime::serverOffset()`` a été retirée. Il incitait à des pratiques de
   correspondance de time incorrects.
 - ``CakeTime::niceShort()`` a été retirée.
+
+Number
+------
+
+- :php:meth:`Number::format()` nécessite maintenant que les options soient un
+  tableau.

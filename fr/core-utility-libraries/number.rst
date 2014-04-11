@@ -279,7 +279,7 @@ automatiqement la sortie dans la vue.
         echo CakeNumber::toReadableSize(1321205.76); // 1.26 MB
         echo CakeNumber::toReadableSize(5368709120); // 5.00 GB
 
-.. php:method:: format(mixed $number, mixed $options=false)
+.. php:method:: format(mixed $number, array $options=[])
 
     Cette méthode vous donne beaucoup plus de contrôle sur le formatage des
     nombres pour l'utilisation dans vos vues (et est utilisée en tant que
