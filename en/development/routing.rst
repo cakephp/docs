@@ -18,7 +18,7 @@ URL structure without having to update all your code.
 Routes Configuration
 ====================
 
-Routes in an application are configured in ``app/Config/routes.php``.
+Routes in an application are configured in ``App/Config/routes.php``.
 This file is included by the :php:class:`Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes
 declared in this file are processed top to bottom when incoming requests
@@ -85,7 +85,7 @@ Connecting Routes
 
 Defining your own routes allows you to define how your application
 will respond to a given URL. Define your own routes in the
-``app/Config/routes.php`` file using the :php:meth:`Cake\\Routing\\Router::connect()`
+``App/Config/routes.php`` file using the :php:meth:`Cake\\Routing\\Router::connect()`
 method.
 
 The ``connect()`` method takes up to three parameters: the URL you
@@ -382,7 +382,7 @@ controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
 ``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
-view file used would be ``app/View/Admin/Users/edit.ctp``
+view file used would be ``App/Template/Admin/Users/edit.ctp``
 
 You can map the URL /admin to your ``index`` action of pages
 controller using following route::
