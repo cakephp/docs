@@ -101,8 +101,8 @@ Object settings/configuration
 
 * Les Objets utilisés dans CakePHP ont maintenant un système
   d'instance-configuration de stockage/récupération cohérent. Le code qui était
-  auparavant accessible par exemple comme ceci: `$object->settings` devra être
-  mis à jour en utilisant à la place `$object->config()`.
+  auparavant accessible par exemple comme ceci: ``$object->settings`` devra être
+  mis à jour en utilisant à la place ``$object->config()``.
 
 Cache
 =====
@@ -282,12 +282,12 @@ Router
   d'informations.
 * L'option ``full_base`` a été remplacée par l'options ``_full``.
 * L'option ``ext`` a été remplacée par l'option ``_ext``.
-* Les options `_scheme`, `_port`, `_host`, `_base`, `_full`, `_ext` ont été
-  ajoutées.
+* Les options ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full`` et
+  ``_ext`` ont été ajoutées.
 * Les chaînes URLs ne sont plus modifiées en ajoutant les noms de
   plugin/controller/prefix.
 * La gestion de route fallback par défaut a été retirée. Si aucune route ne
-  correspond à un paramètre défini, `/` sera retourné.
+  correspond à un paramètre défini, ``/`` sera retourné.
 * Les classes de route sont responsables pour *toutes* les générations d'URL
   incluant les paramètres de query string. Cela rend les routes bien plus
   puissantes et flexibles.
@@ -337,7 +337,7 @@ Request
   méthode static en non static.
 * Le detecteur de Request pour "mobile" a été retiré du coeur. A la place
   le template de app ajoute des detecteurs pour "mobile" et "tablet" en
-  utilisant la lib `MobileDetect`.
+  utilisant la lib ``MobileDetect``.
 
 Response
 --------
@@ -759,6 +759,9 @@ HtmlHelper
 - ``HtmlHelper::meta()`` necessite maintenant que ``$type`` soit une chaîne de
   caractère. Les options supplémentaires peuvent en outre être passées dans
   ``$options``.
+- ``HtmlHelper::nestedList()`` nécessite maintenant que ``$options`` soit un
+  tableau. Le quatrième argument pour le niveau de tag a été retiré et il a été
+  inclu dans le tableau ``$options``.
 
 PaginatorHelper
 ---------------
