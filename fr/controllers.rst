@@ -1,16 +1,16 @@
 Controllers (Contrôleurs)
 #########################
 
-Les Controllers sont le 'C' dans MVC. Après que le routage a été appliqué et
-que le bon controller a été trouvé, l'action de votre controller est
-appelé. Votre controller devra gérer l'interpretation des données requetées,
-s'assurer que les bon models sont appelés, et que la bonne réponse ou vue est
-rendue. Les controllers peuvent être imaginés comme un homme au milieu entre
-le Model et la Vue. Le mieux est de garder des controllers peu chargés, et
-des models plus fournis. Cela vous aidera à réutiliser plus facilement votre
-code et facilitera le test de votre code.
+Les controllers sont le 'C' dans MVC. Après que le routage a été effectué et que
+le bon controller a été trouvé, l'action de votre controller est appelée. Votre
+controller devra gérer l'interpretation des données requêtées, s'assurer que
+les bons models sont appelés et que la bonne réponse ou vue est rendue. Les
+controllers peuvent être imaginés comme un homme au milieu entre le Model et la
+Vue. Le mieux est de garder des controllers peu chargés, et des models plus
+fournis. Cela vous aidera à réutiliser plus facilement votre code et facilitera
+le test de votre code.
 
-Habituellement, les controllers sont utilisés pour gérer la logique autour
+Habituellement, un controller est utilisé pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une
 boulangerie en-ligne, vous aurez sans doute un RecettesController qui gère
 vos recettes et un IngredientsController qui gére vos ingrédients. Cependant,
@@ -21,7 +21,7 @@ gère.
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans ``/app/Controller/AppController.php`` et elle devrait contenir les
+dans ``/App/Controller/AppController.php`` et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
@@ -40,15 +40,15 @@ Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Controller` incluse dans la librairie du cœur
 de CakePHP. ``AppController`` est définie dans
-``/app/Controller/AppController.php`` comme ceci::
+``/App/Controller/AppController.php`` comme ceci::
 
     class AppController extends Controller {
     }
 
 Les attributs et méthodes de controller créés dans ``AppController`` seront
 disponibles dans tous les controllers de votre application. Les Components (que
-vous découvrirez plus loin) sont mieux appropriés pour du code utilisé dans
-la plupart (mais pas nécessairement tous) des controllers.
+vous découvrirez plus loin) sont plus appropriés pour du code utilisé dans
+la plupart des controllers (mais pas nécessairement tous).
 
 Bien que les règles habituelles d'héritage de la programmation orientée objet
 soient appliquées, CakePHP exécute également un travail supplémentaire si des
@@ -210,7 +210,7 @@ Les Méthodes du Controller
 
 Pour une liste complète des méthodes de controller avec leurs descriptions,
 consultez
-`l'API de CakePHP <http://api.cakephp.org/2.4/class-Controller.html>`_.
+`l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
 
 Interactions avec les vues
 --------------------------
@@ -697,7 +697,7 @@ Les attributs du Controller
 ===========================
 
 Pour une liste complète des attributs du controller et ses descriptions,
-regardez `l'API de CakePHP <http://api.cakephp.org/2.4/class-Controller.html>`_.
+regardez `l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
 
 .. php:attr:: name
 

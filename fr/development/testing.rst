@@ -185,8 +185,7 @@ nous ajouterons ce qui suit::
 
     public function setUp() {
         parent::setUp();
-        $Controller = new Controller();
-        $View = new View($Controller);
+        $View = new View();
         $this->Progress = new ProgressHelper($View);
     }
 
@@ -1183,8 +1182,7 @@ Maintenant nous créons nos tests::
         // Ici nous instancions notre helper
         public function setUp() {
             parent::setUp();
-            $Controller = new Controller();
-            $View = new View($Controller);
+            $View = new View();
             $this->CurrencyRenderer = new CurrencyRendererHelper($View);
         }
 
