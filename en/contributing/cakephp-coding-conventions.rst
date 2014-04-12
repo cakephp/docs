@@ -273,7 +273,7 @@ processed if they are the first thing in a DocBlock line, for example::
     /**
      * Foo function.
      *
-     * @reurn void
+     * @return void
      */
     function foo() {
     }
