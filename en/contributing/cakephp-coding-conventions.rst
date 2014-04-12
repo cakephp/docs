@@ -196,6 +196,36 @@ successful::
 
 There are spaces on both side of the equals sign.
 
+Typehinting
+-----------
+
+Arguments that expect objects or arrays can be typehinted.
+We only typehint public methods, though, as typehinting is not cost-free.
+
+    /**
+     * Some method description.
+     *
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param boolean $boolean Some boolean value.
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+
+Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
+you should not typehint as ``array`` accepts only the primitive type.
+
+    /**
+     * Some method description.
+     *
+     * @param array|ArrayObject $array Some array value.
+     */
+    public function foo($array) {
+    }
+
+
 Commenting Code
 ===============
 
@@ -223,6 +253,7 @@ processed if they are the first thing in a DocBlock line, for example::
 
     /**
      * Tag example.
+     *
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
@@ -407,35 +438,6 @@ Type
 		Cast to array.
 (object)
 		Cast to object.
-
-Typehinting
------------
-
-Arguments that expect objects or arrays can be typehinted.
-We only typehint public methods, though, as typehinting is not cost-free.
-
-    /**
-     * Some method description.
-     *
-     * @param Model $Model The model to use.
-     * @param array $array Some array value.
-     * @param boolean $boolean Some boolean value.
-     */
-    public function foo(Model $Model, array $array, $boolean) {
-    }
-
-Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
-
-Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
-you should not typehint as ``array`` accepts only the primitive type.
-
-    /**
-     * Some method description.
-     *
-     * @param array|ArrayObject $array Some array value.
-     */
-    public function foo($array) {
-    }
 
 Constants
 ---------
