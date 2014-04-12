@@ -196,6 +196,36 @@ successful::
 
 There are spaces on both side of the equals sign.
 
+Typehinting
+-----------
+
+Arguments that expect objects or arrays can be typehinted.
+We only typehint public methods, though, as typehinting is not cost-free.
+
+    /**
+     * Some method description.
+     *
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param boolean $boolean Some boolean value.
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+
+Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
+you should not typehint as ``array`` accepts only the primitive type.
+
+    /**
+     * Some method description.
+     *
+     * @param array|ArrayObject $array Some array value.
+     */
+    public function foo($array) {
+    }
+
+
 Commenting Code
 ===============
 
@@ -205,7 +235,6 @@ describe the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
 *  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
 *  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
 *  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
@@ -223,6 +252,7 @@ processed if they are the first thing in a DocBlock line, for example::
 
     /**
      * Tag example.
+     *
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
@@ -233,12 +263,16 @@ processed if they are the first thing in a DocBlock line, for example::
      * Example of inline phpDoc tags.
      *
      * This function works hard with foo() to rule the world.
+     *
+     * @return void
      */
     function bar() {
     }
 
     /**
-     * Foo function
+     * Foo function.
+     *
+     * @return void
      */
     function foo() {
     }
