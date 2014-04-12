@@ -264,12 +264,16 @@ processed if they are the first thing in a DocBlock line, for example::
      * Example of inline phpDoc tags.
      *
      * This function works hard with foo() to rule the world.
+     *
+     * @return void
      */
     function bar() {
     }
 
     /**
-     * Foo function
+     * Foo function.
+     *
+     * @reurn void
      */
     function foo() {
     }
