@@ -424,7 +424,7 @@ We only typehint public methods, though, as typehinting is not cost-free.
     public function foo(Model $Model, array $array, $boolean) {
     }
 
-Here ``$Model`` must be an instance of ``Model``.
+Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
 
 Constants
 ---------
