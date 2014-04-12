@@ -225,6 +225,16 @@ you should not typehint as ``array`` accepts only the primitive type.
     public function foo($array) {
     }
 
+Method Chaining
+===============
+
+Method chaining should have multiple methods spread across separate lines, and
+indented with one tab::
+
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
+        ->send();
 
 Commenting Code
 ===============
@@ -361,17 +371,6 @@ Private methods or variable names start with double underscore (``__``). Example
 Try to avoid private methods or variables, though, in favor of protected ones.
 The latter can be accessed or modified by subclasses, whereas private ones
 prevent extension or re-use. Private visibility also makes testing much more difficult.
-
-Method Chaining
----------------
-
-Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
-
-    $email->from('foo@example.com')
-        ->to('bar@example.com')
-        ->subject('A great message')
-        ->send();
 
 Example Addresses
 -----------------
