@@ -694,8 +694,8 @@ HtmlHelper
   true`` will emulate the previous behavior.
 - ``HtmlHelper::meta()`` now requires ``$type`` to be a string. Additional options can
   further on be passed as ``$options``.
-- ``HtmlHelper::nestedList()`` now requires ``$options`` to be an array. The shortcut for the tag type
-has been removed.
+- ``HtmlHelper::nestedList()`` now requires ``$options`` to be an array. The forth argument for the tag type
+has been removed and included in the ``$options`` array.
 
 PaginatorHelper
 ---------------

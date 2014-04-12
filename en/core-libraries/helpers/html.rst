@@ -665,14 +665,13 @@ methods of the HtmlHelper and how to use them.
 
         $this->Html->scriptEnd();
 
-.. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
+.. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array())
 
     :param array $list: Set of elements to list.
-    :param array $options: Additional HTML attributes of the list (ol/ul) tag
-        or if ul/ol use that as tag.
+    :param array $options: Options and additional HTML attributes of the list
+        (ol/ul) tag.
     :param array $itemOptions: Additional HTML attributes of the list item (LI)
         tag.
-    :param string $tag: Type of list tag to use (ol/ul).
 
     Build a nested list (UL/OL) out of an associative array::
 
