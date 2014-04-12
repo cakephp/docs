@@ -805,7 +805,7 @@ TimeHelper
 NumberHelper
 ------------
 
-- :php:meth:`NumberHelper::format()` nécessite maintenant que les options soient
+- :php:meth:`NumberHelper::format()` nécessite maintenant que ``$options`` soit
   un tableau.
 
 I18n
@@ -910,9 +910,17 @@ Time
 - ``CakeTime::serverOffset()`` a été retirée. Il incitait à des pratiques de
   correspondance de time incorrects.
 - ``CakeTime::niceShort()`` a été retirée.
+- :php:meth:`Time::timeAgoInWords()` a maintenant besoin que ``$options`` soit
+  un tableau.
 
 Number
 ------
 
-- :php:meth:`Number::format()` nécessite maintenant que les options soient un
+- :php:meth:`Number::format()` nécessite maintenant que ``$options`` soit un
+  tableau.
+
+Xml
+---
+
+- :php:meth:`Xml::build()` a maintenant besoin que ``$options`` soit un
   tableau.

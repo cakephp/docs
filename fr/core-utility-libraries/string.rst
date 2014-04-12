@@ -13,21 +13,17 @@ d'une ``View``, utilisez la classe ``String``::
 
     class UsersController extends AppController {
 
-        public $components = array('Auth');
+        public $components = ['Auth'];
 
         public function afterLogin() {
             App::uses('String', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // notifie à l'utilisateur d'un nouveau message
-                $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, ['html' => true])));
             }
         }
     }
-
-.. versionchanged:: 2.1
-   Plusieurs méthodes de :php:class:`TextHelper` ont été déplacées dans la
-   classe ``String``.
 
 .. php:staticmethod:: uuid()
 
@@ -52,17 +48,17 @@ d'une ``View``, utilisez la classe ``String``::
         $data = "cakephp 'great framework' php";
         $result = String::tokenize($data, ' ', "'", "'");
         // le résultat contient
-        array('cakephp', "'great framework'", 'php');
+        ['cakephp', "'great framework'", 'php'];
 
-.. php:staticmethod:: insert($string, $data, $options = array())
+.. php:staticmethod:: insert($string, $data, $options = [])
 
     La méthode insérée est utilisée pour créer des chaînes templates et pour
     permettre les remplacements de clé/valeur::
 
-        String::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
+        String::insert('Mon nom est :name et j'ai :age ans.', ['name' => 'Bob', 'age' => '65']);
         // génére: "Mon nom est Bob et j'ai 65 ans."
 
-.. php:staticmethod:: cleanInsert($string, $options = array())
+.. php:staticmethod:: cleanInsert($string, $options = [])
 
     Nettoie une chaîne formatée ``String::insert`` avec $options donnée
     qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée
@@ -72,16 +68,16 @@ d'une ``View``, utilisez la classe ``String``::
 
     Vous pouvez utiliser les options suivantes dans le tableau options::
 
-        $options = array(
-            'clean' => array(
+        $options = [
+            'clean' => [
                 'method' => 'text', // ou html
-            ),
+            ],
 
             'before' => '',
             'after' => ''
-        );
+        ];
 
-.. php:staticmethod:: wrap($text, $options = array())
+.. php:staticmethod:: wrap($text, $options = [])
 
     Entoure un block de texte pour un ensemble de largeur, et indente aussi les
     blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas
@@ -106,7 +102,7 @@ d'une ``View``, utilisez la classe ``String``::
 
 .. start-string
 
-.. php:method:: highlight(string $haystack, string $needle, array $options = array() )
+.. php:method:: highlight(string $haystack, string $needle, array $options = [] )
 
     :param string $haystack: La chaîne de caractères à rechercher.
     :param string $needle: La chaîne à trouver.
@@ -128,7 +124,7 @@ d'une ``View``, utilisez la classe ``String``::
         echo $this->Text->highlight(
             $lastSentence,
             'using',
-            array('format' => '<span class="highlight">\1</span>')
+            ['format' => '<span class="highlight">\1</span>']
         );
 
         // appelé avec String
@@ -136,7 +132,7 @@ d'une ``View``, utilisez la classe ``String``::
         echo String::highlight(
             $lastSentence,
             'using',
-            array('format' => '<span class="highlight">\1</span>')
+            ['format' => '<span class="highlight">\1</span>']
         );
 
     Sortie::
@@ -148,7 +144,7 @@ d'une ``View``, utilisez la classe ``String``::
 
     Enlève le ``$text`` fourni de tout lien HTML.
 
-.. php:method:: truncate(string $text, int $length=100, array $options)
+.. php:method:: truncate(string $text, int $length = 100, array $options)
 
     :param string $text: Le texte à tronquer.
     :param int $length: La longueur de trim.
@@ -164,11 +160,11 @@ d'une ``View``, utilisez la classe ``String``::
     et a les clés suivantes possibles par défaut, celles-ci étant toutes
     optionnelles::
 
-        array(
+        [
             'ellipsis' => '...',
             'exact' => true,
             'html' => false
-        )
+        ]
 
     Exemple::
 
@@ -176,10 +172,10 @@ d'une ``View``, utilisez la classe ``String``::
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
             22,
-            array(
+            [
                 'ellipsis' => '...',
                 'exact' => false
-            )
+            ]
         );
 
         // appelé avec String
@@ -187,21 +183,17 @@ d'une ``View``, utilisez la classe ``String``::
         echo String::truncate(
             'The killer crept forward and tripped on the rug.',
             22,
-            array(
+            [
                 'ellipsis' => '...',
                 'exact' => false
-            )
+            ]
         );
 
     Sortie::
 
         The killer crept...
 
-.. versionchanged:: 2.3
-   ``ending`` a été remplacé par ``ellipsis``. ``ending`` est toujours utilisé
-   dans 2.2.1.
-
-.. php:method:: tail(string $text, int $length=100, array $options)
+.. php:method:: tail(string $text, int $length = 100, array $options)
 
     :param string $text: The text à tronquer.
     :param int $length: La longueur de trim.
@@ -214,12 +206,10 @@ d'une ``View``, utilisez la classe ``String``::
     ``$options`` est utilisé pour passer tous les paramètres supplémentaires,
     et a les clés possibles suivantes par défaut, toutes sont optionnelles::
 
-        array(
+        [
             'ellipsis' => '...',
             'exact' => true
-        )
-        
-    .. versionadded:: 2.3
+        ]
 
     Exemple::
 
@@ -230,10 +220,10 @@ d'une ``View``, utilisez la classe ``String``::
         echo $this->Text->tail(
             $sampleText,
             70,
-            array(
+            [
                 'ellipsis' => '...',
                 'exact' => false
-            )
+            ]
         );
 
         // appelé avec String
@@ -241,10 +231,10 @@ d'une ``View``, utilisez la classe ``String``::
         echo String::tail(
             $sampleText,
             70,
-            array(
+            [
                 'ellipsis' => '...',
                 'exact' => false
-            )
+            ]
         );
 
     Sortie::
