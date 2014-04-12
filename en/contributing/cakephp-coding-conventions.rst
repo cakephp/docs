@@ -411,8 +411,8 @@ Type
 Typehinting
 -----------
 
-We only typehint public methods - and it should only be done with objects and arrays.
-All other types are currently not well implemented in PHP.
+Arguments that expect objects or arrays can be typehinted.
+We only typehint public methods, though, as typehinting is not cost-free.
 
     /**
      * Some method description.
