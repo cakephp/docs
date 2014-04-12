@@ -408,6 +408,24 @@ Type
 (object)
 		Cast to object.
 
+Typehinting
+-----------
+
+We only typehint public methods - and it should only be done with objects and arrays.
+All other types are currently not well implemented in PHP.
+
+    /**
+     * Some method description.
+     *
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param boolean $boolean Some boolean value.
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+Here ``$Model`` must be an instance of ``Model``.
+
 Constants
 ---------
 
