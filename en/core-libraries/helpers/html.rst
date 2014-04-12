@@ -670,8 +670,8 @@ methods of the HtmlHelper and how to use them.
     :param array $list: Set of elements to list.
     :param array $options: Options and additional HTML attributes of the list
         (ol/ul) tag.
-    :param array $itemOptions: Additional HTML attributes of the list item (LI)
-        tag.
+    :param array $itemOptions: Options and additional HTML attributes of the
+        list item (LI) tag.
 
     Build a nested list (UL/OL) out of an associative array::
 
