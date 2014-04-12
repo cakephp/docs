@@ -18,10 +18,10 @@ are a few examples of how to use the $htmlAttributes parameter:
 .. code-block:: html
 
     Desired attributes: <tag class="someClass" />
-    Array parameter: array('class' => 'someClass')
+    Array parameter: ['class' => 'someClass']
 
     Desired attributes: <tag name="foo" value="bar" />
-    Array parameter:  array('name' => 'foo', 'value' => 'bar')
+    Array parameter:  ['name' => 'foo', 'value' => 'bar']
 
 
 .. note::
@@ -68,7 +68,7 @@ methods of the HtmlHelper and how to use them.
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, array $options = array())
+.. php:method:: css(mixed $path, array $options = [])
 
     :param mixed $path: Either a string of the CSS file to link, or an array with multiple files
     :param array $options: An array of options or :term:`html attributes`.
@@ -117,7 +117,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
-.. php:method:: meta(string $type, string $url = null, array $options = array())
+.. php:method:: meta(string $type, string $url = null, array $options = [])
 
     :param string $type: The type meta tag you want.
     :param mixed $url: The URL for the meta tag, either a string or a :term:`routing array`.
@@ -126,7 +126,7 @@ methods of the HtmlHelper and how to use them.
     This method is handy for linking to external resources like RSS/Atom feeds
     and favicons. Like css(), you can specify whether or not you'd like this tag
     to appear inline or appended to the ``meta`` block by setting the 'block'
-    key in the $attributes parameter to true, ie - ``array('block' => true)``.
+    key in the $attributes parameter to true, ie - ``['block' => true]``.
 
     If you set the "type" attribute using the $attributes parameter,
     CakePHP contains a few shortcuts:
@@ -250,7 +250,7 @@ methods of the HtmlHelper and how to use them.
 
         background:#633; border-bottom:1px solid #000; padding:10px;
 
-.. php:method:: image(string $path, array $options = array())
+.. php:method:: image(string $path, array $options = [])
 
     :param string $path: Path to the image.
     :param array $options: An array of :term:`html attributes`.
@@ -303,9 +303,9 @@ methods of the HtmlHelper and how to use them.
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
 
-        echo $this->Html->image('Blog.icon.png', array('plugin' => false));
+        echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
-.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
 
     :param string $title: The text to display as the body of the link.
     :param mixed $url: Either the string location, or a :term:`routing array`.
@@ -379,7 +379,7 @@ methods of the HtmlHelper and how to use them.
 
     When using named parameters, use the array syntax and include
     names for ALL parameters in the URL. Using the string syntax for
-    paramters (i.e. "recipes/view/6/comments:false" will result in
+    paramters (i.e. "recipes/view/6/comments:false") will result in
     the colon characters being HTML escaped and the link will not work
     as desired.::
 
@@ -600,7 +600,7 @@ methods of the HtmlHelper and how to use them.
 
     The first parameter can be an array to include multiple files.::
 
-        echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
+        echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
 
     Will output:
 
@@ -613,7 +613,7 @@ methods of the HtmlHelper and how to use them.
     You can append the script tag to a specific block using the ``block``
     option::
 
-        echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
+        echo $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
 
     In your layout you can output all the script tags added to 'scriptBottom'::
 
@@ -631,7 +631,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 
-.. php:method::  scriptBlock($code, $options = array())
+.. php:method:: scriptBlock($code, $options = [])
 
     :param string $code: The code to go in the script tag.
     :param array $options: An array of :term:`html attributes`.
@@ -642,7 +642,7 @@ methods of the HtmlHelper and how to use them.
     ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will create
     a script tag with ``defer="defer"`` attribute.
 
-.. php:method:: scriptStart($options = array())
+.. php:method:: scriptStart($options = [])
 
     :param array $options: An array of :term:`html attributes` to be used when
         scriptEnd is called.
@@ -665,7 +665,7 @@ methods of the HtmlHelper and how to use them.
 
         $this->Html->scriptEnd();
 
-.. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array())
+.. php:method:: nestedList(array $list, array $options = [], array $itemOptions = [])
 
     :param array $list: Set of elements to list.
     :param array $options: Options and additional HTML attributes of the list
@@ -1000,7 +1000,7 @@ Creating Breadcrumb Trails with HtmlHelper
     This will add the output of "**Home > Users > Add User**" in your
     layout where getCrumbs was added.
 
-.. php:method:: getCrumbList(array $options = array(), mixed $startText)
+.. php:method:: getCrumbList(array $options = [], mixed $startText)
 
     :param array $options: An array of :term:`html attributes` for the
         containing ``<ul>`` element. Can also contain the 'separator',
