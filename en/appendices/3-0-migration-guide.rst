@@ -94,8 +94,8 @@ Object settings/configuration
 =============================
 
 * Objects used in CakePHP now have a consistent instance-configuration storage/retrieval
-  system. Code which previously accessed for example: `$object->settings` should instead
-  be updated to use `$object->config()`.
+  system. Code which previously accessed for example: ``$object->settings`` should instead
+  be updated to use ``$object->config()``.
 
 Cache
 =====
@@ -253,10 +253,10 @@ Router
 * Named parameters have been removed, see above for more information.
 * The ``full_base`` option has been replaced with the ``_full`` option.
 * The ``ext`` option has been replaced with the ``_ext`` option.
-* `_scheme`, `_port`, `_host`, `_base`, `_full`, `_ext` options added.
+* ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext`` options added.
 * String URLs are no longer modified by adding the plugin/controller/prefix names.
 * The default fallback route handling was removed.  If no routes
-  match a parameter set `/` will be returned.
+  match a parameter set ``/`` will be returned.
 * Route classes are responsible for *all* URL generation including
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
@@ -301,7 +301,7 @@ Request
 * :php:meth:`Cake\\Network\\Request::acceptLanguage()` was changed from static method
   to non-static.
 * Request detector for "mobile" has been removed from the core. Instead the app
-  template adds detectors for "mobile" and "tablet" using `MobileDetect` lib.
+  template adds detectors for "mobile" and "tablet" using ``MobileDetect`` lib.
 
 Response
 --------
