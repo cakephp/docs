@@ -389,9 +389,7 @@ Files
 -----
 
 File names which do not contain classes should be lowercased and underscored, for
-example:
-
-::
+example::
 
     long_file_name.php
 
@@ -425,9 +423,7 @@ resource
 callable
     Callable function.
 
-You can also combine types using the pipe char:
-
-::
+You can also combine types using the pipe char::
 
     int|bool
 
@@ -456,16 +452,12 @@ Type
 Constants
 ---------
 
-Constants should be defined in capital letters:
-
-::
+Constants should be defined in capital letters::
 
     define('CONSTANT', 1);
 
 If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
-
-::
+by an underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
