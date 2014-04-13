@@ -389,9 +389,7 @@ Files
 -----
 
 File names which do not contain classes should be lowercased and underscored, for
-example:
-
-::
+example::
 
     long_file_name.php
 
@@ -404,22 +402,32 @@ Type
     Description
 mixed
     A variable with undefined (or multiple) type.
-integer
+int
     Integer type variable (whole number).
 float
     Float type (point number).
-boolean
+bool
     Logical type (true or false).
 string
     String type (any value in " " or ' ').
+null
+    Null type. Usually used in conjunction with another type.
 array
     Array type.
 object
-    Object type.
+    Object type. A specific class name should be used if possible.
 resource
     Resource type (returned by for example mysql\_connect()).
     Remember that when you specify the type as mixed, you should indicate
     whether it is unknown, or what the possible types are.
+callable
+    Callable function.
+
+You can also combine types using the pipe char::
+
+    int|bool
+
+For more than two types it is usually best to just use ``mixed``.
 
 Casting
 -------
@@ -444,16 +452,12 @@ Type
 Constants
 ---------
 
-Constants should be defined in capital letters:
-
-::
+Constants should be defined in capital letters::
 
     define('CONSTANT', 1);
 
 If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
-
-::
+by an underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
