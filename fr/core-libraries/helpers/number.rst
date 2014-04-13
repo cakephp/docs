@@ -1,7 +1,7 @@
 NumberHelper 
 ############
 
-.. php:class:: NumberHelper(View $view, array $settings = array())
+.. php:class:: NumberHelper(View $view, array $settings = [])
 
 Le helper Number contient des méthodes pratiques qui permettent
 l'affichage des nombres dans divers formats communs dans vos vues. Ces méthodes
