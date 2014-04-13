@@ -7,13 +7,13 @@ Glossary
         An array of attributes that are passed to :php:meth:`Router::url()`.
         They typically look like::
 
-            array('controller' => 'posts', 'action' => 'view', 5)
+            ['controller' => 'posts', 'action' => 'view', 5]
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::
 
             // Given
-            array('class' => 'my-class', 'target' => '_blank')
+            ['class' => 'my-class', 'target' => '_blank']
 
             // Would generate
             class="my-class" target="_blank"
@@ -22,7 +22,7 @@ Glossary
         can be used::
 
             // Given
-            array('checked' => true)
+            ['checked' => true]
 
             // Would generate
             checked="checked"

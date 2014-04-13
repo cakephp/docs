@@ -7,14 +7,14 @@ Glossaire
         Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
         Typiquement, ils ressemblent à cela::
         
-            array('controller' => 'posts', 'action' => 'view', 5)
+            ['controller' => 'posts', 'action' => 'view', 5]
 
     attributs HTML
         Un tableau de clé => valeurs qui sont composées dans les attributs 
         HTML. Par exemple::
 
             // Par exemple
-            array('class' => 'ma-classe', '_target' => 'blank')
+            ['class' => 'ma-classe', '_target' => 'blank']
 
             // générerait
             class="ma-classe" _target="blank"
@@ -23,7 +23,7 @@ Glossaire
         ``true`` peut être utilisée::
 
             // Par exemple
-            array('checked' => true)
+            ['checked' => true]
             
             // Générerait
             checked="checked"
@@ -52,14 +52,15 @@ Glossaire
             ]
 
     CSRF
-        Les Reqûetes de site croisées de Contrefaçon. Emêche les attaques de 
+        Les Reqûetes de site croisées de Contrefaçon. Empêche les attaques de 
         replay, les soumissions doubles et les requêtes contrefaîtes provenant 
         d'autres domaines.
 
     CDN
-        Content Delivery Network. A 3rd party vendor you can pay to help
-        distribute your content to data centers around the world. This helps
-        put your static assets closer to geographically distributed users.
+        Content Delivery Network. Une librairie tierce que vous pouvez payer
+        pour vous aider à distribuer votre contenu vers des centres de données
+        dans le monde entier. Cela aide à rapprocher géographiquement vos
+        assets static pour les utilisateurs.
 
     routes.php
         Un fichier dans APP/Config qui contient la configuration de routing.

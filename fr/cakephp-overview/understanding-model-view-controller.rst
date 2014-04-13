@@ -2,7 +2,7 @@ Comprendre le système M-V-C (Model-View-Controller)
 ###################################################
 
 CakePHP suit le motif de conception logicielle
-`MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
+`MVC <http://fr.wikipedia.org/wiki/Modele-Vue-Controleur>`_.
 Programmer en utilisant MVC sépare votre application en 3 couches principales :
 
 La couche Model
@@ -54,7 +54,7 @@ aux travailleurs corrects.
 Il attend des requêtes des clients, vérifie leur validité selon
 l'authentification et les règles d'autorisation,
 délèguent les données récupérées et traitées par le Model, et sélectionne
-les type de présentation correctes que le client accepte, pour finalement
+les types de présentation correctes que le client accepte, pour finalement
 déléguer le processus d'affichage à la couche Vue.
 
 Cycle de la requête CakePHP
@@ -67,13 +67,13 @@ Figure: 1 Montre la gestion typique d'une requête client dans CakePHP
 
 Le cycle d'une requête CakePHP typique débute avec une requête utilisateur
 qui demande une page ou une ressource dans votre application. Cette requête
-est d'abord traitée par le dispatcheur, qui va sélectionner l'objet controller
-correct traitant la requête.
+est d'abord traitée par le dispatcheur, qui va sélectionner le bon objet
+controller traitant la requête.
 
 Une fois que la requête arrive au controller, celui-ci va communiquer avec
 la couche Model pour traiter la récupération de données ou les opérations
 de sauvegarde qui seraient nécessaires. Après que cette communication est
-finie, le controller va donner à l'objet vue correct, la tâche de générer une
+finie, le controller va donner au bon objet vue, la tâche de générer une
 sortie résultant des données fournies par le model.
 
 Finalement, quand cette sortie est générée, elle est immédiatement rendue
@@ -99,7 +99,7 @@ La séparation permet aussi aux développeurs de faire des changements dans une
 seule partie de l'application sans affecter les autres.
 
 Si vous n'avez jamais construit une application de cette manière, cela prend
-quelques temps pour s'habituer, mais nous sommes confiants qu'une fois votre
+un peu de temps pour s'habituer, mais nous sommes presque sûrs qu'une fois votre
 première application construite avec CakePHP, vous ne voudrez plus faire d'une
 autre façon.
 

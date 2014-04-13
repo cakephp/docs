@@ -140,7 +140,7 @@ into a DOMDocument object, :php:meth:`~Cake\\Network\\Request::input()` supports
 in additional parameters as well::
 
     // Get Xml encoded data submitted to a PUT/POST action
-    $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
+    $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
 Accessing Path Information
 ==========================
@@ -182,28 +182,28 @@ Some examples would be::
     // Add an environment detector.
     $this->request->addDetector(
         'post',
-        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+        ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
     // Add a pattern value detector.
     $this->request->addDetector(
         'iphone',
-        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+        ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
 
     // Add an option detector
-    $this->request->addDetector('internalIp', array(
+    $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP',
-        'options' => array('192.168.0.101', '192.168.0.100')
-    ));
+        'options' => ['192.168.0.101', '192.168.0.100']
+    ]);
 
     // Add a callback detector. Can either be an anonymous function
     // or a regular callable.
     $this->request->addDetector(
         'awesome',
-        array('callback' => function ($request) {
+        ['callback' => function ($request) {
             return isset($request->awesome);
-        })
+        }]
     );
 
 ``Request`` also includes methods like
@@ -431,7 +431,7 @@ content types that are not built into Response, you can map those types
 with ``type()`` as well::
 
     // Add a vCard type
-    $this->response->type(array('vcf' => 'text/v-card'));
+    $this->response->type(['vcf' => 'text/v-card']);
 
     // Set the response Content-Type to vcard.
     $this->response->type('vcf');
@@ -467,7 +467,7 @@ the browser by specifying the options::
 
     $this->response->file(
         $file['path'],
-        array('download' => true, 'name' => 'foo')
+        ['download' => true, 'name' => 'foo']
     );
 
 Sending a String as File
@@ -499,15 +499,15 @@ can be called with a few different parameter configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Set multiple headers
-    $this->response->header(array(
+    $this->response->header([
         'Location' => 'http://example.com',
         'X-Extra' => 'My header'
-    ));
+    ]);
 
-    $this->response->header(array(
+    $this->response->header([
         'WWW-Authenticate: Negotiate',
         'Content-type: application/pdf'
-    ));
+    ]);
 
 Setting the same :php:meth:`~CakeResponse::header()` multiple times will result in overwriting the previous
 values, just like regular header calls. Headers are not sent when
@@ -782,7 +782,7 @@ Response API
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 
-.. php:method:: file($path, $options = array())
+.. php:method:: file($path, $options = [])
 
     Allows you to set the ``Content-Disposition`` header of a file either to display or to download.
 

@@ -29,14 +29,14 @@ Puisque votre application a été démarrée, vous pouvez aussi tester le routin
 en utilisant le REPL::
 
     [1] app > Cake\Routing\Router::parse('/articles/view/1');
-    // array(
+    // [
     //   'controller' => 'articles',
     //   'action' => 'view',
     //   'pass' => array(
     //     0 => '1'
     //   ),
     //   'plugin' => NULL
-    // )
+    // ]
 
 Vous pouvez aussi tester la génération d'URL::
 

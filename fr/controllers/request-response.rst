@@ -39,9 +39,9 @@ Request propose plusieurs interfaces pour accéder aux paramètres de la
 requête. La première est par des tableaux indexés, la seconde est à travers
 ``$this->request->params``, et la troisième est par des propriétés d'objets::
 
-    $this->request['controller'];
     $this->request->controller;
-    $this->request->params['controller']
+    $this->request['controller'];
+    $this->request->params['controller'];
 
 Tout ce qui est au-dessus retournera la même valeur. Plusieurs façons d'accéder
 aux paramètres ont été faites pour faciliter la migration des applications
@@ -53,8 +53,8 @@ d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tou
 les deux disponibles dans l'objet request::
 
     // Arguments passés
-    $this->request['pass'];
     $this->request->pass;
+    $this->request['pass'];
     $this->request->params['pass'];
 
 Il vous fournira un accès aux arguments passés et aux paramètres nommés.
@@ -154,7 +154,7 @@ convertir les XML en objet DOMDocument,
 des paramètres supplémentaires::
 
     // Obtenir les données encodées en Xml soumises avec une action PUT/POST
-    $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
+    $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
 Accéder aux informations du chemin
 ==================================
@@ -173,7 +173,6 @@ L'objet request fournit une façon d'inspecter différentes conditions de la
 requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
 certain nombre de conditions, ainsi qu'inspecter d'autres critères de
 la requête spécifique à l'application::
-
 
     $this->request->is('post');
 
@@ -202,25 +201,25 @@ Quelques exemples seraient::
     // Ajouter un détecteur d'environment.
     $this->request->addDetector(
         'post',
-        array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+        ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
     
     // Ajouter un détecteur de valeur model.
     $this->request->addDetector(
         'iphone',
-        array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+        ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
     
     // Ajouter un détecteur d'options
-    $this->request->addDetector('internalIp', array(
+    $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP', 
-        'options' => array('192.168.0.101', '192.168.0.100')
-    ));
+        'options' => ['192.168.0.101', '192.168.0.100']
+    ]);
     
     // Ajouter un détecteur de callback. Peut soit être une fonction anonyme ou un callback régulier.
-    $this->request->addDetector('awesome', array('callback' => function ($request) {
+    $this->request->addDetector('awesome', ['callback' => function ($request) {
         return isset($request->awesome);
-    }));
+    }]);
 
 ``Request`` inclut aussi des méthodes comme
 :php:meth:`Cake\\Network\\Request::domain()`,
@@ -501,7 +500,7 @@ d'être affiché dans le navigateur en spécifiant les options::
 
     $this->response->file(
         $file['path'],
-        array('download' => true, 'name' => 'foo')
+        ['download' => true, 'name' => 'foo']
     );
 
 Envoyer une chaîne en fichier
@@ -535,14 +534,14 @@ quelques paramètres de configurations::
     $this->response->header('Location', 'http://example.com');
 
     // Régler plusieurs en-têtes
-    $this->response->header(array(
+    $this->response->header([
         'Location' => 'http://example.com',
         'X-Extra' => 'My header'
-    ));
-    $this->response->header(array(
+    ]);
+    $this->response->header([
         'WWW-Authenticate: Negotiate',
         'Content-type: application/pdf'
-    ));
+    ]);
 
 Régler le même en-tête de multiples fois entraînera l'écrasement des
 précédentes valeurs, un peu comme les appels réguliers d'en-tête. Les en-têtes

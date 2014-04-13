@@ -544,8 +544,8 @@ et ses méthodes signature doivent ressembler à ceci::
         // code here.
     }
 
-Callback Method Signature Changes
----------------------------------
+Changements de Signature de Méthode de Callback
+-----------------------------------------------
 
 Les callbacks de Behavior ont été unifiés avec les autres méthodes listener.
 Au lieu de leurs arguments précédents, ils attendent un objet event en premier

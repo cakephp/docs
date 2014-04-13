@@ -11,13 +11,11 @@ C'est une structure fondamentale pour les programmeurs pour créer des
 applications web. Notre principal objectif est de vous permettre
 de travailler d'une manière structurée et rapide -sans perte de flexibilité.
 
-CakePHP rompt la monotonie du développement web. Il vous offre
-tous les outils nécessaires pour ne coder que ce dont vous avez
-réellement besoin : la logique spécifique de votre application.
-
-Au lieu de réinventer la roue à chaque fois que vous démarrez un
-nouveau projet, récupérez une copie de CakePHP et concentrez-vous
-sur la logique de votre application.
+CakePHP rompt la monotonie du développement web. Il vous offre tous les outils
+nécessaires pour ne coder que ce dont vous avez réellement besoin : la logique
+spécifique de votre application. Au lieu de réinventer la roue à chaque fois
+que vous démarrez un nouveau projet, récupérez une copie de CakePHP et
+concentrez-vous sur la logique de votre application.
 
 CakePHP dispose
 `d'une équipe de développement <http://github.com/cakephp/cakephp/contributors>`_
@@ -31,12 +29,10 @@ CakePHP :
 
 -  `Communauté active et sympathique :ref:`cakephp-official-communities`.
 -  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_.
--  Compatible avec les versions PHP 5.2.8 et supérieures.
+-  Compatible avec les versions PHP 5.4.19 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_.
    (create, read, update, delete) intégrées pour les interactions avec la base
    de données.
--  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
-   (maquettage rapide) d'application.
 -  Génération de code.
 -  Architecture `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
 -  Dispatcheur de requêtes avec des URLs propres et personnalisables grâce un

@@ -2,10 +2,8 @@ Code
 ####
 
 Les correctifs et les pull requests sont les meilleures façons de contribuer
-au code de CakePHP. Les correctifs peuvent être attachés aux tickets dans
-`github <http://github.com/cakephp/cakephp/issues>`_. Les pull requests peuvent
-être crées dans github, et sont généralement la meilleure façon de contribuer
-au code.
+au code de CakePHP. Les pull requests peuvent être créées dans github, et sont
+généralement la meilleure façon de contribuer au code.
 
 Configuration initiale
 ======================
@@ -15,10 +13,10 @@ récupérer la configuration de votre environnement.
 Vous aurez besoin du logiciel suivant:
 
 * Git
-* PHP 5.2.8 or greater
-* PHPUnit 3.5.10 or greater
+* PHP 5.4.19 ou supérieur
+* PHPUnit 3.7.0 ou supérieur
 
-Mettez en place vos informations d'utilisateur avec votre nom / titre et
+Mettez en place vos informations d'utilisateur avec votre nom/titre et
 adresse e-mail de travail ::
 
     git config --global user.name 'Bob Barker'
@@ -47,8 +45,8 @@ permettra de rester à jour avec CakePHP ::
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Maintenant que vous avez configuré CakePHP, vous devriez être en mesure
-de définir un ``$ test`` : ref: `connexion à la base <database-configuration>`,
-et : ref: `exécuter tous les tests de <running-tests>`.
+de définir un ``$test``:ref:`connexion à la base <database-configuration>`,
+et:ref:`exécuter tous les tests de <running-tests>`.
 
 Travailler sur un correctif
 ===========================
@@ -62,7 +60,7 @@ Par exemple, si vous régler un bug dans ``2.3``, vous pouvez utiliser la
 branche ``2.3`` comme la base de votre branche. Cela simplifiera la fusion
 future de vos changements::
 
-    # gérer un bug dans 2.3
+    # régler un bug dans 2.3
     git fetch upstream
     git checkout -b ticket-1234 upstream/2.3
 

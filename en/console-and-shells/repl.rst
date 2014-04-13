@@ -28,14 +28,14 @@ Since your application has been bootstrapped you can also test routing using the
 REPL::
 
     [1] app > Cake\Routing\Router::parse('/articles/view/1');
-    // array(
+    // [
     //   'controller' => 'articles',
     //   'action' => 'view',
     //   'pass' => array(
     //     0 => '1'
     //   ),
     //   'plugin' => NULL
-    // )
+    // ]
 
 You can also test generating URL's::
 

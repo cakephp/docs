@@ -47,7 +47,7 @@ suivantes:
 * Obtenir une préparation d'un fix/patch.
 * Préparer un message décrivant la vulnérabilité, et sa possible exploitation.
 * Sortir de nouvelles versions de toutes les versions affectées.
-* Montrer de façon prohéminente le problème dans la publication de l'annonce.
+* Montrer de façon évidente le problème dans la publication de l'annonce.
 
 
 
