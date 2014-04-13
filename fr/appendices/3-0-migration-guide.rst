@@ -199,6 +199,13 @@ ApiShell a été retirée puisqu'il ne fournit aucun bénéfice sur le fichier
 source lui-même et sur la documentation/`l'API <http://api.cakephp.org/>`_
 en-ligne.
 
+ExtractTask
+-----------
+
+- ``Console/cake i18n extract`` n'inclut plus les messages de validation non
+  traduits. Si vous voulez traduire les messages de validation, vous devez
+  entourer ces messages dans des appels `__()` comme tout autre contenu.
+
 Event
 =====
 

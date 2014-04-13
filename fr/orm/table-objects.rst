@@ -9,7 +9,7 @@ Les Objets Table
 
 Les objets Table fournissent un accès à la collection des entities stockées
 dans une table spécifique. Chaque table dans votre application devra avoir une
-classe Table associée qui est sera utilisée pour interagir avec une table
+classe Table associée qui est utilisée pour interagir avec une table
 donnée. Si vous n'avez pas besoin de personnaliser le behavior d'une table
 donnée, CakePHP va générer une instance Table à utiliser pour vous.
 
@@ -33,8 +33,8 @@ basique devrait ressembler à ceci::
     class ArticlesTable extends Table {
     }
 
-Notez que nous ne disons pas à l'ORM quelle table utiliser pour notre class. Par
-convention, les objets table vont utiliser une table avec la notation en
+Notez que nous ne disons pas à l'ORM quelle table utiliser pour notre classe.
+Par convention, les objets table vont utiliser une table avec la notation en
 minuscule et avec des underscores pour le nom de la classe. Dans l'exemple du
 dessus, la table ``articles`` va être utilisée. Si notre classe table était
 nommée ``BlogPosts``, votre table serait nommée ``blog_posts``. Vous pouvez
@@ -68,7 +68,7 @@ utiliser la méthode ``primaryKey()``::
     }
 
 Comme vu dans les exemples ci-dessus, les objets Table ont une méthode
-``initialize()`` qui est appelé à la fin du constructeur. Il est recommandé que
+``initialize()`` qui est appelée à la fin du constructeur. Il est recommandé que
 vous utilisiez cette méthode pour faire la logique d'initialisation au lieu
 de surcharger le constructeur.
 
@@ -1290,11 +1290,11 @@ used. A sample validator method for our articles table would be::
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => 'You need to provide a title',
+                    'message' => __('You need to provide a title'),
                 ])
                 ->add('body', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => 'A body is required'
+                    'message' => __('A body is required')
                 ]);
             return $validator;
         }
@@ -1323,7 +1323,7 @@ a validation rule::
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
-                    'message' => 'You need to provide a valid role',
+                    'message' => __('You need to provide a valid role'),
                     'provider' => 'entity',
                 ]);
             return $validator;
