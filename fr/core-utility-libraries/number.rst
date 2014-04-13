@@ -182,7 +182,7 @@ automatiqement la sortie dans la vue.
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
-           'fractionSymbol'   => '',
+           'fractionSymbol'   => false,
            'fractionPosition' => 'after',
            'zero'             => 0,
            'places'           => 2,
