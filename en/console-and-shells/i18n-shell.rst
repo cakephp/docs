@@ -20,11 +20,10 @@ application will be combined into a single POT file::
 
     ./Console/cake i18n extract
 
-The above will run the extraction shell. In addition to extracting strings in ``__()``
-methods, validation messages in models will be extracted as well. The result of
-this command will be the file ``app/Locale/default.pot``. You use the pot file
-as a template for creating po files. If you are manually creating po files from
-the pot file, be sure to correctly set the ``Plural-Forms`` header line.
+The above will run the extraction shell. The result of this command will be the
+file ``app/Locale/default.pot``. You use the pot file as a template for creating
+po files. If you are manually creating po files from the pot file, be sure to
+correctly set the ``Plural-Forms`` header line.
 
 Generating POT Files for Plugins
 --------------------------------
@@ -34,20 +33,6 @@ You can generate a POT file for a specific plugin using::
     ./Console/cake i18n extract --plugin <Plugin>
 
 This will generate the required POT files used in the plugins.
-
-Model Validation Messages
--------------------------
-
-You can set the domain to be used for extracted validation messages in your models.
-If the model already has a ``$validationDomain`` property, the given validation
-domain will be ignored::
-
-    ./Console/cake i18n extract --validation-domain validation_errors
-
-You can also prevent the shell from extracting validation messages::
-
-    ./Console/cake i18n extract --ignore-model-validation
-
 
 Excluding Folders
 -----------------
@@ -59,7 +44,6 @@ Any path containing a path segment with the provided values will be ignored::
 
 Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------
-.. versionadded:: 2.2
 
 By adding --overwrite, the shell script will no longer warn you if a POT file
 already exists and will overwrite by default::
@@ -68,21 +52,16 @@ already exists and will overwrite by default::
 
 Extracting Messages from the CakePHP Core Libraries
 ---------------------------------------------------
-.. versionadded:: 2.2
 
 By default, the extract shell script will ask you if you like to extract
 the messages used in the CakePHP core libraries. Set --extract-core to yes or
-no to set the default behavior.
-
-::
+no to set the default behavior::
 
     ./Console/cake i18n extract --extract-core yes
 
     or
 
     ./Console/cake i18n extract --extract-core no
-
-
 
 
 Create the Tables used by TranslateBehavior
