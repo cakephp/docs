@@ -684,6 +684,8 @@ and reduce the problems people had in the past:
 - The ``inline`` parameter has been removed from postLink() method.
   You should use the ``block`` option instead. Setting ``block => true`` will
   emulate the previous behavior.
+- The ``timeFormat`` parameter for ``hour()``, ``time()`` and ``dateTime()`` now
+  defaults to 24, complying with ISO 8601.
 
 It is recommended that you review the :doc:`/core-libraries/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
