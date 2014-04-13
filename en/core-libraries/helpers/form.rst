@@ -912,10 +912,10 @@ Creating Input Elements
       Alternatively set 'multiple' to 'checkbox' to output a list of
       related check boxes::
 
-        $options = array(
+        $options = [
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2'
-        );
+        ];
         echo $this->Form->select('Model.field', $options, [
             'multiple' => 'checkbox'
         ]);
