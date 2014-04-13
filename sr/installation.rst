@@ -4,7 +4,7 @@ Instalacija
 CakePHP je brz i lako se instalira. Sve što vam treba je radeći webserver(online ili lokalni), i kopija CakePHP-a, to je to! Dok se ovo uputstvo fokusira na instaliranje CakePHP-a na Apache servere, slobodno možete konfigurisati CakePHP da radi na LightHTTPD ili Microsoft IIS serverima.
 
 Uslovi za instaliranje
-================
+======================
 
 -  HTTP server je potreban. Na primer: Apache server. mod_rewrite je opcionalan, ali uopšte nije obavezan.
 -  PHP 5.2.8 ili viši.
