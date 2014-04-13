@@ -136,34 +136,35 @@ automatically echo the output into the view.
     currency formats easier::
 
         // called as NumberHelper
-        $this->Number->addFormat('BRR', array('before' => 'R$ '));
+        $this->Number->addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
         // called as CakeNumber
         App::uses('CakeNumber', 'Utility');
-        CakeNumber::addFormat('BRR', array('before' => 'R$ '));
+        CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
-    You can now use `BRR` as a short form when formatting currency amounts::
+    You can now use `BRL` as a short form when formatting currency amounts::
 
         // called as NumberHelper
-        echo $this->Number->currency($value, 'BRR');
+        echo $this->Number->currency($value, 'BRL');
 
         // called as CakeNumber
         App::uses('CakeNumber', 'Utility');
-        echo CakeNumber::currency($value, 'BRR');
+        echo CakeNumber::currency($value, 'BRL');
 
     Added formats are merged with the following defaults::
 
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
-           'fractionSymbol'   => '',
+           'fractionSymbol'   => false,
            'fractionPosition' => 'after',
            'zero'             => 0,
            'places'           => 2,
            'thousands'        => ',',
            'decimals'         => '.',
            'negative'         => '()',
-           'escape'           => true
+           'escape'           => true,
+           'fractionExponent' => 2
        )
 
 .. php:method:: precision(mixed $number, int $precision = 3)
