@@ -404,11 +404,11 @@ Type
     Description
 mixed
     A variable with undefined (or multiple) type.
-integer
+int
     Integer type variable (whole number).
 float
     Float type (point number).
-boolean
+bool
     Logical type (true or false).
 string
     String type (any value in " " or ' ').
@@ -420,6 +420,14 @@ resource
     Resource type (returned by for example mysql\_connect()).
     Remember that when you specify the type as mixed, you should indicate
     whether it is unknown, or what the possible types are.
+
+You can also combine types using the pipe char:
+
+::
+
+    int|bool
+
+For more than two types it is usually best to just use ``mixed``.
 
 Casting
 -------
