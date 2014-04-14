@@ -403,9 +403,7 @@ Fichiers
 --------
 
 Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en
-minuscules et soulignés, par exemple:
-
-::
+minuscules et soulignés, par exemple::
 
     nom_de_fichier_long.php
 
@@ -418,14 +416,16 @@ Type
     Description
 mixed
     Une variable avec un type indéfini (ou multiple).
-integer
+int
     Variable de type Integer (Tout nombre).
 float
     Type Float (nombres à virgule).
-boolean
+bool
     Type Logique (true ou false).
 string
     Type String (toutes les valeurs en " " ou ' ').
+null
+    Type null. Habituellement utilisé avec un autre type.
 array
     Type Tableau.
 object
@@ -434,6 +434,15 @@ resource
     Type Ressource (retourné par exemple par mysql\_connect()).
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
     indiquer si il est inconnu, ou les types possibles.
+callable
+    Function appelable.
+
+Vous pouvez aussi combiner les types en utilisant le caractère pipe::
+
+    int|bool
+
+Pour plus de deux types, il est habituellement mieux d'utiliser seulement
+``mixed``.
 
 Casting
 -------
@@ -458,16 +467,12 @@ Type
 Constantes
 ----------
 
-Les constantes doivent être définies en majuscules:
-
-::
+Les constantes doivent être définies en majuscules::
 
     define('CONSTANTE', 1);
 
 Si un nom de constante a plusieurs mots, ils doivent être séparés par un
-caractère underscore, par exemple:
-
-::
+caractère underscore, par exemple::
 
     define('NOM_LONG_DE_CONSTANTE', 2);
 
