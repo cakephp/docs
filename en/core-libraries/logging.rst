@@ -230,7 +230,7 @@ CakeLog::write()::
 All configured log streams are written to sequentially each time
 :php:meth:`CakeLog::write()` is called.
 
-... versionchanged:: 2.5
+.. versionchanged:: 2.5
 
 CakeLog does not auto-configure itself anymore. As a result log files will not be
 auto-created anymore if no stream is listening.
