@@ -188,6 +188,12 @@ ExtractTask
   messages. If you want translated validation messages you should wrap those
   messages in `__()` calls like any other content.
 
+Shell
+-----
+
+- ``Shell::__construct()`` has changed. It now takes an instance of
+  ``Cake\\Console\\ConsoleIo``.
+
 Event
 =====
 

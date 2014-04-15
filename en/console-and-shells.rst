@@ -7,22 +7,20 @@ a variety of background tasks such as maintenance, and completing work outside
 of the request-response cycle. CakePHP console applications allow you
 to reuse your application classes from the command line.
 
-CakePHP comes with a number of console applications out of the box.
-Some of these applications are used in concert with other CakePHP
-features (like ACL or i18n), and others are for general use in
-getting you working faster.
+CakePHP comes with a number of console applications out of the box.  Some of
+these applications are used in concert with other CakePHP features (like i18n),
+and others are for general use to get you working faster.
 
 The CakePHP Console
 ===================
 
 This section provides an introduction into CakePHP at the
-command-line. If you've ever needed access to your CakePHP MVC
-classes in a cron job or other command-line script, this section is
-for you.
+command-line. Console tools are ideal for use in cron jobs, or command line
+based utilities that don't need to be accessible from a web browser.
 
 PHP provides a CLI client that makes interfacing with your
 file system and applications much smoother. The CakePHP console
-provides a framework for creating shell scripts. The Console uses a
+provides a framework for creating shell scripts. The console uses a
 dispatcher-type setup to load a shell or task, and hand it its
 parameters.
 
@@ -31,103 +29,50 @@ parameters.
     A command-line (CLI) build of PHP must be available on the system
     if you plan to use the Console.
 
-Before we get into specifics, let's make sure we can run the
-CakePHP console. First, you'll need to bring up a system shell. The
-examples shown in this section will be in bash, but the CakePHP
-Console is Windows-compatible as well. Let's execute the Console
-program from bash. This example assumes that the user is currently
-logged into a bash prompt and is currently at the root of a CakePHP
-application.
+Before we get into specifics, let's make sure you can run the CakePHP console.
+First, you'll need to bring up a system shell. The examples shown in this
+section will be in bash, but the CakePHP Console is Windows-compatible as well.
+This example assumes that the user is currently logged into a bash prompt and is
+currently at the root of a CakePHP application.
 
-CakePHP applications contain a ``Console`` directory that contains
-all the shells and tasks for an application. It also comes with an
-executable::
+CakePHP applications contain a ``Console`` directory that contains all the
+shells and tasks for an application. It also comes with an executable::
 
     $ cd /path/to/cakephp/app
     $ Console/cake
 
-It's often wise to add the core cake executable to your system path
-so you can use the cake command anywhere. This comes in handy when you are
-creating new projects. See :ref:`adding-cake-to-your-path` for how to make ``cake``
-available systemwide.
-
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP Console
+    Welcome to CakePHP v3.0.0-dev2 Console
     ---------------------------------------------------------------
     App : App
-    Path: /path/to/cakephp/App/
+    Path: /Users/markstory/Sites/cakephp-app/App/
     ---------------------------------------------------------------
     Current Paths:
 
      -app: App
-     -working: /path/to/cakephp/App
-     -root: /path/to/cakephp
-     -core: /path/to/cakephp/vendor/cakephp/cakephp
+     -working: /Users/markstory/Sites/cakephp-app/App
+     -root: /Users/markstory/Sites/cakephp-app
+     -core: /Users/markstory/Sites/cakephp-app/vendor/cakephp/cakephp
 
     Changing Paths:
 
-    your working path should be the same as your application path
-    to change your path use the '-app' param.
-    Example: -app relative/path/to/cakephp/App or -app /absolute/path/to/cakephp/App
+    Your working path should be the same as your application path. To change your path use the '-app' param.
+    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
 
     Available Shells:
 
-     acl [CORE]                              i18n [CORE]
-     api [CORE]                              import [app]
-     bake [CORE]                             schema [CORE]
-     command_list [CORE]                     testsuite [CORE]
-     console [CORE]                          upgrade [CORE]
+    [CORE] bake, i18n, server, test
 
-    To run a command, type 'cake shell_name [args]'
-    To get help on a specific command, type 'cake shell_name help'
+    [app] behavior_time, console, orm
+
+    To run an app or core command, type cake shell_name [args]
+    To run a plugin command, type cake Plugin.shell_name [args]
+    To get help on a specific command, type cake shell_name --help
 
 The first information printed relates to paths. This is especially
 helpful if you're running the console from different parts of the
 filesystem.
-
-Since many users add the CakePHP console to their system's path so it can
-be accessed easily. Printing out the working, root, app, and core
-paths allows you to see where the console will be making changes.
-To change the app folder you wish to work with, you can supply its
-path as the first argument to the cake command. This next example
-shows how to specify an app folder, assuming you've already added
-the console folder to your ``PATH``::
-
-    $ cake -app /path/to/cakephp/App
-
-The path supplied can be relative to the current working directory
-or supplied as an absolute path.
-
-
-.. _adding-cake-to-your-path:
-
-Adding Cake to Your System Path
--------------------------------
-
-If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
-cake executable to your system path.
-
-#. Locate where your CakePHP install, and cake executable are. For example
-   ``/Users/mark/cakephp/lib/Cake/Console/cake``
-#. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
-
-    export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
-
-#. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
-
-If you are on Windows Vista or 7, you should follow the steps below.
-
-#. Locate where your CakePHP install and cake executable are. For example
-   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
-#. Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column
-#. Go under Advanced tab and click on Environment Variables button
-#. In the System Variables portion, reach Path variable and double-click on it to Edit
-#. Add the ``cake`` install path string followed by a semi colon. Result example::
-
-    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
-
-#. Click Ok and ``cake`` should work anywhere.
 
 Creating a Shell
 ================
@@ -136,6 +81,10 @@ Let's create a shell for use in the Console. For this example,
 we'll create a simple Hello world shell. In your applications
 ``Console/Command`` directory create ``HelloShell.php``. Put the following
 code inside it::
+
+    namespace App\Console\Command;
+
+    use App\Console\Command\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -161,12 +110,17 @@ You should see the following output::
     Hello world.
 
 As mentioned before, the ``main()`` method in shells is a special method called
-whenever there are no other commands or arguments given to a shell. You may have also
-noticed that HelloShell is extending ``AppShell``. Much like :ref:`app-controller`, AppShell
-gives you a base class to contain all your common functions or logic. You can define an AppShell,
-by creating ``app/Console/Command/AppShell.php``. If you don't have one, CakePHP will use the
-built-in one. Since our main method wasn't very interesting let's add another command
-that does something::
+whenever there are no other commands or arguments given to a shell. You may have
+also noticed that HelloShell is extending ``AppShell``. Much like
+:ref:`app-controller`, AppShell gives you a base class to contain all your
+common functions or logic. You can define an AppShell, by creating
+``app/Console/Command/AppShell.php``. Since our main method wasn't very
+interesting let's add another command that does something::
+
+
+    namespace App\Console\Command;
+
+    use App\Console\Command\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -185,9 +139,9 @@ property contains an array of all the positional arguments provided to a command
 also use switches or options on shell applications, these are available at ``$this->params``,
 but we'll cover that in a bit.
 
-When using a ``main()`` method you won't be able to use the positional arguments
-or parameters. This is because the first positional argument or option is
-interpreted as the command name. If you want to use arguments and options, you
+When using a ``main()`` method you won't be able to use the positional
+arguments. This is because the first positional argument or option is
+interpreted as the command name. If you want to use arguments, you
 should use method names other than ``main``.
 
 Using Models in Your Shells
@@ -198,7 +152,11 @@ utilities; CakePHP makes that super easy. You can load models in shells, just as
 you would in a controller using ``loadModel()``. The loaded models are set as
 properties attached to your shell::
 
-    class UserShell extends AppShell {
+    namespace App\Console\Command;
+
+    use Cake\Console\Shell;
+
+    class UserShell extends Shell {
 
         public function initialize() {
             parent::initialize();
@@ -220,10 +178,10 @@ Shell Tasks
 There will be times when building more advanced console applications, you'll want
 to compose functionality into re-usable classes that can be shared across many shells.
 Tasks allow you to extract commands into classes. For example the ``bake`` is made
-almost entirely of tasks. You define a shell's tasks by using the ``$tasks`` property::
+almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
     class UserShell extends AppShell {
-        public $tasks = array('Template');
+        public $tasks = ['Template'];
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
@@ -243,9 +201,11 @@ will call this method when the task is invoked. A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    // found in Console/Command/SeaShell.php
+    // found in App/Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-        public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
+        // found in App/Console/Command/Task/SoundTask.php
+        public $tasks = ['Sound'];
+
         public function main() {
             $this->Sound->execute();
         }
@@ -280,7 +240,6 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 Invoking Other Shells from Your Shell
 =====================================
 
-Shells no longer have direct access to the ShellDispatcher any more through `$this->Dispatch`.
 There are still many cases where you will want to invoke one shell from another though.
 `Shell::dispatchShell()` gives you the ability to call other shells by providing the
 `argv` for the sub shell. You can provide arguments and options either
@@ -378,7 +337,7 @@ Turning Off Colouring
 Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->_io->outputAs(ConsoleOutput::RAW);
 
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
@@ -826,7 +785,7 @@ Shell API
 
 .. php:namespace:: Cake\Console
 
-.. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
+.. php:class:: Shell(ConsoleIo $io)
 
     Shell is the base class for all shells, and provides a number of functions for
     interacting with user input, outputting text a generating errors.
@@ -908,7 +867,7 @@ Shell API
     It will return the users answer to the prompt, and allows you to provide a
     list of valid options the user can choose from::
 
-        $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
+        $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
 
     The selection validation is case-insensitive.
 
@@ -919,7 +878,7 @@ Shell API
 
 .. php:method:: loadTasks()
 
-    Loads tasks defined in public :php:attr:`Shell::$tasks`
+    Loads tasks defined in public :php:attr:`Cake\\Console\\Shell::$tasks`
 
 .. php:method:: nl($multiplier = 1)
 
