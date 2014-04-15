@@ -242,7 +242,7 @@ interne CakeLog::write()::
 Tous les flux de log configurés sont écrits séquentiellement à chaque fois
 que :php:meth:`CakeLog::write()` est appelée.
 
-... versionchanged:: 2.5
+.. versionchanged:: 2.5
 
 CakeLog ne s'auto-configure plus lui-même. En résultat, les fichiers de log,
 ne seront plus auto-créés si aucun flux n'est écouté. Assurez-vous que vous
