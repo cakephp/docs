@@ -745,6 +745,8 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - Le paramètre ``inline`` a été retiré de la méthode postLink().
   Vous devriez utiliser l'option ``block`` à la place. Définir ``block => true``
   va émuler le comportement précédent.
+- Le paramètre ``timeFormat`` pour ``hour()``, ``time()`` et ``dateTime()`` est
+  par maintenant par défaut à 24, en accord avec l'ISO 8601.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/core-libraries/helpers/form` pour plus de détails sur la façon d'utiliser

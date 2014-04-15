@@ -731,7 +731,7 @@ Créer des Elements Input
 
     Si le form est édité (ainsi, le tableau ``$this->request->data`` va contenir
     les informations sauvegardées pour le model ``User``), la valeur
-    correspondant au champs ``notes`` sera automatiquement ajoutée au HTML 
+    correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
     généré. Exemple:
 
     .. code-block:: html
@@ -1070,7 +1070,7 @@ Crée des inputs de date et d'heure (date and time inputs)
     can override the ``dateWidget`` template. By default the ``dateWidget`` template
     is::
 
-        {{month}}{{day}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}
+        {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
 .. php:method:: year(string $fieldName, array $options = [])
 
@@ -1429,7 +1429,7 @@ A list of the default templates and the variables they can expect are:
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
 * ``checkboxContainer`` {{input}}, {{label}}
-* ``dateWidget`` {{month}}, {{day}}, {{year}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
+* ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
 * ``errorItem`` {{text}}
