@@ -225,11 +225,11 @@ finder methods in 3.0::
 
     class ArticlesTable {
 
-        public function findPopular($query, $options = []) {
+        public function findPopular(Query $query, array $options) {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites($query, $options = []) {
+        public function findFavorites(Query $query, array $options) {
             $for = $options['for'];
             return $query->matching('Users.Favorites' => function($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -250,7 +250,7 @@ migrate this code in one of a few ways:
 
 In the 3rd case above your code would look like::
 
-    public function findAll(Query $query, array $options = []) {
+    public function findAll(Query $query, array $options) {
         $mapper = function ($row, $key, $mr) {
             // Your afterFind logic
         };

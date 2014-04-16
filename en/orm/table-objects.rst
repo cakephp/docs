@@ -815,7 +815,7 @@ would do the following::
 
     class ArticlesTable extends Table {
 
-        public function findPublished(Query $query, array $options = []) {
+        public function findPublished(Query $query, array $options) {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true
@@ -1207,7 +1207,7 @@ Saving Entities
 
 When saving request data to your database you need to first hydrate a new entity
 using ``newEntity()`` for passing into ``save()``. For example::
-  
+
   // In a controller
   $articles = TableRegistry::get('Articles');
   $article = $articles->newEntity($this->request->data);
@@ -1421,7 +1421,7 @@ plural, camel cased version the association name. For example::
 
 When converting request data into entities, the ``newEntity`` and
 ``newEntities`` methods will handle both arrays of properties, as well as a list
-of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a 
+of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
 
