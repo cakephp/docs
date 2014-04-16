@@ -82,7 +82,7 @@ encoding
     Indicates the character set to use when sending SQL statements to
     the server. This defaults to the database's default encoding for
     all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql/mysqli connections you must use 'utf8' without the
+    with mysql connections you must use 'utf8' without the
     hyphen.
 timezone
     Server timezone to set.
@@ -100,7 +100,7 @@ ssl_ca
 init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQL Server at this time.
+    supported by MySQL, Postgres, and SQLServer at this time.
 dsn
     A full PDO compatible data source name.
 log
@@ -180,7 +180,7 @@ data types for use with the database layer. The types CakePHP supports are:
 
 string
     Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column.
+    will force a CHAR column. In SQLServer, NCHAR and NVARCHAR types are used.
 text
     Maps to TEXT types
 uuid
@@ -204,8 +204,8 @@ binary
 date
     Maps to a timezone naive DATE column type.
 datetime
-    Maps to a timezone naive DATETIME column type. In postgres this turns into
-    a TIMESTAMP type.
+    Maps to a timezone naive DATETIME column type. In postgres, and SQLServer
+    this turns into a TIMESTAMP type.
 timestamp
     Maps to the TIMESTAMP type.
 time

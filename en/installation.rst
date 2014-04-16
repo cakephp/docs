@@ -22,8 +22,8 @@ database storage engines:
 
 -  MySQL (4 or greater)
 -  PostgreSQL
--  Microsoft SQL Server
--  SQLite
+-  Microsoft SQL Server (2008 or higher)
+-  SQLite 3
 
 .. note::
 
