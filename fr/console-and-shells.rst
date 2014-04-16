@@ -16,12 +16,13 @@ une utilisation générale pour que votre travail se fasse plus vite.
 La console de CakePHP
 =====================
 
-Cette section fournit une introduction sur la ligne de commande dans CakePHP.
-Si vous avez besoin d'accéder à vos classes MVC de CakePHP dans une tâche cron
-ou tout autre script de ligne de commande, cette section est pour vous.
+Cette section est une introduction sur la ligne de commande dans CakePHP.
+Les outils de la Console sont idéals pour l'utilisation de tâches cron, ou pour
+des utilitaires basés sur des lignes de commandes qui n'ont pas besoin d'être
+accessible par un navigateur.
 
 PHP fournit un puissant client CLI qui rend l'interfaçage avec votre système
-de fichier et vos applications plus facile. La console CakePHP fournit un
+de fichier et vos applications plus facile. La Console CakePHP fournit un
 framework de création de scripts shell. La console utilise un ensemble de
 répartiteur de types pour charger un shell ou une tâche, et lui passer des
 paramètres.
@@ -45,99 +46,39 @@ un exécutable::
     $ cd /path/to/cakephp/app
     $ Console/cake
 
-Mais il est préférable d'ajouter l'exécutable du coeur de cake dans votre
-système de path afin que vous puissiez utiliser la commande cake de partout.
-C'est plus pratique quand vous créez de nouveaux projets. Regardez
-:ref:`adding-cake-to-your-path` pour voir la façon de rendre ``cake``
-disponible dans tout le système.
-
 Lancez la Console avec aucun argument entraîne ce message d'aide::
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP v3.0.0-dev2 Console
     ---------------------------------------------------------------
-    App : app
-    Path: /path/to/cakephp/app/
+    App : App
+    Path: /Users/markstory/Sites/cakephp-app/App/
     ---------------------------------------------------------------
     Current Paths:
 
-     -app: app
-     -working: /path/to/cakephp/app
-     -root: /path/to/cakephp/
-     -core: /path/to/cakephp/core
+     -app: App
+     -working: /Users/markstory/Sites/cakephp-app/App
+     -root: /Users/markstory/Sites/cakephp-app
+     -core: /Users/markstory/Sites/cakephp-app/vendor/cakephp/cakephp
 
     Changing Paths:
 
-    your working path should be the same as your application path
-    to change your path use the '-app' param.
-    Example: -app relative/path/to/cakephp/app or -app /absolute/path/to/cakephp/app
+    Votre working path devrait être le même que celui de votre application. Pour
+    changer votre path, utilisez le paramètre '-app'.
+    Exemple: -app relative/path/to/myapp ou -app /absolute/path/to/myapp
 
-    Available Shells:
+    Shells disponibles:
 
-     acl [CORE]                              i18n [CORE]
-     api [CORE]                              import [app]
-     bake [CORE]                             schema [CORE]
-     command_list [CORE]                     testsuite [CORE]
-     console [CORE]                          upgrade [CORE]
+    [CORE] bake, i18n, server, test
 
-    To run a command, type 'cake shell_name [args]'
-    To get help on a specific command, type 'cake shell_name help'
+    [app] behavior_time, console, orm
+
+    Pour lancer une commande de app ou du coeur, tapez cake shell_name [args]
+    Pour lancer une commande d'un plugin, tapez cake Plugin.shell_name [args]
+    Pour avoir de l'aide sur une commande spécifique, tapez cake shell_name --help
 
 La première information affichée est en rapport avec les chemins. Ceci est
 particulièrement pratique si vous exécutez la Console depuis différents
 endroits de votre système de fichier.
-
-Beaucoup d'utilisateurs ajoutent la console CakePHP à leur path système
-afin qu'elle puisse être facilement accessible. L'affichage des chemins de
-workdir, root, app et core vous permet de voir où la Console fera des
-changements. Pour changer le dossier app par celui dans lequel vous souhaitez
-travailler, vous pouvez fournir son chemin comme premier argument de la ligne
-de commande cake. L'exemple suivant montre comment spécifier un dossier app,
-en supposant que vous avez déjà ajouté le dossier de la console à votre
-``PATH``::
-
-    $ cake -app /path/to/cakephp/app
-
-Le chemin fourni peut être relatif au répertoire courant ou fourni sous
-forme de chemin absolu.
-
-.. _adding-cake-to-your-path:
-
-Ajouter cake à votre système path
----------------------------------
-
-Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
-permettront de rendre cake executable dans votre système path.
-
-#. Localisez où se trouve votre installation de cakephp et le cake exécutable.
-   Par exemple ``/Users/mark/cakephp/lib/Cake/Console/cake``
-#. Modifiez votre fichier ``.bashrc`` ou ``.bash_profile`` dans votre
-   répertoire home, et ajoutez ce qui suit::
-
-    export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
-
-#. Rechargez la configuration bash ou ouvrez un nouveau terminal, et
-   ``cake`` devrait fonctionner n'importe où.
-
-Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
-
-#. Localisez l'emplacement où se trouvent votre installation CakePHP et
-   l'exécutable cake. Par exemple
-   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
-#. Ouvrez la fenêtre des propriétés du Système de votre ordinateur. Vous
-   essaierez le raccourci clavier Windows Key + Pause ou Windows Key + Break.
-   Ou, à partir du Bureau, faîtes un clique droit sur Mon Ordinateur, clickez
-   sur Propriétés et cliquez sur le lien Paramètres avancés du système dans la
-   colonne de gauche.
-#. Allez sous l'onglet Avancé et cliquez sur le bouton des Variables
-   d'Environnement.
-#. Dans la portion des Variables Sytèmes, cherchez le chemin de la variable
-   et double-cliquez dessus pour la modifier.
-#. Ajoutez le chemin de l'installation de ``cake`` suivi par un point virgule.
-   On pourrait avoir par exemple::
-
-    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
-
-#. Cliquez Ok et ``cake`` devrait fonctionner partout.
 
 Créer un Shell
 ==============
@@ -146,6 +87,10 @@ Créons un shell pour l'utilisation dans la Console. Pour cet exemple, nous
 créerons un simple shell Hello world. Dans le répertoire ``Console/Command``
 de votre application, créez ``HelloShell.php``. Mettez le code suivant
 dedans::
+
+    namespace App\Console\Command;
+
+    use App\Console\Command\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -165,21 +110,25 @@ application, lancez::
 
 Vous devriez voir la sortie suivante::
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/Sites/cake_dev/app/
+    Path: /Users/markstory/Sites/cake_dev/App/
     ---------------------------------------------------------------
     Hello world.
 
-Comme mentionné avant, la méthode ``main()`` dans les shells est une méthode
-spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments donnés au
-shell. Vous pouvez aussi remarquer que HelloShell étend ``AppShell``. Un peu
-comme :ref:`app-controller`, AppShell vous donne une classe de base pour
+Comme mentionné prédémment, la méthode ``main()`` dans les shells est une
+méthode spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments
+donnés au shell. Vous pouvez aussi remarquer que HelloShell étend ``AppShell``.
+Un peu comme :ref:`app-controller`, AppShell vous donne une classe de base pour
 contenir toutes les fonctions ordinaires ou logiques. Vous pouvez définir un
 AppShell en créant ``app/Console/Command/AppShell.php``. Si vous n'en avez pas
 un, CakePHP en utilisera une integrée. Comme notre méthode principale n'était
 pas très intéressante, ajoutons une autre commande qui fait quelque chose::
+
+    namespace App\Console\Command;
+
+    use App\Console\Command\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -210,17 +159,24 @@ Utiliser les Models dans vos shells
 -----------------------------------
 
 Vous avez souvent besoin d'accéder à la logique métier de votre application
-dans les utilitaires de shell. CakePHP rend cela super facile. En configurant
-une propriété ``$uses``, vous pouvez définir un tableau de models auxquels
-vous voulez accéder dans votre shell. Les models définis sont chargés en
-propriétés attachées à votre shell, juste comme un controller obtient les
-models qui lui sont attachés::
+dans les utilitaires de shell. CakePHP rend cela super facile. Vous pouvez
+charger les models dans les shells, juste comme vous le feriez dans un
+controller en utilisant ``loadModel()``. Les models définis sont chargés en
+propriétés attachées à votre shell::
 
-    class UserShell extends AppShell {
-        public $uses = array('User');
+    namespace App\Console\Command;
+
+    use Cake\Console\Shell;
+
+    class UserShell extends Shell {
+
+        public function initialize() {
+            parent::initialize();
+            $this->loadModel('Users');
+        }
 
         public function show() {
-            $user = $this->User->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
     }
@@ -228,7 +184,7 @@ models qui lui sont attachés::
 Le shell ci-dessus récupérera un utilisateur par son username et affichera
 l'information stockée dans la base de données.
 
-Les tâches Shell
+Les Tâches Shell
 ================
 
 Il y aura des fois où quand vous construirez des applications plus poussées
@@ -239,7 +195,7 @@ tâches vous permettent d'extraire des commandes dans des classes. Par exemple,
 shell en utilisant la propriété ``$tasks``::
 
     class UserShell extends AppShell {
-        public $tasks = array('Template');
+        public $tasks = ['Template'];
     }
 
 Vous pouvez utiliser les tâches à partir de plugins en utilisant la
@@ -254,7 +210,6 @@ ShellDispatcher appelera cette méthode quand la tâche est invoquée.
 une classe de tâche ressemble à cela::
 
     class FileGeneratorTask extends Shell {
-        public $uses = array('User');
         public function execute() {
 
         }
@@ -264,9 +219,11 @@ Un shell peut aussi accéder à ses tâches en tant que propriétés, ce qui
 rend les tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
-    // trouvé dans Console/Command/SeaShell.php
+    // Dans App/Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-        public $tasks = array('Sound'); // trouvé dans Console/Command/Task/SoundTask.php
+        // dans App/Console/Command/Task/SoundTask.php
+        public $tasks = ['Sound'];
+
         public function main() {
             $this->Sound->execute();
         }
@@ -304,8 +261,7 @@ Chargera et retournera une instance ProjectTask. Vous pouvez charger les tâches
 Invoquer d'autres shells à partir de votre shell
 ================================================
 
-Les Shells n'ont plus directement accès à ShellDispatcher, à travers
-`$this->Dispatch`. Il y a cependant beaucoup de cas où vous voulez invoquer un
+Il y a effectivement beaucoup de cas où vous voulez invoquer un
 shell à partir d'un autre. `Shell::dispatchShell()` vous donne la possibilité
 d'appeler d'autres shells en fournissant le `argv` pour le shell sub. Vous
 pouvez fournir des arguments et des options soit en variables args ou en
@@ -377,7 +333,7 @@ Vous pouvez créer des styles supplémentaires en utilisant
 `$this->stdout->styles()`. Pour déclarer un nouveau style de sortie,
 vous pouvez faire::
 
-    $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
+    $this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
 Cela vous permettra d'utiliser un tag ``<flashy>`` dans la sortie de votre
 shell, et si les couleurs ansi sont activées, ce qui suit sera rendu en texte
@@ -413,7 +369,7 @@ Enlever la coloration
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous
 voulez l'arrêter, ou forcer à l'avoir::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->_io->outputAs(ConsoleOutput::RAW);
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
@@ -471,14 +427,14 @@ parser en une unique série d'appel de méthodes::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
-        $parser->addArgument('type', array(
+        $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
-        ))->addArgument('className', array(
+        ])->addArgument('className', [
             'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-        ))->addOption('method', array(
+        ])->addOption('method', [
             'short' => 'm',
             'help' => __('The specific method you want help on.')
-        ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+        ])->description(__('Lookup doc block comments for classes in CakePHP.'));
         return $parser;
     }
 
@@ -502,7 +458,7 @@ tableau, soit une chaîne, vous pouvez définir la valeur de la description.
 Appeler sans arguments va retourner la valeur actuelle::
 
     // Définit plusieurs lignes en une fois
-    $parser->description(array('line one', 'line two'));
+    $parser->description(['line one', 'line two']);
 
     // Lit la valeur actuelle
     $parser->description()
@@ -515,7 +471,7 @@ ou une chaîne, vous pouvez définir la valeur de epilog.
 L'appeler avec aucun argument va retourner la valeur actuelle::
 
     // Définit plusieurs lignes en une fois
-    $parser->epilog(array('line one', 'line two'));
+    $parser->epilog(['line one', 'line two']);
 
     // Lit la valeur actuelle
     $parser->epilog()
@@ -523,7 +479,7 @@ L'appeler avec aucun argument va retourner la valeur actuelle::
 Ajouter des arguments
 ---------------------
 
-.. php:method:: addArgument($name, $params = array())
+.. php:method:: addArgument($name, $params = [])
 
 Les arguments de position sont fréquemment utilisés dans les outils en ligne
 de commande, et ``ConsoleOptionParser`` vous permet de définir les arguments
@@ -531,7 +487,7 @@ de position ainsi que de les rendre obligatoires. Vous pouvez ajouter des
 arguments un à la fois avec ``$parser->addArgument();`` ou plusieurs à la fois
 avec ``$parser->addArguments();``::
 
-    $parser->addArgument('model', array('help' => 'The model to bake'));
+    $parser->addArgument('model', ['help' => 'The model to bake']);
 
 Vous pouvez utiliser les options suivantes lors de la création d'un argument:
 
@@ -553,10 +509,10 @@ gérer cela dans votre shell.
 Si vous avez un tableau avec plusieurs arguments, vous pouvez utiliser
 ``$parser->addArguments()`` pour ajouter plusieurs arguments en une fois.::
 
-    $parser->addArguments(array(
-        'node', array('help' => 'The node to create', 'required' => true),
-        'parent' => array('help' => 'The parent node', 'required' => true)
-    ));
+    $parser->addArguments([
+        'node', ['help' => 'The node to create', 'required' => true],
+        'parent' => ['help' => 'The parent node', 'required' => true]
+    ]);
 
 Comme avec toutes les méthodes de construction avec ConsoleOptionParser,
 addArguments peuvent être utilisés comme des parties d'une chaîne de méthode
@@ -570,11 +526,11 @@ Lors de la création d'arguments de position, vous pouvez utiliser le flag
 est appelé. De plus, vous pouvez utiliser ``choices`` pour forcer un argument
 pour qu'il soit une liste de choix valides::
 
-    $parser->addArgument('type', array(
+    $parser->addArgument('type', [
         'help' => 'Le type de noeud avec lequel intéragir.',
         'required' => true,
-        'choices' => array('aro', 'aco')
-    ));
+        'choices' => ['aro', 'aco']
+    ]);
 
 Ce qui est au-dessus va créer un argument qui est nécessaire et a une
 validation sur l'entrée. Si l'argument est soit manquant, soit a une valeur
@@ -583,7 +539,7 @@ incorrecte, une exception sera levée et le shell sera arreté.
 Ajouter des Options
 -------------------
 
-.. php:method:: addOption($name, $options = array())
+.. php:method:: addOption($name, $options = [])
 
 Les options ou les flags sont aussi fréquemment utilisés avec les outils de
 ligne de commande. ``ConsoleOptionParser`` supporte la création d'options avec
@@ -591,11 +547,11 @@ les deux verbose et short aliases, fournissant les valeurs par défaut
 et créant des switches en boléen. Les options sont créées avec soit
 ``$parser->addOption()``, soit ``$parser->addOptions()``.::
 
-    $parser->addOption('connection', array(
+    $parser->addOption('connection', [
         'short' => 'c'
         'help' => 'connection',
         'default' => 'default'
-    ));
+    ]);
 
 Ce qui est au-dessus vous permet l'utilisation soit de
 ``cake myshell --connection=other``, soit de
@@ -604,7 +560,7 @@ de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
 switches ne consomment pas de valeurs, et leur présence les active juste dans
 les paramètres parsés.::
 
-    $parser->addOption('no-commit', array('boolean' => true));
+    $parser->addOption('no-commit', ['boolean' => true]);
 
 Avec cette option, lors de l'appel d'un shell comme
 ``cake myshell --no-commit something`` le paramètre no-commit aurait une valeur
@@ -633,10 +589,10 @@ pour définir le comportement de l'option:
 Si vous avez un tableau avec plusieurs options, vous pouvez utiliser
 ``$parser->addOptions()`` pour ajouter plusieurs options en une fois.::
 
-    $parser->addOptions(array(
-        'node', array('short' => 'n', 'help' => 'The node to create'),
-        'parent' => array('short' => 'p', 'help' => 'The parent node')
-    ));
+    $parser->addOptions([
+        'node', ['short' => 'n', 'help' => 'The node to create'],
+        'parent' => ['short' => 'p', 'help' => 'The parent node']
+    ]);
 
 Comme avec toutes les méthodes de construcion de ConsoleOptionParser,
 addOptions peut être utilisée comme une partie de la chaîne de méthode courante.
@@ -649,10 +605,10 @@ arguments de position peuvent l'être. Quand une option a défini les choix,
 ceux-ci sont les seuls choix valides pour une option. Toutes les autres valeurs
 vont lancer une ``InvalidArgumentException``::
 
-    $parser->addOption('accept', array(
+    $parser->addOption('accept', [
         'help' => 'What version to accept.',
-        'choices' => array('working', 'theirs', 'mine')
-    ));
+        'choices' => ['working', 'theirs', 'mine']
+    ]);
 
 Utiliser les options boléennes
 ------------------------------
@@ -663,10 +619,10 @@ les options boléennes les incluent toujours dans les paramètres parsés. Quand
 les flags sont présents, ils sont définis à true, quand ils sont absents à
 false::
 
-    $parser->addOption('verbose', array(
+    $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',
         'boolean' => true
-    ));
+    ]);
 
 L'option suivante fera que ``$this->params['verbose']`` sera toujours
 disponible. Cela vous permet d'oublier ``empty()`` ou ``isset()``
@@ -682,7 +638,7 @@ Puisque les options boléennes sont toujours définies à ``true`` ou à
 Ajouter des sous-commandes
 --------------------------
 
-.. php:method:: addSubcommand($name, $options = array())
+.. php:method:: addSubcommand($name, $options = [])
 
 Les applications de Console sont souvent faites de sous-commandes, et ces
 sous-commandes nécessiteront un parsing d'options spéciales et ont leur propre
@@ -692,10 +648,10 @@ tâches séparées qui ont toutes leur propre aide et options.
 de fournir les parsers d'option spécifiques donc le shell sait comment parser
 les commandes pour ses tâches::
 
-    $parser->addSubcommand('model', array(
+    $parser->addSubcommand('model', [
         'help' => 'Bake a model',
         'parser' => $this->Model->getOptionParser()
-    ));
+    ]);
 
 Ce qui est au-dessus est un exemple de la façon dont vous pouvez fournir de
 l'aide et un parser d'option spécialisé pour une tâche du shell. En appelant
@@ -732,21 +688,21 @@ sous-commande, vous pouvez définir le parser spec en tableau pour cette
 méthode. Ceci peut faciliter la construction de parsers de sous-commande,
 puisque tout est un tableau::
 
-    $parser->addSubcommand('check', array(
+    $parser->addSubcommand('check', [
         'help' => __('Check the permissions between an ACO and ARO.'),
-        'parser' => array(
-            'description' => array(
+        'parser' => [
+            'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the ARO "),
                 __("specified (and its children, if any) will have ALLOW access to the"),
                 __("specified ACO action (and the ACO's children, if any).")
-            ),
-            'arguments' => array(
-                'aro' => array('help' => __('ARO to check.'), 'required' => true),
-                'aco' => array('help' => __('ACO to check.'), 'required' => true),
-                'action' => array('help' => __('Action to check'))
-            )
-        )
-    ));
+            ],
+            'arguments' => [
+                'aro' => ['help' => __('ARO to check.'), 'required' => true],
+                'aco' => ['help' => __('ACO to check.'), 'required' => true],
+                'action' => ['help' => __('Action to check')]
+            ]
+        ]
+    ]);
 
 A l'intérieur du parser spec, vous pouvez définir les clés pour `arguments``,
 ``options``, ``description`` et ``epilog``. Vous ne pouvez pas définir les
@@ -757,18 +713,18 @@ arguments, et les options, doivent suivre le format que
 utiliser buildFromArray lui-même, pour construire un parser d'option::
 
     public function getOptionParser() {
-        return ConsoleOptionParser::buildFromArray(array(
-            'description' => array(
+        return ConsoleOptionParser::buildFromArray([
+            'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the ARO "),
                 __("specified (and its children, if any) will have ALLOW access to the"),
                 __("specified ACO action (and the ACO's children, if any).")
-            ),
-            'arguments' => array(
-                'aro' => array('help' => __('ARO to check.'), 'required' => true),
-                'aco' => array('help' => __('ACO to check.'), 'required' => true),
-                'action' => array('help' => __('Action to check'))
-            )
-        ));
+            ],
+            'arguments' => [
+                'aro' => ['help' => __('ARO to check.'), 'required' => true],
+                'aco' => ['help' => __('ACO to check.'), 'required' => true],
+                'action' => ['help' => __('Action to check')]
+            ]
+        ]);
     }
 
 Obtenir de l'aide dans les shells
@@ -884,7 +840,9 @@ API de Shell
     Elle devrait étendre :php:class:`Shell`, et être localisée dans
     ``Console/Command/AppShell.php``.
 
-.. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
+.. php:namespace:: Cake\Console
+
+.. php:class:: Shell(ConsoleIo $io)
 
     Shell est une classe de base pour tous les shells, et fournit un certain
     nombre de fonctions pour l'interaction avec l'entrée de l'utilisateur,
@@ -894,13 +852,15 @@ API de Shell
 
     Un tableau de tâches que vous voulez charger pour ce shell/task.
 
-.. php:attr:: uses
-
-    Un tableau de models qui devrait être chargé pour ce shell/task.
-
 .. php:method:: clear()
 
     Efface la sortie courante étant affichée.
+
+.. php:method:: loadModel($modelClass, $type = 'Table')
+
+    Charge un model d'un ``$type`` donné dans une propriété avec le même nom.
+    C'est l'équivalent pour la console de
+    :php:meth:`Cake\\Controller\\Controller::loadModel()`.
 
 .. php:method:: createFile($path, $contents)
 
@@ -973,7 +933,7 @@ API de Shell
     prompt, et vous permet de fournir une liste d'options valides dans laquelle
     l'utilisateur peut choisir::
 
-        $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
+        $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
 
     La validation de la sélection est sensible à la casse.
 
@@ -1017,7 +977,9 @@ API de Shell
     En formattant les messages avec des balises de style, vous pouvez afficher
     une sortie stylisée::
 
-        $this->out('<warning>This will remove data from the filesystems.</warning>');
+        $this->out(
+            '<warning>This will remove data from the filesystems.</warning>'
+        );
 
     Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
     une sortie colorée.
@@ -1050,7 +1012,7 @@ API de Shell
     Redéfinit cette méthode si vous voulez retirer l'information de bienvenue,
     ou sinon modifier le pre-command flow.
 
-.. php:method:: wrapText($text, $options = array())
+.. php:method:: wrapText($text, $options = [])
 
     Entoure un block de texte. Vous permet de configurer la largeur, et
     d'indenter un block de texte.
@@ -1070,12 +1032,11 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/cron-jobs
-    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/i18n-shell
-    console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
+    console-and-shells/repl
+    console-and-shells/cron-jobs
 
 
 .. meta::

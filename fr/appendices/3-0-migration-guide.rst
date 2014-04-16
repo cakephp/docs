@@ -206,6 +206,12 @@ ExtractTask
   traduits. Si vous voulez traduire les messages de validation, vous devez
   entourer ces messages dans des appels `__()` comme tout autre contenu.
 
+Shell
+-----
+
+- ``Shell::__construct()`` a changé. Il prend maintenant une instance de
+  ``Cake\\Console\\ConsoleIo`` en paramètre.
+
 Event
 =====
 
