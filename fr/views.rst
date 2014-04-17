@@ -17,8 +17,8 @@ rendu les plus communs:
 - Pour créer plusieurs vues pour un thème, vous pouvez utiliser
   :doc:`views/themes`.
 
-Templates de Views
-==================
+Templates de Vues
+=================
 
 La couche view de CakePHP c'est la façon dont vous parlez à vos utilisateurs.
 La plupart du temps, vos vues afficheront des documents (X)HTML pour les
@@ -26,17 +26,18 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de vues de CakePHP sont écrits en pur PHP et ont comme extension
-par défaut .ctp (Cakephp TemPlate). Ces fichiers contiennent toute la logique
+Les fichiers de vue de CakePHP sont écrits en pur PHP et ont par défaut .ctp
+(Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la logique
 de présentation nécessaire à l'organisation des données reçues du controller,
 dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre language de template et CakePHP.
 
-Les fichiers de vues sont stockées dans ``/app/View/``, dans un dossier portant
-le nom du controller qui utilise ces fichiers et le nom de la vue
-correspondante. Par exemple, l'action "view()" du controller Produits devrait
-normalement se trouver dans ``/app/View/Products/view.ctp``.
+Un fichier de vue est stocké dans ``/app/View/``, dans un sous-dossier
+portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
+correspondant à son action. Par exemple, le fichier de vue pour l'action
+"view()" du controller Products devra normalement se trouver dans
+``/app/View/Products/view.ctp``.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différent usages qui seront présentés dans ce
@@ -57,8 +58,8 @@ chapitre :
 
 .. _extending-views:
 
-Views étendues
---------------
+Vues étendues
+-------------
 
 .. versionadded:: 2.1
 
@@ -135,7 +136,7 @@ vue parente va récupérer le contenu de la vue précédente en tant que bloc
 
 .. _view-blocks:
 
-Utiliser les blocs de vues
+Utiliser les Blocs de Vues
 ==========================
 
 .. versionadded:: 2.1
@@ -212,7 +213,7 @@ enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
     utilisé par CakePHP en interne pour étendre les vues, et le contenu des
     vues dans le layout.
 
-Afficher les blocs
+Afficher les Blocs
 ------------------
 
 .. versionadded:: 2.1
@@ -249,7 +250,7 @@ une valeur par défaut en utilisant le 2ème argument::
 .. versionchanged:: 2.3
     L'argument ``$default`` a été ajouté dans 2.3.
 
-Utiliser des blocks pour les fichiers de script et les CSS
+Utiliser des Blocks pour les Fichiers de Script et les CSS
 ----------------------------------------------------------
 
 .. versionadded:: 2.1
@@ -684,7 +685,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: getVar(string $var)
 
-    Récupère la valeur de viewVar avec le nom $var.
+    Récupère la valeur de viewVar avec le nom ``$var``.
 
     .. deprecated:: 2.3
         Utilisez :php:meth:`View::get()` à la place.
@@ -760,7 +761,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: startIfEmpty($name)
 
-    Commence un block sous conditions, seulement si il est vide. Tout le
+    Commence un block si il est vide. Tout le
     contenu dans le block va être capturé et écarté si le block est déjà
     défini.
 

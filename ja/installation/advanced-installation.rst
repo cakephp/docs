@@ -73,7 +73,7 @@ composerの実行が終わると、ディレクトリ構造は次のようにな
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
 
 composerで他のライブラリをインストールしている場合は、

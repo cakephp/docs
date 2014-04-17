@@ -61,23 +61,23 @@ fichier sera automatiquement créé pour vous.
 Voir aussi :doc:`Behaviors <models/behaviors>` pour plus d'informations sur la
 façon d'appliquer la même logique pour de multiples models.
 
-Retournons à notre model Ingredient, pour que cela fonctionne, créez le
+Revenons-en à notre model Ingredient. Pour que cela fonctionne, créez le
 fichier PHP dans le repertoire ``/app/Model/``. Par convention, il devra avoir
-le même nom que la classe; pour cet exemple ``Ingredient.php``.
+le même nom que la classe ce qui pour l'exemple sera ``Ingredient.php``.
 
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous si il ne peut
     pas trouver un fichier correspondant dans /app/Model. Cela veut également
-    dire que si votre fichier de model n'est pas nommé correctement (ex :
-    ingredient.php ou ingredients.php) CakePHP utilisera une instance de
-    AppModel, plutôt que votre fichier de model "manquant" (d'un point de
-    vue CakePHP). Si vous essayez d'utiliser une méthode que vous avez définie
-    dans votre model ou dans un comportement attaché à votre model et que
-    vous obtenez des erreurs SQL qui indiquent le nom de la méthode que vous
-    appelez, c'est une indication certaine que CakePHP ne peut pas trouver
-    votre model et que vous devez, soit vérifier les noms de fichier, soit
-    nettoyer les fichiers temporaires ou les deux.
+    dire que si votre fichier de model n'est pas nommé correctement (par ex si
+    il est nommé ingredient.php ou Ingredients.php plutôt que Ingredient.php)
+    CakePHP utilisera une instance de AppModel, plutôt que votre fichier de
+    model (qui sera manquant pour CakePHP). Si vous essayez d'utiliser une
+    méthode que vous avez définie dans votre model ou dans un comportement
+    attaché à votre model et que vous obtenez des erreurs SQL qui indiquent le
+    nom de la méthode que vous appelez, c'est une indication certaine que
+    CakePHP ne peut pas trouver votre model et que vous devez vérifier
+    les noms de fichier, nettoyer les fichiers temporaires ou les deux.
 
 .. note::
 

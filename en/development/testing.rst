@@ -1067,7 +1067,7 @@ set correctly by the ``adjust`` method in our component. We create the file
     use Cake\Network\Response;
 
     // A fake controller to test against
-    class TestPagematronController extends Controller {
+    class PagematronControllerTest extends Controller {
         public $paginate = null;
     }
 
@@ -1082,7 +1082,7 @@ set correctly by the ``adjust`` method in our component. We create the file
             $this->PagematronComponent = new PagematronComponent($Collection);
             $CakeRequest = new CakeRequest();
             $CakeResponse = new CakeResponse();
-            $this->Controller = new TestPagematronController($CakeRequest, $CakeResponse);
+            $this->Controller = new PagematronControllerTest($CakeRequest, $CakeResponse);
             $this->PagematronComponent->startup($this->Controller);
         }
 

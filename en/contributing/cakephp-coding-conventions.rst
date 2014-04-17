@@ -196,6 +196,46 @@ successful::
 
 There are spaces on both side of the equals sign.
 
+Typehinting
+-----------
+
+Arguments that expect objects or arrays can be typehinted.
+We only typehint public methods, though, as typehinting is not cost-free::
+
+    /**
+     * Some method description.
+     *
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param boolean $boolean Some boolean value.
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+
+Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
+you should not typehint as ``array`` accepts only the primitive type::
+
+    /**
+     * Some method description.
+     *
+     * @param array|ArrayObject $array Some array value.
+     */
+    public function foo($array) {
+    }
+
+Method Chaining
+===============
+
+Method chaining should have multiple methods spread across separate lines, and
+indented with one tab::
+
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
+        ->send();
+
 Commenting Code
 ===============
 
@@ -205,7 +245,6 @@ describe the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
 *  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
 *  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
 *  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
@@ -223,6 +262,7 @@ processed if they are the first thing in a DocBlock line, for example::
 
     /**
      * Tag example.
+     *
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
@@ -233,12 +273,16 @@ processed if they are the first thing in a DocBlock line, for example::
      * Example of inline phpDoc tags.
      *
      * This function works hard with foo() to rule the world.
+     *
+     * @return void
      */
     function bar() {
     }
 
     /**
-     * Foo function
+     * Foo function.
+     *
+     * @return void
      */
     function foo() {
     }
@@ -345,17 +389,6 @@ Try to avoid private methods or variables, though, in favor of protected ones.
 The latter can be accessed or modified by subclasses, whereas private ones
 prevent extension or re-use. Private visibility also makes testing much more difficult.
 
-Method Chaining
----------------
-
-Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
-
-    $email->from('foo@example.com')
-        ->to('bar@example.com')
-        ->subject('A great message')
-        ->send();
-
 Example Addresses
 -----------------
 
@@ -373,9 +406,7 @@ Files
 -----
 
 File names which do not contain classes should be lowercased and underscored, for
-example:
-
-::
+example::
 
     long_file_name.php
 
@@ -388,22 +419,32 @@ Type
     Description
 mixed
     A variable with undefined (or multiple) type.
-integer
+int
     Integer type variable (whole number).
 float
     Float type (point number).
-boolean
+bool
     Logical type (true or false).
 string
     String type (any value in " " or ' ').
+null
+    Null type. Usually used in conjunction with another type.
 array
     Array type.
 object
-    Object type.
+    Object type. A specific class name should be used if possible.
 resource
     Resource type (returned by for example mysql\_connect()).
     Remember that when you specify the type as mixed, you should indicate
     whether it is unknown, or what the possible types are.
+callable
+    Callable function.
+
+You can also combine types using the pipe char::
+
+    int|bool
+
+For more than two types it is usually best to just use ``mixed``.
 
 Casting
 -------
@@ -428,16 +469,12 @@ Type
 Constants
 ---------
 
-Constants should be defined in capital letters:
-
-::
+Constants should be defined in capital letters::
 
     define('CONSTANT', 1);
 
 If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
-
-::
+by an underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 

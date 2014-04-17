@@ -66,8 +66,8 @@ Glossaire
         Un fichier dans APP/Config qui contient la configuration de routing.
         Ce fichier est inclus avant que chaque requête soit traitée.
         Il devrait connecter toutes les routes dont votre application a besoin 
-        afin que les requêtes puissent être routées aux controller + action 
-        corrects.
+        afin que les requêtes puissent être routées aux contrôleurs + actions 
+        correctes.
 
     DRY
         Ne vous répétez pas vous-même. Est un principe de développement de 

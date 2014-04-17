@@ -161,35 +161,36 @@ automatiqement la sortie dans la vue.
     des formats de monnaie.::
 
         // appelé par NumberHelper
-        $this->Number->addFormat('BRR', array('before' => 'R$ '));
+        $this->Number->addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
         // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
-        CakeNumber::addFormat('BRR', array('before' => 'R$ '));
+        CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
-    Vous pouvez maintenant utiliser `BRR` de manière courte quand vous
+    Vous pouvez maintenant utiliser `BRL` de manière courte quand vous
     formattez les montants de monnaie::
 
         // appelé par NumberHelper
-        echo $this->Number->currency($value, 'BRR');
+        echo $this->Number->currency($value, 'BRL');
 
         // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
-        echo CakeNumber::currency($value, 'BRR');
+        echo CakeNumber::currency($value, 'BRL');
 
     Les formats ajoutés sont fusionnés avec les formats par défaut suivants::
 
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
-           'fractionSymbol'   => '',
+           'fractionSymbol'   => false,
            'fractionPosition' => 'after',
            'zero'             => 0,
            'places'           => 2,
            'thousands'        => ',',
            'decimals'         => '.',
            'negative'         => '()',
-           'escape'           => true
+           'escape'           => true,
+           'fractionExponent' => 2
        )
 
 .. php:method:: precision(mixed $number, int $precision = 3)

@@ -57,7 +57,7 @@ traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 Le domaine par défaut est 'default', donc votre dossier "locale"
-devrait ressembler à cela ::
+devrait ressembler à cela::
 
     /app/Locale/eng/LC_MESSAGES/default.po (Anglais)   
     /app/Locale/fra/LC_MESSAGES/default.po (Français)   
@@ -95,7 +95,7 @@ d'une solution différente. Par ex ::
     // Code du fichier App Controller.
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
-        if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
+        if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath)) {
             // utilise /app/views/fra/pages/tos.ctp au lieu de /app/views/pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }
