@@ -27,10 +27,8 @@ champs que vous souhaitez valider::
 
     $validator
         ->validatePresence('title')
+        ->allowEmpty('title', false, 'Please fill this field')
         ->add('title', [
-            'notEmpty' => [
-                'rule' => 'notEmpty'
-            ]
             'length' => [
                 'rule' => ['minLength', 10],
                 'message' => 'Titles need to be at least 10 characters long',
@@ -254,19 +252,13 @@ d'envoyer un email, vous pouvez faire ce qui suit::
             'message' => 'E-mail must be valid'
         ])
         ->validatePresence('name')
-        ->add('name', 'notEmpty', [
-            'rule' => 'notEmpty',
-            'message' => 'We need your name.'
-        ])
+        ->allowEmpty('name', false, 'We need your name.')
         ->validatePresence('comment')
-        ->add('name', 'notEmpty', [
-            'rule' => 'notEmpty',
-            'message' => 'You need to give a comment.'
-        ]);
+        ->allowEmpty('comment', false, 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
     if (!empty($errors)) {
-        // Envoi d'un email.
+        // Send an email.
     }
 
 La méthode ``errors()`` va retourner un tableau non-vide quand il y a des échecs
