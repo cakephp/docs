@@ -953,7 +953,7 @@ Form Element-Specific Methods
  All elements are created under a form for the ``User`` model as in the examples above.
 For this reason, the HTML code generated will contain attributes that reference to the User model.
 Ex: name=data[User][username], id=UserUsername
-    
+
 .. php:method:: label(string $fieldName, string $text, array $options)
 
     Create a label element. ``$fieldName`` is used for generating the
@@ -1057,6 +1057,7 @@ Ex: name=data[User][username], id=UserUsername
     generated. Example:
 
     .. code-block:: html
+
         <textarea name="data[User][notes]" id="UserNotes">
         This text is to be edited.
         </textarea>
@@ -1068,7 +1069,7 @@ Ex: name=data[User][username], id=UserUsername
         textarea should be escaped. Defaults to ``true``.
 
     ::
-        
+
         echo $this->Form->textarea('notes', array('escape' => false);
         // OR....
         echo $this->Form->input(

@@ -115,7 +115,7 @@ three plugins, and not the rest.
 Finally, you can also specify a set of defaults for ``loadAll()`` which will
 apply to every plugin that doesn't have a more specific configuration.
 
-Load the bootstrap file from all plugins, and the routes from the Blog plugin::
+Load the bootstrap file from all plugins, and additionally the routes from the Blog plugin::
 
     Plugin::loadAll([
         ['bootstrap' => true],
@@ -240,13 +240,13 @@ have any problems with using the command line.
 .. warning::
 
     Plugins do not work as namespacing to separate code.
-    Due to PHP lacking namespaces in older versions 
+    Due to PHP lacking namespaces in older versions
     you cannot have the same class,
     or same filename, in your plugins.
     Even if it is two different plugins.
     So use unique classes and filenames, possible prefixing
     the class and filename with the plugin name.
-    
+
 
 Plugin Controllers
 ==================

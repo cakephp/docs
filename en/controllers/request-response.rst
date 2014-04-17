@@ -33,19 +33,19 @@ also access it in Components by using the controller reference. Some of the duti
 Accessing Request Parameters
 ============================
 
-Request exposes several interfaces for accessing request parameters. The first is as object
-properties, the second is array indexes, and the third is through ``$this->request->params``::
+Request exposes several interfaces for accessing request parameters. The first uses object
+properties, the second uses array indexes, and the third uses ``$this->request->params``::
 
     $this->request->controller;
     $this->request['controller'];
     $this->request->params['controller'];
 
-All of the above will both access the same value. Multiple ways of accessing the
-parameters was done to ease migration for existing applications. All
+All of the above will access the same value. Multiple ways of accessing the
+parameters have been provided to ease migration for existing applications. All
 :ref:`route-elements` are accessed through this interface.
 
-In addition to :ref:`route-elements` you also often need access to
-:ref:`passed-arguments`. These are available on the request object as well::
+In addition to :ref:`route-elements`, you also often need access to
+:ref:`passed-arguments`. These are both available on the request object as well::
 
     // Passed arguments
     $this->request->pass;
@@ -56,7 +56,7 @@ Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these
 are also all found in the request parameters:
 
-* ``plugin`` The plugin handling the request, will be null for no plugin.
+* ``plugin`` The plugin handling the request. Will be null when there is no plugin.
 * ``controller`` The controller handling the current request.
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
@@ -69,17 +69,17 @@ are also all found in the request parameters:
 Accessing Querystring Parameters
 ================================
 
-Querystring parameters can be read from using :php:attr:`~Cake\\Network\\Request::$query`::
+Querystring parameters can be read using :php:attr:`~Cake\\Network\\Request::$query`::
 
     // URL is /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-    // You can also access it via array access
+    // You can also access it via an array
     // Note: BC accessor, will be deprecated in future versions
     $this->request['url']['page'];
 
 You can either directly access the query property, or you can use
-:php:meth:`~Cake\\Network\\Request::query()` to read the URL query array in an error free manner.
+:php:meth:`~Cake\\Network\\Request::query()` to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -89,7 +89,7 @@ Accessing POST Data
 ===================
 
 All POST data can be accessed using :php:meth:`Cake\\Network\\Request::data()`. Any form data
-that contains a ``data`` prefix, will have that data prefix removed. For example::
+that contains a ``data`` prefix will have that data prefix removed. For example::
 
     // An input with a name attribute equal to 'MyModel[title]' is accessible at
     $this->request->data('MyModel.title');
@@ -102,8 +102,8 @@ Any keys that do not exist will return ``null``::
 Accessing PUT, PATCH or DELETE Data
 ===================================
 
-When building REST services you often accept request data on ``PUT`` and
-``DELETE`` requests. As of 2.2 any ``application/x-www-form-urlencoded``
+When building REST services, you often accept request data on ``PUT`` and
+``DELETE`` requests. As of 2.2, any ``application/x-www-form-urlencoded``
 request body data will automatically be parsed and set to ``$this->data`` for
 ``PUT`` and ``DELETE`` requests. If you are accepting JSON or XML data, see
 below for how you can access those request bodies.
@@ -126,16 +126,16 @@ acts as a getter/setter for enviroment variables without having to modify global
 Accessing XML or JSON Data
 ==========================
 
-Applications employing :doc:`/development/rest` often exchange data in non
-URL encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Network\\Request::input()`. By providing a decoding function you can
+Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded
+post bodies. You can read input data in any format using
+:php:meth:`~Cake\\Network\\Request::input()`. By providing a decoding function, you can
 receive the content in a deserialized format::
 
     // Get JSON encoded data submitted to a PUT/POST action
     $data = $this->request->input('json_decode');
 
-Since some deserializing methods require additional parameters when being called,
-such as the 'as array' parameter on ``json_decode`` or if you want XML converted
+Some deserializing methods require additional parameters when called,
+such as the 'as array' parameter on ``json_decode``. If you want XML converted
 into a DOMDocument object, :php:meth:`~Cake\\Network\\Request::input()` supports passing
 in additional parameters as well::
 
@@ -165,9 +165,9 @@ You can also easily extend the request detectors that are available, by using
 :php:meth:`Cake\\Network\\Request::addDetector()` to create new kinds of
 detectors. There are four different types of detectors that you can create:
 
-* Environment value comparison - An environment value comparison, compares a
-  value fetched from :php:func:`env()` to a known value the environment value is
-  equality checked against the provided value.
+* Environment value comparison - Compares a
+  value fetched from :php:func:`env()` for equality 
+  with the provided value.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
 * Option based comparison -  Option based comparisons use a list of options to
@@ -214,17 +214,17 @@ have a slightly easier life.
 
 There are several built-in detectors that you can use:
 
-* ``is('get')`` Check to see if the current request is a GET.
-* ``is('put')`` Check to see if the current request is a PUT.
-* ``is('post')`` Check to see if the current request is a POST.
-* ``is('delete')`` Check to see if the current request is a DELETE.
-* ``is('head')`` Check to see if the current request is HEAD.
-* ``is('options')`` Check to see if the current request is OPTIONS.
-* ``is('ajax')`` Check to see of the current request came with
+* ``is('get')`` Check to see whether the current request is a GET.
+* ``is('put')`` Check to see whether the current request is a PUT.
+* ``is('post')`` Check to see whether the current request is a POST.
+* ``is('delete')`` Check to see whether the current request is a DELETE.
+* ``is('head')`` Check to see whether the current request is HEAD.
+* ``is('options')`` Check to see whether the current request is OPTIONS.
+* ``is('ajax')`` Check to see whether the current request came with
   X-Requested-with = XmlHttpRequest.
-* ``is('ssl')`` Check to see if the request is via SSL
-* ``is('flash')`` Check to see if the request has a User-Agent of Flash
-* ``is('mobile')`` Check to see if the request came from a common list
+* ``is('ssl')`` Check to see whether the request is via SSL
+* ``is('flash')`` Check to see whether the request has a User-Agent of Flash
+* ``is('mobile')`` Check to see whether the request came from a common list
   of mobile agents.
 
 Interacting with Other Aspects of the Request
@@ -236,7 +236,7 @@ properties and methods.
 
 * ``$this->request->webroot`` contains the webroot directory.
 * ``$this->request->base`` contains the base path.
-* ``$this->request->here`` contains the full address to the current request
+* ``$this->request->here`` contains the full address to the current request.
 * ``$this->request->query`` contains the query string parameters.
 
 
@@ -269,7 +269,7 @@ Request API
 
 .. php:method:: onlyAllow($methods)
 
-    Set allowed HTTP methods, if not matched will throw MethodNotAllowedException
+    Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
     The 405 response will include the required ``Allow`` header with the passed methods
 
 .. php:method:: referer($local = false)
@@ -283,11 +283,11 @@ Request API
 .. php:method:: header($name)
 
     Allows you to access any of the ``HTTP_*`` headers that were used
-    for the request::
+    for the request. For example::
 
         $this->request->header('User-Agent');
 
-    Would return the user agent used for the request.
+    would return the user agent used for the request.
 
 .. php:method:: input($callback, [$options])
 
@@ -300,8 +300,8 @@ Request API
 
 .. php:method:: data($name)
 
-    Provides dot notation access to request data. Allows for reading and
-    modification of request data, calls can be chained together as well::
+    Provides dot notation access to request data. Allows request data to be read and
+    modified. Calls can be chained together as well::
 
         // Modify some request data, so you can prepopulate some form fields.
         $this->request->data('Post.title', 'New post')
@@ -319,7 +319,7 @@ Request API
 
 .. php:method:: is($type)
 
-    Check whether or not a Request matches a certain criteria. Uses
+    Check whether or not a Request matches a certain criterion. Uses
     the built-in detection rules as well as any additional rules defined
     with :php:meth:`Cake\\Network\\Request::addDetector()`.
 
@@ -330,7 +330,7 @@ Request API
 
 .. php:method:: accepts($type = null)
 
-    Find out which content types the client accepts or check if they accept a
+    Find out which content types the client accepts, or check whether it accepts a
     particular type of content.
 
     Get all types::
@@ -343,14 +343,14 @@ Request API
 
 .. php:method:: acceptLanguage($language = null)
 
-    Get either all the languages accepted by the client,
-    or check if a specific language is accepted.
+    Get all the languages accepted by the client,
+    or check whether a specific language is accepted.
 
     Get the list of accepted languages::
 
         $this->request->acceptLanguage();
 
-    Check if a specific language is accepted::
+    Check whether a specific language is accepted::
 
         $this->request->acceptLanguage('es-es');
 
@@ -399,7 +399,7 @@ of methods previously found on :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
 methods are deprecated in favour of using :php:class:`Cake\\Network\\Response`.
 
-``Response`` provides an interface to wrap the common response related
+``Response`` provides an interface to wrap the common response-related
 tasks such as:
 
 * Sending headers for redirects.
@@ -411,9 +411,8 @@ Changing the Response Class
 ===========================
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
-transparent to use class. If you need to replace it with an application
-specific class, you can override and replace ``Response`` with
-your own class by replacing Response in app/webroot/index.php.
+transparent class. If you need to override it with your own application-specific class, 
+you can replace ``Response`` in ``app/webroot/index.php``. 
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
@@ -425,9 +424,9 @@ out the methods that interact with :php:meth:`~CakeResponse::header()`. See the 
 Dealing with Content Types
 ==========================
 
-You can control the Content-Type of your application's responses with using
+You can control the Content-Type of your application's responses with
 :php:meth:`Cake\\Network\\Response::type()`. If your application needs to deal with
-content types that are not built into Response, you can map those types
+content types that are not built into Response, you can map them
 with ``type()`` as well::
 
     // Add a vCard type
@@ -436,7 +435,7 @@ with ``type()`` as well::
     // Set the response Content-Type to vcard.
     $this->response->type('vcf');
 
-Usually you'll want to map additional content types in your controller's
+Usually, you'll want to map additional content types in your controller's
 :php:meth:`~Controller::beforeFilter()` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
@@ -456,13 +455,13 @@ You can accomplish that by using :php:meth:`Cake\\Network\\Response::file()`::
         return $this->response;
     }
 
-As shown in the above example, you have to pass the file path to the method.
-CakePHP will send proper content type header if it's a known file type listed in
+As shown in the above example, you must pass the file path to the method.
+CakePHP will send a proper content type header if it's a known file type listed in
 `Cake\\Network\\Reponse::$_mimeTypes`. You can add new types prior to calling
 :php:meth:`Cake\\Network\\Response::file()` by using the
 :php:meth:`Cake\\Network\\Response::type()` method.
 
-If you want you can also force a file to be downloaded instead of being displayed in
+If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
 
     $this->response->file(
@@ -473,8 +472,8 @@ the browser by specifying the options::
 Sending a String as File
 ========================
 
-You can respond with a file that does not exist on the disk, for instance with
-a pdf or an ics generated on the fly, and serve the generated string as a file by using::
+You can respond with a file that does not exist on the disk, such as
+a pdf or an ics generated on the fly from a string::
 
     public function sendIcs() {
         $icsString = $this->Calendar->generateIcs();
@@ -510,7 +509,7 @@ can be called with a few different parameter configurations::
     ]);
 
 Setting the same :php:meth:`~CakeResponse::header()` multiple times will result in overwriting the previous
-values, just like regular header calls. Headers are not sent when
+values, just as regular header calls. Headers are not sent when
 :php:meth:`Cake\\Network\\Response::header()` is called; instead they are buffered
 until the response is actually sent.
 
@@ -553,17 +552,17 @@ Cache-Control's ``public`` directive is set as well.
 Fine Tuning HTTP Cache
 ======================
 
-One of the best and easiest ways of speeding up your application is using HTTP
-cache. Under this caching model you are only required to help clients decide if
+One of the best and easiest ways of speeding up your application is to use HTTP
+cache. Under this caching model, you are only required to help clients decide if
 they should use a cached copy of the response by setting a few headers such as
-modified time, response entity tag and others.
+modified time and response entity tag.
 
-Opposed to having to code the logic for caching and for invalidating (refreshing)
+Rather than forcing you to code the logic for caching and for invalidating (refreshing)
 it once the data has changed, HTTP uses two models, expiration and validation,
-which usually are a lot simpler than having to manage the cache yourself.
+which usually are much simpler to use.
 
-Apart from using :php:meth:`Cake\\Network\\Response::cache()` you can also use many other
-methods to fine tune HTTP cache headers to take advantage of browser or reverse
+Apart from using :php:meth:`Cake\\Network\\Response::cache()`, you can also use many other
+methods to fine-tune HTTP cache headers to take advantage of browser or reverse
 proxy caching.
 
 The Cache Control Header
@@ -576,15 +575,15 @@ that can change the way browsers or proxies use the cached content. A
     Cache-Control: private, max-age=3600, must-revalidate
 
 ``Response`` class helps you set this header with some utility methods that
-will produce a final valid ``Cache-Control`` header. First of them is :php:meth:`Cake\\Network\\Response::sharable()`
-method, which indicates whether a response in to be considered sharable across
-different users or clients or users. This method actually controls the ``public``
+will produce a final valid ``Cache-Control`` header. The first is the :php:meth:`Cake\\Network\\Response::sharable()`
+method, which indicates whether a response is to be considered sharable across
+different users or clients. This method actually controls the ``public``
 or ``private`` part of this header. Setting a response as private indicates that
 all or part of it is intended for a single user. To take advantage of shared
-caches it is needed to set the control directive as public
+caches, the control directive must be set as public.
 
-Second parameter of this method is used to specify a ``max-age`` for the cache,
-which is the number of seconds, after which the response is no longer considered
+The second parameter of this method is used to specify a ``max-age`` for the cache,
+which is the number of seconds after which the response is no longer considered
 fresh::
 
     public function view() {
@@ -627,12 +626,12 @@ whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.
 
 The :php:meth:`~CakeResponse::etag()` method (called entity tag) is a string that uniquely identifies the
-requested resource. It is very much like a checksum of a file; caching
-will compare checksums to tell whether they match or not.
+requested resource, as a checksum does for a file, in order to determine whether
+it matches a cached resource.
 
-To take advantage of this header you have to either call the
-:php:meth:`Cake\\Network\\Response::checkNotModified()` method manually or to have the
-:php:class:`RequestHandlerComponent` included in your controller::
+To take advantage of this header, you must either call the
+:php:meth:`Cake\\Network\\Response::checkNotModified()` method manually or include the
+:php:class:`RequestHandlerComponent` in your controller::
 
     public function index() {
         $articles = $this->Article->find('all');
@@ -648,12 +647,12 @@ The Last Modified Header
 
 Also, under the HTTP cache validation model, you can set the ``Last-Modified``
 header to indicate the date and time at which the resource was modified for the
-last time. Setting this header helps CakePHP to tell caching clients whether
-the response was modified or not based on the their cache.
+last time. Setting this header helps CakePHP tell caching clients whether
+the response was modified or not based on their cache.
 
-To actually get advantage of using this header you have to either call manually
-:php:meth:`Cake\\Network\\Response::checkNotModified()` method or have the
-:php:class:`RequestHandlerComponent` included in your controller::
+To take advantage of this header, you must either call the
+:php:meth:`Cake\\Network\\Response::checkNotModified()` method or include the
+:php:class:`RequestHandlerComponent` in your controller::
 
     public function view() {
         $article = $this->Article->find('first');
@@ -667,7 +666,7 @@ To actually get advantage of using this header you have to either call manually
 The Vary Header
 ---------------
 
-In some cases you might want to serve different content using the same URL.
+In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
 HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
 
@@ -683,7 +682,7 @@ Response and Testing
 Probably one of the biggest wins from ``Response`` comes from how it makes
 testing controllers and components easier. Instead of having methods spread across
 several objects, you only have to mock a single object, since controllers and
-components delegate to ``Response``. This helps you to get closer to a 'unit'
+components delegate to ``Response``. This helps you to get closer to a unit
 test and makes testing controllers easier::
 
     public function testSomething() {
@@ -693,7 +692,7 @@ test and makes testing controllers easier::
     }
 
 Additionally, you can run tests from the command line more easily, as you can use
-mocks to avoid the 'headers sent' errors, which can come up from trying to set
+mocks to avoid the 'headers sent' errors that can occur when trying to set
 headers in CLI.
 
 
@@ -743,7 +742,7 @@ Response API
 
 .. php:method:: expires($time = null)
 
-    Allows to set the ``Expires`` header to a specific date.
+    Allows the ``Expires`` header to be set to a specific date.
 
 .. php:method:: etag($tag = null, $weak = false)
 
@@ -757,7 +756,7 @@ Response API
 .. php:method:: checkNotModified(Request $request)
 
     Compares the cache headers for the request object with the cache header from
-    the response and determines if it can still be considered fresh. If so,
+    the response and determines whether it can still be considered fresh. If so,
     deletes the response content, and sends the `304 Not Modified` header.
 
 .. php:method:: compress()
@@ -774,13 +773,13 @@ Response API
 
 .. php:method:: body($content = null)
 
-    Set the content body of the response.
+    Sets the content body of the response.
 
 .. php:method:: send()
 
     Once you are done creating a response, calling :php:meth:`~CakeResponse::send()` will send all
     the set headers as well as the body. This is done automatically at the
-    end of each request by :php:class:`Dispatcher`
+    end of each request by :php:class:`Dispatcher`.
 
 .. php:method:: file($path, $options = [])
 

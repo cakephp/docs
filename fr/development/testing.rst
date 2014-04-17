@@ -1106,7 +1106,7 @@ dans notre component. Nous créons le fichier
     App::uses('PagematronComponent', 'Controller/Component');
 
     // Un faux controller pour tester against
-    class TestPagematronController extends Controller {
+    class PagematronControllerTest extends Controller {
         public $paginate = null;
     }
 
@@ -1121,7 +1121,7 @@ dans notre component. Nous créons le fichier
             $this->PagematronComponent = new PagematronComponent($Collection);
             $CakeRequest = new CakeRequest();
             $CakeResponse = new CakeResponse();
-            $this->Controller = new TestPagematronController($CakeRequest, $CakeResponse);
+            $this->Controller = new PagematronControllerTest($CakeRequest, $CakeResponse);
             $this->PagematronComponent->startup($this->Controller);
         }
 
