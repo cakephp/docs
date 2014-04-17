@@ -199,7 +199,7 @@ There are spaces on both side of the equals sign.
 Typehinting
 -----------
 
-Arguments that expect objects or arrays can be typehinted.
+Arguments that expect objects, arrays or callbacks (callable) can be typehinted.
 We only typehint public methods, though, as typehinting is not cost-free::
 
     /**
@@ -207,12 +207,14 @@ We only typehint public methods, though, as typehinting is not cost-free::
      *
      * @param Model $Model The model to use.
      * @param array $array Some array value.
+     * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, $boolean) {
+    public function foo(Model $Model, array $array, callable $callback, $boolean) {
     }
 
-Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+Here ``$Model`` must be an instance of ``Model``, ``$array`` must be an ``array`` and
+``$callback`` must be of type ``callable`` (a valid callback).
 
 Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
 you should not typehint as ``array`` accepts only the primitive type::
@@ -326,7 +328,7 @@ single space, and the php closing tag::
     <td><?= $name ?></td>
 
 As of PHP 5.4 the short echo tag (``<?=``) is no longer to be consider a 'short tag'
-is always available regardless of the ``short_open_tag`` ini directive.  
+is always available regardless of the ``short_open_tag`` ini directive.
 
 Naming Convention
 =================
