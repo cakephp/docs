@@ -213,7 +213,8 @@ We only typehint public methods, though, as typehinting is not cost-free::
     public function foo(Model $Model, array $array, callable $callback, $boolean) {
     }
 
-Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+Here ``$Model`` must be an instance of ``Model``, ``$array`` must be an ``array`` and
+``$callback`` must be of type ``callable`` (a valid callback).
 
 Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
 you should not typehint as ``array`` accepts only the primitive type::
