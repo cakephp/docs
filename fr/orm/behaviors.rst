@@ -175,7 +175,7 @@ facilement récupérer les articles par leur slug. Les méthodes find de behavio
 utilisent les mêmes conventions que les :ref:`custom-find-methods`. Notre
 méthode ``find('slug')`` ressemblerait à ceci::
 
-    public function findSlug(Query $query, array $options = []) {
+    public function findSlug(Query $query, array $options) {
         return $query->where(['slug' => $options['slug']]);
     }
 

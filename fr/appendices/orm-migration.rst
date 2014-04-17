@@ -244,11 +244,11 @@ personnalisées dans 3.0::
 
     class ArticlesTable {
 
-        public function findPopular($query, $options = []) {
+        public function findPopular(Query $query, array $options) {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites($query, $options = []) {
+        public function findFavorites(Query $query, array $options) {
             $for = $options['for'];
             return $query->matching('Users.Favorites' => function($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
