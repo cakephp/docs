@@ -128,7 +128,8 @@ interesting let's add another command that does something::
         }
 
         public function hey_there() {
-            $this->out('Hey there ' . $this->args[0]);
+            $name = !empty($this->args[0]) : $this->args[0] : 'Anonymous';
+            $this->out('Hey there ' . $name);
         }
     }
 
@@ -154,9 +155,9 @@ properties attached to your shell::
 
     namespace App\Console\Command;
 
-    use Cake\Console\Shell;
+    use App\Console\Command\AppShell;
 
-    class UserShell extends Shell {
+    class UserShell extends AppShell {
 
         public function initialize() {
             parent::initialize();
@@ -164,6 +165,9 @@ properties attached to your shell::
         }
 
         public function show() {
+            if (empty($this->args[0])) {
+                return $this->error('Please enter a username.');
+            }
             $user = $this->Users->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
