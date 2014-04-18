@@ -128,84 +128,6 @@ Cache.check
     When using the FileEngine you might need to use the ``mask`` option to
     ensure cache files are made with the correct permissions.
 
-Creating a Storage Engine for Cache
-===================================
-
-You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
-as in plugins using ``$plugin\Cache\Engine``. App/plugin cache engines can
-also override the core engines. Cache adapters must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``App/Cache/Engine/MyCustomCacheEngine.php``
-as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
-
-    Cache::config('custom', array(
-        'className' => 'CachePack.MyCustomCache',
-        // ...
-    ));
-
-Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which defines
-a number of abstract methods as well as provides a few initialization
-methods.
-
-The required API for a CacheEngine is
-
-.. php:class:: CacheEngine
-
-    The base class for all cache engines used with Cache.
-
-.. php:method:: write($key, $value, $config = 'default')
-
-    :return: boolean for success.
-
-    Write value for a key into cache, optional string $config
-    specifies configuration name to write to.
-
-.. php:method:: read($key)
-
-    :return: The cached value or false for failure.
-
-    Read a key from the cache. Return false to indicate
-    the entry has expired or does not exist.
-
-.. php:method:: delete($key)
-
-    :return: Boolean true on success.
-
-    Delete a key from the cache. Return false to indicate that
-    the entry did not exist or could not be deleted.
-
-.. php:method:: clear($check)
-
-    :return: Boolean true on success.
-
-    Delete all keys from the cache. If $check is true, you should
-    validate that each value is actually expired.
-
-.. php:method:: clearGroup($group)
-
-    :return: Boolean true on success.
-
-    Delete all keys from the cache belonging to the same group.
-
-.. php:method:: decrement($key, $offset = 1)
-
-    :return: Boolean true on success.
-
-    Decrement a number under the key and return decremented value
-
-.. php:method:: increment($key, $offset = 1)
-
-    :return: Boolean true on success.
-
-    Increment a number under the key and return incremented value
-
-.. php:method:: gc()
-
-    Not required, but used to do clean up when resources expire.
-    FileEngine uses this to delete files containing expired content.
-
 Using Cache to Store Common Query Results
 =========================================
 
@@ -470,6 +392,85 @@ Cache API
                 });
             }
         }
+
+Creating a Storage Engine for Cache
+===================================
+
+You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
+as in plugins using ``$plugin\Cache\Engine``. App/plugin cache engines can
+also override the core engines. Cache adapters must be in a cache
+directory. If you had a cache engine named ``MyCustomCacheEngine``
+it would be placed in either ``App/Cache/Engine/MyCustomCacheEngine.php``
+as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
+part of a plugin. Cache configs from plugins need to use the plugin
+dot syntax.::
+
+    Cache::config('custom', array(
+        'className' => 'CachePack.MyCustomCache',
+        // ...
+    ));
+
+Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which defines
+a number of abstract methods as well as provides a few initialization
+methods.
+
+The required API for a CacheEngine is
+
+.. php:class:: CacheEngine
+
+    The base class for all cache engines used with Cache.
+
+.. php:method:: write($key, $value, $config = 'default')
+
+    :return: boolean for success.
+
+    Write value for a key into cache, optional string $config
+    specifies configuration name to write to.
+
+.. php:method:: read($key)
+
+    :return: The cached value or false for failure.
+
+    Read a key from the cache. Return false to indicate
+    the entry has expired or does not exist.
+
+.. php:method:: delete($key)
+
+    :return: Boolean true on success.
+
+    Delete a key from the cache. Return false to indicate that
+    the entry did not exist or could not be deleted.
+
+.. php:method:: clear($check)
+
+    :return: Boolean true on success.
+
+    Delete all keys from the cache. If $check is true, you should
+    validate that each value is actually expired.
+
+.. php:method:: clearGroup($group)
+
+    :return: Boolean true on success.
+
+    Delete all keys from the cache belonging to the same group.
+
+.. php:method:: decrement($key, $offset = 1)
+
+    :return: Boolean true on success.
+
+    Decrement a number under the key and return decremented value
+
+.. php:method:: increment($key, $offset = 1)
+
+    :return: Boolean true on success.
+
+    Increment a number under the key and return incremented value
+
+.. php:method:: gc()
+
+    Not required, but used to do clean up when resources expire.
+    FileEngine uses this to delete files containing expired content.
+
 
 .. meta::
     :title lang=en: Caching
