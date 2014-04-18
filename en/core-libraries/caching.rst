@@ -158,23 +158,43 @@ model finds::
 Using ``Cache::write()`` and ``Cache::read()`` to easily reduce the number
 of trips made to the database to fetch posts.
 
+Writing Multiple Keys at Once
+-----------------------------
+
+.. php:staticmethod:: writeMany($data, $config = 'default')
+
+You may find yourself needing to write multiple cache keys at once. While you
+can use multiple calls to ``write()``, ``writeMany()`` allows CakePHP to use
+more efficient storage API's where available. For example using ``writeMany()``
+save multiple network connections when using Memcached::
+
+    Cache::writeMany([
+        'article-' . $slug => $article,
+        'article-' . $slug . '-comments' => $comments
+    ]);
+
+Read Through Caching
+--------------------
+
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-    Provides an easy way to do read-through caching. If the cache key exists
-    it will be returned. If the key does not exist, the callable will be invoked
-    and the results stored in the cache at the provided key.
+Cache makes it easy to do read-through caching. If the named cache key exists,
+it will be returned. If the key does not exist, the callable will be invoked
+and the results stored in the cache at the provided key.
 
-    For example, you often want to cache query results. You could use
-    ``remember()`` to make this simple. Assuming you were using PHP5.3 or more::
+For example, you often want to cache remote service call results. You could use
+``remember()`` to make this simple::
 
-        class Articles extends AppModel {
-            function all() {
-                $model = $this;
-                return Cache::remember('all_articles', function() use ($model){
-                    return $model->find('all');
-                });
-            }
+    class IssueService  {
+
+        function allIssues($repo) {
+            return Cache::remember($repo . '-issues', function() use ($repo) {
+                return $this->fetchAll($repo);
+            });
         }
+
+    }
+
 
 Reading From a Cache
 ====================
@@ -204,6 +224,22 @@ For example::
     Cache::write('cloud', $cloud);
     return $cloud;
 
+Reading Multiple Keys at Once
+-----------------------------
+
+.. php:staticmethod:: readMany($keys, $config = 'default')
+
+After you've written multiple keys at once, you'll probably want to read them as
+well. While you could use multiple calls to ``read()``, ``readMany()`` allows CakePHP to use
+more efficient storage API's where available. For example using ``readMany()``
+save multiple network connections when using Memcached::
+
+    Cache::readMany([
+        'article-' . $slug,
+        'article-' . $slug . '-comments'
+    ]);
+
+
 Deleting From a Cache
 =====================
 
@@ -214,6 +250,22 @@ object from the store::
 
     // Remove a key
     Cache::delete('my_key');
+
+Deleting Multiple Keys at Once
+------------------------------
+
+.. php:staticmethod:: deleteMany($keys, $config = 'default')
+
+After you've written multiple keys at once, you may want to delete them.  While
+you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to use
+more efficient storage API's where available. For example using ``deleteMany()``
+save multiple network connections when using Memcached::
+
+    Cache::deleteMany([
+        'article-' . $slug,
+        'article-' . $slug . '-comments'
+    ]);
+
 
 Clearing Cached Data
 ====================
@@ -359,10 +411,6 @@ Once disabled, you can use ``enable()`` to re-enable caching::
 .. php:staticmethod:: enabled()
 
 If you need to check on the state of Cache, you can use ``enabled()``.
-
-.. versionadded:: 3.0
-
-    ``enable()``, ``disable()`` and ``enabled()`` were added in 3.0.
 
 
 Creating a Storage Engine for Cache
