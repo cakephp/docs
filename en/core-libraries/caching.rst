@@ -30,9 +30,6 @@ to implement your own caching systems. The built-in caching engines are:
   optimized for Windows and IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
-* ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
-  extension. Memcache provides a very fast cache system that can be
-  distributed across many servers, and provides atomic operations.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension. It also interfaces with memcache but provides better performance.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
@@ -58,7 +55,7 @@ two cache configurations internally.  ``_cake_core_`` is used for storing file
 maps, and parsed results of
 :doc:`/core-libraries/internationalization-and-localization` files.
 ``_cake_model_``, is used to store schema descriptions for your applications
-models. If you are using APC or Memcache you should make sure to set unique keys
+models. If you are using APC or Memcached you should make sure to set unique keys
 for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
@@ -411,7 +408,7 @@ Cache API
 .. php:staticmethod:: clear($check, $config = 'default')
 
     Destroy all cached values for a cache configuration. In engines like Apc,
-    Memcache and Wincache, the cache configuration's prefix is used to remove
+    Memcached and Wincache, the cache configuration's prefix is used to remove
     cache entries. Make sure that different cache configurations have different
     prefixes.
 
