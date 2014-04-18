@@ -230,7 +230,7 @@ You could improve the above code by moving the cache reading logic into
 a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
-As of 2.5 you can accomplish the above much more simply using
+You can accomplish the above much more simply using
 :php:meth:`Cache::remember()`. Using the new method the above would look like::
 
     class Post extends AppModel {
@@ -257,7 +257,8 @@ contention, and ability for two users to simultaneously lower the value by one,
 resulting in an incorrect value.
 
 After setting an integer value you can manipulate it using
-:php:meth:`Cake\\Cache\\Cache::increment()` and :php:meth:`Cake\\Cache\\Cache::decrement()`::
+:php:meth:`Cake\\Cache\\Cache::increment()` and
+:php:meth:`Cake\\Cache\\Cache::decrement()`::
 
     Cache::write('initial_count', 10);
 
@@ -270,7 +271,7 @@ After setting an integer value you can manipulate it using
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APC, Redis or Memcached instead.
+    APC, Wincache, Redis or Memcached instead.
 
 
 Using Groups
@@ -281,45 +282,42 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration::
 
-    Cache::config('site_home', array(
+    Cache::config('site_home', [
         'className' => 'Redis',
         'duration' => '+999 days',
-        'groups' => array('comment', 'post')
-    ));
+        'groups' => ['comment', 'article']
+    ]);
 
 Let's say you want to store the HTML generated for your homepage in cache, but
 would also want to automatically invalidate this cache every time a comment or
-post is added to your database. By adding the groups ``comment`` and ``post``,
+post is added to your database. By adding the groups ``comment`` and ``article``,
 we have effectively tagged any key stored into this cache configuration with
 both group names.
 
 For instance, whenever a new post is added, we could tell the Cache engine to
-remove all entries associated to the ``post`` group::
+remove all entries associated to the ``article`` group::
 
-    // Model/Post.php
-
-    public function afterSave($created, $options = array()) {
-        if ($created) {
-            Cache::clearGroup('post', 'site_home');
+    // Model/Table/Articles.php
+    public function afterSave($entity, $options = []) {
+        if ($entity->isNew()) {
+            Cache::clearGroup('article', 'site_home');
         }
     }
-
-.. versionadded:: 2.4
 
 :php:func:`Cache::groupConfigs()` can be used to retrieve mapping between
 group and configurations, i.e.: having the same group::
 
-    // Model/Post.php
+    // Model/Table/Articles.php
 
     /**
      * A variation of previous example that clears all Cache configurations
      * having the same group
      */
-    public function afterSave($created, $options = array()) {
-        if ($created) {
-            $configs = Cache::groupConfigs('post');
-            foreach ($configs['post'] as $config) {
-                Cache::clearGroup('post', $config);
+    public function afterSave($entity, $options = []) {
+        if ($entity->isNew()) {
+            $configs = Cache::groupConfigs('article');
+            foreach ($configs['article'] as $config) {
+                Cache::clearGroup('article', $config);
             }
         }
     }
