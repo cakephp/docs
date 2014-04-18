@@ -1039,6 +1039,8 @@ While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
+.. _caching-query-results:
+
 Caching Loaded Results
 ----------------------
 
