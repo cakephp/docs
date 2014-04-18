@@ -102,8 +102,8 @@ Using SQL Functions
 
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
-function you are want. For example ``concat`` is implemented differently on
-MySQL and Postgres, so using the abstraction allows your code to remain
+function you are want. For example ``concat`` is implemented differently in
+MySQL, Postgres and SQLServer. Using the abstraction allows your code to be
 portable::
 
     // Results in SELECT COUNT(*) count FROM ...
