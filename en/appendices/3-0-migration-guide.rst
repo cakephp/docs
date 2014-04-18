@@ -114,6 +114,8 @@ Cache
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
 * All ``CacheEngine`` subclasses now implement a ``config()`` method.
+* :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+  and :php:meth:`Cake\\Cache\\Cache::writeMany()` were added.
 
 All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
 configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
