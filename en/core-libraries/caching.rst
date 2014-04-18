@@ -168,10 +168,13 @@ can use multiple calls to ``write()``, ``writeMany()`` allows CakePHP to use
 more efficient storage API's where available. For example using ``writeMany()``
 save multiple network connections when using Memcached::
 
-    Cache::writeMany([
+    $result = Cache::writeMany([
         'article-' . $slug => $article,
         'article-' . $slug . '-comments' => $comments
     ]);
+
+    // $result will contain
+    ['article-first-post' => true, 'article-first-post-comments' => true]
 
 Read Through Caching
 --------------------
@@ -234,10 +237,12 @@ well. While you could use multiple calls to ``read()``, ``readMany()`` allows Ca
 more efficient storage API's where available. For example using ``readMany()``
 save multiple network connections when using Memcached::
 
-    Cache::readMany([
+    $result = Cache::readMany([
         'article-' . $slug,
         'article-' . $slug . '-comments'
     ]);
+    // $result will contain
+    ['article-first-post' => '...', 'article-first-post-comments' => '...']
 
 
 Deleting From a Cache
@@ -261,10 +266,12 @@ you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to
 more efficient storage API's where available. For example using ``deleteMany()``
 save multiple network connections when using Memcached::
 
-    Cache::deleteMany([
+    $result = Cache::deleteMany([
         'article-' . $slug,
         'article-' . $slug . '-comments'
     ]);
+    // $result will contain
+    ['article-first-post' => true, 'article-first-post-comments' => true]
 
 
 Clearing Cached Data
