@@ -9,13 +9,6 @@ to format currency, percentages, data sizes, format numbers to
 specific precisions and also to give you more flexibility with
 formatting numbers.
 
-.. versionchanged:: 2.1
-   ``NumberHelper`` have been refactored into :php:class:`CakeNumber` class to
-   allow easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the ``NumberHelper``
-   class and you can call it as you would call a normal helper method:
-   ``$this->Number->method($args);``.
-
 .. include:: ../../core-utility-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber

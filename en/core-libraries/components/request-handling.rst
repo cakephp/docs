@@ -259,8 +259,6 @@ application.
 Taking Advantage of HTTP Cache Validation
 =========================================
 
-.. versionadded:: 2.1
-
 The HTTP cache validation model is one of the processes used for cache
 gateways, also known as reverse proxies, to determine if they can serve a
 stored copy of a response to the client. Under this model, you mostly save
@@ -286,8 +284,6 @@ setting to false::
 
 Using custom ViewClasses
 ========================
-
-.. versionadded:: 2.3
 
 When using JsonView/XmlView you might want to override the default serialization
 with a custom View class, or add View classes for other types.

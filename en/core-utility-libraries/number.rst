@@ -20,9 +20,6 @@ use the ``CakeNumber`` class::
         }
     }
 
-.. versionadded:: 2.1
-    ``CakeNumber`` has been factored out from :php:class:`NumberHelper`.
-
 .. start-cakenumber
 
 All of these functions return the formatted number; They do not
@@ -114,17 +111,12 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
 
-    .. versionchanged:: 2.4
-        The ``fractionExponent`` option was added.
-
 .. php:method:: defaultCurrency(string $currency)
 
     :param string $currency: Set a known currency for :php:meth:`CakeNumber::currency()`.
 
     Setter/getter for default currency. This removes the need always passing the
     currency to :php:meth:`CakeNumber::currency()` and change all currency outputs by setting other default.
-
-    .. versionadded:: 2.3 This method was added in 2.3
 
 .. php:method:: addFormat(string $formatName, array $options)
 
@@ -217,18 +209,12 @@ automatically echo the output into the view.
             'multiply' => true
         ));
 
-    .. versionadded:: 2.4
-        The ``$options`` argument with the ``multiply`` option was added.
-
 .. php:method:: fromReadableSize(string $size, $default)
 
     :param string $size: The formatted human readable value.
 
     This method unformats a number from a human readable byte size
     to an integer number of bytes.
-
-    .. versionadded:: 2.3
-        This method was added in 2.3
 
 .. php:method:: toReadableSize(string $dataSize)
 
@@ -353,9 +339,6 @@ automatically echo the output into the view.
             'thousands' => ','
         ));
         // output '+123,456.79'
-
-    .. versionadded:: 2.3
-        This method was added in 2.3
 
 .. end-cakenumber
 

@@ -3,8 +3,6 @@ Hash
 
 .. php:class:: Hash
 
-.. versionadded:: 2.2
-
 Array management, if done right, can be a very powerful and useful
 tool for building smarter, more optimized code. CakePHP offers a
 very useful set of static utilities in the Hash class that allow you
@@ -41,8 +39,8 @@ Expression Types
 +--------------------------------+--------------------------------------------+
 
 All expression elements are supported by all methods. In addition to expression
-elements, you can use attribute matching with certain methods. They are ``extract()``, 
-``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
+elements, you can use attribute matching with certain methods. They are ``extract()``,
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()``, ``insert()``, ``remove()`` and ``nest()``.
 
 Attribute Matching Types
@@ -70,9 +68,6 @@ Attribute Matching Types
 | ``[text=/.../]``               | Match elements that have values matching   |
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
-
-.. versionchanged:: 2.5
-    Matcher support was added to ``insert()`` and ``remove()``.
 
 .. php:staticmethod:: get(array $data, $path)
 
@@ -127,9 +122,6 @@ Attribute Matching Types
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
-    .. versionchanged:: 2.5
-        As of 2.5.0 attribute matching expressions work with insert().
-
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
@@ -155,8 +147,6 @@ Attribute Matching Types
 
     Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
 
-    .. versionchanged:: 2.5
-        As of 2.5.0 attribute matching expressions work with remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 

@@ -551,8 +551,6 @@ File API
 
     Replaces text in a file. Returns false on failure and true on success.
 
-    .. versionadded::
-        2.5 ``File::replaceText()``
 
 .. todo::
 

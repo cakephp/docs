@@ -200,9 +200,6 @@ Context factory functions are where you can add logic for checking the form
 options for the correct type of entity. If matching input data is found you can
 return an object. If there is no match return null.
 
-    .. versionchanged:: 2.5
-        The ``$secureAttributes`` parameter was added in 2.5.
-
 .. _automagic-form-elements:
 
 Creating Form Inputs

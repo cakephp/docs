@@ -1,8 +1,6 @@
 Completion Shell
 ################
 
-.. versionadded:: 2.5
-
 Working with the console gives the developer a lot of possibilities but having
 to completely know and write those commands can be tedious. Especially when
 developing new shells where the commands differ per minute iteration. The

@@ -30,7 +30,7 @@ is also supported. To install PHPUnit run the following::
 .. note::
 
     PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-    
+
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
@@ -587,8 +587,7 @@ fixture name::
 In the above example, both fixtures would be loaded from
 ``App/Test/Fixture/blog/``.
 
-.. versionchanged:: 2.5
-    As of 2.5.0 you can load fixtures in subdirectories.
+You can also load fixtures from subdirectories.
 
 Testing Models
 ==============
@@ -715,7 +714,7 @@ Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -801,7 +800,7 @@ normal. You should always return after calling ``redirect`` to prevent unwanted
 code from executing::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {

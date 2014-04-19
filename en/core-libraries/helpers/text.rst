@@ -9,13 +9,6 @@ creating excerpts of text around chosen words or phrases,
 highlighting key words in blocks of text, and to gracefully
 truncating long stretches of text.
 
-.. versionchanged:: 2.1
-   Several of ``TextHelper`` methods have been moved into :php:class:`String`
-   class to allow easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the `TextHelper`
-   class and you can call it as you would call a normal helper method:
-   ``$this->Text->method($args);``.
-
 .. php:method:: autoLinkEmails(string $text, array $options=array())
 
     :param string $text: The text to convert.
@@ -34,9 +27,8 @@ truncating long stretches of text.
         For more information regarding our world-famous pastries and desserts,
         contact <a href="mailto:info@example.com">info@example.com</a>
 
-    .. versionchanged:: 2.1
-        In 2.1 this method automatically escapes its input. Use the ``escape``
-        option to disable this if necessary.
+    This method automatically escapes its input. Use the ``escape``
+    option to disable this if necessary.
 
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
@@ -47,9 +39,8 @@ truncating long stretches of text.
     strings that start with https, http, ftp, or nntp and links them
     appropriately.
 
-    .. versionchanged:: 2.1
-        In 2.1 this method automatically escapes its input. Use the ``escape``
-        option to disable this if necessary.
+    This method automatically escapes its input. Use the ``escape``
+    option to disable this if necessary.
 
 .. php:method:: autoLink(string $text, array $htmlOptions=array())
 
@@ -60,9 +51,8 @@ truncating long stretches of text.
     ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
     are linked appropriately given the supplied ``$htmlOptions``.
 
-    .. versionchanged:: 2.1
-        In 2.1 this method automatically escapes its input. Use the ``escape``
-        option to disable this if necessary.
+    This method automatically escapes its input. Use the ``escape``
+    option to disable this if necessary.
 
 .. php:method:: autoParagraph(string $text)
 
@@ -82,8 +72,6 @@ truncating long stretches of text.
         <p>For more information<br />
         regarding our world-famous pastries and desserts.<p>
         <p>contact info@example.com</p>
-
-    .. versionadded:: 2.4
 
 .. include:: ../../core-utility-libraries/string.rst
     :start-after: start-string
