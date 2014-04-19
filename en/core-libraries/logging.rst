@@ -101,9 +101,7 @@ CakePHP requires that all logging adapters implement
 
 .. _file-log:
 
-.. versionadded:: 2.4
-
-As of 2.4 ``FileLog`` engine takes a few new options:
+``FileLog`` engine takes the following options:
 
 * ``size`` Used to implement basic log file rotation. If log file size
   reaches specified size the existing file is renamed by appending timestamp
@@ -116,11 +114,7 @@ As of 2.4 ``FileLog`` engine takes a few new options:
 
 .. warning::
 
-    Prior to 2.4 you had to include the suffix ``Log`` in your configuration
-    (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
-    If you have been using a Log engine like ```DatabaseLogger`` that does not follow
-    the convention to use a suffix ``Log`` for your class name you have to adjust your
-    class name to ``DatabaseLog``. You should also avoid class names like ``SomeLogLog``
+    Engines have the suffix ``Log``. You should avoid class names like ``SomeLogLog``
     which include the suffix twice at the end.
 
 .. note::
@@ -128,7 +122,7 @@ As of 2.4 ``FileLog`` engine takes a few new options:
     You should configure loggers during bootstrapping. ``app/Config/app.php`` is the
     conventional place to configure log adapters.
 
-    Also new in 2.4: In debug mode missing directories will now be automatically created to avoid unnecessary
+    In debug mode missing directories will be automatically created to avoid unnecessary
     errors thrown when using the FileEngine.
 
 Error and Exception Logging
@@ -182,8 +176,6 @@ custom paths to be used::
 
 Logging to Syslog
 =================
-
-.. versionadded:: 2.4
 
 In production environments it is highly recommended that you setup your system to
 use syslog instead of the files logger. This will perform much better as any

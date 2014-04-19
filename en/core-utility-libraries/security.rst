@@ -33,9 +33,6 @@ Security API
     Instead you should use the one way hashing methods provided by
     :php:meth:`~Security::hash()`
 
-    .. versionadded:: 2.2
-        ``Security::rijndael()`` was added in 2.2.
-
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 
     :param string $plain: The value to encrypt.
@@ -57,8 +54,6 @@ Security API
 
     Encrypted values can be decrypted using :php:meth:`Security::decrypt()`.
 
-    .. versionadded:: 2.5
-
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
     :param string $cipher: The ciphertext to decrypt.
@@ -78,8 +73,6 @@ Security API
 
     If the value cannot be decrypted due to changes in the key or HMAC salt
     ``false`` will be returned.
-
-    .. versionadded:: 2.5
 
 .. php:staticmethod:: generateAuthKey( )
 
@@ -122,9 +115,6 @@ Security API
     provided as the ``$salt`` parameter. This allows bcrypt to reuse the same
     cost and salt values, allowing the generated hash to end up with the same
     resulting hash given the same input value.
-
-    .. versionchanged:: 2.3
-        Support for bcrypt was added in 2.3
 
 
 .. php:staticmethod:: inactiveMins( )

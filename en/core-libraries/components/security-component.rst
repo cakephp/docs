@@ -217,8 +217,6 @@ You may "unlock" these actions by listing them in ``$this->Security->unlockedAct
 ``beforeFilter``. The ``unlockedActions`` property will **not** effect other
 features of ``SecurityComponent``.
 
-.. versionadded:: 2.3
-
 .. meta::
     :title lang=en: Security
     :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions

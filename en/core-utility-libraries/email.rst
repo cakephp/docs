@@ -383,8 +383,6 @@ necessary when dealing with some Japanese ISP's::
     // to non-conformant addresses.
     $email->emailPattern($newPattern);
 
-.. versionadded:: 2.4
-
 
 Sending Messages Quickly
 ========================
@@ -421,9 +419,6 @@ Check the list of :ref:`configurations <email-configurations>` to see all accept
 
 Sending Emails from CLI
 ========================
-
-.. versionchanged:: 2.2
-    The ``domain()`` method was added in 2.2
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the

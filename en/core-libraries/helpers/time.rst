@@ -10,13 +10,6 @@ Time Helper has two main tasks that it can perform:
 #. It can format time strings.
 #. It can test time (but cannot bend time, sorry).
 
-.. versionchanged:: 2.1
-   ``TimeHelper`` has been refactored into the :php:class:`CakeTime` class to allow
-   easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the `TimeHelper`
-   class and you can call it as you would call a normal helper method:
-   ``$this->Time->method($args);``.
-
 Using the Helper
 ================
 

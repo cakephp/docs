@@ -114,10 +114,6 @@ Accepted keys for ``$options``:
 * ``direction`` The default direction to use when this link isn't active.
 * ``lock`` Lock direction. Will only use the default direction then, defaults to false.
 
-  .. versionadded:: 2.5
-    You can now set the lock option to true in order to lock the sorting direction into the
-    specified direction.
-
 Assuming you are paginating some posts, and are on page one::
 
     echo $this->Paginator->sort('user_id');

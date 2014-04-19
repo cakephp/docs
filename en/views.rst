@@ -59,8 +59,6 @@ chapter:
 Extending Views
 ---------------
 
-.. versionadded:: 2.1
-
 View extending allows you to wrap one view in another. Combining this with
 :ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
 :term:`DRY`. For example, your application has a sidebar that needs to change depending
@@ -139,8 +137,6 @@ as the ``content`` block.
 Using View Blocks
 =================
 
-.. versionadded:: 2.1
-
 View blocks replace ``$scripts_for_layout`` and provide a flexible API that
 allows you to define slots or blocks in your views/layouts that will be defined
 elsewhere. For example, blocks are ideal for implementing things such as
@@ -202,9 +198,6 @@ In the above example, the ``navbar`` block will only contain the content added
 in the first section. Since the block was defined in the child view, the
 default content with the ``<p>`` tag will be discarded.
 
-.. versionadded: 2.3
-    ``startIfEmpty()`` and ``prepend()`` were added in 2.3
-
 .. note::
 
     You should avoid using ``content`` as a block name. This is used by CakePHP
@@ -213,8 +206,6 @@ default content with the ``<p>`` tag will be discarded.
 
 Displaying Blocks
 -----------------
-
-.. versionadded:: 2.1
 
 You can display blocks using the ``fetch()`` method. ``fetch()`` will safely
 output a block, returning '' if a block does not exist::
@@ -246,13 +237,9 @@ states. You can provide a default value using the second argument:
         <?= $this->fetch('cart', 'Your cart is empty') ?>
     </div>
 
-.. versionchanged:: 2.3
-    The ``$default`` argument was added in 2.3.
 
 Using Blocks for Script and CSS Files
 -------------------------------------
-
-.. versionadded:: 2.1
 
 Blocks replace the deprecated ``$scripts_for_layout`` layout variable. Instead
 you should use blocks. The :php:class:`HtmlHelper` ties into view blocks, and its
@@ -415,8 +402,6 @@ and easy way to serve up content that isn't text/html.
 
 Using Layouts from Plugins
 --------------------------
-
-.. versionadded:: 2.1
 
 If you want to use a layout that exists in a plugin, you can use
 :term:`plugin syntax`. For example, to use the contact layout from the
@@ -600,10 +585,6 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 
 are equivalent and will result in the same element being rendered.
 
-.. versionchanged:: 2.1
-    The ``$options[plugin]`` option was deprecated and support for
-    ``Plugin.element`` was added.
-
 
 Creating Your Own View Classes
 ==============================
@@ -662,9 +643,6 @@ To call any view method use ``$this->method()``
     As of 2.5, you can provide a default value in case the variable is not
     already set.
 
-    .. versionchanged:: 2.5
-        The ``$default`` argument was added in 2.5.
-
 .. php:method:: getVar(string $var)
 
     Gets the value of the viewVar with the name ``$var``.
@@ -717,56 +695,40 @@ To call any view method use ``$this->method()``
     Start a capturing block for a view block. See the section on
     :ref:`view-blocks` for examples.
 
-    .. versionadded:: 2.1
-
 .. php:method:: end
 
     End the top most open capturing block. See the section on
     :ref:`view-blocks` for examples.
-
-    .. versionadded:: 2.1
 
 .. php:method:: append($name, $content)
 
     Append into the block with ``$name``. See the section on
     :ref:`view-blocks` for examples.
 
-    .. versionadded:: 2.1
-
 .. php:method:: prepend($name, $content)
 
     Prepend to the block with ``$name``. See the section on
     :ref:`view-blocks` for examples.
-
-    .. versionadded:: 2.3
 
 .. php:method:: startIfEmpty($name)
 
     Start a block if it is empty. All content in the block
     will be captured and discarded if the block is already defined.
 
-    .. versionadded:: 2.3
-
 .. php:method:: assign($name, $content)
 
     Assign the value of a block. This will overwrite any existing content. See
     the section on :ref:`view-blocks` for examples.
-
-    .. versionadded:: 2.1
 
 .. php:method:: fetch($name, $default = '')
 
     Fetch the value of a block. If a block is empty or undefined, '' will be returned.
     See the section on :ref:`view-blocks` for examples.
 
-    .. versionadded:: 2.1
-
 .. php:method:: extend($name)
 
     Extend the current view/element/layout with the named one. See the section
     on :ref:`extending-views` for examples.
-
-    .. versionadded:: 2.1
 
 .. php:attr:: layout
 
@@ -796,8 +758,6 @@ To call any view method use ``$this->method()``
 
     An instance of :php:class:`ViewBlock`. Used to provide view block
     functionality in view rendering.
-
-    .. versionadded:: 2.1
 
 More About Views
 ================

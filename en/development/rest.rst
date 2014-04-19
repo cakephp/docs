@@ -181,8 +181,6 @@ need them, using :php:meth:`RequestHandler::addInputType()`
 Modifying the default REST Routes
 =================================
 
-.. versionadded:: 2.1
-
 If the default REST routes don't work for your application, you can modify them
 using :php:meth:`Router::resourceMap()`. This method allows you to set the
 default routes that get set with :php:meth:`Router::mapResources()`. When using
@@ -209,8 +207,6 @@ If the default routes created by :php:meth:`Router::mapResources()` don't work
 for you, use the :php:meth:`Router::connect()` method to define a custom set of
 REST routes. The ``connect()`` method allows you to define a number of different
 options for a given URL. See the section on :ref:`route-conditions` for more information.
-
-.. versionadded:: 2.5
 
 You can provide ``connectOptions`` key in the ``$options`` array for
 :php:meth:`Router::mapResources()` to provide custom setting used by

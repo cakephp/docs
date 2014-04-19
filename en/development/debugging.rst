@@ -28,10 +28,6 @@ default.
 Output from this function is only shown if the core debug variable
 has been set to a value greater than 0.
 
-.. versionchanged:: 2.1
-    The output of ``debug()`` more resembles ``var_dump()``, and uses
-    :php:class:`Debugger` internally.
-
 Debugger Class
 ==============
 
@@ -91,13 +87,6 @@ set to ``true``.
         Car::decelerate()
         Car::stop()
 
-    .. versionchanged:: 2.1
-        In 2.1 forward the output was updated for readability. See
-        :php:func:`Debugger::exportVar()`
-
-    .. versionchanged:: 2.5.0
-        The ``depth`` parameter was added.
-
 .. php:staticmethod:: Debugger::log($var, $level = 7, $depth = 3)
 
     Creates a detailed stack trace log at the time of invocation. The
@@ -105,9 +94,6 @@ set to ``true``.
     Debugger::dump(), but to the debug.log instead of the output
     buffer. Note your app/tmp directory (and its contents) must be
     writable by the web server for log() to work correctly.
-
-    .. versionchanged:: 2.5.0
-        The ``depth`` parameter was added.
 
 .. php:staticmethod:: Debugger::trace($options)
 
@@ -163,9 +149,6 @@ set to ``true``.
     variable conversions, and can be used in your own Debuggers as
     well.
 
-    .. versionchanged:: 2.1
-        This function generates different output in 2.1 forward.
-
 .. php:staticmethod:: Debugger::invoke($debugger)
 
     Replace the CakePHP Debugger with a new instance.
@@ -174,7 +157,6 @@ set to ``true``.
 
     Get the type of a variable. Objects will return their class name
 
-    .. versionadded:: 2.1
 
 Using Logging to Debug
 ======================
