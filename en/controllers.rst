@@ -12,7 +12,7 @@ your code and makes your code easier to test.
 Commonly, a controller is used to manage the logic around a single model. For
 example, if you were building a site for an online bakery, you might have a
 RecipesController managing your recipes and an IngredientsController managing your
-ingredients. However, it's also possible to have controllers work with more than 
+ingredients. However, it's also possible to have controllers work with more than
 one model. In CakePHP, a controller is named after the primary model it
 handles.
 
@@ -21,7 +21,7 @@ extends the core :php:class:`Controller` class. The ``AppController``
 class can be defined in ``/app/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
-Controllers provide a number of methods that handle requests. These are called 
+Controllers provide a number of methods that handle requests. These are called
 *actions*. By default, each public method in
 a controller is an action, and is accessible from a URL. An action is responsible
 for interpreting the request and creating the response. Usually responses are
@@ -44,7 +44,7 @@ CakePHP core library. ``AppController`` is defined in
     }
 
 Controller attributes and methods created in your ``AppController``
-will be available to all of your application's controllers. Components 
+will be available to all of your application's controllers. Components
 (which you'll learn about later) are best
 used for code that is used in many (but not necessarily all)
 controllers.
@@ -225,14 +225,7 @@ rendered from the controller.
 
     The :php:meth:`~Controller::set()` method also takes an associative array as its first
     parameter. This can often be a quick way to assign a set of
-    information to the view.
-
-    .. versionchanged:: 1.3
-        Array keys will no longer be inflected before they are assigned
-        to the view ('underscored\_key' does not become 'underscoredKey'
-        anymore, etc.):
-
-    ::
+    information to the view::
 
         $data = array(
             'color' => 'pink',
@@ -273,7 +266,7 @@ rendered from the controller.
         // ...
         }
 
-    Although CakePHP will automatically call it after every action's logic 
+    Although CakePHP will automatically call it after every action's logic
     (unless you've set ``$this->autoRender`` to false), you can
     use it to specify an alternate view file by specifying an action
     name in the controller using ``$action``.
@@ -391,9 +384,9 @@ Flow Control
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
-    Like :php:meth:`~Controller::redirect()`, the :php:meth:`~Controller::flash()` 
-    method is used to direct a user to a new page after an operation. The 
-    :php:meth:`~Controller::flash()` method is different in that it shows a 
+    Like :php:meth:`~Controller::redirect()`, the :php:meth:`~Controller::flash()`
+    method is used to direct a user to a new page after an operation. The
+    :php:meth:`~Controller::flash()` method is different in that it shows a
     message before passing the user on to another URL.
 
     The first parameter should hold the message to be displayed, and
@@ -704,7 +697,7 @@ $components, $helpers and $uses
 -------------------------------
 
 The next most often used controller attributes tell CakePHP what
-:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`, 
+:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`,
 and ``models`` you'll be using in conjunction with
 the current controller. Using these attributes make MVC classes
 given by :php:attr:`~Controller::$components` and :php:attr:`~Controller::$uses` available to the controller
@@ -762,10 +755,10 @@ given by :php:attr:`~Controller::$helpers` to the view as an object reference va
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
-    a controller will use. Like :php:attr:`~Controller::$helpers` and 
-    :php:attr:`~Controller::$uses` components in your controllers are 
+    a controller will use. Like :php:attr:`~Controller::$helpers` and
+    :php:attr:`~Controller::$uses` components in your controllers are
     merged with those in ``AppController``. As with
-    :php:attr:`~Controller::$helpers` you can pass settings 
+    :php:attr:`~Controller::$helpers` you can pass settings
     into :php:attr:`~Controller::$components`. See :ref:`configuring-components` for more information.
 
 Other Attributes
