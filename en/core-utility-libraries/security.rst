@@ -148,16 +148,6 @@ Security API
     .. versionchanged:: 2.3
         Support for bcrypt was added in 2.3
 
-
-.. php:staticmethod:: inactiveMins( )
-
-    :rtype: integer
-
-    Get allowed minutes of inactivity based on security level.::
-
-        $mins = Security::inactiveMins();
-        // If your config Security.level is set to 'medium' then $mins will equal 100
-
 .. php:staticmethod:: setHash( $hash )
 
     :rtype: void
