@@ -76,15 +76,6 @@ Security API
         //デフォルトのハッシュアルゴリズムを利用する場合
         $hash = Security::hash('CakePHP Framework');
 
-.. php:staticmethod:: inactiveMins( )
-
-    :rtype: integer
-
-    セキュリティレベルに基づいた未操作の許容時間（単位：分）を返します。\ ::
-
-        $mins = Security::inactiveMins();
-        // Security.level を 'medium' にしていた場合、$mins は 100 となります。
-
 .. php:staticmethod:: setHash( $hash )
 
     :rtype: void
