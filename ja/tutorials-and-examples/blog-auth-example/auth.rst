@@ -337,7 +337,7 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {
-        return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 
 これはシンプルな認証と承認のチュートリアルのまとめとなります。
