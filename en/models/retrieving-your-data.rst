@@ -681,8 +681,8 @@ findBy() functions return results like ``find('first')``
 ``query(string $query)``
 
 SQL calls that you can't or don't want to make via other model
-methods (this should only rarely be necessary) can be made using
-the model's ``query()`` method.
+methods can be made using the model's ``query()`` method
+(though this should only rarely be necessary).
 
 If you use this method, be sure to properly escape all parameters using the
 ``value()`` method on the database driver. Failing to escape parameters
@@ -765,7 +765,7 @@ which returns::
 
 Returns the value of a single field, specified as ``$name``, from
 the first record matched by $conditions as ordered by $order. If no
-conditions are passed and the model id is set, will return the
+conditions are passed and the model id is set, it will return the
 field value for the current model result. If no matching record is
 found, it returns false.
 
@@ -834,8 +834,8 @@ At its most basic, an array-based query looks like this::
     $this->Post->find('first', array('conditions' => $conditions));
 
 The structure here is fairly self-explanatory: it will find any
-post where the title equals "This is a post". Note that we could
-have used just "title" as the field name, but when building
+post where the title equals "This is a post" and the author id is equal to 1. Note
+that we could have used just "title" as the field name, but when building
 queries, it is good practice to always specify the model name, as
 it improves the clarity of the code, and helps prevent collisions
 in the future, should you choose to change your schema.
