@@ -227,9 +227,8 @@ and add the following::
 
     // app/Model/User.php
     
-    # Tell Cake to "use" (include) lib/Cake/Controller/Component/Auth/SimplePasswordHasher.php
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
     App::uses('AppModel','Model');
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
 
