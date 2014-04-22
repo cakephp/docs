@@ -226,7 +226,10 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
+    
+    # Tell Cake to "use" (include) lib/Cake/Controller/Component/Auth/SimplePasswordHasher.php
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('AppModel','Model');
 
     class User extends AppModel {
 
