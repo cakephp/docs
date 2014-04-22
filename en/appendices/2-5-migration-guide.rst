@@ -104,6 +104,8 @@ CakeEmail
 - Email addresses in CakeEmail are now validated with ``filter_var`` by default.
   This relaxes the email address rules allowing internal email addresses like
   ``root@localhost`` for example.
+- You can now specify ``layout`` key in email config array without having to
+  specify ``template`` key.
 
 CakeRequest
 -----------
