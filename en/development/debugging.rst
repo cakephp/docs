@@ -162,22 +162,22 @@ Using Logging to Debug
 ======================
 
 Logging messages is another good way to debug applications, and you can use
-:php:class:`CakeLog` to do logging in your application. All objects that
-extend :php:class:`Object` have an instance method `log()` which can be used
+:php:class:`Cake\\Log\\Log` to do logging in your application. All objects that
+use ``LogTrait`` have an instance method `log()` which can be used
 to log messages::
 
     $this->log('Got here', 'debug');
 
 The above would write ``Got here`` into the debug log. You can use log entries
 to help debug methods that involve redirects or complicated loops. You can also
-use :php:meth:`CakeLog::write()` to write log messages. This method can be called
+use :php:meth:`Cake\\Log\\Log::write()` to write log messages. This method can be called
 statically anywhere in your application one CakeLog has been loaded::
 
-    // in app/Config/bootstrap.php
-    App::uses('CakeLog', 'Log');
+    // At the top of the file you want to log in.
+    use Cake\Log\Log;
 
-    // Anywhere in your application
-    CakeLog::write('debug', 'Got here');
+    // Anywhere that Log has been imported.
+    Log::debug('Got here');
 
 Debug Kit
 =========

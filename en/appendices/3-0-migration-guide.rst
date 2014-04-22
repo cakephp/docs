@@ -161,9 +161,11 @@ The config reader classes have been renamed:
 Object
 ------
 
-- ``Object::log()`` was removed from Object and added to the :php:trait:`Cake\\Log\\LogTrait` class.
-- ``Object::requestAction()`` was removed from Object and added to the
-  :php:trait:`Cake\\Routing\\RequestActionTrait`.
+The ``Object`` class has been removed. It formerly contained a grab bag of
+methods that were used in various places across the framework. The most useful
+of these methods have been extracted into traits. You can use the
+:php:trait:`Cake\\Log\\LogTrait` to access the ``log()`` method. The
+:php:trait:`Cake\\Routing\\RequestActionTrait` provides ``requestAction()``.
 
 Console
 =======
