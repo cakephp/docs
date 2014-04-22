@@ -227,7 +227,7 @@ and add the following::
 
     // app/Model/User.php
     
-    App::uses('AppModel','Model');
+    App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
