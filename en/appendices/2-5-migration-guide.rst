@@ -232,7 +232,7 @@ View
 View
 ----
 
-- ``$title_for_layout`` is deprecated. Use ``$this->fetch('title');`` instead.
+- ``$title_for_layout`` is deprecated. Use ``$this->fetch('title');`` and ``$this->assign('title', 'page title');`` instead.
 - :php:meth:`View::get()` now accepts a second argument to provide a default
   value.
 
