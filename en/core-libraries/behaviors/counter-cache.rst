@@ -19,10 +19,10 @@ anything until you configure some relations and the field counts that should be
 stored on each of them. Using our example above, we could cache the comment
 count for each article with the following::
 
-    class ArticlesTable extends Table {
+    class CommentsTable extends Table {
         public function initialize(array $config) {
             $this->addBehavior('CounterCache', [
-                'Comments' => ['comment_count']
+                'Articles' => ['comment_count']
             ]);
         }
     }
@@ -44,7 +44,7 @@ counter value::
     // Use a specific find method.
     // In this case find(published)
     $this->addBehavior('CounterCache', [
-        'Comments' => [
+        'Articles' => [
             'comment_count' => [
                 'findType' => 'published'
             ]
@@ -55,7 +55,7 @@ If you don't have a custom finder method you can provide an array of conditions
 to find records instead::
 
     $this->addBehavior('CounterCache', [
-        'Comments' => [
+        'Articles' => [
             'comment_count' => [
                 'conditions' => ['Comments.spam' => false]
             ]
@@ -66,7 +66,7 @@ Lastly, if a custom finder and conditions are not suitable you can provide
 a callback method. This callable must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
-        'Comments' => [
+        'Articles' => [
             'rating_avg' => function($event, $entity, $table) {
                 return 4.5;
             }
