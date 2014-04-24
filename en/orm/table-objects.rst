@@ -724,13 +724,24 @@ The ``first()`` method allows you to fetch only the first row from a query. If
 the query has not been executed, a ``LIMIT 1`` clause will be applied::
 
     $query = $articles->find('all', [
-        'order' => ['Article.created' => 'DESC']
+        'order' => ['Articles.created' => 'DESC']
     ]);
     $row = $query->first();
 
 This approach replaces ``find('first')`` in previous versions of CakePHP. You
 may also want to use the ``get()`` method if you are loading entities by primary
 key.
+
+Getting a Count of Results
+--------------------------
+
+Once you have created a query object, you can use the ``count()`` method to get
+a result count of that query::
+
+    $query = $articles->find('all', [
+        'where' => ['Articles.title LIKE' => '%Ovens%']
+    ]);
+    $number = $query->count();
 
 .. _table-find-list:
 
@@ -796,7 +807,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
         ]
     ];
 
-Finding threaded data
+Finding Threaded Data
 ---------------------
 
 The ``find('threaded')`` finder returns nested entities that are threaded
