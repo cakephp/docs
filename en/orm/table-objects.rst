@@ -743,6 +743,8 @@ a result count of that query::
     ]);
     $number = $query->count();
 
+See :ref:`query-count` for additional usage of the ``count()`` method.
+
 .. _table-find-list:
 
 Finding Key/Value Pairs
