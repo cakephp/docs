@@ -796,6 +796,31 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
         ]
     ];
 
+Finding threaded data
+---------------------
+
+The ``find('threaded')`` finder returns nested entities that are threaded
+together through a key field. By default this field is ``parent_id``. This
+finder allows you to easily access data stored in an 'adjacency list' style
+table. All entities matching a given ``parent_id`` are placed under the
+``children`` attribute::
+
+    $query = $comments->find('threaded', [
+        'idField' => $comments->primaryKey(),
+        'parentField' => 'parent_id'
+    ]);
+    $results = $query->toArray();
+
+    echo count($results[0]->children);
+    echo $results[0]->children[0]->comment;
+
+The ``parentField`` and ``idField`` keys can be used to define the fields that
+threading will occur on.
+
+.. tip::
+    If you need to manage more advanced trees of data, consider using
+    :doc:`/core-libraries/behaviors/tree` instead.
+
 .. _custom-find-methods:
 
 Custom Finder Methods
