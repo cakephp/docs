@@ -219,10 +219,10 @@ is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
     Log::write('debug', 'Something did not work');
 
 The second is to use the log() shortcut function available on any
-class that extends ``Object``. Calling log() will internally call
+using the ``LogTrait`` Calling log() will internally call
 ``Log::write()``::
 
-    // Executing this inside a CakePHP class:
+    // Executing this inside a class using LogTrait
     $this->log("Something did not work!", 'debug');
 
 All configured log streams are written to sequentially each time
