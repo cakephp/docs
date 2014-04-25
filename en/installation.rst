@@ -111,35 +111,30 @@ Development
 ===========
 
 A development installation is the fastest method to setup CakePHP.
-This example will help you install a CakePHP application and make
-it available at http://www.example.com/cake3/. We assume for
-the purposes of this example that your document root is set to
-``/var/www/html``.
+In this example, we will be using CakePHP's console to run PHP's built-in
+web server which will make your application available at
+``http://host:port``.  From the ``App/Console`` directory, execute::
+    
+    $ ./cake server
 
-After installing your application using one of the methods above into
-``/var/www/html``. You now have a folder in your document root named after the
-release you've downloaded (e.g. cake3). Rename this folder to cake3.
-Your development setup will look like this on the file system::
+By default, without any arguments provided, this will serve your application
+at ``http://localhost:80/``.
 
-    /var/www/html/
-        cake3/
-            App/
-            Plugin/
-            Test/
-            tmp/
-            vendor/
-            webroot/
-            .gitignore
-            .htaccess
-            .travis.yml
-            README.md
-            composer.json
-            index.php
-            phpunit.xml.dist
+If you have something conflicting with ``localhost`` or ``port 80``, you can
+tell the CakePHP console to run the web server on a specific host and/or port
+utilizing the following arguments::
 
-If your web server is configured correctly, you should now find
-your CakePHP application accessible at
-http://www.example.com/cake3/.
+    $ ./cake server -H 192.168.13.37 -p 8080
+
+This will serve your application at ``http://192.168.13.37:8080/``. 
+
+That's it!  Your CakePHP application is up and running without having to
+configure a web server.
+
+.. warning::
+    
+    This is not intended to be used, nor should ever be used, in a production
+    environment.
 
 Production
 ==========
@@ -247,7 +242,7 @@ Fire It Up
 
 Alright, let's see CakePHP in action. Depending on which setup you
 used, you should point your browser to http://example.com/ or
-http://example.com/cake3/. At this point, you'll be
+http://localhost:80/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
