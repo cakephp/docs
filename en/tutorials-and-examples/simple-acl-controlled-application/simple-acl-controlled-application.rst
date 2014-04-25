@@ -228,7 +228,7 @@ table error ("Error: Database table acos for model Aco was not
 found."). To remove these errors we need to run a schema file. In a
 shell run the following::
 
-    ./Console/cake schema create DbAcl
+    Console/cake  schema create DbAcl
 
 This schema will prompt you to drop and create the tables. Say yes
 to dropping and creating the tables.
@@ -373,7 +373,7 @@ few ways to manually create ACO's though. You can create ACO
 objects from the Acl shell or You can use the ``AclComponent``.
 Creating Acos from the shell looks like::
 
-    ./Console/cake acl create aco root controllers
+    Console/cake  acl create aco root controllers
 
 While using the AclComponent would look like::
 

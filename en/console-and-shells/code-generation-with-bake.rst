@@ -9,7 +9,7 @@ functional application in just a few minutes. In fact, Bake is a natural step to
 take once an application has been scaffolded.
 
 Depending on how your computer is configured, you may have to set
-execute rights on the cake bash script to call it using ``./Console/cake
+execute rights on the cake bash script to call it using ``Console/cake 
 bake``. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
