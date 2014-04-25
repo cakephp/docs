@@ -118,15 +118,15 @@ web server which will make your application available at
     $ ./cake server
 
 By default, without any arguments provided, this will serve your application
-at ``http://localhost:80/``.
+at ``http://localhost:8765/``.
 
-If you have something conflicting with ``localhost`` or ``port 80``, you can
+If you have something conflicting with ``localhost`` or ``port 8765``, you can
 tell the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments::
 
-    $ ./cake server -H 192.168.13.37 -p 8080
+    $ ./cake server -H 192.168.13.37 -p 5673
 
-This will serve your application at ``http://192.168.13.37:8080/``. 
+This will serve your application at ``http://192.168.13.37:5673/``. 
 
 That's it!  Your CakePHP application is up and running without having to
 configure a web server.
@@ -242,7 +242,7 @@ Fire It Up
 
 Alright, let's see CakePHP in action. Depending on which setup you
 used, you should point your browser to http://example.com/ or
-http://localhost:80/. At this point, you'll be
+http://localhost:8765/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
