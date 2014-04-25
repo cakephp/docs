@@ -818,6 +818,9 @@ finder allows you to easily access data stored in an 'adjacency list' style
 table. All entities matching a given ``parent_id`` are placed under the
 ``children`` attribute::
 
+    $query = $comments->find('threaded');
+
+    // Expanded default values
     $query = $comments->find('threaded', [
         'idField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
