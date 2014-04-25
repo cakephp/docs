@@ -724,13 +724,26 @@ The ``first()`` method allows you to fetch only the first row from a query. If
 the query has not been executed, a ``LIMIT 1`` clause will be applied::
 
     $query = $articles->find('all', [
-        'order' => ['Article.created' => 'DESC']
+        'order' => ['Articles.created' => 'DESC']
     ]);
     $row = $query->first();
 
 This approach replaces ``find('first')`` in previous versions of CakePHP. You
 may also want to use the ``get()`` method if you are loading entities by primary
 key.
+
+Getting a Count of Results
+--------------------------
+
+Once you have created a query object, you can use the ``count()`` method to get
+a result count of that query::
+
+    $query = $articles->find('all', [
+        'where' => ['Articles.title LIKE' => '%Ovens%']
+    ]);
+    $number = $query->count();
+
+See :ref:`query-count` for additional usage of the ``count()`` method.
 
 .. _table-find-list:
 
@@ -795,6 +808,34 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
             // More data.
         ]
     ];
+
+Finding Threaded Data
+---------------------
+
+The ``find('threaded')`` finder returns nested entities that are threaded
+together through a key field. By default this field is ``parent_id``. This
+finder allows you to easily access data stored in an 'adjacency list' style
+table. All entities matching a given ``parent_id`` are placed under the
+``children`` attribute::
+
+    $query = $comments->find('threaded');
+
+    // Expanded default values
+    $query = $comments->find('threaded', [
+        'idField' => $comments->primaryKey(),
+        'parentField' => 'parent_id'
+    ]);
+    $results = $query->toArray();
+
+    echo count($results[0]->children);
+    echo $results[0]->children[0]->comment;
+
+The ``parentField`` and ``idField`` keys can be used to define the fields that
+threading will occur on.
+
+.. tip::
+    If you need to manage more advanced trees of data, consider using
+    :doc:`/core-libraries/behaviors/tree` instead.
 
 .. _custom-find-methods:
 

@@ -401,6 +401,8 @@ Expression objects can be used with any query builder methods like ``where``,
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
 
+.. _query-count:
+
 Returning the Total Count of Records
 ------------------------------------
 
