@@ -639,7 +639,7 @@ Datetime Options
   Defaults to null which rounds half up according to `interval`.
 
 * ``$options['monthNames']`` If false, 2 digit numbers will be used instead of text.
-  If an array, the given array will be used.
+  If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]`` then the given array will be used.
 
 Creating Input Elements
 =======================
