@@ -249,8 +249,8 @@ View
 View
 ----
 
-- ``$title_for_layout`` est déprécié. Utilisez ``$this->fetch('title');`` à la
-  place.
+- ``$title_for_layout`` est déprécié. Utilisez ``$this->fetch('title');`` et
+  ``$this->assign('title', 'your-page-title');`` à la place.
 - :php:meth:`View::get()` accepte maintenant un deuxième argument pour fournir
   une valeur par défaut.
 
