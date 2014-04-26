@@ -703,8 +703,8 @@ Les fonctions findBy() retournent des résultats comme ``find('first')``.
 ``query(string $query)``
 
 Les appels SQL que vous ne pouvez pas ou ne voulez pas faire grâce aux autres
-méthodes de model (attention, il y a très peu de circonstances où cela se
-vérifie), peuvent être exécutés en utilisant la méthode ``query()``.
+méthodes de model peuvent être exécutés en utilisant la méthode ``query()``
+(bien qu'il y ait très peu de circonstances où cela se vérifie).
 
 Si vous utilisez cette méthode, assurez-vous d'échapper correctement tous les
 paramètres en utilisant la méthode ``value()`` sur le driver de la base de
@@ -789,7 +789,7 @@ ce qui retourne::
 
 Retourne la valeur d'un champ unique, spécifié par ``$name``, du premier
 enregistrement correspondant aux $conditions ordonnées par $order. Si
-aucune condition n'est passée et que l'id du model est fixé, cela
+aucune condition n'est passée et que l'id du model est fixé, la fonction
 retournera la valeur du champ pour le résultat de l'enregistrement actuel.
 Si aucun enregistrement correspondant n'est trouvé cela retournera false.
 
@@ -861,9 +861,9 @@ ceci::
     // Exemple d'utilisation avec un model:
     $this->Post->find('first', array('conditions' => $conditions));
 
-La structure ici est assez significative : Tous les posts dont le
-titre à pour valeur « Ceci est un post » sont cherchés. Nous aurions
-pu uniquement utiliser « titre » comme nom de champ, mais lorsque l'on
+La structure ici est assez significative : elle va trouver tous les posts où le
+titre à pour valeur « This is a post » et où l'id de l'auteur est égal à 1. Nous
+aurions pu uniquement utiliser « title » comme nom de champ, mais lorsque l'on
 construit des requêtes, il vaut mieux toujours spécifier le nom du model.
 Cela améliore la clarté du code, et évite des collisions futures, dans
 le cas où vous devriez changer votre schéma.
