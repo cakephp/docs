@@ -202,21 +202,23 @@ Il y a des espaces des deux côtés du signe égal.
 Typehinting
 -----------
 
-Les arguments qui attendent des objets ou des tableaux peuvent être typés.
-Nous ne typons que les méthodes publiques car le typage prend du temps::
+Les arguments qui attendent des objets, des tableaux ou des callbacks
+(appelables) peuvent être typés. Nous ne typons que les méthodes publiques car
+le typage prend du temps::
 
     /**
      * Some method description.
      *
-     * @param Model $Model Le model à utiliser.
-     * @param array $array Une valeur de tableau.
-     * @param boolean $boolean Une valeur boléenne.
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param callable $callback Some callback.
+     * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, $boolean) {
+    public function foo(Model $Model, array $array, callable $callback, $boolean) {
     }
 
-Ici ``$Model`` doit être une instance de ``Model`` et ``$array`` doit être un
-``array``.
+Ici ``$Model`` doit être une instance de ``Model``, ``$array`` doit être un
+``array`` et ``$callback`` doit être de type ``callable`` (un callback valide ).
 
 Notez que si vous souhaitez autoriser que ``$array`` soit aussi une instance
 de ``ArrayObject``, vous ne devez pas typer puisque ``array`` accepte seulement
@@ -318,7 +320,26 @@ Les Tags PHP
 ============
 
 Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts
-(``<? ?>``).
+(``<? ?>``). L'echo court doit être utilisé dans les fichiers de vue
+(``.ctp``) lorque cela est nécessaire.
+
+Echo court
+----------
+
+L'echo court doit être utilisé dans les fichiers de vue à la place de
+``<?php echo``. Il doit être immédiatemment suivi par un espace unique, la
+variable ou la valeur de la fonction pour faire un ``echo``, un espace unique,
+et le tag de fermeture de php::
+
+    // wrong = semicolon, aucun espace
+    <td><?=$name;?></td>
+
+    // good = espaces, aucun semicolon
+    <td><?= $name ?></td>
+
+Depuis PHP 5.4, le tag echo court (``<?=``) ne doit plus être considéré.
+un 'tag court' est toujours disponible quelque soit la directive ini de
+``short_open_tag``.
 
 Convention de Nommage
 =====================
