@@ -123,6 +123,8 @@ CakeEmail
 - Les adresses Email dans CakeEmail ne sont pas validées avec ``filter_var``
   par défaut. Cela assouplit les règles d'addresse email en autorisant les
   addresses d'email interne comme ``root@localhost`` par exemple.
+- Vous pouvez maintenant spécifier la clé ``layout`` dans la config d'email
+  sans avoir à spécifier la clé ``template``.
 
 CakeRequest
 -----------
