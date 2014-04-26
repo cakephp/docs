@@ -15,6 +15,7 @@ Conditions requises
 - PHP 5.4.19 ou plus.
 - extension mbstring
 - extension mcrypt
+- extension intl
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
@@ -22,8 +23,8 @@ supporte une diversité de moteurs de stockage de données:
 
 -  MySQL (4 ou supérieur)
 -  PostgreSQL
--  Microsoft SQL Server
--  SQLite
+-  Microsoft SQL Server (2008 ou supérieur)
+-  SQLite 3
 
 .. note::
 
@@ -43,35 +44,17 @@ d'application commerciale ou fermée.
 Installer CakePHP
 =================
 
-Il y a plusieurs manières d'obtenir une copie fraiche de CakePHP. Vous pouvez
-soit télécharger une copie archivée (zip/tar.gz/tar.bz2) à partir d'une version
-de GitHub, soit utiliser Composer, soit cloner le squelette d'application
-à partir du répertoire de Github.
-
-Télécharger un Fichier Zip
---------------------------
-
-Pour télécharger une version préconstruite de CakePHP, visitez le site web
-principal `http://cakephp.org <http://cakephp.org>`_ et suivez le lien
-"Télécharger maintenant".
-
-Toutes les versions actuelles de CakePHP sont hébérgées sur `GitHub`_. GitHub
-héberge à la fois CakePHP ainsi que plusieurs autres plugins pour CakePHP. Les
-versions de CakePHP sont disponibles en
-`GitHub tags <https://github.com/cakephp/cakephp/releases>`_.
-
-Installer avec Composer
------------------------
-
-`Composer <http://getcomposer.org>`_ est un outil de gestion de dépendance
-pour PHP 5.3+. Il résoud plusieurs des problèmes que l'installeur PEAR a, et
-simplifie la gestion de versions multiples des librairies.
+CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
+dépendance pour PHP 5.3+, comme la méthode officielle pour l'installation.
 
 Tout d'abord, vous aurez besoin de télécharger et d'installer Composer si vous
 ne l'avez pas encore fait. Si vous avez cURL installé, c'est aussi facile que de
 lancer ce qui suit::
 
     curl -s https://getcomposer.org/installer | php
+
+Ou vous pouvez télécharger ``composer.phar`` à partir de son
+`site <https://getcomposer.org/download/>`_.
 
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
 une nouvelle application CakePHP en lançant::
@@ -80,25 +63,9 @@ une nouvelle application CakePHP en lançant::
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du coeur de la librairie de CakePHP, vous devriez avoir maintenant une
-application CakePHP qui fonctionne, installée via composer. Assure-vous de
+application CakePHP qui fonctionne, installée via composer. Assurez-vous de
 garder les fichiers composer.json et composer.lock avec le reste de votre code
 source.
-
-Installer avec Git & GitHub
----------------------------
-
-Dans CakePHP 3.0, `le squelette d'application <https://github.com/cakephp/app>`_
-et la `librairie du coeur de <https://github.com/cakephp/cakephp>`_ ont été
-séparés en deux répertoires séparés. Vous pouvez forker et/ou cloner
-le projet du squelette de l'application en utilisant Git + GitHub. Cela va
-aussi vous permettre de facilement contribuer aux changements de nouveau
-vers le squelette de l'application.
-
-Une fois que vous avez cloné le squelette d'application, vous aurez besoin de
-cloner la librairie de coeur de CakePHP dans ``vendor/cakephp/cakephp``. Après
-avoir cloné la librairie du coeur de CakePHP, décommentez la section en
-utilisant ``Cake\Core\ClassLoader`` dans ``App/Config/bootstrap.php``, et
-copiez ``App/Config/app.default.php`` dans ``App/Config/app.php``.
 
 Vous devriez être maintenant capable de visiter le chemin où vous avez installé
 votre application CakePHP et voir les feux de signalisations de configuration.
@@ -126,7 +93,10 @@ session en sont juste quelques exemples.
 
 De même, assurez-vous que le répertoire ``tmp`` et tous ses
 sous-répertoires dans votre installation cake sont en écriture pour
-l'utilisateur du serveur web.
+l'utilisateur du serveur web. Composer's installation
+process makes ``tmp`` and it's subfolders globally writeable to get things up
+and running quickly but you can update the permissions for better security and
+keep them writable only for the webserver user.
 
 Configuration
 =============
@@ -147,36 +117,30 @@ Développement
 =============
 
 Une installation "développement" est la méthode la plus rapide pour lancer
-CakePHP. Cet exemple vous aidera à installer une application CakePHP et à la
-rendre disponible à l'adresse http://www.example.com/cake3/. Nous
-considérons pour les besoins de cet exemple que votre document root pointe sur
-``/var/www/html``.
+CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour executer
+le serveur web PHP intégré qui va rendre votre application disponible sur
+``http://host:port``. A partir du répertoire ``App``, lancez::
 
-Après avoir installé votre application en utilisant une des méthodes ci-dessus
-dans ``/var/www/html``. Vous avez maintenant un dossier dans votre document
-root, nommé d'après la version que vous avez téléchargée (par exemple : cake3).
-Renommez ce dossier en cake3. Votre installation "développement" devrait
-ressembler à quelque chose comme cela dans votre système de fichiers::
+    Console/cake server
 
-    /var/www/html/
-        cake3/
-            App/
-            Plugin/
-            Test/
-            tmp/
-            vendor/
-            webroot/
-            .gitignore
-            .htaccess
-            .travis.yml
-            README.md
-            composer.json
-            index.php
-            phpunit.xml.dist
+Par défaut, sans aucun argument fourni, cela va afficher votre application
+sur ``http://localhost:8765/``.
 
-Si votre serveur web est configuré correctement, vous devriez trouver
-maintenant votre application CakePHP accessible à l'adresse
-http://www.example.com/cake3/.
+Si vous avez quelque chose en conflit avec ``localhost`` ou ``port 8765``, vous
+pouvez dire à la console CakePHP de lancer le seveur web sur un hôte spécifique
+et/ou un port utilisant les arguments suivants::
+
+    Console/cake server -H 192.168.13.37 -p 5673
+
+Cela affichera votre application sur ``http://192.168.13.37:5673/``. 
+
+C'est tout! Votre application CakePHP est ok et elle est lancée sans avoir
+à configurer un serveur web.
+
+.. warning::
+    
+    Ceci n'a pas vocation à être utilisé, ni ne devrait être utilisé dans un
+    environnement de production.
 
 Production
 ==========
@@ -197,12 +161,17 @@ votre système de fichiers::
     /cake_install/
         App/
         Plugin/
+        Test/
         tmp/
         vendor/
         webroot/ (ce répertoire est défini comme DocumentRoot)
+        .gitignore
         .htaccess
-        index.php
+        .travis.yml
         README.md
+        composer.json
+        index.php
+        phpunit.xml.dist
 
 Les développeurs utilisant Apache devraient régler la directive
 ``DocumentRoot`` pour le domaine à::
@@ -283,7 +252,7 @@ A vous de jouer!
 
 Ok, voyons voir CakePHP en action. Selon la configuration que vous utilisez,
 vous pouvez pointer votre navigateur vers http://exemple.com/ ou
-http://exemple.com/cake3/. A ce niveau, vous serez sur la page home
+http://localhost:8765/. A ce niveau, vous serez sur la page home
 par défaut de CakePHP, et un message qui vous donnera le statut de la
 connexion de votre base de données courante.
 

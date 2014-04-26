@@ -114,7 +114,7 @@ A development installation is the fastest method to setup CakePHP.
 In this example, we will be using CakePHP's console to run PHP's built-in
 web server which will make your application available at
 ``http://host:port``.  From the ``App`` directory, execute::
-    
+
     Console/cake server
 
 By default, without any arguments provided, this will serve your application

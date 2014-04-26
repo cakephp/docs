@@ -85,7 +85,7 @@ encoding
     Indique le character set à utiliser lors de l'envoi de statements SQL au
     serveur. Ceci est par défaut à l'encodage par défaut de la base de données
     pout toutes les bases de données autres que DB2. Si vous souhaitez utiliser
-    l'encodage UTF-8 avec les connections mysql/mysqli, vous devez utiliser
+    l'encodage UTF-8 avec les connections mysql, vous devez utiliser
     'utf8' sans trait d'union.
 timezone
     La définition du timezone du Serveur.
@@ -190,7 +190,8 @@ couche de la base de données. Les types que CakePHP supporte sont:
 
 string
     Généralement backed by CHAR or VARCHAR columns. Utiliser l'option ``fixed``
-    va forcer une colonne CHAR.
+    va forcer une colonne CHAR. Dans SQLServer, les types NCHAR et NVARCHAR sont
+    utilisés.
 text
     Maps vers les types TEXT
 uuid
@@ -213,8 +214,8 @@ binary
 date
     Maps vers un type de colonne DATE sans timezone.
 datetime
-    Maps vers un type de colonne DATETIME sans timezone. Dans postgres, ceci
-    retourne un type TIMESTAMP.
+    Maps vers un type de colonne DATETIME sans timezone. Dans postgres et
+    SQLServer, ceci retourne un type TIMESTAMP.
 timestamp
     Maps vers le type TIMESTAMP.
 time
