@@ -202,6 +202,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 ``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
 
     // app/Model/User.php
+
+    App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
