@@ -8,21 +8,21 @@ from 1.3 to 2.0.
 
 To run all upgrade steps::
 
-    ./Console/cake upgrade all
+    Console/cake  upgrade all
 
 If you would like to see what the shell will do without modifying files perform
 a dry run first with --dry-run::
 
-    ./Console/cake upgrade all --dry-run
+    Console/cake  upgrade all --dry-run
 
 To upgrade your plugin run the command::
 
-    ./Console/cake upgrade all --plugin YourPluginName
+    Console/cake  upgrade all --plugin YourPluginName
 
 You are able to run each upgrade step individually. To see all the steps
 available run the command::
 
-    ./Console/cake upgrade --help
+    Console/cake  upgrade --help
 
 Or visit the `API docs <http://api.cakephp.org/2.4/class-UpgradeShell.html>`_ for more info.
 
@@ -70,7 +70,7 @@ Your folder structure should look like this now::
 Now we can run the upgrade shell by ``cd``'ing into your ``app`` folder and
 running the command::
 
-    ./Console/cake upgrade all
+    Console/cake  upgrade all
 
 This will do **most** of the work to upgrade your app to 2.x. Check things over
 in your upgraded ``app`` folder. If everything looks good then congratulate
