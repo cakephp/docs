@@ -226,7 +226,10 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
 ``app/Model/User.php`` et ajoutez ce qui suit::
 
     // app/Model/User.php
+    
+    App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
     class User extends AppModel {
 
     // ...
@@ -234,7 +237,9 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+            $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                $this->data[$this->alias]['password']
+            );
         }
         return true;
     }
@@ -247,16 +252,20 @@ juste un fichier template de vue pour la fonction de connexion:
 
 .. code-block:: php
 
+    //app/View/Users/login.ctp
+
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User');?>
+    <?php echo $this->Form->create('User'); ?>
         <fieldset>
-            <legend><?php echo __('Merci de rentrer votre nom d\'user et mot de passe'); ?></legend>
+            <legend>
+                <?php echo __('Please enter your username and password'); ?>
+            </legend>
             <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Connexion'));?>
+    <?php echo $this->Form->end(__('Login')); ?>
     </div>
 
 Vous pouvez maintenant inscrire un nouvel user en rentrant l'URL
