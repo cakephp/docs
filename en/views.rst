@@ -52,6 +52,9 @@ chapter:
   in many places in the view layer. Among other things, helpers in
   CakePHP can help you build forms, build AJAX functionality,
   paginate model data, or serve RSS feeds.
+- **cells**: these classes provide miniature controller-like features for
+  creating self contained UI components. See the :doc:`/views/cells`
+  documentation for more information.
 
 
 .. _extending-views:
@@ -163,8 +166,7 @@ can be used to clear or overwrite a block at any time::
     $this->assign('sidebar', '');
 
 
-In 2.3, a few new methods were added for working with blocks. The ``prepend()``
-method was added to prepend content to an existing block::
+The ``prepend()`` method was added to prepend content to an existing block::
 
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
@@ -616,17 +618,8 @@ To call any view method use ``$this->method()``
 
 .. php:method:: get(string $var, $default = null)
 
-    Get the value of a viewVar with the name ``$var``.
-
-    As of 2.5, you can provide a default value in case the variable is not
-    already set.
-
-.. php:method:: getVar(string $var)
-
-    Gets the value of the viewVar with the name ``$var``.
-
-    .. deprecated:: 2.3
-        Use :php:meth:`View::get()` instead.
+    Get the value of a viewVar with the name ``$var``. You can provide a default
+    value in case the variable is not already set.
 
 .. php:method:: getVars()
 
@@ -650,19 +643,6 @@ To call any view method use ``$this->method()``
           array('controller' => 'posts', 'action' => 'index')
         );
         //$uuid contains 'form0425fe3bad'
-
-.. php:method:: addScript(string $name, string $content)
-
-    Adds content to the internal scripts buffer. This buffer is made
-    available in the layout as ``$scripts_for_layout``. This method is
-    helpful when creating helpers that need to add JavaScript or CSS
-    directly to the layout. Keep in mind that scripts added from the
-    layout and elements in the layout will not be added to
-    ``$scripts_for_layout``. This method is most often used from inside
-    helpers, such as the :doc:`/core-libraries/helpers/html` Helper.
-
-    .. deprecated:: 2.1
-        Use the :ref:`view-blocks` features instead.
 
 .. php:method:: blocks
 
@@ -723,14 +703,6 @@ To call any view method use ``$this->method()``
 
     An instance of :php:class:`CakeRequest`. Use this instance to access
     information about the current request.
-
-.. php:attr:: output
-
-    Contains the last rendered content from a view, either the view file, or the
-    layout content.
-
-    .. deprecated:: 2.1
-        Use ``$view->Blocks->get('content');`` instead.
 
 .. php:attr:: Blocks
 
