@@ -172,6 +172,43 @@ you can do so with the second parameter::
 
     }
 
+The same table can be used multiple times to define different types of
+associations, for example consider a case where you'd want to have separated
+approved comments and those that has not been moderated yet::
+
+    class ArticlesTable extends Table {
+
+        public function initialize(array $config) {
+            $this->hasMany('Comments', [
+                'className' => 'Comments',
+                'conditions' => ['approved' => true]
+            ]);
+
+            $this->hasMany('UnapprovedComments', [
+                'className' => 'Comments',
+                'conditions' => ['approved' => false],
+                'propertyName' => 'unnaproved_comments'
+            ]);
+        }
+    }
+
+As you can see, by specifying the ``className`` key, it is possible to use the
+same table as different associations for the same table. You can even create
+self-associated tables to create parent-child relationships::
+
+    class CategoriesTable extends Table {
+
+        public function initialize(array $config) {
+            $this->hasMany('SubCategories', [
+                'className' => 'Categories',
+            ]);
+
+            $this->belongsTo('ParentCategories', [
+                'className' => 'Categories',
+            ]);
+        }
+    }
+
 HasOne Associations
 -------------------
 
