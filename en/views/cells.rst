@@ -120,8 +120,26 @@ You will often want to parameterize cell methods to make cells more flexible.
 By using the second and third arguments of ``cell()`` you can pass action
 parameters, and additional options to your cell classes::
 
-    <?= $this->cell('Inbox', ['since' => '-3 days']); ?>
+    <?= $this->cell('Inbox::recent', ['since' => '-3 days']); ?>
+
+The above would match the following function signature::
+
+    public function recent($since) {
+    }
 
 Rendering Alternate Templates
 =============================
+
+By convention cells render templates that match the action they are executing.
+If you need to render a different view template you can specify the template
+to use when rendering the cell::
+
+    // Calling render() explicitly
+    <?= $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages'); ?>
+
+    // Set action before echoing the cell.
+    <?php
+    $cell = $this->cell('Inbox'); ?>
+    $cell->action = 'messages';
+    echo $cell;
 
