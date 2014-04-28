@@ -86,32 +86,39 @@ following::
         You have <?= $unread_count ?> unread messages.
     </div>
 
+Loading Cells
+=============
+
+Cells can be loaded from controllers or views using the ``cell()`` method. The
+``cell()`` method works the same in both contexts. The ``cell()`` method is
+available in both contexts because you may need to use controller logic to
+choose which cells to construct. To load a cell use the ``cell()`` method::
+
+    // Load an application cell
+    $cell = $this->cell('Inbox');
+
+    // Load a plugin cell
+    $cell = $this->cell('Messaging.Inbox');
+
+The above will load the named cell class and execute the ``display()`` method.
+You can execute other methods using the following::
+
+    // Run the expanded() method on the Inbox cell
+    $cell = $this->cell('Inbox::expanded');
+
 Rendering a Cell
 ================
 
-Now that our very basic cell is working we can render the cell in our views or
-layouts using the ``renderCell()`` method::
+Once a cell has been loaded and executed you'll probably want to render it. The
+easiest way to render a cell is to echo it::
 
-    // in our layout.
-    <?= $this->cell('Inbox'); ?>
+    <?= $cell ?>
 
-This will execute the cell's ``display()`` method and render the ``display.ctp``
-template we made earlier. If you'd like to execute a different method on the
-cell you call ``cell()`` like::
+This will render the template matching the lowercased and underscored version of
+our action name, e.g. ``display.ctp``.
 
-    <?= $this->cell('Inbox::expanded'); ?>
-
-If our InboxCell was in a Messaging plugin we could render it using the
-following::
-
-    // Default display action.
-    <?= $this->cell('Messaging.Inbox'); ?>
-
-    // Specific action.
-    <?= $this->cell('Messaging.Inbox::expanded'); ?>
-
-Because cells use ``View`` to render templates, you can nest cells within cells
-if you need to.
+Because cells use ``View`` to render templates, you can load additional cells
+within a cell templates if required.
 
 Passing Arguments to a Cell
 ---------------------------
@@ -135,10 +142,9 @@ If you need to render a different view template you can specify the template
 to use when rendering the cell::
 
     // Calling render() explicitly
-    <?= $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages'); ?>
+    echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
 
     // Set action before echoing the cell.
-    <?php
     $cell = $this->cell('Inbox'); ?>
     $cell->action = 'messages';
     echo $cell;
