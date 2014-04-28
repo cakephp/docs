@@ -715,6 +715,7 @@ More About Views
 .. toctree::
     :maxdepth: 1
 
+    views/cells
     views/themes
     views/json-and-xml-views
     views/helpers

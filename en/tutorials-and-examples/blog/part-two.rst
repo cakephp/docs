@@ -1,5 +1,5 @@
 Blog Tutorial - Adding a Layer
-******************************
+##############################
 
 Create an Article Model
 =======================
@@ -36,7 +36,7 @@ be used in the ArticlesController, and will be tied to a database table called
     use the defaults instead.
 
 For more on models, such as table prefixes, callbacks, and
-validation, check out the :doc:`/models` chapter of the
+validation, check out the :doc:`/orm` chapter of the
 Manual.
 
 
@@ -628,7 +628,7 @@ Now that you've created a basic CakePHP application, you're ready for
 the real thing. Start your own project and read the rest of the
 :doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
-If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. 
+If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page.
 Welcome to CakePHP!
 
 Suggested Follow-up Reading
