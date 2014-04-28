@@ -367,9 +367,8 @@ Configuring Options and Generating Help
 
 .. php:class:: ConsoleOptionParser
 
-Console option parsing in CakePHP has always been a little bit different
-from everything else on the command line. In 2.0 ``ConsoleOptionParser``
-helps provide a more familiar command line option and argument parser.
+``ConsoleOptionParser`` helps provide a more familiar command line option and
+argument parser.
 
 OptionParsers allow you to accomplish two goals at the same time.
 First they allow you to define the options and arguments, separating
@@ -465,11 +464,11 @@ You can use the following options when creating an argument:
 * ``help`` The help text to display for this argument.
 * ``required`` Whether this parameter is required.
 * ``index`` The index for the arg, if left undefined the argument will be put
-   onto the end of the arguments. If you define the same index twice the
-   first option will be overwritten.
+  onto the end of the arguments. If you define the same index twice the
+  first option will be overwritten.
 * ``choices`` An array of valid choices for this argument. If left empty all
-   values are valid. An exception will be raised when parse() encounters an
-   invalid value.
+  values are valid. An exception will be raised when parse() encounters an
+  invalid value.
 
 Arguments that have been marked as required will throw an exception when
 parsing the command if they have been omitted. So you don't have to
@@ -848,14 +847,6 @@ Shell API
     Should return a :php:class:`Cake\\Console\\ConsoleOptionParser` object, with any
     sub-parsers for the shell.
 
-.. php:method:: hasMethod($name)
-
-    Check to see if this shell has a callable method by the given name.
-
-.. php:method:: hasTask($task)
-
-    Check to see if this shell has a task with the provided name.
-
 .. php:method:: hr($newlines = 0, $width = 63)
 
     :param int $newlines: The number of newlines to precede and follow the line.
@@ -920,20 +911,6 @@ Shell API
     By default on \*nix systems ConsoleOutput objects default to colour output.
     On windows systems, plain output is the default unless the ``ANSICON`` environment
     variable is present.
-
-.. php:method:: runCommand($command, $argv)
-
-    Runs the Shell with the provided argv.
-
-    Delegates calls to Tasks and resolves methods inside the class. Commands
-    are looked up with the following order:
-
-    - Method on the shell.
-    - Matching task name.
-    - main() method.
-
-    If a shell implements a main() method, all missing method calls will be
-    sent to main() with the original method name in the argv.
 
 .. php:method:: shortPath($file)
 
