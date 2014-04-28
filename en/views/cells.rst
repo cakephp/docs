@@ -2,7 +2,7 @@ View Cells
 ##########
 
 View cells are small mini-controllers that can invoke view logic and render out
-templates. The provide a light-weight modular replacement to
+templates. They provide a light-weight modular replacement to
 ``requestAction()``. The idea of cells is borrowed from `cells in ruby
 <http://cells.rubyforge.org/>`_, where they fulfill a similar role and purpose.
 
@@ -10,11 +10,11 @@ When to use Cells
 =================
 
 Cells are ideal for building reusable page components that require interaction
-with models,  view logic, and rendering logic. A simple example would be the
+with models, view logic, and rendering logic. A simple example would be the
 cart in an online store, or a data-driven navigation menu in a CMS.
 
 Cells also provide a lightweight replacement for ``requestAction()``. Because
-cells do not dispatch sub-requests they sidestep all of the overhead associated
+cells do not dispatch sub-requests, they sidestep all of the overhead associated
 with ``requestAction()``.
 
 Creating a Cell
@@ -22,7 +22,7 @@ Creating a Cell
 
 To create a cell, you define a class in ``App/View/Cell``, and a template in
 ``App/Template/Cell/``. In this example, we'll be making a cell to display the
-number of messages in a user's notification inbox. First create the class file.
+number of messages in a user's notification inbox. First, create the class file.
 Its contents should look like::
 
     namespace App\View\Cell;
@@ -36,8 +36,8 @@ Its contents should look like::
 
     }
 
-Save this file into ``App/View/Cell/InboxCell.php``. As you can see like other
-classes in CakePHP Cells have a few conventions:
+Save this file into ``App/View/Cell/InboxCell.php``. As you can see, like other
+classes in CakePHP, Cells have a few conventions:
 
 * Cells live in the ``App\View\Cell`` namespace. If you are making a cell in
   a plugin, the namespace would be ``PluginName\View\Cell``.
@@ -46,7 +46,7 @@ classes in CakePHP Cells have a few conventions:
 
 We added an empty ``display()`` method to our cell, this is the conventional
 default method when rendering a cell. We'll cover how to use other methods later
-in the docs. Now create the file ``App/Template/Cell/Inbox/display.ctp``. This
+in the docs. Now, create the file ``App/Template/Cell/Inbox/display.ctp``. This
 will be our template for our new cell.
 
 You can generate this stub code quickly using ``bake``::
@@ -132,7 +132,7 @@ This will render the template matching the lowercased and underscored version of
 our action name, e.g. ``display.ctp``.
 
 Because cells use ``View`` to render templates, you can load additional cells
-within a cell templates if required.
+within a cell template if required.
 
 Rendering Alternate Templates
 -----------------------------
