@@ -574,6 +574,7 @@ View Class
 - ``View::getVar()`` has been removed, use :php:meth:`Cake\\View\\View::get()` instead.
 - ``View::$ext`` has been removed and instead a protected property ``View::$_ext``
   has been added.
+- ``View::addScript()`` has been removed. Use :ref:`view-blocks` instead.
 
 ViewBlock
 ---------

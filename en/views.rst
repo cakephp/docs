@@ -43,7 +43,7 @@ chapter:
 
 - **views**: Templates are the part of the page that is unique to the
   action being run. They form the meat of your application's response.
-- **elements**: smaller, reusable bits of view code. Elements are
+- **elements**: small, reusable bits of view code. Elements are
   usually rendered inside views.
 - **layouts**: view files that contain presentational code that
   wraps many interfaces in your application. Most views are
@@ -52,6 +52,9 @@ chapter:
   in many places in the view layer. Among other things, helpers in
   CakePHP can help you build forms, build AJAX functionality,
   paginate model data, or serve RSS feeds.
+- **cells**: these classes provide miniature controller-like features for
+  creating self contained UI components. See the :doc:`/views/cells`
+  documentation for more information.
 
 
 .. _extending-views:
@@ -137,13 +140,12 @@ as the ``content`` block.
 Using View Blocks
 =================
 
-View blocks replace ``$scripts_for_layout`` and provide a flexible API that
-allows you to define slots or blocks in your views/layouts that will be defined
-elsewhere. For example, blocks are ideal for implementing things such as
-sidebars, or regions to load assets at the bottom/top of the layout.
-Blocks can be defined in two ways: either as a capturing block, or by direct
-assignment. The ``start()``, ``append()`` and ``end()`` methods allow you to
-work with capturing blocks::
+View blocks provide a flexible API that allows you to define slots or blocks in
+your views/layouts that will be defined elsewhere. For example, blocks are ideal
+for implementing things such as sidebars, or regions to load assets at the
+bottom/top of the layout. Blocks can be defined in two ways: either as
+a capturing block, or by direct assignment. The ``start()``, ``append()`` and
+``end()`` methods allow you to work with capturing blocks::
 
     // create the sidebar block.
     $this->start('sidebar');
@@ -164,8 +166,7 @@ can be used to clear or overwrite a block at any time::
     $this->assign('sidebar', '');
 
 
-In 2.3, a few new methods were added for working with blocks. The ``prepend()``
-method was added to prepend content to an existing block::
+The ``prepend()`` method was added to prepend content to an existing block::
 
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
@@ -207,8 +208,8 @@ default content with the ``<p>`` tag will be discarded.
 Displaying Blocks
 -----------------
 
-You can display blocks using the ``fetch()`` method. ``fetch()`` will safely
-output a block, returning '' if a block does not exist::
+You can display blocks using the ``fetch()`` method. ``fetch()`` will output
+a block, returning '' if a block does not exist::
 
     <?= $this->fetch('sidebar') ?>
 
@@ -226,7 +227,7 @@ want to conditionally show headings or other markup:
     </div>
     <?php endif; ?>
 
-As of 2.3.0, you can also provide a default value for a block should it not have
+You can also provide a default value for a block should it not have
 any content. This allows you to easily add placeholder content for empty
 states. You can provide a default value using the second argument:
 
@@ -241,18 +242,17 @@ states. You can provide a default value using the second argument:
 Using Blocks for Script and CSS Files
 -------------------------------------
 
-Blocks replace the deprecated ``$scripts_for_layout`` layout variable. Instead
-you should use blocks. The :php:class:`HtmlHelper` ties into view blocks, and its
+The :php:class:`HtmlHelper` ties into view blocks, and its
 :php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
 :php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``inline = false`` option:
+when used with the ``block = true`` option:
 
 .. code-block:: php
 
     <?php
     // in your view file
-    $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->script('carousel', ['block' => true]);
+    $this->Html->css('carousel', null, ['block' => true]);
     ?>
 
     // In your layout file.
@@ -265,11 +265,11 @@ when used with the ``inline = false`` option:
         </head>
         // rest of the layout follows
 
-The :php:meth:`HtmlHelper` also allows you to control which block the scripts
-and CSS go to::
+The :php:meth:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
+block the scripts and CSS go to::
 
     // in your view
-    $this->Html->script('carousel', array('block' => 'scriptBottom'));
+    $this->Html->script('carousel', ['block' => 'scriptBottom']);
 
     // in your layout
     <?= $this->fetch('scriptBottom') ?>
@@ -325,13 +325,6 @@ might look like:
    </body>
    </html>
 
-.. note::
-
-    Prior to version 2.1, method fetch() was not available, ``fetch('content')``
-    is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
-    ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
-    variable in version 2.0
-
 The ``script``, ``css`` and ``meta`` blocks contain any content defined
 in the views using the built-in HTML helper. Useful for including
 JavaScript and CSS files from views.
@@ -339,31 +332,28 @@ JavaScript and CSS files from views.
 .. note::
 
     When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
-    in view files, specify 'false' for the 'inline' option to place the HTML
+    in view files, specify ``'block' => true`` to place the HTML
     source in a block with the same name. (See API for more details on usage).
 
 The ``content`` block contains the contents of the rendered view.
 
-``$title_for_layout`` contains the page title. This variable is generated automatically,
-but you can override it by setting it in your controller/view.
-
 Setting the title for the layout is easiest to do in the
-controller, setting the ``$title_for_layout`` variable::
+controller, setting the ``title`` variable::
 
    class UsersController extends AppController {
        public function view_active() {
-           $this->set('title_for_layout', 'View Active Users');
+           $this->set('title', 'View Active Users');
        }
    }
 
 You can also set the title_for_layout variable from inside the view file::
 
-    $this->set('title_for_layout', $titleContent);
+    $this->set('title', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
 ``app/Template/Layout`` directory, and switch between them inside of your
 controller actions using the controller or view's
-:php:attr:`~View::$layout` property::
+:php:attr:`~Cake\\View\\View::$layout` property::
 
     // from a controller
     public function admin_view() {
@@ -381,7 +371,7 @@ using something like::
 
    class UsersController extends AppController {
        public function view_active() {
-           $this->set('title_for_layout', 'View Active Users');
+           $this->set('title', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
@@ -558,16 +548,6 @@ is given.
 Requesting Elements from a Plugin
 ---------------------------------
 
-2.0
----
-
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
-
-    echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
-
-2.1
----
-
 If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
@@ -638,17 +618,8 @@ To call any view method use ``$this->method()``
 
 .. php:method:: get(string $var, $default = null)
 
-    Get the value of a viewVar with the name ``$var``.
-
-    As of 2.5, you can provide a default value in case the variable is not
-    already set.
-
-.. php:method:: getVar(string $var)
-
-    Gets the value of the viewVar with the name ``$var``.
-
-    .. deprecated:: 2.3
-        Use :php:meth:`View::get()` instead.
+    Get the value of a viewVar with the name ``$var``. You can provide a default
+    value in case the variable is not already set.
 
 .. php:method:: getVars()
 
@@ -672,19 +643,6 @@ To call any view method use ``$this->method()``
           array('controller' => 'posts', 'action' => 'index')
         );
         //$uuid contains 'form0425fe3bad'
-
-.. php:method:: addScript(string $name, string $content)
-
-    Adds content to the internal scripts buffer. This buffer is made
-    available in the layout as ``$scripts_for_layout``. This method is
-    helpful when creating helpers that need to add JavaScript or CSS
-    directly to the layout. Keep in mind that scripts added from the
-    layout and elements in the layout will not be added to
-    ``$scripts_for_layout``. This method is most often used from inside
-    helpers, such as the :doc:`/core-libraries/helpers/html` Helper.
-
-    .. deprecated:: 2.1
-        Use the :ref:`view-blocks` features instead.
 
 .. php:method:: blocks
 
@@ -746,14 +704,6 @@ To call any view method use ``$this->method()``
     An instance of :php:class:`CakeRequest`. Use this instance to access
     information about the current request.
 
-.. php:attr:: output
-
-    Contains the last rendered content from a view, either the view file, or the
-    layout content.
-
-    .. deprecated:: 2.1
-        Use ``$view->Blocks->get('content');`` instead.
-
 .. php:attr:: Blocks
 
     An instance of :php:class:`ViewBlock`. Used to provide view block
@@ -765,6 +715,7 @@ More About Views
 .. toctree::
     :maxdepth: 1
 
+    views/cells
     views/themes
     views/json-and-xml-views
     views/helpers

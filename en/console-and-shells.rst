@@ -1,6 +1,8 @@
 Console and Shells
 ##################
 
+.. php:namespace:: Cake\Console
+
 CakePHP features not only a web framework but also a console framework
 for creating console applications. Console applications are ideal for handling
 a variety of background tasks such as maintenance, and completing work outside
@@ -43,7 +45,7 @@ shells and tasks for an application. It also comes with an executable::
 
 Running the Console with no arguments produces this help message::
 
-    Welcome to CakePHP v3.0.0-dev2 Console
+    Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
     App : App
     Path: /Users/markstory/Sites/cakephp-app/App/
@@ -114,7 +116,7 @@ whenever there are no other commands or arguments given to a shell. You may have
 also noticed that HelloShell is extending ``AppShell``. Much like
 :ref:`app-controller`, AppShell gives you a base class to contain all your
 common functions or logic. You can define an AppShell, by creating
-``app/Console/Command/AppShell.php``. Since our main method wasn't very
+``App/Console/Command/AppShell.php``. Since our main method wasn't very
 interesting let's add another command that does something::
 
 
@@ -193,11 +195,11 @@ Tasks are stored in ``Console/Command/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
 ``Console/Command/Task/FileGeneratorTask.php``.
 
-Each task must at least implement an ``execute()`` method. The ShellDispatcher,
+Each task must at least implement an ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
 
     class FileGeneratorTask extends Shell {
-        public function execute() {
+        public function main() {
 
         }
     }
@@ -211,7 +213,7 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
         public $tasks = ['Sound'];
 
         public function main() {
-            $this->Sound->execute();
+            $this->Sound->main();
         }
     }
 
@@ -245,8 +247,8 @@ Invoking Other Shells from Your Shell
 =====================================
 
 There are still many cases where you will want to invoke one shell from another though.
-`Shell::dispatchShell()` gives you the ability to call other shells by providing the
-`argv` for the sub shell. You can provide arguments and options either
+``Shell::dispatchShell()`` gives you the ability to call other shells by providing the
+``argv`` for the sub shell. You can provide arguments and options either
 as var args or as a string::
 
     // As a string
@@ -268,7 +270,7 @@ most output is un-necessary. And there are times when you are not interested in
 everything that a shell has to say. You can use output levels to flag output
 appropriately. The user of the shell, can then decide what level of detail
 they are interested in by setting the correct flag when calling the shell.
-:php:meth:`Shell::out()` supports 3 types of output by default.
+:php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
 * QUIET - Only absolutely important information should be marked for quiet output.
 * NORMAL - The default level, and normal usage
@@ -279,13 +281,16 @@ You can mark output as follows::
 
     // would appear at all levels.
     $this->out('Quiet message', 1, Shell::QUIET);
+    $this->quiet('Quiet message');
 
     // would not appear when quiet output is toggled
     $this->out('normal message', 1, Shell::NORMAL);
     $this->out('loud message', 1, Shell::VERBOSE);
+    $this->verbose('Verbose output');
 
     // would only appear when verbose output is enabled.
     $this->out('extra message', 1, Shell::VERBOSE);
+    $this->verbose('Verbose output');
 
 You can control the output level of shells, by using the ``--quiet`` and ``--verbose``
 options. These options are added by default, and allow you to consistently control
@@ -305,15 +310,15 @@ are several built-in styles, and you can create more. The built-in ones are
 * ``comment`` Additional text. Blue text.
 * ``question`` Text that is a question, added automatically by shell.
 
-You can create additional styles using `$this->stdout->styles()`. To declare a
+You can create additional styles using ``$this->stdout->styles()``. To declare a
 new output style you could do::
 
-    $this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
+    $this->_io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
 This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi
 colours are enabled, the following would be rendered as blinking magenta text
 ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. When defining
-styles you can use the following colours for the `text` and `background` attributes:
+styles you can use the following colours for the ``text`` and ``background`` attributes:
 
 * black
 * red
@@ -362,9 +367,8 @@ Configuring Options and Generating Help
 
 .. php:class:: ConsoleOptionParser
 
-Console option parsing in CakePHP has always been a little bit different
-from everything else on the command line. In 2.0 ``ConsoleOptionParser``
-helps provide a more familiar command line option and argument parser.
+``ConsoleOptionParser`` helps provide a more familiar command line option and
+argument parser.
 
 OptionParsers allow you to accomplish two goals at the same time.
 First they allow you to define the options and arguments, separating
@@ -460,11 +464,11 @@ You can use the following options when creating an argument:
 * ``help`` The help text to display for this argument.
 * ``required`` Whether this parameter is required.
 * ``index`` The index for the arg, if left undefined the argument will be put
-   onto the end of the arguments. If you define the same index twice the
-   first option will be overwritten.
+  onto the end of the arguments. If you define the same index twice the
+  first option will be overwritten.
 * ``choices`` An array of valid choices for this argument. If left empty all
-   values are valid. An exception will be raised when parse() encounters an
-   invalid value.
+  values are valid. An exception will be raised when parse() encounters an
+  invalid value.
 
 Arguments that have been marked as required will throw an exception when
 parsing the command if they have been omitted. So you don't have to
@@ -627,7 +631,7 @@ When defining a subcommand you can use the following options:
   to create method specific option parsers. When help is generated for a
   subcommand, if a parser is present it will be used. You can also
   supply the parser as an array that is compatible with
-  :php:meth:`ConsoleOptionParser::buildFromArray()`
+  :php:meth:`Cake\\Console\\ConsoleOptionParser::buildFromArray()`
 
 Adding subcommands can be done as part of a fluent method chain.
 
@@ -659,8 +663,8 @@ make building subcommand parsers easier, as everything is an array::
 Inside the parser spec, you can define keys for ``arguments``, ``options``,
 ``description`` and ``epilog``. You cannot define ``subcommands`` inside an
 array style builder. The values for arguments, and options, should follow the
-format that :php:func:`ConsoleOptionParser::addArguments()` and
-:php:func:`ConsoleOptionParser::addOptions()` use. You can also use
+format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also use
 buildFromArray on its own, to build an option parser::
 
     public function getOptionParser() {
@@ -772,7 +776,7 @@ the default host ``http://localhost/``  and thus resulting in invalid URLs. In t
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 
-For sending emails, you should provide CakeEmail class with the host you want to send the email with:
+For sending emails, you should provide CakeEmail class with the host you want to send the email with::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
@@ -786,8 +790,6 @@ Shell API
 
     AppShell can be used as a base class for all your shells. It should extend
     :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
-
-.. php:namespace:: Cake\Console
 
 .. php:class:: Shell(ConsoleIo $io)
 
@@ -830,7 +832,7 @@ Shell API
     :param string $method: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
 
-    Outputs a method to ``stderr``, works similar to :php:meth:`Shell::out()`
+    Outputs a method to ``stderr``, works similar to :php:meth:`Cake\\Console\\Shell::out()`
 
 .. php:method:: error($title, $message = null)
 
@@ -842,16 +844,8 @@ Shell API
 
 .. php:method:: getOptionParser()
 
-    Should return a :php:class:`ConsoleOptionParser` object, with any
+    Should return a :php:class:`Cake\\Console\\ConsoleOptionParser` object, with any
     sub-parsers for the shell.
-
-.. php:method:: hasMethod($name)
-
-    Check to see if this shell has a callable method by the given name.
-
-.. php:method:: hasTask($task)
-
-    Check to see if this shell has a task with the provided name.
 
 .. php:method:: hr($newlines = 0, $width = 63)
 
@@ -918,20 +912,6 @@ Shell API
     On windows systems, plain output is the default unless the ``ANSICON`` environment
     variable is present.
 
-.. php:method:: runCommand($command, $argv)
-
-    Runs the Shell with the provided argv.
-
-    Delegates calls to Tasks and resolves methods inside the class. Commands
-    are looked up with the following order:
-
-    - Method on the shell.
-    - Matching task name.
-    - main() method.
-
-    If a shell implements a main() method, all missing method calls will be
-    sent to main() with the original method name in the argv.
-
 .. php:method:: shortPath($file)
 
     Makes absolute file path easier to read.
@@ -963,10 +943,11 @@ More Topics
     :maxdepth: 1
 
     console-and-shells/code-generation-with-bake
-    console-and-shells/i18n-shell
-    console-and-shells/upgrade-shell
     console-and-shells/repl
     console-and-shells/cron-jobs
+    console-and-shells/i18n-shell
+    console-and-shells/completion-shell
+    console-and-shells/upgrade-shell
 
 
 .. meta::
