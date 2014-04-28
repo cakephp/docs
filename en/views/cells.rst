@@ -144,8 +144,8 @@ to use when rendering the cell::
     // Calling render() explicitly
     echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
 
-    // Set action before echoing the cell.
+    // Set template before echoing the cell.
     $cell = $this->cell('Inbox'); ?>
-    $cell->action = 'messages';
+    $cell->template = 'messages';
     echo $cell;
 
