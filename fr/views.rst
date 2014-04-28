@@ -33,11 +33,11 @@ dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre language de template et CakePHP.
 
-Un fichier de vue est stocké dans ``/app/View/``, dans un sous-dossier
+Un fichier de vue est stocké dans ``/App/Template/``, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
-``/app/View/Products/view.ctp``.
+``/App/Template/Products/view.ctp``.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différent usages qui seront présentés dans ce
@@ -130,7 +130,7 @@ de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est
 nécessaire. Chaque vue peut étendre une autre vue si vous le souhaitez. Chaque
-vue parente va récupérer le contenu de la vue précédente en tant que bloc
+vue parente va récupérer le contenu de la vue précédente en tant que block
 ``content``.
 
 .. note::
@@ -359,7 +359,7 @@ controller, en configurant la variable ``title``::
 
    class UsersController extends AppController {
        public function view_active() {
-           $this->set('title_for_layout', 'Voir les Utilisateurs actifs');
+           $this->set('title', 'Voir les Utilisateurs actifs');
        }
    }
 
@@ -395,7 +395,7 @@ actions du controller en utilisant quelque chose comme::
 
        public function view_image() {
            $this->layout = 'image';
-           //sort une image de l\'utilisateur
+           //affiche une image de l\'utilisateur
        }
    }
 

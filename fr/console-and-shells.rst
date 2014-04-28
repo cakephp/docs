@@ -3,24 +3,24 @@ Console et Shells
 
 .. php:namespace:: Cake\Console
 
-CakePHP ne dispose pas seulement d'un framework web mais aussi d'une console
+CakePHP n'est pas seulement un framework web, c'est aussi une console
 de framework pour la création d'applications. Les applications par la console
-sont idéales pour la gestion d'une variété de tâches d'arrière-plan comme la
+sont idéales pour la gestion des tâches d'arrière-plan comme la
 maintenance et l'achèvement du travail en-dehors du cycle de requête-réponse.
 Les applications par la console CakePHP vous permettent de réutiliser les
 classes de votre application à partir de lignes de commande.
 
 CakePHP dispose d'un certain nombre d'applications fournies pour la console.
 Certaines de ces applications sont utilisées de concert avec les
-fonctionnalités de CakePHP (comme ACL ou i18n), et d'autres sont pour
-une utilisation générale pour que votre travail se fasse plus vite.
+fonctionnalités de CakePHP (comme i18n), et d'autres sont pour une utilisation
+générale pour que votre travail se fasse plus vite.
 
 La console de CakePHP
 =====================
 
 Cette section est une introduction sur la ligne de commande dans CakePHP.
 Les outils de la Console sont idéals pour l'utilisation de tâches cron, ou pour
-des utilitaires basés sur des lignes de commandes qui n'ont pas besoin d'être
+les utilitaires basés sur les lignes de commandes qui n'ont pas besoin d'être
 accessible par un navigateur.
 
 PHP fournit un puissant client CLI qui rend l'interfaçage avec votre système
@@ -36,10 +36,10 @@ paramètres.
 
 Avant d'entrer dans les spécificités, assurons-nous que vous pouvez exécuter
 la console CakePHP. Tout d'abord, vous devrez ouvrir un shell système. Les
-exemples présentés dans cette section sont issus du bash, mais la console
-CakePHP est également compatible Windows. Exécutons le programme Console
+exemples présentés dans cette section seront en bash, mais la console
+CakePHP est également compatible avec Windows. Exécutons le programme Console
 depuis le bash. Cet exemple suppose que l'utilisateur est actuellement
-connecté dans l'invite bash et qu'il en est root sur une installation CakePHP.
+connecté dans l'invité bash et qu'il est en root sur une installation CakePHP.
 
 Les applications CakePHP contiennent un répertoire ``Console`` qui contient
 tous les shells et les tâches pour une application. Il est aussi livré avec
@@ -138,7 +138,8 @@ pas très intéressante, ajoutons une autre commande qui fait quelque chose::
         }
 
         public function hey_there() {
-            $this->out('Hey there ' . $this->args[0]);
+            $name = !empty($this->args[0]) : $this->args[0] : 'Anonymous';
+            $this->out('Hey there ' . $name);
         }
     }
 
@@ -168,9 +169,9 @@ propriétés attachées à votre shell::
 
     namespace App\Console\Command;
 
-    use Cake\Console\Shell;
+    use App\Console\Command\AppShell;
 
-    class UserShell extends Shell {
+    class UserShell extends AppShell {
 
         public function initialize() {
             parent::initialize();
@@ -178,6 +179,9 @@ propriétés attachées à votre shell::
         }
 
         public function show() {
+            if (empty($this->args[0])) {
+                return $this->error('Please enter a username.');
+            }
             $user = $this->Users->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
@@ -879,8 +883,8 @@ API de Shell
 .. php:method:: dispatchShell()
 
     Dispatche une commande vers un autre Shell. Similaire à
-    :php:meth:`Controller::requestAction()` mais pour lancer les shells
-    à partir d'autres shells.
+    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` mais pour
+    lancer les shells à partir d'autres shells.
 
     Regardez :ref:`invoking-other-shells-from-your-shell`.
 
@@ -939,7 +943,8 @@ API de Shell
 
 .. php:method:: loadTasks()
 
-    Charge les tâches défines dans public :php:attr:`Shell::$tasks`.
+    Charge les tâches défines dans public
+    :php:attr:`Cake\\Console\\Shell::$tasks`.
 
 .. php:method:: nl($multiplier = 1)
 

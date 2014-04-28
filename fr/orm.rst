@@ -56,7 +56,6 @@ de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable e
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
 ajouterions ce qui suit dans ``App/Model/Repository/ArticlesTable.php``::
 
-    <?php
     namespace App\Model\Repository;
 
     use Cake\ORM\Table;
@@ -80,7 +79,6 @@ vous laissent définir les méthodes accesseurs et mutateurs, définissent la
 logique personnalisée pour des enegistrements individuels et plus encore. Nous
 commencerons par ajouter ce qui suit à ``App/Model/Entity/Article.php``::
 
-    <?php
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -120,14 +118,9 @@ Pour en savoir plus sur les Models
 .. toctree::
     :maxdepth: 2
 
-    orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/behaviors
-    orm/query-builder
+    orm/database-basics
     orm/schema-system
-
-
-.. meta::
-    :title lang=fr: Models (Modèles)
-    :keywords lang=fr: flux d'informations,fichier csv,programmation orientée objet,classe de modèle,classes de modèle,définition de modèle,modèle interne,modèle du coeur,déclaration simple,modèle application,classe php,table de base de données,modèle de données,accès aux données,web externe,héritage,différentes façons,validité,fonctionnalité,requêtes

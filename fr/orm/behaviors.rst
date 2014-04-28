@@ -190,8 +190,8 @@ Lors de la création de behaviors, il peut y avoir des situations où vous ne
 voulez pas montrer les méthodes find, ou vous avez besoin de renommer les
 finders pour éviter les méthodes dupliquées. Dans ces cas, vous pouvez utiliser
 la clé de configuration ``implementedFinders`` pour renommer ou exclure les
-méthodes find. Par exemple, si vous voulez renommer notre méthode
-``find(slug)``, nous pourrions faire ce qui suit::
+méthodes find. Par exemple, si vous vouliez renommer votre méthode
+``find(slug)``, vous pourriez faire ce qui suit::
 
     public $_defaultConfig = [
         'implementedFinders' => [
@@ -199,9 +199,9 @@ méthodes find. Par exemple, si vous voulez renommer notre méthode
         ]
     ];
 
-Utliser cette configuration fera que ``find('slug')`` attrapera une erreur.
-Cepedant, cela rendra ``find('slugged')`` disponible. Notamment si notre
-behavior implémente d'autres méthodes find, elles **ne** seront pas disponible
+Utiliser cette configuration fera que ``find('slug')`` attrapera une erreur.
+Cependant, cela rendra ``find('slugged')`` disponible. Notamment si notre
+behavior implémente d'autres méthodes find, elles **ne** seront pas disponibles
 puisqu'elles ne sont pas inclues dans la configuration.
 
 Depuis que les méthodes montrées sont décidées par configuration, vous pouvez

@@ -105,7 +105,7 @@ Configurer CakePHP est aussi simple que de le flanquer dans le
 document root de votre serveur web, ou aussi complexe et flexible
 que vous le souhaitez.
 Cette section couvrira les deux types principaux d'installation de CakePHP:
-développement, production.
+développement et production.
 
 -  Développement: Facile à mettre en oeuvre, mais les URLs de l'application
    contiennent le nom du répertoire d'installation de CakePHP et c'est moins

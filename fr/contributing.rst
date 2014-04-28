@@ -1,7 +1,7 @@
 Contribuer
 ##########
 
-Il y a un certain nombre de moyens pour contribuer à CakePHP. Les sections
+Il y a un plusieurs façons de contribuer à CakePHP. Les sections
 suivantes couvrent les différentes façons avec lesquelles vous pouvez
 contribuer à CakePHP:
 

@@ -73,8 +73,8 @@ propriété :php:attr:`~Controller::$helpers` dans votre classe ``AppController`
 Pensez aussi à appeler les fonctions de rappel (callbacks) de AppController dans
 celles du controller enfant pour de meilleurs résultats::
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
     }
 
 Les paramètres de requête
@@ -109,7 +109,7 @@ RecipesController pourrait contenir les actions
                 //la logique de l'action va ici..
             }
         
-            public function share($client_id, $recette_id) {
+            public function share($clientId, $recetteId) {
                 //la logique de l'action va ici..
             }
         
@@ -118,10 +118,10 @@ RecipesController pourrait contenir les actions
             }
         }
 
-Les fichiers de vue pour ces actions seraient ``app/View/Recettes/view.ctp``,
-``app/View/Recettes/share.ctp``, et ``app/View/Recettes/search.ctp``. Le nom
-du fichier de vue est par convention le nom de l'action en minuscules et avec
-des underscores.
+Les fichiers de vue pour ces actions seraient ``app/Template/Recipes/view.ctp``,
+``app/Template/Recipes/share.ctp``, et ``app/Template/Recipes/search.ctp``. Le
+nom du fichier de vue est par convention le nom de l'action en minuscules et
+avec des underscores.
 
 Les actions du Controller utilisent généralement :php:meth:`~Controller::set()`
 pour créer un contexte que :php:class:`View` utilise pour rendre la vue. Du
@@ -159,8 +159,8 @@ Le controller ci-dessus est un exemple montrant comment la méthode peut être
 utilisée avec :php:meth:`~Controller::requestAction()` et des requêtes normales.
 Retourner un tableau de données à une requête non-requestAction va entraîner
 des erreurs et devra être évité. Regardez la section sur
-:php:meth:`~Controller::requestAction()` pour plus d'astuces sur l'utilisation
-de :php:meth:`~Controller::requestAction()`.
+:php:meth:`Cake\\Controller\\Controller::requestAction()` pour plus d'astuces
+sur l'utilisation de :php:meth:`~Controller::requestAction()`.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
 application, nous couvrons certains des attributs et méthodes du coeur fournis
@@ -177,7 +177,7 @@ Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
 (ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
 ou juste après que les actions du controller soient effectuées:
 
-.. php:method:: beforeFilter()
+.. php:method:: beforeFilter(Event $event)
 
     Cette fonction est exécutée avant chaque action du controller. C'est
     un endroit pratique pour vérifier le statut d'une session ou les
@@ -187,14 +187,14 @@ ou juste après que les actions du controller soient effectuées:
 
         La méthode beforeFilter() sera appelée pour les actions manquantes.
 
-.. php:method:: beforeRender()
+.. php:method:: beforeRender(Event $event)
 
     Cette méthode est appelée après l'action du controller mais avant
     que la vue ne soit rendue. Ce callback n'est pas souvent utilisé,
     mais peut-être nécessaire si vous appellez :php:meth:`~Controller::render()`
     manuellement à la fin d'une action donnée.
 
-.. php:method:: afterFilter()
+.. php:method:: afterFilter(Event $event)
 
     Cette méthode est appelée après chaque action du controller, et après
     que l'affichage soit terminé. C'est la dernière méthode du controller
@@ -234,7 +234,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
         // Ensuite vous pouvez les utiliser dans la vue de cette manière:
         ?>
 
-        Vous avez sélectionné un glaçage <?php echo $couleur; ?> pour le gâteau.
+        Vous avez sélectionné un glaçage <?= $couleur; ?> pour le gâteau.
 
     La méthode :php:meth:`~Controller::set()` peut également prendre un tableau
     associatif comme premier paramètre. Cela peut souvent être une manière
@@ -247,11 +247,11 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     ::
 
-        $data = array(
+        $data = [
             'couleur' => 'rose',
             'type' => 'sucre',
             'prix_de_base' => 23.95
-        );
+        ];
 
         // donne $couleur, $type, et $prix_de_base 
         // disponible dans la vue:
@@ -265,7 +265,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
         $this->set('title_for_layout', 'Ceci est la page titre');
 
 
-.. php:method:: render(string $action, string $layout, string $file)
+.. php:method:: render(string $view, string $layout)
 
     La méthode :php:meth:`~Controller::render()` est automatiquement appelée à
     la fin de chaque action exécutée par le controller. Cette méthode exécute
@@ -276,13 +276,13 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     Le fichier de vue utilisé par défaut est déterminé par convention.
     Ainsi, si l'action ``search()`` de notre controller RecettesController
-    est demandée, le fichier de vue situé dans /app/view/recettes/search.ctp
+    est demandée, le fichier de vue situé dans /App/Template/Recettes/search.ctp
     sera utilisé::
 
         class RecettesController extends AppController {
         // ...
             public function search() {
-                // Rend la vue dans /View/Recettes/search.ctp
+                // Rend la vue dans /Template/Recettes/search.ctp
                 $this->render();
             }
         // ...
@@ -295,12 +295,12 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
     le paramètre ``$action``.
 
     Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
-    vue ou un élément dont le chemin est relatif au dossier ``/app/View``. Cela
-    permet un affichage direct des éléments, ce qui est très pratique lors
+    vue ou un élément dont le chemin est relatif au dossier ``/app/Template``.
+    Cela permet un affichage direct des éléments, ce qui est très pratique lors
     d'appels AJAX.
     ::
 
-        // Rend un élément dans /View/Elements/ajaxreturn.ctp
+        // Rend un élément dans /Template/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
     Le paramètre :php:attr:`~View::$layout` vous permet de spécifier le layout
@@ -320,8 +320,8 @@ directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
         }
     }
 
-Cela rendrait ``app/View/Posts/fichier_personnalise.ctp`` au lieu de
-``app/View/Posts/mon_action.ctp``.
+Cela rendrait ``app/Template/Posts/fichier_personnalise.ctp`` au lieu de
+``app/Template/Posts/mon_action.ctp``.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -333,7 +333,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``app/Plugin/Users/Template/UserDetails/custom_file.ctp`` 
 
 Contrôle de Flux
 ----------------
@@ -350,11 +350,11 @@ Contrôle de Flux
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
                 return $this->redirect(
-                    array('controller' => 'paiements', 'action' => 'remerciements')
+                    ['controller' => 'paiements', 'action' => 'remerciements']
                 );
             } else {
                 return $this->redirect(
-                    array('controller' => 'paiements', 'action' => 'confirmations')
+                    ['controller' => 'paiements', 'action' => 'confirmations']
                 );
             }
         }
@@ -366,7 +366,7 @@ Contrôle de Flux
 
     Vous pouvez aussi passer des données à l'action::
 
-        $this->redirect(array('action' => 'editer', $id));
+        $this->redirect(['action' => 'editer', $id]);
 
     Le second paramètre de la fonction :php:meth:`~Controller::redirect()`
     vous permet de définir un code de statut HTTP accompagnant la redirection.
@@ -387,50 +387,28 @@ Contrôle de Flux
     ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
     vous pouvez utiliser::
 
-        $this->redirect(array(
+        $this->redirect([
             'controller' => 'commandes',
             'action' => 'confirmation',
             'produit' => 'pizza',
             'quantite' => 5
-        ));
+        ]);
 
     Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
     à ceci::
 
-        $this->redirect(array(
+        $this->redirect([
             'controller' => 'commandes',
             'action' => 'confirmation',
-            '?' => array(
+            '?' => [
                 'produit' => 'pizza',
                 'quantite' => 5
-            ),
+            ],
             '#' => 'top'
-        ));
+        ]);
 
     L'URL généré serait:
         ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
-
-.. php:method:: flash(string $message, string $url, integer $pause, string $layout)
-
-    Tout comme :php:meth:`~Controller::redirect()`, la méthode
-    :php:meth:`~Controller::flash()` est utilisée pour rediriger un utilisateur
-    vers une autre page à la fin d'une opération. La méthode
-    :php:meth:`~Controller::flash()` est toutefois différente en ce sens
-    qu'elle affiche un message avant de diriger l'utilisateur vers une autre
-    url.
-
-    Le premier paramètre devrait contenir le message qui sera affiché et le
-    second paramètre une URL relative à votre application CakePHP. CakePHP
-    affichera le ``$message`` pendant ``$pause`` secondes avant de rediriger
-    l'utilisateur.
-
-    Si vous souhaitez utiliser un template particulier pour messages flash,
-    vous pouvez spécifier le nom du layout dans le paramètre
-    :php:attr:`~View::$layout`.
-
-    Pour définir des messages flash dans une page, regardez du côté de la
-    méthode :php:meth:`SessionComponent::setFlash()` du component Session
-    (SessionComponent).
 
 Autres Méthodes utiles
 ----------------------
@@ -458,7 +436,7 @@ Autres Méthodes utiles
                 if ($this->referer() != '/') {
                     return $this->redirect($this->referer());
                 }
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
 
@@ -467,7 +445,9 @@ Autres Méthodes utiles
         class UtilisateursController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
-                return $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect(
+                    $this->referer(['action' => 'index'])
+                );
             }
         }
 
@@ -491,62 +471,6 @@ Autres Méthodes utiles
         Cache-Control: post-check=0, pre-check=0
         Pragma: no-cache
 
-.. php:method:: postConditions(array $data, mixed $op, string $bool, boolean $exclusive)
-
-    Utilisez cette méthode pour transformer des données de formulaire,
-    transmises par POST (depuis les inputs du Helper Form), en des
-    conditions de recherche pour un model. Cette fonction offre un
-    raccourci appréciable pour la construction de la logique de recherche.
-    Par exemple, un administrateur aimerait pouvoir chercher des commandes
-    dans le but de connaître les produits devant être emballés. Vous
-    pouvez utiliser les Helpers Form et Html pour construire un formulaire
-    rapide basé sur le model Commande. Ensuite une action du controller
-    peut utiliser les données postées par ce formulaire pour construire
-    automatiquement les conditions de la recherche::
-
-        public function index() {
-            $conditions = $this->postConditions($this->request->data);
-            $commandes = $this->Commande->find('all', compact('conditions'));
-            $this->set('commandes', $orders);
-        }
-
-    Si ``$this->data[‘Commande’][‘destination’]`` vaut "Boulangerie du village",
-    postConditions convertit cette condition en un tableau compatible avec
-    la méthode Model->find(). Soit dans notre cas,
-    ``array("Commande.destination" => "Boulangerie du village")``.
-
-    Si vous voulez utiliser un opérateur SQL différent entre chaque
-    terme, remplacez-le en utilisant le second paramètre::
-
-        /*
-        Contenu de $this->request->data
-        array(
-            'Commande' => array(
-                'nb_items' => '4',
-                'referrer' => 'Ye Olde'
-            )
-        )
-        */
-
-        // Récupérons maintenant les commandes qui ont au moins 4 items et
-        contenant 'Ye Olde'
-        $conditions = $this->postConditions(
-            $this->request->data,
-            array(
-                'nb_items' => '>=', 
-                'referrer' => 'LIKE'
-            )
-        );
-        $commandes = $this->Commande->find('all', compact('conditions'));
-
-    Le troisième paramètre vous permet de dire à CakePHP quel opérateur
-    booléen SQL utiliser entre les conditions de recherche. Les chaînes
-    comme 'AND', 'OR' et 'XOR' sont des valeurs possibles.
-
-    Enfin, si le dernier paramètre est défini à vrai et que $op est un tableau,
-    les champs non-inclus dans $op ne seront pas inclus dans les conditions
-    retournées.
-
 .. php:method:: paginate()
 
     Cette méthode est utilisée pour paginer les résultats retournés par vos
@@ -557,140 +481,40 @@ Autres Méthodes utiles
 
 .. php:method:: requestAction(string $url, array $options)
 
-    Cette fonction appelle l'action d'un controller depuis tout endroit
-    du code et retourne les données associées à cette action. L'``$url``
-    passée est une adresse relative à votre application CakePHP
-    (/nomducontroleur/nomaction/parametres). Pour passer des données
-    supplémentaires au controller destinataire, ajoutez le tableau $options.
+    Regardez la documentation pour
+    :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` pour plus
+    d'informations sur cette méthode.
 
-    .. note::
+.. php:method:: loadModel(string $modelClass, string $type)
 
-        Vous pouvez utiliser :php:meth:`~Controller::requestAction()` pour
-        récupérer l'intégralité de l'affichage d'une vue en passant la valeur
-        'return' dans les options : ``requestAction($url, array('return'))``.
-        Il est important de noter que faire un requestAction en utilisant
-        'return' à partir d'une méthode d'un controller peut entraîner des
-        problèmes de fonctionnement dans les script et tags CSS.
-
-    .. warning::
-
-        Si elle est utilisée sans cache, la méthode
-        :php:meth:`~Controller::requestAction()` peut engendrer des faibles
-        performances. Il est rarement approprié de l'utiliser dans un
-        controller ou un model.
-
-    :php:meth:`~Controller::requestAction()` est plutôt utilisée en conjonction
-    avec des éléments (mis en cache) - comme moyen de récupérer les données
-    pour un élément avant de l'afficher. Prenons l'exemple de la mise en place
-    d'un élément "derniers commentaires" dans le layout. Nous devons d'abord
-    créer une méthode de controller qui retourne les données::
-    
-        // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
-                if (empty($this->request->params['requested'])) {
-                    throw new ForbiddenException();
-                }
-                return $this->Comment->find(
-                    'all',
-                    array('order' => 'Comment.created DESC', 'limit' => 10)
-                );
-            }
-        }
-
-    Vous devriez toujours inclure des vérifications pour vous assurer que
-    vos méthodes de requestAction sont en fait originaires de
-    :php:meth:`~Controller::requestAction()`. Ne pas le faire va autoriser les
-    méthodes :php:meth:`~Controller::requestAction()` à être directement
-    accessible d'une URL, ce qui n'est généralement pas souhaité.
-
-    Si nous créons un élément simple pour appeler cette fonction::
-
-        // View/Elements/latest_comments.ctp
-
-        $comments = $this->requestAction('/comments/latest');
-        foreach ($comments as $comment) {
-            echo $comment['Comment']['title'];
-        }
-
-    On peut ensuite placer cet élément n'importe où pour obtenir la
-    sortie en utilisant::
-
-        echo $this->element('latest_comments');
-
-    Ecrit de cette manière, dès que l'élément est affiché, une requête
-    sera faite au controller pour obtenir les données, les données seront
-    traitées, et retournées. Cependant, compte tenu de l'avertissement
-    ci-dessus il vaut mieux utiliser des éléments mis en cache pour anticiper
-    des traitements inutiles. En modifiant l'appel à l'élément pour qu'il
-    ressemble à ceci::
-
-        echo $this->element('latest_comments', array(), array('cache' => true));
-
-    L'appel à :php:meth:`~Controller::requestAction()` ne sera pas effectué
-    tant que le fichier de vue de l'élément en cache existe et est valide.
-
-    De plus, :php:meth:`~Controller::requestAction()` prend désormais des URLs
-    basées sur des tableau dans le style de cake::
-
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'featured'),
-            array('return')
-        );
-
-    Cela permet à l'appel de :php:meth:`~Controller::requestAction()` d'éviter
-    l'utilisation de Router::url ce qui peut améliorer la performance. Les urls
-    basées sur des tableaux sont les mêmes que celles utilisées par
-    :php:meth:`HtmlHelper::link()` avec une seule différence. Si vous utilisez
-    des paramètres nommés ou passés dans vos urls, vous devez les mettre dans
-    un second tableau et les inclure dans la clé correcte. La raison de cela
-    est que :php:meth:`~Controller::requestAction()` fusionne seulement le
-    tableau des arguments nommés avec les membres du tableau de
-    ``Controller::params`` et ne place pas les arguments nommés dans la clé
-    'named'. Des parties supplémentaires dans le tableau ``$option`` vont aussi
-    être disponibles dans le tableau Controller::params de l'action requêtée ::
-        
-        echo $this->requestAction('/articles/featured/limit:3');
-        echo $this->requestAction('/articles/view/5');
-
-    En array dans requestAction serait ainsi::
-
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'featured'),
-            array('named' => array('limit' => 3))
-        );
-
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'view'),
-            array('pass' => array(5))
-        );
-
-    .. note::
-
-        Contrairement aux autres places où les URLs en tableau sont analogues
-        aux URLs en chaîne de caractère, requestAction les traite différemment.
-
-    Quand vous utilisez une url en tableau en conjonction avec
-    :php:meth:`~Controller::requestAction()`, vous devez spécifier **tous** les
-    paramètres dont vous aurez besoin dans l'action requêtée. Ceci inclut les
-    paramètres comme ``$this->request->data``. En plus de passer tous les
-    paramètres requis, les paramètres nommés et passés doivent être faits dans
-    le second tableau comme vu ci-dessus.
-
-.. php:method:: loadModel(string $modelClass, mixed $id)
-
-    La fonction :php:meth:`~Controller::loadModel()` devient pratique quand
+    La fonction ``loadModel`` devient pratique quand
     vous avez besoin d'utiliser un model qui n'est pas le model du controller
     par défaut ou un de ses models associés::
     
-        $this->loadModel('Article');
-        $recentArticles = $this->Article->find(
-            'all',
-            array('limit' => 5, 'order' => 'Article.created DESC')
+        $this->loadModel('Articles');
+        $recentArticles = $this->Articles->find('all', [
+            'limit' => 5,
+            'order' => 'Articles.created DESC'
+        ]);
+
+    Si vous utilisez un provider de table différent de l'ORM intégré, vous
+    pouvez lier ce système de table dans les controllers de CakePHP en
+    connectant sa méthode factory::
+
+        $this->modelFactory(
+            'ElasticIndex',
+            ['ElasticIndexes', 'factory']
         );
 
-        $this->loadModel('User', 2);
-        $user = $this->User->read();
+    Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
+    pour charger les instances::
+
+        $this->loadModel('Locations', 'ElasticIndex');
+
+    .. note::
+
+        La TableRegistry intégrée dans l'ORM est connectée par défaut comme
+        provider de 'Table'.
 
 
 Les attributs du Controller
@@ -712,8 +536,8 @@ regardez `l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Con
         }
 
 
-$components, $helpers et $uses
-------------------------------
+$components, $helpers
+---------------------
 
 Les autres attributs les plus souvent utilisés permettent d'indiquer à
 CakePHP quels :php:attr:`~Controller::$helpers`,
@@ -729,28 +553,6 @@ référence à l'objet (``$this->{$helpername}``).
 
     Chaque controller a déjà accès, par défaut, à certaines de ces classes,
     donc vous n'avez pas besoin de les redéfinir.
-
-.. php:attr:: uses
-
-    Les controllers ont accès par défaut à leur model primaire respectif.
-    Notre controller Recettes aura donc accès à son model Recette, disponible
-    via ``$this->Recette``, et notre controller Produits proposera un accès à
-    son model via ``$this->Produit``. Cependant, quand vous autorisez un
-    controller à accéder à d'autres models via la variable
-    :php:attr:`~Controller::$uses`, le nom du model primaire du controller
-    courant doit également être inclu. Ceci est illustré dans l'exemple
-    ci-dessous.
-    
-    Si vous ne souhaitez pas utiliser un Model dans votre controller,
-    définissez ``public $uses = array()``. Cela vous permettra d'utiliser un
-    controller sans avoir besoin d'un fichier Model correspondant. Cependant,
-    les models définis dans ``AppController`` seront toujours chargés. Vous
-    pouvez aussi utiliser ``false`` pour ne charger absolument aucun model.
-    Même ceux définis dans ``AppController``.
-
-    .. versionchanged:: 2.1
-        :php:attr:`~Controller::$uses` a maintenant une nouvelle valeur par
-        défaut, il gère aussi ``false`` différemment.
 
 .. php:attr:: helpers
 
@@ -768,15 +570,14 @@ référence à l'objet (``$this->{$helpername}``).
     d'autres classes MVC::
 
         class RecipesController extends AppController {
-            public $uses = array('Recipe', 'User');
-            public $helpers = array('Js');
-            public $components = array('RequestHandler');
+            public $helpers = ['Js'];
+            public $components = ['RequestHandler'];
         }
 
     Toutes ces variables sont fusionnées avec leurs valeurs héritées,
     par conséquent ce n'est pas nécessaire de re-déclarer (par exemple) le
-    helper :php:class:`FormHelper` ou tout autre déclaré dans votre controller
-    App.
+    helper :php:class:`FormHelper` ou tout autre déclaré dans votre
+    ``AppController``.
 
 .. php:attr:: components
 
@@ -810,13 +611,13 @@ du controller qui méritent leurs propres sections dans le manuel.
     normaux du component::
 
         class ArticlesController extends AppController {
-            public $components = array(
-                'Paginator' => array(
-                    'Article' => array(
-                        'conditions' => array('published' => 1)
-                    )
-                )
-            );
+            public $components = [
+                'Paginator' => [
+                    'Article' => [
+                        'conditions' => ['published' => 1]
+                    ]
+                ]
+            ];
         }
 
 .. todo::

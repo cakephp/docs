@@ -12,7 +12,7 @@ Si vous sortez votre application dans la nature, il est bon de vous assurer
 qu'elle n'a pas de fuites. Allez voir
 :doc:`/core-libraries/components/security-component` pour vous sécuriser contre
 les attaques CSRF, form field tampering, etc... Utiliser
-:doc:`/models/data-validation` est aussi une bonne idée, pour protéger votre
+:doc:`/core-libraries/validation` est aussi une bonne idée, pour protéger votre
 base de données et aussi contre les attaques XSS. Vérifiez que seul votre
 répertoire ``webroot`` est visible publiquement, et que vos secrets (comme
 le salt de votre app, et les clés de sécurité) sont privés et uniques aussi!
@@ -23,7 +23,7 @@ Définir le document root
 Configurer le document root correctement dans votre application est aussi
 une étape importante pour garder votre code sécurisé et votre application
 plus sûre. Les applications CakePHP devraient avoir le document root configuré
-au répertoire ``app/webroot`` de l'application. Cela rend les fichiers de
+au répertoire ``webroot`` de l'application. Cela rend les fichiers de
 l'application et de configuration inaccessibles via une URL.
 Configurer le document root est différent selon les webserveurs. Regardez
 la documentation :doc:`/installation/url-rewriting` pour une
