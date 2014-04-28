@@ -56,7 +56,7 @@ You can generate this stub code quickly using ``bake``::
 Would generate the code we typed out.
 
 Implementing the Cell
-=====================
+---------------------
 
 Assume that we are working on an application that allows users to send messages
 to each other. We have a ``Messages`` model, and we want to show the count of
@@ -106,6 +106,20 @@ You can execute other methods using the following::
     // Run the expanded() method on the Inbox cell
     $cell = $this->cell('Inbox::expanded');
 
+Passing Arguments to a Cell
+---------------------------
+
+You will often want to parameterize cell methods to make cells more flexible.
+By using the second and third arguments of ``cell()`` you can pass action
+parameters, and additional options to your cell classes::
+
+    $cell = $this->cell('Inbox::recent', ['since' => '-3 days']);
+
+The above would match the following function signature::
+
+    public function recent($since) {
+    }
+
 Rendering a Cell
 ================
 
@@ -120,22 +134,8 @@ our action name, e.g. ``display.ctp``.
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell templates if required.
 
-Passing Arguments to a Cell
----------------------------
-
-You will often want to parameterize cell methods to make cells more flexible.
-By using the second and third arguments of ``cell()`` you can pass action
-parameters, and additional options to your cell classes::
-
-    <?= $this->cell('Inbox::recent', ['since' => '-3 days']); ?>
-
-The above would match the following function signature::
-
-    public function recent($since) {
-    }
-
 Rendering Alternate Templates
-=============================
+-----------------------------
 
 By convention cells render templates that match the action they are executing.
 If you need to render a different view template you can specify the template
