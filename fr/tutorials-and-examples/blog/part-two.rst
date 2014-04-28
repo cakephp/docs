@@ -37,7 +37,7 @@ de la base de données appelée ``articles``.
     configuration et utilisera les objets par défaut.
 
 Pour plus d'informations sur les models, comme les préfixes des tables,
-les callbacks, et la validation, consultez le chapitre :doc:`/models` du
+les callbacks, et la validation, consultez le chapitre :doc:`/orm` du
 manuel.
 
 

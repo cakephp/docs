@@ -27,7 +27,7 @@ L'organisation des répertoires de l'application a changé et suit maintenant
 `squelette d'application <https://github.com/cakephp/app>`_ de projet comme
 point de référence lors de la mise à jour de votre application.
 
-CakePHP doit être installé avec composer
+CakePHP doit être installé avec Composer
 ========================================
 
 Puisque CakePHP ne peut plus être facilement installé via PEAR, ou dans
@@ -623,6 +623,7 @@ View class
   à la place.
 - ``View::$ext`` a été retirée et à la place une propriété protected
   ``View::$_ext`` a été ajoutée.
+- ``View::addScript()`` a été retirée. Utilisez :ref:`view-blocks` à la place.
 
 ViewBlock
 ---------

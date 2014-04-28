@@ -15,7 +15,6 @@ Utilitaires
     ../core-utility-libraries/number
     ../core-utility-libraries/router
     ../core-utility-libraries/security
-    ../core-utility-libraries/set
     ../core-utility-libraries/string
     ../core-utility-libraries/time
     ../core-utility-libraries/xml
