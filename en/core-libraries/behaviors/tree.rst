@@ -14,9 +14,9 @@ Relational databases are usually not well suited for storing and retrieving this
 type of data, but there are a few known techniques that can make them effective
 for working with multi-level information.
 
-The TreeBehavior helps you maintaining an efficient storage for hierarchical
-data in the database that can be queried without much overhead and helps
-reconstruct the tree data for finding and displaying processes.
+The TreeBehavior helps you maintain a hierarchical data structure in the
+database that can be queried without much overhead and helps reconstruct the
+tree data for finding and displaying processes.
 
 Requirements
 ============
@@ -63,8 +63,8 @@ Getting a flat list of the descendants for a node is equally easy::
         echo $category->name . "\n";
     }
 
-If you instead need a threaded list, where children are nested for each node
-in the hierarchy, you can stack the 'threaded' finder::
+If you instead need a threaded list, where children for each node are nested
+in a hierarchy, you can stack the 'threaded' finder::
 
     $children = $categories
         ->find('children', ['for' => 1])
@@ -75,10 +75,10 @@ in the hierarchy, you can stack the 'threaded' finder::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
-Traversing results from thread)d usually requires using recursive functions in
-order to be displayed, but if you only require a result set containing the name
-field from each level so you can display a list, in a HTML select for example,
-it is better to just use the 'treeList' finder::
+Traversing threaded results usually requires recursive functions in, but if you
+only require a result set containing a single field from each level so you can
+display a list, in an HTML select for example, it is better to just use the
+'treeList' finder::
 
     $list = $categories->find('treeList');
 
