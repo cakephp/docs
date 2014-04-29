@@ -1,29 +1,32 @@
 View Cells
 ##########
 
-View cells are small mini-controllers that can invoke view logic and render out
-templates. The provide a light-weight modular replacement to
-``requestAction()``. The idea of cells is borrowed from `cells in ruby
-<http://cells.rubyforge.org/>`_, where they fulfill a similar role and purpose.
+View cells sont des mini-controllers qui peuvent invoquer de la logique de vue
+et afficher les templates. Ils sont un module de remplacement léger pour
+``requestAction()``. L'idée des cells est emprunté aux `cells dans ruby
+<http://cells.rubyforge.org/>`_, où elles remplissent un rôle et un sujet
+similaire.
 
-When to use Cells
-=================
+Quand utiliser les Cells
+========================
 
-Cells are ideal for building reusable page components that require interaction
-with models,  view logic, and rendering logic. A simple example would be the
-cart in an online store, or a data-driven navigation menu in a CMS.
+Les Cells sont idéals pour la construction de components de page réutilisables
+qui necessitent une interaction avec les models, la logique de view, et la
+logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
+ou un menu de navigation selon des données dans un CMS.
 
-Cells also provide a lightweight replacement for ``requestAction()``. Because
-cells do not dispatch sub-requests they sidestep all of the overhead associated
-with ``requestAction()``.
+Les Cells rempalcent aussi ``requestAction()``. Parce que les cells ne
+dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
+de ``requestAction()``.
 
-Creating a Cell
-===============
+Créer une Cell
+==============
 
-To create a cell, you define a class in ``App/View/Cell``, and a template in
-``App/Template/Cell/``. In this example, we'll be making a cell to display the
-number of messages in a user's notification inbox. First create the class file.
-Its contents should look like::
+Pour créer une cell, vous définissez une classe dans ``App/View/Cell``, et un
+template dans ``App/Template/Cell/``. Dans cet exemple, nous ferons une
+cell pour afficher le nombre de messages dans la boite de message de
+notification de l'utilisateur. D'abord, créons le fichier de classe.
+Son contenu devrait ressembler à ceci::
 
     namespace App\View\Cell;
 
@@ -36,32 +39,35 @@ Its contents should look like::
 
     }
 
-Save this file into ``App/View/Cell/InboxCell.php``. As you can see like other
-classes in CakePHP Cells have a few conventions:
+Sauvegardez ce fichier dans ``App/View/Cell/InboxCell.php``. Comme vous pouvez
+le voir, comme pour les autres classes dans CakePHP, les Cells ont quelques
+conventions:
 
-* Cells live in the ``App\View\Cell`` namespace. If you are making a cell in
-  a plugin, the namespace would be ``PluginName\View\Cell``.
-* Class names should end in Cell.
-* Classes should inherit from ``Cake\View\Cell``.
+* Les Cells se trouvent dans le namespace ``App\View\Cell``. Si vous faîtes une
+  cell dans un plugin, le namespace sera ``PluginName\View\Cell``.
+* Les noms de classe doivent finir en Cell.
+* Les classes doivent hériter de ``Cake\View\Cell``.
 
-We added an empty ``display()`` method to our cell, this is the conventional
-default method when rendering a cell. We'll cover how to use other methods later
-in the docs. Now create the file ``App/Template/Cell/Inbox/display.ctp``. This
-will be our template for our new cell.
+Nous avons ajouté une méthode vide ``display()`` à notre cell, c'est la méthode
+conventionnelle par défaut pour le rendu de cell. Nous couvrirons la façon
+d'utiliser les autres méthodes plus tard dans la doc. Maintenant, créons le
+fichier ``App/Template/Cell/Inbox/display.ctp``. Ce sera le template pour notre
+nouvelle cell.
 
-You can generate this stub code quickly using ``bake``::
+Vous pouvez générer ce bout de code rapidement en utilisant ``bake``::
 
     Console/cake bake cell Inbox
 
-Would generate the code we typed out.
+Générera le code que nous avons tapé.
 
-Implementing the Cell
----------------------
+Implémenter la Cell
+-------------------
 
-Assume that we are working on an application that allows users to send messages
-to each other. We have a ``Messages`` model, and we want to show the count of
-unread messages without having to pollute AppController. This is a perfect use
-case for a cell. In the class we just made add the following::
+Supposons que nous travaillions sur une application qui permette aux
+utilisateurs d'envoyer des messages aux autres. Nous avons un model
+``Messages``, et nous voulons montrer le nombre de messages non lus sans avoir
+à polluer AppController. C'est un cas d'utilisation parfait pour une cell. Dans
+la classe, nous avons juste ajouté ce qui suit::
 
     namespace App\View\Cell;
 
@@ -77,74 +83,78 @@ case for a cell. In the class we just made add the following::
 
     }
 
-Because Cells use the ``ModelAwareTrait`` and ``ViewVarsTrait``, they behave
-very much like a controller would.  We can use the ``loadModel()`` and ``set()``
-methods just like we would in a controller. In our template file add the
-following::
+Puisque les cells utilisent ``ModelAwareTrait`` et ``ViewVarsTrait``, elles
+se comportent un peu comme un controller. Nous pouvons utiliser les méthodes
+``loadModel()`` et ``set()`` un peu comme nous le ferions dans un controller.
+Dans notre fichier de template, ajoutons ce qui suit::
 
     <div class="notification-icon">
         You have <?= $unread_count ?> unread messages.
     </div>
 
-Loading Cells
-=============
+Charger les Cells
+=================
 
-Cells can be loaded from controllers or views using the ``cell()`` method. The
-``cell()`` method works the same in both contexts. The ``cell()`` method is
-available in both contexts because you may need to use controller logic to
-choose which cells to construct. To load a cell use the ``cell()`` method::
+Les cells peuvent être chargées à partir des controllers ou des views en
+utilisant la méthode ``cell()``. La méthode ``cell()`` fonctionne de la même
+manière dans les deux contextes. La méthode ``cell()`` est disponible dans les
+deux contextes car vous pourriez avoir besoin d'utiliser la logique de
+controller pour choisir les cells à construire. Pour charger une cell, utilisez
+la méthode ``cell()``::
 
-    // Load an application cell
+    // Charge une celle d'une application
     $cell = $this->cell('Inbox');
 
-    // Load a plugin cell
+    // Charge une cell d'un plugin
     $cell = $this->cell('Messaging.Inbox');
 
-The above will load the named cell class and execute the ``display()`` method.
-You can execute other methods using the following::
+Ce qui est au-dessus va charger la classe de cell nommée et executer la méthode
+``display()``.
+Vous pouvez executer d'autres méthodes en utilisant ce qui suit::
 
-    // Run the expanded() method on the Inbox cell
+    // Lance la méthode expanded() dans la cell Inbox
     $cell = $this->cell('Inbox::expanded');
 
-Passing Arguments to a Cell
----------------------------
+Passer des Arguments à une Cell
+-------------------------------
 
-You will often want to parameterize cell methods to make cells more flexible.
-By using the second and third arguments of ``cell()`` you can pass action
-parameters, and additional options to your cell classes::
+Vous voudrez souvent paramétrer les méthodes cell pour rendre les cells plus
+flexibles. En utilisant les deuxième et troisième arguments de ``cell()``, vous
+pouvez passer des paramètres d'action, et des options supplémentaires à vos
+classes de cell::
 
     $cell = $this->cell('Inbox::recent', ['since' => '-3 days']);
 
-The above would match the following function signature::
+Ce qui est au-dessus correspondra à la signature de la fonction suivante::
 
     public function recent($since) {
     }
 
-Rendering a Cell
-================
+Afficher une Cell
+=================
 
-Once a cell has been loaded and executed you'll probably want to render it. The
-easiest way to render a cell is to echo it::
+Une fois qu'une cell a été chargée et executée, vous voudrez probablement
+l'afficher. La façon la plus simple pour rendre une cell est de faire une echo::
 
     <?= $cell ?>
 
-This will render the template matching the lowercased and underscored version of
-our action name, e.g. ``display.ctp``.
+Ceci va afficher le template correspondant à la version en minuscule et avec des
+underscores de notre nom d'action, par exemple ``display.ctp``.
 
-Because cells use ``View`` to render templates, you can load additional cells
-within a cell templates if required.
+Puisque les cells, utilisez ``View`` pour afficher les templates, vous pouvez
+charger les cells supplémentaires dans un template de cell si nécessaire.
 
-Rendering Alternate Templates
------------------------------
+Afficher un Template alternatif
+-------------------------------
 
-By convention cells render templates that match the action they are executing.
-If you need to render a different view template you can specify the template
-to use when rendering the cell::
+Par convention, les cells affichent les templates qui correspondent à l'action
+qu'ils executent. Si vous avez besoin d'afficher un template de vue différent,
+vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
 
-    // Calling render() explicitly
+    // Appel de render() explicitement
     echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
 
-    // Set template before echoing the cell.
+    // Définit le template avant de faire un echo de la cell.
     $cell = $this->cell('Inbox'); ?>
     $cell->template = 'messages';
     echo $cell;
