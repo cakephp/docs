@@ -467,7 +467,7 @@ could do the following::
         }
     }
 
-When overriding ``init()`` just remember to always call ``parent::init()``.
+When overriding ``init()`` remember to always call ``parent::init()``.
 
 Importing Table Information
 ---------------------------
@@ -569,7 +569,7 @@ You can control when your fixtures are loaded by setting
         }
     }
 
-As of 2.5.0, you can load fixtures in subdirectories. Using multiple directories
+You can load fixtures in subdirectories. Using multiple directories
 can make it easier to organize your fixtures if you have a larger application.
 To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name::
