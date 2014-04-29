@@ -173,8 +173,8 @@ you can do so with the second parameter::
     }
 
 The same table can be used multiple times to define different types of
-associations. For example consider a case where you would want to separate
-approved comments and those that has not been moderated yet::
+associations. For example consider a case where you want to separate
+approved comments and those that have not been moderated yet::
 
     class ArticlesTable extends Table {
 
