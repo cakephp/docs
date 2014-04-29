@@ -307,9 +307,15 @@ Router
 * Les paramètres persistents ont été retirés. Ils ont été remplacés par
   :php:meth:`Cake\\Routing\\Router::urlFilter()` qui est une meilleur façon
   plus flexible pour changer les urls étant routées inversement.
-* Appeler :php:meth:`Cake\\Routing\\Router::parseExtensions()` avec aucun
-  paramètre ne parse plus toutes les extensions. Vous devez faire une
-  liste des extensions que votre application supporte.
+* La signature de :php:meth:`Cake\\Routing\\Router::parseExtensions()` a changé
+  en ``parseExtensions(string|array $extensions = null, $merge = true)``. Elle
+  ne prend plus d'arguments variables pour la spécification des extensions.
+  Aussi, vous ne pouvez plus l'appeler sans paramètre pour parser toutes les
+  extensions (en faisant cela, cela va retourner des extensions existantes qui
+  sont définies). Vous avez besoin de faire une liste blanche des extensions
+  que votre application accepte.
+* ``Router::setExtensions()`` a été retirée. Utilisez
+  :php:meth:`Cake\\Routing\\Router::parseExtensions()` à la place.
 
 Route
 -----

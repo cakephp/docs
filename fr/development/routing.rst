@@ -467,7 +467,7 @@ Extensions de Fichier
 Pour manipuler différentes extensions de fichier avec vos routes, vous avez
 besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
-    Router::parseExtensions('html', 'rss');
+    Router::parseExtensions(['html', 'rss']);
 
 Ceci indiquera au routeur de supprimer toutes extensions de fichiers
 correspondantes et ensuite d'analyser ce qui reste.
@@ -921,6 +921,8 @@ d'implémenter la gestion de paramètre personnalisée.
 API du Router
 =============
 
+.. php:namespace:: Cake\Routing
+
 .. php:class:: Router
 
     Le Router gère la génération des URLs sortants, et le parsing de la
@@ -1061,13 +1063,10 @@ API du Router
     Crée les routes de ressource REST pour les controller(s) donné. Regardez
     la section :doc:`/development/rest` pour plus d'informations.
 
-.. php:staticmethod:: parseExtensions($types)
+.. php:staticmethod:: parseExtensions(string|array $extensions, $merge = true)
 
     Utilisé dans routes.php pour déclarer quelle :ref:`file-extensions` de
-    votre application supporte. En ne fournissant aucun argument, toutes les
-    extensions de fichiers seront supportées.
-    
-    .. versionadded:: 2.1
+    votre application supporte.
 
 .. php:staticmethod:: setExtensions($extensions, $merge = true)
 
