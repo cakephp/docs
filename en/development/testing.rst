@@ -13,31 +13,12 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP.  It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either the `PEAR installer <http://pear.php.net>`_ or `Composer
+through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
 <http://getcomposer.org>`_.
 
-Install PHPUnit with PEAR
--------------------------
-
-The PEAR installer can be used to install PHPUnit systemwide on you machine. It
-is recommended that you use Composer, but for compatibility reasons the PEAR installer
-is also supported. To install PHPUnit run the following::
-
-    pear upgrade PEAR
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.7.32
-
-.. note::
+.. warning::
 
     PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-
-    Depending on your system's configuration, you may need to run the previous
-    commands with ``sudo``
-
-Once PHPUnit is installed with the PEAR installer, you should confirm that the
-PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
-your php.ini file and making sure that the PHPUnit files are in one of the
-``include_path`` directories.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -51,6 +32,19 @@ After updating your package.json, run Composer again inside your application
 directory::
 
     $ php composer.phar install
+
+You can now run PHPUnit using::
+
+    $ vendor/bin/phpunit
+
+Using the PHAR File
+-------------------
+
+After you have downloaded the ``phpunit.phar`` file, you can use it to run your
+tests::
+
+    php phpunit.phar
+
 
 Test Database Setup
 ===================
