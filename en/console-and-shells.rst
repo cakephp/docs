@@ -958,9 +958,9 @@ Shell API
 
     A useful method to generate progress bars or to avoid outputting too many lines.
 
-		Warning: You cannot overwrite text that contains newlines.
+    Warning: You cannot overwrite text that contains newlines.
 
-		.. versionadded:: 2.6
+    .. versionadded:: 2.6
 
 .. php:method:: runCommand($command, $argv)
 
