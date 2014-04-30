@@ -338,7 +338,7 @@ Cela rendrait la vue ``app/Plugin/Users/Template/UserDetails/custom_file.ctp``
 Contrôle de Flux
 ----------------
 
-.. php:method:: redirect(mixed $url, integer $status, boolean $exit)
+.. php:method:: redirect(string|array $url, integer $status)
 
     La méthode de contrôle de flux que vous utiliserez le plus souvent est
     :php:meth:`~Controller::redirect()`. Cette méthode prend son premier
@@ -361,12 +361,12 @@ Contrôle de Flux
 
     Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
-        $this->redirect('/paiements/remerciements');
-        $this->redirect('http://www.exemple.com');
+        return $this->redirect('/paiements/remerciements');
+        return $this->redirect('http://www.exemple.com');
 
     Vous pouvez aussi passer des données à l'action::
 
-        $this->redirect(['action' => 'editer', $id]);
+        return $this->redirect(['action' => 'editer', $id]);
 
     Le second paramètre de la fonction :php:meth:`~Controller::redirect()`
     vous permet de définir un code de statut HTTP accompagnant la redirection.
@@ -380,14 +380,14 @@ Contrôle de Flux
     Si vous avez besoin de rediriger à la page appelante, vous pouvez
     utiliser::
 
-        $this->redirect($this->referer());
+        return $this->redirect($this->referer());
 
     Cette méthode supporte aussi les paramètres nommés de base. Si vous
     souhaitez être redirigé sur une URL comme:
     ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
     vous pouvez utiliser::
 
-        $this->redirect([
+        return $this->redirect([
             'controller' => 'commandes',
             'action' => 'confirmation',
             'produit' => 'pizza',
@@ -397,7 +397,7 @@ Contrôle de Flux
     Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
     à ceci::
 
-        $this->redirect([
+        return $this->redirect([
             'controller' => 'commandes',
             'action' => 'confirmation',
             '?' => [
