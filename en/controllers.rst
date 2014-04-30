@@ -12,7 +12,7 @@ your code and makes your code easier to test.
 Commonly, a controller is used to manage the logic around a single model. For
 example, if you were building a site for an online bakery, you might have a
 RecipesController managing your recipes and an IngredientsController managing your
-ingredients. However, it's also possible to have controllers work with more than 
+ingredients. However, it's also possible to have controllers work with more than
 one model. In CakePHP, a controller is named after the primary model it
 handles.
 
@@ -21,7 +21,7 @@ extends the core :php:class:`Controller` class. The ``AppController``
 class can be defined in ``/App/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
-Controllers provide a number of methods that handle requests. These are called 
+Controllers provide a number of methods that handle requests. These are called
 *actions*. By default, each public method in
 a controller is an action, and is accessible from a URL. An action is responsible
 for interpreting the request and creating the response. Usually responses are
@@ -44,7 +44,7 @@ CakePHP core library. ``AppController`` is defined in
     }
 
 Controller attributes and methods created in your ``AppController``
-will be available to all of your application's controllers. Components 
+will be available to all of your application's controllers. Components
 (which you'll learn about later) are best
 used for code that is used in many (but not necessarily all)
 controllers.
@@ -273,7 +273,7 @@ rendered from the controller.
         // ...
         }
 
-    Although CakePHP will automatically call it after every action's logic 
+    Although CakePHP will automatically call it after every action's logic
     (unless you've set ``$this->autoRender`` to false), you can
     use it to specify an alternate view file by specifying an action
     name in the controller using ``$action``.
@@ -322,7 +322,7 @@ This would render ``app/Plugin/Users/Template/UserDetails/custom_file.ctp``
 Flow Control
 ------------
 
-.. php:method:: redirect(mixed $url, integer $status, boolean $exit)
+.. php:method:: redirect(string|array $url, integer $status)
 
     The flow control method you'll use most often is :php:meth:`~Controller::redirect()`.
     This method takes its first parameter in the form of a
@@ -341,32 +341,33 @@ Flow Control
             );
         }
 
+    The method will return the response instance with appropriate headers set.
+    You should return the response instance from your action to prevent
+    view rendering and let the dispatcher handle actual redirection.
+
     You can also use a relative or absolute URL as the $url argument::
 
-        $this->redirect('/orders/thanks');
-        $this->redirect('http://www.example.com');
+        return $this->redirect('/orders/thanks');
+        return $this->redirect('http://www.example.com');
 
     You can also pass data to the action::
 
-        $this->redirect(array('action' => 'edit', $id));
+        return $this->redirect(array('action' => 'edit', $id));
 
     The second parameter of :php:meth:`~Controller::redirect()` allows you to define an HTTP
     status code to accompany the redirect. You may want to use 301
     (moved permanently) or 303 (see other), depending on the nature of
     the redirect.
 
-    The method will issue an ``exit()`` after the redirect unless you
-    set the third parameter to ``false``.
-
     If you need to redirect to the referer page you can use::
 
-        $this->redirect($this->referer());
+        return $this->redirect($this->referer());
 
     The method also supports name-based parameters. If you want to redirect
     to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
     you can use::
 
-        $this->redirect(array(
+        return $this->redirect(array(
             'controller' => 'orders',
             'action' => 'confirm',
             'product' => 'pizza',
@@ -375,7 +376,7 @@ Flow Control
 
     An example using query strings and hash would look like::
 
-        $this->redirect(array(
+        return $this->redirect(array(
             'controller' => 'orders',
             'action' => 'confirm',
             '?' => array(
@@ -549,10 +550,10 @@ variable (``$this->{$helpername}``).
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
-    a controller will use. Like :php:attr:`~Controller::$helpers` and 
-    :php:attr:`~Controller::$uses` components in your controllers are 
+    a controller will use. Like :php:attr:`~Controller::$helpers` and
+    :php:attr:`~Controller::$uses` components in your controllers are
     merged with those in ``AppController``. As with
-    :php:attr:`~Controller::$helpers` you can pass settings 
+    :php:attr:`~Controller::$helpers` you can pass settings
     into :php:attr:`~Controller::$components`. See :ref:`configuring-components` for more information.
 
 Other Attributes

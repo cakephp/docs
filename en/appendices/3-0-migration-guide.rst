@@ -402,6 +402,11 @@ Controller
 - The ``Controller::$ext`` property has been removed. You now have to extend and
   overide the ``View::$_ext`` property if you want to use a non-default view file
   extension.
+- The signature of :php:meth:`Cake\\Controller\\Controller::redirect()` has been
+  changed to ``Controller::redirect(string|array $url, int $status = null)``.
+  The 3rd argument ``$exit`` has been dropped. The method can no longer send
+  response and exit script, instead it returns a ``Response`` instance with
+  approriate headers set.
 
 Scaffold Removed
 ----------------
