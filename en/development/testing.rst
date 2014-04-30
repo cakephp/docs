@@ -542,14 +542,14 @@ In each test case you should load the fixtures you will need. You should load a
 fixture for every model that will have a query run against it. To load fixtures
 you define the ``$fixtures`` property in your model::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['app.article', 'app.comment'];
     }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
     }
 
@@ -560,7 +560,7 @@ You can control when your fixtures are loaded by setting
 :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
 :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['app.article', 'app.comment'];
         public $autoFixtures = false;
 
@@ -574,14 +574,12 @@ can make it easier to organize your fixtures if you have a larger application.
 To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name::
 
-    class ArticleTest extends CakeTestCase {
+    class ArticlesTest extends CakeTestCase {
         public $fixtures = array('app.blog/article', 'app.blog/comment');
     }
 
 In the above example, both fixtures would be loaded from
 ``App/Test/Fixture/blog/``.
-
-You can also load fixtures from subdirectories.
 
 Testing Models
 ==============
@@ -1107,9 +1105,7 @@ important to make sure those classes are covered by test cases.
 
 First we create an example helper to test. The ``CurrencyRendererHelper`` will
 help us display currencies in our views and for simplicity only has one method
-``usd()``.
-
-::
+``usd()``::
 
     // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
@@ -1167,11 +1163,25 @@ indicating 1 pass and 4 assertions.
 Creating Test Suites
 ====================
 
-If you want several of your tests to run at the same time, you can
-create a test suite. A test suite is composed of several test cases.
-``CakeTestSuite`` offers a few methods for easily creating test suites based on
-the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
+If you want several of your tests to run at the same time, you can create a test
+suite. A test suite is composed of several test cases.  You can either create
+test suites in your application's ``phpunit.xml`` file, or by creating suite
+classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
+need simple include/exclude rules to define your test suite. A simple example
+would be::
+
+    <testsuites>
+      <testsuite name="Models">
+        <directory>App/Model</directory>
+        <file>App/Service/UserServiceTest.php</file>
+        <exclude>App/Model/Cloud/ImagesTest.php</exclude>
+      </testsuite>
+    </testsuites>
+
+``CakeTestSuite`` offers several methods for easily creating test suites based
+on the file system. It allows you to run any code you want to prepare your test
+suite. If we wanted to create a test suite for all our model tests we could
+would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
