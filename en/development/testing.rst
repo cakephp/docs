@@ -1271,22 +1271,30 @@ bleed through and avoids a number of basic problems. Once you've created a new
 database in a database server that jenkins can access (usually localhost). Add
 a *shell script step* to the build that contains the following::
 
-    cat > app/Config/database.php <<'DATABASE_PHP'
+    cat > App/Config/app_local.php <<'CONFIG'
     <?php
-    class DATABASE_CONFIG {
-        public $test = array(
-            'datasource' => 'Database/Mysql',
-            'host'       => 'localhost',
-            'database'   => 'jenkins_test',
-            'login'      => 'jenkins',
-            'password'   => 'cakephp_jenkins',
-            'encoding'   => 'utf8'
-        );
-    }
-    DATABASE_PHP
+    $config = [
+        'Datasources' => [
+            'test' => [
+                'datasource' => 'Database/Mysql',
+                'host'       => 'localhost',
+                'database'   => 'jenkins_test',
+                'login'      => 'jenkins',
+                'password'   => 'cakephp_jenkins',
+                'encoding'   => 'utf8'
+            ]
+        ]
+    ];
+    CONFIG
 
-This ensures that you'll always have the correct database configuration that
-Jenkins requires. Do the same for any other configuration files you need to.
+Then uncomment the following line in your ``App/Config/bootstrap.php`` file::
+
+    //Configure::load('app_local.php', 'default');
+
+By creating an ``app_local.php`` file, you have an easy way to define
+configuration specific to Jenkins. You can use this same configuration file to
+override any other configuration files you need on Jenkins.
+
 It's often a good idea to drop and re-create the database before each build as
 well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
@@ -1297,14 +1305,16 @@ following::
 Add your Tests
 --------------
 
-Add another *shell script step* to your build. In this step run the tests for
-your application. Creating a junit log file, or clover coverage is often a nice
-bonus, as it gives you a nice graphical view of your testing results::
+Add another *shell script step* to your build. In this step install your
+dependencies and run the tests for your application. Creating a junit log file,
+or clover coverage is often a nice bonus, as it gives you a nice graphical view
+of your testing results::
 
-    app/Console/cake test app AllTests \
-    --stderr \
-    --log-junit junit.xml \
-    --coverage-clover clover.xml
+    # Download composer if it is missing.
+    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
+    # Install dependencies
+    php composer.phar install
+    vendor/bin/phpunit --stderr --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
