@@ -215,7 +215,9 @@ date
     Maps vers un type de colonne DATE sans timezone.
 datetime
     Maps vers un type de colonne DATETIME sans timezone. Dans postgres et
-    SQLServer, ceci retourne un type TIMESTAMP.
+    SQLServer, ceci retourne un type TIMESTAMP. The default return value of this
+    column type is :php:class:`Cake\\Utility\\Time` which extends the built-in
+    ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.
 timestamp
     Maps vers le type TIMESTAMP.
 time
