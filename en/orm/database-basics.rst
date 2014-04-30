@@ -205,7 +205,9 @@ date
     Maps to a timezone naive DATE column type.
 datetime
     Maps to a timezone naive DATETIME column type. In postgres, and SQLServer
-    this turns into a TIMESTAMP type.
+    this turns into a TIMESTAMP type. The default return value of this column
+    type is :php:class:`Cake\\Utility\\Time` which extends the built-in
+    ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.
 timestamp
     Maps to the TIMESTAMP type.
 time

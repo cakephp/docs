@@ -13,31 +13,12 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP.  It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either the `PEAR installer <http://pear.php.net>`_ or `Composer
+through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
 <http://getcomposer.org>`_.
 
-Install PHPUnit with PEAR
--------------------------
-
-The PEAR installer can be used to install PHPUnit systemwide on you machine. It
-is recommended that you use Composer, but for compatibility reasons the PEAR installer
-is also supported. To install PHPUnit run the following::
-
-    pear upgrade PEAR
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.7.32
-
-.. note::
+.. warning::
 
     PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-
-    Depending on your system's configuration, you may need to run the previous
-    commands with ``sudo``
-
-Once PHPUnit is installed with the PEAR installer, you should confirm that the
-PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
-your php.ini file and making sure that the PHPUnit files are in one of the
-``include_path`` directories.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -51,6 +32,19 @@ After updating your package.json, run Composer again inside your application
 directory::
 
     $ php composer.phar install
+
+You can now run PHPUnit using::
+
+    $ vendor/bin/phpunit
+
+Using the PHAR File
+-------------------
+
+After you have downloaded the ``phpunit.phar`` file, you can use it to run your
+tests::
+
+    php phpunit.phar
+
 
 Test Database Setup
 ===================
@@ -473,7 +467,7 @@ could do the following::
         }
     }
 
-When overriding ``init()`` just remember to always call ``parent::init()``.
+When overriding ``init()`` remember to always call ``parent::init()``.
 
 Importing Table Information
 ---------------------------
@@ -548,14 +542,14 @@ In each test case you should load the fixtures you will need. You should load a
 fixture for every model that will have a query run against it. To load fixtures
 you define the ``$fixtures`` property in your model::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['app.article', 'app.comment'];
     }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
     }
 
@@ -566,7 +560,7 @@ You can control when your fixtures are loaded by setting
 :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
 :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticleTest extends TestCase {
+    class ArticlesTest extends TestCase {
         public $fixtures = ['app.article', 'app.comment'];
         public $autoFixtures = false;
 
@@ -575,19 +569,17 @@ You can control when your fixtures are loaded by setting
         }
     }
 
-As of 2.5.0, you can load fixtures in subdirectories. Using multiple directories
+You can load fixtures in subdirectories. Using multiple directories
 can make it easier to organize your fixtures if you have a larger application.
 To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name::
 
-    class ArticleTest extends CakeTestCase {
+    class ArticlesTest extends CakeTestCase {
         public $fixtures = array('app.blog/article', 'app.blog/comment');
     }
 
 In the above example, both fixtures would be loaded from
 ``App/Test/Fixture/blog/``.
-
-You can also load fixtures from subdirectories.
 
 Testing Models
 ==============
@@ -1113,9 +1105,7 @@ important to make sure those classes are covered by test cases.
 
 First we create an example helper to test. The ``CurrencyRendererHelper`` will
 help us display currencies in our views and for simplicity only has one method
-``usd()``.
-
-::
+``usd()``::
 
     // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
@@ -1173,11 +1163,25 @@ indicating 1 pass and 4 assertions.
 Creating Test Suites
 ====================
 
-If you want several of your tests to run at the same time, you can
-create a test suite. A test suite is composed of several test cases.
-``CakeTestSuite`` offers a few methods for easily creating test suites based on
-the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
+If you want several of your tests to run at the same time, you can create a test
+suite. A test suite is composed of several test cases.  You can either create
+test suites in your application's ``phpunit.xml`` file, or by creating suite
+classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
+need simple include/exclude rules to define your test suite. A simple example
+would be::
+
+    <testsuites>
+      <testsuite name="Models">
+        <directory>App/Model</directory>
+        <file>App/Service/UserServiceTest.php</file>
+        <exclude>App/Model/Cloud/ImagesTest.php</exclude>
+      </testsuite>
+    </testsuites>
+
+``CakeTestSuite`` offers several methods for easily creating test suites based
+on the file system. It allows you to run any code you want to prepare your test
+suite. If we wanted to create a test suite for all our model tests we could
+would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1267,22 +1271,30 @@ bleed through and avoids a number of basic problems. Once you've created a new
 database in a database server that jenkins can access (usually localhost). Add
 a *shell script step* to the build that contains the following::
 
-    cat > app/Config/database.php <<'DATABASE_PHP'
+    cat > App/Config/app_local.php <<'CONFIG'
     <?php
-    class DATABASE_CONFIG {
-        public $test = array(
-            'datasource' => 'Database/Mysql',
-            'host'       => 'localhost',
-            'database'   => 'jenkins_test',
-            'login'      => 'jenkins',
-            'password'   => 'cakephp_jenkins',
-            'encoding'   => 'utf8'
-        );
-    }
-    DATABASE_PHP
+    $config = [
+        'Datasources' => [
+            'test' => [
+                'datasource' => 'Database/Mysql',
+                'host'       => 'localhost',
+                'database'   => 'jenkins_test',
+                'login'      => 'jenkins',
+                'password'   => 'cakephp_jenkins',
+                'encoding'   => 'utf8'
+            ]
+        ]
+    ];
+    CONFIG
 
-This ensures that you'll always have the correct database configuration that
-Jenkins requires. Do the same for any other configuration files you need to.
+Then uncomment the following line in your ``App/Config/bootstrap.php`` file::
+
+    //Configure::load('app_local.php', 'default');
+
+By creating an ``app_local.php`` file, you have an easy way to define
+configuration specific to Jenkins. You can use this same configuration file to
+override any other configuration files you need on Jenkins.
+
 It's often a good idea to drop and re-create the database before each build as
 well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
@@ -1293,14 +1305,16 @@ following::
 Add your Tests
 --------------
 
-Add another *shell script step* to your build. In this step run the tests for
-your application. Creating a junit log file, or clover coverage is often a nice
-bonus, as it gives you a nice graphical view of your testing results::
+Add another *shell script step* to your build. In this step install your
+dependencies and run the tests for your application. Creating a junit log file,
+or clover coverage is often a nice bonus, as it gives you a nice graphical view
+of your testing results::
 
-    app/Console/cake test app AllTests \
-    --stderr \
-    --log-junit junit.xml \
-    --coverage-clover clover.xml
+    # Download composer if it is missing.
+    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
+    # Install dependencies
+    php composer.phar install
+    vendor/bin/phpunit --stderr --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
