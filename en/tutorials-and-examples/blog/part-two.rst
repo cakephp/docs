@@ -204,6 +204,8 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 PostsController now::
 
+  <!-- File: /app/Controller/PostsController.php -->
+
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
