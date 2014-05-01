@@ -950,6 +950,18 @@ Shell API
     On windows systems, plain output is the default unless the ``ANSICON`` environment
     variable is present.
 
+.. php:method:: overwrite($message = null, $newlines = 1, $size = null)
+
+    :param string $method: The message to print.
+    :param integer $newlines: The number of newlines to follow the message.
+    :param integer $size: The number of bytes to overwrite
+
+    A useful method to generate progress bars or to avoid outputting too many lines.
+
+    Warning: You cannot overwrite text that contains newlines.
+
+    .. versionadded:: 2.6
+
 .. php:method:: runCommand($command, $argv)
 
     Runs the Shell with the provided argv.
