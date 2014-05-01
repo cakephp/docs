@@ -261,7 +261,7 @@ PHPUnit outputs test progress to stdout by default, this causes PHP to assume
 that headers have been sent which prevents sessions from starting. By switching
 PHPUnit to output on stderr, this issue is avoided.
 
-Combining Test Suites for plugins
+Combining Test Suites for Plugins
 ---------------------------------
 
 Often times your application will be composed of several plugins. In these
@@ -321,6 +321,18 @@ test case:
 #. Runs test methods.
 #. Empties the fixture tables.
 #. Removes fixture tables from database.
+
+Test Connections
+----------------
+
+By default CakePHP will alias each connection in your application. Each
+connection defined in your application's bootstrap that does not start with
+``test_`` will have a ``test_`` prefixed alias created. Aliasing connections
+ensures, you don't accidentally use the wrong connection/database in test cases,
+and makes the test connections transparent to the rest of your application. For
+example if you use the 'default' connection, instead you will get the ``test``
+connection in test cases.  If you use the 'replica' connection, the test suite
+will attempt to use 'test_replica' instead.
 
 Creating Fixtures
 -----------------
@@ -581,65 +593,54 @@ fixture name::
 In the above example, both fixtures would be loaded from
 ``App/Test/Fixture/blog/``.
 
-Testing Models
+Testing Tables
 ==============
 
-.. TODO:: rewrite this section.
+Let's say we already have our Articles Table class defeind in
+``App/Model/Table/ArticlesTable.php``, and it looks like::
 
-Let's say we already have our Article model defined on
-``app/Model/Article.php``, which looks like this::
+    namespace App\Model\Table;
 
-    class Article extends AppModel {
-        public function published($fields = null) {
-            $params = array(
-                'conditions' => array(
-                    $this->name . '.published' => 1
-                ),
-                'fields' => $fields
-            );
+    use Cake\ORM\Table;
+    use Cake\ORM\Query;
 
-            return $this->find('all', $params);
+    class ArticlesTable extends Table {
+
+        public function findPublished(Query $query, array $options) {
+            $query->where([
+                $this->alias() . '.published' => 1
+            ]);
+            return $query;
         }
     }
 
-We now want to set up a test that will use this model definition, but through
-fixtures, to test some functionality in the model. CakePHP test suite loads a
-very minimum set of files (to keep tests isolated), so we have to start by
-loading our model - in this case the Article model which we already defined.
+We now want to set up a test that will test this table class. Let's now create
+a file named ``ArticlesTableTest.php`` in your ``App/Test/TestCase/Model/Table`` directory,
+with the following contents::
 
-Let's now create a file named ``ArticleTest.php`` in your
-``app/Test/TestCase/Model`` directory, with the following contents::
+    namespace App\Test\TestCase\Model\Table;
 
-    namespace App\Test\TestCase\Model;
-
-    use App\Model\Article;
+    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticleTest extends TestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = ['app.article'];
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use. You should remember to include all the fixtures that will have
 queries run against them.
 
-.. note::
-
-    You can override the test model database by specifying the ``$useDbConfig``
-    property. Ensure that the relevant fixture uses the same value so that the
-    table is created in the correct database.
-
 Creating a Test Method
 ----------------------
 
-Let's now add a method to test the function published() in the
-Article model. Edit the file
-``app/Test/TestCase/Model/ArticleTest.php`` so it now looks like
-this::
+Let's now add a method to test the function published() in the Article model.
+Edit the file ``App/Test/TestCase/Model/Table/ArticlesTableTest.php`` so it now
+looks like this::
 
-    namespace App\Test\TestCase\Model;
+    namespace App\Test\TestCase\Model\Table;
 
-    use App\Model\Article;
+    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticleTest extends TestCase {
@@ -647,44 +648,41 @@ this::
 
         public function setUp() {
             parent::setUp();
-            $this->Article = ClassRegistry::init('Article');
+            $this->Articles = TableRegistry::get('Articles');
         }
 
-        public function testPublished() {
-            $result = $this->Article->published(array('id', 'title'));
-            $expected = array(
-                array('Article' => array('id' => 1, 'title' => 'First Article')),
-                array('Article' => array('id' => 2, 'title' => 'Second Article')),
-                array('Article' => array('id' => 3, 'title' => 'Third Article'))
-            );
+        public function testFindPublished() {
+            $query = $this->Article->find('published');
+            $this->assertInstanceOf('Cake\ORM\Query', $query);
+            $result = $query->hydrate(false)->toArray();
+            $expected = [
+                ['id' => 1, 'title' => 'First Article'],
+                ['id' => 2, 'title' => 'Second Article'],
+                ['id' => 3, 'title' => 'Third Article']
+            ];
 
             $this->assertEquals($expected, $result);
         }
     }
 
 You can see we have added a method called ``testPublished()``. We start by
-creating an instance of our ``Article`` model, and then run our ``published()``
-method. In ``$expected`` we set what we expect should be the proper result (that
-we know since we have defined which records are initially populated to the
-article table.) We test that the result equals our expectation by using the
-``assertEquals`` method. See the :ref:`running-tests` section for more
-information on how to run your test case.
+creating an instance of our ``ArticlesTable`` class, and then run our
+``find('published')`` method. In ``$expected`` we set what we expect should be
+the proper result (that we know since we have defined which records are
+initially populated to the article table.) We test that the result equals our
+expectation by using the ``assertEquals`` method. See the :ref:`running-tests`
+section for more information on how to run your test case.
 
-.. note::
-
-    When setting up your Model for testing be sure to use
-    ``ClassRegistry::init('YourModelName');`` as it knows to use your test
-    database connection.
 
 Mocking Model Methods
 ---------------------
 
 There will be times you'll want to mock methods on models when testing them. You should
-use ``getMockForModel`` to create testing mocks of models. It avoids issues
+use ``getMockForModel`` to create testing mocks of table classes. It avoids issues
 with reflected properties that normal mocks have::
 
     public function testSendingEmails() {
-        $model = $this->getMockForModel('EmailVerification', array('send'));
+        $model = $this->getMockForModel('EmailVerification', ['send']);
         $model->expects($this->once())
             ->method('send')
             ->will($this->returnValue(true));
