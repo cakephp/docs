@@ -110,7 +110,7 @@ la variable 'posts' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
 chose comme cela ::
 
-    // print_r($posts) sort:
+    // print_r($posts) affiche:
 
     Array
     (
@@ -154,6 +154,8 @@ d'un dossier dont le nom correspond à celui du controller (nous aurons à crée
 un dossier appelé 'Posts' dans ce cas). Pour mettre en forme les données de
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à
 quelque chose comme cela ::
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
 
@@ -208,6 +210,7 @@ quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
 tarder dans le Controller Posts ::
 
+    // File: /app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
