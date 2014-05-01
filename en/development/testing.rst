@@ -698,15 +698,17 @@ and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
 Using this class as the base class for your controller test cases allows you to
 use ``testAction()`` for simpler test cases. ``ControllerTestCase`` allows you
 to easily mock out components and models, as well as potentially difficult to
-test methods like :php:meth:`~Controller::redirect()`.
+test methods like :php:meth:`~Cake\\Controller\Controller::redirect()`.
 
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
-    App::uses('AppController', 'Controller');
+    namespace App\Controller;
+
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController {
-        public $helpers = array('Form', 'Html');
+        public $helpers = ['Form', 'Html'];
 
         public function index($short = null) {
             if (!empty($this->request->data)) {
@@ -715,14 +717,10 @@ model. The controller code looks like::
             }
             if (!empty($short)) {
                 $result = $this->Article->find('all', [
-                    'fields' => 'id', 'title']
+                    'fields' => ['id', 'title']
                 ]);
             } else {
                 $result = $this->Article->find();
-            }
-
-            if (isset($this->params['requested'])) {
-                return $result;
             }
 
             $this->set('title', 'Articles');
@@ -731,13 +729,24 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``app/Test/TestCase/Controller`` directory and put the following inside::
+``App/Test/TestCase/Controller`` directory and put the following inside::
+
+    namespace App\Test\TestCase\Controller;
+
+    use Cake\TestSuite\ControllerTestCase;
 
     class ArticlesControllerTest extends ControllerTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = ['app.article'];
 
         public function testIndex() {
-            $result = $this->testAction('/articles');
+            $result = $this->testAction('/articles?page=1');
+            debug($result);
+        }
+
+        public function testIndexQueryData() {
+            $result = $this->testAction('/articles', [
+                'query' => ['page' => 1]
+            ]);
             debug($result);
         }
 
@@ -749,7 +758,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
         public function testIndexShortGetRenderedHtml() {
             $result = $this->testAction(
                '/articles/index/short',
-                array('return' => 'contents')
+                ['return' => 'contents']
             );
             debug($result);
         }
@@ -757,22 +766,22 @@ Create a file named ``ArticlesControllerTest.php`` in your
         public function testIndexShortGetViewVars() {
             $result = $this->testAction(
                 '/articles/index/short',
-                array('return' => 'vars')
+                ['return' => 'vars']
             );
             debug($result);
         }
 
         public function testIndexPostData() {
-            $data = array(
+            $data = [
                 'user_id' => 1,
                 'published' => 1,
                 'slug' => 'new-article',
                 'title' => 'New Article',
                 'body' => 'New Body'
-            );
+            ];
             $result = $this->testAction(
                 '/articles',
-                array('data' => $data, 'method' => 'post')
+                ['data' => $data, 'method' => 'post']
             );
             debug($result);
         }
@@ -783,53 +792,21 @@ controllers. The first parameter of ``testAction`` should always be the URL you
 want to test. CakePHP will create a request and dispatch the controller and
 action.
 
-When testing actions that contain ``redirect()`` and other code following the
-redirect it is generally a good idea to return when redirecting. The reason for
-this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal. You should always return after calling ``redirect`` to prevent unwanted
-code from executing::
-
-    App::uses('AppController', 'Controller');
-
-    class ArticlesController extends AppController {
-        public function add() {
-            if ($this->request->is('post')) {
-                $article = $this->Articles->newEntity($this->request->data);
-                if ($this->Articles->save($article)) {
-                    return $this->redirect(array('action' => 'index'));
-                }
-            }
-            // more code
-        }
-    }
-
-Simulating GET Requests
+Simulating HTTP Methods
 -----------------------
 
 As seen in the ``testIndexPostData()`` example above, you can use
 ``testAction()`` to test POST actions as well as GET actions. By default all
-requests will be GET requests. You can simulate a GET or POST request by setting the
-method key::
+requests will be GET requests. You can simulate any HTTP verb by setting the::
 
-    public function testAdding() {
-        $data = array(
+    public function testUpdating() {
+        $data = [
+            'id' => 1,
             'title' => 'New post'
-        );
-        $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        ];
+        $this->testAction('/posts/edit', ['data' => $data, 'method' => 'put']);
         // some assertions.
     }
-
-    public function testAddingPost() {
-        $data = array(
-            'title' => 'New post',
-            'body' => 'Secret sauce'
-        );
-        $this->testAction('/posts/add', array('data' => $data, 'method' => 'post'));
-        // some assertions.
-    }
-
-The data key will be used as query string parameters when simulating a GET
-request.
 
 Choosing the Return Type
 ------------------------
@@ -859,24 +836,23 @@ Using Mocks with testAction
 
 There will be times when you want to replace components or models with either
 partially mocked objects or completely mocked objects. You can do this by using
-:php:meth:`ControllerTestCase::generate()`. ``generate()`` takes the hard work
-out of generating mocks on your controller. If you decide to generate a
-controller to be used in testing, you can generate mocked versions of its models
-and components along with it::
+:php:meth:`Cake\\TestSuite\\ControllerTestCase::generate()`. ``generate()``
+takes the hard work out of generating mocks on your controller. If you decide to
+generate a controller to be used in testing, you can generate mocked versions of
+its models and components along with it::
 
-    $Posts = $this->generate('Articles', array(
-        'methods' => array(
+    $Posts = $this->generate('Articles', [
+        'methods' => [
             'isAuthorized'
-        ),
-        'models' => array(
-            'Articles' => array('save')
-        ),
-        'components' => array(
-            'RequestHandler' => array('isPut'),
-            'Email' => array('send'),
+        ],
+        'models' => [
+            'Articles' => ['save']
+        ],
+        'components' => [
+            'Email' => ['send'],
             'Session'
-        )
-    ));
+        ]
+    ]);
 
 The above would create a mocked ``ArticlesController``, stubbing out the ``isAuthorized``
 method. The attached Post model will have ``save()`` stubbed, and the attached
@@ -937,35 +913,14 @@ allowing you to check for redirects::
 
 This example shows a slightly more complex use of the ``testAction()`` and
 ``generate()`` methods. First, we generate a testing controller and mock the
-:php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have
-the ability to run testing methods on it. Assuming ``ArticlesController::add()``
-redirects us to index, sends an email and sets a flash message, the test will
-pass. A second test was added to do basic sanity testing when fetching the add
-form. We check to see if the layout was loaded by checking the entire rendered
-contents, and checks the view for a form tag. As you can see, your freedom to
-test controllers and easily mock its classes is greatly expanded with these
-changes.
-
-When doing controller tests using mocks that use static methods you'll have to
-use a different method to register your mock expectations. For example if you
-wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
-following::
-
-    public function testAdd() {
-        $Articles = $this->generate('Articles', array(
-            'components' => array(
-                'Session',
-                'Auth' => array('user')
-            )
-        ));
-        $Articles->Auth->staticExpects($this->any())
-            ->method('user')
-            ->with('id')
-            ->will($this->returnValue(2));
-    }
-
-By using ``staticExpects`` you will be able to mock and manipulate static
-methods on components and models.
+:php:class:`Cake\\Controller\\Component\\SessionComponent`. Now that the
+SessionComponent is mocked, we have the ability to run testing methods on it.
+Assuming ``ArticlesController::add()`` redirects us to index, sends an email and
+sets a flash message, the test will pass. A second test was added to do basic
+sanity testing when fetching the add form. We check to see if the layout was
+loaded by checking the entire rendered contents, and checks the view for a form
+tag. As you can see, your freedom to test controllers and easily mock its
+collaborators is greatly expanded with these changes.
 
 Testing a JSON Responding Controller
 ------------------------------------
@@ -982,16 +937,16 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``app/Test/TestCase/Controller/MarkersControllerTest.php``
+Now we create the file ``App/Test/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends ControllerTestCase {
         public function testIndex() {
             $result = $this->testAction('/markers/index.json');
             $result = json_decode($result, true);
-            $expected = array(
-                'Marker' => array('id' => 1, 'lng' => 66, 'lat' => 45),
-            );
+            $expected = [
+                ['id' => 1, 'lng' => 66, 'lat' => 45],
+            ];
             $this->assertEquals($expected, $result);
         }
     }
