@@ -24,7 +24,7 @@ Install PHPUnit with Composer
 -----------------------------
 
 To install PHPUnit with Composer, add the following to you application's
-``require`` section in its ``package.json``::
+``require`` section in its ``composer.json``::
 
     "phpunit/phpunit": "3.7.*",
 
@@ -101,8 +101,6 @@ and number passed.
 
     If you are on a windows system you probably won't see any colours.
 
-Congratulations, you are now ready to start writing tests!
-
 Test Case Conventions
 =====================
 
@@ -110,7 +108,7 @@ Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
 #. PHP files containing tests should be in your
-   ``app/Test/TestCase/[Type]`` directories.
+   ``App/Test/TestCase/[Type]`` directories.
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
@@ -148,7 +146,6 @@ we'll start with the following::
     namespace App\Test\TestCase\View\Helper;
 
     use App\View\Helper\ProgressHelper;
-    use Cake\Controller\Controller;
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
@@ -328,11 +325,11 @@ Test Connections
 By default CakePHP will alias each connection in your application. Each
 connection defined in your application's bootstrap that does not start with
 ``test_`` will have a ``test_`` prefixed alias created. Aliasing connections
-ensures, you don't accidentally use the wrong connection/database in test cases,
-and makes the test connections transparent to the rest of your application. For
-example if you use the 'default' connection, instead you will get the ``test``
-connection in test cases.  If you use the 'replica' connection, the test suite
-will attempt to use 'test_replica' instead.
+ensures, you don't accidentally use the wrong connection in test cases.
+Connection aliasing is transparent to the rest of your application. For example
+if you use the 'default' connection, instead you will get the ``test``
+connection in test cases. If you use the 'replica' connection, the test suite
+will attempt to use 'test_replica'.
 
 Creating Fixtures
 -----------------
@@ -405,28 +402,29 @@ and how they are defined. The format used to define these fields is
 the same used with :php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
 definition are:
 
-``type``
+type
     CakePHP internal data type. Currently supported:
-        - ``string``: maps to ``VARCHAR`` or ``CHAR``
-        - ``text``: maps to ``TEXT``
-        - ``integer``: maps to ``INT``
-        - ``decimal``: maps to ``DECIMAL``
-        - ``float``: maps to ``FLOAT``
-        - ``datetime``: maps to ``DATETIME``
-        - ``timestamp``: maps to ``TIMESTAMP``
-        - ``time``: maps to ``TIME``
-        - ``date``: maps to ``DATE``
-        - ``binary``: maps to ``BLOB``
-``fixed``
+
+    - ``string``: maps to ``VARCHAR`` or ``CHAR``
+    - ``text``: maps to ``TEXT``
+    - ``integer``: maps to ``INT``
+    - ``decimal``: maps to ``DECIMAL``
+    - ``float``: maps to ``FLOAT``
+    - ``datetime``: maps to ``DATETIME``
+    - ``timestamp``: maps to ``TIMESTAMP``
+    - ``time``: maps to ``TIME``
+    - ``date``: maps to ``DATE``
+    - ``binary``: maps to ``BLOB``
+fixed
     Used with string types to create CHAR columns in platforms that support
     them. Also used to force UUID types in Postgres when the length is also 36.
-``length``
+length
     Set to the specific length the field should take.
-``precision``
+precision
     Set the number of decimal places used on float & decimal fields.
-``null``
+null
     Set to either ``true`` (to allow NULLs) or ``false`` (to disallow NULLs).
-``default``
+default
     Default value the field takes.
 
 We can define a set of records that will be populated after the fixture table is
@@ -493,7 +491,7 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``app/Test/Fixture/ArticleFixture.php``) to::
+(``App/Test/Fixture/ArticleFixture.php``) to::
 
 
     class ArticleFixture extends TestFixture {
@@ -513,32 +511,32 @@ as it was shown on previous section. For example::
 
     class ArticleFixture extends TestFixture {
         public $import = ['table' => 'articles'];
-        public $records = array(
-            array(
+        public $records = [
+            [
               'id' => 1,
               'title' => 'First Article',
               'body' => 'First Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:39:23',
               'updated' => '2007-03-18 10:41:31'
-            ),
-            array(
+            ],
+            [
               'id' => 2,
               'title' => 'Second Article',
               'body' => 'Second Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:41:23',
               'updated' => '2007-03-18 10:43:31'
-            ),
-            array(
+            ],
+            [
               'id' => 3,
               'title' => 'Third Article',
               'body' => 'Third Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:43:23',
               'updated' => '2007-03-18 10:45:31'
-            )
-        );
+            ]
+        ];
     }
 
 Finally, you can not load/create any schema in a fixture. This is useful if you
@@ -587,7 +585,7 @@ To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name::
 
     class ArticlesTest extends CakeTestCase {
-        public $fixtures = array('app.blog/article', 'app.blog/comment');
+        public $fixtures = ['app.blog/article', 'app.blog/comment'];
     }
 
 In the above example, both fixtures would be loaded from
@@ -932,7 +930,7 @@ begin with a simple example controller that responds in JSON::
     class MarkersController extends AppController {
         public $autoRender = false;
         public function index() {
-            $data = $this->Marker->find('first');
+            $data = $this->Markers->find()->first();
             $this->response->body(json_encode($data));
         }
     }
@@ -972,27 +970,30 @@ controllers that use it. Here is our example component located in
 ``app/Controller/Component/PagematronComponent.php``::
 
     class PagematronComponent extends Component {
-        public $Controller = null;
+        public $controller = null;
 
-        public function startup(Controller $controller) {
-            parent::startup($controller);
-            $this->Controller = $controller;
+        public function setController($controller) {
+            $this->controller = $controller;
             // Make sure the controller is using pagination
-            if (!isset($this->Controller->paginate)) {
-                $this->Controller->paginate = array();
+            if (!isset($this->controller->paginate)) {
+                $this->controller->paginate = [];
             }
+        }
+
+        public function startup(Event $event) {
+            $this->setController($event->subject());
         }
 
         public function adjust($length = 'short') {
             switch ($length) {
                 case 'long':
-                    $this->Controller->paginate['limit'] = 100;
+                    $this->controller->paginate['limit'] = 100;
                 break;
                 case 'medium':
-                    $this->Controller->paginate['limit'] = 50;
+                    $this->controller->paginate['limit'] = 50;
                 break;
                 default:
-                    $this->Controller->paginate['limit'] = 20;
+                    $this->controller->paginate['limit'] = 20;
                 break;
             }
         }
@@ -1010,43 +1011,43 @@ set correctly by the ``adjust`` method in our component. We create the file
     use Cake\Network\Request;
     use Cake\Network\Response;
 
-    // A fake controller to test against
-    class PagematronControllerTest extends Controller {
-        public $paginate = null;
-    }
-
     class PagematronComponentTest extends TestCase {
-        public $PagematronComponent = null;
-        public $Controller = null;
+
+        public $component = null;
+        public $controller = null;
 
         public function setUp() {
             parent::setUp();
             // Setup our component and fake test controller
-            $Collection = new ComponentCollection();
-            $this->PagematronComponent = new PagematronComponent($Collection);
-            $CakeRequest = new CakeRequest();
-            $CakeResponse = new CakeResponse();
-            $this->Controller = new PagematronControllerTest($CakeRequest, $CakeResponse);
-            $this->PagematronComponent->startup($this->Controller);
+            $collection = new ComponentCollection();
+            $this->component = new PagematronComponent($collection);
+
+            $request = new Request();
+            $response = new Response();
+            $this->controller = $this->getMock(
+                'Cake\Controller\Controller',
+                [],
+                [$request, $response]
+            );
+            $this->component->setController($this->controller);
         }
 
         public function testAdjust() {
             // Test our adjust method with different parameter settings
-            $this->PagematronComponent->adjust();
-            $this->assertEquals(20, $this->Controller->paginate['limit']);
+            $this->component->adjust();
+            $this->assertEquals(20, $this->controller->paginate['limit']);
 
-            $this->PagematronComponent->adjust('medium');
-            $this->assertEquals(50, $this->Controller->paginate['limit']);
+            $this->component->adjust('medium');
+            $this->assertEquals(50, $this->controller->paginate['limit']);
 
-            $this->PagematronComponent->adjust('long');
-            $this->assertEquals(100, $this->Controller->paginate['limit']);
+            $this->component->adjust('long');
+            $this->assertEquals(100, $this->controller->paginate['limit']);
         }
 
         public function tearDown() {
             parent::tearDown();
             // Clean up after we're done
-            unset($this->PagematronComponent);
-            unset($this->Controller);
+            unset($this->component, $this->controller);
         }
     }
 
@@ -1060,8 +1061,12 @@ First we create an example helper to test. The ``CurrencyRendererHelper`` will
 help us display currencies in our views and for simplicity only has one method
 ``usd()``::
 
-    // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
+    // App/View/Helper/CurrencyRendererHelper.php
+    namespace App\View\Helper;
+
+    use Cake\View\Helper;
+
+    class CurrencyRendererHelper extends Helper {
         public function usd($amount) {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
@@ -1072,37 +1077,37 @@ separator to comma, and prefix the formatted number with 'USD' string.
 
 Now we create our tests::
 
-    // app/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
+    // App/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
     namespace App\Test\TestCase\View\Helper;
 
     use App\View\Helper\CurrencyRendererHelper;
-    use Cake\Controller\Controller;
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
     class CurrencyRendererHelperTest extends TestCase {
-        public $CurrencyRenderer = null;
+
+        public $helper = null;
 
         // Here we instantiate our helper
         public function setUp() {
             parent::setUp();
-            $View = new View();
-            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
+            $view = new View();
+            $this->helper = new CurrencyRendererHelper($view);
         }
 
         // Testing the usd() function
         public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
+            $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
             // We should always have 2 decimal digits
-            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
+            $this->assertEquals('USD 1.00', $this->helper->usd(1));
+            $this->assertEquals('USD 2.05', $this->helper->usd(2.05));
 
             // Testing the thousands separator
             $this->assertEquals(
               'USD 12,000.70',
-              $this->CurrencyRenderer->usd(12000.70)
+              $this->helper->usd(12000.70)
             );
         }
     }
@@ -1121,7 +1126,9 @@ suite. A test suite is composed of several test cases.  You can either create
 test suites in your application's ``phpunit.xml`` file, or by creating suite
 classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
 need simple include/exclude rules to define your test suite. A simple example
-would be::
+would be
+
+.. code-block:: xml
 
     <testsuites>
       <testsuite name="Models">
@@ -1182,21 +1189,43 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
     class BlogPostTest extends TestCase {
 
         // Plugin fixtures located in /App/Plugin/Blog/Test/Fixture/
-        public $fixtures = array('plugin.blog.blog_post');
+        public $fixtures = ['plugin.blog.blog_post'];
         public $BlogPost;
 
         public function testSomething() {
-            // ClassRegistry makes the model use the test database connection
-            $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
-
-            // do some useful test here
-            $this->assertTrue(is_object($this->BlogPost));
+            // Test something.
         }
     }
 
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
 ``$fixtures`` array.
+
+Generating Tests with Bake
+==========================
+
+If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
+generate scaffolding, it will also generate test stubs. If you need to
+re-generate test case skeletons, or if you want to generate test skeletons for
+code you wrote, you can use ``bake``:
+
+.. code-block:: bash
+
+    Console/cake bake test <type> <name>
+
+``<type>`` should be one of:
+
+#. Entity
+#. Table
+#. Controller
+#. Component
+#. Behavior
+#. Helper
+#. Shell
+#. Cell
+
+While ``<name>`` should be the name of the object you want to bake a test
+skeleton for.
 
 Integration with Jenkins
 ========================
@@ -1222,7 +1251,9 @@ Add Test Database Config
 Using a separate database just for Jenkins is generally a good idea, as it stops
 bleed through and avoids a number of basic problems. Once you've created a new
 database in a database server that jenkins can access (usually localhost). Add
-a *shell script step* to the build that contains the following::
+a *shell script step* to the build that contains the following:
+
+.. code-block:: bash
 
     cat > App/Config/app_local.php <<'CONFIG'
     <?php
@@ -1261,7 +1292,9 @@ Add your Tests
 Add another *shell script step* to your build. In this step install your
 dependencies and run the tests for your application. Creating a junit log file,
 or clover coverage is often a nice bonus, as it gives you a nice graphical view
-of your testing results::
+of your testing results:
+
+.. code-block:: bash
 
     # Download composer if it is missing.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
@@ -1277,8 +1310,6 @@ Run a Build
 
 You should be able to run a build now. Check the console output and make any
 necessary changes to get a passing build.
-
-
 
 .. meta::
     :title lang=en: Testing
