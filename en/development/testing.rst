@@ -406,8 +406,10 @@ type
     CakePHP internal data type. Currently supported:
 
     - ``string``: maps to ``VARCHAR`` or ``CHAR``
+    - ``uuid``: maps to ``UUID``
     - ``text``: maps to ``TEXT``
     - ``integer``: maps to ``INT``
+    - ``biginteger``: maps to ``BIGINTEGER``
     - ``decimal``: maps to ``DECIMAL``
     - ``float``: maps to ``FLOAT``
     - ``datetime``: maps to ``DATETIME``
@@ -417,7 +419,7 @@ type
     - ``binary``: maps to ``BLOB``
 fixed
     Used with string types to create CHAR columns in platforms that support
-    them. Also used to force UUID types in Postgres when the length is also 36.
+    them.
 length
     Set to the specific length the field should take.
 precision
@@ -594,7 +596,7 @@ In the above example, both fixtures would be loaded from
 Testing Tables
 ==============
 
-Let's say we already have our Articles Table class defeind in
+Let's say we already have our Articles Table class defined in
 ``App/Model/Table/ArticlesTable.php``, and it looks like::
 
     namespace App\Model\Table;
@@ -650,7 +652,7 @@ looks like this::
         }
 
         public function testFindPublished() {
-            $query = $this->Article->find('published');
+            $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->hydrate(false)->toArray();
             $expected = [
