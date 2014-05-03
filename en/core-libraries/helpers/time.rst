@@ -1,6 +1,8 @@
 TimeHelper
 ##########
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: TimeHelper(View $view, array $config = array())
 
 The Time Helper does what it says on the tin: saves you time. It
@@ -26,8 +28,8 @@ the time zone of the logged in user we can correct the date and time on our
 posts using the Time Helper::
 
     echo $this->Time->format(
-      'F jS, Y h:i A',
       $post['Post']['created'],
+      'F jS, Y h:i A',
       null,
       $user['User']['time_zone']
     );
@@ -35,12 +37,10 @@ posts using the Time Helper::
     // August 22nd, 2011 03:53 PM for a user in GMT-8
     // and August 23rd, 2011 09:53 AM GMT+10
 
-Most of the Time Helper methods have a $timezone parameter. The $timezone parameter
-accepts a valid timezone identifier string or an instance of `DateTimeZone` class.
-
-.. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-time
-    :end-before: end-time
+Most of TimeHelper's features are intended as backwards compatible interfaces
+for applications that are upgrading from older versions of CakePHP. Because the
+ORM returns :php:class:`Cake\\Utility\\Time` instances for every ``timestamp``
+and ``datetime`` column, you can use the methods there to do most tasks.
 
 .. meta::
     :title lang=en: TimeHelper
