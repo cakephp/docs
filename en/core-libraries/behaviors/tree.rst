@@ -183,7 +183,7 @@ entities::
 
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = 5;
-    $categoriesTable->save($category);
+    $categoriesTable->save($aCategory);
 
 Providing inexistent parent ids when saving or attempting to create a loop in
 the tree (making a node child of itself) will throw an exception.
@@ -193,6 +193,25 @@ null::
 
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = null;
-    $categoriesTable->save($category);
+    $categoriesTable->save($aCategory);
 
 Children for the new root node will be preserved.
+
+Deleting Nodes
+==============
+
+Deleting a node and all its sub-tree (any children it may have at any depth in
+the tree) is trivial::
+
+    $aCategory = $categoriesTable->get(10);
+    $categoriesTable->delete($aCategory);
+
+The TreeBehavior will take care of all internal deleting operations for you. It
+is also possible to Only delete one node and re-assign all children to the
+immediately superior parent node in the tree::
+
+    $aCategory = $categoriesTable->get(10);
+    $categoriesTable->removeFromTree($aCategory);
+    $categoriesTable->delete($aCategory);
+
+All children nodes will be kept and a new parent will be assigned to them.
