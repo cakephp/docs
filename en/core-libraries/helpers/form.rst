@@ -17,7 +17,7 @@ Starting a Form
 .. php:method:: create(mixed $model = null, array $options = [])
 
 The first method you'll need to use in order to take advantage of the FormHelper
-is ``create()``. This method outputs an opening form tag.
+is ``create()``. This method outputs an opening form tag.b
 
 All parameters are optional. If ``create()`` is called with no parameters
 supplied, it assumes you are building a form that submits to the current
@@ -1415,7 +1415,7 @@ A list of the default templates and the variables they can expect are:
 Generating Entire Forms
 =======================
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = [])
+.. php:method:: inputs(mixed $fields = [], $options = [])
 
 Generates a set of inputs for the given context. By default, all fields for the
 current top level entity are generated. By setting ``$fields`` to a string you
@@ -1430,13 +1430,13 @@ You can configure the generated inputs by defining additional options in the
         'name' => ['label' => 'custom label']
     ]);
 
-To exclude specific fields from the generated inputs, use the ``$blacklist``
-parameter::
+To exclude specific fields from the generated inputs, set them to false in the 
+fields parameter::
 
-    echo $this->Form->inputs([], ['password']);
+    echo $this->Form->inputs(['password' => false]);
 
-When customizing, ``fields`` or using the ``blacklist`` parameter, you can use
-the ``$options`` parameter to control the generated legend/fieldset.
+When customizing, ``fields``, you can use the ``$options`` parameter to 
+control the generated legend/fieldset.
 
 - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
   it will be used as the class name for the fieldset element.
