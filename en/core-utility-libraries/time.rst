@@ -25,8 +25,8 @@ use the ``Time`` class::
 
 
 Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
-to power its Time utility. Anything you could do with ``Carbon`` you can do with
-``Time``.
+to power its Time utility. Anything you could do with ``Carbon`` and
+``DateTime`` you can do with ``Time``.
 
 .. start-time
 
@@ -49,6 +49,14 @@ There are a few ways to create ``Time`` instances::
 
     // Get the current time.
     $time = Time::now();
+
+    // Or just use 'new'
+    $time = new Time('2014-01-10 11:11', 'America/New_York');
+
+    $time = new Time('2 hours ago');
+
+The Time class constructor can take any paramenter the internal ``DateTime`` PHP
+class can. When passing a number or numeric string it will be interpreted as a UNIX Timetamp.
 
 In test cases you can easily mock out ``now()`` using ``setTestNow()``::
 
@@ -85,6 +93,19 @@ Dates can be modified through subtraction and addition of their components::
     // Using strtotime strings.
     $now->modify('+5 days');
 
+You can get the internal components of a date by accessing its properties::
+
+    $now = Time::now();
+    echo $now->y; // 2014
+    echo $now->m; // 5
+    echo $now->d; // 10
+    echo $now->timezone; // America/New_York
+
+It is also allowed to directly assign those properties to modify the date::
+
+    $time->y = 2015;
+    $time->timezone = 'Europe/Paris';
+
 Formatting
 ==========
 
@@ -118,6 +139,47 @@ Print out a predefined 'nice' format::
 
     // Outputs 'Oct 31, 2014 12:32pm' in en-US
     echo $now->nice();
+
+You can alter the timezone in which the date is displayed without altering the Time
+object itself, this is useful when you store dates in one timezone bu want to
+display them back into the user's own timezone::
+
+    $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
+
+Leaving the first parameter as null will use the default formatting string::
+
+    $now->i18nFormat(null, 'Europe/Paris');
+
+Finally, it is possible to use a different locale for displaying a date::
+
+    echo $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris', 'fr-FR');
+
+    echo $now->nice('Europe/Paris', 'fr-FR');
+
+Setting the Default Locale and Format String
+--------------------------------------------
+
+The default locale in which dates are displayed when using ``nice``
+``18nFormat`` is taken from the directive
+`intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
+You can, however, modify this default at runtime::
+
+    Time::$defaultLocale = 'es-ES';
+
+From now on, date will be displayed in the Spanish preferred format, unless
+a different locale is specified directly in the formatting method.
+
+Likewise, it is possible to alter the default formatting string to be used for
+``i18nFormat``::
+
+    Time::setToStringFormat(\IntlDateFormatter::Short);
+
+    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+
+    Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
+
+It is recommended to always use the constants instead of directly passing a date
+format string.
 
 Formatting Relative Times
 -------------------------
@@ -167,6 +229,7 @@ values::
 Comparing With the Present
 ==========================
 
+.. php:method:: isYesterday()
 .. php:method:: isThisWeek()
 .. php:method:: isThisMonth()
 .. php:method:: isThisYear()
@@ -174,6 +237,8 @@ Comparing With the Present
 You can compare a ``Time`` instance with the present in a variety of ways::
 
     $time = new Time('2014-06-15');
+
+    echo $time->isYesterday();
     echo $time->isThisWeek();
     echo $time->isThisMonth();
     echo $time->isThisYear();
