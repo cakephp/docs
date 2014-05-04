@@ -3,16 +3,16 @@ Authentification Simple et Autorisation de l'Application
 
 Suivez notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons que
 nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion
-de l'user. Nous avons aussi une autre condition requise, qui est
-d'autoriser notre blog à avoir des auteurs multiples, afin que chacun d'eux
-puisse créer ses propres posts, les modifier et les supprimer selon le besoin
-interdisant d'autres auteurs à apporter des modifications sur ses messages.
+de l'user. Nous avons aussi un autre impératif : permettre à notre
+blog d'avoir plusieurs auteurs, afin que chacun d'eux puisse créer ses propres
+articles, les modifier et les supprimer mais ne laisser la possibilité de ne
+modifier que ses propres messages.
 
-Créer le code lié de tous les users
-===================================
+Créer le code lié à tous les users
+==================================
 
-Premièrement, créeons une nouvelle table dans notre base de données du blog
-pour contenir les données de notre user::
+Premièrement, créons une nouvelle table dans notre base de données blog
+pour enregistrer les données de notre user::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -26,131 +26,97 @@ pour contenir les données de notre user::
 Nous avons respecté les conventions de CakePHP pour le nommage des tables,
 mais nous profitons d'une autre convention: en utilisant les colonnes du
 nom d'user et du mot de passe dans une table users, CakePHP sera
-capable de configurer automatiquement la plupart des choses pour nous quand on
-réalisera la connexion de l'user.
+capable de configurer automatiquement la plupart des choses pour nous quand nous
+réaliserons la connexion de l'user.
 
-La prochaine étape est de créer notre model User, qui a la
+La prochaine étape est de créer notre table Users, qui a la
 responsablilité de trouver, sauvegarder et valider toute donnée d'user::
 
-    // app/Model/User.php
-    App::uses('AppModel', 'Model');
+    // App/Model/Repository/UsersTable.php
+    namespace App\Model\Repository;
 
-    class User extends AppModel {
-        public $name = 'User';
-        public $validate = array(
-            'username' => array(
-                'required' => array(
-                    'rule' => array('notEmpty'),
-                    'message' => 'Un nom d\'utilisateur est requis'
-                )
-            ),
-            'password' => array(
-                'required' => array(
-                    'rule' => array('notEmpty'),
-                    'message' => 'Un mot de passe est requis'
-                )
-            ),
-            'role' => array(
-                'valid' => array(
-                    'rule' => array('inList', array('admin', 'auteur')),
-                    'message' => 'Merci de rentrer un rôle valide',
-                    'allowEmpty' => false
-                )
-            )
-        );
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table {
+
+        public function validationDefault(Validator $validator) {
+            return $validator
+                ->allowEmpty('username', false, 'A username is required')
+                ->allowEmpty('password', false, 'A password is required')
+                ->allowEmpty('role', false, 'A password is required')
+                ->add('role', [
+                    'rule' => ['inList', ['admin', 'author']],
+                    'message' => 'Please enter a valid role'
+                ]);
+        }
+
     }
 
-Créeons aussi notre UsersController, le contenu suivant correspond à la
+Créons aussi notre UsersController, le contenu suivant correspond à la
 classe `cuisinée` basique UsersController en utilisant les utilitaires
-de génération de code fournis avec CakePHP::
+de génération de code fournis par CakePHP::
 
-    // app/Controller/UsersController.php
+    // App/Controller/UsersController.php
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Error\NotFoundException;
+
     class UsersController extends AppController {
 
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Auth->allow('add', 'logout');
+            $this->Auth->allow('add');
         }
 
-        public function index() {
-            $this->User->recursive = 0;
-            $this->set('users', $this->paginate());
+         public function index() {
+            $this->set('users', $this->Users->find('all'));
         }
 
-        public function view($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('User invalide'));
+        public function view($id) {
+            if (!$id) {
+                throw new NotFoundException(__('Invalid user'));
             }
-            $this->set('user', $this->User->read(null, $id));
+
+            $user = $this->Users->get($id);
+            $this->set(compact('user'));
         }
 
         public function add() {
+            $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
-                $this->User->create();
-                if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('L\'user a été sauvegardé'));
-                    return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
+                if ($this->Users->save($user)) {
+                    $this->Session->setFlash(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'index']);
                 }
+                $this->Session->setFlash(__('Unable to add the user.'));
             }
-        }
-
-        public function edit($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('User Invalide'));
-            }
-            if ($this->request->is('post') || $this->request->is('put')) {
-                if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('L\'user a été sauvegardé'));
-                    return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
-                }
-            } else {
-                $this->request->data = $this->User->read(null, $id);
-                unset($this->request->data['User']['password']);
-            }
-        }
-
-        public function delete($id = null) {
-            $this->request->onlyAllow('post');
-
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('User invalide'));
-            }
-            if ($this->User->delete()) {
-                $this->Session->setFlash(__('User supprimé'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Session->setFlash(__('L\'user n\'a pas été supprimé'));
-            return $this->redirect(array('action' => 'index'));
+            $this->set('user', $user);
         }
 
     }
 
-De la même façon, nous avons crée les vues pour nos posts de blog ou en
-utilisant l'outil de génération de code, nous exécutons les vues. Dans
+De la même façon, nous avons créé les vues pour nos articles de blog ou en
+utilisant l'outil de génération de code, nous pouvons ajouter les vues. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 
 .. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
-    <?php echo $this->Form->create('User');?>
+    <?= $this->Form->create($user) ?>
         <fieldset>
-            <legend><?php echo __('Ajouter User'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('role', array(
-                'options' => array('admin' => 'Admin', 'auteur' => 'Auteur')
-            ));
+            <legend><?= __('Add User') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
+            <?= $this->Form->input('role', [
+                'options' => ['admin' => 'Admin', 'author' => 'Author']
+            ]) ?>
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Ajouter'));?>
+    <?= $this->Form->submit(__('Submit')); ?>
+    <?= $this->Form->end() ?>
     </div>
 
 Authentification (Connexion et Deconnexion)
@@ -163,19 +129,29 @@ déconnexion, et aussi d'autoriser aux users connectés les actions
 que l'on souhaite leur voir autorisées.
 
 Pour ajouter ce component à votre application, ouvrez votre fichier
-``app/Controller/AppController.php`` et ajoutez les lignes suivantes::
+``App/Controller/AppController.php`` et ajoutez les lignes suivantes::
 
-    // app/Controller/AppController.php
+    // App/Controller/AppController.php
+
+    namespace App\Controller;
+
     class AppController extends Controller {
         //...
 
-        public $components = array(
+        public $components = [
             'Session',
-            'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
-            )
-        );
+            'Auth' => [
+                'loginRedirect' => [
+                    'controller' => 'articles', 
+                    'action' => 'index'
+                ],
+                'logoutRedirect' => [
+                    'controller' => 'pages', 
+                    'action' => 'display', 
+                    'home'
+                ]
+            ]
+        ];
 
         public function beforeFilter() {
             $this->Auth->allow('index', 'view');
@@ -184,9 +160,9 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     }
 
 Il n'y a pas grand chose à configurer, puisque nous avons utilisé les
-conventions pour la table des users. Nous avons juste configuré les
+conventions pour la table users. Nous avons juste configuré les
 URLs qui seront chargées après que la connexion et la déconnexion des actions
-sont effectuées, dans notre cas, respectivement à ``/posts/`` et ``/``.
+sont effectuées, dans notre cas, respectivement à ``/articles/`` et ``/``.
 
 Ce que nous avons fait dans la fonction ``beforeFilter`` a été de dire au
 AuthComponent de ne pas exiger un login pour toutes les actions ``index``
@@ -196,15 +172,15 @@ capables de lire et lister les entrées sans s'inscrire dans le site.
 Maintenant, nous avons besoin d'être capable d'inscrire des nouveaux
 users, de sauvegarder leur nom d'user et mot de passe, et plus
 important de hasher leur mot de passe afin qu'il ne soit pas stocké en
-texte plain dans notre base de données. Disons à AuthComponent de laisser
-des users non-authentifiés d'accéder à la fonction add des users
+clair dans notre base de données. Disons à AuthComponent de laisser
+certains users non-authentifiés accéder à la fonction add des users
 et de réaliser l'action connexion et deconnexion::
 
-    // app/Controller/UsersController.php
+    // App/Controller/UsersController.php
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // Permet aux utilisateurs de s'enregistrer et de se déconnecter
+        // Allow users to register and logout.
         $this->Auth->allow('add', 'logout');
     }
 
@@ -212,9 +188,8 @@ et de réaliser l'action connexion et deconnexion::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash(__("Nom d'user ou mot de passe invalide, réessayer"));
             }
+            $this->Session->setFlash(__('Invalid username or password, try again'));
         }
     }
 
@@ -222,47 +197,51 @@ et de réaliser l'action connexion et deconnexion::
         return $this->redirect($this->Auth->logout());
     }
 
-Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
-``app/Model/User.php`` et ajoutez ce qui suit::
+Le hash du mot de passe n'est pas encore fait, nous avons besoin d'une classe
+Entity pour notre User afin de gérer sa propre logique spécifique. Créons
+fichier entity dans ``App/Model/Entity/User.php`` et ajoutons ce qui suit::
 
-    // app/Model/User.php
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
-    class User extends AppModel {
+    // App/Model/Entity/User.php
+    namespace App\Model\Entity;
 
-    // ...
+    use Cake\ORM\Entity;
+    use Cake\Controller\Component\Auth\SimplePasswordHasher;
 
-    public function beforeSave($options = array()) {
-        if (isset($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+    class User extends Entity {
+
+        // ...
+
+        public function setPassword($password) {
+            return (new SimplePasswordHasher)->hash($password);
         }
-        return true;
-    }
 
-    // ...
+        // ...
+    }
 
 Ainsi, maintenant à chaque fois qu'un user est sauvegardé, le mot de
 passe est hashé en utilisant la classe SimplePasswordHasher. Il nous manque
-juste un fichier template de vue pour la fonction de connexion:
+juste un fichier template de vue pour la fonction de connexion. Ouvrez votre
+fichier ``App/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
+    //app/View/Users/login.ctp
+
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User');?>
+    <?= $this->Session->flash('auth') ?>
+    <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?php echo __('Merci de rentrer votre nom d\'user et mot de passe'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
-        ?>
+            <legend><?= __('Please enter your username and password') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Connexion'));?>
+    <?= $this->Form->end(__('Login')) ?>
     </div>
 
 Vous pouvez maintenant inscrire un nouvel user en rentrant l'URL
 ``/users/add`` et vous connecter avec ce profil nouvellement créé en allant
 sur l'URL ``/users/login``. Essayez aussi d'aller sur n'importe quel URL
-qui n'a pas été explicitement autorisée telle que ``/posts/add``, vous verrez
+qui n'a pas été explicitement autorisée telle que ``/articles/add``, vous verrez
 que l'application vous redirige automatiquement vers la page de connexion.
 
 Et c'est tout! Cela semble trop simple pour être vrai. Retournons en arrière un
@@ -290,22 +269,26 @@ Autorisation (Qui est autorisé à accéder à quoi)
 
 Comme mentionné avant, nous convertissons ce blog en un outil multi-user
 à autorisation, et pour ce faire, nous avons besoin de modifier un peu la table
-posts pour ajouter la référence au model User::
+articles pour ajouter la référence à la table Users::
 
-    ALTER TABLE posts ADD COLUMN user_id INT(11);
+    ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-Aussi, un petit changement dans PostsController est nécessaire pour stocker
-l'user connecté courant en référence pour le post créé::
+Aussi, un petit changement dans ArticlesController est nécessaire pour stocker
+l'user connecté courant en référence pour l'article créé::
 
-    // app/Controller/PostsController.php
+    // App/Controller/ArticlesController.php
     public function add() {
+        $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Ligne ajoutée
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Votre post a été sauvegardé.'));
-                $this->redirect(array('action' => 'index'));
+            // Added this line
+            $article->user_id = $this->Auth->user('id');
+            if ($this->Articles->save($article)) {
+                $this->Session->setFlash(__('Your article has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
+            $this->Session->setFlash(__('Unable to add your article.'));
         }
+        $this->set('article', $article);
     }
 
 La fonction ``user()`` fournie par le component retourne toute colonne à partir
@@ -313,58 +296,65 @@ de l'user connecté courant. Nous avons utilisé cette méthode pour
 ajouter les données dans les infos requêtées qui sont sauvegardées.
 
 Sécurisons maintenant notre app pour empêcher certains auteurs de modifier ou
-supprimer les posts des autres. Des règles basiques pour notre app sont que les
-users admin peuvent accéder à tout URL, alors que les users
+supprimer les articles des autres. Des règles basiques pour notre app sont que
+les users admin peuvent accéder à tout URL, alors que les users
 normaux (le role auteur) peuvent seulement accéder aux actions permises.
 Ouvrez encore la classe AppController et ajoutez un peu plus d'options à la
 config de Auth::
 
-    // app/Controller/AppController.php
+    // App/Controller/AppController.php
 
-    public $components = array(
+    public $components = [
         'Session',
-        'Auth' => array(
-            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller') // Ligne ajoutée
-        )
-    );
+        'Auth' => [
+            'loginRedirect' => [
+                'controller' => 'articles',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            ],
+            'authorize' => ['Controller'] // Added this line
+        ]
+    ];
 
     public function isAuthorized($user) {
-        // Admin peut accéder à toute action
+        // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
 
-        // Refus par défaut
+        // Default deny
         return false;
     }
 
 Nous venons de créer un mécanisme très simple d'autorisation. Dans ce cas, les
 users avec le role ``admin`` sera capable d'accéder à tout URL dans le
-site quand ils sont connectés, mais les autres (par ex le role ``auteur``) ne
+site quand ils sont connectés, mais les autres (par ex le role ``author``) ne
 peut rien faire d'autre par rapport aux users non connectés.
 
 Ce n'est pas exactement ce que nous souhaitions, donc nous avons besoin de
 déterminer et fournir plus de règles à notre méthode ``isAuthorized()``. Mais
 plutôt que de le faire dans AppController, déleguons à chaque controller la
-fourniture de ces règles supplémentaires. Les règles que nous allons ajouter
-à PostsController permettront aux auteurs de créer des posts mais empêcheront
-l'édition des posts si l'auteur ne correspond pas. Ouvrez le fichier
-``PostsController.php`` et ajoutez le contenu suivant::
+gestion de ces règles supplémentaires. Les règles que nous allons ajouter
+à ArticlesController permettront aux auteurs de créer des articles mais
+empêcheront l'édition des articles si l'auteur ne correspond pas. Ouvrez le
+fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
 
-    // app/Controller/PostsController.php
+    // App/Controller/ArticlesController.php
 
     public function isAuthorized($user) {
-        // Tous les users inscrits peuvent ajouter les posts
+        // All registered users can add articles
         if ($this->action === 'add') {
             return true;
         }
 
-        // Le propriétaire du post peut l'éditer et le supprimer
-        if (in_array($this->action, array('edit', 'delete'))) {
-            $postId = (int) $this->request->params['pass'][0];
-            if ($this->Post->isOwnedBy($postId, $user['id'])) {
+        // The owner of an article can edit and delete it
+        if (in_array($this->action, ['edit', 'delete'])) {
+            $articleId = (int)$this->request->params['pass'][0];
+            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }
         }
@@ -377,21 +367,20 @@ vérifions à l'intérieur si la classe parente autorise déjà l'user.
 Si elle ne le fait pas, alors nous ajoutons juste l'autorisation d'accéder
 à l'action add, et éventuellement accés pour modifier et de supprimer.
 Une dernière chose à que nous avons oubliée d'exécuter est de dire si
-l'user à l'autorisation ou non de modifier le post, nous appelons
-une fonction ``isOwnedBy()`` dans le model Post. C'est généralement une
-bonne pratique de déplacer autant que possible la logique dans les models.
-Laissons la fonction s'exécuter::
+l'user à l'autorisation ou non de modifier l'article, nous appelons
+une fonction ``isOwnedBy()`` dans la table Articles. Laissons la fonction
+s'exécuter::
 
-    // app/Model/Post.php
+    // App/Model/Repository/ArticlesTable.php
 
-    public function isOwnedBy($post, $user) {
-        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;;
+    public function isOwnedBy($articleId, $userId) {
+        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 
 
 Ceci conclut notre tutoriel simple sur l'authentification et les autorisations.
 Pour sécuriser l'UsersController, vous pouvez suivre la même technique que nous
-faisions pour PostsController, vous pouvez aussi être plus créatif et coder
+faisions pour ArticlesController, vous pouvez aussi être plus créatif et coder
 quelque chose de plus général dans AppController basé sur vos propres règles.
 
 Si vous avez besoin de plus de contrôle, nous vous suggérons de lire le guide
