@@ -2,13 +2,13 @@ Simple Authentication and Authorization Application
 ###################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
-secure the access to certain URLs, based on the logged in
-user. We also have another requirement, to allow our blog to have multiple authors
-so each one of them can create their own articles, edit and delete them at will
-disallowing other authors to make any changes on one's articles.
+secure access to certain URLs, based on the logged-in
+user. We also have another requirement: to allow our blog to have multiple authors
+who can create, edit, and delete their own articles while
+disallowing other authors to make any changes to articles they do not own.
 
-Creating All Users' Related Code
-================================
+Creating All User-Related Code
+==============================
 
 First, let's create a new table in our blog database to hold our users' data::
 
@@ -22,8 +22,8 @@ First, let's create a new table in our blog database to hold our users' data::
     );
 
 We have adhered to the CakePHP conventions in naming tables, but we're also
-taking advantage of another convention: by using the username and password
-columns in a users table, CakePHP will be able to auto configure most things for
+taking advantage of another convention: By using the username and password
+columns in a users table, CakePHP will be able to auto-configure most things for
 us when implementing the user login.
 
 Next step is to create our Users table, responsible for finding, saving and
@@ -49,7 +49,7 @@ validating any user data::
 
     }
 
-Let's also create our UsersController, the following contents correspond to
+Let's also create our UsersController. The following content corresponds to
 parts of a basic baked UsersController class using the code generation utilities bundled
 with CakePHP::
 
@@ -95,8 +95,8 @@ with CakePHP::
     }
 
 In the same way we created the views for our articles or by using the code
-generation tool, we implement the views. For the purpose of this tutorial, we
-will show just the add.ctp:
+generation tool, we can implement the user views. For the purpose of this
+tutorial, we will show just the add.ctp:
 
 .. code-block:: php
 
@@ -116,13 +116,13 @@ will show just the add.ctp:
     <?= $this->Form->end() ?>
     </div>
 
-Authentication (login and logout)
+Authentication (Login and Logout)
 =================================
 
 We're now ready to add our authentication layer. In CakePHP this is handled by
 the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
-for requiring login for certain actions, handling user sign-in and sign-out, and
-also authorizing logged in users to the actions they are allowed to reach.
+for requiring login for certain actions, handling user login and logout, and
+also authorizing logged-in users to the actions they are allowed to reach.
 
 To add this component to your application open your ``App/Controller/AppController.php``
 file and add the following lines::
@@ -165,7 +165,7 @@ our visitors to be able to read and list the entries without registering in the
 site.
 
 Now, we need to be able to register new users, save their username and password,
-and, more importantly, hash their password so it is not stored as plain text in
+and more importantly, hash their password so it is not stored as plain text in
 our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
@@ -231,8 +231,8 @@ the following lines:
     <?= $this->Form->end(__('Login')) ?>
     </div>
 
-You can now register a new user by accessing the ``/users/add`` URL and log-in with the
-newly created credentials by going to ``/users/login`` URL. Also try to access
+You can now register a new user by accessing the ``/users/add`` URL and log in with the
+newly created credentials by going to ``/users/login`` URL. Also, try to access
 any other URL that was not explicitly allowed such as ``/articles/add``, you will see
 that the application automatically redirects you to the login page.
 
