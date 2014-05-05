@@ -127,3 +127,91 @@ having to change their parent::
 
     //Move the node to the bottom
     $categories->moveDown($node, true);
+
+Configuration
+=============
+
+If the default column names that are used by this behavior don't match your own
+schema, you can provide aliases for them::
+
+    public function initialize(array $config) {
+        $this->addBehavior('Tree', [
+            'parent' => 'ancestor_id', // Use this instead of parent_id,
+            'left' => 'tree_left', // Use this instead of lft
+            'right' => 'tree_right' // Use this instead of rght
+        ]);
+    }
+
+Scoping and Multi Trees
+=======================
+
+Sometimes you want to persist more than one tree structure inside the same
+table, you can achieve that by using the 'scope' configuration. For example, in
+a locations table you may want to create one tree per country::
+
+    class LocationsTable extends Table {
+
+        public function initialize(array $config) {
+            $this->addBehavior('Tree', [
+                'scope' => ['country_name' => 'Brazil']
+            ]);
+        }
+
+    }
+
+In the previous example, all tree operations will be scoped to only the rows
+having the column ``country_name`` set to 'Brazil'. You can change the scoping
+on the fly by using the 'config' function::
+
+    $this->behaviors->Tree->config('scope', ['country_name' => 'France']);
+
+Optionally, you can have a finer grain control of the scope by passing a closure
+as the scope::
+
+    $this->behaviors->Tree->config('scope', function($query) {
+        $country = $this->getConfigureContry(); // A made-up function
+        return $query->where(['country_name' => $country]);
+    });
+
+Saving Hierarchical Data
+========================
+
+When using the Three behavior, you usually don't need to worry about the
+internal representation of the hierarchical structure. The positions where nodes
+are placed in the tree are deduced from the 'parent_id' column in each of your
+entities::
+
+    $aCategory = $categoriesTable->get(10);
+    $aCategory->parent_id = 5;
+    $categoriesTable->save($aCategory);
+
+Providing inexistent parent ids when saving or attempting to create a loop in
+the tree (making a node child of itself) will throw an exception.
+
+You can make a node a root in the tree by setting the 'parent_id' column to
+null::
+
+    $aCategory = $categoriesTable->get(10);
+    $aCategory->parent_id = null;
+    $categoriesTable->save($aCategory);
+
+Children for the new root node will be preserved.
+
+Deleting Nodes
+==============
+
+Deleting a node and all its sub-tree (any children it may have at any depth in
+the tree) is trivial::
+
+    $aCategory = $categoriesTable->get(10);
+    $categoriesTable->delete($aCategory);
+
+The TreeBehavior will take care of all internal deleting operations for you. It
+is also possible to Only delete one node and re-assign all children to the
+immediately superior parent node in the tree::
+
+    $aCategory = $categoriesTable->get(10);
+    $categoriesTable->removeFromTree($aCategory);
+    $categoriesTable->delete($aCategory);
+
+All children nodes will be kept and a new parent will be assigned to them.
