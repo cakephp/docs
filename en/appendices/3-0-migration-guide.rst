@@ -520,6 +520,20 @@ ConnectionManager
   and ``config()`` replace ``sourceList()`` & ``enumConnectionObjects()`` with
   a more standard and consistent API.
 
+
+TreeBehavior
+------------
+
+The TreeBheavior was completely re-written to use the new ORM. Although it works
+the same as in 2.x, a few methods were renamed or removed::
+
+- ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
+- ``TreeBehavior::generateTreeList()`` is now a custom finder ``find('treeList')``.
+- ``TreeBehavior::getParentNode()`` was removed.
+- ``TreeBehavior::getPath()`` is now a custom finder ``find('path')``.
+- ``TreeBehavior::reorder()`` was removed.
+- ``TreeBehavior::verify()`` was removed.
+
 TestSuite
 =========
 
