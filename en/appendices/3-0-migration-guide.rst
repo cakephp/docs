@@ -324,7 +324,7 @@ Request
   to non-static.
 * Request detector for "mobile" has been removed from the core. Instead the app
   template adds detectors for "mobile" and "tablet" using ``MobileDetect`` lib.
-* The method ``onlyAllow`` has been renamed to ``allowMethod()`` and no longer accepts "var args".
+* The method ``onlyAllow()`` has been renamed to ``allowMethod()`` and no longer accepts "var args".
   All method names need to be passed as first argument, either as string or array of strings.
 
 Response
