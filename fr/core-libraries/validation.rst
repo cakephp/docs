@@ -27,7 +27,7 @@ champs que vous souhaitez valider::
 
     $validator
         ->validatePresence('title')
-        ->allowEmpty('title', false, 'Please fill this field')
+        ->notEmpty('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],

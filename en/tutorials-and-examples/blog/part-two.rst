@@ -379,8 +379,8 @@ back at our Articles model and make a few adjustments::
 
         public function validationDefault(Validator $validator) {
             $validator
-                ->allowEmpty('title', false)
-                ->allowEmpty('body', false);
+                ->notEmpty('title')
+                ->notEmpty('body');
 
             return $validator;
         }

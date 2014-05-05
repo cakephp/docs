@@ -25,7 +25,7 @@ validate::
 
     $validator
         ->validatePresence('title')
-        ->allowEmpty('title', false, 'Please fill this field')
+        ->notEmpty('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
@@ -72,20 +72,29 @@ mode using the second parameter::
 Allowing Empty Fields
 ---------------------
 
-The ``allowEmpty`` method will skip other valiation rules if the field is
-'empty', as empty values are accepted. The ``allowEmpty()`` method has 4 modes:
+The ``allowEmpty()`` and ``notEmpty()`` methods allow you to control which fields are
+allowed to be 'empty'. By using the ``notEmpty()`` method the given field will be marked
+invalid when it is empty. You can use ``allowEmpty()`` to allow a field to be
+empty. Both ``allowEmpty()`` and ``notEmpty()`` support a mode parameter that
+allows you to control when a field can or cannot be empty:
 
-* ``true`` The field is allowed to be empty.
 * ``false`` The field is not allowed to be empty.
 * ``create`` The field is required when validating a **create**
   operation.
 * ``update`` The field is required when validating an **update**
   operation.
 
-By default ``true`` is used. The values ``''``, ``null`` and ``[]`` (empty
-array) will cause validation errors when fields are not allowed to be empty.
-When fields are allowed to be empty, the values ``''``, ``null``, ``false``,
-``[]``, ``0``, ``'0'`` are accepted.
+The values ``''``, ``null`` and ``[]`` (empty array) will cause validation
+errors when fields are not allowed to be empty.  When fields are allowed to be
+empty, the values ``''``, ``null``, ``false``, ``[]``, ``0``, ``'0'`` are
+accepted.
+
+An example of these methods in action is::
+
+    $validator->allowEmpty('published')
+        ->notEmpty('title', 'A title is required')
+        ->notEmpty('body', 'A title is required', 'create')
+        ->allowEmpty('header_image', 'update')
 
 Marking Rules as the Last to Run
 --------------------------------
@@ -236,9 +245,9 @@ sending an email you could do the following::
             'message' => 'E-mail must be valid'
         ])
         ->validatePresence('name')
-        ->allowEmpty('name', false, 'We need your name.')
+        ->notEmpty('name', 'We need your name.')
         ->validatePresence('comment')
-        ->allowEmpty('comment', false, 'You need to give a comment.');
+        ->notEmpty('comment', 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
     if (!empty($errors)) {

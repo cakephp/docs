@@ -38,9 +38,9 @@ validating any user data::
 
         public function validationDefault(Validator $validator) {
             return $validator
-                ->allowEmpty('username', false, 'A username is required')
-                ->allowEmpty('password', false, 'A password is required')
-                ->allowEmpty('role', false, 'A password is required')
+                ->notEmpty('username', 'A username is required')
+                ->notEmpty('password', 'A password is required')
+                ->notEmpty('role', 'A password is required')
                 ->add('role', [
                     'rule' => ['inList', ['admin', 'author']],
                     'message' => 'Please enter a valid role'
