@@ -618,7 +618,7 @@ By default all actions require authorization. However, after making actions
 public, you want to revoke the public access. You can do so using
 ``AuthComponent::deny()``::
 
-		// Deny all the actions.
+    // Deny all actions.
     $this->Auth->deny();
 
     // Deny one action
