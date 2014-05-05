@@ -361,6 +361,97 @@ By default ``SORT_NUMERIC`` is used::
     plan to do so, consider converting the collection to an array or simply use
     the ``compile`` method on it.
 
+Working with Tree Data
+======================
+
+.. php:method:: nest($idPath, $parentPath)
+
+Not all data is meant to be represented in a linear way. Collections make it
+easier to construct and flatten hierarchical or nested structures. Creating
+a nested structure where children are grouped by a parent identifier property is
+easy with the ``nest`` method.
+
+Two parameters are required for this function, the first one is the property
+representing the item identifier. The second parameter is the name of the
+property representing the identifier for the parent item::
+
+    $items new Collection([
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
+        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+    ]);
+
+    $collection->nest('id', 'parent_id')->toArray();
+    // Returns
+    [
+        [
+            'id' => 1,
+            'parent_id' => null,
+            'name' => 'Bird',
+            'children' => [
+                [
+                    'id' => 2,
+                    'parent_id' => 1,
+                    'name' => 'Land Birds'
+                    'children' => [
+                        ['id' => 3, 'name' => 'Eagle', 'parent_id' => 2]
+                    ]
+                ],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull',  'children' => []],
+            ]
+        ],
+        [
+            'id' => 6,
+            'parent_id' => null,
+            'name' => 'Fish'
+            'children' => [
+                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
+            ]
+        ]
+    ];
+
+Children elements are nested inside the ``children`` property inside each of the
+items in the collection. This type of data representation is helpful for
+rendering menus or traversing elements up to certain level in the tree.
+
+.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+
+The inverse of ``nest`` is ``listNested``, this method allows you to flatten
+a tree structure back into a linear structure. It takes two parameters, the
+first one is the traversing mode (asc, desc or leaves) and the second one is the
+name of the property containing the children for each element in the
+collection.
+
+Taking as input the nested collection built in the previous example, we can
+flatten it::
+
+    $nested->listNested()->toArray();
+
+    //Returns
+    [
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+    ]
+
+By default the tree is traversed from the root to the leaves. You can also
+instruct it to only return the leave elements in the tree::
+
+    $nested->listNested()->toArray();
+
+    //Returns
+    [
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+    ]
+
 Other Methods
 =============
 
