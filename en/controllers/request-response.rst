@@ -166,7 +166,7 @@ You can also easily extend the request detectors that are available, by using
 detectors. There are four different types of detectors that you can create:
 
 * Environment value comparison - Compares a
-  value fetched from :php:func:`env()` for equality 
+  value fetched from :php:func:`env()` for equality
   with the provided value.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
@@ -267,7 +267,7 @@ Request API
 
     Returns the HTTP method the request was made with.
 
-.. php:method:: onlyAllow($methods)
+.. php:method:: allowMethod($methods)
 
     Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
     The 405 response will include the required ``Allow`` header with the passed methods
@@ -411,8 +411,8 @@ Changing the Response Class
 ===========================
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
-transparent class. If you need to override it with your own application-specific class, 
-you can replace ``Response`` in ``app/webroot/index.php``. 
+transparent class. If you need to override it with your own application-specific class,
+you can replace ``Response`` in ``app/webroot/index.php``.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
