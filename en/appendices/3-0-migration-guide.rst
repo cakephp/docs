@@ -324,6 +324,8 @@ Request
   to non-static.
 * Request detector for "mobile" has been removed from the core. Instead the app
   template adds detectors for "mobile" and "tablet" using ``MobileDetect`` lib.
+* The method ``onlyAllow()`` has been renamed to ``allowMethod()`` and no longer accepts "var args".
+  All method names need to be passed as first argument, either as string or array of strings.
 
 Response
 --------
@@ -462,6 +464,8 @@ AuthComponent
   with ``hashType`` set to ``Blowfish``.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 - Configuration options are no longer set as public properties.
+- The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
+  to be passed as first argument, either as string or array of strings.
 
 RequestHandlerComponent
 -----------------------
@@ -480,13 +484,15 @@ SecurityComponent
 
 - The following methods and their related properties have been removed from Security component:
   ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
-  Use the :php:meth:`Cake\\Network\\Request::onlyAllow()` instead.
+  Use the :php:meth:`Cake\\Network\\Request::allowMethod()` instead.
 - ``SecurityComponent::$disabledFields()`` has been removed, use
   ``SecurityComponent::$unlockedFields()``.
 - The CSRF related features in SecurityComponent have been extracted and moved
   into a separate CsrfComponent. This allows you more easily use CSRF protection
   without having to use form tampering prevention.
 - Configuration options are no longer set as public properties.
+- The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args".
+  All method names need to be passed as first argument, either as string or array of strings.
 
 Model
 =====
@@ -715,7 +721,7 @@ and reduce the problems people had in the past:
   content.
 - The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
-  It now also requires ``$fields`` parameter to be an array. The ``$blacklist`` 
+  It now also requires ``$fields`` parameter to be an array. The ``$blacklist``
   parameter has been removed, the functionality has been replaced by specifying
   ``'field' => false`` in the ``$fields`` parameter.
 - The ``inline`` parameter has been removed from postLink() method.

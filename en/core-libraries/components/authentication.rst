@@ -602,14 +602,14 @@ user, nor will authorize objects be checked::
     // Allow all actions
     $this->Auth->allow();
 
-    // Allow only the view and index actions.
-    $this->Auth->allow('view', 'index');
+    // Allow only the index action.
+    $this->Auth->allow('index');
 
     // Allow only the view and index actions.
-    $this->Auth->allow(array('view', 'index'));
+    $this->Auth->allow(['view', 'index']);
 
-You can provide as many action names as you need to ``allow()``. You can
-also supply an array containing all the action names.
+By calling it empty you allow all actions to be public.
+For a single action you can provide the action name as string. Otherwise use an array.
 
 Making Actions Require Authorization
 ------------------------------------
@@ -618,18 +618,17 @@ By default all actions require authorization. However, after making actions
 public, you want to revoke the public access. You can do so using
 ``AuthComponent::deny()``::
 
-    // remove one action
-    $this->Auth->deny('add');
-
-    // remove all the actions.
+    // Deny all actions.
     $this->Auth->deny();
 
-    // remove a group of actions.
-    $this->Auth->deny('add', 'edit');
-    $this->Auth->deny(array('add', 'edit'));
+    // Deny one action
+    $this->Auth->deny('add');
 
-You can provide as many action names as you need to ``deny()``. You can
-also supply an array containing all the action names.
+    // Deny a group of actions.
+    $this->Auth->deny(['add', 'edit']);
+
+By calling it empty you deny all actions.
+For a single action you can provide the action name as string. Otherwise use an array.
 
 
 Using ControllerAuthorize
@@ -776,7 +775,7 @@ unauthorizedRedirect
     The session key name where the record of the current user is stored. If
     unspecified, it will be "Auth.User".
 
-.. php:method:: allow($action, [$action, ...])
+.. php:method:: allow($actions = null)
 
     Set one or more actions as public actions, this means that no
     authorization checks will be performed for the specified actions.
@@ -792,7 +791,7 @@ unauthorizedRedirect
 
     Loads the authorization objects configured.
 
-.. php:method:: deny($action, [$action, ...])
+.. php:method:: deny($actions = null)
 
     Toggle one or more actions previously declared as public actions,
     as non-public methods. These methods will now require

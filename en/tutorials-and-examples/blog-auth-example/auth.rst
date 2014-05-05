@@ -138,19 +138,19 @@ file and add the following lines::
             'Session',
             'Auth' => [
                 'loginRedirect' => [
-                    'controller' => 'articles', 
+                    'controller' => 'articles',
                     'action' => 'index'
                 ],
                 'logoutRedirect' => [
-                    'controller' => 'pages', 
-                    'action' => 'display', 
+                    'controller' => 'pages',
+                    'action' => 'display',
                     'home'
                 ]
             ]
         ];
 
         public function beforeFilter() {
-            $this->Auth->allow('index', 'view');
+            $this->Auth->allow(['index', 'view']);
         }
         //...
     }
@@ -174,7 +174,7 @@ the users add function and implement the login and logout action::
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('add', 'logout');
+        $this->Auth->allow(['add', 'logout']);
     }
 
     public function login() {
