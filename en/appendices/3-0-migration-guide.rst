@@ -520,6 +520,20 @@ ConnectionManager
   and ``config()`` replace ``sourceList()`` & ``enumConnectionObjects()`` with
   a more standard and consistent API.
 
+
+TreeBehavior
+------------
+
+The TreeBheavior was completely re-written to use the new ORM. Although it works
+the same as in 2.x, a few methods were renamed or removed::
+
+- ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
+- ``TreeBehavior::generateTreeList()`` is now a custom finder ``find('treeList')``.
+- ``TreeBehavior::getParentNode()`` was removed.
+- ``TreeBehavior::getPath()`` is now a custom finder ``find('path')``.
+- ``TreeBehavior::reorder()`` was removed.
+- ``TreeBehavior::verify()`` was removed.
+
 TestSuite
 =========
 
@@ -855,11 +869,34 @@ Time
 ----
 
 - ``CakeTime`` was renamed to :php:class:`Cake\\Utility\\Time`.
-- ``Time::__set()`` and - ``Time::__get()`` were removed. These were
-  magic setter/getter methods for backwards compatibility.
-- ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practices.
+- ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practises.
 - ``CakeTime::niceShort()`` has been removed.
+- ``CakeTime::convert()`` has been removed.
+- ``CakeTime::convertSpecifiers()`` has been removed.
+- ``CakeTime::dayAsSql()`` has been removed.
+- ``CakeTime::daysAsSql()`` has been removed.
+- ``CakeTime::fromString()`` has been removed.
+- ``CakeTime::gmt()`` has been removed.
+- ``CakeTime::toATOM()`` was renamed to ``toATOMString``.
+- ``CakeTime::toRSS()`` was renamed to ``toATOMRSSString``.
+- ``CakeTime::toUnix()`` was renamed to ``toUnixString``.
+- ``CakeTime::wasYesterday()`` was renamed to ``isYesterday`` to match the rest
+  of the method naming.
+- ``CakeTime::format()`` Does not use spritf format strings anymore, you can use
+  ``i18nFormat`` instead.
 - :php:meth:`Time::timeAgoInWords()` now requires ``$options`` to be an array.
+
+Time is not a collection of static methods anymore, it extends ``DateTime`` to
+inherit all its methods and adds location aware formatting functions with the
+help of the ``intl`` extension.
+
+In general, expressions looking like this::
+
+    CakeTime::aMethod($date);
+
+Can be migrated by rewriting it to::
+
+    (new Time($date))->aMethod();
 
 Number
 ------
