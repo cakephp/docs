@@ -12,7 +12,7 @@ use the ``Time`` class::
 
     class UsersController extends AppController {
 
-        public $components = array('Auth');
+        public $components = ['Auth'];
 
         public function afterLogin() {
             $time = new Time($this->Auth->user('date_of_birth'));
@@ -25,8 +25,8 @@ use the ``Time`` class::
 
 
 Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
-to power its Time utility. Anything you could do with ``Carbon`` and
-``DateTime`` you can do with ``Time``.
+to power its Time utility. Anything you can do with ``Carbon`` and
+``DateTime``, you can do with ``Time``.
 
 .. start-time
 
@@ -55,10 +55,11 @@ There are a few ways to create ``Time`` instances::
 
     $time = new Time('2 hours ago');
 
-The Time class constructor can take any paramenter the internal ``DateTime`` PHP
-class can. When passing a number or numeric string it will be interpreted as a UNIX Timetamp.
+The ``Time`` class constructor can take any paramenter the internal ``DateTime``
+PHP class can. When passing a number or numeric string, it will be interpreted
+as a UNIX timestamp.
 
-In test cases you can easily mock out ``now()`` using ``setTestNow()``::
+In test cases, you can easily mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
     $now = new Time('2014-04-12 12:22:30');
@@ -73,14 +74,14 @@ In test cases you can easily mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Once created you can manipulate ``Time`` instances using setter methods::
+Once created, you can manipulate ``Time`` instances using setter methods::
 
     $now = Time::now();
     $now->year(2013)
         ->month(10)
         ->day(31);
 
-You can also use the methods provided by PHP's built-in DateTime class::
+You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
     $now->setDate(2013, 10, 31);
 
@@ -111,8 +112,8 @@ Formatting
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
-A very common thing to do with times is to print out formatted dates. CakePHP
-makes this a snap::
+A very common thing to do with ``Time`` instances is to print out formatted
+dates. CakePHP makes this a snap::
 
     $now = Time::parse('2014-10-31');
 
@@ -140,9 +141,9 @@ Print out a predefined 'nice' format::
     // Outputs 'Oct 31, 2014 12:32pm' in en-US
     echo $now->nice();
 
-You can alter the timezone in which the date is displayed without altering the Time
-object itself, this is useful when you store dates in one timezone bu want to
-display them back into the user's own timezone::
+You can alter the timezone in which the date is displayed without altering the
+``Time`` object itself. This is useful when you store dates in one timezone, but
+want to display them in a user's own timezone::
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
@@ -166,7 +167,7 @@ You can, however, modify this default at runtime::
 
     Time::$defaultLocale = 'es-ES';
 
-From now on, date will be displayed in the Spanish preferred format, unless
+From now on, dates will be displayed in the Spanish preferred format, unless
 a different locale is specified directly in the formatting method.
 
 Likewise, it is possible to alter the default formatting string to be used for
@@ -195,8 +196,8 @@ Often it is useful to print times relative to the present::
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 
 The ``end`` option lets you define at which point after which relative times should be
-formatted using the ``format`` option. The ``accuracy`` option lets control what
-level of detail should be used for each interval range::
+formatted using the ``format`` option. The ``accuracy`` option lets us control
+what level of detail should be used for each interval range::
 
     // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
     echo $timestamp->timeAgoInWords([
@@ -244,7 +245,7 @@ You can compare a ``Time`` instance with the present in a variety of ways::
     echo $time->isThisYear();
 
 Each of the above methods will return true/false based on whether or not the
-time instance matches the present.
+``Time`` instance matches the present.
 
 Comparing With Intervals
 ========================
@@ -252,7 +253,7 @@ Comparing With Intervals
 .. php:method:: isWithinNext($interval)
 
 You can see if a ``Time`` instance falls within a given range using
-``wasWithinLast()``, ``isWithinNext()``::
+``wasWithinLast()`` and ``isWithinNext()``::
 
     $time = new Time('2014-06-15');
 
@@ -264,7 +265,7 @@ You can see if a ``Time`` instance falls within a given range using
 
 .. php:method:: isWithinPast($interval)
 
-You can also compare with periods in the past::
+You can also compare a ``Time`` instance within a range in the past::
 
     // Within past 2 days.
     echo $time->isWithinPast(2);
