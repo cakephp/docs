@@ -105,7 +105,7 @@ Création de liens triés
     :param array $options: Options pour le tri des liens.
 
 Génère un lien de tri. Définit le nom ou les paramètres de la chaîne de
-recherche pour le tri et la direction. Les liens par défaut fournirons un tri
+recherche pour le tri et la direction. Les liens par défaut fourniront un tri
 ascendant. Après le premier clique, les liens générés avec ``sort()`` gèreront
 le changement de direction automatiquement. Les liens de tri par défaut
 ascendant. Si le jeu de résultat est trié en ascendant avec la clé spécifiée
@@ -113,7 +113,7 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptées pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
+* ``escape`` Si vous voulez que le contenu soit encodé en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
 * ``direction`` La direction par défaut à utiliser quand ce lien n'est pas actif.
@@ -145,7 +145,7 @@ Sortie:
 
     <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
-Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
+Si vous utilisez de l'HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
     echo $this->Paginator->sort(

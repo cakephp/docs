@@ -116,7 +116,6 @@ Security API
     cost and salt values, allowing the generated hash to end up with the same
     resulting hash given the same input value.
 
-
 .. php:staticmethod:: inactiveMins( )
 
     :rtype: integer

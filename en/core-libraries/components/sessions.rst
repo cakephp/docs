@@ -107,9 +107,9 @@ Creating Notification Messages
         </div>
 
     You can use the additional parameters of ``setFlash()`` to create
-    different kinds of flash messages. For example, error and positive
-    notifications may look differently. CakePHP gives you a way to do that.
-    Using the ``$key`` parameter you can store multiple messages, which can be
+    different kinds of flash messages. For example, you may want error and positive
+    notifications to look different from each other. CakePHP gives you a way to do that.
+    Using the ``$key`` parameter, you can store multiple messages, which can be
     output separately::
 
         // set a bad message.
@@ -124,9 +124,9 @@ Creating Notification Messages
         echo $this->Session->flash('good');
         echo $this->Session->flash('bad');
 
-    The ``$element`` parameter allows you to control which element
-    (located in ``/App/Template/Element``) should be used to render the
-    message in. In the element the message is available as ``$message``.
+    The ``$element`` parameter allows you to control the element
+    (located in ``/app/View/Elements``) in which the message should be
+    rendered. Within the element, the message is available as ``$message``.
     First we set the flash in our controller::
 
         $this->Session->setFlash('Something custom!', 'flash_custom');
@@ -137,9 +137,9 @@ Creating Notification Messages
         <div id="myCustomFlash"><?= h($message) ?></div>
 
     ``$params`` allows you to pass additional view variables to the
-    rendered layout. Parameters can be passed affecting the rendered div, for
-    example adding "class" in the $params array will apply a class to the
-    ``div`` output using ``$this->Session->flash()`` in your layout or view.::
+    rendered layout. Parameters can be passed affecting the rendered div. For
+    example, adding "class" in the $params array will apply a class to the
+    ``div`` output using ``$this->Session->flash()`` in your layout or view::
 
         $this->Session->setFlash(
             'Example message text',
@@ -163,8 +163,8 @@ Creating Notification Messages
         );
 
     .. note::
-        By default CakePHP does not HTML escape flash messages. If you are using
-        any request or user data in your flash messages you should escape it
+        By default CakePHP does not escape the HTML in flash messages. If you are using
+        any request or user data in your flash messages, you should escape it
         with :php:func:`h` when formatting your messages.
 
 .. meta::

@@ -1018,7 +1018,7 @@ Création d'un chemin de navigation avec le Helper Html
     pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', '/users/add');
+        $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
 
     Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
     où le fil d'Ariane a été ajouté.

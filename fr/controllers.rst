@@ -238,14 +238,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     La méthode :php:meth:`~Controller::set()` peut également prendre un tableau
     associatif comme premier paramètre. Cela peut souvent être une manière
-    rapide d'affecter en une seule fois un jeu complet d'informations à la vue.
-
-    .. versionchanged:: 1.3
-        Les clefs de votre tableau ne seront plus infléchies avant d'être
-        assignées à la vue (‘clef\_avec\_underscore’ ne devient plus
-        ‘clefAvecUnderscore’, etc...).
-
-    ::
+    rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
         $data = [
             'couleur' => 'rose',

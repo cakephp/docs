@@ -7,7 +7,7 @@ The CookieComponent is a wrapper around the native PHP ``setcookie``
 method. It also includes a host of delicious icing to make coding
 cookies in your controllers very convenient. Before attempting to
 use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controllers' $components array.
+in your controller's $components array.
 
 
 Controller Setup
@@ -85,13 +85,13 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    The write() method is the heart of cookie component, $key is the
+    The write() method is the heart of the cookie component. $key is the
     cookie variable name you want, and the $value is the information to
     be stored::
 
         $this->Cookie->write('name', 'Larry');
 
-    You can also group your variables by supplying dot notation in the
+    You can also group your variables by using dot notation in the
     key parameter::
 
         $this->Cookie->write('User.name', 'Larry');
@@ -105,15 +105,15 @@ The CookieComponent offers a number of methods for working with Cookies.
         );
 
     All values in the cookie are encrypted by default. If you want to
-    store the values as plain-text, set the third parameter of the
+    store the values as plain text, set the third parameter of the
     write() method to false. You should remember to set
-    the encryption mode to 'aes' to ensure values are securely
+    the encryption mode to 'aes' to ensure that values are securely
     encrypted::
 
         $this->Cookie->write('name', 'Larry', false);
 
     The last parameter to write is $expires – the number of seconds
-    before your cookie will expire. For convenience, this parameter can
+    until your cookie will expire. For convenience, this parameter can
     also be passed as a string that the php strtotime() function
     understands::
 
@@ -133,7 +133,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         echo $this->Cookie->read('User.name');
 
         // To get the variables which you had grouped
-        // using the dot notation as an array use something like
+        // using the dot notation as an array use the following
         $this->Cookie->read('User');
 
         // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
@@ -142,7 +142,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     :param string $key: The key to check.
 
-    Used to check if a key/path exists and has not-null value.
+    Used to check whether a key/path exists and has a non-null value.
 
 .. php:method:: delete(mixed $key)
 
@@ -152,7 +152,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         // Delete a variable
         $this->Cookie->delete('bar');
 
-        // Delete the cookie variable bar, but not all under foo
+        // Delete the cookie variable bar, but not everything under foo
         $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()

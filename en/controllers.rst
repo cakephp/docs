@@ -225,14 +225,7 @@ rendered from the controller.
 
     The :php:meth:`~Controller::set()` method also takes an associative array as its first
     parameter. This can often be a quick way to assign a set of
-    information to the view.
-
-    .. versionchanged:: 1.3
-        Array keys will no longer be inflected before they are assigned
-        to the view ('underscored\_key' does not become 'underscoredKey'
-        anymore, etc.):
-
-    ::
+    information to the view::
 
         $data = array(
             'color' => 'pink',
@@ -514,12 +507,14 @@ visit the `CakePHP API <http://api.cakephp.org/3.0/class-Cake.Controller.Control
 $components, $helpers
 ---------------------
 
-The next most often used controller attributes tell CakePHP what helpers,
-components, and models you'll be using in conjunction with the current
-controller. Using these attributes make MVC classes given by ``$components``
-available and ``$uses`` available to the controller as class variables (``$this->ComponentName``, for
-example) and those given by ``$helpers`` to the view as an object reference
-variable (``$this->{$helpername}``).
+The next most often used controller attributes tell CakePHP what
+:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`,
+and ``models`` you'll be using in conjunction with
+the current controller. Using these attributes make MVC classes
+given by :php:attr:`~Controller::$components` and :php:attr:`~Controller::$uses` available to the controller
+as class variables (``$this->ModelName``, for example) and those
+given by :php:attr:`~Controller::$helpers` to the view as an object reference variable
+(``$this->{$helpername}``).
 
 .. note::
 

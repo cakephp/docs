@@ -4,7 +4,7 @@ SessionHelper
 .. php:class:: SessionHelper(View $view, array $config = array())
 
 As a natural counterpart to the Session Component, the Session
-Helper replicates most of the components functionality and makes it
+Helper replicates most of the component's functionality and makes it
 available in your view.
 
 The major difference between the Session Helper and the Session
@@ -34,7 +34,7 @@ used.
 
     :rtype: boolean
 
-    Check to see if a key is in the Session. Returns a boolean on the
+    Check to see whether a key is in the Session. Returns a boolean representing the
     key's existence.
 
 .. php:method:: error()
@@ -47,7 +47,7 @@ used.
 
     :rtype: boolean
 
-    Used to check is a session is valid in a view.
+    Used to check whether a session is valid in a view.
 
 Displaying Notifications or Flash Messages
 ==========================================
@@ -56,15 +56,15 @@ Displaying Notifications or Flash Messages
 
     :rtype: string
 
-    As explained in :ref:`creating-notification-messages` you can
+    As explained in :ref:`creating-notification-messages`, you can
     create one-time notifications for feedback. After creating messages
-    with :php:meth:`SessionComponent::setFlash()` you will want to
+    with :php:meth:`SessionComponent::setFlash()`, you will want to
     display them. Once a message is displayed, it will be removed and
     not displayed again::
 
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following HTML:
+    The above will output a simple message with the following HTML:
 
     .. code-block:: html
 
@@ -72,15 +72,15 @@ Displaying Notifications or Flash Messages
             Your stuff has been saved.
         </div>
 
-    As with the component method you can set additional properties
-    and customize which element is used. In the controller you might
+    As with the component method, you can set additional properties
+    and customize which element is used. In the controller, you might
     have code like::
 
         // in a controller
         $this->Session->setFlash('The user could not be deleted.');
 
     When outputting this message, you can choose the element used to display
-    this message::
+    the message::
 
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
@@ -88,8 +88,7 @@ Displaying Notifications or Flash Messages
     This would use ``View/Elements/failure.ctp`` to render the message. The
     message text would be available as ``$message`` in the element.
 
-    Inside the failure element file would be something like
-    this:
+    The failure element would contain something like this:
 
     .. code-block:: php
 
@@ -98,7 +97,7 @@ Displaying Notifications or Flash Messages
         </div>
 
     You can also pass additional parameters into the ``flash()`` method, which
-    allow you to generate customized messages::
+    allows you to generate customized messages::
 
         // In the controller
         $this->Session->setFlash('Thanks for your payment.');
@@ -115,11 +114,11 @@ Displaying Notifications or Flash Messages
         </div>
 
     .. note::
-        By default CakePHP does not HTML escape flash messages. If you are using
-        any request or user data in your flash messages you should escape it
+        By default, CakePHP does not escape the HTML in flash messages. If you are using
+        any request or user data in your flash messages, you should escape it
         with :php:func:`h` when formatting your messages.
 
 .. meta::
     :title lang=en: SessionHelper
-    :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the components functionality and makes it available in your view.
+    :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.
     :keywords lang=en: session helper,flash messages,session flash,session read,session check
