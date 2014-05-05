@@ -464,7 +464,7 @@ AuthComponent
   with ``hashType`` set to ``Blowfish``.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 - Configuration options are no longer set as public properties.
-- The methods ``allow()`` and ``deny()`` no longer accept "var args". The methods need
+- The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
   to be passed as first argument, either as string or array of strings.
 
 RequestHandlerComponent
@@ -491,8 +491,8 @@ SecurityComponent
   into a separate CsrfComponent. This allows you more easily use CSRF protection
   without having to use form tampering prevention.
 - Configuration options are no longer set as public properties.
-- The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args". The methods need
-  to be passed as first argument, either as string or array of strings.
+- The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args".
+  All method names need to be passed as first argument, either as string or array of strings.
 
 Model
 =====
