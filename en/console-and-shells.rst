@@ -129,18 +129,18 @@ interesting let's add another command that does something::
             $this->out('Hello world.');
         }
 
-        public function hey_there() {
-            $name = !empty($this->args[0]) : $this->args[0] : 'Anonymous';
+        public function hey_there($name = 'Anonymous') {
             $this->out('Hey there ' . $name);
         }
     }
 
-After saving this file you should be able to run ``Console/cake hello hey_there your-name``
-and see your name printed out. Any public method not prefixed by an ``_`` is allowed to be
-called from the command line. In our ``hey_there`` method we also used ``$this->args``, this
-property contains an array of all the positional arguments provided to a command. You can
-also use switches or options on shell applications, these are available at ``$this->params``,
-but we'll cover that in a bit.
+After saving this file you should be able to run ``Console/cake hello hey_there
+your-name`` and see your name printed out. Any public method not prefixed by an
+``_`` is allowed to be called from the command line. In our ``hey_there`` method
+we can see that positional arguments are provided as arguments to our ``hey_ther()``
+function. Positional arguments are also available in the ``args`` property. You
+can access switches or options on shell applications, which are available at
+``$this->params``, but we'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional
 arguments. This is because the first positional argument or option is
@@ -618,11 +618,16 @@ option parser for a shell's task. By calling the Task's ``getOptionParser()``
 we don't have to duplicate the option parser generation, or mix concerns
 in our shell. Adding subcommands in this way has two advantages.
 First it lets your shell easily document its subcommands in the
-generated help, and it also allows easy access to the subcommand
+generated help. It also gives easy access to the subcommand
 help. With the above subcommand created you could call
 ``cake myshell --help`` and see the list of subcommands, and
 also run ``cake myshell model --help`` to view the help for
 just the model task.
+
+.. note::
+
+    Once your Shell defines subcommands, all subcommands must be explicitly
+    defined.
 
 When defining a subcommand you can use the following options:
 
