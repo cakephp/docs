@@ -129,18 +129,18 @@ interesting let's add another command that does something::
             $this->out('Hello world.');
         }
 
-        public function hey_there() {
-            $name = !empty($this->args[0]) : $this->args[0] : 'Anonymous';
+        public function hey_there($name = 'Anonymous') {
             $this->out('Hey there ' . $name);
         }
     }
 
-After saving this file you should be able to run ``Console/cake hello hey_there your-name``
-and see your name printed out. Any public method not prefixed by an ``_`` is allowed to be
-called from the command line. In our ``hey_there`` method we also used ``$this->args``, this
-property contains an array of all the positional arguments provided to a command. You can
-also use switches or options on shell applications, these are available at ``$this->params``,
-but we'll cover that in a bit.
+After saving this file you should be able to run ``Console/cake hello hey_there
+your-name`` and see your name printed out. Any public method not prefixed by an
+``_`` is allowed to be called from the command line. In our ``hey_there`` method
+we can see that positional arguments are provided as arguments to our ``main()``
+method. Positional arguments are also available in the ``args`` property. You
+can also use switches or options on shell applications, these are available at
+``$this->params``, but we'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional
 arguments. This is because the first positional argument or option is
