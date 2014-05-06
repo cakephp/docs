@@ -139,7 +139,7 @@ your-name`` and see your name printed out. Any public method not prefixed by an
 ``_`` is allowed to be called from the command line. In our ``hey_there`` method
 we can see that positional arguments are provided as arguments to our ``main()``
 method. Positional arguments are also available in the ``args`` property. You
-can also use switches or options on shell applications, these are available at
+can access switches or options on shell applications, which are available at
 ``$this->params``, but we'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional
@@ -618,11 +618,16 @@ option parser for a shell's task. By calling the Task's ``getOptionParser()``
 we don't have to duplicate the option parser generation, or mix concerns
 in our shell. Adding subcommands in this way has two advantages.
 First it lets your shell easily document its subcommands in the
-generated help, and it also allows easy access to the subcommand
+generated help. It also gives easy access to the subcommand
 help. With the above subcommand created you could call
 ``cake myshell --help`` and see the list of subcommands, and
 also run ``cake myshell model --help`` to view the help for
 just the model task.
+
+.. note::
+
+    Once your Shell defines subcommands, all subcommands must be explicitly
+    defined.
 
 When defining a subcommand you can use the following options:
 
