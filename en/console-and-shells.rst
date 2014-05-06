@@ -137,8 +137,8 @@ interesting let's add another command that does something::
 After saving this file you should be able to run ``Console/cake hello hey_there
 your-name`` and see your name printed out. Any public method not prefixed by an
 ``_`` is allowed to be called from the command line. In our ``hey_there`` method
-we can see that positional arguments are provided as arguments to our ``main()``
-method. Positional arguments are also available in the ``args`` property. You
+we can see that positional arguments are provided as arguments to our ``hey_ther()``
+function. Positional arguments are also available in the ``args`` property. You
 can access switches or options on shell applications, which are available at
 ``$this->params``, but we'll cover that in a bit.
 
