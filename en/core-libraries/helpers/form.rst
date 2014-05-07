@@ -17,7 +17,7 @@ Starting a Form
 .. php:method:: create(mixed $model = null, array $options = [])
 
 The first method you'll need to use in order to take advantage of the FormHelper
-is ``create()``. This method outputs an opening form tag.b
+is ``create()``. This method outputs an opening form tag.
 
 All parameters are optional. If ``create()`` is called with no parameters
 supplied, it assumes you are building a form that submits to the current
