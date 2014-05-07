@@ -112,7 +112,7 @@ tutorial, we will show just the add.ctp:
             ]) ?>
         ?>
         </fieldset>
-    <?= $this->Form->submit(__('Submit')); ?>
+    <?= $this->Form->button(__('Submit')); ?>
     <?= $this->Form->end() ?>
     </div>
 
@@ -198,23 +198,23 @@ and add the following::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Controller\Component\Auth\SimplePasswordHasher;
+    use Cake\Controller\Component\Auth\BlowfishPasswordHasher;
 
     class User extends Entity {
 
         // ...
 
         public function setPassword($password) {
-            return (new SimplePasswordHasher)->hash($password);
+            return (new BlowfishPasswordHasher)->hash($password);
         }
 
         // ...
     }
 
 Now every time the password property is assigned to the user it will be hashed
-using the SimplePasswordHasher class.  We're just missing a template view file
-for the login function. Open up your ``App/Template/Users/login.ctp`` file and add
-the following lines:
+using the ``BlowfishPasswordHasher`` class.  We're just missing a template view
+file for the login function. Open up your ``App/Template/Users/login.ctp`` file
+and add the following lines:
 
 .. code-block:: php
 
@@ -228,7 +228,8 @@ the following lines:
             <?= $this->Form->input('username') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
-    <?= $this->Form->end(__('Login')) ?>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
     </div>
 
 You can now register a new user by accessing the ``/users/add`` URL and log in with the
