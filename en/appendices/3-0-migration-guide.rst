@@ -909,6 +909,12 @@ Number
 
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
 
+Validation
+----------
+
+- The range for :php:meth:`Validation::range()` now is inclusive if ``$lower`` and
+  ``$upper`` are provided.
+
 Xml
 ---
 
