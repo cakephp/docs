@@ -52,7 +52,11 @@ following::
 
     curl -s https://getcomposer.org/installer | php
 
-Or you can download ``composer.phar`` from it's `site <https://getcomposer.org/download/>`_.
+Or, you can download ``composer.phar`` from the
+`Composer website <https://getcomposer.org/download/>`_.
+
+For Windows systems, you can download Composer's Windows installer
+`here <https://github.com/composer/windows-setup/releases/>`_.
 
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
