@@ -6,8 +6,8 @@ FormHelper
 .. php:class:: FormHelper(View $view, array $config = [])
 
 Le Helper Form prend en charge la plupart des opérations lourdes
-en création du formulaire. Le Helper Form se concentre sur la
-possibilité de créé des formulaires rapidement, d'une manière qui
+en création de formulaire. Le Helper Form se concentre sur la
+possibilité de créér des formulaires rapidement, d'une manière qui
 permettra de rationaliser la validation, la re-population et la mise
 en page (layout). Le Helper Form est aussi flexible - Il va faire à
 peu près tout pour vous en utilisant les conventions, ou vous
@@ -19,8 +19,8 @@ Création de Formulaire
 
 .. php:method:: create(mixed $model = null, array $options = [])
 
-La première méthode que vous aurez besoin d'utiliser pour prendre pleinement
-avantage du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
+La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
+profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
 affichera une balise d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si create() est appelée sans paramètres,
@@ -1365,14 +1365,15 @@ Fermer le Formulaire
 
         <?= $this->Form->end(); ?>
 
-    The ``$secureAttributes`` parameter allows you to pass additional HTML
-    attributes to the hidden inputs that are generated when your application is
-    using ``SecurityComponent``. If you need to add additional attributes to the
-    generated hidden inputs you can use the ``$secureAttributes`` argument::
+    Le paramètre ``$secureAttributes`` vous permet de passer des attributs HTML
+    supplémentaires aux inputs cachés qui sont générés quand votre application
+    utilise ``SecurityComponent``. Si vous avez besoin d'ajouter des attributs
+    supplémentaires aux inputs cachés générés, vous pouvez utiliser l'argument
+    ``$secureAttributes``::
 
         echo $this->Form->end(['data-type' => 'hidden']);
 
-    Will output:
+    Affichera:
 
     .. code-block:: html
 
@@ -1385,19 +1386,20 @@ Fermer le Formulaire
 
     .. note::
 
-        If you are using
-        :php:class:`Cake\\Controller\\Component\\SecurityComponent` in your
-        application you should always end your forms with ``end()``.
+        Si vous utilisez
+        :php:class:`Cake\\Controller\\Component\\SecurityComponent` dans votre
+        application, vous devrez terminer vos formulaires avec ``end()``.
 
-Customizing the Templates FormHelper Uses
-=========================================
+Personnaliser les Templates que FormHelper Utilise
+==================================================
 
-Like many helpers in CakePHP, FormHelper uses string templates to format the
-HTML it creates. While the default templates are intended to be a reasonable set
-of defaults. You may need to customize the templates to suit your application.
+Comme beaucoup de helpers dans CakePHP, FormHelper utilise les string templates
+pour mettre en forme le HTML qu'ils créent. Alors que les templates par défaut
+sont un ensemble raisonnale de valeurs par défaut, vous aurez peut-être besoin
+de personnaliser les templates pour correspondre à votre application.
 
-To change the templates when the helper is loaded you can set the ``templates``
-option when including the helper in your controller::
+Pour changer les templates quand le helper est chargé, vous pouvez définir
+l'option ``templates`` lors de l'inclusion du helper dans votre controller::
 
     public $helpers = [
         'Form' => [
@@ -1405,26 +1407,28 @@ option when including the helper in your controller::
         ]
     ];
 
-This would load the tags in ``App/Config/app_form.php``. This file should
-contain an array of templates indexed by name::
+Ceci charge les balise dans ``App/Config/app_form.php``. Le fichier devra
+contenir un tableau des templates indexés par leur nom::
 
     $config = [
         'groupContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
-Any templates you define will replace the default ones included in the helper.
-Templates that are not replaced, will continue to use the default values.
-You can also change the templates at runtime using the ``templates()`` method::
+Tous les templates que vous définissez vont remplacer ceux par défaut dans
+le helper. Les Templates qui ne sont pas remplacés vont continuer à être
+utiliser avec les valeurs par défaut. Vous pouvez aussi changer les templates
+à la volée en utilisant la méthode ``templates()``::
 
     $myTemplates = [
         'groupContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->templates($myTemplates);
 
-List of Templates
------------------
+Liste des Templates
+-------------------
 
-A list of the default templates and the variables they can expect are:
+Une liste des templates par défaut et les variables attendues sont les
+suivantes:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
@@ -1453,38 +1457,41 @@ A list of the default templates and the variables they can expect are:
 * ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``submitContainer`` {{content}}
 
-Generating Entire Forms
-=======================
+Générer des Formulaires Entiers
+===============================
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = [])
+.. php:method:: inputs(mixed $fields = [], $options = [])
 
-Generates a set of inputs for the given context. By default, all fields for the
-current top level entity are generated. By setting ``$fields`` to a string you
-can provide custom legend element content::
+Génére un ensemble d'inputs pour un contexte donné. Par défaut, tous les champs
+pour le niveau supérieur courant de l'entity sont générés. en configurant
+``$fields`` avec une chaîne, vous pouvez fournir un contenu personnalisé d'un
+element legend::
 
     echo $this->Form->inputs('Update news post');
 
-You can configure the generated inputs by defining additional options in the
-``$fields`` parameter::
+Vous pouvez configurer les inputs générés en définissant les options
+supplémentaires dans le paramètre ``$fields``::
 
     echo $this->Form->inputs([
         'name' => ['label' => 'custom label']
     ]);
 
-To exclude specific fields from the generated inputs, use the ``$blacklist``
-parameter::
+Pour exclure des champs spécifiques des inputs générés, définissez les à false
+dans le paramètre fields::
 
-    echo $this->Form->inputs([], ['password']);
+    echo $this->Form->inputs(['password' => false]);
 
-When customizing, ``fields`` or using the ``blacklist`` parameter, you can use
-the ``$options`` parameter to control the generated legend/fieldset.
+Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
+``$options`` pour contrôler les legend/fieldset générés.
 
-- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
-  it will be used as the class name for the fieldset element.
-- ``legend`` Set to false to disable the legend for the generated input set.
-  Or supply a string to customize the legend text.
+- ``fieldset`` Défini à false pour désactiver le fieldset. Si une chaîne est
+  fournie, elle sera utilisée comme nom de classe pour l'element fieldset
+ 
+- ``legend`` Défini à false pour désactiver la legend pour l'ensemble d'input
+  généré.
+  Ou fournir une chaîne pour personnaliser le texte de legend.
 
-For example::
+Par exemple::
 
     echo $this->Form->inputs(
         [
@@ -1494,18 +1501,18 @@ For example::
         ['legend' => 'Update your post']
     );
 
-If you disable the fieldset, the legend will not print.
+Si vous désactiver le fieldset, la legend ne s'affichera pas.
 
-Adding Custom Widgets
-=====================
+Ajouter des Widgets Personnalisés
+=================================
 
 CakePHP makes it easy to add custom input widgets in your application, and use
 them like any other input type. All of the core input types are implemented as
 wigets, which means you can easily override any core widget with your own
 implemenation as well.
 
-Building a Widget Class
------------------------
+Construire une Classe Widget
+----------------------------
 
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
@@ -1543,8 +1550,8 @@ could do the following::
 Obviously, this is a very simple example, but it demonstrates how a custom
 widget could be built.
 
-Using Widgets
--------------
+Utiliser les Widgets
+--------------------
 
 You can load custom widgets either in the ``$helpers`` array or using the
 ``addWidget()`` method. In your helpers array, widgets are defined as
@@ -1578,13 +1585,13 @@ In the above example, the autocomplete widget would depend on the ``text`` and
 the widget objects that are related to the ``text`` and ``label`` names. To add
 widgets using the ``addWidget()`` method would look like::
 
-    // Using a classname.
+    // Utiliser un nom de classe.
     $this->Form->addWidget(
         'autocomplete',
         ['App\View\Widget\Autocomplete', 'text' 'label']
     );
 
-    // Using an instance - requires you to resolve dependencies.
+    // Utiliser une instance - nécessite que vous résolviez les dépendances.
     $autocomplete = new Autocomplete(
         $this->Form->getTemplater(),
         $this->Form->widgetRegistry()->get('text'),
@@ -1592,7 +1599,8 @@ widgets using the ``addWidget()`` method would look like::
     );
     $this->Form->addWidget('autocomplete', $autocomplete);
 
-Once added/replaced, widgets can be used as the input 'type'::
+Une fois ajoutés/remplacés, les widgets peuvent être utilisés comme input
+'type'::
 
     echo $this->Form->input('search', ['type' => 'autocomplete']);
 
@@ -1602,8 +1610,8 @@ using the magic method::
 
     echo $this->Form->autocomplete('search', $options);
 
-Working with SecurityComponent
-==============================
+Travailler avec SecurityComponent
+=================================
 
 :php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several
 features that make your forms safer and more secure. By simply including the
@@ -1624,8 +1632,8 @@ ensure that the special ``_Token`` inputs are generated.
 
 .. php:method:: secure(array $fields = [])
 
-    Generates a hidden field with a security hash based on the fields used
-    in the form.
+    Génére un champ caché avec un hash de securité basé sur les champs utilisés
+    dans le formulaire.
 
 
 .. meta::

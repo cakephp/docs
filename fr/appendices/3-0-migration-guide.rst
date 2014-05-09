@@ -759,7 +759,9 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
 - La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
-  Elle nécessite aussi que le paramètre ``$fields`` soit un tableau.
+  Elle nécessite aussi que le paramètre ``$fields`` soit un tableau. Le
+  paramètre ``$blacklist`` a été retiré, la fonctionnalité a été remplacée en
+  spécifiant ``'field' => false`` dans le paramètre ``$fields``.
 - Le paramètre ``inline`` a été retiré de la méthode postLink().
   Vous devriez utiliser l'option ``block`` à la place. Définir ``block => true``
   va émuler le comportement précédent.
