@@ -1059,7 +1059,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
-            'queryBuilder' => funtction($q) {
+            'queryBuilder' => function($q) {
                 return $q->where(...) // Full conditions for filtering
             }
         ]
