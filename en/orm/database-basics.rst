@@ -503,6 +503,8 @@ same way as the ones provided by PDO::
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
 
+.. _database-query-logging:
+
 Query Logging
 =============
 

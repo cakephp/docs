@@ -29,6 +29,9 @@ SQL being sent to the database. It also means that if a Query is never evaluated
 no SQL is ever sent to the database. Once executed, modifying and re-evaluating
 a query will result in additional SQL being run.
 
+If you want to take a look at what SQL cake is generating, you can turn database
+:ref:`query logging <database-query-logging>` on.
+
 Creating a Query Object
 =======================
 
