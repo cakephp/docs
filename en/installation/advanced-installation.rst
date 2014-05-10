@@ -41,7 +41,7 @@ would look like the following::
             }
         ],
         "require": {
-            "pear-cakephp/cakephp": ">=2.4.0"
+            "cakephp/cakephp": ">=2.4.9"
         },
         "config": {
             "vendor-dir": "Vendor/"
