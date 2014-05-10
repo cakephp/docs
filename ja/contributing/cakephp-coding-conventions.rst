@@ -12,8 +12,8 @@ Cakeの開発者は以下のコーディング規約を使います。
 新しい機能の追加
 ================
 
-新しい機能は、そのテストが無い限り、追加してはなりません。
-このテストはレポジトリにコミットされる前に合格する必要があります。
+新しい機能は、そのテストが無い限り、追加してはいけません。
+このテストはレポジトリにコミットされる前にパスする必要があります。
 
 インデント
 ==========
@@ -31,11 +31,11 @@ Cakeの開発者は以下のコーディング規約を使います。
 または::
 
     $booleanVariable = true;
-    $stringVariable = "大鹿";
+    $stringVariable = '大鹿';
     if ($booleanVariable) {
-        echo "真偽値はtrueです";
-        if ($stringVariable == "大鹿") {
-            echo "大鹿に遭遇しました";
+        echo '真偽値はtrueです';
+        if ($stringVariable === '大鹿') {
+            echo '大鹿に遭遇しました';
         }
     }
 
@@ -55,7 +55,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 *  制御構造では1個の空白が最初の丸括弧の前に、1個の空白が最後の丸括弧と開き中括弧の間にある必要があります。
 *  制御構造では、必要でなくとも常に中括弧を使います。
-   これはコードの可読性を高め、論理エラーが稀になります。
+   これはコードの可読性を高め、論理エラーが発生しにくくなります。
 *  開き中括弧は制御構造と同じ行に置かれる必要があります。
    閉じ中括弧は新しい行に置かれ、制御構造と同じレベルのインデントがされている必要があります。
    中括弧内に含まれているステートメントは新しい行で始まり、その中に含まれるコードは、新しいレベルのインデントが付けられる必要があります。
@@ -101,6 +101,49 @@ Cakeの開発者は以下のコーディング規約を使います。
     //ネストされた三項はダメ
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
+
+ビューファイル
+--------------
+
+ビューファイル(拡張子が .ctp のファイル)内では、開発者は、キーワードの制御構造を使用する必要があります。
+キーワードの制御構造を使うと、複雑なビューファイルが読みやすくなります。
+制御構造は、大きいPHPブロック内、または別々のPHPタグに含めることができます::
+
+    <?php
+    if ($isAdmin):
+        echo '<p>You are the admin user.</p>';
+    endif;
+    ?>
+    <p>The following is also acceptable:</p>
+    <?php if ($isAdmin): ?>
+        <p>You are the admin user.</p>
+    <?php endif; ?>
+
+
+比較
+====
+
+値の比較は、常に可能な限り厳密に行うようにしてください。もし厳格でないテストが意図的なものであれば、
+混乱を避けるためにコメントを残しておいたほうがいいかもしれません。
+
+変数がnullかどうかのテストの場合は、厳密なチェックを使用することを推奨します::
+
+    if ($value === null) {
+    	  // ...
+    }
+
+チェック対象の値は右側に配置してください::
+
+    // 非推奨
+    if (null === $this->foo()) {
+        // ...
+    }
+
+    // 推奨
+    if ($this->foo() === null) {
+        // ...
+    }
+
 関数の呼び出し
 ==============
 
@@ -114,9 +157,9 @@ Cakeの開発者は以下のコーディング規約を使います。
 メソッドの定義
 ==============
 
-関数の定義の例::
+メソッドの定義の例::
 
-    function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
         }
@@ -126,7 +169,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 デフォルトを用いた引数は、関数の定義の最後に置く必要があります。
 関数は何かを、少なくともtrueかfalseを、関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください::
 
-    function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false) {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -134,12 +177,51 @@ Cakeの開発者は以下のコーディング規約を使います。
         }
 
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
-            return $this=>addError();
+            return $this->addError();
         }
         return true;
     }
 
 イコール記号の両サイドには空白を置きます。
+
+タイプヒンティング
+------------------
+
+オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
+しかしながらタイプヒンティングはコストフリーではないので、publicメソッドにだけ指定します::
+
+    /**
+     * メソッドの説明。
+     *
+     * @param Model $Model 使用するモデル。
+     * @param array $array 配列。
+     * @param boolean $boolean 真偽値。
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+ここで ``$Model`` は ``Model`` のインスタンスで、また ``$array`` は ``array`` でなければなりません。
+
+ちなみに、もし ``$array`` が ``ArrayObject`` のインスタンスでも受け付けるようにしたい場合は、
+``array`` のタイプヒントを指定してプリミティブ型だけを受け入れるようにするべきではありません。::
+
+    /**
+     * メソッドの説明。
+     *
+     * @param array|ArrayObject $array 配列。
+     */
+    public function foo($array) {
+    }
+
+メソッドチェーン
+================
+
+メソッドチェーンは複数の行にまたがる複数のメソッドとなり、単一のタブでインデントする必要があります::
+
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
+        ->send();
 
 コードのコメント
 ================
@@ -148,7 +230,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます:
 
-*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
 *  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
 *  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
 *  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
@@ -167,6 +248,7 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 
     /**
      * タグの例。
+     *
      * @author このタグは解析されますが、この@versionは無視されます
      * @version 1.0 このタグも解析されます
      */
@@ -177,12 +259,16 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
      * インラインphpDocタグの例。
      *
      * この関数は世界征服のためにfoo()を使って身を粉にして働きます。
+     *
+     * @return void
      */
     function bar() {
     }
 
     /**
-     * Foo function
+     * Foo function.
+     *
+     * @return void
      */
     function foo() {
     }
@@ -192,6 +278,16 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 ファイルの読み込み
 ==================
 
+``include`` 、 ``require`` 、 ``include_once`` そして ``require_once`` は括弧を付けません::
+
+    // 間違い = 括弧あり
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // よろしい = 括弧なし
+    require_once 'ClassFileName.php';
+    require_once $class;
+
 クラスまたはライブラリを伴うファイルを読み込む場合、
 `require\_once <http://php.net/require_once>`_
 関数のみを常に使用してください。
@@ -199,7 +295,7 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 PHPタグ
 =======
 
-常にショートタグ(<? ?>)の代わりに、ロングタグ(``<?php ?>``)を使ってください。
+常にショートタグ(``<? ?>``)の代わりに、ロングタグ(``<?php ?>``)を使ってください。
 
 命名規約
 ========
@@ -237,7 +333,7 @@ PHPタグ
 --------------------------------
 
 メソッドと変数の為の、PHP5のprivateとprotectedキーワードを使用してください。
-加えて、protectedなメソッドまたは変数の名前は単一のアンダースコア("\_")から始まります。
+加えて、protectedなメソッドまたは変数の名前は単一のアンダースコア(``_``)から始まります。
 例::
 
     class A {
@@ -248,7 +344,7 @@ PHPタグ
         }
     }
 
-privateなメソッドまたは変数の名前は二つののアンダースコア("\_\_")から始まります。
+privateなメソッドまたは変数の名前は二つののアンダースコア(``__``)から始まります。
 例::
 
     class A {
@@ -263,17 +359,6 @@ privateなメソッドまたは変数を回避し、protectedなそれらを用�
 後者はサブクラスからアクセスや修正が可能です。一方で、privateでは拡張や再利用ができません。
 privateは、テストの実施もより難しくなります。
 
-
-メソッドチェーン
-----------------
-
-メソッドチェーンは複数の行にまたがる複数のメソッドとなり、単一のタブでインデントする必要があります::
-
-    $email->from('foo@example.com')
-        ->to('bar@example.com')
-        ->subject('A great message')
-        ->send();
-
 アドレスの例示
 --------------
 
@@ -284,7 +369,7 @@ privateは、テストの実施もより難しくなります。
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-``example.com`` ドメインはこの(:rfc:`2606` をみてください)為に予約されており、ドキュメント中か例として使うことが推奨されています。
+"example.com" ドメインはこの(:rfc:`2606` をみてください)為に予約されており、ドキュメント内の説明や例として使うことが推奨されています。
 
 ファイル
 --------
@@ -327,6 +412,26 @@ callable
     int|bool
 
 ふたつ以上の型の場合は ``mixed`` を指定するのが良いでしょう。
+
+キャスト
+--------
+
+次のキャストを使用します:
+
+型
+    説明
+(bool)
+		booleanにキャスト。
+(int)
+		integerにキャスト。
+(float)
+		floatにキャスト。
+(string)
+		stringにキャスト。
+(array)
+		arrayにキャスト。
+(object)
+		objectにキャスト。
 
 定数
 ----
