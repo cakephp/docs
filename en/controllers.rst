@@ -236,7 +236,8 @@ rendered from the controller.
         // make $color, $type, and $base_price
         // available to the view:
 
-        $this->set($data);
+        $this->set(compact('data')); // OR
+        $this->set('data', $data);
 
 
     The attribute ``$pageTitle`` no longer exists. Use :php:meth:`~Controller::set()` to set
