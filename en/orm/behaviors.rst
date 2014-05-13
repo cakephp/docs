@@ -136,7 +136,7 @@ behavior should now look like::
     use Cake\Utility\Inflector;
 
     class SluggableBehavior extends Behavior {
-        proteted $_defaultConfig = [
+        protected $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',
