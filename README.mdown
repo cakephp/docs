@@ -23,7 +23,7 @@ You can install the phpdomain using:
 
 *To run the easy_install command, the setuptools package must be previously installed.*
 
-Building the documentation
+Building the Documentation
 --------------------------
 
 After installing the required packages, you can build the documentation using `Make`.
@@ -78,7 +78,7 @@ Translations
 Contributing translations requires that you make a new directory using the two letter name for your language.  As content is translated, directories mirroring the english content should be created with localized content.
 
 
-Generating Meta tags
+Generating Meta Tags
 --------------------
 
 If you are providing translations and want to automatically generate meta tags for the resulting html files, a MetatagShell is provided in
@@ -88,7 +88,7 @@ the `scripts` folder of this repo. In order to use it, copy it into any CakePHP 
 The script will process all the files under one of the translation folders and generate the possible description terms using an external API, 
 it is a good idea to go over the generated terms and clean-up whatever noise it might have generated.
 
-Making search work locally
+Making Search Work Locally
 --------------------------
 
 * Install elasticsearch.  This varies based on your platform, but most
