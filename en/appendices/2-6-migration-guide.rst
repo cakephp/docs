@@ -12,3 +12,11 @@ Shell
 
 - ``overwrite()`` has been added to allow generating progress bars or to avoid outputting
   too many lines by replacing text that has been already outputted to the screen.
+
+Behavior
+========
+
+AclBehavior
+-----------
+
+- ``Model::parentNode()`` now gets the type (Aro, Aco) passed as first argument: ``$model->parentNode($type)``.
