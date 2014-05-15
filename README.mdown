@@ -26,7 +26,7 @@ You can install the phpdomain using:
 Building the Documentation
 --------------------------
 
-After installing the required packages, you can build the documentation using `Make`.
+After installing the required packages, you can build the documentation using `make`.
 
 	# Create all the HTML docs. Including all the languages.
 	make html
@@ -43,16 +43,16 @@ After installing the required packages, you can build the documentation using `M
 	# Populate the search index
 	make populate-index
 
-This will generate all the documentation in an html form.  Other output such as 'htmlhelp' are not fully complete at this time.
+This will generate all the documentation in an HTML form.  Other output such as 'htmlhelp' are not fully complete at this time.
 
-After making changes to the documentation, you can build the html version of the docs by using `make html` again.  This will build only the html files that have had changes made to them.
+After making changes to the documentation, you can build the HTML version of the docs by using `make html` again.  This will build only the HTML files that have had changes made to them.
 
 Building the PDF
 ----------------
 
 Building the PDF is a non-trivial task.
 
-1. Install Latex - This varies by distribution/OS so refer to your package manager. You should install the full LaTeX package. The basic one requires many additional packages to be installed with `tlmgr`
+1. Install LaTeX - This varies by distribution/OS so refer to your package manager. You should install the full LaTeX package. The basic one requires many additional packages to be installed with `tlmgr`
 2. Run `make latex-en`.
 3. Run `make pdf-en`.
 
@@ -68,9 +68,9 @@ There are currently a number of outstanding issues that need to be addressed.  W
 
 	todo_include_todos = True
 
-After rebuilding the html content, you should see a list of existing todo items at the bottom of the table of contents.
+After rebuilding the HTML content, you should see a list of existing todo items at the bottom of the table of contents.
 
-You are also welcome to make and suggestions for new content as commits in a github fork.  Please make any totally new sections in a separate branch.  This makes changes far easier to integrate later on.
+You are also welcome to make and suggestions for new content as commits in a GitHub fork.  Please make any totally new sections in a separate branch.  This makes changes far easier to integrate later on.
 
 Translations
 ------------
@@ -81,7 +81,7 @@ Contributing translations requires that you make a new directory using the two l
 Generating Meta Tags
 --------------------
 
-If you are providing translations and want to automatically generate meta tags for the resulting html files, a MetatagShell is provided in
+If you are providing translations and want to automatically generate meta tags for the resulting HTML files, a MetatagShell is provided in
 the `scripts` folder of this repo. In order to use it, copy it into any CakePHP 2.0 empty application inside `app/Console/Command`, execute
 `Console/cake metatag` and follow the instructions.
 
