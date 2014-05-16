@@ -203,9 +203,11 @@ the requested URL. If a user requests ``/articles/view/3``, then the value
 
 We also do a bit of error checking to ensure a user is actually
 accessing a record. If a user requests ``/articles/view``, we will throw a
-``NotFoundException`` and let the CakePHP ErrorHandler take over. We
-also perform a similar check to make sure the user has accessed a
-record that exists.
+``NotFoundException`` and let the CakePHP ErrorHandler take over. By using the
+``get()`` function in the Articles table, we also perform a similar check to make
+sure the user has accessed a record that exists. In case the requested article
+is not present in the database, the ``get()`` function will throw
+a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
 ``/App/Template/Articles/view.ctp``
