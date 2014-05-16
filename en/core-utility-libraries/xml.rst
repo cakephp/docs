@@ -19,6 +19,9 @@ constructor of Xml class to import data. In CakePHP 2.0 you can do it using
 SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
 
+    //First Load the Utility Class
+    App::uses('Xml', 'Utility');
+
     // Old method:
     $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 
