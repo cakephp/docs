@@ -89,10 +89,9 @@ following::
 Loading Cells
 =============
 
-Cells can be loaded from controllers or views using the ``cell()`` method. The
-``cell()`` method works the same in both contexts. The ``cell()`` method is
-available in both contexts because you may need to use controller logic to
-choose which cells to construct. To load a cell use the ``cell()`` method::
+Cells can be loaded from views using the ``cell()`` method. The
+``cell()`` method works the same in both contexts. To load a
+cell use the ``cell()`` method::
 
     // Load an application cell
     $cell = $this->cell('Inbox');
@@ -105,6 +104,20 @@ You can execute other methods using the following::
 
     // Run the expanded() method on the Inbox cell
     $cell = $this->cell('Inbox::expanded');
+
+If you need controller logic to decide which cells to load in a request, you can
+use the ``CellTrait`` in your controller to enable the ``cell()`` method there::
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\View\CellTrait;
+
+    class DashboardsController extends AppController {
+        use CellTrait;
+
+        // More code.
+    }
 
 Passing Arguments to a Cell
 ---------------------------
