@@ -37,7 +37,7 @@ After installing the required packages, you can build the documentation using `M
 	# Create all the EPUB (e-book) docs.
 	make epub
 	
-	# Create just the engish EPUB docs.
+	# Create just the english EPUB docs.
 	make epub-en
 
 	# Populate the search index
