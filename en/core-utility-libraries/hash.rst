@@ -623,7 +623,15 @@ Attribute Matching Types
 
     Creates a new array, by extracting $path, and mapping $function
     across the results. You can use both expression and matching elements with
-    this method.
+    this method::
+    
+        //call the noop function $this->noop() on every element of $data
+        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        
+        function noop($array) {
+         //do stuff to array and return the result
+         return $array;
+        }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
