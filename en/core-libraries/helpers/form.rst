@@ -1161,7 +1161,7 @@ Ex: name=data[User][username], id=UserUsername
     * ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
       will disable all of the generated radio buttons.
 
-    * ``$attributes['legend']`` Radio elements are wrapped with a label and
+    * ``$attributes['legend']`` Radio elements are wrapped with a legend and
       fieldset by default. Set ``$attributes['legend']`` to false to remove
       them.::
 
