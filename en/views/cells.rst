@@ -3,7 +3,7 @@ View Cells
 
 View cells are small mini-controllers that can invoke view logic and render out
 templates. They provide a light-weight modular replacement to
-``requestAction()``. The idea of cells is borrowed from `cells in ruby
+``requestAction()``. The idea of cells is borrowed from `cells in Ruby
 <http://cells.rubyforge.org/>`_, where they fulfill a similar role and purpose.
 
 When to use Cells
@@ -11,16 +11,14 @@ When to use Cells
 
 Cells are ideal for building reusable page components that require interaction
 with models, view logic, and rendering logic. A simple example would be the
-cart in an online store, or a data-driven navigation menu in a CMS.
-
-Cells also provide a lightweight replacement for ``requestAction()``. Because
+cart in an online store, or a data-driven navigation menu in a CMS. Because
 cells do not dispatch sub-requests, they sidestep all of the overhead associated
 with ``requestAction()``.
 
 Creating a Cell
 ===============
 
-To create a cell, you define a class in ``App/View/Cell``, and a template in
+To create a cell, define a class in ``App/View/Cell`` and a template in
 ``App/Template/Cell/``. In this example, we'll be making a cell to display the
 number of messages in a user's notification inbox. First, create the class file.
 Its contents should look like::
@@ -44,7 +42,7 @@ classes in CakePHP, Cells have a few conventions:
 * Class names should end in Cell.
 * Classes should inherit from ``Cake\View\Cell``.
 
-We added an empty ``display()`` method to our cell, this is the conventional
+We added an empty ``display()`` method to our cell; this is the conventional
 default method when rendering a cell. We'll cover how to use other methods later
 in the docs. Now, create the file ``App/Template/Cell/Inbox/display.ctp``. This
 will be our template for our new cell.
@@ -61,7 +59,7 @@ Implementing the Cell
 Assume that we are working on an application that allows users to send messages
 to each other. We have a ``Messages`` model, and we want to show the count of
 unread messages without having to pollute AppController. This is a perfect use
-case for a cell. In the class we just made add the following::
+case for a cell. In the class we just made, add the following::
 
     namespace App\View\Cell;
 
@@ -79,7 +77,7 @@ case for a cell. In the class we just made add the following::
 
 Because Cells use the ``ModelAwareTrait`` and ``ViewVarsTrait``, they behave
 very much like a controller would.  We can use the ``loadModel()`` and ``set()``
-methods just like we would in a controller. In our template file add the
+methods just like we would in a controller. In our template file, add the
 following::
 
     <div class="notification-icon">
@@ -89,9 +87,8 @@ following::
 Loading Cells
 =============
 
-Cells can be loaded from views using the ``cell()`` method. The
-``cell()`` method works the same in both contexts. To load a
-cell use the ``cell()`` method::
+Cells can be loaded from views using the ``cell()`` method and works the same in
+both contexts::
 
     // Load an application cell
     $cell = $this->cell('Inbox');
@@ -123,8 +120,8 @@ Passing Arguments to a Cell
 ---------------------------
 
 You will often want to parameterize cell methods to make cells more flexible.
-By using the second and third arguments of ``cell()`` you can pass action
-parameters, and additional options to your cell classes::
+By using the second and third arguments of ``cell()``, you can pass action
+parameters and additional options to your cell classes::
 
     $cell = $this->cell('Inbox::recent', ['since' => '-3 days']);
 
@@ -136,7 +133,7 @@ The above would match the following function signature::
 Rendering a Cell
 ================
 
-Once a cell has been loaded and executed you'll probably want to render it. The
+Once a cell has been loaded and executed, you'll probably want to render it. The
 easiest way to render a cell is to echo it::
 
     <?= $cell ?>
@@ -151,14 +148,14 @@ Rendering Alternate Templates
 -----------------------------
 
 By convention cells render templates that match the action they are executing.
-If you need to render a different view template you can specify the template
+If you need to render a different view template, you can specify the template
 to use when rendering the cell::
 
     // Calling render() explicitly
     echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
 
     // Set template before echoing the cell.
-    $cell = $this->cell('Inbox'); ?>
+    $cell = $this->cell('Inbox');
     $cell->template = 'messages';
     echo $cell;
 
