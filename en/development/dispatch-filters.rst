@@ -7,9 +7,9 @@ such as response caching, header tuning, special authentication or just to
 provide access to a mission-critical API response in lesser time than a complete
 request dispatching cycle would take.
 
-CakePHP provides a clean and interface for attaching filters to the dispatch
+CakePHP provides a clean interface for attaching filters to the dispatch
 cycle. It is similar to a middleware layer, but re-uses the existing event
-subsytem used in other parts of CakePHP. Because of they do not work exactly
+subsystem used in other parts of CakePHP. Since they do not work exactly
 like traditional middleware, we refer to them as *Dispatcher Filters*.
 
 Built-in Filters
@@ -19,7 +19,7 @@ CakePHP comes with several dispatcher filters built-in. They handle common
 features that all applications are likely to need. The built-in filters are:
 
 * ``AssetFilter`` checks whether the request is referring to a theme
-  or plugin asset file, such as a CSS, JavaScript or image stored on either a
+  or plugin asset file, such as a CSS, JavaScript or image file stored in either a
   plugin's webroot folder or the corresponding one for a Theme. It will serve the
   file accordingly if found, stopping the rest of the dispatching cycle.
 * ``CacheFilter`` when ``Cache.check`` config variable is enabled, will check if the
@@ -35,9 +35,9 @@ Using Filters
 
 Filters are usually enabled in your application's ``bootstrap.php`` file, but
 you could easily load them any time before the request is dispatched.  Adding
-and removing filters is done through ``Cake\\Routing\\DispatcherFactory`` By
-default the CakePHP application template comes with a couple filter classes
-already enabled for all requests, let's take a look at how they are added::
+and removing filters is done through ``Cake\\Routing\\DispatcherFactory``. By
+default, the CakePHP application template comes with a couple filter classes
+already enabled for all requests; let's take a look at how they are added::
 
     DispatcherFactory::add('Cache');
     DispatcherFactory::add('Routing');
@@ -123,11 +123,11 @@ classes in CakePHP, dispatcher filters have a few conventions:
 ``DispatcherFilter`` exposes two methods that can be overridden in subclasses,
 they are ``beforeDispatch`` and ``afterDispatch``. These methods are executed
 before or after any controller is executed respectively. Both methods receive
-a  :php:class:`Cake\\Event\\Event` object containing the ``request`` and
+a :php:class:`Cake\\Event\\Event` object containing the ``request`` and
 ``response`` objects (:php:class:`Cake\\Network\\Request` and
 :php:class:`Cake\\Network\\Response` instances) inside the ``data`` property.
 
-While our filter was pretty simple, there are a few other interesting thing we
+While our filter was pretty simple, there are a few other interesting things we
 can do in filter methods. By returning an ``Response`` object, you can
 short-circuit the dispatch process and prevent the controller from being called.
 When returning a response, you should also remember to call
@@ -166,14 +166,14 @@ page, in our case it would be anything served from the ``PagesController``::
 This filter will send a expiration header to 1 day in the future for
 all responses produced by the pages controller. You could of course do the same
 in the controller, this is just an example of what could be done with filters.
-For instance, instead of altering the response you could cache it using
+For instance, instead of altering the response, you could cache it using
 :php:class:`Cake\\Cache\\Cache` and serve the response from the ``beforeDispatch``
 callback.
 
 While powerful, dispatcher filters have the potential to make your application
 more difficult to maintain. Filters are an extremely powerful tool when used
-wisely, adding response handlers for each URL in your app is not a good use for
-them. Keep in mind that not everything needs to be a filter, `Controllers` and
+wisely and adding response handlers for each URL in your app is not a good use for
+them. Keep in mind that not everything needs to be a filter; `Controllers` and
 `Components` are usually a more accurate choice for adding any request handling
 code to your app.
 
