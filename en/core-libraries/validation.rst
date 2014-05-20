@@ -12,7 +12,7 @@ Creating Validators
 .. php:class:: Validator
 
 Validator objects define the rules that apply to a set of fields.
-Validator objects contain a mapping between fields and validation sets. In turn the
+Validator objects contain a mapping between fields and validation sets. In turn, the
 validation sets contain a collection of rules that apply to the field they are
 attached to. Creating a validator is simple::
 
@@ -45,7 +45,7 @@ validate::
 As seen in the example above, validators are built with a fluent interface that
 allows you to define rules for each field you want to validate.
 
-There were a few methods called in the example above, so lets go over the
+There were a few methods called in the example above, so let's go over the
 various features. The ``add()`` method allows you to add new rules to
 a validator. You can either add rules individually or in groups as seen above.
 
@@ -63,8 +63,8 @@ validated array. If the field is absent, validation will fail. The
 * ``update`` The field's presence is required when validating an **update**
   operation.
 
-By default ``true`` is used. Key presence is checked for using
-``array_key_exists()`` so null values will count as present. You can set the
+By default, ``true`` is used. Key presence is checked by using
+``array_key_exists()`` so that null values will count as present. You can set the
 mode using the second parameter::
 
     $validator->validatePresence('author_id', 'create');
@@ -73,7 +73,7 @@ Allowing Empty Fields
 ---------------------
 
 The ``allowEmpty()`` and ``notEmpty()`` methods allow you to control which fields are
-allowed to be 'empty'. By using the ``notEmpty()`` method the given field will be marked
+allowed to be 'empty'. By using the ``notEmpty()`` method, the given field will be marked
 invalid when it is empty. You can use ``allowEmpty()`` to allow a field to be
 empty. Both ``allowEmpty()`` and ``notEmpty()`` support a mode parameter that
 allows you to control when a field can or cannot be empty:
@@ -94,15 +94,15 @@ An example of these methods in action is::
     $validator->allowEmpty('published')
         ->notEmpty('title', 'A title is required')
         ->notEmpty('body', 'A title is required', 'create')
-        ->allowEmpty('header_image', 'update')
+        ->allowEmpty('header_image', 'update');
 
 Marking Rules as the Last to Run
 --------------------------------
 
 When fields have multiple rules, each validation rule will be run even if the
 previous one has failed. This allows you to collect as many validation errors as
-you can in a single pass. If however, you want to stop execution after
-a specific rule has failed you can set the ``last`` option to ``true``::
+you can in a single pass. However, if you want to stop execution after
+a specific rule has failed, you can set the ``last`` option to ``true``::
 
     $validator = new Validator();
     $validator
@@ -118,7 +118,7 @@ a specific rule has failed you can set the ``last`` option to ``true``::
             ]
         ]);
 
-In the above example if the minLength rule fails, the maxLength rule will not be
+If the minLength rule fails in the example above, the maxLength rule will not be
 run.
 
 Adding Validation Providers
@@ -156,7 +156,7 @@ Custom Validation Rules
 -----------------------
 
 In addition to using methods coming from providers, you can also use any
-callable including anonymous functions as validation rules::
+callable, including anonymous functions, as validation rules::
 
     // Use a global function
     $validator->add('title', 'custom', [
@@ -186,15 +186,15 @@ containing data related to the validation process:
 - **newRecord**: Whether the validation call is for a new record or
   a pre-existent one.
 
-Defining Donditions for Validator
+Defining Conditions for Validator
 ---------------------------------
 
 When defining validation rules, you can use the ``on`` key to define when
-a validation rule should be applied. If left undefined the rule will always be
+a validation rule should be applied. If left undefined, the rule will always be
 applied. Other valid values are ``create`` and ``update``. Using one of these
 values will make the rule apply to only create or update operations.
 
-Additionally you can provide a callable function that will determine whether or
+Additionally, you can provide a callable function that will determine whether or
 not a particular rule should be applied::
 
     $validator->add('picture', 'file', [
@@ -209,12 +209,12 @@ the value for ``show_profile_picture`` is empty.
 
 .. _reusable-validators:
 
-Creating Re-usable Validators
------------------------------
+Creating Reusable Validators
+----------------------------
 
 While defining validators inline where they are used makes for good example
-code, it doesn't lead to easily maintainable applications. Instead you should
-create ``Validator`` sub-classes for your re-usable validation logic::
+code, it doesn't lead to easily maintainable applications. Instead, you should
+create ``Validator`` sub-classes for your reusable validation logic::
 
     // In App/Model/Validation/ContactValidator.php
     namespace App\Model\Validation;
@@ -280,7 +280,7 @@ Core Validation Rules
 =====================
 
 CakePHP provides a basic suite of validation methods in the ``Validation``
-class. The Validation class contains a variety of  static methods that provide
+class. The Validation class contains a variety of static methods that provide
 validators for a several common validation situations.
 
 The `API documentation
