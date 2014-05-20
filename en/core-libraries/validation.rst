@@ -118,7 +118,7 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
             ]
         ]);
 
-In the above example, if the minLength rule fails, the maxLength rule will not be
+If the minLength rule fails in the example above, the maxLength rule will not be
 run.
 
 Adding Validation Providers
