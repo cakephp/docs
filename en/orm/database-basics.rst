@@ -30,7 +30,8 @@ like::
             'database' => 'my_app',
             'prefix' => false,
             'encoding' => 'utf8',
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
         ]
     ],
 
@@ -52,7 +53,8 @@ would be::
         'database' => 'my_app',
         'prefix' => false,
         'encoding' => 'utf8',
-        'timezone' => 'UTC'
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
     ]);
 
 By default, all Table objects will use the ``default`` connection. To
@@ -116,6 +118,11 @@ flags
     An associative array of PDO constants that should be passed to the
     underlying PDO instance. See the PDO documentation for the flags supported
     by the driver you are using.
+cacheMetadata
+    Either boolean true, or a string containing the cache configuration to store
+    meta data in. Having metadata caching disable is not advised and can result
+    in very poor performance. See the :ref:`database-metadata-cache` section
+    for more information.
 
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
@@ -571,3 +578,38 @@ converts all identifiers into ``IdentifierExpression`` objects.
 
     SQL snippets contained in QueryExpression objects will not be modified.
 
+.. _database-metadata-cache:
+
+Metadata Caching
+================
+
+CakePHP's ORM uses database reflection to determine the schema, indexes and
+foreign keys your application contains. Because this metadata changes
+infrequently, and can be expensive to access it is typically cached. By default,
+metadata is stored in the ``_cake_model_`` cache configuration. You can define
+a custom cache configuration using the ``cacheMetatdata`` option in your
+datasource configuration::
+
+    'Datasources' => [
+        'default' => [
+            // Other keys go here.
+
+            // Use the 'orm_metadata' cache config for metadata.
+            'cacheMetadata' => 'orm_metadata',
+        ]
+    ],
+
+You can also configure the metadata caching at runtime with the
+``cacheMetadata()`` method::
+
+    // Disable the cache
+    $connection->cacheMetadata(false);
+
+    // Enable the cache
+    $connection->cacheMetadata(true);
+
+    // Use a custom cache config
+    $connection->cacheMetadata('orm_metadata');
+
+CakePHP also includes a CLI tool for managing metadata caches. See the
+:doc:`/console-and-shells/orm-cache` chapter for more information.
