@@ -1,31 +1,16 @@
 Security
 ########
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Security
 
-La `librairie security <http://api.cakephp.org/2.4/class-Security.html>`_
+La `librairie security <http://api.cakephp.org/class/security>`_
 gère les mesures basiques de sécurité telles que les méthodes fournies pour
 le hashage et les données chiffrées.
 
 L'API de Security
 =================
-
-.. php:staticmethod:: cipher( $text, $key )
-
-    :rtype: string
-
-    Chiffre/Déchiffre un texte selon la clé donnée::
-
-        // Chiffre votre mot de passe secret avec my_key
-        $secret = Security::cipher('hello world', 'my_key');
-
-        // Plus tard, déchiffrez votre mot de passe secret
-        $nosecret = Security::cipher($secret, 'my_key');
-
-    .. warning::
-
-        ``cipher()`` utilise un cipher XOR **faible** et **ne** doit **pas**
-        être utilisé pour des données importantes ou sensibles.
 
 .. php:staticmethod:: rijndael($text, $key, $mode)
 
@@ -50,9 +35,6 @@ L'API de Security
     devrez utiliser la seule méthode de hashage fourni par
     :php:meth:`~Security::hash()`
 
-    .. versionadded:: 2.2
-        ``Security::rijndael()`` a été ajoutée pour la version 2.2.
-
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 
     :param string $plain: La valeur à chiffrer.
@@ -76,8 +58,6 @@ L'API de Security
     Les valeurs chiffrés peuvent être déchiffrées en utilisant
     :php:meth:`Security::decrypt()`.
 
-    .. versionadded:: 2.5
-
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
     :param string $cipher: Le ciphertext à déchiffrer.
@@ -98,20 +78,11 @@ L'API de Security
     Si la valeurne peut pas être déchiffrée à cause de changements dans la
     clé ou le sel HMAC à ``false`` sera retournée.
 
-    .. versionadded:: 2.5
-
 .. php:staticmethod:: generateAuthKey( )
 
     :rtype: string
 
         Génére un hash d'autorisation.
-
-.. php:staticmethod:: getInstance( )
-
-    :rtype: object
-
-    L'implémentation Singleton pour obtenir l'instance de l'objet.
-
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
@@ -151,8 +122,15 @@ L'API de Security
     le même coût et les valeurs de salt, en autorisant le hash généré pour
     finir avec le même résultat de hash donnant la même valeur d'entrée.
 
-    .. versionchanged:: 2.3
-        Le support pour bcrypt a été ajouté dans la version 2.3.
+.. php:staticmethod:: inactiveMins( )
+
+    :rtype: integer
+
+    Récupère les minutes permises d'inactivité basé sur le niveau de sécurité.::
+
+        $mins = Security::inactiveMins();
+        // Si votre config Security.level est définie à 'medium' alors $mins
+           sera égal à 100
 
 .. php:staticmethod:: setHash( $hash )
 
