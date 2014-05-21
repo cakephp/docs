@@ -295,6 +295,18 @@ Route
 * The signature of ``match()`` has changed to ``match($url, $context = array())``
   See :php:meth:`Cake\\Routing\\Route::match()` for information on the new signature.
 
+Dispatcher Filters Configuration Changed
+----------------------------------------
+
+Dispatcher filters are no longer added to your application using ``Configure``.
+You now append them with :php:class:`Cake\\Routing\\DispatcherFactory``. This
+means if your application used ``Dispatcher.filters``, you should now use
+php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+
+In addition to configuration changes, dispatcher filters have had some
+conventions updated, and features added. See the
+:doc:`/development/dispatch-filters` documentation for more information.
+
 Filter\AssetFilter
 ------------------
 
@@ -304,6 +316,7 @@ Filter\AssetFilter
   short_tags enabled.
 * Support for the ``Asset.filter`` configuration and hooks were removed. This
   feature can easily be replaced with a plugin or dispatcher filter.
+
 
 Network
 =======
