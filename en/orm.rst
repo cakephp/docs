@@ -113,3 +113,4 @@ More Information
     orm/behaviors
     orm/database-basics
     orm/schema-system
+    console-and-shells/orm-cache-shell
