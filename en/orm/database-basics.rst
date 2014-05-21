@@ -585,7 +585,7 @@ Metadata Caching
 
 CakePHP's ORM uses database reflection to determine the schema, indexes and
 foreign keys your application contains. Because this metadata changes
-infrequently, and can be expensive to access it is typically cached. By default,
+infrequently and can be expensive to access, it is typically cached. By default,
 metadata is stored in the ``_cake_model_`` cache configuration. You can define
 a custom cache configuration using the ``cacheMetatdata`` option in your
 datasource configuration::
