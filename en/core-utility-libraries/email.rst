@@ -6,13 +6,7 @@ Email
 .. php:class:: Email(mixed $profile = null)
 
 ``Email`` is a new class to send email. With this
-class you can send email from any place of your application. In addition to
-using the EmailComponent from your controller, you can also send mail from
-Shells and Models.
-
-This class replaces the :php:class:`EmailComponent` and gives more flexibility
-in sending emails. For example, you can create your own transports to send
-email instead of using the provided SMTP and Mail transports.
+class you can send email from any place inside of your application.
 
 Basic Usage
 ===========
@@ -21,17 +15,7 @@ First of all, you should ensure the class is loaded::
 
     use Cake\Network\Email\Email;
 
-Using Email is similar to using :php:class:`EmailComponent`. But instead of
-using attributes you must use methods. Example::
-
-    $email = new Email();
-    $email->from(array('me@example.com' => 'My Site'));
-    $email->to('you@example.com');
-    $email->subject('About');
-    $email->send('My message');
-
-To simplify things, all of the setter methods return the instance of class.
-You can re-write the above code as::
+After you've loaded ``Email``, you can send an email with the following::
 
     $email = new Email();
     $email->from(array('me@example.com' => 'My Site'))
@@ -39,10 +23,13 @@ You can re-write the above code as::
         ->subject('About')
         ->send('My message');
 
+Since ``Email``'s setter methods return the instance of the class, you are able
+to set its properties with method chaining.
+
 Choosing the Sender
 -------------------
 
-When sending email on behalf of other people it's often a good idea to define the
+When sending email on behalf of other people, it's often a good idea to define the
 original sender using the Sender header. You can do so using ``sender()``::
 
     $email = new Email();
@@ -59,18 +46,18 @@ original sender using the Sender header. You can do so using ``sender()``::
 Configuration
 =============
 
-Configuration for Email defaults is created using ``config()`` and
-``configTransport()``. You should put your email presets in the file
-``App/Config/app.php``.  The ``App/Config/app.php.default`` has an example of
-this file. It is not required to define email configuratin in
-``App/Config/app.php``. ``Email`` can be used without it and use respective
+Configuration for ``Email`` defaults is created using ``config()`` and
+``configTransport()``. You should put your email presets in the
+``App/Config/app.php`` file.  The ``App/Config/app.php.default`` file is an
+example of this file. It is not required to define email configuration in
+``App/Config/app.php``. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
 
-By defining profiles and transports you can keep your application code free of
+By defining profiles and transports, you can keep your application code free of
 configuration data, and avoid duplication that makes maintenance and deployment
 less difficult.
 
-To load a predefined configuration you can use the ``profile()`` method or pass it
+To load a predefined configuration, you can use the ``profile()`` method or pass it
 to the constructor of ``Email``::
 
     $email = new Email();
@@ -79,7 +66,7 @@ to the constructor of ``Email``::
     //or in constructor::
     $email = new Email('default');
 
-Instead of passing a string which matches a preset configuration name you can
+Instead of passing a string which matches a preset configuration name, you can
 also just load an array of options::
 
     $email = new Email();
@@ -93,7 +80,7 @@ Configuring Transports
 
 .. php:staticmethod:: configTransport($key, $config = null)
 
-Email messages are deliverd by transports. Different transports allow you to
+Email messages are delivered by transports. Different transports allow you to
 send messages via PHP's ``mail()`` function, SMTP servers, or not at all which
 is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
@@ -115,8 +102,8 @@ change the configuration data. An example transport configuration looks like::
         'className' => 'Smtp'
     ]);
 
-You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
-at prefix in the host and configure the port value accordingly. You can also
+You can configure SSL SMTP servers, like Gmail. To do so, put the ``ssl://``
+prefix in the host and configure the port value accordingly. You can also
 enable TLS SMTP using the ``tls`` option::
 
     use Cake\Network\Email\Email;
@@ -208,7 +195,7 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory called ``Emails``. Email views can also use layouts,
+``View`` directory called ``Emails``. Email views can also use layouts
 and elements just like normal views::
 
     $email = new Email();
@@ -218,7 +205,7 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``App/View/Email/html/welcome.ctp`` for the view,
+The above would use ``App/View/Email/html/welcome.ctp`` for the view
 and ``App/View/Layout/Email/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
@@ -398,8 +385,8 @@ Example::
 
     Email::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
 
-This method will send an email to you@example.com, from me@example.com with
-subject Subject and content Message.
+This method will send an email to "you@example.com", from "me@example.com" with
+subject "Subject" and content "Message".
 
 The return of ``deliver()`` is a :php:class:`Cake\\Email\\Email` instance with all
 configurations set. If you do not want to send the email right away, and wish
