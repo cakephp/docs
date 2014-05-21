@@ -952,6 +952,7 @@ More Topics
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
+    console-and-shells/orm-cache-shell
     console-and-shells/upgrade-shell
 
 
