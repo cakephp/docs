@@ -35,15 +35,21 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </Directory>
 
 #. Make sure you are loading mod\_rewrite correctly. You should
-   see something like::
+   see something like this in the httpd.conf::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
    In many systems these will be commented out by default, so you may 
    just need to remove the leading # symbols.
+   
+   You may possibly be able to take advantage of the 'apache2 enable module' shell command (Debian, Ubuntu):
+   
+         sudo a2enmod rewrite
 
    After you make changes, restart Apache to make sure the settings
-   are active.
+   are active:
+   
+         sudo service apache2 restart
 
    Verify that your .htaccess files are actually in the right
    directories. Some operating systems treat files that start 
