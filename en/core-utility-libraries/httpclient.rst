@@ -3,7 +3,7 @@ Http Client
 
 .. php:namespace:: Cake\Network\Http
 
-.. php:class:: Client(mixed $config = array())
+.. php:class:: Client(mixed $config = [])
 
 CakePHP includes a basic but powerful HTTP client which can be easily used for
 making requests. It is a great way to communicate with webservices, and
@@ -136,8 +136,8 @@ An example of basic authentication::
       'auth' => ['username' => 'mark', 'password' => 'secret']
     ]);
 
-By default Http\\Client will use basic authentication is there is no ``'type'`` key
-in the auth option.
+By default Http\\Client will use basic authentication if there is no ``'type'``
+key in the auth option.
 
 
 Using Digest Authentication
@@ -308,8 +308,8 @@ Response objects have a number of methods for inspecting the response data.
 .. php:method:: cookie($name = null, $all = false)
 
     Get a single cookie from the response. By default only the value of a cookie
-    is returnned. If you set the second parameter to true, all the properties
-    set in the response will be returnned.
+    is returned. If you set the second parameter to true, all the properties
+    set in the response will be returned.
 
 .. php:method:: statusCode()
 

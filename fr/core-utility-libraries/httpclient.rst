@@ -3,16 +3,16 @@ Http Client
 
 .. php:namespace:: Cake\Network\Http
 
-.. php:class:: Client(mixed $config = array())
+.. php:class:: Client(mixed $config = [])
 
-CakePHP includes a basic but powerful HTTP client which can be easily used for
-making requests. It is a great way to communicate with webservices, and
-remote APIs.
+CakePHP intègre un client HTTP basique mais puissant qui peut facilement être
+utilisé pour faire des requêtes. C'est un bon moyen de communiquer avec des
+services webs et des APIs distantes.
 
-Doing Requests
-==============
+Faire des Requêtes
+==================
 
-Doing requests is simple and straight forward.  Doing a get request looks like::
+Faire des requêtes est simple et direct. Faire une requête get ressemble à ceci::
 
     use Cake\Network\Http\Client;
 
@@ -21,38 +21,39 @@ Doing requests is simple and straight forward.  Doing a get request looks like::
     // Simple get
     $response = $http->get('http://example.com/test.html');
 
-    // Simple get with querystring
+    // Simple get avec querystring
     $response = $http->get('http://example.com/search', ['q' => 'widget']);
 
-    // Simple get with querystring & additional headers
+    // Simple get avec querystring & headers supplémentaires
     $response = $http->get('http://example.com/search', ['q' => 'widget'], [
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
-Doing post and put requests is equally simple::
+Faire des requêtes post et put est également simple::
 
-    // Send a POST request with application/x-www-form-urlencoded encoded data
+    // Envoit une requête POST avec des données encodées application/x-www-form-urlencoded
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Send a PUT request with application/x-www-form-urlencoded encoded data
+    // Envoit une requête PUT avec des données encodées application/x-www-form-urlencoded
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Other methods as well.
+    // Autres méthodes.
     $http->delete(...);
     $http->head(...);
     $http->patch(...);
 
-Creating Multipart Requests with Files
-======================================
+Créer des Requêtes Multipart avec des Fichiers
+==============================================
 
-You can include files in request bodies by including them in the data array::
+Vous pouvez inclure des fichiers dans des corps de requête en les incluant
+dans le tableau de données::
 
     $http = new Client();
     $response = $http->post('http://example.com/api', [
@@ -60,15 +61,17 @@ You can include files in request bodies by including them in the data array::
       'logo' => $fileHandle
     ]);
 
-By prefixing data values with ``@`` or including a filehandle in the data.  If
-a filehandle is used, the filehandle will be read until its end, it will not be
-rewound before being read.
+En préfixant les valeurs des données par ``@`` ou en inclluant un gestionnaire
+de fichier dans les données. Si un gestionnaire de fichier est utilisé, le
+gestionnaire de fichier sera lu jusqu'à sa fin, il ne sera pas rembobiné avant
+d'être lu.
 
-Sending Request Bodies
-======================
+Envoyer des Corps de Requête
+============================
 
-When dealing with REST API's you often need to send request bodies that are not
-form encoded. Http\\Client exposes this through the type option::
+Lorsque vous utilisez des REST API, vous avez souvent besoin d'envoyer des corps
+de requête qui ne sont pas encodés. Http\\Client le permet grâce à l'option
+type::
 
     // Send a JSON request body.
     $http = new Client();
@@ -78,12 +81,13 @@ form encoded. Http\\Client exposes this through the type option::
       ['type' => 'json']
     );
 
-The ``type`` key can either be a one of 'json', 'xml' or a full mime type.
-When using the ``type`` option, you should provide the data as a string. If you're
-doing a GET request that needs both querystring parameters and a request body
-you can do the following::
+La clé ``type`` peut être soit 'json', soit 'xml' ou bien un mime type complet.
+Quand vous utilisez l'option ``type``, vous devrez fournir les données en
+chaîne de caractères. Si vous faîtes une requête GET qui a besoin des deux
+paramètres querystring et d'un corps de requête, vous pouvez faire comme ce
+qui suit::
 
-    // Send a JSON body in a GET request with query string parameters.
+    // Envoi d'un corps JSON dans une requête GET avec des paramètres query string.
     $http = new Client();
     $response = $http->get(
       'http://example.com/tasks',
@@ -93,57 +97,59 @@ you can do the following::
 
 .. _http_client_request_options:
 
-Request Method Options
-=======================
+Options de la Méthode Request
+=============================
 
-Each HTTP method takes an ``$options`` parameter which is used to provide
-addition request information.  The following keys can be used in ``$options``:
+Chaque méthode HTTP prend un paramètre ``$options`` qui est utilisé pour fournir
+des informations de requête supplémentaires. les clés suivantes peuvent être
+utilisées dans ``$options``:
 
-- ``headers`` - Array of additional headers
-- ``cookie`` - Array of cookies to use.
-- ``proxy`` - Array of proxy information.
-- ``auth`` - Array of authentication data, the ``type`` key is used to delegate to
-  an authentication strategy. By default Basic auth is used.
-- ``ssl_verify_peer`` - defaults to true. Set to false to disable SSL certification
-  verification (not advised)
-- ``ssl_verify_depth`` - defaults to 5. Depth to traverse in the CA chain.
-- ``ssl_verify_host`` - defaults to true. Validate the SSL certificate against the host name.
-- ``ssl_cafile`` - defaults to built in cafile. Overwrite to use custom CA bundles.
-- ``timeout`` - Duration to wait before timing out.
-- ``type`` - Send a request body in a custom content type. Requires ``$data`` to
-  either be a string, or the ``_content`` option to be set when doing GET
-  requests.
+- ``headers`` - Tableau de headers supplémentaires
+- ``cookie`` - Tableau de cookies à utiliser.
+- ``proxy`` - Tableau d'informations proxy.
+- ``auth`` - Tableau de données d'authentification, la clé ``type`` est utilisée
+  pour déleguer à une stratégie d'authentification. Par défaut l'Auth Basic est
+  utilisée.
+- ``ssl_verify_peer`` - par défaut à true. Définie à false pour désactiver
+  la certification SSL (non conseillé)
+- ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
+- ``ssl_verify_host`` - par défaut à true. Valide le certificat SSL pour un nom d'hôte.
+- ``ssl_cafile`` - par défaut pour construire dans cafile. Overwrite to use custom CA bundles.
+- ``timeout`` - Durée d'attente avant timing out.
+- ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
+  Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
+  définie quand vous faîtes des requêtes GET.
 
-The options parameter is always the 3rd parameter in each of the HTTP methods.
-They can also be use when constructing ``Client`` to create
+Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
+Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
 :ref:`scoped clients <http_client_scoped_client>`.
 
-Authentication
-==============
+Authentification
+================
 
-Http\\Client supports a few different authentication systems.  Different
-authentication strategies can be added by developers. Auth strategies are called
-before the request is sent, and allow headers to be added to the request
-context.
+Http\\Client intègre plusieurs systèmes d'authentification. Les différentes
+stratégies d'authentification peuvent être ajoutées par les développeurs.
+Les stratégies d'Authentification sont appelées avant que la requête ne soit
+envoyée, et permettent aux headers d'être ajoutés au contexte de la requête.
 
-Using Basic Authentication
---------------------------
+Utiliser l'Authentication Basic
+-------------------------------
 
-An example of basic authentication::
+Un exemple simple d'authentification::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
       'auth' => ['username' => 'mark', 'password' => 'secret']
     ]);
 
-By default Http\\Client will use basic authentication is there is no ``'type'`` key
-in the auth option.
+Par défaut Http\\Client va utiliser l'authentification basic si il n'y a pas
+de clé ``'type'`` dans l'option auth.
 
 
-Using Digest Authentication
----------------------------
+Utiliser l'Authentification Digest
+----------------------------------
 
-An example of basic authentication::
+Un exemple simple d'authentification::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
@@ -158,15 +164,15 @@ An example of basic authentication::
       ]
     ]);
 
-By setting the 'type' key to 'digest', you tell the authentication subsystem to
-use digest authentication.
+En configurant la clé 'type' à 'digest', vous dîtes au sous-système
+d'authentification d'utiliser l'authentification digest.
 
-OAuth 1 Authentication
-----------------------
+Authentification OAuth 1
+------------------------
 
-Many modern web-services require OAuth authentication to access their API's.
-The included OAuth authentication assumes that you already have your consumer
-key and consumer secret::
+Plusieurs services web modernes nécessitent une authentication OAuth pour
+accéder à leur API. L'authentification OAuth inclue suppose que vous ayez
+déjà votre clé de consommateur et un secret de consommateur::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
@@ -180,12 +186,13 @@ key and consumer secret::
       ]
     ]);
 
-Proxy Authentication
---------------------
+Authentification Proxy 
+----------------------
 
-Some proxies require authentication to use them. Generally this authentication
-is Basic, but it can be implemented by any authentication adapter.  By default
-Http\\Client will assume Basic authentication, unless the type key is set::
+Certains proxies ont besoin d'une authentification pour les utiliser.
+Généralement cette authentification est Basic, mais elle peut être implémentée
+par un adaptateur d'authentification. Par défaut, Http\\Client va supposer
+une authentification Basic, à moins que la clé type ne soit définie::
 
     $http = new Client();
     $response = $http->get('http://example.com/test.php', [], [
@@ -198,24 +205,25 @@ Http\\Client will assume Basic authentication, unless the type key is set::
 
 .. _http_client_scoped_client:
 
-Creating Scoped Clients
-=======================
+Créer des Scoped Clients
+========================
 
-Having to re-type the domain name, authentication and proxy settings can become
-tedious & error prone.  To reduce the change for mistake and relieve some of the
-tedium, you can create scoped clients::
+Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
+peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
+être moins pénible, vous pouvez créer des clients scoped::
 
-    // Create a scoped client.
+    // Créé un client scoped.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',
       'auth' => ['username' => 'mark', 'password' => 'testing']
     ]);
 
-    // Do a request to api.example.com
+    // Fait une requête vers api.example.com
     $response = $http->get('/test.php');
 
-The following information can be used when creating a scoped client:
+Les informations suivantes peuvent être utilisées lors de la création d'un
+client scoped:
 
 * host
 * scheme
@@ -228,100 +236,103 @@ The following information can be used when creating a scoped client:
 * ssl_verify_depth
 * ssl_verify_host
 
-Any of these options can be overridden by specifying them when doing requests.
-host, scheme, proxy, port are overridden in the request URL::
+Chacune de ces options peut être remplacées en les spécifiant quand vous
+faîtes des requêtes. 
+host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
-    // Using the scoped client we created earlier.
+    // Utiliser le client scoped que nous avons créé précédemment.
     $response = $http->get('http://foo.com/test.php');
 
-The above will replace the domain, scheme, and port.  However, this request will
-continue using all the other options defined when the scoped client was created.
-See :ref:`http_client_request_options` for more information on the options
-supported.
+Ce qui est au-dessus va remplacer le domaine, le scheme, et le port. Cependant,
+cette requête va continuer à utiliser toutes les autres options définies quand
+le client scoped a été créé. Regardez :ref:`http_client_request_options`
+pour plus d'informations sur les options intégrées.
 
 
-Setting and Managing Cookies
-============================
+Configurer et Gérer les Cookies
+===============================
 
-Http\\Client can also accept cookies when making requests. In addition to
-accepting cookies, it will also automatically store valid cookies set in
-responses. Any response with cookies, will have them stored in the originating
-instance of Http\\Client. The cookies stored in a Client instance are
-automatically included in future requests to domain + path combinations that
-match::
+Http\\Client peut aussi accepter les cookies quand on fait des requêtes. En plus
+d'accepter les cookies, il va aussi automatiquement stocker les cookies valides
+définis dans les responses. Toute response avec des cookies, les verra
+stockés dans l'instance d'origne de Http\\Client. Les cookies stockés dans une
+instance Client sont automatiquement inclus dans les futures requêtes vers
+le domaine + combinaisons de chemin qui correspondent::
 
     $http = new Client([
         'host' => 'cakephp.org'
     ]);
 
-    // Do a request that sets some cookies
+    // Faire une requête qui définit des cookies
     $response = $http->get('/');
 
-    // Cookies from the first request will be included
-    // by default.
+    // Cookies à partir de la première requête seront inclus par défaut.
     $response2 = $http->get('/changelogs');
 
-You can always override the auto-included cookies by setting them in the
-request's ``$options`` parameters::
+Vous pouvez toujours remplacer les cookies auto-inclus en les définissant dans
+les paramètres ``$options`` de la requête::
 
-    // Replace a stored cookie with a custom value.
+    // Remplace un cookie stocké avec une valeur personnalisée.
     $response = $http->get('/changelogs', [], [
         'cookies' => ['sessionid' => '123abc']
     ]);
 
 
-Response Objects
-================
+Objets Response
+===============
 
 .. php:class:: Response
 
-Response objects have a number of methods for inspecting the response data.
+Les objets Response ont un certain nombre de méthode pour parcourir les données
+de réponse.
 
 .. php:method:: body($parser = null)
 
-    Get the response body. Pass in an optional parser, to decode the response
-    body. For example. `json_decode` could be used for decoding response data.
+    Récupère le corps de la réponse. Passé dans un parser en option pour décoder
+    le corps de la réponse. Par exemple. `json_decode` peut être utilisé pour
+    décoder les données de réponse.
 
 .. php:method:: header($name)
 
-    Get a header with ``$name``. ``$name`` is case-insensitive.
+    Récupère un header avec ``$name``. ``$name`` n'est pas sensible à la casse.
 
 .. php:method:: headers()
 
-    Get all the headers.
+    Récupère tous les headers.
 
 .. php:method:: isOk()
 
-    Check if the response was ok. Any valid 20x response code will be
-    treated as OK.
+    Vérifie si la réponse était ok. Tout code de réponse valide 20x sera traité
+    comme OK.
 
 .. php:method:: isRedirect()
 
-    Check if the response was a redirect.
+    Vérifie si la réponse était une redirection.
 
 .. php:method:: cookies()
 
-    Get the cookies from the response. Cookies will be returned as
-    an array with all the properties that were defined in the response header.
-    To access the raw cookie data you can use :php:meth:`header()`
+    Récupère les cookies à partir de la réponse. Les Cookies seront retournés
+    en tableau avec toutes les propriétés qui étaient définies dans le header
+    de response. Pour accéder aux données brutes du cookie, vous pouvez utiliser
+    :php:meth:`header()`
 
 .. php:method:: cookie($name = null, $all = false)
 
-    Get a single cookie from the response. By default only the value of a cookie
-    is returnned. If you set the second parameter to true, all the properties
-    set in the response will be returnned.
+    Récupère un cookie unique à partir de response. Par défaut, seule la valeur
+    d'un cookie est retourné. Si vous définissez le deuxième paramètre à true,
+    toutes les propriétés définies dans la response seront retournées.
 
 .. php:method:: statusCode()
 
-    Get the status code.
+    Récupère le code de statut.
 
 .. php:method:: encoding()
 
-    Get the encoding of the response. Will return null if the response
-    headers did not contain an encoding.
+    Récupère l'encodage de response. Va retourner null si les headers de
+    response ne contiennent pas d'encodage.
 
-In addition to the above methods you can also use object accessors to read data
-from the following properties:
+En plus des méthodes ci-dessus, vous pouvez aussi utiliser les accesseurs
+d'objet pour lire les données à partir des propriétés suivantes:
 
 * cookies
 * body
@@ -333,31 +344,32 @@ from the following properties:
     $http = new Client(['host' => 'example.com']);
     $response = $http->get('/test');
 
-    // Use object accessors to read data.
+    // Utilise les accesseurs d'object pour lire les données.
     debug($response->body);
     debug($response->status);
     debug($response->headers);
 
-Reading JSON and XML Response Bodies
-------------------------------------
+Lire des Corps de Réponse JSON et XML
+-------------------------------------
 
-Since JSON and XML responses are commonly used, response objects provide easy to
-use accessors to read decoded data. JSON data is decoded into an array, while
-XML data is decoded into a ``SimpleXMLElement`` tree::
+Puisque les réponses JSON et XML sont souvent utilisées, les objets response
+fournissent une utilisation facile d'accéder à la lecture des données décodées.
+Les données JSON dans un tableau, alors que les données XML sont décodées dans
+un arbre ``SimpleXMLElement``::
 
-    // Get some XML
+    // Récupérer du XML
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
     $xml = $response->xml;
 
-    // Get some JSON
+    // Récupérer du JSON
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
     $json = $response->json;
 
-The decoded response data is stored in the response object, so accessing it
-multiple times has no additional cost.
+Les données de réponse décodées sont stockées dans l'objet response, donc y
+accéder de nombreuses fois n'augmente pas la charge.
 
 .. meta::
-    :title lang=en: HttpClient
-    :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results
+    :title lang=fr: HttpClient
+    :keywords lang=fr: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results
