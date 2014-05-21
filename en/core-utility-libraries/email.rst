@@ -18,7 +18,7 @@ First of all, you should ensure the class is loaded::
 After you've loaded ``Email``, you can send an email with the following::
 
     $email = new Email();
-    $email->from(array('me@example.com' => 'My Site'))
+    $email->from(['me@example.com' => 'My Site'])
         ->to('you@example.com')
         ->subject('About')
         ->send('My message');
@@ -177,7 +177,7 @@ All these configurations are optional, except ``'from'``.
     The values of above keys using Email or array, like from, to, cc, etc will be passed
     as first parameter of corresponding methods. The equivalent for:
     ``Email::from('my@example.com', 'My Site')``
-    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
+    would be defined as  ``'from' => ['my@example.com' => 'My Site']`` in your config
 
 Setting Headers
 ===============
@@ -229,7 +229,7 @@ When sending templated emails you have the option of sending either
 You can set view variables with ``Email::viewVars()``::
 
     $email = new Email('templated');
-    $email->viewVars(array('value' => 12345));
+    $email->viewVars(['value' => 12345]);
 
 In your email templates you can use these with::
 
@@ -239,7 +239,7 @@ You can use helpers in emails as well, much like you can in normal view files.
 By default only the :php:class:`HtmlHelper` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
-    $Email->helpers(array('Html', 'Custom', 'Text'));
+    $Email->helpers(['Html', 'Custom', 'Text']);
 
 When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
@@ -275,21 +275,21 @@ you want the filenames to appear in the recipient's mail client:
 
 1. String: ``$Email->attachments('/full/file/path/file.png')`` will attach this
    file with the name file.png.
-2. Array: ``$Email->attachments(array('/full/file/path/file.png')`` will have
+2. Array: ``$Email->attachments(['/full/file/path/file.png'])`` will have
    the same behavior as using a string.
 3. Array with key:
-   ``$Email->attachments(array('photo.png' => '/full/some_hash.png'))`` will
+   ``$Email->attachments(['photo.png' => '/full/some_hash.png'])`` will
    attach some_hash.png with the name photo.png. The recipient will see
    photo.png, not some_hash.png.
 4. Nested arrays::
 
-    $Email->attachments(array(
-        'photo.png' => array(
+    $Email->attachments([
+        'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
             'contentId' => 'my-unique-id'
-        )
-    ));
+        ]
+    ]);
 
    The above will attach the file with different mimetype and with custom
    Content ID (when set the content ID the attachment is transformed to inline).
@@ -383,7 +383,7 @@ You can create your configuration using
 options that you need and use the static method ``Email::deliver()``.
 Example::
 
-    Email::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
+    Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
 
 This method will send an email to "you@example.com", from "me@example.com" with
 subject "Subject" and content "Message".
