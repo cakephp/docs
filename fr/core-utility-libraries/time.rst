@@ -74,7 +74,7 @@ Dans les cas de test, vous pouvez facilement mock out ``now()`` en utilisant
 Manipulation
 ============
 
-Une fois créé, vous pouvez manipuler les instances ``Time`` en utilisant les
+Une fois créées, vous pouvez manipuler les instances ``Time`` en utilisant les
 méthodes setter::
 
     $now = Time::now();
@@ -112,8 +112,8 @@ date::
     $time->y = 2015;
     $time->timezone = 'Europe/Paris';
 
-Formatge
-========
+Formatage
+=========
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
@@ -204,32 +204,33 @@ Souvent, il est utile d'afficher les temps liés au présent::
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 
-The ``end`` option lets you define at which point after which relative times should be
-formatted using the ``format`` option. The ``accuracy`` option lets us control
-what level of detail should be used for each interval range::
+L'option ``end`` vous laisse définir à partir de quel point les temps relatifs
+doivent être formatés en utilisant l'option ``format``. L'option ``accuracy``
+nous laisse contrôler le niveau de détail qui devra être utilisé pour chaque
+intervalle::
 
-    // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
+    // Si $timestamp est 1 month, 1 week, 5 days et 6 hours ago
     echo $timestamp->timeAgoInWords([
         'accuracy' => ['month' => 'month'],
         'end' => '1 year'
     ]);
-    // Outputs '1 month ago'
+    // Affiche '1 month ago'
 
-By setting ``accuracy`` to a string, you can specify what is the maximum level of detail you
-want output::
+En configurant ``accuracy`` en une chaîne, vous pouvez spécifier le niveau
+maximum de détail que vous souhaitez afficher::
 
     $time = new Time('+23 hours');
-    // Outputs 'in about a day'
-    $result = $time->timeAgoInWords(array(
+    // Affiche 'in about a day'
+    $result = $time->timeAgoInWords([
         'accuracy' => 'day'
-    ));
+    ]);
 
 Conversion
 ==========
 
 .. php:method:: toQuarter()
 
-Une fois créée, vous pouvez convertir les instances ``Time`` en timestamps ou
+Une fois créées, vous pouvez convertir les instances ``Time`` en timestamps ou
 valeurs quarter::
 
     $time = new Time('2014-06-15');
@@ -261,25 +262,25 @@ Comparer Avec les Intervals
 
 .. php:method:: isWithinNext($interval)
 
-You can see if a ``Time`` instance falls within a given range using
-``wasWithinLast()`` and ``isWithinNext()``::
+Vous pouvez regarder si une instance ``Time`` tombe dans un interval en
+utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
     $time = new Time('2014-06-15');
 
-    // Within 2 days.
+    // A moins de 2 jours.
     echo $time->isWithinNext(2);
 
-    // Within 2 next weeks.
+    // A moins de 2 semaines.
     echo $time->isWithinNext('2 weeks');
 
 .. php:method:: isWithinPast($interval)
 
-You can also compare a ``Time`` instance within a range in the past::
+Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé::
 
-    // Within past 2 days.
+    // Dans les 2 derniers jours.
     echo $time->isWithinPast(2);
 
-    // Within past 2 weeks.
+    // Dans les 2 dernières semaines.
     echo $time->isWithinPast('2 weeks');
 
 .. end-time

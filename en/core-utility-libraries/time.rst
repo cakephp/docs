@@ -211,9 +211,9 @@ want output::
 
     $time = new Time('+23 hours');
     // Outputs 'in about a day'
-    $result = $time->timeAgoInWords(array(
+    $result = $time->timeAgoInWords([
         'accuracy' => 'day'
-    ));
+    ]);
 
 Conversion
 ==========
