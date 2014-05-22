@@ -14,7 +14,9 @@ HTTP responses from your controllers.
 Request
 #######
 
-:php:class:`Cake\\Network\\Request` is the default request object used in CakePHP. It centralizes
+.. php:class:: Request
+
+``Request`` is the default request object used in CakePHP. It centralizes
 a number of features for interrogating and interacting with request data.
 On each request one Request is created and then passed by reference to the various
 layers of an application that use request data. By default ``Request`` is assigned to
@@ -39,6 +41,7 @@ properties, the second uses array indexes, and the third uses ``$this->request->
     $this->request->controller;
     $this->request['controller'];
     $this->request->params['controller'];
+    $this->request->param('controller');
 
 All of the above will access the same value. Multiple ways of accessing the
 parameters have been provided to ease migration for existing applications. All
@@ -65,28 +68,27 @@ are also all found in the request parameters:
   bare option. Bare requests do not have layouts rendered.
 * ``requested`` Present and set to true when the action came from :php:meth:`~Controller::requestAction()`.
 
+Accessing Query String Parameters
+=================================
 
-Accessing Querystring Parameters
-================================
+.. php:method:: query($name)
 
-Querystring parameters can be read using :php:attr:`~Cake\\Network\\Request::$query`::
+Query string parameters can be read using :php:attr:`~Cake\\Network\\Request::$query`::
 
     // URL is /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-    // You can also access it via an array
-    // Note: BC accessor, will be deprecated in future versions
-    $this->request['url']['page'];
-
 You can either directly access the query property, or you can use
-:php:meth:`~Cake\\Network\\Request::query()` to read the URL query array in an error-free manner.
+``query()`` method to read the URL query array in an error-free manner.
 Any keys that do not exist will return ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
 
-Accessing POST Data
-===================
+Accessing Request Data
+======================
+
+.. php:method:: data($name)
 
 All POST data can be accessed using :php:meth:`Cake\\Network\\Request::data()`. Any form data
 that contains a ``data`` prefix will have that data prefix removed. For example::
@@ -99,22 +101,38 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
+You can also access the array of data, as an array::
+
+    $this->request->data['title'];
+    $this->request->data['comments'][1]['author'];
+
 Accessing PUT, PATCH or DELETE Data
 ===================================
 
+.. php:method:: input($callback, [$options])
+
 When building REST services, you often accept request data on ``PUT`` and
-``DELETE`` requests. As of 2.2, any ``application/x-www-form-urlencoded``
-request body data will automatically be parsed and set to ``$this->data`` for
-``PUT`` and ``DELETE`` requests. If you are accepting JSON or XML data, see
-below for how you can access those request bodies.
+``DELETE`` requests. Any ``application/x-www-form-urlencoded`` request body data
+will automatically be parsed and set to ``$this->data`` for ``PUT`` and
+``DELETE`` requests. If you are accepting JSON or XML data, see below for how
+you can access those request bodies.
+
+When accessing the input data, you can decode it with an optional function.
+This is useful when interacting with XML or JSON request body content.
+Additional parameters for the decoding function can be passed as arguments to
+``input()``::
+
+    $this->request->input('json_decode');
 
 Accessing / Setting Environment Variables (from $_SERVER and $_ENV)
 ===================================================================
 
 .. versionadded:: 3.0
 
-:php:meth:`Cake\\Network\\Request::env()` is a wrapper for ``env()`` global function and
-acts as a getter/setter for enviroment variables without having to modify globals
+.. php:method:: env($key, $value = null)
+
+``Request::env()`` is a wrapper for ``env()`` global function and acts as
+a getter/setter for enviroment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
     //Get a value
@@ -146,14 +164,42 @@ Accessing Path Information
 ==========================
 
 The request object also provides useful information about the paths in your
-application. :php:attr:`Cake\\Network\\Request::$base` and
-:php:attr:`Cake\\Network\\Request::$webroot` are useful for generating URLs, and
-determining whether or not your application is in a subdirectory.
+application. ``$request->base`` and ``$request->webroot`` are useful for
+generating URLs, and determining whether or not your application is in
+a subdirectory. The various properties you can use are::
+
+    // Assume the current request URL is /subdir/articles/edit/1?page=1
+
+    // Holds /subdir/articles/edit/1?page=1
+    $request->here;
+
+    // Holds /subdir
+    $request->base;
+
+    // Holds /subdir/
+    $request->webroot;
 
 .. _check-the-request:
 
-Inspecting the Request
-======================
+Checking Request Conditions
+===========================
+
+.. php:method:: is($type)
+
+Check whether or not a Request matches a certain criterion. Uses
+the built-in detection rules as well as any additional rules defined
+with :php:meth:`Cake\\Network\\Request::addDetector()`::
+
+    // Check if the request is a POST
+    $request->is('post');
+
+    // Check if the request is from AJAX
+    $request->is('ajax');
+
+.. php:method:: addDetector($name, $options)
+
+Add a detector to be used with :php:meth:`CakeRequest::is()`. See
+:ref:`check-the-request` for more information.
 
 The request object provides an easy way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
@@ -239,8 +285,8 @@ properties and methods.
 * ``$this->request->here`` contains the full address to the current request.
 * ``$this->request->query`` contains the query string parameters.
 
-Access Session Data
-===================
+Session Data
+============
 
 To access the session for a given request use the ``session()`` method::
 
@@ -249,151 +295,90 @@ To access the session for a given request use the ``session()`` method::
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
 
-
-Request API
-===========
-
-.. php:class:: Request
-
-    Request encapsulates request parameter handling, and introspection.
-
-.. php:method:: env($key, $value = null)
-
-    Getter / setter for environment variables.
+Hostname Parts
+==============
 
 .. php:method:: domain($tldLength = 1)
 
-    Returns the domain name your application is running on.
+Returns the domain name your application is running on::
+
+    // Prints 'example.org'
+    echo $request->domain();
 
 .. php:method:: subdomains($tldLength = 1)
 
-    Returns the subdomains your application is running on as an array.
+Returns the subdomains your application is running on as an array::
+
+    // Returns ['my', 'dev'] for 'my.dev.example.org'
+    $request->subdomains();
 
 .. php:method:: host()
 
-    Returns the host your application is on.
+Returns the host your application is on::
+
+    // Prints 'my.dev.example.org'
+    echo $request->host();
+
+Working With HTTP Methods & Headers
+===================================
 
 .. php:method:: method()
 
-    Returns the HTTP method the request was made with.
+Returns the HTTP method the request was made with::
+
+    // Output POST
+    echo $request->method();
 
 .. php:method:: allowMethod($methods)
 
-    Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
-    The 405 response will include the required ``Allow`` header with the passed methods
-
-.. php:method:: referer($local = false)
-
-    Returns the referring address for the request.
-
-.. php:method:: clientIp($safe = true)
-
-    Returns the current visitor's IP address.
+Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
+The 405 response will include the required ``Allow`` header with the passed methods
 
 .. php:method:: header($name)
 
-    Allows you to access any of the ``HTTP_*`` headers that were used
-    for the request. For example::
+Allows you to access any of the ``HTTP_*`` headers that were used
+for the request. For example::
 
-        $this->request->header('User-Agent');
+    $this->request->header('User-Agent');
 
-    would return the user agent used for the request.
+would return the user agent used for the request.
 
-.. php:method:: input($callback, [$options])
+.. php:method:: referer($local = false)
 
-    Retrieve the input data for a request, and optionally pass it through a
-    decoding function. Useful when interacting with XML or JSON
-    request body content. Additional parameters for the decoding function
-    can be passed as arguments to input()::
+Returns the referring address for the request.
 
-        $this->request->input('json_decode');
+.. php:method:: clientIp($safe = true)
 
-.. php:method:: data($name)
+Returns the current visitor's IP address.
 
-    Provides dot notation access to request data. Allows request data to be read and
-    modified. Calls can be chained together as well::
-
-        // Modify some request data, so you can prepopulate some form fields.
-        $this->request->data('Post.title', 'New post')
-            ->data('Comment.1.author', 'Mark');
-
-        // You can also read out data.
-        $value = $this->request->data('Post.title');
-
-.. php:method:: query($name)
-
-    Provides dot notation access to URL query data::
-
-        // URL is /posts/index?page=1&sort=title
-        $value = $this->request->query('page');
-
-.. php:method:: is($type)
-
-    Check whether or not a Request matches a certain criterion. Uses
-    the built-in detection rules as well as any additional rules defined
-    with :php:meth:`Cake\\Network\\Request::addDetector()`.
-
-.. php:method:: addDetector($name, $options)
-
-    Add a detector to be used with :php:meth:`CakeRequest::is()`. See :ref:`check-the-request`
-    for more information.
+Checking Accept Headers
+=======================
 
 .. php:method:: accepts($type = null)
 
-    Find out which content types the client accepts, or check whether it accepts a
-    particular type of content.
+Find out which content types the client accepts, or check whether it accepts a
+particular type of content.
 
-    Get all types::
+Get all types::
 
-        $this->request->accepts();
+    $this->request->accepts();
 
-    Check for a single type::
+Check for a single type::
 
-        $this->request->accepts('application/json');
+    $this->request->accepts('application/json');
 
 .. php:method:: acceptLanguage($language = null)
 
-    Get all the languages accepted by the client,
-    or check whether a specific language is accepted.
+Get all the languages accepted by the client,
+or check whether a specific language is accepted.
 
-    Get the list of accepted languages::
+Get the list of accepted languages::
 
-        $this->request->acceptLanguage();
+    $this->request->acceptLanguage();
 
-    Check whether a specific language is accepted::
+Check whether a specific language is accepted::
 
-        $this->request->acceptLanguage('es-es');
-
-.. php:method:: param($name)
-
-    Safely read values in ``$request->params``. This removes the need to call
-    ``isset()`` or ``empty()`` before using param values.
-
-.. php:attr:: data
-
-    An array of POST data. You can use :php:meth:`Cake\\Network\\Request::data()`
-    to read this property in a way that suppresses notice errors.
-
-.. php:attr:: query
-
-    An array of query string parameters.
-
-.. php:attr:: params
-
-    An array of route elements and request parameters.
-
-.. php:attr:: here
-
-    Returns the current request uri.
-
-.. php:attr:: base
-
-    The base path to the application, usually ``/`` unless your
-    application is in a subdirectory.
-
-.. php:attr:: webroot
-
-    The current webroot.
+    $this->request->acceptLanguage('es-es');
 
 .. index:: $this->response
 
