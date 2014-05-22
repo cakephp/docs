@@ -239,6 +239,16 @@ properties and methods.
 * ``$this->request->here`` contains the full address to the current request.
 * ``$this->request->query`` contains the query string parameters.
 
+Access Session Data
+===================
+
+To access the session for a given request use the ``session()`` method::
+
+    $this->request->session()->read('User.name');
+
+For more information, see the :doc:`/development/sessions` documentation for how
+to use the session object.
+
 
 Request API
 ===========

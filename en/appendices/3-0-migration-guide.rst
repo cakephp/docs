@@ -348,8 +348,8 @@ Response
   doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
   which was a common annoyance when receiving a jQuery XHR request.
 
-Sessions Are Attached To The Request
-====================================
+Sessions
+========
 
 The session class is no longer static, instead the session can be accessed
 through the request object. See the :doc:`/development/sessions` documentation
@@ -364,6 +364,8 @@ for using the session object.
   when chrome frame, and flash player are involved.
 * The conventional sessions database table name is now ``sessions`` instead of
   ``cake_sessions``.
+* The session cookie timeout is automatically updated in tandem with the timeout
+  in the session data.
 
 Network\\Http
 =============
