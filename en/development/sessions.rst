@@ -18,25 +18,10 @@ level ``Session`` key, and a number of options are available:
 * ``Session.cookie`` - Change the name of the session cookie.
 
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
-  This affects ``Session.autoRegenerate`` (below), and is handled by CakeSession.
 
 * ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
   If this is undefined, it will use the same value as ``Session.timeout``.
   This affects the session cookie, and is handled by PHP itself.
-
-* ``Session.checkAgent`` - Should the user agent be checked, on each request. If
-  the user agent does not match the session will be destroyed.
-
-* ``Session.autoRegenerate`` - Enabling this setting, turns on automatic
-  renewal of sessions, and session ids that change frequently. Enabling this
-  value will use the session's ``Config.countdown`` value to keep track of requests.
-  Once the countdown reaches 0, the session id will be regenerated. This is a
-  good option to use for applications that need frequently
-  changing session ids for security reasons.
-
-* ``Session.requestCountdown`` - Number of requests that can occur during a
-  session time without the session being renewed. Only used when config value
-  ``Session.autoRegenerate`` is set to true. Defaults to 10.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration. See below for the
@@ -51,28 +36,28 @@ level ``Session`` key, and a number of options are available:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-CakePHP's defaults to setting ``session.cookie_secure`` to true, when your
-application is on an SSL protocol. If your application serves from both SSL and
-non-SSL protocols, then you might have problems with sessions being lost. If
-you need access to the session on both SSL and non-SSL domains you will want to
-disable this::
+CakePHP's defaults ``session.cookie_secure`` to true, when your application is
+on an SSL protocol. If your application serves from both SSL and non-SSL
+protocols, then you might have problems with sessions being lost. If you need
+access to the session on both SSL and non-SSL domains you will want to disable
+this::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'php',
-        'ini' => array(
+        'ini' => [
             'session.cookie_secure' => false
-        )
-    ));
+        ]
+    ]);
 
-Session cookie paths default to ``/`` in 2.0, to change this you can use the
+The session cookie path defaults to ``/``. To change this you can use the
 ``session.cookie_path`` ini flag to the directory path of your application::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'php',
-        'ini' => array(
+        'ini' => [
             'session.cookie_path' => '/App/dir'
-        )
-    ));
+        ]
+    ]);
 
 Built-in Session Handlers & Configuration
 =========================================
@@ -83,19 +68,18 @@ custom solution. To use defaults, simply set the 'defaults' key to the name of
 the default you want to use. You can then override any sub setting by declaring
 it in your Session config::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'php'
-    ));
+    ]);
 
 The above will use the built-in 'php' session configuration. You could augment
 part or all of it by doing the following::
 
-
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'php',
         'cookie' => 'my_app',
-        'timeout' => 4320 //3 days
-    ));
+        'timeout' => 4320 // 3 days
+    ]);
 
 The above overrides the timeout and cookie name for the 'php' session
 configuration. The built-in configurations are:
@@ -116,27 +100,27 @@ object you want to use for session saving. There are two ways to use the
 'handler'. The first is to provide an array with 5 callables. These callables
 are then applied to ``session_set_save_handler``::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'userAgent' => false,
         'cookie' => 'my_cookie',
         'timeout' => 600,
-        'handler' => array(
-            array('Foo', 'open'),
-            array('Foo', 'close'),
-            array('Foo', 'read'),
-            array('Foo', 'write'),
-            array('Foo', 'destroy'),
-            array('Foo', 'gc'),
-        ),
-        'ini' => array(
+        'handler' => [
+            ['Foo', 'open'],
+            ['Foo', 'close'],
+            ['Foo', 'read'],
+            ['Foo', 'write'],
+            ['Foo', 'destroy'],
+            ['Foo', 'gc'],
+        ],
+        'ini' => [
             'cookie_secure' => 1,
             'use_trans_sid' => 0
-        )
-    ));
+        ]
+    ]);
 
 The second mode is to define an 'engine' key. This key should be a class name
-that implements ``CakeSessionHandlerInterface``. Implementing this interface
-will allow CakeSession to automatically map the methods for the handler. Both
+that implements ``SessionHandlerInterface``. Implementing this interface
+will allow ``Session`` to automatically map the methods for the handler. Both
 the core Cache and Database session handlers use this method for saving
 sessions. Additional settings for the handler should be placed inside the
 handler array. You can then read those values out from inside your handler.
@@ -146,16 +130,15 @@ something like ``MyPlugin.PluginSessionHandler``. This will load and use the
 ``PluginSessionHandler`` class from inside the MyPlugin of your application.
 
 
-CakeSessionHandlerInterface
+SessionHandlerInterface
 ---------------------------
 
-This interface is used for all custom session handlers inside CakePHP, and can
-be used to create custom user land session handlers. Simply implement the
-interface in your class and set ``Session.handler.engine``  to the class name
-you've created. CakePHP will attempt to load the handler from inside
-``app/Model/Datasource/Session/$classname.php``. So if your class name is
+CakePHP requires that all session handlers implement the native PHP interface.
+Implement the interface in your class and set ``Session.handler.engine`` to the
+class name you've created. CakePHP will attempt to load the handler from inside
+``App/Network/Session/$classname.php``. So if your class name is
 ``AppSessionHandler`` the file should be
-``app/Model/Datasource/Session/AppSessionHandler.php``.
+``App/Network/Session/AppSessionHandler.php``.
 
 Database Sessions
 -----------------
@@ -164,39 +147,36 @@ The changes in session configuration change how you define database sessions.
 Most of the time you will only need to set ``Session.handler.model`` in your
 configuration as well as choose the database defaults::
 
-
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'database',
-        'handler' => array(
-            'model' => 'CustomSession'
-        )
-    ));
+        'handler' => [
+            'model' => 'CustomSessions'
+        ]
+    ]);
 
-The above will tell CakeSession to use the built-in 'database' defaults, and
-specify that a model called ``CustomSession`` will be the delegate for saving
+The above will tell Session to use the built-in 'database' defaults, and
+specify that a model called ``CustomSessions`` will be the delegate for saving
 session information to the database.
 
 If you do not need a fully custom session handler, but still require
 database-backed session storage, you can simplify the above code to::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'database'
-    ));
+    ]);
 
 This configuration will require a database table to be added with
 at least these fields::
 
-    CREATE TABLE `cake_sessions` (
+    CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
       `data` text,
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
 
-You can also use the schema shell to create this table using the schema file
-provided in the default app skeleton::
-
-    $ Console/cake schema create sessions
+You can find a copy of the schema for the sessions table in the application
+skeleton.
 
 Cache Sessions
 --------------
@@ -208,14 +188,14 @@ start to expire as records are evicted.
 
 To use Cache based sessions you can configure you Session config like::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'cache',
-        'handler' => array(
+        'handler' => [
             'config' => 'session'
-        )
-    ));
+        ]
+    ]);
 
-This will configure CakeSession to use the ``CacheSession`` class as the
+This will configure Session to use the ``CacheSession`` class as the
 delegate for saving the sessions. You can use the 'config' key which cache
 configuration to use. The default cache configuration is ``'default'``.
 
@@ -229,13 +209,13 @@ configurations, as well as custom ones. The ``ini`` key in the session settings,
 allows you to specify individual configuration values. For example you can use
 it to control settings like ``session.gc_divisor``::
 
-    Configure::write('Session', array(
+    Configure::write('Session', [
         'defaults' => 'php',
-        'ini' => array(
+        'ini' => [
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
-        )
-    ));
+        ]
+    ]);
 
 
 Creating a Custom Session Handler
@@ -247,12 +227,16 @@ example we'll create a session handler that stores sessions both in the Cache
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
-``app/Model/Datasource/Session/ComboSession.php``. The class should look
+``App/Network/Session/ComboSession.php``. The class should look
 something like::
 
-    App::uses('DatabaseSession', 'Model/Datasource/Session');
+    namespace App\Network\Session;
 
-    class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
+    use Cake\Cache\Cache;
+    use Cake\Core\Configure;
+    use Cake\Network\Session\DatabaseSession;
+
+    class ComboSession extends DatabaseSession {
         public $cacheKey;
 
         public function __construct() {
@@ -291,62 +275,135 @@ something like::
     }
 
 Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
-all of its logic and behavior. We wrap each operation with a :php:class:`Cache`
-operation. This lets us fetch sessions from the fast cache, and not have to
-worry about what happens when we fill the cache. Using this session handler is
-also easy. In your ``core.php`` make the session block look like the following::
+all of its logic and behavior. We wrap each operation with
+a :php:class:`Cake\\Cache\\Cache` operation. This lets us fetch sessions from
+the fast cache, and not have to worry about what happens when we fill the cache.
+Using this session handler is also easy. In your ``app.php`` make the session
+block look like the following::
 
-    Configure::write('Session', array(
+    'Session' => [
         'defaults' => 'database',
-        'handler' => array(
+        'handler' => [
             'engine' => 'ComboSession',
             'model' => 'Session',
             'cache' => 'apc'
-        )
-    ));
-
+        ]
+    ],
     // Make sure to add a apc cache config
-    Configure::write('Cache.apc', array('Engine' => 'Apc'));
+    'Cache' => [
+        'apc' => ['engine' => 'Apc']
+    ]
 
 Now our application will start using our custom session handler for reading &
 writing session data.
 
 
-.. php:class:: CakeSession
+.. php:class:: Session
+
+Accessing the Session Object
+============================
+
+You can access the session data any place you have access to a request object.
+This means the session is easily accessible from:
+
+* Controllers
+* Views
+* Helpers
+* Cells
+* Components
+
+In addition to the basic session object, you can also use the
+:php:class:`Cake\\Controller\\Component\\SessionComponent` and
+:php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
+controllers and views. A basic example of session usage would be::
+
+    $name = $this->request->session()->read('User.name');
+
+    // If you are accessing the session multiple times,
+    // you will probably want a local variable.
+    $session = $this->request->session();
+    $name = $session->read('User.name');
 
 Reading & Writing Session Data
 ==============================
 
-Depending on the context you are in, your application has different classes
-that provide access to the session. In controllers you can use
-:php:class:`SessionComponent`. In the view, you can use
-:php:class:`SessionHelper`. In any part of your application you can use
-``CakeSession`` to access the session as well. Like the other interfaces to the
-session, ``CakeSession`` provides a simple CRUD interface.
-
-.. php:staticmethod:: read($key)
+.. php:method:: read($key)
 
 You can read values from the session using :php:meth:`Hash::extract()`
 compatible syntax::
 
-    CakeSession::read('Config.language');
+    $session->read('Config.language');
 
-.. php:staticmethod:: write($key, $value)
+.. php:method:: write($key, $value)
 
 ``$key`` should be the dot separated path you wish to write ``$value`` to::
 
-    CakeSession::write('Config.language', 'eng');
+    $session->write('Config.language', 'eng');
 
-.. php:staticmethod:: delete($key)
+.. php:method:: delete($key)
 
 When you need to delete data from the session, you can use delete::
 
-    CakeSession::delete('Config.language');
+    $session->delete('Config.language');
 
-You should also see the documentation on
-:doc:`/core-libraries/components/sessions` and
-:doc:`/core-libraries/helpers/session` for how to access Session data
-in the controller and view.
+.. php:method:: check($key)
+
+If you want to see if data exists in the session, you can use ``check()``::
+
+    if ($session->check('Config.language')) {
+        // Config.language exists and is not null.
+    }
+
+Destroying the Session
+======================
+
+.. php:method:: destroy()
+
+Destroying the session is useful when users log out. To destroy a session, use
+the ``destroy()`` method::
+
+    $session->destroy();
+
+Destroying a session will remove all serverside data in the session, but will **not**
+remove the session cookie.
+
+Rotating Session Identifiers
+============================
+
+.. php:method:: renew()
+
+While ``AuthComponent`` automatically renews the session id when users login and
+out, you may need to rotate the session id's manually. To do this use the
+``renew()`` method::
+
+    $session->renew();
+
+Flash Messages
+==============
+
+.. php:method:: flash($message, $type = 'info', $options = [])
+
+Flash messages are small messages displayed to end users once. They are often used to
+present error messages, or confirm that actions took place successfully. Because
+flash messages are so common in web applications, CakePHP makes setting flash
+messages on the session object a snap::
+
+    // Default info type message.
+    $session->flash('Your article was saved');
+
+    // Error type message.
+    $session->flash('You have mistakes to correct', 'error');
+
+    // Separate domains are stored separately
+    $session->flash('You have mistakes to correct', 'error', ['key' => 'auth']);
+
+You can only have one message per key/domain.
+
+Displaying Flash Messages
+-------------------------
+
+Once set, the most common way to print out flash messages is with
+:doc:`/core-libraries/helpers/session`.
 
 
 .. meta::

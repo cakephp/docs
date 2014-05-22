@@ -362,6 +362,8 @@ for using the session object.
 * The property ``Session::$requestCountdown`` has been removed.
 * The session checkAgent feature has been removed. It caused a number of bugs
   when chrome frame, and flash player are involved.
+* The conventional sessions database table name is now ``sessions`` instead of
+  ``cake_sessions``.
 
 Network\\Http
 =============
