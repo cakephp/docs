@@ -32,8 +32,8 @@ also access it in Components by using the controller reference. Some of the duti
 * Provide access to request parameters both as array indexes and object
   properties.
 
-Accessing Request Parameters
-============================
+Request Parameters
+==================
 
 Request exposes several interfaces for accessing request parameters. The first uses object
 properties, the second uses array indexes, and the third uses ``$this->request->params``::
@@ -68,8 +68,8 @@ are also all found in the request parameters:
   bare option. Bare requests do not have layouts rendered.
 * ``requested`` Present and set to true when the action came from :php:meth:`~Controller::requestAction()`.
 
-Accessing Query String Parameters
-=================================
+Query String Parameters
+=======================
 
 .. php:method:: query($name)
 
@@ -85,8 +85,8 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
 
-Accessing Request Data
-======================
+Request Body Data
+=================
 
 .. php:method:: data($name)
 
@@ -106,8 +106,8 @@ You can also access the array of data, as an array::
     $this->request->data['title'];
     $this->request->data['comments'][1]['author'];
 
-Accessing PUT, PATCH or DELETE Data
-===================================
+PUT, PATCH or DELETE Data
+=========================
 
 .. php:method:: input($callback, [$options])
 
@@ -124,8 +124,8 @@ Additional parameters for the decoding function can be passed as arguments to
 
     $this->request->input('json_decode');
 
-Accessing / Setting Environment Variables (from $_SERVER and $_ENV)
-===================================================================
+Environment Variables (from $_SERVER and $_ENV)
+===============================================
 
 .. versionadded:: 3.0
 
@@ -141,8 +141,8 @@ a getter/setter for enviroment variables without having to modify globals
     //Set a value. Generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-Accessing XML or JSON Data
-==========================
+XML or JSON Data
+=================
 
 Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded
 post bodies. You can read input data in any format using
@@ -160,8 +160,8 @@ in additional parameters as well::
     // Get Xml encoded data submitted to a PUT/POST action
     $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
-Accessing Path Information
-==========================
+Path Information
+================
 
 The request object also provides useful information about the paths in your
 application. ``$request->base`` and ``$request->webroot`` are useful for
