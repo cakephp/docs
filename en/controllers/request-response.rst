@@ -273,17 +273,6 @@ There are several built-in detectors that you can use:
 * ``is('mobile')`` Check to see whether the request came from a common list
   of mobile agents.
 
-Interacting with Other Aspects of the Request
-=============================================
-
-You can use `Request` to introspect a variety of things about the request.
-Beyond the detectors, you can also find out other information from various
-properties and methods.
-
-* ``$this->request->webroot`` contains the webroot directory.
-* ``$this->request->base`` contains the base path.
-* ``$this->request->here`` contains the full address to the current request.
-* ``$this->request->query`` contains the query string parameters.
 
 Session Data
 ============
@@ -295,8 +284,8 @@ To access the session for a given request use the ``session()`` method::
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
 
-Hostname Parts
-==============
+Host and Domain Name
+====================
 
 .. php:method:: domain($tldLength = 1)
 
