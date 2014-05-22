@@ -3,7 +3,7 @@ Request and Response Objects
 
 .. php:namespace:: Cake\Network
 
-The request and response objects provide an abstraction around HTTP request and
+The request and response objects provide an abstraction around HTTP requests and
 responses. The request object in CakePHP allows you to easily introspect an
 incoming request, while the response object allows you to effortlessly create
 HTTP responses from your controllers.
@@ -19,33 +19,29 @@ Request
 ``Request`` is the default request object used in CakePHP. It centralizes
 a number of features for interrogating and interacting with request data.
 On each request one Request is created and then passed by reference to the various
-layers of an application that use request data. By default ``Request`` is assigned to
-``$this->request``, and is available in Controllers, Views and Helpers. You can
-also access it in Components by using the controller reference. Some of the duties
+layers of an application that use request data. By default the request is assigned to
+``$this->request``, and is available in Controllers, Cells, Views and Helpers. You can
+also access it in Components using the controller reference. Some of the duties
 ``Request`` performs include:
 
-* Process the GET, POST, and FILES arrays into the data structures you are
+* Processing the GET, POST, and FILES arrays into the data structures you are
   familiar with.
-* Provide environment introspection pertaining to the request. Things like the
-  headers sent, the client's IP address, and the subdomain/domain information
-  about the application the server is running on.
-* Provide access to request parameters both as array indexes and object
+* Providing environment introspection pertaining to the request. Information like the
+  headers sent, the client's IP address, and the subdomain/domain names
+  the server your application is running on.
+* Providing access to request parameters both as array indexes and object
   properties.
 
 Request Parameters
 ==================
 
-Request exposes several interfaces for accessing request parameters. The first uses object
-properties, the second uses array indexes, and the third uses ``$this->request->params``::
+Request exposes several interfaces for accessing request parameters::
 
-    $this->request->controller;
-    $this->request['controller'];
     $this->request->params['controller'];
     $this->request->param('controller');
 
-All of the above will access the same value. Multiple ways of accessing the
-parameters have been provided to ease migration for existing applications. All
-:ref:`route-elements` are accessed through this interface.
+All of the above will access the same value. All :ref:`route-elements` are
+accessed through this interface.
 
 In addition to :ref:`route-elements`, you also often need access to
 :ref:`passed-arguments`. These are both available on the request object as well::
@@ -64,9 +60,9 @@ are also all found in the request parameters:
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
   more information.
-* ``bare`` Present when the request came from :php:meth:`~Controller::requestAction()` and included the
+* ``bare`` Present when the request came from :php:meth:`~Cake\\Controller\\Controller::requestAction()` and included the
   bare option. Bare requests do not have layouts rendered.
-* ``requested`` Present and set to true when the action came from :php:meth:`~Controller::requestAction()`.
+* ``requested`` Present and set to true when the action came from :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Query String Parameters
 =======================
@@ -198,7 +194,7 @@ with :php:meth:`Cake\\Network\\Request::addDetector()`::
 
 .. php:method:: addDetector($name, $options)
 
-Add a detector to be used with :php:meth:`CakeRequest::is()`. See
+Add a detector to be used with :php:meth:`Cake\\Network\\Request::is()`. See
 :ref:`check-the-request` for more information.
 
 The request object provides an easy way to inspect certain conditions in a given
@@ -336,9 +332,27 @@ would return the user agent used for the request.
 
 Returns the referring address for the request.
 
-.. php:method:: clientIp($safe = true)
+.. php:method:: clientIp()
 
 Returns the current visitor's IP address.
+
+Trusting Proxy Headers
+======================
+
+If your application is behind a load balancer or running on a cloud service, you
+will often get the load balancer host, port and scheme in your requests. Often
+load balancers will also send ``HTTP-X-Forwarded-*`` headers with the original
+values. The forwarded headers will not be used by CakePHP out of the box. To
+have the request object use these headers set the ``trustProxy`` property to
+true::
+
+    $this->request->trustProxy = true;
+
+    // These methods will not use the proxied headers.
+    $this->request->port();
+    $this->request->host();
+    $this->request->scheme();
+    $this->request->clientIp();
 
 Checking Accept Headers
 =======================
