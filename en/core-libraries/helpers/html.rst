@@ -188,12 +188,6 @@ methods of the HtmlHelper and how to use them.
         // Output
         <meta name="description" content="enter any meta description here" />
 
-    If you want to add a custom meta tag then the first parameter
-    should be set to an array. To output a robots noindex tag use the
-    following code::
-
-        echo $this->Html->meta(['name' => 'robots', 'content' => 'noindex']);
-
 .. php:method:: docType(string $type = 'html5')
 
     :param string $type: The type of doctype being made.
