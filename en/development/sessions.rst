@@ -28,9 +28,8 @@ level ``Session`` key, and a number of options are available:
   built-in defaults.
 
 * ``Session.handler`` - Allows you to define a custom session handler. The core
-  database and cache session handlers use this. This option replaces
-  ``Session.save`` in previous versions. See below for additional information on
-  Session handlers.
+  database and cache session handlers use this. See below for additional
+  information on Session handlers.
 
 * ``Session.ini`` - Allows you to set additional session ini settings for your
   config. This combined with ``Session.handler`` replace the custom session
@@ -94,51 +93,29 @@ configuration. The built-in configurations are:
 Session Handlers
 ----------------
 
-Session handlers can also be defined in the session config array. When defined
-they allow you to map the various ``session_save_handler`` values to a class or
-object you want to use for session saving. There are two ways to use the
-'handler'. The first is to provide an array with 5 callables. These callables
-are then applied to ``session_set_save_handler``::
+Session handlers can also be defined in the session config array.  By defining
+the 'handler.engine' config key, you can name the class name, or provide
+a handler instance.  The class/object must implement the
+native PHP ``SessionHandlerInterface``. Implementing this interface will allow ``Session``
+to automatically map the methods for the handler. Both the core Cache and
+Database session handlers use this method for saving sessions. Additional
+settings for the handler should be placed inside the handler array. You can then
+read those values out from inside your handler::
 
-    Configure::write('Session', [
-        'userAgent' => false,
-        'cookie' => 'my_cookie',
-        'timeout' => 600,
+    'Session' => [
         'handler' => [
-            ['Foo', 'open'],
-            ['Foo', 'close'],
-            ['Foo', 'read'],
-            ['Foo', 'write'],
-            ['Foo', 'destroy'],
-            ['Foo', 'gc'],
-        ],
-        'ini' => [
-            'cookie_secure' => 1,
-            'use_trans_sid' => 0
+            'engine' => 'Database',
+            'model' => 'CustomSessions'
         ]
-    ]);
+    ]
 
-The second mode is to define an 'engine' key. This key should be a class name
-that implements ``SessionHandlerInterface``. Implementing this interface
-will allow ``Session`` to automatically map the methods for the handler. Both
-the core Cache and Database session handlers use this method for saving
-sessions. Additional settings for the handler should be placed inside the
-handler array. You can then read those values out from inside your handler.
-
-You can also use session handlers from inside plugins. By setting the engine to
-something like ``MyPlugin.PluginSessionHandler``. This will load and use the
-``PluginSessionHandler`` class from inside the MyPlugin of your application.
-
-
-SessionHandlerInterface
----------------------------
-
-CakePHP requires that all session handlers implement the native PHP interface.
-Implement the interface in your class and set ``Session.handler.engine`` to the
-class name you've created. CakePHP will attempt to load the handler from inside
-``App/Network/Session/$classname.php``. So if your class name is
-``AppSessionHandler`` the file should be
-``App/Network/Session/AppSessionHandler.php``.
+The above shows how you could setup the Database session handler with an
+application model. When using class names as your handler.engine, CakePHP will
+expect to find your class in the ``Network\\Session`` namespace. For example, if
+you had a ``AppSessionHandler`` class,  the file should be
+``App/Network/Session/AppSessionHandler.php``, and the class name should be
+``App\\Network\\Session\\AppSessionHandler``. You can also use session handlers
+from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
 Database Sessions
 -----------------
