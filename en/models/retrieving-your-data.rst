@@ -548,7 +548,7 @@ It is also possible to paginate via a custom find type as follows:
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
 
-To simply return the count of a custom find type, call count like you normally would, but pass in the 
+To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the 
 find type in an array for the second argument.
 
 ::
