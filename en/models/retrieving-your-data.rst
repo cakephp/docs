@@ -548,6 +548,21 @@ It is also possible to paginate via a custom find type as follows:
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
 
+To simply return the count of a custom find type, call count like you normally would, but pass in the 
+find type in an array for the second argument.
+
+::
+
+    class ArticlesController extends AppController {
+
+        // Will find the count of all published articles (using the available find defined above)
+        public function index() {
+            $count = $this->Article->find('count', array(
+                'type' => 'available'
+            ));
+        }
+    }
+
 If your pagination page count is becoming corrupt, it may be necessary to add the following code to
 your ``AppModel``, which should fix the pagination count:
 
