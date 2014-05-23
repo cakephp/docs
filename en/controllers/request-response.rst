@@ -123,8 +123,6 @@ Additional parameters for the decoding function can be passed as arguments to
 Environment Variables (from $_SERVER and $_ENV)
 ===============================================
 
-.. versionadded:: 3.0
-
 .. php:method:: env($key, $value = null)
 
 ``Request::env()`` is a wrapper for ``env()`` global function and acts as
