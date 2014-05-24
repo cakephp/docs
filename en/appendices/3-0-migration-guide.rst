@@ -348,18 +348,24 @@ Response
   doesn't set extension to ``csv`` if ``Accept`` header contains mimetype ``text/plain``
   which was a common annoyance when receiving a jQuery XHR request.
 
-Network\\Session
-================
+Sessions
+========
+
+The session class is no longer static, instead the session can be accessed
+through the request object. See the :doc:`/development/sessions` documentation
+for using the session object.
 
 * :php:class:`Cake\\Network\\Session` and related session classes have been
   moved under the ``Cake\Network`` namespace.
-
 * ``SessionHandlerInterface`` has been removed in favor of the one provided by
   PHP itself.
-
-* The property ``Session::$requestCountdown`` has been changed to protected.
-  To specify the request countdown value you can now use the ``Session.requestCountdown``
-  config variable.
+* The property ``Session::$requestCountdown`` has been removed.
+* The session checkAgent feature has been removed. It caused a number of bugs
+  when chrome frame, and flash player are involved.
+* The conventional sessions database table name is now ``sessions`` instead of
+  ``cake_sessions``.
+* The session cookie timeout is automatically updated in tandem with the timeout
+  in the session data.
 
 Network\\Http
 =============

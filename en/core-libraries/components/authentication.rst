@@ -436,14 +436,9 @@ Accessing the Logged In User
 
 Once a user is logged in, you will often need some particular
 information about the current user. You can access the currently logged
-in user using ``AuthComponent::user()``. This method is static, and can
-be used globally after the AuthComponent has been loaded. You can access
-it both as an instance method or as a static method::
+in user using ``AuthComponent::user()``::
 
-    // Use anywhere
-    AuthComponent::user('id')
-
-    // From inside a controller
+    // From inside a controller or other component.
     $this->Auth->user('id');
 
 
