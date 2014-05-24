@@ -76,10 +76,9 @@ On a UNIX system, if your web server user is different from your command line us
 you can run the following commands just once in your project to ensure that
 permissions will be setup properly::
 
-   setfacl -R -m u:www-data:rwx app/tmp
-   setfacl -R -m u:${USER}:rwx app/tmp
-   setfacl -R -d -m u:www-data:rwx app/tmp
-   setfacl -R -d -m u:${USER}:rwx app/tmp
+   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
 
 Setup
 =====
