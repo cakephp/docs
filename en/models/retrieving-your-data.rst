@@ -827,6 +827,11 @@ efficient query possible, ensure proper SQL syntax, and properly
 escape each individual part of the query. Using the array syntax
 also enables CakePHP to secure your queries against any SQL injection attack.
 
+.. warning::
+
+    CakePHP only escapes the array values. You should **never** put user data
+    into the keys. Doing so will make you vulnerable to SQL injections.
+
 At its most basic, an array-based query looks like this::
 
     $conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);

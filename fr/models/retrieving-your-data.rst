@@ -854,6 +854,12 @@ convenablement chaque partie de la requête. Utiliser une syntaxe en tableau
 permet aussi à CakePHP de sécuriser vos requêtes contre toute attaque
 d'injection SQL.
 
+.. warning::
+
+    CakePHP échappe seulement les valeurs de tableau. Vous **ne** devriez
+    **jamais** mettre les données d'utilisateur dans les clés. Faire ceci vous
+    rendra vulnérable aux injections SQL.
+
 Dans sa forme la plus simple, une requête basée sur un tableau ressemble à
 ceci::
 

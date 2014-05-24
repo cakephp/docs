@@ -386,7 +386,7 @@ le proxy dans la même classe d'authentification. Par exemple::
 .. note::
 
     Pour utiliser un proxy, vous devez appeler ``HttpSocket::configProxy()``
-    semblalble à ``HttpSocket::configAuth()``.
+    semblable à ``HttpSocket::configAuth()``.
 
 
 
