@@ -20,3 +20,12 @@ AclBehavior
 -----------
 
 - ``Model::parentNode()`` now gets the type (Aro, Aco) passed as first argument: ``$model->parentNode($type)``.
+
+Utility
+=======
+
+Validation
+----------
+
+- ``Validation::between`` has been deprecated, you should use
+  :php:meth:`Validation::lengthBetween` instead.

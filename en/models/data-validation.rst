@@ -61,7 +61,7 @@ some of these built-in validation rules::
                     'message'  => 'Alphabets and numbers only'
                 ),
                 'between' => array(
-                    'rule'    => array('between', 5, 15),
+                    'rule'    => array('lengthBetween', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
@@ -497,7 +497,7 @@ multiple calls to add to create as many rules as you like::
             'required' => 'create'
         ))
         ->add('password', 'size', array(
-            'rule' => array('between', 8, 20),
+            'rule' => array('lengthBetween', 8, 20),
             'message' => 'Password should be at least 8 chars long'
         ));
 
@@ -509,7 +509,7 @@ It is also possible to add multiple rules at once for a single field::
             'required' => 'create'
         ),
         'size' => array(
-            'rule' => array('between', 8, 20),
+            'rule' => array('lengthBetween', 8, 20),
             'message' => 'Password should be at least 8 chars long'
         )
     ));
@@ -622,7 +622,7 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: between(string $check, integer $min, integer $max)
+.. php:staticmethod:: lengthBetween(string $check, integer $min, integer $max)
 
     The length of the data for the field must fall within the specified
     numeric range. Both minimum and maximum values must be supplied.
@@ -630,7 +630,7 @@ with usage examples.
 
         public $validate = array(
             'password' => array(
-                'rule'    => array('between', 5, 15),
+                'rule'    => array('lengthBetween', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
             )
         );
