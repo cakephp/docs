@@ -71,6 +71,15 @@ views and session information.
 As such, make sure the directory ``app/tmp`` and all its subdirectories in your CakePHP installation
 are writable by the web server user.
 
+One common issue is that the app/tmp directories and subdirectories must be writable both by the web server and the command line user.
+On a UNIX system, if your web server user is different from your command line user,
+you can run the following commands just once in your project to ensure that
+permissions will be setup properly::
+
+   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+
 Setup
 =====
 
