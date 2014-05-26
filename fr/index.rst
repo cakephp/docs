@@ -25,7 +25,7 @@ Mise en route
 Conventions
 -----------
 
-Apprennez le :doc:`fonctionnement typique de CakePHP
+Apprenez le :doc:`fonctionnement typique de CakePHP
 </getting-started/a-typical-cakephp-request>` et les :doc:`conventions
 </getting-started/cakephp-conventions>` propres à CakePHP.
 
@@ -39,7 +39,7 @@ Views (vues)
 ------------
 
 Les views (vues) sont la représentation graphique des données dans CakePHP.
-Elles permettent de convertir les données extraites de models, dans le format
+Elles permettent de convertir les données extraites de Models, dans le format
 de sortie demandé par le client. En savoir plus sur les :doc:`/views`.
 
 Models (modèles)
@@ -47,7 +47,7 @@ Models (modèles)
 
 Les models (Modèles) sont le coeur de votre application. Ils gèrent la
 validation, le stockage et la récupération de vos données. En savoir plus
-sur les :doc:`/orm`.
+sur les :doc:`/models`.
 
 Obtenir de l'aide
 =================

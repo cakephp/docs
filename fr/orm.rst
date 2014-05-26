@@ -54,7 +54,7 @@ conventions dans CakePHP nous permettent d'éviter un code bancal et permet au
 framework d'inserer des classes de base lorsque votre application n'a pas créé
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
-ajouterions ce qui suit dans ``App/Model/Repository/ArticlesTable.php``::
+ajouterions ce qui suit dans ``App/Model/Table/ArticlesTable.php``::
 
     namespace App\Model\Repository;
 
@@ -124,3 +124,4 @@ Pour en savoir plus sur les Models
     orm/behaviors
     orm/database-basics
     orm/schema-system
+    console-and-shells/orm-cache

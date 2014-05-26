@@ -91,7 +91,7 @@ uncaptured content from the extending view. Assuming our view file has a
 .. code-block:: php
 
     <?php
-    // app/Template/Posts/view.ctp
+    // App/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
@@ -100,10 +100,10 @@ uncaptured content from the extending view. Assuming our view file has a
     ?>
     <li>
     <?php
-    echo $this->Html->link('edit', array(
+    echo $this->Html->link('edit', [
         'action' => 'edit',
         $post['Post']['id']
-    )); ?>
+    ]); ?>
     </li>
     <?php $this->end(); ?>
 
@@ -433,9 +433,9 @@ Passing Variables into an Element
 You can pass data to an element through the element's second
 argument::
 
-    echo $this->element('helpbox', array(
+    echo $this->element('helpbox', [
         "helptext" => "Oh, this text is very helpful."
-    ));
+    ]);
 
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that :php:meth:`Controller::set()` in
@@ -449,16 +449,16 @@ variable::
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
 
-    echo $this->element('helpbox', array(
+    echo $this->element('helpbox', [
             "helptext" => "This is passed to the element as $helptext",
             "foobar" => "This is passed to the element as $foobar",
-        ),
-        array(
+        ],
+        [
             // uses the "long_view" cache configuration
             "cache" => "long_view",
             // set to true to have before/afterRender called for the element
             "callbacks" => true
-        )
+        ]
     );
 
 Element caching is facilitated through the :php:class:`Cache` class. You can
@@ -467,9 +467,9 @@ gives you a great amount of flexibility to decide where and for how long element
 are stored. To cache different versions of the same element in an application,
 provide a unique cache key value using the following format::
 
-    $this->element('helpbox', array(), array(
-            "cache" => array('config' => 'short', 'key' => 'unique value')
-        )
+    $this->element('helpbox', [], [
+            "cache" => ['config' => 'short', 'key' => 'unique value']
+        ]
     );
 
 You can take full advantage of elements by using
@@ -520,7 +520,7 @@ cache parameter. If set to true, it will cache the element in the
 should be used. See :doc:`/core-libraries/caching` for more information on
 configuring :php:class:`Cache`. A simple example of caching an element would be::
 
-    echo $this->element('helpbox', array(), array('cache' => true));
+    echo $this->element('helpbox', [], ['cache' => true]);
 
 If you render the same element more than once in a view and have
 caching enabled, be sure to set the 'key' parameter to a different
@@ -529,14 +529,14 @@ overwriting the previous element() call's cached result. For example::
 
     echo $this->element(
         'helpbox',
-        array('var' => $var),
-        array('cache' => array('key' => 'first_use', 'config' => 'view_long')
+        ['var' => $var],
+        ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
     );
 
     echo $this->element(
         'helpbox',
-        array('var' => $differenVar),
-        array('cache' => array('key' => 'second_use', 'config' => 'view_long')
+        ['var' => $differenVar],
+        ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
     );
 
 The above will ensure that both element results are cached separately. If
@@ -626,7 +626,7 @@ To call any view method use ``$this->method()``
     Gets a list of all the available view variables in the current
     rendering scope. Returns an array of variable names.
 
-.. php:method:: element(string $elementPath, array $data, array $options = array())
+.. php:method:: element(string $elementPath, array $data, array $options = [])
 
     Renders an element or view partial. See the section on
     :ref:`view-elements` for more information and
@@ -640,7 +640,7 @@ To call any view method use ``$this->method()``
 
         $uuid = $this->uuid(
           'form',
-          array('controller' => 'posts', 'action' => 'index')
+          ['controller' => 'posts', 'action' => 'index']
         );
         //$uuid contains 'form0425fe3bad'
 

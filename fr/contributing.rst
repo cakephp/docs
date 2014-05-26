@@ -1,9 +1,8 @@
 Contribuer
 ##########
 
-Il y a un plusieurs façons de contribuer à CakePHP. Les sections
-suivantes couvrent les différentes façons avec lesquelles vous pouvez
-contribuer à CakePHP:
+Il y a plusieurs façons de contribuer à CakePHP. Les sections suivantes
+couvrent les différentes manières de contribuer à CakePHP:
 
 .. toctree::
     :maxdepth: 1
