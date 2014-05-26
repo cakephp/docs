@@ -12,7 +12,7 @@ Installing PHPUnit
 Installing from PEAR (Recommended)
 ----------------------------------
 
-PHPUnit recommends it be installed via the pear installer, to do so run the
+PHPUnit recommends it be installed via the PEAR installer, to do so run the
 following commands::
 
     pear channel-discover pear.phpunit.de
@@ -27,10 +27,10 @@ can be used to install packages from the PHPUnit channel::
 Installing manually
 -------------------
 
-In addition to pear, CakePHP also supports placing the PHPUnit directory inside
-one of your vendors directories along with all its dependencies.  Doing so is
+In addition to PEAR, CakePHP also supports placing the PHPUnit directory inside
+one of your vendors directories along with all its dependencies. Doing so is
 generally not recommended as PHPUnit is complicated to install as it is composed
-of many pear packages.  Installing with the pear installer is easier and faster.
+of many PEAR packages. Installing with the PEAR installer is easier and faster.
 
 If you do wish to install PHPUnit manually, you'll need to place it and all of
 its dependencies inside your applications ``Vendor`` directory.
@@ -173,15 +173,15 @@ the cases directory and use ``PHPUnit_Framework_TestSuite`` as a base class. An
 example Testsuite would look like::
 
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
-    
+
     /**
      * Suite define the tests for this suite
      *
      * @return void
      */
         public static function suite() {
-            $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
-            
+            $suite = new PHPUnit_Framework_TestSuite('JsHelper and all Engine Helpers');
+
             $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
             $suite->addTestFile($helperTestPath . 'JsHelperTest.php');
             $suite->addTestFile($helperTestPath . 'JqueryEngineHelperTest.php');

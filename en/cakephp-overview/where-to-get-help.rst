@@ -35,7 +35,7 @@ with the community and gain instant fame and fortune.
 The API
 =======
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
 Straight to the point and straight from the core developers, the
 CakePHP API (Application Programming Interface) is the most
@@ -74,24 +74,26 @@ and South America users. We'd love to hear from you, whether you
 need some help, want to find users in your area, or would like to
 donate your brand new sports car.
 
-The Google Group
-================
+.. _cakephp-official-communities:
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+Official CakePHP discussion group
+=================================
+`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
-CakePHP also has a very active Google Group. It can be a great
-resource for finding archived answers, frequently asked questions,
-and getting answers to immediate problems.
+CakePHP also has its official discusson group on Google Groups.
+There are thousands of people discussing CakePHP projects, helping each other,
+solving problems, building projects and sharing ideas.
+It can be a great resource for finding archived answers, frequently asked questions, and
+getting answers to immediate problems. Join other CakePHP users and start discussing.
 
-CakePHP Questions
-=================
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+Stackoverflow
+=============
 
-Simply register/login and ask a question. Wait until you've got some answers 
-and pick the correct answer. You can view, comment and vote on previously asked 
-and solved questions as well.
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
+Tag your questions with ``cakephp`` and the specific version you are using to enable
+existing users of stackoverflow to find your questions.
 
 .. meta::
     :title lang=en: Where to Get Help

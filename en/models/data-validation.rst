@@ -124,10 +124,12 @@ general usage pattern adding a rule for a single field::
 
     public $validate = array(
         'fieldName1' => array(
-            'rule'       => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+            // or: array('ruleName', 'param1', 'param2' ...)
+            'rule'       => 'ruleName',
             'required'   => true,
             'allowEmpty' => false,
-            'on'         => 'create', // or: 'update'
+            // or: 'update'
+            'on'         => 'create',
             'message'    => 'Your Error Message'
         )
     );
@@ -175,11 +177,11 @@ definitions.
 required
 --------
 
-This key accepts either a boolean, or ``create`` or ``update``.  Setting this
-key to ``true`` will make the field always required.  While setting it to
+This key accepts either a boolean, or ``create`` or ``update``. Setting this
+key to ``true`` will make the field always required. While setting it to
 ``create`` or ``update`` will make the field required only for update or  create
 operations. If 'required' is evaluated to true, the field must be present in the
-data array.  For example, if the validation rule has been defined as follows::
+data array. For example, if the validation rule has been defined as follows::
 
     public $validate = array(
         'login' => array(
@@ -278,7 +280,7 @@ field, this is basically how it should look::
 As you can see, this is quite similar to what we did in the
 previous section. There, for each field we had only one array of
 validation parameters. In this case, each 'fieldName' consists of
-an array of rule indices. Each 'ruleName' contains a separate array
+an array of rule indexes. Each 'ruleName' contains a separate array
 of validation parameters.
 
 This is better explained with a practical example::
@@ -329,7 +331,7 @@ fails::
         )
     );
 
-When specifying validation rules in this array form its possible to avoid
+When specifying validation rules in this array form it's possible to avoid
 providing the ``message`` key. Consider this example::
 
     public $validate = array(
@@ -394,11 +396,11 @@ function, as shown below::
         public function limitDuplicates($check, $limit) {
             // $check will have value: array('promotion_code' => 'some-value')
             // $limit will have value: 25
-            $existing_promo_count = $this->find('count', array(
+            $existingPromoCount = $this->find('count', array(
                 'conditions' => $check,
                 'recursive' => -1
             ));
-            return $existing_promo_count < $limit;
+            return $existingPromoCount < $limit;
         }
     }
 
@@ -431,7 +433,8 @@ stored in $this->data member variable::
         public $validate = array(
             'slug' => array(
                 'rule'    => 'alphaNumericDashUnderscore',
-                'message' => 'Slug can only be letters, numbers, dash and underscore'
+                'message' => 'Slug can only be letters,' .
+                    ' numbers, dash and underscore'
             )
         );
 
@@ -821,7 +824,7 @@ with usage examples.
     Note that unlike date(), datetime() will validate a date and a time.
 
 
-.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
+.. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
 
     This rule ensures that the data is a valid decimal number. A
     parameter can be passed to specify the number of digits required
@@ -876,16 +879,19 @@ with usage examples.
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule'    => array(
+                    'extension',
+                    array('gif', 'jpeg', 'png', 'jpg')
+                ),
                 'message' => 'Please supply a valid image.'
             )
         );
 
 .. php:staticmethod:: fileSize($check, $operator = null, $size = null)
 
-    This rule allows you to check filesizes.  You can use ``$operator`` to
-    decide the type of comparison you want to use.  All the operators supported
-    by :php:func:`~Validation::comparison()` are supported here as well.  This
+    This rule allows you to check filesizes. You can use ``$operator`` to
+    decide the type of comparison you want to use. All the operators supported
+    by :php:func:`~Validation::comparison()` are supported here as well. This
     method will automatically handle array values from ``$_FILES`` by reading
     from the ``tmp_name`` key if ``$check`` is an array an contains that key::
 
@@ -899,7 +905,7 @@ with usage examples.
     .. versionadded:: 2.3
         This method was added in 2.3
 
-.. php:staticmethod:: inList(string $check, array $list)
+.. php:staticmethod:: inList(string $check, array $list, $strict = true)
 
     This rule will ensure that the value is in a given set. It needs an
     array of values. The field is valid if the field's value matches
@@ -1197,6 +1203,9 @@ with usage examples.
             )
         );
 
+    This validation method uses a complex regular expression that can sometimes
+    cause issues with Apache2 on Windows using mod\_php.
+
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
@@ -1249,6 +1258,7 @@ ability to pass off to another validator has been added.
     Also feel free to contribute with your localized validation rules.
 
 .. toctree::
+    :maxdepth: 1
 
     data-validation/validating-data-from-the-controller
 

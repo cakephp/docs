@@ -94,7 +94,7 @@ ssl_ca
     MySQL, nécessite PHP 5.3.7+).
 settings
     Un tableau de clé/valeur qui doit être envoyé à la base de données du
-    serveur en tant que commandes ``SET`` quand la connection est créée.
+    serveur en tant que commandes ``SET`` quand la connexion est créée.
     Cette option est seulement supportée par MySQL, Postgres, et SQLserver en
     ce moment.
 
@@ -223,22 +223,22 @@ App.baseUrl
     Si vous ne souhaitez pas ou ne pouvez pas avoir le mod\_rewrite (ou
     un autre module compatible) et ne pouvez pas le lancer sur votre
     serveur, vous aurez besoin d'utiliser le système de belles URLs
-    construit dans Cake. Dans ``/app/Config/core.php``,
+    construit dans CakePHP. Dans ``/app/Config/core.php``,
     décommentez la ligne qui ressemble à cela::
-    
+
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
-        
+
     Retirez aussi ces fichiers .htaccess::
-    
+
         /.htaccess
         /app/.htaccess
         /app/webroot/.htaccess
-    
-    
+
+
     Cela fera apparaitre vos URLs de la façon suivante
     www.example.com/index.php/controllername/actionname/param plutôt
     que www.example.com/controllername/actionname/param.
-    
+
     Si vous installez CakePHP sur un serveur web autre que Apache, vous
     pouvez trouver des instructions pour faire fonctionner l'URL rewriting
     pour d'autres serveurs dans la section
@@ -263,7 +263,7 @@ Cache.check
 Session
     Contient un tableau de configurations à utiliser pour la configuration
     de session. La clé par défaut est utilisée pour définir un preset par
-    défaut pour utiliser les sessions, toute configuration déclarée ici va 
+    défaut pour utiliser les sessions, toute configuration déclarée ici va
     écraser les configurations de la config par défaut.
 
     Sous-clés
@@ -431,7 +431,7 @@ dans un contexte statique::
 
         Configure::read('Company');
 
-        //yields: 
+        //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     Si $key est laissé à null, toutes les valeurs dans Configure seront
@@ -575,7 +575,7 @@ les fichiers de configuration qui sont lisibles avec
 
 .. versionadded:: 2.2
     ``Configure::dump()`` a été ajouté dans 2.2.
-    
+
 Stocker la configuration de runtime
 -----------------------------------
 
@@ -759,11 +759,11 @@ Readers de Configuration intégrés
 Configuration de Inflection
 ===========================
 
-Les conventions de nommage de Cake peuvent être vraiment sympas - vous pouvez
-nommer votre table de base de données big\_boxes, votre model BigBox, votre
-controller BigBoxesController, et tout fonctionne ensemble automatiquement.
-La façon dont CakePHP sait comment lier les choses ensemble est
-en *infléctant* les mots entre leurs formes singulière et plurielle.
+Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
+pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
+votre controller BigBoxesController, et tout fonctionne ensemble
+automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
+est en *infléctant* les mots entre leurs formes singulière et plurielle.
 
 Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
 vous pouvez être dans des situations où l'inflecteur de CakePHP (la classe

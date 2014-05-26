@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-******************
+##################
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
@@ -8,9 +8,9 @@ plus agréable : nous espérons que vous le découvrirez au fur et à mesure que
 vous plongerez dans le code.
 
 Ce tutoriel vous accompagnera à travers la création d'une simple application
-de blog. Nous récupérerons et installerons Cake, créerons et configurerons une
-base de données et ajouterons suffisamment de logique applicative pour lister,
-ajouter, éditer et supprimer des posts.
+de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons
+une base de données et ajouterons suffisamment de logique applicative pour
+lister, ajouter, éditer et supprimer des posts.
 
 Voici ce dont vous aurez besoin :
 
@@ -18,10 +18,10 @@ Voici ce dont vous aurez besoin :
    bien que les instructions pour utiliser d'autres serveurs doivent
    être assez semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire
-   fonctionner Cake sans aucune configuration préalable.
+   fonctionner CakePHP sans aucune configuration préalable.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL.
    Vous aurez besoin d'un minimum de connaissance en SQL afin de créer une
-   base de données : Cake prendra les rênes à partir de là.
+   base de données : CakePHP prendra les rênes à partir de là.
 #. Des connaissances de base en PHP. Plus vous aurez d'expérience en
    programmation orienté objet, mieux ce sera ; mais n'ayez crainte, même
    si vous êtes adepte de la programmation procédurale.
@@ -32,10 +32,10 @@ Voici ce dont vous aurez besoin :
 
 Maintenant, lançons-nous !
 
-Obtenir Cake
-============
+Obtenir CakePHP
+===============
 
-Tout d'abord, récupérons une copie récente de Cake.
+Tout d'abord, récupérons une copie récente de CakePHP.
 
 Pour obtenir la dernière version, allez sur le site GitHub du projet CakePHP :
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
@@ -59,8 +59,25 @@ d'installation devrait ressembler à quelque chose comme cela::
         README
 
 A présent, il est peut-être temps de voir un peu comment fonctionne la
-structure de fichiers de Cake : lisez le chapitre
+structure de fichiers de CakePHP : lisez le chapitre
 :doc:`/getting-started/cakephp-folder-structure`.
+
+Permissions du répertoire Tmp
+-----------------------------
+
+Ensuite vous devrez mettre le répertoire ``app/tmp`` en écriture pour le
+serveur web. La meilleur façon de le faire est de trouver sous quel utilisateur
+votre serveur web tourne. Vous pouver mettre ``<?php echo exec('whoami'); ?>``
+à l'intérieur de tout fichier php que votre serveur web execute. Vous devriez
+voir afficher un nom d'utilisateur. Changez le possesseur du répertoire
+``app/tmp`` pour cet utilisateur. La commande finale que vous pouvez lancer
+(dans \*nix) pourrait ressembler à ceci::
+
+    $ chown -R www-data app/tmp
+
+Si pour une raison ou une autre, CakePHP ne peut écrire dans ce répertoire,
+vous verrez des avertissements et des exceptions attrapées vous disant que les
+données de cache n'ont pas pu être écrites.
 
 Créer la base de données du blog
 ================================
@@ -92,11 +109,11 @@ de données :
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
 Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
-Si vous respectez les conventions de nommage de Cake pour les bases de données
-et les classes (toutes deux expliquées au chapitre
+Si vous respectez les conventions de nommage de CakePHP pour les bases de
+données et les classes (toutes deux expliquées au chapitre
 :doc:`/getting-started/cakephp-conventions`), vous tirerez profit d'un
 grand nombre de fonctionnalités automatiques et vous éviterez des étapes
-de configurations. Cake est suffisamment souple pour implémenter les pires
+de configurations. CakePHP est suffisamment souple pour implémenter les pires
 schémas de bases de données, mais respecter les conventions vous fera gagner
 du temps.
 
@@ -104,16 +121,16 @@ Consultez le chapitre :doc:`/getting-started/cakephp-conventions` pour plus
 d'informations, mais il suffit de comprendre que nommer notre table 'posts'
 permet de la relier automatiquement à notre model Post, et qu'avoir des
 champs 'modified' et 'created' permet de les avoir gérés automagiquement par
-Cake.
+CakePHP.
 
-Configurer la base de données Cake
-==================================
+Configurer la base de données CakePHP
+=====================================
 
-En avant : indiquons à Cake où se trouve notre base de données et comment s'y
+En avant : indiquons à CakePHP où se trouve notre base de données et comment s'y
 connecter. Pour la plupart d'entre vous, c'est la première et dernière fois que
 vous configurerez quelque chose.
 
-Une copie du fichier de configuration Cake pour la base de données se trouve
+Une copie du fichier de configuration CakePHP pour la base de données se trouve
 dans ``/app/Config/database.php.default``. Faites une copie de ce fichier dans
 le même répertoire mais nommez le ``database.php``.
 
@@ -137,8 +154,8 @@ ressembler à ce qui suit::
 
 Une fois votre nouveau fichier ``database.php`` sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
-de Cake. Elle devrait également vous indiquer que votre fichier de connexion a
-été trouvé, et que Cake peut s'y connecter avec succès.
+de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion a
+été trouvé, et que CakePHP peut s'y connecter avec succès.
 
 .. note::
 
@@ -148,18 +165,17 @@ de Cake. Elle devrait également vous indiquer que votre fichier de connexion a
 Configuration facultative
 =========================
 
-Il y a trois autres élements qui peuvent être configurés. La plupart des
+Il y a quelques autres élements qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs. Le second consiste à définir un nombre personnalisé (ou "graine") à
-utiliser pour le chiffrage. Le troisième est de permettre l'accès en écriture
-à CakePHP pour son dossier ``tmp``.
+utiliser pour le chiffrage.
 
-Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/app/Config/core.php`` à la ligne 187.
-La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
-difficile à deviner::
+Le "grain de sel" est utilisé pour générer des hashes. Changez la valeur par
+défaut de ``Security.salt`` dans ``/app/Config/core.php`` à la ligne 187.
+La valeur de remplacement doit être longue, difficile à deviner et aussi
+aléatoire que possible::
 
     /**
      * Une chaîne aléatoire utilisée dans les méthodes de hachage sécurisées.
@@ -167,9 +183,9 @@ difficile à deviner::
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 La "graine cipher" est utilisée pour le chiffrage/déchiffrage des chaînes de
-caractères. Changez sa valeur par défaut en modifiant
-``/app/Config/core.php`` à la ligne 192. La nouvelle valeur n'a pas beaucoup
-d'importance du moment qu'elle est difficile à deviner::
+caractères. Changez la valeur par défaut de ``Security.cipherSeed`` dans
+``/app/Config/core.php`` à la ligne 192. La valeur de remplacement doit être
+un grand nombre entier aléatoire::
 
     /**
      * Une chaîne aléatoire de chiffre utilisée pour le chiffrage/déchiffrage
@@ -177,29 +193,18 @@ d'importance du moment qu'elle est difficile à deviner::
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
-La dernière étape consiste à rendre le dossier ``/app/tmp`` accessible en
-écriture. Le meilleur moyen de faire cela est de trouver sous quel utilisateur
-votre serveur web s'exécute (``<?php echo `whoami`; ?>``) et de modifier le
-propriétaire du dossier ``/app/tmp`` pour cet utilisateur. La commande à
-exécuter (sous \*nix) devrait ressembler à quelque chose comme cela ::
-
-    $ chown -R www-data app/tmp
-
-Si pour une raison quelconque CakePHP ne peut pas écrire dans ce répertoire,
-vous en serez informé par un message d'avertissement tant que vous n'êtes pas
-en mode production.
-
 Une note sur mod\_rewrite
 =========================
 
-Occasionnellement, un nouvel utilisateur peut avoir des problèmes de
+Occasionnellement, les nouveaux utilisateurs peuvent avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
-(pas d'images ou de styles css), cela signifie probablement que
+(pas d'images ou de styles CSS), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer
 à la section suivante sur l'URL rewriting pour que votre serveur
 web fonctionne:
 
 .. toctree::
+    :maxdepth: 1
 
     /installation/url-rewriting
 

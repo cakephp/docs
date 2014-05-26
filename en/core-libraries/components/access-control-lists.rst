@@ -270,10 +270,10 @@ Hobbits                 Allow 'ale'      Allowing access to ale!
 Merry                   Deny Ale         Denying ale.
 ======================= ================ =======================
 
-Defining Permissions: Cake's INI-based ACL
-==========================================
+Defining Permissions: CakePHP's INI-based ACL
+=============================================
 
-Cake's first ACL implementation was based on INI files stored in
+CakePHP's first ACL implementation was based on INI files stored in
 the CakePHP installation. While it's useful and stable, we recommend
 that you use the database backed ACL solution, mostly because of
 its ability to create new ACOs and AROs on the fly. We meant it for
@@ -364,8 +364,8 @@ Now that you've got your permissions defined, you can skip along to
 using the ACL component.
 
 
-Defining Permissions: Cake's Database ACL
-=========================================
+Defining Permissions: CakePHP's Database ACL
+============================================
 
 Now that we've covered INI-based ACL permissions, let's move on to
 the (more commonly used) database ACL.
@@ -374,7 +374,7 @@ Getting Started
 ---------------
 
 The default ACL permissions implementation is database powered.
-Cake's database ACL consists of a set of core models, and a console
+CakePHP's database ACL consists of a set of core models, and a console
 application that comes with your CakePHP installation. The models are
 used by CakePHP to interact with your database in order to store and
 retrieve nodes in tree format. The console application is used to
@@ -489,7 +489,7 @@ structure. Supply the ID of the parent node in the tree to create a
 new child.
 
 Before we can create new ACL objects, we'll need to load up their
-respective classes. The easiest way to do this is to include Cake's
+respective classes. The easiest way to do this is to include CakePHP's
 ACL Component in your controller's $components array:
 
 ::
@@ -704,7 +704,7 @@ little more interesting. Let's give it a try:
 Now that we've got our ARO tree setup properly, let's discuss a
 possible approach for structuring an ACO tree. While we can
 structure more of an abstract representation of our ACO's, it's
-often more practical to model an ACO tree after Cake's
+often more practical to model an ACO tree after CakePHP's
 Controller/Action setup. We've got five main objects we're handling
 in this Fellowship scenario, and the natural setup for that in a
 CakePHP application is a group of models, and ultimately the
@@ -712,7 +712,7 @@ controllers that manipulate them. Past the controllers themselves,
 we'll want to control access to specific actions in those
 controllers.
 
-Based on that idea, let's set up an ACO tree that will mimic a Cake
+Based on that idea, let's set up an ACO tree that will mimic a CakePHP
 app setup. Since we have five ACOs, we'll create an ACO tree that
 should end up looking something like the following:
 
@@ -723,14 +723,11 @@ should end up looking something like the following:
 -  DiplomaticEfforts
 -  Ales
 
-One nice thing about a CakePHP ACL setup is that each ACO
-automatically contains four properties related to CRUD (create,
-read, update, and delete) actions. You can create children nodes
-under each of these five main ACOs, but using Cake's built in
-action management covers basic CRUD operations on a given object.
-Keeping this in mind will make your ACO trees smaller and easier to
-maintain. We'll see how these are used later on when we discuss how
-to assign permissions.
+You can create children nodes under each of these five main ACOs,
+but using CakePHP's built-in action management covers basic CRUD
+operations on a given object. Keeping this in mind will make your
+ACO trees smaller and easier to maintain. We'll see how these are
+used later on when we discuss how to assign permissions.
 
 Since you're now a pro at adding AROs, use those same techniques to
 create this ACO tree. Create these upper level groups using the
@@ -740,38 +737,32 @@ Assigning Permissions
 ---------------------
 
 After creating our ACOs and AROs, we can finally assign permissions
-between the two groups. This is done using Cake's core Acl
+between the two groups. This is done using CakePHP's core Acl
 component. Let's continue on with our example.
 
-Here we'll work in the context of a controller action. We do that
-because permissions are managed by the Acl Component.
+Here we'll work with Acl permisions in the context of a controller
+action. Let's set up some basic permissions using the AclComponent in 
+an action inside our controller.
 
 ::
 
     class SomethingsController extends AppController {
         // You might want to place this in the AppController
         // instead, but here works great too.
-
         public $components = array('Acl');
 
-    }
+        public function index() {
+            // Allow warriors complete access to weapons
+            // Both these examples use the alias syntax
+            $this->Acl->allow('warriors', 'Weapons');
 
-Let's set up some basic permissions using the AclComponent in an
-action inside this controller.
+            // Though the King may not want to let everyone
+            // have unfettered access
+            $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
+            $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
 
-::
-
-    public function index() {
-        // Allow warriors complete access to weapons
-        // Both these examples use the alias syntax
-        $this->Acl->allow('warriors', 'Weapons');
-
-        // Though the King may not want to let everyone
-        // have unfettered access
-        $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
-        $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
-
-        die(print_r('done', 1));
+            die(print_r('done', 1));
+        }
     }
 
 The first call we make to the AclComponent allows any user under
@@ -779,9 +770,10 @@ the 'warriors' ARO group full access to anything under the
 'Weapons' ACO group. Here we're just addressing ACOs and AROs by
 their aliases.
 
-Notice the usage of the third parameter? That's where we use those
-handy actions that are in-built for all CakePHP ACOs. The default
-options for that parameter are ``create``, ``read``, ``update``,
+Notice the usage of the third parameter? One nice thing about the CakePHP
+ACL setup is that permissions contain four built-in properties related
+to CRUD (create, read, update, and delete) actions for convenience. The 
+default options for that parameter are ``create``, ``read``, ``update``,
 and ``delete`` but you can add a column in the ``aros_acos``
 database table (prefixed with \_ - for example ``_admin``) and use
 it alongside the defaults.
@@ -798,8 +790,16 @@ yourself. What we have above is equivalent to this:
     // 6342 = Legolas
     // 1564 = Gimli
 
-    $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
-    $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 6342),
+      'Weapons',
+      'delete'
+    );
+    $this->Acl->deny(
+      array('model' => 'User', 'foreign_key' => 1564),
+      'Weapons',
+      'delete'
+    );
 
 .. note::
 

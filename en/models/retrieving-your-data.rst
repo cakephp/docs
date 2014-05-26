@@ -25,8 +25,10 @@ optional::
     array(
         'conditions' => array('Model.field' => $thisValue), //array of conditions
         'recursive' => 1, //int
-        'fields' => array('Model.field1', 'DISTINCT Model.field2'), //array of field names
-        'order' => array('Model.created', 'Model.field3 DESC'), //string or array defining order
+        //array of field names
+        'fields' => array('Model.field1', 'DISTINCT Model.field2'),
+        //string or array defining order
+        'order' => array('Model.created', 'Model.field3 DESC'),
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
@@ -38,6 +40,7 @@ It's also possible to add and use other parameters, as is made use
 of by some find types, behaviors and of course possibly with your
 own model methods.
 
+If your find operation fails to match any records you will get an empty array.
 
 .. _model-find-first:
 
@@ -362,7 +365,7 @@ returned first.
 .. warning::
 
     If you specify ``fields``, you need to always include the
-    parent_id (or its current alias)::
+    id & parent_id (or their current aliases)::
 
         public function some_function() {
             $categories = $this->Category->find('threaded', array(
@@ -384,7 +387,10 @@ return the row before and after the one you request. Below is a simple
 ::
 
     public function some_function() {
-       $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
+        $neighbors = $this->Article->find(
+            'neighbors',
+            array('field' => 'id', 'value' => 3)
+        );
     }
 
 You can see in this example the two required elements of the
@@ -563,8 +569,11 @@ your ``AppModel``, which should fix pagination count:
      */
         protected function _findCount($state, $query, $results = array()) {
             if ($state === 'before') {
-                if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
-                    $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
+                if (isset($query['type']) &&
+                    isset($this->findMethods[$query['type']])) {
+                    $query = $this->{
+                        '_find' . ucfirst($query['type'])
+                    }('before', $query);
                     if (!empty($query['fields']) && is_array($query['fields'])) {
                         if (!preg_match('/^count/i', current($query['fields']))) {
                             unset($query['fields']);
@@ -766,8 +775,12 @@ found returns false.
     $this->Post->id = 22;
     echo $this->Post->field('name'); // echo the name for row id 22
 
-    echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
     // echo the name of the last created instance
+    echo $this->Post->field(
+        'name',
+        array('created <' => date('Y-m-d H:i:s')),
+        'created DESC'
+    );
 
 :php:meth:`Model::read()`
 =========================
@@ -849,7 +862,9 @@ To do a NOT IN(...) match to find posts where the title is not in
 the given set of values::
 
     array(
-        "NOT" => array("Post.title" => array("First post", "Second post", "Third post"))
+        "NOT" => array(
+            "Post.title" => array("First post", "Second post", "Third post")
+        )
     )
 
 Adding additional filters to the conditions is as simple as adding
@@ -997,7 +1012,7 @@ Which produces the following SQL::
     WHERE
        ((`Company`.`name` = 'Future Holdings')
        OR
-       (`Company`.`name` = 'Steel Mega Works'))
+       (`Company`.`city` = 'CA'))
     AND
        ((`Company`.`status` = 'active')
        OR (NOT (`Company`.`status` IN ('inactive', 'suspended'))))

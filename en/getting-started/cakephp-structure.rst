@@ -9,6 +9,8 @@ to quickly add functionality to the base MVC classes in your
 applications. Right now we'll stay at a higher level, so look for
 the details on how to use these tools later on.
 
+.. _application-extensions:
+
 Application Extensions
 ======================
 
@@ -19,7 +21,7 @@ application-wide changes. AppController (located at
 ``/app/Model/AppModel.php``) are great places to put methods you want to share
 between all controllers, helpers or models.
 
-Although they aren't classes or files, routes play a role in
+Although routes aren't classes or files, they play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the
 URL ``/controller/action/var1/var2`` maps to
@@ -48,14 +50,11 @@ Controllers are also fitted with callbacks. These callbacks are
 available for your use, just in case you need to insert some logic
 between CakePHP's core operations. Callbacks available include:
 
--  ``beforeFilter()``, executed before any controller action logic
--  ``beforeRender()``, executed after controller logic, but before
+-  :php:meth:`~Controller::afterFilter()`, executed after all controller logic,
+   including the view render.
+-  :php:meth:`~Controller::beforeFilter()`, executed before any controller action logic
+-  :php:meth:`~Controller::beforeRender()`, executed after controller logic, but before
    the view is rendered
--  ``afterFilter()``, executed after all controller logic,
-   including the view render. There may be no difference between
-   ``afterRender()`` and ``afterFilter()`` unless you've manually made
-   a call to ``render()`` in your controller action and have included
-   some logic after that call.
 
 Model Extensions ("Behaviors")
 ==============================
@@ -81,6 +80,7 @@ Just like controllers, models are featured with callbacks as well:
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()
@@ -95,7 +95,7 @@ View Extensions ("Helpers")
 A Helper is a class that aids in view logic. Much like a component
 used among controllers, helpers allow presentational logic to be
 accessed and shared between views. One of the core helpers,
-JsHelper, makes Ajax requests within views much easier and comes with support for jQuery (default), Prototype and Mootools.
+JsHelper, makes AJAX requests within views much easier and comes with support for jQuery (default), Prototype and Mootools.
 
 Most applications have pieces of view code that are used
 repeatedly. CakePHP facilitates view code reuse with layouts and

@@ -149,7 +149,7 @@ CakeRequest
 
 - CakeRequestは、 ``PUT``, ``DELETE`` リクエスト時に、 ``application/x-www-form-urlencoded`` リクエストボディを自動的にデコードするようになりました。
   このデータは、POSTデータと同じように ``$this->data`` に格納されます
- 
+
 ユーティリティ
 ==============
 
@@ -191,7 +191,7 @@ CakeTime
 FormHelper
 ----------
 
-- Formヘルパーは、inputに必要なクラスの追加を、よりうまく扱うようになりました。 
+- Formヘルパーは、inputに必要なクラスの追加を、よりうまく扱うようになりました。
   これは  ``on`` キーを受け取ります
 - :php:meth:`FormHelper::radio()` メソッドは、 ``empty`` をサポートします。
   これは、 ``select()`` のemptyオプションに似たものです
@@ -224,7 +224,7 @@ Dispatcher
 - この機能を利用するために、 ``app/Config/bootstrap.php`` ファイルをアップデートする必要があります。
   詳細は、 :ref:`required-steps-to-upgrade-2-2` を参照ください
 
-  
+
 Router
 ------
 
@@ -295,4 +295,3 @@ Redis エンジン
   * :php:meth:`Validation::naturalNumber()`
   * :php:meth:`Validation::mimeType()`
   * :php:meth:`Validation::uploadError()`
-

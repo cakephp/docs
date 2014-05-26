@@ -12,6 +12,9 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf).
 
+These files can vary on different distributions and apache versions.
+You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
+
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
@@ -19,10 +22,10 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # directory (and its subdirectories).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # First, we configure the "default" to be a very restrictive set of
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -51,7 +54,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    copy.
 
 #. Make sure your copy of CakePHP is from the downloads section of
-   the site or our GIT repository, and has been unpacked correctly by
+   the site or our Git repository, and has been unpacked correctly by
    checking for .htaccess files.
 
    CakePHP root directory (needs to be copied to your document, this
@@ -82,10 +85,10 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
-   If your CakePHP site still has problems with mod\_rewrite you might 
-   want to try and modify settings for virtualhosts. If on ubuntu, 
-   edit the file /etc/apache2/sites-available/default (location is 
-   distribution dependent). In this file, ensure that 
+   If your CakePHP site still has problems with mod\_rewrite you might
+   want to try and modify settings for Virtual Hosts. If on Ubuntu,
+   edit the file /etc/apache2/sites-available/default (location is
+   distribution dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
        <Directory />
@@ -99,8 +102,9 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            Allow from all
        </Directory>
 
-   If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   If on Mac OSX, another solution is to use the tool
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   to make a Virtual Host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -125,7 +129,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    The details of those changes will depend on your setup, and can
    include additional things that are not CakePHP related. Please refer
    to Apache's online documentation for more information.
-   
+
 #. (Optional) To improve production setup, you should prevent invalid assets
    from being parsed by CakePHP. Modify your webroot .htaccess to something like::
 
@@ -137,13 +141,13 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
-       
+
    The above will simply prevent incorrect assets from being sent to index.php
    and instead display your webserver's 404 page.
-   
-   Additionally you can create a matching HTML 404 page, or use the default 
+
+   Additionally you can create a matching HTML 404 page, or use the default
    built-in CakePHP 404 by adding an ``ErrorDocument`` directive::
-       
+
        ErrorDocument 404 /404-not-found
 
 Pretty URLs on nginx
@@ -167,7 +171,7 @@ you will need PHP running as a FastCGI instance.
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;
@@ -176,7 +180,7 @@ you will need PHP running as a FastCGI instance.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
@@ -210,21 +214,27 @@ these steps:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                    <rule name="Rewrite requests to test.php"
+                      stopProcessing="true">
                         <match url="^test.php(.*)$" ignoreCase="false" />
                         <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*"
+                      stopProcessing="true">
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
                     </rule>
-                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>
@@ -232,8 +242,21 @@ these steps:
     </configuration>
 
 Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, css, js, and rerouting should work
+rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
 correctly.
+
+URL-Rewriting on lighttpd
+=========================
+
+Lighttpd does not support .htaccess functions, therefore you can remove all .htaccess files. 
+In the lighttpd configuration make sure you've activiated "mod_rewrite". Add a line:
+
+::
+
+    url.rewrite-if-not-file =(
+        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
+    )
+
 
 I don't / can't use URL rewriting
 =================================

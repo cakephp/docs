@@ -6,25 +6,28 @@
 Welcome
 #######
 
-The CakePHP cookbook, is an openly developed community editable documentation
-project.  We hope to maintain a high level of quality, validity and accuracy for 
+The CakePHP cookbook is an openly developed and community editable documentation
+project. We hope to maintain a high level of quality, validity and accuracy for
+the documentation. Notice the "Improve this Doc" button in the upper right-hand
+corner; it will direct you to the GitHub online editor of the active page,
+allowing you to easily contribute any additions, deletions, or corrections to
 the documentation.
 
 .. container:: offline-download
 
-    **Read the book anywhere**
+    **Read the Book Anywhere**
 
-    Enjoy the CakePHP cookbook almost anywhere.  Available, as both a PDF and
+    Enjoy the CakePHP cookbook almost anywhere. Available, as both a PDF and
     EPUB, you can now read the docs on more devices and offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
-Getting started
+Getting Started
 ===============
 
-Build a blog
+Build a Blog
 ------------
 
 Get started with the :doc:`blog tutorial</tutorials-and-examples/blog/blog>`.
@@ -41,26 +44,26 @@ Controllers
 -----------
 
 Controllers handle requests, and help co-ordinate and prepare
-the response for the client.  Read more about :doc:`/controllers`
+the response for the client. Read more about :doc:`/controllers`.
 
 Views
 -----
 
-Views are the presentation layer in CakePHP.  They convert
+Views are the presentation layer in CakePHP. They convert
 the data fetched from Models, into the output format the client
-requested.  Read more about :doc:`/views`
+requested. Read more about :doc:`/views`.
 
 Models
 ------
 
 Models are the heart of your application, they handle the validation,
-storage and retrieval of your data.  Read more about :doc:`/models`
+storage and retrieval of your data. Read more about :doc:`/models`.
 
 Getting Help
 ============
 
 If you're stuck, there are a number of places :doc:`you can get help
-</cakephp-overview/where-to-get-help>`
+</cakephp-overview/where-to-get-help>`.
 
 
 

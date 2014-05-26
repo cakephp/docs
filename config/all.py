@@ -12,7 +12,8 @@
 extensions = [
     'sphinx.ext.todo',
     'sphinxcontrib.phpdomain',
-    'config.cakei18n'
+    'config.cakei18n',
+    'config.cakebranch'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -29,7 +30,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'CakePHP Cookbook'
-copyright = u'2013, Cake Software Foundation, Inc'
+copyright = u'2014, Cake Software Foundation, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -49,7 +50,10 @@ release = '2.x'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['themes', 'core-libraries/components/email.rst']
+exclude_patterns = [
+    'themes',
+    'core-libraries/components/email.rst'
+]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -244,19 +248,22 @@ epub_copyright = u'2013, Cake Software Foundation, Inc.'
 
 epub_theme = 'cakephp-epub'
 
+# The cover page information.
+epub_cover = ('_static/epub-logo.png', 'epub-cover.html')
+
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
 #epub_language = ''
 
 # The scheme of the identifier. Typical schemes are ISBN or URL.
-#epub_scheme = ''
+epub_scheme = 'URL'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
-#epub_identifier = ''
+epub_identifier = 'http://cakephp.org'
 
 # A unique identification for the text.
-#epub_uid = ''
+epub_uid = 'cakephpcookbook1393624653'
 
 # HTML files that should be inserted before the pages created by sphinx.
 # The format is a list of tuples containing the path and title.
@@ -271,6 +278,7 @@ epub_exclude_files = [
     'index.html',
     'pdf-contents.html',
     'search.html',
+    'contents.html'
 ]
 
 # The depth of the table of contents in toc.ncx.
@@ -279,8 +287,14 @@ epub_tocdepth = 2
 # Allow duplicate toc entries.
 epub_tocdup = False
 
+# If true, add an index to the epub document.
+epub_use_index = False
+
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
+
+# The GitHub branch name for this version of the docs
+branch = 'master'
 
 # Hack to render the php source code without the <?php tag
 from sphinx.highlighting import lexers

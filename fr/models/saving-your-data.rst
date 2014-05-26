@@ -284,6 +284,8 @@ une fois. Les options suivantes peuvent être utilisées:
 * ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 * ``deep``: (since 2.1) Si défini à true, les données associées sont aussi
   sauvegardées, regardez aussi saveAssociated.
+* ``callbacks`` Défini à false pour désactiver les callbacks. En utilisant
+  'before' ou 'after' va activer seulement ces callbacks.
 * ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
   counter caches (si il y en a).
 
@@ -316,11 +318,14 @@ Pour sauvegarder les données associées avec ``$options['deep'] = true``
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
-    )
+    );
     $data = array(
-        array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
+        array(
+            'Article' => array('title' => 'title 1'),
+            'Assoc' => array('field' => 'value')
+        ),
         array('Article' => array('title' => 'title 2')),
-    )
+    );
     $Model->saveMany($data, array('deep' => true));
 
 Gardez à l'esprit que si vous souhaitez mettre à jour un enregistrement au lieu
@@ -328,8 +333,10 @@ d'en créer un nouveau, vous devez juste ajouter en index la clé primaire à la
 ligne de donnée::
 
     array(
-        array('Article' => array('title' => 'New article')), // Ceci crée une nouvelle ligne
-        array('Article' => array('id' => 2, 'title' => 'title 2')), // Ceci met à jour une ligne existante
+        // Ceci crée une nouvelle ligne
+        array('Article' => array('title' => 'New article')),
+        // Ceci met à jour une ligne existante
+        array('Article' => array('id' => 2, 'title' => 'title 2')),
     )
 
 
@@ -423,9 +430,12 @@ ceci::
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Sauvegarder aussi un nouveau user', 'User' => array('first' => 'mad', 'last' => 'coder'))
+            array(
+                'body' => 'Save a new user as well',
+                'User' => array('first' => 'mad', 'last' => 'coder')
+            ),
         ),
-    )
+    );
 
 Et sauvegarder cette donnée avec::
 
@@ -578,7 +588,7 @@ Regardons comment les données stockées dans une table jointe pour deux models
 sont sauvegardées. Comme montré dans la section :ref:`hasMany-through`,
 la table jointe est associée pour chaque model en utilisant un type de relation
 `hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole
-Cake qui nous demande d'écrire une application qui lui permette de connecter
+CakePHP qui nous demande d'écrire une application qui lui permette de connecter
 la présence d'un étudiant à un cours avec les journées assistées et
 validées. Jettez un oeil au code suivant.::
 
@@ -587,7 +597,10 @@ validées. Jettez un oeil au code suivant.::
        public $uses = array('CourseMembership');
 
        public function index() {
-           $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
+           $this->set(
+                'courseMembershipsList',
+                $this->CourseMembership->find('all')
+            );
        }
 
        public function add() {
@@ -634,9 +647,9 @@ Le tableau de données ressemblera à ceci quand il sera soumis.::
 
     )
 
-Cake va heureusement être capable de sauvegarder le lot ensemble et d'assigner
-les clés étrangères de Student et de Course dans CourseMembership avec
-un appel `saveAssociated` avec cette structure de données. Si nous lançons
+CakePHP va heureusement être capable de sauvegarder le lot ensemble et
+d'assigner les clés étrangères de Student et de Course dans CourseMembership
+avec un appel `saveAssociated` avec cette structure de données. Si nous lançons
 l'action index de notre CourseMembershipsController, la structure de données
 reçue maintenant par un find('all') est::
 
@@ -678,9 +691,27 @@ et ensuite les deux meta-champs pour CourseMembership, par ex.::
 
         // View/CourseMemberships/add.ctp
 
-        <?php echo $form->create('CourseMembership'); ?>
-            <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
-            <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
+        <?php echo $this->Form->create('CourseMembership'); ?>
+            <?php
+                echo $this->Form->input(
+                    'Student.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Student ID',
+                        'default' => 1
+                    )
+                );
+            ?>
+            <?php
+                echo $this->Form->input(
+                    'Course.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Course ID',
+                        'default' => 1
+                    )
+                );
+            ?>
             <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
             <?php echo $this->Form->input('CourseMembership.grade'); ?>
             <button type="submit">Save</button>
@@ -707,7 +738,7 @@ Et le POST résultant::
         )
     )
 
-Encore une fois, Cake est bon pour nous et envoie les id de Student et de
+Encore une fois, CakePHP est bon pour nous et envoie les id de Student et de
 Course dans CourseMembership avec `saveAssociated`.
 
 .. _saving-habtm:
@@ -755,7 +786,7 @@ celui qui suit::
             (
                 [Recipe] => Array
                     (
-                        [id] => 42
+                        [id] => 43
                     )
                 [Tag] => Array
                     (
@@ -845,7 +876,7 @@ légèrement différemment. Le nom du Tag est défini en utilisant la convention
     $this->Form->input('Tag');
 
 En utilisant le code précédent, un liste déroulante est créée, permettant aux
-multiples choix d'être automatiquement sauvegarder au Recipe existant en étant
+multiples choix d'être automatiquement sauvegardés au Recipe existant en étant
 ajouté à la base de données.
 
 Self HABTM
@@ -885,7 +916,7 @@ Devient ceci::
 Que faire quand HABTM devient compliqué?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, Cake
+Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, CakePHP
 supprime toutes les lignes de la table jointe avant d'en sauvegarder de
 nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant)
 associés. Vous mettez ensuite à jour le Club avec 2 Children. Le Club aura

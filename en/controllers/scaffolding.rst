@@ -20,7 +20,7 @@ of a project in order to get started. It isn't meant to be
 completely flexible, it's meant as a temporary way to get up and
 going. If you find yourself really wanting to customize your logic
 and your views, it's time to pull your scaffolding down in order to
-write some code. CakePHP's Bake console, covered in the next
+write some code. CakePHP's :doc:`bake console </console-and-shells>`, covered in the next
 section, is a great next step: it generates all the code that would
 produce the same result as the most current scaffold.
 
@@ -35,33 +35,32 @@ delete and edit buttons, standard forms for editing and standard
 views for inspecting a single item in the database.
 
 To add scaffolding to your application, in the controller, add the
-$scaffold variable::
+``$scaffold`` variable::
 
     class CategoriesController extends AppController {
         public $scaffold;
     }
 
 Assuming you've created even the most basic Category model class
-file (in /app/Model/Category.php), you're ready to go. Visit
+file (in ``app/Model/Category.php``), you're ready to go. Visit
 http://example.com/categories to see your new scaffold.
 
 .. note::
 
     Creating methods in controllers that are scaffolded can cause
-    unwanted results. For example, if you create an index() method in a
+    unwanted results. For example, if you create an ``index()`` method in a
     scaffolded controller, your index method will be rendered rather
     than the scaffolding functionality.
 
-Scaffolding is knowledgeable about model associations, so if your
-Category model belongsTo a User, you'll see related User IDs in the
-Category listings. While scaffolding "knows" about model
+Scaffolding is aware of model's associations; so, if your
+Category model ``belongsTo`` User, you'll see related User IDs in the
+Category listings. While scaffolding "knows" about model's
 associations, you will not see any related records in the scaffold
 views until you manually add the association code to the model. For
-example, if Group hasMany User and User belongsTo Group, you have
-to manually add the following code in your User and Group models.
-Before you add the following code, the view displays an empty
-select input for Group in the New User form. After you add the
-following code, the view displays a select input populated with IDs
+example, if Group ``hasMany`` User and User ``belongsTo`` Group, you have
+to manually add the following code to your User and Group models.
+Before you do it, the view displays an empty
+select input for Group in the New User form; after – populated with IDs
 or names from the Group table in the New User form::
 
     // In Group.php
@@ -70,10 +69,10 @@ or names from the Group table in the New User form::
     public $belongsTo = 'Group';
 
 If you'd rather see something besides an ID (like the user's first
-name), you can set the $displayField variable in the model. Let's
-set the $displayField variable in our User class so that users
+name), you can set the ``$displayField`` variable in the model. Let's
+set the ``$displayField`` variable in our User class so that users
 related to categories will be shown by first name rather than just
-an ID in scaffolding. This feature makes scaffolding more readable
+by ID in scaffolding. This feature makes scaffolding more readable
 in many instances::
 
     class User extends AppModel {
@@ -84,11 +83,11 @@ in many instances::
 Creating a simple admin interface with scaffolding
 ==================================================
 
-If you have enabled admin routing in your app/Config/core.php, with
-``Configure::write('Routing.prefixes', array('admin'));`` you can
+If you have enabled admin routing in your ``app/Config/core.php`` with
+``Configure::write('Routing.prefixes', array('admin'));``, you can
 use scaffolding to generate an admin interface.
 
-Once you have enabled admin routing assign your admin prefix to the
+Once you have enabled admin routing, assign your admin prefix to the
 scaffolding variable::
 
     public $scaffold = 'admin';
@@ -103,14 +102,14 @@ You will now be able to access admin scaffolded actions::
 
 This is an easy way to create a simple backend interface quickly.
 Keep in mind that you cannot have both admin and non-admin methods
-scaffolded at the same time. As with normal scaffolding you can
+scaffolded at the same time. As with normal scaffolding, you can
 override individual methods and replace them with your own::
 
     public function admin_view($id = null) {
       // custom code here
     }
 
-Once you have replaced a scaffolded action you will need to create
+Once you have replaced a scaffolded action, you will need to create
 a view file for the action as well.
 
 Customizing Scaffold Views
@@ -124,15 +123,15 @@ such a customization may be useful during prototyping iterations.
 Custom scaffolding views for a specific controller
 (PostsController in this example) should be placed like so::
 
-    /app/View/Posts/scaffold.index.ctp
-    /app/View/Posts/scaffold.form.ctp
-    /app/View/Posts/scaffold.view.ctp
+    app/View/Posts/scaffold.index.ctp
+    app/View/Posts/scaffold.form.ctp
+    app/View/Posts/scaffold.view.ctp
 
 Custom scaffolding views for all controllers should be placed like so::
 
-    /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/form.ctp
-    /app/View/Scaffolds/view.ctp
+    app/View/Scaffolds/index.ctp
+    app/View/Scaffolds/form.ctp
+    app/View/Scaffolds/view.ctp
 
 
 .. meta::

@@ -2,7 +2,7 @@ Código
 ######
 
 Patches e pull requests são as melhores formas de colaborar com o CakePHP.
-Você pode anexar patchs nos tickets do `lighthouse <http://cakephp.lighthouseapp.com>`_.
+Você pode anexar patchs nos tickets do `github <http://github.com/cakephp/cakephp/issues>`_.
 Pull requests podem ser feitos através do github e geralmente é a melhor forma de contribuir.
 
 Configuração Inicial

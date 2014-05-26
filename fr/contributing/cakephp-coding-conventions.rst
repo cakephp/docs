@@ -1,7 +1,7 @@
 Normes de codes
 ###############
 
-Les développeurs de Cake vont utiliser les normes de code suivantes.
+Les développeurs de CakePHP vont utiliser les normes de code suivantes.
 
 Il est recommandé que les autres personnes qui développent des IngredientsCake
 suivent les mêmes normes.
@@ -254,6 +254,17 @@ fichier, doivent toujours être précédés par un retour à la ligne.
 Inclure les fichiers
 ====================
 
+``include``, ``require``, ``include_once`` et ``require_once`` n'ont pas de
+parenthèses::
+
+    // mauvais = parenthèses
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // bon = pas de parenthèses
+    require_once 'ClassFileName.php';
+    require_once $class;
+
 Quand on inclut les fichiers avec des classes ou librairies, utilisez seulement
 et toujours la fonction `require\_once <http://php.net/require_once>`_.
 
@@ -388,6 +399,26 @@ resource
     Type Ressource (retourné par exemple par mysql\_connect()).
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
     indiquer si il est inconnu, ou les types possibles.
+
+Casting
+-------
+
+Pour le casting, nous utilisons:
+
+Type
+    Description
+(bool)
+		Cast pour boolean.
+(int)
+		Cast pour integer.
+(float)
+		Cast pour float.
+(string)
+		Cast pour string.
+(array)
+		Cast pour array.
+(object)
+		Cast pour object.
 
 Constantes
 ----------

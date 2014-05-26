@@ -13,7 +13,7 @@ instead of the :php:class:`EmailComponent`. Below some tips about the migration.
 
 -  The headers are not changed to be X-... What you set is what is used. So,
    remember to put X- in your custom headers.
--  The ``send()`` method receives only the message content. The template and 
+-  The ``send()`` method receives only the message content. The template and
    layout should be set using :php:meth:`CakeEmail::template()` method.
 -  The list of attachments should be an array of filenames (that will appear in
    email) as key and value the full path to real file.

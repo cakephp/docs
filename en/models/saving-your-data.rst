@@ -40,7 +40,7 @@ model to save data to a database table::
     }
 
 When save is called, the data passed to it in the first parameter is validated
-using CakePHP validation mechanism (see :doc:`/models/data-validation` chapter for more
+using CakePHP's validation mechanism (see :doc:`/models/data-validation` chapter for more
 information). If for some reason your data isn't saving, be sure to check to see
 if some validation rules are being broken. You can debug this situation by
 outputting :php:attr:`Model::$validationErrors`::
@@ -75,7 +75,7 @@ single fields, in an ActiveRecord approach. You can also use
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save the 
+The above would update the title and published fields and save the
 record to the database.
 
 :php:meth:`Model::clear()`
@@ -110,9 +110,9 @@ The save method also has an alternate syntax::
 ``$params`` array can have any of the following available options
 as keys:
 
-* ``validate`` Set to true/false to enable disable validation.
+* ``validate`` Set to true/false to enable/disable validation.
 * ``fieldList`` An array of fields you want to allow for saving.
-* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
@@ -152,7 +152,7 @@ Otherwise a new record is created::
 
 
 If you want to update a value, rather than create a new one, make sure
-your are passing the primary key field into the data array::
+you are passing the primary key field into the data array::
 
     $data = array('id' => 10, 'title' => 'My new title');
     // This will update Recipe with id 10
@@ -203,7 +203,7 @@ The saveField method also has an alternate syntax::
 as keys:
 
 * ``validate`` Set to true/false to enable disable validation.
-* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
@@ -225,7 +225,7 @@ year, the update call might look something like::
     );
 
 
-The ``$fields`` array accepts SQL expressions. Literal values should be 
+The ``$fields`` array accepts SQL expressions. Literal values should be
 quoted manually using :php:meth:`DboSource::value()`. For example if one of your
 model methods was calling ``updateAll()`` you would do the following::
 
@@ -266,6 +266,8 @@ options may be used:
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 *  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
+  will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving multiple records of single model, $data needs to be a
@@ -278,7 +280,7 @@ numerically indexed array of records like this::
 
 .. note::
 
-    Note that we are passing numerical indices instead of usual
+    Note that we are passing numerical indexes instead of usual
     ``$data`` containing the Article key. When saving multiple records
     of same model the records arrays should be just numerically indexed
     without the model key.
@@ -297,7 +299,10 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
         array('title' => 'title 2'),
     );
     $data = array(
-        array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
+        array(
+            'Article' => array('title' => 'title 1'),
+            'Assoc' => array('field' => 'value')
+        ),
         array('Article' => array('title' => 'title 2')),
     );
     $Model->saveMany($data, array('deep' => true));
@@ -306,8 +311,12 @@ Keep in mind that if you want to update a record instead of creating a new
 one you just need to add the primary key index to the data row::
 
     $data = array(
-        array('Article' => array('title' => 'New article')), // This creates a new row
-        array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
+        array(
+            // This creates a new row
+            'Article' => array('title' => 'New article')),
+        array(
+            // This updates an existing row
+            'Article' => array('id' => 2, 'title' => 'title 2')),
     );
 
 
@@ -392,7 +401,10 @@ the data array should be like this::
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder')),
+            array(
+                'body' => 'Save a new user as well',
+                'User' => array('first' => 'mad', 'last' => 'coder')
+            ),
         ),
     );
 
@@ -548,7 +560,10 @@ a look at the following code.::
        public $uses = array('CourseMembership');
 
        public function index() {
-           $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
+           $this->set(
+                'courseMembershipsList',
+                $this->CourseMembership->find('all')
+            );
        }
 
        public function add() {
@@ -640,8 +655,26 @@ then the two meta-fields for the CourseMembership, e.g.::
         // View/CourseMemberships/add.ctp
 
         <?php echo $this->Form->create('CourseMembership'); ?>
-            <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
-            <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
+            <?php
+                echo $this->Form->input(
+                    'Student.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Student ID',
+                        'default' => 1
+                    )
+                );
+            ?>
+            <?php
+                echo $this->Form->input(
+                    'Course.id',
+                    array(
+                        'type' => 'text',
+                        'label' => 'Course ID',
+                        'default' => 1
+                    )
+                );
+            ?>
             <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
             <?php echo $this->Form->input('CourseMembership.grade'); ?>
             <button type="submit">Save</button>
@@ -716,7 +749,7 @@ following::
             (
                 [Recipe] => Array
                     (
-                        [id] => 42
+                        [id] => 43
                     )
                 [Tag] => Array
                     (
@@ -844,7 +877,7 @@ Becomes this::
 What to do when HABTM becomes complicated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default when saving a HasAndBelongsToMany relationship, Cake
+By default when saving a HasAndBelongsToMany relationship, CakePHP
 will delete all rows on the join table before saving new ones. For
 example if you have a Club that has 10 Children associated. You
 then update the Club with 2 children. The Club will only have 2

@@ -3,17 +3,20 @@ Bienvenue
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Nous espérons maintenir une documentation pointue et de
-qualité. 
+qualité. Remarquez le bouton "Improve this Doc" dans le coin en haut à droite;
+il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
+vous permettant de facilement contribuer, d'ajouter, de supprimer ou corriger
+la documentation.
 
 .. container:: offline-download
 
-    **Lire le livre partout**
+    **Lire le Livre partout**
 
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
     EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
 
-    - `format PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
-    - `format EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
+    - `PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
+    - `EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
     - `Source originale <http://github.com/cakephp/docs>`_.
 
 Mise en route

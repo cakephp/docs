@@ -49,7 +49,7 @@ Constantes
   remplacées par les variables de config respectivement ``App.imageBaseUrl``,
   ``App.jsBaseUrl``, ``App.cssBaseUrl``.
 
-- Les Constantes `IMAGES`, `JS`, `CSS` ont été dépréciées.
+- Les Constantes ``IMAGES``, ``JS``, ``CSS`` ont été dépréciées.
 
 Object
 ------
@@ -64,13 +64,13 @@ AuthComponent
 -------------
 
 - AuthComponent supporte maintenant le mode proper stateless lors de
-  l'utilisation des authentifieurs `Basic` ou `Digest`. Partir de session
+  l'utilisation des authentifieurs 'Basic' ou 'Digest'. Partir de session
   peut être empêché en configurant :php:attr:`AuthComponent::$sessionKey`
-  à false. Aussi maintenant lors de l'utilisation uniquement de `Basic` ou
-  `Digest`, vous n'êtes plus redirigé vers la page de login. Pour plus d'infos,
+  à false. Aussi maintenant lors de l'utilisation uniquement de 'Basic' ou
+  'Digest', vous n'êtes plus redirigé vers la page de login. Pour plus d'infos,
   vérifiez la page :php:class:`AuthComponent`.
 - La propriété :php:attr:`AuthComponent::$authError` peut être définie au
-  boléen `false` pour supprimer l'affichage du message flash.
+  boléen ``false`` pour supprimer l'affichage du message flash.
 
 PasswordHasher
 --------------
@@ -103,8 +103,8 @@ Datasource
 ----------
 
 - Mysql, Postgres, et SQLserver supportent maintenant un tableau 'settings'
-  dans la définition de connection. Cette paire de clé => valeur émettra des
-  commandes ``SET`` lorque la connection est créée.
+  dans la définition de connexion. Cette paire de clé => valeur émettra des
+  commandes ``SET`` lorque la connexion est créée.
 - Mysql driver supporte maintenant les options SSL.
 
 View
@@ -154,9 +154,9 @@ FormHelper
 ----------
 
 - L'option ``round`` a été ajoutée à :php:meth:`FormHelper::dateTime()`. Peut
-  être définie à `up` ou `down` pour forcer l'arrondi quelque soit la
+  être définie à ``up`` ou ``down`` pour forcer l'arrondi quelque soit la
   direction. Par défaut à null qui arrondit à la moitié supérieure selon
-  `interval`.
+  ``interval``.
 
 Network
 =======
@@ -214,7 +214,7 @@ L10n
 - ``sme`` est maintenant la locale par défaut pour le Sami comme spécifié par
   ISO 639-3 et ``smi`` son alias. Les dossiers de locale ont été ajustés en
   conséquence (de `/Locale/smi/` en `/Locale/sme/`).
-- ``mkd`` remplace ```mk`` comme locale par défaut pour le Macedonien comme
+- ``mkd`` remplace ``mk`` comme locale par défaut pour le Macedonien comme
   spécifié par ISO 639-3. Les dossiers de locale ont aussi été ajustés.
 - Le code de Catalog ``in`` a été supprimé et remplacé par ``id`` (Indonesian),
   ``e`` a été supprimé et remplacé par ``el`` (Greek),
@@ -234,7 +234,7 @@ Logging
   configuration. Donc pour le moteur de FileLog; il suffit maintenant de
   définir ``'engine' => 'File'``. Cela unifie la façon dont les moteurs sont
   nommés dans la configuration (regardez les moteurs de Cache par exemple).
-  Note: Si vous avez un moteur de Log de type ```DatabaseLogger`` qui ne
+  Note: Si vous avez un moteur de Log de type ``DatabaseLogger`` qui ne
   suit pas les conventions, utilisez un suffix ``Log`` pour votre nom de
   classe, vous devez ajuster votre nom de classe en ``DatabaseLog``.
   Vous devez aussi éviter les noms de classe comme ``SomeLogLog`` ce qui inclut
@@ -269,7 +269,7 @@ Utility
 General
 -------
 
-- :php:func:`pr` ne sort plus le HTML lors du lancement en mode cli.
+- :php:func:`pr()` ne sort plus le HTML lors du lancement en mode cli.
 
 Sanitize
 --------

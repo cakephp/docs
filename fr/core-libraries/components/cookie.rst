@@ -56,7 +56,7 @@ permet de définir la façon dont le Component cookie fonctionne.
 +-----------------+--------------+------------------------------------------------------+
 | boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
 | $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
-|                 |              | disponibles en javascript                            |
+|                 |              | disponibles en JavaScript                            |
 +-----------------+--------------+------------------------------------------------------+
 
 Les extraits de code de controller suivants montrent comment inclure le

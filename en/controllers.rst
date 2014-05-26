@@ -2,29 +2,29 @@ Controllers
 ###########
 
 Controllers are the 'C' in MVC. After routing has been applied and the correct
-controller has been found, your controller's action is called.  Your controller
+controller has been found, your controller's action is called. Your controller
 should handle interpreting the request data, making sure the correct models
-are called, and the right response or view is rendered.  Controllers can be
-thought of as middle man between the Model and View.  You want to keep your
-controllers thin, and your models fat.  This will help you more easily reuse
+are called, and the right response or view is rendered. Controllers can be
+thought of as middle man between the Model and View. You want to keep your
+controllers thin, and your models fat. This will help you more easily reuse
 your code and makes your code easier to test.
 
 Commonly, controllers are used to manage the logic around a single model. For
-example, if you were building a site for an on-line bakery, you might have a
+example, if you were building a site for an online bakery, you might have a
 RecipesController and an IngredientsController managing your recipes and their
-ingredients.  In CakePHP, controllers are named after the primary model they
+ingredients. In CakePHP, controllers are named after the primary model they
 handle. It's totally possible to have controllers work with more than one model as
 well.
 
-Your application's controllers extend ``AppController`` class, which in turn
-extends the core :php:class:`Controller` class. The AppController
+Your application's controllers extend the ``AppController`` class, which in turn
+extends the core :php:class:`Controller` class. The ``AppController``
 class can be defined in ``/app/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
-Controllers provide a number of methods which are called *actions*.  Actions are
-methods on a controller that handle requests.  By default all public methods on
-a controller are an action, and accessible from a URL.  Actions are responsible
-for interpreting the request and creating the response.  Usually responses are
+Controllers provide a number of methods which are called *actions*. Actions are
+methods in a controller that handle requests. By default all public methods in
+a controller are an action, and accessible from a URL. Actions are responsible
+for interpreting the request and creating the response. Usually responses are
 in the form of a rendered view, but there are other ways to create responses as
 well.
 
@@ -34,16 +34,16 @@ well.
 The App Controller
 ==================
 
-As stated in the introduction, the AppController class is the
+As stated in the introduction, the ``AppController`` class is the
 parent class to all of your application's controllers.
-AppController itself extends the Controller class included in the
-CakePHP core library. As such, AppController is defined in
+``AppController`` itself extends the :php:class:`Controller` class included in the
+CakePHP core library. As such, ``AppController`` is defined in
 ``/app/Controller/AppController.php`` like so::
 
     class AppController extends Controller {
     }
 
-Controller attributes and methods created in your AppController
+Controller attributes and methods created in your ``AppController``
 will be available to all of your application's controllers. It is
 the ideal place to create code that is common to all of your
 controllers. Components (which you'll learn about later) are best
@@ -53,23 +53,23 @@ controllers.
 While normal object-oriented inheritance rules apply, CakePHP
 does a bit of extra work when it comes to special controller
 attributes. The list of components and helpers used by a
-controller are treated specially. In these cases, AppController
+controller are treated specially. In these cases, ``AppController``
 value arrays are merged with child controller class arrays. The values in the
-child class will always override those in AppController.
+child class will always override those in ``AppController.``
 
 .. note::
 
-    CakePHP merges the following variables from the AppController to
+    CakePHP merges the following variables from the ``AppController`` to
     your application's controllers:
 
-    -  $components
-    -  $helpers
-    -  $uses
+    -  :php:attr:`~Controller::$components`
+    -  :php:attr:`~Controller::$helpers`
+    -  :php:attr:`~Controller::$uses`
 
 Remember to add the default Html and Form helpers, if you define
-var ``$helpers`` in your AppController
+the :php:attr:`~Controller::$helpers` property in your ``AppController``.
 
-Please also remember to call AppController's callbacks within child
+Please, also remember to call ``AppController``'s callbacks within child
 controller callbacks for best results::
 
     public function beforeFilter() {
@@ -83,19 +83,19 @@ When a request is made to a CakePHP application, CakePHP's :php:class:`Router` a
 :php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
 create the correct controller. The request data is encapsulated into a request
 object. CakePHP puts all of the important request information into the
-``$this->request`` property.  See the section on
+``$this->request`` property. See the section on
 :ref:`cake-request` for more information on the CakePHP request object.
 
 Controller actions
 ==================
 
 Controller actions are responsible for converting the request parameters into a
-response for the browser/user making the request.  CakePHP uses conventions to
+response for the browser/user making the request. CakePHP uses conventions to
 automate this process and remove some boiler-plate code you would otherwise need
 to write.
 
 By convention CakePHP renders a view with an inflected version of the action
-name.  Returning to our online bakery example, our RecipesController might contain the
+name. Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
 in ``/app/Controller/RecipesController.php`` and contain::
 
@@ -116,17 +116,17 @@ in ``/app/Controller/RecipesController.php`` and contain::
         }
 
 The view files for these actions would be ``app/View/Recipes/view.ctp``,
-``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``.  The
-conventional view file name is the lower cased and underscored version of the
+``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``. The
+conventional view file name is the lowercased and underscored version of the
 action name.
 
 Controller actions generally use :php:meth:`~Controller::set()` to create a
-context that :php:class:`View` uses to render the view.  Because of the
+context that :php:class:`View` uses to render the view. Because of the
 conventions that CakePHP uses, you don't need to create and render the view
 manually. Instead once a controller action has completed, CakePHP will handle
 rendering and delivering the View.
 
-If for some reason you'd like to skip the default behavior.  Both of the
+If for some reason you'd like to skip the default behavior. Both of the
 following techniques will by-pass the default view rendering behavior.
 
 * If you return a string, or an object that can be converted to a string from
@@ -135,7 +135,7 @@ following techniques will by-pass the default view rendering behavior.
   response.
 
 When controller methods are used with :php:meth:`~Controller::requestAction()`
-you will often want to return data that isn't a string.  If you have controller
+you will often want to return data that isn't a string. If you have controller
 methods that are used for normal web requests + requestAction you should check
 the request type before returning::
 
@@ -150,10 +150,10 @@ the request type before returning::
     }
 
 The above controller action is an example of how a method can be used with
-``requestAction()`` and normal requests. Returning an array data to a
-non-requestAction request will cause errors and should be avoided.  See the
-section on :php:meth:`Controller::requestAction()` for more tips on using
-``requestAction()``
+:php:meth:`~Controller::requestAction()` and normal requests. Returning an array data to a
+non-requestAction request will cause errors and should be avoided. See the
+section on :php:meth:`~Controller::requestAction()` for more tips on using
+:php:meth:`~Controller::requestAction()`
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
@@ -183,7 +183,7 @@ insert logic around the request life-cycle:
 
     Called after controller action logic, but before the view is
     rendered. This callback is not used often, but may be needed if you
-    are calling render() manually before the end of a given action.
+    are calling :php:meth:`~Controller::render()` manually before the end of a given action.
 
 .. php:method:: afterFilter()
 
@@ -199,21 +199,20 @@ Controller Methods
 ==================
 
 For a complete list of controller methods and their descriptions
-visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+visit the `CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 Interacting with Views
 ----------------------
 
 Controllers interact with the view in a number of ways. First they
-are able to pass data to the views, using ``set()``. You can also
+are able to pass data to the views, using :php:meth:`~Controller::set()`. You can also
 decide which view class to use, and which view file should be
 rendered from the controller.
 
 .. php:method:: set(string $var, mixed $value)
 
-    The ``set()`` method is the main way to send data from your
-    controller to your view. Once you've used ``set()``, the variable
+    The :php:meth:`~Controller::set()` method is the main way to send data from your
+    controller to your view. Once you've used :php:meth:`~Controller::set()`, the variable
     can be accessed in your view::
 
         // First you pass data from the controller:
@@ -225,7 +224,7 @@ rendered from the controller.
 
         You have selected <?php echo $color; ?> icing for the cake.
 
-    The ``set()`` method also takes an associative array as its first
+    The :php:meth:`~Controller::set()` method also takes an associative array as its first
     parameter. This can often be a quick way to assign a set of
     information to the view.
 
@@ -248,7 +247,7 @@ rendered from the controller.
         $this->set($data);
 
 
-    The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
+    The attribute ``$pageTitle`` no longer exists, use :php:meth:`~Controller::set()` to set
     the title::
 
         $this->set('title_for_layout', 'This is the page title');
@@ -256,10 +255,10 @@ rendered from the controller.
 
 .. php:method:: render(string $view, string $layout)
 
-    The ``render()`` method is automatically called at the end of each
+    The :php:meth:`~Controller::render()` method is automatically called at the end of each
     requested controller action. This method performs all the view
-    logic (using the data you've given in using the ``set()`` method),
-    places the view inside its layout and serves it back to the end
+    logic (using the data you've given in using the :php:meth:`~Controller::set()` method),
+    places the view inside its :php:attr:`~View::$layout` and serves it back to the end
     user.
 
     The default view file used by render is determined by convention.
@@ -282,13 +281,13 @@ rendered from the controller.
 
     If ``$view`` starts with '/' it is assumed to be a view or
     element file relative to the ``/app/View`` folder. This allows
-    direct rendering of elements, very useful in ajax calls.
+    direct rendering of elements, very useful in AJAX calls.
     ::
 
         // Render the element in /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
-    The ``$layout`` parameter allows you to specify the layout the
+    The :php:attr:`~View::$layout` parameter allows you to specify the layout the
     view is rendered in.
 
 Rendering a specific view
@@ -296,7 +295,7 @@ Rendering a specific view
 
 In your controller you may want to render a different view than
 what would conventionally be done. You can do this by calling
-``render()`` directly. Once you have called ``render()`` CakePHP
+:php:meth:`~Controller::render()` directly. Once you have called :php:meth:`~Controller::render()` CakePHP
 will not try to re-render the view::
 
     class PostsController extends AppController {
@@ -326,7 +325,7 @@ Flow Control
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
-    The flow control method you'll use most often is ``redirect()``.
+    The flow control method you'll use most often is :php:meth:`~Controller::redirect()`.
     This method takes its first parameter in the form of a
     CakePHP-relative URL. When a user has successfully placed an order,
     you might wish to redirect them to a receipt screen.::
@@ -334,9 +333,13 @@ Flow Control
         public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
-                return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
+                return $this->redirect(
+                    array('controller' => 'orders', 'action' => 'thanks')
+                );
             }
-            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+            return $this->redirect(
+                array('controller' => 'orders', 'action' => 'confirm')
+            );
         }
 
     You can also use a relative or absolute URL as the $url argument::
@@ -348,7 +351,7 @@ Flow Control
 
         $this->redirect(array('action' => 'edit', $id));
 
-    The second parameter of ``redirect()`` allows you to define an HTTP
+    The second parameter of :php:meth:`~Controller::redirect()` allows you to define an HTTP
     status code to accompany the redirect. You may want to use 301
     (moved permanently) or 303 (see other), depending on the nature of
     the redirect.
@@ -364,21 +367,35 @@ Flow Control
     to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
     you can use::
 
-        $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+        $this->redirect(array(
+            'controller' => 'orders',
+            'action' => 'confirm',
+            'product' => 'pizza',
+            'quantity' => 5)
+        );
 
     An example using query strings and hash would look like::
 
         $this->redirect(array(
-            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+            'controller' => 'orders',
+            'action' => 'confirm',
+            '?' => array(
+                'product' => 'pizza',
+                'quantity' => 5
+            ),
+            '#' => 'top')
+        );
 
-    The generated URL would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
+    The generated URL would be::
+
+        http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
-    Like ``redirect()``, the ``flash()`` method is used to direct a
-    user to a new page after an operation. The ``flash()`` method is
-    different in that it shows a message before passing the user on to
-    another URL.
+    Like :php:meth:`~Controller::redirect()`, the :php:meth:`~Controller::flash()` 
+    method is used to direct a user to a new page after an operation. The 
+    :php:meth:`~Controller::flash()` method is different in that it shows a 
+    message before passing the user on to another URL.
 
     The first parameter should hold the message to be displayed, and
     the second parameter is a CakePHP-relative URL. CakePHP will
@@ -386,11 +403,11 @@ Flow Control
     the user on.
 
     If there's a particular template you'd like your flashed message to
-    use, you may specify the name of that layout in the ``$layout``
+    use, you may specify the name of that layout in the :php:attr:`~View::$layout`
     parameter.
 
-    For in-page flash messages, be sure to check out SessionComponent's
-    setFlash() method.
+    For in-page flash messages, be sure to check out
+    :php:meth:`SessionComponent::setFlash()` method.
 
 Callbacks
 ---------
@@ -423,7 +440,7 @@ Other Useful Methods
     loading process is done by CakePHP normally, but this method is
     handy to have when accessing controllers from a different
     perspective. If you need CakePHP in a command-line script or some
-    other outside use, constructClasses() may come in handy.
+    other outside use, :php:meth:`~Controller::constructClasses()` may come in handy.
 
 .. php:method:: referer(mixed $default = null, boolean $local = false)
 
@@ -447,7 +464,9 @@ Other Useful Methods
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
-                return $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect(
+                    $this->referer(array('action' => 'index'))
+                );
             }
         }
 
@@ -541,19 +560,19 @@ Other Useful Methods
 
     .. note::
 
-        You can use ``requestAction()`` to retrieve a fully rendered view
+        You can use :php:meth:`~Controller::requestAction()` to retrieve a fully rendered view
         by passing 'return' in the options:
         ``requestAction($url, array('return'));``. It is important to note
-        that making a requestAction using 'return' from a controller method
-        can cause script and css tags to not work correctly.
+        that making a :php:meth:`~Controller::requestAction()` using ``return`` from a controller method
+        can cause script and CSS tags to not work correctly.
 
     .. warning::
 
-        If used without caching ``requestAction`` can lead to poor
+        If used without caching :php:meth:`~Controller::requestAction()` can lead to poor
         performance. It is rarely appropriate to use in a controller or
         model.
 
-    ``requestAction`` is best used in conjunction with (cached)
+    :php:meth:`~Controller::requestAction()` is best used in conjunction with (cached)
     elements – as a way to fetch data for an element before rendering.
     Let's use the example of putting a "latest comments" element in the
     layout. First we need to create a controller function that will
@@ -565,13 +584,16 @@ Other Useful Methods
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }
-                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+                return $this->Comment->find(
+                    'all',
+                    array('order' => 'Comment.created DESC', 'limit' => 10)
+                );
             }
         }
 
-    You should always include checks to make sure your requestAction methods are
-    actually originating from ``requestAction``.  Failing to do so will allow
-    requestAction methods to be directly accessible from a URL, which is
+    You should always include checks to make sure your :php:meth:`~Controller::requestAction()` methods are
+    actually originating from :php:meth:`~Controller::requestAction()`. Failing to do so will allow
+    :php:meth:`~Controller::requestAction()` methods to be directly accessible from a URL, which is
     generally undesirable.
 
     If we now create a simple element to call that function::
@@ -596,31 +618,31 @@ Other Useful Methods
 
         echo $this->element('latest_comments', array(), array('cache' => true));
 
-    The ``requestAction`` call will not be made while the cached
+    The :php:meth:`~Controller::requestAction()` call will not be made while the cached
     element view file exists and is valid.
 
-    In addition, requestAction now takes array based cake style URLs::
+    In addition, :php:meth:`~Controller::requestAction()` now takes array based cake style URLs::
 
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('return')
         );
 
-    This allows the requestAction call to bypass the usage of
-    Router::url which can increase performance. The url based arrays
+    This allows the :php:meth:`~Controller::requestAction()` call to bypass the usage of
+    :php:meth:`Router::url()` which can increase performance. The url based arrays
     are the same as the ones that :php:meth:`HtmlHelper::link()` uses with one
     difference - if you are using named or passed parameters, you must put them
     in a second array and wrap them with the correct key. This is because
-    requestAction merges the named args array (requestAction's 2nd parameter)
-    with the Controller::params member array and does not explicitly place the
+    :php:meth:`~Controller::requestAction()` merges the named args array (requestAction's 2nd parameter)
+    with the ``Controller::params`` member array and does not explicitly place the
     named args array into the key 'named'; Additional members in the ``$option``
     array will also be made available in the requested action's
-    Controller::params array::
+    ``Controller::params`` array::
 
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
-    As an array in the requestAction would then be::
+    As an array in the :php:meth:`~Controller::requestAction()` would then be::
 
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
@@ -635,23 +657,26 @@ Other Useful Methods
     .. note::
 
         Unlike other places where array URLs are analogous to string URLs,
-        requestAction treats them differently.
+        :php:meth:`~Controller::requestAction()` treats them differently.
 
-    When using an array url in conjunction with requestAction() you
+    When using an array url in conjunction with :php:meth:`~Controller::requestAction()` you
     must specify **all** parameters that you will need in the requested
-    action. This includes parameters like ``$this->request->data``.  In addition
+    action. This includes parameters like ``$this->request->data``. In addition
     to passing all required parameters, named and pass parameters must be done
     in the second array as seen above.
 
 
 .. php:method:: loadModel(string $modelClass, mixed $id)
 
-    The ``loadModel`` function comes handy when you need to use a model
+    The :php:meth:`~Controller::loadModel()` function comes handy when you need to use a model
     which is not the controller's default model or its associated
     model::
 
         $this->loadModel('Article');
-        $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
+        $recentArticles = $this->Article->find(
+            'all',
+            array('limit' => 5, 'order' => 'Article.created DESC')
+        );
 
         $this->loadModel('User', 2);
         $user = $this->User->read();
@@ -661,12 +686,11 @@ Controller Attributes
 =====================
 
 For a complete list of controller attributes and their descriptions
-visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+visit the `CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_.
 
 .. php:attr:: name
 
-    The ``$name`` attribute should be set to the
+    The :php:attr:`~Controller::$name` attribute should be set to the
     name of the controller. Usually this is just the plural form of the
     primary model the controller uses. This property can be omitted,
     but saves CakePHP from inflecting it::
@@ -681,11 +705,12 @@ $components, $helpers and $uses
 -------------------------------
 
 The next most often used controller attributes tell CakePHP what
-helpers, components, and models you'll be using in conjunction with
+:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`, 
+and ``models`` you'll be using in conjunction with
 the current controller. Using these attributes make MVC classes
-given by ``$components`` and ``$uses`` available to the controller
+given by :php:attr:`~Controller::$components` and :php:attr:`~Controller::$uses` available to the controller
 as class variables (``$this->ModelName``, for example) and those
-given by ``$helpers`` to the view as an object reference variable
+given by :php:attr:`~Controller::$helpers` to the view as an object reference variable
 (``$this->{$helpername}``).
 
 .. note::
@@ -700,29 +725,29 @@ given by ``$helpers`` to the view as an object reference variable
     available at ``$this->Recipe``, and our ProductsController also
     features the Product model at ``$this->Product``. However, when
     allowing a controller to access additional models through the
-    ``$uses`` variable, the name of the current controller's model must
+    :php:attr:`~Controller::$uses` variable, the name of the current controller's model must
     also be included. This is illustrated in the example below.
 
     If you do not wish to use a Model in your controller, set
     ``public $uses = array()``. This will allow you to use a controller
     without a need for a corresponding Model file. However, the models
-    defined in the ``AppController`` will still be loaded.  You can also use
-    ``false`` to not load any models at all.  Even those defined in the
+    defined in the ``AppController`` will still be loaded. You can also use
+    ``false`` to not load any models at all. Even those defined in the
     ``AppController``.
 
     .. versionchanged:: 2.1
-        Uses now has a new default value, it also handles ``false`` differently.
+        :php:attr:`~Controller::$uses` now has a new default value, it also handles ``false`` differently.
 
 .. php:attr:: helpers
 
-    The Html, Form, and Session Helpers are available by
-    default, as is the SessionComponent. But if you choose to define
-    your own ``$helpers`` array in AppController, make sure to include
-    ``Html`` and ``Form`` if you want them still available by default
+    The :php:class:`HtmlHelper`, :php:class:`FormHelper`, and :php:class:`SessionHelper` are available by
+    default, as is the :php:class:`SessionComponent`. But if you choose to define
+    your own :php:attr:`~Controller::$helpers` array in ``AppController``, make sure to include
+    :php:class:`HtmlHelper` and :php:class:`FormHelper` if you want them still available by default
     in your Controllers. To learn more about these classes, be sure
     to check out their respective sections later in this manual.
 
-    Let's look at how to tell a CakePHP controller that you plan to use
+    Let's look at how to tell a CakePHP :php:class:`Controller` that you plan to use
     additional MVC classes::
 
         class RecipesController extends AppController {
@@ -732,34 +757,35 @@ given by ``$helpers`` to the view as an object reference variable
         }
 
     Each of these variables are merged with their inherited values,
-    therefore it is not necessary (for example) to redeclare the Form
-    helper, or anything that is declared in your App controller.
+    therefore it is not necessary (for example) to redeclare the
+    :php:class:`FormHelper`, or anything that is declared in your ``AppController``.
 
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
-    a controller will use.  Like ``$helpers`` and ``$uses`` components in your
-    controllers are merged with those in ``AppController``.  As with
-    ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
-    for more information.
+    a controller will use. Like :php:attr:`~Controller::$helpers` and 
+    :php:attr:`~Controller::$uses` components in your controllers are 
+    merged with those in ``AppController``. As with
+    :php:attr:`~Controller::$helpers` you can pass settings 
+    into :php:attr:`~Controller::$components`. See :ref:`configuring-components` for more information.
 
 Other Attributes
 ----------------
 
 While you can check out the details for all controller attributes
-in the API, there are other controller attributes that merit their
+in the `API <http://api.cakephp.org>`_, there are other controller attributes that merit their
 own sections in the manual.
 
-.. php:attr: cacheAction
+.. php:attr:: cacheAction
 
     The cacheAction attribute is used to define the duration and other
-    information about full page caching.  You can read more about
+    information about full page caching. You can read more about
     full page caching in the :php:class:`CacheHelper` documentation.
 
-.. php:attr: paginate
+.. php:attr:: paginate
 
-    The paginate attribute is a deprecated compatibility property.  Using it
-    loads and configures the :php:class:`PaginatorComponent`.  It is recommended
+    The paginate attribute is a deprecated compatibility property. Using it
+    loads and configures the :php:class:`PaginatorComponent`. It is recommended
     that you update your code to use normal component settings::
 
         class ArticlesController extends AppController {
@@ -774,7 +800,7 @@ own sections in the manual.
 
 .. todo::
 
-    This chapter should be less about the controller api and more about
+    This chapter should be less about the controller API and more about
     examples, the controller attributes section is overwhelming and difficult to
     understand at first. The chapter should start with some example controllers
     and what they do.
@@ -783,6 +809,7 @@ More on controllers
 ===================
 
 .. toctree::
+    :maxdepth: 1
 
     controllers/request-response
     controllers/scaffolding

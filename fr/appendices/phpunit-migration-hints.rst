@@ -1,90 +1,99 @@
 PHPUnit Migration Hints
 #######################
 
-Migrating your test cases to `PHPUnit 3.5 <http://www.phpunit.de/manual/current/en/>`_
-will hopefully be a fairly pain free transition. However, there are a few known
-differences between test cases under PHPUnit and
-`SimpleTest <http://www.simpletest.org/>`_.
+Migrer vos cas de test vers
+`PHPUnit 3.5 <http://www.phpunit.de/manual/current/en/>`_ va, espérons-le être
+une transition sans douleur. Cepeandant, il y a quelques différences entre les
+cas de test sous PHPUnit et `SimpleTest <http://www.simpletest.org/>`_.
 
-Installing PHPUnit
-==================
+Installer PHPUnit
+=================
 
-Installing from PEAR (Recommended)
-----------------------------------
+Installer à partir de PEAR (Recommandé)
+---------------------------------------
 
-PHPUnit recommends it be installed via the pear installer, to do so run the
-following commands::
+PHPUnit recommande qu'il soit installé via l'installeur PEAR, pour ce faire,
+suivez les commandes suivantes::
 
     pear channel-discover pear.phpunit.de
     pear channel-discover components.ez.no
     pear channel-discover pear.symfony-project.com
 
-This has to be done only once. Now the `PEAR Installer <http://pear.php.net/>`_
-can be used to install packages from the PHPUnit channel::
+Ceci n'a à être fait qu'une seule fois. Maintenant
+`l'Installeur PEAR <http://pear.php.net/>`_ peut être utilisé pour installer
+les packages à partir de le canal PHPUnit::
 
     pear install phpunit/PHPUnit
 
-Installing manually
--------------------
-
-In addition to pear, CakePHP also supports placing the PHPUnit directory inside
-one of your vendors directories along with all its dependencies.  Doing so is
-generally not recommended as PHPUnit is complicated to install as it is composed
-of many pear packages.  Installing with the pear installer is easier and faster.
-
-If you do wish to install PHPUnit manually, you'll need to place it and all of
-its dependencies inside your applications ``Vendor`` directory.
-
-Differences between SimpleTest
-==============================
-
-There are a number of differences between SimpleTest and PHPUnit. The following
-is an attempt to list the most frequently encountered differences.
-
-startCase() and endCase()
--------------------------
-
-These methods are no longer supported. Use the static methods PHPUnit provides:
-``setupBeforeClass`` and ``tearDownAfterClass``.
-
-start(), end(), before() and after()
-------------------------------------
-
-These methods were part of SimpleTest's test case initialization. ``start()`` and
-``end()`` have no replacements. You can use ``setUp()`` and ``tearDown()`` to
-replace ``before()`` and ``after()``.
-
-setUp() and tearDown()
+Installer manuellement
 ----------------------
 
-In the past the methods ``setUp``, ``tearDown``, ``startTest`` and ``endTest``
-where supported, and caused confusion as they looked almost like the same thing
-but in some cases you should use one or the other.
+En plus de PEAR, CakePHP permet aussi de placer le répertoire de PHPUnit dans
+l'un des répertoires vendors avec ses dépendances. Faire ceci n'est généralement
+pas recommandé puisque PHPUnit est compliqué à installer puisqu'il est composé
+de plusieurs packages. L'installation avec l'installeur PEAR est plus facile et
+rapide.
 
-In the new CakePHP test suite, it is recommended to use only ``setUp`` and
-``tearDown``. The methods startTest and endTest are still supported but are
-deprecated.
+Si vous souhaitez installer PHPUnit manuellement, vous aurez besoin de le
+placer lui et toutes ses dépendances à l'intérieur du répertoire ``Vendor``
+de vos applications.
+
+Différences avec SimpleTest
+===========================
+
+Il y a un certain nombre de différences entre SimpleTest and PHPUnit. Ce qui
+suit est une tentative de lister les différences les plus fréquemment
+rencontrées.
+
+startCase() et endCase()
+------------------------
+
+Ces méthodes ne sont plus supportées. Utilisez les méthodes static que PHPUnit
+fournit:
+``setupBeforeClass`` et ``tearDownAfterClass``.
+
+start(), end(), before() et after()
+-----------------------------------
+
+Ces méthodes faisaient parti de l'initialisation des cas de test de SimpleTest.
+``start()`` et ``end()`` ne sont pas remplacés. Vous pouvez utiliser ``setUp()``
+et ``tearDown()`` pour remplacer ``before()`` et ``after()``.
+
+setUp() et tearDown()
+---------------------
+
+Dans le passé, les méthodes ``setUp``, ``tearDown``, ``startTest`` et
+``endTest`` étaient supportées, et entrainaient une confusion puisqu'elles
+étaient quasi identiques mais dans certains cas, vous deviez utiliser l'une ou
+l'autre.
+
+Dans le nouveau test suite de CakePHP, il est recommandé d'utiliser uniquement
+``setUp`` et ``tearDown``. Ces méthodes startTest et endTest sont toujours
+supportées mais sont dépréciées.
 
 getTests
 --------
 
-The method ``getTests`` is no longer supported. You can use filters instead. The
-web test runner now takes an additional query string parameter that allows you
-to specify a basic regular expression. This regular expression is used to
-restrict the methods that are run::
+La méthode ``getTests`` n'est plus supportée. Vous pouvez utiliser les filtres
+à la place. le runner web de test prend maintenant un paramètre de query
+string supplémentaire qui vous permet de spécifier une expression régulière
+basique. Cette expression régulière est utilisée pour restreindre les méthodes
+qui sont lancées::
 
     e.g. filter=myMethod
 
-Only tests containing the string ``myMethod`` will be run on the next refresh.
-The cake testsuite shell also supports a -filter option to filter methods.
+Seuls les tests contenant la chaîne ``myMethod`` seront lancés au prochain
+rafraichissement. Le shell testsuite de cake supporte aussi une option
+-filter pour filtrer les méthodes.
 
-Assertion methods
------------------
+Méthodes d'assertion
+--------------------
 
-Many of the assertion methods have slightly different names between PHPUnit and
-SimpleTest. Where possible :php:class:`CakeTestCase` provides a wrapper for the
-SimpleTest method names. These compatibility wrappers will be removed in 2.1.0.
-The following methods will be affected.
+Plusieurs des méthodes d'assertion ont des noms légèrement différents entre
+PHPUnit et SimpleTest. La où le possible :php:class:`CakeTestCase` fournit
+un wrapper pour les noms de méthode de SimpleTest. Ces wrappers de
+compatibilité seront retirés dans 2.1.0.
+Les méthodes suivantes seront affectées.
 
 * ``assertEqual`` -> ``assertEquals``
 * ``assertNotEqual`` -> ``assertNotEquals``
@@ -98,66 +107,67 @@ The following methods will be affected.
 * ``assertReference`` -> ``assertSame``
 * ``assertIsA`` -> ``assertType``
 
-Some methods take their arguments in different orders, be sure to check the
-methods you are using when updating them.
+Certaines méthodes prennent leurs arguments dans différents ordres, assurez-vous
+de vérifier les méthodes que vous utilisez lors de la mise à jour.
 
 Mock expectations
 -----------------
 
-Mock objects are dramatically different between PHPUnit and SimpleTest. There is
-no compatibility wrapper between them. Updating mock object usage can be a
-painful process but we hope the following tips help you in your migration. It's
-highly recommended you familiarize yourself with the `PHPUnit Mock object <http://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects>`_
-documentation.
+Mock objects sont très différents entre PHPUnit et SimpleTest. Il n'y a pas
+de compatibilité de wrapper entre eux. Mettre à jour l'utilisation de mock
+object peut être un processus douloureux mais nous espérons que les astuces
+suivantes vous aideront dans votre migration. Il est hautement recommandé de
+vous familiariser vous-même avec la documentation de
+`PHPUnit Mock object <http://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects>`_.
 
-Replacing method calls
-~~~~~~~~~~~~~~~~~~~~~~
+Remplacez les appels de méthode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following regular expressions should help update some of your more
-straightforward mock object expectations.
+Les expressions régulières devraient vous aider à mettre à jour certaines
+de vos expectations mock object plus simplement.
 
-Replace expectOnce() no params
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Remplacez expectOnce() sans params
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     expectOnce\(([^\)]+)\);
     expects(\$this->once())->method($1);
 
-Replace expectOnce() with params
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Remplacez expectOnce() avec params
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     expectOnce\(([^,]+), array\((.+)\)\);
     expects(\$this->once())->method($1)->with($2);
 
-Replace expectAt()
-^^^^^^^^^^^^^^^^^^
+Remplacez expectAt()
+^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     expectAt\((\d+), (.+), array\((.+)\)\);
     expects(\$this->at($1))->method($2)->with($3);
 
-Replace expectNever
-^^^^^^^^^^^^^^^^^^^
+Remplacez expectNever
+^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     expectNever\(([^\)]+)\);
     expects(\$this->never())->method($1);
 
-Replace setReturnValue
-^^^^^^^^^^^^^^^^^^^^^^
+Remplacez setReturnValue
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     setReturnValue\(([^,]+), (.+)\);
     expects(\$this->once())->method($1)->will($this->returnValue($2));
 
-Replace setReturnValueAt
-^^^^^^^^^^^^^^^^^^^^^^^^
+Remplacez setReturnValueAt
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -165,23 +175,24 @@ Replace setReturnValueAt
     expects(\$this->at($1))->method($2)->will($this->returnValue($3));
 
 Group tests
------------
+------------
 
-Group tests have been removed as PHPUnit treats individual test cases and test
-suites as composable entities in the runner. You can place group tests inside
-the cases directory and use ``PHPUnit_Framework_TestSuite`` as a base class. An
-example Testsuite would look like::
+Group tests ont été retirés puisque PHPUnit traite les cas de test individuels
+et les suites test comme des entités composables dans le runner. Vous pouvez
+placer les group tests à l'intérieur du répertoire des cas et utiliser
+``PHPUnit_Framework_TestSuite`` en classe de base. Un exemple Testsuite
+ressemblerait à ceci::
 
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
-    
+
     /**
      * Suite define the tests for this suite
      *
      * @return void
      */
         public static function suite() {
-            $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
-            
+            $suite = new PHPUnit_Framework_TestSuite('JsHelper and all Engine Helpers');
+
             $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
             $suite->addTestFile($helperTestPath . 'JsHelperTest.php');
             $suite->addTestFile($helperTestPath . 'JqueryEngineHelperTest.php');
@@ -191,8 +202,8 @@ example Testsuite would look like::
         }
     }
 
-``TestManger`` no longer has methods to add tests to group tests either. It is
-recommended that you use the methods PHPUnit offers.
+``TestManger`` n'a plus les méthodes pour ajouter les tests ni pour les group
+tests. Il est recommandé que vous utilisiez les méthodes offertes par PHPUnit.
 
 
 .. meta::

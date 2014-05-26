@@ -1,11 +1,12 @@
 Documentation
 #############
 
-Contributing to the documentation is simple.  The files are hosted on
-https://github.com/cakephp/docs.  Feel free to fork the repo, add your
+Contributing to the documentation is simple. The files are hosted on
+https://github.com/cakephp/docs. Feel free to fork the repo, add your
 changes/improvements/translations and give back by issuing a pull request.
-You can even edit the docs online with github, without ever downloading the
-files.
+You can even edit the docs online with GitHub, without ever downloading the
+files -- the "Improve this Doc" button on any given page will direct you to
+GitHub's online editor for that page.
 
 Translations
 ============
@@ -41,16 +42,16 @@ Translator tips:
 Documentation formatting guide
 ==============================
 
-The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_.  ReST
+The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
-textile.  To maintain consistency it is recommended that when adding to the
+textile. To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
 structure your text.
 
 Line length
 -----------
 
-Lines of text should be wrapped at 80 columns.  The only exception should be
+Lines of text should be wrapped at 80 columns. The only exception should be
 long URLs, and code snippets.
 
 Headings and Sections
@@ -102,12 +103,12 @@ Inline markup has a few restrictions:
 Lists
 -----
 
-List markup is very similar to markdown.  Unordered lists are indicated by
-starting a line with a single asterisk and a space.  Numbered lists can be
+List markup is very similar to markdown. Unordered lists are indicated by
+starting a line with a single asterisk and a space. Numbered lists can be
 created with either numerals, or ``#`` for auto numbering::
 
     * This is a bullet
-    * So is this.  But this line
+    * So is this. But this line
       has two lines.
 
     1. First line
@@ -158,9 +159,9 @@ Links to other pages
 
     Other pages in the documentation can be linked to using the ``:doc:`` role.
     You can link to the specified document using either an absolute or relative
-    path reference.  You should omit the ``.rst`` extension.  For example, if
+    path reference. You should omit the ``.rst`` extension. For example, if
     the reference ``:doc:`form``` appears in the document ``core-helpers/html``,
-    then the link references ``core-helpers/form``.  If the reference was
+    then the link references ``core-helpers/form``. If the reference was
     ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
     regardless of where it was used.
 
@@ -170,11 +171,11 @@ Cross referencing links
 .. rst:role:: ref
 
     You can cross reference any arbitrary title in any document using the
-    ``:ref:`` role.  Link label targets must be unique across the entire
-    documentation.  When creating labels for class methods, it's best to use
+    ``:ref:`` role. Link label targets must be unique across the entire
+    documentation. When creating labels for class methods, it's best to use
     ``class-method`` as the format for your link label.
 
-    The most common use of labels is above a title.  Example::
+    The most common use of labels is above a title. Example::
 
         .. _label-name:
 
@@ -184,7 +185,7 @@ Cross referencing links
         More content here.
 
     Elsewhere you could reference the above section using ``:ref:`label-name```.
-    The link's text would be the title that the link preceded.  You can also
+    The link's text would be the title that the link preceded. You can also
     provide custom link text using ``:ref:`Link text <label-name>```.
 
 Describing classes and their contents
@@ -192,7 +193,7 @@ Describing classes and their contents
 
 The CakePHP documentation uses the `phpdomain
 <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
-directives for describing PHP objects and constructs.  Using these directives
+directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 
 Describing classes and constructs
@@ -220,7 +221,7 @@ Each directive populates the index, and or the namespace index.
 
 .. rst:directive:: .. php:class:: name
 
-   Describes a class.  Methods, attributes, and constants belonging to the class
+   Describes a class. Methods, attributes, and constants belonging to the class
    should be inside this directive's body::
 
         .. php:class:: MyClass
@@ -232,7 +233,7 @@ Each directive populates the index, and or the namespace index.
            Method description
 
 
-   Attributes, methods and constants don't need to be nested.  They can also just
+   Attributes, methods and constants don't need to be nested. They can also just
    follow the class declaration::
 
         .. php:class:: MyClass
@@ -284,7 +285,7 @@ matching directive is found:
 
 .. rst:role:: php:const
 
-   Reference either a global constant, or a class constant.  Class constants should
+   Reference either a global constant, or a class constant. Class constants should
    be preceded by the owning class::
 
         DateTime has an :php:const:`DateTime::ATOM` constant.
@@ -335,7 +336,7 @@ Notes and warnings
 
 There are often times when you want to inform the reader of an important tip,
 special note or a potential hazard. Admonitions in sphinx are used for just
-that.  There are three kinds of admonitions.
+that. There are three kinds of admonitions.
 
 * ``.. tip::`` Tips are used to document or re-iterate interesting or important
   information. The content of the directive should be written in complete
@@ -344,7 +345,7 @@ that.  There are three kinds of admonitions.
   information. The content of the directive should be written in complete
   sentences and include all appropriate punctuation.
 * ``.. warning::`` Warnings are used to document potential stumbling blocks, or
-  information pertaining to security.  The content of the directive should be
+  information pertaining to security. The content of the directive should be
   written in complete sentences and include all appropriate punctuation.
 
 All admonitions are made the same::

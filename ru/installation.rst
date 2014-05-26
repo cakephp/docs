@@ -149,6 +149,7 @@ Production установка
 =================================================
 
 .. toctree::
+   :maxdepth: 1
 
    installation/advanced-installation
 

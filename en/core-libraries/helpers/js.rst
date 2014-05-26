@@ -30,9 +30,7 @@ it in ``app/webroot/js``
 
 Then you must include the library in your page. To include it in
 all pages, add this line to the <head> section of
-``app/View/Layouts/default.ctp`` (copy this file from
-``lib/Cake/View/Layouts/default.ctp`` if you have not created your
-own)::
+``app/View/Layouts/default.ctp``::
 
     echo $this->Html->script('jquery'); // Include jQuery library
 
@@ -77,7 +75,7 @@ To override the "$" shortcut, use the jQueryObject variable::
 
     $this->Js->JqueryEngine->jQueryObject = '$j';
     echo $this->Html->scriptBlock(
-        'var $j = jQuery.noConflict();', 
+        'var $j = jQuery.noConflict();',
         array('inline' => false)
     );
     // Tell jQuery to go into noconflict mode
@@ -110,7 +108,7 @@ default, do the helper setup in your controller as follows::
     ``$helpers`` array in your controller.
 
 The selected JavaScript engine may disappear (replaced by the
-default) from the jsHelper object in your helper, if you miss to do
+default) from the JsHelper object in your helper, if you miss to do
 so and you will get code that does not fit your JavaScript
 library.
 
@@ -144,7 +142,7 @@ Since most methods in JavaScript begin with a selection of elements
 in the DOM, ``$this->Js->get()`` returns a $this, allowing you to
 chain the methods using the selection. Method chaining allows you
 to write shorter, more expressive code::
- 
+
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Is an example of method chaining. Method chaining is not possible
@@ -156,7 +154,7 @@ in PHP4 and the above sample would be written like::
 Common options
 --------------
 
-In attempts to simplify development where Js libraries can change,
+In attempts to simplify development where JavaScript libraries can change,
 a common set of options is supported by ``JsHelper``, these common
 options will be mapped out to the library specific options
 internally. If you are not planning on switching JavaScript
@@ -256,7 +254,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: object($data, $options = array())
 
-    Serializes ``$data`` into JSON.  This method is a proxy for ``json_encode()``
+    Serializes ``$data`` into JSON. This method is a proxy for ``json_encode()``
     with a few extra features added via the ``$options`` parameter.
 
     **Options:**
@@ -265,7 +263,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     -  ``postfix`` - String appended to the returned data.
 
     **Example Use**::
-    
+
         $json = $this->Js->object($data);
 
 .. php:method:: sortable($options = array())
@@ -297,7 +295,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     detailed information on its options and parameters.
 
     **Example Use**::
-    
+
         $this->Js->get('#my-list');
         $this->Js->sortable(array(
             'distance' => 5,
@@ -310,10 +308,16 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     Assuming you were using the jQuery engine, you would get the
     following code in your generated JavaScript block
-    
+
     .. code-block:: javascript
 
-        $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
+        $("#myList").sortable({
+            containment:"parent",
+            distance:5,
+            sort:onSort,
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: request($url, $options = array())
 
@@ -357,7 +361,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     Set the internal 'selection' to a CSS selector. The active
     selection is used in subsequent operations until a new selection is
     made::
-    
+
         $this->Js->get('#element');
 
     The ``JsHelper`` now will reference all other element based methods
@@ -366,9 +370,9 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: set(mixed $one, mixed $two = null)
 
-    Pass variables into JavaScript. Allows you to set variables that will be 
-    output when the buffer is fetched with :php:meth:`JsHelper::getBuffer()` or 
-    :php:meth:`JsHelper::writeBuffer()`. The JavaScript variable used to output 
+    Pass variables into JavaScript. Allows you to set variables that will be
+    output when the buffer is fetched with :php:meth:`JsHelper::getBuffer()` or
+    :php:meth:`JsHelper::writeBuffer()`. The JavaScript variable used to output
     set variables can be controlled with :php:attr:`JsHelper::$setVariable`.
 
 .. php:method:: drag($options = array())
@@ -403,10 +407,16 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     If you were using the jQuery engine the following code would be
     added to the buffer
-    
+
     .. code-block:: javascript
 
-        $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
+        $("#element").draggable({
+            containment:"#content",
+            drag:onDrag,
+            grid:[10,10],
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: drop($options = array())
 
@@ -440,10 +450,15 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     If you were using the jQuery engine the following code would be
     added to the buffer
-    
+
     .. code-block:: javascript
 
-        $("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});
+        $("#element").droppable({
+            accept:".items",
+            drop:onDrop,
+            out:onExit,
+            over:onHover
+        });
 
     .. note::
 
@@ -489,10 +504,17 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     If you were using the jQuery engine the following code would be
     added to the buffer
-    
+
     .. code-block:: javascript
 
-        $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
+        $("#element").slider({
+            change:onChange,
+            max:10,
+            min:0,
+            orientation:"vertical",
+            stop:onComplete,
+            value:2
+        });
 
 .. php:method:: effect($name, $options = array())
 
@@ -541,13 +563,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
        true)
 
     **Example use**::
-    
+
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('hey you!'));
 
     If you were using the jQuery library you would get the following
     JavaScript code:
-    
+
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
@@ -559,12 +581,16 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     ``stop`` option to false::
 
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
+        $this->Js->event(
+            'click',
+            $this->Js->alert('hey you!'),
+            array('stop' => false)
+        );
 
     If you were using the jQuery library you would the following
     JavaScript code would be added to the buffer. Note that the default
     browser event is not cancelled:
-    
+
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
@@ -587,7 +613,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
         $this->Js->each('$(this).css({color: "red"});');
 
     Using the jQuery engine would create the following JavaScript:
-    
+
     .. code-block:: javascript
 
         $('div.message').each(function () { $(this).css({color: "red"}); });
@@ -658,12 +684,12 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Create an html anchor element that has a click event bound to it.
+    Create an HTML anchor element that has a click event bound to it.
     Options can include both those for :php:func:`HtmlHelper::link()` and
     :php:func:`JsHelper::request()`, :php:func:`JsHelper::event()`, ``$options``
-    is a :term:`html attributes` array that are appended to the generated 
-    anchor element. If an option is not part of the standard attributes 
-    or ``$htmlAttributes`` it will be passed to :php:func:`JsHelper::request()` 
+    is a :term:`html attributes` array that are appended to the generated
+    anchor element. If an option is not part of the standard attributes
+    or ``$htmlAttributes`` it will be passed to :php:func:`JsHelper::request()`
     as an option. If an id is not supplied, a randomly generated one will be
     created for each link generated.
 
@@ -680,7 +706,11 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
+        echo $this->Js->link(
+            'Page 2',
+            array('page' => 2),
+            array('update' => '#content')
+        );
 
     Will create a link pointing to ``/page:2`` and updating #content
     with the response.
@@ -693,7 +723,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'htmlAttributes' => array('other' => 'value')
         ));
 
-    Outputs the following html:
+    Outputs the following HTML:
 
     .. code-block:: html
 
@@ -731,17 +761,17 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. _ajax-pagination:
 
-Ajax Pagination
+AJAX Pagination
 ===============
 
-Much like Ajax Pagination in 1.2, you can use the JsHelper to
-handle the creation of Ajax pagination links instead of plain HTML
+Much like AJAX Pagination in 1.2, you can use the JsHelper to
+handle the creation of AJAX pagination links instead of plain HTML
 links.
 
-Making Ajax Links
+Making AJAX Links
 -----------------
 
-Before you can create ajax links you must include the JavaScript
+Before you can create AJAX links you must include the JavaScript
 library that matches the adapter you are using with ``JsHelper``.
 By default the ``JsHelper`` uses jQuery. So in your layout include
 jQuery (or whichever library you are using). Also make sure to
@@ -759,7 +789,7 @@ example we'll be using jQuery::
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make JavaScript enhanced links instead of plain HTML ones.
 To do so you use ``options()``::
-    
+
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true
@@ -783,7 +813,7 @@ bottom of your view file. Be sure to include::
 
     echo $this->Js->writeBuffer();
 
-If you omit this you will **not** be able to chain ajax pagination
+If you omit this you will **not** be able to chain AJAX pagination
 links. When you write the buffer, it is also cleared, so you don't
 have worry about the same JavaScript being output twice.
 
@@ -805,14 +835,19 @@ indicator effects yourself:
         <div id="content">
             <?php echo $content_for_layout; ?>
         </div>
-        <?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>
+        <?php
+            echo $this->Html->image(
+                'indicator.gif',
+                array('id' => 'busy-indicator')
+            );
+        ?>
         </body>
     </html>
 
 Remember to place the indicator.gif file inside app/webroot/img
 folder. You may see a situation where the indicator.gif displays
-immediately upon the page load. You need to put in this css
-``#busy-indicator { display:none; }`` in your main css file.
+immediately upon the page load. You need to put in this CSS
+``#busy-indicator { display:none; }`` in your main CSS file.
 
 With the above layout, we've included an indicator image file, that
 will display a busy indicator animation that we will show and hide
@@ -822,8 +857,14 @@ with the ``JsHelper``. To do that we need to update our
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,
-        'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
-        'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
+        'before' => $this->Js->get('#busy-indicator')->effect(
+            'fadeIn',
+            array('buffer' => false)
+        ),
+        'complete' => $this->Js->get('#busy-indicator')->effect(
+            'fadeOut',
+            array('buffer' => false)
+        ),
     ));
 
 This will show/hide the busy-indicator element before and after the

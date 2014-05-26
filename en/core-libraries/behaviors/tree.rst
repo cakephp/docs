@@ -59,21 +59,66 @@ data in it::
         PRIMARY KEY  (id)
     );
 
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(1, 'My Categories', NULL, 1, 30);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(2, 'Fun', 1, 2, 15);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(3, 'Sport', 2, 3, 8);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(4, 'Surfing', 3, 4, 5);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(5, 'Extreme knitting', 3, 6, 7);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(6, 'Friends', 2, 9, 14);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(7, 'Gerald', 6, 10, 11);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(8, 'Gwendolyn', 6, 12, 13);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(9, 'Work', 1, 16, 29);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(10, 'Reports', 9, 17, 22);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(11, 'Annual', 10, 18, 19);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(12, 'Status', 10, 20, 21);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(13, 'Trips', 9, 23, 28);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(14, 'National', 13, 24, 25);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(15, 'International', 13, 26, 27);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (1, 'My Categories', NULL, 1, 30);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (2, 'Fun', 1, 2, 15);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (3, 'Sport', 2, 3, 8);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (4, 'Surfing', 3, 4, 5);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (5, 'Extreme knitting', 3, 6, 7);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (6, 'Friends', 2, 9, 14);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (7, 'Gerald', 6, 10, 11);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (8, 'Gwendolyn', 6, 12, 13);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (9, 'Work', 1, 16, 29);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (10, 'Reports', 9, 17, 22);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (11, 'Annual', 10, 18, 19);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (12, 'Status', 10, 20, 21);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (13, 'Trips', 9, 23, 28);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (14, 'National', 13, 24, 25);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (15, 'International', 13, 26, 27);
 
 For the purpose of checking that everything is setup correctly, we
 can create a test method and output the contents of our category
@@ -82,7 +127,12 @@ tree to see what it looks like. With a simple controller::
     class CategoriesController extends AppController {
 
         public function index() {
-            $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
+            $data = $this->Category->generateTreeList(
+              null,
+              null,
+              null,
+              '&nbsp;&nbsp;&nbsp;'
+            );
             debug($data); die;
         }
     }
@@ -243,7 +293,10 @@ following code::
 
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme fishing
-    $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
+    $newParentId = $this->Category->field(
+      'id',
+      array('name' => 'Other People\'s Categories')
+    );
     $this->Category->save(array('parent_id' => $newParentId));
 
 As would be expected the structure would be modified to:
@@ -367,7 +420,8 @@ are a few more tree-orientated permutations at your disposal.
         $allChildren = $this->Category->children(); // a flat array with 11 items
 
         // Only return direct children
-        $directChildren = $this->Category->children(1, true); // a flat array with 2 items
+        $directChildren = $this->Category->children(1, true); // a flat array with
+                                                              // 2 items
 
     .. note::
 
@@ -398,9 +452,9 @@ are a few more tree-orientated permutations at your disposal.
     :param $recursive: The number of levels deep to fetch associated records
 
     This method will return data similar to
-    :ref:`model-find-list`, with an indented prefix
-    to show the structure of your data. Below is an example of what you
-    can expect this method to return::
+    :ref:`model-find-list` but with a nested prefix that is specified
+    in the ``spacer`` option to show the structure of your data. Below is
+    an example of what you can expect this method to return::
 
       $treelist = $this->Category->generateTreeList();
 
@@ -461,10 +515,18 @@ are a few more tree-orientated permutations at your disposal.
 
       // contents of $parents
       array(
-          [0] =>  array('Category' => array('id' => 1, 'name' => 'My Categories', ..)),
-          [1] =>  array('Category' => array('id' => 9, 'name' => 'Work', ..)),
-          [2] =>  array('Category' => array('id' => 13, 'name' => 'Trips', ..)),
-          [3] =>  array('Category' => array('id' => 15, 'name' => 'International', ..)),
+          [0] =>  array(
+            'Category' => array('id' => 1, 'name' => 'My Categories', ..)
+          ),
+          [1] =>  array(
+            'Category' => array('id' => 9, 'name' => 'Work', ..)
+          ),
+          [2] =>  array(
+            'Category' => array('id' => 13, 'name' => 'Trips', ..)
+          ),
+          [3] =>  array(
+            'Category' => array('id' => 15, 'name' => 'International', ..)
+          ),
       )
 
 
@@ -495,7 +557,10 @@ Advanced Usage
             if ($delta > 0) {
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
+                $this->Session->setFlash(
+                  'Please provide the number of positions the field should be' .
+                  'moved down.'
+                );
             }
 
             return $this->redirect(array('action' => 'index'));
@@ -523,7 +588,10 @@ Advanced Usage
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
+                $this->Session->setFlash(
+                  'Please provide a number of positions the category should' .
+                  'be moved up.'
+                );
             }
 
             return $this->redirect(array('action' => 'index'));
@@ -606,10 +674,14 @@ Advanced Usage
     not change the parent of any node.::
 
         $model->reorder(array(
-            'id' => ,    //id of record to use as top node for reordering, default: $Model->id
-            'field' => , //which field to use in reordering, default: $Model->displayField
-            'order' => , //direction to order, default: 'ASC'
-            'verify' =>  //whether or not to verify the tree before reorder, default: true
+            //id of record to use as top node for reordering, default: $Model->id
+            'id' => ,
+            //which field to use in reordering, default: $Model->displayField
+            'field' => ,
+            //direction to order, default: 'ASC'
+            'order' => ,
+            //whether or not to verify the tree before reorder, default: true
+            'verify' =>
         ));
 
     .. note::

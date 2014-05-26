@@ -11,7 +11,7 @@ accomplir.
 CakePHP dispose d'un certain nombre de helpers qui aident à la création des
 vues. Ils aident à la création de balises bien-formatées (y compris les
 formulaires), aident à la mise en forme du texte, les durées et les nombres,
-et peuvent même accélérer la fonctionnalité Ajax. Pour plus d'informations sur
+et peuvent même accélérer la fonctionnalité AJAX. Pour plus d'informations sur
 les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 
 .. include:: /core-libraries/toc-helpers.rst

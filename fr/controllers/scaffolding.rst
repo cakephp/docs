@@ -23,9 +23,10 @@ ne l'utiliser qu'au début d'un projet. Il n'a pas été conçu pour être
 flexible, mais uniquement pour être un moyen temporaire de mettre en place
 votre application. A partir du moment où vous voudrez adapter les fonctions
 et les vues associées, il vous faudra désactiver le scaffolding et écrire
-votre propre code. La console CakePHP bake, que vous pourrez apprendre à
-connaître dans la prochaine section, est une bonne alternative : il va générer
-tout le code équivalent à ce que ferait le scaffolding.
+votre propre code. :doc:`bake console </console-and-shells>` de CakePHP, que
+vous pourrez apprendre à connaître dans la prochaine section, est une bonne
+alternative : il va générer tout le code équivalent à ce que ferait le
+scaffolding.
 
 Le Scaffolding est à utiliser au tout début du développement
 d'une application Internet. Le schéma de votre base de données
@@ -39,34 +40,35 @@ modification, des formulaires pour l'édition et une vue pour afficher un
 enregistrement en particulier.
 
 Pour ajouter le Scaffolding dans votre application, ajoutez la variable
-$scaffold dans votre controller ::
+``$scaffold`` dans votre controller ::
 
     class CategoriesController extends AppController {
         public $scaffold;
     }
     
 En supposant que vous avez bien crée un model Category dans le bon
-dossier (/app/Model/Category.php), vous pouvez aller sur
+dossier (``app/Model/Category.php``), vous pouvez aller sur
 http://exemple.com/categories pour voir votre nouveau scaffold.
 
 .. note::
 
     Créer des méthodes dans un controller contenant la variable
     $scaffold peut donner des résultats inattendus. Par exemple,
-    si vous créez une méthode index() dans ce controller, votre
+    si vous créez une méthode ``index()`` dans ce controller, votre
     méthode remplacera celle rendue normalement par la fonctionnalité
     de scaffold
 
 Le Scaffolding prend bien en compte les relations contenues dans votre
-model. Ainsi, si votre model Category a une relation BelongsTo avec
+model. Ainsi, si votre model Category a une relation ``belongsTo`` avec
 le model User, vous verrez les identifiants des users dans
 l'affichage de vos catégories. Puisque scaffolding connaît les associations
 entre models, vous ne verrez pas d'enregistrements liés dans les vues via
 scaffold jusqu'à ce que vous ajoutiez manuellement un code d'association
-au model. Par exemple, si le model Group hasMany User et que
-User belongsTo Group, vous devrez ajouter manuellement le code suivant
-dans vos models User et Group. Avant d'ajouter le code suivant, la
-vue affiche un select pour le Group dans le nouveau formulaire User::
+au model. Par exemple, si le model Group ``hasMany`` User et que
+User ``belongsTo`` Group, vous devrez ajouter manuellement le code suivant
+dans vos models User et Group. Avant de faire cela, la vue affiche un select
+vide pour le Group dans le Nouveau formulaire User; after – populated avec les
+IDs ou noms à partir de la table du Group dans le Nouveau formulaire User::
 
     // Dans Group.php
     public $hasMany = 'User';
@@ -75,8 +77,8 @@ vue affiche un select pour le Group dans le nouveau formulaire User::
 
 Si vous préférez voir autre chose en plus des identifiants
 (par exemple les prénoms des users), vous pouvez
-affecter la variable $displayField dans le model.
-Voyons comment définir la variable $displayField dans la classe des users,
+affecter la variable ``$displayField`` dans le model.
+Voyons comment définir la variable ``$displayField`` dans la classe des users,
 afin que le prénom soit montré en lieu et place de l'unique identifiant.
 Cette astuce permet de rendre le scaffolding plus lisible dans de nombreux cas::
 
@@ -88,8 +90,8 @@ Cette astuce permet de rendre le scaffolding plus lisible dans de nombreux cas::
 Créer une interface admin simplifiée avec scaffolding
 =====================================================
 
-Si vous avez activé le routage admin dans votre app/config/core.php,
-avec ``Configure::write('Routing.prefixes', array('admin'));`` vous pouvez
+Si vous avez activé le routage admin dans votre ``app/Config/core.php``,
+avec ``Configure::write('Routing.prefixes', array('admin'));``, vous pouvez
 utiliser le scaffolding (échafaudage) pour générer une interface
 d'administration.
 
@@ -132,16 +134,16 @@ leur développement.
 La personnalisation des vues scaffoldées pour un controller spécifique
 (PostsController dans notre exemple) doit être placée comme ceci::
 
-    /app/View/Posts/scaffold.index.ctp
-    /app/View/Posts/scaffold.form.ctp
-    /app/View/Posts/scaffold.view.ctp
+    app/View/Posts/scaffold.index.ctp
+    app/View/Posts/scaffold.form.ctp
+    app/View/Posts/scaffold.view.ctp
 
 Les vues scaffoldées personnalisées pour tous les controllers doivent être
 placées comme ceci::
 
-    /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/form.ctp
-    /app/View/Scaffolds/view.ctp
+    app/View/Scaffolds/index.ctp
+    app/View/Scaffolds/form.ctp
+    app/View/Scaffolds/view.ctp
 
 
 .. meta::

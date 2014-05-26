@@ -90,6 +90,210 @@ cache after each table is created. Cache can be disable by setting
         return true;
     }
 
+If you use models in your callbacks make sure to initialize them with the
+correct datasource, lest they fallback to their default datasources::
+
+    public function before($event = array()) {
+        $articles = ClassRegistry::init('Articles', array(
+            'ds' => $this->connection
+        ));
+        // Do things with articles.
+    }
+
+Writing CakePHP Schema by Hand
+==============================
+
+The CakeSchema class is the base class for all database schemas. Each schema
+class is able to generate a set of tables.  The schema shell console class
+``SchemaShell`` in the ``lib/Cake/Console/Command`` directory interprets command
+line, and base schema class can read from the database, or generate the database
+table.
+
+CakeSchema can now locate, read and write schema files to plugins. The
+SchemaShell also exposes this functionality.
+
+CakeSchema also supports ``tableParameters``. Table Parameters are non column
+specific table information such as collation, charset, comments, and table
+engine type. Each Dbo implements the tableParameters they support.
+
+Example
+-------
+
+Here is a full example from the acl class ::
+
+    /**
+     * ACO - Access Control Object - Something that is wanted
+     */
+        public $acos = array(
+            'id' => array(
+                'type' => 'integer',
+                'null' => false,
+                'default' => null,
+                'length' => 10,
+                'key' => 'primary'
+            ),
+            'parent_id' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'model' => array('type' => 'string', 'null' => true),
+            'foreign_key' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'alias' => array('type' => 'string', 'null' => true),
+            'lft' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'rght' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+        );
+
+
+Columns
+-------
+Each column is encoded as a key value associative array.
+The field name is the key of the field, the value is another array with some of
+the following attributes. 
+
+Example column ::
+
+    'id' => array(
+        'type' => 'integer',
+        'null' => false,
+        'default' => null,
+        'length' => 10,
+        'key' => 'primary'
+     ),
+
+key
+    The ``primary`` key defines the primary key index.
+
+null
+    Is the field nullable?
+
+default
+    What is the default value of the field?
+
+limit
+    The limit of the type of the field.
+
+length
+    What is the length of the field?
+
+type
+    One of the following types
+
+    * integer
+    * date
+    * time
+    * datetime
+    * timestamp
+    * boolean
+    * biginteger
+    * float
+    * string
+    * text
+    * binary
+
+
+Table key `indexes`
+===================
+The key name `indexes` is put in the table array instead of a field name.
+
+column
+    This is either a single column name or an array of columns.
+
+    e.g. Single ::
+
+        'indexes' => array(
+        'PRIMARY' => array(
+             'column' => 'id',
+             'unique' => 1
+            )
+        )
+
+    e.g. Multiple ::
+
+        'indexes' => array(
+        'AB_KEY' => array(
+            'column' => array(
+                 'a_id', 
+                 'b_id'), 
+             'unique' => 1
+            )
+        )
+
+
+unique
+    If the index is unique, set this to 1, otherwise 0.
+
+
+Table key `tableParameters`
+===========================
+
+tableParameters are supported only in MySQL.
+
+You can use tableParameters to set a variety of MySQL specific settings.
+
+
+-  ``engine`` Control the storage engine used for your tables.
+-  ``charset`` Control the character set used for tables.
+-  ``encoding`` Control the encoding used for tables.
+
+In addition to tableParameters MySQL dbo's implement
+``fieldParameters``. ``fieldParameters`` allow you to control MySQL
+specific settings per column.
+
+
+-  ``charset`` Set the character set used for a column
+-  ``encoding`` Set the encoding used for a column
+
+See below for examples on how to use table and field parameters in
+your schema files.
+
+**Using tableParameters in schema files**
+
+You use ``tableParameters`` just as you would any other key in a
+schema file. Much like ``indexes``::
+
+    var $comments => array(
+        'id' => array(
+          'type' => 'integer',
+          'null' => false,
+          'default' => 0,
+          'key' => 'primary'
+        ),
+        'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
+        'comment' => array('type' => 'text'),
+        'indexes' => array(
+            'PRIMARY' => array('column' => 'id', 'unique' => true),
+            'post_id' => array('column' => 'post_id'),
+        ),
+        'tableParameters' => array(
+            'engine' => 'InnoDB',
+            'charset' => 'latin1',
+            'collate' => 'latin1_general_ci'
+        )
+    );
+
+is an example of a table using ``tableParameters`` to set some
+database specific settings. If you use a schema file that contains
+options and features your database does not implement, those
+options will be ignored. 
+
 Migrations with CakePHP schema shell
 ====================================
 

@@ -20,7 +20,7 @@ nouveau projet, récupérez une copie de CakePHP et concentrez-vous
 sur la logique de votre application.
 
 CakePHP dispose
-`d'une équipe de développement <http://cakephp.lighthouseapp.com/contributors>`_
+`d'une équipe de développement <http://github.com/cakephp/cakephp/contributors>`_
 et d'une communauté actives, qui donnent au projet une forte valeur ajoutée.
 En plus de vous éviter de ré-inventer la roue, l'utilisation de CakePHP
 implique que le coeur de votre application est bien testé et qu'il peut être
@@ -29,7 +29,7 @@ constamment amélioré.
 Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant
 CakePHP :
 
--  `Communauté active et sympathique <http://cakephp.org/feeds>`_.
+-  `Communauté active et sympathique :ref:`cakephp-official-communities`.
 -  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_.
 -  Compatible avec les versions PHP 5.2.8 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_.
@@ -58,4 +58,4 @@ CakePHP :
 
 .. meta::
     :title lang=fr: Qu'est-ce que CakePHP? Pourquoi l'utiliser?
-    :keywords lang=fr: urls personnalisées,syntaxe php,sécurité cookie,interaction avec base de données,sécurité session,rapid manner,equipe de programmeurs,gratuit open source,javascript html,apache configuration,répertoire site web,formulaires html,génération de code,développement framework,monotonie,développement rapide,scaffolding,dispatcher,communauté amicale,crud
+    :keywords lang=fr: urls personnalisées,syntaxe php,sécurité cookie,interaction avec base de données,sécurité session,rapid manner,equipe de programmeurs,gratuit open source,JavaScript html,apache configuration,répertoire site web,formulaires html,génération de code,développement framework,monotonie,développement rapide,scaffolding,dispatcher,communauté amicale,crud

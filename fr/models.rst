@@ -26,7 +26,7 @@ et effacer des données. Au final, elle s'intéressera aux sources de données.
 Comprendre les Models
 =====================
 
-Un Model représente votre model de données. En programmation orientée, un model
+Un Model représente votre model de données. En programmation orientée objet, un model
 est un objet qui représente une "chose", comme une voiture, une
 personne ou une maison. Un blog, par exemple, peut avoir plusieurs posts et
 chaque post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont
@@ -118,6 +118,7 @@ Pour en savoir plus sur les Models
 ==================================
 
 .. toctree::
+    :maxdepth: 1
 
     models/associations-linking-models-together
     models/retrieving-your-data

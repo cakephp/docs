@@ -15,13 +15,13 @@ CakePHPは、web開発から単調な作業を取り除きます。
 新しいプロジェクトを始める時には、毎回、車輪の再開発をする代わりに、CakePHPのコピーをチェックアウトして、アプリケーションの本質部分の開発にすぐに取り掛かれます。
 
 CakePHPにはアクティブな
-`開発チーム <http://cakephp.lighthouseapp.com/contributors>`_ とコミュニティが存在し、プロジェクトに貢献しています。
+`開発チーム <http://github.com/cakephp/cakephp/contributors>`_ とコミュニティが存在し、プロジェクトに貢献しています。
 CakePHPを使用する、ということは、車輪の再開発を避けるだけでなく、あなたが開発するアプリケーションのコア部分がよくテストされ、常に改良されている、ということになります。
 
 CakePHPの使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります：
 
 
--  アクティブ、フレンドリーな `コミュニティ <http://cakephp.org/feeds>`_
+-  アクティブ、フレンドリーな :ref:`cakephp-official-communities`
 -  フレキシブルな `ライセンス <http://ja.wikipedia.org/wiki/MIT_License>`_
 -  PHP5.2.8以上との互換性をもつ
 -  データベースとのやり取りのための、

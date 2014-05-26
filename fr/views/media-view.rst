@@ -45,7 +45,8 @@ chemin relatif qui va être par défaut dans votre dossier ``app/webroot``::
             'name'      => 'example',
             'extension' => 'docx',
             'mimeType'  => array(
-                'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                'docx' => 'application/vnd.openxmlformats-officedocument' .
+                    '.wordprocessingml.document'
             ),
             'path'      => 'files' . DS
         );

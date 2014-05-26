@@ -57,14 +57,14 @@ Displaying notifications or flash messages
     :rtype: string
 
     As explained in :ref:`creating-notification-messages` you can
-    create one-time notifications for feedback. After creating messages 
-    with :php:meth:`SessionComponent::setFlash()` you will want to 
-    display them. Once a message is displayed, it will be removed and 
+    create one-time notifications for feedback. After creating messages
+    with :php:meth:`SessionComponent::setFlash()` you will want to
+    display them. Once a message is displayed, it will be removed and
     not displayed again::
 
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html:
+    The above will output a simple message, with the following HTML:
 
     .. code-block:: html
 
@@ -73,7 +73,7 @@ Displaying notifications or flash messages
         </div>
 
     As with the component method you can set additional properties
-    and customize which element is used. In the controller you might 
+    and customize which element is used. In the controller you might
     have code like::
 
         // in a controller
@@ -85,7 +85,7 @@ Displaying notifications or flash messages
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
-    This would use ``View/Elements/failure.ctp`` to render the message.  The 
+    This would use ``View/Elements/failure.ctp`` to render the message. The
     message text would be available as ``$message`` in the element.
 
     Inside the failure element file would be something like
@@ -108,7 +108,7 @@ Displaying notifications or flash messages
             'params' => array('name' => $user['User']['name'])
             'element' => 'payment'
         ));
-        
+
         // View/Elements/payment.ctp
         <div class="flash payment">
             <?php printf($message, h($name)); ?>

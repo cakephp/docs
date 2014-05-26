@@ -112,6 +112,7 @@ More on models
 ==============
 
 .. toctree::
+    :maxdepth: 1
 
     models/associations-linking-models-together
     models/retrieving-your-data

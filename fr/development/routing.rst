@@ -184,15 +184,10 @@ Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
 URL va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
-Si vous pensez utiliser des arguments nommés personnalisés avec votre route,
-vous devrez avertir le routeur de cela en utilisant la fonction
-:php:meth:`Router::connectNamed()`. Donc si vous voulez que la route ci-dessus
-matchent les URLs comme ``/cooks/some_action/type:chef``, nous faisons::
-
-    Router::connectNamed(array('type'));
-    Router::connect(
-        '/cooks/:action/*', array('controller' => 'users')
-    );
+Par défaut tous les paramètres nommés passés et les arguments sont extraits
+des URLs qui matchent ces templates gourmands. Cependant, vous pouvez configurer
+comment et quels arguments nommés sont parsés en utilisant
+:php:meth:`Router::connectNamed()` si vous en avez besoin.
 
 .. _route-elements:
 
@@ -326,8 +321,8 @@ doivent aussi être rendus disponibles en arguments passés::
     );
 
 et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
-dans le tableau d'URL comme ci-dessous et Cake sait comment former l'URL comme
-définie dans les routes::
+dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
+comme définie dans les routes::
 
     // view.ctp
     // cela va retourner un lien vers /blog/3-CakePHP_Rocks
@@ -412,7 +407,7 @@ définissez::
 
     Configure::write('Routing.prefixes', array('admin', 'manager'));
 
-Cake va automatiquement générer les routes pour les deux prefixes admin et
+CakePHP va automatiquement générer les routes pour les deux prefixes admin et
 manager. Chaque préfixe configuré va avoir les routes générées suivantes
 pour cela::
 
@@ -433,10 +428,10 @@ utilisant le helper HTML pour construire vos liens va aider à maintenir les
 appels préfixés. Voici comment construire le lien en utilisant le helper HMTL::
 
     // Allez dans une route préfixée.
-    echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
+    echo $this->Html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
 
     // laissez un préfixe
-    echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
+    echo $this->Html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
 .. index:: plugin routing
 
@@ -447,13 +442,13 @@ Le routage des Plugins utilise la clé **plugin**. Vous pouvez créer des liens
 qui pointent vers un plugin, mais en ajoutant la clé plugin à votre tableau
 d'URL::
 
-    echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
+    echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
 Inversement, si la requête active est une requête de plugin et que vous
 voulez créer un lien qui ne pointe pas vers un plugin, vous pouvez faire
 ce qui suit::
 
-    echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
+    echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
 
 En définissant ``plugin => null``, vous indiquez au Routeur que vous souhaitez
 créer un lien qui n'est pas une partie d'un plugin.
@@ -485,8 +480,8 @@ créer votre route comme illustré ci-dessous::
 
 Ensuite pour créer des liens qui s'adapteront aux routes, utilisez simplement::
 
-    $html->link(
-        'Link title', 
+    $this->Html->link(
+        'Link title',
         array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
     );
 
@@ -681,7 +676,7 @@ URLs, vous pouvez utiliser la syntaxe suivante::
         'controller' => 'posts',
         'action' => 'index',
         'filter' => array(
-            'published' => 1
+            'published' => 1,
             'frontpage' => 1
         )
     ));
@@ -693,7 +688,7 @@ controller en tableau, de la même façon que vous les envoyez au
 :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
-        'published' => 1
+        'published' => 1,
         'frontpage' => 1
     );
 
@@ -1033,7 +1028,7 @@ API du Router
         au résultat. Si un tableau accèpte les clés suivantes.
         
            * escape - utilisé quand on fait les URLs intégrées dans les
-             chaînes de requête html échappées '&'.
+             chaînes de requête HTML échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
 
     Génére une URL pour l'action spécfiée. Retourne une URL pointant vers
@@ -1050,7 +1045,7 @@ API du Router
     * ``base`` - défini à false pour retirer le chemin de base à partir
       d'URL générée. Si votre application n'est pas le répertoire root, ceci
       peut être utilisé pour générer les URLs qui sont 'cake relative'. Les
-      URLs Cake relative sont nécessaires quand on utilise requestAction.
+      URLs CakePHP relative sont nécessaires quand on utilise requestAction.
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
     * ``full_base`` - Si à true, la valeur de :php:meth:`Router::fullBaseUrl()`

@@ -1,8 +1,8 @@
 Récupérer vos données
 #####################
 
-Comme mentionné avant, un des rôles de la couche Model est d'obtenir les
-données à partir de multiples types de stockage. La classe Model de CakePHP
+Comme mentionné précédemment, un des rôles de la couche Model est d'obtenir les
+données à partir de plusieurs types de stockage. La classe Model de CakePHP
 est livrée avec quelques fonctions qui vous aident à chercher ces données, à
 les trier, les paginer, et les filtrer. La fonction la plus courante que
 vous utiliserez dans les models est :php:meth:`Model::find()`.
@@ -26,20 +26,27 @@ formes de find et il a les clés suivantes disponibles par défaut - qui sont
 toutes optionnelles::
 
     array(
-        'conditions' => array('Model.field' => $cetteValeur), //tableau de conditions
+        //tableau de conditions
+        'conditions' => array('Model.field' => $cetteValeur),
         'recursive' => 1, //int
-        'fields' => array('Model.champ1', 'DISTINCT Model.champ2'), //tableau de champs nommés
-        'order' => array('Model.created', 'Model.champ3 DESC'), //chaîne de caractère ou tableau définissant order
+        //tableau de champs nommés
+        'fields' => array('Model.champ1', 'DISTINCT Model.champ2'),
+        //chaîne de caractère ou tableau définissant order
+        'order' => array('Model.created', 'Model.champ3 DESC'),
         'group' => array('Model.champ'), //champs en GROUP BY
         'limit' => n, //int
         'page' => n, //int
         'offset' => n, //int
-        'callbacks' => true //autres valeurs possible sont false, 'before', 'after'
+        //autres valeurs possibles sont false, 'before', 'after'
+        'callbacks' => true
     )
 
-Il est possible également, d'ajouter et d'utiliser d'autres paramètres, dont
+Il est également possible d'ajouter et d'utiliser d'autres paramètres, dont
 il est fait usage dans quelques types de find, dans des behaviors
 (comportements) et, bien sûr, dans vos propres méthodes de model.
+
+Si votre opération de find n'arrive pas à récupérer des données, vous aurez
+un tableau vide.
 
 .. _model-find-first:
 
@@ -361,8 +368,8 @@ cette méthode pour que le meilleur résultat soit retourné en premier.
 
 .. warning::
 
-    Si vous spécifiez ``fields``, vous aurez besoin de toujours inclure le
-    parent_id (ou son alias courant)::
+    Si vous spécifiez ``fields``, vous aurez besoin de toujours inclure
+    id & parent_id (ou leurs alias courants)::
 
         public function some_function() {
             $categories = $this->Category->find('threaded', array(
@@ -384,8 +391,11 @@ Ci-dessous, un exemple simple (code du controller):
 
 ::
 
-    public function une_function() {
-       $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
+    public function some_function() {
+        $neighbors = $this->Article->find(
+            'neighbors',
+            array('field' => 'id', 'value' => 3)
+        );
     }
 
 Vous pouvez voir dans cet exemple, les deux éléments requis par le
@@ -565,21 +575,23 @@ régler le compte de pagination:
     class AppModel extends Model {
 
     /**
-     * Retire la clé 'fields' du compte de la requête find personnalisée 
-     * quand c'est un tableau, comme il cassera entièrement l'appel 
-     * Model::_findCount() call
+     * Removes 'fields' key from count query on custom finds when it is an array,
+     * as it will completely break the Model::_findCount() call
      *
-     * @param string $state Soit "before" soit "after"
+     * @param string $state Either "before" or "after"
      * @param array $query
      * @param array $results
-     * @return int Le nombre d'enregistrements trouvés, ou false
+     * @return int The number of records found, or false
      * @access protected
      * @see Model::find()
      */
         protected function _findCount($state, $query, $results = array()) {
             if ($state === 'before') {
-                if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
-                    $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
+                if (isset($query['type']) &&
+                    isset($this->findMethods[$query['type']])) {
+                    $query = $this->{
+                        '_find' . ucfirst($query['type'])
+                    }('before', $query);
                     if (!empty($query['fields']) && is_array($query['fields'])) {
                         if (!preg_match('/^count/i', current($query['fields']))) {
                             unset($query['fields']);
@@ -591,6 +603,7 @@ régler le compte de pagination:
         }
 
     }
+    ?>
 
 
 .. versionchanged:: 2.2
@@ -765,7 +778,7 @@ ce qui retourne::
 .. note::
 
     Cette syntaxe et la structure de tableau correspondante est valide
-    seulement pour MySQL. Cake ne fournit pas de données d'abstraction quand
+    seulement pour MySQL. CakePHP ne fournit pas de données d'abstraction quand
     les requêtes sont lancées manuellement, donc les résultats exacts vont
     varier entre les bases de données.
 
@@ -785,8 +798,12 @@ Si aucun enregistrement correspondant n'est trouvé cela retournera false.
     $this->Post->id = 22;
     echo $this->Post->field('name'); // affiche le nom pour la ligne avec l'id 22
 
-    echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
     // affiche le nom de la dernière instance créée
+    echo $this->Post->field(
+        'name',
+        array('created <' => date('Y-m-d H:i:s')),
+        'created DESC'
+    );
 
 :php:meth:`Model::read()`
 =========================
@@ -872,7 +889,9 @@ Faire un NOT IN(...) correspond à trouver les posts dont le titre n'est pas
 dans le jeu de données passé::
 
     array(
-        "NOT" => array("Post.titre" => array("Premier post", "Deuxième post", "Troisième post"))
+        "NOT" => array(
+            "Post.titre" => array("First post", "Second post", "Third post")
+        )
     )
 
 Ajouter des filtres supplémentaires aux conditions est aussi simple que
@@ -912,7 +931,7 @@ trouver les posts qui correspondent à l'une ou l'autre des conditions::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-Cake accepte toute opération booléenne SQL valide, telles que AND, OR, NOT,
+CakePHP accepte toute opération booléenne SQL valide, telles que AND, OR, NOT,
 XOR, etc., et elles peuvent être en majuscule comme en minuscule, comme vous
 préférez. Ces conditions sont également infiniment "IMBRIQUABLES". Admettons
 que vous ayez une relation hasMany/belongsTo entre Posts et Auteurs, ce qui
@@ -938,7 +957,7 @@ pouvez faire ceci en utilisant des conditions identiques à::
         array('Post.titre LIKE' => '%two%')
     ))
 
-Cake peut aussi vérifier les champs null. Dans cet exemple, la requête
+CakePHP peut aussi vérifier les champs null. Dans cet exemple, la requête
 retournera les enregistrements où le titre du post n'est pas null::
 
     array("NOT" => array(
@@ -1022,7 +1041,7 @@ Qui produira la requête SQL suivante::
     WHERE
        ((`Entreprise`.`nom` = 'Futurs Gains')
        OR
-       (`Entreprise`.`nom` = 'Le truc qui marche bien'))
+       (`Entreprise`.`ville` = 'CA'))
     AND
        ((`Entreprise`.`status` = 'active')
        OR (NOT (`Entreprise`.`status` IN ('inactive', 'suspendue'))))

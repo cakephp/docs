@@ -2,7 +2,7 @@ Development
 ###########
 
 In this section we'll cover the various aspects of developing a CakePHP
-application.  Topics like Configuration, handling errors & exceptions,
+application. Topics like Configuration, handling errors & exceptions,
 debugging, and testing will be covered.
 
 .. toctree::
@@ -18,7 +18,7 @@ debugging, and testing will be covered.
     development/rest
     development/dispatch-filters
     development/vendor-packages
-    
+
 
 
 .. meta::

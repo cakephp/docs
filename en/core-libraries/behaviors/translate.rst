@@ -94,8 +94,8 @@ Reading translated content
 ==========================
 
 By default the TranslateBehavior will automatically fetch and add in data based
-on the current locale.  The current locale is read from ``Configure::read('Config.language')``
-which is assigned by the :php:class:`L10n` class.  You can override this
+on the current locale. The current locale is read from ``Configure::read('Config.language')``
+which is assigned by the :php:class:`L10n` class. You can override this
 default on the fly using ``$Model->locale``.
 
 Retrieve translated fields in a specific locale
@@ -186,7 +186,8 @@ where the key is the translatable field and the value is the fake
 association name.::
 
     $this->Post->bindTranslation(array('title' => 'titleTranslation'));
-    $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
+    // need at least recursive 1 for this to work.
+    $this->Post->find('all', array('recursive' => 1));
 
 With this setup the result of your find() should look something
 like this::
@@ -243,7 +244,8 @@ your controller or you can define it directly in the model.
 
         public function add() {
             if (!empty($this->request->data)) {
-                $this->Post->locale = 'de_de'; // we are going to save the german version
+                // we are going to save the german version
+                $this->Post->locale = 'de_de';
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
                     return $this->redirect(array('action' => 'index'));

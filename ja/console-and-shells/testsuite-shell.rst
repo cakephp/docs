@@ -9,4 +9,4 @@
 
 .. meta::
     :title lang=ja: テストシェル
-    :keywords lang=ja: cakephp testing,test shell,testsuite,command line,テストシェル,テストスイート,コマンドライン 
+    :keywords lang=ja: cakephp testing,test shell,testsuite,command line,テストシェル,テストスイート,コマンドライン

@@ -30,7 +30,7 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptée pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encoder en html, true par
+* ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
 
@@ -55,16 +55,22 @@ Sortie:
 
     <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
-Si vous utilisez du html comme des images dans vos liens rappelez-vous de
+Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
-    echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
+    echo $this->Paginator->sort(
+      'user_id',
+      '<em>User account</em>',
+      array('escape' => false)
+    );
 
 Sortie:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/"><em>User account</em></a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">
+      <em>User account</em>
+    </a>
 
 L'option de direction peut être utilisée pour paramétrer la direction par
 défaut pour un lien. Une fois qu'un lien est activé, il changera
@@ -173,20 +179,29 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     * ``tag`` La balise enveloppante que vous voulez utiliser, 'span' par
       défaut.
-    * ``escape`` Si vous voulez que le contenu soit encodé en html,
+    * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
       par défaut à true.
     * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
         
     Un simple exemple serait::
 
-        echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->prev(
+          ' << ' . __('previous'),
+          array(),
+          null,
+          array('class' => 'prev disabled')
+        );
 
     Si vous étiez actuellement sur la secondes pages des posts (articles),
     vous obtenez le résultat suivant:
 
     .. code-block:: html
 
-        <span class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc"><< previous</a></span>
+        <span class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            << previous
+          </a>
+        </span>
 
     Si il n'y avait pas de page précédente vous obtenez:
 
@@ -202,7 +217,11 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a></li>
+        <li class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            previous
+          </a>
+        </li>
 
     Vous pouvez aussi désactiver la balise enroulante::
 
@@ -212,7 +231,10 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <a class="prev" rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a>
+        <a class="prev" rel="prev"
+          href="/posts/index/page:1/sort:title/order:desc">
+          previous
+        </a>
 
 .. versionchanged:: 2.3
     Pour les méthodes: :php:meth:`PaginatorHelper::prev()` et
@@ -406,14 +428,16 @@ que la principale option de configuration pour cette fonctionnalité est dans
 les vues. Vous pouvez utiliser `options()`` pour indiquer que vous voulez la
 conversion d'autres paramètres nommés::
 
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
+    $this->Paginator->options(array(
+      'convertKeys' => array('your', 'keys', 'here')
+    ));
 
 Configurer le Helper Paginator pour utiliser le Helper Javascript
 -----------------------------------------------------------------
 
 Par défaut le ``Helper Paginator`` utilise :php:class:`JsHelper` pour effectuer
-les fonctionnalités Ajax. Toutefois, si vous ne voulez pas cela et que vous
-voulez utiliser un Helper personnalisé pour les liens Ajax, vous pouvez le
+les fonctionnalités AJAX. Toutefois, si vous ne voulez pas cela et que vous
+voulez utiliser un Helper personnalisé pour les liens AJAX, vous pouvez le
 faire en changeant le tableau ``$helpers`` dans votre controller.
 Après avoir lancé ``paginate()`` faîtes ce qui suit::
 
@@ -422,7 +446,7 @@ Après avoir lancé ``paginate()`` faîtes ce qui suit::
     $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
 Changera le ``Helper Paginator`` pour utiliser ``CustomJs`` pour
-les opérations Ajax. Vous pourriez aussi définir la clé Ajax
+les opérations AJAX. Vous pourriez aussi définir la clé AJAX
 pour être un Helper, tant que la classe implémente la méthode
 ``link()`` qui se comporte comme :php:meth:`HtmlHelper::link()`.
 
@@ -436,7 +460,7 @@ tabulaire, mais le Helper Paginator disponible dans les vues
 N'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
-`PaginatorHelper <http://api20.cakephp.org/class/paginator-helper>`_
+`PaginatorHelper <http://api.cakephp.org/2.4/class-PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
 offre également des fonctionnalités de tri qui peuvent être facilement
 intégrés dans vos en-têtes de colonne de table:
@@ -513,13 +537,13 @@ D'autres Méthodes
     Les clés acceptées pour ``$options``:
 
         * **update** - L' Id de l'élément DOM que vous souhaitez actualiser.
-            Créé des liens près pour Ajax.
+            Créé des liens près pour AJAX.
         * **escape** Si vous voulez que le contenu soit encodé comme une
-            entité html, par défaut à true.
+            entité HTML, par défaut à true.
         * **model** Le model à utiliser, par défaut à
             PaginatorHelper::defaultModel().
 
-    Créé un lien ordinaire ou Ajax avec des paramètres de pagination::
+    Créé un lien ordinaire ou AJAX avec des paramètres de pagination::
 
         echo $this->Paginator->link('Sort by title on page 5',
                 array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));

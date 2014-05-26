@@ -34,8 +34,8 @@ filtre déjà activées pour toutes les requêtes, allons voir comment elles ont
 Chacune de ces valeurs de tableaux sont des noms de classe qui seront
 instanciés et ajoutés en écouteurs des évènements générés au niveau du
 dispatcher. Le premier, ``AssetDispatcher`` est là pour vérifier si la
-requête se réfère au theme ou au fichier d'asset du plugin, comme le css,
-le javascript ou une image stockée dans soit un dossier du webroot du plugin,
+requête se réfère au theme ou au fichier d'asset du plugin, comme le CSS,
+le JavaScript ou une image stockée dans soit un dossier du webroot du plugin,
 soit dans celui correspondant au Theme. Il servira le fichier selon s'il est
 trouvé ou non, stoppant le reste du cycle de dispatchement. Le filtre
 ``CacheDispatcher``, quand la variable de config ``Cache.check`` est
@@ -199,7 +199,7 @@ Filtres Inline
 ==============
 
 Notre dernier exemple va utiliser une fonction anonyme (seulement disponible
-sur PHP 5.3+) pour servir une liste de posts dans un format json, nous
+sur PHP 5.3+) pour servir une liste de posts dans un format JSON, nous
 vous encourageons à faire ainsi l'utilisation des controllers et la classe
 :php:class:`JsonView`, mais imaginons que vous ayez besoin de gagner une tout
 petite milliseconde pour cette mission-critical API endpoint::

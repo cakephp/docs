@@ -312,7 +312,7 @@ Surcharger les classes dans CakePHP
 Vous pouvez surcharger presque toute classe dans le framework, les exceptions
 sont les classes :php:class:`App` et :php:class:`Configure`. Quelque soit le
 moment où vous souhaitez effectuer l'écrasement, ajoutez seulement votre classe
-dans votre dossier app/Lib en imitant la structure interne du framework.
+dans votre dossier ``app/Lib`` en imitant la structure interne du framework.
 Quelques exemples suivants
 
 * Pour écraser la classe :php:class:`Dispatcher`, créer
@@ -355,8 +355,8 @@ Pour charger **app/Vendor/geshi.php**::
 
 .. note::
 
-    Le nom du fichier geshi doit être en minuscule puisque Cake ne le trouvera
-    pas sinon.
+    Le nom du fichier geshi doit être en minuscule puisque CakePHP ne le
+    trouvera pas sinon.
 
 Pour charger **app/Vendor/flickr/flickr.php**::
 
@@ -371,7 +371,7 @@ Pour charger **app/Vendor/services/well.named.php**::
     App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
 Cela ne ferait pas de différence si vos fichiers vendor étaient à l'intérieur
-du répertoire /vendors. Cake le trouvera automatiquement.
+du répertoire /vendors. CakePHP le trouvera automatiquement.
 
 Pour charger **vendors/vendorName/libFile.php**::
 

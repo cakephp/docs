@@ -29,7 +29,7 @@ leverage behaviors and model callbacks::
     $this->Comment->delete($this->request->data('Comment.id'));
 
 You can hook custom logic into the delete process using the ``beforeDelete`` and
-``afterDelete`` callbacks present in both Models and Behaviors.  See
+``afterDelete`` callbacks present in both Models and Behaviors. See
 :doc:`/models/callback-methods` for more information.
 
 .. _model-deleteall:
@@ -57,7 +57,10 @@ Example::
     $this->Comment->deleteAll(array('Comment.spam' => true), false);
 
 If you delete with either callbacks and/or cascade, rows will be found and then
-deleted. This will often result in more queries being issued.
+deleted. This will often result in more queries being issued. Associations will
+be reset before the matched records are deleted in deleteAll(). If you use
+bindModel() or unbindModel() to change the associations, you should set
+**reset** to ``false``.
 
 .. note::
 

@@ -4,21 +4,20 @@ Attributs de Model
 Les attributs de Model vous permettent de configurer les propriétés qui
 peuvent surcharger le behavior du model par défaut.
 
-Pour une liste complète d'attributs du model et ses descriptions, visitez
-l'API de CakePHP. Allez voir
-`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
+Pour une liste complète d'attributs du model et ses descriptions, allez voir
+`l'API de CakePHP <http://api.cakephp.org/2.4/class-Model.html>`_.
 
 useDbConfig
 ===========
 
 La propriété ``useDbConfig`` est une chaîne de caractère qui spécifie le nom
-de la connection à la base de données à utiliser pour lier votre classe model
+de la connexion à la base de données à utiliser pour lier votre classe model
 à la table de la base de données liée. Vous pouvez la configurer
 pour n'importe quelles connexions de base de données définies dans votre
 fichier de configuration database. Le fichier de configuration database
 est placé dans /app/Config/database.php.
 
-La propriété ``useDbConfig`` est par défaut la connection à la base de
+La propriété ``useDbConfig`` est par défaut la connexion à la base de
 données 'default'.
 
 Exemple d'utilisation:
@@ -54,7 +53,7 @@ tablePrefix
 ===========
 
 Le nom du préfixe de la table utilisé pour le model. Le préfixe de la table
-est initialement configuré dans le fichier de connection à la base de données
+est initialement configuré dans le fichier de connexion à la base de données
 dans /app/Config/database.php. Par défaut il n'y a pas de prefix. Vous pouvez
 écraser la valeur par défaut en configurant l'attribut ``tablePrefix`` dans le
 model.
@@ -80,7 +79,7 @@ Exemple d'utilisation::
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id est le nom du champ dans la base de données
     }
-    
+
 
 .. _model-displayField:
 
@@ -116,10 +115,10 @@ Articles. vous pouvez définir $recursive à différentes valeurs basées sur
 la quantité de données que vous souhaitez retourner à partir d'un appel
 $this->Group->find():
 
-* -1 Cake récupère seulement les données de Group, pas de jointures.
-* 0  Cake récupère les données de Group et leur Domain.
-* 1  Cake récupère Group, son domaine et ses Users associés.
-* 2  Cake récupère un Group, son domain, ses Users associés, et les
+* -1 CakePHP récupère seulement les données de Group, pas de jointures.
+* 0  CakePHP récupère les données de Group et leur Domain.
+* 1  CakePHP récupère Group, son domaine et ses Users associés.
+* 2  CakePHP récupère un Group, son domain, ses Users associés, et les
   Articles associés des Users.
 
 Ne le définissez pas à plus que vous n'avez besoin. Faire que CakePHP
@@ -185,11 +184,11 @@ Exemple d'utilisation::
 
     public $_schema = array(
         'first_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'last_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'email' => array(

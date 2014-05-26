@@ -27,6 +27,9 @@ groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
 appliquez les matchers aux élements de l'expression.
 
+Types d'expression
+------------------
+
 +--------------------------------+--------------------------------------------+
 | Expression                     | Définition                                 |
 +================================+============================================+
@@ -46,6 +49,9 @@ Tous les éléments d'expression supportent toutes les méthodes. En plus des
 certaines méthodes. Il y a ``extract()``,
 ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()`` et ``nest()``.
+
+Les Types d'Attribut Correspondants
+-----------------------------------
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -104,7 +110,7 @@ certaines méthodes. Il y a ``extract()``,
 
     :rtype: array
 
-    Insère $data dans un tableau comme défini par $path. Cette méthode
+    Insère $values dans un tableau tel que défini dans $path. Cette méthode
     supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
@@ -633,6 +639,12 @@ certaines méthodes. Il y a ``extract()``,
     Crée une valeur unique, en extrayant $path, et en réduisant les résultats
     extraits avec $function. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
+
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    $function. La fonction va récupérer les valeurs extraites en premier
+    argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

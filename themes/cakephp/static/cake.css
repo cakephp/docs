@@ -301,6 +301,9 @@ dl.docutils {
 #cakephp-global-navigation .nav-select {
 	display: none;
 }
+a.improve {
+	float: right;
+}
 /**
  * Responsive CSF navbar override.
  */

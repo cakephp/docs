@@ -21,14 +21,14 @@ Creating sort links
     :param array $options: Options for sorting link.
 
 Generates a sorting link. Sets named or querystring parameters for the sort and
-direction.  Links will default to sorting by asc.  After the first click, links
+direction. Links will default to sorting by asc. After the first click, links
 generated with ``sort()`` will handle direction switching automatically. Link
-sorting default by 'asc'.  If the resultset is sorted 'asc' by the specified key
+sorting default by 'asc'. If the resultset is sorted 'asc' by the specified key
 the returned link will sort by 'desc'.
 
 Accepted keys for ``$options``:
 
-* ``escape`` Whether you want the contents html entity encoded, defaults to
+* ``escape`` Whether you want the contents HTML entity encoded, defaults to
   true.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 
@@ -54,15 +54,21 @@ Output:
 
 If you are using HTML like images in your links remember to set escaping off::
 
-    echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
+    echo $this->Paginator->sort(
+      'user_id',
+      '<em>User account</em>',
+      array('escape' => false)
+    );
 
 Output:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/"><em>User account</em></a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">
+      <em>User account</em>
+    </a>
 
-The direction option can be used to set the default direction for a link.  Once a
+The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal::
 
     echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
@@ -89,7 +95,7 @@ Creating page number links
 Returns a set of numbers for the paged result set. Uses a modulus to
 decide how many numbers to show on each side of the current page  By default
 8 links on either side of the current page will be created if those pages exist.
-Links will not be generated for pages that do not exist.  The current page is
+Links will not be generated for pages that do not exist. The current page is
 also not a link.
 
 Supported options are:
@@ -103,21 +109,21 @@ Supported options are:
 * ``separator`` Separator content defaults to `` | ``
 * ``tag`` The tag to wrap links in, defaults to 'span'.
 * ``first`` Whether you want first links generated, set to an integer to
-  define the number of 'first' links to generate. Defaults to false.  If a
+  define the number of 'first' links to generate. Defaults to false. If a
   string is set a link to the first page will be generated with the value as the
   title::
 
       echo $this->Paginator->numbers(array('first' => 'First page'));
 
 * ``last`` Whether you want last links generated, set to an integer to define
-  the number of 'last' links to generate. Defaults to false.  Follows the same
+  the number of 'last' links to generate. Defaults to false. Follows the same
   logic as the ``first`` option. There is a
   :php:meth:`~PaginatorHelper::last()`` method to be used separately as well if
   you wish.
 
 * ``ellipsis`` Ellipsis content, defaults to '...'
-* ``class`` The classname used on the wrapping tag.
-* ``currentClass`` The classname to use on the current/active link. Defaults to
+* ``class`` The class name used on the wrapping tag.
+* ``currentClass`` The class name to use on the current/active link. Defaults to
   *current*.
 * ``currentTag`` Tag to use for current page number, defaults to null.
   This allows you to generate for example Twitter Bootstrap like links with the
@@ -160,20 +166,29 @@ pages in the paged data set.
     ``$options`` and ``$disabledOptions`` supports the following keys:
 
     * ``tag`` The tag wrapping tag you want to use, defaults to 'span'. Set this to ``false`` to disable this option.
-    * ``escape`` Whether you want the contents html entity encoded,
+    * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTag`` Tag to use instead of A tag when there is no previous page
 
     A simple example would be::
 
-        echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->prev(
+          ' << ' . __('previous'),
+          array(),
+          null,
+          array('class' => 'prev disabled')
+        );
 
     If you were currently on the second page of posts, you would get the following:
 
     .. code-block:: html
 
-        <span class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc"><< previous</a></span>
+        <span class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            << previous
+          </a>
+        </span>
 
     If there were no previous pages you would get:
 
@@ -189,7 +204,11 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a></li>
+        <li class="prev">
+          <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
+            previous
+          </a>
+        </li>
 
     You can also disable the wrapping tag::
 
@@ -199,7 +218,10 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <a class="prev" rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a>
+        <a class="prev" rel="prev"
+          href="/posts/index/page:1/sort:title/order:desc">
+          previous
+        </a>
 
 .. versionchanged:: 2.3
     For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
@@ -207,13 +229,13 @@ pages in the paged data set.
     New options ``disabledTag`` has been added.
 
     If you leave the ``$disabledOptions`` empty the ``$options`` parameter will be
-    used.  This can save some additional typing if both sets of options are the
+    used. This can save some additional typing if both sets of options are the
     same.
 
 .. php:method:: next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
     This method is identical to :php:meth:`~PagintorHelper::prev()` with a few exceptions. It
-    creates links pointing to the next page instead of the previous one.  It also
+    creates links pointing to the next page instead of the previous one. It also
     uses ``next`` as the rel attribute value instead of ``prev``
 
 .. php:method:: first($first = '<< first', $options = array())
@@ -223,8 +245,8 @@ pages in the paged data set.
 
         echo $this->Paginator->first('< first');
 
-    The above creates a single link for the first page.  Will output nothing if you
-    are on the first page.  You can also use an integer to indicate how many first
+    The above creates a single link for the first page. Will output nothing if you
+    are on the first page. You can also use an integer to indicate how many first
     paging links you want generated::
 
         echo $this->Paginator->first(3);
@@ -243,8 +265,8 @@ pages in the paged data set.
 .. php:method:: last($last = 'last >>', $options = array())
 
     This method works very much like the :php:meth:`~PaginatorHelper::first()`
-    method.  It has a few differences though.  It will not generate any links if you
-    are on the last page for a string values of ``$last``.  For an integer value of
+    method. It has a few differences though. It will not generate any links if you
+    are on the last page for a string values of ``$last``. For an integer value of
     ``$last`` no links will be generated once the user is inside the range of last
     pages.
 
@@ -277,10 +299,10 @@ Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
 specific indicators of where a user is in the paged data set.
 
-There are a number of options for ``counter()``.  The supported ones are:
+There are a number of options for ``counter()``. The supported ones are:
 
 * ``format`` Format of the counter. Supported formats are 'range', 'pages'
-  and custom. Defaults to pages which would output like '1 of 10'.  In the
+  and custom. Defaults to pages which would output like '1 of 10'. In the
   custom mode the supplied string is parsed and tokens are replaced with
   actual values. The available tokens are:
 
@@ -309,7 +331,7 @@ There are a number of options for ``counter()``.  The supported ones are:
       ));
 
 * ``separator`` The separator between the actual page and the number of
-  pages.  Defaults to ' of '. This is used in conjunction with 'format' =
+  pages. Defaults to ' of '. This is used in conjunction with 'format' =
   'pages' which is 'format' default value::
 
       echo $this->Paginator->counter(array(
@@ -349,8 +371,8 @@ Sets all the options for the Paginator Helper. Supported options are:
 
   The above adds the ``en`` route parameter to all links the helper will
   generate. It will also create links with specific sort, direction and page
-  values.  By default PaginatorHelper will merge in all of the current pass and
-  named parameters.  So you don't have to do that in each view file.
+  values. By default PaginatorHelper will merge in all of the current pass and
+  named parameters. So you don't have to do that in each view file.
 
 * ``escape`` Defines if the title field for links should be HTML escaped.
   Defaults to true.
@@ -360,7 +382,7 @@ Sets all the options for the Paginator Helper. Supported options are:
 
     $this->Paginator->options(array('update' => '#content'));
 
-  This is useful when doing :ref:`ajax-pagination`.  Keep in mind that the value
+  This is useful when doing :ref:`ajax-pagination`. Keep in mind that the value
   of update can be any valid CSS selector, but most often is simpler to use an
   id selector.
 
@@ -371,20 +393,22 @@ Sets all the options for the Paginator Helper. Supported options are:
 Using GET parameters for pagination
 -----------------------------------
 
-Normally Pagination in CakePHP uses :ref:`named-parameters`.  There are times
-you want to use GET parameters instead.  While the main configuration option for
+Normally Pagination in CakePHP uses :ref:`named-parameters`. There are times
+you want to use GET parameters instead. While the main configuration option for
 this feature is in :php:class:`PaginatorComponent`, you have some additional
-control in the view.  You can use ``options()`` to indicate that you want other
+control in the view. You can use ``options()`` to indicate that you want other
 named parameters to be converted::
 
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
+    $this->Paginator->options(array(
+      'convertKeys' => array('your', 'keys', 'here')
+    ));
 
-Configuring the PaginatorHelper to use a javascript helper
+Configuring the PaginatorHelper to use a JavaScript helper
 ----------------------------------------------------------
 
-By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do ajax
+By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do AJAX
 features. However, if you don't want that and want to use a custom helper
-for ajax links, you can do so by changing the ``$helpers`` array in your controller.
+for AJAX links, you can do so by changing the ``$helpers`` array in your controller.
 After running ``paginate()`` do the following::
 
     // In your controller action.
@@ -392,7 +416,7 @@ After running ``paginate()`` do the following::
     $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
 Will change the ``PaginatorHelper`` to use the ``CustomJs`` for
-ajax operations. You could also set the 'ajax' key to be any
+AJAX operations. You could also set the 'ajax' key to be any
 helper, as long as that class implements a ``link()`` method that
 behaves like :php:meth:`HtmlHelper::link()`
 
@@ -406,7 +430,7 @@ assume a tabular layout, but the PaginatorHelper available in views
 doesn't always need to be restricted as such.
 
 See the details on
-`PaginatorHelper <http://api20.cakephp.org/class/paginator-helper>`_
+`PaginatorHelper <http://api.cakephp.org/2.4/class-PaginatorHelper.html>`_
 in the API. As mentioned, the PaginatorHelper also offers sorting features
 which can be easily integrated into your table column headers:
 
@@ -454,8 +478,18 @@ of page navigation, also supplied by the PaginationHelper::
     echo $this->Paginator->numbers();
 
     // Shows the next and previous links
-    echo $this->Paginator->prev('« Previous', null, null, array('class' => 'disabled'));
-    echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled'));
+    echo $this->Paginator->prev(
+      '« Previous',
+      null,
+      null,
+      array('class' => 'disabled')
+    );
+    echo $this->Paginator->next(
+      'Next »',
+      null,
+      null,
+      array('class' => 'disabled')
+    );
 
     // prints X of Y, where X is current page and Y is number of pages
     echo $this->Paginator->counter();
@@ -480,8 +514,8 @@ Other Methods
     Accepted keys for ``$options``:
 
     * ``update`` The Id of the DOM element you wish to update. Creates
-      Ajax enabled links.
-    * ``escape`` Whether you want the contents html entity encoded,
+      AJAX enabled links.
+    * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to true.
     * ``model`` The model to use, defaults to
       :php:meth:`PaginatorHelper::defaultModel()`.

@@ -19,28 +19,34 @@ Hash path syntax
 ================
 
 The path syntax described below is used by all the methods in ``Hash``. Not all
-parts of the path syntax are available in all methods.  A path expression is
-made of any number of tokens.  Tokens are composed of two groups.  Expressions,
+parts of the path syntax are available in all methods. A path expression is
+made of any number of tokens. Tokens are composed of two groups. Expressions,
 are used to traverse the array data, while matchers are used to qualify
-elements.  You apply matchers to expression elements.
+elements. You apply matchers to expression elements.
+
+Expression Types
+----------------
 
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
 +================================+============================================+
-| ``{n}``                        | Represents a numeric key.  Will match      |
+| ``{n}``                        | Represents a numeric key. Will match       |
 |                                | any string or numeric key.                 |
 +--------------------------------+--------------------------------------------+
-| ``{s}``                        | Represents a string.  Will match any       |
-|                                | any string value including numeric string  |
+| ``{s}``                        | Represents a string. Will match any        |
+|                                | string value including numeric string      |
 |                                | values.                                    |
 +--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
-All expression elements are supported by all methods.  In addition to expression
-elements, you can use attribute matching with certain methods. They are ``extract()``, 
-``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
+All expression elements are supported by all methods. In addition to expression
+elements, you can use attribute matching with certain methods. They are ``extract()``,
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()`` and ``nest()``.
+
+Attribute Matching Types
+------------------------
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
@@ -70,8 +76,8 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     :rtype: mixed
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
-    path expressions.  Paths with ``{n}``, ``{s}`` or matchers are not
-    supported.  Use ``get()`` when you want exactly one value out of an array.
+    path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
+    supported. Use ``get()`` when you want exactly one value out of an array.
 
 .. php:staticmethod:: extract(array $data, $path)
 
@@ -80,7 +86,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     ``Hash::extract()`` supports all expression, and matcher components of
     :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays,
     along arbitrary paths quickly without having to loop through the data
-    structures.  Instead you use path expressions to qualify which elements you
+    structures. Instead you use path expressions to qualify which elements you
     want returned ::
 
         // Common Usage:
@@ -93,7 +99,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path. This method **only** supports
+    Inserts $values into an array as defined by $path. This method **only** supports
     the expression types of :ref:`hash-path-syntax`::
 
         $a = array(
@@ -250,7 +256,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
             )
         */
 
-    You can provide array's for both $keyPath and $valuePath.  If you do this,
+    You can provide array's for both $keyPath and $valuePath. If you do this,
     the first value will be used as a format string, for values extracted by the
     other paths::
 
@@ -569,7 +575,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: integer
 
-    Counts the dimensions of an array. This method will only 
+    Counts the dimensions of an array. This method will only
     consider the dimension of the first element in the array::
 
         $data = array('one', '2', 'three');
@@ -617,6 +623,11 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     results with $function. You can use both expression and matching elements
     with this method.
 
+.. php:staticmethod:: apply(array $data, $path, $function)
+
+    Apply a callback to a set of extracted values using $function. The function
+    will get the extracted values as the first argument.
+
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
     :rtype: array
@@ -649,13 +660,13 @@ elements, you can use attribute matching with certain methods. They are ``extrac
             )
         */
 
-    ``$dir`` can be either ``asc`` or ``desc``.  ``$type``
+    ``$dir`` can be either ``asc`` or ``desc``. ``$type``
     can be one of the following values:
 
     * ``regular`` for regular sorting.
     * ``numeric`` for sorting values as their numeric equivalents.
     * ``string`` for sorting values as their string value.
-    * ``natural`` for sorting values in a human friendly way.  Will
+    * ``natural`` for sorting values in a human friendly way. Will
       sort ``foo10`` below ``foo2`` as an example. Natural sorting
       requires PHP 5.4 or greater.
 
@@ -739,7 +750,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
     :rtype: array
 
     Normalizes an array. If ``$assoc`` is true, the resulting array will be
-    normalized to be an associative array.  Numeric keys with values, will be
+    normalized to be an associative array. Numeric keys with values, will be
     converted to string keys with null values. Normalizing an array, makes using
     the results with :php:meth:`Hash::merge()` easier::
 

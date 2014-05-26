@@ -37,13 +37,13 @@ et obtenez en un instant la gloire et la fortune.
 L'API
 =====
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
 Allez droit au but et atteignez le graal des développeurs,
 l'API CakePHP (Application Programming Interface) est la documentation
 la plus complète sur tous les détails essentiels au fonctionnement interne
-du framework.
-C'est une référence directe au code, donc apportez votre chapeau à hélice.
+du framework. C'est une référence directe au code, donc apportez votre chapeau
+à hélice.
 
 Les cas de Test
 ===============
@@ -76,24 +76,28 @@ que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs
 dans votre région ou que vous souhaitiez donner votre nouvelle marque de
 voiture sportive.
 
-Le Groupe Google
-================
+.. _cakephp-official-communities:
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+Communautés Officiels CakePHP
+=============================
+`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
-CakePHP dispose également d'un Groupe Google très actif.
-Il peut être une ressource de choix pour trouver des réponses archivées,
-des questions fréquemment posées et obtenir des réponses aux problèmes urgents.
+CakePHP a aussi son groupe officiel sur Google Groups. Il y a des centaines
+de personne qui discutent des projets CakePHP, qui s'aident les uns les autres,
+résolvent des problèmes, qui construisent des projets et partagent leurs idées.
+Cela peut être une grande ressource pour trouver des réponses archivées, des
+questions fréquemment posées et obtenir des réponses aux problèmes urgents.
+Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
 
-Les Questions CakePHP
-=====================
 
-`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+Stackoverflow
+=============
 
-Simplement s'inscrire/se connecter et poser une question. Attendez jusqu'à ce
-que vous ayez quelques réponses et choisissez la réponse correcte. Vous pouvez
-aussi voir, commenter et voter pour les questions précédemment demandées et
-aussi les questions résolues.
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+
+Tagge vos questions avec ``cakephp`` et la version sépcifique que vous utilisez
+pour permettre aux utilisateurs existant de stackoverflow de trouver vos
+questions.
 
 
 .. meta::

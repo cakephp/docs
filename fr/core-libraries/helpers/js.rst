@@ -4,11 +4,11 @@ JSHelper
 .. php:class:: Helper Js(View $view, array $settings = array())
 
 Depuis le début le support de CakePHP pour Javascript a été
-orienté vers Prototype/Scriptaculous (librairie javascript).
+orienté vers Prototype/Scriptaculous (librairie JavaScript).
 Tandis que nous continuons de penser qu'il s'agit d'excellentes
 bibliothèques Javascript, il a été demandé à la communauté de
 supporter d'autres librairies. Plutôt que d'enlever Prototype en faveur
-d'une autre librairie javascript. Nous avons créé un adaptateur fonctionnant
+d'une autre librairie JavaScript. Nous avons créé un adaptateur fonctionnant
 sur le principe d'un Helper et avons inclu 3 des librairies les plus demandées.
 Prototype/scriptaculous, Mootools/Mootools-more, et jQuery/jQueryUI.
 Bien que l'API n'est pas aussi vaste que le Helper Ajax, nous
@@ -17,21 +17,20 @@ plus extensible offrant aux développeurs la puissance et la
 flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
 
 Les moteurs Javascript forment l'épine dorsale du nouveau Helper Js.
-Un moteur javascript traduit un élément Javascript abstrait dans
-un code javascript concret spécifique à la librairie en cours
+Un moteur JavaScript traduit un élément Javascript abstrait dans
+un code JavaScript concret spécifique à la librairie en cours
 d'utilisation. De plus ils créent un système extensible à utiliser
 pour les autres.
 
 Utilisation d'un moteur Javascript spécifique
 =============================================
 
-Avant tout, téléchargez votre librairie javascript préférée et placez la
+Avant tout, téléchargez votre librairie JavaScript préférée et placez la
 dans ``app/webroot/js``.
 
 Puis, vous devez inclure la librairie dans votre page. Pour l'inclure
 dans toutes les pages, ajoutez cette ligne dans la section <head>
-de ``app/View/Layouts/default.ctp`` (copiez ce fichier depuis
-``lib/Cake/View/Layouts/default.ctp`` si vous n'avez pas créé le votre)::
+de ``app/View/Layouts/default.ctp``::
 
     echo $this->Html->script('jquery'); // Inclut la librairie Jquery
 
@@ -77,7 +76,7 @@ Pour redéfinir le raccourci "$", utilisez la variable jQueryObject::
 
     $this->Js->JqueryEngine->jQueryObject = '$j';
     echo $this->Html->scriptBlock(
-        'var $j = jQuery.noConflict();', 
+        'var $j = jQuery.noConflict();',
         array('inline' => false)
     );
     // Demande à jQuery de se placer dans un mode noconflict
@@ -92,10 +91,10 @@ Helper personnalisé::
 
 .. note::
 
-    Il n'est pas possible de déclarer le moteur javascript dans un
+    Il n'est pas possible de déclarer le moteur JavaScript dans un
     Helper personnalisé. Ceci n'aurait aucun effet.
 
-Si vous êtes prêt à utiliser un moteur javascript autre que celui
+Si vous êtes prêt à utiliser un moteur JavaScript autre que celui
 par défaut, faîtes le paramétrage du Helper dans votre controller
 comme ceci::
 
@@ -110,9 +109,9 @@ comme ceci::
     Assurez-vous de déclarer le Helper Js et son moteur **en haut**
     du tableau ``$helpers`` dans votre controller.
 
-Le moteur javascript séléctionné peut disparaître (remplacé par celui par
-défaut) de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
-et vous obtiendrez du code qui ne correspond pas à votre librairie javascript.
+Le moteur JavaScript séléctionné peut disparaître (remplacé par celui par
+défaut) de l'objet JsHelper dans votre helper, si vous oubliez de faire cela
+et vous obtiendrez du code qui ne correspond pas à votre librairie JavaScript.
 
 Création d'un moteur Javascript
 ===============================
@@ -148,7 +147,7 @@ avec une sélection d'éléments dans le DOM, ``$this->Js->get()``
 retourne un $this, vous permettent d'enchaîner les méthodes en
 utilisant la selection.  Le chaînage de méthode vous permet
 d'écrire moins, et de rendre votre code plus expressif .::
- 
+
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Est un exemple de chaînage de méthode. Le chaînage de méthode
@@ -161,12 +160,12 @@ n'est pas possible dans PHP4 et l'exemple ci-dessus devrait être
 Options communes
 ----------------
 
-Dans le but de simplifier le développement et comme les librairies Js peuvent
-changer, un ensemble courant d'options est pris en charge par ``JsHelper``,
-Ces options courantes seront mappées en dehors des options spécifiques de la
-librairies en interne. Si vous ne prévoyez pas la commutation des librairies,
-chaque librairie supporte toutes les fonctions de callback natives et les
-options.
+Dans le but de simplifier le développement et comme les librairies JavaScript
+peuvent changer, un ensemble courant d'options est pris en charge par
+``JsHelper``, ces options courantes seront mappées en dehors des options
+spécifiques de la librairies en interne. Si vous ne prévoyez pas la commutation
+des librairies, chaque librairie supporte toutes les fonctions de callback
+natives et les options.
 
 Enveloppement de Callback
 -------------------------
@@ -180,7 +179,7 @@ Travailler avec des scripts bufferisés
 --------------------------------------
 
 Un inconvénient à la précédente implémentation des fonctionnalités de
-type d'Ajax était la dispersion des balises de script partout dans
+type d'AJAX était la dispersion des balises de script partout dans
 le document , et l'impossibilité de bufferiser les scripts ajoutés par
 les éléments dans la mise en page. Le nouveau Helper Js si il est
 utilisé correctement évite ces deux questions. Il est recommandé
@@ -264,8 +263,9 @@ méthode.
 
 .. php:method:: object($data, $options = array())
 
-    Sérialise ``$data`` vers JSON.  Cette méthode est un proxy pour ``json_encode()``
-    avec quelques fonctionnalités supplémentaires ajoutée avec le paramètre ``$options``.
+    Sérialise ``$data`` vers JSON.  Cette méthode est un proxy pour
+    ``json_encode()`` avec quelques fonctionnalités supplémentaires ajoutée
+    avec le paramètre ``$options``.
 
     **Options:**
 
@@ -319,10 +319,16 @@ méthode.
 
     En imaginant que vous étiez en train d'utiliser le moteur Jquery, vous
     devriez avoir le code suivant dans votre block Javascript généré.
-    
+
     .. code-block:: javascript
 
-        $("#maListe").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
+        $("#myList").sortable({
+            containment:"parent",
+            distance:5,
+            sort:onSort,
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: request($url, $options = array())
 
@@ -375,7 +381,7 @@ méthode.
 
 .. php:method:: set(mixed $one, mixed $two = null)
 
-    Passe des variables dans javascript. Vous permet de définir des variables
+    Passe des variables dans JavaScript. Vous permet de définir des variables
     qui seront retournées quand le buffer est extrait avec
     :php:meth:`Helper Js::getBuffer()` ou :php:meth:`Helper Js::writeBuffer()`.
     La variable Javascript utilisée pour retourner les variables peut être
@@ -417,7 +423,13 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
+        $("#element").draggable({
+            containment:"#content",
+            drag:onDrag,
+            grid:[10,10],
+            start:onStart,
+            stop:onStop
+        });
 
 .. php:method:: drop($options = array())
 
@@ -454,7 +466,12 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});
+        $("#element").droppable({
+            accept:".items",
+            drop:onDrop,
+            out:onExit,
+            over:onHover
+        });
 
     .. note::
 
@@ -505,7 +522,14 @@ méthode.
     
     .. code-block:: javascript
 
-        $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
+        $("#element").slider({
+            change:onChange,
+            max:10,
+            min:0,
+            orientation:"vertical",
+            stop:onComplete,
+            value:2
+        });
 
 .. php:method:: effect($name, $options = array())
 
@@ -572,7 +596,11 @@ méthode.
     ``stop`` à false::
 
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('saperlipopette!'), array('stop' => false));
+        $this->Js->event(
+            'click',
+            $this->Js->alert('saperlipopette!'),
+            array('stop' => false)
+        );
 
     Si vous employiez la librairie jQuery vous devriez avoir le code 
     Javascript suivant ajouté au buffer. Notez que l'événement du navigateur
@@ -607,7 +635,7 @@ méthode.
 
 .. php:method:: alert($message)
 
-    Créé un extrait de code javascript contenant un ``alert()``. Par
+    Créé un extrait de code JavaScript contenant un ``alert()``. Par
     défaut, ``alert`` ne bufferise pas, et retourne le morceau de script
     suivant.::
 
@@ -657,14 +685,20 @@ méthode.
     Va créé un bouton submit et un événement onclick attaché. 
     L'événement click sera bufferisé par défaut.::
 
-        echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
+        echo $this->Js->submit('Save', array(
+            'update' => '#content',
+            'div' => false,
+            'type' => 'json',
+            'async' => false
+        ));
 
     Montre comment vous pouvez combiner les options de 
-    :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à l'utilisation des submits.
+    :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à
+    l'utilisation des submits.
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Créé un élément ancre html qui a un événement clic rattaché.
+    Créé un élément ancre HTML qui a un événement clic rattaché.
     Les options peuvent inclure celle pour :php:func:`HtmlHelper::link()`
     et :php:func:`Helper Js::request()`, :php:func:`Helper Js::event()`,
     ``$options`` est un tableau d'attribut :term:`attributs html` qui sont
@@ -679,7 +713,7 @@ méthode.
     -  ``confirm`` - Génère une boite de dialogue de confirmation avant
        l'envoi de l'événement.
     -  ``id`` - utilise une id personnalisée .
-    -  ``htmlAttributes`` - attributs html non standard supplémentaires.
+    -  ``htmlAttributes`` - attributs HTML non standard supplémentaires.
        Les attributs standards sont class, id, rel, title, escape, onblur et
        onfocus.
     -  ``buffer`` - Désactive le buffering et retourne une balise script
@@ -687,7 +721,11 @@ méthode.
 
     **Exemple d'utilisation**::
 
-        echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
+        echo $this->Js->link(
+            'Page 2',
+            array('page' => 2),
+            array('update' => '#content')
+        );
 
     Va créé un lien pointant vers ``/page:2`` et mettre à jour  #content
     avec la réponse.
@@ -700,7 +738,10 @@ méthode.
             'htmlAttributes' => array('other' => 'value')
         ));
 
-        // Créé le html suivant
+        // Créé le HTML suivant
+
+    .. code-block:: html
+
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())
@@ -729,20 +770,20 @@ méthode.
 
 .. php:method:: value($value)
 
-    Converti une variable native PHP d'un type dans une représentation
+    Convertit une variable native PHP d'un type dans une représentation
     JSON équivalente. Échappe une valeur de chaîne dans une chaîne 
     compatible JSON. Les caractère UTF-8 seront échappés .
 
 .. _ajax-pagination:
 
-La Pagination Ajax
+La Pagination AJAX
 ==================
 
-Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
+Bien mieux qu'avec la pagination AJAX de la 1.2, vous pouvez utiliser
 le Helper JS pour gérer les liens de pagination AJAX au lieu de
 liens HTML.
 
-Fabriquer les liens Ajax
+Fabriquer les liens AJAX
 ------------------------
 
 Avant de pouvoir créer les liens ajax vous devez inclure la librairie
@@ -789,7 +830,7 @@ du buffer. A la fin de votre fichier de vue. Vérifiez l'inclusion de::
     echo $this->Js->writeBuffer();
 
 Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de 
-paginiation Ajax. Quand vous écrivez le buffer, cela l'efface également ,
+pagination AJAX. Quand vous écrivez le buffer, cela l'efface également ,
 et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 
 Ajouter des effets et des transitions
@@ -798,17 +839,24 @@ Ajouter des effets et des transitions
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter
 les effets d'indicator vous même.::
 
+.. code-block:: php
+
     <!DOCTYPE html>
     <html>
         <head>
             <?php echo $this->Html->script('jquery'); ?>
-            //plus de trucs ici.
+            //more stuff here.
         </head>
         <body>
         <div id="content">
             <?php echo $content_for_layout; ?>
         </div>
-        <?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>
+        <?php
+            echo $this->Html->image(
+                'indicator.gif',
+                array('id' => 'busy-indicator')
+            );
+        ?>
         </body>
     </html>
 
@@ -816,7 +864,7 @@ Rappelez vous de placer le fichier indicator.gif dans le répertoire
 app/webroot/img. Vous devriez voir une situation où indicator.gif
 s'affiche immédiatement au chargement de la page. Vous avez
 besoin d'insérer cet indicateur  ``#busy-indicator { display:none; }``
-dans votre fichier css principal.
+dans votre fichier CSS principal.
 
 Avec le layout ci-dessus, nous avons inclus un indicateur, qui affichera
 une animation "occupé" que nous aurons à montrer et cacher
@@ -826,8 +874,14 @@ avec le ``Helper Js``. Pour faire cela, nous avons besoin de mettre
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,
-        'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
-        'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
+        'before' => $this->Js->get('#busy-indicator')->effect(
+            'fadeIn',
+            array('buffer' => false)
+        ),
+        'complete' => $this->Js->get('#busy-indicator')->effect(
+            'fadeOut',
+            array('buffer' => false)
+        ),
     ));
 
 Ceci montrera/cachera l'élément 'indicateur occupé' avant et après

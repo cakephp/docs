@@ -25,7 +25,7 @@ HTTP methods.
 
         // string query
         $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
-        
+
         // array query
         $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
 
@@ -36,7 +36,7 @@ HTTP methods.
 
     The parameters for the ``post`` method are almost the same as the
     get method, ``$uri`` is the web address where the request is being
-    made; ``$query`` is the data to be posted, either as a string, or as 
+    made; ``$query`` is the data to be posted, either as a string, or as
     an array of keys and values::
 
         App::uses('HttpSocket', 'Network/Http');
@@ -48,7 +48,7 @@ HTTP methods.
             'http://example.com/add',
             'name=test&type=user'
         );
-        
+
         // array data
         $data = array('name' => 'test', 'type' => 'user');
         $results = $HttpSocket->post('http://example.com/add', $data);
@@ -121,7 +121,7 @@ Handling the response
 =====================
 
 Responses from requests made with ``HttpSocket`` are instances of
-``HttpResponse``.  This object gives you a few accessor methods to access the
+``HttpResponse``. This object gives you a few accessor methods to access the
 contents of an HTTP response. This class implements the
 `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ and
 `__toString() <http://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
@@ -161,7 +161,7 @@ Getting headers from a response
 -------------------------------
 
 Following others places in core, the HttpSocket does not change the casing of
-headers.  :rfc:`2616` states that headers are case insensitive, and HttpSocket
+headers. :rfc:`2616` states that headers are case insensitive, and HttpSocket
 preserves the values the remote host sends::
 
     HTTP/1.1 200 OK
@@ -171,7 +171,7 @@ preserves the values the remote host sends::
 
 Your ``$response->headers`` (or ``$response['header']``) will contain the exact
 keys sent. In order to safely access the header fields, it's best to use
-``getHeader()``.  If your headers looks like::
+``getHeader()``. If your headers looks like::
 
     Date: Mon, 16 Apr 2007 04:14:16 GMT
     server: CakeHttp Server
@@ -191,10 +191,10 @@ Headers can be fetched case-insensitively.
 Automatically handling a redirect response
 ------------------------------------------
 
-When the response has a valid redirect status code (see ``HttpResponse::isRedirect``), 
+When the response has a valid redirect status code (see ``HttpResponse::isRedirect``),
 an extra request can be automatically done according to the received *Location* header::
 
-    <?php 
+    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $HttpSocket = new HttpSocket();
@@ -221,7 +221,7 @@ exception will be thrown. By default HttpSocket will use the mozilla certificate
 authority file to verify SSL certificates. You can use the following options to
 configure how SSL certificates are handled:
 
-- ``ssl_verify_peer`` Set to false to disable SSL verification.  This is
+- ``ssl_verify_peer`` Set to false to disable SSL verification. This is
   **not recommended**.
 - ``ssl_verify_host`` Set to false if you wish to ignore hostname match errors
   when validating certificates.
@@ -267,8 +267,8 @@ Before your request you'll need to change the responseClass property::
     $http->responseClass = 'YourResponse';
 
 .. versionchanged:: 2.3
-    As of 2.3.0 you should extend ``HttpSocketResponse`` instead.  This
-    avoids a common issue with the http pecl extension.
+    As of 2.3.0 you should extend ``HttpSocketResponse`` instead. This
+    avoids a common issue with the HTTP PECL extension.
 
 Downloading the results
 -----------------------
@@ -295,8 +295,8 @@ Using authentication
 ====================
 
 HttpSocket supports a HTTP Basic and Digest authentication methods out of the
-box.  You can also create custom authentication objects to support protocols
-like OAuth.  To use any authentication system you need to configure the
+box. You can also create custom authentication objects to support protocols
+like OAuth. To use any authentication system you need to configure the
 ``HttpSocket`` instance::
 
     App::uses('HttpSocket', 'Network/Http');

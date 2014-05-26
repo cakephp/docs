@@ -17,7 +17,7 @@ of which is listed here for your convenience:
 .. note::
 
     You can find additional community contributed datasources in the
-    `CakePHP DataSources repository at github <https://github.com/cakephp/datasources/tree/2.0>`_.
+    `CakePHP DataSources repository on GitHub <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 When specifying a database connection configuration in
 ``app/Config/database.php``, CakePHP transparently uses the corresponding
@@ -50,7 +50,7 @@ Methods that must be implemented for all CRUD methods:
 -  ``listSources($data = null)``
 -  ``calculate($model, $func, $params)``
 -  At least one of:
-   
+
    -  ``create(Model $model, $fields = null, $values = null)``
    -  ``read(Model $model, $queryData = array(), $recursive = null)``
    -  ``update(Model $model, $fields = null, $values = null, $conditions = null)``
@@ -166,7 +166,8 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
     /**
      * Implement the R in CRUD. Calls to ``Model::find()`` arrive here.
      */
-        public function read(Model $model, $queryData = array(), $recursive = null) {
+        public function read(Model $model, $queryData = array(),
+            $recursive = null) {
             /**
              * Here we do the actual count as instructed by our calculate()
              * method above. We could either check the remote source or some
@@ -180,7 +181,10 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
              * Now we get, decode and return the remote data.
              */
             $queryData['conditions']['apiKey'] = $this->config['apiKey'];
-            $json = $this->Http->get('http://example.com/api/list.json', $queryData['conditions']);
+            $json = $this->Http->get(
+                'http://example.com/api/list.json',
+                $queryData['conditions']
+            );
             $res = json_decode($json, true);
             if (is_null($res)) {
                 $error = json_last_error();
@@ -210,7 +214,8 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      * set arrive here. Depending on the remote source you can just call
      * ``$this->create()``.
      */
-        public function update(Model $model, $fields = null, $values = null, $conditions = null) {
+        public function update(Model $model, $fields = null, $values = null,
+            $conditions = null) {
             return $this->create($model, $fields, $values);
         }
 
@@ -255,7 +260,7 @@ We can retrieve data from our remote source using the familiar model methods::
 
 .. tip::
 
-    Using find types other than ``'all'`` can have unexpected results if the 
+    Using find types other than ``'all'`` can have unexpected results if the
     result of your ``read`` method is not a numerically indexed array.
 
 Similarly we can save a new message::
@@ -290,6 +295,25 @@ and refer to it using the plugin notation::
         'apiKey'     => 'abcd1234',
     );
 
+Connecting to SQL Server
+========================
+
+The Sqlserver datasource depends on Microsoft's PHP extension called pdo_sqlsrv.
+This PHP Extension is not included in the base installation of PHP and must be
+installed separately.
+
+Also the SQL Server Native Client must be installed for the extension to work.
+As the Native Client is available only for Windows you will not be able to
+install it on Linux, Mac OS X or FreeBSD.
+
+So if the Sqlserver Datasource errors out with::
+
+    Error: Database connection "Sqlserver" is missing, or could not be created.
+
+First check if the SQL Server PHP extension pdo_sqlsrv and the SQL Server Native
+Client are installed properly.
+
 .. meta::
     :title lang=en: DataSources
     :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+

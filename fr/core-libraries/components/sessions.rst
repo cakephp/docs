@@ -145,7 +145,11 @@ Création de messages de notification
     $params qui appliquera une classe à la div de sortie en utilisant
     ``$this->Session->flash()`` dans votre layout ou vue.::
 
-        $this->Session->setFlash('Message Exemple', 'default', array('class' => 'classe_exemple'));
+        $this->Session->setFlash(
+            'Message Exemple',
+            'default',
+            array('class' => 'classe_exemple')
+        );
 
     La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci-dessus
     sera::
@@ -156,10 +160,14 @@ Création de messages de notification
     dans le ``$params``::
     
         // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
-        $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+        $this->Session->setFlash(
+            'Message!',
+            'flash_no_spam',
+            array('plugin' => 'Comment')
+        );
 
     .. note::
-        Par défaut, CakePHP n'échappe pas le html des messages flash. Si vous
+        Par défaut, CakePHP n'échappe pas le HTML des messages flash. Si vous
         utilisez une requête ou une donnée d'utilisateur dans vos messages
         flash, vous devrez les échapper avec :php:func:`h` quand vous formatez
         vos messages.

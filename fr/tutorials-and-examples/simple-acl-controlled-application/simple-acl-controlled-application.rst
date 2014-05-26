@@ -25,7 +25,7 @@ Ce dont vous aurez besoin
    fonctionner sans qu'aucune configuration soit nécessaire.
 #. Un serveur de base de données. Nous utiliserons MySQL dans ce tutoriel.
    Vous aurez besoin de connaître suffisamment de chose en SQL, notamment
-   pour pouvoir créer une base de données : Cake prendra les rènes à partir
+   pour pouvoir créer une base de données : CakePHP prendra les rènes à partir
    d'ici.
 #. Une connaissance des bases PHP. Plus vous aurez pratiqué la programmation
    orientée objet, mieux ça vaudra : mais n'ayez pas peur si vous êtes un fan
@@ -44,7 +44,7 @@ Vous pouvez aussi dupliquer le dépôt en utilisant
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``.
 
-Une fois que vous avez votre copie toute récente de Cake, configurez votre
+Une fois que vous avez votre copie toute récente de CakePHP, configurez votre
 fichier "app/Config/database.php" et changez la valeur du Security.salt
 ("grain" de sécurité) dans votre fichier "app/Config/core.php". A ce stade,
 nous construirons un schéma simple de base de données sur lequel bâtir notre
@@ -98,7 +98,7 @@ affectée si vous cuisinez les controllers avec la fonctionnalité Scaffold.
 
 Pendant la cuisson des Models, cake détectera auto-magiquement les
 associations entre vos Models (ou relations entre vos tables). Laissez
-Cake remplir les bonnes associations hasMany et belongsTo. Si vous êtes invité
+CakePHP remplir les bonnes associations hasMany et belongsTo. Si vous êtes invité
 à choisir hasOne ou hasMany, d'une manière générale, vous aurez besoin d'une
 relation hasMany (seulement) pour ce tutoriel.
 
@@ -313,8 +313,8 @@ Cela nous montre que nous avons 3 groups et 3 users. Les users
 sont imbriqués dans les groups, ce qui signifie que nous pouvons définir des
 permissions sur une base par groupe ou par user.
 
-ACL basé sur les groupe uniquement
-----------------------------------
+ACL basé uniquement sur les groupes
+-----------------------------------
 
 Dans la cas où nous souhaiterions simplifier en utilisant les permissions
 par groups, nous avons besoin d'implémenter ``bindNode()`` dans le model
@@ -324,11 +324,21 @@ par groups, nous avons besoin d'implémenter ``bindNode()`` dans le model
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
-Cette méthode va demander à ACL de ne pas vérifier les AROs de ``User``
-mais de seulement vérifier les AROs de ``Group``.
+Modifiez le ``actsAs`` pour le model ``User`` et désactivez la directive
+requester::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+Cette méthode, avec le changement de configuration, va dire à ACL de ne pas
+vérifier les Aros des ``User`` Aro's et de vérifier seulement les Aros de
+``Group``.
 
 Chaque user devra être assigné à un ``group_id`` pour que ceci fontionne
-correctement.
+correctement. De plus, vous devrez changer ce qui suit dans le model ``User``::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+ceci évite que le callback afterSave soit appelé.
 
 Dans ce cas, notre table `aros`` va ressembler à ceci ::
 

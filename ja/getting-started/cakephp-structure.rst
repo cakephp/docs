@@ -34,10 +34,9 @@ URL ``/controller/action/var1/var2`` は、デフォルトの動作では、Cont
 CakePHPコアの動作中に自分のロジックを割り込ませたい場合、コールバックを使うことができます。
 使用できるコールバックには次のものがあります:
 
--  ``beforeFilter()`` 、すべてのコントローラのアクションロジックの実行前に呼ばれます。 
--  ``beforeRender()`` 、コントローラロジックの実行後、しかしビューの表示(*render*)前に実行されます。
--  ``afterFilter()`` 、すべてのコントローラロジックを実行し、ビューの表示(*render*)が終わった後に実行されます。
-   手動で ``render()`` をコントローラから呼び、その後にロジックを実行しているのでない限り、 ``afterRender()`` と ``afterFilter()`` には違いがありません。
+-  :php:meth:`~Controller::afterFilter()` 、 ビューの表示(*render*)を含むすべてのコントローラのロジックの後に実行されます。
+-  :php:meth:`~Controller::beforeFilter()` 、 コントローラのアクションロジックの実行前に呼ばれます。
+-  :php:meth:`~Controller::beforeRender()` 、 コントローラロジックの実行後、しかしビューの表示(*render*)前に実行されます。
 
 モデルの拡張("ビヘイビア")
 ==========================
@@ -56,6 +55,7 @@ CakePHPアプリケーションの主なソースは、通常データベース�
 -  beforeFind()
 -  afterFind()
 -  beforeValidate()
+-  afterValidate()
 -  beforeSave()
 -  afterSave()
 -  beforeDelete()

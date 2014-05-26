@@ -1,7 +1,7 @@
 2.2 Migration Guide
 ###################
 
-CakePHP 2.2 is a fully API compatible upgrade from 2.0/2.1.  This page outlines the
+CakePHP 2.2 is a fully API compatible upgrade from 2.0/2.1. This page outlines the
 changes and improvements made for 2.2.
 
 .. _required-steps-to-upgrade-2-2:
@@ -10,7 +10,7 @@ Required steps to upgrade
 =========================
 
 When upgrading to CakePHP 2.2 its important to add a few new configuration
-values to ``app/Config/bootstrap.php``.  Adding these will ensure consistent
+values to ``app/Config/bootstrap.php``. Adding these will ensure consistent
 behavior with 2.1.x::
 
     // Enable the Dispatcher filters for plugin assets, and
@@ -84,13 +84,13 @@ Error Handling
 ==============
 
 - When repeat exceptions, or exception are raised when rendering error pages,
-  the new ``error`` layout will be used.  It's recommended to not use additional
+  the new ``error`` layout will be used. It's recommended to not use additional
   helpers in this layout as its intended for development level errors only. This
   fixes issues with fatal errors in rendering error pages due to helper usage in
   the ``default`` layout.
 - It is important to copy the ``app/View/Layouts/error.ctp`` into your app
-  directory.  Failing to do so will make error page rendering fail.
-- You can now configure application specific console error handling.  By setting
+  directory. Failing to do so will make error page rendering fail.
+- You can now configure application specific console error handling. By setting
   ``Error.consoleHandler``, and ``Exception.consoleHandler`` you can define the
   callback that will handle errors/exceptions raised in console applications.
 - The handler configured in ``Error.handler`` and ``Error.consoleHandler`` will
@@ -108,14 +108,14 @@ Core
 Configure
 ---------
 
-- :php:meth:`Configure::dump()` was added.  It is used to persist configuration
-  data in durable storage like files.  Both :php:class:`PhpReader` and
+- :php:meth:`Configure::dump()` was added. It is used to persist configuration
+  data in durable storage like files. Both :php:class:`PhpReader` and
   :php:class:`IniReader` work with it.
-- A new config parameter 'Config.timezone' is available which you can set to
-  user's timezone string.  eg. You can do ``Configure::write('Config.timezone',
-  'Europe/Paris')``.  If a method of ``CakeTime`` class is called with
+- A new config parameter 'Config.timezone' is available in which you can set
+  users' timezone string. eg. You can do ``Configure::write('Config.timezone',
+  'Europe/Paris')``. If a method of ``CakeTime`` class is called with
   ``$timezone`` parameter as null and 'Config.timezone' is set, then the value
-  of 'Config.timezone' will be used. This feature allows you to set user's
+  of 'Config.timezone' will be used. This feature allows you to set users'
   timezone just once instead of passing it each time in function calls.
 
 
@@ -132,8 +132,8 @@ AuthComponent
 CookieComponent
 ---------------
 
-- You can now encrypt cookie values with the rijndael cipher.  This requires
-  the `mcrypt <http://php.net/mcrypt>`_ extension to be installed.  Using
+- You can now encrypt cookie values with the rijndael cipher. This requires
+  the `mcrypt <http://php.net/mcrypt>`_ extension to be installed. Using
   rijndael gives cookie values actual encryption, and is recommended in place of
   the XOR cipher available in previous releases. The XOR cipher is still the
   default cipher scheme to maintain compatibility with previous releases. You
@@ -168,7 +168,7 @@ CakeRequest
 
 - CakeRequest will now automatically decode
   ``application/x-www-form-urlencoded`` request bodies on ``PUT`` and ``DELETE``
-  requests.  This data will be available as ``$this->data`` just like POST data
+  requests. This data will be available as ``$this->data`` just like POST data
   is.
 
 Utility
@@ -184,7 +184,7 @@ Set
 Hash
 ----
 
-The :php:class:`Hash` class was added in 2.2.  It replaced Set providing a more
+The :php:class:`Hash` class was added in 2.2. It replaced Set providing a more
 consistent, reliable and performant API to doing many of the same tasks Set
 does. See the :doc:`/core-utility-libraries/hash` page for more detail.
 
@@ -192,8 +192,8 @@ CakeTime
 --------
 
 - The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter
-  in all relevant functions.  So instead of numeric offset you can now pass in a
-  timezone string or DateTimeZone object.  Passing numeric offsets for
+  in all relevant functions. So instead of numeric offset you can now pass in a
+  timezone string or DateTimeZone object. Passing numeric offsets for
   ``$timezone`` parameter is still possible for backwards compatibility.
 - :php:meth:`CakeTime::timeAgoInWords()` had the ``accuracy`` option added.
   This option allows you to specify how accurate formatted times should be.
@@ -213,7 +213,7 @@ Helpers
 FormHelper
 ----------
 
-- FormHelper now better handles adding required classes to inputs.  It now
+- FormHelper now better handles adding required classes to inputs. It now
   honors the ``on`` key.
 - :php:meth:`FormHelper::radio()` now supports an ``empty`` which works similar
   to the empty option on ``select()``.
@@ -246,7 +246,7 @@ Dispatcher
   sent to the client. Check the full documentation for this new features in
   :doc:`/development/dispatch-filters`
 - With the addition of :doc:`/development/dispatch-filters` you'll need to
-  update ``app/Config/bootstrap.php``.  See
+  update ``app/Config/bootstrap.php``. See
   :ref:`required-steps-to-upgrade-2-2`.
 
 Router
@@ -288,11 +288,11 @@ Log
 ===
 
 Changes in :php:class:`CakeLog` now require, some additional configuration in
-your ``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`,
+your ``app/Config/bootstrap.php``. See :ref:`required-steps-to-upgrade-2-2`,
 and :doc:`/core-libraries/logging`.
 
 - The :php:class:`CakeLog` class now accepts the same log levels as defined in
-  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Several convenience
+  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_. Several convenience
   methods have also been added:
 
   * :php:meth:`CakeLog::emergency($message, $scope = array())`

@@ -31,8 +31,7 @@ appel::
     CakePlugin::loadAll(); // Charge tous les plugins d'un coup.
     CakePlugin::load('ContactManager'); //Charge un seul plugin.
 
-
-loadAll charge tous les plugins disponibles, bien que vous autorisant à
+``loadAll()`` charge tous les plugins disponibles, bien que vous autorisant à
 configurer certains paramètres pour des plugins spécifiques. ``load()``
 fonctionne de la même manière, mais charge seulement les plugins que vous avez
 explicitement spécifiés.
@@ -64,7 +63,7 @@ loadAll qui s'applique à chaque plugin qui n'a pas de configuration spécifique
 
 Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
 partir du plugin Blog::
-    
+
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
@@ -75,6 +74,16 @@ Notez que tous les fichiers spécifiés doivent réellement exister dans le(s)
 plugin(s) configurés ou PHP vous donnera des avertissements pour chaque
 fichier qu'il ne peut pas charger. C'est particulèrement important à
 retenir quand on spécifie defaults pour tous les plugins.
+
+CakePHP 2.3.0 ajoute une option ``ignoreMissing```, qui vous permet d'ignorer
+toute route manquante et les fichiers de bootstrap quand vous chargez les
+plugins. Vous pouvez raccourcir le code en chargeant tous les plugins en
+utilisant ceci::
+
+    // Charge tous les plugins y compris les possibles routes et les fichiers de bootstrap
+    CakePlugin::loadAll(array(
+        array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
+    ));
 
 Certains plugins ont besoin en supplément de créer une ou plusieurs tables
 dans votre base de données. Dans ces cas, ils incluent souvent un fichier
@@ -107,7 +116,7 @@ plugin est chargé::
 
 
     function aCallableFunction($pluginName, $config) {
-        
+
     }
 
     CakePlugin::loadAll(array(
@@ -152,7 +161,7 @@ de répertoire basique. Cela devrait ressembler à ceci::
                 /View
                     /Helper
                     /Layouts
-                    
+
 Notez que le nom du dossier du plugin, '**ContactManager**'. Il est important
 que ce dossier ait le même nom que le plugin.
 
@@ -189,7 +198,7 @@ Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
 des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
 
 Merci de noter que le processus de création de plugins peut être méchamment
-simplifié en utilisant le shell de Cake.
+simplifié en utilisant le shell de CakePHP.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 
@@ -239,7 +248,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     ContactManager. Contact sera le model par défaut pour ce controller,
     cependant, il est inclu pour démontrer comment faire préceder proprement
     le nom du plugin.
-   
+
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez
 /contact_manager/contacts. Vous devriez obtenir une erreur "Missing Model"
 parce que nous n'avons pas un model Contact déjà défini.
@@ -346,7 +355,7 @@ Mais garder à l'esprit que la gestion des assets statiques, comme les images,
 le Javascript et les fichiers CSS des plugins à travers le Dispatcher est
 incroyablement inefficace. Il est grandement recommandé de les symlinker pour
 la production.
-Par exemple comme ceci:: 
+Par exemple comme ceci::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
@@ -392,7 +401,7 @@ du component. Par exemple::
     // Component défini dans le plugin 'ContactManager'
     class ExampleComponent extends Component {
     }
-    
+
     // dans vos controllers:
     public $components = array('ContactManager.Exemple');
 
@@ -403,7 +412,7 @@ La même technique s'applique aux Helpers et aux Behaviors.
     À la création de Helpers, vous verrez que AppHelper n'est pas
     automatiquement disponible. Vous pouvez déclarer les ressources dont vous
     avez besoin avec les uses::
-    
+
         // Déclarez le use de AppHelper pour le Helper de votre Plugin
         App::uses('AppHelper', 'View/Helper');
 
@@ -455,4 +464,4 @@ applications CakePHP:
 
 .. meta::
     :title lang=fr: Plugins
-    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connection base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications
+    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connexion base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications

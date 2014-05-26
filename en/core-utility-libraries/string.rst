@@ -91,7 +91,7 @@ use the ``String`` class::
         This is the song
         that never ends.
 
-    You can provide an array of options that control how wrapping is done.  The
+    You can provide an array of options that control how wrapping is done. The
     supported options are:
 
     * ``width`` The width to wrap to. Defaults to 72.
@@ -112,7 +112,7 @@ use the ``String`` class::
 
     Options:
 
-    -  'format' - string The piece of html with that the phrase will be
+    -  'format' - string The piece of HTML with that the phrase will be
        highlighted
     -  'html' - bool If true, will ignore any HTML tags, ensuring that
        only the correct text is highlighted
@@ -120,11 +120,19 @@ use the ``String`` class::
     Example::
 
         // called as TextHelper
-        echo $this->Text->highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo $this->Text->highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
         // called as String
         App::uses('String', 'Utility');
-        echo String::highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo String::highlight(
+            $lastSentence,
+            'using',
+            array('format' => '<span class="highlight">\1</span>')
+        );
 
     Output::
 
@@ -144,7 +152,7 @@ use the ``String`` class::
     Cuts a string to the ``$length`` and adds a suffix with
     ``'ellipsis'`` if the text is longer than ``$length``. If ``'exact'``
     is passed as ``false``, the truncation will occur after the next
-    word ending. If ``'html'`` is passed as ``true``, html tags will be
+    word ending. If ``'html'`` is passed as ``true``, HTML tags will be
     respected and will not be cut off.
 
     ``$options`` is used to pass all extra parameters, and has the
@@ -205,14 +213,17 @@ use the ``String`` class::
             'ellipsis' => '...',
             'exact' => true
         )
-        
+
     .. versionadded:: 2.3
 
     Example::
 
+        $sampleText = 'I packed my bag and in it I put a PSP, a PS3, a TV, ' .
+            'a C# program that can divide by zero, death metal t-shirts'
+
         // called as TextHelper
         echo $this->Text->tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -223,7 +234,7 @@ use the ``String`` class::
         // called as String
         App::uses('String', 'Utility');
         echo String::tail(
-            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            $sampleText,
             70,
             array(
                 'ellipsis' => '...',
@@ -234,7 +245,7 @@ use the ``String`` class::
     Output::
 
         ...a TV, a C# program that can divide by zero, death metal t-shirts
-        
+
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
     :param string $haystack: The string to search.

@@ -19,7 +19,8 @@ Vous remarquerez trois dossiers principaux :
 -  Le dossier *lib* est l'endroit où nous avons exercé notre propre magie.
    Engagez-vous personnellement à ne **pas** modifier les fichiers dans ce
    dossier. Nous ne pourrons pas vous aider si vous avez modifié le cœur
-   du framework.
+   du framework. A la place, regardez dans les :ref:`application-extensions`
+   modifiées.
 -  Enfin, le dossier *vendors* est l'endroit où vous placerez vos librairies
    PHP tierces dont vous avez besoin pour vos applications CakePHP.
 
@@ -77,17 +78,17 @@ Vendor
     "vendors" à la racine de l'arborescence. Nous aborderons les différences
     entre les deux lorsque nous discuterons de la gestion multi-applications
     et des configurations systèmes plus complexes.
-    
+
 View
     Les fichiers de présentation sont placés ici : éléments, pages d'erreur,
     helpers, layouts et vues.
-    
+
 webroot
     Dans un environnement de production, ce dossier doit être la racine de
     votre application. Les sous-répertoires sont utilisés pour les feuilles
     de style CSS, les images et les fichiers Javascript.
-    
+
 
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
-    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connection,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp
+    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connexion,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

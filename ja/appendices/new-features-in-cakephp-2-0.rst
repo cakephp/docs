@@ -26,7 +26,7 @@ HtmlHelper
 ----------
 
 * ``getCrumbList()`` は ``<li>`` エレメントでラップされたぱんくずリストのリンクを生成します。
-  `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_ を見てください。 
+  `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_ を見てください。
 * ``loadConfig()`` は :php:class:`Helper` から :php:class:`HtmlHelper` に移動しました。
    このメソッドは設定ファイルを読み込むのに新しいリーダークラス（2.0 :php:class:`Configure` をみてください）を使うようになりました。
    省略可能ですが、二番目の引数としてパス（デフォルトは ``app/Config`` ）を渡すことができます。
@@ -94,7 +94,7 @@ Router
 以下はサブドメインをサポートするルートクラスの一例です::
 
     class SubdomainRoute extends CakeRoute {
-        
+
         public function match($params) {
             $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
             unset($params['subdomain']);
@@ -238,9 +238,9 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 
 ::
 
-    public $helpers = array( 
-        'Html' => array( 
-            'className' => 'MyHtml' 
+    public $helpers = array(
+        'Html' => array(
+            'className' => 'MyHtml'
         )
     );
 
@@ -248,9 +248,9 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 
 ::
 
-    public $components = array( 
-        'Email' => array( 
-            'className' => 'QueueEmailer' 
+    public $components = array(
+        'Email' => array(
+            'className' => 'QueueEmailer'
         )
     );
 
@@ -259,10 +259,10 @@ Emailコンポーネントを呼び出すことは、代わりにQueueEmailerを
 
 ::
 
-    public $actsAs = array( 
-        'Containable' => array( 
-            'className' => 'SuperContainable' 
-        ) 
+    public $actsAs = array(
+        'Containable' => array(
+            'className' => 'SuperContainable'
+        )
     );
 
 2.0がコレクションを利用し、アプリケーションにまたがって共有することから、全てのエイリアス化されたクラスはアプリケーションの至る所で使用されるでしょう。

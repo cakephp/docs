@@ -214,7 +214,7 @@ Une méthode qui utilise Le Cache pour stocker les résultats pourrait ressemble
     
         public function newest() {
             $result = Cache::read('newest_posts', 'longterm');
-            if (!$result) {
+            if ($result === false) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
                 Cache::write('newest_posts', $result, 'longterm');
             }
@@ -282,7 +282,7 @@ Cache de retirer toutes les entrées associées au groupe ``post``::
 
     // Model/Post.php
 
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
         }
@@ -300,7 +300,7 @@ même groupe::
      * Une variation de l\'exemple précédent qui nettoie toutes les
      * configurations de Cache ayant le même groupe
      */
-    public function afterSave($created) {
+    public function afterSave($created, $options = array()) {
         if ($created) {
             $configs = Cache::groupConfigs('post');
             foreach ($configs['post'] as $config) {
@@ -338,9 +338,9 @@ l'API de Cache
     configuration par défaut sera utilisée. ``Cache::read()`` retournera
     la valeur en cache si c'est un cache valide ou ``false`` si le
     cache a expiré ou n'existe pas. Le contenu du cache pourrait
-    évaluer false, donc soyez sûr que vous utilisez l'opérateur
+    évaluer false, donc assurez-vous que vous utilisez les opérateurs
     de comparaison stricte ``===`` ou ``!==``.
-    
+
     Par exemple::
 
         $cloud = Cache::read('cloud');

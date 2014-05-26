@@ -149,8 +149,8 @@ Then create the following view file for login at
     echo $this->Form->end('Login');
 
 Next we'll have to update our User model to hash passwords before they go into
-the database.  Storing plaintext passwords is extremely insecure and
-AuthComponent will expect that your passwords are hashed.  In
+the database. Storing plaintext passwords is extremely insecure and
+AuthComponent will expect that your passwords are hashed. In
 ``app/Model/User.php`` add the following::
 
     App::uses('AuthComponent', 'Controller/Component');
@@ -158,7 +158,9 @@ AuthComponent will expect that your passwords are hashed.  In
         // other code.
 
         public function beforeSave($options = array()) {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            $this->data['User']['password'] = AuthComponent::password(
+              $this->data['User']['password']
+            );
             return true;
         }
     }
@@ -182,9 +184,18 @@ site controlled with Auth and Acl, we will set them up in
 
         public function beforeFilter() {
             //Configure AuthComponent
-            $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+            $this->Auth->loginAction = array(
+              'controller' => 'users', 
+              'action' => 'login'
+            );
+            $this->Auth->logoutRedirect = array(
+              'controller' => 'users', 
+              'action' => 'login'
+            );
+            $this->Auth->loginRedirect = array(
+              'controller' => 'posts', 
+              'action' => 'add'
+            );
         }
     }
 
@@ -324,10 +335,19 @@ implement ``bindNode()`` in ``User`` model::
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
-This method will tell ACL to skip checking ``User`` Aro's and to
+Modify the ``actsAs`` for the model ``User`` and disable the requester directive::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+This method along with configuration change will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
 
-Every user has to have assigned ``group_id`` for this to work.
+Every user has to have assigned ``group_id`` for this to work. In addition, you have 
+to change the following in ``User`` model::
+
+    public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+
+this avoids the afterSave to be called.
 
 In this case our ``aros`` table will look like this::
 

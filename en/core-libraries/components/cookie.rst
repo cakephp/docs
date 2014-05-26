@@ -70,7 +70,7 @@ a secure connection, is available on the path
         $this->Cookie->name = 'baker_id';
         $this->Cookie->time = 3600;  // or '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
-        $this->Cookie->domain = 'example.com';   
+        $this->Cookie->domain = 'example.com';
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
@@ -168,7 +168,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: type($type)
 
-    Allows you to change the encryption scheme.  By default the 'cipher' scheme
+    Allows you to change the encryption scheme. By default the 'cipher' scheme
     is used. However, you should use the 'rijndael' scheme for improved
     security.
 

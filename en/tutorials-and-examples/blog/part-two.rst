@@ -1,5 +1,5 @@
 Blog Tutorial - Adding a layer
-******************************
+##############################
 
 Create a Post Model
 ===================
@@ -81,9 +81,9 @@ from the controller to the view (which we'll create next). The line
 sets the view variable called 'posts' equal to the return value of
 the ``find('all')`` method of the Post model. Our Post model is
 automatically available at ``$this->Post`` because we've followed
-Cake's naming conventions.
+CakePHP's naming conventions.
 
-To learn more about Cake's controllers, check out the
+To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
 
 Creating Post Views
@@ -144,7 +144,7 @@ to the view that would look something like this::
             )
     )
 
-Cake's view files are stored in ``/app/View`` inside a folder
+CakePHP's view files are stored in ``/app/View`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
 nice table, our view code might look something like this
@@ -181,13 +181,13 @@ Hopefully this should look somewhat simple.
 You might have noticed the use of an object called ``$this->Html``.
 This is an instance of the CakePHP :php:class:`HtmlHelper` class. CakePHP
 comes with a set of view helpers that make things like linking,
-form output, JavaScript and Ajax a snap. You can learn more about
+form output, JavaScript and AJAX a snap. You can learn more about
 how to use them in :doc:`/views/helpers`, but
 what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)
 and URL (the second parameter).
 
-When specifying URLs in Cake, it is recommended that you use the
+When specifying URLs in CakePHP, it is recommended that you use the
 array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
@@ -300,6 +300,14 @@ PostsController::
 
 .. note::
 
+    ``$this->request->is()`` takes a single argument, which can be the
+    request METHOD (``get``, ``put``, ``post``, ``delete``) or some request
+    identifier (``ajax``). It is **not** a way to check for specific posted
+    data. For instance, ``$this->request->is('book')`` will not return true
+    if book data was posted.
+
+.. note::
+
     You need to include the SessionComponent - and SessionHelper - in
     any controller where you will use it. If necessary, include it in
     your AppController.
@@ -328,12 +336,17 @@ controller's :php:meth:`Controller::redirect` function
 redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the
-`API <http://api20.cakephp.org>`_ to see the formats in which you can specify a
+`API <http://api.cakephp.org>`_ to see the formats in which you can specify a
 URL for various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
 handled in the following sections.
+
+The reason why we call the ``create()`` method first is to resets the model
+state for saving new information. It does not actually create a record in the
+database but clears Model::$id and sets Model::$data based on your database
+field defaults. 
 
 Data Validation
 ===============
@@ -343,7 +356,7 @@ validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use
-Cake's FormHelper in your views. The :php:class:`FormHelper` is available by
+CakePHP's FormHelper in your views. The :php:class:`FormHelper` is available by
 default to all views at ``$this->Form``.
 
 Here's our add view:
@@ -442,7 +455,7 @@ like::
             throw new NotFoundException(__('Invalid post'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been updated.'));
@@ -460,7 +473,7 @@ This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the post does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
-Next the action checks that the request is a POST request.  If it is, then we
+Next the action checks whether the request is either a POST or a PUT request. If it is, then we
 use the POST data to update our Post record, or kick back and show the user
 validation errors.
 
@@ -513,10 +526,20 @@ posts:
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        $post['Post']['title'],
+                        array('action' => 'view', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        'Edit',
+                        array('action' => 'edit', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -538,17 +561,19 @@ Next, let's make a way for users to delete posts. Start with a
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
+            $this->Session->setFlash(
+                __('The post with id: %s has been deleted.', h($id))
+            );
             return $this->redirect(array('action' => 'index'));
         }
     }
 
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
-message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a GET request, we throw an Exception.  Uncaught exceptions
+message after redirecting them on to ``/posts``. If the user attempts to
+do a delete using a GET request, we throw an Exception. Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is
-displayed.  There are many built-in :doc:`/development/exceptions` that can
+displayed. There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
 to generate.
 
@@ -576,15 +601,26 @@ links that allow users to delete posts, however:
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        $post['Post']['title'],
+                        array('action' => 'view', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
-                <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?'));
+                <?php
+                    echo $this->Form->postLink(
+                        'Delete',
+                        array('action' => 'delete', $post['Post']['id']),
+                        array('confirm' => 'Are you sure?')
+                    );
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php
+                    echo $this->Html->link(
+                        'Edit', array('action' => 'edit', $post['Post']['id'])
+                    );
+                ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -595,7 +631,7 @@ links that allow users to delete posts, however:
     </table>
 
 Using :php:meth:`~FormHelper::postLink()` will create a link that uses
-Javascript to do a POST request deleting our post.  Allowing content to be
+JavaScript to do a POST request deleting our post. Allowing content to be
 deleted using GET requests is dangerous, as web crawlers could accidentally
 delete all your content.
 
@@ -622,11 +658,16 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 
-Cake's routing is found in ``/app/Config/routes.php``. You'll want
+CakePHP's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
-route. It looks like this::
+route. It looks like this:
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+.. code-block:: php
+
+    Router::connect(
+        '/',
+        array('controller' => 'pages', 'action' => 'display', 'home')
+    );
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
@@ -659,7 +700,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application you're ready for
 the real thing. Start your own project, read the rest of the
-:doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
+:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
 If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
 

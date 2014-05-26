@@ -17,7 +17,7 @@ especially handy when working with legacy systems.
 Controller Conventions
 ======================
 
-Controller classnames are plural, CamelCased, and end in
+Controller class names are plural, CamelCased, and end in
 ``Controller``. ``PeopleController`` and
 ``LatestArticlesController`` are both examples of conventional
 controller names.
@@ -38,22 +38,22 @@ will not be accessible directly from the web but is available for
 internal use. For example::
 
     class NewsController extends AppController {
-    
+
         public function latest() {
             $this->_findNewArticles();
         }
-        
+
         protected function _findNewArticles() {
             // Logic to find latest news articles
         }
     }
-    
+
 
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
 because the method is preceded with an underscore. You can also use
-PHP's visibility keywords to indicate whether or not a method can be 
+PHP's visibility keywords to indicate whether or not a method can be
 accessed from a URL. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names
@@ -83,18 +83,18 @@ For more information on CakePHP URLs and parameter handling, see
 
 .. _file-and-classname-conventions:
 
-File and Classname Conventions
-==============================
+File and Class Name Conventions
+===============================
 
-In general, filenames match the classnames, which are
-CamelCased. So if you have a class **MyNiftyClass**, then in Cake,
+In general, filenames match the class names, which are
+CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
 the file should be named **MyNiftyClass.php**. Below are
 examples of how to name the file for each of the different types of
 classes you would typically use in a CakePHP application:
 
 
 -  The Controller class **KissesAndHugsController** would be found
-   in a file named **KissesAndHugsController.php** 
+   in a file named **KissesAndHugsController.php**
 -  The Component class **MyHandyComponent** would be found in a
    file named **MyHandyComponent.php**
 -  The Model class **OptionValue** would be found in a file named
@@ -111,7 +111,7 @@ Each file would be located in the appropriate folder in your app folder.
 Model and Database Conventions
 ==============================
 
-Model classnames are singular and CamelCased. Person, BigPerson,
+Model class names are singular and CamelCased. Person, BigPerson,
 and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
@@ -155,7 +155,7 @@ as a normal model. E.g.::
     id INT(10) NOT NULL AUTO_INCREMENT,
     post_id INT(10) NOT NULL,
     tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
+    PRIMARY KEY(id));
 
 Rather than using an auto-increment key as the primary key, you may
 also use char(36). CakePHP will then use a unique 36 character UUID

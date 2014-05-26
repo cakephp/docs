@@ -182,7 +182,7 @@ property to the model class. Remember to have a Profile model in
 
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
-string containing the classname of the associated model, as we've
+string containing the class name of the associated model, as we've
 done above.
 
 If you need more control, you can define your associations using
@@ -204,7 +204,7 @@ to include only certain records.
 Possible keys for hasOne association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'User hasOne Profile'
    relationship, the className key should equal 'Profile.'
 -  **foreignKey**: the name of the foreign key found in the other
@@ -297,7 +297,7 @@ syntax::
 Possible keys for belongsTo association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Profile belongsTo User'
    relationship, the className key should equal 'User.'
 -  **foreignKey**: the name of the foreign key found in the current
@@ -397,7 +397,7 @@ syntax::
 Possible keys for hasMany association arrays include:
 
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'User hasMany Comment'
    relationship, the className key should equal 'Comment.'
 -  **foreignKey**: the name of the foreign key found in the other
@@ -531,7 +531,10 @@ Using our Image model example, we can specify it like so::
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+                // only count if "ImageComment" is active = 1
+                'counterScope' => array(
+                  'ImageComment.active' => 1
+                )
             )
         );
     }
@@ -653,7 +656,7 @@ Possible keys for HABTM association arrays include:
 
 .. _ref-habtm-arrays:
 
--  **className**: the classname of the model being associated to
+-  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Recipe HABTM Ingredient'
    relationship, the className key should equal 'Ingredient.'
 -  **joinTable**: The name of the join table used in this
@@ -685,7 +688,7 @@ Possible keys for HABTM association arrays include:
     - When set to ``keepExisting``, the behavior is similar to `true`,
       but existing associations are not deleted.
 -  **conditions**: an array of find() compatible conditions or SQL
-   string.  If you have conditions on an associated table, you should use a
+   string. If you have conditions on an associated table, you should use a
    'with' model, and define the necessary belongsTo associations on it.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
@@ -780,7 +783,7 @@ the columns as it is not replaced in the new insert.
     .. versionchanged:: 2.1
 
     You can set ``unique`` setting to ``keepExisting`` circumvent
-    losing extra data during the save operation.  See ``unique``
+    losing extra data during the save operation. See ``unique``
     key in :ref:`HABTM association arrays <ref-habtm-arrays>`.
 
 The way to implement our requirement is to use a **join model**,
@@ -815,7 +818,7 @@ The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Join models are pretty useful things to be able to use and Cake
+Join models are pretty useful things to be able to use and CakePHP
 makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
 
@@ -1097,7 +1100,7 @@ table::
             'alias' => 'BooksTag',
             'type' => 'inner',
             'conditions' => array(
-                'Books.id = BooksTag.book_id'
+                'Book.id = BooksTag.book_id'
             )
         ),
         array('table' => 'tags',

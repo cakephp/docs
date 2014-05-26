@@ -8,11 +8,6 @@ seulement des squelettes de classes : Bake peut créer une application
 fonctionnelle complète en seulement quelques minutes. En réalité, Bake est
 une étape naturelle à suivre une fois qu'une application a été prototypée.
 
-Ceux qui sont novices avec Bake (spécialement les utilisateurs de Windows)
-pourront trouver le
-`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
-utile pour paramétrer les choses avant de continuer.
-
 Suivant la configuration de votre installation, vous devrez peut être donner
 les droits d'exécution au script bash cake ou l'appeler avec la commande
 ./cake bake.
@@ -44,7 +39,7 @@ exécuter Bake vous présentera les options suivantes ::
     [T]est case
     [Q]uit
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >  
+    >
 
 Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la
 ligne de commande ::
@@ -102,7 +97,7 @@ Pour baker des projets personnalisés
     -  Puisque le chemin complet du squelette doit être entré manuellement,
        vous pouvez spécifier n'importe quel dossier avec le template que vous
        souhaitez construire, ainsi que l'utilisation de plusieurs templates.
-       (Sauf si Cake commence par outrepasser le dossier
+       (Sauf si CakePHP commence par outrepasser le dossier
        squelette comme il fait pour les vues)
 
 
@@ -117,7 +112,7 @@ avec le rajout de fonctionnalités et améliorations.
 -  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans
    vos shells.
 -  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser
-   d'autres connections de bake que le 'default'.
+   d'autres connexions de bake que le 'default'.
    Utilisez le paramètre ``-connection``.
 -  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant
    utiliser ``--plugin NomDuPlugin`` ou ``Plugin.class``.

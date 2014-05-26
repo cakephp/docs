@@ -47,7 +47,7 @@ metadata in the controller action and pass it to your view using
 the :php:meth:`Controller::set()` method but this is inappropriate. That
 information can also go in the view. That will come later though,
 for now if you have a different set of logic for the data used to
-make the RSS feed and the data for the html view you can use the
+make the RSS feed and the data for the HTML view you can use the
 :php:meth:`RequestHandler::isRss()` method, otherwise your controller can stay
 the same::
 
@@ -57,14 +57,20 @@ the same::
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
-            $posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));
+            $posts = $this->Post->find(
+                'all',
+                array('limit' => 20, 'order' => 'Post.created DESC')
+            );
             return $this->set(compact('posts'));
         }
 
         // this is not an Rss request, so deliver
         // data used by website's interface
-        $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
-        
+        $this->paginate['Post'] = array(
+            'order' => 'Post.created DESC',
+            'limit' => 10
+        );
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
@@ -85,7 +91,7 @@ An Rss layout is very simple, put the following contents in
     }
     if (!isset($channelData['title'])) {
         $channelData['title'] = $title_for_layout;
-    } 
+    }
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData, $channel);
 
@@ -141,7 +147,7 @@ associative array into an element for each key value pair.
 
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
-    
+
         $postLink = array(
             'controller' => 'posts',
             'action' => 'view',
@@ -158,7 +164,7 @@ associative array into an element for each key value pair.
             'exact'  => true,
             'html'   => true,
         ));
-         
+
         echo  $this->Rss->item(array(), array(
             'title' => $post['Post']['title'],
             'link' => $postLink,
@@ -173,11 +179,11 @@ into XML elements. It is important to filter out any non-plain text characters
 out of the description, especially if you are using a rich text editor for the
 body of your blog. In the code above we used ``strip_tags()`` and
 :php:func:`h()` to remove/escape any XML special characaters from the content,
-as they could cause validation errors.  Once we have set up the data for the
+as they could cause validation errors. Once we have set up the data for the
 feed, we can then use the :php:meth:`RssHelper::item()` method to create the XML
 in RSS format. Once you have all this setup, you can test your RSS feed by going
 to your site ``/posts/index.rss`` and you will see your new feed. It is always
-important that you validate your RSS feed before making it live.  This can be
+important that you validate your RSS feed before making it live. This can be
 done by visiting sites that validate the XML such as Feed Validator or the w3c
 site at http://validator.w3.org/feed/.
 
@@ -255,14 +261,14 @@ Rss Helper API
 
     :rtype: string
 
-    Transforms an array of data using an optional callback, and maps it to a 
+    Transforms an array of data using an optional callback, and maps it to a
     set of ``<item />`` tags.
 
 .. php:method:: time(mixed $time)
 
     :rtype: string
 
-    Converts a time in any format to an RSS time. See 
+    Converts a time in any format to an RSS time. See
     :php:meth:`TimeHelper::toRSS()`.
 
 

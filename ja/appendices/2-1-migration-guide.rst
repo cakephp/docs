@@ -56,7 +56,7 @@ app/Controller ディレクトリへコピーする必要があります。
 .htaccess ファイル
 ==================
 
-.. 
+..
   The default ``.htaccess`` files have changed, you should remember to update them
   or update your webservers URL re-writing scheme to match the changes done in
   ``.htaccess``
@@ -118,7 +118,7 @@ CakeSession
 .. versionchanged:: 2.1.1
    CakeSession は P3P ヘッダをセットしなくなりました。このことは、あな
    たのアプリケーションの動作に変化でる場合があります。
-   更に詳しい情報は lighthouse にある次のチケットを参照してください。    
+   更に詳しい情報は lighthouse にある次のチケットを参照してください。
    `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_
 
 ビヘイビア
@@ -262,7 +262,7 @@ General
 Router
 ------
 
-.. 
+..
   - Routes can now use a special ``/**`` syntax to include all trailing arguments
     as a single passed argument. See the section on :ref:`connecting-routes` for
     more information.
@@ -311,7 +311,7 @@ Controller
   - :php:attr:`Controller::$uses` was modified the default value is now ``true``
     instead of false.  Additionally different values are handled slightly
     differently, but will behave the same in most cases.
-  
+
       - ``true`` Will load the default model and merge with AppController.
       - An array will load those models and merge with AppController.
       - An empty array will not load any models other than those declared in the
@@ -448,11 +448,11 @@ HtmlHelper
   - ``$content_for_layout`` is deprecated.  Use ``$this->fetch('content');``
     instead.
   - ``$scripts_for_layout`` is deprecated.  Use the following instead::
-  
+
           echo $this->fetch('meta');
           echo $this->fetch('css');
           echo $this->fetch('script');
-  
+
     ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
     gives a more extensible & flexible replacement.
   - The ``Plugin.view`` syntax is now available everywhere.  You can use this
@@ -460,7 +460,7 @@ HtmlHelper
   - The ``$options['plugin']`` option for :php:meth:`~View::element()` is
     deprecated.  You should use ``Plugin.element_name`` instead.
 
-  
+
 - :php:attr:`View::$output` は推奨されません。
 - ``$content_for_layout`` は推奨されません。
   代わりに ``$this->fetch('content');`` を利用してください。

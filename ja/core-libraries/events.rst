@@ -811,6 +811,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 ============
 
 .. toctree::
+    :maxdepth: 1
 
     /core-libraries/collections
     /models/behaviors

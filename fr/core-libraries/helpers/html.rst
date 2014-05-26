@@ -71,7 +71,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionchanged:: 2.4
 
-    :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau
+    :param mixed $path: Soit une chaîne du fichier CSS à lier, ou un tableau
        avec plusieurs fichiers.    
     :param array $options: Un tableau d'options ou :term:`attributs html`.
 
@@ -111,19 +111,21 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    Vous pouvez inclure un fichier css depuis un plugin chargé en utilisant
+    Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant
     :term:`syntaxe de plugin`. Pour inclure
     ``app/Plugin/DebugKit/webroot/css/toolbar.css``, vous pouvez utiliser ce
     qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
-    Si vous voulez inclure un fichier css qui partage un nom avec un plugin
+    Si vous voulez inclure un fichier CSS qui partage un nom avec un plugin
     chargé vous pouvez faire ce qui suit. Par exemple vous avez un plugin
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::
 
-        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
+    .. versionchanged:: 2.4
+
+        echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
     .. versionchanged:: 2.1
         L'option ``block`` a été ajoutée.
@@ -248,16 +250,20 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     ::
 
         echo $this->Html->docType();
-        // Affichera: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        // Sortie:
+        // <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        //    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
         echo $this->Html->docType('html5');
-        // Affichera: <!DOCTYPE html>
+        // Sortie: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // Affichera: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // Sortie:
+        // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        //    "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
-        La valeur par défaut de doctype est html5 avec la version 2.1.
+        La valeur par défaut de doctype est HTML5 avec la version 2.1.
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
@@ -348,7 +354,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour spécifier les attributs des éléments et si le ``$title`` devra ou
     non être échappé.::
 
-        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+        echo $this->Html->link(
+            'Enter',
+            '/pages/home',
+            array('class' => 'button', 'target' => '_blank')
+        );
 
     Affichera:
 
@@ -360,7 +370,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->link(
             'Dashboard',
-            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+            array(
+                'controller' => 'dashboards',
+                'action' => 'index',
+                'full_base' => true
+            )
         );
 
     Affichera:
@@ -371,7 +385,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 
     Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de
-    confirmation ``confirm()`` javascript::
+    confirmation ``confirm()`` JavaScript::
 
         echo $this->Html->link(
             'Delete',
@@ -410,7 +424,12 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
-            array('controller' => "recipes', 'action' => 'view', 'id' => 6, 'comments' => false)
+            array(
+                'controller' => 'recipes',
+                'action' => 'view',
+                'id' => 6,
+                'comments' => false
+            )
         );
 
     Affichera:
@@ -488,30 +507,37 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une balise formatée audio/video::
 
-        .. code-block:: php
+    .. code-block:: php
 
         <?php echo $this->Html->media('audio.mp3'); ?>
 
-        // Affichera
+        // Sortie
         <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
-            'text' => 'Texte de remplacement'
+            'text' => 'Fallback text'
         )); ?>
 
-        // Affichera
-        <video src="http://www.somehost.com/files/video.mp4">Texte de remplacement</video>
+        // Sortie
+        <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
-        <?php echo $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+       <?php echo $this->Html->media(
+            array(
+                'video.mp4',
+                array(
+                    'src' => 'video.ogg',
+                    'type' => "video/ogg; codecs='theora, vorbis'"
+                )
+            ),
             array('autoplay')
         ); ?>
 
-        // Affichera
+        // Sortie
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
-            <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+            <source src="/files/video.ogg" type="video/ogg;
+                codecs='theora, vorbis'"/>
         </video>
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
@@ -611,8 +637,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour la balise script générée. Si un tableau de balise script est utilisé,
     les attributs seront appliqués à toutes les balises script générées.
 
-    Cette méthode d'inclusion de fichier javascript suppose que les fichiers
-    javascript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
+    Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
+    JavaScript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
 
         echo $this->Html->script('scripts');
 
@@ -709,7 +735,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         $this->Html->scriptStart(array('inline' => false));
 
-        echo $this->Js->alert('je suis dans le javascript');
+        echo $this->Js->alert('je suis dans le JavaScript');
 
         $this->Html->scriptEnd();
 
@@ -954,7 +980,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         /posts/search?foo=bar#first
 
     Pour plus d'information voir 
-    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
+    `Router::url <http://api.cakephp.org/2.4/class-Router.html#_url>`_
     dans l' API.
 
 .. php:method:: useTag(string $tag)

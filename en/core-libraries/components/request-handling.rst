@@ -6,11 +6,11 @@ Request Handling
 The Request Handler component is used in CakePHP to obtain
 additional information about the HTTP requests that are made to
 your applications. You can use it to inform your controllers about
-Ajax as well as gain additional insight into content types that the
+AJAX as well as gain additional insight into content types that the
 client accepts and automatically changes to the appropriate layout
 when file extensions are enabled.
 
-By default RequestHandler will automatically detect Ajax requests
+By default RequestHandler will automatically detect AJAX requests
 based on the HTTP-X-Requested-With header that many javascript
 libraries use. When used in conjunction with
 :php:meth:`Router::parseExtensions()` RequestHandler will automatically switch
@@ -49,12 +49,14 @@ the client and its request.
 
             public function beforeFilter() {
                 if ($this->RequestHandler->accepts('html')) {
-                    // Execute code only if client accepts an HTML (text/html) response
+                    // Execute code only if client accepts an HTML (text/html)
+                    // response
                 } elseif ($this->RequestHandler->accepts('xml')) {
                     // Execute XML-only code
                 }
                 if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {
-                    // Executes if the client accepts any of the above: XML, RSS or Atom
+                    // Executes if the client accepts any of the above: XML, RSS
+                    // or Atom
                 }
             }
         }
@@ -113,9 +115,9 @@ Other request 'type' detection methods include:
 
 All of the above request detection methods can be used in a similar
 fashion to filter functionality intended for specific content
-types. For example when responding to Ajax requests, you often will
+types. For example when responding to AJAX requests, you often will
 want to disable browser caching, and change the debug level.
-However, you want to allow caching for non-ajax requests. The
+However, you want to allow caching for non-AJAX requests. The
 following would accomplish that::
 
         if ($this->request->is('ajax')) {
@@ -130,7 +132,7 @@ Obtaining Additional Client Information
 
 .. php:method:: getAjaxVersion()
 
-    Gets Prototype version if call is Ajax, otherwise empty string. The
+    Gets Prototype version if call is AJAX, otherwise empty string. The
     Prototype library sets a special "Prototype version" HTTP header.
 
 Automatically decoding request data
@@ -143,8 +145,8 @@ Automatically decoding request data
     :param array $handler: The handler information for the type.
 
     Add a request data decoder. The handler should contain a callback, and any
-    additional arguments for the callback.  The callback should return
-    an array of data contained in the request input.  For example adding a CSV
+    additional arguments for the callback. The callback should return
+    an array of data contained in the request input. For example adding a CSV
     handler in your controllers' beforeFilter could look like::
 
         $parser = function ($data) {
@@ -157,7 +159,7 @@ Automatically decoding request data
         $this->RequestHandler->addInputType('csv', array($parser));
 
     The above example requires PHP 5.3, however you can use any
-    `callable <http://php.net/callback>`_ for the handling function.  You can
+    `callable <http://php.net/callback>`_ for the handling function. You can
     also pass additional arguments to the callback, this is useful for callbacks
     like ``json_decode``::
 
@@ -271,8 +273,8 @@ against the original request to determine whether the response was not modified
 since the last time the client asked for it.
 
 If response is evaluated as not modified, then the view rendering process is
-stopped, saving processing time an  no content is returned to the client, saving
-bandwidth. The response status code is then set to `304 Not Modified`.
+stopped, saving processing time, saving bandwidth and no content is returned to
+the client. The response status code is then set to `304 Not Modified`.
 
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to false::

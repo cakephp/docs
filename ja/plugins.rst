@@ -30,7 +30,7 @@ CakePHP2.0 の変更点として、プラグインは app/Config/bootstrap.php �
     CakePlugin::load('ContactManager'); //一つだけ読み込み
 
 
-設定で記述されたプラグインは、 loadAll ですべてのプラグインで利用できます。
+設定で記述されたプラグインは、 ``loadAll()`` ですべてのプラグインで利用できます。
 ``load()`` も同様の働きですが、明示的に指定したプラグインだけロードします。
 
 プラグイン設定
@@ -98,7 +98,7 @@ Advanced bootstrapping
 ::
 
     function aCallableFunction($pluginName, $config) {
-        
+
     }
 
     CakePlugin::loadAll(array(
@@ -110,7 +110,7 @@ Advanced bootstrapping
 プラグインの利用
 ================
 
-クラス名の前にプラグイン名を付けることで、プラグインのcontrollers,models,components,behaviors, そして helpersが参照できます。 
+クラス名の前にプラグイン名を付けることで、プラグインのcontrollers,models,components,behaviors, そして helpersが参照できます。
 
 例えば、viewsの一つに必要なコンタクト情報をいくつか出力するために、
 ContacktMangerプラグインのContactInfoHelperを使いたい場合、
@@ -146,11 +146,11 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
                 /View
                     /Helper
                     /Layouts
- 
+
 
 プラグインフォルダーの名前は、 '**ContactManager**' となります。
 プラグインと同じ名前のフォルダになることが重要です。
-                    
+
 ..
  Note the name of the plugin folder, '**ContactManager**'. It is important
  that this folder has the same name as the plugin.
@@ -229,7 +229,7 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
         モデルの名前の頭にプラグイン名がつくことにも注意してください。
         これは、プラグイン内のモデルとメインのアプリケーション内のモデルの区別が必要だからです。
 
-        今回の例では、ContactManager.Contact はこのコントローラのデフォルトのモデルなのですから、 
+        今回の例では、ContactManager.Contact はこのコントローラのデフォルトのモデルなのですから、
         $uses 配列に書く必要は無かったかもしれませんが、プラグイン名を正しく頭につける方法を示すためにここでは書いています。
 
 これまで行ってきたものにアクセスしたい場合、 /contact_manager/contacts にアクセスします。
@@ -253,7 +253,7 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 次にこれを作ります。
 
 .. note::
-   もしプラグイン内のモデルを参照したいなら、ドットで区切られた、モデル名といっしょのプラグイン名を含む必要があります。 
+   もしプラグイン内のモデルを参照したいなら、ドットで区切られた、モデル名といっしょのプラグイン名を含む必要があります。
 
 例えば
 
@@ -372,9 +372,9 @@ Contacts controllerにはこのファイルを作ります。
     // Component defined in 'ContactManager' plugin
     class ExampleComponent extends Component {
     }
-    
+
     // within your controllers:
-    public $components = array('ContactManager.Example'); 
+    public $components = array('ContactManager.Example');
 
 同じテクニックはヘルパーとビヘイビアにも使えます。
 
@@ -394,7 +394,7 @@ Contacts controllerにはこのファイルを作ります。
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 通常のルールでは、つまりアプリケーションでできることは、プラグインでもできます。
 
-まずは、'Vendor'にサードパーティのライブラリを設置し、 
+まずは、'Vendor'にサードパーティのライブラリを設置し、
 cake console に新しい shell を追加します。
 さらに、利用者が自動で出来る、プラグインの機能をテストするためのテストケースを作成する事を忘れないでください。
 
@@ -407,7 +407,7 @@ Contact modelにvalidationを作成し、contact管理機能を追加します�
 プラグインTips
 ==============
 
-一度、プラグインを /app/Plugin にインストールすると、 /plugin_name/controller_name/action 
+一度、プラグインを /app/Plugin にインストールすると、 /plugin_name/controller_name/action
 というURLでアクセスできます。ContactManagerの例だと、ContactsControllerには /contact_manager/contacts でアクセスできます。
 
 CakePHPアプリケーションで動作するプラグインの最後のtipsです。
@@ -420,4 +420,3 @@ CakePHPアプリケーションで動作するプラグインの最後のtipsで
    内部プラグインとコミュニケーションができます。
 -  requestActionを使う際は、コントローラ名とモデル名がユニークであることを確認してください。
    そうしないと、"redefined class ..."エラーが発生します。
-

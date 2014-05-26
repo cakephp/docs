@@ -1,16 +1,15 @@
 Code
 ####
 
-Patches and pull requests are the best ways to contribute code back to CakePHP.
-Patches can be attached to tickets in `lighthouse
-<http://cakephp.lighthouseapp.com>`_. Pull requests can be created in github,
-and are generally a better way to contribute code.
+Patches and pull requests are a great way to contribute code back to CakePHP.
+Pull requests can be created in GitHub, and are prefered over patch files in
+ticket comments.
 
 Initial setup
 =============
 
 Before working on patches for CakePHP, it's a good idea to get your environment
-setup.  You'll need the following software:
+setup. You'll need the following software:
 
 * Git
 * PHP 5.2.8 or greater
@@ -23,12 +22,12 @@ Set up your user information with your name/handle and working email address::
 
 .. note::
 
-    If you are new to Git, we highly recommend you to read the excellent and free 
+    If you are new to Git, we highly recommend you to read the excellent and free
     `ProGit <http://progit.org>`_ book.
 
-Get a clone of the CakePHP source code from github:
+Get a clone of the CakePHP source code from GitHub:
 
-* If you don't have a `github <http://github.com>`_ account, create one.
+* If you don't have a `GitHub <http://github.com>`_ account, create one.
 * Fork the `CakePHP repository <http://github.com/cakephp/cakephp>`_ by clicking
   the **Fork** button.
 
@@ -36,15 +35,15 @@ After your fork is made, clone your fork to your local machine::
 
     git clone git@github.com:YOURNAME/cakephp.git
 
-Add the original CakePHP repository as a remote repository.  You'll use this
-later to fetch changes from the CakePHP repository.  This will let you stay up
+Add the original CakePHP repository as a remote repository. You'll use this
+later to fetch changes from the CakePHP repository. This will let you stay up
 to date with CakePHP::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Now that you have CakePHP setup you should be able to define a ``$test``
-:ref:`database connection <database-configuration>`, and 
+:ref:`database connection <database-configuration>`, and
 :ref:`run all the tests <running-tests>`.
 
 Working on a patch
@@ -54,8 +53,8 @@ Each time you want to work on a bug, feature or enhancement create a topic
 branch.
 
 The branch you create should be based on the version that your fix/enhancement
-is for.  For example if you are fixing a bug in ``2.3`` you would want to use
-the ``2.3`` branch as the base for your branch.  If your change is a bug fix
+is for. For example if you are fixing a bug in ``2.3`` you would want to use
+the ``2.3`` branch as the base for your branch. If your change is a bug fix
 for the current stable release, you should use the ``master`` branch. This
 makes merging your changes in later much simpler::
 
@@ -90,22 +89,22 @@ you'll want to update your branch::
     git rebase 2.3
 
 This will fetch + merge in any changes that have happened in CakePHP since you
-started.  It will then rebase - or replay your changes on top of the current
-code.  You might encounter a conflict during the ``rebase``.  If the rebase
+started. It will then rebase - or replay your changes on top of the current
+code. You might encounter a conflict during the ``rebase``. If the rebase
 quits early you can see which files are conflicted/un-merged with ``git status``.
 Resolve each conflict, and then continue the rebase::
 
     git add <filename> # do this for each conflicted file.
     git rebase --continue
 
-Check that all your tests continue to pass.  Then push your branch to your
+Check that all your tests continue to pass. Then push your branch to your
 fork::
 
     git push origin <branch-name>
 
-Once your branch is on github, you can discuss it on the
+Once your branch is on GitHub, you can discuss it on the
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
-submit a pull request on github. 
+submit a pull request on GitHub.
 
 Choosing where your changes will be merged into
 -----------------------------------------------
@@ -114,14 +113,14 @@ When making pull requests you should make sure you select the correct base
 branch, as you cannot edit it once the pull request is created.
 
 * If your change is a **bugfix** and doesn't introduce new functionality and only
-  corrects existing behavior that is present in the current release.  Then
+  corrects existing behavior that is present in the current release. Then
   choose **master** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
-  should choose the branch with the next version number.  For example if the
+  should choose the branch with the next version number. For example if the
   current stable release is ``2.2.2``, the branch accepting new features will be
   ``2.3``
 * If your change is a breaks existing functionality, or API's then you'll have
-  to choose then next major release.  For example, if the current release is
+  to choose then next major release. For example, if the current release is
   ``2.2.2`` then the next time existing behavior can be broken will be in
   ``3.0`` so you should target that branch.
 
@@ -139,4 +138,4 @@ releases periodically by the core team.
 
 .. meta::
     :title lang=en: Code
-    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,lighthouse,repository,user information,enhancement,back patches,checkout
+    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout

@@ -13,7 +13,7 @@ the same way Inflector is called. Example: :php:meth:`Set::combine()`.
 
 .. deprecated:: 2.2
     The Set class has been deprecated in 2.2 in favour of the :php:class:`Hash`
-    class.  It offers a more consistent interface and API.
+    class. It offers a more consistent interface and API.
 
 Set-compatible Path syntax
 ==========================
@@ -681,7 +681,7 @@ available.
 
     :rtype: string
 
-    The enum method works well when using html select elements. It
+    The enum method works well when using HTML select elements. It
     returns a value from an array list if the key exists.
 
     If a comma separated $list is passed arrays are numeric with the

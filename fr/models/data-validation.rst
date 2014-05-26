@@ -396,11 +396,11 @@ propre méthode de validation, comme indiqué ci-dessous::
         public function limiteUtilisations($check, $limit) {
             // $check aura comme valeur : array('code_promo' => 'une valeur')
             // $limit aura comme valeur : 25
-             $compteur_code_actuel = $this->find( 'count', array(
+             $compteurCodeActuel = $this->find('count', array(
                 'conditions' => $check,
                 'recursive' => -1
             ));
-            return $compteur_code_actuel < $limit;
+            return $compteurCodeActuel < $limit;
         }
     }
 
@@ -832,7 +832,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     
     Notez que au contraire de date(), datetime() validera une date et un time.
 
-.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
+.. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
 
     Cette règle s'assure que la donnée est un nombre décimal valide. Un
     paramètre peut être passé pour spécifier le nombre de décimales requises
@@ -910,7 +910,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     .. versionadded:: 2.3
         Cette méthode a été ajoutée dans 2.3
 
-.. php:staticmethod:: inList(string $check, array $list)
+.. php:staticmethod:: inList(string $check, array $list, $strict = true)
 
     Cette règle s'assurera que la valeur est dans un ensemble donné. Elle
     nécessite un tableau des valeurs. Le champ est valide si sa valeur
@@ -1198,6 +1198,11 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
+    Cette méthode de validation utilise une expression régulière complexe qui
+    peut parfois entraîner des problèmes avec Apache2 sur Windows en utilisant
+    mod\_php.
+
+
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
     Lance une validation de définition d'user.
@@ -1251,6 +1256,7 @@ validateur a été ajouté.
     localisées.
 
 .. toctree::
+    :maxdepth: 1
 
     data-validation/validating-data-from-the-controller
 

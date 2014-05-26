@@ -47,8 +47,10 @@ Example of how to set configuration file on controller::
 
     public $helpers = array(
         'Html' => array(
-            'configFile' => array('config_file', 'php') // Option one: an array with filename and reader name
-            'configFile' => 'config_file' // Option two: a string with filename. The PhpReader will be used
+            // Option one: an array with filename and reader name
+            'configFile' => array('config_file', 'php')
+            // Option two: a string with filename. The PhpReader will be used
+            'configFile' => 'config_file'
         )
     );
 
@@ -100,7 +102,7 @@ this could be used to create routes to handle subdomains, or enabling https/http
 flags. An example of a route class that supports subdomains would be::
 
     class SubdomainRoute extends CakeRoute {
-        
+
         public function match($params) {
             $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
             unset($params['subdomain']);
@@ -158,7 +160,7 @@ text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
 debug()
 -------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes
+:php:func:`debug()` no longer outputs HTML in the console. Instead it makes
 output like the following::
 
     ########## DEBUG ##########
@@ -196,13 +198,13 @@ use this feature start off by enabling extensions in ``app/Config/routes.php``::
 
 Once you have created layouts and views for your extensions, you will be able to
 visit a url like posts/view/1 and send Accept: ``application/json`` in the
-headers to receive the json version of that url.
+headers to receive the JSON version of that URL.
 
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` now supports http only cookies. You can enable
-their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
+:php:class:`CookieComponent` now supports HTTP only cookies. You can enable
+their use by setting ``$this->Cookie->httpOnly = true;``. Having HTTP only
 cookies will make them inaccessible from the browser.
 
 Security Component CSRF separation
@@ -252,27 +254,27 @@ and not need to replace every instance of ``$this->Html`` in your views. To do
 this, pass the 'className' key along with your class, like you would with
 models::
 
-    public $helpers = array( 
-        'Html' => array( 
-            'className' => 'MyHtml' 
+    public $helpers = array(
+        'Html' => array(
+            'className' => 'MyHtml'
         )
     );
 
 Similarly, you can alias components for use in your controllers::
 
-    public $components = array( 
-        'Email' => array( 
-            'className' => 'QueueEmailer' 
+    public $components = array(
+        'Email' => array(
+            'className' => 'QueueEmailer'
         )
     );
 
 Calls to the Email component would call the QueueEmailer component instead.
 Finally, you can alias behaviors as well::
 
-    public $actsAs = array( 
-        'Containable' => array( 
-            'className' => 'SuperContainable' 
-        ) 
+    public $actsAs = array(
+        'Containable' => array(
+            'className' => 'SuperContainable'
+        )
     );
 
 Because of the way 2.0 utilizes collections and shares them across the

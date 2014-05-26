@@ -8,7 +8,7 @@ between page requests. It acts as a wrapper for ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
 related functions.
 
-Sessions can be configured in a number of ways in CakePHP.  For more
+Sessions can be configured in a number of ways in CakePHP. For more
 information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
 
@@ -88,7 +88,7 @@ Creating notification messages
 
     Often in web applications, you will need to display a one-time notification
     message to the user after processing a form or acknowledging data.
-    In CakePHP, these are referred to as "flash messages".  You can set flash
+    In CakePHP, these are referred to as "flash messages". You can set flash
     message with the SessionComponent and display them with the
     :php:meth:`SessionHelper::flash()`. To set a message, use ``setFlash``::
 
@@ -107,8 +107,8 @@ Creating notification messages
         </div>
 
     You can use the additional parameters of ``setFlash()`` to create
-    different kinds of flash messages.  For example, error and positive
-    notifications may look differently.  CakePHP gives you a way to do that.
+    different kinds of flash messages. For example, error and positive
+    notifications may look differently. CakePHP gives you a way to do that.
     Using the ``$key`` parameter you can store multiple messages, which can be
     output separately::
 
@@ -124,7 +124,7 @@ Creating notification messages
         echo $this->Session->flash('good');
         echo $this->Session->flash('bad');
 
-    The ``$element`` parameter allows you to control which element 
+    The ``$element`` parameter allows you to control which element
     (located in ``/app/View/Elements``) should be used to render the
     message in. In the element the message is available as ``$message``.
     First we set the flash in our controller::
@@ -137,22 +137,30 @@ Creating notification messages
         <div id="myCustomFlash"><?php echo h($message); ?></div>
 
     ``$params`` allows you to pass additional view variables to the
-    rendered layout. Parameters can be passed affecting the rendered div, for 
+    rendered layout. Parameters can be passed affecting the rendered div, for
     example adding "class" in the $params array will apply a class to the
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
-        $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
+        $this->Session->setFlash(
+            'Example message text',
+            'default',
+            array('class' => 'example_class')
+        );
 
     The output from using ``$this->Session->flash()`` with the above example
     would be::
 
         <div id="flashMessage" class="example_class">Example message text</div>
 
-    To use an element from a plugin just specify the plugin in the 
+    To use an element from a plugin just specify the plugin in the
     ``$params``::
 
         // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
-        $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+        $this->Session->setFlash(
+            'Message!',
+            'flash_no_spam',
+            array('plugin' => 'Comment')
+        );
 
     .. note::
         By default CakePHP does not HTML escape flash messages. If you are using

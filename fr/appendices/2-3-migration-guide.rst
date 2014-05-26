@@ -17,7 +17,7 @@ Mise en Cache
 - FileEngine est toujours le moteur de cache par défaut. Dans le passé, un
   certain nombre de personnes a des difficultés configurant et déployant
   APC correctement des deux façons en cli et web. L'utilisation des
-  fichiers devrait rendre la configuration de CakePHP plus simple pour 
+  fichiers devrait rendre la configuration de CakePHP plus simple pour
   les nouveaux développeurs.
 - `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` a été ajoutée à
   `core.php` pour autoriser les domaines/languages multiples par configuration.
@@ -54,12 +54,12 @@ PaginatorComponent
 - PaginatorComponent lance maintenant `NotFoundException` quand vous essayez
   d'accéder à une page qui n'est pas correct (par ex la page requêtée est
   supérieure au total du compte de page).
-  
+
 SecurityComponent
 ------------------
 
-- SecurityComponent supporte maintenant l'option ``unlockedActions``. Ceci peut 
-  être utilisé pour désactiver toutes les vérifications de sécurité pour toute 
+- SecurityComponent supporte maintenant l'option ``unlockedActions``. Ceci peut
+  être utilisé pour désactiver toutes les vérifications de sécurité pour toute
   action listée dans cette option.
 
 RequestHandlerComponent
@@ -170,7 +170,7 @@ Network
 SmtpTransport
 -------------
 
-- Le support TLS/SSL a été ajouté pour les connections SMTP.
+- Le support TLS/SSL a été ajouté pour les connexions SMTP.
 
 CakeRequest
 -----------
@@ -201,7 +201,7 @@ HttpSocket
   pour augmenter ce comportement. Regardez :ref:`http-socket-ssl-options`
   pour plus d'informations.
 - ``HttpResponse`` a été renommée en ``HttpSocketResponse``. Ceci évite
-  un problème commun avec l'extension pecl http. Il y a une classe
+  un problème commun avec l'extension HTTP PECL. Il y a une classe
   ``HttpResponse`` fournie ainsi que pour des raisons de compatibilité.
 
 Routing
@@ -266,7 +266,7 @@ FormHelper
   d'input basé sur les règles de validation pour un champ. Si vous avez un
   bouton "Cancel" dans votre formulaire va soumettre le formulaire puis vous
   devriez ajouter ``'formnovalidate' => true`` à vos options de bouton pour
-  empêcher le déclenchement de la validation dans le html. Vous pouvez aussi
+  empêcher le déclenchement de la validation dans le HTML. Vous pouvez aussi
   empêcher le déclenchement de la validation pour l'ensemble du formulaire
   en ajoutant ``'novalidate' => true`` dans les options de FormHelper::create().
 - :php:meth:`FormHelper::input()` génère maintenant les elements d'input de
@@ -343,7 +343,7 @@ Debugger
 Security
 --------
 
-- Le support pour 
+- Le support pour
   `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
   a été ajouté. Regardez la documentation de :php:class:`Security::hash()`
   pour plus d'informations sur la façon d'utiliser bcrypt.

@@ -21,7 +21,10 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder'))
+            array(
+                'body' => 'Save a new user as well',
+                'User' => array('first' => 'mad', 'last' => 'coder')
+            )
         ),
     );
     $this->SomeModel->saveAll($data, array('deep' => true));
@@ -190,7 +193,7 @@ it in ``engine`` key::
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
         // my truncate is better than yours
-        public function static truncate($text, $length = 100, $options = array()) {
+        public static function truncate($text, $length = 100, $options = array()) {
             return null;
         }
     }

@@ -391,6 +391,7 @@ API представления
 ==========================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/media-view

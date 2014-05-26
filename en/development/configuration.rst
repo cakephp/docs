@@ -127,24 +127,78 @@ By using :php:meth:`App::build()` in bootstrap.php we can define additional
 paths where CakePHP will look for classes::
 
     App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
+        'Model' => array(
+            '/path/to/models',
+            '/next/path/to/models'
+        ),
+        'Model/Behavior' => array(
+            '/path/to/behaviors',
+            '/next/path/to/behaviors'
+        ),
+        'Model/Datasource' => array(
+            '/path/to/datasources',
+            '/next/path/to/datasources'
+        ),
+        'Model/Datasource/Database' => array(
+            '/path/to/databases',
+            '/next/path/to/database'
+        ),
+        'Model/Datasource/Session' => array(
+            '/path/to/sessions',
+            '/next/path/to/sessions'
+        ),
+        'Controller' => array(
+            '/path/to/controllers',
+            '/next/path/to/controllers'
+        ),
+        'Controller/Component' => array(
+            '/path/to/components',
+            '/next/path/to/components'
+        ),
+        'Controller/Component/Auth' => array(
+            '/path/to/auths',
+            '/next/path/to/auths'
+        ),
+        'Controller/Component/Acl' => array(
+            '/path/to/acls',
+            '/next/path/to/acls'
+        ),
+        'View' => array(
+            '/path/to/views',
+            '/next/path/to/views'
+        ),
+        'View/Helper' => array(
+            '/path/to/helpers',
+            '/next/path/to/helpers'
+        ),
+        'Console' => array(
+            '/path/to/consoles',
+            '/next/path/to/consoles'
+        ),
+        'Console/Command' => array(
+            '/path/to/commands',
+            '/next/path/to/commands'
+        ),
+        'Console/Command/Task' => array(
+            '/path/to/tasks',
+            '/next/path/to/tasks'
+        ),
+        'Lib' => array(
+            '/path/to/libs',
+            '/next/path/to/libs'
+        ),
+        'Locale' => array(
+            '/path/to/locales',
+            '/next/path/to/locales'
+        ),
+        'Vendor' => array(
+            '/path/to/vendors',
+            '/next/path/to/vendors'
+        ),
+        'Plugin' => array(
+            '/path/to/plugins',
+            '/next/path/to/plugins'
+        ),
     ));
 
 .. note::
@@ -184,7 +238,7 @@ debug
 
 Error
     Configure the Error handler used to handle errors for your application.
-    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display
+    By default :php:meth:`ErrorHandler::handleError()` is used. It will display
     errors using :php:class:`Debugger`, when debug > 0
     and log errors with :php:class:`CakeLog` when debug = 0.
 
@@ -196,10 +250,10 @@ Error
     * ``trace`` - boolean - Include stack traces for errors in log files.
 
 Exception
-    Configure the Exception handler used for uncaught exceptions.  By default,
+    Configure the Exception handler used for uncaught exceptions. By default,
     ErrorHandler::handleException() is used. It will display a HTML page for
     the exception, and while debug > 0, framework errors like
-    Missing Controller will be displayed.  When debug = 0,
+    Missing Controller will be displayed. When debug = 0,
     framework errors will be coerced into generic HTTP errors.
     For more information on Exception handling, see the :doc:`exceptions`
     section.
@@ -209,7 +263,7 @@ Exception
 App.baseUrl
     If you don't want or can't get mod\_rewrite (or some other
     compatible module) up and running on your server, you'll need to
-    use Cake's built in pretty URLs. In ``/app/Config/core.php``,
+    use CakePHP's built-in pretty URLs. In ``/app/Config/core.php``,
     uncomment the line that looks like::
 
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -229,7 +283,7 @@ App.baseUrl
     can find instructions for getting URL rewriting working for other
     servers under the :doc:`/installation/url-rewriting` section.
 App.encoding
-    Define what encoding your application uses.  This encoding
+    Define what encoding your application uses. This encoding
     is used to generate the charset in the layout, and encode entities.
     It should match the encoding values specified for your database.
 Routing.prefixes
@@ -268,7 +322,7 @@ Session
       See :php:attr:`CakeSession::$requestCountdown`.
     * ``ini`` - An associative array of additional ini values to set.
 
-    The built in defaults are:
+    The built-in defaults are:
 
     * 'php' - Uses settings defined in your php.ini.
     * 'cake' - Saves session files in CakePHP's /tmp directory.
@@ -322,11 +376,11 @@ are a few constants that CakePHP uses during runtime.
 Core Cache Configuration
 ------------------------
 
-CakePHP uses two cache configurations internally.  ``_cake_model_`` and ``_cake_core_``.
-``_cake_core_`` is used to store file paths, and object locations.  ``_cake_model_`` is
-used to store schema descriptions, and source listings for datasources.  Using a fast
+CakePHP uses two cache configurations internally. ``_cake_model_`` and ``_cake_core_``.
+``_cake_core_`` is used to store file paths, and object locations. ``_cake_model_`` is
+used to store schema descriptions, and source listings for datasources. Using a fast
 cache storage like APC or Memcached is recommended for these configurations, as
-they are read on every request.  By default both of these configurations expire every
+they are read on every request. By default both of these configurations expire every
 10 seconds when debug is greater than 0.
 
 As with all cached data stored in :php:class:`Cache` you can clear data using
@@ -377,7 +431,11 @@ anywhere within your application, in a static context::
     The above example could also be written in a single call::
 
         Configure::write(
-            'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
+            'Company',
+            array(
+                'name' => 'Pizza, Inc.',
+                'slogan' => 'Pizza for your body and soul'
+            )
         );
 
     You can use ``Configure::write('debug', $int)`` to switch between
@@ -395,7 +453,8 @@ anywhere within your application, in a static context::
     data back::
 
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+        Configure::read('Company.slogan');  //yields: 'Pizza for your body
+                                            //and soul'
 
         Configure::read('Company');
 
@@ -430,7 +489,7 @@ anywhere within your application, in a static context::
     :param string $name: The name of the reader being attached.
     :param ConfigReaderInterface $reader: The reader instance being attached.
 
-    Attach a configuration reader to Configure.  Attached readers can
+    Attach a configuration reader to Configure. Attached readers can
     then be used to load configuration files. See :ref:`loading-configuration-files`
     for more information on how to read configuration files.
 
@@ -452,8 +511,8 @@ Reading and writing configuration files
 
 CakePHP comes with two built-in configuration file readers.
 :php:class:`PhpReader` is able to read PHP config files, in the same
-format that Configure has historically read.  :php:class:`IniReader` is
-able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
+format that Configure has historically read. :php:class:`IniReader` is
+able to read ini config files. See the `PHP documentation <http://php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
@@ -467,7 +526,7 @@ using :php:meth:`Configure::config()`::
 
 You can have multiple readers attached to Configure, each reading
 different kinds of configuration files, or reading from
-different types of sources.  You can interact with attached readers
+different types of sources. You can interact with attached readers
 using a few other methods on Configure. To see check which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
@@ -477,7 +536,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
     // Check if a specific reader is attached
     Configure::configured('default');
 
-You can also remove attached readers.  ``Configure::drop('default')``
+You can also remove attached readers. ``Configure::drop('default')``
 would remove the default reader alias. Any future attempts to load configuration
 files with that reader would fail.
 
@@ -500,7 +559,7 @@ Once you've attached a config reader to Configure you can load configuration fil
     Configure::load('my_file', 'default');
 
 Loaded configuration files merge their data with the existing runtime configuration
-in Configure.  This allows you to overwrite and add new values
+in Configure. This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
@@ -511,12 +570,12 @@ Creating or modifying configuration files
 
     :param string $key: The name of the file/stored configuration to be created.
     :param string $config: The name of the reader to store the data with.
-    :param array $keys: The list of top-level keys to save.  Defaults to all
+    :param array $keys: The list of top-level keys to save. Defaults to all
         keys.
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config reader. The serialization format
-is decided by the config reader attached as $config.  For example, if the
+is decided by the config reader attached as $config. For example, if the
 'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP
 configuration file loadable by the :php:class:`PhpReader`
 
@@ -566,13 +625,13 @@ Restoring runtime configuration
     :param string $cacheConfig: The cache configuration to load the data from.
 
 Once you've stored runtime configuration, you'll probably need to restore it
-so you can access it again.  ``Configure::restore()`` does exactly that::
+so you can access it again. ``Configure::restore()`` does exactly that::
 
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it.  Restored
+the same key, and cache configuration as was used to store it. Restored
 information is merged on top of the existing runtime configuration.
 
 Creating your own Configuration readers
@@ -652,8 +711,8 @@ Built-in Configuration readers
 
     Allows you to read configuration files that are stored as plain PHP files.
     You can read either files from your ``app/Config`` or from plugin configs
-    directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
-    variable.  An example configuration file would look like::
+    directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
+    variable. An example configuration file would look like::
 
         $config = array(
             'debug' => 0,
@@ -694,8 +753,8 @@ Built-in Configuration readers
         log = true
 
     The above ini file, would result in the same end configuration data
-    as the PHP example above.  Array structures can be created either
-    through dot separated values, or sections.  Sections can contain
+    as the PHP example above. Array structures can be created either
+    through dot separated values, or sections. Sections can contain
     dot separated keys for deeper nesting.
 
 .. _inflection-configuration:
@@ -703,7 +762,7 @@ Built-in Configuration readers
 Inflection Configuration
 ========================
 
-Cake's naming conventions can be really nice - you can name your
+CakePHP's naming conventions can be really nice - you can name your
 database table big\_boxes, your model BigBox, your controller
 BigBoxesController, and everything just works together
 automatically. The way CakePHP knows how to tie things together is
@@ -723,7 +782,10 @@ You can use :php:meth:`Inflector::rules()` in the file
 ``app/Config/bootstrap.php`` to load custom inflections::
 
     Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
+        'rules' => array(
+            '/^(bil)er$/i' => '\1',
+            '/^(inflec|contribu)tors$/i' => '\1ta'
+        ),
         'uninflected' => array('singulars'),
         'irregular' => array('spins' => 'spinor')
     ));

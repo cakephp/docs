@@ -13,6 +13,9 @@ fonctionne correctement. Premièrement, regardez votre fichier
 httpd.conf (Assurez-vous que vous avez édité le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
+Ces fichiers peuvent varier selon les différentes distributions et les versions
+d'apache. Vous pouvez allez voir
+http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
    All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
@@ -51,11 +54,11 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    coup ne les voient pas pour les copier.
 
 #. Assurez-vous que votre copie de CakePHP vient de la section des
-   téléchargements du site de notre dépôt GIT, et a été dézippé correctement
+   téléchargements du site de notre dépôt Git, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
-   Le répertoire root de Cake (a besoin d'être copié dans votre document, cela
-   redirige tout vers votre app Cake)::
+   Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
+   cela redirige tout vers votre app CakePHP)::
    
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -63,7 +66,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Le répertoire app de Cake (sera copié dans le répertoire supérieur de votre
+   Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
    application avec Bake)::
    
        <IfModule mod_rewrite.c>
@@ -72,7 +75,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Le répertoire webroot de Cake (sera copié dans le webroot de votre
+   Le répertoire webroot de CakePHP (sera copié dans le webroot de votre
    application avec Bake)::
 
        <IfModule mod_rewrite.c>
@@ -83,8 +86,8 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
        </IfModule>
 
    Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
-   essayez de modifier les paramètres pour les virtualhosts. Si vous
-   êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default
+   essayez de modifier les paramètres pour les Hôtes Virtuels. Si vous
+   êtes sur Ubuntu, modifiez le fichier /etc/apache2/sites-available/default
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
    devez avoir::
@@ -101,7 +104,8 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
        </Directory>
 
    Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil
-   virtualhostx pour faire un hôte virtuel pour pointer vers votre dossier.
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
+   Virtuel pour pointer vers votre dossier.
 
    Pour beaucoup de services d'hébergement (GoDaddy, 1and1), votre serveur web
    est en fait déjà distribué à partir d'un répertoire utilisateur qui
@@ -179,7 +183,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
@@ -215,21 +219,27 @@ faire, suivez ces étapes:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                    <rule name="Rewrite requests to test.php"
+                      stopProcessing="true">
                         <match url="^test.php(.*)$" ignoreCase="false" />
                         <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*"
+                      stopProcessing="true">
                         <match url="^app/webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
-                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                    <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
+                      stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                          appendQueryString="false" />
                     </rule>
-                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
+                    <rule name="Rewrite requested file/folder to index.php"
+                      stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php"
+                          appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>
@@ -237,8 +247,21 @@ faire, suivez ces étapes:
     </configuration>
 
 Une fois que le fichier web.config est créé avec les bonnes règles de
-réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et
+réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
+
+URL-Rewriting sur lighttpd
+==========================
+
+Lighttpd ne supporte pas les fonctions .htaccess, par conséquent vous pouvez
+retirer tous les fichiers .htaccess. Dans la configuration lighttpd,
+assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
+
+::
+
+    url.rewrite-if-not-file =(
+        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
+    )
 
 Je ne veux / ne peux utiliser l'URL rewriting
 =============================================

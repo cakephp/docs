@@ -155,6 +155,9 @@ window.lang = "{{ language }}";
 <div class="content row">
 	<div class="document columns nine push-three">
 		<div class="body">
+			{%- if pagename != 'search' -%}
+				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
+			{%- endif -%}
 			{% block body %} {% endblock %}
 		</div>
 	</div>
@@ -195,7 +198,7 @@ window.lang = "{{ language }}";
 	<div class="row">
 		<div class="columns six offset-by-three contribute">
 			<strong>Found an issue?</strong>
-			Submit a correction on <a href="https://github.com/cakephp/docs">github</a><br />
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
 			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
 		</div>
 	</div>

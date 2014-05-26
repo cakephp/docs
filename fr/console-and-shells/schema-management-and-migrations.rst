@@ -1,8 +1,8 @@
 Gestion des Schémas et migrations
 #################################
 
-Le shell Schema fournit une fonctionnalité pour créer des objets, des dumps sql
-et pour créer et restaurer des vues instantanées de votre base de données.
+Le shell Schema permet de créer des objets, des dumps sql et de créer et
+restaurer des vues instantanées de votre base de données.
 
 Générer et utiliser les fichiers Schema
 =======================================
@@ -91,6 +91,215 @@ peut être désactivé en configurant
         $db->cacheSources = false;
         return true;
     }
+
+Si vous utilisez les models dans vos callbacks, assurez-vous de les initialiser
+avec la bonne source de données, pour ne pas qu'ils s'exécutent sur leurs
+sources de données par défaut::
+
+    public function before($event = array()) {
+        $articles = ClassRegistry::init('Articles', array(
+            'ds' => $this->connection
+        ));
+        // Do things with articles.
+    }
+
+Ecrire un Schema CakePHP à la main
+==================================
+
+La classe CakeSchema est la classe de base pour tous les schémas de base de
+données. Chaque classe schema est capable de générer un ensemble de tables. La
+classe de console shell schema ``SchemaShell`` dans le repertoire
+``lib/Cake/Console/Command`` interprète la ligne de commande, et la classe
+schema de base peut lire la base de données, ou générer la table de la base de
+données.
+
+CakeSchema peut maintenant localiser, lire et écrire les fichiers schema pour
+les plugins. SchemaShell permet aussi cette fonctionnalité.
+
+CakeSchema supporte aussi ``tableParameters``. Les paramètres de Table sont
+les informations non spécifiques aux colonnes de la table comme collation,
+charset, comments, et le le type de moteur de la table. Chaque Dbo implémente
+le tableParameters qu'ils supportent.
+
+Exemple
+-------
+
+Voici un exemple complet à partir de la classe acl ::
+
+    /**
+     * ACO - Access Control Object - Quelque chose qui est souhaité
+     */
+        public $acos = array(
+            'id' => array(
+                'type' => 'integer',
+                'null' => false,
+                'default' => null,
+                'length' => 10,
+                'key' => 'primary'
+            ),
+            'parent_id' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'model' => array('type' => 'string', 'null' => true),
+            'foreign_key' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'alias' => array('type' => 'string', 'null' => true),
+            'lft' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'rght' => array(
+                'type' => 'integer',
+                'null' => true,
+                'default' => null,
+                'length' => 10
+            ),
+            'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+        );
+
+
+Colonnes
+--------
+Chaque colonne est encodée comme un tableau associatif avec clé et valeur.
+Le nom du champ est la clé du champ, la valeur est un autre tableau avec
+certains des attributs suivants.
+
+Exemple de colonne ::
+
+    'id' => array(
+        'type' => 'integer',
+        'null' => false,
+        'default' => null,
+        'length' => 10,
+        'key' => 'primary'
+     ),
+
+key
+    La clé ``primary`` définit l'index de clé primaire.
+
+null
+    Est-ce que le champ peut être null?
+
+default
+    Quel est la valeur par défaut du champ?
+
+limit
+    La limit du type de champ.
+
+length
+    Quelle est la longueur du champ?
+
+type
+    Un des types suivants
+
+    * integer
+    * date
+    * time
+    * datetime
+    * timestamp
+    * boolean
+    * biginteger
+    * float
+    * string
+    * text
+    * binary
+
+
+La clé de Table `indexes`
+=========================
+Le nom de clé `indexes` est mise dans le tableau de table plutôt que dans celui
+d'un nom de champ.
+
+column
+    C'est soit un nom de colonne unique, soit un tableau de colonnes.
+
+    par exemple Unique ::
+
+        'indexes' => array(
+        'PRIMARY' => array(
+             'column' => 'id',
+             'unique' => 1
+            )
+        )
+
+    par exemple Multiple ::
+
+        'indexes' => array(
+        'AB_KEY' => array(
+            'column' => array(
+                 'a_id', 
+                 'b_id'), 
+             'unique' => 1
+            )
+        )
+
+
+unique
+    Si l'index est unique, définissez ceci à 1, sinon à 0.
+
+
+La clé de Table `tableParameters`
+=================================
+
+tableParameters sont supportés uniquement dans MySQL.
+
+Vous pouvez utiliser tableParameters pour définir un ensemble de paramètres
+spécifiques à MySQL.
+
+
+-  ``engine`` Controle le moteur de stockage utilisé pour vos tables.
+-  ``charset`` Controle le character set utilisé pour les tables.
+-  ``encoding`` Controle l'encodage utilisé pour les tables.
+
+En plus du tableParameters de MySQL, dbo's implémente ``fieldParameters``.
+``fieldParameters`` vous permet de contrôler les paramètres spécifiques à MySQL
+par colonne.
+
+
+-  ``charset`` Définit le character set utilisé pour une colonne
+-  ``encoding`` Définit l'encodage utilisé pour une colonne
+
+Regardez ci-dessous pour des exemples sur la façon d'utiliser les paramètres
+de table et de champ dans vos fichiers de schema.
+
+**Utilisation de tableParameters dans les fichiers de schema**
+
+Vous utilisez ``tableParameters`` comme vous le feriez avec toute autre clé dans
+un fichier de schema. Un peu comme les ``indexes``::
+
+    var $comments => array(
+        'id' => array(
+          'type' => 'integer',
+          'null' => false,
+          'default' => 0,
+          'key' => 'primary'
+        ),
+        'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
+        'comment' => array('type' => 'text'),
+        'indexes' => array(
+            'PRIMARY' => array('column' => 'id', 'unique' => true),
+            'post_id' => array('column' => 'post_id'),
+        ),
+        'tableParameters' => array(
+            'engine' => 'InnoDB',
+            'charset' => 'latin1',
+            'collate' => 'latin1_general_ci'
+        )
+    );
+
+est un exemple d'une table utilisant ``tableParameters`` pour définir quelques
+parmaètres spécifiques de base de données. Si vous utilisez un fichier de
+schema qui contient des options et des fonctionnalités que votre base de données
+n'intègre pas, ces options seront ignorées.
 
 Migrations avec le shell schema de CakePHP
 ==========================================

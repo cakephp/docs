@@ -249,7 +249,7 @@ une valeur par défaut en utilisant le 2ème argument::
 .. versionchanged:: 2.3
     L'argument ``$default`` a été ajouté dans 2.3.
 
-Utiliser des blocks pour les fichiers de script et les css
+Utiliser des blocks pour les fichiers de script et les CSS
 ----------------------------------------------------------
 
 .. versionadded:: 2.1
@@ -344,7 +344,7 @@ ressembler::
 
 Les blocks ``script``, ``css`` et ``meta`` contiennent tout contenu défini
 dans les vues en utilisant le helper HTML intégré. Il est utile pour inclure
-les fichiers javascript et les CSS à partir des vues.
+les fichiers JavaScript et les CSS à partir des vues.
 
 .. note::
 
@@ -408,7 +408,7 @@ actions du controller en utilisant quelque chose comme::
 CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
 du layout default de CakePHP) que vous pouvez utiliser dans votre propre
 application: 'ajax' et 'flash'.
-Le layout Ajax est pratique pour élaborer des réponses Ajax - c'est un layout
+Le layout AJAX est pratique pour élaborer des réponses AJAX - c'est un layout
 vide (la plupart des appels ajax ne nécessitent qu'un peu de balise en retour,
 et pas une interface de rendu complète). Le layout flash est utilisé
 pour les messages montrés par la méthode :php:meth:`Controller::flash()`.
@@ -482,8 +482,10 @@ l'element. Les options supoortés sont 'cache' et 'callbacks'. Un exemple::
             "foobar" => "Ceci est passé à l'element via $foobar",
         ),
         array(
-            "cache" => "long_view", // utilise la configuration de cache "long_view"
-            "callbacks" => true // défini à true pour avoir before/afterRender appelé pour l'element
+            // utilise la configuration de cache "long_view"
+            "cache" => "long_view",
+            // défini à true pour avoir before/afterRender appelé pour l'element
+            "callbacks" => true
         )
     );
 
@@ -526,11 +528,17 @@ Et ensuite dans l'element, nous pouvons accéder au model des posts paginés.
 Pour obtenir les cinq derniers posts dans une liste ordonnée, nous ferions
 ce qui suit::
 
+.. code-block:: php
+
     <h2>Derniers Posts</h2>
-    <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
+    <?php
+      $posts = $this->requestAction(
+        'posts/index/sort:created/direction:asc/limit:5'
+      );
+    ?>
     <ol>
     <?php foreach ($posts as $post): ?>
-        <li><?php echo $post['Post']['title']; ?></li>
+          <li><?php echo $post['Post']['title']; ?></li>
     <?php endforeach; ?>
     </ol>
 
@@ -685,15 +693,18 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
     qui ont besoin de générer un ID de DOM unique pour les elements comme
     le :php:class:`JsHelper`::
 
-        $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
-        //$uuid contient 'form0425fe3bad'
+        $uuid = $this->uuid(
+          'form',
+          array('controller' => 'posts', 'action' => 'index')
+        );
+        //$uuid contains 'form0425fe3bad'
 
 .. php:method:: addScript(string $name, string $content)
 
     Ajoute du contenu au buffer des scripts internes. Ce buffer est rendu
     disponible dans le layout dans ``$scripts_for_layout``. Cette méthode est
-    utile quand vous créez des helpers qui ont besoin d'ajouter du javascript
-    ou du css directement au layout. Gardez à l'esprit que les scripts ajoutés
+    utile quand vous créez des helpers qui ont besoin d'ajouter du JavaScript
+    ou du CSS directement au layout. Gardez à l'esprit que les scripts ajoutés
     à partir du layout, ou des elements du layout ne seront pas ajoutés à
     ``$scripts_for_layout``. Cette méthode est plus souvent utilisée de
     l'intérieur des helpers, comme pour les helpers
@@ -799,6 +810,7 @@ En savoir plus sur les vues
 ===========================
 
 .. toctree::
+    :maxdepth: 1
 
     views/themes
     views/media-view

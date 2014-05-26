@@ -683,7 +683,7 @@ quelles options sont disponibles.
 
     :rtype: string
 
-    La méthode enum fonctionne bien quand on utilise les éléments html select. 
+    La méthode enum fonctionne bien quand on utilise les éléments HTML select. 
     Elle retourne une valeur d'un tableau listé si la clé existe.
 
     Si un $list séparé par des virgules est passé dans les tableaux sont 
