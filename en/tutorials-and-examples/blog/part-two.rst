@@ -305,11 +305,6 @@ Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
 handled in the following sections.
 
-We call the ``create()`` method first in order to reset the model
-state for saving new information. It does not actually create a record in the
-database, but clears Model::$id and sets Model::$data based on your database
-field defaults. 
-
 Data Validation
 ===============
 
