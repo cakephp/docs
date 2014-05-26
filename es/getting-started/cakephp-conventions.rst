@@ -90,15 +90,15 @@ iguales, en formato CamelCased. Si tienes una clase **MyNiftyClass**, el
 fichero que la contiene se llamará **MyNiftyClass.php**. En el listado
 siguiente se muestran algunos ejemplos:
 
--  El controlador con nombre **KissesAndHugsController** estará definida en el 
+-  El controlador con nombre **KissesAndHugsController** estará definido en el 
    fichero **KissesAndHugsController.php**
--  El componente con nombre **MyHandyComponent** estará definido en el fichero
+-  El componente con nombre **MyHandyComponent** estará en el fichero
    **MyHandyComponent.php**
 -  El modelo con nombre **OptionValue** estará en el fichero **OptionValue.php**
--  El comportamiento (behavior) **EspeciallyFunkableBehavior** podrás encontrarlo
-   en el fichero **EspeciallyFunkableBehavior.php**
+-  El comportamiento (behavior) **EspeciallyFunkableBehavior** estará en el 
+   fichero **EspeciallyFunkableBehavior.php**
 -  La vista **SuperSimpleView** estará en el fichero **SuperSimpleView.php**
--  El helper **BestEverHelper** estará, seguro que lo has adivinado ya, en el 
+-  El helper **BestEverHelper** estará, como ya habrás adivinado, en el 
    fichero **BestEverHelper.php**
 
 Cada uno de estos ficheros estará en la carpeta correspondiente bajo el 
@@ -107,15 +107,15 @@ directorio /app.
 Convenciones para modelos y bases de datos
 ==========================================
 
-Los nombres de clase para los modelos serán CamelCased. Persona, GranPersona, 
-y SuperGranPersona son ejemplos válidos para modelos.
+Los nombres de clase para los modelos serán CamelCased.
+Persona, GranPersona y SuperGranPersona, son ejemplos válidos para modelos.
 
 Para las tablas en la base de datos se utiliza plural y el carácter subrayado 
 (underscored) de esta forma: ``gran_personas``, ``super_gran_personas``. 
 Verás que al leer los plurales en español, no tienen el sentido correcto. 
 Ten en cuenta que esta convención proviene del inglés y si escribes los 
-nombres de tus modelos en inglés, todo cobra mucho más sentido. Puedes 
-saltar esta convención en cualquier momento y escribir plurales más adecuados
+nombres de tus modelos en inglés, todo tiene mucho más sentido. Puedes 
+saltarte esta convención en cualquier momento y escribir plurales más adecuados
 al español.
 
 Puedes también usar la clase de utilidad :php:class:`Inflector` para comprobar
@@ -125,22 +125,23 @@ el singular y plural de las palabras. Consulta la documentación aquí
 Los nombres de los campos con más de una palabra se escriben en minúscula y 
 subrayado, por ejemplo ``first_name``.
 
-Las claves foráneas (foreign keys) en las relaciones hasMany, belongsTo y 
-hasOne se reconocen por defecto si el nombre del campo se escribe usando
-el singular de la tabla con la que se relaciona y terminando en \_id.
-Por ejemplo en el modelo Baker tenemos una relación hasMany con el modelo
-Cake, en la tabla cakes escribiremos un campo con el nombre baker_id. En 
+Las claves foráneas o ajenas (foreign keys) en las relaciones 'a muchos' (hasMany),
+'pertenece a' (belongsTo) y 'a uno' (hasOne) se reconocen por defecto si el nombre
+del campo se escribe usando el singular de la tabla con la que se relaciona y terminando
+en \_id.
+Por ejemplo el modelo Baker tiene una relación 'a muchos' con el modelo
+Cake. En la tabla cakes escribiremos un campo con el nombre baker_id. En 
 caso de que el nombre de la tabla tenga varias palabras, como en 
-category\_types, la clave sería category\_types\_id.
+category\_types, la clave sería category\_type\_id.
 
-Cuando se trata de relaciones HABTM hasAndBelongsToMany, la tabla que hace de
-unión entre las tablas de ambos modelos debe nombrarse utilizando a su vez el
-nombre de cada tabla en orden alfabético y plural. Por ejemplo usaremos
-apples\_zebras en vez de zebras\_apples.
+Cuando la tabla es el resultado de una relación de 'muchos a muchos' (HABTM o hasAndBelongsToMany),
+se nombrará utilizando el nombre de cada tabla de la relación, en orden alfabético y plural.
+Por ejemplo se usará apples\_zebras en lugar de zebras\_apples.
 
 Todas las tablas que utilicemos en CakePHP, salvo las tablas de unión de las 
-relaciones HABTM, requieren una clave primaria en un único campo para 
-identificar cada fila. Si necesitas que algún modelo no tenga clave primaria en un único campo, la convención es que añadas este campo a la tabla.
+relaciones 'muchos a muchos', requieren una clave primaria en un único campo para 
+identificar cada fila. Si necesitas que algún modelo no tenga clave primaria
+en un único campo, la convención es que añadas este campo a la tabla.
 
 CakePHP no soporta claves primarias compuestas. Si quieres manipular 
 directamente los datos de una tabla de unión, usa :ref:`query <model-query>`
@@ -155,11 +156,10 @@ para poder trabajar con ella como con un modelo normal. Ejemplo:
     tag_id INT(10) NOT NULL,
     PRIMARY KEY(id)); 
 
-En vez de utilizar una clave con autoincremento como clave primaria, recuerda 
-que también puedes usar una clave char(36). Cuando CakePHP ve que has 
-definido así tu clave primaria, gestionará esta clave añadiendo un UUID 
-(String::uuid) que es un código único que identificará a cada registro, cada
-vez que realices un Model::save en ese modelo.
+En vez de usar un campo numérico autoincremental como clave primaria, también
+puedes usar un char(36). Si has definido así tu clave primaria, CakePHP gestionará
+esta clave añadiendo un UUID (String::uuid), que es un código único que identificará
+a cada registro, cada vez que realices un Model::save en ese modelo.
 
 Convenciones en la vistas
 =========================
@@ -187,10 +187,10 @@ Si usas estas convenciones, CakePHP sabrá que una llamada a
 http://example.com/people/ se mapeará a una llamada al método index() del 
 controlador PeopleController, donde el modelo Person será instanciado 
 automáticamente para su uso (leerá los datos de la tabla 'people' en la base 
-de datos). Ninguna de estas relaciones necesita ser creada ni configurada de
-ninguna otra forma que creando los nombres correctos y los ficheros que tienes
-que crear de todos modos para que tu aplicación funcione.
+de datos). Ninguna de estas relaciones necesita ser creada ni configurada s
+nombras de la forma correcta los los ficheros que de todos modos tienes que
+crear para que tu aplicación funcione.
 
-Ahora ya sabes los fundamentos y cómo utilizar las convenciones de CakePHP, 
+Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP, 
 te recomendamos que le eches un vistazo al :doc:`tutorial para hacer un blog</tutorials-and-examples/blog/blog>`
 para ver cómo encajan estas piezas en una aplicación completa.

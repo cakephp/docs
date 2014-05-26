@@ -271,7 +271,7 @@ attachés et d'augmenter les paramètres ou de les accoler dans un behavior
 supplémentaire.
 
 Tous les callbacks des behaviors sont lancés **avant** les callbacks du
-model/behavior:
+model:
 
 -  ``beforeFind``
 -  ``afterFind``

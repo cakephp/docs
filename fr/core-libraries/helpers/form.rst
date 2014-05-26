@@ -234,7 +234,7 @@ Il y plusieurs options pour create():
 Fermer le Formulaire
 ====================
 
-.. php:method:: end($options = null)
+.. php:method:: end($options = null, $secureAttributes = array())
 
     Le FormHelper inclut également une méthode ``end()`` qui
     complète le marquage du formulaire. Souvent, ``end()`` affiche juste
@@ -291,6 +291,9 @@ Fermer le Formulaire
         dans votre application vous devez toujours terminer vos formulaires
         avec  ``end()``.
 
+    .. versionchanged:: 2.5
+        Le paramètre ``$secureAttributes`` a été ajouté dans 2.5.
+
 .. _automagic-form-elements:
 
 Création d'éléments de Formulaire
@@ -332,6 +335,8 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
         day, month, year, hour, minute, et meridian selects
     time
         hour, minute, et meridian selects
+    binary
+        file
 
     Le paramètre ``$options`` vous permet de personnaliser le
     fonctionnement de ``input()``, et contrôle finement ce qui est généré.
@@ -341,6 +346,9 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     ``allowEmpty => true``. Une limitation de ce comportement est que le champ
     du model doit avoir été chargé pendant la requête. Ou être directement
     associé au model fourni par :php:meth:`~FormHelper::create()`.
+
+    .. versionadded:: 2.5
+        Le type binaire mappe maintenant vers un input de fichier.
 
     .. versionadded:: 2.3
 
@@ -429,10 +437,11 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
         Essayez d'éviter l'utilisation de `FormHelper::input()` pour générer
         les boutons submit. Utilisez plutôt :php:meth:`FormHelper::submit()`.
      
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = array())
 
     Génère un ensemble d'inputs (entrées) pour ``$fields``. Si $fields est
-    null, le model courant sera utilisé.
+    null, tous les champs, sauf ceux définis dans ``$blacklist``, du model
+    courant seront utilisés.
 
     En plus de l'affichage des champs de controller, ``$fields`` peut
     être utilisé pour contrôler legend et fieldset (jeu de champs) rendus
@@ -1076,8 +1085,9 @@ Ex: name=data[User][username], id=UserUsername
     les informations sauvegardées pour le model ``User``), la valeur
     correspondant au champs ``notes`` sera automatiquement ajoutée au HTML 
     généré. Exemple:
-    
+
     .. code-block:: html
+
         <textarea name="data[User][notes]" id="UserNotes">
         Ce texte va être édité.
         </textarea>
@@ -1167,8 +1177,8 @@ Ex: name=data[User][username], id=UserUsername
       désactivera tous les boutons radios générés.
 
     * ``$attributes['legend']`` Les éléments Radio sont enveloppés avec un
-      label et un fieldset (jeu de champs) par défaut. Définir
-      ``$attributes['legend']`` à false pour les retirer.::
+      legend et un fieldset par défaut. Définir ``$attributes['legend']`` à
+      false pour les retirer.::
 
         $options = array('H' => 'Homme', 'F' => 'Femme');
         $attributes = array('legend' => false);

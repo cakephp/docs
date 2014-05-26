@@ -206,6 +206,8 @@ devez définir *toutes* les valeurs par défaut que vous voulez utiliser::
 En écrivant par dessus la ressource map par défaut, les appels futurs à
 ``mapResources()`` vont utiliser les nouvelles valeurs.
 
+.. _custom-rest-routing:
+
 Routing REST Personnalisé
 =========================
 
@@ -216,6 +218,17 @@ vous permet de définir un certain nombre d'options différentes pour une URL
 donnée. Regardez la section sur :ref:`route-conditions` pour plus
 d'informations.
 
+.. versionadded:: 2.5
+
+Vous pouvez fournir la clé ``connectOptions`` dans le tableau ``$options`` pour
+:php:meth:`Router::mapResources()` pour fournir un paramètre personnalisé
+utilisé par :php:meth:`Router::connect()`::
+
+    Router::mapResources('books', array(
+        'connectOptions' => array(
+            'routeClass' => 'ApiRoute',
+        )
+    ));
 
 .. meta::
     :title lang=fr: REST

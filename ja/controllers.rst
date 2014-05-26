@@ -184,13 +184,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         You have selected <?php echo $color; ?> icing for the cake.
 
     :php:meth:`~Controller::set()` メソッドは最初のパラメータに連想配列も指定できます。
-    この方法はデータのかたまりを簡単にビューに割り当てる方法としてよく使われます。
-
-    .. versionchanged:: 1.3
-        配列のキーは、ビューに渡される時に単語変化しなくなりました。
-        ('underscored\_key' は 'underscoredKey' とはなりません):
-
-    ::
+    この方法はデータのかたまりを簡単にビューに割り当てる方法としてよく使われます。 ::
 
         $data = array(
             'color' => 'pink',

@@ -837,7 +837,7 @@ Ajouter des effets et des transitions
 -------------------------------------
 
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter
-les effets d'indicator vous même.::
+les effets d'indicator vous même.:
 
 .. code-block:: php
 
@@ -849,7 +849,7 @@ les effets d'indicator vous même.::
         </head>
         <body>
         <div id="content">
-            <?php echo $content_for_layout; ?>
+            <?php echo $this->fetch('content'); ?>
         </div>
         <?php
             echo $this->Html->image(

@@ -226,6 +226,8 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
+    
+    App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
@@ -388,7 +390,7 @@ logic as possible into models. Let's then implement the function::
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {
-        return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 
 

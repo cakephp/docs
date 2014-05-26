@@ -374,7 +374,7 @@ callback of your model using appropriate password hasher class::
     class User extends AppModel {
         public function beforeSave($options = array()) {
             if (!empty($this->data['User']['password'])) {
-                $passwordHasher = new SimplePasswordHasher();
+                $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
                 $this->data['User']['password'] = $passwordHasher->hash(
                     $this->data['User']['password']
                 );

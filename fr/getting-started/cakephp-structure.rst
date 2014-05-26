@@ -82,8 +82,7 @@ enregistrements issus de sources différentes : plutôt que d'être limité à d
 jointures SQL, les Sources de Données vous permettent de dire à votre model
 LDAP qu'il est associé à plusieurs événements iCal.
 
-Tout comme les controllers, les models sont également caractérisés par des
-fonctions de rappel (callbacks) :
+Tout comme les controllers, les models ont des callbacks:
 
 -  beforeFind()
 -  afterFind()

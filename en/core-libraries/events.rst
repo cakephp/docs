@@ -92,11 +92,9 @@ In addition to instance level event managers, CakePHP provides a global event
 manager that allows you to listen to any event fired in an application. This
 is useful when attaching listeners to a specific instance might be cumbersome or
 difficult. The global manager is a singleton instance of
-:php:class:`CakeEventManager` that receives every event **before** the instance
-managers do. In addition to receiving events first, the global manager also
-maintains a separate priority stack for listeners. Once an event has been
-dispatched to the global manager, it will be dispatched to the instance level
-manager. You can access the global manager using a static method::
+:php:class:`CakeEventManager`.  When an event is
+dispatched, it will be dispatched to the both the global and instance level
+listeners in priority order. You can access the global manager using a static method::
 
     // In any configuration file or piece of code that executes before the event
     App::uses('CakeEventManager', 'Event');
@@ -110,6 +108,12 @@ triggered having the same name but different subjects, so checking it in the
 event object is usually required in any function that gets attached globally in
 order to prevent some bugs. Remember that with the flexibility of using the
 global manager, some additional complexity is incurred.
+
+
+.. versionchanged:: 2.5
+
+    Prior to 2.5, listeners on the global manager were kept in a separate list
+    and fired **before** instance listeners are.
 
 
 Dispatching events

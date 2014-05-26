@@ -41,9 +41,9 @@ Expression Types
 +--------------------------------+--------------------------------------------+
 
 All expression elements are supported by all methods. In addition to expression
-elements, you can use attribute matching with certain methods. They are ``extract()``,
-``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
-``apply()``, ``sort()`` and ``nest()``.
+elements, you can use attribute matching with certain methods. They are ``extract()``, 
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
+``apply()``, ``sort()``, ``insert()``, ``remove()`` and ``nest()``.
 
 Attribute Matching Types
 ------------------------
@@ -70,6 +70,9 @@ Attribute Matching Types
 | ``[text=/.../]``               | Match elements that have values matching   |
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
+
+.. versionchanged:: 2.5
+    Matcher support was added to ``insert()`` and ``remove()``.
 
 .. php:staticmethod:: get(array $data, $path)
 
@@ -99,8 +102,7 @@ Attribute Matching Types
 
     :rtype: array
 
-    Inserts $values into an array as defined by $path. This method **only** supports
-    the expression types of :ref:`hash-path-syntax`::
+    Inserts $data into an array as defined by ``$path``::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -125,12 +127,15 @@ Attribute Matching Types
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
+    .. versionchanged:: 2.5
+        As of 2.5.0 attribute matching expressions work with insert().
+
+
 .. php:staticmethod:: remove(array $data, $path = null)
 
     :rtype: array
 
-    Removes all elements from an array that match $path. This method **only** supports
-    the expression types of :ref:`hash-path-syntax`::
+    Removes all elements from an array that match $path.::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -149,6 +154,9 @@ Attribute Matching Types
         */
 
     Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+
+    .. versionchanged:: 2.5
+        As of 2.5.0 attribute matching expressions work with remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
@@ -615,7 +623,15 @@ Attribute Matching Types
 
     Creates a new array, by extracting $path, and mapping $function
     across the results. You can use both expression and matching elements with
-    this method.
+    this method::
+    
+        //call the noop function $this->noop() on every element of $data
+        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        
+        function noop($array) {
+         //do stuff to array and return the result
+         return $array;
+        }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 

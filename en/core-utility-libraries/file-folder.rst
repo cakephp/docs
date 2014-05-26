@@ -68,9 +68,17 @@ Folder API
 
     Returns $path with $element added, with correct slash in-between::
 
-        <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
         // $path equals /a/path/for/testing
+
+    $element can also be an array::
+
+        $path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+        // $path equals /a/path/for/testing/another
+
+    .. versionadded:: 2.5
+        $element parameter accepts an array as of 2.5
+
 
 .. php:method:: cd(string $path)
 
@@ -110,11 +118,11 @@ Folder API
 
         $folder = new Folder('/path/to/folder');
         $folder->copy(array(
-            'from' => '/path/to/copy/from', // will cause a cd() to occur
             'to' => '/path/to/new/folder',
+            'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP  // Skip directories/files that already exist
+            'scheme' => Folder::SKIP  // Skip directories/files that already exist.
         ));
 
     There are 3 supported schemes:
@@ -557,6 +565,20 @@ File API
     :rtype: mixed
 
     Get the file's mimetype, returns false on failure.
+
+
+.. php:method:: replaceText( $search, $replace )
+
+    :rtype: boolean
+
+    Replaces text in a file. Returns false on failure and true on success.
+
+    .. versionadded::
+        2.5 ``File::replaceText()``
+
+.. todo::
+
+    Better explain how to use each method with both classes.
 
 .. meta::
     :title lang=en: Folder & File

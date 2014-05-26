@@ -1,21 +1,16 @@
 Components
 ##########
 
-Components are packages of logic that are shared between
-controllers. If you find yourself wanting to copy and paste things
-between controllers, you might consider wrapping some functionality
-in a component.
+Components are packages of logic that are shared between controllers.
+CakePHP comes with a fantastic set of core components you can use to aid in
+various common tasks. You can also create you own components. If you find
+yourself wanting to copy and paste things between controllers, you should
+consider creating your own component to contain the functionality. Creating
+components keeps controller code clean and allows you to reuse code between projects.
 
-CakePHP also comes with a fantastic set of core components you can
-use to aid in:
-
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 7
-
-Each of these core components is detailed in its own chapter.
-For now, we'll show you how to create your own components. Creating
-components keeps controller code clean and allows you to reuse code
-between projects.
+Each of the core components is detailed in its own chapter. See :doc:`/core-libraries/toc-components`.
+This section describes how to configure and use components, and how to create
+your own components.
 
 .. _configuring-components:
 
@@ -149,6 +144,8 @@ Component Callbacks
 Components also offer a few request life-cycle callbacks that allow them
 to augment the request cycle. See the base :ref:`component-api` for
 more information on the callbacks components offer.
+
+.. _creating-a-component:
 
 Creating a Component
 ====================

@@ -10,7 +10,7 @@ You can use the `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ to check that your code
 follows required standards.
 
-Adding new features
+Adding New Features
 ===================
 
 No new features should be added, without having their own tests – which
@@ -109,7 +109,7 @@ clarity::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
-View files
+View Files
 ----------
 
 In view files (.ctp files) developers should use keyword control structures.
@@ -164,12 +164,12 @@ function call::
 As you can see above there should be one space on both sides of equals
 sign (=).
 
-Method definition
+Method Definition
 =================
 
-Example of a function definition::
+Example of a method definition::
 
-    function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
         }
@@ -177,8 +177,8 @@ Example of a function definition::
     }
 
 Parameters with a default value, should be placed last in function
-definition. Try to make your functions return something, at least true
-or false = so it can be determined whether the function call was
+definition. Try to make your functions return something, at least ``true``
+or ``false``, so it can be determined whether the function call was
 successful::
 
     public function connection($dns, $persistent = false) {
@@ -196,7 +196,47 @@ successful::
 
 There are spaces on both side of the equals sign.
 
-Commenting code
+Typehinting
+-----------
+
+Arguments that expect objects or arrays can be typehinted.
+We only typehint public methods, though, as typehinting is not cost-free::
+
+    /**
+     * Some method description.
+     *
+     * @param Model $Model The model to use.
+     * @param array $array Some array value.
+     * @param boolean $boolean Some boolean value.
+     */
+    public function foo(Model $Model, array $array, $boolean) {
+    }
+
+Here ``$Model`` must be an instance of ``Model`` and ``$array`` must be an ``array``.
+
+Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
+you should not typehint as ``array`` accepts only the primitive type::
+
+    /**
+     * Some method description.
+     *
+     * @param array|ArrayObject $array Some array value.
+     */
+    public function foo($array) {
+    }
+
+Method Chaining
+===============
+
+Method chaining should have multiple methods spread across separate lines, and
+indented with one tab::
+
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
+        ->send();
+
+Commenting Code
 ===============
 
 All comments should be written in English, and should in a clear way
@@ -205,7 +245,6 @@ describe the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
 *  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
 *  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
 *  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
@@ -223,6 +262,7 @@ processed if they are the first thing in a DocBlock line, for example::
 
     /**
      * Tag example.
+     *
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
@@ -233,12 +273,16 @@ processed if they are the first thing in a DocBlock line, for example::
      * Example of inline phpDoc tags.
      *
      * This function works hard with foo() to rule the world.
+     *
+     * @return void
      */
     function bar() {
     }
 
     /**
-     * Foo function
+     * Foo function.
+     *
+     * @return void
      */
     function foo() {
     }
@@ -246,7 +290,7 @@ processed if they are the first thing in a DocBlock line, for example::
 Comment blocks, with the exception of the first block in a file, should
 always be preceded by a newline.
 
-Including files
+Including Files
 ===============
 
 ``include``, ``require``, ``include_once`` and ``require_once`` do not have parentheses::
@@ -262,12 +306,12 @@ Including files
 When including files with classes or libraries, use only and always the
 `require\_once <http://php.net/require_once>`_ function.
 
-PHP tags
+PHP Tags
 ========
 
-Always use long tags (``<?php ?>``) Instead of short tags (<? ?>).
+Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``).
 
-Naming convention
+Naming Convention
 =================
 
 Functions
@@ -292,7 +336,7 @@ Variables
 Variable names should be as descriptive as possible, but also as short
 as possible. Normal variables should start with a lowercase letter, and
 should be written in camelBack in case of multiple words. Variables
-containing objects should start with a capital letter, and in some way
+referencing objects should start with a capital letter, and in some way
 associate to the class the variable is an object of. Example::
 
     $user = 'John';
@@ -300,11 +344,11 @@ associate to the class the variable is an object of. Example::
 
     $Dispatcher = new Dispatcher();
 
-Member visibility
+Member Visibility
 -----------------
 
 Use PHP5's private and protected keywords for methods and variables. Additionally,
-protected method or variable names start with a single underscore ("\_"). Example::
+protected method or variable names start with a single underscore (``_``). Example::
 
     class A {
         protected $_iAmAProtectedVariable;
@@ -314,7 +358,7 @@ protected method or variable names start with a single underscore ("\_"). Exampl
         }
     }
 
-Private methods or variable names start with double underscore ("\_\_"). Example::
+Private methods or variable names start with double underscore (``__``). Example::
 
     class A {
         private $__iAmAPrivateVariable;
@@ -328,18 +372,7 @@ Try to avoid private methods or variables, though, in favor of protected ones.
 The latter can be accessed or modified by subclasses, whereas private ones
 prevent extension or re-use. Private visibility also makes testing much more difficult.
 
-Method Chaining
----------------
-
-Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
-
-    $email->from('foo@example.com')
-        ->to('bar@example.com')
-        ->subject('A great message')
-        ->send();
-
-Example addresses
+Example Addresses
 -----------------
 
 For all example URL and mail addresses use "example.com", "example.org"
@@ -349,20 +382,18 @@ and "example.net", for example:
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-The ``example.com`` domain name has been reserved for this (see :rfc:`2606`) and is recommended
+The "example.com" domain name has been reserved for this (see :rfc:`2606`) and is recommended
 for use in documentation or as examples.
 
 Files
 -----
 
 File names which do not contain classes should be lowercased and underscored, for
-example:
-
-::
+example::
 
     long_file_name.php
 
-Variable types
+Variable Types
 --------------
 
 Variable types for use in DocBlocks:
@@ -371,22 +402,32 @@ Type
     Description
 mixed
     A variable with undefined (or multiple) type.
-integer
+int
     Integer type variable (whole number).
 float
     Float type (point number).
-boolean
+bool
     Logical type (true or false).
 string
     String type (any value in " " or ' ').
+null
+    Null type. Usually used in conjunction with another type.
 array
     Array type.
 object
-    Object type.
+    Object type. A specific class name should be used if possible.
 resource
     Resource type (returned by for example mysql\_connect()).
     Remember that when you specify the type as mixed, you should indicate
     whether it is unknown, or what the possible types are.
+callable
+    Callable function.
+
+You can also combine types using the pipe char::
+
+    int|bool
+
+For more than two types it is usually best to just use ``mixed``.
 
 Casting
 -------
@@ -411,16 +452,12 @@ Type
 Constants
 ---------
 
-Constants should be defined in capital letters:
-
-::
+Constants should be defined in capital letters::
 
     define('CONSTANT', 1);
 
 If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
-
-::
+by an underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 

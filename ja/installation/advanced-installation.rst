@@ -38,7 +38,7 @@ CakePHPアプリケーションのための composer.json ファイルは次の�
             }
         ],
         "require": {
-            "pear-cakephp/cakephp": ">=2.3.4"
+            "cakephp/cakephp": ">=2.4.9"
         },
         "config": {
             "vendor-dir": "Vendor/"
@@ -73,7 +73,7 @@ composerの実行が終わると、ディレクトリ構造は次のようにな
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
 
 composerで他のライブラリをインストールしている場合は、

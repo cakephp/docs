@@ -1,6 +1,9 @@
 Scaffolding
 ###########
 
+.. deprecated:: 2.5
+    Dynamic scaffolding will be removed and replaced in 3.0 
+
 Application scaffolding is a technique that allows a developer to
 define and create a basic application that can create, retrieve,
 update and delete objects. Scaffolding in CakePHP also allows

@@ -17,8 +17,8 @@ the documentation.
 
     **Read the Book Anywhere**
 
-    Enjoy the CakePHP cookbook almost anywhere. Available, as both a PDF and
-    EPUB, you can now read the docs on more devices and offline.
+    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
+    EPUB, you can now read it on more devices, as well as offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
@@ -43,20 +43,20 @@ Learn about a typical :doc:`CakePHP request
 Controllers
 -----------
 
-Controllers handle requests, and help co-ordinate and prepare
-the response for the client. Read more about :doc:`/controllers`.
+Controllers handle requests and help co-ordinate and prepare
+responses for the client. Read more about :doc:`/controllers`.
 
 Views
 -----
 
 Views are the presentation layer in CakePHP. They convert
-the data fetched from Models, into the output format the client
-requested. Read more about :doc:`/views`.
+the data fetched from Models into the output format requested by the
+client. Read more about :doc:`/views`.
 
 Models
 ------
 
-Models are the heart of your application, they handle the validation,
+Models are the heart of your application. They handle the validation,
 storage and retrieval of your data. Read more about :doc:`/models`.
 
 Getting Help

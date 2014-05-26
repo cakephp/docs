@@ -41,7 +41,7 @@ would look like the following::
             }
         ],
         "require": {
-            "pear-cakephp/cakephp": ">=2.4.0"
+            "cakephp/cakephp": ">=2.4.9"
         },
         "config": {
             "vendor-dir": "Vendor/"
@@ -76,7 +76,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
 
 .. note::

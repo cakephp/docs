@@ -2,7 +2,7 @@ Models (Modèles)
 ################
 
 Les Models sont les classes qui représentent la couche de logique dans votre
-application. Cela signifie qu'ils sont responsables de la gestion de presque
+application. Ils sont responsables de la gestion de presque
 tout ce qui concerne les données, leur validité, les interactions et
 l'évolution du flux d'informations dans votre domaine de travail.
 
@@ -11,11 +11,10 @@ utilisées dans les applications CakePHP pour l'accès aux données, plus
 spécifiquement elles représentent une table de la base de données, mais elles
 ne sont pas limitées à cela et peuvent être utilisées pour accéder à tout ce
 qui manipule des données comme des fichiers, des services web externes, des
-évènements iCal ou des lignes dans un fichier CSV.
+évènements iCal.
 
 Un model peut être associé avec d'autres models. Par exemple, une Recette
-peut être associé avec l'Auteur de la recette ainsi qu'à l'Ingredient dans
-la recette.
+peut être associée avec l'Auteur de la recette ainsi qu'à un Ingredient.
 
 Cette section vous expliquera quelles fonctionnalités du model peuvent
 être automatisées, comment outrepasser ces fonctionnalités, et quelles
@@ -27,7 +26,7 @@ Comprendre les Models
 =====================
 
 Un Model représente votre model de données. En programmation orientée objet, un model
-est un objet qui représente une "chose", comme une voiture, une
+est un objet qui représente une chose, comme une voiture, une
 personne ou une maison. Un blog, par exemple, peut avoir plusieurs posts et
 chaque post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont
 tous des exemples de models, chacun étant associé avec un autre.
@@ -46,10 +45,9 @@ classe Model de CakePHP, grâce à la magie de l'héritage. Le model Ingredient
 étend le model de l'application AppModel, lequel étend la classe Model interne
 de CakePHP. C'est cette classe Model du cœur qui fournit les fonctionnalités à
 l'intérieur de votre model Ingredient. ``App::uses('AppModel', 'Model')``
-s'assure que le model est chargé sans effort pour chaque utilisation de
-l'instance.
+s'assure que le model est chargé sans effort quand cela est nécessaire.
 
-La classe intermédiaire AppModel est vide et si vous n'avez pas créé la vôtre,
+La classe intermédiaire AppModel est vide. Si vous n'avez pas créé la vôtre,
 elle provient du répertoire du coeur de cakePHP. Ecraser AppModel vous permet
 de définir des fonctionnalités qui doivent être rendues disponibles pour tous
 les models de votre application. Pour faire cela, vous avez besoin de créer
@@ -61,23 +59,23 @@ fichier sera automatiquement créé pour vous.
 Voir aussi :doc:`Behaviors <models/behaviors>` pour plus d'informations sur la
 façon d'appliquer la même logique pour de multiples models.
 
-Retournons à notre model Ingredient, pour que cela fonctionne, créez le
+Revenons-en à notre model Ingredient. Pour que cela fonctionne, créez le
 fichier PHP dans le repertoire ``/app/Model/``. Par convention, il devra avoir
-le même nom que la classe; pour cet exemple ``Ingredient.php``.
+le même nom que la classe ce qui pour l'exemple sera ``Ingredient.php``.
 
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous si il ne peut
     pas trouver un fichier correspondant dans /app/Model. Cela veut également
-    dire que si votre fichier de model n'est pas nommé correctement (ex :
-    ingredient.php ou ingredients.php) CakePHP utilisera une instance de
-    AppModel, plutôt que votre fichier de model "manquant" (d'un point de
-    vue CakePHP). Si vous essayez d'utiliser une méthode que vous avez définie
-    dans votre model ou dans un comportement attaché à votre model et que
-    vous obtenez des erreurs SQL qui indiquent le nom de la méthode que vous
-    appelez, c'est une indication certaine que CakePHP ne peut pas trouver
-    votre model et que vous devez, soit vérifier les noms de fichier, soit
-    nettoyer les fichiers temporaires ou les deux.
+    dire que si votre fichier de model n'est pas nommé correctement (par ex si
+    il est nommé ingredient.php ou Ingredients.php plutôt que Ingredient.php)
+    CakePHP utilisera une instance de AppModel, plutôt que votre fichier de
+    model (qui sera manquant pour CakePHP). Si vous essayez d'utiliser une
+    méthode que vous avez définie dans votre model ou dans un comportement
+    attaché à votre model et que vous obtenez des erreurs SQL qui indiquent le
+    nom de la méthode que vous appelez, c'est une indication certaine que
+    CakePHP ne peut pas trouver votre model et que vous devez vérifier
+    les noms de fichier, nettoyer les fichiers temporaires ou les deux.
 
 .. note::
 

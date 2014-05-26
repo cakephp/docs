@@ -8,7 +8,7 @@ comme les numéros de pages et les liens suivant/précédent. Il travaille en
 tamdem avec :php:class:`PaginatorComponent`.
 
 Voir aussi :doc:`/core-libraries/components/pagination` pour des informations
-sur la façon de créé des jeux de données paginés et faire des requêtes paginées.
+sur la façon de créer des jeux de données paginés et faire des requêtes paginées.
 
 Création de liens triés
 =======================
@@ -22,7 +22,7 @@ Création de liens triés
     :param array $options: Options pour le tri des liens.
 
 Génère un lien de tri. Définit le nom ou les paramètres de la chaîne de
-recherche pour le tri et la direction. Les liens par défaut fournirons un tri
+recherche pour le tri et la direction. Les liens par défaut fourniront un tri
 ascendant. Après le premier clique, les liens générés avec ``sort()`` gèreront
 le changement de direction automatiquement. Les liens de tri par défaut
 ascendant. Si le jeu de résultat est trié en ascendant avec la clé spécifiée
@@ -30,9 +30,16 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptée pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encoder en HTML, true par
+* ``escape`` Si vous voulez que le contenu soit encodé en HTML, true par
   défaut.
 * ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
+* ``direction`` La direction par défaut à utiliser quand ce lien n'est pas actif.
+* ``lock`` Verrouiller la direction. Va seulement utiliser la direction par
+  défaut, par défaut à false.
+
+  .. versionadded:: 2.5
+    Vous pouvez maintenant définir l'option lock à true afin de verrouiller
+    la direction du tri dans la direction spécifiée.
 
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
@@ -55,7 +62,7 @@ Sortie:
 
     <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
-Si vous utilisez du HTML comme des images dans vos liens rappelez-vous de
+Si vous utilisez de l'HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
 
     echo $this->Paginator->sort(
@@ -83,6 +90,11 @@ Sortie
 .. code-block:: html
 
     <a href="/posts/index/page:1/sort:user_id/direction:desc/">User Id</a>
+
+L'option lock peut être utilisée pour verrouiller le tri dans la direction
+spécifiée::
+
+    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
 
 .. php:method:: sortDir(string $model = null, mixed $options = array())
 

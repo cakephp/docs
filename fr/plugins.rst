@@ -61,8 +61,8 @@ ce qui aurait chargé seulement ces trois plugins, et pas le reste.
 Au final, vous pouvez aussi spécifier un ensemble de valeurs dans defaults pour
 loadAll qui s'applique à chaque plugin qui n'a pas de configuration spécifique.
 
-Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
-partir du plugin Blog::
+Chargez le fichier bootstrap à partir de tous les plugins, et aussi les routes
+du plugin Blog::
 
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
@@ -213,6 +213,14 @@ Merci de vous référer au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande.
 
+.. warning::
+
+    Les Plugins ne fonctionnent pas en namespace pour séparer le code.
+    A cause du manque de namespaces de PHP dans les versions plus vieilles, vous
+    ne pouvez pas avoir la même classe ou le même nom de fichier dans vos
+    plugins. Même si il s'agit de deux plugins différents. Donc utilisez des
+    classes et des noms de fichier uniques, en préfixant si possible la classe
+    et le nom de fichier par le nom du plugin.
 
 Controllers du Plugin
 =====================

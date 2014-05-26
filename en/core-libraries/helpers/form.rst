@@ -224,7 +224,7 @@ There are a number of options for create():
 Closing the Form
 ================
 
-.. php:method:: end($options = null)
+.. php:method:: end($options = null, $secureAttributes = array())
 
     The FormHelper includes an ``end()`` method that completes the
     form. Often, ``end()`` only outputs a closing form tag, but
@@ -278,6 +278,9 @@ Closing the Form
         If you are using :php:class:`SecurityComponent` in your application you
         should always end your forms with ``end()``.
 
+    .. versionchanged:: 2.5
+        The ``$secureAttributes`` parameter was added in 2.5.
+
 .. _automagic-form-elements:
 
 Creating form elements
@@ -319,6 +322,8 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
         day, month, year, hour, minute, and meridian selects
     time
         hour, minute, and meridian selects
+    binary
+        file
 
     The ``$options`` parameter allows you to customize how ``input()`` works,
     and finely control what is generated.
@@ -328,6 +333,9 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     true``. One limitation of this behavior is the field's model must have
     been loaded during this request. Or be directly associated to the
     model supplied to :php:meth:`~FormHelper::create()`.
+
+    .. versionadded:: 2.5
+        The binary type now maps to a file input.
 
     .. versionadded:: 2.3
 
@@ -407,10 +415,10 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
         Try to avoid using `FormHelper::input()` to generate submit buttons. Use
         :php:meth:`FormHelper::submit()` instead.
 
-.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = array())
 
-    Generate a set of inputs for ``$fields``. If $fields is null the current model
-    will be used.
+    Generate a set of inputs for ``$fields``. If ``$fields`` is null all fields,
+    except of those defined in ``$blacklist``, of the current model will be used.
 
     In addition to controller fields output, ``$fields`` can be used to control
     legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
@@ -1153,7 +1161,7 @@ Ex: name=data[User][username], id=UserUsername
     * ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
       will disable all of the generated radio buttons.
 
-    * ``$attributes['legend']`` Radio elements are wrapped with a label and
+    * ``$attributes['legend']`` Radio elements are wrapped with a legend and
       fieldset by default. Set ``$attributes['legend']`` to false to remove
       them.::
 

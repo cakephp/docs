@@ -19,8 +19,8 @@ incluir mudanças válidas por toda a aplicação. As classes AppController
 ``/app/Model/AppModel.php``) são excelentes lugares para colocar métodos que
 você quer compartilhar entre todos os controllers, helpers ou models.
 
-Embora não sejam classes ou arquivos, as rotas desempenhar um papel na
-requisição feita para o CakePHP. Definições de rotas dizem ao CakePHP como
+Embora rotas não sejam classes ou arquivos, elas desempenham um papel nas
+requisições feitas ao CakePHP. Definições de rotas dizem ao CakePHP como
 mapear URLs para as ações de controllers. O comportamento padrão assume que a
 URL ``/controller/action/var1/var2`` deve ser mapeada para o método
 Controller::action($var1, $var2), mas você pode usar as rotas para customizar as

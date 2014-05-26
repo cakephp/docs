@@ -18,10 +18,12 @@ following::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+    pear install pear.phpunit.de/PHPUnit-3.7.32
 
 .. note::
 
+    PHPUnit 4 is not compatible with CakePHP's Unit Testing.
+    
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
@@ -333,10 +335,11 @@ test case:
 Creating fixtures
 -----------------
 
-When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
-create our first fixture, that will be used to test our own Article
-model. Create a file named ``ArticleFixture.php`` in your
-``app/Test/Fixture`` directory, with the following content::
+When creating a fixture you will mainly define two things: how the table is
+created (which fields are part of the table), and which records will be
+initially populated to the table. Let's create our first fixture, that will be
+used to test our own Article model. Create a file named ``ArticleFixture.php``
+in your ``app/Test/Fixture`` directory, with the following content::
 
     class ArticleFixture extends CakeTestFixture {
 
@@ -592,6 +595,21 @@ You can control when your fixtures are loaded by setting
         }
     }
 
+As of 2.5.0, you can load fixtures in subdirectories. Using multiple directories
+can make it easier to organize your fixtures if you have a larger application.
+To load fixtures in subdirectories, simply include the subdirectory name in the
+fixture name::
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.blog/article', 'app.blog/comment');
+    }
+
+In the above example, both fixtures would be loaded from
+``App/Test/Fixture/blog/``.
+
+.. versionchanged:: 2.5
+    As of 2.5.0 you can load fixtures in subdirectories.
+
 Testing Models
 ==============
 
@@ -711,6 +729,8 @@ test methods like :php:meth:`~Controller::redirect()`.
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -794,6 +814,8 @@ this, is that ``redirect()`` is mocked in testing, and does not exit like
 normal. And instead of your code exiting, it will continue to run code following
 the redirect. For example::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -808,6 +830,8 @@ the redirect. For example::
 When testing the above code, you will still run ``// more code`` even when the
 redirect is reached. Instead, you should write the code like::
 
+    App::uses('AppController', 'Controller');
+    
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -1067,7 +1091,7 @@ set correctly by the ``adjust`` method in our component. We create the file
     App::uses('PagematronComponent', 'Controller/Component');
 
     // A fake controller to test against
-    class TestPagematronController extends Controller {
+    class PagematronControllerTest extends Controller {
         public $paginate = null;
     }
 
@@ -1082,7 +1106,7 @@ set correctly by the ``adjust`` method in our component. We create the file
             $this->PagematronComponent = new PagematronComponent($Collection);
             $CakeRequest = new CakeRequest();
             $CakeResponse = new CakeResponse();
-            $this->Controller = new TestPagematronController($CakeRequest, $CakeResponse);
+            $this->Controller = new PagematronControllerTest($CakeRequest, $CakeResponse);
             $this->PagematronComponent->startup($this->Controller);
         }
 

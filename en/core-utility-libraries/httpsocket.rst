@@ -63,7 +63,7 @@ HTTP methods.
 
 .. php:method:: delete($uri, $query, $request)
 
-    The put method makes a simple HTTP PUT request returning the
+    The delete method makes a simple HTTP DELETE request returning the
     results.
 
     The parameters for the ``delete`` method is the same as the

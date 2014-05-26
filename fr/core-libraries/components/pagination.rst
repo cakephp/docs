@@ -200,12 +200,12 @@ utilisez::
     public function paginateCount($conditions = null, $recursive = 0,
         $extra = array()) {
          $sql = "SELECT
-+            DISTINCT ON(
-+                week, home_team_id, away_team_id
-+            )
-+                week, home_team_id, away_team_id
-+            FROM
-+                games";
+            DISTINCT ON(
+                week, home_team_id, away_team_id
+            )
+                week, home_team_id, away_team_id
+            FROM
+                games";
         $this->recursive = $recursive;
         $results = $this->query($sql);
         return count($results);

@@ -384,7 +384,7 @@ configuration de ``AuthComponent``. L'``AuthComponent`` doit être renseigné su
 l'existence de ce nœud root, de sorte que lors des contrôles de l'ACL, le
 component puisse utiliser le bon chemin de nœud lors de la recherche
 controllers/actions. Dans l'``AppController``, assurez vous que le tableau
-``$components`` contient l'``actionPath`` défini avant.
+``$components`` contient l'``actionPath`` défini avant::
 
     class AppController extends Controller {
         public $components = array(
@@ -398,7 +398,6 @@ controllers/actions. Dans l'``AppController``, assurez vous que le tableau
         );
 
 Continuez à :doc:`part-two` pour continuer le tutoriel.
-
 
 .. meta::
     :title lang=fr: Application Simple contrôlée par Acl

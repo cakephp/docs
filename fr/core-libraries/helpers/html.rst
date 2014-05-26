@@ -189,7 +189,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         />
 
     Cette méthode peut aussi être utilisée pour ajouter les balise de mots clés
-    et les descriptions. Exemple::
+    et les descriptions. Exemple:
 
     .. code-block:: php
 
@@ -419,7 +419,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex 
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.:
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.::
 
         <?php
         echo $this->Html->link(
@@ -440,9 +440,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    Les caractères spéciaux HTML de ``$title``seront convertis en entités
+    Les caractères spéciaux HTML de ``$title`` seront convertis en entités
     HTML. Pour désactiver cette conversion, définissez l'option escape à
-    false dans le tableau ``$options``.::
+    false dans le tableau ``$options``::
 
         <?php
         echo $this->Html->link(
@@ -505,7 +505,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionadded:: 2.1
 
-    Retourne une balise formatée audio/video::
+    Retourne une balise formatée audio/video:
 
     .. code-block:: php
 
@@ -522,7 +522,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         // Sortie
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
-       <?php echo $this->Html->media(
+        <?php echo $this->Html->media(
             array(
                 'video.mp4',
                 array(
@@ -1056,7 +1056,7 @@ Création d'un chemin de navigation avec le Helper Html
     pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', '/users/add');
+        $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
 
     Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
     où le fil d'Ariane a été ajouté.
@@ -1065,7 +1065,7 @@ Création d'un chemin de navigation avec le Helper Html
 
     :param array $options: Un tableau de :term:`html attributes` pour les
         elements contenant ``<ul>``. Peut aussi contenir les options
-        'separator', 'firstClass' et 'lastClass'.
+        'separator', 'firstClass', 'lastClass' et 'escape'.
     :param string|array $startText: Le texte ou l'elément qui précède ul.
 
     Retourne le fil d'Ariane comme une liste (x)html.
@@ -1085,6 +1085,8 @@ Création d'un chemin de navigation avec le Helper Html
     .. versionchanged:: 2.3
         Les options 'separator', 'firstClass' et 'lastClass' ont été ajoutées.
 
+    .. versionchanged:: 2.5
+        L'option 'escape' a été ajoutée.
 
 .. meta::
     :title lang=fr: HtmlHelper

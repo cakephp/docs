@@ -37,12 +37,12 @@ one to many   hasMany               A user can have multiple recipes.
 ------------- --------------------- ---------------------------------------
 many to one   belongsTo             Many recipes belong to a user.
 ------------- --------------------- ---------------------------------------
-many to many  hasAndBelongsToMany   Recipes have, and belong to many ingredients.
+many to many  hasAndBelongsToMany   Recipes have, and belong to, many ingredients.
 ============= ===================== =======================================
 
 Associations are defined by creating a class variable named after
 the association you are defining. The class variable can sometimes
-be as simple as a string, but can be as complete as a
+be as simple as a string, but can be as complex as a
 multidimensional array used to define association specifics.
 
 ::
@@ -60,9 +60,9 @@ multidimensional array used to define association specifics.
 
 In the above example, the first instance of the word 'Recipe' is
 what is termed an 'Alias'. This is an identifier for the
-relationship and can be anything you choose. Usually, you will
+relationship, and can be anything you choose. Usually, you will
 choose the same name as the class that it references. However,
-**aliases for each model must be unique app wide**. For example it is
+**aliases for each model must be unique across the app**. For example, it is
 appropriate to have::
 
     class User extends AppModel {
@@ -138,9 +138,9 @@ simply by following your model associations::
 .. note::
 
     Remember that associations are defined 'one way'. If you define
-    User hasMany Recipe that has no effect on the Recipe Model. You
+    User hasMany Recipe, that has no effect on the Recipe Model. You
     need to define Recipe belongsTo User to be able to access the User
-    model from your Recipe model
+    model from your Recipe model.
 
 hasOne
 ------
@@ -150,7 +150,7 @@ model.
 
 First, your database tables need to be keyed correctly. For a
 hasOne relationship to work, one table has to contain a foreign key
-that points to a record in the other. In this case the profiles
+that points to a record in the other. In this case, the profiles
 table will contain a field called user\_id. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
@@ -167,9 +167,9 @@ Doctor hasOne Mentor mentors.doctor\_id
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can easily override
-    the use of any foreignKey in your associations definitions. Nevertheless sticking
-    to conventions will make your code less repetitive, easier to read and to maintain.
+    It is not mandatory to follow CakePHP conventions. You can easily override
+    the use of any foreignKey in your associations definitions. Nevertheless, sticking
+    to conventions will make your code less repetitive and easier to read and maintain.
 
 The User model file will be saved in /app/Model/User.php. To
 define the 'User hasOne Profile' association, add the $hasOne
@@ -206,21 +206,21 @@ Possible keys for hasOne association arrays include:
 
 -  **className**: the class name of the model being associated to
    the current model. If you're defining a 'User hasOne Profile'
-   relationship, the className key should equal 'Profile.'
+   relationship, the className key should equal 'Profile'.
 -  **foreignKey**: the name of the foreign key found in the other
    model. This is especially handy if you need to define multiple
    hasOne relationships. The default value for this key is the
    underscored, singular name of the current model, suffixed with
-   '\_id'. In the example above it would default to 'user\_id'.
--  **conditions**: an array of find() compatible conditions or SQL
+   '\_id'. In the example above, it would default to 'user\_id'.
+-  **conditions**: an array of find()-compatible conditions or SQL
    strings such as array('Profile.approved' => true)
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
--  **order**: an array of find() compatible order clauses or SQL
+-  **order**: an array of find()-compatible order clauses or SQL
    strings such as array('Profile.last_name' => 'ASC')
 -  **dependent**: When the dependent key is set to true, and the
    model's delete() method is called with the cascade parameter set to
-   true, associated model records are also deleted. In this case we
+   true, associated model records are also deleted. In this case, we
    set it true so that deleting a User will also delete her associated
    Profile.
 
@@ -299,7 +299,7 @@ Possible keys for belongsTo association arrays include:
 
 -  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Profile belongsTo User'
-   relationship, the className key should equal 'User.'
+   relationship, the className key should equal 'User'.
 -  **foreignKey**: the name of the foreign key found in the current
    model. This is especially handy if you need to define multiple
    belongsTo relationships. The default value for this key is the
@@ -307,23 +307,21 @@ Possible keys for belongsTo association arrays include:
    ``_id``.
 -  **conditions**: an array of find() compatible conditions or SQL
    strings such as ``array('User.active' => true)``
--  **type**: the type of the join to use in the SQL query, default
-   is LEFT which may not fit your needs in all situations, INNER may
-   be helpful when you want everything from your main and associated
-   models or nothing at all! (effective when used with some conditions
-   of course).
-   **(NB: type value is in lower case - i.e. left, inner)**
+-  **type**: the type of the join to use in the SQL query. The default
+   is 'LEFT', which may not fit your needs in all situations. The value
+   'INNER' may be helpful (when used with some conditions) when you want 
+   everything from your main and associated models or nothing at all.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
 -  **order**: an array of find() compatible order clauses or SQL
    strings such as ``array('User.username' => 'ASC')``
--  **counterCache**: If set to true the associated Model will
+-  **counterCache**: If set to true, the associated Model will
    automatically increase or decrease the
    "[singular\_model\_name]\_count" field in the foreign table
-   whenever you do a ``save()`` or ``delete()``. If it's a string then it's the
+   whenever you do a ``save()`` or ``delete()``. If it's a string, then it's the
    field name to use. The value in the counter field represents the
    number of related rows. You can also specify multiple counter caches
-   by defining an array, see :ref:`multiple-counterCache`
+   by defining an array. See :ref:`multiple-counterCache`.
 -  **counterScope**: Optional conditions array to use for updating
    counter cache field.
 
@@ -422,7 +420,7 @@ Possible keys for hasMany association arrays include:
    but may not be ideal for all circumstances.
 -  **finderQuery**: A complete SQL query CakePHP can use to fetch
    associated model records. This should be used in situations that
-   require very custom results.
+   require highly customized results.
    If a query you're building requires a reference to the associated
    model ID, use the special ``{$__cakeID__$}`` marker in the query.
    For example, if your Apple model hasMany Orange, the query should
@@ -468,8 +466,8 @@ One thing to remember is that you'll need a complimentary Comment
 belongsTo User association in order to get the data from both
 directions. What we've outlined in this section empowers you to get
 Comment data from the User. Adding the Comment belongsTo User
-association in the Comment model empowers you to get User data from
-the Comment model - completing the connection and allowing the flow
+association in the Comment model enables you to get User data from
+the Comment model, completing the connection and allowing the flow
 of information from either model's perspective.
 
 counterCache - Cache your count()
@@ -477,7 +475,7 @@ counterCache - Cache your count()
 
 This function helps you cache the count of related data. Instead of
 counting the records manually via ``find('count')``, the model
-itself tracks any addition/deleting towards the associated
+itself tracks any addition/deletion towards the associated
 ``$hasMany`` model and increases/decreases a dedicated integer
 field within the parent model table.
 
@@ -487,7 +485,7 @@ by a underscore and the word "count"::
     my_model_count
 
 Let's say you have a model called ``ImageComment`` and a model
-called ``Image``, you would add a new INT-field to the ``images``
+called ``Image``. You would add a new INT-field to the ``images``
 table and name it ``image_comment_count``.
 
 Here are some more examples:
@@ -502,7 +500,7 @@ Image      ImageComment            images.image\_comment\_count
 BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
 ========== ======================= =========================================
 
-Once you have added the counter field you are good to go. Activate
+Once you have added the counter field, you are good to go. Activate
 counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
@@ -544,9 +542,9 @@ Using our Image model example, we can specify it like so::
 Multiple counterCache
 =====================
 
-Since 2.0 CakePHP supports having multiple ``counterCache`` in a single model
+Since 2.0, CakePHP has supported having multiple ``counterCache`` in a single model
 relation. It is also possible to define a ``counterScope`` for each ``counterCache``.
-Assuming you have a ``User`` model and a ``Message`` model and you want to be able
+Assuming you have a ``User`` model and a ``Message`` model, and you want to be able
 to count the amount of read and unread messages for each user.
 
 ========= ====================== ===========================================
@@ -559,7 +557,7 @@ User      users.messages\_unread Count unread ``Message``
 Message   messages.is\_read      Determines if a ``Message`` is read or not.
 ========= ====================== ===========================================
 
-With this setup your ``belongsTo`` would look like this::
+With this setup, your ``belongsTo`` would look like this::
 
     class Message extends AppModel {
         public $belongsTo = array(
@@ -575,7 +573,7 @@ With this setup your ``belongsTo`` would look like this::
 hasAndBelongsToMany (HABTM)
 ---------------------------
 
-Alright. At this point, you can already call yourself a CakePHP
+All right. At this point, you can already call yourself a CakePHP
 model associations professional. You're already well versed in the
 three associations that take up the bulk of object relations.
 
@@ -591,17 +589,17 @@ doesn't "use up" the ingredient. I can also use it for a salad Recipe.
 
 Links between hasMany associated objects are exclusive. If my User
 hasMany Comments, a comment is only linked to a specific user. It's
-no longer up for grabs.
+not up for grabs.
 
 Moving on. We'll need to set up an extra table in the database to
 handle HABTM associations. This new join table's name needs to
 include the names of both models involved, in alphabetical order,
 and separated with an underscore ( \_ ). The contents of the table
-should be two fields, each foreign keys (which should be integers)
-pointing to both of the primary keys of the involved models. To
-avoid any issues - don't define a combined primary key for these
-two fields, if your application requires it you can define a unique
-index. If you plan to add any extra information to this table, or use
+should be two fields that are foreign keys (which should be integers)
+pointing to the primary keys of the involved models. To
+avoid any issues, don't define a combined primary key for these
+two fields. If your application requires a unique index, you can define one.
+If you plan to add any extra information to this table, or use
 a 'with' model, you should add an additional primary key field (by convention
 'id').
 
@@ -621,15 +619,15 @@ Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.
 
 .. note::
 
-    Table names are by convention in alphabetical order. It is
-    possible to define a custom table name in association definition
+    Table names are in alphabetical order by convention. It is
+    possible to define a custom table name in association definition.
 
 Make sure primary keys in tables **cakes** and **recipes** have
 "id" fields as assumed by convention. If they're different than
-assumed, it has to be changed in model's :ref:`model-primaryKey`
+assumed, they must be changed in model's :ref:`model-primaryKey`.
 
 Once this new table has been created, we can define the HABTM
-association in the model files. We're gonna skip straight to the
+association in the model files. We're going to skip straight to the
 array syntax this time::
 
     class Recipe extends AppModel {
@@ -658,7 +656,7 @@ Possible keys for HABTM association arrays include:
 
 -  **className**: the class name of the model being associated to
    the current model. If you're defining a 'Recipe HABTM Ingredient'
-   relationship, the className key should equal 'Ingredient.'
+   relationship, the className key should equal 'Ingredient'.
 -  **joinTable**: The name of the join table used in this
    association (if the current table doesn't adhere to the naming
    convention for HABTM join tables).
@@ -667,8 +665,8 @@ Possible keys for HABTM association arrays include:
    above it would be called IngredientsRecipe. By using this key you can
    override this default name. The join table model can be used just
    like any "regular" model to access the join table directly. By creating
-   a model class with such name and filename you can add any custom behavior
-   to the join table searches, such as adding more information/columns to it
+   a model class with such name and filename, you can add any custom behavior
+   to the join table searches, such as adding more information/columns to it.
 -  **foreignKey**: the name of the foreign key found in the current
    model. This is especially handy if you need to define multiple
    HABTM relationships. The default value for this key is the
@@ -687,20 +685,20 @@ Possible keys for HABTM association arrays include:
       no join records are deleted during a save operation.
     - When set to ``keepExisting``, the behavior is similar to `true`,
       but existing associations are not deleted.
--  **conditions**: an array of find() compatible conditions or SQL
+-  **conditions**: an array of find()-compatible conditions or SQL
    string. If you have conditions on an associated table, you should use a
    'with' model, and define the necessary belongsTo associations on it.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
--  **order**: an array of find() compatible order clauses or SQL
+-  **order**: an array of find()-compatible order clauses or SQL
    strings
 -  **limit**: The maximum number of associated rows you want
    returned.
 -  **offset**: The number of associated rows to skip over (given
    the current conditions and order) before fetching and associating.
 -  **finderQuery**: A complete SQL query CakePHP can use to fetch associated
-   model records. This should be used in situations that require very custom
-   results.
+   model records. This should be used in situations that require 
+   highly customized results.
 
 Once this association has been defined, find operations on the
 Recipe model will also fetch related Tag records if they exist::
@@ -741,14 +739,14 @@ like to fetch Recipe data when using the Ingredient model.
 
 .. note::
 
-   HABTM data is treated like a complete set, each time a new data association is added
-   the complete set of associated rows in database is dropped and created again so you
+   HABTM data is treated like a complete set. Each time a new data association is added,
+   the complete set of associated rows in the database is dropped and created again so you
    will always need to pass the whole data set for saving. For an alternative to using
-   HABTM see :ref:`hasMany-through`
+   HABTM, see :ref:`hasMany-through`.
 
 .. tip::
 
-    For more information on saving HABTM objects see :ref:`saving-habtm`
+    For more information on saving HABTM objects, see :ref:`saving-habtm`
 
 
 .. _hasMany-through:
@@ -756,15 +754,15 @@ like to fetch Recipe data when using the Ingredient model.
 hasMany through (The Join Model)
 --------------------------------
 
-It is sometimes desirable to store additional data with a many to
-many association. Consider the following
+It is sometimes desirable to store additional data with a many-to-many 
+association. Consider the following
 
 `Student hasAndBelongsToMany Course`
 
 `Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
-taken by many Students. This is a simple many to many association
+taken by many Students. This is a simple many-to-many association
 demanding a table such as this::
 
     id | student_id | course_id
@@ -782,7 +780,7 @@ the columns as it is not replaced in the new insert.
 
     .. versionchanged:: 2.1
 
-    You can set ``unique`` setting to ``keepExisting`` circumvent
+    You can set the ``unique`` setting to ``keepExisting`` to circumvent
     losing extra data during the save operation. See ``unique``
     key in :ref:`HABTM association arrays <ref-habtm-arrays>`.
 
@@ -818,7 +816,7 @@ The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Join models are pretty useful things to be able to use and CakePHP
+Join models are pretty useful things to be able to use, and CakePHP
 makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
 
@@ -838,8 +836,8 @@ associations on the fly. This may be for any number of reasons:
 
 This association creation and destruction is done using the CakePHP
 model bindModel() and unbindModel() methods. (There is also a very
-helpful behavior called "Containable", please refer to manual
-section about Built-in behaviors for more information). Let's set
+helpful behavior called "Containable". Please refer to the manual
+section about Built-in behaviors for more information.) Let's set
 up a few models so we can see how bindModel() and unbindModel()
 work. We'll start with two models::
 
@@ -889,7 +887,7 @@ controller action::
 .. note::
 
     Removing or adding associations using bind- and unbindModel() only
-    works for the *next* find operation only unless the second
+    works for the *next* find operation unless the second
     parameter has been set to false. If the second parameter has been
     set to *false*, the bind remains in place for the remainder of the
     request.
@@ -904,13 +902,13 @@ Now that we've successfully removed an association on the fly,
 let's add one. Our as-of-yet unprincipled Leader needs some
 associated Principles. The model file for our Principle model is
 bare, except for the public $name statement. Let's associate some
-Principles to our Leader on the fly (but remember–only for just the
+Principles to our Leader on the fly (but remember, only for the
 following find operation). This function appears in the
 LeadersController::
 
     public function another_action() {
         // There is no Leader hasMany Principles in
-        // the leader.php model file, so a find here,
+        // the leader.php model file, so a find here
         // only fetches Leaders.
         $this->Leader->find('all');
 
@@ -953,9 +951,9 @@ Multiple relations to the same model
 ------------------------------------
 
 There are cases where a Model has more than one relation to another
-Model. For example you might have a Message model that has two
-relations to the User model. One relation to the user that sends a
-message, and a second to the user that receives the message. The
+Model. For example, you might have a Message model that has two
+relations to the User model: one relation to the user who sends a
+message, and a second to the user who receives the message. The
 messages table will have a field user\_id, but also a field
 recipient\_id. Now your Message model can look something like::
 
@@ -1009,8 +1007,8 @@ It is also possible to create self associations as shown below::
 
 **Fetching a nested array of associated records:**
 
-If your table has ``parent_id`` field you can also use :ref:`model-find-threaded`
-to fetch nested array of records using a single query without
+If your table has a ``parent_id`` field, you can also use :ref:`model-find-threaded`
+to fetch a nested array of records using a single query without
 setting up any associations.
 
 .. _joining-tables:
@@ -1018,11 +1016,11 @@ setting up any associations.
 Joining tables
 --------------
 
-In SQL you can combine related tables using the JOIN statement.
-This allows you to perform complex searches across multiples tables
-(i.e: search posts given several tags).
+In SQL, you can combine related tables using the JOIN statement.
+This allows you to perform complex searches across multiple tables
+(for example, search posts given several tags).
 
-In CakePHP some associations (belongsTo and hasOne) performs
+In CakePHP, some associations (belongsTo and hasOne) perform
 automatic joins to retrieve data, so you can issue queries to
 retrieve models based on data in the related one.
 
@@ -1033,10 +1031,10 @@ the desired results for your query.
 
 .. note::
 
-    Remember you need to set the recursion to -1 for this to work. I.e:
+    Remember that you need to set the recursion to -1 for this to work:
     $this->Channel->recursive = -1;
 
-To force a join between tables you need to use the "modern" syntax
+To force a join between tables, you need to use the "modern" syntax
 for Model::find(), adding a 'joins' key to the $options array. For
 example::
 
@@ -1056,7 +1054,7 @@ example::
 
     Note that the 'join' arrays are not keyed.
 
-In the above example, a model called Item is left joined to the
+In the above example, a model called Item is left-joined to the
 channels table. You can alias the table with the Model name, so the
 retrieved data complies with the CakePHP data structure.
 
@@ -1090,8 +1088,8 @@ fields::
 
 You could perform several joins as needed in hasAndBelongsToMany:
 
-Suppose a Book hasAndBelongsToMany Tag association. This relation
-uses a books\_tags table as join table, so you need to join the
+Suppose there is a Book hasAndBelongsToMany Tag association. This relation
+uses a books\_tags table as a join table, so you need to join the
 books table to the books\_tags table, and this with the tags
 table::
 
@@ -1118,10 +1116,10 @@ table::
 
     $books = $Book->find('all', $options);
 
-Using joins allows you to have a maximum flexibility in how CakePHP handles associations
-and fetch the data, however in most cases you can use other tools to achieve the same results
+Using joins allows you to have maximum flexibility in how CakePHP handles associations
+and fetches the data. However, in most cases, you can use other tools to achieve the same results
 such as correctly defining associations, binding models on the fly and using the Containable
-behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
+behavior. This feature should be used with care because it could lead, in a few cases, into ill-formed
 SQL queries if combined with any of the former techniques described for associating models.
 
 

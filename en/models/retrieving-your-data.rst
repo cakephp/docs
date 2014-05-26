@@ -13,13 +13,13 @@ find
 ``find(string $type = 'first', array $params = array())``
 
 Find is the multifunctional workhorse of all model data-retrieval functions.
-``$type`` can be either ``'all'``, ``'first'``, ``'count'``, ``'list'``,
-``'neighbors'`` or ``'threaded'`` or any custom finder you can define.
-Keep in mind that ``$type`` is case sensitive. Using an upper case character
-(for example ``All``) will not produce the expected results.
+``$type`` can be ``'all'``, ``'first'``, ``'count'``, ``'list'``,
+``'neighbors'`` or ``'threaded'``, or any custom finder you can define.
+Keep in mind that ``$type`` is case-sensitive. Using an upper case character
+(for example, ``All``) will not produce the expected results.
 
-``$params`` is used to pass all parameters to the various finds,
-and has the following possible keys by default - all of which are
+``$params`` is used to pass all parameters to the various types of find(),
+and has the following possible keys by default, all of which are
 optional::
 
     array(
@@ -36,18 +36,17 @@ optional::
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-It's also possible to add and use other parameters, as is made use
-of by some find types, behaviors and of course possibly with your
-own model methods.
+It's also possible to add and use other parameters. Some types of find() 
+and behaviors make use of this ability, and your own model methods can, too.
 
-If your find operation fails to match any records you will get an empty array.
+If your find() operation fails to match any records, you will get an empty array.
 
 .. _model-find-first:
 
 find('first')
 =============
 
-``find('first', $params)`` will return one result, you'd use this for any case
+``find('first', $params)`` will return one result. You'd use this for any case
 where you expect only one result. Below are a couple of simple (controller code)
 examples::
 
@@ -63,8 +62,8 @@ examples::
         // ...
     }
 
-In the first example, no parameters at all are passed to find -
-therefore no conditions or sort order will be used. The format
+In the first example, no parameters at all are passed to find, so
+no conditions or sort order will be used. The format
 returned from ``find('first')`` call is of the form::
 
     Array
@@ -112,15 +111,15 @@ couple of simple (controller code) examples::
 
     Don't pass ``fields`` as an array to ``find('count')``. You would
     only need to specify fields for a DISTINCT count (since otherwise,
-    the count is always the same - dictated by the conditions).
+    the count is always the same, dictated by the conditions).
 
 .. _model-find-all:
 
 find('all')
 ===========
 
-``find('all', $params)`` returns an array of (potentially multiple) results.
-It is in fact the mechanism used by all ``find()`` variants, as
+``find('all', $params)`` returns an array of potentially multiple results.
+It is, in fact, the mechanism used by all ``find()`` variants, as
 well as ``paginate``. Below are a couple of simple (controller
 code) examples::
 
@@ -139,8 +138,8 @@ code) examples::
 
 .. note::
 
-    In the above example ``$allAuthors`` will contain every user in the
-    users table. There will be no condition applied to the find as none
+    In the above example, ``$allAuthors`` will contain every user in the
+    users table. There will be no condition applied to the find, since none
     were passed.
 
 The results of a call to ``find('all')`` will be of the following
@@ -175,7 +174,7 @@ find('list')
 ============
 
 ``find('list', $params)`` returns an indexed array, useful for any
-place where you would want a list such as for populating input select
+place where you would want a list, such as for populating input select
 boxes. Below are a couple of simple (controller code) examples::
 
     public function some_function() {
@@ -195,8 +194,8 @@ boxes. Below are a couple of simple (controller code) examples::
 
 .. note::
 
-    In the above example ``$allAuthors`` will contain every user in the
-    users table. There will be no condition applied to the find as none
+    In the above example, ``$allAuthors`` will contain every user in the
+    users table. There will be no condition applied to the find, since none
     were passed.
 
 The results of a call to ``find('list')`` will be in the following
@@ -213,9 +212,9 @@ form::
         [3] => 'displayValue3',
     )
 
-When calling ``find('list')`` the ``fields`` passed are used to
-determine what should be used as the array key, value and
-optionally what to group the results by. By default the primary key
+When calling ``find('list')``, the ``fields`` passed are used to
+determine what should be used as the array key and value, and
+optionally what to group the results by. By default, the primary key
 for the model is used for the key, and the display field (which can
 be configured using the model attribute
 :ref:`model-displayField`) is used for the value.
@@ -355,17 +354,17 @@ call to ``find('threaded')`` will be of the following form::
         )
     )
 
-The order results appear can be changed as it is influenced by the
+The order in which results appear can be changed, as it is influenced by the
 order of processing. For example, if ``'order' => 'name ASC'`` is
 passed in the params to ``find('threaded')``, the results will
-appear in name order. Likewise any order can be used, there is no
-inbuilt requirement of this method for the top result to be
+appear in name order. Any order can be used; there is no
+built-in requirement of this method for the top result to be
 returned first.
 
 .. warning::
 
     If you specify ``fields``, you need to always include the
-    id & parent_id (or their current aliases)::
+    id and parent_id (or their current aliases)::
 
         public function some_function() {
             $categories = $this->Category->find('threaded', array(
@@ -373,7 +372,7 @@ returned first.
             ));
         }
 
-    Otherwise the returned array will not be of the expected nested structure from above.
+    Otherwise, the returned array will not be of the expected nested structure from above.
 
 .. _model-find-neighbors:
 
@@ -395,9 +394,9 @@ return the row before and after the one you request. Below is a simple
 
 You can see in this example the two required elements of the
 ``$params`` array: field and value. Other elements are still
-allowed as with any other find (Ex: If your model acts as
-containable, then you can specify 'contain' in ``$params``). The
-format returned from a ``find('neighbors')`` call is in the form:
+allowed as with any other find. (For example: If your model acts as
+containable, then you can specify 'contain' in ``$params``.) The
+result returned from a ``find('neighbors')`` call is in the form:
 
 ::
 
@@ -451,11 +450,11 @@ format returned from a ``find('neighbors')`` call is in the form:
 Creating custom find types
 ==========================
 
-The ``find`` method is flexible enough to accept your custom finders, this is
+The ``find`` method is flexible enough to accept your custom finders. This is
 done by declaring your own types in a model variable and by implementing a special
 function in your model class.
 
-A Model Find Type is a shortcut to find options. For example, the following two finds are equivalent
+A Model Find Type is a shortcut to find() options. For example, the following two finds are equivalent
 
 ::
 
@@ -481,8 +480,8 @@ change you need to do is add your type to the :php:attr:`Model::$findMethods` va
     }
 
 Basically this is just telling CakePHP to accept the value ``available`` as the first
-argument of the ``find`` function. Next step is to implement the function ``_findAvailable``.
-This is done by convention, if you wanted to implement a finder called ``myFancySearch`` then
+argument of the ``find`` function. The next step is to implement the function ``_findAvailable``.
+This is done by convention. If you wanted to implement a finder called ``myFancySearch``, then
 the method to implement would be named ``_findMyFancySearch``.
 
 ::
@@ -514,7 +513,7 @@ This all comes together in the following example (controller code):
 
     }
 
-The special ``_find[Type]`` methods receive 3 arguments as shown above. The first one
+The special ``_find[Type]`` methods receive three arguments as shown above. The first one
 means the state of the query execution, which could be either ``before`` or ``after``. It
 is done this way because this function is just a sort of callback function that has the
 ability to modify the query before it is done, or to modify the results after they are fetched.
@@ -524,7 +523,7 @@ The ``before`` state is the moment to modify the query, bind new associations, a
 behaviors, and interpret any special key that is passed in the second argument of ``find``. This
 state requires you to return the $query argument (modified or not).
 
-The ``after`` state is the perfect place to inspect the results, inject new data, process it
+The ``after`` state is the perfect place to inspect the results, inject new data, process it in order
 to return it in another format, or do whatever you like to the recently fetched data. This state
 requires you to return the $results array (modified or not).
 
@@ -549,8 +548,23 @@ It is also possible to paginate via a custom find type as follows:
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
 
+To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the 
+find type in an array for the second argument.
+
+::
+
+    class ArticlesController extends AppController {
+
+        // Will find the count of all published articles (using the available find defined above)
+        public function index() {
+            $count = $this->Article->find('count', array(
+                'type' => 'available'
+            ));
+        }
+    }
+
 If your pagination page count is becoming corrupt, it may be necessary to add the following code to
-your ``AppModel``, which should fix pagination count:
+your ``AppModel``, which should fix the pagination count:
 
 ::
 
@@ -593,7 +607,7 @@ your ``AppModel``, which should fix pagination count:
 You no longer need to override _findCount for fixing incorrect count results.
 The ``'before'`` state of your custom finder will now be called again with
 $query['operation'] = 'count'. The returned $query will be used in ``_findCount()``
-If needed you can distinguish by checking for ``'operation'`` key
+If necessary, you can distinguish by checking the ``'operation'`` key
 and return a different ``$query``::
 
     protected function _findAvailable($state, $query, $results = array()) {
@@ -682,10 +696,10 @@ findBy() functions return results like ``find('first')``
 ``query(string $query)``
 
 SQL calls that you can't or don't want to make via other model
-methods (this should only rarely be necessary) can be made using
-the model's ``query()`` method.
+methods can be made using the model's ``query()`` method
+(though this should only rarely be necessary).
 
-If you use this method be sure to properly escape all parameters using the
+If you use this method, be sure to properly escape all parameters using the
 ``value()`` method on the database driver. Failing to escape parameters
 will create SQL injection vulnerabilities.
 
@@ -766,9 +780,9 @@ which returns::
 
 Returns the value of a single field, specified as ``$name``, from
 the first record matched by $conditions as ordered by $order. If no
-conditions are passed and the model id is set, will return the
+conditions are passed and the model id is set, it will return the
 field value for the current model result. If no matching record is
-found returns false.
+found, it returns false.
 
 ::
 
@@ -816,8 +830,8 @@ Complex Find Conditions
 =======================
 
 Most of the model's find calls involve passing sets of conditions
-in one way or another. In general CakePHP prefers using arrays for
-expressing any conditions that needs to be put after the WHERE clause
+in one way or another. In general, CakePHP prefers using arrays for
+expressing any conditions that need to be put after the WHERE clause
 in any SQL query.
 
 Using arrays is clearer and easier to read, and also makes it very
@@ -826,7 +840,12 @@ your query (fields, values, operators, etc.) into discrete,
 manipulatable parts. This allows CakePHP to generate the most
 efficient query possible, ensure proper SQL syntax, and properly
 escape each individual part of the query. Using the array syntax
-also enables CakePHP to secure your queries against any SQL injection attack
+also enables CakePHP to secure your queries against any SQL injection attack.
+
+.. warning::
+
+    CakePHP only escapes the array values. You should **never** put user data
+    into the keys. Doing so will make you vulnerable to SQL injections.
 
 At its most basic, an array-based query looks like this::
 
@@ -835,8 +854,8 @@ At its most basic, an array-based query looks like this::
     $this->Post->find('first', array('conditions' => $conditions));
 
 The structure here is fairly self-explanatory: it will find any
-post where the title equals "This is a post". Note that we could
-have used just "title" as the field name, but when building
+post where the title equals "This is a post" and the author id is equal to 1. Note
+that we could have used just "title" as the field name, but when building
 queries, it is good practice to always specify the model name, as
 it improves the clarity of the code, and helps prevent collisions
 in the future, should you choose to change your schema.
@@ -859,7 +878,7 @@ title was in a given set of values::
     )
 
 To do a NOT IN(...) match to find posts where the title is not in
-the given set of values::
+the given set of values, do the following::
 
     array(
         "NOT" => array(
@@ -879,12 +898,12 @@ You can also create finds that compare two fields in the database::
 
     array("Post.created = Post.modified")
 
-This above example will return posts where the created date is
-equal to the modified date (ie it will return posts that have never
+The above example will return posts where the created date is
+equal to the modified date (that is, it will return posts that have never
 been modified).
 
 Remember that if you find yourself unable to form a WHERE clause in
-this method (ex. boolean operations), you can always specify it as
+this method (for example, boolean operations), you can always specify it as
 a string like::
 
     array(
@@ -892,8 +911,8 @@ a string like::
         // other conditions as usual
     )
 
-By default, CakePHP joins multiple conditions with boolean AND;
-which means, the snippet above would only match posts that have
+By default, CakePHP joins multiple conditions with boolean AND.
+This means the snippet above would only match posts that have
 been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
 that match either condition::
@@ -905,11 +924,11 @@ that match either condition::
 
 CakePHP accepts all valid SQL boolean operations, including AND, OR,
 NOT, XOR, etc., and they can be upper or lower case, whichever you
-prefer. These conditions are also infinitely nest-able. Let's say
+prefer. These conditions are also infinitely nestable. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
 keyword ("magic") or were created in the past two weeks, but you
-want to restrict your search to posts written by Bob::
+wanted to restrict your search to posts written by Bob::
 
     array(
         "Author.name" => "Bob",
@@ -981,7 +1000,7 @@ operators, such as MIN(), MAX(), etc., in a similar fashion::
         'order' = >array('User.id DESC')
     )
 
-You can create very complex conditions, by nesting multiple
+You can create very complex conditions by nesting multiple
 condition arrays::
 
     array(
@@ -1001,7 +1020,7 @@ condition arrays::
         )
     )
 
-Which produces the following SQL::
+which produces the following SQL::
 
     SELECT `Company`.`id`, `Company`.`name`,
     `Company`.`description`, `Company`.`location`,
@@ -1020,12 +1039,12 @@ Which produces the following SQL::
 Sub-queries
 -----------
 
-For this example, imagine we have a "users" table with "id", "name"
-and "status". The status can be "A", "B" or "C". And we want to get
-all the users that have status other than "B" using sub-query.
+For this example, imagine that we have a "users" table with "id", "name"
+and "status". The status can be "A", "B" or "C". We want to retrieve
+all the users that have status other than "B" using a sub-query.
 
-In order to achieve that we are going to get the model data source
-and ask it to build the query as if we were calling a find method,
+In order to achieve that, we are going to get the model data source
+and ask it to build the query as if we were calling a find() method,
 but it will just return the SQL statement. After that we make an
 expression and add it to the conditions array::
 
@@ -1071,7 +1090,7 @@ This should generate the following SQL::
                 "User2"."status" = 'B'
         )
 
-Also, if you need to pass just part of your query as raw SQL as the
+Also, if you need to pass just part of your query as raw SQL as 
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
 

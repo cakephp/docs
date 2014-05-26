@@ -7,7 +7,7 @@ The CookieComponent is a wrapper around the native PHP ``setcookie``
 method. It also includes a host of delicious icing to make coding
 cookies in your controllers very convenient. Before attempting to
 use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controllers' $components array.
+in your controller's $components array.
 
 
 Controller Setup
@@ -25,18 +25,18 @@ allows you to define how the CookieComponent works.
 +-----------------+--------------+------------------------------------------------------+
 | string $key     | null         | This string is used to encrypt                       |
 |                 |              | the value written to the cookie.                     |
-|                 |              | This string should be random and difficult to guess. |
+|                 |              | The string should be random and difficult to guess.  |
 |                 |              |                                                      |
-|                 |              | When using rijndael encryption this value            |
+|                 |              | When using rijndael or aes encryption, this value    |
 |                 |              | must be longer than 32 bytes.                        |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
-|                 |              | Use '.yourdomain.com' to allow access from all your  |
-|                 |              | subdomains.                                          |
+| string $domain  | ''           | The domain name allowed to access the cookie. For    |
+|                 |              | example, use '.yourdomain.com' to allow access from  |
+|                 |              | all your subdomains.                                 |
 +-----------------+--------------+------------------------------------------------------+
 | int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
-| $time           |              | Interpreted as seconds and a value of 0 is equivalent|
-|                 |              | to a 'session cookie': i.e. the cookie expires when  |
+| $time           |              | interpreted as seconds. A value of 0 is equivalent   |
+|                 |              | to a 'session cookie': i.e., the cookie expires when |
 |                 |              | the browser is closed. If a string is set, this will |
 |                 |              | be interpreted with PHP function strtotime(). You can|
 |                 |              | set this directly within the write() method.         |
@@ -44,7 +44,7 @@ allows you to define how the CookieComponent works.
 | string $path    | '/'          | The server path on which the cookie will be applied. |
 |                 |              | If $path is set to '/foo/', the cookie will          |
 |                 |              | only be available within the /foo/ directory and all |
-|                 |              | sub-directories such as /foo/bar/ of your domain. The|
+|                 |              | sub-directories of your domain, such as /foo/bar. The|
 |                 |              | default value is the entire domain. You can set this |
 |                 |              | directly within the write() method.                  |
 +-----------------+--------------+------------------------------------------------------+
@@ -65,6 +65,7 @@ a secure connection, is available on the path
 '/bakers/preferences/', expires in one hour and is HTTP only::
 
     public $components = array('Cookie');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
@@ -74,6 +75,7 @@ a secure connection, is available on the path
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
+        $this->Cookie->type('aes');
     }
 
 Next, let's look at how to use the different methods of the Cookie
@@ -86,13 +88,13 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    The write() method is the heart of cookie component, $key is the
+    The write() method is the heart of the cookie component. $key is the
     cookie variable name you want, and the $value is the information to
     be stored::
 
         $this->Cookie->write('name', 'Larry');
 
-    You can also group your variables by supplying dot notation in the
+    You can also group your variables by using dot notation in the
     key parameter::
 
         $this->Cookie->write('User.name', 'Larry');
@@ -106,18 +108,15 @@ The CookieComponent offers a number of methods for working with Cookies.
         );
 
     All values in the cookie are encrypted by default. If you want to
-    store the values as plain-text, set the third parameter of the
-    write() method to false. The encryption performed on cookie values
-    is fairly uncomplicated encryption system. It uses
-    ``Security.salt`` and a predefined Configure class var
-    ``Security.cipherSeed`` to encrypt values. To make your cookies
-    more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
+    store the values as plain text, set the third parameter of the
+    write() method to false. You should remember to set
+    the encryption mode to 'aes' to ensure that values are securely
+    encrypted::
 
         $this->Cookie->write('name', 'Larry', false);
 
     The last parameter to write is $expires – the number of seconds
-    before your cookie will expire. For convenience, this parameter can
+    until your cookie will expire. For convenience, this parameter can
     also be passed as a string that the php strtotime() function
     understands::
 
@@ -137,7 +136,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         echo $this->Cookie->read('User.name');
 
         // To get the variables which you had grouped
-        // using the dot notation as an array use something like
+        // using the dot notation as an array use the following
         $this->Cookie->read('User');
 
         // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
@@ -146,7 +145,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     :param string $key: The key to check.
 
-    Used to check if a key/path exists and has not-null value.
+    Used to check whether a key/path exists and has a non-null value.
 
     .. versionadded:: 2.3
         ``CookieComponent::check()`` was added in 2.3
@@ -159,7 +158,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         // Delete a variable
         $this->Cookie->delete('bar');
 
-        // Delete the cookie variable bar, but not all under foo
+        // Delete the cookie variable bar, but not everything under foo
         $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()
@@ -168,12 +167,15 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: type($type)
 
-    Allows you to change the encryption scheme. By default the 'cipher' scheme
-    is used. However, you should use the 'rijndael' scheme for improved
-    security.
+    Allows you to change the encryption scheme. By default the 'cipher' scheme is used for
+    backwards compatibility. However, you should always use either the 'rijndael' or
+    'aes' schemes.
 
     .. versionchanged:: 2.2
         The 'rijndael' type was added.
+
+    .. versionadded:: 2.5
+        The 'aes' type was added.
 
 
 .. meta::

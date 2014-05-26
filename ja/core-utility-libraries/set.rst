@@ -746,7 +746,7 @@ Set互換のパス記法
     より詳しくSet::extract()について学ぶには、``/lib/Cake/Test/Case/Utility/SetTest.php`` の中のtextExcract()関数を参照してください。
 
 
-.. php:staticmethod:: filter($var, $isArray = null)
+.. php:staticmethod:: filter($var)
 
     :rtype: array
 

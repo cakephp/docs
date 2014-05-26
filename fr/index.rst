@@ -45,14 +45,14 @@ plus sur les :doc:`/controllers`.
 Views (vues)
 ------------
 
-Les vues (views) sont la représentation graphique des données dans CakePHP.
+Les views (vues) sont la représentation graphique des données dans CakePHP.
 Elles permettent de convertir les données extraites de models, dans le format
 de sortie demandé par le client. En savoir plus sur les :doc:`/views`.
 
 Models (modèles)
 ----------------
 
-Les modèles (Models) sont le coeur de votre application, ils gèrent la
+Les models (Modèles) sont le coeur de votre application. Ils gèrent la
 validation, le stockage et la récupération de vos données. En savoir plus
 sur les :doc:`/models`.
 

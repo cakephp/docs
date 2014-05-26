@@ -3,16 +3,6 @@ Liste de contrôle d'accès (ACL)
 
 .. php:class:: AclComponent(ComponentCollection $collection, array $settings = array())
 
-La fonctionnalité de listes de contrôle d'accès (Access Control List, ACL)
-de CakePHP est l'une des plus souvent discutée, probablement parce
-qu'elle est la plus recherchée, mais aussi parce qu'elle peut-être la plus
-déroutante. Si vous recherchez une bonne façon de débuter avec les ACLs
-en général, lisez ce qui suit.
-
-Soyez courageux et persévérant avec ce sujet, même si au départ cela paraît
-difficile. Une fois que vous aurez pris le coup, ce sera un outil extrêmement
-puissant, à garder sous la main quand vous développez votre application.
-
 Comprendre le fonctionnement des ACL
 ====================================
 
@@ -23,21 +13,21 @@ très précise et pourtant facilement maintenable et manipulable.
 Les listes de contrôles d'accès, ou ACL (Access Control Lists), manipulent deux
 choses principales : les choses qui veulent accéder à des trucs et celles qui
 sont recherchées. Dans le jargon ACL, les choses qui veulent accéder à des
-trucs (le plus souvent les utilisateurs) sont appelées access request objects
-(objets requête d'accès) ou AROs. Les choses du système qui sont recherchées
-(le plus souvent les actions ou les données) sont appelées access control
-objects (objets contrôle d'accès) ou ACOs. Les entités sont appelées "objets",
-parce que parfois, l'objet demandé n'est pas une personne - des fois, vous
-pourriez vouloir limiter l'accès à certains controllers de CakePHP qui doivent
-initier leur logique dans d'autres parties de votre application. Les ACOs
-pourraient être n'importe quoi que vous voudriez contrôler, d'une action de
-controller à un service Web, en passant par une case de l'agenda en ligne de
-votre Mamy.
+trucs (le plus souvent les utilisateurs) sont représentées par des access
+request objects (objets requête d'accès) ou AROs. Les choses du système qui
+sont recherchées (le plus souvent les actions ou les données) sont appelées
+access control objects (objets contrôle d'accès) ou ACOs. Les entités sont
+appelées "objets", parce que parfois, l'objet demandé n'est pas une personne -
+des fois, vous pourriez vouloir limiter l'accès à certains controllers de
+CakePHP qui doivent initier leur logique dans d'autres parties de votre
+application. Les ACOs pourraient être n'importe quoi que vous voudriez
+contrôler, d'une action de controller à un service Web, en passant par une case
+de l'agenda en ligne de votre Mamy.
 
 Rappel :
 
--   ACO - Objet Contrôle d'Accès - Quelque chose qui est recherché
--   ARO - Objet Requête d'Accès - Quelque chose qui veut quelque chose
+-   ACO - Objet Contrôle d'Accès - Représente quelque chose qui est recherché
+-   ARO - Objet Requête d'Accès - Représente quelque chose qui veut quelque chose
 
 Généralement, les ACL sont utilisées pour décider quand un ARO peut obtenir
 l'accès à un ACO.
@@ -48,7 +38,7 @@ utilisé par un célèbre groupe d'aventuriers tirés du roman fantastique le
 *Seigneur des Anneaux*. Le chef du groupe, Gandalf, veut gérer les biens du
 groupe, tout en maintenant un bon niveau de confidentialité et de sécurité
 entre les autres membres de l'équipe. La première chose dont il a besoin est de
-créer une liste d'AROs qui comprend :
+créer une liste d'AROs (requêteurs) qui comprend :
 
 -    Gandalf
 -    Aragorn
@@ -486,7 +476,7 @@ association. Réciproquement, si vous voulez gérer les opérations d'édition
 sur un article spécifique d'un blog ou d'une liste de recette, vous devez
 choisir de lier un ACO à cet enregistrement spécifique du model.
 
-L'``alias`` d'un objet ACL est un simple label lisible pour un humain que vous
+Un ``alias`` est un simple label lisible pour un humain que vous
 pouvez utiliser pour identifier un objet ACL qui n'est pas en relation directe
 avec un enregistrement d'un model. Les alias sont couramment utilisés pour
 nommer les groupes d'utilisateurs ou les collections d'ACOs.
@@ -721,9 +711,9 @@ et tout à la fin les controllers qui les manipulent. A côté des controllers
 eux-mêmes, nous allons vouloir contrôler l'accès à des actions spécifiques
 dans ces controllers.
 
-En partant de cette idée, nous allons configurer un arbre d'ACO qui va imiter
-une configuration d'application CakePHP. Depuis nos cinq ACOs, nous allons créer
-un arbre d'ACO qui devra ressembler à ça :
+Nous allons configurer un arbre d'ACO qui va imiter une configuration
+d'application CakePHP. Depuis nos cinq ACOs, nous allons créer un arbre d'ACO
+qui devra ressembler à ça :
 
 -    Armes
 -    Anneaux

@@ -117,7 +117,7 @@ quelles options sont disponibles.
 
 .. php:staticmethod:: classicExtract($data, $path = null)
 
-    :rtype: array
+    :rtype: mixed
 
     Récupère une valeur d'un tableau ou d'un objet qui est contenu dans un
     chemin donné en utilisant un tableau en une syntaxe de tableau, par ex:
@@ -707,7 +707,7 @@ quelles options sont disponibles.
 
 .. php:staticmethod:: extract($path, $data=null, $options=array())
 
-    :rtype: array
+    :rtype: mixed
 
     Set::extract utilise la syntaxe basique XPath 2.0 pour retourner les 
     sous-ensembles de vos données à partir d'un fin ou d'un find all. Cette 
@@ -771,7 +771,7 @@ quelles options sont disponibles.
     testExtract() dans ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
-.. php:staticmethod:: filter($var, $isArray=null)
+.. php:staticmethod:: filter($var)
 
     :rtype: array
 

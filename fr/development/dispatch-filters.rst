@@ -111,6 +111,23 @@ d'utiliser une façon plus avancée/rapide pour servir les thèmes les assets
 de plugin ou si vous ne souhaitez pas utiliser la mise en cache intégrée
 de la page entière, ou pour juste implémenter le votre.
 
+Si vous avez besoin de passer des paramètres ou des configurations au
+constructeur à vos classes de dispatch filter, vous pouvez le faire en
+fournissant un tableau de paramètres::
+
+    Configure::write('Dispatcher.filters', array(
+        'MyAssetFilter' => array('service' => 'google.com')
+    ));
+
+Quand la clé filter est un nom de classe valide, la valeur peut être un tableau
+de paramètres qui sont passés au dispatch filter. Par défaut, la classe de base
+va assigner ces paramètres à la propriété ``$settings`` après les avoir
+fusionnés avec les valeurs par défaut dans la classe.
+
+.. versionchanged:: 2.5
+    Vous pouvez maintenant fournir des paramètres au constructeur pour
+    dispatcher les filtres dans 2.5.
+
 Classes Filter
 ==============
 

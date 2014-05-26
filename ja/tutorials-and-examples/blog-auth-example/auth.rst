@@ -202,6 +202,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 ``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
 
     // app/Model/User.php
+
+    App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
@@ -272,7 +274,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
         }
     }
 
-Authコンポーネントの ``users()`` 関数は現在ログインしているユーザーから全てのカラムを返します。
+Authコンポーネントの ``user()`` 関数は現在ログインしているユーザーから全てのカラムを返します。
 このメソッドを使って、保存されるリクエストデータにそのデータを追加します。
 
 誰かが他の著者の投稿を編集したり削除したりするのを防ぐように、アプリケーションをセキュアにしましょう。
@@ -337,7 +339,7 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {
-        return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 
 これはシンプルな認証と承認のチュートリアルのまとめとなります。

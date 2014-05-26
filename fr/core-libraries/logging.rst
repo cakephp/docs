@@ -52,10 +52,11 @@ utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
 un tableau.::
 
-    App::uses('CakeLogInterface', 'Log');
+    App::uses('BaseLog', 'Log');
 
-    class DatabaseLog implements CakeLogInterface {
+    class DatabaseLog extends BaseLog {
         public function __construct($options = array()) {
+            parent::__construct($options);
             // ...
         }
 
@@ -64,8 +65,15 @@ un tableau.::
         }
     }
 
-CakePHP n'a pas d'exigences pour les flux de log sinon qu'il doit implémenter
-une méthode ``write``. Cette méthode ``write`` doit prendre deux paramètres,
+Alors que CakePHP n'a pas d'exigences pour les flux de Log sinon qu'il doit
+implémenter une méthode ``write``, en étendant la classe ``BaseLog`` a
+quelques bénéfices.
+
+- Il gère automatiquement le scope et type argument casting.
+- Il intègre la méthode ``config()`` qui est requise pour faire le travail du
+  scope de logging.
+
+Chaque méthode ``write`` doit prendre deux paramètres,
 dans l'ordre ``$type, $message``.``$type`` est le type de chaîne du message
 logué, les valeurs de noyau sont ``error``, ``warning``, ``info`` et ``debug``.
 De plus vous pouvez définir vos propres types par leur utilisation en appelant
@@ -75,7 +83,7 @@ De plus vous pouvez définir vos propres types par leur utilisation en appelant
 
 .. versionadded:: 2.4
 
-Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations::
+Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
@@ -190,9 +198,7 @@ les écritures ou utiliser un stockage complètement différent pour vos logs.
 Utiliser syslog est à peu près comme utiliser le moteur par défaut FileLog,
 vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
-par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`.
-
-::
+par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`::
 
     CakeLog::config('default', array(
         'engine' => 'Syslog'
@@ -234,11 +240,19 @@ interne CakeLog::write()::
     $this->log("Quelque chose qui ne fonctionne pas!", 'debug');
 
 Tous les flux de log configurés sont écrits séquentiellement à chaque fois
-que :php:meth:`CakeLog::write()` est appelée. Vous n'avez pas besoin de
-configurer un flux pour utiliser la journalisation. Si il n'y a pas de flux
-configuré quand le log est écrit, un flux par ``défaut`` utilisant la classe
-de noyau ``FileLog`` sera configuré pour envoyer en sortie vers
-``app/tmp/logs/`` juste comme CakeLog le faisait dans les précédentes versions.
+que :php:meth:`CakeLog::write()` est appelée.
+
+.. versionchanged:: 2.5
+
+CakeLog ne s'auto-configure plus lui-même. En résultat, les fichiers de log,
+ne seront plus auto-créés si aucun flux n'est écouté. Assurez-vous que vous
+ayez au moins un flux ``default`` configuré si vous souhaitez écouter tous
+les types et les niveaux. Habituellement, vous pouvez juste définir la classe
+``FileLog`` du coeur pour le sortir dans ``app/tmp/logs/``::
+
+    CakeLog::config('default', array(
+        'engine' => 'File'
+    ));
 
 .. _logging-scopes:
 
