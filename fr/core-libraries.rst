@@ -1,7 +1,7 @@
 Librairies du Coeur
 ###################
 
-CakePHP est fourni avec une pléthore de fonctions et de classes intégrées. Ces
+CakePHP est livré avec une pléthore de fonctions et de classes intégrées. Ces
 classes et fonctions tentent de couvrir certaines des fonctionnalités les plus
 communes requises dans les applications web.
 
@@ -63,7 +63,7 @@ Utilitaires
 
 En plus des components du coeur MVC, CakePHP inclut une bonne sélection de
 classes utilitaires qui vous aident à faire tout à partir de requêtes de
-services web, de mettre en cache, de se logger, d'internationaliser et plus
+services web, de mettre en cache, de faire des logs, d'internationaliser et plus
 encore.
 
 .. toctree::

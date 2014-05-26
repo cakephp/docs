@@ -14,13 +14,15 @@ données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
 comme il l'aurait fait si il était une application à part entière.
 
 Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
-``DebugKit``.
+``DebugKit``. By convention, plugins use their package name as their namespace.
+If you'd like to use a different namespace, you can configure how plugins are
+loaded.
 
 Installer un Plugin
 ===================
 
 Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
-et peuvent être installés avec ``composer``. Pour installer DebugKit, vous
+et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
@@ -51,7 +53,7 @@ following to your composer.json::
         "": "./Plugin"
     }
 
-Once added, you would need to regenerate your autoloader::
+Une fois ajouté, vous aurez besoin de regénérer votre autoloader::
 
     $ php composer.phar dumpautoload
 
@@ -78,17 +80,19 @@ certaines configurations pour des plugins spécifiques. ``load()`` fonctionne
 de la même manière, mais charge seulement les plugins que vous avez spécifié
 explicitement.
 
-When to Load Plugins
---------------------
+Quand Charger les Plugins
+-------------------------
 
-You do not need to load every plugin your application uses. If your plugins use
-the conventional namespace and filesystem layout you **do not** need to use
-``Plugin::load()`` in order to load and use components, helpers, behaviors,
-other class based code, or render views from the plugin.
+Vous n'avez pas besoin de charger chaque plugin que votre application utilise.
+Si vos plugins utilisent le namespace par convention et le layout du système
+de fichier, vous **n'avez pas** besoin d'utiliser ``Plugin::load()`` pour
+charger et utiliser les components, helpers, behaviors, et autres classes, ou
+rendre des vues à partir du plugin.
 
-You **do** need to load a plugin when you want to access its controllers,
-webroot assets, or console commands. You will also need to load a plugin if the
-plugin is using a non-conventional namespace.
+Vous **avez besoin** de charger un plugin quand vous voulez accéder à ses
+controllers, les assets du webroot, ou les commandes de la console. Vous aurez
+aussi besoin de charger un plugin si le plugin utilise un namespace
+non-conventionnel.
 
 .. _plugin-configuration:
 
@@ -107,8 +111,8 @@ des routes et des fichiers de bootstrap pour certains plugins::
     ]);
 
 Avec ce type de configuration, vous n'avez plus besoin de faire manuellement un
-include() ou un require() d'une configuration de plugin ou d'un fichier de
-routes--Cela arrive automatiquement au bon moment et à la bonne place. Un
+``include()`` ou un ``require()`` d'une configuration de plugin ou d'un fichier
+de routes -- Cela arrive automatiquement au bon moment et à la bonne place. Un
 paramètre totalement identique peut avoir été fourni à la méthode load(),
 ce qui aurait chargé seulement ces trois plugins, et pas le reste.
 
@@ -226,8 +230,8 @@ pour notre exemple ContactManager::
 Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
 des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
 
-Merci de noter que le processus de création de plugins peut être méchamment
-simplifié en utilisant le shell de CakePHP.
+Merci de noter que le processus de création de plugins peut être grandement
+simplifié en utilisant le shell bake de CakePHP.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 
@@ -268,7 +272,6 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     use ContactManager\Controller\ContactManagerAppController;
 
     class ContactsController extends ContactManagerAppController {
-        public $uses = array('ContactManager.Contact');
 
         public function index() {
             //...
@@ -285,27 +288,28 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     C'est nécessaire pour faire la différence entre les models dans les
     plugins et les models dans l'application principale.
 
-If you want to access what we've got going thus far, visit
-``/contact_manager/contacts``. You should get a "Missing Model" error
-because we don't have a Contact model defined yet.
+If you want to access what we've got going thus far, visitez
+``/contact_manager/contacts``. Vous aurez une erreur "Missing Model"
+parce que nous n'avons pas de model Contact encore défini.
 
-If your application includes the default routing CakePHP provides you will be
-able to access your plugin controllers using URLs like::
+Si votre application inclut le routage par défaut que CakePHP fournit, vous
+serez capable d'accéder aux controllers de votre plugin en utilisant les URLs
+comme::
 
-    // Access the index route of a plugin controller.
+    // Accéder à la route index d'un controller de plugin.
     /contact_manager/contacts
 
-    // Any action on a plugin controller.
+    // Toute action sur un controller de plugin.
     /contact_manager/contacts/view/1
 
-If your application defines routing prefixes, CakePHP's default routing will
-also connect routes that use the following pattern::
+Si votre application définit des préfixes de routage, le routage par défaut de
+CakePHP va aussi connecter les routes qui utilisent le modèle suivant::
 
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
 
-See the section on :ref:`plugin-configuration` for information on how to load
-plugin specific route files.
+Regardez la section sur :ref:`plugin-configuration` pour plus d'informations sur
+la façon de charger les fichiers de route spécifique à un plugin.
 
 .. _plugin-models:
 
@@ -332,9 +336,10 @@ table et l'entity pour ce controller::
     class ContactsTable extends Table {
     }
 
-If you need to reference a model within your plugin when building associations,
-or defining entitiy classes, you need to include the plugin name with the class
-name, separated with a dot. For example::
+Si vous avez besoin de faire référence à un model dans votre plugin lors de la
+construction des associations, ou la définition de classes d'entity, vous devrez
+inclure le nom du plugin avec le nom de la classe, séparé par un point. Par
+exemple::
 
     // /Plugin/ContactManager/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
@@ -347,8 +352,8 @@ name, separated with a dot. For example::
         }
     }
 
-If you would prefer that the array keys for the association not have the plugin
-prefix on them, use the alternative syntax::
+Si vous préférez que les clés du tableau pour l'association n'aient pas le
+préfix du plugin, utilisez la syntaxe alternative::
 
     // /Plugin/ContactManager/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
@@ -363,45 +368,46 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``TableRegistry`` to load your plugin tables using the familiar
-:term:`plugin syntax`::
+Vous pouvez utiliser ``TableRegistry`` pour charger les tables de votre plugin
+en utilisant l'habituelle :term:`plugin syntax`::
 
     use Cake\ORM\TableRegistry;
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
-Visiting ``/contact_manager/contacts`` now (given you've got a table in your
-database called 'contacts') should give us a "Missing View" error.  Let's create
-that next.
+Allez sur ``/contact_manager/contacts`` maintenant (si vous avez une table dans
+votre base de données appelée 'contacts') devrait vous donner une erreur
+"Missing View". Créons donc ensuite la vue.
 
 Vues du Plugin
 ==============
 
 Les Vues se comportent exactement comme elles le font dans les applications
 normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
-/app/Plugin/[PluginName]/Template/. Pour notre plugin ContactManager, nous aurons
-besoin d'une vue pour notre action ContactsController::index(), ainsi incluons
-ceci aussi::
+/Plugin/[PluginName]/Template/. Pour notre plugin ContactManager, nous aurons
+besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
+incluons ceci aussi::
 
     // /Plugin/ContactManager/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Ce qui suit est une liste triable de vos contacts</p>
     <!-- Une liste triable de contacts irait ici....-->
 
-Plugins can provide their own layouts. Add plugin layouts, inside
-``/Plugin/[PluginName]/Template/Layout``. To use a plugin layout in your controller
-you can do the following::
+Les Plugins peuvent fournir leurs propres layouts. Ajoutez des layouts de
+plugin, dans ``/Plugin/[PluginName]/Template/Layout``. Pour utiliser le layout
+d'un plugin dans votre controller, vous pouvez faire ce qui suit::
 
     public $layout = 'ContactManager.admin';
 
-If the plugin prefix is omitted, the layout/view file will be located normally.
+Si le préfix de plugin n'est pas mis, le fichier de vue/layout sera localisé
+normalement.
 
 .. note::
 
     Pour des informations sur la façon d'utiliser les elements à partir d'un
     plugin, regardez :ref:`view-elements`.
 
-Redéfinition des vues de plugin à partir de l'intérieur de votre application
+Redéfinition des Vues de Plugin à partir de l'Intérieur de votre Application
 ----------------------------------------------------------------------------
 
 Vous pouvez redéfinir toutes les vues du plugin à partir de l'intérieur de
@@ -420,11 +426,11 @@ Créer ce fichier vous permettra de redéfinir
 .. _plugin-assets:
 
 
-Plugin assets
-=============
+Assets de Plugin
+================
 
 Les assets web du plugin (mais pas les fichiers de PHP) peuvent être servis
-à travers le répertoire 'webroot' du plugin, juste comme les assets de
+à travers le répertoire ``webroot`` du plugin, juste comme les assets de
 l'application principale::
 
     /Plugin/ContactManager/webroot/
@@ -447,8 +453,8 @@ Lier aux plugins
 ----------------
 
 Vous pouvez utiliser la :term:`plugin syntax` pour lier les assets de plugin
-en utilisant les méthodes script :php:class:`Cake\\View\\Helper\\HtmlHelper`,
-image, ou css::
+en utilisant les méthodes script, image ou css de
+:php:class:`Cake\\View\\Helper\\HtmlHelper`::
 
     // Génére une url de /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
@@ -472,11 +478,11 @@ début de l'URL pour servir un asset du plugin . Lier avec
 Components, Helpers et Behaviors
 ================================
 
-Un plugin peut avoir des Components, Helpers et Behaviors tout comme
-une application CakePHP classique. Vous pouvez soit créer des plugins
-qui sont composés seulement de Components, Helpers ou Behaviors ce qui
-peut être une bonne façon de construire des Components réutilisables
-qui peuvent être facilement déplacés dans tout projet.
+Un plugin peut avoir des Components, Helpers et Behaviors tout comme une
+application CakePHP classique. Vous pouvez soit créer des plugins qui sont
+composés seulement de Components, Helpers ou Behaviors ce qui peut être une
+bonne façon de construire des Components réutilisables qui peuvent être
+facilement déplacés dans tout projet.
 
 Construire ces components est exactement la même chose que de les construire
 à l'intérieur d'une application habituelle, avec aucune convention spéciale
@@ -495,7 +501,7 @@ du component. Par exemple::
     }
 
     // dans vos controllers:
-    public $components = array('ContactManager.Exemple');
+    public $components = ['ContactManager.Example'];
 
 La même technique s'applique aux Helpers et aux Behaviors.
 

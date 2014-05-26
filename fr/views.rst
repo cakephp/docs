@@ -94,7 +94,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci::
 .. code-block:: php
 
     <?php
-    // app/Template/Posts/view.ctp
+    // App/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);

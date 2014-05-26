@@ -56,6 +56,11 @@ lancer ce qui suit::
 Ou vous pouvez télécharger ``composer.phar`` à partir de son
 `site <https://getcomposer.org/download/>`_.
 
+Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
+Composer `ici <https://github.com/composer/windows-setup/releases/>`_. D'autres
+instructions pour l'installeur Windows de Composer se trouvent dans le README
+`ici <https://github.com/composer/windows-setup>`_.
+
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
 une nouvelle application CakePHP en lançant::
 
@@ -93,10 +98,11 @@ session en sont juste quelques exemples.
 
 De même, assurez-vous que le répertoire ``tmp`` et tous ses
 sous-répertoires dans votre installation cake sont en écriture pour
-l'utilisateur du serveur web. Composer's installation
-process makes ``tmp`` and it's subfolders globally writeable to get things up
-and running quickly but you can update the permissions for better security and
-keep them writable only for the webserver user.
+l'utilisateur du serveur web. Le processus d'installation avec Composer va
+rendre ``tmp`` et ses sous-dossiers globalement en écriture pour récupérer et
+lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
+meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
+serveur web.
 
 Configuration
 =============
@@ -179,11 +185,11 @@ Les développeurs utilisant Apache devraient régler la directive
     DocumentRoot /cake_install/webroot
 
 Si votre serveur web est configuré correctement, vous devriez maintenant
-accéder à votre application CakePHP accessible à l'adresse :
+accéder à votre application CakePHP accessible à l'adresse
 http://www.exemple.com.
 
-Utiliser un CakePHP pour de multiples applications
---------------------------------------------------
+Utiliser un CakePHP pour Plusieurs Applications
+-----------------------------------------------
 
 Il peut y avoir des situations où vous souhaitez placer les répertoires
 de CakePHP dans différents endroits du système de fichier. Ceci est peut-être

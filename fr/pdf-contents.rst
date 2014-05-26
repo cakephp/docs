@@ -1,5 +1,5 @@
-Contents
-########
+Contenu
+#######
 
 .. toctree::
    :maxdepth: 2
@@ -18,8 +18,8 @@ Contents
    appendices
 
 
-Indices et tables
-=================
+Index et tables
+===============
 
 * :ref:`genindex`
 * :ref:`modindex`
