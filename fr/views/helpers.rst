@@ -107,17 +107,19 @@ toute configuration dont votre helper a besoin. Par exemple::
         }
     }
 
-Any configuration provided to your helper's constructor will be merged with the
-default values during construction and the merged data will be set to
-``_config``. You can use the ``config()`` method to read runtime configuration::
+Toute configuration fournie au constructeur de votre helper sera fusionnée avec
+les valeurs par défaut pendant la construction et les données fusionnées seront
+définies à ``_config``. Vous pouvez utiliser la méthode ``config()`` pour lire
+la configuration actuelle::
 
-    // Read the errorClass config option.
+    // Lit l'option de config errorClass.
     $class = $this->Awesome->config('errorClass');
 
-Using helper configuration allows you to declaratively configure your helpers and
-keep configuration logic out of your controller actions. If you have
-configuration options that cannot be included as part of a class declaration,
-you can set those in your controller's beforeRender callback::
+L'utilisation de la configuration du helper vous permet de configurer de manière
+déclarative vos helpers et de garder la logique de configuration en dehors des
+actions de votre controller. Si vous avez des options de configuration qui ne
+peuvent pas être inclues comme une partie de la classe de déclaration, vous
+pouvez les définir dans le callback beforeRender de votre controller::
 
     class PostsController extends AppController {
         public function beforeRender() {
@@ -127,13 +129,13 @@ you can set those in your controller's beforeRender callback::
     }
 
 
-Aliasing Helpers
-----------------
+Faire des Alias de Helpers
+--------------------------
 
-One common setting to use is the ``className`` option, which allows you to
-create aliased helpers in your views. This feature is useful when you want to
-replace ``$this->Html`` or another common Helper reference with a custom
-implementation::
+Une configuration habituelle à utiliser est l'option ``className``, qui vous
+permet de créer des alias de helpers dans vos vues. Cette fonctionnalité est
+utile quand vous voulez remplacer ``$this->Html`` ou une autre référence du
+Helper habituel avec une implémentation personnalisée::
 
     // App/Controller/PostsController.php
     class PostsController extends AppController {
@@ -148,15 +150,16 @@ implementation::
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper {
-        // Add your code to override the core HtmlHelper
+        // Ajout de code pour surcharger le HtmlHelper du coeur
     }
 
-The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
+Ce qui est au-dessus va faire un *alias* de ``MyHtmlHelper`` vers
+``$this->Html`` dans vos vues.
 
 .. note::
 
-    Aliasing a helper replaces that instance anywhere that helper is used,
-    including inside other Helpers.
+    Faire un alias remplace cette instance partout où le helper est utilisé,
+    ainsi que dans les autres Helpers.
 
 Utiliser les Helpers
 ====================
@@ -171,7 +174,7 @@ d'y accéder en faisant ce qui suit::
 Ce qui est au-dessus appelera la méthode ``css`` du HtmlHelper. Vous pouvez
 accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``.
 
-Charger les Helpers à la volée
+Charger les Helpers à la Volée
 ------------------------------
 
 Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
@@ -245,7 +248,7 @@ feriez dans un controller::
 Utiliser votre Helper
 ---------------------
 
-Une fois que vous avez créez votre helper et l'avez placé dans
+Une fois que vous avez créé votre helper et l'avez placé dans
 ``/App/View/Helper/``, vous serez capable de l'inclure dans vos controllers
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 

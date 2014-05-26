@@ -3,7 +3,7 @@ Vues JSON et XML
 
 Deux nouvelles classes de vue dans CakePHP 2.1. Les vues ``XmlView`` et
 ``JsonView`` vous laissent créer facilement des réponses XML et JSON,
-et sont intégrées avec :php:class:`RequestHandlerComponent`.
+et sont intégrées à :php:class:`RequestHandlerComponent`.
 
 En activant ``RequestHandlerComponent`` dans votre application, et en activant
 le support pour les extensions ``xml`` et/ou ``json``, vous pouvez
@@ -26,19 +26,13 @@ besoin de faire un peu de configuration:
    votre controller. Cela activera automatiquement le changement de la classe
    de vue pour les types de contenu.
 
-.. versionadded:: 2.3
-    La méthode :php:meth:`RequestHandlerComponent::viewClassMap()` a été
-    ajoutée pour lier les types aux viewClasses.
-    La configuration de viewClassMap ne va pas fonctionner avec les versions
-    précédentes.
-
 Après avoir ajouté ``Router::parseExtensions('json');`` à votre fichier de
 routes, CakePHP changera automatiquement les classes de vue quand une requête
 sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
 ``application/json``.
 
-Utilisation des vues de données avec la clé _serialize
-======================================================
+Utilisation des Vues de Données avec la Clé Serialize
+=====================================================
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quel
 autre(s) variable(s) de vue devraient être sérialisée(s) quand on utilise la
@@ -52,11 +46,11 @@ fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
     class PostsController extends AppController {
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function index() {
             $this->set('posts', $this->paginate());
-            $this->set('_serialize', array('posts'));
+            $this->set('_serialize', ['posts']);
         }
     }
 
@@ -64,12 +58,12 @@ Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
 combiner::
 
     class PostsController extends AppController {
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function index() {
-            // some code that created $posts and $comments
+            // du code qui créé $posts et $comments
             $this->set(compact('posts', 'comments'));
-            $this->set('_serialize', array('posts', 'comments'));
+            $this->set('_serialize', ['posts', 'comments']);
         }
     }
 
@@ -80,10 +74,10 @@ automatiquement un elément de top-niveau ``<response>`` en utilisant
 elément unique de top-niveau. Sans un elément de top-niveau, le Xml ne pourra
 être généré.
 
-Utilisation d'une vue de données avec les fichiers de vue
+Utilisation d'une Vue de Vonnées avec les Fichiers de Vue
 =========================================================
 
-Vous devriez utiliser les fichiers de vue si vous avez besoin de faire des
+Vous devrez utiliser les fichiers de vue si vous avez besoin de faire des
 manipulations du contenu de votre vue avant de créer la sortie finale. Par
 exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
 vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.
@@ -120,21 +114,21 @@ utiliser les helpers pour formater.
     définir un nom personnalisé pour ce noeud en utilisant la variable de vue
     ``_rootNode``.
 
-    .. versionadded:: 2.3
-        La fonctionnalité ``_rootNode`` a été ajoutée.
-
 .. php:class:: JsonView
 
     Une classe de vue pour la génération de vue de données Json. Voir au-dessus
-    pour savoir comment vous pouvez utiliser XmlView dans votre application.
+    pour savoir comment vous pouvez utiliser JsonView dans votre application.
 
-JSONP response
-==============
+    La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
+    personnaliser le bit-mask utilisé pour générer le JSON. Regardez la
+    documentation `http://php.net/json_encode <json_encode>`_ sur la façon de
+    valider les valeurs de cette option.
 
-.. versionadded:: 2.4
+Réponse JSONP
+=============
 
 Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
-``_jsonp`` pour permettre de retourner une réponse JSONP. La définir à ``true``
+``_jsonp`` pour retourner une réponse JSONP. La définir à ``true``
 fait que la classe de vue vérifie si le paramètre de chaine de la requête
 nommée "callback" est définie et si c'est la cas, permet d'enrouler la réponse
 json dans le nom de la fonction fournie. Si vous voulez utiliser un nom

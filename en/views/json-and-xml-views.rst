@@ -43,23 +43,23 @@ generating the response, you should use view files. The value of ``_serialize``
 can be either a string or an array of view variables to serialize::
 
     class PostsController extends AppController {
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function index() {
             $this->set('posts', $this->paginate());
-            $this->set('_serialize', array('posts'));
+            $this->set('_serialize', ['posts']);
         }
     }
 
 You can also define ``_serialize`` as an array of view variables to combine::
 
     class PostsController extends AppController {
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function index() {
             // some code that created $posts and $comments
             $this->set(compact('posts', 'comments'));
-            $this->set('_serialize', array('posts', 'comments'));
+            $this->set('_serialize', ['posts', 'comments']);
         }
     }
 

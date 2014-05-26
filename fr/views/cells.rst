@@ -15,7 +15,7 @@ qui necessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
 ou un menu de navigation selon des données dans un CMS.
 
-Les Cells rempalcent aussi ``requestAction()``. Parce que les cells ne
+Les Cells remplacent aussi ``requestAction()``. Parce que les cells ne
 dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
 de ``requestAction()``.
 

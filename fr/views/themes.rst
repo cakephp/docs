@@ -69,7 +69,7 @@ Augmenter la performance des assets du plug-in et du theme
 C'est un fait bien connu que de servir les assets par le biais de PHP est
 assuré d'être plus lent que de servir ces assets sans invoquer PHP. Et
 tandis que l'équipe du coeur a pris des mesures pour rendre le plugin et
-l'asset du theme servis aussi vite que possible, il peut y avoir des
+l'asset du theme servis aussi rapide que possible, il peut y avoir des
 situations où plus de performance est requis. Dans ces situations, il
 est recommandé soit que vous fassiez un lien symbolique soit que vous
 fassiez une copie sur les assets du plug-in/theme vers des répertoires
