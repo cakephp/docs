@@ -32,7 +32,7 @@ paramètres.
 .. note::
 
     Une installation de PHP contruite avec la ligne de commande (CLI) doit
-    être disponible sur le système où vous prévoyez d'utiliser la console.
+    être disponible sur le système si vous prévoyez d'utiliser la Console.
 
 Avant d'entrer dans les spécificités, assurons-nous que vous pouvez exécuter
 la console CakePHP. Tout d'abord, vous devrez ouvrir un shell système. Les
@@ -137,8 +137,7 @@ pas très intéressante, ajoutons une autre commande qui fait quelque chose::
             $this->out('Hello world.');
         }
 
-        public function hey_there() {
-            $name = !empty($this->args[0]) : $this->args[0] : 'Anonymous';
+        public function hey_there($name = 'Anonymous') {
             $this->out('Hey there ' . $name);
         }
     }

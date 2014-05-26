@@ -227,11 +227,11 @@ rendered from the controller.
     parameter. This can often be a quick way to assign a set of
     information to the view::
 
-        $data = array(
+        $data = [
             'color' => 'pink',
             'type' => 'sugar',
             'base_price' => 23.95
-        );
+        ];
 
         // make $color, $type, and $base_price
         // available to the view:
@@ -326,11 +326,11 @@ Flow Control
             // Logic for finalizing order goes here
             if ($success) {
                 return $this->redirect(
-                    array('controller' => 'orders', 'action' => 'thanks')
+                    ['controller' => 'orders', 'action' => 'thanks']
                 );
             }
             return $this->redirect(
-                array('controller' => 'orders', 'action' => 'confirm')
+                ['controller' => 'orders', 'action' => 'confirm']
             );
         }
 
@@ -345,7 +345,7 @@ Flow Control
 
     You can also pass data to the action::
 
-        return $this->redirect(array('action' => 'edit', $id));
+        return $this->redirect(['action' => 'edit', $id]);
 
     The second parameter of :php:meth:`~Controller::redirect()` allows you to define an HTTP
     status code to accompany the redirect. You may want to use 301
@@ -360,24 +360,24 @@ Flow Control
     to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
     you can use::
 
-        return $this->redirect(array(
+        return $this->redirect([
             'controller' => 'orders',
             'action' => 'confirm',
             'product' => 'pizza',
-            'quantity' => 5)
-        );
+            'quantity' => 5
+        ]);
 
     An example using query strings and hash would look like::
 
-        return $this->redirect(array(
+        return $this->redirect([
             'controller' => 'orders',
             'action' => 'confirm',
-            '?' => array(
+            '?' => [
                 'product' => 'pizza',
                 'quantity' => 5
-            ),
-            '#' => 'top')
-        );
+            ],
+            '#' => 'top'
+        ]);
 
     The generated URL would be::
 
@@ -407,7 +407,7 @@ Other Useful Methods
                 if ($this->referer() != '/') {
                     return $this->redirect($this->referer());
                 }
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
 
@@ -417,7 +417,7 @@ Other Useful Methods
             public function delete($id) {
                 // delete code goes here, and then...
                 return $this->redirect(
-                    $this->referer(array('action' => 'index'))
+                    $this->referer(['action' => 'index'])
                 );
             }
         }
@@ -534,8 +534,8 @@ given by :php:attr:`~Controller::$helpers` to the view as an object reference va
     additional MVC classes::
 
         class RecipesController extends AppController {
-            public $helpers = array('Js');
-            public $components = array('RequestHandler');
+            public $helpers = ['Js'];
+            public $components = ['RequestHandler'];
         }
 
     Each of these variables are merged with their inherited values,
@@ -571,13 +571,13 @@ own sections in the manual.
     that you update your code to use normal component settings::
 
         class ArticlesController extends AppController {
-            public $components = array(
-                'Paginator' => array(
-                    'Article' => array(
-                        'conditions' => array('published' => 1)
-                    )
-                )
-            );
+            public $components = [
+                'Paginator' => [
+                    'Article' => [
+                        'conditions' => ['published' => 1]
+                    ]
+                ]
+            ];
         }
 
 .. todo::

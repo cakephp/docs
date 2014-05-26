@@ -12,7 +12,7 @@ le test de votre code.
 
 Habituellement, un controller est utilisé pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une
-boulangerie en-ligne, vous aurez sans doute un RecettesController qui gère
+boulangerie en-ligne, vous aurez sans doute un RecipesController qui gère
 vos recettes et un IngredientsController qui gére vos ingrédients. Cependant,
 il est aussi possible d'avoir des controllers qui fonctionnent avec plus qu'un
 model. Dans CakePHP, un controller est nommé d'après le model principal qu'il
@@ -100,16 +100,16 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en-ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``/app/Controller/RecettesController.php`` et contiendrait::
+``/app/Controller/RecipesController.php`` et contiendrait::
 
-        # /App/Controller/RecettesController.php
+        # /App/Controller/RecipesController.php
         
-        class RecettesController extends AppController {
+        class RecipesController extends AppController {
             public function view($id) {
                 //la logique de l'action va ici..
             }
         
-            public function share($clientId, $recetteId) {
+            public function share($customerId, $recipeId) {
                 //la logique de l'action va ici..
             }
         
@@ -140,10 +140,11 @@ défaut de la vue.
   complètement créée.
 
 Quand vous utilisez les méthodes du controller avec
-:php:meth:`~Controller::requestAction()`, vous voudrez souvent retourner les
-données qui ne sont pas des chaînes de caractère. Si vous avez des méthodes
-du controller qui sont utilisées pour des requêtes web normales + requestAction,
-vous devrez vérifier le type de requête avant de retourner::
+:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`, vous voudrez
+souvent retourner les données qui ne sont pas des chaînes de caractère. Si vous
+avez des méthodes du controller qui sont utilisées pour des requêtes web
+normales + requestAction, vous devrez vérifier le type de requête avant de
+retourner::
 
     class RecipesController extends AppController {
         public function popular() {
@@ -268,14 +269,14 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
     tout à l'utilisateur final.
 
     Le fichier de vue utilisé par défaut est déterminé par convention.
-    Ainsi, si l'action ``search()`` de notre controller RecettesController
-    est demandée, le fichier de vue situé dans /App/Template/Recettes/search.ctp
+    Ainsi, si l'action ``search()`` de notre controller RecipesController
+    est demandée, le fichier de vue situé dans /App/Template/Recipes/search.ctp
     sera utilisé::
 
-        class RecettesController extends AppController {
+        class RecipesController extends AppController {
         // ...
             public function search() {
-                // Rend la vue dans /Template/Recettes/search.ctp
+                // Rend la vue dans /Template/Recipes/search.ctp
                 $this->render();
             }
         // ...
@@ -367,15 +368,12 @@ Contrôle de Flux
     déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
     de la nature de la redirection.
 
-    Cette méthode réalise un ``exit()`` après la redirection, tant que vous
-    ne mettez pas le troisième paramètre à false.
-
     Si vous avez besoin de rediriger à la page appelante, vous pouvez
     utiliser::
 
         return $this->redirect($this->referer());
 
-    Cette méthode supporte aussi les paramètres nommés de base. Si vous
+    Cette méthode accepte aussi les paramètres nommés de base. Si vous
     souhaitez être redirigé sur une URL comme:
     ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
     vous pouvez utiliser::
@@ -387,7 +385,7 @@ Contrôle de Flux
             'quantite' => 5
         ]);
 
-    Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
+    Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
     à ceci::
 
         return $this->redirect([
@@ -423,7 +421,7 @@ Autres Méthodes utiles
     utiliser si HTTP\_REFERER ne peut pas être lu par les headers. Donc,
     au lieu de faire ceci::
 
-        class UtilisateursController extends AppController {
+        class UserController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
                 if ($this->referer() != '/') {
@@ -435,7 +433,7 @@ Autres Méthodes utiles
 
     vous pouvez faire ceci::
 
-        class UtilisateursController extends AppController {
+        class UserController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
                 return $this->redirect(
