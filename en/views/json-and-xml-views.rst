@@ -84,9 +84,9 @@ JSON response. This is a situation where a view file would be useful::
         }
     }
 
-    // View code - app/View/Posts/json/index.ctp
+    // View code - App/Template/Posts/json/index.ctp
     foreach ($posts as &$post) {
-        unset($post['Post']['generated_html']);
+        unset($post->generated_html);
     }
     echo json_encode(compact('posts', 'comments'));
 
