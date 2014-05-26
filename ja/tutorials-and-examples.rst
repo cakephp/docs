@@ -12,6 +12,4 @@
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
     tutorials-and-examples/blog-auth-example/auth
-    tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application
-    tutorials-and-examples/simple-acl-controlled-application/part-two
 
