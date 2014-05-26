@@ -3,14 +3,14 @@ Tutoriel d'un Blog
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
-C'est notre but d'améliorer la productivité et de rendre le développement
+Notre objectif est d'améliorer la productivité et de rendre le développement
 plus agréable : nous espérons que vous le découvrirez au fur et à mesure que
 vous plongerez dans le code.
 
 Ce tutoriel vous accompagnera à travers la création d'une simple application
 de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons
 une base de données et ajouterons suffisamment de logique applicative pour
-lister, ajouter, éditer et supprimer des posts.
+lister, ajouter, éditer et supprimer des articles.
 
 Voici ce dont vous aurez besoin :
 

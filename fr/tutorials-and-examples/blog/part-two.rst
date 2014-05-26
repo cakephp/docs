@@ -135,7 +135,7 @@ ressembler à quelque chose comme cela:
             <th>Created</th>
         </tr>
 
-        <!-- Here is where we iterate through our $articles query object, printing out article info -->
+        <!-- Ici se trouve l'itération sur l'objet query de nos $articles, l'affichage des infos des articles -->
 
         <?php foreach ($articles as $article): ?>
         <tr>
@@ -211,9 +211,11 @@ transmise à la variable ``$id``.
 Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
 utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
 ``/articles/view``, nous lancerons un ``NotFoundException`` et laisserons
-le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. Nous
-exécutons aussi une vérification similaire pour nous assurer que l'utilisateur
-a accède à un enregistrement qui existe.
+le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. En utilisant
+la fonction ``get()`` dans la table Articles, nous faisons aussi un vérification
+similaire pour nous assurer que l'utilisateur a accès à l'enregistrement qui
+existe. Dans le cas où l'article requêté n'est pas présent dans la base de
+données, la fonction ``get()`` va lancer une ``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
 dans ``/App/Template/Articles/view.ctp``.
@@ -262,10 +264,10 @@ ArticlesController::
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
-                    $this->Session->setFlash(__('Your article has been saved.'));
+                    $this->Session->setFlash(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__('Unable to add your article.'));
+                $this->Session->setFlash(__('Impossible d ajouter votre article.'));
             }
             $this->set('article', $article);
         }
@@ -273,18 +275,9 @@ ArticlesController::
 
 .. note::
 
-    ``$this->request->is()`` prend un unique argument, qui peut être la METHOD
-    request (``get``, ``put``, ``post``, ``delete``) ou toute identifier de
-    request (``ajax``). Ce **n'est pas** une façon de vérifier une data postée
-    spécifique. Par exemple, ``$this->request->is('book')`` ne retournera pas
-    true si les data du book ont été postées.
-
-.. note::
-
-   Vous avez besoin d'inclure le component Session (SessionComponent) et
-   le helper Session (SessionHelper) dans chaque controller où vous voulez
-   les utiliser. Si nécessaire, incluez-les dans le controller principal
-   (AppController) pour qu'ils soient accessibles à tous les controllers.
+   Vous avez besoin d'inclure le component Session (SessionComponent) dans
+   chaque controller où vous voulez les utiliser. Si nécessaire, incluez-les
+   dans le controller principal (AppController).
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST,
 essayez de sauvegarder les données en utilisant le model "Articles". Si pour une
@@ -306,12 +299,12 @@ les afficher si vous voulez voir à quoi cela ressemble.
 
 Nous utilisons la méthode
 :php:meth:`Cake\\Controller\\Component\\SessionComponent::setFlash()` pour
-définir un message dans une variable session et qui sera affiché dans la page
+définir un message dans une variable de session et qui sera affiché dans la page
 juste après la redirection. Dans le layout, nous trouvons la fonction
 :php:func:`Cake\\View\Helper\\SessionHelper::flash` qui permet
 d'afficher et de nettoyer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
-rediriger vers une autre URL. Le paramètre ``array('action' => 'index')`` sera
+rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
 "Articles" (ArticlesController). Vous pouvez vous référer à l'
 `API<http://api.cakephp.org>`_ de la fonction
@@ -324,7 +317,7 @@ la façon dont les erreurs sont traitées dans les sections suivantes.
 
 Nous appelons la méthode ``create()`` en premier afin
 de réinitialiser l'état du model pour sauvegarder les nouvelles informations.
-Cela ne crée pas réellement un enregistrement dans la base de données mais
+Cela ne créé pas réellement un enregistrement dans la base de données mais
 réinitialise Model::$id et définit Model::$data en se basant sur le champ par
 défaut dans votre base de données.
 
@@ -352,7 +345,7 @@ Voici le code de notre vue "add" (ajout)
     echo $this->Form->create($article);
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->button(__('Sauvegarder l Article'));
     echo $this->Form->end();
     ?>
 
@@ -443,10 +436,10 @@ devrait ressembler::
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
-                $this->Session->setFlash(__('Your article has been updated.'));
+                $this->Session->setFlash(__('Votre article a été mis à jour.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__('Unable to update your article.'));
+            $this->Session->setFlash(__('Impossible de mettre à jour votre article.'));
         }
 
         $this->set('article', $article);
@@ -473,7 +466,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
     <?= $this->Form->create($article) ?>
     <?= $this->Form->input('title') ?>
     <?= $this->Form->input('body', ['rows' => '3']) ?>
-    <?= $this->Form->button(__('Save Article')) ?>
+    <?= $this->Form->button(__('Sauvegarder l Article')) ?>
     <?= $this->Form->end() ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
@@ -481,18 +474,18 @@ les messages d'erreur de validation nécessaires.
 
 Une chose à noter ici : CakePHP supposera que vous éditez un model si le champ
 'id' est présent dans le tableau de données. S'il n'est pas présent (ce qui
-revient à notre vue "add"), CakePHP supposera que vous insérez un nouveau model
+revient à notre vue add), CakePHP supposera que vous insérez un nouveau model
 lorsque ``save()`` sera appelée.
 
-Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour
+Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 éditer des articles :
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: /App/Template/Articles/index.ctp  (liens de modification ajoutés) -->
 
     <h1>Blog articles</h1>
-    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <p><?= $this->Html->link("Ajouter un Article", ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -532,7 +525,7 @@ Articles (ArticlesController)::
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Session->setFlash(__('The article with id: %s has been deleted.', h($id)));
+            $this->Session->setFlash(__('L article avec l id: %s a été supprimé.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -549,7 +542,7 @@ rencontrer.
 
 Etant donné que nous exécutons juste un peu de logique et de redirection,
 cette action n'a pas de vue. Vous voudrez peut-être mettre à jour votre vue
-"index" avec des liens pour permettre aux utilisateurs de supprimer des
+index avec des liens pour permettre aux utilisateurs de supprimer des
 articles, ainsi :
 
 .. code-block:: php
@@ -557,7 +550,7 @@ articles, ainsi :
     <!-- File: /App/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
-    <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
+    <p><?= $this->Html->link('Ajouter un Article', ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
@@ -578,7 +571,7 @@ articles, ainsi :
                 <?= $this->Form->postLink(
                     'Delete',
                     ['action' => 'delete', $article->id],
-                    ['confirm' => 'Are you sure?'])
+                    ['confirm' => 'Etes vous sur?'])
                 ?>
                 <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
@@ -669,12 +662,10 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 
 1. :ref:`view-layouts`: Personnaliser les Layouts de votre application.
 2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
-3. :doc:`/controllers/scaffolding`: Construire une ébauche d'application
-   sans avoir à coder.
 4. :doc:`/console-and-shells/code-generation-with-bake` Générer un code
    CRUD basique.
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur
-   l\'enregistrement et la connexion d'utilisateurs.
+   l'enregistrement et la connexion d'utilisateurs.
 
 
 .. meta::
