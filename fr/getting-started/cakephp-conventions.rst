@@ -11,7 +11,7 @@ uniforme, permettant à d'autres développeurs de s'investir dans le code
 plus facilement.
 
 Les conventions de CakePHP ont été créées à partir de nombreuses années
-d'expérience dans le développement Web et de bonnes pratiques. Alors
+d'expérience et de bonnes pratiques dans le développement Web. Alors
 que nous vous conseillons d'utiliser ces conventions lors de vos
 développements CakePHP, nous devons mentionner que la plupart de ces
 principes sont facilement contournables - ce qui est particulièrement
@@ -20,11 +20,11 @@ utile lorsque vous travaillez avec d'anciennes applications.
 Les conventions des Controllers
 ===============================
 
-Les noms des classes de controller sont au pluriel, CamelCased et
+Les noms des classes de controller sont au pluriel, en CamelCase et
 se terminent par ``Controller``. ``PeopleController`` et
 ``LatestArticlesController`` sont des exemples respectant cette convention.
 
-La première méthode que vous écrivez pour un controller devrait être
+La première méthode que vous écrivez pour un controller doit être
 ``index()``. Lorsqu'une requête pointe vers un controller sans action, le
 comportement par défaut de CakePHP est d'exécuter la fonction ``index()``
 de ce controller. Ainsi, la requête http://www.exemple.com/apples/ renvoie
@@ -36,7 +36,7 @@ Vous pouvez aussi changer la visibilité des méthodes des controllers
 dans CakePHP en préfixant les noms de méthode des controllers avec des
 underscores. Si une méthode du controller a été préfixée avec un
 underscore, la méthode ne sera pas accessible directement à partir du web
-mais est disponible pour une utilisation interne. Par exemple::
+mais sera disponible pour une utilisation interne. Par exemple::
 
     class NewsController extends AppController {
     
@@ -51,22 +51,22 @@ mais est disponible pour une utilisation interne. Par exemple::
     
 
 Alors que la page http://www.exemple.com/news/latest/ est accessible
-pour l'utilisateur comme d'habitude, quelqu'un qui essaie d'aller sur la page
-http://www.example.com/news/\_findNewArticles/ aura une erreur,
+pour l'utilisateur, quelqu'un qui essaie d'aller sur la page
+http://www.example.com/news/\_findNewArticles/ aura une erreur
 car la méthode est précédée d'un underscore. Vous pouvez aussi utiliser les
 mots-clés de visibilité de PHP pour indiquer si la méthode peut ou non être
 accessible à partir d'une URL. Les méthodes non-publiques ne sont pas
 accessibles.
 
-Considérations URL pour les noms de Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Considérations concernant les URLs et les Noms des Controllers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme vous venez de voir, un controller à mot unique renvoie facilement vers
 un chemin URL en minuscules. Par exemple, ``ApplesController`` (qui serait
 défini dans le nom de fichier 'ApplesController.php') est accessible à
 l'adresse http://exemple.com/apples.
 
-Les controllers à multiples mots *peuvent* être de forme 'inflecté' qui
+Les controllers avec plusieurs mots *peuvent* être de forme 'inflecté' qui
 correspondent au nom du controller:
 
 -  /redApples
@@ -88,7 +88,7 @@ Conventions des Fichiers et des Noms de Classe
 ==============================================
 
 En général, les noms de fichiers correspondent aux noms des classes
-c'est-à-dire en CamelCase. Donc si vous avez
+écrits en CamelCase. Donc si vous avez
 une classe **MaChouetteClasse**, alors dans Cake, le fichier devra être nommé
 **MaChouetteClasse.php**. Voici des exemples de la manière dont on nomme les
 fichiers, pour chacun des différents types de classes que vous utiliseriez
@@ -109,7 +109,7 @@ habituellement dans une application CakePHP :
 
 Chaque fichier sera situé dans le répertoire approprié dans votre dossier app.
 
-Conventions pour les Models et les Sources de données
+Conventions pour les Models et les Sources de Données
 =====================================================
 
 Les noms de classe de model sont au singulier et en CamelCase. Person,
@@ -174,10 +174,10 @@ Conventions des vues
 Les fichiers de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PersonnesController cherchera un gabarit
-de vue dans : /app/View/Personnes/soyez\_pret.ctp.
+de vue dans : /App/View/Personnes/soyez\_pret.ctp.
 
 Le schéma classique est
-/app/View/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
+/App/View/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
