@@ -21,7 +21,7 @@ Technically a database engine isn't required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
 database storage engines:
 
--  MySQL (4 or greater)
+-  MySQL (5.1.10 or greater)
 -  PostgreSQL
 -  Microsoft SQL Server (2008 or higher)
 -  SQLite 3
