@@ -889,7 +889,7 @@ Custom Route classes
 
 Custom route classes allow you to extend and change how individual
 routes parse requests and handle reverse routing. A custom route class
-should be created in ``app/Lib/Routing/Route`` and should extend
+should be created in ``app/Routing/Route`` and should extend
 :php:class:`CakeRoute` and implement one or both of ``match()``
 and/or ``parse()``. ``parse()`` is used to parse requests and
 ``match()`` is used to handle reverse routing.
