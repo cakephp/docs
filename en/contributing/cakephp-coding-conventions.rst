@@ -359,7 +359,7 @@ referencing objects should start with a capital letter, and in some way
 associate to the class the variable is an object of. Example::
 
     $user = 'John';
-    $users = array('John', 'Hans', 'Arne');
+    $users = ['John', 'Hans', 'Arne'];
 
     $Dispatcher = new Dispatcher();
 

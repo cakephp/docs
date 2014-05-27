@@ -45,7 +45,7 @@ la plus complète sur tous les détails essentiels au fonctionnement interne
 du framework. C'est une référence directe au code, donc apportez votre chapeau
 à hélice.
 
-Les cas de Test
+Les Cas de Test
 ===============
 
 Si vous avez toujours le sentiment que l'information fournie par
@@ -55,7 +55,7 @@ données membres d'une classe.::
 
     lib/Cake/Test/Case
 
-Le canal IRC
+Le Canal IRC
 ============
 
 **Canaux IRC sur irc.freenode.net :**
@@ -94,8 +94,9 @@ Stackoverflow
 
 `http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Tag your questions with ``cakephp`` and the specific version you are using to enable
-existing users of stackoverflow to find your questions.
+Taggez vos questions avec ``cakephp`` et la version spécifique que vous utilisez
+pour activer les utilisateurs existants de stackoverflow pour trouver vos
+questions.
 
 .. meta::
     :title lang=fr: Où trouver de l'aide

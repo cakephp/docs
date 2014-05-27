@@ -16,7 +16,7 @@ faire le meilleur rapport de bug possible:
   <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   pour un ticket similaire éventuellement existant, et s'assurer que personne
   n'a déjà reporté le bug ou qu'il n'a pas déjà été résolu dans le répertoire.
-* **A Faire** Inlcure des instructions détaillées de la manière de **reproduire
+* **A Faire** Inclure des instructions détaillées sur la manière de **reproduire
   le bug**. Cela peut être sous la forme de cas de Test ou un bout de code
   démontrant le problème. Ne pas avoir une possibilité de reproduire le
   problème, signifie qu'il est moins facile de le régler.

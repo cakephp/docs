@@ -371,7 +371,7 @@ avec une majuscule, et d'une certaine manière être associées à la classe d'o
 elles proviennent. Exemple::
 
     $user = 'John';
-    $users = array('John', 'Hans', 'Arne');
+    $users = ['John', 'Hans', 'Arne'];
 
     $Dispatcher = new Dispatcher();
 
