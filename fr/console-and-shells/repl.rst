@@ -32,9 +32,9 @@ en utilisant le REPL::
     // [
     //   'controller' => 'articles',
     //   'action' => 'view',
-    //   'pass' => array(
+    //   'pass' => [
     //     0 => '1'
-    //   ),
+    //   ],
     //   'plugin' => NULL
     // ]
 

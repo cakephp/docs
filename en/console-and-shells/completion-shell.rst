@@ -14,14 +14,14 @@ The Completion Shell consists of a number of sub commands to assist the
 developer creating it's completion script. Each for a different step in the
 autocompletion process.
 
-commands
+Commands
 --------
 
 For the first step commands outputs the available Shell Commands, including
 plugin name when applicable. (All returned possibilities, for this and the other
 sub commands, are separated by a space.) For example::
 
-    Console/cake  Completion commands
+    Console/cake Completion commands
 
 Returns::
 
@@ -37,7 +37,7 @@ Once the preferred command has been chosen subCommands comes in as the second
 step and outputs the possible sub command for the given shell command. For
 example::
 
-    Console/cake  Completion subcommands bake
+    Console/cake Completion subcommands bake
 
 Returns::
 
@@ -50,7 +50,7 @@ As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)
 For example::
 
-    Console/cake  Completion options bake
+    Console/cake Completion options bake
 
 Returns::
 

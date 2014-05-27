@@ -1,14 +1,12 @@
 Completion du Shell
 ###################
 
-.. versionadded:: 2.5
-
 Travailler avec la console donne au développeur beaucoup de possibilités mais
 devoir complètement connaître et écrire ces commandes peut être fastidieux.
 Spécialement lors du développement de nouveaux shells où les commandes
 diffèrent à chaque itération. Les Shells de Completion aident ce niveau-là
 en fournissant une API pour écrire les scripts de completion pour les shells
-comme like bash, zsh, fish etc...
+comme bash, zsh, fish etc...
 
 Sous Commandes
 ==============
@@ -17,7 +15,7 @@ Les Shell de Completion se compose d'un certain nombre de sous-commandes pour
 permettre au développeur de créer son script de completion. Chacun pour une
 étape différente dans le processus d'autocompletion.
 
-commandes
+Commandes
 ---------
 
 Pour les premières étapes, les commandes sortent les Commandes de Shell
