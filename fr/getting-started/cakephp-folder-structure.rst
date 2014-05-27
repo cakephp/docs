@@ -38,7 +38,7 @@ Vous remarquerez quelques dossiers principaux :
 Le dossier App
 ==============
 
-Le répertoire App de CakePHP est l'endroit où vous réaliserez la majorité
+Le répertoire *App* de CakePHP est l'endroit où vous réaliserez la majorité
 du développement de votre application. Regardons de plus près le contenu de
 ce répertoire.
 
@@ -54,15 +54,10 @@ Console
     :doc:`/console-and-shells`.
 Controller
     Contient vos Controllers et leurs Components.
-Lib
-    Contient les librairies qui ne proviennent pas de librairies
-    externes. Cela vous permet de séparer les librairies internes de votre
-    organisme des librairies externes.
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model
-    Pour les Models, Behaviors et Sources de Données de votre
-    application.
+    Pour les Tables, Entity et Behaviors de votre application.
 Test
     Ce répertoire contient tous les cas de test, et les fixtures de test pour
     votre application. Le répertoire ``Test/Case`` devra refléter votre
@@ -70,8 +65,8 @@ Test
     application. Pour plus d'informations sur les cas de test et les fixtures
     de test, référez-vous à la documentation :doc:`/development/testing`.
 View
-    Les fichiers de présentation sont placés ici : éléments, pages d'erreur,
-    helpers, layouts et vues.
+    Les fichiers de présentation sont placés ici : elements, pages d'erreur,
+    helpers, layouts et templates de vues.
 
 
 .. meta::
