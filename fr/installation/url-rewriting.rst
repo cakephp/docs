@@ -56,18 +56,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    téléchargements du site de notre dépôt Git, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
-   Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
-   cela redirige tout vers votre app CakePHP)::
-   
-       <IfModule mod_rewrite.c>
-          RewriteEngine on
-          RewriteRule    ^$ app/webroot/    [L]
-          RewriteRule    (.*) app/webroot/$1 [L]
-       </IfModule>
-
    Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
    application avec Bake)::
-   
+
        <IfModule mod_rewrite.c>
           RewriteEngine on
           RewriteRule    ^$    webroot/    [L]
@@ -81,7 +72,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
 
    Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
@@ -112,7 +103,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    utilisateur (http://exemple.com/~username/cakephp/), ou toute autre
    structure d'URL qui utilise déjà mod\_rewrite, vous aurez besoin d'ajouter
    les requêtes (statements) RewriteBase aux fichiers .htaccess que CakePHP
-   utilise (/.htaccess, /app/.htaccess, /app/webroot/.htaccess).
+   utilise (/.htaccess, /App/.htaccess, /App/webroot/.htaccess).
 
    Ceci peut être ajouté dans la même section que la directive RewriteEngine,
    donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci::
@@ -122,7 +113,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
 
    Les détails de ces changements dépendront de votre configuration, et
@@ -139,8 +130,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
-           RewriteRule ^(.*)$ index.php [QSA,L]
+           RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^ index.php [QSA,L]
        </IfModule>
        
    Ce qui est au-dessus va simplement empêcher les assets incorrects d'être
@@ -157,7 +148,7 @@ De belles URLs sur nginx
 
 nginx est un serveur populaire qui, comme Lighttpd, utilise moins
 de ressources système. Son inconvénient est qu'il ne fait pas usage de
-fichiers .htaccess comme Apache et Lighttpd, il est donc nécessaire de créer
+fichiers .htaccess comme Apache, il est donc nécessaire de créer
 les URLs réécrites disponibles dans la configuration du site. selon
 votre configuration, vous devrez modifier cela, mais à tout le moins,
 vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
@@ -175,7 +166,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         server_name example.com;
     
         # root directive should be global
-        root   /var/www/example.com/public/app/webroot/;
+        root   /var/www/example.com/public/App/webroot/;
         index  index.php;
         
         access_log /var/www/example.com/log/access.log;
@@ -186,8 +177,8 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         }
 
         location ~ \.php$ {
-            include /etc/nginx/fastcgi_params;
             try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
             fastcgi_pass    127.0.0.1:9000;
             fastcgi_index   index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -248,19 +239,6 @@ faire, suivez ces étapes:
 Une fois que le fichier web.config est créé avec les bonnes règles de
 réécriture des liens de IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
-
-URL-Rewriting sur lighttpd
-==========================
-
-Lighttpd ne supporte pas les fonctions .htaccess, par conséquent vous pouvez
-retirer tous les fichiers .htaccess. Dans la configuration lighttpd,
-assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
-
-::
-
-    url.rewrite-if-not-file =(
-        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
-    )
 
 Je ne veux / ne peux utiliser l'URL rewriting
 =============================================
