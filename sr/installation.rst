@@ -11,7 +11,7 @@ Uslovi za instaliranje
 
 Tehnički, baza podataka nije potrebna, ali naslućujemo da će svaka aplikacija koristiti po jednu. CakePHP podržava najrazličitije vrste baza podataka:
 
--  MySQL (4 or greater)
+-  MySQL (5.1.10 or greater)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite

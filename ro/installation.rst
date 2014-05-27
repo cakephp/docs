@@ -18,7 +18,7 @@ Dpdv tehnic nu este necesar un motor de baza de date, dar ne imaginam ca
 majoritatea aplicatiilor vor utiliza una. CakePHP suporta o varietate de
 baze de date:
 
--  MySQL (4 sau mai mare)
+-  MySQL (5.1.10 sau mai mare)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite

@@ -16,7 +16,7 @@ Requisitos
 Tecnicamente não é exigido um banco de dados mas imaginamos que a maioria
 das aplicações irá utilizar um. O CakePHP suporta uma variedade deles:
 
--  MySQL (4 ou superior)
+-  MySQL (5.1.10 ou superior)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite

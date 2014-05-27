@@ -16,7 +16,7 @@ Nginx, LightHTTPD, Microsoft IIS и др.
 Технически, база данных не требуется, но предположим, что большинство
 приложений ее используют. CakePHP поддерживает различные СУБД: 
 
--  MySQL (4 и выше)
+-  MySQL (5.1.10 и выше)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite
