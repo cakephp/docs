@@ -157,8 +157,8 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at /App/Tables/PeopleTable.php
--  Entity class: "Person", found at /App/Entity/Person.php
+-  Table class: "PeopleTable", found at /App/Model/Table/PeopleTable.php
+-  Entity class: "Person", found at /App/Model/Entity/Person.php
 -  Controller class: "PeopleController", found at
    /App/Controller/PeopleController.php
 -  View template, found at /App/Template/People/index.ctp

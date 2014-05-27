@@ -187,8 +187,8 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
 -  Nom de la table de la base de données: "people"
--  Classe Table: "PeopleTable", trouvée dans /App/Tables/PeopleTable.php
--  Classe Entity: "Person", trouvée dans /App/Entity/Person.php
+-  Classe Table: "PeopleTable", trouvée dans /App/Model/Table/PeopleTable.php
+-  Classe Entity: "Person", trouvée dans /App/Model/Entity/Person.php
 -  Classe Controller: "PeopleController", trouvée dans
    /App/Controller/PeopleController.php
 -  Template de View, trouvée dans /App/Template/People/index.ctp
