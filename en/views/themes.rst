@@ -23,8 +23,12 @@ You can also set or change the theme name within an action or within the
 Theme view files need to be within the ``/app/View/Themed/`` folder. Within the
 themed folder, create a folder using the same name as your theme name. For
 example, the above theme would be found in ``/app/View/Themed/AnotherExample``.
-Its important to remember that CakePHP expects CamelCase theme names. Beyond
-that, the folder structure within the ``/app/View/Themed/Example/`` folder is
+
+.. note::
+
+    Its important to remember that CakePHP expects CamelCase theme names.
+
+Beyond that, the folder structure within the ``/app/View/Themed/Example/`` folder is
 exactly the same as ``/app/View/``.
 
 For example, the view file for an edit action of a Posts controller would reside
