@@ -26,7 +26,7 @@ example, the above theme would be found in ``/app/View/Themed/AnotherExample``.
 
 .. note::
 
-    Its important to remember that CakePHP expects CamelCase theme names.
+    It is important to remember that CakePHP expects CamelCase theme names.
 
 Beyond that, the folder structure within the ``/app/View/Themed/Example/`` folder is
 exactly the same as ``/app/View/``.
