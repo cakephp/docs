@@ -3,8 +3,6 @@ Hash
 
 .. php:class:: Hash
 
-.. versionadded:: 2.2
-
 La gestion du tableau, si elle est bien faite, peut être un outil très
 puissant et utile pour construire du code plus intelligent et plus
 optimisé. CakePHP offre un ensemble d'utilitaires statiques très
@@ -80,9 +78,6 @@ Les Types d'Attribut Correspondants
 |                                | à l'intérieur de ``...``.                  |
 +--------------------------------+--------------------------------------------+
 
-.. versionchanged:: 2.5
-    Le support des matcher a été ajouté dans ``insert()`` et ``remove()``.
-
 .. php:staticmethod:: get(array $data, $path)
 
     :rtype: mixed
@@ -107,7 +102,7 @@ Les Types d'Attribut Correspondants
         $users = $this->User->find("all");
         $results = Hash::extract($users, '{n}.User.id');
         // $results égal à:
-        // array(1,2,3,4,5,...);
+        // [1,2,3,4,5,...];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
@@ -115,22 +110,20 @@ Les Types d'Attribut Correspondants
 
     Insère $data dans un tableau tel que défini dans ``$path``::
 
-        $a = array(
-            'pages' => array('name' => 'page')
-        );
-        $result = Hash::insert($a, 'files', array('name' => 'files'));
+        $a = [
+            'pages' => ['name' => 'page']
+        ];
+        $result = Hash::insert($a, 'files', ['name' => 'files']);
         // $result ressemble maintenant à:
-        Array
-        (
-            [pages] => Array
-                (
+        [
+            [pages] => [
                     [name] => page
-                )
-            [files] => Array
-                (
+	]
+            [files] => [
+            
                     [name] => files
-                )
-        )
+	]
+        ]
 
     Vous pouvez utiliser les chemins en utilisant ``{n}`` et ``{s}`` pour
     insérer des données dans des points multiples::
@@ -138,38 +131,28 @@ Les Types d'Attribut Correspondants
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
-    .. versionchanged:: 2.5
-        Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
-        insert().
-
 .. php:staticmethod:: remove(array $data, $path = null)
 
     :rtype: array
 
     Retire tous les éléments d'un tableau qui matche avec $path.::
 
-        $a = array(
-            'pages' => array('name' => 'page'),
-            'files' => array('name' => 'files')
-        );
+        $a = [
+            'pages' => ['name' => 'page'],
+            'files' => ['name' => 'files']
+        ];
         $result = Hash::remove($a, 'files');
         /* $result ressemble maintenant à:
-            Array
-            (
-                [pages] => Array
-                    (
+            [
+                [pages] => [
                         [name] => page
-                    )
+	    ]
 
-            )
+            ]
         */
 
     L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs
     multiples en une fois.
-
-    .. versionchanged:: 2.5
-        Depuis 2.5.0, les expressions matchant l'attribut fonctionnenent avec
-        remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
@@ -182,100 +165,87 @@ Les Types d'Attribut Correspondants
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
     $groupPath.::
 
-        $a = array(
-            array(
-                'User' => array(
+        $a = [
+            [
+                'User' => [
                     'id' => 2,
                     'group_id' => 1,
-                    'Data' => array(
+                    'Data' => [
                         'user' => 'mariano.iglesias',
                         'name' => 'Mariano Iglesias'
-                    )
-                )
-            ),
-            array(
-                'User' => array(
+                    ]
+                ]
+            ],
+            [
+                'User' => [
                     'id' => 14,
                     'group_id' => 2,
-                    'Data' => array(
+                    'Data' => [
                         'user' => 'phpnut',
                         'name' => 'Larry E. Masters'
-                    )
-                )
-            ),
-        );
+                    ]
+                ]
+            ],
+        ];
 
         $result = Hash::combine($a, '{n}.User.id');
         /* $result ressemble maintenant à:
-            Array
-            (
+            [
                 [2] =>
                 [14] =>
-            )
+            ]
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
         /* $result ressemble maintenant à:
-            Array
-            (
-                [2] => Array
-                    (
+            [
+                [2] => [
                         [user] => mariano.iglesias
                         [name] => Mariano Iglesias
-                    )
-                [14] => Array
-                    (
+                ]
+                [14] => [
                         [user] => phpnut
                         [name] => Larry E. Masters
-                    )
-            )
+                ]
+            ]
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name');
         /* $result ressemble maintenant à:
-            Array
-            (
+            [
                 [2] => Mariano Iglesias
                 [14] => Larry E. Masters
-            )
+            ]
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
         /* $result ressemble maintenant à:
-            Array
-            (
-                [1] => Array
-                    (
-                        [2] => Array
-                            (
+            [
+                [1] => [
+                        [2] => [
                                 [user] => mariano.iglesias
                                 [name] => Mariano Iglesias
-                            )
-                    )
-                [2] => Array
-                    (
-                        [14] => Array
-                            (
+                        ]
+                ]
+                [2] => [
+                        [14] => [
                                 [user] => phpnut
                                 [name] => Larry E. Masters
-                            )
-                    )
-            )
+                        ]
+                ]
+            ]
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
         /* $result ressemble maintenant à:
-            Array
-            (
-                [1] => Array
-                    (
+            [
+                [1] => [
                         [2] => Mariano Iglesias
-                    )
-                [2] => Array
-                    (
+                ]
+                [2] => [
                         [14] => Larry E. Masters
-                    )
-            )
+                ]
+            ]
         */
 
     Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
@@ -285,34 +255,30 @@ Les Types d'Attribut Correspondants
         $result = Hash::combine(
             $a,
             '{n}.User.id',
-            array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+            ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
             '{n}.User.group_id'
         );
         /* $result ressemble maintenant à:
-            Array
-            (
-                [1] => Array
-                    (
+            [
+                [1] => [
                         [2] => mariano.iglesias: Mariano Iglesias
-                    )
-                [2] => Array
-                    (
+                ]
+                [2] => [
                         [14] => phpnut: Larry E. Masters
-                    )
-            )
+                ]
+            ]
         */
 
         $result = Hash::combine(
             $a,
-            array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+            ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
             '{n}.User.id'
         );
         /* $result ressemble maintenant à:
-            Array
-            (
+            [
                 [mariano.iglesias: Mariano Iglesias] => 2
                 [phpnut: Larry E. Masters] => 14
-            )
+            ]
         */
 
 .. php:staticmethod:: format(array $data, array $paths, $format)
@@ -322,54 +288,52 @@ Les Types d'Attribut Correspondants
     Retourne une série de valeurs extraites d'un tableau, formaté avec un
     format de chaîne de caractères::
 
-        $data = array(
-            array(
-                'Person' => array(
+        $data = [
+            [
+                'Person' => [
                     'first_name' => 'Nate',
                     'last_name' => 'Abele',
                     'city' => 'Boston',
                     'state' => 'MA',
                     'something' => '42'
-                )
-            ),
-            array(
-                'Person' => array(
+                ]
+            ],
+            [
+                'Person' => [
                     'first_name' => 'Larry',
                     'last_name' => 'Masters',
                     'city' => 'Boondock',
                     'state' => 'TN',
                     'something' => '{0}'
-                )
-            ),
-            array(
-                'Person' => array(
+                ]
+            ],
+            [
+                'Person' => [
                     'first_name' => 'Garrett',
                     'last_name' => 'Woodworth',
                     'city' => 'Venice Beach',
                     'state' => 'CA',
                     'something' => '{1}'
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
-        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%2$d, %1$s');
+        $res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%2$d, %1$s');
         /*
-        Array
-        (
+        [
             [0] => 42, Nate
             [1] => 0, Larry
             [2] => 0, Garrett
-        )
+        ]
         */
 
-        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%1$s, %2$d');
+        $res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%1$s, %2$d');
         /*
-        Array
-        (
+        [
             [0] => Nate, 42
             [1] => Larry, 0
             [2] => Garrett, 0
-        )
+        ]
         */
 
 .. php:staticmethod:: contains(array $data, array $needle)
@@ -379,16 +343,16 @@ Les Types d'Attribut Correspondants
     Détermine si un Hash ou un tableau contient les clés et valeurs exactes
     d'un autre::
 
-        $a = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about')
-        );
-        $b = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about'),
-            2 => array('name' => 'contact'),
+        $a = [
+            0 => ['name' => 'main'],
+            1 => ['name' => 'about']
+        ];
+        $b = [
+            0 => ['name' => 'main'],
+            1 => ['name' => 'about'],
+            2 => ['name' => 'contact'],
             'a' => 'b'
-        );
+        ];
 
         $result = Hash::contains($a, $a);
         // true
@@ -403,21 +367,26 @@ Les Types d'Attribut Correspondants
 
    Vérifie si un chemin particulier est défini dans un tableau::
 
-        $set = array(
-            'My Index 1' => array('First' => 'The first item')
-        );
+        $set = [
+            'My Index 1' => ['First' => 'The first item']
+        ];
         $result = Hash::check($set, 'My Index 1.First');
         // $result == True
 
         $result = Hash::check($set, 'My Index 1');
         // $result == True
 
-        $set = array(
-            'My Index 1' => array('First' =>
-                array('Second' =>
-                    array('Third' =>
-                        array('Fourth' => 'Heavy. Nesting.'))))
-        );
+        $set = [
+            'My Index 1' => [
+                'First' => [
+                    'Second' => [
+                        'Third' => [
+                            'Fourth' => 'Heavy. Nesting.'
+                        ]
+                    ]
+                ]
+            ]
+        ];
         $result = Hash::check($set, 'My Index 1.First.Second');
         // $result == True
 
@@ -430,7 +399,7 @@ Les Types d'Attribut Correspondants
         $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
         // $result == False
 
-.. php:staticmethod:: filter(array $data, $callback = array('Hash', 'filter'))
+.. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     :rtype: array
 
@@ -439,27 +408,26 @@ Les Types d'Attribut Correspondants
     de tableau. Votre callback devrait retourner ``false`` pour retirer
     les éléments du tableau résultant::
 
-        $data = array(
+        $data = [
             '0',
             false,
             true,
             0,
-            array('one thing', 'I can tell you', 'is you got to be', false)
-        );
+            ['one thing', 'I can tell you', 'is you got to be', false]
+        ];
         $res = Hash::filter($data);
 
         /* $data ressemble maintenant à:
-            Array (
+            [
                 [0] => 0
                 [2] => true
                 [3] => 0
-                [4] => Array
-                    (
+                [4] => [
                         [0] => one thing
                         [1] => I can tell you
                         [2] => is you got to be
-                    )
-            )
+                ]
+            ]
         */
 
 .. php:staticmethod:: flatten(array $data, string $separator = '.')
@@ -468,19 +436,19 @@ Les Types d'Attribut Correspondants
 
     Réduit un tableau multi-dimensionnel en un tableau à une seule dimension::
 
-        $arr = array(
-            array(
-                'Post' => array('id' => '1', 'title' => 'First Post'),
-                'Author' => array('id' => '1', 'user' => 'Kyle'),
-            ),
-            array(
-                'Post' => array('id' => '2', 'title' => 'Second Post'),
-                'Author' => array('id' => '3', 'user' => 'Crystal'),
-            ),
-        );
+        $arr = [
+            [
+                'Post' => ['id' => '1', 'title' => 'First Post'],
+                'Author' => ['id' => '1', 'user' => 'Kyle'],
+            ],
+            [
+                'Post' => ['id' => '2', 'title' => 'Second Post'],
+                'Author' => ['id' => '3', 'user' => 'Crystal'],
+            ],
+        ];
         $res = Hash::flatten($arr);
         /* $res ressemble maintenant à:
-            Array (
+            [
                 [0.Post.id] => 1
                 [0.Post.title] => First Post
                 [0.Author.id] => 1
@@ -489,7 +457,7 @@ Les Types d'Attribut Correspondants
                 [1.Post.title] => Second Post
                 [1.Author.id] => 3
                 [1.Author.user] => Crystal
-            )
+            ]
         */
 
 .. php:staticmethod:: expand(array $data, string $separator = '.')
@@ -499,7 +467,7 @@ Les Types d'Attribut Correspondants
     Développe un tableau qui a déjà été aplatie avec
     :php:meth:`Hash::flatten()`::
 
-        $data = array(
+        $data = [
             '0.Post.id' => 1,
             '0.Post.title' => First Post,
             '0.Author.id' => 1,
@@ -508,19 +476,19 @@ Les Types d'Attribut Correspondants
             '1.Post.title' => Second Post,
             '1.Author.id' => 3,
             '1.Author.user' => Crystal,
-        );
+        ];
         $res = Hash::expand($data);
         /* $res ressemble maintenant à:
-        array(
-            array(
-                'Post' => array('id' => '1', 'title' => 'First Post'),
-                'Author' => array('id' => '1', 'user' => 'Kyle'),
-            ),
-            array(
-                'Post' => array('id' => '2', 'title' => 'Second Post'),
-                'Author' => array('id' => '3', 'user' => 'Crystal'),
-            ),
-        );
+        [
+            [
+                'Post' => ['id' => '1', 'title' => 'First Post'],
+                'Author' => ['id' => '1', 'user' => 'Kyle'],
+            ],
+            [
+                'Post' => ['id' => '2', 'title' => 'Second Post'],
+                'Author' => ['id' => '3', 'user' => 'Crystal'],
+            ],
+        ];
         */
 
 .. php:staticmethod:: merge(array $data, array $merge[, array $n])
@@ -541,44 +509,41 @@ Les Types d'Attribut Correspondants
 
     ::
 
-        $array = array(
-            array(
+        $array = [
+            [
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
                 'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
                 'description' => 'Importing an sql dump'
-            ),
-            array(
+            ],
+            [
                 'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
                 'name' => 'pbpaste | grep -i Unpaid | pbcopy',
                 'description' => 'Remove all lines that say "Unpaid".',
-            )
-        );
+            ]
+        ];
         $arrayB = 4;
-        $arrayC = array(0 => "test array", "cats" => "dogs", "people" => 1267);
-        $arrayD = array("cats" => "felines", "dog" => "angry");
+        $arrayC = [0 => "test array", "cats" => "dogs", "people" => 1267];
+        $arrayD = ["cats" => "felines", "dog" => "angry"];
         $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
         /* $res ressemble maintenant à:
-        Array
-        (
-            [0] => Array
-                (
+       [
+            [0] => [
                     [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
                     [name] => mysql raleigh-workshop-08 < 2008-09-05.sql
                     [description] => Importing an sql dump
-                )
-            [1] => Array
-                (
+            ]
+            [1] => [
                     [id] => 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb
                     [name] => pbpaste | grep -i Unpaid | pbcopy
                     [description] => Remove all lines that say "Unpaid".
-                )
+            ]
             [2] => 4
             [3] => test array
             [cats] => felines
             [people] => 1267
             [dog] => angry
-        )
+        ]
         */
 
 .. php:staticmethod:: numeric(array $data)
@@ -587,11 +552,11 @@ Les Types d'Attribut Correspondants
 
     Vérifie pour voir si toutes les valeurs dans le tableau sont numériques::
 
-        $data = array('one');
+        $data = ['one'];
         $res = Hash::numeric(array_keys($data));
         // $res est à true
 
-        $data = array(1 => 'one');
+        $data = [1 => 'one'];
         $res = Hash::numeric($data);
         // $res est à false
 
@@ -602,23 +567,23 @@ Les Types d'Attribut Correspondants
     Compte les dimensions d'un tableau. Cette méthode va seulement considérer
     la dimension du premier élément dans le tableau::
 
-        $data = array('one', '2', 'three');
+        $data = ['one', '2', 'three'];
         $result = Hash::dimensions($data);
         // $result == 1
 
-        $data = array('1' => '1.1', '2', '3');
+        $data = ['1' => '1.1', '2', '3'];
         $result = Hash::dimensions($data);
         // $result == 1
 
-        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => '3.1.1'));
+        $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => '3.1.1']];
         $result = Hash::dimensions($data);
         // $result == 2
 
-        $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
+        $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
         $result = Hash::dimensions($data);
         // $result == 1
 
-        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
+        $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
         $result = Hash::dimensions($data);
         // $result == 2
 
@@ -628,11 +593,11 @@ Les Types d'Attribut Correspondants
     retourne le nombre le plus profond de dimensions de tout élément dans
     le tableau::
 
-        $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
+        $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
         $result = Hash::maxDimensions($data, true);
         // $result == 2
 
-        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
+        $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
         $result = Hash::maxDimensions($data, true);
         // $result == 3
 
@@ -662,29 +627,24 @@ Les Types d'Attribut Correspondants
     :ref:`hash-path-syntax`. Seuls les élements de type expression sont
     supportés par cette méthode::
 
-        $a = array(
-            0 => array('Person' => array('name' => 'Jeff')),
-            1 => array('Shirt' => array('color' => 'black'))
-        );
+        $a = [
+            0 => ['Person' => ['name' => 'Jeff']],
+            1 => ['Shirt' => ['color' => 'black']]
+        ];
         $result = Hash::sort($a, '{n}.Person.name', 'asc');
         /* $result ressemble maintenant à:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Shirt] => Array
-                            (
+            [
+                [0] => [
+                        [Shirt] => [
                                 [color] => black
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Person] => Array
-                            (
+                        ]
+                ]
+                [1] => [
+                        [Person] => [
                                 [name] => Jeff
-                            )
-                    )
-            )
+                        ]
+                ]
+            ]
         */
 
     ``$dir`` peut être soit ``asc``, soit ``desc`. Le ``$type``
@@ -704,25 +664,23 @@ Les Types d'Attribut Correspondants
 
     Calcule la différence entre deux tableaux::
 
-        $a = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about')
-        );
-        $b = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about'),
-            2 => array('name' => 'contact')
-        );
+        $a = [
+            0 => ['name' => 'main'],
+            1 => ['name' => 'about']
+        ];
+        $b = [
+            0 => ['name' => 'main'],
+            1 => ['name' => 'about'],
+            2 => ['name' => 'contact']
+        ];
 
         $result = Hash::diff($a, $b);
         /* $result ressemble maintenant à:
-            Array
-            (
-                [2] => Array
-                    (
+            [
+                [2] => [
                         [name] => contact
-                    )
-            )
+                ]
+            ]
         */
 
 .. php:staticmethod:: mergeDiff(array $data, array $compare)
@@ -735,42 +693,38 @@ Les Types d'Attribut Correspondants
     **Exemple 1**
     ::
 
-        $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
-        $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
+        $array1 = ['ModelOne' => ['id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2']];
+        $array2 = ['ModelOne' => ['id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3']];
         $res = Hash::mergeDiff($array1, $array2);
 
         /* $res ressemble maintenant à:
-            Array
-            (
-                [ModelOne] => Array
-                    (
+            [
+                [ModelOne] => [
                         [id] => 1001
                         [field_one] => a1.m1.f1
                         [field_two] => a1.m1.f2
                         [field_three] => a3.m1.f3
-                    )
-            )
+                    ]
+            ]
         */
 
     **Exemple 2**
     ::
 
-        $array1 = array("a" => "b", 1 => 20938, "c" => "string");
-        $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
+        $array1 = ["a" => "b", 1 => 20938, "c" => "string"];
+        $array2 = ["b" => "b", 3 => 238, "c" => "string", ["extra_field"]];
         $res = Hash::mergeDiff($array1, $array2);
         /* $res ressemble maintenant à:
-            Array
-            (
+            [
                 [a] => b
                 [1] => 20938
                 [c] => string
                 [b] => b
                 [3] => 238
-                [4] => Array
-                    (
+                [4] => [
                         [0] => extra_field
-                    )
-            )
+                ]
+            ]
         */
 
 .. php:staticmethod:: normalize(array $data, $assoc = true)
@@ -783,54 +737,49 @@ Les Types d'Attribut Correspondants
     Normaliser un tableau, facilite l'utilisation des résultats avec
     :php:meth:`Hash::merge()`::
 
-        $a = array('Tree', 'CounterCache',
-            'Upload' => array(
+        $a = ['Tree', 'CounterCache',
+            'Upload' => [
                 'folder' => 'products',
-                'fields' => array('image_1_id', 'image_2_id')
-            )
-        );
+                'fields' => ['image_1_id', 'image_2_id']
+            ]
+        ];
         $result = Hash::normalize($a);
         /* $result ressemble maintenant à:
-            Array
-            (
+            [
                 [Tree] => null
                 [CounterCache] => null
-                [Upload] => Array
-                    (
+                [Upload] => [
                         [folder] => products
-                        [fields] => Array
-                            (
+                        [fields] => [
                                 [0] => image_1_id
                                 [1] => image_2_id
-                            )
-                    )
-            )
+                        ]
+                ]
+            ]
         */
 
-        $b = array(
-            'Cacheable' => array('enabled' => false),
+        $b = [
+            'Cacheable' => ['enabled' => false],
             'Limit',
             'Bindable',
             'Validator',
             'Transactional'
-        );
+        ];
         $result = Hash::normalize($b);
         /* $result ressemble maintenant à:
-            Array
-            (
-                [Cacheable] => Array
-                    (
+            [
+                [Cacheable] => [
                         [enabled] => false
-                    )
+                ]
 
                 [Limit] => null
                 [Bindable] => null
                 [Validator] => null
                 [Transactional] => null
-            )
+            ]
         */
 
-.. php:staticmethod:: nest(array $data, array $options = array())
+.. php:staticmethod:: nest(array $data, array $options = [])
 
     Prend un ensemble de tableau aplati, et crée une structure de données
     imbriquée ou chaînée. Utilisé par des méthodes comme
@@ -850,59 +799,59 @@ Les Types d'Attribut Correspondants
 
     Exemple::
 
-        $data = array(
-            array('ModelName' => array('id' => 1, 'parent_id' => null)),
-            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
-            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
-            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
-            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
-            array('ModelName' => array('id' => 6, 'parent_id' => null)),
-            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
-            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
-            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
-            array('ModelName' => array('id' => 10, 'parent_id' => 6))
-        );
+        $data = [
+            ['ModelName' => ['id' => 1, 'parent_id' => null]],
+            ['ModelName' => ['id' => 2, 'parent_id' => 1]],
+            ['ModelName' => ['id' => 3, 'parent_id' => 1]],
+            ['ModelName' => ['id' => 4, 'parent_id' => 1]],
+            ['ModelName' => ['id' => 5, 'parent_id' => 1]],
+            ['ModelName' => ['id' => 6, 'parent_id' => null]],
+            ['ModelName' => ['id' => 7, 'parent_id' => 6]],
+            ['ModelName' => ['id' => 8, 'parent_id' => 6]],
+            ['ModelName' => ['id' => 9, 'parent_id' => 6]],
+            ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+        ];
 
-        $result = Hash::nest($data, array('root' => 6));
+        $result = Hash::nest($data, ['root' => 6]);
         /* $result ressemble maintenant à:
-        array(
-                (int) 0 => array(
-                    'ModelName' => array(
+            [
+                (int) 0 => [
+                    'ModelName' => [
                         'id' => (int) 6,
                         'parent_id' => null
-                    ),
-                    'children' => array(
-                        (int) 0 => array(
-                            'ModelName' => array(
+                    ],
+                    'children' => [
+                        (int) 0 => [
+                            'ModelName' => [
                                 'id' => (int) 7,
                                 'parent_id' => (int) 6
-                            ),
-                            'children' => array()
-                        ),
-                        (int) 1 => array(
-                            'ModelName' => array(
+                            ],
+                            'children' => []
+                        ],
+                        (int) 1 => [
+                            'ModelName' => [
                                 'id' => (int) 8,
                                 'parent_id' => (int) 6
-                            ),
-                            'children' => array()
-                        ),
-                        (int) 2 => array(
-                            'ModelName' => array(
+                            ],
+                            'children' => []
+                        ],
+                        (int) 2 => [
+                            'ModelName' => [
                                 'id' => (int) 9,
                                 'parent_id' => (int) 6
-                            ),
-                            'children' => array()
-                        ),
-                        (int) 3 => array(
-                            'ModelName' => array(
+                            ],
+                            'children' => []
+                        ],
+                        (int) 3 => [
+                            'ModelName' => [
                                 'id' => (int) 10,
                                 'parent_id' => (int) 6
-                            ),
-                            'children' => array()
-                        )
-                    )
-                )
-            )
+                            ],
+                            'children' => []
+                        ]
+                    ]
+                ]
+            ]
             */
 
 
