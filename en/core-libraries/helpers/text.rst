@@ -6,14 +6,14 @@ TextHelper
 The TextHelper contains methods to make text more usable and
 friendly in your views. It aids in enabling links, formatting URLs,
 creating excerpts of text around chosen words or phrases,
-highlighting key words in blocks of text, and to gracefully
+highlighting key words in blocks of text, and gracefully
 truncating long stretches of text.
 
 .. versionchanged:: 2.1
-   Several of ``TextHelper`` methods have been moved into :php:class:`String`
+   Several ``TextHelper`` methods have been moved into the :php:class:`String`
    class to allow easier use outside of the ``View`` layer.
    Within a view, these methods are accessible via the `TextHelper`
-   class and you can call it as you would call a normal helper method:
+   class. You can call one as you would call a normal helper method:
    ``$this->Text->method($args);``.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
@@ -43,7 +43,7 @@ truncating long stretches of text.
     :param string $text: The text to convert.
     :param array $htmlOptions: An array :term:`html attributes` for the generated links
 
-    Same as in ``autoLinkEmails()``, only this method searches for
+    Same as ``autoLinkEmails()``, only this method searches for
     strings that start with https, http, ftp, or nntp and links them
     appropriately.
 
@@ -61,14 +61,14 @@ truncating long stretches of text.
     are linked appropriately given the supplied ``$htmlOptions``.
 
     .. versionchanged:: 2.1
-        In 2.1 this method automatically escapes its input. Use the ``escape``
+        As of 2.1, this method automatically escapes its input. Use the ``escape``
         option to disable this if necessary.
 
 .. php:method:: autoParagraph(string $text)
 
     :param string $text: The text to convert.
 
-    Adds proper <p> around text where double-line returns and <br> where single-line returns
+    Adds proper <p> around text where double-line returns are found, and <br> where single-line returns
     are found.::
 
         $myText = 'For more information
