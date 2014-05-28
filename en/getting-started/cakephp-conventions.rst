@@ -144,7 +144,7 @@ View Conventions
 ================
 
 View template files are named after the controller functions they
-display, in an underscored form. The get\_ready() function of the
+display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
 /App/Template/People/get\_ready.ctp.
 

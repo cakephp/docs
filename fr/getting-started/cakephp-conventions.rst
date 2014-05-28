@@ -175,7 +175,7 @@ Conventions des vues
 
 Les fichiers de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
-La fonction soyez\_pret() de la classe PeopleController cherchera un gabarit
+La fonction soyezPret() de la classe PeopleController cherchera un gabarit
 de vue dans : /App/Template/People/soyez\_pret.ctp.
 
 Le schéma classique est
