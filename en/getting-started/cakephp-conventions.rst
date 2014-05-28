@@ -97,8 +97,10 @@ classes you would typically use in a CakePHP application:
    in a file named **KissesAndHugsController.php**
 -  The Component class **MyHandyComponent** would be found in a
    file named **MyHandyComponent.php**
--  The Model class **OptionValue** would be found in a file named
-   **OptionValue.php**
+-  The Table class **OptionValuesTable** would be found in a file named
+   **OptionValuesTable.php**.
+-  The Entity class **OptionValue** would be found in a file named
+   **OptionValue.php**.
 -  The Behavior class **EspeciallyFunkableBehavior** would be found
    in a file named **EspeciallyFunkableBehavior.php**
 -  The View class **SuperSimpleView** would be found in a file
@@ -144,10 +146,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/App/View/People/get\_ready.ctp.
+/App/Template/People/get\_ready.ctp.
 
 The basic pattern is
-/App/View/Controller/underscored\_function\_name.ctp.
+/App/Template/Controller/underscored\_function\_name.ctp.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -155,13 +157,14 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Model class: "Person", found at /App/Model/Person.php
+-  Table class: "PeopleTable", found at /App/Model/Table/PeopleTable.php
+-  Entity class: "Person", found at /App/Model/Entity/Person.php
 -  Controller class: "PeopleController", found at
    /App/Controller/PeopleController.php
--  View template, found at /App/View/People/index.ctp
+-  View template, found at /App/Template/People/index.ctp
 
 Using these conventions, CakePHP knows that a request to
-http://example.com/people/ maps to a call on the index() function
+http://example.com/people/ maps to a call on the ``index()`` function
 of the PeopleController, where the Person model is automatically
 available (and automatically tied to the 'people' table in the
 database), and renders to a file. None of these relationships have

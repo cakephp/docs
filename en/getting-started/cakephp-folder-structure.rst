@@ -37,9 +37,9 @@ You'll notice a few top level folders:
 The App Folder
 ==============
 
-CakePHP's *app* folder is where you will do most of your application
+CakePHP's *App* folder is where you will do most of your application
 development. Let's look a little closer at the folders inside
-*app*.
+*App*.
 
 Config
     Holds the (few) configuration files CakePHP uses. Database
@@ -51,14 +51,10 @@ Console
     output of bake. For more information see :doc:`/console-and-shells`.
 Controller
     Contains your application's controllers and their components.
-Lib
-    Contains libraries that do not come from 3rd parties or
-    external vendors. This allows you to separate your organization's
-    internal libraries from vendor libraries.
 Locale
     Stores string files for internationalization.
 Model
-    Contains your application's models, behaviors, and datasources.
+    Contains your application's tables, entities and behaviors.
 Test
     This directory contains all the test cases and test fixtures for your
     application. The ``Test/Case`` directory should mirror your application and
@@ -67,7 +63,7 @@ Test
     documentation.
 View
     Presentational files are placed here: elements, error pages,
-    helpers, layouts, and view files.
+    helpers, layouts, and view template files.
 
 
 .. meta::

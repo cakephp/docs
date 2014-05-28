@@ -98,7 +98,9 @@ habituellement dans une application CakePHP :
    fichier nommé **BisousEtCalinsController.php**.
 -  La classe Component (Composant) **MonSuperComponent** devra se trouver dans
    un fichier nommé **MonSuperComponent.php**.
--  La classe Model **ValeurOption** devra se trouver dans un fichier
+-  La classe Table **ValeurOptionsTable** devra se trouver dans un fichier
+   nommé **ValeurOptionsTable.php**.
+-  La classe Entity **ValeurOptionEntity** devra se trouver dans un fichier
    nommé **ValeurOption.php**.
 -  La classe Behavior (Comportement) **SpecialementFunkableBehavior** devra
    se trouver dans un fichier nommé **SpecialementFunkableBehavior.php**.
@@ -118,7 +120,7 @@ BigPerson et ReallyBigPerson en sont des exemples.
 Les noms de tables correspondant aux models CakePHP sont au pluriel et
 utilisent le caractère souligné (underscore). Les tables correspondantes
 aux models mentionnés ci-dessus seront donc respectivement : ``people``,
-``big_people``, et ``really_big_people``.
+``big\_people``, et ``really\_big\_people``.
 
 Note des traducteurs francophones : seul le dernier mot est au pluriel et
 tous les pluriels français ne seront pas compris par CakePHP sans lui indiquer
@@ -173,25 +175,26 @@ Conventions des vues
 
 Les fichiers de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
-La fonction soyezPret() de la classe PersonnesController cherchera un gabarit
-de vue dans : /App/View/Personnes/soyez\_pret.ctp.
+La fonction soyezPret() de la classe PeopleController cherchera un gabarit
+de vue dans : /App/Template/People/soyez\_pret.ctp.
 
 Le schéma classique est
-/App/View/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
+/App/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
 affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
-    Nom de la table dans la base de données : "personnes"
-    Classe du Model : "Personne", trouvée dans /app/Model/Personne.php
-    Classe du Controller : "PersonnesController", trouvée dans 
-    /app/Controller/PersonnesController.php
-    Gabarit de la Vue : trouvé dans /app/View/Personnes/index.ctp
+-  Nom de la table de la base de données: "people"
+-  Classe Table: "PeopleTable", trouvée dans /App/Model/Table/PeopleTable.php
+-  Classe Entity: "Person", trouvée dans /App/Model/Entity/Person.php
+-  Classe Controller: "PeopleController", trouvée dans
+   /App/Controller/PeopleController.php
+-  Template de View, trouvée dans /App/Template/People/index.ctp
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
-http://exemple.com/personnes/ sera liée à un appel à la fonction index() du
+http://exemple.com/personnes/ sera liée à un appel à la fonction ``index()`` du
 Controller PersonnesController, dans lequel le model Personne est
 automatiquement disponible (et automatiquement lié à la table 'personnes'
 dans la base) et rendue dans un fichier. Aucune de ces relations n'a été
