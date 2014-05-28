@@ -76,15 +76,15 @@ Finding Which Objects CakePHP Knows About
 
     Example usage::
 
-        //returns array('DebugKit', 'Blog', 'User');
+        //returns ['DebugKit', 'Blog', 'User'];
         App::objects('plugin');
 
-        // returns array('PagesController', 'BlogController');
+        // returns ['PagesController', 'BlogController'];
         App::objects('Controller');
 
     You can also search only within a plugin's objects by using the plugin dot syntax.::
 
-        // returns array('MyPluginPost', 'MyPluginComment');
+        // returns ['MyPluginPost', 'MyPluginComment'];
         App::objects('MyPlugin.Model');
 
 

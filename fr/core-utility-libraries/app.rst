@@ -19,7 +19,7 @@ Trouver les Classes
 
         // Retourne un nom de classe court avec le namespace + suffix
         App::classname('Auth', 'Controller/Component', 'Component');
-        // Returns Cake\Controller\Component\AuthComponent
+        // Retourne Cake\Controller\Component\AuthComponent
 
         // Retourne un nom de plugin.
         App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
@@ -27,7 +27,7 @@ Trouver les Classes
 
         // Noms contenant \ seront retournés non modifiés.
         App::classname('App\Cache\ComboCache');
-        // Returns App\Cache\ComboCache
+        // Retourne App\Cache\ComboCache
 
     Quand vous retrouvez les classes, le namespace ``App`` sera essayé, et si
     la classe n'existe pas, le namespace ``Cake`` sera tenté. Si les deux noms
