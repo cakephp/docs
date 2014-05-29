@@ -226,8 +226,8 @@ Plugin Images, CSS and Javascript
 
 You can include plugin specific Images, Javascript and CSS files in your
 plugins. These asset files should be placed in
-``your_plugin/webroot/img``, ``your_plugin/webroot/css`` and
-``your_plugin/webroot/js`` respectively. They can be linked into your
+``your_plugin/vendors/img``, ``your_plugin/vendors/css`` and
+``your_plugin/vendors/js`` respectively. They can be linked into your
 views with the core helpers as well.
 
 ::
