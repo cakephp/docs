@@ -29,8 +29,8 @@ us when implementing the user login.
 Next step is to create our Users table, responsible for finding, saving and
 validating any user data::
 
-    // App/Model/Repository/UsersTable.php
-    namespace App\Model\Repository;
+    // App/Model/Table/UsersTable.php
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
