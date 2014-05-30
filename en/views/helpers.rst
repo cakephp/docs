@@ -39,9 +39,9 @@ CakePHP::
     }
 
 You can also add helpers from within an action, so they will only
-be available to that action and not the other actions in the
+be available to that action and not to the other actions in the
 controller. This saves processing power for the other actions that
-do not use the helper as well as help keep the controller better
+do not use the helper and helps keep the controller better
 organized::
 
     class BakeriesController extends AppController {
@@ -53,9 +53,9 @@ organized::
         }
     }
 
-If you need to enable a helper for all controllers add the name of
+If you need to enable a helper for all controllers, add the name of
 the helper to the ``$helpers`` array in ``/app/Controller/AppController.php`` (or
-create if not present). Remember to include the default Html and
+create it if not present). Remember to include the default Html and
 Form helpers::
 
     class AppController extends Controller {
@@ -76,7 +76,7 @@ attribute values or modify behavior of a helper::
         public $helpers = array('Awesome' => array('option1' => 'value1'));
     }
 
-As of 2.3 the options are merged with the ``Helper::$settings`` property of
+As of 2.3, the options are merged with the ``Helper::$settings`` property of
 the helper.
 
 One common setting to use is the ``className`` option, which allows you to
@@ -149,12 +149,12 @@ view rendering process. See the :ref:`helper-api` and the
 Creating Helpers
 ================
 
-If a core helper (or one showcased on GitHub or the Bakery)
+If a core helper (or one showcased on GitHub or in the Bakery)
 doesn't fit your needs, helpers are easy to create.
 
 Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different
-places in your application. In order to fit your logic in to
+places in your application. In order to fit your logic into
 CakePHP's existing helper structure, you'll need to create a new
 class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::

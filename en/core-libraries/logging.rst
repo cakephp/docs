@@ -50,7 +50,7 @@ When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.::
 
-    App::uses('BaseLog', 'Log');
+    App::uses('BaseLog', 'Log/Engine');
 
     class DatabaseLog extends BaseLog {
         public function __construct($options = array()) {

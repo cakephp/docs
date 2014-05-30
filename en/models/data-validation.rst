@@ -58,7 +58,7 @@ some of these built-in validation rules::
                 'alphaNumeric' => array(
                     'rule'     => 'alphaNumeric',
                     'required' => true,
-                    'message'  => 'Alphabets and numbers only'
+                    'message'  => 'Letters and numbers only'
                 ),
                 'between' => array(
                     'rule'    => array('lengthBetween', 5, 15),
