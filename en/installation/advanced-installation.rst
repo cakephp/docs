@@ -76,7 +76,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
