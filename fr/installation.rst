@@ -75,10 +75,10 @@ source.
 Vous devriez être maintenant capable de visiter le chemin où vous avez installé
 votre application CakePHP et voir les feux de signalisations de configuration.
 
-Garder à jour avec les changements du dernier CakePHP
+Rester à jour avec les derniers changements de CakePHP
 -----------------------------------------------------
 
-Si vous voulez garder à jour avec les derniers changements de CakePHP, vous
+Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
 pouvez ajouter ce qui suit dans le ``composer.json`` de votre application::
 
     "require": {
@@ -97,9 +97,9 @@ Les descriptions de Model, les vues mises en cache, et les informations de
 session en sont juste quelques exemples.
 
 De même, assurez-vous que le répertoire ``tmp`` et tous ses
-sous-répertoires dans votre installation cake sont en écriture pour
+sous-répertoires dans votre installation Cake sont accessible en écriture pour
 l'utilisateur du serveur web. Le processus d'installation avec Composer va
-rendre ``tmp`` et ses sous-dossiers globalement en écriture pour récupérer et
+rendre ``tmp`` et ses sous-dossiers accessibles en écriture pour récupérer et
 lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
 meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
 serveur web.
@@ -107,7 +107,7 @@ serveur web.
 Configuration
 =============
 
-Configurer CakePHP est aussi simple que de le flanquer dans le
+Configurer CakePHP est aussi simple que de le placer dans le
 document root de votre serveur web, ou aussi complexe et flexible
 que vous le souhaitez.
 Cette section couvrira les deux types principaux d'installation de CakePHP:
@@ -132,7 +132,7 @@ le serveur web PHP intégré qui va rendre votre application disponible sur
 Par défaut, sans aucun argument fourni, cela va afficher votre application
 sur ``http://localhost:8765/``.
 
-Si vous avez quelque chose en conflit avec ``localhost`` ou ``port 8765``, vous
+Si vous avez quelque chose qui rentre en conflit avec ``localhost`` ou le ``port 8765``, vous
 pouvez dire à la console CakePHP de lancer le seveur web sur un hôte spécifique
 et/ou un port utilisant les arguments suivants::
 
@@ -188,7 +188,7 @@ Si votre serveur web est configuré correctement, vous devriez maintenant
 accéder à votre application CakePHP accessible à l'adresse
 http://www.exemple.com.
 
-Utiliser un CakePHP pour Plusieurs Applications
+Utiliser un CakePHP pour plusieurs applications
 -----------------------------------------------
 
 Il peut y avoir des situations où vous souhaitez placer les répertoires
@@ -196,7 +196,7 @@ de CakePHP dans différents endroits du système de fichier. Ceci est peut-être
 dû à une restriction de domaine partagé. Cette section décrit comment étendre
 vos répertoires CakePHP à travers votre système de fichier.
 
-Tout d'abord, réalisez qu'il y a trois parties principales dans une application
+Tout d'abord, prenez conscience qu'il y a trois parties principales dans une application
 CakePHP:
 
 #. La librairie du coeur de CakePHP, dans /vendor/cakephp/cakephp.
@@ -204,7 +204,7 @@ CakePHP:
 #. Le webroot de l'application, usuellement dans /App/webroot.
 
 Chacun de ces répertoires peut être localisé partout dans votre système de
-fichier, avec l'exception du webroot, ce qui nécessite d'être accessible par
+fichiers, avec l'exception du webroot, ce qui nécessite d'être accessible par
 votre serveur web. Vous pouvez même déplacer le dossier webroot en dehors
 du dossier App tant que vous dites à CakePHP où vous l'avez mis.
 
@@ -253,16 +253,16 @@ URL Rewriting
 
     installation/url-rewriting
 
-A vous de jouer!
-================
+A vous de jouer !
+=================
 
-Ok, voyons voir CakePHP en action. Selon la configuration que vous utilisez,
+Ok, regardons CakePHP en action. Selon la configuration que vous utilisez,
 vous pouvez pointer votre navigateur vers http://exemple.com/ ou
 http://localhost:8765/. A ce niveau, vous serez sur la page home
 par défaut de CakePHP, et un message qui vous donnera le statut de la
 connexion de votre base de données courante.
 
-Félicitations! Vous êtes prêt à :doc:`créer votre première application CakePHP
+Félicitations ! Vous êtes prêt à :doc:`créer votre première application CakePHP
 </getting-started>`.
 
 
