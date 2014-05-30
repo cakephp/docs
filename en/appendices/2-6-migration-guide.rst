@@ -21,6 +21,16 @@ AclBehavior
 
 - ``Model::parentNode()`` now gets the type (Aro, Aco) passed as first argument: ``$model->parentNode($type)``.
 
+Network
+=======
+
+CakeRequest
+-----------
+
+- ``CakeRequest::param()`` can now read values using :ref:`hash-path-syntax`
+  like ``data()``.
+
+
 Utility
 =======
 
