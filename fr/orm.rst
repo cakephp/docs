@@ -13,7 +13,7 @@ de sauvegarder de nouveaux enregistrements, de modifier/supprimer des
 enregistrements existants, définir des relations et d'effectuer des informations
 en vrac. Les seconds types d'objet sont des **entities**. Les Entities
 représentent des enregistrements individuels et vous permettent de définir
-des niveau de ligne/enregistrement (row/record level behavior) &
+des niveaux de ligne/enregistrement (row/record level behavior) &
 fonctionnalités.
 
 L'ORM intégré dans CakePHP se spécialise dans les bases de données
@@ -26,13 +26,13 @@ hybride qui combine les aspects des deux patterns pour créer un ORM rapide et
 facile d'utilisation.
 
 Avant de commencer à explorer ORM, assurez-vous de :ref:`configurer votre
-connection à la base de données <database-configuration>`.
+connexion à la base de données <database-configuration>`.
 
 .. note::
 
     Si vous etes familier avec les versions précédentes de CakePHP, vous devriez
     lire :doc:`/appendices/orm-migration` pour voir les différences importantes
-    entre CakePHP 3.0 et les versions anciennes de CakePHP.
+    entre CakePHP 3.0 et les versions antérieures de CakePHP.
 
 Exemple rapide
 ==============
@@ -49,8 +49,8 @@ de CakePHP pour vos tables de base de données, vous pouvez simplement commencer
         echo $row->title;
     }
 
-Notez que nous n'avons créé aucun code ou gérer aucune configuration. Les
-conventions dans CakePHP nous permettent d'éviter un code bancal et permet au
+Notez que nous n'avons créé aucun code ou généré aucune configuration. Les
+conventions dans CakePHP nous permettent d'éviter un code bancal et permettent au
 framework d'inserer des classes de base lorsque votre application n'a pas créé
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
@@ -66,7 +66,7 @@ ajouterions ce qui suit dans ``App/Model/Table/ArticlesTable.php``::
 
 Les classes de Table utilisent la version CamelCased du nom de la table avec le
 suffix ``Table`` en nom de classe. Une fois que votre classe a été créée vous
-obtenez une référence pour elle en utilisant
+obtenez une référence vers celle-ci en utilisant
 :php:class:`~Cake\\ORM\\TableRegistry` comme avant::
 
     use Cake\ORM\TableRegistry;
@@ -75,7 +75,7 @@ obtenez une référence pour elle en utilisant
 
 Maintenant que nous avons une classe de table concrète, nous allons
 probablement vouloir utiliser une classe entity concrète. Les classes Entity
-vous laissent définir les méthodes accesseurs et mutateurs, définissent la
+vous laissent définir les méthodes accesseurs et mutateurs, définissant la
 logique personnalisée pour des enegistrements individuels et plus encore. Nous
 commencerons par ajouter ce qui suit à ``App/Model/Entity/Article.php``::
 
@@ -103,7 +103,7 @@ de notre nouvelle classe Article::
         echo $row->title;
     }
 
-CakePHP utilise les conventions de nommage pour lier ensemble les classes Table
+CakePHP utilise des conventions de nommage pour lier ensemble les classes Table
 et Entity. Si vous avez besoin de personnaliser l'entity qu'une table utilise,
 vous pouvez utiliser la méthode ``entityClass()`` pour définir un nom de
 classe spécifique.
