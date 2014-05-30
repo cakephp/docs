@@ -1,20 +1,20 @@
 Controllers (Contrôleurs)
 #########################
 
-Les controllers sont le 'C' dans MVC. Après que le routage a été effectué et que
-le bon controller a été trouvé, l'action de votre controller est appelée. Votre
+Les controllers sont le 'C' dans MVC. Après que le routage ait été effectué et que
+le bon controller ait été trouvé, l'action de votre controller est appelée. Votre
 controller devra gérer l'interpretation des données requêtées, s'assurer que
 les bons models sont appelés et que la bonne réponse ou vue est rendue. Les
-controllers peuvent être imaginés comme un homme au milieu entre le Model et la
+controllers peuvent être imaginés comme un homme au milieu, entre le Model et la
 Vue. Le mieux est de garder des controllers peu chargés, et des models plus
 fournis. Cela vous aidera à réutiliser plus facilement votre code et facilitera
 le test de votre code.
 
 Habituellement, un controller est utilisé pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une
-boulangerie en-ligne, vous aurez sans doute un RecipesController qui gère
+boulangerie en ligne, vous aurez sans doute un RecipesController qui gère
 vos recettes et un IngredientsController qui gére vos ingrédients. Cependant,
-il est aussi possible d'avoir des controllers qui fonctionnent avec plus qu'un
+il est aussi possible d'avoir des controllers qui fonctionnent avec plus d'un
 model. Dans CakePHP, un controller est nommé d'après le model principal qu'il
 gère.
 
@@ -25,7 +25,7 @@ dans ``/App/Controller/AppController.php`` et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
-requête. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
+requêtes. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
 publique dans un controller est une action accessible via une URL. Une action
 est responsable de l'interprétation des requêtes et de la création de
 la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
@@ -85,7 +85,7 @@ Quand une requête est faîte dans une application CakePHP, Les classes
 :ref:`routes-configuration` pour trouver et créer le bon controller. La
 requête de données est encapsulée dans un objet request.
 CakePHP met toutes les informations importantes de la requête dans la
-propriété ``$this->request``. Regardez la section :ref:`cake-request`
+propriété ``$this->request``. Consultez la section :ref:`cake-request`
 pour plus d'informations sur l'objet request de CakePHP.
 
 Les Actions du Controller
@@ -93,11 +93,11 @@ Les Actions du Controller
 
 Les actions du Controller sont responsables de la conversion des paramètres de
 la requête dans une réponse pour le navigateur/utilisateur faisant la requête.
-CakePHP utilise les conventions pour automatiser le processus et retirer
+CakePHP utilise des conventions pour automatiser le processus et retirer
 quelques codes boiler-plate que vous auriez besoin d'écrire autrement.
 
 Par convention, CakePHP rend une vue avec une version inflectée du nom de
-l'action. Revenons à notre boulangerie en-ligne par exemple, notre
+l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
 ``/app/Controller/RecipesController.php`` et contiendrait::
@@ -159,7 +159,7 @@ retourner::
 Le controller ci-dessus est un exemple montrant comment la méthode peut être
 utilisée avec :php:meth:`~Controller::requestAction()` et des requêtes normales.
 Retourner un tableau de données à une requête non-requestAction va entraîner
-des erreurs et devra être évité. Regardez la section sur
+des erreurs et devra être évité. Consultez la section sur
 :php:meth:`Cake\\Controller\\Controller::requestAction()` pour plus d'astuces
 sur l'utilisation de :php:meth:`~Controller::requestAction()`.
 
@@ -176,7 +176,7 @@ Request Life-cycle callbacks
 
 Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
 (ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
-ou juste après que les actions du controller soient effectuées:
+ou juste après que les actions du controller soient effectuées :
 
 .. php:method:: beforeFilter(Event $event)
 
@@ -206,7 +206,7 @@ fournissent aussi un ensemble similaire de callbacks.
 
 .. _controller-methods:
 
-Les Méthodes du Controller
+Les méthodes du Controller
 ==========================
 
 Pour une liste complète des méthodes de controller avec leurs descriptions,
@@ -304,7 +304,7 @@ Rendre une vue spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans votre controller, vous pourriez avoir envie de rendre une vue
-différente de celle rendue par défaut. Vous pouvez faire cela en appelant
+différente de celle rendue par défaut. Vous pouvez le faire en appelant
 directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
 :php:meth:`~Controller::render()` CakePHP n'essaiera pas de re-rendre la vue::
 
@@ -442,7 +442,7 @@ Autres Méthodes utiles
             }
         }
 
-    Si ``$default`` n'est pas défini, la fonction se met par défaut sur
+    Si ``$default`` n'est pas défini, la fonction se met par défaut 
     à la racine (root) de votre domaine - '/'.
 
     Le paramètre ``$local``, si il est défini à ``true``, restreint les URLs se
@@ -512,7 +512,7 @@ Les attributs du Controller
 ===========================
 
 Pour une liste complète des attributs du controller et ses descriptions,
-regardez `l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
+consultez `l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
 
 .. php:attr:: name
 
@@ -554,7 +554,7 @@ référence à l'objet (``$this->{$helpername}``).
     assurez-vous d'y inclure :php:class:`HtmlHelper` et :php:class:`FormHelper`
     si vous voulez qu'ils soient toujours disponibles par défaut dans vos
     propres controllers. Pour en savoir plus au sujet de ces classes,
-    regardez leurs sections respectives plus loin dans le manuel.
+    consultez leurs sections respectives plus loin dans le manuel.
 
     Jetons maintenant un œil sur la façon d'indiquer à un
     :php:class:`Controller` CakePHP que vous avez dans l'idée d'utiliser
@@ -577,7 +577,7 @@ référence à l'objet (``$this->{$helpername}``).
     :php:attr:`~Controller::$helpers` et :php:attr:`~Controller::$uses`, les
     components dans vos controllers sont fusionnés avec ceux dans
     ``AppController``. Comme pour les :php:attr:`~Controller::$helpers`,
-    vous pouvez passer les paramètres dans les components. Regardez
+    vous pouvez passer les paramètres dans les components. Consultez
     :ref:`configuring-components` pour plus d'informations.
 
 Autres Attributs
