@@ -7,8 +7,7 @@ providing view files. In addition to template files, they can also provide
 helpers and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin-syntax`.
 
-To use themes, specify the theme name in your
-controller::
+To use themes, specify the theme name in your controller::
 
     class ExampleController extends AppController {
         public $theme = 'Example';
