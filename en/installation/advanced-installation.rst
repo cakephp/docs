@@ -34,12 +34,6 @@ would look like the following::
 
     {
         "name": "example-app",
-        "repositories": [
-            {
-                "type": "pear",
-                "url": "http://pear.cakephp.org"
-            }
-        ],
         "require": {
             "cakephp/cakephp": ">=2.4.9"
         },
