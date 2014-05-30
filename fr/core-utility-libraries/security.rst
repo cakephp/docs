@@ -55,9 +55,9 @@ L'API de Security
 
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 
-    :param string $plain: La valeur à chiffrer.
+    :param string $text: La valeur à chiffrer.
     :param string $key: La clé 256 bit/32 byte à utiliser en clé cipher.
-    :param string $hmacSalt: Le sel à utiliser pour le processus HMAC. Laissez null pour utiliser Security.salt.
+    :param string $hmacSalt: Le sel à utiliser pour le processus HMAC. Laissez à null pour utiliser Security.salt.
 
     Chiffre ``$text`` en utilisant AES-256. La ``$key`` devrait être une valeur
     avec beaucoup de différence dans les données un peu comme un bon mot de
