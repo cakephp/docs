@@ -198,28 +198,19 @@ A plugin can also have basically any of the other directories that your
 application can, such as Config, Console, webroot, etc.
 
 If you want to be able to access your plugin with a URL, defining an
-AppController and AppModel for the plugin is required. These two special classes
-are named after the plugin, and extend the parent application's AppController
-and AppModel. Here's what they should look like for our ContactManager example::
+AppController for the plugin is required. Here's what they should look like for
+our ContactManager example::
 
     // /Plugin/ContactManager/Controller/ContactManagerAppController.php:
     namespace ContactManager\Controller;
 
-    use App\Controller\Controller;
+    use App\Controller\AppController;
 
     class ContactManagerAppController extends AppController {
     }
 
-    // /Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    namespace ContactManager\Model;
-
-    use App\Model\AppModel;
-
-    class ContactManagerAppModel extends AppModel {
-    }
-
-If you forgot to define these special classes, CakePHP will hand
-you "Missing Controller" errors until you've done so.
+If you forget to define this class, CakePHP will throw a
+"Missing Controller" error until you've done so.
 
 Please note that the process of creating plugins can be greatly
 simplified by using the bake shell.
@@ -237,17 +228,6 @@ Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
 have any problems with using the command line.
 
-.. warning::
-
-    Plugins do not work as namespacing to separate code.
-    Due to PHP lacking namespaces in older versions
-    you cannot have the same class,
-    or same filename, in your plugins.
-    Even if it is two different plugins.
-    So use unique classes and filenames, possible prefixing
-    the class and filename with the plugin name.
-
-
 Plugin Controllers
 ==================
 
@@ -262,9 +242,9 @@ So, we place our new ContactsController in
     // /Plugin/ContactManager/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
-    use ContactManager\Controller\ContactManagerAppController;
+    use ContactManager\Controller\AppController;
 
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends AppController {
 
         public function index() {
             //...
@@ -276,10 +256,6 @@ So, we place our new ContactsController in
     This controller extends the plugin's AppController (called
     ContactManagerAppController) rather than the parent application's
     AppController.
-
-    Also note how the name of the model is prefixed with the name of
-    the plugin. This is required to differentiate between models in
-    the plugin and models in the main application.
 
 If you want to access what we've got going thus far, visit
 ``/contact_manager/contacts``. You should get a "Missing Model" error
