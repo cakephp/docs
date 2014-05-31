@@ -52,7 +52,7 @@ utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
 un tableau.::
 
-    App::uses('BaseLog', 'Log');
+    App::uses('BaseLog', 'Log/Engine');
 
     class DatabaseLog extends BaseLog {
         public function __construct($options = array()) {
