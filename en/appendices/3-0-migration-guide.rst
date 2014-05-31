@@ -428,6 +428,9 @@ Controller
   The 3rd argument ``$exit`` has been dropped. The method can no longer send
   response and exit script, instead it returns a ``Response`` instance with
   approriate headers set.
+- The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
+  magic properties have been removed. You should access all of these properties
+  on ``$this->request`` instead.
 
 Scaffold Removed
 ----------------
@@ -624,6 +627,9 @@ View Class
 - ``View::$ext`` has been removed and instead a protected property ``View::$_ext``
   has been added.
 - ``View::addScript()`` has been removed. Use :ref:`view-blocks` instead.
+- The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
+  magic properties have been removed. You should access all of these properties
+  on ``$this->request`` instead.
 
 ViewBlock
 ---------
