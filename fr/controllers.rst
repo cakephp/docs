@@ -1,8 +1,8 @@
 Controllers (Contrôleurs)
 #########################
 
-Les controllers sont le 'C' dans MVC. Après que le routage ait été effectué et que
-le bon controller ait été trouvé, l'action de votre controller est appelée. Votre
+Les controllers sont le 'C' dans MVC. Après que le routage a été effectué et que
+le bon controller a été trouvé, l'action de votre controller est appelée. Votre
 controller devra gérer l'interpretation des données requêtées, s'assurer que
 les bons models sont appelés et que la bonne réponse ou vue est rendue. Les
 controllers peuvent être imaginés comme un homme au milieu, entre le Model et la
@@ -176,7 +176,7 @@ Request Life-cycle callbacks
 
 Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
 (ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
-ou juste après que les actions du controller soient effectuées :
+ou juste après que les actions du controller ont été effectuées :
 
 .. php:method:: beforeFilter(Event $event)
 
@@ -442,7 +442,7 @@ Autres Méthodes utiles
             }
         }
 
-    Si ``$default`` n'est pas défini, la fonction se met par défaut 
+    Si ``$default`` n'est pas définie, la fonction se met par défaut 
     à la racine (root) de votre domaine - '/'.
 
     Le paramètre ``$local``, si il est défini à ``true``, restreint les URLs se
