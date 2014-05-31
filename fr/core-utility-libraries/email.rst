@@ -195,7 +195,7 @@ Toutes ces configurations sont optionnelles, excepté ``'from'``.
     ``Email::from('my@example.com', 'My Site')`` sera défini comme
     ``'from' => ['my@example.com' => 'My Site']`` dans votre config.
 
-Définir les headers
+Définir les Headers
 -------------------
 
 Dans ``Email``, vous êtes libre de définir les headers que vous souhaitez.
@@ -204,7 +204,7 @@ Si vous migrez pour utiliser Email, n'oubliez pas de mettre le préfixe
 
 Regardez ``Email::setHeaders()`` et ``Email::addHeaders()``
 
-Envoyer les emails templatés
+Envoyer les Emails Templatés
 ----------------------------
 
 Les Emails sont souvent bien plus que de simples message textes. Afin de
@@ -212,7 +212,7 @@ faciliter cela, CakePHP fournit une façon d'envoyer les emails en utilisant la
 :doc:`view layer </views>` de CakePHP.
 
 Les templates pour les emails se placent dans un dossier spécial appelé
-``Emails`` dans le répertoire ``View`` de votre application. Les vues des
+``Email`` dans le répertoire ``Template`` de votre application. Les vues des
 emails peuvent aussi utiliser les layouts et éléments tout comme les vues
 normales::
 
@@ -223,8 +223,8 @@ normales::
         ->from('app@domain.com')
         ->send();
 
-Ce qui est au-dessus utilise ``App/View/Email/html/welcome.ctp`` pour la vue,
-et ``App/View/Layouts/Email/html/fancy.ctp`` pour le layout. Vous pouvez
+Ce qui est au-dessus utilise ``App/Template/Email/html/welcome.ctp`` pour la vue,
+et ``App/Template/Layout/Email/html/fancy.ctp`` pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $Email = new Email();
@@ -236,10 +236,10 @@ aussi envoyer des messages email templaté multipart::
 
 Ceci utiliserait les fichiers de vue suivants:
 
-* ``App/View/Email/text/welcome.ctp``
-* ``App/View/Layout/Email/text/fancy.ctp``
-* ``App/View/Email/html/welcome.ctp``
-* ``App/View/Layout/Email/html/fancy.ctp``
+* ``App/Template/Email/text/welcome.ctp``
+* ``App/Template/Layout/Email/text/fancy.ctp``
+* ``App/Template/Email/html/welcome.ctp``
+* ``App/Template/Layout/Email/html/fancy.ctp``
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 ``text``, ``html`` soit ``both``.
@@ -329,7 +329,7 @@ client:
        fichier en chaîne en utilisant l'option ``data``. Cela vous permet
        d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
 
-Utiliser les transports
+Utiliser les Transports
 -----------------------
 
 Les Transports sont des classes destinées à envoyer l'email selon certain
@@ -349,7 +349,7 @@ votre configuration.
     $transport = new DebugTransport();
     $email->transport($transport);
 
-Créer des Transports personnalisés
+Créer des Transports Personnalisés
 ----------------------------------
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
@@ -400,7 +400,7 @@ ISP Japonais.
     $email->emailPattern($newPattern);
 
 
-Envoyer des messages rapidement
+Envoyer des Messages Rapidement
 ===============================
 
 Parfois vous avez besoin d'une façon rapide d'envoyer un email, et vous n'avez
@@ -435,7 +435,7 @@ toutes les configurations dans le 4ème paramètre (en tableau ou en utilisant
 Vérifiez la liste des :ref:`configurations <email-configurations>` pour voir
 toutes les configs acceptées.
 
-Envoyer des emails depuis CLI
+Envoyer des Emails depuis CLI
 =============================
 
 Quand vous envoyez des emails à travers un script CLI (Shells, Tasks, ...),
