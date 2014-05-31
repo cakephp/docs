@@ -125,6 +125,9 @@ Cache
   d'exécution, ce qui était auparavant possible avec ``Cache::set()``.
 * Toutes les sous-classes ``CacheEngine`` integrent maintenant une méthode
   ``config()``.
+* :php:meth:`Cake\\Cache\\Cache::readMany()`,
+  :php:meth:`Cake\\Cache\\Cache::deleteMany()`, et
+  :php:meth:`Cake\\Cache\\Cache::writeMany()` ont été ajoutées.
 
 Toutes les méthodes de :php:class:`Cake\\Cache\\Cache\\CacheEngine` sont
 maintenant responsables de la gestion du préfix de clé configuré.
@@ -174,15 +177,17 @@ Les classes de lecteur de configuration ont été renomées:
 Object
 ------
 
-- ``Object::log()`` a été retirée de Object et ajoutée à
-  la classe :php:trait:`Cake\\Log\\LogTrait`.
-- ``Object::requestAction()`` a été retirée de Object et ajoutée à
-  :php:trait:`Cake\\Routing\\RequestActionTrait`.
+La classe ``Object`` a été retirée. Elle contenait au début un tas de méthodes
+qui étaient utilisées dans plusieurs endroits à travers le framework. Les
+méthodes les plus utiles qui était utilisées ont été extraites dans des traits.
+Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la méthode
+``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
+``requestAction()``.
 
 Console
 =======
 
-TaskCollection remplacée
+TaskCollection Remplacée
 ------------------------
 
 Cette classe a été renommée en :php:class:`Cake\\Console\\TaskRegistry`.
@@ -192,7 +197,7 @@ pouvez utiliser ``cake upgrade rename_collections`` pour vous aider à mettre
 à niveau votre code. Les Tasks n'ont plus accès aux callbacks, puiqu'il
 n'y avait jamais de callbacks à utiliser.
 
-ApiShell retirée
+ApiShell Retirée
 ----------------
 
 ApiShell a été retirée puisqu'il ne fournit aucun bénéfice sur le fichier
@@ -254,7 +259,7 @@ Log
 Routing
 =======
 
-Paramètres nommés
+Paramètres Nommés
 -----------------
 
 Les paramètres nommés ont été retirés dans 3.0. Les paramètres nommés ont été
@@ -322,8 +327,22 @@ Route
 
 * ``CakeRoute`` a été renommée en ``Route``.
 * La signature de ``match()`` a changé en ``match($url, $context = array())``
-  Regardez :php:meth:`Cake\\Routing\\Route::match()` pour plus d'informations
+  Consultez :php:meth:`Cake\\Routing\\Route::match()` pour plus d'informations
   sur la nouvelle signature.
+
+Dispatcher Filters Configuration Changed
+----------------------------------------
+
+Les filtres de Dispatcher ne sont plus ajoutés à votre application en utilisant
+``Configure``. Vous les ajoutez maintenant avec
+:php:class:`Cake\\Routing\\DispatcherFactory``. Cela signifie que si votre
+application utilisait ``Dispatcher.filters``, vous devrez maintenant utiliser
+php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+
+En plus des changements de configuration, les filtres du dispatcher ont vu
+leurs conventions mises à jour, et des fonctionnalités ont été ajoutées.
+Consultez la documentation :doc:`/development/dispatch-filters` pour plus
+d'informations.
 
 Filter\AssetFilter
 ------------------
@@ -357,6 +376,9 @@ Request
 * Le detecteur de Request pour "mobile" a été retiré du coeur. A la place
   le template de app ajoute des detecteurs pour "mobile" et "tablet" en
   utilisant la lib ``MobileDetect``.
+* La méthode ``onlyAllow()`` a été renommée en ``allowMethod()`` et n'accepte
+  plus "var args". Tous les noms de méthode doivent être passés en premier
+  argument, soit en chaîne de caractère, soit en tableau de chaînes.
 
 Response
 --------
@@ -367,18 +389,23 @@ Response
   mimetype ``text/plain`` ce qui était une nuisance habituelle lors de la
   réception d'une requête jQuery XHR.
 
-Network\\Session
-================
+Sessions
+========
+
+La classe session n'est plus statique, à la place, la session est accessible
+à travers l'objet request. Consultez la documentation
+:doc:`/development/sessions` sur l'utilisation de l'objet session.
 
 * :php:class:`Cake\\Network\\Session` et les classes de session liées ont été
   déplacées dans le namespace ``Cake\Network``.
-
-* ``SessionHandlerInterface`` a été retirée en faveur de celle fournie par PHP
-  lui-même.
-
-* La propriété ``Session::$requestCountdown`` a été changée en protected.
-  Pour spécifier le valeur countdown de la requête, vous pouvez maintenant
-  utiliser la variable de configuration ``Session.requestCountdown``.
+* ``SessionHandlerInterface`` a été retirée en faveur de celui fourni par PHP.
+* La propriété ``Session::$requestCountdown`` a été retirée.
+* La fonctionnalité de session checkAgent a été retirée. Elle entrainait un
+  certain nombre de bugs quand le chrome frame, et flash player sont impliqués.
+* Le nom de la table de la base de données des sessions est maintenant
+  ``sessions`` plutôt que ``cake_sessions``.
+* Le timeout du cookie de session est automatiquement mis à jour en tandem avec
+  le timeout dans les données de session.
 
 Network\\Http
 =============
@@ -500,6 +527,9 @@ AuthComponent
   ``FormAuthenticate`` avec ``hashType`` défini à ``Blowfish``.
 - La méthode ``loggedIn()`` a été retirée. Utilisez ``user()`` à la place.
 - Les options de configuration ne sont plus définie en propriété public.
+- Les méthodes ``allow()`` et ``deny()`` n'acceptent plus "var args". Tous les
+  noms de méthode ont besoin d'être passés en premier argument, soit en chaîne,
+  soit en tableau de chaînes.
 
 RequestHandlerComponent
 -----------------------
@@ -531,6 +561,11 @@ SecurityComponent
   déplacées dans un CsrfComponent séparé. Ceci vous permet de plus facilement
   utiliser une protection CSRF sans avoir à utiliser de form
   tampering prevention.
+- Les options de Configuration ne sont plus définies comme des propriétés
+  publiques.
+- Les méthodes ``requireAuth()`` et ``requireSecure()`` n'acceptent plus
+  "var args". Tous les noms de méthode ont besoin d'être passés en premier
+  argument, soi en chaîne, soit en tableau de chaînes.
 
 Model
 =====
@@ -563,6 +598,20 @@ ConnectionManager
 - :php:meth:`~Cake\\Database\\ConnectionManager::configured()` a été ajoutée.
   Celle-ci avec ``config()`` remplace ``sourceList()`` &
   ``enumConnectionObjects()`` avec une API plus standard et cohérente.
+
+TreeBehavior
+------------
+
+TreeBheavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
+fonctionne de la même manière que dans 2.x, certaines méthodes ont été renommées
+ou retirées::
+
+- ``TreeBehavior::children()`` est maintenant un finder personnalisé ``find('children')``.
+- ``TreeBehavior::generateTreeList()`` est maintenant un finder personnalisé ``find('treeList')``.
+- ``TreeBehavior::getParentNode()`` a été retirée.
+- ``TreeBehavior::getPath()`` est maintenant un finder personnalisé ``find('path')``.
+- ``TreeBehavior::reorder()`` a été retirée.
+- ``TreeBehavior::verify()`` a été retirée.
 
 TestSuite
 =========
@@ -603,7 +652,7 @@ ControllerTestCase
 View
 ====
 
-Les dossiers de View renommés
+Les Dossiers de View Renommés
 -----------------------------
 
 Les dossiers de View suivants ont été renommées pour éviter les collisions de
@@ -942,14 +991,45 @@ Time
 - ``CakeTime::serverOffset()`` a été retirée. Il incitait à des pratiques de
   correspondance de time incorrects.
 - ``CakeTime::niceShort()`` a été retirée.
+- ``CakeTime::convert()`` a été retirée.
+- ``CakeTime::convertSpecifiers()`` a été retirée.
+- ``CakeTime::dayAsSql()`` a été retirée.
+- ``CakeTime::daysAsSql()`` a été retirée.
+- ``CakeTime::fromString()`` a été retirée.
+- ``CakeTime::gmt()`` a été retirée.
+- ``CakeTime::toATOM()`` a été renommée en ``toATOMString``.
+- ``CakeTime::toRSS()`` a été renommée en ``toATOMRSSString``.
+- ``CakeTime::toUnix()`` a été renommée en ``toUnixString``.
+- ``CakeTime::wasYesterday()`` a été renommée en ``isYesterday`` pour
+  correspondre aux autres noms de méthode.
+- ``CakeTime::format()`` N'utilise plus les chaînes de format sprintf, vous
+  pouvez utiliser ``i18nFormat`` à la place.
 - :php:meth:`Time::timeAgoInWords()` a maintenant besoin que ``$options`` soit
   un tableau.
+
+Time n'est plus une collection de méthodes statiques, il étend ``DateTime`` pour
+hériter de ses méthodes et ajoute la localisation des fonctions de formatage
+avec l'aide de l'extension ``intl``.
+
+En général, les expressions ressemblent à ceci::
+
+    CakeTime::aMethod($date);
+
+Peut être migré en réécrivant ceci en::
+
+    (new Time($date))->aMethod();
 
 Number
 ------
 
 - :php:meth:`Number::format()` nécessite maintenant que ``$options`` soit un
   tableau.
+
+Validation
+----------
+
+- Le range pour :php:meth:`Validation::range()` maintenant inclusif si
+  ``$lower`` et ``$upper`` sont fournies.
 
 Xml
 ---

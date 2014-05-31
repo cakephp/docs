@@ -31,7 +31,7 @@ features that all applications are likely to need. The built-in filters are:
   will handle the current request.
 
 Using Filters
-================
+=============
 
 Filters are usually enabled in your application's ``bootstrap.php`` file, but
 you could easily load them any time before the request is dispatched.  Adding
