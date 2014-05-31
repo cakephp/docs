@@ -14,10 +14,10 @@ httpd.conf (Assurez-vous que vous avez édité le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
 Ces fichiers peuvent varier selon les différentes distributions et les versions
-d'apache. Vous pouvez allez voir
+d'Apache. Vous pouvez consulter
 http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
-#. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
+#. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que AllowOverride est défini à
    All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
@@ -39,10 +39,10 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   Dans la plupart des systèmes, ceux-ci vont être commentés donc vous aurez
-   juste besoin de retirer les symboles # en début de ligne.
+   Dans la plupart des systèmes, cette ligne est commentée donc vous aurez
+   juste besoin de retirer le symbole # en début de ligne.
 
-   Après que vous avez fait des changements, re-démarrez Apache pour être sûr
+   Après avoir effectué les changements, re-démarrez Apache pour être sûr
    que les paramètres soient actifs.
 
    Vérifiez que vos fichiers .htaccess sont effectivement dans le bon
