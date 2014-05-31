@@ -32,8 +32,8 @@ réaliserons la connexion de l'utilisateur.
 La prochaine étape est de créer notre table Users, qui a la
 responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
 
-    // App/Model/Repository/UsersTable.php
-    namespace App\Model\Repository;
+    // App/Model/Table/UsersTable.php
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
