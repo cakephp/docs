@@ -892,7 +892,7 @@ Classes de Route personnalisées
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
 façon dont certaines routes parsent les demandes et de traiter le routing
 inversé. Une classe personnalisée  de route devrait être créée dans
-``app/Lib/Routing/Route`` et étendre
+``app/Routing/Route`` et étendre
 :php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou 
 ``parse()``. ``parse()`` est utilisée pour
 analyser les demandes et correspondance et ``match()`` est utilisée pour
