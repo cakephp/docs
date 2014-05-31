@@ -134,7 +134,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteRule ^ index.php [QSA,L]
        </IfModule>
        
-   Ce qui est au dessus va simplement empêcher les assets incorrects d'être
+   Ce qui est au-dessus va simplement empêcher les assets incorrects d'être
    envoyés à index.php et à la place d'afficher la page 404 de votre serveur
    web.
    
