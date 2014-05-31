@@ -3,10 +3,10 @@ Les Objets Request et Response
 
 .. php:namespace:: Cake\Network
 
-The request and response objects provide an abstraction around HTTP request and
-responses. The request object in CakePHP allows you to easily introspect an
-incoming request, while the response object allows you to effortlessly create
-HTTP responses from your controllers.
+Les objets request et response fournissent une abstraction autour de la requête
+et des réponses HTTP. L'objet request dans CakePHP vous permet de facilement
+faire une introspection de la requête entrante, tandis que l'objet response vous
+permet de créer sans effort des réponses HTTP à partir de vos controllers.
 
 .. index:: $this->request
 .. _cake-request:
@@ -14,11 +14,13 @@ HTTP responses from your controllers.
 Request
 #######
 
-:php:class:`Cake\\Network\\Request` est l'objet requête utilisé par défaut dans
+.. php:class:: Request
+
+``Request`` est l'objet requête utilisé par défaut dans
 CakePHP. Il centralise un certain nombre de fonctionnalités pour interroger et
 interagir avec les données demandées. Pour chaque requête, une Request est
 créée et passée en référence aux différentes couches de l'application que la
-requête de données utilise. Par défaut ``Request`` est assignée à
+requête de données utilise. Par défaut la requête est assignée à
 ``$this->request``, et est disponible dans les Controllers, Vues et Helpers.
 Vous pouvez aussi y accéder dans les Components en utilisant la référence du
 controller. Certaines des tâches incluses que ``Request`` permet :
@@ -32,21 +34,17 @@ controller. Certaines des tâches incluses que ``Request`` permet :
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
   et en propriétés d'un objet.
 
-Accéder aux paramètres de la requête
-====================================
+Paramètres de la requête
+========================
 
 Request propose plusieurs interfaces pour accéder aux paramètres de la
-requête. La première est par des tableaux indexés, la seconde est à travers
-``$this->request->params``, et la troisième est par des propriétés d'objets::
+requête::
 
-    $this->request->controller;
-    $this->request['controller'];
     $this->request->params['controller'];
+    $this->request->param('controller');
 
-Tout ce qui est au-dessus retournera la même valeur. Plusieurs façons d'accéder
-aux paramètres ont été faites pour faciliter la migration des applications
-existantes. Tous les éléments de route :ref:`route-elements` sont accessibles
-à travers cette interface.
+Tout ce qui est au-dessus retournera la même valeur. Tous les éléments de
+route :ref:`route-elements` sont accessibles à travers cette interface.
 
 En plus des éléments de routes :ref:`route-elements`, vous avez souvent besoin
 d'accéder aux arguments passés :ref:`passed-arguments`. Ceux-ci sont aussi tous
@@ -68,13 +66,15 @@ interne, on peut auusi les trouver dans les paramètres de la requête:
 * ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
 * ``bare`` Présent quand la requête vient de
-  :php:meth:`~Controller::requestAction()` et inclut l'option bare. Les requêtes
-  vides n'ont pas de layout de rendu.
+  :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
+  bare. Les requêtes vides n'ont pas de layout de rendu.
 * ``requested`` Présent et mis à true quand l'action vient de
-  :php:meth:`~Controller::requestAction()`.
+  :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
-Accéder aux paramètres Querystring
+Accéder aux Paramètres Querystring
 ==================================
+
+.. php:method:: query($name)
 
 Les paramètres Querystring peuvent être lus en utilisant
 :php:attr:`~Cake\\Network\\Request::$query`::
@@ -82,26 +82,23 @@ Les paramètres Querystring peuvent être lus en utilisant
     // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-    //  Vous pouvez aussi y accéder par un tableau
-    // accesseur BC, va être déprécié dans les versions futures
-    $this->request['url']['page'];
-
 Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
-utiliser php:meth:`~Cake\\Network\\Request::query()` pour lire l'URL requêtée
-d'une manière sans erreur. Toute clé qui n'existe pas va retourner ``null``::
+utiliser ``query()`` pour lire l'URL requêtée d'une manière sans erreur.
+Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
     // $foo === null
 
-Accéder aux données POST
-========================
+Données de la Requête Body
+==========================
 
-Toutes les données POST peuvent être atteintes à travers
-:php:meth:`Cake\\Network\\Request::data()`. N'importe quelle forme de tableau
-qui contient un prefixe ``data``, va avoir sa donnée prefixée retirée. Par
-exemple::
+.. php:method:: data($name)
 
-    // Un input avec un nom attribute égal à 'MyModel[title]' est accessible
+Toutes les données POST sont accessibles en utilisant
+:php:meth:`Cake\\Network\\Request::data()`. Toute données de formulaire qui
+contient un préfix ``data`` verra ce préfix data prefix retiré. Par exemple::
+
+    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible dans
     $this->request->data('MyModel.title');
 
 Toute clé qui n'existe pas va retourner ``null``::
@@ -109,22 +106,36 @@ Toute clé qui n'existe pas va retourner ``null``::
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
+Vous pouvez aussi accéder au tableau de données, comme un tableau::
+
+    $this->request->data['title'];
+    $this->request->data['comments'][1]['author'];
+
 Accéder aux données PUT, PATCH ou DELETE
 ========================================
 
+.. php:method:: input($callback, [$options])
+
 Quand vous construisez des services REST, vous acceptez souvent des données
-requêtées sur des requêtes ``PUT`` et ``DELETE``. Depuis 2.2, toute donnée
+requêtées sur des requêtes ``PUT`` et ``DELETE``. Toute donnée
 de corps de requête ``application/x-www-form-urlencoded``
 va automatiquement être parsée et définie dans ``$this->data`` pour les
 requêtes ``PUT`` et ``DELETE``. Si vous acceptez les données JSON ou XML,
 regardez ci-dessous comment vous pouvez accéder aux corps de ces requêtes.
 
+When accessing the input data, you can decode it with an optional function.
+This is useful when interacting with XML or JSON request body content.
+Additional parameters for the decoding function can be passed as arguments to
+``input()``::
+
+    $this->request->input('json_decode');
+
 Accéder / Configurer les Variables d'Environment (à partir de $_SERVER et $_ENV)
 ================================================================================
 
-.. versionadded:: 3.0
+.. php:method:: env($key, $value = null)
 
-:php:meth:`Cake\\Network\\Request::env()` est un wrapper pour la fonction
+``Request::env()`` est un wrapper pour la fonction
 globale ``env()`` et agit comme un getter/setter pour les variables
 d'environnement sans avoir à modifier les variables globales
 ``$_SERVER`` et ``$_ENV``::
@@ -164,11 +175,40 @@ L'objet request fournit aussi des informations utiles sur les chemins dans votre
 application. :php:attr:`Cake\\Network\\Request::$base` et
 :php:attr:`Cake\\Network\\Request::$webroot` sont utiles pour générer des URLs,
 et déterminer si votre application est ou n'est pas dans un sous-dossier.
+Les différents propriétés que vous pouvez utiliser sont::
+
+    // Assume the current request URL is /subdir/articles/edit/1?page=1
+
+    // Holds /subdir/articles/edit/1?page=1
+    $request->here;
+
+    // Holds /subdir
+    $request->base;
+
+    // Holds /subdir/
+    $request->webroot;
 
 .. _check-the-request:
 
 Inspecter la requête
 ====================
+
+.. php:method:: is($type)
+
+Check whether or not a Request matches a certain criterion. Uses
+the built-in detection rules as well as any additional rules defined
+with :php:meth:`Cake\\Network\\Request::addDetector()`::
+
+    // Check if the request is a POST
+    $request->is('post');
+
+    // Check if the request is from AJAX
+    $request->is('ajax');
+
+.. php:method:: addDetector($name, $options)
+
+Add a detector to be used with :php:meth:`Cake\\Network\\Request::is()`. See
+:ref:`check-the-request` for more information.
 
 L'objet request fournit une façon d'inspecter différentes conditions de la
 requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
@@ -244,62 +284,57 @@ Vous pouvez utiliser plusieurs détecteurs intégrés:
 * ``is('mobile')`` Vérifie si la requête courante vient d'une liste
   courante de mobiles.
 
-Interagir avec les autres aspects de la requête
-===============================================
+Données de Session
+==================
 
-Vous pouvez utiliser `Request` pour voir une quantité de choses sur la
-requête. Au-delà des détecteurs, vous pouvez également trouver d'autres
-informations sur les diverses propriétés et méthodes.
+To access the session for a given request use the ``session()`` method::
 
-* ``$this->request->webroot`` contient le répertoire webroot.
-* ``$this->request->base`` contient le chemin de base.
-* ``$this->request->here`` contient l'adresse complète de la requête courante.
-* ``$this->request->query`` contient les paramètres de la chaîne de requête.
+    $this->request->session()->read('User.name');
 
+For more information, see the :doc:`/development/sessions` documentation for how
+to use the session object.
 
-API de Request
-==============
-
-.. php:class:: Request
-
-    Request encapsule la gestion des paramètres de la requête, et son
-    introspection.
-
-.. php:method:: env($key, $value = null)
-
-    Getter / setter pour les variables d'environnement.
+Hôte et Nom de Domaine
+======================
 
 .. php:method:: domain($tldLength = 1)
 
     Retourne le nom de domaine sur lequel votre application tourne.
+
+    // Affiche 'example.org'
+    echo $request->domain();
 
 .. php:method:: subdomains($tldLength = 1)
 
     Retourne un tableau avec le sous-domaine sur lequel votre application
     tourne.
 
+    // Retourne ['my', 'dev'] pour 'my.dev.example.org'
+    $request->subdomains();
+
 .. php:method:: host()
 
     Retourne l'hôte où votre application tourne.
+
+    // Affiche 'my.dev.example.org'
+    echo $request->host();
+
+Travailler avec les Méthodes & Headers de HTTP
+==============================================
 
 .. php:method:: method()
 
     Retourne la méthode HTTP où la requête a été faite.
 
-.. php:method:: onlyAllow($methods)
+    // Affiche POST
+    echo $request->method();
+
+.. php:method:: allowMethod($methods)
 
     Définit les méthodes HTTP autorisées, si elles ne correspondent pas, elle
     va lancer une MethodNotAllowedException.
     La réponse 405 va inclure l'en-tête ``Allow`` nécessaire avec les méthodes
     passées.
-
-.. php:method:: referer($local = false)
-
-    Retourne l'adresse de référence de la requête.
-
-.. php:method:: clientIp($safe = true)
-
-    Retourne l'adresse IP du visiteur courant.
 
 .. php:method:: header($name)
 
@@ -309,106 +344,60 @@ API de Request
 
     Retournerait le user agent utilisé pour la requête.
 
-.. php:method:: input($callback, [$options])
+.. php:method:: referer($local = false)
 
-    Récupère les données d'entrée pour une requête, et les passe
-    optionnellement à travers une fonction qui décode. Utile lors des
-    interactions avec une requête de contenu de corps XML ou JSON. Les
-    paramètres supplémentaires pour la fonction décodant peuvent être passés
-    comme des arguments de input()::
+    Retourne l'adresse de référence de la requête.
 
-        $this->request->input('json_decode');
+.. php:method:: clientIp($safe = true)
 
-.. php:method:: data($name)
+    Retourne l'adresse IP du visiteur courant.
 
-    Fournit une notation en point pour accéder aux données requêtées. Permet
-    la lecture et la modification des données requêtées, les appels peuvent
-    aussi être chaînés ensemble::
+Faire Confiance aux Header de Proxy
+===================================
 
-        // Modifier une donnée requêtée, ainsi vous pouvez pré-enregistrer certains champs.
-        $this->request->data('Post.title', 'New post')
-            ->data('Comment.1.author', 'Mark');
-            
-        // Vous pouvez aussi lire des données.
-        $value = $this->request->data('Post.title');
+If your application is behind a load balancer or running on a cloud service, you
+will often get the load balancer host, port and scheme in your requests. Often
+load balancers will also send ``HTTP-X-Forwarded-*`` headers with the original
+values. The forwarded headers will not be used by CakePHP out of the box. To
+have the request object use these headers set the ``trustProxy`` property to
+true::
 
-.. php:method:: query($name)
+    $this->request->trustProxy = true;
 
-    Fournit un accès aux données requêtées de l'URL avec notation en point::
+    // These methods will not use the proxied headers.
+    $this->request->port();
+    $this->request->host();
+    $this->request->scheme();
+    $this->request->clientIp();
 
-        // l\'URL est /posts/index?page=1&sort=title
-        $value = $this->request->query('page');
-
-.. php:method:: is($type)
-
-    Vérifie si la requête remplit certains critères ou non. Utilisez
-    les règles de détection déjà construites ainsi que toute règle
-    supplémentaire définie dans
-    :php:meth:`Cake\\Network\\Request::addDetector()`.
-
-.. php:method:: addDetector($name, $options)
-
-    Ajoute un détecteur pour être utilisé avec :php:meth:`CakeRequest::is()`.
-    Voir :ref:`check-the-request` pour plus d'informations.
+Vérifier les Headers Accept
+===========================
 
 .. php:method:: accepts($type = null)
 
-    Trouve quels types de contenu le client accepte ou vérifie si ils acceptent
-    un type particulier de contenu.
+Trouve les types de contenu que le client accepte ou vérifie si il
+accepte un type particulier de contenu.
 
-    Récupère tous les types::
+Récupère tous les types::
 
-        $this->request->accepts();
+    $this->request->accepts();
 
-    Vérifie pour un unique type::
+Vérifie pour un unique type::
 
-        $this->request->accepts('application/json');
+    $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language = null)
 
-    Obtenir toutes les langues acceptées par le client,
-    ou alors vérifier si une langue spécifique est acceptée.
+Obtenir toutes les langues acceptées par le client,
+ou alors vérifier si une langue spécifique est acceptée.
 
-    Obtenir la liste des langues acceptées::
+Obtenir la liste des langues acceptées::
 
-        $this->request->acceptLanguage();
+    $this->request->acceptLanguage();
 
-    Vérifier si une langue spécifique est acceptée::
+Vérifier si une langue spécifique est acceptée::
 
-        $this->request->acceptLanguage('es-es');
-
-.. php:method:: param($name)
-
-    Lit les valeurs en toute sécurité dans ``$request->params``. Celle-ci
-    enlève la nécessité d'appeler ``isset()`` ou ``empty()`` avant
-    l'utilisation des valeurs de param.
-
-.. php:attr:: data
-
-    Un tableau de données POST. Vous pouvez utiliser
-    :php:meth:`Cake\\Network\\Request::data()` pour lire cette propriété
-    d'une manière qui supprime les erreurs notice.
-
-.. php:attr:: query
-
-    Un tableau des paramètres de chaîne requêtés.
-
-.. php:attr:: params
-
-    Un tableau des éléments de route et des paramètres requêtés.
-
-.. php:attr:: here
-
-    Retourne l'URL requêtée courante.
-
-.. php:attr:: base
-
-    Le chemin de base de l'application, normalement ``/``, à moins que votre
-    application soit dans un sous-répertoire.
-
-.. php:attr:: webroot
-
-    Le webroot courant.
+    $this->request->acceptLanguage('es-es');
 
 .. index:: $this->response
 
@@ -611,8 +600,6 @@ du proxy.
 
 L'en-tête de Cache Control
 --------------------------
-
-.. versionadded:: 2.1
 
 Utilisé sous le model d'expiration, cet en-tête contient de multiples
 indicateurs qui peuvent changer la façon dont les navigateurs ou les
