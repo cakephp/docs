@@ -149,7 +149,7 @@ use the ``String`` class::
     :param int $length:  The length, in characters, beyond which the text should be truncated.
     :param array $options: An array of options to use.
 
-    If ``$text`` is longer than ``$length``, this method truncates it at ``$length`` and adds a suffix
+    If ``$text`` is longer than ``$length``, this method truncates it at ``$length`` and adds a prefix
     consisting of ``'ellipsis'``, if defined. If ``'exact'``
     is passed as ``false``, the truncation will occur at the first whitespace after the
     point at which ``$length`` is exceeded. If ``'html'`` is passed as ``true``, HTML tags will be
