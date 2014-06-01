@@ -19,7 +19,7 @@ d'une ``View``, utilisez la classe ``String``::
             App::uses('String', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
-                // notifie à l'utilisateur d'un nouveau message
+                // notification à l'utilisateur d'un nouveau message
                 $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
@@ -151,14 +151,15 @@ d'une ``View``, utilisez la classe ``String``::
 .. php:method:: truncate(string $text, int $length=100, array $options)
 
     :param string $text: Le texte à tronquer.
-    :param int $length: La longueur de trim.
+    :param int $length: La longueur en caractères pour laquelle le texte doit être tronqué.
     :param array $options: Un tableau d'options à utiliser.
 
-    Coupe une chaîne avec ``$length`` et ajoute un suffixe avec
-    ``'ending'`` si le texte est plus long que ``$length``. Si ``'exact'``
-    est passé à ``false``, le truchement va se faire après le mot de fin
-    suivant. Si ``'html'`` est passé à ``true``, les balises html seront
-    respectés et ne seront pas coupés.
+    Si ``$text`` est plus long que ``$length``, cette méthode le tronque à la
+    longueur ``$length`` et ajoute un prefix ``'ellipsis'``, si défini. Si
+    ``'exact'`` est passé à ``false``, le truchement va se faire au premier
+    espace après le point où ``$length`` a dépassé. Si ``'html'``
+    est passé à ``true``, les balises html seront respectés et ne seront pas
+    coupés.
 
     ``$options`` est utilisé pour passer tous les paramètres supplémentaires,
     et a les clés suivantes possibles par défaut, celles-ci étant toutes
@@ -204,12 +205,14 @@ d'une ``View``, utilisez la classe ``String``::
 .. php:method:: tail(string $text, int $length=100, array $options)
 
     :param string $text: The text à tronquer.
-    :param int $length: La longueur de trim.
+    :param int $length: La longueur en caractères pour laquelle le texte doit être tronqué.
     :param array $options: Un tableau d'options à utiliser.
 
-    Coupe une chaîne à la longueur ``$length`` et ajoute un préfixe avec
-    ``'ellipsis'`` si le texte est plus long que ``$length``. Si ``'exact'``
-    est passé à ``false``, le truchement se fera avant le prochain mot de fin.
+    Si ``$text`` est plus long que ``$length``, cette méthode retire une
+    sous-chaîne initiale avec la longueur de la différence et ajoute un
+    suffixe ``'ellipsis'``, si il est défini. Si ``'exact'`` est passé à
+    ``false``, le truchement va se faire au premier espace avant le moment où
+    le truchement aurait été fait.
 
     ``$options`` est utilisé pour passer tous les paramètres supplémentaires,
     et a les clés possibles suivantes par défaut, toutes sont optionnelles::
