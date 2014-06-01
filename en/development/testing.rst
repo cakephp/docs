@@ -878,12 +878,12 @@ property which gives you access to the ``headers`` that would have been sent,
 allowing you to check for redirects::
 
     public function testAdd() {
-        $Articles = $this->generate('Articles', array(
-            'components' => array(
+        $Articles = $this->generate('Articles', [
+            'components' => [
                 'Session',
-                'Email' => array('send')
-            )
-        ));
+                'Email' => ['send']
+            ]
+        ]);
         $Articles->Session
             ->expects($this->once())
             ->method('setFlash');
@@ -892,20 +892,20 @@ allowing you to check for redirects::
             ->method('send')
             ->will($this->returnValue(true));
 
-        $this->testAction('/articles', array(
+        $this->testAction('/articles', [
             'method' => 'post',
-            'data' => array(
+            'data' => [
                 'title' => 'New Article'
-            )
-        ));
+            ]
+        ]);
         $this->assertContains('/articles', $this->headers['Location']);
     }
 
     public function testAddGet() {
-        $this->testAction('/articles', array(
+        $this->testAction('/articles', [
             'method' => 'GET',
             'return' => 'contents'
-        ));
+        ]);
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
