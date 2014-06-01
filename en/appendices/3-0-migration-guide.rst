@@ -596,6 +596,19 @@ ControllerTestCase
 View
 ====
 
+Themes are now Basic Plugins
+----------------------------
+
+Having themes and plugins as ways to create modular application components has
+proven to be limited, and confusing. In CakePHP 3.0, themes no longer reside
+**inside** the application. Instead they are standalone plugins. This solves
+a few problems with themes:
+
+- You could not put themes *in* plugins.
+- Themes could not provide helpers, or custom view classes.
+
+Both these issues are solved by converting themes into plugins.
+
 View Folders Renamed
 --------------------
 

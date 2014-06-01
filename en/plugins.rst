@@ -15,14 +15,14 @@ behaving much like it would if it were an application on its own.
 
 In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
 ``DebugKit``. By convention, plugins use their package name as their namespace.
-If you'd like to use a different namespace, you can configure how plugins are
-loaded.
+If you'd like to use a different namespace, you can configure the plugin
+namespace, when plugins are loaded.
 
 Installing a Plugin
 ===================
 
 Many plugins are available on `Packagist <http://packagist.org>`_
-and can be installed with ``Composer``. To install DebugKit, you
+and can be installed with ``composer``. To install DebugKit, you
 would do the following::
 
     php composer.phar require cakephp/debug_kit
@@ -55,6 +55,10 @@ following to your composer.json::
 Once added, you would need to regenerate your autoloader::
 
     $ php composer.phar dumpautoload
+
+Don't forget to specify any non-conventional namespaces when loading plugins.
+Failing to do so will result in missing class errors, as CakePHP will generate
+the incorrect class name.
 
 Loading a Plugin
 ================
@@ -192,37 +196,16 @@ Inside the plugin folder, you'll notice it looks a lot like a CakePHP
 application, and that's basically what it is. You don't have to
 include any of the folders you are not using. Some plugins might
 only define a Component and a Behavior, and in that case they can completely
-omit the 'View' directory.
+omit the 'Template' directory.
 
 A plugin can also have basically any of the other directories that your
 application can, such as Config, Console, webroot, etc.
 
-If you want to be able to access your plugin with a URL, defining an
-AppController and AppModel for the plugin is required. These two special classes
-are named after the plugin, and extend the parent application's AppController
-and AppModel. Here's what they should look like for our ContactManager example::
+Creating a Plugin Using Bake
+----------------------------
 
-    // /Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    namespace ContactManager\Controller;
-
-    use App\Controller\Controller;
-
-    class ContactManagerAppController extends AppController {
-    }
-
-    // /Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    namespace ContactManager\Model;
-
-    use App\Model\AppModel;
-
-    class ContactManagerAppModel extends AppModel {
-    }
-
-If you forgot to define these special classes, CakePHP will hand
-you "Missing Controller" errors until you've done so.
-
-Please note that the process of creating plugins can be greatly
-simplified by using the bake shell.
+The process of creating plugins can be greatly simplified by using the bake
+shell.
 
 In order to bake a plugin please use the following command::
 
@@ -236,17 +219,6 @@ of your app. For example - baking controllers::
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
 have any problems with using the command line.
-
-.. warning::
-
-    Plugins do not work as namespacing to separate code.
-    Due to PHP lacking namespaces in older versions
-    you cannot have the same class,
-    or same filename, in your plugins.
-    Even if it is two different plugins.
-    So use unique classes and filenames, possible prefixing
-    the class and filename with the plugin name.
-
 
 Plugin Controllers
 ==================
@@ -262,9 +234,9 @@ So, we place our new ContactsController in
     // /Plugin/ContactManager/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
-    use ContactManager\Controller\ContactManagerAppController;
+    use ContactManager\Controller\AppController;
 
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends AppController {
 
         public function index() {
             //...
@@ -276,10 +248,6 @@ So, we place our new ContactsController in
     This controller extends the plugin's AppController (called
     ContactManagerAppController) rather than the parent application's
     AppController.
-
-    Also note how the name of the model is prefixed with the name of
-    the plugin. This is required to differentiate between models in
-    the plugin and models in the main application.
 
 If you want to access what we've got going thus far, visit
 ``/contact_manager/contacts``. You should get a "Missing Model" error
@@ -366,10 +334,6 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
 
-Visiting ``/contact_manager/contacts`` now (given you've got a table in your
-database called 'contacts') should give us a "Missing View" error.  Let's create
-that next.
-
 
 Plugin Views
 ============
@@ -451,7 +415,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
     // Generates a url of /contact_manager/img/logo.js
     echo $this->Html->image('ContactManager.logo');
 
-Plugin assets are served using the ``AssetDispatcher`` middleware by default.
+Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.
 This is only recommended for development. In production you should
 :ref:`symlink plugin assets <symlink-assets>` to improve performance.
 
