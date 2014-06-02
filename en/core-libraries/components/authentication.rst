@@ -11,6 +11,16 @@ ways of identifying and checking user authorization.
 
 .. _authentication-objects:
 
+Suggested reading before reading this article
+---------------------------------------------
+
+Configuring Authentication requires several steps including defining
+a users table, creating a model, controller & views, etc...
+
+This is all covered step by step in the Blog Tutorial, specifically 
+http://book.cakephp.org/2.0/en/tutorials-and-examples/blog-auth-example/auth.html
+
+
 Authentication
 ==============
 
