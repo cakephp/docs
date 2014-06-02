@@ -33,44 +33,44 @@ Si vous ne faîtes rien de plus, ces deux bouts de codes donneront un résultat
 identique - ils renverront le même contenu au navigateur.
 La fonction :php:func:`__()` traduira la chaîne passée si une
 traduction est disponible, sinon elle la renverra non modifiée.
-Cela fonctionne exactement comme les autres implémentations Gettext
+Cela fonctionne exactement comme les autres implémentations
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_
-(comme les autres fonctions de traductions, comme
-:php:func:`__d()` , :php:func:`__n()` etc).
+(ainsi que les autres fonctions de traductions, comme :php:func:`__d()` ,
+:php:func:`__n()` etc...).
 
 Après avoir préparé votre code pour le multi-langue, l'étape suivante
-est de créer votre fichier pot
-`pot file <http://en.wikipedia.org/wiki/Gettext>`_,
+est de créer votre
+`fichier pot <http://en.wikipedia.org/wiki/Gettext>`_,
 qui est le template pour toutes les chaînes traduisibles de votre application.
 Pour générer votre (vos) fichier(s) pot, tout ce que vous avez à faire est de
-lancer la tâche i18n :doc:`i18n console task </console-and-shells>` de la
-console Cake, qui va chercher partout dans votre code où vous avez utilisé une
-fonction de traduction, et générer le(s) fichier(s) pot pour vous.
-Vous pouvez (et devez) relancer cette tâche console à chaque fois
-que vous changez les chaînes traduisibles dans votre code.
+lancer la :doc:`tâche i18n de la console Cake</console-and-shells>`, qui va
+chercher partout dans votre code où vous avez utilisé une fonction de
+traduction, et générer le(s) fichier(s) pot pour vous. Vous pouvez (et devez)
+relancer cette tâche console à chaque fois que vous changez les chaînes
+traduisibles dans votre code.
 
 Le(s) fichier(s) pot eux mêmes ne sont pas utilisés par CakePHP, ils sont les
-templates utilisés pour créer ou mettre à jour vos fichiers po,
-`po files <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
+templates utilisés pour créer ou mettre à jour vos
+`fichiers po <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
 traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
 
-    /app/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /App/Locale/<locale>/LC_MESSAGES/<domain>.po
 
-Le domaine par défaut est 'default', donc votre dossier "locale"
+Le domaine par défaut est 'default', donc votre dossier locale
 devrait ressembler à cela::
 
-    /app/Locale/eng/LC_MESSAGES/default.po (Anglais)   
-    /app/Locale/fra/LC_MESSAGES/default.po (Français)   
-    /app/Locale/por/LC_MESSAGES/default.po (Portugais) 
+    /App/Locale/eng/LC_MESSAGES/default.po (Anglais)   
+    /App/Locale/fra/LC_MESSAGES/default.po (Français)   
+    /App/Locale/por/LC_MESSAGES/default.po (Portugais) 
 
-Pour créer ou éditer vos fichiers po, il est recommandé de ne pas utiliser
+Pour créer ou éditer vos fichiers po, il est recommandé de *ne pas* utiliser
 votre éditeur de texte préféré. Pour créer un fichier po pour la première fois,
 il est possible de copier le fichier pot à l'endroit correct et de changer
 l'extension. *Cependant*, à moins que vous ne soyez familiarisé avec leur
 format, il est très facile de créer un fichier po invalide, ou de le sauver
 dans un mauvais encodage de caractères (si vous éditez ces fichiers
 manuellement, utilisez l'UTF-8 pour éviter les problèmes). Il y a des outils
-gratuits tel que PoEdit `PoEdit <http://www.poedit.net>`_ qui rendent les
+gratuits tel que `PoEdit <http://www.poedit.net>`_ qui rendent les
 tâches d'édition et de mise à jour de vos fichiers po vraiment simples,
 spécialement pour la mise à jour d'un fichier po existant avec un fichier pot
 nouvellement mis à jour.
@@ -240,19 +240,19 @@ validation dynamiques::
 
         public $validationDomain = 'validation';
 
-        public $validate = array(
-            'username' => array(
-                    'length' => array(
-                    'rule' => array('between', 2, 10),
+        public $validate = [
+            'username' => [
+                    'length' => [
+                    'rule' => ['between', 2, 1],
                     'message' => 'Username devrait être entre %d et %d caractères'
-                )
-            )
-        )
+                ]
+            ]
+        ];
     }
 
 Ce qui va faire l'appel interne suivant::
 
-    __d('validation', 'Username devrait être entre %d et %d caractères', array(2, 10));
+    __d('validation', 'Username devrait être entre %d et %d caractères', [2, 10]);
 
 
 .. meta::

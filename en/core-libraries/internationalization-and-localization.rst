@@ -225,19 +225,19 @@ function. This allows you to create dynamic validation messages::
 
         public $validationDomain = 'validation';
 
-        public $validate = array(
-            'username' => array(
-                    'length' => array(
-                    'rule' => array('between', 2, 10),
+        public $validate = [
+            'username' => [
+                    'length' => [
+                    'rule' => ['between', 2, 10],
                     'message' => 'Username should be between %d and %d characters'
-                )
-            )
-        )
+                ]
+            ]
+        ];
     }
 
 Which will do the following internal call::
 
-    __d('validation', 'Username should be between %d and %d characters', array(2, 10));
+    __d('validation', 'Username should be between %d and %d characters', [2, 10]);
 
 .. meta::
     :title lang=en: Internationalization & Localization
