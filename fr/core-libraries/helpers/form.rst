@@ -364,28 +364,22 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     ``'novalidate' => true`` dans les options pour
     :php:meth:`FormHelper::create()`.
 
-   Par exemple, supposons que votre model User contient les champs
-   username (varchar), password (varchar), approved (datetime) et quote (text).
-   Vous pouvez utiliser la méthode input() de l'Helper Formulaire (Formhelper)
-   pour créer une entrée appropriée pour tous les champs du formulaire.::
+    Par exemple, supposons que votre model User contient les champs
+    username (varchar), password (varchar), approved (datetime) et quote (text).
+    Vous pouvez utiliser la méthode input() de l'Helper Formulaire (Formhelper)
+    pour créer une entrée appropriée pour tous les champs du formulaire.::
 
-       echo $this->Form->create();
-       // text
-       echo $this->Form->input('username');
+        echo $this->Form->create();
 
-       // password
-       echo $this->Form->input('password');
+        echo $this->Form->input('username');   //text
+        echo $this->Form->input('password');   //password
+        echo $this->Form->input('approved');   //day, month, year, hour, minute,
+                                               //meridian
+        echo $this->Form->input('quote');      //textarea
 
-       // day, month, year, hour, minute, meridian
-       echo $this->Form->input('approved');
+        echo $this->Form->end('Add');
 
-       //textarea
-       echo $this->Form->input('quote');
-
-       echo $this->Form->end('Add');
-
-
-    Un exemple plus complet montrant quelques options pour le champ de date ::
+    Un exemple plus complet montrant quelques options pour le champ de date::
 
         echo $this->Form->input('birth_dt', array(
             'label' => 'Date de naissance',
