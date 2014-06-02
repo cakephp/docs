@@ -655,6 +655,21 @@ ControllerTestCase
 View
 ====
 
+Les Themes sont maintenant purement des Plugins
+-----------------------------------------------
+
+Avoir des themes et des plugins comme façon de créer des composants
+d'applications modulaires nous semblait limité et cela apportait de la
+confusion. Dans CakePHP 3.0, les themes ne se trouvent plus **dans**
+l'application. A la place, ce sont des plugins autonomes. Cela résoud certains
+problèmes liés aux themes:
+
+- Vous ne pouviez pas mettre les themes *dans* les plugins.
+- Les Themes ne pouvaient pas fournir de helpers, ou de classes de vue
+  personnalisée.
+
+Ces deux problèmes sont résolus en convertissant les themes en plugins.
+
 Les Dossiers de View Renommés
 -----------------------------
 

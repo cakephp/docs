@@ -2,7 +2,12 @@ Themes
 ######
 
 Vous pouvez profiter des themes, ce qui facilite le changement du visuel et
-du ressenti de votre page rapidement et facilement.
+du ressenti de votre page rapidement et facilement. Les Themes dans CakePHP
+sont simplement des plugins qui se focalisent sur la livraison de fichiers
+de vues. En plus des fichiers de template, ils peuvent fournir des helpers et
+des cells si votre theme le nécessite. Quand vous utilisez des cells et des
+helpers à partir de votre theme, vous devrez continuer à utiliser la
+:term:`plugin-syntax`
 
 Pour utiliser les themes, spécifiez le nom du theme dans votre controller::
 
@@ -15,71 +20,45 @@ dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::
 
     $this->theme = 'AutreExemple';
 
-Les fichiers de vue du theme ont besoin d'être dans le dossier
-``/App/Template/Themed/``. Dans le dossier du theme, créez un dossier utilisant
-le même nom que le nom de votre theme. Par exemple, Le theme ci-dessus serait
-trouvé dans ``/App/Template/Themed/AnotherExample``. Il est important de se
-souvenir que CakePHP attend des noms de theme en CamelCase. Au-delà de ça, la
-structure de dossier dans le dossier ``/App/Template/Themed/Example/`` est
-exactement le même que ``/App/Template/``.
+Les fichiers de vue du theme doivent être dans un plugin avec le même nom. Par
+exemple, le theme ci-dessus se trouvera dans
+``/Plugin/AnotherExample/Template``. Il est important de se rappeler que
+CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
+cela, la structure de dossier dans le dossier ``/Plugin/Example/Template`` est
+exactement la même que ``/App/Template/``.
 
-Par exemple, le fichier de vue pour une action edit d'un controller Posts
-se trouvera dans ``/App/Template/Themed/Example/Posts/edit.ctp``. Les fichiers
-de Layout se trouveront dans ``/App/Template/Themed/Example/Layout/``.
+Par exemple, le fichier de vue pour une action edit d'un controller Posts se
+trouvera dans ``/Plugin/Example/Templte/Posts/edit.ctp``. Les fichiers de layout
+se trouveront dans ``/Plugin/Example/Template/Layout/``.
 
-Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va
-essayer de localiser le fichier de vue dans le dossier ``/App/Template/``.
-De cette façon, vous pouvez créer des fichiers de vue master et simplement
-les remplacer au cas par cas au sein de votre dossier de theme.
+Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va essayer
+de le trouver dans le dossier ``/App/Template/``. De cette façon, vous pouvez
+créer les fichiers de vue principaux et simplement les surcharger au cas par
+cas dans votre dossier theme.
 
 Assets du theme
 ---------------
 
-Les themes peuvent contenir des assets statiques ainsi que des fichiers de vue.
-Un theme peut inclure tout asset nécessaire dans son répertoire webroot. Cela
-permet un packaging facile et une distribution des themes. Pendant le
-développement, les requêtes pour les assets du theme seront gérés par
-:php:class:`Dispatcher`. Pour améliorer la performance des environnements de
-production, il est recommandé, soit que vous fassiez un lien symbolique, soit
-que vous copiez les assets du theme dans le webroot de application. Voir
-ci-dessous pour plus d'informations.
+Puisque les themes sont des plugins CakePHP standards, ils peuvent inclure
+tout asset nécessaire dans leur répertoire webroot. Cela permet de facilement
+packager et distribuer les themes. En development, les requêtes pour les assets
+de theme seront gérés par :php:class:`Cake\\Routing\\Dispatcher`. Pour améliorer
+les performances pour les environnements de production, il est recommandé
+de :ref:`symlink-assets`.
 
-Pour utiliser le nouveau theme, créez des répertoires de type
-``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>`` dans votre theme.
-Le Dispatcher se chargera de trouver les assets du theme corrects dans vos
-chemins de vue.
+Tous les helpers intégrés à CakePHP connaissent les themes et seront créés
+avec les bons chemins automatiquement. Comme les fichiers de vue, si un fichier
+n'est pas dans le dossier du theme, il va chercher par défaut dans le dossier
+webroot principal::
 
-Tous les helpers integrés dans CakePHP ont intégrés l'existence des themes
-et vont créer des chemins d'accès corrects automatiquement. Comme pour les
-fichiers de vue, si un fichier n'est pas dans le dossier du theme, il sera
-par défaut dans le dossier principal webroot ::
-
-    //Quand dans un theme avec un nom de 'purple_cupcake'
+    //Quand un theme avec le nom de 'purple_cupcake'
     $this->Html->css('main.css');
 
-    //crée un chemin comme
-    /theme/purple_cupcake/css/main.css
+    //Créé un chemin comme
+    /purple_cupcake/css/main.css
 
-    //et fait un lien vers
-    app/Template/Themed/PurpleCupcake/webroot/css/main.css
-
-Augmenter la performance des assets du plug-in et du theme
-----------------------------------------------------------
-
-C'est un fait bien connu que de servir les assets par le biais de PHP est
-assuré d'être plus lent que de servir ces assets sans invoquer PHP. Et
-tandis que l'équipe du coeur a pris des mesures pour rendre le plugin et
-l'asset du theme servis aussi rapide que possible, il peut y avoir des
-situations où plus de performance est requis. Dans ces situations, il
-est recommandé soit que vous fassiez un lien symbolique soit que vous
-fassiez une copie sur les assets du plug-in/theme vers des répertoires
-dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par
-cakephp.
-
--  ``App/Plugin/DebugKit/webroot/js/my_file.js`` devient
-   ``App/webroot/DebugKit/js/my_file.js``.
--  ``App/View/Themed/Navy/webroot/css/navy.css`` devient
-   ``App/webroot/themed/Navy/css/navy.css``.
+    // et les liens vers
+    Plugin/PurpleCupcake/webroot/css/main.css
 
 
 .. meta::

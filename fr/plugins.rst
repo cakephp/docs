@@ -14,15 +14,15 @@ données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
 comme il l'aurait fait si il était une application à part entière.
 
 Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
-``DebugKit``. By convention, plugins use their package name as their namespace.
-If you'd like to use a different namespace, you can configure how plugins are
-loaded.
+``DebugKit``. Par convention, les plugins utilisent leur nom de package pour
+leur namespace. Si vous souhaitez utiliser un namespace différent, vous pouvez
+configurer le namespace du plugin, quand les plugins sont chargés.
 
 Installer un Plugin
 ===================
 
 Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
-et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
+et peuvent être installés avec ``composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
@@ -57,6 +57,10 @@ Une fois ajouté, vous aurez besoin de regénérer votre autoloader::
 
     $ php composer.phar dumpautoload
 
+N'oubliez pas de spécifier tout namespace non-conventionnel lors du chargement
+des plugins. Ne pas le faire va entraîner des erreurs de classe manquante,
+puisque CakePHP va générer le nom de la classe incorrect.
+
 Charger un Plugin
 =================
 
@@ -67,12 +71,12 @@ coup avec une méthode unique::
     // Charge un Plugin unique
     Plugin::load('ContactManager');
 
-    // Loads a single plugin, with a custom namespace.
+    // Charge un plugin unique, avec un namespace personnalisé.
     Plugin::load('ContactManager', [
         'namespace' => 'AcmeCorp\ContactManager'
     ]);
 
-    // Loads all plugins at once
+    // Charge tous les plugins en premier
     Plugin::loadAll();
 
 ``loadAll()`` charge tous les plugins disponibles, vous permettant de définir
@@ -200,38 +204,16 @@ Dans le dossier plugin, vous remarquerez qu'il ressemble beaucoup à une
 application CakePHP, et c'est au fond ce que c'est. Vous n'avez à inclure
 aucun de vos dossiers si vous ne les utilisez pas. Certains plugins peuvent
 ne contenir qu'un Component ou un Behavior, et dans certains cas, ils peuvent
-carrément ne pas avoir de répertoire 'View'.
+carrément ne pas avoir de répertoire 'Template'.
 
 Un plugin peut aussi avoir tous les autres répertoires que votre application a,
 comme Config, Console, Lib, webroot, etc...
 
-Si vous souhaitez être capable d'accéder à votre plugin avec une URL,
-définir un AppController et AppModel pour le plugin est nécessaire. Ces deux
-classes spéciales sont nommées d'après le plugin, et étendent les parents de
-l'application AppController et AppModel. Voilà à quoi ils devraient ressembler
-pour notre exemple ContactManager::
+Créer un Plugin en utilisant Bake
+---------------------------------
 
-    // /Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    namespace ContactManager\Controller;
-
-    use App\Controller\Controller;
-
-    class ContactManagerAppController extends AppController {
-    }
-
-    // /Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    namespace ContactManager\Model;
-
-    use App\Model\AppModel;
-
-    class ContactManagerAppModel extends AppModel {
-    }
-
-Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
-des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
-
-Merci de noter que le processus de création de plugins peut être grandement
-simplifié en utilisant le shell bake de CakePHP.
+Le processus de création des plugins peut être grandement simplifié en utilisant
+le shell bake.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 
@@ -245,15 +227,6 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
 Merci de vous référer au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande.
-
-.. warning::
-
-    Les Plugins ne fonctionnent pas en namespace pour séparer le code.
-    A cause du manque de namespaces de PHP dans les versions plus vieilles, vous
-    ne pouvez pas avoir la même classe ou le même nom de fichier dans vos
-    plugins. Même si il s'agit de deux plugins différents. Donc utilisez des
-    classes et des noms de fichier uniques, en préfixant si possible la classe
-    et le nom de fichier par le nom du plugin.
 
 Controllers du Plugin
 =====================
@@ -269,9 +242,9 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     // /Plugin/ContactManager/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
-    use ContactManager\Controller\ContactManagerAppController;
+    use ContactManager\Controller\AppController;
 
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends AppController {
 
         public function index() {
             //...
@@ -284,11 +257,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     ContactManagerAppController) plutôt que l'AppController de l'application
     parente.
 
-    Notez aussi comment le nom du model est préfixé avec le nom du plugin.
-    C'est nécessaire pour faire la différence entre les models dans les
-    plugins et les models dans l'application principale.
-
-If you want to access what we've got going thus far, visitez
+Si vous souhaitez accéder à ce qu'on a fait avant, visitez
 ``/contact_manager/contacts``. Vous aurez une erreur "Missing Model"
 parce que nous n'avons pas de model Contact encore défini.
 
@@ -374,10 +343,6 @@ en utilisant l'habituelle :term:`plugin syntax`::
     use Cake\ORM\TableRegistry;
 
     $contacts = TableRegistry::get('ContactManager.Contacts');
-
-Allez sur ``/contact_manager/contacts`` maintenant (si vous avez une table dans
-votre base de données appelée 'contacts') devrait vous donner une erreur
-"Missing View". Créons donc ensuite la vue.
 
 Vues du Plugin
 ==============
@@ -465,10 +430,10 @@ en utilisant les méthodes script, image ou css de
     // Génére une url de /contact_manager/img/logo.js
     echo $this->Html->image('ContactManager.logo');
 
-Les assets de Plugin sont servis en utilisant ``AssetDispatcher`` middleware par
-défaut. C'est seulement recommandé pour le développement. En production vous
-devrez :ref:`symlink-assets <symlink plugin assets>` pour améliorer la
-performance.
+Les assets de Plugin sont servis en utilisant le filtre du dispatcheur
+``AssetFilter`` par défaut. C'est seulement recommandé pour le développement.
+En production vous devrez :ref:`symlink-assets <symlink plugin assets>` pour
+améliorer la performance.
 
 Si vous n'utilisez pas les helpers, vous pouvez préfixer /plugin_name/ au
 début de l'URL pour servir un asset du plugin . Lier avec
