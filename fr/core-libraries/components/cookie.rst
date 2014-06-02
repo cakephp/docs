@@ -167,9 +167,6 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     Vous permet de changer le schéma de chiffrement. Vous pouvez utiliser soit
     le schema 'rijndael', soit le schema 'aes'. Par défaut à 'aes'.
 
-    .. versionadded:: 2.5
-        Le type 'aes' a été ajouté.
-
 
 .. meta::
     :title lang=fr: Cookie
