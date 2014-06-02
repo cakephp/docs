@@ -7,22 +7,22 @@ Collections
 
 .. php:class:: Collection
 
-Les classe collection fournissent un ensemble d'outils pour manipuler les
+Les classes collection fournissent un ensemble d'outils pour manipuler les
 tableaux ou les objets ``Traversable``. Si vous avez déjà utilisé
 underscore.js, vous avez une idée de ce que vous pouvez attendre des classes
 collection.
 
-Les instances Collection sont immutables, en modifiant une collection va
-générer will instead generate
-a new collection. This makes working with collection objects more predictable as
-operations are side-effect free.
+Les instances Collection sont immutables, modifier une collection va plutôt
+générer une nouvelle collection. Cela rend le travail avec les objets collection
+plus prévisible puisque les opérations sont sans effets collatéraux.
 
-Quick Example
-=============
+Exemple Rapide
+==============
 
-Collections can be created using an array or Traversable object. You'll also
-interact with collections every time you interact with the ORM in CakePHP.
-A simple use of a Collection would be::
+Les Collections peuvent être créées en utilisant un tableau ou un objet
+Traversable. Vous allez aussi interagir avec les collections à chaque fois que
+vous faites une interaction avec l'ORM de CakePHP. Une utilisation simple de
+Collection serait::
 
     use Cake\Collection\Collection;
 
@@ -35,26 +35,27 @@ A simple use of a Collection would be::
         return $value > 1;
     });
 
-The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
-collection like features into any Traversable object you have in your
-application as well.
+:php:trait:`~Cake\\Collection\\CollectionTrait` vous permet d'intégrer
+collection en tant que fonctionnalité dans tout objet Traversable que vous
+avez aussi dans votre application.
 
-Iterating
-=========
+Faire une Itération
+===================
 
-Collections can be iterated and or transformed into new collections with the
-``each`` and ``map`` methods. The ``each`` method will not create a new
-collection, but will allow you to modify any objects within the collection::
+Les Collections peuvent être itérées et ou transformées en nouvelles
+collections avec les méthodes ``each`` et ``map``. La méthode ``each`` ne va
+pas créer une nouvelle collection, mais va vous permettre de modifier tout
+objet dans collection::
 
     $collection = new Collection($items);
     $collection = $collection->each(function($value, $key) {
         echo "Element $key: $value";
     });
 
-The return of ``each()`` will be the collection object. Each will iterate the
-collection immediately applying the callback to each value in the collection.
-The ``map()`` method will create a new collection based on the output of the
-callback being applied to each object in the original collection::
+Le retour de ``each()`` sera un objet collection. Chacun va itérer la collection
+immédiatemment en appliquant le callback pour chaque valeur dans collection.
+La méthode ``map()`` va créer une nouvelle collection basée sur la sortie du
+callback étant appliqué à chaque objet dans la collection originelle::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
@@ -63,14 +64,14 @@ callback being applied to each object in the original collection::
         return $value * 2;
     });
 
-    // $result contains [2, 4, 6];
+    // $result contient [2, 4, 6];
     $result = $new->toArray();
 
-The ``map()`` method will create a new iterator, that lazily creates
-the resulting items when iterated.
+La méthode ``map()`` va créer un nouvel itérateur, qui va créer automatiquement
+les objets résultants quand ils sont itérés.
 
-Filtering
-=========
+Filtrer
+=======
 
 Collections make it easy to filter and create new collections based on
 the result of callback functions. You can use ``filter()`` to create a new
@@ -527,5 +528,5 @@ Now when the those 2 collections are iterated, they will only call the
 extracting operation once.
 
 .. meta::
-    :title lang=en: Collections
-    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert
+    :title lang=fr: Collections
+    :keywords lang=fr: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert
