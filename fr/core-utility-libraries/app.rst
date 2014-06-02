@@ -15,7 +15,7 @@ Trouver les Classes
 
     Cette méthode est utilisée pour trouver les noms de classe dans CakePHP.
     Elle retrouve les noms courts que CakePHP utilise et retourne le nom de
-    classe entier.
+    classe entier::
 
         // Retourne un nom de classe court avec le namespace + suffix
         App::classname('Auth', 'Controller/Component', 'Component');
