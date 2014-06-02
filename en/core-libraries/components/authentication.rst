@@ -1,7 +1,7 @@
 Authentication
 ##############
 
-.. php:class:: AuthComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
 Identifying, authenticating and authorizing users is a common part of
 almost every web application. In CakePHP AuthComponent provides a
@@ -94,7 +94,7 @@ keys.
 - ``fields`` The fields to use to identify a user by.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
-  authenticating users, i.e. ``array('User.is_active' => 1)``.
+  authenticating users, i.e. ``['User.is_active' => 1]``.
 - ``passwordHasher`` Password hasher class. Defaults to ``Blowfish``.
 
 To configure different fields for user in ``$components`` array::
@@ -167,7 +167,7 @@ working with a login form could look like::
                 $this->Session->setFlash(
                     __('Username or password is incorrect'),
                     'default',
-                    array(),
+                    [],
                     'auth'
                 );
             }
@@ -228,10 +228,10 @@ Using Custom Authentication Objects
 Once you've created your custom authentication object, you can use them
 by including them in AuthComponents authenticate array::
 
-    $this->Auth->authenticate = array(
+    $this->Auth->authenticate = [
         'Openid', // app authentication object.
         'AuthBag.Combo', // plugin authentication object.
-    );
+    ];
 
 Creating Stateless Authentication Systems
 -----------------------------------------
@@ -292,7 +292,7 @@ AuthComponent uses for setting flash messages. The available keys are
 
 - ``element`` - The element to use, defaults to 'default'.
 - ``key`` - The key to use, defaults to 'auth'
-- ``params`` - The array of additional params to use, defaults to array()
+- ``params`` - The array of additional params to use, defaults to []
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or
@@ -323,18 +323,18 @@ array with key ``className`` stating the class name and any extra keys will be
 passed to password hasher constructor as config. As of 3.0 the default hasher
 class is ``Blowfish``. You can use alternate hashing schemes like this::
 
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => array(
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
                         'className' => 'Simple',
                         'hashType' => 'sha256'
-                    )
-                )
-            )
-        )
-    );
+                    ]
+                ]
+            ]
+        ]
+    ];
 
 When creating new user records you can hash a password in the beforeSave
 callback of your model using appropriate password hasher class::
@@ -342,7 +342,7 @@ callback of your model using appropriate password hasher class::
     App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
-        public function beforeSave($options = array()) {
+        public function beforeSave($options = []) {
             if (!$this->id) {
                 $passwordHasher = new BlowfishPasswordHasher();
                 $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
@@ -366,7 +366,7 @@ recommended that you store the digest password in a separate column,
 from the normal password hash::
 
     class User extends AppModel {
-        public function beforeSave($options = array()) {
+        public function beforeSave($options = []) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
                 $this->data['User']['username'],
@@ -419,7 +419,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
             $id = $this->User->id;
             $this->request->data['User'] = array_merge(
                 $this->request->data['User'],
-                array('id' => $id)
+                ['id' => $id]
             );
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
@@ -641,9 +641,9 @@ the request. The callback is passed the active user, so it can be
 checked::
 
     class AppController extends Controller {
-        public $components = array(
-            'Auth' => array('authorize' => 'Controller'),
-        );
+        public $components = [
+            'Auth' => ['authorize' => 'Controller'],
+        ];
         public function isAuthorized($user = null) {
             // Any registered user can access public functions
             if (empty($this->request->params['admin'])) {
@@ -698,10 +698,10 @@ map actions -> CRUD permissions using mapAction(). Calling this on
 AuthComponent will delegate to all the of the configured authorize
 objects, so you can be sure the settings were applied every where::
 
-    $this->Auth->mapActions(array(
-        'create' => array('register'),
-        'view' => array('show', 'display')
-    ));
+    $this->Auth->mapActions([
+        'create' => ['register'],
+        'view' => ['show', 'display']
+    ]);
 
 The keys for mapActions should be the CRUD permissions you want to set,
 while the values should be an array of all the actions that are mapped
@@ -742,7 +742,7 @@ flash
 
     - ``element`` - The element to use, defaults to 'default'.
     - ``key`` - The key to use, defaults to 'auth'
-    - ``params`` - The array of additional params to use, defaults to array()
+    - ``params`` - The array of additional params to use, defaults to []
 
 loginAction
     A URL (defined as a string or array) to the controller action that handles
@@ -833,7 +833,7 @@ unauthorizedRedirect
 
     Logs out the current user.
 
-.. php:method:: mapActions($map = array())
+.. php:method:: mapActions($map = [])
 
     Maps action names to CRUD operations. Used for controller-based
     authentication. Make sure to configure the authorize property before

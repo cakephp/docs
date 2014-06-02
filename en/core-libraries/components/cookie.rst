@@ -1,7 +1,7 @@
 Cookie
 ######
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: CookieComponent(ComponentCollection $collection, array $config = [])
 
 The CookieComponent is a wrapper around the native PHP ``setcookie``
 method. It also includes a host of delicious icing to make coding
@@ -64,7 +64,7 @@ named 'baker\_id' for the domain 'example.com' which needs a secure connection,
 is available on the path '/bakers/preferences/', expires in one hour and is HTTP
 only::
 
-    public $components = array('Cookie');
+    public $components = ['Cookie'];
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -101,7 +101,7 @@ The CookieComponent offers a number of methods for working with Cookies.
     you can pass an array::
 
         $this->Cookie->write('User',
-            array('name' => 'Larry', 'role' => 'Lead')
+            ['name' => 'Larry', 'role' => 'Lead']
         );
 
     All values in the cookie are encrypted by default. If you want to
@@ -136,7 +136,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         // using the dot notation as an array use the following
         $this->Cookie->read('User');
 
-        // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
+        // this outputs something like ['name' => 'Larry', 'role' => 'Lead']
 
 .. php:method:: check($key)
 

@@ -1,7 +1,7 @@
 Authentification
 ################
 
-.. php:class:: AuthComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
 Identifier, authentifier et autoriser des utilisateurs constitue une
 partie courante de nombreuses applications Web. Le component Auth de
@@ -105,7 +105,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
+  l'authentification des utilisateurs, ex ``['User.is_active' => 1]``.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Blowfish``.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
@@ -182,7 +182,7 @@ Une simple fonction de connexion pourrait ressembler à cela ::
                 $this->Session->setFlash(
                     __('Username ou password est incorrect'),
                     'default',
-                    array(),
+                    [],
                     'auth'
                 );
             }
@@ -250,10 +250,10 @@ Utilisation d'objets d'authentification personnalisés
 Une fois votre objet d'authentification créer, vous pouvez les utiliser
 en les incluant dans le tableau d'authentification AuthComponents::
 
-    $this->Auth->authenticate = array(
+    $this->Auth->authenticate = [
         'Openid', // objet d'authentification app
         'AuthBag.Combo', // plugin objet d'identification.
-    );
+    ];
 
 Création de systèmes d'authentification stateless
 -------------------------------------------------
@@ -320,7 +320,7 @@ envoyer des messages flash. Les clés disponibles sont :
 
 - ``element`` - L'élément à utiliser , 'default' par défaut.
 - ``key`` - La clé a utiliser , 'auth' par défaut
-- ``params`` - Le tableau des paramètres additionnels à utiliser, array() par défaut
+- ``params`` - Le tableau des paramètres additionnels à utiliser, [] par défaut
 
 En plus des paramètres de message flash, vous pouvez personnaliser d'autres
 messages d'erreurs que le component AuthComponent utilise. Dans la partie
@@ -352,18 +352,18 @@ passed to password hasher constructor as config. The default hasher class
 ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash type
 set in Security class will be used. You can use specific hash type like this::
 
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => array(
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
                         'className' => 'Simple',
                         'hashType' => 'sha256'
-                    )
-                )
-            )
-        )
-    );
+                    ]
+                ]
+            ]
+        ]
+    ];
 
 Lors de la création de nouveaux enregistrements d'utilisateurs, vous pouvez
 hasher un mot de passe dans le callback beforeSave de votre model en utilisant
@@ -372,7 +372,7 @@ la classe de hasher de mot de passe appropriée::
     App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
-        public function beforeSave($options = array()) {
+        public function beforeSave($options = []) {
             if (!$this->id) {
                 $passwordHasher = new BlowfishPasswordHasher();
                 $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
@@ -398,7 +398,7 @@ est aussi recommandé de stocker le mot de passe  Digest dans une colonne
 séparée, pour le hachage normal de mot de passe::
 
     class User extends AppModel {
-        public function beforeSave($options = array()) {
+        public function beforeSave($options = []) {
             // fabrique un mot de passe pour l'auth Digest.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
                 $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
@@ -450,7 +450,7 @@ utilisateur que vous voulez pour la 'connexion'::
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
+            $this->request->data['User'] = array_merge($this->request->data['User'], ['id' => $id]);
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
         }
@@ -638,7 +638,7 @@ n'autorisera la vérification des objets ::
     $this->Auth->allow('view', 'index');
 
     // Ne permet que les actions view et index.
-    $this->Auth->allow(array('view', 'index'));
+    $this->Auth->allow(['view', 'index']);
 
 Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``allow()``.
 Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
@@ -658,7 +658,7 @@ accès publics. Vous pouvez le faire en utilisant ``AuthComponent::deny()``::
 
     // retire un groupe d'actions.
     $this->Auth->deny('add', 'edit');
-    $this->Auth->deny(array('add', 'edit'));
+    $this->Auth->deny(['add', 'edit']);
 
 Vous pouvez fournir autant de noms d'action que vous voulez à ``deny()``.
 Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
@@ -678,9 +678,9 @@ ressources de la requête. Le callback est passé à l'utilisateur actif, il
 peut donc être vérifié::
 
     class AppController extends Controller {
-        public $components = array(
-            'Auth' => array('authorize' => 'Controller'),
-        );
+        public $components = [
+            'Auth' => ['authorize' => 'Controller'],
+        ];
         public function isAuthorized($user = null) {
             // Chacun des utilisateur enregistré peut accéder aux fonctions publiques
             if (empty($this->request->params['admin'])) {
@@ -736,10 +736,10 @@ utilisant mapAction(). En l'appelant dans le component Auth vous
 déléguerez toutes les actions aux objets authorize configurés, ainsi vous
 pouvez être sûr que le paramétrage sera appliqué partout::
 
-    $this->Auth->mapActions(array(
-        'create' => array('register'),
-        'view' => array('show', 'display')
-    ));
+    $this->Auth->mapActions([
+        'create' => ['register'],
+        'view' => ['show', 'display']
+    ]);
 
 La clé pour mapActions devra être les permissions CRUD que vous voulez
 définir, tandis que les valeurs devront être un tableau de toutes les
@@ -780,7 +780,7 @@ flash
     - ``element`` - L'élement à utiliser , par défaut à 'default'.
     - ``key`` - La clé à utiliser, par défaut à 'auth'.
     - ``params`` - Un tableau de paramètres supplémentaires à utiliser par
-      défaut à array()
+      défaut à []
 
 loginAction
     Une URL (définie comme une chaîne de caractères ou un tableau) pour
@@ -878,7 +878,7 @@ unauthorizedRedirect
 
     Déconnecte l'utilisateur actuel.
 
-.. php:method:: mapActions($map = array())
+.. php:method:: mapActions($map = [])
 
     Mappe les noms d'action aux opérations CRUD. Utilisé par les
     authentifications basées sur le controller. Assurez-vous d'avoir

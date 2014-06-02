@@ -1,7 +1,7 @@
 Security
 ########
 
-.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
 The Security Component creates an easy way to integrate tighter
 security in your application. It provides methods for various tasks like:
@@ -149,7 +149,7 @@ want and the Security Component will enforce them on its startup::
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             $this->Security->requirePost('delete');
@@ -161,7 +161,7 @@ triggered if it receives a POST request::
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
@@ -175,7 +175,7 @@ require secure SSL requests::
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             if (isset($this->params['admin'])) {

@@ -1,7 +1,7 @@
 Request Handling (Gestion des requêtes)
 #######################################
 
-.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
 Le component Request Handler est utilisé dans CakePHP pour obtenir des
 informations supplémentaires au sujet des requêtes HTTP qui sont faites à votre
@@ -24,7 +24,7 @@ doit être inclu dans votre tableau $components::
 
     class WidgetController extends AppController {
 
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         // suite du controller
     }
@@ -45,7 +45,7 @@ contenu que le client accepte. Par exemple::
 
     class PostsController extends AppController {
 
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function beforeFilter () {
             if ($this->RequestHandler->accepts('html')) {
@@ -55,7 +55,7 @@ contenu que le client accepte. Par exemple::
                 // executé seulement si le client accepte seulement
                 // les réponse XML
             }
-            if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {
+            if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
                 // Executé si le client accepte l'un des suivants: XML, RSS ou Atom
             }
         }
@@ -158,14 +158,14 @@ Décoder automatiquement les données de la requête
             }
             return $rows;
         };
-        $this->RequestHandler->addInputType('csv', array($parser));
+        $this->RequestHandler->addInputType('csv', [$parser]);
 
     L'exemple ci-dessus nécessite PHP 5.3, cependant vous pouvez utiliser
     n'importe quel `callback <http://php.net/callback>`_ pour la fonction
     de gestion. Vous pouvez aussi passer des arguments supplémentaires
     au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
-        $this->RequestHandler->addInputType('json', array('json_decode', true));
+        $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
     Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
     d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
@@ -282,10 +282,10 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à false::
 
-    public $components = array(
-        'RequestHandler' => array(
+    public $components = [
+        'RequestHandler' => [
             'checkHttpCache' => false
-    ));
+    ]];
 
 Utiliser les ViewClasses personnalisées
 =======================================
@@ -300,21 +300,21 @@ personnalisées.
 .. php:method:: viewClassMap($type, $viewClass)
 
     :param string|array $type: Le type string ou un tableau map avec le
-      format ``array('json' => 'MyJson')``.
+      format ``['json' => 'MyJson']``.
     :param string $viewClass: La viewClass à utiliser pour le type sans `View`
       en suffixe.
 
 Vous pouvez aussi définir ceci automatiquement en utilisant la configuration
 ``viewClassMap``::
 
-    public $components = array(
-        'RequestHandler' => array(
-            'viewClassMap' => array(
+    public $components = [
+        'RequestHandler' => [
+            'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',
                 'csv' => 'ApiKit.Csv'
-            )
-    ));
+            ]
+    ]];
 
 .. meta::
     :title lang=fr: Request Handling (Gestion des requêtes)

@@ -1,7 +1,7 @@
 Security (Sécurité)
 ###################
 
-.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
 Le Component Security offre une manière simple d'inclure une sécurité
 renforcée à votre application. Il fournit des méthodes pour diverses tâches
@@ -168,7 +168,7 @@ au démarrage::
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             $this->Security->requirePost('delete');
@@ -180,7 +180,7 @@ avec succès si celui ci reçoit une requête POST::
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
@@ -194,7 +194,7 @@ Cette exemple forcera toutes les actions qui proviennent de la
 
     class WidgetController extends AppController {
 
-        public $components = array('Security');
+        public $components = ['Security'];
 
         public function beforeFilter() {
             if (isset($this->params['admin'])) {

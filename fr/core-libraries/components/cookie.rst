@@ -1,7 +1,7 @@
 Cookie
 ######
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $config = array())
+.. php:class:: CookieComponent(ComponentCollection $collection, array $config = [])
 
 Le component Cookie est un conteneur de la méthode native de PHP
 ``setcookie``. Il inclut également toutes sortes de fonctionnalités pour
@@ -68,7 +68,7 @@ d'une connexion sécurisée, qui est disponible au chemin
 
 ::
 
-    public $components = array('Cookie');
+    public $components = ['Cookie'];
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -104,7 +104,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     pouvez passer un tableau::
 
         $this->Cookie->write('User',
-            array('name' => 'Larry', 'role' => 'Lead')
+            ['name' => 'Larry', 'role' => 'Lead']
         );
 
     Toutes les valeurs dans le cookie sont chiffrées par défaut. Si vous voulez
@@ -139,7 +139,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
         // la notation par point comme tableau, faîtes quelque chose comme
         $this->Cookie->read('User');
 
-        // ceci retourne quelque chose comme array('name' => 'Larry', 'role' => 'Lead')
+        // ceci retourne quelque chose comme ['name' => 'Larry', 'role' => 'Lead']
 
 .. php:method:: check($key)
 

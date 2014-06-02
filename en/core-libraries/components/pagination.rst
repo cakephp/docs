@@ -166,10 +166,10 @@ rows in a paginated set. By default CakePHP limits the maximum number of rows
 that can be fetched to 100. If this default is not appropriate for your
 application, you can adjust it as part of the pagination options::
 
-    public $paginate = array(
+    public $paginate = [
         // other keys here.
         'maxLimit' => 10
-    );
+    ];
 
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
