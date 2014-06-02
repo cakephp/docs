@@ -66,7 +66,7 @@ expect from CakePHP:
 +-------------------------------+--------------------------+
 | If you...                     | Backwards compatibility? |
 +===============================+==========================+
-| Typehint against the class    |  Yes                     |
+| Typehint against the class    | Yes                      |
 +-------------------------------+--------------------------+
 | Create a new instance         | Yes                      |
 +-------------------------------+--------------------------+
@@ -75,7 +75,7 @@ expect from CakePHP:
 | Access a public property      | Yes                      |
 +-------------------------------+--------------------------+
 | Call a public method          | Yes                      |
-+-------------------------------+---------------------------
++-------------------------------+--------------------------+
 | **Extend a class and...**                                |
 +-------------------------------+--------------------------+
 | Override a public property    | Yes                      |
@@ -158,8 +158,6 @@ In a minor release you can:
 | default value                 |                          |
 +-------------------------------+--------------------------+
 
-
-.. rubric:: Footnotes
 
 .. [1] Your code *may* be broken by minor releases. Check the migration guide
        for details.
