@@ -1,16 +1,16 @@
 Objets Registry
 ###############
 
-Les classes registry fournissent une façon simple pour créer et récupérer les
+Les classes registry sont une façon simple de créer et récupérer les
 instances chargées d'un type d'objet donné. Il y a des classes registry pour les
 Components, les Helpers, les Tasks, et les Behaviors.
 
-Dans les exemples ci-dessous, on va utiliser les Components, le même behavior
-peut être attendu pour les Helpers, les Behaviors, et les Tasks en plus des
-Components.
+Dans les exemples ci-dessous, on va utiliser les Components, mais le même
+comportement peut être attendu pour les Helpers, les Behaviors, et les Tasks en
+plus des Components.
 
 Charger les Objets
-===================
+==================
 
 Le chargement des objets sur chaque type de registry peut être fait en utilisant
 la méthode ``load()``::
@@ -26,14 +26,14 @@ supplémentaire::
 
     $this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
 
-Toute clés & valeurs fournies vont être passées au constructeur du Component
+Toutes clés & valeurs fournies vont être passées au constructeur du Component
 La seule exception à cette règle est ``className``. Classname est une clé
 spéciale qui est utilisée pour faire des alias des objets dans un registry. Cela
 vous permet d'avoir des noms de component qui ne correspondent pas aux noms de
 classes, ce qui peut être utile quand vous étendez les components du coeur::
 
     $this->Auth = $this->Components->load('Auth', ['className' => 'MyCustomAuth']);
-    $this->Auth->user(); // Actually using MyCustomAuth::user();
+    $this->Auth->user(); // En fait utilise MyCustomAuth::user();
 
 Attraper les Callbacks
 ======================
@@ -45,7 +45,7 @@ events/callbacks dans votre application.
 Désactiver les Callbacks
 ========================
 
-Dans les versions précédentes, les objets collection fournissent une méthode
+Dans les versions précédentes, les objets collection fournissaient une méthode
 ``disable`` pour désactiver les objets à partir des callbacks reçus. Pour le
 faire maintenant, vous devez utiliser les fonctionnalités dans le système
 d'evènements. Par exemple, vous pouvez désactiver les callbacks du component
