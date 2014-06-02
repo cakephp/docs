@@ -384,6 +384,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
        echo $this->Form->end('Add');
 
+
     Un exemple plus complet montrant quelques options pour le champ de date ::
 
         echo $this->Form->input('birth_dt', array(
