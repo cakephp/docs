@@ -1,20 +1,20 @@
-Timestamp Behavior
+Behavior Timestamp
 ##################
 
 .. php:namespace:: Cake\Model\Behavior
 
 .. php:class:: TimestampBehavior
 
-The timestamp behavior allows your table objects to update one or more
-timestamps on each model event. This is primarily used to populate data into
-``created`` and ``modified`` fields. However, with some additional
-configuration, you can update any timestamp/datetime column on any event a table
-publishes.
+Le behavior timestamp permet à vos objets de table de mettre à jour un ou
+plusieurs timestamps sur chaque evenement de model. C'est principalement utilisé
+pour remplir les données dans les champs ``created`` et ``modified``.
+Cependant, avec quelques configurations supplémentaires, vous pouvez mettre à
+jour la colonne timestamp/datetime sur chaque évenement qu'une table publie.
 
-Basic Usage
-===========
+Utilisation Basique
+===================
 
-You enable the timestamp behavior like any other behavior::
+Vous activez le behavior timestamp comme tout autre behavior::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
@@ -22,17 +22,19 @@ You enable the timestamp behavior like any other behavior::
         }
     }
 
-The default configuration will do the following:
+La configuration par défaut va faire ce qui suit:
 
-- When a new entity is saved the ``created`` and ``modified`` fields will be set
-  to the current time.
-- When an entity is updated, the ``modified`` field is set to the current time.
+- Quand une nouvelle entity est sauvegardée, les champs ``created`` et
+  ``modified`` seront définis avec le time courant.
+- Quand une entity est mise à jour, le champ ``modified`` est défini au time
+  courant.
 
-Using and Configuring the Behavior
+Utiliser et Configurer le Behavior
 ==================================
 
-If you need to modify fields with different names, or want to update additional
-timestamp fields on custom events you can use some additional configuration::
+Si vous avez besoin de modifier les champs avec des noms différents, ou que vous
+souhaitiez mettre à jour le timestamp supplémentaire sur des evenements
+personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
     class OrdersTable extends Table {
         public function initialize(array $config) {
@@ -50,22 +52,25 @@ timestamp fields on custom events you can use some additional configuration::
         }
     }
 
-As you can see above, in addition to the standard ``Model.beforeSave`` event, we
-are also updating the ``completed_at`` column when orders are completed.
+Comme vous pouvez le voir au-dessus, en plus de l'evenement standard
+``Model.beforeSave``, nous mettons aussi à jour la colonne ``completed_at``
+quand les ordres sont complétés.
 
-Updating Timestamps on Entities
-===============================
+Mettre à jour les Timestamps sur les Entities
+=============================================
 
-Sometimes you'll want to update just the timestamps on an entity without
-changing any other properties. This is sometimes referred to as 'touching'
-a record. In CakePHP you can use the ``touch()`` method to do exactly this::
+Parfois, vous souhaitez mettre à jour uniquement les timestamps sur une entity
+sans changer aucune autre propriété. On fait parfois référence au
+'touching' d'un enregistrement. Dans CakePHP, vous pouvez utiliser la méthode
+``touch()`` pour le faire exactement::
 
-    // Touch based on the Model.beforeSave event.
+    // Touch basé sur l'evenement Model.beforeSave.
     $articles->touch($article);
 
-    // Touch based on a specific event.
+    // Touch basé sur un evenement spécifique.
     $orders->touch($order, 'Orders.completed');
 
-Touching records can be useful when you want to signal that a parent resource
-has changed when a child resource is created/updated. For example: updating an
-article when a new comment is added.
+Toucher les enregistrements peut être utile quand vous souhaitez signaler
+qu'une ressource parente a changé quand une ressource enfante est créée/mise
+à jour. Par exemple: mettre à jour un article quand un nouveau commentaire
+est ajouté.
