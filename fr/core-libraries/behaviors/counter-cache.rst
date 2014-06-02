@@ -1,23 +1,24 @@
-CounterCache Behavior
+Behavior CounterCache
 #####################
 
 .. php:namespace:: Cake\Model\Behavior
 
 .. php:class:: CounterCacheBehavior
 
-Often times web applications need to display counts of related objects. For
-example, when showing a list of articles you may want to display how many
-comments it has. Or when showing a user you might want to show how many
-friends/followers she has. The CounterCache behavior is intended for these
-situations.
+Souvent les applications web doivent afficher le nombre d'objets liés. Par
+exemple, quand vous montrez une liste d'articles, vous voulez peut-être
+afficher combien de commentaires ils ont. Ou quand vous montrez un utilisateur,
+vous voulez montrer le nombre d'amis/de followers qu'il a. Le behavior
+CounterCache est présent pour ces situations.
 
-Basic Usage
-===========
+Usage Basique
+=============
 
-You enable the CounterCache behavior like any other behavior, but it won't do
-anything until you configure some relations and the field counts that should be
-stored on each of them. Using our example below, we could cache the comment
-count for each article with the following::
+Vous activez le behavior CounterCache comme tous les autres behaviors, mais
+il ne fera rien jusqu'à ce que vous configuriez quelques relations et le
+nombre de champ qui doivent être stockés sur chacun d'eux. Utiliser notre
+exemple ci-dessous, nous pourrions mettre en cache le nombre de commentaires
+pour chaque article avec ce qui suit::
 
     class CommentsTable extends Table {
         public function initialize(array $config) {
@@ -27,22 +28,23 @@ count for each article with the following::
         }
     }
 
-The CounterCache configuration should be a map of relation names and the
-specific configuration for that relation.
+La configuration de CounterCache doit être composée de noms de relations et
+de la configuration spécifique pour cette relation.
 
-The counter's value will be updated each time an entity is saved or deleted. The
-counter **will not** be updated when you use ``updateAll()`` or ``deleteAll()``,
-or execute SQL you have written.
+La valeur du compteur sera mise à jour à chaque fois qu'une entity est
+sauvegardée ou supprimée. Le compteur **ne va pas** être mis à jour lorsque
+vous utilisez ``updateAll()`` ou ``deleteAll()``, ou que vous executez du SQL
+que vous avez écrit.
 
-Advanced Usage
-==============
+Usage Avancée
+=============
 
-If you need to keep a cached counter for less than all of the related records,
-you can supply additional conditions or finder methods to generate a
-counter value::
+Si vous avez besoin de garder un compteur mis en cache pour moins que tous les
+enregistrements liés, vous pouvez fournir des conditions supplémentaires ou
+des méthodes finder pour générer une valeur du compteur::
 
-    // Use a specific find method.
-    // In this case find(published)
+    // Utilise une méthode find spécifique.
+    // Dans ce cas find(published)
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
@@ -51,8 +53,8 @@ counter value::
         ]
     ]);
 
-If you don't have a custom finder method you can provide an array of conditions
-to find records instead::
+Si vous n'avez pas de méthode de finder personnalisé, vous pouvez fournir
+un tableau de conditions pour trouver les enregistrements à la place::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
@@ -62,8 +64,9 @@ to find records instead::
         ]
     ]);
 
-Lastly, if a custom finder and conditions are not suitable you can provide
-a callback method. This callable must return the count value to be stored::
+Enfin, si un finder personnalisé et les conditions ne sont pas réunies, vous
+pouvez fournir une méthode de callback. Cette méthode retourne la valeur du
+compteur à stocker::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
