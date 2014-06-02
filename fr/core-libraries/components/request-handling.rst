@@ -120,10 +120,10 @@ si vous voulez désactiver le cache du navigateur, et changer le niveau de
 débogage. Cependant, si vous voulez utiliser le cache pour les requêtes
 non-AJAX., le code suivant vous permettra de le faire::
 
-    if ($this->request->is('ajax')) {
-        $this->disableCache();
-    }
-    // Continue l'action du controller
+        if ($this->request->is('ajax')) {
+            $this->disableCache();
+        }
+        // Continue l'action du controller
 
 
 Obtenir des informations supplémentaires sur le client
@@ -261,8 +261,6 @@ corresponde à votre application.
 Profiter du cache de validation HTTP
 ====================================
 
-.. versionadded:: 2.1
-
 Le model de validation de cache HTTP est l'un des processus utilisé pour les
 passerelles de cache, aussi connu comme reverse proxies, pour déterminer si
 elles peuvent servir une copie de réponse stockée au client. D'après ce model,
@@ -291,8 +289,6 @@ Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 
 Utiliser les ViewClasses personnalisées
 =======================================
-
-.. versionadded:: 2.3
 
 Quand vous utilisez JsonView/XmlView, vous aurez envie peut-être de surcharger
 la serialization par défaut avec une classe View par défaut, ou ajouter des
