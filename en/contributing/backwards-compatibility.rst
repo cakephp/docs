@@ -19,11 +19,12 @@ Because backwards compatibility is complicated, and different changes have
 different impacts on your application. Some changes just require method renames,
 and others require significant overhauls of application code.
 
-To clarify what changes you can expect in each release tier we have more detailed guides for 
+To clarify what changes you can expect in each release tier we have more detailed guides for
 developers using CakePHP, and for developers working on CakePHP.
 
 Migration Guides
 ================
+
 
 For each major and minor release, the CakePHP team will provide a migration
 guide. These guides explain the new features and any breaking changes that are
@@ -80,17 +81,84 @@ expect from CakePHP:
 +===============================+===========================
 | Extend a class and...         | Backwards compatibility? |
 +===============================+==========================+
-| Override a public property    |  Yes                     |
+| Override a public property    | Yes                      |
 +-------------------------------+--------------------------+
-| Access a protected property   |  No [1]_                 |
+| Access a protected property   | No [1]_                  |
 +-------------------------------+--------------------------+
-| Override a protected property |  No [1]_                 |
+| Override a protected property | No [1]_                  |
 +-------------------------------+--------------------------+
-| Override a protected method   |  No [1]_                 |
+| Override a protected method   | No [1]_                  |
 +-------------------------------+--------------------------+
-| Call a protected method       |  No [1]_                 |
+| Call a protected method       | No [1]_                  |
 +-------------------------------+--------------------------+
-| Add a public property         |  No                      |
+| Add a public property         | No                       |
++-------------------------------+--------------------------+
+| Add a public method           | No                       |
++-------------------------------+--------------------------+
+| Add an argument               | No [1]_                  |
+| to an overridden method       |                          |
++-------------------------------+--------------------------+
+| Add a default argument        | Yes                      |
+| to an existing method         |                          |
++-------------------------------+--------------------------+
+
+Working on CakePHP
+==================
+
+If you are helping make CakePHP even better please keep the following guidelines
+in mind when adding/changing functionality: 
+
+In a minor release you can:
+
++===============================+==========================+
+| In a minor release can you...                            |
++===============================+==========================+
+| Classes                                                  |
++===============================+==========================+
+| Remove a class                | No                       |
++-------------------------------+--------------------------+
+| Remove an interface           | No                       |
++-------------------------------+--------------------------+
+| Remove a trait                | No                       |
++-------------------------------+--------------------------+
+| Make final                    | No                       |
++-------------------------------+--------------------------+
+| Make abstract                 | No                       |
++-------------------------------+--------------------------+
+| Change name                   | Yes [2]_                 |
++===============================+==========================+
+| Properties                                               |
++===============================+==========================+
+| Add a public property         | Yes                      |
++-------------------------------+--------------------------+
+| Remove a public property      | No                       |
++-------------------------------+--------------------------+
+| Add a protected property      | Yes                      |
++-------------------------------+--------------------------+
+| Remove a protected property   | Yes [3]_                 |
++-------------------------------+--------------------------+
+| Remove a protected property   | Yes [2]_                 |
++===============================+==========================+
+| Methods                                                  |
++===============================+==========================+
+| Add a public method           | Yes                      |
++-------------------------------+--------------------------+
+| Remove a public method        | No                       |
++-------------------------------+--------------------------+
+| Add a protected method        | Yes                      |
++-------------------------------+--------------------------+
+| Move to parent class          | Yes                      |
++-------------------------------+--------------------------+
+| Remove a protected method     | Yes [3]_                 |
++-------------------------------+--------------------------+
+| Reduce visibility             | No                       |
++-------------------------------+--------------------------+
+| Change method name            | Yes [2]_                 |
++-------------------------------+--------------------------+
+| Add required argument         | No                       |
++-------------------------------+--------------------------+
+| Add argument with             | No                       |
+| default value                 |                          |
 +-------------------------------+--------------------------+
 
 
@@ -98,4 +166,7 @@ expect from CakePHP:
 
 .. [1] Your code *may* be broken by minor releases. Check the migration guide
        for details.
+.. [2] You can change a class/method names as long as the old name remains available.
+       This is generally avoided unless renaming has significant benefit.
+.. [3] We try to avoid this at all costs.
 
