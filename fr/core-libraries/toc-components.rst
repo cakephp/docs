@@ -2,8 +2,9 @@ Components (Composants)
 #######################
 
 CakePHP a une sélection de components pour prendre en charge des tâches basiques
-dans vos controllers. Regardez la section sur :doc:`/controllers/components`
-pour savoir comment configurer et utiliser les components.
+dans vos controllers. Consultez la section sur les
+:doc:`/controllers/components` pour savoir comment configurer et utiliser les
+components.
 
 .. toctree::
     :maxdepth: 1

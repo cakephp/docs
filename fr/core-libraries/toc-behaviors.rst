@@ -5,13 +5,13 @@ Les behaviors ajoutent des fonctionnalités supplémentaires à vos objets table
 CakePHP offre un certain nombre de behaviors integrés tels que
 :php:class:`~Cake\\Model\\Behavior\\TimestampBehavior`.
 
-Pour en apprendre plus sur la création et l'utilisation des behaviors, lisez la
-section sur :doc:`/orm/behaviors`.
+Pour en apprendre plus sur la création et l'utilisation des behaviors, consultez
+la section sur :doc:`/orm/behaviors`.
 
 .. start-toc
 
 CakePHP est fourni avec une selection de behaviors intégrés. Pour en savoir
-plus sur chacun, regardez les chapitres correspondants ci-dessous.
+plus sur chacun, consultez les chapitres correspondants ci-dessous.
 
 .. toctree::
     :maxdepth: 1
