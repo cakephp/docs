@@ -1,7 +1,7 @@
 SessionHelper
 #############
 
-.. php:class:: SessionHelper(View $view, array $config = array())
+.. php:class:: SessionHelper(View $view, array $config = [])
 
 Équivalent du Component Session, le Helper Session offre la majorité des
 fonctionnalités du component et les rend disponible dans votre vue.
@@ -15,9 +15,9 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec des :term:`dot notation`,
 comme ci-dessous::
 
-    array('User' =>
-        array('username' => 'super@example.com')
-    );
+    ['User' =>
+        ['username' => 'super@example.com']
+    ];
 
 Étant donné ce tableau, le nœud sera accessible par ``User.username``,
 le point indiquant le tableau imbriqué. Cette notation est utilisée pour
@@ -53,7 +53,7 @@ utilisée.
 Affichage de notifications ou de messages flash
 ===============================================
 
-.. php:method:: flash(string $key = 'flash', array $params = array())
+.. php:method:: flash(string $key = 'flash', array $params = [])
 
     :rtype: string
 
@@ -84,7 +84,7 @@ Affichage de notifications ou de messages flash
     ce message::
 
         // dans un layout.
-        echo $this->Session->flash('flash', array('element' => 'failure'));
+        echo $this->Session->flash('flash', ['element' => 'failure']);
 
     Ceci utilise ``View/Elements/failure.ctp`` pour rendre le message. Le
     message texte sera disponible dans une variable ``$message`` dans l'élément.
@@ -105,15 +105,20 @@ Affichage de notifications ou de messages flash
         $this->Session->setFlash('Thanks for your payment %s');
 
         // Dans le layout.
-        echo $this->Session->flash('flash', array(
-            'params' => array('name' => $user['User']['name'])
+        echo $this->Session->flash('flash', [
+            'params' => ['name' => $user['User']['name']]
             'element' => 'payment'
-        ));
+        ]);
 
         // View/Elements/payment.ctp
         <div class="flash payment">
             <?php printf($message, h($name)); ?>
         </div>
+
+    .. note::
+        By default, CakePHP does not escape the HTML in flash messages. If you are using
+        any request or user data in your flash messages, you should escape it
+        with :php:func:`h` when formatting your messages.
 
 
 .. meta::

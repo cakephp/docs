@@ -1,7 +1,9 @@
 TimeHelper
 ##########
 
-.. php:class:: TimeHelper(View $view, array $config = array())
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: TimeHelper(View $view, array $config = [])
 
 Le Helper Time vous permet, comme il l'indique de gagner du temps. Il permet
 le traitement rapide des informations se rapportant au temps. Le Helper
@@ -9,14 +11,6 @@ Time a deux tâches principales qu'il peut accomplir:
 
 #. Il peut formater les chaînes de temps.
 #. Il peut tester le temps (mais ne peut pas le courber, désolé).
-
-.. versionchanged:: 2.1
-   ``TimeHelper`` a été reconstruit dans la classe :php:class:`CakeTime`
-   pour faciliter l'utilisation en-dehors de la couche ``View``.
-   Dans une vue, ces méthodes sont accessibles via la classe `TimeHelper`
-   et vous pouvez l'appeler comme vous appelleriez une méthode normale
-   de helper:
-   ``$this->Time->method($args);``.
 
 Utiliser le Helper
 ==================
@@ -47,10 +41,6 @@ pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
 La plupart des méthodes du Helper Time contiennent un paramètre $timezone.
 Le paramètre $timezone accepte une chaîne identifiante de timezone valide ou
 une instance de la classe `DateTimeZone`.
-
-.. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-time
-    :end-before: end-time
 
 .. meta::
     :title lang=fr: TimeHelper

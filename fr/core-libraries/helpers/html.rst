@@ -122,7 +122,7 @@ les utiliser.
     ``Blog``, et souhaitez inclure également
     ``app/webroot/css/Blog.common.css``::
 
-        echo $this->Html->css('Blog.common.css', array('plugin' => false));
+        echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
 .. php:method:: meta(string $type, string $url = null, array $options = [])
 
@@ -799,7 +799,7 @@ les utiliser.
 
     Créé des cellules de table, en assignant aux lignes  des attributs <tr>
     différents pour les lignes paires et les lignes impaires. Entoure une
-    table simple de cellule dans un array() pour des attributs <td>
+    table simple de cellule dans un [] pour des attributs <td>
     spécifiques. ::
 
         echo $this->Html->tableCells([
@@ -1018,7 +1018,7 @@ Création d'un chemin de navigation avec le Helper Html
     pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
+        $this->Html->addCrumb('Add User', ['controller' => 'users', 'action' => 'add']);
 
     Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
     où le fil d'Ariane a été ajouté.

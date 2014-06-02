@@ -1,7 +1,7 @@
 TextHelper
 ##########
 
-.. php:class:: TextHelper(View $view, array $config = array())
+.. php:class:: TextHelper(View $view, array $config = [])
 
 TextHelper possède des méthodes pour rendre le texte plus utilisable et sympa
 dans vos vues. Il aide à activer les liens, à formater les URLs, à créer
@@ -9,14 +9,7 @@ des extraits de texte autour des mots ou des phrases choisies, mettant en
 évidence des mots clés dans des blocs de texte et tronquer élegamment de
 longues étendues de texte.
 
-.. versionchanged:: 2.1
-   Plusieurs des méthodes de ``TextHelper`` ont été déplacées dans la classe
-   :php:class:`String` pour permettre une utilisation plus facile de la couche
-   ``View``. Dans une vue, ces méthodes sont accessibles avec la classe
-   `TextHelper` et vous pouvez l'appeler comme vous appelleriez une méthode
-   normale de helper: ``$this->Text->method($args);``.
-
-.. php:method:: autoLinkEmails(string $text, array $options=array())
+.. php:method:: autoLinkEmails(string $text, array $options=[])
 
     :param string $text: Le texte à convertir.
     :param array $options: Un tableau de :term:`html attributes` pour générer
@@ -35,11 +28,10 @@ longues étendues de texte.
         Pour plus d'informations sur nos pâtes et desserts fameux,
         contactez <a href="mailto:info@example.com">info@example.com</a>
 
-    .. versionchanged:: 2.1
-        Dans 2.1, cette méthode echappe automatiquement ces inputs. Utilisez
-        l'option ``escape`` pour la désactiver si nécessaire.
+    Cette méthode echappe automatiquement ces inputs. Utilisez l'option
+    ``escape`` pour la désactiver si nécessaire.
 
-.. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
+.. php:method:: autoLinkUrls(string $text, array $htmlOptions=[])
 
     :param string $text: Le texte à convertir.
     :param array $htmlOptions: Un tableau de :term:`html attributes` pour
@@ -49,11 +41,10 @@ longues étendues de texte.
     chaînes de caractère qui commence par https, http, ftp, ou nntp et
     les liens de manière appropriée.
 
-    .. versionchanged:: 2.1
-        Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
-        l'option ``escape`` pour la désactiver si nécessaire.
+    Cette méthode échappe automatiquement son input. Utilisez l'option
+    ``escape`` pour la désactiver si nécessaire.
 
-.. php:method:: autoLink(string $text, array $htmlOptions=array())
+.. php:method:: autoLink(string $text, array $htmlOptions=[])
 
     :param string $text: Le texte à lier automatiquement.
     :param array $htmlOptions: Un tableau de :term:`html attributes` pour
@@ -63,9 +54,8 @@ longues étendues de texte.
     ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails
     sont liés de manière appropriée donnée par ``$htmlOptions`` fourni.
 
-    .. versionchanged:: 2.1
-        Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
-        l'option ``escape`` pour la désactiver si nécessaire.
+    Cette méthode échappe automatiquement son input. Utilisez l'option
+    ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoParagraph(string $text)
 
@@ -85,8 +75,6 @@ longues étendues de texte.
         <p>Pour plus d\'information<br />
         selon nos célèbres pâtes et desserts.<p>
         <p>contact info@example.com</p>
-
-    .. versionadded:: 2.4
 
 .. include:: ../../core-utility-libraries/string.rst
     :start-after: start-string

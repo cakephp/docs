@@ -772,7 +772,7 @@ methods of the HtmlHelper and how to use them.
 
     Creates table cells, in rows, assigning <tr> attributes differently
     for odd- and even-numbered rows. Wrap a single table cell within an
-    array() for specific <td>-attributes. ::
+    [] for specific <td>-attributes. ::
 
         echo $this->Html->tableCells([
             ['Jul 7th, 2007', 'Best Brownies', 'Yes'],
@@ -989,7 +989,7 @@ Creating Breadcrumb Trails with HtmlHelper
     breadcrumb trails on each of the pages::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));
+        $this->Html->addCrumb('Add User', ['controller' => 'users', 'action' => 'add']);
 
     This will add the output of "**Home > Users > Add User**" in your
     layout where getCrumbs was added.

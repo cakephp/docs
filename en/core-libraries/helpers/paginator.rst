@@ -139,7 +139,7 @@ If you are using HTML like images in your links remember to set escaping off::
     echo $this->Paginator->sort(
       'user_id',
       '<em>User account</em>',
-      array('escape' => false)
+      ['escape' => false]
     );
 
 Output:
@@ -151,7 +151,7 @@ Output:
 The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal::
 
-    echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
+    echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 
 Output:
 
@@ -161,7 +161,7 @@ Output:
 
 The lock option can be used to lock sorting into the specified direction::
 
-    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
+    echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 
 .. php:method:: sortDir(string $model = null, mixed $options = [])
 
@@ -348,9 +348,9 @@ There are a number of options for ``counter()``. The supported ones are:
 
   Setting 'format' to range would output like '1 - 3 of 13'::
 
-      echo $this->Paginator->counter(array(
+      echo $this->Paginator->counter([
           'format' => 'range'
-      ));
+      ]);
 
 * ``model`` The name of the model being paginated, defaults to
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
@@ -462,10 +462,10 @@ of page navigation, also supplied by the PaginationHelper::
 The wording output by the counter() method can also be customized
 using special markers::
 
-    <?= $this->Paginator->counter(array(
+    <?= $this->Paginator->counter([
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
-    )) ?>
+    ]) ?>
 
 Other Methods
 =============

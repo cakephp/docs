@@ -1,7 +1,7 @@
 RSS
 ###
 
-.. php:class:: RssHelper(View $view, array $config = array())
+.. php:class:: RssHelper(View $view, array $config = [])
 
 Le Helper RSS permet de générer facilement des XML pour les flux RSS.
 
@@ -35,12 +35,12 @@ Code du Controller
 C'est une bonne idée d'ajouter RequestHandler au tableau $components de votre
 controller Posts. Cela permettra à beaucoup d'automagie de se produire::
 
-    public $components = array('RequestHandler');
+    public $components = ['RequestHandler'];
 
 Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il
 doit aussi être ajouté au controller::
 
-    public $helpers = array('Text');
+    public $helpers = ['Text'];
 
 Avant que nous puissions faire une version RSS de notre posts/index, nous
 avons besoin de mettre certaines choses en ordre. Il pourrait être tentant
@@ -61,17 +61,17 @@ le même::
         if ($this->RequestHandler->isRss() ) {
             $posts = $this->Post->find(
                 'all',
-                array('limit' => 20, 'order' => 'Post.created DESC')
+                ['limit' => 20, 'order' => 'Post.created DESC']
             );
             return $this->set(compact('posts'));
         }
 
         // ceci n'est pas une requête RSS
         // donc on retourne les données utilisées par l'interface du site web
-        $this->paginate['Post'] = array(
+        $this->paginate['Post'] = [
             'order' => 'Post.created DESC',
             'limit' => 10
-        );
+        ];
         
         $posts = $this->paginate();
         $this->set(compact('posts'));
@@ -87,15 +87,15 @@ Un layout Rss est très simple, mettez les contenus suivants dans
 ``app/View/Layouts/rss/default.ctp``::
 
     if (!isset($documentData)) {
-        $documentData = array();
+        $documentData = [];
     }
     if (!isset($channelData)) {
-        $channelData = array();
+        $channelData = [];
     }
     if (!isset($channelData['title'])) {
         $channelData['title'] = $this->fetch('title');
     }
-    $channel = $this->Rss->channel(array(), $channelData, $this->fetch('content'));
+    $channel = $this->Rss->channel([], $channelData, $this->fetch('content'));
     echo $this->Rss->document($documentData, $channel);
 
 Il ne ressemble pas à plus mais grâce à la puissance du ``RssHelper``
@@ -120,11 +120,11 @@ en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la
 méthode Controller::set(). Ici nous passons les canaux de données en retour au
 layout::
 
-    $this->set('channelData', array(
+    $this->set('channelData', [
         'title' => __("Most Recent Posts"),
         'link' => $this->Html->url('/', true),
         'description' => __("Most recent posts."),
-        'language' => 'en-us'));
+        'language' => 'en-us']);
 
 La seconde partie de la vue génére les éléments pour les enregistrements
 actuels du flux. Ceci est accompli en bouclant sur les données qui ont
@@ -150,30 +150,30 @@ pour chaque pair de valeur de clé.
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
 
-        $postLink = array(
+        $postLink = [
             'controller' => 'posts',
             'action' => 'view',
             'year' => date('Y', $postTime),
             'month' => date('m', $postTime),
             'day' => date('d', $postTime),
             $post['Post']['slug']
-        );
+        ];
 
         // Retire & échappe tout HTML pour être sûr que le contenu va être validé.
         $bodyText = h(strip_tags($post['Post']['body']));
-        $bodyText = $this->Text->truncate($bodyText, 400, array(
+        $bodyText = $this->Text->truncate($bodyText, 400, [
             'ending' => '...',
             'exact'  => true,
             'html'   => true,
-        ));
+        ]);
 
-        echo  $this->Rss->item(array(), array(
+        echo  $this->Rss->item([], [
             'title' => $post['Post']['title'],
             'link' => $postLink,
-            'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
+            'guid' => ['url' => $postLink, 'isPermaLink' => 'true'],
             'description' => $bodyText,
             'pubDate' => $post['Post']['created']
-        ));
+        ]);
     }
 
 Vous pouvez voir ci-dessus que nous pouvons utiliser la boucle pour préparer
@@ -256,7 +256,7 @@ API de Rss Helper
 
     Génére un élément XML.
 
-.. php:method:: item(array $att = array (), array $elements = array ())
+.. php:method:: item(array $att = [], array $elements = array ())
 
     :rtype: string
 

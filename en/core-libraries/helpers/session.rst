@@ -1,7 +1,7 @@
 SessionHelper
 #############
 
-.. php:class:: SessionHelper(View $view, array $config = array())
+.. php:class:: SessionHelper(View $view, array $config = [])
 
 As a natural counterpart to the Session Component, the Session
 Helper replicates most of the component's functionality and makes it
@@ -14,9 +14,9 @@ to the session.
 As with the Session Component, data is read by using
 :term:`dot notation` array structures::
 
-    array('User' => array(
+    ['User' => [
         'username' => 'super@example.com'
-    ));
+    ]];
 
 Given the previous array structure, the node would be accessed by
 ``User.username``, with the dot indicating the nested array. This
@@ -52,7 +52,7 @@ used.
 Displaying Notifications or Flash Messages
 ==========================================
 
-.. php:method:: flash(string $key = 'flash', array $params = array())
+.. php:method:: flash(string $key = 'flash', array $params = [])
 
     :rtype: string
 
@@ -83,7 +83,7 @@ Displaying Notifications or Flash Messages
     the message::
 
         // in a layout.
-        echo $this->Session->flash('flash', array('element' => 'failure'));
+        echo $this->Session->flash('flash', ['element' => 'failure']);
 
     This would use ``View/Elements/failure.ctp`` to render the message. The
     message text would be available as ``$message`` in the element.
@@ -103,10 +103,10 @@ Displaying Notifications or Flash Messages
         $this->Session->setFlash('Thanks for your payment.');
 
         // In the layout.
-        <?= $this->Session->flash('flash', array(
-            'params' => array('name' => $user['User']['name'])
+        <?= $this->Session->flash('flash', [
+            'params' => ['name' => $user['User']['name']]
             'element' => 'payment'
-        ));
+        ]);
 
         // View/Elements/payment.ctp
         <div class="flash payment">

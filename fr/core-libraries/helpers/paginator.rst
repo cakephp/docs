@@ -120,10 +120,6 @@ Les clés acceptées pour ``$options``:
 * ``lock`` Verrouiller la direction. Va seulement utiliser la direction par
   défaut, par défaut à false.
 
-  .. versionadded:: 2.5
-    Vous pouvez maintenant définir l'option lock à true afin de verrouiller
-    la direction du tri dans la direction spécifiée.
-
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
     echo $this->Paginator->sort('user_id');
@@ -151,7 +147,7 @@ paramétrer l'échappement::
     echo $this->Paginator->sort(
       'user_id',
       '<em>User account</em>',
-      array('escape' => false)
+      ['escape' => false]
     );
 
 Sortie:
@@ -166,7 +162,7 @@ L'option de direction peut être utilisée pour paramétrer la direction par
 défaut pour un lien. Une fois qu'un lien est activé, il changera
 automatiquement de direction comme habituellement::
 
-    echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
+    echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 
 Sortie
 
@@ -177,7 +173,7 @@ Sortie
 L'option lock peut être utilisée pour verrouiller le tri dans la direction
 spécifiée::
 
-    echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
+    echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 
 .. php:method:: sortDir(string $model = null, mixed $options = [])
 
@@ -378,9 +374,9 @@ supportées sont:
 
   En définissant 'format' à 'range' donnerait en sortie '1 - 3 of 13'::
 
-      echo $this->Paginator->counter(array(
+      echo $this->Paginator->counter([
           'format' => 'range'
-      ));
+      ]);
 
 * ``model`` Le nom du model en cours de pagination, par défaut à
   :php:meth:`PaginatorHelper::defaultModel()`. Ceci est utilisé en conjonction
@@ -499,10 +495,10 @@ Helper de Pagination::
 Le texte de sortie de la méthode counter() peut également être personnalisé
 en utilisant des marqueurs spéciaux::
 
-    <?= $this->Paginator->counter(array(
+    <?= $this->Paginator->counter([
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
-    )) ?>
+    ]) ?>
 
 D'autres Méthodes
 =================

@@ -1,7 +1,7 @@
 CacheHelper
 ###########
 
-.. php:class:: CacheHelper(View $view, array $config = array())
+.. php:class:: CacheHelper(View $view, array $config = [])
 
 Le helper Cache permet la mise en cache des layouts (mises en page)
 et des vues permettant de gagner du temps pour la récupération de données
@@ -33,20 +33,19 @@ Une fois que vous avez décommenté la ligne ``Cache.check`` vous devez
 ajouter le helper à votre tableau ``$helpers`` de votre controller::
 
     class PostsController extends AppController {
-        public $helpers = array('Cache');
+        public $helpers = ['Cache'];
     }
 
 Vous devrez aussi ajouter CacheDispatcher à vos filtres de dispatcher dans
 votre bootstrap::
 
-    Configure::write('Dispatcher.filters', array(
+    Configure::write('Dispatcher.filters', [
         'CacheDispatcher'
-    ));
+    ]);
 
-.. versionadded:: 2.3
-  Si vous avez une configuration avec des domaines ou des languages multiples,
-  vous pouvez utiliser `Configure::write('Cache.viewPrefix', 'YOURPREFIX');`
-  pour stocker les fichiers de vue préfixés mis en cache.
+Si vous avez une configuration avec des domaines ou des languages multiples,
+vous pouvez utiliser `Configure::write('Cache.viewPrefix', 'YOURPREFIX');`
+pour stocker les fichiers de vue préfixés mis en cache.
 
 Options de configuration supplémentaires
 ----------------------------------------
@@ -63,10 +62,10 @@ soit cachée. La valeur du temps peut être exprimé dans le format
 En utilisant l'exemple d'un controller d'articles ArticlesController,
 qui reçoit beaucoup de trafics qui ont besoins d'être mise en cache::
 
-    public $cacheAction = array(
+    public $cacheAction = [
         'view' => 36000,
         'index'  => 48000
-    );
+    ];
 
 Ceci mettra en cache l'action view 10 heures et l'action index 13 heures.
 En plaçant une valeur usuelle de ``strtotime()`` dans ``$cacheAction`` vous
@@ -79,11 +78,11 @@ les vues cachées créées avec  ``CacheHelper``. Pour faire cela,
 vous devez utiliser le format de tableau pour ``$cacheAction``
 et créer un tableau comme ceci::
 
-    public $cacheAction = array(
-        'view' => array('callbacks' => true, 'duration' => 21600),
-        'add' => array('callbacks' => true, 'duration' => 36000),
-        'index' => array('callbacks' => true, 'duration' => 48000)
-    );
+    public $cacheAction = [
+        'view' => ['callbacks' => true, 'duration' => 21600],
+        'add' => ['callbacks' => true, 'duration' => 36000],
+        'index' => ['callbacks' => true, 'duration' => 48000]
+    ];
 
 En paramétrant ``callbacks => true`` vous dites au CacheHelper
 (Assistant Cache) que vous voulez que les fichiers générés créent
@@ -110,10 +109,10 @@ entourez-les par <!--nocache--> <!--/nocache-->`` comme ci-dessous :
 .. code-block:: php
 
     <!--nocache-->
-    <?php if ($this->Session->check('User.name')) : ?>
-        Bienvenue, <?php echo h($this->Session->read('User.name')); ?>.
+    <?php if ($this->Session->check('User.name')): ?>
+        Welcome, <?= h($this->Session->read('User.name')) ?>.
     <?php else: ?>
-        <?php echo $html->link('Login', 'users/login')?>
+        <?= $this->Html->link('Login', 'users/login') ?>
     <?php endif; ?>
     <!--/nocache-->
 

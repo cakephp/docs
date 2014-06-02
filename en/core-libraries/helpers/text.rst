@@ -1,7 +1,7 @@
 TextHelper
 ##########
 
-.. php:class:: TextHelper(View $view, array $config = array())
+.. php:class:: TextHelper(View $view, array $config = [])
 
 The TextHelper contains methods to make text more usable and
 friendly in your views. It aids in enabling links, formatting URLs,
@@ -9,7 +9,7 @@ creating excerpts of text around chosen words or phrases,
 highlighting key words in blocks of text, and to gracefully
 truncating long stretches of text.
 
-.. php:method:: autoLinkEmails(string $text, array $options=array())
+.. php:method:: autoLinkEmails(string $text, array $options=[])
 
     :param string $text: The text to convert.
     :param array $options: An array of :term:`html attributes` for the generated links.
@@ -30,7 +30,7 @@ truncating long stretches of text.
     This method automatically escapes its input. Use the ``escape``
     option to disable this if necessary.
 
-.. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
+.. php:method:: autoLinkUrls(string $text, array $htmlOptions=[])
 
     :param string $text: The text to convert.
     :param array $htmlOptions: An array :term:`html attributes` for the generated links
@@ -42,7 +42,7 @@ truncating long stretches of text.
     This method automatically escapes its input. Use the ``escape``
     option to disable this if necessary.
 
-.. php:method:: autoLink(string $text, array $htmlOptions=array())
+.. php:method:: autoLink(string $text, array $htmlOptions=[])
 
     :param string $text: The text to autolink.
     :param array $htmlOptions: An array :term:`html attributes` for the generated links
