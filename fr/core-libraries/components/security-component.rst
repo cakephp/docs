@@ -3,7 +3,7 @@ Security (Sécurité)
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = array())
 
-Le component Security offre une manière simple d'inclure une sécurité
+Le Component Security offre une manière simple d'inclure une sécurité
 renforcée à votre application. Il fournit des méthodes pour diverses tâches
 comme:
 
@@ -240,7 +240,6 @@ Vous pouvez "délocker" ces actions en les listant dans
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
 fonctionnalités de ``SecurityComponent``.
 
-.. versionadded:: 2.3
 
 .. meta::
     :title lang=fr: Security (Securité)
