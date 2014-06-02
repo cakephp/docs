@@ -27,7 +27,7 @@ Ci-dessous un exemple d'un code pour une application mono-langue::
 Pour internationaliser votre code, la seule chose à faire est d'entourer
 la chaîne avec :php:func:`__()` comme ceci::
 
-    <h2><?php echo __('Posts') ?></h2>
+    <h2><?= __('Posts') ?></h2>
 
 Si vous ne faîtes rien de plus, ces deux bouts de codes donneront un résultat
 identique - ils renverront le même contenu au navigateur.
@@ -110,13 +110,13 @@ ou::
 
 Pour la traduction de chaînes de catégorie LC_TIME, CakePHP utilise des fichiers
 POSIX compliant LC_TIME. Les fonctions i18n de la classe d'utilitaire
-:php:class:`CakeTime` et le helper :php:class:`TimeHelper` utilise ces fichiers
+:php:class:`Time` et le helper :php:class:`TimeHelper` utilise ces fichiers
 LC_TIME.
 
 Placez juste le fichier LC_TIME dans son répertoire local respectif::
 
-    /app/Locale/fra/LC_TIME (French)
-    /app/Locale/por/LC_TIME (Portuguese)
+    /App/Locale/fra/LC_TIME (French)
+    /App/Locale/por/LC_TIME (Portuguese)
 
 Vous pouvez trouver ces fichiers pour quelques langues populaires à partir du
 dépôt officiel `Localized <https://github.com/cakephp/localized>`_.
@@ -137,13 +137,13 @@ CakePHP ne trouvera pas votre fichier de traduction.
 
 Votre fichier de traduction pour cet exemple devra être dans ::
 
-    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /App/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 Et pour les autres langues par rapport à celle par défaut::
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
-    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+    /App/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
+    /App/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
+    /App/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
 
 La raison pour cela est que CakePHP va utiliser le nom du plugin en minuscule
 et avec des underscores, pour le comparer avec le domaine de traduction et va
