@@ -12,19 +12,16 @@ features, but are not allowed to break compatibility. Bug fix releases (such as 
 
 .. note::
 
-    CakePHP started following semantic versioning ideas in 2.0.0, and these
+    CakePHP started following semantic versioning in 2.0.0. These
     rules do not apply to 1.x.
 
-Because backwards compatibility is complicated, and different changes have
-different impacts on your application. Some changes just require method renames,
-and others require significant overhauls of application code.
-
-To clarify what changes you can expect in each release tier we have more detailed guides for
-developers using CakePHP, and for developers working on CakePHP.
+To clarify what changes you can expect in each release tier we have more
+detailed information for developers using CakePHP, and for developers working on
+CakePHP that helps set expectations of what can be done in minor releases. Major
+releases can have as many breaking changes as required.
 
 Migration Guides
 ================
-
 
 For each major and minor release, the CakePHP team will provide a migration
 guide. These guides explain the new features and any breaking changes that are
@@ -66,7 +63,7 @@ for that release.
 The following table outlines several use cases and what compatibility you can
 expect from CakePHP:
 
-+===============================+==========================+
++-------------------------------+--------------------------+
 | If you...                     | Backwards compatibility? |
 +===============================+==========================+
 | Typehint against the class    |  Yes                     |
@@ -78,9 +75,9 @@ expect from CakePHP:
 | Access a public property      | Yes                      |
 +-------------------------------+--------------------------+
 | Call a public method          | Yes                      |
-+===============================+===========================
-| Extend a class and...         | Backwards compatibility? |
-+===============================+==========================+
++-------------------------------+---------------------------
+| **Extend a class and...**                                |
++-------------------------------+--------------------------+
 | Override a public property    | Yes                      |
 +-------------------------------+--------------------------+
 | Access a protected property   | No [1]_                  |
@@ -110,11 +107,11 @@ in mind when adding/changing functionality:
 
 In a minor release you can:
 
-+===============================+==========================+
++-------------------------------+--------------------------+
 | In a minor release can you...                            |
 +===============================+==========================+
-| Classes                                                  |
-+===============================+==========================+
+| **Classes**                                              |
++-------------------------------+--------------------------+
 | Remove a class                | No                       |
 +-------------------------------+--------------------------+
 | Remove an interface           | No                       |
@@ -126,9 +123,9 @@ In a minor release you can:
 | Make abstract                 | No                       |
 +-------------------------------+--------------------------+
 | Change name                   | Yes [2]_                 |
-+===============================+==========================+
-| Properties                                               |
-+===============================+==========================+
++-------------------------------+--------------------------+
+| **Properties**                                           |
++-------------------------------+--------------------------+
 | Add a public property         | Yes                      |
 +-------------------------------+--------------------------+
 | Remove a public property      | No                       |
@@ -138,9 +135,9 @@ In a minor release you can:
 | Remove a protected property   | Yes [3]_                 |
 +-------------------------------+--------------------------+
 | Remove a protected property   | Yes [2]_                 |
-+===============================+==========================+
-| Methods                                                  |
-+===============================+==========================+
++-------------------------------+--------------------------+
+| **Methods**                                              |
++-------------------------------+--------------------------+
 | Add a public method           | Yes                      |
 +-------------------------------+--------------------------+
 | Remove a public method        | No                       |
