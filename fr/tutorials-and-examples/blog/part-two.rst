@@ -345,7 +345,7 @@ Voici le code de notre vue "add" (ajout)
 
 Nous utilisons le :php:class:`FormHelper` pour générer la balise
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par
-``$this->Form->create()`` ::
+``$this->Form->create()``::
 
 .. code-block:: html
 
@@ -652,14 +652,12 @@ Bienvenue sur CakePHP !
 Prochaines lectures suggérées
 -----------------------------
 
-Voici les différents chapitres que les gens veulent souvent lire après :
+Voici les différents chapitres que les gens veulent souvent lire après:
 
 1. :ref:`view-layouts`: Personnaliser les Layouts de votre application.
 2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
-4. :doc:`/console-and-shells/code-generation-with-bake` Générer un code
-   CRUD basique.
-5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur
-   l'enregistrement et la connexion d'utilisateurs.
+3. :doc:`/console-and-shells/code-generation-with-bake` Générer un code CRUD basique.
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur l'enregistrement et la connexion d'utilisateurs.
 
 
 .. meta::
