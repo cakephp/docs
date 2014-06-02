@@ -120,7 +120,7 @@ Surcharger les Classes dans CakePHP
 
 Vous pouvez surcharger presque toutes les classes dans le framework, les
 exceptions sont les classes :php:class:`Cake\\Core\\App` et
-:php:class:`Cake\\Core\\Configure`. Lorque vous souhaitez faire ce genre de
+:php:class:`Cake\\Core\\Configure`. Lorsque vous souhaitez faire ce genre de
 surcharge, ajoutez simplement votre classe à votre dossier app/Lib
 en copiant la structure interne du framework. Quelques exemples à suivre
 
@@ -130,7 +130,7 @@ en copiant la structure interne du framework. Quelques exemples à suivre
   ``App/Routing/Route/CakeRoute.php``
 
 Lorque vous chargez les fichiers remplacés, les App/fichiers vont être chargés
-à la place des classes intégrés au coeur.
+à la place des classes intégrées au coeur.
 
 Charger les Fichiers de Vendor
 ==============================
