@@ -1028,7 +1028,7 @@ Un exemple rapide pour faire une requête DISTINCT. Vous pouvez utiliser
 d'autres opérateurs, comme MIN(), MAX(), etc..., d'une manière analogue::
 
     array(
-        'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),'),
+        'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),
         'order' = >array('User.id DESC')
     )
 
