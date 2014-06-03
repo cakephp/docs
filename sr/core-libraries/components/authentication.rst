@@ -338,73 +338,72 @@ In your controller's beforeFilter(), or component settings::
 Hashing passwords
 -----------------
 
-AuthComponent no longer automatically hashes every password it can find.
-This was removed because it made a number of common tasks like
-validation difficult. You should **never** store plain text passwords,
-and before saving a user record you should always hash the password.
+You are responsible for hashing the passwords before they are persisted to the
+database, the easiest way is to use a setter function in your User entity::
 
-As of 2.4 the generation and checking of password hashes has been delegated to
-password hasher classes. Authenticating objects use a new setting ``passwordHasher``
-which specifies the password hasher class to use. It can be a string specifying class
-name or an array with key ``className`` stating the class name and any extra keys
-will be passed to password hasher constructor as config. The default hasher
-class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
-type set in Security class will be used. You can use specific hash type like this::
+    use \Cake\Controller\Component\Auth\SimplePasswordHasher;
+    class User extends Entity {
 
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => array(
-                        'className' => 'Simple',
-                        'hashType' => 'sha256'
-                    )
-                )
-            )
-        )
-    );
+        // ...
 
-When creating new user records you can hash a password in the beforeSave
-callback of your model using appropriate password hasher class::
+        public function setPassword($password) {
+            return (new SimplePasswordHasher)->hash($password);
+        }
 
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+        // ...
+    }
 
-    class User extends AppModel {
-        public function beforeSave($options = array()) {
-            if (!$this->id) {
-                $passwordHasher = new SimplePasswordHasher();
-                $this->data['User']['password'] = $passwordHasher->hash(
-                    $this->data['User']['password']
-                );
-            }
-            return true;
+AuthComponent is configured by default to use the ``SimplePasswordHasher``
+when validating user credentials so no additional configuration is required in
+order to authenticate users.
+
+``SimplePasswordHasher`` uses the Blowfish hashing algorithm internally, which
+is one of the stronger password hashing solution used in the industry. While it
+is recommended that you use this password hasher class, the case may be that you
+are managing a database of users whose password was hashed differently.
+
+Creating custom password hasher classes
+---------------------------------------
+
+In order to use a different password hasher, you need to create the class in
+``App/Controller/Component/Auth`` and implement the ``hash`` and ``check``
+methods::
+
+    use Cake\Controller\Component\Auth\AbstractPasswordHasher;
+
+    class DumbPasswordHasher extends AbstractPasswordHasher {
+
+        public function hash($password) {
+            return md5($password);
+        }
+
+        public function check($password, $hashed) {
+            return md5($password) === $hashed;
         }
     }
 
-You don't need to hash passwords before calling ``$this->Auth->login()``.
-The various authentication objects will hash passwords individually.
+Then you are required to configure the AuthComponent to use your own password
+hasher::
 
-Using bcrypt for passwords
---------------------------
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'MyOwn',
+                    ]
+                ]
+            ]
+        ]
+    ];
 
-In CakePHP 2.3 the ``BlowfishAuthenticate`` class was introduced to allow
-using `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ a.k.a Blowfish for hash passwords.
-Bcrypt hashes are much harder to brute force than passwords stored with sha1.
-But ``BlowfishAuthenticate`` has been deprecated in 2.4 and instead ``BlowfishPasswordHasher``
-has been added.
+Supporting legacy systems is a good idea, but it is even better to keep your
+database with the latest security advancements. The following section will
+explain how to migrate from one hashing algorithm to CakePHP's default
 
-A blowfish password hasher can be used with any authentication class. All you have
-to do with specify ``passwordHasher`` setting for the authenticating object::
+Changing hashing algorithms
+---------------------------
 
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Blowfish'
-                )
-            )
-        )
-    );
 
 
 Hashing passwords for digest authentication
@@ -440,25 +439,6 @@ other password hashes, based on the RFC for digest authentication.
     configured in AuthComponent::$authenticate. This defaults to
     ``env('SCRIPT_NAME)``. You may wish to use a static string if you
     want consistent hashes in multiple environments.
-
-Creating custom password hasher classes
----------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
-the following::
-
-    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
-
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
-            // stuff here
-        }
-
-        public function check($password, $hashedPassword) {
-            // stuff here
-        }
-    }
 
 Manually logging users in
 -------------------------
