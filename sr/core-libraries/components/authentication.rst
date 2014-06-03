@@ -169,16 +169,13 @@ working with a login form could look like::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
-                // Prior to 2.3 use
-                // `return $this->redirect($this->Auth->redirect());`
-            } else {
-                $this->Session->setFlash(
-                    __('Username or password is incorrect'),
-                    'default',
-                    array(),
-                    'auth'
-                );
             }
+            $this->Session->setFlash(
+                __('Username or password is incorrect'),
+                'default',
+                array(),
+                'auth'
+            );
         }
     }
 
@@ -366,8 +363,8 @@ Creating custom password hasher classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``App/Controller/Component/Auth`` and implement the ``hash`` and ``check``
-methods::
+``App/Controller/Component/Auth/DumbPasswordHasher.php`` and implement the
+``hash`` and ``check`` methods::
 
     use Cake\Controller\Component\Auth\AbstractPasswordHasher;
 
@@ -390,7 +387,7 @@ hasher::
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
-                        'className' => 'MyOwn',
+                        'className' => 'Dumb',
                     ]
                 ]
             ]
@@ -404,7 +401,48 @@ explain how to migrate from one hashing algorithm to CakePHP's default
 Changing hashing algorithms
 ---------------------------
 
+CakePHP provides a clean way to migrate your users' passwords from one algorithm
+to another, this is achieved through the ``FallbackPasswordHasher`` class.
+Assuming you are using ``DumbPasswordHasher`` from the previous example, you
+can configure the AuthComponent as follows::
 
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'Fallback',
+                        'hashers' => ['Simple', 'Dumb']
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+The first name appearing in the ``hashers`` key indicates which of the classes
+is the preferred one, but it will fallback to the others in the list if the
+check was unsuccessful.
+
+In order to update old users' passwords on the fly, you can change the login
+function accordingly::
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                if ((new SimplePasswordHasher)->needsRehash($this->Auth->user('password'))) {
+                    $user = $this->Users->get($this->Auth->user('id'));
+                    $user->password = $this->request->data('password');
+                    $this->Users->save($user);
+                }
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            ...
+        }
+    }
+
+As you cans see we are just setting the plain password again to to property so
+the setter function in the entity hashes the password as shown in previous
+examples and then saved again to the database.
 
 Hashing passwords for digest authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
