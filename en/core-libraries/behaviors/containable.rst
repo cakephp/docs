@@ -379,22 +379,6 @@ model, you don't need to use 'contain' again for related models
 .. _containablebehavior-options:
 
 
-Order By in deeper associations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-From the previous example, we could force the Posts to order by the date when they were last updated. 
-This is how you define the order of the contained asociations::
-
-    $this->User->find('all', array(
-        'contain' => array(
-            'Profile',
-            'Post' => array(
-                'order' => 'Post.updated DESC'
-            )
-        )
-    ));
-
-
 ContainableBehavior options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -414,6 +398,21 @@ more easily.
    value is ``true``.
 -  **autoFields**: (boolean, optional) auto-add needed fields to
    fetch requested bindings. The default value is ``true``.
+-  **order**: (string, optional) the order of how the contained 
+   elements are sorted.
+   
+From the previous example, this is an example of how to force the Posts 
+to be order by the date when they were last updated::
+
+    $this->User->find('all', array(
+        'contain' => array(
+            'Profile',
+            'Post' => array(
+                'order' => 'Post.updated DESC'
+            )
+        )
+    ));   
+   
 
 You can change ContainableBehavior settings at run time by
 reattaching the behavior as seen in
