@@ -188,6 +188,20 @@ you will need PHP running as a FastCGI instance.
         }
     }
 
+URL rewrite rules for Hiawatha
+==============================
+`Hiawatha <https://www.hiawatha-webserver.org/>`_ is a webserver with a strong focus on security. It also aims at being easy to use and being lightweight. Research performed by independent researchers proves that Hiawatha offers a performance comparable to other web servers under `normal conditions <http://www.saltwaterc.ro/wp-download/documents/PHP_web_serving_study.pdf>`_, but much better while `under attack <https://www.hiawatha-webserver.org/weblog/64>`_.
+
+Follow the `HOWTO instructions <https://www.hiawatha-webserver.org/howto>`_ at the Hiawatha webserver website to configure your webserver. The required UrlToolkit rule (for URL rewriting) to use CakePHP with Hiawatha is:
+
+::
+
+    UrlToolkit {
+       ToolkitID = cakephp
+       RequestURI exists Return
+       Match .* Rewrite /index.php
+    }
+
 URL Rewrites on IIS7 (Windows hosts)
 ====================================
 
