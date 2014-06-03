@@ -477,13 +477,17 @@ CookieComponent
 AuthComponent
 -------------
 
-- ``Blowfish`` is now the default password hasher used by authentication classes.
-  If you want to continue using SHA1 hashing used in 2.x use
-  ``'passwordHasher' => 'Simple'`` in your authenticator configuration.
+- ``Simple`` is now the default password hasher used by authentication classes.
+  It uses exclusively the Blowfish hashing algorithm. If you want to continue using
+  SHA1 hashing used in 2.x use ``'passwordHasher' => 'Weak'`` in your authenticator configuration.
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
+- A new ``FallbackPasswordHasher`` was added to help users migrate old passwords
+  from one algorithm to another. Check AuthComponent's documentation for more
+  info.
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
-  with ``hashType`` set to ``Blowfish``.
+- ``BlowfishaPasswordHasher`` class has been removed. Use
+  ``SimplePasswordHasher`` instead.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 - Configuration options are no longer set as public properties.
 - The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
