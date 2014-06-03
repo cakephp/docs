@@ -155,49 +155,24 @@ a capturing block, or by direct assignment. The ``start()``, ``append()`` and
 
 
     // Append into the sidebar later on.
-    $this->append('sidebar');
+    $this->start('sidebar');
+    echo $this->fetch('sidebar');
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-You can also append into a block using ``start()`` multiple times. ``assign()``
-can be used to clear or overwrite a block at any time::
+You can also append into a block using ``append()``::
+
+    $this->append('sidebar', $this->element('sidebar/popular_topics'));
+
+``assign()`` can be used to clear or overwrite a block at any time::
 
     // Clear the previous content from the sidebar block.
     $this->assign('sidebar', '');
 
-
-The ``prepend()`` method was added to prepend content to an existing block::
+The ``prepend()`` method allows you to prepend content to an existing block::
 
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
-
-The method ``startIfEmpty()`` can be used to start a block **only** if it is empty
-or undefined. If the block already exists, the captured content will be
-discarded. This is useful when you want to conditionally define default content for
-a block if it does not already exist:
-
-.. code-block:: php
-
-    // In a view file.
-    // Create a navbar block
-    $this->startIfEmpty('navbar');
-    echo $this->element('navbar');
-    echo $this->element('notifications');
-    $this->end();
-
-.. code-block:: php
-
-    // In a parent view/layout
-    <?php $this->startIfEmpty('navbar'); ?>
-    <p>If the block is not defined by now - show this instead</p>
-    <?php $this->end(); ?>
-
-    // Somewhere later in the parent view/layout
-    echo $this->fetch('navbar');
-
-In the above example, the ``navbar`` block will only contain the content added
-in the first section. Since the block was defined in the child view, the
-default content with the ``<p>`` tag will be discarded.
 
 .. note::
 

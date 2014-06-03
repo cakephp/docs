@@ -643,11 +643,19 @@ View Class
 - The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
   magic properties have been removed. You should access all of these properties
   on ``$this->request`` instead.
+- ``View::start()`` no longer appends to an existing block. Instead it will
+  overwrite the block content when end is called. If you need to combine block
+  contents you should fetch the block content when calling start a second time.
+- ``View::append()`` no longer has a capturing mode.
+- ``View::prepend()`` no longer has a capturing mode.
+- ``View::startIfEmpty()`` has been removed. Now that start() always overwrites
+  startIfEmpty serves no purpose.
 
 ViewBlock
 ---------
 
-- ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead.
+- ``ViewBlock::append()`` has been removed, use :php:meth:`Cake\\View\ViewBlock::concat()` instead. However,
+  ``View::append()`` still exists.
 
 JsonView
 --------
