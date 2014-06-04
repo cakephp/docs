@@ -217,7 +217,7 @@ along with their values, are identified by the ``$fields`` array.
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
 
-    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approved' => true),
