@@ -643,11 +643,6 @@ To call any view method use ``$this->method()``
     Prepend to the block with ``$name``. See the section on
     :ref:`view-blocks` for examples.
 
-.. php:method:: startIfEmpty($name)
-
-    Start a block if it is empty. All content in the block
-    will be captured and discarded if the block is already defined.
-
 .. php:method:: assign($name, $content)
 
     Assign the value of a block. This will overwrite any existing content. See
