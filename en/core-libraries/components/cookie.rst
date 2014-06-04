@@ -50,7 +50,7 @@ key
     Encryption key used when encrypted cookies are enabled. Defaults to Security.salt.
 httpOnly
     Set to true to make HTTP only cookies. Cookies that are HTTP only
-    are not accessible in JavaScript. Default false.
+    are not accessible in JavaScript. Defaults to false.
 encryption
     Type of encryption to use. Defaults to 'aes'. Can also be 'rijndael' for
     backwards compatibility.
