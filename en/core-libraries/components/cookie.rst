@@ -1,89 +1,66 @@
-Cookie
-######
+CookieComponent
+###############
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $config = [])
+.. php:namespace:: Cake\Controller\Component
 
-The CookieComponent is a wrapper around the native PHP ``setcookie``
-method. It also includes a host of delicious icing to make coding
-cookies in your controllers very convenient. Before attempting to
-use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controller's $components array.
+.. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
+The CookieComponent is a wrapper around the native PHP ``setcookie`` method. It
+makes it easier to manipulate cookies, and automatically encrypt cookie data.
 
-Controller Setup
-================
+Configuring Cookies
+===================
 
-There are a number of controller variables that allow you to configure the way
-cookies are created and managed. Defining these special configuration values in
-the beforeFilter() method of your controller allows you to define how the
-CookieComponent works.
+Cookies can be configured either globally or per top-level name. The global
+configuration data will be merged with the top-level configuration. So only need
+to override the parts that are different. To configure the global settings use
+the ``config()`` method::
 
-+---------------------+--------------+------------------------------------------------------+
-| Configuration value | default      | description                                          |
-+=====================+==============+======================================================+
-| string name         |'CakeCookie'  | The name of the cookie.                              |
-+---------------------+--------------+------------------------------------------------------+
-| string key          | null         | This string is used to encrypt                       |
-|                     |              | the value written to the cookie.                     |
-|                     |              | This string should be random and difficult to guess. |
-|                     |              |                                                      |
-|                     |              | When using rijndael or aes encryption this value     |
-|                     |              | must be longer than 32 bytes.                        |
-+---------------------+--------------+------------------------------------------------------+
-| string domain       | ''           | The domain name allowed to access the cookie. e.g.   |
-|                     |              | Use '.yourdomain.com' to allow access from all your  |
-|                     |              | subdomains.                                          |
-+---------------------+--------------+------------------------------------------------------+
-| int or string       | '5 Days'     | The time when your cookie will expire. Integers are  |
-| time                |              | Interpreted as seconds and a value of 0 is equivalent|
-|                     |              | to a 'session cookie': i.e. the cookie expires when  |
-|                     |              | the browser is closed. If a string is set, this will |
-|                     |              | be interpreted with PHP function strtotime(). You can|
-|                     |              | set this directly within the write() method.         |
-+---------------------+--------------+------------------------------------------------------+
-| string path         | '/'          | The server path on which the cookie will be applied. |
-|                     |              | If $path is set to '/foo/', the cookie will          |
-|                     |              | only be available within the /foo/ directory and all |
-|                     |              | sub-directories such as /foo/bar/ of your domain. The|
-|                     |              | default value is the entire domain. You can set this |
-|                     |              | directly within the write() method.                  |
-+---------------------+--------------+------------------------------------------------------+
-| boolean secure      | false        | Indicates that the cookie should only be transmitted |
-|                     |              | over a secure HTTPS connection. When set to true, the|
-|                     |              | cookie will only be set if a secure connection       |
-|                     |              | exists. You can set this directly within the write() |
-|                     |              | method.                                              |
-+---------------------+--------------+------------------------------------------------------+
-| boolean             | false        | Set to true to make HTTP only cookies. Cookies that  |
-| httpOnly            |              | are HTTP only are not accessible in Javascript.      |
-+---------------------+--------------+------------------------------------------------------+
+    $this->Cookie->config('path', '/');
+    $this->Cookie->config([
+        'expires' => '+10 days',
+        'httpOnly' => true
+    ]);
 
-The following snippet of controller code shows how to include the
-CookieComponent and set up the controller variables needed to write a cookie
-named 'baker\_id' for the domain 'example.com' which needs a secure connection,
-is available on the path '/bakers/preferences/', expires in one hour and is HTTP
-only::
+To configure a specific key use the ``configKey()`` method::
 
-    public $components = ['Cookie'];
+    $this->Cookie->config('User', 'path', '/');
+    $this->Cookie->configKey('User', [
+        'expires' => '+10 days',
+        'httpOnly' => true
+    ]);
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Cookie->config('name', 'baker_id');
-        $this->Cookie->config('time', 3600);  // or '1 hour'
-        $this->Cookie->config('path', '/bakers/preferences/');
-        $this->Cookie->config('domain', 'example.com');
-        $this->Cookie->config('secure', true);  // i.e. only sent if using secure HTTPS
-        $this->Cookie->config('key, 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^');
-        $this->Cookie->config('httpOnly', true);
-        $this->Cookie->encryption('aes');
-    }
+There are a number of configurable values for cookies:
+
+expires
+    How long the cookies should last for. Defaults to 1 month.
+path
+    The path on the server in which the cookie will be available on.
+    If path is set to '/foo/', the cookie will only be available within the
+    /foo/ directory and all sub-directories such as /foo/bar/ of domain.
+    The default value is the entire domain.
+domain
+    The domain that the cookie is available. To make the cookie
+    available on all subdomains of example.com set domain to '.example.com'.
+secure
+    Indicates that the cookie should only be transmitted over a
+    secure HTTPS connection. When set to true, the cookie will only be set if
+    a secure connection exists.
+key
+    Encryption key used when encrypted cookies are enabled. Defaults to Security.salt.
+httpOnly
+    Set to true to make HTTP only cookies. Cookies that are HTTP only
+    are not accessible in JavaScript. Default false.
+encryption
+    Type of encryption to use. Defaults to 'aes'. Can also be 'rijndael' for
+    backwards compatibility.
 
 Using the Component
 ===================
 
 The CookieComponent offers a number of methods for working with Cookies.
 
-.. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
+.. php:method:: write(mixed $key, mixed $value = null)
 
     The write() method is the heart of the cookie component. $key is the
     cookie variable name you want, and the $value is the information to
@@ -104,22 +81,10 @@ The CookieComponent offers a number of methods for working with Cookies.
             ['name' => 'Larry', 'role' => 'Lead']
         );
 
-    All values in the cookie are encrypted by default. If you want to
-    store the values as plain text, set the third parameter of the
-    write() method to false. You should remember to set
-    the encryption mode to 'aes' to ensure that values are securely
-    encrypted::
+    All values in the cookie are encrypted with AES by default. If you want to
+    store the values as plain text, be sure to configure the key space::
 
-        $this->Cookie->write('name', 'Larry', false);
-
-    The last parameter to write is $expires – the number of seconds
-    until your cookie will expire. For convenience, this parameter can
-    also be passed as a string that the php strtotime() function
-    understands::
-
-        // Both cookies expire in one hour.
-        $this->Cookie->write('first_name', 'Larry', false, 3600);
-        $this->Cookie->write('last_name', 'Masters', false, '1 hour');
+        $this->Cookie->configKey('User', 'encryption', false);
 
 .. php:method:: read(mixed $key = null)
 
@@ -154,16 +119,6 @@ The CookieComponent offers a number of methods for working with Cookies.
 
         // Delete the cookie variable bar, but not everything under foo
         $this->Cookie->delete('foo.bar');
-
-.. php:method:: destroy()
-
-    Destroys the current cookie.
-
-.. php:method:: encryption($type)
-
-    Allows you to change the encryption scheme. You can use either the 'rijndael'
-    or 'aes' schemes. Default is 'aes'.
-
 
 .. meta::
     :title lang=en: Cookie
