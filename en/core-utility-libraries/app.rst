@@ -14,7 +14,7 @@ package or folder where other classes reside. You can configure each package
 location in your application using ``App::build('APackage/SubPackage', $paths)``
 to inform the framework where should each class be loaded. Almost every class in
 the CakePHP framework can be swapped with your own compatible implementation. If
-you wish to use you own class instead of the classes the framework provides,
+you wish to use your own class instead of the classes the framework provides,
 just add the class to your libs folder emulating the directory location of where
 CakePHP expects to find it.
 
