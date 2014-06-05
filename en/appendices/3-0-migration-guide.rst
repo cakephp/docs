@@ -493,7 +493,7 @@ AuthComponent
 - The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
   to be passed as first argument, either as string or array of strings.
 
-ACL related classes where moved to a separate plugin. Password hashers, Authentication and
+ACL related classes were moved to a separate plugin. Password hashers, Authentication and
 Authorization providers where moved to the ``\Cake\Auth`` namespace. You are
 required to move your providers and hashers to the ``App\Auth`` namespace as
 well.
