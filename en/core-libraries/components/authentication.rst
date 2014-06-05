@@ -337,7 +337,7 @@ AuthComponent is configured by default to use the ``SimplePasswordHasher``
 when validating user credentials so no additional configuration is required in
 order to authenticate users.
 
-``SimplePasswordHasher`` uses the Blowfish hashing algorithm internally, which
+``SimplePasswordHasher`` uses the bcrypt hashing algorithm internally, which
 is one of the stronger password hashing solution used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.

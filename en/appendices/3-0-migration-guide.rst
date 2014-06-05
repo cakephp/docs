@@ -478,7 +478,7 @@ AuthComponent
 -------------
 
 - ``Simple`` is now the default password hasher used by authentication classes.
-  It uses exclusively the Blowfish hashing algorithm. If you want to continue using
+  It uses exclusively the bcrypt hashing algorithm. If you want to continue using
   SHA1 hashing used in 2.x use ``'passwordHasher' => 'Weak'`` in your authenticator configuration.
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
