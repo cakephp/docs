@@ -411,7 +411,7 @@ to be order by the date when they were last updated::
                 'order' => 'Post.updated DESC'
             )
         )
-    ));   
+    ));
    
 
 You can change ContainableBehavior settings at run time by

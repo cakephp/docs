@@ -405,6 +405,21 @@ les autres behaviors.
   par défaut est true.
 - **autoFields** (boolean, optional), ajout automatique des champs nécessaires
   pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
+-  **order**: (string, optional) l'ordre dans lequel les elements contenus sont
+   triés.
+   
+A partir de l'exemple précédent, ceci est un exemple de la façon de forcer
+les Posts à être triés selon la date de dernière modification::
+
+    $this->User->find('all', array(
+        'contain' => array(
+            'Profile',
+            'Post' => array(
+                'order' => 'Post.updated DESC'
+            )
+        )
+    ));
+
 
 Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en
 ré-attachant le behavior comme vu au chapitre
