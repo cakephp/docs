@@ -21,6 +21,14 @@ AclBehavior
 
 - ``Model::parentNode()`` now gets the type (Aro, Aco) passed as first argument: ``$model->parentNode($type)``.
 
+Model
+=====
+
+Model
+-----
+
+- ``Model::save()`` had the ``atomic`` option back-ported from 3.0.
+
 Network
 =======
 
