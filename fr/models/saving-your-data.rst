@@ -231,7 +231,7 @@ Par exemple, si je voulais approuver tous les bakers qui sont membres
 depuis plus d'un an, l'appel à update devrait ressembler à quelque chose
 du style:: 
 
-    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approve' => true),
