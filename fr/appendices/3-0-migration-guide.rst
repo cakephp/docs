@@ -508,14 +508,15 @@ CookieComponent
 - Utilise :php:meth:`Cake\\Network\\Request::cookie()` pour lire les données de
   cookie, ceci facilite les tests, et permet de définir les cookies pour
   ControllerTestCase.
-- Les Cookies cryptés dans les versions précédentes de CakePHP utilisant la
+- Les Cookies chiffrés dans les versions précédentes de CakePHP utilisant la
   méthode ``cipher`` sont maintenant illisible parce que ``Security::cipher()``
-  a été retirée. Vous aurez besoin de re-crypter les cookies avec la méthode
-  ``rijndael`` avant mise à jour.
-- ``CookieComponent::type()`` a été renommée en
-  :php:meth:`Cake\\Controller\\Component\CookieComponent::encryption()` qui est
-  plus intuitive.
-- Les options de configuration ne sont plus définie en propriété public.
+  a été retirée. Vous aurez besoin de re-chiffrer les cookies avec la méthode
+  ``rijndael`` ou ``aes`` avant mise à jour.
+- ``CookieComponent::type()`` a été retirée et remplacée par la donnée de
+  configuration accessible avec ``config()``.
+- ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
+   deux-là sont maintenant gérés avec des données de config. Consultez
+  :doc:`/core-libraries/components/cookie` pour plus d'informations.
 
 AuthComponent
 -------------
