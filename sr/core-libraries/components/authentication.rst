@@ -1,7 +1,7 @@
 Authentication
 ##############
 
-.. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
+.. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
 Identifying, authenticating and authorizing users is a common part of
 almost every web application. In CakePHP AuthComponent provides a
@@ -29,7 +29,7 @@ ways of authenticating users stored in your application.
 
 By default ``AuthComponent`` uses ``FormAuthenticate``.
 
-Choosing an Authentication type
+Choosing an Authentication Type
 -------------------------------
 
 Generally you'll want to offer form based authentication. It is the easiest for
@@ -46,7 +46,7 @@ applications without SSL encryption.
 You can also use authentication systems like openid as well, however openid is
 not part of CakePHP core.
 
-Configuring Authentication handlers
+Configuring Authentication Handlers
 -----------------------------------
 
 You configure authentication handlers using ``$this->Auth->authenticate``.
@@ -64,13 +64,13 @@ configuration information into each authentication object, using an
 array::
 
     // Basic setup
-    $this->Auth->authenticate = array('Form');
+    $this->Auth->config('authenticate', ['Form']);
 
     // Pass settings in
-    $this->Auth->authenticate = array(
-        'Basic' => array('userModel' => 'Member'),
-        'Form' => array('userModel' => 'Member')
-    );
+    $this->Auth->config('authenticate', [
+        'Basic' => ['userModel' => 'Members'],
+        'Form' => ['userModel' => 'Members']
+    ]);
 
 In the second example you'll notice that we had to declare the
 ``userModel`` key twice. To help you keep your code DRY, you can use the
@@ -79,11 +79,11 @@ to every attached object. The all key is also exposed as
 ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Member'),
+    $this->Auth->config('authenticate', [
+        AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
-    );
+    ]);
 
 In the above example, both ``Form`` and ``Basic`` will get the settings
 defined for the 'all' key. Any settings passed to a specific
@@ -94,27 +94,21 @@ keys.
 - ``fields`` The fields to use to identify a user by.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
-  authenticating users, i.e. ``array('User.is_active' => 1)``.
-- ``contain`` Containable options for when the user record is loaded.
-
-  .. versionadded:: 2.2
-
+  authenticating users, i.e. ``['User.is_active' => 1]``.
 - ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
-
-  .. versionadded:: 2.4
 
 To configure different fields for user in ``$components`` array::
 
     // Pass settings in $components array
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array('username' => 'email')
-                )
-            )
-        )
-    );
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]
+    ];
 
 Do not put other Auth configuration keys (like authError, loginAction etc)
 within the authenticate or Form element. They should be at the same level as
@@ -122,21 +116,21 @@ the authenticate key. The setup above with other Auth configuration
 should look like::
 
     // Pass settings in $components array
-    public $components = array(
-        'Auth' => array(
-            'loginAction' => array(
+    public $components = [
+        'Auth' => [
+            'loginAction' => [
                 'controller' => 'users',
                 'action' => 'login',
                 'plugin' => 'users'
-            ),
+            ],
             'authError' => 'Did you really think you are allowed to see that?',
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array('username' => 'email')
-                )
-            )
-        )
-    );
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]
+    ];
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -150,9 +144,9 @@ the following keys:
 - ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
 - ``qop`` Defaults to auth, no other values are supported at this time.
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
-  to ``md5($settings['realm'])``
+  to ``md5($config['realm'])``
 
-Identifying users and logging them in
+Identifying Users and Logging Them In
 -------------------------------------
 
 In the past ``AuthComponent`` auto-magically logged users in. This was
@@ -169,13 +163,14 @@ working with a login form could look like::
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Session->setFlash(
+                    __('Username or password is incorrect'),
+                    'default',
+                    [],
+                    'auth'
+                );
             }
-            $this->Session->setFlash(
-                __('Username or password is incorrect'),
-                'default',
-                array(),
-                'auth'
-            );
         }
     }
 
@@ -185,11 +180,10 @@ or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful, a fl
 
 .. warning::
 
-    In 2.x ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
-    whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in
-    when successful.
+    ``$this->Auth->login($data)`` will log the user in with whatever data is passed
+    to the method. It won't actually check the credentials against an authenticate class.
 
-Using Digest and Basic Authentication for logging in
+Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because basic and digest authentication don't require an initial POST or a form
@@ -200,14 +194,7 @@ authentication will re-verify the user's credentials on each request, this creat
 a small amount of additional overhead, but allows clients that to login in without
 using cookies.
 
-.. note::
-
-  Prior to 2.4 you still need the login action as you are redirected to login
-  when an unauthenticated user tries to access a protected page even when using
-  only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
-  will cause an error prior to 2.4.
-
-Creating Custom Authentication objects
+Creating Custom Authentication Objects
 --------------------------------------
 
 Because authentication objects are pluggable, you can create custom
@@ -235,18 +222,18 @@ also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
 basic and digest authentication below for more information.
 
-Using custom authentication objects
+Using Custom Authentication Objects
 -----------------------------------
 
 Once you've created your custom authentication object, you can use them
 by including them in AuthComponents authenticate array::
 
-    $this->Auth->authenticate = array(
+    $this->Auth->authenticate = [
         'Openid', // app authentication object.
         'AuthBag.Combo', // plugin authentication object.
-    );
+    ];
 
-Creating stateless authentication systems
+Creating Stateless Authentication Systems
 -----------------------------------------
 
 Authentication objects can implement a ``getUser()`` method that can be
@@ -274,7 +261,7 @@ The above is how you could implement getUser method for HTTP basic
 authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
-Handling unauthenticated requests
+Handling Unauthenticated Requests
 ---------------------------------
 
 When an unauthenticated user tries to access a protected page first the
@@ -288,16 +275,12 @@ If authenticator returns null, `AuthComponent` redirects user to login action.
 If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that element
 is rendered else a 403 HTTP status code is returned.
 
-.. note::
-
-  Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
-
-Displaying auth related flash messages
+Displaying Auth Related Flash Messages
 --------------------------------------
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the ``app/View/Layouts/default.ctp`` file in the body section
+lines to the ``app/View/Layout/default.ctp`` file in the body section
 preferable before the content_for_layout line.::
 
     echo $this->Session->flash();
@@ -309,7 +292,7 @@ AuthComponent uses for setting flash messages. The available keys are
 
 - ``element`` - The element to use, defaults to 'default'.
 - ``key`` - The key to use, defaults to 'auth'
-- ``params`` - The array of additional params to use, defaults to array()
+- ``params`` - The array of additional params to use, defaults to []
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or
@@ -332,13 +315,13 @@ In your controller's beforeFilter(), or component settings::
 
 .. _hashing-passwords:
 
-Hashing passwords
+Hashing Passwords
 -----------------
 
 You are responsible for hashing the passwords before they are persisted to the
 database, the easiest way is to use a setter function in your User entity::
 
-    use \Cake\Controller\Component\Auth\SimplePasswordHasher;
+    use \Cake\Auth\SimplePasswordHasher;
     class User extends Entity {
 
         // ...
@@ -359,14 +342,14 @@ is one of the stronger password hashing solution used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.
 
-Creating custom password hasher classes
+Creating Custom Password Hasher Classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``App/Controller/Component/Auth/DumbPasswordHasher.php`` and implement the
+``App/Auth/DumbPasswordHasher.php`` and implement the
 ``hash`` and ``check`` methods::
 
-    use Cake\Controller\Component\Auth\AbstractPasswordHasher;
+    use \Cake\Auth\AbstractPasswordHasher;
 
     class DumbPasswordHasher extends AbstractPasswordHasher {
 
@@ -398,7 +381,7 @@ Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
 explain how to migrate from one hashing algorithm to CakePHP's default
 
-Changing hashing algorithms
+Changing Hashing Algorithms
 ---------------------------
 
 CakePHP provides a clean way to migrate your users' passwords from one algorithm
@@ -444,7 +427,7 @@ As you cans see we are just setting the plain password again to to property so
 the setter function in the entity hashes the password as shown in previous
 examples and then saved again to the database.
 
-Hashing passwords for digest authentication
+Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
@@ -456,7 +439,7 @@ recommended that you store the digest password in a separate column,
 from the normal password hash::
 
     class User extends AppModel {
-        public function beforeSave($options = array()) {
+        public function beforeSave($options = []) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
                 $this->data['User']['username'],
@@ -478,7 +461,26 @@ other password hashes, based on the RFC for digest authentication.
     ``env('SCRIPT_NAME)``. You may wish to use a static string if you
     want consistent hashes in multiple environments.
 
-Manually logging users in
+Creating Custom Password Hasher Classes
+---------------------------------------
+Custom password hasher classes need to extend the ``AbstractPasswordHasher``
+class and need to implement the abstract methods ``hash()`` and ``check()``.
+In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+the following::
+
+    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
+
+    class CustomPasswordHasher extends AbstractPasswordHasher {
+        public function hash($password) {
+            // stuff here
+        }
+
+        public function check($password, $hashedPassword) {
+            // stuff here
+        }
+    }
+
+Manually Logging Users In
 -------------------------
 
 Sometimes the need arises where you need to manually log a user in, such
@@ -490,7 +492,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
             $id = $this->User->id;
             $this->request->data['User'] = array_merge(
                 $this->request->data['User'],
-                array('id' => $id)
+                ['id' => $id]
             );
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
@@ -502,23 +504,18 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     Be sure to manually add the new User id to the array passed to the login
     method. Otherwise you won't have the user id available.
 
-Accessing the logged in user
+Accessing the Logged In User
 ----------------------------
 
 Once a user is logged in, you will often need some particular
 information about the current user. You can access the currently logged
-in user using ``AuthComponent::user()``. This method is static, and can
-be used globally after the AuthComponent has been loaded. You can access
-it both as an instance method or as a static method::
+in user using ``AuthComponent::user()``::
 
-    // Use anywhere
-    AuthComponent::user('id')
-
-    // From inside a controller
+    // From inside a controller or other component.
     $this->Auth->user('id');
 
 
-Logging users out
+Logging Users Out
 -----------------
 
 Eventually you'll want a quick way to de-authenticate someone, and
@@ -557,7 +554,7 @@ application, or as part of a plugin.
   and uses the return of that to authorize a user. This is often the
   most simple way to authorize users.
 
-Configuring Authorization handlers
+Configuring Authorization Handlers
 ----------------------------------
 
 You configure authorization handlers using ``$this->Auth->authorize``.
@@ -578,25 +575,25 @@ configuration information into each authorization object, using an
 array::
 
     // Basic setup
-    $this->Auth->authorize = array('Controller');
+    $this->Auth->config('authorize', ['Controller']);
 
     // Pass settings in
-    $this->Auth->authorize = array(
-        'Actions' => array('actionPath' => 'controllers/'),
+    $this->Auth->config('authorize', [
+        'Actions' => ['actionPath' => 'controllers/'],
         'Controller'
-    );
+    ]);
 
-Much like ``Auth->authenticate``, ``Auth->authorize``, helps you
+Much like ``authenticate``, ``authorize``, helps you
 keep your code DRY, by using the ``all`` key. This special key allows you
 to set settings that are passed to every attached object. The all key
 is also exposed as ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'
-    $this->Auth->authorize = array(
-        AuthComponent::ALL => array('actionPath' => 'controllers/'),
+    $this->Auth->config('authorize', [
+        AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
-    );
+    ]);
 
 In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
@@ -611,19 +608,22 @@ The core authorize objects support the following configuration keys.
   under. Used with ActionsAuthorize.
 
 
-Creating Custom Authorize objects
+Creating Custom Authorize Objects
 ---------------------------------
 
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the
+``App/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
 
-    App::uses('BaseAuthorize', 'Controller/Component/Auth');
+    namespace App\Controller\Component\Auth;
+
+    use Cake\Controller\Component\Auth\BaseAuthorize;
+    use Cake\Network\Request;
 
     class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, CakeRequest $request) {
+        public function authorize($user, Request $request) {
             // Do things for ldap here.
         }
     }
@@ -635,29 +635,29 @@ that you extend ``BaseAuthorize``, only that your authorize object
 implements an ``authorize()`` method. The ``BaseAuthorize`` class provides
 a number of helpful methods that are commonly used.
 
-Using custom authorize objects
+Using Custom Authorize Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
 including them in your AuthComponent's authorize array::
 
-    $this->Auth->authorize = array(
+    $this->Auth->config('authorize', [
         'Ldap', // app authorize object.
         'AuthBag.Combo', // plugin authorize object.
-    );
+    ]);
 
-Using no authorization
+Using No Authorization
 ----------------------
 
 If you'd like to not use any of the built-in authorization objects, and
 want to handle things entirely outside of AuthComponent you can set
-``$this->Auth->authorize = false;``. By default AuthComponent starts off
+``$this->Auth->config('authorize', false);``. By default AuthComponent starts off
 with ``authorize = false``. If you don't use an authorization scheme,
 make sure to check authorization yourself in your controller's
 beforeFilter, or with another component.
 
 
-Making actions public
+Making Actions Public
 ---------------------
 
 There are often times controller actions that you wish to remain
@@ -667,45 +667,36 @@ mark actions as public actions by using ``AuthComponent::allow()``. By
 marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
-    // Allow all actions. CakePHP 2.0
-    $this->Auth->allow('*');
-
-    // Allow all actions. CakePHP 2.1
+    // Allow all actions
     $this->Auth->allow();
 
-    // Allow only the view and index actions.
-    $this->Auth->allow('view', 'index');
+    // Allow only the index action.
+    $this->Auth->allow('index');
 
     // Allow only the view and index actions.
-    $this->Auth->allow(array('view', 'index'));
+    $this->Auth->allow(['view', 'index']);
 
-.. warning::
+By calling it empty you allow all actions to be public.
+For a single action you can provide the action name as string. Otherwise use an array.
 
-  If you're using scaffolding, allow all will not identify and allow the
-  scaffolded methods. You have to specify their action names.
-
-You can provide as many action names as you need to ``allow()``. You can
-also supply an array containing all the action names.
-
-Making actions require authorization
+Making Actions Require Authorization
 ------------------------------------
 
 By default all actions require authorization. However, after making actions
 public, you want to revoke the public access. You can do so using
 ``AuthComponent::deny()``::
 
-    // remove one action
-    $this->Auth->deny('add');
-
-    // remove all the actions.
+    // Deny all actions.
     $this->Auth->deny();
 
-    // remove a group of actions.
-    $this->Auth->deny('add', 'edit');
-    $this->Auth->deny(array('add', 'edit'));
+    // Deny one action
+    $this->Auth->deny('add');
 
-You can provide as many action names as you need to ``deny()``. You can
-also supply an array containing all the action names.
+    // Deny a group of actions.
+    $this->Auth->deny(['add', 'edit']);
+
+By calling it empty you deny all actions.
+For a single action you can provide the action name as string. Otherwise use an array.
 
 
 Using ControllerAuthorize
@@ -723,9 +714,9 @@ the request. The callback is passed the active user, so it can be
 checked::
 
     class AppController extends Controller {
-        public $components = array(
-            'Auth' => array('authorize' => 'Controller'),
-        );
+        public $components = [
+            'Auth' => ['authorize' => 'Controller'],
+        ];
         public function isAuthorized($user = null) {
             // Any registered user can access public functions
             if (empty($this->request->params['admin'])) {
@@ -771,7 +762,7 @@ then be for the ``posts`` controller with the ``read`` permission. This
 allows you to create permission systems that focus more on what is being
 done to resources, rather than the specific actions being visited.
 
-Mapping actions when using CrudAuthorize
+Mapping Actions When Using CrudAuthorize
 ----------------------------------------
 
 When using CrudAuthorize or any other authorize objects that use action
@@ -780,10 +771,10 @@ map actions -> CRUD permissions using mapAction(). Calling this on
 AuthComponent will delegate to all the of the configured authorize
 objects, so you can be sure the settings were applied every where::
 
-    $this->Auth->mapActions(array(
-        'create' => array('register'),
-        'view' => array('show', 'display')
-    ));
+    $this->Auth->mapActions([
+        'create' => ['register'],
+        'view' => ['show', 'display']
+    ]);
 
 The keys for mapActions should be the CRUD permissions you want to set,
 while the values should be an array of all the actions that are mapped
@@ -795,88 +786,64 @@ AuthComponent API
 AuthComponent is the primary interface to the built-in authorization
 and authentication mechanics in CakePHP.
 
-.. php:attr:: ajaxLogin
+Configuration options
+---------------------
 
+ajaxLogin
     The name of an optional view element to render when an AJAX request is made
     with an invalid or expired session.
-
-.. php:attr:: allowedActions
-
+allowedActions
     Controller actions for which user validation is not required.
-
-.. php:attr:: authenticate
-
+authenticate
     Set to an array of Authentication objects you want to use when
     logging users in. There are several core authentication objects,
     see the section on :ref:`authentication-objects`.
-
-.. php:attr:: authError
-
+authError
     Error to display when user attempts to access an object or action to which
     they do not have access.
 
-    .. versionchanged:: 2.4
-       You can suppress authError message from being displayed by setting this
-       value to boolean `false`.
-
-.. php:attr:: authorize
-
+    You can suppress authError message from being displayed by setting this
+    value to boolean `false`.
+authorize
     Set to an array of Authorization objects you want to use when
     authorizing users on each request, see the section on
     :ref:`authorization-objects`.
-
-.. php:attr:: components
-
-    Other components utilized by AuthComponent
-
-.. php:attr:: flash
-
+flash
     Settings to use when Auth needs to do a flash message with
     :php:meth:`SessionComponent::setFlash()`.
     Available keys are:
 
     - ``element`` - The element to use, defaults to 'default'.
     - ``key`` - The key to use, defaults to 'auth'
-    - ``params`` - The array of additional params to use, defaults to array()
+    - ``params`` - The array of additional params to use, defaults to []
 
-.. php:attr:: loginAction
-
+loginAction
     A URL (defined as a string or array) to the controller action that handles
     logins. Defaults to `/users/login`
-
-.. php:attr:: loginRedirect
-
+loginRedirect
     The URL (defined as a string or array) to the controller action users
     should be redirected to after logging in. This value will be ignored if the
     user has an ``Auth.redirect`` value in their session.
-
-.. php:attr:: logoutRedirect
-
+logoutRedirect
     The default action to redirect to after the user is logged out. While
     AuthComponent does not handle post-logout redirection, a redirect URL will
     be returned from :php:meth:`AuthComponent::logout()`. Defaults to
-    :php:attr:`AuthComponent::$loginAction`.
-
-.. php:attr:: unauthorizedRedirect
-
+    ``loginAction``.
+unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer URL or ``AuthComponent::$loginAction`` or '/'.
+    redirected to the referrer URL or ``loginAction`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
 
-.. php:attr:: request
+.. php:attr:: components
 
-    Request object
-
-.. php:attr:: response
-
-    Response object
+    Other components utilized by AuthComponent
 
 .. php:attr:: sessionKey
 
     The session key name where the record of the current user is stored. If
     unspecified, it will be "Auth.User".
 
-.. php:method:: allow($action, [$action, ...])
+.. php:method:: allow($actions = null)
 
     Set one or more actions as public actions, this means that no
     authorization checks will be performed for the specified actions.
@@ -892,9 +859,9 @@ and authentication mechanics in CakePHP.
 
     Loads the authorization objects configured.
 
-.. php:method:: deny($action, [$action, ...])
+.. php:method:: deny($actions = null)
 
-    Toggle one more more actions previously declared as public actions,
+    Toggle one or more actions previously declared as public actions,
     as non-public methods. These methods will now require
     authorization. Best used inside your controller's beforeFilter
     method.
@@ -923,11 +890,6 @@ and authentication mechanics in CakePHP.
     is authorized. Each adapter will be checked in sequence, if any of them
     return true, then the user will be authorized for the request.
 
-.. php:method:: loggedIn()
-
-    Returns true if the current client is a logged in user, or false if
-    they are not.
-
 .. php:method:: login($user)
 
     :param array $user: Array of logged in user data.
@@ -944,20 +906,12 @@ and authentication mechanics in CakePHP.
 
     Logs out the current user.
 
-.. php:method:: mapActions($map = array())
+.. php:method:: mapActions($map = [])
 
     Maps action names to CRUD operations. Used for controller-based
     authentication. Make sure to configure the authorize property before
     calling this method. As it delegates $map to all the attached authorize
     objects.
-
-.. php:staticmethod:: password($pass)
-
-.. deprecated:: 2.4
-
-.. php:method:: redirect($url = null)
-
-.. deprecated:: 2.3
 
 .. php:method:: redirectUrl($url = null)
 
@@ -965,8 +919,6 @@ and authentication mechanics in CakePHP.
     URL in to set the destination a user should be redirected to upon logging
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
-
-.. versionadded:: 2.3
 
 .. php:method:: shutdown($Controller)
 

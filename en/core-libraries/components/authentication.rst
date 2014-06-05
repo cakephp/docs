@@ -95,7 +95,7 @@ keys.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['User.is_active' => 1]``.
-- ``passwordHasher`` Password hasher class. Defaults to ``Blowfish``.
+- ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
 
 To configure different fields for user in ``$components`` array::
 
@@ -315,13 +315,13 @@ In your controller's beforeFilter(), or component settings::
 
 .. _hashing-passwords:
 
-Hashing passwords
+Hashing Passwords
 -----------------
 
 You are responsible for hashing the passwords before they are persisted to the
 database, the easiest way is to use a setter function in your User entity::
 
-    use \Cake\Controller\Component\Auth\SimplePasswordHasher;
+    use \Cake\Auth\SimplePasswordHasher;
     class User extends Entity {
 
         // ...
@@ -342,14 +342,14 @@ is one of the stronger password hashing solution used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.
 
-Creating custom password hasher classes
+Creating Custom Password Hasher Classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``App/Controller/Component/Auth/DumbPasswordHasher.php`` and implement the
+``App/Auth/DumbPasswordHasher.php`` and implement the
 ``hash`` and ``check`` methods::
 
-    use Cake\Controller\Component\Auth\AbstractPasswordHasher;
+    use \Cake\Auth\AbstractPasswordHasher;
 
     class DumbPasswordHasher extends AbstractPasswordHasher {
 
@@ -381,7 +381,7 @@ Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
 explain how to migrate from one hashing algorithm to CakePHP's default
 
-Changing hashing algorithms
+Changing Hashing Algorithms
 ---------------------------
 
 CakePHP provides a clean way to migrate your users' passwords from one algorithm
@@ -427,7 +427,7 @@ As you cans see we are just setting the plain password again to to property so
 the setter function in the entity hashes the password as shown in previous
 examples and then saved again to the database.
 
-Hashing passwords for digest authentication
+Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
