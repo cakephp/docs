@@ -36,14 +36,8 @@ application CakePHP ressemblerait à ce qui suit::
 
     {
         "name": "example-app",
-        "repositories": [
-            {
-                "type": "pear",
-                "url": "http://pear.cakephp.org"
-            }
-        ],
         "require": {
-            "cakephp/cakephp": ">=2.4.9"
+            "cakephp/cakephp": ">=2.5.0"
         },
         "config": {
             "vendor-dir": "Vendor/"
@@ -81,7 +75,7 @@ relatif::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
@@ -161,15 +155,15 @@ exemple) pour ressembler à ce qui suit::
     // /app/webroot/index.php (partiel, commentaires retirés) 
     
     if (!defined('ROOT')) {
-        define('ROOT', DS.'home'.DS.'moi');
+        define('ROOT', DS . 'home' . DS . 'me');
     }
-    
+
     if (!defined('APP_DIR')) {
-        define ('APP_DIR', 'monapp');
+        define ('APP_DIR', 'myapp');
     }
-    
+
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
+        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
 Il est recommandé d'utiliser la constante ``DS`` plutôt que des slashes pour

@@ -34,14 +34,8 @@ would look like the following::
 
     {
         "name": "example-app",
-        "repositories": [
-            {
-                "type": "pear",
-                "url": "http://pear.cakephp.org"
-            }
-        ],
         "require": {
-            "cakephp/cakephp": ">=2.4.9"
+            "cakephp/cakephp": ">=2.5.0"
         },
         "config": {
             "vendor-dir": "Vendor/"
@@ -76,7 +70,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::

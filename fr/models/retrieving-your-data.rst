@@ -566,6 +566,22 @@ Configurer la propriété ``$this->paginate`` comme ci-dessus dans le controller
 fera que le ``type`` de find deviendra ``available``, et vous permettra aussi
 de continuer à modifier les résultats trouvés.
 
+Pour simplement retourner le nombre d'un type find personnalisé, appelez
+``count`` comme vous le feriez habituellement, mais passez le type de find
+dans un tableau dans le second argument.
+
+::
+
+    class ArticlesController extends AppController {
+
+        // Va récupèrer le nombre d'articles publiés (en utilisant le find available défini ci-dessus)
+        public function index() {
+            $count = $this->Article->find('count', array(
+                'type' => 'available'
+            ));
+        }
+    }
+
 Si le compte de votre page de pagination devient fausse, il peut être
 nécessaire d'ajouter le code suivant à votre ``AppModel``, ce qui devrait
 régler le compte de pagination:
