@@ -592,7 +592,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   afficher dans le label qui accompagne le input::
   
       echo $this->Form->input('User.name', array(
-          'label' => 'Alias de l'user'
+          'label' => "Alias de l'user"
       ));
 
   Affichera:
