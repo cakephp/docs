@@ -803,7 +803,7 @@ authError
     they do not have access.
 
     You can suppress authError message from being displayed by setting this
-    value to boolean `false`.
+    value to boolean ``false``.
 authorize
     Set to an array of Authorization objects you want to use when
     authorizing users on each request, see the section on
@@ -819,7 +819,7 @@ flash
 
 loginAction
     A URL (defined as a string or array) to the controller action that handles
-    logins. Defaults to `/users/login`
+    logins. Defaults to ``/users/login``.
 loginRedirect
     The URL (defined as a string or array) to the controller action users
     should be redirected to after logging in. This value will be ignored if the
@@ -834,10 +834,6 @@ unauthorizedRedirect
     redirected to the referrer URL or ``loginAction`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
 
-.. php:attr:: components
-
-    Other components utilized by AuthComponent
-
 .. php:attr:: sessionKey
 
     The session key name where the record of the current user is stored. If
@@ -850,14 +846,6 @@ unauthorizedRedirect
     The special value of ``'*'`` will mark all the current controllers
     actions as public. Best used in your controller's beforeFilter
     method.
-
-.. php:method:: constructAuthenticate()
-
-    Loads the configured authentication objects.
-
-.. php:method:: constructAuthorize()
-
-    Loads the authorization objects configured.
 
 .. php:method:: deny($actions = null)
 
@@ -919,15 +907,6 @@ unauthorizedRedirect
     URL in to set the destination a user should be redirected to upon logging
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
-
-.. php:method:: shutdown($Controller)
-
-    Component shutdown. If user is logged in, wipe out redirect.
-
-.. php:method:: startup($Controller)
-
-    Main execution method. Handles redirecting of invalid users, and
-    processing of login form data.
 
 .. php:staticmethod:: user($key = null)
 
