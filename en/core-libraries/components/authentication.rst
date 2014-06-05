@@ -412,7 +412,7 @@ function accordingly::
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                if ((new SimplePasswordHasher)->needsRehash($this->Auth->user('password'))) {
+                if ($this->Auth->loginProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
                     $user->password = $this->request->data('password');
                     $this->Users->save($user);
