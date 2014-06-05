@@ -198,7 +198,7 @@ and add the following::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Controller\Component\Auth\SimplePasswordHasher;
+    use Cake\Auth\SimplePasswordHasher;
 
     class User extends Entity {
 
