@@ -302,59 +302,132 @@ for when authorization fails::
     $this->Auth->authError = "This error shows up with the user tries to access" .
                                 "a part of the website that is protected.";
 
+.. versionchanged:: 2.4
    Sometimes, you want to display the authorization error only after
    the user has already logged-in. You can suppress this message by setting
    its value to boolean `false`
 
 In your controller's beforeFilter(), or component settings::
 
-    if (!$this->Auth->user()) {
+    if (!$this->Auth->loggedIn()) {
         $this->Auth->authError = false;
     }
 
 .. _hashing-passwords:
 
-Hashing Passwords
+Hashing passwords
 -----------------
 
-Authenticating objects use a new setting ``passwordHasher`` which specifies the
-password hasher class to use. It can be a string specifying class name or an
-array with key ``className`` stating the class name and any extra keys will be
-passed to password hasher constructor as config. As of 3.0 the default hasher
-class is ``Blowfish``. You can use alternate hashing schemes like this::
+You are responsible for hashing the passwords before they are persisted to the
+database, the easiest way is to use a setter function in your User entity::
+
+    use \Cake\Controller\Component\Auth\SimplePasswordHasher;
+    class User extends Entity {
+
+        // ...
+
+        public function setPassword($password) {
+            return (new SimplePasswordHasher)->hash($password);
+        }
+
+        // ...
+    }
+
+AuthComponent is configured by default to use the ``SimplePasswordHasher``
+when validating user credentials so no additional configuration is required in
+order to authenticate users.
+
+``SimplePasswordHasher`` uses the Blowfish hashing algorithm internally, which
+is one of the stronger password hashing solution used in the industry. While it
+is recommended that you use this password hasher class, the case may be that you
+are managing a database of users whose password was hashed differently.
+
+Creating custom password hasher classes
+---------------------------------------
+
+In order to use a different password hasher, you need to create the class in
+``App/Controller/Component/Auth/DumbPasswordHasher.php`` and implement the
+``hash`` and ``check`` methods::
+
+    use Cake\Controller\Component\Auth\AbstractPasswordHasher;
+
+    class DumbPasswordHasher extends AbstractPasswordHasher {
+
+        public function hash($password) {
+            return md5($password);
+        }
+
+        public function check($password, $hashed) {
+            return md5($password) === $hashed;
+        }
+    }
+
+Then you are required to configure the AuthComponent to use your own password
+hasher::
 
     public $components = [
         'Auth' => [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
-                        'className' => 'Simple',
-                        'hashType' => 'sha256'
+                        'className' => 'Dumb',
                     ]
                 ]
             ]
         ]
     ];
 
-When creating new user records you can hash a password in the beforeSave
-callback of your model using appropriate password hasher class::
+Supporting legacy systems is a good idea, but it is even better to keep your
+database with the latest security advancements. The following section will
+explain how to migrate from one hashing algorithm to CakePHP's default
 
-    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+Changing hashing algorithms
+---------------------------
 
-    class User extends AppModel {
-        public function beforeSave($options = []) {
-            if (!$this->id) {
-                $passwordHasher = new BlowfishPasswordHasher();
-                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
+CakePHP provides a clean way to migrate your users' passwords from one algorithm
+to another, this is achieved through the ``FallbackPasswordHasher`` class.
+Assuming you are using ``DumbPasswordHasher`` from the previous example, you
+can configure the AuthComponent as follows::
+
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'Fallback',
+                        'hashers' => ['Simple', 'Dumb']
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+The first name appearing in the ``hashers`` key indicates which of the classes
+is the preferred one, but it will fallback to the others in the list if the
+check was unsuccessful.
+
+In order to update old users' passwords on the fly, you can change the login
+function accordingly::
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                if ((new SimplePasswordHasher)->needsRehash($this->Auth->user('password'))) {
+                    $user = $this->Users->get($this->Auth->user('id'));
+                    $user->password = $this->request->data('password');
+                    $this->Users->save($user);
+                }
+                return $this->redirect($this->Auth->redirectUrl());
             }
-            return true;
+            ...
         }
     }
 
-You don't need to hash passwords before calling ``$this->Auth->login()``.
-The various authentication objects will hash passwords individually.
+As you cans see we are just setting the plain password again to to property so
+the setter function in the entity hashes the password as shown in previous
+examples and then saved again to the database.
 
-Hashing Passwords for Digest Authentication
+Hashing passwords for digest authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format

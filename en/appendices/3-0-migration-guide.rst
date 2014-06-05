@@ -486,7 +486,7 @@ AuthComponent
   from one algorithm to another. Check AuthComponent's documentation for more
   info.
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
-- ``BlowfishaPasswordHasher`` class has been removed. Use
+- ``BlowfishPasswordHasher`` class has been removed. Use
   ``SimplePasswordHasher`` instead.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 - Configuration options are no longer set as public properties.
