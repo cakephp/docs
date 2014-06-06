@@ -717,8 +717,8 @@ The next step in the map-reduce process is to consolidate the final results. For
 each status created in the mapper, the ``$reducer`` function will be called so
 you can do any extra processing. This function will receive the list of articles
 in a particular ``bucket`` as the first parameter, the name of the ``bucket`` it
-needs to process as the second parameter, and again, as in the ``mapper() ``
-function, the instance of the ``MapReduce`` routine as thethird parameter. In
+needs to process as the second parameter, and again, as in the ``mapper()``
+function, the instance of the ``MapReduce`` routine as the third parameter. In
 our example, we did not have to do any extra processing, so we just ``emit()``
 the final results::
 
