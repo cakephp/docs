@@ -1024,7 +1024,7 @@ associations and filter them by conditions::
         }
     ]);
 
-Is is also possible to restrict deeply nested associations using the dot
+It is also possible to restrict deeply nested associations using the dot
 notation::
 
     $query = $articles->find()->contain([
