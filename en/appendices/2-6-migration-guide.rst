@@ -47,3 +47,15 @@ Validation
 
 - ``Validation::between`` has been deprecated, you should use
   :php:meth:`Validation::lengthBetween` instead.
+
+
+View
+====
+
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::css()` had the ``once`` option added. It works the same
+  as the ``once`` option for ``HtmlHelper::script()``. The default value is
+  ``false`` to maintain backwards compatibility.
+
