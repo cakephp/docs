@@ -94,7 +94,7 @@ keys.
 - ``fields`` The fields to use to identify a user by.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
-  authenticating users, i.e. ``['User.is_active' => 1]``.
+  authenticating users, i.e. ``['Users.is_active' => true]``.
 - ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
 
 To configure different fields for user in ``$components`` array::
