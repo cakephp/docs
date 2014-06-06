@@ -15,10 +15,11 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+    pear install pear.phpunit.de/PHPUnit-3.7.32
 
 .. note::
 
+    PHPUnit4 はCakePHPのユニットテスト機能と互換性がありません。
     システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
 一旦PEARインストーラーによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
