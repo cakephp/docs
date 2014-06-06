@@ -1,30 +1,33 @@
-Schema System
-#############
+Système de Schema
+#################
 
 .. php:namespace:: Cake\Database\Schema
 
-CakePHP features a schema system that is capable of reflecting and generating
-schema information for tables in SQL datastores. The schema system can
-generate/reflect a schema for any SQL platform that CakePHP supports.
+CakePHP dispose d'un système de schema qui est capable de montrer et de générer
+les informations de schema des tables dans les stockages de données SQL. Le
+système de schema peut générer/montrer un schema pour toute plateforme SQL
+que CakePHP supporte.
 
-The main pieces of the schema system are ``Cake\Database\Schema\Table`` and
-``Cake\Database\Schema\Collection``. These classes give you access to
-database-wide and individual Table object features respectively.
+Les principales parties du système de schema sont ``Cake\Database\Schema\Table``
+et ``Cake\Database\Schema\Collection``. Ces classes vous donnent accès
+respectivement à la base de donnée toute entière et aux fonctionnalités de
+l'objet Table.
 
-The primary use of the schema system is for :ref:`test-fixtures`. However, it
-can also be used in your application if required.
+L'utilisation première du système de schema est pour les :ref:`test-fixtures`.
+Cependant, il peut aussi être utilisé dans votre application si nécessaire.
 
-Schema\\Table Objects
-=====================
+Objets Schema\\Table
+====================
 
 .. php:class:: Table
 
-The schema subsystem provides a simple Table object to hold data about a table
-in a database. This object is returned by the schema reflection features::
+Le sous-système de schema fournit un objet Table pour avoir les données d'une
+table dans la base de données. Cet objet est retourné par les fonctionnalités
+de reflection de schema::
 
     use Cake\Database\Schema\Table;
 
-    // Create a table one column at a time.
+    // Créé une table colonne par colonne.
     $t = new Table('posts');
     $t->addColumn('id', [
       'type' => 'integer',
@@ -41,43 +44,47 @@ in a database. This object is returned by the schema reflection features::
       'columns' => ['id']
     ]);
 
-    // Schema\Table classes could also be created with array data
+    // Classes Schema\Table peuvent aussi être créées avec des données de tableau
     $t = new Table('posts', $columns);
 
-``Schema\Table`` objects allow you build up information about a table's schema. It helps to
-normalize and validate the data used to describe a table. For example, the
-following two forms are equivalent::
+Les objets ``Schema\Table`` vous permettent de construire des informations sur
+le schema d'une table. Il aide à normaliser et à valider les données utilisés
+pour décrire une table. Par exemple, les deux formulaires suivants sont
+équivalents::
 
     $t->addColumn('title', 'string');
-    // and
+    // et
     $t->addColumn('title', [
       'type' => 'string'
     ]);
 
-While equivalent, the 2nd form allows more detail and control. This emulates
-the existing features available in Schema files + the fixture schema in 2.x.
+ Bien qu'équivalent, le 2ème formulaire donne plus de détails et de contrôle.
+Ceci émule les fonctionnalités existantes disponibles dans les fichiers de
+Schema + le schema de fixture dans 2.x.
 
-Accessing Column Data
----------------------
+Accéder aux Données de Colonne
+------------------------------
 
-Columns are either added as constructor arguments, or via `addColumn()`. Once
-fields are added information can be fetched using `column()` or `columns()`::
+Les colonnes sont soit ajoutées en argument du constructeur, soit via
+`addColumn()`. Une fois que les champs sont ajoutés, les informations peuvent
+être récupérées en utilisant `column()` ou `columns()`::
 
-    // Get the array of data about a column
+    // Récupère le tableau de données d'une colonne
     $c = $t->column('title');
 
-    // Get the list of all columns.
+    // Récupère la liste de toutes les colonnes.
     $cols = $t->columns();
 
 
-Indexes and Constraints
------------------------
+Indices et Contraintes
+----------------------
 
-Indexes are added using the ``addIndex()``. Constraints are added using
-``addConstraint()``.  Indexes & constraints cannot be added for columns that do
-not exist, as it would result in an invalid state. Indexes are different from
-constraints and exceptions will be raised if you try to mix types beween the
-methods. An example of both methods is::
+Les indices sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
+ajoutées en utilisant ``addConstraint()``.  Les indices & contraintes peuvent
+être ajoutés pour les colonnes qui n'existent pas, puisque cela donnera un
+état invalide. Les indices sont différents des contraintes et les exceptions
+seront levées si vous essayez de mélanger les types entre les méthodes. Un
+exemple des deux méthodes est::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
@@ -85,22 +92,22 @@ methods. An example of both methods is::
       ->addColumn('title', 'string')
       ->addColumn('slug', 'string');
 
-    // Add a primary key.
+    // Ajoute une clé primaire.
     $t->addConstraint('primary', [
       'type' => 'primary',
       'columns' => ['id']
     ]);
-    // Add a unique key
+    // Ajoute une clé unique
     $t->addConstraint('slug_idx', [
       'columns' => ['slug'],
       'type' => 'unique',
     ]);
-    // Add index
+    // Ajoute un indice
     $t->addIndex('slug_title', [
       'columns' => ['slug', 'title'],
       'type' => 'index'
     ]);
-    // Add a foreign key
+    // Ajoute une clé étrangère
     $t->addConstraint('author_id_idx', [
       'columns' => ['author_id'],
       'type' => 'foreign',
@@ -109,9 +116,9 @@ methods. An example of both methods is::
       'delete' => 'cascade'
     ]);
 
-If you add a primary key constraint to a single integer column it will automatically
-be converted into a auto-increment/serial column depending on the database
-platform::
+Si vous ajoutez une contrainte de clé primaire à une colonne unique integer,
+elle va automatiquement être convertie en une colonne auto-incrémentée/serial
+selon la plateforme de la base de données::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
@@ -120,7 +127,7 @@ platform::
             'columns' => ['id']
         ]);
 
-In the above example the ``id`` column would generate the following SQL in
+Dans l'exemple ci-dessus, la colonne ``id`` générerait le SQL suivant dans
 MySQL::
 
     CREATE TABLE `posts` (
@@ -128,10 +135,10 @@ MySQL::
         PRIMARY KEY (`id`)
     )
 
-If your primary key contains more than one column, none of them will
-automatically be converted to an auto-increment value. Instead you will need to
-tell the table object which column in the composite key you want to
-auto-increment::
+Si votre clé primaire contient plus d'une colonne, aucune d'elle ne sera
+automatiquement convertie en une valeur auto-incrémentée. A la place, vous
+devrez dire à l'objet table quelle colonne dans la clé composite vous voulez
+auto-incrémenter::
 
     $t = new Table('posts');
     $t->addColumn('id', [
@@ -144,89 +151,92 @@ auto-increment::
         'columns' => ['id', 'account_id']
     ]);
 
-The ``autoIncrement`` option only works with ``integer`` and ``biginteger``
-columns.
+L'option ``autoIncrement`` ne fonctionne qu'avec les colonnes ``integer`` et
+``biginteger``.
 
-Reading Indexes and Constraints
--------------------------------
+Lire les Indices et les Contraintes
+-----------------------------------
 
-Indexes and constraints can be read out of a table object using accessor
-methods. Assuming that ``$t`` is a populated Table instance you could do the
-following::
+Les indices et les contraintes peuvent être lus d'un objet table en utilisant
+les méthodes d'accesseur. En supposant que ``$t`` est une instance de table
+remplie, vous pourriez faire ce qui suit::
 
-    // Get contraints. Will return the
-    // names of all constraints.
+    // Récupère les contraintes. Va retourner les noms de toutes les
+    // contraintes.
     $constraints = $t->constraints()
 
-    // Get data about a single constraint.
+    // Récupère les données sur une contrainte unique.
     $constraint = $t->constraint('author_id_idx')
 
-    // Get indexes. Will return the
-    // names of all indexes.
+    // Récupère les indices. Va retourner les noms de tous les indices
     $indexes = $t->indexes()
 
-    // Get data about a single index.
+    // Récupère les données d'un indice unique.
     $index = $t->index('author_id_idx')
 
 
-Adding Table Options
---------------------
+Ajouter des Options de Table
+----------------------------
 
-Some drivers (primarily MySQL) support & require additional table metadata. In
-the case of MySQL the ``CHARSET``, ``COLLATE`` and ``ENGINE`` properties are
-required for maintaining a table's structure in MySQL. The following could be
-used to add table options::
+Certains drivers (principalement MySQL) supportent & nécessitent des
+meta données de table supplémentaires. Dans le cas de MySQL, les propriétés
+``CHARSET``, ``COLLATE`` et ``ENGINE`` sont nécessaires pour maintenir une
+structure de table dans MySQL. Ce qui suit pourra être utilisée pour ajouter
+des options de table::
 
     $t->options([
       'engine' => 'InnoDB',
       'collate' => 'utf8_unicode_ci',
     ]);
 
-Platform dialects only handle the keys they are interested in
-and ignore the rest. Not all options are support on all platforms.
+Les languages de plateforme ne gèrent que les clés qui les intéressent et
+ignorent le reste. Toutes les options ne sont pas supportées sur toutes les
+plateformes.
 
-Converting Tables into SQL
---------------------------
+Convertir les Tables en SQL
+---------------------------
 
-Using the ``createSql()`` or ``dropSql()`` you can get
-platform specific SQL for creating or dropping a specific table::
+En utilisant ``createSql()`` ou ``dropSql()`` vous pouvez récupérer du SQL
+spécifique à la plateforme pour créer ou supprimer une table spécifique::
 
     $db = ConnectionManager::get('default');
     $schema = new Table('posts', $fields, $indexes);
 
-    // Create a table
+    // Créé une table
     $queries = $schema->createSql($db);
     foreach ($queries as $sql) {
       $db->execute($sql);
     }
 
-    // Drop a table
+    // Supprime une table
     $sql = $schema->dropSql($db);
     $db->execute($sql);
 
-By using a connection's driver the schema data can be converted into platform
-specific SQL. The return of ``createSql`` and ``dropSql`` is a list of SQL
-queries required to create a table and the required indexes. Some platforms may
-require multiple statements to create tables with comments and/or indexes. An
-array of queries is always returned.
+En utilisant un driver de connection, les données de schema peuvent être
+converties en SQL spécifique à la plateforme. Le retour de ``createSql`` et
+``dropSql`` est une liste de requêtes SQL nécessaires pour créer une table et
+les indices nécessaires. Certaines plateformes peuvent nécessiter plusieurs
+lignes pour créer des tables avec des commentaires et/ou indices. Un tableau
+de requêtes est toujours retourné.
 
 
-Schema Collections
-==================
+Collections de Schema
+=====================
 
 .. php:class:: Collection
 
-``Collection`` provides access to the various tables available on a connection.
-You can use it to get the list of tables or reflect tables into
-:php:class:`Table` objects. Basic usage of the class looks like::
+``Collection`` fournit un accès aux différentes tables disponibles pour une
+connection. Vous pouvez l'utiliser pour récupérer une liste des tables ou
+envoyer les tables dans les objets :php:class:`Table`. Une utilisation
+habituelle de la classe ressemble à::
 
     $db = ConnectionManager::get('default');
 
-    // Create a schema collection.
+    // Créé une collection de schema.
     $collection = $db->schemaCollection();
 
-    // Get the table names
+    // Récupère les noms des tables
     $tables = $collection->listTables();
 
-    // Get a single table (instance of Schema\Table)
+    // Récupère une table unique (instance de Schema\Table)
     $table = $collection->describe('posts')
