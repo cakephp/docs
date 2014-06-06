@@ -26,7 +26,7 @@ of the following things occur:
 
 Until one of these conditions are met, the query can be modified with additional
 SQL being sent to the database. It also means that if a Query hasn't been
-evaluated, no SQL is ever sent to the database. Once executed, modifying and 
+evaluated, no SQL is ever sent to the database. Once executed, modifying and
 e-evaluating a query will result in additional SQL being run.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
@@ -397,7 +397,7 @@ expression objects to add snippets of SQL to your queries::
     $expr = $query->newExpr()->add('1 + 1');
     $query->select(['two' => $expr]);
 
-``Expression ``objects can be used with any query builder methods like
+``Expression`` objects can be used with any query builder methods like
 ``where()``, ``limit()``, ``group()``, ``select()`` and many other methods.
 
 .. warning::
