@@ -198,21 +198,21 @@ and add the following::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Controller\Component\Auth\BlowfishPasswordHasher;
+    use Cake\Auth\SimplePasswordHasher;
 
     class User extends Entity {
 
         // ...
 
         public function setPassword($password) {
-            return (new BlowfishPasswordHasher)->hash($password);
+            return (new SimplePasswordHasher)->hash($password);
         }
 
         // ...
     }
 
 Now every time the password property is assigned to the user it will be hashed
-using the ``BlowfishPasswordHasher`` class.  We're just missing a template view
+using the ``SimplePasswordHasher`` class.  We're just missing a template view
 file for the login function. Open up your ``App/Template/Users/login.ctp`` file
 and add the following lines:
 
