@@ -16,10 +16,6 @@ for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
 <http://getcomposer.org>`_.
 
-.. warning::
-
-    PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-
 Install PHPUnit with Composer
 -----------------------------
 
