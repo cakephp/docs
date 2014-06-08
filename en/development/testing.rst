@@ -26,7 +26,7 @@ Install PHPUnit with Composer
 To install PHPUnit with Composer, add the following to you application's
 ``require`` section in its ``composer.json``::
 
-    "phpunit/phpunit": "3.7.*",
+    "phpunit/phpunit": "*",
 
 After updating your package.json, run Composer again inside your application
 directory::
