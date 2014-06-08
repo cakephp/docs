@@ -20,7 +20,7 @@ You can also set or change the theme name within an action or within the
 
 Theme view files need to be within a plugin with the same name. For example,
 the above theme would be found in ``/Plugin/AnotherExample/Template``.
-Its important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
+It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
 that, the folder structure within the ``/Plugin/Example/Template`` folder is
 exactly the same as ``/App/Template/``.
 
