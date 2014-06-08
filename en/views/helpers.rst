@@ -175,7 +175,7 @@ There may be situations where you need to dynamically load a helper from inside
 a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
 do this::
 
-    $mediaHelper = $this->Helpers->load('Media', $mediaConfig);
+    $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
 
 The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
 supports the registry API used elsewhere in CakePHP.
