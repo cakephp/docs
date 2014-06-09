@@ -129,17 +129,20 @@ interesting let's add another command that does something::
             $this->out('Hello world.');
         }
 
-        public function hey_there($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous') {
             $this->out('Hey there ' . $name);
         }
     }
 
 After saving this file, you should be able to run ``Console/cake hello hey_there
 your-name`` and see your name printed out. Any public method not prefixed by an
-``_`` is allowed to be called from the command line. In our ``hey_there`` method
-we can see that positional arguments are provided to our ``hey_there()``
-function. Positional arguments are also available in the ``args`` property. You
-can access switches or options on shell applications, which are available at
+``_`` is allowed to be called from the command line. As you can see, methods
+invoked from the comand line are transformed from the underscored shell argument to
+the correct camel-cased method name in the class.
+
+In our ``heyThere()`` method we can see that positional arguments are provided to our
+``heyThere()`` function. Positional arguments are also available in the ``args`` property.
+You can access switches or options on shell applications, which are available at
 ``$this->params``, but we'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional
