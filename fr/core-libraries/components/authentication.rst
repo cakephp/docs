@@ -105,7 +105,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``['User.is_active' => 1]``.
+  l'authentification des utilisateurs, ex ``['Users.is_active' => 1]``.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Blowfish``.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
@@ -334,7 +334,8 @@ l'authentification échoue ::
    l'user se soit déja connecté. Vous pouvez supprimer ce message en
    configurant sa valeur avec le boléen `false`.
 
-Dans le beforeFilter() de votre controller, ou les configurations du component::
+Dans le beforeFilter() de votre controller, ou dans les configurations du
+component::
 
     if (!$this->Auth->loggedIn()) {
         $this->Auth->authError = false;
@@ -342,49 +343,122 @@ Dans le beforeFilter() de votre controller, ou les configurations du component::
 
 .. _hashing-passwords:
 
-Hachage des mots de passe
+Hachage desMmots de Passe
 -------------------------
 
-Authenticating objects use a new setting ``passwordHasher`` which specifies the
-password hasher class to use. It can be a string specifying class name or an
-array with key ``className`` stating the class name and any extra keys will be
-passed to password hasher constructor as config. The default hasher class
-``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash type
-set in Security class will be used. You can use specific hash type like this::
+Vous êtes responsable du hashage des mots de passe avant qu'ils soient stockés
+dans la base de données, la façon la plus simple est d'utiliser une fonction
+setter dans votre entity User::
+
+    use \Cake\Auth\SimplePasswordHasher;
+    class User extends Entity {
+
+        // ...
+
+        public function setPassword($password) {
+            return (new SimplePasswordHasher)->hash($password);
+        }
+
+        // ...
+    }
+
+AuthComponent est configuré par défaut pour utiliser ``SimplePasswordHasher``
+lors de la validation de clé utilisateur, donc aucun configuration
+supplémentaire n'est nécessaire pour authentifier les utilisateurs.
+
+``SimplePasswordHasher`` utilise l'algorythme de hashage bcrypt en interne,
+qui est l'une des solutions les plus fortes pour hasher un mot de passe dans
+l'industrie. Bien qu'il soit recommandé que vous utilisiez la classe de hash
+de mot de passe, il se peut que vous gériez une base de données d'utilisateurs
+dont les mots de passe ont été hashés différemment.
+
+Créer des Classes de Hash de Mot de Passe Personnalisé
+------------------------------------------------------
+
+Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
+dans ``App/Auth/DumbPasswordHasher.php`` et intégrer les méthodes ``hash`` et
+``check``::
+
+    use \Cake\Auth\AbstractPasswordHasher;
+
+    class DumbPasswordHasher extends AbstractPasswordHasher {
+
+        public function hash($password) {
+            return md5($password);
+        }
+
+        public function check($password, $hashed) {
+            return md5($password) === $hashed;
+        }
+    }
+
+Ensuite, vous devez configurer AuthComponent pour utiliser votre propre
+hasher de mot de passe::
 
     public $components = [
         'Auth' => [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
-                        'className' => 'Simple',
-                        'hashType' => 'sha256'
+                        'className' => 'Dumb',
                     ]
                 ]
             ]
         ]
     ];
 
-Lors de la création de nouveaux enregistrements d'utilisateurs, vous pouvez
-hasher un mot de passe dans le callback beforeSave de votre model en utilisant
-la classe de hasher de mot de passe appropriée::
+Supporter des système légaux est une bonne idée, mais il est encore mieux de
+garder votre base de données avec les derniers outils de sécurité. La section
+suivante va expliquer comment migrer d'un algorithme de hash vers celui par
+défaut de CakePHP.
 
-    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+Changer les Algorithmes de Hashage
+----------------------------------
 
-    class User extends AppModel {
-        public function beforeSave($options = []) {
-            if (!$this->id) {
-                $passwordHasher = new BlowfishPasswordHasher();
-                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
+CakePHP fournit un moyen propre de migrer vos mots de passe utilisateurs
+d'un algorithme vers un autre, ceci est possible avec la classe
+``FallbackPasswordHasher``. Supposons que vous utilisiez ``DumbPasswordHasher``
+à partir de l'exemple précédent, vous pouvez configurer AuthComponent comme
+suit::
+
+    public $components = [
+        'Auth' => [
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => [
+                        'className' => 'Fallback',
+                        'hashers' => ['Simple', 'Dumb']
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+le premier nom qui apparait dans la clé ``hashers`` indique quelle classe
+est la préférée, et elle va remplacer les autres dans la liste si la
+vérification n'est pas un succès.
+
+Afin de mettre à jour les mots de passe ancien des utilisateurs à la volée, vous
+pouvez changer la fonction login selon::
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                if ($this->Auth->loginProvider()->needsPasswordRehash()) {
+                    $user = $this->Users->get($this->Auth->user('id'));
+                    $user->password = $this->request->data('password');
+                    $this->Users->save($user);
+                }
+                return $this->redirect($this->Auth->redirectUrl());
             }
-            return true;
+            ...
         }
     }
 
-Vous n'avez pas besoin de hacher le mot de passe avant d'appeler
-``$this->Auth->login()``.
-Les différents objets d'authentification hacherons les mots de passe
-individuellement.
+Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
+vers la propriété comme cela la fonction setter dans l'entity hashe le mot de
+passe comme montré dans les exemples précédents et sauvegardent à nouveau vers
+la base de données.
 
 Hachage de mots de passe pour l'authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -767,7 +841,7 @@ authError
     objet ou une action à laquelle ils n'ont pas accès.
 
     You can suppress authError message from being displayed by setting this
-    value to boolean `false`.
+    value to boolean ``false``.
 authorize
     Défini comme un tableau d'objets d'autorisation que vous voulez utiliser
     quand les utilisateurs sont autorisés sur chaque requête, cf la section
@@ -784,7 +858,8 @@ flash
 
 loginAction
     Une URL (définie comme une chaîne de caractères ou un tableau) pour
-    l'action du controller qui gère les connexions. Par défaut à `/users/login`.
+    l'action du controller qui gère les connexions. Par défaut à
+    ``/users/login``.
 loginRedirect
     L' URL (définie comme une chaîne de caractères ou un tableau) pour l'action
     du controller où les utilisateurs doivent être redirigés après la
@@ -803,10 +878,6 @@ unauthorizedRedirect
     Si défini à false, une exception ForbiddenException est lancée au lieu de
     la redirection.
 
-.. php:attr:: components
-
-    Les autres components utilisés par AuthComponent
-
 .. php:attr:: sessionKey
 
     Le nom de la clé de session où les enregistrements de l'utilisateur actuel
@@ -819,14 +890,6 @@ unauthorizedRedirect
     spécifiées. La valeur spéciale  ``'*'`` marquera les actions du controller
     actuelle comme publique. Sera mieux utilisé dans la méthode beforeFilter de
     votre controller.
-
-.. php:method:: constructAuthenticate()
-
-    Charge les objets d'authentification configurés.
-
-.. php:method:: constructAuthorize()
-
-    Charge les objets d'autorisation configurés.
 
 .. php:method:: deny($action, [$action, ...])
 
@@ -892,15 +955,6 @@ unauthorizedRedirect
     utilisateur devrait être redirigé lors de la connexion. Se repliera vers
     :php:attr:`AuthComponent::$loginRedirect` si il n'y a pas de valeur de
     redirection stockée.
-
-.. php:method:: shutdown($Controller)
-
-    Component shutdown. Si un utilisateur est connecté, liquide la redirection.
-
-.. php:method:: startup($Controller)
-
-    Méthode d'exécution principale. Gère la redirection des utilisateurs
-    invalides et traite les données des formulaires de connexion.
 
 .. php:staticmethod:: user($key = null)
 

@@ -521,19 +521,29 @@ CookieComponent
 AuthComponent
 -------------
 
-- ``Blowfish`` est maintenant le hasher de mot de passe par défaut utilisé par
+- ``Simple`` est maintenant le hasher de mot de passe par défaut utilisé par
   les classes d'authentification.
   Si vous voulez continuer à utiliser le hashage SHA1 utilisé dans 2.x utilisez
-  ``'passwordHasher' => 'Simple'`` dans votre configuration d'authenticator.
+  ``'passwordHasher' => 'Weak'`` dans votre configuration d'authenticator.
 - ``BaseAuthenticate::_password()`` a été retirée. Utilisez une classe
   ``PasswordHasher`` à la place.
+- Un nouveau ``FallbackPasswordHasher`` a été ajouté pour aider les utilisateurs
+  à migrer des vieux mots de passe d'un algorithm à un autre. Consultez la
+  documentation de AuthComponent pour plus d'informations.
 - La classe ``BlowfishAuthenticate`` a été retirée. Utilisez juste
-  ``FormAuthenticate`` avec ``hashType`` défini à ``Blowfish``.
+  ``FormAuthenticate``.
+- La classe ``BlowfishPasswordHasher`` a été retirée. Utilisez
+  ``SimplePasswordHasher`` à la place.
 - La méthode ``loggedIn()`` a été retirée. Utilisez ``user()`` à la place.
 - Les options de configuration ne sont plus définie en propriété public.
 - Les méthodes ``allow()`` et ``deny()`` n'acceptent plus "var args". Tous les
   noms de méthode ont besoin d'être passés en premier argument, soit en chaîne,
   soit en tableau de chaînes.
+
+Les classes liées à ACL ont été déplacées dans un plugin séparée. Les hashers
+de mot de passe, l'Authentification et les fournisseurs d'Authorisation ont
+été déplacés vers le namespace ``\Cake\Auth``. Vous devez aussi déplacer vos
+providers et les hashers dans le namespace ``App\Auth``.
 
 RequestHandlerComponent
 -----------------------
