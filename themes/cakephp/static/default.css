@@ -531,6 +531,22 @@ dt tt {
 	margin-bottom: 18px;
 }
 
+/* -- Footnotes -- */
+.footnote {
+	border: 0;
+}
+.footnote .label {
+	background: none;
+	color: #000;
+	display: block;
+	position: static;
+	font-size: 14px;
+}
+/* Hide backrefs */
+.footnote td em:first-child {
+	display: none;
+}
+
 /* -- generated index -- */
 .genindex-jumpbox {
 	margin-bottom: 18px;
@@ -606,7 +622,7 @@ dt tt {
 .contribute,
 .related-pages a {
 	font-size: 14px;
-	font-family: MuseoSlab500, Helvetica, Arial;	
+	font-family: MuseoSlab500, Helvetica, Arial;
 }
 .copyright {
 	font-size: 12px;
