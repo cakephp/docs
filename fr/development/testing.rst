@@ -18,17 +18,13 @@ ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
 le `PHAR package <http://phpunit.de/#download>`_ ou avec
 `Composer <http://getcomposer.org>`_.
 
-.. warning::
-
-    PHPUnit 4 n'est pas compatible avec le Test Unitaire de CakePHP.
-
 Installer PHPUnit avec Composer
 -------------------------------
 
 Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
-``require`` de votre application dans son ``package.json``::
+``require`` de votre application dans son ``composer.json``::
 
-    "phpunit/phpunit": "3.7.*",
+    "phpunit/phpunit": "*",
 
 Après avoir mis à jour votre package.json, lancez à nouveau Composer dans votre
 répertoire d'application::
