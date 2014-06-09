@@ -12,6 +12,7 @@ contribuer à CakePHP:
     contributing/tickets
     contributing/code
     contributing/cakephp-coding-conventions
+    contributing/backwards-compatibility
 
 
 
