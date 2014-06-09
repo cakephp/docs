@@ -134,8 +134,6 @@ In a minor release you can:
 +-------------------------------+--------------------------+
 | Remove a protected property   | Yes [3]_                 |
 +-------------------------------+--------------------------+
-| Remove a protected property   | Yes [2]_                 |
-+-------------------------------+--------------------------+
 | **Methods**                                              |
 +-------------------------------+--------------------------+
 | Add a public method           | Yes                      |
@@ -163,5 +161,6 @@ In a minor release you can:
        for details.
 .. [2] You can change a class/method names as long as the old name remains available.
        This is generally avoided unless renaming has significant benefit.
-.. [3] We try to avoid this at all costs.
+.. [3] We try to avoid this at all costs. Any removals need to be documented in
+       the migration guide.
 
