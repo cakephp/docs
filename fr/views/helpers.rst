@@ -181,7 +181,7 @@ Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
 à partir d'une vue. Vous pouvez utiliser la vue du
 :php:class:`Cake\\View\\HelperRegistry` pour le faire::
 
-    $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
+    $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
 
 Le HelperCollection est une :doc:`registry </core-libraries/registry-objects>`
 et supporte l'API collection utilisée partout ailleurs dans CakePHP.
