@@ -401,8 +401,8 @@ more easily.
 -  **order**: (string, optional) the order of how the contained 
    elements are sorted.
    
-From the previous example, this is an example of how to force the Posts 
-to be order by the date when they were last updated::
+From the previous example, this is an example of how to force the posts 
+to be ordered by the date when they were last updated::
 
     $this->User->find('all', array(
         'contain' => array(
