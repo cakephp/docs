@@ -711,7 +711,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Génère un bloc de code contenant des options ``$options['inline']``
     définies de ``$code`` à mettre à false pour voir le bloc de script
     apparaître dans le bloc de ``script`` de la vue. D'autre options définies
-    seront ajoutée comme attributs dans les balises de script.
+    seront ajoutées comme attributs dans les balises de script.
     ``$this->Html->scriptBlock('stuff', array('defer' => true));`` créera une
     balise script avec l'attribut ``defer="defer"``.
 
@@ -1035,7 +1035,7 @@ Création d'un chemin de navigation avec le Helper Html
 
         echo $this->Html->getCrumbs(' > ', 'Home');
 
-    L'option ``$startText`` peut aussi acceptée un tableau. Cela donne plus de
+    L'option ``$startText`` peut aussi accepter un tableau. Cela donne plus de
     contrôle à travers le premier lien généré::
 
         echo $this->Html->getCrumbs(' > ', array(
