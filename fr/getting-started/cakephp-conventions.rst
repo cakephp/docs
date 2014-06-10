@@ -155,7 +155,7 @@ CakePHP n'accepte pas les clés primaires composées. Dans l'éventualité où v
 voulez manipuler directement les données de votre table de jointure, cela veut
 dire que vous devez soit utiliser les appels directs à
 :ref:`query <model-query>`, soit ajouter une clé primaire pour être en mesure
-d'agir sur elle comme un model normal. Exemple :
+d'agir sur elle comme un model normal. Exemple:
 
     CREATE TABLE posts_tags (
     id INT(10) NOT NULL AUTO_INCREMENT,
