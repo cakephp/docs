@@ -19,9 +19,7 @@ Routes Configuration
 ====================
 
 Routes in an application are configured in ``App/Config/routes.php``.
-This file is included by the :php:class:`Dispatcher` when handling routes
-and allows you to define application specific routes you want used. Routes
-declared in this file are processed top to bottom when incoming requests
+Routes declared in this file are processed top to bottom when incoming requests
 are matched. This means that the order you place routes can affect how
 routes are parsed. It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible. This will
