@@ -54,6 +54,13 @@ the Router to treat the ``id`` placeholder as a function argument to the
 ``view()`` function by specifying the ``pass`` option. More on using this
 options later.
 
+The CakePHP Router can also match routes in reverse. That means that from an
+array containing similar parameters, it is capable of generation a URL string::
+
+    echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
+    // Will output
+    /articles/15
+
 Routes can also be labelled with a unique name, this allow you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
