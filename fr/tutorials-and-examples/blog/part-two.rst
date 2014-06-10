@@ -345,7 +345,7 @@ Voici le code de notre vue "add" (ajout)
 
 Nous utilisons le :php:class:`FormHelper` pour générer la balise
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par
-``$this->Form->create()``::
+``$this->Form->create()``:
 
 .. code-block:: html
 
