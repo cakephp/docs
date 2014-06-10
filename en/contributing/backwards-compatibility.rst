@@ -161,6 +161,6 @@ In a minor release you can:
        for details.
 .. [2] You can change a class/method names as long as the old name remains available.
        This is generally avoided unless renaming has significant benefit.
-.. [3] We try to avoid this at all costs. Any removals need to be documented in
+.. [3] Avoid whenever possible. Any removals need to be documented in
        the migration guide.
 
