@@ -11,19 +11,63 @@ where an array of parameters can be reversed into a string URL.
 By using reverse routing, you can easily re-factor your application's
 URL structure without having to update all your code.
 
-.. index:: routes.php
-
-.. _routes-configuration:
-
-Routes Configuration
-====================
-
 Routes in an application are configured in ``App/Config/routes.php``.
 Routes declared in this file are processed top to bottom when incoming requests
 are matched. This means that the order you place routes can affect how
 routes are parsed. It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible. This will
 save having to check a number of routes that won't match on each request.
+
+.. index:: routes.php
+
+Quick Tour
+==========
+
+This section will teach you by example the most common uses of the CakePHP
+Router. Typically you want to display something as a landing page, so you add
+this to your **routes.php** file::
+
+    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+
+This will execute the index method in the ``ArticlesController`` when the homepage
+of your site is visited. Sometimes you need dynamic routes that will accept
+multiple parameters, this would be the case, for example of a route for viewing
+an article's content::
+
+    Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
+
+The above route will accept any url looking like ``/articles/15`` and invoke the
+method ``view(15)`` in the ``ArticlesController``. This will not, though,
+prevent people from trying to access URLs looking like ``/articles/foobar``. If
+you wish, you can restring some parameters to conform to a regular expression::
+
+    Router::connect(
+        '/articles/:id',
+        ['controller' => 'Articles', 'action' => 'view'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+
+The previous example changed the star matcher by a new placeholder ``:id``.
+Using placeholders allows us to validate parts of the url, in this case we used
+the ``\d+`` regular expression so that only digits are matched. Finally, we told
+the Router to treat the ``id`` placeholder as a function argument to the
+``view()`` function by specifying the ``pass`` option. More on using this
+options later.
+
+Routes can also be labelled with a unique name, this allow you to quickly
+reference them when building links instead of specifying each of the routing
+parameters::
+ 
+    Router::connect(
+        '/login',
+        ['controller' => 'Users', 'action' => 'login'],
+        ['_name' => 'login']
+    );
+
+.. _routes-configuration:
+
+Routes Configuration
+====================
 
 Routes are parsed and matched in the order they are connected in.
 If you define two similar routes, the first defined route will
@@ -50,11 +94,9 @@ Routing.prefixes
 Default Routing
 ===============
 
-Before you learn about configuring your own routes, you should know
-that CakePHP comes configured with a default set of routes.
-CakePHP's default routing will get you pretty far in any
-application. You can access an action directly via the URL by
-putting its name in the request. You can also pass parameters to
+CakePHP comes configured with a default set of routes that is handy for early
+stages of a prototype and sometimes for a full blown app. You can access an action
+directly via the URL by putting its name in the request. You can also pass parameters to
 your controller actions using the URL.::
 
         URL pattern default routes:
@@ -213,6 +255,19 @@ is a CakePHP default route element, so the router knows how to match and
 identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
 matching regular expression in the third parameter of connect().
+
+CakePHP does not automatically produce lowercased urls when using the
+``:controller`` parameter. If you need this, the above example could be
+rewritten like so::
+
+    Router::connect(
+        '/:controller/:id',
+        ['action' => 'view'],
+        ['id' => '[0-9]+', 'routeClass' => 'Cake\Routing\Route\InflectedRoute']
+    );
+
+The special ``InflectedRoute`` class will make sure that the ``:controller`` and
+``:plugin`` parameters are correctly lowercased.
 
 .. note::
 
