@@ -8,7 +8,7 @@ the general guideline we use on all CakePHP projects. In short, semantic
 versioning means that only major releases (such as 2.0, 3.0, 4.0) can break
 backwards compatibility. Minor releases (such as 2.1, 3.1, 3.2) may introduce new
 features, but are not allowed to break compatibility. Bug fix releases (such as 2.1.2,
-3.0.1) do not add new features, and only fix bugs or enhance performance.
+3.0.1) do not add new features, but fix bugs or enhance performance only.
 
 .. note::
 
