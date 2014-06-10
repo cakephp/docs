@@ -71,6 +71,10 @@ parameters::
         ['_name' => 'login']
     );
 
+    echo Router::url('login');
+    // Will output
+    /login
+
 .. _routes-configuration:
 
 Routes Configuration
