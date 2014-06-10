@@ -69,7 +69,7 @@ cela avec :ref:`view blocks <view-blocks>`, cela vous donne une façon puissante
 pour garder vos vues :term:`DRY`. Par exemple, votre application a une sidebar
 qui a besoin de changer selon la vue spécifique en train d'être rendue. En
 étendant un fichier de vue commun, vous pouvez éviter de répeter la balise
-commune pour votre sidebar, et seulement définir les parties qui changent::
+commune pour votre sidebar, et seulement définir les parties qui changent:
 
 .. code-block:: php
 
@@ -89,7 +89,7 @@ s'attend à ce que la vue l'étendant définisse des blocks ``sidebar``
 et ``title``. Le block ``content`` est un block spécial que CakePHP
 crée. Il contiendra tous les contenus non capturés de la vue étendue.
 En admettant que notre fichier de vue a une variable ``$post`` avec les
-données sur notre post. Notre vue pourrait ressembler à ceci::
+données sur notre post. Notre vue pourrait ressembler à ceci:
 
 .. code-block:: php
 
@@ -225,7 +225,7 @@ n'existe pas::
 Vous pouvez également utiliser fetch pour afficher du contenu, sous conditions,
 qui va entourer un block existant. Ceci est très utile dans les layouts, ou
 dans les vues étendues lorsque vous voulez, sous conditions, afficher des
-en-têtes ou autres balises::
+en-têtes ou autres balises:
 
 .. code-block:: php
 
@@ -240,7 +240,7 @@ en-têtes ou autres balises::
 Vous pouvez aussi fournir une valeur par défaut pour un bloc
 qui ne devrait pas avoir de contenu. Cela vous permet d'ajouter facilement
 du contenu placeholder, pour des déclarations vides. Vous pouvez fournir
-une valeur par défaut en utilisant le 2ème argument::
+une valeur par défaut en utilisant le 2ème argument:
 
 .. code-block:: php
 
@@ -303,7 +303,7 @@ Les autres fichiers de layout devront être placés dans ``/App/Template/Layout`
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
-ressembler::
+ressembler:
 
 .. code-block:: php
 

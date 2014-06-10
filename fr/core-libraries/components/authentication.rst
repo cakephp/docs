@@ -343,7 +343,7 @@ component::
 
 .. _hashing-passwords:
 
-Hachage desMmots de Passe
+Hachage des Mots de Passe
 -------------------------
 
 Vous êtes responsable du hashage des mots de passe avant qu'ils soient stockés

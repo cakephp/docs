@@ -313,13 +313,13 @@ automatically echo the output into the view.
 
     The $options parameter takes the same keys as :php:meth:`CakeNumber::format()` itself:
 
-       -  places (integer): the amount of desired precision
-       -  before (string): to be put before the outputted number
-       -  after (string): to be put after the outputted number
-       -  decimals (string): used to delimit the decimal places in a
+        - places (integer): the amount of desired precision
+        - before (string): to be put before the outputted number
+        - after (string): to be put after the outputted number
+        - decimals (string): used to delimit the decimal places in a
           number
-       -  thousands (string): used to mark off thousand, millions, …
-          places
+        - thousands (string): used to mark off thousand, millions, …
+         places
 
     Example::
 

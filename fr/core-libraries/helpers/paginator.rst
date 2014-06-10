@@ -251,7 +251,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
       par défaut à true.
     * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
     * ``disabledTitle`` Le texte à utiliser quand le lien est désactivé. Par
-       défaut, la valeur du paramètre ``$title``.
+      défaut, la valeur du paramètre ``$title``.
 
     Un simple exemple serait::
 

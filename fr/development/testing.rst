@@ -1310,7 +1310,7 @@ bonne idée, puisque cela évite au sang de couler et évite un certain nombre
 de problèmes basiques. Une fois que vous avez crée une nouvelle base de données
 dans un serveur de base de données auquel jenkins peut accéder (habituellement
 localhost). Ajoutez une *étape de script shell* au build qui contient ce qui
-suit::
+suit:
 
 .. code-block:: bash
 
@@ -1351,7 +1351,7 @@ Ajouter vos tests
 Ajoutez une autre *étape de script shell* à votre build. Dans cette étape,
 lancez les tests pour votre application. Créer un fichier de log junit, ou
 clover coverage est souvent un bonus sympa, puisqu'il vous donne une vue
-graphique sympa des résultats de votre test::
+graphique sympa des résultats de votre test:
 
 .. code-block:: bash
 

@@ -286,7 +286,7 @@ chemin suivant:
 ``App/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Envoyer les pièces jointes
---------------------------
+==========================
 
 .. php:method:: attachments($attachments = null)
 
@@ -318,19 +318,19 @@ client:
    jointe est transformée en inline). Le mimetype et contentId sont optionels
    dans ce formulaire.
 
-  4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans
-       corps HTML comme ``<img src="cid:my-content-id">``.
+   4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans
+   corps HTML comme ``<img src="cid:my-content-id">``.
 
-  4.2. Vous pouvez utiliser l'option ``contentDisposition`` pour désactiver le
-       header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
-       l'envoi d'invitations ical à des clients utilisant outlook.
+   4.2. Vous pouvez utiliser l'option ``contentDisposition`` pour désactiver le
+   header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
+   l'envoi d'invitations ical à des clients utilisant outlook.
 
    4.3 Au lieu de l'option ``file``, vous pouvez fournir les contenus de
-       fichier en chaîne en utilisant l'option ``data``. Cela vous permet
-       d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
+   fichier en chaîne en utilisant l'option ``data``. Cela vous permet
+   d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
 
 Utiliser les Transports
------------------------
+=======================
 
 Les Transports sont des classes destinées à envoyer l'email selon certain
 protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut),
@@ -338,7 +338,7 @@ Debug et SMTP.
 
 Pour configurer votre méthode, vous devez utiliser la méthode
 :php:meth:`Cake\\Network\Email\\Email::transport()` ou avoir le transport dans
-votre configuration.
+votre configuration::
 
     $email = new Email();
 
@@ -391,7 +391,7 @@ Faciliter les Règles de Validation des Adresses
 Si vous avez des problèmes de validation lors de l'envoi vers des adresses
 non conformes, vous pouvez faciliter le patron utilisé pour valider les
 adresses email. C'est parfois nécessaire quand il s'agit de certains
-ISP Japonais.
+ISP Japonais::
 
     $email = new Email('default');
 

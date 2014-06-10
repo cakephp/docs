@@ -21,7 +21,7 @@ d'une ``View``, utilisez la classe ``CakeNumber``::
     }
 
 .. versionadded:: 2.1
-    ``CakeNumber`` a été refondu à partir de :php:class:`NumberHelper`.
+    ``CakeNumber`` a été recréée à partir de :php:class:`NumberHelper`.
 
 .. start-cakenumber
 
@@ -353,12 +353,12 @@ automatiqement la sortie dans la vue.
     Le paramètre $options prend les mêmes clés que
     :php:meth:`CakeNumber::format()` lui-même:
 
-       -  places (integer): le montant de precision souhaité.
-       -  before (string): à mettre avant le nombre sorti.
-       -  after (string): à mettre après le nombre sorti.
-       -  decimals (string): utilisé pour délimiter les places de la décimal
+        - places (integer): le montant de precision souhaité.
+        - before (string): à mettre avant le nombre sorti.
+        - after (string): à mettre après le nombre sorti.
+        - decimals (string): utilisé pour délimiter les places de la décimal
           dans un nombre.
-       -  thousands (string): utilisé pour marquer les places des centaines,
+        - thousands (string): utilisé pour marquer les places des centaines,
           millions, …
 
     Exemple::

@@ -49,7 +49,7 @@ généraux sur le code.
 -  Si vous utilisez la branche de développement ou la branche de 
    fonctionnalité, le premier endroit où aller est IRC. Si vous avez un 
    commentaire et ne pouvez pas nous atteindre sur IRC après un jour ou deux, 
-   merci de nnous soumettre un ticket.
+   merci de nous soumettre un ticket.
 
 Si vous trouvez un problème, la meilleure réponse est d'écrire un test. Le 
 meilleur conseil que nous pouvons offrir dans l'écriture des tests est de 

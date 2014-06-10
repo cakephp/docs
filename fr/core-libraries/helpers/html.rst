@@ -283,7 +283,7 @@ les utiliser.
             'url' => ['controller' => 'recipes', 'action' => 'view', 6]
         ]);
 
-   Affichera:
+    Affichera:
 
     .. code-block:: html
 

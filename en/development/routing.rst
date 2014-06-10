@@ -715,7 +715,7 @@ Router API
     Router manages generation of outgoing URLs, and parsing of incoming
     request uri's into parameter sets that CakePHP can dispatch.
 
-.. php:staticmethod:: connect($route, $defaults = array(), $options = array())
+.. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
     :param string $route: A string describing the template of the route
     :param array $defaults: An array describing the default route parameters.
@@ -767,7 +767,7 @@ Router API
       Ex. ``'routeClass' => 'SlugRoute'``
 
 
-.. php:staticmethod:: redirect($route, $url, $options = array())
+.. php:staticmethod:: redirect($route, $url, $options = [])
 
     :param string $route: A route template that dictates which URLs should
         be redirected.
@@ -811,7 +811,7 @@ Router API
     * ``#`` - Allows you to set URL hash fragments.
     * ``ssl`` - Set to true to convert the generated URL to https, or false to force http.
 
-.. php:staticmethod:: mapResources($controller, $options = array())
+.. php:staticmethod:: mapResources($controller, $options = [])
 
     Creates REST resource routes for the given controller(s). See
     the :doc:`/development/rest` section for more information.
