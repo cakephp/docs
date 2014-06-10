@@ -207,7 +207,7 @@ We only typehint public methods, though, as typehinting is not cost-free::
      *
      * @param Model $Model The model to use.
      * @param array $array Some array value.
-     * @param boolean $boolean Some boolean value.
+     * @param bool $boolean Some boolean value.
      */
     public function foo(Model $Model, array $array, $boolean) {
     }
