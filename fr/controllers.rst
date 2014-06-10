@@ -399,7 +399,8 @@ Contrôle de Flux
         ]);
 
     L'URL généré serait:
-        ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
+
+        http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
 Autres Méthodes utiles
 ----------------------
