@@ -135,7 +135,7 @@ nice table, our view code might look something like this:
             <td><?= $article->id ?></td>
             <td>
                 <?= $this->Html->link($article->title,
-                ['controller' => 'articles', 'action' => 'view', $article->id]) ?>
+                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
             </td>
             <td><?= $article->created->format(DATE_RFC850) ?></td>
         </tr>
@@ -360,7 +360,7 @@ the following line::
 
     <?= $this->Html->link(
         'Add Article',
-        ['controller' => 'articles', 'action' => 'add']
+        ['controller' => 'Articles', 'action' => 'add']
     ) ?>
 
 You may be wondering: how do I tell CakePHP about my validation
@@ -590,13 +590,13 @@ route. It looks like this:
 
 .. code-block:: php
 
-    Router::connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
+    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one::
 
-    Router::connect('/', ['controller' => 'articles', 'action' => 'index']);
+    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 This should connect users requesting '/' to the index() action of
 our ArticlesController.
@@ -605,7 +605,7 @@ our ArticlesController.
 
     CakePHP also makes use of 'reverse routing'. If, with the above
     route defined, you pass
-    ``['controller' => 'articles', 'action' => 'index']`` to a
+    ``['controller' => 'Articles', 'action' => 'index']`` to a
     function expecting an array, the resulting URL used will be '/'.
     It's therefore a good idea to always use arrays for URLs as this
     means your routes define where a URL goes, and also ensures that

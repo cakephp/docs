@@ -138,11 +138,11 @@ file and add the following lines::
             'Session',
             'Auth' => [
                 'loginRedirect' => [
-                    'controller' => 'articles',
+                    'controller' => 'Articles',
                     'action' => 'index'
                 ],
                 'logoutRedirect' => [
-                    'controller' => 'pages',
+                    'controller' => 'Pages',
                     'action' => 'display',
                     'home'
                 ]
@@ -297,11 +297,11 @@ config::
         'Session',
         'Auth' => [
             'loginRedirect' => [
-                'controller' => 'articles',
+                'controller' => 'Articles',
                 'action' => 'index'
             ],
             'logoutRedirect' => [
-                'controller' => 'pages',
+                'controller' => 'Pages',
                 'action' => 'display',
                 'home'
             ],

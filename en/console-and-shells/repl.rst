@@ -29,7 +29,7 @@ REPL::
 
     [1] app > Cake\Routing\Router::parse('/articles/view/1');
     // [
-    //   'controller' => 'articles',
+    //   'controller' => 'Articles',
     //   'action' => 'view',
     //   'pass' => [
     //     0 => '1'
@@ -39,7 +39,7 @@ REPL::
 
 You can also test generating URL's::
 
-    [1] app > Cake\Routing\Router::url(['controller' => 'articles', 'action' => 'edit', 99]);
+    [1] app > Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
 To quit the REPL you can use ``CTRL-D``.

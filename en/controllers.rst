@@ -326,11 +326,11 @@ Flow Control
             // Logic for finalizing order goes here
             if ($success) {
                 return $this->redirect(
-                    ['controller' => 'orders', 'action' => 'thanks']
+                    ['controller' => 'Orders', 'action' => 'thanks']
                 );
             }
             return $this->redirect(
-                ['controller' => 'orders', 'action' => 'confirm']
+                ['controller' => 'Orders', 'action' => 'confirm']
             );
         }
 
@@ -361,7 +361,7 @@ Flow Control
     you can use::
 
         return $this->redirect([
-            'controller' => 'orders',
+            'controller' => 'Orders',
             'action' => 'confirm',
             'product' => 'pizza',
             'quantity' => 5
@@ -370,7 +370,7 @@ Flow Control
     An example using query strings and hash would look like::
 
         return $this->redirect([
-            'controller' => 'orders',
+            'controller' => 'Orders',
             'action' => 'confirm',
             '?' => [
                 'product' => 'pizza',

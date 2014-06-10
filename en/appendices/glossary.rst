@@ -7,7 +7,7 @@ Glossary
         An array of attributes that are passed to :php:meth:`Router::url()`.
         They typically look like::
 
-            ['controller' => 'posts', 'action' => 'view', 5]
+            ['controller' => 'Posts', 'action' => 'view', 5]
 
     HTML attributes
         An array of key => values that are composed into HTML attributes. For example::

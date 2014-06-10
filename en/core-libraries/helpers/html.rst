@@ -265,7 +265,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->image("recipes/6.jpg", [
             "alt" => "Brownies",
-            'url' => ['controller' => 'recipes', 'action' => 'view', 6]
+            'url' => ['controller' => 'Recipes', 'action' => 'view', 6]
         ]);
 
     Will output:
@@ -325,7 +325,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->link(
             'Dashboard',
-            ['controller' => 'dashboards', 'action' => 'index', '_full' => true]
+            ['controller' => 'Dashboards', 'action' => 'index', '_full' => true]
         );
 
     Will output:
@@ -340,7 +340,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->link(
             'Delete',
-            ['controller' => 'recipes', 'action' => 'delete', 6],
+            ['controller' => 'Recipes', 'action' => 'delete', 6],
             [],
             "Are you sure you wish to delete this recipe?"
         );
@@ -359,7 +359,7 @@ methods of the HtmlHelper and how to use them.
     Query strings can also be created with ``link()``.::
 
         echo $this->Html->link('View image', [
-            'controller' => 'images',
+            'controller' => 'Images',
             'action' => 'view',
             1,
             '?' => ['height' => 400, 'width' => 500]
@@ -380,7 +380,7 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
-            ['controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false]
+            ['controller' => 'Recipes', 'action' => 'view', 'id' => 6, 'comments' => false]
         );
 
     Will output:
@@ -976,7 +976,7 @@ Creating Breadcrumb Trails with HtmlHelper
 
         echo $this->Html->getCrumbs(' > ', [
             'text' => $this->Html->image('home.png'),
-            'url' => ['controller' => 'pages', 'action' => 'display', 'home'],
+            'url' => ['controller' => 'Pages', 'action' => 'display', 'home'],
             'escape' => false
         ]);
 
@@ -989,7 +989,7 @@ Creating Breadcrumb Trails with HtmlHelper
     breadcrumb trails on each of the pages::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', ['controller' => 'users', 'action' => 'add']);
+        $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
 
     This will add the output of "**Home > Users > Add User**" in your
     layout where getCrumbs was added.
