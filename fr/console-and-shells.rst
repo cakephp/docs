@@ -137,19 +137,21 @@ pas très intéressante, ajoutons une autre commande qui fait quelque chose::
             $this->out('Hello world.');
         }
 
-        public function hey_there($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous') {
             $this->out('Hey there ' . $name);
         }
     }
 
-Après avois sauvegardé ce fichier, vous devriez être capable de lancer
-``Console/cake hello hey_there your-name`` et de voir vos noms affichés.
-Toute méthode publique non préfixée par un ``_`` peut être appelée à partir
-de ligne de commande. Dans notre méthode ``hey_there``, nous utilisons aussi
-``$this->args``, cette propriété contient un tableau de tous les arguments
-de position fournis à une commande. Vous pouvez aussi utiliser des switches
-ou des options sur les shells des applications, ils sont disponibles dans la
-variable ``$this->params``, mais nous verrons ça bientôt.
+After saving this file, you should be able to run ``Console/cake hello hey_there
+your-name`` and see your name printed out. Any public method not prefixed by an
+``_`` is allowed to be called from the command line. As you can see, methods
+invoked from the comand line are transformed from the underscored shell argument to
+the correct camel-cased method name in the class.
+
+In our ``heyThere()`` method we can see that positional arguments are provided to our
+``heyThere()`` function. Positional arguments are also available in the ``args`` property.
+You can access switches or options on shell applications, which are available at
+``$this->params``, but we'll cover that in a bit.
 
 Lorsque vous utilisez la méthode ``main()``, vous n'êtes pas capable d'utiliser
 les arguments de position ou les paramètres. Cela parce que le premier argument

@@ -217,6 +217,13 @@ Shell
 - ``Shell::__construct()`` a changé. Il prend maintenant une instance de
   ``Cake\\Console\\ConsoleIo`` en paramètre.
 
+En plus de la transformation de toutes les méthodes shell en camel case lors
+de leur appel.
+Par exemple, si vous aviez une méthode ``hello_world()`` dans un shell et
+l'appelez avec ``Console/cake my_shell hello_world``, vous devrez renommer la
+méthode en ``helloWorld``. Il n'y a pas de changements nécessaires de la façon
+dont vous appelez les commandes.
+
 Event
 =====
 
