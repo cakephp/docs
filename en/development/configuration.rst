@@ -770,7 +770,7 @@ by *inflecting* the words between their singular and plural forms.
 
 There are occasions (especially for our non-English speaking
 friends) where you may run into situations where CakePHP's
-inflector (the class that pluralizes, singularizes, camelCases, and
+:php:class:`Inflector` (the class that pluralizes, singularizes, camelCases, and
 under\_scores) might not work as you'd like. If CakePHP won't
 recognize your Foci or Fish, you can tell CakePHP about your
 special cases.
