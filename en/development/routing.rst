@@ -61,7 +61,7 @@ array containing similar parameters, it is capable of generation a URL string::
     // Will output
     /articles/15
 
-Routes can also be labelled with a unique name, this allow you to quickly
+Routes can also be labelled with a unique name, this allows you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
  
