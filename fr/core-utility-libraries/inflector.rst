@@ -8,6 +8,9 @@ pour gérer les variations de mot comme les mises au pluriel ou les mises
 en Camel et est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
+Vous pouvez essayer les inflections enligne sur
+`inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+
 .. php:staticmethod:: pluralize($singular)
 
     * **Input:** Apple, Orange, Person, Man
