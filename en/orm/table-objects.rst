@@ -1090,15 +1090,16 @@ published articles using the following::
 Filtering by deep associations is surprisingly easy, and the syntax should be
 already familiar to you::
 
-    $query = $products->find()->matching([
-        'Shops.Cities.Countries' => function($q) {
+    $query = $products->find()->matching(
+        'Shops.Cities.Countries', function($q) {
             return $q->where(['Country.name' => 'Japan'])
         }
-    ]);
+    );
 
-    // Bring unique articles that were commented by 'markstory'
-    $query = $articles->find()->matching('Comments.Users', function($q) {
-        return $q->where(['username' => 'markstory'])
+    // Bring unique articles that were commented by 'markstory' using passed variable
+    $username = 'markstory';
+    $query = $articles->find()->matching('Comments.Users', function($q) use($username){
+        return $q->where(['username' => $username])
     });
 
 .. note::
