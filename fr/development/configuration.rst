@@ -766,10 +766,10 @@ automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
 est en *infléctant* les mots entre leurs formes singulière et plurielle.
 
 Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
-vous pouvez être dans des situations où l'inflecteur de CakePHP (la classe
-qui met au pluriel, au singulier, en CamelCase, et en underscore) ne fonctionne
-pas comme vous voulez. Si CakePHP ne reconnait pas vos Foci ou Fish, vous
-pouvez dire à CakePHP vos cas spéciaux.
+vous pouvez être dans des situations où l':php:class:`Inflector` de CakePHP (la
+classe qui met au pluriel, au singulier, en CamelCase, et en underscore) ne
+fonctionne pas comme vous voulez. Si CakePHP ne reconnait pas vos Foci ou Fish,
+vous pouvez dire à CakePHP vos cas spéciaux.
 
 Chargement d'inflections personnalisées
 ---------------------------–-----------
