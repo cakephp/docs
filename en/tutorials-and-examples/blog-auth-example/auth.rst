@@ -41,11 +41,9 @@ validating any user data::
                 ->notEmpty('username', 'A username is required')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A password is required')
-                ->add('role', [
-				'inList'=>[
-                 'rule' => ['inList', ['admin', 'author']],
-                 'message' => 'Please enter a valid role'
-                 ]
+                ->add('role', 'inList', [
+                    'rule' => ['inList', ['admin', 'author']],
+                    'message' => 'Please enter a valid role'
                 ]);
         }
 
