@@ -144,15 +144,15 @@ View blocks provide a flexible API that allows you to define slots or blocks in
 your views/layouts that will be defined elsewhere. For example, blocks are ideal
 for implementing things such as sidebars, or regions to load assets at the
 bottom/top of the layout. Blocks can be defined in two ways: either as
-a capturing block, or by direct assignment. The ``start()``, ``append()`` and
-``end()`` methods allow you to work with capturing blocks::
+a capturing block, or by direct assignment. The ``start()``, ``append()``,
+``prepend()``, ``assign()``, ``fetch()``, and ``end()`` methods allow you to work with
+capturing blocks::
 
     // create the sidebar block.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
     $this->end();
-
 
     // Append into the sidebar later on.
     $this->start('sidebar');
@@ -162,6 +162,11 @@ a capturing block, or by direct assignment. The ``start()``, ``append()`` and
 
 You can also append into a block using ``append()``::
 
+    $this->append('sidebar');
+    echo $this->element('sidebar/popular_topics');
+    $this->end();
+
+    // The same as the above.
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
 ``assign()`` can be used to clear or overwrite a block at any time::

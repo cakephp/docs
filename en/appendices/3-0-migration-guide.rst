@@ -645,8 +645,8 @@ View Class
   on ``$this->request`` instead.
 - ``View::start()`` no longer appends to an existing block. Instead it will
   overwrite the block content when end is called. If you need to combine block
-  contents you should fetch the block content when calling start a second time.
-- ``View::append()`` no longer has a capturing mode.
+  contents you should fetch the block content when calling start a second time,
+  or use the capturing mode of ``append()``.
 - ``View::prepend()`` no longer has a capturing mode.
 - ``View::startIfEmpty()`` has been removed. Now that start() always overwrites
   startIfEmpty serves no purpose.
