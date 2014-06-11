@@ -1,5 +1,5 @@
-Authentification Simple et Autorisation de l'Application
-########################################################
+Application avec une Authentification Simple et des Autorisations
+#################################################################
 
 Suivez notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons que
 nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion
@@ -41,10 +41,10 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur:
 
         public function validationDefault(Validator $validator) {
             return $validator
-                ->allowEmpty('username', false, "Un nom d'utilisateur est nécessaire")
-                ->allowEmpty('password', false, 'Un mot de passe est nécessaire')
-                ->allowEmpty('role', false, 'Un mot de passe est nécessaire')
-                ->add('role', [
+                ->notEmpty('username', "Un nom d'utilisateur est nécessaire")
+                ->notEmpty('password', 'Un mot de passe est nécessaire')
+                ->notEmpty('role', 'Un mot de passe est nécessaire')
+                ->add('role', 'inList', [
                     'rule' => ['inList', ['admin', 'author']],
                     'message' => 'Merci de rentrer un role valide'
                 ]);
