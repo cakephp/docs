@@ -1098,7 +1098,7 @@ already familiar to you::
 
     // Bring unique articles that were commented by 'markstory' using passed variable
     $username = 'markstory';
-    $query = $articles->find()->matching('Comments.Users', function($q) use($username){
+    $query = $articles->find()->matching('Comments.Users', function($q) use($username) {
         return $q->where(['username' => $username])
     });
 
