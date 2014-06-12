@@ -77,12 +77,12 @@ are read or set. For example::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        public function getTitle($title) {
+        protected function _getTitle($title) {
             return ucwords($title);
         }
     }
 
-Accessors use the convention of ``get`` followed by the CamelCased version of
+Accessors use the convention of ``_get`` followed by the CamelCased version of
 the field name. They receive the basic value stored in the ``_properties`` array
 as their only argument. You can customize how properties get set by defining
 a mutator::
@@ -94,7 +94,7 @@ a mutator::
 
     class Article extends Entity {
 
-        public function setTitle($title) {
+        protected function _setTitle($title) {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -122,7 +122,7 @@ actually exist. For example if your users table has ``first_name`` and
 
     class User extends Entity {
 
-        public function getFullName() {
+        protected function _getFullName() {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -259,7 +259,7 @@ can lazily load associated data::
 
     class Article extends Entity {
 
-        public function getComments() {
+        protected function _getComments() {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])

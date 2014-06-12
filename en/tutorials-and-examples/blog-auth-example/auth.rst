@@ -204,7 +204,7 @@ and add the following::
 
         // ...
 
-        public function setPassword($password) {
+        protected function _setPassword($password) {
             return (new SimplePasswordHasher)->hash($password);
         }
 
