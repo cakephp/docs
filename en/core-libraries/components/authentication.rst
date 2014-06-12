@@ -119,9 +119,9 @@ should look like::
     public $components = [
         'Auth' => [
             'loginAction' => [
-                'controller' => 'users',
+                'controller' => 'Users',
                 'action' => 'login',
-                'plugin' => 'users'
+                'plugin' => 'Users'
             ],
             'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => [

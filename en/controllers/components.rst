@@ -27,7 +27,7 @@ Configuration for these components, and for components in general, is usually do
         public $components = [
             'Auth' => [
                 'authorize' => ['controller'],
-                'loginAction' => ['controller' => 'users', 'action' => 'login']
+                'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ],
             'Cookie' => ['name' => 'CookieMonster']
         ];
@@ -39,7 +39,7 @@ the ``config()`` method. Often, this is done in your controller's
 
     public function beforeFilter() {
         $this->Auth->config('authorize', ['controller']);
-        $this->Auth->config('loginAction', ['controller' => 'users', 'action' => 'login']);
+        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
 
         $this->Cookie->config('name', 'CookieMonster');
     }

@@ -149,7 +149,7 @@ associative array into an element for each key value pair.
         $postTime = strtotime($post['Post']['created']);
 
         $postLink = [
-            'controller' => 'posts',
+            'controller' => 'Posts',
             'action' => 'view',
             'year' => date('Y', $postTime),
             'month' => date('m', $postTime),
