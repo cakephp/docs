@@ -141,17 +141,17 @@ vue parente va récupérer le contenu de la vue précédente en tant que block
 
 .. _view-blocks:
 
-Utiliser les Blocs de Vues
-==========================
+Utiliser les Blocks de Vues
+===========================
 
-Les blocs de vue remplacent fournissent une API flexible qui vous permet de
-définir des slots (emplacements), ou blocs, dans vos vues / layouts qui peuvent
-être définies ailleurs. Par exemple, les blocs pour implémenter des choses
+Les blocks de vue remplacent fournissent une API flexible qui vous permet de
+définir des slots (emplacements), ou blocks, dans vos vues / layouts qui peuvent
+être définies ailleurs. Par exemple, les blocks pour implémenter des choses
 telles que les sidebars, ou des régions pour charger des ressources dans
 l'en-tête / pied de page du layout. Un block peut être défini de deux manières.
 Soit en tant que block capturant, soit en le déclarant explicitement. Les
-méthodes ``start()``, ``append()`` et ``end()`` vous permettent de travailler
-avec les blocs capturant::
+méthodes ``start()``, ``append()``, ``prepend()``, ``assign()``, ``fetch()``
+et ``end()`` vous permettent de travailler avec les blocks capturant::
 
     // Creer le block sidebar.
     $this->start('sidebar');
@@ -159,53 +159,32 @@ avec les blocs capturant::
     echo $this->element('sidebar/recent_comments');
     $this->end();
 
-
     // Le rattacher a la sidebar plus tard.
+    $this->start('sidebar');
+    echo $this->fetch('sidebar');
+    echo $this->element('sidebar/popular_topics');
+    $this->end();
+
+Vous pouvez aussi ajouter dans un block en utilisant ``append()``::
+
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-Vous pouvez aussi le rattacher à l'intérieur d'un block en utilisant ``start()``
-pluieurs fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou
-outrepasser un block à n'importe quel moment::
+    // Le même que ci-dessus.
+    $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-    // Nettoyer le contenu précedent de la sidebar.
+``assign()`` peut être utilisée pour nettoyer ou écraser un block en tout
+temps::
+
+    // Nettoyer le contenu précédent du block de sidebar
     $this->assign('sidebar', '');
-
 
 La méthode ``prepend()`` a été ajoutée pour ajouter du contenu avant un block
 existant::
 
     // Ajoutez avant la sidebar
     $this->prepend('sidebar', 'ce contenu va au-dessus de la sidebar');
-
-La méthode ``startIfEmpty()`` peut être utilisée pour commencer un bloc
-**seulement** si il est vide ou non défini. Si le block existe déjà, le contenu
-capturé va être écarté. C'est utile quand vous voulez définir le contenu par
-défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister:
-
-.. code-block:: php
-
-    // Dans un fichier de vue.
-    // Crée un block de navbar
-    $this->startIfEmpty('navbar');
-    echo $this->element('navbar');
-    echo $this->element('notifications');
-    $this->end();
-
-.. code-block:: php
-
-    // Dans une vue/layout parente
-    <?php $this->startIfEmpty('navbar'); ?>
-    <p>Si le block n est pas défini pour l instant - montrer ceci à la place</p>
-    <?php $this->end(); ?>
-
-    // Quelque part plus loin dans la vue/layout parent
-    echo $this->fetch('navbar');
-
-Dans l'exemple ci-dessus, le block ``navbar`` va seulement contenir le contenu
-ajouté dans la première section. Puisque le block a été défini dans la vue
-enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 
 .. note::
 
@@ -216,7 +195,7 @@ enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 Afficher les Blocs
 ------------------
 
-Vous pouvez afficher les blocs en utilisant la méthode ``fetch()``. Cette
+Vous pouvez afficher les blocks en utilisant la méthode ``fetch()``. Cette
 dernière va, de manière sécurisée, générer un bloc, en retournant '' si le bloc
 n'existe pas::
 
@@ -696,12 +675,6 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
     Ajoute avant dans le block avec ``$name``. Regardez la section
     :ref:`view-blocks` pour des exemples.
-
-.. php:method:: startIfEmpty($name)
-
-    Commence un block si il est vide. Tout le
-    contenu dans le block va être capturé et écarté si le block est déjà
-    défini.
 
 .. php:method:: assign($name, $content)
 
