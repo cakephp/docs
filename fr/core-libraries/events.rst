@@ -69,7 +69,7 @@ créé. Pour garder votre model Order propre, vous pouvez utiliser les
                 $event = new CakeEvent('Model.Order.afterPlace', $this, array(
                     'order' => $order
                 ));
-                $this->getEventManager()->dispatch($event);
+                $this->eventManager()->dispatch($event);
                 return true;
             }
             return false;
@@ -87,9 +87,9 @@ Accéder aux Gestionnaires d'Evènement
 
 Dans CakePHP, les évènements sont attrapés par les gestionnaires d'évènement.
 Les gestionnaires d'Evènement sont disponible dans chaque Table, View et
-Controller en utilisant ``getEventManager()``::
+Controller en utilisant ``eventManager()``::
 
-    $events = $this->getEventManager();
+    $events = $this->eventManager();
 
 Chaque model a un gestionnaire d'événement séparé, alors que View et
 Controller en partagent un. Cela permet aux événements de model d'être
@@ -141,7 +141,7 @@ of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event
     $event = new Event('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
-    $this->getEventManager()->dispatch($event);
+    $this->eventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
 the event name, you should try to keep this name as unique as possible, while
@@ -197,7 +197,7 @@ listener might start out like::
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Order->getEventManager()->attach($statistics);
+    $this->Order->eventManager()->attach($statistics);
 
 As you can see in the above code, the ``attach`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
@@ -211,7 +211,7 @@ you can also bind any ``callable`` as an event listener. For example if we
 wanted to put any orders into the log files, we could use a simple anonymous
 function to do so::
 
-    $this->Order->getEventManager()->attach(function($event) {
+    $this->Order->eventManager()->attach(function($event) {
         CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
     }, 'Model.Order.afterPlace');
 
@@ -252,7 +252,7 @@ event listeners::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach(
+    $this->eventManager()->attach(
         $callback,
         'Model.Order.afterPlace',
         array('priority' => 2)
@@ -282,7 +282,7 @@ When events have data provided in their constructor, the provided data is
 converted into arguments for the listeners. An example from the View layer is
 the afterRender callback::
 
-    $this->getEventManager()
+    $this->eventManager()
         ->dispatch(new Event('View.afterRender', $this, [$viewFileName]));
 
 The listeners of the ``View.afterRender`` callback should have the following
@@ -332,7 +332,7 @@ To check if an event was stopped, you call the ``isStopped()`` method in the eve
 
     public function place($order) {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->getEventManager()->dispatch($event);
+        $this->eventManager()->dispatch($event);
         if ($event->isStopped()) {
             return false;
         }
@@ -372,7 +372,7 @@ directly or returning the value in the callback itself::
     // Using the event result
     public function place($order) {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
-        $this->getEventManager()->dispatch($event);
+        $this->eventManager()->dispatch($event);
         if (!empty($event->result['order'])) {
             $order = $event->result['order'];
         }
@@ -395,27 +395,27 @@ the :php:meth:`Cake\\Event\\EventManager::detach()` method using as arguments th
 params you used for attaching it::
 
     // Attaching a function
-    $this->getEventManager()->attach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->attach([$this, 'doSomething'], 'My.event');
 
     // Detaching the function
-    $this->getEventManager()->detach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->detach([$this, 'doSomething'], 'My.event');
 
     // Attaching an anonymous function.
     $myFunction = function($event) { ... };
-    $this->getEventManager()->attach($myFunction, 'My.event');
+    $this->eventManager()->attach($myFunction, 'My.event');
 
     // Detaching the anonymous function
-    $this->getEventManager()->detach($myFunction, 'My.event');
+    $this->eventManager()->detach($myFunction, 'My.event');
 
     // Attaching a CakeEventListener
     $listener = new MyEventLister();
-    $this->getEventManager()->attach($listener);
+    $this->eventManager()->attach($listener);
 
     // Detaching a single event key from a listener
-    $this->getEventManager()->detach($listener, 'My.event');
+    $this->eventManager()->detach($listener, 'My.event');
 
     // Detaching all callbacks implemented by a listener
-    $this->getEventManager()->detach($listener);
+    $this->eventManager()->detach($listener);
 
 Conclusion
 ==========

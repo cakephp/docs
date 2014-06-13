@@ -206,6 +206,10 @@ to ``helloWorld``. There are no changes required in the way you invoke commands.
 Event
 =====
 
+All objects having a ``getEventManager()`` method, got this function renamed to
+``eventManager()``. An ``EventManagerTrait`` was added containing the logic of
+instantiating and keeping a reference to a local event manager.
+
 * The Event subsystem has had a number of optional features removed. When
   dispatching events you can no longer use the following options:
 
