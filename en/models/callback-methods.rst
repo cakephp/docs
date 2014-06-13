@@ -98,13 +98,7 @@ return *true*, otherwise the current save() execution will abort.
 afterValidate
 ==============
 
-``afterValidate()``
-
-Called after data has been checked for errors. Use this callback to perform
-any data cleanup or preparation if needed.
-
-beforeSave
-==========
+``afterMICValidate()`` 
 
 ``beforeSave(array $options = array())``
 
