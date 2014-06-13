@@ -1413,9 +1413,21 @@ A list of the default templates and the variables they can expect are:
 * ``submitContainer`` {{content}}
 
 In addition to these templates, the ``input()`` method will attempt to use
-distinct templates for each input containere. For example, when creating
+distinct templates for each input container. For example, when creating
 a datetime input the ``datetimeContainer`` will be used if it is present.
-If that container is missing the ``inputContainer`` template will be used.
+If that container is missing the ``inputContainer`` template will be used. For
+example::
+
+    // Add custom radio wrapping HTML
+    $this->Form->templates([
+        'radioContainer' => '<div class="form-radio">{{content}}</div>'
+    ]);
+
+    // Create a radio set with our custom wrapping div.
+    echo $this->Form->radio('User.email_notifications', [
+        'options' => ['y', 'n'],
+        'type' => 'radio'
+    ]);
 
 Generating Entire Forms
 =======================
