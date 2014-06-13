@@ -168,7 +168,7 @@ Il y plusieurs options pour create():
   L'URL ainsi fournie peut être relative à votre application CakePHP ::
 
     echo $this->Form->create(null, [
-        'url' => ['controller' => 'articles', 'action' => 'publish']
+        'url' => ['controller' => 'Articles', 'action' => 'publish']
     ]);
 
   Affichera:

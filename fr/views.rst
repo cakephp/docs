@@ -669,7 +669,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
         $uuid = $this->uuid(
           'form',
-          ['controller' => 'posts', 'action' => 'index']
+          ['controller' => 'Posts', 'action' => 'index']
         );
         //$uuid contains 'form0425fe3bad'
 

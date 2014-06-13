@@ -344,11 +344,11 @@ Contrôle de Flux
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
                 return $this->redirect(
-                    ['controller' => 'paiements', 'action' => 'remerciements']
+                    ['controller' => 'Paiements', 'action' => 'remerciements']
                 );
             } else {
                 return $this->redirect(
-                    ['controller' => 'paiements', 'action' => 'confirmations']
+                    ['controller' => 'Paiements', 'action' => 'confirmations']
                 );
             }
         }
@@ -379,7 +379,7 @@ Contrôle de Flux
     vous pouvez utiliser::
 
         return $this->redirect([
-            'controller' => 'commandes',
+            'controller' => 'Commandes',
             'action' => 'confirmation',
             'produit' => 'pizza',
             'quantite' => 5
@@ -389,7 +389,7 @@ Contrôle de Flux
     à ceci::
 
         return $this->redirect([
-            'controller' => 'commandes',
+            'controller' => 'Commandes',
             'action' => 'confirmation',
             '?' => [
                 'produit' => 'pizza',

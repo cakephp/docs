@@ -151,7 +151,7 @@ pour chaque pair de valeur de clé.
         $postTime = strtotime($post['Post']['created']);
 
         $postLink = [
-            'controller' => 'posts',
+            'controller' => 'Posts',
             'action' => 'view',
             'year' => date('Y', $postTime),
             'month' => date('m', $postTime),

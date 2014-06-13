@@ -280,7 +280,7 @@ les utiliser.
 
         echo $this->Html->image("recipes/6.jpg", [
             "alt" => "Brownies",
-            'url' => ['controller' => 'recipes', 'action' => 'view', 6]
+            'url' => ['controller' => 'Recipes', 'action' => 'view', 6]
         ]);
 
     Affichera:
@@ -341,7 +341,7 @@ les utiliser.
 
         echo $this->Html->link(
             'Dashboard',
-            ['controller' => 'dashboards', 'action' => 'index', '_full' => true]
+            ['controller' => 'Dashboards', 'action' => 'index', '_full' => true]
         );
 
     Affichera:
@@ -356,7 +356,7 @@ les utiliser.
 
         echo $this->Html->link(
             'Delete',
-            ['controller' => 'recipes', 'action' => 'delete', 6],
+            ['controller' => 'Recipes', 'action' => 'delete', 6],
             [],
             "Are you sure you wish to delete this recipe?"
         );
@@ -375,7 +375,7 @@ les utiliser.
     Les chaînes de requête peuvent aussi être créées avec ``link()``.::
 
         echo $this->Html->link('View image', [
-            'controller' => 'images',
+            'controller' => 'Images',
             'action' => 'view',
             1,
             '?' => ['height' => 400, 'width' => 500]
@@ -396,7 +396,7 @@ les utiliser.
         <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
-            ['controller' => 'recipes', 'action' => 'view', 'id' => 6, 'comments' => false]
+            ['controller' => 'Recipes', 'action' => 'view', 'id' => 6, 'comments' => false]
         );
 
     Affichera:
@@ -1005,7 +1005,7 @@ Création d'un chemin de navigation avec le Helper Html
 
         echo $this->Html->getCrumbs(' > ', [
             'text' => $this->Html->image('home.png'),
-            'url' => ['controller' => 'pages', 'action' => 'display', 'home'],
+            'url' => ['controller' => 'Pages', 'action' => 'display', 'home'],
             'escape' => false
         ]);
 
@@ -1018,7 +1018,7 @@ Création d'un chemin de navigation avec le Helper Html
     pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
         $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', ['controller' => 'users', 'action' => 'add']);
+        $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
 
     Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
     où le fil d'Ariane a été ajouté.

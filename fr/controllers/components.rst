@@ -32,7 +32,7 @@ de vos controllers::
         public $components = [
             'Auth' => [
                 'authorize' => ['controller'],
-                'loginAction' => ['controller' => 'users', 'action' => 'login']
+                'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ],
             'Cookie' => ['name' => 'CookieMonster']
         ];
@@ -45,7 +45,7 @@ comme ceci::
 
     public function beforeFilter() {
         $this->Auth->config('authorize', ['controller']);
-        $this->Auth->config('loginAction', ['controller' => 'users', 'action' => 'login']);
+        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
 
         $this->Cookie->config('name', 'CookieMonster');
     }

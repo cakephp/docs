@@ -30,7 +30,7 @@ en utilisant le REPL::
 
     [1] app > Cake\Routing\Router::parse('/articles/view/1');
     // [
-    //   'controller' => 'articles',
+    //   'controller' => 'Articles',
     //   'action' => 'view',
     //   'pass' => [
     //     0 => '1'
@@ -40,7 +40,7 @@ en utilisant le REPL::
 
 Vous pouvez aussi tester la génération d'URL::
 
-    [1] app > Cake\Routing\Router::url(['controller' => 'articles', 'action' => 'edit', 99]);
+    [1] app > Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
 Pour quitter le REPL, vous pouver utiliser ``CTRL-D``.

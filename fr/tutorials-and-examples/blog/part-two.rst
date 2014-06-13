@@ -142,7 +142,7 @@ ressembler à quelque chose comme cela:
             <td><?= $article->id ?></td>
             <td>
                 <?= $this->Html->link($article->title,
-                ['controller' => 'articles', 'action' => 'view', $article->id]) ?>
+                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
             </td>
             <td><?= $article->created->format(DATE_RFC850) ?></td>
         </tr>
@@ -373,7 +373,7 @@ Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?= $this->Html->link(
         'Ajouter un article',
-        ['controller' => 'articles', 'action' => 'add']
+        ['controller' => 'Articles', 'action' => 'add']
     ) ?>
 
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
@@ -609,13 +609,13 @@ Le routage de CakePHP se trouve dans ``/App/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 
-    Router::connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
+    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous
 voulons que cette URL soit connectée à notre propre controller, remplacez donc
 la ligne par celle-ci ::
 
-    Router::connect('/', ['controller' => 'articles', 'action' => 'index']);
+    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 Cela devrait connecter les utilisateurs demandant '/' à l'action ``index()`` de
 notre controller Articles (ArticlesController).
@@ -624,7 +624,7 @@ notre controller Articles (ArticlesController).
 
     CakePHP peut aussi faire du 'reverse routing' (ou routage inversé).
     Par exemple, pour la route définie plus haut, en ajoutant
-    ``['controller' => 'articles', 'action' => 'index']`` à la fonction
+    ``['controller' => 'Articles', 'action' => 'index']`` à la fonction
     retournant un tableau, l'URL '/' sera utilisée. Il est d'ailleurs bien
     avisé de toujours utiliser un tableau pour les URLs afin que vos routes
     définissent où vont les URLs, mais aussi pour s'assurer qu'elles aillent

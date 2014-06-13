@@ -7,7 +7,7 @@ Glossaire
         Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
         Typiquement, ils ressemblent à cela::
         
-            ['controller' => 'posts', 'action' => 'view', 5]
+            ['controller' => 'Posts', 'action' => 'view', 5]
 
     attributs HTML
         Un tableau de clé => valeurs qui sont composées dans les attributs 
@@ -65,14 +65,14 @@ Glossaire
     routes.php
         Un fichier dans APP/Config qui contient la configuration de routing.
         Ce fichier est inclus avant que chaque requête soit traitée.
-        Il devrait connecter toutes les routes dont votre application a besoin 
-        afin que les requêtes puissent être routées aux contrôleurs + actions 
+        Il doit connecter toutes les routes dont votre application a besoin 
+        afin que les requêtes puissent être routées aux controllers + actions 
         correctes.
 
     DRY
-        Ne vous répétez pas vous-même. Est un principe de développement de 
+        Ne vous répétez pas vous-même. C'est un principe de développement de 
         logiciel qui a pour objectif de réduire les répétitions d'information 
-        de tout type. Dans CakePHP, DRY est utilisé pout vous permettre de 
+        de tout type. Dans CakePHP, DRY est utilisé pour vous permettre de 
         coder des choses et de les ré-utiliser à travers votre application.
 
 

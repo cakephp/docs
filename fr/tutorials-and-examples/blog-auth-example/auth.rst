@@ -142,11 +142,11 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
             'Session',
             'Auth' => [
                 'loginRedirect' => [
-                    'controller' => 'articles', 
+                    'controller' => 'Articles', 
                     'action' => 'index'
                 ],
                 'logoutRedirect' => [
-                    'controller' => 'pages', 
+                    'controller' => 'Pages', 
                     'action' => 'display', 
                     'home'
                 ]
@@ -308,11 +308,11 @@ config de Auth::
         'Session',
         'Auth' => [
             'loginRedirect' => [
-                'controller' => 'articles',
+                'controller' => 'Articles',
                 'action' => 'index'
             ],
             'logoutRedirect' => [
-                'controller' => 'pages',
+                'controller' => 'Pages',
                 'action' => 'display',
                 'home'
             ],
@@ -393,8 +393,8 @@ personnalisée, et bien plus encore.
 Lectures suivantes suggérées
 ----------------------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` Génération basique CRUD de code
-2. :doc:`/core-libraries/components/authentication`: Inscription d'utilisateur et connexion
+#. :doc:`/console-and-shells/code-generation-with-bake` Génération basique CRUD de code
+#. :doc:`/core-libraries/components/authentication`: Inscription d'utilisateur et connexion
 
 
 .. meta::
