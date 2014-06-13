@@ -1368,7 +1368,7 @@ This would load the tags in ``App/Config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
     $config = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
+        'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
 Any templates you define will replace the default ones included in the helper.
@@ -1376,7 +1376,7 @@ Templates that are not replaced, will continue to use the default values.
 You can also change the templates at runtime using the ``templates()`` method::
 
     $myTemplates = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
+        'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->templates($myTemplates);
 
@@ -1387,7 +1387,7 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxContainer`` {{input}}, {{label}}
+* ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
@@ -1404,13 +1404,30 @@ A list of the default templates and the variables they can expect are:
 * ``select`` {{name}}, {{attrs}}, {{content}}
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioContainer``  {{input}}, {{label}},
+* ``radioWrapper``  {{input}}, {{label}},
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
 * ``formGroup`` {{label}}, {{input}},
 * ``checkboxFormGroup`` {{input}}, {{label}},
-* ``groupContainer`` {{type}}, {{required}}, {{content}}
-* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``inputContainer`` {{type}}, {{required}}, {{content}}
+* ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``submitContainer`` {{content}}
+
+In addition to these templates, the ``input()`` method will attempt to use
+distinct templates for each input container. For example, when creating
+a datetime input the ``datetimeContainer`` will be used if it is present.
+If that container is missing the ``inputContainer`` template will be used. For
+example::
+
+    // Add custom radio wrapping HTML
+    $this->Form->templates([
+        'radioContainer' => '<div class="form-radio">{{content}}</div>'
+    ]);
+
+    // Create a radio set with our custom wrapping div.
+    echo $this->Form->radio('User.email_notifications', [
+        'options' => ['y', 'n'],
+        'type' => 'radio'
+    ]);
 
 Generating Entire Forms
 =======================
