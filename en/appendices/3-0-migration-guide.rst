@@ -206,8 +206,13 @@ to ``helloWorld``. There are no changes required in the way you invoke commands.
 Event
 =====
 
-* The Event subsystem has had a number of optional features removed. When
-  dispatching events you can no longer use the following options:
+The ``getEventManager()`` method,  was removed on all objects that had it.  An
+``eventManager()`` method is now provided by the ``EventManagerTrait``. The
+``EventManagerTrait`` contains the logic of instantiating and keeping
+a reference to a local event manager.
+
+The Event subsystem has had a number of optional features removed. When
+dispatching events you can no longer use the following options:
 
   * ``passParams`` This option is now enabled always implicitly. You
     cannot turn it off.
