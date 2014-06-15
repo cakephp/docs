@@ -227,8 +227,14 @@ dont vous appelez les commandes.
 Event
 =====
 
-* Le sous-système d'Event a eu un certain nombre d'options retirées. Lors
-  du dispatching des events, vous ne pouvez plus utiliser les options suivantes:
+La méthode ``getEventManager()`` a été retirée pour tous les objets qui
+l'avaient. Une méthode ``eventManager()`` est maintenant fournie par
+``EventManagerTrait``. ``EventManagerTrait`` contient la logique pour instancier
+et garder une référence d'un gestionnaire d'evenement local.
+
+Le sous-système d'Event s'est vu retiré un certain nombre de fonctionnalités
+Lors du dispatching des évenements, vous ne pouver plus utiliser les options
+suivantes:
 
   * ``passParams`` Cette option est maintenant toujours activée implicitement.
     Vous ne pouvez pas l'arrêter.
