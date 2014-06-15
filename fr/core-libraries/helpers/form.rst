@@ -1411,7 +1411,7 @@ Ceci charge les balise dans ``App/Config/app_form.php``. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     $config = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
+        'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
 Tous les templates que vous définissez vont remplacer ceux par défaut dans
@@ -1420,7 +1420,7 @@ utiliser avec les valeurs par défaut. Vous pouvez aussi changer les templates
 à la volée en utilisant la méthode ``templates()``::
 
     $myTemplates = [
-        'groupContainer' => '<div class="form-control">{{content}}</div>',
+        'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->templates($myTemplates);
 
@@ -1432,7 +1432,7 @@ suivantes:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxContainer`` {{input}}, {{label}}
+* ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
@@ -1449,13 +1449,30 @@ suivantes:
 * ``select`` {{name}}, {{attrs}}, {{content}}
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioContainer``  {{input}}, {{label}},
+* ``radioWrapper``  {{input}}, {{label}},
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
 * ``formGroup`` {{label}}, {{input}},
 * ``checkboxFormGroup`` {{input}}, {{label}},
-* ``groupContainer`` {{type}}, {{required}}, {{content}}
-* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``inputContainer`` {{type}}, {{required}}, {{content}}
+* ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``submitContainer`` {{content}}
+
+En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
+templates pour chaque conteneur d'input. Par exemple, lors de la création
+d'un input datetime, ``datetimeContainer`` va être utilisé si il est présent.
+Si le conteneur n'est pas présent, le template ``inputContainer`` sera utilisé.
+Par exemple::
+
+    // Ajoute du HTML personnalisé autour d'un input radio
+    $this->Form->templates([
+        'radioContainer' => '<div class="form-radio">{{content}}</div>'
+    ]);
+
+    // Créé un ensemble d'inputs radio avec notre div personnalisé autour
+    echo $this->Form->radio('User.email_notifications', [
+        'options' => ['y', 'n'],
+        'type' => 'radio'
+    ]);
 
 Générer des Formulaires Entiers
 ===============================
