@@ -10,6 +10,10 @@ of your entities in multiple languages. It does so by using a separate
 ``i18n`` table where it stores the translation for each of the fields of any
 given Table object that it's bound to.
 
+.. warning::
+    The TranslateBehavior does not support composite primary keys at this point in
+    time.
+
 A Quick Tour
 ============
 
