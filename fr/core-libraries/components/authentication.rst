@@ -355,7 +355,7 @@ setter dans votre entity User::
 
         // ...
 
-        public function setPassword($password) {
+        protected function _setPassword($password) {
             return (new SimplePasswordHasher)->hash($password);
         }
 

@@ -211,7 +211,7 @@ fichier entity dans ``App/Model/Entity/User.php`` et ajoutons ce qui suit::
 
         // ...
 
-        public function setPassword($password) {
+        protected function _setPassword($password) {
             return (new SimplePasswordHasher)->hash($password);
         }
 
