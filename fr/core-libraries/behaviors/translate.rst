@@ -10,6 +10,10 @@ de vos entities en plusieurs langues. Il le fait en utilisant une table
 ``i18n`` séparée où il stocke la traduction pour chacun des champs de tout
 objet Table donné auquel il est lié.
 
+.. warning::
+    TranslateBehavior ne supporte pas les clés primaires composite pour
+    l'intant.
+
 Un Rapide Aperçu
 ================
 

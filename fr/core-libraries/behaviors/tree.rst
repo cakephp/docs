@@ -35,6 +35,9 @@ Plus d'informations sur la signification des champs et comment ils sont utilisé
 peuvent être trouvées dans cet article décrivant la
 `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
+.. warning::
+    TreeBehavior ne supporte pas les clés primaire composite pour le moment.
+
 Un Aperçu Rapide
 ================
 
