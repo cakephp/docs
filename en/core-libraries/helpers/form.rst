@@ -1368,7 +1368,7 @@ This would load the tags in ``App/Config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
     $config = [
-        'inputContainer' => '<div class="form-control">{{content}}</div>',
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
 Any templates you define will replace the default ones included in the helper.
@@ -1376,7 +1376,7 @@ Templates that are not replaced, will continue to use the default values.
 You can also change the templates at runtime using the ``templates()`` method::
 
     $myTemplates = [
-        'inputContainer' => '<div class="form-control">{{content}}</div>',
+        'groupContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->templates($myTemplates);
 
@@ -1408,14 +1408,14 @@ A list of the default templates and the variables they can expect are:
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
 * ``formGroup`` {{label}}, {{input}},
 * ``checkboxFormGroup`` {{input}}, {{label}},
-* ``inputContainer`` {{type}}, {{required}}, {{content}}
-* ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``groupContainer`` {{type}}, {{required}}, {{content}}
+* ``groupContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``submitContainer`` {{content}}
 
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating
 a datetime input the ``datetimeContainer`` will be used if it is present.
-If that container is missing the ``inputContainer`` template will be used. For
+If that container is missing the ``groupContainer`` template will be used. For
 example::
 
     // Add custom radio wrapping HTML
