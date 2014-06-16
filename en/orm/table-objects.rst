@@ -1412,8 +1412,14 @@ option::
     // Only save the comments association
     $articles->save($entity, ['associated' => ['Comments']);
 
-You can define nested ``associated`` options to save distant or deeply nested
-associations::
+You can define save distant or deeply nested associations by using dot notation::
+
+    // Save the company, the employees and related addresses for each of them.
+    $companies->save($entity, ['associated' => ['Employees.Addresses']]);
+
+
+If you need to run a different validation rule set for any association you can
+specify it as an options array for the association::
 
     // Save the company, the employees and related addresses for each of them.
     // For employees use the 'special' validation group
@@ -1423,6 +1429,16 @@ associations::
           'associated' => ['Addresses'],
           'validate' => 'special',
         ]
+      ]
+    ]);
+
+Moreover, you can combine the dot notation for associations with the options
+array::
+
+    $companies->save($entity, [
+      'associated' => [
+        'Employees',
+        'Employees.Addresses' => ['validate' => 'special']
       ]
     ]);
 
@@ -1926,7 +1942,12 @@ associations should be marshalled::
     ]);
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. You can convert multiple entities using::
+should be marshalled. Alternatively, you can use dot notation for brevity::
+
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), ['Tags', 'Comments.Users']);
+
+You can convert multiple entities using::
 
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
@@ -1993,9 +2014,7 @@ merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the second parameter of the method::
 
     $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
-    ]);
+    $articles->patchEntity($article, $this->request->data(), ['Tags', 'Comments.Users']);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2091,6 +2110,4 @@ Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
-    $patched = $articles->patchEntities($list, $this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
-    ]);
+    $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
