@@ -136,7 +136,7 @@ associations. Les quatres types d'association dans CakePHP sont:
 hasOne, hasMany, belongsTo, et belongsToMany.
 
 ============= ===================== =======================================
-Relationship  Association Type      Example
+Relation      Type d'Association    Exemple
 ============= ===================== =======================================
 one to one    hasOne                Un user a un profile.
 ------------- --------------------- ---------------------------------------
@@ -147,9 +147,9 @@ many to one   belongsTo             Plusieurs articles appartiennent à un user.
 many to many  belongsToMany         Les Tags appartiennent aux articles.
 ============= ===================== =======================================
 
-Les Associations sont définis durant la méthode ``inititalize()`` de votre objet
-table. Les méthodes matchant le type d'association vous permet de définir les
-associations dans votre application. Par exemple, si vous voulez définir une
+Les Associations sont définies durant la méthode ``inititalize()`` de votre
+objet table. Les méthodes matchant le type d'association vous permet de définir
+les associations dans votre application. Par exemple, si vous voulez définir une
 association belongsTo dans notre ArticlesTable::
 
     namespace App\Model\Table;
@@ -1399,8 +1399,14 @@ option::
     // Only save the comments association
     $articles->save($entity, ['associated' => ['Comments']);
 
-You can define nested ``associated`` options to save distant or deeply nested
-associations::
+You can define save distant or deeply nested associations by using dot notation::
+
+    // Save the company, the employees and related addresses for each of them.
+    $companies->save($entity, ['associated' => ['Employees.Addresses']]);
+
+
+If you need to run a different validation rule set for any association you can
+specify it as an options array for the association::
 
     // Save the company, the employees and related addresses for each of them.
     // For employees use the 'special' validation group
@@ -1410,6 +1416,16 @@ associations::
           'associated' => ['Addresses'],
           'validate' => 'special',
         ]
+      ]
+    ]);
+
+Moreover, you can combine the dot notation for associations with the options
+array::
+
+    $companies->save($entity, [
+      'associated' => [
+        'Employees',
+        'Employees.Addresses' => ['validate' => 'special']
       ]
     ]);
 
@@ -1913,7 +1929,12 @@ associations should be marshalled::
     ]);
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. You can convert multiple entities using::
+should be marshalled. Alternatively, you can use dot notation for brevity::
+
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), ['Tags', 'Comments.Users']);
+
+You can convert multiple entities using::
 
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
@@ -1933,7 +1954,25 @@ look like::
     ];
 
 Once you've converted request data into entities you can ``save()`` or
-``delete()`` them.
+``delete()`` them::
+
+    foreach ($entities as $entity) {
+        // Save entity
+        $articles->save($entity);
+
+        // Delete entity
+        $articles->delete($entity);
+    }
+
+The above will run a separate transaction for each entity saved. If you'd like
+to process all the entities as a single transaction you can use
+``transactional()``::
+
+    $articles->connection()->transactional(function () use ($articles, $entities) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['atomic' => false]);
+        }
+    });
 
 .. note::
 
@@ -1962,9 +2001,7 @@ merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the second parameter of the method::
 
     $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
-    ]);
+    $articles->patchEntity($article, $this->request->data(), ['Tags', 'Comments.Users']);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2060,6 +2097,4 @@ Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
-    $patched = $articles->patchEntities($list, $this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
-    ]);
+    $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
