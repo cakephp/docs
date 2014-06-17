@@ -19,13 +19,8 @@ d'une ``View``, utilisez la classe ``String``::
             App::uses('String', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
-<<<<<<< HEAD
                 // notifie à l'utilisateur d'un nouveau message
                 $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, ['html' => true])));
-=======
-                // notification à l'utilisateur d'un nouveau message
-                $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
->>>>>>> master
             }
         }
     }
