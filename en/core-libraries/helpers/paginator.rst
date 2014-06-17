@@ -69,6 +69,13 @@ a particular method call::
         'number' => '<em><a href="{{url}}">{{text}}</a></em>'
     ]);
 
+.. warning::
+
+    Template strings containing a percentage sign (``%``) need special attention,
+    you should prefix this character with another percentage so it looks like
+    ``%%``. The reson is that internally templates are compiled to be used with
+    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
+
 Template Names
 --------------
 
