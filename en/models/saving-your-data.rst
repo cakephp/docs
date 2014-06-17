@@ -207,12 +207,14 @@ as keys:
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
-:php:meth:`Model::updateAll(array $fields, array $conditions)`
+:php:meth:`Model::updateAll(array $fields, mixed $conditions)`
 ==============================================================
 
-Updates one or more records in a single call. Records to be updated are
-identified by the ``$conditions`` array, and fields to be updated,
+Updates one or more records in a single call. Fields to be updated,
 along with their values, are identified by the ``$fields`` array.
+Records to be updated are identified by the ``$conditions`` array.
+If ``$conditions`` argument is not supplied or it is set to ``true``,
+all records will be updated.
 
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
