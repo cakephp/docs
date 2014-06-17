@@ -7,21 +7,23 @@ Entities
 
 .. php:class:: Entity
 
-While :doc:`/orm/table-objects` represent and provide access to a collection of
-objects, entities represent individual rows or domain objects in your
-application. Entities contain persistent properties and methods to manipulate and
-access the data they contain.
+Alors que :doc:`/orm/table-objects` représentent et fournissent un accès à une
+collection d'objets, les entities représentent des lignes individuelles ou
+des objets de domaine dans votre application. Les entities contiennent des
+propriétés persistentes et des méthodes pour manipuler et accéder aux données
+qu'ils contiennent.
 
-Entities are created for you by CakePHP each time you use ``find()`` on a table
-object.
+Les entities sont créés pour vous par CakePHP à chaque fois que vous utilisez
+``find()`` sur un objet table.
 
-Creating Entity Classes
-=======================
+Créer des Classes Entity
+========================
 
-You don't need to create entity classes to get started with the ORM in CakePHP.
-However, if you want to have custom logic in your entities you will need to
-create classes. By convention entity classes live in ``App/Model/Entity/``. If
-our application had an ``articles`` table we could create the following entity::
+Vous n'avez pas besoin de créer des classes entity pour utiliser l'ORM dans
+CakePHP. Cependant si vous souhaitez avoir de la logique personnalisée dans
+vos entities, vous devrez créer des classes. Par convention, les classes
+entity se trouvent dans ``App/Model/Entity/``. Si notre application a une
+table ``articles``, nous pourrions créer l'entity suivante::
 
     namespace App\Model\Entity;
 
@@ -30,47 +32,52 @@ our application had an ``articles`` table we could create the following entity::
     class Article extends Entity {
     }
 
-Right now this entity doesn't do very much. However, when we load data from our
-articles table, we'll get instances of this class.
+Pour l'instant cette entity ne fait pas grand chose. Cependant quand nous
+chargeons les données de notre table articles, nous obtiendrons des instances
+de cette classe.
 
 .. note::
 
-    If you don't define an entity class CakePHP will use the basic Entity class.
+    Si vous ne définissez pas de classe entity, CakePHP va utiliser la classe
+    de base Entity.
 
-Accessing Entity Data
-=====================
+Accéder aux Données de l'Entity
+===============================
 
-Entities provide a few ways to access the data they contain. Most commonly you
-will access the data in an entity using object notation::
+Les entities fournissent quelques façons d'accéder aux données qu'ils
+contiennent. La plupart du temps, vous accéderez aux données dans une entity
+en utilisant la notation objet::
 
-    $article->title = 'This is my first post';
+    $article->title = 'Ceci est mon premier post';
     echo $article->title;
 
-You can also use the ``get()`` and ``set()`` methods::
+Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``::
 
-    $article->set('title', 'This is my first post');
+    $article->set('title', 'Ceci est mon premier post');
     echo $article->get('title');
 
-When using ``set()`` you can update multiple properties at once using an array::
+Quand vous utilisez ``set()``, vous pouvez mettre à jour plusieurs propriétés
+en une fois en utilisant un tableau::
 
     $article->set([
-        'title' => 'My first post',
-        'body' => 'It is the best ever!'
+        'title' => 'Mon premier post',
+        'body' => "C'est le meilleur de tous!"
     ]);
 
 .. warning::
 
-    When updating entities with request data you should whitelist which fields
-    can be set with mass assignment.
+    Lors de la mise à jour des entities avec des données requêtées, vous
+    devriez faire une liste des champs qui peuvent être définis avec
+    mass assignment.
 
-Accessors & Mutators
-====================
+Accesseurs & Mutateurs
+======================
 
 .. php:method:: set($field = null, $value = null)
 
-In addition to the simple get/set interface, entities allow you to provide
-accessors and mutator methods. These methods let you customize how properties
-are read or set. For example::
+En plus de l'interface simple get/set, les entities vous permettent de fournir
+des méthodes accesseurs et mutateurs. Ces méthodes vous laissent personnaliser
+la façon dont les propriétés sont lues ou définies. Par exemple::
 
     namespace App\Model\Entity;
 
@@ -82,10 +89,10 @@ are read or set. For example::
         }
     }
 
-Accessors use the convention of ``_get`` followed by the CamelCased version of
-the field name. They receive the basic value stored in the ``_properties`` array
-as their only argument. You can customize how properties get set by defining
-a mutator::
+Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
+case du nom du champ. Ils reçoivent la valeur basique stockée dans le tableau
+``_properties`` pour seul argument. Vous pouvez personnaliser la façon dont
+les propriétés sont récupérées/définies en définissant un mutateur::
 
     namespace App\Model\Entity;
 
@@ -101,20 +108,23 @@ a mutator::
 
     }
 
-Mutator methods should always return the value that should be stored in the
-property. As you can see above, you can also use mutators to set other
-calculated properties. When doing this, be careful to not introduce any loops,
-as CakePHP will not prevent infinitely looping mutator methods. Mutators allow
-you easily convert properties as they are set, or create calculated data.
-Mutators and accessors are applied when properties are read using object
-notation, or using get() and set().
+Les méthodes mutateur doivent toujours retourner la valeur qui doit être
+stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
+aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
+faisant cela, attention à ne pas introduire de boucle, puisque CakePHP
+n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
+mutateurs vous permettent de facilement convertir les propriétés puisqu'elles
+sont définies ou de créer des données calculées. Les mutateurs et accesseurs
+sont appliqués quand les propriétés sont lus en utilisant la notation objet
+ou en utilisant get() et set().
 
-Creating Virtual Properties
----------------------------
+Créer des Propriétés Virtuelles
+-------------------------------
 
-By defining accessors you can provide access to properties that do not
-actually exist. For example if your users table has ``first_name`` and
-``last_name`` you could create a method for the full name::
+En définissant des accesseurs, vous pouvez fournir un accès aux propriétés
+qui n'existent pas réellement. Par exemple si votre table users a
+``first_name`` et ``last_name``, vous pouvez créer une méthode pour le nom
+complet::
 
     namespace App\Model\Entity;
 
@@ -129,43 +139,46 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual properties as if they existed on the entity. The property
-name will be the lower case and underscored version of the method::
+Vous pouvez accéder aux propriétés virtuelles puisqu'elles existent sur
+l'entity. Le nom de la propriété sera la version en minuscule et en underscore
+de la méthode::
 
     echo $user->full_name;
 
-Validation Errors
-=================
+Erreurs de Validation
+=====================
 
 .. php:method:: errors($field = null, $errors = null)
 
-After you :ref:`save an entity <saving-entities>` any validation errors will be
-stored on the entity itself. You can access any validation errors using the
-``errors()`` method::
+Après avoir :ref:`sauvegardé une entity <saving-entities>` toute erreur de
+validation sera stockée sur l'entity elle-même. Vous pouvez accéder à toutes
+les erreurs de validation en utilisant la méthode ``errors()``::
 
-    // Get all the errors
+    // Récupère toutes les erreurs
     $errors = $user->errors();
 
-    // Get the errors for a single field.
+    // Récupère les erreurs pour un champ unique.
     $errors = $user->errors('password');
 
-The ``errors()`` method can also be used to set the errors on an entity, making
-it easier to test code that works with error messages::
+La méthode ``errors()`` peut aussi être utilisée pour définir les erreurs sur
+une entity, facilitant le code de test qui fonctionne avec les messages
+d'erreur::
 
     $user->errors('password', ['Password is required.']);
 
 Mass Assignment
 ===============
 
-While setting properties to entites in bulk is simple and convenient, it can
-create signifcant security issues. Bulk assigning user data from the request
-into an entity allows the user to modify any and all columns. By default CakePHP
-protects against mass-assignment and makes you whitelist which fields
-are mass-assignable.
+Alors que la définition des propriétés en entites in bulk est simple et
+pratique, il peut créer des problèmes importants de sécurité.
+Assigner Bulk les données d'utilisateur à partir de la requête dans une
+entity permet à l'utilisateur de modifier une et toutes les colonnes. Par
+défaut CakePHP protecte contre l'assignement massif et vous fait faire une
+liste des champs qui sont assignables massivement.
 
-The ``_accessible`` property allows you to provide a map of properties and
-whether or not they can be mass-assigned. The values ``true`` and ``false``
-indicate whether a field can or cannot be mass-assigned::
+La propriété ``_accessible`` vous permet de fournir un map des propriétés et
+si oui ou non ils peuvent être assigné en masse. Les valeurs ``true`` et
+``false`` indiquent si un champ peut ou ne peut pas être assigné massivement::
 
     namespace App\Model\Entity;
 
@@ -178,8 +191,8 @@ indicate whether a field can or cannot be mass-assigned::
         ];
     }
 
-In addition to concrete fields there is a special ``*`` field which defines the
-fallback behavior if a field is not specifically named::
+En plus des champs réels, il existe un champ spécial ``*`` qui définit le
+bahavior fallback si un champ n'est pas nommé spécifiquement::
 
     namespace App\Model\Entity;
 
@@ -193,64 +206,68 @@ fallback behavior if a field is not specifically named::
         ];
     }
 
-If the ``*`` property is not defined it will default to ``false``.
+Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
-Modifying the Guarded Fields at Runtime
----------------------------------------
+Modifier les Champs Gardés à l'Execution
+----------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``accessible``
-method::
+Vous pouvez modifier la liste des champs gardés à la volée en utilisant la
+méthode ``accessible``::
 
-    // Make user_id accessible.
+    // Rendre user_id accessible.
     $article->accessible('user_id', true);
 
-    // Make title guarded.
+    // Rendre title guarded.
     $article->accessible('title', false);
 
 .. note::
 
-    Modifying accessible fields effects only the instance the method is called
-    on.
+    Modifier des champs accessibles agissent seulement sur l'instance de la
+    méthode sur laquelle il est appelé.
 
 
-Bypassing Field Guarding
-------------------------
+Outrepasser le Champ Gardé
+--------------------------
 
-There are sometimes situations when you want to allow mass-assignment to guarded
-fields::
+Il arrive des fois où vous voulez permettre un mass-assignment aux champs
+gardés::
 
     $article->set($properties, ['guard' => false]);
 
-By setting the ``guard`` option to false, you can ignore the accessible field
-list for a single call to ``set()``.
+En définissant l'option ``guard`` à false, vous pouvez ignorer la liste des
+champs accessible pour un appel unique de ``set()``.
 
 
 .. _lazy-load-associations:
 
-Lazy Loading Associations
+Associations Lazy Loading
 =========================
 
-While eager loading associations is generally the most efficient way to access
-your associations, there may be times when you need to lazily load associated
-data. Before we get into how to lazy load associations, we should discuss the
-differences between eager loading and lazy loading associations:
+Alors que les associations chargées eager sont généralement la façon la plus
+efficace pour accéder à vos associations, il peut arriver des fois où vous
+avez besoin de charger lazily les données associées. Avant de voir comment
+faire avec des associations chargé en lazy, nous devrions discuter des
+différences entre le chargement des associations eager et lazy:
 
 Eager loading
-    Eager loading uses joins (where possible) to fetch data from the
-    database in as *few* queries as possible. When a separate query is required,
-    like in the case of a HasMany association, a single query is emitted to
-    fetch *all* the associated data for the current set of objects.
+    Le chargement Eager utilise les joins (si possible) pour récupérer les
+    données de la base de données avec aussi *peu* de requêtes que possible.
+    Quand une requête séparée est nécessaire comme dans le cas d'une
+    association HasMany, une requête unique est émise pour récupérer *toutes*
+    les données associées pour l'ensemble courant d'objets.
 Lazy loading
-    Lazy loading defers loading association data until it is absolutely
-    required. While this can save CPU time because possibly unused data is not
-    hydrated into objects, it can result in many more queries being emitted to
-    the database. For example looping over a set of articles & their comments
-    will frequently emit N queries where N is the number of articles being
-    iterated.
+    Le chargement Lazy defers le chargement des données de l'association jusqu'à
+    ce que ce soit complètement nécessaire. Alors que ceci peut sauver du temps
+    CPU car des données possiblement non utilisées ne sont pas hydratées dans
+    les objets, cela peut résulter en plus de requêtes émises vers la base de
+    données. Par exemple faire des boucles sur un ensemble d'articles et leurs
+    commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
+    étant itérés.
 
-While lazy loading is not include by CakePHP's ORM, it is not hard to implement
-it yourself when and where you need it. When implementing an accessor method you
-can lazily load associated data::
+Alors que le chargement lazy n'est pas inclu par l'ORM de CakePHP, il n'est
+pas difficile de l'intégrer vous-même quand et où vous le souhaitez. Lors
+de l'implémentation d'une méthode accesseur, vous pouvez charger lazily les
+données associées::
 
     namespace App\Model\Entity;
 
@@ -268,26 +285,27 @@ can lazily load associated data::
 
     }
 
-Implementing the above method will enable you to do the following::
+Intégrer la méthode ci-dessus va vous permettre de faire ce qui suit::
 
     $article = $this->Articles->findById($id);
     foreach ($article->comments as $comment) {
         echo $comment->body;
     }
 
-Creating Re-usable Code with Traits
-===================================
+Créer du Code Re-utilisable avec les Traits
+===========================================
 
-You may find yourself needing the same logic in multiple entity classes. PHP's
-traits are a great fit for this. You can put your application's traits in
-``App/Model/Entity``. By convention traits in CakePHP are suffixed with
-``Trait`` so they are easily discernible from classes or interfaces. Traits are
-often a good compliment to behaviors, allowing you to provide functionality for
-the table and entity objects.
+Vous pouvez vous retrouver dans un cas où vous avez besoin de la même logique
+dans plusieurs classes d'entity. Les traits de PHP sont parfaits pour cela.
+Vous pouvez mettre les traits de votre application dans ``App/Model/Entity``.
+Par convention, les traits dans CakePHP sont suffixés avec ``Trait`` pour
+qu'ils sont facilement discernables des classes ou des interfaces. Les traits
+sont souvent un bon allié des behaviors, vous permettant de fournir des
+fonctionnalités pour la table et les objets entity.
 
-For example if we had SoftDeletable plugin, it could provide a trait. This trait
-could give methods for marking entities as 'deleted', the method ``softDelete``
-could be provided by a trait::
+Par exemple si vous avez un plugin SoftDeletable, il pourrait fournir un trait.
+Ce trait pourrait donner des méthodes pour rendre les entities comme
+'supprimé', la méthode ``softDelete`` pourrait être fournie par un trait::
 
     // SoftDelete/Model/Entity/SoftDeleteTrait.php
 
@@ -301,8 +319,8 @@ could be provided by a trait::
 
     }
 
-You could then use this trait in your entity class by importing it and including
-it::
+Vous pourriez ensuite utiliser ce trait dans votre classe entity en l'intégrant
+et en l'incluant::
 
     namespace App\Model\Entity;
 
@@ -313,30 +331,32 @@ it::
         use SoftDeleteTrait;
     }
 
-Converting to Arrays/JSON
-=========================
+Convertir en Tableaux/JSON
+==========================
 
-When building APIs, you may often need to convert entities into arrays or JSON
-data. CakePHP makes this simple::
+Lors de la construction d'APIs, vous avez peut-être besoin de convertir des
+entities en tableaux ou en données JSON. CakePHP facilite cela::
 
-    // Get an array.
+    // Obtenir un tableau.
     $array = $user->toArray();
 
-    // Convert to JSON
+    // Convertir en JSON
     $json = json_encode($user);
 
-When converting an entity to an array/JSON the virtual & hidden field lists are
-applied. Entities are converted recursively as well. This means that if you
-eager loaded entities and their associations CakePHP will correctly handle
-converting the associated data into the correct format.
+Lors de la conversion d'une entity en tableau/JSON, les listes de champ
+virtuel & caché sont utilisés. Les entities sont convertis aussi de façon
+récursive. Cela signifie que si vous chargez eager les entities avec leurs
+associations, CakePHP va correctement gérer la conversion des données associées
+dans le bon format.
 
-Exposing Virtual Properties
----------------------------
+Montrer les Propriétés Virtuelles
+---------------------------------
 
-By default virtual properties are not exported when converting entities to
-arrays or JSON. In order to expose virtual properties you need to make them
-visible. When defining your entity class you can provide a list of virtual
-fields that should be exposed::
+Par défaut, les propriétés virtuelles ne sont pas exportées lors de la
+conversion des entities en tableaux ou JSON. Afin d'exposer les propriétés
+virtuelles, vous devez les rendre visibles. Lors de la définition de votre
+classe entity, vous pouvez fournir une liste de champs virtuels qui doivent
+être exposés::
 
     namespace App\Model\Entity;
 
@@ -348,17 +368,18 @@ fields that should be exposed::
 
     }
 
-This list can be modified at runtime using ``virtualProperties``::
+Cette liste peut être modifiée à la volée en utilisant ``virtualProperties``::
 
     $user->virtualProperties(['full_name', 'is_admin']);
 
-Hiding Properties
------------------
+Cacher les Propriétés
+---------------------
 
-There are often fields you do not want exported in JSON or array formats. For
-example it is often unwise to expose password hashes or account recovery
-questions. When defining an entity class, define which properties should be
-hidden::
+Il arrive souvent que vous ne souhaitiez pas exporter certains champs dans
+des formats JSON ou tableau. Par exemple il n'est souvent pas sage de montrer
+les hashs de mot de passe ou les questions pour retrouver son compte. Lors
+de la définition d'une classe entity, définissez les propriétés qui doivent
+être cachés::
 
     namespace App\Model\Entity;
 
@@ -370,7 +391,7 @@ hidden::
 
     }
 
-This list can be modified at runtime using ``hiddenProperties``::
+Cette liste peut être modifiée à la volée en utilisant ``hiddenProperties``::
 
     $user->hiddenProperties(['password', 'recovery_question']);
 
