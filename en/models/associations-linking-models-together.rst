@@ -678,10 +678,10 @@ Possible keys for HABTM association arrays include:
    underscored, singular name of the other model, suffixed with
    '\_id'.
 -  **unique**: boolean or string ``keepExisting``.
-    - If true (default value) cake will first delete existing relationship
+    - If true (default value) CakePHP will first delete existing relationship
       records in the foreign keys table before inserting new ones.
       Existing associations need to be passed again when updating.
-    - When false, cake will insert the specified new relationship records
+    - When false, CakePHP will insert the specified new relationship records
       and leave any existing relationship records in place, possibly
       resulting in duplicate relationship records.
     - When set to ``keepExisting``, the behavior is similar to `true`,
