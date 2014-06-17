@@ -964,7 +964,7 @@ Changing the Tags Output by HtmlHelper
 
     Template strings containing a percentage sign (``%``) need special attention,
     you should prefix this character with another percentage so it looks like
-    ``%%``. The reson is that internally templates are compiled to be used with
+    ``%%``. The reason is that internally templates are compiled to be used with
     ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
 
 Creating Breadcrumb Trails with HtmlHelper

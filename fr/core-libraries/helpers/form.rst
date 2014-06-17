@@ -1424,6 +1424,14 @@ utiliser avec les valeurs par défaut. Vous pouvez aussi changer les templates
     ];
     $this->Form->templates($myTemplates);
 
+.. warning::
+
+    Les chaînes de template contenant un signe pourcentage (``%``) nécessitent
+    une attention spéciale, vous devriez préfixer ce caractère avec un autre
+    pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
+    sont compilés en interne pour être utilisé avec ``sprintf()``.
+    Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
+
 Liste des Templates
 -------------------
 

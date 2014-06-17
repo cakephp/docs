@@ -73,6 +73,14 @@ pour l'appel d'une méthode particulière::
         'number' => '<em><a href="{{url}}">{{text}}</a></em>'
     ]);
 
+.. warning::
+
+    Les chaînes de template contenant un signe pourcentage (``%``) nécessitent
+    une attention spéciale, vous devriez préfixer ce caractère avec un autre
+    pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
+    sont compilés en interne pour être utilisé avec ``sprintf()``.
+    Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
+
 Noms du Template
 ----------------
 
