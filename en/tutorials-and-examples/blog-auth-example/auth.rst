@@ -110,8 +110,7 @@ tutorial, we will show just the add.ctp:
             <?= $this->Form->input('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
-        ?>
-        </fieldset>
+       </fieldset>
     <?= $this->Form->button(__('Submit')); ?>
     <?= $this->Form->end() ?>
     </div>
