@@ -681,10 +681,15 @@ Possible keys for HABTM association arrays include:
     - If true (default value) cake will first delete existing relationship
       records in the foreign keys table before inserting new ones.
       Existing associations need to be passed again when updating.
-    - When false, cake will insert the relationship record, and that
-      no join records are deleted during a save operation.
+    - When false, cake will insert the specified new relationship records
+      and leave any existing relationship records in place, possibly
+      resulting in duplicate relationship records.
     - When set to ``keepExisting``, the behavior is similar to `true`,
-      but existing associations are not deleted.
+      but with an additional check so that if a any of the records
+      to be added duplicates and existing relationship record, the
+      existing relationship record is not deleted, and the duplicate
+      is ignored.  This can be useful if, for example, the join table
+      has additional data in it that needs to be retained.
 -  **conditions**: an array of find()-compatible conditions or SQL
    string. If you have conditions on an associated table, you should use a
    'with' model, and define the necessary belongsTo associations on it.
