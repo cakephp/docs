@@ -52,7 +52,7 @@ ce traitement, vous pouvez empaqueter ce code et ainsi le partager.
 Les controllers sont également équipés de fonctions de rappel (callbacks).
 Ces fonctions sont à votre disposition au cas où vous avez besoin d'ajouter
 du code entre les différentes opérations internes de CakePHP. Les callbacks
-disponibles sont :
+disponibles sont:
 
 -  :php:meth:`~Controller::afterFilter()`, exécutée après la logique du
     controller, y compris l'affichage de la vue.

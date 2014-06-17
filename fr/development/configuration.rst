@@ -661,6 +661,43 @@ Moteurs de Configuration intégrés
     sections peuvent contenir des clés séparées de point pour des imbrications
     plus profondes.
 
+.. _inflection-configuration:
+
+Configuration de Inflection
+===========================
+
+Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
+pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
+votre controller BigBoxesController, et tout fonctionne ensemble
+automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
+est en *infléctant* les mots entre leurs formes singulière et plurielle.
+
+Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
+vous pouvez être dans des situations où l':php:class:`Inflector` de CakePHP (la
+classe qui met au pluriel, au singulier, en CamelCase, et en underscore) ne
+fonctionne pas comme vous voulez. Si CakePHP ne reconnait pas vos Foci ou Fish,
+vous pouvez dire à CakePHP vos cas spéciaux.
+
+Chargement d'inflections personnalisées
+---------------------------–-----------
+
+Vous pouvez utiliser :php:meth:`Inflector::rules()` dans le fichier
+``app/Config/bootstrap.php`` pour charger des inflections personnalisées::
+
+    Inflector::rules('singular', array(
+        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
+        'uninflected' => array('singulars'),
+        'irregular' => array('spins' => 'spinor')
+    ));
+
+ou::
+
+    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
+
+Va fusionner les règles fournies dans les ensembles d'inflection définies dans
+lib/Cake/Utility/Inflector.php, avec les règles ajoutées prenant le pas sur
+les règles du coeur.
+
 Bootstrapping CakePHP
 =====================
 

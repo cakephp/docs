@@ -607,6 +607,14 @@ Les Types d'Attribut Correspondants
     les résultats. Vous pouvez utiliser les deux, expression et le matching
     d'éléments avec cette méthode.
 
+        //appel de la fonction noop $this->noop() sur chaque element de $data
+        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        
+        function noop($array) {
+         //fait des trucs au tableau et retourne les résultats
+         return $array;
+        }
+
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
     Crée une valeur unique, en extrayant $path, et en réduisant les résultats

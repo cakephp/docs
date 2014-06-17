@@ -6,7 +6,7 @@ TextHelper
 The TextHelper contains methods to make text more usable and
 friendly in your views. It aids in enabling links, formatting URLs,
 creating excerpts of text around chosen words or phrases,
-highlighting key words in blocks of text, and to gracefully
+highlighting key words in blocks of text, and gracefully
 truncating long stretches of text.
 
 .. php:method:: autoLinkEmails(string $text, array $options=[])
@@ -35,7 +35,7 @@ truncating long stretches of text.
     :param string $text: The text to convert.
     :param array $htmlOptions: An array :term:`html attributes` for the generated links
 
-    Same as in ``autoLinkEmails()``, only this method searches for
+    Same as ``autoLinkEmails()``, only this method searches for
     strings that start with https, http, ftp, or nntp and links them
     appropriately.
 
@@ -58,7 +58,7 @@ truncating long stretches of text.
 
     :param string $text: The text to convert.
 
-    Adds proper <p> around text where double-line returns and <br> where single-line returns
+    Adds proper <p> around text where double-line returns are found, and <br> where single-line returns
     are found.::
 
         $myText = 'For more information

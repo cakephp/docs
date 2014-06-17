@@ -21,6 +21,9 @@ cela retournera un objet SimpleXMLElement ou DOMDocument (selon votre paramètre
 options - par défault SimpleXMLElement). Ci-dessous les échantillons sur la
 façon d'importer des données depuis une URL::
 
+    //D'abord charger la Classe Utility
+    App::uses('Xml', 'Utility');
+
     // Vieille méthode:
     $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 

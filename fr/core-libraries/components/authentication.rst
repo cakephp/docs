@@ -12,6 +12,16 @@ l'identification et le contrôle des autorisations de l'utilisateur.
 
 .. _authentication-objects:
 
+Lectures Suggérées Avant de Continuer
+=====================================
+
+La Configuration de l'authentification nécessite quelques étapes, notamment
+la définition d'une table users, la création d'un model, du controller et
+des vues, etc..
+
+Tout ceci est couvert étape par étape dans le
+:doc:`Blog Tutorial </tutorials-and-examples/blog-auth-example/auth>`.
+
 Authentification
 ================
 

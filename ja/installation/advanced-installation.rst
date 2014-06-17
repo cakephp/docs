@@ -38,7 +38,7 @@ CakePHPアプリケーションのための composer.json ファイルは次の�
             }
         ],
         "require": {
-            "pear-cakephp/cakephp": ">=2.3.4"
+            "cakephp/cakephp": ">=2.4.9"
         },
         "config": {
             "vendor-dir": "Vendor/"

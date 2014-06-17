@@ -44,7 +44,7 @@
 PostgreSQLだと、以下のようになります。 ::
 
     public $virtualFields = array(
-        'name' => 'User.first_name || ' ' || User.last_name'
+        'name' => 'User.first_name || \' \' || User.last_name'
     );
 
 ..

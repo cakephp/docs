@@ -786,7 +786,7 @@ Creating Input Elements
     * ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
       will disable all of the generated radio buttons.
 
-    * ``$attributes['legend']`` Radio elements are wrapped with a label and
+    * ``$attributes['legend']`` Radio elements are wrapped with a legend and
       fieldset by default. Set ``$attributes['legend']`` to false to remove
       them.::
 
@@ -1379,6 +1379,13 @@ You can also change the templates at runtime using the ``templates()`` method::
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
     $this->Form->templates($myTemplates);
+
+.. warning::
+
+    Template strings containing a percentage sign (``%``) need special attention,
+    you should prefix this character with another percentage so it looks like
+    ``%%``. The reson is that internally templates are compiled to be used with
+    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
 
 List of Templates
 -----------------
