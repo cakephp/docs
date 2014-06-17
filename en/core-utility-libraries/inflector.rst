@@ -8,6 +8,8 @@ word variations such as pluralizations or camelizing and is
 normally accessed statically. Example:
 ``Inflector::pluralize('example')`` returns "examples".
 
+You can try out the inflections online at `inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+
 .. php:staticmethod:: pluralize($singular)
 
     * **Input:** Apple, Orange, Person, Man

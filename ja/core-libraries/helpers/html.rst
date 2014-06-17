@@ -948,7 +948,7 @@ HtmlHelper を使ったパンくずリストの作成
     以下のコードを加えたとします。::
 
         $this->Html->addCrumb('ユーザー', '/users');
-        $this->Html->addCrumb('ユーザーの追加', '/users/add');
+        $this->Html->addCrumb('ユーザーの追加', array('controller' => 'users', 'action' => 'add'));
 
     すると、レイアウトで ``getCrumbs`` を書いたたところに、
     "**Home > ユーザー > ユーザーの追加**" というパンくずリストが追加されます。

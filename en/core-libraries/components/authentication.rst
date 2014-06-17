@@ -11,6 +11,16 @@ ways of identifying and checking user authorization.
 
 .. _authentication-objects:
 
+Suggested Reading Before Continuing
+===================================
+
+Configuring authentication requires several steps including defining
+a users table, creating a model, controller & views, etc.
+
+This is all covered step by step in the
+:doc:`Blog Tutorial </tutorials-and-examples/blog-auth-example/auth>`.
+
+
 Authentication
 ==============
 

@@ -820,8 +820,8 @@ Créer des Elements Input
       désactivera tous les boutons radios générés.
 
     * ``$attributes['legend']`` Les éléments Radio sont enveloppés avec un
-      label et un fieldset (jeu de champs) par défaut. Définir
-      ``$attributes['legend']`` à false pour les retirer.::
+      legend et un fieldset par défaut. Définir ``$attributes['legend']`` à
+      false pour les retirer.::
 
         $options = ['M' => 'Male', 'F' => 'Female'];
         $attributes = ['legend' => false];

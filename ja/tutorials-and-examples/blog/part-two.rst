@@ -174,6 +174,7 @@ http://www.example.com/posts/index
 もしそういう表示が出ない場合には、何かおかしくなってしまったか、もうすでにあなたがその定義作業をしてしまったから（仕事がハヤイ！）か、のどちらかです。
 そうでないなら、これからPostsControllerの中に作ってみましょう::
 
+    // File: /app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 

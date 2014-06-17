@@ -104,6 +104,17 @@ lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
 meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
 serveur web.
 
+Un problème habituel est que les répertoires app/tmp et les sous-répertoires
+doivent être accessible en écriture à la fois pour le serveur web et et pour
+l'utilisateur des lignes de commande. Sur un système UNIX, si votre serveur
+web est différent à partir de l'utilisateur en ligne de commande, vous pouvez
+lancer les commandes suivantes juste une fois dans votre projet pour vous
+assurer que les permissions sont bien configurées::
+
+   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+
 Configuration
 =============
 

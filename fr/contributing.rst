@@ -11,6 +11,7 @@ couvrent les différentes manières de contribuer à CakePHP:
     contributing/tickets
     contributing/code
     contributing/cakephp-coding-conventions
+    contributing/backwards-compatibility
 
 
 
