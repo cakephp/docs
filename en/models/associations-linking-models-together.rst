@@ -685,8 +685,8 @@ Possible keys for HABTM association arrays include:
       and leave any existing relationship records in place, possibly
       resulting in duplicate relationship records.
     - When set to ``keepExisting``, the behavior is similar to `true`,
-      but with an additional check so that if a any of the records
-      to be added duplicates and existing relationship record, the
+      but with an additional check so that if any of the records
+      to be added are duplicates of an existing relationship record, the
       existing relationship record is not deleted, and the duplicate
       is ignored.  This can be useful if, for example, the join table
       has additional data in it that needs to be retained.
