@@ -169,8 +169,8 @@ App.InlineSearch = (function () {
 
 // http://stackoverflow.com/questions/967096/using-jquery-to-test-if-an-input-has-focus
 jQuery.extend(jQuery.expr[':'], {
-	focus: function(element) { 
-		return element == document.activeElement; 
+	focus: function(element) {
+		return element == document.activeElement;
 	}
 });
 
