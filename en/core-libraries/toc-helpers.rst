@@ -18,5 +18,6 @@ can create and use your own helpers.
     /core-libraries/helpers/paginator
     /core-libraries/helpers/rss
     /core-libraries/helpers/session
+    /core-libraries/helpers/flash
     /core-libraries/helpers/text
     /core-libraries/helpers/time
