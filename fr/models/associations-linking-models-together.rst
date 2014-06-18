@@ -1,5 +1,5 @@
-Associations : relier les models entre eux
-##########################################
+Associations : Lier les models
+##############################
 
 Une des caractéristiques les plus puissantes de CakePHP est sa capacité
 d'établir les liens nécessaires entre les models d'après les informations
@@ -701,13 +701,17 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
 -  **unique**: Un boléen ou une chaîne de caractères ``keepExisting``.
     - Si true (valeur par défaut) CakePHP supprimera d'abord les enregistrements
       des relations existantes dans la table des clés étrangères avant d'en
-      insérer de nouvelles, lors de la mise à jour d'un enregistrement. Ainsi
-      les associations existantes devront être passées encore une fois lors
-      d'une mise à jour.
-    - Si false, CakePHP va insérer l'enregistrement lié, et aucun enregistrement
-      joint n'est supprimé pendant une opération de sauvegarde.
+      insérer de nouvelles. Les associations existantes devront être passées
+      encore une fois lors d'une mise à jour.
+    - Si à false, CakePHP va insérer les nouveaux enregistrements de liaison
+      spécifiés et ne laissait aucun enregistrement de liaison existant,
+      provenant par exemple d'enregistrements dupliqués de liaison.
     - Si ``keepExisting`` est définie, le behavior est similaire à `true`,
-      mais les associations existantes ne sont pas supprimées.
+      mais avec une vérification supplémentaire afin que si un enregistrement
+      à ajouter est en doublon d'un enregistrement de liaison existant,
+      l'enregistrement de liaison existant n'est pas supprimé et le doublon
+      est ignoré. Ceci peut être utile par exemple, la table de jointure a
+      des données supplémentaires en lui qui doivent être gardées.
 -  **conditions**: un tableau de conditions compatibles avec find() ou des
    chaînes SQL. Si vous avez des conditions sur la table associée, vous devez
    utiliser un model 'with', et définir les associations belongsTo nécessaires
