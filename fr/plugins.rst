@@ -43,7 +43,7 @@ plugins using PSR-0 standards. This means that a class called
 l'autoloader en modifiant le fichier composer.json suivit de la commande ``php composer.phar update``.
 Par exemple, si vous voulez changer le nom de la classe du controller ContactManager par
 ``AcmeCorp\ContactManager\Controller\ContactsController.php`` sans changer le nom du fichier, il
-faut ajouter ceci au fichier composer.json:
+faut ajouter ceci au fichier composer.json::
     "psr-4": {
         "App\\": "App",
         "App\\Test\\": "Test",
