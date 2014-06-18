@@ -32,20 +32,18 @@ fichiers ``composer.json``, ``composer.lock``, et mettrait à jour votre
 autoloader. Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
 répertoire ``/Plugin``. En supposant que vous voulez installer un plugin
-appelé 'ContactManager', vous auriez un dossier dans ``/Plugin``
-appelé 'ContactManager'. Dans ce répertoire se trouvent les View, Model,
+appelé ``ContactManager``, vous auriez un dossier dans ``/Plugin``
+appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
 Controller, webroot, et tous les autres répertoires du plugin.
 
 By default the application skeleton will include catch-all autoloading for
 plugins using PSR-0 standards. This means that a class called
 ``ContactManager\Controller\ContactsController`` would be located in
-``/Plugin/ContactManager/Controller/ContactsController.php``. You can customize
-the autoloader by updating your application's composer.json and re-generating
-the autoloader. For example if you wanted your ContactManager's Controller
-classname to be ``AcmeCorp\ContactManager\Controller\ContactsController.php``,
-but keep the filename as it was in the previous example you would add the
-following to your composer.json::
-
+``/Plugin/ContactManager/Controller/ContactsController.php``. Vous pouvez personnaliser
+l'autoloader en modifiant le fichier composer.json suivit de la commande ``php composer.phar update``.
+Par exemple, si vous voulez changer le nom de la classe du controller ContactManager par
+``AcmeCorp\ContactManager\Controller\ContactsController.php`` sans changer le nom du fichier, il
+faut ajouter ceci au fichier composer.json::
     "psr-4": {
         "App\\": "App",
         "App\\Test\\": "Test",
