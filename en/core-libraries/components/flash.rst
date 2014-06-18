@@ -1,6 +1,8 @@
 FlashComponent
 ##############
 
+.. php:namespace:: Cake\Controller\Component
+
 .. php:class:: FlashComponent(ComponentCollection $collection, array $config = [])
 
 FlashComponent provides a way to set one-time notification messages to be
@@ -36,7 +38,7 @@ parameter, an array of options:
 * ``key`` Defaults to 'flash'. The array key found under the 'Flash' key in
   the session. 
 * ``element`` Defaults to null, but will automatically be set when using the
-  ``_call`` magic method. The element name to use for rendering.
+  ``__call`` magic method. The element name to use for rendering.
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
 

@@ -1,6 +1,8 @@
 FlashHelper
 ###########
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: FlashHelper(View $view, array $config = [])
 
 FlashHelper provides a way to render flash messages that were set in
