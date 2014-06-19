@@ -35,31 +35,6 @@ a plugin named 'ContactManager', you should have a folder in ``/Plugin``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
 
-By default the application skeleton will include catch-all autoloading for
-plugins using PSR-0 standards. This means that a class called
-``ContactManager\Controller\ContactsController`` would be located in
-``/Plugin/ContactManager/Controller/ContactsController.php``. You can customize
-the autoloader by updating your application's composer.json and re-generating
-the autoloader. For example if you wanted your ContactManager's Controller
-classname to be ``AcmeCorp\ContactManager\Controller\ContactsController.php``,
-but keep the filename as it was in the previous example you would add the
-following to your composer.json::
-
-    "psr-4": {
-        "App\\": "App",
-        "App\\Test\\": "Test",
-        "AcmeCorp\\ContactManager\\": "/Plugin/ContactManager",
-        "": "./Plugin"
-    }
-
-Once added, you would need to regenerate your autoloader::
-
-    $ php composer.phar dumpautoload
-
-Don't forget to specify any non-conventional namespaces when loading plugins.
-Failing to do so will result in missing class errors, as CakePHP will generate
-the incorrect class name.
-
 Loading a Plugin
 ================
 
@@ -82,17 +57,30 @@ method::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
-When to Load Plugins
---------------------
+Autoloading Plugin Classes
+--------------------------
 
-You do not need to load every plugin your application uses. If your plugins use
-the conventional namespace and filesystem layout you **do not** need to use
-``Plugin::load()`` in order to load and use components, helpers, behaviors,
-other class based code, or render views from the plugin.
+When using ``bake`` for creating a plugin or when installing a it using
+composer, you don't typically need to make any changes to your application in order to
+make CakePHP recognize the classes that live inside it.
 
-You **do** need to load a plugin when you want to access its controllers,
-webroot assets, or console commands. You will also need to load a plugin if the
-plugin is using a non-conventional namespace.
+In any other cases you may need to modify your application's composer.json file
+to contain the following information::
+
+    "psr-4": {
+        (...)
+        "MyPlugin\\": "/Plugin/MyPlugin/src",
+        "MyPlugin\\Test\\": "/Plugin/MyPlugin/tests"
+    }
+
+Additionally you will need to tell composer to refresh it's autoloading cache::
+
+    $ php composer.phar dumpautoload
+
+If you are unable to use composer for any reason, you can also use a fallback
+autoloading for your plugin::
+
+    Plugin::load('ContactManager', ['autoload' => true]);
 
 .. _plugin-configuration:
 
@@ -178,16 +166,20 @@ basic directory structure. It should look like this::
     /App
     /Plugin
         /ContactManager
-            /Controller
-                /Component
-            /Model
-                /Table
-                /Entity
-                /Behavior
-            /View
-                /Helper
-            /Template
-                /Layout
+            /src
+                /Controller
+                    /Component
+                /Model
+                    /Table
+                    /Entity
+                    /Behavior
+                /View
+                    /Helper
+                /Template
+                    /Layout
+            /tests
+                /TestCase
+                /Fixture
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
