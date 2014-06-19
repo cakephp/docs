@@ -155,6 +155,10 @@ App.InlineSearch = (function () {
 		$(document).keyup(handleEscape);
 	
 		doSearch = createSearch(searchResults, 10);
+
+		if (document.location.hash.length == 0) {
+			searchInput.focus();
+		}
 	};
 
 	return {
@@ -169,8 +173,8 @@ App.InlineSearch = (function () {
 
 // http://stackoverflow.com/questions/967096/using-jquery-to-test-if-an-input-has-focus
 jQuery.extend(jQuery.expr[':'], {
-	focus: function(element) { 
-		return element == document.activeElement; 
+	focus: function(element) {
+		return element == document.activeElement;
 	}
 });
 
