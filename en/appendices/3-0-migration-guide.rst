@@ -537,6 +537,12 @@ SecurityComponent
 - The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args".
   All method names need to be passed as first argument, either as string or array of strings.
 
+SessionComponent
+----------------
+
+- ``SessionComponent::setFlash()`` is deprecated. You should use
+  :doc:`/core-libraries/components/flash` instead.
+
 Model
 =====
 
@@ -854,6 +860,12 @@ NumberHelper
 ------------
 
 - :php:meth:`NumberHelper::format()` now requires ``$options`` to be an array.
+
+SessionHelper
+-------------
+
+- ``SessionHelper::flash()`` is deprecated. You should use
+  :doc:`/core-libraries/helpers/flash` instead.
 
 I18n
 ====

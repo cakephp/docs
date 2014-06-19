@@ -37,18 +37,6 @@ used.
     Check to see whether a key is in the Session. Returns a boolean representing the
     key's existence.
 
-.. php:method:: error()
-
-    :rtype: string
-
-    Returns last error encountered in a session.
-
-.. php:method:: valid()
-
-    :rtype: boolean
-
-    Used to check whether a session is valid in a view.
-
 .. meta::
     :title lang=en: SessionHelper
     :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.
