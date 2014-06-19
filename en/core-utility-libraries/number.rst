@@ -15,7 +15,7 @@ use the ``CakeNumber`` class::
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
                 // notify users of quota
-                $this->Session->setFlash(__('You are using %s storage', CakeNumber::toReadableSize($storageUsed)));
+                $this->Flash->success(__('You are using %s storage', CakeNumber::toReadableSize($storageUsed)));
             }
         }
     }

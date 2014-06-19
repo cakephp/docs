@@ -10,6 +10,7 @@ configure and use components.
 
     /core-libraries/components/pagination
     /core-libraries/components/sessions
+    /core-libraries/components/flash
     /core-libraries/components/authentication
     /core-libraries/components/csrf-component
     /core-libraries/components/security-component

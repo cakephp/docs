@@ -84,10 +84,10 @@ with CakePHP::
             $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Users->save($user)) {
-                    $this->Session->setFlash(__('The user has been saved.'));
+                    $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__('Unable to add the user.'));
+                $this->Flash->error(__('Unable to add the user.'));
             }
             $this->set('user', $user);
         }
@@ -181,7 +181,7 @@ the users add function and implement the login and logout action::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             }
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 
@@ -220,7 +220,7 @@ and add the following lines:
     //app/View/Users/login.ctp
 
     <div class="users form">
-    <?= $this->Session->flash('auth') ?>
+    <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Please enter your username and password') ?></legend>
@@ -272,10 +272,10 @@ logged in user as a reference for the created article::
             // Added this line
             $article->user_id = $this->Auth->user('id');
             if ($this->Articles->save($article)) {
-                $this->Session->setFlash(__('Your article has been saved.'));
+                $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__('Unable to add your article.'));
+            $this->Flash->error(__('Unable to add your article.'));
         }
         $this->set('article', $article);
     }

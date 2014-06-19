@@ -174,7 +174,7 @@ working with a login form could look like::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(
+                $this->Flash->error(
                     __('Username or password is incorrect'),
                     'default',
                     [],
@@ -293,14 +293,14 @@ need to add the following code to your layout. Add the following two
 lines to the ``app/View/Layout/default.ctp`` file in the body section
 preferable before the content_for_layout line.::
 
-    echo $this->Session->flash();
-    echo $this->Session->flash('auth');
+    echo $this->Flash->render();
+    echo $this->Flash->render('auth');
 
 You can customize the error messages, and flash settings AuthComponent
 uses. Using ``$this->Auth->flash`` you can configure the parameters
 AuthComponent uses for setting flash messages. The available keys are
 
-- ``element`` - The element to use, defaults to 'default'.
+- ``element`` - The element to use, defaults to null.
 - ``key`` - The key to use, defaults to 'auth'
 - ``params`` - The array of additional params to use, defaults to []
 
