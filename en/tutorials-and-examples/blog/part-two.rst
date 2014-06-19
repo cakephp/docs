@@ -257,10 +257,10 @@ ArticlesController::
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
-                    $this->Session->setFlash(__('Your article has been saved.'));
+                    $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__('Unable to add your article.'));
+                $this->Flash->error(__('Unable to add your article.'));
             }
             $this->set('article', $article);
         }
@@ -288,16 +288,15 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use the SessionComponent's
-:php:meth:`Cake\\Controller\\Component\\SessionComponent::setFlash()` method to
+We use FlashComponent's
+``__call`` magic method method to
 set a message to a session variable to be displayed on the page after
-redirection. In the layout we have
-:php:func:`Cake\\View\Helper\\SessionHelper::flash` which displays the message
-and clears the corresponding session variable. The controller's
-:php:meth:`Cake\\Controller\\Controller::redirect` function
-redirects to another URL. The param ``['action' => 'index']``
-translates to URL /articles i.e the index action of articles controller.
-You can refer to :php:func:`Cake\\Routing\\Router::url()` function on the
+redirection. In the layout we have ``<?= $this->Flash->render() ?>`` which
+displays the message and clears the corresponding session variable. The
+controller's :php:meth:`Cake\\Controller\\Controller::redirect` function
+redirects to another URL. The param ``['action' => 'index']`` translates to URL
+/articles i.e the index action of articles controller. You can refer to
+:php:func:`Cake\\Routing\\Router::url()` function on the
 `API <http://api.cakephp.org>`_ to see the formats in which you can specify a
 URL for various CakePHP functions.
 
@@ -414,10 +413,10 @@ like::
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
-                $this->Session->setFlash(__('Your article has been updated.'));
+                $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__('Unable to update your article.'));
+            $this->Flash->error(__('Unable to update your article.'));
         }
 
         $this->set('article', $article);
@@ -500,13 +499,13 @@ Next, let's make a way for users to delete articles. Start with a
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Session->setFlash(__('The article with id: %s has been deleted.', h($id)));
+            $this->Flash->success(__('The article with id: %s has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
 
 This logic deletes the article specified by $id, and uses
-``$this->Session->setFlash()`` to show the user a confirmation
+``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them on to ``/articles``. If the user attempts to
 do a delete using a GET request, the 'allowMethod' will throw an Exception.
 Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is

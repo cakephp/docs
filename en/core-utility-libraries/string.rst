@@ -19,7 +19,7 @@ use the ``String`` class::
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // notify user of new message
-                $this->Session->setFlash(__('You have a new message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                $this->FLash->success(__('You have a new message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
     }
