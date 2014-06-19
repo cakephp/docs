@@ -180,6 +180,7 @@ basic directory structure. It should look like this::
             /tests
                 /TestCase
                 /Fixture
+            /webroot
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
@@ -268,11 +269,11 @@ plugin specific route files.
 Plugin Models
 =============
 
-Models for the plugin are stored in ``/Plugin/ContactManager/Model``.
+Models for the plugin are stored in ``/Plugin/ContactManager/src/Model``.
 We've already defined a ContactsController for this plugin, so let's
 create the table and entity for that controller::
 
-    // /Plugin/ContactManager/Model/Entity/Contact.php:
+    // /Plugin/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -280,7 +281,7 @@ create the table and entity for that controller::
     class Contact extends Entity {
     }
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -292,7 +293,7 @@ If you need to reference a model within your plugin when building associations,
 or defining entitiy classes, you need to include the plugin name with the class
 name, separated with a dot. For example::
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -306,7 +307,7 @@ name, separated with a dot. For example::
 If you would prefer that the array keys for the association not have the plugin
 prefix on them, use the alternative syntax::
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -331,17 +332,17 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place them in the
-right folder inside of the ``/Plugin/[PluginName]/Template/`` folder. For our
+right folder inside of the ``/Plugin/[PluginName]/src/Template/`` folder. For our
 ContactManager plugin, we'll need a view for our ``ContactsController::index()``
 action, so let's include that as well::
 
-    // /Plugin/ContactManager/Template/Contacts/index.ctp:
+    // /Plugin/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. Add plugin layouts, inside
-``/Plugin/[PluginName]/Template/Layout``. To use a plugin layout in your controller
+``/Plugin/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -359,13 +360,13 @@ Overriding Plugin Views from Inside Your Application
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the view files of the
 plugin with more application specific view logic by creating files using the
-following template ``App/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
+following template ``App/Template/Plugin/[Plugin]/src/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 
-    /App/Template/Plugin/ContactManager/Contacts/index.ctp
+    /App/Template/Plugin/src/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``/Plugin/ContactManager/Template/Contacts/index.ctp``.
+``/Plugin/ContactManager/src/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
