@@ -182,15 +182,15 @@ Avec la version 2.0, vous avez besoin d'appeler manuellement
 Quand les utilisateurs s'identifient, les objets d'identification sont
 vérifiés dans l'ordre où ils ont été attachés. Une fois qu'un objet
 peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
-Une simple fonction de connexion pourrait ressembler à cela ::
+Une simple fonction de connexion pourrait ressembler à cela::
 
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(
-                    __('Username ou password est incorrect'),
+                $this->Flash->error(
+                    __('Username ou mot de pase incorrect'),
                     'default',
                     [],
                     'auth'
@@ -320,23 +320,23 @@ ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de
 préférence avant la ligne content_for_layout.::
 
-    echo $this->Session->flash();
-    echo $this->Session->flash('auth');
+    echo $this->Flash->render();
+    echo $this->Flash->render('auth');
 
 Vous pouvez personnaliser les messages d'erreur, et les réglages que le
 component Auth ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash``
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont :
 
-- ``element`` - L'élément à utiliser , 'default' par défaut.
-- ``key`` - La clé a utiliser , 'auth' par défaut
-- ``params`` - Le tableau des paramètres additionnels à utiliser, [] par défaut
+- ``element`` - L'element à utiliser, null par défaut.
+- ``key`` - La clé a utiliser, 'auth' par défaut
+- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par défaut
 
 En plus des paramètres de message flash, vous pouvez personnaliser d'autres
 messages d'erreurs que le component AuthComponent utilise. Dans la partie
 beforeFilter de votre controller, ou dans le paramétrage du component vous
 pouvez utiliser ``authError`` pour personnaliser l'erreur à utiliser quand
-l'authentification échoue ::
+l'authentification échoue::
 
     $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente d'accéder à une partie du site qui est protégé.";
 

@@ -18,7 +18,7 @@ d'une ``View``, utilisez la classe ``Time``::
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
                 // greet user with a happy birthday message
-                $this->Session->setFlash(__('Happy birthday to you...'));
+                $this->Flash->success(__('Happy birthday to you...'));
             }
         }
     }

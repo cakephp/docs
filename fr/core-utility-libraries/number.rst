@@ -15,13 +15,10 @@ d'une ``View``, utilisez la classe ``CakeNumber``::
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
                 // notify users of quota
-                $this->Session->setFlash(__('You are using %s storage', CakeNumber::toReadableSize($storageUsed)));
+                $this->Flash->success(__('You are using %s storage', CakeNumber::toReadableSize($storageUsed)));
             }
         }
     }
-
-.. versionadded:: 2.1
-    ``CakeNumber`` a été recréée à partir de :php:class:`NumberHelper`.
 
 .. start-cakenumber
 
@@ -128,34 +125,11 @@ automatiqement la sortie dans la vue.
     toujours passer la monnaie à :php:meth:`CakeNumber::currency()` et change
     toutes les sorties de monnaie en définissant les autres par défaut.
 
-    .. versionadded:: 2.3 Cette méthode a été ajoutée dans 2.3.
-
 .. php:method:: addFormat(string $formatName, array $options)
     
     :param string $formatName: Le nom du format à utiliser dans le futur.
     :param array $options: Le tableau d'options pour ce format. Utilise les
         mêmes clés ``$options`` comme :php:meth:`CakeNumber::currency()`.
-
-        - `before` Symbole de monnaie avant le nombre. False pour aucun.
-        - `after` Symbole de monnaie après le nombre. False pour aucun.
-        - `zero` Le texte à utiliser pour les valeurs à zéro, peut être
-          une chaîne de caractères ou un nombre.
-          ex: 0, 'Free!'
-        - `places` Nombre de décimal à utiliser. ex. 2.
-        - `thousands` Séparateur des milliers. ex: ','.
-        - `decimals` Symbole de Séparateur des Decimales. ex: '.'.
-        - `negative` Symbole pour les nombres négatifs. Si égal à '()', le
-          nombre sera entouré avec ( et ).
-        - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
-          à true.
-        - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres. 
-          ex: ' dollars'.
-        - `wholePosition` Soit 'before' soit 'after' pour placer le symbole
-          complet.
-        - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à
-          fraction. ex: ' cents'.
-        - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole
-          de fraction.
 
     Ajoute le format de monnaie au helper Number. Facilite la réutilisation
     des formats de monnaie.::
@@ -244,18 +218,12 @@ automatiqement la sortie dans la vue.
             'multiply' => true
         ));
 
-    .. versionadded:: 2.4
-        L'argument ``$options`` avec l'option ``multiply`` a été ajouté.
-
 .. php:method:: fromReadableSize(string $size, $default)
 
     :param string $size: La valeur formatée lisible par un humain.
 
     Cette méthode enlève le format d'un nombre à partir d'une taille de byte
     lisible par un humain en un nombre entier de bytes.
-
-    .. versionadded:: 2.3
-        Cette méthode a été ajoutée dans 2.3
 
 .. php:method:: toReadableSize(string $dataSize)
 
@@ -379,9 +347,6 @@ automatiqement la sortie dans la vue.
             'thousands' => ','
         ));
         // sortie '+123,456.79'
-
-    .. versionadded:: 2.3
-        Cette méthode a été ajoutée dans 2.3.
 
 .. end-cakenumber
 

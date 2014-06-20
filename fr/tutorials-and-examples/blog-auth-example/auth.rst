@@ -87,10 +87,10 @@ de génération de code fournis par CakePHP::
             $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Users->save($user)) {
-                    $this->Session->setFlash(__("L'utilisateur a été sauvegardé."));
+                    $this->Flash->success(__("L'utilisateur a été sauvegardé."));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__("Impossible d'ajouter l'utilisateur."));
+                $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
             }
             $this->set('user', $user);
         }
@@ -188,7 +188,7 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             }
-            $this->Session->setFlash(__("Nom d'utilisateur ou mot de passe incorrect, essayez à nouveau."));
+            $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect, essayez à nouveau."));
         }
     }
 
@@ -227,7 +227,7 @@ votre fichier ``App/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
     //app/View/Users/login.ctp
 
     <div class="users form">
-    <?= $this->Session->flash('auth') ?>
+    <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></legend>
@@ -282,10 +282,10 @@ l'utilisateur connecté courant en référence pour l'article créé::
             // Ajout de cette ligne
             $article->user_id = $this->Auth->user('id');
             if ($this->Articles->save($article)) {
-                $this->Session->setFlash(__('Votre article a été sauvegardé.'));
+                $this->Flash->success(__('Votre article a été sauvegardé.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__("Impossible d'ajouter votre article."));
+            $this->Flash->error(__("Impossible d'ajouter votre article."));
         }
         $this->set('article', $article);
     }

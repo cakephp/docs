@@ -264,10 +264,10 @@ ArticlesController::
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
-                    $this->Session->setFlash(__('Votre article a été sauvegardé.'));
+                    $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Session->setFlash(__('Impossible d ajouter votre article.'));
+                $this->Flash->error(__('Impossible d ajouter votre article.'));
             }
             $this->set('article', $article);
         }
@@ -297,12 +297,11 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode
-:php:meth:`Cake\\Controller\\Component\\SessionComponent::setFlash()` pour
+Nous utilisons la méthode magique ``__call`` du Component Flash pour
 définir un message dans une variable de session et qui sera affiché dans la page
-juste après la redirection. Dans le layout, nous trouvons la fonction
-:php:func:`Cake\\View\Helper\\SessionHelper::flash` qui permet
-d'afficher et de nettoyer la variable correspondante. La méthode
+juste après la redirection. Dans le layout, nous avons
+``<?= $this->Flash->render() ?>`` qui permet
+d'afficher et d'effacer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
@@ -430,10 +429,10 @@ devrait ressembler::
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
-                $this->Session->setFlash(__('Votre article a été mis à jour.'));
+                $this->Flash->success(__('Votre article a été mis à jour.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Session->setFlash(__('Impossible de mettre à jour votre article.'));
+            $this->Flash->error(__('Impossible de mettre à jour votre article.'));
         }
 
         $this->set('article', $article);
@@ -519,13 +518,13 @@ Articles (ArticlesController)::
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Session->setFlash(__('L article avec l id: %s a été supprimé.', h($id)));
+            $this->Flash->success(__('L article avec l id: %s a été supprimé.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
 
 Cette logique supprime l'article spécifié par $id, et utilise
-``$this->Session->setFlash()`` pour afficher à l'utilisateur un message de
+``$this->Flash->success()`` pour afficher à l'utilisateur un message de
 confirmation après l'avoir redirigé sur ``/articles``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de

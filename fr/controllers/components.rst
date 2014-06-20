@@ -105,11 +105,11 @@ comme propriété dans votre controller. Si vous avez chargé la
 controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController {
-        public $components = ['Session', 'Cookie'];
+        public $components = ['Flash', 'Cookie'];
 
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
-                $this->Session->setFlash('Post deleted.');
+                $this->Flash->success('Post deleted.');
                 return $this->redirect(['action' => 'index']);
             }
         }
