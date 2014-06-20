@@ -39,10 +39,10 @@ You can also override any of the options that were set in FlashComponent::
         'element' => 'great_success'
     ]);
 
-For more information about the available array options, please refer to the
-:doc:`FlashComponent </core-libraries/components/flash>` section.
-
 .. note::
     By default, CakePHP does not escape the HTML in flash messages. If you are using
     any request or user data in your flash messages, you should escape it
     with :php:func:`h` when formatting your messages.
+
+For more information about the available array options, please refer to the
+:doc:`FlashComponent </core-libraries/components/flash>` section.
