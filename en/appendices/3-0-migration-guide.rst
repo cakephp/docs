@@ -504,6 +504,10 @@ AuthComponent
 - Configuration options are no longer set as public properties.
 - The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
   to be passed as first argument, either as string or array of strings.
+- The method ``login()`` has been removed and replaced by ``setUser()`` instead.
+  To login a user you now have to call ``identify()`` which returns user info upon
+  successful identification and then use ``setUser()`` to save the info to
+  session for persistence across requests.
 
 ACL related classes were moved to a separate plugin. Password hashers, Authentication and
 Authorization providers where moved to the ``\Cake\Auth`` namespace. You are

@@ -105,6 +105,7 @@ keys.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['Users.is_active' => true]``.
+- ``contain`` Extra models to contain and return with identified user's info.
 - ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
 
 To configure different fields for user in ``$components`` array::
@@ -171,7 +172,9 @@ working with a login form could look like::
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(
@@ -184,9 +187,11 @@ working with a login form could look like::
         }
     }
 
-The above code (without any data passed to the ``login`` method), will attempt to log a user in using
-the POST data, and if successful redirect the user to either the last page they were visiting,
-or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful, a flash message is set.
+The above code will attempt to first identify a user in using the POST data.
+If successful we set the user info to session so that it persists across requests
+and redirect to either the last page they were visiting,
+or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful,
+a flash message is set.
 
 .. warning::
 
@@ -196,10 +201,11 @@ or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful, a fl
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because basic and digest authentication don't require an initial POST or a form
-so if using only basic / digest authenticators you don't require a login action
+Basic and digest are stateless authentication schemes and don't require an initial
+POST or a form. If using only basic / digest authenticators you don't require a login action
 in your controller. Also you can set ``AuthComponent::$sessionKey`` to false to
-ensure AuthComponent doesn't try to read user info from session. Stateless
+ensure AuthComponent doesn't try to read user info from session. You may also
+want to set ``$this->Auth->unauthorizedRedirect = false;``. Stateless
 authentication will re-verify the user's credentials on each request, this creates
 a small amount of additional overhead, but allows clients that to login in without
 using cookies.
@@ -312,14 +318,13 @@ for when authorization fails::
     $this->Auth->authError = "This error shows up with the user tries to access" .
                                 "a part of the website that is protected.";
 
-.. versionchanged:: 2.4
-   Sometimes, you want to display the authorization error only after
-   the user has already logged-in. You can suppress this message by setting
-   its value to boolean `false`
+Sometimes, you want to display the authorization error only after
+the user has already logged-in. You can suppress this message by setting
+its value to boolean `false`.
 
 In your controller's beforeFilter(), or component settings::
 
-    if (!$this->Auth->loggedIn()) {
+    if (!$this->Auth->user()) {
         $this->Auth->authError = false;
     }
 
@@ -495,7 +500,7 @@ Manually Logging Users In
 
 Sometimes the need arises where you need to manually log a user in, such
 as just after they registered for your application. You can do this by
-calling ``$this->Auth->login()`` with the user data you want to 'login'::
+calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
     public function register() {
         if ($this->User->save($this->request->data)) {
@@ -504,14 +509,14 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
                 $this->request->data['User'],
                 ['id' => $id]
             );
-            $this->Auth->login($this->request->data['User']);
+            $this->Auth->setUser($this->request->data['User']);
             return $this->redirect('/users/home');
         }
     }
 
 .. warning::
 
-    Be sure to manually add the new User id to the array passed to the login
+    Be sure to manually add the new User id to the array passed to the ``setUser()``
     method. Otherwise you won't have the user id available.
 
 Accessing the Logged In User
@@ -617,6 +622,11 @@ The core authorize objects support the following configuration keys.
 - ``userModel`` The name of the ARO/Model node user information can be found
   under. Used with ActionsAuthorize.
 
+If an authenticated user tries to go to a URL he's not authorized to access,
+he's redirected back to the referrer. If you do not want such redirection
+(mostly needed when using stateless authentication adapter) you can set config
+option ``unauthorizedRedirect`` to ``false``. This causes AuthComponent
+to throw a ``ForbiddenException`` instead of redirecting.
 
 Creating Custom Authorize Objects
 ---------------------------------
@@ -747,49 +757,6 @@ The above callback would provide a very simple authorization system
 where, only users with role = admin could access actions that were in
 the admin prefix.
 
-
-Using ActionsAuthorize
-----------------------
-
-ActionsAuthorize integrates with the AclComponent, and provides a fine
-grained per action ACL check on each request. ActionsAuthorize is often
-paired with DbAcl to give dynamic and flexible permission systems that
-can be edited by admin users through the application. It can however,
-be combined with other Acl implementations such as IniAcl and custom
-application Acl backends.
-
-Using CrudAuthorize
--------------------
-
-``CrudAuthorize`` integrates with AclComponent, and provides the ability to
-map requests to CRUD operations. Provides the ability to authorize
-using CRUD mappings. These mapped results are then checked in the
-AclComponent as specific permissions.
-
-For example, taking ``/posts/index`` as the current request. The default
-mapping for ``index``, is a ``read`` permission check. The Acl check would
-then be for the ``posts`` controller with the ``read`` permission. This
-allows you to create permission systems that focus more on what is being
-done to resources, rather than the specific actions being visited.
-
-Mapping Actions When Using CrudAuthorize
-----------------------------------------
-
-When using CrudAuthorize or any other authorize objects that use action
-mappings, it might be necessary to map additional methods. You can
-map actions -> CRUD permissions using mapAction(). Calling this on
-AuthComponent will delegate to all the of the configured authorize
-objects, so you can be sure the settings were applied every where::
-
-    $this->Auth->mapActions([
-        'create' => ['register'],
-        'view' => ['show', 'display']
-    ]);
-
-The keys for mapActions should be the CRUD permissions you want to set,
-while the values should be an array of all the actions that are mapped
-to the CRUD permission.
-
 AuthComponent API
 =================
 
@@ -869,11 +836,7 @@ unauthorizedRedirect
     Set a flash message. Uses the Session component, and values from
     :php:attr:`AuthComponent::$flash`.
 
-.. php:method:: identify($request, $response)
-
-    :param CakeRequest $request: The request to use.
-    :param CakeResponse $response: The response to use, headers can be
-        sent if authentication fails.
+.. php:method:: identify()
 
     This method is used by AuthComponent to identify a user based on the
     information contained in the current request.
@@ -888,15 +851,12 @@ unauthorizedRedirect
     is authorized. Each adapter will be checked in sequence, if any of them
     return true, then the user will be authorized for the request.
 
-.. php:method:: login($user)
+.. php:method:: setUser(array $user)
 
-    :param array $user: Array of logged in user data.
+    :param array $user: Array of user data.
 
-    Takes an array of user data to login with. Allows for manual
-    logging of users. Calling user() will populate the session value
-    with the provided information. If no user is provided,
-    AuthComponent will try to identify a user using the current request
-    information. See :php:meth:`AuthComponent::identify()`
+    Takes an array of user data to login with and writes to session for persisting
+    across requests.
 
 .. php:method:: logout()
 
