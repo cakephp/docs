@@ -820,7 +820,7 @@ authorize
     :ref:`authorization-objects`.
 flash
     Settings to use when Auth needs to do a flash message with
-    :php:meth:`SessionComponent::setFlash()`.
+    ``FlashComponent::set()``.
     Available keys are:
 
     - ``element`` - The element to use, defaults to 'default'.
