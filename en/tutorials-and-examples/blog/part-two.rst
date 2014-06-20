@@ -237,7 +237,7 @@ ArticlesController::
     use Cake\Error\NotFoundException;
 
     class ArticlesController extends AppController {
-        public $components = ['Session'];
+        public $components = ['Flash'];
 
         public function index() {
             $this->set('articles', $this->Articles->find('all'));
@@ -268,9 +268,8 @@ ArticlesController::
 
 .. note::
 
-    You need to include the SessionComponent in
-    any controller where you will use it. If necessary, include it in
-    your AppController.
+    You need to include the FlashComponent in any controller where you will use
+    it. If necessary, include it in your AppController.
 
 Here's what the ``add()`` action does: if the HTTP method of the
 request was POST, try to save the data using the Articles model. If for some
@@ -624,8 +623,8 @@ Now that you've created a basic CakePHP application, you're ready for
 the real thing. Start your own project and read the rest of the
 :doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
-If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page.
-Welcome to CakePHP!
+If you need help, there are many ways to get the help you need - please see the
+:doc:`/cakephp-overview/where-to-get-help` page.  Welcome to CakePHP!
 
 Suggested Follow-up Reading
 ---------------------------

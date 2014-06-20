@@ -358,30 +358,12 @@ out, you may need to rotate the session id's manually. To do this use the
 Flash Messages
 ==============
 
-.. php:method:: flash($message, $type = 'info', $options = [])
-
 Flash messages are small messages displayed to end users once. They are often used to
-present error messages, or confirm that actions took place successfully. Because
-flash messages are so common in web applications, CakePHP makes setting flash
-messages on the session object a snap::
+present error messages, or confirm that actions took place successfully.
 
-    // Default info type message.
-    $session->flash('Your article was saved');
-
-    // Error type message.
-    $session->flash('You have mistakes to correct', 'error');
-
-    // Separate domains are stored separately
-    $session->flash('You have mistakes to correct', 'error', ['key' => 'auth']);
-
-You can only have one message per key/domain.
-
-Displaying Flash Messages
--------------------------
-
-Once set, the most common way to print out flash messages is with
-:doc:`/core-libraries/helpers/session`.
-
+To set and display flash messages you should use
+:doc:`/core-libraries/components/flash` and
+:doc:`/core-libraries/helpers/flash`:doc:`/core-libraries/helpers/flash`
 
 .. meta::
     :title lang=en: Sessions
