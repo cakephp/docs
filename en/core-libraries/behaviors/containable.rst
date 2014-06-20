@@ -366,7 +366,7 @@ This is how we retrieve the above associations with Containable::
     ));
 
 Keep in mind that ``contain`` key is only used once in the main
-model, you don't need to use 'contain' again for related models
+model, you don't need to use 'contain' again for related models.
 
 .. note::
 
