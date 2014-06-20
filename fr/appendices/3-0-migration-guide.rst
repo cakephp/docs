@@ -594,6 +594,12 @@ SecurityComponent
   "var args". Tous les noms de méthode ont besoin d'être passés en premier
   argument, soi en chaîne, soit en tableau de chaînes.
 
+SessionComponent
+----------------
+
+- ``SessionComponent::setFlash()`` est déprécié. Vous devez utiliser
+  :doc:`/core-libraries/components/flash` à la place.
+
 Model
 =====
 
@@ -942,6 +948,12 @@ NumberHelper
 
 - :php:meth:`NumberHelper::format()` nécessite maintenant que ``$options`` soit
   un tableau.
+
+SessionHelper
+-------------
+
+- ``SessionHelper::flash()`` est déprécié. Vous devez utiliser
+  :doc:`/core-libraries/helpers/flash` à la place.
 
 I18n
 ====
