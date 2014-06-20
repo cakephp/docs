@@ -178,7 +178,8 @@ the users add function and implement the login and logout action::
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
+            $user = $this->Auth->identify();
+            if ($user) {
                 return $this->redirect($this->Auth->redirect());
             }
             $this->Flash->error(__('Invalid username or password, try again'));
