@@ -372,7 +372,7 @@ elements should also be made available as passed arguments::
     // routes.php
     Router::connect(
         '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-        ['controller' => 'Blog', 'action' => 'view'].
+        ['controller' => 'Blog', 'action' => 'view'],
         [
             // order matters since this will simply map ":id" to $articleId in your action
             'pass' => ['id', 'slug'],
