@@ -27,37 +27,14 @@ feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
 
-Ceci installerait la dernière version de DebugKit et mettrait à jour vos
-fichiers ``composer.json``, ``composer.lock``, et mettrait à jour votre
+Ceci installe la dernière version de DebugKit et met à jour vos
+fichiers ``composer.json``, ``composer.lock``, et met à jour votre
 autoloader. Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
 répertoire ``/Plugin``. En supposant que vous voulez installer un plugin
 appelé ``ContactManager``, vous auriez un dossier dans ``/Plugin``
 appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
 Controller, webroot, et tous les autres répertoires du plugin.
-
-By default the application skeleton will include catch-all autoloading for
-plugins using PSR-0 standards. This means that a class called
-``ContactManager\Controller\ContactsController`` would be located in
-``/Plugin/ContactManager/Controller/ContactsController.php``. Vous pouvez personnaliser
-l'autoloader en modifiant le fichier composer.json suivit de la commande ``php composer.phar update``.
-Par exemple, si vous voulez changer le nom de la classe du controller ContactManager par
-``AcmeCorp\ContactManager\Controller\ContactsController.php`` sans changer le nom du fichier, il
-faut ajouter ceci au fichier composer.json::
-    "psr-4": {
-        "App\\": "App",
-        "App\\Test\\": "Test",
-        "AcmeCorp\\ContactManager\\": "/Plugin/ContactManager",
-        "": "./Plugin"
-    }
-
-Une fois ajouté, vous aurez besoin de regénérer votre autoloader::
-
-    $ php composer.phar dumpautoload
-
-N'oubliez pas de spécifier tout namespace non-conventionnel lors du chargement
-des plugins. Ne pas le faire va entraîner des erreurs de classe manquante,
-puisque CakePHP va générer le nom de la classe incorrect.
 
 Charger un Plugin
 =================
@@ -82,19 +59,32 @@ certaines configurations pour des plugins spécifiques. ``load()`` fonctionne
 de la même manière, mais charge seulement les plugins que vous avez spécifié
 explicitement.
 
-Quand Charger les Plugins
--------------------------
+Autochargement des Classes du Plugin
+------------------------------------
 
-Vous n'avez pas besoin de charger chaque plugin que votre application utilise.
-Si vos plugins utilisent le namespace par convention et le layout du système
-de fichier, vous **n'avez pas** besoin d'utiliser ``Plugin::load()`` pour
-charger et utiliser les components, helpers, behaviors, et autres classes, ou
-rendre des vues à partir du plugin.
+Quand on utilise ``bake`` pour la création d'un plugin ou quand on en installe
+un en utilisant composer, vous n'avez typiquement pas besoin de faire des
+changements dans votre application afin que CakePHP reconnaisse les classes qui
+se trouvent dedans.
 
-Vous **avez besoin** de charger un plugin quand vous voulez accéder à ses
-controllers, les assets du webroot, ou les commandes de la console. Vous aurez
-aussi besoin de charger un plugin si le plugin utilise un namespace
-non-conventionnel.
+Dans tous les autres cas, vous avez peut-être besoin de modifier le fichier
+composer.json de votre application pour contenir les informations suivantes::
+
+    "psr-4": {
+        (...)
+        "MyPlugin\\": "/Plugin/MyPlugin/src",
+        "MyPlugin\\Test\\": "/Plugin/MyPlugin/tests"
+    }
+
+De plus, vous aurez besoin de dire à composer de refraichir le cache de
+l'autochargement::
+
+    $ php composer.phar dumpautoload
+
+Si vous ne pouvez pas utiliser composer pour toute raison, vous pouvez aussi
+utiliser un autochargement fallback pour votre plugin::
+
+    Plugin::load('ContactManager', ['autoload' => true]);
 
 .. _plugin-configuration:
 
@@ -184,16 +174,21 @@ de répertoire basique. Cela devrait ressembler à ceci::
     /App
     /Plugin
         /ContactManager
-            /Controller
-                /Component
-            /Model
-                /Table
-                /Entity
-                /Behavior
-            /View
-                /Helper
-            /Template
-                /Layout
+            /src
+                /Controller
+                    /Component
+                /Model
+                    /Table
+                    /Entity
+                    /Behavior
+                /View
+                    /Helper
+                /Template
+                    /Layout
+            /tests
+                /TestCase
+                /Fixture
+            /webroot
                     
 Notez que le nom du dossier du plugin, '**ContactManager**'. Il est important
 que ce dossier ait le même nom que le plugin.
@@ -283,11 +278,11 @@ la façon de charger les fichiers de route spécifique à un plugin.
 Models du Plugin
 ================
 
-Les Models pour le plugin sont stockés dans ``/Plugin/ContactManager/Model``.
+Les Models pour le plugin sont stockés dans ``/Plugin/ContactManager/src/Model``.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons la
 table et l'entity pour ce controller::
 
-    // /Plugin/ContactManager/Model/Entity/Contact.php:
+    // /Plugin/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -295,7 +290,7 @@ table et l'entity pour ce controller::
     class Contact extends Entity {
     }
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -308,7 +303,7 @@ construction des associations, ou la définition de classes d'entity, vous devre
 inclure le nom du plugin avec le nom de la classe, séparé par un point. Par
 exemple::
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -322,7 +317,7 @@ exemple::
 Si vous préférez que les clés du tableau pour l'association n'aient pas le
 préfix du plugin, utilisez la syntaxe alternative::
 
-    // /Plugin/ContactManager/Model/Table/ContactsTable.php:
+    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -351,14 +346,14 @@ normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
 besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
 incluons ceci aussi::
 
-    // /Plugin/ContactManager/Template/Contacts/index.ctp:
+    // /Plugin/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Ce qui suit est une liste triable de vos contacts</p>
     <!-- Une liste triable de contacts irait ici....-->
 
 Les Plugins peuvent fournir leurs propres layouts. Ajoutez des layouts de
-plugin, dans ``/Plugin/[PluginName]/Template/Layout``. Pour utiliser le layout
-d'un plugin dans votre controller, vous pouvez faire ce qui suit::
+plugin, dans ``/Plugin/[PluginName]/src/Template/Layout``. Pour utiliser le
+layout d'un plugin dans votre controller, vous pouvez faire ce qui suit::
 
     public $layout = 'ContactManager.admin';
 
@@ -381,10 +376,10 @@ utilisant le template suivant
 "App/Template/Plugin/[Plugin]/[Controller]/[view].ctp". Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
-    /App/Template/Plugin/ContactManager/Contacts/index.ctp
+    /App/Template/Plugin/src/ContactManager/Contacts/index.ctp
 
 Créer ce fichier vous permettra de redéfinir
-``/Plugin/ContactManager/Template/Contacts/index.ctp``.
+``/Plugin/ContactManager/src/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
