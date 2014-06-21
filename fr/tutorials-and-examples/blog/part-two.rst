@@ -153,7 +153,7 @@ Les fichiers des vues de CakePHP sont stockés dans ``/app/View`` à l'intérieu
 d'un dossier dont le nom correspond à celui du controller (nous aurons à créer
 un dossier appelé 'Posts' dans ce cas). Pour mettre en forme les données de
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à
-quelque chose comme cela ::
+quelque chose comme cela
 
 .. code-block:: php
 
