@@ -185,7 +185,9 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirect());
             }
             $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect, essayez à nouveau."));

@@ -244,7 +244,7 @@ ArticlesController::
     use Cake\Error\NotFoundException;
 
     class ArticlesController extends AppController {
-        public $components = ['Session'];
+        public $components = ['Flash'];
 
         public function index() {
             $this->set('articles', $this->Articles->find('all'));
@@ -275,7 +275,7 @@ ArticlesController::
 
 .. note::
 
-   Vous avez besoin d'inclure le component Session (SessionComponent) dans
+   Vous avez besoin d'inclure le component Flash (FlashComponent) dans
    chaque controller où vous voulez les utiliser. Si nécessaire, incluez-les
    dans le controller principal (AppController).
 
