@@ -552,6 +552,11 @@ AuthComponent
 - Les méthodes ``allow()`` et ``deny()`` n'acceptent plus "var args". Tous les
   noms de méthode ont besoin d'être passés en premier argument, soit en chaîne,
   soit en tableau de chaînes.
+- La méthode ``login()`` a été retirée et remplacée par ``setUser()``.
+  Pour connecter un utilisateur, vous devez maintenant appeler ``identify()``
+  qui retourne les informations d'utilisateur en cas de succès d'identification
+  et utilise ensuite ``setUser()`` pour sauvegarder les informations de session
+  pour la persistence au cours des différentes requêtes.
 
 Les classes liées à ACL ont été déplacées dans un plugin séparée. Les hashers
 de mot de passe, l'Authentification et les fournisseurs d'Authorisation ont

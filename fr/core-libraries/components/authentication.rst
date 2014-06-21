@@ -116,6 +116,8 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``['Users.is_active' => 1]``.
+- ``contain`` Les models supplémentaires à mettre dans contain et à retourner
+  avec les informations de l'utilisateur identifié.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Blowfish``.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
@@ -186,11 +188,13 @@ Une simple fonction de connexion pourrait ressembler à cela::
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(
-                    __('Username ou mot de pase incorrect'),
+                    __("Nom d'utilisateur ou mot de passe incorrect"),
                     'default',
                     [],
                     'auth'
@@ -199,30 +203,32 @@ Une simple fonction de connexion pourrait ressembler à cela::
         }
     }
 
-Le code ci-dessus (sans aucune donnée transmise à la méthode ``login``),
-tentera de connecter un utilisateur en utilisant les données POST, et sera
-redirigé en cas de succès sur la dernière page visitée, ou
+Le code ci-dessus va d'abord tenter d'identifier un utilisateur en utilisant les
+données POST. En cas de succès, nous définissons les informations de
+l'utilisateur dans les sessions afin qu'elles persistent au cours des requêtes
+et redirigera en cas de succès vers la dernière page visitée, ou vers
 :php:attr:`AuthComponent::$loginRedirect`. Si le login est en échec, un message
 flash est défini.
 
 .. warning::
 
-    ``$this->Auth->login($this->request->data)`` connectera l'utilisateur avec
+    ``$this->Auth->login($data)`` connectera l'utilisateur avec
     les données postées. Elle ne va pas réellement vérifier les certificats avec
     une classe d'authentification.
 
 Utilisation de l'authentification Digest et Basic pour la connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Puisque les authentifications basic et digest ne nécessitent pas un POST
+Les authentifications basic et digest ne nécessitent pas un POST
 initial ou un form, ainsi si vous utilisez seulement les authentificators
 basic / digest, vous n'avez pas besoin d'action login dans votre controller.
 Aussi, vous pouvez définir ``AuthComponent::$sessionKey`` à false pour vous
 assurer que AuthComponent n'essaie pas de lire les infos de l'user
-à partir des sessions. L'authentification stateless va re-vérifier les
-certificats de l'user à chaque requête, cela crée un petit montant de charges
-supplémentaires, mais permet aux clients de se connecter sans utiliser les
-cookies.
+à partir des sessions. Vous voudrez peut-être aussi définir
+``$this->Auth->unauthorizedRedirect = false;``. L'authentification stateless va
+re-vérifier les certificats de l'user à chaque requête, cela crée un petit
+montant de charges supplémentaires, mais permet aux clients de se connecter
+sans utiliser les cookies.
 
 Créer des objets d'authentification personnalisés
 -------------------------------------------------
@@ -340,14 +346,14 @@ l'authentification échoue::
 
     $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente d'accéder à une partie du site qui est protégé.";
 
-   Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
-   l'user se soit déja connecté. Vous pouvez supprimer ce message en
-   configurant sa valeur avec le boléen `false`.
+Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
+l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
+sa valeur avec le boléen `false`.
 
 Dans le beforeFilter() de votre controller, ou dans les configurations du
 component::
 
-    if (!$this->Auth->loggedIn()) {
+    if (!$this->Auth->user()) {
         $this->Auth->authError = false;
     }
 
@@ -528,22 +534,26 @@ Connecter les utilisateurs manuellement
 
 Parfois, le besoin se fait sentir de connecter un utilisateur manuellement,
 par exemple juste après qu'il se soit enregistré dans votre application. Vous
-pouvez faire cela en appelant ``$this->Auth->login()`` avec les données
+pouvez faire cela en appelant ``$this->Auth->setUser()`` avec les données
 utilisateur que vous voulez pour la 'connexion'::
 
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data['User'], ['id' => $id]);
-            $this->Auth->login($this->request->data['User']);
+            $this->request->data['User'] = array_merge(
+                $this->request->data['User'],
+                ['id' => $id]
+            );
+            $this->Auth->setUser($this->request->data['User']);
             return $this->redirect('/users/home');
         }
     }
 
 .. warning::
 
-    Soyez certain d'ajouter manuellement le nouveau User id au tableau passé
-    à la méthode de login. Sinon vous n'aurez pas l'id utilisateur disponible.
+    Assurez-vous d'ajouter manuellement le nouveau User id au tableau passé
+    à la méthode de ``setUser()``. Sinon vous n'aurez pas l'id utilisateur
+    disponible.
 
 Accéder à l'utilisateur connecté
 --------------------------------
@@ -654,6 +664,13 @@ Le noyau authorize objects supporte les clés de configuration suivantes.
 - ``userModel`` Le nom du nœud ARO/Model dans lequel l'information utilisateur
   peut être trouvé. Utilisé avec ActionsAuthorize.
 
+Si un utilisateur authentifié essaie d'aller à une URL pour laquelle il n'est
+pas autorisé, il est redirigé vers l'URL de référence. Si vous ne voulez pas
+cette redirection (souvent nécessaire quand vous utilisez un adaptateur
+d'authentification stateless), vous pouvez définir l'option de configuration
+``unauthorizedRedirect`` à ``false``. Cela fait que AuthComponent
+lance une ``ForbiddenException`` au lieu de rediriger.
+
 Création d'objets Authorize personnalisés
 -----------------------------------------
 
@@ -704,7 +721,7 @@ démarre avec ``authorize = false``. Si vous n'utilisez pas de schéma
 d'autorisation, assurez-vous de vérifier les autorisations vous-même dans la
 partie beforeFilter de votre controller ou avec un autre component.
 
-Rendre des actions publiques
+Rendre des Actions Publiques
 ----------------------------
 
 Il y a souvent des actions de controller que vous souhaitez laisser
@@ -727,7 +744,7 @@ n'autorisera la vérification des objets ::
 Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``allow()``.
 Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
 
-Fabriquer des actions qui requièrent des autorisations
+Fabriquer des Actions qui requièrent des Autorisations
 ------------------------------------------------------
 
 Par défaut, toutes les actions nécessitent une authorisation.
@@ -785,55 +802,14 @@ Le callback ci-dessus fournirait un système d'autorisation très simple
 où seuls les utilisateurs ayant le rôle d'administrateur pourraient
 accéder aux actions qui ont le préfixe admin.
 
-Utilisation de ActionsAuthorize
--------------------------------
-
-ActionsAuthorize s'intègre au component ACL, et fournit une vérification ACL
-très fine pour chaque requête. ActionsAuthorize est souvent jumelé avec
-DbAcl pour apporter un système de permissions dynamique et flexible
-qui peuvent être éditées par les utilisateurs administrateurs au travers de
-l'application. Il peut en outre être combiné avec d'autres implémentations
-Acl comme IniAcl et des applications Acl backends personnalisées.
-
-Utilisation de CrudAuthorize
-----------------------------
-
-``CrudAuthorize`` s'intègre au component Acl, et fournit la possibilité de
-mapper les requêtes aux opérations CRUD. Fournit la possibilité d'autoriser
-l'utilisation du mapping CRUD. Les résultats mappés sont alors vérifiés dans
-le component Acl comme des permissions spécifiques.
-
-Par exemple, en prenant la requête ``/posts/index``. Le mapping
-par défaut pour ``index`` est une vérification de la permission de ``read``.
-La vérification d'Acl se ferait alors avec les permissions de ``read`` pour le
-controller ``posts``. Ceci vous permet de créer un système de permission
-qui met d'avantage l'accent sur ce qui est en train d'être fait aux ressources,
-plutôt que sur l'action spécifique en cours de visite.
-
-Mapper les actions en utilisant CrudAuthorize
----------------------------------------------
-
-Quand vous utilisez CrudAuthorize ou d'autres objets authorize qui utilisent
-le mapping d'action, il peut être nécessaire de mapper des méthodes
-supplémentaires. vous pouvez mapper des actions --> CRUD permissions en
-utilisant mapAction(). En l'appelant dans le component Auth vous
-déléguerez toutes les actions aux objets authorize configurés, ainsi vous
-pouvez être sûr que le paramétrage sera appliqué partout::
-
-    $this->Auth->mapActions([
-        'create' => ['register'],
-        'view' => ['show', 'display']
-    ]);
-
-La clé pour mapActions devra être les permissions CRUD que vous voulez
-définir, tandis que les valeurs devront être un tableau de toutes les
-actions qui sont mappées vers les permissions CRUD.
-
 API de AuthComponent
 ====================
 
 Le component Auth est l'interface primaire à la construction de mécanisme
 d'autorisation et d'authentification intégrée dans CakePHP.
+
+Options de Configuration
+------------------------
 
 ajaxLogin
     Le nom d'une vue optionnelle d'un élément à rendre quand une requête AJAX
@@ -912,11 +888,7 @@ unauthorizedRedirect
     Définit un message flash. Utilise le component Session, et prend les
     valeurs depuis :php:attr:`AuthComponent::$flash`.
 
-.. php:method:: identify($request, $response)
-
-    :param CakeRequest $request: La requête à utiliser.
-    :param CakeResponse $response: La réponse à utiliser, les en-tête peuvent
-      être envoyées si l'authentification échoue.
+.. php:method:: identify()
 
     Cette méthode est utilisée par le component Auth pour identifier un
     utilisateur en se basant sur les informations contenues dans la requête
@@ -933,17 +905,13 @@ unauthorizedRedirect
     l'ordre, si chacun d'eux retourne true, alors l'utilisateur sera autorisé
     pour la requête.
 
-.. php:method:: login($user)
+.. php:method:: setUser(array $user)
 
     :param array $user: Un tableau de données d'utilisateurs connectés.
 
-    Prends un tableau de données de l'utilisateur pour se connecter.
+    Prend un tableau de données de l'utilisateur à connecter et écrit la session
+    pour permettre une persistence à travers les requêtes.
     Permet la connexion manuelle des utilisateurs.
-    L'appel de user() va renseigner la valeur de la session avec les
-    informations fournies. Si aucun utilisateur n'est fourni, le
-    component Auth essaiera d'identifier un utilisateur en utilisant les
-    informations de la requête en cours. cf
-    :php:meth:`AuthComponent::identify()`.
 
 .. php:method:: logout()
 
