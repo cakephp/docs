@@ -214,8 +214,8 @@ containing data related to the validation process:
 - **newRecord**: Whether the validation call is for a new record or
   a pre-existent one.
 
-Defining Conditions for Validator
----------------------------------
+Conditional Validation
+----------------------
 
 When defining validation rules, you can use the ``on`` key to define when
 a validation rule should be applied. If left undefined, the rule will always be
@@ -226,14 +226,32 @@ Additionally, you can provide a callable function that will determine whether or
 not a particular rule should be applied::
 
     $validator->add('picture', 'file', [
-            'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-            'on' => function($context) {
-                return !empty($context['data']['show_profile_picture']);
-            }
-        ]);
+        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+        'on' => function($context) {
+            return !empty($context['data']['show_profile_picture']);
+        }
+    ]);
 
 The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty.
+
+Te same can be done for the ``allowEmpty()`` and ``notEmpty`` validation method.
+Both take a callable function as last argument, which determines whether or not
+the rule should be applied. For example, a field can be sometimes allowed to be
+empty::
+
+    $validator->allowEmpty('tax', function($context) {
+        return !$context['data']['is_taxable'];
+    });
+
+Likewise, a field can be required to not be left empty on certain conditions::
+
+    $validator->notEmpty('email_frequency', 'This field is required', function($context) {
+        return !empty($context['data']['wants_newsletter']);
+    });
+
+In the above example, the ``email_frequency`` field cannot be left empty if the
+the user wants to receive the newsletter.
 
 .. _reusable-validators:
 
