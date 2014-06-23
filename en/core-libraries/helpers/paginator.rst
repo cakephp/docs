@@ -418,7 +418,7 @@ which can be easily integrated into your table column headers:
 
 .. code-block:: php
 
-    // src/View/Posts/index.ctp
+    // src/Template/Posts/index.ctp
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>

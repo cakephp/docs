@@ -64,9 +64,9 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /path_to_document_root
-        /App
-        /Plugin
-        /Test
+        /src
+        /plugins
+        /tests
         /tmp
         /vendor
         /webroot
@@ -88,7 +88,7 @@ Directory Permissions on tmp
 You'll also need to set the proper permissions on the ``/tmp`` directory to make
 it writable by your webserver. The best way to do this is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``src/tmp`` directory to that user. The final command you run (in \*nix)
+the ``tmp`` directory to that user. The final command you run (in \*nix)
 might look something like this::
 
     $ chown -R www-data tmp
@@ -251,7 +251,7 @@ uncomment the line that looks like::
 Also remove these .htaccess files::
 
     /.htaccess
-    /src/webroot/.htaccess
+    webroot/.htaccess
 
 
 This will make your URLs look like

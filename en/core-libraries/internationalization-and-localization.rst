@@ -91,7 +91,7 @@ should consider implementing a different solution. e.g.::
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
-            // e.g. use /src/View/fra/Pages/tos.ctp instead of /src/View/Pages/tos.ctp
+            // e.g. use /src/Template/fra/Pages/tos.ctp instead of /src/Template/Pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }
     }
@@ -131,13 +131,13 @@ find your translation file.
 
 Your translation file for this example should go into::
 
-    /src/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /plugins/DebugKit/src/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 And for other languages than the default::
 
-    /src/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
-    /src/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
-    /src/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
+    /plugins/DebugKit/src/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+    /plugins/DebugKit/src/Locale/fra/LC_MESSAGES/debug_kit.po (French)
+    /plugins/DebugKit/src/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
 
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into
@@ -175,7 +175,7 @@ should configure ``Configure`` as well::
     }
 
 Doing this will ensure that both :php:class:`I18n` and
-:php:class:`TranslateBehavior` access the same language value.
+:doc:`/core-libraries/behaviors/translate` access the same language value.
 
 It's a good idea to serve up public content available in multiple
 languages from a unique URL - this makes it easy for users (and

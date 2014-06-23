@@ -269,7 +269,7 @@ additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
 
         <!-- Add your plugin suites -->
         <testsuite name="Forum plugin">
-            <directory>./Plugin/Forum/tests/TestCase</directory>
+            <directory>./plugins/Forum/tests/TestCase</directory>
         </testsuite>
     </testsuites>
 
@@ -334,7 +334,7 @@ When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
 used to test our own Article model. Create a file named ``ArticleFixture.php``
-in your ``src/tests/Fixture`` directory, with the following content::
+in your ``tests/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
@@ -1186,7 +1186,7 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     class BlogPostTest extends TestCase {
 
-        // Plugin fixtures located in /src/Plugin/Blog/tests/Fixture/
+        // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_post'];
         public $BlogPost;
 

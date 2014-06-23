@@ -211,10 +211,7 @@ it.
 To configure your CakePHP installation, you'll need to make some
 changes to the following files.
 
-
--  /src/webroot/index.php
--  /src/webroot/test.php (if you use the
-   :doc:`Testing </development/testing>` feature.)
+-  /webroot/index.php
 
 There are three constants that you'll need to edit: ``ROOT``,
 ``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.

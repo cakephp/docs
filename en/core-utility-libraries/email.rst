@@ -219,9 +219,9 @@ send multipart templated email messages as well::
 This would use the following view files:
 
 * ``src/Template/Email/text/welcome.ctp``
-* ``src/Layout/Email/text/fancy.ctp``
+* ``src/Template/Layout/Email/text/fancy.ctp``
 * ``src/Template/Email/html/welcome.ctp``
-* ``src/Layout/Email/html/fancy.ctp``
+* ``src/Template/Layout/Email/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -262,7 +262,7 @@ You can do this using themes by telling Email to use appropriate theme using
 
 This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin. The template file needs to be created in the following path:
-``src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
+``src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Sending Attachments
 ===================
@@ -329,7 +329,7 @@ Creating Custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``src/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
+``src/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
     use Cake\Network\Email\AbstractTransport;
