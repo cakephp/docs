@@ -200,7 +200,7 @@ application:
 
 #. The core CakePHP library, in /vendor/cakephp/cakephp.
 #. Your application code, in /App.
-#. The application's webroot, usually in /App/webroot.
+#. The application's webroot, usually in /src/webroot.
 
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
@@ -212,8 +212,8 @@ To configure your CakePHP installation, you'll need to make some
 changes to the following files.
 
 
--  /App/webroot/index.php
--  /App/webroot/test.php (if you use the
+-  /src/webroot/index.php
+-  /src/webroot/test.php (if you use the
    :doc:`Testing </development/testing>` feature.)
 
 There are three constants that you'll need to edit: ``ROOT``,

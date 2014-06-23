@@ -146,10 +146,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/App/Template/People/get\_ready.ctp.
+/src/Template/People/get\_ready.ctp.
 
 The basic pattern is
-/App/Template/Controller/underscored\_function\_name.ctp.
+/src/Template/Controller/underscored\_function\_name.ctp.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -157,11 +157,11 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at /App/Model/Table/PeopleTable.php
--  Entity class: "Person", found at /App/Model/Entity/Person.php
+-  Table class: "PeopleTable", found at /src/Model/Table/PeopleTable.php
+-  Entity class: "Person", found at /src/Model/Entity/Person.php
 -  Controller class: "PeopleController", found at
-   /App/Controller/PeopleController.php
--  View template, found at /App/Template/People/index.ctp
+   /src/Controller/PeopleController.php
+-  View template, found at /src/Template/People/index.ctp
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the ``index()`` function

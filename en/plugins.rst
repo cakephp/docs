@@ -363,7 +363,7 @@ plugin with more application specific view logic by creating files using the
 following template ``App/Template/Plugin/[Plugin]/src/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 
-    /App/Template/Plugin/src/ContactManager/Contacts/index.ctp
+    /src/Template/Plugin/src/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
 ``/Plugin/ContactManager/src/Template/Contacts/index.ctp``.

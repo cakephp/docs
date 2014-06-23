@@ -1150,7 +1150,7 @@ would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
     }
 
 The code above will group all test cases found in the
-``/App/Test/TestCase/Model/`` folder. To add an individual file, use
+``/src/Test/TestCase/Model/`` folder. To add an individual file, use
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
@@ -1186,7 +1186,7 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     class BlogPostTest extends TestCase {
 
-        // Plugin fixtures located in /App/Plugin/Blog/Test/Fixture/
+        // Plugin fixtures located in /src/Plugin/Blog/Test/Fixture/
         public $fixtures = ['plugin.blog.blog_post'];
         public $BlogPost;
 

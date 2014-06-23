@@ -196,7 +196,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/App/Config/app.php``. It doesn't
+salt value by editing ``/src/Config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -240,7 +240,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``/App/Config/app.php``,
+use CakePHP's built in pretty URLs. In ``/src/Config/app.php``,
 uncomment the line that looks like::
 
     'App' => [
@@ -251,7 +251,7 @@ uncomment the line that looks like::
 Also remove these .htaccess files::
 
     /.htaccess
-    /App/webroot/.htaccess
+    /src/webroot/.htaccess
 
 
 This will make your URLs look like

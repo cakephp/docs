@@ -54,7 +54,7 @@ The session cookie path defaults to ``/``. To change this you can use the
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            'session.cookie_path' => '/App/dir'
+            'session.cookie_path' => '/src/dir'
         ]
     ]);
 

@@ -26,7 +26,7 @@ tasks. You should see something like::
 
     ---------------------------------------------------------------
     App : App
-    Path: /Users/markstory/Sites/cakephp-app/App/
+    Path: /Users/markstory/Sites/cakephp-app/src/
     ---------------------------------------------------------------
     The following commands you can generate skeleton code your your application.
 

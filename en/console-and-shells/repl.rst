@@ -16,7 +16,7 @@ application's models::
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
     App : App
-    Path: /Users/mark/projects/cakephp-app/App/
+    Path: /Users/mark/projects/cakephp-app/src/
     ---------------------------------------------------------------
     [1] app > $articles = Cake\ORM\TableRegistry::get('Articles');
     // object(Cake\ORM\Table)(

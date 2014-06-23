@@ -151,7 +151,7 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in ``/App/Controller/Component/MathComponent.php``. The basic
+the file in ``/src/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     use Cake\Controller\Component;

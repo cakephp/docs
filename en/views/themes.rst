@@ -22,14 +22,14 @@ Theme view files need to be within a plugin with the same name. For example,
 the above theme would be found in ``/Plugin/AnotherExample/Template``.
 It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
 that, the folder structure within the ``/Plugin/Example/Template`` folder is
-exactly the same as ``/App/Template/``.
+exactly the same as ``/src/Template/``.
 
 For example, the view file for an edit action of a Posts controller would reside
 at ``/Plugin/Example/Templte/Posts/edit.ctp``. Layout files would reside in
 ``/Plugin/Example/Template/Layout/``.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the ``/App/Template/`` folder. This way, you can create master view files
+file in the ``/src/Template/`` folder. This way, you can create master view files
 and simply override them on a case-by-case basis within your theme folder.
 
 Theme Assets

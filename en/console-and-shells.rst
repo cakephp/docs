@@ -48,7 +48,7 @@ Running the Console with no arguments produces this help message::
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
     App : App
-    Path: /Users/markstory/Sites/cakephp-app/App/
+    Path: /Users/markstory/Sites/cakephp-app/src/
     ---------------------------------------------------------------
     Current Paths:
 
@@ -107,7 +107,7 @@ You should see the following output::
     Welcome to CakePHP Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/Sites/cake_dev/App/
+    Path: /Users/markstory/Sites/cake_dev/src/
     ---------------------------------------------------------------
     Hello world.
 
