@@ -172,7 +172,7 @@ indicate whether a field can or cannot be mass-assigned::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        protected $_accessible => [
+        protected $_accessible = [
             'title' => true,
             'body' => true,
         ];
@@ -186,7 +186,7 @@ fallback behavior if a field is not specifically named::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        protected $_accessible => [
+        protected $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,
