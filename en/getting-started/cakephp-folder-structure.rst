@@ -4,8 +4,8 @@ CakePHP Folder Structure
 After you've downloaded and extracted the CakePHP application, these are the files
 and folders you should see:
 
-- App
-- Plugin
+- src
+- plugins
 - tmp
 - vendor
 - webroot
@@ -16,9 +16,10 @@ and folders you should see:
 
 You'll notice a few top level folders:
 
-- The *App* folder will be where you work your magic: it’s where
+- The *src* folder will be where you work your magic: it’s where
   your application’s files will be placed.
-- The *Plugin* folder is where the :doc:`/plugins` your application uses are stored.
+- The *tests* folder will be where you put the test cases for your application.
+- The *plugins* folder is where the :doc:`/plugins` your application uses are stored.
 - The *vendor* folder is where CakePHP and other application dependencies will
   be installed. Make a personal commitment **not** to edit files in this folder.
   We can’t help you if you’ve modified the core.
@@ -37,9 +38,9 @@ You'll notice a few top level folders:
 The App Folder
 ==============
 
-CakePHP's *App* folder is where you will do most of your application
+CakePHP's *src* folder is where you will do most of your application
 development. Let's look a little closer at the folders inside
-*App*.
+*src*.
 
 Config
     Holds the (few) configuration files CakePHP uses. Database
@@ -55,15 +56,11 @@ Locale
     Stores string files for internationalization.
 Model
     Contains your application's tables, entities and behaviors.
-Test
-    This directory contains all the test cases and test fixtures for your
-    application. The ``Test/Case`` directory should mirror your application and
-    contain one or more test cases per class in your application. For more
-    information on test cases and test fixtures, refer to the :doc:`/development/testing`
-    documentation.
 View
+    Presentational classes are placed here: cells, helpers, and view files.
+Template
     Presentational files are placed here: elements, error pages,
-    helpers, layouts, and view template files.
+    layouts, and view template files.
 
 
 .. meta::

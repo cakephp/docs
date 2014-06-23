@@ -88,7 +88,7 @@ To run a specific test you can supply the path to the test as a parameter to
 PHPUnit. For example, if you had a test case for ArticlesTable class you could
 run it with::
 
-    $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
+    $ phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 You should see a green bar with some additional information about the tests run,
 and number passed.
@@ -104,7 +104,7 @@ Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
 #. PHP files containing tests should be in your
-   ``src/Test/TestCase/[Type]`` directories.
+   ``tests/TestCase/[Type]`` directories.
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
@@ -136,7 +136,7 @@ Our helper looks like::
 
 This is a very simple example, but it will be useful to show how you can create
 a simple test case. After creating and saving our helper, we'll create the test
-case file in ``src/Test/TestCase/View/Helper/ProgressHelperTest.php``. In that file
+case file in ``tests/TestCase/View/Helper/ProgressHelperTest.php``. In that file
 we'll start with the following::
 
     namespace App\Test\TestCase\View\Helper;
@@ -226,7 +226,7 @@ When you have larger test cases, you will often want to run a subset of the test
 methods when you are trying to work on a single failing case. With the
 CLI runner you can use an option to filter test methods::
 
-    $ phpunit --filter testSave Test/TestCase/Model/Table/ArticlesTableTest
+    $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
 The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
@@ -239,7 +239,7 @@ built-in code coverage tools. PHPUnit will generate a set of static HTML files
 containing the coverage results. You can generate coverage for a test case by
 doing the following::
 
-    $ phpunit --coverage-html webroot/coverage Test/TestCase/Model/Table/ArticlesTableTest
+    $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
 This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
@@ -264,12 +264,12 @@ additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
 
     <testsuites>
         <testsuite name="App Test Suite">
-            <directory>./Test/TestCase</directory>
+            <directory>./tests/TestCase</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
         <testsuite name="Forum plugin">
-            <directory>./Plugin/Forum/Test/TestCase</directory>
+            <directory>./Plugin/Forum/tests/TestCase</directory>
         </testsuite>
     </testsuites>
 
@@ -334,7 +334,7 @@ When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
 used to test our own Article model. Create a file named ``ArticleFixture.php``
-in your ``src/Test/Fixture`` directory, with the following content::
+in your ``src/tests/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
@@ -489,7 +489,7 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``src/Test/Fixture/ArticleFixture.php``) to::
+(``tests/Fixture/ArticleFixture.php``) to::
 
 
     class ArticleFixture extends TestFixture {
@@ -587,7 +587,7 @@ fixture name::
     }
 
 In the above example, both fixtures would be loaded from
-``src/Test/Fixture/blog/``.
+``tests/Fixture/blog/``.
 
 Testing Tables
 ==============
@@ -611,7 +611,7 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your ``src/Test/TestCase/Model/Table`` directory,
+a file named ``ArticlesTableTest.php`` in your ``tests/TestCase/Model/Table`` directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
@@ -631,7 +631,7 @@ Creating a Test Method
 ----------------------
 
 Let's now add a method to test the function published() in the Article model.
-Edit the file ``src/Test/TestCase/Model/Table/ArticlesTableTest.php`` so it now
+Edit the file ``tests/TestCase/Model/Table/ArticlesTableTest.php`` so it now
 looks like this::
 
     namespace App\Test\TestCase\Model\Table;
@@ -725,7 +725,7 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``src/Test/TestCase/Controller`` directory and put the following inside::
+``tests/TestCase/Controller`` directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
 
@@ -933,7 +933,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``src/Test/TestCase/Controller/MarkersControllerTest.php``
+Now we create the file ``tests/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends ControllerTestCase {
@@ -999,7 +999,7 @@ controllers that use it. Here is our example component located in
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
 set correctly by the ``adjust`` method in our component. We create the file
-``app/Test/TestCase/Controller/Component/PagematronComponentTest.php``::
+``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
 
     namespace App\Test\TestCase\Controller\Component;
 
@@ -1075,7 +1075,7 @@ separator to comma, and prefix the formatted number with 'USD' string.
 
 Now we create our tests::
 
-    // src/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
+    // tests/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
     namespace App\Test\TestCase\View\Helper;
 
@@ -1139,7 +1139,7 @@ would be
 ``CakeTestSuite`` offers several methods for easily creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
-would create ``src/Test/TestCase/AllModelTest.php``. Put the following in it::
+would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1150,13 +1150,13 @@ would create ``src/Test/TestCase/AllModelTest.php``. Put the following in it::
     }
 
 The code above will group all test cases found in the
-``/src/Test/TestCase/Model/`` folder. To add an individual file, use
+``tests/TestCase/Model/`` folder. To add an individual file, use
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the ``app/Test/TestCase/``
+Would recursively add all test cases in the ``tests/TestCase/``
 directory.
 
 Creating Tests for Plugins
@@ -1186,7 +1186,7 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     class BlogPostTest extends TestCase {
 
-        // Plugin fixtures located in /src/Plugin/Blog/Test/Fixture/
+        // Plugin fixtures located in /src/Plugin/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_post'];
         public $BlogPost;
 
