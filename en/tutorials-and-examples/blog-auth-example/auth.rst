@@ -29,7 +29,7 @@ us when implementing the user login.
 Next step is to create our Users table, responsible for finding, saving and
 validating any user data::
 
-    // App/Model/Table/UsersTable.php
+    // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -53,7 +53,7 @@ Let's also create our UsersController. The following content corresponds to
 parts of a basic baked UsersController class using the code generation utilities bundled
 with CakePHP::
 
-    // App/Controller/UsersController.php
+    // src/Controller/UsersController.php
 
     namespace App\Controller;
 
@@ -123,10 +123,10 @@ the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
 for requiring login for certain actions, handling user login and logout, and
 also authorizing logged-in users to the actions they are allowed to reach.
 
-To add this component to your application open your ``App/Controller/AppController.php``
+To add this component to your application open your ``src/Controller/AppController.php``
 file and add the following lines::
 
-    // App/Controller/AppController.php
+    // src/Controller/AppController.php
 
     namespace App\Controller;
 
@@ -168,7 +168,7 @@ and more importantly, hash their password so it is not stored as plain text in
 our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
-    // App/Controller/UsersController.php
+    // src/Controller/UsersController.php
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -192,10 +192,10 @@ the users add function and implement the login and logout action::
     }
 
 Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the ``App/Model/Entity/User.php`` entity file
+to handle its own specific logic. Create the ``src/Model/Entity/User.php`` entity file
 and add the following::
 
-    // App/Model/Entity/User.php
+    // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -214,7 +214,7 @@ and add the following::
 
 Now every time the password property is assigned to the user it will be hashed
 using the ``SimplePasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your ``App/Template/Users/login.ctp`` file
+file for the login function. Open up your ``src/Template/Users/login.ctp`` file
 and add the following lines:
 
 .. code-block:: php
@@ -267,7 +267,7 @@ reference to the Users table::
 Also, a small change in the ArticlesController is required to store the currently
 logged in user as a reference for the created article::
 
-    // App/Controller/ArticlesController.php
+    // src/Controller/ArticlesController.php
     public function add() {
         $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
@@ -292,7 +292,7 @@ URL, while normal users (the author role) can only access the permitted actions.
 Again, open the AppController class and add a few more options to the Auth
 config::
 
-    // App/Controller/AppController.php
+    // src/Controller/AppController.php
 
     public $components = [
         'Session',
@@ -332,7 +332,7 @@ add to ArticlesController should allow authors to create articles but prevent th
 edition of articles if the author does not match. Open the file ``ArticlesController.php``
 and add the following content::
 
-    // App/Controller/ArticlesController.php
+    // src/Controller/ArticlesController.php
 
     public function isAuthorized($user) {
         // All registered users can add articles
@@ -358,7 +358,7 @@ edit and delete. One final thing has not been implemented. To tell whether
 or not the user is authorized to edit the article, we're calling a ``isOwnedBy()``
 function in the Articles table. Let's then implement that function::
 
-    // App/Model/Repository/ArticlesTable.php
+    // src/Model/Repository/ArticlesTable.php
 
     public function isOwnedBy($articleId, $userId) {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);

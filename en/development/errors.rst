@@ -282,10 +282,10 @@ Exception Renderer
 The ExceptionRenderer class with the help of ``CakeErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
-The error page views are located at ``App/View/Error/``. For all 4xx and 5xx errors
+The error page views are located at ``src/View/Error/``. For all 4xx and 5xx errors
 the view files ``error400.ctp`` and ``error500.ctp`` are used respectively. You can
-customize them as per your needs. By default your ``App/Layout/default.ctp`` is used
-for error pages too. If for example, you want to use another layout ``App/Layout/my_error.ctp``
+customize them as per your needs. By default your ``src/Layout/default.ctp`` is used
+for error pages too. If for example, you want to use another layout ``src/Layout/my_error.ctp``
 for your error pages. Simply edit the error views and add the statement
 ``$this->layout = 'my_error';`` to the ``error400.ctp`` and ``error500.ctp``.
 
@@ -314,7 +314,7 @@ application contained the following exception::
     class MissingWidgetException extends Exception {};
 
 You could provide nice development errors, by creating
-``App/View/Error/missing_widget.ctp``.  When in production mode, the above
+``src/View/Error/missing_widget.ctp``.  When in production mode, the above
 error would be treated as a 500 error.  The constructor for :php:exc:`Cake\\Error\\Exception`
 has been extended, allowing you to pass in hashes of data.  These hashes are
 interpolated into the the messageTemplate, as well as into the view that is used
@@ -386,7 +386,7 @@ Using the exceptionRenderer Option of the Default Handler
 
 If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use the ``exceptionRenderer`` option in
-App/Config/error.php to choose a class that will render exception pages.  By
+src/Config/error.php to choose a class that will render exception pages.  By
 default :php:class:`Cake\\Error\\ExceptionRenderer` is used.  Your custom
 exception renderer class should be placed in ``app/Error``.  In a custom
 exception rendering class you can provide specialized handling for application
@@ -440,7 +440,7 @@ controller you want::
     }
 
 Alternatively, you could just override the core CakeErrorController,
-by including one in ``App/Controller``.  If you are using a custom
+by including one in ``src/Controller``.  If you are using a custom
 controller for error handling, make sure you do all the setup you need
 in your constructor, or the render method.  As those are the only methods
 that the built-in ``ErrorHandler`` class directly call.
@@ -451,7 +451,7 @@ Logging Exceptions
 
 Using the built-in exception handling, you can log all the exceptions that are
 dealt with by ErrorHandler by setting the ``log`` option to true in your
-App/Config/error.php. Enabling this will log every exception to
+src/Config/error.php. Enabling this will log every exception to
 :php:class:`Cake\\Log\\Log` and the configured loggers.
 
 .. note::

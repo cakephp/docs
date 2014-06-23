@@ -88,7 +88,7 @@ Directory Permissions on tmp
 You'll also need to set the proper permissions on the ``/tmp`` directory to make
 it writable by your webserver. The best way to do this is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``App/tmp`` directory to that user. The final command you run (in \*nix)
+the ``src/tmp`` directory to that user. The final command you run (in \*nix)
 might look something like this::
 
     $ chown -R www-data tmp
@@ -150,7 +150,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's configuration file is found in
-``App/Config/app.default.php``. Make a copy of this file in
+``src/Config/app.default.php``. Make a copy of this file in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the

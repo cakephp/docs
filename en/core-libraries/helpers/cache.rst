@@ -22,7 +22,7 @@ Using the Helper
 ================
 
 There are two steps you have to take before you can use the CacheHelper. First
-in your ``App/Config/app.php`` uncomment the Configure write call for
+in your ``src/Config/app.php`` uncomment the Configure write call for
 ``Cache.check``. This will tell CakePHP to check for, and generate view cache
 files when handling requests.
 

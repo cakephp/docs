@@ -59,7 +59,7 @@ to provide new tasks, or replace tasks provided by CakePHP. By extending
 it as part of bake.
 
 As an example, we'll make a task that creates shell classes. First, create
-the task file ``App/Console/Command/Task/ShellTask.php``. We'll extend the
+the task file ``src/Console/Command/Task/ShellTask.php``. We'll extend the
 ``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
 is abstract and requires us to define 4 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our
@@ -89,7 +89,7 @@ ShellTask.php file should look like::
 
 Once this file has been created, we need to create a template that bake can use
 when generating code. Create
-``App/Console/Command/Template/app/classes/shell.ctp``. In this file we'll add
+``src/Console/Command/Template/app/classes/shell.ctp``. In this file we'll add
 the following content::
 
     <?php
@@ -120,7 +120,7 @@ If you wish to modify the default HTML output produced by the
 some or all of the templates that bake uses. To create a new bake theme do the
 following:
 
-#. Create a new directory in ``App/Console/Templates/[name]``.
+#. Create a new directory in ``src/Console/Templates/[name]``.
 #. Copy any templates you want to override from
    ``vendor/cakephp/cakephp/src/Console/Templates/default``.  to matching
    directories in your application/plugin.

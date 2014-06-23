@@ -25,7 +25,7 @@ Logging Configuration
 =====================
 
 Configuring ``Log`` should be done during your application's bootstrap phase.
-The ``App/Config/app.php`` file is intended for just this.  You can define
+The ``src/Config/app.php`` file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
@@ -61,12 +61,12 @@ Creating Log Adapters
 Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLog``. As part of your application it would be placed in
-``App/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
-``App/Plugin/LoggingPack/Log/Engine/DatabaseLog.php``. To configure log
+``src/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
+``src/Plugin/LoggingPack/Log/Engine/DatabaseLog.php``. To configure log
 adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
 configuring our DatabaseLog would look like::
 
-    // for App/Log
+    // for src/Log
     Log::config('otherFile', [
         'className' => 'DatabaseLog',
         'model' => 'LogEntry',

@@ -48,9 +48,9 @@ Configuration
 
 Configuration for ``Email`` defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the
-``App/Config/app.php`` file.  The ``App/Config/app.php.default`` file is an
+``src/Config/app.php`` file.  The ``App/Config/app.php.default`` file is an
 example of this file. It is not required to define email configuration in
-``App/Config/app.php``. ``Email`` can be used without it and use the respective
+``src/Config/app.php``. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
 
 By defining profiles and transports, you can keep your application code free of
@@ -205,8 +205,8 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``App/Template/Email/html/welcome.ctp`` for the view
-and ``App/Layout/Email/html/fancy.ctp`` for the layout. You can
+The above would use ``src/Template/Email/html/welcome.ctp`` for the view
+and ``src/Layout/Email/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -218,10 +218,10 @@ send multipart templated email messages as well::
 
 This would use the following view files:
 
-* ``App/Template/Email/text/welcome.ctp``
-* ``App/Layout/Email/text/fancy.ctp``
-* ``App/Template/Email/html/welcome.ctp``
-* ``App/Layout/Email/html/fancy.ctp``
+* ``src/Template/Email/text/welcome.ctp``
+* ``src/Layout/Email/text/fancy.ctp``
+* ``src/Template/Email/html/welcome.ctp``
+* ``src/Layout/Email/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -262,7 +262,7 @@ You can do this using themes by telling Email to use appropriate theme using
 
 This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin. The template file needs to be created in the following path:
-``App/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
+``src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Sending Attachments
 ===================
@@ -329,7 +329,7 @@ Creating Custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``App/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
+``src/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
     use Cake\Network\Email\AbstractTransport;

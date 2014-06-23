@@ -116,7 +116,7 @@ whenever there are no other commands or arguments given to a shell. You may have
 also noticed that HelloShell is extending ``AppShell``. Much like
 :ref:`app-controller`, AppShell gives you a base class to contain all your
 common functions or logic. You can define an AppShell, by creating
-``App/Console/Command/AppShell.php``. Since our main method wasn't very
+``src/Console/Command/AppShell.php``. Since our main method wasn't very
 interesting let's add another command that does something::
 
 
@@ -210,9 +210,9 @@ will call this method when the task is invoked. A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    // found in App/Console/Command/SeaShell.php
+    // found in src/Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-        // found in App/Console/Command/Task/SoundTask.php
+        // found in src/Console/Command/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {

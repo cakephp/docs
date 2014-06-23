@@ -4,12 +4,12 @@ The Pages Controller
 CakePHP ships with a default controller ``PagesController.php``. This is a
 simple and optional controller for serving up static content. The home page
 you see after installation is generated using this controller. If you make the
-view file ``App/Template/Pages/about_us.ctp`` you can access it using the URL
+view file ``src/Template/Pages/about_us.ctp`` you can access it using the URL
 ``http://example.com/pages/about_us``. You are free to modify the Pages
 Controller to meet your needs.
 
 When you "bake" an app using CakePHP's console utility the Pages Controller is
-created in your ``App/Controller/`` folder. You can also copy the file from
+created in your ``src/Controller/`` folder. You can also copy the file from
 ``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
 
 .. warning::

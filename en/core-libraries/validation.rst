@@ -244,7 +244,7 @@ While defining validators inline where they are used makes for good example
 code, it doesn't lead to easily maintainable applications. Instead, you should
 create ``Validator`` sub-classes for your reusable validation logic::
 
-    // In App/Model/Validation/ContactValidator.php
+    // In src/Model/Validation/ContactValidator.php
     namespace App\Model\Validation;
 
     use Cake\Validation\Validator;

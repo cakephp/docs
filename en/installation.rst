@@ -165,7 +165,7 @@ directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
 
     /cake_install/
-        App/
+        src/
         Plugin/
         Test/
         tmp/
@@ -239,7 +239,7 @@ Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
-    // App/Config/paths.php (partial, comments removed)
+    // src/Config/paths.php (partial, comments removed)
     define('ROOT', '/home/me');
     define('APP_DIR', 'myapp');
     define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');

@@ -91,7 +91,7 @@ needed. Example::
     You must specify which className to use. It does **not** default to
     File.
 
-By placing the above code in your ``App/Config/app.php`` you will have two
+By placing the above code in your ``src/Config/app.php`` you will have two
 additional Cache configurations. The name of these configurations 'short' or
 'long' is used as the ``$config`` parameter for
 :php:meth:`Cake\\Cache\\Cache::write()` and
@@ -424,10 +424,10 @@ Creating a Storage Engine for Cache
 ===================================
 
 You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
-as in plugins using ``$plugin\Cache\Engine``. App/plugin cache engines can
+as in plugins using ``$plugin\Cache\Engine``. src/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``App/Cache/Engine/MyCustomCacheEngine.php``
+it would be placed in either ``src/Cache/Engine/MyCustomCacheEngine.php``
 as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.::

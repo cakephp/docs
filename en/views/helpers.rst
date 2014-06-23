@@ -132,7 +132,7 @@ create aliased helpers in your views. This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
 implementation::
 
-    // App/Controller/PostsController.php
+    // src/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = [
             'Html' => [
@@ -141,7 +141,7 @@ implementation::
         ];
     }
 
-    // App/View/Helper/MyHtmlHelper.php
+    // src/View/Helper/MyHtmlHelper.php
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper {

@@ -45,10 +45,10 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``App/Config/app.php``
+Remember to have a debug level of at least 1 in your ``src/Config/app.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
-``test`` datasource configuration to ``App/Config/app.php``.  This
+``test`` datasource configuration to ``src/Config/app.php``.  This
 configuration is used by CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -104,7 +104,7 @@ Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
 #. PHP files containing tests should be in your
-   ``App/Test/TestCase/[Type]`` directories.
+   ``src/Test/TestCase/[Type]`` directories.
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
@@ -136,7 +136,7 @@ Our helper looks like::
 
 This is a very simple example, but it will be useful to show how you can create
 a simple test case. After creating and saving our helper, we'll create the test
-case file in ``App/Test/TestCase/View/Helper/ProgressHelperTest.php``. In that file
+case file in ``src/Test/TestCase/View/Helper/ProgressHelperTest.php``. In that file
 we'll start with the following::
 
     namespace App\Test\TestCase\View\Helper;
@@ -302,7 +302,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your ``App/Config/datasources.php``
+CakePHP uses the connection named ``test`` in your ``src/Config/datasources.php``
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -334,7 +334,7 @@ When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
 used to test our own Article model. Create a file named ``ArticleFixture.php``
-in your ``App/Test/Fixture`` directory, with the following content::
+in your ``src/Test/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
@@ -489,7 +489,7 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``App/Test/Fixture/ArticleFixture.php``) to::
+(``src/Test/Fixture/ArticleFixture.php``) to::
 
 
     class ArticleFixture extends TestFixture {
@@ -587,13 +587,13 @@ fixture name::
     }
 
 In the above example, both fixtures would be loaded from
-``App/Test/Fixture/blog/``.
+``src/Test/Fixture/blog/``.
 
 Testing Tables
 ==============
 
 Let's say we already have our Articles Table class defined in
-``App/Model/Table/ArticlesTable.php``, and it looks like::
+``src/Model/Table/ArticlesTable.php``, and it looks like::
 
     namespace App\Model\Table;
 
@@ -611,7 +611,7 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your ``App/Test/TestCase/Model/Table`` directory,
+a file named ``ArticlesTableTest.php`` in your ``src/Test/TestCase/Model/Table`` directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
@@ -631,7 +631,7 @@ Creating a Test Method
 ----------------------
 
 Let's now add a method to test the function published() in the Article model.
-Edit the file ``App/Test/TestCase/Model/Table/ArticlesTableTest.php`` so it now
+Edit the file ``src/Test/TestCase/Model/Table/ArticlesTableTest.php`` so it now
 looks like this::
 
     namespace App\Test\TestCase\Model\Table;
@@ -725,7 +725,7 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``App/Test/TestCase/Controller`` directory and put the following inside::
+``src/Test/TestCase/Controller`` directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
 
@@ -933,7 +933,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``App/Test/TestCase/Controller/MarkersControllerTest.php``
+Now we create the file ``src/Test/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends ControllerTestCase {
@@ -1059,7 +1059,7 @@ First we create an example helper to test. The ``CurrencyRendererHelper`` will
 help us display currencies in our views and for simplicity only has one method
 ``usd()``::
 
-    // App/View/Helper/CurrencyRendererHelper.php
+    // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
 
     use Cake\View\Helper;
@@ -1075,7 +1075,7 @@ separator to comma, and prefix the formatted number with 'USD' string.
 
 Now we create our tests::
 
-    // App/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
+    // src/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
     namespace App\Test\TestCase\View\Helper;
 
@@ -1130,16 +1130,16 @@ would be
 
     <testsuites>
       <testsuite name="Models">
-        <directory>App/Model</directory>
-        <file>App/Service/UserServiceTest.php</file>
-        <exclude>App/Model/Cloud/ImagesTest.php</exclude>
+        <directory>src/Model</directory>
+        <file>src/Service/UserServiceTest.php</file>
+        <exclude>src/Model/Cloud/ImagesTest.php</exclude>
       </testsuite>
     </testsuites>
 
 ``CakeTestSuite`` offers several methods for easily creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
-would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
+would create ``src/Test/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1253,7 +1253,7 @@ a *shell script step* to the build that contains the following:
 
 .. code-block:: bash
 
-    cat > App/Config/app_local.php <<'CONFIG'
+    cat > src/Config/app_local.php <<'CONFIG'
     <?php
     $config = [
         'Datasources' => [
@@ -1269,7 +1269,7 @@ a *shell script step* to the build that contains the following:
     ];
     CONFIG
 
-Then uncomment the following line in your ``App/Config/bootstrap.php`` file::
+Then uncomment the following line in your ``src/Config/bootstrap.php`` file::
 
     //Configure::load('app_local.php', 'default');
 
