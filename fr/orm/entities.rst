@@ -185,7 +185,7 @@ si oui ou non ils peuvent être assigné en masse. Les valeurs ``true`` et
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        protected $_accessible => [
+        protected $_accessible = [
             'title' => true,
             'body' => true,
         ];
@@ -199,7 +199,7 @@ bahavior fallback si un champ n'est pas nommé spécifiquement::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        protected $_accessible => [
+        protected $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,
