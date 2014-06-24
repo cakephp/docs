@@ -148,7 +148,7 @@ Otherwise a new record is created::
 
 .. tip::
 
-    When calling save in a loop, don't forget to call ``create()``.
+    When calling save in a loop, don't forget to call ``clear()``.
 
 
 If you want to update a value, rather than create a new one, make sure
