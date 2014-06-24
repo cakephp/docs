@@ -70,6 +70,12 @@ Scaffold
 Core
 ====
 
+App
+---
+
+- ``App::pluginPath()`` has been deprecated. ``CakePlugin::path()`` should be used instead.
+
+
 CakePlugin
 ----------
 
@@ -232,7 +238,7 @@ View
 View
 ----
 
-- ``$title_for_layout`` is deprecated. Use ``$this->fetch('title');`` and 
+- ``$title_for_layout`` is deprecated. Use ``$this->fetch('title');`` and
   ``$this->assign('title', 'your-page-title');`` instead.
 - :php:meth:`View::get()` now accepts a second argument to provide a default
   value.
