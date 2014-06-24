@@ -53,7 +53,7 @@ l'API est insuffisante, regardez le code des cas de test fournis avec CakePHP.
 Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de
 données membres d'une classe.::
 
-    lib/Cake/Test/Case
+    tests/TestCase/
 
 Le Canal IRC
 ============

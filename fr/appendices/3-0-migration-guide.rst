@@ -708,7 +708,12 @@ Ces deux problèmes sont résolus en convertissant les themes en plugins.
 Les Dossiers de View Renommés
 -----------------------------
 
-Les dossiers de View suivants ont été renommées pour éviter les collisions de
+Les dossiers contenant les fichiers de vue vont maintenant dans `src/Template`
+à la place de `src/View`.
+Ceci a été fait pour séparer les fichiers de vue des fichiers contenant des
+classes php (par ex les classes Helpers et View).
+
+Les dossiers de View suivants ont été renommés pour éviter les collisions
 avec les noms de controller:
 
 - ``Layouts`` est mantenant ``Layout``
