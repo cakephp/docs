@@ -35,14 +35,14 @@ would look like the following::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": ">=2.5.0"
+            "cakephp/cakephp": "2.5.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
         }
     }
 
-Save this JSON into ``composer.json`` in the root directory of your project.
+Save this JSON into ``composer.json`` in the APP directory of your project.
 Next download the composer.phar file into your project. After you've downloaded
 Composer, install CakePHP. In the same directory as your ``composer.json`` run
 the following::
@@ -70,7 +70,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/cakephp/cakephp/lib'
+        APP . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
@@ -94,6 +94,15 @@ the autoloader, and work around an issue in Composer's autoloader. In your
 You should now have a functioning CakePHP application installed via
 Composer. Be sure to keep the composer.json and composer.lock file with the
 rest of your source code.
+
+For running the console you also need to change the ``APP . 'Console' . DS . 'cake.php'`` file::
+
+    if (function_exists('ini_set')) {
+        $root = dirname(dirname(dirname(__FILE__)));
+        $appDir = basename(dirname(dirname(__FILE__)));
+
+        ini_set('include_path', $root . $ds . $appDir . $ds . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp' . $ds . 'lib' . $ds . ini_get('include_path'));
+    }
 
 
 Sharing CakePHP Libraries with multiple Applications
