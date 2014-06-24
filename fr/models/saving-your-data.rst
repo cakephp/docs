@@ -152,7 +152,7 @@ mis à jour. Sinon, un nouvel enregistrement est créé::
 .. tip::
 
     Lors de l'appel à save() dans une boucle, n'oubliez pas d'appeler
-    ``create()``.
+    ``clear()``.
 
 
 Si vous voulez mettre à jour une valeur, plutôt qu'en créer une, assurez-vous
