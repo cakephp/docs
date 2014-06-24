@@ -137,7 +137,7 @@ permet de créer des alias de helpers dans vos vues. Cette fonctionnalité est
 utile quand vous voulez remplacer ``$this->Html`` ou une autre référence du
 Helper habituel avec une implémentation personnalisée::
 
-    // App/Controller/PostsController.php
+    // src/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = [
             'Html' => [
@@ -146,7 +146,7 @@ Helper habituel avec une implémentation personnalisée::
         ];
     }
 
-    // App/View/Helper/MyHtmlHelper.php
+    // src/View/Helper/MyHtmlHelper.php
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper {
@@ -203,10 +203,10 @@ Mettons que nous voulions créer un helper, qui pourra être utilisé pour
 produire un lien CSS, façonné spécialement selon vos besoins, à différents
 endroits de votre application. Afin de trouver une place à votre logique dans
 la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
-classe dans ``/App/View/Helper``. Appelons notre helper LinkHelper. Le
+classe dans ``/src/View/Helper``. Appelons notre helper LinkHelper. Le
 fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
-    /* /App/View/Helper/LinkHelper.php */
+    /* /src/View/Helper/LinkHelper.php */
     use Cake\View\Helper;
 
     class LinkHelper extends AppHelper {
@@ -227,7 +227,7 @@ un autre helper. Pour faire cela, vous pouvez spécifier les helpers que
 vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le
 feriez dans un controller::
 
-    /* /App/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
+    /* /src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
     use App\View\Helper\AppHelper;
 
     class LinkHelper extends AppHelper {
@@ -249,7 +249,7 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créé votre helper et l'avez placé dans
-``/App/View/Helper/``, vous serez capable de l'inclure dans vos controllers
+``/src/View/Helper/``, vous serez capable de l'inclure dans vos controllers
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController {
@@ -270,7 +270,7 @@ Créer des fonctionnalités pour Tous les Helpers
 Tous les helpers étendent une classe spéciale, AppHelper (comme les models
 étendent AppModel et les controllers étendent AppController). Pour créer une
 fonctionnalité disponible pour tous les helpers, créez
-``/App/View/Helper/AppHelper.php``::
+``/src/View/Helper/AppHelper.php``::
 
     use App\View\Helper\AppHelper;
 

@@ -71,9 +71,9 @@ du "DocumentRoot" de votre serveur. Une fois terminé, votre répertoire
 d'installation devrait ressembler à quelque chose comme cela::
 
     /chemin_du_document_root
-        /App
-        /Plugin
-        /Test
+        /src
+        /plugins
+        /tests
         /tmp
         /vendor
         /webroot
@@ -95,10 +95,10 @@ Les Permissions du Répertoire tmp
 Ensuite vous devrez mettre le répertoire ``/tmp`` en écriture pour le serveur
 web. La meilleur façon de le faire est de trouver sous quel utilisateur votre
 serveur web tourne en faisant (``<?= `whoami`; ?>``) et en changeant le
-possesseur du répertoire ``App/tmp`` pour cet utilisateur. La commande finale
+possesseur du répertoire ``src/tmp`` pour cet utilisateur. La commande finale
 que vous pouvez lancer (dans \*nix) pourrait ressembler à ceci::
 
-    $ chown -R www-data App/tmp
+    $ chown -R www-data src/tmp
 
 Si pour une raison ou une autre, CakePHP ne peut écrire dans ce répertoire, vous
 verrez des avertissements et des exceptions attrapées vous disant que les
@@ -161,7 +161,7 @@ connecter. Pour la plupart d'entre vous, c'est la première et dernière fois qu
 vous configurerez quelque chose.
 
 Une copie du fichier de configuration CakePHP pour la base de données se trouve
-dans ``App/Config/app.default.php``. Faites une copie de ce fichier dans
+dans ``src/Config/app.default.php``. Faites une copie de ce fichier dans
 le même répertoire mais nommez le ``app.php``.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
@@ -208,7 +208,7 @@ chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs.
 
 Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/App/Config/app.php``.
+défaut en modifiant ``/src/Config/app.php``.
 La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
 difficile à deviner::
 
@@ -253,7 +253,7 @@ web fonctionne:
 
 Si vous ne voulez pas ou ne pouvez pas obtenir mod\_rewrite (ou d'autres modules
 compatibles) et le lancer sur votre serveur, vous aurez besoin d'utiliser les
-belles URLs intégrées à CakePHP. Dans ``/App/Config/app.php``, décommentez la
+belles URLs intégrées à CakePHP. Dans ``/src/Config/app.php``, décommentez la
 ligne qui ressemble à::
 
     'App' => [
@@ -264,7 +264,7 @@ ligne qui ressemble à::
 Retirez aussi ces fichiers .htaccess::
 
     /.htaccess
-    /App/webroot/.htaccess
+    /src/webroot/.htaccess
 
 
 Ceci va faire que vos URLs ressembleront à

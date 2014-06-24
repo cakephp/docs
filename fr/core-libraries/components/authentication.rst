@@ -392,7 +392,7 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 ------------------------------------------------------
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
-dans ``App/Auth/DumbPasswordHasher.php`` et intégrer les méthodes ``hash`` et
+dans ``src/Auth/DumbPasswordHasher.php`` et intégrer les méthodes ``hash`` et
 ``check``::
 
     use \Cake\Auth\AbstractPasswordHasher;
@@ -677,7 +677,7 @@ Création d'objets Authorize personnalisés
 Parce que les objets authorize sont modulables, vous pouvez créer des objets
 authorize personnalisés dans votre application, ou plugins. Si par exemple
 vous voulez créer un objet authorize LDAP. Dans
-``App/Controller/Component/Auth/LdapAuthorize.php``, vous pourriez mettre
+``src/Controller/Component/Auth/LdapAuthorize.php``, vous pourriez mettre
 cela::
 
     namespace App\Controller\Component\Auth;

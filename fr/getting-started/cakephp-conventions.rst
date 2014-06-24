@@ -176,10 +176,10 @@ Conventions des vues
 Les fichiers de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
-de vue dans : /App/Template/People/soyez\_pret.ctp.
+de vue dans : /src/Template/People/soyez\_pret.ctp.
 
 Le schéma classique est
-/App/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
+/src/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -187,11 +187,11 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
 -  Nom de la table de la base de données: "people"
--  Classe Table: "PeopleTable", trouvée dans /App/Model/Table/PeopleTable.php
--  Classe Entity: "Person", trouvée dans /App/Model/Entity/Person.php
+-  Classe Table: "PeopleTable", trouvée dans /src/Model/Table/PeopleTable.php
+-  Classe Entity: "Person", trouvée dans /src/Model/Entity/Person.php
 -  Classe Controller: "PeopleController", trouvée dans
-   /App/Controller/PeopleController.php
--  Template de View, trouvée dans /App/Template/People/index.ctp
+   /src/Controller/PeopleController.php
+-  Template de View, trouvée dans /src/Template/People/index.ctp
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/personnes/ sera liée à un appel à la fonction ``index()`` du

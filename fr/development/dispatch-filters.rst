@@ -89,7 +89,7 @@ The callable can expect to get the current request and response as arguments.
 Building a Filter
 =================
 
-To create a filter, define a class in ``App/Routing/Filter``. In this example,
+To create a filter, define a class in ``src/Routing/Filter``. In this example,
 we'll be making a filter that adds a tracking cookie for the first landing
 page. First, create the file. Its contents should look like::
 
@@ -113,7 +113,7 @@ page. First, create the file. Its contents should look like::
         }
     }
 
-Save this file into ``App/Routing/Filter/TrackingCookieFilter.php``. As you can see, like other
+Save this file into ``src/Routing/Filter/TrackingCookieFilter.php``. As you can see, like other
 classes in CakePHP, dispatcher filters have a few conventions:
 
 * Class names end in ``Filter``.

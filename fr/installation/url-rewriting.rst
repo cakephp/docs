@@ -103,7 +103,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    utilisateur (http://exemple.com/~username/cakephp/), ou toute autre
    structure d'URL qui utilise déjà mod\_rewrite, vous aurez besoin d'ajouter
    les requêtes (statements) RewriteBase aux fichiers .htaccess que CakePHP
-   utilise (/.htaccess, /App/.htaccess, /App/webroot/.htaccess).
+   utilise (/.htaccess, /src/.htaccess, /src/webroot/.htaccess).
 
    Ceci peut être ajouté dans la même section que la directive RewriteEngine,
    donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci::
@@ -166,7 +166,7 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
         server_name example.com;
     
         # root directive should be global
-        root   /var/www/example.com/public/App/webroot/;
+        root   /var/www/example.com/public/src/webroot/;
         index  index.php;
         
         access_log /var/www/example.com/log/access.log;

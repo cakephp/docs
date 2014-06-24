@@ -12,7 +12,7 @@ où un tableau de paramètres peut être inversé en une chaîne URL.
 En utilisant le routing inversé, vous pouvez facilement reconstruire votre
 structure d'URL des applications sans avoir mis à jour tous vos codes.
 
-Les Routes dans une application sont configurées dans ``App/Config/routes.php``.
+Les Routes dans une application sont configurées dans ``src/Config/routes.php``.
 Ce fichier est inclu par le :php:class:`Dispatcher` quand on gère les routes et
 vous permet de définir des routes spécifiques d'application que vous voulez
 utiliser. Les Routes déclarées dans ce fichier sont traitées de haut en bas
@@ -146,7 +146,7 @@ Connecter les Routes
 
 Définir vos propres routes vous permet de définir la façon dont votre
 application va répondre à une URL donnée. Définir vos propres routes
-dans le fichier ``App/Config/routes.php`` en utilisant la méthode
+dans le fichier ``src/Config/routes.php`` en utilisant la méthode
 :php:meth:`Router::connect()`.
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
@@ -470,7 +470,7 @@ controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
 ``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
-view file used would be ``App/Template/Admin/Users/edit.ctp``
+view file used would be ``src/Template/Admin/Users/edit.ctp``
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::

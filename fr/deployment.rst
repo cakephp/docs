@@ -84,7 +84,7 @@ les fichiers CSS des plugins à travers le Dispatcher est incroyablement
 inefficace, il est chaudement recommandé de les symlinker pour la
 production. Par exemple comme ceci::
 
-    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+    ln -s plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 .. meta::
     :title lang=fr: Déploiement

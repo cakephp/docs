@@ -78,7 +78,7 @@ l'entity fournie n'est pas 'nouvelle', le form va être créé comme un form
 edit. Par exemple, si nous naviguons vers http://example.org/articles/edit/5,
 nous pourrions faire ce qui suit::
 
-    // App/Controller/ArticlesController.php:
+    // src/Controller/ArticlesController.php:
     public function edit($id = null) {
         if (empty($id)) {
             throw new NotFoundException;
@@ -1407,7 +1407,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         ]
     ];
 
-Ceci charge les balise dans ``App/Config/app_form.php``. Le fichier devra
+Ceci charge les balise dans ``src/Config/app_form.php``. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     $config = [

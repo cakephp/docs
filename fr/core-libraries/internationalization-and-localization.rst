@@ -54,14 +54,14 @@ templates utilisés pour créer ou mettre à jour vos
 `fichiers po <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
 traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
 
-    /App/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /src/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 Le domaine par défaut est 'default', donc votre dossier locale
 devrait ressembler à cela::
 
-    /App/Locale/eng/LC_MESSAGES/default.po (Anglais)   
-    /App/Locale/fra/LC_MESSAGES/default.po (Français)   
-    /App/Locale/por/LC_MESSAGES/default.po (Portugais) 
+    /src/Locale/eng/LC_MESSAGES/default.po (Anglais)   
+    /src/Locale/fra/LC_MESSAGES/default.po (Français)   
+    /src/Locale/por/LC_MESSAGES/default.po (Portugais) 
 
 Pour créer ou éditer vos fichiers po, il est recommandé de *ne pas* utiliser
 votre éditeur de texte préféré. Pour créer un fichier po pour la première fois,
@@ -115,8 +115,8 @@ LC_TIME.
 
 Placez juste le fichier LC_TIME dans son répertoire local respectif::
 
-    /App/Locale/fra/LC_TIME (French)
-    /App/Locale/por/LC_TIME (Portuguese)
+    /src/Locale/fra/LC_TIME (French)
+    /src/Locale/por/LC_TIME (Portuguese)
 
 Vous pouvez trouver ces fichiers pour quelques langues populaires à partir du
 dépôt officiel `Localized <https://github.com/cakephp/localized>`_.
@@ -137,13 +137,13 @@ CakePHP ne trouvera pas votre fichier de traduction.
 
 Votre fichier de traduction pour cet exemple devra être dans ::
 
-    /App/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+    /plugins/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 Et pour les autres langues par rapport à celle par défaut::
 
-    /App/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
-    /App/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
-    /App/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+    /plugins/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
+    /plugins/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
+    /plugins/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
 
 La raison pour cela est que CakePHP va utiliser le nom du plugin en minuscule
 et avec des underscores, pour le comparer avec le domaine de traduction et va

@@ -125,11 +125,11 @@ surcharge, ajoutez simplement votre classe à votre dossier app/Lib
 en copiant la structure interne du framework. Quelques exemples à suivre
 
 * Pour surcharger la classe :php:class:`Dispatcher`, créez
-  ``App/Routing/Dispatcher.php``
+  ``src/Routing/Dispatcher.php``
 * Pour surcharger la classe :php:class:`CakeRoute`, créez
-  ``App/Routing/Route/CakeRoute.php``
+  ``src/Routing/Route/CakeRoute.php``
 
-Lorque vous chargez les fichiers remplacés, les App/fichiers vont être chargés
+Lorque vous chargez les fichiers remplacés, les src/fichiers vont être chargés
 à la place des classes intégrées au coeur.
 
 Charger les Fichiers de Vendor

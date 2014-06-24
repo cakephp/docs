@@ -12,8 +12,8 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 Les fichiers des classes de model de CakePHP sont séparés entre des objets
 ``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
 collection des entities stockées dans une table spécifique et vont dans
-``/App/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
-``/App/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
+``/src/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
+``/src/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
 à ceci::
 
     namespace App\Model\Table;
@@ -31,7 +31,7 @@ de la base de données appelée ``articles``.
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans /App/Model/Table. Cela veut aussi dire que
+    pas le fichier correspondant dans /src/Model/Table. Cela veut aussi dire que
     si vous n'avez pas nommé correctement votre fichier (par ex.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
@@ -48,7 +48,7 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier ``/App/Controller``. Voici
+``ArticlesController.php`` à l'intérieur du dossier ``/src/Controller``. Voici
 à quoi devrait ressembler le controller de base ::
 
     namespace App\Controller;
@@ -117,7 +117,7 @@ la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
 chose comme cela ::
 
-Les fichiers des vues de CakePHP sont stockés dans ``/App/Template`` à
+Les fichiers des vues de CakePHP sont stockés dans ``/src/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
 aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
 données de ces articles dans un joli tableau, le code de notre vue devrait
@@ -125,7 +125,7 @@ ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp -->
+    <!-- File: /src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <table>
@@ -218,11 +218,11 @@ existe. Dans le cas où l'article requêté n'est pas présent dans la base de
 données, la fonction ``get()`` va lancer une ``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
-dans ``/App/Template/Articles/view.ctp``.
+dans ``/src/Template/Articles/view.ctp``.
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/view.ctp -->
+    <!-- File: /src/Template/Articles/view.ctp -->
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
@@ -331,7 +331,7 @@ Voici le code de notre vue "add" (ajout)
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/add.ctp -->
+    <!-- File: /src/Template/Articles/add.ctp -->
 
     <h1>Add Article</h1>
     <?php
@@ -367,7 +367,7 @@ une fois, référez-vous au chapitre :doc:`/views/helpers` pour en savoir plus
 sur les helpers.
 
 A présent, revenons en arrière et modifions notre vue
-``/App/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
+``/src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?= $this->Html->link(
@@ -453,7 +453,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/edit.ctp -->
+    <!-- File: /src/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
     <?= $this->Form->create($article) ?>
@@ -475,7 +475,7 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp  (liens de modification ajoutés) -->
+    <!-- File: /src/Template/Articles/index.ctp  (liens de modification ajoutés) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Ajouter un Article", ['action' => 'add']) ?></p>
@@ -540,7 +540,7 @@ articles, ainsi :
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp -->
+    <!-- File: /src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Ajouter un Article', ['action' => 'add']) ?></p>
@@ -604,7 +604,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Articles
 (ArticlesController).
 
-Le routage de CakePHP se trouve dans ``/App/Config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans ``/src/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 

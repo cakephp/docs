@@ -176,9 +176,9 @@ installation de production devrait ressembler à quelque chose comme ceci dans
 votre système de fichiers::
 
     /cake_install/
-        App/
-        Plugin/
-        Test/
+        src/
+        plugins/
+        tests/
         tmp/
         vendor/
         webroot/ (ce répertoire est défini comme DocumentRoot)
@@ -212,7 +212,7 @@ CakePHP:
 
 #. La librairie du coeur de CakePHP, dans /vendor/cakephp/cakephp.
 #. Votre code d'application, dans /App.
-#. Le webroot de l'application, usuellement dans /App/webroot.
+#. Le webroot de l'application, usuellement dans /src/webroot.
 
 Chacun de ces répertoires peut être localisé partout dans votre système de
 fichiers, avec l'exception du webroot, ce qui nécessite d'être accessible par
@@ -223,8 +223,8 @@ Pour configurer votre installation CakePHP, vous aurez besoin de faire des
 changements aux fichiers suivants.
 
 
--  /App/webroot/index.php
--  /App/webroot/test.php (si vous utilisez la fonctionnalité
+-  /src/webroot/index.php
+-  /src/webroot/test.php (si vous utilisez la fonctionnalité
    :doc:`Testing </development/testing>`.)
 
 Il y a trois constantes que vous aurez besoin de modifier: ``ROOT``,
@@ -251,7 +251,7 @@ Etant donnée le type de configuration, j'aurai besoin de modifier mon fichier
 webroot/index.php (qui finira dans /var/www/mysite/index.php, dans cet exemple)
 pour ressembler à ce qui suit::
 
-    // App/Config/paths.php (partial, comments removed)
+    // src/Config/paths.php (partial, comments removed)
     define('ROOT', '/home/me');
     define('APP_DIR', 'myapp');
     define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');

@@ -32,7 +32,7 @@ réaliserons la connexion de l'utilisateur.
 La prochaine étape est de créer notre table Users, qui a la
 responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
 
-    // App/Model/Table/UsersTable.php
+    // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -56,7 +56,7 @@ Créons aussi notre UsersController, le contenu suivant correspond à la
 classe `cuisinée` basique UsersController en utilisant les utilitaires
 de génération de code fournis par CakePHP::
 
-    // App/Controller/UsersController.php
+    // src/Controller/UsersController.php
 
     namespace App\Controller;
 
@@ -128,9 +128,9 @@ la connexion et la déconnexion, et aussi d'autoriser aux utilisateurs connecté
 les actions que l'on souhaite leur voir autorisées.
 
 Pour ajouter ce component à votre application, ouvrez votre fichier
-``App/Controller/AppController.php`` et ajoutez les lignes suivantes::
+``src/Controller/AppController.php`` et ajoutez les lignes suivantes::
 
-    // App/Controller/AppController.php
+    // src/Controller/AppController.php
 
     namespace App\Controller;
 
@@ -175,7 +175,7 @@ clair dans notre base de données. Disons à AuthComponent de laisser
 certains utilisateurs non-authentifiés accéder à la fonction add des
 utilisateurs et de réaliser l'action connexion et deconnexion::
 
-    // App/Controller/UsersController.php
+    // src/Controller/UsersController.php
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -200,9 +200,9 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
 
 Le hash du mot de passe n'est pas encore fait, nous avons besoin d'une classe
 Entity pour notre User afin de gérer sa propre logique spécifique. Créons
-fichier entity dans ``App/Model/Entity/User.php`` et ajoutons ce qui suit::
+fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
 
-    // App/Model/Entity/User.php
+    // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -222,7 +222,7 @@ fichier entity dans ``App/Model/Entity/User.php`` et ajoutons ce qui suit::
 Ainsi, maintenant à chaque fois qu'un utilisateur est sauvegardé, le mot de
 passe est hashé en utilisant la classe ``SimplePasswordHasher``. Il nous
 manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
-votre fichier ``App/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
+votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
@@ -277,7 +277,7 @@ articles pour ajouter la référence à la table Users::
 Aussi, un petit changement dans ArticlesController est nécessaire pour stocker
 l'utilisateur connecté courant en référence pour l'article créé::
 
-    // App/Controller/ArticlesController.php
+    // src/Controller/ArticlesController.php
     public function add() {
         $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
@@ -303,7 +303,7 @@ normaux (le role auteur) peuvent seulement accéder aux actions permises.
 Ouvrez encore la classe AppController et ajoutez un peu plus d'options à la
 config de Auth::
 
-    // App/Controller/AppController.php
+    // src/Controller/AppController.php
 
     public $components = [
         'Session',
@@ -344,7 +344,7 @@ gestion de ces règles supplémentaires. Les règles que nous allons ajouter
 empêcheront l'édition des articles si l'auteur ne correspond pas. Ouvrez le
 fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
 
-    // App/Controller/ArticlesController.php
+    // src/Controller/ArticlesController.php
 
     public function isAuthorized($user) {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
@@ -372,7 +372,7 @@ l'utilisateur à l'autorisation ou non de modifier l'article, nous appelons
 une fonction ``isOwnedBy()`` dans la table Articles. Intégrons la fonction
 suivante::
 
-    // App/Model/Repository/ArticlesTable.php
+    // src/Model/Repository/ArticlesTable.php
 
     public function isOwnedBy($articleId, $userId) {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);

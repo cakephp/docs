@@ -21,7 +21,7 @@ gère.
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans ``/App/Controller/AppController.php`` et elle devra contenir les
+dans ``/src/Controller/AppController.php`` et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
@@ -40,7 +40,7 @@ Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Controller` incluse dans la librairie du cœur
 de CakePHP. ``AppController`` est définie dans
-``/App/Controller/AppController.php`` comme ceci::
+``/src/Controller/AppController.php`` comme ceci::
 
     class AppController extends Controller {
     }
@@ -102,7 +102,7 @@ RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
 ``/app/Controller/RecipesController.php`` et contiendrait::
 
-        # /App/Controller/RecipesController.php
+        # /src/Controller/RecipesController.php
         
         class RecipesController extends AppController {
             public function view($id) {
@@ -270,7 +270,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     Le fichier de vue utilisé par défaut est déterminé par convention.
     Ainsi, si l'action ``search()`` de notre controller RecipesController
-    est demandée, le fichier de vue situé dans /App/Template/Recipes/search.ctp
+    est demandée, le fichier de vue situé dans /src/Template/Recipes/search.ctp
     sera utilisé::
 
         class RecipesController extends AppController {
@@ -327,7 +327,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``app/Plugin/Users/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``plugins/Users/Template/UserDetails/custom_file.ctp`` 
 
 Contrôle de Flux
 ----------------

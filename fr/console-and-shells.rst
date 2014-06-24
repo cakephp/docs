@@ -53,7 +53,7 @@ Lancez la Console avec aucun argument entraîne ce message d'aide::
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
     App : App
-    Path: /Users/markstory/Sites/cakephp-app/App/
+    Path: /Users/markstory/Sites/cakephp-app/src/
     ---------------------------------------------------------------
     Current Paths:
 
@@ -115,7 +115,7 @@ Vous devriez voir la sortie suivante::
     Welcome to CakePHP Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/Sites/cake_dev/App/
+    Path: /Users/markstory/Sites/cake_dev/src/
     ---------------------------------------------------------------
     Hello world.
 
@@ -124,7 +124,7 @@ méthode spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments
 donnés au shell. Vous pouvez aussi remarquer que HelloShell étend ``AppShell``.
 Un peu comme :ref:`app-controller`, AppShell vous donne une classe de base pour
 contenir toutes les fonctions ordinaires ou logiques. Vous pouvez définir un
-AppShell en créant ``App/Console/Command/AppShell.php``. Si vous n'en avez pas
+AppShell en créant ``src/Console/Command/AppShell.php``. Si vous n'en avez pas
 un, CakePHP en utilisera une integrée. Comme notre méthode principale n'était
 pas très intéressante, ajoutons une autre commande qui fait quelque chose::
 
@@ -226,9 +226,9 @@ Un shell peut aussi accéder à ses tâches en tant que propriétés, ce qui
 rend les tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
-    // Dans App/Console/Command/SeaShell.php
+    // Dans src/Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-        // dans App/Console/Command/Task/SoundTask.php
+        // dans src/Console/Command/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {

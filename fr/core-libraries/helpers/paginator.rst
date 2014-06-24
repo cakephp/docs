@@ -40,7 +40,7 @@ votre code DRY::
     ];
 
 Cela va charger le fichier qui se trouve dans
-``App/Config/paginator-templates.php`` et lire les templates à partir de la
+``src/Config/paginator-templates.php`` et lire les templates à partir de la
 variable ``$config`` à l'intérieur de ce fichier. Vous pouvez aussi charger
 les templates à partir d'un plugin en utilisant :term:`plugin syntax`::
 
@@ -451,7 +451,7 @@ intégrés dans vos en-têtes de colonne de table:
 
 .. code-block:: php
 
-    // App/View/Posts/index.ctp
+    // src/View/Posts/index.ctp
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>

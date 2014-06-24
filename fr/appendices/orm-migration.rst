@@ -466,7 +466,7 @@ les noms de table qui contiennent des caractères spéciaux ou sont des mots
 résérvés. Si nécessaire, vous pouvez activer identifier quoting lors de la
 configuration d'une connection::
 
-    // dans App/Config/app.php
+    // dans src/Config/app.php
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Driver\Mysql',

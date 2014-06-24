@@ -13,10 +13,10 @@ Configuration
 =============
 
 Par convention, les connections de la base de données sont configurées dans
-``App/Config/app.php``. L'information de la connection définie dans ce fichier
+``src/Config/app.php``. L'information de la connection définie dans ce fichier
 se trouve dans :php:class:`Cake\\Database\\ConnectionManager` en créant la
 configuration de la connection de votre application sera utilisée. L'information
-de la connection d'Exemple peut être trouvé dans ``App/Config/app.default.php``.
+de la connection d'Exemple peut être trouvé dans ``src/Config/app.default.php``.
 Une configuration de connection d'exemple ressemblera à ceci::
 
     'Datasources' => [

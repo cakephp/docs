@@ -29,7 +29,7 @@ liste des tâches disponibles. Vous devriez voir quelque chose comme::
 
     ---------------------------------------------------------------
     App : App
-    Path: /Users/markstory/Sites/cakephp-app/App/
+    Path: /Users/markstory/Sites/cakephp-app/src/
     ---------------------------------------------------------------
     Les commandes suivantes avec lesquelles vous pouvez générer un squelette de
     code pour votre application.
@@ -65,7 +65,7 @@ fournies par CakePHP. En étendant ``Cake\Console\Command\Task\BakeTask``, bake
 va trouver votre nouvelle tâche et l'inclure comme une partie de bake.
 
 Comme exemple, nous allons faire une tâche qui créé des classes shell. D'abord
-créez le fichier de tâche ``App/Console/Command/Task/ShellTask.php``. Nous
+créez le fichier de tâche ``src/Console/Command/Task/ShellTask.php``. Nous
 étendrons le ``SimpleBakeTask`` pour l'instant puisque notre tâche shell sera
 simple. ``SimpleBakeTask`` est abstract et nous impose de définir 4 méthodes
 qui disent à bake la tâche appelée, où devront se trouver les fichiers qu'il
@@ -96,7 +96,7 @@ ressembler à ceci::
 
 Une fois que le fichier a été créé, nous devons créer un template que bake peut
 utiliser pour la génération de code. Créez
-``App/Console/Command/Template/app/classes/shell.ctp``. Dans ce fichier, nous
+``src/Console/Command/Template/app/classes/shell.ctp``. Dans ce fichier, nous
 ajouterons le contenu suivant::
 
     <?php
@@ -129,7 +129,7 @@ Si vous souhaitez modifier la sortie par défaut du HTML produit par la commande
 remplacer certaine ou toute partie des templates que bake utilise. Pour créer
 un nouveau theme de bake, faîtes ce qui suit:
 
-#. Créez un nouveau répertoire dans ``App/Console/Templates/[name]``.
+#. Créez un nouveau répertoire dans ``src/Console/Templates/[name]``.
 #. Copiez tout template que vous souhaitez changer à partir de
    ``vendor/cakephp/cakephp/src/Console/Templates/default``.  vers les
    répertoires correspondants dans votre application/plugin.

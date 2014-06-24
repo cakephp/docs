@@ -18,13 +18,13 @@ FlashComponent fournit deux façons de définir des messages flash : sa méthode
 magique ``__call`` et sa méthode ``set()``. Pour votre application with verbosity,
 la méthode magique ``__call`` de FlashComponent vous permet d'utiliser un nom
 de méthode qui est lié à un element qui se trouve dans le répertoire
-``App/Template/Element/Flash``. Par convention, les méthodes en camel case
+``src/Template/Element/Flash``. Par convention, les méthodes en camel case
 vont être liées à un nom d'element en minuscule et avec des underscores::
 
-    // Utilise App/Template/Element/Flash/success.ctp
+    // Utilise src/Template/Element/Flash/success.ctp
     $this->Flash->success('This was successful');
 
-    // Utilise App/Template/Element/Flash/great_success.ctp
+    // Utilise src/Template/Element/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
 
 De façon alternative, pour définir un message en clair sans rendre un element,
@@ -57,7 +57,7 @@ Un exemple de l'utilisation de ces options::
     // Dans votre View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- Dans App/Template/Element/Flash/success.ctp -->
+    <!-- Dans src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= $key ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     <div>

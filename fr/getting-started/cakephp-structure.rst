@@ -18,9 +18,9 @@ Extensions de l'Application
 
 Controllers, Helpers et Models ont chacun une classe parente, que vous
 pouvez utiliser pour définir des modifications impactant toute l'application.
-AppController (disponible dans ``App/Controller/AppController.php``),
-AppHelper (disponible dans ``App/View/Helper/AppHelper.php``) et
-AppModel (disponible dans ``App/Model/AppModel.php``) sont de bons choix
+AppController (disponible dans ``src/Controller/AppController.php``),
+AppHelper (disponible dans ``src/View/Helper/AppHelper.php``) et
+AppModel (disponible dans ``src/Model/AppModel.php``) sont de bons choix
 pour écrire les méthodes que vous souhaitez partager entre tous vos
 controllers, helpers ou models.
 

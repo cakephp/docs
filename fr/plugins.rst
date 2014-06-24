@@ -72,8 +72,8 @@ composer.json de votre application pour contenir les informations suivantes::
 
     "psr-4": {
         (...)
-        "MyPlugin\\": "/Plugin/MyPlugin/src",
-        "MyPlugin\\Test\\": "/Plugin/MyPlugin/tests"
+        "MyPlugin\\": "/plugins/MyPlugin/src",
+        "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
     }
 
 De plus, vous aurez besoin de dire à composer de refraichir le cache de
@@ -225,14 +225,14 @@ Controllers du Plugin
 =====================
 
 Les controllers pour notre plugin ContactManager seront stockés dans
-``/Plugin/ContactManager/Controller/``. Puisque la principale chose que
+``/plugins/ContactManager/Controller/``. Puisque la principale chose que
 nous souhaitons faire est la gestion des contacts, nous aurons besoin de créer
 un ContactsController pour ce plugin.
 
 Ainsi, nous mettons notre nouveau ContactsController dans
-``/Plugin/ContactManager/Controller`` et il ressemblerait à cela::
+``/plugins/ContactManager/Controller`` et il ressemblerait à cela::
 
-    // /Plugin/ContactManager/Controller/ContactsController.php
+    // /plugins/ContactManager/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
     use ContactManager\Controller\AppController;
@@ -278,11 +278,11 @@ la façon de charger les fichiers de route spécifique à un plugin.
 Models du Plugin
 ================
 
-Les Models pour le plugin sont stockés dans ``/Plugin/ContactManager/src/Model``.
+Les Models pour le plugin sont stockés dans ``/plugins/ContactManager/src/Model``.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons la
 table et l'entity pour ce controller::
 
-    // /Plugin/ContactManager/src/Model/Entity/Contact.php:
+    // /plugins/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -290,7 +290,7 @@ table et l'entity pour ce controller::
     class Contact extends Entity {
     }
 
-    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
+    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -303,7 +303,7 @@ construction des associations, ou la définition de classes d'entity, vous devre
 inclure le nom du plugin avec le nom de la classe, séparé par un point. Par
 exemple::
 
-    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
+    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -317,7 +317,7 @@ exemple::
 Si vous préférez que les clés du tableau pour l'association n'aient pas le
 préfix du plugin, utilisez la syntaxe alternative::
 
-    // /Plugin/ContactManager/src/Model/Table/ContactsTable.php:
+    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -342,17 +342,17 @@ Vues du Plugin
 
 Les Vues se comportent exactement comme elles le font dans les applications
 normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
-/Plugin/[PluginName]/Template/. Pour notre plugin ContactManager, nous aurons
+/plugins/[PluginName]/Template/. Pour notre plugin ContactManager, nous aurons
 besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
 incluons ceci aussi::
 
-    // /Plugin/ContactManager/src/Template/Contacts/index.ctp:
+    // /plugins/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Ce qui suit est une liste triable de vos contacts</p>
     <!-- Une liste triable de contacts irait ici....-->
 
 Les Plugins peuvent fournir leurs propres layouts. Ajoutez des layouts de
-plugin, dans ``/Plugin/[PluginName]/src/Template/Layout``. Pour utiliser le
+plugin, dans ``/plugins/[PluginName]/src/Template/Layout``. Pour utiliser le
 layout d'un plugin dans votre controller, vous pouvez faire ce qui suit::
 
     public $layout = 'ContactManager.admin';
@@ -373,13 +373,13 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de vue du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
-"App/Template/Plugin/[Plugin]/[Controller]/[view].ctp". Pour le controller
+"src/Template/plugins/[Plugin]/[Controller]/[view].ctp". Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
-    /App/Template/Plugin/src/ContactManager/Contacts/index.ctp
+    /src/Template/plugins/src/ContactManager/Contacts/index.ctp
 
 Créer ce fichier vous permettra de redéfinir
-``/Plugin/ContactManager/src/Template/Contacts/index.ctp``.
+``/plugins/ContactManager/src/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
@@ -391,7 +391,7 @@ Les assets web du plugin (mais pas les fichiers de PHP) peuvent être servis
 à travers le répertoire ``webroot`` du plugin, juste comme les assets de
 l'application principale::
 
-    /Plugin/ContactManager/webroot/
+    /plugins/ContactManager/webroot/
                                    css/
                                    js/
                                    img/
@@ -431,7 +431,7 @@ améliorer la performance.
 Si vous n'utilisez pas les helpers, vous pouvez préfixer /plugin_name/ au
 début de l'URL pour servir un asset du plugin . Lier avec
 '/contact_manager/js/some_file.js' servirait l'asset
-``Plugin/ContactManager/webroot/js/some_file.js``.
+``plugins/ContactManager/webroot/js/some_file.js``.
 
 Components, Helpers et Behaviors
 ================================

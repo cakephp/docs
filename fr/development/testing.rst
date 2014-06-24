@@ -47,10 +47,10 @@ Tester la Configuration de la Base de Données
 =============================================
 
 Souvenez-vous qu'il faut avoir un niveau de debug d'au moins 1 dans votre
-fichier ``App/Config/app.php`` avant de lancer des tests. Les tests ne sont
+fichier ``src/Config/app.php`` avant de lancer des tests. Les tests ne sont
 pas accessibles via le navigateur quand le debug est égal à 0. Avant de lancer
 des tests, vous devrez vous assurer d'ajouter une configuration de base de
-données ``test`` dans ``App/Config/app.php``. Cette configuration est utilisée
+données ``test`` dans ``src/Config/app.php``. Cette configuration est utilisée
 par CakePHP pour les tables fixture et les données::
 
     'Datasources' => [
@@ -108,7 +108,7 @@ Comme beaucoup de choses dans CakePHP, les cas de test ont quelques
 conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests devraient être dans votre répertoire
-   ``app/Test/Case/[Type]``.
+   ``tests/Case/[Type]``.
 #. Les noms de fichier de ces fichiers devraient finir avec ``Test.php`` à la
    place de .php.
 #. Les classes contenant les tests devraient étendre ``Cake\TestSuite\TestCase``,
@@ -143,7 +143,7 @@ bar HTML. Notre helper ressemblera à cela::
 C'est un exemple très simple, mais ce sera utile pour montrer comment vous
 pouvez créer un cas de test simple. Après avoir créer et sauvegardé notre
 helper, nous allons créer le fichier de cas de tests dans
-``App/Test/TestCase/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous
+``tests/TestCase/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous
 allons commencer avec ce qui suit::
 
     namespace App\Test\TestCase\View\Helper;
@@ -286,7 +286,7 @@ additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
 
         <!-- Add your plugin suites -->
         <testsuite name="Forum plugin">
-            <directory>./Plugin/Forum/Test/TestCase</directory>
+            <directory>./plugins/Forum/Test/TestCase</directory>
         </testsuite>
     </testsuites>
 
@@ -327,7 +327,7 @@ votre code avant dee développer réellement en live le contenu pour
 une application.
 
 CakePHP utilise la connection nommée ``test`` dans votre fichier de
-configuration ``App/Config/datasources.php`` Si la connection n'est pas
+configuration ``src/Config/datasources.php`` Si la connection n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -360,7 +360,7 @@ comment la table est créée (quels champs font parti de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
 Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
-``App/Test/Fixture`` avec le contenu suivant::
+``tests/Fixture`` avec le contenu suivant::
 
     namespace App\Test\Fixture;
 
@@ -523,7 +523,7 @@ model existant ou d'une table existante.
 Commençons par un exemple. Imaginons que vous ayez un model nommé Article
 disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente
-(``app/Test/Fixture/ArticleFixture.php``) en ce qui suit::
+(``tests/Fixture/ArticleFixture.php``) en ce qui suit::
 
     class ArticleFixture extends TestFixture {
         public $import = ['table' => 'articles']
@@ -624,13 +624,13 @@ la fixture::
     }
 
 Dans l'exemple ci-dessus, les deux fixtures seront chargés à partir de
-``App/Test/Fixture/blog/``.
+``tests/Fixture/blog/``.
 
 Tester les Models
 =================
 
 Disons que nous avons déjà notre table Articles définie dans
-``App/Model/Table/ArticlesTable.php``, qui ressemble à ceci::
+``src/Model/Table/ArticlesTable.php``, qui ressemble à ceci::
 
     namespace App\Model\Table;
 
@@ -654,7 +654,7 @@ le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
 model - dans ce cas le model Article que nous avons déjà défini.
 
 Créons maintenant un fichier nommé ``ArticlesTableTest.php`` dans notre
-répertoire ``App/Test/TestCase/Model/Table``, avec les contenus suivants::
+répertoire ``tests/TestCase/Model/Table``, avec les contenus suivants::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -674,7 +674,7 @@ Créer une méthode de test
 
 Ajoutons maintenant une méthode pour tester la fonction published() dans le
 model Article. Modifions le fichier
-``App/Test/TestCase/Model/Table/ArticlesTableTest.php`` afin qu'il ressemble
+``tests/TestCase/Model/Table/ArticlesTableTest.php`` afin qu'il ressemble
 maintenant à ceci::
 
     namespace App\Test\TestCase\Model\Table;
@@ -772,7 +772,7 @@ correspondant. Le code du controller ressemble à ceci::
     }
 
 Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
-``App/Test/TestCase/Controller`` et mettez ce qui suit à l'intérieur::
+``tests/TestCase/Controller`` et mettez ce qui suit à l'intérieur::
 
     namespace App\Test\TestCase\Controller;
 
@@ -986,7 +986,7 @@ Commençons par un exemple de controller simple qui réponde dans JSON::
     }
 
 Maintenant nous créons le fichier
-``App/Test/TestCase/Controller/MarkersControllerTest.php``
+``tests/TestCase/Controller/MarkersControllerTest.php``
 et nous assurons que notre service web retourne la réponse appropriée::
 
     class MarkersControllerTest extends ControllerTestCase {
@@ -1055,7 +1055,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 Maintenant nous pouvons écrire des tests pour nous assurer que notre paramètre
 de pagination ``limit`` est défini correctement par la méthode ``adjust``
 dans notre component. Nous créons le fichier
-``app/Test/TestCase/Controller/Component/PagematronComponentTest.php``::
+``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
 
     namespace App\Test\TestCase\Controller\Component;
 
@@ -1115,7 +1115,7 @@ Tout d'abord, nous créons un helper d'exemple à tester.
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
 et pour siplifier, il ne va avoir qu'une méthode ``usd()``::
 
-    // App/View/Helper/CurrencyRendererHelper.php
+    // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
 
     use Cake\View\Helper;
@@ -1132,7 +1132,7 @@ avec la chaîne 'USD' en préfixe.
 
 Maintenant nous créons nos tests::
 
-    // App/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
+    // tests/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
     namespace App\Test\TestCase\View\Helper;
 
@@ -1186,16 +1186,16 @@ would be::
 
     <testsuites>
       <testsuite name="Models">
-        <directory>App/Model</directory>
-        <file>App/Service/UserServiceTest.php</file>
-        <exclude>App/Model/Cloud/ImagesTest.php</exclude>
+        <directory>src/Model</directory>
+        <file>src/Service/UserServiceTest.php</file>
+        <exclude>src/Model/Cloud/ImagesTest.php</exclude>
       </testsuite>
     </testsuites>
 
 ``CakeTestSuite`` offers several methods for easily creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
-would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
+would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1206,14 +1206,14 @@ would create ``App/Test/TestCase/AllModelTest.php``. Put the following in it::
     }
 
 Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
-``/app/Test/TestCase/Model/``. Pour ajouter un fichier individuel, utilisez
+``/tests/TestCase/Model/``. Pour ajouter un fichier individuel, utilisez
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
 un répertoire pour tous les tests en utilisant::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
 Ajouterait de façon récursive tous les cas de test dans le répertoire
-``app/Test/TestCase/Model``.
+``tests/TestCase/Model``.
 
 Créer des Tests pour les Plugins
 ================================
@@ -1221,10 +1221,10 @@ Créer des Tests pour les Plugins
 Les Tests pour les plugins sont crées dans leur propre répertoire à
 l'intérieur du dossier des plugins.::
 
-    /app
-        /Plugin
+    /src
+        /plugins
             /Blog
-                /Test
+                /tests
                     /TestCase
                     /Fixture
 
@@ -1243,7 +1243,7 @@ les fixtures de votre plugin avec ``plugin.blog.blog_post``::
 
     class BlogPostTest extends TestCase {
 
-        // Plugin fixtures located in /App/Plugin/Blog/Test/Fixture/
+        // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_post'];
         public $BlogPost;
 
@@ -1314,7 +1314,7 @@ suit:
 
 .. code-block:: bash
 
-    cat > App/Config/app_local.php <<'CONFIG'
+    cat > src/Config/app_local.php <<'CONFIG'
     <?php
     $config = [
         'Datasources' => [
@@ -1330,7 +1330,7 @@ suit:
     ];
     CONFIG
 
-Then uncomment the following line in your ``App/Config/bootstrap.php`` file::
+Then uncomment the following line in your ``src/Config/bootstrap.php`` file::
 
     //Configure::load('app_local.php', 'default');
 

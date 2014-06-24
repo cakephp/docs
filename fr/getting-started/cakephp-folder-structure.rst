@@ -4,8 +4,9 @@ Structure du dossier de CakePHP
 Après avoir téléchargé et extrait CakePHP, voici les fichiers et
 répertoires que vous devriez voir :
 
-- App
-- Plugin
+- src
+- plugins
+- tests
 - tmp
 - vendor
 - webroot
@@ -16,10 +17,15 @@ répertoires que vous devriez voir :
 
 Vous remarquerez quelques dossiers principaux :
 
-- Le dossier *App* sera celui où vous exercerez votre magie : c'est là
+- Le dossier *src* sera celui où vous exercerez votre magie : c'est là
   que vous placerez les fichiers de votre application.
-- Le dossier *Plugin* est l'endroit où sont stockés les :doc:`/plugins` que
+- Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
+- Le dossier *tests* contient tous les cas de test, et les fixtures de test pour
+  votre application. Le répertoire ``tests/Case`` devra refléter votre
+  application et contenir un ou plusieurs cas de test par classe dans votre
+  application. Pour plus d'informations sur les cas de test et les fixtures
+  de test, référez-vous à la documentation :doc:`/development/testing`.
 - Le dossier *vendor* est l'endroit où CakePHP et d'autres dépendances de
   l'application vont être installés. Engagez-vous personnellement à ne
   **pas** modifier les fichiers dans ce dossier. Nous ne pourrons pas vous
@@ -35,7 +41,7 @@ Vous remarquerez quelques dossiers principaux :
   performance de votre application sera sévèrement impactée. En mode debug,
   CakePHP vous avertira si ce n'est pas le cas.
 
-Le dossier App
+Le dossier src
 ==============
 
 Le répertoire *App* de CakePHP est l'endroit où vous réaliserez la majorité
@@ -58,12 +64,6 @@ Locale
     Stocke les fichiers pour l'internationalisation.
 Model
     Pour les Tables, Entity et Behaviors de votre application.
-Test
-    Ce répertoire contient tous les cas de test, et les fixtures de test pour
-    votre application. Le répertoire ``Test/Case`` devra refléter votre
-    application et contenir un ou plusieurs cas de test par classe dans votre
-    application. Pour plus d'informations sur les cas de test et les fixtures
-    de test, référez-vous à la documentation :doc:`/development/testing`.
 View
     Les fichiers de présentation sont placés ici : elements, pages d'erreur,
     helpers, layouts et templates de vues.

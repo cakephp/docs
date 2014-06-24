@@ -87,7 +87,7 @@ les utiliser.
     la feuille de style sera importée.
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
-    le répertoire /App/webroot/css si le chemin ne commence pas par un '/'.::
+    le répertoire /src/webroot/css si le chemin ne commence pas par un '/'.::
 
         echo $this->Html->css('forms');
 
@@ -112,7 +112,7 @@ les utiliser.
 
     Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant la
     :term:`syntaxe de plugin`. Pour inclure
-    ``app/Plugin/DebugKit/webroot/css/toolbar.css``, vous pouvez utiliser ce
+    ``plugins/DebugKit/webroot/css/toolbar.css``, vous pouvez utiliser ce
     qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
@@ -265,7 +265,7 @@ les utiliser.
     :param array $options: Un tableau de :term:`attributs html`.
 
     Créé une balise image formatée. Le chemin fourni devra être relatif à
-    /App/webroot/img/.::
+    /src/webroot/img/.::
 
         echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -304,7 +304,7 @@ les utiliser.
 
     Vous pouvez inclure des fichiers images depuis un plugin chargé en
     utilisant :term:`plugin syntax`. Pour inclure
-    ``app/Plugin/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
+    ``plugins/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
 
         echo $this->Html->image('DebugKit.icon.png');
 
@@ -584,7 +584,7 @@ les utiliser.
     les attributs seront appliqués à toutes les balises script générées.
 
     Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
-    JavaScript spécifiés se trouvent dans le répertoire ``/App/webroot/js``.::
+    JavaScript spécifiés se trouvent dans le répertoire ``/src/webroot/js``.::
 
         echo $this->Html->script('scripts');
 
@@ -634,7 +634,7 @@ les utiliser.
 
     Vous pouvez inclure des fichiers de script depuis un plugin en utilisant
     la :term:`syntaxe de plugin`. Pour inclure
-    ``app/Plugin/DebugKit/webroot/js/toolbar.js`` vous pouvez faire cela::
+    ``plugins/DebugKit/webroot/js/toolbar.js`` vous pouvez faire cela::
 
         echo $this->Html->script('DebugKit.toolbar.js');
 
@@ -974,7 +974,7 @@ Changer l'affichage des balises avec le Helper Html
     de caractères vers le fichier PHP contenant les balises que vous
     souhaitez charger, soit avec un tableau des templates à ajouter/remplacer::
 
-        // Charger les templates à partir de App/Config/my_html.php
+        // Charger les templates à partir de src/Config/my_html.php
         $this->Html->templates('my_html.php');
 
         // Charger les templates spécifiques.

@@ -28,7 +28,7 @@ La configuration est généralement stockée soit dans les fichiers PHP ou INI,
 et chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
 fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
 ajouter des fichiers supplémentaires de configuration et les charger dans
-``App/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
+``src/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
 pour la configuration générale, et les classes d'adaptateur fournissent
 les méthodes ``config()`` pour faciliter la configuration et la rendre plus
 transparente.
@@ -38,7 +38,7 @@ Charger les Fichiers de Configuration Supplémentaires
 
 Si votre application a plusieurs options de configuration, il peut être utile
 de séparer la configuration dans plusieurs fichiers. Après avoir créé chacun
-des fichiers dans votre répertoire ``App/Config/``, vous pouvez les charger
+des fichiers dans votre répertoire ``src/Config/``, vous pouvez les charger
 dans bootstrap.php::
 
     use Cake\Core\Configure;
@@ -207,14 +207,14 @@ Les chemins de View et de Plugin
 Puisque les views et plugins ne sont pas des classes, ils ne peuvent pas avoir
 un autoloader configuré. CakePHP fournit deux variables de configuration pour
 configurer des chemins supplémentaires pour vos ressources. Dans votre
-``App/Config/app.php``, vous pouvez définir les variables::
+``src/Config/app.php``, vous pouvez définir les variables::
 
     $config = [
         // Plus de configuration
         'App' => [
             'paths' => [
                 'views' => [APP . 'View/', APP . 'View2/'],
-                'plugins' => [ROOT . '/Plugin/', '/path/to/other/plugins/']
+                'plugins' => [ROOT . '/plugins/', '/path/to/other/plugins/']
             ]
         ]
     ];

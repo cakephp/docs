@@ -22,17 +22,17 @@ dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::
 
 Les fichiers de vue du theme doivent être dans un plugin avec le même nom. Par
 exemple, le theme ci-dessus se trouvera dans
-``/Plugin/AnotherExample/Template``. Il est important de se rappeler que
+``/plugins/AnotherExample/Template``. Il est important de se rappeler que
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
-cela, la structure de dossier dans le dossier ``/Plugin/Example/Template`` est
-exactement la même que ``/App/Template/``.
+cela, la structure de dossier dans le dossier ``/plugins/Example/Template`` est
+exactement la même que ``/src/Template/``.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
-trouvera dans ``/Plugin/Example/Templte/Posts/edit.ctp``. Les fichiers de layout
-se trouveront dans ``/Plugin/Example/Template/Layout/``.
+trouvera dans ``/plugins/Example/Templte/Posts/edit.ctp``. Les fichiers de layout
+se trouveront dans ``/plugins/Example/Template/Layout/``.
 
 Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va essayer
-de le trouver dans le dossier ``/App/Template/``. De cette façon, vous pouvez
+de le trouver dans le dossier ``/src/Template/``. De cette façon, vous pouvez
 créer les fichiers de vue principaux et simplement les surcharger au cas par
 cas dans votre dossier theme.
 
@@ -58,7 +58,7 @@ webroot principal::
     /purple_cupcake/css/main.css
 
     // et les liens vers
-    Plugin/PurpleCupcake/webroot/css/main.css
+    plugins/PurpleCupcake/webroot/css/main.css
 
 
 .. meta::

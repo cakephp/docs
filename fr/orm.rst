@@ -54,7 +54,7 @@ conventions dans CakePHP nous permettent d'éviter un code bancal et permettent 
 framework d'inserer des classes de base lorsque votre application n'a pas créé
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
-ajouterions ce qui suit dans ``App/Model/Table/ArticlesTable.php``::
+ajouterions ce qui suit dans ``src/Model/Table/ArticlesTable.php``::
 
     namespace App\Model\Repository;
 
@@ -77,7 +77,7 @@ Maintenant que nous avons une classe de table concrète, nous allons
 probablement vouloir utiliser une classe entity concrète. Les classes Entity
 vous laissent définir les méthodes accesseurs et mutateurs, définissant la
 logique personnalisée pour des enegistrements individuels et plus encore. Nous
-commencerons par ajouter ce qui suit à ``App/Model/Entity/Article.php``::
+commencerons par ajouter ce qui suit à ``src/Model/Entity/Article.php``::
 
     namespace App\Model\Entity;
 

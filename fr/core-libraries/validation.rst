@@ -257,7 +257,7 @@ donner un bon exemple de code, cela ne conduit pas à avoir des applications
 facilement maintenable. A la place, vous devriez créer des sous-classes
 de ``Validator`` pour votre logique de validation réutilisable::
 
-    // Dans App/Model/Validation/ContactValidator.php
+    // Dans src/Model/Validation/ContactValidator.php
     namespace App\Model\Validation;
 
     use Cake\Validation\Validator;

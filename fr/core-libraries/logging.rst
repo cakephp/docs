@@ -25,7 +25,7 @@ Configuration des flux d'un log (journal)
 =========================================
 
 La configuration de ``Log`` doit être faite pendant la phase de bootstrap
-de votre application. Le fichier ``App/Config/app.php`` est justement prévu pour
+de votre application. Le fichier ``src/Config/app.php`` est justement prévu pour
 ceci. Vous pouvez définir autant de jounaux que votre application nécessite.
 Les journaux doivent être configurés en utilisant :php:class:`Cake\\Core\\Log`.
 Un exemple serait::
@@ -65,14 +65,14 @@ Les gestionnaires de flux de log peuvent faire partie de votre application,
 ou parti d'un plugin. Si par exemple vous avez un enregistreur de logs de
 base de données appelé ``DatabaseLog``. Comme faisant parti de votre
 application il devrait être placé dans
-``App/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
+``src/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
 il devrait être placé dans
-``App/Plugin/LoggingPack/Log/Engine/DatabaseLog.php``. Une fois
+``plugins/LoggingPack/Log/Engine/DatabaseLog.php``. Une fois
 configuré ``CakeLog`` va tenter de charger la configuration des flux de logs
 en appelant :php:meth:`Cake\\Log\\Log::config()`. La configuration de notre
 ``DatabaseLog`` pourrait ressembler à ceci::
 
-    // pour App/Log
+    // pour src/Log
     Log::config('otherFile', [
         'className' => 'DatabaseLog',
         'model' => 'LogEntry',
@@ -137,7 +137,7 @@ Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 .. note::
 
-    Toujours configurer les loggers dans ``App/Config/app.php``
+    Toujours configurer les loggers dans ``src/Config/app.php``
     Essayer de configurer les loggers ou les loggers de plugin dans
     core.php provoquera des problèmes, les chemins d'applications
     n'étant pas encore configurés.
