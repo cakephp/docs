@@ -621,22 +621,33 @@ name as an index. If named parameters are omitted, they will not be set.
 
 Some summarizing examples for default routes might prove helpful::
 
-    URL to controller action mapping using default routes:
+URL to controller action mapping using default routes:
 
-    URL: /monkeys/jump
-    Mapping: MonkeysController->jump();
+URL: /monkeys/jump
+Mapping: 
 
-    URL: /products
-    Mapping: ProductsController->index();
+    MonkeysController->jump();
 
-    URL: /tasks/view/45
-    Mapping: TasksController->view(45);
+URL: /products
+Mapping: 
 
-    URL: /donations/view/recent/2001
-    Mapping: DonationsController->view('recent', '2001');
+    ProductsController->index();
 
-    URL: /contents/view/chapter:models/section:associations
-    Mapping: ContentsController->view();
+URL: /tasks/view/45
+Mapping: 
+
+    TasksController->view(45);
+
+URL: /donations/view/recent/2001
+Mapping:
+
+    DonationsController->view('recent', '2001');
+
+URL: /contents/view/chapter:models/section:associations
+Mapping: 
+
+    ContentsController->view();
+    
     $this->passedArgs['chapter'] = 'models';
     $this->passedArgs['section'] = 'associations';
     $this->params['named']['chapter'] = 'models';
