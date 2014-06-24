@@ -73,6 +73,13 @@ Scaffold
 Core
 ====
 
+App
+---
+
+- ``App::pluginPath()`` a été dépréciée. ``CakePlugin::path()`` doit être
+  utilisé à la place.
+
+
 CakePlugin
 ----------
 
