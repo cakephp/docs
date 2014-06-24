@@ -95,17 +95,6 @@ You should now have a functioning CakePHP application installed via
 Composer. Be sure to keep the composer.json and composer.lock file with the
 rest of your source code.
 
-For running the console you also need to change the ``APP . 'Console' . DS . 'cake.php'`` file::
-
-    if (function_exists('ini_set')) {
-        $root = dirname(dirname(dirname(__FILE__)));
-        $appDir = basename(dirname(dirname(__FILE__)));
-
-        $composerRoot = $root . DS . $appDir . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib';
-        ini_set('include_path', $composerRoot . PATH_SEPARATOR . ini_get('include_path'));
-    }
-
-
 Sharing CakePHP Libraries with multiple Applications
 ====================================================
 
