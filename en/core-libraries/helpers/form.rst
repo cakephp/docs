@@ -68,7 +68,7 @@ create an add or edit form. If the provided entity is not 'new', the form will
 be created as an edit form.  For example, if we browse to
 http://example.org/articles/edit/5, we could do the following::
 
-    // App/Controller/ArticlesController.php:
+    // src/Controller/ArticlesController.php:
     public function edit($id = null) {
         if (empty($id)) {
             throw new NotFoundException;
@@ -1364,7 +1364,7 @@ option when including the helper in your controller::
         ]
     ];
 
-This would load the tags in ``App/Config/app_form.php``. This file should
+This would load the tags in ``src/Config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
     $config = [

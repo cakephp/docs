@@ -103,7 +103,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
    (http://example.com/~username/cakephp/), or any other URL structure
    that already utilizes mod\_rewrite, you'll need to add RewriteBase
    statements to the .htaccess files CakePHP uses (/.htaccess,
-   /App/.htaccess, /App/webroot/.htaccess).
+   /src/.htaccess, /src/webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example, your webroot .htaccess file would look
@@ -111,7 +111,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteBase /path/to/cake/app
+           RewriteBase /path/to/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [QSA,L]
@@ -126,7 +126,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteBase /path/to/cake/app
+           RewriteBase /path/to/app/
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
@@ -164,7 +164,7 @@ you will need PHP running as a FastCGI instance.
         server_name example.com;
 
         # root directive should be global
-        root   /var/www/example.com/public/App/webroot/;
+        root   /var/www/example.com/public/webroot/;
         index  index.php;
 
         access_log /var/www/example.com/log/access.log;

@@ -84,7 +84,7 @@ JSON response. This is a situation where a view file would be useful::
         }
     }
 
-    // View code - App/Template/Posts/json/index.ctp
+    // View code - src/Template/Posts/json/index.ctp
     foreach ($posts as &$post) {
         unset($post->generated_html);
     }

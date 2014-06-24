@@ -65,7 +65,7 @@ alias components. This feature is useful when you want to
 replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
-    // App/Controller/PostsController.php
+    // src/Controller/PostsController.php
     class PostsController extends AppController {
         public $components = [
             'Auth' => [
@@ -74,7 +74,7 @@ implementation::
         ];
     }
 
-    // App/Controller/Component/MyAuthComponent.php
+    // src/Controller/Component/MyAuthComponent.php
     use Cake\Controller\Component\AuthComponent;
 
     class MyAuthComponent extends AuthComponent {
@@ -151,7 +151,7 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in ``/App/Controller/Component/MathComponent.php``. The basic
+the file in ``/src/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     use Cake\Controller\Component;
@@ -210,7 +210,7 @@ Sometimes one of your components may need to use another component.
 In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
-    // App/Controller/Component/CustomComponent.php
+    // src/Controller/Component/CustomComponent.php
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
@@ -226,7 +226,7 @@ way you include them in controllers - using the ``$components`` var::
        }
     }
 
-    // App/Controller/Component/ExistingComponent.php
+    // src/Controller/Component/ExistingComponent.php
     use Cake\Controller\Component;
 
     class ExistingComponent extends Component {

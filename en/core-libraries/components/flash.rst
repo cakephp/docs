@@ -17,14 +17,14 @@ Setting Flash Messages
 FlashComponent provides two ways to set flash messages: its ``__call`` magic
 method and its ``set()`` method.  To furnish your application with verbosity,
 FlashComponent's ``__call`` magic method allows you use a method name that maps
-to an element located under the ``App/Template/Element/Flash`` directory. By
+to an element located under the ``src/Template/Element/Flash`` directory. By
 convention, camelcased methods will map to the lowercased and underscored
 element name::
 
-    // Uses App/Template/Element/Flash/success.ctp
+    // Uses src/Template/Element/Flash/success.ctp
     $this->Flash->success('This was successful');
 
-    // Uses App/Template/Element/Flash/great_success.ctp
+    // Uses src/Template/Element/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
 
 Alternatively, to set a plain-text message without rendering an element, you can use the
@@ -56,7 +56,7 @@ An example of using these options::
     // In your View
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In App/Template/Element/Flash/success.ctp -->
+    <!-- In src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= $key ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     <div>

@@ -11,8 +11,8 @@ edit, and delete operations later.
 
 CakePHP's model class files are split between ``Table`` and ``Entity`` objects.
 ``Table`` objects provide access to the collection of entities stored in a
-specific table and go in ``/App/Model/Table``. The file we'll be creating will
-be saved to ``/App/Model/Table/ArticlesTable.php``. The completed file should
+specific table and go in ``/src/Model/Table``. The file we'll be creating will
+be saved to ``/src/Model/Table/ArticlesTable.php``. The completed file should
 look like this::
 
     namespace App\Model\Table;
@@ -30,7 +30,7 @@ be used in the ArticlesController, and will be tied to a database table called
 .. note::
 
     CakePHP will dynamically create a model object for you if it
-    cannot find a corresponding file in /App/Model/Table. This also means
+    cannot find a corresponding file in /src/Model/Table. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
     use the defaults instead.
@@ -47,7 +47,7 @@ Next, we'll create a controller for our articles. The controller is
 where all interaction with articles will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to articles done. We'll place this new controller in a file called
-``ArticlesController.php`` inside the ``/App/Controller`` directory. Here's
+``ArticlesController.php`` inside the ``/src/Controller`` directory. Here's
 what the basic controller should look like::
 
     namespace App\Controller;
@@ -111,14 +111,14 @@ Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
 object to the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's view files are stored in ``/App/Template`` inside a folder
+CakePHP's view files are stored in ``/src/Template`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Articles' in this case). To format this article data in a
 nice table, our view code might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp -->
+    <!-- File: /src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <table>
@@ -210,11 +210,11 @@ is not present in the database, the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
-``/App/Template/Articles/view.ctp``
+``/src/Template/Articles/view.ctp``
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/view.ctp -->
+    <!-- File: /src/Template/Articles/view.ctp -->
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
@@ -318,7 +318,7 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/add.ctp -->
+    <!-- File: /src/Template/Articles/add.ctp -->
 
     <h1>Add Article</h1>
     <?php
@@ -352,7 +352,7 @@ field specified.
 The ``$this->Form->end()`` call ends
 the form. Again, refer to :doc:`/views/helpers` for more on helpers.
 
-Now let's go back and update our ``/App/Template/Articles/index.ctp``
+Now let's go back and update our ``/src/Template/Articles/index.ctp``
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
@@ -434,7 +434,7 @@ The edit view might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/edit.ctp -->
+    <!-- File: /src/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
     <?= $this->Form->create($article) ?>
@@ -456,7 +456,7 @@ articles:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: /src/Template/Articles/index.ctp  (edit links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -518,7 +518,7 @@ links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: /App/Template/Articles/index.ctp -->
+    <!-- File: /src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
@@ -582,7 +582,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
-CakePHP's routing is found in ``/App/Config/routes.php``. You'll want
+CakePHP's routing is found in ``/src/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this:
 

@@ -36,7 +36,7 @@ customize multiple templates and keep your code DRY::
         'Paginator' => ['templates' => 'paginator-templates.php']
     ];
 
-This will load the file located at ``App/Config/paginator-templates.php`` and
+This will load the file located at ``src/Config/paginator-templates.php`` and
 read templates from the ``$config`` variable within that file. You can also load
 templates from a plugin using :term:`plugin syntax`::
 
@@ -418,7 +418,7 @@ which can be easily integrated into your table column headers:
 
 .. code-block:: php
 
-    // App/View/Posts/index.ctp
+    // src/Template/Posts/index.ctp
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>

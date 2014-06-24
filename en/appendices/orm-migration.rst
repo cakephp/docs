@@ -445,7 +445,7 @@ you are using column names or table names that contain special characters or are
 reserved words. If required, you can enable identifier quoting when configuring
 a connection::
 
-    // in App/Config/app.php
+    // in src/Config/app.php
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Driver\Mysql',

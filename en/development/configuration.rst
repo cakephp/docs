@@ -26,7 +26,7 @@ rapidly.
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
-``App/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` is used for
+``src/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` is used for
 general configuration, and the adapter based classes provide ``config()``
 methods to make configuration simple and transparent.
 
@@ -35,7 +35,7 @@ Loading Additional Configuration Files
 
 If your application has many configuration options it can be helpful to split
 configuration into multiple files. After creating each of the files in your
-``App/Config/`` directory you can load them during bootstrap.php::
+``src/Config/`` directory you can load them during bootstrap.php::
 
     use Cake\Core\Configure;
     use Cake\Configure\Engine\PhpConfig;
@@ -191,7 +191,7 @@ View and Plugin Paths
 
 Since views and plugins are not classes, they cannot have an autoloader
 configured. CakePHP provides two configure variables to setup additional paths
-for these resources. In your ``App/Config/app.php`` you can set these
+for these resources. In your ``src/Config/app.php`` you can set these
 variables::
 
     $config = [

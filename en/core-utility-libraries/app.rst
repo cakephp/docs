@@ -118,10 +118,10 @@ You can override almost every class in the framework, exceptions are the
 perform such overriding, just add your class to your app/Lib folder mimicking
 the internal structure of the framework.  Some examples to follow
 
-* To override the :php:class:`Dispatcher` class, create ``App/Routing/Dispatcher.php``
-* To override the :php:class:`CakeRoute` class, create ``App/Routing/Route/CakeRoute.php``
+* To override the :php:class:`Dispatcher` class, create ``src/Routing/Dispatcher.php``
+* To override the :php:class:`CakeRoute` class, create ``src/Routing/Route/CakeRoute.php``
 
-When you load the replaced files, the App/files will be loaded instead of
+When you load the replaced files, the src/files will be loaded instead of
 the built-in core classes.
 
 Loading Vendor Files

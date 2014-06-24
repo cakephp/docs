@@ -83,7 +83,7 @@ methods of the HtmlHelper and how to use them.
     If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
     This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /App/webroot/css directory if path doesn't start with a '/'.::
+    resides inside the ``/webroot/css`` directory if path doesn't start with a '/'.::
 
         echo $this->Html->css('forms');
 
@@ -250,7 +250,7 @@ methods of the HtmlHelper and how to use them.
     :param array $options: An array of :term:`html attributes`.
 
     Creates a formatted image tag. The path supplied should be relative
-    to /App/webroot/img/.::
+    to ``/webroot/img/``.::
 
         echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -566,7 +566,7 @@ methods of the HtmlHelper and how to use them.
     attributes will be applied to all of the generated script tags.
 
     This method of JavaScript file inclusion assumes that the
-    JavaScript file specified resides inside the ``/App/webroot/js``
+    JavaScript file specified resides inside the ``/webroot/js``
     directory::
 
         echo $this->Html->script('scripts');
@@ -945,7 +945,7 @@ Changing the Tags Output by HtmlHelper
     file containing the tags you want to load, or an array of templates to
     add/replace::
 
-        // Load templates from App/Config/my_html.php
+        // Load templates from src/Config/my_html.php
         $this->Html->templates('my_html.php');
 
         // Load specific templates.

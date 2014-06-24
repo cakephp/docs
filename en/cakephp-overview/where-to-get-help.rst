@@ -52,7 +52,7 @@ sufficient, check out the code of the test cases provided with
 CakePHP. They can serve as practical examples for function and
 data member usage for a class.::
 
-    lib/Cake/Test/Case
+    tests/TestCase/
 
 The IRC Channel
 ===============

@@ -64,9 +64,9 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /path_to_document_root
-        /App
-        /Plugin
-        /Test
+        /src
+        /plugins
+        /tests
         /tmp
         /vendor
         /webroot
@@ -88,7 +88,7 @@ Directory Permissions on tmp
 You'll also need to set the proper permissions on the ``/tmp`` directory to make
 it writable by your webserver. The best way to do this is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``App/tmp`` directory to that user. The final command you run (in \*nix)
+the ``tmp`` directory to that user. The final command you run (in \*nix)
 might look something like this::
 
     $ chown -R www-data tmp
@@ -150,7 +150,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's configuration file is found in
-``App/Config/app.default.php``. Make a copy of this file in
+``src/Config/app.default.php``. Make a copy of this file in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -196,7 +196,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/App/Config/app.php``. It doesn't
+salt value by editing ``/src/Config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -240,7 +240,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``/App/Config/app.php``,
+use CakePHP's built in pretty URLs. In ``/src/Config/app.php``,
 uncomment the line that looks like::
 
     'App' => [
@@ -251,7 +251,7 @@ uncomment the line that looks like::
 Also remove these .htaccess files::
 
     /.htaccess
-    /App/webroot/.htaccess
+    webroot/.htaccess
 
 
 This will make your URLs look like

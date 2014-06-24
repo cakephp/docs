@@ -643,7 +643,7 @@ Both these issues are solved by converting themes into plugins.
 View Folders Renamed
 --------------------
 
-The folders containing view files now go under `App/Template` instead of `App/View`.
+The folders containing view files now go under `src/Template` instead of `src/View`.
 This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
 
 The following View folders have been renamed to avoid naming collisions with controller names:

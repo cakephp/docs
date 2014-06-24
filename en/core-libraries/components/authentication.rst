@@ -361,7 +361,7 @@ Creating Custom Password Hasher Classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``App/Auth/DumbPasswordHasher.php`` and implement the
+``src/Auth/DumbPasswordHasher.php`` and implement the
 ``hash`` and ``check`` methods::
 
     use \Cake\Auth\AbstractPasswordHasher;
@@ -634,7 +634,7 @@ Creating Custom Authorize Objects
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-``App/Controller/Component/Auth/LdapAuthorize.php`` you could put the
+``src/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
 
     namespace App\Controller\Component\Auth;

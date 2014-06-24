@@ -18,7 +18,7 @@ handles.
 
 Your application's controllers extend the ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The ``AppController``
-class can be defined in ``/App/Controller/AppController.php`` and it should
+class can be defined in ``/src/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods that handle requests. These are called
@@ -38,7 +38,7 @@ As stated in the introduction, the ``AppController`` class is the
 parent class to all of your application's controllers.
 ``AppController`` itself extends the :php:class:`Controller` class included in the
 CakePHP core library. ``AppController`` is defined in
-``/App/Controller/AppController.php`` as follows::
+``/src/Controller/AppController.php`` as follows::
 
     class AppController extends Controller {
     }
@@ -96,9 +96,9 @@ to write.
 By convention, CakePHP renders a view with an inflected version of the action
 name. Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``/App/Controller/RecipesController.php`` and contain::
+in ``/src/Controller/RecipesController.php`` and contain::
 
-        # /App/Controller/RecipesController.php
+        # /src/Controller/RecipesController.php
 
         class RecipesController extends AppController {
             public function view($id) {
@@ -255,7 +255,7 @@ rendered from the controller.
 
     The default view file used by render is determined by convention.
     If the ``search()`` action of the RecipesController is requested,
-    the view file in /App/Template/Recipes/search.ctp will be rendered::
+    the view file in /src/Template/Recipes/search.ctp will be rendered::
 
         class RecipesController extends AppController {
         // ...
@@ -272,7 +272,7 @@ rendered from the controller.
     name in the controller using ``$action``.
 
     If ``$view`` starts with '/', it is assumed to be a view or
-    element file relative to the ``/App/Template`` folder. This allows
+    element file relative to the ``/src/Template`` folder. This allows
     direct rendering of elements, very useful in AJAX calls.
     ::
 
