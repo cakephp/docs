@@ -111,7 +111,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteBase /path/to/cake/app
+           RewriteBase /path/to/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [QSA,L]
@@ -126,7 +126,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteBase /path/to/cake/app
+           RewriteBase /path/to/app/
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
@@ -164,7 +164,7 @@ you will need PHP running as a FastCGI instance.
         server_name example.com;
 
         # root directive should be global
-        root   /var/www/example.com/public/src/webroot/;
+        root   /var/www/example.com/public/webroot/;
         index  index.php;
 
         access_log /var/www/example.com/log/access.log;
