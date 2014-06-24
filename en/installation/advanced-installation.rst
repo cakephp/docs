@@ -101,7 +101,8 @@ For running the console you also need to change the ``APP . 'Console' . DS . 'ca
         $root = dirname(dirname(dirname(__FILE__)));
         $appDir = basename(dirname(dirname(__FILE__)));
 
-        ini_set('include_path', $root . $ds . $appDir . $ds . 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp' . $ds . 'lib' . $ds . ini_get('include_path'));
+        $composerDir = $root . DS . $appDir . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib';
+        ini_set('include_path', $composerDir . PATH_SEPARATOR . ini_get('include_path'));
     }
 
 
