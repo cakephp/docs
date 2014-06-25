@@ -235,7 +235,7 @@ not a particular rule should be applied::
 The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty.
 
-Te same can be done for the ``allowEmpty()`` and ``notEmpty`` validation method.
+The same can be done for the ``allowEmpty()`` and ``notEmpty`` validation method.
 Both take a callable function as last argument, which determines whether or not
 the rule should be applied. For example, a field can be sometimes allowed to be
 empty::
