@@ -106,7 +106,7 @@ keys.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['Users.is_active' => true]``.
 - ``contain`` Extra models to contain and return with identified user's info.
-- ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
+- ``passwordHasher`` Password hasher class. Defaults to ``Default``.
 
 To configure different fields for user in ``$components`` array::
 
@@ -336,23 +336,23 @@ Hashing Passwords
 You are responsible for hashing the passwords before they are persisted to the
 database, the easiest way is to use a setter function in your User entity::
 
-    use \Cake\Auth\SimplePasswordHasher;
+    use \Cake\Auth\DefaultPasswordHasher;
     class User extends Entity {
 
         // ...
 
         protected function _setPassword($password) {
-            return (new SimplePasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password);
         }
 
         // ...
     }
 
-AuthComponent is configured by default to use the ``SimplePasswordHasher``
+AuthComponent is configured by default to use the ``DefaultPasswordHasher``
 when validating user credentials so no additional configuration is required in
 order to authenticate users.
 
-``SimplePasswordHasher`` uses the bcrypt hashing algorithm internally, which
+``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
 is one of the stronger password hashing solution used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.
@@ -410,7 +410,7 @@ can configure the AuthComponent as follows::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Simple', 'Dumb']
+                        'hashers' => ['Default', 'Dumb']
                     ]
                 ]
             ]

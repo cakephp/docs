@@ -199,21 +199,21 @@ and add the following::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Auth\SimplePasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher;
 
     class User extends Entity {
 
         // ...
 
         protected function _setPassword($password) {
-            return (new SimplePasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password);
         }
 
         // ...
     }
 
 Now every time the password property is assigned to the user it will be hashed
-using the ``SimplePasswordHasher`` class.  We're just missing a template view
+using the ``DefaultPasswordHasher`` class.  We're just missing a template view
 file for the login function. Open up your ``src/Template/Users/login.ctp`` file
 and add the following lines:
 
