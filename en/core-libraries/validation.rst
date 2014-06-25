@@ -236,7 +236,7 @@ The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty.
 
 The same can be done for the ``allowEmpty()`` and ``notEmpty`` validation method.
-Both take a callable function as last argument, which determines whether or not
+Both take a callable function as the last argument, which determines whether or not
 the rule should be applied. For example, a field can be sometimes allowed to be
 empty::
 
@@ -244,7 +244,8 @@ empty::
         return !$context['data']['is_taxable'];
     });
 
-Likewise, a field can be required to not be left empty on certain conditions::
+Likewise, a field can be required to be populated when certain conditions are
+met::
 
     $validator->notEmpty('email_frequency', 'This field is required', function($context) {
         return !empty($context['data']['wants_newsletter']);
