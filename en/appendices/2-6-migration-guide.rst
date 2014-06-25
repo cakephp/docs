@@ -42,6 +42,11 @@ CakeRequest
 Utility
 =======
 
+Hash
+----
+
+- ``Hash::get()`` now raises an exception when the path argument is invalid.
+
 Validation
 ----------
 
