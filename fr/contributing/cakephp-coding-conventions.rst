@@ -210,7 +210,7 @@ Nous ne typons que les méthodes publiques car le typage prend du temps::
      *
      * @param Model $Model Le model à utiliser.
      * @param array $array Une valeur de tableau.
-     * @param boolean $boolean Une valeur boléenne.
+     * @param bool $boolean Une valeur boléenne.
      */
     public function foo(Model $Model, array $array, $boolean) {
     }

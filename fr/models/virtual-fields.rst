@@ -22,7 +22,7 @@ serait::
 et avec PostgreSQL::
 
     public $virtualFields = array(
-        'nom' => 'User.prenom || ' ' || User.nom_famille'
+        'nom' => 'User.prenom || \' \' || User.nom_famille'
     );
 
 Par conséquent, avec les opérations find, les résultats de l'User

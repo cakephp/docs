@@ -366,7 +366,7 @@ This is how we retrieve the above associations with Containable::
     ));
 
 Keep in mind that ``contain`` key is only used once in the main
-model, you don't need to use 'contain' again for related models
+model, you don't need to use 'contain' again for related models.
 
 .. note::
 
@@ -377,6 +377,7 @@ model, you don't need to use 'contain' again for related models
     your AppModel.
 
 .. _containablebehavior-options:
+
 
 ContainableBehavior options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -397,6 +398,21 @@ more easily.
    value is ``true``.
 -  **autoFields**: (boolean, optional) auto-add needed fields to
    fetch requested bindings. The default value is ``true``.
+-  **order**: (string, optional) the order of how the contained 
+   elements are sorted.
+   
+From the previous example, this is an example of how to force the posts 
+to be ordered by the date when they were last updated::
+
+    $this->User->find('all', array(
+        'contain' => array(
+            'Profile',
+            'Post' => array(
+                'order' => 'Post.updated DESC'
+            )
+        )
+    ));
+   
 
 You can change ContainableBehavior settings at run time by
 reattaching the behavior as seen in

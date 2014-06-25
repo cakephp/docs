@@ -81,7 +81,7 @@ composerで他のライブラリをインストールしている場合は、
 ``Config/bootstrap.php`` ファイルに次の行を追加します::
 
     // composerのautoloadを読み込み
-    require APP . '/Vendor/autoload.php';
+    require APP . 'Vendor/autoload.php';
 
     // CakePHPのオートローダーをいったん削除し、composerより先に評価されるように先頭に追加する
     // https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b を参照

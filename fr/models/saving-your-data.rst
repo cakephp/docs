@@ -152,7 +152,7 @@ mis à jour. Sinon, un nouvel enregistrement est créé::
 .. tip::
 
     Lors de l'appel à save() dans une boucle, n'oubliez pas d'appeler
-    ``create()``.
+    ``clear()``.
 
 
 Si vous voulez mettre à jour une valeur, plutôt qu'en créer une, assurez-vous
@@ -219,19 +219,20 @@ suivantes:
   counter caches (si il y en a).
 
     
-:php:meth:`Model::updateAll(array $fields, array $conditions)`
+:php:meth:`Model::updateAll(array $fields, mixed $conditions)`
 ==============================================================
 
 Met à jour plusieurs enregistrements en un seul appel. Les enregistrements à
-mettre à jour sont identifiés par le tableau ``$conditions``, et les champs
-devant être mis à jour, ainsi que leurs valeurs, sont identifiés par
-le tableau ``$fields``.
+mettre à jour, ainsi qu'avec leurs valeurs, sont identifiés par le tableau
+``$fields``. Les enregistrements à mettre à jour sont identifiés par le tableau
+``$conditions``. Si l'argument ``$conditions`` n'est pas fourni ou si il n'est
+pas défini à ``true``, tous les enregistrements seront mis à jour.
 
 Par exemple, si je voulais approuver tous les bakers qui sont membres
 depuis plus d'un an, l'appel à update devrait ressembler à quelque chose
 du style:: 
 
-    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approve' => true),
