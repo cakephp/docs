@@ -490,7 +490,7 @@ CookieComponent
 AuthComponent
 -------------
 
-- ``Simple`` is now the default password hasher used by authentication classes.
+- ``Default`` is now the default password hasher used by authentication classes.
   It uses exclusively the bcrypt hashing algorithm. If you want to continue using
   SHA1 hashing used in 2.x use ``'passwordHasher' => 'Weak'`` in your authenticator configuration.
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
@@ -500,7 +500,7 @@ AuthComponent
   info.
 - ``BlowfishAuthenticate`` class has been removed. Just use ``FormAuthenticate``
 - ``BlowfishPasswordHasher`` class has been removed. Use
-  ``SimplePasswordHasher`` instead.
+  ``DefaultPasswordHasher`` instead.
 - The ``loggedIn()`` method has been removed. Use ``user()`` instead.
 - Configuration options are no longer set as public properties.
 - The methods ``allow()`` and ``deny()`` no longer accept "var args". All method names need
