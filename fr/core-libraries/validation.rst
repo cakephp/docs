@@ -224,8 +224,8 @@ un tableau contextuel contenant des données liées au processus de validation:
 - **newRecord**: Selon si l'appel de la validation est pour un nouvel
   enregistrement ou pour un enregistrement existant.
 
-Définir des conditions pour Validator
--------------------------------------
+Validation Conditionnelle
+-------------------------
 
 Lors de la définition des règles de validation, vous pouvez utiliser la clé
 ``on`` pour définir quand une règle de validation doit être appliquée. Si
@@ -238,14 +238,34 @@ En plus, vous pouvez fournir une fonction appelable qui va determiner si oui
 ou non, une règle particulière doit être appliquée::
 
     $validator->add('picture', 'file', [
-            'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-            'on' => function($context) {
-                return !empty($context['data']['show_profile_picture']);
-            }
-        ]);
+        'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+        'on' => function($context) {
+            return !empty($context['data']['show_profile_picture']);
+        }
+    ]);
 
 L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
 valeur pour ``show_profile_picture`` est vide.
+
+On peut faire la même chose pour les méthodes de validation ``allowEmpty()``
+et ``notEmpty``.
+Les deux prennent une fonction appelable en dernier argument, ce qui determine
+si oui ou non la règle doit être appliquée. Par exemple on peut autoriser
+parfois à un champ à être vide::
+
+    $validator->allowEmpty('tax', function($context) {
+        return !$context['data']['is_taxable'];
+    });
+
+De la même façon, on peut vouloir qu'un champ soit peuplé quand certaines
+conditions sont vérifiées::
+
+    $validator->notEmpty('email_frequency', 'This field is required', function($context) {
+        return !empty($context['data']['wants_newsletter']);
+    });
+
+Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
+si l'utilisateur veut recevoir la newsletter.
 
 .. _reusable-validators:
 
