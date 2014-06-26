@@ -206,21 +206,21 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Controller\Component\Auth\SimplePasswordHasher;
+    use Cake\Controller\Component\Auth\DefaultPasswordHasher;
 
     class User extends Entity {
 
         // ...
 
         protected function _setPassword($password) {
-            return (new SimplePasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password);
         }
 
         // ...
     }
 
 Ainsi, maintenant à chaque fois qu'un utilisateur est sauvegardé, le mot de
-passe est hashé en utilisant la classe ``SimplePasswordHasher``. Il nous
+passe est hashé en utilisant la classe ``DefaultPasswordHasher``. Il nous
 manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
 votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
 

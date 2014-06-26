@@ -366,23 +366,23 @@ Vous êtes responsable du hashage des mots de passe avant qu'ils soient stockés
 dans la base de données, la façon la plus simple est d'utiliser une fonction
 setter dans votre entity User::
 
-    use \Cake\Auth\SimplePasswordHasher;
+    use \Cake\Auth\DefaultPasswordHasher;
     class User extends Entity {
 
         // ...
 
         protected function _setPassword($password) {
-            return (new SimplePasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password);
         }
 
         // ...
     }
 
-AuthComponent est configuré par défaut pour utiliser ``SimplePasswordHasher``
+AuthComponent est configuré par défaut pour utiliser ``DefaultPasswordHasher``
 lors de la validation de clé utilisateur, donc aucun configuration
 supplémentaire n'est nécessaire pour authentifier les utilisateurs.
 
-``SimplePasswordHasher`` utilise l'algorythme de hashage bcrypt en interne,
+``DefaultPasswordHasher`` utilise l'algorythme de hashage bcrypt en interne,
 qui est l'une des solutions les plus fortes pour hasher un mot de passe dans
 l'industrie. Bien qu'il soit recommandé que vous utilisiez la classe de hash
 de mot de passe, il se peut que vous gériez une base de données d'utilisateurs
@@ -443,7 +443,7 @@ suit::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Simple', 'Dumb']
+                        'hashers' => ['Dumb']
                     ]
                 ]
             ]

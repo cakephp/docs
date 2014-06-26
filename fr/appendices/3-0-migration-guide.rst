@@ -535,7 +535,7 @@ CookieComponent
 AuthComponent
 -------------
 
-- ``Simple`` est maintenant le hasher de mot de passe par défaut utilisé par
+- ``Default`` est maintenant le hasher de mot de passe par défaut utilisé par
   les classes d'authentification.
   Si vous voulez continuer à utiliser le hashage SHA1 utilisé dans 2.x utilisez
   ``'passwordHasher' => 'Weak'`` dans votre configuration d'authenticator.
@@ -547,7 +547,7 @@ AuthComponent
 - La classe ``BlowfishAuthenticate`` a été retirée. Utilisez juste
   ``FormAuthenticate``.
 - La classe ``BlowfishPasswordHasher`` a été retirée. Utilisez
-  ``SimplePasswordHasher`` à la place.
+  ``DefaultPasswordHasher`` à la place.
 - La méthode ``loggedIn()`` a été retirée. Utilisez ``user()`` à la place.
 - Les options de configuration ne sont plus définie en propriété public.
 - Les méthodes ``allow()`` et ``deny()`` n'acceptent plus "var args". Tous les
