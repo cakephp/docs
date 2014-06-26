@@ -21,6 +21,17 @@ AclBehavior
 
 - ``Model::parentNode()`` now gets the type (Aro, Aco) passed as first argument: ``$model->parentNode($type)``.
 
+Datasource
+==========
+
+Mysql
+-----
+
+- Schema migrations with MySQL now support an ``after`` key when adding
+  a column. This key allows you to specify which column the new one should be
+  added after.
+
+
 Model
 =====
 
