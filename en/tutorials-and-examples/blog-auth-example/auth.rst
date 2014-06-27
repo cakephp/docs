@@ -62,8 +62,8 @@ with CakePHP::
 
     class UsersController extends AppController {
 
-        public function beforeFilter() {
-            parent::beforeFilter();
+        public function beforeFilter(Event $event) {
+            parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
@@ -148,7 +148,7 @@ file and add the following lines::
             ]
         ];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             $this->Auth->allow(['index', 'view']);
         }
         //...
@@ -170,8 +170,8 @@ the users add function and implement the login and logout action::
 
     // src/Controller/UsersController.php
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
         // Allow users to register and logout.
         $this->Auth->allow(['add', 'logout']);
     }
