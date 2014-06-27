@@ -59,7 +59,7 @@ An example of using these options::
     <!-- In src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= $key ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
-    <div>
+    </div>
 
 .. note::
     By default, CakePHP does not escape the HTML in flash messages. If you
