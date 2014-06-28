@@ -322,11 +322,11 @@ Here's our add view:
 
     <h1>Add Article</h1>
     <?php
-    echo $this->Form->create($article);
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->button(__('Save Article'));
-    echo $this->Form->end();
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
     ?>
 
 We use the FormHelper to generate the opening tag for an HTML
@@ -437,11 +437,13 @@ The edit view might look something like this:
     <!-- File: /src/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
-    <?= $this->Form->create($article) ?>
-    <?= $this->Form->input('title') ?>
-    <?= $this->Form->input('body', ['rows' => '3']) ?>
-    <?= $this->Form->button(__('Save Article')) ?>
-    <?= $this->Form->end() ?>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
@@ -464,8 +466,8 @@ articles:
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Action</th>
             <th>Created</th>
+            <th>Action</th>
         </tr>
 
     <!-- Here's where we iterate through our $articles query object, printing out article info -->
@@ -477,10 +479,10 @@ articles:
                 <?= $this->Html->link($article->title, ['action' => 'view', $article->id']) ?>
             </td>
             <td>
-                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $article->created->format(DATE_RFC850) ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -526,8 +528,8 @@ links that allow users to delete articles, however:
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Actions</th>
             <th>Created</th>
+            <th>Actions</th>
         </tr>
 
     <!-- Here's where we loop through our $articles query object, printing out article info -->
@@ -539,15 +541,15 @@ links that allow users to delete articles, however:
                 <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
                 <?= $this->Form->postLink(
                     'Delete',
                     ['action' => 'delete', $article->id],
                     ['confirm' => 'Are you sure?'])
                 ?>
                 <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
-            </td>
-            <td>
-                <?= $article->created->format(DATE_RFC850) ?>
             </td>
         </tr>
         <?php endforeach; ?>
