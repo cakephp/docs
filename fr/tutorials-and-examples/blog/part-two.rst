@@ -327,7 +327,7 @@ le helper "Form" (FormHelper) dans vos vues.
 :php:class:`Cake\\View\\Helper\\FormHelper` est disponible par défaut dans
 toutes les vues avec la variables ``$this->Form``.
 
-Voici le code de notre vue "add" (ajout)
+Voici le code de notre vue "add" (ajout):
 
 .. code-block:: php
 
@@ -335,11 +335,11 @@ Voici le code de notre vue "add" (ajout)
 
     <h1>Add Article</h1>
     <?php
-    echo $this->Form->create($article);
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', ['rows' => '3']);
-    echo $this->Form->button(__('Sauvegarder l Article'));
-    echo $this->Form->end();
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__("Sauvegarder l'article"));
+        echo $this->Form->end();
     ?>
 
 Nous utilisons le :php:class:`FormHelper` pour générer la balise
@@ -456,11 +456,13 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
     <!-- File: /src/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
-    <?= $this->Form->create($article) ?>
-    <?= $this->Form->input('title') ?>
-    <?= $this->Form->input('body', ['rows' => '3']) ?>
-    <?= $this->Form->button(__('Sauvegarder l Article')) ?>
-    <?= $this->Form->end() ?>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
 
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
@@ -483,8 +485,8 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Action</th>
             <th>Created</th>
+            <th>Action</th>
         </tr>
 
     <!-- Here's where we iterate through our $articles query object, printing out article info -->
@@ -496,10 +498,10 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
                 <?= $this->Html->link($article->title, ['action' => 'view', $article->id']) ?>
             </td>
             <td>
-                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $article->created->format(DATE_RFC850) ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -548,8 +550,8 @@ articles, ainsi :
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Actions</th>
             <th>Created</th>
+            <th>Actions</th>
         </tr>
 
     <!-- Here's where we loop through our $articles query object, printing out article info -->
@@ -561,15 +563,15 @@ articles, ainsi :
                 <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
                 <?= $this->Form->postLink(
                     'Delete',
                     ['action' => 'delete', $article->id],
                     ['confirm' => 'Etes vous sur?'])
                 ?>
                 <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
-            </td>
-            <td>
-                <?= $article->created->format(DATE_RFC850) ?>
             </td>
         </tr>
         <?php endforeach; ?>
