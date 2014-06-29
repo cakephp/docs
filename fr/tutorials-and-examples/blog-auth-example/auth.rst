@@ -65,8 +65,8 @@ de génération de code fournis par CakePHP::
 
     class UsersController extends AppController {
 
-        public function beforeFilter() {
-            parent::beforeFilter();
+        public function beforeFilter(Event $event) {
+            parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
@@ -152,7 +152,7 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
             ]
         ];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             $this->Auth->allow(['index', 'view']);
         }
         //...
@@ -177,8 +177,8 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
 
     // src/Controller/UsersController.php
 
-    public function beforeFilter() {
-        parent::beforeFilter();
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
         // Permet aux utilisateurs de s'enregistrer et de se déconnecter.
         $this->Auth->allow(['add', 'logout']);
     }
