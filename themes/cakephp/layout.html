@@ -158,6 +158,11 @@ window.lang = "{{ language }}";
 	<div class="document columns nine push-three">
 		<div class="body">
 			{%- if pagename != 'search' -%}
+				<div class="row promo">
+					<div class="twelve columns" style="padding-bottom: 12px; text-align: center;">
+						<a href="http://cakefest.org" target="_blank"><img src="http://cakephp.org/img/banners/cakefest_2014_promo_banner.png" alt="CakeFest 2014" title="CakeFest 2014" style="width: 100%; max-width: 800px;"></a>
+					</div>
+				</div>
 				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
 			{%- endif -%}
 			{% block body %} {% endblock %}
