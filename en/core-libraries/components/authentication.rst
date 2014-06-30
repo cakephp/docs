@@ -878,7 +878,7 @@ unauthorizedRedirect
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
 
-.. php:staticmethod:: user($key = null)
+.. php:method:: user($key = null)
 
     :param string $key:  The user data key you want to fetch. If null,
         all user data will be returned. Can also be called as an instance
