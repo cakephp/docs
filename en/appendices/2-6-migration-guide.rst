@@ -48,6 +48,7 @@ CakeRequest
 
 - ``CakeRequest::param()`` can now read values using :ref:`hash-path-syntax`
   like ``data()``.
+- ``CakeRequest:setInput()``
 
 
 Utility
