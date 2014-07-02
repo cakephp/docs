@@ -718,10 +718,10 @@ arguments as values without string keys in the array::
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
 
-Reverse Routing
+Generating URLs
 ===============
 
-Reverse routing is a feature in CakePHP that is used to allow you to
+Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your URL structure without having to modify all your code.
 By using :term:`routing arrays <routing array>` to define your URLs, you can
 later configure routes and the generated URLs will automatically update.
@@ -759,16 +759,6 @@ document fragments using special keys::
 Router will also convert any unknown parameters in a routing array to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
 older versions of CakePHP.
-
-Improving Performance of Routing
---------------------------------
-
-After connecting many routes, or if you're reverse routing a higher than average
-number of URLs, generating URLs can start representing a measurable amount of
-time.  The easiest way to address this issue is to use :ref:`named-routes`.
-Using named routes dramatically changes the internal performance of finding
-matching routes. Instead of a linear search through a subset of routes, a
-single route is fetched and used for generating a URL.
 
 .. _redirect-routing:
 
