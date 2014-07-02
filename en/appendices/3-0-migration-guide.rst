@@ -295,6 +295,8 @@ Router
   longer takes variable arguments for specifying extensions. Also you can no
   longer call it with no parameters to parse all extensions (doing so will
   return existing extensions that are set). You need to whitelist the extensions
+* ``Router::parseExtensions()`` **must** be called before routes are connected.
+  It no longer modifies existing routes when called.
   your application supports.
 * ``Router::setExtensions()`` has been removed. Use :php:meth:`Cake\\Routing\\Router::parseExtensions()`
   instead.
