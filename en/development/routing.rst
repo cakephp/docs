@@ -1,6 +1,9 @@
 Routing
 #######
 
+.. php:namespace:: Cake\Routing
+.. php:class:: Router
+
 Routing is a feature that maps URLs to controller actions. It was
 added to CakePHP to make pretty URLs more configurable and
 flexible. Using Apache's mod\_rewrite is not required for using
@@ -83,6 +86,8 @@ added your own routes, you can remove the default routes if you don't need them.
 
 Connecting Routes
 =================
+
+.. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
 Defining your own routes allows you to define how your application will respond
 to a given URL. Routes are defined in the ``src/Config/routes.php`` file.
@@ -370,6 +375,8 @@ need to supply those as part of the options to ``Router::url()``.
 Prefix Routing
 --------------
 
+.. php:staticmethod:: prefix($name, $callback)
+
 Many applications require an administration section where
 privileged users can make changes. This is often done through a
 special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
@@ -447,6 +454,8 @@ build this link using the HTML helper::
 Plugin routing
 --------------
 
+.. php:staticmethod:: plugin($name, $options = [], $callback)
+
 Plugin routes are most easily created using the ``plugin()`` method. This method
 creates a new routing scope for the plugin's routes::
 
@@ -500,6 +509,8 @@ create a link that is not part of a plugin.
 
 File Extensions
 ---------------
+
+.. php:staticmethod:: parseExtensions($extensions, $merge = true)
 
 To handle different file extensions with your routes, you need one
 extra line in your routes config file::
@@ -575,6 +586,8 @@ you can create custom REST routing, or other request data dependent information.
 Creating RESTful Routes
 =======================
 
+.. php:staticmethod:: mapResources($controller, $options)
+
 Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
@@ -618,6 +631,30 @@ The \_method POST variable is helpful in using a browser as a
 REST client (or anything else that can do POST easily). Just set
 the value of \_method to the name of the HTTP request method you
 wish to emulate.
+
+Creating Nested Resources
+-------------------------
+
+Once you have connected resources in a scope, you can connect routes for
+sub-resources as well. Sub-resource routes will be prepended by the original
+resource name and a id parameter. For example::
+
+    Router::scope('/api', function($routes) {
+        $routes->resources('Articles', function($routes) {
+            $routes->resources('Comments');
+        });
+    });
+
+Will generate resource routes for both ``articles`` and ``comments``. The
+comments routes will look like::
+
+    /api/articles/:article_id/comments
+    /api/articles/:article_id/comments/:id
+
+.. note::
+
+    While you can nest resources as deeply as you require, it is not recommended to
+    nest more than 2 resources together.
 
 Modifying the default REST Routes
 ---------------------------------
@@ -718,6 +755,8 @@ Since ``5`` has a numeric key, it is treated as a passed argument.
 Generating URLs
 ===============
 
+.. php:staticmethod:: url($url = null, $options = [])
+
 Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your URL structure without having to modify all your code.
 By using :term:`routing arrays <routing array>` to define your URLs, you can
@@ -775,6 +814,8 @@ You can also use any of the special route elements when generating URLs:
 Redirect Routing
 ================
 
+.. php:staticmethod:: redirect($route, $url, $options = [])
+
 Redirect routing allows you to issue HTTP status 30x redirects for
 incoming routes, and point them at different URLs. This is useful
 when you want to inform client applications that a resource has moved
@@ -812,13 +853,11 @@ Custom route classes allow you to extend and change how individual
 routes parse requests and handle reverse routing. A route class
 should extend :php:class:`Cake\\Routing\\Route` and implement one or both of
 ``match()`` and/or ``parse()``. ``parse()`` is used to parse requests and
-``match()`` is used to handle reverse routing.
+``match()`` is used to handle reverse routing. Route classes are expected to be
+found in the ``Routing\\Route`` namespace of your application or plugin.
 
 You can use a custom route class when making a route by using the
-``routeClass`` option, and loading the file containing your route
-before trying to use it::
-
-    App::uses('SlugRoute', 'Routing/Route');
+``routeClass`` option::
 
     Router::connect(
          '/:slug',
@@ -851,110 +890,6 @@ named parameter, will be removed from the list of passed arguments.
 
 Router API
 ==========
-
-.. php:namespace:: Cake\Routing
-
-.. php:class:: Router
-
-    Router manages generation of outgoing URLs, and parsing of incoming
-    request uri's into parameter sets that CakePHP can dispatch.
-
-.. php:staticmethod:: connect($route, $defaults = [], $options = [])
-
-    :param string $route: A string describing the template of the route
-    :param array $defaults: An array describing the default route parameters.
-        These parameters will be used by default
-        and can supply routing parameters that are not dynamic.
-    :param array $options: An array matching the named elements in the route
-        to regular expressions which that element should match. Also contains
-        additional parameters such as which routed parameters should be
-        shifted into the passed arguments, supplying patterns for routing
-        parameters and supplying the name of a custom routing class.
-
-    Routes are a way of connecting request URLs to objects in your application.
-    At their core routes are a set or regular expressions that are used to
-    match requests to destinations.
-
-    Examples::
-
-        Router::connect('/:controller/:action/*');
-
-    The first parameter will be used as a controller name while the second is
-    used as the action name. The '/\*' syntax makes this route greedy in that
-    it will match requests like `/articles/index` as well as requests like
-    ``/articles/edit/1/foo/bar`` .::
-
-        Router::connect('/home-page', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
-    The above shows the use of route parameter defaults. And providing routing
-    parameters for a static route.::
-
-        Router::connect(
-            '/:lang/:controller/:action/:id',
-            [],
-            ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
-        );
-
-    Shows connecting a route with custom route parameters as well as providing
-    patterns for those parameters. Patterns for routing parameters do not need
-    capturing groups, as one will be added for each route params.
-
-    $options offers three 'special' keys. ``pass``, ``persist`` and ``routeClass``
-    have special meaning in the $options array.
-
-    * ``pass`` is used to define which of the routed parameters should be
-      shifted into the pass array. Adding a parameter to pass will remove
-      it from the regular route array. Ex. ``'pass' => ['slug']``
-
-    * ``routeClass`` is used to extend and change how individual routes parse
-      requests and handle reverse routing, via a custom routing class.
-      Ex. ``'routeClass' => 'SlugRoute'``
-
-
-.. php:staticmethod:: redirect($route, $url, $options = [])
-
-    :param string $route: A route template that dictates which URLs should
-        be redirected.
-    :param mixed $url: Either a :term:`routing array` or a string URL
-        for the destination of the redirect.
-    :param array $options: An array of options for the redirect.
-
-    Connects a new redirection Route in the router.
-    See :ref:`redirect-routing` for more information.
-
-.. php:staticmethod:: url($url = null, $full = false)
-
-    :param mixed $url: Cake-relative URL, like "/products/edit/92" or
-        "/presidents/elect/4" or a :term:`routing array`
-    :param bool|array $options: If (bool) true, the full base URL will be prepended to the result.
-        If an array accepts the following keys.  If used with a named route you can provide
-        a list of query string parameters.
-
-    Generate a URL for the specified action. Returns a URL pointing
-    to a combination of controller and action. $url can be:
-
-    There are a few 'special' parameters that can change the final URL string that is generated
-
-    * ``_base`` - Set to false to remove the base path from the generated URL. If your application
-      is not in the root directory, this can be used to generate URLs that are 'cake relative'.
-      cake relative URLs are required when using requestAction.
-    * ``_scheme`` - Set to create links on different schemes like ``webcal`` or ``ftp``. Defaults
-      to the current scheme.
-    * ``_host`` - Set the host to use for the link.  Defaults to the current host.
-    * ``_port`` - Set the port if you need to create links on non-standard ports.
-    * ``_full`` - If true the value of :php:meth:`Router::baseUrl` will be prepended to generated URLs.
-    * ``#`` - Allows you to set URL hash fragments.
-    * ``_ssl`` - Set to true to convert the generated URL to https, or false to force http.
-
-.. php:staticmethod:: mapResources($controller, $options = [])
-
-    Creates REST resource routes for the given controller(s). See
-    the :doc:`/development/rest` section for more information.
-
-.. php:staticmethod:: parseExtensions(string|array $extensions, $merge = true)
-
-    Used in routes.php to set or add which :ref:`file-extensions` your application
-    supports.
 
 .. php:staticmethod:: fullBaseUrl($url = null)
 
