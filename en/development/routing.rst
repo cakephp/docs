@@ -669,14 +669,12 @@ to your controller methods.::
 
     http://localhost/calendars/view/recent/mark
 
-In the above example, both ``recent`` and ``mark`` are passed
-arguments to ``CalendarsController::view()``. Passed arguments are
-given to your controllers in three ways. First as arguments to the
-action method called, and secondly they are available in
-``$this->request->params['pass']`` as a numerically indexed array. Lastly
-there is ``$this->passedArgs`` available in the same way as the
-second one. When using custom routes you can force particular
-parameters to go into the passed arguments as well.
+In the above example, both ``recent`` and ``mark`` are passed arguments to
+``CalendarsController::view()``. Passed arguments are given to your controllers
+in three ways. First as arguments to the action method called, and secondly they
+are available in ``$this->request->params['pass']`` as a numerically indexed
+array. When using custom routes you can force particular parameters to go into
+the passed arguments as well.
 
 If you were to visit the previously mentioned URL, and you
 had a controller action that looked like::
@@ -701,7 +699,6 @@ The values in the pass array are numerically indexed based on the
 order they appear in the called URL::
 
     debug($this->request->params['pass']);
-    debug($this->passedArgs);
 
 Either of the above would output::
 
@@ -759,6 +756,19 @@ document fragments using special keys::
 Router will also convert any unknown parameters in a routing array to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
 older versions of CakePHP.
+
+You can also use any of the special route elements when generating URLs:
+
+* ``_ext`` Used for :ref:`file-extensions` routing.
+* ``_base`` Set to false to remove the base path from the generated URL. If your application
+  is not in the root directory, this can be used to generate URLs that are 'cake relative'.
+  cake relative URLs are required when using requestAction.
+* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
+  to the current scheme.
+* ``_host`` Set the host to use for the link.  Defaults to the current host.
+* ``_port`` Set the port if you need to create links on non-standard ports.
+* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
 
 .. _redirect-routing:
 
