@@ -849,15 +849,22 @@ HTTP status of 302.
 Custom Route Classes
 ====================
 
-Custom route classes allow you to extend and change how individual
-routes parse requests and handle reverse routing. A route class
-should extend :php:class:`Cake\\Routing\\Route` and implement one or both of
-``match()`` and/or ``parse()``. ``parse()`` is used to parse requests and
-``match()`` is used to handle reverse routing. Route classes are expected to be
-found in the ``Routing\\Route`` namespace of your application or plugin.
+Custom route classes allow you to extend and change how individual routes parse
+requests and handle reverse routing. Route classes have a few conventions:
 
-You can use a custom route class when making a route by using the
-``routeClass`` option::
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin. 
+* Route classes should extend :php:class:`Cake\\Routing\\Route`.
+* Route classes should implement one or both of ``match()`` and/or ``parse()``.
+
+The ``parse()`` method is used to parse an incoming URL. It should generate an
+array of request parameters that can be resolved into a controller & action.
+Return ``false`` from this method to indicate a match failure.
+
+The ``match()`` method is used to match an array of URL parameters and create a string URL.
+If the URL parameters do not match the route ``false`` should be returned.
+
+You can use a custom route class when making a route by using the ``routeClass``
+option::
 
     Router::connect(
          '/:slug',
@@ -866,7 +873,8 @@ You can use a custom route class when making a route by using the
     );
 
 This route would create an instance of ``SlugRoute`` and allow you
-to implement custom parameter handling.
+to implement custom parameter handling. You can use plugin route classes using
+standard :term:`plugin syntax`.
 
 Handling Named Parameters in URLs
 =================================
@@ -888,50 +896,9 @@ This will populate ``$this->request->params['named']`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 
-Router API
-==========
 
-.. php:staticmethod:: fullBaseUrl($url = null)
-
-    Get or set the baseURL used for generating URL's. When setting this value
-    you should be sure to include the fully qualified domain name including
-    protocol.
-
-    Setting values with this method will also update ``App.fullBaseUrl`` in
-    :php:class:`Cake\\Core\\Configure`.
-
-.. php:class:: Route
-
-    The base class for custom routes to be based on.
-
-.. php:method:: parse($url)
-
-    :param string $url: The string URL to parse.
-
-    Parses an incoming URL, and generates an array of request parameters
-    that Dispatcher can act upon. Extending this method allows you to customize
-    how incoming URLs are converted into an array. Return ``false`` from
-    URL to indicate a match failure.
-
-.. php:method:: match($url, $context = [])
-
-    :param array $url: The routing array to convert into a string URL.
-    :param array $context: An array of the current request context.
-        Contains information such as the current host, scheme, port, and base
-        directory.
-
-    Attempt to match a URL array. If the URL matches the route parameters
-    and settings, then return a generated string URL. If the URL doesn't
-    match the route parameters, false will be returned. This method handles
-    the reverse routing or conversion of URL arrays into string URLs.
-
-    .. versionchanged:: 3.0
-        The ``$context`` parameter was added to support new routing features.
-
-.. php:method:: compile()
-
-    Force a route to compile its regular expression.
-
+RequestActionTrait
+==================
 
 .. php:trait:: RequestActionTrait
 
