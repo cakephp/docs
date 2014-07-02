@@ -570,6 +570,93 @@ option to create a custom RESTful route::
 The above route will only match for ``PUT`` requests. Using these conditions,
 you can create custom REST routing, or other request data dependent information.
 
+.. _resource-routes:
+
+Creating RESTful Routes
+=======================
+
+Router makes it easy to generate RESTful routes for your controllers.
+If we wanted to allow REST access to a recipe database, we'd do
+something like this::
+
+    //In app/Config/routes.php...
+
+    Router:scope('/', function($routes) {
+        $routes->extensions('json');
+        $routes->resources('recipes');
+    });
+
+The first line sets up a number of default routes for easy REST
+access where method specifies the desired result format (e.g. xml,
+json, rss). These routes are HTTP Request Method sensitive.
+
+=========== ===================== ==============================
+HTTP format URL.format            Controller action invoked
+=========== ===================== ==============================
+GET         /recipes.format       RecipesController::index()
+----------- --------------------- ------------------------------
+GET         /recipes/123.format   RecipesController::view(123)
+----------- --------------------- ------------------------------
+POST        /recipes.format       RecipesController::add()
+----------- --------------------- ------------------------------
+PUT         /recipes/123.format   RecipesController::edit(123)
+----------- --------------------- ------------------------------
+DELETE      /recipes/123.format   RecipesController::delete(123)
+----------- --------------------- ------------------------------
+POST        /recipes/123.format   RecipesController::edit(123)
+=========== ===================== ==============================
+
+CakePHP's Router class uses a number of different indicators to
+detect the HTTP method being used. Here they are in order of
+preference:
+
+#. The \_method POST variable
+#. The X\_HTTP\_METHOD\_OVERRIDE
+#. The REQUEST\_METHOD header
+
+The \_method POST variable is helpful in using a browser as a
+REST client (or anything else that can do POST easily). Just set
+the value of \_method to the name of the HTTP request method you
+wish to emulate.
+
+Modifying the default REST Routes
+---------------------------------
+
+.. TODO:: This doesn't actually work right now. I need to fix the code.
+
+If the default REST routes don't work for your application, you can modify them
+using :php:meth:`Router::resourceMap()`. This method allows you to set the
+default routes that get set with :php:meth:`Router::mapResources()`. When using
+this method you need to set *all* the defaults you want to use::
+
+    Router::resourceMap(array(
+        array('action' => 'index', 'method' => 'GET', 'id' => false),
+        array('action' => 'view', 'method' => 'GET', 'id' => true),
+        array('action' => 'add', 'method' => 'POST', 'id' => false),
+        array('action' => 'edit', 'method' => 'PUT', 'id' => true),
+        array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
+        array('action' => 'update', 'method' => 'POST', 'id' => true)
+    ));
+
+By overwriting the default resource map, future calls to ``mapResources()`` will
+use the new values.
+
+.. _custom-rest-routing:
+
+Custom REST Routing
+-------------------
+
+You can provide ``connectOptions`` key in the ``$options`` array for
+``resources()`` to provide custom setting used by ``connect()``::
+
+    Router::scope('/', function($routes) {
+        $routes->resources('books', array(
+            'connectOptions' => array(
+                'routeClass' => 'ApiRoute',
+            )
+        );
+    });
+
 .. index:: passed arguments
 .. _passed-arguments:
 
