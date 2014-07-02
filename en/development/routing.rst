@@ -298,7 +298,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_port`` Set the port if you need to create links on non-standard ports.
 * ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
-* ``ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
 
 Passing Parameters to Action
 ----------------------------
@@ -401,12 +401,34 @@ following route::
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
+You can define prefixes inside plugin scopes as well::
+
+    Router::plugin('DebugKit', function($routes) {
+        $routes->prefix('admin', function($routes) {
+            $routes->connect('/:controller');
+        });
+    });
+
+The above would create a route template like ``/debug_kit/admin/:controller``.
+The connected route would have the ``plugin`` and ``prefix`` route elements set.
+
+When defining prefixes, you can nest multiple prefixes if necessary::
+
+    Router::prefix('manager', function($routes) {
+        $routes->prefix('admin', function($routes) {
+            $routes->connect('/:controller');
+        });
+    });
+
+The above would create a route template like ``/manager/admin/:controller``.
+The connected route would have the ``prefix`` route element set to
+``manager/admin``.
+
 The current prefix will be available from the controller methods through
 ``$this->request->params['prefix']``
 
-When using prefix routes it's important to remember, using the HTML helper to
-build your links will help maintain the prefix calls.  Here's how to build this
-link using the HTML helper::
+When using prefix routes it's important to set the prefix option. Here's how to
+build this link using the HTML helper::
 
     // Go into a prefixed route.
     echo $this->Html->link(
@@ -425,17 +447,50 @@ link using the HTML helper::
 Plugin routing
 --------------
 
-.. TODO:: Update to use scopes
+Plugin routes are most easily created using the ``plugin()`` method. This method
+creates a new routing scope for the plugin's routes::
 
-Plugin routing uses the **plugin** key. You can create links that
-point to a plugin, but adding the plugin key to your URL array::
+    Router::plugin('DebugKit', function($routes) {
+        // Routes connected here are prefixed with '/debug_kit' and
+        // have the plugin route element set to 'DebugKit'
+        $routes->connect('/:controller');
+    });
 
-    echo $this->Html->link('New todo', ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']);
+When creating plugin scopes, you can customize the path element used with the
+``path`` option::
 
-Conversely if the active request is a plugin request and you want
-to create a link that has no plugin you can do the following::
+    Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
+        // Routes connected here are prefixed with '/debugger' and
+        // have the plugin route element set to 'DebugKit'
+        $routes->connect('/:controller');
+    });
 
-    echo $this->Html->link('New todo', ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']);
+When using scopes you can nest plugin scopes within prefix scopes::
+
+    Router::prefix('admin', function($routes) {
+        $routes->plugin('DebugKit', function($routes) {
+            $routes->connect('/:controller');
+        });
+    });
+
+The above would create a route that looks like ``/admin/debug_kit/:controller``.
+It would have the ``prefix``, and ``plugin`` route elements set.
+
+You can create links that point to a plugin, by adding the plugin key to your
+URL array::
+
+    echo $this->Html->link(
+        'New todo',
+        ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
+    );
+
+Conversely if the active request is a plugin request and you want to create
+a link that has no plugin you can do the following::
+
+    echo $this->Html->link(
+        'New todo',
+        ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
+    );
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
@@ -446,26 +501,37 @@ create a link that is not part of a plugin.
 File Extensions
 ---------------
 
-.. TODO:: Update to document scoped properties of extensions
-
 To handle different file extensions with your routes, you need one
 extra line in your routes config file::
 
     Router::parseExtensions(['html', 'rss']);
 
-This will tell the router to remove any matching file extensions,
-and then parse what remains.
+This will enable the named extensions for all routes connected **after** this
+method call. Any routes connected prior to it will not inerit the extensions.
+You can set extensions per scope as well::
 
-If you want to create a URL such as /page/title-of-page.html you
-would create your route as illustrated below::
+    Router::scope('/api', function($routes) {
+        $routes->extensions(['json', 'xml']);
+    });
 
-    Router::connect(
-        '/page/:title',
-        ['controller' => 'Pages', 'action' => 'view'],
-        [
-            'pass' => ['title']
-        ]
-    );
+Setting the extensions should be the first thing you do in a scope, as the
+extensions will only be applied to routes connected **after** the extensions are
+set.
+
+By using extensions, you tell the router to remove any matching file extensions,
+and then parse what remains. If you want to create a URL such as
+/page/title-of-page.html you would create your route using::
+
+    Router::scope('/api', function($routes) {
+        $routes->extensions(['json', 'xml']);
+        $routes->connect(
+            '/page/:title',
+            ['controller' => 'Pages', 'action' => 'view'],
+            [
+                'pass' => ['title']
+            ]
+        );
+    });
 
 Then to create links which map back to the routes simply use::
 
@@ -474,9 +540,8 @@ Then to create links which map back to the routes simply use::
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-File extensions are used by :php:class:`RequestHandlerComponent` to do automatic
-view switching based on content types. See the RequestHandlerComponent for
-more information.
+File extensions are used by :doc:`/core-libraries/components/request-handling`
+to do automatic view switching based on content types.
 
 .. _route-conditions:
 
@@ -484,11 +549,10 @@ Using Additional Conditions When Matching Routes
 ------------------------------------------------
 
 When creating routes you might want to restrict certain URL's based on specific
-request/environment settings. A good example of this is :doc:`rest`
-routing. You can specify additional conditions in the ``$defaults`` argument for
-:php:meth:`Router::connect()`. By default CakePHP exposes 3 environment
-conditions, but you can add more using :ref:`custom-route-classes`. The built-in
-options are:
+request/environment settings. A good example of this is :doc:`rest` routing. You
+can specify additional conditions in the ``$defaults`` argument for
+``connect()``. By default CakePHP exposes 3 environment conditions, but you can
+add more using :ref:`custom-route-classes`. The built-in options are:
 
 - ``[type]`` Only match requests for specific content types.
 - ``[method]`` Only match requests with specific HTTP verbs.
@@ -497,7 +561,7 @@ options are:
 We'll provide a simple example here of how you can use the ``[method]``
 option to create a custom RESTful route::
 
-    Router::connect(
+    $routes->connect(
         "/:controller/:id",
         array("action" => "edit", "[method]" => "PUT"),
         array("id" => "[0-9]+")
@@ -612,13 +676,11 @@ older versions of CakePHP.
 Improving Performance of Routing
 --------------------------------
 
-.. TODO:: Revisit
-
 After connecting many routes, or if you're reverse routing a higher than average
-number of URL's generating URL's can start representing a measurable amout of
+number of URLs, generating URLs can start representing a measurable amount of
 time.  The easiest way to address this issue is to use :ref:`named-routes`.
 Using named routes dramatically changes the internal performance of finding
-matching routes.  Instead of a linear search through a subset of routes, a
+matching routes. Instead of a linear search through a subset of routes, a
 single route is fetched and used for generating a URL.
 
 .. _redirect-routing:
@@ -635,10 +697,12 @@ Redirection routes are different from normal routes as they perform an actual
 header redirection if a match is found. The redirection can occur to
 a destination within your application or an outside location::
 
-    Router::redirect(
+    $routes->redirect(
         '/home/*',
         ['controller' => 'Articles', 'action' => 'view'],
-        ['persist' => true] // or ['persist'=>['id']] for default routing where the view action expects $id as an argument
+        ['persist' => true]
+        // or ['persist'=>['id']] for default routing where the
+        // view action expects $id as an argument
     );
 
 Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to
@@ -647,7 +711,7 @@ you to use other routes to define where a URL string should be
 redirected to. You can redirect to external locations using
 string URLs as the destination::
 
-    Router::redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
 
 This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
@@ -771,15 +835,6 @@ Router API
     Connects a new redirection Route in the router.
     See :ref:`redirect-routing` for more information.
 
-.. php:staticmethod:: promote($which = null)
-
-    :param integer $which: A zero-based array index representing the route to move.
-        For example, if 3 routes have been added, the last route would be 2.
-
-    Promote a route (by default, the last one added) to the beginning of the list.
-    This will move the chosen route to the top of its subsection in the named
-    route table as well.
-
 .. php:staticmethod:: url($url = null, $full = false)
 
     :param mixed $url: Cake-relative URL, like "/products/edit/92" or
@@ -802,7 +857,7 @@ Router API
     * ``_port`` - Set the port if you need to create links on non-standard ports.
     * ``_full`` - If true the value of :php:meth:`Router::baseUrl` will be prepended to generated URLs.
     * ``#`` - Allows you to set URL hash fragments.
-    * ``ssl`` - Set to true to convert the generated URL to https, or false to force http.
+    * ``_ssl`` - Set to true to convert the generated URL to https, or false to force http.
 
 .. php:staticmethod:: mapResources($controller, $options = [])
 
@@ -813,10 +868,6 @@ Router API
 
     Used in routes.php to set or add which :ref:`file-extensions` your application
     supports.
-
-.. php:staticmethod:: defaultRouteClass($classname)
-
-    Set the default route to be used when connecting routes in the future.
 
 .. php:staticmethod:: fullBaseUrl($url = null)
 
