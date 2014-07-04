@@ -5,6 +5,7 @@ After you've downloaded and extracted the CakePHP application, these are the fil
 and folders you should see:
 
 - src
+- tests
 - plugins
 - tmp
 - vendor
