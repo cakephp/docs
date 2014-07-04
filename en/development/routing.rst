@@ -8,8 +8,8 @@ routes, but it will make your address bar look much more tidy.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
 where an array of parameters can be reversed into a string URL.
-By using reverse routing, you can easily re-factor your applications
-url structure without having to update all your code.
+By using reverse routing, you can easily re-factor your application's
+URL structure without having to update all your code.
 
 .. index:: routes.php
 
@@ -186,7 +186,7 @@ parsed using :php:meth:`Router::connectNamed()` if you need to.
 
 .. _route-elements:
 
-Route elements
+Route Elements
 --------------
 
 You can specify your own route elements and doing so gives you the
@@ -283,7 +283,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``prefix`` Used for :ref:`prefix-routing`
 * ``ext`` Used for :ref:`file-extensions` routing.
 
-Passing parameters to action
+Passing Parameters to Action
 ----------------------------
 
 When connecting routes using :ref:`route-elements` you may want
@@ -321,7 +321,7 @@ as defined in the routes::
         'slug' => 'CakePHP_Rocks'
     ));
 
-Per-route named parameters
+Per-Route Named Parameters
 --------------------------
 
 While you can control named parameters on a global scale using
@@ -439,7 +439,7 @@ Here's how to build this link using the HTML helper::
 
 .. index:: plugin routing
 
-Plugin routing
+Plugin Routing
 --------------
 
 Plugin routing uses the **plugin** key. You can create links that
@@ -464,7 +464,7 @@ create a link that is not part of a plugin.
 .. index:: file extensions
 .. _file-extensions:
 
-File extensions
+File Extensions
 ---------------
 
 To handle different file extensions with your routes, you need one
@@ -504,7 +504,7 @@ more information.
 
 .. _route-conditions:
 
-Using additional conditions when matching routes
+Using Additional Conditions When Matching Routes
 ------------------------------------------------
 
 When creating routes you might want to restrict certain URL's based on specific
@@ -533,7 +533,7 @@ you can create custom REST routing, or other request data dependent information.
 .. index:: passed arguments
 .. _passed-arguments:
 
-Passed arguments
+Passed Arguments
 ================
 
 Passed arguments are additional arguments or path segments that are
@@ -600,7 +600,7 @@ Since ``5`` has a numeric key, it is treated as a passed argument.
 
 .. _named-parameters:
 
-Named parameters
+Named Parameters
 ================
 
 You can name parameters and send their values using the URL. A
@@ -743,7 +743,7 @@ which you passed to the router::
 
 .. _controlling-named-parameters:
 
-Controlling named parameters
+Controlling Named Parameters
 ----------------------------
 
 You can control named parameter configuration at the per-route-level
@@ -797,7 +797,7 @@ connectNamed() supports a number of options:
 * ``separator`` Change the string used to separate the key & value in a named
   parameter. Defaults to `:`
 
-Reverse routing
+Reverse Routing
 ===============
 
 Reverse routing is a feature in CakePHP that is used to allow you to
@@ -837,7 +837,7 @@ document fragments using special keys::
 
 .. _redirect-routing:
 
-Redirect routing
+Redirect Routing
 ================
 
 Redirect routing allows you to issue HTTP status 30x redirects for
@@ -870,7 +870,7 @@ HTTP status of 302.
 
 .. _disabling-default-routes:
 
-Disabling the default routes
+Disabling the Default Routes
 ============================
 
 If you have fully customized all your routes, and want to avoid any
@@ -884,7 +884,7 @@ been connected explicitly.
 
 .. _custom-route-classes:
 
-Custom Route classes
+Custom Route Classes
 ====================
 
 Custom route classes allow you to extend and change how individual
