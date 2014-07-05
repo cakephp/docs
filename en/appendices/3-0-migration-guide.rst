@@ -872,6 +872,15 @@ SessionHelper
 - ``SessionHelper::flash()`` is deprecated. You should use
   :doc:`/core-libraries/helpers/flash` instead.
 
+JsHelper
+--------
+
+- ``JsHelper`` and all associated engines have been removed. It could only
+  generate a very small subset of javascript code for selected library and
+  hence trying to generate all javascript code using just the helper often
+  became an impediment. It's now recommended to directly use javascript library
+  of your choice.
+
 I18n
 ====
 
