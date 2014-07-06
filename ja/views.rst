@@ -215,7 +215,7 @@ fetchを使うとブロックが存在するかどうかによってブロック
     <?php
     // ビューファイルの中
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // レイアウトファイルの中
