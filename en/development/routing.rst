@@ -449,6 +449,10 @@ build this link using the HTML helper::
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
     );
 
+.. note::
+
+    You should connect prefix routes *before* you connect fallback routes.
+
 .. index:: plugin routing
 
 Plugin routing
