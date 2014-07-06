@@ -333,8 +333,18 @@ Router
   extensions (en faisant cela, cela va retourner des extensions existantes qui
   sont définies). Vous avez besoin de faire une liste blanche des extensions
   que votre application accepte.
+* ``Router::parseExtensions()`` **doit** être appelée avant que les routes ne
+  soient connectées. Il ne modifie plus les routes existantes lors de son appel.
 * ``Router::setExtensions()`` a été retirée. Utilisez
   :php:meth:`Cake\\Routing\\Router::parseExtensions()` à la place.
+* ``Router::promote()`` a été retirées.
+* ``Router::parse()`` va maintenant lancer une exception quand une URL ne peut
+  pas être gérée par aucune route.
+* ``Router::url()`` va maintenant lancer une exception quand aucune route ne
+  matche un ensemble de paramètres.
+* Les scopes de Routing ont été introduits. Les scopes de Routing vous
+  permettent de garder votre fichier de routes DRY et donne au Router hints
+  sur la façon d'optimiser le parsing et le routing inversé des URLS.
 
 Route
 -----
