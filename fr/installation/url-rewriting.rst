@@ -155,12 +155,10 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 De belles URLs sur nginx
 ========================
 
-nginx est un serveur populaire qui, comme Lighttpd, utilise moins
-de ressources système. Son inconvénient est qu'il ne fait pas usage de
-fichiers .htaccess comme Apache et Lighttpd, il est donc nécessaire de créer
-les URLs réécrites disponibles dans la configuration du site. selon
-votre configuration, vous devrez modifier cela, mais à tout le moins,
-vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
+nginx ne fait pas usage de fichiers .htaccess comme Apache et Lighttpd, il est
+donc nécessaire de créer les URLs réécrites disponibles dans la configuration
+du site. selon votre configuration, vous devrez modifier cela, mais à tout le
+moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
 
 ::
 
@@ -192,28 +190,6 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
             fastcgi_index   index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
-    }
-
-Règles de rewrite URL pour Hiawatha
-===================================
-`Hiawatha <https://www.hiawatha-webserver.org/>`_ est un serveur web qui se
-focalise sur une forte sécurité. Il a aussi pour objectif d'être facile à
-utiliser et d'être léger. Les recherches faîtes par des chercheurs indépendants
-ont montré que Hiawatha offre une performance comparable aux autres serveurs
-web dans des `conditions normales <http://www.saltwaterc.ro/wp-download/documents/PHP_web_serving_study.pdf>`_,
-mais de biens meilleurs performances `lors d'attaques <https://www.hiawatha-webserver.org/weblog/64>`_.
-
-Suivez les `instructions HOWTO <https://www.hiawatha-webserver.org/howto>`_
-sur le site du serveur web Hiawatha pour configurer votre serveur web. La
-règle nécessaire UrlToolkit (pour le rewriting URL) pour utiliser CakePHP
-avec Hiawatha est:
-
-::
-
-    UrlToolkit {
-       ToolkitID = cakephp
-       RequestURI exists Return
-       Match .* Rewrite /index.php
     }
 
 Rewrites d'URL sur IIS7 (serveurs Windows)
@@ -284,13 +260,26 @@ assurez-vous d'activer "mod_rewrite". Ajoutez une ligne:
         "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
     )
 
+Règles de rewrite URL pour Hiawatha
+===================================
+
+La règle nécessaire UrlToolkit (pour le rewriting URL) pour utiliser CakePHP
+avec Hiawatha est:
+
+::
+
+    UrlToolkit {
+       ToolkitID = cakephp
+       RequestURI exists Return
+       Match .* Rewrite /index.php
+    }
+
 Je ne veux / ne peux utiliser l'URL rewriting
 =============================================
 
 Si vous ne voulez ou ne pouvez pas utiliser l'URL rewriting sur votre serveur
 web, référez-vous à la section
 :ref:`core configuration<core-configuration-baseurl>`.
-
 
 
 .. meta::
