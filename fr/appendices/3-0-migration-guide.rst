@@ -966,6 +966,15 @@ SessionHelper
 - ``SessionHelper::flash()`` est déprécié. Vous devez utiliser
   :doc:`/core-libraries/helpers/flash` à la place.
 
+JsHelper
+--------
+
+- ``JsHelper`` et tous les moteurs associés ont été retirés. il pouvait
+  seulement générer un tout petit nombre de code javascript pour la librairie
+  sélectionnée et essayer de générer tout le code javascript en utilisant
+  le helper devenait souvent difficile. Il est maintenant recommandé d'utiliser
+  directement la librairie javascript de votre choix.
+
 I18n
 ====
 
