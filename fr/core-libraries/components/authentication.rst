@@ -934,7 +934,7 @@ unauthorizedRedirect
     :php:attr:`AuthComponent::$loginRedirect` si il n'y a pas de valeur de
     redirection stockée.
 
-.. php:staticmethod:: user($key = null)
+.. php:method:: user($key = null)
 
     :param string $key: La clé des données utilisateur que vous voulez
       récupérer.Si elle est null, tous les utilisateurs seront retournés. Peut
