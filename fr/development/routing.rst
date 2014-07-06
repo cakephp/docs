@@ -42,7 +42,7 @@ aurez pas besoin. Regardez :ref:`disabling-default-routes` sur la façon de
 désactiver le routing par défaut.
 
 
-Routing par défaut
+Routing par Défaut
 ==================
 
 Avant que vous appreniez à configurer vos propres routes, vous devez savoir
@@ -191,7 +191,7 @@ comment et quels arguments nommés sont parsés en utilisant
 
 .. _route-elements:
 
-Les éléments de Route
+Les Eléments de Route
 ---------------------
 
 Vous pouvez spécifier vos propres éléments de route et ce faisant
@@ -295,7 +295,7 @@ spécifiquement la signification.
 * ``prefix`` Utilisé pour :ref:`prefix-routing`.
 * ``ext`` Utilisé pour le routing :ref:`file-extensions`.
 
-Passer des paramètres à l'action
+Passer des Paramètres à l'Action
 --------------------------------
 
 Quand vous connectez les routes en utilisant
@@ -333,7 +333,7 @@ comme définie dans les routes::
         'slug' => 'CakePHP_Rocks'
     ));
 
-Paramètres nommées Per-route
+Paramètres Nommées Per-route
 ----------------------------
 
 Alors que vous pouvez contrôler les paramètres nommés à une grande échelle
@@ -376,7 +376,7 @@ sera traité comme un argument passé au lieu d'un paramètre nommé.
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
 
-Prefix de routage
+Prefix de Routage
 -----------------
 
 De nombreuses applications nécessitent une section d'administration dans
@@ -523,7 +523,7 @@ requêtes de données dépendant d'information.
 .. index:: passed arguments
 .. _passed-arguments:
 
-Arguments passés
+Arguments Passés
 ================
 
 Les arguments passés sont des arguments supplémentaires ou des segments
@@ -593,7 +593,7 @@ Comme ``5`` a une clé numérique, il est traité comme un argument passé.
 
 .. _named-parameters:
 
-Paramètres nommés
+Paramètres Nommés
 =================
 
 Vous pouvez nommer les paramètres et envoyer leurs valeurs en utilisant l'URL.
@@ -743,7 +743,7 @@ vous avez passé au routeur::
 
 .. _controlling-named-parameters:
 
-Contrôler les paramètres nommés
+Contrôler les Paramètres Nommés
 -------------------------------
 
 Vous pouvez contrôler la configuration du paramètre nommé au niveau-par-route
@@ -886,7 +886,7 @@ n'ont pas été connectée explicitement.
 
 .. _custom-route-classes:
 
-Classes de Route personnalisées
+Classes de Route Personnalisées
 ===============================
 
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
