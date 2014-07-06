@@ -309,7 +309,7 @@ Possible keys for belongsTo association arrays include:
    strings such as ``array('User.active' => true)``
 -  **type**: the type of the join to use in the SQL query. The default
    is 'LEFT', which may not fit your needs in all situations. The value
-   'INNER' may be helpful (when used with some conditions) when you want 
+   'INNER' may be helpful (when used with some conditions) when you want
    everything from your main and associated models or nothing at all.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
@@ -346,6 +346,106 @@ Profile model will also fetch a related User record if it exists::
                 [created] => 2007-05-01 10:31:01
             )
     )
+
+counterCache - Cache your count()
+=================================
+
+This feature helps you cache the count of related data. Instead of
+counting the records manually via ``find('count')``, the model
+itself tracks any addition/deletion towards the associated
+``$hasMany`` model and increases/decreases a dedicated integer
+field within the parent model table.
+
+The name of the field consists of the singular model name followed
+by a underscore and the word "count"::
+
+    my_model_count
+
+Let's say you have a model called ``ImageComment`` and a model
+called ``Image``. You would add a new INT-field to the ``images``
+table and name it ``image_comment_count``.
+
+Here are some more examples:
+
+========== ======================= =========================================
+Model      Associated Model        Example
+========== ======================= =========================================
+User       Image                   users.image\_count
+---------- ----------------------- -----------------------------------------
+Image      ImageComment            images.image\_comment\_count
+---------- ----------------------- -----------------------------------------
+BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
+========== ======================= =========================================
+
+Once you have added the counter field, you are good to go. Activate
+counter-cache in your association by adding a ``counterCache`` key
+and set the value to ``true``::
+
+    class ImageComment extends AppModel {
+        public $belongsTo = array(
+            'Image' => array(
+                'counterCache' => true,
+            )
+        );
+    }
+
+From now on, every time you add or remove a ``ImageComment`` associated to
+``Image``, the number within ``image_comment_count`` is adjusted
+automatically.
+
+counterScope
+============
+
+You can also specify ``counterScope``. It allows you to specify a
+simple condition which tells the model when to update (or when not
+to, depending on how you look at it) the counter value.
+
+Using our Image model example, we can specify it like so::
+
+    class ImageComment extends AppModel {
+        public $belongsTo = array(
+            'Image' => array(
+                'counterCache' => 'active_comment_count', //custom field name
+                // only count if "ImageComment" is active = 1
+                'counterScope' => array(
+                  'ImageComment.active' => 1
+                )
+            )
+        );
+    }
+
+.. _multiple-counterCache:
+
+Multiple counterCache
+=====================
+
+Since 2.0, CakePHP has supported having multiple ``counterCache`` in a single model
+relation. It is also possible to define a ``counterScope`` for each ``counterCache``.
+Assuming you have a ``User`` model and a ``Message`` model, and you want to be able
+to count the amount of read and unread messages for each user.
+
+========= ====================== ===========================================
+Model     Field                  Description
+========= ====================== ===========================================
+User      users.messages\_read   Count read ``Message``
+--------- ---------------------- -------------------------------------------
+User      users.messages\_unread Count unread ``Message``
+--------- ---------------------- -------------------------------------------
+Message   messages.is\_read      Determines if a ``Message`` is read or not.
+========= ====================== ===========================================
+
+With this setup, your ``belongsTo`` would look like this::
+
+    class Message extends AppModel {
+        public $belongsTo = array(
+            'User' => array(
+                'counterCache' => array(
+                    'messages_read' => array('Message.is_read' => 1),
+                    'messages_unread' => array('Message.is_read' => 0)
+                )
+            )
+        );
+    }
 
 hasMany
 -------
@@ -469,106 +569,6 @@ Comment data from the User. Adding the Comment belongsTo User
 association in the Comment model enables you to get User data from
 the Comment model, completing the connection and allowing the flow
 of information from either model's perspective.
-
-counterCache - Cache your count()
----------------------------------
-
-This function helps you cache the count of related data. Instead of
-counting the records manually via ``find('count')``, the model
-itself tracks any addition/deletion towards the associated
-``$hasMany`` model and increases/decreases a dedicated integer
-field within the parent model table.
-
-The name of the field consists of the singular model name followed
-by a underscore and the word "count"::
-
-    my_model_count
-
-Let's say you have a model called ``ImageComment`` and a model
-called ``Image``. You would add a new INT-field to the ``images``
-table and name it ``image_comment_count``.
-
-Here are some more examples:
-
-========== ======================= =========================================
-Model      Associated Model        Example
-========== ======================= =========================================
-User       Image                   users.image\_count
----------- ----------------------- -----------------------------------------
-Image      ImageComment            images.image\_comment\_count
----------- ----------------------- -----------------------------------------
-BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
-========== ======================= =========================================
-
-Once you have added the counter field, you are good to go. Activate
-counter-cache in your association by adding a ``counterCache`` key
-and set the value to ``true``::
-
-    class ImageComment extends AppModel {
-        public $belongsTo = array(
-            'Image' => array(
-                'counterCache' => true,
-            )
-        );
-    }
-
-From now on, every time you add or remove a ``ImageComment`` associated to
-``Image``, the number within ``image_comment_count`` is adjusted
-automatically.
-
-counterScope
-============
-
-You can also specify ``counterScope``. It allows you to specify a
-simple condition which tells the model when to update (or when not
-to, depending on how you look at it) the counter value.
-
-Using our Image model example, we can specify it like so::
-
-    class ImageComment extends AppModel {
-        public $belongsTo = array(
-            'Image' => array(
-                'counterCache' => true,
-                // only count if "ImageComment" is active = 1
-                'counterScope' => array(
-                  'ImageComment.active' => 1
-                )
-            )
-        );
-    }
-
-.. _multiple-counterCache:
-
-Multiple counterCache
-=====================
-
-Since 2.0, CakePHP has supported having multiple ``counterCache`` in a single model
-relation. It is also possible to define a ``counterScope`` for each ``counterCache``.
-Assuming you have a ``User`` model and a ``Message`` model, and you want to be able
-to count the amount of read and unread messages for each user.
-
-========= ====================== ===========================================
-Model     Field                  Description
-========= ====================== ===========================================
-User      users.messages\_read   Count read ``Message``
---------- ---------------------- -------------------------------------------
-User      users.messages\_unread Count unread ``Message``
---------- ---------------------- -------------------------------------------
-Message   messages.is\_read      Determines if a ``Message`` is read or not.
-========= ====================== ===========================================
-
-With this setup, your ``belongsTo`` would look like this::
-
-    class Message extends AppModel {
-        public $belongsTo = array(
-            'User' => array(
-                'counterCache' => array(
-                    'messages_read' => array('Message.is_read' => 1),
-                    'messages_unread' => array('Message.is_read' => 0)
-                )
-            )
-        );
-    }
 
 hasAndBelongsToMany (HABTM)
 ---------------------------
@@ -702,7 +702,7 @@ Possible keys for HABTM association arrays include:
 -  **offset**: The number of associated rows to skip over (given
    the current conditions and order) before fetching and associating.
 -  **finderQuery**: A complete SQL query CakePHP can use to fetch associated
-   model records. This should be used in situations that require 
+   model records. This should be used in situations that require
    highly customized results.
 
 Once this association has been defined, find operations on the
@@ -759,7 +759,7 @@ like to fetch Recipe data when using the Ingredient model.
 hasMany through (The Join Model)
 --------------------------------
 
-It is sometimes desirable to store additional data with a many-to-many 
+It is sometimes desirable to store additional data with a many-to-many
 association. Consider the following
 
 `Student hasAndBelongsToMany Course`
