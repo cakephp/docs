@@ -265,7 +265,7 @@ le même nom quand l'option ``inline = false`` est utilisée::
     <?php
     // dans votre fichier de vue
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // dans votre fichier de layout.

@@ -216,7 +216,7 @@ e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opç
     <?php
     // no seu arquivo de view
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // no seu arquivo de layout
