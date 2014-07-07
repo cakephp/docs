@@ -160,9 +160,9 @@ the following keys:
 Identifying Users and Logging Them In
 -------------------------------------
 
-You need to manually call ``$this->Auth->identify()`` to identify a user using
-credentials provided in request and then use ``$this->Auth->setUser()``
-to log a user in i.e. save user info to session.
+You need to manually call ``$this->Auth->identify()`` to identify the user using
+credentials provided in request. Then use ``$this->Auth->setUser()``
+to log the user in i.e. save user info to session.
 
 When authenticating users, attached authentication objects are checked
 in the order they are attached. Once one of the objects can identify
@@ -188,7 +188,7 @@ working with a login form could look like::
 
 The above code will attempt to first identify a user in using the POST data.
 If successful we set the user info to session so that it persists across requests
-and redirect to either the last page they were visiting, or URL specified in
+and redirect to either the last page they were visiting or a URL specified in the
 ``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
 
 .. warning::
@@ -207,7 +207,7 @@ read user info from session. You may also want to set config
 ``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
 a ``ForbiddenException`` instead of default behavior of redirecting to referer.
 Stateless authentication will re-verify the user's credentials on each request,
-this creates a small amount of additional overhead, but allows clients that to
+this creates a small amount of additional overhead, but allows clients to
 login in without using cookies and makes is suitable for APIs.
 
 Creating Custom Authentication Objects
@@ -282,7 +282,7 @@ Handling Unauthenticated Requests
 When an unauthenticated user tries to access a protected page first the
 ``unauthenticated()`` method of the last authenticator in the chain is called.
 The authenticate object can handle sending response or redirection as appropriate
-and return ``true`` to indicate no further action is necessary. Due to this the
+and return ``true`` to indicate no further action is necessary. Due to this, the
 order in which you specify the authentication provider in ``authenticate``
 config matters.
 
@@ -573,7 +573,7 @@ application, or as part of a plugin.
 Configuring Authorization Handlers
 ----------------------------------
 
-You configure authorization handlers using ``authorize`` config key.
+You configure authorization handlers using the ``authorize`` config key.
 You can configure one or many handlers for authorization. Using
 multiple handlers allows you to support different ways of checking
 authorization. When authorization handlers are checked, they will be
