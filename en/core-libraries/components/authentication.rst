@@ -59,7 +59,7 @@ not part of CakePHP core.
 Configuring Authentication Handlers
 -----------------------------------
 
-You configure authentication handlers using ``$this->Auth->authenticate``.
+You configure authentication handlers using the ``authenticate`` config.
 You can configure one or many handlers for authentication. Using
 multiple handlers allows you to support different ways of logging users
 in. When logging users in, authentication handlers are checked in the
@@ -160,10 +160,9 @@ the following keys:
 Identifying Users and Logging Them In
 -------------------------------------
 
-In the past ``AuthComponent`` auto-magically logged users in. This was
-confusing for many people, and made using AuthComponent a bit difficult
-at times. For 2.0, you'll need to manually call ``$this->Auth->login()``
-to log a user in.
+You need to manually call ``$this->Auth->identify()`` to identify the user using
+credentials provided in request. Then use ``$this->Auth->setUser()``
+to log the user in i.e. save user info to session.
 
 When authenticating users, attached authentication objects are checked
 in the order they are attached. Once one of the objects can identify
@@ -189,26 +188,27 @@ working with a login form could look like::
 
 The above code will attempt to first identify a user in using the POST data.
 If successful we set the user info to session so that it persists across requests
-and redirect to either the last page they were visiting,
-or :php:attr:`AuthComponent::$loginRedirect`. If the login is unsuccessful,
-a flash message is set.
+and redirect to either the last page they were visiting or a URL specified in the
+``loginRedirect`` config. If the login is unsuccessful, a flash message is set.
 
 .. warning::
 
-    ``$this->Auth->login($data)`` will log the user in with whatever data is passed
+    ``$this->Auth->setUser($data)`` will log the user in with whatever data is passed
     to the method. It won't actually check the credentials against an authenticate class.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Basic and digest are stateless authentication schemes and don't require an initial
-POST or a form. If using only basic / digest authenticators you don't require a login action
-in your controller. Also you can set ``AuthComponent::$sessionKey`` to false to
-ensure AuthComponent doesn't try to read user info from session. You may also
-want to set ``$this->Auth->unauthorizedRedirect = false;``. Stateless
-authentication will re-verify the user's credentials on each request, this creates
-a small amount of additional overhead, but allows clients that to login in without
-using cookies.
+Basic and digest are stateless authentication schemes and don't require an
+initial POST or a form. If using only basic / digest authenticators you don't
+require a login action in your controller. Also you can set
+``$this->Auth->sessionKey`` to false to ensure AuthComponent doesn't try to
+read user info from session. You may also want to set config
+``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
+a ``ForbiddenException`` instead of default behavior of redirecting to referer.
+Stateless authentication will re-verify the user's credentials on each request,
+this creates a small amount of additional overhead, but allows clients to
+login in without using cookies and makes is suitable for APIs.
 
 Creating Custom Authentication Objects
 --------------------------------------
@@ -216,13 +216,12 @@ Creating Custom Authentication Objects
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins. If for example
 you wanted to create an OpenID authentication object. In
-``app/Controller/Component/Auth/OpenidAuthenticate.php`` you could put
-the following::
+``app/Auth/OpenidAuthenticate.php`` you could put the following::
 
-    App::uses('BaseAuthenticate', 'Controller/Component/Auth');
+    use Cake\Auth\BaseAuthenticate;
 
     class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(CakeRequest $request, CakeResponse $response) {
+        public function authenticate(Request $request, Response $response) {
             // Do things for OpenID here.
             // Return an array of user if they could authenticate the user,
             // return false if not
@@ -230,7 +229,7 @@ the following::
     }
 
 Authentication objects should return ``false`` if they cannot identify the
-user. And an array of user information if they can. It's not required
+user and an array of user information if they can. It's not required
 that you extend ``BaseAuthenticate``, only that your authentication object
 implements an ``authenticate()`` method. The ``BaseAuthenticate`` class
 provides a number of helpful methods that are commonly used. You can
@@ -244,10 +243,10 @@ Using Custom Authentication Objects
 Once you've created your custom authentication object, you can use them
 by including them in AuthComponents authenticate array::
 
-    $this->Auth->authenticate = [
+    $this->Auth->config('authenticate', [
         'Openid', // app authentication object.
         'AuthBag.Combo', // plugin authentication object.
-    ];
+    ]);
 
 Creating Stateless Authentication Systems
 -----------------------------------------
@@ -281,14 +280,14 @@ Handling Unauthenticated Requests
 ---------------------------------
 
 When an unauthenticated user tries to access a protected page first the
-`unauthenticated()` method of the last authenticator in the chain is called.
+``unauthenticated()`` method of the last authenticator in the chain is called.
 The authenticate object can handle sending response or redirection as appropriate
-and return `true` to indicate no further action is necessary. Due to this the
-order in which you specify the authenticate object in `AuthComponent::$authenticate`
-property matters.
+and return ``true`` to indicate no further action is necessary. Due to this, the
+order in which you specify the authentication provider in ``authenticate``
+config matters.
 
-If authenticator returns null, `AuthComponent` redirects user to login action.
-If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that element
+If authenticator returns null, AuthComponent redirects user to login action.
+If it's an AJAX request and config ``ajaxLogin` is specified that element
 is rendered else a 403 HTTP status code is returned.
 
 Displaying Auth Related Flash Messages
@@ -296,14 +295,13 @@ Displaying Auth Related Flash Messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the ``app/View/Layout/default.ctp`` file in the body section
-preferable before the content_for_layout line.::
+lines to the ``app/View/Layout/default.ctp`` file in the body section::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
 
 You can customize the error messages, and flash settings AuthComponent
-uses. Using ``$this->Auth->flash`` you can configure the parameters
+uses. Using ``flash`` config you can configure the parameters
 AuthComponent uses for setting flash messages. The available keys are
 
 - ``element`` - The element to use, defaults to null.
@@ -315,8 +313,7 @@ messages AuthComponent uses. In your controller's beforeFilter, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->authError = "This error shows up with the user tries to access" .
-                                "a part of the website that is protected.";
+    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
 
 Sometimes, you want to display the authorization error only after
 the user has already logged-in. You can suppress this message by setting
@@ -325,7 +322,7 @@ its value to boolean `false`.
 In your controller's beforeFilter(), or component settings::
 
     if (!$this->Auth->user()) {
-        $this->Auth->authError = false;
+        $this->Auth->config('authError', false);
     }
 
 .. _hashing-passwords:
@@ -426,7 +423,9 @@ function accordingly::
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
                 if ($this->Auth->loginProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
                     $user->password = $this->request->data('password');
@@ -480,7 +479,7 @@ Creating Custom Password Hasher Classes
 ---------------------------------------
 Custom password hasher classes need to extend the ``AbstractPasswordHasher``
 class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+In ``app/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
     App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
@@ -561,18 +560,20 @@ access the resources they are requesting. There are several built-in
 authorization handlers, and you can create custom ones for your
 application, or as part of a plugin.
 
-- ``ActionsAuthorize`` Uses the AclComponent to check for permissions on
-  an action level.
-- ``CrudAuthorize`` Uses the AclComponent and action -> CRUD mappings to
-  check permissions for resources.
 - ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller,
   and uses the return of that to authorize a user. This is often the
   most simple way to authorize users.
 
+.. note::
+
+    The ``ActionsAuthorize`` & ``CrudAuthorize`` adapter available in CakePHP
+    2.x have now been moved to a separate plugin `cakephp/acl <https://github.com/cakephp/acl>`_.
+
+
 Configuring Authorization Handlers
 ----------------------------------
 
-You configure authorization handlers using ``$this->Auth->authorize``.
+You configure authorization handlers using the ``authorize`` config key.
 You can configure one or many handlers for authorization. Using
 multiple handlers allows you to support different ways of checking
 authorization. When authorization handlers are checked, they will be
@@ -613,14 +614,6 @@ is also exposed as ``AuthComponent::ALL``::
 In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
 authorization object will override the matching key in the 'all' key.
-The core authorize objects support the following configuration keys.
-
-- ``actionPath`` Used by ``ActionsAuthorize`` to locate controller action
-  ACO's in the ACO tree.
-- ``actionMap`` Action -> CRUD mappings. Used by ``CrudAuthorize`` and
-  authorization objects that want to map actions to CRUD roles.
-- ``userModel`` The name of the ARO/Model node user information can be found
-  under. Used with ActionsAuthorize.
 
 If an authenticated user tries to go to a URL he's not authorized to access,
 he's redirected back to the referrer. If you do not want such redirection
@@ -634,12 +627,12 @@ Creating Custom Authorize Objects
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-``src/Controller/Component/Auth/LdapAuthorize.php`` you could put the
+``src/Auth/LdapAuthorize.php`` you could put the
 following::
 
-    namespace App\Controller\Component\Auth;
+    namespace App\Auth;
 
-    use Cake\Controller\Component\Auth\BaseAuthorize;
+    use Cake\Auth\BaseAuthorize;
     use Cake\Network\Request;
 
     class LdapAuthorize extends BaseAuthorize {
@@ -672,7 +665,7 @@ Using No Authorization
 If you'd like to not use any of the built-in authorization objects, and
 want to handle things entirely outside of AuthComponent you can set
 ``$this->Auth->config('authorize', false);``. By default AuthComponent starts off
-with ``authorize = false``. If you don't use an authorization scheme,
+with ``authorize`` set to ``false``. If you don't use an authorization scheme,
 make sure to check authorization yourself in your controller's
 beforeFilter, or with another component.
 
