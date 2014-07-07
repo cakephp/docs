@@ -49,14 +49,18 @@ For example in your Cart plugin you have an Order model that deals with creating
 orders. You'd like to notify the rest of the application that an order has been
 created. To keep your Order model clean you could use events::
 
-    // Cart/Model/Order.php
-    App::uses('CakeEvent', 'Event');
-    class Order extends AppModel {
+    // Cart/Model/Table/OrdersTable.php
+    namespace Cart\Model\Table;
+
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class Order extends Table {
 
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $event = new CakeEvent('Model.Order.afterPlace', $this, array(
+                $event = new Event('Model.Order.afterPlace', $this, array(
                     'order' => $order
                 ));
                 $this->eventManager()->dispatch($event);
