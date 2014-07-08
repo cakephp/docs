@@ -559,8 +559,9 @@ directly into the ``CakeValidationRule`` object::
     $this->validator()->getField('password')
         ->getRule('required')->message = 'This field cannot be left blank';
 
-Properties in any ``CakeValidationRule`` are named as the valid array keys you
-can use for defining such rules using the ``$validate`` property in the model.
+Properties in any ``CakeValidationRule`` get their name from the array keys 
+one is allowed to use when defining a validation rules' properties, such as the 
+array keys 'message' and 'allowEmpty' for example.
 
 As with adding new rule to the set, it is also possible to modify existing rules
 using the array interface::
