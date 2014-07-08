@@ -199,8 +199,7 @@ There are spaces on both side of the equals sign.
 Typehinting
 -----------
 
-Arguments that expect objects or arrays can be typehinted.
-We only typehint public methods, though, as typehinting is not cost-free::
+Arguments that expect objects or arrays can be typehinted::
 
     /**
      * Some method description.
@@ -290,6 +289,53 @@ processed if they are the first thing in a DocBlock line, for example::
 Comment blocks, with the exception of the first block in a file, should
 always be preceded by a newline.
 
+Variable Types
+--------------
+
+Variable types for use in DocBlocks:
+
+Type
+    Description
+mixed
+    A variable with undefined (or multiple) type.
+int
+    Integer type variable (whole number).
+float
+    Float type (point number).
+bool
+    Logical type (true or false).
+string
+    String type (any value in " " or ' ').
+null
+    Null type. Usually used in conjunction with another type.
+array
+    Array type.
+object
+    Object type. A specific class name should be used if possible.
+resource
+    Resource type (returned by for example mysql\_connect()).
+    Remember that when you specify the type as mixed, you should indicate
+    whether it is unknown, or what the possible types are.
+callable
+    Callable function.
+
+You can also combine types using the pipe char::
+
+    int|bool
+
+For more than two types it is usually best to just use ``mixed``.
+
+When returning the object itself, e.g. for chaining, one should use ``$this`` instead::
+
+    /**
+     * Foo function.
+     *
+     * @return $this
+     */
+    public function foo() {
+    	return $this;
+    }
+
 Including Files
 ===============
 
@@ -354,7 +400,7 @@ protected method or variable names start with a single underscore (``_``). Examp
         protected $_iAmAProtectedVariable;
 
         protected function _iAmAProtectedMethod() {
-           /*...*/
+           /* ... */
         }
     }
 
@@ -364,7 +410,7 @@ Private methods or variable names start with double underscore (``__``). Example
         private $__iAmAPrivateVariable;
 
         private function __iAmAPrivateMethod() {
-            /*...*/
+            /* ... */
         }
     }
 
@@ -392,42 +438,6 @@ File names which do not contain classes should be lowercased and underscored, fo
 example::
 
     long_file_name.php
-
-Variable Types
---------------
-
-Variable types for use in DocBlocks:
-
-Type
-    Description
-mixed
-    A variable with undefined (or multiple) type.
-int
-    Integer type variable (whole number).
-float
-    Float type (point number).
-bool
-    Logical type (true or false).
-string
-    String type (any value in " " or ' ').
-null
-    Null type. Usually used in conjunction with another type.
-array
-    Array type.
-object
-    Object type. A specific class name should be used if possible.
-resource
-    Resource type (returned by for example mysql\_connect()).
-    Remember that when you specify the type as mixed, you should indicate
-    whether it is unknown, or what the possible types are.
-callable
-    Callable function.
-
-You can also combine types using the pipe char::
-
-    int|bool
-
-For more than two types it is usually best to just use ``mixed``.
 
 Casting
 -------
