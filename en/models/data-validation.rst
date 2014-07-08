@@ -560,7 +560,7 @@ directly into the ``CakeValidationRule`` object::
         ->getRule('required')->message = 'This field cannot be left blank';
 
 Properties in any ``CakeValidationRule`` get their name from the array keys 
-one is allowed to use when defining a validation rules' properties, such as the 
+one is allowed to use when defining a validation rules properties, such as the 
 array keys 'message' and 'allowEmpty' for example.
 
 As with adding new rule to the set, it is also possible to modify existing rules
