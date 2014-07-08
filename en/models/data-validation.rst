@@ -463,7 +463,7 @@ in the view's form as the reason why the field was not valid.
 Dynamically change validation rules
 ===================================
 
-Using ``$validate`` property to declare validation rules is a good ways of defining
+Using ``$validate`` property to declare validation rules is a good way of defining
 statically rules for each model. Nevertheless there are cases when you want to
 dynamically add, change or remove validation rules from the predefined set.
 
@@ -559,8 +559,8 @@ directly into the ``CakeValidationRule`` object::
     $this->validator()->getField('password')
         ->getRule('required')->message = 'This field cannot be left blank';
 
-Properties in any ``CakeValidationRule`` are named as the valid array keys you
-can use for defining such rules using the ``$validate`` property in the model.
+Properties in any ``CakeValidationRule`` get their name from the valid array keys 
+on uses when defining such rules in the ``$validate`` property of the model.
 
 As with adding new rule to the set, it is also possible to modify existing rules
 using the array interface::
