@@ -333,7 +333,7 @@ When returning the object itself, e.g. for chaining, one should use ``$this`` in
      * @return $this
      */
     public function foo() {
-    	return $this;
+        return $this;
     }
 
 Including Files
