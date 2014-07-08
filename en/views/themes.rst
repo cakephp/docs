@@ -25,7 +25,7 @@ that, the folder structure within the ``/Plugin/Example/Template`` folder is
 exactly the same as ``/src/Template/``.
 
 For example, the view file for an edit action of a Posts controller would reside
-at ``/Plugin/Example/Templte/Posts/edit.ctp``. Layout files would reside in
+at ``/Plugin/Example/Template/Posts/edit.ctp``. Layout files would reside in
 ``/Plugin/Example/Template/Layout/``.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
