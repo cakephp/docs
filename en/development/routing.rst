@@ -28,6 +28,8 @@ This section will teach you by example the most common uses of the CakePHP
 Router. Typically you want to display something as a landing page, so you add
 this to your **routes.php** file::
 
+    use Cake\Routing\Router;
+
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 This will execute the index method in the ``ArticlesController`` when the homepage
@@ -58,6 +60,8 @@ options later.
 The CakePHP Router can also match routes in reverse. That means that from an
 array containing similar parameters, it is capable of generation a URL string::
 
+    use Cake\Routing\Router;
+
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
     // Will output
     /articles/15
@@ -65,6 +69,8 @@ array containing similar parameters, it is capable of generation a URL string::
 Routes can also be labelled with a unique name, this allows you to quickly
 reference them when building links instead of specifying each of the routing
 parameters::
+
+    use Cake\Routing\Router;
 
     Router::connect(
         '/login',
