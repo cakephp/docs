@@ -463,9 +463,10 @@ in the view's form as the reason why the field was not valid.
 Dynamically change validation rules
 ===================================
 
-Using ``$validate`` property to declare validation rules is a good way of defining
-statically rules for each model. Nevertheless there are cases when you want to
-dynamically add, change or remove validation rules from the predefined set.
+Using the ``$validate`` property to declare validation rules is a good way of
+statically defining rules for each model. Nevertheless, there are cases when you
+want to dynamically add, change or remove validation rules from the predefined
+set.
 
 All validation rules are stored in a ``ModelValidator`` object, which holds
 every rule set for each field in your model. Defining new validation rules is as
