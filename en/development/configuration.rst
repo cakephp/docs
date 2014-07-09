@@ -56,8 +56,8 @@ Below is a description of the variables and how they affect your CakePHP
 application.
 
 debug
-    Changes CakePHP debugging output. 0 = Production mode. No output. 1 = Show
-    errors and warnings. 2 = Show errors, warnings, and enable SQL logging.
+    Changes CakePHP debugging output. false = Production mode. No error 
+    messages, errors, or warnings shown. true = Errors and warnings shown.
 App.namespace
     The namespace to find app classes under.
 App.baseUrl
