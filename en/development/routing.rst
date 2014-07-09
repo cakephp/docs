@@ -517,8 +517,8 @@ create a link that is not part of a plugin.
 .. index:: file extensions
 .. _file-extensions:
 
-File Extensions
----------------
+Routing File Extensions
+-----------------------
 
 .. php:staticmethod:: parseExtensions($extensions, $merge = true)
 

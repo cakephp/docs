@@ -18,15 +18,14 @@ Enabling Data Views in Your Application
 
 Before you can use the data view classes, you'll need to do a bit of setup:
 
-#. Enable the json and or xml extensions with
-   :php:meth:`Router::parseExtensions()`. This will enable Router to handle
-   multiple extensions.
+#. Enable the json and or xml extensions with :ref:`file-extensions`. This will
+   enable Router to handle multiple extensions.
 #. Add the :php:class:`RequestHandlerComponent` to your controller's list of
    components. This will enable automatic view class switching on content
    types. You can also set the component up with the ``viewClassMap`` setting,
    to map types to your custom classes and/or map other data types.
 
-After adding ``Router::parseExtensions('json');`` to your routes file, CakePHP
+After adding ``Router::parseExtensions(['json']);`` to your routes file, CakePHP
 will automatically switch view classes when a request is done with the ``.json``
 extension, or the Accept header is ``application/json``.
 
