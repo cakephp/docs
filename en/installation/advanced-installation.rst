@@ -58,7 +58,7 @@ Once Composer has finished running you should have a directory structure that lo
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 You are now ready to generate the rest of your application skeleton::
 
