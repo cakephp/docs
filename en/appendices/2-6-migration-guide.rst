@@ -81,4 +81,13 @@ HtmlHelper
 - :php:meth:`HtmlHelper::css()` had the ``once`` option added. It works the same
   as the ``once`` option for ``HtmlHelper::script()``. The default value is
   ``false`` to maintain backwards compatibility.
+- The ``$confirmMessage`` argument of :php:meth:`HtmlHelper::link()` has been
+  deprecated. You should instead use key ``confirm`` in ``$options`` to specify
+  the message.
 
+FormHelper
+----------
+
+- The ``$confirmMessage`` argument of :php:meth:`FormHelper::postLink()` has been
+  deprecated. You should instead use key ``confirm`` in ``$options`` to specify
+  the message.
