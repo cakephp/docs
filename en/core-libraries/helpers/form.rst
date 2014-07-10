@@ -99,84 +99,94 @@ happens. This special array can contain a number of different
 key-value pairs that affect the way the form tag is generated.
 
 
-Options for create()
---------------------
+Changing the HTTP Method for a Form
+-----------------------------------
 
-There are a number of options for create():
-
-* ``$options['type']`` This key is used to specify the type of form to be created. Valid
-  values include 'post', 'get', 'file', 'patch', 'put' and 'delete'.
-
-  Supplying either 'post' or 'get' changes the form submission method
-  accordingly::
+By using the ``type`` option you can change the HTTP method a form will use::
 
       echo $this->Form->create($article, ['type' => 'get']);
 
-  Output:
+Output:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form method="get" action="/articles/edit/5">
+    <form method="get" action="/articles/edit/5">
 
-  Specifying 'file' changes the form submission method to 'post', and
-  includes an enctype of "multipart/form-data" on the form tag. This
-  is to be used if there are any file elements inside the form. The
-  absence of the proper enctype attribute will cause the file uploads
-  not to function::
+Specifying 'file' changes the form submission method to 'post', and includes an
+enctype of "multipart/form-data" on the form tag. This is to be used if there
+are any file elements inside the form. The absence of the proper enctype
+attribute will cause the file uploads not to function::
 
-      echo $this->Form->create($article, ['type' => 'file']);
+    echo $this->Form->create($article, ['type' => 'file']);
 
-  Output:
+Output:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form enctype="multipart/form-data" method="post" action="/articles/add">
+   <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-  When using 'put', 'patch' or 'delete', your form will be functionally
-  equivalent to a 'post' form, but when submitted, the HTTP request method will
-  be overridden with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows
-  CakePHP to emulate proper REST support in web browsers.
+When using 'put', 'patch' or 'delete', your form will be functionally equivalent
+to a 'post' form, but when submitted, the HTTP request method will be overridden
+with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows CakePHP to emulate
+proper REST support in web browsers.
 
-* ``$options['action']`` The action key allows you to point the form to a
-  specific action in your current controller. For example, if you'd like to
-  point the form to the login() action of the current controller, you would
-  supply an $options array like the following::
+Setting the Controller Action for the Form
+------------------------------------------
+
+Using the ``action`` option allows  you to point the form to a
+specific action in your current controller. For example, if you'd like to
+point the form to the login() action of the current controller, you would
+supply an $options array like the following::
 
     echo $this->Form->create($article, ['action' => 'login']);
 
-  Output:
+Output:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form id="UserLoginForm" method="post" action="/users/login">
+    <form id="UserLoginForm" method="post" action="/users/login">
 
-* ``$options['url']`` If the desired form action isn't in the current
-  controller, you can specify a URL for the form action using the 'url' key of
-  the $options array. The supplied URL can be relative to your CakePHP
-  application::
+Setting a URL for the Form
+--------------------------
+
+If the desired form action isn't in the current controller, you can specify
+a URL for the form action using the 'url' key of the $options array. The
+supplied URL can be relative to your CakePHP application::
 
     echo $this->Form->create(null, [
         'url' => ['controller' => 'Articles', 'action' => 'publish']
     ]);
 
-  Output:
+Output:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form method="post" action="/articles/publish">
+    <form method="post" action="/articles/publish">
 
-  or can point to an external domain::
+or can point to an external domain::
 
     echo $this->Form->create(null, [
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ]);
 
-  Output:
+Output:
 
-  .. code-block:: html
+.. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
+
+Using Custom Validators
+-----------------------
+
+Often models will have multiple validation sets, and you will want FormHelper to
+mark fields required based on a the specific validation rules your controller
+action is going to apply. For example, your Users table has specific validation
+rules that only apply when an account is being registered::
+
+    echo $this->Form->create($user, [
+        'context' => ['validator' => 'register']
+    ]);
 
 Creating context classes
 ------------------------
