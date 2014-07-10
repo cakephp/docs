@@ -8,7 +8,7 @@ Basics.php
 ==========
 
 - ``stackTrace()`` has been added as a convenience wrapper function for ```Debugger::trace()``.
-  It directly echos just as ``debug()`` does.
+  It directly echos just as ``debug()`` does. But only if debug level is on.
 
 Console
 =======
