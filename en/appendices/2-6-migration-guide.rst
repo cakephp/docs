@@ -4,6 +4,12 @@
 CakePHP 2.6 is a fully API compatible upgrade from 2.5.  This page outlines
 the changes and improvements made in 2.6.
 
+Basics.php
+==========
+
+- ``stackTrace()`` has been added as a convenience wrapper function for ```Debugger::trace()``.
+  It directly echos just as ``debug()`` does. But only if debug level is on.
+
 Console
 =======
 

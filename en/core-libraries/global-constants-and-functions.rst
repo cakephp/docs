@@ -129,6 +129,10 @@ such as debugging and translating content.
     which it was called.
     Also see :doc:`/development/debugging`
 
+.. php:function:: stackTrace(array $options = array())
+
+    If the application's DEBUG level is non-zero, the stack trace is printed out.
+
 .. php:function:: env(string $key)
 
     Gets an environment variable from available sources. Used as a
