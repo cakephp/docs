@@ -818,6 +818,9 @@ and reduce the problems people had in the past:
   emulate the previous behavior.
 - The ``timeFormat`` parameter for ``hour()``, ``time()`` and ``dateTime()`` now
   defaults to 24, complying with ISO 8601.
+- The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
+  has been removed. You should now use key ``confirm`` in ``$options`` to specify
+  the message.
 
 It is recommended that you review the :doc:`/core-libraries/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
@@ -837,6 +840,9 @@ HtmlHelper
   further on be passed as ``$options``.
 - ``HtmlHelper::nestedList()`` now requires ``$options`` to be an array. The forth argument for the tag type
   has been removed and included in the ``$options`` array.
+- The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()`
+  has been removed. You should now use key ``confirm`` in ``$options`` to specify
+  the message.
 
 PaginatorHelper
 ---------------
