@@ -299,7 +299,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
-.. php:method:: link(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = [])
 
     :param string $title: The text to display as the body of the link.
     :param mixed $url: Either the string location, or a :term:`routing array`.
@@ -335,14 +335,13 @@ methods of the HtmlHelper and how to use them.
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Specify ``$confirmMessage`` to display a JavaScript ``confirm()``
+    Specify ``confirm`` key in options to display a JavaScript ``confirm()``
     dialog::
 
         echo $this->Html->link(
             'Delete',
             ['controller' => 'Recipes', 'action' => 'delete', 6],
-            [],
-            "Are you sure you wish to delete this recipe?"
+            ['confirm' => 'Are you sure you wish to delete this recipe?'],
         );
 
     Will output:

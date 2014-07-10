@@ -1307,7 +1307,7 @@ Creating Buttons and Submit Elements
     opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
     Creates an HTML link, but accesses the URL using method POST. Requires
     JavaScript to be enabled in browser.
@@ -1464,12 +1464,12 @@ You can configure the generated inputs by defining additional options in the
         'name' => ['label' => 'custom label']
     ]);
 
-To exclude specific fields from the generated inputs, set them to false in the 
+To exclude specific fields from the generated inputs, set them to false in the
 fields parameter::
 
     echo $this->Form->inputs(['password' => false]);
 
-When customizing, ``fields``, you can use the ``$options`` parameter to 
+When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
 - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
