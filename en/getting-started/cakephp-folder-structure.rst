@@ -36,7 +36,7 @@ You'll notice a few top level folders:
   impacted. In debug mode, CakePHP will warn you if it is not the
   case.
 
-The App Folder
+The Src Folder
 ==============
 
 CakePHP's *src* folder is where you will do most of your application
