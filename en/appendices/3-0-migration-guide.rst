@@ -589,7 +589,8 @@ ConnectionManager
 - :php:meth:`~Cake\\Database\\ConnectionManager::configured()` has been added. It
   and ``config()`` replace ``sourceList()`` & ``enumConnectionObjects()`` with
   a more standard and consistent API.
-
+- ``ConnectionManager::create()`` has been removed.
+  It can be replaced by ``config($name, $config)`` and ``get($name)``.
 
 TreeBehavior
 ------------
