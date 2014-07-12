@@ -71,7 +71,7 @@ that change:
 
 .. code-block:: php
 
-    // app/Template/Common/view.ctp
+    // /src/Template/Common/view.ctp
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -91,7 +91,7 @@ uncaptured content from the extending view. Assuming our view file has a
 .. code-block:: php
 
     <?php
-    // src/Template/Posts/view.ctp
+    // /src/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
@@ -199,7 +199,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // in app/Template/Layout/default.ctp
+    // in /src/Template/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -331,7 +331,7 @@ You can also set the title_for_layout variable from inside the view file::
     $this->set('title', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
-``app/Template/Layout`` directory, and switch between them inside of your
+``/src/Template/Layout`` directory, and switch between them inside of your
 controller actions using the controller or view's
 :php:attr:`~Cake\\View\\View::$layout` property::
 
@@ -423,7 +423,7 @@ the controller works with view files). In the above example, the
 ``/src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
-    // inside app/Template/Element/helpbox.ctp
+    // inside /src/Template/Element/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
@@ -561,7 +561,7 @@ components of CakePHP, view classes have a few conventions:
 
 You'll also want to extend ``View`` to ensure things work correctly::
 
-    // in src/View/PdfView.php
+    // in /src/View/PdfView.php
 
     App::uses('View', 'View');
     class PdfView extends View {

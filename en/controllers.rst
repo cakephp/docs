@@ -114,8 +114,8 @@ in ``/src/Controller/RecipesController.php`` and contain::
             }
         }
 
-The view files for these actions would be ``app/Template/Recipes/view.ctp``,
-``app/Template/Recipes/share.ctp``, and ``app/Template/Recipes/search.ctp``. The
+The view files for these actions would be ``/src/Template/Recipes/view.ctp``,
+``/src/Template/Recipes/share.ctp``, and ``/src/Template/Recipes/search.ctp``. The
 conventional view file name is the lowercased and underscored version of the
 action name.
 
@@ -296,8 +296,8 @@ will not try to re-render the view::
         }
     }
 
-This would render ``app/Template/Posts/custom_file.ctp`` instead of
-``app/Template/Posts/my_action.ctp``
+This would render ``/src/Template/Posts/custom_file.ctp`` instead of
+``/src/Template/Posts/my_action.ctp``
 
 
 You can also render views inside plugins using the following syntax:
@@ -310,7 +310,7 @@ For example::
         }
     }
     
-This would render ``app/Plugin/Users/Template/UserDetails/custom_file.ctp``
+This would render ``/src/Plugin/Users/Template/UserDetails/custom_file.ctp``
 
 Flow Control
 ------------
