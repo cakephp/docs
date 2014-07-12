@@ -60,6 +60,14 @@ debug
     messages, errors, or warnings shown. true = Errors and warnings shown.
 App.namespace
     The namespace to find app classes under.
+    
+    .. note::
+
+        When changing the namespace in your configuration, you will also
+        need to update your ``composer.json`` file to use this namespace
+        as well. Additionally, create a new autoloader by running
+        ``php composer.phar dumpautoload``.
+    
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
