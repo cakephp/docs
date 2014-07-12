@@ -310,7 +310,7 @@ For example::
         }
     }
     
-This would render ``/plugins/Users/Template/UserDetails/custom_file.ctp``
+This would render ``/plugins/Users/src/Template/UserDetails/custom_file.ctp``
 
 Flow Control
 ------------
