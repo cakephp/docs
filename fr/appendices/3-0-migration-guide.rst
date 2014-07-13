@@ -1077,6 +1077,12 @@ Security
   les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez re-crypter
   les valeurs en utilisant une version plus récente de CakePHP 2.x avant
   migration.
+- La capacité de générer blowfish a été retiré. Vous ne pouvez plus utiliser le
+  type "blowfish" pour ``Security::hash()``. Vous devrez utiliser uniquement
+  le `password_hash()` de PHP et `password_verify()` pour génerer et vérifier
+  les hashs de blowfish. La librairie compatible
+  `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_.
+  qui est installée avec CakePHP fournit ces fonctions pour PHP < 5.5.
 
 Time
 ----
