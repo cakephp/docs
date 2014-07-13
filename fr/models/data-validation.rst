@@ -567,9 +567,9 @@ vous pouvez définir des propriétés directement dans l'objet
     $this->validator()->getField('password')
         ->getRule('required')->message = 'This field cannot be left blank';
 
-Les propriétés dans toute ``CakeValidationRule`` sont nommées avec le tableau
-de clés valides que vous pouvez utiliser pour définir de telles règles en
-utilisant la propriété ``$validate`` dans le model.
+Les propriétés dans toute ``CakeValidationRule`` sont nommées selon les clés
+valides de tableau autorisées à utiliser quand vous définissez des propriétés
+de règles de comme les clés de tableau 'message' et 'allowEmpty' par exemple.
 
 Comme avec l'ajout de nouvelle règle à l'ensemble, il est aussi possible de
 modifier les règles existantes en utilisant l'interface de tableau::
