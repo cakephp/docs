@@ -61,13 +61,19 @@ Ci-dessous se trouve une description des variables et la façon dont elles
 modifient votre application CakePHP.
 
 debug
-    Change la sortie de debug de CakePHP. 0 = Mode Production. Pas de sortie.
-    1 = Montre les erreurs et les avertissements. 2 = Montre les erreurs, les
-    avertissements, et active le logging SQL. Le log SQL est seulement montré
-    quand vous ajoutez ``$this->element('sql_dump');`` à votre view ou votre
-    layout.
+    Change la sortie de debug de CakePHP. false = Mode Production. Pas de
+    messages, d'erreurs ou d'avertissements montrés. true = Erreurs et
+    avertissements montrés.
 App.namespace
     Le namespace sous lequel se trouvent les classes de l'app.
+    
+    .. note::
+
+        Quand vous changez le namespace dans votre configuration, vous devez
+        aussi mettre à jour le fichier ``composer.json`` pour utiliser aussi
+        ce namespace. De plus, créer un nouvel autoloader en lançant
+        ``php composer.phar dumpautoload``.
+
 App.baseUrl
     Décommentez cette définition si vous **n'** envisagez **pas** d'utiliser
     le mod\_rewrite d'Apache avec CakePHP. N'oubliez pas aussi de retirer vos

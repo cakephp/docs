@@ -44,7 +44,7 @@ Vous remarquerez quelques dossiers principaux :
 Le dossier src
 ==============
 
-Le répertoire *App* de CakePHP est l'endroit où vous réaliserez la majorité
+Le répertoire *src* de CakePHP est l'endroit où vous réaliserez la majorité
 du développement de votre application. Regardons de plus près le contenu de
 ce répertoire.
 
