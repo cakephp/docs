@@ -147,16 +147,16 @@ As a working example, let's begin to create the ContactManager
 plugin referenced above. To start out, we'll set up our plugin's
 basic directory structure. It should look like this::
 
-    /app
-        /Plugin
-            /ContactManager
-                /Controller
-                    /Component
-                /Model
-                    /Behavior
-                /View
-                    /Helper
-                    /Layouts
+    /plugins
+        /ContactManager
+            /Controller
+                /Component
+            /Model
+                /Behavior
+            /View
+                /Helper
+                /Layouts
+    /src
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
