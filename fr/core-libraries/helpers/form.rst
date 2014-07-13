@@ -104,94 +104,105 @@ Affichera:
     Puisque c'est un form edit, un champ input caché est généré pour surcharger
     la méthode HTTP par défaut.
 
-Le tableau ``$options`` est la où la configuration de form arrive. Ce tableau
+Le tableau ``$options`` est là où la configuration de form arrive. Ce tableau
 spécial peut contenir un certain nombre de paires de clé-valeur différent qui
 affectent la façon dont la balise form est générée.
 
-Options pour  create()
------------------------
+Changer la méthode HTTP pour un Formulaire
+------------------------------------------
 
-Il y plusieurs options pour create():
-
-* ``$options['type']`` Cette clé est utilisée pour spécifier le type de
-  formulaire à créer. Les valeurs que peuvent prendre cette variable
-  sont 'post', 'get', 'file', 'patch', 'put' et 'delete'.
-
-  Choisir 'post' ou 'get' changera la méthode de soumission du formulaire
-  en fonction de votre choix.::
+En utilisant l'option ``type``, vous pouvez changer la méthode HTTP qu'un
+formulaire va utiliser::
 
       echo $this->Form->create($article, ['type' => 'get']);
 
-    Affichera:
+Affichera:
 
-  .. code-block:: html
+.. code-block:: html
 
      <form method="get" action="/articles/edit/5">
 
-  En spécifiant 'file' cela changera la méthode de soumission à 'post', et
-  ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
-  Vous devez l'utiliser si vous avez des demandes de fichiers dans
-  votre formulaire. L'absence de cet attribut enctype empêchera le
-  fonctionnement de l'envoi de fichiers.::
+En spécifiant 'file' cela changera la méthode de soumission à 'post', et
+ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
+Vous devez l'utiliser si vous avez des demandes de fichiers dans
+votre formulaire. L'absence de cet attribut enctype empêchera le
+fonctionnement de l'envoi de fichiers.::
 
-      echo $this->Form->create($article, ['type' => 'file']);
+    echo $this->Form->create($article, ['type' => 'file']);
 
-  Affichera:
+Affichera:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form enctype="multipart/form-data" method="post" action="/articles/add">
+    <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-  Quand vous utilisez 'put' ou 'delete', votre formulaire aura un
-  fonctionnement équivalent à un formulaire de type 'post',
-  mais quand il sera envoyé, la méthode de requête HTTP
-  sera respectivement réécrite avec 'PUT' ou 'DELETE'.
-  Cela permettra à CakePHP de créer son propre support
-  REST dans les navigateurs web.
+Quand vous utilisez 'put' ou 'delete', votre formulaire aura un fonctionnement
+équivalent à un formulaire de type 'post', mais quand il sera envoyé, la
+méthode de requête HTTP sera respectivement réécrite avec 'PUT' ou 'DELETE'.
+Cela permettra à CakePHP de créer son propre support REST dans les navigateurs
+web.
 
-* ``$options['action']`` La clé action vous permet de définir vers quelle
-  action de votre controller pointera le formulaire. Par exemple, si vous
-  voulez que le formulaire appelle l'action login() de votre controller
-  courant, vous créeriez le tableau $options comme ceci ::
+Définir l'Action du Controller pour le Formulaire
+-------------------------------------------------
+
+Utiliser l'option ``action`` vous permet de diriger le formulaire vers une
+action spécifique dans vore controller courant. Par exemple, si vous voulez
+diriger le formulaire vers une action login() du controller courant, vous
+pouvez fournir le tableau $options comme ce qui suit::
 
     echo $this->Form->create($article, ['action' => 'login']);
 
-  Affichera:
+Affichera:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form id="UserLoginForm" method="post" action="/users/login">
+   <form id="UserLoginForm" method="post" action="/users/login">
 
-* ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire
-  n'est pas dans le controller courant, vous pouvez spécifier une URL
-  dans le formulaire en utilisant la clé 'url' de votre tableau $options.
-  L'URL ainsi fournie peut être relative à votre application CakePHP ::
+Définir une URL pour un Formulaire
+----------------------------------
+
+Si l'action que vous désirez appeler avec le formulaire n'est pas dans le
+controller courant, vous pouvez spécifier une URL dans le formulaire en
+utilisant la clé 'url' de votre tableau $options. L'URL ainsi fournie peut être
+relative à votre application CakePHP ::
 
     echo $this->Form->create(null, [
         'url' => ['controller' => 'Articles', 'action' => 'publish']
     ]);
 
-  Affichera:
+Affichera:
 
-  .. code-block:: html
+.. code-block:: html
 
-     <form method="post" action="/articles/publish">
+    <form method="post" action="/articles/publish">
 
-  ou pointer vers un domaine extérieur::
+ou pointer vers un domaine extérieur::
 
     echo $this->Form->create(null, [
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ]);
 
-  Affichera:
+Affichera:
 
-  .. code-block:: html
+.. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
 
-Creating context classes
-------------------------
+Utiliser des Validateurs Personnalisés
+--------------------------------------
+
+Often models will have multiple validation sets, and you will want FormHelper to
+mark fields required based on a the specific validation rules your controller
+action is going to apply. For example, your Users table has specific validation
+rules that only apply when an account is being registered::
+
+    echo $this->Form->create($user, [
+        'context' => ['validator' => 'register']
+    ]);
+
+Créer des Classes de Contexte
+-----------------------------
 
 While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
@@ -211,9 +222,6 @@ listener, or in an application view class::
 Context factory functions are where you can add logic for checking the form
 options for the correct type of entity. If matching input data is found you can
 return an object. If there is no match return null.
-
-    .. versionchanged:: 2.5
-        The ``$secureAttributes`` parameter was added in 2.5.
 
 .. _automagic-form-elements:
 

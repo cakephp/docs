@@ -29,6 +29,8 @@ Cette section va vous apprendre par exemple les utilisations les plus
 habituelles du Router de CakePHP. Typiquement si vous voulez afficher quelque
 chose en page de base, vous ajoutez ceci au fichier **routes.php**::
 
+    use Cake\Routing\Router;
+
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 Ceci va executer la méthode index dans ``ArticlesController`` quand la page
@@ -61,6 +63,8 @@ Le Router de CakePHP peut aussi faire correspondre les routes en reverse. Cela
 signifie qu'à partir d'un tableau contenant des paramètres similaires, il est
 capable de générer une chaîne URL::
 
+    use Cake\Routing\Router;
+
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
     // Will output
     /articles/15
@@ -68,7 +72,9 @@ capable de générer une chaîne URL::
 Les routes peuvent aussi être labellisées avec un nom unique, cela vous permet
 de rapidement leur faire référence lors de la construction des liens plutôt
 que de spécifier chacun des paramètres de routing::
- 
+
+    use Cake\Routing\Router;
+
     Router::connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
@@ -102,7 +108,7 @@ operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
-    // In src/Config/routes.php
+    // Dans src/Config/routes.php
     Router::scope('/', function($routes) {
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
@@ -115,7 +121,7 @@ faire correspondre les éléments dans l'URL.
 
 Le format basique pour une définition de route est::
 
-    Router::connect(
+    $routes->connect(
         'URL template',
         ['default' => 'defaultValue'],
         ['option' => 'matchingRegex']
@@ -137,7 +143,7 @@ Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
 Regardons quelques exemples simples avant que nous commencions l'utilisation
 le troisième paramètre de connect()::
 
-    Router::connect(
+    $routes->connect(
         '/pages/*',
         ['controller' => 'Pages', 'action' => 'display']
     );
@@ -153,7 +159,7 @@ En plus de l'étoile greedy ``/*`` il y aussi la syntaxe de l'étoile trailing
 en tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez
 un argument qui incluait un ``/`` dedans::
 
-    Router::connect(
+    $routes->connect(
         '/pages/**',
         ['controller' => 'Pages', 'action' => 'show']
     );
@@ -161,11 +167,10 @@ un argument qui incluait un ``/`` dedans::
 L'URL entrante de ``/pages/the-example-/-and-proof`` résulterait en un argument
 unique passé de ``the-example-/-and-proof``.
 
-Vous pouvez utiliser le deuxième paramètre de :php:meth:`Router::connect()`
-pour fournir tout paramètre de routing qui est composé des valeurs par défaut
-de la route::
+Vous pouvez utiliser le deuxième paramètre de ``connect()`` pour fournir tout
+paramètre de routing qui est composé des valeurs par défaut de la route::
 
-    Router::connect(
+    $routes->connect(
         '/government',
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
@@ -181,7 +186,7 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
 ``/users/some_action/5``, nous aimerions être capable de l'accéder avec
 ``/cooks/some_action/5``. La route suivante s'occupe facilement de cela::
 
-    Router::connect(
+    $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
     );
 
@@ -195,7 +200,7 @@ accepter tout argument de position supplémentaire donné. Ces arguments
 seront rendus disponibles dans le tableau :ref:`passed-arguments`.
 
 Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
-``array('controller' => 'Users', 'action' => 'some_action', 5)`` en
+``['controller' => 'Users', 'action' => 'some_action', 5]`` en
 URL va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
@@ -215,7 +220,7 @@ correctement formé ou non. Si vous choisissez de ne pas fournir une expression
 régulière, toute expression non ``/`` sera traitée comme une partie du
 paramètre::
 
-    Router::connect(
+    $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
         ['id' => '[0-9]+']
@@ -234,7 +239,7 @@ CakePHP ne produit pas automatiquement d'urls en minuscule quand vous utilisez
 le paramètre ``:controller``. Si vous avez besoin de ceci, l'exemple ci-dessus
 peut être réécrit en::
 
-    Router::connect(
+    $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
         ['id' => '[0-9]+', 'routeClass' => 'Cake\Routing\Route\InflectedRoute']
@@ -260,12 +265,12 @@ tous les URLs aux actions dans votre controller. Par exemple, pour mapper
 toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
-    Router::connect('/:action', ['controller' => 'Home']);
+    $routes->connect('/:action', ['controller' => 'Home']);
 
 Si vous souhaitez fournir une URL non sensible à la casse, vous pouvez utiliser
 les modificateurs en ligne d'expression régulière::
 
-    Router::connect(
+    $routes->connect(
         '/:userShortcut',
         ['controller' => 'Teachers', 'action' => 'profile', 1],
         ['userShortcut' => '(?i:principal)']
@@ -273,7 +278,7 @@ les modificateurs en ligne d'expression régulière::
 
 Un exemple de plus, et vous serez un pro du routing::
 
-    Router::connect(
+    $routes->connect(
         '/:controller/:year/:month/:day',
         ['action' => 'index'],
         [
@@ -378,7 +383,7 @@ vous pouvez spécifier une option ``_name``, cette option peut être utilisée
 pour le routing inversé pour identifier la route que vous souhaitez utiliser::
 
     // Connecter une route avec un nom.
-    Router::connect(
+    $routes->connect(
         '/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
@@ -540,8 +545,8 @@ create a link that is not part of a plugin.
 .. index:: file extensions
 .. _file-extensions:
 
-Extensions de Fichier
----------------------
+Routing des Extensions de Fichier
+---------------------------------
 
 .. php:staticmethod:: parseExtensions($extensions, $merge = true)
 

@@ -20,13 +20,13 @@ Avant que vous puissiez utiliser les classes de vue de données, vous aurez
 besoin de faire un peu de configuration:
 
 #. Activez les extensions json et/ou xml avec
-   :php:meth:`Router::parseExtensions()`. Cela permettra au Router de gérer les
-   multiples extensions.
+   :ref:`file-extensions`. Cela permettra au Router de gérer plusieurs
+   extensions.
 #. Ajoutez le :php:class:`RequestHandlerComponent` à la liste de components de
    votre controller. Cela activera automatiquement le changement de la classe
    de vue pour les types de contenu.
 
-Après avoir ajouté ``Router::parseExtensions('json');`` à votre fichier de
+Après avoir ajouté ``Router::parseExtensions(['json']);`` à votre fichier de
 routes, CakePHP changera automatiquement les classes de vue quand une requête
 sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
 ``application/json``.
