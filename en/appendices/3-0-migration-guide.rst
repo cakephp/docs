@@ -444,6 +444,9 @@ Controller
 - The ``Controller::$ext`` property has been removed. You now have to extend and
   overide the ``View::$_ext`` property if you want to use a non-default view file
   extension.
+- The ``Controller::$Components`` property has been removed and replaced with
+  ``_components``. If you need to load components at runtime you should use
+  ``$this->addComponent()`` on your controller.
 - The signature of :php:meth:`Cake\\Controller\\Controller::redirect()` has been
   changed to ``Controller::redirect(string|array $url, int $status = null)``.
   The 3rd argument ``$exit`` has been dropped. The method can no longer send
@@ -693,6 +696,9 @@ View Class
 - ``View::prepend()`` no longer has a capturing mode.
 - ``View::startIfEmpty()`` has been removed. Now that start() always overwrites
   startIfEmpty serves no purpose.
+- The ``View::$Helpers`` property has been removed and replaced with
+  ``_helpers``. If you need to load helpers at runtime you should use
+  ``$this->addHelper()`` in your view files.
 
 ViewBlock
 ---------
