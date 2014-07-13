@@ -67,7 +67,7 @@ Configuration des gestionnaires d'authentification
 --------------------------------------------------
 
 Vous configurez les gestionnaires d'authentification en
-utilisant ``$this->Auth->authenticate``.
+utilisant la config ``authenticate``.
 Vous pouvez configurer un ou plusieurs gestionnaires pour l'authentification.
 L'utilisation de plusieurs gestionnaires d'authentification vous permet de
 supporter les différentes méthodes de connexion des utilisateurs.
@@ -171,15 +171,13 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
 
-Identifier les utilisateurs et les connecter
+Identifier les Utilisateurs et les Connecter
 --------------------------------------------
 
-Par le passé le component Auth ``AuthComponent`` connectait les utilisateurs
-automatiquement.
-C'était un peu déroutant pour certain, et rendait la création au travers
-du component Auth ``AuthComponent`` par moment un peu difficile.
-Avec la version 2.0, vous avez besoin d'appeler manuellement
-``$this->Auth->login()`` pour connecter un utilisateur.
+Vous devez appeler manuellement ``$this->Auth->identify()`` pour connecter un
+utilisateur en utilisant les clés fournies dans la requête. Ensuite utilisez
+``$this->Auth->setUser()`` pour connecter l'utilisateur et sauvegarder
+les infos de l'utilisateur dans la session par exemple.
 
 Quand les utilisateurs s'identifient, les objets d'identification sont
 vérifiés dans l'ordre où ils ont été attachés. Une fois qu'un objet
@@ -206,13 +204,13 @@ Une simple fonction de connexion pourrait ressembler à cela::
 Le code ci-dessus va d'abord tenter d'identifier un utilisateur en utilisant les
 données POST. En cas de succès, nous définissons les informations de
 l'utilisateur dans les sessions afin qu'elles persistent au cours des requêtes
-et redirigera en cas de succès vers la dernière page visitée, ou vers
-:php:attr:`AuthComponent::$loginRedirect`. Si le login est en échec, un message
-flash est défini.
+et redirigera en cas de succès vers la dernière page visitée, ou vers une
+URL spécifiée dans la config ``loginRedirect``. Si la connexion est un échec,
+un message flash est défini.
 
 .. warning::
 
-    ``$this->Auth->login($data)`` connectera l'utilisateur avec
+    ``$this->Auth->setUser($data)`` connectera l'utilisateur avec
     les données postées. Elle ne va pas réellement vérifier les certificats avec
     une classe d'authentification.
 
@@ -220,15 +218,17 @@ Utilisation de l'authentification Digest et Basic pour la connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les authentifications basic et digest ne nécessitent pas un POST
-initial ou un form, ainsi si vous utilisez seulement les authentificators
+initial ou un form. Si vous utilisez seulement les authentificators
 basic / digest, vous n'avez pas besoin d'action login dans votre controller.
-Aussi, vous pouvez définir ``AuthComponent::$sessionKey`` à false pour vous
+Aussi, vous pouvez définir ``$this->Auth->sessionKey`` à false pour vous
 assurer que AuthComponent n'essaie pas de lire les infos de l'user
 à partir des sessions. Vous voudrez peut-être aussi définir
-``$this->Auth->unauthorizedRedirect = false;``. L'authentification stateless va
+``unauthorizedRedirect`` à ``false`` ce qui va entraîner l'envoi d'une
+``ForbiddenException`` de AuthComponent à la place du comportement par défaut
+de redirection vers le référent. L'authentification stateless va
 re-vérifier les certificats de l'user à chaque requête, cela crée un petit
 montant de charges supplémentaires, mais permet aux clients de se connecter
-sans utiliser les cookies.
+sans utiliser les cookies et est parfait pour le APIs.
 
 Créer des objets d'authentification personnalisés
 -------------------------------------------------
@@ -236,23 +236,22 @@ Créer des objets d'authentification personnalisés
 Comme les objets d'authentification sont modulaires, vous pouvez créer des
 objets d'authentification personnalisés pour votre application ou plugins.
 Si par exemple vous vouliez créer un objet d'authentification OpenID.
-Dans ``app/Controller/Component/Auth/OpenidAuthenticate.php``
-vous pourriez mettre ce qui suit::
+Dans ``app/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
 
-    App::uses('BaseAuthenticate', 'Controller/Component/Auth');
+    use Cake\Auth\BaseAuthenticate;
 
     class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(CakeRequest $request, CakeResponse $response) {
+        public function authenticate(Request $request, Response $response) {
             // Faire les trucs d'OpenID ici.
-            // Retourne un tableau de l\'user si ils peuvent authentifier
-            // l\'user
+            // Retourne un tableau de l user si ils peuvent authentifier
+            // l user
             // retourne false dans le cas contraire
         }
     }
 
 Les objets d'authentification devraient retourner ``false`` si ils ne peuvent
 identifier l'utilisateur. Et un tableau d'information utilisateur si ils le
-peuvent.Il n'est pas utile d'étendre (extend) ``BaseAuthenticate``, simplement
+peuvent. Il n'est pas utile d'étendre (extend) ``BaseAuthenticate``, simplement
 votre objet d'identification doit implémenter la méthode ``authenticate()``.
 La class ``BaseAuthenticate`` fournie un nombre de méthode très utiles
 communément utilisées. Vous pouvez aussi implémenter une méthode ``getUser()``
@@ -266,10 +265,10 @@ Utilisation d'objets d'authentification personnalisés
 Une fois votre objet d'authentification créer, vous pouvez les utiliser
 en les incluant dans le tableau d'authentification AuthComponents::
 
-    $this->Auth->authenticate = [
-        'Openid', // objet d'authentification app
-        'AuthBag.Combo', // plugin objet d'identification.
-    ];
+    $this->Auth->config('authenticate', [
+        'Openid', // objet d'authentification de app
+        'AuthBag.Combo', // objet d'identification de plugin.
+    ]);
 
 Création de systèmes d'authentification stateless
 -------------------------------------------------
@@ -307,15 +306,14 @@ Gestion des requêtes non authentifiées
 --------------------------------------
 
 Quand un user non authentifié essaie d'accéder à une page protégée en premier,
-la méthode `unauthenticated()` du dernier authenticator dans la chaîne est
+la méthode ``unauthenticated()`` du dernier authenticator dans la chaîne est
 appelée. L'objet d'authentification peut gérer la réponse d'envoi ou la
 redirection appropriée et retourne `true` pour indiquer qu'aucune action
 suivante n'est nécessaire. Du fait de l'ordre dans lequel vous spécifiez
-l'objet d'authentification dans les propriétés de
-`AuthComponent::$authenticate`.
+l'objet d'authentification dans les propriétés de ``authenticate``.
 
 Si authenticator retourne null, `AuthComponent` redirige l'user vers l'action
-login. Si c'est une requête ajax et `AuthComponent::$ajaxLogin` est spécifiée,
+login. Si c'est une requête ajax et ``ajaxLogin`` est spécifiée,
 cet element est rendu, sinon un code de statut HTTP 403 est retourné.
 
 Afficher les messages flash de Auth
@@ -323,16 +321,15 @@ Afficher les messages flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de
-préférence avant la ligne content_for_layout.::
+suivantes au fichier ``src/Template/Layouts/default.ctp`` dans la section body::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
 
 Vous pouvez personnaliser les messages d'erreur, et les réglages que le
-component Auth ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash``
+component Auth ``AuthComponent`` utilise. En utilisant ``flash``
 vous pouvez configurer les paramètres que le component Auth utilise pour
-envoyer des messages flash. Les clés disponibles sont :
+envoyer des messages flash. Les clés disponibles sont
 
 - ``element`` - L'element à utiliser, null par défaut.
 - ``key`` - La clé a utiliser, 'auth' par défaut
@@ -344,7 +341,7 @@ beforeFilter de votre controller, ou dans le paramétrage du component vous
 pouvez utiliser ``authError`` pour personnaliser l'erreur à utiliser quand
 l'authentification échoue::
 
-    $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente d'accéder à une partie du site qui est protégé.";
+    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
 l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
@@ -354,7 +351,7 @@ Dans le beforeFilter() de votre controller, ou dans les configurations du
 component::
 
     if (!$this->Auth->user()) {
-        $this->Auth->authError = false;
+        $this->Auth->config('authError', false);
     }
 
 .. _hashing-passwords:
@@ -514,7 +511,7 @@ Creating custom password hasher classes
 ---------------------------------------
 Custom password hasher classes need to extend the ``AbstractPasswordHasher``
 class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+In ``src/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
     App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
@@ -600,19 +597,21 @@ identifier/authentifier est autorisé à accéder aux ressources qu'il demande.
 Il y a plusieurs gestionnaires d'autorisation intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
-- ``ActionsAuthorize`` Utilise le Component AclComponent pour vérifier les
-  permissions d'un niveau d'action.
-- ``CrudAuthorize`` Utilise le Component Acl et les action -> CRUD mappings
-  pour vérifier les permissions pour les ressources.
 - ``ControllerAuthorize`` appelle ``isAuthorized()`` sur le controller actif,
   et utilise ce retour pour autoriser un utilisateur. C'est souvent le moyen
   le plus simple d'autoriser les utilisateurs.
 
+.. note::
+
+    Les adaptateurs ``ActionsAuthorize`` & ``CrudAuthorize`` disponibles dans
+    CakePHP 2.x ont été déplacés dans un plugin séparé
+    `cakephp/acl <https://github.com/cakephp/acl>`_.
+
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant
-``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
+Vous configurez les gestionnaires d'autorisation en utilisant la clé de config
+``authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
@@ -655,14 +654,6 @@ La clé all est aussi exposée comme ``AuthComponent::ALL``::
 Dans l'exemple ci-dessus, à la fois les ``Actions`` et le ``Controller`` auront
 les paramètres définis pour la clé 'all'. Chaque paramètres passés a un objet
 d'autorisation spécifique remplacera la clé correspondante dans la clé 'all'.
-Le noyau authorize objects supporte les clés de configuration suivantes.
-
-- ``actionPath`` Utilisé par ``ActionsAuthorize`` pour localiser le controller
-  action ACO's dans l'arborescence ACO.
-- ``actionMap`` Action -> CRUD mappings. Utilisé par ``CrudAuthorize`` et
-  les objets d'autorisation qui veulent mapper les actions aux rôles CRUD.
-- ``userModel`` Le nom du nœud ARO/Model dans lequel l'information utilisateur
-  peut être trouvé. Utilisé avec ActionsAuthorize.
 
 Si un utilisateur authentifié essaie d'aller à une URL pour laquelle il n'est
 pas autorisé, il est redirigé vers l'URL de référence. Si vous ne voulez pas
@@ -676,18 +667,17 @@ Création d'objets Authorize personnalisés
 
 Parce que les objets authorize sont modulables, vous pouvez créer des objets
 authorize personnalisés dans votre application, ou plugins. Si par exemple
-vous voulez créer un objet authorize LDAP. Dans
-``src/Controller/Component/Auth/LdapAuthorize.php``, vous pourriez mettre
-cela::
+vous voulez créer un objet authorize LDAP. Dans ``src/Auth/LdapAuthorize.php``,
+vous pourriez mettre cela::
 
-    namespace App\Controller\Component\Auth;
+    namespace App\Auth;
 
-    use Cake\Controller\Component\Auth\BaseAuthorize;
+    use Cake\Auth\BaseAuthorize;
     use Cake\Network\Request;
 
     class LdapAuthorize extends BaseAuthorize {
         public function authorize($user, Request $request) {
-            // Do things for ldap here.
+            // Faire des choses pour ldap ici.
         }
     }
 
@@ -717,7 +707,7 @@ Si vous souhaitez ne pas utiliser les objets d'autorisation intégrés, et que
 vous voulez gérer les choses entièrement à l'extérieur du Component Auth
 (AuthComponent) vous pouvez définir
 ``$this->Auth->config('authorize', false);``. Par défaut le component Auth
-démarre avec ``authorize = false``. Si vous n'utilisez pas de schéma
+démarre avec ``authorize`` à ``false``. Si vous n'utilisez pas de schéma
 d'autorisation, assurez-vous de vérifier les autorisations vous-même dans la
 partie beforeFilter de votre controller ou avec un autre component.
 
