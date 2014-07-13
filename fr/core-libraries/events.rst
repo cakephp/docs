@@ -59,16 +59,20 @@ des commandes. Vous voulez notifier au reste de l'application qu'une commande a
 été créée. Pour garder votre model Order propre, vous pouvez utiliser les
 évènements::
 
-    // Cart/Model/Order.php
-    App::uses('CakeEvent', 'Event');
-    class Order extends AppModel {
+    // Cart/Model/Table/OrdersTable.php
+    namespace Cart\Model\Table;
+
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class Order extends Table {
 
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $event = new CakeEvent('Model.Order.afterPlace', $this, array(
+                $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
-                ));
+                ]);
                 $this->eventManager()->dispatch($event);
                 return true;
             }
