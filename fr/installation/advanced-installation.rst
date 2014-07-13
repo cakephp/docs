@@ -61,7 +61,7 @@ de répertoire qui ressemble à::
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 Vous êtes maintenant prêt à générer le reste du squelette de votre
 application::
