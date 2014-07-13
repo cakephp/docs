@@ -28,8 +28,8 @@ cela, la structure de dossier dans le dossier ``/plugins/Example/Template`` est
 exactement la même que ``/src/Template/``.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
-trouvera dans ``/plugins/Example/Templte/Posts/edit.ctp``. Les fichiers de layout
-se trouveront dans ``/plugins/Example/Template/Layout/``.
+trouvera dans ``/plugins/Example/Template/Posts/edit.ctp``. Les fichiers de
+layout se trouveront dans ``/plugins/Example/Template/Layout/``.
 
 Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va essayer
 de le trouver dans le dossier ``/src/Template/``. De cette façon, vous pouvez
