@@ -11,18 +11,16 @@ for Helpers, Behaviors, and Tasks in addition to Components.
 Loading Objects
 ===============
 
-Loading objects on every kind of registry can be done using the ``load()``
-method::
+Objects can be loaded on-the-fly using add<registry-object>()
+Example::
+    
+    $this->addComponent('DebugKit.Toolbar');
+    $this->addHelper('Flash')
 
-    $this->Prg = $this->Components->load('Prg');
-    $this->Prg->process();
+Will result in `Toolbar property` and `Flash helper` being set.
+Configuration can also be set on-the-fly. Example::
 
-When loading a component, if the component is not currently loaded into the
-registry, a new instance will be created.  If the component is already loaded,
-another instance will not be created.  When loading components, you can also
-provide additional configuration for them::
-
-    $this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
+    $this->addComponent('Cookie', ['name' => 'sweet']);
 
 Any keys & values provided will be passed to the Component's constructor.  The
 one exception to this rule is ``className``.  Classname is a special key that is
@@ -30,7 +28,7 @@ used to alias objects in a registry.  This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
-    $this->Auth = $this->Components->load('Auth', ['className' => 'MyCustomAuth']);
+    $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
 Triggering Callbacks
