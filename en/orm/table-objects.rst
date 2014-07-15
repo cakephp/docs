@@ -1590,6 +1590,50 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
 
+.. _saving-complex-types:
+
+Saving Complex Types
+--------------------
+
+Tables are capable of storing data represented in plain types, like strings,
+integers, floats, booleans, etc. But It can also be instructed to accept more
+complex types such as arrays or objects and serialize this data into simpler
+types to be saved in the database.
+
+This functionality is achieved by using the custom types system. See the
+:ref:`adding-custom-database-types` section to find out how to build custom column
+Types::
+
+    // in bootstrap/php
+    use Cake\Database\Type;
+    Type::map('json', 'App\Database\Type\JsonType');
+
+    //in UsersTable.php
+    use Cake\Database\Schema\Table as Schema;
+    class ArticlesTable extends Table {
+
+        protected function _initializeSchema(Schema $schema) {
+            $schema->columnType('preferences', 'json');
+            return $schema;
+        }
+
+    }
+
+The code above maps the ``preferences`` column to the ``json`` custom type.
+This means that when retrieving data for that column, it will will be converted
+from a JSON string in the database and put into an entity as an array.
+
+Likewise, when saved, the array will be transformed back into its JSON
+representation::
+
+    $user = new User([
+        'preferences' => [
+            'sports' => ['football', 'baseball'],
+            'books' => ['Mastering PHP', 'Hamlet']
+        ]
+    ]);
+    $usersTable->save($user);
+
 Deleting Entities
 =================
 

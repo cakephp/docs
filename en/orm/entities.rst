@@ -374,3 +374,11 @@ This list can be modified at runtime using ``hiddenProperties``::
 
     $user->hiddenProperties(['password', 'recovery_question']);
 
+Storing Complex Types
+=====================
+
+Entities are not meant for containing the logic for serializing and
+unserializing complex data comming from the database. Please check
+the :ref:`saving-complex-types` section to understand how entites can
+be used to hold complex information sucha objects and arrays that are required
+to be stored in the database.

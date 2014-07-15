@@ -230,6 +230,8 @@ automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
+.. _adding-custom-database-types:
+
 Adding Custom Types
 -------------------
 
