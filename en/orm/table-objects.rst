@@ -1983,14 +1983,18 @@ associations should be marshalled::
     // In a controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
+        'associated' => [
+            'Tags', 'Comments' => ['associated' => ['Users']]
+        ]
     ]);
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), ['Tags', 'Comments.Users']);
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
 
 You can convert multiple entities using::
 
@@ -2059,7 +2063,9 @@ merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the second parameter of the method::
 
     $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data(), ['Tags', 'Comments.Users']);
+    $articles->patchEntity($article, $this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2156,3 +2162,46 @@ controlling the associations that will be merged in each of the entities in the
 array::
 
     $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
+
+Avoiding Property Mass Assignment Attacks
+-----------------------------------------
+
+When creating or merging entities from request data you need to be careful of
+what you allow your users to change or add in th entities. For example by
+sending an array in the request containing the ``user_id`` they could change the
+owner of an article, causing undesirable effects::
+
+    //contains ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->data;
+    $entity = $this->patchEntity($entity, $data);
+
+There are two ways of protecting you against this problem. The first one is by
+setting the default columns that can be safely set from a request using the
+:ref:`entities-mass-assignment` feature in the entities.
+
+The second way is by using the ``fieldList`` option when creating or merging
+data into an entity::
+
+    //contains ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->data;
+
+    //Only allow title to be changed
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title']
+    ]);
+
+You can also control which properties can be assigned for associations::
+
+    // Only allow changing the title and tags
+    // and the tag name is the only column that can be set
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title', 'tags'],
+        'associated' => ['Tags' => ['fieldList' => ['name']]]
+    ]);
+
+Using this feature is handy when you have many different functions your users
+can access and you want to let your users edit different data based on their
+privileges.
+
+The ``fieldList`` options is also accepted by the ``newEntity()``,
+``newEntities()`` and ``patchEntitites()`` methods.

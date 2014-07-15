@@ -154,6 +154,8 @@ it easier to test code that works with error messages::
 
     $user->errors('password', ['Password is required.']);
 
+.. _entities-mass-assignment:
+
 Mass Assignment
 ===============
 
