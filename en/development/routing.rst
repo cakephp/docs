@@ -310,6 +310,8 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_method`` Define the HTTP verb/method to use. Useful when working with
+  :ref:`resource-routes`.
 
 Passing Parameters to Action
 ----------------------------
@@ -576,19 +578,18 @@ can specify additional conditions in the ``$defaults`` argument for
 add more using :ref:`custom-route-classes`. The built-in options are:
 
 - ``[type]`` Only match requests for specific content types.
-- ``[method]`` Only match requests with specific HTTP verbs.
 - ``[server]`` Only match when $_SERVER['SERVER_NAME'] matches the given value.
 
-We'll provide a simple example here of how you can use the ``[method]``
+We'll provide a simple example here of how you can use the ``[type]``
 option to create a custom RESTful route::
 
     $routes->connect(
         "/:controller/:id",
-        array("action" => "edit", "[method]" => "PUT"),
+        array("action" => "edit", "[type]" => "application/json"),
         array("id" => "[0-9]+")
     );
 
-The above route will only match for ``PUT`` requests. Using these conditions,
+The above route will only match for ``application/json`` requests. Using these conditions,
 you can create custom REST routing, or other request data dependent information.
 
 .. _resource-routes:

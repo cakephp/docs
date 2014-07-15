@@ -301,6 +301,7 @@ Router
 * ``Router::setExtensions()`` has been removed. Use :php:meth:`Cake\\Routing\\Router::parseExtensions()`
   instead.
 * ``Router::resourceMap()`` has been removed.
+* The ``[method]`` option has been renamed to ``_method``.
 * ``Router::promote()`` has been removed.
 * ``Router::parse()`` will now raise an exception when a URL cannot be handled
   by any route.
