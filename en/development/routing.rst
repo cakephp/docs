@@ -624,9 +624,9 @@ POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-DELETE      /recipes/123.format   RecipesController::delete(123)
+PATCH       /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
+DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
 CakePHP's Router class uses a number of different indicators to
@@ -666,32 +666,37 @@ comments routes will look like::
     While you can nest resources as deeply as you require, it is not recommended to
     nest more than 2 resources together.
 
-Modifying the default REST Routes
----------------------------------
+Limiting the Routes Created
+---------------------------
 
-.. TODO:: This doesn't actually work right now. I need to fix the code.
+By default CakePHP will connect 6 routes for each resource. If you'd like to
+only connect specific resource routes you can use the ``only`` option::
 
-If the default REST routes don't work for your application, you can modify them
-using :php:meth:`Router::resourceMap()`. This method allows you to set the
-default routes that get set with :php:meth:`Router::mapResources()`. When using
-this method you need to set *all* the defaults you want to use::
+    $routes->resources('Articles', [
+        'only' => ['index', 'view']
+    ]);
 
-    Router::resourceMap(array(
-        array('action' => 'index', 'method' => 'GET', 'id' => false),
-        array('action' => 'view', 'method' => 'GET', 'id' => true),
-        array('action' => 'add', 'method' => 'POST', 'id' => false),
-        array('action' => 'edit', 'method' => 'PUT', 'id' => true),
-        array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
-        array('action' => 'update', 'method' => 'POST', 'id' => true)
-    ));
+Would create read only resource routes. The route names are ``create``,
+``update``, ``view``, ``index``, and ``delete``.
 
-By overwriting the default resource map, future calls to ``mapResources()`` will
-use the new values.
+Changing the Controller Actions Used
+------------------------------------
+
+You may need to change the controller action names that are used when connecting
+routes. For example, if your ``edit`` action is called ``update`` you can use
+the ``actions`` key to rename the actions used::
+
+    $routes->resources('Articles', [
+        'actions' => ['update' => 'update', 'add' => 'create']
+    ]);
+
+The above would use ``update`` for the update action, and ``create`` instead of
+``add``.
 
 .. _custom-rest-routing:
 
-Custom REST Routing
--------------------
+Custom Route Classes for Resource Routes
+----------------------------------------
 
 You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
