@@ -94,7 +94,7 @@ Using Components
 
 Once you've included some components in your controller, using them is pretty
 simple. Each component you use is exposed as a property on your controller. If
-you had loaded up the :php:class:`Cake\\Controller\\Component\\SessionComponent`
+you had loaded up the :php:class:`Cake\\Controller\\Component\\FlashComponent`
 and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
 
