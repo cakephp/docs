@@ -20,6 +20,9 @@ look like this::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
     }
 
 Naming conventions are very important in CakePHP. By naming our Table object
@@ -35,13 +38,12 @@ be used in the ArticlesController, and will be tied to a database table called
     ArticleTable.php), CakePHP will not recognize any of your settings and will
     use the defaults instead.
 
-For more on models, such as table prefixes, callbacks, and
-validation, check out the :doc:`/orm` chapter of the
-Manual.
+For more on models, such as callbacks, and validation, check out the :doc:`/orm`
+chapter of the Manual.
 
 
-Create an Articles Controller
-=============================
+Create the Articles Controller
+==============================
 
 Next, we'll create a controller for our articles. The controller is
 where all interaction with articles will happen. In a nutshell, it's the place
