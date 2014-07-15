@@ -11,12 +11,6 @@ Controller to meet your needs.
 When you "bake" an app using CakePHP's console utility the Pages Controller is
 created in your ``src/Controller/`` folder.
 
-.. warning::
-
-    Do not directly modify ANY file under the ``/vendor/cakephp/cakephp`` folder to avoid
-    issues when updating the core in future.
-
-
 .. meta::
     :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,lib,cakephp,ships,php,file folder
+    :keywords lang=en: pages controller,default controller,cakephp,ships,php,file folder
