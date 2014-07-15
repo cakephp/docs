@@ -86,7 +86,7 @@ The values of the ``Posts`` and ``Authors`` keys could contain all the propertie
 that a model/key less ``$paginate`` array could.
 
 Once the ``$paginate`` property has been defined, we can use the
-:php:meth:`~Cake\\Controller\Controller::paginate()` method to create the
+:php:meth:`~Cake\\Controller\\Controller::paginate()` method to create the
 pagination data, and add the ``PaginatorHelper`` if it hasn't already been
 added. The controller's paginate method will return the result set of the
 paginated query, and set pagination metadata to the request. You can access the

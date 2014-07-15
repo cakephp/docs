@@ -98,7 +98,7 @@ manually running the following SQL script in your database:
 Attaching the Translate Behavior to Your Tables
 ===============================================
 
-Attaching the bahavior can be done in the ``initialize`` method in your Table
+Attaching the behavior can be done in the ``initialize`` method in your Table
 class::
 
     class Articles extends Table {

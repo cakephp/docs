@@ -180,7 +180,7 @@ as the scope::
 Saving Hierarchical Data
 ========================
 
-When using the Three behavior, you usually don't need to worry about the
+When using the Tree behavior, you usually don't need to worry about the
 internal representation of the hierarchical structure. The positions where nodes
 are placed in the tree are deduced from the 'parent_id' column in each of your
 entities::
