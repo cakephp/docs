@@ -28,7 +28,7 @@ that lists the helpers to be made available in the view. To enable a helper in
 your view, add the name of the helper to the controller's ``$helpers`` array::
 
     class BakeriesController extends AppController {
-        public $helpers = ['Form', 'Html', 'Js', 'Time'];
+        public $helpers = ['Form', 'Html', 'Time'];
     }
 
 Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
@@ -59,7 +59,7 @@ create if not present). Remember to include the default Html and
 Form helpers::
 
     class AppController extends Controller {
-        public $helpers = ['Form', 'Html', 'Js', 'Time'];
+        public $helpers = ['Form', 'Html', 'Time'];
     }
 
 Configuration options
