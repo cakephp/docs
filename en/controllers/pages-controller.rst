@@ -9,8 +9,7 @@ view file ``src/Template/Pages/about_us.ctp`` you can access it using the URL
 Controller to meet your needs.
 
 When you "bake" an app using CakePHP's console utility the Pages Controller is
-created in your ``src/Controller/`` folder. You can also copy the file from
-``/vendor/cakephp/cakephp/tests/test_app/TestApp/Controller/PagesController.php``.
+created in your ``src/Controller/`` folder.
 
 .. warning::
 
