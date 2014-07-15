@@ -10,11 +10,11 @@ Controller to meet your needs.
 
 When you "bake" an app using CakePHP's console utility the Pages Controller is
 created in your ``src/Controller/`` folder. You can also copy the file from
-``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
+``/vendor/cakephp/cakephp/tests/test_app/TestApp/Controller/PagesController.php``.
 
 .. warning::
 
-    Do not directly modify ANY file under the ``lib/Cake`` folder to avoid
+    Do not directly modify ANY file under the ``/vendor/cakephp/cakephp`` folder to avoid
     issues when updating the core in future.
 
 
