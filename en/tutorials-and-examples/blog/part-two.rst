@@ -30,6 +30,11 @@ Naming conventions are very important in CakePHP. By naming our Table object
 be used in the ArticlesController, and will be tied to a database table called
 ``articles``.
 
+.. note:: NEED TO ADD THIS IN ORDER FOR SAVING AN ARTICLE TO WORK:
+    public function initialize(array $config) {
+        $this->addBehavior('Timestamp');
+    }
+
 .. note::
 
     CakePHP will dynamically create a model object for you if it
