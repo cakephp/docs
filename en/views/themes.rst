@@ -19,14 +19,14 @@ You can also set or change the theme name within an action or within the
     $this->theme = 'AnotherExample';
 
 Theme view files need to be within a plugin with the same name. For example,
-the above theme would be found in ``/Plugin/AnotherExample/Template``.
+the above theme would be found in ``/plugins/AnotherExample/Template``.
 It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
-that, the folder structure within the ``/Plugin/Example/Template`` folder is
+that, the folder structure within the ``/plugins/Example/Template`` folder is
 exactly the same as ``/src/Template/``.
 
 For example, the view file for an edit action of a Posts controller would reside
-at ``/Plugin/Example/Template/Posts/edit.ctp``. Layout files would reside in
-``/Plugin/Example/Template/Layout/``.
+at ``/plugins/Example/Template/Posts/edit.ctp``. Layout files would reside in
+``/plugins/Example/Template/Layout/``.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the ``/src/Template/`` folder. This way, you can create master view files
@@ -52,7 +52,7 @@ folder, it will default to the main webroot folder::
     /purple_cupcake/css/main.css
 
     // and links to
-    Plugin/PurpleCupcake/webroot/css/main.css
+    plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::
     :title lang=en: Themes
