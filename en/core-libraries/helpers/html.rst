@@ -117,6 +117,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
+.. note::
+    Setting the ``inline`` option to false will no longer automatically add stylesheets to the ``css`` block. You will need to set the ``block`` option to true to use the ``css`` block by default.
+
 .. php:method:: meta(string $type, string $url = null, array $options = [])
 
     :param string $type: The type meta tag you want.
