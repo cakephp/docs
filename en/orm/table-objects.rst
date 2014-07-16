@@ -1595,22 +1595,23 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 Saving Complex Types
 --------------------
 
-Tables are capable of storing data represented in plain types, like strings,
-integers, floats, booleans, etc. But It can also be instructed to accept more
+Tables are capable of storing data represented in basic types, like strings,
+integers, floats, booleans, etc. But It can also be extended to accept more
 complex types such as arrays or objects and serialize this data into simpler
-types to be saved in the database.
+types that can be saved in the database.
 
 This functionality is achieved by using the custom types system. See the
-:ref:`adding-custom-database-types` section to find out how to build custom column
-Types::
+:ref:`adding-custom-database-types` section to find out how to build custom
+column Types::
 
-    // in bootstrap/php
+    // in src/Config/bootstrap.php
     use Cake\Database\Type;
     Type::map('json', 'App\Database\Type\JsonType');
 
-    //in UsersTable.php
+    // in src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
-    class ArticlesTable extends Table {
+
+    class UsersTable extends Table {
 
         protected function _initializeSchema(Schema $schema) {
             $schema->columnType('preferences', 'json');
@@ -1620,8 +1621,9 @@ Types::
     }
 
 The code above maps the ``preferences`` column to the ``json`` custom type.
-This means that when retrieving data for that column, it will will be converted
-from a JSON string in the database and put into an entity as an array.
+This means that when retrieving data for that column, it will will be
+unserialized from a JSON string in the database and put into an entity as an
+array.
 
 Likewise, when saved, the array will be transformed back into its JSON
 representation::
@@ -1633,6 +1635,11 @@ representation::
         ]
     ]);
     $usersTable->save($user);
+
+When using complex types it is important to validate that the data you are
+receiving from the end user is the correct type. Failing to correctly handle
+complex data could result in malicious users being able to store data they
+would not normally be able to.
 
 Deleting Entities
 =================
@@ -2161,17 +2168,21 @@ Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
-    $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->data(),
+        ['associated' => ['Tags', 'Comments.Users']]
+    );
 
 Avoiding Property Mass Assignment Attacks
 -----------------------------------------
 
 When creating or merging entities from request data you need to be careful of
-what you allow your users to change or add in th entities. For example by
-sending an array in the request containing the ``user_id`` they could change the
+what you allow your users to change or add in the entities. For example, by
+sending an array in the request containing the ``user_id`` an attacker could change the
 owner of an article, causing undesirable effects::
 
-    //contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
 
@@ -2182,10 +2193,10 @@ setting the default columns that can be safely set from a request using the
 The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
-    //contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
 
-    //Only allow title to be changed
+    // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);

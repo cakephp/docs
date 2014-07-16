@@ -379,8 +379,7 @@ This list can be modified at runtime using ``hiddenProperties``::
 Storing Complex Types
 =====================
 
-Entities are not meant for containing the logic for serializing and
-unserializing complex data comming from the database. Please check
-the :ref:`saving-complex-types` section to understand how entites can
-be used to hold complex information sucha objects and arrays that are required
-to be stored in the database.
+Entities are not intended to contain the logic for serializing and
+unserializing complex data coming from the database. Refer to the
+:ref:`saving-complex-types` section to understand how your application can store
+more complex data types like arrays and objects.
