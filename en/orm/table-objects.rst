@@ -1621,7 +1621,7 @@ column Types::
     }
 
 The code above maps the ``preferences`` column to the ``json`` custom type.
-This means that when retrieving data for that column, it will will be
+This means that when retrieving data for that column, it will be
 unserialized from a JSON string in the database and put into an entity as an
 array.
 
