@@ -265,7 +265,7 @@ when used with the ``inline = false`` option:
     <?php
     // in your view file
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // In your layout file.

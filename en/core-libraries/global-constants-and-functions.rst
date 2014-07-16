@@ -181,7 +181,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: APP
 
-   Path to the application's directory.
+   Absolute path to your application directory, including a trailing slash.
 
 .. php:const:: APP_DIR
 

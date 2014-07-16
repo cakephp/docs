@@ -221,7 +221,7 @@ There are several built-in detectors that you can use:
 * ``is('head')`` Checks if the current request is HEAD.
 * ``is('options')`` Checks if the current request is OPTIONS.
 * ``is('ajax')`` Checks if the current request came with
-  X-Requested-with = XmlHttpRequest.
+  X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Checks if the current request is via SSL
 * ``is('flash')`` Checks if the current request has a User-Agent of Flash
 * ``is('mobile')`` Checks if the current request came from a common list

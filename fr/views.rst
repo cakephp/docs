@@ -188,7 +188,7 @@ existant::
 
 .. note::
 
-    Vous devriez éviter d'utiliser ``content`` comme nom de bloc. Celui-ci est 
+    Vous devriez éviter d'utiliser ``content`` comme nom de bloc. Celui-ci est
     utilisé par CakePHP en interne pour étendre les vues, et le contenu des
     vues dans le layout.
 
@@ -239,7 +239,7 @@ when used with the ``block = true`` option:
 .. code-block:: php
 
     <?php
-    // in your view file
+    // dans votre fichier de vue
     $this->Html->script('carousel', ['block' => true]);
     $this->Html->css('carousel', null, ['block' => true]);
     ?>

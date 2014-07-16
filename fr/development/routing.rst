@@ -206,7 +206,7 @@ première correspondante trouvée.
 
 .. _route-elements:
 
-Les éléments de Route
+Les Eléments de Route
 ---------------------
 
 Vous pouvez spécifier vos propres éléments de route et ce faisant
@@ -333,7 +333,7 @@ spécifiquement la signification.
 * ``_ssl`` Défini à true pour convertir l'URL générée à https, ou false pour
   forcer http.
 
-Passer des paramètres à l'action
+Passer des Paramètres à l'Action
 --------------------------------
 
 Quand vous connectez les routes en utilisant
@@ -740,7 +740,7 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 .. index:: passed arguments
 .. _passed-arguments:
 
-Arguments passés
+Arguments Passés
 ================
 
 Les arguments passés sont des arguments supplémentaires ou des segments

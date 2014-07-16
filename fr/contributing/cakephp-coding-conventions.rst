@@ -298,6 +298,55 @@ ligne DocBlock, par exemple::
 Les blocks de commentaires, avec une exception du premier block dans le
 fichier, doivent toujours être précédés par un retour à la ligne.
 
+Types de Variables
+------------------
+
+Les types de variables pour l'utilisation dans DocBlocks:
+
+Type
+    Description
+mixed
+    Une variable avec un type indéfini (ou multiple).
+int
+    Variable de type Integer (Tout nombre).
+float
+    Type Float (nombres à virgule).
+bool
+    Type Logique (true ou false).
+string
+    Type String (toutes les valeurs en " " ou ' ').
+null
+    Type null. Habituellement utilisé avec un autre type.
+array
+    Type Tableau.
+object
+    Type Objet.
+resource
+    Type Ressource (retourné par exemple par mysql\_connect()).
+    Rappelez vous que quand vous spécifiez un type en mixed, vous devez
+    indiquer si il est inconnu, ou les types possibles.
+callable
+    Function appelable.
+
+Vous pouvez aussi combiner les types en utilisant le caractère pipe::
+
+    int|bool
+
+Pour plus de deux types, il est habituellement mieux d'utiliser seulement
+``mixed``.
+
+Quand vous retournez l'objet lui-même, par ex pour chaîner, vous devriez
+utilisez ``$this`` à la place::
+
+    /**
+     * Foo function.
+     *
+     * @return $this
+     */
+    public function foo() {
+        return $this;
+    }
+
 Inclure les Fichiers
 ====================
 
@@ -427,43 +476,6 @@ Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en
 minuscules et soulignés, par exemple::
 
     nom_de_fichier_long.php
-
-Types de Variables
-------------------
-
-Les types de variables pour l'utilisation dans DocBlocks:
-
-Type
-    Description
-mixed
-    Une variable avec un type indéfini (ou multiple).
-int
-    Variable de type Integer (Tout nombre).
-float
-    Type Float (nombres à virgule).
-bool
-    Type Logique (true ou false).
-string
-    Type String (toutes les valeurs en " " ou ' ').
-null
-    Type null. Habituellement utilisé avec un autre type.
-array
-    Type Tableau.
-object
-    Type Objet.
-resource
-    Type Ressource (retourné par exemple par mysql\_connect()).
-    Rappelez vous que quand vous spécifiez un type en mixed, vous devez
-    indiquer si il est inconnu, ou les types possibles.
-callable
-    Function appelable.
-
-Vous pouvez aussi combiner les types en utilisant le caractère pipe::
-
-    int|bool
-
-Pour plus de deux types, il est habituellement mieux d'utiliser seulement
-``mixed``.
 
 Casting
 -------

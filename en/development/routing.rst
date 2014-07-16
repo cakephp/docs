@@ -463,7 +463,7 @@ build this link using the HTML helper::
 
 .. index:: plugin routing
 
-Plugin routing
+Plugin Routing
 --------------
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)

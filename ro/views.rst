@@ -14,20 +14,20 @@ mai uzuale scenarii de redare:
   :ref:`cake-response-file`.
 - pentru a crea view-uri cu teme multiple puteti folosi :doc:`views/themes`.
 
-Template-uri View 
+Template-uri View
 =================
 
-Layerul de view din CakePHP reprezinta modul prin care vorbiti cu 
-utilizatorii dvs. Majoritatea timpului viewurile dvs vor arata documente 
-(X)HTML in browsere, dar s-ar putea sa aveti nevoie sa serveasca 
-date AMF unui obiect Flash, sa raspunda unei aplicatii de la distanta 
+Layerul de view din CakePHP reprezinta modul prin care vorbiti cu
+utilizatorii dvs. Majoritatea timpului viewurile dvs vor arata documente
+(X)HTML in browsere, dar s-ar putea sa aveti nevoie sa serveasca
+date AMF unui obiect Flash, sa raspunda unei aplicatii de la distanta
 folosind SOAP, sau sa genereze un fisier CSV pentru un utilizator.
 
-Implicit fisierele view din CakePHP sunt scrise in PHP simplu si au o 
+Implicit fisierele view din CakePHP sunt scrise in PHP simplu si au o
 extensie .ctp (CakePHP Template). Aceste fisiere contin toata logica de
 prezentare necesara pentru a receptiona datele de la controller intr-un
-format ce este pregatit pentru audienta pe care o deserviti. Daca veti prefera 
-sa folositi un limbaj de templating cum ar fi Twig sau Smarty, o subclasa a View 
+format ce este pregatit pentru audienta pe care o deserviti. Daca veti prefera
+sa folositi un limbaj de templating cum ar fi Twig sau Smarty, o subclasa a View
 va conecta limbajul dvs de templating cu CakePHP.
 
 Fisierele view sunt stocate in ``/app/View/``, intr-un folder numit dupa
@@ -43,12 +43,12 @@ chapter:
   acțiunea ce se executa. ELe formeaza baza raspunsului aplicatiei dvs.
 - **elements**: sunt parti mai mici, reutilizabile ale codului unei view.
   Elementele sunt de obicei redate in interiorul unor view-uri.
-- **layouts**: sunt fisiere view ce contin cod de prezentare ce impacheteaza 
+- **layouts**: sunt fisiere view ce contin cod de prezentare ce impacheteaza
   mai multe interfete din aplicatia dvs. Majoritatea view-urilor sunt redate
   in interiorul unui layout.
-- **helpers**: Aceste clase incapsuleaza codul (logica) unui view ce este 
+- **helpers**: Aceste clase incapsuleaza codul (logica) unui view ce este
   necesar/a in multe locuri dintr-un view. Printre altele helper-ii in
-  CakePHP pot ajuta sa construiesti formulare, sa construiesti functionalitate 
+  CakePHP pot ajuta sa construiesti formulare, sa construiesti functionalitate
   AJAX, sa paginezi datele dintr-un model, sau sa servesti RSS feeds.
 
 
@@ -59,11 +59,11 @@ Cum se extind View-urile
 
 .. versionadded:: 2.1
 
-Extinderea view-urilor va permite sa impachetati o view intr-alta. Daca veti 
-combina aceasta cu :ref:`view blocks <view-blocks>` veti obtine un mod puternic de 
-a va pastra view-urile :term:`DRY`. De exemplu, aplicatia dvs are o bara laterala 
-ce trebuie sa se schimbe in functie de un anumit view ce este afisat. Prin 
-extinderea unui fisier obisnuit de view puteti evita sa repetati marcajele uzuale 
+Extinderea view-urilor va permite sa impachetati o view intr-alta. Daca veti
+combina aceasta cu :ref:`view blocks <view-blocks>` veti obtine un mod puternic de
+a va pastra view-urile :term:`DRY`. De exemplu, aplicatia dvs are o bara laterala
+ce trebuie sa se schimbe in functie de un anumit view ce este afisat. Prin
+extinderea unui fisier obisnuit de view puteti evita sa repetati marcajele uzuale
 pentru bara dvs laterala, si doar sa definiti partile care se modifica:
 
 .. code-block:: php
@@ -79,11 +79,11 @@ pentru bara dvs laterala, si doar sa definiti partile care se modifica:
         </ul>
     </div>
 
-Fișierul view de mai sus ar putea fi folosit ca view părinte. Este de 
-asteptat ca view-ul extins sa defineasca blocurile ``baralaterala`` si 
-``titlu``. Blocul ``continut`` este un bloc special pe care il creaza 
-CakePHP. Va contine tot continutul ne-capturat din view-ul extins. Daca 
-presupunem ca fisierul dvs view are o variabila ``$post`` cu datele 
+Fișierul view de mai sus ar putea fi folosit ca view părinte. Este de
+asteptat ca view-ul extins sa defineasca blocurile ``baralaterala`` si
+``titlu``. Blocul ``continut`` este un bloc special pe care il creaza
+CakePHP. Va contine tot continutul ne-capturat din view-ul extins. Daca
+presupunem ca fisierul dvs view are o variabila ``$post`` cu datele
 despre post-ul (articolul) nostru. View-ul nostru ar putea arata astfel:
 
 .. code-block:: php
@@ -264,7 +264,7 @@ when used with the ``inline = false`` option:
     <?php
     // in your view file
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // In your layout file.
