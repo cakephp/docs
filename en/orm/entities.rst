@@ -154,6 +154,8 @@ it easier to test code that works with error messages::
 
     $user->errors('password', ['Password is required.']);
 
+.. _entities-mass-assignment:
+
 Mass Assignment
 ===============
 
@@ -374,3 +376,10 @@ This list can be modified at runtime using ``hiddenProperties``::
 
     $user->hiddenProperties(['password', 'recovery_question']);
 
+Storing Complex Types
+=====================
+
+Entities are not intended to contain the logic for serializing and
+unserializing complex data coming from the database. Refer to the
+:ref:`saving-complex-types` section to understand how your application can store
+more complex data types like arrays and objects.
