@@ -59,6 +59,7 @@ with CakePHP::
 
     use App\Controller\AppController;
     use Cake\Error\NotFoundException;
+    use Cake\Event\Event;
 
     class UsersController extends AppController {
 
