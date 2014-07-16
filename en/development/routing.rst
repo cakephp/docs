@@ -310,6 +310,8 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_method`` Define the HTTP verb/method to use. Useful when working with
+  :ref:`resource-routes`.
 
 Passing Parameters to Action
 ----------------------------
@@ -564,33 +566,6 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :doc:`/core-libraries/components/request-handling`
 to do automatic view switching based on content types.
 
-.. _route-conditions:
-
-Using Additional Conditions When Matching Routes
-------------------------------------------------
-
-When creating routes you might want to restrict certain URL's based on specific
-request/environment settings. A good example of this is :doc:`rest` routing. You
-can specify additional conditions in the ``$defaults`` argument for
-``connect()``. By default CakePHP exposes 3 environment conditions, but you can
-add more using :ref:`custom-route-classes`. The built-in options are:
-
-- ``[type]`` Only match requests for specific content types.
-- ``[method]`` Only match requests with specific HTTP verbs.
-- ``[server]`` Only match when $_SERVER['SERVER_NAME'] matches the given value.
-
-We'll provide a simple example here of how you can use the ``[method]``
-option to create a custom RESTful route::
-
-    $routes->connect(
-        "/:controller/:id",
-        array("action" => "edit", "[method]" => "PUT"),
-        array("id" => "[0-9]+")
-    );
-
-The above route will only match for ``PUT`` requests. Using these conditions,
-you can create custom REST routing, or other request data dependent information.
-
 .. _resource-routes:
 
 Creating RESTful Routes
@@ -624,9 +599,9 @@ POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-DELETE      /recipes/123.format   RecipesController::delete(123)
+PATCH       /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
+DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
 CakePHP's Router class uses a number of different indicators to
@@ -666,32 +641,37 @@ comments routes will look like::
     While you can nest resources as deeply as you require, it is not recommended to
     nest more than 2 resources together.
 
-Modifying the default REST Routes
----------------------------------
+Limiting the Routes Created
+---------------------------
 
-.. TODO:: This doesn't actually work right now. I need to fix the code.
+By default CakePHP will connect 6 routes for each resource. If you'd like to
+only connect specific resource routes you can use the ``only`` option::
 
-If the default REST routes don't work for your application, you can modify them
-using :php:meth:`Router::resourceMap()`. This method allows you to set the
-default routes that get set with :php:meth:`Router::mapResources()`. When using
-this method you need to set *all* the defaults you want to use::
+    $routes->resources('Articles', [
+        'only' => ['index', 'view']
+    ]);
 
-    Router::resourceMap(array(
-        array('action' => 'index', 'method' => 'GET', 'id' => false),
-        array('action' => 'view', 'method' => 'GET', 'id' => true),
-        array('action' => 'add', 'method' => 'POST', 'id' => false),
-        array('action' => 'edit', 'method' => 'PUT', 'id' => true),
-        array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
-        array('action' => 'update', 'method' => 'POST', 'id' => true)
-    ));
+Would create read only resource routes. The route names are ``create``,
+``update``, ``view``, ``index``, and ``delete``.
 
-By overwriting the default resource map, future calls to ``mapResources()`` will
-use the new values.
+Changing the Controller Actions Used
+------------------------------------
+
+You may need to change the controller action names that are used when connecting
+routes. For example, if your ``edit`` action is called ``update`` you can use
+the ``actions`` key to rename the actions used::
+
+    $routes->resources('Articles', [
+        'actions' => ['update' => 'update', 'add' => 'create']
+    ]);
+
+The above would use ``update`` for the update action, and ``create`` instead of
+``add``.
 
 .. _custom-rest-routing:
 
-Custom REST Routing
--------------------
+Custom Route Classes for Resource Routes
+----------------------------------------
 
 You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::

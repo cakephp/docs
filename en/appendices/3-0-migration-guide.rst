@@ -300,6 +300,11 @@ Router
   your application supports.
 * ``Router::setExtensions()`` has been removed. Use :php:meth:`Cake\\Routing\\Router::parseExtensions()`
   instead.
+* ``Router::resourceMap()`` has been removed.
+* The ``[method]`` option has been renamed to ``_method``.
+* The ability to match arbitrary headers with ``[]`` style parameters has been
+  removed. If you need to parse/match on arbitrary conditions consider using
+  custom route classes.
 * ``Router::promote()`` has been removed.
 * ``Router::parse()`` will now raise an exception when a URL cannot be handled
   by any route.
