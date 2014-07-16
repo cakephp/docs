@@ -566,32 +566,6 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :doc:`/core-libraries/components/request-handling`
 to do automatic view switching based on content types.
 
-.. _route-conditions:
-
-Using Additional Conditions When Matching Routes
-------------------------------------------------
-
-When creating routes you might want to restrict certain URL's based on specific
-request/environment settings. A good example of this is :doc:`rest` routing. You
-can specify additional conditions in the ``$defaults`` argument for
-``connect()``. By default CakePHP exposes 3 environment conditions, but you can
-add more using :ref:`custom-route-classes`. The built-in options are:
-
-- ``[type]`` Only match requests for specific content types.
-- ``[server]`` Only match when $_SERVER['SERVER_NAME'] matches the given value.
-
-We'll provide a simple example here of how you can use the ``[type]``
-option to create a custom RESTful route::
-
-    $routes->connect(
-        "/:controller/:id",
-        array("action" => "edit", "[type]" => "application/json"),
-        array("id" => "[0-9]+")
-    );
-
-The above route will only match for ``application/json`` requests. Using these conditions,
-you can create custom REST routing, or other request data dependent information.
-
 .. _resource-routes:
 
 Creating RESTful Routes
