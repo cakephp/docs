@@ -204,7 +204,7 @@ Redirecting Users After Login
 
 .. php:method:: redirectUrl
 
-After logging a user in, you'll generally want to redirect the back to where
+After logging a user in, you'll generally want to redirect them back to where
 they came from. Pass a URL in to set the destination a user should be redirected
 to upon logging in.
 
