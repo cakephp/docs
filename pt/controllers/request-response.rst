@@ -208,7 +208,7 @@ Existem vários detectores inclusos no Cake que você já pode usar:
 * ``is('head')`` Verifica se a requisição corrente é do tipo HEAD.
 * ``is('options')`` Verifica se a requisição corrente é do tipo OPTIONS.
 * ``is('ajax')`` Verifica se a requisição corrente acompanha o cabeçalho 
-  X-Requested-with = XmlHttpRequest.
+  X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Verifica se a requisição corrente é via SSL.
 * ``is('flash')`` Verifica se a requisição foi feita por um objeto do Flash.
 * ``is('mobile')`` Verifica se a requisição veio de uma lista comum de

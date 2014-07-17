@@ -37,14 +37,14 @@ application CakePHP ressemblerait à ce qui suit::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": ">=2.5.0"
+            "cakephp/cakephp": "2.5.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
         }
     }
 
-Sauvegardez ce JSON dans ``composer.json`` dans le répetoire racine de votre
+Sauvegardez ce JSON dans ``composer.json`` dans le répetoire APP de votre
 projet. Ensuite, téléchargez le fichier composer.phar dans votre projet. Après
 avoir téléchargé composer, installez CakePHP. Dans le même répertoire que votre
 fichier ``composer.json``, lancez ce qui suit::
@@ -61,7 +61,7 @@ de répertoire qui ressemble à::
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 Vous êtes maintenant prêt à générer le reste du squelette de votre
 application::
@@ -75,7 +75,7 @@ relatif::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/cakephp/cakephp/lib'
+        APP . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
@@ -99,7 +99,6 @@ fichier ``Config/bootstrap.php``, ajoutez ce qui suit::
 Vous devriez maintenant avoir une application CakePHP fonctionnelle avec
 CakePHP installé via composer. Assurez-vous de garder les fichiers
 composer.json et composer.lock.json avec le reste de votre code source.
-
 
 Partager les librairies de CakePHP pour plusieurs applications
 ==============================================================
@@ -133,14 +132,13 @@ quelques changements aux fichiers suivants.
 Il y a trois constantes que vous devrez modifier: ``ROOT``,
 ``APP_DIR``, et ``CAKE_CORE_INCLUDE_PATH``.
 
-
 - ``ROOT`` doit être définie vers le chemin du répertoire qui contient le
   dossier app.
 - ``APP_DIR`` doit être définie comme le nom (de base) de votre dossier app.
 - ``CAKE_CORE_INCLUDE_PATH`` doit être définie comme le chemin du dossier
   des librairies de CakePHP.
 
-Testons cela avec un exemple pour que vous puissiez voir ce à quoi peut
+Testons cela avec un exemple pour que vous puissiez voir à quoi peut
 ressembler une installation avancée en pratique. Imaginez que je souhaite
 configurer CakePHP pour travailler comme ce qui suit:
 

@@ -35,14 +35,14 @@ would look like the following::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": ">=2.5.0"
+            "cakephp/cakephp": "2.5.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
         }
     }
 
-Save this JSON into ``composer.json`` in the root directory of your project.
+Save this JSON into ``composer.json`` in the APP directory of your project.
 Next download the composer.phar file into your project. After you've downloaded
 Composer, install CakePHP. In the same directory as your ``composer.json`` run
 the following::
@@ -58,7 +58,7 @@ Once Composer has finished running you should have a directory structure that lo
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 You are now ready to generate the rest of your application skeleton::
 
@@ -70,7 +70,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/cakephp/cakephp/lib'
+        APP . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
@@ -94,7 +94,6 @@ the autoloader, and work around an issue in Composer's autoloader. In your
 You should now have a functioning CakePHP application installed via
 Composer. Be sure to keep the composer.json and composer.lock file with the
 rest of your source code.
-
 
 Sharing CakePHP Libraries with multiple Applications
 ====================================================

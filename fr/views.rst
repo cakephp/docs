@@ -209,7 +209,7 @@ enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 
 .. note::
 
-    Vous devriez éviter d'utiliser ``content`` comme nom de bloc. Celui-ci est 
+    Vous devriez éviter d'utiliser ``content`` comme nom de bloc. Celui-ci est
     utilisé par CakePHP en interne pour étendre les vues, et le contenu des
     vues dans le layout.
 
@@ -265,7 +265,7 @@ le même nom quand l'option ``inline = false`` est utilisée::
     <?php
     // dans votre fichier de vue
     $this->Html->script('carousel', array('inline' => false));
-    $this->Html->css('carousel', null, array('inline' => false));
+    $this->Html->css('carousel', array('inline' => false));
     ?>
 
     // dans votre fichier de layout.

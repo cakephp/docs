@@ -355,6 +355,108 @@ model Profile vont aussi récupérer un enregistrement lié de User si il existe
             )
     )
 
+counterCache - Cache your count()
+---------------------------------
+
+Cette fonction vous aide à mettre en cache le count des données liées.
+Au lieu de compter les enregistrements manuellement via ``find('count')``,
+le model suit lui-même tout ajout/suppression à travers le model ``$hasMany``
+associé et augmente/diminue un champ numérique dedié dans la table du model
+parent.
+
+Le nom du champ est le nom du model particulier suivi par un underscore
+et le mot "count"::
+
+    my_model_count
+
+Disons que vous avez un model appelé ``ImageComment`` et un model
+appelé ``Image``, vous ajouteriez un nouveau champ numérique (INT) à la
+table ``images`` et l'appeleriez ``image_comment_count``.
+
+Ici vous trouverez quelques exemples supplémentaires:
+
+========== ======================= =========================================
+Model      Associated Model        Example
+========== ======================= =========================================
+User       Image                   users.image\_count
+---------- ----------------------- -----------------------------------------
+Image      ImageComment            images.image\_comment\_count
+---------- ----------------------- -----------------------------------------
+BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
+========== ======================= =========================================
+
+Une fois que vous avez ajouté le champ counter, c'est tout bon. Activez
+counter-cache dans votre association en ajoutant une clé ``counterCache`` et
+configurez la valeur à ``true``::
+
+    class ImageComment extends AppModel {
+        public $belongsTo = array(
+            'Image' => array(
+                'counterCache' => true,
+            )
+        );
+    }
+
+A partir de maintenant, chaque fois que vous ajoutez ou retirez un
+``ImageComment`` associé à ``Image``, le nombre dans ``image_comment_count``
+est ajusté automatiquement.
+
+counterScope
+============
+
+Vous pouvez aussi spécifier ``counterScope``. Cela vous permet de spécifier une
+condition simple qui dit au model quand mettre à jour (ou quand ne pas
+le faire, selon la façon dont on le conçoit) la valeur counter.
+
+En utilisant notre exemple de model Image, nous pouvons le spécifier comme
+cela::
+
+    class ImageComment extends AppModel {
+        public $belongsTo = array(
+            'Image' => array(
+                'counterCache' => true,
+                // compte seulement si "ImageComment" est active = 1
+                'counterScope' => array(
+                    'ImageComment.active' => 1
+                )
+            )
+        );
+    }
+
+.. _multiple-counterCache:
+    
+Multiple counterCache
+=====================
+
+Depuis la 2.0, CakePHP supporte les multiples ``counterCache`` dans une seule
+relation de model. Il est aussi possible de définir un ``counterScope`` pour
+chaque ``counterCache``. En assumant que vous avez un model ``User`` et un
+model ``Message`` et que vous souhaitez être capable de compter le montant
+de messages lus et non lus pour chaque utilisateur.
+
+========= ====================== ===========================================
+Model     Field                  Description
+========= ====================== ===========================================
+User      users.messages\_read   Compte les ``Message`` lus
+--------- ---------------------- -------------------------------------------
+User      users.messages\_unread Compte les ``Message`` non lus
+--------- ---------------------- -------------------------------------------
+Message   messages.is\_read      Determines si un ``Message`` est lu ou non.
+========= ====================== ===========================================
+
+Avec la configuration de votre ``belongsTo`` qui ressemblerait à cela::
+
+    class Message extends AppModel {
+        public $belongsTo = array(
+            'User' => array(
+                'counterCache' => array(
+                    'messages_read' => array('Message.is_read' => 1),
+                    'messages_unread' => array('Message.is_read' => 0)
+                )
+            )
+        );
+    }
+
 hasMany
 -------
 
@@ -480,108 +582,6 @@ belongsTo User" dans le model Comment, vous aurez la possibilité
 de connaître les données de l'User depuis le model Comment -
 cela complète la connexion entre eux et permet un flot d'informations depuis
 n'importe lequel des deux models.
-
-counterCache - Cache your count()
----------------------------------
-
-Cette fonction vous aide à mettre en cache le count des données liées.
-Au lieu de compter les enregistrements manuellement via ``find('count')``,
-le model suit lui-même tout ajout/suppression à travers le model ``$hasMany``
-associé et augmente/diminue un champ numérique dedié dans la table du model
-parent.
-
-Le nom du champ est le nom du model particulier suivi par un underscore
-et le mot "count"::
-
-    my_model_count
-
-Disons que vous avez un model appelé ``ImageComment`` et un model
-appelé ``Image``, vous ajouteriez un nouveau champ numérique (INT) à la
-table ``images`` et l'appeleriez ``image_comment_count``.
-
-Ici vous trouverez quelques exemples supplémentaires:
-
-========== ======================= =========================================
-Model      Associated Model        Example
-========== ======================= =========================================
-User       Image                   users.image\_count
----------- ----------------------- -----------------------------------------
-Image      ImageComment            images.image\_comment\_count
----------- ----------------------- -----------------------------------------
-BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
-========== ======================= =========================================
-
-Une fois que vous avez ajouté le champ counter, c'est tout bon. Activez
-counter-cache dans votre association en ajoutant une clé ``counterCache`` et
-configurez la valeur à ``true``::
-
-    class ImageComment extends AppModel {
-        public $belongsTo = array(
-            'Image' => array(
-                'counterCache' => true,
-            )
-        );
-    }
-
-A partir de maintenant, chaque fois que vous ajoutez ou retirez un
-``ImageComment`` associé à ``Image``, le nombre dans ``image_comment_count``
-est ajusté automatiquement.
-
-counterScope
-============
-
-Vous pouvez aussi spécifier ``counterScope``. Cela vous permet de spécifier une
-condition simple qui dit au model quand mettre à jour (ou quand ne pas
-le faire, selon la façon dont on le conçoit) la valeur counter.
-
-En utilisant notre exemple de model Image, nous pouvons le spécifier comme
-cela::
-
-    class ImageComment extends AppModel {
-        public $belongsTo = array(
-            'Image' => array(
-                'counterCache' => true,
-                // compte seulement si "ImageComment" est active = 1
-                'counterScope' => array(
-                    'ImageComment.active' => 1
-                )
-            )
-        );
-    }
-
-.. _multiple-counterCache:
-    
-Multiple counterCache
-=====================
-
-Depuis la 2.0, CakePHP supporte les multiples ``counterCache`` dans une seule
-relation de model. Il est aussi possible de définir un ``counterScope`` pour
-chaque ``counterCache``. En assumant que vous avez un model ``User`` et un
-model ``Message`` et que vous souhaitez être capable de compter le montant
-de messages lus et non lus pour chaque utilisateur.
-
-========= ====================== ===========================================
-Model     Field                  Description
-========= ====================== ===========================================
-User      users.messages\_read   Compte les ``Message`` lus
---------- ---------------------- -------------------------------------------
-User      users.messages\_unread Compte les ``Message`` non lus
---------- ---------------------- -------------------------------------------
-Message   messages.is\_read      Determines si un ``Message`` est lu ou non.
-========= ====================== ===========================================
-
-Avec la configuration de votre ``belongsTo`` qui ressemblerait à cela::
-
-    class Message extends AppModel {
-        public $belongsTo = array(
-            'User' => array(
-                'counterCache' => array(
-                    'messages_read' => array('Message.is_read' => 1),
-                    'messages_unread' => array('Message.is_read' => 0)
-                )
-            )
-        );
-    }
 
 hasAndBelongsToMany (HABTM)
 ---------------------------

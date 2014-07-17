@@ -241,7 +241,7 @@ Vous pouvez utiliser plusieurs détecteurs intégrés:
 * ``is('head')`` Vérifie si la requête courante est un HEAD.
 * ``is('options')`` Vérifie si la requête courante est OPTIONS.
 * ``is('ajax')`` Vérifie si la requête courante vient d'un
-  X-Requested-with = XmlHttpRequest.
+  X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Vérifie si la requête courante est via SSL.
 * ``is('flash')`` Vérifie si la requête courante a un User-Agent
   de Flash.

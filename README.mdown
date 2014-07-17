@@ -31,13 +31,13 @@ After installing the required packages, you can build the documentation using `m
 	# Create all the HTML docs. Including all the languages.
 	make html
 	
-	# Create just the english HTML docs.
+	# Create just the English HTML docs.
 	make html-en
 	
 	# Create all the EPUB (e-book) docs.
 	make epub
 	
-	# Create just the engish EPUB docs.
+	# Create just the English EPUB docs.
 	make epub-en
 
 	# Populate the search index

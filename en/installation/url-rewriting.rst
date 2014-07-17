@@ -39,14 +39,14 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   In many systems these will be commented out by default, so you may 
+   In many systems these will be commented out by default, so you may
    just need to remove the leading # symbols.
 
    After you make changes, restart Apache to make sure the settings
    are active.
 
    Verify that your .htaccess files are actually in the right
-   directories. Some operating systems treat files that start 
+   directories. Some operating systems treat files that start
    with '.' as hidden and therefore won't copy them.
 
 #. Make sure your copy of CakePHP comes from the downloads section of
@@ -149,10 +149,8 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
 Pretty URLs on nginx
 ====================
 
-nginx is a popular server that uses less system
-resources than Apache. Its drawback is that it does not make use of .htaccess
-files like Apache, so it is necessary to create those
-rewritten URLs in the site-available configuration. Depending upon
+nginx does not make use of .htaccess files like Apache, so it is necessary to
+create those rewritten URLs in the site-available configuration. Depending upon
 your setup, you will have to modify this, but at the very least,
 you will need PHP running as a FastCGI instance.
 
@@ -186,20 +184,6 @@ you will need PHP running as a FastCGI instance.
             fastcgi_index   index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
-    }
-
-URL rewrite rules for Hiawatha
-==============================
-`Hiawatha <https://www.hiawatha-webserver.org/>`_ is a webserver with a strong focus on security. It also aims at being easy to use and being lightweight. Research performed by independent researchers proves that Hiawatha offers a performance comparable to other web servers under `normal conditions <http://www.saltwaterc.ro/wp-download/documents/PHP_web_serving_study.pdf>`_, but much better while `under attack <https://www.hiawatha-webserver.org/weblog/64>`_.
-
-Follow the `HOWTO instructions <https://www.hiawatha-webserver.org/howto>`_ at the Hiawatha webserver website to configure your webserver. The required UrlToolkit rule (for URL rewriting) to use CakePHP with Hiawatha is:
-
-::
-
-    UrlToolkit {
-       ToolkitID = cakephp
-       RequestURI exists Return
-       Match .* Rewrite /index.php
     }
 
 URL Rewrites on IIS7 (Windows hosts)
@@ -258,7 +242,7 @@ correctly.
 URL-Rewriting on lighttpd
 =========================
 
-Lighttpd does not support .htaccess functions, so you can remove all .htaccess files. 
+Lighttpd does not support .htaccess functions, so you can remove all .htaccess files.
 In the lighttpd configuration, make sure you've activated "mod_rewrite". Add a line:
 
 ::
@@ -267,6 +251,18 @@ In the lighttpd configuration, make sure you've activated "mod_rewrite". Add a l
         "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
     )
 
+URL rewrite rules for Hiawatha
+==============================
+
+The required UrlToolkit rule (for URL rewriting) to use CakePHP with Hiawatha is:
+
+::
+
+    UrlToolkit {
+       ToolkitID = cakephp
+       RequestURI exists Return
+       Match .* Rewrite /index.php
+    }
 
 I don't / can't use URL rewriting
 =================================

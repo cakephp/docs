@@ -124,8 +124,8 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: convertSlash(string $string)
 
-    Convertit les slashes en underscores et supprime le premier et
-    le dernier underscores dans une chaîne. Retourne la chaîne convertie.
+    Convertit les slashes en underscores et supprime les premier et
+    dernier underscores dans une chaîne. Retourne la chaîne convertie.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 

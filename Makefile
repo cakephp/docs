@@ -19,7 +19,7 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
-# Copy-paste the english Makefile everwhere its needed.
+# Copy-paste the English Makefile everywhere it's needed.
 %/Makefile: en/Makefile
 	cp $< $@
 

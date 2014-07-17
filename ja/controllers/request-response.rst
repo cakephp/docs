@@ -174,7 +174,7 @@ CakeRequestはまたアプリケーションのパスについての役立つ情
 * ``is('delete')`` 現在のリクエストがDELETEかどうかを調べます。
 * ``is('head')`` 現在のリクエストがHEADかどうかを調べます。
 * ``is('options')`` 現在のリクエストがOPTIONSかどうかを調べます。
-* ``is('ajax')`` 現在のリクエストが X-Requested-with = XmlHttpRequestに由来するものかどうかを調べます。
+* ``is('ajax')`` 現在のリクエストが X-Requested-With = XMLHttpRequestに由来するものかどうかを調べます。
 * ``is('ssl')`` リクエストがSSL経由かどうかを調べます。
 * ``is('flash')`` リクエストにFlashのUser-Agentがあるかどうかを調べます。
 * ``is('mobile')`` リクエストがモバイルエージェントの共通リストに由来しているかどうかを調べます。
