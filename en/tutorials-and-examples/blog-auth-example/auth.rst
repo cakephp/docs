@@ -101,7 +101,7 @@ tutorial, we will show just the add.ctp:
 
 .. code-block:: php
 
-    <!-- app/View/Users/add.ctp -->
+    <!-- src/Template/Users/add.ctp -->
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
@@ -131,11 +131,13 @@ file and add the following lines::
 
     namespace App\Controller;
 
+    use Cake\Event\Event;
+
     class AppController extends Controller {
         //...
 
         public $components = [
-            'Session',
+            'Flash',
             'Auth' => [
                 'loginRedirect' => [
                     'controller' => 'Articles',
@@ -223,7 +225,7 @@ and add the following lines:
 
 .. code-block:: php
 
-    //app/View/Users/login.ctp
+    // src/Template/Users/login.ctp
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
@@ -247,7 +249,7 @@ happened. The ``beforeFilter`` function is telling the AuthComponent to not requ
 login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
 already allowed in the AppController's ``beforeFilter`` function.
 
-The ``login`` action calls the ``$this->Auth->login()`` function in the AuthComponent,
+The ``login`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as
 mentioned earlier. That is, having a Users table with a username and a password
 column, and use a form posted to a controller with the user data. This function
@@ -272,6 +274,7 @@ Also, a small change in the ArticlesController is required to store the currentl
 logged in user as a reference for the created article::
 
     // src/Controller/ArticlesController.php
+
     public function add() {
         $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
@@ -299,7 +302,7 @@ config::
     // src/Controller/AppController.php
 
     public $components = [
-        'Session',
+        'Flash',
         'Auth' => [
             'loginRedirect' => [
                 'controller' => 'Articles',
@@ -340,12 +343,12 @@ and add the following content::
 
     public function isAuthorized($user) {
         // All registered users can add articles
-        if ($this->action === 'add') {
+        if ($this->request->action === 'add') {
             return true;
         }
 
         // The owner of an article can edit and delete it
-        if (in_array($this->action, ['edit', 'delete'])) {
+        if (in_array($this->request->action, ['edit', 'delete'])) {
             $articleId = (int)$this->request->params['pass'][0];
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
@@ -362,7 +365,7 @@ edit and delete. One final thing has not been implemented. To tell whether
 or not the user is authorized to edit the article, we're calling a ``isOwnedBy()``
 function in the Articles table. Let's then implement that function::
 
-    // src/Model/Repository/ArticlesTable.php
+    // src/Model/Table/ArticlesTable.php
 
     public function isOwnedBy($articleId, $userId) {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
