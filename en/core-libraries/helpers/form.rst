@@ -961,7 +961,7 @@ Form Element-Specific Methods
 All elements are created under a form for the ``User`` model as in the examples above.
 For this reason, the HTML code generated will contain attributes that reference to the User model.
 Ex: name=data[User][username], id=UserUsername
-    
+
 .. php:method:: label(string $fieldName, string $text, array $options)
 
     Create a label element. ``$fieldName`` is used for generating the
@@ -1032,14 +1032,14 @@ Ex: name=data[User][username], id=UserUsername
     .. code-block:: html
 
         <input name="data[User][id]" id="UserId" type="hidden" />
-        
+
     If the form is edited (that is, the array ``$this->request->data`` will
     contain the information saved for the ``User`` model), the value
     corresponding to ``id`` field will automatically be added to the HTML
     generated. Example for data[User][id] = 10:
-    
+
     .. code-block:: html
-        
+
         <input name="data[User][id]" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
@@ -1061,7 +1061,7 @@ Ex: name=data[User][username], id=UserUsername
 
     If the form is edited (that is, the array ``$this->request->data`` will
     contain the information saved for the ``User`` model), the value
-    corresponding to ``notes`` field will automatically be added to the HTML 
+    corresponding to ``notes`` field will automatically be added to the HTML
     generated. Example:
 
     .. code-block:: html
@@ -1077,7 +1077,7 @@ Ex: name=data[User][username], id=UserUsername
         textarea should be escaped. Defaults to ``true``.
 
     ::
-        
+
         echo $this->Form->textarea('notes', array('escape' => false);
         // OR....
         echo $this->Form->input(
@@ -1530,6 +1530,13 @@ Creating buttons and submit elements
 
     .. versionchanged:: 2.3
         The ``method`` option was added.
+
+    .. versionchanged:: 2.5
+        The ``inline`` and ``block`` options were added. They allow buffering
+        the generated form tag, instead of returning with the link. This helps
+        avoiding nested form tags. Setting ``'inline' => true`` will add
+        the form tag to ``postLink`` content block or you can use option ``block``
+        to specify a custom block.
 
 Creating date and time inputs
 =============================
