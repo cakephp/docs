@@ -193,8 +193,9 @@ and redirect to either the last page they were visiting or a URL specified in th
 
 .. warning::
 
-    ``$this->Auth->setUser($data)`` will log the user in with whatever data is passed
-    to the method. It won't actually check the credentials against an authenticate class.
+    ``$this->Auth->setUser($data)`` will log the user in with whatever data is
+    passed to the method. It won't actually check the credentials against an
+    authentication class.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -287,7 +288,7 @@ order in which you specify the authentication provider in ``authenticate``
 config matters.
 
 If authenticator returns null, AuthComponent redirects user to login action.
-If it's an AJAX request and config ``ajaxLogin` is specified that element
+If it's an AJAX request and config ``ajaxLogin`` is specified that element
 is rendered else a 403 HTTP status code is returned.
 
 Displaying Auth Related Flash Messages
@@ -295,7 +296,7 @@ Displaying Auth Related Flash Messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the ``app/View/Layout/default.ctp`` file in the body section::
+lines to the ``src/Template/Layout/default.ctp`` file in the body section::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
@@ -304,9 +305,8 @@ You can customize the error messages, and flash settings AuthComponent
 uses. Using ``flash`` config you can configure the parameters
 AuthComponent uses for setting flash messages. The available keys are
 
-- ``element`` - The element to use, defaults to null.
-- ``key`` - The key to use, defaults to 'auth'
-- ``params`` - The array of additional params to use, defaults to []
+- ``key`` - The key to use, defaults to 'auth'.
+- ``params`` - The array of additional params to use, defaults to [].
 
 In addition to the flash message settings you can customize other error
 messages AuthComponent uses. In your controller's beforeFilter, or
@@ -317,7 +317,7 @@ for when authorization fails::
 
 Sometimes, you want to display the authorization error only after
 the user has already logged-in. You can suppress this message by setting
-its value to boolean `false`.
+its value to boolean ``false``.
 
 In your controller's beforeFilter(), or component settings::
 
@@ -333,7 +333,11 @@ Hashing Passwords
 You are responsible for hashing the passwords before they are persisted to the
 database, the easiest way is to use a setter function in your User entity::
 
-    use \Cake\Auth\DefaultPasswordHasher;
+    namespace App\Model\Entity;
+
+    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
+
     class User extends Entity {
 
         // ...
@@ -358,12 +362,12 @@ Creating Custom Password Hasher Classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``src/Auth/DumbPasswordHasher.php`` and implement the
+``src/Auth/LegacyPasswordHasher.php`` and implement the
 ``hash`` and ``check`` methods::
 
     use \Cake\Auth\AbstractPasswordHasher;
 
-    class DumbPasswordHasher extends AbstractPasswordHasher {
+    class LegacyPasswordHasher extends AbstractPasswordHasher {
 
         public function hash($password) {
             return md5($password);
@@ -382,7 +386,7 @@ hasher::
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
-                        'className' => 'Dumb',
+                        'className' => 'Legacy',
                     ]
                 ]
             ]
@@ -398,7 +402,7 @@ Changing Hashing Algorithms
 
 CakePHP provides a clean way to migrate your users' passwords from one algorithm
 to another, this is achieved through the ``FallbackPasswordHasher`` class.
-Assuming you are using ``DumbPasswordHasher`` from the previous example, you
+Assuming you are using ``LegacyPasswordHasher`` from the previous example, you
 can configure the AuthComponent as follows::
 
     public $components = [
@@ -407,7 +411,7 @@ can configure the AuthComponent as follows::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Default', 'Dumb']
+                        'hashers' => ['Default', 'Legacy']
                     ]
                 ]
             ]
@@ -452,12 +456,21 @@ digest authentication with any other authentication strategies, it's also
 recommended that you store the digest password in a separate column,
 from the normal password hash::
 
-    class User extends AppModel {
-        public function beforeSave($options = []) {
+    namespace App\Model\Table;
+
+    use Cake\Auth\DigestAuthenticate;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table {
+
+        public function beforeSave(Event $event) {
+            $entity = $event->data['entity'];
+
             // make a password for digest auth.
-            $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'],
-                $this->data['User']['password'],
+            $entity->digest_hash = DigestAuthenticate::password(
+                $entity->username,
+                $entity->plain_password,
                 env('SERVER_NAME')
             );
             return true;
@@ -482,7 +495,9 @@ class and need to implement the abstract methods ``hash()`` and ``check()``.
 In ``app/Auth/CustomPasswordHasher.php`` you could put
 the following::
 
-    App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
+    namespace App\Auth;
+
+    use Cake\Auth\AbstractPasswordHasher;
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
@@ -502,14 +517,13 @@ as just after they registered for your application. You can do this by
 calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
     public function register() {
-        if ($this->Users->save($this->request->data)) {
-            $id = $this->Users->id;
-            $this->request->data['User'] = array_merge(
-                $this->request->data['User'],
-                ['id' => $id]
-            );
-            $this->Auth->setUser($this->request->data['User']);
-            return $this->redirect('/users/home');
+        $user = $this->Users->newEntity($this->request->data);
+        if ($this->Users->save($user)) {
+            $this->Auth->setUser($user->toArray());
+            return $this->redirect([
+                'controller' => 'Users',
+                'action' => 'home'
+            ]);
         }
     }
 
@@ -732,12 +746,12 @@ checked::
         ];
         public function isAuthorized($user = null) {
             // Any registered user can access public functions
-            if (empty($this->request->params['admin'])) {
+            if (empty($this->request->params['prefix'])) {
                 return true;
             }
 
             // Only admins can access admin functions
-            if (isset($this->request->params['admin'])) {
+            if ($this->request->params['prefix'] === 'admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
