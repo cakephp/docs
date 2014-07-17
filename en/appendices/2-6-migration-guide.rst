@@ -64,6 +64,9 @@ Hash
 ----
 
 - ``Hash::get()`` now raises an exception when the path argument is invalid.
+- ``Hash::nest()`` now raises an exception when the nesting operation results in
+  no data.
+
 
 Validation
 ----------
