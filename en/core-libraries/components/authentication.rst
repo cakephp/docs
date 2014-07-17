@@ -160,6 +160,8 @@ the following keys:
 Identifying Users and Logging Them In
 -------------------------------------
 
+.. php:method:: identify()
+
 You need to manually call ``$this->Auth->identify()`` to identify the user using
 credentials provided in request. Then use ``$this->Auth->setUser()``
 to log the user in i.e. save user info to session.
@@ -196,6 +198,29 @@ and redirect to either the last page they were visiting or a URL specified in th
     ``$this->Auth->setUser($data)`` will log the user in with whatever data is
     passed to the method. It won't actually check the credentials against an
     authentication class.
+
+Redirecting Users After Login
+-----------------------------
+
+.. php:method:: redirectUrl
+
+After logging a user in, you'll generally want to redirect the back to where
+they came from. Pass a URL in to set the destination a user should be redirected
+to upon logging in.
+
+If no parameter is passed, gets the authentication redirect URL. The URL
+returned is as per following rules:
+
+ - Returns the normalized URL from session Auth.redirect value if it is
+   present and for the same domain the current app is running on.
+ - If there is no session value and there is a config ``loginRedirect``, the
+   ``loginRedirect`` value is returned.
+ - If there is no session and no ``loginRedirect``, / is returned.
+
+If no parameter is passed, gets the authentication redirect URL. Pass a
+URL in to set the destination a user should be redirected to upon logging
+in. Will fallback to ``AuthComponent::$loginRedirect`` if there is
+no stored redirect value.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -512,6 +537,8 @@ the following::
 Manually Logging Users In
 -------------------------
 
+.. php:method:: setUser(array $user)
+
 Sometimes the need arises where you need to manually log a user in, such
 as just after they registered for your application. You can do this by
 calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
@@ -535,6 +562,8 @@ calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 Accessing the Logged In User
 ----------------------------
 
+.. php:method:: user($key = null)
+
 Once a user is logged in, you will often need some particular
 information about the current user. You can access the currently logged
 in user using ``AuthComponent::user()``::
@@ -542,9 +571,14 @@ in user using ``AuthComponent::user()``::
     // From inside a controller or other component.
     $this->Auth->user('id');
 
+If the current user is not logged in or the key doesn't exist, null will
+be returned.
+
 
 Logging Users Out
 -----------------
+
+.. php:method:: logout()
 
 Eventually you'll want a quick way to de-authenticate someone, and
 redirect them to where they need to go. This method is also useful if
@@ -687,6 +721,8 @@ beforeFilter, or with another component.
 Making Actions Public
 ---------------------
 
+.. php:method:: allow($actions = null)
+
 There are often times controller actions that you wish to remain
 entirely public, or that don't require users to be logged in.
 AuthComponent is pessimistic, and defaults to denying access. You can
@@ -695,7 +731,7 @@ marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
     // Allow all actions
-    $this->Auth->allow();
+    $this->Auth->allow('*');
 
     // Allow only the index action.
     $this->Auth->allow('index');
@@ -709,12 +745,14 @@ For a single action you can provide the action name as string. Otherwise use an 
 Making Actions Require Authorization
 ------------------------------------
 
+.. php:method:: deny($actions = null)
+
 By default all actions require authorization. However, after making actions
 public, you want to revoke the public access. You can do so using
 ``AuthComponent::deny()``::
 
     // Deny all actions.
-    $this->Auth->deny();
+    $this->Auth->deny('*');
 
     // Deny one action
     $this->Auth->deny('add');
@@ -764,14 +802,11 @@ The above callback would provide a very simple authorization system
 where, only users with role = admin could access actions that were in
 the admin prefix.
 
-AuthComponent API
-=================
-
-AuthComponent is the primary interface to the built-in authorization
-and authentication mechanics in CakePHP.
-
 Configuration options
----------------------
+=====================
+
+The following settings can all be defined either in your controller's
+``$components`` array or using ``$this->Auth->config()``:
 
 ajaxLogin
     The name of an optional view element to render when an AJAX request is made
@@ -817,88 +852,6 @@ unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
-
-.. php:attr:: sessionKey
-
-    The session key name where the record of the current user is stored. If
-    unspecified, it will be "Auth.User".
-
-.. php:method:: allow($actions = null)
-
-    Set one or more actions as public actions, this means that no
-    authorization checks will be performed for the specified actions.
-    The special value of ``'*'`` will mark all the current controllers
-    actions as public. Best used in your controller's beforeFilter
-    method.
-
-.. php:method:: deny($actions = null)
-
-    Toggle one or more actions previously declared as public actions,
-    as non-public methods. These methods will now require
-    authorization. Best used inside your controller's beforeFilter
-    method.
-
-.. php:method:: flash($message)
-
-    Set a flash message. Uses the Session component, and values from
-    :php:attr:`AuthComponent::$flash`.
-
-.. php:method:: identify()
-
-    This method is used by AuthComponent to identify a user based on the
-    information contained in the current request.
-
-.. php:method:: initialize($Controller)
-
-    Initializes AuthComponent for use in the controller.
-
-.. php:method:: isAuthorized($user = null, $request = null)
-
-    Uses the configured Authorization adapters to check whether or not a user
-    is authorized. Each adapter will be checked in sequence, if any of them
-    return true, then the user will be authorized for the request.
-
-.. php:method:: setUser(array $user)
-
-    :param array $user: Array of user data.
-
-    Takes an array of user data to login with and writes to session for persisting
-    across requests.
-
-.. php:method:: logout()
-
-    :return: A string URL to redirect the logged out user to.
-
-    Logs out the current user.
-
-.. php:method:: mapActions($map = [])
-
-    Maps action names to CRUD operations. Used for controller-based
-    authentication. Make sure to configure the authorize property before
-    calling this method. As it delegates $map to all the attached authorize
-    objects.
-
-.. php:method:: redirectUrl($url = null)
-
-    If no parameter is passed, gets the authentication redirect URL. Pass a
-    URL in to set the destination a user should be redirected to upon logging
-    in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
-    no stored redirect value.
-
-.. php:method:: user($key = null)
-
-    :param string $key:  The user data key you want to fetch. If null,
-        all user data will be returned. Can also be called as an instance
-        method.
-
-    Get data concerning the currently logged in user, you can use a
-    property key to fetch specific data about the user::
-
-        $id = $this->Auth->user('id');
-
-    If the current user is not logged in or the key doesn't exist, null will
-    be returned.
-
 
 .. meta::
     :title lang=en: Authentication
