@@ -731,7 +731,7 @@ marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
     // Allow all actions
-    $this->Auth->allow('*');
+    $this->Auth->allow();
 
     // Allow only the index action.
     $this->Auth->allow('index');
@@ -752,7 +752,7 @@ public, you want to revoke the public access. You can do so using
 ``AuthComponent::deny()``::
 
     // Deny all actions.
-    $this->Auth->deny('*');
+    $this->Auth->deny();
 
     // Deny one action
     $this->Auth->deny('add');
