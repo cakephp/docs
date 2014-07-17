@@ -102,7 +102,7 @@ The core authentication objects support the following configuration
 keys.
 
 - ``fields`` The fields to use to identify a user by.
-- ``userModel`` The model name of the User, defaults to User.
+- ``userModel`` The model name of the users table, defaults to Users.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['Users.is_active' => true]``.
 - ``contain`` Extra models to contain and return with identified user's info.
@@ -502,8 +502,8 @@ as just after they registered for your application. You can do this by
 calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
     public function register() {
-        if ($this->User->save($this->request->data)) {
-            $id = $this->User->id;
+        if ($this->Users->save($this->request->data)) {
+            $id = $this->Users->id;
             $this->request->data['User'] = array_merge(
                 $this->request->data['User'],
                 ['id' => $id]
