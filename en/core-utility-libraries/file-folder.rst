@@ -8,10 +8,10 @@ related tasks.
 Basic Usage
 ===========
 
-Ensure the classes are loaded using :php:meth:`App::uses()`::
+Ensure the classes are loaded::
 
-    App::uses('Folder', 'Utility');
-    App::uses('File', 'Utility');
+    use Cake\Utility\Folder;
+    use Cake\Utility\File;
 
 Then we can setup a new folder instance::
 
