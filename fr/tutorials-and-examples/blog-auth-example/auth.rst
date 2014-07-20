@@ -62,6 +62,7 @@ de génération de code fournis par CakePHP::
 
     use App\Controller\AppController;
     use Cake\Error\NotFoundException;
+    use Cake\Event\Event;
 
     class UsersController extends AppController {
 
@@ -133,6 +134,8 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     // src/Controller/AppController.php
 
     namespace App\Controller;
+    
+    use Cake\Event\Event;
 
     class AppController extends Controller {
         //...
