@@ -831,7 +831,7 @@ When calling ``list`` you can configure the fields used for the key and value wi
 the ``idField`` and ``valueField`` options respectively::
 
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title']
+        'idField' => 'slug', 'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -845,7 +845,7 @@ Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title'],
+        'idField' => 'slug', 'valueField' => 'title',
         'groupField' => ['author_id']
     ]);
     $data = $query->toArray();
