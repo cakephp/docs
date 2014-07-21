@@ -56,6 +56,13 @@ CakeRequest
   like ``data()``.
 - ``CakeRequest:setInput()``
 
+HttpSocket
+----------
+
+- ``HttpSocket::head()`` was added.
+- You can now use the ``protocol`` option to override the specific protocol to
+  use when making a request.
+
 
 Utility
 =======
