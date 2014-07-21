@@ -1343,7 +1343,7 @@ Création des boutons et des éléments submits
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
     pour créér des boutons a l'intérieur de formulaires ouvert.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
     Requiert que JavaScript  soit autorisé dans votre navigateur.

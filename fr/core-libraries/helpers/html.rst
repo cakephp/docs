@@ -315,7 +315,7 @@ les utiliser.
 
         echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
-.. php:method:: link(string $title, mixed $url = null, array $options = [], string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = [])
 
     :param string $title: Le texte à afficher comme corps du lien.
     :param mixed $url: Soit la chaîne spécifiant le chemin, ou un :term:`tableau routing`.
@@ -351,14 +351,13 @@ les utiliser.
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de
-    confirmation JavaScript ``confirm()``::
+    Spécifiez la clé ``confirm`` dans les options pour afficher une boite de
+    dialogue de confirmation JavaScript ``confirm()``::
 
         echo $this->Html->link(
             'Delete',
             ['controller' => 'Recipes', 'action' => 'delete', 6],
-            [],
-            "Are you sure you wish to delete this recipe?"
+            ['confirm' => 'Are you sure you wish to delete this recipe?'],
         );
 
     Affichera:
