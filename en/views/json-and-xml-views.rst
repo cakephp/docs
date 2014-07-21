@@ -113,7 +113,7 @@ well.
 
     The JsonView class supports the ``_jsonOptions`` variable that allows you to
     customize the bit-mask used to generate JSON. See the
-    `http://php.net/json_encode <json_encode>`_ documentation for how the valid
+    `http://php.net/json_encode <json_encode>`_ documentation for the valid
     values of this option.
 
 JSONP Response
