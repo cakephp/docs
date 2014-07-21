@@ -484,7 +484,6 @@ like the following:
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
-    <?php foreach ($posts as $post): ?>
     <ol>
     <?php foreach ($posts as $post): ?>
           <li><?= $post['Post']['title'] ?></li>
