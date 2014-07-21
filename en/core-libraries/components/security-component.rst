@@ -135,7 +135,7 @@ Restricting cross controller communication
 .. php:attr:: allowedActions
 
     A list of actions which are allowed to send requests
-    to this controllers actions.
+    to this controller's actions.
     This can be used to control cross controller requests.
 
 Form tampering prevention
