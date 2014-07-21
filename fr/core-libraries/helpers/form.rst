@@ -1017,7 +1017,7 @@ Ex: name=data[User][username], id=UserUsername
     Toutefois, dans ce cas, $options est utilisé avant tout pour spécifier
     les attributs des balises HTML
     (comme la valeur ou l'id DOM d'un élément du formulaire).::
-   
+
         echo $this->Form->text('username', array('class' => 'users'));
 
     Affichera:
@@ -1054,9 +1054,9 @@ Ex: name=data[User][username], id=UserUsername
     contenir les informations sauvegardées pour le model ``User``), la valeur
     correspondant au champ ``id`` sera automatiquement ajoutée au HTML généré.
     Exemple pour data[User][id] = 10:
-    
+
     .. code-block:: html
-        
+
         <input name="data[User][id]" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
@@ -1191,7 +1191,7 @@ Ex: name=data[User][username], id=UserUsername
 
     Si pour quelque raisons vous ne voulez pas du input caché, définissez
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false 
-    
+
     .. versionchanged:: 2.1
         L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
 
@@ -1201,7 +1201,7 @@ Ex: name=data[User][username], id=UserUsername
     avec l'option spécifiée par ``$attributes['value']`` sera montré comme
     sélectionné par défaut. Définir à false la clé 'empty' dans la variable
     ``$attributes`` pour empêcher l'option empty par défaut::
-   
+
         $options = array('H' => 'Homme', 'F' => 'Femme');
         echo $this->Form->select('genre', $options)
 
@@ -1266,7 +1266,7 @@ Ex: name=data[User][username], id=UserUsername
       avec les checkboxes multiples et les boutons radios également,
       mais au lieu des groupes optionnels enveloppez les éléments
       dans des fieldsets::
-      
+
         $options = array(
            'Group 1' => array(
               'Value 1' => 'Label 1',
@@ -1389,7 +1389,7 @@ Ex: name=data[User][username], id=UserUsername
     En raisons des limitations du code HTML lui même, il n'est pas possible
     de placer des valeurs par défauts dans les champs inputs de type 'file'.
     A chacune des fois ou le formulaire sera affiché, la valeur sera vide.
-  
+
     Lors de la soumission, le champ file fournit un tableau étendu de données
     au script recevant les données de formulaire.
 
@@ -1466,7 +1466,7 @@ Création des boutons et des éléments submits
 
     Vous pouvez aussi passer une URL relative ou absolue vers une image
     pour le paramêtre caption au lieu d'un caption text::
-    
+
         echo $this->Form->submit('ok.png');
 
     Affichera:
@@ -1516,21 +1516,28 @@ Création des boutons et des éléments submits
     pas cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`FormHelper::submit() ou :php:meth:`FormHelper::button()`
     pour créér des boutons a l'intérieur de formulaires ouvert.
-    
+
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
     Requiert que JavaScript  soit autorisé dans votre navigateur.
-    
+
     Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette
     méthode dans un formulaire existant. En remplacement vous devriez
     ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`.
-    
+
     .. versionchanged:: 2.3
 
     L'option ``method`` a été ajoutée.
 
-   
+    .. versionchanged:: 2.5
+        Les options ``inline`` et ``block`` ont été ajoutées. Elles permettent
+        de mettre en tampon la balise de form générée au lieu de la retourner
+        avec le lien. Ceci permet d'éviter les balises de form imbriquées.
+        Définir ``'inline' => true`` va ajouter la balise de form en block
+        de contenu ``postLink`` ou vous pouvez utiliser l'option ``block``
+        pour spécifier un block personnalisé.
+
 Crée des inputs de date et d'heure (date and time inputs)
 =========================================================
 
@@ -1550,7 +1557,7 @@ Crée des inputs de date et d'heure (date and time inputs)
     ``$minYear`` jusqu'à ``$maxYear``. Les attributs HTML devrons être fournis
     dans $attributes. Si ``$attributes['empty']`` est false, le select
     n'inclura pas d'option empty::
-   
+
         echo $this->Form->annee('purchased', 2000, date('Y'));
 
     Affichera:
@@ -1704,7 +1711,7 @@ déclarant l'option dans l'appel input()::
 
     echo $this->Form->input('password'); // Pas de div, pas de label avec la classe 'fancy'
     echo $this->Form->input('username', array('label' => 'Username')); // a un élément label avec les mêmes valeurs par défaut
-    
+
 Travailler avec le Component Sécurity
 =====================================
 
@@ -1724,7 +1731,7 @@ Ceci assurera que les inputs  jeton spéciaux ``_Token`` seront générés.
     du ``SecurityComponent``. Ceci permet également au champ d'être
     manipulé par Javascript. Le paramètre ``$name`` devra être le nom
     d'entité de l'input::
-    
+
         $this->Form->unlockField('User.id');
 
 .. php:method:: secure(array $fields = array())

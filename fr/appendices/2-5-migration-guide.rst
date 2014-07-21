@@ -273,6 +273,9 @@ FormHelper
   permettent de passer des options supplémentaires qui sont changées en
   attributs sur les inputs cachés générés. C'est utile quand vous voulez
   utiliser l'attribut HTML5 ``form``.
+- :php:meth:`FormHelper::postLink()` vous permet maintenant de faire un tampon
+  de la balise de formulaire généré au lieu de la retourner avec le lien. Ceci
+  permet d'éviter les balises de formulaire imbriquées.
 
 PaginationHelper
 ----------------
