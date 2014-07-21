@@ -69,8 +69,8 @@ to contain the following information::
 
     "psr-4": {
         (...)
-        "MyPlugin\\": "/plugins/MyPlugin/src",
-        "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
+        "MyPlugin\\": "./plugins/MyPlugin/src",
+        "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
 Additionally you will need to tell composer to refresh it's autoloading cache::
