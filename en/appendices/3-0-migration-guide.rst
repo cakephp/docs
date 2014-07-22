@@ -912,7 +912,7 @@ JsHelper
 CacheHelper
 --------
 
-- ``CacheHelper`` has been removed.
+- ``CacheHelper`` has been removed and is going to be provided into a standalone plugin.
 
 I18n
 ====
