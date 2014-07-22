@@ -908,6 +908,11 @@ JsHelper
   hence trying to generate all javascript code using just the helper often
   became an impediment. It's now recommended to directly use javascript library
   of your choice.
+  
+CacheHelper
+--------
+
+- ``CacheHelper`` has been removed.
 
 I18n
 ====
