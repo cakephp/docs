@@ -342,7 +342,7 @@ Then modify the ``actsAs`` for the model ``User`` and disable the requester dire
 These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group`` 
 Aro's. This also avoids the afterSave being called.
 
-Note: Every user must have an assigned ``group_id`` for this to work.
+Note: Every user has to have ``group_id`` assigned for this to work.
 
 Now the ``aros`` table will look like this::
 
