@@ -335,14 +335,14 @@ implement ``bindNode()`` in ``User`` model::
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
-and modify the ``actsAs`` for the model ``User`` and disable the requester directive::
+Then modify the ``actsAs`` for the model ``User`` and disable the requester directive::
 
     public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 
 These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group`` 
 Aro's. This also avoids the afterSave being called.
 
-Note: Every user has to have assigned ``group_id`` for this to work.
+Note: Every user must have an assigned ``group_id`` for this to work.
 
 Now the ``aros`` table will look like this::
 
