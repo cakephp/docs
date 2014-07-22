@@ -13,6 +13,11 @@ Basics.php
 Console
 =======
 
+ConsoleOptionParser
+-------------------
+
+- ``ConsoleOptionParser::removeSubcommand()`` was added.
+
 Shell
 -----
 
