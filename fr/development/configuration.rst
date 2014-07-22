@@ -121,9 +121,6 @@ Asset.timestamp
     (bool) false - Ne fait rien (par défaut)
     (bool) true - Ajoute le timestamp quand debug > 0
     (string) 'force' - Toujours ajouter le timestamp.
-Acl.classname, Acl.database
-    Utilisé pour la fonctionnalité d'Access Control List de CakePHP. Regardez
-    le chapitre sur les Access Control Lists pour plus d'informations.
 
 Configuration de la Base de Données
 ===================================
