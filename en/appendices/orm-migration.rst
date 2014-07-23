@@ -124,7 +124,7 @@ Inflection Rules Updated
 ------------------------
 
 You may have noticed that table classes have a pluralized name. In addition to
-tables having pluralized names, associations are also referred to in the plural
+tables having pluralized names, associations are also referred in the plural
 form. This is in contrast to ``Model`` where class names and association aliases
 were singular. There are a few reasons for this change:
 
