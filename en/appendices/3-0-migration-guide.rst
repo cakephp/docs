@@ -908,11 +908,18 @@ JsHelper
   hence trying to generate all javascript code using just the helper often
   became an impediment. It's now recommended to directly use javascript library
   of your choice.
-  
-CacheHelper
---------
 
-- ``CacheHelper`` has been removed and is going to be provided as a standalone plugin.
+CacheHelper Removed
+-------------------
+
+CacheHelper has been removed. The caching functionality it provided was
+non-standard, limited and incompatible with non-html layouts and data views.
+These limitations meant a full rebuild would be necessary. Edge Side Includes
+have become a standardized way to implement the functionality CacheHelper used
+to provide. However, implementing Edge Side Includes in PHP has a number of
+limitations and edge cases. Instead of building a sub-par solution, we recommend
+that developers needing full response caching use `Varnish
+<http://varnish-cache.org>`_ or `Squid <http://squid-cache.org>`_ instead.
 
 I18n
 ====
