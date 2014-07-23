@@ -14,7 +14,7 @@ Configuration
 
 By convention database connections are configured in ``src/Config/app.php``. The
 connection information defined in this file is fed into
-:php:class:`Cake\\Database\\ConnectionManager` creating the connection configuration
+:php:class:`Cake\\Datasource\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
 ``src/Config/app.default.php``. A sample connection configuration would look
 like::
@@ -38,10 +38,10 @@ like::
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
 also define additional connections at runtime using
-:php:meth:`Cake\\Database\\ConnectionManager::config()`. An example of that
+:php:meth:`Cake\\Datasource\\ConnectionManager::config()`. An example of that
 would be::
 
-    use Cake\Database\ConnectionManager;
+    use Cake\Datasource\ConnectionManager;
 
     ConnectionManager::config('default', [
         'className' => 'Cake\Database\Connection',
@@ -134,6 +134,7 @@ work together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
+.. php:namespace:: Cake\Datasource
 
 Managing Connections
 ====================
@@ -150,11 +151,11 @@ Accessing Connections
 .. php:staticmethod:: get($name)
 
 Once configured connections can be fetched using
-:php:meth:`Cake\\Database\\ConnectionManager::get()`. This method will
+:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. This method will
 construct and load a connection if it has not been built before, or return the
 existing known connection::
 
-    use Cake\Database\ConnectionManager;
+    use Cake\Datasource\ConnectionManager;
 
     $conn = ConnectionManager::get('default');
 
@@ -173,6 +174,7 @@ in your configuration files at runtime::
 See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
 
+.. php:namespace:: Cake\Database
 
 .. _database-data-types:
 
