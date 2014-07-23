@@ -383,10 +383,10 @@ callback of your model using appropriate password hasher class::
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            if (!empty($this->data['User']['password'])) {
+            if (!empty($this->data[$this->alias]['password'])) {
                 $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
-                $this->data['User']['password'] = $passwordHasher->hash(
-                    $this->data['User']['password']
+                $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                    $this->data[$this->alias]['password']
                 );
             }
             return true;
@@ -433,9 +433,9 @@ from the normal password hash::
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // make a password for digest auth.
-            $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'],
-                $this->data['User']['password'],
+            $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
+                $this->data[$this->alias]['username'],
+                $this->data[$this->alias]['password'],
                 env('SERVER_NAME')
             );
             return true;
