@@ -98,7 +98,7 @@ and ``page()`` methods::
         ->page(2);
 
 As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query though chained method
+provide a fluent interface, allowing you to build a query through chained method
 calls.
 
 Using SQL Functions
@@ -747,7 +747,7 @@ example in which the reducer function will be needed to do something more than
 just emitting the results.
 
 Calculating the most commonly mentioned words, where the articles contain
-information about CakePHP. as usual we need a mapper function::
+information about CakePHP, as usual we need a mapper function::
 
     $mapper = function($article, $key, $mapReduce) {
         if (stripos('cakephp', $article['body']) === false) {
