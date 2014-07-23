@@ -11,7 +11,6 @@ can create and use your own helpers.
 .. toctree::
     :maxdepth: 1
 
-    /core-libraries/helpers/cache
     /core-libraries/helpers/form
     /core-libraries/helpers/html
     /core-libraries/helpers/number
