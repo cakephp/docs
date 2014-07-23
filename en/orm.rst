@@ -10,7 +10,7 @@ In CakePHP your application's domain model gets split into 2 primary object
 types. The first are **repositories** or **table objects**. These objects
 provide access to collections of data. They allow you to save new records,
 modify/delete existing ones, define relations, and perform bulk operations. The
-second type of object are **entities**. Entities represent individual records
+second type of objects are **entities**. Entities represent individual records
 and allow you to define row/record level behavior & functionality.
 
 CakePHP's built-in ORM specializes in relational databases, but can be extended
