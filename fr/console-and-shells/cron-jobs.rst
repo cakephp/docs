@@ -5,7 +5,7 @@ Une chose habituelle à faire avec un shell, c'est de l'exécuter par une tâche
 cron pour nettoyer la base de données une fois de temps en temps ou pour
 envoyer des newsletters::
 
-      */5  *    *    *    *  cd /full/path/to/App && Console/cake myshell myparam
+      */5  *    *    *    *  cd /full/path/to/root/src && Console/cake myshell myparam
     # *    *    *    *    *  command to execute
     # │    │    │    │    │
     # │    │    │    │    │
