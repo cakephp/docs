@@ -289,7 +289,7 @@ ressembler:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?php echo $this->fetch('title'); ?></title>
+   <title><?= $this->fetch('title'); ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
