@@ -482,7 +482,7 @@ the statement::
     $rows = $stmt->fetchAll('assoc');
 
     // Read rows through iteration.
-    foreach ($stmt as $row) {
+    foreach ($rows as $row) {
         // Do work
     }
 
