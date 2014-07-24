@@ -310,11 +310,11 @@ directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
 
     class PostsController extends AppController {
         public function mon_action() {
-            $this->render('fichier_personnalise');
+            $this->render('ustom_file');
         }
     }
 
-Cela rendrait ``src/Template/Posts/fichier_personnalise.ctp`` au lieu de
+Cela rendrait ``src/Template/Posts/custom_file.ctp`` au lieu de
 ``src/Template/Posts/mon_action.ctp``.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
@@ -327,7 +327,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``/src/Plugin/Users/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``/plugins/Users/Template/UserDetails/custom_file.ctp`` 
 
 Contrôle de Flux
 ----------------
