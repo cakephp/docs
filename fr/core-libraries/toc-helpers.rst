@@ -12,7 +12,6 @@ API, et comment vous pouvez créer et utiliser vos propres helpers.
 .. toctree::
     :maxdepth: 1
 
-    /core-libraries/helpers/cache
     /core-libraries/helpers/form
     /core-libraries/helpers/html
     /core-libraries/helpers/number

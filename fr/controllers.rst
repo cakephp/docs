@@ -588,13 +588,6 @@ Tandis que vous pouvez vérifier les détails pour tous les attributs des
 controllers dans l'`API <http://api.cakephp.org>`_, il y a d'autres attributs
 du controller qui méritent leurs propres sections dans le manuel.
 
-.. php:attr: cacheAction
-
-    L'attribut cacheAction est utilisé pour définir la durée et d'autres
-    informations sur la mise en cache d'une page complète. Vous pouvez lire
-    plus d'informations sur la mise en cache d'une page complète dans la
-    documentation :php:class:`CacheHelper`.
-
 .. php:attr: paginate
 
     L'attribut paginate est une propriété avec une compatibilité dépréciée.

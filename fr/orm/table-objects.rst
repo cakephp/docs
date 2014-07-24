@@ -965,7 +965,7 @@ you define eager loaded associations using the 'contain' method::
     // As an option to find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
-    // As a method on the query objecy
+    // As a method on the query object
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments']);
 
