@@ -43,7 +43,7 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur:
             return $validator
                 ->notEmpty('username', "Un nom d'utilisateur est nécessaire")
                 ->notEmpty('password', 'Un mot de passe est nécessaire')
-                ->notEmpty('role', 'Un mot de passe est nécessaire')
+                ->notEmpty('role', 'Un role est nécessaire')
                 ->add('role', 'inList', [
                     'rule' => ['inList', ['admin', 'author']],
                     'message' => 'Merci de rentrer un role valide'
