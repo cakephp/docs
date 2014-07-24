@@ -118,8 +118,8 @@ RecipesController pourrait contenir les actions
             }
         }
 
-Les fichiers de vue pour ces actions seraient ``app/Template/Recipes/view.ctp``,
-``app/Template/Recipes/share.ctp``, et ``app/Template/Recipes/search.ctp``. Le
+Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
+``app/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
@@ -314,8 +314,8 @@ directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
         }
     }
 
-Cela rendrait ``app/Template/Posts/fichier_personnalise.ctp`` au lieu de
-``app/Template/Posts/mon_action.ctp``.
+Cela rendrait ``src/Template/Posts/fichier_personnalise.ctp`` au lieu de
+``src/Template/Posts/mon_action.ctp``.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -327,7 +327,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``plugins/Users/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``/src/Plugin/Users/Template/UserDetails/custom_file.ctp`` 
 
 Contrôle de Flux
 ----------------

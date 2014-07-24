@@ -73,7 +73,7 @@ commune pour votre sidebar, et seulement définir les parties qui changent:
 
 .. code-block:: php
 
-    // app/Template/Common/view.ctp
+    // /src/Template/Common/view.ctp
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -94,7 +94,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
 .. code-block:: php
 
     <?php
-    // src/Template/Posts/view.ctp
+    // /src/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
@@ -208,7 +208,7 @@ en-têtes ou autres balises:
 
 .. code-block:: php
 
-    // dans app/Template/Layout/default.ctp
+    // dans /src/Template/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -348,7 +348,7 @@ d'un fichier de vue::
     $this->set('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
-le répertoire ``app/Template/Layout``, et passez de l'un à l'autre depuis les
+le répertoire ``/src/Template/Layout``, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 :php:attr:`~Cake\\View\\View::$layout` de votre controller ou de votre vue::
 
@@ -441,7 +441,7 @@ des membres du paramètre du tableau (de la même manière que
 de vues). Dans l'exemple ci-dessus, le fichier
 ``/src/Template/Element/helpbox.ctp`` peut utiliser la variable ``$helptext``::
 
-    // A l'intérieur de app/Template/Element/helpbox.ctp
+    // A l'intérieur de /src/Template/Element/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
@@ -579,7 +579,7 @@ de rendu de vue personnalisée. Comme la plupart des components de CakePHP, les
 classes de vue ont quelques conventions:
 
 * Les fichiers de classe de View doivent être mis dans ``src/View``. Par
-  exemple ``src/View/PdfView.php``.
+  exemple ``/src/View/PdfView.php``.
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le
