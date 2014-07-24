@@ -22,14 +22,14 @@ dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::
 
 Les fichiers de vue du theme doivent être dans un plugin avec le même nom. Par
 exemple, le theme ci-dessus se trouvera dans
-``/plugins/AnotherExample/Template``. Il est important de se rappeler que
+``/plugins/AnotherExample/src/Template``. Il est important de se rappeler que
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
-cela, la structure de dossier dans le dossier ``/plugins/Example/Template`` est
-exactement la même que ``/src/Template/``.
+cela, la structure de dossier dans le dossier ``/plugins/Example/src/Template``
+est exactement la même que ``/src/Template/``.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
-trouvera dans ``/plugins/Example/Template/Posts/edit.ctp``. Les fichiers de
-layout se trouveront dans ``/plugins/Example/Template/Layout/``.
+trouvera dans ``/plugins/Example/src/Template/Posts/edit.ctp``. Les fichiers de
+layout se trouveront dans ``/plugins/Example/src/Template/Layout/``.
 
 Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va essayer
 de le trouver dans le dossier ``/src/Template/``. De cette façon, vous pouvez
