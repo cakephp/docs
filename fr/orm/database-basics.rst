@@ -235,7 +235,9 @@ en 'datetime' va automatiquement convertir les paramètres d'input d'instances
 colonnes 'binary' vont accepter un fichier qui gère, et génère le fichier lors
 de la lecture des données.
 
-Ajouter des types personnalisés
+.. _adding-custom-database-types:
+
+Ajouter des Types Personnalisés
 -------------------------------
 
 .. php:staticmethod:: map($name, $class)

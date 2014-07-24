@@ -1576,6 +1576,57 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
 
+.. _saving-complex-types:
+
+Saving Complex Types
+--------------------
+
+Tables are capable of storing data represented in basic types, like strings,
+integers, floats, booleans, etc. But It can also be extended to accept more
+complex types such as arrays or objects and serialize this data into simpler
+types that can be saved in the database.
+
+This functionality is achieved by using the custom types system. See the
+:ref:`adding-custom-database-types` section to find out how to build custom
+column Types::
+
+    // in src/Config/bootstrap.php
+    use Cake\Database\Type;
+    Type::map('json', 'App\Database\Type\JsonType');
+
+    // in src/Model/Table/UsersTable.php
+    use Cake\Database\Schema\Table as Schema;
+
+    class UsersTable extends Table {
+
+        protected function _initializeSchema(Schema $schema) {
+            $schema->columnType('preferences', 'json');
+            return $schema;
+        }
+
+    }
+
+The code above maps the ``preferences`` column to the ``json`` custom type.
+This means that when retrieving data for that column, it will be
+unserialized from a JSON string in the database and put into an entity as an
+array.
+
+Likewise, when saved, the array will be transformed back into its JSON
+representation::
+
+    $user = new User([
+        'preferences' => [
+            'sports' => ['football', 'baseball'],
+            'books' => ['Mastering PHP', 'Hamlet']
+        ]
+    ]);
+    $usersTable->save($user);
+
+When using complex types it is important to validate that the data you are
+receiving from the end user is the correct type. Failing to correctly handle
+complex data could result in malicious users being able to store data they
+would not normally be able to.
+
 Deleting Entities
 =================
 
@@ -1925,14 +1976,18 @@ associations should be marshalled::
     // In a controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
-        'Tags', 'Comments' => ['associated' => ['Users']]
+        'associated' => [
+            'Tags', 'Comments' => ['associated' => ['Users']]
+        ]
     ]);
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), ['Tags', 'Comments.Users']);
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
 
 You can convert multiple entities using::
 
@@ -1992,7 +2047,9 @@ persisted. You can merge an array of raw data into an existing entity using the
 
     $articles = TableRegistry::get('Articles');
     $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data());
+    $articles->patchEntity($article, $this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
 
 As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity`` method is equally capable of
@@ -2098,3 +2155,46 @@ controlling the associations that will be merged in each of the entities in the
 array::
 
     $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
+
+Avoiding Property Mass Assignment Attacks
+-----------------------------------------
+
+When creating or merging entities from request data you need to be careful of
+what you allow your users to change or add in the entities. For example, by
+sending an array in the request containing the ``user_id`` an attacker could change the
+owner of an article, causing undesirable effects::
+
+    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->data;
+    $entity = $this->patchEntity($entity, $data);
+
+There are two ways of protecting you against this problem. The first one is by
+setting the default columns that can be safely set from a request using the
+:ref:`entities-mass-assignment` feature in the entities.
+
+The second way is by using the ``fieldList`` option when creating or merging
+data into an entity::
+
+    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    $data = $this->request->data;
+
+    // Only allow title to be changed
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title']
+    ]);
+
+You can also control which properties can be assigned for associations::
+
+    // Only allow changing the title and tags
+    // and the tag name is the only column that can be set
+    $entity = $this->patchEntity($entity, $data, [
+        'fieldList' => ['title', 'tags'],
+        'associated' => ['Tags' => ['fieldList' => ['name']]]
+    ]);
+
+Using this feature is handy when you have many different functions your users
+can access and you want to let your users edit different data based on their
+privileges.
+
+The ``fieldList`` options is also accepted by the ``newEntity()``,
+``newEntities()`` and ``patchEntitites()`` methods.

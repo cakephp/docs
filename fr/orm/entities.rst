@@ -166,6 +166,8 @@ d'erreur::
 
     $user->errors('password', ['Password is required.']);
 
+.. _entities-mass-assignment:
+
 Mass Assignment
 ===============
 
@@ -395,3 +397,11 @@ Cette liste peut être modifiée à la volée en utilisant ``hiddenProperties``:
 
     $user->hiddenProperties(['password', 'recovery_question']);
 
+Stocker des Types Complexes
+===========================
+
+Les entities n'ont pas pour objectif de contenir de la logique pour sérialiser
+et desérialiser les données complexes venant de la base de données. Réferez-vous
+à la section :ref:`saving-complex-types` pour comprendre la façon dont votre
+application peut stocker des types de données complexe comme les tableaux et les
+objets.
