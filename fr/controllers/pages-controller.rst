@@ -10,17 +10,8 @@ accéder en utilisant l'url ``http://exemple.com/pages/a_propos``. Vous pouvez
 modifier le controller Pages selon vos besoins.
 
 Quand vous "cuisinez" une application avec l'utilitaire console de CakePHP,
-le controller Pages est copié dans votre dossier ``src/Controller/`` et vous
-pouvez le modifier selon vos besoins. Ou vous pouvez simplement copier le
-fichier à partir de
-``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
-
-.. warning::
-
-    Ne modifiez directement AUCUN fichier du dossier ``lib/Cake`` pour éviter
-    les problèmes lors des mises à jour du coeur dans le futur.
-
+le controller Pages est créé dans votre dossier ``src/Controller/``.
 
 .. meta::
     :title lang=fr: Le Controller Pages
-    :keywords lang=fr: controller pages,controller par défaut,lib,cakephp,ships,php,fichier dossier
+    :keywords lang=fr: controller pages,controller par défaut,cakephp,ships,php,fichier dossier

@@ -90,7 +90,7 @@ Les valeurs des clés ``Posts`` et ``Authors`` peuvent contenir toutes
 les propriétés qu'un model/clé sans ``$paginate`` peut contenir.
 
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
-utiliser la méthode ``~Cake\\Controller\Controller::paginate()`` pour créer
+utiliser la méthode ``~Cake\\Controller\\Controller::paginate()`` pour créer
 les données paginées et ajouter le ``PaginatorHelper`` si il n'a pas déjà été
 ajouté. La méthode paginate du controller va retourner l'ensemble des résultats
 de la requête paginée, et définir les meta-données de paginatino de la requête.
