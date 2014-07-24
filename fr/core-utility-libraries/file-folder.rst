@@ -8,28 +8,23 @@ et autres tâches habituelles liées aux répertoires.
 Utilisation basique
 ===================
 
-Assurez vous que les classes sont chargées en utilisant
-:php:meth:`App::uses()`::
+Assurez-vous que les classes sont chargées::
 
-    <?php
-    App::uses('Folder', 'Utility');
-    App::uses('File', 'Utility');
+    use Cake\Utility\Folder;
+    use Cake\Utility\File;
 
 Ensuite nous pouvons configurer une nouvelle instance de dossier::
 
-    <?php
     $dir = new Folder('/path/to/folder');
 
 et chercher tous les fichiers *.ctp* à l'intérieur de ce dossier en utilisant
 les regex::
 
-    <?php
     $files = $dir->find('.*\.ctp');
 
 Maintenant nous pouvons faire une boucle sur les fichiers et les lire,
 écrire/ajouter aux contenus, ou simplement supprimer le fichier::
 
-    <?php
     foreach ($files as $file) {
         $file = new File($dir->pwd() . DS . $file);
         $contents = $file->read();
@@ -46,7 +41,6 @@ API de Folder
 
 ::
 
-    <?php
     // Crée un nouveau dossier avec les permissions à 0755
     $dir = new Folder('/path/to/folder', true, 0755);
 
@@ -198,7 +192,6 @@ API de Folder
     Retourne un tableau de tous les fichiers correspondants dans le répertoire
     courant::
 
-        <?php
         // Trouve tous les .png dans votre dossier app/webroot/img/ et range les résultats
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
@@ -226,8 +219,7 @@ API de Folder
 
     Retourne un tableau de tous les fichiers correspondants dans et
     en-dessous du répertoire courant::
-    
-        <?php
+
         // Trouve de façon récursive les fichiers commençant par test ou index
         $dir = new Folder(WWW_ROOT);
         $files = $dir->findRecursive('(test|index).*');
@@ -257,7 +249,6 @@ API de Folder
 
     Retourne true si le Fichier est dans le chemin donné::
 
-        <?php
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
         // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
@@ -280,7 +271,6 @@ API de Folder
     Retourne true si le $path donné finit par un slash (par exemple. se
     termine-par-un-slash)::
 
-        <?php
         $result = Folder::isSlashTerm('/my/test/path');
         // $result = false
         $result = Folder::isSlashTerm('/my/test/path/');
@@ -293,20 +283,17 @@ API de Folder
 
     Retourne true si le $path donné est un chemin Windows.
 
-
 .. php:method:: messages()
 
     :rtype: array
 
     Récupère les messages de la dernière méthode.
 
-
 .. php:method:: move(array $options)
 
     :rtype: boolean
 
     Déplace le répertoire de façon récursive.
-
 
 .. php:staticmethod:: normalizePath(string $path)
 
@@ -315,13 +302,11 @@ API de Folder
     Retourne un ensemble correct de slashes pour un $path donné. ('\\' pour
     les chemins Windows et '/' pour les autres chemins.)
 
-
 .. php:method:: pwd()
 
     :rtype: string
 
     Retourne le chemin courant.
-
 
 .. php:method:: read(boolean $sort = true, array|boolean $exceptions = false, boolean $fullPath = false)
 
@@ -337,7 +322,6 @@ API de Folder
     Retourne un tableau du contenu du répertoire courant. Le tableau retourné
     contient deux sous-tableaux: Un des repertoires et un des fichiers::
 
-        <?php
         $dir = new Folder(WWW_ROOT);
         $files = $dir->read(true, array('files', 'index.php'));
         /*
@@ -389,7 +373,6 @@ L'API de File
 
 ::
 
-    <?php
     // Crée un nouveau fichier avec les permissions à 0644
     $file = new File('/path/to/file.php', true, 0644);
 
@@ -483,9 +466,6 @@ L'API de File
     :rtype: array
 
     Retourne l'info du Fichier.
-
-    .. versionchanged:: 2.1
-        ``File::info()`` inclut maintenant les informations filesize & mimetype.
 
 .. php:method:: lastAccess()
 
@@ -602,8 +582,6 @@ L'API de File
 
     Remplace le texte dans un fichier. Retourne false en cas d'échec et true en cas de succès.
 
-    .. versionadded::
-        2.5 ``File::replaceText()``
 
 .. meta::
     :title lang=fr: Folder & File
