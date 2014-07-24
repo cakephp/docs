@@ -450,10 +450,12 @@ Vous pouvez aussi définir les préfixes dans les scopes de plugin::
         });
     });
 
-The above would create a route template like ``/debug_kit/admin/:controller``.
-The connected route would have the ``plugin`` and ``prefix`` route elements set.
+Ce qui est au-dessus va créer un template de route de type
+``/debug_kit/admin/:controller``. La route connectée aura les elements de
+route ``plugin`` et ``prefix`` définis.
 
-When defining prefixes, you can nest multiple prefixes if necessary::
+Quand vous définissez des préfixes, vous pouvez imbriquer plusieurs préfixes
+si besoin::
 
     Router::prefix('manager', function($routes) {
         $routes->prefix('admin', function($routes) {
@@ -461,23 +463,23 @@ When defining prefixes, you can nest multiple prefixes if necessary::
         });
     });
 
-The above would create a route template like ``/manager/admin/:controller``.
-The connected route would have the ``prefix`` route element set to
-``manager/admin``.
+Ce qui est au-dessus va créer un template de route de type
+``/manager/admin/:controller``. La route connectée aura l'element de
+route ``prefix`` défini à ``manager/admin``.
 
-The current prefix will be available from the controller methods through
+Le préfixe actuel sera disponible à partir des méthodes du controller avec
 ``$this->request->params['prefix']``
 
-When using prefix routes it's important to set the prefix option. Here's how to
-build this link using the HTML helper::
+Quand vous utilisez les routes préfixées, il est important de définir l'option
+prefix. Voici comment construire ce lien en utilisant le helper HTML::
 
-    // Go into a prefixed route.
+    // Aller vers une route préfixée.
     echo $this->Html->link(
         'Manage articles',
         ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
-    // leave a prefix
+    // laisser un prefix
     echo $this->Html->link(
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
@@ -485,7 +487,8 @@ build this link using the HTML helper::
 
 .. note::
 
-    You should connect prefix routes *before* you connect fallback routes.
+    Vous devez connecter les routes préfixées *avant* de connecter les routes
+    fallback.
 
 .. index:: plugin routing
 
@@ -594,40 +597,10 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :doc:`/core-libraries/components/request-handling`
 to do automatic view switching based on content types.
 
-.. _route-conditions:
-
-Utiliser des conditions supplémentaires de correspondance des routes
---------------------------------------------------------------------
-
-Quand vous créez des routes, vous souhaitez restreindre certaines URL basées
-sur des configurations requête/environnement spécifique. Un bon exemple de
-cela est le routing :doc:`rest`. Vous pouvez spécifier des conditions
-supplémentaires dans l'argument ``$defaults`` pour
-:php:meth:`Router::connect()`. Par défaut, CakePHP propose 3 conditions
-d'environment, mais vous pouvez en ajouter plus en utilisant
-:ref:`custom-route-classes`. Les options intégrées sont:
-
-- ``[type]`` Seulement les requêtes correspondantes pour des types de contenu spécifiques.
-- ``[method]`` Seulement les requêtes correspondantes avec des verbes HTTP spécifiques.
-- ``[server]`` Correspond seuelement quand $_SERVER['SERVER_NAME'] correspond à la valeur donnée.
-
-Nous allons fournir un exemple simple ici pour montrer comment vous pouvez
-utiliser l'options ``[method]`` pour créer une route Restful personnalisée::
-
-    Router::connect(
-        "/:controller/:id",
-        array("action" => "edit", "[method]" => "PUT"),
-        array("id" => "[0-9]+")
-    );
-
-La route ci-dessus va seulement correspondre aux requêtes ``PUT``. En utilisant
-ces conditions, vous pouvez créer un routing REST personnalisé, ou d'autres
-requêtes de données dépendant d'information.
-
 .. _resource-routes:
 
-Creating RESTful Routes
-=======================
+Créer des Routes RESTful
+========================
 
 .. php:staticmethod:: mapResources($controller, $options)
 
@@ -657,9 +630,9 @@ POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-DELETE      /recipes/123.format   RecipesController::delete(123)
+PATCH       /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
+DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
 CakePHP's Router class uses a number of different indicators to
@@ -699,32 +672,37 @@ comments routes will look like::
     While you can nest resources as deeply as you require, it is not recommended to
     nest more than 2 resources together.
 
-Modifying the default REST Routes
----------------------------------
+Limiting the Routes Created
+---------------------------
 
-.. TODO:: This doesn't actually work right now. I need to fix the code.
+By default CakePHP will connect 6 routes for each resource. If you'd like to
+only connect specific resource routes you can use the ``only`` option::
 
-If the default REST routes don't work for your application, you can modify them
-using :php:meth:`Router::resourceMap()`. This method allows you to set the
-default routes that get set with :php:meth:`Router::mapResources()`. When using
-this method you need to set *all* the defaults you want to use::
+    $routes->resources('Articles', [
+        'only' => ['index', 'view']
+    ]);
 
-    Router::resourceMap(array(
-        array('action' => 'index', 'method' => 'GET', 'id' => false),
-        array('action' => 'view', 'method' => 'GET', 'id' => true),
-        array('action' => 'add', 'method' => 'POST', 'id' => false),
-        array('action' => 'edit', 'method' => 'PUT', 'id' => true),
-        array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
-        array('action' => 'update', 'method' => 'POST', 'id' => true)
-    ));
+Would create read only resource routes. The route names are ``create``,
+``update``, ``view``, ``index``, and ``delete``.
 
-By overwriting the default resource map, future calls to ``mapResources()`` will
-use the new values.
+Changing the Controller Actions Used
+------------------------------------
+
+You may need to change the controller action names that are used when connecting
+routes. For example, if your ``edit`` action is called ``update`` you can use
+the ``actions`` key to rename the actions used::
+
+    $routes->resources('Articles', [
+        'actions' => ['update' => 'update', 'add' => 'create']
+    ]);
+
+The above would use ``update`` for the update action, and ``create`` instead of
+``add``.
 
 .. _custom-rest-routing:
 
-Custom REST Routing
--------------------
+Custom Route Classes for Resource Routes
+----------------------------------------
 
 You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
@@ -801,15 +779,15 @@ tableau::
 
 Comme ``5`` a une clé numérique, il est traité comme un argument passé.
 
-Routing inversé
-===============
+Générer des URLs
+================
 
-Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
-vous permettre de changer facilement votre structure d'URL sans avoir à
-modifier tout votre code. En utilisant
-:term:`routing arrays <tableau routing>` pour définir vos URLs, vous pouvez
-configurer les routes plus tard et les URLs générés vont automatiquement
-être mises à jour.
+.. php:staticmethod:: url($url = null, $options = [])
+
+Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
+easily change your URL structure without having to modify all your code.
+By using :term:`routing arrays <routing array>` to define your URLs, you can
+later configure routes and the generated URLs will automatically update.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 

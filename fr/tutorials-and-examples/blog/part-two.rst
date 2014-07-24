@@ -21,6 +21,9 @@ collection des entities stockées dans une table spécifique et vont dans
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
     }
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant
@@ -36,12 +39,11 @@ de la base de données appelée ``articles``.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
 
-Pour plus d'informations sur les models, comme les préfixes des tables,
-les callbacks, et la validation, consultez le chapitre :doc:`/orm` du
-manuel.
+Pour plus d'informations sur les models, comme les callbacks et la validation,
+consultez le chapitre :doc:`/orm` du manuel.
 
 
-Créer un controller Articles
+Créer le controller Articles
 ============================
 
 Nous allons maintenant créer un controller pour nos articles. Le controller est
@@ -148,6 +150,8 @@ ressembler à quelque chose comme cela:
         </tr>
         <?php endforeach; ?>
     </table>
+
+Espérons que cela vous semble simple.
 
 Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
 C'est une instance de la classe CakePHP
