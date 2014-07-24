@@ -12,19 +12,16 @@ plus des Components.
 Charger les Objets
 ==================
 
-Le chargement des objets sur chaque type de registry peut être fait en utilisant
-la méthode ``load()``::
+Les objets peuvent être chargés à la volée en utilisant add<registry-object>()
+Exemple::
 
-    $this->Prg = $this->Components->load('Prg');
-    $this->Prg->process();
+    $this->addComponent('DebugKit.Toolbar');
+    $this->addHelper('Flash')
 
-Lors du chargement d'un component, si le component n'est pas actuellement
-chargé dans le registry, une nouvelle instance va être créée. Si le component
-est déjà chargé, une autre instance ne va pas être créée. Lors du chargement
-des components, vous pouvez aussi leur fournir une configuration
-supplémentaire::
+Va permettre de définir `Toolbar property` et `Flash helper`.
+La configuration peut aussi être définie à la volée. Exemple::
 
-    $this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
+    $this->addComponent('Cookie', ['name' => 'sweet']);
 
 Toutes clés & valeurs fournies vont être passées au constructeur du Component
 La seule exception à cette règle est ``className``. Classname est une clé
@@ -32,8 +29,8 @@ spéciale qui est utilisée pour faire des alias des objets dans un registry. Ce
 vous permet d'avoir des noms de component qui ne correspondent pas aux noms de
 classes, ce qui peut être utile quand vous étendez les components du coeur::
 
-    $this->Auth = $this->Components->load('Auth', ['className' => 'MyCustomAuth']);
-    $this->Auth->user(); // En fait utilise MyCustomAuth::user();
+    $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
+    $this->Auth->user(); // utilise en fait MyCustomAuth::user();
 
 Attraper les Callbacks
 ======================
