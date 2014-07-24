@@ -192,7 +192,7 @@ dans votre application.
 
 .. php:const:: APP
 
-   Chemin du répertoire de l'application.
+   Chemin absolu du répertoire de l'application avec un slash.
 
 .. php:const:: APP_DIR
 
