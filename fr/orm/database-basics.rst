@@ -14,7 +14,7 @@ Configuration
 
 Par convention, les connections de la base de données sont configurées dans
 ``src/Config/app.php``. L'information de la connection définie dans ce fichier
-se trouve dans :php:class:`Cake\\Database\\ConnectionManager` en créant la
+se trouve dans :php:class:`Cake\\DataSource\\ConnectionManager` en créant la
 configuration de la connection de votre application sera utilisée. L'information
 de la connection d'Exemple peut être trouvé dans ``src/Config/app.default.php``.
 Une configuration de connection d'exemple ressemblera à ceci::
@@ -38,10 +38,10 @@ Ce qui est au-dessus va créer une connection 'default', avec les paramètres
 fournies. Vous pouvez définir autant de connections que vous le souhaitez dans
 votre fichier de configuration. Vous pouvez aussi définir le connections
 supplémentaires à la volée en utilisant
-:php:meth:`Cake\\Database\\ConnectionManager::config()`. Un exemple de ceci
+:php:meth:`Cake\\DataSource\\ConnectionManager::config()`. Un exemple de ceci
 serait::
 
-    use Cake\Database\ConnectionManager;
+    use Cake\DataSource\ConnectionManager;
 
     ConnectionManager::config('default', [
         'className' => 'Cake\Database\Connection',
@@ -134,6 +134,7 @@ ensemble automatiquement. Par convention, utiliser les underscores, les
 minuscules et les formes pluriels pour vos noms de table de la base de données
 ) par exemple: bakers, pastry\_stores, et savory\_cakes.
 
+.. php:namespace:: Cake\Datasource
 
 Gérer les Connections
 =====================
@@ -151,11 +152,11 @@ Accéder à des Connections
 .. php:staticmethod:: get($name)
 
 Une fois configurées, les connections peuvent être récupérées en utilisant
-:php:meth:`Cake\\Database\\ConnectionManager::get()`. Cette méthode va
+:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. Cette méthode va
 construire et charger une connection si elle n'a pas été déjà construite
 avant, ou retourner la connextion connue existante::
 
-    use Cake\Database\ConnectionManager;
+    use Cake\Datasource\ConnectionManager;
 
     $conn = ConnectionManager::get('default');
 
@@ -175,6 +176,7 @@ ne sont pas définies dans vos fichiers de configuration à l'execution::
 Regarder :ref:`database-configuration` pour plus d'informations sur la
 configuration de données utilisée lors de la création de connections.
 
+.. php:namespace:: Cake\Database
 
 .. _database-data-types:
 
