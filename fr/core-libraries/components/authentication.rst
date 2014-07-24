@@ -420,10 +420,10 @@ la classe de hasher de mot de passe appropriée::
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            if (!empty($this->data['User']['password'])) {
+            if (!empty($this->data[$this->alias]['password'])) {
                 $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
-                $this->data['User']['password'] = $passwordHasher->hash(
-                    $this->data['User']['password']
+                $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                    $this->data[$this->alias]['password']
                 );
             }
             return true;
@@ -474,8 +474,8 @@ séparée, pour le hachage normal de mot de passe::
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // fabrique un mot de passe pour l'auth Digest.
-            $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
+            $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
+                $this->data[$this->alias]['username'], $this->data[$this->alias]['password'], env('SERVER_NAME')
             );
             return true;
         }
