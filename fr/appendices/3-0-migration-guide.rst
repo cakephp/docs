@@ -337,7 +337,13 @@ Router
   soient connectées. Il ne modifie plus les routes existantes lors de son appel.
 * ``Router::setExtensions()`` a été retirée. Utilisez
   :php:meth:`Cake\\Routing\\Router::parseExtensions()` à la place.
-* ``Router::promote()`` a été retirées.
+* ``Router::resourceMap()`` a été retirée.
+* L'option ``[method]`` a été renommée en ``_method``.
+* La capacité pour faire correspondre les en-tête arbitraires avec les
+  paramètres de style ``[]`` a été retirée. Si vous avez besoin de parser/faire
+  correspondre sur les conditions arbitraires, pensez à utiliser les classes de
+  route personnalisées.
+* ``Router::promote()`` a été retirée.
 * ``Router::parse()`` va maintenant lancer une exception quand une URL ne peut
   pas être gérée par aucune route.
 * ``Router::url()`` va maintenant lancer une exception quand aucune route ne
@@ -354,8 +360,8 @@ Route
   Consultez :php:meth:`Cake\\Routing\\Route::match()` pour plus d'informations
   sur la nouvelle signature.
 
-Dispatcher Filters Configuration Changed
-----------------------------------------
+La Configuration des Filtres de Dispatcher a Changé
+---------------------------------------------------
 
 Les filtres de Dispatcher ne sont plus ajoutés à votre application en utilisant
 ``Configure``. Vous les ajoutez maintenant avec
