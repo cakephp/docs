@@ -113,7 +113,7 @@ remplaceront la clé correspondante dans la clé 'all'.
 Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.
-- ``userModel`` Le nom du model de l'utilisateur, par défaut User.
+- ``userModel`` Le nom du model de la table users, par défaut Users.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``['Users.is_active' => 1]``.
 - ``contain`` Les models supplémentaires à mettre dans contain et à retourner
@@ -535,8 +535,8 @@ pouvez faire cela en appelant ``$this->Auth->setUser()`` avec les données
 utilisateur que vous voulez pour la 'connexion'::
 
     public function register() {
-        if ($this->User->save($this->request->data)) {
-            $id = $this->User->id;
+        if ($this->Users->save($this->request->data)) {
+            $id = $this->Users->id;
             $this->request->data['User'] = array_merge(
                 $this->request->data['User'],
                 ['id' => $id]
