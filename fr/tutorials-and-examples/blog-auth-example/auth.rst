@@ -104,7 +104,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 
 .. code-block:: php
 
-    <!-- app/View/Users/add.ctp -->
+    <!-- src/Template/Users/add.ctp -->
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
@@ -141,7 +141,7 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
         //...
 
         public $components = [
-            'Session',
+            'Flash',
             'Auth' => [
                 'loginRedirect' => [
                     'controller' => 'Articles', 
@@ -229,7 +229,7 @@ votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
-    //app/View/Users/login.ctp
+    // src/Template/Users/login.ctp
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
@@ -254,7 +254,7 @@ component AuthComponent de ne pas exiger de connexion pour l'action ``add``
 en plus des actions ``index`` et ``view`` qui étaient déjà autorisées dans
 la fonction ``beforeFilter`` de l'AppController.
 
-L'action ``login`` appelle la fonction ``$this->Auth->login()`` dans
+L'action ``login`` appelle la fonction ``$this->Auth->identify()`` dans
 AuthComponent, et cela fonctionne sans autre config car nous suivons les
 conventions comme mentionnées plus tôt. C'est-à-dire, avoir un model
 User avec les colonnes username et password, et
@@ -309,7 +309,7 @@ config de Auth::
     // src/Controller/AppController.php
 
     public $components = [
-        'Session',
+        'Flash',
         'Auth' => [
             'loginRedirect' => [
                 'controller' => 'Articles',
@@ -351,12 +351,12 @@ fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
 
     public function isAuthorized($user) {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
-        if ($this->action === 'add') {
+        if ($this->request->action === 'add') {
             return true;
         }
 
         // Le propriétaire d'un article peut l'éditer et le supprimer
-        if (in_array($this->action, ['edit', 'delete'])) {
+        if (in_array($this->request->action, ['edit', 'delete'])) {
             $articleId = (int)$this->request->params['pass'][0];
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
@@ -375,7 +375,7 @@ l'utilisateur à l'autorisation ou non de modifier l'article, nous appelons
 une fonction ``isOwnedBy()`` dans la table Articles. Intégrons la fonction
 suivante::
 
-    // src/Model/Repository/ArticlesTable.php
+    // src/Model/Table/ArticlesTable.php
 
     public function isOwnedBy($articleId, $userId) {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
