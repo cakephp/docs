@@ -262,7 +262,7 @@ Possible keys for hasOne association arrays include:
 
 - **className**: the class name of the table being associated to
   the current model. If you're defining a 'User hasOne Address'
-  relationship, the className key should equal 'Addresses.'
+  relationship, the className key should equal 'Addresses'.
 - **foreignKey**: the name of the foreign key found in the other
   model. This is especially handy if you need to define multiple
   hasOne relationships. The default value for this key is the
@@ -666,7 +666,7 @@ Getting a Single Entity by Primary Key
 
 .. php:method:: get($id, $options = [])
 
-It is often convienent to load a single entity from the database when editing or
+It is often convenient to load a single entity from the database when editing or
 view entities and their related data. You can do this easily by using
 ``get()``::
 
@@ -1481,7 +1481,7 @@ singular, camel cased version the association name. For example::
 Saving HasMany Associations
 ---------------------------
 
-When saving hasOne associations, the ORM expects an array of entities at the
+When saving hasMany associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
     use App\Model\Entity\Article;
@@ -1502,7 +1502,7 @@ inserted. The ORM will not remove or 'sync' a hasMany association.
 Saving BelongsToMany Associations
 ---------------------------------
 
-When saving hasOne associations, the ORM expects an array of entities at the
+When saving belongsToMany associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
     use App\Model\Entity\Article;
@@ -1803,7 +1803,7 @@ Behaviors
 
 .. start-behaviors
 
-Behaviors provide an easy way to create horizonally re-usable pieces of logic
+Behaviors provide an easy way to create horizontally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
@@ -2067,7 +2067,7 @@ As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity`` method is equally capable of
 merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
-merge deeper to deeper levels, you can use the second parameter of the method::
+merge deeper to deeper levels, you can use the third parameter of the method::
 
     $entity = $articles->get(1);
     $articles->patchEntity($article, $this->request->data(), [
