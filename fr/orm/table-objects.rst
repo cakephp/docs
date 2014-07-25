@@ -343,7 +343,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 Nous pouvons définir l'association belongsTo dans notre table Addresses comme
 ce qui suit::
 
-    class Addresses extends Table {
+    class AddressesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsTo('Users');
@@ -353,7 +353,7 @@ ce qui suit::
 Nous pouvons aussi définir une relation plus spécifique en utilisant une
 syntaxe de tableau::
 
-    class Addresses extends Table {
+    class AddressesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsTo('Users', [
@@ -415,12 +415,12 @@ Article hasMany Comment    Comment.user\_id
 -------------------------- -------------------
 Product hasMany Option     Option.product\_id
 -------------------------- -------------------
-Doctor hasMany Appointment Patient.doctor\_id
+Doctor hasMany Patient     Patient.doctor\_id
 ========================== ===================
 
 Nous pouvons définir l'association hasMany dans notre model Articles comme suit::
 
-    class Addresses extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->hasMany('Comments');
@@ -430,7 +430,7 @@ Nous pouvons définir l'association hasMany dans notre model Articles comme suit
 Nous pouvons également définir une relation plus spécifique en utilisant un
 tableau::
 
-    class Addresses extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->hasMany('Comments', [
@@ -534,7 +534,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
 Nous pouvons définir l'association belongsToMany dans notre model Articles comme
 suit::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags');
@@ -543,7 +543,7 @@ suit::
 
 Nous pouvons aussi définir une relation plus spécifique en utilisant un tableau::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags', [
