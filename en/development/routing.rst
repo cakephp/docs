@@ -886,6 +886,7 @@ This will populate ``$this->request->params['named']`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 
+.. _request-action:
 
 RequestActionTrait
 ==================
