@@ -373,6 +373,8 @@ Check whether a specific language is accepted::
 Response
 ########
 
+.. php:class:: Response
+
 :php:class:`Cake\\Network\\Response` is the default response class in CakePHP. It
 encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
@@ -407,6 +409,8 @@ out the methods that interact with :php:meth:`~CakeResponse::header()`. See the 
 Dealing with Content Types
 ==========================
 
+.. php:method:: type($contentType = null)
+
 You can control the Content-Type of your application's responses with
 :php:meth:`Cake\\Network\\Response::type()`. If your application needs to deal with
 content types that are not built into Response, you can map them
@@ -422,10 +426,21 @@ Usually, you'll want to map additional content types in your controller's
 :php:meth:`~Controller::beforeFilter()` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
+Setting the Character Set
+=========================
+
+.. php:method:: charset($charset = null)
+
+Sets the charset that will be used in the response::
+
+    $this->response->charset('UTF-8');
+
 .. _cake-response-file:
 
 Sending Files
 =============
+
+.. php:method:: file($path, $options = [])
 
 There are times when you want to send files as responses for your requests.
 You can accomplish that by using :php:meth:`Cake\\Network\\Response::file()`::
@@ -452,6 +467,15 @@ the browser by specifying the options::
         ['download' => true, 'name' => 'foo']
     );
 
+The supported options are:
+
+name
+    The name allows you to specify an alternate file name to be sent to
+    the user.
+download
+    A boolean value indicating whether headers should be set to force
+    download.
+
 Sending a String as File
 ========================
 
@@ -473,6 +497,8 @@ a pdf or an ics generated on the fly from a string::
 
 Setting Headers
 ===============
+
+.. php:method:: header($header = null, $value = null)
 
 Setting headers is done with the :php:meth:`Cake\\Network\\Response::header()` method. It
 can be called with a few different parameter configurations::
@@ -502,6 +528,8 @@ the redirect location header.
 Interacting with Browser Caching
 ================================
 
+.. php:method:: disableCache()
+
 You sometimes need to force browsers not to cache the results of a controller
 action. :php:meth:`Cake\\Network\\Response::disableCache()` is intended for just that::
 
@@ -514,6 +542,8 @@ action. :php:meth:`Cake\\Network\\Response::disableCache()` is intended for just
 
     Using disableCache() with downloads from SSL domains while trying to send
     files to Internet Explorer can result in errors.
+
+.. php:method:: cache($since, $time = '+1 day')
 
 You can also tell clients that you want them to cache responses. By using
 :php:meth:`Cake\\Network\\Response::cache()`::
@@ -551,6 +581,8 @@ proxy caching.
 The Cache Control Header
 ------------------------
 
+.. php:method:: sharable($public = null, $time = null)
+
 Used under the expiration model, this header contains multiple indicators
 that can change the way browsers or proxies use the cached content. A
 ``Cache-Control`` header can look like this::
@@ -587,6 +619,8 @@ the ``Cache-Control`` header.
 The Expiration Header
 ---------------------
 
+.. php:method:: expires($time = null)
+
 You can set the ``Expires`` header to a date and time after which the response is
 no longer considered fresh. This header can be set using the
 :php:meth:`Cake\\Network\\Response::expires()` method::
@@ -600,6 +634,8 @@ This method also accepts a :php:class:`DateTime` instance or any string that can
 
 The Etag Header
 ---------------
+
+.. php:method:: etag($tag = null, $weak = false)
 
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
@@ -628,6 +664,8 @@ To take advantage of this header, you must either call the
 The Last Modified Header
 ------------------------
 
+.. php:method:: modified($time = null)
+
 Also, under the HTTP cache validation model, you can set the ``Last-Modified``
 header to indicate the date and time at which the resource was modified for the
 last time. Setting this header helps CakePHP tell caching clients whether
@@ -649,6 +687,8 @@ To take advantage of this header, you must either call the
 The Vary Header
 ---------------
 
+.. php:method:: vary($header)
+
 In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
 HTML depending on the browser. Under such circumstances you can use the ``Vary`` header::
@@ -657,16 +697,38 @@ HTML depending on the browser. Under such circumstances you can use the ``Vary``
     $this->response->vary('Accept-Encoding', 'User-Agent');
     $this->response->vary('Accept-Language');
 
+Sending Not-Modified Responses
+------------------------------
+
+.. php:method:: checkNotModified(Request $request)
+
+Compares the cache headers for the request object with the cache header from
+the response and determines whether it can still be considered fresh. If so,
+deletes the response content, and sends the `304 Not Modified` header::
+
+    // In a controller action.
+    if ($this->response->checkNotModfied($this->request)) {
+        return $this->response;
+    }
+
+Sending the Response
+====================
+
+.. php:method:: send()
+
+Once you are done creating a response, calling ``send()`` will send all
+the set headers as well as the body. This is done automatically at the
+end of each request by ``Dispatcher``.
+
+
 .. _cakeresponse-testing:
 
 Response and Testing
 ====================
 
-Probably one of the biggest wins from ``Response`` comes from how it makes
-testing controllers and components easier. Instead of having methods spread across
-several objects, you only have to mock a single object, since controllers and
-components delegate to ``Response``. This helps you to get closer to a unit
-test and makes testing controllers easier::
+The ``Response`` class helps make testing controllers and components easier.
+By having a single place to mock/stub headers you can more easily test
+controllers and components::
 
     public function testSomething() {
         $this->controller->response = $this->getMock('Cake\Network\Response');
@@ -677,104 +739,6 @@ test and makes testing controllers easier::
 Additionally, you can run tests from the command line more easily, as you can use
 mocks to avoid the 'headers sent' errors that can occur when trying to set
 headers in CLI.
-
-
-Response API
-============
-
-.. php:class:: Response
-
-    Response provides a number of useful methods for interacting with
-    the response you are sending to a client.
-
-.. php:method:: header($header = null, $value = null)
-
-    Allows you to directly set one or more headers to be sent with the response.
-
-.. php:method:: location($url = null)
-
-    Allows you to directly set the redirect location header to be sent with the response::
-
-        // Set the redirect location
-        $this->response->location('http://example.com');
-
-        // Get the current redirect location header
-        $location = $this->response->location();
-
-.. php:method:: charset($charset = null)
-
-    Sets the charset that will be used in the response.
-
-.. php:method:: type($contentType = null)
-
-    Sets the content type of the response. You can either use a known content
-    type alias or the full content type name.
-
-.. php:method:: cache($since, $time = '+1 day')
-
-    Allows you to set caching headers in the response.
-
-.. php:method:: disableCache()
-
-    Sets the headers to disable client caching for the response.
-
-.. php:method:: sharable($public = null, $time = null)
-
-    Sets the ``Cache-Control`` header to be either ``public`` or ``private`` and
-    optionally sets a ``max-age`` directive of the resource
-
-.. php:method:: expires($time = null)
-
-    Allows the ``Expires`` header to be set to a specific date.
-
-.. php:method:: etag($tag = null, $weak = false)
-
-    Sets the ``Etag`` header to uniquely identify a response resource.
-
-.. php:method:: modified($time = null)
-
-    Sets the ``Last-Modified`` header to a specific date and time in the correct
-    format.
-
-.. php:method:: checkNotModified(Request $request)
-
-    Compares the cache headers for the request object with the cache header from
-    the response and determines whether it can still be considered fresh. If so,
-    deletes the response content, and sends the `304 Not Modified` header.
-
-.. php:method:: compress()
-
-    Turns on gzip compression for the request.
-
-.. php:method:: download($filename)
-
-    Allows you to send a response as an attachment, and to set its filename.
-
-.. php:method:: statusCode($code = null)
-
-    Allows you to set the status code of the response.
-
-.. php:method:: body($content = null)
-
-    Sets the content body of the response.
-
-.. php:method:: send()
-
-    Once you are done creating a response, calling :php:meth:`~CakeResponse::send()` will send all
-    the set headers as well as the body. This is done automatically at the
-    end of each request by :php:class:`Dispatcher`.
-
-.. php:method:: file($path, $options = [])
-
-    Allows you to set the ``Content-Disposition`` header of a file either to display or to download.
-
-    ``name``
-        The name allows you to specify an alternate file name to be sent to
-        the user.
-
-    ``download``
-        A boolean value indicating whether headers should be set to force
-        download.
 
 .. meta::
     :title lang=en: Request and Response objects
