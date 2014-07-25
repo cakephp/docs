@@ -198,12 +198,12 @@ comme ceci::
 
     use Cake\Event\EventListener;
 
-    class UserStatistic implements CakeEventListener {
+    class UserStatistic implements EventListener {
 
         public function implementedEvents() {
-            return array(
+            return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
-            );
+            ];
         }
 
         public function updateBuyStatistic($event) {
@@ -433,7 +433,7 @@ les deux premiers paramètres que vous utilisiez pour l'attacher::
     // Détacher la fonction anonyme
     $this->eventManager()->detach($myFunction, 'My.event');
 
-    // Attacher un CakeEventListener
+    // Attacher un EventListener
     $listener = new MyEventLister();
     $this->eventManager()->attach($listener);
 
