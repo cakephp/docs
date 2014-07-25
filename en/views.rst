@@ -690,11 +690,6 @@ To call any view method use ``$this->method()``
     An instance of :php:class:`CakeRequest`. Use this instance to access
     information about the current request.
 
-.. php:attr:: Blocks
-
-    An instance of :php:class:`ViewBlock`. Used to provide view block
-    functionality in view rendering.
-
 More About Views
 ================
 
