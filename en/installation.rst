@@ -147,9 +147,9 @@ That's it!  Your CakePHP application is up and running without having to
 configure a web server.
 
 .. warning::
-    
-    This is not intended to be used, nor should ever be used, in a production
-    environment.
+
+    The development server is not intended to be used, nor should ever be used,
+    in a production environment.
 
 Production
 ==========
@@ -186,60 +186,6 @@ for the domain to::
 
 If your web server is configured correctly, you should now find
 your CakePHP application accessible at http://www.example.com.
-
-Sharing CakePHP with Multiple Applications
-==========================================
-
-There may be some situations where you wish to place CakePHP's
-directories on different places on the filesystem. This may be due
-to a shared host restriction. This section describes how
-to spread your CakePHP directories across a filesystem.
-
-First, realize that there are three main parts to a CakePHP
-application:
-
-#. The core CakePHP library, in /vendor/cakephp/cakephp.
-#. Your application code, in /src.
-#. The application's webroot, usually in /src/webroot.
-
-Each of these directories can be located anywhere on your file
-system, with the exception of the webroot, which needs to be
-accessible by your web server. You can even move the webroot folder
-out of the ``src`` folder as long as you tell CakePHP where you've put
-it.
-
-To configure your CakePHP installation, you'll need to make some
-changes to the following files.
-
--  /webroot/index.php
-
-There are three constants that you'll need to edit: ``ROOT``,
-``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.
-
-
-- ``ROOT`` should be set to the path of the directory that contains your
-  app folder.
-- ``APP_DIR`` should be set to the (base)name of your app folder.
-- ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your CakePHP
-  libraries folder. Generally you will not need to change this if you use any of
-  the :doc:`suggested installation </installation>` methods.
-
-Let's run through an example so you can see what an advanced
-installation might look like in practice. Imagine that I wanted to
-set up CakePHP to work as follows:
-
-- My application's webroot directory will be /var/www/mysite/.
-- My application's app directory will be /home/me/myapp.
-- CakePHP is installed via Composer.
-
-Given this type of setup, I would need to edit my webroot/index.php
-file (which will end up at /var/www/mysite/index.php, in this
-example) to look like the following::
-
-    // src/Config/paths.php (partial, comments removed)
-    define('ROOT', '/home/me');
-    define('APP_DIR', 'myapp');
-    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
 
 URL Rewriting
 =============
