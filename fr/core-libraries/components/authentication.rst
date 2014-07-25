@@ -494,22 +494,21 @@ vous connecter.
     ``env('SCRIPT_NAME')``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
-Creating custom password hasher classes
+Création de classes de hachage de mots de passe personnalisées
 ---------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
-the following::
+Les classes de hachage de mots de passe personnalisées doivent étendre la classe ``AbstractPasswordHasher``
+et implémenter les méthodes abstraites ``hash()`` et ``check()``.
+Dans ``app/Controller/Component/Auth/CustomPasswordHasher.php``, vous pourriez mettre ceci::
 
     App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
-            // stuff here
+            // choses ici
         }
 
         public function check($password, $hashedPassword) {
-            // stuff here
+            // choses ici
         }
     }
 
@@ -532,18 +531,18 @@ utilisateur que vous voulez pour la 'connexion'::
 
 .. warning::
 
-    Soyez certain d'ajouter manuellement le nouveau User id au tableau passé
-    à la méthode de login. Sinon vous n'aurez pas l'id utilisateur disponible.
+    Soyez certain d'ajouter manuellement le nouvel id utilisateur au tableau passé
+    à la méthode de login. Sinon, l'id utilisateur ne sera pas disponible.
 
 Accéder à l'utilisateur connecté
 --------------------------------
 
 Une fois que l'utilisateur est connecté, vous avez souvent besoin
-d'information particulière à propos de l'utilisateur courant. Vous pouvez
-accéder à l'utilisateur en cours de connexion en utilisant
+d'informations particulières à propos de l'utilisateur courant. Vous pouvez
+accéder à ce dernier en utilisant
 ``AuthComponent::user()``. Cette méthode est statique, et peut être utilisée
 globalement après le chargement du component Auth. Vous pouvez y accéder à la
-fois avec l'instance d'une méthode ou comme une méthode statique::
+fois avec une méthode d'instance ou une méthode statique::
 
     // Utilisez n'importe où
     AuthComponent::user('id')
@@ -555,9 +554,9 @@ Déconnexion des utilisateurs
 ----------------------------
 
 Éventuellement vous aurez besoin d'un moyen rapide pour dés-authentifier
-les utilisateurs et les rediriger ou il devraient aller. Cette méthode
-est aussi très pratique si vous voulez fournir un lien 'Déconnecte moi'
-à l'intérieur de la zone membres de votre application ::
+les utilisateurs et les rediriger où ils devraient aller. Cette méthode
+est aussi très pratique si vous voulez fournir un lien 'Déconnecte-moi'
+à l'intérieur de la zone membres de votre application::
 
     public function logout() {
         $this->redirect($this->Auth->logout());
@@ -575,9 +574,9 @@ fonctionne pour certain clients.
 Autorisation
 ============
 
-l'autorisation est le processus qui permet de s'assurer qu'un utilisateur
-identifier/authentifier est autorisé à accéder aux ressources qu'il demande.
-Il y a plusieurs gestionnaires d'autorisation intégrés, et vous
+L'autorisation est le processus qui permet de s'assurer qu'un utilisateur
+identifié/authentifié est autorisé à accéder aux ressources qu'il demande.
+Il y a plusieurs gestionnaires d'autorisations intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
 - ``ActionsAuthorize`` Utilise le Component AclComponent pour vérifier les
@@ -591,23 +590,23 @@ pouvez créer vos propres gestionnaires dans un plugin par exemple.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant
+Vous configurez les gestionnaires d'autorisations via 
 ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
-gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
+gestionnaires. L'utilisation de plusieurs gestionnaires vous donne la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
-Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
-dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
-false, s'il ne sont pas capable de vérifier les autorisation, ou bien si
-la vérification a échouée. Le gestionnaire devrait retourner true si ils
+Quand les gestionnaires d'autorisation sont vérifiés, ils sont appelés
+dans l'ordre dans lequel ils sont déclarés. Les gestionnaires devraient retourner
+false s'ils ne sont pas capables de vérifier les autorisations, ou bien si
+la vérification a échoué. Ils devraient retourner true s'ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
-seront appelés dans l'ordre jusqu'à ce qu'un passe. Si toutes les
-vérifications échoues , l'utilisateur sera redirigé vers la page
+seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne true. Si toutes les
+vérifications échouent, l'utilisateur sera redirigé vers la page
 d'où il vient. Vous pouvez également stopper les autorisations
 en levant une exception. Vous aurez besoin de traiter toutes les exceptions
-levées, et les manipuler.
+levées, et de les manipuler.
 
-Vous pouvez configurer les gestionnaires d'autorisation dans le
-``beforeFilter`` de votre controller ou , dans le tableau ``$components``.
+Vous pouvez configurer les gestionnaires d'autorisations dans le
+``beforeFilter`` de votre controller ou dans le tableau ``$components``.
 Vous pouvez passer les informations de configuration dans chaque objet
 d'autorisation, en utilisant un tableau::
 
@@ -620,21 +619,21 @@ d'autorisation, en utilisant un tableau::
         'Controller'
     );
 
-Tout comme ``Auth->authenticate``, ``Auth->authorize``, vous aident
-à garder un code "propre, en utilisant la clé ``all``. Cette clé spéciale
+Tout comme ``Auth->authenticate``, ``Auth->authorize`` vous aident
+à garder un code propre, en utilisant la clé ``all``. Cette clé spéciale
 vous aide à définir les paramètres qui sont passés à chaque objet attaché.
-La clé all est aussi exposée comme ``AuthComponent::ALL``::
+La clé ``all`` est aussi exposée comme ``AuthComponent::ALL``::
 
 
     // passage de paramètre en utilisant 'all'
     $this->Auth->authorize = array(
         AuthComponent::ALL => array('actionPath' => 'controllers/'),
-        'Actions',
+        'Action',
         'Controller'
     );
 
-Dans l'exemple ci-dessus, à la fois ``L' Actions`` et ``Le Controller`` auront
-les paramètres définis pour la clé 'all'. Chaque paramètres passés a un objet
+Dans l'exemple ci-dessus, à la fois l'``Action`` et le ``Controller`` auront
+les paramètres définis pour la clé 'all'. Chaque paramètre passé à un objet
 d'autorisation spécifique remplacera la clé correspondante dans la clé 'all'.
 Le noyau authorize objects supporte les clés de configuration suivantes.
 
