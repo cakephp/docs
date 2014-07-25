@@ -180,21 +180,6 @@ Checking Request Conditions
 
 .. php:method:: is($type)
 
-Check whether or not a Request matches a certain criterion. Uses
-the built-in detection rules as well as any additional rules defined
-with :php:meth:`Cake\\Network\\Request::addDetector()`::
-
-    // Check if the request is a POST
-    $request->is('post');
-
-    // Check if the request is from AJAX
-    $request->is('ajax');
-
-.. php:method:: addDetector($name, $options)
-
-Add a detector to be used with :php:meth:`Cake\\Network\\Request::is()`. See
-:ref:`check-the-request` for more information.
-
 The request object provides an easy way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
 conditions, as well as inspect other application specific request criteria::
@@ -216,6 +201,8 @@ detectors. There are four different types of detectors that you can create:
 * Callback detectors - Callback detectors allow you to provide a 'callback' type
   to handle the check. The callback will receive the request object as its only
   parameter.
+
+.. php:method:: addDetector($name, $options)
 
 Some examples would be::
 
