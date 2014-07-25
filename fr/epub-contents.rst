@@ -9,7 +9,7 @@ Contenu
    cakephp-overview
    controllers
    views
-   models
+   orm
    core-libraries
    plugins
    console-and-shells
@@ -22,5 +22,5 @@ Contenu
 .. todolist::
 
 .. meta::
-    :title lang=fr: Contents
+    :title lang=fr: Contenu
     :keywords lang=fr: librairies du coeur,ref search,shells,déploiement,appendices,glossary,models

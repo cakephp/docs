@@ -274,12 +274,12 @@ automatiqement la sortie dans la vue.
     -  Si vous passez un tableau associatif, vous pouvez utiliser les clés
        suivantes:
 
-       -  places (integer): le montant de précision désiré.
-       -  before (string): à mettre avant le nombre à sortir.
-       -  escape (boolean): si vous voulez la valeur avant d'être échappée.
-       -  decimals (string): utilisé pour délimiter les places des décimales
-          dans le nombre.
-       -  thousands (string): utilisé pour marquer les milliers, millions, …
+       - places (integer): le montant de précision désiré.
+       - before (string): à mettre avant le nombre à sortir.
+       - escape (boolean): si vous voulez la valeur avant d'être échappée.
+       - decimals (string): utilisé pour délimiter les places des décimales
+         dans le nombre.
+       - thousands (string): utilisé pour marquer les milliers, millions, …
 
     Exemple::
 
