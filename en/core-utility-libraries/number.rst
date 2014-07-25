@@ -265,13 +265,13 @@ automatically echo the output into the view.
        or places for the function.
     -  If you pass an associated array, you can use the following keys:
 
-       -  places (integer): the amount of desired precision
-       -  before (string): to be put before the outputted number
-       -  escape (boolean): if you want the value in before to be escaped
-       -  decimals (string): used to delimit the decimal places in a
-          number
-       -  thousands (string): used to mark off thousand, millions, …
-          places
+       - places (integer): the amount of desired precision
+       - before (string): to be put before the outputted number
+       - escape (boolean): if you want the value in before to be escaped
+       - decimals (string): used to delimit the decimal places in a
+         number
+       - thousands (string): used to mark off thousand, millions, …
+         places
 
     Example::
 
@@ -319,7 +319,7 @@ automatically echo the output into the view.
         - decimals (string): used to delimit the decimal places in a
           number
         - thousands (string): used to mark off thousand, millions, …
-         places
+          places
 
     Example::
 

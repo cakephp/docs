@@ -130,7 +130,7 @@ Core
 App
 ---
 
-- ``App::pluginPath()`` has been removed. Use ``CakePlugin::path()``instead.
+- ``App::pluginPath()`` has been removed. Use ``CakePlugin::path()`` instead.
 - ``App::build()`` has been removed.
 - ``App::location()`` has been removed.
 - ``App::paths()`` has been removed.
