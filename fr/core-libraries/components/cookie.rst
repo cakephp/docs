@@ -15,7 +15,7 @@ Paramétrage du controller
 Voici un certain nombre de variables du controller qui vous permettent de
 configurer la manière dont les cookies sont créés et gérés. Définir ces
 variables spéciales dans la méthode beforeFilter() de votre controller vous
-permet de définir la façon dont le Component cookie fonctionne.
+permet de modifier le fonctionnement du component Cookie.
 
 +-----------------+--------------+------------------------------------------------------+
 | variable Cookie | par défaut   | description                                          |
@@ -29,7 +29,7 @@ permet de définir la façon dont le Component cookie fonctionne.
 |                 |              | chiffrement AES, cette valeur doit être plus grande  |
 |                 |              | que 32 bytes.                                        |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie.     |
+| string $domain  | ''           | Le nom de domaine autorisé à accéder au cookie.     |
 |                 |              | Utilisez par exemple '.votredomaine.com' pour        |
 |                 |              | autoriser les accès depuis tous vos sous-domaines.   |
 +-----------------+--------------+------------------------------------------------------+
@@ -111,17 +111,17 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
         );
 
     Toutes les valeurs dans le cookie sont chiffrées par défaut. Si vous voulez
-    stocker vos valeurs en texte clair, definissez le troisème paramètre de la
+    stocker vos valeurs en texte clair, définissez le troisième paramètre de la
     méthode write() à false. Vous devriez vous rappeler de définir le mode de
-    chiffrement à 'aes' pour s'assurer que les valeurs sont chiffrées de façon
+    chiffrement à 'aes' pour vous assurer que les valeurs sont chiffrées de façon
     sécurisée::
 
         $this->Cookie->write('name', 'Larry', false);
 
     Le dernier paramètre à écrire est $expires - le nombre de secondes
     avant que le cookie n'expire. Par convention, ce paramètre peut aussi
-    être passé comme une chaîne de texte que la fonction strtotime() de
-    php comprend::
+    être passé comme une chaîne de caractères que la fonction strtotime() de
+    PHP comprend::
 
         // Les deux cookies expirent dans une heure.
         $this->Cookie->write('first_name', 'Larry', false, 3600);
@@ -151,11 +151,11 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     Utilisé pour vérifier si une clé/chemin existe et a une valeur non null.
 
     .. versionadded:: 2.3
-        ``CookieComponent::check()`` a été ajoutée dans la versoin 2.3
+        ``CookieComponent::check()`` a été ajoutée dans la version 2.3
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie dont le nome est défini dans $key. Fonctionne avec la
+    Efface une variable de cookie dont le nom est défini dans $key. Fonctionne avec la
     notation par point::
 
         // Efface une variable
