@@ -182,7 +182,7 @@ Exibindo blocos
 
 .. versionadded:: 2.1
 
-Você pode exibir blocos usando o método ``fetch()``. ``fecht()`` irá retornar
+Você pode exibir blocos usando o método ``fetch()``. ``fetch()`` irá retornar
 um bloco de maneira segura, retornando '' se o bloco não existir"::
 
     echo $this->fetch('sidebar');
