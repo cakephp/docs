@@ -27,8 +27,8 @@ element name::
     // Uses src/Template/Element/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
 
-Alternatively, to set a plain-text message without rendering an element, you can use the
-``set()`` method::
+Alternatively, to set a plain-text message without rendering an element, you can
+use the ``set()`` method::
 
     $this->Flash->set('This is a message');
 
@@ -36,9 +36,9 @@ FlashComponent's ``__call`` and ``set()`` methods optionally take a second
 parameter, an array of options:
 
 * ``key`` Defaults to 'flash'. The array key found under the 'Flash' key in
-  the session. 
+  the session.
 * ``element`` Defaults to null, but will automatically be set when using the
-  ``__call`` magic method. The element name to use for rendering.
+  ``__call()`` magic method. The element name to use for rendering.
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
 
@@ -57,7 +57,7 @@ An example of using these options::
     <?= $this->Flash->render('positive') ?>
 
     <!-- In src/Template/Element/Flash/success.ctp -->
-    <div id="flash-<?= $key ?>" class="message-info success">
+    <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 
