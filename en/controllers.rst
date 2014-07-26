@@ -132,7 +132,7 @@ following techniques will bypass the default view rendering behavior.
 * If you return a string, or an object that can be converted to a string from
   your controller action, it will be used as the response body.
 * You can return a :php:class:`Cake\\Network\\Response` object with the
-  completely created response.
+  fully created response.
 
 When you use controller methods with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
@@ -492,12 +492,11 @@ $components, $helpers
 ---------------------
 
 The next most often used controller attributes tell CakePHP what
-:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`, and
-``models`` you'll be using in conjunction with the current controller. Using
-these attributes make MVC classes given by :php:attr:`~Controller::$components`
-available to the controller as class variables (``$this->ModelName``, for
-example) and those given by :php:attr:`~Controller::$helpers` to the view as an
-object reference variable (``$this->{$helpername}``).
+:php:attr:`~Controller::$helpers`, :php:attr:`~Controller::$components`
+you'll be using in conjunction with the current controller. The ``$components``
+will be created as class properties on the controller e.g ``$this->Csrf``.
+While, ``$helpers`` will be created as class properties in your view e.g
+``$this->Form``.
 
 .. note::
 
@@ -516,7 +515,7 @@ object reference variable (``$this->{$helpername}``).
     additional MVC classes::
 
         class RecipesController extends AppController {
-            public $helpers = ['Js'];
+            public $helpers = ['Form'];
             public $components = ['RequestHandler'];
         }
 

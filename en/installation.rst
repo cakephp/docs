@@ -141,15 +141,15 @@ utilizing the following arguments::
 
     Console/cake server -H 192.168.13.37 -p 5673
 
-This will serve your application at ``http://192.168.13.37:5673/``. 
+This will serve your application at ``http://192.168.13.37:5673/``.
 
 That's it!  Your CakePHP application is up and running without having to
 configure a web server.
 
 .. warning::
 
-    The development server is not intended to be used, nor should ever be used,
-    in a production environment.
+    The development server should ever be used in a production environment. It
+    is only intended as a minimal development server.
 
 Production
 ==========

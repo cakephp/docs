@@ -63,9 +63,11 @@ Any variables you set in your controller with ``set()`` will be available in
 both the view and the layout your action renders. In addition, any set variables
 will also be available in any element. If you need to pass additional variables
 from the view to the layout you can either call ``set()`` in the view template,
-or use a :ref:`view-blocks`. You should remember to **always** escape any user
-data before outputting it as CakePHP does not automatically escape output. You
-can escape user content with the ``h()`` function::
+or use a :ref:`view-blocks`.
+
+You should remember to **always** escape any user data before outputting it as
+CakePHP does not automatically escape output. You can escape user content with
+the ``h()`` function::
 
     <?= h($user->bio); ?>
 
