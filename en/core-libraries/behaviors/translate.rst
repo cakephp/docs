@@ -11,8 +11,9 @@ of your entities in multiple languages. It does so by using a separate
 given Table object that it's bound to.
 
 .. warning::
-    The TranslateBehavior does not support composite primary keys at this point in
-    time.
+
+    The TranslateBehavior does not support composite primary keys at this point
+    in time.
 
 A Quick Tour
 ============
@@ -20,7 +21,7 @@ A Quick Tour
 After creating the ``i18n`` table in your database attach the behavior to any
 Table object you want to make translatable::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
     
         public function initialize(array $config) {
             $this->addBehavior('Translate', ['fields' => ['title']]);
@@ -101,8 +102,8 @@ Attaching the Translate Behavior to Your Tables
 Attaching the behavior can be done in the ``initialize`` method in your Table
 class::
 
-    class Articles extends Table {
-    
+    class ArticlesTable extends Table {
+
         public function initialize(array $config) {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -121,8 +122,8 @@ when you have multiple tables to translate and you want a cleaner separation
 of the data that is stored for each different table::
 
 
-    class Articles extends Table {
-    
+    class ArticlesTable extends Table {
+
         public function initialize(array $config) {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],

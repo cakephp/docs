@@ -32,6 +32,7 @@ More information on the meaning of the fields and how they are used can be found
 in this article describing the `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
+
     The TreeBehavior does not support composite primary keys at this point in
     time.
 
@@ -81,7 +82,7 @@ in a hierarchy, you can stack the 'threaded' finder::
 
 Traversing threaded results usually requires recursive functions in, but if you
 only require a result set containing a single field from each level so you can
-display a list, in an HTML select for example, it is better to just use the
+display a list, in an HTML select for example, it is better to use the
 'treeList' finder::
 
     $list = $categories->find('treeList');
@@ -167,12 +168,12 @@ In the previous example, all tree operations will be scoped to only the rows
 having the column ``country_name`` set to 'Brazil'. You can change the scoping
 on the fly by using the 'config' function::
 
-    $this->behaviors->Tree->config('scope', ['country_name' => 'France']);
+    $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
 
 Optionally, you can have a finer grain control of the scope by passing a closure
 as the scope::
 
-    $this->behaviors->Tree->config('scope', function($query) {
+    $this->behaviors()->Tree->config('scope', function($query) {
         $country = $this->getConfigureContry(); // A made-up function
         return $query->where(['country_name' => $country]);
     });
