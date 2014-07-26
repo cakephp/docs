@@ -177,6 +177,11 @@ file and add the following lines::
                     'controller' => 'pages', 
                     'action' => 'display', 
                     'home'
+                ),
+                'authenticate' => array(
+                    'Form' => array(
+                        'passwordHasher' => 'Blowfish'
+                    )
                 )
             )
         );
@@ -228,7 +233,7 @@ and add the following::
     // app/Model/User.php
     
     App::uses('AppModel', 'Model');
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
 
@@ -236,7 +241,7 @@ and add the following::
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher();
+            $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']
             );
@@ -246,7 +251,12 @@ and add the following::
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
+.. note::
+	
+	The BluefishPasswordHasher is more secure than the old SimplePasswordHasher and
+	allows setting a custom a custom cost. The SimplePasswordHasher will be removed as of CakePHP version 3.0
+
+So, now every time a user is saved, the password is hashed using the BlowfishPasswordHasher class.
 We're just missing a template view file for the login function. Open up your ``app/View/Users/login.ctp`` file and add the following lines:
 
 .. code-block:: php
