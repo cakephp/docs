@@ -56,6 +56,20 @@ chapter:
   creating self contained UI components. See the :doc:`/views/cells`
   documentation for more information.
 
+View Variables
+--------------
+
+Any variables you set in your controller with ``set()`` will be available in
+both the view and the layout your action renders. In addition, any set variables
+will also be available in any element. If you need to pass additional variables
+from the view to the layout you can either call ``set()`` in the view template,
+or use a :ref:`view-blocks`.
+
+You should remember to **always** escape any user data before outputting it as
+CakePHP does not automatically escape output. You can escape user content with
+the ``h()`` function::
+
+    <?= h($user->bio); ?>
 
 .. _extending-views:
 
@@ -279,7 +293,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?= $this->fetch('title') ?></title>
+   <title><?= h($title) ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -326,7 +340,7 @@ controller, setting the ``title`` variable::
        }
    }
 
-You can also set the title_for_layout variable from inside the view file::
+You can also set the ``title`` variable from inside the view file::
 
     $this->set('title', $titleContent);
 
@@ -677,11 +691,6 @@ To call any view method use ``$this->method()``
 
     An instance of :php:class:`CakeRequest`. Use this instance to access
     information about the current request.
-
-.. php:attr:: Blocks
-
-    An instance of :php:class:`ViewBlock`. Used to provide view block
-    functionality in view rendering.
 
 More About Views
 ================
