@@ -539,10 +539,11 @@ RequestHandlerComponent
 - The following methods have been removed from RequestHandler component::
   ``isAjax()``, ``isFlash()``, ``isSSL()``, ``isPut()``, ``isPost()``, ``isGet()``, ``isDelete()``.
   Use the :php:meth:`Cake\\Network\\Request::is()` method instead with relevant argument.
-- ``RequestHandler::setContent()`` has removed, use :php:meth:`Cake\\Network\\Response::type()` instead.
-- ``RequestHandler::getReferer()`` has removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
-- ``RequestHandler::getClientIP()`` has removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
-- ``RequestHandler::mapType()`` has removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
+- ``RequestHandler::setContent()`` was removed, use :php:meth:`Cake\\Network\\Response::type()` instead.
+- ``RequestHandler::getReferer()`` was removed, use :php:meth:`Cake\\Network\\Request::referer()` instead.
+- ``RequestHandler::getClientIP()`` was removed, use :php:meth:`Cake\\Network\\Request::clientIp()` instead.
+- ``RequestHandler::getAjaxVersion()`` was removed.
+- ``RequestHandler::mapType()`` was removed, use :php:meth:`Cake\\Network\\Response::mapType()` instead.
 - Configuration options are no longer set as public properties.
 
 SecurityComponent
