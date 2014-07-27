@@ -251,7 +251,11 @@ pages in the paged data set.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index?page=1&amp;sort=title&amp;order=desc">&lt;&lt; previous</a></span>
+        <li class="prev">
+            <a rel="prev" href="/posts/index?page=1&amp;sort=title&amp;order=desc">
+                &lt;&lt; previous
+            </a>
+        </li>
 
     If there were no previous pages you would get:
 
@@ -368,9 +372,6 @@ Modifying the Options PaginatorHelper Uses
 
 .. php:method:: options($options = [])
 
-    :param mixed $options: Default options for pagination links. If a
-       string is supplied - it is used as the DOM id element to update.
-
 Sets all the options for the Paginator Helper. Supported options are:
 
 * ``url`` The URL of the paginating action. 'url' has a few sub options as well:
@@ -424,10 +425,10 @@ which can be easily integrated into your table column headers:
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipies as $recipe): ?>
         <tr>
-            <td><?= $recipe['Recipe']['id'] ?> </td>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
+            <td><?= $recipe->id ?> </td>
+            <td><?= h($recipe->title) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -445,10 +446,10 @@ It is also possible to sort a column based on associations:
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
             <th><?= $this->Paginator->sort('Author.name', 'Author') ?></th>
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipies as $recipe): ?>
         <tr>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
-            <td><?= h($recipe['Author']['name']) ?> </td>
+            <td><?= h($recipe->title) ?> </td>
+            <td><?= h($recipe->name) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -474,54 +475,15 @@ using special markers::
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
     ]) ?>
 
-Other Methods
-=============
+Generating Pagination URLs
+==========================
 
-.. php:method:: url(array $options = [], $model = null, $full = false)
+.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-    :param array $options: Pagination/URL options array. As used on
-        ``options()`` or ``link()`` method.
-    :param string $model: Which model to paginate on
+By default returns a full pagination URL string for use in non-standard
+contexts (i.e. JavaScript).::
 
-    By default returns a full pagination URL string for use in non-standard
-    contexts (i.e. JavaScript).::
-
-        echo $this->Paginator->generateUrl(['sort' => 'title']);
-
-.. php:method:: defaultModel()
-
-    Gets the default model of the paged sets or null if pagination is not
-    initialized.
-
-.. php:method:: params(string $model = null)
-
-    Gets the current paging parameters from the resultset for the given model::
-
-        debug($this->Paginator->params());
-        /*
-        Array
-        (
-            [page] => 2
-            [current] => 2
-            [count] => 43
-            [prevPage] => 1
-            [nextPage] => 3
-            [pageCount] => 3
-            [order] =>
-            [limit] => 20
-            [sort] => null
-            [direction] = asc
-        )
-        */
-
-.. php:method:: param(string $key, string $model = null)
-
-    Gets the specific paging parameter from the resultset for the given model::
-
-        debug($this->Paginator->param('count'));
-        /*
-        (int)43
-        */
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. meta::
     :title lang=en: PaginatorHelper

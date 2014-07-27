@@ -1,6 +1,8 @@
 SessionHelper
 #############
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: SessionHelper(View $view, array $config = [])
 
 As a natural counterpart to the Session Component, the Session

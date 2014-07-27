@@ -1,6 +1,8 @@
 RSS
 ###
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: RssHelper(View $view, array $config = [])
 
 The RSS helper makes generating XML for RSS feeds easy.
@@ -16,7 +18,7 @@ After a few simple steps you can simply append the desired
 extension .rss to ``posts/index`` making your URL ``posts/index.rss``.
 Before we jump too far ahead trying to get our webservice up and
 running we need to do a few things. First parseExtensions needs to
-be activated, this is done in ``app/Config/routes.php``::
+be activated, this is done in ``src/Config/routes.php``::
 
     Router::parseExtensions('rss');
 
@@ -57,7 +59,7 @@ the same::
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
-            $posts = $this->Post->find(
+            $posts = $this->Posts->find(
                 'all',
                 ['limit' => 20, 'order' => 'Post.created DESC']
             );
@@ -81,7 +83,7 @@ Layout
 ------
 
 An Rss layout is very simple, put the following contents in
-``app/View/Layout/rss/default.ctp``::
+``src/Template/Layout/rss/default.ctp``::
 
     if (!isset($documentData)) {
         $documentData = [];
@@ -103,14 +105,14 @@ can pass variables back to the layout. Which is where our
 our feed.
 
 Next up is view file for my posts/index. Much like the layout file
-we created, we need to create a ``View/Posts/rss/`` directory and
+we created, we need to create a ``src/Template/Posts/rss/`` directory and
 create a new ``index.ctp`` inside that folder. The contents of the file
 are below.
 
 View
 ----
 
-Our view, located at ``app/View/Posts/rss/index.ctp``, begins by
+Our view, located at ``src/Template/Posts/rss/index.ctp``, begins by
 setting the ``$documentData`` and ``$channelData`` variables for the
 layout, these contain all the metadata for our RSS feed. This is
 done by using the :php:meth:`View::set()`` method which is analogous to the
@@ -193,84 +195,6 @@ site at http://validator.w3.org/feed/.
     to ``false`` to get a valid feed, because of the various debug
     information added automagically under higher debug settings that
     break XML syntax or feed validation rules.
-
-Rss Helper API
-==============
-
-.. php:attr:: action
-
-    Current action
-
-.. php:attr:: base
-
-    Base URL
-
-.. php:attr:: data
-
-    POSTed model data
-
-.. php:attr:: field
-
-    Name of the current field
-
-.. php:attr:: helpers
-
-    Helpers used by the RSS Helper
-
-.. php:attr:: here
-
-    URL to current action
-
-.. php:attr:: model
-
-    Name of current model
-
-.. php:attr:: params
-
-    Parameter array
-
-.. php:attr:: version
-
-    Default spec version of generated RSS.
-
-.. php:method:: channel(array $attrib = array (), array $elements = array (), mixed $content = null)
-
-    :rtype: string
-
-    Returns an RSS ``<channel />`` element.
-
-.. php:method:: document(array $attrib = array (), string $content = null)
-
-    :rtype: string
-
-    Returns an RSS document wrapped in ``<rss />`` tags.
-
-.. php:method:: elem(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
-
-    :rtype: string
-
-    Generates an XML element.
-
-.. php:method:: item(array $att = [], array $elements = array ())
-
-    :rtype: string
-
-    Converts an array into an ``<item />`` element and its contents.
-
-.. php:method:: items(array $items, mixed $callback = null)
-
-    :rtype: string
-
-    Transforms an array of data using an optional callback, and maps it to a
-    set of ``<item />`` tags.
-
-.. php:method:: time(mixed $time)
-
-    :rtype: string
-
-    Converts a time in any format to an RSS time. See
-    :php:meth:`TimeHelper::toRSS()`.
-
 
 .. meta::
     :title lang=en: RssHelper
