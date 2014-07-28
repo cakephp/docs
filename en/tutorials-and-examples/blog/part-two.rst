@@ -373,7 +373,10 @@ back at our Articles model and make a few adjustments::
     use Cake\Validation\Validator;
 
     class ArticlesTable extends Table {
-
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
+        
         public function validationDefault(Validator $validator) {
             $validator
                 ->notEmpty('title')
