@@ -214,7 +214,8 @@ a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
 As of 2.5 you can accomplish the above much more simply using
-:php:meth:`Cache::remember()`. Using the new method the above would look like::
+:php:meth:`Cache::remember()`. Assuming you are using PHP 5.3 or
+newer, using the ``remember()`` method would look like::
 
     class Post extends AppModel {
 
@@ -441,7 +442,8 @@ Cache API
     and the results stored in the cache at the provided key.
 
     For example, you often want to cache query results. You could use
-    ``remember()`` to make this simple. Assuming you were using PHP5.3 or more::
+    ``remember()`` to make this simple. Assuming you are using PHP 5.3 or
+    newer::
 
         class Articles extends AppModel {
             function all() {
