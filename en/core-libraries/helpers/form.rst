@@ -279,11 +279,14 @@ quote (text). You can use the input() method of the FormHelper to
 create appropriate inputs for all of these form fields::
 
     echo $this->Form->create($user);
-
-    echo $this->Form->input('username'); //text
-    echo $this->Form->input('password'); //password
-    echo $this->Form->input('approved'); //day, month, year, hour, minute, meridian
-    echo $this->Form->input('quote');    //textarea
+    // Text
+    echo $this->Form->input('username');
+    // Password
+    echo $this->Form->input('password');
+    // Day, month, year, hour, minute, meridian
+    echo $this->Form->input('approved');
+    // Textarea
+    echo $this->Form->input('quote');
 
     echo $this->Form->button('Add');
     echo $this->Form->end();
@@ -722,7 +725,7 @@ generated. Example:
 
 .. code-block:: html
 
-    <textarea name="data[User][notes]" id="UserNotes">
+    <textarea name="notes" id="notes">
     This text is to be edited.
     </textarea>
 
@@ -929,8 +932,8 @@ Defaults to true::
         </optgroup>
     </select>
 
-* ``$attributes['multiple']`` If 'multiple' has been set to true for an input that
-  outputs a select, the select will allow multiple selections::
+* ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
+  input that outputs a select, the select will allow multiple selections::
 
     echo $this->Form->select('Model.field', $options, ['multiple' => true]);
 
@@ -1024,7 +1027,7 @@ environment::
         'name' => 'conference_schedule.pdf',
         'type' => 'application/pdf',
         'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
-        'error' => 0, // On windows this can be a string.
+        'error' => 0, // On Windows this can be a string.
         'size' => 41737,
     ];
 
@@ -1140,8 +1143,8 @@ Will output:
 
 You can pass in your own array of months to be used by setting the
 'monthNames' attribute, or have months displayed as numbers by
-passing false. (Note: the default months are internationalized and
-can be translated using localization.)::
+passing false. (Note: the default months can be localized with CakePHP
+:doc:`/core-libraries/internationalization-and-localization` features.)::
 
     echo $this->Form->month('mob', ['monthNames' => false]);
 
@@ -1330,10 +1333,9 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-
-The ``button`` input type supports the ``escape`` option, which accepts a
-bool and determines whether to HTML entity encode the $title of the button.
-Defaults to false::
+The ``button`` input type supports the ``escape`` option, which accepts
+a boolean and defaults to false. It determines whether to HTML encode the
+``$title`` of the button::
 
     echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
 

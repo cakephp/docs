@@ -43,10 +43,8 @@ Creating Charset Tags
 
 .. php:method:: charset($charset=null)
 
-Used to create a meta tag specifying the document's character.
-Defaults to UTF-8
-
-Example use::
+Used to create a meta tag specifying the document's character. The default value
+is UTF-8. An example use::
 
     echo $this->Html->charset();
 
@@ -105,7 +103,7 @@ Will output:
 
 You can include CSS files from any loaded plugin using
 :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
-You could use the following::
+you could use the following::
 
     echo $this->Html->css('DebugKit.toolbar.css');
 
@@ -261,7 +259,7 @@ Will output:
     <img src="/img/cake_logo.png" alt="CakePHP" />
 
 To create an image link specify the link destination using the
-``url`` option in ``$htmlAttributes``.::
+``url`` option in ``$attributes``.::
 
     echo $this->Html->image("recipes/6.jpg", [
         "alt" => "Brownies",
@@ -293,7 +291,7 @@ You could use the following::
 
     echo $this->Html->image('DebugKit.icon.png');
 
-If you want to include a image file which shares a name with a loaded
+If you want to include an image file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
 and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
 
@@ -752,9 +750,9 @@ Generating URLs
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
 Returns a URL pointing to a combination of controller and action.
-If $url is empty, it returns the REQUEST\_URI, otherwise it
-generates the URL for the controller and action combo. If full is
-true, the full base URL will be prepended to the result::
+If ``$url`` is empty, it returns the ``REQUEST\_URI``, otherwise it
+generates the URL for the controller and action combo. If ``full`` is
+``true``, the full base URL will be prepended to the result::
 
     echo $this->Html->url([
         "controller" => "posts",

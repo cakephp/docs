@@ -17,7 +17,7 @@ Linking Email addresses
 .. php:method:: autoLinkEmails(string $text, array $options=[])
 
 Adds links to the well-formed email addresses in $text, according
-to any options defined in ``$htmlOptions`` (see
+to any options defined in ``$options`` (see
 :php:meth:`HtmlHelper::link()`).::
 
     $myText = 'For more information regarding our world-famous ' .
@@ -35,7 +35,7 @@ option to disable this if necessary.
 Linking URLs
 ============
 
-.. php:method:: autoLinkUrls(string $text, array $htmlOptions=[])
+.. php:method:: autoLinkUrls(string $text, array $options=[])
 
 Same as ``autoLinkEmails()``, only this method searches for
 strings that start with https, http, ftp, or nntp and links them
@@ -47,7 +47,7 @@ option to disable this if necessary.
 Linking Both URLs and Email Addresses
 =====================================
 
-.. php:method:: autoLink(string $text, array $htmlOptions=[])
+.. php:method:: autoLink(string $text, array $options=[])
 
 Performs the functionality in both ``autoLinkUrls()`` and
 ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
@@ -62,8 +62,8 @@ Converting Text into Paragraphs
 
 .. php:method:: autoParagraph(string $text)
 
-Adds proper <p> around text where double-line returns are found, and <br> where single-line returns
-are found.::
+Adds proper <p> around text where double-line returns are found, and <br> where
+single-line returns are found.::
 
     $myText = 'For more information
     regarding our world-famous pastries and desserts.
