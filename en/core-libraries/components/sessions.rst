@@ -8,8 +8,8 @@ between page requests. It acts as a wrapper for ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
 related functions.
 
-Sessions can be configured in a number of ways in CakePHP. For more
-information, you should see the :doc:`Session configuration </development/sessions>`
+Sessions can be configured in a number of ways in CakePHP. For more information,
+you should see the :doc:`Session configuration </development/sessions>`
 documentation.
 
 Interacting with Session Data

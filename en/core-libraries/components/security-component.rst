@@ -37,43 +37,37 @@ components in your ``$components`` array.
     :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
     the fields that are submitted in a POST request (e.g.  disabling, deleting
-    or creating new fields via JavaScript) is likely to trigger a black-holing
-    of the request. See the ``$validatePost`` or ``$disabledFields``
-    configuration parameters.
+    or creating new fields via JavaScript) is likely to cause the request to be
+    send to the blackhole callback. See the ``$validatePost`` or
+    ``$disabledFields`` configuration parameters.
 
 Handling Blackhole Callbacks
 ============================
 
+.. php:method:: blackHole(object $controller, string $error)
+
 If an action is restricted by the Security Component it is
-black-holed as an invalid request which will result in a 400 error
+'black-holed' as an invalid request which will result in a 400 error
 by default. You can configure this behavior by setting the
 ``blackHoleCallback`` configuration option to a callback function
 in the controller.
 
-.. php:method:: blackHole(object $controller, string $error)
+By configuring a callback method you can customize how the blackhole process
+works::
 
-    Black-hole an invalid request with a 400 error or a custom
-    callback. With no callback, the request will be exited. If a
-    controller callback is set to SecurityComponent::blackHoleCallback,
-    it will be called and passed any error information.
+    public function beforeFilter() {
+        $this->Security->config('blackHoleCallback', 'blackhole');
+    }
 
-    A Controller callback that will handle and requests that are
-    blackholed. A blackhole callback can be any public method on a controllers.
-    The callback should expect an parameter indicating the type of error::
+    public function blackhole($type) {
+        // handle errors.
+    }
 
-        public function beforeFilter() {
-            $this->Security->config('blackHoleCallback', 'blackhole');
-        }
+The ``$type`` parameter can have the following values:
 
-        public function blackhole($type) {
-            // handle errors.
-        }
-
-    The ``$type`` parameter can have the following values:
-
-    * 'auth' Indicates a form validation error, or a controller/action mismatch
-      error.
-    * 'secure' Indicates an SSL method restriction failure.
+* 'auth' Indicates a form validation error, or a controller/action mismatch
+  error.
+* 'secure' Indicates an SSL method restriction failure.
 
 Restrict Actions to SSL
 =======================
@@ -121,7 +115,6 @@ tracked as well. All of this data is combined and turned into a hash. When
 a form is submitted, SecurityComponent will use the POST data to build the same
 structure and compare the hash.
 
-
 .. note::
 
     SecurityComponent will **not** prevent select options from being
@@ -152,26 +145,16 @@ want and the Security Component will enforce them on its startup::
         public $components = ['Security'];
 
         public function beforeFilter() {
-            $this->Security->requirePost('delete');
-        }
-    }
-
-In this example the delete action can only be successfully
-triggered if it receives a POST request::
-
-    class WidgetController extends AppController {
-
-        public $components = ['Security'];
-
-        public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests::
+The above example would force all actions that had admin routing to
+require secure SSL requests.
+
+::
 
     class WidgetController extends AppController {
 
@@ -189,10 +172,10 @@ require secure SSL requests::
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests. When the request is black holed, it
-will call the nominated forceSSL() callback which will redirect
-non-secure requests to secure requests automatically.
+This example would force all actions that had admin routing to require secure
+SSL requests. When the request is black holed, it will call the nominated
+``forceSSL()`` callback which will redirect non-secure requests to secure
+requests automatically.
 
 .. _security-csrf:
 
@@ -202,20 +185,17 @@ CSRF Protection
 CSRF or Cross Site Request Forgery is a common vulnerability in web
 applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
-domains.
-
-Double submission and replay attacks are handled by the SecurityComponent's CSRF
-features. They work by adding a special token to each form request. This token
-once used cannot be used again. If an attempt is made to re-use an expired
-token the request will be blackholed.
+domains. To enable CSRF protection features use the
+:doc:`/core-libraries/components/csrf-component`.
 
 Disabling Security Component for Specific Actions
 =================================================
 
-There may be cases where you want to disable all security checks for an action (ex. AJAX requests).
-You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your
-``beforeFilter``. The ``unlockedActions`` property will **not** effect other
-features of ``SecurityComponent``.
+There may be cases where you want to disable all security checks for an action
+(ex. AJAX requests).  You may "unlock" these actions by listing them in
+``$this->Security->unlockedActions`` in your ``beforeFilter``. The
+``unlockedActions`` property will **not** affect other features of
+``SecurityComponent``.
 
 .. meta::
     :title lang=en: Security

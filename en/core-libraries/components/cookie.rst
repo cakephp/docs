@@ -24,7 +24,7 @@ the ``config()`` method::
 
 To configure a specific key use the ``configKey()`` method::
 
-    $this->Cookie->config('User', 'path', '/');
+    $this->Cookie->configKey('User', 'path', '/');
     $this->Cookie->configKey('User', [
         'expires' => '+10 days',
         'httpOnly' => true

@@ -11,10 +11,10 @@ grow in size and complexity quickly, and designers and programmers alike find
 they are unable to cope with displaying hundreds or thousands of records.
 Refactoring takes time, and performance and user satisfaction can suffer.
 
-Displaying a reasonable number of records per page has always been
-a critical part of every application and used to cause many
-headaches for developers. CakePHP eases the burden on the developer
-by providing a quick, easy way to paginate data.
+Displaying a reasonable number of records per page has always been a critical
+part of every application and used to cause many headaches for developers.
+CakePHP eases the burden on the developer by providing a quick, easy way to
+paginate data.
 
 Pagination in CakePHP is offered by a Component in the controller, to make
 building paginated queries easier. In the View
@@ -24,20 +24,20 @@ of pagination links & buttons simple.
 Using Controller::paginate()
 ============================
 
-In the controller, we start by defining the query conditions pagination will use
-by default in the ``$paginate`` controller variable. These conditions, serve as
-the basis of your pagination queries. They are augmented by the sort, direction
+In the controller, we start by defining the default query conditions pagination
+will use in the ``$paginate`` controller variable. These conditions, serve as
+the basis for your pagination queries. They are augmented by the sort, direction
 limit, and page parameters passed in from the URL. It is important to note
-here that the order key must be defined in an array structure like below::
+that the order key must be defined in an array structure like below::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $components = ['Paginator'];
 
         public $paginate = [
             'limit' => 25,
             'order' => [
-                'Posts.title' => 'asc'
+                'Articles.title' => 'asc'
             ]
         ];
     }
@@ -45,15 +45,15 @@ here that the order key must be defined in an array structure like below::
 You can also include any of the options supported by
 :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $components = ['Paginator'];
 
         public $paginate = [
-            'fields' => ['Posts.id', 'Posts.created'],
+            'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
             'order' => [
-                'Post.title' => 'asc'
+                'Articles.title' => 'asc'
             ]
         ];
     }
@@ -63,7 +63,7 @@ often cleaner and simpler to bundle up your pagination options into
 a :ref:`custom-find-methods`. You can define the finder pagination uses by
 setting the ``findType`` option::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $paginate = [
             'findType' => 'published',
@@ -74,15 +74,15 @@ In addition to defining general pagination values, you can define more than one
 set of pagination defaults in the controller, you just name the keys of the
 array after the model you wish to configure::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $paginate = [
-            'Posts' => [],
+            'Articles' => [],
             'Authors' => [],
         ];
     }
 
-The values of the ``Posts`` and ``Authors`` keys could contain all the properties
+The values of the ``Articles`` and ``Authors`` keys could contain all the properties
 that a model/key less ``$paginate`` array could.
 
 Once the ``$paginate`` property has been defined, we can use the
@@ -129,7 +129,7 @@ method::
 
     $articles = $this->Paginator->paginate($articleTable->find(), $config);
 
-    //Or just
+    // Or
     $articles = $this->Paginator->paginate($articleTable, $config);
 
 The first parameter should be the query object from a find on table object you wish
