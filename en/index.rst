@@ -16,7 +16,7 @@ Dies macht ermöglicht es Dir Dich an diesem Projekt zu beteiligen, Inhalte zu l
 
     **Das Kochbuch überall lesen**
 
-    Lies das CakePHP Kochbuch nahezug überall. Verfügbar als PDF und EPUB,
+    Lies das CakePHP Kochbuch nahezu überall. Verfügbar als PDF und EPUB,
     kannst Du es auf vielen Geräten lesen. Sogar offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
