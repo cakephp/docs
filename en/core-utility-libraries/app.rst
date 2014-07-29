@@ -95,10 +95,8 @@ for example, will give you the full path to the DebugKit plugin::
 Locating Themes
 ===============
 
-.. php:staticmethod:: themePath(string $theme)
-
-Themes can be found ``App::themePath('purple');``, would give the full path to the
-`purple` theme.
+Since themes are plugins, you can use the methods above to get the path to
+a theme.
 
 Overriding Classes in CakePHP
 =============================
