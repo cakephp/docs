@@ -12,7 +12,7 @@ or remote webservice access that doesn't frequently change in a cache. Once
 in the cache, re-reading the stored resource from the cache is much cheaper
 than accessing the remote resource.
 
-Caching in CakePHP is primarily facilitated by the :php:class:`Cache` class.
+Caching in CakePHP is primarily facilitated by the ``Cache`` class.
 This class provides a set of static methods that provide a uniform API to
 dealing with all different types of Caching implementations. CakePHP
 comes with several cache engines built-in, and provides an easy system
@@ -22,11 +22,10 @@ to implement your own caching systems. The built-in caching engines are:
   is the slowest cache engine, and doesn't provide as many features for
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
-  work well in files. This is the default Cache engine for 2.3+
+  work well in files.
 * ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
@@ -39,10 +38,8 @@ to implement your own caching systems. The built-in caching engines are:
   memcached, also provides atomic operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cake\\Cache\\Cache` in a consistent manner.  This means you can easily swap cache engines
-as your application grows. In addition to the ``Cache`` class, the
-:doc:`/core-libraries/helpers/cache` allows for full page caching, which
-can greatly improve performance as well.
+:php:class:`Cake\\Cache\\Cache` in a consistent manner.  This means you can
+easily swap cache engines as your application grows.
 
 .. _cache-configuration:
 
@@ -52,7 +49,7 @@ Configuring Cache Class
 .. php:staticmethod:: config($key, $config = null)
 
 Configuring the Cache class can be done anywhere, but generally you will want to
-configure Cache during bootstrapping.  The ``app/Config/app.php`` file is the
+configure Cache during bootstrapping.  The ``src/Config/app.php`` file is the
 conventional location to do this.  You can configure as many cache
 configurations as you need, and use any mixture of cache engines.  CakePHP uses
 two cache configurations internally.  ``_cake_core_`` is used for storing file
@@ -128,10 +125,6 @@ enabled
     You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
     :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
     :php:meth:`Cake\\Cache\\Cache::enabled()`.
-Cache.check
-    If set to true, enables view caching. Enabling is still needed in
-    the controllers, but this variable enables the detection of those
-    settings.
 
 .. note::
 
@@ -233,9 +226,9 @@ Reading Multiple Keys at Once
 .. php:staticmethod:: readMany($keys, $config = 'default')
 
 After you've written multiple keys at once, you'll probably want to read them as
-well. While you could use multiple calls to ``read()``, ``readMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``readMany()``
-save multiple network connections when using Memcached::
+well. While you could use multiple calls to ``read()``, ``readMany()`` allows
+CakePHP to use more efficient storage API's where available. For example using
+``readMany()`` save multiple network connections when using Memcached::
 
     $result = Cache::readMany([
         'article-' . $slug,
@@ -363,7 +356,7 @@ both group names.
 For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the ``article`` group::
 
-    // Model/Table/Articles.php
+    // src/Model/Table/ArticlesTable.php
     public function afterSave($entity, $options = []) {
         if ($entity->isNew()) {
             Cache::clearGroup('article', 'site_home');
@@ -375,7 +368,7 @@ remove all entries associated to the ``article`` group::
 ``groupConfigs()`` can be used to retrieve mapping between group and
 configurations, i.e.: having the same group::
 
-    // Model/Table/Articles.php
+    // src/Model/Table/ArticlesTable.php
 
     /**
      * A variation of previous example that clears all Cache configurations
@@ -437,8 +430,8 @@ dot syntax.::
         // ...
     ));
 
-Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which defines
-a number of abstract methods as well as provides a few initialization
+Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which
+defines a number of abstract methods as well as provides a few initialization
 methods.
 
 The required API for a CacheEngine is

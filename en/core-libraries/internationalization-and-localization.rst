@@ -78,17 +78,12 @@ The three-character locale codes conform to the
 standard, although if you create regional locales (en\_US, en\_GB,
 etc.) cake will use them if appropriate.
 
-.. warning::
-
-    In 2.3 and 2.4 some language codes have been corrected to meet the ISO standard.
-    Please see the corresponding migration guides for details.
-
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g.::
 
     // App Controller Code.
-    public function beforeFilter() {
+    public function beforeFilter(Event $event) {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
             // e.g. use /src/Template/fra/Pages/tos.ctp instead of /src/Template/Pages/tos.ctp
@@ -167,7 +162,7 @@ At the beginning of each request in your controller's ``beforeFilter`` you
 should configure ``Configure`` as well::
 
     class AppController extends Controller {
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if ($this->Session->check('Config.language')) {
                 Configure::write('Config.language', $this->Session->read('Config.language'));
             }
@@ -192,10 +187,6 @@ translation functions all of which are globally available, but
 probably be best utilized in your views. The first parameter of the
 function is used as the msgid defined in the .po files.
 
-CakePHP will automatically assume that all model validation error messages in
-your ``$validate`` array are intended to be localized. When running the i18n
-shell these strings will also be extracted.
-
 There's one other aspect of localizing your application which is
 not covered by the use of the translate functions, and that is
 date/money formats. Don't forget that CakePHP is PHP :), therefore
@@ -206,38 +197,6 @@ If you pass a locale that doesn't exist on your computer to
 `setlocale <http://www.php.net/setlocale>`_ it will have no
 effect. You can find the list of available locales by running the
 command ``locale -a`` in a terminal.
-
-Translating Model Validation Errors
-===================================
-CakePHP will automatically extract the validation error when you are using the
-:doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
-This can be overwritten by setting the ``$validationDomain`` property in your model::
-
-    class User extends AppModel {
-
-        public $validationDomain = 'validation_errors';
-    }
-
-Additional parameters defined in the validation rule are passed to the translation
-function. This allows you to create dynamic validation messages::
-
-    class User extends AppModel {
-
-        public $validationDomain = 'validation';
-
-        public $validate = [
-            'username' => [
-                    'length' => [
-                    'rule' => ['between', 2, 10],
-                    'message' => 'Username should be between %d and %d characters'
-                ]
-            ]
-        ];
-    }
-
-Which will do the following internal call::
-
-    __d('validation', 'Username should be between %d and %d characters', [2, 10]);
 
 .. meta::
     :title lang=en: Internationalization & Localization
