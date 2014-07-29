@@ -44,7 +44,7 @@ Used to get locations for paths based on conventions::
 This can be done for all namespaces that are part of your application. You
 can also fetch paths for a plugin::
 
-    // return the component paths in DebugKit
+    // returns the component paths in DebugKit
     App::path('Component', 'DebugKit');
 
 ``App::path()`` will only return the default path, and will not be able to
@@ -70,7 +70,7 @@ App knows about.
 
 Example usage::
 
-    //returns ['DebugKit', 'Blog', 'User'];
+    // returns ['DebugKit', 'Blog', 'User'];
     App::objects('plugin');
 
     // returns ['PagesController', 'BlogController'];
@@ -97,21 +97,6 @@ Locating Themes
 
 Since themes are plugins, you can use the methods above to get the path to
 a theme.
-
-Overriding Classes in CakePHP
-=============================
-
-You can override almost every class in the framework, exceptions are the
-:php:class:`Cake\\Core\\App` and :php:class:`Cake\\Core\\Configure` classes.
-Whenever you like to perform such overriding, just add your class to your
-app/Lib folder mimicking the internal structure of the framework.  Some examples
-to follow:
-
-* To override the ``Dispatcher`` class, create ``src/Routing/Dispatcher.php``
-* To override the ``CakeRoute`` class, create ``src/Routing/Route/CakeRoute.php``
-
-When you load the replaced files, the src/files will be loaded instead of
-the built-in core classes.
 
 Loading Vendor Files
 ====================
