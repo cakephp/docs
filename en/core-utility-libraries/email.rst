@@ -48,7 +48,7 @@ Configuration
 
 Configuration for ``Email`` defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the
-``src/Config/app.php`` file.  The ``App/Config/app.php.default`` file is an
+``src/Config/app.php`` file.  The ``src/Config/app.php.default`` file is an
 example of this file. It is not required to define email configuration in
 ``src/Config/app.php``. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
@@ -72,7 +72,7 @@ also just load an array of options::
     $email = new Email();
     $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-    //or in constructor::
+    // or in constructor
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 Configuring Transports
@@ -206,7 +206,7 @@ and elements just like normal views::
         ->send();
 
 The above would use ``src/Template/Email/html/welcome.ctp`` for the view
-and ``src/Layout/Email/html/fancy.ctp`` for the layout. You can
+and ``src/Template/Layout/Email/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -236,7 +236,7 @@ In your email templates you can use these with::
     <p>Here is your value: <b><?= $value ?></b></p>
 
 You can use helpers in emails as well, much like you can in normal view files.
-By default only the :php:class:`HtmlHelper` is loaded. You can load additional
+By default only the ``HtmlHelper`` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
     $Email->helpers(['Html', 'Custom', 'Text']);
@@ -260,8 +260,9 @@ You can do this using themes by telling Email to use appropriate theme using
     $email->template('Blog.new_comment', 'Blog.auto_message');
     $email->theme('TestTheme');
 
-This allows you to override the `new_comment` template in your theme without modifying
-the Blog plugin. The template file needs to be created in the following path:
+This allows you to override the ``new_comment`` template in your theme without
+modifying the Blog plugin. The template file needs to be created in the
+following path:
 ``src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp``.
 
 Sending Attachments
@@ -364,7 +365,7 @@ If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
 necessary when dealing with some Japanese ISP's::
 
-    $email = new CakeEmail('default');
+    $email = new Email('default');
 
     // Relax the email pattern, so you can send
     // to non-conformant addresses.

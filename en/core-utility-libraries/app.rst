@@ -12,55 +12,51 @@ Finding Classes
 
 .. php:staticmethod:: classname($name, $type = '', $suffix = '')
 
-    This method is used to resolve classnames throughout CakePHP. It resolves
-    the short form names CakePHP uses and returns the fully resolved classname::
+This method is used to resolve classnames throughout CakePHP. It resolves
+the short form names CakePHP uses and returns the fully resolved classname::
 
-        // Resolve a short classname with the namespace + suffix
-        App::classname('Auth', 'Controller/Component', 'Component');
-        // Returns Cake\Controller\Component\AuthComponent
+    // Resolve a short classname with the namespace + suffix
+    App::classname('Auth', 'Controller/Component', 'Component');
+    // Returns Cake\Controller\Component\AuthComponent
 
-        // Resolve a plugin name.
-        App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
-        // Returns DebugKit\Controller\Component\ToolbarComponent
+    // Resolve a plugin name.
+    App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
+    // Returns DebugKit\Controller\Component\ToolbarComponent
 
-        // Names with \ in them will be returned unaltered.
-        App::classname('App\Cache\ComboCache');
-        // Returns App\Cache\ComboCache
+    // Names with \ in them will be returned unaltered.
+    App::classname('App\Cache\ComboCache');
+    // Returns App\Cache\ComboCache
 
-    When resolving classes, the ``App`` namespace will be tried, and if the
-    class does not exist the ``Cake`` namespace will be attempted. If both
-    classnames do not exist, ``false`` will be returned.
+When resolving classes, the ``App`` namespace will be tried, and if the
+class does not exist the ``Cake`` namespace will be attempted. If both
+classnames do not exist, ``false`` will be returned.
 
 Finding Paths to Namespaces
 ===========================
 
 .. php:staticmethod:: path(string $package, string $plugin = null)
 
-    :rtype: array
+Used to get locations for paths based on conventions::
 
-    Used to get locations for paths based on conventions::
+    // Get the path to Controller/ in your application
+    App::path('Controller');
 
-        // Get the path to Controller/ in your application
-        App::path('Controller');
+This can be done for all namespaces that are part of your application. You
+can also fetch paths for a plugin::
 
-    This can be done for all namespaces that are part of your application. You
-    can also fetch paths for a plugin::
+    // return the component paths in DebugKit
+    App::path('Component', 'DebugKit');
 
-        // return the component paths in DebugKit
-        App::path('Component', 'DebugKit');
-
-    ``App::path()`` will only return the default path, and will not be able to
-    provide any information about additional paths the autoloader is configured
-    for.
+``App::path()`` will only return the default path, and will not be able to
+provide any information about additional paths the autoloader is configured
+for.
 
 .. php:staticmethod:: core(string $package)
 
-    :rtype: array
+Used for finding the path to a package inside CakePHP::
 
-    Used for finding the path to a package inside CakePHP::
-
-        // Get the path to Cache engines.
-        App::core('Cache/Engine');
+    // Get the path to Cache engines.
+    App::core('Cache/Engine');
 
 
 Finding Which Objects CakePHP Knows About
@@ -68,24 +64,22 @@ Finding Which Objects CakePHP Knows About
 
 .. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
 
-    :rtype: mixed Returns an array of objects of the given type or false if incorrect.
+You can find out which objects App knows about using
+``App::objects('Controller')`` for example to find which application controllers
+App knows about.
 
-    You can find out which objects App knows about using
-    ``App::objects('Controller')`` for example to find which application controllers
-    App knows about.
+Example usage::
 
-    Example usage::
+    //returns ['DebugKit', 'Blog', 'User'];
+    App::objects('plugin');
 
-        //returns ['DebugKit', 'Blog', 'User'];
-        App::objects('plugin');
+    // returns ['PagesController', 'BlogController'];
+    App::objects('Controller');
 
-        // returns ['PagesController', 'BlogController'];
-        App::objects('Controller');
+You can also search only within a plugin's objects by using the plugin dot syntax.::
 
-    You can also search only within a plugin's objects by using the plugin dot syntax.::
-
-        // returns ['MyPluginPost', 'MyPluginComment'];
-        App::objects('MyPlugin.Model');
+    // returns ['MyPluginPost', 'MyPluginComment'];
+    App::objects('MyPlugin.Model');
 
 
 Locating Plugins
@@ -93,33 +87,30 @@ Locating Plugins
 
 .. php:staticmethod:: pluginPath(string $plugin)
 
-    :rtype: string
+Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
+for example, will give you the full path to the DebugKit plugin::
 
-    Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
-    for example, will give you the full path to the DebugKit plugin::
-
-        $path = App::pluginPath('DebugKit');
+    $path = App::pluginPath('DebugKit');
 
 Locating Themes
 ===============
 
 .. php:staticmethod:: themePath(string $theme)
 
-    :rtype: string
-
-    Themes can be found ``App::themePath('purple');``, would give the full path to the
-    `purple` theme.
+Themes can be found ``App::themePath('purple');``, would give the full path to the
+`purple` theme.
 
 Overriding Classes in CakePHP
 =============================
 
 You can override almost every class in the framework, exceptions are the
-:php:class:`Cake\\Core\\App` and :php:class:`Cake\\Core\\Configure` classes. Whenever you like to
-perform such overriding, just add your class to your app/Lib folder mimicking
-the internal structure of the framework.  Some examples to follow
+:php:class:`Cake\\Core\\App` and :php:class:`Cake\\Core\\Configure` classes.
+Whenever you like to perform such overriding, just add your class to your
+app/Lib folder mimicking the internal structure of the framework.  Some examples
+to follow:
 
-* To override the :php:class:`Dispatcher` class, create ``src/Routing/Dispatcher.php``
-* To override the :php:class:`CakeRoute` class, create ``src/Routing/Route/CakeRoute.php``
+* To override the ``Dispatcher`` class, create ``src/Routing/Dispatcher.php``
+* To override the ``CakeRoute`` class, create ``src/Routing/Route/CakeRoute.php``
 
 When you load the replaced files, the src/files will be loaded instead of
 the built-in core classes.
@@ -171,23 +162,6 @@ application's autoloader using::
 
 If you happen to not be using Composer in your application, you will need to
 manually load all vendor libraries yourself.
-
-
-App Init/Load/Shutdown Methods
-==============================
-
-.. php:staticmethod:: init( )
-
-    :rtype: void
-
-    Initializes the cache for App, registers a shutdown function.
-
-.. php:staticmethod:: shutdown( )
-
-    :rtype: void
-
-    Object destructor. Writes cache file if changes have been made to the
-    ``$_objects``.
 
 .. meta::
     :title lang=en: App Class

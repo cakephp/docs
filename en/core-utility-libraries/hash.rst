@@ -71,15 +71,11 @@ Attribute Matching Types
 
 .. php:staticmethod:: get(array $data, $path)
 
-    :rtype: mixed
-
     ``get()`` is a simplified version of ``extract()``, it only supports direct
     path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
     supported. Use ``get()`` when you want exactly one value out of an array.
 
 .. php:staticmethod:: extract(array $data, $path)
-
-    :rtype: array
 
     ``Hash::extract()`` supports all expression, and matcher components of
     :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays,
@@ -95,8 +91,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    :rtype: array
-
     Inserts $data into an array as defined by ``$path``::
 
         $a = [
@@ -106,12 +100,11 @@ Attribute Matching Types
         // $result now looks like:
         [
             [pages] => [
-                    [name] => page
-	]
+                [name] => page
+            ]
             [files] => [
-            
-                    [name] => files
-	]
+                [name] => files
+            ]
         ]
 
     You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
@@ -120,10 +113,7 @@ Attribute Matching Types
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
-
 .. php:staticmethod:: remove(array $data, $path = null)
-
-    :rtype: array
 
     Removes all elements from an array that match $path.::
 
@@ -135,8 +125,8 @@ Attribute Matching Types
         /* $result now looks like:
             [
                 [pages] => [
-                        [name] => page
-	    ]
+                    [name] => page
+                ]
 
             ]
         */
@@ -145,8 +135,6 @@ Attribute Matching Types
 
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
-
-    :rtype: array
 
     Creates an associative array using a $keyPath as the path to build its keys,
     and optionally $valuePath as path to get the values. If $valuePath is not
@@ -272,8 +260,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: format(array $data, array $paths, $format)
 
-    :rtype: array
-
     Returns a series of values extracted from an array, formatted with a
     format string::
 
@@ -327,8 +313,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: contains(array $data, array $needle)
 
-    :rtype: boolean
-
     Determines if one Hash or array contains the exact keys and values
     of another::
 
@@ -351,8 +335,6 @@ Attribute Matching Types
         // true
 
 .. php:staticmethod:: check(array $data, string $path = null)
-
-    :rtype: boolean
 
     Checks if a particular path is set in an array::
 
@@ -390,8 +372,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
-    :rtype: array
-
     Filters empty elements out of array, excluding '0'. You can also supply a
     custom $callback to filter the array elements. You callback should return
     ``false`` to remove elements from the resulting array::
@@ -419,8 +399,6 @@ Attribute Matching Types
         */
 
 .. php:staticmethod:: flatten(array $data, string $separator = '.')
-
-    :rtype: array
 
     Collapses a multi-dimensional array into a single dimension::
 
@@ -450,8 +428,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: expand(array $data, string $separator = '.')
 
-    :rtype: array
-
     Expands an array that was previously flattened with
     :php:meth:`Hash::flatten()`::
 
@@ -480,8 +456,6 @@ Attribute Matching Types
         */
 
 .. php:staticmethod:: merge(array $data, array $merge[, array $n])
-
-    :rtype: array
 
     This function can be thought of as a hybrid between PHP's
     ``array_merge`` and ``array_merge_recursive``. The difference to the two
@@ -535,8 +509,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: numeric(array $data)
 
-    :rtype: boolean
-
     Checks to see if all the values in the array are numeric::
 
         $data = ['one'];
@@ -548,8 +520,6 @@ Attribute Matching Types
         // $res is false
 
 .. php:staticmethod:: dimensions (array $data)
-
-    :rtype: integer
 
     Counts the dimensions of an array. This method will only
     consider the dimension of the first element in the array::
@@ -614,8 +584,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
-    :rtype: array
-
     Sorts an array by any value, determined by a :ref:`hash-path-syntax`
     Only expression elements are supported by this method::
 
@@ -651,8 +619,6 @@ Attribute Matching Types
 
 .. php:staticmethod:: diff(array $data, array $compare)
 
-    :rtype: array
-
     Computes the difference between two arrays::
 
         $a = [
@@ -675,8 +641,6 @@ Attribute Matching Types
         */
 
 .. php:staticmethod:: mergeDiff(array $data, array $compare)
-
-    :rtype: array
 
     This function merges two arrays and pushes the differences in
     data to the bottom of the resultant array.
@@ -719,8 +683,6 @@ Attribute Matching Types
         */
 
 .. php:staticmethod:: normalize(array $data, $assoc = true)
-
-    :rtype: array
 
     Normalizes an array. If ``$assoc`` is true, the resulting array will be
     normalized to be an associative array. Numeric keys with values, will be
@@ -772,7 +734,7 @@ Attribute Matching Types
 .. php:staticmethod:: nest(array $data, array $options = [])
 
     Takes a flat array set, and creates a nested, or threaded data structure.
-    Used by methods like ``Model::find('threaded')``.
+    Used by methods like ``Table::find('threaded')``.
 
     **Options:**
 
