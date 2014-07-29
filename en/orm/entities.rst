@@ -23,6 +23,7 @@ However, if you want to have custom logic in your entities you will need to
 create classes. By convention entity classes live in ``src/Model/Entity/``. If
 our application had an ``articles`` table we could create the following entity::
 
+    // src/Model/Entity/Article.php
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
