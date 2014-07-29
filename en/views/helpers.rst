@@ -117,8 +117,8 @@ configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::
 
     class PostsController extends AppController {
-        public function beforeRender() {
-            parent::beforeRender();
+        public function beforeRender(Event $event) {
+            parent::beforeRender($event);
             $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
         }
     }
