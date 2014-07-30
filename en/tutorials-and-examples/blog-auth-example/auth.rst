@@ -254,7 +254,7 @@ and add the following::
 .. note::
 
     The BlowfishPasswordHasher uses a stronger hashing algorithm (bcrypt) than
-    SimplePasswordHasher (sha1) and providers per user salts. The
+    SimplePasswordHasher (sha1) and provides per user salts. The
     SimplePasswordHasher will be removed as of CakePHP version 3.0
 
 So, now every time a user is saved, the password is hashed using the
