@@ -42,13 +42,13 @@ vous êtes déjà quelque part familier avec les events dans CakePHP.
 
 Example event usage
 ===================
-
-Let's suppose you are building a Cart plugin, and you'd like to focus on just
-handling order logic. You don't really want to include shipping logic, emailing
-the user or decrementing the item from the stock, but these are important tasks
-to the people using your plugin. If you were not using events, you may try to
-implement this by attaching behaviors to models, or adding components to your
-controllers. Doing so represents a challenge most of the time, since you
+Supposons que vous codez un Plugin de gestion de panier, et que vous vouliez
+vous focaliser sur la logique de lors de la commande. Vous ne voulez pas à ce
+moment là inclure la logique pour l'expédition, l'email ou la décrémentation
+du produit dans le stock, mais ce sont des tâches importantes pour les personnes
+utilisant votre plugin. Si vous n'utilisiez pas les évènements vous auriez pu
+implémenter cela en attachant des behaviors à vos modèles ou en ajoutant des 
+composant à votre controller. Doing so represents a challenge most of the time, since you
 would have to come up with the code for externally loading those behaviors or
 attaching hooks to your plugin controllers.
 
