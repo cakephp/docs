@@ -3,63 +3,62 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome
+Willkommen
 #######
 
-The CakePHP cookbook is an openly developed and community editable documentation
-project. We hope to maintain a high level of quality, validity and accuracy for
-the documentation. Notice the "Improve this Doc" button in the upper right-hand
-corner; it will direct you to the GitHub online editor of the active page,
-allowing you to easily contribute any additions, deletions, or corrections to
-the documentation.
+Das CakePHP Kochbuch ist eine offen geführte und von der Gemeinschaft getragende Dokumentation.
+Wir sind bestrebt in dieser Dokumentation, ein hohes Maß an Qualität, Verlässlichkeit und Genauigkeit
+zu erreichen. Hinweis: Der Button "Improve this Doc" befindet sich rechts oben in der Ecke. 
+Er wird Dich direkt zu GitHub weiterleiten, wo Du die aktuelle Seite bearbeiten kannst. 
+Dies macht ermöglicht es Dir Dich an diesem Projekt zu beteiligen, Inhalte zu löschen oder Fehler zu beheben.
 
 .. container:: offline-download
 
-    **Read the Book Anywhere**
+    **Das Kochbuch überall lesen**
 
-    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
-    EPUB, you can now read it on more devices, as well as offline.
+    Lies das CakePHP Kochbuch nahezu überall. Verfügbar als PDF und EPUB,
+    kannst Du es auf vielen Geräten lesen. Sogar offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
-Getting Started
+Anfangen
 ===============
 
 Conventions
 -----------
 
-Learn about a typical :doc:`CakePHP request
-</getting-started/a-typical-cakephp-request>` and the :doc:`conventions
-</getting-started/cakephp-conventions>` that power CakePHP.
+Lies etwas über den typischen :doc:`CakePHP request
+</getting-started/a-typical-cakephp-request>` und :doc:`conventions
+</getting-started/cakephp-conventions>` welche CakePHP auszeichnen.
 
 Controllers
 -----------
 
-Controllers handle requests and help co-ordinate and prepare
-responses for the client. Read more about :doc:`/controllers`.
+Controllers verarbeiten den Request. Sie entscheiden und bereiten vor, was an den Nutzer
+ausgegeben wird. Lies mehr über :doc:`/controllers`.
 
 Views
 -----
 
-Views are the presentation layer in CakePHP. They convert
-the data fetched from Models into the output format requested by the
-client. Read more about :doc:`/views`.
+Views sind die Präsentationsebene in CakePHP. Sie wandeln die Informationen aus dem Model 
+in die Browserausgabe um. Lies mehr über :doc:`/views`.
 
 Models
 ------
 
-Models are the heart of your application. They handle the validation,
-storage and retrieval of your data. Read more about :doc:`/models`.
+Models sind das Herz jeder Anwendung. Sie validieren, speichern und finden Deine Daten. 
+Lies mehr über :doc:`/models`.
 
-Getting Help
+Hilfe finden
 ============
 
-If you're stuck, there are a number of places :doc:`you can get help
+Solltest Du einmal feststecken, findest Du eine große Anzahl an möglichen Anlaufpunkten bei Fragen und Problemen
+:doc:`hier
 </cakephp-overview/where-to-get-help>`.
 
 
 .. meta::
-    :title lang=en: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=de: .. CakePHP Kochbuch Dokumentation master file, created by
+    :keywords lang=de: doc models,dokumentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
