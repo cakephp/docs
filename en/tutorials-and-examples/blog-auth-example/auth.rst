@@ -252,12 +252,15 @@ and add the following::
     // ...
 
 .. note::
-	
-	The BluefishPasswordHasher is more secure than the old SimplePasswordHasher and
-	allows setting a custom a custom cost. The SimplePasswordHasher will be removed as of CakePHP version 3.0
 
-So, now every time a user is saved, the password is hashed using the BlowfishPasswordHasher class.
-We're just missing a template view file for the login function. Open up your ``app/View/Users/login.ctp`` file and add the following lines:
+    The BlowfishPasswordHasher uses a stronger hashing algorithm (bcrypt) than
+    SimplePasswordHasher (sha1) and providers per user salts. The
+    SimplePasswordHasher will be removed as of CakePHP version 3.0
+
+So, now every time a user is saved, the password is hashed using the
+BlowfishPasswordHasher class.  We're just missing a template view file for the
+login function. Open up your ``app/View/Users/login.ctp`` file and add the
+following lines:
 
 .. code-block:: php
 
