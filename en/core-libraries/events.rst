@@ -45,9 +45,9 @@ attaching hooks to your plugin controllers.
 
 Instead, you can use events to allow you to cleanly separate the concerns of
 your code and allow additional concerns to hook into your plugin using events.
-For example in your Cart plugin you have an Order model that deals with creating
+For example, in your Cart plugin you have an Orders model that deals with creating
 orders. You'd like to notify the rest of the application that an order has been
-created. To keep your Order model clean you could use events::
+created. To keep your Orders model clean you could use events::
 
     // Cart/Model/Table/OrdersTable.php
     namespace Cart\Model\Table;
@@ -55,7 +55,7 @@ created. To keep your Order model clean you could use events::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class Order extends Table {
+    class OrdersTable extends Table {
 
         public function place($order) {
             if ($this->save($order)) {
@@ -91,14 +91,12 @@ Global Event Manager
 --------------------
 
 In addition to instance level event managers, CakePHP provides a global event
-manager that allows you to listen to any event fired in an application. This
-is useful when attaching listeners to a specific instance might be cumbersome or
+manager that allows you to listen to any event fired in an application. This is
+useful when attaching listeners to a specific instance might be cumbersome or
 difficult. The global manager is a singleton instance of
-:php:class:`Cake\\Event\\EventManager` that receives every event **before** the instance
-managers do. In addition to receiving events first, the global manager also
-maintains a separate priority stack for listeners. Once an event has been
-dispatched to the global manager, it will be dispatched to the instance level
-manager. You can access the global manager using a static method::
+:php:class:`Cake\\Event\\EventManager`. Listeners attached to the global
+dispatcher will be fired before instance listeners at the same priority. You can
+access the global manager using a static method::
 
     // In any configuration file or piece of code that executes before the event
     use Cake\Event\EventManager;
@@ -144,7 +142,7 @@ specific classes on a layer, for example ``Model.User.afterRegister`` or
 
 The second argument is the ``subject``, meaning the object associated to the event,
 usually when it is the same class triggering events about itself, using ``$this``
-will be the most common case. Although a :php:class:`Component` could trigger
+will be the most common case. Although a Component could trigger
 controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.
@@ -166,10 +164,10 @@ to register some callbacks. Classes implementing it need to provide the
 with all event names that the class will handle.
 
 To continue our previous example, let's imagine we have a UserStatistic class
-responsible for calculating a user's purchasing history, and compiling into global site
-statistics. This is a great place to use a listener class. Doing so allows you concentrate the statistics
-logic in one place and react to events as necessary. Our ``UserStatistics``
-listener might start out like::
+responsible for calculating a user's purchasing history, and compiling into
+global site statistics. This is a great place to use a listener class. Doing so
+allows you concentrate the statistics logic in one place and react to events as
+necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListener;
 
@@ -188,7 +186,7 @@ listener might start out like::
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Order->eventManager()->attach($statistics);
+    $this->Orders->eventManager()->attach($statistics);
 
 As you can see in the above code, the ``attach`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
@@ -202,8 +200,10 @@ you can also bind any ``callable`` as an event listener. For example if we
 wanted to put any orders into the log files, we could use a simple anonymous
 function to do so::
 
-    $this->Order->eventManager()->attach(function($event) {
-        CakeLog::write(
+    use Cake\Log\Log;
+
+    $this->Orders->eventManager()->attach(function($event) {
+        Log::write(
             'info',
             'A new order was placed with id: ' . $event->subject()->id
         );
@@ -322,7 +322,8 @@ event being stopped or not. Generally it does not make sense to stop 'after'
 events, but stopping 'before' events is often used to prevent the entire
 operation from occurring.
 
-To check if an event was stopped, you call the ``isStopped()`` method in the event object::
+To check if an event was stopped, you call the ``isStopped()`` method in the
+event object::
 
     public function place($order) {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
@@ -330,7 +331,7 @@ To check if an event was stopped, you call the ``isStopped()`` method in the eve
         if ($event->isStopped()) {
             return false;
         }
-        if ($this->Order->save($order)) {
+        if ($this->Orders->save($order)) {
             // ...
         }
         // ...
@@ -370,7 +371,7 @@ directly or returning the value in the callback itself::
         if (!empty($event->result['order'])) {
             $order = $event->result['order'];
         }
-        if ($this->Order->save($order)) {
+        if ($this->Orders->save($order)) {
             // ...
         }
         // ...
@@ -384,9 +385,9 @@ kept the same and modifications are shared across all callback calls.
 Removing Callbacks and Listeners
 --------------------------------
 
-If for any reason you want to remove any callback from the event manager just call
-the :php:meth:`Cake\\Event\\EventManager::detach()` method using as arguments the first two
-params you used for attaching it::
+If for any reason you want to remove any callback from the event manager just
+call the :php:meth:`Cake\\Event\\EventManager::detach()` method using as
+arguments the first two params you used for attaching it::
 
     // Attaching a function
     $this->eventManager()->attach([$this, 'doSomething'], 'My.event');

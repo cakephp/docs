@@ -59,8 +59,6 @@ Folder API
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
-    :rtype: string
-
     Returns $path with $element added, with correct slash in-between::
 
         $path = Folder::addPathElement('/a/path/for', 'testing');
@@ -73,8 +71,6 @@ Folder API
 
 .. php:method:: cd( $path )
 
-    :rtype: string
-
     Change directory to $path. Returns false on failure::
 
         $folder = new Folder('/foo');
@@ -85,8 +81,6 @@ Folder API
 
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
 
-    :rtype: boolean
-
     Change the mode on a directory structure recursively. This includes
     changing the mode on files as well::
 
@@ -94,8 +88,6 @@ Folder API
         $dir->chmod('/path/to/folder', 0755, true, array('skip_me.php'));
 
 .. php:method:: copy(array|string $options = array())
-
-    :rtype: boolean
 
     Recursively copy a directory. The only parameter $options can either
     be a path into copy to or an array of options::
@@ -128,14 +120,10 @@ Folder API
 
 .. php:staticmethod:: correctSlashFor(string $path)
 
-    :rtype: string
-
     Returns a correct set of slashes for given $path ('\\' for
     Windows paths and '/' for other paths).
 
 .. php:method:: create(string $pathname, integer $mode = false)
-
-    :rtype: boolean
 
     Create a directory structure recursively. Can be used to create
     deep path structures like `/foo/bar/baz/shoe/horn`::
@@ -147,8 +135,6 @@ Folder API
 
 .. php:method:: delete(string $path = null)
 
-    :rtype: boolean
-
     Recursively remove directories if the system allows::
 
         $folder = new Folder('foo');
@@ -158,19 +144,13 @@ Folder API
 
 .. php:method:: dirsize()
 
-    :rtype: integer
-
     Returns the size in bytes of this Folder and its contents.
 
 .. php:method:: errors()
 
-    :rtype: array
-
     Get the error from latest method.
 
 .. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
-
-    :rtype: array
 
     Returns an array of all matching files in the current directory::
 
@@ -196,8 +176,6 @@ Folder API
 
 .. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
 
-    :rtype: array
-
     Returns an array of all matching files in and below the current directory::
 
         // Recursively find files beginning with test or index
@@ -217,13 +195,9 @@ Folder API
 
 .. php:method:: inCakePath(string $path = '')
 
-    :rtype: boolean
-
     Returns true if the file is in a given CakePath.
 
 .. php:method:: inPath(string $path = '', boolean $reverse = false)
-
-    :rtype: boolean
 
     Returns true if the file is in the given path::
 
@@ -236,13 +210,9 @@ Folder API
 
 .. php:staticmethod:: isAbsolute(string $path)
 
-    :rtype: boolean
-
     Returns true if the given $path is an absolute path.
 
 .. php:staticmethod:: isSlashTerm(string $path)
-
-    :rtype: boolean
 
     Returns true if given $path ends in a slash (i.e. is slash-terminated)::
 
@@ -253,43 +223,26 @@ Folder API
 
 .. php:staticmethod:: isWindowsPath(string $path)
 
-    :rtype: boolean
-
     Returns true if the given $path is a Windows path.
 
 .. php:method:: messages()
-
-    :rtype: array
 
     Get the messages from the latest method.
 
 .. php:method:: move(array $options)
 
-    :rtype: boolean
-
     Recursive directory move.
 
 .. php:staticmethod:: normalizePath(string $path)
-
-    :rtype: string
 
     Returns a correct set of slashes for given $path ('\\' for
     Windows paths and '/' for other paths).
 
 .. php:method:: pwd()
 
-    :rtype: string
-
     Return current path.
 
 .. php:method:: read(boolean $sort = true, array|boolean $exceptions = false, boolean $fullPath = false)
-
-    :rtype: mixed
-
-    :param boolean $sort: If true will sort results.
-    :param mixed $exceptions: An array of files and folder names to ignore. If
-        true or '.' this method will ignore hidden or dot files.
-    :param boolean $fullPath: If true will return results using absolute paths.
 
     Returns an array of the contents of the current directory. The
     returned array holds two sub arrays: One of directories and one of files::
@@ -316,20 +269,14 @@ Folder API
 
 .. php:method:: realpath(string $path)
 
-    :rtype: string
-
     Get the real path (taking ".." and such into account).
 
 .. php:staticmethod:: slashTerm(string $path)
-
-    :rtype: string
 
     Returns $path with added terminating slash (corrected for
     Windows or other OS).
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
-
-    :rtype: mixed
 
     Returns an array of nested directories and files in each directory.
 
@@ -370,126 +317,82 @@ File API
 
 .. php:method:: append(string $data, boolean $force = false)
 
-    :rtype: boolean
-
     Append the given data string to the current file.
 
 .. php:method:: close()
-
-    :rtype: boolean
 
     Closes the current file if it is opened.
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
-    :rtype: boolean
-
     Copy the file to $dest.
 
 .. php:method:: create()
-
-    :rtype: boolean
 
     Creates the file.
 
 .. php:method:: delete()
 
-    :rtype: boolean
-
     Deletes the file.
 
 .. php:method:: executable()
-
-    :rtype: boolean
 
     Returns true if the file is executable.
 
 .. php:method:: exists()
 
-    :rtype: boolean
-
     Returns true if the file exists.
 
 .. php:method:: ext()
-
-    :rtype: string
 
     Returns the file extension.
 
 .. php:method:: Folder()
 
-    :rtype: Folder
-
     Returns the current folder.
 
 .. php:method:: group()
-
-    :rtype: integer|false
 
     Returns the file's group, or false in case of an error.
 
 .. php:method:: info()
 
-    :rtype: array
-
     Returns the file info.
 
 .. php:method:: lastAccess( )
 
-    :rtype: integer
-
     Returns last access time.
 
-    :rtype: integer|false
-
-    Returns last access time, or false in case of an error.
-
 .. php:method:: lastChange()
-
-    :rtype: integer|false
 
     Returns last modified time, or false in case of an error.
 
 .. php:method:: md5(integer|boolean $maxsize = 5)
-
-    :rtype: string
 
     Get the MD5 Checksum of file with previous check of filesize,
     or false in case of an error.
 
 .. php:method:: name()
 
-    :rtype: string
-
     Returns the file name without extension.
 
 .. php:method:: offset(integer|boolean $offset = false, integer $seek = 0)
-
-    :rtype: mixed
 
     Sets or gets the offset for the currently opened file.
 
 .. php:method:: open(string $mode = 'r', boolean $force = false)
 
-    :rtype: boolean
-
     Opens the current file with the given $mode.
 
 .. php:method:: owner()
-
-    :rtype: integer
 
     Returns the file's owner.
 
 .. php:method:: perms()
 
-    :rtype: string
-
     Returns the "chmod" (permissions) of the file.
 
 .. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
-
-    :rtype: string
 
     Prepares a ascii string for writing. Converts line endings to the
     correct terminator for the current platform. For Windows "\r\n"
@@ -497,57 +400,39 @@ File API
 
 .. php:method:: pwd()
 
-    :rtype: string
-
     Returns the full path of the file.
 
 .. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
-
-    :rtype: string|boolean
 
     Return the contents of the current file as a string or return false on failure.
 
 .. php:method:: readable()
 
-    :rtype: boolean
-
     Returns true if the file is readable.
 
 .. php:method:: safe(string $name = null, string $ext = null)
-
-    :rtype: string
 
     Makes filename safe for saving.
 
 .. php:method:: size()
 
-    :rtype: integer
-
     Returns the filesize.
 
 .. php:method:: writable()
 
-    :rtype: boolean
-
     Returns true if the file is writable.
 
 .. php:method:: write(string $data, string $mode = 'w', boolean$force = false)
-
-    :rtype: boolean
 
     Write given data to the current file.
 
 
 .. php:method:: mime()
 
-    :rtype: mixed
-
     Get the file's mimetype, returns false on failure.
 
 
 .. php:method:: replaceText( $search, $replace )
-
-    :rtype: boolean
 
     Replaces text in a file. Returns false on failure and true on success.
 

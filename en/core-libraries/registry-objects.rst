@@ -13,11 +13,11 @@ Loading Objects
 
 Objects can be loaded on-the-fly using add<registry-object>()
 Example::
-    
+
     $this->addComponent('DebugKit.Toolbar');
     $this->addHelper('Flash')
 
-Will result in `Toolbar property` and `Flash helper` being set.
+Will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
 Configuration can also be set on-the-fly. Example::
 
     $this->addComponent('Cookie', ['name' => 'sweet']);

@@ -149,10 +149,6 @@ such as debugging and translating content.
 
     Convenience wrapper for ``htmlspecialchars()``.
 
-.. php:function:: LogError(string $message)
-
-    Shortcut to :php:meth:`Log::write()`.
-
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     Splits a dot syntax plugin name into its plugin and class name. If $name
@@ -169,11 +165,6 @@ such as debugging and translating content.
 
     Sorts given $array by key $sortby.
 
-.. php:function:: stripslashes_deep(array $value)
-
-    Recursively strips slashes from the supplied ``$value``. Returns
-    the modified array.
-
 Core Definition Constants
 =========================
 
@@ -186,10 +177,6 @@ Most of the following constants refer to paths in your application.
 .. php:const:: APP_DIR
 
     Equals ``app`` or the name of your application directory.
-
-.. php:const:: APPLIBS
-
-    Path to the application's Lib directory.
 
 .. php:const:: CACHE
 
@@ -227,10 +214,6 @@ Most of the following constants refer to paths in your application.
 .. php:const:: TMP
 
     Path to the temporary files directory.
-
-.. php:const:: VENDORS
-
-    Path to the vendors directory.
 
 .. php:const:: WEBROOT_DIR
 

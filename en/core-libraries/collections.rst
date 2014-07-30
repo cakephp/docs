@@ -179,7 +179,7 @@ you can use a callback function to return it::
 
 .. php:method:: reduce(callable $c)
 
-The counterpart of a ``map()`` operation is usually a ``reduceIO``. This
+The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
 collection::
 
@@ -596,7 +596,6 @@ first one, then the target property will be filled with ``null`` values::
     $merged = (new Collection($users))->insert('skills', $languages);
 
     // Will yield
-
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
@@ -628,15 +627,16 @@ following example::
     });
     $itemsToShow = $collection->take(30);
 
-Had collections not been lazy, we would have executed one million operations,
+Had the collections not been lazy, we would have executed one million operations,
 even though we only wanted to show 30 elements out of it. Instead, our map
 operation was only applied to the 30 elements we used. We can also
-derive benefits from this lazy evaluation even for smaller collections when we
+derive benefits from this lazy evaluation for smaller collections when we
 do more than one operation on them. For example: calling ``map()`` twice and
 then ``filter()``.
 
 Lazy evaluation comes with its downside too. You could be doing the same
-operations more than once if you optimize it first. Consider this example::
+operations more than once if you optimize a collection prematurely. Consider
+this example::
 
     $ages = $collection->extract('age');
 
@@ -661,7 +661,7 @@ into another collection using the ``compile()`` function::
     $youngerThan30 = ...
     $olderThan30 = ...
 
-Now, when the those 2 collections are iterated, they will only call the
+Now, when both collections are iterated, they will only call the
 extracting operation once.
 
 .. meta::

@@ -13,11 +13,11 @@ application over time. What search terms are being used? What sorts
 of errors are my users being shown? How often is a particular query
 being executed?
 
-Logging data in CakePHP is easy - the log() function is a part of
-the Object class, which is the common ancestor for almost all
-CakePHP classes. If the context is a CakePHP class (Model,
-Controller, Component... almost anything), you can log your data.
-You can also use ``Log::write()`` directly. See :ref:`writing-to-logs`
+Logging data in CakePHP is easy - the log() function is provided by the
+``LogTrait``, which is the common ancestor for almost all CakePHP classes. If
+the context is a CakePHP class (Model, Controller, Component... almost
+anything), you can log your data.  You can also use ``Log::write()`` directly.
+See :ref:`writing-to-logs`.
 
 .. _log-configuration:
 
@@ -62,7 +62,7 @@ Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLog``. As part of your application it would be placed in
 ``src/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
-``src/Plugin/LoggingPack/Log/Engine/DatabaseLog.php``. To configure log
+``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. To configure log
 adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
 configuring our DatabaseLog would look like::
 
@@ -119,7 +119,7 @@ CakePHP requires that all logging adapters implement
 
 .. note::
 
-    You should configure loggers during bootstrapping. ``app/Config/app.php`` is the
+    You should configure loggers during bootstrapping. ``src/Config/app.php`` is the
     conventional place to configure log adapters.
 
     In debug mode missing directories will be automatically created to avoid unnecessary
@@ -130,8 +130,8 @@ Error and Exception Logging
 
 Errors and Exceptions can also be logged. By configuring the co-responding
 values in your app.php file.  Errors will be displayed when debug > 0 and logged
-when debug == 0. To log uncaugh exceptions, set the ``log`` option to true. See
-:doc:`/development/configuration` for more information.
+when debug is ``false``. To log uncaugh exceptions, set the ``log`` option to
+``true``. See :doc:`/development/configuration` for more information.
 
 Interacting with Log Streams
 ============================
@@ -184,9 +184,9 @@ logger can be configured separately to rotate files, pre-process writes or use
 a completely different storage for your logs.
 
 Using syslog is pretty much like using the default FileLog engine, you just need
-to specify `Syslog` as the engine to be used for logging. The following
+to specify ``Syslog`` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
-be done in the `bootstrap.php` file::
+be done in the ``bootstrap.php`` file::
 
     CakeLog::config('default', array(
         'engine' => 'Syslog'
@@ -195,18 +195,18 @@ be done in the `bootstrap.php` file::
 The configuration array accepted for the Syslog logging engine understands the
 following keys:
 
-* `format`: An sprintf template strings with two placeholders, the first one
+* ``format``: An sprintf template strings with two placeholders, the first one
   for the error level, and the second for the message itself. This key is
   useful to add additional information about the server or process in the
   logged message. For example: ``%s - Web Server 1 - %s`` will look like
   ``error - Web Server 1 - An error occurred in this request`` after
   replacing the placeholders.
-* `prefix`: An string that will be prefixed to every logged message.
-* `flag`: An integer flag to be used for opening the connection to the
-  logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
+* ``prefix``: An string that will be prefixed to every logged message.
+* ``flag``: An integer flag to be used for opening the connection to the
+  logger, by default ``LOG_ODELAY`` will be used. See ``openlog`` documentation
   for more options
-* `facility`: The logging slot to use in syslog. By default `LOG_USER` is
-  used. See `syslog` documentation for more options
+* ``facility``: The logging slot to use in syslog. By default ``LOG_USER`` is
+  used. See ``syslog`` documentation for more options
 
 .. _writing-to-logs:
 
@@ -337,12 +337,6 @@ Log API
 Call this method without arguments, eg: `Log::levels()` to obtain current
 level configuration.
 
-.. php:staticmethod:: engine($name, $engine = null)
-
-    Fetch a connected logger by configuration name.
-
-    .. versionadded: 3.0
-
 Convenience Methods
 -------------------
 
@@ -378,8 +372,6 @@ Logging Trait
 .. php:trait:: LogTrait
 
     A trait that provides shortcut methods for logging
-
-    .. versionadded:: 3.0
 
 .. php:method:: log($msg, $level = LOG_ERR)
 
