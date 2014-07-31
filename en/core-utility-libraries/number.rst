@@ -36,12 +36,12 @@ Formatting Currency Values
 .. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
 
 This method is used to display a number in common currency formats
-(EUR,GBP,USD). Usage in a view looks like::
+(EUR, GBP, USD). Usage in a view looks like::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->currency($number, $currency);
 
-    // called as Number
+    // Called as Number
     echo Number::currency($number, $currency);
 
 The first parameter, $number, should be a floating point number
@@ -73,29 +73,29 @@ output. The following options are available:
 |                     | symbol. eg. 0.35 => $0.35.                         |
 +---------------------+----------------------------------------------------+
 | zero                | The text to use for zero values, can be a string or|
-|                     | a number. ie. 0, 'Free!'                           |
+|                     | a number. ie. 0, 'Free!'.                          |
 +---------------------+----------------------------------------------------+
-| places              | Number of decimal places to use. ie. 2             |
+| places              | Number of decimal places to use, ie. 2             |
 +---------------------+----------------------------------------------------+
-| thousands           | Thousands separator ie. ','                        |
+| thousands           | Thousands separator, ie. ','                       |
 +---------------------+----------------------------------------------------+
-| decimals            | Decimal separator symbol ie. '.'                   |
+| decimals            | Decimal separator symbol, ie. '.'                  |
 +---------------------+----------------------------------------------------+
 | negative            | Symbol for negative numbers. If equal to '()', the |
-|                     | number will be wrapped with ( and )                |
+|                     | number will be wrapped with ( and ).               |
 +---------------------+----------------------------------------------------+
 | escape              | Should the output be htmlentity escaped? Defaults  |
-|                     | to true                                            |
+|                     | to true.                                           |
 +---------------------+----------------------------------------------------+
-| wholeSymbol         | String to use for whole numbers ie. ' dollars'     |
+| wholeSymbol         | String to use for whole numbers, ie. ' dollars'.    |
 +---------------------+----------------------------------------------------+
 | wholePosition       | Either 'before' or 'after' to place the whole      |
-|                     | symbol                                             |
+|                     | symbol.                                            |
 +---------------------+----------------------------------------------------+
-| fractionSymbol      | String to use for fraction numbers ie. ' cents'    |
+| fractionSymbol      | String to use for fraction numbers, ie. ' cents'.  |
 +---------------------+----------------------------------------------------+
 | fractionPosition    | Either 'before' or 'after' to place the fraction   |
-|                     | symbol                                             |
+|                     | symbol.                                            |
 +---------------------+----------------------------------------------------+
 | fractionExponent    | Fraction exponent of this specific currency.       |
 |                     | Defaults to 2.                                     |
@@ -104,13 +104,13 @@ output. The following options are available:
 If a non-recognized $currency value is supplied, it is prepended to
 a USD formatted number. For example::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->currency('1234.56', 'FOO');
 
     // Outputs
     FOO 1,234.56
 
-    // called as Number
+    // Called as Number
     echo Number::currency('1234.56', 'FOO');
 
 Setting the Default Currency
@@ -118,7 +118,7 @@ Setting the Default Currency
 
 .. php:method:: defaultCurrency(string $currency)
 
-Setter/getter for default currency. This removes the need always passing the
+Setter/getter for the default currency. This removes the need to always pass the
 currency to :php:meth:`Cake\\Utility\\Number::currency()` and change all
 currency outputs by setting other default.
 
@@ -130,18 +130,18 @@ Adding a New Currency
 Add a currency format to the Number helper. Makes reusing
 currency formats easier::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     $this->Number->addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
-    // called as Number
+    // Called as Number
     Number::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
 You can now use `BRL` as a short form when formatting currency amounts::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->currency($value, 'BRL');
 
-    // called as Number
+    // Called as Number
     echo Number::currency($value, 'BRL');
 
 Added formats are merged with the following defaults::
@@ -169,13 +169,13 @@ This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
 level of precision defined.::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->precision(456.91873645, 2);
 
     // Outputs
     456.92
 
-    // called as Number
+    // Called as Number
     echo Number::precision(456.91873645, 2);
 
 
@@ -226,13 +226,13 @@ displayed with a two-digit precision level, according to the size
 of data supplied (i.e. higher sizes are expressed in larger
 terms)::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->toReadableSize(0); // 0 Bytes
     echo $this->Number->toReadableSize(1024); // 1 KB
     echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
     echo $this->Number->toReadableSize(5368709120); // 5.00 GB
 
-    // called as CakeNumber
+    // Called as CakeNumber
     echo Number::toReadableSize(0); // 0 Bytes
     echo Number::toReadableSize(1024); // 1 KB
     echo Number::toReadableSize(1321205.76); // 1.26 MB
@@ -248,10 +248,10 @@ numbers for use in your views (and is used as the main method by
 most of the other NumberHelper methods). Using this method might
 looks like::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     $this->Number->format($number, $options);
 
-    // called as Number
+    // Called as Number
     Number::format($number, $options);
 
 The $number parameter is the number that you are planning on
@@ -259,7 +259,7 @@ formatting for output. With no $options supplied, the number
 1236.334 would output as 1,236. Note that the default precision is
 zero decimal places.
 
-The $options parameter is where the real magic for this method
+The ``$options`` parameter is where the real magic for this method
 resides.
 
 -  If you pass an integer then this becomes the amount of precision
@@ -276,7 +276,7 @@ resides.
 
 Example::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->format('123456.7890', array(
         'places' => 2,
         'before' => '¥ ',
@@ -284,9 +284,9 @@ Example::
         'decimals' => '.',
         'thousands' => ','
     ));
-    // output '¥ 123,456.79'
+    // Output '¥ 123,456.79'
 
-    // called as Number
+    // Called as Number
     echo Number::format('123456.7890', array(
         'places' => 2,
         'before' => '¥ ',
@@ -294,7 +294,7 @@ Example::
         'decimals' => '.',
         'thousands' => ','
     ));
-    // output '¥ 123,456.79'
+    // Output '¥ 123,456.79'
 
 
 Format Differences
@@ -304,10 +304,10 @@ Format Differences
 
 This method displays differences in value as a signed number::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     $this->Number->formatDelta($number, $options);
 
-    // called as CakeNumber
+    // Called as CakeNumber
     Number::formatDelta($number, $options);
 
 The $number parameter is the number that you are planning on
@@ -327,7 +327,7 @@ The $options parameter takes the same keys as :php:meth:`Number::format()` itsel
 
 Example::
 
-    // called as NumberHelper
+    // Called as NumberHelper
     echo $this->Number->formatDelta('123456.7890', array(
         'places' => 2,
         'decimals' => '.',
@@ -335,7 +335,7 @@ Example::
     ));
     // output '+123,456.79'
 
-    // called as Number
+    // Called as Number
     echo Number::formatDelta('123456.7890', array(
         'places' => 2,
         'decimals' => '.',

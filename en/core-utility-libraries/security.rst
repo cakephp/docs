@@ -36,8 +36,8 @@ Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
 parameters must match the values used to encrypt or decryption will fail. An
 example use would be::
 
-    // Assuming key is stored somewhere it can be re-used for
-    // decryption later.
+    // Assuming the key is stored somewhere it can be re-used for
+    // Decryption later.
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 
     $cipher = $user->secrets;

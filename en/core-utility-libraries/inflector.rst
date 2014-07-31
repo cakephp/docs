@@ -18,7 +18,7 @@ Creating Plural & Singular Forms
 .. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
 
-Both ``pluralize`` and ``singularize()`` work on most english nouns. If you need
+Both ``pluralize`` and ``singularize()`` work on most English nouns. If you need
 to support other languages, you can use :ref:`inflection-configuration` to
 customize the rules used::
 
@@ -26,7 +26,7 @@ customize the rules used::
     echo Inflector::pluralize('Apple');
 
     // Person
-    echo Inflector::pluralize('People');
+    echo Inflector::singularize('People');
 
 Creating CamelCase and under_scored Forms
 =========================================
@@ -51,7 +51,7 @@ Creating Human Readable Forms
 
 .. php:staticmethod:: humanize($underscored)
 
-This method is useful when converting underscored forms into Title Case forms
+This method is useful when converting underscored forms into "Title Case" forms
 for human readable values::
 
     // Apple Pie
@@ -102,8 +102,8 @@ Inflection Configuration
 ========================
 
 CakePHP's naming conventions can be really nice - you can name your
-database table big\_boxes, your model BigBox, your controller
-BigBoxesController, and everything just works together
+database table ``big\_boxes``, your model ``BigBoxes``, your controller
+``BigBoxesController``, and everything just works together
 automatically. The way CakePHP knows how to tie things together is
 by *inflecting* the words between their singular and plural forms.
 
