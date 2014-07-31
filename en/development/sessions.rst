@@ -363,7 +363,7 @@ present error messages, or confirm that actions took place successfully.
 
 To set and display flash messages you should use
 :doc:`/core-libraries/components/flash` and
-:doc:`/core-libraries/helpers/flash`:doc:`/core-libraries/helpers/flash`
+:doc:`/core-libraries/helpers/flash`
 
 .. meta::
     :title lang=en: Sessions
