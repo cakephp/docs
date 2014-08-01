@@ -12,7 +12,7 @@ application.
 Error & Exception Configuration
 ================================
 
-Error configuration is done inside your application's ``config/error.php``
+Error configuration is done inside your application's ``config/app.php``
 file. By default CakePHP uses the ``ErrorHandler`` or ``ConsoleErrorHandler``
 class to trap errors and print/log the errors. You can replace this behavior by
 changing out the default error handler. The default error handler also handles
@@ -56,7 +56,7 @@ You can create an error handler out of any callback type. For example you could
 use a class called ``AppError`` to handle your errors. By extending the
 ``BaseErrorHandler`` you can supply custom logic for handling errors. An example would be::
 
-    //in config/error.php
+    //in config/app.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
@@ -88,7 +88,7 @@ The default error handlers convert fatal errors into exceptions and re-use the
 exception handling logic to render an error page. If you do not want to show the
 standard error page, you can override it like::
 
-    //in config/error.php
+    //in config/app.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
@@ -386,7 +386,7 @@ Using the exceptionRenderer Option of the Default Handler
 
 If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use the ``exceptionRenderer`` option in
-config/error.php to choose a class that will render exception pages.  By
+config/app.php to choose a class that will render exception pages.  By
 default :php:class:`Cake\\Error\\ExceptionRenderer` is used.  Your custom
 exception renderer class should be placed in ``app/Error``.  In a custom
 exception rendering class you can provide specialized handling for application
@@ -451,7 +451,7 @@ Logging Exceptions
 
 Using the built-in exception handling, you can log all the exceptions that are
 dealt with by ErrorHandler by setting the ``log`` option to true in your
-config/error.php. Enabling this will log every exception to
+config/app.php. Enabling this will log every exception to
 :php:class:`Cake\\Log\\Log` and the configured loggers.
 
 .. note::
