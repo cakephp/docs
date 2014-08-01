@@ -1,0 +1,889 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"h",
+				"hidden"
+			],
+			[
+				"min-",
+				"min-width"
+			],
+			[
+				"re",
+				"require"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"strto",
+				"strtolower"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"listpa",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"disablep	c",
+				"Package Control: Disable Package"
+			],
+			[
+				"disablp",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"livre",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"enabp",
+				"Package Control: Enable Package"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"disa",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"coffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"user",
+				"Preferences: Settings - User"
+			],
+			[
+				"posc",
+				"Project: Close"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"pcak",
+				"Package Control: Enable Package"
+			],
+			[
+				"pref",
+				"Preferences: Browse Packages"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"pre",
+				"Preferences: Browse Packages"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"packr",
+				"Package Control: Remove Package"
+			],
+			[
+				"pckre",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack	",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 601.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"quest,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/antograssiot/Documents/Lab/cakephp/src/Controller/Controller.php",
+		"/Users/antograssiot/Documents/Lab/cakephp/src/Cache/Cache.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/AppController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/gulpfile.js",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Users/login.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Posts/index.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Posts/index2.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Users/login2.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Pages/home.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/admin.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/js/default.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/admin2.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/default.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/Emails/text/default.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Elements/flash.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Layouts/flash.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/test_app/View/Posts/helper_overwrite.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Log/Engine/FileLog.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/routes.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/Behavior/SlugBehavior.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Test/Case/Controller/UsersControllerTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Test/Case/Model/UserTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Users/signup.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Users/password.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Users/forgot.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Stats/admin_index.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Posts/view.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Posts/admin_edit.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Links/admin_index.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Generic/Docs/Commenting/TodoStandard.xml",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/PostsTagFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/Post.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Routing/Filter/AssetDispatcher.php",
+		"/Users/antograssiot/Documents/Lab/Institut/.gitignore",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/User.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/PostsController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/Validator/UserValidator.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/Media/webroot/js/tinymce/utils/validate.js",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Case/Utility/ValidationTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Utility/Validation.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/core.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/UsersController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/StatsController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/PagesController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/Component/TestComponent.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/DebugKit/Test/test_app/Controller/DebugKitTestController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/test_app/Controller/TestConfigsController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/test.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/test_app/View/Elements/test_element.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Network/Email/SmtpTransport.php",
+		"/Users/antograssiot/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/antograssiot/Documents/Lab/cake-a/composer.json",
+		"/Users/antograssiot/Documents/Lab/Institut/index.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/coffee/application.coffee",
+		"/Users/antograssiot/Documents/Lab/Institut/package.json",
+		"/Users/antograssiot/.composer/composer.json",
+		"/Users/antograssiot/Documents/Lab/Institut/npm-debug.log",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/database.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/layout/_grid.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Case/Controller/Component/Acl/DbAclTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/Schema/db_acl.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/modules/_article.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/base/_base.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Controller/Component/Auth/BaseAuthorize.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Model/Datasource/Session/DatabaseSession.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Contact/index.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/bake_compare/Controller/ActionsWithNoSessions.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Console/Templates/default/actions/controller_actions.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/Contact.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Controller/ContactController.php",
+		"/Users/antograssiot/Documents/Lab/Institut/config.rb",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/ArticlesTagFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/ArticleFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Case/AllRoutingTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Console/Command/SchemaShell.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/css/style.css",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/PostFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/test_app/Model/Post.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/CounterCachePostNonstandardPrimaryKeyFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/View/Pages/legal.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/robots.txt",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/View/Errors/private_action.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/DebugKit/Test/test_app/Plugin/DebugkitTestPlugin/Lib/Panel/PluginTestPanel.php",
+		"/Users/antograssiot/Library/Application Support/Sublime Text 3/Packages/User/phpcs.sublime-settings",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/email.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Model/AppModel.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Config/bootstrap.php",
+		"/Users/antograssiot/Documents/Lab/cake-a/.gitignore",
+		"/Applications/MAMP/bin/php/php5.5.10/conf/php.ini",
+		"/Applications/MAMP_2014-03-30_18-35-58/bin/php/php5.5.10/conf/php.ini",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/base/_form.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/modules/_inputs.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Console/ConsoleInputSubcommand.php",
+		"/Users/antograssiot/Documents/Lab/Institut/Institut.sublime-project",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/ThePaperMonkiesFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/DomainsSiteFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/View/Scaffolds/form.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/FruitFixture.php",
+		"/Applications/MAMP_2014-07-18_20-22-07/bin/php/php5.5.10/conf/php.ini",
+		"/Users/antograssiot/Library/Application Support/Sublime Text 3/Packages/Phpcs/phpcs.sublime-settings",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/View/Helper/PaginatorHelper.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Configure/PhpReader.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/DebugKit/View/Elements/history_panel.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Case/Controller/Component/Acl/PhpAclTest.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/Media/webroot/js/tinymce/themes/advanced/skins/prbaron/content.css",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/Media/webroot/js/tinymce/themes/advanced/skins/prbaron/dialog.css",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/I18n/Multibyte.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Model/Model.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/AuthUserCustomFieldFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/dist/app/Model/User.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/modules/_checkboxes.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/scss/layout/_generic.scss",
+		"/Users/antograssiot/Documents/Lab/Institut/dploy.yaml",
+		"/Users/antograssiot/Documents/Lab/Institut/app/Plugin/Media/Vendor/imagine.phar",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Model/CakeSchema.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/TestSuite/CakeTestSuiteCommand.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/TestSuite/CakeTestCase.php",
+		"/Volumes/NO NAME/institut/gulpfile.js",
+		"/Users/antograssiot/Desktop/dossier sans titre/index.php",
+		"/Users/antograssiot/Desktop/dossier sans titre/Stat.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/Test/Fixture/ProductFixture.php",
+		"/Users/antograssiot/Documents/Lab/Institut/gulpfile.coffee",
+		"/Users/antograssiot/Desktop/StatsController.php",
+		"/Users/antograssiot/Desktop/Stat.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/View/Scaffolds/index.ctp",
+		"/Users/antograssiot/Documents/Lab/Institut/app/webroot/index.php",
+		"/Users/antograssiot/Documents/Lab/Institut/app/index.php",
+		"/Users/antograssiot/Documents/Lab/Institut/lib/Cake/View/Helper/CacheHelper.php"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 112.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"Example",
+			"    ",
+			"  ",
+			"phpcs",
+			"ga_profileId",
+			"ga_password",
+			"ga_email",
+			"user_profile",
+			"app_secret",
+			"coffe",
+			"plum",
+			"configure::read('prod')",
+			"posts",
+			"plu",
+			"sendm",
+			"send_",
+			"send",
+			"com",
+			"mail",
+			"send",
+			"mail",
+			"smtp",
+			"redirect",
+			"l-wrap-bg",
+			"text-ali",
+			"install",
+			"debu",
+			"plu",
+			"gutil",
+			"log",
+			"        js: 'app/webroot/js',",
+			"        app: 'app',\n        dist: 'dist',\n        webroot: 'app/webroot',\n        css: 'app/webroot/css',\n        scss: 'app/webroot/scss',\n        coffee: 'app/webroot/coffee',\n        js: 'app/webroot/js',",
+			"        ",
+			"media",
+			"uglify",
+			"dist",
+			"_ressources",
+			"<ul class=\"\">\n					<li><a href=\"#\">L'institut</a>\n					</li><li><a href=\"#\">Prestations</a>\n					</li><li><a href=\"#\">Remise en forme</a>\n					</li><li><a href=\"#\">Produits</a>\n					</li><li><a href=\"#\">Contact</a>\n					</li><li><a href=\"#\">Mentions légales</a></li>\n				</ul>",
+			"<!--<?=",
+			"-s-off",
+			"col-s-offset-",
+			"col-s-push",
+			"footer",
+			"TABIN",
+			"$header-height",
+			"4rem",
+			"	\n",
+			"65px",
+			"media",
+			"l-pusher",
+			" $",
+			"pointer",
+			"\">",
+			"h1",
+			"media ",
+			"media on",
+			"media",
+			"media on",
+			"media s",
+			"media",
+			"script",
+			"prefi",
+			"load",
+			"debugk",
+			"debug",
+			"load",
+			"debu",
+			"news",
+			"droid_sansregular",
+			".new",
+			".wrap",
+			".xrap",
+			"box-siz",
+			"FONT-fa",
+			"FONT",
+			"BTN",
+			"SWAP",
+			"+up",
+			"move",
+			"datab",
+			"da",
+			"		\n",
+			"font",
+			"E_ALL",
+			"AppError"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			" 	",
+			" "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 41.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.coffeecompile_output":
+	{
+		"height": 134.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"project": "docs.sublime-project",
+	"replace":
+	{
+		"height": 78.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"hom",
+				"app/View/Pages/home.ctp"
+			],
+			[
+				"flash",
+				"app/View/Elements/flash.ctp"
+			],
+			[
+				"postadmin",
+				"app/View/Posts/admin_edit.ctp"
+			],
+			[
+				"postinde",
+				"app/View/Posts/index.ctp"
+			],
+			[
+				"postview",
+				"app/View/Posts/view.ctp"
+			],
+			[
+				"admin",
+				"app/View/Links/admin_index.ctp"
+			],
+			[
+				"validat",
+				"app/Model/Validator/UserValidator.php"
+			],
+			[
+				"posts",
+				"app/Controller/PostsController.php"
+			],
+			[
+				"user",
+				"app/Model/User.php"
+			],
+			[
+				"testcon",
+				"app/Controller/Component/TestComponent.php"
+			],
+			[
+				"pagescon",
+				"app/Controller/PagesController.php"
+			],
+			[
+				"stats",
+				"app/Controller/StatsController.php"
+			],
+			[
+				"appcoff",
+				"app/webroot/coffee/application.coffee"
+			],
+			[
+				"gri",
+				"app/webroot/scss/layout/_grid.scss"
+			],
+			[
+				"default",
+				"app/View/Layouts/default.ctp"
+			],
+			[
+				"usercontr",
+				"app/Test/Case/Controller/UsersControllerTest.php"
+			],
+			[
+				"userc",
+				"app/Controller/UsersController.php"
+			],
+			[
+				"data",
+				"app/Config/database.php"
+			],
+			[
+				"app",
+				"app/Controller/AppController.php"
+			],
+			[
+				"base",
+				"app/webroot/scss/base/_base.scss"
+			],
+			[
+				"contactin",
+				"app/View/Contact/index.ctp"
+			],
+			[
+				"grid",
+				"app/webroot/scss/layout/_grid.scss"
+			],
+			[
+				"articlessc",
+				"app/webroot/scss/modules/_article.scss"
+			],
+			[
+				"post",
+				"app/Model/Post.php"
+			],
+			[
+				"route",
+				"app/Config/routes.php"
+			],
+			[
+				"postin",
+				"app/View/Posts/index.ctp"
+			],
+			[
+				"routes",
+				"app/Config/routes.php"
+			],
+			[
+				"appmo",
+				"app/Model/AppModel.php"
+			],
+			[
+				"inputscs",
+				"app/webroot/scss/modules/_inputs.scss"
+			],
+			[
+				"fromsc",
+				"app/webroot/scss/base/_form.scss"
+			],
+			[
+				"usertet",
+				"app/Test/Case/Model/UserTest.php"
+			],
+			[
+				"usercon",
+				"app/Controller/UsersController.php"
+			],
+			[
+				"generic",
+				"app/webroot/scss/layout/_generic.scss"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"sta",
+				"app/Model/Stat.php"
+			],
+			[
+				"stat",
+				"app/Controller/StatsController.php"
+			],
+			[
+				"inde",
+				"app/View/Contact/index.ctp"
+			],
+			[
+				"checkbox",
+				"app/webroot/scss/modules/_checkboxes.scss"
+			],
+			[
+				"contacinde",
+				"app/View/Contact/index.ctp"
+			],
+			[
+				"contact",
+				"app/Model/Contact.php"
+			],
+			[
+				"login",
+				"app/View/Users/login.ctp"
+			],
+			[
+				"layouscss",
+				"app/webroot/scss/layout/_generic.scss"
+			],
+			[
+				"defaul",
+				"app/View/Layouts/default.ctp"
+			],
+			[
+				"form",
+				"app/webroot/scss/base/_form.scss"
+			],
+			[
+				"app.co",
+				"app/webroot/coffee/application.coffee"
+			],
+			[
+				"appli",
+				"app/webroot/js/application.js"
+			],
+			[
+				"footer",
+				"app/webroot/scss/layout/_footer.scss"
+			],
+			[
+				"btn",
+				"app/webroot/scss/modules/_btn.scss"
+			],
+			[
+				"forms",
+				"app/webroot/scss/base/_form.scss"
+			],
+			[
+				"sett",
+				"app/webroot/scss/tools/_settings.scss"
+			],
+			[
+				"config",
+				"config.rb"
+			],
+			[
+				"coffe",
+				"app/webroot/coffee/application.coffee"
+			],
+			[
+				"foot",
+				"app/webroot/scss/layout/_footer.scss"
+			],
+			[
+				"nav",
+				"app/webroot/scss/modules/_nav.scss"
+			],
+			[
+				"gener",
+				"app/webroot/scss/layout/_generic.scss"
+			],
+			[
+				"basez",
+				"lib/Cake/Controller/Component/Auth/BaseAuthorize.php"
+			],
+			[
+				"header",
+				"app/webroot/scss/layout/_header.scss"
+			],
+			[
+				"applicat",
+				"app/webroot/css/application.css"
+			],
+			[
+				"style.",
+				"app/webroot/scss/style.scss"
+			],
+			[
+				"style",
+				"app-master/webroot/css/style.scss"
+			],
+			[
+				"headscs",
+				"Institut/app/webroot/scss/layout/_header.scss"
+			],
+			[
+				"footsc",
+				"Institut/app/webroot/scss/layout/_footer.scss"
+			],
+			[
+				"_nav",
+				"Institut/app/webroot/scss/modules/_nav.scss"
+			],
+			[
+				"cakecoreapp",
+				"lib/Cake/Core/App.php"
+			],
+			[
+				"side",
+				"app/webroot/scss/layout/_sidebar.scss"
+			],
+			[
+				"sidebar",
+				"app/View/Elements/sidebar.ctp"
+			],
+			[
+				"icon",
+				"app/webroot/scss/modules/_icon.scss"
+			],
+			[
+				"coff",
+				"app/webroot/coffee/app.coffee"
+			],
+			[
+				"font",
+				"app/webroot/scss/fonts/_fonts.scss"
+			],
+			[
+				"normali",
+				"app/webroot/scss/base/_normalize.scss"
+			],
+			[
+				"applica",
+				"app/webroot/scss/application.scss"
+			],
+			[
+				"gene",
+				"app/webroot/scss/layout/_generic.scss"
+			],
+			[
+				"funct",
+				"app/webroot/scss/tools/_functions.scss"
+			],
+			[
+				"forgot",
+				"app/View/Users/forgot.ctp"
+			],
+			[
+				"defau",
+				"app/View/Layouts/default.ctp"
+			],
+			[
+				"head",
+				"app/webroot/scss/layout/_header.scss"
+			],
+			[
+				"applica.css",
+				"app/webroot/css/scss/application.css"
+			],
+			[
+				"style.sc",
+				"app/webroot/scss/style.scss"
+			],
+			[
+				"face.js",
+				"app/webroot/js/facebook.js"
+			],
+			[
+				"styl",
+				"app/webroot/css/style.css"
+			],
+			[
+				"elemgoo",
+				"app/View/Elements/google-analytics.ctp"
+			],
+			[
+				"postvi",
+				"app/View/Posts/view.ctp"
+			],
+			[
+				"postvie",
+				"app/View/Posts/view.ctp"
+			],
+			[
+				"elemfoo",
+				"app/View/Elements/footer.ctp"
+			],
+			[
+				"appdefa",
+				"app/View/Layouts/default.ctp"
+			],
+			[
+				"tviewdef",
+				"lib/Cake/Test/test_app/View/Layouts/default.ctp"
+			],
+			[
+				"appc",
+				"app/Controller/AppController.php"
+			],
+			[
+				"postc",
+				"app/Controller/PostsController.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"cakephjp",
+				"~/Documents/Lab/cakephp.sublime-project"
+			],
+			[
+				"",
+				"~/Documents/Lab/Institut/Institut.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 256.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

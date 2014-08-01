@@ -56,18 +56,18 @@ Below is a description of the variables and how they affect your CakePHP
 application.
 
 debug
-    Changes CakePHP debugging output. false = Production mode. No error 
+    Changes CakePHP debugging output. false = Production mode. No error
     messages, errors, or warnings shown. true = Errors and warnings shown.
 App.namespace
     The namespace to find app classes under.
-    
+
     .. note::
 
         When changing the namespace in your configuration, you will also
         need to update your ``composer.json`` file to use this namespace
         as well. Additionally, create a new autoloader by running
         ``php composer.phar dumpautoload``.
-    
+
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
@@ -283,13 +283,13 @@ context::
     returned. Using our examples from write() above, we can read that
     data back::
 
-        Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body
-                                            //and soul'
+        Configure::read('Company.name');    // yields: 'Pizza, Inc.'
+        Configure::read('Company.slogan');  // yields: 'Pizza for your body
+                                            // and soul'
 
         Configure::read('Company');
 
-        //yields:
+        // yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     If $key is left null, all values in Configure will be returned.

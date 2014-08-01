@@ -129,10 +129,10 @@ Environment Variables (from $_SERVER and $_ENV)
 a getter/setter for enviroment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
-    //Get a value
+    // Get a value
     $value = $this->request->env('HTTP_HOST');
 
-    //Set a value. Generally helpful in testing.
+    // Set a value. Generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
 XML or JSON Data
@@ -487,7 +487,7 @@ a pdf or an ics generated on the fly from a string::
         $this->response->body($icsString);
         $this->response->type('ics');
 
-        //Optionally force file download
+        // Optionally force file download
         $this->response->download('filename_for_download.ics');
 
         // Return response object to prevent controller from trying to render
@@ -549,7 +549,7 @@ You can also tell clients that you want them to cache responses. By using
 :php:meth:`Cake\\Network\\Response::cache()`::
 
     public function index() {
-        //do something
+        // do something
         $this->response->cache('-1 minute', '+5 days');
     }
 

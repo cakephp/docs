@@ -371,7 +371,7 @@ using something like::
 
        public function view_image() {
            $this->layout = 'image';
-           //output user image
+           // output user image
        }
    }
 
@@ -438,7 +438,7 @@ the controller works with view files). In the above example, the
 variable::
 
     // inside /src/Template/Element/helpbox.ctp
-    echo $helptext; //outputs "Oh, this text is very helpful."
+    echo $helptext; // outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::

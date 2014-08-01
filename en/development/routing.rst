@@ -577,7 +577,7 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In app/Config/routes.php...
+    // In app/Config/routes.php...
 
     Router:scope('/', function($routes) {
         $routes->extensions('json');
@@ -842,7 +842,7 @@ Custom Route Classes
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin. 
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin.
 * Route classes should extend :php:class:`Cake\\Routing\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 
