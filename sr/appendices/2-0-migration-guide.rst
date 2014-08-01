@@ -562,7 +562,7 @@ Router
 
   To your routes file for each plugin you need short routes on.
 
-Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file::
+Your config/routes.php file needs to be updated adding this line at the bottom of the file::
 
     require CAKE . 'Config' . DS . 'routes.php';
 

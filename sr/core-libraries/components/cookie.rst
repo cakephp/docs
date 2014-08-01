@@ -112,7 +112,7 @@ The CookieComponent offers a number of methods for working with Cookies.
     ``Security.salt`` and a predefined Configure class var
     ``Security.cipherSeed`` to encrypt values. To make your cookies
     more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
+    config/core.php to ensure a better encryption.::
 
         $this->Cookie->write('name', 'Larry', false);
 

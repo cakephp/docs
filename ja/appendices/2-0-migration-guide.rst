@@ -525,7 +525,7 @@ Router
 
   ショートカットルートを有効にしたいプラグイン毎にroutesファイルにこれを追加してください。
 
-app/Config/routes.phpファイルは以下の行をファイルの後方に追加するように更新する必要があります::
+config/routes.phpファイルは以下の行をファイルの後方に追加するように更新する必要があります::
 
     require CAKE . 'Config' . DS . 'routes.php';
 

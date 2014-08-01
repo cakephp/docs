@@ -39,7 +39,7 @@ your php.ini file and making sure that the PHPUnit files are in one of the
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``app/Config/core.php``
+Remember to have a debug level of at least 1 in your ``config/core.php``
 file before running any tests. Tests are not accessible via the web runner when
 debug is equal to 0. Before running any tests you should be sure to add a
 ``$test`` database configuration. This configuration is used by CakePHP for
@@ -317,7 +317,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``$test`` in your ``app/Config/database.php``
+CakePHP uses the connection named ``$test`` in your ``config/database.php``
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -1276,7 +1276,7 @@ bleed through and avoids a number of basic problems. Once you've created a new
 database in a database server that jenkins can access (usually localhost). Add
 a *shell script step* to the build that contains the following::
 
-    cat > app/Config/database.php <<'DATABASE_PHP'
+    cat > config/database.php <<'DATABASE_PHP'
     <?php
     class DATABASE_CONFIG {
         public $test = array(

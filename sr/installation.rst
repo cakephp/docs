@@ -193,7 +193,7 @@ Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
 Not working? If you're getting timezone related errors from PHP
-uncomment one line in ``app/Config/core.php``::
+uncomment one line in ``config/core.php``::
 
    /**
     * Uncomment this line and correct your server timezone to fix

@@ -28,7 +28,7 @@ La configuration est généralement stockée soit dans les fichiers PHP ou INI,
 et chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
 fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
 ajouter des fichiers supplémentaires de configuration et les charger dans
-``src/Config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
+``config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
 pour la configuration générale, et les classes d'adaptateur fournissent
 les méthodes ``config()`` pour faciliter la configuration et la rendre plus
 transparente.
@@ -38,7 +38,7 @@ Charger les Fichiers de Configuration Supplémentaires
 
 Si votre application a plusieurs options de configuration, il peut être utile
 de séparer la configuration dans plusieurs fichiers. Après avoir créé chacun
-des fichiers dans votre répertoire ``src/Config/``, vous pouvez les charger
+des fichiers dans votre répertoire ``config/``, vous pouvez les charger
 dans bootstrap.php::
 
     use Cake\Core\Configure;
@@ -66,7 +66,7 @@ debug
     avertissements montrés.
 App.namespace
     Le namespace sous lequel se trouvent les classes de l'app.
-    
+
     .. note::
 
         Quand vous changez le namespace dans votre configuration, vous devez
@@ -210,7 +210,7 @@ Les chemins de View et de Plugin
 Puisque les views et plugins ne sont pas des classes, ils ne peuvent pas avoir
 un autoloader configuré. CakePHP fournit deux variables de configuration pour
 configurer des chemins supplémentaires pour vos ressources. Dans votre
-``src/Config/app.php``, vous pouvez définir les variables::
+``config/app.php``, vous pouvez définir les variables::
 
     $config = [
         // Plus de configuration
@@ -247,7 +247,7 @@ Chargement d’inflections personnalisées
 ---------------------------------------
 
 Vous pouvez utiliser :php:meth:`Cake\Utility\Inflector::rules()` dans le fichier
-``app/Config/bootstrap.php`` pour charger des inflections personnalisées:
+``config/bootstrap.php`` pour charger des inflections personnalisées:
 
     Inflector::rules('singular', [
         'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
@@ -410,7 +410,7 @@ reader de config du coeur, vous aurez besoin de l'attacher à Configure
 en utilisant :php:meth:`Configure::config()`::
 
     use Cake\\Configure\\Engine\\PhpConfig;
-    // Lire les fichiers de config à partir de app/Config
+    // Lire les fichiers de config à partir de config
     Configure::config('default', new PhpConfig());
 
     // Lire les fichiers de config à partir du chemin
@@ -487,7 +487,7 @@ Sauvegarde seulement les erreurs gérant la configuration::
 les fichiers de configuration qui sont lisibles avec
 :php:meth:`Configure::load()`
 
-    
+
 Stocker la configuration de runtime
 -----------------------------------
 
@@ -567,7 +567,7 @@ application::
         }
     }
 
-Dans votre ``app/Config/bootstrap.php``, vous pouvez attacher ce reader et
+Dans votre ``config/bootstrap.php``, vous pouvez attacher ce reader et
 l'utiliser::
 
     use Cake\\Configure\\Engine\\XmlConfig;
@@ -616,7 +616,7 @@ Moteurs de Configuration intégrés
 
     Vous permet de lire les fichiers de configuration qui sont stockés en
     fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
-    ``app/Config``, soit des répertoires configs du plugin en utilisant la
+    ``config``, soit des répertoires configs du plugin en utilisant la
     :term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable
     ``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
 
@@ -634,7 +634,7 @@ Moteurs de Configuration intégrés
     :php:exc:`ConfigureException`.
 
     Charger votre fichier de configuration personnalisé en insérant ce qui suit
-    dans app/Config/bootstrap.php:
+    dans config/bootstrap.php:
 
         Configure::load('customConfig');
 
@@ -685,7 +685,7 @@ Chargement d'inflections personnalisées
 ---------------------------–-----------
 
 Vous pouvez utiliser :php:meth:`Inflector::rules()` dans le fichier
-``app/Config/bootstrap.php`` pour charger des inflections personnalisées::
+``config/bootstrap.php`` pour charger des inflections personnalisées::
 
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
@@ -705,7 +705,7 @@ Bootstrapping CakePHP
 =====================
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
-bootstrap de CakePHP dans app/Config/bootstrap.php. Ce fichier est
+bootstrap de CakePHP dans config/bootstrap.php. Ce fichier est
 exécuté juste après le bootstrapping du coeur de CakePHP.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping

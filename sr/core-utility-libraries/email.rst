@@ -57,8 +57,8 @@ Configuration
 
 Similar to database configuration, email configuration can be centralized in a class.
 
-Create the file ``app/Config/email.php`` with the class ``EmailConfig``.
-The ``app/Config/email.php.default`` has an example of this file.
+Create the file ``config/email.php`` with the class ``EmailConfig``.
+The ``config/email.php.default`` has an example of this file.
 
 ``CakeEmail`` will create an instance of the ``EmailConfig`` class to access the
 config. If you have dynamic data to put in the configs, you can use the
@@ -70,7 +70,7 @@ constructor to do that::
         }
     }
 
-It is not required to create ``app/Config/email.php``, ``CakeEmail`` can be used
+It is not required to create ``config/email.php``, ``CakeEmail`` can be used
 without it and use respective methods to set all configurations separately or
 load an array of configs.
 

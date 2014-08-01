@@ -25,7 +25,7 @@ Logging Configuration
 =====================
 
 Configuring ``Log`` should be done during your application's bootstrap phase.
-The ``src/Config/app.php`` file is intended for just this.  You can define
+The ``config/app.php`` file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
@@ -119,7 +119,7 @@ CakePHP requires that all logging adapters implement
 
 .. note::
 
-    You should configure loggers during bootstrapping. ``src/Config/app.php`` is the
+    You should configure loggers during bootstrapping. ``config/app.php`` is the
     conventional place to configure log adapters.
 
     In debug mode missing directories will be automatically created to avoid unnecessary

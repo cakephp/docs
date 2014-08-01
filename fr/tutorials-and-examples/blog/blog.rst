@@ -60,7 +60,7 @@ chose qui est lié à votre projet, par ex: ``blog``.
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions
-de fichier et créer votre fichier app/Config/app.php à votre place.
+de fichier et créer votre fichier config/app.php à votre place.
 
 Il y a d'autres moyens d'installer CakePHP si vous n'êtes pas à l'aise avec
 ``Composer``. Pour plus d'informations: regardez la section
@@ -161,7 +161,7 @@ connecter. Pour la plupart d'entre vous, c'est la première et dernière fois qu
 vous configurerez quelque chose.
 
 Une copie du fichier de configuration CakePHP pour la base de données se trouve
-dans ``src/Config/app.default.php``. Faites une copie de ce fichier dans
+dans ``config/app.default.php``. Faites une copie de ce fichier dans
 le même répertoire mais nommez le ``app.php``.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
@@ -208,7 +208,7 @@ chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs.
 
 Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/src/Config/app.php``.
+défaut en modifiant ``/config/app.php``.
 La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
 difficile à deviner::
 
@@ -253,7 +253,7 @@ web fonctionne:
 
 Si vous ne voulez pas ou ne pouvez pas obtenir mod\_rewrite (ou d'autres modules
 compatibles) et le lancer sur votre serveur, vous aurez besoin d'utiliser les
-belles URLs intégrées à CakePHP. Dans ``/src/Config/app.php``, décommentez la
+belles URLs intégrées à CakePHP. Dans ``/config/app.php``, décommentez la
 ligne qui ressemble à::
 
     'App' => [

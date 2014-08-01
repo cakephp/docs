@@ -14,7 +14,7 @@ Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
 arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
 completo deste arquivo deve ficar assim::
 
-    
+
     class Post extends AppModel {
         public $name = 'Post';
     }
@@ -25,7 +25,7 @@ model será usado num PostsController, e que manipulará os dados de uma tabela 
 banco chamada de ``posts``.
 
 .. note::
-    
+
     O CakePHP irá criar um objeto (instância) do model dinamicamente para você,
     se não encontrar um arquivo correspondente na pasta /app/Model. Isto também
     significa que, se você acidentalmente der um nome errado ao seu arquivo
@@ -60,7 +60,7 @@ código para tal ação deve se parecer com algo assim::
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
-    
+
         function index() {
             $this->set('posts', $this->Post->find('all'));
         }
@@ -110,7 +110,7 @@ o método ``set()``? Com aquilo, os dados foram repassados para a view num
 formato parecido com este::
 
     // print_r($posts) output:
-    
+
     Array
     (
         [0] => Array
@@ -156,7 +156,7 @@ adequado de tabela, o código de nossa view deve ser algo como:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Posts do Blog</h1>
     <table>
         <tr>
@@ -164,21 +164,21 @@ adequado de tabela, o código de nossa view deve ser algo como:
             <th>Título</th>
             <th>Data de Criação</th>
         </tr>
-    
+
         <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
              as informações dos posts -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], 
+                <?php echo $this->Html->link($post['Post']['title'],
     array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 Isto é tão simples quanto parece!
@@ -213,11 +213,11 @@ agora::
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
-    
+
         public function index() {
              $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id = null) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
@@ -239,11 +239,11 @@ Agora vamos criar a view para nossa nova action 'view' e colocá-la em
 .. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
-    
+
     <h1><?php echo $post['Post']['title']?></h1>
-    
+
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
-    
+
     <p><?php echo $post['Post']['body']?></p>
 
 Confira se está funcionando tentando acessar os links em ``/posts/index`` ou
@@ -261,17 +261,17 @@ Primeiramente, comece criando uma action ``add()`` no PostsController::
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
         public $components = array('Session');
-    
+
         public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
-    
+
         }
-    
+
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {
@@ -330,8 +330,8 @@ Aqui está nossa view add:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->   
-    
+    <!-- File: /app/View/Posts/add.ctp -->
+
     <h1>Add Post</h1>
     <?php
     echo $this->Form->create('Post');
@@ -347,7 +347,7 @@ está o HTML gerado pelo ``$this->Form->create()``:
     <form id="PostAddForm" method="post" action="/posts/add">
 
 Se o método ``create()`` for chamado sem quaisquer parâmetros, o CakePHP assume
-que você está criando um formulário que submete para a action ``add()`` do 
+que você está criando um formulário que submete para a action ``add()`` do
 controller atual (ou para a action ``edit()`` se um campo id for incluído nos
 dados do formulário), via POST.
 
@@ -377,7 +377,7 @@ de volta nosso model Post e fazer alguns pequenos ajustes::
 
     class Post extends AppModel {
         public $name = 'Post';
-    
+
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -411,7 +411,7 @@ CakePHP, então você deve ter identificado um padrão. Criar a action e então
 criar a view. Aqui está como o código da action ``edit()`` do PostsController
 deve se parecer::
 
-    
+
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -435,13 +435,13 @@ A view edit pode ser algo parecido com isto:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
-    
+
     <h1>Edit Post</h1>
     <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden')); 
+        echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
 
 Esta view exibe o formulário de edição (com os valores populados), juntamente
@@ -529,7 +529,7 @@ helper FormHelper fornece o método ``postLink()``:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
     <table>
@@ -539,10 +539,10 @@ helper FormHelper fornece o método ``postLink()``:
                     <th>Actions</th>
             <th>Created</th>
         </tr>
-    
+
     <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
     as informações dos posts -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
@@ -551,15 +551,15 @@ helper FormHelper fornece o método ``postLink()``:
             </td>
             <td>
             <?php echo $this->Form->postLink(
-                'Delete', 
+                'Delete',
                 array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?')); 
+                array('confirm' => 'Are you sure?'));
             ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 .. note::
@@ -584,7 +584,7 @@ Por padrão, o CakePHP responde a requisições para a raiz de seu site
 chamada de "home". Ao invés disso, vamos substituir isto por nosso
 PostsController criando uma regra de roteamento.
 
-As rotas do Cake são encontrada no arquivo ``/app/Config/routes.php``. Você vai
+As rotas do Cake são encontrada no arquivo ``/config/routes.php``. Você vai
 querer comentar ou remover a linha que define a rota raiz padrão. Ela se parece
 com::
 

@@ -20,7 +20,7 @@ of which is listed here for your convenience:
     `CakePHP DataSources repository on GitHub <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 When specifying a database connection configuration in
-``app/Config/database.php``, CakePHP transparently uses the corresponding
+``config/database.php``, CakePHP transparently uses the corresponding
 database datasource for all model operations. So, even though you might not have
 known about datasources, you've been using them all along.
 
@@ -89,7 +89,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
 
     /**
      * Our default config options. These options will be customized in our
-     * ``app/Config/database.php`` and will be merged in the ``__construct()``.
+     * ``config/database.php`` and will be merged in the ``__construct()``.
      */
         public $config = array(
             'apiKey' => '',
@@ -237,7 +237,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
 
     }
 
-We can then configure the datasource in our ``app/Config/database.php`` file
+We can then configure the datasource in our ``config/database.php`` file
 by adding something like this::
 
     public $faraway = array(

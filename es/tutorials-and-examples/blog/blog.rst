@@ -27,7 +27,7 @@ Esto es lo que necesitas:
 
 #. Conocimiento sobre patrón MVC. Puedes encontrar una definición rápida aquí:
    :doc:`/cakephp-overview/understanding-model-view-controller`. No tengas miedo, sólo
-   es media página. 
+   es media página.
 
 ¡ Vamos allá !
 
@@ -37,10 +37,10 @@ Descargar CakePHP
 Vamos a descargar la última versión de CakePHP.
 
 Para ello, visita la web del proyecto en github:
-`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_ 
+`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 y descargar / descomprimir la última versión de la rama 2.0
 
-También puedes clonar el repositorio usando 
+También puedes clonar el repositorio usando
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
 
@@ -82,8 +82,8 @@ tabla, ejecuta el siguiente código SQL en ella:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
-     
+
+
     /* algunos valores de test */
     INSERT INTO posts (title,body,created)
         VALUES ('The title', 'This is the post body.', NOW());
@@ -116,8 +116,8 @@ en cada proyecto.
 Hay un fichero de configuración preparado para que sólo tengas que copiarlo y
 modificarlo con tu propia configuración.
 
-Cambia el nombre del fichero ``/app/Config/database.php.default`` por
-``/app/Config/database.php`` (hemos eliminado el '.default' del final).
+Cambia el nombre del fichero ``/config/database.php.default`` por
+``/config/database.php`` (hemos eliminado el '.default' del final).
 
 Edita ahora este fichero y verás un array definido en la variable ``$default``
 que contiene varios campos. Modifica esos campos para que se correspondan con tu
@@ -156,9 +156,9 @@ Configuración Opcional
 
 Hay otras tres cosas que puedes querer configurar, aunque no son requeridas para
 este tutorial no está mal echarles un vistazo. Para ello abre el fichero
-``/app/Config/core.php`` que contiene todos estos parámetros.
+``/config/core.php`` que contiene todos estos parámetros.
 
-#. Configurar un string de seguridad 'salt' para usarlo al realizar los 'hash'. 
+#. Configurar un string de seguridad 'salt' para usarlo al realizar los 'hash'.
 
 #. Configurar un número semilla para el encriptado 'seed'.
 
@@ -166,7 +166,7 @@ este tutorial no está mal echarles un vistazo. Para ello abre el fichero
 
 El string de seguridad se utiliza en la generación de 'hashes'. Cambia el valor
 inicial y escribe cualquier cosa diferente. Cualquier cosa vale. Para cambiarlo
-vete a la línea 203 del fichero ``/app/Config/core.php`` y verás algo así:
+vete a la línea 203 del fichero ``/config/core.php`` y verás algo así:
 
 ::
 
@@ -176,7 +176,7 @@ vete a la línea 203 del fichero ``/app/Config/core.php`` y verás algo así:
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 El número semilla se utiliza para encriptar y desencriptar cadenas. Cambia el
-valor por defecto en el ficharo ``/app/Config/core.php`` línea 208. No importa
+valor por defecto en el ficharo ``/config/core.php`` línea 208. No importa
 qué numero pongas, que sea difícil de adivinar.
 
 ::
@@ -244,7 +244,7 @@ Prueba lo siguiente:
 
 Si no puedes (o no quieres) configurar mod\_rewrite o algún otro módulo
 compatible, necesitarás activar las url amigables en CakePHP. En el fichero
-``/app/Config/core.php``, quita el comentario a la línea::
+``/config/core.php``, quita el comentario a la línea::
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 

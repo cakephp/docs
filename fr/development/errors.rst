@@ -16,7 +16,7 @@ Configuration des Erreurs
 =========================
 
 La configuration des Erreurs est faite à l'intérieur du fichier
-``app/Config/core.php`` de votre application. Vous pouvez définir un callback
+``config/core.php`` de votre application. Vous pouvez définir un callback
 pour qu'il soit effectué à chaque fois que votre application attrape une erreur
 PHP - les exceptions sont gérées séparément :doc:`/development/exceptions`.
 Le callback peut être n'importe quel PHP appelable, avec la possibilité
@@ -72,10 +72,10 @@ Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type
 de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
 pour gérer vos erreurs. Ce qui suit serait à faire::
 
-    //dans app/Config/core.php
+    //dans config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //dans app/Config/bootstrap.php
+    //dans config/bootstrap.php
     App::uses('AppError', 'Lib');
 
     //dans app/Lib/AppError.php
@@ -107,10 +107,10 @@ fatal.
 Si vous ne voulez pas montrer la page d'erreur de cake, vous pouvez la
 remplacer comme cela::
 
-    //dans app/Config/core.php
+    //dans config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //dans app/Config/bootstrap.php
+    //dans config/bootstrap.php
     App::uses('AppError', 'Lib');
 
     //dans app/Lib/AppError.php

@@ -28,7 +28,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 ..
   Error configuration
 
-エラーの設定はあなたのアプリケーションの ``app/Config/core.php`` の中で行われています。
+エラーの設定はあなたのアプリケーションの ``config/core.php`` の中で行われています。
 あなたのアプリケーションが PHP エラー（例外については :doc:`/development/exceptions` にて別で説明します）を発生させるたびに呼び出されるコールバックを定義することができます。
 コールバックは PHP が呼ぶことができるものなら無名関数であってもかまいません。
 エラーをハンドルするデフォルトの設定は以下のようになっています::
@@ -40,7 +40,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
     ));
 
 ..
-  Error configuration is done inside your application's ``app/Config/core.php``
+  Error configuration is done inside your application's ``config/core.php``
   file.  You can define a callback to be fired each time your application triggers
   any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
   The callback can be any PHP callable, including an anonymous function.  The
@@ -108,10 +108,10 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 
 エラーハンドラはどのような種類のコールバックを使ってでも作ることができます。たとえば、``AppError`` というクラスをエラーをハンドルするのに使うことができます。その場合は次のようにすることになるでしょう::
 
-    //app/Config/core.php の中で
+    //config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //app/Config/bootstrap.php の中で
+    //config/bootstrap.php の中で
     App::uses('AppError', 'Lib');
 
     //app/Lib/AppError.php の中で
@@ -155,10 +155,10 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 CakePHP 2.2 以降、``Error.handler`` は致命的(fatal)なエラーコードも受け取るようになりました。
 もしも cake のエラーページを表示させたくないのなら、次のように処理を上書くことができます::
 
-    //app/Config/core.php の中で
+    //config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //app/Config/bootstrap.php の中で
+    //config/bootstrap.php の中で
     App::uses('AppError', 'Lib');
 
     //app/Lib/AppError.php の中で

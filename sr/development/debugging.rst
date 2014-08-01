@@ -185,7 +185,7 @@ to help debug methods that involve redirects or complicated loops. You can also
 use :php:meth:`CakeLog::write()` to write log messages. This method can be called
 statically anywhere in your application one CakeLog has been loaded::
 
-    // in app/Config/bootstrap.php
+    // in config/bootstrap.php
     App::uses('CakeLog', 'Log');
 
     // Anywhere in your application

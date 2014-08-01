@@ -165,6 +165,7 @@ directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
 
     /cake_install/
+        config/
         src/
         plugins/
         tests/
@@ -176,7 +177,6 @@ production setup will look like this on the file system::
         .travis.yml
         README.md
         composer.json
-        index.php
         phpunit.xml.dist
 
 Developers using Apache should set the ``DocumentRoot`` directive

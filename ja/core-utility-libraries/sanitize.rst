@@ -52,7 +52,7 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 .. php:staticmethod:: Sanitize::escape($string, $connection)
 
     :param string $string: サニタイズを行うデータ
-    :param string $connection: app/Config/database.phpで指定されたデータベース名
+    :param string $connection: config/database.phpで指定されたデータベース名
 
     SQLステートメントにスラッシュを加え、エスケープします。この動作は、プログラムが実行されるシステムにおける「magic_quotes_gpc」の設定によって変化します。
 

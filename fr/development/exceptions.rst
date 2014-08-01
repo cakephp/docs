@@ -327,17 +327,17 @@ Créer vos propress gestionnaires d'Exception avec `Exception.handler`
 
 Créer votre propre gestionnaire d'exception vous donne plus de contrôle
 sur le processus de gestion des exceptions. La classe que vous choisissez
-devra être chargée dans votre ``app/Config/bootstrap.php``, ainsi elle
+devra être chargée dans votre ``config/bootstrap.php``, ainsi elle
 sera disponible pour gérer toute exception. Vous pouvez définir le gestionnaire
 comme tout type de callback. En configurant ``Exception.handler`` CakePHP
 va ignorer toutes les configurations d'Exception. Une configuration de
 gestionnaire d'exception personnalisée pourrait par exemple ressembler à
 ceci::
 
-    // dans app/Config/core.php
+    // dans config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
-    // dans app/Config/bootstrap.php
+    // dans config/bootstrap.php
     App::uses('AppExceptionHandler', 'Lib');
 
     // dans app/Lib/AppExceptionHandler.php

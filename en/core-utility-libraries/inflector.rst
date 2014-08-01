@@ -120,7 +120,7 @@ Loading Custom Inflections
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
 Define new inflection and transliteration rules for Inflector to use.  Often,
-this method is used in your ``src/Config/bootstrap.php``::
+this method is used in your ``config/bootstrap.php``::
 
     Inflector::rules('singular', [
         'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],

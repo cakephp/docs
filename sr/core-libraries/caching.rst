@@ -51,10 +51,10 @@ Configuring Cache class
 =======================
 
 Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/Config/bootstrap.php``. You
+you will want to configure Cache in ``config/bootstrap.php``. You
 can configure as many cache configurations as you need, and use any
 mixture of cache engines. CakePHP uses two cache configurations internally,
-which are configured in ``app/Config/core.php``. If you are using APC or
+which are configured in ``config/core.php``. If you are using APC or
 Memcache you should make sure to set unique keys for the core caches. This will
 prevent multiple applications from overwriting each other's cached data.
 
@@ -85,7 +85,7 @@ Example::
         'path' => CACHE . 'long' . DS,
     ));
 
-By placing the above code in your ``app/Config/bootstrap.php`` you will
+By placing the above code in your ``config/bootstrap.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
 parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
@@ -120,7 +120,7 @@ dot syntax.::
 .. note::
 
     App and Plugin cache engines should be configured in
-    ``app/Config/bootstrap.php``. If you try to configure them in core.php
+    ``config/bootstrap.php``. If you try to configure them in core.php
     they will not work correctly.
 
 Custom Cache engines must extend :php:class:`CacheEngine` which defines
@@ -300,7 +300,7 @@ Cache API
 
     The Cache class in CakePHP provides a generic frontend for several
     backend caching systems. Different Cache configurations and engines
-    can be set up in your app/Config/core.php
+    can be set up in your config/core.php
 
 .. php:staticmethod:: config($name = null, $settings = array())
 

@@ -3,29 +3,29 @@ Plugin-uri
 
 CakePHP vă permite să înființati o combinație de controlere, modele
 și view-uri și sa o publicati ca o aplicație de tip plugin pe care
-altii o pot utiliza în aplicatiile lor CakePHP. Daca aveti un modul 
-placut de administrare, un blog simplu, sau un modul web de servicii 
-într-una din aplicații, impachetati-l ca un plugin CakePHP astfel încât 
+altii o pot utiliza în aplicatiile lor CakePHP. Daca aveti un modul
+placut de administrare, un blog simplu, sau un modul web de servicii
+într-una din aplicații, impachetati-l ca un plugin CakePHP astfel încât
 puteți să-l folositi si în alte aplicații.
 
 Principala legătura între un plugin și aplicatia in care a fost
 instalat, este configurarea aplicației (conexiunea la baza de date, etc).
-Asfel, functioneaza în propriul spațiu mic, se comportă la fel 
-ca ea ar fi dacă ar fi fost o cerere pe cont propriu. Astfel, ea operează 
-în propriul spațiu mic, comportandu-se ca si cum ar fi o aplicatie de sine 
+Asfel, functioneaza în propriul spațiu mic, se comportă la fel
+ca ea ar fi dacă ar fi fost o cerere pe cont propriu. Astfel, ea operează
+în propriul spațiu mic, comportandu-se ca si cum ar fi o aplicatie de sine
 statatoare.
 
 Instalarea unui Plugin
 ======================
 
-Pentru a instala un plugin, începeti printr-o simpla copiere a dosarului 
+Pentru a instala un plugin, începeti printr-o simpla copiere a dosarului
 plugin-ului în folderul app/Plugin. Daca instalati un plugin numit
 'ContactManager' atunci ar trebui să aveți un folder in app/Plugin
 numit 'ContactManager' sub care se gasesc directoarele pluginului: View, Model,
 Controller, webroot, si orice alt director.
 
 Ca o noutate de la CakePHP 2.0, plugin-urle trebuie sa fie incarcate manual in
-app/Config/bootstrap.php.
+config/bootstrap.php.
 
 Sau le puteti incarca unu cate unul sau chiar oe toate intr-un singur apel::
 
@@ -34,7 +34,7 @@ Sau le puteti incarca unu cate unul sau chiar oe toate intr-un singur apel::
 
 
 ``loadAll()`` încarcă toate plugin-uri disponibile, permițându-vă să setați anumite
-setări pentru anumite plugin-uri. ``load()`` functioneaza similar, doar ca le 
+setări pentru anumite plugin-uri. ``load()`` functioneaza similar, doar ca le
 incarca pe cele pe care le specificati explicit.
 
 Plugin configuration
