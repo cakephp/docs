@@ -166,7 +166,7 @@ http://www.example.com/articles/index. You should see your view,
 correctly formatted with the title and table listing of the articles.
 
 If you happened to have clicked on one of the links we created in
-this view (that link a article's title to a URL /articles/view/some\_id),
+this view (that link an article's title to a URL /articles/view/some\_id),
 you were probably informed by CakePHP that the action hasn't yet
 been defined. If you were not so informed, either something has
 gone wrong, or you actually did define it already, in which case
@@ -376,7 +376,7 @@ back at our Articles model and make a few adjustments::
         public function initialize(array $config) {
             $this->addBehavior('Timestamp');
         }
-        
+
         public function validationDefault(Validator $validator) {
             $validator
                 ->notEmpty('title')

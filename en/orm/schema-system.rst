@@ -110,7 +110,7 @@ methods. An example of both methods is::
     ]);
 
 If you add a primary key constraint to a single integer column it will automatically
-be converted into a auto-increment/serial column depending on the database
+be converted into an auto-increment/serial column depending on the database
 platform::
 
     $t = new Table('posts');

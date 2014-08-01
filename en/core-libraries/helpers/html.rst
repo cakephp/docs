@@ -550,7 +550,7 @@ Creating Javascript Blocks
 .. php:method:: scriptStart($options = [])
 
 Begin a buffering code block. This code block will capture all output between
-``scriptStart()`` and ``scriptEnd()`` and create an script tag. Options are the
+``scriptStart()`` and ``scriptEnd()`` and create a script tag. Options are the
 same as ``scriptBlock()``. An example of using ``scriptStart()`` and
 ``scriptEnd()`` would be::
 

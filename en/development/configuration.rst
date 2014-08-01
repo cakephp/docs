@@ -333,7 +333,7 @@ context::
     :param string $name: The name of the engine to check, if null
         a list of all attached engines will be returned.
 
-    Either check that a engine with a given name is attached, or get
+    Either check that an engine with a given name is attached, or get
     the list of attached engines.
 
 .. php:staticmethod:: drop($name)

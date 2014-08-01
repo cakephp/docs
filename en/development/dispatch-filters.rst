@@ -163,7 +163,7 @@ page, in our case it would be anything served from the ``PagesController``::
     // In our bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 
-This filter will send a expiration header to 1 day in the future for
+This filter will send an expiration header to 1 day in the future for
 all responses produced by the pages controller. You could of course do the same
 in the controller, this is just an example of what could be done with filters.
 For instance, instead of altering the response, you could cache it using
