@@ -85,6 +85,8 @@ Validation
 
 - ``Validation::between`` has been deprecated, you should use
   :php:meth:`Validation::lengthBetween` instead.
+- ``Validation::ssn`` has been deprecated, you should use
+  :php:meth:`Validation::personId` instead.
 
 
 View
