@@ -728,10 +728,10 @@ View\\Helper
 - The ``$settings`` property is now called ``$_config`` and should be accessed
   through the ``config()`` method.
 - Configuration options are no longer set as public properties.
-- :php:meth:`Cake\\View\\Helper::clean()` was removed. It was never robust enough
+- ``Cake\\View\\Helper::clean()`` was removed. It was never robust enough
   to fully prevent xss. instead you should escape content with :php:func:`h` or
   use a dedicated libray like htmlPurifier.
-- :php:meth:`Cake\\View\\Helper::output()` was removed. This method was
+- ``Cake\\View\\Helper::output()`` was removed. This method was
   deprecated in 2.x.
 - Magic accessors to deprecated properties have been removed. The following
   properties now need to be accessed from the request object:
@@ -1054,6 +1054,8 @@ Validation
 
 - The range for :php:meth:`Validation::range()` now is inclusive if ``$lower`` and
   ``$upper`` are provided.
+- ``Validation::ssn()`` has been removed in favor of :php:meth:`Validation::personId()`.
+  This method name is more meaningful and applies to a larger spectrum of countries.
 
 Xml
 ---
