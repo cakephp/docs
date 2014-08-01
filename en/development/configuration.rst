@@ -211,46 +211,10 @@ variables::
 
 Paths should be suffixed with ``/``, or they will not work properly.
 
-
-.. _inflection-configuration:
-
 Inflection Configuration
 ========================
 
-Cake's naming conventions can be really nice - you can name your
-database table big\_boxes, your model BigBox, your controller
-BigBoxesController, and everything just works together
-automatically. The way CakePHP knows how to tie things together is
-by *inflecting* the words between their singular and plural forms.
-
-There are occasions (especially for our non-English speaking
-friends) where you may run into situations where CakePHP's
-inflector (the class that pluralizes, singularizes, camelCases, and
-under\_scores) might not work as you'd like. If CakePHP won't
-recognize your Foci or Fish, you can tell CakePHP about your
-special cases.
-
-Loading Custom Inflections
---------------------------
-
-You can use :php:meth:`Cake\Utility\Inflector::rules()` in the file
-``app/Config/bootstrap.php`` to load custom inflections::
-
-    Inflector::rules('singular', [
-        'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
-        'uninflected' => ['singulars'],
-        'irregular' => ['spins' => 'spinor']
-    ]);
-
-or::
-
-    Inflector::rules('plural', [
-        'irregular' => ['phylum' => 'phyla']
-    ]);
-
-Will merge the supplied rules into the inflection sets defined in
-lib/Cake/Utility/Inflector.php, with the added rules taking precedence
-over the core rules.
+See the :ref:`inflection-configuration` docs for more information.
 
 Configure Class
 ===============

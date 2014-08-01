@@ -1,5 +1,6 @@
 Inflector
 #########
+.. php:namespace:: Cake\Utility
 
 .. php:class:: Inflector
 
@@ -8,70 +9,135 @@ word variations such as pluralizations or camelizing and is
 normally accessed statically. Example:
 ``Inflector::pluralize('example')`` returns "examples".
 
-You can try out the inflections online at `inflector.cakephp.org <http://inflector.cakephp.org/>`_.
+You can try out the inflections online at `inflector.cakephp.org
+<http://inflector.cakephp.org/>`_.
 
+Creating Plural & Singular Forms
+================================
+
+.. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
 
-    * **Input:** Apple, Orange, Person, Man
-    * **Output:** Apples, Oranges, People, Men
+Both ``pluralize`` and ``singularize()`` work on most English nouns. If you need
+to support other languages, you can use :ref:`inflection-configuration` to
+customize the rules used::
 
-.. php:staticmethod:: singularize($plural)
+    // Apples
+    echo Inflector::pluralize('Apple');
 
-    * **Input:** Apples, Oranges, People, Men
-    * **Output:** Apple, Orange, Person, Man
+    // Person
+    echo Inflector::singularize('People');
+
+Creating CamelCase and under_scored Forms
+=========================================
 
 .. php:staticmethod:: camelize($underscored)
-
-    * **Input:** Apple\_pie, some\_thing, people\_person
-    * **Output:** ApplePie, SomeThing, PeoplePerson
-
 .. php:staticmethod:: underscore($camelCase)
 
-    It should be noted that underscore will only convert camelCase
-    formatted words. Words that contains spaces will be lower-cased,
-    but will not contain an underscore.
+These methods are useful when creating class names, or property names::
 
-    * **Input:** applePie, someThing
-    * **Output:** apple\_pie, some\_thing
+    // ApplePie
+    Inflector::camelize('Apple_pie')
+
+    // apple_pie
+    Inflector::undescore('ApplePie');
+
+It should be noted that underscore will only convert camelCase
+formatted words. Words that contains spaces will be lower-cased,
+but will not contain an underscore.
+
+Creating Human Readable Forms
+=============================
 
 .. php:staticmethod:: humanize($underscored)
 
-    * **Input:** apple\_pie, some\_thing, people\_person
-    * **Output:** Apple Pie, Some Thing, People Person
+This method is useful when converting underscored forms into "Title Case" forms
+for human readable values::
+
+    // Apple Pie
+    Inflector::humanize('apple_pie');
+
+Creating Table and Class Name Forms
+===================================
 
 .. php:staticmethod:: tableize($camelCase)
-
-    * **Input:** Apple, UserProfileSetting, Person
-    * **Output:** apples, user\_profile\_settings, people
-
 .. php:staticmethod:: classify($underscored)
 
-    * **Input:** apples, user\_profile\_settings, people
-    * **Output:** Apple, UserProfileSetting, Person
+When generating code, or using CakePHP's conventions you may need to inflect
+table names or class names::
+
+    // UserProfileSetting
+    Inflector::classify('user_profile_settings');
+
+    // user_profile_settings
+    Inflector::tabelize('UserProfileSetting');
+
+Creating Variable Names
+=======================
 
 .. php:staticmethod:: variable($underscored)
 
-    * **Input:** apples, user\_result, people\_people
-    * **Output:** apples, userResult, peoplePeople
+Variable names are often useful when doing meta-programming tasks that involve
+generating code or doing work based on conventions::
+
+    // applePie
+    Inflector::variable('apple_pie');
+
+Creating URL Safe Strings
+=========================
 
 .. php:staticmethod:: slug($word, $replacement = '_')
 
-    Slug converts special characters into latin versions and converting
-    unmatched characters and spaces to underscores. The slug method
-    expects UTF-8 encoding.
+Slug converts special characters into latin versions and converting
+unmatched characters and spaces to underscores. The slug method
+expects UTF-8 encoding::
 
-    * **Input:** apple purée
-    * **Output:** apple\_puree
+    // apple\_puree
+    Inflector::slug('apple purée');
 
-.. php:staticmethod:: reset()
 
-    Resets Inflector back to its initial state, useful in testing.
+.. _inflection-configuration:
+
+Inflection Configuration
+========================
+
+CakePHP's naming conventions can be really nice - you can name your
+database table ``big\_boxes``, your model ``BigBoxes``, your controller
+``BigBoxesController``, and everything just works together
+automatically. The way CakePHP knows how to tie things together is
+by *inflecting* the words between their singular and plural forms.
+
+There are occasions (especially for our non-English speaking
+friends) where you may run into situations where CakePHP's
+inflector (the class that pluralizes, singularizes, camelCases, and
+under\_scores) might not work as you'd like. If CakePHP won't
+recognize your Foci or Fish, you can tell CakePHP about your
+special cases.
+
+Loading Custom Inflections
+--------------------------
 
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
-    Define new inflection and transliteration rules for Inflector to use.
-    See :ref:`inflection-configuration` for more information.
+Define new inflection and transliteration rules for Inflector to use.  Often,
+this method is used in your ``src/Config/bootstrap.php``::
 
+    Inflector::rules('singular', [
+        'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
+        'uninflected' => ['singulars'],
+        'irregular' => ['spins' => 'spinor']
+    ]);
+
+or::
+
+    Inflector::rules('plural', [
+        'irregular' => ['phylum' => 'phyla']
+    ]);
+
+Will merge the supplied rules into the inflection sets defined in
+``Cake/Utility/Inflector``, with the added rules taking precedence
+over the core rules. You can use ``Inflector::reset()`` to clear rules and
+restore the original Inflector state.
 
 .. meta::
     :title lang=en: Inflector
