@@ -252,7 +252,8 @@ All Http and Cake exceptions extend the CakeBaseException class, which has a met
 to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
 the rfc2616 says:
 
-    "The response MUST include an Allow header containing a list of valid methods for the requested resource."
+    "The response MUST include an Allow header containing a list of valid
+    methods for the requested resource."
 
 Using HTTP Exceptions in your Controllers
 =========================================

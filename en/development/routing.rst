@@ -2,6 +2,7 @@ Routing
 #######
 
 .. php:namespace:: Cake\Routing
+
 .. php:class:: Router
 
 Routing is a feature that maps URLs to controller actions. It was
