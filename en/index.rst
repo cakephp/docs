@@ -51,7 +51,7 @@ Models
 ------
 
 Models are the heart of your application. They handle the validation,
-storage and retrieval of your data. Read more about :doc:`/models`.
+storage and retrieval of your data. Read more about :doc:`/orm`.
 
 Getting Help
 ============

@@ -87,7 +87,7 @@ output. The following options are available:
 | escape              | Should the output be htmlentity escaped? Defaults  |
 |                     | to true.                                           |
 +---------------------+----------------------------------------------------+
-| wholeSymbol         | String to use for whole numbers, ie. ' dollars'.    |
+| wholeSymbol         | String to use for whole numbers, ie. ' dollars'.   |
 +---------------------+----------------------------------------------------+
 | wholePosition       | Either 'before' or 'after' to place the whole      |
 |                     | symbol.                                            |
