@@ -56,13 +56,13 @@ You can create an error handler out of any callback type. For example you could
 use a class called ``AppError`` to handle your errors. By extending the
 ``BaseErrorHandler`` you can supply custom logic for handling errors. An example would be::
 
-    //in app/Config/error.php
+    // in app/Config/error.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    //in app/Error/AppError.php
+    // in app/Error/AppError.php
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
@@ -88,13 +88,13 @@ The default error handlers convert fatal errors into exceptions and re-use the
 exception handling logic to render an error page. If you do not want to show the
 standard error page, you can override it like::
 
-    //in app/Config/error.php
+    // in app/Config/error.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    //in app/Error/AppError.php
+    // in app/Error/AppError.php
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;

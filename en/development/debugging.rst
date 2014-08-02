@@ -101,10 +101,10 @@ set to ``true``.
     the calling method, including which file and line the call
     originated from.::
 
-        //In PostsController::index()
+        // In PostsController::index()
         pr(Debugger::trace());
 
-        //outputs
+        // outputs
         PostsController::index() - APP/Controller/DownloadsController.php, line 48
         Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
         Dispatcher::dispatch() - CORE/lib/Cake/Routing/Dispatcher.php, line 237
@@ -127,7 +127,7 @@ set to ``true``.
 
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
-        //will output the following.
+        // will output the following.
         Array
         (
             [0] => <code><span style="color: #000000"> * @access public</span></code>

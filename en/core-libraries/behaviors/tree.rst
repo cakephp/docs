@@ -130,7 +130,7 @@ having to change their parent::
     // Move the node to the top of the list inside the same level
     $categories->moveUp($node, true);
 
-    //Move the node to the bottom
+    // Move the node to the bottom
     $categories->moveDown($node, true);
 
 Configuration

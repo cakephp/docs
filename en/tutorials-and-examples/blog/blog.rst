@@ -41,7 +41,7 @@ from GitHub. To do this simply visit the CakePHP project on GitHub:
 and download the latest release of CakePHP 3.0.
 
 You can also install CakePHP using ``Composer``.
-``Composer`` is an simple way of installing CakePHP from your terminal or
+``Composer`` is a simple way of installing CakePHP from your terminal or
 command line prompt. Simply type the following two lines in your terminal from
 your webroot directory::
 

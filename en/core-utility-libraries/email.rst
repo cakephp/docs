@@ -63,7 +63,7 @@ to the constructor of ``Email``::
     $email = new Email();
     $email->profile('default');
 
-    //or in constructor::
+    // or in constructor::
     $email = new Email('default');
 
 Instead of passing a string which matches a preset configuration name, you can

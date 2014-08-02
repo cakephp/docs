@@ -266,7 +266,7 @@ event listeners::
 
 As you see, the main difference for ``EventListener`` objects is that you need
 to use an array for specifying the callable method and the priority preference.
-The ``callable`` key is an special array entry that the manager will read to know
+The ``callable`` key is a special array entry that the manager will read to know
 what function in the class it should be calling.
 
 Getting Event Data as Function Parameters

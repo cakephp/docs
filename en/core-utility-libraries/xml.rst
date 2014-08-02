@@ -19,7 +19,7 @@ constructor of Xml class to import data. In CakePHP 2.0 you can do it using
 SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
 
-    //First Load the Utility Class
+    // First Load the Utility Class
     App::uses('Xml', 'Utility');
 
     // Old method:
@@ -29,7 +29,7 @@ default is SimpleXMLElement). Below the samples how to import data from URL::
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
-    //or
+    // or
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
@@ -90,7 +90,7 @@ Transforming a XML String in Array
 Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back::
 
-    //Old method:
+    // Old method:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
     $xmlArray = $xmlObject->toArray();

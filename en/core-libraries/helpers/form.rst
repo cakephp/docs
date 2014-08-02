@@ -530,7 +530,7 @@ Options for Select, Checkbox and Radio Inputs
 * ``$options['empty']`` If set to true, forces the input to remain empty.
 
   When passed to a select list, this creates a blank option with an
-  empty value in your drop down list. If you want to have a empty
+  empty value in your drop down list. If you want to have an empty
   value with text displayed instead of just a blank option, pass in a
   string to empty::
 
@@ -1548,7 +1548,7 @@ Building a Widget Class
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
 a the ``render(array $data)`` method to be implemented. The render method
-expects an array of data to build the widget and is expected to return an string
+expects an array of data to build the widget and is expected to return a string
 of HTML for the widget. If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you
