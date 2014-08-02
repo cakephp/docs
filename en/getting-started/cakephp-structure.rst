@@ -78,7 +78,6 @@ that it is associated with many iCal events.
 Like controllers, models have callbacks:
 
 -  beforeFind()
--  afterFind()
 -  beforeValidate()
 -  afterValidate()
 -  beforeSave()

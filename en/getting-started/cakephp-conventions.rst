@@ -113,8 +113,8 @@ Each file would be located in the appropriate folder in your app folder.
 Model and Database Conventions
 ==============================
 
-Model class names are singular and CamelCased. Person, BigPerson,
-and ReallyBigPerson are all examples of conventional model names.
+Table class names are plural and CamelCased. People, BigPeople,
+and ReallyBigPeople are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
 underscored. The underlying tables for the above mentioned models
@@ -130,7 +130,7 @@ first\_name.
 
 Foreign keys in hasMany, belongsTo or hasOne relationships are
 recognized by default as the (singular) name of the related table
-followed by \_id. So if a Baker hasMany Cake, the cakes table will
+followed by \_id. So if a Bakers hasMany Cakes, the cakes table will
 refer to the bakers table via a baker\_id foreign key. For a
 table like category\_types whose name contains multiple words, 
 the foreign key would be category\_type\_id.
