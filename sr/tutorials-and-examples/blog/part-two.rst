@@ -346,7 +346,7 @@ handled in the following sections.
 The reason why we call the ``create()`` method first is to resets the model
 state for saving new information. It does not actually create a record in the
 database but clears Model::$id and sets Model::$data based on your database
-field defaults. 
+field defaults.
 
 Data Validation
 ===============
@@ -658,7 +658,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 
-CakePHP's routing is found in ``/app/Config/routes.php``. You'll want
+CakePHP's routing is found in ``/config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this:
 

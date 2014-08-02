@@ -56,9 +56,9 @@ Or, you can download ``composer.phar`` from the
 `Composer website <https://getcomposer.org/download/>`_.
 
 For Windows systems, you can download Composer's Windows installer
-`here <https://github.com/composer/windows-setup/releases/>`_.  Further
+`here <https://github.com/composer/windows-setup/releases/>`__.  Further
 instructions for Composer's Windows installer can be found within the README
-`here <https://github.com/composer/windows-setup>`_.
+`here <https://github.com/composer/windows-setup>`__.
 
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
@@ -165,6 +165,7 @@ directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
 
     /cake_install/
+        config/
         src/
         plugins/
         tests/
@@ -176,7 +177,6 @@ production setup will look like this on the file system::
         .travis.yml
         README.md
         composer.json
-        index.php
         phpunit.xml.dist
 
 Developers using Apache should set the ``DocumentRoot`` directive
@@ -209,7 +209,7 @@ application </getting-started>`.
 
 
 .. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.com
+.. _Composer: http://getcomposer.org
 
 .. meta::
     :title lang=en: Installation

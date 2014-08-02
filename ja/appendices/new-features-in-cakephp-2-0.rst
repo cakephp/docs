@@ -29,7 +29,7 @@ HtmlHelper
   `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_ を見てください。
 * ``loadConfig()`` は :php:class:`Helper` から :php:class:`HtmlHelper` に移動しました。
    このメソッドは設定ファイルを読み込むのに新しいリーダークラス（2.0 :php:class:`Configure` をみてください）を使うようになりました。
-   省略可能ですが、二番目の引数としてパス（デフォルトは ``app/Config`` ）を渡すことができます。
+   省略可能ですが、二番目の引数としてパス（デフォルトは ``config`` ）を渡すことができます。
    単純に、設定ファイル（とリーダー）を ``Controller::$helpers`` で設定することで、ヘルパーにコンストラクタで読み込むことができます（以下に例があります）。
    設定ファイルでは、以下のキーを指定できます:
 
@@ -177,7 +177,7 @@ Acceptヘッダーの自動解析
 
 もしクライアントが送ったAcceptが単一のMIMEタイプで、それに対応する拡張子が :php:class`Router` で有効となっているものと一致するならば、 :php:class:`RequestHandler` はそれを拡張子と同じものとして扱うでしょう。
 これはCakePHPのRESTスタイルのエンドポイントのサポートを拡張します。
-この機能を使うには、まず ``app/Config/routes.php`` で拡張子を有効にしてください。
+この機能を使うには、まず ``config/routes.php`` で拡張子を有効にしてください。
 
 ::
 

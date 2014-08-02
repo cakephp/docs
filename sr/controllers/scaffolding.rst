@@ -83,7 +83,7 @@ in many instances::
 Creating a simple admin interface with scaffolding
 ==================================================
 
-If you have enabled admin routing in your app/Config/core.php with
+If you have enabled admin routing in your config/core.php with
 ``Configure::write('Routing.prefixes', array('admin'));``, you can
 use scaffolding to generate an admin interface.
 

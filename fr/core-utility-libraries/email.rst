@@ -49,9 +49,9 @@ Configuration
 
 La Configuration par défaut pour ``Email`` est créé en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier ``src/Config/app.php``. Le fichier ``src/Config/app.php.default`` est
+le fichier ``config/app.php``. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
-d'email dans ``src/Config/app.php``. ``Email`` peut être utilisé sans cela
+d'email dans ``config/app.php``. ``Email`` peut être utilisé sans cela
 et utilise les méthodes séparement pour définir toutes les configurations
 ou charger un tableau de configs.
 
@@ -415,7 +415,7 @@ Exemple::
 
     Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
 
-Cette méthode va envoyer un email à you@example.com, à partir de me@example.com 
+Cette méthode va envoyer un email à you@example.com, à partir de me@example.com
 avec le sujet Subject et le contenu Message.
 
 Le retour de ``deliver()`` est une instance de :php:class:`Cake\\Email\\Email`

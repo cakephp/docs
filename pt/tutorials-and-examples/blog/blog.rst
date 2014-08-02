@@ -25,7 +25,7 @@ Aqui vai uma lista do que você vai precisar:
    já programou, melhor: mas não tenha medo se é fã de programação procedural.
 #. E por último, você vai precisar de um conhecimento básico do padrão de
    projetos MVC. Uma rápida visão geral pode ser encontrada em
-   :doc:`/cakephp-overview/understanding-model-view-controller`. 
+   :doc:`/cakephp-overview/understanding-model-view-controller`.
    Não se preocupe, deve ter meia página ou menos.
 
 Então, vamos começar!
@@ -77,7 +77,7 @@ teste. Execute as instruções a seguir no seu banco de dados::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     -- Agora inserimos alguns posts para testar
     INSERT INTO posts (title, body, created)
         VALUES ('The title', 'This is the post body.', NOW());
@@ -107,7 +107,7 @@ e como conectar a ele. Para muitos, esta é a primeira e última configuração 
 ser feita.
 
 Uma exemplo de arquivo de configuração do banco de dados pode ser encontrado em
-``/app/Config/database.php.default``. Copie este arquivo no mesmo diretório
+``/config/database.php.default``. Copie este arquivo no mesmo diretório
 renomeando-o para ``database.php``.
 
 O arquivo é bem simples: basta alterar os valores da variável $default com os
@@ -143,7 +143,7 @@ criptografia. E o terceiro é dar permissão de escrita para o CakePHP na pasta
 ``tmp``.
 
 O "security salt" é utilizado para gerar hashes. Altere o valor padrão do salt
-editando o arquivo ``/app/Config/core.php`` na linha 187. Não importa muito o
+editando o arquivo ``/config/core.php`` na linha 187. Não importa muito o
 que o novo valor seja, basta que não seja fácil de adivinhar.
 
 ::
@@ -155,7 +155,7 @@ que o novo valor seja, basta que não seja fácil de adivinhar.
     ?>
 
 O "cipher seed" é usado para criptografar/descriptografar strings.
-Altere o valor padrão editando o arquivo ``/app/Config/core.php`` na linha 192.
+Altere o valor padrão editando o arquivo ``/config/core.php`` na linha 192.
 Como no "security salt", não importa muito o que o novo valor seja, basta que
 não seja fácil de adivinhar.
 
@@ -215,12 +215,12 @@ tudo funcionando corretamente:
    ou (para o Apache 1.3)::
 
        AddModule                       mod_rewrite.c
-   
+
    em seu httpd.conf.
 
 Se você não quiser ou não puder carregar o mod\_rewrite (ou algum outro módulo
 compatível) em seu servidor, você vai precisar usar o recurso de URLs amigáveis
-do CakePHP. No arquivo ``/app/Config/core.php``, descomente uma linha parecida
+do CakePHP. No arquivo ``/config/core.php``, descomente uma linha parecida
 com::
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));

@@ -1415,7 +1415,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         ]
     ];
 
-Ceci charge les balise dans ``src/Config/app_form.php``. Le fichier devra
+Ceci charge les balise dans ``config/app_form.php``. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     $config = [
@@ -1519,7 +1519,7 @@ Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
 
 - ``fieldset`` Défini à false pour désactiver le fieldset. Si une chaîne est
   fournie, elle sera utilisée comme nom de classe pour l'element fieldset
- 
+
 - ``legend`` Défini à false pour désactiver la legend pour l'ensemble d'input
   généré.
   Ou fournir une chaîne pour personnaliser le texte de legend.

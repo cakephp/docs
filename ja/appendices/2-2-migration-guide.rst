@@ -8,7 +8,7 @@ CakePHP 2.2 は、2.0/2.1 の API の完全上位互換です。 このページ
 アップグレードに必要なステップ
 ======================================================================
 
-CakePHP2.2 にアップグレードする際には、 ``app/Config/bootstrap.php`` ファイルに新しい設定項目を追加する必要があります。この追加設定は、2.1.xと同じような振舞いをする設定です ::
+CakePHP2.2 にアップグレードする際には、 ``config/bootstrap.php`` ファイルに新しい設定項目を追加する必要があります。この追加設定は、2.1.xと同じような振舞いをする設定です ::
 
     // アセットプラグイン、キャッシュヘルパープラグインの
     // ディスパッチャーフィルターを有効化
@@ -30,7 +30,7 @@ CakePHP2.2 にアップグレードする際には、 ``app/Config/bootstrap.php
     ));
 
 
-また、 ``app/Config/core.php`` ファイルも修正が必要です。
+また、 ``config/core.php`` ファイルも修正が必要です。
 定数 :php:const:`LOG_ERROR` に :php:const:`LOG_ERR` の値で定義してください。 ::
 
     define('LOG_ERROR', LOG_ERR);
@@ -221,7 +221,7 @@ Dispatcher
 - ディスパッチャーコールに、独自のイベントリスナーを追加することができるようになりました。
   これにより、クライアントからのリクエストの変更や、クライアントに返すレスポンス情報の変更が容易になります。
   詳細は、 :doc:`/development/dispatch-filters` ドキュメントを参照ください
-- この機能を利用するために、 ``app/Config/bootstrap.php`` ファイルをアップデートする必要があります。
+- この機能を利用するために、 ``config/bootstrap.php`` ファイルをアップデートする必要があります。
   詳細は、 :ref:`required-steps-to-upgrade-2-2` を参照ください
 
 
@@ -262,7 +262,7 @@ Redis エンジン
 ログ
 ====
 
-:php:class:`CakeLog` の変更によって、いくつかの設定を ``app/Config/bootstrap.php`` ファイルに追加する必要があります。
+:php:class:`CakeLog` の変更によって、いくつかの設定を ``config/bootstrap.php`` ファイルに追加する必要があります。
 詳細は、 :doc:`/core-libraries/logging` を参照ください。
 
 - :php:class:`CakeLog` クラスは `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_ の定義と同じレベルでログを出力します。

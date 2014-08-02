@@ -171,7 +171,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 準備ができました。
 
 動きませんか？
-もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
+もしPHPのタイムゾーンに関連するエラーが出るなら、 ``config/core.php`` の中のとある一行のコメントを外してください::
 
    /**
     * Uncomment this line and correct your server timezone to fix

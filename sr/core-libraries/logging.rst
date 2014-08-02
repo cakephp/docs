@@ -95,7 +95,7 @@ As of 2.4 ``FileLog`` engine takes a few new options:
 
 .. note::
 
-    Always configure loggers in ``app/Config/bootstrap.php``
+    Always configure loggers in ``config/bootstrap.php``
     Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 

@@ -60,7 +60,7 @@ User追加フォームにGroupのためのselectボックスが空のまま表�
 Scaffoldingを使って単純な管理インターフェイスを作成する
 =======================================================
 
-もしapp/Config/core.phpにて管理ルーティングを有効にする場合、 ``Configure::write('Routing.prefixes', array('admin'));``
+もしconfig/core.phpにて管理ルーティングを有効にする場合、 ``Configure::write('Routing.prefixes', array('admin'));``
 とすることで管理者インターフェイスを生成するためにスキャフォールディングを使えるようになります。
 
 一旦管理ルーティングを有効にしたら、スキャフォールディング変数にadminプレフィクスを設定して下さい。::

@@ -117,16 +117,16 @@ Usando este método permite um total domínio para agir como uma única aplicaç
 CakePHP. Este exemplo irá ajudá-lo a instalar o Cake em qualquer lugar do seu
 sistema de arquivos e torná-lo disponível em http://www.example.com. Note que
 esta instalação pode requerer os privilégios para alteração do DocumentRoot do
-servidor apache. 
+servidor apache.
 
 Descompacte o conteúdo do arquivo do Cake em um diretório de sua escolha. Para
 fins deste exemplo, assumimos que você escolheu instalar o Cake em /cake\_install.
 Sua configuração de produção será semelhante a esta em seu sistema de arquivos:
 
 -  /cake\_install/
-   
+
    -  /app
-      
+
       -  /webroot (este diretório será usado na diretiva ``DocumentRoot``)
 
    -  /lib
@@ -141,7 +141,7 @@ Desenvolvedores usando o Apache devem definir o ``DocumentRoot`` do domínio par
     DocumentRoot /cake_install/app/webroot
 
 Se o seu servidor web estiver configurado corretamente, você deve encontrar
-agora sua aplicação Cake acessível em http://www.example.com. 
+agora sua aplicação Cake acessível em http://www.example.com.
 
 Instalação Avançada e Configuração Específica por Servidor
 ==========================================================
@@ -163,10 +163,10 @@ Parabéns! Você já está pronto para :doc:`criar sua primeira aplicação Cake
 </getting-started>`.
 
 Não está funcionando? Se você estiver recebendo erros do PHP relacionados ao
-fuso horário, descomente uma linha no app/Config/core.php::
+fuso horário, descomente uma linha no config/core.php::
 
    /**
-    * Uncomment this line and correct your server timezone to fix 
+    * Uncomment this line and correct your server timezone to fix
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');

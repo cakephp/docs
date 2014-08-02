@@ -55,7 +55,7 @@ e.g. ``blog``.
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
-creating your app/Config/app.php file for you.
+creating your config/app.php file for you.
 
 There are other ways to install CakePHP if you are uncomfortable with
 ``Composer``. For more information: check out the :doc:`/installation` section.
@@ -64,6 +64,7 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /path_to_document_root
+        /config
         /src
         /plugins
         /tests
@@ -75,7 +76,6 @@ completed, your directory setup should look something like the following::
         .travis.yml
         README.md
         composer.json
-        index.php
         phpunit.xml.dist
 
 Now might be a good time to learn a bit about how CakePHP's directory
@@ -150,7 +150,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's configuration file is found in
-``src/Config/app.default.php``. Make a copy of this file in
+``config/app.default.php``. Make a copy of this file in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -196,7 +196,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/src/Config/app.php``. It doesn't
+salt value by editing ``/config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -240,7 +240,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``/src/Config/app.php``,
+use CakePHP's built in pretty URLs. In ``/config/app.php``,
 uncomment the line that looks like::
 
     'App' => [

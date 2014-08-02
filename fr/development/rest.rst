@@ -18,7 +18,7 @@ Mise en place Simple
 
 Le moyen le plus rapide pour démarrer avec REST est d'ajouter quelques lignes
 pour configurer :ref:`resource routes <resource-routes>` dans votre fichier
-src/Config/routes.php.
+config/routes.php.
 
 Une fois que le router a été configuré pour mapper les requêtes REST vers
 certaines actions de controller, nous pouvons continuer et créer la logique

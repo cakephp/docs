@@ -1026,7 +1026,7 @@ Changing the tags output by HtmlHelper
     The built-in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
     however if you need to generate HTML for HTML5 you will need to
     create and load a new tags config file containing the tags you'd
-    like to use. To change the tags used create ``app/Config/html5_tags.php``
+    like to use. To change the tags used create ``config/html5_tags.php``
     containing::
 
         $config = array('tags' => array(

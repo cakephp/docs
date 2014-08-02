@@ -194,7 +194,7 @@ les redirections ou les boucles compliquées. Vous pouvez aussi utiliser
 peut être appelée statiquement partout dans votre application où CakeLog
 a été chargée::
 
-    // dans app/Config/bootstrap.php
+    // dans config/bootstrap.php
     App::uses('CakeLog', 'Log');
 
     // N'importe où dans votre application

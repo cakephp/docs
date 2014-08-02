@@ -33,7 +33,7 @@ HtmlHelper
 * ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
   class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
   to load your config file. As an option you can pass the path as second parameter
-  (``app/Config`` is default). To simplify, you can set the configuration file
+  (``config`` is default). To simplify, you can set the configuration file
   (and the reader) in ``Controller::$helpers`` (example below) to load on helper
   constructor. In configuration file you can set the below keys:
 
@@ -192,7 +192,7 @@ Automatic parsing of Accept headers
 If a client sends a single Accept mime type that matches one of the extensions
 enabled in :php:class`Router`, :php:class:`RequestHandler` will treat it the
 same an extension. This expands CakePHP's support for REST style endpoints. To
-use this feature start off by enabling extensions in ``app/Config/routes.php``::
+use this feature start off by enabling extensions in ``config/routes.php``::
 
     Router::parseExtensions('json', 'xml');
 

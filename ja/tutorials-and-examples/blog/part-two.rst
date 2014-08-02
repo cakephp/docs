@@ -553,7 +553,7 @@ CakePHPのデフォルトのルーティングの動作で十分だという人�
 CakeはPagesControllerに接続し、「home」というビューを表示するようになっています。
 ではこれを、ルーティングルールを作成してPostsControllerに行くようにしてみましょう。
 
-Cakeのルーティングは、 ``/app/Config/routes.php`` の中にあります。
+Cakeのルーティングは、 ``/config/routes.php`` の中にあります。
 デフォルトのトップページのルートをコメントアウトするか、削除します。
 この行です::
 

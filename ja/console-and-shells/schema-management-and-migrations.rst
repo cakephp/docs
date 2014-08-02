@@ -10,7 +10,7 @@
 
     $ Console/cake schema generate
 
-上のコマンドで schema.php ファイルが ``app/Config/Schema`` ディレクトリに生成されるはずです。
+上のコマンドで schema.php ファイルが ``config/Schema`` ディレクトリに生成されるはずです。
 
 .. note::
 
