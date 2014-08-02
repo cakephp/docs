@@ -238,7 +238,7 @@ I Don't / Can't Use URL Rewriting
 =================================
 
 If you don't want to or can't use URL rewriting on your webserver,
-refer to the :ref:`core configuration<core-configuration-baseurl>`.
+refer to the ::doc:`core configuration</development/configuration>`.
 
 
 

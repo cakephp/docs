@@ -174,8 +174,6 @@ in your configuration files at runtime::
 See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
 
-.. php:namespace:: Cake\Database
-
 .. _database-data-types:
 
 Data Types

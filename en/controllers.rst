@@ -151,9 +151,10 @@ the request type before returning::
     }
 
 The above controller action is an example of how a method can be used with
-:php:meth:`~Controller::requestAction()` and normal requests. Returning array data to a
-non-requestAction request will cause errors and should be avoided. See the
-:doc:`request-action` section for more tips on using ``requestAction()``.
+:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` and normal
+requests. Returning array data to a non-requestAction request will cause errors
+and should be avoided. See the :doc:`request-action` section for more tips on
+using ``requestAction()``.
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
