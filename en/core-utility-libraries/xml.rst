@@ -196,7 +196,7 @@ your document type to add, remove, or manipulate child nodes::
 .. tip::
 
     After manipulate your XML using SimpleXMLElement or DomDocument you can use
-    ``Xml::toArray()`` without problem.
+    ``Xml::toArray()`` without a problem.
 
 .. meta::
     :title lang=en: Xml
