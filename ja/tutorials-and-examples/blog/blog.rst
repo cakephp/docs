@@ -111,7 +111,7 @@ Cakeのデータベース設定
 多くの人にとって、設定(*configure*)をする最初で最後の機会です。
 
 CakePHPのデータベース設定ファイルの元は、
-``/app/Config/database.php.default`` の中にあります。
+``/config/database.php.default`` の中にあります。
 同一ディレクトリ上にこのファイルのコピーを作り、 ``database.php`` という名前にしてください。
 
 この設定ファイルの中身は一目瞭然です。
@@ -147,7 +147,7 @@ CakePHPのデータベース設定ファイルの元は、
 二つ目は、独自の番号(「seed」ともいう)を暗号化用に定義するということです。
 
 セキュリティ用のsaltは、ハッシュの生成に用いられます。
-``/app/Config/core.php`` を編集し、デフォルトの ``Security.salt`` の値を変更してください。
+``/config/core.php`` を編集し、デフォルトの ``Security.salt`` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。::
 
     /**
@@ -156,7 +156,7 @@ CakePHPのデータベース設定ファイルの元は、
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 サイファシード(*cipher seed*)は暗号化・復号化のための文字列です。
-``/app/Config/core.php`` を編集して ``Security.cipherSeed`` をデフォルト値から変更してください。
+``/config/core.php`` を編集して ``Security.cipherSeed`` をデフォルト値から変更してください。
 この値は、大きくてランダムな整数でなければなりません::
 
     /**

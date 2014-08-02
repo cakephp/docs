@@ -308,15 +308,15 @@ Create your own Exception handler with `Exception.handler`
 
 Creating your own exception handler gives you full control over the exception
 handling process. The class you choose should be loaded in your
-``app/Config/bootstrap.php``, so it's available to handle any exceptions. You can
+``config/bootstrap.php``, so it's available to handle any exceptions. You can
 define the handler as any callback type. By settings ``Exception.handler`` CakePHP
 will ignore all other Exception settings. A sample custom exception handling setup
 could look like::
 
-    // in app/Config/core.php
+    // in config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
-    // in app/Config/bootstrap.php
+    // in config/bootstrap.php
     App::uses('AppExceptionHandler', 'Lib');
 
     // in app/Lib/AppExceptionHandler.php

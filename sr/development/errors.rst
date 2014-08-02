@@ -13,7 +13,7 @@ and exception handler using configure.
 Error configuration
 ===================
 
-Error configuration is done inside your application's ``app/Config/core.php``
+Error configuration is done inside your application's ``config/core.php``
 file. You can define a callback to be fired each time your application triggers
 any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
 The callback can be any PHP callable, including an anonymous function. The
@@ -64,10 +64,10 @@ You can create an error handler out of any callback type. For example you could
 use a class called ``AppError`` to handle your errors. The following would
 need to be done::
 
-    //in app/Config/core.php
+    //in config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //in app/Config/bootstrap.php
+    //in config/bootstrap.php
     App::uses('AppError', 'Lib');
 
     //in app/Lib/AppError.php
@@ -98,10 +98,10 @@ Changing fatal error behavior
 Since CakePHP 2.2 the ``Error.handler`` will receive the fatal error codes as well.
 If you do not want to show the cake error page, you can override it like::
 
-    //in app/Config/core.php
+    //in config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //in app/Config/bootstrap.php
+    //in config/bootstrap.php
     App::uses('AppError', 'Lib');
 
     //in app/Lib/AppError.php

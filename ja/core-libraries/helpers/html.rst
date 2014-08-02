@@ -902,7 +902,7 @@ HtmlHelper が出力するタグの変更
     :php:class:`HtmlHelper` 組み込みのタグ設定は、 XH|TML に準拠したものです。
     そのため、 HTML5 に準拠した HTML を生成するためには、新しいタグの設定を
     作成して読み込む必要があります。出力されるタグを変更するためには、
-    ``app/Config/html5_tags.php`` というファイルを作成し、以下の内容を記述します。::
+    ``config/html5_tags.php`` というファイルを作成し、以下の内容を記述します。::
 
         $config = array('tags' => array(
             'css' => '<link rel="%s" href="%s" %s>',

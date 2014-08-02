@@ -273,7 +273,7 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 また、 :php:meth:`CakeLog::write()` を使うことで、ログメッセージを書きだすことも可能です。
 このメソッドは CakeLog がロードされているなら static にあなたのアプリケーション内のどこからでも呼び出すことができるのです::
 
-    // app/Config/bootstrap.php の中で
+    // config/bootstrap.php の中で
     App::uses('CakeLog', 'Log');
 
     // あなたのアプリケーションのどこからでも

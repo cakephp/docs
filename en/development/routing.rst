@@ -14,7 +14,7 @@ where an array of parameters can be reversed into a string URL.
 By using reverse routing, you can easily re-factor your application's
 URL structure without having to update all your code.
 
-Routes in an application are configured in ``src/Config/routes.php``.
+Routes in an application are configured in ``config/routes.php``.
 Routes are processed based on the scopes they are defined in. Within each scope
 routes are processed top to bottom, so you should place the most frequently used
 routes at the top of each scope.
@@ -96,7 +96,7 @@ Connecting Routes
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
 Defining your own routes allows you to define how your application will respond
-to a given URL. Routes are defined in the ``src/Config/routes.php`` file.
+to a given URL. Routes are defined in the ``config/routes.php`` file.
 
 To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
@@ -104,7 +104,7 @@ operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
-    // In src/Config/routes.php
+    // In config/routes.php
     Router::scope('/', function($routes) {
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
@@ -577,7 +577,7 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In app/Config/routes.php...
+    //In config/routes.php...
 
     Router:scope('/', function($routes) {
         $routes->extensions('json');
@@ -842,7 +842,7 @@ Custom Route Classes
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin. 
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin.
 * Route classes should extend :php:class:`Cake\\Routing\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 

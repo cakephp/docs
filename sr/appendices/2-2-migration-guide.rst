@@ -10,7 +10,7 @@ Required steps to upgrade
 =========================
 
 When upgrading to CakePHP 2.2 its important to add a few new configuration
-values to ``app/Config/bootstrap.php``. Adding these will ensure consistent
+values to ``config/bootstrap.php``. Adding these will ensure consistent
 behavior with 2.1.x::
 
     // Enable the Dispatcher filters for plugin assets, and
@@ -32,7 +32,7 @@ behavior with 2.1.x::
         'file' => 'error',
     ));
 
-You will also need to modify ``app/Config/core.php``. Change the value of
+You will also need to modify ``config/core.php``. Change the value of
 :php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
 
     define('LOG_ERROR', LOG_ERR);
@@ -246,7 +246,7 @@ Dispatcher
   sent to the client. Check the full documentation for this new features in
   :doc:`/development/dispatch-filters`
 - With the addition of :doc:`/development/dispatch-filters` you'll need to
-  update ``app/Config/bootstrap.php``. See
+  update ``config/bootstrap.php``. See
   :ref:`required-steps-to-upgrade-2-2`.
 
 Router
@@ -288,7 +288,7 @@ Log
 ===
 
 Changes in :php:class:`CakeLog` now require, some additional configuration in
-your ``app/Config/bootstrap.php``. See :ref:`required-steps-to-upgrade-2-2`,
+your ``config/bootstrap.php``. See :ref:`required-steps-to-upgrade-2-2`,
 and :doc:`/core-libraries/logging`.
 
 - The :php:class:`CakeLog` class now accepts the same log levels as defined in

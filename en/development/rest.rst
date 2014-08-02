@@ -17,7 +17,7 @@ The Simple Setup
 ================
 
 The fastest way to get up and running with REST is to add a few lines to setup
-:ref:`resource routes <resource-routes>` in your src/Config/routes.php file.
+:ref:`resource routes <resource-routes>` in your config/routes.php file.
 
 Once the router has been set up to map REST requests to certain
 controller actions, we can move on to creating the logic in our

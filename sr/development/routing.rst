@@ -18,7 +18,7 @@ url structure without having to update all your code.
 Routes Configuration
 ====================
 
-Routes in an application are configured in ``app/Config/routes.php``.
+Routes in an application are configured in ``config/routes.php``.
 This file is included by the :php:class:`Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes
 declared in this file are processed top to bottom when incoming requests
@@ -73,7 +73,7 @@ Connecting Routes
 
 Defining your own routes allows you to define how your application
 will respond to a given URL. Define your own routes in the
-``app/Config/routes.php`` file using the :php:meth:`Router::connect()`
+``config/routes.php`` file using the :php:meth:`Router::connect()`
 method.
 
 The ``connect()`` method takes up to three parameters: the URL you
@@ -377,7 +377,7 @@ special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
 can be enabled from within the core configuration file by setting
 the prefixes with Routing.prefixes. Note that prefixes, although
 related to the router, are to be configured in
-``app/Config/core.php``::
+``config/core.php``::
 
     Configure::write('Routing.prefixes', array('admin'));
 

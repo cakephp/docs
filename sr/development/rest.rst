@@ -17,7 +17,7 @@ The Simple Setup
 ================
 
 The fastest way to get up and running with REST is to add a few
-lines to your routes.php file, found in app/Config. The Router
+lines to your routes.php file, found in config. The Router
 object features a method called ``mapResources()``, that is used to set
 up a number of default routes for REST access to your controllers.
 Make sure ``mapResources()`` comes before ``require CAKE . 'Config' . DS . 'routes.php';``
@@ -25,7 +25,7 @@ and other routes which would override the routes.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In app/Config/routes.php...
+    //In config/routes.php...
 
     Router::mapResources('recipes');
     Router::parseExtensions();

@@ -18,8 +18,8 @@ Database Configuration
 ======================
 
 CakePHP expects database configuration details to be in a file at
-``app/Config/database.php``. An example database configuration file can
-be found at ``app/Config/database.php.default``. A finished
+``config/database.php``. An example database configuration file can
+be found at ``config/database.php.default``. A finished
 configuration should look something like this::
 
     class DATABASE_CONFIG {
@@ -215,7 +215,7 @@ Core Configuration
 
 Each application in CakePHP contains a configuration file to
 determine CakePHP's internal behavior.
-``app/Config/core.php``. This file is a collection of Configure class
+``config/core.php``. This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
@@ -226,7 +226,7 @@ CakePHP Core Configuration
 
 The :php:class:`Configure` class is used to manage a set of core CakePHP
 configuration variables. These variables can be found in
-``app/Config/core.php``. Below is a description of each variable and
+``config/core.php``. Below is a description of each variable and
 how it affects your CakePHP application.
 
 debug
@@ -263,7 +263,7 @@ Exception
 App.baseUrl
     If you don't want or can't get mod\_rewrite (or some other
     compatible module) up and running on your server, you'll need to
-    use CakePHP's built-in pretty URLs. In ``/app/Config/core.php``,
+    use CakePHP's built-in pretty URLs. In ``/config/core.php``,
     uncomment the line that looks like::
 
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -333,7 +333,7 @@ Session
     Make sure the class implements :php:interface:`CakeSessionHandlerInterface`
     and set Session.handler to <name>
 
-    To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
+    To use database sessions, run the ``config/Schema/sessions.php`` schema using
     the cake shell command: ``cake schema create Sessions``
 
 Security.salt
@@ -518,7 +518,7 @@ To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
     App::uses('PhpReader', 'Configure');
-    // Read config files from app/Config
+    // Read config files from config
     Configure::config('default', new PhpReader());
 
     // Read config files from another path.
@@ -665,7 +665,7 @@ reader for you application::
         }
     }
 
-In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
+In your ``config/bootstrap.php`` you could attach this reader and use it::
 
     App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
@@ -710,7 +710,7 @@ Built-in Configuration readers
 .. php:class:: PhpReader
 
     Allows you to read configuration files that are stored as plain PHP files.
-    You can read either files from your ``app/Config`` or from plugin configs
+    You can read either files from your ``config`` or from plugin configs
     directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
     variable. An example configuration file would look like::
 
@@ -728,7 +728,7 @@ Built-in Configuration readers
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+    Load your custom configuration file by inserting the following in config/bootstrap.php:
 
         Configure::load('customConfig');
 
@@ -779,7 +779,7 @@ Loading custom inflections
 --------------------------
 
 You can use :php:meth:`Inflector::rules()` in the file
-``app/Config/bootstrap.php`` to load custom inflections::
+``config/bootstrap.php`` to load custom inflections::
 
     Inflector::rules('singular', array(
         'rules' => array(
@@ -802,7 +802,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, use CakePHP's
-bootstrap file, found in app/Config/bootstrap.php. This file is
+bootstrap file, found in config/bootstrap.php. This file is
 executed just after CakePHP's core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:

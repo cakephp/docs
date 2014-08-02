@@ -45,10 +45,10 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``src/Config/app.php``
+Remember to have a debug level of at least 1 in your ``config/app.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
-``test`` datasource configuration to ``src/Config/app.php``.  This
+``test`` datasource configuration to ``config/app.php``.  This
 configuration is used by CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -302,7 +302,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your ``src/Config/datasources.php``
+CakePHP uses the connection named ``test`` in your ``config/datasources.php``
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -1253,7 +1253,7 @@ a *shell script step* to the build that contains the following:
 
 .. code-block:: bash
 
-    cat > src/Config/app_local.php <<'CONFIG'
+    cat > config/app_local.php <<'CONFIG'
     <?php
     $config = [
         'Datasources' => [
@@ -1269,7 +1269,7 @@ a *shell script step* to the build that contains the following:
     ];
     CONFIG
 
-Then uncomment the following line in your ``src/Config/bootstrap.php`` file::
+Then uncomment the following line in your ``config/bootstrap.php`` file::
 
     //Configure::load('app_local.php', 'default');
 

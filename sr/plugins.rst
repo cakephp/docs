@@ -23,7 +23,7 @@ named 'ContactManager' under which are the plugin's View, Model,
 Controller, webroot, and any other directories.
 
 New for CakePHP 2.0, plugins need to be loaded manually in
-app/Config/bootstrap.php.
+config/bootstrap.php.
 
 You can either load them one by one or all of them in a single call::
 

@@ -65,10 +65,10 @@ Configuration de la classe Cache
 
 La configuration de la classe Cache peut être effectuée n'importe où, mais
 généralement vous voudrez configurer le cache dans
-``app/Config/bootstrap.php``. Vous pouvez configurer autant de configurations
+``config/bootstrap.php``. Vous pouvez configurer autant de configurations
 de cache dont vous avez besoin, et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne, qui
-sont configurés dans ``app/Config/core.php``. Si vous utilisez APC ou Memcache
+sont configurés dans ``config/core.php``. Si vous utilisez APC ou Memcache
 vous devrez vous assurer de définir des clés uniques pour les caches du noyau.
 Ceci vous évitera qu'une application vienne réécrire les données cache d'une
 autre application.
@@ -101,7 +101,7 @@ Exemple::
         'path' => CACHE . 'long' . DS,
     ));
 
-En insérant le code ci-dessus dans votre ``app/Config/bootstrap.php`` vous
+En insérant le code ci-dessus dans votre ``config/bootstrap.php`` vous
 aurez deux configurations de cache supplémentaires. Le nom de ces
 configurations 'short' ou 'long' est utilisé comme paramètre ``$config``
 pour :php:func:`Cache::write()` et :php:func:`Cache::read()`.

@@ -20,7 +20,7 @@ CakePHP では、コントローラ・モデル・ビューのコンビをセッ
 もし 'ContactManager' というプラグインをインストールするなら、 app/Plugin に 'ContactManager' というフォルダを作成し、
 その下にプラグインの View, Model, Controller, webroot とその他のディレクトリを作成します。
 
-CakePHP2.0 の変更点として、プラグインは app/Config/bootstrap.php から手動でロードが必要です。
+CakePHP2.0 の変更点として、プラグインは config/bootstrap.php から手動でロードが必要です。
 
 シングルコールで、一つまたは全部をロードできます。
 

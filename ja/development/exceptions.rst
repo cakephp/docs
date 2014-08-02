@@ -533,15 +533,15 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
   Create your own Exception handler with `Exception.handler`
 
 あなた独自の例外ハンドラを作成すれば、例外ハンドリング処理のすべてを完全に制御できるようになります。
-選択したクラスは、あなたの ``app/Config/bootstrap.php`` でロードすべきものですので、どんな例外でもハンドリングすることができます。
+選択したクラスは、あなたの ``config/bootstrap.php`` でロードすべきものですので、どんな例外でもハンドリングすることができます。
 どのようなコールバックタイプでも定義することができます。
 ``Exception.handler`` をセットすることにより、CakePHP は他のすべての例外設定を無視します。
 独自の例外ハンドリングをセットアップする場合は次のようになります::
 
-    // app/Config/core.php の中で
+    // config/core.php の中で
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
-    // app/Config/bootstrap.php の中で
+    // config/bootstrap.php の中で
     App::uses('AppExceptionHandler', 'Lib');
 
     // app/Lib/AppExceptionHandler.php の中で
@@ -556,7 +556,7 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 ..
   Creating your own exception handler gives you full control over the exception
   handling process.  The class you choose should be loaded in your
-  ``app/Config/bootstrap.php``, so it's available to handle any exceptions. You can
+  ``config/bootstrap.php``, so it's available to handle any exceptions. You can
   define the handler as any callback type. By settings ``Exception.handler`` CakePHP
   will ignore all other Exception settings.  A sample custom exception handling setup
   could look like::

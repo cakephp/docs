@@ -1275,7 +1275,7 @@ Saving Entities
 
 When saving request data to your database you need to first hydrate a new entity
 using ``newEntity()`` for passing into ``save()``. For example::
-  
+
   // In a controller
   $articles = TableRegistry::get('Articles');
   $article = $articles->newEntity($this->request->data);
@@ -1590,7 +1590,7 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // in src/Config/bootstrap.php
+    // in config/bootstrap.php
     use Cake\Database\Type;
     Type::map('json', 'App\Database\Type\JsonType');
 

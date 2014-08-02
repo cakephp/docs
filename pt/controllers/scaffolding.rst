@@ -37,7 +37,7 @@ e views padronizadas para visualização de um único registro da base de dados.
 Para adicionar o recurso de `scaffold` à sua aplicação, no controller, adicione
 o atributo ``$scaffold``::
 
-    
+
     class CategoriesController extends AppController {
         public $scaffold;
     }
@@ -70,7 +70,7 @@ IDs ou nomes vindos da tabela groups no formulário de adição de ``User``.
 
     // Em Group.php
     public $hasMany = 'User';
-    
+
     // Em User.php
     public $belongsTo = 'Group';
 
@@ -93,7 +93,7 @@ Criando uma interface administrativa simples com scaffolding
 ============================================================
 
 Se você tiver habilitado as rotas de `admin` em seu arquivo de configuração
-``app/Config/core.php`` com a alteração a seguir
+``config/core.php`` com a alteração a seguir
 ``Configure::write('Routing.prefixes', array('admin'));``, você
 poderá usar o `scaffold` para gerar interfaces administrativas.
 
@@ -112,9 +112,9 @@ Agora você poderá acessar o arcabouço de suas ações administrativas::
 
 Esta é uma forma fácil de criar uma interface de administração simples
 rapidamente. Tenha em mente que você não pode ter ambos os métodos de scaffold,
-um para admin e outro para não-admin ao mesmo tempo. Assim como em um `scaffold` 
+um para admin e outro para não-admin ao mesmo tempo. Assim como em um `scaffold`
 normal você pode sobrescrever um método individual com seu próprio código::
-    
+
     function admin_view($id = null) {
       // código customizado aqui
     }

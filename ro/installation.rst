@@ -1,10 +1,10 @@
 Instalarea
 ##########
 
-CakePHP se repede si usor. Cerintele minime sunt un webserver si o 
+CakePHP se repede si usor. Cerintele minime sunt un webserver si o
 copie de CakePHP. Doar atat! Desi acest manual se concentreaza mai ales
 pe instalarea pe Apache (deoarece este cel mai folosit), puteti configura
-CakePHP sa functioneze pe o varietate de web servere cum ar fi 
+CakePHP sa functioneze pe o varietate de web servere cum ar fi
 LightHTTPD sau Microsoft IIS.
 
 Cerinte
@@ -25,8 +25,8 @@ baze de date:
 
 .. note::
 
-    Toate driverele incluse in distributiile de servere necesita PDO. 
-    Prin urmare ar trebui sa va asigurati ca aveti instalate extensiile 
+    Toate driverele incluse in distributiile de servere necesita PDO.
+    Prin urmare ar trebui sa va asigurati ca aveti instalate extensiile
     PDO corecte.
 
 Licenta
@@ -65,12 +65,12 @@ These can be accessed from GitHub by cloning the
 Permisiuni
 ==========
 
-CakePHP foloseste folderul ``app/tmp`` pentru diferite operatii. 
-Cateva exemple ar fi descrierile Modelelor, cached view-uri si informatii 
+CakePHP foloseste folderul ``app/tmp`` pentru diferite operatii.
+Cateva exemple ar fi descrierile Modelelor, cached view-uri si informatii
 despre sesiune.
 
-Prin urmare, asigurati-va ca folderul ``app/tmp`` si toate subfolderele 
-sale din instalarea dvs de CakePHP sunt *writable* de catre utilizatorul 
+Prin urmare, asigurati-va ca folderul ``app/tmp`` si toate subfolderele
+sale din instalarea dvs de CakePHP sunt *writable* de catre utilizatorul
 pe care functioneaza web server-ul.
 
 Configurare
@@ -205,7 +205,7 @@ Felicitari! Sunteti gata sa :doc:`creati prima dvs aplicatie CakePHP
 </getting-started>`.
 
 Tot nu functioneaza? Dacă obtineți erori de fus orar legate de PHP
-decomentați o linie în ``app/Config/core.php``::
+decomentați o linie în ``config/core.php``::
 
    /**
     * Uncomment this line and correct your server timezone to fix

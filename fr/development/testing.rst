@@ -47,10 +47,10 @@ Tester la Configuration de la Base de Données
 =============================================
 
 Souvenez-vous qu'il faut avoir un niveau de debug d'au moins 1 dans votre
-fichier ``src/Config/app.php`` avant de lancer des tests. Les tests ne sont
+fichier ``config/app.php`` avant de lancer des tests. Les tests ne sont
 pas accessibles via le navigateur quand le debug est égal à 0. Avant de lancer
 des tests, vous devrez vous assurer d'ajouter une configuration de base de
-données ``test`` dans ``src/Config/app.php``. Cette configuration est utilisée
+données ``test`` dans ``config/app.php``. Cette configuration est utilisée
 par CakePHP pour les tables fixture et les données::
 
     'Datasources' => [
@@ -327,7 +327,7 @@ votre code avant dee développer réellement en live le contenu pour
 une application.
 
 CakePHP utilise la connection nommée ``test`` dans votre fichier de
-configuration ``src/Config/datasources.php`` Si la connection n'est pas
+configuration ``config/datasources.php`` Si la connection n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -1314,7 +1314,7 @@ suit:
 
 .. code-block:: bash
 
-    cat > src/Config/app_local.php <<'CONFIG'
+    cat > config/app_local.php <<'CONFIG'
     <?php
     $config = [
         'Datasources' => [
@@ -1330,7 +1330,7 @@ suit:
     ];
     CONFIG
 
-Then uncomment the following line in your ``src/Config/bootstrap.php`` file::
+Then uncomment the following line in your ``config/bootstrap.php`` file::
 
     //Configure::load('app_local.php', 'default');
 

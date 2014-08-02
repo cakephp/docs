@@ -98,31 +98,31 @@ Usando una misma instalación de CakePHP para múltiples aplicaciones
 
 Si estás desarrollando varias aplicaciones a la vez, muchas veces tiene
 sentido compartir la misma versión del núcleo de CakePHP. Hay varias formas
-de conseguirlo. Una de las más sencillas es usar la directiva PHP 
+de conseguirlo. Una de las más sencillas es usar la directiva PHP
 ``include_path``. Para empezar, clona CakePHP en un directorio. Por ejemplo,
 usaremos ``/home/mark/projects``::
 
     git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 Este comando clonará CakePHP en tu directorio ``/home/mark/projects``. Si no quieres
-usar git, puedes descargar el archivo zip del repositorio, todos los demás 
-pasos serán los mismos. Lo siguiente es modificar tu archivo de configuración 
-de PHP ``php.ini``. En sistemas \*nix, este archivo suele estar ubicado en la 
+usar git, puedes descargar el archivo zip del repositorio, todos los demás
+pasos serán los mismos. Lo siguiente es modificar tu archivo de configuración
+de PHP ``php.ini``. En sistemas \*nix, este archivo suele estar ubicado en la
 ruta ``/etc/php.ini``, pero puedes localizarlo fácilmente mediante el comando
-``php -i``, busca la ruta bajo el epígrafe 'Loaded Configuration File'. Cuando 
-hayas localizado el fichero correcto, modifica el parámetro ``include_path`` y 
+``php -i``, busca la ruta bajo el epígrafe 'Loaded Configuration File'. Cuando
+hayas localizado el fichero correcto, modifica el parámetro ``include_path`` y
 añade el directorio ``/home/mark/projects/cakephp/lib``. Ejemplo::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
-Reinicia el servidor web, deberías ver los cambios aplicados en la salida de 
+Reinicia el servidor web, deberías ver los cambios aplicados en la salida de
 ``phpinfo()``.
 
 .. note::
 
     Si utilizas Windows, separa las rutas en el include path con ; en vez de :
 
-Tras modificar este parámetro y reiniciar el servidor web, tus aplicaciones 
+Tras modificar este parámetro y reiniciar el servidor web, tus aplicaciones
 podrán utilizar CakePHP automáticamente.
 
 Producción
@@ -143,9 +143,9 @@ archivos de CakePHP en la ruta ``/cake_install``. Tu sistema de archivos sería
 entonces:
 
 -  /cake\_install/
-   
+
    -  /app
-      
+
       -  /webroot (este directorio es el que configuraremos como ``DocumentRoot``   en el servidor web
 
    -  /lib
@@ -186,7 +186,7 @@ de tu conexión actual de Base de Datos.
 
 ¿ No funciona ? Bueno, estas cosas pasan. Si aparece un mensaje de error que
 habla de la Zona Horaria *timezone*, quita el comentario a la siguiente línea de
-tu fichero app/Config/core.php:
+tu fichero config/core.php:
 
 ::
 

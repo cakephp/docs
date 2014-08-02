@@ -124,7 +124,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's database configuration file is found in
-``/app/Config/database.php.default``. Make a copy of this file in
+``/config/database.php.default``. Make a copy of this file in
 the same directory, but name it ``database.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -165,7 +165,7 @@ in security hashes. The second is defining a custom number (or
 "seed") for use in encryption.
 
 The security salt is used for generating hashes. Change the default
-``Security.salt`` value in ``/app/Config/core.php``. The replacement value
+``Security.salt`` value in ``/config/core.php``. The replacement value
 should be long, hard to guess and be as random as you can make it::
 
     /**
@@ -174,7 +174,7 @@ should be long, hard to guess and be as random as you can make it::
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 The cipher seed is used for encrypt/decrypt strings. Change the default
-``Security.cipherSeed`` value by editing ``/app/Config/core.php``. The
+``Security.cipherSeed`` value by editing ``/config/core.php``. The
 replacement value should be a large random integer::
 
     /**

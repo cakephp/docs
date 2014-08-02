@@ -15,7 +15,7 @@ où un tableau de paramètres peut être inversé en une chaîne URL.
 En utilisant le routing inversé, vous pouvez facilement reconstruire votre
 structure d'URL des applications sans avoir mis à jour tous vos codes.
 
-Les Routes dans une application sont configurées dans ``src/Config/routes.php``.
+Les Routes dans une application sont configurées dans ``config/routes.php``.
 Routes are processed based on the scopes they are defined in. Within each scope
 routes are processed top to bottom, so you should place the most frequently used
 routes at the top of each scope.
@@ -100,7 +100,7 @@ Connecter les Routes
 
 Définir vos propres routes vous permet de définir la façon dont votre
 application va répondre à une URL donnée. Les Routes sont définies dans le
-fichier ``src/Config/routes.php``.
+fichier ``config/routes.php``.
 
 To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
@@ -108,7 +108,7 @@ operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
-    // Dans src/Config/routes.php
+    // Dans config/routes.php
     Router::scope('/', function($routes) {
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
@@ -608,7 +608,7 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In app/Config/routes.php...
+    //In config/routes.php...
 
     Router:scope('/', function($routes) {
         $routes->extensions('json');
@@ -761,7 +761,7 @@ Les valeurs dans le tableau pass sont indicées numériquement basé sur l'ordre
 dans lequel elles apparaissent dans l'URL appelé::
 
     debug($this->request->params['pass']);
-    debug($this->passedArgs); 
+    debug($this->passedArgs);
 
 Les deux du dessus sortiraient::
 
@@ -798,7 +798,7 @@ appelé 'articles' à la place, vous devrez aller dans toute votre application
 en renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(
-        'View', 
+        'View',
         ['controller' => 'Articles', 'action' => 'view', $id]
     );
 
@@ -816,7 +816,7 @@ spéciales::
         '?' => ['page' => 1],
         '#' => 'top'
     ]);
-    
+
     // va générer une URL comme.
     /articles/index?page=1#top
 
@@ -880,7 +880,7 @@ Custom Route Classes
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin. 
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin.
 * Route classes should extend :php:class:`Cake\\Routing\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 

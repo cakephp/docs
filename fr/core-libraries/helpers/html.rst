@@ -944,7 +944,7 @@ les utiliser.
         // Affichera
         /posts/search?foo=bar#first
 
-    Pour plus d'information voir 
+    Pour plus d'information voir
     `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
     dans l' API.
 
@@ -973,7 +973,7 @@ Changer l'affichage des balises avec le Helper Html
     de caractères vers le fichier PHP contenant les balises que vous
     souhaitez charger, soit avec un tableau des templates à ajouter/remplacer::
 
-        // Charger les templates à partir de src/Config/my_html.php
+        // Charger les templates à partir de config/my_html.php
         $this->Html->templates('my_html.php');
 
         // Charger les templates spécifiques.

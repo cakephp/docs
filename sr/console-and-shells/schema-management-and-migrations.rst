@@ -14,7 +14,7 @@ using::
 
     $ Console/cake schema generate
 
-This will generate a schema.php file in your ``app/Config/Schema``
+This will generate a schema.php file in your ``config/Schema``
 directory.
 
 .. note::

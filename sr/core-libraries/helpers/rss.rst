@@ -16,7 +16,7 @@ After a few simple steps you can simply append the desired
 extension .rss to ``posts/index`` making your URL ``posts/index.rss``.
 Before we jump too far ahead trying to get our webservice up and
 running we need to do a few things. First parseExtensions needs to
-be activated, this is done in ``app/Config/routes.php``::
+be activated, this is done in ``config/routes.php``::
 
     Router::parseExtensions('rss');
 

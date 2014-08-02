@@ -15,14 +15,14 @@ CakePHPを使ってRESTのAPIを提供するのはすごく簡単です。
 簡単なセットアップ
 =========================
 
-RESTを動かすための手っ取り早い方法は、 app/Config/routes.php ファイルに数行追記することです。
+RESTを動かすための手っ取り早い方法は、 config/routes.php ファイルに数行追記することです。
 Routerオブジェクトは、 ``mapResources()`` というメソッドを提供していて、
 これはコントローラへのRESTアクセスのために、いくつかのデフォルトルートを設定するものです。
 ``mapResources()`` は、routes.phpの最後にある ``require CAKE . 'Config' . DS . 'routes.php';`` の記述や、
 routesをオーバーライドする他のroutesよりも前に呼び出す必要があります。
 例えば、レシピ(recipe)データベースにアクセスするRESTは、下記のようにします ::
 
-    //In app/Config/routes.php...
+    //In config/routes.php...
 
     Router::mapResources('recipes');
     Router::parseExtensions();

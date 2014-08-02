@@ -149,13 +149,13 @@ et/ou un port utilisant les arguments suivants::
 
     Console/cake server -H 192.168.13.37 -p 5673
 
-Cela affichera votre application sur ``http://192.168.13.37:5673/``. 
+Cela affichera votre application sur ``http://192.168.13.37:5673/``.
 
 C'est tout! Votre application CakePHP est ok et elle est lancée sans avoir
 à configurer un serveur web.
 
 .. warning::
-    
+
     Ceci n'a pas vocation à être utilisé, ni ne devrait être utilisé dans un
     environnement de production.
 
@@ -251,7 +251,7 @@ Etant donnée le type de configuration, j'aurai besoin de modifier mon fichier
 webroot/index.php (qui finira dans /var/www/mysite/index.php, dans cet exemple)
 pour ressembler à ce qui suit::
 
-    // src/Config/paths.php (partial, comments removed)
+    // config/paths.php (partial, comments removed)
     define('ROOT', '/home/me');
     define('APP_DIR', 'myapp');
     define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
