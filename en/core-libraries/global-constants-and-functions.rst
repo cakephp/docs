@@ -102,24 +102,6 @@ such as debugging and translating content.
     for count $count. Some languages have more than one form for plural
     messages dependent on the count.
 
-.. php:function:: am(array $one, $two, $three...)
-
-    Merges all the arrays passed as parameters and returns the merged
-    array.
-
-.. php:function:: config()
-
-    Can be used to load files from your application ``config``-folder
-    via include\_once. Function checks for existence before include and
-    returns boolean. Takes an optional number of arguments.
-
-    Example: ``config('some_file', 'myconfig');``
-
-.. php:function:: convertSlash(string $string)
-
-    Converts forward slashes to underscores and removes the first and
-    last underscores in a string. Returns the converted string.
-
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     If the application's DEBUG level is non-zero, $var is printed out.
@@ -140,11 +122,6 @@ such as debugging and translating content.
     you plan to distribute the code), since it's a full emulation
     wrapper.
 
-.. php:function:: fileExistsInPath(string $file)
-
-    Checks to make sure that the supplied file is within the current
-    PHP include\_path. Returns a boolean result.
-
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
     Convenience wrapper for ``htmlspecialchars()``.
@@ -160,10 +137,6 @@ such as debugging and translating content.
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping <pre> tags around the output.
-
-.. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
-
-    Sorts given $array by key $sortby.
 
 Core Definition Constants
 =========================
