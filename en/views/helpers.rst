@@ -1,7 +1,6 @@
 Helpers
 #######
 
-
 Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
 shared between many views, elements, or layouts. This chapter will

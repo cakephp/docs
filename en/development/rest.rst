@@ -24,13 +24,13 @@ controller actions, we can move on to creating the logic in our
 controller actions. A basic controller might look something like
 this::
 
-    // Controller/RecipesController.php
+    // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
         public $components = array('RequestHandler');
 
         public function index() {
-            $recipes = $this->Recipe->find('all');
+            $recipes = $this->Recipes->find('all');
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
@@ -38,7 +38,7 @@ this::
         }
 
         public function view($id) {
-            $recipe = $this->Recipe->findById($id);
+            $recipe = $this->Recipes->findById($id);
             $this->set(array(
                 'recipe' => $recipe,
                 '_serialize' => array('recipe')
@@ -46,11 +46,14 @@ this::
         }
 
         public function edit($id) {
-            $this->Recipe->id = $id;
-            if ($this->Recipe->save($this->request->data)) {
-                $message = 'Saved';
-            } else {
-                $message = 'Error';
+            $recipe = $this->Recipes->get($id);
+            if ($this->request->is(['post', 'put'])) {
+                $this->Recipes->patchEntity($recipe, $this->request->data);
+                if ($this->Recipes->save($this->request->data)) {
+                    $message = 'Saved';
+                } else {
+                    $message = 'Error';
+                }
             }
             $this->set(array(
                 'message' => $message,
@@ -59,7 +62,8 @@ this::
         }
 
         public function delete($id) {
-            if ($this->Recipe->delete($id)) {
+            $recipe = $this->Recipes->get($id);
+            if ($this->Recipes->delete($recipe)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';
@@ -81,7 +85,7 @@ serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
 define the ``_serialize`` view variable, and instead use view files. We place
-the REST views for our RecipesController inside ``app/View/recipes/xml``. We can also use
+the REST views for our RecipesController inside ``src/Template/recipes/xml``. We can also use
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
@@ -100,14 +104,21 @@ for our use in those views.
 The rendered XML will end up looking something like this::
 
     <recipes>
-        <recipe id="234" created="2008-06-13" modified="2008-06-14">
-            <author id="23423" first_name="Billy" last_name="Bob"></author>
-            <comment id="245" body="Yummy yummmy"></comment>
+        <recipe>
+            <id>234</id>
+            <created>2008-06-13</created>
+            <modified>2008-06-14</modified>
+            <author>
+                <id>23423</id>
+                <first_name>Billy</first_name>
+                <last_name>Bob</last_name>
+            </author>
+            <comment>
+                <id>245</id>
+                <body>Yummy yummmy</body>
+            </comment>
         </recipe>
-        <recipe id="3247" created="2008-06-15" modified="2008-06-15">
-            <author id="625" first_name="Nate" last_name="Johnson"></author>
-            <comment id="654" body="This is a comment for this tasty dish."></comment>
-        </recipe>
+        ...
     </recipes>
 
 Creating the logic for the edit action is a bit trickier, but not by much. Since
@@ -117,7 +128,7 @@ as input. Not to worry, the
 :php:class:`Cake\\Routing\\Router` classes make things much easier. If a POST or
 PUT request has an XML content-type, then the input is run through  CakePHP's
 :php:class:`Xml` class, and the array representation of the data is assigned to
-`$this->request->data`.  Because of this feature, handling XML and POST data in
+``$this->request->data``.  Because of this feature, handling XML and POST data in
 parallel is seamless: no changes are required to the controller or model code.
 Everything you need should end up in ``$this->request->data``.
 
@@ -128,7 +139,7 @@ Typically REST applications not only output content in alternate data formats
 they also accept data in different formats. In CakePHP, the
 :php:class:`RequestHandlerComponent` helps facilitate this. By default
 it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in `$this->request->data`.
+and supply the array version of that data in ``$this->request->data``.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`
 

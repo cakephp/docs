@@ -12,9 +12,9 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf. (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf.)
 
-These files can vary between different distributions and Apache versions.
-You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
-
+These files can vary between different distributions and Apache versions.  You
+may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for
+further information.
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
@@ -147,9 +147,7 @@ Pretty URLs on nginx
 nginx does not make use of .htaccess files like Apache, so it is necessary to
 create those rewritten URLs in the site-available configuration. Depending upon
 your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance.
-
-::
+you will need PHP running as a FastCGI instance::
 
     server {
         listen   80;
@@ -238,8 +236,7 @@ I Don't / Can't Use URL Rewriting
 =================================
 
 If you don't want to or can't use URL rewriting on your webserver,
-refer to the ::doc:`core configuration</development/configuration>`.
-
+refer to the :ref:`core configuration <core-configuration-baseurl>`.
 
 
 .. meta::
