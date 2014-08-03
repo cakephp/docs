@@ -83,6 +83,9 @@ Basics
 ======
 
 * ``LogError()`` was removed, it provided no benefit and is rarely/never used.
+* The following global functions have been removed: ``config()``, ``cache()``,
+  ``clearCache()``, ``convertSlashes()``, ``am()``, ``fileExistsInPath()``,
+  ``sortByKey()``.
 
 Debugging
 =========
