@@ -56,7 +56,7 @@ An example of using these options::
     // In your View
     <?= $this->Flash->render('positive') ?>
 
-    // In src/Template/Element/Flash/success.ctp
+    <!-- In src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
