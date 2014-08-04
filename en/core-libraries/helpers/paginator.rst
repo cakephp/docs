@@ -464,7 +464,7 @@ of page navigation, also supplied by the PaginationHelper::
     <?= $this->Paginator->prev('« Previous') ?>
     <?= $this->Paginator->next('Next »') ?>
 
-    // prints X of Y, where X is current page and Y is number of pages
+    // Prints X of Y, where X is current page and Y is number of pages
     <?= $this->Paginator->counter() ?>
 
 The wording output by the counter() method can also be customized

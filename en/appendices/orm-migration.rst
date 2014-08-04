@@ -445,7 +445,7 @@ you are using column names or table names that contain special characters or are
 reserved words. If required, you can enable identifier quoting when configuring
 a connection::
 
-    // in config/app.php
+    // In config/app.php
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Driver\Mysql',
@@ -518,7 +518,7 @@ The behavior providing the ``slug`` method will receive only 1 argument, and its
 method signature should look like::
 
     public function slug($value) {
-        // code here.
+        // Code here.
     }
 
 Callback Method Signature Changes
@@ -529,7 +529,7 @@ their previous arguments, they need to expect an event object as their first
 argument::
 
     public function beforeFind(Event $event, Query $query, array $options) {
-        // code.
+        // Code.
     }
 
 See :ref:`table-callbacks` for the signatures of all the callbacks a behavior

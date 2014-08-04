@@ -308,7 +308,7 @@ the ``stopPropagation`` method on the event object::
 
     public function doSomething($event) {
         // ...
-        return false; // stops the event
+        return false; // Stops the event
     }
 
     public function updateBuyStatistic($event) {

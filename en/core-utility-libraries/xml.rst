@@ -25,7 +25,7 @@ a SimpleXMLElement or DOMDocument object (depending of your options parameter
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // $xml now is a instance of SimpleXMLElement
 
-    //or
+    // Or
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // $xml now is a instance of SimpleXMLElement
 
@@ -47,10 +47,10 @@ For example, you can load XML from strings::
 You can also build Xml objects from either local files, or remote files. Remote
 files will be fetched with :doc:`/core-utility-libraries/httpclient`::
 
-    // local file
+    // Local file
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
-    // remote file
+    // Remote file
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
 You can also build Xml objects using an array::

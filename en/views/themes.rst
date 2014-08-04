@@ -45,13 +45,13 @@ All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like view files, if a file isn't in the theme
 folder, it will default to the main webroot folder::
 
-    //When in a theme with the name of 'purple_cupcake'
+    // When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
 
-    //creates a path like
+    // Creates a path like
     /purple_cupcake/css/main.css
 
-    // and links to
+    // And links to
     plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::

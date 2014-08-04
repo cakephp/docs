@@ -801,7 +801,7 @@ requests will be GET requests. You can simulate any HTTP verb by setting the::
             'title' => 'New post'
         ];
         $this->testAction('/posts/edit', ['data' => $data, 'method' => 'put']);
-        // some assertions.
+        // Some assertions.
     }
 
 Choosing the Return Type

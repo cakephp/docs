@@ -50,13 +50,13 @@ the client and its request.
             public function beforeFilter() {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html)
-                    // response
+                    // response.
                 } elseif ($this->RequestHandler->accepts('xml')) {
                     // Execute XML-only code
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
                     // Executes if the client accepts any of the above: XML, RSS
-                    // or Atom
+                    // or Atom.
                 }
             }
         }

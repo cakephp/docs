@@ -99,7 +99,7 @@ Folder API
         $folder = new Folder('/path/to/folder');
         $folder->copy(array(
             'to' => '/path/to/new/folder',
-            'from' => '/path/to/copy/from', // will cause a cd() to occur
+            'from' => '/path/to/copy/from', // Will cause a cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
             'scheme' => Folder::SKIP  // Skip directories/files that already exist.
@@ -252,13 +252,13 @@ Folder API
         /*
         Array
         (
-            [0] => Array // folders
+            [0] => Array // Folders
                 (
                     [0] => css
                     [1] => img
                     [2] => js
                 )
-            [1] => Array // files
+            [1] => Array // Files
                 (
                     [0] => .htaccess
                     [1] => favicon.ico

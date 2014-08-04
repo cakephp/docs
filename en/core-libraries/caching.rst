@@ -213,10 +213,10 @@ For example::
         return $cloud;
     }
 
-    // generate cloud data
+    // Generate cloud data
     // ...
 
-    // store data in cache
+    // Store data in cache
     Cache::write('cloud', $cloud);
     return $cloud;
 
@@ -312,7 +312,7 @@ After setting an integer value you can manipulate it using ``increment()`` and
     // Later on
     Cache::decrement('initial_count');
 
-    // or
+    // Or
     Cache::increment('initial_count');
 
 .. note::

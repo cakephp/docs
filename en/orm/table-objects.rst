@@ -1039,7 +1039,7 @@ If you have defined some custom finder methods in your associated table, you can
 use them inside ``contain``::
 
     // Bring all articles, but only bring the comments that are approved and
-    // popular
+    // popular.
     $query = $articles->find()->contain([
         'Comments' => function($q) {
            return $q->find('approved')->find('popular');
@@ -1190,13 +1190,13 @@ Result sets allow you to easily cache/serialize or JSON encode results for API r
 
     $results = $query->all();
 
-    // serialized
+    // Serialized
     $serialized = serialize($results);
 
     // Cache
     Cache::write('my_results', $results);
 
-    // json
+    // Json
     $json = json_encode($results);
 
 Both serializing and JSON encoding result sets work as you would expect. The
@@ -1604,11 +1604,11 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // in config/bootstrap.php
+    // In config/bootstrap.php
     use Cake\Database\Type;
     Type::map('json', 'App\Database\Type\JsonType');
 
-    // in src/Model/Table/UsersTable.php
+    // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
     class UsersTable extends Table {
@@ -2182,7 +2182,7 @@ what you allow your users to change or add in the entities. For example, by
 sending an array in the request containing the ``user_id`` an attacker could change the
 owner of an article, causing undesirable effects::
 
-    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
 
@@ -2193,7 +2193,7 @@ setting the default columns that can be safely set from a request using the
 The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
-    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
 
     // Only allow title to be changed
