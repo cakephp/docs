@@ -197,10 +197,10 @@ comme Config, Console, Lib, webroot, etc...
 Si vous oubliez de définir ces classes spéciales, CakePHP vous donnera
 des erreurs "Missing Controller" jusqu'à ce que ce soit fait.
 
-Merci de noter que le processus de création de plugins peut être méchamment
+Notez que le processus de création de plugins peut être
 simplifié en utilisant le shell de CakePHP.
 
-Pour cuisiner un plugin, merci d'utiliser la commande suivante::
+Pour cuisiner un plugin, utilisez la commande suivante::
 
     user@host$ cake bake plugin ContactManager
 
@@ -209,7 +209,7 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
 
     user@host$ cake bake controller Contacts --plugin ContactManager
 
-Merci de vous référer au chapitre
+Référez-vous au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande.
 
