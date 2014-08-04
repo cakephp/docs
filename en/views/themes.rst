@@ -48,10 +48,10 @@ folder, it will default to the main webroot folder::
     // When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
 
-    // Creates a path like
+    // creates a path like
     /purple_cupcake/css/main.css
 
-    // And links to
+    // and links to
     plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::
