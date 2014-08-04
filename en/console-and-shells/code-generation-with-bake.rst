@@ -9,7 +9,7 @@ functional application in just a few minutes. In fact, Bake is a natural step to
 take once an application has been scaffolded.
 
 Depending on how your computer is configured, you may have to set
-execute rights on the cake bash script to call it using ``Console/cake 
+execute rights on the cake bash script to call it using ``Console/cake
 bake``. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
@@ -89,7 +89,7 @@ ShellTask.php file should look like::
 
 Once this file has been created, we need to create a template that bake can use
 when generating code. Create
-``src/Console/Command/Template/app/classes/shell.ctp``. In this file we'll add
+``src/Template/Bake/app/classes/shell.ctp``. In this file we'll add
 the following content::
 
     <?php
@@ -109,27 +109,27 @@ the following content::
     }
 
 You should now see your new task in the output of ``Console/cake bake``. You can
-run your new task by running ``Console/cake bake shell Example --theme app``.
+run your new task by running ``Console/cake bake shell Example --template app``.
 This will generate a new ``ExampleShell`` class for your application to use.
 
 Modify Default HTML/Code Produced by bake
 =========================================
 
 If you wish to modify the default HTML output produced by the
-"bake" command, you can create your own bake 'theme' which allows you to replace
-some or all of the templates that bake uses. To create a new bake theme do the
+"bake" command, you can create your own bake 'template' which allows you to replace
+some or all of the templates that bake uses. To create a new bake template do the
 following:
 
-#. Create a new directory in ``src/Console/Templates/[name]``.
+#. Create a new directory in ``src/Template/Bake/[name]``.
 #. Copy any templates you want to override from
-   ``vendor/cakephp/cakephp/src/Console/Templates/default``.  to matching
+   ``vendor/cakephp/cakephp/src/Template/Bake/default``.  to matching
    directories in your application/plugin.
-#. When running bake use the ``--theme`` option to specify the bake theme you
+#. When running bake use the ``--template`` option to specify the bake template you
    want to use.
 
 .. note::
 
-    Bake theme names need to be unique, so don't use 'default'.
+    Bake template names need to be unique, so don't use 'default'.
 
 
 .. meta::

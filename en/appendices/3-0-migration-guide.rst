@@ -207,6 +207,12 @@ For example, if you had a ``hello_world()`` method inside a shell and invoked it
 with ``Console/cake my_shell hello_world``, you will need to rename the method
 to ``helloWorld``. There are no changes required in the way you invoke commands.
 
+BakeShell / TemplateTask
+------------------------
+
+- Bake templates have been moved under `src/Template/Bake`. Also the param
+  ``theme`` for bake template selection has been renamed to ``template``.
+
 Event
 =====
 
