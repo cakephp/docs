@@ -66,14 +66,14 @@ plugins. If for example you had a database logger called
 adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
 configuring our DatabaseLog would look like::
 
-    // for src/Log
+    // For src/Log
     Log::config('otherFile', [
         'className' => 'DatabaseLog',
         'model' => 'LogEntry',
         // ...
     ]);
 
-    // for plugin called LoggingPack
+    // For plugin called LoggingPack
     Log::config('otherFile', [
         'className' => 'LoggingPack.DatabaseLog',
         'model' => 'LogEntry',
@@ -92,7 +92,7 @@ properties are passed to the log adapter's constructor as an array.::
         }
 
         public function write($level, $message, $scope = []) {
-            // write to the database.
+            // Write to the database.
         }
     }
 
@@ -269,8 +269,8 @@ the log messages will be directed to those loggers. If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
-    // configure tmp/logs/shops.log to receive all levels, but only
-    // those with `orders` and `payments` scope
+    // Configure tmp/logs/shops.log to receive all levels, but only
+    // those with `orders` and `payments` scope.
     Log::config('shops', [
         'className' => 'FileLog',
         'levels' => [],
@@ -278,8 +278,8 @@ message. For example::
         'file' => 'shops.log',
     ]);
 
-    // configure tmp/logs/payments.log to receive all levels, but only
-    // those with `payments` scope
+    // Configure tmp/logs/payments.log to receive all levels, but only
+    // those with `payments` scope.
     Log::config('payments', [
         'className' => 'FileLog',
         'levels' => [],

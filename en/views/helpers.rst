@@ -228,7 +228,7 @@ helper. To do so, you can specify helpers you wish to use with a
 
         public function makeEdit($title, $url) {
             // Use the HTML helper to output
-            // formatted data:
+            // Formatted data:
 
             $link = $this->Html->link($title, $url, ['class' => 'edit']);
 

@@ -63,7 +63,7 @@ to the constructor of ``Email``::
     $email = new Email();
     $email->profile('default');
 
-    //or in constructor::
+    // Or in constructor
     $email = new Email('default');
 
 Instead of passing a string which matches a preset configuration name, you can
@@ -72,7 +72,7 @@ also just load an array of options::
     $email = new Email();
     $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-    // or in constructor
+    // Or in constructor
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 Configuring Transports
@@ -338,7 +338,7 @@ transport). To start off your file should look like::
     class ExampleTransport extends AbstractTransport {
 
         public function send(Email $email) {
-            // magic inside!
+            // Magic inside!
         }
 
     }
@@ -414,7 +414,7 @@ message id (since there is no host name in a CLI environment)::
 
     $Email->domain('www.example.org');
     // Results in message ids like ``<UUID@www.example.org>`` (valid)
-    // instead of `<UUID@>`` (invalid)
+    // Instead of `<UUID@>`` (invalid)
 
 A valid message id can help to prevent emails ending up in spam folders.
 

@@ -103,15 +103,15 @@ in ``/src/Controller/RecipesController.php`` and contain::
 
         class RecipesController extends AppController {
             public function view($id) {
-                //action logic goes here..
+                // Action logic goes here..
             }
 
             public function share($customerId, $recipeId) {
-                //action logic goes here..
+                // Action logic goes here..
             }
 
             public function search($query) {
-                //action logic goes here..
+                // Action logic goes here..
             }
         }
 
@@ -237,7 +237,7 @@ rendered from the controller.
             'base_price' => 23.95
         ];
 
-        // make $color, $type, and $base_price
+        // Make $color, $type, and $base_price
         // available to the view:
 
         $this->set($data);
@@ -402,7 +402,7 @@ Other Useful Methods
 
         class UserController extends AppController {
             public function delete($id) {
-                // delete code goes here, and then...
+                // Delete code goes here, and then...
                 if ($this->referer() != '/') {
                     return $this->redirect($this->referer());
                 }
@@ -416,7 +416,7 @@ Other Useful Methods
 
         class UserController extends AppController {
             public function delete($id) {
-                // delete code goes here, and then...
+                // Delete code goes here, and then...
                 return $this->redirect(
                     $this->referer(['action' => 'index'])
                 );

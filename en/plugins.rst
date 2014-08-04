@@ -439,7 +439,7 @@ that you prefix the plugin name before the name of the component. For example::
     class ExampleComponent extends Component {
     }
 
-    // within your controllers:
+    // Within your controllers:
     public $components = ['ContactManager.Example'];
 
 The same technique applies to Helpers and Behaviors.

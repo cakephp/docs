@@ -56,7 +56,7 @@ You can also define ``_serialize`` as an array of view variables to combine::
         public $components = ['RequestHandler'];
 
         public function index() {
-            // some code that created $posts and $comments
+            // Some code that created $posts and $comments
             $this->set(compact('posts', 'comments'));
             $this->set('_serialize', ['posts', 'comments']);
         }

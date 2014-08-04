@@ -214,7 +214,7 @@ way you include them in controllers - using the ``$components`` var::
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
-        // the other component your component uses
+        // The other component your component uses
         public $components = ['Existing'];
 
         public function initialize(Controller $controller) {

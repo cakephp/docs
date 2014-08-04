@@ -221,7 +221,7 @@ something like::
             parent::__construct();
         }
 
-        // read data from the session.
+        // Read data from the session.
         public function read($id) {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
@@ -230,7 +230,7 @@ something like::
             return parent::read($id);
         }
 
-        // write data into the session.
+        // Write data into the session.
         public function write($id, $data) {
             $result = Cache::write($id, $data, $this->cacheKey);
             if ($result) {
@@ -239,13 +239,13 @@ something like::
             return false;
         }
 
-        // destroy a session.
+        // Destroy a session.
         public function destroy($id) {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
-        // removes expired sessions.
+        // Removes expired sessions.
         public function gc($expires = null) {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }

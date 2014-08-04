@@ -101,7 +101,7 @@ The CookieComponent offers a number of methods for working with Cookies.
         // using the dot notation as an array use the following
         $this->Cookie->read('User');
 
-        // this outputs something like ['name' => 'Larry', 'role' => 'Lead']
+        // This outputs something like ['name' => 'Larry', 'role' => 'Lead']
 
 .. php:method:: check($key)
 

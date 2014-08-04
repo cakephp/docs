@@ -111,7 +111,7 @@ a controller. You can also pass the resulting query of a find method::
 If you want to paginate a different model you can provide a query for it, the
 table object itself, or its name::
 
-    //Using a query
+    // Using a query
     $comments = $this->paginate($commentsTable->find());
 
     // Using the model name.
@@ -167,7 +167,7 @@ that can be fetched to 100. If this default is not appropriate for your
 application, you can adjust it as part of the pagination options::
 
     public $paginate = [
-        // other keys here.
+        // Other keys here.
         'maxLimit' => 10
     ];
 

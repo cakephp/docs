@@ -248,7 +248,7 @@ share the same value for a property::
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
 
-    //Result will look like this when converted to array:
+    // Result will look like this when converted to array:
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -279,7 +279,7 @@ should be already familiar to you::
         retrun $student->grade > 6 ? 'approved' : 'denied';
     });
 
-    //Result could look like this when converted to array:
+    // Result could look like this when converted to array:
     ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
@@ -290,7 +290,7 @@ function ``indexBy()``::
 
     $usersById = $users->indexBy('id');
 
-    //When converted to array result could look like
+    // When converted to array result could look like
     [
         1 => 'markstory',
         3 => 'jose_zap',
@@ -433,7 +433,7 @@ flatten it::
 
     $nested->listNested()->toArray();
 
-    //Returns
+    // Returns
     [
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
@@ -448,7 +448,7 @@ instruct it to only return the leaf elements in the tree::
 
     $nested->listNested()->toArray();
 
-    //Returns
+    // Returns
     [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
@@ -494,7 +494,7 @@ some A/B tests to, you can use the ``sample()`` function::
 
     $collection = new Collection($people);
 
-    // withdraw maximum 20 random users from this collection
+    // Withdraw maximum 20 random users from this collection
     $testSubjects = $collection->sample(20);
 
 ``sample()`` will take at most the number of values you specify in the first

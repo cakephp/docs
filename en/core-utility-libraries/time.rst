@@ -17,7 +17,7 @@ use the ``Time`` class::
         public function afterLogin() {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
-                // greet user with a happy birthday message
+                // Greet user with a happy birthday message
                 $this->Flash->success(__('Happy birthday to you...'));
             }
         }
@@ -120,7 +120,7 @@ dates. CakePHP makes this a snap::
     // Prints a localized datetime stamp.
     echo $now;
 
-    // outputs '4/20/14, 10:10 PM' for the en-US locale
+    // Outputs '4/20/14, 10:10 PM' for the en-US locale
     $now->i18nFormat();
 
     // Use the full date and time format
@@ -129,7 +129,7 @@ dates. CakePHP makes this a snap::
     // Use full date but short time format
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
 
-    // outputs '2014-04-20 22:10'
+    // Outputs '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
 
 .. php:method:: nice()

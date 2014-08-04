@@ -60,7 +60,7 @@ works::
     }
 
     public function blackhole($type) {
-        // handle errors.
+        // Handle errors.
     }
 
 The ``$type`` parameter can have the following values:

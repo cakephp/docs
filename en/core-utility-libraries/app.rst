@@ -15,7 +15,7 @@ Finding Classes
 This method is used to resolve classnames throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved classname::
 
-    // Resolve a short classname with the namespace + suffix
+    // Resolve a short classname with the namespace + suffix.
     App::classname('Auth', 'Controller/Component', 'Component');
     // Returns Cake\Controller\Component\AuthComponent
 
@@ -44,7 +44,7 @@ Used to get locations for paths based on conventions::
 This can be done for all namespaces that are part of your application. You
 can also fetch paths for a plugin::
 
-    // returns the component paths in DebugKit
+    // Returns the component paths in DebugKit
     App::path('Component', 'DebugKit');
 
 ``App::path()`` will only return the default path, and will not be able to
@@ -70,15 +70,15 @@ App knows about.
 
 Example usage::
 
-    // returns ['DebugKit', 'Blog', 'User'];
+    // Returns ['DebugKit', 'Blog', 'User'];
     App::objects('plugin');
 
-    // returns ['PagesController', 'BlogController'];
+    // Returns ['PagesController', 'BlogController'];
     App::objects('Controller');
 
 You can also search only within a plugin's objects by using the plugin dot syntax.::
 
-    // returns ['MyPluginPost', 'MyPluginComment'];
+    // Returns ['MyPluginPost', 'MyPluginComment'];
     App::objects('MyPlugin.Model');
 
 

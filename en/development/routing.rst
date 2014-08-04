@@ -324,7 +324,7 @@ elements should also be made available as passed arguments::
 
     // SomeController.php
     public function view($articleId = null, $slug = null) {
-        // some code here...
+        // Some code here...
     }
 
     // routes.php
@@ -343,7 +343,7 @@ in the URL array like below and CakePHP will know how to form the URL
 as defined in the routes::
 
     // view.ctp
-    // this will return a link to /blog/3-CakePHP_Rocks
+    // This will return a link to /blog/3-CakePHP_Rocks
     echo $this->Html->link('CakePHP Rocks', [
         'controller' => 'Blog',
         'action' => 'view',
@@ -372,7 +372,7 @@ can be used in reverse routing to identify the route you want to use::
     $url = Router::url('login');
 
     // Generate a URL using a named route,
-    // with some query string args
+    // with some query string args.
     $url = Router::url('login', ['username' => 'jimmy']);
 
 If your route template contains any route elements like ``:controller`` you'll
@@ -452,7 +452,7 @@ build this link using the HTML helper::
         ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
-    // leave a prefix
+    // Leave a prefix
     echo $this->Html->link(
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
@@ -474,7 +474,7 @@ creates a new routing scope for the plugin's routes::
 
     Router::plugin('DebugKit', function($routes) {
         // Routes connected here are prefixed with '/debug_kit' and
-        // have the plugin route element set to 'DebugKit'
+        // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
     });
 
@@ -483,7 +483,7 @@ When creating plugin scopes, you can customize the path element used with the
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
         // Routes connected here are prefixed with '/debugger' and
-        // have the plugin route element set to 'DebugKit'
+        // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
     });
 
@@ -578,7 +578,7 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In config/routes.php...
+    // In config/routes.php...
 
     Router:scope('/', function($routes) {
         $routes->extensions('json');
@@ -780,7 +780,7 @@ document fragments using special keys::
         '#' => 'top'
     ]);
 
-    // will generate a URL like.
+    // Will generate a URL like.
     /articles/index?page=1#top
 
 Router will also convert any unknown parameters in a routing array to
@@ -820,8 +820,8 @@ a destination within your application or an outside location::
         '/home/*',
         ['controller' => 'Articles', 'action' => 'view'],
         ['persist' => true]
-        // or ['persist'=>['id']] for default routing where the
-        // view action expects $id as an argument
+        // Or ['persist'=>['id']] for default routing where the
+        // view action expects $id as an argument.
     );
 
 Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to

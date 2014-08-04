@@ -50,19 +50,19 @@ properties and methods (if any) of the supplied variable::
 
     Debugger::dump($foo);
 
-    // outputs
+    // Outputs
     array(
         1,
         2,
         3
     )
 
-    // simple object
+    // Simple object
     $car = new Car();
 
     Debugger::dump($car);
 
-    // outputs
+    // Outputs
     object(Car) {
         color => 'red'
         make => 'Toyota'
@@ -116,7 +116,7 @@ lines around it.::
 
     pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
-    //will output the following.
+    // Will output the following.
     Array
     (
         [0] => <code><span style="color: #000000"> * @access public</span></code>

@@ -129,10 +129,10 @@ Environment Variables (from $_SERVER and $_ENV)
 a getter/setter for enviroment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
-    //Get a value
+    // Get a value
     $value = $this->request->env('HTTP_HOST');
 
-    //Set a value. Generally helpful in testing.
+    // Set a value. Generally helpful in testing.
     $this->request->env('REQUEST_METHOD', 'POST');
 
 XML or JSON Data
@@ -449,7 +449,7 @@ You can accomplish that by using :php:meth:`Cake\\Network\\Response::file()`::
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
         // Return response object to prevent controller from trying to render
-        // a view
+        // a view.
         return $this->response;
     }
 
@@ -487,11 +487,11 @@ a pdf or an ics generated on the fly from a string::
         $this->response->body($icsString);
         $this->response->type('ics');
 
-        //Optionally force file download
+        // Optionally force file download
         $this->response->download('filename_for_download.ics');
 
         // Return response object to prevent controller from trying to render
-        // a view
+        // a view.
         return $this->response;
     }
 
@@ -534,7 +534,7 @@ You sometimes need to force browsers not to cache the results of a controller
 action. :php:meth:`Cake\\Network\\Response::disableCache()` is intended for just that::
 
     public function index() {
-        // do something.
+        // Do something.
         $this->response->disableCache();
     }
 
@@ -549,7 +549,7 @@ You can also tell clients that you want them to cache responses. By using
 :php:meth:`Cake\\Network\\Response::cache()`::
 
     public function index() {
-        //do something
+        // Do something.
         $this->response->cache('-1 minute', '+5 days');
     }
 
@@ -603,13 +603,13 @@ fresh::
 
     public function view() {
         // ...
-        // set the Cache-Control as public for 3600 seconds
+        // Set the Cache-Control as public for 3600 seconds
         $this->response->sharable(true, 3600);
     }
 
     public function my_data() {
         // ...
-        // set the Cache-Control as private for 3600 seconds
+        // Set the Cache-Control as private for 3600 seconds
         $this->response->sharable(false, 3600);
     }
 

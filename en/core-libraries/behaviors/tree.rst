@@ -124,13 +124,13 @@ having to change their parent::
 
     $node = $categories->get(5);
 
-    // Move the node so it shows up one position up when listing children
+    // Move the node so it shows up one position up when listing children.
     $categories->moveUp($node);
 
-    // Move the node to the top of the list inside the same level
+    // Move the node to the top of the list inside the same level.
     $categories->moveUp($node, true);
 
-    //Move the node to the bottom
+    // Move the node to the bottom.
     $categories->moveDown($node, true);
 
 Configuration

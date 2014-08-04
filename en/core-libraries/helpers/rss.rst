@@ -55,7 +55,7 @@ the same::
 
     // Modify the Posts Controller action that corresponds to
     // the action which deliver the rss feed, which is the
-    // index action in our example
+    // Index action in our example.
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
@@ -67,7 +67,7 @@ the same::
         }
 
         // this is not an Rss request, so deliver
-        // data used by website's interface
+        // data used by website's interface.
         $this->paginate['Post'] = [
             'order' => 'Post.created DESC',
             'limit' => 10

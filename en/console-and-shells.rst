@@ -210,9 +210,9 @@ will call this method when the task is invoked. A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    // found in src/Console/Command/SeaShell.php
+    // Found in src/Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-        // found in src/Console/Command/Task/SoundTask.php
+        // Found in src/Console/Command/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {
@@ -282,16 +282,16 @@ they are interested in by setting the correct flag when calling the shell.
 
 You can mark output as follows::
 
-    // would appear at all levels.
+    // Would appear at all levels.
     $this->out('Quiet message', 1, Shell::QUIET);
     $this->quiet('Quiet message');
 
-    // would not appear when quiet output is toggled
+    // Would not appear when quiet output is toggled.
     $this->out('normal message', 1, Shell::NORMAL);
     $this->out('loud message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-    // would only appear when verbose output is enabled.
+    // Would only appear when verbose output is enabled.
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
@@ -433,7 +433,7 @@ Calling with no arguments will return the current value::
     // Set multiple lines at once
     $parser->description(['line one', 'line two']);
 
-    // read the current value
+    // Read the current value
     $parser->description();
 
 .. php:method:: epilog($text = null)
@@ -446,7 +446,7 @@ Calling with no arguments will return the current value::
     // Set multiple lines at once
     $parser->epilog(['line one', 'line two']);
 
-    // read the current value
+    // Read the current value
     $parser->epilog();
 
 Adding Arguments
@@ -593,7 +593,7 @@ being available. This lets you omit ``empty()`` or ``isset()``
 checks for boolean flags::
 
     if ($this->params['verbose']) {
-        // do something
+        // Do something.
     }
 
 Since the boolean options are always defined as ``true`` or

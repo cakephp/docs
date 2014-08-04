@@ -23,7 +23,7 @@ of a ``View``, use the ``String`` class::
         public function afterLogin() {
             $message = $this->User->find('new_message');
             if (!empty($message)) {
-                // notify user of new message
+                // Notify user of new message
                 $this->Flash->success(__(
                     'You have a new message: %s',
                     String::truncate($message['Message']['body'], 255, array('html' => true))
@@ -56,7 +56,7 @@ formatting such as tag lists::
 
     $data = "cakephp 'great framework' php";
     $result = String::tokenize($data, ' ', "'", "'");
-    // result contains
+    // Result contains
     array('cakephp', "'great framework'", 'php');
 
 
@@ -103,7 +103,7 @@ Can intelligently wrap text so words are not sliced across lines::
     $text = 'This is the song that never ends.';
     $result = String::wrap($text, 22);
 
-    // returns
+    // Returns
     This is the song
     that never ends.
 
@@ -233,7 +233,7 @@ Example::
     $sampleText = 'I packed my bag and in it I put a PSP, a PS3, a TV, ' .
         'a C# program that can divide by zero, death metal t-shirts'
 
-    // called as TextHelper
+    // Called as TextHelper
     echo $this->Text->tail(
         $sampleText,
         70,

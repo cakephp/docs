@@ -250,7 +250,7 @@ you wanted to create an OpenID authentication object. In
         public function authenticate(Request $request, Response $response) {
             // Do things for OpenID here.
             // Return an array of user if they could authenticate the user,
-            // return false if not
+            // return false if not.
         }
     }
 
@@ -492,7 +492,7 @@ from the normal password hash::
         public function beforeSave(Event $event) {
             $entity = $event->data['entity'];
 
-            // make a password for digest auth.
+            // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
                 $entity->username,
                 $entity->plain_password,
@@ -526,11 +526,11 @@ the following::
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
-            // stuff here
+            // Stuff here
         }
 
         public function check($password, $hashedPassword) {
-            // stuff here
+            // Stuff here
         }
     }
 

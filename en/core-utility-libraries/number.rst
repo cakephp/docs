@@ -19,7 +19,7 @@ use the ``Number`` class::
         public function afterLogin() {
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
-                // notify users of quota
+                // Notify users of quota
                 $this->Flash->success(__('You are using %s storage', Number::toReadableSize($storageUsed)));
             }
         }

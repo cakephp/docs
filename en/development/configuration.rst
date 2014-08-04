@@ -283,13 +283,13 @@ context::
     returned. Using our examples from write() above, we can read that
     data back::
 
-        Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body
-                                            //and soul'
+        Configure::read('Company.name');    // Yields: 'Pizza, Inc.'
+        Configure::read('Company.slogan');  // Yields: 'Pizza for your body
+                                            // and soul'
 
         Configure::read('Company');
 
-        //yields:
+        // Yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     If $key is left null, all values in Configure will be returned.
@@ -460,7 +460,7 @@ Restoring Runtime Configuration
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. ``Configure::restore()`` does exactly that::
 
-    // restore runtime configuration from the cache.
+    // Restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
@@ -477,7 +477,7 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 engine for you application::
 
-    // in app/Lib/Configure/Engine/XmlConfig.php
+    // In app/Lib/Configure/Engine/XmlConfig.php
     use Cake\\Utility\\Xml;
 
     class XmlConfig implements ConfigEngineInterface {
@@ -495,7 +495,7 @@ engine for you application::
 
         // As of 2.3 a dump() method is also required
         public function dump($key, $data) {
-            // code to dump data to file
+            // Code to dump data to file
         }
     }
 

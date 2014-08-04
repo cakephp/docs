@@ -122,7 +122,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
-    // in the parent view.
+    // In the parent view.
     <?= h($post['Post']['body']) ?>
 
 The post view above shows how you can extend a view, and populate a set of
@@ -162,7 +162,7 @@ a capturing block, or by direct assignment. The ``start()``, ``append()``,
 ``prepend()``, ``assign()``, ``fetch()``, and ``end()`` methods allow you to work with
 capturing blocks::
 
-    // create the sidebar block.
+    // Create the sidebar block.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
@@ -213,7 +213,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // in /src/Template/Layout/default.ctp
+    // In /src/Template/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -244,7 +244,7 @@ when used with the ``block = true`` option:
 .. code-block:: php
 
     <?php
-    // in your view file
+    // In your view file
     $this->Html->script('carousel', ['block' => true]);
     $this->Html->css('carousel', null, ['block' => true]);
     ?>
@@ -257,15 +257,15 @@ when used with the ``block = true`` option:
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
-        // rest of the layout follows
+        // Rest of the layout follows
 
 The :php:meth:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
 block the scripts and CSS go to::
 
-    // in your view
+    // In your view
     $this->Html->script('carousel', ['block' => 'scriptBottom']);
 
-    // in your layout
+    // In your layout
     <?= $this->fetch('scriptBottom') ?>
 
 .. _view-layouts:
@@ -349,13 +349,13 @@ You can create as many layouts as you wish: just place them in the
 controller actions using the controller or view's
 :php:attr:`~Cake\\View\\View::$layout` property::
 
-    // from a controller
+    // From a controller
     public function admin_view() {
-        // stuff
+        // Stuff
         $this->layout = 'admin';
     }
 
-    // from a view file
+    // From a view file
     $this->layout = 'loggedin';
 
 For example, if a section of my site included a smaller ad banner
@@ -371,7 +371,7 @@ using something like::
 
        public function view_image() {
            $this->layout = 'image';
-           //output user image
+           // Output user image
        }
    }
 
@@ -437,8 +437,8 @@ the controller works with view files). In the above example, the
 ``/src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
-    // inside /src/Template/Element/helpbox.ctp
-    echo $helptext; //outputs "Oh, this text is very helpful."
+    // Inside /src/Template/Element/helpbox.ctp
+    echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
@@ -574,12 +574,12 @@ components of CakePHP, view classes have a few conventions:
 
 You'll also want to extend ``View`` to ensure things work correctly::
 
-    // in /src/View/PdfView.php
+    // In /src/View/PdfView.php
 
     App::uses('View', 'View');
     class PdfView extends View {
         public function render($view = null, $layout = null) {
-            // custom logic here.
+            // Custom logic here.
         }
     }
 
