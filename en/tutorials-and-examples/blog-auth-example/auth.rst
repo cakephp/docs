@@ -33,6 +33,7 @@ validating any user data::
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
+    use Cake\Validation\Validator;
 
     class UsersTable extends Table {
 
@@ -132,6 +133,7 @@ file and add the following lines::
     namespace App\Controller;
 
     use Cake\Event\Event;
+    use Cake\Controller\Controller;
 
     class AppController extends Controller {
         //...
