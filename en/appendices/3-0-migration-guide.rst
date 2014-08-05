@@ -1063,8 +1063,7 @@ Validation
 
 - The range for :php:meth:`Validation::range()` now is inclusive if ``$lower`` and
   ``$upper`` are provided.
-- ``Validation::ssn()`` has been removed in favor of :php:meth:`Validation::personId()`.
-  This method name is more meaningful and applies to a larger spectrum of countries.
+- ``Validation::ssn()`` has been removed.
 
 Xml
 ---
