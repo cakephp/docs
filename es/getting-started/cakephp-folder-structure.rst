@@ -5,6 +5,7 @@ Una vez has descargado y extraído el fichero, estos son los
 directorios y ficheros que verás:
 
 - src
+- config
 - tests
 - plugins
 - tmp
