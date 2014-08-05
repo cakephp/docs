@@ -13,8 +13,8 @@ Trabajar con convenciones también estandariza el proceso de despliegue de tu
 aplicación, permitiendo a otros desarrolladores conocer tu estructura más
 fácilmente.
 
-Hemos empleado varios años y toda nuestra experiencia y buenas prácticas en 
-la creación de estas convenciones. Ya sabes que, aunque te recomendamos que 
+Hemos empleado varios años y toda nuestra experiencia y buenas prácticas en
+la creación de estas convenciones. Ya sabes que, aunque te recomendamos que
 las sigas, puedes evitarlas con facilidad. Esto te resultará especialmente
 útil cuando trates con sistemas legados.
 
@@ -26,32 +26,32 @@ final. ``PeopleController`` y ``LatestArticlesController`` son ejemplos que
 siguen esta convención.
 
 El primer método a escribir en el controlador es ``index()``. Cuando una petición
-vaya dirigida a este controlador, pero no se especifique acción, CakePHP 
+vaya dirigida a este controlador, pero no se especifique acción, CakePHP
 ejecutará por defecto el método ``index()``. Por ejemplo, la petición
 http://example.com/apples/ será dirigida al método ``index()`` del controlador
 ``ApplesController``, así como la llamada a http://example.com/apples/view/ se
 mapeará al método ``view()`` de este mismo controlador.
 
-Puedes cambiar la visibilidad de los métodos de CakePHP usando el carácter 
+Puedes cambiar la visibilidad de los métodos de CakePHP usando el carácter
 subrayado "_" al principio para ocultar su acceso directo desde la web, aunque
 será accesible internamente. Por ejemplo:
 
 ::
 
     class NewsController extends AppController {
-    
+
         function latest() {
             $this->_findNewArticles();
         }
-        
+
         function _findNewArticles() {
             //Logic to find latest news articles
         }
     }
 
-El acceso a la url http://example.com/news/latest podrá realizarse con 
-normalidad, mientras que al acceder a la url 
-http://example.com/news/\_findNewArticles/ retornará un error, ya que 
+El acceso a la url http://example.com/news/latest podrá realizarse con
+normalidad, mientras que al acceder a la url
+http://example.com/news/\_findNewArticles/ retornará un error, ya que
 este método está precedido por un "_". También puedes usar los modificadores
 de visibilidad de PHP (private, protected, public) para esto. Los métodos
 que no sean públicos, no podrán ser accedidos.
@@ -60,11 +60,11 @@ Consideraciones para las URL de los controladores
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Como acabas de ver, los controladores que tienen nombres de una sóla palabra
-se asignan a una URL en minúscula. Por ejemplo ``ApplesController`` (que se 
-definirá en el fichero con nombre ApplesController.php) se accederá desde la 
+se asignan a una URL en minúscula. Por ejemplo ``ApplesController`` (que se
+definirá en el fichero con nombre ApplesController.php) se accederá desde la
 URL http://example.com/apples.
 
-Controladores cuyo nombre tiene varias palabras podrían ser asignados de 
+Controladores cuyo nombre tiene varias palabras podrían ser asignados de
 cualquiera de estas formas
 
 -  /redApples
@@ -77,7 +77,7 @@ la convención es que esa url sea minúscula y subrayada, de este modo
 
 - /red\_apples/go\_pick sería la url correcta para acceder a  ``RedApplesController::go_pick``
 
-Para más información sobre URLs y parámetros en CakePHP, consulta 
+Para más información sobre URLs y parámetros en CakePHP, consulta
 :ref:`routes-configuration`.
 
 .. _file-and-classname-conventions:
@@ -88,109 +88,89 @@ Convenciones sobre nombres de fichero y nombres de clases
 Como regla general, los nombres de fichero y los nombres de clase serán
 iguales, en formato CamelCased. Si tienes una clase **MyNiftyClass**, el
 fichero que la contiene se llamará **MyNiftyClass.php**. En el listado
-siguiente se muestran algunos ejemplos:
+siguiente se muestran algunos ejemplos típicos utilizados en una aplicación
+CakePHP:
 
--  El controlador con nombre **KissesAndHugsController** estará definido en el 
+-  El Controlador con nombre **KissesAndHugsController** estará en el
    fichero **KissesAndHugsController.php**
--  El componente con nombre **MyHandyComponent** estará en el fichero
+-  El Componente con nombre **MyHandyComponent** estará en el fichero
    **MyHandyComponent.php**
--  El modelo con nombre **OptionValue** estará en el fichero **OptionValue.php**
--  El comportamiento (behavior) **EspeciallyFunkableBehavior** estará en el 
+-  La Tabla **OptionValuesTable** estará en el fichero **OptionValuesTable.php**
+-  La Entidad **OptionValue** estará en el fichero **OptionValue.php**
+-  El Comportamiento (Behavior) **EspeciallyFunkableBehavior** estará en el
    fichero **EspeciallyFunkableBehavior.php**
--  La vista **SuperSimpleView** estará en el fichero **SuperSimpleView.php**
--  El helper **BestEverHelper** estará, como ya habrás adivinado, en el 
-   fichero **BestEverHelper.php**
+-  La Vista **SuperSimpleView** estará en el fichero **SuperSimpleView.php**
+-  El Ayudante (Helper) **BestEverHelper** estará en el fichero
+   **BestEverHelper.php**
 
-Cada uno de estos ficheros estará en la carpeta correspondiente bajo el 
-directorio /app.
+Cada uno de estos ficheros estará ubicado en su carpeta correspondiente en tu
+directorio app.
 
 Convenciones para modelos y bases de datos
 ==========================================
 
-Los nombres de clase para los modelos serán CamelCased.
-Persona, GranPersona y SuperGranPersona, son ejemplos válidos para modelos.
+Los nombres de clase para las Tablas serán CamelCased. Gente (People),
+GranGente (BigPeople) y SuperGranGente (ReallyBigPeople), son ejemplos
+válidos para modelos.
 
-Para las tablas en la base de datos se utiliza plural y el carácter subrayado 
-(underscored) de esta forma: ``gran_personas``, ``super_gran_personas``. 
-Verás que al leer los plurales en español, no tienen el sentido correcto. 
-Ten en cuenta que esta convención proviene del inglés y si escribes los 
-nombres de tus modelos en inglés, todo tiene mucho más sentido. Puedes 
-saltarte esta convención en cualquier momento y escribir plurales más adecuados
-al español.
+Los nombres de Tablas correspondientes a modelos CakePHP son plurales y en
+formato subrayado (underscored). Los nombres de las tablas para los modelos
+mencionados arriba serían ``gente`` (people), ``gran_gente`` (big\_people) y
+``super_gran_gente`` (really\_big\_people) respectivamente.
 
-Puedes también usar la clase de utilidad :php:class:`Inflector` para comprobar
-el singular y plural de las palabras. Consulta la documentación aquí 
-:doc:`/core-utility-libraries/inflector`.
+Puedes utilizar la librería de utilidad :php:class:`Cake\\Utility\\Inflector`
+para comprobar el singular/plural de las palabras. Echa un vistazo a
+:doc:`/core-utility-libraries/inflector` para más información.
 
-Los nombres de los campos con más de una palabra se escriben en minúscula y 
-subrayado, por ejemplo ``first_name``.
+Los nombres de campos con dos o más palabras serán separados con guiones
+bajos (underscored):
+first\_name.
 
-Las claves foráneas o ajenas (foreign keys) en las relaciones 'a muchos' (hasMany),
-'pertenece a' (belongsTo) y 'a uno' (hasOne) se reconocen por defecto si el nombre
-del campo se escribe usando el singular de la tabla con la que se relaciona y terminando
-en \_id.
-Por ejemplo el modelo Baker tiene una relación 'a muchos' con el modelo
-Cake. En la tabla cakes escribiremos un campo con el nombre baker_id. En 
-caso de que el nombre de la tabla tenga varias palabras, como en 
-category\_types, la clave sería category\_type\_id.
+Las claves foráneas o ajenas (foreign keys) en las relaciones 'a muchos'
+(hasMany), 'pertenece a' (belongsTo) y 'a uno' (hasOne) se reconocen por
+defecto si el nombre del campo se escribe usando el singular de la tabla
+con la que se relaciona y terminando en \_id. Así pues, si Bakers hasMany
+Cakes, la tabla de los pasteles referirá a la de pasteleros vía una clave
+foránea baker\_id. Para una tabla como category\_types cuyo nombre
+contiene múltiples palabras, la clave foránea sería category\_type\_id.
 
-Cuando la tabla es el resultado de una relación de 'muchos a muchos' (HABTM o hasAndBelongsToMany),
-se nombrará utilizando el nombre de cada tabla de la relación, en orden alfabético y plural.
-Por ejemplo se usará apples\_zebras en lugar de zebras\_apples.
-
-Todas las tablas que utilicemos en CakePHP, salvo las tablas de unión de las 
-relaciones 'muchos a muchos', requieren una clave primaria en un único campo para 
-identificar cada fila. Si necesitas que algún modelo no tenga clave primaria
-en un único campo, la convención es que añadas este campo a la tabla.
-
-CakePHP no soporta claves primarias compuestas. Si quieres manipular 
-directamente los datos de una tabla de unión, usa :ref:`query <model-query>`
-y construye una query manualmente, o añade una clave primaria a la tabla
-para poder trabajar con ella como con un modelo normal. Ejemplo:
-
-::
-
-    CREATE TABLE posts_tags (
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    post_id INT(10) NOT NULL,
-    tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
-
-En vez de usar un campo numérico autoincremental como clave primaria, también
-puedes usar un char(36). Si has definido así tu clave primaria, CakePHP gestionará
-esta clave añadiendo un UUID (String::uuid), que es un código único que identificará
-a cada registro, cada vez que realices un Model::save en ese modelo.
+Las tablas relacionales, utilizadas en relaciones 'de muchos a muchos'
+(hasAndBelongsToMany o HABTM) entre modelos, deben ser nombradas con los
+nombres de ambas tablas relacionadas ordenadas alfabéticamente y underscored
+(mejor abejas\_zebras que zebras\_abejas).
 
 Convenciones en la vistas
 =========================
 
 Los nombres de las vistas son iguales a los del método del controlador al que
-hacen referencia, en formato subrayado. Por ejemplo el método getReady() del 
+hacen referencia, en formato subrayado. Por ejemplo el método getReady() del
 controlador PeopleController buscará el fichero de vista en la ruta
-/app/View/People/get\_ready.ctp.
+/src/Template/People/get\_ready.ctp.
 
 El patrón para nombrar las vistas es
-/app/View/Controller/underscored\_function\_name.ctp.
+/src/Template/Controller/nombre\_de\_function\_subrayada.ctp.
 
-Si usas las convenciones de CakePHP para tu aplicación, ganas inmediatamente
-funcionalidad gratis, que se mantiene sola y no necesita tocar la 
-configuración. Sirva para ilustrar esto un ejemplo:
+Si usas las convenciones de CakePHP para tu aplicación ganas inmediatamente
+funcionalidad, que se mantiene sola y no necesita tocar la configuración.
+Sirva para ilustrar esto un ejemplo:
 
 -  Tabla en la base de datos: "people"
--  Nombre de Modelo: "Person" (es el singular de people para CakePHP), en 
-   el fichero /app/Model/Person.php
--  Nombre del Controlador: "PeopleController", en el fichero 
-   /app/Controller/PeopleController.php
--  Plantilla para la vista en el fichero /app/View/People/index.ctp
+-  Clase de Tabla: "PeopleTable", hayado en /src/Model/Table/PeopleTable.php
+-  Clase de Entidad: "Person" (es el singular de people en inglés), hayado
+   en /src/Model/Entity/Person.php
+-  Controlador: "PeopleController", hayado en
+   /src/Controller/PeopleController.php
+-  Plantilla para la vista, hayado en /src/Template/People/index.ctp
 
-Si usas estas convenciones, CakePHP sabrá que una llamada a 
-http://example.com/people/ se mapeará a una llamada al método index() del 
-controlador PeopleController, donde el modelo Person será instanciado 
-automáticamente para su uso (leerá los datos de la tabla 'people' en la base 
-de datos). Ninguna de estas relaciones necesita ser creada ni configurada s
-nombras de la forma correcta los los ficheros que de todos modos tienes que
-crear para que tu aplicación funcione.
+Si usas estas convenciones, CakePHP sabrá que una llamada a
+http://example.com/people/ se mapeará a una llamada al método ``index()``
+del controlador PeopleController, donde el modelo Person será instanciado
+automáticamente para su uso (y automáticamente leerá los datos de la tabla
+'people' en la base de datos). Ninguna de estas relaciones necesita ser creada
+ni configurada si nombras de la forma correcta los ficheros que, de todos modos,
+tienes que crear para que tu aplicación funcione.
 
-Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP, 
-te recomendamos que le eches un vistazo al :doc:`tutorial para hacer un blog</tutorials-and-examples/blog/blog>`
-para ver cómo encajan estas piezas en una aplicación completa.
+Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP,
+te recomendamos que le eches un vistazo al para hacer un
+:doc:`/tutorials-and-examples/blog/blog` para ver cómo encajan estas piezas en
+una aplicación completa.
