@@ -66,8 +66,8 @@ Instead you should map additional paths using your application's autoloader. See
 the section on :ref:`additional-class-paths` for more information.
 
 Two new configure variables provide the path configuration for plugins, and
-views. You can add multiple paths to ``App.paths.views`` and
-``App.paths.plugins`` to configure multiple paths for plugins & view files.
+views. You can add multiple paths to ``App.paths.templates`` and
+``App.paths.plugins`` to configure multiple paths for templates & plugins.
 
 New ORM
 =======
