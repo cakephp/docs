@@ -36,6 +36,7 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur:
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
+    use Cake\Validation\Validator;
 
     class UsersTable extends Table {
 
@@ -134,7 +135,8 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     // src/Controller/AppController.php
 
     namespace App\Controller;
-    
+
+    use Cake\Controller\Controller;
     use Cake\Event\Event;
 
     class AppController extends Controller {
@@ -144,12 +146,12 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
             'Flash',
             'Auth' => [
                 'loginRedirect' => [
-                    'controller' => 'Articles', 
+                    'controller' => 'Articles',
                     'action' => 'index'
                 ],
                 'logoutRedirect' => [
-                    'controller' => 'Pages', 
-                    'action' => 'display', 
+                    'controller' => 'Pages',
+                    'action' => 'display',
                     'home'
                 ]
             ]
