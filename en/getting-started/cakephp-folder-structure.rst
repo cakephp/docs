@@ -5,6 +5,7 @@ After you've downloaded and extracted the CakePHP application, these are the fil
 and folders you should see:
 
 - src
+- config
 - tests
 - plugins
 - tmp
@@ -19,6 +20,9 @@ You'll notice a few top level folders:
 
 - The *src* folder will be where you work your magic: it’s where
   your application’s files will be placed.
+- The *config* folder holds the (few) :doc:`/development/configuration` files
+  CakePHP uses. Database connection details, bootstrapping, core configuration files
+  and more should be stored here.
 - The *tests* folder will be where you put the test cases for your application.
 - The *plugins* folder is where the :doc:`/plugins` your application uses are stored.
 - The *vendor* folder is where CakePHP and other application dependencies will
@@ -43,10 +47,6 @@ CakePHP's *src* folder is where you will do most of your application
 development. Let's look a little closer at the folders inside
 *src*.
 
-Config
-    Holds the (few) configuration files CakePHP uses. Database
-    connection details, bootstrapping, core configuration files and
-    more should be stored here.
 Console
     Contains the console commands and console tasks for your application.
     This directory can also contain a ``Templates`` directory to customize the
