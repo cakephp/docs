@@ -1147,21 +1147,6 @@ with usage examples.
         The range lower/upper are not inclusive
 
 
-.. php:staticmethod:: ssn(mixed $check, string $regex = null, string $country = null)
-
-    Ssn validates social security numbers from the U.S. (us), Denmark
-    (dk), and the Netherlands (nl). For other social security number
-    formats, you may provide a regular expression.
-
-    ::
-
-        public $validate = array(
-            'ssn' => array(
-                'rule' => array('ssn', null, 'us')
-            )
-        );
-
-
 .. php:staticmethod:: time(string $check)
 
     Time validation, determines if the string passed is a valid time. Validates
