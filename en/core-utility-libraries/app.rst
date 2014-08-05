@@ -367,7 +367,7 @@ To load **app/Plugin/Awesome/Vendor/Folder/Foo.php**::
     App::import(
         'Vendor',
         'Awesome.Foo',
-        array('file' => 'Folder'.DS.'Foo.php'));
+        array('file' => 'Folder' . DS . 'Foo.php'));
 
 It wouldn't make a difference if your vendor files are inside your /vendors
 directory. CakePHP will automatically find it.
