@@ -210,8 +210,8 @@ to ``helloWorld``. There are no changes required in the way you invoke commands.
 BakeShell / TemplateTask
 ------------------------
 
-- Bake templates have been moved under `src/Template/Bake`. Also the param
-  ``theme`` for bake template selection has been renamed to ``template``.
+- Bake templates have been moved under `src/Template/Bake`. Also, the ``theme``
+  option, used for selecting a bake template, has been renamed to ``template``.
 
 Event
 =====
