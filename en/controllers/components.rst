@@ -155,6 +155,7 @@ the file in ``/src/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     namespace App\Controller\Component;
+    
     use Cake\Controller\Component;
 
     class MathComponent extends Component {
