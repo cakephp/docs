@@ -234,7 +234,7 @@ All configured log streams are written to sequentially each time
 
 CakeLog does not auto-configure itself anymore. As a result log files will not be
 auto-created anymore if no stream is listening.
-Make sure you got at least one ``default`` stream set up if you want to
+Make sure you got at least one ``default`` stream set up, if you want to
 listen to all types and levels. Usually, you can just set the core ``FileLog`` class
 to output into ``app/tmp/logs/``::
 
