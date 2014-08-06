@@ -139,8 +139,8 @@ Las tablas relacionales, utilizadas en relaciones 'de muchos a muchos'
 nombres de ambas tablas relacionadas ordenadas alfabéticamente y underscored
 (mejor abejas\_zebras que zebras\_abejas).
 
-Convenciones en la vistas
-=========================
+Convenciones en las vistas
+==========================
 
 Los nombres de las vistas son iguales a los del método del controlador al que
 hacen referencia, en formato subrayado. Por ejemplo el método getReady() del
