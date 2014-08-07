@@ -40,7 +40,7 @@ currently at the root of a CakePHP application.
 CakePHP applications contain a ``Console`` directory that contains all the
 shells and tasks for an application. It also comes with an executable::
 
-    $ cd /path/to/cakephp/app
+    $ cd /path/to/app/src
     $ Console/cake
 
 Running the Console with no arguments produces this help message::
@@ -52,8 +52,7 @@ Running the Console with no arguments produces this help message::
     ---------------------------------------------------------------
     Current Paths:
 
-     -app: App
-     -working: /Users/markstory/Sites/cakephp-app/App
+     -app: src
      -root: /Users/markstory/Sites/cakephp-app
      -core: /Users/markstory/Sites/cakephp-app/vendor/cakephp/cakephp
 
@@ -72,9 +71,8 @@ Running the Console with no arguments produces this help message::
     To run a plugin command, type cake Plugin.shell_name [args]
     To get help on a specific command, type cake shell_name --help
 
-The first information printed relates to paths. This is especially
-helpful if you're running the console from different parts of the
-filesystem.
+The first information printed relates to paths. This is helpful if you're
+running the console from different parts of the filesystem.
 
 Creating a Shell
 ================
@@ -118,7 +116,6 @@ also noticed that HelloShell is extending ``AppShell``. Much like
 common functions or logic. You can define an AppShell, by creating
 ``src/Console/Command/AppShell.php``. Since our main method wasn't very
 interesting let's add another command that does something::
-
 
     namespace App\Console\Command;
 
@@ -196,7 +193,7 @@ almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` pr
 You can use tasks from plugins using the standard :term:`plugin syntax`.
 Tasks are stored in ``Console/Command/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
-``Console/Command/Task/FileGeneratorTask.php``.
+``src/Console/Command/Task/FileGeneratorTask.php``.
 
 Each task must at least implement an ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
@@ -232,22 +229,24 @@ You can also access tasks directly from the command line::
     class would override the ability to access the functionality in the
     Sound task specified in the $tasks array.
 
-Loading Tasks On The Fly with TaskCollection
---------------------------------------------
+Loading Tasks On The Fly with TaskRegistry
+------------------------------------------
 
-You can load tasks on the fly using the Task collection object. You can load tasks that
+You can load tasks on the fly using the Task registry object. You can load tasks that
 were not declared in $tasks this way::
 
-    $Project = $this->Tasks->load('Project');
+    $project = $this->Tasks->load('Project');
 
 Would load and return a ProjectTask instance. You can load tasks from plugins using::
 
-    $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+    $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 .. _invoking-other-shells-from-your-shell:
 
 Invoking Other Shells from Your Shell
 =====================================
+
+.. php:method:: dispatchShell($args)
 
 There are still many cases where you will want to invoke one shell from another though.
 ``Shell::dispatchShell()`` gives you the ability to call other shells by providing the
@@ -263,10 +262,84 @@ as var args or as a string::
 The above shows how you can call the schema shell to create the schema for a plugin
 from inside your plugin's shell.
 
+Getting User Input
+==================
+
+.. php:method:: in($question, $choices = null, $defaut = null)
+
+When building interactive console applications you'll need to get user input.
+CakePHP provides an easy way to do this::
+
+    // Get arbitrary text from the user.
+    $color = $this->in('What color do you like?');
+
+    // Get a choice from the user.
+    $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
+
+Selection validation is case-insensitive.
+
+Creating Files
+==============
+
+.. php:method:: createFile($path, $contents)
+
+Many Shell applications help automate development or deployment tasks. Creating
+files is often important in these use cases. CakePHP provides an easy way to
+create a file at a given path::
+
+    $this->createFile('bower.json', $stuff);
+
+If the Shell is interactive, a warning will be generated, and the user asked if
+they want to overwrite the file if it already exists.  If the shell's
+interactive property is false, no question will be asked and the file will
+simply be overwritten.
+
+Console Output
+==============
+
+.. php:method:out($message, $newlines, $level)
+.. php:method:err($message, $newlines)
+
+The ``Shell`` class provides a few methods for outputting content::
+
+    // Write to stdout
+    $this->out('normal message');
+
+    // Write to stderr
+    $this->err('error message');
+
+    // Write to stderr and stop the process
+    $this->error('Fatal error');
+
+Shell also includes methods for clearing output, creating blank lines, or
+drawing a line of dashes::
+
+    // Output 2 newlines
+    $this->out($this->nl(2));
+
+    // Clear the user's screen
+    $this->clear();
+
+    // Draw a horizontal line
+    $this->hr();
+
+Lastly, you can update the current line of text on the screen using
+``_io->overwrite()``::
+
+    $this->out('Counting down');
+    $this->out('10', 0);
+    for ($i = 9; $i > 0; $i--) {
+        sleep(1);
+        $this->_io->overwrite($i, 0, 2);
+    }
+
+It is important to remember, that you cannot overwrite text
+once a new line has been output.
+
 .. _shell-output-level:
 
 Console Output Levels
-=====================
+---------------------
 
 Shells often need different levels of verbosity. When running as cron jobs,
 most output is un-necessary. And there are times when you are not interested in
@@ -300,7 +373,7 @@ options. These options are added by default, and allow you to consistently contr
 output levels inside your CakePHP shells.
 
 Styling Output
-==============
+--------------
 
 Styling output is done by including tags - just like HTML - in your output.
 ConsoleOutput will replace these tags with the correct ansi code sequence, or
@@ -370,21 +443,22 @@ Configuring Options and Generating Help
 
 .. php:class:: ConsoleOptionParser
 
-``ConsoleOptionParser`` helps provide a more familiar command line option and
+``ConsoleOptionParser`` provides a command line option and
 argument parser.
 
-OptionParsers allow you to accomplish two goals at the same time.
-First they allow you to define the options and arguments, separating
-basic input validation and your code. Secondly, it allows you to provide
-documentation, that is used to generate well formatted help file.
+OptionParsers allow you to accomplish two goals at the same time.  First, they
+allow you to define the options and arguments for your commands.  This allows
+you to separate basic input validation and your console commands. Secondly, it
+allows you to provide documentation, that is used to generate a well formatted
+help file.
 
-The console framework gets your shell's option parser by calling
+The console framework in CakePHP gets your shell's option parser by calling
 ``$this->getOptionParser()``. Overriding this method allows you to
-configure the OptionParser to match the expected inputs of your shell.
+configure the OptionParser to define the expected inputs of your shell.
 You can also configure subcommand option parsers, which allow you to
 have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once.::
+methods for easily setting multiple options/arguments at once::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -791,138 +865,13 @@ For sending emails, you should provide CakeEmail class with the host you want to
 
 This asserts that the generated message IDs are valid and fit to the domain the emails are sent from.
 
-Shell API
-=========
-
-.. php:class:: AppShell
-
-    AppShell can be used as a base class for all your shells. It should extend
-    :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
-
-.. php:class:: Shell(ConsoleIo $io)
-
-    Shell is the base class for all shells, and provides a number of functions for
-    interacting with user input, outputting text a generating errors.
-
-.. php:attr:: tasks
-
-    An array of tasks you want loaded for this shell/task.
-
-.. php:method:: clear()
-
-    Clears the current output being displayed.
-
-.. php:method:: loadModel($modelClass, $type = 'Table')
-
-    Load a model of the given ``$type`` into a property with the same name. This
-    is the console counterpart to :php:meth:`Cake\\Controller\\Controller::loadModel()`.
-
-.. php:method:: createFile($path, $contents)
-
-    :param string $path: Absolute path to the file you want to create.
-    :param string $contents: Contents to put in the file.
-
-    Creates a file at a given path. If the Shell is interactive, a warning will be
-    generated, and the user asked if they want to overwrite the file if it already exists.
-    If the shell's interactive property is false, no question will be asked and the file
-    will simply be overwritten.
-
-.. php:method:: dispatchShell()
-
-    Dispatch a command to another Shell. Similar to
-    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` but intended for running shells
-    from other shells.
-
-    See :ref:`invoking-other-shells-from-your-shell`.
-
-.. php:method:: err($message = null, $newlines = 1)
-
-    :param string $method: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
-
-    Outputs a method to ``stderr``, works similar to :php:meth:`Cake\\Console\\Shell::out()`
-
-.. php:method:: error($title, $message = null)
-
-    :param string $title: Title of the error
-    :param string $message: An optional error message
-
-    Displays a formatted error message and exits the application with status
-    code 1
-
-.. php:method:: getOptionParser()
-
-    Should return a :php:class:`Cake\\Console\\ConsoleOptionParser` object, with any
-    sub-parsers for the shell.
-
-.. php:method:: hr($newlines = 0, $width = 63)
-
-    :param int $newlines: The number of newlines to precede and follow the line.
-    :param int $width: The width of the line to draw.
-
-    Create a horizontal line preceded and followed by a number of newlines.
-
-.. php:method:: in($prompt, $options = null, $default = null)
-
-    :param string $prompt: The prompt to display to the user.
-    :param array $options: An array of valid choices the user can pick from.
-       Picking an invalid option will force the user to choose again.
-    :param string $default: The default option if there is one.
-
-    This method helps you interact with the user, and create interactive shells.
-    It will return the users answer to the prompt, and allows you to provide a
-    list of valid options the user can choose from::
-
-        $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
-
-    The selection validation is case-insensitive.
+Hook Methods
+============
 
 .. php:method:: initialize()
 
     Initializes the Shell acts as constructor for subclasses allows
     configuration of tasks prior to shell execution.
-
-.. php:method:: loadTasks()
-
-    Loads tasks defined in public :php:attr:`Cake\\Console\\Shell::$tasks`
-
-.. php:method:: nl($multiplier = 1)
-
-    :param int $multiplier Number of times the linefeed sequence should be repeated
-
-    Returns a number of linefeed sequences.
-
-.. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
-
-    :param string $method: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
-    :param integer $level: The highest :ref:`shell-output-level` this message
-        should display at.
-
-    The primary method for generating output to the user. By using levels, you
-    can limit how verbose a shell is. out() also allows you to use colour formatting
-    tags, which will enable coloured output on systems that support it. There are
-    several built-in styles for colouring text, and you can define your own.
-
-    * ``error`` Error messages.
-    * ``warning`` Warning messages.
-    * ``info`` Informational messages.
-    * ``comment`` Additional text.
-    * ``question`` Magenta text used for user prompts
-
-    By formatting messages with style tags you can display styled output::
-
-        $this->out(
-            '<warning>This will remove data from the filesystems.</warning>'
-        );
-
-    By default on \*nix systems ConsoleOutput objects default to colour output.
-    On windows systems, plain output is the default unless the ``ANSICON`` environment
-    variable is present.
-
-.. php:method:: shortPath($file)
-
-    Makes absolute file path easier to read.
 
 .. php:method:: startup()
 
@@ -931,18 +880,6 @@ Shell API
 
     Override this method if you want to remove the welcome information, or
     otherwise modify the pre-command flow.
-
-.. php:method:: wrapText($text, $options = [])
-
-    Wrap a block of text. Allows you to set the width, and indenting on a
-    block of text.
-
-    :param string $text: The text to format
-    :param array $options:
-
-        * ``width`` The width to wrap to. Defaults to 72
-        * ``wordWrap`` Only wrap on words breaks (spaces) Defaults to true.
-        * ``indent`` Indent the text with the string provided. Defaults to null.
 
 More Topics
 ===========
