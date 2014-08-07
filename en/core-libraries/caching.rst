@@ -200,10 +200,10 @@ A method that uses Cache to store results could look like::
     class Post extends AppModel {
 
         public function newest() {
-            $result = Cache::read('newest_posts', 'longterm');
+            $result = Cache::read('newest_posts', 'long');
             if (!$result) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
-                Cache::write('newest_posts', $result, 'longterm');
+                Cache::write('newest_posts', $result, 'long');
             }
             return $result;
         }
@@ -226,7 +226,7 @@ newer, using the ``remember()`` method would look like::
                     'order' => 'Post.updated DESC',
                     'limit' => 10
                 ));
-            }, 'longterm');
+            }, 'long');
         }
     }
 
