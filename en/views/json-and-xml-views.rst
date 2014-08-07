@@ -1,9 +1,9 @@
 JSON and XML views
 ##################
 
-New in CakePHP 2.1 are two new view classes. The ``XmlView`` and ``JsonView``
+The ``XmlView`` and ``JsonView``
 let you easily create XML and JSON responses, and integrate with the
-:php:class:`RequestHandlerComponent`.
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 By enabling ``RequestHandlerComponent`` in your application, and enabling
 support for the ``xml`` and or ``json`` extensions, you can automatically
@@ -20,12 +20,13 @@ Before you can use the data view classes, you'll need to do a bit of setup:
 
 #. Enable the json and or xml extensions with :ref:`file-extensions`. This will
    enable Router to handle multiple extensions.
-#. Add the :php:class:`RequestHandlerComponent` to your controller's list of
-   components. This will enable automatic view class switching on content
-   types. You can also set the component up with the ``viewClassMap`` setting,
-   to map types to your custom classes and/or map other data types.
+#. Add the :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` to
+   your controller's list of components. This will enable automatic view class
+   switching on content types. You can also set the component up with the
+   ``viewClassMap`` setting, to map types to your custom classes and/or map
+   other data types.
 
-After adding ``Router::parseExtensions(['json']);`` to your routes file, CakePHP
+After :ref:`enabling extension routing <file-extensions>`, CakePHP
 will automatically switch view classes when a request is done with the ``.json``
 extension, or the Accept header is ``application/json``.
 
@@ -41,24 +42,28 @@ If you need to do any formatting or manipulation of your view variables before
 generating the response, you should use view files. The value of ``_serialize``
 can be either a string or an array of view variables to serialize::
 
-    class PostsController extends AppController {
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
         public $components = ['RequestHandler'];
 
         public function index() {
-            $this->set('posts', $this->paginate());
-            $this->set('_serialize', ['posts']);
+            $this->set('articles', $this->paginate());
+            $this->set('_serialize', ['articles']);
         }
     }
 
 You can also define ``_serialize`` as an array of view variables to combine::
 
-    class PostsController extends AppController {
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
         public $components = ['RequestHandler'];
 
         public function index() {
-            // Some code that created $posts and $comments
-            $this->set(compact('posts', 'comments'));
-            $this->set('_serialize', ['posts', 'comments']);
+            // Some code that created $articles and $comments
+            $this->set(compact('articles', 'comments'));
+            $this->set('_serialize', ['articles', 'comments']);
         }
     }
 
@@ -77,9 +82,10 @@ a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::
 
     // Controller code
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
         public function index() {
-            $this->set(compact('posts', 'comments'));
+            $articles = $this->paginate('Articles');
+            $this->set(compact('articles'));
         }
     }
 
@@ -87,7 +93,7 @@ JSON response. This is a situation where a view file would be useful::
     foreach ($posts as &$post) {
         unset($post->generated_html);
     }
-    echo json_encode(compact('posts', 'comments'));
+    echo json_encode(compact('posts'));
 
 You can do more complex manipulations, or use helpers to do formatting as
 well.
@@ -97,29 +103,29 @@ well.
     The data view classes don't support layouts. They assume that the view file
     will output the serialized content.
 
+Creating XML Views
+==================
+
 .. php:class:: XmlView
 
-    A view class for generating Xml view data. See above for how you can use
-    XmlView in your application.
+By default when using ``_serialize`` the XmlView will wrap your serialized
+view variables with a ``<response>`` node. You can set a custom name for
+this node using the ``_rootNode`` view variable.
 
-    By default when using ``_serialize`` the XmlView will wrap your serialized
-    view variables with a ``<response>`` node. You can set a custom name for
-    this node using the ``_rootNode`` view variable.
+Creating JSON Views
+===================
 
 .. php:class:: JsonView
 
-    A view class for generating Json view data. See above for how you can use
-    JsonView in your application.
+The JsonView class supports the ``_jsonOptions`` variable that allows you to
+customize the bit-mask used to generate JSON. See the
+`http://php.net/json_encode <json_encode>`_ documentation for the valid
+values of this option.
 
-    The JsonView class supports the ``_jsonOptions`` variable that allows you to
-    customize the bit-mask used to generate JSON. See the
-    `http://php.net/json_encode <json_encode>`_ documentation for the valid
-    values of this option.
+JSONP Responses
+---------------
 
-JSONP Response
-==============
-
-When using JsonView you can use the special view variable ``_jsonp`` to enable
+When using ``JsonView`` you can use the special view variable ``_jsonp`` to enable
 returning a JSONP response. Setting it to ``true`` makes the view class check if query
 string parameter named "callback" is set and if so wrap the json response in the
 function name provided. If you want to use a custom query string parameter name
