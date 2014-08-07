@@ -35,7 +35,7 @@ proyectos. Un sistema de gestión de usuarios o un blog podrían ser buenos
 candidatos para escribir un plugin y utilizarlo en múltiples proyectos.
 
 Extensiones de Controladores ("Components")
-============================================
+===========================================
 
 Un Componente (Component) es una clase que da soporte a la lógica de los
 controladores. Si tienes lógica que quieres reutilizar entre controladores, o
@@ -55,8 +55,8 @@ incluyen:
 -  :php:meth:`~Controller::beforeRender()`, ejecutado tras la lógica del
     controlador, pero antes de que la vista sea renderizada.
 
-Extensiones de Modelos ("Behaviors")
-==========================================
+Extensiones de Tablas ("Behaviors")
+===================================
 
 De forma similar, los Comportamientos o "Behaviors" son formas de compartir
 funcionalidades entre los modelos. Por ejemplo, si guardas datos de usuario
@@ -88,7 +88,7 @@ Los nombres de estos métodos deberían ser descriptivos por sí mismos.
 Encontrarás todos los detalles en el capítulo que habla sobre los modelos.
 
 Extensiones de Vistas ("Helpers")
-==================================
+=================================
 
 Un helper es una clase que sirve de apoyo a las vistas. De forma similar a
 los componentes y los controladores, los helpers permiten que la lógica que
