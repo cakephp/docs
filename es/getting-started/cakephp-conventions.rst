@@ -109,14 +109,14 @@ directorio app.
 Convenciones para modelos y bases de datos
 ==========================================
 
-Los nombres de clase para las Tablas serán CamelCased. Gente (People),
-GranGente (BigPeople) y SuperGranGente (ReallyBigPeople), son ejemplos
-válidos para modelos.
+Los nombres de clase para las Tablas serán CamelCased. Personas (People),
+PersonasGrandes (BigPeople) y PersonasSuperGrandes (ReallyBigPeople), son
+ejemplos válidos para modelos.
 
 Los nombres de Tablas correspondientes a modelos CakePHP son plurales y en
 formato subrayado (underscored). Los nombres de las tablas para los modelos
-mencionados arriba serían ``gente`` (people), ``gran_gente`` (big\_people) y
-``super_gran_gente`` (really\_big\_people) respectivamente.
+mencionados arriba serían ``personas`` (people), ``personas_grandes``
+(big\_people) y ``personas_super_grandes`` (really\_big\_people) respectivamente.
 
 Puedes utilizar la librería de utilidad :php:class:`Cake\\Utility\\Inflector`
 para comprobar el singular/plural de las palabras. Echa un vistazo a
