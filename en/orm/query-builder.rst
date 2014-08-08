@@ -89,7 +89,7 @@ and traversing methods on. Often, there is no need to call ``all()`` you are
 allowed to just iterate the query object to get its results::
 
     // Iterate the results
-    foreach ($all$results as $result) {
+    foreach ($allResults as $result) {
      ...
     }
 
