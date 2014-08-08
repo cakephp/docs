@@ -84,7 +84,7 @@ either call the ``first()`` or the ``all()`` methods::
         ->all();
 
 In the above example, ``$allResults`` will be an instance of
-``Cake\ORM\ResultSet``, an object you can iterator and apply several extracting
+``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
 and traversing methods on. Often, there is no need to call ``all()`` you are
 allowed to just iterate the query object to get its results::
 
