@@ -50,7 +50,7 @@ means that Queries are lazy, they will not be executed unless you actually tell
 them to::
 
     $query->where(['id' => 1]); // Return the same query object
-    $query->order(['title' => 'DESC']); // Still same object, not SQL executed
+    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
 
 You can of course chain the methods you call on Query objects::
 
