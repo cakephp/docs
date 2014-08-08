@@ -32,8 +32,8 @@ re-evaluating a query will result in additional SQL being run.
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
 
-Creating a Query Object
-=======================
+The Query Object
+================
 
 The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
@@ -44,6 +44,94 @@ examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
 
     // Start a new query.
     $query = $articles->find();
+
+Almost every method in an ``Query`` object will return the same query, this also
+means that Queries are lazy, they will not be executed unless you actually tell
+them to::
+
+    $query->where(['id' => 1]); // Return the same query object
+    $query->order(['title' => 'DESC']); // Still same object, not SQL executed
+
+You can of course chain the methods you call on Query objects::
+
+    $query = $articles
+        ->find()
+        ->select(['id', 'name'])
+        ->where(['id !=' => 1])
+        ->order(['created' => 'DESC']);
+
+If you try to call ``debug()`` a Query,  you will see its internal state and the SQL
+that will be executed in the database::
+
+    debug($articles->find()->where(['id' => 1]));
+
+    // Outputs
+    // ...
+    // 'sql' => 'SELECT * FROM articles where id = ?'
+    // ...
+
+Once you're happy with the Query, you can execute it, the easiest way is to
+either call the ``first()`` or the ``all()`` methods::
+
+    $firstArticle = $articles
+        ->find()
+        ->where(['id' => 1])
+        ->first();
+
+    $allResults = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->all();
+
+In the above example, ``$allResults`` will be an instance of
+``Cake\ORM\ResultSet``, an object you can iterator and apply several extracting
+and traversing methods on. Often, there is no need to call ``all()`` you are
+allowed to just iterate the query object to get its results::
+
+    // Iterate the results
+    foreach ($all$results as $result) {
+     ...
+    }
+
+    / That is equivalent to
+    $query = $articles->find()->where(['id' => 1]);
+    foreach ($query as $result) {
+     ..
+    }
+
+Queries can also be used directly as the result object; trying to iterate the query,
+calling ``toArray`` or some of the methods inherited from :ref:`collection<collection-objects>`,
+will result in the query being executed and results returned to you::
+
+    // This executes the query and returns an array of results
+    $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
+
+    // Use the combine() method from the collections library
+    // This executes the query
+    $keyValueList = $articles->find()->combine('id', 'title');
+
+    // Use the extract() method from the collections library
+    // This executes the query as well
+    $allTitles = $articles->find()->extract('title');
+
+Once you get familiar with the Query object methods, it is strongly encouraged
+that you visit the :ref:`collection<collection-objects>` to improve your skills
+in efficiently traversing the data. In short, it is important to remember that
+anything you can call on a collection object, you can do too in a Query::
+
+    // An advanced example
+    $results = $articles->find()
+        ->where(['id >' => 1])
+        ->order(['title' => 'DESC'])
+        ->map(function($row) { // map() is a collection method, it executes the query
+            $row->trimmedTitle = trim($row->title);
+            return $row;
+        });
+        ->combine('id', 'trimmedTitle') // combine() is another collection method
+        ->toArray(); // Also a collections library method
+
+The following sections will show you everything there is to know about using and
+combining the Query object methods to construct SQL statements and extract data.
 
 Selecting Data
 ==============
