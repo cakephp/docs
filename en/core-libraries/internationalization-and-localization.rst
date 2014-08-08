@@ -198,8 +198,50 @@ pluralized correctly depending on the language they are shown. CakePHP provides
 a couple ways to correctly select plurals in your messages.
 
 The first one is taking advantage of the ``ICU`` message format that comes
-by default in the translation functions.
+by default in the translation functions. In the translations file you could have
+the following strings
 
+.. code-block:: pot
+
+     msgid "{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}"
+     msgstr "{{0},plural,=0{Ningún resultado}=1{1 resultado}other{{1} resultados}"
+
+And in your application use the following code to output either of the
+translations for such string::
+
+    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [0]);
+
+    // Returns "Ningún resultado" as the argument {0} is 0
+
+    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [1]);
+
+    // Returns "1 resultado" because the argument {0} is 1
+
+    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [2, 2]);
+
+    // Returns "2 resultados" because the argument {0} is 2
+
+You can of course use simpler message ids if you don't want to type the full
+plural selection sequence in your code
+
+.. code-block:: pot
+
+     msgid "search.results"
+     msgstr "{{0},plural,=0{Ningún resultado}=1{1 resultado}other{{1} resultados}"
+
+Then use the new string in your code::
+
+    __('search.results', [2, 2]);
+
+    // Returns "2 resultados"
+
+The latter version has the downside that you will need to have a translation
+messages file even for the default language, but has the advantage that it makes
+the code more readable and leaves the complicated plural selection strings to
+the translation files.
+
+The second way you can use plural selection is by using the built-in
+capabilities for Gettext. In this case 
 
 .. meta::
     :title lang=en: Internationalization & Localization
