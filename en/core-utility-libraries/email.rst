@@ -165,6 +165,7 @@ The following configuration keys are used:
 - ``'transport'``: Transport name. See ``CakeEmail::transport()``.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also ``CakeLog::write()``
+- ``'helpers'``: Array of helpers used in the email template.
 
 All of these configurations are optional, except ``'from'``. If you put more
 configurations in this array, the configurations will be used in the
