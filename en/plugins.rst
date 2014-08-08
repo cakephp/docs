@@ -166,6 +166,7 @@ basic directory structure. It should look like this::
     /src
     /plugins
         /ContactManager
+            /config
             /src
                 /Controller
                     /Component
@@ -211,7 +212,10 @@ of your app. For example - baking controllers::
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
-have any problems with using the command line.
+have any problems with using the command line. Be sure to re-generate your
+autoloader once you've created your plugin::
+
+    $ php composer.phar dumpautoload
 
 Plugin Controllers
 ==================
@@ -241,6 +245,25 @@ So, we place our new ContactsController in
     This controller extends the plugin's AppController (called
     ContactManagerAppController) rather than the parent application's
     AppController.
+
+Before you can access your controllers, you'll need to ensure the plugin is
+loaded and connect some routes. In your ``/config/bootstrap.php`` add the
+following::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+Then create the ContactManager plugin routes. Put the following into
+``/plugins/ContactManager/config/routes.php``::
+
+    <?php
+    use Cake\Routing\Router;
+
+    Router::plugin('ContactManager', function($routes) {
+        $routes->fallbacks();
+    });
+
+The above will connect default routes for you plugin. You can customize this
+file with more specific routes later on.
 
 If you want to access what we've got going thus far, visit
 ``/contact_manager/contacts``. You should get a "Missing Model" error
