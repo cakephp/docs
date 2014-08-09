@@ -58,7 +58,7 @@ contain the ``default.po`` file as shown above. A domain refers to any arbitrary
 grouping of translation messages. When no group is used, then the default group
 is selected.
 
-Plugin can also contain translation files, the convention is to use the
+Plugins can also contain translation files, the convention is to use the
 ``underscored`` version of the plugin name as the domain for the translation
 messages::
 
@@ -99,7 +99,7 @@ of those is displayed using the localization libraries that CakePHP provides.
 Changing the Locale at Runtime
 ------------------------------
 
-To change the language strings are displayed you can call this method::
+To change the language for translated strings you can call this method::
 
     use Cake\I18n\I18n;
 
@@ -119,7 +119,7 @@ translation was found::
     echo __('Popular Articles');
 
 If you need to group your messages, for example, translations inside a plugin,
-you can use the :php:func:`__d()` function to fetch messages form another domain::
+you can use the :php:func:`__d()` function to fetch messages from another domain::
 
     echo __d('my_plugin', 'Trending right now');
 
@@ -205,7 +205,7 @@ understands the same options as ``date``.
 
     If you are using PHP 5.5+, then you can use named placeholders like {name}
     {age}, etc. And pass the variables in an array having the corresponding key
-    names like ``['name' => 'Sara', 'age' => 12]``. This feature is no available
+    names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
     in PHP 5.4.
 
 Plurals
