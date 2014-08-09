@@ -432,8 +432,37 @@ any language from an external service::
     });
 
 The above example calls an example external service to load a json file with the
-translations and then just build a ``Package`` object. For any locale that is
-requested in the application, this function will be able to build a translator.
+translations and then just build a ``Package`` object for any locale that is
+requested in the application.
+
+Plurals and Context in Custom Translators
+-----------------------------------------
+
+
+
+Using Different Formatters
+--------------------------
+
+In previous examples we have seen that Packages are built using ``default`` as
+first argument, and it was indicated with a comment that it corresponded to the
+formatter to be used. Formatters are  classes responsible for interpolating variables
+in translation messages and selecting the correct plural form.
+
+If you're dealing with a legacy application, or you don't need the power offered
+by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::
+
+    return Package('sprintf', 'fallback_domain', $messages);
+
+The messages to be translated will be passed to the ``sprintf`` function for
+interpolating the variables::
+
+    __('Hello, my name is %s and I am %d years old', 'José', 29);
+
+It is possible to set the default formatter for all translators cerated by
+CakePHP before they are used for the first time. This does not include manually
+created translators using the ``translator()`` and ``config()`` methods::
+
+    I18n::defaultFormatter('sprintf');
 
 .. meta::
     :title lang=en: Internationalization & Localization
