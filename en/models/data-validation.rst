@@ -62,7 +62,7 @@ some of these built-in validation rules::
                 ),
                 'between' => array(
                     'rule'    => array('between', 5, 15),
-                    'message' => 'Between 5 to 15 characters'
+                    'message' => 'A number between 5 (min) to 15 (max)'
                 )
             ),
             'password' => array(
