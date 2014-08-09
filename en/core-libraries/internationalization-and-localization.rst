@@ -167,7 +167,7 @@ currency::
     Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 
 
-Numbers in placeholders can be formatter as well with fine grain control of the
+Numbers in placeholders can be formatted as well with fine grain control of the
 output::
 
     echo __(
@@ -182,6 +182,24 @@ output::
 
     // Returns
     There are 6,100,000,000 people on earth
+
+This is the list of formatter specifiers you can put after the word ``number``:
+
+* ``integer``: Removes the decimal part
+* ``decimal``: Formats the number as a float
+* ``currency``: Puts the locale currency symbol and rounds decimals
+* ``percent``: Formats the number as a percentage
+
+Dates can also be formatted by using the word ``date`` after the placeholder
+number. A list of extra options follows:
+
+* ``short``
+* ``medium``
+* ``long``
+* ``full``
+
+The word ``time`` after the placeholder number is also accepted and it
+understands the same options as ``date``.
 
 .. note::
 
@@ -303,7 +321,7 @@ form, for example croatian
     msgstr[1] "{0} datoteke uklonjenih"
     msgstr[2] "{0} slika uklonjenih"
 
-Please visit the `Lanchpad languages guide <https://translations.launchpad.net/+languages>`_
+Please visit the `Lanchpad languages page <https://translations.launchpad.net/+languages>`_
 for a detailed explanation of the plural form numbers for each language.
 
 .. meta::
