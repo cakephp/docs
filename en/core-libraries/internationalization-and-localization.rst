@@ -154,7 +154,7 @@ All translation functions support placeholder replacements::
     __x('alphabet', 'He read the letter {0}', 'Z');
 
 These functions take advantage of the
-`ICU MessageFormatter <http://dk1.php.net/manual/en/messageformatter.format.php>`_
+`ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
 so you can in a single code translate messages and localize dates, numbers and
 currency::
 
@@ -197,27 +197,30 @@ One crucial part of internationalizing your application is getting your messages
 pluralized correctly depending on the language they are shown. CakePHP provides
 a couple ways to correctly select plurals in your messages.
 
+Using ICU Plural Selection
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The first one is taking advantage of the ``ICU`` message format that comes
 by default in the translation functions. In the translations file you could have
 the following strings
 
 .. code-block:: pot
 
-     msgid "{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}"
-     msgstr "{{0},plural,=0{Ningún resultado}=1{1 resultado}other{{1} resultados}"
+     msgid "{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}"
+     msgstr "{{0},plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}"
 
 And in your application use the following code to output either of the
 translations for such string::
 
-    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [0]);
+    __('{{0},plural,=0{No records found }=1{Found 1 record} other{Found {1} records}', [0]);
 
     // Returns "Ningún resultado" as the argument {0} is 0
 
-    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [1]);
+    __('{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}', [1]);
 
     // Returns "1 resultado" because the argument {0} is 1
 
-    __('{{0},plural,=0{No records found}=1{Found 1 record}other{Found {1} records}', [2, 2]);
+    __('{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}', [2, 2]);
 
     // Returns "2 resultados" because the argument {0} is 2
 
@@ -227,21 +230,47 @@ plural selection sequence in your code
 .. code-block:: pot
 
      msgid "search.results"
-     msgstr "{{0},plural,=0{Ningún resultado}=1{1 resultado}other{{1} resultados}"
+     msgstr "{{0},plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}"
 
 Then use the new string in your code::
 
     __('search.results', [2, 2]);
 
-    // Returns "2 resultados"
+    // Returns: "2 resultados"
 
 The latter version has the downside that you will need to have a translation
 messages file even for the default language, but has the advantage that it makes
 the code more readable and leaves the complicated plural selection strings to
 the translation files.
 
-The second way you can use plural selection is by using the built-in
-capabilities for Gettext. In this case 
+Sometimes using direct number matching in plurals is practical. For example,
+there are languages like Arabic that require a different plural when you refer
+to few things and other for many things. In those cases you can also use the ICU
+matching aliases. Instead of writing::
+
+    =0{No results} =1{...} other{...}
+
+You can also do::
+
+    zero{No Results} one{One result} few{...} many{...} other{...}
+
+Make sure you read the
+`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+to get a complete overview of the aliases you can use for each language.
+
+Using Gettext Plural Selection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The second plural selection format accepted is using the built-in capabilities
+of Gettext. In this case, plurals will be stored in the ``.po``
+file by creating a separate message translation line per plural form
+
+.. code-block:: pot
+
+    msgid "One file removed" # One message identifier for singular
+    msgid_plural "{0} files removed" # Another one for plural
+    msgstr[0] "Un fichero eliminado" # Translation in singular
+    msgstr[1] "{0} ficheros eliminados" # Translation in plural
 
 .. meta::
     :title lang=en: Internationalization & Localization
