@@ -474,12 +474,13 @@ using::
     $query = $articles->find()
         ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 
-Automatically Creating "IS" Clauses
----------------------------------
+Automatic IS NULL Creation
+--------------------------
 
-When building queries where conditions in your ``where()`` statement can be either ``integer`` or ``NULL`` values, use the following::
+When a condition value is expected to be ``null`` or any other value, you can use
+the ``IS`` operator to automatically create the correct expression::
 
-    $query = $nodes->find()
+    $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
 
