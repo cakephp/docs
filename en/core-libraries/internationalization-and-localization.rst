@@ -10,7 +10,7 @@ First, it's important to understand some terminology.
 *Internationalization* refers to the ability of an application to
 be localized. The term *localization* refers to the adaptation of
 an application to meet specific language (or culture) requirements
-(i.e., a "locale"). Internationalization and localization are often
+(i.e. a "locale"). Internationalization and localization are often
 abbreviated as i18n and l10n respectively; 18 and 10 are the number
 of characters between the first and last character.
 
@@ -267,17 +267,17 @@ Then use the new string in your code::
 
 The latter version has the downside that you will need to have a translation
 messages file even for the default language, but has the advantage that it makes
-the code more readable and leaves the complicated plural selection strings to
+the code more readable and leaves the complicated plural selection strings into
 the translation files.
 
-Sometimes using direct number matching in plurals is practical. For example,
+Sometimes using direct number matching in plurals is impractical. For example,
 there are languages like Arabic that require a different plural when you refer
-to few things and other for many things. In those cases you can also use the ICU
-matching aliases. Instead of writing::
+to few things and other plural form for many things. In those cases you can
+use the ICU matching aliases. Instead of writing::
 
     =0{No results} =1{...} other{...}
 
-You can also do::
+You can do::
 
     zero{No Results} one{One result} few{...} many{...} other{...}
 
@@ -311,7 +311,7 @@ function::
 
 The number inside ``msgstr[]`` is the number assigned by Gettext for the plural
 form of the language. There are languages that can have more than two plural
-form, for example croatian
+form, for example Croatian
 
 .. code-block:: pot
 
@@ -323,6 +323,90 @@ form, for example croatian
 
 Please visit the `Lanchpad languages page <https://translations.launchpad.net/+languages>`_
 for a detailed explanation of the plural form numbers for each language.
+
+Creating Your Own Translators
+=============================
+
+If you need to divert from CakePHP conventions regarding where and how
+translation messages are stored, you can create your own translation messages
+loader. The easiest way to create your own translator is by defining a loader
+for a single domain and locale::
+
+    use Aura\Intl\Package;
+    I18n::translator('animals', 'fr_FR', function() {
+        $package = new Package(
+            'default', // The formatting strategy (ICU)
+            'default', // The fallback domain
+        );
+        $package->setMessages([
+            'Dog' => 'Chien',
+            'Cat' => 'Chat',
+            'Bird' => 'Oiseau'
+            ...
+        ]);
+
+        return $package;
+    });
+
+The above code can be added to your ``config/bootstrap.php`` so that
+translations can be found before any translation function is used. The absolute
+minimum that is required for creating a translator is that the loader function
+should return a ``Aura\Intl\Package`` object. Once the code is in place you can
+use the translation functions as usual::
+
+    I18n::defaultLocale('fr_FR');
+    __d('animals', 'Dog'); // Returns "Chien"
+
+As you see, ``Package`` objects take translation messages as an array. You can
+pass the ``setMessages()`` method however you like: with inline code, including
+another file, calling another function, etc. CakePHP provides a few loader
+functions you can reuse if you just need to change where messages are loaded.
+For example, you can still use ``.po`` files, bu loaded from another location::
+
+    use Cake\I18n\MessagesFileLoader as Loader;
+
+    // Load messages from src/Locale/folder/sub_folder/filename.po
+
+    I18n::translator(
+        'animals',
+        'fr_FR',
+        new Loader('filename', 'folder/sub_folder', 'po')
+    );
+
+Creating Message Parsers
+------------------------
+
+It is possible to keep using the same conventions CakePHP uses, but use
+a message parser other than ``PoFileParser``. For example, if you wanted to load
+translation messages using ``YAML``, you will first need to created the parser
+class::
+
+    namespace App\I18n\Parser;
+
+    class YamlFileParser {
+
+        public function parse($file) {
+            return yaml_parse_file($file);
+        }
+    }
+
+The file should be created in the ``src/I18n/Parser`` of your application. Next,
+create the translations file under ``src/Locale/fr_FR/animals.yaml``
+
+.. code-block:: yaml
+
+    Dog: Chien
+    Cat: Chat
+    Bird: Oiseau
+
+And finally, configure the translation loader for the domain and locale::
+
+    use Cake\I18n\MessagesFileLoader as Loader;
+    I18n::translator(
+        'animals',
+        'fr_FR',
+        new Loader('animals', 'fr_FR', 'yaml')
+    );
 
 .. meta::
     :title lang=en: Internationalization & Localization
