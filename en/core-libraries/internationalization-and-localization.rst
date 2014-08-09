@@ -438,7 +438,28 @@ requested in the application.
 Plurals and Context in Custom Translators
 -----------------------------------------
 
+The arrays used for ``setMessages()`` can be crafted to instruct the translator
+to store messages under different domains or to trigger Gettext-style plural selection.
+The following is an example of storing translations for the same key in
+different contexts::
 
+    [
+        'He reads the letter {0}' => [
+            'alphabet' => 'Él lee la letra {0}',
+            'written communication' => 'Él lee la carta {0}'
+        ]
+    ]
+
+Similarly, you can express Gettext-style plurals using the messages array by
+having a nested array key per plural form::
+
+    [
+        'I have read one book' => 'He leído un libro',
+        'I have read {0} books' => [
+            'He leído un libro',
+            'He leído {0} libros'
+        ]
+    ]
 
 Using Different Formatters
 --------------------------
