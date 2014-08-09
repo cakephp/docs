@@ -40,7 +40,7 @@ Language Files
 Translations can be made available by using language files stored in your
 application. The default format for CakePHP translation files is the
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files neeed to be
-placed under `src/Locale/` and within this directory, there should be
+placed under ``src/Locale/`` and within this directory, there should be
 a subfolder for each language the application needs to support::
 
     /src
@@ -59,7 +59,7 @@ grouping of translation messages. When no group is used, then the default group
 is selected.
 
 Plugins can also contain translation files, the convention is to use the
-``underscored`` version of the plugin name as the domain for the translation
+``under_scored`` version of the plugin name as the domain for the translation
 messages::
 
     MyPlugin
@@ -70,7 +70,7 @@ messages::
                 /de
                     my_plugin.po
 
-Language folders can either be the two letter ISO code of the language or the
+Translation folders can either be the two letter ISO code of the language or the
 full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the
 language and the country where it is spoken.
 
@@ -90,7 +90,7 @@ Setting the Default Locale
 The default locale can be set in your ``config/bootstrap.php`` folder by using
 the following line::
 
-    ini_set('inlt.default_locale', 'fr_FR');
+    ini_set('intl.default_locale', 'fr_FR');
 
 This will control several aspects of your application, including the default
 translations language, the date format, number format and currency whenever any
@@ -105,15 +105,15 @@ To change the language for translated strings you can call this method::
 
     I18n::defaultLocale('de_DE');
 
-This will as well change how numbers and dates are formatted when using one of
+This will also change how numbers and dates are formatted when using one of
 the localization tools.
 
 Using Translation Functions
 ===========================
 
 CakePHP provides several functions that will help you internationalize your
-application. The most used one is the :php:func:`__()` function which is used to
-retrieve a single translation message or return the same string if no
+application. The most frequently used one is :php:func:`__()`. This function
+is used to retrieve a single translation message or return the same string if no
 translation was found::
 
     echo __('Popular Articles');
@@ -123,9 +123,10 @@ you can use the :php:func:`__d()` function to fetch messages from another domain
 
     echo __d('my_plugin', 'Trending right now');
 
-Sometimes translations strings can be ambiguous for people translating them,
-specially if two strings are identical but refer to different things. To solve
-that problem, you can use the :php:func:`__x()` function::
+Sometimes translations strings can be ambiguous for people translating them.
+This can happen if two strings are identical but refer to different things. For
+example, 'letter' has multiple meanings in english. To solve that problem, you
+can use the :php:func:`__x()` function::
 
     echo __x('written communication', 'He read the first letter');
 
@@ -155,8 +156,8 @@ All translation functions support placeholder replacements::
 
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-so you can in a single code translate messages and localize dates, numbers and
-currency::
+so you and translate messages and localize dates, numbers and
+currency at the same time::
 
     echo __(
         'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
@@ -267,11 +268,11 @@ Then use the new string in your code::
 
 The latter version has the downside that you will need to have a translation
 messages file even for the default language, but has the advantage that it makes
-the code more readable and leaves the complicated plural selection strings into
+the code more readable and leaves the complicated plural selection strings in
 the translation files.
 
 Sometimes using direct number matching in plurals is impractical. For example,
-there are languages like Arabic that require a different plural when you refer
+languages like Arabic require a different plural when you refer
 to few things and other plural form for many things. In those cases you can
 use the ICU matching aliases. Instead of writing::
 
@@ -310,8 +311,8 @@ function::
     __dn('my_plugin', 'One file removed', '{0} files removed', $count, $count);
 
 The number inside ``msgstr[]`` is the number assigned by Gettext for the plural
-form of the language. There are languages that can have more than two plural
-form, for example Croatian
+form of the language. Some languages have more than two plural forms, for
+example Croatian:
 
 .. code-block:: pot
 
@@ -327,12 +328,13 @@ for a detailed explanation of the plural form numbers for each language.
 Creating Your Own Translators
 =============================
 
-If you need to divert from CakePHP conventions regarding where and how
-translation messages are stored, you can create your own translation messages
+If you need to diverge from CakePHP conventions regarding where and how
+translation messages are stored, you can create your own translation message
 loader. The easiest way to create your own translator is by defining a loader
 for a single domain and locale::
 
     use Aura\Intl\Package;
+
     I18n::translator('animals', 'fr_FR', function() {
         $package = new Package(
             'default', // The formatting strategy (ICU)
@@ -361,7 +363,7 @@ As you see, ``Package`` objects take translation messages as an array. You can
 pass the ``setMessages()`` method however you like: with inline code, including
 another file, calling another function, etc. CakePHP provides a few loader
 functions you can reuse if you just need to change where messages are loaded.
-For example, you can still use ``.po`` files, bu loaded from another location::
+For example, you can still use ``.po`` files, but loaded from another location::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
@@ -376,7 +378,7 @@ For example, you can still use ``.po`` files, bu loaded from another location::
 Creating Message Parsers
 ------------------------
 
-It is possible to keep using the same conventions CakePHP uses, but use
+It is possible to continue using the same conventions CakePHP uses, but use
 a message parser other than ``PoFileParser``. For example, if you wanted to load
 translation messages using ``YAML``, you will first need to created the parser
 class::
@@ -390,8 +392,9 @@ class::
         }
     }
 
-The file should be created in the ``src/I18n/Parser`` of your application. Next,
-create the translations file under ``src/Locale/fr_FR/animals.yaml``
+The file should be created in the ``src/I18n/Parser`` directory of your
+application. Next, create the translations file under
+``src/Locale/fr_FR/animals.yaml``
 
 .. code-block:: yaml
 
@@ -420,6 +423,7 @@ Imagine that you wanted to load all translations for the default domain and for
 any language from an external service::
 
     use Aura\Intl\Package;
+
     I18n::config('default', function($domain, $locale) {
         $locale = Locale::parseLocale($locale);
         $language = $locale['language'];
@@ -479,7 +483,7 @@ interpolating the variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);
 
-It is possible to set the default formatter for all translators cerated by
+It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually
 created translators using the ``translator()`` and ``config()`` methods::
 
