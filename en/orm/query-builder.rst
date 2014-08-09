@@ -474,7 +474,7 @@ using::
     $query = $articles->find()
         ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 
-Automatically Creating IS Clauses
+Automatically Creating "IS" Clauses
 ---------------------------------
 
 When building queries where conditions in your ``where()`` statement can be either ``integer`` or ``NULL`` values, use the following::
