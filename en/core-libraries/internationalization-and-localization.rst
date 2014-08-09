@@ -408,6 +408,33 @@ And finally, configure the translation loader for the domain and locale::
         new Loader('animals', 'fr_FR', 'yaml')
     );
 
+Creating Generic Translators
+----------------------------
+
+Configuring translators by calling ``I18n::translator()`` for each domain and
+locale you need to support can be tedious, specially if you need to support more
+than a few different locales. To avoid this problem, CakePHP lets you define
+generic translator loaders for each domain.
+
+Imagine that you wanted to load all translations for the default domain and for
+any language from an external service::
+
+    use Aura\Intl\Package;
+    I18n::config('default', function($domain, $locale) {
+        $locale = Locale::parseLocale($locale);
+        $language = $locale['language'];
+        $messages = file_get_contents("http://example.com/translations/$lang.json");
+        return new Package(
+            'default', // Formatter
+            null, // Fallback (none for default domain)
+            json_decode($messages, true)
+        )
+    });
+
+The above example calls an example external service to load a json file with the
+translations and then just build a ``Package`` object. For any locale that is
+requested in the application, this function will be able to build a translator.
+
 .. meta::
     :title lang=en: Internationalization & Localization
     :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
