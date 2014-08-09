@@ -45,9 +45,9 @@ examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
     // Start a new query.
     $query = $articles->find();
 
-Almost every method in an ``Query`` object will return the same query, this also
-means that Queries are lazy, they will not be executed unless you actually tell
-them to::
+Almost every method in a ``Query`` object will return the same query, this means
+that ``Query`` objects are lazy, and will not be executed unless you tell them
+to::
 
     $query->where(['id' => 1]); // Return the same query object
     $query->order(['title' => 'DESC']); // Still same object, no SQL executed
@@ -60,8 +60,8 @@ You can of course chain the methods you call on Query objects::
         ->where(['id !=' => 1])
         ->order(['created' => 'DESC']);
 
-If you try to call ``debug()`` a Query,  you will see its internal state and the SQL
-that will be executed in the database::
+If you try to call ``debug()`` on a Query object, you will see its internal
+state and the SQL that will be executed in the database::
 
     debug($articles->find()->where(['id' => 1]));
 
@@ -70,7 +70,7 @@ that will be executed in the database::
     // 'sql' => 'SELECT * FROM articles where id = ?'
     // ...
 
-Once you're happy with the Query, you can execute it, the easiest way is to
+Once you're happy with the Query, you can execute it. The easiest way is to
 either call the ``first()`` or the ``all()`` methods::
 
     $firstArticle = $articles
@@ -85,22 +85,22 @@ either call the ``first()`` or the ``all()`` methods::
 
 In the above example, ``$allResults`` will be an instance of
 ``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
-and traversing methods on. Often, there is no need to call ``all()`` you are
-allowed to just iterate the query object to get its results::
+and traversing methods on. Often, there is no need to call ``all()``, you are
+allowed to just iterate the Query object to get its results::
 
     // Iterate the results
     foreach ($allResults as $result) {
      ...
     }
 
-    / That is equivalent to
+    // That is equivalent to
     $query = $articles->find()->where(['id' => 1]);
     foreach ($query as $result) {
-     ..
+     ...
     }
 
-Queries can also be used directly as the result object; trying to iterate the query,
-calling ``toArray`` or some of the methods inherited from :ref:`collection<collection-objects>`,
+Query objects can also be used directly as the result object; trying to iterate the query,
+calling ``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
 will result in the query being executed and results returned to you::
 
     // This executes the query and returns an array of results
@@ -115,9 +115,9 @@ will result in the query being executed and results returned to you::
     $allTitles = $articles->find()->extract('title');
 
 Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`collection<collection-objects>` to improve your skills
+that you visit the :ref:`Collection<collection-objects>` section to improve your skills
 in efficiently traversing the data. In short, it is important to remember that
-anything you can call on a collection object, you can do too in a Query::
+anything you can call on a Collection object, you can also do in a Query object::
 
     // An advanced example
     $results = $articles->find()
