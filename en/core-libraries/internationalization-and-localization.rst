@@ -206,23 +206,32 @@ the following strings
 
 .. code-block:: pot
 
-     msgid "{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}"
-     msgstr "{{0},plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}"
+     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
+     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 And in your application use the following code to output either of the
 translations for such string::
 
-    __('{{0},plural,=0{No records found }=1{Found 1 record} other{Found {1} records}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
 
     // Returns "Ningún resultado" as the argument {0} is 0
 
-    __('{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
 
     // Returns "1 resultado" because the argument {0} is 1
 
-    __('{{0},plural,=0{No records found} =1{Found 1 record} other{Found {1} records}', [2, 2]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
 
     // Returns "2 resultados" because the argument {0} is 2
+
+A closer look to the format we just used will make it evident how messages are
+built::
+
+    { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
+
+The ``[count placeholder]`` can be the array key number of any of the variables
+you pass to the translation function. It will be used for selecting the correct
+plural form.
 
 You can of course use simpler message ids if you don't want to type the full
 plural selection sequence in your code
@@ -230,7 +239,7 @@ plural selection sequence in your code
 .. code-block:: pot
 
      msgid "search.results"
-     msgstr "{{0},plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}"
+     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 Then use the new string in your code::
 
@@ -271,6 +280,31 @@ file by creating a separate message translation line per plural form
     msgid_plural "{0} files removed" # Another one for plural
     msgstr[0] "Un fichero eliminado" # Translation in singular
     msgstr[1] "{0} ficheros eliminados" # Translation in plural
+
+When using this other format you are required to use another translation
+function::
+
+    // Returns: "10 ficheros eliminados"
+    $count = 10;
+    __n('One file removed', '{0} files removed', $count, $count);
+
+    // It is also possible to use it inside a domain
+    __dn('my_plugin', 'One file removed', '{0} files removed', $count, $count);
+
+The number inside ``msgstr[]`` is the number assigned by Gettext for the plural
+form of the language. There are languages that can have more than two plural
+form, for example croatian
+
+.. code-block:: pot
+
+    msgid "One file removed"
+    msgid_plural "{0} files removed"
+    msgstr[0] "jednom datotekom je uklonjen"
+    msgstr[1] "{0} datoteke uklonjenih"
+    msgstr[2] "{0} slika uklonjenih"
+
+Please visit the `Lanchpad languages guide <https://translations.launchpad.net/+languages>`_
+for a detailed explanation of the plural form numbers for each language.
 
 .. meta::
     :title lang=en: Internationalization & Localization
