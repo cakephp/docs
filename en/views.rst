@@ -23,7 +23,7 @@ View Templates
 
 The view layer of CakePHP is how you speak to your users. Most of the time your
 views will be showing (X)HTML documents to browsers, but you might also need to
-reply to a remote application via SOAP, or output a CSV file for a user.
+reply to a remote application via JSON, or output a CSV file for a user.
 
 By default CakePHP view files are written in plain PHP and have a default
 extension of ``.ctp`` (CakePHP Template). These files contain all the
