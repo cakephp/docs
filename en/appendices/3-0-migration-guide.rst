@@ -644,9 +644,16 @@ their new PHPUnit counterpart:
 - ``assertReference()`` if favor of ``assertSame()``
 - ``assertIsA()`` in favor of ``assertInstanceOf()``
 
-Note that some methods have switched the order, e.g. ``assertEqual($is, $expected)`` should now be
+Note that some methods have switched the attribute order, e.g. ``assertEqual($is, $expected)`` should now be
 ``assertEquals($expected, $is)``.
-There is an upgrade shell command ``cake upgrade tests`` to assist in upgrading your code.
+
+The following assertion methods have been deprecated and will be removed in the future:
+
+- ``assertWithinMargin()`` if favor of ``assertWithinRange()``
+- ``assertTags()`` in favor of ``assertHtml()``
+
+Both method replacements also switched the attribute order for a consistent assert method API
+with ``$expected`` as first argument.
 
 ControllerTestCase
 ------------------
