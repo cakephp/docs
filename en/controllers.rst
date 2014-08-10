@@ -69,11 +69,7 @@ The values in the child class will always override those in ``AppController.``
     -  :php:attr:`~Controller::$components`
     -  :php:attr:`~Controller::$helpers`
 
-Remember to add the default ``Html`` and ``Form`` helpers if you define the
-:php:attr:`~Cake\\Controller\\Controller::$helpers` property in your
-``AppController``.
-
-Also remember to call ``AppController``'s callbacks within child
+Remember to call ``AppController``'s callbacks within child
 controller callbacks for best results::
 
     public function beforeFilter(Event $event) {
@@ -138,7 +134,7 @@ created response.
 
 When you use controller methods with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-you will typcially retun a ``Response`` istance. If you have controller
+you will typcially retun a ``Response`` instance. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning::
 
@@ -438,12 +434,6 @@ Configuring Helpers to Load
 ===========================
 
 .. php:attr:: helpers
-
-If you choose to define your own ``Controller::$helpers`` array in
-``AppController``, make sure to include ``HtmlHelper`` and
-``FormHelper`` if you want them available by default in your
-Views. To learn more about these classes, be sure to check out their
-respective sections later in this manual.
 
 Let's look at how to tell a CakePHP Controller that you plan to use
 additional MVC classes::
