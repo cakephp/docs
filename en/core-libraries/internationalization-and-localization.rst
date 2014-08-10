@@ -204,7 +204,7 @@ understands the same options as ``date``.
 
 .. note::
 
-    If you are using PHP 5.5+, then you can use named placeholders like {name}
+    If you are using PHP 5.5+, you can use also named placeholders like {name}
     {age}, etc. And pass the variables in an array having the corresponding key
     names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
     in PHP 5.4.
@@ -300,7 +300,7 @@ file by creating a separate message translation line per plural form
     msgstr[0] "Un fichero eliminado" # Translation in singular
     msgstr[1] "{0} ficheros eliminados" # Translation in plural
 
-When using this other format you are required to use another translation
+When using this other format, you are required to use another translation
 function::
 
     // Returns: "10 ficheros eliminados"
@@ -322,7 +322,7 @@ example Croatian:
     msgstr[1] "{0} datoteke uklonjenih"
     msgstr[2] "{0} slika uklonjenih"
 
-Please visit the `Lanchpad languages page <https://translations.launchpad.net/+languages>`_
+Please visit the `Launchpad languages page <https://translations.launchpad.net/+languages>`_
 for a detailed explanation of the plural form numbers for each language.
 
 Creating Your Own Translators
@@ -428,6 +428,7 @@ any language from an external service::
         $locale = Locale::parseLocale($locale);
         $language = $locale['language'];
         $messages = file_get_contents("http://example.com/translations/$lang.json");
+
         return new Package(
             'default', // Formatter
             null, // Fallback (none for default domain)
