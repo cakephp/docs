@@ -262,9 +262,9 @@ the view file in ``/src/Template/Recipes/search.ctp`` will be rendered::
     }
 
 Although CakePHP will automatically call it after every action's logic
-(unless you've set ``$this->autoRender`` to false), you can
-use it to specify an alternate view file by specifying an action
-name in the controller using ``$action``.
+(unless you've set ``$this->autoRender`` to false), you can use it to specify
+an alternate view file by specifying a view file name as first argument of
+``render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
 element file relative to the ``/src/Template`` folder. This allows
@@ -273,7 +273,7 @@ direct rendering of elements, very useful in AJAX calls::
     // Render the element in /src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
 
-The ``View::$layout`` parameter allows you to specify the layout
+The second parameter ``$layout`` of ``render()`` allows you to specify the layout
 with which the view is rendered.
 
 Rendering a Specific Template
