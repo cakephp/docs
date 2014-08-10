@@ -52,7 +52,7 @@ sure it doesn't have any obvious leaks:
 * You may want to enable :doc:`/core-libraries/components/security-component`.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.
-* Ensure your models have the correct :doc:`/core-libraries/validation` rules 
+* Ensure your models have the correct :doc:`/core-libraries/validation` rules
   enabled.
 * Check that only your ``webroot`` directory is publicly visible, and that your
   secrets (such as your app salt, and any security keys) are private and unique
@@ -78,9 +78,9 @@ directory being executed.
 Improve Your Application's Performance
 ======================================
 
-Class loading can easily take a big share of your application's processing time,
-in order to avoid this problem, it is recommended that you run this command in
-your production server once the aplication is deployed::
+Class loading can easily take a big share of your application's processing time.
+In order to avoid this problem, it is recommended that you run this command in
+your production server once the application is deployed::
 
     php composer.phar dumpautoload -o
 
