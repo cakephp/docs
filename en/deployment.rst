@@ -78,6 +78,12 @@ directory being executed.
 Improve Your Application's Performance
 ======================================
 
+Class loading can easily take a big share of your application's processing time,
+in order to avoid this problem, it is recommended that you run this command in
+your production server once the aplication is deployed::
+
+    php composer.phar dumpautoload -o
+
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
 recommended to symlink them for production. For example like this::
