@@ -236,12 +236,6 @@ assign a set of information to the view::
 
     $this->set($data);
 
-
-The attribute ``$pageTitle`` no longer exists. Use
-``set()`` to set the title::
-
-    $this->set('title', 'This is the page title');
-
 Rendering a View
 ----------------
 
