@@ -495,7 +495,7 @@ vous connecter.
     voulez un hachage permanent dans des environnements multiples.
 
 Création de classes de hachage de mots de passe personnalisées
----------------------------------------
+--------------------------------------------------------------
 Les classes de hachage de mots de passe personnalisées doivent étendre la classe ``AbstractPasswordHasher``
 et implémenter les méthodes abstraites ``hash()`` et ``check()``.
 Dans ``app/Controller/Component/Auth/CustomPasswordHasher.php``, vous pourriez mettre ceci::
