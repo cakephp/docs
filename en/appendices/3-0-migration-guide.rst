@@ -649,7 +649,7 @@ Note that some methods have switched the attribute order, e.g. ``assertEqual($is
 
 The following assertion methods have been deprecated and will be removed in the future:
 
-- ``assertWithinMargin()`` if favor of ``assertWithinRange()``
+- ``assertWithinMargin()`` in favor of ``assertWithinRange()``
 - ``assertTags()`` in favor of ``assertHtml()``
 
 Both method replacements also switched the attribute order for a consistent assert method API
