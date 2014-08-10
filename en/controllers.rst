@@ -69,7 +69,7 @@ The values in the child class will always override those in ``AppController.``
     -  :php:attr:`~Controller::$components`
     -  :php:attr:`~Controller::$helpers`
 
-Remember to add the default Html and Form helpers if you define the
+Remember to add the default ``Html`` and ``Form`` helpers if you define the
 :php:attr:`~Cake\\Controller\\Controller::$helpers` property in your
 ``AppController``.
 
@@ -86,10 +86,10 @@ Request Parameters
 When a request is made to a CakePHP application, CakePHP's
 :php:class:`Cake\\Routing\\Router` and :php:class:`Cake\\Routing\\Dispatcher`
 classes use :ref:`routes-configuration` to find and create the correct
-controller. The request data is encapsulated in a request object. CakePHP puts
-all of the important request information into the ``$this->request`` property.
-See the section on :ref:`cake-request` for more information on the CakePHP
-request object.
+controller instance. The request data is encapsulated in a request object.
+CakePHP puts all of the important request information into the ``$this->request``
+property. See the section on :ref:`cake-request` for more information on the
+CakePHP request object.
 
 Controller Actions
 ==================
@@ -132,17 +132,13 @@ CakePHP uses, you don't need to create and render the view manually. Instead,
 once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
 
-If for some reason you'd like to skip the default behavior, both of the
-following techniques will bypass the default view rendering behavior:
-
-* If you return a string, or an object that can be converted to a string from
-  your controller action, it will be used as the response body.
-* You can return a :php:class:`Cake\\Network\\Response` object with the
-  fully created response.
+If for some reason you'd like to skip the default behavior, you can return a
+:php:class:`Cake\\Network\\Response` object from the action with the fully
+created response.
 
 When you use controller methods with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-you will often want to return data that isn't a string. If you have controller
+you will typcially retun a ``Response`` istance. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning::
 
@@ -150,7 +146,8 @@ the request type before returning::
         public function popular() {
             $popular = $this->Recipes->find('popular');
             if (!$this->request->is('requested')) {
-                return $popular;
+                $this->response->body(json_encode($popular));
+                return $this->response;
             }
             $this->set('popular', $popular);
         }
@@ -158,9 +155,8 @@ the request type before returning::
 
 The above controller action is an example of how a method can be used with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` and normal
-requests. Returning array data to a non-requestAction request will cause errors
-and should be avoided. See the :doc:`request-action` section for more tips on
-using ``requestAction()``.
+requests. See the :doc:`request-action` section for more tips on using
+``requestAction()``.
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
