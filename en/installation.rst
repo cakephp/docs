@@ -43,8 +43,8 @@ incorporate CakePHP into any commercial or closed source application.
 Installing CakePHP
 ===================
 
-CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool for
-PHP 5.3+, as the officially supported method for installation.
+CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool
+for PHP 5.3+, as the officially supported method for installation.
 
 First, you'll need to download and install Composer if you haven't
 done so already. If you have cURL installed, it's as easy as running the
@@ -66,12 +66,12 @@ application by running::
     php composer.phar create-project -s dev cakephp/app
 
 Once Composer finishes downloading the application skeleton and the core
-CakePHP library, you should now have a functioning CakePHP application
+CakePHP library, you should have a functioning CakePHP application
 installed via Composer. Be sure to keep the composer.json and composer.lock
 files with the rest of your source code.
 
-You should now be able to visit the path to where you installed your CakePHP
-application and see the setup traffic lights.
+You can now visit the path to where you installed your CakePHP application and
+see the setup traffic lights.
 
 Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
@@ -100,10 +100,11 @@ process makes ``tmp`` and it's subfolders globally writeable to get things up
 and running quickly but you can update the permissions for better security and
 keep them writable only for the webserver user.
 
-One common issue is that the app/tmp directories and subdirectories must be writable both by the web server and the command line user.
-On a UNIX system, if your web server user is different from your command line user,
-you can run the following commands just once in your project to ensure that
-permissions will be setup properly::
+One common issue is that the app/tmp directories and subdirectories must be
+writable both by the web server and the command line user. On a UNIX system, if
+your web server user is different from your command line user, you can run the
+following commands just once in your project to ensure that permissions will be
+setup properly::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
@@ -128,7 +129,7 @@ Development
 A development installation is the fastest method to setup CakePHP.
 In this example, we will be using CakePHP's console to run PHP's built-in
 web server which will make your application available at
-``http://host:port``.  From the ``src`` directory, execute::
+``http://host:port``. From the ``src`` directory, execute::
 
     Console/cake server
 
@@ -143,13 +144,13 @@ utilizing the following arguments::
 
 This will serve your application at ``http://192.168.13.37:5673/``.
 
-That's it!  Your CakePHP application is up and running without having to
+That's it! Your CakePHP application is up and running without having to
 configure a web server.
 
 .. warning::
 
-    The development server should ever be used in a production environment. It
-    is only intended as a minimal development server.
+    The development server should *never* be used in a production environment. It
+    is only intended as a basic development server.
 
 Production
 ==========

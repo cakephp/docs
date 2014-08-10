@@ -1,5 +1,8 @@
 Views
 #####
+.. php:namespace:: Cake\View
+
+.. php:class:: View
 
 Views are the **V** in MVC. Views are responsible for generating
 the specific output required for the request. Often this is in the
@@ -18,17 +21,16 @@ common rendering scenarios:
 View Templates
 ==============
 
-The view layer of CakePHP is how you speak to your users. Most of
-the time your views will be showing (X)HTML documents to browsers,
-but you might also need to serve AMF data to a Flash object, reply
-to a remote application via SOAP, or output a CSV file for a user.
+The view layer of CakePHP is how you speak to your users. Most of the time your
+views will be showing (X)HTML documents to browsers, but you might also need to
+reply to a remote application via SOAP, or output a CSV file for a user.
 
 By default CakePHP view files are written in plain PHP and have a default
-extension of .ctp (CakePHP Template). These files contain all the
+extension of ``.ctp`` (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
-Twig, or Smarty, a subclass of View will bridge your templating
+Twig, a subclass of View will bridge your templating
 language and CakePHP.
 
 View files are stored in ``/src/Template/``, in a folder named after the
@@ -70,6 +72,24 @@ CakePHP does not automatically escape output. You can escape user content with
 the ``h()`` function::
 
     <?= h($user->bio); ?>
+
+Setting View Variables
+----------------------
+
+.. php:method:: set(string $var, mixed $value)
+
+Views have a ``set()`` method that is analogous to the ``set()``
+found in Controller objects. Using set() from your view file will
+add the variables to the layout and elements that will be rendered
+later. See :ref:`controller-methods` for more information on using
+set().
+
+In your view file you can do::
+
+    $this->set('activeMenuButton', 'posts');
+
+Then, in your layout, the ``$activeMenuButton`` variable will be
+available and contain the value 'posts'.
 
 .. _extending-views:
 
@@ -148,6 +168,10 @@ as the ``content`` block.
     You should avoid using ``content`` as a block name in your application.
     CakePHP uses this for uncaptured content in extended views.
 
+
+You can get the list of all populated blocks using the ``blocks()`` method::
+
+    $list = $this->blocks();
 
 .. _view-blocks:
 
@@ -236,10 +260,9 @@ states. You can provide a default value using the second argument:
 Using Blocks for Script and CSS Files
 -------------------------------------
 
-The :php:class:`HtmlHelper` ties into view blocks, and its
-:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
-:php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``block = true`` option:
+The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
+``meta()`` methods each update a block with the same name when used with the
+``block = true`` option:
 
 .. code-block:: php
 
@@ -325,7 +348,7 @@ JavaScript and CSS files from views.
 
 .. note::
 
-    When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
+    When using ``HtmlHelper::css()`` or ``HtmlHelper::script()``
     in view files, specify ``'block' => true`` to place the HTML
     source in a block with the same name. (See API for more details on usage).
 
@@ -334,11 +357,13 @@ The ``content`` block contains the contents of the rendered view.
 Setting the title for the layout is easiest to do in the
 controller, setting the ``title`` variable::
 
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title', 'View Active Users');
-       }
-   }
+    namespace App\Controller;
+    
+    class UsersController extends AppController {
+        public function view_active() {
+            $this->set('title', 'View Active Users');
+        }
+    }
 
 You can also set the ``title`` variable from inside the view file::
 
@@ -347,7 +372,7 @@ You can also set the ``title`` variable from inside the view file::
 You can create as many layouts as you wish: just place them in the
 ``/src/Template/Layout`` directory, and switch between them inside of your
 controller actions using the controller or view's
-:php:attr:`~Cake\\View\\View::$layout` property::
+``$layout`` property::
 
     // From a controller
     public function admin_view() {
@@ -363,17 +388,19 @@ space, I might create a new layout with the smaller advertising
 space and specify it as the layout for all controllers' actions
 using something like::
 
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title', 'View Active Users');
-           $this->layout = 'default_small_ad';
-       }
+    namespace App\Controller;
 
-       public function view_image() {
-           $this->layout = 'image';
-           // Output user image
-       }
-   }
+    class UsersController extends AppController {
+        public function view_active() {
+            $this->set('title', 'View Active Users');
+            $this->layout = 'default_small_ad';
+        }
+
+        public function view_image() {
+            $this->layout = 'image';
+            // Output user image
+        }
+    }
 
 CakePHP features two core layouts (besides CakePHP's default
 layout) you can use in your own application: 'ajax' and 'flash'.
@@ -391,6 +418,8 @@ If you want to use a layout that exists in a plugin, you can use
 :term:`plugin syntax`. For example, to use the contact layout from the
 Contacts plugin::
 
+    namespace App\Controller;
+
     class UsersController extends AppController {
         public function view_active() {
             $this->layout = 'Contacts.contact';
@@ -402,6 +431,8 @@ Contacts plugin::
 
 Elements
 ========
+
+.. php:method:: element(string $elementPath, array $data, array $options = [])
 
 Many applications have small blocks of presentation code that need
 to be repeated from page to page, sometimes in different places in
@@ -432,7 +463,7 @@ argument::
     ]);
 
 Inside the element file, all the passed variables are available as
-members of the parameter array (in the same way that :php:meth:`Controller::set()` in
+members of the parameter array (in the same way that ``Controller::set()`` in
 the controller works with view files). In the above example, the
 ``/src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
@@ -440,7 +471,7 @@ variable::
     // Inside /src/Template/Element/helpbox.ctp
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
-The :php:meth:`View::element()` method also supports options for the element.
+The ``View::element()`` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
 
     echo $this->element('helpbox', [
@@ -455,7 +486,7 @@ The options supported are 'cache' and 'callbacks'. An example::
         ]
     );
 
-Element caching is facilitated through the :php:class:`Cache` class. You can
+Element caching is facilitated through the ``Cache`` class. You can
 configure elements to be stored in any Cache configuration you've set up. This
 gives you a great amount of flexibility to decide where and for how long elements
 are stored. To cache different versions of the same element in an application,
@@ -477,6 +508,8 @@ controller.
 
 To do this, in your controller add something like the following for
 the Post example::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
         // ...
@@ -511,7 +544,7 @@ You can take advantage of CakePHP view caching if you supply a
 cache parameter. If set to true, it will cache the element in the
 'default' Cache configuration. Otherwise, you can set which cache configuration
 should be used. See :doc:`/core-libraries/caching` for more information on
-configuring :php:class:`Cache`. A simple example of caching an element would be::
+configuring ``Cache``. A simple example of caching an element would be::
 
     echo $this->element('helpbox', [], ['cache' => true]);
 
@@ -534,7 +567,7 @@ overwriting the previous element() call's cached result. For example::
 
 The above will ensure that both element results are cached separately. If
 you want all element caching to use the same cache configuration, you can avoid
-some repetition by setting :php:attr:`View::$elementCache` to the cache
+some repetition by setting ``View::$elementCache`` to the cache
 configuration you want to use. CakePHP will use this configuration when none
 is given.
 
@@ -575,8 +608,10 @@ components of CakePHP, view classes have a few conventions:
 You'll also want to extend ``View`` to ensure things work correctly::
 
     // In /src/View/PdfView.php
+    namespace App\View;
 
-    App::uses('View', 'View');
+    use Cake\View\View;
+
     class PdfView extends View {
         public function render($view = null, $layout = null) {
             // Custom logic here.
@@ -585,112 +620,6 @@ You'll also want to extend ``View`` to ensure things work correctly::
 
 Replacing the render method lets you take full control over how your content is
 rendered.
-
-View API
-========
-
-.. php:class:: View
-
-View methods are accessible in all view, element and layout files.
-To call any view method use ``$this->method()``
-
-.. php:method:: set(string $var, mixed $value)
-
-    Views have a ``set()`` method that is analogous to the ``set()``
-    found in Controller objects. Using set() from your view file will
-    add the variables to the layout and elements that will be rendered
-    later. See :ref:`controller-methods` for more information on using
-    set().
-
-    In your view file you can do::
-
-        $this->set('activeMenuButton', 'posts');
-
-    Then, in your layout, the ``$activeMenuButton`` variable will be
-    available and contain the value 'posts'.
-
-.. php:method:: get(string $var, $default = null)
-
-    Get the value of a viewVar with the name ``$var``. You can provide a default
-    value in case the variable is not already set.
-
-.. php:method:: getVars()
-
-    Gets a list of all the available view variables in the current
-    rendering scope. Returns an array of variable names.
-
-.. php:method:: element(string $elementPath, array $data, array $options = [])
-
-    Renders an element or view partial. See the section on
-    :ref:`view-elements` for more information and
-    examples.
-
-.. php:method:: uuid(string $object, mixed $url)
-
-    Generates a unique non-random DOM ID for an object, based on the
-    object type and URL. This method is often used by helpers that need
-    to generate unique DOM ID's for elements::
-
-        $uuid = $this->uuid(
-          'form',
-          ['controller' => 'Posts', 'action' => 'index']
-        );
-        //$uuid contains 'form0425fe3bad'
-
-.. php:method:: blocks
-
-    Get the names of all defined blocks as an array.
-
-.. php:method:: start($name)
-
-    Start a capturing block for a view block. See the section on
-    :ref:`view-blocks` for examples.
-
-.. php:method:: end
-
-    End the top most open capturing block. See the section on
-    :ref:`view-blocks` for examples.
-
-.. php:method:: append($name, $content)
-
-    Append into the block with ``$name``. See the section on
-    :ref:`view-blocks` for examples.
-
-.. php:method:: prepend($name, $content)
-
-    Prepend to the block with ``$name``. See the section on
-    :ref:`view-blocks` for examples.
-
-.. php:method:: assign($name, $content)
-
-    Assign the value of a block. This will overwrite any existing content. See
-    the section on :ref:`view-blocks` for examples.
-
-.. php:method:: fetch($name, $default = '')
-
-    Fetch the value of a block. If a block is empty or undefined, '' will be returned.
-    See the section on :ref:`view-blocks` for examples.
-
-.. php:method:: extend($name)
-
-    Extend the current view/element/layout with the named one. See the section
-    on :ref:`extending-views` for examples.
-
-.. php:attr:: layout
-
-    Set the layout the current view will be wrapped in.
-
-.. php:attr:: elementCache
-
-    The cache configuration used to cache elements. Setting this
-    property will change the default configuration used to cache elements.
-    This default can be overridden using the 'cache' option in the element
-    method.
-
-.. php:attr:: request
-
-    An instance of :php:class:`CakeRequest`. Use this instance to access
-    information about the current request.
 
 More About Views
 ================
