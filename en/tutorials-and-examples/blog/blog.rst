@@ -154,7 +154,7 @@ A copy of CakePHP's configuration file is found in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
-values in the ``Datatsources.default`` array with those that apply to your
+values in the ``Datasources.default`` array with those that apply to your
 setup. A sample completed configuration array might look something
 like the following::
 
