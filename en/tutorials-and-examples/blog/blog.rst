@@ -182,10 +182,6 @@ able to open your browser and see the CakePHP welcome page. It should
 also tell you that your database connection file was found, and
 that CakePHP can successfully connect to the database.
 
-.. note::
-
-    Remember that you'll need to have PDO, and pdo_mysql enabled in
-    your php.ini.
 
 Optional Configuration
 ======================
