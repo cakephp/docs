@@ -125,14 +125,14 @@ potential warnings by using the ``ignoreMissing`` option::
         'Blog' => ['routes' => true]
     ]);
 
-When loading plugins the plugin name used should match the namespace.
+When loading plugins, the plugin name used should match the namespace.
 For example you have a plugin with top level namespace ``Users`` you would load
 it using::
 
     Plugin::load('User');
 
-If you prefer having have your vendor name as top level and have namespace like
-``AcmeCorp\\Users`` then you would load the plugin as::
+If you prefer to have your vendor name as top level and have a namespace like
+``AcmeCorp\\Users``, then you would load the plugin as::
 
     Plugin::load('Jose\\Users');
 
