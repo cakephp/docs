@@ -30,8 +30,8 @@ would do the following::
 This would install the latest version of DebugKit and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
 the plugin you want to install is not available on packagist.org, you can clone
-or copy the plugin code into your ``/Plugin`` directory. Assuming you want to install
-a plugin named 'ContactManager', you should have a folder in ``/Plugin``
+or copy the plugin code into your ``/plugins`` directory. Assuming you want to install
+a plugin named 'ContactManager', you should have a folder in ``/plugins``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
 
@@ -45,10 +45,8 @@ method::
     // Loads a single plugin
     Plugin::load('ContactManager');
 
-    // Loads a single plugin, with a custom namespace.
-    Plugin::load('ContactManager', [
-        'namespace' => 'AcmeCorp\ContactManager'
-    ]);
+    // Loads a plugin with a vendor namespace at top level.
+    Plugin::load('AcmeCorp\ContactManager');
 
     // Loads all plugins at once
     Plugin::loadAll();
@@ -56,6 +54,10 @@ method::
 ``loadAll()`` loads all plugins available, while allowing you to set certain
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
+
+.. note::
+
+    ``Plugin::loadAll()`` won't load vendor namespaced plugins.
 
 Autoloading Plugin Classes
 --------------------------
@@ -87,8 +89,8 @@ autoloading for your plugin::
 Plugin Configuration
 ====================
 
-There is a lot you can do with the ``load`` and ``loadAll`` methods to help with
-plugin configuration and routing. Perhaps you want to load all plugins
+There is a lot you can do with the ``load()`` and ``loadAll()`` methods to help
+with plugin configuration and routing. Perhaps you want to load all plugins
 automatically, while specifying custom routes and bootstrap files for
 certain plugins::
 
@@ -123,12 +125,16 @@ potential warnings by using the ``ignoreMissing`` option::
         'Blog' => ['routes' => true]
     ]);
 
-By default the namespace of the Plugin should match the plugin name. If this is
-not the case, you can use the ``namespace`` option to provide a different
-namespace. For example you have a Users plugin that actually uses
-``Jose\\Users`` as its namespace::
+When loading plugins, the plugin name used should match the namespace.
+For example you have a plugin with top level namespace ``Users`` you would load
+it using::
 
-    Plugin::load('Users', ['namespace' => 'Jose\Users']);
+    Plugin::load('User');
+
+If you prefer to have your vendor name as top level and have a namespace like
+``AcmeCorp\\Users``, then you would load the plugin as::
+
+    Plugin::load('AcmeCorp\\Users');
 
 This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.
