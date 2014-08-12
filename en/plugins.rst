@@ -134,7 +134,7 @@ it using::
 If you prefer to have your vendor name as top level and have a namespace like
 ``AcmeCorp\\Users``, then you would load the plugin as::
 
-    Plugin::load('Jose\\Users');
+    Plugin::load('AcmeCorp\\Users');
 
 This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.
