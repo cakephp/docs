@@ -83,7 +83,7 @@ lancer vos propres tests en lancant un de ceux présents dans le coeur::
     // Pour phpunit.phar
     $ php phpunit.phar
 
-    // Pour un PHPUnit installé avec composer
+    // Pour un PHPUnit installé avec Composer
     $ vendor/bin/phpunit
 
 Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
@@ -1355,7 +1355,7 @@ graphique sympa des résultats de votre test:
 
 .. code-block:: bash
 
-    # Download composer if it is missing.
+    # Download Composer if it is missing.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install

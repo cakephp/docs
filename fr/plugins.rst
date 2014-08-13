@@ -22,7 +22,7 @@ Installer un Plugin
 ===================
 
 Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
-et peuvent être installés avec ``composer``. Pour installer DebugKit, vous
+et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
@@ -63,7 +63,7 @@ Autochargement des Classes du Plugin
 ------------------------------------
 
 Quand on utilise ``bake`` pour la création d'un plugin ou quand on en installe
-un en utilisant composer, vous n'avez typiquement pas besoin de faire des
+un en utilisant Composer, vous n'avez typiquement pas besoin de faire des
 changements dans votre application afin que CakePHP reconnaisse les classes qui
 se trouvent dedans.
 
@@ -76,12 +76,12 @@ composer.json de votre application pour contenir les informations suivantes::
         "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
     }
 
-De plus, vous aurez besoin de dire à composer de refraichir le cache de
+De plus, vous aurez besoin de dire à Composer de refraichir le cache de
 l'autochargement::
 
     $ php composer.phar dumpautoload
 
-Si vous ne pouvez pas utiliser composer pour toute raison, vous pouvez aussi
+Si vous ne pouvez pas utiliser Composer pour toute raison, vous pouvez aussi
 utiliser un autochargement fallback pour votre plugin::
 
     Plugin::load('ContactManager', ['autoload' => true]);

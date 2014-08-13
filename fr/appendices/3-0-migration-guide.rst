@@ -32,7 +32,7 @@ CakePHP doit être installé avec Composer
 
 Puisque CakePHP ne peut plus être facilement installé via PEAR, ou dans
 un répertoire partagé, ces options ne sont plus supportées. A la place, vous
-devez utiliser `composer <http://getcomposer.org>`_ pour installer CakePHP dans
+devez utiliser `Composer <http://getcomposer.org>`_ pour installer CakePHP dans
 votre application.
 
 Namespaces (Espaces de Noms)
