@@ -286,13 +286,13 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use FlashComponent's ``__call`` magic method method to set a message to
-a session variable to be displayed on the page after redirection. In the layout
+We use FlashComponent's magic ``__call`` method to set a message to a session
+variable, which will be displayed on the page after redirection. In the layout
 we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
 the corresponding session variable. The controller's
 :php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
 URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
-index action of articles controller. You can refer to
+index action of the articles controller. You can refer to
 :php:func:`Cake\\Routing\\Router::url()` function on the `API
 <http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
 various CakePHP functions.
@@ -390,7 +390,7 @@ validation engine is strong, with a number of pre-built rules
 adding your own validation rules. For more information on that
 setup, check the :doc:`/core-libraries/validation` documentation.
 
-Now that your validation rules in place, use the app to try to add
+Now that your validation rules are in place, use the app to try to add
 an article with an empty title or body to see how it works.  Since we've used the
 :php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
