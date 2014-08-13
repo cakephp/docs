@@ -23,7 +23,7 @@ for you.
 PHP provides a CLI client that makes interfacing with your
 file system and applications much smoother. The CakePHP console
 provides a framework for creating shell scripts. The Console uses a
-dispatcher-type setup to load a shell or task, and hand it its
+dispatcher-type setup to load a shell or task, and provide its
 parameters.
 
 .. note::
