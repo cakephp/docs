@@ -251,7 +251,7 @@ Lazy loading
     will frequently emit N queries where N is the number of articles being
     iterated.
 
-While lazy loading is not include by CakePHP's ORM, it is not hard to implement
+While lazy loading is not included by CakePHP's ORM, it is not hard to implement
 it yourself when and where you need it. When implementing an accessor method you
 can lazily load associated data::
 
