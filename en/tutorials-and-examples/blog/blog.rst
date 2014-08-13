@@ -53,7 +53,7 @@ important set up tasks, such as setting the correct file permissions and
 creating your config/app.php file for you.
 
 There are other ways to install CakePHP if you are uncomfortable with
-composer. For more information: check out the :doc:`/installation` section.
+Composer. For more information: check out the :doc:`/installation` section.
 
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::

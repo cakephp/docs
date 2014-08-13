@@ -22,7 +22,7 @@ Installing a Plugin
 ===================
 
 Many plugins are available on `Packagist <http://packagist.org>`_
-and can be installed with ``composer``. To install DebugKit, you
+and can be installed with ``Composer``. To install DebugKit, you
 would do the following::
 
     php composer.phar require cakephp/debug_kit
@@ -61,7 +61,7 @@ Autoloading Plugin Classes
 --------------------------
 
 When using ``bake`` for creating a plugin or when installing a it using
-composer, you don't typically need to make any changes to your application in order to
+Composer, you don't typically need to make any changes to your application in order to
 make CakePHP recognize the classes that live inside it.
 
 In any other cases you may need to modify your application's composer.json file
@@ -73,11 +73,11 @@ to contain the following information::
         "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
-Additionally you will need to tell composer to refresh it's autoloading cache::
+Additionally you will need to tell Composer to refresh its autoloading cache::
 
     $ php composer.phar dumpautoload
 
-If you are unable to use composer for any reason, you can also use a fallback
+If you are unable to use Composer for any reason, you can also use a fallback
 autoloading for your plugin::
 
     Plugin::load('ContactManager', ['autoload' => true]);

@@ -80,7 +80,7 @@ application's tests::
     // For phpunit.phar
     $ php phpunit.phar
 
-    // For composer installed phpunit
+    // For Composer installed phpunit
     $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
@@ -1294,7 +1294,7 @@ of your testing results:
 
 .. code-block:: bash
 
-    # Download composer if it is missing.
+    # Download Composer if it is missing.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
