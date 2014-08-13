@@ -1,8 +1,8 @@
 Transactions
 ############
 
-To perform a transaction, a model's tables must be of a type that
-supports transactions.
+To perform a transaction, a model's table must be of a datasource
+and type which supports transactions.
 
 All transaction methods must be performed on a model's DataSource
 object. To get a model's DataSource from within the model, use:
