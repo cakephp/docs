@@ -36,7 +36,7 @@ be used in the ArticlesController, and will be tied to a database table called
     cannot find a corresponding file in /src/Model/Table. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
-    use the defaults instead.
+    use the a generated model instead.
 
 For more on models, such as callbacks, and validation, check out the :doc:`/orm`
 chapter of the Manual.
@@ -61,7 +61,7 @@ Now, let's add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/articles/index (which is also the same
 as www.example.com/articles/), they might expect to see a listing of
-articles. The code for that action would look something like this::
+articles. The code for that action would look like this::
 
     namespace App\Controller;
 
@@ -97,8 +97,8 @@ To learn more about CakePHP's controllers, check out the
 Creating Article Views
 ======================
 
-Now that we have our data flowing to our model, and our application
-logic and flow defined by our controller, let's create a view for
+Now that we have our data flowing from our model, and our application
+logic is defined by our controller, let's create a view for
 the index action we created above.
 
 CakePHP views are just presentation-flavored fragments that fit inside
@@ -159,14 +159,14 @@ array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
 specify URLs relative to the base of the application in the form of
-/controller/action/param1/param2.
+``/controller/action/param1/param2`` or use :ref:`named-routes`.
 
 At this point, you should be able to point your browser to
 http://www.example.com/articles/index. You should see your view,
 correctly formatted with the title and table listing of the articles.
 
 If you happened to have clicked on one of the links we created in
-this view (that link a article's title to a URL /articles/view/some\_id),
+this view (that link a article's title to a URL ``/articles/view/some\_id``),
 you were probably informed by CakePHP that the action hasn't yet
 been defined. If you were not so informed, either something has
 gone wrong, or you actually did define it already, in which case
@@ -187,9 +187,7 @@ ArticlesController now::
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
-
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
     }
@@ -205,7 +203,7 @@ the requested URL. If a user requests ``/articles/view/3``, then the value
 
 We also do a bit of error checking to ensure a user is actually
 accessing a record. If a user requests ``/articles/view``, we will throw a
-``NotFoundException`` and let the CakePHP ErrorHandler take over. By using the
+``NotFoundException`` and let the ErrorHandler take over. By using the
 ``get()`` function in the Articles table, we also perform a similar check to make
 sure the user has accessed a record that exists. In case the requested article
 is not present in the database, the ``get()`` function will throw
@@ -251,7 +249,6 @@ ArticlesController::
             }
 
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
 
@@ -289,17 +286,16 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use FlashComponent's
-``__call`` magic method method to
-set a message to a session variable to be displayed on the page after
-redirection. In the layout we have ``<?= $this->Flash->render() ?>`` which
-displays the message and clears the corresponding session variable. The
-controller's :php:meth:`Cake\\Controller\\Controller::redirect` function
-redirects to another URL. The param ``['action' => 'index']`` translates to URL
-/articles i.e the index action of articles controller. You can refer to
-:php:func:`Cake\\Routing\\Router::url()` function on the
-`API <http://api.cakephp.org>`_ to see the formats in which you can specify a
-URL for various CakePHP functions.
+We use FlashComponent's ``__call`` magic method method to set a message to
+a session variable to be displayed on the page after redirection. In the layout
+we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
+the corresponding session variable. The controller's
+:php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
+URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
+index action of articles controller. You can refer to
+:php:func:`Cake\\Routing\\Router::url()` function on the `API
+<http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
+various CakePHP functions.
 
 Calling the ``save()`` method will check for validation errors and
 abort the save if any occur. We'll discuss how those errors are
@@ -351,8 +347,8 @@ textarea. There's a bit of introspection and automagic here:
 ``input()`` will output different form elements based on the model
 field specified.
 
-The ``$this->Form->end()`` call ends
-the form. Again, refer to :doc:`/views/helpers` for more on helpers.
+The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
+CSRF/Form Tampering prevention is enabled.
 
 Now let's go back and update our ``/src/Template/Articles/index.ctp``
 view to include a new "Add Article" link. Before the ``<table>``, add
@@ -394,7 +390,7 @@ validation engine is strong, with a number of pre-built rules
 adding your own validation rules. For more information on that
 setup, check the :doc:`/core-libraries/validation` documentation.
 
-Now that you have your validation rules in place, use the app to try to add
+Now that your validation rules in place, use the app to try to add
 an article with an empty title or body to see how it works.  Since we've used the
 :php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
@@ -430,10 +426,10 @@ This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the article does not
 exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
-Next the action checks whether the request is either a POST or a PUT request. If it is, then we
-use the POST data to update our article entity by using the 'patchEntity' method.
-Finally we use the table object to save the entity back or kick back and show the user
-validation errors.
+Next the action checks whether the request is either a POST or a PUT request. If
+it is, then we use the POST data to update our article entity by using the
+'patchEntity' method.  Finally we use the table object to save the entity back
+or kick back and show the user validation errors.
 
 The edit view might look something like this:
 
@@ -453,10 +449,8 @@ The edit view might look something like this:
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
 
-One thing to note here: CakePHP will assume that you are editing a
-model if the 'id' field is present in the data array. If no 'id' is
-present (look back at our add view), CakePHP will assume that you are
-inserting a new model when ``save()`` is called.
+CakePHP will use the result of ``$article->isNew()`` to determine whether or not
+a ``save()`` should insert a new record, or update an existing one.
 
 You can now update your index view with links to edit specific
 articles:
