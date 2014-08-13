@@ -31,7 +31,7 @@ Nested Transactions
 
 It is possible to start a transaction several times using the
 :php:meth:`Datasource::begin()` method. The transaction will finish only when
-the number of `commit` and `rollback` match with begin's.
+the number of ``commit``s and ``rollback``s match with ``begin``s.
 
 ::
 
@@ -53,7 +53,7 @@ transaction mode and the nested is not supported or disabled.
 
 If you want to use multiple begin's but not use the nested transaction from database,
 disable it using ``$dataSource->useNestedTransactions = false;``. It will use only
-the global transaction.
+one global transaction.
 
 The real nested transaction is disabled by default. Enable it using
 ``$dataSource->useNestedTransactions = true;``.
