@@ -744,11 +744,14 @@ View\\Helper
 - The ``$settings`` property is now called ``$_config`` and should be accessed
   through the ``config()`` method.
 - Configuration options are no longer set as public properties.
-- ``Cake\\View\\Helper::clean()`` was removed. It was never robust enough
+- ``Helper::clean()`` was removed. It was never robust enough
   to fully prevent xss. instead you should escape content with :php:func:`h` or
   use a dedicated libray like htmlPurifier.
-- ``Cake\\View\\Helper::output()`` was removed. This method was
+- ``Helper::output()`` was removed. This method was
   deprecated in 2.x.
+- Methods ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
+  ``Helper::assetTimestamp()`` has been moved to new :php:class:`Cake\\View\\Helper\\UrlHelper`
+  helper. ``Helper::url()`` is now available as :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
 - Magic accessors to deprecated properties have been removed. The following
   properties now need to be accessed from the request object:
 
