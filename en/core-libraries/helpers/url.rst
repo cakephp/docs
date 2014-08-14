@@ -74,7 +74,16 @@ URL for named route::
     echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
 
     // Assuming route is setup like:
-    // $router->connect('/products/:slug', ['controller' => 'products', 'action' => 'view'], ['_name' => 'product-page']);
+    // $router->connect(
+    //     '/products/:slug',
+    //     [
+    //         'controller' => 'products',
+    //         'action' => 'view'
+    //     ],
+    //     [
+    //         '_name' => 'product-page'
+    //     ]
+    // );
     /products/i-m-slug
 
 For further information check
