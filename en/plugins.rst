@@ -46,7 +46,7 @@ method::
     Plugin::load('ContactManager');
 
     // Loads a plugin with a vendor namespace at top level.
-    Plugin::load('AcmeCorp\ContactManager');
+    Plugin::load('AcmeCorp/ContactManager');
 
     // Loads all plugins at once
     Plugin::loadAll();
@@ -132,9 +132,9 @@ it using::
     Plugin::load('User');
 
 If you prefer to have your vendor name as top level and have a namespace like
-``AcmeCorp\\Users``, then you would load the plugin as::
+``AcmeCorp/Users``, then you would load the plugin as::
 
-    Plugin::load('AcmeCorp\\Users');
+    Plugin::load('AcmeCorp/Users');
 
 This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.

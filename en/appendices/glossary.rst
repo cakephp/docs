@@ -34,8 +34,8 @@ Glossary
             // The plugin is "DebugKit", and the class name is "Toolbar".
             'DebugKit.Toolbar'
 
-            // The plugin is "AcmeCorp\\Tools", and the class name is "Toolbar".
-            'AcmeCorp\\Tools.Toolbar'
+            // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+            'AcmeCorp/Tools.Toolbar'
 
     dot notation
         Dot notation defines an array path, by separating nested levels with ``.``
