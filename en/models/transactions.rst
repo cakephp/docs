@@ -31,7 +31,7 @@ Nested Transactions
 
 It is possible to start a transaction several times using the
 :php:meth:`Datasource::begin()` method. The transaction will finish only when
-the number of ``commit``s and ``rollback``s match with ``begin``s.
+the number of ``commit`` and ``rollback`` calls match with ``begin``.
 
 ::
 
