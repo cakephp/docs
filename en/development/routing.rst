@@ -313,6 +313,8 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
 * ``_method`` Define the HTTP verb/method to use. Useful when working with
   :ref:`resource-routes`.
+* ``_name`` Name of route. If you have setup named routes you can use this key
+  to specify it.
 
 Passing Parameters to Action
 ----------------------------
@@ -369,11 +371,11 @@ can be used in reverse routing to identify the route you want to use::
     );
 
     // Generate a URL using a named route.
-    $url = Router::url('login');
+    $url = Router::url(['_name' => login']);
 
     // Generate a URL using a named route,
     // with some query string args.
-    $url = Router::url('login', ['username' => 'jimmy']);
+    $url = Router::url(['_name' => 'login', 'username' => 'jimmy']);
 
 If your route template contains any route elements like ``:controller`` you'll
 need to supply those as part of the options to ``Router::url()``.
@@ -746,7 +748,7 @@ Since ``5`` has a numeric key, it is treated as a passed argument.
 Generating URLs
 ===============
 
-.. php:staticmethod:: url($url = null, $options = [])
+.. php:staticmethod:: url($url = null, $full = false)
 
 Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your URL structure without having to modify all your code.
@@ -755,7 +757,7 @@ later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
-    $this->Html->link('View', '/articles/view/' + $id);
+    $this->Html->link('View', '/articles/view/' . $id);
 
 And then later decide that ``/articles`` should really be called
 'articles' instead, you would have to go through your entire
@@ -799,6 +801,8 @@ You can also use any of the special route elements when generating URLs:
 * ``_port`` Set the port if you need to create links on non-standard ports.
 * ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_name`` Name of route. If you have setup named routes you can use this key
+  to specify it.
 
 .. _redirect-routing:
 
