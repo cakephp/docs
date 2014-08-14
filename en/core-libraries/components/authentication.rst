@@ -101,7 +101,9 @@ authentication object will override the matching key in the 'all' key.
 The core authentication objects support the following configuration
 keys.
 
-- ``fields`` The fields to use to identify a user by.
+- ``fields`` The fields to use to identify a user by. You can use keys
+  ``username`` and ``password`` to specify your username and password fields
+  respectively.
 - ``userModel`` The model name of the users table, defaults to Users.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['Users.is_active' => true]``.
@@ -115,7 +117,7 @@ To configure different fields for user in ``$components`` array::
         'Auth' => [
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'email']
+                    'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
         ]
