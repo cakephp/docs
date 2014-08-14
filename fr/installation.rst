@@ -68,7 +68,7 @@ une nouvelle application CakePHP en lançant::
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du coeur de la librairie de CakePHP, vous devriez avoir maintenant une
-application CakePHP qui fonctionne, installée via composer. Assurez-vous de
+application CakePHP qui fonctionne, installée via Composer. Assurez-vous de
 garder les fichiers composer.json et composer.lock avec le reste de votre code
 source.
 
