@@ -313,7 +313,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
 * ``_method`` Define the HTTP verb/method to use. Useful when working with
   :ref:`resource-routes`.
-* ``_name`` Name of route. If you have setup named routes you can use this key
+* ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
 Passing Parameters to Action
@@ -801,7 +801,7 @@ You can also use any of the special route elements when generating URLs:
 * ``_port`` Set the port if you need to create links on non-standard ports.
 * ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
-* ``_name`` Name of route. If you have setup named routes you can use this key
+* ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
 .. _redirect-routing:
