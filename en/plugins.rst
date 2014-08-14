@@ -62,7 +62,7 @@ plugins you explicitly specify.
 Autoloading Plugin Classes
 --------------------------
 
-When using ``bake`` for creating a plugin or when installing a it using
+When using ``bake`` for creating a plugin or when installing a plugin using
 composer, you don't typically need to make any changes to your application in order to
 make CakePHP recognize the classes that live inside it.
 
