@@ -744,6 +744,12 @@ user, nor will authorize objects be checked::
 By calling it empty you allow all actions to be public.
 For a single action you can provide the action name as string. Otherwise use an array.
 
+.. note::
+
+    You should not add the "login" action of your ``UsersController`` to allow list.
+    Doing so would cause problems with normal functioning of ``AuthComponent``.
+
+
 Making Actions Require Authorization
 ------------------------------------
 
