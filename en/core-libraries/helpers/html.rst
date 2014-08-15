@@ -23,14 +23,6 @@ are a few examples of how to use the ``$attributes`` parameter:
     Desired attributes: <tag name="foo" value="bar" />
     Array parameter:  ['name' => 'foo', 'value' => 'bar']
 
-
-.. note::
-
-    The HtmlHelper is available in all views by default. If you're
-    getting an error informing you that it isn't there, it's usually
-    due to its name being missing from a manually configured ``$helpers``
-    controller variable.
-
 Inserting Well-Formatted Elements
 =================================
 
