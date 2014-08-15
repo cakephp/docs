@@ -548,27 +548,6 @@ vous connecter.
     ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
-Creating custom password hasher classes
----------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``src/Auth/CustomPasswordHasher.php`` you could put
-the following::
-
-    namespace App\Auth;
-
-    use Cake\Auth\AbstractPasswordHasher;
-
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
-            // stuff here
-        }
-
-        public function check($password, $hashedPassword) {
-            // stuff here
-        }
-    }
-
 Connecter les utilisateurs manuellement
 ---------------------------------------
 
