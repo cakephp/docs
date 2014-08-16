@@ -401,6 +401,9 @@ for using the session object.
   ``cake_sessions``.
 * The session cookie timeout is automatically updated in tandem with the timeout
   in the session data.
+* The path for session cookie now defaults to app's base path instead of "/".
+  Also new config variable ``Session.cookiePath`` has been added to easily
+  customize the cookie path.
 
 Network\\Http
 =============
@@ -513,6 +516,8 @@ CookieComponent
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
   these are now managed through config data. See
   :doc:`/core-libraries/components/cookie` for more information.
+- The path for cookies now defaults to app's base path instead of "/".
+
 
 AuthComponent
 -------------
