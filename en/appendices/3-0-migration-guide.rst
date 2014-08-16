@@ -402,7 +402,7 @@ for using the session object.
 * The session cookie timeout is automatically updated in tandem with the timeout
   in the session data.
 * The path for session cookie now defaults to app's base path instead of "/".
-  Also new config variable ``Session.cookie_path`` has been added to easily
+  Also new config variable ``Session.cookiePath`` has been added to easily
   customize the cookie path.
 
 Network\\Http
