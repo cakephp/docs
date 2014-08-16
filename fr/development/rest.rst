@@ -30,44 +30,89 @@ dans nos actions de controller. Un controller basique pourrait ressembler
 
         public $components = array('RequestHandler');
 
+        /**
+         * GET /recipes
+         */
         public function index() {
-            $recipes = $this->Recipe->find('all');
+            $recipes = $this->Recipes->find('all');
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
             ));
         }
 
-        public function view($id) {
-            $recipe = $this->Recipe->findById($id);
+        /**
+         * POST /recipes
+         */
+        public function add() {
+            // Le résultat à retourner
+            $result = false;
+        
+            // Créé une nouvelle recette
+            $recipe = $this->Recipes->newEntity($this->request->data);
+            
+            // La recette a été sauvegardée
+            if($this->Recipes->save($recipe)) {
+                $result = true;
+            }
             $this->set(array(
                 'recipe' => $recipe,
-                '_serialize' => array('recipe')
+                'result' => $result,
+                '_serialize' => ['recipe', 'result']
             ));
         }
 
-        public function edit($id) {
-            $this->Recipe->id = $id;
-            if ($this->Recipe->save($this->request->data)) {
+        /*
+         * GET /recipes/:id
+         */
+        public function view($id = null) {
+            // Find the recipe by id
+            $recipe = $this->Recipes->get($id);
+            $this->set(array(
+                'recipe' => $recipe,
+                '_serialize' => ['recipe']
+            ));
+        }
+
+        /**
+         * PUT /recipes/:id
+         * PATCH /recipes/:id
+         */
+        public function edit($id = null) {
+            // Récupère la recette via son id
+            $recipe = $this->Recipes->get($id);
+            
+            // Met à jour la recette
+            $recipe->set($this->request->data);
+            
+            // Essaie d'enregistrer la recette
+            if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
                 $message = 'Error';
             }
             $this->set(array(
                 'message' => $message,
-                '_serialize' => array('message')
+                '_serialize' => ['message']
             ));
         }
 
-        public function delete($id) {
-            if ($this->Recipe->delete($id)) {
+        /**
+         * DELETE /recipes/:id
+         */
+        public function delete($id = null) {
+            // Récupère la recette via son id
+            $recipe = $this->Recipes->get($id);
+            
+            // Suppression de la recette
+            if ($this->Recipe->delete($recipe)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';
             }
             $this->set(array(
                 'message' => $message,
-                '_serialize' => array('message')
+                '_serialize' => ['message']
             ));
         }
     }
@@ -84,11 +129,11 @@ variables de vue que ``XmlView`` doit sérialiser en XML.
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
 nous ne devons pas définir la variable de vue ``_serialize``, et à la place
 utiliser les fichiers de vue. Nous plaçons les vues REST pour notre
-RecipesController à l'intérieur de ``app/View/recipes/xml``. Nous pouvons aussi
+RecipesController à l'intérieur de ``src/Template/Recipes/xml``. Nous pouvons aussi
 utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces vues.
 Voici ce que notre vue index pourrait ressembler à::
 
-    // app/View/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.ctp
     // Faire du formatage et de la manipulation sur le tableau
     // $recipes.
     $xml = Xml::fromArray(array('response' => $recipes));
