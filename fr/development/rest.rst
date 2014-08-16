@@ -82,10 +82,10 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             // Récupère la recette via son id
             $recipe = $this->Recipes->get($id);
             
-            // Met à jours la recette
+            // Met à jour la recette
             $recipe->set($this->request->data);
             
-            // Try to save the recipe
+            // Essaie d'enregistrer la recette
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
             } else {
