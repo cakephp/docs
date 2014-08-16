@@ -17,6 +17,9 @@ level ``Session`` key, and a number of options are available:
 
 * ``Session.cookie`` - Change the name of the session cookie.
 
+* ``Session.cookie_path`` - The url path for which session cookie is set.
+  Maps to the ``session.cookie_path`` php.ini config. Defaults to base path of app.
+
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
 
 * ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
