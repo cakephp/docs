@@ -90,25 +90,27 @@ branch.
 Permissions
 ===========
 
-CakePHP uses the ``tmp`` directory for a number of different
-operations. Model descriptions, cached views, and session
-information are just a few examples.
+CakePHP uses the ``tmp`` directory for a number of different operations.
+Model descriptions, cached views, and session information are just a few examples.
+The ``logs`` directory is used to write log files by the default ``FileLog`` engine.
 
-As such, make sure the directory ``tmp`` and all its subdirectories in your
+As such, make sure the directory ``logs``, ``tmp`` and all its subdirectories in your
 CakePHP installation are writable by the web server user. Composer's installation
 process makes ``tmp`` and it's subfolders globally writeable to get things up
 and running quickly but you can update the permissions for better security and
 keep them writable only for the webserver user.
 
-One common issue is that the app/tmp directories and subdirectories must be
+One common issue is that ``logs`` and ``tmp`` directories and subdirectories must be
 writable both by the web server and the command line user. On a UNIX system, if
 your web server user is different from your command line user, you can run the
-following commands just once in your project to ensure that permissions will be
-setup properly::
+following commands from your application direcotry just once in your project to
+ensure that permissions will be setup properly::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx logs
+   setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 Setup
 =====
@@ -171,6 +173,7 @@ production setup will look like this on the file system::
         plugins/
         tests/
         tmp/
+        logs/
         vendor/
         webroot/ (this directory is set as DocumentRoot)
         .gitignore

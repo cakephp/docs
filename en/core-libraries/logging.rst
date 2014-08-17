@@ -149,12 +149,12 @@ Using the FileLog Adapter
 As its name implies FileLog writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
 If a level is not supplied, :php:const:`LOG_ERROR` is used which writes to the
-error log. The default log location is ``app/tmp/logs/$level.log``::
+error log. The default log location is ``logs/$level.log``::
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
 
-    // Results in this being appended to app/tmp/logs/error.log
+    // Results in this being appended to logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
 The configured directory must be writable by the web server user in
@@ -269,7 +269,7 @@ the log messages will be directed to those loggers. If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
-    // Configure tmp/logs/shops.log to receive all levels, but only
+    // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
     Log::config('shops', [
         'className' => 'FileLog',
@@ -278,7 +278,7 @@ message. For example::
         'file' => 'shops.log',
     ]);
 
-    // Configure tmp/logs/payments.log to receive all levels, but only
+    // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
     Log::config('payments', [
         'className' => 'FileLog',
