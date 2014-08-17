@@ -120,7 +120,7 @@ les utiliser.
     Si vous voulez inclure un fichier CSS qui partage un nom avec un plugin
     chargé vous pouvez faire ce qui suit. Par exemple vous avez un plugin
     ``Blog``, et souhaitez inclure également
-    ``app/webroot/css/Blog.common.css``::
+    ``/src/webroot/css/Blog.common.css``::
 
         echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
@@ -311,7 +311,7 @@ les utiliser.
     Si vous voulez inclure un fichier image qui partage un nom
     avec un plugin chargé vous pouvez faire ce qui suit. Par exemple si vous
     avez un plugin `Blog``, et si vous voulez également inclure
-    ``app/webroot/js/Blog.icon.png``, vous feriez::
+    ``/src/webroot/js/Blog.icon.png``, vous feriez::
 
         echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
@@ -594,7 +594,7 @@ les utiliser.
         <script src="/js/scripts.js"></script>
 
     Vous pouvez lier à des fichiers avec des chemins absolus
-    tant qu'ils ne se trouvent pas dans ``app/webroot/js``::
+    tant qu'ils ne se trouvent pas dans ``/src/webroot/js``::
 
         echo $this->Html->script('/autrerep/fichier_script');
 
@@ -640,7 +640,7 @@ les utiliser.
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
     avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez
     Un plugin ``Blog``, et voulez inclure également
-    ``app/webroot/js/Blog.plugins.js``, vous feriez::
+    ``/src/webroot/js/Blog.plugins.js``, vous feriez::
 
         echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 
