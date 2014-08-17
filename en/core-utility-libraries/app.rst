@@ -59,29 +59,6 @@ Used for finding the path to a package inside CakePHP::
     App::core('Cache/Engine');
 
 
-Finding Which Objects CakePHP Knows About
-=========================================
-
-.. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
-
-You can find out which objects App knows about using
-``App::objects('Controller')`` for example to find which application controllers
-App knows about.
-
-Example usage::
-
-    // Returns ['DebugKit', 'Blog', 'User'];
-    App::objects('plugin');
-
-    // Returns ['PagesController', 'BlogController'];
-    App::objects('Controller');
-
-You can also search only within a plugin's objects by using the plugin dot syntax.::
-
-    // Returns ['MyPluginPost', 'MyPluginComment'];
-    App::objects('MyPlugin.Model');
-
-
 Locating Plugins
 ================
 

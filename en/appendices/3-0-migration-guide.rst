@@ -138,6 +138,7 @@ App
 - ``App::location()`` has been removed.
 - ``App::paths()`` has been removed.
 - ``App::load()`` has been removed.
+- ``App::objects()`` has been removed.
 - ``App::RESET`` has been removed.
 - ``App::APPEND`` has been removed.
 - ``App::PREPEND`` has been removed.
