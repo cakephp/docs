@@ -100,7 +100,7 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``/app/Controller/RecipesController.php`` et contiendrait::
+``/src/Controller/RecipesController.php`` et contiendrait::
 
         # /src/Controller/RecipesController.php
         
@@ -119,7 +119,7 @@ RecipesController pourrait contenir les actions
         }
 
 Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
-``app/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
+``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
@@ -289,7 +289,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
     le paramètre ``$action``.
 
     Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
-    vue ou un élément dont le chemin est relatif au dossier ``/app/Template``.
+    vue ou un élément dont le chemin est relatif au dossier ``/src/Template``.
     Cela permet un affichage direct des éléments, ce qui est très pratique lors
     d'appels AJAX.
     ::
@@ -310,7 +310,7 @@ directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
 
     class PostsController extends AppController {
         public function mon_action() {
-            $this->render('ustom_file');
+            $this->render('custom_file');
         }
     }
 
