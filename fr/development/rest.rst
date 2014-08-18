@@ -34,7 +34,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
          * GET /recipes
          */
         public function index() {
-            $recipes = $this->Recipes->find('all');
+            $recipes = $this->Recipes->find('all')->toArray();
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
