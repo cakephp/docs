@@ -43,7 +43,7 @@ a CakePHP application:
 * :doc:`Views </views>` are the presentation layer in your application. They
   give you powerful tools to create HTML, JSON and the other outputs your
   application needs.
-* `Models </models>` are the key ingredient in any application. They handle
+* :doc:`Models </models>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
 
 Getting Help
