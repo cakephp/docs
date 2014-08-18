@@ -30,7 +30,7 @@ this::
         public $components = array('RequestHandler');
 
         public function index() {
-            $recipes = $this->Recipes->find('all');
+            $recipes = $this->Recipes->find('all')->toArray();
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
@@ -38,7 +38,7 @@ this::
         }
 
         public function view($id) {
-            $recipe = $this->Recipes->findById($id);
+            $recipe = $this->Recipes->findById($id)->toArray();
             $this->set(array(
                 'recipe' => $recipe,
                 '_serialize' => array('recipe')
