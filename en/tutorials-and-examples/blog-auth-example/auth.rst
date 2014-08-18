@@ -61,6 +61,8 @@ basic `baked` UsersController class using the code generation utilities bundled
 with CakePHP::
 
     // app/Controller/UsersController.php
+    App::uses('AppController', 'Controller');
+    
     class UsersController extends AppController {
 
         public function beforeFilter() {
