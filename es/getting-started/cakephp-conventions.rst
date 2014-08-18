@@ -171,6 +171,6 @@ ni configurada si nombras de la forma correcta los ficheros que, de todos modos,
 tienes que crear para que tu aplicación funcione.
 
 Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP,
-te recomendamos que le eches un vistazo al para hacer un
+te recomendamos que le eches un vistazo al
 :doc:`/tutorials-and-examples/blog/blog` para ver cómo encajan estas piezas en
 una aplicación completa.
