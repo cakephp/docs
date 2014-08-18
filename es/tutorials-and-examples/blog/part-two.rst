@@ -1,40 +1,48 @@
-Parte 2: Tutorial para desarrollar el Blog
-##########################################
+Tutorial de desarrollo del Blog - Añadiendo una capa
+####################################################
 
-Creando un modelo para los artículos (*Post Model*)
-===================================================
+Creando un modelo Artículo (Article)
+====================================
 
 Los modelos son una parte fundamental en CakePHP. Cuando creamos un modelo,
 podemos interactuar con la base de datos para crear, editar, ver y borrar con
 facilidad cada ítem de ese modelo.
 
-Los ficheros en los que se definen los modelos se ubican en la carpeta
-``/app/Model``, y el fichero que vamos a crear debe guardarse en la ruta
-``/app/Model/Post.php``. El contenido de este ficheró será::
+Los modelos están separados entre los objetos ``Tabla`` (``Table``) y ``Entidad``
+(``Entity``). Los objetos ``Tabla`` proporcionan acceso a la coleción de
+entidades almacenada en una tabla específica y va en ``/src/Model/Table``. El
+fichero que crearemos se guardará en ``/src/Model/Table/ArticlesTable.php``. El
+fichero completo debería tener este aspecto::
 
-    class Post extends AppModel {
-            public $name = 'Post';
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
     }
 
-Los convenios usados para los nombres son importantes. Cuando llamamos a nuestro
-modelo *Post*, CakePHP deducirá automáticamente que este modelo se utilizará en
-el controlador PostController, y que se vinculará a una tabla en nuestra base de
-datos llamada ``posts``.
+Los convenios usados para los nombres son importantes. Llamando a nuestro objeto
+Tabla ``ArticlesTable``, CakePHP deducirá automáticamente que esta Tabla será
+utilizada en el controlador ArticlesController, y que se vinculará a una tabla
+en nuestra base de datos llamada ``articles``.
 
 .. note::
 
     CakePHP creará dinámicamente un objeto para el modelo si no encuentra el
-    fichero correspondiente en /app/Model. Esto significa que si te equivocas al
-    nombrar el fichero (por ejemplo lo llamas post.php con la primera p
-    minúscula o posts.php en plural) CakePHP no va a reconocer la configuración
-    que escribas en ese fichero y utilizará valores por defecto.
+    fichero correspondiente en /src/Model/Table. Esto significa que si te
+    equivocas al nombrar el fichero (por ejemplo lo llamas articlestable.php —en
+    minúscula— o ArticleTable.php —en singular) CakePHP no va a reconocer la
+    configuración que escribas en ese fichero y utilizará valores por defecto.
 
-Para más información sobre modelos, como prefijos para las tablas, validación,
-etc. puedes visitar :doc:`/models` en el Manual.
+Para más información sobre modelos, como callbacks y validaciones echa un vistazo
+al capítulo del Manual :doc:`/orm`.
 
 
-Crear un Controlador para nuestros Artículos (*Posts*)
-======================================================
+Crear un Controlador para nuestros Artículos
+============================================
 
 Vamos a crear ahora un controlador para nuestros artículos. En el controlador es
 donde escribiremos el código para interactuar con nuestros artículos. Es donde
