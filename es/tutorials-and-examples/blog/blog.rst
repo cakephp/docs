@@ -1,5 +1,5 @@
 Tutorial de desarrollo del Blog
-##########################################
+###############################
 
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque
 quieres aprender más sobre cómo funciona CakePHP. Nuestro objetivo es potenciar
@@ -30,7 +30,7 @@ Esto es lo que necesitarás:
 ¡Vamos allá!
 
 Obtener CakePHP
-=================
+===============
 
 La manera más sencilla de ponerse en marcha es descargando o clonando una copia
 reciente desde GitHub. Para hacer esto, simplemente visita el proyecto de
@@ -101,7 +101,7 @@ permisos de escritura al directorio ejecutando un comando tipo::
     $ chmod 777 -R tmp
 
 Creando la base de datos del Blog
-==========================================
+=================================
 
 Vamos a crear una nueva base de datos para el blog.
 Puedes crear una base de datos en blanco con el nombre que quieras. De momento
@@ -145,7 +145,7 @@ vincule esta tabla por defecto al Modelo 'Post', e incluir los campos 'modified'
 y 'created' con ese nombre, serán automáticamente administrados por CakePHP.
 
 Configurando la Base de Datos
-==============================
+=============================
 
 Rápido y sencillo, vamos a decirle a CakePHP dónde está la Base de Datos y cómo
 conectarnos a ella. Seguramente esta sea la primera y última vez que configuras
