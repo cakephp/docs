@@ -23,7 +23,7 @@ You can either load them one by one or all of them in a single call::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
-Plugin configuration
+Plugin Configuration
 ====================
 
 There is a lot you can do with the load and loadAll methods to help with
@@ -79,7 +79,7 @@ Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
 plugins will require more setup than others.
 
-Advanced bootstrapping
+Advanced Bootstrapping
 ======================
 
 If you like to load more than one bootstrap file for a plugin. You can specify

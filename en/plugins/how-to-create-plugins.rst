@@ -180,7 +180,7 @@ well::
     For information on how to use elements from a plugin, look up
     :ref:`view-elements`
 
-Overriding plugin views from inside your application
+Overriding Plugin Views From Inside Your Application
 ----------------------------------------------------
 
 You can override any plugin views from inside your app using
@@ -198,7 +198,7 @@ Creating this file, would allow you to override
 .. _plugin-assets:
 
 
-Plugin assets
+Plugin Assets
 =============
 
 A plugin's web assets (but not PHP files) can be served through the
@@ -221,7 +221,7 @@ For example like this::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
-Linking to assets in plugins
+Linking to Assets in Plugins
 ----------------------------
 
 Simply prepend /plugin_name/ to the beginning of a request for an
