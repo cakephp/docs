@@ -510,7 +510,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
 
 We can define the belongsToMany association in our Articles model as follows::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags');
@@ -520,7 +520,7 @@ We can define the belongsToMany association in our Articles model as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags', [
@@ -805,7 +805,7 @@ table, while the values will be the 'displayField' of the table. You can use the
 ``displayField()`` method on a table object to configure the display field on
 a table::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->displayField('title');
