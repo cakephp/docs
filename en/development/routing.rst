@@ -583,7 +583,7 @@ something like this::
     // In config/routes.php...
 
     Router:scope('/', function($routes) {
-        $routes->extensions('json');
+        $routes->extensions(['json']);
         $routes->resources('recipes');
     });
 
