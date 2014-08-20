@@ -1,9 +1,6 @@
 How To Create Plugins
 #####################
 
-Creating Your Own Plugins
-=========================
-
 As a working example from the :doc:`/plugins/how-to-use-plugins` section, let's
 begin to create a ContactManager plugin. To start out, we'll set up our plugin's
 basic directory structure. It should look like this::
