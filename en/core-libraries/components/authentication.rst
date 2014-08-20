@@ -309,8 +309,8 @@ Handling Unauthenticated Requests
 
 When an unauthenticated user tries to access a protected page first the
 ``unauthenticated()`` method of the last authenticator in the chain is called.
-The authenticate object can handle sending response or redirection as appropriate
-and return ``true`` to indicate no further action is necessary. Due to this, the
+The authenticate object can handle sending response or redirection by returning
+a response object, to indicate no further action is necessary. Due to this, the
 order in which you specify the authentication provider in ``authenticate``
 config matters.
 
