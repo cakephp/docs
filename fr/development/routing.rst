@@ -2,6 +2,7 @@ Routing
 #######
 
 .. php:namespace:: Cake\Routing
+
 .. php:class:: Router
 
 Routing est une fonctionnalité qui mappe les URLs aux actions du controller.
@@ -608,10 +609,10 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In config/routes.php...
+    //Dans config/routes.php...
 
     Router:scope('/', function($routes) {
-        $routes->extensions('json');
+        $routes->extensions(['json']);
         $routes->resources('recipes');
     });
 
