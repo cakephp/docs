@@ -63,7 +63,7 @@ instructions for Composer's Windows installer can be found within the README
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
@@ -117,8 +117,8 @@ Setup
 
 Setting up CakePHP can be as simple as slapping it in your web
 server's document root, or as complex and flexible as you wish.
-This section will cover the three main installation types for
-CakePHP: development, production, and advanced.
+This section will cover the two main installation types for
+CakePHP: development and production.
 
 -  Development: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
