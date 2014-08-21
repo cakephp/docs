@@ -945,9 +945,7 @@ with usage examples.
 .. php:method:: Model::isUnique()
 
     The data for the field must be unique, it cannot be used by any
-    other rows.
-
-    ::
+    other rows::
 
         public $validate = array(
             'login' => array(
@@ -955,6 +953,19 @@ with usage examples.
                 'message' => 'This username has already been taken.'
             )
         );
+
+    You can validate that a set of fields are unique by providing multiple
+    fields::
+
+        public $validate = array(
+            'email' => array(
+                'rule'    => array('isUnique', 'email', 'username'),
+                'message' => 'This username has already been taken.'
+            )
+        );
+
+    Make sure to include the original field in the list of fields when making
+    a unique rule across multiple fields.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
