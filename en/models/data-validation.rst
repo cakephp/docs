@@ -960,7 +960,7 @@ with usage examples.
         public $validate = array(
             'email' => array(
                 'rule'    => array('isUnique', 'email', 'username'),
-                'message' => 'This username has already been taken.'
+                'message' => 'This username & email combination has already been used.'
             )
         );
 
