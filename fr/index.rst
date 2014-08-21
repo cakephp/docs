@@ -13,7 +13,8 @@ la documentation.
     **Lire le Livre partout**
 
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
-    EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
+    EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et
+    hors-ligne.
 
     - `PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
     - `EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
@@ -22,34 +23,27 @@ la documentation.
 Mise en route
 =============
 
-Conventions
------------
+Apprendre un nouveau framework peut être intimidant et excitant en même temps.
+Pour vous aider, nous avons créé un cookbook avec des exemples et des recettes
+des tâches les plus comunément effectuées. Si vous êtes nouveau, vous devriez
+commencer avec le :doc:`/tutorials-and-examples/blog` puisqu'il vous donne
+un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
 
-Apprenez le :doc:`fonctionnement typique de CakePHP
-</getting-started/a-typical-cakephp-request>` et les :doc:`conventions
-</getting-started/cakephp-conventions>` propres à CakePHP.
+Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
+d'une application CakePHP:
 
-Controllers (contrôleurs)
--------------------------
+* Le :doc:`cycle de requête de CakePHP </getting-started/a-typical-cakephp-request>`
+* Les :doc:`conventions </getting-started/cakephp-conventions>` que CakePHP
+  utilise.
+* Les :doc:`Controllers </controllers>` gèrent les requêtes et coordonnent vos
+  models et les réponses que votre application créé.
+* Les :doc:`Views </views>` sont la couche de présentation dans votre
+  application. Elles vous donnent des outils puisssants pour créer le HTML,
+  JSON et les autres sorties dont votre application a besoin.
+* Les :doc:`Models </orm>` sont les ingrédients clé dans toute application. Ils
+  gèrent la validation et la logique du domaine de votre application.
 
-Traitement des requêtes et renvoi des résultats au client web. En savoir
-plus sur les :doc:`/controllers`.
-
-Views (vues)
-------------
-
-Les views (vues) sont la représentation graphique des données dans CakePHP.
-Elles permettent de convertir les données extraites de Models, dans le format
-de sortie demandé par le client. En savoir plus sur les :doc:`/views`.
-
-Models (modèles)
-----------------
-
-Les models (Modèles) sont le coeur de votre application. Ils gèrent la
-validation, le stockage et la récupération de vos données. En savoir plus
-sur les :doc:`/models`.
-
-Obtenir de l'aide
+Obtenir de l'Aide
 =================
 
 Si vous êtes bloqué, voici une :doc:`liste qui vous aidera
