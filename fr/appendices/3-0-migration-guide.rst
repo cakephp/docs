@@ -217,6 +217,7 @@ Shell
 
 - ``Shell::__construct()`` a changé. Il prend maintenant une instance de
   ``Cake\\Console\\ConsoleIo`` en paramètre.
+- ``Shell::param()`` a été ajoutée pour un accès pratique aux params.
 
 En plus de la transformation de toutes les méthodes shell en camel case lors
 de leur appel.
