@@ -108,9 +108,7 @@ CakePHP a besoin que tous les adaptateurs de logging intégrent
 
 .. _file-log:
 
-.. versionadded:: 2.4
-
-Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations:
+Le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
@@ -127,24 +125,18 @@ Depuis 2.4 le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 .. warning::
 
-    Avant 2.4 vous deviez inclure le suffixe ``Log`` dans votre configuration
-    (``LoggingPack.DatabaseLog``). Ce n'est plus nécessaire maintenant.
-    Si vous avez utilisé un moteur de Log comme ``DatabaseLogger`` qui ne suit
-    pas la convention d'utiliser un suffixe ``Log`` pour votre nom de classe,
-    vous devez ajuster votre nom de classe en ``DatabaseLog``. Vous devez
-    aussi éviter les noms de classe comme ``SomeLogLog`` qui inclut le suffixe
-    deux fois à la fin.
+    Engines have the suffix ``Log``. You should avoid class names like ``SomeLogLog``
+    which include the suffix twice at the end.
 
 .. note::
 
-    Toujours configurer les loggers dans ``config/app.php``
-    Essayer de configurer les loggers ou les loggers de plugin dans
-    core.php provoquera des problèmes, les chemins d'applications
-    n'étant pas encore configurés.
+    Vous devrez configurer les loggers pendant le bootstrapping.
+    ``config/app.php`` est l'endroit par convention pour configurer les
+    adaptaters de log.
 
-    Aussi nouveau dans 2.4: En mode debug, les répertoires manquants vont
-    maintenant être automatiquement créés pour éviter le lancement des erreurs
-    non nécessaires lors de l'utilisation de FileEngine.
+    En mode debug, les répertoires manquants vont maintenant être
+    automatiquement créés pour éviter le lancement des erreurs non nécessaires
+    lors de l'utilisation de FileEngine.
 
 Journalisation des Erreurs et des Exception
 ===========================================
@@ -205,8 +197,6 @@ chemins personnalisés d'être utilisés.::
 
 Logging to Syslog
 =================
-
-.. versionadded:: 2.4
 
 Dans les environnements de production, il est fortement recommandé que vous
 configuriez votre système pour utiliser syslog plutôt que le logger de
@@ -415,15 +405,13 @@ Logging Trait
 
 .. php:trait:: LogTrait
 
-    Un trait qui fournit les méthodes raccourcis pour le logging
-
-    .. versionadded:: 3.0
+    Un trait qui fournit des raccourcis pour les méthodes de journalisation
 
 .. php:method:: log($msg, $level = LOG_ERR)
 
-    Log un message dans les logs. Par défaut, les messages sont loggés en
-    messages ERROR. Si ``$msg`` n'est pas une chaîne, elle sera convertie avec
-    ``print_r`` avant d'être loggé.
+    Ecrit un message dans les logs. Par défaut, les messages sont écrits dans
+    les messages ERROR. Si ``$msg`` n'est pas une chaîne, elle sera convertie
+    avec ``print_r`` avant d'être écrite.
 
 
 .. meta::
