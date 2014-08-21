@@ -1,8 +1,8 @@
 REST
 ####
 
-Quelques programmeurs néophytes d'application réalisent le besoin
-d'ouvrir leurs fonctionnalités du coeur à un public plus important.
+Beaucoup de programmeurs néophytes d'application réalisent qu'ils ont
+besoin d'ouvrir leurs fonctionnalités principales à un public plus important.
 Fournir facilement, un accès sans entrave à votre API du coeur peut
 aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
@@ -25,94 +25,53 @@ certaines actions de controller, nous pouvons continuer et créer la logique
 dans nos actions de controller. Un controller basique pourrait ressembler
 à ceci::
 
-    // Controller/RecipesController.php
+    // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
         public $components = array('RequestHandler');
 
-        /**
-         * GET /recipes
-         */
         public function index() {
-            $recipes = $this->Recipes->find('all');
+            $recipes = $this->Recipes->find('all')->toArray();
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
             ));
         }
 
-        /**
-         * POST /recipes
-         */
-        public function add() {
-            // Le résultat à retourner
-            $result = false;
-        
-            // Créé une nouvelle recette
-            $recipe = $this->Recipes->newEntity($this->request->data);
-            
-            // La recette a été sauvegardée
-            if($this->Recipes->save($recipe)) {
-                $result = true;
-            }
+        public function view($id) {
+            $recipe = $this->Recipes->findById($id)->toArray();
             $this->set(array(
                 'recipe' => $recipe,
-                'result' => $result,
-                '_serialize' => ['recipe', 'result']
+                '_serialize' => array('recipe')
             ));
         }
 
-        /*
-         * GET /recipes/:id
-         */
-        public function view($id = null) {
-            // Find the recipe by id
+        public function edit($id) {
             $recipe = $this->Recipes->get($id);
-            $this->set(array(
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ));
-        }
-
-        /**
-         * PUT /recipes/:id
-         * PATCH /recipes/:id
-         */
-        public function edit($id = null) {
-            // Récupère la recette via son id
-            $recipe = $this->Recipes->get($id);
-            
-            // Met à jour la recette
-            $recipe->set($this->request->data);
-            
-            // Essaie d'enregistrer la recette
-            if ($this->Recipes->save($recipe)) {
-                $message = 'Saved';
-            } else {
-                $message = 'Error';
+            if ($this->request->is(['post', 'put'])) {
+                $this->Recipes->patchEntity($recipe, $this->request->data);
+                if ($this->Recipes->save($this->request->data)) {
+                    $message = 'Saved';
+                } else {
+                    $message = 'Error';
+                }
             }
             $this->set(array(
                 'message' => $message,
-                '_serialize' => ['message']
+                '_serialize' => array('message')
             ));
         }
 
-        /**
-         * DELETE /recipes/:id
-         */
-        public function delete($id = null) {
-            // Récupère la recette via son id
+        public function delete($id) {
             $recipe = $this->Recipes->get($id);
-            
-            // Suppression de la recette
-            if ($this->Recipe->delete($recipe)) {
+            if ($this->Recipes->delete($recipe)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';
             }
             $this->set(array(
                 'message' => $message,
-                '_serialize' => ['message']
+                '_serialize' => array('message')
             ));
         }
     }
@@ -148,14 +107,21 @@ utilisation dans ces vues.
 Le XML rendu va finir par ressembler à ceci::
 
     <recipes>
-        <recipe id="234" created="2008-06-13" modified="2008-06-14">
-            <author id="23423" first_name="Billy" last_name="Bob"></author>
-            <comment id="245" body="Yummy yummmy"></comment>
+        <recipe>
+            <id>234</id>
+            <created>2008-06-13</created>
+            <modified>2008-06-14</modified>
+            <author>
+                <id>23423</id>
+                <first_name>Billy</first_name>
+                <last_name>Bob</last_name>
+            </author>
+            <comment>
+                <id>245</id>
+                <body>Yummy yummmy</body>
+            </comment>
         </recipe>
-        <recipe id="3247" created="2008-06-15" modified="2008-06-15">
-            <author id="625" first_name="Nate" last_name="Johnson"></author>
-            <comment id="654" body="This is a comment for this tasty dish."></comment>
-        </recipe>
+        ...
     </recipes>
 
 Créer la logique pour l'action edit est un tout petit peu plus compliqué.
