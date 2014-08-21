@@ -47,9 +47,7 @@ coup avec une méthode unique::
     Plugin::load('ContactManager');
 
     // Charge un plugin unique, avec un namespace personnalisé.
-    Plugin::load('ContactManager', [
-        'namespace' => 'AcmeCorp\ContactManager'
-    ]);
+    Plugin::load('AcmeCorp/ContactManager');
 
     // Charge tous les plugins en premier
     Plugin::loadAll();
@@ -58,6 +56,10 @@ coup avec une méthode unique::
 certaines configurations pour des plugins spécifiques. ``load()`` fonctionne
 de la même manière, mais charge seulement les plugins que vous avez spécifié
 explicitement.
+
+.. note::
+
+    ``Plugin::loadAll()`` ne va pas charger tous les plugins de vendor.
 
 Autochargement des Classes du Plugin
 ------------------------------------
@@ -131,12 +133,16 @@ potentiels en utilisantt l'option ``ignoreMissing``::
         'Blog' => ['routes' => true]
     ]);
 
-Par défaut le namespace du Plugin doit correspondre au nom du plugin. Si ce
-n'est pas le cas, vous pouvez utiliser l'option ``namespace`` pour fournir un
-namespace différent. Par exemple vous avez un plugin Users qui utilise
-en fait ``Jose\\Users`` pour namespace::
+Par défaut le namespace du Plugin doit correspondre au nom du plugin. Par
+exemple si vous avez un plugin avec un namespace de haut niveau ``Users``, vous
+le chargeriez en utilisant::
 
-    Plugin::load('Users', ['namespace' => 'Jose\Users']);
+    Plugin::load('User');
+
+Si vous préférez avoir votre nom de vendor en haut niveau et avoir un namespace
+comme ``AcmeCorp/Users``, alors vous devrez charger le plugin comme suit::
+
+    Plugin::load('AcmeCorp/Users');
 
 Cela va assurer que les noms de classe sont résolus correctement lors de
 l'utilisation de la :term:`plugin syntax`.
@@ -171,9 +177,10 @@ En exemple de travail, commençons par créer le plugin ContactManager
 référencé ci-dessus. Pour commencer, nous allons configurer votre structure
 de répertoire basique. Cela devrait ressembler à ceci::
 
-    /App
-    /Plugin
+    /src
+    /plugins
         /ContactManager
+            /config
             /src
                 /Controller
                     /Component
@@ -219,20 +226,23 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
 
 Merci de vous référer au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
-problème avec l'utilisation de la ligne de commande.
+problème avec l'utilisation de la ligne de commande. Assurez-vous de
+re-générer votre autoloader une fois que vous avez créé votre plugin::
+
+    $ php composer.phar dumpautoload
 
 Controllers du Plugin
 =====================
 
 Les controllers pour notre plugin ContactManager seront stockés dans
-``/plugins/ContactManager/Controller/``. Puisque la principale chose que
+``/plugins/ContactManager/sr/Controller/``. Puisque la principale chose que
 nous souhaitons faire est la gestion des contacts, nous aurons besoin de créer
 un ContactsController pour ce plugin.
 
 Ainsi, nous mettons notre nouveau ContactsController dans
-``/plugins/ContactManager/Controller`` et il ressemblerait à cela::
+``/plugins/ContactManager/src/Controller`` et il ressemblerait à cela::
 
-    // /plugins/ContactManager/Controller/ContactsController.php
+    // /plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
     use ContactManager\Controller\AppController;
@@ -249,6 +259,25 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     Ce controller étend AppController du plugin (appelé
     ContactManagerAppController) plutôt que l'AppController de l'application
     parente.
+
+Avant d'accéder à vos controllers, vous devrez vous assurez que le plugin est
+chargé et connecte des routes. Dans votre ``/config/bootstrap.php``, ajoutez
+ce qui suit::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
+``/plugins/ContactManager/config/routes.php``::
+
+    <?php
+    use Cake\Routing\Router;
+
+    Router::plugin('ContactManager', function($routes) {
+        $routes->fallbacks();
+    });
+
+Ce qui est au-dessus connecte les routes par défaut pour votre plugin. Vous
+pouvez personnaliser ce fichier avec des routes plus spécifiques plus tard.
 
 Si vous souhaitez accéder à ce qu'on a fait avant, visitez
 ``/contact_manager/contacts``. Vous aurez une erreur "Missing Model"

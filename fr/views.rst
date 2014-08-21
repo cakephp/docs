@@ -1,5 +1,8 @@
 Views (Vues)
 ############
+.. php:namespace:: Cake\View
+
+.. php:class:: View
 
 Les Views (Vues) sont le **V** dans MVC. Les vues sont chargées de générer la
 sortie spécifique requise par la requête. Souvent, cela est fait sous forme
@@ -58,6 +61,38 @@ chapitre :
   en miniature pour créer des components avec une UI indépendante. Regardez
   la documentation :doc:`/views/cells` pour plus d'informations.
 
+View Variables
+--------------
+
+Any variables you set in your controller with ``set()`` will be available in
+both the view and the layout your action renders. In addition, any set variables
+will also be available in any element. If you need to pass additional variables
+from the view to the layout you can either call ``set()`` in the view template,
+or use a :ref:`view-blocks`.
+
+You should remember to **always** escape any user data before outputting it as
+CakePHP does not automatically escape output. You can escape user content with
+the ``h()`` function::
+
+    <?= h($user->bio); ?>
+
+Setting View Variables
+----------------------
+
+.. php:method:: set(string $var, mixed $value)
+
+Views have a ``set()`` method that is analogous to the ``set()``
+found in Controller objects. Using set() from your view file will
+add the variables to the layout and elements that will be rendered
+later. See :ref:`controller-methods` for more information on using
+set().
+
+In your view file you can do::
+
+    $this->set('activeMenuButton', 'posts');
+
+Then, in your layout, the ``$activeMenuButton`` variable will be
+available and contain the value 'posts'.
 
 .. _extending-views:
 
@@ -111,7 +146,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
-    // in the parent view.
+    // In the parent view.
     <?= h($post['Post']['body']) ?>
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
@@ -138,6 +173,10 @@ vue parente va récupérer le contenu de la vue précédente en tant que block
     Vous devriez éviter d'utiliser ``content`` comme nom de block dans votre
     application. CakePHP l'utilise pour définir le contenu non-capturé pour
     les vues étendues.
+
+You can get the list of all populated blocks using the ``blocks()`` method::
+
+    $list = $this->blocks();
 
 .. _view-blocks:
 
@@ -239,7 +278,7 @@ when used with the ``block = true`` option:
 .. code-block:: php
 
     <?php
-    // dans votre fichier de vue
+    // Dans votre fichier de vue
     $this->Html->script('carousel', ['block' => true]);
     $this->Html->css('carousel', null, ['block' => true]);
     ?>
@@ -336,11 +375,13 @@ controller/view.
 Pour définir le titre pour le layout, il est plus facile de le faire dans le
 controller, en configurant la variable ``title``::
 
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title', 'Voir les Utilisateurs actifs');
-       }
-   }
+    namespace App\Controller;
+    
+    class UsersController extends AppController {
+        public function view_active() {
+            $this->set('title', 'View Active Users');
+        }
+    }
 
 Vous pouvez aussi définir la variable title_for_layout depuis l'intérieur
 d'un fichier de vue::
@@ -350,7 +391,7 @@ d'un fichier de vue::
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
 le répertoire ``/src/Template/Layout``, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
-:php:attr:`~Cake\\View\\View::$layout` de votre controller ou de votre vue::
+``$layout`` de votre controller ou de votre vue::
 
     // A partir d'un controller
     public function admin_view() {
@@ -366,17 +407,19 @@ une bannière publicitaire, je peux créer un nouveau layout avec le plus
 petit espace de publicité et le spécifier comme un layout pour toutes les
 actions du controller en utilisant quelque chose comme::
 
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title', 'Voir les Utilisateurs actifs');
-           $this->layout = 'default_small_ad';
-       }
+    namespace App\Controller;
 
-       public function view_image() {
-           $this->layout = 'image';
-           //affiche une image de l\'utilisateur
-       }
-   }
+    class UsersController extends AppController {
+        public function view_active() {
+            $this->set('title', 'View Active Users');
+            $this->layout = 'default_small_ad';
+        }
+
+        public function view_image() {
+            $this->layout = 'image';
+            // Output user image
+        }
+    }
 
 CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
 du layout default de CakePHP) que vous pouvez utiliser dans votre propre
@@ -395,6 +438,8 @@ Si vous souhaitez utiliser un layout qui existe dans un plugin, vous pouvez
 utiliser la :term:`syntaxe de plugin`. Par exemple pour utiliser le layout de
 contact à partir du plugin Contacts::
 
+    namespace App\Controller;
+
     class UsersController extends AppController {
         public function view_active() {
             $this->layout = 'Contacts.contact';
@@ -406,6 +451,8 @@ contact à partir du plugin Contacts::
 
 Elements
 ========
+
+.. php:method:: element(string $elementPath, array $data, array $options = [])
 
 Beaucoup d'applications ont des petits blocks de code de présentation qui
 doivent être répliqués d'une page à une autre, parfois à des endroits
@@ -598,119 +645,6 @@ fonctionnent correctement::
 
 Remplacer la méthode render vous laisse le contrôle total sur la façon dont
 votre contenu est rendu.
-
-API de View
-===========
-
-.. php:class:: View
-
-Les méthodes de View sont accessibles dans toutes les vues, element et fichiers
-de layout.
-Pour appeler toute méthode de view, utilisez ``$this->method()``
-
-.. php:method:: set(string $var, mixed $value)
-
-    Les Views ont une méthode ``set()`` qui est analogue à ``set()`` qui
-    se trouvent dans les objets du controller. Utiliser set() à partir
-    de votre fichier de vue va ajouter les variables au layout et aux elements
-    qui seront rendus plus tard. Regarder :ref:`controller-methods` pour plus
-    d'informations sur l'utilisation de set().
-
-    Dans votre fichier de vue, vous pouvez faire::
-
-        $this->set('activeMenuButton', 'posts');
-
-    Ensuite dans votre fichier de layout la variable ``$activeMenuButton``
-    sera disponible et contiendra la valeur 'posts'.
-
-.. php:method:: get(string $var, $default = null)
-
-    Récupère la valeur d'une viewVar avec le nom de ``$var``. Vous pouvez
-    fournir une valeur par défaut si la variable n'est pas déjà définie.
-
-.. php:method:: getVars()
-
-    Récupère une liste de toutes les variables de view disponibles
-    dans le cadre de rendu courant. Retourne un tableau des noms de variable.
-
-.. php:method:: element(string $elementPath, array $data, array $options = [])
-
-    Rend un element ou une vue partielle. Regardez la section sur
-    :ref:`view-elements` pour plus d'informations et d'exemples.
-
-.. php:method:: uuid(string $object, mixed $url)
-
-    Génère un ID de DOM unique pour un objet non pris au hasard, basé sur le
-    type d'objet et l'URL. Cette méthode est souvent utilisée par les helpers
-    qui ont besoin de générer un ID de DOM unique pour les elements comme
-    le :php:class:`JsHelper`::
-
-        $uuid = $this->uuid(
-          'form',
-          ['controller' => 'Posts', 'action' => 'index']
-        );
-        //$uuid contains 'form0425fe3bad'
-
-.. php:method:: blocks
-
-    Récupère les noms de tous les blocks définis en tant que tableau.
-
-.. php:method:: start($name)
-
-    Commence un block de capture pour un block de vue. Regardez la section
-    :ref:`view-blocks` pour avoir des exemples.
-
-.. php:method:: end
-
-    Termine le block de capture ouvert le plus en haut. Regardez la section sur
-    les :ref:`view-blocks` pour avoir des exemples.
-
-.. php:method:: append($name, $content)
-
-    Ajoute dans le block avec ``$name``. Regardez la section sur les
-    :ref:`view-blocks` pour des exemples.
-
-.. php:method:: prepend($name, $content)
-
-    Ajoute avant dans le block avec ``$name``. Regardez la section
-    :ref:`view-blocks` pour des exemples.
-
-.. php:method:: assign($name, $content)
-
-    Assigne la valeur d'un block. Cela va surcharger tout contenu existant.
-    Regardez la section sur les :ref:`view-blocks` pour des exemples.
-
-.. php:method:: fetch($name, $default = '')
-
-    Récupère la valeur d'un block. Si un block est vide ou non défini, '' va
-    être retourné. Regardez la section sur les :ref:`view-blocks` pour
-    des exemples.
-
-.. php:method:: extend($name)
-
-    Etend la vue/element/layout courant avec celle contenu dans $name. Regardez
-    la section sur les :ref:`extending-views` pour les exemples.
-
-.. php:attr:: layout
-
-    Définit le layout qui va entourer la vue courante.
-
-.. php:attr:: elementCache
-
-    La configuration de cache utilisée pour les elements de cache. Définir
-    cette propriété va changer la configuration par défaut utilisée pour mettre
-    en cache les elements. Celle par défaut peut être surchargée en utilisant
-    l'option 'cache' dans la méthode element.
-
-.. php:attr:: request
-
-    Une instance de :php:class:`CakeRequest`. Utilisez cette instance pour
-    accéder aux informations qui concernent la requête courante.
-
-.. php:attr:: Blocks
-
-    Une instance de :php:class:`ViewBlock`. Utilisé pour fournir la
-    fonctionnalité des blocks de view dans le rendu de view.
 
 En savoir plus sur les vues
 ===========================
