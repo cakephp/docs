@@ -111,16 +111,16 @@ habituellement dans une application CakePHP :
 
 Chaque fichier sera situé dans le répertoire approprié dans votre dossier app.
 
-Conventions pour les Models et les Sources de Données
-=====================================================
+Conventions pour les Models et les Bases de Données
+===================================================
 
-Les noms de classe de model sont au singulier et en CamelCase. Person,
-BigPerson et ReallyBigPerson en sont des exemples.
+Les noms de classe de model sont au pluriel et en CamelCase. People, BigPeople,
+et ReallyBigPeople en sont des exemples.
 
 Les noms de tables correspondant aux models CakePHP sont au pluriel et
 utilisent le caractère souligné (underscore). Les tables correspondantes
 aux models mentionnés ci-dessus seront donc respectivement : ``people``,
-``big\_people``, et ``really\_big\_people``.
+``big_people`` et ``really_big_people``.
 
 Note des traducteurs francophones : seul le dernier mot est au pluriel et
 tous les pluriels français ne seront pas compris par CakePHP sans lui indiquer
@@ -147,33 +147,10 @@ Les tables de jointure utilisées dans les relations hasAndBelongsToMany
 models qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt
 que "zebres\_pommes").
 
-Toutes les tables avec lesquelles les models de CakePHP interagissent (à
-l'exception des tables de jointure), nécessitent une clé primaire simple pour
-identifier chaque ligne de manière unique. Si vous souhaitez modéliser une
-table qui n'a pas de clé primaire sur un seul champ, la convention de CakePHP
-veut qu'une clé primaire sur un seul champ soit ajoutée à la table.
-
-CakePHP n'accepte pas les clés primaires composées. Dans l'éventualité où vous
-voulez manipuler directement les données de votre table de jointure, cela veut
-dire que vous devez soit utiliser les appels directs à
-:ref:`query <model-query>`, soit ajouter une clé primaire pour être en mesure
-d'agir sur elle comme un model normal. Exemple:
-
-    CREATE TABLE posts_tags (
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    post_id INT(10) NOT NULL,
-    tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
-
-Plutôt que d'utiliser une clé auto-incrémentée comme clé primaire, vous pouvez
-aussi utiliser un champ char(36). CakePHP utilisera alors un UUID de 36
-caractères (String::uuid) lorsque vous sauvegardez un nouvel enregistrement en
-utilisant la méthode Model::save.
-
 Conventions des vues
 ====================
 
-Les fichiers de vue sont nommés d'après les fonctions
+Les fichiers de template de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
 de vue dans : /src/Template/People/soyez\_pret.ctp.
@@ -187,11 +164,11 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
 -  Nom de la table de la base de données: "people"
--  Classe Table: "PeopleTable", trouvée dans /src/Model/Table/PeopleTable.php
--  Classe Entity: "Person", trouvée dans /src/Model/Entity/Person.php
--  Classe Controller: "PeopleController", trouvée dans
+-  Classe Table: "PeopleTable" se trouvant dans /src/Model/Table/PeopleTable.php
+-  Classe Entity: "Person" se trouvant dans /src/Model/Entity/Person.php
+-  Classe Controller: "PeopleController" se trouvant dans
    /src/Controller/PeopleController.php
--  Template de View, trouvée dans /src/Template/People/index.ctp
+-  Template de View se trouvant dans /src/Template/People/index.ctp
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/personnes/ sera liée à un appel à la fonction ``index()`` du
