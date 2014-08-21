@@ -2060,7 +2060,7 @@ persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity`` method::
 
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->get(1);
+    $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
 
 As explained in the previous section, the request data should follow the
@@ -2069,7 +2069,7 @@ merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
 
-    $entity = $articles->get(1);
+    $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
