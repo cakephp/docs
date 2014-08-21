@@ -333,8 +333,8 @@ Gestion des requêtes non authentifiées
 Quand un user non authentifié essaie d'accéder à une page protégée en premier,
 la méthode ``unauthenticated()`` du dernier authenticator dans la chaîne est
 appelée. L'objet d'authentification peut gérer la réponse d'envoi ou la
-redirection appropriée et retourne `true` pour indiquer qu'aucune action
-suivante n'est nécessaire. Du fait de l'ordre dans lequel vous spécifiez
+redirection appropriée en retournantl'objet reponse pour indiquer qu'aucune
+action suivante n'est nécessaire. Du fait de l'ordre dans lequel vous spécifiez
 l'objet d'authentification dans les propriétés de ``authenticate``.
 
 Si authenticator retourne null, `AuthComponent` redirige l'user vers l'action
