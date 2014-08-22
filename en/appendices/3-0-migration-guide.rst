@@ -1054,7 +1054,7 @@ Time
 - ``CakeTime::toUnix()`` was renamed to ``toUnixString``.
 - ``CakeTime::wasYesterday()`` was renamed to ``isYesterday`` to match the rest
   of the method naming.
-- ``CakeTime::format()`` Does not use spritf format strings anymore, you can use
+- ``CakeTime::format()`` Does not use ``sprintf`` format strings anymore, you can use
   ``i18nFormat`` instead.
 - :php:meth:`Time::timeAgoInWords()` now requires ``$options`` to be an array.
 
