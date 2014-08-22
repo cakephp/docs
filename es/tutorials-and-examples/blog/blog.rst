@@ -17,15 +17,12 @@ Esto es lo que necesitarás:
    instrucciones para otros servidores son similares. Igual tendremos que ajustar
    un poco la configuración inicial, pero la mayoría pueden poner en marcha
    CakePHP sin configuración alguna. Asegúrate de tener PHP 5.4.19 o superior
-   así como tener las extensiones ``mbstring`` y ``mcrypt`` activadas en PHP.
+   así como tener las extensiones ``mbstring``, ``intl`` y ``mcrypt`` activadas
+   en PHP.
 #. Servidor de base de datos. Usaremos MySQL en este tutorial. Necesitarás saber
    cómo crear una base de datos nueva. CakePHP se encargará del resto. Dado que
    utilizamos MySQL, asegúrate también de tener ``pdo_mysql`` habilitado en PHP.
-#. Nivel básico de PHP. Si estás familiarizado con la programación orientada a
-   objetos, mucho mejor: pero no te asustes si eres un fan de lo procedural.
-#. Conocimiento sobre patrón MVC. Puedes encontrar una definición rápida aquí:
-   :doc:`/cakephp-overview/understanding-model-view-controller`. No te preocupes,
-   es cerca de media página.
+#. Conocimientos básicos de PHP.
 
 ¡Vamos allá!
 
@@ -54,12 +51,12 @@ La ventaja de utilizar Composer es que automáticamente completará algunas tare
 de inicialización, como aplicar permisos a ficheros y crear tu fichero
 config/app.php por ti.
 
-Existen otros modos de instalar CakePHP si no te sientes cómodo con ``Composer``.
+Existen otros modos de instalar CakePHP si no te sientes cómodo con Composer.
 Para más información revisa la sección :doc:`/installation`.
 
-Dejando de lado cómo has descargado e instalado CakePHP, una vez la
-configuración ha terminado, tu directorio de instalación debería tener la
-siguiente estructura::
+Dejando de lado cómo has descargado e instalado CakePHP, una vez ha terminado
+la configuración, tu directorio de instalación debería tener la siguiente
+estructura::
 
     /directorio_raiz
         /config
@@ -77,8 +74,8 @@ siguiente estructura::
         phpunit.xml.dist
 
 Quizás sea buen momento para aprender algo sobre cómo funciona esta estructura
-de directorios: echa un vistazo a la sección "Estructura de Directorios en
-CakePHP": :doc:`/getting-started/cakephp-folder-structure`.
+de directorios: echa un vistazo a la sección
+:doc:`/getting-started/cakephp-folder-structure`.
 
 Permisos de directorio en tmp
 =============================
