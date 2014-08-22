@@ -361,7 +361,7 @@ Network
 Request
 -------
 
-* ``CakeRequest`` was renamed to :php:class:`Cake\\Network\\Request`.
+* ``CakeRequest`` has been renamed to :php:class:`Cake\\Network\\Request`.
 * :php:meth:`Cake\\Network\\Request::port()` was added.
 * :php:meth:`Cake\\Network\\Request::scheme()` was added.
 * :php:meth:`Cake\\Network\\Request::cookie()` was added.
@@ -1040,7 +1040,7 @@ Security
 Time
 ----
 
-- ``CakeTime`` was renamed to :php:class:`Cake\\Utility\\Time`.
+- ``CakeTime`` has been renamed to :php:class:`Cake\\Utility\\Time`.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practises.
 - ``CakeTime::niceShort()`` has been removed.
 - ``CakeTime::convert()`` has been removed.
@@ -1049,10 +1049,10 @@ Time
 - ``CakeTime::daysAsSql()`` has been removed.
 - ``CakeTime::fromString()`` has been removed.
 - ``CakeTime::gmt()`` has been removed.
-- ``CakeTime::toATOM()`` was renamed to ``toATOMString``.
-- ``CakeTime::toRSS()`` was renamed to ``toATOMRSSString``.
-- ``CakeTime::toUnix()`` was renamed to ``toUnixString``.
-- ``CakeTime::wasYesterday()`` was renamed to ``isYesterday`` to match the rest
+- ``CakeTime::toATOM()`` has been renamed to ``toATOMString``.
+- ``CakeTime::toRSS()`` has been renamed to ``toRSSString``.
+- ``CakeTime::toUnix()`` has been renamed to ``toUnixString``.
+- ``CakeTime::wasYesterday()`` has been renamed to ``isYesterday`` to match the rest
   of the method naming.
 - ``CakeTime::format()`` Does not use ``sprintf`` format strings anymore, you can use
   ``i18nFormat`` instead.
