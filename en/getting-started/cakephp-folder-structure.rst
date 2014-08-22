@@ -28,7 +28,7 @@ You'll notice a few top level folders:
 - The *vendor* folder is where CakePHP and other application dependencies will
   be installed. Make a personal commitment **not** to edit files in this folder.
   We can’t help you if you’ve modified the core.
-- The *webroot* directory is public document root of your application. It
+- The *webroot* directory is the public document root of your application. It
   contains all the files you want to be publically reachable.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
