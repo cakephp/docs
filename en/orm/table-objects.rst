@@ -657,7 +657,7 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Using the finder Option
+Using the 'finder' Option
 -----------------------
 
 The ``finder`` option allows you to use a :ref:`custom finder
@@ -667,15 +667,15 @@ using finders to load associated records for associations that are loaded using
 joins (belongsTo/hasOne). Only the following aspects of the query will be
 applied to the root query:
 
-- WHERE conditions.
-- Additional Joins.
-- Contained Associations
-- Map/Reduce functions.
-- Result formatters.
+- WHERE conditions
+- Additional joins
+- Contained associations
+- Map/Reduce functions
+- Result formatters
 
-Other aspects of the query such as selected columns, order, group by having and
-other sub-statements will not be applied to the root query. Associations that
-are *not* loaded through joins (hasMany/belongsToMany) do not have the above
+Other aspects of the query, such as selected columns, order, group by, having and
+other sub-statements, will not be applied to the root query. Associations that
+are *not* loaded through joins (hasMany/belongsToMany), do not have the above
 restrictions.
 
 Loading Entities
