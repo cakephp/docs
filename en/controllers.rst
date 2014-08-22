@@ -134,7 +134,7 @@ created response.
 
 When you use controller methods with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-you will typcially retun a ``Response`` instance. If you have controller
+you will typcially return a ``Response`` instance. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning::
 
