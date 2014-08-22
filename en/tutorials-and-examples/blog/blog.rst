@@ -52,8 +52,8 @@ The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
 creating your config/app.php file for you.
 
-There are other ways to install CakePHP if you are uncomfortable with
-Composer. For more information: check out the :doc:`/installation` section.
+There are other ways to install CakePHP. If you cannot or don't want to use
+Composer, check out the :doc:`/installation` section.
 
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
@@ -77,18 +77,19 @@ Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
-Directory Permissions on tmp
-============================
+Directory Permissions on tmp and logs
+=====================================
 
-You'll need to set the proper permissions on the ``/tmp`` directory to make
-it writable by your webserver. The best way to do this is to find out what user
+You'll need to set the proper permissions on the ``/tmp`` and ``/logs`` directories to make
+them writable by your webserver. The best way to do this, is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``tmp`` directory to that user. The final command you run (in \*nix)
+these two directories to that user. The final command you run (in \*nix)
 might look something like this::
 
     $ chown -R www-data tmp
+    $ chown -R www-data logs
 
-If for some reason CakePHP can't write to that directory, you'll be
+If for some reason CakePHP can't write to these directories, you'll be
 informed by a warning while not in production mode.
 
 While not recommended, if you are unable to set the permissions to the same as
@@ -96,16 +97,17 @@ your webserver, you can simply set write permissions on the folder by running a
 command such as::
 
     $ chmod 777 -R tmp
+    $ chmod 777 -R logs
 
 Creating the Blog Database
 ==========================
 
-Next, let's set up the underlying database for our blog. If you
+Next, let's set up the underlying MySQL database for our blog. If you
 haven't already done so, create an empty database for use in this
-tutorial, with a name of your choice. Right now, we'll just create
-a single table to store our articles. We'll also throw in a few articles
-right now to use for testing purposes. Execute the following SQL
-statements into your database::
+tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
+we'll just create a single table to store our articles. We'll also throw
+in a few articles to use for testing purposes. Execute the following
+SQL statements into your database::
 
     /* First, create our articles table: */
     CREATE TABLE articles (
