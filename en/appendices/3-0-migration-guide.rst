@@ -975,6 +975,20 @@ language switching from the Accept-Language header sent by the browser::
 There is no built-in replacement for automatically selecting the language by
 setting a value in the user session.
 
+The default formatting function for translated messages is no longer
+``sprintf``, but the more advanced and feature rich ``MessageFormatter`` class.
+In general you can rewrite placeholders in messages as follows::
+
+    // Before:
+    __('Today is a %s day in %s', 'Sunny', 'Spain');
+
+    // After:
+    __('Today is a {0} day in {1}', 'Sunny', 'Spain');
+
+You can avoid rewriting your messages by using the old ``sprintf`` formatter::
+
+    I18n::defaultFormatter('sprintf');
+
 Additionally, the ``Config.language`` value was removed and it cannot be used
 anymore to control the current language of the application. Instead, you can use
 the ``I18n`` class::
