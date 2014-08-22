@@ -29,8 +29,13 @@ Glossary
 
     plugin syntax
         Plugin syntax refers to the dot separated class name indicating classes
-        are part of a plugin. E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
-        and the class name is Toolbar.
+        are part of a plugin::
+
+            // The plugin is "DebugKit", and the class name is "Toolbar".
+            'DebugKit.Toolbar'
+
+            // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+            'AcmeCorp/Tools.Toolbar'
 
     dot notation
         Dot notation defines an array path, by separating nested levels with ``.``

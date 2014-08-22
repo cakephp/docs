@@ -2135,7 +2135,8 @@ delete for those not in the list::
 
     $present = (new Collection($entity->comments))->extract('id');
     TableRegistry::get('Comments')->deleteAll([
-        'conditions' => ['article_id' => $article->id, 'id NOT IN' => $present]
+        'article_id' => $article->id,
+        'id NOT IN' => $present
     ]);
 
 As you can see, this also helps creating solutions where an association needs to

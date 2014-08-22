@@ -43,8 +43,8 @@ incorporate CakePHP into any commercial or closed source application.
 Installing CakePHP
 ===================
 
-CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool for
-PHP 5.3+, as the officially supported method for installation.
+CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool
+for PHP 5.3+, as the officially supported method for installation.
 
 First, you'll need to download and install Composer if you haven't
 done so already. If you have cURL installed, it's as easy as running the
@@ -63,15 +63,15 @@ instructions for Composer's Windows installer can be found within the README
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project -s dev cakephp/app
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Once Composer finishes downloading the application skeleton and the core
-CakePHP library, you should now have a functioning CakePHP application
+CakePHP library, you should have a functioning CakePHP application
 installed via Composer. Be sure to keep the composer.json and composer.lock
 files with the rest of your source code.
 
-You should now be able to visit the path to where you installed your CakePHP
-application and see the setup traffic lights.
+You can now visit the path to where you installed your CakePHP application and
+see the setup traffic lights.
 
 Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
@@ -90,32 +90,35 @@ branch.
 Permissions
 ===========
 
-CakePHP uses the ``tmp`` directory for a number of different
-operations. Model descriptions, cached views, and session
-information are just a few examples.
+CakePHP uses the ``tmp`` directory for a number of different operations.
+Model descriptions, cached views, and session information are just a few examples.
+The ``logs`` directory is used to write log files by the default ``FileLog`` engine.
 
-As such, make sure the directory ``tmp`` and all its subdirectories in your
-CakePHP installation are writable by the web server user. Composer's installation
-process makes ``tmp`` and it's subfolders globally writeable to get things up
-and running quickly but you can update the permissions for better security and
-keep them writable only for the webserver user.
+As such, make sure the directories ``logs``, ``tmp`` and all its subdirectories
+in your CakePHP installation are writable by the web server user. Composer's
+installation process makes ``tmp`` and it's subfolders globally writeable to get
+things up and running quickly but you can update the permissions for better
+security and keep them writable only for the webserver user.
 
-One common issue is that the app/tmp directories and subdirectories must be writable both by the web server and the command line user.
-On a UNIX system, if your web server user is different from your command line user,
-you can run the following commands just once in your project to ensure that
-permissions will be setup properly::
+One common issue is that ``logs`` and ``tmp`` directories and subdirectories must be
+writable both by the web server and the command line user. On a UNIX system, if
+your web server user is different from your command line user, you can run the
+following commands from your application directory just once in your project to
+ensure that permissions will be setup properly::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx logs
+   setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 Setup
 =====
 
 Setting up CakePHP can be as simple as slapping it in your web
 server's document root, or as complex and flexible as you wish.
-This section will cover the three main installation types for
-CakePHP: development, production, and advanced.
+This section will cover the two main installation types for
+CakePHP: development and production.
 
 -  Development: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
@@ -128,7 +131,7 @@ Development
 A development installation is the fastest method to setup CakePHP.
 In this example, we will be using CakePHP's console to run PHP's built-in
 web server which will make your application available at
-``http://host:port``.  From the ``src`` directory, execute::
+``http://host:port``. From the ``src`` directory, execute::
 
     Console/cake server
 
@@ -143,13 +146,13 @@ utilizing the following arguments::
 
 This will serve your application at ``http://192.168.13.37:5673/``.
 
-That's it!  Your CakePHP application is up and running without having to
+That's it! Your CakePHP application is up and running without having to
 configure a web server.
 
 .. warning::
 
-    The development server should ever be used in a production environment. It
-    is only intended as a minimal development server.
+    The development server should *never* be used in a production environment. It
+    is only intended as a basic development server.
 
 Production
 ==========
@@ -170,6 +173,7 @@ production setup will look like this on the file system::
         plugins/
         tests/
         tmp/
+        logs/
         vendor/
         webroot/ (this directory is set as DocumentRoot)
         .gitignore

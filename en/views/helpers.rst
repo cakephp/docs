@@ -122,6 +122,7 @@ you can set those in your controller's beforeRender callback::
         }
     }
 
+.. _aliasing-helpers:
 
 Aliasing Helpers
 ----------------

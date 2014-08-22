@@ -17,7 +17,7 @@ Vous aurez besoin du logiciel suivant:
 * PHPUnit 3.7.0 ou supérieur
 
 Mettez en place vos informations d'utilisateur avec votre nom/titre et
-adresse e-mail de travail ::
+adresse e-mail de travail::
 
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
@@ -25,7 +25,7 @@ adresse e-mail de travail ::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <http://progit.org>`_.
+    excellent livre gratuit `ProGit <git-scm.com/book/>`_.
 
 Récupérer un clone du code source de CakePHP sous github.:
 

@@ -73,7 +73,7 @@ further information.
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^ index.php [QSA,L]
+           RewriteRule ^ index.php [L]
        </IfModule>
 
    If your CakePHP site still has problems with mod\_rewrite, you might
@@ -103,7 +103,7 @@ further information.
    (http://example.com/~username/cakephp/), or any other URL structure
    that already utilizes mod\_rewrite, you'll need to add RewriteBase
    statements to the .htaccess files CakePHP uses (/.htaccess,
-   /src/.htaccess, /src/webroot/.htaccess).
+   /webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example, your webroot .htaccess file would look
@@ -114,7 +114,7 @@ further information.
            RewriteBase /path/to/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^ index.php [QSA,L]
+           RewriteRule ^ index.php [L]
        </IfModule>
 
    The details of those changes will depend on your setup, and can
@@ -130,7 +130,7 @@ further information.
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
-           RewriteRule ^ index.php [QSA,L]
+           RewriteRule ^ index.php [L]
        </IfModule>
 
    The above will simply prevent incorrect assets from being sent to index.php
@@ -201,20 +201,15 @@ these steps:
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="Rewrite requests to test.php"
+                    <rule name="Exclude direct access to webroot/*"
                       stopProcessing="true">
-                        <match url="^test.php(.*)$" ignoreCase="false" />
-                        <action type="Rewrite" url="app/webroot/test.php{R:1}" />
-                    </rule>
-                    <rule name="Exclude direct access to app/webroot/*"
-                      stopProcessing="true">
-                        <match url="^app/webroot/(.*)$" ignoreCase="false" />
+                        <match url="^webroot/(.*)$" ignoreCase="false" />
                         <action type="None" />
                     </rule>
                     <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
                       stopProcessing="true">
                         <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
+                        <action type="Rewrite" url="webroot/{R:1}{R:2}"
                           appendQueryString="false" />
                     </rule>
                     <rule name="Rewrite requested file/folder to index.php"

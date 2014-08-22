@@ -64,11 +64,11 @@ instructions pour l'installeur Windows de Composer se trouvent dans le README
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
 une nouvelle application CakePHP en lançant::
 
-    php composer.phar create-project -s dev cakephp/app
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du coeur de la librairie de CakePHP, vous devriez avoir maintenant une
-application CakePHP qui fonctionne, installée via composer. Assurez-vous de
+application CakePHP qui fonctionne, installée via Composer. Assurez-vous de
 garder les fichiers composer.json et composer.lock avec le reste de votre code
 source.
 
@@ -96,7 +96,7 @@ CakePHP utilise le répertoire ``tmp`` pour un certain nombre d'opérations.
 Les descriptions de Model, les vues mises en cache, et les informations de
 session en sont juste quelques exemples.
 
-De même, assurez-vous que le répertoire ``tmp`` et tous ses
+De même, assurez-vous que les répertoires ``logs``, ``tmp`` et tous ses
 sous-répertoires dans votre installation Cake sont accessible en écriture pour
 l'utilisateur du serveur web. Le processus d'installation avec Composer va
 rendre ``tmp`` et ses sous-dossiers accessibles en écriture pour récupérer et
@@ -112,8 +112,10 @@ lancer les commandes suivantes juste une fois dans votre projet pour vous
 assurer que les permissions sont bien configurées::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
+   setfacl -R -m u:${HTTPDUSER}:rwx logs
+   setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 Configuration
 =============
@@ -136,16 +138,16 @@ Développement
 Une installation "développement" est la méthode la plus rapide pour lancer
 CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour executer
 le serveur web PHP intégré qui va rendre votre application disponible sur
-``http://host:port``. A partir du répertoire ``App``, lancez::
+``http://host:port``. A partir du répertoire ``src``, lancez::
 
     Console/cake server
 
 Par défaut, sans aucun argument fourni, cela va afficher votre application
 sur ``http://localhost:8765/``.
 
-Si vous avez quelque chose qui rentre en conflit avec ``localhost`` ou le ``port 8765``, vous
-pouvez dire à la console CakePHP de lancer le seveur web sur un hôte spécifique
-et/ou un port utilisant les arguments suivants::
+Si vous avez quelque chose qui rentre en conflit avec ``localhost`` ou le
+``port 8765``, vous pouvez dire à la console CakePHP de lancer le seveur web
+sur un hôte spécifique et/ou un port utilisant les arguments suivants::
 
     Console/cake server -H 192.168.13.37 -p 5673
 
@@ -176,10 +178,12 @@ installation de production devrait ressembler à quelque chose comme ceci dans
 votre système de fichiers::
 
     /cake_install/
+        config/
         src/
         plugins/
         tests/
         tmp/
+        logs/
         vendor/
         webroot/ (ce répertoire est défini comme DocumentRoot)
         .gitignore
@@ -187,7 +191,6 @@ votre système de fichiers::
         .travis.yml
         README.md
         composer.json
-        index.php
         phpunit.xml.dist
 
 Les développeurs utilisant Apache devraient régler la directive
@@ -198,63 +201,6 @@ Les développeurs utilisant Apache devraient régler la directive
 Si votre serveur web est configuré correctement, vous devriez maintenant
 accéder à votre application CakePHP accessible à l'adresse
 http://www.exemple.com.
-
-Utiliser un CakePHP pour plusieurs applications
------------------------------------------------
-
-Il peut y avoir des situations où vous souhaitez placer les répertoires
-de CakePHP dans différents endroits du système de fichier. Ceci est peut-être
-dû à une restriction de domaine partagé. Cette section décrit comment étendre
-vos répertoires CakePHP à travers votre système de fichier.
-
-Tout d'abord, prenez conscience qu'il y a trois parties principales dans une application
-CakePHP:
-
-#. La librairie du coeur de CakePHP, dans /vendor/cakephp/cakephp.
-#. Votre code d'application, dans /App.
-#. Le webroot de l'application, usuellement dans /src/webroot.
-
-Chacun de ces répertoires peut être localisé partout dans votre système de
-fichiers, avec l'exception du webroot, ce qui nécessite d'être accessible par
-votre serveur web. Vous pouvez même déplacer le dossier webroot en dehors
-du dossier App tant que vous dites à CakePHP où vous l'avez mis.
-
-Pour configurer votre installation CakePHP, vous aurez besoin de faire des
-changements aux fichiers suivants.
-
-
--  /src/webroot/index.php
--  /src/webroot/test.php (si vous utilisez la fonctionnalité
-   :doc:`Testing </development/testing>`.)
-
-Il y a trois constantes que vous aurez besoin de modifier: ``ROOT``,
-``APP_DIR``, et ``CAKE_CORE_INCLUDE_PATH``.
-
-
-- ``ROOT`` devrait être défini comme le chemin du répertoire qui contient votre
-  dossier app.
-- ``APP_DIR`` devrait être défini comme le nom (de base) de votre dossier app.
-- ``CAKE_CORE_INCLUDE_PATH`` devrait être défini comme le chemin de votre
-  dossier de librairies CakePHP. Généralement vous aurez besoin de changer cela
-  si vous utilisez chacune des méthodes d'
-  :doc:`installation suggérées </installation>`.
-
-Faisons un exemple pour que vous voyiez à quoi peut ressembler une installation
-avancée en pratique. Imaginez que je veuille configurer CakePHP pour fonctionner
-comme ce qui suit:
-
-- Le répertoire webroot de mon application sera /var/www/mysite/.
-- Le répertoire app de mon application sera /home/me/myapp.
-- CakePHP est installé via Composer.
-
-Etant donnée le type de configuration, j'aurai besoin de modifier mon fichier
-webroot/index.php (qui finira dans /var/www/mysite/index.php, dans cet exemple)
-pour ressembler à ce qui suit::
-
-    // config/paths.php (partial, comments removed)
-    define('ROOT', '/home/me');
-    define('APP_DIR', 'myapp');
-    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
 
 URL Rewriting
 =============
@@ -277,8 +223,8 @@ Félicitations ! Vous êtes prêt à :doc:`créer votre première application Ca
 </getting-started>`.
 
 
-.. _Github: http://github.com/cakephp/cakephp
-.. _composer: http://getcomposer.com
+.. _GitHub: http://github.com/cakephp/cakephp
+.. _Composer: http://getcomposer.org
 
 .. meta::
     :title lang=fr: Installation

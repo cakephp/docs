@@ -17,6 +17,9 @@ level ``Session`` key, and a number of options are available:
 
 * ``Session.cookie`` - Change the name of the session cookie.
 
+* ``Session.cookiePath`` - The url path for which session cookie is set.
+  Maps to the ``session.cookie_path`` php.ini config. Defaults to base path of app.
+
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
 
 * ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
@@ -48,13 +51,15 @@ this::
         ]
     ]);
 
-The session cookie path defaults to ``/``. To change this you can use the
-``session.cookie_path`` ini flag to the directory path of your application::
+The session cookie path defaults to app's base path. To change this you can use
+the ``cookiePath`` config. For e.g. if you want your session to persist across
+all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
+        'cookiePath' => '/',
         'ini' => [
-            'session.cookie_path' => '/src/dir'
+            'session.cookie_domain' => '.yourdomain.com'
         ]
     ]);
 

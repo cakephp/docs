@@ -510,7 +510,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
 
 We can define the belongsToMany association in our Articles model as follows::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags');
@@ -520,7 +520,7 @@ We can define the belongsToMany association in our Articles model as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsToMany('Tags', [
@@ -805,7 +805,7 @@ table, while the values will be the 'displayField' of the table. You can use the
 ``displayField()`` method on a table object to configure the display field on
 a table::
 
-    class Articles extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->displayField('title');
@@ -2060,7 +2060,7 @@ persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity`` method::
 
     $articles = TableRegistry::get('Articles');
-    $entity = $articles->get(1);
+    $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
 
 As explained in the previous section, the request data should follow the
@@ -2069,7 +2069,7 @@ merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
 
-    $entity = $articles->get(1);
+    $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
@@ -2149,7 +2149,8 @@ delete for those not in the list::
 
     $present = (new Collection($entity->comments))->extract('id');
     TableRegistry::get('Comments')->deleteAll([
-        'conditions' => ['article_id' => $article->id, 'id NOT IN' => $present]
+        'article_id' => $article->id,
+        'id NOT IN' => $present
     ]);
 
 As you can see, this also helps creating solutions where an association needs to

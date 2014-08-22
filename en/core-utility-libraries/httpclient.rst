@@ -324,9 +324,12 @@ In addition to the above methods you can also use object accessors to read data
 from the following properties:
 
 * cookies
-* body
-* status
 * headers
+* body
+* code
+* json
+* xml
+
 
 ::
 
@@ -335,7 +338,7 @@ from the following properties:
 
     // Use object accessors to read data.
     debug($response->body);
-    debug($response->status);
+    debug($response->code);
     debug($response->headers);
 
 Reading JSON and XML Response Bodies

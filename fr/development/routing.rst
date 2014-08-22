@@ -2,6 +2,7 @@ Routing
 #######
 
 .. php:namespace:: Cake\Routing
+
 .. php:class:: Router
 
 Routing est une fonctionnalité qui mappe les URLs aux actions du controller.
@@ -81,7 +82,7 @@ que de spécifier chacun des paramètres de routing::
         ['_name' => 'login']
     );
 
-    echo Router::url('login');
+    echo Router::url(['_name' => 'login']);
     // Va afficher
     /login
 
@@ -390,11 +391,11 @@ pour le routing inversé pour identifier la route que vous souhaitez utiliser::
     );
 
     // Génère une URL en utilisant une route nommée.
-    $url = Router::url('login');
+    $url = Router::url(['_name' => 'login']);
 
     // Génère une URL en utilisant une route nommée,
     // avec certains args query string
-    $url = Router::url('login', ['username' => 'jimmy']);
+    $url = Router::url(['_name' => 'login', 'username' => 'jimmy']);
 
 Si votre template de route contient des elements de route comme ``:controller``,
 vous aurez besoin de fournir ceux-ci comme options de ``Router::url()``.
@@ -608,10 +609,10 @@ Router makes it easy to generate RESTful routes for your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
-    //In config/routes.php...
+    //Dans config/routes.php...
 
     Router:scope('/', function($routes) {
-        $routes->extensions('json');
+        $routes->extensions(['json']);
         $routes->resources('recipes');
     });
 
@@ -782,7 +783,7 @@ Comme ``5`` a une clé numérique, il est traité comme un argument passé.
 Générer des URLs
 ================
 
-.. php:staticmethod:: url($url = null, $options = [])
+.. php:staticmethod:: url($url = null, $full = false)
 
 Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your URL structure without having to modify all your code.

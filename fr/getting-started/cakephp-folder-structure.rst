@@ -2,11 +2,12 @@ Structure du dossier de CakePHP
 ###############################
 
 Après avoir téléchargé et extrait CakePHP, voici les fichiers et
-répertoires que vous devriez voir :
+répertoires que vous devriez voir:
 
 - src
-- plugins
+- config
 - tests
+- plugins
 - tmp
 - vendor
 - webroot
@@ -15,10 +16,14 @@ répertoires que vous devriez voir :
 - index.php
 - README.md
 
-Vous remarquerez quelques dossiers principaux :
+Vous remarquerez quelques dossiers principaux:
 
 - Le dossier *src* sera celui où vous exercerez votre magie : c'est là
   que vous placerez les fichiers de votre application.
+- Le dossier *config* contient les (quelques) fichiers de
+  :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
+  connection à la Base de Données, le bootstrapping, les fichiers de
+  configuration du coeur et consorts doivent être stockés ici.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
 - Le dossier *tests* contient tous les cas de test, et les fixtures de test pour
@@ -41,18 +46,13 @@ Vous remarquerez quelques dossiers principaux :
   performance de votre application sera sévèrement impactée. En mode debug,
   CakePHP vous avertira si ce n'est pas le cas.
 
-Le dossier src
+Le Dossier Src
 ==============
 
 Le répertoire *src* de CakePHP est l'endroit où vous réaliserez la majorité
 du développement de votre application. Regardons de plus près le contenu de
 ce répertoire.
 
-Config
-    Contient les (quelques) fichiers de configuration utilisés par CakePHP.
-    Informations de connexion à la base de données, démarrage, fichiers de
-    configuration de base et tous fichiers du même genre doivent être rangés
-    ici.
 Console
     Contient les commandes de la console et les Tasks de la console pour votre
     application. Ce répertoire peut aussi contenir un répertoire ``Templates``
@@ -67,6 +67,9 @@ Model
 View
     Les fichiers de présentation sont placés ici : elements, pages d'erreur,
     helpers, layouts et templates de vues.
+Template
+    Les fichiers de présentation se trouvent ici: elements, pages d'erreur,
+    les layouts, et les fichiers de template de vue.
 
 
 .. meta::

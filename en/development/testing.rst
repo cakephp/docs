@@ -80,7 +80,7 @@ application's tests::
     // For phpunit.phar
     $ php phpunit.phar
 
-    // For composer installed phpunit
+    // For Composer installed phpunit
     $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
@@ -213,12 +213,6 @@ application's tests you can simply run::
 From your application's root directory. To run a plugin's tests, first ``cd``
 into the plugin directory, then use ``phpunit`` to run the tests.
 
-.. note::
-
-    If you are running tests that interact with the session it's generally a good
-    idea to use the ``--stderr`` option. This will fix issues with tests
-    failing because of headers_sent warnings.
-
 Filtering Test Cases
 --------------------
 
@@ -244,15 +238,6 @@ doing the following::
 This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
-
-Running Tests that Use Sessions
--------------------------------
-
-When running tests on the command line that use sessions you'll need to include
-the ``--stderr`` flag. Failing to do so will cause sessions to not work.
-PHPUnit outputs test progress to stdout by default, this causes PHP to assume
-that headers have been sent which prevents sessions from starting. By switching
-PHPUnit to output on stderr, this issue is avoided.
 
 Combining Test Suites for Plugins
 ---------------------------------
@@ -1294,11 +1279,11 @@ of your testing results:
 
 .. code-block:: bash
 
-    # Download composer if it is missing.
+    # Download Composer if it is missing.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    vendor/bin/phpunit --stderr --log-junit junit.xml --coverage-clover clover.xml
+    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.

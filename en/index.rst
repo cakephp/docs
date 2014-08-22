@@ -7,8 +7,7 @@ Welcome
 #######
 
 The CakePHP cookbook is an openly developed and community editable documentation
-project. We hope to maintain a high level of quality, validity and accuracy for
-the documentation. Notice the "Improve this Doc" button in the upper right-hand
+project. Notice the "Improve this Doc" button in the upper right-hand
 corner; it will direct you to the GitHub online editor of the active page,
 allowing you to easily contribute any additions, deletions, or corrections to
 the documentation.
@@ -27,31 +26,25 @@ the documentation.
 Getting Started
 ===============
 
-Conventions
------------
+Learning a new framework can be intimidating and exciting at the same time. To
+help you along, we have created a cookbook packed with examples and recipies to
+get the common tasks completed. If you are new, you should start off with the
+:doc:`/tutorials-and-examples/blog` as it will give you a quick tour of what
+CakePHP has to offer and how it works.
 
-Learn about a typical :doc:`CakePHP request
-</getting-started/a-typical-cakephp-request>` and the :doc:`conventions
-</getting-started/cakephp-conventions>` that power CakePHP.
+After you've finished the Blog Tutorial, you can brush up on the key elements in
+a CakePHP application:
 
-Controllers
------------
-
-Controllers handle requests and help co-ordinate and prepare
-responses for the client. Read more about :doc:`/controllers`.
-
-Views
------
-
-Views are the presentation layer in CakePHP. They convert
-the data fetched from Models into the output format requested by the
-client. Read more about :doc:`/views`.
-
-Models
-------
-
-Models are the heart of your application. They handle the validation,
-storage and retrieval of your data. Read more about :doc:`/orm`.
+* The :doc:`CakePHP request cycle </getting-started/a-typical-cakephp-request>`
+* The :doc:`conventions </getting-started/cakephp-conventions>` that CakePHP
+  uses.
+* :doc:`Controllers </controllers>` handle requests and co-ordinate your models
+  and the responses your application creates.
+* :doc:`Views </views>` are the presentation layer in your application. They
+  give you powerful tools to create HTML, JSON and the other outputs your
+  application needs.
+* :doc:`Models </orm>` are the key ingredient in any application. They handle
+  validation, and domain logic within your application.
 
 Getting Help
 ============

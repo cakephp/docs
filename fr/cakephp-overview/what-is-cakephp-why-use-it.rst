@@ -25,7 +25,7 @@ implique que le coeur de votre application est bien testé et qu'il peut être
 constamment amélioré.
 
 Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant
-CakePHP :
+CakePHP:
 
 -  `Communauté active et sympathique :ref:`cakephp-official-communities`.
 -  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_.
@@ -47,7 +47,7 @@ CakePHP :
    `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_  flexible.
 -  Nettoyage des données.
 -  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple.
--  Localisation et internationalisation.
+-  Localisation.
 -  Fonctionne sur n'importe quelle arborescence de site web, avec un zest de 
    configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée.
 

@@ -22,7 +22,7 @@ Installing a Plugin
 ===================
 
 Many plugins are available on `Packagist <http://packagist.org>`_
-and can be installed with ``composer``. To install DebugKit, you
+and can be installed with ``Composer``. To install DebugKit, you
 would do the following::
 
     php composer.phar require cakephp/debug_kit
@@ -30,8 +30,8 @@ would do the following::
 This would install the latest version of DebugKit and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
 the plugin you want to install is not available on packagist.org, you can clone
-or copy the plugin code into your ``/Plugin`` directory. Assuming you want to install
-a plugin named 'ContactManager', you should have a folder in ``/Plugin``
+or copy the plugin code into your ``/plugins`` directory. Assuming you want to install
+a plugin named 'ContactManager', you should have a folder in ``/plugins``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
 
@@ -45,10 +45,8 @@ method::
     // Loads a single plugin
     Plugin::load('ContactManager');
 
-    // Loads a single plugin, with a custom namespace.
-    Plugin::load('ContactManager', [
-        'namespace' => 'AcmeCorp\ContactManager'
-    ]);
+    // Loads a plugin with a vendor namespace at top level.
+    Plugin::load('AcmeCorp/ContactManager');
 
     // Loads all plugins at once
     Plugin::loadAll();
@@ -57,11 +55,15 @@ method::
 settings for specific plugins. ``load()`` works similarly, but only loads the
 plugins you explicitly specify.
 
+.. note::
+
+    ``Plugin::loadAll()`` won't load vendor namespaced plugins.
+
 Autoloading Plugin Classes
 --------------------------
 
-When using ``bake`` for creating a plugin or when installing a it using
-composer, you don't typically need to make any changes to your application in order to
+When using ``bake`` for creating a plugin or when installing a plugin using
+Composer, you don't typically need to make any changes to your application in order to
 make CakePHP recognize the classes that live inside it.
 
 In any other cases you may need to modify your application's composer.json file
@@ -73,11 +75,11 @@ to contain the following information::
         "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
-Additionally you will need to tell composer to refresh it's autoloading cache::
+Additionally you will need to tell Composer to refresh its autoloading cache::
 
     $ php composer.phar dumpautoload
 
-If you are unable to use composer for any reason, you can also use a fallback
+If you are unable to use Composer for any reason, you can also use a fallback
 autoloading for your plugin::
 
     Plugin::load('ContactManager', ['autoload' => true]);
@@ -87,8 +89,8 @@ autoloading for your plugin::
 Plugin Configuration
 ====================
 
-There is a lot you can do with the ``load`` and ``loadAll`` methods to help with
-plugin configuration and routing. Perhaps you want to load all plugins
+There is a lot you can do with the ``load()`` and ``loadAll()`` methods to help
+with plugin configuration and routing. Perhaps you want to load all plugins
 automatically, while specifying custom routes and bootstrap files for
 certain plugins::
 
@@ -123,12 +125,16 @@ potential warnings by using the ``ignoreMissing`` option::
         'Blog' => ['routes' => true]
     ]);
 
-By default the namespace of the Plugin should match the plugin name. If this is
-not the case, you can use the ``namespace`` option to provide a different
-namespace. For example you have a Users plugin that actually uses
-``Jose\\Users`` as its namespace::
+When loading plugins, the plugin name used should match the namespace.
+For example you have a plugin with top level namespace ``Users`` you would load
+it using::
 
-    Plugin::load('Users', ['namespace' => 'Jose\Users']);
+    Plugin::load('User');
+
+If you prefer to have your vendor name as top level and have a namespace like
+``AcmeCorp/Users``, then you would load the plugin as::
+
+    Plugin::load('AcmeCorp/Users');
 
 This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.
@@ -166,6 +172,7 @@ basic directory structure. It should look like this::
     /src
     /plugins
         /ContactManager
+            /config
             /src
                 /Controller
                     /Component
@@ -211,7 +218,10 @@ of your app. For example - baking controllers::
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
-have any problems with using the command line.
+have any problems with using the command line. Be sure to re-generate your
+autoloader once you've created your plugin::
+
+    $ php composer.phar dumpautoload
 
 Plugin Controllers
 ==================
@@ -241,6 +251,25 @@ So, we place our new ContactsController in
     This controller extends the plugin's AppController (called
     ContactManagerAppController) rather than the parent application's
     AppController.
+
+Before you can access your controllers, you'll need to ensure the plugin is
+loaded and connect some routes. In your ``/config/bootstrap.php`` add the
+following::
+
+    Plugin::load('ContactManager', ['routes' => true]);
+
+Then create the ContactManager plugin routes. Put the following into
+``/plugins/ContactManager/config/routes.php``::
+
+    <?php
+    use Cake\Routing\Router;
+
+    Router::plugin('ContactManager', function($routes) {
+        $routes->fallbacks();
+    });
+
+The above will connect default routes for you plugin. You can customize this
+file with more specific routes later on.
 
 If you want to access what we've got going thus far, visit
 ``/contact_manager/contacts``. You should get a "Missing Model" error

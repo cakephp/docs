@@ -3,7 +3,7 @@ Une requête CakePHP typique
 
 Nous avons découvert les ingrédients de bases de CakePHP, regardons
 maintenant comment chaque objet travaille avec les autres pour répondre
-à une requête simple. Poursuivons sur notre exemple original de requête,
+à une requête simple. Poursuivons avec notre exemple de requête précédent,
 imaginons que notre ami Ricardo vient de cliquer sur le lien "Achetez un
 Cake personnalisé maintenant !" sur la page d'accueil d'une application
 CakePHP.
@@ -47,7 +47,7 @@ Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callbac
    laquelle peut inclure l'utilisation d'elements et/ou de helpers.
    Par défaut, la vue est rendue à travers un layout (mise en page).
 #. D'autres fonctions de rappel (callbacks) du controller (comme
-   :php:meth:`~Controller::afterFilter`) peuvent être exécutées. La vue
+   ``Controller::afterFilter``) peuvent être exécutées. La vue
    complète et finale est envoyée au navigateur de Ricardo.
 
 

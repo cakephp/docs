@@ -1,6 +1,10 @@
 Controllers (Contrôleurs)
 #########################
 
+.. php:namespace:: Cake\Controller
+
+.. php:class:: Controller
+
 Les controllers sont le 'C' dans MVC. Après que le routage a été effectué et que
 le bon controller a été trouvé, l'action de votre controller est appelée. Votre
 controller devra gérer l'interpretation des données requêtées, s'assurer que
@@ -42,6 +46,10 @@ elle-même la classe :php:class:`Controller` incluse dans la librairie du cœur
 de CakePHP. ``AppController`` est définie dans
 ``/src/Controller/AppController.php`` comme ceci::
 
+    namespace App\Controller;
+
+    use Cake\Controller\Controller;
+
     class AppController extends Controller {
     }
 
@@ -65,7 +73,6 @@ surcharger celles dans ``AppController``.
 
     -  :php:attr:`~Controller::$components`
     -  :php:attr:`~Controller::$helpers`
-    -  :php:attr:`~Controller::$uses`
 
 N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la
 propriété :php:attr:`~Controller::$helpers` dans votre classe ``AppController``.
@@ -100,7 +107,7 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``/app/Controller/RecipesController.php`` et contiendrait::
+``/src/Controller/RecipesController.php`` et contiendrait::
 
         # /src/Controller/RecipesController.php
         
@@ -119,7 +126,7 @@ RecipesController pourrait contenir les actions
         }
 
 Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
-``app/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
+``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
@@ -204,15 +211,6 @@ ou juste après que les actions du controller ont été effectuées :
 En plus des callbacks des controllers, les :doc:`/controllers/components`
 fournissent aussi un ensemble similaire de callbacks.
 
-.. _controller-methods:
-
-Les méthodes du Controller
-==========================
-
-Pour une liste complète des méthodes de controller avec leurs descriptions,
-consultez
-`l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
-
 Interactions avec les vues
 --------------------------
 
@@ -221,96 +219,98 @@ Premièrement, ils sont capables de passer des données aux vues, en utilisant
 :php:meth:`~Controller::set()`. Vous pouvez aussi décider quelle classe de vue
 utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
+Définir les Variables de View
+-----------------------------
+
 .. php:method:: set(string $var, mixed $value)
 
-    La méthode :php:meth:`~Controller::set()` est la voie principale utilisée
-    pour transmettre des données de votre controller à votre vue. Une fois
-    :php:meth:`~Controller::set()` utilisée, la variable de votre controller
-    devient accessible par la vue::
+La méthode :php:meth:`~Controller::set()` est la voie principale utilisée
+pour transmettre des données de votre controller à votre vue. Une fois
+:php:meth:`~Controller::set()` utilisée, la variable de votre controller
+devient accessible par la vue::
 
-        // Dans un premier temps vous passez les données depuis le controller:
+    // Dans un premier temps vous passez les données depuis le controller:
 
-        $this->set('couleur', 'rose');
+    $this->set('couleur', 'rose');
 
-        // Ensuite vous pouvez les utiliser dans la vue de cette manière:
-        ?>
+    // Ensuite vous pouvez les utiliser dans la vue de cette manière:
+    ?>
 
-        Vous avez sélectionné un glaçage <?= $couleur; ?> pour le gâteau.
+    Vous avez sélectionné un glaçage <?= $couleur; ?> pour le gâteau.
 
-    La méthode :php:meth:`~Controller::set()` peut également prendre un tableau
-    associatif comme premier paramètre. Cela peut souvent être une manière
-    rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
+La méthode :php:meth:`~Controller::set()` peut également prendre un tableau
+associatif comme premier paramètre. Cela peut souvent être une manière
+rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
-        $data = [
-            'couleur' => 'rose',
-            'type' => 'sucre',
-            'prix_de_base' => 23.95
-        ];
+    $data = [
+        'couleur' => 'rose',
+        'type' => 'sucre',
+        'prix_de_base' => 23.95
+    ];
 
-        // donne $couleur, $type, et $prix_de_base 
-        // disponible dans la vue:
+    // donne $couleur, $type, et $prix_de_base 
+    // disponible dans la vue:
 
-        $this->set($data);  
+    $this->set($data);  
 
-
-    L'attribut ``$pageTitle`` n'existe plus. Utilisez
-    :php:meth:`~Controller::set()` pour définir le titre::
-
-        $this->set('title_for_layout', 'Ceci est la page titre');
-
+Rendre une View
+---------------
 
 .. php:method:: render(string $view, string $layout)
 
-    La méthode :php:meth:`~Controller::render()` est automatiquement appelée à
-    la fin de chaque action exécutée par le controller. Cette méthode exécute
-    toute la logique liée à la présentation (en utilisant les variables
-    transmises via la méthode :php:meth:`~Controller::set()`), place le contenu
-    de la vue à l'intérieur de son :php:attr:`~View::$layout` et transmet le
-    tout à l'utilisateur final.
+La méthode ``render()`` est automatiquement appelée à
+la fin de chaque action exécutée par le controller. Cette méthode exécute
+toute la logique liée à la présentation (en utilisant les variables
+transmises via la méthode :php:meth:`~Controller::set()`), place le contenu
+de la vue à l'intérieur de son :php:attr:`~View::$layout` et transmet le
+tout à l'utilisateur final.
 
-    Le fichier de vue utilisé par défaut est déterminé par convention.
-    Ainsi, si l'action ``search()`` de notre controller RecipesController
-    est demandée, le fichier de vue situé dans /src/Template/Recipes/search.ctp
-    sera utilisé::
+Le fichier de vue utilisé par défaut est déterminé par convention.
+Ainsi, si l'action ``search()`` de notre controller RecipesController
+est demandée, le fichier de vue situé dans /src/Template/Recipes/search.ctp
+sera utilisé::
 
-        class RecipesController extends AppController {
-        // ...
-            public function search() {
-                // Rend la vue dans /Template/Recipes/search.ctp
-                $this->render();
-            }
-        // ...
+    namespace App\Controller;
+
+    class RecipesController extends AppController {
+    // ...
+        public function search() {
+            // Render the view in /src/Template/Recipes/search.ctp
+            $this->render();
         }
+    // ...
+    }
 
-    Bien que CakePHP appelle cette fonction automatiquement à la
-    fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
-    à false), vous pouvez l'utiliser pour spécifier un fichier de vue
-    alternatif en précisant le nom d'une action dans le controller, via
-    le paramètre ``$action``.
+Bien que CakePHP appelle cette fonction automatiquement à la
+fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
+à false), vous pouvez l'utiliser pour spécifier un fichier de vue
+alternatif en précisant le nom d'une action dans le controller, via
+le paramètre ``$action``.
 
-    Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
-    vue ou un élément dont le chemin est relatif au dossier ``/app/Template``.
-    Cela permet un affichage direct des éléments, ce qui est très pratique lors
-    d'appels AJAX.
-    ::
+Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
+vue ou un élément dont le chemin est relatif au dossier ``/src/Template``.
+Cela permet un affichage direct des éléments, ce qui est très pratique lors
+d'appels AJAX::
 
-        // Rend un élément dans /Template/Elements/ajaxreturn.ctp
-        $this->render('/Elements/ajaxreturn');
+    // Rend un élément dans /Template/Elements/ajaxreturn.ctp
+    $this->render('/Elements/ajaxreturn');
 
-    Le paramètre :php:attr:`~View::$layout` vous permet de spécifier le layout
-    de la vue qui est rendue.
+Le paramètre ``$layout`` de ``render()`` vous permet de spécifier le layout
+de la vue qui est rendue.
 
-Rendre une vue spécifique
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Rendre un template de vue spécifique
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans votre controller, vous pourriez avoir envie de rendre une vue
 différente de celle rendue par défaut. Vous pouvez le faire en appelant
-directement :php:meth:`~Controller::render()`. Une fois que vous avez appelé
-:php:meth:`~Controller::render()` CakePHP n'essaiera pas de re-rendre la vue::
+directement ``render()``. Une fois que vous avez appelé
+``render()``, CakePHP n'essaiera pas de re-rendre la vue::
+
+    namespace App\Controller;
 
     class PostsController extends AppController {
-        public function mon_action() {
-            $this->render('ustom_file');
+        public function my_action() {
+            $this->render('custom_file');
         }
     }
 
@@ -321,299 +321,167 @@ Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
 Par exemple::
 
+    namespace App\Controller;
+
     class PostsController extends AppController {
         public function my_action() {
             $this->render('Users.UserDetails/custom_file');
         }
     }
     
-Cela rendrait la vue ``/plugins/Users/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``/plugins/Users/src/Template/UserDetails/custom_file.ctp`` 
 
-Contrôle de Flux
-----------------
+Rediriger vers d'Autres Pages
+-----------------------------
 
 .. php:method:: redirect(string|array $url, integer $status)
 
-    La méthode de contrôle de flux que vous utiliserez le plus souvent est
-    :php:meth:`~Controller::redirect()`. Cette méthode prend son premier
-    paramètre sous la forme d'une URL relative à votre application CakePHP.
-    Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-    rediriger vers un écran affichant le reçu.::
+La méthode de contrôle de flux que vous utiliserez le plus souvent est
+:php:meth:`~Controller::redirect()`. Cette méthode prend son premier
+paramètre sous la forme d'une URL relative à votre application CakePHP.
+Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
+rediriger vers un écran affichant le reçu.::
 
-        public function regler_achats() {
-            // Placez ici la logique pour finaliser l'achat...
-            if ($success) {
-                return $this->redirect(
-                    ['controller' => 'Paiements', 'action' => 'remerciements']
-                );
-            } else {
-                return $this->redirect(
-                    ['controller' => 'Paiements', 'action' => 'confirmations']
-                );
-            }
+    public function place_order() {
+        // Logic for finalizing order goes here
+        if ($success) {
+            return $this->redirect(
+                ['controller' => 'Orders', 'action' => 'thanks']
+            );
         }
+        return $this->redirect(
+            ['controller' => 'Orders', 'action' => 'confirm']
+        );
+    }
 
-    Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
+La méthode va retourner l'instance de réponse avec les bons headers définis.
+Vous devrez retourner l'instance de réponse à partir de votre action pour éviter
+les rendus de view et laisser le dispatcher gérer la bonne redirection.
 
-        return $this->redirect('/paiements/remerciements');
-        return $this->redirect('http://www.exemple.com');
+Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
-    Vous pouvez aussi passer des données à l'action::
+    return $this->redirect('/orders/thanks');
+    return $this->redirect('http://www.example.com');
 
-        return $this->redirect(['action' => 'editer', $id]);
+Vous pouvez aussi passer des données à l'action::
 
-    Le second paramètre de la fonction :php:meth:`~Controller::redirect()`
-    vous permet de définir un code de statut HTTP accompagnant la redirection.
-    Vous aurez peut-être besoin d'utiliser le code 301 (document
-    déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
-    de la nature de la redirection.
+    return $this->redirect(['action' => 'edit', $id]);
 
-    Si vous avez besoin de rediriger à la page appelante, vous pouvez
-    utiliser::
+Le second paramètre de la fonction :php:meth:`~Controller::redirect()`
+vous permet de définir un code de statut HTTP accompagnant la redirection.
+Vous aurez peut-être besoin d'utiliser le code 301 (document
+déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
+de la nature de la redirection.
 
-        return $this->redirect($this->referer());
+Si vous avez besoin de rediriger à la page appelante, vous pouvez
+utiliser::
 
-    Cette méthode accepte aussi les paramètres nommés de base. Si vous
-    souhaitez être redirigé sur une URL comme:
-    ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
-    vous pouvez utiliser::
+    return $this->redirect($this->referer());
 
-        return $this->redirect([
-            'controller' => 'Commandes',
-            'action' => 'confirmation',
-            'produit' => 'pizza',
-            'quantite' => 5
-        ]);
+Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
+à ceci::
 
-    Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
-    à ceci::
+    return $this->redirect([
+        'controller' => 'Orders',
+        'action' => 'confirm',
+        '?' => [
+            'product' => 'pizza',
+            'quantity' => 5
+        ],
+        '#' => 'top'
+    ]);
 
-        return $this->redirect([
-            'controller' => 'Commandes',
-            'action' => 'confirmation',
-            '?' => [
-                'produit' => 'pizza',
-                'quantite' => 5
-            ],
-            '#' => 'top'
-        ]);
+L'URL généré serait:
 
-    L'URL généré serait:
+    http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
-        http://www.example.com/orders/confirm?product=pizza&quantity=5#top
-
-Autres Méthodes utiles
-----------------------
-
-.. php:method:: constructClasses
-
-    Cette méthode charge en mémoire les models nécessaires au controller.
-    Cette procédure de chargement est normalement effectuée par CakePHP,
-    mais cette méthode est à garder sous le coude quand vous avez besoin
-    d'accéder à certains controllers dans une autre perspective. Si
-    vous avez besoin de CakePHP dans un script utilisable en ligne de
-    commande ou d'autres utilisations externes,
-    :php:meth:`~Controller::constructClasses()` peut devenir pratique.
-
-.. php:method:: referer(mixed $default = null, boolean $local = false)
-
-    Retourne l'URL référente de la requête courante. Le paramètre
-    ``$default`` peut être utilisé pour fournir une URL par défaut à
-    utiliser si HTTP\_REFERER ne peut pas être lu par les headers. Donc,
-    au lieu de faire ceci::
-
-        class UserController extends AppController {
-            public function delete($id) {
-                // le code de suppression va ici, et ensuite...
-                if ($this->referer() != '/') {
-                    return $this->redirect($this->referer());
-                }
-                return $this->redirect(['action' => 'index']);
-            }
-        }
-
-    vous pouvez faire ceci::
-
-        class UserController extends AppController {
-            public function delete($id) {
-                // le code de suppression va ici, et ensuite...
-                return $this->redirect(
-                    $this->referer(['action' => 'index'])
-                );
-            }
-        }
-
-    Si ``$default`` n'est pas définie, la fonction se met par défaut 
-    à la racine (root) de votre domaine - '/'.
-
-    Le paramètre ``$local``, si il est défini à ``true``, restreint les URLs se
-    référant au serveur local.
-
-.. php:method:: disableCache
-
-    Utilisée pour indiquer au **navigateur** de l'utilisateur de ne pas
-    mettre en cache le résultat de la requête courante. Ceci est différent
-    du système de cache de vue couvert dans le chapitre suivant.
-
-    Les en-têtes HTTP envoyés à cet effet sont::
-
-        Expires: Mon, 26 Jul 1997 05:00:00 GMT
-        Last-Modified: [current datetime] GMT
-        Cache-Control: no-store, no-cache, must-revalidate
-        Cache-Control: post-check=0, pre-check=0
-        Pragma: no-cache
+Paginating a Model
+==================
 
 .. php:method:: paginate()
 
-    Cette méthode est utilisée pour paginer les résultats retournés par vos
-    models. Vous pouvez définir les tailles de la page, les conditions à
-    utiliser pour la recherche de ces données et bien plus encore. Consultez la
-    section :doc:`pagination <core-libraries/components/pagination>`
-    pour plus de détails sur l'utilisation de la pagination.
+Cette méthode est utilisée pour paginer les résultats retournés par vos
+models. Vous pouvez définir les tailles de la page, les conditions à
+utiliser pour la recherche de ces données et bien plus encore. Consultez la
+section :doc:`pagination <core-libraries/components/pagination>`
+pour plus de détails sur l'utilisation de la pagination.
 
-.. php:method:: requestAction(string $url, array $options)
+L'attribut paginate vous donne une façon facile de personnaliser la façon dont
+``paginate()`` se comporte::
 
-    Regardez la documentation pour
-    :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` pour plus
-    d'informations sur cette méthode.
+    class ArticlesController extends AppController {
+        public $paginate = [
+            'Articles' => [
+                'conditions' => ['published' => 1]
+            ]
+        ];
+    }
+
+Chargement des Models Supplémentaires
+=====================================
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-    La fonction ``loadModel`` devient pratique quand
-    vous avez besoin d'utiliser un model qui n'est pas le model du controller
-    par défaut ou un de ses models associés::
-    
-        $this->loadModel('Articles');
-        $recentArticles = $this->Articles->find('all', [
-            'limit' => 5,
-            'order' => 'Articles.created DESC'
-        ]);
+La fonction ``loadModel`` devient pratique quand
+vous avez besoin d'utiliser une table de model/collection qui n'est pas le
+model du controller par défaut ou un de ses models associés::
 
-    Si vous utilisez un provider de table différent de l'ORM intégré, vous
-    pouvez lier ce système de table dans les controllers de CakePHP en
-    connectant sa méthode factory::
+    $this->loadModel('Articles');
+    $recentArticles = $this->Articles->find('all', [
+	'limit' => 5,
+	'order' => 'Articles.created DESC'
+    ]);
 
-        $this->modelFactory(
-            'ElasticIndex',
-            ['ElasticIndexes', 'factory']
-        );
+Si vous utilisez un provider de table différent de l'ORM intégré, vous
+pouvez lier ce système de table dans les controllers de CakePHP en
+connectant sa méthode factory::
 
-    Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
-    pour charger les instances::
+    $this->modelFactory(
+	'ElasticIndex',
+	['ElasticIndexes', 'factory']
+    );
 
-        $this->loadModel('Locations', 'ElasticIndex');
+Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
+pour charger les instances::
 
-    .. note::
-
-        La TableRegistry intégrée dans l'ORM est connectée par défaut comme
-        provider de 'Table'.
-
-
-Les attributs du Controller
-===========================
-
-Pour une liste complète des attributs du controller et ses descriptions,
-consultez `l'API de CakePHP <http://api.cakephp.org/3.0/class-Cake.Controller.Controller.html>`_.
-
-.. php:attr:: name
-
-    L'attribut :php:attr:`~Controller::$name` doit être défini selon le nom du
-    controller. Habituellement, c'est juste la forme plurielle du model
-    principal que le controller utilise. Cette propriété n'est pas requise,
-    mais évite à CakePHP d'inflecter dessus::
-
-        // Exemple d'utilisation d'attribut $name du controller
-        class RecipesController extends AppController {
-           public $name = 'Recipes';
-        }
-
-
-$components, $helpers
----------------------
-
-Les autres attributs les plus souvent utilisés permettent d'indiquer à
-CakePHP quels :php:attr:`~Controller::$helpers`,
-:php:attr:`~Controller::$components` et models vous utiliserez avec le
-controller courant. Utiliser ces attributs rend ces classes MVC, fournies
-par :php:attr:`~Controller::$components` et :php:attr:`~Controller::$uses`,
-disponibles pour le controller, sous la forme de variables de classe
-(``$this->ModelName``, par exemple) et celles fournies par
-:php:attr:`~Controller::$helpers`, disponibles pour la vue comme une variable
-référence à l'objet (``$this->{$helpername}``).
+    $this->loadModel('Locations', 'ElasticIndex');
 
 .. note::
 
-    Chaque controller a déjà accès, par défaut, à certaines de ces classes,
-    donc vous n'avez pas besoin de les redéfinir.
+    La TableRegistry intégrée dans l'ORM est connectée par défaut comme
+    provider de 'Table'.
 
-.. php:attr:: helpers
-
-    Les Helpers :php:class:`HtmlHelper`, :php:class:`FormHelper` et
-    :php:class:`SessionHelper` sont toujours accessibles par défaut, tout
-    comme le :php:class:`SessionComponent`. Mais si vous choisissez de définir
-    votre propre tableau :php:attr:`~Controller::$helpers` dans AppController,
-    assurez-vous d'y inclure :php:class:`HtmlHelper` et :php:class:`FormHelper`
-    si vous voulez qu'ils soient toujours disponibles par défaut dans vos
-    propres controllers. Pour en savoir plus au sujet de ces classes,
-    consultez leurs sections respectives plus loin dans le manuel.
-
-    Jetons maintenant un œil sur la façon d'indiquer à un
-    :php:class:`Controller` CakePHP que vous avez dans l'idée d'utiliser
-    d'autres classes MVC::
-
-        class RecipesController extends AppController {
-            public $helpers = ['Js'];
-            public $components = ['RequestHandler'];
-        }
-
-    Toutes ces variables sont fusionnées avec leurs valeurs héritées,
-    par conséquent ce n'est pas nécessaire de re-déclarer (par exemple) le
-    helper :php:class:`FormHelper` ou tout autre déclaré dans votre
-    ``AppController``.
+Configurer les Components à Charger
+===================================
 
 .. php:attr:: components
 
-    Le tableau de components vous permet de définir quel
-    :doc:`/controllers/components` un controller va utiliser. Comme les
-    :php:attr:`~Controller::$helpers` et :php:attr:`~Controller::$uses`, les
-    components dans vos controllers sont fusionnés avec ceux dans
-    ``AppController``. Comme pour les :php:attr:`~Controller::$helpers`,
-    vous pouvez passer les paramètres dans les components. Consultez
-    :ref:`configuring-components` pour plus d'informations.
+La propriété ``$components`` de vos controllers vous permet de configurer les
+components. Les components configurés et leurs dépendances vont être créés par
+CakePHP pour vous. Lisez la section :ref:`configuring-components` pour plus
+d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
+fusionnée avec la propriété définie dans chacune des classes parentes de votre
+controller.
 
-Autres Attributs
-----------------
+Configurer les Helpers à Charger
+================================
 
-Tandis que vous pouvez vérifier les détails pour tous les attributs des
-controllers dans l'`API <http://api.cakephp.org>`_, il y a d'autres attributs
-du controller qui méritent leurs propres sections dans le manuel.
+.. php:attr:: helpers
 
-.. php:attr: paginate
+Voyons comment dire à un controller de CakePHP que vous avez prévu d'utiliser
+les classes MVC supplémentaires::
 
-    L'attribut paginate est une propriété avec une compatibilité dépréciée.
-    L'utiliser charge et configure le :php:class:`PaginatorComponent`. Il est
-    recommandé que vous mettiez à jour votre code en utilisant les paramètres
-    normaux du component::
+    class RecipesController extends AppController {
+        public $helpers = ['Form'];
+        public $components = ['RequestHandler'];
+    }
 
-        class ArticlesController extends AppController {
-            public $components = [
-                'Paginator' => [
-                    'Article' => [
-                        'conditions' => ['published' => 1]
-                    ]
-                ]
-            ];
-        }
+Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
+ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
+bien tout ce qui est déclaré dans votre ``AppController``.
 
-.. todo::
-
-    Ce chapitre devrait être moins sur l'API de controller et plus sur les
-    exemples, la section des attributs du controller est trop chargée et
-    difficile à comprendre au premier abord. Le chapitre devrait commencer avec
-    quelques exemples de controllers et ce qu'ils font.
-
-En savoir plus sur les controllers
-==================================
+Plus sur les Controllers
+========================
 
 .. toctree::
     :maxdepth: 1
@@ -621,7 +489,6 @@ En savoir plus sur les controllers
     controllers/request-response
     controllers/pages-controller
     controllers/components
-
 
 .. meta::
     :title lang=fr: Controllers (Contrôleurs)

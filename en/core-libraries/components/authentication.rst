@@ -101,7 +101,9 @@ authentication object will override the matching key in the 'all' key.
 The core authentication objects support the following configuration
 keys.
 
-- ``fields`` The fields to use to identify a user by.
+- ``fields`` The fields to use to identify a user by. You can use keys
+  ``username`` and ``password`` to specify your username and password fields
+  respectively.
 - ``userModel`` The model name of the users table, defaults to Users.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``['Users.is_active' => true]``.
@@ -115,7 +117,7 @@ To configure different fields for user in ``$components`` array::
         'Auth' => [
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'email']
+                    'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
         ]
@@ -307,8 +309,8 @@ Handling Unauthenticated Requests
 
 When an unauthenticated user tries to access a protected page first the
 ``unauthenticated()`` method of the last authenticator in the chain is called.
-The authenticate object can handle sending response or redirection as appropriate
-and return ``true`` to indicate no further action is necessary. Due to this, the
+The authenticate object can handle sending response or redirection by returning
+a response object, to indicate no further action is necessary. Due to this, the
 order in which you specify the authentication provider in ``authenticate``
 config matters.
 
@@ -741,6 +743,12 @@ user, nor will authorize objects be checked::
 
 By calling it empty you allow all actions to be public.
 For a single action you can provide the action name as string. Otherwise use an array.
+
+.. note::
+
+    You should not add the "login" action of your ``UsersController`` to allow list.
+    Doing so would cause problems with normal functioning of ``AuthComponent``.
+
 
 Making Actions Require Authorization
 ------------------------------------

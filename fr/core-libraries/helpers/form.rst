@@ -1539,10 +1539,11 @@ Si vous désactiver le fieldset, la legend ne s'affichera pas.
 Ajouter des Widgets Personnalisés
 =================================
 
-CakePHP makes it easy to add custom input widgets in your application, and use
-them like any other input type. All of the core input types are implemented as
-wigets, which means you can easily override any core widget with your own
-implemenation as well.
+CakePHP permet d'ajouter facilement des widgets personnalisés dans votre
+application, afin de les utiliser comme n'importe quel input. Tous les types   
+d'input que contient le corp de cake sont implémentés comme des widgets. Ainsi
+vous pouvez facilement remplacer n'importe quel widget de base avec votre propre 
+implémentation.
 
 Construire une Classe Widget
 ----------------------------
@@ -1555,9 +1556,11 @@ of HTML for the widget. If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you
 could do the following::
-
+    
+    // src\View\Widget\Autocomplete.php
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class Autocomplete implements WidgetInterface {
@@ -1567,8 +1570,18 @@ could do the following::
         public function __construct($templates) {
             $this->_templates = $templates;
         }
-
-        public function render(array $data) {
+        
+        /**
+         * Fournit un input permettant de faire une saisie semi-automatique.
+         *
+         * @param array $data Données requises pour créer le champ de saisie
+         *        semi-automatique.
+         * @param \Cake\View\Form\ContextInterface $context Le contexte du 
+         *        formulaire courant.
+         * @return string Retourne le code HTML représentant le champ de
+         *         saisie semi-automatique.
+         */
+        public function render(array $data, ContextInterface $context) {
             $data += [
                 'name' => '',
             ];
@@ -1578,10 +1591,24 @@ could do the following::
             ]);
         }
 
+        /**
+         * Retourne une liste de champs qui doivent être
+         * sécurisé pour le widget.
+         * @param array $data Les données à fournir au widget.
+         * @return array Tableau de champs à sécuriser.
+         */
+        public function secureFields(array $data) {
+            if (!isset($data['name'])) {
+                return [];
+            }
+            return [$data['name']];
+        }
     }
+    
 
-Obviously, this is a very simple example, but it demonstrates how a custom
-widget could be built.
+Évidemment, c'est un exemple très simple, mais il montre comment développer
+un widget personnalisé.
+
 
 Utiliser les Widgets
 --------------------

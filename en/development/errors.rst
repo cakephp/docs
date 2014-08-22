@@ -389,7 +389,7 @@ If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use the ``exceptionRenderer`` option in
 config/app.php to choose a class that will render exception pages.  By
 default :php:class:`Cake\\Error\\ExceptionRenderer` is used.  Your custom
-exception renderer class should be placed in ``app/Error``.  In a custom
+exception renderer class should be placed in ``src/Error``.  In a custom
 exception rendering class you can provide specialized handling for application
 specific errors::
 

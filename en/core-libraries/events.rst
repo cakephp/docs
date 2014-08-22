@@ -171,7 +171,7 @@ necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListener;
 
-    class UserStatistic implements CakeEventListener {
+    class UserStatistic implements EventListener {
 
         public function implementedEvents() {
             return array(
@@ -402,7 +402,7 @@ arguments the first two params you used for attaching it::
     // Detaching the anonymous function
     $this->eventManager()->detach($myFunction, 'My.event');
 
-    // Attaching a CakeEventListener
+    // Attaching a EventListener
     $listener = new MyEventLister();
     $this->eventManager()->attach($listener);
 

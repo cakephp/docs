@@ -13,6 +13,7 @@ API, et comment vous pouvez créer et utiliser vos propres helpers.
     :maxdepth: 1
 
     /core-libraries/helpers/form
+    /core-libraries/helpers/url
     /core-libraries/helpers/html
     /core-libraries/helpers/number
     /core-libraries/helpers/paginator

@@ -138,6 +138,7 @@ App
 - ``App::location()`` has been removed.
 - ``App::paths()`` has been removed.
 - ``App::load()`` has been removed.
+- ``App::objects()`` has been removed.
 - ``App::RESET`` has been removed.
 - ``App::APPEND`` has been removed.
 - ``App::PREPEND`` has been removed.
@@ -201,6 +202,7 @@ Shell
 
 - ``Shell::__construct()`` has changed. It now takes an instance of
   ``Cake\\Console\\ConsoleIo``.
+- ``Shell::param()`` has been added as convenience access to the params.
 
 Additionally all shell methods will be transformed to camel case when invoked.
 For example, if you had a ``hello_world()`` method inside a shell and invoked it
@@ -401,6 +403,9 @@ for using the session object.
   ``cake_sessions``.
 * The session cookie timeout is automatically updated in tandem with the timeout
   in the session data.
+* The path for session cookie now defaults to app's base path instead of "/".
+  Also new config variable ``Session.cookiePath`` has been added to easily
+  customize the cookie path.
 
 Network\\Http
 =============
@@ -513,6 +518,8 @@ CookieComponent
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
   these are now managed through config data. See
   :doc:`/core-libraries/components/cookie` for more information.
+- The path for cookies now defaults to app's base path instead of "/".
+
 
 AuthComponent
 -------------
@@ -644,9 +651,16 @@ their new PHPUnit counterpart:
 - ``assertReference()`` if favor of ``assertSame()``
 - ``assertIsA()`` in favor of ``assertInstanceOf()``
 
-Note that some methods have switched the order, e.g. ``assertEqual($is, $expected)`` should now be
+Note that some methods have switched the argument order, e.g. ``assertEqual($is, $expected)`` should now be
 ``assertEquals($expected, $is)``.
-There is an upgrade shell command ``cake upgrade tests`` to assist in upgrading your code.
+
+The following assertion methods have been deprecated and will be removed in the future:
+
+- ``assertWithinMargin()`` in favor of ``assertWithinRange()``
+- ``assertTags()`` in favor of ``assertHtml()``
+
+Both method replacements also switched the argument order for a consistent assert method API
+with ``$expected`` as first argument.
 
 ControllerTestCase
 ------------------
@@ -737,11 +751,14 @@ View\\Helper
 - The ``$settings`` property is now called ``$_config`` and should be accessed
   through the ``config()`` method.
 - Configuration options are no longer set as public properties.
-- ``Cake\\View\\Helper::clean()`` was removed. It was never robust enough
+- ``Helper::clean()`` was removed. It was never robust enough
   to fully prevent xss. instead you should escape content with :php:func:`h` or
   use a dedicated libray like htmlPurifier.
-- ``Cake\\View\\Helper::output()`` was removed. This method was
+- ``Helper::output()`` was removed. This method was
   deprecated in 2.x.
+- Methods ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
+  ``Helper::assetTimestamp()`` have been moved to new :php:class:`Cake\\View\\Helper\\UrlHelper`
+  helper. ``Helper::url()`` is now available as :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
 - Magic accessors to deprecated properties have been removed. The following
   properties now need to be accessed from the request object:
 
@@ -1037,7 +1054,7 @@ Time
 - ``CakeTime::toUnix()`` was renamed to ``toUnixString``.
 - ``CakeTime::wasYesterday()`` was renamed to ``isYesterday`` to match the rest
   of the method naming.
-- ``CakeTime::format()`` Does not use spritf format strings anymore, you can use
+- ``CakeTime::format()`` Does not use ``sprintf`` format strings anymore, you can use
   ``i18nFormat`` instead.
 - :php:meth:`Time::timeAgoInWords()` now requires ``$options`` to be an array.
 

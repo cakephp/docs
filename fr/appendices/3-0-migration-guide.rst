@@ -32,7 +32,7 @@ CakePHP doit être installé avec Composer
 
 Puisque CakePHP ne peut plus être facilement installé via PEAR, ou dans
 un répertoire partagé, ces options ne sont plus supportées. A la place, vous
-devez utiliser `composer <http://getcomposer.org>`_ pour installer CakePHP dans
+devez utiliser `Composer <http://getcomposer.org>`_ pour installer CakePHP dans
 votre application.
 
 Namespaces (Espaces de Noms)
@@ -148,6 +148,7 @@ App
 - ``App::location()`` a été retirée.
 - ``App::paths()`` a été retirée.
 - ``App::load()`` a été retirée.
+- ``App::objects()`` a été retirée.
 - ``App::RESET`` a été retirée.
 - ``App::APPEND`` a été retirée.
 - ``App::PREPEND`` a été retirée.
@@ -217,6 +218,7 @@ Shell
 
 - ``Shell::__construct()`` a changé. Il prend maintenant une instance de
   ``Cake\\Console\\ConsoleIo`` en paramètre.
+- ``Shell::param()`` a été ajoutée pour un accès pratique aux params.
 
 En plus de la transformation de toutes les méthodes shell en camel case lors
 de leur appel.

@@ -85,7 +85,6 @@ LDAP qu'il est associé à plusieurs événements iCal.
 Tout comme les controllers, les models ont des callbacks:
 
 -  beforeFind()
--  afterFind()
 -  beforeValidate()
 -  afterValidate()
 -  beforeSave()
@@ -103,8 +102,7 @@ Extension de la Vue ("Helpers")
 Un Helper (Assistant) est une classe d'assistance pour les vues. De même
 que les components sont utilisés par plusieurs controllers, les helpers
 permettent à différentes vues d'accéder et de partager une même logique de
-présentation. L'un des helpers intégrés à Cake, AjaxHelper, facilite les
-requêtes AJAX dans les vues.
+présentation.
 
 La plupart des applications ont des portions de code pour les vues qui sont
 répétitives. CakePHP facilite la réutilisabilité de ce code grâce aux Layouts

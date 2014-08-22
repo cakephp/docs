@@ -23,14 +23,6 @@ are a few examples of how to use the ``$attributes`` parameter:
     Desired attributes: <tag name="foo" value="bar" />
     Array parameter:  ['name' => 'foo', 'value' => 'bar']
 
-
-.. note::
-
-    The HtmlHelper is available in all views by default. If you're
-    getting an error informing you that it isn't there, it's usually
-    due to its name being missing from a manually configured ``$helpers``
-    controller variable.
-
 Inserting Well-Formatted Elements
 =================================
 
@@ -403,7 +395,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check :php:meth:`HtmlHelper::url` method
+Also check :php:meth:`Cake\View\Helper\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 Linking to Videos and Audio Files
@@ -743,73 +735,6 @@ Output:
     <tr class="darker"><td>Red</td><td>Apple</td></tr>
     <tr><td>Orange</td><td>Orange</td></tr>
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
-
-Generating URLs
----------------
-
-.. php:method:: url(mixed $url = NULL, boolean $full = false)
-
-Returns a URL pointing to a combination of controller and action.
-If ``$url`` is empty, it returns the ``REQUEST\_URI``, otherwise it
-generates the URL for the controller and action combo. If ``full`` is
-``true``, the full base URL will be prepended to the result::
-
-    echo $this->Html->url([
-        "controller" => "posts",
-        "action" => "view",
-        "bar"
-    ]);
-
-    // Output
-    /posts/view/bar
-
-Here are a few more usage examples:
-
-URL with named parameters::
-
-    echo $this->Html->url([
-        "controller" => "posts",
-        "action" => "view",
-        "foo" => "bar"
-    ]);
-
-    // Output
-    /posts/view/foo:bar
-
-URL with extension::
-
-    echo $this->Html->url([
-        "controller" => "posts",
-        "action" => "list",
-        "ext" => "rss"
-    ]);
-
-    // Output
-    /posts/list.rss
-
-URL (starting with '/') with the full base URL prepended::
-
-    echo $this->Html->url('/posts', true);
-
-    // Output
-    http://somedomain.com/posts
-
-URL with GET params and named anchor::
-
-    echo $this->Html->url([
-        "controller" => "posts",
-        "action" => "search",
-        "?" => ["foo" => "bar"],
-        "#" => "first"
-    ]);
-
-    // Output
-    /posts/search?foo=bar#first
-
-For further information check
-`Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
-in the API.
-
 
 Changing the Tags Output by HtmlHelper
 ======================================

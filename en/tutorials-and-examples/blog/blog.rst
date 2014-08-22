@@ -17,18 +17,13 @@ Here's what you'll need:
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
    configuration, but most folks can get CakePHP up and running without
-   any configuration at all. Make sure you have PHP 5.4.19 or greater and also
-   that ``mbstring`` and ``mcrypt`` extensions are enabled in PHP.
+   any configuration at all. Make sure you have PHP 5.4.19 or greater, and
+   that the ``mbstring``, ``intl`` and ``mcrypt`` extensions are enabled in PHP.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
    database: CakePHP will be taking the reins from there. Since we're using MySQL,
    also make sure that you have ``pdo_mysql`` enabled in PHP.
-#. Basic PHP knowledge. The more object-oriented programming you've
-   done, the better: but fear not if you're a procedural fan.
-#. Finally, you'll need a basic knowledge of the MVC programming pattern.
-   A quick overview can be found in
-   :doc:`/cakephp-overview/understanding-model-view-controller`.  Don't worry,
-   it's only a half a page or so.
+#. Basic PHP knowledge.
 
 Let's get started!
 
@@ -58,7 +53,7 @@ important set up tasks, such as setting the correct file permissions and
 creating your config/app.php file for you.
 
 There are other ways to install CakePHP if you are uncomfortable with
-``Composer``. For more information: check out the :doc:`/installation` section.
+Composer. For more information: check out the :doc:`/installation` section.
 
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
@@ -85,7 +80,7 @@ structure works: check out the
 Directory Permissions on tmp
 ============================
 
-You'll also need to set the proper permissions on the ``/tmp`` directory to make
+You'll need to set the proper permissions on the ``/tmp`` directory to make
 it writable by your webserver. The best way to do this is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
 the ``tmp`` directory to that user. The final command you run (in \*nix)
@@ -134,27 +129,27 @@ follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
 :doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
-CakePHP is flexible enough to accommodate even the worst legacy
-database schema, but adhering to convention will save you time.
+CakePHP is flexible enough to accommodate even inconsistent legacy
+database schemas, but adhering to the conventions will save you time.
 
 Check out :doc:`/getting-started/cakephp-conventions` for more
 information, but it's suffice to say that naming our table 'articles'
 automatically hooks it to our Articles model, and having fields called
-'modified' and 'created' will be automagically managed by CakePHP.
+'modified' and 'created' will be automatically managed by CakePHP.
 
 Database Configuration
 ======================
 
-Onward and upward: let's tell CakePHP where our database is and how to
+Next, let's tell CakePHP where our database is and how to
 connect to it. For many, this is the first and last time you
-configure anything.
+will need to configure anything.
 
 A copy of CakePHP's configuration file is found in
 ``config/app.default.php``. Make a copy of this file in
 the same directory, but name it ``app.php``.
 
 The config file should be pretty straightforward: just replace the
-values in the ``Datatsources.default`` array with those that apply to your
+values in the ``Datasources.default`` array with those that apply to your
 setup. A sample completed configuration array might look something
 like the following::
 
@@ -182,10 +177,6 @@ able to open your browser and see the CakePHP welcome page. It should
 also tell you that your database connection file was found, and
 that CakePHP can successfully connect to the database.
 
-.. note::
-
-    Remember that you'll need to have PDO, and pdo_mysql enabled in
-    your php.ini.
 
 Optional Configuration
 ======================
@@ -229,14 +220,13 @@ you up and running:
 #. Make sure Apache is loading up mod\_rewrite correctly! You
    should see something like::
 
-       LoadModule rewrite_module             libexec/httpd/mod_rewrite.so
+       LoadModule rewrite_module libexec/httpd/mod_rewrite.so
 
    or (for Apache 1.3)::
 
-       AddModule             mod_rewrite.c
+       AddModule mod_rewrite.c
 
    in your httpd.conf.
-
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
@@ -252,7 +242,6 @@ Also remove these .htaccess files::
 
     /.htaccess
     webroot/.htaccess
-
 
 This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather

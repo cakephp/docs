@@ -1,8 +1,8 @@
 REST
 ####
 
-Quelques programmeurs néophytes d'application réalisent le besoin
-d'ouvrir leurs fonctionnalités du coeur à un public plus important.
+Beaucoup de programmeurs néophytes d'application réalisent qu'ils ont
+besoin d'ouvrir leurs fonctionnalités principales à un public plus important.
 Fournir facilement, un accès sans entrave à votre API du coeur peut
 aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
@@ -25,13 +25,13 @@ certaines actions de controller, nous pouvons continuer et créer la logique
 dans nos actions de controller. Un controller basique pourrait ressembler
 à ceci::
 
-    // Controller/RecipesController.php
+    // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
         public $components = array('RequestHandler');
 
         public function index() {
-            $recipes = $this->Recipe->find('all');
+            $recipes = $this->Recipes->find('all')->toArray();
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
@@ -39,7 +39,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         }
 
         public function view($id) {
-            $recipe = $this->Recipe->findById($id);
+            $recipe = $this->Recipes->findById($id)->toArray();
             $this->set(array(
                 'recipe' => $recipe,
                 '_serialize' => array('recipe')
@@ -47,11 +47,14 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         }
 
         public function edit($id) {
-            $this->Recipe->id = $id;
-            if ($this->Recipe->save($this->request->data)) {
-                $message = 'Saved';
-            } else {
-                $message = 'Error';
+            $recipe = $this->Recipes->get($id);
+            if ($this->request->is(['post', 'put'])) {
+                $this->Recipes->patchEntity($recipe, $this->request->data);
+                if ($this->Recipes->save($this->request->data)) {
+                    $message = 'Saved';
+                } else {
+                    $message = 'Error';
+                }
             }
             $this->set(array(
                 'message' => $message,
@@ -60,7 +63,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         }
 
         public function delete($id) {
-            if ($this->Recipe->delete($id)) {
+            $recipe = $this->Recipes->get($id);
+            if ($this->Recipes->delete($recipe)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';
@@ -84,11 +88,11 @@ variables de vue que ``XmlView`` doit sérialiser en XML.
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
 nous ne devons pas définir la variable de vue ``_serialize``, et à la place
 utiliser les fichiers de vue. Nous plaçons les vues REST pour notre
-RecipesController à l'intérieur de ``app/View/recipes/xml``. Nous pouvons aussi
+RecipesController à l'intérieur de ``src/Template/Recipes/xml``. Nous pouvons aussi
 utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces vues.
 Voici ce que notre vue index pourrait ressembler à::
 
-    // app/View/Recipes/xml/index.ctp
+    // src/Template/Recipes/xml/index.ctp
     // Faire du formatage et de la manipulation sur le tableau
     // $recipes.
     $xml = Xml::fromArray(array('response' => $recipes));
@@ -103,14 +107,21 @@ utilisation dans ces vues.
 Le XML rendu va finir par ressembler à ceci::
 
     <recipes>
-        <recipe id="234" created="2008-06-13" modified="2008-06-14">
-            <author id="23423" first_name="Billy" last_name="Bob"></author>
-            <comment id="245" body="Yummy yummmy"></comment>
+        <recipe>
+            <id>234</id>
+            <created>2008-06-13</created>
+            <modified>2008-06-14</modified>
+            <author>
+                <id>23423</id>
+                <first_name>Billy</first_name>
+                <last_name>Bob</last_name>
+            </author>
+            <comment>
+                <id>245</id>
+                <body>Yummy yummmy</body>
+            </comment>
         </recipe>
-        <recipe id="3247" created="2008-06-15" modified="2008-06-15">
-            <author id="625" first_name="Nate" last_name="Johnson"></author>
-            <comment id="654" body="This is a comment for this tasty dish."></comment>
-        </recipe>
+        ...
     </recipes>
 
 Créer la logique pour l'action edit est un tout petit peu plus compliqué.
