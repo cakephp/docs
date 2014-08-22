@@ -952,7 +952,39 @@ that developers needing full response caching use `Varnish
 I18n
 ====
 
-- :php:class:`Cake\\I18n\\I18n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as an argument.
+The I18n subsystem was completely rewritten. In general, you can expect the same
+behavior as in previous versions, specially if you are using the ``__()``
+functions family.
+
+Internally, the ``I18n`` class uses ``Aura\Intl``, and appropriate methods are
+exposed to access the specific features of this library. For this reason most
+methods inside this class were removed or renamed.
+
+Due to the use of ``ext/intl`` the L10n class was completely removed. It was
+providing outdated data compared to that from the ``Locale`` class in PHP.
+
+The default application language will no longer be changed automatically by the
+browser accepted language nor by having the ``Config.language`` value set in the
+browser session. You can, however, use a dispatcher filter to get automatic
+language switching from the Accept-Language header sent by the browser::
+
+    // in config/bootstrap.php
+    DispatcherFactory::addFilter('LocaleSelector');
+
+
+There is no built-in replacement for automatically selecting the language by
+setting a value in the user session.
+
+Additionally, the ``Config.language`` value was removed and it cannot be used
+anymore to control the current language of the application. Instead, you can use
+the ``I18n`` class::
+
+    // Before
+    Configure::write('Config.language', 'fr_FR');
+
+    // Now
+    I18n::defaultLoacale('en_US');
+
 
 - The methods below have been moved:
 
