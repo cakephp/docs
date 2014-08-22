@@ -1119,7 +1119,11 @@ Can be migrated by rewriting it to::
 Number
 ------
 
+The Number library was rewritten to internally user the ``NumberFormatter``
+class.
+
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
+- :php:meth:`Number::addFormat()` was removed
 
 Validation
 ----------
