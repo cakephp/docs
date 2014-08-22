@@ -32,12 +32,14 @@ You'll notice a few top level folders:
   contains all the files you want to be publically reachable.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
-  is usually used to store model descriptions, logs, and sometimes
+  is usually used to store model descriptions and sometimes
   session information.
+- The *logs* folder normally contains your log files, depending on your log
+  configuration.
 
-  Make sure that this folder exists and that it is writable,
+  Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely
-  impacted. In debug mode, CakePHP will warn you if it is not the
+  impacted. In debug mode, CakePHP will warn you, if it is not the
   case.
 
 The src Folder
