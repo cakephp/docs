@@ -457,7 +457,7 @@ function accordingly::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                if ($this->Auth->loginProvider()->needsPasswordRehash()) {
+                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
                     $user->password = $this->request->data('password');
                     $this->Users->save($user);
