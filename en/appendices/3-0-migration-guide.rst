@@ -960,16 +960,16 @@ Internally, the ``I18n`` class uses ``Aura\Intl``, and appropriate methods are
 exposed to access the specific features of this library. For this reason most
 methods inside ``I18n`` were removed or renamed.
 
-Due to the use of ``ext/intl`` the L10n class was completely removed. It
+Due to the use of ``ext/intl``, the L10n class was completely removed. It
 provided outdated and imcomplete data in comparison to the data available from
 the ``Locale`` class in PHP.
 
 The default application language will no longer be changed automatically by the
 browser accepted language nor by having the ``Config.language`` value set in the
 browser session. You can, however, use a dispatcher filter to get automatic
-language switching from the Accept-Language header sent by the browser::
+language switching from the ``Accept-Language`` header sent by the browser::
 
-    // in config/bootstrap.php
+    // In config/bootstrap.php
     DispatcherFactory::addFilter('LocaleSelector');
 
 There is no built-in replacement for automatically selecting the language by
