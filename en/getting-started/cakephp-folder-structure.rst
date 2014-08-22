@@ -40,7 +40,7 @@ You'll notice a few top level folders:
   impacted. In debug mode, CakePHP will warn you if it is not the
   case.
 
-The Src Folder
+The src Folder
 ==============
 
 CakePHP's *src* folder is where you will do most of your application
