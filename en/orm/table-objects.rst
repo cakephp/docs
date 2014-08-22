@@ -283,6 +283,7 @@ Possible keys for hasOne association arrays include:
 - **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``address`` in our example.
+- **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
@@ -362,6 +363,7 @@ Possible keys for belongsTo association arrays include:
 - **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``user`` in our example.
+- **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the User table can
 contain the Address record if it exists::
@@ -447,6 +449,7 @@ Possible keys for hasMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
+- **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Articles table can
 contain the Comment records if they exist::
@@ -567,6 +570,7 @@ Possible keys for belongsToMany association arrays include:
   for saving associated entities. The former will only create new links
   between both side of the relation and the latter will do a wipe and
   replace to create the links between the passed entities when saving.
+- **finder**: The finder method to use when loading associated records.
 
 
 Once this association has been defined, find operations on the Articles table can
@@ -652,6 +656,27 @@ model CoursesMemberships. Take a look at the following models.::
 The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
+
+Using the 'finder' Option
+-----------------------
+
+The ``finder`` option allows you to use a :ref:`custom finder
+<custom-find-methods>` to load associated record data. This lets you encapsulate
+your queries better and keep your code DRY'er. There are some limitations when
+using finders to load associated records for associations that are loaded using
+joins (belongsTo/hasOne). Only the following aspects of the query will be
+applied to the root query:
+
+- WHERE conditions
+- Additional joins
+- Contained associations
+- Map/Reduce functions
+- Result formatters
+
+Other aspects of the query, such as selected columns, order, group by, having and
+other sub-statements, will not be applied to the root query. Associations that
+are *not* loaded through joins (hasMany/belongsToMany), do not have the above
+restrictions.
 
 Loading Entities
 ================
