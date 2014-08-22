@@ -85,7 +85,7 @@ files that cannot be autoloaded or installed with Composer you will need to use
 If you cannot install a library with Composer, it is best to install each library in
 a directory following Composer's convention of ``vendor/$author/$package``.
 If you had a library called AcmeLib, you could install it into
-``/vendor/Acme/AcmeLib``. Assuming it did not use PSR-0 compatible classnames
+``vendor/Acme/AcmeLib``. Assuming it did not use PSR-0 compatible classnames
 you could autoload the classes within it using ``classmap`` in your
 application's ``composer.json``::
 

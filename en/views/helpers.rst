@@ -53,7 +53,7 @@ organized::
     }
 
 If you need to enable a helper for all controllers add the name of
-the helper to the ``$helpers`` array in ``/src/Controller/AppController.php`` (or
+the helper to the ``$helpers`` array in ``src/Controller/AppController.php`` (or
 create if not present). Remember to include the default Html and
 Form helpers::
 
@@ -198,10 +198,10 @@ Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed at many different
 places in your application. In order to fit your logic into
 CakePHP's existing helper structure, you'll need to create a new
-class in ``/src/View/Helper``. Let's call our helper LinkHelper. The
+class in ``src/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
-    /* /src/View/Helper/LinkHelper.php */
+    /* src/View/Helper/LinkHelper.php */
     use Cake\View\Helper;
 
     class LinkHelper extends AppHelper {
@@ -221,7 +221,7 @@ You may wish to use some functionality already existing in another
 helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
-    /* /src/View/Helper/LinkHelper.php (using other helpers) */
+    /* src/View/Helper/LinkHelper.php (using other helpers) */
     use App\View\Helper\AppHelper;
 
     class LinkHelper extends AppHelper {
@@ -244,7 +244,7 @@ Using Your Helper
 -----------------
 
 Once you've created your helper and placed it in
-``/src/View/Helper/``, you'll be able to include it in your
+``src/View/Helper/``, you'll be able to include it in your
 controllers using the special variable :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController {
@@ -265,7 +265,7 @@ Creating Functionality for All Helpers
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-``/src/View/Helper/AppHelper.php``::
+``src/View/Helper/AppHelper.php``::
 
     use App\View\Helper\AppHelper;
 

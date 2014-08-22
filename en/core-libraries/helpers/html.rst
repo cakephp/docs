@@ -71,7 +71,7 @@ will be appended to. By default it will append to the ``css`` block.
 If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
 This method of CSS inclusion assumes that the CSS file specified
-resides inside the ``/webroot/css`` directory if path doesn't start with a '/'.::
+resides inside the ``webroot/css`` directory if path doesn't start with a '/'.::
 
     echo $this->Html->css('forms');
 
@@ -94,14 +94,14 @@ Will output:
     <link rel="stylesheet" href="/css/menu.css" />
 
 You can include CSS files from any loaded plugin using
-:term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
+:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/css/toolbar.css``
 you could use the following::
 
     echo $this->Html->css('DebugKit.toolbar.css');
 
 If you want to include a CSS file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
+and also wanted to include ``webroot/css/Blog.common.css``, you would::
 
     echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
@@ -240,7 +240,7 @@ Linking to Images
 
 
 Creates a formatted image tag. The path supplied should be relative
-to ``/webroot/img/``.::
+to ``webroot/img/``.::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -278,14 +278,14 @@ Will output:
     <img src="http://example.com/img/logo.jpg" alt="" />
 
 You can include image files from any loaded plugin using
-:term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/img/icon.png``
+:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/img/icon.png``
 You could use the following::
 
     echo $this->Html->image('DebugKit.icon.png');
 
 If you want to include an image file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
+and also wanted to include ``webroot/js/Blog.icon.png``, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
@@ -466,7 +466,7 @@ generated script tag. If an array of script tags is used, the
 attributes will be applied to all of the generated script tags.
 
 This method of JavaScript file inclusion assumes that the
-JavaScript file specified resides inside the ``/webroot/js``
+JavaScript file specified resides inside the ``webroot/js``
 directory::
 
     echo $this->Html->script('scripts');
@@ -478,7 +478,7 @@ Will output:
     <script src="/js/scripts.js"></script>
 
 You can link to files with absolute paths as well to link files
-that are not in ``app/webroot/js``::
+that are not in ``webroot/js``::
 
     echo $this->Html->script('/otherdir/script_file');
 
@@ -514,14 +514,14 @@ In your layout you can output all the script tags added to 'scriptBottom'::
     echo $this->fetch('scriptBottom');
 
 You can include script files from any loaded plugin using
-:term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
+:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/js/toolbar.js``
 You could use the following::
 
     echo $this->Html->script('DebugKit.toolbar.js');
 
 If you want to include a script file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
+and also wanted to include ``webroot/js/Blog.plugins.js``, you would::
 
     echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
 

@@ -102,8 +102,8 @@ further information.
    mod\_rewrite. If you are installing CakePHP into a user directory
    (http://example.com/~username/cakephp/), or any other URL structure
    that already utilizes mod\_rewrite, you'll need to add RewriteBase
-   statements to the .htaccess files CakePHP uses (/.htaccess,
-   /webroot/.htaccess).
+   statements to the .htaccess files CakePHP uses (.htaccess,
+   webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example, your webroot .htaccess file would look
