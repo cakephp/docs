@@ -169,19 +169,20 @@ production setup will look like this on the file system::
 
     /cake_install/
         config/
-        src/
+        logs/
         plugins/
+        src/
         tests/
         tmp/
-        logs/
         vendor/
         webroot/ (this directory is set as DocumentRoot)
         .gitignore
         .htaccess
         .travis.yml
-        README.md
         composer.json
+        index.php
         phpunit.xml.dist
+        README.md
 
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::

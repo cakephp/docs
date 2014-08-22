@@ -104,10 +104,10 @@ such as debugging and translating content.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    If the application's DEBUG level is non-zero, $var is printed out.
+    If the core ``$debug`` variable is true, $var is printed out.
     If ``$showHTML`` is true or left as null, the data is rendered to be
     browser-friendly.
-    If $showFrom is not set to false, the debug output will start with the line from
+    If ``$showFrom`` is not set to false, the debug output will start with the line from
     which it was called.
     Also see :doc:`/development/debugging`
 

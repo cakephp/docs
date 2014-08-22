@@ -30,23 +30,16 @@ Let's get started!
 Getting CakePHP
 ===============
 
-The easiest way to get up and running is by downloading or cloning a fresh copy
-from GitHub. To do this simply visit the CakePHP project on GitHub:
-`http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
-and download the latest release of CakePHP 3.0.
-
-You can also install CakePHP using ``Composer``.
-``Composer`` is an simple way of installing CakePHP from your terminal or
+The easiest way to install CakePHP is to use Composer.
+Composer is an simple way of installing CakePHP from your terminal or
 command line prompt. Simply type the following two lines in your terminal from
 your webroot directory::
 
     curl -s https://getcomposer.org/installer | php
-    php composer.phar create-project -s dev cakephp/app
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app-name]
 
-This will download Composer and install the CakePHP application skeleton.
-By default Composer will save your new project into a directory called ``app``.
-Feel free to rename this directory to something which relates to your project,
-e.g. ``blog``.
+This will download Composer and install the CakePHP application skeleton in the
+[app-name] directory.
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -58,10 +51,11 @@ Composer, check out the :doc:`/installation` section.
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
-    /path_to_document_root
+    /cake_install
         /config
-        /src
+        /logs
         /plugins
+        /src
         /tests
         /tmp
         /vendor
@@ -69,9 +63,10 @@ completed, your directory setup should look something like the following::
         .gitignore
         .htaccess
         .travis.yml
-        README.md
         composer.json
+        index.php
         phpunit.xml.dist
+        README.md
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
@@ -142,18 +137,13 @@ automatically hooks it to our Articles model, and having fields called
 Database Configuration
 ======================
 
-Next, let's tell CakePHP where our database is and how to
-connect to it. For many, this is the first and last time you
-will need to configure anything.
+Next, let's tell CakePHP where our database is and how to connect to it.
+For many, this is the first and last time you will need to configure anything.
 
-A copy of CakePHP's configuration file is found in
-``config/app.default.php``. Make a copy of this file in
-the same directory, but name it ``app.php``.
-
-The config file should be pretty straightforward: just replace the
-values in the ``Datasources.default`` array with those that apply to your
-setup. A sample completed configuration array might look something
-like the following::
+The configuration should be pretty straightforward: just replace the
+values in the ``Datasources.default`` array in the ``config/app.php`` file
+with those that apply to your setup. A sample completed configuration
+array might look something like the following::
 
     $config = [
         // More configuration above.
@@ -174,11 +164,14 @@ like the following::
         // More configuration below.
     ];
 
-Once you've saved your new ``app.php`` file, you should be
-able to open your browser and see the CakePHP welcome page. It should
-also tell you that your database connection file was found, and
-that CakePHP can successfully connect to the database.
+Once you've saved your ``config/app.php`` file, you should be able to open
+your browser and see the CakePHP welcome page. It should also tell
+you that your database connection file was found, and that CakePHP
+can successfully connect to the database.
 
+.. note::
+
+    A copy of CakePHP's default configuration file is found in ``config/app.default.php``.
 
 Optional Configuration
 ======================
@@ -189,7 +182,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/config/app.php``. It doesn't
+salt value by editing ``config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -232,7 +225,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``/config/app.php``,
+use CakePHP's built in pretty URLs. In ``config/app.php``,
 uncomment the line that looks like::
 
     'App' => [

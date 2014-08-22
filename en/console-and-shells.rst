@@ -462,7 +462,7 @@ methods for easily setting multiple options/arguments at once::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
-        //configure parser
+        // Configure parser
         return $parser;
     }
 
