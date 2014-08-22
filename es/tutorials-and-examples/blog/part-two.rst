@@ -1,8 +1,8 @@
 Tutorial de desarrollo del Blog - Añadiendo una capa
 ####################################################
 
-Creando un modelo Artículo (Article)
-====================================
+Crear un modelo Artículo (Article)
+==================================
 
 Los modelos son una parte fundamental en CakePHP. Cuando creamos un modelo,
 podemos interactuar con la base de datos para crear, editar, ver y borrar con
@@ -41,64 +41,62 @@ Para más información sobre modelos, como callbacks y validaciones echa un vist
 al capítulo del Manual :doc:`/orm`.
 
 
-Crear un Controlador para nuestros Artículos
-============================================
+Crear el Controlador de Artículos (Articles Controller)
+=======================================================
 
 Vamos a crear ahora un controlador para nuestros artículos. En el controlador es
 donde escribiremos el código para interactuar con nuestros artículos. Es donde
 se utilizan los modelos para llevar a cabo el trabajo que queramos hacer con
 nuestros artículos. Vamos a crear un nuevo fichero llamado
-``PostsController.php`` dentro de la ruta ``/app/Controller``. El contenido de
-este fichero será::
+``ArticlesController.php`` dentro del directorio ``/src/Controller``. A
+continuación puedes ver el aspecto básico que debería tener este controlador::
 
-    class PostsController extends AppController {
-        public $helpers = array('Html','Form');
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
     }
 
-Y vamos a añadir una acción a nuestro nuevo controlador. Las acciones
-representan una función concreta o interfaz en nuestra aplicación. Por ejemplo,
-cuando los usuarios recuperan la url www.example.com/posts/index (que CakePHP
-también asigna por defecto a la ruta www.example.com/posts/ ya que la acción por
-defecto de cada controlador es index por convención) esperan ver un listado de
-*posts*. El código para tal acción sería este:
+Vamos a añadir una acción a nuestro nuevo controlador. Las acciones representan
+una función concreta o interfaz en nuestra aplicación. Por ejemplo,
+cuando los usuarios recuperan la url www.example.com/articles/index (que es lo
+mismo que www.example.com/articles/) esperan ver un listado de artículos. El
+código para tal acción sería este::
 
-::
+    namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
+    class ArticlesController extends AppController {
 
-        function index() {
-            $this->set('posts', $this->Post->find('all'));
+        public function index() {
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
         }
     }
 
-Si examinamos el contenido de la función index() en detalle, podemos ver que
-ahora los usuarios podrán acceder a la ruta www.example.com/posts/index. Además
-si creáramos otra función llamada ``foobar()``, los usuarios podrían acceder a
-ella en la url www.example.com/posts/foobar.
+
+Por el hecho de haber definido el método ``index()`` en nuestro
+ArticlesController, los usuarios ahora pueden acceder a su lógica solicitando
+www.example.com/articles/index. Del mismo modo, si definimos un método llamado
+``foobar()`` los usuarios tendrán acceso a él desde
+www.example.com/articles/foobar.
 
 .. warning::
 
     Puede que tengas la tentación de llamar tus controladores y acciones de
-    forma determinada para que esto afecte a la ruta final, y así puedas
-    predeterminar estas rutas. No te preocupes por esto ya que CakePHP
-    incorpora un potente sistema de configuración de rutas. Al escribir los
-    ficheros, te recomendamos seguir las convenciones de nombres y ser
-    claro. Luego podrás generar las rutas que te convengan utilizando el
-    componente de rutas (*Route*).
+    cierto modo para obtener una URL en concreto. Resiste la tentación. Sigue
+    las convenciones de CakePHP (mayúsculas, nombre en plural, etc.) y crea
+    acciones comprensibles, que se dejen leer. Luego podrás asignar URLs a tu
+    código utilizando "rutas", que veremos más adelante.
 
-La función index tiene sólo una instrucción ``set()`` que sirve para pasar
-información desde el controlador a la vista (*view*) asociada. Luego crearemos
-esta vista. Esta función set() asigna una nueva variab le 'posts' igual al valor
-retornado por la función ``find('all')`` del modelo ``Post``. Nuestro modelo
-Post está disponible automáticamente en el controlador y no hay que importarlo
-ya que hemos usado las convenciones de nombres de CakePHP.
+La única instrucción en la acción utiliza ``set()`` para pasar datos desde el
+controlador hacia la vista (que crearemos a continuación). La línea en cuestión
+asigna una variable en la vista llamada 'articles' igual al valor retornado por
+el método ``find('all')`` del objeto de tabla Artículos (ArticlesTable).
 
 Para aprender más sobre los controladores, puedes visitar el capítulo
-:doc:`/controllers`
+:doc:`/controllers`.
 
-Creando una vista para los artículos (*View*)
-=============================================
+Crear Vistas de Artículos (Article Views)
+=========================================
 
 Ya tenemos un modelo que define nuestros artículos y un controlador que ejecuta
 alguna lógica sobre ese modelo y envía los datos recuperados a la vista. Ahora
