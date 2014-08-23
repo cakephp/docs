@@ -82,9 +82,9 @@ we'll create a simple Hello world shell. In your applications
 ``Console/Command`` directory create ``HelloShell.php``. Put the following
 code inside it::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -114,12 +114,12 @@ whenever there are no other commands or arguments given to a shell. You may have
 also noticed that HelloShell is extending ``AppShell``. Much like
 :ref:`app-controller`, AppShell gives you a base class to contain all your
 common functions or logic. You can define an AppShell, by creating
-``src/Console/Command/AppShell.php``. Since our main method wasn't very
+``src/Shell/AppShell.php``. Since our main method wasn't very
 interesting let's add another command that does something::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -155,9 +155,9 @@ utilities; CakePHP makes that super easy. You can load models in shells, just as
 you would in a controller using ``loadModel()``. The loaded models are set as
 properties attached to your shell::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class UserShell extends AppShell {
 
@@ -191,9 +191,9 @@ almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` pr
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
-Tasks are stored in ``Console/Command/Task/`` in files named after
+Tasks are stored in ``Shell/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
-``src/Console/Command/Task/FileGeneratorTask.php``.
+``src/Shell/Task/FileGeneratorTask.php``.
 
 Each task must at least implement an ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
@@ -207,9 +207,9 @@ will call this method when the task is invoked. A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    // Found in src/Console/Command/SeaShell.php
+    // Found in src/Shell/SeaShell.php
     class SeaShell extends AppShell {
-        // Found in src/Console/Command/Task/SoundTask.php
+        // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {

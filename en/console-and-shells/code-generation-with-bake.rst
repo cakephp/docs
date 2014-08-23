@@ -55,23 +55,23 @@ Create New Tasks for Bake
 
 Bake features an extensible architecture that allows your application or plugins
 to provide new tasks, or replace tasks provided by CakePHP. By extending
-``Cake\Console\Command\Task\BakeTask``, bake will find your new task and include
+``Cake\Shell\Task\BakeTask``, bake will find your new task and include
 it as part of bake.
 
 As an example, we'll make a task that creates shell classes. First, create
-the task file ``src/Console/Command/Task/ShellTask.php``. We'll extend the
+the task file ``src/Shell/Task/ShellTask.php``. We'll extend the
 ``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
 is abstract and requires us to define 4 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our
 ShellTask.php file should look like::
 
     <?php
-    namespace App\Console\Command\Task;
+    namespace App\Shell\Task;
 
-    use Cake\Console\Command\Task\SimpleBakeTask;
+    use Cake\Shell\Task\SimpleBakeTask;
 
     class ShellTask extends SimpleBakeTask {
-        public $pathFragment = 'Console/Command/';
+        public $pathFragment = 'Shell/';
 
         public function name() {
             return 'shell';
@@ -94,7 +94,7 @@ the following content::
 
     <?php
     echo "<?php\n"; ?>
-    namespace <?= $namespace ?>\Console\Command;
+    namespace <?= $namespace ?>\Shell;
 
     use Cake\Console\Shell;
 
