@@ -220,70 +220,83 @@ solicitándolo manualmente accediendo a ``/articles/view/1``.
 Añadiendo Artículos
 ===================
 
-Ya podemos leer de la base de datos nuestros artículos y mostrarlos en pantalla,
-ahora vamos a ser capaces de crear nuevos artículos y guardarlos.
+Leer de la base de datos y mostrar nuestros artículos es un gran comienzo, pero
+permitamos también añadir nuevos artículos.
 
-Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsController:
+Lo primero, añadir una nueva acción ``add()`` en nuestro controlador
+ArticlesController::
 
-::
+    namespace App\Controller;
 
-    class PostsController extends AppController {
-        public $name = 'Posts';
-        public $components = array('Session');
+    use Cake\Error\NotFoundException;
+
+    class ArticlesController extends AppController {
+        public $components = ['Flash'];
 
         public function index() {
-            $this->set('posts', $this->Post->find('all'));
+            $this->set('articles', $this->Articles->find('all'));
         }
 
         public function view($id) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            if (!$id) {
+                throw new NotFoundException(__('Invalid article'));
+            }
 
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
         }
 
         public function add() {
+            $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
-                if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
-                    $this->redirect(array('action' => 'index'));
+                if ($this->Articles->save($article)) {
+                    $this->Flash->success(__('Your article has been saved.'));
+                    return $this->redirect(['action' => 'index']);
                 }
+                $this->Flash->error(__('Unable to add your article.'));
             }
+            $this->set('article', $article);
         }
     }
 
 .. note::
 
-    Necesitas incluír el SessionComponent y SessionHelper en el controlador
-    para poder utilizarlo. Si lo prefieres, puedes añadirlo en AppController
-    y será compartido para todos los controladores que hereden de él.
+    Necesitas incluir el FlashComponent en cualquier controlador donde vayas a
+    usarlo. Si lo ves necesario, inclúyelo en tu AppController.
 
 Lo que la función add() hace es: si el formulario enviado no está vacío, intenta
-salvar un nuevo artículo utilizando el modelo *Post*. Si no se guarda bien,
+salvar un nuevo artículo utilizando el modelo Articles. Si no se guarda bien,
 muestra la vista correspondiente, así podremos mostrar los errores de validación
-si el artículo no se ha guardado correctamente.
+u otras alertas.
+
+Cada petición de CakePHP incluye un objeto ``Request`` que es accesible
+utilizando ``$this->request``. El objeto de petición contiene información útil
+acerca de la petición que se recibe y puede ser utilizado para controlar el flujo
+de nuestra aplicación. En este caso, utilizamos el método
+:php:meth:`Cake\\Network\\Request::is()` para verificar que la petición es una
+petición HTTP POST.
 
 Cuando un usuario utiliza un formulario y efectúa un POST a la aplicación, esta
-información puedes accederla en ``$this->request->data``. Puedes usar la función
+información está disponible en ``$this->request->data``. Puedes usar la función
 :php:func:`pr()` o :php:func:`debug()` para mostrar el contenido de esa variable
 y ver la pinta que tiene.
 
-Utilizamos el SessionComponent, concretamente el método
-:php:meth:`SessionComponent::setFlash()` para guardar el mensaje en la sesión y
-poder recuperarlo posteriormente en la vista y mostrarlo al usuario, incluso
-después de haber redirigido a otra página mediante el método redirect(). Esto se
-realiza a través de la función :php:func:`SessionHelper::flash` que está en el
-layout, que muestra el mensaje y lo borra de la sesión para que sólo se vea una
-vez. El método :php:meth:`Controller::redirect <redirect>` del controlador nos
-permite redirigir a otra página de nuestra aplicación, traduciendo el parámetro
-``array('action' => 'index)`` a la URL /posts, y la acción index. Puedes consultar
-la documentación de este método aquí :php:func:`Router::url()`. Verás los
-diferentes modos de indicar la ruta que quieres construir.
+Utilizamos el método mágico ``__call`` del FlashComponent para guardar un
+mensaje en una variable de sesión que será mostrado en la página después de la
+redirección. En la plantilla tenemos ``<?= $this->Flash->render() ?>`` que
+muestra el mensaje y elimina la correspondiente variable de sesión. El método
+:php:meth:`Cake\\Controller\\Controller::redirect` del controlador redirige
+hacia otra URL. El parámetro ``['action' => 'index']`` se traduce a la URL
+/articles (p.e. la acción index del controlador de artículos). Puedes echar un
+ojo al método :php:func:`Cake\\Routing\\Router::url()` en la `API
+<http://api.cakephp.org>`_ para ver los formatos en que puedes especificar una
+URL para varias funciones de CakePHP.
 
 Al llamar al método ``save()``, comprobará si hay errores de validación primero
 y si encuentra alguno, no continuará con el proceso de guardado. Veremos a
 continuación cómo trabajar con estos errores de validación.
 
-Validando los datos
+Validando los Datos
 ===================
 
 CakePHP te ayuda a evitar la monotonía al construir tus formularios y su
