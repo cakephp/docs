@@ -61,12 +61,12 @@ You can also include any of the options supported by
 While you can pass most of the query options from the paginate property it is
 often cleaner and simpler to bundle up your pagination options into
 a :ref:`custom-find-methods`. You can define the finder pagination uses by
-setting the ``findType`` option::
+setting the ``finder`` option::
 
     class ArticlesController extends AppController {
 
         public $paginate = [
-            'findType' => 'published',
+            'finder' => 'published',
         ];
     }
 
