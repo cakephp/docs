@@ -658,7 +658,7 @@ Student's participation on a Course in addition to extra
 meta-information.
 
 Using the 'finder' Option
------------------------
+-------------------------
 
 The ``finder`` option allows you to use a :ref:`custom finder
 <custom-find-methods>` to load associated record data. This lets you encapsulate
