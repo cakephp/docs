@@ -195,6 +195,8 @@ your CakePHP application accessible at http://www.example.com.
 URL Rewriting
 =============
 
+If you want to use URL rewriting, see the dedicated section about the topic:
+
 .. toctree::
     :maxdepth: 1
 
