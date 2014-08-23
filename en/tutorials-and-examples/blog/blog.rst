@@ -31,15 +31,28 @@ Getting CakePHP
 ===============
 
 The easiest way to install CakePHP is to use Composer.
-Composer is an simple way of installing CakePHP from your terminal or
-command line prompt. Simply type the following two lines in your terminal from
-your webroot directory::
+Composer is a simple way of installing CakePHP from your terminal or
+command line prompt.
+First, you'll need to download and install Composer if you haven't
+done so already. If you have cURL installed, it's as easy as running the
+following::
 
     curl -s https://getcomposer.org/installer | php
+
+Or, you can download ``composer.phar`` from the
+`Composer website <https://getcomposer.org/download/>`_.
+
+Installing Composer globally will avoid you to repeat this step on each project.
+
+Then simply type the following line in your terminal from your
+installation directory to install the CakePHP application skeleton
+in the [app-name] directory.::
+
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app-name]
 
-This will download Composer and install the CakePHP application skeleton in the
-[app-name] directory.
+Or if Composer is installed globally::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -75,7 +88,7 @@ structure works: check out the
 Directory Permissions on tmp and logs
 =====================================
 
-You'll need to set the proper permissions on the ``/tmp`` and ``/logs`` directories to make
+You'll need to set the proper permissions on the ``tmp`` and ``logs`` directories to make
 them writable by your webserver. The best way to do this, is to find out what user
 your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
 these two directories to that user. The final command you run (in \*nix)

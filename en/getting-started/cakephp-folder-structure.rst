@@ -51,8 +51,7 @@ development. Let's look a little closer at the folders inside
 
 Console
     Contains the console commands and console tasks for your application.
-    This directory can also contain a ``Templates`` directory to customize the
-    output of bake. For more information see :doc:`/console-and-shells`.
+    For more information see :doc:`/console-and-shells`.
 Controller
     Contains your application's controllers and their components.
 Locale

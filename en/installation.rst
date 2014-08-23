@@ -65,6 +65,10 @@ application by running::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
+Or if Composer is installed globally::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
 installed via Composer. Be sure to keep the composer.json and composer.lock
