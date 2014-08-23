@@ -132,7 +132,7 @@ Foreign keys in hasMany, belongsTo or hasOne relationships are
 recognized by default as the (singular) name of the related table
 followed by \_id. So if a Bakers hasMany Cakes, the cakes table will
 refer to the bakers table via a baker\_id foreign key. For a
-table like category\_types whose name contains multiple words, 
+table like category\_types whose name contains multiple words,
 the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
@@ -146,10 +146,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/src/Template/People/get\_ready.ctp.
+src/Template/People/get\_ready.ctp.
 
 The basic pattern is
-/src/Template/Controller/underscored\_function\_name.ctp.
+src/Template/Controller/underscored\_function\_name.ctp.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -157,11 +157,11 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at /src/Model/Table/PeopleTable.php
--  Entity class: "Person", found at /src/Model/Entity/Person.php
+-  Table class: "PeopleTable", found at src/Model/Table/PeopleTable.php
+-  Entity class: "Person", found at src/Model/Entity/Person.php
 -  Controller class: "PeopleController", found at
-   /src/Controller/PeopleController.php
--  View template, found at /src/Template/People/index.ctp
+   src/Controller/PeopleController.php
+-  View template, found at src/Template/People/index.ctp
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the ``index()`` function

@@ -22,7 +22,7 @@ handles.
 
 Your application's controllers extend the ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The ``AppController``
-class can be defined in ``/src/Controller/AppController.php`` and it should
+class can be defined in ``src/Controller/AppController.php`` and it should
 contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods that handle requests. These are called
@@ -40,7 +40,7 @@ The App Controller
 As stated in the introduction, the ``AppController`` class is the parent class
 to all of your application's controllers.  ``AppController`` itself extends the
 :php:class:`Cake\\Controller\\Controller` class included in CakePHP.
-``AppController`` is defined in ``/src/Controller/AppController.php`` as
+``AppController`` is defined in ``src/Controller/AppController.php`` as
 follows::
 
     namespace App\Controller;
@@ -98,9 +98,9 @@ to write.
 By convention, CakePHP renders a view with an inflected version of the action
 name. Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``/src/Controller/RecipesController.php`` and contain::
+in ``src/Controller/RecipesController.php`` and contain::
 
-        # /src/Controller/RecipesController.php
+        # src/Controller/RecipesController.php
 
         class RecipesController extends AppController {
             public function view($id) {
@@ -116,8 +116,8 @@ in ``/src/Controller/RecipesController.php`` and contain::
             }
         }
 
-The view files for these actions would be ``/src/Template/Recipes/view.ctp``,
-``/src/Template/Recipes/share.ctp``, and ``/src/Template/Recipes/search.ctp``. The
+The view files for these actions would be ``src/Template/Recipes/view.ctp``,
+``src/Template/Recipes/share.ctp``, and ``src/Template/Recipes/search.ctp``. The
 conventional view file name is the lowercased and underscored version of the
 action name.
 
@@ -151,8 +151,7 @@ the request type before returning::
 
 The above controller action is an example of how a method can be used with
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` and normal
-requests. See the :doc:`request-action` section for more tips on using
-``requestAction()``.
+requests.
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
@@ -199,6 +198,8 @@ are able to pass data to the views, using ``Controller::set()``. You can also
 decide which view class to use, and which view file should be
 rendered from the controller.
 
+.. _setting-view_variables:
+
 Setting View Variables
 ----------------------
 
@@ -244,14 +245,14 @@ you've submitted using the ``set()`` method), places the view inside its
 
 The default view file used by render is determined by convention.
 If the ``search()`` action of the RecipesController is requested,
-the view file in ``/src/Template/Recipes/search.ctp`` will be rendered::
+the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 
     namespace App\Controller;
 
     class RecipesController extends AppController {
     // ...
         public function search() {
-            // Render the view in /src/Template/Recipes/search.ctp
+            // Render the view in src/Template/Recipes/search.ctp
             $this->render();
         }
     // ...
@@ -263,10 +264,10 @@ an alternate view file by specifying a view file name as first argument of
 ``render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
-element file relative to the ``/src/Template`` folder. This allows
+element file relative to the ``src/Template`` folder. This allows
 direct rendering of elements, very useful in AJAX calls::
 
-    // Render the element in /src/Template/Element/ajaxreturn.ctp
+    // Render the element in src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
 
 The second parameter ``$layout`` of ``render()`` allows you to specify the layout
@@ -287,8 +288,8 @@ have called ``render()``, CakePHP will not try to re-render the view::
         }
     }
 
-This would render ``/src/Template/Posts/custom_file.ctp`` instead of
-``/src/Template/Posts/my_action.ctp``
+This would render ``src/Template/Posts/custom_file.ctp`` instead of
+``src/Template/Posts/my_action.ctp``
 
 
 You can also render views inside plugins using the following syntax:
@@ -303,7 +304,7 @@ For example::
         }
     }
     
-This would render ``/plugins/Users/src/Template/UserDetails/custom_file.ctp``
+This would render ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
 
 Redirecting to Other Pages
 ==========================

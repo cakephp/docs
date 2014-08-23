@@ -154,7 +154,7 @@ Folder API
 
     Returns an array of all matching files in the current directory::
 
-        // Find all .png in your app/webroot/img/ folder and sort the results
+        // Find all .png in your webroot/img/ folder and sort the results
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
         /*
@@ -184,12 +184,12 @@ Folder API
         /*
         Array
         (
-            [0] => /var/www/cake/app/webroot/index.php
-            [1] => /var/www/cake/app/webroot/test.php
-            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
-            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
-            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
-            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
+            [0] => /var/www/cake/webroot/index.php
+            [1] => /var/www/cake/webroot/test.php
+            [2] => /var/www/cake/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/webroot/img/test-pass-icon.png
         )
         */
 
