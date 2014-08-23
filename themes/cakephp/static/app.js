@@ -155,10 +155,6 @@ App.InlineSearch = (function () {
 		$(document).keyup(handleEscape);
 	
 		doSearch = createSearch(searchResults, 10);
-
-		if (document.location.hash.length == 0) {
-			searchInput.focus();
-		}
 	};
 
 	return {
