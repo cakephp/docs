@@ -98,75 +98,34 @@ Para aprender más sobre los controladores, puedes visitar el capítulo
 Crear Vistas de Artículos (Article Views)
 =========================================
 
-Ya tenemos un modelo que define nuestros artículos y un controlador que ejecuta
-alguna lógica sobre ese modelo y envía los datos recuperados a la vista. Ahora
-vamos a crear una vista para la acción index().
+Ahora que tenemos nuestros datos fluyendo por el modelo, y que la lógica de
+nuestra aplicación está definida en nuestro controlador, vamos a crear una vista
+para la acción índex creada en el paso anterior.
 
-Las vistas en CakePHP están orientadas a cómo se van a presentar los datos. Las
-vistas encajan dentro de *layouts* o plantillas. Normalmente las vistas son una
-mezcla de HTML y PHP, aunque pueden ser también XML, CSV o incluso datos
-binarios.
+Las vistas en CakePHP únicamente son fragmentos de presentación que encajan
+dentro de la plantilla (layout) de nuestra aplicación. Para la mayoría de
+aplicaciones son HTML mezclados con PHP, pero bien podrían acabar siendo XML,
+CSV o incluso datos binarios.
 
-Las plantillas (*layouts*) sirven para recubrir las vistas y reutilizar código.
-Además pueden crearse tantos layouts como se deseen y se puede elegir cuál
-utilizar en cada momento. Por el momento vamos a usar el la plantilla por
-defecto ``default``.
+Una plantilla (layout) es una presentación de código que envuelve una vista. Se
+pueden definir múltiples plantillas y puedes cambiar entre ellas pero, por ahora,
+utilizaremos la plantilla por defecto (``default``).
 
-¿ Recuerdas que el controlador envió a la vista una variable ``posts`` que
-contiene todos los posts mediante el método set() ? Esto nos generará una
-variable en la vista con esta pinta:
+¿Recuerdas cómo en la sección anterior hemos asignado la variable 'articles' a
+la vista utilizando el método ``set()``? Esto asignaría el objeto de consulta
+(query object) a la vista para ser invocado por una iteración ``foreach``.
 
-::
-
-    // print_r($posts) output:
-
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => The title
-                        [body] => This is the post body.
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => A title once again
-                        [body] => And the post body follows.
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Title strikes back
-                        [body] => This is really exciting! Not.
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
-
-Las vistas en CakePHP se almacenan en la ruta ``/app/View`` y en un directorio
-con el mismo nombre que el controlador al que pertenecen, en nuestro caso
-*Posts*, así que para mostrar estos elementos formateados mediante una tabla
-tendremos algo como esto:
+Las vistas en CakePHP se almacenan en la ruta ``/src/Template`` y en un
+directorio con el mismo nombre que el controlador al que pertenecen (tendremos
+que crear una carpeta llamada 'Articles' en este caso). Para dar formato a los
+datos de este artículo en una bonita tabla, el código de nuestra vista debería
+ser algo así:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: /src/Template/Articles/index.ctp -->
 
-    <h1>Blog posts</h1>
+    <h1>Blog articles</h1>
     <table>
         <tr>
             <th>Id</th>
@@ -174,92 +133,92 @@ tendremos algo como esto:
             <th>Created</th>
         </tr>
 
-        <!-- Here is where we loop through our $posts array, printing out post info -->
+        <!-- Aquí es donde iteramos nuestro objeto de consulta $articles, mostrando en pantalla la información del artículo -->
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                <?= $this->Html->link($article->title,
+                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td><?= $article->created->format(DATE_RFC850) ?></td>
         </tr>
         <?php endforeach; ?>
-
     </table>
 
 Esto debería ser sencillo de comprender.
 
 Como habrás notado, hay una llamada a un objeto ``$this->Html``. Este objeto es
-una instancia de una clase *Helper* :php:class:`HtmlHelper`. CakePHP proporciona
-un conjunto de *Helpers* para ayudarte a completar acciones habituales, como por
-ejemplo realizar un link, crear un formulario, utilizar Javascript y Ajax de
-forma sencilla, etc. Puedes aprender más sobre esto en :doc:`/views/helpers` en
-otro momento. Basta con saber que la función ``link()`` generará un link HTML
-con el título como primer parámetro y la URL como segundo parámetro.
+una instancia de la clase :php:class:`Cake\\View\\Helper\\HtmlHelper` de CakePHP.
+CakePHP proporciona un conjunto de ayudantes de vistas (helpers) para ayudarte a
+completar acciones habituales, como por ejemplo crear un enlace o un formulario.
+Puedes aprender más sobre esto en :doc:`/views/helpers`, pero lo que es
+importante destacar aquí es que el método ``link()`` generará un enlace HTML con
+el título como primer parámetro y la URL como segundo parámetro.
 
 Cuando crees URLs en CakePHP te recomendamos emplear el formato de array. Se
-explica con detenimiento en la sección de *Routes*. Si utilizas estas rutas,
-podrás aprovecharte de las potentes funcionalidades de generación inversa de
-rutas de CakePHP en el futuro. Además puedes especificar ritas relativas a la
-base de tu aplicación de la forma '/controlador/accion/param1/param2'.
+explica con detenimiento en la sección de Rutas (Routes). Si utilizas las rutas
+en formato array podrás aprovecharte de las potentes funcionalidades de
+generación de rutas inversa de CakePHP en el futuro. Además puedes especificar
+rutas relativas a la base de tu aplicación de la forma
+``/controlador/accion/param1/param2`` o incluso utilizar :ref:`named-routes`.
 
-Llegados a este punto, deberías poder ver esta página si escribes la ruta a tu
-aplicación en el navegador, normalmente será algo asi
-http://localhost/blog/posts/index. Deberías ver los posts correctamente
-formateados en una tabla.
+Llegados a este punto, deberías ser capaz de acceder con tu navegador a
+http://www.example.com/articles/index. Deberías ver tu vista, correctamente
+formatada con el título y la tabla listando los artículos.
 
-Verás que si pinchas sobre alguno de los enlaces que aparecen en esta página
-(que van a una URL '/posts/view/some\_id', verás una página de error que te
-indica que la acción ``view()`` no ha sido definida todavía, y que debes
-definirla en el fichero PostsController. Si no ves ese error, algo ha ido mal,
-ya que esa acción no está definida y debería mostrar la página de error
-correspondiente. Cosa muy rara.
-Creemos esta acción para evitar el error::
+Si te ha dado por hacer clic en uno de los enlaces que hemos creado en esta
+vista (que enlazan el título de un artículo hacia la URL
+``/articles/view/un\_id``), seguramente habrás sido informado por CakePHP de que
+la acción no ha sido definida todavía. Si no has sido infromado, o bien algo
+ha ido mal o bien ya la habías definido, en cuyo caso eres muy astuto. En caso
+contrario, la crearemos ahora en nuestro controlador de artículos::
 
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
-        public $name = 'Posts';
+    namespace App\Controller;
+
+    use Cake\Error\NotFoundException;
+
+    class ArticlesController extends AppController {
 
         public function index() {
-             $this->set('posts', $this->Post->find('all'));
+             $this->set('articles', $this->Articles->find('all'));
         }
 
         public function view($id = null) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            if (!$id) {
+                throw new NotFoundException(__('Invalid article'));
+            }
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
         }
     }
 
 Si observas la función view(), ahora el método set() debería serte familiar.
-Verás que estamos usando ``read()`` en vez de ``find('all')`` ya que sólo
-queremos un post concreto.
+Verás que estamos usando ``get()`` en vez de ``find('all')`` ya que sólo
+queremos un artículo concreto.
 
 Verás que nuestra función view toma un parámetro ($id), que es el ID del
 artículo que queremos ver. Este parámetro se gestiona automáticamente al llamar
-a la URL /posts/view/3, el valor '3' se pasa a la función view como primer
-parámetro $id.
+a la URL ``/articles/view/3``, el valor '3' se pasa a la función view como primer
+parámetro ``$id``.
 
-Vamos a definir la vista para esta nueva función, como hicimos antes para
-index() salvo que el nombre ahora será ``/app/View/Posts/view.ctp``.
+Vamos a definir la vista para esta nueva función 'view' ubicándola en
+``/src/Template/Articles/view.ctp``.
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/view.ctp -->
+    <!-- File: /src/Template/Articles/view.ctp -->
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
-    <h1><?php echo $post['Post']['title']?></h1>
-
-    <p><small>Created: <?php echo $post['Post']['created']?></small></p>
-
-    <p><?php echo $post['Post']['body']?></p>
-
-Verifica que ahora funciona el enlace que antes daba un error desde
-``/posts/index`` o puedes ir manualmente si escribes ``/posts/view/1``.
+Verifica que esto funciona probando los enlaces en ``/articles/index`` o puedes
+solicitándolo manualmente accediendo a ``/articles/view/1``.
 
 
-Añadiendo artículos (*posts*)
-=============================
+Añadiendo Artículos
+===================
 
 Ya podemos leer de la base de datos nuestros artículos y mostrarlos en pantalla,
 ahora vamos a ser capaces de crear nuevos artículos y guardarlos.
