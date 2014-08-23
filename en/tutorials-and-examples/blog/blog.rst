@@ -42,13 +42,14 @@ following::
 Or, you can download ``composer.phar`` from the
 `Composer website <https://getcomposer.org/download/>`_.
 
-Installing Composer globally will avoid you to repeat this step on each project.
+Installing Composer globally will avoid you having to repeat this step
+on each project.
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the [app-name] directory.::
+in the [app_name] directory.::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app-name]
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Or if Composer is installed globally::
 
