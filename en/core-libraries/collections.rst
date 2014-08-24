@@ -481,6 +481,36 @@ position, use the ``shuffle``::
     // This could return ['b' => 2, 'c' => 3, 'a' => 1]
     $collection->shuffle()->toArray();
 
+.. php:method:: combine($keyPath, $valuePath, $groupPath = null)
+
+Collections allow you to create a new collection made from keys and values in
+an existing collection. Both the key and value paths can be specified with
+dot notation paths::
+
+    $items = [
+        ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
+        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
+        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+    ];
+    $combined = (new Collection($items))->combine('id', 'name');
+
+    // Result will look like this when converted to array
+    [
+        1 => 'foo',
+        2 => 'bar',
+        3 => 'baz,
+    ];
+
+You can also optionally use a ``groupPath`` to group results based on a path::
+
+    $combined = (new Collection($items))->combine('id', 'name', 'parent');
+
+    // Result will look like this when converted to array
+    [
+        'a' => [1 => 'foo', 3 => 'baz'],
+        'b' => [2 => 'bar']
+    ];
+
 Withdrawing Elements
 --------------------
 
