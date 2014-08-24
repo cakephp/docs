@@ -89,9 +89,11 @@ structure works: check out the
 Directory Permissions on tmp and logs
 =====================================
 
-You'll need to set the proper permissions on the ``tmp`` and ``logs`` directories to make
-them writable by your webserver. The best way to do this, is to find out what user
-your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
+The ``tmp`` and ``logs`` directories need to have proper permissions to be writable
+by your webserver. If you used Composer for the install, this should have been done
+for you and confirmed with a "Permissions set on <folder>" message. If you instead
+got an error message or want to do it manually, the best way would be to find out
+what user your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
 these two directories to that user. The final command you run (in \*nix)
 might look something like this::
 
@@ -152,7 +154,8 @@ Database Configuration
 ======================
 
 Next, let's tell CakePHP where our database is and how to connect to it.
-For many, this is the first and last time you will need to configure anything.
+For many, this will be the first and last time you will need to configure
+anything.
 
 The configuration should be pretty straightforward: just replace the
 values in the ``Datasources.default`` array in the ``config/app.php`` file
@@ -193,12 +196,12 @@ Optional Configuration
 There are a few other items that can be configured. Most developers
 complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
-in security hashes.
+in security hashes. 
 
-The security salt is used for generating hashes. Change the default
-salt value by editing ``config/app.php``. It doesn't
-much matter what the new value is, as long as it's not easily
-guessed::
+The security salt is used for generating hashes. If you used Composer this too is taken
+care of for you during the install. Else you'd need to change the default salt value 
+by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
+it's not easily guessed::
 
     'Security' => [
         'salt' => 'something long and containing lots of different values.',
