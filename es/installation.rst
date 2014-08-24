@@ -1,5 +1,5 @@
 Instalación
-############
+###########
 
 CakePHP se instala rápido y fácilmente. Los requisitos mínimos son
 un servidor web y una copia de CakePHP, y listo! Aunque es manual se enfoca
