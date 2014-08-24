@@ -42,6 +42,7 @@ After installing a plugin and setting up the autoloader, you may need to load
 the plugin. You can load plugins one by one, or all of them with a single
 method::
 
+    // In config/bootstrap.php
     // Loads a single plugin
     Plugin::load('ContactManager');
 
