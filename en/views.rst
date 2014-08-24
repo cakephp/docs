@@ -106,7 +106,7 @@ that change:
 .. code-block:: php
 
     // src/Template/Common/view.ctp
-    <h1><?= $this->fetch('title') ?></h1>
+    <h1><?= h($this->fetch('title')) ?></h1>
     <?= $this->fetch('content') ?>
 
     <div class="actions">
@@ -276,7 +276,7 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
     <!DOCTYPE html>
     <html lang="en">
         <head>
-        <title><?= $this->fetch('title') ?></title>
+        <title><?= h($this->fetch('title')) ?></title>
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
@@ -316,7 +316,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?= h($title) ?></title>
+   <title><?= h($this->fetch('title')) ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -354,20 +354,11 @@ JavaScript and CSS files from views.
 
 The ``content`` block contains the contents of the rendered view.
 
-Setting the title for the layout is easiest to do in the
-controller, setting the ``title`` variable::
+Setting the title for the layout is easiest to do in the view assigning the
+``title`` block content::
 
-    namespace App\Controller;
-
-    class UsersController extends AppController {
-        public function view_active() {
-            $this->set('title', 'View Active Users');
-        }
-    }
-
-You can also set the ``title`` variable from inside the view file::
-
-    $this->set('title', $titleContent);
+    // View template, anywhere before the layout is rendered
+    $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
 ``src/Template/Layout`` directory, and switch between them inside of your
@@ -392,7 +383,6 @@ using something like::
 
     class UsersController extends AppController {
         public function view_active() {
-            $this->set('title', 'View Active Users');
             $this->layout = 'default_small_ad';
         }
 
@@ -533,7 +523,7 @@ like the following:
     <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
     <ol>
     <?php foreach ($posts as $post): ?>
-          <li><?= $post['Post']['title'] ?></li>
+          <li><?= h($post['Post']['title']) ?></li>
     <?php endforeach; ?>
     </ol>
 
