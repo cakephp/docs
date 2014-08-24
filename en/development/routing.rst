@@ -371,7 +371,7 @@ can be used in reverse routing to identify the route you want to use::
     );
 
     // Generate a URL using a named route.
-    $url = Router::url(['_name' => login']);
+    $url = Router::url(['_name' => 'login']);
 
     // Generate a URL using a named route,
     // with some query string args.
