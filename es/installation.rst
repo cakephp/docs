@@ -1,6 +1,11 @@
 Instalación
 ###########
 
+.. note::
+    Esta página todavía no ha sido traducida y pertenece a la documentación de
+    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
+    desde Github <https://github.com/cakephp/docs>`_.
+
 CakePHP se instala muy fácil y rápidamente. Los requisitos mínimos son: servidor
 web y copia de CakePHP. Nada más. Aunque este manual se centra en Apache, ya que
 es el servidor web más común, puedes configurar CakePHP para que funcione en

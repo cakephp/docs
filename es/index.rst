@@ -1,6 +1,11 @@
 Bienvenido
 ##########
 
+.. note::
+    Esta página todavía no ha sido traducida y pertenece a la documentación de
+    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
+    desde Github <https://github.com/cakephp/docs>`_.
+
 El manual de CakePHP, es un proyecto de documentación abierto, editable y
 mantenido por la comunidad. Esperamos mantener un alto nivel de calidad, validez
 y precisión de la documentación.
