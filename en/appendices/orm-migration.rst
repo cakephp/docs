@@ -371,8 +371,8 @@ code, interact with the same API when manipulating associations::
     class ReviewsTable extends Table {
 
         public function initialize(array $config) {
-            $this->belongsTo('Movies');
-            $this->hasOne('Ratings');
+            $this->belongsTo('Movie');
+            $this->hasOne('Rating');
             $this->hasMany('Comments')
             $this->belongsToMany('Tags')
         }
