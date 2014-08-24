@@ -1,14 +1,14 @@
 Instalación
 ###########
 
-CakePHP se instala rápido y fácilmente. Los requisitos mínimos son
-un servidor web y una copia de CakePHP, y listo! Aunque es manual se enfoca
+CakePHP se instala rápida y fácilmente. Los requisitos mínimos son
+un servidor web y una copia de CakePHP, y ya! Aunque este manual se enfoca
 principalmente en configurar Apache (ya que es el más utilizado),
 puedes configurar CakePHP para que corra con una variedad de servidores web
 como nginx, LightHTHPD o Microsoft IIS.
 
 Requisitos
-============
+==========
 
 - Servidor HTTP. Por ejemplo: Apache. mod\_rewrite es recomendado, pero
   no requerido.
@@ -32,7 +32,7 @@ de sistemas de bases de datos:
     las extensiones de PDO correctas.
 
 Licencia
-=======
+========
 
 CakePHP está licenciado bajo la
 `Licencia MIT <http://www.opensource.org/licenses/mit-license.php>`_. Esto
@@ -41,12 +41,12 @@ con la condición de que las notas de copyright queden intactas. También eres l
 para incorporar CakePHP en cualquier aplicación comercial o de código cerrado.
 
 Instalando CakePHP
-===================
+==================
 
 CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo de 
 dependicias para PHP 5.3+, como el método de instalación oficialmente soportado.
 
-Primero, necesitas descargar e instalar Composer si no lo has hecho ya.
+Primero, necesitas descargar e instalar Composer, si no lo has hecho ya.
 Si tienes instalado cURL, es tan fácil como correr esto en un terminal::
 
     curl -s https://getcomposer.org/installer | php
@@ -59,7 +59,7 @@ Para sistemas Windows, puedes descargar el Instalador de Composer para Windows
 instrucciones acerca de esto, puedes leer el README del instalador de Windows
 `aquí <https://github.com/composer/windows-setup>`__.
 
-Ya que hayas decargado e instalado Composer puedes obtener una aplicación
+Ya que has decargado e instalado Composer puedes generar una aplicación
 CakePHP ejecutando::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
@@ -68,13 +68,13 @@ O si tienes Composer definido globalmente::
 
     composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
-Una vez que Composer termine de descargar el esqueleto y la librería code
+Una vez que Composer termine de descargar el esqueleto y la librería core
 de CakePHP, deberías tener una aplicación funcional de CakePHP instalada 
-via Composer. Asegúrate de que los ficheros composer.json y composer.lock
+vía Composer. Asegúrate de que los ficheros composer.json y composer.lock
 se mantengan junto con el resto de tu código fuente.
 
 Ahora puedes visitar el destino donde instalaste la aplicación y ver los
-diferentes avisos de setup.s.
+diferentes avisos de setup.
 
 Mantente al día con los últimos cambios de CakePHP
 --------------------------------------------------
@@ -100,16 +100,16 @@ de log por el motor de ``FileLog`` por defecto.
 Asegúrate de que los directorios ``logs``, ``tmp`` y todos sus subdirectorios
 tengan permisos de escritura por el usuario del Servidor Web. La instalación
 de CakePHP a través de Composer se encarga de este proceso haciendo que dichos
-directorios tengan los permisos correctos globalmente con el fin de que puedas
+directorios tengan los permisos abiertos globalmente con el fin de que puedas
 tener el setup de manera más rápida. Obviamente es recomendable que revises, y
 modifiques si es necesario, los permisos tras la instalación vía Composer para
-una mejor capa de seguridad.
+mayor seguridad.
 
-Un problema común es que ``logs`` and ``tmp`` y sus subdirectorios deben poder
+Un problema común es que ``logs``, ``tmp`` y sus subdirectorios deben poder
 ser modificados tanto por el usuario del Servidor Web como por el usuario de la
 línea de comandos. En un sistema UNIX, si los usuarios mencionados difieren,
 puedes ejecutar los siguientes comandos desde el directorio de tu aplicación
-para asegurarte de que todo está configurado correctamente::
+para asegurarte de que todo esté configurado correctamente::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -127,8 +127,8 @@ principales de instalación de CakePHP: Desarrollo y Producción.
 
 -  Desarrollo: fácil de arrancar, las URLs de la aplicación incluyen
    el nombre del directorio de la aplicación de CakePHP y es menos segura.
--  Production: Requiere tener la habilidad de configurar el directorio raíz
-   del Servidor Web, URLs limpias y es bastante segura.
+-  Producción: Requiere tener la habilidad de configurar el directorio raíz
+   del Servidor Web, cuenta con URLs limpias y es bastante segura.
 
 Desarrollo
 ==========
@@ -166,7 +166,7 @@ CakePHP. Utilizando este método, podrás tener un dominio entero actuando como 
 sola aplicación de CakePHP. Este ejemplo te ayudará a instalar CakePHP donde quieras
 en tu sistema de ficheros y tenerlo disponible en ``http://www.example.com``. Toma
 en cuenta que esta instalación requiere que tengas los derechos de cambiar el
-directorio raíz (``DocumentRoot``) de servidores web Apache.
+directorio raíz (``DocumentRoot``) del servidor web Apache.
 
 Después de instalar tu aplicación utilizando cualquiera de los métodos mencionados
 en el directorio elegido - asumiremos que has escogido /cake_install - tu estructura
@@ -211,10 +211,10 @@ A rodar!
 ========
 
 Muy bien, ahora veamos a CakePHP en acción. Dependiendo del setup
-que has utilizado, deberías dirigirte en tu navegador a http://example.com/
+que hayas utilizado, deberías dirigirte en tu navegador a http://example.com/
 o http://localhost:8765/. En este punto, encontrás el home principal de
 CakePHP y un mensaje que te dice el status actual de tu conexión a la base
-de datos actual.
+de datos.
 
 Felicidades! Estás listo para :doc:`Crear tu primera aplicación de CakePHP </getting-started>`.
 
