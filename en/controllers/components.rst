@@ -274,12 +274,12 @@ Callbacks
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender(Event $event, Controller $controller)
+.. php:method:: beforeRender(Event $event)
 
     Is called after the controller executes the requested action's logic,
     but before the controller's renders views and layout.
 
-.. php:method:: shutdown(Event $event, Controller $controller)
+.. php:method:: shutdown(Event $event)
 
     Is called before output is sent to the browser.
 
