@@ -316,7 +316,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?= h($title) ?></title>
+   <title><?= h($this->fetch('title')) ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -354,20 +354,9 @@ JavaScript and CSS files from views.
 
 The ``content`` block contains the contents of the rendered view.
 
-Setting the title for the layout is easiest to do in the
-controller, setting the ``title`` variable::
+You can set the ``title`` block content from inside your view file::
 
-    namespace App\Controller;
-
-    class UsersController extends AppController {
-        public function view_active() {
-            $this->set('title', 'View Active Users');
-        }
-    }
-
-You can also set the ``title`` variable from inside the view file::
-
-    $this->set('title', $titleContent);
+    $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
 ``src/Template/Layout`` directory, and switch between them inside of your
