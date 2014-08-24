@@ -12,7 +12,7 @@ sure it doesn't have any leaks. Check the :doc:`/core-libraries/components/secur
 CSRF attacks, form field tampering, and others. Doing :doc:`/models/data-validation`, and/or
 :doc:`/core-utility-libraries/sanitize` is also a great idea, for protecting your
 database and also against XSS attacks. Check that only your ``webroot`` directory
-is publicly visible, and that your secrets (such as your app salt, and
+is publicly visible, and that your secrets (such as your app salt and
 any security keys) are private and unique as well!
 
 Set document root
