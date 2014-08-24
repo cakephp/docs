@@ -39,10 +39,10 @@ Loading a Plugin
 ================
 
 After installing a plugin and setting up the autoloader, you may need to load
-the plugin. A good place to do this would be in `src/config/bootstrap.php`,
-for example. You can load plugins one by one, or all of them with a single
+the plugin. You can load plugins one by one, or all of them with a single
 method::
 
+    // In config/bootstrap.php
     // Loads a single plugin
     Plugin::load('ContactManager');
 
