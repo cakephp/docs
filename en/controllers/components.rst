@@ -263,12 +263,12 @@ Component API
 Callbacks
 ---------
 
-.. php:method:: initialize(Event $event, Controller $controller)
+.. php:method:: initialize(Event $event)
 
     Is called before the controller's
     beforeFilter method.
 
-.. php:method:: startup(Event $event, Controller $controller)
+.. php:method:: startup(Event $event)
 
     Is called after the controller's beforeFilter
     method but before the controller executes the current action
