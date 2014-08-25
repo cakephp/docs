@@ -69,8 +69,8 @@ output. The following options are available:
 |                     | ie. '$'                                            |
 +---------------------+----------------------------------------------------+
 | after               | The currency symbol to place after decimal numbers |
-|                     | ie. 'c'. Set to boolean false to use no decimal    |
-|                     | symbol. eg. 0.35 => $0.35.                         |
+|                     | ie. 'c'. Set to boolean ``false`` to use no        |
+|                     | decimal symbol. eg. 0.35 => $0.35.                 |
 +---------------------+----------------------------------------------------+
 | zero                | The text to use for zero values, can be a string or|
 |                     | a number. ie. 0, 'Free!'.                          |
@@ -85,7 +85,7 @@ output. The following options are available:
 |                     | number will be wrapped with ( and ).               |
 +---------------------+----------------------------------------------------+
 | escape              | Should the output be htmlentity escaped? Defaults  |
-|                     | to true.                                           |
+|                     | to ``true``.                                       |
 +---------------------+----------------------------------------------------+
 | wholeSymbol         | String to use for whole numbers, ie. ' dollars'.   |
 +---------------------+----------------------------------------------------+

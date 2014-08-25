@@ -291,7 +291,7 @@ create a file at a given path::
 
 If the Shell is interactive, a warning will be generated, and the user asked if
 they want to overwrite the file if it already exists.  If the shell's
-interactive property is false, no question will be asked and the file will
+interactive property is ``false``, no question will be asked and the file will
 simply be overwritten.
 
 Console Output
@@ -608,7 +608,7 @@ parsed parameters.::
     $parser->addOption('no-commit', ['boolean' => true]);
 
 With this option, when calling a shell like ``cake myshell --no-commit something``
-the no-commit param would have a value of true, and 'something'
+the no-commit param would have a value of ``true``, and 'something'
 would be a treated as a positional argument.
 The built-in ``--help``, ``--verbose``, and ``--quiet`` options
 use this feature.
@@ -618,9 +618,9 @@ define the behavior of the option:
 
 * ``short`` - The single letter variant for this option, leave undefined for none.
 * ``help`` - Help text for this option. Used when generating help for the option.
-* ``default`` - The default value for this option. If not defined the default will be true.
+* ``default`` - The default value for this option. If not defined the default will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
-  Defaults to false.
+  Defaults to ``false``.
 * ``choices`` An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
@@ -655,7 +655,7 @@ Using Boolean Options
 Options can be defined as boolean options, which are useful when you need to create
 some flag options. Like options with defaults, boolean options always include
 themselves into the parsed parameters. When the flags are present they are set
-to true, when they are absent false::
+to ``true``, when they are absent they are set ot ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',

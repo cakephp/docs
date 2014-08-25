@@ -43,14 +43,14 @@ domain
     The domain that the cookie is available. To make the cookie
     available on all subdomains of example.com set domain to '.example.com'.
 secure
-    Indicates that the cookie should only be transmitted over a
-    secure HTTPS connection. When set to true, the cookie will only be set if
-    a secure connection exists.
+    Indicates that the cookie should only be transmitted over a secure HTTPS
+    connection. When set to ``true``, the cookie will only be set if a
+    secure connection exists.
 key
     Encryption key used when encrypted cookies are enabled. Defaults to Security.salt.
 httpOnly
-    Set to true to make HTTP only cookies. Cookies that are HTTP only
-    are not accessible in JavaScript. Defaults to false.
+    Set to ``true`` to make HTTP only cookies. Cookies that are HTTP only
+    are not accessible in JavaScript. Defaults to ``false``.
 encryption
     Type of encryption to use. Defaults to 'aes'. Can also be 'rijndael' for
     backwards compatibility.

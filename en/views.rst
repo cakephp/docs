@@ -530,7 +530,7 @@ Caching Elements
 ----------------
 
 You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache the element in the
+cache parameter. If set to ``true``, it will cache the element in the
 'default' Cache configuration. Otherwise, you can set which cache configuration
 should be used. See :doc:`/core-libraries/caching` for more information on
 configuring ``Cache``. A simple example of caching an element would be::

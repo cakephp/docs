@@ -38,8 +38,8 @@ the client and its request.
 .. php:method:: accepts($type = null)
 
     $type can be a string, or an array, or null. If a string, accepts
-    will return true if the client accepts the content type. If an
-    array is specified, accepts return true if any one of the content
+    will return ``true`` if the client accepts the content type. If an
+    array is specified, accepts return ``true`` if any one of the content
     types is accepted by the client. If null returns an array of the
     content-types that the client accepts. For example::
 
@@ -65,20 +65,20 @@ Other request 'type' detection methods include:
 
 .. php:method:: isXml()
 
-    Returns true if the current request accepts XML as a response.
+    Returns ``true`` if the current request accepts XML as a response.
 
 .. php:method:: isRss()
 
-    Returns true if the current request accepts RSS as a response.
+    Returns ``true`` if the current request accepts RSS as a response.
 
 .. php:method:: isAtom()
 
-    Returns true if the current call accepts an Atom response, false
+    Returns ``true`` if the current call accepts an Atom response, false
     otherwise.
 
 .. php:method:: isMobile()
 
-    Returns true if user agent string matches a mobile web browser, or
+    Returns ``true`` if user agent string matches a mobile web browser, or
     if the client accepts WAP content. The supported Mobile User Agent
     strings are:
 
@@ -111,7 +111,7 @@ Other request 'type' detection methods include:
 
 .. php:method:: isWap()
 
-    Returns true if the client accepts WAP content.
+    Returns ``true`` if the client accepts WAP content.
 
 All of the above request detection methods can be used in a similar
 fashion to filter functionality intended for specific content
@@ -218,7 +218,7 @@ stopped, saving processing time, saving bandwidth and no content is returned to
 the client. The response status code is then set to ``304 Not Modified``.
 
 You can opt-out this automatic checking by setting the ``checkHttpCache``
-setting to false::
+setting to ``false``::
 
     public $components = [
         'RequestHandler' => [

@@ -62,7 +62,7 @@ Linking to CSS Files
 .. php:method:: css(mixed $path, array $options = [])
 
 Creates a link(s) to a CSS style-sheet. If the ``block`` option is set to
-true, the link tags are added to the ``css`` block which you can print
+``true``, the link tags are added to the ``css`` block which you can print
 inside the head tag of the document.
 
 You can use the ``block`` option to control which block the link element
@@ -133,7 +133,7 @@ Creating meta Tags
 This method is handy for linking to external resources like RSS/Atom feeds
 and favicons. Like css(), you can specify whether or not you'd like this tag
 to appear inline or appended to the ``meta`` block by setting the 'block'
-key in the $attributes parameter to true, ie - ``['block' => true]``.
+key in the $attributes parameter to ``true``, ie - ``['block' => true]``.
 
 If you set the "type" attribute using the $attributes parameter,
 CakePHP contains a few shortcuts:
@@ -361,7 +361,7 @@ Will output:
 
 HTML special characters in ``$title`` will be converted to HTML
 entities. To disable this conversion, set the escape option to
-false in the ``$options`` array.::
+``false`` in the ``$options`` array.::
 
     echo $this->Html->link(
         $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
@@ -377,7 +377,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Setting ``escape`` to false will also disable escaping of attributes of the
+Setting ``escape`` to ``false`` will also disable escaping of attributes of the
 link. You can use the option ``escapeTitle`` to disable just
 escaping of title and not the attributes.::
 
@@ -452,14 +452,14 @@ Linking to Javascript Files
 Include a script file(s), contained either locally or as a remote URL.
 
 By default, script tags are added to the document inline. If you override
-this by setting ``$options['block']`` to true, the script tags will instead
+this by setting ``$options['block']`` to ``true``, the script tags will instead
 be added to the ``script`` block which you can print elsewhere in the document.
 If you wish to override which block name is used, you can do so by setting
 ``$options['block']``.
 
 ``$options['once']`` controls whether or
 not you want to include this script once per request or more than
-once. This defaults to true.
+once. This defaults to ``true``.
 
 You can use $options to set additional properties to the
 generated script tag. If an array of script tags is used, the
@@ -530,7 +530,7 @@ Creating Inline Javascript Blocks
 
 .. php:method:: scriptBlock($code, $options = [])
 
-Generate a code block containing ``$code`` set ``$options['block']`` to true
+Generate a code block containing ``$code`` set ``$options['block']`` to ``true``
 to have the script block appear in the ``script`` view block. Other options
 defined will be added as attributes to script tags.
 ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will create

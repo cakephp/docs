@@ -53,7 +53,7 @@ all Session component methods wherever a name/key is used.
 
 .. php:method:: check($name)
 
-    Used to check if a Session variable has been set. Returns true on
+    Used to check if a Session variable has been set. Returns ``true`` on
     existence and false on non-existence.
 
 .. php:method:: delete($name)

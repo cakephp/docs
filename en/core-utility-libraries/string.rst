@@ -111,7 +111,7 @@ You can provide an array of options that control how wrapping is done. The
 supported options are:
 
 * ``width`` The width to wrap to. Defaults to 72.
-* ``wordWrap`` Whether or not to wrap whole words. Defaults to true.
+* ``wordWrap`` Whether or not to wrap whole words. Defaults to ``true``.
 * ``indent`` The character to indent lines with. Defaults to ''.
 * ``indentAt`` The line number to start indenting text. Defaults to 0.
 
@@ -129,7 +129,7 @@ Options:
 
 -  'format' - string The piece of HTML with that the phrase will be
    highlighted
--  'html' - bool If true, will ignore any HTML tags, ensuring that
+-  'html' - bool If ``true``, will ignore any HTML tags, ensuring that
    only the correct text is highlighted
 
 Example::

@@ -272,12 +272,12 @@ Possible keys for hasOne association arrays include:
   such as ``['Addresses.primary' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
   is INNER. You may want to use LEFT if your hasOne association is optional.
-- **dependent**: When the dependent key is set to true, and an
+- **dependent**: When the dependent key is set to ``true``, and an
   entity is deleted, the associated model records are also deleted. In this
-  case we set it true so that deleting a User will also delete her associated
+  case we set it to ``true`` so that deleting a User will also delete her associated
   Address.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When false,
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When ``false``,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
 - **propertyName**: The property name that should be filled with data from the associated
@@ -436,11 +436,11 @@ Possible keys for hasMany association arrays include:
   strings such as ``['Comments.visible' => true]``
 - **sort**  an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
-- **dependent**: When dependent is set to true, recursive model
+- **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
   deleted when their associated Article record has been deleted.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When false,
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When ``false``,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
 - **propertyName**: The property name that should be filled with data from the associated
@@ -556,10 +556,10 @@ Possible keys for belongsToMany association arrays include:
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.
-- **cascadeCallbacks**: When this is true, cascaded deletes will load and delete
+- **cascadeCallbacks**: When this is ``true``, cascaded deletes will load and delete
   entities so that callbacks are properly triggered on join table records. When
-  false, ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered. This defaults to false to help reduce overhead.
+  ``false``, ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered. This defaults to ``false`` to help reduce overhead.
 - **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
   the association, so ``tags`` in our example.
@@ -1349,12 +1349,12 @@ When an entity is saved a few things happen:
 
 1. Validation will be started if not disabled.
 2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
-   stopped the save operation will fail and return false.
+   stopped the save operation will fail and return ``false``.
 3. Validation will be applied. If validation fails, the save will be aborted,
-   and save() will return false.
+   and save() will return ``false``.
 4. The ``Model.afterValidate`` event will be triggered.
 5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
-   be aborted, and save() will return false.
+   be aborted, and save() will return ``false``.
 6. Parent associations are saved. For example, any listed belongsTo
    associations will be saved.
 7. The modified fields on the entity will be saved.
@@ -1700,7 +1700,7 @@ HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
 are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
-``cascadeCallbacks`` option to true. A sample HasMany association with both
+``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
 
     $this->hasMany('Comments', [
@@ -1710,7 +1710,7 @@ these options enabled would be::
 
 .. note::
 
-    Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+    Setting ``cascadeCallbacks`` to ``true``, results in considerably slower deletes
     when compared to bulk deletes. The cascadeCallbacks option should only be
     enabled when your application has important work handled by event listeners.
 
