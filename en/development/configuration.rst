@@ -56,8 +56,8 @@ Below is a description of the variables and how they affect your CakePHP
 application.
 
 debug
-    Changes CakePHP debugging output. false = Production mode. No error
-    messages, errors, or warnings shown. true = Errors and warnings shown.
+    Changes CakePHP debugging output. ``false`` = Production mode. No error
+    messages, errors, or warnings shown. ``true`` = Errors and warnings shown.
 App.namespace
     The namespace to find app classes under.
 
@@ -75,7 +75,7 @@ App.baseUrl
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
     files too.
 App.base
-    The base directory the app resides in. If false this
+    The base directory the app resides in. If ``false`` this
     will be auto detected.
 App.encoding
     Define what encoding your application uses.  This encoding
@@ -108,8 +108,8 @@ Asset.timestamp
     file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-    (bool) false - Doesn't do anything (default)
-    (bool) true - Appends the timestamp when debug > 0
+    (bool) ``false`` - Doesn't do anything (default)
+    (bool) ``true`` - Appends the timestamp when debug > 0
     (string) 'force' - Always appends the timestamp.
 
 Database Configuration
@@ -397,7 +397,7 @@ Once you've attached a config engine to Configure you can load configuration fil
 
 Loaded configuration files merge their data with the existing runtime configuration
 in Configure. This allows you to overwrite and add new values
-into the existing runtime configuration. By setting ``$merge`` to true, values
+into the existing runtime configuration. By setting ``$merge`` to ``true``, values
 will not ever overwrite the existing configuration.
 
 Creating or Modifying Configuration Files

@@ -244,7 +244,7 @@ You can compare a ``Time`` instance with the present in a variety of ways::
     echo $time->isThisMonth();
     echo $time->isThisYear();
 
-Each of the above methods will return true/false based on whether or not the
+Each of the above methods will return ``true``/``false`` based on whether or not the
 ``Time`` instance matches the present.
 
 Comparing With Intervals

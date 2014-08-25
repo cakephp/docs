@@ -392,7 +392,7 @@ subject "Subject" and content "Message".
 The return of ``deliver()`` is a :php:class:`Cake\\Email\\Email` instance with all
 configurations set. If you do not want to send the email right away, and wish
 to configure a few things before sending, you can pass the 5th parameter as
-false.
+``false``.
 
 The 3rd parameter is the content of message or an array with variables (when
 using rendered content).

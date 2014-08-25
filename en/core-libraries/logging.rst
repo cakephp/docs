@@ -227,7 +227,7 @@ using the ``LogTrait`` Calling log() will internally call
 
 All configured log streams are written to sequentially each time
 :php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
-logging adapters ``log()`` will return false and no log messages will be
+logging adapters ``log()`` will return ``false`` and no log messages will be
 written.
 
 .. _logging-levels:

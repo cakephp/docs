@@ -301,16 +301,17 @@ CakePHP, and should not be used unless you want the special meaning
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated URL. If your application
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
-* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
+to force http.
 * ``_method`` Define the HTTP verb/method to use. Useful when working with
   :ref:`resource-routes`.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
@@ -792,15 +793,16 @@ older versions of CakePHP.
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated URL. If your application
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
-* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
+to force http.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
