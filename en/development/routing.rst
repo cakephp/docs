@@ -79,7 +79,7 @@ parameters::
         ['_name' => 'login']
     );
 
-    echo Router::url('login');
+    echo Router::url(['_name' => 'login']);
     // Will output
     /login
 
