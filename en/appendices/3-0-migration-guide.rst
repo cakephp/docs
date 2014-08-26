@@ -184,6 +184,25 @@ on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code. Tasks no longer have
 access to callbacks, as there were never any callbacks to use.
 
+Shell
+-----
+
+- ``Shell::__construct()`` has changed. It now takes an instance of
+  ``Cake\\Console\\ConsoleIo``.
+- ``Shell::param()`` has been added as convenience access to the params.
+
+Additionally all shell methods will be transformed to camel case when invoked.
+For example, if you had a ``hello_world()`` method inside a shell and invoked it
+with ``Console/cake my_shell hello_world``, you will need to rename the method
+to ``helloWorld``. There are no changes required in the way you invoke commands.
+
+
+Shell / Task
+============
+
+Shells and Tasks have been moved from ``Console/Command`` and ``Console/Command/Task``
+to ``Shell`` and ``Shell/Task``.
+
 ApiShell Removed
 ----------------
 
@@ -197,22 +216,10 @@ ExtractTask
   messages. If you want translated validation messages you should wrap those
   messages in `__()` calls like any other content.
 
-Shell
------
-
-- ``Shell::__construct()`` has changed. It now takes an instance of
-  ``Cake\\Console\\ConsoleIo``.
-- ``Shell::param()`` has been added as convenience access to the params.
-
-Additionally all shell methods will be transformed to camel case when invoked.
-For example, if you had a ``hello_world()`` method inside a shell and invoked it
-with ``Console/cake my_shell hello_world``, you will need to rename the method
-to ``helloWorld``. There are no changes required in the way you invoke commands.
-
 BakeShell / TemplateTask
 ------------------------
 
-- Bake templates have been moved under `src/Template/Bake`. Also, the ``theme``
+- Bake templates have been moved under ``src/Template/Bake``. Also, the ``theme``
   option, used for selecting a bake template, has been renamed to ``template``.
 
 Event
