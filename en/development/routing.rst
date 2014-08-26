@@ -534,7 +534,7 @@ extra line in your routes config file::
     Router::parseExtensions(['html', 'rss']);
 
 This will enable the named extensions for all routes connected **after** this
-method call. Any routes connected prior to it will not inerit the extensions.
+method call. Any routes connected prior to it will not inherit the extensions.
 You can set extensions per scope as well::
 
     Router::scope('/api', function($routes) {
