@@ -1,21 +1,21 @@
 Instalación
 ###########
 
-CakePHP se instala muy fácil y rápidamente. Los requisitos mínimos son: servidor
-web y copia de CakePHP. Nada más. Aunque este manual se centra en Apache, ya que
-es el servidor web más común, puedes configurar CakePHP para que funcione en
-otros servidores como LightHTTPD o Microsoft IIS.
+CakePHP se instala de forma fácil y rápidamente. Los requisitos mínimos son: un servidor
+web y una copia de los archivos de CakePHP ¡Eso es todo! Aunque este manual se centra en 
+la configuración de Apache, ya que es el servidor web más común, se puede configurar 
+CakePHP para que funcione en otros servidores como LightHTTPD o Microsoft IIS.
 
 Vamos a preparar el proceso de instalación, que consta de los siguientes pasos:
 
 -  Descargar copia de CakePHP
--  Configurar tu servidor web para que use PHP
--  Comprobar que los permisos de los ficheros y carpetas está ok
+-  Configurar el servidor web para que use PHP
+-  Comprobar que los permisos de ficheros y carpetas son correctos
 
 Descargar CakePHP
 =================
 
-Tienes dos opciones: descargar un archivo comprimido con todo el código
+Hay dos opciones: descargar un archivo comprimido con todo el código
 (zip/tar.gz/tar.bz2) de la web oficial o realizar un *checkout* del código
 directamente desde el repositorio de git.
 
@@ -29,8 +29,8 @@ CakePHP como muchos otros plugins para el sistema. Las versiones *release* de
 CakePHP están disponibles aquí `Github tags
 <https://github.com/cakephp/cakephp/tags>`_.
 
-También puedes obtener la última versión, con todos los bugs y mejoras
-corregidos hasta el último minuto (o al menos en ese día). Para ello puedes
+También se puede obtener la última versión, con las últimas correcciones de errores y mejoras
+de última hora (o al menos en ese día). Para ello puedes
 clonar el repositorio. `Github`_.
 
 Permisos
@@ -40,10 +40,10 @@ CakePHP usa el directorio ``/app/tmp`` para varias cosas, como guardar las
 descripciones de los modelos, la cache de las vistas y la información de sesión
 de los usuarios.
 
-Debido a esto, asegúrate de que el directorio ``/app/tmp`` de tu instalación de
+Por ello debes, asegúrarte de que el directorio ``/app/tmp`` de tu instalación de
 CakePHP puede ser escrito por el usuario que ejecuta tu servidor web. Ten en
 cuenta que cuando tu servidor web se inicia, define un usuario como propietario
-del servicio. Este usuario suele llamarse 'apache' en algunas versiones de
+del servicio. Este usuario suele llamarse 'apache' o 'www-data' en algunas versiones de
 sistemas \*nix. Por lo tanto la carpeta ``/app/tmp`` debe tener permisos de
 escritura para que el usuario propietario del servidor web pueda escribir dentro
 de ella.
@@ -90,8 +90,8 @@ La estructura de directorios debería ser ahora similar a esta:
      -  /index.php
      -  /README
 
-Si la configuración de tu servidor web es correcta, ahora podrás acceder a tu aplicación aquí:
-http://localhost/cake20 .
+Si la configuración de tu servidor web es correcta, ahora podrás acceder a tu aplicación accediendo
+a: http://localhost/cake20 .
 
 Usando una misma instalación de CakePHP para múltiples aplicaciones
 -------------------------------------------------------------------
@@ -100,13 +100,13 @@ Si estás desarrollando varias aplicaciones a la vez, muchas veces tiene
 sentido compartir la misma versión del núcleo de CakePHP. Hay varias formas
 de conseguirlo. Una de las más sencillas es usar la directiva PHP 
 ``include_path``. Para empezar, clona CakePHP en un directorio. Por ejemplo,
-usaremos ``/home/mark/projects``::
+en ``/home/mark/projects``::
 
     git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 Este comando clonará CakePHP en tu directorio ``/home/mark/projects``. Si no quieres
 usar git, puedes descargar el archivo zip del repositorio, todos los demás 
-pasos serán los mismos. Lo siguiente es modificar tu archivo de configuración 
+pasos serán los mismos. Lo siguiente es modificar el archivo de configuración 
 de PHP ``php.ini``. En sistemas \*nix, este archivo suele estar ubicado en la 
 ruta ``/etc/php.ini``, pero puedes localizarlo fácilmente mediante el comando
 ``php -i``, busca la ruta bajo el epígrafe 'Loaded Configuration File'. Cuando 
@@ -129,12 +129,12 @@ Producción
 ==========
 
 Se llama entorno de Producción porque es el lugar al que accederán los usuarios
-finales de la aplicación web. Una instalación para Producción es más flexible.
-Este ejemplo te permitirá que un dominio actúe como una única aplicación
-CakePHP. Podrás instalar CakePHP en el directorio que prefieras dentro de tu
-sistema de ficheros y tendrás tu aplicación disponible en
-http://www.example.com. Ten en cuenta que esta instalación requiere que tengas
-permiso para escribir en el directorio raíz de tu servidor web *document root*.
+finales de la aplicación web. Una instalación en Producción es una forma más flexible de configurar
+CakePHP. Usando este método permite que un dominio completo actúe como una única aplicación CakePHP.
+El siguiente ejemplo permitirá ayudar a instalar CakePHP en cualquier parte del sistema de archivos
+y tener la aplicación disponible en http://www.example.com. 
+Ten en cuenta que esta instalación requiere que tengas permiso de escritura en el 
+directorio raíz de tu servidor web *document root*.
 
 Descomprime los contenidos del paquete que has descargado con la última versión
 de CakePHP en el directorio que prefieras. No es necesario que sea una carpeta
@@ -146,7 +146,7 @@ entonces:
    
    -  /app
       
-      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot``   en el servidor web
+      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot`` en el servidor web
 
    -  /lib
    -  /vendors
@@ -179,14 +179,14 @@ Instalación avanzada y configuración flexible
 Vamos a ver de qué es capaz tu recientemente instalado CakePHP. Dependiendo de
 qué opción de configuración hayas elegido, podrás acceder a tu aplicación
 mediante http://www.example.com/ o http://example.com/cake\_install/. Verás una
-página de bienvenida por defecto, que mostrará un mensaje que te dice el estado
-de tu conexión actual de Base de Datos.
+página de bienvenida por defecto, que mostrará un mensaje que te dice el estado 
+actual de conexión a la Base de Datos.
 
 ¡ Enhorabuena ! Estás preparado para empezar.
 
 ¿ No funciona ? Bueno, estas cosas pasan. Si aparece un mensaje de error que
-habla de la Zona Horaria *timezone*, quita el comentario a la siguiente línea de
-tu fichero app/Config/core.php:
+habla de la Zona Horaria *timezone*, quita el comentario en la siguiente línea del
+fichero app/Config/core.php:
 
 ::
 
