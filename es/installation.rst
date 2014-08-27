@@ -2,9 +2,9 @@ Instalación
 ###########
 
 CakePHP se instala de forma fácil y rápidamente. Los requisitos mínimos son: un servidor
-web y una copia de los archivos de CakePHP ¡Eso es todo! Aunque este manual se centra en la configuración de Apache, ya que
-es el servidor web más común, se puede configurar CakePHP para que funcione en
-otros servidores como LightHTTPD o Microsoft IIS.
+web y una copia de los archivos de CakePHP ¡Eso es todo! Aunque este manual se centra en 
+la configuración de Apache, ya que es el servidor web más común, se puede configurar 
+CakePHP para que funcione en otros servidores como LightHTTPD o Microsoft IIS.
 
 Vamos a preparar el proceso de instalación, que consta de los siguientes pasos:
 
@@ -129,8 +129,8 @@ Producción
 ==========
 
 Se llama entorno de Producción porque es el lugar al que accederán los usuarios
-finales de la aplicación web. Una instalación en Producción es una forma más flexible de configurar CakePHP.
-Usando este método permite que un dominio completo actúe como una única aplicación CakePHP.
+finales de la aplicación web. Una instalación en Producción es una forma más flexible de configurar
+CakePHP. Usando este método permite que un dominio completo actúe como una única aplicación CakePHP.
 El siguiente ejemplo permitirá ayudar a instalar CakePHP en cualquier parte del sistema de archivos
 y tener la aplicación disponible en http://www.example.com. 
 Ten en cuenta que esta instalación requiere que tengas permiso de escritura en el 
@@ -146,7 +146,7 @@ entonces:
    
    -  /app
       
-      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot``   en el servidor web
+      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot`` en el servidor web
 
    -  /lib
    -  /vendors
