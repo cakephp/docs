@@ -585,7 +585,7 @@ something like this::
 
     Router:scope('/', function($routes) {
         $routes->extensions(['json']);
-        $routes->resources('recipes');
+        $routes->resources('Recipes');
     });
 
 The first line sets up a number of default routes for easy REST
