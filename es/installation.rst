@@ -90,8 +90,8 @@ La estructura de directorios debería ser ahora similar a esta:
      -  /index.php
      -  /README
 
-Si la configuración de tu servidor web es correcta, ahora podrás acceder a tu aplicación accediendo a:
-http://localhost/cake20 .
+Si la configuración de tu servidor web es correcta, ahora podrás acceder a tu aplicación accediendo
+a: http://localhost/cake20 .
 
 Usando una misma instalación de CakePHP para múltiples aplicaciones
 -------------------------------------------------------------------
