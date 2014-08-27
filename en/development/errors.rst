@@ -69,10 +69,10 @@ use a class called ``AppError`` to handle your errors. By extending the
 
     class AppError extends BaseErrorHandler {
         public function _displayError($error, $debug) {
-            echo 'There has been an error!';
+            return 'There has been an error!';
         }
         public function _displayException($exception) {
-            echo 'There has been an exception!';
+            return 'There has been an exception!';
         }
     }
 
@@ -103,7 +103,7 @@ standard error page, you can override it like::
         // Other methods.
 
         public function handleFatalError($code, $description, $file, $line) {
-            echo 'A fatal error has happened';
+            return 'A fatal error has happened';
         }
     }
 
@@ -400,7 +400,7 @@ specific errors::
 
     class AppExceptionRenderer extends ExceptionRenderer {
         public function missingWidget($error) {
-            echo 'Oops that widget is missing!';
+            return 'Oops that widget is missing!';
         }
     }
 
@@ -408,7 +408,9 @@ specific errors::
 The above would handle any exceptions of the type ``MissingWidgetException``,
 and allow you to provide custom display/handling logic for those application
 exceptions.  Exception handling methods get the exception being handled as
-their argument.
+their argument. Your custom exception rendering can return either a string or
+a ``Response`` object. By returning a ``Response`` you can take full control
+over the entire response.
 
 .. note::
 

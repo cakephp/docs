@@ -590,6 +590,14 @@ SessionComponent
 - ``SessionComponent::setFlash()`` is deprecated. You should use
   :doc:`/core-libraries/components/flash` instead.
 
+Error
+-----
+
+Custom ExceptionRenderers are now expected to either return
+a ``Cake\\Network\\Response`` object or string when rendering errors. This means
+that any methods handling specific exceptions must return a response or string
+value.
+
 Model
 =====
 
