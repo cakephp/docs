@@ -131,11 +131,15 @@ interesting let's add another command that does something::
         }
     }
 
-After saving this file, you should be able to run ``Console/cake hello hey_there
-your-name`` and see your name printed out. Any public method not prefixed by an
-``_`` is allowed to be called from the command line. As you can see, methods
-invoked from the comand line are transformed from the underscored shell argument to
-the correct camel-cased method name in the class.
+After saving this file, you should be able to run the following command and
+see your name printed out::
+
+    Console/cake hello hey_there your-name
+
+Any public method not prefixed by an ``_`` is allowed to be called from the
+command line. As you can see, methods invoked from the comand line are
+transformed from the underscored shell argument to the correct camel-cased
+method name in the class.
 
 In our ``heyThere()`` method we can see that positional arguments are provided to our
 ``heyThere()`` function. Positional arguments are also available in the ``args`` property.
@@ -195,7 +199,7 @@ Tasks are stored in ``Shell/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
 ``src/Shell/Task/FileGeneratorTask.php``.
 
-Each task must at least implement an ``main()`` method. The ShellDispatcher,
+Each task must at least implement a ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
 
     class FileGeneratorTask extends Shell {
