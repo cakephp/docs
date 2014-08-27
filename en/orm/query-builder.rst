@@ -148,7 +148,7 @@ method::
 
 You can set aliases for fields by providing fields as an associative array::
 
-    // Results in SELECT id pk, title aliased_title, body ...
+    // Results in SELECT id AS pk, title AS aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
