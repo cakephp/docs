@@ -137,7 +137,7 @@ see your name printed out::
     Console/cake hello hey_there your-name
 
 Any public method not prefixed by an ``_`` is allowed to be called from the
-command line. As you can see, methods invoked from the comand line are
+command line. As you can see, methods invoked from the command line are
 transformed from the underscored shell argument to the correct camel-cased
 method name in the class.
 
