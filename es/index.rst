@@ -21,19 +21,19 @@ Crear un Blog
 -------------
 
 Empezar con el: doc: :doc:`tutorial Blog</tutorials-and-examples/blog/blog>`.
-Usted aprenderá los conceptos básicos de CakePHP, y crear un blog básico en el proceso.
+Aprenderá los conceptos básicos de CakePHP, y a crear un blog básico en el proceso.
 
 Convenciones
 ------------
 
-Aprende acerca de una típica :doc:`petición en CakePHP
-</getting-started/a-typical-cakephp-request>`y las  :doc:`convenciones
-</getting-started/cakephp-conventions>` que rijen y le dan fueraza a CakePHP.
+Aprende acerca de una :doc:`petición típica en CakePHP
+</getting-started/a-typical-cakephp-request>` y las  :doc:`convenciones
+</getting-started/cakephp-conventions>` que sigue y fortalecen CakePHP.
 
 Controladores
 -------------
 
-Los Controladores traminan las solicitudes, y ayudan a coordinar y preparar
+Los Controladores tramitan las solicitudes, y ayudan a coordinar y preparar
 la respuesta para el cliente. Lea más sobre ellos :doc:`/controllers`
 
 Vistas
