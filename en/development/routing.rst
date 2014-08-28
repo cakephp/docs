@@ -407,7 +407,7 @@ simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
-``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
+``src/Controller/Admin/UsersController.php`` passing 5 as the first parameter. The
 view file used would be ``src/Template/Admin/Users/edit.ctp``
 
 You can map the URL /admin to your ``index`` action of pages controller using
