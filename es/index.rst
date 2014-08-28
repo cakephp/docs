@@ -27,7 +27,7 @@ Convenciones
 ------------
 
 Aprende acerca de una :doc:`petición típica en CakePHP
-</getting-started/a-typical-cakephp-request>`y las  :doc:`convenciones
+</getting-started/a-typical-cakephp-request>` y las  :doc:`convenciones
 </getting-started/cakephp-conventions>` que sigue y fortalecen CakePHP.
 
 Controladores
