@@ -1199,7 +1199,7 @@ code you wrote, you can use ``bake``:
 
 .. code-block:: bash
 
-    Console/cake bake test <type> <name>
+    bin/cake bake test <type> <name>
 
 ``<type>`` should be one of:
 

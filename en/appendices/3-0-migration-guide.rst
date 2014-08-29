@@ -175,6 +175,10 @@ of these methods have been extracted into traits. You can use the
 Console
 =======
 
+The ``cake`` executable has been moved from the ``app/Console`` directory to the
+``bin`` directory within the application skeleton. You can now invoke CakePHP's
+console with ``bin/cake``.
+
 TaskCollection Replaced
 -----------------------
 
@@ -193,7 +197,7 @@ Shell
 
 Additionally all shell methods will be transformed to camel case when invoked.
 For example, if you had a ``hello_world()`` method inside a shell and invoked it
-with ``Console/cake my_shell hello_world``, you will need to rename the method
+with ``bin/cake my_shell hello_world``, you will need to rename the method
 to ``helloWorld``. There are no changes required in the way you invoke commands.
 
 
@@ -212,7 +216,7 @@ and the online documentation/`API <http://api.cakephp.org/>`_.
 ExtractTask
 -----------
 
-- ``Console/cake i18n extract`` no longer includes untranslated validation
+- ``bin/cake i18n extract`` no longer includes untranslated validation
   messages. If you want translated validation messages you should wrap those
   messages in `__()` calls like any other content.
 

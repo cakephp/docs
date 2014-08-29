@@ -26,7 +26,7 @@ For the first step commands outputs the available Shell Commands, including
 plugin name when applicable. (All returned possibilities, for this and the other
 sub commands, are separated by a space.) For example::
 
-    Console/cake Completion commands
+    bin/cake Completion commands
 
 Returns::
 
@@ -42,7 +42,7 @@ Once the preferred command has been chosen subCommands comes in as the second
 step and outputs the possible sub command for the given shell command. For
 example::
 
-    Console/cake Completion subcommands bake
+    bin/cake Completion subcommands bake
 
 Returns::
 
@@ -55,7 +55,7 @@ As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)
 For example::
 
-    Console/cake Completion options bake
+    bin/cake Completion options bake
 
 Returns::
 
@@ -115,4 +115,4 @@ The following bash example comes from the original author::
         return 0;
     }
 
-    complete -F _cake cake Console/cake
+    complete -F _cake cake bin/cake

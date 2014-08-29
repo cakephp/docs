@@ -11,7 +11,7 @@ une étape naturelle à suivre une fois qu'une application a été prototypée.
 
 Suivant la configuration de votre installation, vous devrez peut être donner
 les droits d'exécution au script bash cake ou l'appeler avec la commande
-``./Console/cake bake``.
+``./bin/cake bake``.
 La console cake est exécutée en utilisant le CLI PHP
 (Interface de Ligne de Commande). Si vous avez des problèmes en exécutant ce
 script, vérifiez que le CLI PHP est installé et qu'il a les bons modules
@@ -24,7 +24,7 @@ base de données est configurée. Regardez la section dans
 :ref:`database configuration <database-configuration>` pour plus d'informations.
 configuration de la base de données, si vous n'en avez pas créé un auparavant.
 
-Quand vous lancer sans arguments ``Console/cake bake``, cela va afficher une
+Quand vous lancer sans arguments ``bin/cake bake``, cela va afficher une
 liste des tâches disponibles. Vous devriez voir quelque chose comme::
 
     ---------------------------------------------------------------
@@ -47,13 +47,13 @@ liste des tâches disponibles. Vous devriez voir quelque chose comme::
     test
     view
 
-    En utilisant Console/cake bake [name] vous pouvez faire appel à une tâche
+    En utilisant bin/cake bake [name] vous pouvez faire appel à une tâche
     spécifique de bake.
 
 Vous pouvez obtenir plus d'informations sur ce que chaque tâche fait et quelles
 options sont disponibles en utilisant l'option ``--help``::
 
-    $ Console/cake bake model --help
+    $ bin/cake bake model --help
 
 
 Créer des nouvelles Tâches pour Bake
@@ -116,8 +116,8 @@ ajouterons le contenu suivant::
     }
 
 Vous devriez maintenant voir votre nouvelle tâche dans l'affichage de
-``Console/cake bake``. Vous pouvez lancer votre nouvelle tâche en executant
-``Console/cake bake shell Example --theme app``.
+``bin/cake bake``. Vous pouvez lancer votre nouvelle tâche en executant
+``bin/cake bake shell Example --theme app``.
 Cela va générer une nouvelle classe ``ExampleShell`` que votre application va
 utiliser.
 

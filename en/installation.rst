@@ -135,9 +135,9 @@ Development
 A development installation is the fastest method to setup CakePHP.
 In this example, we will be using CakePHP's console to run PHP's built-in
 web server which will make your application available at
-``http://host:port``. From the ``src`` directory, execute::
+``http://host:port``. From the app directory, execute::
 
-    Console/cake server
+    bin/cake server
 
 By default, without any arguments provided, this will serve your application
 at ``http://localhost:8765/``.
@@ -146,7 +146,7 @@ If you have something conflicting with ``localhost`` or ``port 8765``, you can
 tell the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments::
 
-    Console/cake server -H 192.168.13.37 -p 5673
+    bin/cake server -H 192.168.13.37 -p 5673
 
 This will serve your application at ``http://192.168.13.37:5673/``.
 

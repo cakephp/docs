@@ -138,7 +138,7 @@ utilizaremos la consola de CakePHP para ejecutar el servidor web nativo
 de PHP para hacer que tu aplicación esté disponible en ``http://host:port``.
 Para ello ejecuta desde el directorio ``src``::
 
-    Console/cake server
+    bin/cake server
 
 Por defecto, sin ningún argumento, esto colocará tu aplicación en ``http://localhost:8765/``.
 
@@ -146,7 +146,7 @@ Si tienes algún conflicto con ``localhost`` o ``port 8765``, puedes indicarle
 a la consola de CakePHP que corra el servidor de manera más específica utilizando
 los siguientes argumentos::
 
-    Console/cake server -H 192.168.13.37 -p 5673
+    bin/cake server -H 192.168.13.37 -p 5673
 
 Esto colocará tu aplicación en ``http://192.168.13.37:5673/``.
 

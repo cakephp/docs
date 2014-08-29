@@ -6,19 +6,19 @@ votre application. Dans les situations de déploiement, il est utile de
 reconstruire le cache des metadata déjà en place sans enlever les données du
 cache existantes. Vous pouvez faire ceci en lançant::
 
-    Console/cake orm_cache build --connection default
+    bin/cake orm_cache build --connection default
 
 Ceci va reconstruire le cache de metadata pour toutes les tables sur la
 connection ``default``. Si vous avez besoin seulement de reconstruire une table
 unique, vous pouvez ceci en fournissant son nom::
 
-    Console/cake orm_cache build --connection default articles
+    bin/cake orm_cache build --connection default articles
 
 En plus de construire les données mises en cache, vous pouvez utiliser aussi
 OrmCacheShell pour retirer les metadata mis en cache::
 
     # Nettoyer toutes les metadata
-    Console/cake orm_cache clear
+    bin/cake orm_cache clear
 
     # Nettoyer une table unique
-    Console/cake orm_cache clear articles
+    bin/cake orm_cache clear articles

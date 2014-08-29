@@ -210,12 +210,12 @@ shell.
 
 In order to bake a plugin please use the following command::
 
-    $ Console/cake bake plugin ContactManager
+    $ bin/cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers::
 
-    $ Console/cake bake controller --plugin ContactManager Contacts
+    $ bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you

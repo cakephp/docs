@@ -49,7 +49,7 @@ will be our template for our new cell.
 
 You can generate this stub code quickly using ``bake``::
 
-    Console/cake bake cell Inbox
+    bin/cake bake cell Inbox
 
 Would generate the code we typed out.
 
