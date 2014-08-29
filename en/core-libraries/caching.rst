@@ -145,19 +145,21 @@ The required API for a CacheEngine is
     Write value for a key into cache, optional string $config
     specifies configuration name to write to.
 
-.. php:method:: read($key)
+.. php:method:: read($key, $config = 'default')
 
     :return: The cached value or false for failure.
 
-    Read a key from the cache. Return false to indicate
-    the entry has expired or does not exist.
+    Read a key from the cache, optional string $config
+    specifies configuration name to read from. Return false to
+    indicate the entry has expired or does not exist.
 
-.. php:method:: delete($key)
+.. php:method:: delete($key, $config = 'default')
 
     :return: Boolean true on success.
 
-    Delete a key from the cache. Return false to indicate that
-    the entry did not exist or could not be deleted.
+    Delete a key from the cache, optional string $config
+    specifies configuration name to delete from. Return false to
+    indicate that the entry did not exist or could not be deleted.
 
 .. php:method:: clear($check)
 
