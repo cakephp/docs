@@ -281,6 +281,11 @@ We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
 queries.
 
+In the initialize() Method of your Table class, you can update the column type for a specific column by doing the following:
+
+    $this->schema()->columnType('your_column', 'json');
+
+
 Connection Classes
 ==================
 
