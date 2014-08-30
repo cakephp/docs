@@ -23,7 +23,7 @@ disponibles, y compris le nom du plugin quand il est valable. (Toutes les
 possibilités retournées, pour celle-ci et les autres sous-commandes, sont
 séparées par un espace.) Par exemple::
 
-    ./Console/cake Completion commands
+    ./bin/cake Completion commands
 
 Retourne::
 
@@ -39,7 +39,7 @@ Une fois que la commande préférée a été choisie, les subCommands apparaisse
 à la deuxième étape et sort la sous-commande possible pour la commande de
 shell donnée. Par exemple::
 
-    ./Console/cake Completion subcommands bake
+    ./bin/cake Completion subcommands bake
 
 Retourne::
 
@@ -53,7 +53,7 @@ commande donnée comme défini dans getOptionParser. (Y compris les options par
 défaut héritées du Shell.)
 Par exemple::
 
-    ./Console/cake Completion options bake
+    ./bin/cake Completion options bake
 
 Retourne::
 
@@ -113,4 +113,4 @@ L'exemple de bash suivant provient de l'auteur original::
         return 0;
     }
 
-    complete -F _cake cake Console/cake
+    complete -F _cake cake bin/cake

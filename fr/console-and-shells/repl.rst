@@ -6,13 +6,13 @@ Le squelette de l'app CakePHP app intègre un REPL(Read Eval Print Loop
 de votre application avec une console interactive. Vous pouvez commencer la
 console interactive en utilisant::
 
-    $ Console/cake console
+    $ bin/cake console
 
 Cela va démarrer votre application et lancer une console interactive. A ce
 niveau-là, vous pouvez intéragir avec le code de votre application et executer
 des requêtes en utilisant les models de votre application::
 
-    $ Console/cake console
+    $ bin/cake console
 
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------

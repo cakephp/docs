@@ -8,21 +8,21 @@ applications cakePHP de la version 1.3 à 2.0.
 
 Pour lancer la mise à jour::
 
-    ./Console/cake upgrade all
+    ./bin/cake upgrade all
 
 Si vous voulez voir ce que le shell va faire sans modifier les fichiers,
 faîtes d'abord une exécution à blanc avec --dry-run::
 
-    ./Console/cake upgrade all --dry-run
+    ./bin/cake upgrade all --dry-run
 
 Pour mettre à jour vos Plugins, lancer la commande::
 
-    ./Console/cake upgrade all --plugin YourPluginName
+    ./bin/cake upgrade all --plugin YourPluginName
 
 Il est aussi possible de lancer chaque mise à jour individuellement. Pour voir
 toutes les étapes possibles, lancez la commande::
 
-    ./Console/cake upgrade --help
+    ./bin/cake upgrade --help
 
 Ou allez voir les
 `docs de l'API <http://api.cakephp.org/2.4/class-UpgradeShell.html>`_
@@ -78,7 +78,7 @@ La structure de votre dossier devrait ressembler à cela maintenant::
 Maintenant nous pouvons lancer la mise à jour shell en tapant ``cd`` puis le
 chemin vers votre app et en lancant la commande::
 
-    ./Console/cake upgrade all
+    ./bin/cake upgrade all
 
 Cela fera la **plupart** du travail pour mettre à jour votre app vers 2.x.
 Vérifiez dans votre dossier ``app`` mis à jour. Si tout a l'air bien, félicitez

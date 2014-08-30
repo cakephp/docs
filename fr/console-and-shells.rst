@@ -46,7 +46,7 @@ tous les shells et les tâches pour une application. Il est aussi livré avec
 un exécutable::
 
     $ cd /path/to/cakephp/app
-    $ Console/cake
+    $ bin/cake
 
 Lancez la Console avec aucun argument entraîne ce message d'aide::
 
@@ -108,7 +108,7 @@ supplémentaire. Nous allons ajouter quelques commandes en plus dans un moment,
 mais pour l'instant lançons juste notre shell. Depuis le répertoire de votre
 application, lancez::
 
-    Console/cake hello
+    bin/cake hello
 
 Vous devriez voir la sortie suivante::
 
@@ -142,7 +142,7 @@ pas très intéressante, ajoutons une autre commande qui fait quelque chose::
         }
     }
 
-After saving this file, you should be able to run ``Console/cake hello hey_there
+After saving this file, you should be able to run ``bin/cake hello hey_there
 your-name`` and see your name printed out. Any public method not prefixed by an
 ``_`` is allowed to be called from the command line. As you can see, methods
 invoked from the comand line are transformed from the underscored shell argument to

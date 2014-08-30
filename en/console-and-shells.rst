@@ -40,8 +40,8 @@ currently at the root of a CakePHP application.
 CakePHP applications contain a ``Console`` directory that contains all the
 shells and tasks for an application. It also comes with an executable::
 
-    $ cd /path/to/app/src
-    $ Console/cake
+    $ cd /path/to/app
+    $ bin/cake
 
 Running the Console with no arguments produces this help message::
 
@@ -98,7 +98,7 @@ This method is called when a shell is called with no additional commands. We'll 
 some more commands in a bit, but for now let's just run our shell. From your application
 directory, run::
 
-    Console/cake hello
+    bin/cake hello
 
 You should see the following output::
 
@@ -134,7 +134,7 @@ interesting let's add another command that does something::
 After saving this file, you should be able to run the following command and
 see your name printed out::
 
-    Console/cake hello hey_there your-name
+    bin/cake hello hey_there your-name
 
 Any public method not prefixed by an ``_`` is allowed to be called from the
 command line. As you can see, methods invoked from the command line are
