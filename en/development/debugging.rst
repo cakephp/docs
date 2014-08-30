@@ -31,7 +31,7 @@ a stack trace whereever the function is called.
 Using the Debugger Class
 ========================
 
-.. php:namespace:: Cake\Utility
+.. php:namespace:: Cake\Error
 
 .. php:class:: Debugger
 
