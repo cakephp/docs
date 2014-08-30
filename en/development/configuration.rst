@@ -38,7 +38,7 @@ configuration into multiple files. After creating each of the files in your
 ``config/`` directory you can load them during bootstrap.php::
 
     use Cake\Core\Configure;
-    use Cake\Configure\Engine\PhpConfig;
+    use Cake\Core\Configure\Engine\PhpConfig;
 
     Configure::config('default', new PhpConfig());
     Configure::load('app.php', 'default', false);
@@ -347,14 +347,15 @@ Reading and writing configuration files
 =======================================
 
 CakePHP comes with two built-in configuration file engines.
-:php:class:`Cake\\Configure\\Engine\\PhpConfig` is able to read PHP config files, in the same
-format that Configure has historically read. :php:class:`Cake\\Configure\\Engine\\IniConfig` is
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config files, in the same
+format that Configure has historically read. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` is
 able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config engine, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
-    use Cake\\Configure\\Engine\\PhpConfig;
+    use Cake\\Core\\Configure\\Engine\\PhpConfig;
+
     // Read config files from config
     Configure::config('default', new PhpConfig());
 
@@ -474,7 +475,7 @@ Creating your Own Configuration Engines
 
 Since configuration engines are an extensible part of CakePHP,
 you can create configuration engines in your application and plugins.
-Configuration engines need to implement the :php:interface:`Cake\\Configure\\ConfigEngineInterface`.
+Configuration engines need to implement the :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.
 This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 engine for you application::
@@ -503,7 +504,7 @@ engine for you application::
 
 In your ``config/bootstrap.php`` you could attach this engine and use it::
 
-    use Cake\\Configure\\Engine\\XmlConfig;
+    use Cake\\Core\\Configure\\Engine\\XmlConfig;
     Configure::config('xml', new XmlConfig());
     ...
 
@@ -512,7 +513,7 @@ In your ``config/bootstrap.php`` you could attach this engine and use it::
 The ``read()`` method of a config engine, must return an array of the configuration information
 that the resource named ``$key`` contains.
 
-.. php:namespace:: Cake\Configure
+.. php:namespace:: Cake\Core\Configure
 
 .. php:interface:: ConfigEngineInterface
 

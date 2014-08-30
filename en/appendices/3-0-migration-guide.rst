@@ -158,9 +158,9 @@ Configure
 
 The config reader classes have been renamed:
 
-- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
-- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
-- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Configure\\ConfigEngineInterface`
+- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
+- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
+- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 
 Object
