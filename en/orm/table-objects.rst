@@ -2130,9 +2130,9 @@ important note should be made.
     those records will be discarded from the resulting entity.
     
 .. note::
-    Remember that using either ``patchEntity`` or ``patchEntities`` 
+    Remember that using either ``patchEntity()`` or ``patchEntities()`` 
     does not persist the data, it just edits (or creates) the given entities. In order to
-    persist the entity you will have to call the ``save`` method
+    save the entity you will have to call the ``save()`` method.
 
 For example, consider the following case::
 
