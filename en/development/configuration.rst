@@ -507,7 +507,7 @@ engine for you application::
 
 In your ``config/bootstrap.php`` you could attach this engine and use it::
 
-    use App\Engine\XmlConfig;
+    use App\Configure\Engine\XmlConfig;
 
     Configure::config('xml', new XmlConfig());
     ...
