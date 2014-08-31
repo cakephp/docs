@@ -1015,10 +1015,10 @@ The Set class has been removed, you should use the Hash class instead now.
 Inflector
 ---------
 
-Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed. If
-you use custom transliterations you will need to update your code. Instead of
-regular expressions, transliterations use simple string replacement. This
-yielded significant performance improvements::
+- Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
+  If you use custom transliterations you will need to update your code. Instead
+  of regular expressions, transliterations use simple string replacement. This
+  yielded significant performance improvements::
 
     // Instead of
     Inflector::rules('transliteration', array(
@@ -1033,6 +1033,15 @@ yielded significant performance improvements::
         'å' => 'aa'
     ]);
 
+- Separate set of uninflected and irregular rules for pluralization and
+  singularization have been removed. Instead we now have a common list for each.
+  When using :php:meth:`Cake\\Utility\\Inflector::rules()` with type 'singular'
+  and 'plural' you can no longer use keys like 'uninflected', 'irregular' in
+  ``$rules`` argument array.
+
+  You can add / overwrite the list of uninflected and irregular rules using
+  :php:meth:`Cake\\Utility\\Inflector::rules()` by using values 'uninflected' and
+  'irregular' for ``$type`` argument.
 
 Sanitize
 --------
