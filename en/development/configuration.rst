@@ -35,7 +35,7 @@ Loading Additional Configuration Files
 
 If your application has many configuration options it can be helpful to split
 configuration into multiple files. After creating each of the files in your
-``config/`` directory you can load them during bootstrap.php::
+``config/`` directory you can load them in ``bootstrap.php``::
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -480,13 +480,17 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 engine for you application::
 
-    // In app/Lib/Configure/Engine/XmlConfig.php
-    use Cake\\Utility\\Xml;
+    // In src/Engine/XmlConfig.php
+    namespace App\Engine;
+
+    use Cake\Core\Configure\ConfigEngineInterface;
+    use Cake\Utility\Xml;
 
     class XmlConfig implements ConfigEngineInterface {
+
         public function __construct($path = null) {
             if (!$path) {
-                $path = APP . 'Config' . DS;
+                $path = CONFIG;
             }
             $this->_path = $path;
         }
@@ -496,7 +500,6 @@ engine for you application::
             return Xml::toArray($xml);
         }
 
-        // As of 2.3 a dump() method is also required
         public function dump($key, $data) {
             // Code to dump data to file
         }
@@ -504,11 +507,12 @@ engine for you application::
 
 In your ``config/bootstrap.php`` you could attach this engine and use it::
 
-    use Cake\\Core\\Configure\\Engine\\XmlConfig;
+    use App\Engine\XmlConfig;
+
     Configure::config('xml', new XmlConfig());
     ...
 
-    Configure::load('my_xml');
+    Configure::load('my_xml', 'xml');
 
 The ``read()`` method of a config engine, must return an array of the configuration information
 that the resource named ``$key`` contains.
@@ -534,12 +538,6 @@ that the resource named ``$key`` contains.
 
     This method should dump/store the provided configuration data to a key identified by ``$key``.
 
-.. php:exception:: ConfigureException
-
-    Thrown when errors occur when loading/storing/restoring configuration data.
-    :php:interface:`ConfigEngineInterface` implementations should throw this
-    error when they encounter an error.
-
 Built-in Configuration Engines
 ------------------------------
 
@@ -562,7 +560,7 @@ Built-in Configuration Engines
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in config/bootstrap.php::
+    Load your custom configuration file by inserting the following in ``config/bootstrap.php``::
 
         Configure::load('customConfig');
 
@@ -594,7 +592,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, use CakePHP's
-bootstrap file, found in config/bootstrap.php. This file is
+bootstrap file, found in ``config/bootstrap.php``. This file is
 executed just after CakePHP's core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:
