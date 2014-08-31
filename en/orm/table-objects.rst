@@ -2087,6 +2087,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
+    $articles->save($article);
 
 As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity`` method is equally capable of
@@ -2098,6 +2099,7 @@ merge deeper to deeper levels, you can use the third parameter of the method::
     $articles->patchEntity($article, $this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+    $articles->save($article);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2126,6 +2128,11 @@ important note should be made.
     For  hasMany and belongsToMany associations, if there were any entities that
     could not be matched by primary key to any record in the data array, then
     those records will be discarded from the resulting entity.
+    
+.. note::
+    Remember that using either ``patchEntity`` method:: or ``patchEntities`` method::
+    does not persist the data, it just edits (or creates) the given entities. In order to
+    persist the entity you will have to call the ``save`` method::
 
 For example, consider the following case::
 
@@ -2146,6 +2153,7 @@ For example, consider the following case::
         ]
     ];
     $articles->patchEntity($entity, $newData);
+    $articles->save($article);
 
 At the end, if the entity is converted back to an array you will obtain the
 following result::
@@ -2189,6 +2197,9 @@ the original entities array will be removed and not present in the result::
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->data());
+    foreach ($patched as $entity) {
+        $articles->save($entity);
+    }
 
 Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
@@ -2211,6 +2222,7 @@ owner of an article, causing undesirable effects::
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
+    $this->save($entity);
 
 There are two ways of protecting you against this problem. The first one is by
 setting the default columns that can be safely set from a request using the
@@ -2226,6 +2238,7 @@ data into an entity::
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);
+    $this->save($entity);
 
 You can also control which properties can be assigned for associations::
 
@@ -2235,6 +2248,7 @@ You can also control which properties can be assigned for associations::
         'fieldList' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
+    $this->save($entity);
 
 Using this feature is handy when you have many different functions your users
 can access and you want to let your users edit different data based on their
