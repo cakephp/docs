@@ -480,8 +480,8 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 engine for you application::
 
-    // In src/Engine/XmlConfig.php
-    namespace App\Engine;
+    // In src/Configure/Engine/XmlConfig.php
+    namespace App\Configure\Engine;
 
     use Cake\Core\Configure\ConfigEngineInterface;
     use Cake\Utility\Xml;
