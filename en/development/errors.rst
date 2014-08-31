@@ -107,7 +107,7 @@ standard error page, you can override it like::
         }
     }
 
-.. php:namespace:: Cake\Error
+.. php:namespace:: Cake\Network\Exception
 
 Exception Classes
 =================
@@ -130,7 +130,7 @@ exceptions for HTTP methods
 
     Used for doing 400 Bad Request error.
 
-.. php:exception::UnauthorizedException
+.. php:exception:: UnauthorizedException
 
     Used for doing a 401 Not found error.
 
@@ -172,6 +172,8 @@ RESTful responses to client applications and users.
 In addition, the following framework layer exceptions are available, and will
 be thrown from a number of CakePHP core components:
 
+.. php:namespace:: Cake\View\Exception
+
 .. php:exception:: MissingViewException
 
     The chosen view file could not be found.
@@ -184,13 +186,17 @@ be thrown from a number of CakePHP core components:
 
     A helper was not found.
 
-.. php:exception:: MissingBehaviorException
-
-    A configured behavior could not be found.
+.. php:namespace:: Cake\Controller\Exception
 
 .. php:exception:: MissingComponentException
 
     A configured component could not be found.
+
+.. php:exception:: MissingActionException
+
+    The requested controller action could not be found.
+
+.. php:namespace:: Cake\Console\Exception
 
 .. php:exception:: MissingTaskException
 
@@ -204,21 +210,19 @@ be thrown from a number of CakePHP core components:
 
     The chosen shell class has no method of that name.
 
-.. php:exception:: MissingDatabaseException
-
-    The configured database is missing.
+.. php:namespace:: Cake\Database\Exception
 
 .. php:exception:: MissingConnectionException
 
     A model's connection is missing.
 
+.. php:namespace:: Cake\ORM\Exception
+
 .. php:exception:: MissingTableException
 
     A model's table is missing.
 
-.. php:exception:: MissingActionException
-
-    The requested controller action could not be found.
+.. php:namespace:: Cake\Routing\Exception
 
 .. php:exception:: MissingControllerException
 
@@ -230,6 +234,8 @@ be thrown from a number of CakePHP core components:
     private/protected/_ prefixed actions, or trying
     to access prefixed routes incorrectly.
 
+.. php:namespace:: Cake\Core\Exception
+
 .. php:exception:: Exception
 
     Base exception class in CakePHP.  All framework layer exceptions thrown by
@@ -239,16 +245,11 @@ These exception classes all extend :php:exc:`Exception`.
 By extending Exception, you can create your own 'framework' errors.
 All of the standard Exceptions that CakePHP will throw also extend Exception.
 
-.. php:exception:: BaseException
-
-    Base exception class in CakePHP.
-    All CakeExceptions and HttpExceptions above extend this class.
-
 .. php:method:: responseHeader($header = null, $value = null)
 
-    See :php:func:`CakeResponse::header()`
+    See :php:func:`Cake\\Network\\Request::header()`
 
-All Http and Cake exceptions extend the CakeBaseException class, which has a method
+All Http and Cake exceptions extend the Exception class, which has a method
 to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
 the rfc2616 says:
 
@@ -301,22 +302,22 @@ Creating your own Application Exceptions
 
 You can create your own application exceptions using any of the built in `SPL
 exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
-itself, or :php:exc:`Cake\\Error\\Exception`.  Application exceptions that
+itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.  Application exceptions that
 extend Exception or the SPL exceptions will be treated as 500 error in
-production mode.  :php:exc:`Cake\\Error\\Exception` is special in that all
-:php:exc:`Cake\\Error\\Exception` objects are coerced into into either 500 or
+production mode.  :php:exc:`Cake\\Core\\Exception\\Exception` is special in that all
+:php:exc:`Cake\\Core\\Exception\\Exception` objects are coerced into into either 500 or
 404 errors depending on the code they use.  When in development mode
-:php:exc:`Cake\\Error\\Exception` objects simply need a new template that
+:php:exc:`Cake\\Core\\Exception\\Exception` objects simply need a new template that
 matches the class name in order to provide useful information.  If your
 application contained the following exception::
 
-    use Cake\Error\Exception;
+    use Cake\Core\Exception\Exception;
 
     class MissingWidgetException extends Exception {};
 
 You could provide nice development errors, by creating
 ``src/Template/Error/missing_widget.ctp``.  When in production mode, the above
-error would be treated as a 500 error.  The constructor for :php:exc:`Cake\\Error\\Exception`
+error would be treated as a 500 error.  The constructor for :php:exc:`Cake\\Core\\Exception\\Exception`
 has been extended, allowing you to pass in hashes of data.  These hashes are
 interpolated into the the messageTemplate, as well as into the view that is used
 to represent the error in development mode.  This allows you to create data rich
@@ -324,7 +325,7 @@ exceptions, by providing more context for your errors.  You can also provide a m
 template which allows the native ``__toString()`` methods to work as normal::
 
 
-    use Cake\Error\Exception;
+    use Cake\Core\Exception\Exception;
 
     class MissingWidgetException extends Exception {
         protected $_messageTemplate = 'Seems that %s is missing.';
@@ -388,7 +389,7 @@ Using the exceptionRenderer Option of the Default Handler
 If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use the ``exceptionRenderer`` option in
 config/app.php to choose a class that will render exception pages.  By
-default :php:class:`Cake\\Error\\ExceptionRenderer` is used.  Your custom
+default :php:class:`Cake\\Core\\Exception\\ExceptionRenderer` is used.  Your custom
 exception renderer class should be placed in ``src/Error``.  In a custom
 exception rendering class you can provide specialized handling for application
 specific errors::
