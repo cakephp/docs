@@ -184,7 +184,19 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: MissingHelperException
 
-    A helper was not found.
+    The chosen helper could not be found.
+
+.. php:exception:: MissingElementException
+
+    The chosen element file could not be found.
+
+.. php:exception:: MissingCellException
+
+    The chosen cell class could not be found.
+
+.. php:exception:: MissingCellViewException
+
+    The chosen cell view file could not be found.
 
 .. php:namespace:: Cake\Controller\Exception
 
@@ -196,11 +208,21 @@ be thrown from a number of CakePHP core components:
 
     The requested controller action could not be found.
 
+.. php:exception:: PrivateActionException
+
+    Private action access.  Either accessing
+    private/protected/_ prefixed actions, or trying
+    to access prefixed routes incorrectly.
+
 .. php:namespace:: Cake\Console\Exception
+
+.. php:exception:: ConsoleException
+
+    A console library class encounter an error.
 
 .. php:exception:: MissingTaskException
 
-    A configured task was not found.
+    A configured task could not found.
 
 .. php:exception:: MissingShellException
 
@@ -216,11 +238,27 @@ be thrown from a number of CakePHP core components:
 
     A model's connection is missing.
 
+.. php:exception:: MissingDriverException
+
+    A database driver could not be found.
+
+.. php:exception:: MissingExtensionException
+
+    A PHP extension is missing for the database driver.
+
 .. php:namespace:: Cake\ORM\Exception
 
 .. php:exception:: MissingTableException
 
-    A model's table is missing.
+    A model's table could not be found.
+
+.. php:exception:: MissingEntityException
+
+    A model's entity could not be found.
+
+.. php:exception:: MissingBehaviorException
+
+    A model's behavior could not be found.
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -228,11 +266,13 @@ be thrown from a number of CakePHP core components:
 
     The requested controller could not be found.
 
-.. php:exception:: PrivateActionException
+.. php:exception:: MissingRouteException
 
-    Private action access.  Either accessing
-    private/protected/_ prefixed actions, or trying
-    to access prefixed routes incorrectly.
+    The requested URL cannot be reverse routed or cannot be parsed.
+
+.. php:exception:: MissingDispatcherFilterException
+
+    The dispatcher filter could not be found.
 
 .. php:namespace:: Cake\Core\Exception
 
