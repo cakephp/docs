@@ -1076,7 +1076,7 @@ Security
 Time
 ----
 
-- ``CakeTime`` has been renamed to :php:class:`Cake\\Utility\\Time`.
+- ``CakeTime`` has been renamed to :php:class:`Cake\\I18n\\Time`.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practises.
 - ``CakeTime::niceShort()`` has been removed.
 - ``CakeTime::convert()`` has been removed.
