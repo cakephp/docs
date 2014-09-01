@@ -125,7 +125,7 @@ ser algo así:
 
     <!-- File: /src/Template/Articles/index.ctp -->
 
-    <h1>Blog articles</h1>
+    <h1>Artículos</h1>
     <table>
         <tr>
             <th>Id</th>
@@ -401,97 +401,90 @@ mensajes de error se construyen automáticamente en la vista sin código adicion
 Editando Artículos
 ==================
 
-Seguro que ya le vas cogiendo el truco a esto. El método es siempre el mismo:
-primero la acción en el controlador, luego la vista.
-Aquí está el método edit():
+Editando artículos: allá vamos. Ya eres un profesional de CakePHP, así que
+habrás cogido la pauta. Crear una acción, luego la vista. He aquí cómo debería
+ser la acción ``edit()`` del controlador ``ArticlesController``::
 
-::
+    public function edit($id = null) {
+        if (!$id) {
+            throw new NotFoundException(__('Artículo no válido'));
+        }
 
-	public function edit($id = null) {
-	    if (!$id) {
-	        throw new NotFoundException(__('Invalid post'));
-	    }
+        $article = $this->Articles->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->data);
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Tu artículo ha sido actualizado.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Tu artículo no se ha podido actualizar.'));
+        }
 
-	    $post = $this->Post->findById($id);
-	    if (!$post) {
-	        throw new NotFoundException(__('Invalid post'));
-	    }
+        $this->set('article', $article);
+    }
 
-	    if ($this->request->is(array('post', 'put'))) {
-	        $this->Post->id = $id;
-	        if ($this->Post->save($this->request->data)) {
-	            $this->Session->setFlash(__('Your post has been updated.'));
-	            return $this->redirect(array('action' => 'index'));
-	        }
-	        $this->Session->setFlash(__('Unable to update your post.'));
-	    }
+Lo primero que hace este método es asegurarse de que el usuario ha intentado
+acceder a un registro existente. Si no han pasado el parámetro ``$id`` o el
+artículo no existe lanzaremos una excepción ``NotFoundException`` para que el
+``ErrorHandler`` se ocupe de ello.
 
-	    if (!$this->request->data) {
-	        $this->request->data = $post;
-	    }
-	}
+Luego verifica si la petición es POST o PUT. Si lo es, entonces utilizamos los
+datos recibidos para actualizar nuestra entidad artículo (``article``) utilizando
+el método 'patchEntity'. Finalmente utilizamos el objeto tabla para guardar la
+entidad de nuevo o mostrar errores de validación al usuario en caso de haberlos.
 
-Esta acción primero comprueba que se trata de un GET request. Si lo es, buscamos
-un *Post* con el id proporcionado como parámetro y lo ponemos a disposición para
-usarlo en la vista. Si la llamada no es GET, usaremos los datos que se envíen
-por POST para intentar actualizar nuestro artículo. Si encontramos algún error
-en estos datos, lo enviaremos a la vista sin guardar nada para que el usuario
-pueda corregirlos.
-
-La vista quedará así:
+La vista sería algo así:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/edit.ctp -->
+    <!-- File: src/Template/Articles/edit.ctp -->
 
-    <h1>Edit Post</h1>
+    <h1>Edit Article</h1>
     <?php
-        echo $this->Form->create('Post', array('action' => 'edit'));
+        echo $this->Form->create($article);
         echo $this->Form->input('title');
-        echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden'));
-        echo $this->Form->end('Save Post');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Guardar artículo'));
+        echo $this->Form->end();
+    ?>
 
 Mostramos el formulario de edición (con los valores actuales de ese artículo),
 junto a los errores de validación que hubiese.
 
-Una cosa importante, CakePHP asume que estás editando un modelo si su ``id``
-está presente en su array de datos. Si no hay un 'id' presente, CakePHP asumirá
-que es un nuevo elemento al llamar a la función ``save()``. Puedes actualizar un
-poco tu vista 'index' para añadir los enlaces de edición de un artículo
-específico:
+CakePHP utilizará el resultado de ``$article->isNew()`` para determinar si un
+``save()`` debería insertar un nuevo registro o actualizar uno existente.
+
+Puedes actualizar tu vista índice (``index``) con enlaces para editar artículos
+específicos:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
+    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
 
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+    <h1>Artículos</h1>
+    <p><?= $this->Html->link("Añadir artículo", ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Action</th>
             <th>Created</th>
+            <th>Action</th>
         </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Aquí es donde iteramos nuestro objeto de consulta $articles, mostrando en pantalla la información del artículo -->
 
-    <?php foreach ($posts as $post): ?>
+    <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
-                    </td>
-                    <td>
-                <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')
-                )?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Editar', ['action' => 'edit', $article->id]) ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 
