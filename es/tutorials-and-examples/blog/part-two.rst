@@ -493,28 +493,27 @@ específicos:
 Borrando Artículos
 ==================
 
-Vamos a permitir a los usuarios que borren artículos. Primero, el método en
-nuestro controlador:
+Vamos a permitir a los usuarios que borren artículos. Empieza con una acción
+``delete()`` en el controlador ``ArticlesController``::
 
-::
+    public function delete($id) {
+        $this->request->allowMethod(['post', 'delete']);
 
-    function delete($id) {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
-        if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
-            $this->redirect(array('action' => 'index'));
+        $article = $this->Articles->get($id);
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__('El artículo con id: %s ha sido eliminado.', h($id)));
+            return $this->redirect(['action' => 'index']);
         }
     }
 
-Este método borra un artículo cuyo 'id' enviamos como parámetro y usa
-``$this->Session->setFlash()`` para mostrar un mensaje si ha sido borrado. Luego
-redirige a '/posts/index'. Si el usuario intenta borrar un artículo mediante una
-llamada GET, generaremos una excepción. Las excepciónes que no se traten, serán
-procesadas por CakePHP de forma genérica, mostrando una bonita página de error.
-Hay muchas excepciones a tu disposición  :doc:`/development/exceptions` que
-puedes usar para informar de diversos problemas típicos.
+La lógica elimina el artículo especificado por $id y utiliza
+``$this->Flash->success()`` para mostrar al usuario un mensaje de confirmación
+tras haber sido redirigidos a ``/articles``. Si el usuario intenta eliminar
+utilizando una petición GET, el 'allowMethod' devolvería una Excepción. Las
+excepciones que no se traten serán capturadas por el manejador de excepciones
+de CakePHP (``exception handler``) y una bonita página de error es mostrada.
+Hay muchas :doc:`Excepciones </development/errors>` que pueden ser utilizadas
+para indicar los varios errores HTTP que tu aplicación pueda generar.
 
 Como estamos ejecutando algunos métodos y luego redirigiendo a otra acción de
 nuestro controlador, no es necesaria ninguna vista (nunca se usa). Lo que si
@@ -522,47 +521,55 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
 
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+    <h1>Artículos</h1>
+    <p><?= $this->Html->link("Añadir artículo", ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Actions</th>
             <th>Created</th>
+            <th>Action</th>
         </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Aquí es donde iteramos nuestro objeto de consulta $articles, mostrando en pantalla la información del artículo -->
 
-        <?php foreach ($posts as $post): ?>
+    <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-            <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
-            <?php echo $this->Form->postLink(
-                'Delete',
-                array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?'));
-            ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td>
+                <?= $this->Form->postLink(
+                    'Eliminar',
+                    ['action' => 'delete', $article->id],
+                    ['confirm' => '¿Estás seguro?'])
+                ?>
+                <?= $this->Html->link('Editar', ['action' => 'edit', $article->id]) ?>
+            </td>
         </tr>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
 
     </table>
 
+Utilizando :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` crearemos un
+enlace que utilizará JavaScript para hacer una petición POST que eliminará
+nuestro artículo. Permitiendo que contenido sea eliminado vía peticiones GET es
+peligroso, ya que arañas web (``crawlers``) podrían eliminar accidentalmente tu
+contenido.
+
 .. note::
 
-    Esta vista utiliza el FormHelper para pedir confirmación al usuario
-    antes de borrar un artículo. Además el enlace para borrar el artículo se
-    construye con Javascript para que se realice una llamada POST.
+    Esta vista utiliza el FormHelper para pedir confirmación vía diálogo de
+    confirmación de JavaScript al usuario antes de borrar un artículo.
 
-Rutas (*Routes*)
-================
+Rutas (``Routes``)
+==================
 
 En muchas ocasiones, las rutas por defecto de CakePHP funcionan bien tal y como
 están. Los desarroladores que quieren rutas diferentes para mejorar la
