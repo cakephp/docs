@@ -211,9 +211,7 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: PrivateActionException
 
-    Private action access.  Either accessing
-    private/protected/_ prefixed actions, or trying
-    to access prefixed routes incorrectly.
+    Accessing private/protected/_ prefixed actions.
 
 .. php:namespace:: Cake\Console\Exception
 
