@@ -1,8 +1,8 @@
 Tutorial de desarrollo del Blog - Añadiendo una capa
 ####################################################
 
-Crear un modelo Artículo (Article)
-==================================
+Crear un modelo Artículo (``Article``)
+======================================
 
 Los modelos son una parte fundamental en CakePHP. Cuando creamos un modelo,
 podemos interactuar con la base de datos para crear, editar, ver y borrar con
@@ -41,8 +41,8 @@ Para más información sobre modelos, como callbacks y validaciones echa un vist
 al capítulo del Manual :doc:`/orm`.
 
 
-Crear el Controlador de Artículos (Articles Controller)
-=======================================================
+Crear el Controlador de Artículos (``Articles Controller``)
+===========================================================
 
 Vamos a crear ahora un controlador para nuestros artículos. En el controlador es
 donde escribiremos el código para interactuar con nuestros artículos. Es donde
@@ -90,30 +90,30 @@ www.example.com/articles/foobar.
 La única instrucción en la acción utiliza ``set()`` para pasar datos desde el
 controlador hacia la vista (que crearemos a continuación). La línea en cuestión
 asigna una variable en la vista llamada 'articles' igual al valor retornado por
-el método ``find('all')`` del objeto de tabla Artículos (ArticlesTable).
+el método ``find('all')`` del objeto de tabla Artículos (``ArticlesTable``).
 
 Para aprender más sobre los controladores, puedes visitar el capítulo
 :doc:`/controllers`.
 
-Crear Vistas de Artículos (Article Views)
-=========================================
+Crear Vistas de Artículos (``Article Views``)
+=============================================
 
 Ahora que tenemos nuestros datos fluyendo por el modelo, y que la lógica de
 nuestra aplicación está definida en nuestro controlador, vamos a crear una vista
 para la acción índex creada en el paso anterior.
 
 Las vistas en CakePHP únicamente son fragmentos de presentación que encajan
-dentro de la plantilla (layout) de nuestra aplicación. Para la mayoría de
+dentro de la plantilla (``layout``) de nuestra aplicación. Para la mayoría de
 aplicaciones son HTML mezclados con PHP, pero bien podrían acabar siendo XML,
 CSV o incluso datos binarios.
 
-Una plantilla (layout) es una presentación de código que envuelve una vista. Se
+Una plantilla es una presentación de código que envuelve una vista. Se
 pueden definir múltiples plantillas y puedes cambiar entre ellas pero, por ahora,
 utilizaremos la plantilla por defecto (``default``).
 
 ¿Recuerdas cómo en la sección anterior hemos asignado la variable 'articles' a
 la vista utilizando el método ``set()``? Esto asignaría el objeto de consulta
-(query object) a la vista para ser invocado por una iteración ``foreach``.
+(``query object``) a la vista para ser invocado por una iteración ``foreach``.
 
 Las vistas en CakePHP se almacenan en la ruta ``/src/Template`` y en un
 directorio con el mismo nombre que el controlador al que pertenecen (tendremos
@@ -151,14 +151,14 @@ Esto debería ser sencillo de comprender.
 
 Como habrás notado, hay una llamada a un objeto ``$this->Html``. Este objeto es
 una instancia de la clase :php:class:`Cake\\View\\Helper\\HtmlHelper` de CakePHP.
-CakePHP proporciona un conjunto de ayudantes de vistas (helpers) para ayudarte a
+CakePHP proporciona un conjunto de ayudantes de vistas (``helpers``) para ayudarte a
 completar acciones habituales, como por ejemplo crear un enlace o un formulario.
 Puedes aprender más sobre esto en :doc:`/views/helpers`, pero lo que es
 importante destacar aquí es que el método ``link()`` generará un enlace HTML con
 el título como primer parámetro y la URL como segundo parámetro.
 
 Cuando crees URLs en CakePHP te recomendamos emplear el formato de array. Se
-explica con detenimiento en la sección de Rutas (Routes). Si utilizas las rutas
+explica con detenimiento en la sección de Rutas (``Routes``). Si utilizas las rutas
 en formato array podrás aprovecharte de las potentes funcionalidades de
 generación de rutas inversa de CakePHP en el futuro. Además puedes especificar
 rutas relativas a la base de tu aplicación de la forma
@@ -198,12 +198,21 @@ Si observas la función view(), ahora el método set() debería serte familiar.
 Verás que estamos usando ``get()`` en vez de ``find('all')`` ya que sólo
 queremos un artículo concreto.
 
-Verás que nuestra función view toma un parámetro ($id), que es el ID del
-artículo que queremos ver. Este parámetro se gestiona automáticamente al llamar
+Verás que nuestra función view toma un parámetro: el ID del artículo que
+queremos ver. Este parámetro se gestiona automáticamente al llamar
 a la URL ``/articles/view/3``, el valor '3' se pasa a la función view como primer
 parámetro ``$id``.
 
-Vamos a definir la vista para esta nueva función 'view' ubicándola en
+También hacemos un poco de verificación de errores para asegurarnos de que el
+usuario realmente accede a dicho registro. Si el usuario solicita
+``/articles/view`` lanzaremos una excepción ``NotFoundException`` y dejaremos al
+ErrorHandler tomar el control. Utilizando el método ``get()`` en la tabla
+Articles también hacemos una verificación similar para asegurarnos de que el
+usuario ha accedido a un registro que existe. En caso de que el artículo
+solicitado no esté presente en la base de datos, el método ``get()`` lanzará
+una excepción ``NotFoundException``.
+
+Ahora vamos a definir la vista para esta nueva función 'view' ubicándola en
 ``/src/Template/Articles/view.ctp``.
 
 .. code-block:: php
@@ -281,7 +290,7 @@ información está disponible en ``$this->request->data``. Puedes usar la funci�
 :php:func:`pr()` o :php:func:`debug()` para mostrar el contenido de esa variable
 y ver la pinta que tiene.
 
-Utilizamos el método mágico ``__call`` del FlashComponent para guardar un
+Utilizamos el método mágico ``__call`` del ``FlashComponent`` para guardar un
 mensaje en una variable de sesión que será mostrado en la página después de la
 redirección. En la plantilla tenemos ``<?= $this->Flash->render() ?>`` que
 muestra el mensaje y elimina la correspondiente variable de sesión. El método
@@ -301,91 +310,96 @@ Validando los Datos
 
 CakePHP te ayuda a evitar la monotonía al construir tus formularios y su
 validación. Todos odiamos teclear largos formularios y gastar más tiempo en
-reglas de validación de cada campo. CakePHP está aquí para echarnos una mano.
+reglas de validación de cada campo. CakePHP lo hace más rápido y sencillo.
 
 Para aprovechar estas funciones es conveniente que utilices el FormHelper en tus
-vistas. La clase :php:class:`FormHelper` está disponible en tus vistas por
-defecto mediante llamadas del estilo ``$this->Form``.
+vistas. La clase :php:class:`Cake\\View\\Helper\\FormHelper` está disponible en
+tus vistas por defecto a través de ``$this->Form``.
 
-Nuestra vista sería así
+He aquí nuestra vista ``add``:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->
+    <!-- File: src/Template/Articles/add.ctp -->
 
-    <h1>Add Post</h1>
+    <h1>Añadir Artículo</h1>
     <?php
-    echo $this->Form->create('Post');
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', array('rows' => '3'));
-    echo $this->Form->end('Save Post');
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Guardar artículo'));
+        echo $this->Form->end();
     ?>
 
-Hemos usado FormHelper para generar la etiqueta 'form'. Esta llamada al
-FormHelper :  ``$this->Form->create()`` generaría el siguiente código
-
+Hemos usado FormHelper para generar la etiqueta 'form'. La ejecución de
+``$this->Form->create()`` genera el siguiente código:
 
 .. code-block:: html
 
-    <form id="PostAddForm" method="post" action="/posts/add">
+    <form method="post" action="/articles/add">
 
 Si ``create()`` no tiene parámetros al ser llamado, asume que estás creando un
-formulario que realiza el *submit* al método del controlador ``add()`` o al
-método ``edit()`` si hay un ``id`` en los datos del formulario. Por defecto el
-formulario se enviará por POST.
+formulario que envía vía POST a la acción ``add()`` (o ``edit()`` cuando ``id``
+es incluido en los datos de formulario) del controlador actual.
 
-Las llamadas ``$this->Form->input()`` se usan para crear los elementos del
-formulario con el nombre que se pasa por parámetro. El primer parámetro indica
-precisamente el nombre del campo del modelo para el que se quiere crear el
-elemento de entrada. El segundo parámetro te permite definir muchas otras
-variables sobre la forma en la que se generará este *input field*. Por ejemplo,
-al enviar ``array('rows' => '3')`` estamos indicando el número de filas para el
-campo textarea que vamos a generar. El método input() está dotado de
-introspección y un poco de magia, ya que tiene en cuenta el tipo de datos del
-modelo al generar cada campo.
+El método ``$this->Form->input()`` se utiliza para crear elementos de formulario
+del mismo nombre. El primer parámetro le indica a CakePHP a qué campo
+corresponde y el segundo parámetro te permite especificar un abanico muy ámplio
+de opciones - en este caso, el número de filas del textarea que se generará. Hay
+un poco de introspección y "automagia" aquí: ``input()`` generará distintos
+elementos de formulario en función del campo del modelo especificado.
 
-Una vez creados los campos de entrada para nuestro modelo, la llamada
-``$this->Form->end()`` genera un botón de *submit* en el formulario y cierra el
-tag <form>. Puedes ver todos los detalles aquí :doc:`/views/helpers`.
+La llamada a ``$this->Form->end()`` cierra el formulario. También generará
+campos ocultos si la CSRF/prevención de manipulación de formularios ha sido
+habilitada.
 
-Volvamos atrás un minuto para añadir un enlace en ``/app/View/Post/index.ctp``
-que nos permita agregar nuevos artículos. Justo antes del tag <table> añade la
-siguiente línea::
+Volvamos atrás un minuto y actualicemos nuestra vista
+``src/Template/Articles/index.ctp`` para añadir un enlace de "Añadir Artículo".
+Justo antes del tag <table> añade la siguiente línea::
 
-    echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
+    <?= $this->Html->link(
+        'Añadir artículo',
+        ['controller' => 'Articles', 'action' => 'add']
+    ) ?>
 
-Te estarás preguntando: ¿ Cómo le digo a CakePHP la forma en la que debe validar
-estos datos ? Muy sencillo, las reglas de validación se escriben en el modelo.
-Abre el modelo Post y vamos a escribir allí algunas reglas sencillas ::
+Te estarás preguntando: ¿Cómo le digo a CakePHP la forma en la que debe validar
+estos datos? Muy sencillo, las reglas de validación se escriben en el modelo.
+Volvamos al modelo ``Articles`` y hagamos algunos ajustes::
 
-    class Post extends AppModel {
-        public $name = 'Post';
+    namespace App\Model\Table;
 
-        public $validate = array(
-            'title' => array(
-                'rule' => 'notEmpty'
-            ),
-            'body' => array(
-                'rule' => 'notEmpty'
-            )
-        );
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
+
+        public function validationDefault(Validator $validator) {
+            $validator
+                ->notEmpty('title')
+                ->notEmpty('body');
+
+            return $validator;
+        }
     }
 
-El array ``$validate`` contiene las reglas definidas para validar cada campo,
-cada vez que se llama al método save(). En este caso vemos que la regla para
-ambos campos es que no pueden ser vacíos ``notEmpty``. El conjunto de reglas de
-validación de CakePHP es muy potente y variado. Podrás validar direcciones de
-email, codificación de tarjetas de crédito, incluso añadir tus propias reglas de
-validación personalizadas. Para más información sobre esto
-:doc:`/models/data-validation`.
+El método ``validationDefault()`` le dice a CakePHP cómo validar tus datos
+cuando se invoca el método ``save()``. Aquí hemos especificado que ambos campos,
+el cuerpo y el título, no pueden quedar vacíos. El motor de validaciones de
+CakePHP es potente y con numerosas reglas ya predefinidas (tarjetas de crédito,
+direcciones de e-mail, etc.) así como flexibilidad para añadir  tus propias
+reglas de validación. Para más información en tal configuración, echa un vistazo
+a la documentación :doc:`/core-libraries/validation`.
 
 Ahora que ya tienes las reglas de validación definidas, usa tu aplicación para
 crear un nuevo artículo con un título vacío y verás cómo funcionan. Como hemos
-usado el método :php:meth:`FormHelper::input()`, los mensajes de error se
-construyen automáticamente en la vista sin código adicional.
+usado el método :php:meth:`Cake\\View\\Helper\\FormHelper::input()`, los
+mensajes de error se construyen automáticamente en la vista sin código adicional.
 
-Editando Posts
-==============
+Editando Artículos
+==================
 
 Seguro que ya le vas cogiendo el truco a esto. El método es siempre el mismo:
 primero la acción en el controlador, luego la vista.
