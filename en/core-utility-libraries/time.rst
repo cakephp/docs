@@ -1,14 +1,14 @@
 Time
 ####
 
-.. php:namespace:: Cake\Utility
+.. php:namespace:: Cake\I18n
 
 .. php:class:: Time
 
 If you need :php:class:`TimeHelper` functionalities outside of a ``View``,
 use the ``Time`` class::
 
-    use Cake\Utility\Time;
+    use Cake\I18n\Time;
 
     class UsersController extends AppController {
 
@@ -35,7 +35,7 @@ Creating Time Instances
 
 There are a few ways to create ``Time`` instances::
 
-    use Cake\Utility\Time;
+    use Cake\I18n\Time;
 
     // Create from a string datetime.
     $time = Time::createFromFormat(
