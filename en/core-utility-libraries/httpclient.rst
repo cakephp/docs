@@ -87,7 +87,7 @@ you can do the following::
     $http = new Client();
     $response = $http->get(
       'http://example.com/tasks',
-      ['q' => 'test', '_content' => json_encode($data)], 
+      ['q' => 'test', '_content' => json_encode($data)],
       ['type' => 'json']
     );
 
@@ -104,10 +104,10 @@ addition request information.  The following keys can be used in ``$options``:
 - ``proxy`` - Array of proxy information.
 - ``auth`` - Array of authentication data, the ``type`` key is used to delegate to
   an authentication strategy. By default Basic auth is used.
-- ``ssl_verify_peer`` - defaults to true. Set to false to disable SSL certification
+- ``ssl_verify_peer`` - defaults to ``true``. Set to ``false`` to disable SSL certification
   verification (not advised)
 - ``ssl_verify_depth`` - defaults to 5. Depth to traverse in the CA chain.
-- ``ssl_verify_host`` - defaults to true. Validate the SSL certificate against the host name.
+- ``ssl_verify_host`` - defaults to ``true``. Validate the SSL certificate against the host name.
 - ``ssl_cafile`` - defaults to built in cafile. Overwrite to use custom CA bundles.
 - ``timeout`` - Duration to wait before timing out.
 - ``type`` - Send a request body in a custom content type. Requires ``$data`` to
@@ -308,7 +308,7 @@ Response objects have a number of methods for inspecting the response data.
 .. php:method:: cookie($name = null, $all = false)
 
     Get a single cookie from the response. By default only the value of a cookie
-    is returned. If you set the second parameter to true, all the properties
+    is returned. If you set the second parameter to ``true``, all the properties
     set in the response will be returned.
 
 .. php:method:: statusCode()

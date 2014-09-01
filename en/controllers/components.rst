@@ -151,11 +151,11 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in ``/src/Controller/Component/MathComponent.php``. The basic
+the file in ``src/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     namespace App\Controller\Component;
-    
+
     use Cake\Controller\Component;
 
     class MathComponent extends Component {
@@ -263,23 +263,23 @@ Component API
 Callbacks
 ---------
 
-.. php:method:: initialize(Event $event, Controller $controller)
+.. php:method:: initialize(Event $event)
 
     Is called before the controller's
     beforeFilter method.
 
-.. php:method:: startup(Event $event, Controller $controller)
+.. php:method:: startup(Event $event)
 
     Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender(Event $event, Controller $controller)
+.. php:method:: beforeRender(Event $event)
 
     Is called after the controller executes the requested action's logic,
     but before the controller's renders views and layout.
 
-.. php:method:: shutdown(Event $event, Controller $controller)
+.. php:method:: shutdown(Event $event)
 
     Is called before output is sent to the browser.
 
@@ -287,7 +287,7 @@ Callbacks
 
     Is invoked when the controller's redirect
     method is called but before any further action. If this method
-    returns false the controller will not continue on to redirect the
+    returns ``false`` the controller will not continue on to redirect the
     request. The $url, and $response paramaters allow you to inspect and modify
     the location or any other headers in the response.
 

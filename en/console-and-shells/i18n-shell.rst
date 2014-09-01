@@ -18,7 +18,7 @@ command. This command will scan your entire application for ``__()`` style
 function calls, and extract the message string. Each unique string in your
 application will be combined into a single POT file::
 
-    Console/cake i18n extract
+    bin/cake i18n extract
 
 The above will run the extraction shell. The result of this command will be the
 file ``app/Locale/default.pot``. You use the pot file as a template for creating
@@ -30,7 +30,7 @@ Generating POT Files for Plugins
 
 You can generate a POT file for a specific plugin using::
 
-    Console/cake i18n extract --plugin <Plugin>
+    bin/cake i18n extract --plugin <Plugin>
 
 This will generate the required POT files used in the plugins.
 
@@ -40,7 +40,7 @@ Excluding Folders
 You can pass a comma separated list of folders that you wish to be excluded.
 Any path containing a path segment with the provided values will be ignored::
 
-    Console/cake i18n extract --exclude Test,Vendor
+    bin/cake i18n extract --exclude Test,Vendor
 
 Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------
@@ -48,7 +48,7 @@ Skipping Overwrite Warnings for Existing POT Files
 By adding --overwrite, the shell script will no longer warn you if a POT file
 already exists and will overwrite by default::
 
-    Console/cake i18n extract --overwrite
+    bin/cake i18n extract --overwrite
 
 Extracting Messages from the CakePHP Core Libraries
 ---------------------------------------------------
@@ -57,11 +57,11 @@ By default, the extract shell script will ask you if you like to extract
 the messages used in the CakePHP core libraries. Set --extract-core to yes or
 no to set the default behavior::
 
-    Console/cake i18n extract --extract-core yes
+    bin/cake i18n extract --extract-core yes
 
     or
 
-    Console/cake i18n extract --extract-core no
+    bin/cake i18n extract --extract-core no
 
 
 Create the Tables used by TranslateBehavior
@@ -70,7 +70,7 @@ Create the Tables used by TranslateBehavior
 The i18n shell can also be used to initialize the default tables used by the
 :php:class:`TranslateBehavior`::
 
-    Console/cake i18n initdb
+    bin/cake i18n initdb
 
 This will create the ``i18n`` table used by translate behavior.
 

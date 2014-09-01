@@ -120,7 +120,7 @@ Other than configuring caching adapters, there are a few other cache related
 configuration properties:
 
 enabled
-    When set to true, persistent caching is disabled site-wide.
+    When set to ``true``, persistent caching is disabled site-wide.
     This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
     You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
     :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
@@ -449,40 +449,40 @@ The required API for a CacheEngine is
 
 .. php:method:: read($key)
 
-    :return: The cached value or false for failure.
+    :return: The cached value or ``false`` for failure.
 
-    Read a key from the cache. Return false to indicate
+    Read a key from the cache. Return ``false`` to indicate
     the entry has expired or does not exist.
 
 .. php:method:: delete($key)
 
-    :return: Boolean true on success.
+    :return: Boolean ``true`` on success.
 
-    Delete a key from the cache. Return false to indicate that
+    Delete a key from the cache. Return ``false`` to indicate that
     the entry did not exist or could not be deleted.
 
 .. php:method:: clear($check)
 
-    :return: Boolean true on success.
+    :return: Boolean ``true`` on success.
 
-    Delete all keys from the cache. If $check is true, you should
+    Delete all keys from the cache. If $check is ``true``, you should
     validate that each value is actually expired.
 
 .. php:method:: clearGroup($group)
 
-    :return: Boolean true on success.
+    :return: Boolean ``true`` on success.
 
     Delete all keys from the cache belonging to the same group.
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: Boolean ``true`` on success.
 
     Decrement a number under the key and return decremented value
 
 .. php:method:: increment($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: Boolean ``true`` on success.
 
     Increment a number under the key and return incremented value
 

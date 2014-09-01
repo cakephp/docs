@@ -1,6 +1,8 @@
 Folder & File
 #############
 
+.. php:namespace:: Cake\Filesystem
+
 The Folder and File utilities are convenience classes to help you read from and
 write/append to files; list files within a folder and other common directory
 related tasks.
@@ -10,8 +12,8 @@ Basic Usage
 
 Ensure the classes are loaded::
 
-    use Cake\Utility\Folder;
-    use Cake\Utility\File;
+    use Cake\Filesystem\Folder;
+    use Cake\Filesystem\File;
 
 Then we can setup a new folder instance::
 
@@ -71,7 +73,7 @@ Folder API
 
 .. php:method:: cd( $path )
 
-    Change directory to $path. Returns false on failure::
+    Change directory to $path. Returns ``false`` on failure::
 
         $folder = new Folder('/foo');
         echo $folder->path; // Prints /foo
@@ -154,7 +156,7 @@ Folder API
 
     Returns an array of all matching files in the current directory::
 
-        // Find all .png in your app/webroot/img/ folder and sort the results
+        // Find all .png in your webroot/img/ folder and sort the results
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
         /*
@@ -184,22 +186,22 @@ Folder API
         /*
         Array
         (
-            [0] => /var/www/cake/app/webroot/index.php
-            [1] => /var/www/cake/app/webroot/test.php
-            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
-            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
-            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
-            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
+            [0] => /var/www/cake/webroot/index.php
+            [1] => /var/www/cake/webroot/test.php
+            [2] => /var/www/cake/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/webroot/img/test-pass-icon.png
         )
         */
 
 .. php:method:: inCakePath(string $path = '')
 
-    Returns true if the file is in a given CakePath.
+    Returns ``true`` if the file is in a given CakePath.
 
 .. php:method:: inPath(string $path = '', boolean $reverse = false)
 
-    Returns true if the file is in the given path::
+    Returns ``true`` if the file is in the given path::
 
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
@@ -210,11 +212,11 @@ Folder API
 
 .. php:staticmethod:: isAbsolute(string $path)
 
-    Returns true if the given $path is an absolute path.
+    Returns ``true`` if the given $path is an absolute path.
 
 .. php:staticmethod:: isSlashTerm(string $path)
 
-    Returns true if given $path ends in a slash (i.e. is slash-terminated)::
+    Returns ``true`` if given $path ends in a slash (i.e. is slash-terminated)::
 
         $result = Folder::isSlashTerm('/my/test/path');
         // $result = false
@@ -223,7 +225,7 @@ Folder API
 
 .. php:staticmethod:: isWindowsPath(string $path)
 
-    Returns true if the given $path is a Windows path.
+    Returns ``true`` if the given $path is a Windows path.
 
 .. php:method:: messages()
 
@@ -337,11 +339,11 @@ File API
 
 .. php:method:: executable()
 
-    Returns true if the file is executable.
+    Returns ``true`` if the file is executable.
 
 .. php:method:: exists()
 
-    Returns true if the file exists.
+    Returns ``true`` if the file exists.
 
 .. php:method:: ext()
 
@@ -353,7 +355,7 @@ File API
 
 .. php:method:: group()
 
-    Returns the file's group, or false in case of an error.
+    Returns the file's group, or ``false`` in case of an error.
 
 .. php:method:: info()
 
@@ -365,12 +367,12 @@ File API
 
 .. php:method:: lastChange()
 
-    Returns last modified time, or false in case of an error.
+    Returns last modified time, or ``false`` in case of an error.
 
 .. php:method:: md5(integer|boolean $maxsize = 5)
 
     Get the MD5 Checksum of file with previous check of filesize,
-    or false in case of an error.
+    or ``false`` in case of an error.
 
 .. php:method:: name()
 
@@ -404,11 +406,11 @@ File API
 
 .. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
 
-    Return the contents of the current file as a string or return false on failure.
+    Return the contents of the current file as a string or return ``false`` on failure.
 
 .. php:method:: readable()
 
-    Returns true if the file is readable.
+    Returns ``true`` if the file is readable.
 
 .. php:method:: safe(string $name = null, string $ext = null)
 
@@ -420,7 +422,7 @@ File API
 
 .. php:method:: writable()
 
-    Returns true if the file is writable.
+    Returns ``true`` if the file is writable.
 
 .. php:method:: write(string $data, string $mode = 'w', boolean$force = false)
 
@@ -429,12 +431,12 @@ File API
 
 .. php:method:: mime()
 
-    Get the file's mimetype, returns false on failure.
+    Get the file's mimetype, returns ``false`` on failure.
 
 
 .. php:method:: replaceText( $search, $replace )
 
-    Replaces text in a file. Returns false on failure and true on success.
+    Replaces text in a file. Returns ``false`` on failure and ``true`` on success.
 
 
 .. todo::

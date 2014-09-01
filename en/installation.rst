@@ -65,6 +65,10 @@ application by running::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
+Or if Composer is installed globally::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
 installed via Composer. Be sure to keep the composer.json and composer.lock
@@ -131,9 +135,9 @@ Development
 A development installation is the fastest method to setup CakePHP.
 In this example, we will be using CakePHP's console to run PHP's built-in
 web server which will make your application available at
-``http://host:port``. From the ``src`` directory, execute::
+``http://host:port``. From the app directory, execute::
 
-    Console/cake server
+    bin/cake server
 
 By default, without any arguments provided, this will serve your application
 at ``http://localhost:8765/``.
@@ -142,7 +146,7 @@ If you have something conflicting with ``localhost`` or ``port 8765``, you can
 tell the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments::
 
-    Console/cake server -H 192.168.13.37 -p 5673
+    bin/cake server -H 192.168.13.37 -p 5673
 
 This will serve your application at ``http://192.168.13.37:5673/``.
 
@@ -169,19 +173,20 @@ production setup will look like this on the file system::
 
     /cake_install/
         config/
-        src/
+        logs/
         plugins/
+        src/
         tests/
         tmp/
-        logs/
         vendor/
         webroot/ (this directory is set as DocumentRoot)
         .gitignore
         .htaccess
         .travis.yml
-        README.md
         composer.json
+        index.php
         phpunit.xml.dist
+        README.md
 
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::
@@ -193,6 +198,8 @@ your CakePHP application accessible at http://www.example.com.
 
 URL Rewriting
 =============
+
+If you want to use URL rewriting, see the dedicated section about the topic:
 
 .. toctree::
     :maxdepth: 1

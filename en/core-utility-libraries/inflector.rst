@@ -122,19 +122,11 @@ Loading Custom Inflections
 Define new inflection and transliteration rules for Inflector to use.  Often,
 this method is used in your ``config/bootstrap.php``::
 
-    Inflector::rules('singular', [
-        'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
-        'uninflected' => ['singulars'],
-        'irregular' => ['spins' => 'spinor']
-    ]);
+    Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
+    Inflector::rules('uninflected', ['singulars']);
+    Inflector::rules('irregular', ['phylum' => 'phyla']); // The key is singular form, value is plural form
 
-or::
-
-    Inflector::rules('plural', [
-        'irregular' => ['phylum' => 'phyla']
-    ]);
-
-Will merge the supplied rules into the inflection sets defined in
+The supplied rules will be merged into the respective inflection sets defined in
 ``Cake/Utility/Inflector``, with the added rules taking precedence
 over the core rules. You can use ``Inflector::reset()`` to clear rules and
 restore the original Inflector state.

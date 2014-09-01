@@ -30,8 +30,8 @@ would do the following::
 This would install the latest version of DebugKit and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
 the plugin you want to install is not available on packagist.org, you can clone
-or copy the plugin code into your ``/plugins`` directory. Assuming you want to install
-a plugin named 'ContactManager', you should have a folder in ``/plugins``
+or copy the plugin code into your ``plugins`` directory. Assuming you want to install
+a plugin named 'ContactManager', you should have a folder in ``plugins``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
 
@@ -42,6 +42,7 @@ After installing a plugin and setting up the autoloader, you may need to load
 the plugin. You can load plugins one by one, or all of them with a single
 method::
 
+    // In config/bootstrap.php
     // Loads a single plugin
     Plugin::load('ContactManager');
 
@@ -209,12 +210,12 @@ shell.
 
 In order to bake a plugin please use the following command::
 
-    $ Console/cake bake plugin ContactManager
+    $ bin/cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers::
 
-    $ Console/cake bake controller --plugin ContactManager Contacts
+    $ bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
@@ -227,14 +228,14 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-``/plugins/ContactManager/src/Controller/``. Since the main thing we'll
+``plugins/ContactManager/src/Controller/``. Since the main thing we'll
 be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-``/plugins/ContactManager/src/Controller`` and it looks like so::
+``plugins/ContactManager/src/Controller`` and it looks like so::
 
-    // /plugins/ContactManager/src/Controller/ContactsController.php
+    // plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
     use ContactManager\Controller\AppController;
@@ -253,13 +254,13 @@ So, we place our new ContactsController in
     AppController.
 
 Before you can access your controllers, you'll need to ensure the plugin is
-loaded and connect some routes. In your ``/config/bootstrap.php`` add the
+loaded and connect some routes. In your ``config/bootstrap.php`` add the
 following::
 
     Plugin::load('ContactManager', ['routes' => true]);
 
 Then create the ContactManager plugin routes. Put the following into
-``/plugins/ContactManager/config/routes.php``::
+``plugins/ContactManager/config/routes.php``::
 
     <?php
     use Cake\Routing\Router;
@@ -298,11 +299,11 @@ plugin specific route files.
 Plugin Models
 =============
 
-Models for the plugin are stored in ``/plugins/ContactManager/src/Model``.
+Models for the plugin are stored in ``plugins/ContactManager/src/Model``.
 We've already defined a ContactsController for this plugin, so let's
 create the table and entity for that controller::
 
-    // /plugins/ContactManager/src/Model/Entity/Contact.php:
+    // plugins/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -310,7 +311,7 @@ create the table and entity for that controller::
     class Contact extends Entity {
     }
 
-    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
+    // plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -322,7 +323,7 @@ If you need to reference a model within your plugin when building associations,
 or defining entitiy classes, you need to include the plugin name with the class
 name, separated with a dot. For example::
 
-    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
+    // plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -336,7 +337,7 @@ name, separated with a dot. For example::
 If you would prefer that the array keys for the association not have the plugin
 prefix on them, use the alternative syntax::
 
-    // /plugins/ContactManager/src/Model/Table/ContactsTable.php:
+    // plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
 
     use Cake\ORM\Table;
@@ -361,17 +362,17 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place them in the
-right folder inside of the ``/plugins/[PluginName]/src/Template/`` folder. For our
+right folder inside of the ``plugins/[PluginName]/src/Template/`` folder. For our
 ContactManager plugin, we'll need a view for our ``ContactsController::index()``
 action, so let's include that as well::
 
-    // /plugins/ContactManager/src/Template/Contacts/index.ctp:
+    // plugins/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. Add plugin layouts, inside
-``/plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
+``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -392,10 +393,10 @@ plugin with more application specific view logic by creating files using the
 following template ``src/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 
-    /src/Template/Plugin/ContactManager/Contacts/index.ctp
+    src/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``/plugins/ContactManager/src/Template/Contacts/index.ctp``.
+``plugins/ContactManager/src/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
@@ -444,7 +445,7 @@ This is only recommended for development. In production you should
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
 of a the URL for an asset within that plugin to serve it. Linking to
 '/contact_manager/js/some_file.js' would serve the asset
-``Plugin/ContactManager/webroot/js/some_file.js``.
+``plugins/ContactManager/webroot/js/some_file.js``.
 
 Components, Helpers and Behaviors
 =================================

@@ -38,7 +38,7 @@ level ``Session`` key, and a number of options are available:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-CakePHP's defaults ``session.cookie_secure`` to true, when your application is
+CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application is
 on an SSL protocol. If your application serves from both SSL and non-SSL
 protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable

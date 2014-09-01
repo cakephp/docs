@@ -28,19 +28,21 @@ You'll notice a few top level folders:
 - The *vendor* folder is where CakePHP and other application dependencies will
   be installed. Make a personal commitment **not** to edit files in this folder.
   We can’t help you if you’ve modified the core.
-- The *webroot* directory is public document root of your application. It
+- The *webroot* directory is the public document root of your application. It
   contains all the files you want to be publically reachable.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
-  is usually used to store model descriptions, logs, and sometimes
+  is usually used to store model descriptions and sometimes
   session information.
+- The *logs* folder normally contains your log files, depending on your log
+  configuration.
 
-  Make sure that this folder exists and that it is writable,
+  Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely
-  impacted. In debug mode, CakePHP will warn you if it is not the
+  impacted. In debug mode, CakePHP will warn you, if it is not the
   case.
 
-The Src Folder
+The src Folder
 ==============
 
 CakePHP's *src* folder is where you will do most of your application
@@ -49,8 +51,7 @@ development. Let's look a little closer at the folders inside
 
 Console
     Contains the console commands and console tasks for your application.
-    This directory can also contain a ``Templates`` directory to customize the
-    output of bake. For more information see :doc:`/console-and-shells`.
+    For more information see :doc:`/console-and-shells`.
 Controller
     Contains your application's controllers and their components.
 Locale

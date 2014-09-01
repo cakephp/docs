@@ -79,7 +79,7 @@ parameters::
         ['_name' => 'login']
     );
 
-    echo Router::url('login');
+    echo Router::url(['_name' => 'login']);
     // Will output
     /login
 
@@ -301,16 +301,17 @@ CakePHP, and should not be used unless you want the special meaning
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated URL. If your application
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
-* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
+  to force http.
 * ``_method`` Define the HTTP verb/method to use. Useful when working with
   :ref:`resource-routes`.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
@@ -371,7 +372,7 @@ can be used in reverse routing to identify the route you want to use::
     );
 
     // Generate a URL using a named route.
-    $url = Router::url(['_name' => login']);
+    $url = Router::url(['_name' => 'login']);
 
     // Generate a URL using a named route,
     // with some query string args.
@@ -406,7 +407,7 @@ simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
-``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
+``src/Controller/Admin/UsersController.php`` passing 5 as the first parameter. The
 view file used would be ``src/Template/Admin/Users/edit.ctp``
 
 You can map the URL /admin to your ``index`` action of pages controller using
@@ -533,7 +534,7 @@ extra line in your routes config file::
     Router::parseExtensions(['html', 'rss']);
 
 This will enable the named extensions for all routes connected **after** this
-method call. Any routes connected prior to it will not inerit the extensions.
+method call. Any routes connected prior to it will not inherit the extensions.
 You can set extensions per scope as well::
 
     Router::scope('/api', function($routes) {
@@ -584,7 +585,7 @@ something like this::
 
     Router:scope('/', function($routes) {
         $routes->extensions(['json']);
-        $routes->resources('recipes');
+        $routes->resources('Recipes');
     });
 
 The first line sets up a number of default routes for easy REST
@@ -792,15 +793,16 @@ older versions of CakePHP.
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated URL. If your application
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
-* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
+  to force http.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 

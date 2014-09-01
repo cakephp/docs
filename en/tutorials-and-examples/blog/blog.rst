@@ -30,38 +30,46 @@ Let's get started!
 Getting CakePHP
 ===============
 
-The easiest way to get up and running is by downloading or cloning a fresh copy
-from GitHub. To do this simply visit the CakePHP project on GitHub:
-`http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
-and download the latest release of CakePHP 3.0.
-
-You can also install CakePHP using ``Composer``.
-``Composer`` is an simple way of installing CakePHP from your terminal or
-command line prompt. Simply type the following two lines in your terminal from
-your webroot directory::
+The easiest way to install CakePHP is to use Composer.
+Composer is a simple way of installing CakePHP from your terminal or
+command line prompt.
+First, you'll need to download and install Composer if you haven't
+done so already. If you have cURL installed, it's as easy as running the
+following::
 
     curl -s https://getcomposer.org/installer | php
-    php composer.phar create-project -s dev cakephp/app
 
-This will download Composer and install the CakePHP application skeleton.
-By default Composer will save your new project into a directory called ``app``.
-Feel free to rename this directory to something which relates to your project,
-e.g. ``blog``.
+Or, you can download ``composer.phar`` from the
+`Composer website <https://getcomposer.org/download/>`_.
+
+Installing Composer globally will avoid you having to repeat this step
+on each project.
+
+Then simply type the following line in your terminal from your
+installation directory to install the CakePHP application skeleton
+in the [app_name] directory.::
+
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+
+Or if Composer is installed globally::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
 creating your config/app.php file for you.
 
-There are other ways to install CakePHP if you are uncomfortable with
-Composer. For more information: check out the :doc:`/installation` section.
+There are other ways to install CakePHP. If you cannot or don't want to use
+Composer, check out the :doc:`/installation` section.
 
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
-    /path_to_document_root
+    /cake_install
         /config
-        /src
+        /logs
         /plugins
+        /src
         /tests
         /tmp
         /vendor
@@ -69,43 +77,48 @@ completed, your directory setup should look something like the following::
         .gitignore
         .htaccess
         .travis.yml
-        README.md
         composer.json
+        index.php
         phpunit.xml.dist
+        README.md
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
-Directory Permissions on tmp
-============================
+Directory Permissions on tmp and logs
+=====================================
 
-You'll need to set the proper permissions on the ``/tmp`` directory to make
-it writable by your webserver. The best way to do this is to find out what user
-your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
-the ``tmp`` directory to that user. The final command you run (in \*nix)
+The ``tmp`` and ``logs`` directories need to have proper permissions to be writable
+by your webserver. If you used Composer for the install, this should have been done
+for you and confirmed with a "Permissions set on <folder>" message. If you instead
+got an error message or want to do it manually, the best way would be to find out
+what user your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
+these two directories to that user. The final command you run (in \*nix)
 might look something like this::
 
-    $ chown -R www-data tmp
+    chown -R www-data tmp
+    chown -R www-data logs
 
-If for some reason CakePHP can't write to that directory, you'll be
+If for some reason CakePHP can't write to these directories, you'll be
 informed by a warning while not in production mode.
 
 While not recommended, if you are unable to set the permissions to the same as
 your webserver, you can simply set write permissions on the folder by running a
 command such as::
 
-    $ chmod 777 -R tmp
+    chmod 777 -R tmp
+    chmod 777 -R logs
 
 Creating the Blog Database
 ==========================
 
-Next, let's set up the underlying database for our blog. If you
+Next, let's set up the underlying MySQL database for our blog. If you
 haven't already done so, create an empty database for use in this
-tutorial, with a name of your choice. Right now, we'll just create
-a single table to store our articles. We'll also throw in a few articles
-right now to use for testing purposes. Execute the following SQL
-statements into your database::
+tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
+we'll just create a single table to store our articles. We'll also throw
+in a few articles to use for testing purposes. Execute the following
+SQL statements into your database::
 
     /* First, create our articles table: */
     CREATE TABLE articles (
@@ -140,18 +153,14 @@ automatically hooks it to our Articles model, and having fields called
 Database Configuration
 ======================
 
-Next, let's tell CakePHP where our database is and how to
-connect to it. For many, this is the first and last time you
-will need to configure anything.
+Next, let's tell CakePHP where our database is and how to connect to it.
+For many, this will be the first and last time you will need to configure
+anything.
 
-A copy of CakePHP's configuration file is found in
-``config/app.default.php``. Make a copy of this file in
-the same directory, but name it ``app.php``.
-
-The config file should be pretty straightforward: just replace the
-values in the ``Datasources.default`` array with those that apply to your
-setup. A sample completed configuration array might look something
-like the following::
+The configuration should be pretty straightforward: just replace the
+values in the ``Datasources.default`` array in the ``config/app.php`` file
+with those that apply to your setup. A sample completed configuration
+array might look something like the following::
 
     $config = [
         // More configuration above.
@@ -172,11 +181,14 @@ like the following::
         // More configuration below.
     ];
 
-Once you've saved your new ``app.php`` file, you should be
-able to open your browser and see the CakePHP welcome page. It should
-also tell you that your database connection file was found, and
-that CakePHP can successfully connect to the database.
+Once you've saved your ``config/app.php`` file, you should be able to open
+your browser and see the CakePHP welcome page. It should also tell
+you that your database connection file was found, and that CakePHP
+can successfully connect to the database.
 
+.. note::
+
+    A copy of CakePHP's default configuration file is found in ``config/app.default.php``.
 
 Optional Configuration
 ======================
@@ -184,12 +196,12 @@ Optional Configuration
 There are a few other items that can be configured. Most developers
 complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
-in security hashes.
+in security hashes. 
 
-The security salt is used for generating hashes. Change the default
-salt value by editing ``/config/app.php``. It doesn't
-much matter what the new value is, as long as it's not easily
-guessed::
+The security salt is used for generating hashes. If you used Composer this too is taken
+care of for you during the install. Else you'd need to change the default salt value 
+by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
+it's not easily guessed::
 
     'Security' => [
         'salt' => 'something long and containing lots of different values.',
@@ -230,7 +242,7 @@ you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``/config/app.php``,
+use CakePHP's built in pretty URLs. In ``config/app.php``,
 uncomment the line that looks like::
 
     'App' => [

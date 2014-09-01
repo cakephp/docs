@@ -29,7 +29,7 @@ Getting Started
 Learning a new framework can be intimidating and exciting at the same time. To
 help you along, we have created a cookbook packed with examples and recipies to
 get the common tasks completed. If you are new, you should start off with the
-:doc:`/tutorials-and-examples/blog` as it will give you a quick tour of what
+:doc:`/tutorials-and-examples/blog/blog` as it will give you a quick tour of what
 CakePHP has to offer and how it works.
 
 After you've finished the Blog Tutorial, you can brush up on the key elements in

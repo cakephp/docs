@@ -1,6 +1,11 @@
 Tutorial de desarrollo del Blog
 ###############################
 
+.. note::
+    Esta página todavía no ha sido traducida y pertenece a la documentación de
+    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
+    desde Github <https://github.com/cakephp/docs>`_.
+
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque
 quieres aprender más sobre cómo funciona CakePHP. Nuestro objetivo es potenciar
 tu productividad y hacer más divertido el desarrollo de aplicaciones. Esperamos

@@ -40,8 +40,8 @@ currently at the root of a CakePHP application.
 CakePHP applications contain a ``Console`` directory that contains all the
 shells and tasks for an application. It also comes with an executable::
 
-    $ cd /path/to/app/src
-    $ Console/cake
+    $ cd /path/to/app
+    $ bin/cake
 
 Running the Console with no arguments produces this help message::
 
@@ -78,13 +78,13 @@ Creating a Shell
 ================
 
 Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell. In your applications
-``Console/Command`` directory create ``HelloShell.php``. Put the following
+we'll create a simple Hello world shell. In your application's
+``Shell`` directory create ``HelloShell.php``. Put the following
 code inside it::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -98,7 +98,7 @@ This method is called when a shell is called with no additional commands. We'll 
 some more commands in a bit, but for now let's just run our shell. From your application
 directory, run::
 
-    Console/cake hello
+    bin/cake hello
 
 You should see the following output::
 
@@ -114,12 +114,12 @@ whenever there are no other commands or arguments given to a shell. You may have
 also noticed that HelloShell is extending ``AppShell``. Much like
 :ref:`app-controller`, AppShell gives you a base class to contain all your
 common functions or logic. You can define an AppShell, by creating
-``src/Console/Command/AppShell.php``. Since our main method wasn't very
+``src/Shell/AppShell.php``. Since our main method wasn't very
 interesting let's add another command that does something::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class HelloShell extends AppShell {
         public function main() {
@@ -131,11 +131,15 @@ interesting let's add another command that does something::
         }
     }
 
-After saving this file, you should be able to run ``Console/cake hello hey_there
-your-name`` and see your name printed out. Any public method not prefixed by an
-``_`` is allowed to be called from the command line. As you can see, methods
-invoked from the comand line are transformed from the underscored shell argument to
-the correct camel-cased method name in the class.
+After saving this file, you should be able to run the following command and
+see your name printed out::
+
+    bin/cake hello hey_there your-name
+
+Any public method not prefixed by an ``_`` is allowed to be called from the
+command line. As you can see, methods invoked from the command line are
+transformed from the underscored shell argument to the correct camel-cased
+method name in the class.
 
 In our ``heyThere()`` method we can see that positional arguments are provided to our
 ``heyThere()`` function. Positional arguments are also available in the ``args`` property.
@@ -155,9 +159,9 @@ utilities; CakePHP makes that super easy. You can load models in shells, just as
 you would in a controller using ``loadModel()``. The loaded models are set as
 properties attached to your shell::
 
-    namespace App\Console\Command;
+    namespace App\Shell;
 
-    use App\Console\Command\AppShell;
+    use App\Shell\AppShell;
 
     class UserShell extends AppShell {
 
@@ -191,11 +195,11 @@ almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` pr
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
-Tasks are stored in ``Console/Command/Task/`` in files named after
+Tasks are stored in ``Shell/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
-``src/Console/Command/Task/FileGeneratorTask.php``.
+``src/Shell/Task/FileGeneratorTask.php``.
 
-Each task must at least implement an ``main()`` method. The ShellDispatcher,
+Each task must at least implement a ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
 
     class FileGeneratorTask extends Shell {
@@ -207,9 +211,9 @@ will call this method when the task is invoked. A task class looks like::
 A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
-    // Found in src/Console/Command/SeaShell.php
+    // Found in src/Shell/SeaShell.php
     class SeaShell extends AppShell {
-        // Found in src/Console/Command/Task/SoundTask.php
+        // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {
@@ -291,7 +295,7 @@ create a file at a given path::
 
 If the Shell is interactive, a warning will be generated, and the user asked if
 they want to overwrite the file if it already exists.  If the shell's
-interactive property is false, no question will be asked and the file will
+interactive property is ``false``, no question will be asked and the file will
 simply be overwritten.
 
 Console Output
@@ -462,7 +466,7 @@ methods for easily setting multiple options/arguments at once::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
-        //configure parser
+        // Configure parser
         return $parser;
     }
 
@@ -608,7 +612,7 @@ parsed parameters.::
     $parser->addOption('no-commit', ['boolean' => true]);
 
 With this option, when calling a shell like ``cake myshell --no-commit something``
-the no-commit param would have a value of true, and 'something'
+the no-commit param would have a value of ``true``, and 'something'
 would be a treated as a positional argument.
 The built-in ``--help``, ``--verbose``, and ``--quiet`` options
 use this feature.
@@ -618,9 +622,9 @@ define the behavior of the option:
 
 * ``short`` - The single letter variant for this option, leave undefined for none.
 * ``help`` - Help text for this option. Used when generating help for the option.
-* ``default`` - The default value for this option. If not defined the default will be true.
+* ``default`` - The default value for this option. If not defined the default will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
-  Defaults to false.
+  Defaults to ``false``.
 * ``choices`` An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
@@ -655,7 +659,7 @@ Using Boolean Options
 Options can be defined as boolean options, which are useful when you need to create
 some flag options. Like options with defaults, boolean options always include
 themselves into the parsed parameters. When the flags are present they are set
-to true, when they are absent false::
+to ``true``, when they are absent they are set ot ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',

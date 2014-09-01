@@ -342,10 +342,10 @@ Attribute Matching Types
             'My Index 1' => ['First' => 'The first item']
         ];
         $result = Hash::check($set, 'My Index 1.First');
-        // $result == True
+        // $result == true
 
         $result = Hash::check($set, 'My Index 1');
-        // $result == True
+        // $result == true
 
         $set = [
             'My Index 1' => [
@@ -359,16 +359,16 @@ Attribute Matching Types
             ]
         ];
         $result = Hash::check($set, 'My Index 1.First.Second');
-        // $result == True
+        // $result == true
 
         $result = Hash::check($set, 'My Index 1.First.Second.Third');
-        // $result == True
+        // $result == true
 
         $result = Hash::check($set, 'My Index 1.First.Second.Third.Fourth');
-        // $result == True
+        // $result == true
 
         $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
-        // $result == False
+        // $result == false
 
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
@@ -684,7 +684,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: normalize(array $data, $assoc = true)
 
-    Normalizes an array. If ``$assoc`` is true, the resulting array will be
+    Normalizes an array. If ``$assoc`` is ``true``, the resulting array will be
     normalized to be an associative array. Numeric keys with values, will be
     converted to string keys with null values. Normalizing an array, makes using
     the results with :php:meth:`Hash::merge()` easier::

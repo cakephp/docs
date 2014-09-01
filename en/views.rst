@@ -33,11 +33,11 @@ serving to. If you'd prefer using a templating language like
 Twig, a subclass of View will bridge your templating
 language and CakePHP.
 
-View files are stored in ``/src/Template/``, in a folder named after the
+View files are stored in ``src/Template/``, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
-``/src/Template/Products/view.ctp``.
+``src/Template/Products/view.ctp``.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
@@ -81,8 +81,8 @@ Setting View Variables
 Views have a ``set()`` method that is analogous to the ``set()``
 found in Controller objects. Using set() from your view file will
 add the variables to the layout and elements that will be rendered
-later. See :ref:`controller-methods` for more information on using
-set().
+later. See :ref:`setting-view_variables` for more information on using
+``set()``.
 
 In your view file you can do::
 
@@ -105,7 +105,7 @@ that change:
 
 .. code-block:: php
 
-    // /src/Template/Common/view.ctp
+    // src/Template/Common/view.ctp
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -125,7 +125,7 @@ uncaptured content from the extending view. Assuming our view file has a
 .. code-block:: php
 
     <?php
-    // /src/Template/Posts/view.ctp
+    // src/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
@@ -237,7 +237,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // In /src/Template/Layout/default.ctp
+    // In src/Template/Layout/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -300,12 +300,12 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-CakePHP's default layout is located at ``/src/Template/Layout/default.ctp``.
+CakePHP's default layout is located at ``src/Template/Layout/default.ctp``.
 If you want to change the overall look of your application, then this is
 the right place to start, because controller-rendered view code is placed
 inside of the default layout when the page is rendered.
 
-Other layout files should be placed in ``/src/Template/Layout``.
+Other layout files should be placed in ``src/Template/Layout``.
 When you create a layout, you need to tell CakePHP where to place
 the output of your views. To do so, make sure your layout includes a
 place for ``$this->fetch('content')`` Here's an example of what a default layout
@@ -316,7 +316,7 @@ might look like:
    <!DOCTYPE html>
    <html lang="en">
    <head>
-   <title><?= h($title) ?></title>
+   <title><?= h($this->fetch('title')) ?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
    <?php
@@ -354,23 +354,12 @@ JavaScript and CSS files from views.
 
 The ``content`` block contains the contents of the rendered view.
 
-Setting the title for the layout is easiest to do in the
-controller, setting the ``title`` variable::
+You can set the ``title`` block content from inside your view file::
 
-    namespace App\Controller;
-    
-    class UsersController extends AppController {
-        public function view_active() {
-            $this->set('title', 'View Active Users');
-        }
-    }
-
-You can also set the ``title`` variable from inside the view file::
-
-    $this->set('title', $titleContent);
+    $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
-``/src/Template/Layout`` directory, and switch between them inside of your
+``src/Template/Layout`` directory, and switch between them inside of your
 controller actions using the controller or view's
 ``$layout`` property::
 
@@ -446,7 +435,7 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the ``/src/Template/Element/`` folder, and have the .ctp
+Elements live in the ``src/Template/Element/`` folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 
@@ -465,10 +454,10 @@ argument::
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that ``Controller::set()`` in
 the controller works with view files). In the above example, the
-``/src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
+``src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
-    // Inside /src/Template/Element/helpbox.ctp
+    // Inside src/Template/Element/helpbox.ctp
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.
@@ -541,7 +530,7 @@ Caching Elements
 ----------------
 
 You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache the element in the
+cache parameter. If set to ``true``, it will cache the element in the
 'default' Cache configuration. Otherwise, you can set which cache configuration
 should be used. See :doc:`/core-libraries/caching` for more information on
 configuring ``Cache``. A simple example of caching an element would be::
@@ -607,7 +596,7 @@ components of CakePHP, view classes have a few conventions:
 
 You'll also want to extend ``View`` to ensure things work correctly::
 
-    // In /src/View/PdfView.php
+    // In src/View/PdfView.php
     namespace App\View;
 
     use Cake\View\View;

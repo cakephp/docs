@@ -39,7 +39,7 @@ posts using the Time Helper::
 
 Most of TimeHelper's features are intended as backwards compatible interfaces
 for applications that are upgrading from older versions of CakePHP. Because the
-ORM returns :php:class:`Cake\\Utility\\Time` instances for every ``timestamp``
+ORM returns :php:class:`Cake\\I18n\\Time` instances for every ``timestamp``
 and ``datetime`` column, you can use the methods there to do most tasks.
 
 .. meta::

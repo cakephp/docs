@@ -9,7 +9,7 @@ functional application in just a few minutes. In fact, Bake is a natural step to
 take once an application has been scaffolded.
 
 Depending on how your computer is configured, you may have to set
-execute rights on the cake bash script to call it using ``Console/cake
+execute rights on the cake bash script to call it using ``bin/cake
 bake``. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
@@ -21,7 +21,7 @@ Before running bake you should make sure you have at least one database
 connection configured. See the section on :ref:`database configuration
 <database-configuration>` for more information.
 
-When run with no arguments ``Console/cake bake`` will output a list of available
+When run with no arguments ``bin/cake bake`` will output a list of available
 tasks. You should see something like::
 
     ---------------------------------------------------------------
@@ -43,35 +43,35 @@ tasks. You should see something like::
     test
     view
 
-    By using Console/cake bake [name] you can invoke a specific bake task.
+    By using bin/cake bake [name] you can invoke a specific bake task.
 
 You can get more information on what each task does, and what options are
 availble using the ``--help`` option::
 
-    $ Console/cake bake model --help
+    $ bin/cake bake model --help
 
 Create New Tasks for Bake
 =========================
 
 Bake features an extensible architecture that allows your application or plugins
 to provide new tasks, or replace tasks provided by CakePHP. By extending
-``Cake\Console\Command\Task\BakeTask``, bake will find your new task and include
+``Cake\Shell\Task\BakeTask``, bake will find your new task and include
 it as part of bake.
 
 As an example, we'll make a task that creates shell classes. First, create
-the task file ``src/Console/Command/Task/ShellTask.php``. We'll extend the
+the task file ``src/Shell/Task/ShellTask.php``. We'll extend the
 ``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
 is abstract and requires us to define 4 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our
 ShellTask.php file should look like::
 
     <?php
-    namespace App\Console\Command\Task;
+    namespace App\Shell\Task;
 
-    use Cake\Console\Command\Task\SimpleBakeTask;
+    use Cake\Shell\Task\SimpleBakeTask;
 
     class ShellTask extends SimpleBakeTask {
-        public $pathFragment = 'Console/Command/';
+        public $pathFragment = 'Shell/';
 
         public function name() {
             return 'shell';
@@ -94,7 +94,7 @@ the following content::
 
     <?php
     echo "<?php\n"; ?>
-    namespace <?= $namespace ?>\Console\Command;
+    namespace <?= $namespace ?>\Shell;
 
     use Cake\Console\Shell;
 
@@ -108,8 +108,8 @@ the following content::
         }
     }
 
-You should now see your new task in the output of ``Console/cake bake``. You can
-run your new task by running ``Console/cake bake shell Example --template app``.
+You should now see your new task in the output of ``bin/cake bake``. You can
+run your new task by running ``bin/cake bake shell Example --template app``.
 This will generate a new ``ExampleShell`` class for your application to use.
 
 Modify Default HTML/Code Produced by bake

@@ -62,7 +62,7 @@ are also all found in the request parameters:
   more information.
 * ``bare`` Present when the request came from :php:meth:`~Cake\\Controller\\Controller::requestAction()` and included the
   bare option. Bare requests do not have layouts rendered.
-* ``requested`` Present and set to true when the action came from :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
+* ``requested`` Present and set to ``true`` when the action came from :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Query String Parameters
 =======================
@@ -329,7 +329,7 @@ will often get the load balancer host, port and scheme in your requests. Often
 load balancers will also send ``HTTP-X-Forwarded-*`` headers with the original
 values. The forwarded headers will not be used by CakePHP out of the box. To
 have the request object use these headers set the ``trustProxy`` property to
-true::
+``true``::
 
     $this->request->trustProxy = true;
 
@@ -397,7 +397,7 @@ Changing the Response Class
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
 transparent class. If you need to override it with your own application-specific class,
-you can replace ``Response`` in ``/webroot/index.php``.
+you can replace ``Response`` in ``webroot/index.php``.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response

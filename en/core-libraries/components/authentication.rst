@@ -230,7 +230,7 @@ Using Digest and Basic Authentication for Logging In
 Basic and digest are stateless authentication schemes and don't require an
 initial POST or a form. If using only basic / digest authenticators you don't
 require a login action in your controller. Also you can set
-``$this->Auth->sessionKey`` to false to ensure AuthComponent doesn't try to
+``$this->Auth->sessionKey`` to ``false`` to ensure AuthComponent doesn't try to
 read user info from session. You may also want to set config
 ``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
 a ``ForbiddenException`` instead of default behavior of redirecting to referer.
@@ -457,7 +457,7 @@ function accordingly::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                if ($this->Auth->loginProvider()->needsPasswordRehash()) {
+                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
                     $user->password = $this->request->data('password');
                     $this->Users->save($user);
@@ -627,9 +627,9 @@ You configure authorization handlers using the ``authorize`` config key.
 You can configure one or many handlers for authorization. Using
 multiple handlers allows you to support different ways of checking
 authorization. When authorization handlers are checked, they will be
-called in the order they are declared. Handlers should return false, if
+called in the order they are declared. Handlers should return ``false``, if
 they are unable to check authorization, or the check has failed.
-Handlers should return true if they were able to check authorization
+Handlers should return ``true`` if they were able to check authorization
 successfully. Handlers will be called in sequence until one passes. If
 all checks fail, the user will be redirected to the page they came from.
 Additionally you can halt all authorization by throwing an exception.
@@ -859,7 +859,7 @@ logoutRedirect
 unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to false a ForbiddenException exception is thrown instead of redirecting.
+    If set to ``false`` a ForbiddenException exception is thrown instead of redirecting.
 
 .. meta::
     :title lang=en: Authentication

@@ -106,10 +106,10 @@ init
 dsn
     A full PDO compatible data source name.
 log
-    Set to true to enable query logging. When enabled queries will be logged
+    Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
 quoteIdentifiers
-    Set to true if you are using reserved words or special characters in your
+    Set to ``true`` if you are using reserved words or special characters in your
     table or column names. Enabling this setting will result in queries built using the
     :ref:`query-builder` having identifiers quoted when creating SQL. It should be
     noted that this decreases performance because each query needs to be traversed
@@ -119,7 +119,7 @@ flags
     underlying PDO instance. See the PDO documentation for the flags supported
     by the driver you are using.
 cacheMetadata
-    Either boolean true, or a string containing the cache configuration to store
+    Either boolean ``true``, or a string containing the cache configuration to store
     meta data in. Having metadata caching disable is not advised and can result
     in very poor performance. See the :ref:`database-metadata-cache` section
     for more information.
@@ -213,7 +213,7 @@ date
 datetime
     Maps to a timezone naive DATETIME column type. In postgres, and SQLServer
     this turns into a TIMESTAMP type. The default return value of this column
-    type is :php:class:`Cake\\Utility\\Time` which extends the built-in
+    type is :php:class:`Cake\\I18n\\Time` which extends the built-in
     ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.
 timestamp
     Maps to the TIMESTAMP type.
@@ -518,7 +518,7 @@ Query Logging
 =============
 
 Query logging can be enabled when configuring your connection by setting the
-``log`` option to true. You can also toggle query logging at runtime, using
+``log`` option to ``true``. You can also toggle query logging at runtime, using
 ``logQueries``::
 
     // Turn query logging on.

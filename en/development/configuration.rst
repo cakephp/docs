@@ -35,10 +35,10 @@ Loading Additional Configuration Files
 
 If your application has many configuration options it can be helpful to split
 configuration into multiple files. After creating each of the files in your
-``config/`` directory you can load them during bootstrap.php::
+``config/`` directory you can load them in ``bootstrap.php``::
 
     use Cake\Core\Configure;
-    use Cake\Configure\Engine\PhpConfig;
+    use Cake\Core\Configure\Engine\PhpConfig;
 
     Configure::config('default', new PhpConfig());
     Configure::load('app.php', 'default', false);
@@ -56,8 +56,8 @@ Below is a description of the variables and how they affect your CakePHP
 application.
 
 debug
-    Changes CakePHP debugging output. false = Production mode. No error
-    messages, errors, or warnings shown. true = Errors and warnings shown.
+    Changes CakePHP debugging output. ``false`` = Production mode. No error
+    messages, errors, or warnings shown. ``true`` = Errors and warnings shown.
 App.namespace
     The namespace to find app classes under.
 
@@ -68,12 +68,14 @@ App.namespace
         as well. Additionally, create a new autoloader by running
         ``php composer.phar dumpautoload``.
 
+.. _core-configuration-baseurl:
+
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
     files too.
 App.base
-    The base directory the app resides in. If false this
+    The base directory the app resides in. If ``false`` this
     will be auto detected.
 App.encoding
     Define what encoding your application uses.  This encoding
@@ -106,8 +108,8 @@ Asset.timestamp
     file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-    (bool) false - Doesn't do anything (default)
-    (bool) true - Appends the timestamp when debug > 0
+    (bool) ``false`` - Doesn't do anything (default)
+    (bool) ``true`` - Appends the timestamp when debug > 0
     (string) 'force' - Always appends the timestamp.
 
 Database Configuration
@@ -345,14 +347,15 @@ Reading and writing configuration files
 =======================================
 
 CakePHP comes with two built-in configuration file engines.
-:php:class:`Cake\\Configure\\Engine\\PhpConfig` is able to read PHP config files, in the same
-format that Configure has historically read. :php:class:`Cake\\Configure\\Engine\\IniConfig` is
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config files, in the same
+format that Configure has historically read. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` is
 able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config engine, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
-    use Cake\\Configure\\Engine\\PhpConfig;
+    use Cake\\Core\\Configure\\Engine\\PhpConfig;
+
     // Read config files from config
     Configure::config('default', new PhpConfig());
 
@@ -395,7 +398,7 @@ Once you've attached a config engine to Configure you can load configuration fil
 
 Loaded configuration files merge their data with the existing runtime configuration
 in Configure. This allows you to overwrite and add new values
-into the existing runtime configuration. By setting ``$merge`` to true, values
+into the existing runtime configuration. By setting ``$merge`` to ``true``, values
 will not ever overwrite the existing configuration.
 
 Creating or Modifying Configuration Files
@@ -472,18 +475,22 @@ Creating your Own Configuration Engines
 
 Since configuration engines are an extensible part of CakePHP,
 you can create configuration engines in your application and plugins.
-Configuration engines need to implement the :php:interface:`Cake\\Configure\\ConfigEngineInterface`.
+Configuration engines need to implement the :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`.
 This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 engine for you application::
 
-    // In app/Lib/Configure/Engine/XmlConfig.php
-    use Cake\\Utility\\Xml;
+    // In src/Configure/Engine/XmlConfig.php
+    namespace App\Configure\Engine;
+
+    use Cake\Core\Configure\ConfigEngineInterface;
+    use Cake\Utility\Xml;
 
     class XmlConfig implements ConfigEngineInterface {
+
         public function __construct($path = null) {
             if (!$path) {
-                $path = APP . 'Config' . DS;
+                $path = CONFIG;
             }
             $this->_path = $path;
         }
@@ -493,7 +500,6 @@ engine for you application::
             return Xml::toArray($xml);
         }
 
-        // As of 2.3 a dump() method is also required
         public function dump($key, $data) {
             // Code to dump data to file
         }
@@ -501,16 +507,17 @@ engine for you application::
 
 In your ``config/bootstrap.php`` you could attach this engine and use it::
 
-    use Cake\\Configure\\Engine\\XmlConfig;
+    use App\Configure\Engine\XmlConfig;
+
     Configure::config('xml', new XmlConfig());
     ...
 
-    Configure::load('my_xml');
+    Configure::load('my_xml', 'xml');
 
 The ``read()`` method of a config engine, must return an array of the configuration information
 that the resource named ``$key`` contains.
 
-.. php:namespace:: Cake\Configure
+.. php:namespace:: Cake\Core\Configure
 
 .. php:interface:: ConfigEngineInterface
 
@@ -530,12 +537,6 @@ that the resource named ``$key`` contains.
     :param array $data: The data to dump.
 
     This method should dump/store the provided configuration data to a key identified by ``$key``.
-
-.. php:exception:: ConfigureException
-
-    Thrown when errors occur when loading/storing/restoring configuration data.
-    :php:interface:`ConfigEngineInterface` implementations should throw this
-    error when they encounter an error.
 
 Built-in Configuration Engines
 ------------------------------
@@ -559,7 +560,7 @@ Built-in Configuration Engines
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in config/bootstrap.php::
+    Load your custom configuration file by inserting the following in ``config/bootstrap.php``::
 
         Configure::load('customConfig');
 
@@ -591,7 +592,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, use CakePHP's
-bootstrap file, found in config/bootstrap.php. This file is
+bootstrap file, found in ``config/bootstrap.php``. This file is
 executed just after CakePHP's core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:

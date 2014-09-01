@@ -148,7 +148,7 @@ method::
 
 You can set aliases for fields by providing fields as an associative array::
 
-    // Results in SELECT id pk, title aliased_title, body ...
+    // Results in SELECT id AS pk, title AS aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
@@ -991,6 +991,6 @@ Removing All Stacked Map-reduce Operations
 Under some circumstances you may want to modify a ``Query`` object so that no
 ``mapReduce`` operations are executed at all. This can be easily done by
 calling the method with both parameters as null and the third parameter
-(overwrite) as true::
+(overwrite) as ``true``::
 
     $query->mapReduce(null, null, true);
