@@ -28,7 +28,7 @@ your application:
   will be included in the log after each error.  This is helpful for finding
   where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught exceptions.
-  If you choose a custom class you should place the file for that class in app/Error.
+  If you choose a custom class you should place the file for that class in src/Error.
   This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When true, exceptions + their stack traces will be logged
   to :php:class:`Cake\\Log\\Log`.
@@ -36,13 +36,13 @@ your application:
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting logs messages.
 
-ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors
-when debug = 0. The type of errors captured in both cases is controlled by
-``errorLevel``. The fatal error handler will be called independent of ``debug``
-level or ``errorLevel`` configuration, but the result will be different based on
-``debug`` level. The default behavior for fatal errors is show a page to
-internal server error (``debug`` disabled) or a page with the message, file and
-line (``debug`` enabled).
+ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
+errors when debug is ```false``. The type of errors captured in both cases is
+controlled by ``errorLevel``. The fatal error handler will be called independent
+of ``debug`` level or ``errorLevel`` configuration, but the result will be
+different based on ``debug`` level. The default behavior for fatal errors is
+show a page to internal server error (``debug`` disabled) or a page with the
+message, file and line (``debug`` enabled).
 
 .. note::
 
@@ -54,15 +54,16 @@ Creating your Own Error Handler
 
 You can create an error handler out of any callback type. For example you could
 use a class called ``AppError`` to handle your errors. By extending the
-``BaseErrorHandler`` you can supply custom logic for handling errors. An example would be::
+``BaseErrorHandler`` you can supply custom logic for handling errors.
+An example would be::
 
-    // In config/app.php
+    // In config/bootstrap.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    // In app/Error/AppError.php
+    // In src/Error/AppError.php
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
@@ -88,13 +89,13 @@ The default error handlers convert fatal errors into exceptions and re-use the
 exception handling logic to render an error page. If you do not want to show the
 standard error page, you can override it like::
 
-    // In config/app.php
+    // In config/bootstrap.php
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    // In app/Error/AppError.php
+    // In src/Error/AppError.php
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
@@ -342,14 +343,8 @@ Creating your own Application Exceptions
 
 You can create your own application exceptions using any of the built in `SPL
 exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
-itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.  Application exceptions that
-extend Exception or the SPL exceptions will be treated as 500 error in
-production mode.  :php:exc:`Cake\\Core\\Exception\\Exception` is special in that all
-:php:exc:`Cake\\Core\\Exception\\Exception` objects are coerced into into either 500 or
-404 errors depending on the code they use.  When in development mode
-:php:exc:`Cake\\Core\\Exception\\Exception` objects simply need a new template that
-matches the class name in order to provide useful information.  If your
-application contained the following exception::
+itself, or :php:exc:`Cake\\Core\\Exception\\Exception`. 
+If your application contained the following exception::
 
     use Cake\Core\Exception\Exception;
 
@@ -434,7 +429,7 @@ exception renderer class should be placed in ``src/Error``.  In a custom
 exception rendering class you can provide specialized handling for application
 specific errors::
 
-    // In app/Error/AppExceptionRenderer.php
+    // In src/Error/AppExceptionRenderer.php
     namespace App\Error;
 
     use Cake\Error\ExceptionRenderer;
