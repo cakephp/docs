@@ -322,7 +322,7 @@ Exception Renderer
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
-The ExceptionRenderer class with the help of ``CakeErrorController`` takes care of rendering
+The ExceptionRenderer class with the help of ``ErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
 The error page views are located at ``src/Template/Error/``. For all 4xx and 5xx errors
@@ -461,7 +461,7 @@ Creating a Custom Controller to Handle Exceptions
 
 In your ExceptionRenderer sub-class, you can use the ``_getController``
 method to allow you to return a custom controller to handle your errors.
-By default CakePHP uses ``CakeErrorController`` which omits a few of the normal
+By default CakePHP uses ``ErrorController`` which omits a few of the normal
 callbacks to help ensure errors always display.  However, you may need a more
 custom error handling controller in your application.  By implementing
 ``_getController`` in your ``AppExceptionRenderer`` class, you can use any
@@ -478,7 +478,7 @@ controller you want::
         }
     }
 
-Alternatively, you could just override the core CakeErrorController,
+Alternatively, you could just override the core ``ErrorController``,
 by including one in ``src/Controller``.  If you are using a custom
 controller for error handling, make sure you do all the setup you need
 in your constructor, or the render method.  As those are the only methods
