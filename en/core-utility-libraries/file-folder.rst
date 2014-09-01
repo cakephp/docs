@@ -1,6 +1,8 @@
 Folder & File
 #############
 
+.. php:namespace:: Cake\Filesystem
+
 The Folder and File utilities are convenience classes to help you read from and
 write/append to files; list files within a folder and other common directory
 related tasks.
@@ -10,8 +12,8 @@ Basic Usage
 
 Ensure the classes are loaded::
 
-    use Cake\Utility\Folder;
-    use Cake\Utility\File;
+    use Cake\Filesystem\Folder;
+    use Cake\Filesystem\File;
 
 Then we can setup a new folder instance::
 

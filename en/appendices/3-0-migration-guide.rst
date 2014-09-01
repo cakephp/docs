@@ -1012,6 +1012,14 @@ Set Class Removed
 
 The Set class has been removed, you should use the Hash class instead now.
 
+Folder & File
+-------------
+
+The folder and file classes have been renamed:
+
+- ``Cake\Utility\File`` renamed to :php:class:`Cake\\Filesystem\\File`
+- ``Cake\Utility\Folder`` renamed to :php:class:`Cake\\Filesystem\\Folder`
+
 Inflector
 ---------
 
