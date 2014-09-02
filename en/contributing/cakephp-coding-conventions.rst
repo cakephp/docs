@@ -254,7 +254,6 @@ tags:
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
 *  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
