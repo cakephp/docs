@@ -521,7 +521,7 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+    <!-- File: src/Template/Articles/index.ctp -->
 
     <h1>Artículos</h1>
     <p><?= $this->Html->link("Añadir artículo", ['action' => 'add']) ?></p>
@@ -576,35 +576,36 @@ están. Los desarroladores que quieren rutas diferentes para mejorar la
 usabilidad apreciarán la forma en la que CakePHP relaciona las URLs con las
 acciones de los controladores. Vamos a hacer cambios ligeros para este tutorial.
 
-Para más información sobre las rutas, visita esta referencia
+Para más información sobre las rutas así como técnicas avanzadas revisa
 :ref:`routes-configuration`.
 
 Por defecto CakePHP responde a las llamadas a la raíz de tu sitio (por ejemplo
-www.example.com/) usando el controlador PagesController, y la acción
-'display'/'home'. Esto muestra la página de bienvenida con información de
-CakePHP que ya has visto. Vamos a cambiar esto mediante una nueva regla.
+http://www.example.com) usando el controlador PagesController, mostrando una vista
+llamada "home". En lugar de eso, lo reemplazaremos con nuestro controlador
+``ArticlesController`` creando una nueva ruta.
 
-Las reglas de enrutamiento están en ``/config/routes.php``. Comentaremos
-primero la regla de la que hemos hablado:
+Las reglas de enrutamiento están en ``/config/routes.php``. Querrás eliminar o
+comentar la línea que define la raíz por defecto. Dicha ruta se parece a esto:
 
-::
+.. code-block:: php
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-Como habíamos dicho, esta regla conecta la URL '/' con el controlador 'pages' la
-acción 'display' y le pasa como parámetro 'home', así que reemplazaremos esta
-regla por esta otra:
+Esta línea conecta la url '/' con la página por defecto de inicio de CakePHP.
+Queremos conectarla a nuestro propio controlador, así que reemplaza dicha línea
+por esta otra:
 
-::
+.. code-block:: php
 
-    Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
+    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-Ahora la URL '/' nos llevará al controlador 'posts' y la acción 'index'.
+Esto debería, cuando un usuario solicita '/', devolver la acción index() del
+controlador ArticlesController.
 
 .. note::
 
     CakePHP también calcula las rutas a la inversa. Si en tu código pasas el
-    array ``array('controller' => 'posts', 'action' => 'index')`` a una
+    array ``['controller' => 'Articles', 'action' => 'index']`` a una
     función que espera una url, el resultado será '/'. Es buena idea usar
     siempre arrays para configurar las URL, lo que asegura que los links
     irán siempre al mismo lugar.
@@ -612,24 +613,28 @@ Ahora la URL '/' nos llevará al controlador 'posts' y la acción 'index'.
 Conclusión
 ==========
 
-Creando aplicaciones de este modo te traerá paz, amor, dinero a carretas e
-incluso te conseguirá lo demás que puedas querer. Así de simple.
+Creando aplicaciones de este modo te traerá paz, honor, amor, dinero a carretas e
+incluso tus fantasías más salvajes. Simple, no te parece? Ten en cuenta que este
+tutorial es muy básico, CakePHP tiene *muchas* otras cosas que ofrecer y es
+flexible aunque no hemos cubierto aquí estos puntos para que te sea más simple
+al principio. Usa el resto de este manual como una guía para construir mejores
+aplicaciones.
 
-Ten en cuenta que este tutorial es muy básico, CakePHP tiene *muchas* otras
-cosas que harán tu vida más fácil, y es flexible aunque no hemos cubierto aquí
-estos puntos para que te sea más simple al principio. Usa el resto de este
-manual como una guía para construir mejores aplicaciones (recuerda todo los los
-beneficios que hemos mencionado un poco más arriba)
+Ahora que ya has creado una aplicación CakePHP básica, estás listo para la vida
+real. Empieza tu nuevo proyecto y lee el resto del :doc:`Cookbook </index>` así
+como la `API <http://api.cakephp.org>`_.
 
-
-Ahora ya estás preparado para la acción. Empieza tu propio proyecto, lee el
-resto del manual y el API `Manual </>`_ `API <http://api20.cakephp.org>`_.
+Si necesitas ayuda, hay muchos modos de encontrar la ayuda que buscas - por
+favor, míralo en la página :doc:`/cakephp-overview/where-to-get-help`.
+¡Bienvenido a CakePHP!
 
 Lectura sugerida para continuar desde aquí
 ==========================================
 
+Hay varias tareas comunes que la gente que está aprendiendo CakePHP quiere
+aprender después:
+
 1. :ref:`view-layouts`: Personaliza la plantilla *layout* de tu aplicación
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
-3. :doc:`/controllers/scaffolding`: Prototipos antes de trabajar en el código final
-4. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
-5. :doc:`/core-libraries/components/authentication`: Gestión de usuarios y permisos
+3. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticación y permisos
