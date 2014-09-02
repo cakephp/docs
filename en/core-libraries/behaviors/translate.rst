@@ -6,7 +6,7 @@ Translate
 TranslateBehavior is actually quite easy to setup and works out of
 the box with very little configuration. In this section, you will
 learn how to add and setup the behavior to use in any model.
-
+than the on detected.
 If you are using TranslateBehavior in alongside containable issue,
 be sure to set the 'fields' key for your queries. Otherwise you
 could end up with invalid SQL generated.
@@ -231,7 +231,7 @@ Saving in another language
 ==========================
 
 You can force the model which is using the TranslateBehavior to
-save in a language other than the on detected.
+save in a language other than the one detected.
 
 To tell a model in what language the content is going to be you
 simply change the value of the ``$locale`` property on the model
