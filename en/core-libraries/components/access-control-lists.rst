@@ -749,20 +749,8 @@ an action inside our controller.
             $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
             $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
 
-::
-
-    public function index() {
-        // Allow warriors complete access to weapons
-        // Both these examples use the alias syntax
-        $this->Acl->allow('warriors', 'Weapons');
-
-        // However, the King does not want to let everyone
-        // have unfettered access
-        $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
-        $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
-
-        die(print_r('done', 1));
-    }
+            die(print_r('done', 1));
+        }
 
 The first call we make to the AclComponent allows any user under
 the 'warriors' ARO group full access to anything under the
