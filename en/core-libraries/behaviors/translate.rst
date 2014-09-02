@@ -231,7 +231,7 @@ Saving in another language
 ==========================
 
 You can force the model which is using the TranslateBehavior to
-save in a language other than the on detected.
+save in a language other than the one detected.
 
 To tell a model in what language the content is going to be you
 simply change the value of the ``$locale`` property on the model
