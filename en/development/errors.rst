@@ -37,7 +37,7 @@ your application:
   uninteresting logs messages.
 
 ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
-errors when debug is ```false``. The type of errors captured in both cases is
+errors when debug is ``false``. The type of errors captured in both cases is
 controlled by ``errorLevel``. The fatal error handler will be called independent
 of ``debug`` level or ``errorLevel`` configuration, but the result will be
 different based on ``debug`` level. The default behavior for fatal errors is
