@@ -296,7 +296,7 @@ Configurer la langue directement dans la table est utile quand vous avez besoin
 à la fois de récupérer et de sauvegarder les entities pour la même langue
 ou quand vous avez besoin de sauvegarder plusieurs entities en une fois.
 
-Sauvegarder Plusierus Traductions
+Sauvegarder Plusieurs Traductions
 =================================
 
 C'est un pré-requis habituel d'être capable d'ajouter ou de modifier plusieurs

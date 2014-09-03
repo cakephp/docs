@@ -175,7 +175,7 @@ ArticlesController now::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
+    use Cake\Network\Exception\ForbiddenException;
 
     class ArticlesController extends AppController {
 
@@ -234,7 +234,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
+    use Cake\Network\Exception\ForbiddenException;
 
     class ArticlesController extends AppController {
         public $components = ['Flash'];
@@ -509,7 +509,7 @@ This logic deletes the article specified by $id, and uses
 message after redirecting them on to ``/articles``. If the user attempts to
 do a delete using a GET request, the 'allowMethod' will throw an Exception.
 Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is
-displayed. There are many built-in :doc:`/development/exceptions` that can
+displayed. There are many built-in :doc:`Exceptions </development/errors>` that can
 be used to indicate the various HTTP errors your application might need
 to generate.
 

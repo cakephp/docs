@@ -124,7 +124,7 @@ All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsib
 configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
 the duration on write - the duration is taken from the cache engine's runtime config. Calling a
 cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
-of returning false.
+of returning ``false``.
 
 
 Core
@@ -158,9 +158,9 @@ Configure
 
 The config reader classes have been renamed:
 
-- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Configure\\Engine\PhpConfig`
-- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Configure\\Engine\IniConfig`
-- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Configure\\ConfigEngineInterface`
+- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
+- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
+- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 
 Object
@@ -175,6 +175,10 @@ of these methods have been extracted into traits. You can use the
 Console
 =======
 
+The ``cake`` executable has been moved from the ``app/Console`` directory to the
+``bin`` directory within the application skeleton. You can now invoke CakePHP's
+console with ``bin/cake``.
+
 TaskCollection Replaced
 -----------------------
 
@@ -183,19 +187,6 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code. Tasks no longer have
 access to callbacks, as there were never any callbacks to use.
-
-ApiShell Removed
-----------------
-
-The ApiShell was removed as it didn't provide any benefit over the file source itself
-and the online documentation/`API <http://api.cakephp.org/>`_.
-
-ExtractTask
------------
-
-- ``Console/cake i18n extract`` no longer includes untranslated validation
-  messages. If you want translated validation messages you should wrap those
-  messages in `__()` calls like any other content.
 
 Shell
 -----
@@ -206,13 +197,33 @@ Shell
 
 Additionally all shell methods will be transformed to camel case when invoked.
 For example, if you had a ``hello_world()`` method inside a shell and invoked it
-with ``Console/cake my_shell hello_world``, you will need to rename the method
+with ``bin/cake my_shell hello_world``, you will need to rename the method
 to ``helloWorld``. There are no changes required in the way you invoke commands.
+
+
+Shell / Task
+============
+
+Shells and Tasks have been moved from ``Console/Command`` and ``Console/Command/Task``
+to ``Shell`` and ``Shell/Task``.
+
+ApiShell Removed
+----------------
+
+The ApiShell was removed as it didn't provide any benefit over the file source itself
+and the online documentation/`API <http://api.cakephp.org/>`_.
+
+ExtractTask
+-----------
+
+- ``bin/cake i18n extract`` no longer includes untranslated validation
+  messages. If you want translated validation messages you should wrap those
+  messages in `__()` calls like any other content.
 
 BakeShell / TemplateTask
 ------------------------
 
-- Bake templates have been moved under `src/Template/Bake`. Also, the ``theme``
+- Bake templates have been moved under ``src/Template/Bake``. Also, the ``theme``
   option, used for selecting a bake template, has been renamed to ``template``.
 
 Event
@@ -582,6 +593,14 @@ SessionComponent
 
 - ``SessionComponent::setFlash()`` is deprecated. You should use
   :doc:`/core-libraries/components/flash` instead.
+
+Error
+-----
+
+Custom ExceptionRenderers are now expected to either return
+a ``Cake\\Network\\Response`` object or string when rendering errors. This means
+that any methods handling specific exceptions must return a response or string
+value.
 
 Model
 =====
@@ -993,13 +1012,21 @@ Set Class Removed
 
 The Set class has been removed, you should use the Hash class instead now.
 
+Folder & File
+-------------
+
+The folder and file classes have been renamed:
+
+- ``Cake\Utility\File`` renamed to :php:class:`Cake\\Filesystem\\File`
+- ``Cake\Utility\Folder`` renamed to :php:class:`Cake\\Filesystem\\Folder`
+
 Inflector
 ---------
 
-Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed. If
-you use custom transliterations you will need to update your code. Instead of
-regular expressions, transliterations use simple string replacement. This
-yielded significant performance improvements::
+- Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
+  If you use custom transliterations you will need to update your code. Instead
+  of regular expressions, transliterations use simple string replacement. This
+  yielded significant performance improvements::
 
     // Instead of
     Inflector::rules('transliteration', array(
@@ -1014,6 +1041,15 @@ yielded significant performance improvements::
         'å' => 'aa'
     ]);
 
+- Separate set of uninflected and irregular rules for pluralization and
+  singularization have been removed. Instead we now have a common list for each.
+  When using :php:meth:`Cake\\Utility\\Inflector::rules()` with type 'singular'
+  and 'plural' you can no longer use keys like 'uninflected', 'irregular' in
+  ``$rules`` argument array.
+
+  You can add / overwrite the list of uninflected and irregular rules using
+  :php:meth:`Cake\\Utility\\Inflector::rules()` by using values 'uninflected' and
+  'irregular' for ``$type`` argument.
 
 Sanitize
 --------
@@ -1040,7 +1076,7 @@ Security
 Time
 ----
 
-- ``CakeTime`` has been renamed to :php:class:`Cake\\Utility\\Time`.
+- ``CakeTime`` has been renamed to :php:class:`Cake\\I18n\\Time`.
 - ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practises.
 - ``CakeTime::niceShort()`` has been removed.
 - ``CakeTime::convert()`` has been removed.

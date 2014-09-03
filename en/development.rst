@@ -11,7 +11,6 @@ debugging, and testing will be covered.
     development/configuration
     development/routing
     development/sessions
-    development/exceptions
     development/errors
     development/debugging
     development/testing

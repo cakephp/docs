@@ -272,12 +272,12 @@ Possible keys for hasOne association arrays include:
   such as ``['Addresses.primary' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
   is INNER. You may want to use LEFT if your hasOne association is optional.
-- **dependent**: When the dependent key is set to true, and an
+- **dependent**: When the dependent key is set to ``true``, and an
   entity is deleted, the associated model records are also deleted. In this
-  case we set it true so that deleting a User will also delete her associated
+  case we set it to ``true`` so that deleting a User will also delete her associated
   Address.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When false,
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When ``false``,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
 - **propertyName**: The property name that should be filled with data from the associated
@@ -436,11 +436,11 @@ Possible keys for hasMany association arrays include:
   strings such as ``['Comments.visible' => true]``
 - **sort**  an array of find() compatible order clauses or SQL
   strings such as ``['Comments.created' => 'ASC']``
-- **dependent**: When dependent is set to true, recursive model
+- **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
   deleted when their associated Article record has been deleted.
-- **cascadeCallbacks**: When this and **dependent** are true, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When false,
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
+  load and delete entities so that callbacks are properly triggered. When ``false``,
   ``deleteAll()`` is used to remove associated data and no callbacks are
   triggered.
 - **propertyName**: The property name that should be filled with data from the associated
@@ -556,10 +556,10 @@ Possible keys for belongsToMany association arrays include:
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.
-- **cascadeCallbacks**: When this is true, cascaded deletes will load and delete
+- **cascadeCallbacks**: When this is ``true``, cascaded deletes will load and delete
   entities so that callbacks are properly triggered on join table records. When
-  false, ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered. This defaults to false to help reduce overhead.
+  ``false``, ``deleteAll()`` is used to remove associated data and no callbacks are
+  triggered. This defaults to ``false`` to help reduce overhead.
 - **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & plural name of
   the association, so ``tags`` in our example.
@@ -704,7 +704,7 @@ view entities and their related data. You can do this easily by using
     ]);
 
 If the get operation does not find any results
-a ``Cake\ORM\Error\RecordNotFoundException`` will be raised. You can either
+a ``Cake\ORM\Exception\RecordNotFoundException`` will be raised. You can either
 catch this exception yourself, or allow CakePHP to convert it into a 404 error.
 
 Using Finders to Load Data
@@ -1349,12 +1349,12 @@ When an entity is saved a few things happen:
 
 1. Validation will be started if not disabled.
 2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
-   stopped the save operation will fail and return false.
+   stopped the save operation will fail and return ``false``.
 3. Validation will be applied. If validation fails, the save will be aborted,
-   and save() will return false.
+   and save() will return ``false``.
 4. The ``Model.afterValidate`` event will be triggered.
 5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
-   be aborted, and save() will return false.
+   be aborted, and save() will return ``false``.
 6. Parent associations are saved. For example, any listed belongsTo
    associations will be saved.
 7. The modified fields on the entity will be saved.
@@ -1700,7 +1700,7 @@ HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
 are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
-``cascadeCallbacks`` option to true. A sample HasMany association with both
+``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
 
     $this->hasMany('Comments', [
@@ -1710,7 +1710,7 @@ these options enabled would be::
 
 .. note::
 
-    Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+    Setting ``cascadeCallbacks`` to ``true``, results in considerably slower deletes
     when compared to bulk deletes. The cascadeCallbacks option should only be
     enabled when your application has important work handled by event listeners.
 
@@ -1778,7 +1778,7 @@ been replaced with the :ref:`map-reduce` features and entity constructors.
 beforeValidate
 --------------
 
-.. php:method:: beforeValidate(Event $event, Entity $entity, array $options, Validator $validator)
+.. php:method:: beforeValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
 
 The ``Model.beforeValidate`` method is fired before an entity is validated. By
 stopping this event, you can abort the validate + save operations.
@@ -1786,14 +1786,14 @@ stopping this event, you can abort the validate + save operations.
 afterValidate
 -------------
 
-.. php:method:: afterValidate(Event $event, Entity $entity, array $options, Validator $validator)
+.. php:method:: afterValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
 
 The ``Model.afterValidate`` event is fired after an entity is validated.
 
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, Entity $entity, array $options)
+.. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
@@ -1802,14 +1802,14 @@ of the event will be returned.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, Entity $entity, array $options)
+.. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, Entity $entity, array $options)
+.. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation.
@@ -1817,7 +1817,7 @@ stopping this event you will abort the delete operation.
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, Entity $entity, array $options)
+.. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
 Fired after an entity has been deleted.
 
@@ -2087,6 +2087,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
+    $articles->save($article);
 
 As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity`` method is equally capable of
@@ -2098,6 +2099,7 @@ merge deeper to deeper levels, you can use the third parameter of the method::
     $articles->patchEntity($article, $this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
+    $articles->save($article);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2126,6 +2128,11 @@ important note should be made.
     For  hasMany and belongsToMany associations, if there were any entities that
     could not be matched by primary key to any record in the data array, then
     those records will be discarded from the resulting entity.
+    
+.. note::
+    Remember that using either ``patchEntity()`` or ``patchEntities()`` 
+    does not persist the data, it just edits (or creates) the given entities. In order to
+    save the entity you will have to call the ``save()`` method.
 
 For example, consider the following case::
 
@@ -2146,6 +2153,7 @@ For example, consider the following case::
         ]
     ];
     $articles->patchEntity($entity, $newData);
+    $articles->save($article);
 
 At the end, if the entity is converted back to an array you will obtain the
 following result::
@@ -2189,6 +2197,9 @@ the original entities array will be removed and not present in the result::
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->data());
+    foreach ($patched as $entity) {
+        $articles->save($entity);
+    }
 
 Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
@@ -2211,6 +2222,7 @@ owner of an article, causing undesirable effects::
     // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
+    $this->save($entity);
 
 There are two ways of protecting you against this problem. The first one is by
 setting the default columns that can be safely set from a request using the
@@ -2226,6 +2238,7 @@ data into an entity::
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);
+    $this->save($entity);
 
 You can also control which properties can be assigned for associations::
 
@@ -2235,6 +2248,7 @@ You can also control which properties can be assigned for associations::
         'fieldList' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
+    $this->save($entity);
 
 Using this feature is handy when you have many different functions your users
 can access and you want to let your users edit different data based on their

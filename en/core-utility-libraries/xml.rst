@@ -69,7 +69,7 @@ If your input is invalid the Xml class will throw an Exception::
     $xmlString = 'What is XML?'
     try {
         $xmlObject = Xml::build($xmlString); // Here will throw a Exception
-    } catch (\Cake\Utility\Error\XmlException $e) {
+    } catch (\Cake\Utility\Exception\XmlException $e) {
         throw new InternalErrorException();
     }
 
@@ -91,7 +91,7 @@ default you'll get a SimpleXml object back::
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlArray = Xml::toArray(Xml::build($xmlString));
 
-If your XML is invalid a ``Cake\Utility\Error\XmlException`` will be raised.
+If your XML is invalid a ``Cake\Utility\Exception\XmlException`` will be raised.
 
 Transforming an Array into a String of XML
 ==========================================

@@ -404,7 +404,7 @@ HTML attributes. The following will cover the options specific to
         <input name="name" type="text" value="" id="name" />
     </div>
 
-  Alternatively, set this key to false to disable the output of the
+  Alternatively, set this key to ``false`` to disable the output of the
   label::
 
     echo $this->Form->input('name', ['label' => false]);
@@ -442,7 +442,7 @@ HTML attributes. The following will cover the options specific to
   number of suboptions which control the wrapping element, wrapping element
   class name, and whether HTML in the error message will be escaped.
 
-  To disable error message output & field classes set the error key to false::
+  To disable error message output & field classes set the error key to ``false``::
 
     echo $this->Form->input('name', ['error' => false]);
 
@@ -497,12 +497,12 @@ common options shared by all input methods are as follows:
 
     You cannot use ``default`` to check a checkbox - instead you might
     set the value in ``$this->request->data`` in your controller,
-    or set the input option ``checked`` to true.
+    or set the input option ``checked`` to ``true``.
 
     Date and datetime fields' default values can be set by using the
     'selected' key.
 
-    Beware of using false to assign a default value. A false value is used to
+    Beware of using ``false`` to assign a default value. A ``false`` value is used to
     disable/exclude options of an input field, so ``'default' => false`` would
     not set any value at all. Instead use ``'default' => 0``.
 
@@ -527,7 +527,7 @@ Options for Select, Checkbox and Radio Inputs
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
 
-* ``$options['empty']`` If set to true, forces the input to remain empty.
+* ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
   When passed to a select list, this creates a blank option with an
   empty value in your drop down list. If you want to have a empty
@@ -648,7 +648,7 @@ Datetime Options
 * ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
   Defaults to null which rounds half up according to `interval`.
 
-* ``$options['monthNames']`` If false, 2 digit numbers will be used instead of text.
+* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead of text.
   If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]`` then the given array will be used.
 
 Creating Input Elements
@@ -815,7 +815,7 @@ Creates a set of radio button inputs.
   will disable all of the generated radio buttons.
 
 * ``$attributes['legend']`` Radio elements are wrapped with a legend and
-  fieldset by default. Set ``$attributes['legend']`` to false to remove
+  fieldset by default. Set ``$attributes['legend']`` to ``false`` to remove
   them.::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
@@ -833,7 +833,7 @@ Creates a set of radio button inputs.
     <label for="gender-F">Female</label>
 
 If for some reason you don't want the hidden input, setting
-``$attributes['value']`` to a selected value or boolean false will
+``$attributes['value']`` to a selected value or boolean ``false`` will
 do just that.
 
 Creating Select Pickers
@@ -843,7 +843,7 @@ Creating Select Pickers
 
 Creates a select element, populated with the items in ``$options``,
 with the option specified by ``$attributes['value']`` shown as selected by
-default. Set the 'empty' key in the ``$attributes`` variable to false to
+default. Set the 'empty' key in the ``$attributes`` variable to ``false`` to
 turn off the default empty option::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
@@ -862,7 +862,7 @@ Will output:
 The ``select`` input type allows for a special ``$option``
 attribute called ``'escape'`` which accepts a bool and determines
 whether to HTML entity encode the contents of the select options.
-Defaults to true::
+Defaults to ``true``::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
@@ -1049,18 +1049,18 @@ Creating Date and Time Inputs
 Creates a set of select inputs for date and time. This method accepts a number
 of options:
 
-* ``monthNames`` If false, 2 digit numbers will be used instead of text.
+* ``monthNames`` If ``false``, 2 digit numbers will be used instead of text.
   If an array, the given array will be used.
 * ``minYear`` The lowest year to use in the year select
 * ``maxYear`` The maximum year to use in the year select
 * ``interval`` The interval for the minutes select. Defaults to 1
-* ``empty`` - If true, the empty select option is shown. If a string,
+* ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
 * ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
 * ``default`` The default value to be used by the input. A value in ``$this->request->data``
   matching the field name will override this value. If no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24.
-* ``second`` Set to true to enable seconds drop down.
+* ``second`` Set to ``true`` to enable seconds drop down.
 
 To control the order of inputs, and any elements/content between the inputs you
 can override the ``dateWidget`` template. By default the ``dateWidget`` template
@@ -1075,10 +1075,10 @@ Creating Year Inputs
 
 Creates a select element populated with the years from ``minYear``
 to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
-``$options['empty']`` is false, the select will not include an
+``$options['empty']`` is ``false``, the select will not include an
 empty option:
 
-* ``empty`` - If true, the empty select option is shown. If a string,
+* ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
 * ``orderYear`` - Ordering of year values in select options.
   Possible values 'asc', 'desc'. Default 'desc'
@@ -1143,7 +1143,7 @@ Will output:
 
 You can pass in your own array of months to be used by setting the
 'monthNames' attribute, or have months displayed as numbers by
-passing false. (Note: the default months can be localized with CakePHP
+passing ``false``. (Note: the default months can be localized with CakePHP
 :doc:`/core-libraries/internationalization-and-localization` features.)::
 
     echo $this->Form->month('mob', ['monthNames' => false]);
@@ -1263,7 +1263,7 @@ Options:
 
 .. php:method:: isFieldError(string $fieldName)
 
-Returns true if the supplied $fieldName has an active validation
+Returns ``true`` if the supplied $fieldName has an active validation
 error.::
 
     if ($this->Form->isFieldError('gender')) {
@@ -1334,7 +1334,7 @@ Will output:
     <button type="submit">Submit Form</button>
 
 The ``button`` input type supports the ``escape`` option, which accepts
-a boolean and defaults to false. It determines whether to HTML encode the
+a boolean and defaults to ``false``. It determines whether to HTML encode the
 ``$title`` of the button::
 
     echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
@@ -1494,37 +1494,37 @@ example::
 Generating Entire Forms
 =======================
 
-.. php:method:: inputs(mixed $fields = [], $options = [])
+.. php:method:: inputs(array $fields = [], $options = [])
 
-Generates a set of inputs for the given context. By default, all fields for the
-current top level entity are generated. By setting ``$fields`` to a string you
-can provide custom legend element content::
+Generates a set of inputs for the given context wrapped in a fieldset. You can
+specify the generated fields by including them::
 
-    echo $this->Form->inputs('Update news post');
+    echo $this->Form->inputs([
+        'name' => ['label' => 'custom label']
+    ]);
 
-You can configure the generated inputs by defining additional options in the
+You can customize the legend text using an option::
+
+    echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+
+You can customize the generated inputs by defining additional options in the
 ``$fields`` parameter::
 
     echo $this->Form->inputs([
         'name' => ['label' => 'custom label']
     ]);
 
-To exclude specific fields from the generated inputs, set them to false in the
-fields parameter::
-
-    echo $this->Form->inputs(['password' => false]);
-
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-- ``fieldset`` Set to false to disable the fieldset. If a string is supplied
+- ``fieldset`` Set to ``false`` to disable the fieldset. If a string is supplied
   it will be used as the class name for the fieldset element.
-- ``legend`` Set to false to disable the legend for the generated input set.
+- ``legend`` Set to ``false`` to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
 
 For example::
 
-    echo $this->Form->inputs(
+    echo $this->Form->allInputs(
         [
             'name' => ['label' => 'custom label']
         ],
@@ -1533,6 +1533,16 @@ For example::
     );
 
 If you disable the fieldset, the legend will not print.
+
+.. php:method:: allInputs(array $fields, $options = [])
+
+This method is closely related to ``inputs()``, however the ``$fields`` argument
+is defaulted to *all* fields in the current top-level entity. To exclude
+specific fields from the generated inputs, set them to ``false`` in the fields
+parameter::
+
+    echo $this->Form->allInputs(['password' => false]);
+
 
 Adding Custom Widgets
 =====================

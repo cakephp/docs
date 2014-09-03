@@ -498,7 +498,7 @@ dot notation paths::
     [
         1 => 'foo',
         2 => 'bar',
-        3 => 'baz,
+        3 => 'baz',
     ];
 
 You can also optionally use a ``groupPath`` to group results based on a path::

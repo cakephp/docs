@@ -217,12 +217,12 @@ le shell bake.
 
 Pour cuisiner un plugin, merci d'utiliser la commande suivante::
 
-    $ Console/cake bake plugin ContactManager
+    $ bin/cake bake plugin ContactManager
 
 Maintenant vous pouvez cuisiner en utilisant les mêmes conventions qui
 s'appliquent au reste de votre app. Par exemple - baking controllers::
 
-    $ Console/cake bake controller --plugin ContactManager Contacts
+    $ bin/cake bake controller --plugin ContactManager Contacts
 
 Merci de vous référer au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre

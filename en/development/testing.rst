@@ -842,7 +842,7 @@ an entire class by not passing methods to it, like Session in the example above.
 
 Generated controllers are automatically used as the testing controller to test.
 To enable automatic generation, set the ``autoMock`` variable on the test case to
-true. If ``autoMock`` is false, your original controller will be used in the test.
+``true``. If ``autoMock`` is ``false``, your original controller will be used in the test.
 
 The response object in the generated controller is always replaced with a mock
 that does not send headers. After using ``generate()`` or ``testAction()`` you
@@ -1194,7 +1194,7 @@ code you wrote, you can use ``bake``:
 
 .. code-block:: bash
 
-    Console/cake bake test <type> <name>
+    bin/cake bake test <type> <name>
 
 ``<type>`` should be one of:
 

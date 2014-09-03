@@ -224,7 +224,7 @@ fields::
 
     $article->set($properties, ['guard' => false]);
 
-By setting the ``guard`` option to false, you can ignore the accessible field
+By setting the ``guard`` option to ``false``, you can ignore the accessible field
 list for a single call to ``set()``.
 
 

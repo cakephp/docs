@@ -67,8 +67,8 @@ durante las horas del día de los usuarios del norte y América del Sur. Nos
 encantaría saber de ti, si necesitas ayuda, quieres encontrar
 los usuarios en tu área, o si deseas donarnos un nuevo coche.
 
-El grupo de Google
-==================
+Los grupos de Google
+====================
 
 En Español:
 `http://groups.google.com/group/cakephp-esp <http://groups.google.com/group/cakephp-esp>`_
@@ -79,3 +79,11 @@ En Inglés:
 CakePHP tiene también un Grupo de Google muy activo. Puede ser un gran
 recurso para encontrar las respuestas archivadas, preguntas frecuentes,
 y obtener respuestas a los problemas inmediatos.
+
+Stackoverflow (en inglés)
+=========================
+
+`http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
+
+Etiqueta tus preguntas con ``cakephp`` y la versión específica que utilizas
+para permitir a usuarios existentes de stackoverflow encontrar tus preguntas.

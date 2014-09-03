@@ -116,10 +116,10 @@ resultset is sorted 'asc' by the specified key the returned link will sort by
 Accepted keys for ``$options``:
 
 * ``escape`` Whether you want the contents HTML entity encoded, defaults to
-  true.
+  ``true``.
 * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 * ``direction`` The default direction to use when this link isn't active.
-* ``lock`` Lock direction. Will only use the default direction then, defaults to false.
+* ``lock`` Lock direction. Will only use the default direction then, defaults to ``false``.
 
 Assuming you are paginating some posts, and are on page one::
 
@@ -198,14 +198,14 @@ Supported options are:
 * ``modulus`` how many numbers to include on either side of the current page,
   defaults to 8.
 * ``first`` Whether you want first links generated, set to an integer to
-  define the number of 'first' links to generate. Defaults to false. If a
+  define the number of 'first' links to generate. Defaults to ``false``. If a
   string is set a link to the first page will be generated with the value as the
   title::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
 * ``last`` Whether you want last links generated, set to an integer to define
-  the number of 'last' links to generate. Defaults to false. Follows the same
+  the number of 'last' links to generate. Defaults to ``false``. Follows the same
   logic as the ``first`` option. There is a
   :php:meth:`~PaginatorHelper::last()`` method to be used separately as well if
   you wish.
@@ -238,7 +238,7 @@ pages in the paged data set.
     ``$options`` supports the following keys:
 
     * ``escape`` Whether you want the contents HTML entity encoded,
-      defaults to true.
+      defaults to ``true``.
     * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTitle`` The text to use when the link is disabled. Defaults to
       the ``$title`` parameter.
@@ -290,7 +290,7 @@ pages in the paged data set.
     The options parameter accepts the following:
 
     - ``model`` The model to use defaults to :php:meth:`PaginatorHelper::defaultModel()`
-    - ``escape`` Whether or not the text should be escaped. Set to false if your
+    - ``escape`` Whether or not the text should be escaped. Set to ``false`` if your
       content contains HTML.
 
 .. php:method:: last($last = 'last >>', $options = [])
@@ -314,15 +314,15 @@ Checking the Pagination State
 
 .. php:method:: hasNext(string $model = null)
 
-    Returns true if the given result set is not at the last page.
+    Returns ``true`` if the given result set is not at the last page.
 
 .. php:method:: hasPrev(string $model = null)
 
-    Returns true if the given result set is not at the first page.
+    Returns ``true`` if the given result set is not at the first page.
 
 .. php:method:: hasPage(string $model = null, integer $page = 1)
 
-    Returns true if the given result set has the page number given by ``$page``.
+    Returns ``true`` if the given result set has the page number given by ``$page``.
 
 Creating a Page Counter
 =======================
@@ -399,7 +399,7 @@ Sets all the options for the Paginator Helper. Supported options are:
   arguments and query string parameters.
 
 * ``escape`` Defines if the title field for links should be HTML escaped.
-  Defaults to true.
+  Defaults to ``true``.
 
 * ``model`` The name of the model being paginated, defaults to
   :php:meth:`PaginatorHelper::defaultModel()`.

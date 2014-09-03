@@ -138,9 +138,9 @@ Développement
 Une installation "développement" est la méthode la plus rapide pour lancer
 CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour executer
 le serveur web PHP intégré qui va rendre votre application disponible sur
-``http://host:port``. A partir du répertoire ``src``, lancez::
+``http://host:port``. A partir du répertoire app, lancez::
 
-    Console/cake server
+    bin/cake server
 
 Par défaut, sans aucun argument fourni, cela va afficher votre application
 sur ``http://localhost:8765/``.
@@ -149,7 +149,7 @@ Si vous avez quelque chose qui rentre en conflit avec ``localhost`` ou le
 ``port 8765``, vous pouvez dire à la console CakePHP de lancer le seveur web
 sur un hôte spécifique et/ou un port utilisant les arguments suivants::
 
-    Console/cake server -H 192.168.13.37 -p 5673
+    bin/cake server -H 192.168.13.37 -p 5673
 
 Cela affichera votre application sur ``http://192.168.13.37:5673/``.
 

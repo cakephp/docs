@@ -97,8 +97,8 @@ what user your webserver runs as (``<?= `whoami`; ?>``) and change the ownership
 these two directories to that user. The final command you run (in \*nix)
 might look something like this::
 
-    $ chown -R www-data tmp
-    $ chown -R www-data logs
+    chown -R www-data tmp
+    chown -R www-data logs
 
 If for some reason CakePHP can't write to these directories, you'll be
 informed by a warning while not in production mode.
@@ -107,8 +107,8 @@ While not recommended, if you are unable to set the permissions to the same as
 your webserver, you can simply set write permissions on the folder by running a
 command such as::
 
-    $ chmod 777 -R tmp
-    $ chmod 777 -R logs
+    chmod 777 -R tmp
+    chmod 777 -R logs
 
 Creating the Blog Database
 ==========================

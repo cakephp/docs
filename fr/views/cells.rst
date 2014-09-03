@@ -56,7 +56,7 @@ nouvelle cell.
 
 Vous pouvez générer ce bout de code rapidement en utilisant ``bake``::
 
-    Console/cake bake cell Inbox
+    bin/cake bake cell Inbox
 
 Générera le code que nous avons tapé.
 
