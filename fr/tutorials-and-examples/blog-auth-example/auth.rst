@@ -211,7 +211,7 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
-    use Cake\Controller\Component\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher;
 
     class User extends Entity {
 
