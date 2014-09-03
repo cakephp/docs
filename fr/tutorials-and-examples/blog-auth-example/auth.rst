@@ -241,7 +241,8 @@ votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
             <?= $this->Form->input('username') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
-    <?= $this->Form->end(__('Se Connecter')) ?>
+    <?= $this->Form->submit(__('Se Connecter')); ?>
+    <?= $this->Form->end() ?>
     </div>
 
 Vous pouvez maintenant inscrire un nouvel utilisateur en rentrant l'URL
