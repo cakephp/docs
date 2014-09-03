@@ -971,15 +971,61 @@ that developers needing full response caching use `Varnish
 I18n
 ====
 
-- :php:class:`Cake\\I18n\\I18n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as an argument.
+The I18n subsystem was completely rewritten. In general, you can expect the same
+behavior as in previous versions, specifically if you are using the ``__()``
+family of functions.
+
+Internally, the ``I18n`` class uses ``Aura\Intl``, and appropriate methods are
+exposed to access the specific features of this library. For this reason most
+methods inside ``I18n`` were removed or renamed.
+
+Due to the use of ``ext/intl``, the L10n class was completely removed. It
+provided outdated and imcomplete data in comparison to the data available from
+the ``Locale`` class in PHP.
+
+The default application language will no longer be changed automatically by the
+browser accepted language nor by having the ``Config.language`` value set in the
+browser session. You can, however, use a dispatcher filter to get automatic
+language switching from the ``Accept-Language`` header sent by the browser::
+
+    // In config/bootstrap.php
+    DispatcherFactory::addFilter('LocaleSelector');
+
+There is no built-in replacement for automatically selecting the language by
+setting a value in the user session.
+
+The default formatting function for translated messages is no longer
+``sprintf``, but the more advanced and feature rich ``MessageFormatter`` class.
+In general you can rewrite placeholders in messages as follows::
+
+    // Before:
+    __('Today is a %s day in %s', 'Sunny', 'Spain');
+
+    // After:
+    __('Today is a {0} day in {1}', 'Sunny', 'Spain');
+
+You can avoid rewriting your messages by using the old ``sprintf`` formatter::
+
+    I18n::defaultFormatter('sprintf');
+
+Additionally, the ``Config.language`` value was removed and it can no longer be
+used to control the current language of the application. Instead, you can use
+the ``I18n`` class::
+
+    // Before
+    Configure::write('Config.language', 'fr_FR');
+
+    // Now
+    I18n::defaultLoacale('en_US');
 
 - The methods below have been moved:
 
-  - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
-  - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
-  - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
+    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
+    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
+    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
-- Since having the mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
+- Since CakePHP now requires the mbstring extension, the
+  ``Multibyte`` class has been removed.
 - Error messages throughout CakePHP are no longer passed through I18n
   functions. This was done to simplify the internals of CakePHP and reduce
   overhead. The developer facing messages are rarely, if ever, actually translated -
@@ -1109,7 +1155,11 @@ Can be migrated by rewriting it to::
 Number
 ------
 
+The Number library was rewritten to internally user the ``NumberFormatter``
+class.
+
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
+- :php:meth:`Number::addFormat()` was removed
 
 Validation
 ----------
