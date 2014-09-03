@@ -116,7 +116,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
         </fieldset>
-    <?= $this->Form->submit(__('Ajouter')); ?>
+    <?= $this->Form->button(__('Ajouter')); ?>
     <?= $this->Form->end() ?>
     </div>
 
@@ -241,7 +241,7 @@ votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
             <?= $this->Form->input('username') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
-    <?= $this->Form->submit(__('Se Connecter')); ?>
+    <?= $this->Form->button(__('Se Connecter')); ?>
     <?= $this->Form->end() ?>
     </div>
 
