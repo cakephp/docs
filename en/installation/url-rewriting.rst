@@ -79,6 +79,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php [QSA,L]
+           Options -Indexes
        </IfModule>
 
    If your CakePHP site still has problems with mod\_rewrite, you might
