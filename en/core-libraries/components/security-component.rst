@@ -203,7 +203,7 @@ There may be cases where you want to disable all security checks for an action
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
              $this->Security->config('unlockedActions', ['edit']);
         }
     }
