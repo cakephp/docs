@@ -72,8 +72,8 @@ correct traitant la requête.
 
 Une fois que la requête arrive au controller, celui-ci va communiquer avec
 la couche Model pour traiter la récupération de données ou les opérations
-de sauvegarde qui seraient nécessaires. Après que cette communication est
-finie, le controller va donner à l'objet vue correct, la tâche de générer une
+de sauvegarde qui seraient nécessaires. Cette communication terminée, 
+le controller va donner à l'objet vue correct, la tâche de générer une
 sortie résultant des données fournies par le model.
 
 Finalement, quand cette sortie est générée, elle est immédiatement rendue
