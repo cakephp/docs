@@ -204,7 +204,7 @@ actual PHP class file would look something like this::
     /* src/View/Helper/LinkHelper.php */
     use Cake\View\Helper;
 
-    class LinkHelper extends AppHelper {
+    class LinkHelper extends Helper {
         public function makeEdit($title, $url) {
             // Logic to create specially formatted link goes here...
         }
