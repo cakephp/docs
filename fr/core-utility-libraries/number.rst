@@ -1,7 +1,9 @@
-CakeNumber
-##########
+Number
+######
 
-.. php:class:: CakeNumber()
+.. php:namespace:: Cake\I18n
+
+.. php:class:: Number
 
 Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en-dehors
 d'une ``View``, utilisez la classe ``CakeNumber``::

@@ -6,7 +6,7 @@ Number
     CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
     desde Github <https://github.com/cakephp/docs>`_.
 
-.. php:namespace:: Cake\Utility
+.. php:namespace:: Cake\I18n
 
 .. php:class:: Number
 
@@ -15,7 +15,7 @@ use the ``Number`` class::
 
     namespace App\Controller;
 
-    use Cake\Utility\Number;
+    use Cake\I18n\Number;
 
     class UsersController extends AppController {
 
