@@ -211,13 +211,6 @@ and prepends the output with a percent sign.::
 Interacting with Human Readable Values
 ======================================
 
-.. php:method:: fromReadableSize(string $size, $default)
-
-This method unformats a number from a human readable byte size
-to an integer number of bytes::
-
-    $int = Number::fromReadableSize('2GB');
-
 .. php:method:: toReadableSize(string $dataSize)
 
 This method formats data sizes in human readable forms. It provides

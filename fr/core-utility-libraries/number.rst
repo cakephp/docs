@@ -220,13 +220,6 @@ automatiqement la sortie dans la vue.
             'multiply' => true
         ));
 
-.. php:method:: fromReadableSize(string $size, $default)
-
-    :param string $size: La valeur formatée lisible par un humain.
-
-    Cette méthode enlève le format d'un nombre à partir d'une taille de byte
-    lisible par un humain en un nombre entier de bytes.
-
 .. php:method:: toReadableSize(string $dataSize)
 
     :param string $data_size: Le nombre de bytes pour le rendre lisible.
