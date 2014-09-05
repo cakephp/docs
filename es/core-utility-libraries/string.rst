@@ -69,7 +69,7 @@ formatting such as tag lists::
 This method unformats a number from a human readable byte size
 to an integer number of bytes::
 
-    $int = Number::fromReadableSize('2GB');
+    $int = String::parseFileSize('2GB');
 
 Formatting Strings
 ==================

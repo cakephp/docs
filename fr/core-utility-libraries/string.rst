@@ -57,7 +57,7 @@ d'une ``View``, utilisez la classe ``String``::
     Cette méthode enlève le format d'un nombre à partir d'une taille de byte
     lisible par un humain en un nombre entier de bytes::
 
-        $int = Number::fromReadableSize('2GB');
+        $int = String::parseFileSize('2GB');
 
 .. php:staticmethod:: insert($string, $data, $options = [])
 
