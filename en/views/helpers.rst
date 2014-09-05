@@ -66,8 +66,12 @@ Configuration options
 
 You can pass configuration options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
+    
+    namespace App\View\Helper;
 
-    class AwesomeHelper extends AppHelper {
+    use Cake\View\Helper;
+
+    class AwesomeHelper extends Helper {
         public function __construct(View $view, $config = []) {
             parent::__construct($view, $config);
             debug($config);
@@ -84,9 +88,10 @@ your helper requires. For example::
 
     namespace App\View\Helper;
 
+    use Cake\View\Helper;
     use Cake\View\StringTemplateTrait;
 
-    class AwesomeHelper extends AppHelper {
+    class AwesomeHelper extends Helper {
 
         use StringTemplateTrait;
 
@@ -210,10 +215,6 @@ actual PHP class file would look something like this::
         }
     }
 
-.. note::
-
-    Helpers should extend either ``AppHelper`` or :php:class:`Helper`
-
 Including Other Helpers
 -----------------------
 
@@ -222,9 +223,12 @@ helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
     /* src/View/Helper/LinkHelper.php (using other helpers) */
-    use App\View\Helper\AppHelper;
+    
+    namespace App\View\Helper;
 
-    class LinkHelper extends AppHelper {
+    use Cake\View\Helper;
+
+    class LinkHelper extends Helper {
         public $helpers = ['Html'];
 
         public function makeEdit($title, $url) {
@@ -236,7 +240,6 @@ helper. To do so, you can specify helpers you wish to use with a
             return '<div class="editOuter">' . $link . '</div>';
         }
     }
-
 
 .. _using-helpers:
 
@@ -257,23 +260,6 @@ helper::
 
     <!-- make a link using the new helper -->
     <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
-
-
-Creating Functionality for All Helpers
-======================================
-
-All helpers extend a special class, AppHelper (just like models
-extend AppModel and controllers extend AppController). To create
-functionality that would be available to all helpers, create
-``src/View/Helper/AppHelper.php``::
-
-    use App\View\Helper\AppHelper;
-
-    class AppHelper extends Helper {
-        public function customMethod() {
-        }
-    }
-
 
 .. _helper-api:
 
