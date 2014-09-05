@@ -1155,7 +1155,7 @@ Can be migrated by rewriting it to::
 Number
 ------
 
-The Number library was rewritten to internally user the ``NumberFormatter``
+The Number library was rewritten to internally use the ``NumberFormatter``
 class.
 
 - ``CakeNumber`` has been renamed to :php:class:`Cake\\I18n\\Number`.
