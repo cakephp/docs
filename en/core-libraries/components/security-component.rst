@@ -55,7 +55,7 @@ in the controller.
 By configuring a callback method you can customize how the blackhole process
 works::
 
-    public function beforeFilter() {
+    public function beforeFilter(Event $event) {
         $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
@@ -140,11 +140,16 @@ Using the security component is generally done in the controller
 beforeFilter(). You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
-    class WidgetController extends AppController {
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -152,15 +157,18 @@ want and the Security Component will enforce them on its startup::
     }
 
 The above example would force all actions that had admin routing to
-require secure SSL requests.
+require secure SSL requests::
 
-::
+    namespace App\Controller;
 
-    class WidgetController extends AppController {
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
@@ -195,9 +203,12 @@ There may be cases where you want to disable all security checks for an action
 (ex. AJAX requests).  You may "unlock" these actions by listing them in
 ``$this->Security->unlockedActions`` in your ``beforeFilter``. The
 ``unlockedActions`` property will **not** affect other features of
-``SecurityComponent``.
+``SecurityComponent``::
 
-::
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
 
     class WidgetController extends AppController {
 
