@@ -1160,7 +1160,7 @@ class.
 
 - ``CakeNumber`` has been renamed to :php:class:`Cake\\I18n\\Number`.
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
-- :php:meth:`Number::addFormat()` was removed
+- :php:meth:`Number::addFormat()` was removed.
 - ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\String::parseFileSize()`.
 
 Validation

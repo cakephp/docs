@@ -1,6 +1,8 @@
 NumberHelper
 ############
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: NumberHelper(View $view, array $config = [])
 
 The NumberHelper contains convenient methods that enable display
@@ -15,8 +17,7 @@ formatting numbers.
 
 .. warning::
 
-    Since 2.4 the symbols are now UTF-8. Please see the migration guide for details if you run a
-    non-UTF-8 app.
+    All symbols are UTF-8.
 
 .. meta::
     :title lang=en: NumberHelper
