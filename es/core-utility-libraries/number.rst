@@ -6,7 +6,7 @@ Number
     CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
     desde Github <https://github.com/cakephp/docs>`_.
 
-.. php:namespace:: Cake\Utility
+.. php:namespace:: Cake\I18n
 
 .. php:class:: Number
 
@@ -15,7 +15,7 @@ use the ``Number`` class::
 
     namespace App\Controller;
 
-    use Cake\Utility\Number;
+    use Cake\I18n\Number;
 
     class UsersController extends AppController {
 
@@ -215,13 +215,6 @@ and prepends the output with a percent sign.::
 
 Interacting with Human Readable Values
 ======================================
-
-.. php:method:: fromReadableSize(string $size, $default)
-
-This method unformats a number from a human readable byte size
-to an integer number of bytes::
-
-    $int = Number::fromReadableSize('2GB');
 
 .. php:method:: toReadableSize(string $dataSize)
 

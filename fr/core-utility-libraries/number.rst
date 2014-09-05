@@ -1,7 +1,9 @@
-CakeNumber
-##########
+Number
+######
 
-.. php:class:: CakeNumber()
+.. php:namespace:: Cake\I18n
+
+.. php:class:: Number
 
 Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en-dehors
 d'une ``View``, utilisez la classe ``CakeNumber``::
@@ -217,13 +219,6 @@ automatiqement la sortie dans la vue.
         echo CakeNumber::toPercentage(0.45691, 2, array(
             'multiply' => true
         ));
-
-.. php:method:: fromReadableSize(string $size, $default)
-
-    :param string $size: La valeur formatée lisible par un humain.
-
-    Cette méthode enlève le format d'un nombre à partir d'une taille de byte
-    lisible par un humain en un nombre entier de bytes.
 
 .. php:method:: toReadableSize(string $dataSize)
 

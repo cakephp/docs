@@ -1,6 +1,8 @@
 String
 ######
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: String
 
 La classe String inclut des méthodes pratiques pour la création et la
@@ -49,6 +51,13 @@ d'une ``View``, utilisez la classe ``String``::
         $result = String::tokenize($data, ' ', "'", "'");
         // le résultat contient
         ['cakephp', "'great framework'", 'php'];
+
+.. php:method:: parseFileSize(string $size, $default)
+
+    Cette méthode enlève le format d'un nombre à partir d'une taille de byte
+    lisible par un humain en un nombre entier de bytes::
+
+        $int = Number::fromReadableSize('2GB');
 
 .. php:staticmethod:: insert($string, $data, $options = [])
 

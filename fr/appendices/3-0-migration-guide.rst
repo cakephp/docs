@@ -1155,8 +1155,13 @@ Peut être migré en réécrivant ceci en::
 Number
 ------
 
+Number a été réécrite ppour utiliser en interne la classe ``NumberFormatter``.
+
+- ``CakeNumber`` a été renommée en :php:class:`Cake\\I18n\\Number`.
 - :php:meth:`Number::format()` nécessite maintenant que ``$options`` soit un
   tableau.
+- :php:meth:`Number::addFormat()` a été retirée.
+- ``Number::fromReadableSize()`` a été déplacée :php:meth:`Cake\\Utility\\String::parseFileSize()`.
 
 Validation
 ----------

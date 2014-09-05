@@ -59,6 +59,12 @@ formatting such as tag lists::
     // Result contains
     array('cakephp', "'great framework'", 'php');
 
+.. php:method:: parseFileSize(string $size, $default)
+
+This method unformats a number from a human readable byte size
+to an integer number of bytes::
+
+    $int = Number::fromReadableSize('2GB');
 
 Formatting Strings
 ==================
