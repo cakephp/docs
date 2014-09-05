@@ -1,11 +1,6 @@
 Tutorial de desarrollo del Blog
 ###############################
 
-.. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
-
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque
 quieres aprender más sobre cómo funciona CakePHP. Nuestro objetivo es potenciar
 tu productividad y hacer más divertido el desarrollo de aplicaciones. Esperamos
@@ -34,23 +29,28 @@ Esto es lo que necesitarás:
 Obtener CakePHP
 ===============
 
-La manera más sencilla de ponerse en marcha es descargando o clonando una copia
-reciente desde GitHub. Para hacer esto, simplemente visita el proyecto de
-CakePHP en GitHub:
-`http://github.com/cakephp/cakephp/releases <http://github.com/cakephp/cakephp/releases>`_
-y descarga la última versión de CakePHP 3.0.
-
-También puedes instalar CakePHP utilizando ``Composer``.
-``Composer`` es un modo sencillo de instalar CakePHP desde tu terminal o consola.
-Simplemente escribe lo siguiente en tu terminal desde tu directorio webroot::
+La manera más sencilla de ponerse en marcha es utilizando Composer. Composer te
+permite instalar fácilmente CakePHP desde tu terminal o consola. Primero, debes
+descargar e instalar Composer si todavía no lo has hecho. Si tienes cURL
+instalado, es tan fácil como ejecutar lo siguiente:
 
     curl -s https://getcomposer.org/installer | php
+
+O puedes descargar ``composer.phar`` desde
+`la página web de Composer <https://getcomposer.org/download/>`_.
+
+Instalando Composer de manera global evitarás tener que repetir este paso para
+cada proyecto.
+
+Luego, simplemente escribe la siguiente línea en tu terminal desde tu directorio
+de instalación para instalar el esqueleto de la aplicación de CakePHP en el
+directorio [nombre_app].::
+
     php composer.phar create-project --prefer-dist -s dev cakephp/app [nombre_app]
 
-Esto descargará Composer e instalará el esqueleto de aplicación de CakePHP.
-Por defecto Composer generará tu proyecto en un directorio llamado ``app``.
-Considérate libre de renombrar este directorio a algo relacionado con tu proyecto,
-por ejemplo ``blog``.
+O si tienes Composer instalado globalmente::
+
+    composer create-project --prefer-dist -s dev cakephp/app [nombre_app]
 
 La ventaja de utilizar Composer es que automáticamente completará algunas tareas
 de inicialización, como aplicar permisos a ficheros y crear tu fichero
