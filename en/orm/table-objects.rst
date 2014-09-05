@@ -1757,7 +1757,7 @@ more detail on how to use the events subsystem.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, array $options, boolean $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
@@ -2128,9 +2128,9 @@ important note should be made.
     For  hasMany and belongsToMany associations, if there were any entities that
     could not be matched by primary key to any record in the data array, then
     those records will be discarded from the resulting entity.
-    
+
 .. note::
-    Remember that using either ``patchEntity()`` or ``patchEntities()`` 
+    Remember that using either ``patchEntity()`` or ``patchEntities()``
     does not persist the data, it just edits (or creates) the given entities. In order to
     save the entity you will have to call the ``save()`` method.
 
