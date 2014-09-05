@@ -267,7 +267,9 @@ extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
 ``src/View/Helper/AppHelper.php``::
 
-    use App\View\Helper\AppHelper;
+    namespace App\View\Helper;
+
+    use Cake\View\Helper;
 
     class AppHelper extends Helper {
         public function customMethod() {
