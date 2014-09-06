@@ -8,7 +8,7 @@ from 2.x to 3.x.
 
 It is provided by a standalone
 `Upgrade plugin <https://github.com/cakephp/upgrade>`_. Please read the README
-file to get all informations on how to upgrade your application.
+file to get all information on how to upgrade your application.
 
 .. meta::
     :title lang=en: .. _upgrade-shell:
