@@ -23,7 +23,7 @@ disponibles, y compris le nom du plugin quand il est valable. (Toutes les
 possibilités retournées, pour celle-ci et les autres sous-commandes, sont
 séparées par un espace.) Par exemple::
 
-    ./bin/cake Completion commands
+    bin/cake Completion commands
 
 Retourne::
 
@@ -39,7 +39,7 @@ Une fois que la commande préférée a été choisie, les Sous-commandes apparai
 à la deuxième étape et affiche la sous-commande possible pour la commande de
 shell donnée. Par exemple::
 
-    ./bin/cake Completion subcommands bake
+    bin/cake Completion subcommands bake
 
 Retourne::
 
@@ -53,11 +53,11 @@ commande donnée comme définies dans getOptionParser. (Y compris les options pa
 défaut héritées du Shell.)
 Par exemple::
 
-    ./bin/cake Completion options bake
+    bin/cake Completion options bake
 
 Retourne::
 
-    --help -h --verbose -v --quiet -q --connection -c --theme -t
+    --help -h --verbose -v --quiet -q --connection -c --template -t
 
 Exemple de Bash
 ===============
