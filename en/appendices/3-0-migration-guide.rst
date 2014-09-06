@@ -485,6 +485,9 @@ Controller
 - The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
   magic properties have been removed. You should access all of these properties
   on ``$this->request`` instead.
+- Underscore prefixed controller methods like ``_someMethod()`` are no longer
+  treated as private methods. Use proper visibility keywords instead. Only
+  public methods can be used as controller actions.
 
 Scaffold Removed
 ----------------
@@ -635,6 +638,11 @@ ConnectionManager
   a more standard and consistent API.
 - ``ConnectionManager::create()`` has been removed.
   It can be replaced by ``config($name, $config)`` and ``get($name)``.
+
+Behaviors
+---------
+- Underscore prefixed behavior methods like ``_someMethod()`` are no longer
+  treated as private methods. Use proper visibility keywords instead.
 
 TreeBehavior
 ------------
