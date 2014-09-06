@@ -21,10 +21,10 @@ problèmes si la base de données host est 'localhost' et devront essayer
 
 Avant de lancer bake, vous devrez vous assurer qu'au moins une connection à une
 base de données est configurée. Regardez la section dans
-:ref:`database configuration <database-configuration>` pour plus d'informations.
-configuration de la base de données, si vous n'en avez pas créé un auparavant.
+:ref:`configuration de la base de données <database-configuration>` pour plus
+d'informations.
 
-Quand vous lancer sans arguments ``bin/cake bake``, cela va afficher une
+Quand vous lancez ``bin/cake bake`` sans arguments, cela va afficher une
 liste des tâches disponibles. Vous devriez voir quelque chose comme::
 
     ---------------------------------------------------------------
@@ -50,35 +50,35 @@ liste des tâches disponibles. Vous devriez voir quelque chose comme::
     En utilisant bin/cake bake [name] vous pouvez faire appel à une tâche
     spécifique de bake.
 
-Vous pouvez obtenir plus d'informations sur ce que chaque tâche fait et quelles
-options sont disponibles en utilisant l'option ``--help``::
+Vous pouvez obtenir plus d'informations sur ce que chaque tâche fait et les
+options disponibles en utilisant l'option ``--help``::
 
     $ bin/cake bake model --help
 
 
-Créer des nouvelles Tâches pour Bake
+Créer des Nouvelles Tâches pour Bake
 ====================================
 
 Bake fonctionne sur une architecture extensible qui permet à votre application
 ou vos plugins de fournir de nouvelles tâches, ou de remplacer les tâches
-fournies par CakePHP. En étendant ``Cake\Console\Command\Task\BakeTask``, bake
+fournies par CakePHP. En étendant ``Cake\Shell\Task\BakeTask``, bake
 va trouver votre nouvelle tâche et l'inclure comme une partie de bake.
 
 Comme exemple, nous allons faire une tâche qui créé des classes shell. D'abord
-créez le fichier de tâche ``src/Console/Command/Task/ShellTask.php``. Nous
+créez le fichier de tâche ``src/Shell/Task/ShellTask.php``. Nous
 étendrons le ``SimpleBakeTask`` pour l'instant puisque notre tâche shell sera
-simple. ``SimpleBakeTask`` est abstract et nous impose de définir 4 méthodes
-qui disent à bake la tâche appelée, où devront se trouver les fichiers qu'il
-va générer, et le template à utiliser. Notre fichier ShellTask.php devra
-ressembler à ceci::
+simple. ``SimpleBakeTask`` est abstraite et nous impose de définir 4 méthodes
+qui disent à bake la tâche appelée, l'endroit où devront se trouver les
+fichiers qu'il va générer, et le template à utiliser. Notre fichier
+ShellTask.php devra ressembler à ceci::
 
     <?php
-    namespace App\Console\Command\Task;
+    namespace App\Shell\Task;
 
-    use Cake\Console\Command\Task\SimpleBakeTask;
+    use Cake\Shell\Task\SimpleBakeTask;
 
     class ShellTask extends SimpleBakeTask {
-        public $pathFragment = 'Console/Command/';
+        public $pathFragment = 'Shell/';
 
         public function name() {
             return 'shell';
@@ -96,12 +96,12 @@ ressembler à ceci::
 
 Une fois que le fichier a été créé, nous devons créer un template que bake peut
 utiliser pour la génération de code. Créez
-``src/Console/Command/Template/app/classes/shell.ctp``. Dans ce fichier, nous
+``src/Template/Bake/app/classes/shell.ctp``. Dans ce fichier, nous
 ajouterons le contenu suivant::
 
     <?php
     echo "<?php\n"; ?>
-    namespace <?= $namespace ?>\Console\Command;
+    namespace <?= $namespace ?>\Shell;
 
     use Cake\Console\Shell;
 
@@ -117,28 +117,29 @@ ajouterons le contenu suivant::
 
 Vous devriez maintenant voir votre nouvelle tâche dans l'affichage de
 ``bin/cake bake``. Vous pouvez lancer votre nouvelle tâche en executant
-``bin/cake bake shell Example --theme app``.
+``bin/cake bake shell Example --template app``.
 Cela va générer une nouvelle classe ``ExampleShell`` que votre application va
-utiliser.
+pouvoir utiliser.
 
-Modifier le HTML/Code produit par défaut par bake
+Modifier le HTML/Code Produit par Défaut par bake
 =================================================
 
 Si vous souhaitez modifier la sortie par défaut du HTML produit par la commande
-"bake", vous pouvez créer votre propre 'theme' de bake qui vous permet de
+"bake", vous pouvez créer votre propre 'template' de bake qui vous permet de
 remplacer certaine ou toute partie des templates que bake utilise. Pour créer
-un nouveau theme de bake, faîtes ce qui suit:
+un nouveau template de bake, faîtes ce qui suit:
 
-#. Créez un nouveau répertoire dans ``src/Console/Templates/[name]``.
+#. Créez un nouveau répertoire dans ``src/Template/Bake/[name]``.
 #. Copiez tout template que vous souhaitez changer à partir de
-   ``vendor/cakephp/cakephp/src/Console/Templates/default``.  vers les
+   ``vendor/cakephp/cakephp/src/Template/Bake/default``  vers les
    répertoires correspondants dans votre application/plugin.
-#. Quand vous lancez bake, utilisez l'option ``--theme`` pour spécifier le
-   theme que vous souhaitez utiliser.
+#. Quand vous lancez bake, utilisez l'option ``--template`` pour spécifier le
+   template que vous souhaitez utiliser.
 
 .. note::
 
-    Les noms de theme de bake doivent être unique, donc n'utilisez pas 'default'.
+    Les noms de template de bake doivent être unique, donc n'utilisez pas
+    'default'.
 
 
 .. meta::
