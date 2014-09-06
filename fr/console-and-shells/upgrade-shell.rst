@@ -14,4 +14,4 @@ au fichier README pour avoir toutes les informations sur la façon de mettre
 
 .. meta::
     :title lang=fr: .. _upgrade-shell:
-    :keywords lang=fr: api docs,shell
+    :keywords lang=fr: api docs,shell,upgrade

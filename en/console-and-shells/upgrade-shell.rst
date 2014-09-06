@@ -12,4 +12,4 @@ file to get all information on how to upgrade your application.
 
 .. meta::
     :title lang=en: .. _upgrade-shell:
-    :keywords lang=en: api docs,shell
+    :keywords lang=en: api docs,shell,upgrade
