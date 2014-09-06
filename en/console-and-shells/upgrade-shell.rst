@@ -50,8 +50,8 @@ CakePHP version in your app, eg.: ``cp -R ../cakephp/lib .``. Symlinking is a
 good alternative to copy as well, eg.: ``ln -s /var/www/cakephp/lib``.
 
 Before we can run the upgrade shell we need the new console scripts as well.
-Copy the ``cakephp/src/Console`` folder into your ``mywebsite/App``, eg.:
-``cp -R ../cakephp/src/Console ./App``.
+Copy the ``cakephp/app/Console`` folder into your ``mywebsite/app``, eg.:
+``cp -R ../cakephp/app/Console ./app``.
 
 Your folder structure should look like this now::
 
