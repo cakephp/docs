@@ -45,10 +45,101 @@ examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
     // Start a new query.
     $query = $articles->find();
 
-Récupérer vos données
-==============
+Almost every method in a ``Query`` object will return the same query, this means
+that ``Query`` objects are lazy, and will not be executed unless you tell them
+to::
 
-La plupart des applications web utilisent beaucoup les requêtes de type ``SELECT``. CakePHP permet de construire ces requêtes en un clin d'oeil. La ::method ``select()`` vous permet de ne récupérer que les champs qui vous sont nécessaire.
+    $query->where(['id' => 1]); // Return the same query object
+    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
+
+You can of course chain the methods you call on Query objects::
+
+    $query = $articles
+        ->find()
+        ->select(['id', 'name'])
+        ->where(['id !=' => 1])
+        ->order(['created' => 'DESC']);
+
+If you try to call ``debug()`` on a Query object, you will see its internal
+state and the SQL that will be executed in the database::
+
+    debug($articles->find()->where(['id' => 1]));
+
+    // Outputs
+    // ...
+    // 'sql' => 'SELECT * FROM articles where id = ?'
+    // ...
+
+Once you're happy with the Query, you can execute it. The easiest way is to
+either call the ``first()`` or the ``all()`` methods::
+
+    $firstArticle = $articles
+        ->find()
+        ->where(['id' => 1])
+        ->first();
+
+    $allResults = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->all();
+
+In the above example, ``$allResults`` will be an instance of
+``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
+and traversing methods on. Often, there is no need to call ``all()``, you are
+allowed to just iterate the Query object to get its results::
+
+    // Iterate the results
+    foreach ($allResults as $result) {
+     ...
+    }
+
+    // That is equivalent to
+    $query = $articles->find()->where(['id' => 1]);
+    foreach ($query as $result) {
+     ...
+    }
+
+Query objects can also be used directly as the result object; trying to iterate the query,
+calling ``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
+will result in the query being executed and results returned to you::
+
+    // This executes the query and returns an array of results
+    $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
+
+    // Use the combine() method from the collections library
+    // This executes the query
+    $keyValueList = $articles->find()->combine('id', 'title');
+
+    // Use the extract() method from the collections library
+    // This executes the query as well
+    $allTitles = $articles->find()->extract('title');
+
+Once you get familiar with the Query object methods, it is strongly encouraged
+that you visit the :ref:`Collection<collection-objects>` section to improve your skills
+in efficiently traversing the data. In short, it is important to remember that
+anything you can call on a Collection object, you can also do in a Query object::
+
+    // An advanced example
+    $results = $articles->find()
+        ->where(['id >' => 1])
+        ->order(['title' => 'DESC'])
+        ->map(function($row) { // map() is a collection method, it executes the query
+            $row->trimmedTitle = trim($row->title);
+            return $row;
+        });
+        ->combine('id', 'trimmedTitle') // combine() is another collection method
+        ->toArray(); // Also a collections library method
+
+The following sections will show you everything there is to know about using and
+combining the Query object methods to construct SQL statements and extract data.
+
+Récupérer vos données
+=====================
+
+La plupart des applications web utilisent beaucoup les requêtes de type
+``SELECT``. CakePHP permet de construire ces requêtes en un clin d'oeil. La
+::method ``select()`` vous permet de ne récupérer que les champs qui vous sont
+nécessaire::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -56,7 +147,7 @@ La plupart des applications web utilisent beaucoup les requêtes de type ``SELEC
         debug($row->title);
     }
 
-La ::method ``select()`` permet également de définir des alias pour vos champs
+La ::method ``select()`` permet également de définir des alias pour vos champs::
 
     // Results in SELECT id pk, title aliased_title, body ...
     $query = $articles->find();
