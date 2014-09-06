@@ -22,7 +22,7 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/authentication` et
 :doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
@@ -63,13 +63,13 @@ Comme avec les helpers, les components vont automatiquement fusionner leur
 propriété ``$_defaultConfig`` avec le configuration du constructeur pour créer
 la propriété ``$_config`` qui est accessible avec ``config()``.
 
-Faire des alias avec les Components
+Faire des Alias avec les Components
 -----------------------------------
 
 Un paramètre commun à utiliser est l'option ``className``, qui vous autorise
-les alias des components. Cette fonctionnalité est utile quand vous voulez
-remplacer ``$this->Auth`` ou une autre référence de Component commun avec
-une implémentation sur mesure::
+à faire des alias des components. Cette fonctionnalité est utile quand vous
+voulez remplacer ``$this->Auth`` ou une autre référence habituelle de Component
+avec une implémentation sur mesure::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController {
@@ -84,10 +84,10 @@ une implémentation sur mesure::
     use Cake\Controller\Component\AuthComponent;
 
     class MyAuthComponent extends AuthComponent {
-        // Add your code to override the core AuthComponent
+        // Ajoutez votre code pour surcharge l'AuthComponent du coeur
     }
 
-Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
+Ce qu'il y a au-dessous fera un *alias* ``MyAuthComponent`` de
 ``$this->Auth`` dans vos controllers.
 
 .. note::
@@ -120,12 +120,12 @@ controller, vous pouvez y accéder comme ceci::
     controllers en tant que propriété, ils partagent le même 'espace de noms'.
     Assurez vous de ne pas donner le même nom à un component et à un model.
 
-Charger les components à la volée
+Charger les Components à la Volée
 ---------------------------------
 
 Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
-action. Dans ce cas là, vous pouvez charger à la volée en utilisant la
-:doc:`Component Collection </core-libraries/collections>`. A partir de
+action. Dans ce cas là, vous pouvez le charger à la volée en utilisant le
+:doc:`Registre de Component </core-libraries/registry-objects>`. A partir de
 l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
 
     $this->OneTimer = $this->Components->load('OneTimer');
@@ -133,9 +133,10 @@ l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
 
 .. note::
 
-    Gardez à l'esprit que le chargement d'un component à la volée ne va pas
-    appeler la méthode initialize. Si le component que vous appelez a cette
-    méthode, vous devrez l'appeler manuellement après le chargement.
+    Gardez à l'esprit que le chargement d'un component à la volée n'appelera
+    pas les callbacks manquants. Si vous souhaitez que les callbacks
+    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
+    manuellement selon le moment où vous chargez votre component.
 
 Callbacks des Components
 ========================
@@ -160,6 +161,8 @@ le component. Créez le fichier dans
 ``/src/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
 
+    namespace App\Controller\Component;
+
     use Cake\Controller\Component;
 
     class MathComponent extends Component {
@@ -170,10 +173,10 @@ le component ressemblerait à quelque chose comme cela::
 
 .. note::
 
-    Tous les components comme Math doivent étendre :php:class:`Component`.
+    Tous les components doivent étendre :php:class:`Component`.
     Ne pas le faire vous enverra une exception.
 
-Inclure votre component dans vos controllers
+Inclure votre Component dans vos Controllers
 --------------------------------------------
 
 Une fois notre component terminé, nous pouvons l'utiliser au sein
@@ -204,8 +207,8 @@ Component::
         'Session', 'Auth'
     ];
 
-L'exemple ci-dessus passerait le tableau contenant "precision"
-et "generateurAleatoire" comme second paramètre au
+L'exemple ci-dessus passerait le tableau contenant precision
+et randomGenerator comme second paramètre au
 ``MathComponent::__construct()``. Par convention, si les clés du tableau
 correspondent aux propriétés publiques du component, les propriétés seront
 définies avec les valeurs de ces clés.
@@ -222,7 +225,7 @@ variable ``$components``::
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
-        // the other component your component uses
+        // The other component your component uses
         public $components = ['Existing'];
 
         public function initialize(Controller $controller) {
@@ -263,7 +266,7 @@ API de Component
 
 .. php:method:: __construct(ComponentRegistry $registry, $config = [])
 
-    Les Constructeurs pour la classe de base du component. Tous les
+    Le Constructeur pour la classe de base du component. Tous les
     paramètres se trouvent dans ``$config`` et ont des propriétés publiques.
     Ils vont avoir leur valeur changée pour correspondre aux valeurs de
     ``$config``.
@@ -271,30 +274,28 @@ API de Component
 Les Callbacks
 -------------
 
-.. php:method:: initialize(Event $event, Controller $controller)
+.. php:method:: initialize(Event $event)
 
-    Est appelée avant la méthode du controller
-    beforeFilter.
+    Est appelée avant la méthode du controller beforeFilter.
 
-.. php:method:: startup(Event $event, Controller $controller)
+.. php:method:: startup(Event $event)
 
-    Est appelée après la méthode du controller
-    beforeFilter mais avant que le controller n'exécute l'action prévue.
+    Est appelée après la méthode du controller beforeFilter mais avant que
+    le controller n'exécute l'action prévue.
 
-.. php:method:: beforeRender(Event $event, Controller $controller)
+.. php:method:: beforeRender(Event $event)
 
-    Est appelée après que le controller exécute la
-    logique de l'action requêtée, mais avant le rendu de la vue et le
-    layout du controller.
+    Est appelée après que le controller exécute la logique de l'action
+    requêtée, mais avant le rendu de la vue et le layout du controller.
 
-.. php:method:: shutdown(Event $event, Controller $controller)
+.. php:method:: shutdown(Event $event)
 
     Est appelée avant que la sortie soit envoyée au navigateur.
 
 .. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
 
     Est invoquée quand la méthode de redirection du controller est appelée,
-    mais avant toute action qui suit. Si cette méthode retourne false, le
+    mais avant toute action qui suit. Si cette méthode retourne ``false``, le
     controller ne continuera pas de rediriger la requête. Les paramètres $url et
     $response vous permettent d'inspecter et de modifier la localisation de tout
     autre header dans la réponse.
