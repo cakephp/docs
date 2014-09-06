@@ -325,7 +325,7 @@ Log API
     :param string $name: Name of the logger you wish to no longer receive
         messages.
 
-.. php:staticmethod:: write($level, $message, $scope = array())
+.. php:staticmethod:: write($level, $message, $scope = [])
 
     Write a message into all the configured loggers.
     ``$level`` indicates the level of log message being created.
@@ -343,14 +343,14 @@ Convenience Methods
 The following convenience methods were added to log `$message` with the
 appropriate log level.
 
-.. php:staticmethod:: emergency($message, $scope = array())
-.. php:staticmethod:: alert($message, $scope = array())
-.. php:staticmethod:: critical($message, $scope = array())
-.. php:staticmethod:: error($message, $scope = array())
-.. php:staticmethod:: warning($message, $scope = array())
-.. php:staticmethod:: notice($message, $scope = array())
-.. php:staticmethod:: debug($message, $scope = array())
-.. php:staticmethod:: info($message, $scope = array())
+.. php:staticmethod:: emergency($message, $scope = [])
+.. php:staticmethod:: alert($message, $scope = [])
+.. php:staticmethod:: critical($message, $scope = [])
+.. php:staticmethod:: error($message, $scope = [])
+.. php:staticmethod:: warning($message, $scope = [])
+.. php:staticmethod:: notice($message, $scope = [])
+.. php:staticmethod:: debug($message, $scope = [])
+.. php:staticmethod:: info($message, $scope = [])
 
 Log Adapter Interface
 =====================

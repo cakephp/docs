@@ -77,9 +77,12 @@ le deuxième paramètre::
 Permettre aux Champs d'être Vides
 ---------------------------------
 
-La méthode ``allowEmpty`` va sauter les autres règles de validation si le
-champ est à 'empty', puisque les valeurs vides sont acceptées. La méthode
-``allowEmpty()`` a 4 modes:
+Les méthodes ``allowEmpty()`` et ``notEmpty()`` vous permettent de contrôler
+les champs autorisés à être 'vide'. En utilisant la méthode ``notEmpty()``, le
+champ donné sera noté comme invalide quand il est vide. Vous pouvez utiliser
+``allowEmpty()`` pour permettre à un champ d'être vide. Les deux méthodes
+``allowEmpty()`` et ``notEmpty()`` ont un paramètre mode qui vous permet
+de contrôler quand un champ peut ou ne peut pas être vide:
 
 * ``true`` Le champ peut être vide.
 * ``false`` Le champ ne peut pas être vide.
@@ -88,9 +91,8 @@ champ est à 'empty', puisque les valeurs vides sont acceptées. La méthode
 * ``update`` Le champ est nécessaire lors de la validation d'une opération
   **update**.
 
-Par défaut, ``true`` est utilisée. Les valeurs ``''``, ``null`` et ``[]``
-(tableau vide) va entraîner des erreurs de validation quand les champs n'ont
-pas l'autorisation d'être vide.
+Les valeurs ``''``, ``null`` et ``[]`` (tableau vide) vont entraîner des
+erreurs de validation quand les champs n'ont pas l'autorisation d'être vide.
 Quand les champs ont l'autorisation d'être vide, les valeurs ``''``, ``null``,
 ``false``, ``[]``, ``0``, ``'0'`` sont acceptées.
 
@@ -106,7 +108,7 @@ Champs Uniques
 
 La classe ``Table`` fournit une règle de validation pour s'assurer qu'un champ
 donné est unique dans une table. Par exemple, si vous souhaitez vous assurer
-que l'adresse email est unique, vous pourriez faire ce qui suit::
+que l'adresse email est unique, vous pouvez faire ce qui suit::
 
     $validator->add('email', [
         'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
@@ -313,14 +315,14 @@ d'envoyer un email, vous pouvez faire ce qui suit::
 
     $errors = $validator->errors($this->request->data());
     if (!empty($errors)) {
-        // Send an email.
+        // Envoi d'un email.
     }
 
 La méthode ``errors()`` va retourner un tableau non-vide quand il y a des échecs
 de validation. Le tableau retourné d'erreurs sera structuré comme ceci::
 
     $errors = [
-        'email' => ['E-mail must be valid']
+        'email' => ['E-mail doit être valide']
     ];
 
 Si vous avez plusieurs erreurs pour un seul champ, un tableau de messages

@@ -42,15 +42,19 @@ avez aussi dans votre application.
 Faire une Itération
 ===================
 
+.. php:method:: each(callable $c)
+
 Les Collections peuvent être itérées et ou transformées en nouvelles
-collections avec les méthodes ``each`` et ``map``. La méthode ``each`` ne va
-pas créer une nouvelle collection, mais va vous permettre de modifier tout
+collections avec les méthodes ``each()`` et ``map()``. La méthode ``each()``
+ne va pas créer une nouvelle collection, mais va vous permettre de modifier tout
 objet dans collection::
 
     $collection = new Collection($items);
     $collection = $collection->each(function($value, $key) {
         echo "Element $key: $value";
     });
+
+.. php:method:: map(callable $c)
 
 Le retour de ``each()`` sera un objet collection. Chacun va itérer la collection
 immédiatemment en appliquant le callback pour chaque valeur dans collection.
@@ -73,6 +77,8 @@ les objets résultants quand ils sont itérés.
 Filtrer
 =======
 
+.. php:method:: filter(callable $c)
+
 Collections make it easy to filter and create new collections based on
 the result of callback functions. You can use ``filter()`` to create a new
 collection of elements matching a criteria callback::
@@ -85,6 +91,8 @@ collection of elements matching a criteria callback::
         return $person->gender === 'male';
     });
 
+.. php:method:: reject(callable $c)
+
 The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
 removing elements that match the filter function::
 
@@ -92,6 +100,8 @@ removing elements that match the filter function::
     $ladies = $collection->reject(function($person, $key) {
         return $person->gender === 'male';
     });
+
+.. php:method:: every(callable $c)
 
 You can do truth tests with filter functions. To see if every element in
 a collection matches a test you can use ``every()``::
@@ -101,6 +111,8 @@ a collection matches a test you can use ``every()``::
         return $person->age < 21;
     });
 
+.. php:method:: some(callable $c)
+
 You can see if the collection contains at least one element matching a filter
 function using the ``some()`` method::
 
@@ -109,13 +121,17 @@ function using the ``some()`` method::
         return $person->age < 21;
     });
 
+.. php:method:: match(array $conditions)
+
 If you need to extract a new collection containing only the elements that
-contain a given set of properties you should use the ``match()`` method::
+contain a given set of properties, you should use the ``match()`` method::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-The property name can be a dot separated path. You can traverse into nested
+.. php:method:: firstMatch(array $conditions)
+
+The property name can be a dot-separated path. You can traverse into nested
 entities and match the values they contain. When you only need the first
 matching element from a collection, you can use ``firstMatch()``::
 
@@ -125,16 +141,20 @@ matching element from a collection, you can use ``firstMatch()``::
         'active' => true
     ]);
 
-As you can see from the above, both ``match()`` and ``firstMatch()`` allow you to provide multiple conditions
-to match on. In addition the conditions can be for different paths allowing you
-to express complex conditions to match against.
+As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
+to provide multiple conditions to match on. In addition, the conditions can be
+for different paths, allowing you to express complex conditions to match
+against.
 
 Aggregation
 ===========
 
-One of the most common uses for a ``map`` function is to extract a single column
-from a collection. If you are looking to build a list of elements containing the
-values for a particular property, you can use the ``extract`` method::
+.. php:method:: extract($matcher)
+
+One of the most common uses for a ``map()`` function is to extract a single
+column from a collection. If you are looking to build a list of elements
+containing the values for a particular property, you can use the ``extract()``
+method::
 
     $collection = new Collection($people);
     $names = $collection->extract('name');
@@ -143,7 +163,7 @@ values for a particular property, you can use the ``extract`` method::
     $result = $names->toArray();
 
 As with many other functions in the collection class, you are allowed to specify
-a dot separated path for extracting columns, this example will return
+a dot-separated path for extracting columns. This example will return
 a collection containing the author names from a list of articles::
 
     $collection = new Collection($articles);
@@ -157,18 +177,21 @@ you can use a callback function to return it::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function($article) {
-        return $article->author->name ', ' . $article->author->last_name;
+        return $article->author->name . ', ' . $article->author->last_name;
     });
 
-The counterpart of a ``map`` operation is usually a ``reduce``, this function
-will help you build a single result out of all the elements in a collection::
+.. php:method:: reduce(callable $c)
+
+The counterpart of a ``map()`` operation is usually a ``reduce``. This
+function will help you build a single result out of all the elements in a
+collection::
 
     $totalPrice = $collection->reduce(function($orderLine, $accumulated) {
         return $accumulated + $orderLine->price;
     }, 0);
 
 In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce``
+contained in the collection. Note the second argument for the ``reduce()``
 function, it takes the initial value for the reduce operation you are
 performing::
 
@@ -176,9 +199,11 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-To extract the minimum value for a collection, based on a property, just use the
-``min`` function, this will return the full element from the collection and not
-just the smallest value found::
+.. php:method:: min($callback, $type = SORT_NUMERIC)
+
+To extract the minimum value for a collection based on a property, just use the
+``min()`` function. This will return the full element from the collection and
+not just the smallest value found::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
@@ -195,7 +220,9 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-The same can be applied to the ``max`` function, which will return a single
+.. php:method:: max($callback, $type = SORT_NUMERIC)
+
+The same can be applied to the ``max()`` function, which will return a single
 element from the collection having the highest property value::
 
     $collection = new Collection($people);
@@ -210,19 +237,21 @@ element from the collection having the highest property value::
 Grouping and Counting
 ---------------------
 
+.. php:method:: groupBy($callback)
+
 Collection values can be grouped by different keys in a new collection when they
 share the same value for a property::
 
     $students = [
         ['name' => 'Mark', 'grade' => 9],
         ['name' => 'Andrew', 'grade' => 10],
-        ['name' => 'Stacy' 'grade' => 10],
+        ['name' => 'Stacy', 'grade' => 10],
         ['name' => 'Barbara', 'grade' => 9]
     ];
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
 
-    //Result will look like this when converted to array:
+    // Result will look like this when converted to array:
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -234,40 +263,44 @@ share the same value for a property::
       ]
     ]
 
-As usual, it is possible to provide either a dot separated path for nested
+As usual, it is possible to provide either a dot-separated path for nested
 properties or your own callback function to generate the groups dynamically::
 
     $commentsByUserId = $comments->groupBy('user.id');
 
     $classResults = $students->groupBy(function($student) {
-        retrun $student->grade > 6 ? 'approved' : 'reproved';
+        retrun $student->grade > 6 ? 'approved' : 'denied';
     });
 
+.. php:method:: countBy($callback)
+
 If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy`` method, it takes the same arguments as ``groupBy`` so it
+using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
     $classResults = $students->countBy(function($student) {
-        retrun $student->grade > 6 ? 'approved' : 'reproved';
+        retrun $student->grade > 6 ? 'approved' : 'denied';
     });
 
-    //Result could look like this when converted to array:
-    ['approved' => 70, 'reproved' => 20]
+    // Result could look like this when converted to array:
+    ['approved' => 70, 'denied' => 20]
+
+.. php:method:: indexBy($callback)
 
 There will be certain cases where you know an element is unique for the property
 you want to group by. If you wish a single result per group, you can use the
-function ``indexBy``::
+function ``indexBy()``::
 
     $usersById = $users->indexBy('id');
 
-    //When converted to array result could look like
+    // When converted to array result could look like
     [
         1 => 'markstory',
         3 => 'jose_zap',
         4 => 'jrbasso'
     ]
 
-As with the ``groupBy`` function you can also use a property path or
+As with the ``groupBy()`` function you can also use a property path or
 a callback::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
@@ -278,6 +311,8 @@ a callback::
 
 Sorting
 =======
+
+.. php:method:: sortBy($callback)
 
 Collection values can be sorted in ascending or descending order based on
 a column or custom function. To create a new sorted collection out of the values
@@ -294,8 +329,8 @@ their author's name::
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('author.name');
 
-The ``sortBy`` method is flexible enough to let you specify an extractor
-function that will let you select dynamically the value to use for comparing two
+The ``sortBy()`` method is flexible enough to let you specify an extractor
+function that will let you dynamically select the value to use for comparing two
 different values in the collection::
 
     $collection = new Collection($articles);
@@ -312,38 +347,133 @@ collections are sorted in ascending direction::
     $sorted = $collection->sortBy('age', SORT_ASC);
 
 Sometimes you will need to specify which type of data you are trying to compare
-so that you get consistent results. For this purpose you should supply as third
-argument in the ``sortBy`` function one of the following constants:
+so that you get consistent results. For this purpose, you should supply a third
+argument in the ``sortBy()`` function with one of the following constants:
 
 - **SORT_NUMERIC**: For comparing numbers
 - **SORT_STRING**: For comparing string values
 - **SORT_NATURAL**: For sorting string containing numbers and you'd like those
-  numbers to be order in a natural way. For example showing "10" after "2".
+  numbers to be order in a natural way. For example: showing "10" after "2".
 - **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
 
-By default ``SORT_NUMERIC`` is used::
+By default, ``SORT_NUMERIC`` is used::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 .. warning::
 
-    If is often expensive to iterate sorted collections more than once, if you
+    If is often expensive to iterate sorted collections more than once. If you
     plan to do so, consider converting the collection to an array or simply use
-    the ``compile`` method on it.
+    the ``compile()`` method on it.
+
+Working with Tree Data
+======================
+
+.. php:method:: nest($idPath, $parentPath)
+
+Not all data is meant to be represented in a linear way. Collections make it
+easier to construct and flatten hierarchical or nested structures. Creating
+a nested structure where children are grouped by a parent identifier property is
+easy with the ``nest()`` method.
+
+Two parameters are required for this function. The first one is the property
+representing the item identifier. The second parameter is the name of the
+property representing the identifier for the parent item::
+
+    $items new Collection([
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
+        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+    ]);
+
+    $collection->nest('id', 'parent_id')->toArray();
+    // Returns
+    [
+        [
+            'id' => 1,
+            'parent_id' => null,
+            'name' => 'Bird',
+            'children' => [
+                [
+                    'id' => 2,
+                    'parent_id' => 1,
+                    'name' => 'Land Birds',
+                    'children' => [
+                        ['id' => 3, 'name' => 'Eagle', 'parent_id' => 2]
+                    ]
+                ],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull',  'children' => []],
+            ]
+        ],
+        [
+            'id' => 6,
+            'parent_id' => null,
+            'name' => 'Fish',
+            'children' => [
+                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
+            ]
+        ]
+    ];
+
+Children elements are nested inside the ``children`` property inside each of the
+items in the collection. This type of data representation is helpful for
+rendering menus or traversing elements up to certain level in the tree.
+
+.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+
+The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
+a tree structure back into a linear structure. It takes two parameters, the
+first one is the traversing mode (asc, desc or leaves), and the second one is
+the name of the property containing the children for each element in the
+collection.
+
+Taking the input the nested collection built in the previous example, we can
+flatten it::
+
+    $nested->listNested()->toArray();
+
+    // Returns
+    [
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+    ]
+
+By default, the tree is traversed from the root to the leaves. You can also
+instruct it to only return the leaf elements in the tree::
+
+    $nested->listNested()->toArray();
+
+    // Returns
+    [
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+    ]
 
 Other Methods
 =============
 
+.. php:method:: contains($value)
+
 Collections allow you to quickly check if they contain one particular
-value: by using the ``contains`` method::
+value: by using the ``contains()`` method::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
     $hasThree = $collection->contains(3);
 
 Comparisons are performed using the ``===`` operator. If you wish to do looser
-comparison types you can use the ``some`` method.
+comparison types you can use the ``some()`` method.
+
+.. php:method:: shuffle()
 
 Sometimes you may wish to show a collection of values in a random order. In
 order to create a new collection that will return each value in a randomized
@@ -354,27 +484,61 @@ position, use the ``shuffle``::
     // This could return ['b' => 2, 'c' => 3, 'a' => 1]
     $collection->shuffle()->toArray();
 
+.. php:method:: combine($keyPath, $valuePath, $groupPath = null)
+
+Collections allow you to create a new collection made from keys and values in
+an existing collection. Both the key and value paths can be specified with
+dot notation paths::
+
+    $items = [
+        ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
+        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
+        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+    ];
+    $combined = (new Collection($items))->combine('id', 'name');
+
+    // Result will look like this when converted to array
+    [
+        1 => 'foo',
+        2 => 'bar',
+        3 => 'baz',
+    ];
+
+You can also optionally use a ``groupPath`` to group results based on a path::
+
+    $combined = (new Collection($items))->combine('id', 'name', 'parent');
+
+    // Result will look like this when converted to array
+    [
+        'a' => [1 => 'foo', 3 => 'baz'],
+        'b' => [2 => 'bar']
+    ];
+
 Withdrawing Elements
 --------------------
 
-Shuffling a collection is often useful when doing quick statistical analysis,
-another common operation when doing this sort of tasks is withdrawing a few
+.. php:method: sample($size)
+
+Shuffling a collection is often useful when doing quick statistical analysis.
+Another common operation when doing this sort of task is withdrawing a few
 random values out of a collection so that more tests can be performed on those.
 For example, if you wanted to select 5 random users to which you'd like to apply
-some A/B tests to, you can use the ``sample`` function::
+some A/B tests to, you can use the ``sample()`` function::
 
-    $collection = new Colllection($people);
+    $collection = new Collection($people);
 
-    // withdraw maximum 20 random users from this collection
+    // Withdraw maximum 20 random users from this collection
     $testSubjects = $collection->sample(20);
 
-``sample`` will take at most the number of values you specify in the first argument,
-if there are not enough elements in the collection to satisfy the sample, the
-full collection in a random order is returned.
+``sample()`` will take at most the number of values you specify in the first
+argument. If there are not enough elements in the collection to satisfy the
+sample, the full collection in a random order is returned.
 
-Whenever you want to take a slice of a collection use the ``take`` function, it
-will create a new collection with at most the number of values you specify in the
-first argument, starting from the position passed in the second argument::
+.. php:method: take($size, $from)
+
+Whenever you want to take a slice of a collection use the ``take()`` function,
+it will create a new collection with at most the number of values you specify in
+the first argument, starting from the position passed in the second argument::
 
     $topFive = $collection->sortBy('age')->take(5);
 
@@ -386,9 +550,11 @@ Positions are zero-based, therefore the first position number is ``0``.
 Expanding Collections
 ---------------------
 
+.. php:method: append($items)
+
 You can compose multiple collections into a single one. This enables you to
-gather data from various sources, concatenate it and apply other collection
-functions to it very smoothly. The ``append`` method will return a new
+gather data from various sources, concatenate it, and apply other collection
+functions to it very smoothly. The ``append()`` method will return a new
 collection containing the values from both sources::
 
     $cakephpTweets = new Collection($tweets);
@@ -401,24 +567,26 @@ collection containing the values from both sources::
 
 .. warning::
 
-    When appending from different sources you can expect some keys from both
-    collections to be the same, for example when appending two simple arrays.
+    When appending from different sources, you can expect some keys from both
+    collections to be the same. For example, when appending two simple arrays.
     This can present a problem when converting a collection to an array using
-    ``toArray``. If you do not want values from one collection to override
+    ``toArray()``. If you do not want values from one collection to override
     others in the previous one based on their key, make sure that you call
     ``toArray(false)`` in order to drop the keys and preserve all values.
 
 Modifiying Elements
 -------------------
 
+.. php:method: insert($path, $items)
+
 At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
 a very common case when you fetch data from a data source that does not support
-data merging or joins natively.
+data-merging or joins natively.
 
-Collections offer an ``insert`` method that will allow you to insert each of the
-elements in one collection into a property inside each of elements of another
-collection::
+Collections offer an ``insert()`` method that will allow you to insert each of
+the elements in one collection into a property inside each of the elements of
+another collection::
 
     $users = [
         ['username' => 'mark'],
@@ -429,7 +597,7 @@ collection::
     $languages = [
         ['PHP', 'Python', 'Ruby'],
         ['Bash', 'PHP', 'Javascript'],
-        ['Javascript', 'Prolog'],
+        ['Javascript', 'Prolog']
     ];
 
     $merged = (new Collection($users))->insert('skills', $languages);
@@ -442,7 +610,7 @@ When converted to an array, the ``$merged`` collection will look like this::
         ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
     ];
 
-The first parameter for the ``insert`` method is a dot separated path of
+The first parameter for the ``insert()`` method is a dot-separated path of
 properties to follow so that the elements can be inserted at that position. The
 second argument is anything that can be converted to a collection object.
 
@@ -455,24 +623,25 @@ first one, then the target property will be filled with ``null`` values::
 
     $languages = [
         ['PHP', 'Python', 'Ruby'],
-        ['Bash', 'PHP', 'Javascript'],
+        ['Bash', 'PHP', 'Javascript']
     ];
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
     // Will yield
-
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
         ['username' => 'jose', 'skills' => null]
     ];
 
-The ``insert`` method can operate array elements or objects implementing the
+The ``insert()`` method can operate array elements or objects implementing the
 ``ArrayAccess`` interface.
 
 Optimizing Collections
 ----------------------
+
+.. php:method: compile($preserveKeys = true)
 
 Collections often perform most operations that you create using its functions in
 a lazy way. This means that even though you can call a function, it does not
@@ -482,7 +651,7 @@ where you don't use all the values in a collection. You might not use all the
 values when iteration stops early, or when an exception/failure case is reached
 early.
 
-Additionally lazy evaluation helps speed up some operations, consider the
+Additionally, lazy evaluation helps speed up some operations. Consider the
 following example::
 
     $collection = new Collection($oneMillionItems);
@@ -491,15 +660,16 @@ following example::
     });
     $itemsToShow = $collection->take(30);
 
-Had collections not being lazy, we would have executed one million operations,
+Had the collections not been lazy, we would have executed one million operations,
 even though we only wanted to show 30 elements out of it. Instead, our map
 operation was only applied to the 30 elements we used. We can also
-derive benefits from this lazy evaluation even for smaller collections when we
-do more than one operation on them, for example calling ``map`` twice and then
-``filter``.
+derive benefits from this lazy evaluation for smaller collections when we
+do more than one operation on them. For example: calling ``map()`` twice and
+then ``filter()``.
 
-Lazy evaluation comes with its downside too, you could be doing the same
-operations more than once if you optimize it first. Consider now this example::
+Lazy evaluation comes with its downside too. You could be doing the same
+operations more than once if you optimize a collection prematurely. Consider
+this example::
 
     $ages = $collection->extract('age');
 
@@ -511,20 +681,20 @@ operations more than once if you optimize it first. Consider now this example::
         return $item > 30;
     });
 
-If we iterate both ``youngerThan30`` and ``olderThan30`` collection we would be,
-unfortunately, executing the ``extract`` operation twice. This is because
-collections are immutable and the lazy extracting operation would be done for
+If we iterate both ``youngerThan30`` and ``olderThan30``, the collection would
+unfortunately execute the ``extract()`` operation twice. This is because
+collections are immutable and the lazy-extracting operation would be done for
 both filters.
 
 Luckily we can overcome this issue with a single function. If you plan to reuse
 the values from certain operations more than once, you can compile the results
-into another collection using the ``compile`` function::
+into another collection using the ``compile()`` function::
 
     $ages = $collection->extract('age')->compile();
     $youngerThan30 = ...
     $olderThan30 = ...
 
-Now when the those 2 collections are iterated, they will only call the
+Now, when both collections are iterated, they will only call the
 extracting operation once.
 
 .. meta::

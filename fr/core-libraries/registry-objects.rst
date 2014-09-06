@@ -3,10 +3,10 @@ Objets Registry
 
 Les classes registry sont une façon simple de créer et récupérer les
 instances chargées d'un type d'objet donné. Il y a des classes registry pour les
-Components, les Helpers, les Tasks, et les Behaviors.
+Components, les Helpers, les Tasks et les Behaviors.
 
 Dans les exemples ci-dessous, on va utiliser les Components, mais le même
-comportement peut être attendu pour les Helpers, les Behaviors, et les Tasks en
+comportement peut être attendu pour les Helpers, les Behaviors et les Tasks en
 plus des Components.
 
 Charger les Objets
@@ -18,7 +18,7 @@ Exemple::
     $this->addComponent('DebugKit.Toolbar');
     $this->addHelper('Flash')
 
-Va permettre de définir `Toolbar property` et `Flash helper`.
+Va permettre de charger la propriété ``Toolbar`` et le helper ``Flash``.
 La configuration peut aussi être définie à la volée. Exemple::
 
     $this->addComponent('Cookie', ['name' => 'sweet']);
@@ -30,7 +30,7 @@ vous permet d'avoir des noms de component qui ne correspondent pas aux noms de
 classes, ce qui peut être utile quand vous étendez les components du coeur::
 
     $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
-    $this->Auth->user(); // utilise en fait MyCustomAuth::user();
+    $this->Auth->user(); // Utilise en fait MyCustomAuth::user();
 
 Attraper les Callbacks
 ======================

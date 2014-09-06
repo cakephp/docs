@@ -229,8 +229,13 @@ listener d'évenement. Par exemple si nous souhaitons mettre toutes les
 commandes dans des fichiers de log, nous pourrions utiliser une fonction
 anonyme simple pour le faire::
 
-    $this->Order->eventManager()->attach(function($event) {
-        CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
+    use Cake\Log\Log;
+
+    $this->Orders->eventManager()->attach(function($event) {
+        Log::write(
+            'info',
+            'A new order was placed with id: ' . $event->subject()->id
+        );
     }, 'Model.Order.afterPlace');
 
 En plus des fonctions anonymes, vous pouvez utiliser tout autre type callable

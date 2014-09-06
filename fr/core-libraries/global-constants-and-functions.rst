@@ -1,19 +1,17 @@
 Constantes globales et Fonctions
 ################################
 
-Alors que la plupart de vos activités quotidiennes avec CakePHP
-sera d'initialiser des classes du noyau, CakePHP dispose d'un
-certain nombre de fonctions globales de confort qui peuvent
-arriver à point nommé. La plupart de ses fonctions sont à
-utiliser avec les classes cakePHP (classes de chargement ou de
-component), mais beaucoup d'autres rendent le travail avec les
-tableaux ou les chaînes de caractères un peu plus simple.
+Alors que la plupart de vos activités quotidiennes avec CakePHP sera
+d'initialiser des classes du noyau, CakePHP dispose d'un certain nombre de
+fonctions globales de confort qui peuvent arriver à point nommé. La plupart de
+ses fonctions sont à utiliser avec les classes cakePHP (classes de chargement
+ou de component), mais beaucoup d'autres rendent le travail avec les tableaux
+ou les chaînes de caractères un peu plus simple.
 
-Nous allons aussi couvrir une partie des constantes disponibles
-dans les applications CakePHP. L'utilisation des constantes
-disponibles vous aidera à faire des mises à jour plus lisses,
-mais sont aussi des moyens pratiques pour pointer certains
-fichiers ou répertoires dans vos applications CakePHP.
+Nous allons aussi couvrir une partie des constantes disponibles dans les
+applications CakePHP. L'utilisation des constantes disponibles vous aidera à
+faire des mises à jour plus lisses, mais sont aussi des moyens pratiques pour
+pointer certains fichiers ou répertoires dans vos applications CakePHP.
 
 Fonctions Globales
 ==================
@@ -58,7 +56,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     message.
 
     Utile pour internationaliser un plugin:
-     ``echo __d('PluginName', 'This is my plugin');``
+     ``echo __d('PluginName', 'Ceci est mon plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 
@@ -107,33 +105,14 @@ CakePHP, comme le débogage et la traduction de contenu.
     Retourne la forme correcte d'un message identifié par $singular et $plural
     pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
     dépendant du compteur
- 
-.. php:function:: am(array $one, $two, $three...)
-
-    Fusionne tous les tableaux passés en paramètre et retourne le tableau
-    fusionné.
-   
-.. php:function:: config()
-
-    Peut être utilisé pour charger des fichiers depuis le dossier config
-    de votre application via include\_once. La fonction vérifie l'existence
-    du fichier avant de l'inclure et retourne un booléen.
-    Prend un nombre optionnel d'arguments.
-   
-    Exemple: ``config('un_fichier', 'maconfig');``
-
-.. php:function:: convertSlash(string $string)
-
-    Convertit les slashes en underscores et supprime les premier et
-    dernier underscores dans une chaîne. Retourne la chaîne convertie.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    Si le niveau de DEBUG de l'application est différent de zéro, $var est
-    affiché. Si ``$showHTML`` est true (vrai) ou laissé null, la donnée est
+    Si la variable ``$debug`` du coeur est à ``true``, $var est
+    affiché. Si ``$showHTML`` est ``true`` ou laissé null, la donnée est
     formatée pour être visualisée facilement dans un navigateur.
 
-    Si ``$showFrom`` n'est pas défini à false, debug retournera en sortie
+    Si ``$showFrom`` n'est pas défini à ``false``, debug retournera en sortie
     la ligne depuis laquelle il a été appelé.
     Voir aussi  :doc:`/development/debugging`
 
@@ -147,19 +126,10 @@ CakePHP, comme le débogage et la traduction de contenu.
     de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
     (notamment si vous prévoyez de distribuer le code), puisque
     c'est un wrapper d'émulation totale.
-
-.. php:function:: fileExistsInPath(string $file)
-
-    Vérifie que le fichier donné est dans le include\_path PHP actuel. 
-    Renvoie une valeur booléenne.
     
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
     Raccourci pratique pour ``htmlspecialchars()``.
-
-.. php:function:: LogError(string $message)
-
-    Raccourci pour: :php:meth:`Log::write()`.
  
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
@@ -175,15 +145,6 @@ CakePHP, comme le débogage et la traduction de contenu.
     Raccourci pratique pour ``print_r()``, avec un ajout de balises <pre>
     autour de la sortie.
 
-.. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
-
-    Tris de $array par la clé $sortby. 
-
-.. php:function:: stripslashes_deep(array $value)
-
-    Enlève récursivement les slashes de la ``$valeur`` passée.
-    Renvoie le tableau modifié.
-
 Définitions des constantes du noyau
 ===================================
 
@@ -197,10 +158,6 @@ dans votre application.
 .. php:const:: APP_DIR
 
     La même chose que ``app`` ou le nom du répertoire de votre application.
-
-.. php:const:: APPLIBS
-
-    Le chemin du répertoire Lib de votre application.
 
 .. php:const:: CACHE
 
@@ -239,10 +196,6 @@ dans votre application.
 .. php:const:: TMP
 
     Chemin vers le répertoire des fichiers temporaires.
-
-.. php:const:: VENDORS
-
-    Chemin vers le répertoire vendors.
 
 .. php:const:: WEBROOT_DIR
 

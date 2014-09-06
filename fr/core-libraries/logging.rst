@@ -13,7 +13,7 @@ ont été utilisés ? Quelles sortes d'erreurs ont été vues par mes utilisateu
 A quelle fréquence est exécutée une requête particulière ?
 
 La journalisation des données dans CakePHP est facile - la fonction log()
-est un élément de la classe Object, qui est l'ancêtre commun de la plupart
+est fourni par ``LogTrait``, qui est l'ancêtre commun de la plupart
 des classes CakePHP. Si le contexte est une classe CakePHP (Model, Controller,
 Component... n'importe quoi d'autre), vous pouvez loguer (journaliser) vos
 données. Vous pouvez aussi utiliser ``CakeLog::write()`` directement.
@@ -32,14 +32,14 @@ Un exemple serait::
 
     use Cake\Log\Log;
 
-    // Short classname
+    // Nom de classe court
     Log::config('debug', [
         'className' => 'FileLog',
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
 
-    // nom namespace complet.
+    // Nom avec le namespace complet.
     Log::config('error', [
         'className' => 'Cake\Log\Engine\FileLog',
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
@@ -117,7 +117,7 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
   ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
   Par défaut à 10MB.
 * ``rotate`` Les fichiers de log font une rotation à un temps spécifié
-  avant d\'être retiré.
+  avant d'être retiré.
   Si la valeur est 0, les versions anciennes seront retirées plutôt que
   mises en rotation. Par défaut à 10.
 * ``mask`` Définit les permissions du fichier pour les fichiers créés. Si
@@ -125,8 +125,8 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 .. warning::
 
-    Engines have the suffix ``Log``. You should avoid class names like ``SomeLogLog``
-    which include the suffix twice at the end.
+    Les moteurs ont le suffix ``Log``. Vous devrez éviter les noms de classe
+    comme ``SomeLogLog`` qui inclut le suffix deux fois à la fin.
 
 .. note::
 
@@ -142,12 +142,12 @@ Journalisation des Erreurs et des Exception
 ===========================================
 
 Les erreurs et les exception peuvent elles aussi être journalisées. En
-configurant les valeurs correspondantes dans votre fichier core.php.
-Les erreurs seront affichées quand debug > 0 et loguées quand debug == 0.
-Définir ``log`` à true  pour loguer les exceptions non capturées.
-Voir :doc:`/development/configuration` pour plus d'information.
+configurant les valeurs correspondantes dans votre fichier app.php.
+Les erreurs seront affichées quand debug > 0 et loguées quand debug est à
+`false`. Définir l'option ``log`` à ``true`` pour logger les exceptions non
+capturées. Voir :doc:`/development/configuration` pour plus d'information.
 
-Interagir avec les flux de log
+Interagir avec les Flux de Log
 ==============================
 
 Vous pouvez interroger le flux configurés avec
@@ -156,14 +156,14 @@ tableau de tous les flux actuellement configurés. Vous pouvez rejeter
 des flux en utilisant :php:meth:`Cake\\Log\\Log::drop()`. Une fois que le flux
 d'un log à été rejeté il ne recevra plus de messages.
 
-Utilisation de l'adaptateur FileLog
+Utilisation de l'Adaptateur FileLog
 ===================================
 
 Comme son nom l'indique FileLog écrit les messages log dans des fichiers. Le
 type des messages de log en court d'écriture détermine le nom du fichier ou le
-message sera stocker. Si le type n'est pas fourni, LOG\_ERROR est utilisé ce
-qui à pour effet d'écrire dans le log error. Le chemin par défaut est
-``app/tmp/logs/$type.log``::
+message sera stocker. Si le type n'est pas fourni, :php:const:`LOG_ERROR` est
+utilisé ce qui à pour effet d'écrire dans le log error. Le chemin par défaut est
+``logs/$level.log``::
 
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
@@ -171,32 +171,26 @@ qui à pour effet d'écrire dans le log error. Le chemin par défaut est
     // Aboutit à ce que cela soit ajouté à  app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
 
-Vous pouvez spécifier un nom personnalisé en utilisant le premier paramètre.
-La classe Filelog intégrée par défaut traitera ce nom de log comme le fichier
-dans lequel vous voulez écrire les logs::
-
-    // appelé de manière statique
-    CakeLog::write('activity', 'Un message spécial pour l'activité de logging');
-
-    // Aboutit à ce que cela soit ajouté à app/tmp/logs/activity.log (au lieu de error.log)
-    // 2007-11-02 10:22:02 Activity: Un message spécial pour l'activité de logging
-
 Le répertoire configuré doit être accessible en écriture par le serveur web de
 l'utilisateur pour que la journalisation fonctionne correctement.
 
-Vous pouvez configurer/alterner la localisation de FileLog en utilisant
-:php:meth:`CakeLog::config()`. FileLog accepte un ``chemin`` qui permet aux
-chemins personnalisés d'être utilisés.::
+Vous pouvez configurer/changer la localisation de FileLog lors de la
+configuration du logger. FileLog accepte un ``path`` qui permet aux
+chemins personnalisés d'être utilisés::
 
-    CakeLog::config('chemin_perso', array(
-        'engine' => 'FileLog',
+    Log::config('chemin_perso', [
+        'className' => 'File',
         'path' => '/chemin/vers/endroit/perso/'
-    ));
+    ]);
+
+.. warning::
+    Si vous ne configurez pas d'adaptateur de logging, les logs ne seront pas
+    stockés.
 
 .. _syslog-log:
 
-Logging to Syslog
-=================
+Logging vers Syslog
+===================
 
 Dans les environnements de production, il est fortement recommandé que vous
 configuriez votre système pour utiliser syslog plutôt que le logger de
@@ -227,9 +221,9 @@ comprend les clés suivantes:
 * `prefix`: Une chaine qui va être préfixée à tous les messages de log.
 * `flag`: Un drapeau entier utilisé pour l'ouverture de la connexion à
   logger, par défaut `LOG_ODELAY` sera utilisée. Regardez la documentation
-  de `openlog` pour plus d'options.
+  de ``openlog`` pour plus d'options.
 * `facility`: Le slot de journalisation à utiliser dans syslog. Par défaut
-  `LOG_USER` est utilisé. Regardez la documentation de `syslog` pour plus
+  ``LOG_USER`` est utilisé. Regardez la documentation de `syslog` pour plus
   d'options.
 
 .. _writing-to-logs:
@@ -243,7 +237,7 @@ d'utiliser la méthode statique :php:meth:`Cake\\Log\\Log::write()`::
     CakeLog::write('debug', 'Quelque chose qui ne fonctionne pas');
 
 La seconde est d'utiliser la fonction raccourcie log() disponible dans chacune
-des classes qui étend ``Object``. En appelant log() cela appellera en
+des classes qui utilisent ``LogTrait``. En appelant log() cela appellera en
 interne ``Log::write()``::
 
     // Exécuter cela dans une classe CakePHP:
@@ -280,7 +274,7 @@ niveau qui n'est pas dans les niveaux ci-dessus va entraîner une exception.
 
 .. _logging-scopes:
 
-Scopes de journalisation
+Scopes de Journalisation
 ========================
 
 Souvent, vous voudrez configurer différents comportements de journalisation
@@ -330,7 +324,7 @@ l'API de CakeLog
 
     Une simple classe pour écrire dans les logs (journaux).
 
-.. php:staticmethod:: config($name, $config)
+.. php:staticmethod:: config($key, $config)
 
     :param string $name: Nom du journal en cours de connexion, utilisé
         pour rejeter un journal plus tard.
@@ -351,7 +345,7 @@ l'API de CakeLog
     :param string $name: Nom du journal pour lequel vous ne voulez plus
         recevoir de messages.
 
-.. php:staticmethod:: write($level, $message, $scope = array())
+.. php:staticmethod:: write($level, $message, $scope = [])
 
     Écrit un message dans tous les journaux configurés.
     ``$level`` indique le niveau de message log étant créé.
@@ -364,26 +358,20 @@ l'API de CakeLog
 Appelle cette méthode sans arguments, ex: `Log::levels()` pour
 obtenir le niveau de configuration actuel.
 
-.. php:staticmethod:: engine($name, $engine = null)
-
-    Récupère un journal connecté par un nom de configuration.
-
-    .. versionadded: 3.0
-
 Méthodes pratiques
 ------------------
 
-Les méthodes pratiques suivantes ont été ajoutées au log ``$message`` avec le
-niveau de log approprié.
+Les méthodes pratiques suivantes ont été ajoutées au journal ``$message`` avec
+le niveau de log approprié.
 
-.. php:staticmethod:: emergency($message, $scope = array())
-.. php:staticmethod:: alert($message, $scope = array())
-.. php:staticmethod:: critical($message, $scope = array())
-.. php:staticmethod:: error($message, $scope = array())
-.. php:staticmethod:: warning($message, $scope = array())
-.. php:staticmethod:: notice($message, $scope = array())
-.. php:staticmethod:: debug($message, $scope = array())
-.. php:staticmethod:: info($message, $scope = array())
+.. php:staticmethod:: emergency($message, $scope = [])
+.. php:staticmethod:: alert($message, $scope = [])
+.. php:staticmethod:: critical($message, $scope = [])
+.. php:staticmethod:: error($message, $scope = [])
+.. php:staticmethod:: warning($message, $scope = [])
+.. php:staticmethod:: notice($message, $scope = [])
+.. php:staticmethod:: debug($message, $scope = [])
+.. php:staticmethod:: info($message, $scope = [])
 
 Log Adapter Interface
 =====================
