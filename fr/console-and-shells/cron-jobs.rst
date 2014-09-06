@@ -1,5 +1,5 @@
-Éxecuter des Shells en TâcheCron (cronjob)
-###########################################
+Éxecuter des Shells en Tâches Cron (Cron Jobs)
+##############################################
 
 Une chose habituelle à faire avec un shell, c'est de l'exécuter par une tâche
 cron pour nettoyer la base de données une fois de temps en temps ou pour

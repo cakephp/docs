@@ -10,7 +10,6 @@ It is provided by a standalone
 `Upgrade plugin <https://github.com/cakephp/upgrade>`_. Please read the README
 file to get all informations on how to upgrade.
 
-
 .. meta::
     :title lang=en: .. _upgrade-shell:
     :keywords lang=en: api docs,shell

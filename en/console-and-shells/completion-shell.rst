@@ -54,7 +54,7 @@ For example::
 
 Returns::
 
-    --help -h --verbose -v --quiet -q --connection -c --theme -t
+    --help -h --verbose -v --quiet -q --connection -c --template -t
 
 Bash Example
 ============
