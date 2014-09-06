@@ -16,25 +16,9 @@ Importing Data to Xml Class
 
 You can load XML-ish data do it using ``Xml::build()```. This method will return
 a SimpleXMLElement or DOMDocument object (depending of your options parameter
-- default is SimpleXMLElement). Below the samples how to import data from URL::
-
-    // First Load the Utility Class
-    use Cake\Utility\Xml;
-
-    // Load XML from a URL.
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
-    // $xml now is a instance of SimpleXMLElement
-
-    // Or
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
-    // $xml now is a instance of SimpleXMLElement
-
-    // Load XML and get a DOMDocument instance back.
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
-    // $xml now is a instance of DOMDocument
-
-You can use ``Xml::build()``` to build XML objects from a variety of sources.
-For example, you can load XML from strings::
+- default is SimpleXMLElement). You can use ``Xml::build()``` to build XML
+  objects from a variety of sources.  For example, you can load XML from
+  strings::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
@@ -44,14 +28,10 @@ For example, you can load XML from strings::
     </post>';
     $xml = Xml::build($text);
 
-You can also build Xml objects from either local files, or remote files. Remote
-files will be fetched with :doc:`/core-utility-libraries/httpclient`::
+You can also build Xml objects from local files::
 
     // Local file
     $xml = Xml::build('/home/awesome/unicorns.xml');
-
-    // Remote file
-    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
 You can also build Xml objects using an array::
 

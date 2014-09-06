@@ -1182,3 +1182,5 @@ Xml
 ---
 
 - :php:meth:`Xml::build()` now requires ``$options`` to be an array.
+- ``Xml::build()`` no longer accepts a URL. If you need to create an XML
+  document from a URL, use :ref:`Http\\Client <http-client-xml-json>`.
