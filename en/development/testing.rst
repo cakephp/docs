@@ -1048,7 +1048,7 @@ tools like `Selenium webdriver <http://seleniumhq.org>`_.
 Testing Components
 ==================
 
-Lets pretend we have a component called PagematronComponent in our application.
+Let's pretend we have a component called PagematronComponent in our application.
 This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
 ``app/Controller/Component/PagematronComponent.php``::
