@@ -10,7 +10,7 @@ cache existantes. Vous pouvez faire ceci en lançant::
 
 Ceci va reconstruire le cache de metadata pour toutes les tables sur la
 connection ``default``. Si vous avez besoin seulement de reconstruire une table
-unique, vous pouvez ceci en fournissant son nom::
+unique, vous pouvez faire ceci en fournissant son nom::
 
     bin/cake orm_cache build --connection default articles
 

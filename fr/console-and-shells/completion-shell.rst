@@ -4,7 +4,7 @@ Completion du Shell
 Travailler avec la console donne au développeur beaucoup de possibilités mais
 devoir complètement connaître et écrire ces commandes peut être fastidieux.
 Spécialement lors du développement de nouveaux shells où les commandes
-diffèrent à chaque itération. Les Shells de Completion aident ce niveau-là
+diffèrent à chaque itération. Les Shells de Completion aident à ce niveau-là
 en fournissant une API pour écrire les scripts de completion pour les shells
 comme bash, zsh, fish etc...
 
@@ -18,7 +18,7 @@ permettre au développeur de créer son script de completion. Chacun pour une
 Commandes
 ---------
 
-Pour les premières étapes, les commandes sortent les Commandes de Shell
+Pour les premières étapes, les commandes affichent les Commandes de Shell
 disponibles, y compris le nom du plugin quand il est valable. (Toutes les
 possibilités retournées, pour celle-ci et les autres sous-commandes, sont
 séparées par un espace.) Par exemple::
@@ -32,11 +32,11 @@ Retourne::
 Votre script de completion peut selectionner les commandes pertinentes de cette
 liste pour continuer avec. (Pour celle-là et les sous-commandes suivantes.)
 
-subCommands
------------
+Sous-Commandes
+--------------
 
-Une fois que la commande préférée a été choisie, les subCommands apparaissent
-à la deuxième étape et sort la sous-commande possible pour la commande de
+Une fois que la commande préférée a été choisie, les Sous-commandes apparaissent
+à la deuxième étape et affiche la sous-commande possible pour la commande de
 shell donnée. Par exemple::
 
     ./bin/cake Completion subcommands bake
@@ -48,8 +48,8 @@ Retourne::
 options
 --------
 
-En troisième et dernière options, les options de sortie pour une (sous)
-commande donnée comme défini dans getOptionParser. (Y compris les options par
+En troisième et dernière option, les options de sortie pour une (sous)
+commande donnée comme définies dans getOptionParser. (Y compris les options par
 défaut héritées du Shell.)
 Par exemple::
 
