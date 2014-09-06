@@ -89,12 +89,6 @@ Cela peut être une grande ressource pour trouver des réponses archivées, des
 questions fréquemment posées et obtenir des réponses aux problèmes urgents.
 Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
 
-`CakePHP-fr Communauté francophone <http://www.cakephp-fr.org/>`_
-
-CakePHP a aussi sa communauté francophone. Vous pouvez y retrouver un forum
-d'aide, les discussions entre tous les utilisateurs francophones, un canal IRC
-et les dates de meetups organisés dans tous les pays de langue française.
-
 Stackoverflow
 =============
 
