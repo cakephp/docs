@@ -32,7 +32,7 @@ Astuces de traducteurs:
   ``<em>``. Ex: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
   (*Controller*) asfd" comme il se doit.
 - Ne soumettez pas de traductions partielles.
-- Ne modifier pas une section avec un changement en attente.
+- Ne modifiez pas une section avec un changement en attente.
 - N'utilisez pas d'
   `entités html <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   pour les caractères accentués, le livre utilise UTF-8.
@@ -189,7 +189,7 @@ Les liens croisés de référencement
 
         .. _nom-label:
 
-        Section en-t\ête
+        Section en-tête
         ---------------
 
         Plus de contenu ici.
@@ -262,7 +262,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
 .. rst:directive:: .. php:method:: name(signature)
 
-   Décrire une méthode de classe, ses arguments, les valeurs retournées et
+   Décrit une méthode de classe, ses arguments, les valeurs retournées et
    les exceptions::
 
         .. php:method:: instanceMethod($one, $two)

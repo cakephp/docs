@@ -3,10 +3,10 @@ Normes de codes
 
 Les développeurs de CakePHP vont utiliser les normes de code suivantes.
 
-Il est recommandé que les autres personnes qui développent des IngredientsCake
-suivent les mêmes normes.
+Il est recommandé que les autres personnes qui développent des Ingredients de
+Cake suivent les mêmes normes.
 
-Vous pouvez utilisez le `CakePHP Code Sniffer
+Vous pouvez utilisez le `Code Sniffer de CakePHP
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 
@@ -35,8 +35,8 @@ Ou::
     $stringVariable = "moose";
     if ($booleanVariable) {
         echo "Valeur boléenne si true";
-        if ($stringVariable === "moose") {
-            echo "Nous avons rencontré un moose";
+        if ($stringVariable === "élan") {
+            echo "Nous avons rencontré un élan";
         }
     }
 
@@ -66,7 +66,7 @@ Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
    la structure de contrôle. La déclaration incluse dans les accolades doit
    commencer sur une nouvelle ligne, et le code qu'il contient doit gagner un
    nouveau niveau d'indentation.
-*  Les attributs Inline ne devraient pas être utilisés à l'intérieur des
+*  Les attributs inline ne devraient pas être utilisés à l'intérieur des
    structures de contrôle.
 
 ::
@@ -121,12 +121,12 @@ un block PHP plus large, soit dans des tags PHP séparés::
 
     <?php
     if ($isAdmin):
-        echo '<p>You are the admin user.</p>';
+        echo '<p>Vous êtes l utilisateur admin.</p>';
     endif;
     ?>
-    <p>The following is also acceptable:</p>
+    <p>Ce qui suit suit est aussi acceptable:</p>
     <?php if ($isAdmin): ?>
-        <p>You are the admin user.</p>
+        <p>Vous êtes l utilisateur admin.</p>
     <?php endif; ?>
 
 Comparaison
@@ -365,11 +365,11 @@ Quand vous incluez les fichiers avec des classes ou librairies, utilisez
 seulement et toujours la fonction
 `require\_once <http://php.net/require_once>`_.
 
-Les Tags PHP
-============
+Les Balises PHP
+===============
 
-Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts
-(``<? ?>``). L'echo court doit être utilisé dans les fichiers de vue
+Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
+courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de vue
 (``.ctp``) lorque cela est nécessaire.
 
 Echo court
@@ -378,7 +378,7 @@ Echo court
 L'echo court doit être utilisé dans les fichiers de vue à la place de
 ``<?php echo``. Il doit être immédiatemment suivi par un espace unique, la
 variable ou la valeur de la fonction pour faire un ``echo``, un espace unique,
-et le tag de fermeture de php::
+et la balise de fermeture de php::
 
     // wrong = semicolon, aucun espace
     <td><?=$name;?></td>

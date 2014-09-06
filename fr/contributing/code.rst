@@ -9,8 +9,8 @@ Configuration initiale
 ======================
 
 Avant de travailler sur les correctifs pour CakePHP, c'est une bonne idée de
-récupérer la configuration de votre environnement.
-Vous aurez besoin du logiciel suivant:
+définir la configuration de votre environnement.
+Vous aurez besoin des logiciels suivants:
 
 * Git
 * PHP 5.4.19 ou supérieur
@@ -27,7 +27,7 @@ adresse e-mail de travail::
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
     excellent livre gratuit `ProGit <git-scm.com/book/>`_.
 
-Récupérer un clone du code source de CakePHP sous github.:
+Récupérez un clone du code source de CakePHP sous github.:
 
 * Si vous n'avez pas de compte `github <http://github.com>`_ , créez en un.
 * Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
