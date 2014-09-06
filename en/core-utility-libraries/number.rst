@@ -128,7 +128,7 @@ level of precision defined.::
 Formatting Percentages
 ======================
 
-.. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = []])
+.. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = [])
 
 +---------------------+----------------------------------------------------+
 | Option              | Description                                        |
@@ -295,7 +295,7 @@ Example::
         'before' => '[',
         'after' => ']'
     ]);
-    // output '[+123,456.79]'
+    // Output '[+123,456.79]'
 
     // Called as Number
     echo Number::formatDelta('123456.7890', [
@@ -303,7 +303,7 @@ Example::
         'before' => '[',
         'after' => ']'
     ]);
-    // output '[+123,456.79]'
+    // Output '[+123,456.79]'
 
 .. end-cakenumber
 
