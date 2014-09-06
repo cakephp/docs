@@ -1,7 +1,7 @@
 .. _upgrade-shell:
 
-Mise à jour shell
-#################
+Shell de Mise à Jour
+####################
 
 La mise à jour shell va faire quasiment tout le boulot pour mettre à jour vos
 applications cakePHP de la version 2.x à 3.x.
@@ -13,5 +13,5 @@ au fichier README pour avoir toutes les informations sur la façon de mettre
 
 
 .. meta::
-    :title lang=fr: .. _upgrade-shell:
+    :title lang=fr: Shell de Mise à Jour
     :keywords lang=fr: api docs,shell,upgrade
