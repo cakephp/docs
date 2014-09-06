@@ -35,7 +35,7 @@ Maintenant, selectionnez une langue à utiliser pour récupérer les entities::
 Ensuite, récupérez une entity existante::
 
     $article = $articles->get(12);
-    echo $article->title; // Echoes 'A title', not translated yet
+    echo $article->title; // Affiche 'A title', pas encore traduit
 
 Ensuite, traduisez votre entity::
 
@@ -45,7 +45,7 @@ Ensuite, traduisez votre entity::
 Vous pouvez maintenant essayer de récupérer à nouveau votre entity::
 
     $article = $articles->get(12);
-    echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
+    echo $article->title; // Affiche 'Un Artículo', ouah facile!
 
 Travailler avec plusieurs traductions peut être fait facilement en utilisant un
 trait spécial dans votre classe Entity::

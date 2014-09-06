@@ -8,7 +8,7 @@ TreeBehavior
 Il est courant de vouloir stocker des données hierarchisées dans une table de
 base de données. Des exemples de ce type de données pourrait être des catégories
 sans limite de sous-catégories, les données liées à un système de menu
-multiniveau ou une représentation littérale de la hiérarchie comme un
+multi-niveau ou une représentation littérale de la hiérarchie comme un
 département dans une entreprise.
 
 Les bases de données relationnelles ne sont couramment pas utilisées pour le
@@ -36,6 +36,7 @@ peuvent être trouvées dans cet article décrivant la
 `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
+
     TreeBehavior ne supporte pas les clés primaire composite pour le moment.
 
 Un Aperçu Rapide
@@ -62,7 +63,7 @@ et en demandant le nombre de descendants qu'il a::
     $node = $categories->get(1);
     echo $categories->childCount($node);
 
-Obtenir une liste flat des descendants pour un noeud est également facile::
+Obtenir une liste aplatie des descendants pour un noeud est également facile::
 
     $descendants = $categories->find('children', ['for' => 1]);
 
@@ -70,8 +71,8 @@ Obtenir une liste flat des descendants pour un noeud est également facile::
         echo $category->name . "\n";
     }
 
-Si à la place, vous avez besoin d'une liste threaded, où les enfants pour
-chaque noeud sont imbriqués dans une hierarchie, vous pouvez stack le
+Si à la place, vous avez besoin d'une liste liée, où les enfants pour
+chaque noeud sont imbriqués dans une hierarchie, vous pouvez utiliser le
 finder 'threaded'::
 
     $children = $categories
@@ -83,22 +84,23 @@ finder 'threaded'::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
-Traversing threaded results usually requires recursive functions in, but if you
-only require a result set containing a single field from each level so you can
-display a list, in an HTML select for example, it is better to just use the
-'treeList' finder::
+Traverser les résultats threaded nécessitent habituellement des fonctions
+récursives, mais si vous avez besoin seulement d'un ensemble de résultats
+contenant un champ unique à partir de chaque niveau pour afficher une liste,
+dans un select HTML par exemple, il est préférable d'utiliser le finder
+'treeList'::
 
     $list = $categories->find('treeList');
 
-    // Dans un fichier de template CakePHP:
+    // Dans un fichier template de CakePHP:
     echo $this->Form->input('categories', ['options' => $list]);
 
-    // Or you can output it in plain text, for example in a CLI script
+    // Ou vous pouvez l'afficher en texte, par exemple dans un script de CLI
     foreach ($list as $categoryName) {
         echo $categoryName . "\n";
     }
 
-The output will be similar to::
+La sortie sera similaire à ceci::
 
     My Categories
     _Fun
@@ -109,9 +111,9 @@ The output will be similar to::
     __National
     __International
 
-Une tâche habituelle est de trouver le chemin du tree à partir d'un noeud
-particulier vers la racine du tree. Cela est utile par exemple pour ajouter
-une liste breadcrumbs pour une structure de menu::
+Une tâche classique est de trouver le chemin de l'arbre à partir d'un noeud en
+particulier vers le racine de l'arbre. C'est utile, par exemple, pour ajouter
+la liste des breadcrumbs pour une strcture de menu::
 
     $nodeId = 5;
     $crumbs = $categories->find('path', ['for' => $nodeId]);
@@ -120,42 +122,42 @@ une liste breadcrumbs pour une structure de menu::
         echo $crumb->name . ' > ';
     }
 
-Trees constructed with the TreeBehavior cannot be sorted by any column other
-than ``lft``, this is because the internal representation of the tree depends on
-this sorting. Luckily, you can reorder the nodes inside the same level without
-having to change their parent::
+Les arbres construits avec TreeBehavior ne peuvent pas être triés avec d'autres
+colonnes que ``lft``, ceci parce que la représentation interne de l'arbre
+dépend de ce tri. Heureusement, vous pouvez réorganiser les noeuds à
+l'intérieur du même niveau dans avoir à changer leur parent::
 
     $node = $categories->get(5);
 
-    // Move the node so it shows up one position up when listing children
+    // Déplace le noeud pour qu'il monte d'une position quand on liste les enfants.
     $categories->moveUp($node);
 
-    // Move the node to the top of the list inside the same level
+    // Déplace le noeud vers le haut de la liste dans le même niveau.
     $categories->moveUp($node, true);
 
-    //Move the node to the bottom
+    // Déplace le noeud vers le bas.
     $categories->moveDown($node, true);
 
 Configuration
 =============
 
-If the default column names that are used by this behavior don't match your own
-schema, you can provide aliases for them::
+Si les noms de colonne par défaut qui sont utilisés par ce behavior ne
+correspondent pas à votre schéma, vous pouvez leur fournir des alias::
 
     public function initialize(array $config) {
         $this->addBehavior('Tree', [
-            'parent' => 'ancestor_id', // Use this instead of parent_id,
-            'left' => 'tree_left', // Use this instead of lft
-            'right' => 'tree_right' // Use this instead of rght
+            'parent' => 'ancestor_id', // Utilise ceci plutôt que parent_id,
+            'left' => 'tree_left', // Utilise ceci plutôt que lft
+            'right' => 'tree_right' // Utilise ceci plutôt que rght
         ]);
     }
 
-Scoping and Multi Trees
-=======================
+Scoping et Arbres Multiples
+===========================
 
-Sometimes you want to persist more than one tree structure inside the same
-table, you can achieve that by using the 'scope' configuration. For example, in
-a locations table you may want to create one tree per country::
+Parfois vous voulez avoir plus d'une structure d'arbre dans la même table, vous
+pouvez arriver à faire ceci en utilisant la configuration 'scope'. Par exemple,
+dans une table locations vous voudrez créer un arbre par pays::
 
     class LocationsTable extends Table {
 
@@ -167,59 +169,60 @@ a locations table you may want to create one tree per country::
 
     }
 
-In the previous example, all tree operations will be scoped to only the rows
-having the column ``country_name`` set to 'Brazil'. You can change the scoping
-on the fly by using the 'config' function::
+Dans l'exemple précédent, toutes les opérations sur l'arbre seront scoped
+seulement pour les lignes ayant la colonne ``country_name`` défini à 'Brazil'.
+Vous pouvez changer le scoping à la volée en utilisant la fonction 'config'::
 
-    $this->behaviors->Tree->config('scope', ['country_name' => 'France']);
+    $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
 
-Optionally, you can have a finer grain control of the scope by passing a closure
-as the scope::
+En option, vous pouvez avoir un contrôle plus fin du scope en passant une
+closure au scope::
 
-    $this->behaviors->Tree->config('scope', function($query) {
+    $this->behaviors()->Tree->config('scope', function($query) {
         $country = $this->getConfigureContry(); // A made-up function
         return $query->where(['country_name' => $country]);
     });
 
-Saving Hierarchical Data
-========================
+Sauvegarder les Données Hiérarchisées
+=====================================
 
-When using the Tree behavior, you usually don't need to worry about the
-internal representation of the hierarchical structure. The positions where nodes
-are placed in the tree are deduced from the 'parent_id' column in each of your
-entities::
+Quand vous utilisez le behavior Tree, vous n'avez habituellement pas besoin
+de vous soucier de la représentation interne de la structure hierarchisée. Les
+positions où les noeuds sont placés dans l'arbre se déduisent de la colonne
+'parent_id' dans chacune de vos entities::
 
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = 5;
     $categoriesTable->save($aCategory);
 
-Providing inexistent parent ids when saving or attempting to create a loop in
-the tree (making a node child of itself) will throw an exception.
+Fournir des ids de parent non existant lors de la sauvegarde ou tenter de
+créer une boucle dans l'arbre (faire un noeud enfant de lui-même) va lancer
+une exception.
 
-You can make a node a root in the tree by setting the 'parent_id' column to
-null::
+Vous pouvez faire un noeud à la racine de l'arbre en configurant la colonne
+'parent_id' à null::
 
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = null;
     $categoriesTable->save($aCategory);
 
-Children for the new root node will be preserved.
+Les enfants pour un nouveau noeud à la racine seront préservés.
 
-Deleting Nodes
-==============
+Supprimer les Noeuds
+====================
 
-Deleting a node and all its sub-tree (any children it may have at any depth in
-the tree) is trivial::
+Supprimer un noeud et tous son sous-arbre (tout enfant qu'il peut avoir à tout
+niveau dans l'arbre) est facile::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->delete($aCategory);
 
-The TreeBehavior will take care of all internal deleting operations for you. It
-is also possible to Only delete one node and re-assign all children to the
-immediately superior parent node in the tree::
+TreeBehavior va s'occuper de toutes les opérations internes de suppression.
+Il est aussi possible de Seulement supprimer un noeud et de réassigner tous les
+enfants au noeud parent immédiatemment supérieur dans l'arbre::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->removeFromTree($aCategory);
     $categoriesTable->delete($aCategory);
 
-All children nodes will be kept and a new parent will be assigned to them.
+Tous les noeuds enfant seront conservés et un nouveau parent leur sera assigné.

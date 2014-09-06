@@ -16,7 +16,7 @@ Usage Basique
 
 Vous activez le behavior CounterCache comme tous les autres behaviors, mais
 il ne fera rien jusqu'à ce que vous configuriez quelques relations et le
-nombre de champ qui doivent être stockés sur chacun d'eux. Utiliser notre
+nombre de champs qui doivent être stockés sur chacun d'eux. Utiliser notre
 exemple ci-dessous, nous pourrions mettre en cache le nombre de commentaires
 pour chaque article avec ce qui suit::
 

@@ -32,8 +32,8 @@ La configuration par défaut va faire ce qui suit:
 Utiliser et Configurer le Behavior
 ==================================
 
-Si vous avez besoin de modifier les champs avec des noms différents, ou que vous
-souhaitiez mettre à jour le timestamp supplémentaire sur des evenements
+Si vous avez besoin de modifier les champs avec des noms différents, ou si vous
+souhaitez mettre à jour le timestamp supplémentaire sur des evenements
 personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
     class OrdersTable extends Table {
@@ -62,7 +62,7 @@ Mettre à jour les Timestamps sur les Entities
 Parfois, vous souhaitez mettre à jour uniquement les timestamps sur une entity
 sans changer aucune autre propriété. On fait parfois référence au
 'touching' d'un enregistrement. Dans CakePHP, vous pouvez utiliser la méthode
-``touch()`` pour le faire exactement::
+``touch()`` pour faire exactement ceci::
 
     // Touch basé sur l'evenement Model.beforeSave.
     $articles->touch($article);
