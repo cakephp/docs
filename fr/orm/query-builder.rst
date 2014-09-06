@@ -45,12 +45,10 @@ examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
     // Start a new query.
     $query = $articles->find();
 
-Selecting Data
+Récupérer vos données
 ==============
 
-Most web applications make heavy use of ``SELECT`` queries. CakePHP makes
-building them a snap. To limit the fields fetched, you can use the ``select()``
-method::
+La plupart des applications web utilisent beaucoup les requêtes de type ``SELECT``. CakePHP permet de construire ces requêtes en un clin d'oeil. La ::method ``select()`` vous permet de ne récupérer que les champs qui vous sont nécessaire.
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -58,7 +56,7 @@ method::
         debug($row->title);
     }
 
-You can set aliases for fields by providing fields as an associative array::
+La ::method ``select()`` permet également de définir des alias pour vos champs
 
     // Results in SELECT id pk, title aliased_title, body ...
     $query = $articles->find();
