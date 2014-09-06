@@ -499,7 +499,7 @@ Next, let's make a way for users to delete articles. Start with a
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The article with id: %s has been deleted.', h($id)));
+            $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
