@@ -341,6 +341,8 @@ from the following properties:
     debug($response->code);
     debug($response->headers);
 
+.. _http-client-xml-json:
+
 Reading JSON and XML Response Bodies
 ------------------------------------
 
