@@ -98,12 +98,12 @@ Taggez vos questions avec ``cakephp`` et la version spécifique que vous utilise
 pour activer les utilisateurs existants de stackoverflow pour trouver vos
 questions.
 
-Where to get Help in your Language
-==================================
+Où Trouver de l'Aide dans Votre Langue
+======================================
 
 French
 ------
-- `French CakePHP Community <http://cakephp-fr.org>`_
+- `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
 
 
 .. meta::
