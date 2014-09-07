@@ -76,3 +76,10 @@ O Google Group
 CakePHP também tem um grupo muito ativo no Google. Pode ser um excelente recurso
 para encontrar respostas arquivadas, perguntas frequentes, e obter respostas
 para problemas imediatos.
+
+Where to get Help in your Language
+==================================
+
+French
+------
+- `French CakePHP Community <http://cakephp-fr.org>`_
