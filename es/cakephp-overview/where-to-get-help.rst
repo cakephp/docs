@@ -79,3 +79,10 @@ En Inglés:
 CakePHP tiene también un Grupo de Google muy activo. Puede ser un gran
 recurso para encontrar las respuestas archivadas, preguntas frecuentes,
 y obtener respuestas a los problemas inmediatos.
+
+Where to get Help in your Language
+==================================
+
+French
+------
+- `French CakePHP Community <http://cakephp-fr.org>`_
