@@ -87,3 +87,10 @@ Stackoverflow (en inglés)
 
 Etiqueta tus preguntas con ``cakephp`` y la versión específica que utilizas
 para permitir a usuarios existentes de stackoverflow encontrar tus preguntas.
+
+Where to get Help in your Language
+==================================
+
+French
+------
+- `French CakePHP Community <http://cakephp-fr.org>`_
