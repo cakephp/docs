@@ -44,7 +44,7 @@ This method is used to display a number in common currency formats
     // Called as Number
     echo Number::currency($value, $currency);
 
-The first parameter, $number, should be a floating point number
+The first parameter, ``$value``, should be a floating point number
 that represents the amount of money you are expressing. The second
 parameter is a string used to choose a predefined currency formatting
 scheme:
@@ -109,7 +109,7 @@ it will clear the currently stored value. By default, it will retrieve the
 Formatting Floating Point Numbers
 =================================
 
-.. php:method:: precision(float $number, int $precision = 3)
+.. php:method:: precision(float $value, int $precision = 3)
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
@@ -128,7 +128,7 @@ level of precision defined.::
 Formatting Percentages
 ======================
 
-.. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = [])
+.. php:method:: toPercentage(mixed $value, int $precision = 2, array $options = [])
 
 +---------------------+----------------------------------------------------+
 | Option              | Description                                        |
@@ -193,8 +193,8 @@ looks like::
     // Called as Number
     Number::format($value, $options);
 
-The $number parameter is the number that you are planning on
-formatting for output. With no $options supplied, the number
+The ``$value`` parameter is the number that you are planning on
+formatting for output. With no ``$options`` supplied, the number
 1236.334 would output as 1,236. Note that the default precision is
 zero decimal places.
 
@@ -266,11 +266,11 @@ This method displays differences in value as a signed number::
     Number::formatDelta($value, $options);
 
 The ``$value`` parameter is the number that you are planning on
-formatting for output. With no $options supplied, the number
+formatting for output. With no ``$options`` supplied, the number
 1236.334 would output as 1,236. Note that the default precision is
 zero decimal places.
 
-The $options parameter takes the same keys as :php:meth:`Number::format()` itself:
+The ``$options`` parameter takes the same keys as :php:meth:`Number::format()` itself:
 
 +---------------------+----------------------------------------------------+
 | Option              | Description                                        |
