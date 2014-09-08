@@ -96,6 +96,14 @@ Stackoverflow
 Tag your questions with ``cakephp`` and the specific version you are using to enable
 existing users of stackoverflow to find your questions.
 
+Where to get Help in your Language
+==================================
+
+French
+------
+- `French CakePHP Community <http://cakephp-fr.org>`_
+
+
 .. meta::
     :title lang=en: Where to Get Help
     :description lang=en: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
