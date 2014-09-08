@@ -33,7 +33,7 @@ such as debugging and translating content.
     ``sprintf()``. You can supply additional arguments to replace
     placeholders in your string::
 
-        __('You have %s unread messages', $number);
+        __('You have {0} unread messages', $number);
 
     .. note::
 

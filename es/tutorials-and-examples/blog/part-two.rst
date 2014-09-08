@@ -501,7 +501,7 @@ Vamos a permitir a los usuarios que borren artículos. Empieza con una acción
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('El artículo con id: %s ha sido eliminado.', h($id)));
+            $this->Flash->success(__('El artículo con id: {0} ha sido eliminado.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
