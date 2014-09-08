@@ -1,6 +1,8 @@
 NumberHelper
 ############
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: NumberHelper(View $view, array $config = [])
 
 Le helper Number contient des méthodes pratiques qui permettent
@@ -15,9 +17,7 @@ davantage de souplesse en matière de formatage des nombres.
 
 .. warning::
 
-    Depuis 2.4 les symboles sont maintenant en UTF-8. Merci de regarder le
-    guide de migration pour plus de détails si vous lancez une application
-    non-UTF-8.
+    Les symboles sont en UTF-8.
 
 .. meta::
     :title lang=fr: NumberHelper
