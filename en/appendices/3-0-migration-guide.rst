@@ -284,7 +284,7 @@ any additional parameters to ``Router::url()`` as query string arguments.
 
 Since many applications will still need to parse incoming URLs containing named
 parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
-been added to allow backwards compatiblity with existing URLs.
+been added to allow backwards compatibility with existing URLs.
 
 
 RequestActionTrait
@@ -472,7 +472,7 @@ Controller
   has been removed from CakePHP core, and will be provided as a standalone
   plugin.
 - The ``Controller::$ext`` property has been removed. You now have to extend and
-  overide the ``View::$_ext`` property if you want to use a non-default view file
+  override the ``View::$_ext`` property if you want to use a non-default view file
   extension.
 - The ``Controller::$Components`` property has been removed and replaced with
   ``_components``. If you need to load components at runtime you should use
@@ -481,7 +481,7 @@ Controller
   changed to ``Controller::redirect(string|array $url, int $status = null)``.
   The 3rd argument ``$exit`` has been dropped. The method can no longer send
   response and exit script, instead it returns a ``Response`` instance with
-  approriate headers set.
+  appropriate headers set.
 - The ``base``, ``webroot``, ``here``, ``data``,  ``action``, and ``params``
   magic properties have been removed. You should access all of these properties
   on ``$this->request`` instead.
@@ -779,8 +779,8 @@ View\\Helper
   through the ``config()`` method.
 - Configuration options are no longer set as public properties.
 - ``Helper::clean()`` was removed. It was never robust enough
-  to fully prevent xss. instead you should escape content with :php:func:`h` or
-  use a dedicated libray like htmlPurifier.
+  to fully prevent XSS. instead you should escape content with :php:func:`h` or
+  use a dedicated library like htmlPurifier.
 - ``Helper::output()`` was removed. This method was
   deprecated in 2.x.
 - Methods ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
@@ -988,7 +988,7 @@ exposed to access the specific features of this library. For this reason most
 methods inside ``I18n`` were removed or renamed.
 
 Due to the use of ``ext/intl``, the L10n class was completely removed. It
-provided outdated and imcomplete data in comparison to the data available from
+provided outdated and incomplete data in comparison to the data available from
 the ``Locale`` class in PHP.
 
 The default application language will no longer be changed automatically by the
