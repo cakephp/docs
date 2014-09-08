@@ -30,7 +30,7 @@ of a ``View``, use the ``String`` class::
             if (!empty($message)) {
                 // Notify user of new message
                 $this->Flash->success(__(
-                    'You have a new message: %s',
+                    'You have a new message: {0}',
                     String::truncate($message['Message']['body'], 255, array('html' => true))
                 ));
             }
