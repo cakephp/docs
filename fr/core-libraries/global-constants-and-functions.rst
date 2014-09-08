@@ -1,4 +1,4 @@
-%sConstantes globales et Fonctions
+Constantes globales et Fonctions
 ################################
 
 Alors que la plupart de vos activités quotidiennes avec CakePHP sera
