@@ -29,7 +29,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     des arguments supplémentaires pour remplacer les espaces
     réservés dans votre chaîne::
 
-        __('You have %s unread messages', $number);
+        __('You have {0} unread messages', $number);
 
     .. note::
 

@@ -22,7 +22,10 @@ d'une ``View``, utilisez la classe ``String``::
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // notifie à l'utilisateur d'un nouveau message
-                $this->FLash->success(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, ['html' => true])));
+                $this->FLash->success(__(
+                    'Vous avez un message: {0}',
+                    String::truncate($message['Message']['body'], 255, ['html' => true])
+                ));
             }
         }
     }

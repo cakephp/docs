@@ -524,7 +524,7 @@ Articles (ArticlesController)::
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('L article avec l id: %s a été supprimé.', h($id)));
+            $this->Flash->success(__('L article avec l id: {0} a été supprimé.', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
