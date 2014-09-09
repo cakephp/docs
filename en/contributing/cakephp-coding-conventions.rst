@@ -240,44 +240,129 @@ indented with one tab::
         ->subject('A great message')
         ->send();
 
-Commenting Code
-===============
+DocBlocks
+=========
 
-Comments may only include the following `phpDocumentor <http://phpdoc.org>`_
-tags:
+All comment blocks, with the exception of the first block in a file, should
+always be preceded by a newline.
+
+File Header DocBlock
+--------------------
+
+All php files should contain a file header DocBlock,
+which should look like this::
+
+    <?
+    /**
+    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    *
+    * Licensed under The MIT License
+    * For full copyright and license information, please see the LICENSE.txt
+    * Redistributions of files must retain the above copyright notice.
+    *
+    * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    * @link          http://cakephp.org CakePHP(tm) Project
+    * @since         X.Y.Z
+    * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+    */
+
+The included `phpDocumentor <http://phpdoc.org>`_ tags are:
 
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+
+Class DocBlocks
+---------------
+
+Class DocBlocks should look like this::
+
+    /**
+     * Short description of the class.
+     *
+     * Long description of class.
+     * Can use multiple lines.
+     *
+     * @deprecated 3.0.0 Removed as of 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+     * @see Bar
+     * @link http://book.cakephp.org/2.0/en/foo.html
+     */
+    class Foo {
+
+    }
+
+Class DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+
+Property DocBlocks
+------------------
+
+Property DocBlocks should look like this::
+
+    /**
+     * @var string|null Description of property.
+     *
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
+     * @see Bar::$_bla
+     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     */
+    protected $_bar = null;
+
+Property DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
-PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
-processed if they are the first thing in a DocBlock line, for example::
+Method/Function DocBlocks
+-------------------------
 
-    /**
-     * Example of inline phpDoc tags.
-     *
-     * This function works hard with foo() to rule the world.
-     *
-     * @return void
-     */
-    function bar() {
-    }
+Method and functions DocBlocks should look like this::
 
     /**
-     * Foo function.
+     * Short description of the method.
      *
-     * @return void
-     */
-    function foo() {
-    }
+     * Long description of method.
+     * Can use multiple lines.
+     *
+     * @param string $param2 first parameter.
+     * @param array|null $param2 Second parameter.
+     * @return array An array of cakes.
+     * @throws Exception If something goes wrong.
+     *
+     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
+     * @see Bar::baz
+     /*
+     public function bar($param1, $param2 = null) {
+     }
 
-Comment blocks, with the exception of the first block in a file, should
-always be preceded by a newline.
+Method and function DocBLocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 Variable Types
 --------------
