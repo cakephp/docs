@@ -249,10 +249,10 @@ always be preceded by a newline.
 File Header DocBlock
 --------------------
 
-All php files should contain a file header DocBlock,
+All PHP files should contain a file header DocBlock,
 which should look like this::
 
-    <?
+    <?php
     /**
     * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
     * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -285,7 +285,7 @@ Class DocBlocks should look like this::
      * Long description of class.
      * Can use multiple lines.
      *
-     * @deprecated 3.0.0 Removed as of 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+     * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
      * @see Bar
      * @link http://book.cakephp.org/2.0/en/foo.html
      */
