@@ -13,9 +13,9 @@ when file extensions are enabled.
 By default RequestHandler will automatically detect AJAX requests
 based on the HTTP-X-Requested-With header that many JavaScript
 libraries use. When used in conjunction with
-:php:meth:`Router::parseExtensions()` RequestHandler will automatically switch
-the layout and view files to those that match the requested type.
-Furthermore, if a helper with the same name as the requested
+:php:meth:`Cake\\Routing\\Router::extensions()`, RequestHandler will
+automatically switch the layout and view files to those that match the requested
+type. Furthermore, if a helper with the same name as the requested
 extension exists, it will be added to the Controllers Helper array.
 Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
 parsed into an array which is assigned to ``$this->request->data``,

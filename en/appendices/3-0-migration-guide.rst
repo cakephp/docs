@@ -312,16 +312,12 @@ Router
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
   a more flexible way to mutate URLs being reverse routed.
-* The signature of :php:meth:`Cake\\Routing\\Router::parseExtensions()` has changed
-  to ``parseExtensions(string|array $extensions = null, $merge = true)``. It no
-  longer takes variable arguments for specifying extensions. Also you can no
-  longer call it with no parameters to parse all extensions (doing so will
-  return existing extensions that are set). You need to whitelist the extensions
-* ``Router::parseExtensions()`` **must** be called before routes are connected.
-  It no longer modifies existing routes when called.
-  your application supports.
-* ``Router::setExtensions()`` has been removed. Use :php:meth:`Cake\\Routing\\Router::parseExtensions()`
-  instead.
+* ``Router::parseExtensions()` has been removed.
+  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead. This method
+  **must** be called before routes are connected. It won't modify existing
+  routes.
+* ``Router::setExtensions()`` has been removed.
+  Use :php:meth:`Cake\\Routing\\Router::extensions()` instead.
 * ``Router::resourceMap()`` has been removed.
 * The ``[method]`` option has been renamed to ``_method``.
 * The ability to match arbitrary headers with ``[]`` style parameters has been

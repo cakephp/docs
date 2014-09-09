@@ -526,15 +526,18 @@ create a link that is not part of a plugin.
 Routing File Extensions
 -----------------------
 
-.. php:staticmethod:: parseExtensions($extensions, $merge = true)
+.. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
 To handle different file extensions with your routes, you need one
 extra line in your routes config file::
 
-    Router::parseExtensions(['html', 'rss']);
+    Router::extensions(['html', 'rss']);
 
 This will enable the named extensions for all routes connected **after** this
 method call. Any routes connected prior to it will not inherit the extensions.
+By default the extensions you passed will be merged with existing list of extensions.
+You can pass ``false` for the second argument to override existing list.
+Calling the method with arguments will return existing list of extensions.
 You can set extensions per scope as well::
 
     Router::scope('/api', function($routes) {

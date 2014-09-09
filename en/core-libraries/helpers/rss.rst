@@ -17,14 +17,14 @@ Creating an xml/rss version of posts/index is a snap with CakePHP.
 After a few simple steps you can simply append the desired
 extension .rss to ``posts/index`` making your URL ``posts/index.rss``.
 Before we jump too far ahead trying to get our webservice up and
-running we need to do a few things. First parseExtensions needs to
+running we need to do a few things. First extensions parsing needs to
 be activated, this is done in ``config/routes.php``::
 
-    Router::parseExtensions('rss');
+    Router::extensions('rss');
 
 In the call above we've activated the .rss extension. When using
-:php:meth:`Router::parseExtensions()` you can pass as many arguments or
-extensions as you want. This will activate each
+:php:meth:`Cake\\Routing\\Router::extensions()` you can pass a string or array
+of extensions as first argument. This will activate each
 extension/content-type for use in your application. Now when the
 address ``posts/index.rss`` is requested you will get an xml version of
 your ``posts/index``. However, first we need to edit the controller to
