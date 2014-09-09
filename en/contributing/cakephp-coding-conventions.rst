@@ -244,7 +244,6 @@ describe the commented block of code.
 Comments may only include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
