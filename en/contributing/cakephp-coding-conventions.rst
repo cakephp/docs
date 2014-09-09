@@ -259,15 +259,6 @@ PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
 processed if they are the first thing in a DocBlock line, for example::
 
     /**
-     * Tag example.
-     *
-     * @author this tag is parsed, but this @version is ignored
-     * @version 1.0 this tag is also parsed
-     */
-
-::
-
-    /**
      * Example of inline phpDoc tags.
      *
      * This function works hard with foo() to rule the world.
