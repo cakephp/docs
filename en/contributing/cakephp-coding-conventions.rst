@@ -10,6 +10,11 @@ You can use the `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ to check that your code
 follows required standards.
 
+Language
+========
+
+All code and comments should be written in English.
+
 Adding New Features
 ===================
 
@@ -237,9 +242,6 @@ indented with one tab::
 
 Commenting Code
 ===============
-
-All comments should be written in English, and should in a clear way
-describe the commented block of code.
 
 Comments may only include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
