@@ -241,7 +241,7 @@ Commenting Code
 All comments should be written in English, and should in a clear way
 describe the commented block of code.
 
-Comments can include the following `phpDocumentor <http://phpdoc.org>`_
+Comments may only include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
