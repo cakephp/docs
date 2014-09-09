@@ -18,7 +18,7 @@ Los ficheros en los que se definen los modelos se ubican en la carpeta
 
 Los convenios usados para los nombres son importantes. Cuando llamamos a nuestro
 modelo *Post*, CakePHP deducirá automáticamente que este modelo se utilizará en
-el controlador PostController, y que se vinculará a una tabla en nuestra base de
+el controlador PostsController, y que se vinculará a una tabla en nuestra base de
 datos llamada ``posts``.
 
 .. note::
