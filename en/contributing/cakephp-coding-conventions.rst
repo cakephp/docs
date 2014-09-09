@@ -252,7 +252,6 @@ tags:
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
 processed if they are the first thing in a DocBlock line, for example::
