@@ -312,7 +312,7 @@ Router
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
   a more flexible way to mutate URLs being reverse routed.
-* ``Router::parseExtensions()` has been deprecated.
+* ``Router::parseExtensions()` has been removed.
   Use :php:meth:`Cake\\Routing\\Router::extensions()` instead. This method
   **must** be called before routes are connected. It won't modify existing
   routes.
