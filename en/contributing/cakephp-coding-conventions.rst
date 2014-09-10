@@ -470,7 +470,7 @@ Type
 (object)
 		Cast to object.
 
-Please use ``(int)$var`` instead of ``intval($var)`` and ``(float)$var`` instead of ``floatval($var)``.
+Please use ``(int)$var`` instead of ``intval($var)`` and ``(float)$var`` instead of ``floatval($var)`` when applicable.
 
 Constants
 ---------
