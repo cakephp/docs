@@ -160,12 +160,18 @@ can store any type of object and is ideal for storing results of
 model finds::
 
     if (($posts = Cache::read('posts')) === false) {
-        $posts = $this->Post->find('all');
+        $posts = $unService->getAllPosts();
         Cache::write('posts', $posts);
     }
 
 Using ``Cache::write()`` and ``Cache::read()`` to easily reduce the number
 of trips made to the database to fetch posts.
+
+.. note::
+
+    If you plan to cache the result of queries made with the CakePHP ORM,
+    it is better to use the built-in cache capabilities of the Query object
+    as described in the :ref:`caching-query-results` section
 
 Writing Multiple Keys at Once
 -----------------------------
