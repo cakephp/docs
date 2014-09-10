@@ -175,7 +175,7 @@ ArticlesController now::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\ForbiddenException;
+    use Cake\Network\Exception\NotFoundException;
 
     class ArticlesController extends AppController {
 
@@ -234,7 +234,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\ForbiddenException;
+    use Cake\Network\Exception\NotFoundException;
 
     class ArticlesController extends AppController {
         public $components = ['Flash'];
