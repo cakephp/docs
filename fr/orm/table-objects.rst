@@ -1179,9 +1179,6 @@ Result sets allow you to easily cache/serialize or JSON encode results for API r
     // serialized
     $serialized = serialize($results);
 
-    // Cache
-    Cache::write('my_results', $results);
-
     // json
     $json = json_encode($results);
 
