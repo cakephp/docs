@@ -1149,53 +1149,6 @@ While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
-.. _caching-query-results:
-
-Caching Loaded Results
-----------------------
-
-When fetching entities that don't change often you may want to cache the
-results. The ``Query`` class makes this simple::
-
-    $query->cache('recent_articles');
-
-Will enable caching on the query's result set. If only one argument is provided
-to ``cache()`` then the 'default' cache configuration will be used. You can
-control which caching configuration is used with the second parameter::
-
-    // String config name.
-    $query->cache('recent_articles', 'dbResults');
-
-    // Instance of CacheEngine
-    $query->cache('recent_articles', $memcache);
-
-In addition to supporting static keys, the ``cache()`` method accepts a function
-to generate the key. The function you give it will receive the query as an
-argument. You can then read aspects of the query to dynamically generate the
-cache key::
-
-    // Generate a key based on a simple checksum
-    // of the query's where clause
-    $query->cache(function($q) {
-        return 'articles-' . md5(serialize($q->clause('where')));
-    });
-
-The cache method makes it simple to add cached results to your custom finders or
-through event listeners.
-
-When the results for a cached query are fetched the following happens:
-
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
-   is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
-
-.. note::
-
-    You cannot cache a streaming query result.
-
 Working with Result Sets
 ------------------------
 
@@ -1222,9 +1175,6 @@ Result sets allow you to easily cache/serialize or JSON encode results for API r
 
     // Serialized
     $serialized = serialize($results);
-
-    // Cache
-    Cache::write('my_results', $results);
 
     // Json
     $json = json_encode($results);
