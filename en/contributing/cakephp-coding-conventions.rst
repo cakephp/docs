@@ -40,6 +40,17 @@ Or::
         }
     }
 
+Line Length
+===========
+
+It is recommended to keep lines at approximately 100 characters long for better code readability.
+No line must not be longer than 120 characters.
+
+In short:
+
+* 100 characters is the soft limit.
+* 120 characters is the hard limit.
+
 Control Structures
 ==================
 
