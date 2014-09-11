@@ -192,7 +192,7 @@ Shell
 -----
 
 - ``Shell::__construct()`` has changed. It now takes an instance of
-  ``Cake\\Console\\ConsoleIo``.
+  :php:class:`Cake\\Console\\ConsoleIo`.
 - ``Shell::param()`` has been added as convenience access to the params.
 
 Additionally all shell methods will be transformed to camel case when invoked.
@@ -312,7 +312,7 @@ Router
 * Persistent parameters were removed. They were replaced with
   :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
   a more flexible way to mutate URLs being reverse routed.
-* ``Router::parseExtensions()` has been removed.
+* ``Router::parseExtensions()`` has been removed.
   Use :php:meth:`Cake\\Routing\\Router::extensions()` instead. This method
   **must** be called before routes are connected. It won't modify existing
   routes.
@@ -343,7 +343,7 @@ Dispatcher Filters Configuration Changed
 ----------------------------------------
 
 Dispatcher filters are no longer added to your application using ``Configure``.
-You now append them with :php:class:`Cake\\Routing\\DispatcherFactory``. This
+You now append them with :php:class:`Cake\\Routing\\DispatcherFactory`. This
 means if your application used ``Dispatcher.filters``, you should now use
 php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
@@ -597,7 +597,7 @@ Error
 -----
 
 Custom ExceptionRenderers are now expected to either return
-a ``Cake\\Network\\Response`` object or string when rendering errors. This means
+a :php:class:`Cake\\Network\\Response` object or string when rendering errors. This means
 that any methods handling specific exceptions must return a response or string
 value.
 
@@ -617,7 +617,7 @@ new ORM.
 ConnectionManager
 -----------------
 
-- ConnectionManager has been moved to the ``Cake\\Database`` namespace.
+- ConnectionManager has been moved to the ``Cake\Database`` namespace.
 - ConnectionManager has had the following methods removed:
 
   - ``sourceList``

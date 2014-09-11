@@ -14,11 +14,11 @@ Importing Data to Xml Class
 
 .. php:staticmethod:: build($input, $options = [])
 
-You can load XML-ish data do it using ``Xml::build()```. This method will return
-a SimpleXMLElement or DOMDocument object (depending of your options parameter
-- default is SimpleXMLElement). You can use ``Xml::build()``` to build XML
-  objects from a variety of sources.  For example, you can load XML from
-  strings::
+You can load XML-ish data do it using ``Xml::build()```. Depending on your
+``$options`` parameter, this method will return a SimpleXMLElement (default)
+or DOMDocument object. You can use ``Xml::build()``` to build XML
+objects from a variety of sources.  For example, you can load XML from
+strings::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
