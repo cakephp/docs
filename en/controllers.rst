@@ -244,6 +244,7 @@ rendered from the controller.
 
         $this->set('title_for_layout', 'This is the page title');
 
+    As of 2.5 the variable $title_for_layout is deprecated, use :ref:`view extending <extending-views>` instead.
 
 .. php:method:: render(string $view, string $layout)
 
