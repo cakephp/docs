@@ -360,6 +360,11 @@ The ``content`` block contains the contents of the rendered view.
 ``$title_for_layout`` contains the page title. This variable is generated automatically,
 but you can override it by setting it in your controller/view.
 
+.. note::
+
+    The ``$title_for_layout`` is deprecated as of 2.5, use ``$this->fetch('title')``
+    in your layout and ``$this->assign('title', 'page title')`` instead.
+
 Setting the title for the layout is easiest to do in the
 controller, setting the ``$title_for_layout`` variable::
 
