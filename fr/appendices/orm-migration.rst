@@ -70,7 +70,7 @@ bon de regarder les trois plus importantes classes. Les classes
 ``Table``, ``Query`` et ``Entity`` sont les grandes nouveautés du lifting du
 nouvel ORM, et chacun sert un objectif différent.
 
-Les objets Table
+Les Objets Table
 ----------------
 
 Les objets Table sont la passerelle vers vos données. Ils gèrent plusieurs des
@@ -93,8 +93,8 @@ plateforme dépendant de SQL. A la place, ils collaborent avec les entités et l
 query builder pour faire leur travail. Les objets table intéragissent aussi
 avec les behaviors et d'autres parties à travers les évènements publiés.
 
-Query objects
--------------
+Les Objets Query
+----------------
 
 Alors que celles-ci ne sont pas des classes que vous allez construire vous-même,
 votre code d'application rendra l'utilisation extensive de
@@ -110,7 +110,7 @@ sans exécuter la query elle-même. Elle collabore avec la connection/dialect po
 générer la plateforme spécifique pour SQL qui est exécutée en créant un
 ``ResultSet`` en sortie.
 
-Les objets Entity
+Les Objets Entity
 -----------------
 
 Dans les versions précédentes de CakePHP la classe ``Model`` retournait
@@ -136,7 +136,7 @@ Le nouvel ORM est un grand renouveau par rapport à la couche ``Model``
 existante. Plusieurs différences importantes à comprendre sur la façon
 dont le nouvel ORM opère et comment mettre à jour votre code.
 
-Les règles d'Inflection mises à jour
+Les Règles d'Inflection Mises à Jour
 ------------------------------------
 
 Vous avez peut-être noté que les classes de table ont un nom pluralisé. En plus
@@ -151,11 +151,15 @@ plurielle. C'est en opposition par rapport au Model où les noms et associations
 
 Alors que les conventions pour les objets Table sont de toujours utiliser
 les formes plurielles, vos entities auront leurs propriétés d'association
-peuplées basées sur le type d'association. Les associations BelongsTo et HasOne
-utiliseront la forme au singulier, tandis que HasMany et BelongsToMany (HABTM)
-utiliseront la forme plurielle. Le changement de convention
-pour les objects Table est plus apparent lors de la construction de queries. A
-la place d'expressions de requêtes comme::
+peuplées basées sur le type d'association.
+
+.. note::
+
+    Les associations BelongsTo et HasOne utiliseront la forme au singulier,
+    tandis que HasMany et BelongsToMany (HABTM) utiliseront la forme plurielle.
+
+Le changement de convention pour les objects Table est plus apparent lors de
+la construction de queries. A la place d'expressions de requêtes comme::
 
     // Faux
     $query->where(['User.active' => 1]);
@@ -165,7 +169,7 @@ Vous avez besoin d'utiliser la forme au pluriel::
     // Correct
     $query->where(['Users.active' => 1]);
 
-Find retourne un objet Query
+Find retourne un Objet Query
 ----------------------------
 
 Une différence importante dans le nouvel ORM est qu'appeler ``find`` sur une
@@ -256,11 +260,26 @@ personnalisées dans 3.0::
         }
     }
 
-Comme vous pouvez le voir, ils sont assez simples, ils obtiennent un objet de
-requête à la place d'un tableau et doit retourner un objet Query en retour.
+Comme vous pouvez le voir, ils sont assez simples, ils obtiennent un objet
+Query à la place d'un tableau et doivent retourner un objet Query en retour.
 Pour 2.x, les utilisateurs qui implémentaient la logique afterFind dans les
 finders personnalisés, vous devez vérifier la section :ref:`map-reduce`, ou
-juste les fonctions de collection.
+utiliser les :ref:`collection-objects`. Si dans vos models, vous aviez pour
+habitude d'avoir un afterFind pour toutes les opérations de find, vous
+pouvez migrer ce code d'une des façons suivantes:
+
+1. Surcharger la méthode constructeur de votre entity et faire le formatage supplémentaire ici.
+2. Créer des méthodes accesseurs dans votre entity pour créer les propriétés virtuelles.
+3. Redéfinir ``findAll()`` et attacher une fonction map/reduce.
+
+Dans le 3ème cas ci-dessus, votre code ressemblerait à::
+
+    public function findAll(Query $query, array $options) {
+        $mapper = function ($row, $key, $mr) {
+            // Your afterFind logic
+        };
+        return $query->mapReduce($mapper);
+    }
 
 Vous pouvez peut-être noter que les finders personnalisés recoivent
 un tableau d'options, vous pouvez passer toute information supplémentaire
@@ -293,7 +312,7 @@ définissant simplement une méthode avec un nom matchant et la signature sur un
 Behavior le finder sera automatiquement disponible sur toute table sur laquelle
 le behavior est attaché.
 
-Recursive et ContainableBehavior retirés.
+Recursive et ContainableBehavior Retirés.
 -----------------------------------------
 
 Dans les précédentes versions de CakePHP que vous souhaitez utiliser
@@ -319,8 +338,8 @@ En chargeant seulement les données associées qui on été spécifiquement requ
 vous ne passez pas votre temps à vous battre avec l'ORM à essayer d'obtenir
 seulement les données que vous souhaitez.
 
-No afterFind event or virtual fields
-------------------------------------
+Pas d'Evenement afterFind ou de Champs Virtuels
+-----------------------------------------------
 
 Dans les versions précédentes de CakePHP, vous aviez besoin de rendre
 extensive l'utilisation du callback ``afterFind`` et des champs virtuels afin
@@ -366,7 +385,7 @@ les mêmes résultats que les champs virtuels, cela donne::
         }
     }
 
-Les associations ne sont plus définies en propriétés
+Les Associations Ne sont Plus Définies en Propriétés
 ----------------------------------------------------
 
 Dans les précédentes versions de CakePHP, les diverses associations que vos
@@ -406,7 +425,7 @@ pas couverts par les types de relations intégrées, vous pouvez créer une
 sous-classe ``Association`` personnalisée et définir la logique d'association
 dont vous avez besoin.
 
-Validation n'est plus définie comme une propriété
+Validation n'est plus Définie Comme une Propriété
 -------------------------------------------------
 
 Comme les associations, les règles de validation ont été définies comme une
@@ -453,7 +472,7 @@ méthode devrait être préfixée avec ``validation`` et accepte un argument
 sauvegarde de l'utilisation de l'option ``validate``. Regardez la
 documentation sur :ref:`saving-entities` pour plus d'informations.
 
-Identifier quoting désactivé par défaut
+Identifier Quoting Désactivé par Défaut
 ---------------------------------------
 
 Dans le passé, CakePHP a toujours quoté les identifieurs. Parser les bouts de
@@ -466,7 +485,7 @@ les noms de table qui contiennent des caractères spéciaux ou sont des mots
 résérvés. Si nécessaire, vous pouvez activer identifier quoting lors de la
 configuration d'une connection::
 
-    // dans config/app.php
+    // Dans config/app.php
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Driver\Mysql',
@@ -534,14 +553,14 @@ Les Behaviors continuent d'offir la possibilité d'ajouter les méthodes
 changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 **mêmes** arguments fournis à la table 'method'. Par exemple::
 
-    // Supposons que table a une méthode slug() fournie par un behavior.
+    // Supposons que la table a une méthode slug() fournie par un behavior.
     $table->slug($someValue);
 
 Le behavior qui fournit la méthode ``slug`` va recevoir seulement 1 argument,
 et ses méthodes signature doivent ressembler à ceci::
 
     public function slug($value) {
-        // code here.
+        // code ici.
     }
 
 Changements de Signature de Méthode de Callback
