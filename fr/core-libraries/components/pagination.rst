@@ -34,14 +34,14 @@ Elles sont complétées par le tri, la direction, la limitation et les paramètr
 de page passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
 doit être défini dans une structure en tableau comme ci-dessous::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $components = ['Paginator'];
 
         public $paginate = [
             'limit' => 25,
             'order' => [
-                'Posts.title' => 'asc'
+                'Articles.title' => 'asc'
             ]
         ];
     }
@@ -49,15 +49,15 @@ doit être défini dans une structure en tableau comme ci-dessous::
 Vous pouvez aussi inclure d'autres options
 :php:meth:`~Cake\\ORM\\Table::find()`, comme ``fields``::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $components = ['Paginator'];
 
         public $paginate = [
-            'fields' => ['Posts.id', 'Posts.created'],
+            'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
             'order' => [
-                'Post.title' => 'asc'
+                'Articles.title' => 'asc'
             ]
         ];
     }
@@ -67,10 +67,10 @@ propriété paginate, il est souvent plus propre et simple de mettre vos options
 de pagination dans une :ref:`custom-find-methods`. Vous pouver définir
 l'utilisation de la pagination du finder en configurant l'option ``findType``::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $paginate = [
-            'findType' => 'published',
+            'finder' => 'published',
         ];
     }
 
@@ -78,15 +78,15 @@ En plus de définir les valeurs de pagination générales, vous pouvez définir
 plus d'un jeu de pagination par défaut dans votre controller, vous avez juste
 à nommer les clés du tableau d'après le model que vous souhaitez configurer::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
 
         public $paginate = [
-            'Posts' => [],
+            'Articles' => [],
             'Authors' => [],
         ];
     }
 
-Les valeurs des clés ``Posts`` et ``Authors`` peuvent contenir toutes
+Les valeurs des clés ``Articles`` et ``Authors`` peuvent contenir toutes
 les propriétés qu'un model/clé sans ``$paginate`` peut contenir.
 
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
@@ -128,30 +128,32 @@ l'objet table lui-même, ou son nom::
 Utiliser Directement Paginator
 ==============================
 
-If you need to paginate data from another component you may want to use the
-PaginatorComponent directly. It features a similar API to the controller
-method::
+Si vous devez paginer des données d'un autre component, vous pouvez utiliser
+directement PaginatorComponent. Il fournit une API similaire a à la méthode
+du controller::
 
     $articles = $this->Paginator->paginate($articleTable->find(), $config);
 
     //Or just
     $articles = $this->Paginator->paginate($articleTable, $config);
 
-The first parameter should be the query object from a find on table object you wish
-to paginate results from. Optionally, you can pass the table object and let the query
-be constructed for you. The second parameter should be the array of settings to use for
-pagination. This array should have the same structure as the ``$paginate``
-property on a controller.
+Le premier paramètre doit être l'objet query à partir d'un find sur l'objet
+table duquel vous souhaitez paginer les résultats. En option, vous pouvez passer
+l'objt table et laisser la query être construite par vous. Le second paramètre
+doit être le tableau des configurations à utiliser pour la pagination. Ce
+tableau doit avoir la même structure que la propriété ``$paginate``
+dans un controller.
 
-Control which Fields Used for Ordering
-======================================
+Contrôle les Champs Utilisés pour le Tri
+========================================
 
-By default sorting can be done on any non-virtual column a table has. This is
-sometimes undesirable as it allows users to sort on un-indexed columnsthat can
-be expensive to order by. You can set the whitelist of fields that can be sorted
-using the ``sortWhitelist`` option. This option is required when you want to
-sort on any associated data, or computed fields that may be part of your
-pagination query::
+Par défaut le tri peut être fait sur n'importe quelle colonne qu'une table a.
+Ceci est parfois non souhaité puisque cela permet aux utilisateurs de trier sur
+des colonnes non indexées qui peuvent être compliqués à trier. Vous pouvez
+définir la liste blanche des champs qui peut être triée en utilisant
+l'option ``sortWhitelist``. Cette option est nécessaire quand vous voulez trier
+sur des données associées, ou des champs computés qui peuvent faire parti de
+la query de pagination::
 
     public $paginate = [
         'sortWhitelist' => [
@@ -159,42 +161,44 @@ pagination query::
         ]
     ];
 
-Any requests that attempt to sort on fields not in the whitelist will be
-ignored.
+Toute requête qui tente de trier les champs qui ne sont pas dans la liste
+blanche sera ignorée.
 
-Limit the Maximum Number of Rows that can be Fetched
-====================================================
+Limiter le Nombre Maximum de Lignes qui peuvent être Récupérées
+===============================================================
 
-The number of results that are fetched is exposed to the user as the
-``limit`` parameter. It is generally undesirable to allow users to fetch all
-rows in a paginated set. By default CakePHP limits the maximum number of rows
-that can be fetched to 100. If this default is not appropriate for your
-application, you can adjust it as part of the pagination options::
+Le nombre de résultat qui sont récupérés est montré à l'utilisateur dans le
+paramètre ``limit``. Il est généralement non souhaité de permettre aux
+utilisateurs de récupérer toutes les lignes d'un ensemble paginé. Par défaut,
+CakePHP limite le nombre maximum de lignes qui peuvent être réupérées à
+100. Si par défaut ce n'est pas approprié pour votre application, vous pouvez
+l'ajuster dans les options de pagination::
 
     public $paginate = [
         // other keys here.
         'maxLimit' => 10
     ];
 
-If the request's limit param is greater than this value, it will be reduced to
-the ``maxLimit`` value.
+Si le param de limit de la requête est plus grand que cette valeur, elle sera
+réduit à la valeur ``maxLimit``.
 
-Out of Range Page Requests
-==========================
+Requêtes de Page Out of Range
+=============================
 
-The PaginatorComponent will throw a ``NotFoundException`` when trying to
-access a non-existent page, i.e. page number requested is greater than total
-page count.
+PaginatorComponent va lancer une ``NotFoundException`` quand on essaie
+d'accéder une page non existante, par ex le nombre de page demandé est supérieur
+au total du nombre de page.
 
-So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a ``NotFoundException`` is caught::
+Ainsi vous pouvez soit laisser s'afficher la page d'erreur normal, soit utiliser
+un block try catch et faire des actions appropriées quand une
+``NotFoundException`` est attrapée::
 
     public function index() {
         try {
             $this->paginate();
         } catch (NotFoundException $e) {
-            // Do something here like redirecting to first or last page.
-            // $this->request->params['paging'] will give you required info.
+            // Faire quelque chose ici comme rediriger vers la première ou dernière page.
+            // $this->request->params['paging'] vous donnera les onfos demandées.
         }
     }
 

@@ -127,7 +127,7 @@ Configurer différents champs pour l'utilisateur dans le tableau ``$components``
         'Auth' => [
             'authenticate' => [
                 'Form' => [
-                    'fields' => ['username' => 'email']
+                    'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
         ]
@@ -468,7 +468,7 @@ suit::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Legacy']
+                        'hashers' => ['Default', 'Legacy']
                     ]
                 ]
             ]
@@ -487,7 +487,7 @@ pouvez changer la fonction login selon::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                if ($this->Auth->loginProvider()->needsPasswordRehash()) {
+                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
                     $user = $this->Users->get($this->Auth->user('id'));
                     $user->password = $this->request->data('password');
                     $this->Users->save($user);
@@ -525,7 +525,7 @@ séparée, pour le hachage normal de mot de passe::
         public function beforeSave(Event $event) {
             $entity = $event->data['entity'];
 
-            // make a password for digest auth.
+            // Make a password for digest auth.
             $entity->digest_hash = DigestAuthenticate::password(
                 $entity->username,
                 $entity->plain_password,
@@ -548,7 +548,28 @@ vous connecter.
     ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
-Connecter les utilisateurs manuellement
+Creating Custom Password Hasher Classes
+---------------------------------------
+Custom password hasher classes need to extend the ``AbstractPasswordHasher``
+class and need to implement the abstract methods ``hash()`` and ``check()``.
+In ``app/Auth/CustomPasswordHasher.php`` you could put
+the following::
+
+    namespace App\Auth;
+
+    use Cake\Auth\AbstractPasswordHasher;
+
+    class CustomPasswordHasher extends AbstractPasswordHasher {
+        public function hash($password) {
+            // Stuff here
+        }
+
+        public function check($password, $hashedPassword) {
+            // Stuff here
+        }
+    }
+
+Connecter les Utilisateurs Manuellement
 ---------------------------------------
 
 .. php:method:: setUser(array $user)
@@ -583,12 +604,13 @@ Accéder à l'utilisateur connecté
 Une fois que l'utilisateur est connecté, vous avez souvent besoin
 d'information particulière à propos de l'utilisateur courant. Vous pouvez
 accéder à l'utilisateur en cours de connexion en utilisant
-``AuthComponent::user()``. Cette méthode est statique, et peut être utilisée
-globalement après le chargement du component Auth. Vous pouvez y accéder à la
-fois avec l'instance d'une méthode ou comme une méthode statique::
+``AuthComponent::user()``::
 
     // Depuis l'intérieur du controler
     $this->Auth->user('id');
+
+If the current user is not logged in or the key doesn't exist, null will
+be returned.
 
 Déconnexion des utilisateurs
 ----------------------------
@@ -759,6 +781,11 @@ n'autorisera la vérification des objets ::
 
 Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``allow()``.
 Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
+
+.. note::
+
+    You should not add the "login" action of your ``UsersController`` to allow list.
+    Doing so would cause problems with normal functioning of ``AuthComponent``.
 
 Fabriquer des Actions qui requièrent des Autorisations
 ------------------------------------------------------

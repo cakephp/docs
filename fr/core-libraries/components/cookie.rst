@@ -69,7 +69,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     La méthode write() est le cœur du composant cookie, $key est le
     nom de la variable désirée, et $value est l'information à stocker::
 
-        $this->Cookie->write('nom', 'Rémy');
+        $this->Cookie->write('name', 'Larry');
 
     Vous pouvez également grouper vos variables en utilisant la notation point
     '.' dans les paramètres de clé::

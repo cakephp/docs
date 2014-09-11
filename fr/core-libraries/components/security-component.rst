@@ -59,32 +59,32 @@ dans le controller.
 
 .. php:method:: blackHole(object $controller, string $error)
 
-    Met en "trou noir" (black-hole) une requête invalide, avec une
-    erreur 404 ou un callback personnalisé. Sans callback, la requête
-    sera abandonnée. Si un callback de controller est défini pour
-    SecurityComponent::blackHoleCallback, il sera appelé et passera
-    toute information sur l'erreur.
+Met en "trou noir" (black-hole) une requête invalide, avec une
+erreur 404 ou un callback personnalisé. Sans callback, la requête
+sera abandonnée. Si un callback de controller est défini pour
+SecurityComponent::blackHoleCallback, il sera appelé et passera
+toute information sur l'erreur.
 
-    La fonction de rappel (callback) du controller qui va gérer et requéter
-    ce qui doit être mis dans un trou noir (blackholed).
-    La fonction de rappel de mise en trou noir (blackhole callback) peut être
-    n'importe quelle méthode publique d'un controller.
-    La fonction de rappel doit s'attendre a un paramètre indiquant le type
-    d'erreur::
+La fonction de rappel (callback) du controller qui va gérer et requéter
+ce qui doit être mis dans un trou noir (blackholed).
+La fonction de rappel de mise en trou noir (blackhole callback) peut être
+n'importe quelle méthode publique d'un controller.
+La fonction de rappel doit s'attendre a un paramètre indiquant le type
+d'erreur::
 
-        public function beforeFilter() {
-            $this->Security->config('blackHoleCallback', 'blackhole');
-        }
+    public function beforeFilter(Event $event) {
+        $this->Security->config('blackHoleCallback', 'blackhole');
+    }
 
-        public function blackhole($type) {
-            // handle errors.
-        }
+    public function blackhole($type) {
+        // Handle errors.
+    }
 
-    Le  paramètre ``$type`` peut avoir les valeurs suivantes:
+Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
-    * 'auth' Indique une erreur de validation de formulaire, ou une incohérence
-      controller/action.
-    * 'secure' Indique un problème sur la méthode de restriction SSL.
+* 'auth' Indique une erreur de validation de formulaire, ou une incohérence
+  controller/action.
+* 'secure' Indique un problème sur la méthode de restriction SSL.
 
 Restreindre les actions aux actions SSL
 =======================================
@@ -166,23 +166,16 @@ beforeFilter() de votre controller. Vous pouvez spécifier les restrictions
 de sécurité que vous voulez et le component Security les forcera
 au démarrage::
 
-    class WidgetController extends AppController {
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
-            $this->Security->requirePost('delete');
-        }
-    }
-
-Dans cette exemple, l'action delete peut être effectuée
-avec succès si celui ci reçoit une requête POST::
-
-    class WidgetController extends AppController {
-
-        public $components = ['Security'];
-
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -192,11 +185,16 @@ avec succès si celui ci reçoit une requête POST::
 Cette exemple forcera toutes les actions qui proviennent de la
 "route" Admin à être effectuées via des requêtes sécurisées SSL::
 
-    class WidgetController extends AppController {
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
@@ -204,7 +202,7 @@ Cette exemple forcera toutes les actions qui proviennent de la
         }
 
         public function forceSSL() {
-            $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
     }
 
@@ -222,13 +220,8 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
 les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
-
-Les doubles soumissions et les attaques `replay` sont gérées par les
-fonctionnalités CSRF du component Security. Elles fonctionnent en ajoutant
-un jeton spécial pour chaque requête de formulaire. Ce jeton utilisé
-qu'une fois ne peut pas être utilisé à nouveau. Si une tentative est faîte
-pour ré-utiliser un jeton expiré la requête sera mise dans le trou noir
-(blackholed)
+To enable CSRF protection features use the
+:doc:`/core-libraries/components/csrf-component`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================
@@ -238,8 +231,24 @@ sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
 ``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
-fonctionnalités de ``SecurityComponent``.
+fonctionnalités de ``SecurityComponent`::
 
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetController extends AppController {
+
+        public $components = ['Security'];
+
+        public function beforeFilter(Event $event) {
+             $this->Security->config('unlockedActions', ['edit']);
+        }
+    }
+
+Cet exemple désactiverait toutes les vérifications de sécurité pour une action
+edit.
 
 .. meta::
     :title lang=fr: Security (Securité)

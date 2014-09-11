@@ -12,7 +12,7 @@ are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
 is added containing the CSRF token. During the ``Controller.startup`` event, if
 the request is a POST, PUT, DELETE, PATCH request the component will compare the
 request data & cookie value. If either is missing or the two values mismatch the
-component will throw a :php:class:`Cake\\Error\\ForbiddenException`.
+component will throw a :php:class:`Cake\Network\Exception\ForbiddenException`.
 
 Using the CsrfComponent
 =======================
@@ -27,14 +27,14 @@ you can benefit from the CSRF protection it provides::
     ];
 
 Settings can be passed into the component through your component's settings.
-The available configuration options are::
+The available configuration options are:
 
- - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
- - ``expiry`` How long the CSRF token should last. Defaults to browser session.
- - ``secure`` Whether or not the cookie will be set with the Secure flag.
-   Defaults to false.
- - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
-   will also require configuring FormHelper.
+- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
+- ``expiry`` How long the CSRF token should last. Defaults to browser session.
+- ``secure`` Whether or not the cookie will be set with the Secure flag.
+  Defaults to ``false``.
+- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
+  will also require configuring FormHelper.
 
 When enabled, you can access the current CSRF token on the request object::
 
@@ -53,8 +53,8 @@ token.
     FormHelper. If you do not, you will need to manually create hidden inputs in
     each of your forms.
 
-Sending Data through the X-CSRF-Token Header
-============================================
+CSRF Protection and AJAX Requests
+==================================
 
 In addition to request data parameters, CSRF tokens can be submitted through
 a special ``X-CSRF-Token`` header. Using a header often makes it easier to

@@ -54,11 +54,11 @@ Un exemple de l'utilisation de ces options::
         ]
     ]);
 
-    // Dans votre View
+    // Dans votre Vue
     <?= $this->Flash->render('positive') ?>
 
-    <!-- Dans src/Template/Element/Flash/success.ctp -->
-    <div id="flash-<?= $key ?>" class="message-info success">
+    <!-- In src/Template/Element/Flash/success.ctp -->
+    <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 

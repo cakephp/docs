@@ -43,42 +43,42 @@ Si c'est un tableau, accepts() renverra true si un des types du contenu est
 accepté par le client. Si c'est 'null', elle renverra un tableau des types de
 contenu que le client accepte. Par exemple::
 
-    class PostsController extends AppController {
+        class ArticlesController extends AppController {
 
-        public $components = ['RequestHandler'];
+            public $components = ['RequestHandler'];
 
-        public function beforeFilter () {
-            if ($this->RequestHandler->accepts('html')) {
-                // Ce code est exécuté uniquement si le client accepte les réponses HTML (text/html)
-                // les réponses HTML (text/html)
-            } elseif ($this->RequestHandler->accepts('xml')) {
-                // executé seulement si le client accepte seulement
-                // les réponse XML
-            }
-            if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                // Executé si le client accepte l'un des suivants: XML, RSS ou Atom
+            public function beforeFilter() {
+                if ($this->RequestHandler->accepts('html')) {
+                    // Execute code only if client accepts an HTML (text/html)
+                    // response.
+                } elseif ($this->RequestHandler->accepts('xml')) {
+                    // Execute XML-only code
+                }
+                if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
+                    // Executes if the client accepts any of the above: XML, RSS
+                    // or Atom.
+                }
             }
         }
-    }
 
 D'autres méthodes de détections du contenu des requêtes:
 
 .. php:method:: isXml()
 
-    Renvoie true si la requête actuelle accepte les réponses XML.
+    Renvoie ``true`` si la requête actuelle accepte les réponses XML.
 
 .. php:method:: isRss()
 
-    Renvoie true si la requête actuelle accepte les réponses RSS.
+    Renvoie ``true`` si la requête actuelle accepte les réponses RSS.
 
 .. php:method:: isAtom()
 
-    Renvoie true si l'appel actuel accepte les réponse Atom, false dans le cas
+    Renvoie ``true`` si l'appel actuel accepte les réponse Atom, false dans le cas
     contraire.
 
 .. php:method:: isMobile()
 
-    Renvoie true si le navigateur du client correspond à un téléphone
+    Renvoie ``true`` si le navigateur du client correspond à un téléphone
     portable, ou si le client accepte le contenu WAP. Les navigateurs
     mobiles supportés sont les suivants:
 
@@ -111,7 +111,7 @@ D'autres méthodes de détections du contenu des requêtes:
 
 .. php:method:: isWap()
 
-Retourne true si le client accepte le contenu WAP.
+Retourne ``true`` si le client accepte le contenu WAP.
 
 Toutes les méthodes de détection des requêtes précédentes peuvent être
 utilisées dans un contexte similaire pour filtrer les fonctionnalités destinées
@@ -125,138 +125,83 @@ non-AJAX., le code suivant vous permettra de le faire::
         }
         // Continue l'action du controller
 
-
-Obtenir des informations supplémentaires sur le client
-======================================================
-
-.. php:method:: getAjaxVersion()
-
-    Récupère la version de la librairie 'Prototype' si la requête est de
-    type AJAX ou une chaîne de caractères vide dans le cas contraire.
-    La librairie 'Prototype' envoie une entête HTTP spéciale
-    "Prototype version".
-
-Décoder automatiquement les données de la requête
+Décoder Automatiquement les Données de la Requête
 =================================================
 
 .. php:method:: addInputType($type, $handler)
 
-    :param string $type: L'alias du type de contenu auquel
-      ce décodeur est attaché. ex. 'json' ou 'xml'
-    :param array $handler: L'information de gestionnaire pour le type.
 
-    Ajoute une requête de décodage de données. Le gestionnaire devrait
-    contenir un callback, et tour autre argument supplémentaire pour le
-    callback. Le callback devrait retourner un tableau de données contenues
-    dans la requête. Par exemple, ajouter un gestionnaire de CSV dans le
-    callback 'beforeFilter' de votre controller pourrait ressembler à ceci ::
+Ajoute une requête de décodage de données. Le gestionnaire devrait
+contenir un callback, et tour autre argument supplémentaire pour le
+callback. Le callback devrait retourner un tableau de données contenues
+dans la requête. Par exemple, ajouter un gestionnaire de CSV dans le
+callback beforeFilter de votre controller pourrait ressembler à ceci ::
 
-        $parser = function ($data) {
-            $rows = str_getcsv($data, "\n");
-            foreach ($rows as &$row) {
-                $row = str_getcsv($row, ',');
-            }
-            return $rows;
-        };
-        $this->RequestHandler->addInputType('csv', [$parser]);
+    $parser = function ($data) {
+        $rows = str_getcsv($data, "\n");
+        foreach ($rows as &$row) {
+            $row = str_getcsv($row, ',');
+        }
+        return $rows;
+    };
+    $this->RequestHandler->addInputType('csv', [$parser]);
 
-    L'exemple ci-dessus nécessite PHP 5.3, cependant vous pouvez utiliser
-    n'importe quel `callback <http://php.net/callback>`_ pour la fonction
-    de gestion. Vous pouvez aussi passer des arguments supplémentaires
-    au callback, c'est très utile pour les callbacks comme ``json_decode``::
+Vous pouvez utiliser n'importe quel `callback <http://php.net/callback>`_ pour
+la fonction de gestion. Vous pouvez aussi passer des arguments supplémentaires
+au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
-        $this->RequestHandler->addInputType('json', ['json_decode', true]);
+    $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
-    Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
-    d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
-    d'objets ``StdClass``.
+Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
+d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
+d'objets ``StdClass``.
 
-Répondre Aux Requêtes
-=====================
-
-En plus de la détection de requêtes, RequestHandler fournit également une
-solution simple pour modifier la sortie de façon à ce que le type de contenu
-corresponde à votre application.
-
-.. php:method:: setContent($name, $type = null)
-
-    :param string $name: Le nom ou l'extension du fichier (Content-type), par
-        ex : html, css, json, xml.
-    :param mixed $type: - Le(s) type(s) mime(s) auquel se réfère Content-type.
-
-    setContent ajoute/définit les Content-types pour le nom précisé.
-    Permet aux content-types d'être associés à des alias simplifiés
-    et/ou à des extensions. Ceci permet à RequestHandler de répondre
-    automatiquement aux requêtes de chaque type dans sa méthode startup.
-    Si vous utilisez Router::parseExtension, vous devriez utiliser
-    l'extension de fichier comme le nom du Content-type.
-    De plus, ces types de contenu sont utilisés par prefers() et accepts().
-
-    setContent est bien mieux utilisé dans le beforeFilter() de vos
-    controllers, parce qu'il tirera un meilleur profit de l'automagie
-    des alias de content-type.
-
-    Les correspondances par défaut sont :
-
-    -  **javascript** text/javascript
-    -  **js** text/javascript
-    -  **json** application/json
-    -  **css** text/css
-    -  **html** text/html, \*/\*
-    -  **text** text/plain
-    -  **txt** text/plain
-    -  **csv** application/vnd.ms-excel, text/plain
-    -  **form** application/x-www-form-urlencoded
-    -  **file** multipart/form-data
-    -  **xhtml** application/xhtml+xml, application/xhtml, text/xhtml
-    -  **xhtml-mobile** application/vnd.wap.xhtml+xml
-    -  **xml** application/xml, text/xml
-    -  **rss** application/rss+xml
-    -  **atom** application/atom+xml
-    -  **amf** application/x-amf
-    -  **wap** text/vnd.wap.wml, text/vnd.wap.wmlscript,
-       image/vnd.wap.wbmp
-    -  **wml** text/vnd.wap.wml
-    -  **wmlscript** text/vnd.wap.wmlscript
-    -  **wbmp** image/vnd.wap.wbmp
-    -  **pdf** application/pdf
-    -  **zip** application/x-zip
-    -  **tar** application/x-tar
+Vérifier les Préférences de Content-Type
+========================================
 
 .. php:method:: prefers($type = null)
 
-    Détermine quels content-types le client préfère. Si aucun paramètre n'est
-    donné, le type de contenu le plus approchant est retourné. Si $type est un
-    tableau, le premier type que le client accepte sera retourné. La préférence
-    est déterminée, premièrement par l'extension de fichier analysée par
-    Router, si il y en avait une de fournie et secondairement, par la liste des
-    content-types définis dans HTTP_ACCEPT.
+Détermine les content-types que le client préfère. Si aucun paramètre n'est
+donné, le type de contenu le plus approchant est retourné. Si $type est un
+tableau, le premier type que le client accepte sera retourné. La préférence
+est déterminée, premièrement par l'extension de fichier analysée par
+Router, si il y en avait une de fournie et secondairement, par la liste des
+content-types définis dans ``HTTP\_ACCEPT``.
+
+    $this->RequestHandler->prefers('json');
+
+Répondre aux Requêtes
+=====================
 
 .. php:method:: renderAs($controller, $type)
 
-    :param Controller $controller: Référence du controller
-    :param string $type: nom simplifié du type de contenu à rendre, par
-      exemple : xml, rss.
+Change le mode de rendu d'un controller pour le type spécifié.
+Ajoutera aussi le helper approprié au tableau des helpers du controller,
+s'il est disponible et qu'il n'est pas déjà dans le tableau.
 
-    Change le mode de rendu d'un controller pour le type spécifié.
-    Ajoutera aussi le helper approprié au tableau des helpers du controller,
-    s'il est disponible et qu'il n'est pas déjà dans le tableau.
+    // Force le controller à rendre une response xml.
+    $this->RequestHandler->renderAs($this, 'xml');
+
+Cette méthode va aussi tenter d'ajouter un helper qui correspond au type de
+contenu courant. Par exemple si vous rendez un ``rss``, ``RssHelper`` sera
+ajouté.
 
 .. php:method:: respondAs($type, $options)
 
-    :param string $type: nom simplifié du type de contenu à rendre, par
-      exemple : xml, rss ou un content-type complet, tel que
-      application/x-shockwave
-    :param array $options: Si $type est un nom simplifié de type, qui
-      a plus d'une association avec des contenus, $index est utilisé pour
-      sélectionner le type de contenu.
+Définit l'en-tête de réponse basé sur la correspondance content-type/noms. Cette
+méthode vous laisse définir un certain nombre de propriétés de response en
+une seule fois::
 
-    Définit l'en-tête de réponse basé sur la correspondance content-type/noms.
+    $this->RequestHandler->respondAs('xml', [
+        // Force le téléchargement
+        'attachment' => true,
+        'charset' => 'UTF-8'
+    ]);
 
 .. php:method:: responseType()
 
-    Retourne l'en-tête Content-type du type de réponse actuel ou null s'il
-    y en a déjà un de défini.
+Retourne l'en-tête Content-type du type de réponse actuel ou null s'il
+y en a déjà un de défini.
 
 Profiter du cache de validation HTTP
 ====================================
@@ -268,11 +213,10 @@ vous bénéficiez surtout d'une meilleur bande passante, mais utilisé
 correctement vous pouvez aussi gagner en temps de processeur, et ainsi gagner
 en temps de réponse.
 
-En activant le Component RequestHandler ``RequestHandlerComponent`` dans
-votre controller vous validerez le contrôle automatique effectué avant
-de rendre une vue. Ce contrôle compare l'objet réponse à la requête originale
-pour déterminer si la réponse n'a pas été modifiée depuis la dernière fois
-que le client a fait sa demande.
+En activant le Component RequestHandler dans votre controller vous validerez le
+contrôle automatique effectué avant de rendre une vue. Ce contrôle compare
+l'objet réponse à la requête originale pour déterminer si la réponse n'a pas
+été modifiée depuis la dernière fois que le client a fait sa demande.
 
 Si la réponse est évaluée comme non modifiée, alors le processus de rendu de
 vues est arrêter, réduisant le temps processeur. Un ``no content`` est retourné
@@ -280,7 +224,7 @@ au client, augmentant la bande passante. Le code de réponse est défini
 à `304 Not Modified`.
 
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
-``checkHttpCache`` à false::
+``checkHttpCache`` à ``false``::
 
     public $components = [
         'RequestHandler' => [
@@ -290,22 +234,15 @@ Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 Utiliser les ViewClasses personnalisées
 =======================================
 
+.. php:method:: viewClassMap($type, $viewClass)
+
 Quand vous utilisez JsonView/XmlView, vous aurez envie peut-être de surcharger
 la serialization par défaut avec une classe View par défaut, ou ajouter des
 classes View pour d'autres types.
 
 Vous pouvez mapper les types existants et les nouveaux types à vos classes
-personnalisées.
-
-.. php:method:: viewClassMap($type, $viewClass)
-
-    :param string|array $type: Le type string ou un tableau map avec le
-      format ``['json' => 'MyJson']``.
-    :param string $viewClass: La viewClass à utiliser pour le type sans `View`
-      en suffixe.
-
-Vous pouvez aussi définir ceci automatiquement en utilisant la configuration
-``viewClassMap``::
+personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
+la configuration ``viewClassMap``::
 
     public $components = [
         'RequestHandler' => [

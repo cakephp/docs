@@ -9,10 +9,10 @@ et offre aussi des méthodes pratiques pour de nombreuses fonctions relatives
 à ``$_SESSION``.
 
 Les sessions peuvent être paramétrées de différentes façons dans CakePHP.  Pour
-plus d'information, vous devriez lire la documentation :doc:`Session
-configuration </development/sessions>`
+plus d'information, vous devriez lire la documentation sur la :doc:`
+configuration des Sessions </development/sessions>`
 
-Interagir avec les données de Session
+Interagir avec les Données de Session
 =====================================
 
 Le component Session est utilisé pour interagir avec les informations de
