@@ -35,7 +35,7 @@ Using Filters
 
 Filters are usually enabled in your application's ``bootstrap.php`` file, but
 you could easily load them any time before the request is dispatched.  Adding
-and removing filters is done through ``Cake\\Routing\\DispatcherFactory``. By
+and removing filters is done through :php:class:`Cake\\Routing\\DispatcherFactory`. By
 default, the CakePHP application template comes with a couple filter classes
 already enabled for all requests; let's take a look at how they are added::
 
@@ -116,9 +116,9 @@ Save this file into ``src/Routing/Filter/TrackingCookieFilter.php``. As you can 
 classes in CakePHP, dispatcher filters have a few conventions:
 
 * Class names end in ``Filter``.
-* Classes are in the ``Routing\\Filter`` namespace. For example,
-  ``App\\Routing\\Filter``.
-* Generally filters extend ``Cake\\Routing\\DispatcherFilter``.
+* Classes are in the ``Routing\Filter`` namespace. For example,
+  ``App\Routing\Filter``.
+* Generally filters extend ``Cake\Routing\DispatcherFilter``.
 
 ``DispatcherFilter`` exposes two methods that can be overridden in subclasses,
 they are ``beforeDispatch`` and ``afterDispatch``. These methods are executed

@@ -354,7 +354,7 @@ for more information on the specifics of ini files.
 To use a core config engine, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
-    use Cake\\Core\\Configure\\Engine\\PhpConfig;
+    use Cake\Core\Configure\Engine\PhpConfig;
 
     // Read config files from config
     Configure::config('default', new PhpConfig());
