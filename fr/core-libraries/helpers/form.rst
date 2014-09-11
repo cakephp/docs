@@ -98,7 +98,7 @@ pleinement avantage du Helper Form (Helper Formulaire) est
         caché (hidden) est créé pour réécrire la méthode HTTP par défaut
 
     A la création de formulaires pour les models dans des plugins. Nous
-    devrons toujours utiliser la notation :term:`plugin syntax` à la création
+    devrons toujours utiliser la :term:`syntaxe de plugin` à la création
     d'un formulaire. Cela assurera que le formulaire est correctement généré::
     
         echo $this->Form->create('ContactManager.Contact');

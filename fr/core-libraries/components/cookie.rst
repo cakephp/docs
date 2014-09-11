@@ -29,7 +29,7 @@ permet de modifier le fonctionnement du component Cookie.
 |                 |              | chiffrement AES, cette valeur doit être plus grande  |
 |                 |              | que 32 bytes.                                        |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | Le nom de domaine autorisé à accéder au cookie.     |
+| string $domain  | ''           | Le nom de domaine autorisé à accéder au cookie.      |
 |                 |              | Utilisez par exemple '.votredomaine.com' pour        |
 |                 |              | autoriser les accès depuis tous vos sous-domaines.   |
 +-----------------+--------------+------------------------------------------------------+

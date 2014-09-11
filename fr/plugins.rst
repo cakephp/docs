@@ -384,8 +384,8 @@ servira l'asset
     chemin de l'asset. Et la magie opére!
 
 .. versionchanged:: 2.1
-    Utilisez :term:`plugin syntax` pour accéder aux assets. Par exemple dans
-    votre View:
+    Utilisez la :term:`syntaxe de plugin` pour accéder aux assets. Par exemple
+    dans votre View:
     <?php echo $this->Html->css("ContactManager.style"); ?>
 
 

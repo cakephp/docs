@@ -640,11 +640,11 @@ Les Types d'Attribut Correspondants
 
     Crée un nouveau tableau, en extrayant $path, et mappe $function à travers
     les résultats. Vous pouvez utiliser les deux, expression et le matching
-    d'éléments avec cette méthode.
+    d'éléments avec cette méthode::
 
         //appel de la fonction noop $this->noop() sur chaque element de $data
         $result = Hash::map($data, "{n}", array($this, 'noop'));
-        
+
         function noop($array) {
          //fait des trucs au tableau et retourne les résultats
          return $array;

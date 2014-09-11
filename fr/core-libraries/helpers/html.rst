@@ -134,9 +134,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: Le type de balise meta désiré.
-    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un tableau
-     :term:`routing array`.
-    :param array $options: Un tableau d'attributs :term:`html attributes`.
+    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un
+     :term:`tableau de routing`.
+    :param array $options: Un tableau d' :term:`attributs HTML`.
 
     Cette méthode est pratique pour faire des liens vers des ressources
     externes comme RSS/Atom feeds et les favicons. Comme avec css(), vous
@@ -328,7 +328,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <img src="http://example.com/img/logo.jpg" alt="" />
 
     Vous pouvez inclure des fichiers images depuis un plugin chargé en
-    utilisant :term:`plugin syntax`. Pour inclure
+    utilisant la :term:`syntaxe de plugin`. Pour inclure
     ``app/Plugin/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
 
         echo $this->Html->image('DebugKit.icon.png');
@@ -347,8 +347,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
     :param string $title: Le texte à afficher comme corps du lien.
-    :param mixed $url: Soit la chaîne spécifiant le chemin, ou un :term:`tableau routing`.
-    :param array $options: Un tableau d'attributs :`html attributes`.
+    :param mixed $url: Soit la chaîne spécifiant le chemin, ou un
+        :term:`tableau de routing`.
+    :param array $options: Un tableau d' :`attributs HTML`.
 
     Méthode générale pour la création de liens HTML. Utilisez les ``$options``
     pour spécifier les attributs des éléments et si le ``$title`` devra ou
@@ -717,7 +718,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: scriptStart($options = array())
 
-    :param array $options: Un tableau d'attributs :term:`html attributes` à
+    :param array $options: Un tableau d' :term:`attributs HTML` à
         utiliser quand scriptEnd est appelé.
 
     Débute la mise en mémoire tampon d'un bloc de code. Ce bloc de code
@@ -788,9 +789,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: Un tableau de chaîne pour créé les entête de tableau.
-    :param array $trOptions: Un tableau d'attributs :term:`html attributes`
+    :param array $trOptions: Un tableau d' :term:`attributs HTML`
         pour le <tr>.
-    :param array $thOptions: Un tableau d'attributs :term:`html attributes`
+    :param array $thOptions: Un tableau d' :term:`attributs HTML`
         pour l'élément <th>.
 
     Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
@@ -852,9 +853,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     :param array $data: Un tableau à deux dimensions avec les données pour les
         lignes.
-    :param array $oddTrOptions: Un tableau d'attributs :term:`html attributes`
+    :param array $oddTrOptions: Un tableau d' :term:`attributs HTML`
         pour les <tr> impairs.
-    :param array $evenTrOptions: Un tableau d'attributs :term:`html attributes`
+    :param array $evenTrOptions: Un tableau d' :term:`attributs HTML`
         pour les <tr> pairs.
     :param boolean $useCount: Ajoute la classe "column-$i".
     :param boolean $continueOddEven: Si à false, utilisera une variable $count
@@ -918,7 +919,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: Un tableau de routing :term:`routing array`.
+    :param mixed $url: Un tableau de routing :term:`tableau de routing`.
     :param mixed $full: Soit un booléen s'il faut ou pas que la  base du
         chemin soit incluse ou un tableau d'options pour le router
         :php:meth:`Router::url()`.
@@ -1063,7 +1064,7 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
-    :param array $options: Un tableau de :term:`html attributes` pour les
+    :param array $options: Un tableau d' :term:`attributs HTML` pour les
         elements contenant ``<ul>``. Peut aussi contenir les options
         'separator', 'firstClass', 'lastClass' et 'escape'.
     :param string|array $startText: Le texte ou l'elément qui précède ul.

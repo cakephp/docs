@@ -50,7 +50,7 @@ datasource
     Le nom de la source de données pour lequel ce tableau de configuration
     est destiné. Exemples : Database/Mysql, Database/Sqlserver,
     Database/Postgres, Database/Sqlite. Vous pouvez utiliser la
-    :term:`plugin syntax` pour indiquer la source de données du plugin à
+    :term:`syntaxe de plugin` pour indiquer la source de données du plugin à
     utiliser.
 persistent
     Indique si l'on doit ou non utiliser une connexion persistante à la base.
