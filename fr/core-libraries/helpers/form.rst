@@ -449,20 +449,16 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         <input name="name" type="text" value="" id="name" />
     </div>
 
-* ``$options['error']`` En utilisant cette clé vous permettra de transformer
+* ``$options['error']`` Utiliser cette clé vous permettra de transformer
   les messages de model par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n. (cf  internationalisation).
-  comporte un nombre de sous-options qui contrôles l'enveloppe de l'élément
-  (wrapping) . Le nom de classe de l'élément enveloppé, ainsi que
-  les messages d'erreurs qui contiennent du HTML devront être échappés.
+  définir des messages i18n. Elle comporte un nombre de sous-options qui
+  contrôle l'enveloppe de l'élément (wrapping), le nom de classe de l'élément
+  enveloppé, et si le HTML dans le message d'erreur doit être echappé ou non.
 
   Pour désactiver le rendu des messages d'erreurs définissez la clé error
-  à false::
+  ``false``::
 
     echo $this->Form->input('name', ['error' => false]);
-
-  Pour modifier le type d'enveloppe de l'élément et sa classe, utilisez
-  le format suivant::
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
   avec les clés respectant les règles de validation::

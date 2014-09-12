@@ -310,7 +310,7 @@ d'afficher et d'effacer la variable correspondante. La méthode
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
 "Articles" (ArticlesController). Vous pouvez vous référer à l'
-`API<http://api.cakephp.org>`_ de la fonction
+`API <http://api.cakephp.org>`_ de la fonction
 :php:func:`Cake\\Routing\\Router::url()` pour voir les différents formats
 d'URL acceptés dans les différentes fonctions de CakePHP.
 
