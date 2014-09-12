@@ -4,8 +4,8 @@ Qu'est ce que CakePHP? Pourquoi l'Utiliser?
 `CakePHP <http://www.cakephp.org/>`_ est un
 `framework <http://en.wikipedia.org/wiki/Application_framework>`_
 pour `PHP <http://www.php.net/>`_
-`gratuit <http://en.wikipedia.org/wiki/Licence_MIT>`_,
-`open-source <http://en.wikipedia.org/wiki/Open_source>`_,
+`gratuit <http://fr.wikipedia.org/wiki/Licence_MIT>`_,
+`open-source <http://fr.wikipedia.org/wiki/Open_source>`_,
 `de développement rapide <http://en.wikipedia.org/wiki/Rapid_application_development>`_.
 C'est une structure fondamentale pour les programmeurs pour créer des
 applications web. Notre principal objectif est de vous permettre
@@ -28,13 +28,13 @@ Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant
 CakePHP:
 
 -  `Communauté active et sympathique :ref:`cakephp-official-communities`.
--  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_.
+-  `Système de licence souple <http://fr.wikipedia.org/wiki/Licence_MIT>`_.
 -  Compatible avec les versions PHP 5.4.19 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_.
    (create, read, update, delete) intégrées pour les interactions avec la base
    de données.
 -  Génération de code.
--  Architecture `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
+-  Architecture `MVC <http://fr.wikipedia.org/wiki/Modèle-vue-contrôleur>`_.
 -  Dispatcheur de requêtes avec des URLs propres et personnalisables grâce un
    système de routes.
 -  `Validation intégrée des données <http://en.wikipedia.org/wiki/Data_validation>`_.
@@ -44,9 +44,9 @@ CakePHP:
 -  Components (composants) intégrés : Email, Cookie, Security, Session et 
    Request Handling.
 -  Système de contrôle d'accès 
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_  flexible.
+   `ACL <http://fr.wikipedia.org/wiki/Access_Control_List>`_  flexible.
 -  Nettoyage des données.
--  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple.
+-  Système de `cache <http://fr.wikipedia.org/wiki/Cache_web>`_ souple.
 -  Localisation.
 -  Fonctionne sur n'importe quelle arborescence de site web, avec un zest de 
    configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée.
