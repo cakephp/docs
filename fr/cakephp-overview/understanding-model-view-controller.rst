@@ -79,7 +79,7 @@ Finalement, quand cette sortie est générée, elle est immédiatement rendue
 à l'utilisateur.
 
 Presque chaque requête de votre application va suivre ce schéma de base.
-Nous ajouterons  plus tard des détails qui sont spécifiques à CakePHP,
+Nous ajouterons plus tard des détails qui sont spécifiques à CakePHP,
 donc gardez cela à l'esprit pour la suite.
 
 Bénéfices
