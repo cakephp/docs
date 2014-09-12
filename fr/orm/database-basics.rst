@@ -66,7 +66,7 @@ de données. Une liste complète est comme suit:
 className
     Le nom de la classe du driver utilisée pour faire fonctionner la connection.
     Ceci peut être soit un nom de classe court en utilisant
-    :term:`plugin syntax`, un nom complet en namespace, soit être une instance
+    :term:`syntaxe de plugin`, un nom complet en namespace, soit être une instance
     de driver construite. Les exemples de noms de classe court sont Mysql,
     Sqlite, Postgres, et Sqlserver.
 persistent

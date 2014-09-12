@@ -145,7 +145,7 @@ comme ``AcmeCorp/Users``, alors vous devrez charger le plugin comme suit::
     Plugin::load('AcmeCorp/Users');
 
 Cela va assurer que les noms de classe sont résolus correctement lors de
-l'utilisation de la :term:`plugin syntax`.
+l'utilisation de la :term:`syntaxe de plugin`.
 
 La plupart des plugins va indiquer la procédure correcte pour les configurer et
 configurer la base de données dans leur documentation. Certains plugins
@@ -360,7 +360,7 @@ préfix du plugin, utilisez la syntaxe alternative::
     }
 
 Vous pouvez utiliser ``TableRegistry`` pour charger les tables de votre plugin
-en utilisant l'habituelle :term:`plugin syntax`::
+en utilisant l'habituelle :term:`syntaxe de plugin`::
 
     use Cake\ORM\TableRegistry;
 
@@ -439,7 +439,7 @@ un webroot habituel.
 Lier aux plugins
 ----------------
 
-Vous pouvez utiliser la :term:`plugin syntax` pour lier les assets de plugin
+Vous pouvez utiliser la :term:`syntaxe de plugin` pour lier les assets de plugin
 en utilisant les méthodes script, image ou css de
 :php:class:`Cake\\View\\Helper\\HtmlHelper`::
 

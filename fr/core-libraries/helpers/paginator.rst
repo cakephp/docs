@@ -42,7 +42,7 @@ votre code DRY::
 Cela va charger le fichier qui se trouve dans
 ``config/paginator-templates.php`` et lire les templates à partir de la
 variable ``$config`` à l'intérieur de ce fichier. Vous pouvez aussi charger
-les templates à partir d'un plugin en utilisant :term:`plugin syntax`::
+les templates à partir d'un plugin en utilisant :term:`syntaxe de plugin`::
 
     // Dans un controller.
     public $helpers = [

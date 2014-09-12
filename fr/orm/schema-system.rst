@@ -58,7 +58,7 @@ pour décrire une table. Par exemple, les deux formulaires suivants sont
       'type' => 'string'
     ]);
 
- Bien qu'équivalent, le 2ème formulaire donne plus de détails et de contrôle.
+Bien qu'équivalent, le 2ème formulaire donne plus de détails et de contrôle.
 Ceci émule les fonctionnalités existantes disponibles dans les fichiers de
 Schema + le schema de fixture dans 2.x.
 

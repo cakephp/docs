@@ -772,7 +772,7 @@ Les deux du dessus sortiraient::
         [1] => mark
     )
 
-Quand vous générez des URLs, en utilisant un :term:`tableau routing`, vous
+Quand vous générez des URLs, en utilisant un :term:`tableau de routing`, vous
 ajoutez des arguments passés en valeurs sans clés de type chaîne dans le
 tableau::
 
@@ -903,7 +903,7 @@ option::
 
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
-standard :term:`plugin syntax`.
+standard :term:`syntaxe de plugin`.
 
 Handling Named Parameters in URLs
 =================================
