@@ -9,7 +9,7 @@ pour `PHP <http://www.php.net/>`_
 `de développement rapide <http://en.wikipedia.org/wiki/Rapid_application_development>`_.
 C'est une structure fondamentale pour les programmeurs pour créer des
 applications web. Notre principal objectif est de vous permettre
-de travailler d'une manière structurée et rapide -sans perte de flexibilité.
+de travailler d'une manière structurée et rapide sans perte de flexibilité.
 
 CakePHP rompt la monotonie du développement web. Il vous offre
 tous les outils nécessaires pour ne coder que ce dont vous avez
