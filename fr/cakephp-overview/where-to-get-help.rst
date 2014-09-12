@@ -1,7 +1,7 @@
 Où obtenir de l'aide
 ####################
 
-Le site officiel de CakePHP
+Le Site Officiel de CakePHP
 ===========================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
@@ -78,8 +78,8 @@ voiture sportive.
 
 .. _cakephp-official-communities:
 
-Communautés Officiels CakePHP
-=============================
+Groupes de Discussion Officiels de CakePHP
+==========================================
 `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
 CakePHP a aussi son groupe officiel sur Google Groups. Il y a des centaines de
@@ -101,8 +101,8 @@ questions.
 Où Trouver de l'Aide dans Votre Langue
 ======================================
 
-French
-------
+Française
+---------
 - `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
 
 

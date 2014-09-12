@@ -66,6 +66,7 @@ The IRC Channel
    Documentation
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
    Bakery
+-  `#cakephp-fr <irc://irc.freenode.net/cakephp-fr>`_ -- French Canal.
 
 If you're stumped, give us a holler in the CakePHP IRC channel.
 Someone from the `development team <https://github.com/cakephp?tab=members>`_
