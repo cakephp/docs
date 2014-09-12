@@ -61,9 +61,8 @@ Cycle de la requête CakePHP
 ===========================
 
 |Figure 1|
-Figure: 1: Une requête MVC basique
 
-Figure: 1 Montre la gestion typique d'une requête client dans CakePHP
+Figure 1: Montre la gestion typique d'une requête client dans CakePHP
 
 Le cycle d'une requête CakePHP typique débute avec une requête utilisateur
 qui demande une page ou une ressource dans votre application. Cette requête
@@ -72,15 +71,15 @@ controller traitant la requête.
 
 Une fois que la requête arrive au controller, celui-ci va communiquer avec
 la couche Model pour traiter la récupération de données ou les opérations
-de sauvegarde qui seraient nécessaires. Après que cette communication est
-finie, le controller va donner au bon objet vue, la tâche de générer une
-sortie résultant des données fournies par le model.
+de sauvegarde qui seraient nécessaires. Une fois cette communication terminée,
+le controller va donner au bon objet vue, la tâche de générer une sortie 
+résultant des données fournies par le model.
 
 Finalement, quand cette sortie est générée, elle est immédiatement rendue
 à l'utilisateur.
 
-Presque chaque requête de votre application va suivre ce schéma classique.
-Nous ajouterons des détails plus tard qui sont spécifiques à CakePHP,
+Presque chaque requête de votre application va suivre ce schéma de base.
+Nous ajouterons  plus tard des détails qui sont spécifiques à CakePHP,
 donc gardez cela à l'esprit pour la suite.
 
 Bénéfices
@@ -94,7 +93,7 @@ fonctionnalités sont ajoutées facilement, et les améliorations sur les vieill
 fonctionnalités se font en un clin d'oeil. La conception modulable et séparée
 permet aussi aux développeurs et designeurs de travailler simultanément, avec
 la possibilité de
-`prototyper <http://en.wikipedia.org/wiki/Software_prototyping>`_ rapidement :
+`prototyper <http://en.wikipedia.org/wiki/Software_prototyping>`_ rapidement.
 La séparation permet aussi aux développeurs de faire des changements dans une
 seule partie de l'application sans affecter les autres.
 
@@ -104,7 +103,7 @@ première application construite avec CakePHP, vous ne voudrez plus faire d'une
 autre façon.
 
 Pour commencer votre première application CakePHP,
-:doc:`Essayez le tutoriel du Blog maintenant </tutorials-and-examples/blog/blog>`
+:doc:`essayez le tutoriel du Blog maintenant </tutorials-and-examples/blog/blog>`
 
 .. |Figure 1| image:: /_static/img/basic_mvc.png
 
