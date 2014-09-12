@@ -26,7 +26,7 @@
 
 * 如果你没有`GitHub <http://github.com>`_的账号，创建一个。
 * 点击**Fork**按键，复制(*fork*)一份
-  `CakePHP repository <http://github.com/cakephp/cakephp>`_的源码。
+  `CakePHP repository <http://github.com/cakephp/cakephp>`_ 的源码。
 
 你的复制完成后，从你的复制仓库(*repository*)克隆(*clone*)到你的本地机器::
 
@@ -38,8 +38,8 @@
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个``$test``:ref:`数据库连接 <database-configuration>`，并且
-:ref:`运行所有的测试 <running-tests>`。
+现在你已经搭建好了 CakePHP 的环境。你应该能够定义一个``$test`` :ref:`数据库连接 <database-configuration>`，并且
+:ref:`运行所有的测试 <running-tests>` 。
 
 制作补丁
 ========
@@ -59,7 +59,7 @@
 
 上述命令将创建基于上游(CakePHP) 2.3分支的一个本地分支。进行你的臭虫修复工作，根据你的需要做任意多次的提交(*commit*)。不过你要牢记以下几点:
 
-* 遵循:doc:`/contributing/cakephp-coding-conventions`。
+* 遵循:doc:`/contributing/cakephp-coding-conventions` 。
 * 添加一个测试用例来说明错误修复好了，或者新特性能够工作。
 * 使你的提交保持逻辑性，提交信息应当清晰、简洁。
 
@@ -86,7 +86,7 @@
     git push origin <branch-name>
 
 一旦你的分支在 GitHub 上，你就可以在
-`cakephp-core <http://groups.google.com/group/cakephp-core>`_邮件列表上进行讨论或在 GitHub 
+`cakephp-core <http://groups.google.com/group/cakephp-core>`_ 邮件列表上进行讨论或在 GitHub 
 上提交拉取请求。
 
 选择你的改动会被合并到哪里
