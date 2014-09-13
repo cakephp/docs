@@ -4,7 +4,6 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   index
    contributing
 
 .. todolist::
