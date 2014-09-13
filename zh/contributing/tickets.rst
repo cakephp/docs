@@ -2,18 +2,18 @@
 ############
 
 在 CakePHP 的开发过程中，以问题跟踪系统的形式从社区获得反馈和帮助是极为重要的一部分。所有 CakePHP 的问题跟踪都托管在
-`GitHub <https://github.com/cakephp/cakephp/issues>`_上。
+`GitHub <https://github.com/cakephp/cakephp/issues>`_ 上。
 
 报告臭虫
 ========
 
 写得好的问题报告都非常有用。下面的步骤可以帮助创建尽可能好的问题报告：
 
-* **请**`搜索 <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
+* **请** `搜索 <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   类似的已有问题，并保证别人没有报告你的问题，或者在源代码仓库中还没有得到修复。
-* **请**包括**如何重现问题**的详细说明。这可以是测试用例或代码片段，来展示所报告的问题。如果没有办法重现问题，则意味着它不太容易被修复。
-* **请**尽可能详尽地提供关于你的(运行)环境的细节(操作系统，PHP 的版本，CakePHP 的版本)。
-* **请不要**使用问题跟踪系统来询问技术支持的问题。寻求技术支持，请使用
+* **请** 包括 **如何重现问题** 的详细说明。这可以是测试用例或代码片段，来展示所报告的问题。如果没有办法重现问题，则意味着它不太容易被修复。
+* **请** 尽可能详尽地提供关于你的(运行)环境的细节(操作系统，PHP 的版本，CakePHP 的版本)。
+* **请不要** 使用问题跟踪系统来询问技术支持的问题。寻求技术支持，请使用
   `谷歌讨论组 <http://groups.google.com/group/cake-php>`_ 或 #cakephp 的 IRC 渠道或者 
   Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>。
 
