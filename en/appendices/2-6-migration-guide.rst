@@ -107,3 +107,5 @@ FormHelper
 - The ``$confirmMessage`` argument of :php:meth:`FormHelper::postLink()` has been
   deprecated. You should instead use key ``confirm`` in ``$options`` to specify
   the message.
+- The ``maxlength`` attribute will now also be applied to textareas, when the corresponding
+  DB field is of type varchar, as per HTML specs.
