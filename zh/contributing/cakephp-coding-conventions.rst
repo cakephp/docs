@@ -318,13 +318,13 @@ callable
 包括文件
 ========
 
-``include``，``require``，``include_once``和``require_once``没有括号::
+``include`` 、 ``require`` 、 ``include_once`` 和 ``require_once`` 没有括号::
 
     // 错误 = 括号
     require_once('ClassFileName.php');
     require_once ($class);
 
-    // 真确 = 没有括号
+    // 正确 = 没有括号
     require_once 'ClassFileName.php';
     require_once $class;
 

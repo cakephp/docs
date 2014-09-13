@@ -31,7 +31,7 @@
 ============
 
 这份新的 CakePHP 文档是以
-`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_格式写的。ReST 
+`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。ReST 
 (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。在为 CakePHP 的文档做出贡献时，为了保持一致
 性，建议你遵循下面的准则，来你格式化和组织你的文字。
 
@@ -145,7 +145,7 @@
 .. rst:role:: ref
 
     你可以使用 ``:ref:`` 角色交叉引用在任何文件中的任何标题。链接标签指向的目标在整个文档必须是唯一的。当为类的方法创建标签时，最好使用
-    ``class-method``作为您的链接标签的格式。
+    ``class-method`` 作为您的链接标签的格式。
 
     标签最常见的用途是在标题之前。例如::
 
