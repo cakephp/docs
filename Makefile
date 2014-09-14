@@ -11,7 +11,7 @@ ES_HOST =
 LANGS = en es fr ja pt ru ro sr zh
 
 # pdflatex does not like ja or ru for some reason.
-PDF_LANGS = en es fr pt ro zh
+PDF_LANGS = en es fr pt ro
 
 DEST = website
 
