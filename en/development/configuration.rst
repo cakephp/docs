@@ -44,7 +44,7 @@ configuration into multiple files. After creating each of the files in your
     Configure::load('app.php', 'default', false);
     Configure::load('other_config.php', 'default');
 
-You can also use additional configuration files to provide enviroment specific
+You can also use additional configuration files to provide environment specific
 overrides. Each file loaded after ``app.php`` can redefine previously declared
 values allowing you to customize configuration for development or staging
 environments.
@@ -87,7 +87,7 @@ App.www_root
     The file path to webroot.
 App.fullBaseUrl
     The fully qualified domain name (including protocol) to your application's
-    root. This is used when generating absolute URLs. By default this is value
+    root. This is used when generating absolute URLs. By default this value
     is generated using the $_SERVER environment. However, you should define it
     manually to optimize performance or if you are concerned about people
     manipulating the ``Host`` header.
@@ -108,28 +108,28 @@ Asset.timestamp
     file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-    (bool) ``false`` - Doesn't do anything (default)
-    (bool) ``true`` - Appends the timestamp when debug > 0
-    (string) 'force' - Always appends the timestamp.
+    
+    - (bool) ``false`` - Doesn't do anything (default)
+    - (bool) ``true`` - Appends the timestamp when debug is ``false``
+    - (string) 'force' - Always appends the timestamp.
 
 Database Configuration
-======================
+----------------------
 
-See the :ref:`database-configuration` for information on configuring your
-database connections.
-
+See the :ref:`Database Configuration <database-configuration>` for information
+on configuring your database connections.
 
 Caching Configuration
 ---------------------
 
-See the :ref:`cache-configuration` for information on configuring caching in
-CakePHP.
+See the :ref:`Caching Configuration <cache-configuration>` for information on
+configuring caching in CakePHP.
 
 Error and Exception Handling Configuration
 ------------------------------------------
 
-See the sections on :ref:`error-configuration` for information on configuring
-error and exception handlers.
+See the :ref:`Error and Exception Configuration <error-configuration>` for
+information on configuring error and exception handlers.
 
 Logging Configuration
 ---------------------
@@ -140,8 +140,8 @@ CakePHP.
 Email Configuration
 -------------------
 
-See the :ref:`email-configuration` for information on configuring email presets in
-CakePHP.
+See the :ref:`Email Configuration <email-configuration>` for information on
+configuring email presets in CakePHP.
 
 Session Configuration
 ---------------------
@@ -152,8 +152,8 @@ handling in CakePHP.
 Routing configuration
 ---------------------
 
-See :ref:`routes-configuration` for more information on configuring routing and
-creating routes for your application.
+See the :ref:`Routes Configuration <routes-configuration>` for more information
+on configuring routing and creating routes for your application.
 
 Configuration Constants
 -----------------------

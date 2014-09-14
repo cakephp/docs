@@ -13,6 +13,7 @@ Requirements
 - CakePHP 3.x supports PHP Version 5.4.19 and above.
 - CakePHP 3.x requires the mbstring extension.
 - CakePHP 3.x requires the mcrypt extension.
+- CakePHP 3.x requires the intl extension.
 
 .. warning::
 
@@ -710,7 +711,7 @@ Both these issues are solved by converting themes into plugins.
 View Folders Renamed
 --------------------
 
-The folders containing view files now go under `src/Template` instead of `src/View`.
+The folders containing view files now go under ``src/Template`` instead of ``src/View``.
 This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
 
 The following View folders have been renamed to avoid naming collisions with controller names:
@@ -1020,7 +1021,7 @@ the ``I18n`` class::
     Configure::write('Config.language', 'fr_FR');
 
     // Now
-    I18n::defaultLoacale('en_US');
+    I18n::defaultLocale('en_US');
 
 - The methods below have been moved:
 
