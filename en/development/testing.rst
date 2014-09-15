@@ -108,7 +108,7 @@ tests:
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
-   ``Cake\TestSuite\ControllerTestCase`` or ``\PHPUnit_Framework_TestCase``.
+   ``Cake\TestSuite\IntegrationTestCase`` or ``\PHPUnit_Framework_TestCase``.
 #. Like other classnames, the test case classnames should match the filename.
    ``RouterTest.php`` should contain ``class RouterTest extends TestCase``.
 #. The name of any method containing a test (i.e. containing an
@@ -675,11 +675,16 @@ Testing Controllers
 ===================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
-and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
+and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.
 Using this class as the base class for your controller test cases allows you to
-use ``testAction()`` for simpler test cases. ``ControllerTestCase`` allows you
-to easily mock out components and models, as well as potentially difficult to
-test methods like :php:meth:`~Cake\\Controller\Controller::redirect()`.
+more easily do integration testing with your controllers.
+
+If you are unfamiliar with integration testing, it is a testing approach that
+makes it easy to test multiple units in concert. The integration testing
+features in CakePHP simulate an HTTP request being handled by your application.
+For example, testing your controller will also exercise any components, models
+and helpers that would be involved in handling a given request. This gives you a
+more high level test of your application and all its working parts.
 
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
@@ -704,8 +709,10 @@ model. The controller code looks like::
                 $result = $this->Article->find();
             }
 
-            $this->set('title', 'Articles');
-            $this->set('articles', $result);
+            $this->set([
+                'title' => 'Articles',
+                'articles' => $result
+            ]);
         }
     }
 
@@ -714,42 +721,32 @@ Create a file named ``ArticlesControllerTest.php`` in your
 
     namespace App\Test\TestCase\Controller;
 
-    use Cake\TestSuite\ControllerTestCase;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\IntegrationTestCase;
 
-    class ArticlesControllerTest extends ControllerTestCase {
+    class ArticlesControllerTest extends IntegrationTestCase {
         public $fixtures = ['app.article'];
 
         public function testIndex() {
-            $result = $this->testAction('/articles?page=1');
-            debug($result);
+            $this->get('/articles?page=1');
+
+            $this->assertResponseOk();
+            // More asserts.
         }
 
         public function testIndexQueryData() {
-            $result = $this->testAction('/articles', [
-                'query' => ['page' => 1]
-            ]);
-            debug($result);
+            $this->get('/articles?page=1');
+
+            $this->assertResponseOk();
+            // More asserts.
         }
 
         public function testIndexShort() {
-            $result = $this->testAction('/articles/index/short');
-            debug($result);
-        }
+            $this->get('/articles/index/short');
 
-        public function testIndexShortGetRenderedHtml() {
-            $result = $this->testAction(
-               '/articles/index/short',
-                ['return' => 'contents']
-            );
-            debug($result);
-        }
-
-        public function testIndexShortGetViewVars() {
-            $result = $this->testAction(
-                '/articles/index/short',
-                ['return' => 'vars']
-            );
-            debug($result);
+            $this->assertResponseOk();
+            $this->assertResponseContains('Articles');
+            // More asserts.
         }
 
         public function testIndexPostData() {
@@ -760,148 +757,70 @@ Create a file named ``ArticlesControllerTest.php`` in your
                 'title' => 'New Article',
                 'body' => 'New Body'
             ];
-            $result = $this->testAction(
-                '/articles',
-                ['data' => $data, 'method' => 'post']
-            );
-            debug($result);
+            $this->post('/articles/add', $data);
+
+            $this->assertResponseOk();
+            $articles = TableRegistry::get('Articles');
+            $query = $articles->find()->where(['title' => $data['title']]);
+            $this->assertEquals(1, $query->count());
         }
     }
 
-This example shows a few of the ways you can use testAction to test your
-controllers. The first parameter of ``testAction`` should always be the URL you
-want to test. CakePHP will create a request and dispatch the controller and
-action.
+This example shows a few of the request sending methods and a few of the
+assertions that ``IntegrationTestCase`` provides. Before you can do any
+assertions you'll need to dispatch a request. You can use one of the following
+methods to send a request:
 
-Simulating HTTP Methods
------------------------
+* ``get()`` Sends a GET request.
+* ``post()`` Sends a POST request.
+* ``put()`` Sends a PUT request.
+* ``delete()`` Sends a DELETE request.
+* ``patch()`` Sends a PATCH request.
 
-As seen in the ``testIndexPostData()`` example above, you can use
-``testAction()`` to test POST actions as well as GET actions. By default all
-requests will be GET requests. You can simulate any HTTP verb by setting the::
+All of the methods except ``get()`` and ``delete()`` accept a second parameter
+that allows you to send a request body. After dispatching a request you can use
+the various assertions provided by ``IntegrationTestCase`` or by PHPUnit to
+ensure your request had the correct side-effects.
 
-    public function testUpdating() {
-        $data = [
-            'id' => 1,
-            'title' => 'New post'
-        ];
-        $this->testAction('/posts/edit', ['data' => $data, 'method' => 'put']);
-        // Some assertions.
-    }
+Assertion methods
+-----------------
 
-Choosing the Return Type
-------------------------
+The ``IntegrationTestCase`` class provides a number of assertion methods that
+make testing responses much simpler. Some examples are::
 
-You can choose from a number of ways to inspect the success of your controller
-action. Each offers a different way to ensure your code is doing what you
-expect:
+    // Check for a 2xx response code
+    $this->assertResponseOk();
 
-* ``vars`` Get the set view variables.
-* ``view`` Get the rendered view, without a layout.
-* ``contents`` Get the rendered view including the layout.
-* ``result`` Get the return value of the controller action. Useful
-  for testing requestAction methods.
+    // Check for a 4xx response code
+    $this->assertResponseError();
 
-The default value is ``result``. As long as your return type is not ``result``
-you can also access the various other return types as properties in the test
-case::
+    // Check for a 5xx response code
+    $this->assertResponseFailure();
 
-    public function testIndex() {
-        $this->testAction('/posts');
-        $this->assertInstanceOf('Cake\ORM\Query', $this->vars['posts']);
-    }
+    // Check the Location header
+    $this->assertRedirect(['controller' => 'articles', 'action' => 'index']);
 
+    // Assert content in the response
+    $this->assertResponseContains('You won!');
 
-Using Mocks with testAction
----------------------------
+    // Assert layout
+    $this->assertLayout('default');
 
-There will be times when you want to replace components or models with either
-partially mocked objects or completely mocked objects. You can do this by using
-:php:meth:`Cake\\TestSuite\\ControllerTestCase::generate()`. ``generate()``
-takes the hard work out of generating mocks on your controller. If you decide to
-generate a controller to be used in testing, you can generate mocked versions of
-its models and components along with it::
+    // Assert which template was rendered (if any)
+    $this->assertTemplate('index');
 
-    $Posts = $this->generate('Articles', [
-        'methods' => [
-            'isAuthorized'
-        ],
-        'models' => [
-            'Articles' => ['save']
-        ],
-        'components' => [
-            'Email' => ['send'],
-            'Session'
-        ]
-    ]);
+    // Assert data in the session
+    $this->assertSession(1, 'Auth.User.id');
 
-The above would create a mocked ``ArticlesController``, stubbing out the ``isAuthorized``
-method. The attached Post model will have ``save()`` stubbed, and the attached
-components would have their respective methods stubbed. You can choose to stub
-an entire class by not passing methods to it, like Session in the example above.
+    // Assert response header.
+    $this->assertHeader('Content-Type', 'application/json');
 
-Generated controllers are automatically used as the testing controller to test.
-To enable automatic generation, set the ``autoMock`` variable on the test case to
-``true``. If ``autoMock`` is ``false``, your original controller will be used in the test.
+    // Assert view variables
+    $this->assertEquals('jose', $this->viewVariable('user.username'));
 
-The response object in the generated controller is always replaced with a mock
-that does not send headers. After using ``generate()`` or ``testAction()`` you
-can access the controller object at ``$this->controller``.
+    // Assert cookies in the response
+    $this->assertEquals('1', $this->cookies());
 
-A More Complex Example
-----------------------
-
-In its simplest form, ``testAction()`` will run ``ArticlesController::index()`` on
-your testing controller (or an automatically generated one), including all of the
-mocked models and components. The results of the test are stored in the ``vars``,
-``contents``, ``view``, and ``return`` properties. Also available is a headers
-property which gives you access to the ``headers`` that would have been sent,
-allowing you to check for redirects::
-
-    public function testAdd() {
-        $Articles = $this->generate('Articles', [
-            'components' => [
-                'Session',
-                'Email' => ['send']
-            ]
-        ]);
-        $Articles->Session
-            ->expects($this->once())
-            ->method('setFlash');
-        $Articles->Email
-            ->expects($this->once())
-            ->method('send')
-            ->will($this->returnValue(true));
-
-        $this->testAction('/articles', [
-            'method' => 'post',
-            'data' => [
-                'title' => 'New Article'
-            ]
-        ]);
-        $this->assertContains('/articles', $this->headers['Location']);
-    }
-
-    public function testAddGet() {
-        $this->testAction('/articles', [
-            'method' => 'GET',
-            'return' => 'contents'
-        ]);
-        $this->assertRegExp('/<html/', $this->contents);
-        $this->assertRegExp('/<form/', $this->view);
-    }
-
-
-This example shows a slightly more complex use of the ``testAction()`` and
-``generate()`` methods. First, we generate a testing controller and mock the
-:php:class:`Cake\\Controller\\Component\\SessionComponent`. Now that the
-SessionComponent is mocked, we have the ability to run testing methods on it.
-Assuming ``ArticlesController::add()`` redirects us to index, sends an email and
-sets a flash message, the test will pass. A second test was added to do basic
-sanity testing when fetching the add form. We check to see if the layout was
-loaded by checking the entire rendered contents, and checks the view for a form
-tag. As you can see, your freedom to test controllers and easily mock its
-collaborators is greatly expanded with these changes.
 
 Testing a JSON Responding Controller
 ------------------------------------
