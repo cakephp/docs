@@ -651,7 +651,7 @@ SecurityComponent
   ``SecurityComponent::$unlockedFields()``.
 - Les fonctionnalités liées au CSRF dans SecurityComponent ont été extraites et
   déplacées dans un CsrfComponent séparé. Ceci vous permet de plus facilement
-  utiliser une protection CSRF sans avoir à utiliser de le prévention de
+  utiliser une protection CSRF sans avoir à utiliser la prévention de
   falsification de formulaire.
 - Les options de Configuration ne sont plus définies comme des propriétés
   publiques.

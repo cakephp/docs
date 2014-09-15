@@ -55,7 +55,7 @@ séparé en plus de couches:
   behaviors et la création d'entités et d'objets query.
 * ``Cake\ORM\Behavior`` - La classe de base pour les behaviors, qui agit de
   façon très similaire aux behaviors dans les versions précédentes de CakePHP.
-* ``Cake\ORM\Query`` - Un générateur de requêtes simple basé les objets qui
+* ``Cake\ORM\Query`` - Un générateur de requêtes simple basé sur les objets qui
   remplace les tableaux profondément imbriqués utilisés dans les versions 
   précédentes de CakePHP.
 * ``Cake\ORM\ResultSet`` - Une collection de résultats qui donne des outils
@@ -82,7 +82,7 @@ Table gèrent les tâches telles que:
 - Valider et sauvegarder des entités.
 - Supprimer des entités.
 - Définir & accéder aux associations.
-- Déclancher les évènements de callback.
+- Déclencher les évènements de callback.
 - Intéragir avec les behaviors.
 
 Le chapitre de la documentation sur :doc:`/orm/table-objects` fournit bien plus
@@ -140,10 +140,11 @@ dont le nouvel ORM opère et comment mettre à jour votre code.
 Les Règles d'Inflection Mises à Jour
 ------------------------------------
 
-Vous avez peut-être noté que les classes e Table ont un nom pluralisé. En plus
+Vous avez peut-être noté que les classes Table ont un nom pluralisé. En plus
 d'avoir les noms pluralisés, les associations se réfèrent aussi à la forme
-plurielle. C'est en opposition par rapport au ``Model`` où les noms et associations
-étaient au singulier. Il y avait plusieurs raisons pour ce changement:
+plurielle. C'est en opposition par rapport au ``Model`` où les noms et
+associations étaient au singulier. Il y avait plusieurs raisons pour ce
+changement:
 
 * Les classes de Table représentent des **collections** de données, pas des
   enregistrements uniques.
