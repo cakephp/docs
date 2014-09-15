@@ -39,10 +39,10 @@ Charger les Fichiers de Configuration Supplémentaires
 Si votre application a plusieurs options de configuration, il peut être utile
 de séparer la configuration dans plusieurs fichiers. Après avoir créé chacun
 des fichiers dans votre répertoire ``config/``, vous pouvez les charger
-dans bootstrap.php::
+dans ``bootstrap.php``::
 
     use Cake\Core\Configure;
-    use Cake\Configure\Engine\PhpConfig;
+    use Cake\Core\Configure\Engine\PhpConfig;
 
     Configure::config('default', new PhpConfig());
     Configure::load('app.php', 'default', false);
@@ -61,8 +61,8 @@ Ci-dessous se trouve une description des variables et la façon dont elles
 modifient votre application CakePHP.
 
 debug
-    Change la sortie de debug de CakePHP. false = Mode Production. Pas de
-    messages, d'erreurs ou d'avertissements montrés. true = Erreurs et
+    Change la sortie de debug de CakePHP. ``false`` = Mode Production. Pas de
+    messages, d'erreurs ou d'avertissements montrés. ``true`` = Errors et
     avertissements montrés.
 App.namespace
     Le namespace sous lequel se trouvent les classes de l'app.
@@ -74,12 +74,14 @@ App.namespace
         ce namespace. De plus, créer un nouvel autoloader en lançant
         ``php composer.phar dumpautoload``.
 
+.. _core-configuration-baseurl:
+
 App.baseUrl
     Décommentez cette définition si vous **n'** envisagez **pas** d'utiliser
     le mod\_rewrite d'Apache avec CakePHP. N'oubliez pas aussi de retirer vos
     fichiers .htaccess.
 App.base
-    Le répertoire de base où l'app se trouve. Si à false, il sera detecté
+    Le répertoire de base où l'app se trouve. Si à ``false``, il sera detecté
     automatiquement.
 App.encoding
     Définit l'encodage que votre application utilise. Cet encodage est utilisé
@@ -118,8 +120,8 @@ Asset.timestamp
     à la fin des URLs des fichiers d'asset (CSS, JavaScript, Image) lors de
     l'utilisation des helpers adéquats.
     Valeurs valides:
-    (bool) false - Ne fait rien (par défaut)
-    (bool) true - Ajoute le timestamp quand debug > 0
+    (bool) ``false`` - Ne fait rien (par défaut)
+    (bool) ``true`` - Ajoute le timestamp quand debug > 0
     (string) 'force' - Toujours ajouter le timestamp.
 
 Configuration de la Base de Données
@@ -155,11 +157,11 @@ prédéfini d'email dans CakePHP.
 Configuration de Session
 ------------------------
 
-See the :ref:`session-configuration` for information on configuring session
-handling in CakePHP.
+Regardez :ref:`session-configuration` pour avoir des informations sur la
+configuration de la gestion des sessions dans CakePHP.
 
-Routing configuration
----------------------
+Configuration du Routing
+------------------------
 
 Regardez :ref:`routes-configuration` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
@@ -226,44 +228,10 @@ Les chemins doivent être suffixés par ``/``, ou ils ne fonctionneront pas
 correctement.
 
 
-.. _inflection-configuration:
-
 Configuration de Inflection
 ===========================
 
-Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
-pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
-votre controller BigBoxesController, et tout fonctionne ensemble
-automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
-est en infléctant les mots entre leurs formes singulière et plurielle.
-
-Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
-vous pouvez être dans des situations où l’inflecteur de CakePHP (la classe qui
-met au pluriel, au singulier, en CamelCase, et en under\_scores) ne fonctionne
-pas comme vous voulez. Si CakePHP ne reconnait pas vos Foci ou Fish, vous pouvez
-dire à CakePHP vos cas spéciaux.
-
-Chargement d’inflections personnalisées
----------------------------------------
-
-Vous pouvez utiliser :php:meth:`Cake\Utility\Inflector::rules()` dans le fichier
-``config/bootstrap.php`` pour charger des inflections personnalisées:
-
-    Inflector::rules('singular', [
-        'rules' => ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'],
-        'uninflected' => ['singulars'],
-        'irregular' => ['spins' => 'spinor']
-    ]);
-
-ou::
-
-    Inflector::rules('plural', [
-        'irregular' => ['phylum' => 'phyla']
-    ]);
-
-Va fusionner les règles fournies dans les ensembles d’inflection définies
-dans lib/Cake/Utility/Inflector.php, avec les règles ajoutées prenant le pas
-sur les règles du coeur.
+Regardez :ref:`inflection-configuration` pour plus d'information.
 
 Classe Configure
 ================
@@ -315,7 +283,11 @@ contexte statique::
     L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
         Configure::write(
-            'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
+            'Company',
+            [
+                'name' => 'Pizza, Inc.',
+                'slogan' => 'Pizza for your body and soul'
+            ]
         );
 
     Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
@@ -349,9 +321,6 @@ contexte statique::
     :param string $key: La clé à vérifier.
 
     Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null.
-
-    .. versionadded:: 2.3
-        ``Configure::check()`` a été ajoutée dans 2.3.
 
 .. php:staticmethod:: delete($key)
 
@@ -410,6 +379,7 @@ reader de config du coeur, vous aurez besoin de l'attacher à Configure
 en utilisant :php:meth:`Configure::config()`::
 
     use Cake\\Configure\\Engine\\PhpConfig;
+
     // Lire les fichiers de config à partir de config
     Configure::config('default', new PhpConfig());
 
@@ -461,12 +431,12 @@ la configuration existante.
 Créer et modifier les fichiers de configuration
 -----------------------------------------------
 
-.. php:staticmethod:: dump($key, $config = 'default', $keys = array())
+.. php:staticmethod:: dump($key, $config = 'default', $keys = [])
 
     :param string $key: Le nom du fichier/configuration stockée à créer.
     :param string $config: Le nom du reader avec lequel stocker les données.
     :param array $keys: La liste des clés de haut-niveau à sauvegarder. Par
-     défaut, pour toutes les clés.
+        défaut, pour toutes les clés.
 
 Déverse toute ou quelques données de Configure dans un fichier ou un système de
 stockage supporté par le reader. Le format de sérialisation est décidé en
@@ -540,18 +510,22 @@ Créer vos propres readers de Configuration
 Depuis que les readers de configuration sont une partie extensible de CakePHP,
 vous pouvez créer des readers de configuration dans votre application et
 plugins. Les readers de configuration ont besoin d'implémenter l'
-:php:interface:`Cake\\Configure\\ConfigEngineInterface`. Cette interface définit
-une méthode de lecture, comme seule méthode requise. Si vous aimez vraiment les
-fichiers XML, vous pouvez créer un reader de config simple Xml pour votre
-application::
+:php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`. Cette interface
+définit une méthode de lecture, comme seule méthode requise. Si vous aimez
+vraiment les fichiers XML, vous pouvez créer un reader de config simple Xml
+pour votre application::
 
-    // dans app/Lib/Configure/Engine/XmlConfig.php
-    use Cake\\Utility\\Xml;
+    // Dans app/Lib/Configure/Engine/XmlConfig.php
+    namespace App\Configure\Engine;
+
+    use Cake\Core\Configure\ConfigEngineInterface;
+    use Cake\Utility\Xml;
 
     class XmlConfig implements ConfigEngineInterface {
+
         public function __construct($path = null) {
             if (!$path) {
-                $path = APP . 'Config' . DS;
+                $path = CONFIG;
             }
             $this->_path = $path;
         }
@@ -561,25 +535,25 @@ application::
             return Xml::toArray($xml);
         }
 
-        // Depuis 2.3 une méthode dump() est aussi nécessaire
         public function dump($key, $data) {
-            // code to dump data to file
+            // Code to dump data to file
         }
     }
 
 Dans votre ``config/bootstrap.php``, vous pouvez attacher ce reader et
 l'utiliser::
 
-    use Cake\\Configure\\Engine\\XmlConfig;
+    use App\Configure\Engine\XmlConfig;
+
     Configure::config('xml', new XmlConfig());
     ...
 
-    Configure::load('my_xml');
+    Configure::load('my_xml', 'xml');
 
 La méthode ``read()`` du reader de config, doit retourner un tableau
 d'informations de configuration que la ressource nommé ``$key`` contient.
 
-.. php:namespace:: Cake\Configure
+.. php:namespace:: Cake\Core\Configure
 
 .. php:interface:: ConfigEngineInterface
 
@@ -601,13 +575,6 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
 
     Cette méthode doit supprimer/stocker la donnée de configuration fournie à
     une clé identifié par ``$key``.
-
-.. php:exception:: ConfigureException
-
-    Lancé quand les erreurs apparaissent quand le
-    chargement/stockage/restauration des données de configuration.
-    Les implémentations de :php:interface:`ConfigEngineInterface` devraient
-    lancer cette erreur quand elles rencontrent une erreur.
 
 Moteurs de Configuration intégrés
 ---------------------------------
@@ -634,7 +601,7 @@ Moteurs de Configuration intégrés
     :php:exc:`ConfigureException`.
 
     Charger votre fichier de configuration personnalisé en insérant ce qui suit
-    dans config/bootstrap.php:
+    dans ``config/bootstrap.php``:
 
         Configure::load('customConfig');
 
@@ -663,43 +630,6 @@ Moteurs de Configuration intégrés
     soit à travers des valeurs séparées de point, soit des sections. Les
     sections peuvent contenir des clés séparées de point pour des imbrications
     plus profondes.
-
-.. _inflection-configuration:
-
-Configuration de Inflection
-===========================
-
-Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
-pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
-votre controller BigBoxesController, et tout fonctionne ensemble
-automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
-est en *infléctant* les mots entre leurs formes singulière et plurielle.
-
-Il y a des occasions (spécialement pour nos amis ne parlant pas Anglais) où
-vous pouvez être dans des situations où l':php:class:`Inflector` de CakePHP (la
-classe qui met au pluriel, au singulier, en CamelCase, et en underscore) ne
-fonctionne pas comme vous voulez. Si CakePHP ne reconnait pas vos Foci ou Fish,
-vous pouvez dire à CakePHP vos cas spéciaux.
-
-Chargement d'inflections personnalisées
----------------------------–-----------
-
-Vous pouvez utiliser :php:meth:`Inflector::rules()` dans le fichier
-``config/bootstrap.php`` pour charger des inflections personnalisées::
-
-    Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
-        'uninflected' => array('singulars'),
-        'irregular' => array('spins' => 'spinor')
-    ));
-
-ou::
-
-    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
-
-Va fusionner les règles fournies dans les ensembles d'inflection définies dans
-lib/Cake/Utility/Inflector.php, avec les règles ajoutées prenant le pas sur
-les règles du coeur.
 
 Bootstrapping CakePHP
 =====================

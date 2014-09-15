@@ -3,7 +3,7 @@ Glossaire
 
 .. glossary::
 
-    tableau routing
+    tableau de routing
         Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
         Typiquement, ils ressemblent à cela::
         

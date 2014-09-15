@@ -83,8 +83,7 @@ Charger les Fichiers de Vendor
 
 Idéalement les fichiers de vendor devront être auto-chargés avec ``Composer``,
 si vous avez des fichiers de vendor qui ne peuvent pas être auto-chargés ou
-installés avec Composer, vous devrez utiliser
-``require``pour les charger.
+installés avec Composer, vous devrez utiliser ``require`` pour les charger.
 
 Si vous ne pouvez pas installer une librairie avec Composer, il est mieux
 d'installer chaque librairie dans un répertoire en suivant les conventions de

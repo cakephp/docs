@@ -50,11 +50,9 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   opérations atomiques.
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
-application interagit avec :php:class:`Cache` de manière cohérente. Cela
-signifie que vous pouvez aisément permuter les moteurs de cache en fonction de
-l'évolution de votre application. En plus de la classe :php:class:`Cache`, le
-Helper :doc:`/core-libraries/helpers/cache` vous permet le cache en pleine
-page, qui peut ainsi grandement améliorer les performances.
+application interagit avec :php:class:`Cake\\Cache\\Cache` de manière cohérente.
+Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction de
+l'évolution de votre application.
 
 .. _cache-configuration:
 
@@ -113,7 +111,7 @@ refer to the class name using the following syntaxes:
 
 * Short classname without 'Engine' or a namespace.  This will infer that you
   want to use a Cache engine in ``Cake\Cache\Engine`` or ``App\Cache\Engine``.
-* Using :term:`plugin syntax` which allows you to load engines from a specific
+* Using :term:`syntaxe de plugin` which allows you to load engines from a specific
   plugin.
 * Using a fully qualified namespaced classname.  This allows you to use
   classes located outside of the conventional locations.

@@ -76,7 +76,7 @@ Vous devriez être maintenant capable de visiter le chemin où vous avez install
 votre application CakePHP et voir les feux de signalisations de configuration.
 
 Rester à jour avec les derniers changements de CakePHP
------------------------------------------------------
+------------------------------------------------------
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
 pouvez ajouter ce qui suit dans le ``composer.json`` de votre application::

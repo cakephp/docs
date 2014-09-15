@@ -586,7 +586,7 @@ CookieComponent
 - ``CookieComponent::type()`` a été retirée et remplacée par la donnée de
   configuration accessible avec ``config()``.
 - ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
-   deux-là sont maintenant gérés avec des données de config. Consultez
+  deux-là sont maintenant gérés avec des données de config. Consultez
   :doc:`/core-libraries/components/cookie` pour plus d'informations.
 - Le chemin pour les cookies sont maintenant par défaut le chemin de l'app
   plutôt que "/".
@@ -1148,7 +1148,7 @@ pouvez utiliser la classe ``I18n``::
     ``Cake\Utility\String::isMultibyte()``
 
 - Puisque l'extension mbstring est maintenant nécessaire, la classe
-  ``Multibyte``a été retirée.
+  ``Multibyte`` a été retirée.
 - Les messages d'Error dans CakePHP ne passent plus à travers les fonctions de
   I18n. Ceci a été fait pour simplifier les entrailles de CakePHP et réduire
   la charge. Les messages auxquels font face les développeurs sont rarement,

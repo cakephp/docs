@@ -363,7 +363,7 @@ syntaxe de tableau::
         }
     }
 
-Les clés possibles pour les tableaux d'association belongsTo incluent::
+Les clés possibles pour les tableaux d'association belongsTo incluent:
 
 - **className**: le nom de classe du model associé au model courant. Si vous
   définissez une relation 'Profile belongsTo User', la clé className
@@ -1757,7 +1757,7 @@ Generally the best place to do this is in the ``initialize`` method::
         }
     }
 
-As with associations, you can use :term:`plugin syntax` and provide additional
+As with associations, you can use :term:`syntaxe de plugin` and provide additional
 configuration options::
 
     namespace App\Model\Table;

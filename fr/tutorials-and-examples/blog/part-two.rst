@@ -117,7 +117,7 @@ défaut.
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
-chose comme cela ::
+chose comme cela::
 
 Les fichiers des vues de CakePHP sont stockés dans ``/src/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
@@ -309,8 +309,8 @@ d'afficher et d'effacer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
-"Articles" (ArticlesController). Vous pouvez vous référer à l'
-`API<http://api.cakephp.org>`_ de la fonction
+Articles (ArticlesController). Vous pouvez vous référer à l'
+`API <http://api.cakephp.org>`_ de la fonction
 :php:func:`Cake\\Routing\\Router::url()` pour voir les différents formats
 d'URL acceptés dans les différentes fonctions de CakePHP.
 

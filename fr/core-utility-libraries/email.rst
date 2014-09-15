@@ -181,7 +181,7 @@ sont utilisées:
 - ``'emailFormat'``: Format de l'email (html, text ou both). Regardez
   ``Email::emailFormat()``.
 - ``'transport'``: Nom du Transport. Regardez
-  :php:meth:`~Cake\\Network\\Email\\Email::configTransport().
+  :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers del'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``
 
