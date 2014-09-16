@@ -1054,6 +1054,8 @@ Testing
   If you find yourself in need of a way to run tests from a browser you should
   checkout `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. It
   offers many additional features over the old webrunner.
+- ``ControllerTestCase`` is deprecated and will be removed for CakePHP 3.0.0.
+  You should use the new :ref:`integration-testing` features instead.
 
 Utility
 =======
