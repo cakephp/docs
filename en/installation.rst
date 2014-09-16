@@ -43,9 +43,9 @@ There are two main ways to get a fresh copy of CakePHP. You can
 either download an archived copy (zip/tar.gz/tar.bz2) from the main
 website, or check out the code from the git repository.
 
-To download the latest major release of CakePHP. Visit the main
+To download the latest major release of CakePHP, visit the main
 website `http://cakephp.org <http://cakephp.org>`_ and
-follow the "Download Now" link.
+follow the "Download" link.
 
 All current releases of CakePHP are hosted on
 `GitHub <http://github.com/cakephp/cakephp>`_. GitHub houses both CakePHP
@@ -139,7 +139,7 @@ off, clone CakePHP into a directory. For this example, we'll use
 This will clone CakePHP into your ``/home/mark/projects`` directory. If you don't want
 to use git, you can download a zipball and the remaining steps will be the
 same. Next you'll have to locate and modify your ``php.ini``. On \*nix systems
-this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
+this is often in ``/etc/php.ini``, but you can use ``php -i`` and look for 'Loaded
 Configuration File'. Once you've found the correct ini file, modify the
 ``include_path`` configuration to include ``/home/mark/projects/cakephp/lib``. An
 example would look like::
@@ -204,7 +204,7 @@ Fire It Up
 
 Alright, let's see CakePHP in action. Depending on which setup you
 used, you should point your browser to http://example.com/ or
-http://example.com/cake\_install/. At this point, you'll be
+http://www.example.com/cake\_2\_0/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
