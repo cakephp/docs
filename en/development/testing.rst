@@ -825,40 +825,55 @@ make testing responses much simpler. Some examples are::
 Testing a JSON Responding Controller
 ------------------------------------
 
-JSON is a very friendly and common format to use when building a web service.
+JSON is a friendly and common format to use when building a web service.
 Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController {
-        public $autoRender = false;
-        public function index() {
-            $data = $this->Markers->find()->first();
-            $this->response->body(json_encode($data));
+        public $components = ['RequestHandler'];
+
+        public function view($id) {
+            $marker = $this->Markers->get($id);
+            $this->set([
+                '_serialize' => ['marker'],
+                'marker' => $marker,
+            ]);
         }
     }
 
 Now we create the file ``tests/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
-    class MarkersControllerTest extends ControllerTestCase {
-        public function testIndex() {
-            $result = $this->testAction('/markers/index.json');
-            $result = json_decode($result, true);
+    class MarkersControllerTest extends IntegrationTestCase {
+
+        public function testGet() {
+            $this->configRequest([
+                'headers' => ['Accept' => 'application/json']
+            ]);
+            $result = $this->get('/markers/view/1.json');
+
+            // Check that the response was a 200
+            $this->assertResponseOk();
+
             $expected = [
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
-            $this->assertEquals($expected, $result);
+            $expected = json_encode($expected, JSON_PRETTY_PRINT);
+            $this->assertEquals($expected, $this->_response->body());
         }
     }
+
+We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
+that option when ``debug`` is enabled.
 
 Testing Views
 =============
 
 Generally most applications will not directly test their HTML code. Doing so is
 often results in fragile, difficult to maintain test suites that are prone to
-breaking. When writing functional tests using :php:class:`ControllerTestCase`
+breaking. When writing functional tests using :php:class:`IntegrationTestCase`
 you can inspect the rendered view content by setting the ``return`` option to
-'view'. While it is possible to test view content using ControllerTestCase,
+'view'. While it is possible to test view content using IntegrationTestCase,
 a more robust and maintable integration/view testing can be accomplished using
 tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
