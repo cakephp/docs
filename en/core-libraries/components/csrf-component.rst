@@ -44,7 +44,7 @@ Integration with FormHelper
 ===========================
 
 The CsrfComponent integrates seamlessly with ``FormHelper``. Each time you
-create a form with FormHelper will insert a hidden field containing the CSRF
+create a form with FormHelper, it will insert a hidden field containing the CSRF
 token.
 
 .. note::

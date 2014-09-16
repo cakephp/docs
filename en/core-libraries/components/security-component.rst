@@ -15,9 +15,7 @@ Like all components it is configured through several configurable parameters.
 All of these properties can be set directly or through setter methods of the
 same name in your controller's beforeFilter.
 
-By using the Security Component you automatically get `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ and
-form tampering protection. Hidden token fields will
+By using the Security Component you automatically get form tampering protection. Hidden token fields will
 automatically be inserted into forms and checked by the Security
 component. Among other things, a form submission will not be accepted after a
 certain period of inactivity, which is controlled by the
