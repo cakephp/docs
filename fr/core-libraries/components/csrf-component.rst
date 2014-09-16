@@ -1,24 +1,27 @@
 Cross Site Request Forgery
 ##########################
 
-By enabling the CSRF Component you get protection against attacks. `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
-Request Forgery is a common vulnerability in web applications. It allows an
-attacker to capture and replay a previous request, and sometimes submit data
-requests using image tags or resources on other domains.
+En activant le component CSRFComponent vous bénéficiez d'une protection contre
+les attaques. `CSRF <http://fr.wikipedia.org/wiki/Cross-Site_Request_Forgery>`_
+ou "Cross Site Request Forgery" est une vulnérabilité commune dans les
+applications web. Cela permet à un attaquant de capturer et rejouer une requête
+précédente, et parfois soumettre des données en utilisant des balises images ou
+des ressources sur d'autres domaines.
 
-The CsrfComponent works by setting a cookie to the user's browser. When forms
-are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
-is added containing the CSRF token. During the ``Controller.startup`` event, if
-the request is a POST, PUT, DELETE, PATCH request the component will compare the
-request data & cookie value. If either is missing or the two values mismatch the
-component will throw a :php:class:`Cake\Network\Exception\ForbiddenException`.
+Le CsrfComponent fonctionne en installant un cookie sur le navigateur de
+l'utilisateur. Quand des formulaires sont créés à l'aide du
+:php:class:`Cake\\View\\Helper\\FormHelper`, un champ caché contenant un jeton
+CSRF est ajouté. Au cours de l'événement ``Controller.startup``, si la requête
+est de type POST, PUT, DELETE, PATCH, le component va comparer les données de
+la requête et la valeur du cookie. Si l'une des deux est manquantes ou que les
+deux valeurs ne correspondent pas, le component lancera une
+:php:class:`Cake\Network\Exception\ForbiddenException`.
 
-Using the CsrfComponent
-=======================
+Utiliser le CsrfComponent
+=========================
 
-Simply by adding the ``CsrfComponent``` to your components array,
-you can benefit from the CSRF protection it provides::
+En ajoutant simplement le ``CsrfComponent``` à votre tableau de components,
+vous pouvez profiter de la protection CSRF fournie::
 
     public $components = [
         'Csrf' => [
@@ -26,47 +29,49 @@ you can benefit from the CSRF protection it provides::
         ]
     ];
 
-Settings can be passed into the component through your component's settings.
-The available configuration options are:
+Des réglages peuvent être transmis au composant par l'intermédiaire des
+paramètres de votre composant.
+Les options de configuration disponibles sont les suivants:
 
-- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
-- ``expiry`` How long the CSRF token should last. Defaults to browser session.
-- ``secure`` Whether or not the cookie will be set with the Secure flag.
-  Defaults to ``false``.
-- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
-  will also require configuring FormHelper.
+- ``cookieName`` Le nom du cookie à envoyer. Par défaut ``csrfToken``.
+- ``expiry`` Durée avent l'expiration du jeton CSRF. Session du navigateur par
+  défaut.
+- ``secure`` Si le cookie doit être créé avec Secure flag ou pas.
+  Par défaut à ``false``.
+- ``field`` Le champs de formulaire à vérifier. Par défaut ``_csrfToken``.
+  Changer cette valeur nécéssite également de configurer le FormHelper.
 
-When enabled, you can access the current CSRF token on the request object::
+Lorsqu'il est activé, vous pouvez accéder au jeton CSRF actuel sur l'objet
+request:: 
 
     $token = $this->request->param('_csrfToken');
 
-Integration with FormHelper
-===========================
+Intégration avec le FormHelper
+==============================
 
-The CsrfComponent integrates seamlessly with ``FormHelper``. Each time you
-create a form with FormHelper will insert a hidden field containing the CSRF
-token.
+Le CsrfComponent s'intègre de façon transparente avec `` FormHelper``. Chaque
+fois que vous créer un formulaire avec FormHelper, il va insérer un champ caché
+contenant le jeton CSRF.
 
 .. note::
 
-    When using the CsrfComponent you should always start your forms with the
-    FormHelper. If you do not, you will need to manually create hidden inputs in
-    each of your forms.
+    Lorsque vous utilisez le CsrfComponent vous devez toujours commencer vos
+    formulaires avec le FormHelper. Si vous ne le faites pas, vous devrez créer
+    manuellement les champs cachées dans chacun de vos formulzires.
 
-CSRF Protection and AJAX Requests
-==================================
+Protection CSRF et Requêtes AJAX
+================================
 
-In addition to request data parameters, CSRF tokens can be submitted through
-a special ``X-CSRF-Token`` header. Using a header often makes it easier to
-integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
-endpoints.
+En plus des paramètres de données de requête, les jetons CSRF peuvent être
+soumis par le biais d'un en-tête spécial ``X-CSRF-Token``. Utiliser un en-tête
+rend souvent plus simple l'intégration des jetons CSRF avec de lourdes
+applications Javascript, ou des API basées sur XML/JSON.
 
-Disabling the CSRF Component for Specific Actions
-=================================================
+Désactiver le Component CSRF pour des Actions Spécifiques
+=========================================================
 
-While not recommended, you may want to disable the CsrfComponent on certain
-requests. You can do this using the controller's event dispatcher, during the
-``beforeFilter`` method::
+Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines 
+requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du controlle, au cours de la méthode ``beforeFilter``::
 
     public function beforeFilter(Event $event) {
         $this->eventManager()->detach($this->Csrf);

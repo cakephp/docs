@@ -8,7 +8,6 @@ renforcée à votre application. Il fournit des méthodes pour diverses tâches
 comme:
 
 * Restreindre les méthodes HTTP que votre application accepte.
-* Protection CSRF.
 * Protection contre la falsification de formulaire.
 * Exiger l'utilisation du SSL.
 * Limiter les communications croisées dans le controller.
@@ -18,9 +17,7 @@ configurables.
 Toutes ces propriétés peuvent être définies directement ou au travers de
 "méthodes setter" du même nom dans la partie beforeFilter de votre controller.
 
-En utilisant le Component Security vous obtenez automatiquement une protection
-`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
-et une protection contre la falsification de formulaire.
+En utilisant le Component Security vous obtenez automatiquement une protection contre la falsification de formulaire.
 Des jetons de champs cachés seront automatiquement insérés dans les
 formulaires et vérifiés par le component Security. En outre, une
 soumission par formulaire ne sera pas acceptée après une certaine

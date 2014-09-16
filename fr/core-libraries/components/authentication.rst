@@ -75,7 +75,7 @@ Quand les utilisateurs se connectent, les gestionnaires d'authentification
 sont utilisés dans l'ordre auquel ils ont été déclarés.
 Une fois qu'un gestionnaire est capable d'identifier un utilisateur, les autres
 gestionnaires ne seront pas utilisés. Inversement, vous pouvez mettre un terme
-à tous les authentifications en levant une exception.Vous pourrez traiter
+à toutes les authentifications en levant une exception. Vous devrez traiter
 toutes les exceptions levées, et les gérer comme désiré.
 
 Vous pouvez configurer le gestionnaire d'authentification dans les tableaux
@@ -112,13 +112,15 @@ Tous les paramètres transmis à un objet d'authentification particulier
 remplaceront la clé correspondante dans la clé 'all'.
 Les objets d'authentification supportent les clés de configuration suivante.
 
-- ``fields`` Les champs à utiliser pour identifier un utilisateur.
+- ``fields`` Les champs à utiliser pour identifier un utilisateur.  Vous pouvez
+  utiliser ``username`` et ``password`` pour spécifier le champs de nom
+  d'utilisateur et le mot de passse. 
 - ``userModel`` Le nom du model de la table users, par défaut Users.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``['Users.is_active' => 1]``.
+  l'authentification des utilisateurs, ex ``['Users.is_active' => true]``.
 - ``contain`` Les models supplémentaires à mettre dans contain et à retourner
   avec les informations de l'utilisateur identifié.
-- ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Blowfish``.
+- ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à ``Default``.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
 
@@ -216,28 +218,25 @@ un message flash est défini.
     les données postées. Elle ne va pas réellement vérifier les certificats avec
     une classe d'authentification.
 
-Redirecting Users After Login
------------------------------
+Rediriger un Utilisateur Après Connection
+-----------------------------------------
 
 .. php:method:: redirectUrl
 
-After logging a user in, you'll generally want to redirect them back to where
-they came from. Pass a URL in to set the destination a user should be redirected
-to upon logging in.
+Après avoir connecté un utilisateur, vous voudrez générallement le rediriger
+vers l'endroit doù ils viennent. Passez une URL pour définir la destination
+vers laquelle l'utilisateur doit être redirigé après s'être connecté.
 
-If no parameter is passed, gets the authentication redirect URL. The URL
-returned is as per following rules:
+Si aucun paramètre n'est passé, elle obtient l'URL de redirection
+d'authentification. L'URL retournée correspond aux règles suivantes:
 
- - Returns the normalized URL from session Auth.redirect value if it is
-   present and for the same domain the current app is running on.
- - If there is no session value and there is a config ``loginRedirect``, the
-   ``loginRedirect`` value is returned.
- - If there is no session and no ``loginRedirect``, / is returned.
-
-If no parameter is passed, gets the authentication redirect URL. Pass a
-URL in to set the destination a user should be redirected to upon logging
-in. Will fallback to ``AuthComponent::$loginRedirect`` if there is
-no stored redirect value.
+ - Retourne l'URL normalisée de valeur Auth.redirect si elle est présente
+  en session et pour le même domaine que celui sur lequel application est
+  exécuté.
+ - S'il n'y a pas de valeur en session et qu'il y a une configuration
+ ``loginRedirect``, la valeur de ``loginRedirect`` est retournée..
+ - S'il n'y a pas de valeur en session et pas de ``loginRedirect``, / 
+ est retournée.
 
 Utilisation de l'authentification Digest et Basic pour la connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,7 +244,7 @@ Utilisation de l'authentification Digest et Basic pour la connexion
 Les authentifications basic et digest ne nécessitent pas un POST
 initial ou un form. Si vous utilisez seulement les authentificators
 basic / digest, vous n'avez pas besoin d'action login dans votre controller.
-Aussi, vous pouvez définir ``$this->Auth->sessionKey`` à false pour vous
+Aussi, vous pouvez définir ``$this->Auth->sessionKey`` à ``false`` pour vous
 assurer que AuthComponent n'essaie pas de lire les infos de l'user
 à partir des sessions. Vous voudrez peut-être aussi définir
 ``unauthorizedRedirect`` à ``false`` ce qui va entraîner l'envoi d'une
@@ -536,9 +535,8 @@ séparée, pour le hachage normal de mot de passe::
     }
 
 Les mots de passe pour l'authentification Digest ont besoin d'un peu plus
-d'information que pour d'autres mots de passe hachés. Si vous utilisez le
-component AuthComponent::password() pour le hachage Digest vous ne pourrez pas
-vous connecter.
+d'information que pour d'autres mots de passe hachés, basé sur le RFC pour
+l'authentification Digest.
 
 .. note::
 
@@ -561,11 +559,11 @@ the following::
 
     class CustomPasswordHasher extends AbstractPasswordHasher {
         public function hash($password) {
-            // Stuff here
+            // Code ici
         }
 
         public function check($password, $hashedPassword) {
-            // Stuff here
+            // Code ici
         }
     }
 
@@ -640,6 +638,9 @@ Autorisation
 
 l'autorisation est le processus qui permet de s'assurer qu'un utilisateur
 identifier/authentifier est autorisé à accéder aux ressources qu'il demande.
+Si activé, ``AuthComponent`` peut vérifier automatiquement des gestionnaires
+d'autorisation et veiller à ce que les utilisateurs connectés soient autorisés
+à accéder aux ressources qu'ils demandent.
 Il y a plusieurs gestionnaires d'autorisation intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
@@ -662,8 +663,8 @@ gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
 dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
-false, s'il ne sont pas capable de vérifier les autorisation, ou bien si
-la vérification a échouée. Le gestionnaire devrait retourner true si ils
+``false``, s'il ne sont pas capable de vérifier les autorisation, ou bien si
+la vérification a échouée. Le gestionnaire devrait retourner ``true`` si ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
 seront appelés dans l'ordre jusqu'à ce qu'un passe. Si toutes les
 vérifications échoues , l'utilisateur sera redirigé vers la page
@@ -796,18 +797,18 @@ Par défaut, toutes les actions nécessitent une authorisation.
 Cependant, si après avoir rendu les actions publiques, vous voulez révoquer les
 accès publics. Vous pouvez le faire en utilisant ``AuthComponent::deny()``::
 
-    // retire une action
-    $this->Auth->deny('add');
-
     // retire toutes les actions .
     $this->Auth->deny(*);
 
+    // retire une action
+    $this->Auth->deny('add');
+
     // retire un groupe d'actions.
-    $this->Auth->deny('add', 'edit');
     $this->Auth->deny(['add', 'edit']);
 
-Vous pouvez fournir autant de noms d'action que vous voulez à ``deny()``.
-Vous pouvez aussi fournir un tableau contenant tous les noms d'action.
+En l'appellant sans paramètre, cela interdira toutes les actions.
+Pour une action unique, vous pouvez fournir le nom de l'action dans une chaine
+de caractères. Sinon utilisez un tableau.
 
 Utilisation de ControllerAuthorize
 ----------------------------------
@@ -903,7 +904,7 @@ unauthorizedRedirect
     Contrôle la gestion des accès non autorisés. Par défaut, un utilisateur
     non autorisé est redirigé vers l'URL référente ou vers
     ``AuthComponent::$loginAction`` ou '/'.
-    Si défini à false, une exception ForbiddenException est lancée au lieu de
+    Si défini à ``false``, une exception ForbiddenException est lancée au lieu de
     la redirection.
 
 

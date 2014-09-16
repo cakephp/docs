@@ -15,11 +15,12 @@ Définir les Messages Flash
 ==========================
 
 FlashComponent fournit deux façons de définir des messages flash : sa méthode
-magique ``__call`` et sa méthode ``set()``. Pour votre application with verbosity,
-la méthode magique ``__call`` de FlashComponent vous permet d'utiliser un nom
-de méthode qui est lié à un element qui se trouve dans le répertoire
-``src/Template/Element/Flash``. Par convention, les méthodes en camel case
-vont être liées à un nom d'element en minuscule et avec des underscores::
+magique ``__call`` et sa méthode ``set()``. Pour remplir votre application
+sématiquement, la méthode magique ``__call`` de FlashComponent vous permet
+d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
+répertoire ``src/Template/Element/Flash``. Par convention, les méthodes en
+camelcase vont être liées à un nom d'element en minuscule et avec des
+underscores::
 
     // Utilise src/Template/Element/Flash/success.ctp
     $this->Flash->success('This was successful');
@@ -27,13 +28,13 @@ vont être liées à un nom d'element en minuscule et avec des underscores::
     // Utilise src/Template/Element/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
 
-De façon alternative, pour définir un message en clair sans rendre un element,
+De façon alternative, pour définir un message sans rendre un element,
 vous pouvez utiliser la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
-Les méthodes ``__call`` et ``set()`` de FlashComponent prennent en option un
-deuxième paramètre, un tableau d'options:
+Les méthodes ``__call`` et ``set()`` de FlashComponent prennent un deuxième
+paramètre optionel, un tableau d'options:
 
 * ``key`` Par défaut à 'flash'. La clé du tableau trouvé dans la clé 'Flash'
   dans la session. 

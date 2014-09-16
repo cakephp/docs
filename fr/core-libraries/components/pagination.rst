@@ -90,10 +90,10 @@ Les valeurs des clés ``Articles`` et ``Authors`` peuvent contenir toutes
 les propriétés qu'un model/clé sans ``$paginate`` peut contenir.
 
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
-utiliser la méthode ``~Cake\\Controller\\Controller::paginate()`` pour créer
-les données paginées et ajouter le ``PaginatorHelper`` si il n'a pas déjà été
-ajouté. La méthode paginate du controller va retourner l'ensemble des résultats
-de la requête paginée, et définir les meta-données de paginatino de la requête.
+utiliser la méthode :php:meth:`~Cake\\Controller\\Controller::paginate()` pour
+créer les données paginées et ajouter le ``PaginatorHelper`` si il n'a pas déjà
+été ajouté. La méthode paginate du controller va retourner l'ensemble des résultats
+de la requête paginée, et définir les meta-données de pagination de la requête.
 Vous pouvez accéder aux meta-données de pagination avec
 ``$this->request->params['paging']``. un exemple plus complet de l'utilisation
 de ``paginate()`` serait::
@@ -129,17 +129,17 @@ Utiliser Directement Paginator
 ==============================
 
 Si vous devez paginer des données d'un autre component, vous pouvez utiliser
-directement PaginatorComponent. Il fournit une API similaire a à la méthode
+directement PaginatorComponent. Il fournit une API similaire à la méthode
 du controller::
 
     $articles = $this->Paginator->paginate($articleTable->find(), $config);
 
-    //Or just
+    // Ou
     $articles = $this->Paginator->paginate($articleTable, $config);
 
 Le premier paramètre doit être l'objet query à partir d'un find sur l'objet
 table duquel vous souhaitez paginer les résultats. En option, vous pouvez passer
-l'objt table et laisser la query être construite par vous. Le second paramètre
+l'objet table et laisser la query être construite pour vous. Le second paramètre
 doit être le tableau des configurations à utiliser pour la pagination. Ce
 tableau doit avoir la même structure que la propriété ``$paginate``
 dans un controller.
@@ -175,12 +175,12 @@ CakePHP limite le nombre maximum de lignes qui peuvent être réupérées à
 l'ajuster dans les options de pagination::
 
     public $paginate = [
-        // other keys here.
+        // Autres clés ici.
         'maxLimit' => 10
     ];
 
-Si le param de limit de la requête est plus grand que cette valeur, elle sera
-réduit à la valeur ``maxLimit``.
+Si le paramêtre de limite de la requête est plus grand que cette valeur, elle
+sera réduit à la valeur ``maxLimit``.
 
 Requêtes de Page Out of Range
 =============================
@@ -189,8 +189,8 @@ PaginatorComponent va lancer une ``NotFoundException`` quand on essaie
 d'accéder une page non existante, par ex le nombre de page demandé est supérieur
 au total du nombre de page.
 
-Ainsi vous pouvez soit laisser s'afficher la page d'erreur normal, soit utiliser
-un block try catch et faire des actions appropriées quand une
+Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit utiliser
+un bloc try catch et faire des actions appropriées quand une
 ``NotFoundException`` est attrapée::
 
     public function index() {

@@ -38,8 +38,8 @@ informations à propos du client et de ses requêtes.
 .. php:method:: accepts($type = null)
 
 $type peut être une chaîne, un tableau, ou 'null'. Si c'est une chaîne,
-la méthode accepts() renverra true si le client accepte ce type de contenu.
-Si c'est un tableau, accepts() renverra true si un des types du contenu est
+la méthode accepts() renverra ``true`` si le client accepte ce type de contenu.
+Si c'est un tableau, accepts() renverra ``true`` si un des types du contenu est
 accepté par le client. Si c'est 'null', elle renverra un tableau des types de
 contenu que le client accepte. Par exemple::
 
@@ -49,14 +49,14 @@ contenu que le client accepte. Par exemple::
 
             public function beforeFilter() {
                 if ($this->RequestHandler->accepts('html')) {
-                    // Execute code only if client accepts an HTML (text/html)
-                    // response.
+                    // Execute le code seulement si le client accepte une
+                    // response HTML  (text/html).
                 } elseif ($this->RequestHandler->accepts('xml')) {
-                    // Execute XML-only code
+                    // Execute uniquement le code XML
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                    // Executes if the client accepts any of the above: XML, RSS
-                    // or Atom.
+                    // Execute si le client accetpte l'une des réponses 
+                    // ci-dessus: XML, RSS ou Atom.
                 }
             }
         }
@@ -166,7 +166,7 @@ donné, le type de contenu le plus approchant est retourné. Si $type est un
 tableau, le premier type que le client accepte sera retourné. La préférence
 est déterminée, premièrement par l'extension de fichier analysée par
 Router, si il y en avait une de fournie et secondairement, par la liste des
-content-types définis dans ``HTTP\_ACCEPT``.
+content-types définis dans ``HTTP\_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
 
@@ -177,7 +177,7 @@ Répondre aux Requêtes
 
 Change le mode de rendu d'un controller pour le type spécifié.
 Ajoutera aussi le helper approprié au tableau des helpers du controller,
-s'il est disponible et qu'il n'est pas déjà dans le tableau.
+s'il est disponible et qu'il n'est pas déjà dans le tableau::
 
     // Force le controller à rendre une response xml.
     $this->RequestHandler->renderAs($this, 'xml');

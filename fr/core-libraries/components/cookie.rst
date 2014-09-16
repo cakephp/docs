@@ -47,14 +47,14 @@ domain
     à '.example.com'.
 secure
     Indique que le cookie soit être transmis avec une connection sécurisée
-    HTTPS. Quand il est défini à true, le cookie ne sera défini que si une
+    HTTPS. Quand il est défini à ``true``, le cookie ne sera défini que si une
     connection sécurisée existe.
 key
     La clé de chiffrement utilisé quand les cookies chiffrés sont activés. Par
     défaut à Security.salt.
 httpOnly
-    Défini à true pour ne faire que des cookies HTTP. Les Cookies qui sont HTTP
-    nes ont uniquement accessible en JavaScript. Par défaut à false.
+    Défini à ``true`` pour ne faire que des cookies HTTP. Les Cookies qui sont HTTP
+    nes ont uniquement accessible en JavaScript. Par défaut à ``false``.
 encryption
     Le type de chiffrement à utiliser. Par défaut à 'aes'. Peut aussi être
     'rijndael' pour une compatibilité rétroactive.
