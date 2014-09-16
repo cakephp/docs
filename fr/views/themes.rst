@@ -7,7 +7,7 @@ sont simplement des plugins qui se focalisent sur la livraison de fichiers
 de vues. En plus des fichiers de template, ils peuvent fournir des helpers et
 des cells si votre theme le nécessite. Quand vous utilisez des cells et des
 helpers à partir de votre theme, vous devrez continuer à utiliser la
-:term:`plugin-syntax`
+:term:`syntaxe de plugin`
 
 Pour utiliser les themes, spécifiez le nom du theme dans votre controller::
 

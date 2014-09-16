@@ -10,7 +10,8 @@ La grande différence entre le Component Session et le Helper Session est que ce
 dernier *ne peut pas* écrire dans la session.
 
 Comme pour le Component Session, les données sont écrites et lues en utilisant
-des structures de tableaux avec des :term:`dot notation`, comme ci-dessous::
+des structures de tableaux avec des :term:`notation avec points`, comme
+ci-dessous::
 
     ['User' =>
         ['username' => 'super@example.com']
