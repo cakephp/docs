@@ -29,7 +29,7 @@ disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez son nom
 au tableau ``$helpers`` du controller::
 
     class BakeriesController extends AppController {
-        public $helpers = ['Form', 'Html', 'Js', 'Time'];
+        public $helpers = ['Form', 'Html', 'Time'];
     }
 
 L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
@@ -57,11 +57,11 @@ mieux organisé::
 
 Si vous avez besoin d'activer un helper pour tous les controllers, ajoutez
 son nom dans le tableau ``$helpers`` du fichier
-``/app/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas
+``/src/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas
 d'inclure les helpers par défaut Html et Form::
 
     class AppController extends Controller {
-        public $helpers = ['Form', 'Html', 'Js', 'Time'];
+        public $helpers = ['Form', 'Html', 'Time'];
     }
 
 Options de Configuration
@@ -71,7 +71,11 @@ Vous pouvez passer des options de configuration dans les helpers. Ces options
 peuvent être utilisées pour définir les valeurs d'attributs ou modifier le
 comportement du helper::
 
-    class AwesomeHelper extends AppHelper {
+    namespace App\View\Helper;
+
+    use Cake\View\Helper;
+
+    class AwesomeHelper extends Helper {
         public function __construct(View $view, $config = []) {
             parent::__construct($view, $config);
             debug($config);
@@ -82,15 +86,16 @@ comportement du helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-Par défaut, les options de configuration sont fusionnées avec la propriété
+Par défaut, toutes les options de configuration sont fusionnées avec la propriété
 ``$_defaultConfig``. Cette propriété doit définir les valeurs par défaut de
 toute configuration dont votre helper a besoin. Par exemple::
 
     namespace App\View\Helper;
 
+    use Cake\View\Helper;
     use Cake\View\StringTemplateTrait;
 
-    class AwesomeHelper extends AppHelper {
+    class AwesomeHelper extends Helper {
 
         use StringTemplateTrait;
 
@@ -128,6 +133,7 @@ pouvez les définir dans le callback beforeRender de votre controller::
         }
     }
 
+.. _aliasing-helpers:
 
 Faire des Alias de Helpers
 --------------------------
@@ -229,12 +235,17 @@ feriez dans un controller::
 
     /* /src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
     use App\View\Helper\AppHelper;
+   
+    namespace App\View\Helper;
 
-    class LinkHelper extends AppHelper {
+    use Cake\View\Helper;
+
+    class LinkHelper extends Helper {
         public $helpers = ['Html'];
 
         public function makeEdit($title, $url) {
-            // utilise le helper HTML pour sortir des données formatées
+            // Utilise le Helper Html pour afficher the HTML helper to output
+            // les données formatées:
 
             $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
@@ -261,24 +272,7 @@ pouvez l'utiliser dans vos vues en accédant à un objet nommé d'après le
 helper::
 
     <!-- fait un lien en utilisant le nouveau helper -->
-   <?php echo $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5'); ?>
-
-
-Créer des fonctionnalités pour Tous les Helpers
-===============================================
-
-Tous les helpers étendent une classe spéciale, AppHelper (comme les models
-étendent AppModel et les controllers étendent AppController). Pour créer une
-fonctionnalité disponible pour tous les helpers, créez
-``/src/View/Helper/AppHelper.php``::
-
-    use App\View\Helper\AppHelper;
-
-    class AppHelper extends Helper {
-        public function customMethod() {
-        }
-    }
-
+   <?= $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5'); ?>
 
 .. _helper-api:
 
@@ -340,7 +334,7 @@ aucune des méthodes de callback.
 
 .. php:method:: afterLayout(Event $event, $layoutFile)
 
-    Est appelé après que le rendu du layout est fini. Reçoit le nom du fichier
+    Est appelée après que le rendu du layout est fini. Reçoit le nom du fichier
     layout en argument.
 
 .. meta::

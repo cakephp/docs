@@ -20,8 +20,9 @@ session. Il inclut les fonctions CRUD basiques, mais aussi des fonctionnalités
 pour créer des messages de feedback aux utilisateurs.
 
 Il est important de noter que ces structures en tableaux peuvent être créées
-dans la session en utilisant la notation avec un point :term:`dot notation`.
-Par exemple, ``User.username`` se référera au tableau suivant ::
+dans la session en utilisant la notation avec un point
+:term:`notation avec points`.
+Par exemple, ``User.username`` se référera au tableau suivant::
 
     ['User' =>
         ['username' => 'clark-kent@dailyplanet.com']
