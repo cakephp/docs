@@ -671,8 +671,10 @@ with reflected properties that normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
-Testing Controllers
-===================
+.. _integration-testing:
+
+Controller Integration Testing
+===============================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
 and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.
