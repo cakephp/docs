@@ -219,11 +219,6 @@ returned is as per following rules:
    ``loginRedirect`` value is returned.
  - If there is no session and no ``loginRedirect``, / is returned.
 
-If no parameter is passed, gets the authentication redirect URL. Pass a
-URL in to set the destination a user should be redirected to upon logging
-in. Will fallback to ``AuthComponent::$loginRedirect`` if there is
-no stored redirect value.
-
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
