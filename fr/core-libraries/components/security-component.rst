@@ -47,34 +47,24 @@ le component Security avant ces components dans le tableau ``$components``.
 Gestion des callbacks Blackhole
 ===============================
 
+.. php:method:: blackHole(object $controller, string $error)
+
 Si une action est restreinte par le component Security, elle devient
 un black-hole (trou noir), comme une requête invalide qui aboutira à une
-erreur 404 par défaut.
+erreur 400 par défaut.
 Vous pouvez configurer ce comportement, en définissant l'option de configuration
 ``blackHoleCallback`` par une fonction de rappel (callback)
 dans le controller.
 
-.. php:method:: blackHole(object $controller, string $error)
-
-Met en "trou noir" (black-hole) une requête invalide, avec une
-erreur 404 ou un callback personnalisé. Sans callback, la requête
-sera abandonnée. Si un callback de controller est défini pour
-SecurityComponent::blackHoleCallback, il sera appelé et passera
-toute information sur l'erreur.
-
-La fonction de rappel (callback) du controller qui va gérer et requéter
-ce qui doit être mis dans un trou noir (blackholed).
-La fonction de rappel de mise en trou noir (blackhole callback) peut être
-n'importe quelle méthode publique d'un controller.
-La fonction de rappel doit s'attendre a un paramètre indiquant le type
-d'erreur::
+En configurant la fonction de rappel, vous pouvez personnaliser le processus
+ de mise en trou noir (blackhole callback)::
 
     public function beforeFilter(Event $event) {
         $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
     public function blackhole($type) {
-        // Handle errors.
+        // Gère les erreurs.
     }
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
@@ -118,11 +108,8 @@ Prévention de la falsification de formulaire
 ============================================
 
 Par défaut le component Security ``SecurityComponent`` empêche l'utilisation
-de la falsification de formulaire. Il fait cela en travaillant
-avec le Helper Form et en traquant quels fichiers sont dans un formulaire. il
-assure le suivi des éléments d'entrée cachés. Toutes ces données sont combinées
-et hachées. Quand un formulaire est soumis, le component de sécurité utilisera
-les données POSTé pour construire la même structure et comparer le hachage.
+de la falsification de formulaire. Le ``SecurityComponent`` va empêcher les
+choses suivantes:
 
 * Les champs inconnus ne peuvent être ajoutés au formulaire.
 * Les champs ne peuvent être retirés du formulaire.
@@ -217,7 +204,7 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
 les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
-To enable CSRF protection features use the
+Pour activer la protection CSRF, utilisez 
 :doc:`/core-libraries/components/csrf-component`.
 
 Désactiver le Component Security pour des Actions Spécifiques
