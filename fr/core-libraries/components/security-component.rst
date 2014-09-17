@@ -215,7 +215,7 @@ sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
 ``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
-fonctionnalités de ``SecurityComponent`::
+fonctionnalités de ``SecurityComponent``::
 
     namespace App\Controller;
 

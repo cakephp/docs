@@ -349,6 +349,8 @@ d'objet pour lire les données à partir des propriétés suivantes:
     debug($response->status);
     debug($response->headers);
 
+.. _http-client-xml-json:
+
 Lire des Corps de Réponse JSON et XML
 -------------------------------------
 

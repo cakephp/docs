@@ -1,8 +1,6 @@
 Database Basics
 ###############
 
-.. php:namespace:: Cake\Database
-
 L'ORM et l'accès à la base de données dans CakePHP a été totalement reconstruit
 pour 3.0. Il amène une nouvelle API pour la construction des requêtes, améliore
 le schéma reflection/génération, un type de système flexible et plus.
