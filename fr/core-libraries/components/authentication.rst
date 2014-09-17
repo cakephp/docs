@@ -427,11 +427,11 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 
         public function hash($password) {
-            return md5($password);
+            return sha1($password);
         }
 
         public function check($password, $hashedPassword) {
-            return md5($password) === $hashedPassword;
+            return sha1($password) === $hashedPassword;
         }
     }
 
