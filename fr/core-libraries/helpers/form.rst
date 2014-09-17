@@ -660,7 +660,9 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   du message d'erreur, définissez la sous-option escape à false::
 
       $this->Form->input('Model.field', array(
-          'attributes' => array('escape' => false)
+          'error' => array(
+            'attributes' => array('escape' => false)
+            )
       ));
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
