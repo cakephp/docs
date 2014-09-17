@@ -1177,7 +1177,7 @@ Testing
   plusieurs fonctionnalités supplémentaires par rapport au vieil exécuteur via
   le navigateur.
   
-  ``ControllerTestCase`` est déprécié et sera supprimé de CAKEPHP 3.0.0.
+  ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
   Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
   à la place.
 
