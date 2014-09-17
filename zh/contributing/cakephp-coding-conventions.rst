@@ -318,13 +318,13 @@ callable
 包括文件
 ========
 
-``include``，``require``，``include_once``和``require_once``没有括号::
+``include`` 、 ``require`` 、 ``include_once`` 和 ``require_once`` 没有括号::
 
     // 错误 = 括号
     require_once('ClassFileName.php');
     require_once ($class);
 
-    // 真确 = 没有括号
+    // 正确 = 没有括号
     require_once 'ClassFileName.php';
     require_once $class;
 
@@ -444,5 +444,5 @@ PHP 标签
 
 
 .. meta::
-    :title lang=en: Coding Standards
-    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=zh: Coding Standards
+    :keywords lang=zh: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

@@ -15,5 +15,5 @@
 
 
 .. meta::
-    :title lang=en: Contributing
-    :keywords lang=en: coding conventions,documentation,maxdepth
+    :title lang=zh: Contributing
+    :keywords lang=zh: coding conventions,documentation,maxdepth
