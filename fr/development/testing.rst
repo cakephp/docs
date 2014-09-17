@@ -731,6 +731,8 @@ normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
+.. _integration-testing:
+    
 Test d'intégrations des Controllers
 ======================
 
