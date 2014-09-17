@@ -830,8 +830,8 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
         }
     }
 
-Cet exemple montre quelques façons d'utiliser l'envoie de requête et quelques
-assertions qu'``IntegrationTestCase dispose``. Avant de pouvoir utiliser les
+Cet exemple montre quelques façons d'utiliser l'envoi de requête et quelques
+assertions qu'intègre ``IntegrationTestCase``. Avant de pouvoir utiliser les
 assertions, vous aurez besoin de simulez une requête. Vous pouvez utilisez
 l'une des méthodes suivantes pour simuler une requête:
 
@@ -841,7 +841,7 @@ l'une des méthodes suivantes pour simuler une requête:
 * ``delete()`` Sends a DELETE request.
 * ``patch()`` Sends a PATCH request.
 
-Toutes les méthodes exceptées ``get()`` and ``delete()`` accepte un second
+Toutes les méthodes exceptées ``get()`` and ``delete()`` acceptent un second
 paramètre qui vous permet de saisir le corp d'une requête. Après avoir émis
 une requête, vous pouvez utiliser les différents assertions que fournis
 ``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
@@ -872,7 +872,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     // Vérifie le layout
     $this->assertLayout('default');
 
-    // Vérifie quel Template a été rendue.
+    // Vérifie quel Template a été rendu.
     $this->assertTemplate('index');
 
     // Vérifie les données de la session
@@ -931,7 +931,7 @@ et assurons nous que notre service web retourne une réponse appropriée::
 
 Nous utilisons l'option ``JSON_PRETTY_PRINT`` comme le fait CakePHP à partir de
 la classe JsonView. Ce dernier utilise cette option quand le mode ``debug`` est
-activés. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas::
+activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas::
 
     json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
 
