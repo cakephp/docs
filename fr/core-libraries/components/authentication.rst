@@ -418,7 +418,9 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
 dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` et
-``check``::
+``check``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
+
+    namespace App\Auth;
 
     use \Cake\Auth\AbstractPasswordHasher;
 
@@ -428,8 +430,8 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
             return md5($password);
         }
 
-        public function check($password, $hashed) {
-            return md5($password) === $hashed;
+        public function check($password, $hashedPassword) {
+            return md5($password) === $hashedPassword;
         }
     }
 
@@ -546,27 +548,6 @@ l'authentification Digest.
     était configuré dans AuthComponent::$authenticate. Par défaut à
     ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
-
-Creating Custom Password Hasher Classes
----------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Auth/CustomPasswordHasher.php`` you could put
-the following::
-
-    namespace App\Auth;
-
-    use Cake\Auth\AbstractPasswordHasher;
-
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
-            // Code ici
-        }
-
-        public function check($password, $hashedPassword) {
-            // Code ici
-        }
-    }
 
 Connecter les Utilisateurs Manuellement
 ---------------------------------------

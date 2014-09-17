@@ -385,7 +385,10 @@ Creating Custom Password Hasher Classes
 
 In order to use a different password hasher, you need to create the class in
 ``src/Auth/LegacyPasswordHasher.php`` and implement the
-``hash`` and ``check`` methods::
+``hash`` and ``check`` methods. This class needs to extend the
+``AbstractPasswordHasher`` class::
+
+    namespace App\Auth;
 
     use \Cake\Auth\AbstractPasswordHasher;
 
@@ -395,8 +398,8 @@ In order to use a different password hasher, you need to create the class in
             return md5($password);
         }
 
-        public function check($password, $hashed) {
-            return md5($password) === $hashed;
+        public function check($password, $hashedPassword) {
+            return md5($password) === $hashedPassword;
         }
     }
 
@@ -509,27 +512,6 @@ other password hashes, based on the RFC for digest authentication.
     configured in AuthComponent::$authenticate. This defaults to
     ``env('SCRIPT_NAME')``. You may wish to use a static string if you
     want consistent hashes in multiple environments.
-
-Creating Custom Password Hasher Classes
----------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Auth/CustomPasswordHasher.php`` you could put
-the following::
-
-    namespace App\Auth;
-
-    use Cake\Auth\AbstractPasswordHasher;
-
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
-            // Stuff here
-        }
-
-        public function check($password, $hashedPassword) {
-            // Stuff here
-        }
-    }
 
 Manually Logging Users In
 -------------------------
