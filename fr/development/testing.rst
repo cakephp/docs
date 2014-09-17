@@ -893,7 +893,7 @@ Tester un Controller dont la Réponse est au format JSON
 
 JSON est un format sympa et courant à utiliser quand on construit un service web.
 Tester les endpoints de votre service web est très simple avec CakePHP. Commençons
-par un exemple de controller simple qui répond en JSON:
+par un exemple de controller simple qui répond en JSON::
 
     class MarkersController extends AppController {
         public $components = ['RequestHandler'];
