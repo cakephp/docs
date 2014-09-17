@@ -139,10 +139,10 @@ off, clone CakePHP into a directory. For this example, we'll use
 This will clone CakePHP into your ``/home/mark/projects`` directory. If you don't want
 to use git, you can download a zipball and the remaining steps will be the
 same. Next you'll have to locate and modify your ``php.ini``. On \*nix systems
-this is often in ``/etc/php.ini``, but you can use ``php -i`` and look for 'Loaded
-Configuration File'. Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``/home/mark/projects/cakephp/lib``. An
-example would look like::
+this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
+Configuration File', you can find the actual location. Once you've found the
+correct ini file, modify the ``include_path`` configuration to include
+``/home/mark/projects/cakephp/lib``. An example would look like::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
