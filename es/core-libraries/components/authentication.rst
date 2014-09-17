@@ -1,11 +1,6 @@
 Authentication
 ##############
 
-.. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
-
 .. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
 Identifying, authenticating and authorizing users is a common part of
@@ -224,18 +219,13 @@ returned is as per following rules:
    ``loginRedirect`` value is returned.
  - If there is no session and no ``loginRedirect``, / is returned.
 
-If no parameter is passed, gets the authentication redirect URL. Pass a
-URL in to set the destination a user should be redirected to upon logging
-in. Will fallback to ``AuthComponent::$loginRedirect`` if there is
-no stored redirect value.
-
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Basic and digest are stateless authentication schemes and don't require an
 initial POST or a form. If using only basic / digest authenticators you don't
 require a login action in your controller. Also you can set
-``$this->Auth->sessionKey`` to false to ensure AuthComponent doesn't try to
+``$this->Auth->sessionKey`` to ``false`` to ensure AuthComponent doesn't try to
 read user info from session. You may also want to set config
 ``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
 a ``ForbiddenException`` instead of default behavior of redirecting to referer.
@@ -395,7 +385,10 @@ Creating Custom Password Hasher Classes
 
 In order to use a different password hasher, you need to create the class in
 ``src/Auth/LegacyPasswordHasher.php`` and implement the
-``hash`` and ``check`` methods::
+``hash`` and ``check`` methods. This class needs to extend the
+``AbstractPasswordHasher`` class::
+
+    namespace App\Auth;
 
     use \Cake\Auth\AbstractPasswordHasher;
 
@@ -405,8 +398,8 @@ In order to use a different password hasher, you need to create the class in
             return md5($password);
         }
 
-        public function check($password, $hashed) {
-            return md5($password) === $hashed;
+        public function check($password, $hashedPassword) {
+            return md5($password) === $hashedPassword;
         }
     }
 
@@ -520,27 +513,6 @@ other password hashes, based on the RFC for digest authentication.
     ``env('SCRIPT_NAME')``. You may wish to use a static string if you
     want consistent hashes in multiple environments.
 
-Creating Custom Password Hasher Classes
----------------------------------------
-Custom password hasher classes need to extend the ``AbstractPasswordHasher``
-class and need to implement the abstract methods ``hash()`` and ``check()``.
-In ``app/Auth/CustomPasswordHasher.php`` you could put
-the following::
-
-    namespace App\Auth;
-
-    use Cake\Auth\AbstractPasswordHasher;
-
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
-            // Stuff here
-        }
-
-        public function check($password, $hashedPassword) {
-            // Stuff here
-        }
-    }
-
 Manually Logging Users In
 -------------------------
 
@@ -632,9 +604,9 @@ You configure authorization handlers using the ``authorize`` config key.
 You can configure one or many handlers for authorization. Using
 multiple handlers allows you to support different ways of checking
 authorization. When authorization handlers are checked, they will be
-called in the order they are declared. Handlers should return false, if
+called in the order they are declared. Handlers should return ``false``, if
 they are unable to check authorization, or the check has failed.
-Handlers should return true if they were able to check authorization
+Handlers should return ``true`` if they were able to check authorization
 successfully. Handlers will be called in sequence until one passes. If
 all checks fail, the user will be redirected to the page they came from.
 Additionally you can halt all authorization by throwing an exception.
@@ -864,7 +836,7 @@ logoutRedirect
 unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to false a ForbiddenException exception is thrown instead of redirecting.
+    If set to ``false`` a ForbiddenException exception is thrown instead of redirecting.
 
 .. meta::
     :title lang=en: Authentication
