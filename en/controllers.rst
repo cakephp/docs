@@ -55,22 +55,32 @@ available in all controllers that extend it. Components (which you'll
 learn about later) are best used for code that is used in many (but not
 necessarily all) controllers.
 
-While normal object-oriented inheritance rules apply, CakePHP does a bit of
-extra work when it comes to special controller attributes. The components and
-helpers used by a controller are treated specially. In these cases,
-``AppController`` value arrays are merged with child controller class arrays.
-The values in the child class will always override those in ``AppController.``
+You can use your ``AppController`` to load components that will be used in every
+controller in your application. CakePHP provides a ``initialize()`` method that
+is invoked at the end of a Controller's constructor for this kind of use::
 
-.. note::
+    namespace App\Controller;
 
-    CakePHP merges the following variables from the ``AppController`` into
-    your application's controllers:
+    use Cake\Controller\Controller;
 
-    -  :php:attr:`~Controller::$components`
-    -  :php:attr:`~Controller::$helpers`
+    class AppController extends Controller {
 
-Remember to call ``AppController``'s callbacks within child
-controller callbacks for best results::
+        public function initialize() {
+            // Always enable the CSRF component.
+            $this->addComponent('Csrf');
+        }
+
+    }
+
+In addition to the ``initialize()`` method, the older ``$components`` property
+will also allow you to declare which components should be loaded. While normal
+object-oriented inheritance rules apply, the components and helpers used by
+a controller are treated specially. In these cases, ``AppController`` property
+values are merged with child controller class arrays.  The values in the child
+class will always override those in ``AppController.``
+
+Remember to call ``AppController``'s callbacks within child controller callbacks
+for best results::
 
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
@@ -422,6 +432,16 @@ instances::
 
 Configuring Components to Load
 ==============================
+
+.. php:method:: loadComponent($name, $config = [])
+
+In your Controller's ``initialize()`` method you can define any components you
+want loaded, and any configuration data for them::
+
+    public function intialize() {
+        $this->loadComponent('Csrf');
+        $this->loadComponent('Comments', Configure:read('Comments'));
+    }
 
 .. php:attr:: components
 

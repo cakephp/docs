@@ -17,25 +17,27 @@ your own components.
 Configuring Components
 ======================
 
-Many of the core components require configuration. Some examples of
-components requiring configuration are
-:doc:`/core-libraries/components/authentication` and :doc:`/core-libraries/components/cookie`.
-Configuration for these components, and for components in general, is usually done in the
-``$components`` array or your controller's ``beforeFilter()`` method::
+Many of the core components require configuration. Some examples of components
+requiring configuration are :doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/cookie`.  Configuration for these components,
+and for components in general, is usually done via ``loadComponent()`` in your
+Controller's ``initialize`` method or via the ``$components`` array::
 
     class PostsController extends AppController {
-        public $components = [
-            'Auth' => [
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
                 'authorize' => ['controller'],
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
-            ],
-            'Cookie' => ['name' => 'CookieMonster']
-        ];
+            ]);
+            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+        }
 
-The previous fragment of code would be an example of configuring a component
-with the ``$components`` array. You can configure components at runtime using
-the ``config()`` method. Often, this is done in your controller's
-``beforeFilter()`` method. The above could also be expressed as::
+    }
+
+You can configure components at runtime using the ``config()`` method. Often,
+this is done in your controller's ``beforeFilter()`` method. The above could
+also be expressed as::
 
     public function beforeFilter() {
         $this->Auth->config('authorize', ['controller']);
@@ -67,11 +69,11 @@ implementation::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController {
-        public $components = [
-            'Auth' => [
+        public function initialize() {
+            parent::initialize('Auth', [
                 'className' => 'MyAuth'
-            ]
-        ];
+            ]);
+        }
     }
 
     // src/Controller/Component/MyAuthComponent.php
@@ -173,36 +175,35 @@ Including your Component in your Controllers
 --------------------------------------------
 
 Once our component is finished, we can use it in the application's
-controllers by placing the component's name (without the "Component"
-part) in the controller's ``$components`` array. The controller will
-automatically be given a new attribute named after the component,
-through which we can access an instance of it::
+controllers by loading it during the controller's ``initialize()`` method.
+Once loaded, the controller will be given a new attribute named after the
+component, through which we can access an instance of it::
 
     /* Make the new component available at $this->Math,
-    as well as the standard $this->Session */
-    public $components = ['Math', 'Session'];
-
-Components declared in ``AppController`` will be merged with those
-in your other controllers. So there is no need to re-declare the
-same component twice.
+    as well as the standard $this->Csrf */
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math');
+        $this->loadComponent('Csrf');
+    }
 
 When including Components in a Controller you can also declare a
 set of parameters that will be passed on to the Component's
 constructor. These parameters can then be handled by
 the Component::
 
-    public $components = [
-        'Math' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math', [
             'precision' => 2,
             'randomGenerator' => 'srand'
-        ],
-        'Session', 'Auth'
-    ];
+        ]);
+        $this->loadComponent('Csrf');
+    }
 
 The above would pass the array containing precision and
 randomGenerator to ``MathComponent::__construct()`` as the
-second parameter. By convention, if array keys match component's public
-properties, the properties will be set to the values of these keys.
+second parameter.
 
 
 Using Other Components in your Component
@@ -266,7 +267,7 @@ Callbacks
 .. php:method:: initialize(Event $event)
 
     Is called before the controller's
-    beforeFilter method.
+    beforeFilter method, but *after* the controller's initialize() method.
 
 .. php:method:: startup(Event $event)
 
