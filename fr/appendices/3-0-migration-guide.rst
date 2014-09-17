@@ -1176,6 +1176,10 @@ Testing
   `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. Il dispose de
   plusieurs fonctionnalités supplémentaires par rapport au vieil exécuteur via
   le navigateur.
+  
+  ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
+  Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
+  à la place.
 
 Utility
 =======
