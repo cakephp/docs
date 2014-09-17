@@ -395,11 +395,11 @@ In order to use a different password hasher, you need to create the class in
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 
         public function hash($password) {
-            return md5($password);
+            return sha1($password);
         }
 
         public function check($password, $hashedPassword) {
-            return md5($password) === $hashedPassword;
+            return sha1($password) === $hashedPassword;
         }
     }
 
