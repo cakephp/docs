@@ -208,7 +208,7 @@ will be the value for the field being validated. The second is a context array
 containing data related to the validation process:
 
 - **data**: The original data passed to the validation method, useful if you
-  plan to to create rules comparing values.
+  plan to create rules comparing values.
 - **providers**: The complete list of rule provider objects, useful if you
   need to create complex rules by calling multiple providers.
 - **newRecord**: Whether the validation call is for a new record or
