@@ -47,14 +47,14 @@ domain
     à '.example.com'.
 secure
     Indique que le cookie soit être transmis avec une connection sécurisée
-    HTTPS. Quand il est défini à true, le cookie ne sera défini que si une
+    HTTPS. Quand il est défini à ``true``, le cookie ne sera défini que si une
     connection sécurisée existe.
 key
     La clé de chiffrement utilisé quand les cookies chiffrés sont activés. Par
     défaut à Security.salt.
 httpOnly
-    Défini à true pour ne faire que des cookies HTTP. Les Cookies qui sont HTTP
-    nes ont uniquement accessible en JavaScript. Par défaut à false.
+    Défini à ``true`` pour ne faire que des cookies HTTP. Les Cookies qui sont HTTP
+    nes ont uniquement accessible en JavaScript. Par défaut à ``false``.
 encryption
     Le type de chiffrement à utiliser. Par défaut à 'aes'. Peut aussi être
     'rijndael' pour une compatibilité rétroactive.
@@ -69,7 +69,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
     La méthode write() est le cœur du composant cookie, $key est le
     nom de la variable désirée, et $value est l'information à stocker::
 
-        $this->Cookie->write('nom', 'Rémy');
+        $this->Cookie->write('name', 'Larry');
 
     Vous pouvez également grouper vos variables en utilisant la notation point
     '.' dans les paramètres de clé::

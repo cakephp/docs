@@ -8,7 +8,6 @@ renforcée à votre application. Il fournit des méthodes pour diverses tâches
 comme:
 
 * Restreindre les méthodes HTTP que votre application accepte.
-* Protection CSRF.
 * Protection contre la falsification de formulaire.
 * Exiger l'utilisation du SSL.
 * Limiter les communications croisées dans le controller.
@@ -18,9 +17,7 @@ configurables.
 Toutes ces propriétés peuvent être définies directement ou au travers de
 "méthodes setter" du même nom dans la partie beforeFilter de votre controller.
 
-En utilisant le Component Security vous obtenez automatiquement une protection
-`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
-et une protection contre la falsification de formulaire.
+En utilisant le Component Security vous obtenez automatiquement une protection contre la falsification de formulaire.
 Des jetons de champs cachés seront automatiquement insérés dans les
 formulaires et vérifiés par le component Security. En outre, une
 soumission par formulaire ne sera pas acceptée après une certaine
@@ -50,41 +47,31 @@ le component Security avant ces components dans le tableau ``$components``.
 Gestion des callbacks Blackhole
 ===============================
 
+.. php:method:: blackHole(object $controller, string $error)
+
 Si une action est restreinte par le component Security, elle devient
 un black-hole (trou noir), comme une requête invalide qui aboutira à une
-erreur 404 par défaut.
+erreur 400 par défaut.
 Vous pouvez configurer ce comportement, en définissant l'option de configuration
 ``blackHoleCallback`` par une fonction de rappel (callback)
 dans le controller.
 
-.. php:method:: blackHole(object $controller, string $error)
+En configurant la fonction de rappel, vous pouvez personnaliser le processus
+ de mise en trou noir (blackhole callback)::
 
-    Met en "trou noir" (black-hole) une requête invalide, avec une
-    erreur 404 ou un callback personnalisé. Sans callback, la requête
-    sera abandonnée. Si un callback de controller est défini pour
-    SecurityComponent::blackHoleCallback, il sera appelé et passera
-    toute information sur l'erreur.
+    public function beforeFilter(Event $event) {
+        $this->Security->config('blackHoleCallback', 'blackhole');
+    }
 
-    La fonction de rappel (callback) du controller qui va gérer et requéter
-    ce qui doit être mis dans un trou noir (blackholed).
-    La fonction de rappel de mise en trou noir (blackhole callback) peut être
-    n'importe quelle méthode publique d'un controller.
-    La fonction de rappel doit s'attendre a un paramètre indiquant le type
-    d'erreur::
+    public function blackhole($type) {
+        // Gère les erreurs.
+    }
 
-        public function beforeFilter() {
-            $this->Security->config('blackHoleCallback', 'blackhole');
-        }
+Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
-        public function blackhole($type) {
-            // handle errors.
-        }
-
-    Le  paramètre ``$type`` peut avoir les valeurs suivantes:
-
-    * 'auth' Indique une erreur de validation de formulaire, ou une incohérence
-      controller/action.
-    * 'secure' Indique un problème sur la méthode de restriction SSL.
+* 'auth' Indique une erreur de validation de formulaire, ou une incohérence
+  controller/action.
+* 'secure' Indique un problème sur la méthode de restriction SSL.
 
 Restreindre les actions aux actions SSL
 =======================================
@@ -121,11 +108,8 @@ Prévention de la falsification de formulaire
 ============================================
 
 Par défaut le component Security ``SecurityComponent`` empêche l'utilisation
-de la falsification de formulaire. Il fait cela en travaillant
-avec le Helper Form et en traquant quels fichiers sont dans un formulaire. il
-assure le suivi des éléments d'entrée cachés. Toutes ces données sont combinées
-et hachées. Quand un formulaire est soumis, le component de sécurité utilisera
-les données POSTé pour construire la même structure et comparer le hachage.
+de la falsification de formulaire. Le ``SecurityComponent`` va empêcher les
+choses suivantes:
 
 * Les champs inconnus ne peuvent être ajoutés au formulaire.
 * Les champs ne peuvent être retirés du formulaire.
@@ -166,23 +150,16 @@ beforeFilter() de votre controller. Vous pouvez spécifier les restrictions
 de sécurité que vous voulez et le component Security les forcera
 au démarrage::
 
-    class WidgetController extends AppController {
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
-            $this->Security->requirePost('delete');
-        }
-    }
-
-Dans cette exemple, l'action delete peut être effectuée
-avec succès si celui ci reçoit une requête POST::
-
-    class WidgetController extends AppController {
-
-        public $components = ['Security'];
-
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -192,11 +169,16 @@ avec succès si celui ci reçoit une requête POST::
 Cette exemple forcera toutes les actions qui proviennent de la
 "route" Admin à être effectuées via des requêtes sécurisées SSL::
 
-    class WidgetController extends AppController {
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetsController extends AppController {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
@@ -204,7 +186,7 @@ Cette exemple forcera toutes les actions qui proviennent de la
         }
 
         public function forceSSL() {
-            $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
     }
 
@@ -222,13 +204,8 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
 les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
-
-Les doubles soumissions et les attaques `replay` sont gérées par les
-fonctionnalités CSRF du component Security. Elles fonctionnent en ajoutant
-un jeton spécial pour chaque requête de formulaire. Ce jeton utilisé
-qu'une fois ne peut pas être utilisé à nouveau. Si une tentative est faîte
-pour ré-utiliser un jeton expiré la requête sera mise dans le trou noir
-(blackholed)
+Pour activer la protection CSRF, utilisez 
+:doc:`/core-libraries/components/csrf-component`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================
@@ -238,8 +215,24 @@ sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
 ``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
-fonctionnalités de ``SecurityComponent``.
+fonctionnalités de ``SecurityComponent``::
 
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Event\Event;
+
+    class WidgetController extends AppController {
+
+        public $components = ['Security'];
+
+        public function beforeFilter(Event $event) {
+             $this->Security->config('unlockedActions', ['edit']);
+        }
+    }
+
+Cet exemple désactiverait toutes les vérifications de sécurité pour une action
+edit.
 
 .. meta::
     :title lang=fr: Security (Securité)

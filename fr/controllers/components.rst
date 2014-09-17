@@ -4,13 +4,14 @@ Components (Composants)
 Les Components (Composants) sont des regroupements de logique applicative
 qui sont partagés entre les controllers. CakePHP est également livré avec un
 fantastique ensemble de components, que vous pouvez utiliser pour vous aider.
-Si vous vous surprenez à vouloir copier et coller des choses entre vos
-controllers, alors vous devriez envisager de regrouper plusieurs
-fonctionnalités dans un Component. Créer des components permettent de garder
-un code de controller propre et vous permet de réutiliser du code entre des
-projets.
+Vous pouvez également créer votre propres components. Si vous vous surprenez
+à vouloir copier et coller des choses entre vos controllers, alors vous
+devriez
+envisager de regrouper plusieurs fonctionnalités dans un Component. Créer des
+components permet de garder un code de controller propre et vous permet de
+réutiliser du code entre des projets.
 
-Chacun de ces components d'origine est détaillé dans son chapitre
+Chacun des components d'origine est détaillé dans son chapitre
 spécifique. Regardez :doc:`/core-libraries/toc-components`. Cette section
 décrit la façon de configurer et d'utiliser les components et la façon de
 créer vos propres components.
@@ -60,7 +61,7 @@ pour récupérer et définir toutes les configurations pour un component::
     $this->Csrf->config('cookieName', 'token');
 
 Comme avec les helpers, les components vont automatiquement fusionner leur
-propriété ``$_defaultConfig`` avec le configuration du constructeur pour créer
+propriété ``$_defaultConfig`` avec la configuration du constructeur pour créer
 la propriété ``$_config`` qui est accessible avec ``config()``.
 
 Faire des Alias avec les Components
@@ -87,7 +88,7 @@ avec une implémentation sur mesure::
         // Ajoutez votre code pour surcharge l'AuthComponent du coeur
     }
 
-Ce qu'il y a au-dessous fera un *alias* ``MyAuthComponent`` de
+Le code ci-dessus fera un *alias* ``MyAuthComponent`` de
 ``$this->Auth`` dans vos controllers.
 
 .. note::
@@ -101,7 +102,8 @@ Utiliser les Components
 Une fois que vous avez inclu quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
-:php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre
+:php:class:`Cake\\Controller\\Component\\FlashComponent` et le 
+:php:class:`Cake\\Controller\\Component\\CookieComponent` dans votre
 controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController {
@@ -117,7 +119,7 @@ controller, vous pouvez y accéder comme ceci::
 .. note::
 
     Puisque les Models et les Components sont tous deux ajoutés aux
-    controllers en tant que propriété, ils partagent le même 'espace de noms'.
+    controllers en tant que propriétés, ils partagent le même 'espace de noms'.
     Assurez vous de ne pas donner le même nom à un component et à un model.
 
 Charger les Components à la Volée
@@ -125,8 +127,8 @@ Charger les Components à la Volée
 
 Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
 action. Dans ce cas là, vous pouvez le charger à la volée en utilisant le
-:doc:`Registre de Component </core-libraries/registry-objects>`. A partir de
-l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
+:doc:`Registre de Component </core-libraries/registry-objects>`. A
+l'intérieur d'un controller, vous pouvez faire ce qui suit::
 
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
@@ -225,7 +227,7 @@ variable ``$components``::
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
-        // The other component your component uses
+        // Les autres components utilisés par votre component
         public $components = ['Existing'];
 
         public function initialize(Controller $controller) {

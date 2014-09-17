@@ -792,7 +792,7 @@ Les Dossiers de View Renommés
 -----------------------------
 
 Les dossiers contenant les fichiers de vue vont maintenant dans ``src/Template``
-à la place de ``src/View`.
+à la place de ``src/View``.
 Ceci a été fait pour séparer les fichiers de vue des fichiers contenant des
 classes php (par ex les classes Helpers et View).
 

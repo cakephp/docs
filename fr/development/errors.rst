@@ -12,6 +12,8 @@ exceptions dans CakePHP 2.0. Vous pouvez configurer quelles méthodes vous
 voulez définir en tant que gestionnaire d'erreur, et en gestionnaire
 d'exception en utilisant configure.
 
+.. _error-configuration:
+
 Configuration des Erreurs
 =========================
 

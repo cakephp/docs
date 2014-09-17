@@ -119,7 +119,7 @@ la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
 chose comme cela::
 
-Les fichiers des vues de CakePHP sont stockés dans ``/src/Template`` à
+Les fichiers des vues de CakePHP sont stockés dans ``src/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
 aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
 données de ces articles dans un joli tableau, le code de notre vue devrait
@@ -127,7 +127,7 @@ ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <table>
