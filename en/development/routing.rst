@@ -83,6 +83,18 @@ parameters::
     // Will output
     /login
 
+To help keep your routing code DRY, the Router has the concept of 'scopes'.
+A scope defines a common path segment, and optionally route defaults. Any routes
+connected inside a scope will inherit the path/defaults from their wrapping
+scopes::
+
+    Router::scope('/blog', ['plugin' => 'Blog'], function($routes) {
+        $routes->connect('/', ['controller' => 'Articles']);
+    });
+
+The above route would match ``/blog/`` and send it to
+``Blog\Controller\ArticlesController::index()``.
+
 The application skeleton comes with a few routes to get you started. Once you've
 added your own routes, you can remove the default routes if you don't need them.
 

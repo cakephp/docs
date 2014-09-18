@@ -86,8 +86,21 @@ que de spécifier chacun des paramètres de routing::
     // Va afficher
     /login
 
-The application skeleton comes with a few routes to get you started. Once you've
-added your own routes, you can remove the default routes if you don't need them.
+Pour aider à garder votre code de routeur "DRY", le router apporte le concept
+de 'scopes'. Un scope (étendue) défini un segment de chemin commun, et
+optionnellement des routes par défaut. Toute route connectée à l'intérieur d'un
+scope héritera du chemin et des routes par défaut du scope qui la contient::
+
+    Router::scope('/blog', ['plugin' => 'Blog'], function($routes) {
+        $routes->connect('/', ['controller' => 'Articles']);
+    });
+
+Le route ci-dessus matchera ``/blog/`` et renverra
+``Blog\Controller\ArticlesController::index()``.
+
+Le squellette d'application contient quelques routes pour vous aider à commencer.
+Une fois que vous avez ajouté vos propres routes, vous pouvez retirer les routes
+par défaut si vous n'en avez pas besoin.
 
 .. index:: :controller, :action, :plugin
 .. index:: greedy star, trailing star
