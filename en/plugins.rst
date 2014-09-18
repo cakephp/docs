@@ -76,6 +76,15 @@ to contain the following information::
         "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
+If you are using vendor namespace for your plugins the namespace to path mapping
+should be like::
+
+    "psr-4": {
+        (...)
+        "AcmeCorp\\Users\\": "./plugins/AcmeCorp/Users/src",
+        "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
+    }
+
 Additionally you will need to tell Composer to refresh its autoloading cache::
 
     $ php composer.phar dumpautoload
