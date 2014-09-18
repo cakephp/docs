@@ -628,7 +628,7 @@ array::
 
 Much like ``authenticate``, ``authorize``, helps you
 keep your code DRY, by using the ``all`` key. This special key allows you
-to set settings that are passed to every attached object. The all key
+to set settings that are passed to every attached object. The ``all`` key
 is also exposed as ``AuthComponent::ALL``::
 
     // Pass settings in using 'all'

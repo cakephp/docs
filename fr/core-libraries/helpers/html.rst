@@ -72,7 +72,7 @@ les utiliser.
 
     :param mixed $path: Soit une chaîne du fichier CSS à lier, ou un tableau
        avec plusieurs fichiers.
-    :param array $options: Un tableau d'options ou :term:`attributs html`.
+    :param array $options: Un tableau d'options ou d' :term:`attributs html`.
 
     Créé un ou plusieurs lien(s) vers un feuille de style CSS. Si la clé
     'inline' est définie à false dans les paramètres ``$options``, les balises
@@ -727,7 +727,7 @@ les utiliser.
 
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
-    :param array $names: Un tableau de chaîne pour créé les entête de tableau.
+    :param array $names: Un tableau de chaîne pour créé les entêtes de tableau.
     :param array $trOptions: Un tableau d' :term:`attributs HTML`
         pour le <tr>.
     :param array $thOptions: Un tableau d' :term:`attributs HTML`
@@ -883,8 +883,8 @@ les utiliser.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: Un tableau de routing :term:`tableau de routing`.
-    :param mixed $full: Soit un booléen s'il faut ou pas que la  base du
+    :param mixed $url: Un term:`tableau de routing`.
+    :param mixed $full: Soit un booléen s'il faut ou pas que la base du
         chemin soit incluse ou un tableau d'options pour le router
         :php:meth:`Router::url()`.
 

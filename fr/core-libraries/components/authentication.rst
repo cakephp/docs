@@ -620,6 +620,9 @@ Autorisation
 
 L'autorisation est le processus qui permet de s'assurer qu'un utilisateur
 identifié/authentifié est autorisé à accéder aux ressources qu'il demande.
+S'il est activé, ``ÀuthComponent`` peut vérifier automatiquement des
+gestionnaires d'autorisations et veiller à ce que les utilisateurs connectés
+soient autorisés à accéder aux ressources qu'ils demandent.
 Il y a plusieurs gestionnaires d'autorisations intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
@@ -645,11 +648,11 @@ dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
 ``false``, s'il ne sont pas capable de vérifier les autorisation, ou bien si
 la vérification a échouée. Le gestionnaire devrait retourner ``true`` si ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
-seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne true. Si toutes les
-vérifications échouent, l'utilisateur sera redirigé vers la page
-d'où il vient. Vous pouvez également stopper les autorisations
-en levant une exception. Vous aurez besoin de traiter toutes les exceptions
-levées, et de les manipuler.
+seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne ``true``.
+Si toutes les vérifications échouent, l'utilisateur sera redirigé vers la page
+d'où il vient. Vous pouvez également stopper les autorisations en levant une
+exception. Vous aurez besoin de traiter toutes les exceptions levées, et de les
+manipuler.
 
 Vous pouvez configurer les gestionnaires d'autorisations dans le
 ``beforeFilter`` de votre controller ou dans le tableau ``$components``.
@@ -665,7 +668,7 @@ d'autorisation, en utilisant un tableau::
         'Controller'
     ]);
 
-Tout comme ``Auth->authenticate``, ``Auth->authorize`` vous aident
+Tout comme ``authenticate``, ``authorize`` vous aident
 à garder un code propre, en utilisant la clé ``all``. Cette clé spéciale
 vous aide à définir les paramètres qui sont passés à chaque objet attaché.
 La clé ``all`` est aussi exposée comme ``AuthComponent::ALL``::

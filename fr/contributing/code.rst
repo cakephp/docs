@@ -2,9 +2,8 @@ Code
 ####
 
 Les correctifs et les pull requests sont les meilleures façons de contribuer
-au code de CakePHP. Les correctifs peuvent être attachés aux tickets dans
-GitHub. Les pull requests peuvent être crées dans github, et sont généralement
-la meilleure façon de contribuer au code.
+au code de CakePHP. Les pull requests peuvent être créés sur Github, et sont
+préféré aux correctifs attachés aux tickets.
 
 Configuration initiale
 ======================
@@ -14,7 +13,7 @@ définir la configuration de votre environnement.
 Vous aurez besoin des logiciels suivants:
 
 * Git
-* PHP 5.4.19 ou supérieur
+* PHP 5.4.16 ou supérieur
 * PHPUnit 3.7.0 ou supérieur
 
 Mettez en place vos informations d'utilisateur avec votre nom/titre et
@@ -26,7 +25,7 @@ adresse e-mail de travail::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <git-scm.com/book/>`_.
+    excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
 Récupérez un clone du code source de CakePHP sous github.:
 
