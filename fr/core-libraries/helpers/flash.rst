@@ -47,5 +47,4 @@ FlashComponent::
     vous devez les échapper avec :php:func:`h` lors du formatage de vos
     messages.
 
-Pour plus d'informations sur les options de tableau disponible, merci de
-consulter la section :doc:`FlashComponent </core-libraries/components/flash>`.
+Pour plus d'informations sur le tableau d'options disponibles, consultez la section :doc:`FlashComponent </core-libraries/components/flash>`.
