@@ -4,8 +4,8 @@ Glossaire
 .. glossary::
 
     tableau de routing
-        Un tableau d'attributs qui sont passés au :php:meth:`Router::url()`.
-        Typiquement, ils ressemblent à ça::
+        Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
+        Typiquement, il ressemble à cela::
         
             array('controller' => 'posts', 'action' => 'view', 5)
 

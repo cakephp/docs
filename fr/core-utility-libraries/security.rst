@@ -129,7 +129,7 @@ L'API de Security
         // Utilise l'algorithme de hashage par défaut
         $hash = Security::hash('CakePHP Framework');
 
-    ``hash()`` supporte aussi d'autres algorithms sécurisés de hashage comme
+    ``hash()`` supporte aussi d'autres algorithmes sécurisés de hashage comme
     bcrypt. Quand vous utilisez bcrypt, vous devez vous souvenir de son usage
     légèrement différent.
     Créer un hash initial fonctionne de la même façon que les autres

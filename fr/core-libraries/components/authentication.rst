@@ -576,6 +576,9 @@ Autorisation
 
 L'autorisation est le processus qui permet de s'assurer qu'un utilisateur
 identifié/authentifié est autorisé à accéder aux ressources qu'il demande.
+S'il est activé, ``AuthComponent`` peut vérifier automatiquement des
+gestionnaires d'autorisations et veiller à ce que les utilisateurs connectés
+soient autorisés à accéder aux ressources qu'ils demandent.
 Il y a plusieurs gestionnaires d'autorisations intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
