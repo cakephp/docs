@@ -546,7 +546,7 @@ l'authentification Digest.
     le troisième paramètre de DigestAuthenticate::password() doit correspondre
     à la valeur de la configuration 'realm' définie quand DigestAuthentication
     était configuré dans AuthComponent::$authenticate. Par défaut à
-    ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous
+    ``env('SCRIPT_NAME')``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
 Connecter les Utilisateurs Manuellement
@@ -598,9 +598,9 @@ Déconnexion des Utilisateurs
 .. php:method:: logout()
 
 Éventuellement vous aurez besoin d'un moyen rapide pour dés-authentifier
-les utilisateurs et les rediriger ou il devraient aller. Cette méthode
-est aussi très pratique si vous voulez fournir un lien 'Déconnecte moi'
-à l'intérieur de la zone membres de votre application ::
+les utilisateurs et les rediriger où ils devraient aller. Cette méthode
+est aussi très pratique si vous voulez fournir un lien 'Déconnecte-moi'
+à l'intérieur de la zone membres de votre application::
 
     public function logout() {
         $this->redirect($this->Auth->logout());
@@ -618,12 +618,9 @@ fonctionne pour certain clients.
 Autorisation
 ============
 
-l'autorisation est le processus qui permet de s'assurer qu'un utilisateur
-identifier/authentifier est autorisé à accéder aux ressources qu'il demande.
-Si activé, ``AuthComponent`` peut vérifier automatiquement des gestionnaires
-d'autorisation et veiller à ce que les utilisateurs connectés soient autorisés
-à accéder aux ressources qu'ils demandent.
-Il y a plusieurs gestionnaires d'autorisation intégrés, et vous
+L'autorisation est le processus qui permet de s'assurer qu'un utilisateur
+identifié/authentifié est autorisé à accéder aux ressources qu'il demande.
+Il y a plusieurs gestionnaires d'autorisations intégrés, et vous
 pouvez créer vos propres gestionnaires dans un plugin par exemple.
 
 - ``ControllerAuthorize`` appelle ``isAuthorized()`` sur le controller actif,
@@ -648,14 +645,14 @@ dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
 ``false``, s'il ne sont pas capable de vérifier les autorisation, ou bien si
 la vérification a échouée. Le gestionnaire devrait retourner ``true`` si ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
-seront appelés dans l'ordre jusqu'à ce qu'un passe. Si toutes les
-vérifications échoues , l'utilisateur sera redirigé vers la page
+seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne true. Si toutes les
+vérifications échouent, l'utilisateur sera redirigé vers la page
 d'où il vient. Vous pouvez également stopper les autorisations
 en levant une exception. Vous aurez besoin de traiter toutes les exceptions
-levées, et les manipuler.
+levées, et de les manipuler.
 
-Vous pouvez configurer les gestionnaires d'autorisation dans le
-``beforeFilter`` de votre controller ou , dans le tableau ``$components``.
+Vous pouvez configurer les gestionnaires d'autorisations dans le
+``beforeFilter`` de votre controller ou dans le tableau ``$components``.
 Vous pouvez passer les informations de configuration dans chaque objet
 d'autorisation, en utilisant un tableau::
 
@@ -668,10 +665,10 @@ d'autorisation, en utilisant un tableau::
         'Controller'
     ]);
 
-Tout comme ``authenticate``, ``authorize``, vous aident
-à garder un code "propre, en utilisant la clé ``all``. Cette clé spéciale
+Tout comme ``Auth->authenticate``, ``Auth->authorize`` vous aident
+à garder un code propre, en utilisant la clé ``all``. Cette clé spéciale
 vous aide à définir les paramètres qui sont passés à chaque objet attaché.
-La clé all est aussi exposée comme ``AuthComponent::ALL``::
+La clé ``all`` est aussi exposée comme ``AuthComponent::ALL``::
 
     // Passer la configuration en utilisant 'all'
     $this->Auth->config('authorize', [
@@ -680,8 +677,8 @@ La clé all est aussi exposée comme ``AuthComponent::ALL``::
         'Controller'
     ]);
 
-Dans l'exemple ci-dessus, à la fois les ``Actions`` et le ``Controller`` auront
-les paramètres définis pour la clé 'all'. Chaque paramètres passés a un objet
+Dans l'exemple ci-dessus, à la fois l'``Action`` et le ``Controller`` auront
+les paramètres définis pour la clé 'all'. Chaque paramètre passé à un objet
 d'autorisation spécifique remplacera la clé correspondante dans la clé 'all'.
 
 Si un utilisateur authentifié essaie d'aller à une URL pour laquelle il n'est

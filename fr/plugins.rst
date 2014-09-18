@@ -215,7 +215,7 @@ Créer un Plugin en utilisant Bake
 Le processus de création des plugins peut être grandement simplifié en utilisant
 le shell bake.
 
-Pour cuisiner un plugin, merci d'utiliser la commande suivante::
+Pour cuisiner un plugin, utilisez la commande suivante::
 
     $ bin/cake bake plugin ContactManager
 
@@ -224,7 +224,7 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
 
     $ bin/cake bake controller --plugin ContactManager Contacts
 
-Merci de vous référer au chapitre
+Référez-vous au chapitre
 :doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande. Assurez-vous de
 re-générer votre autoloader une fois que vous avez créé votre plugin::

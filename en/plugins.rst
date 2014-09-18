@@ -495,4 +495,4 @@ that everyone can benefit from your awesome, reusable components!
 
 .. meta::
     :title lang=en: Plugins
-    :keywords lang=en: plugin folder,configuration database,bootstrap,management module,little space,database connection,webroot,user management,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications
+    :keywords lang=en: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

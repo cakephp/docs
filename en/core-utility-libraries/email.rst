@@ -169,6 +169,7 @@ following configuration keys are used:
   :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also ``CakeLog::write()``
+- ``'helpers'``: Array of helpers used in the email template.
 
 All these configurations are optional, except ``'from'``.
 

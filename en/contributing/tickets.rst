@@ -20,8 +20,9 @@ the best bug report possible:
   fixed.
 * **Do** give as many details as possible about your environment: (OS, PHP
   version, CakePHP version).
-* **Don't** use the ticket system to ask support questions. Use the `google
-  group <http://groups.google.com/group/cake-php>`_ or the #cakephp IRC channel
+* **Don't** use the ticket system to ask support questions. Use the `Google
+  Group <http://groups.google.com/group/cake-php>`_, the #cakephp IRC channel or
+  Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>
   for that.
 
 

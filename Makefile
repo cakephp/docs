@@ -8,7 +8,7 @@ ES_HOST =
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
 # Languages that can be built.
-LANGS = en es fr ja pt ru ro sr
+LANGS = en es fr ja pt ru ro sr zh
 
 # pdflatex does not like ja or ru for some reason.
 PDF_LANGS = en es fr pt ro
@@ -19,7 +19,7 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
-# Copy-paste the English Makefile everwhere its needed.
+# Copy-paste the English Makefile everywhere it's needed.
 %/Makefile: en/Makefile
 	cp $< $@
 

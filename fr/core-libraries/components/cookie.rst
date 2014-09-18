@@ -66,7 +66,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null)
 
-    La méthode write() est le cœur du composant cookie, $key est le
+    La méthode write() est le cœur du composant Cookie, $key est le
     nom de la variable désirée, et $value est l'information à stocker::
 
         $this->Cookie->write('name', 'Larry');
@@ -102,7 +102,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
         echo $this->Cookie->read('User.name');
 
         // Pour prendre les variables que vous aviez groupées en utilisant
-        // la notation par point comme tableau, faîtes quelque chose comme
+        // la notation par point comme tableau, faites quelque chose comme
         $this->Cookie->read('User');
 
         // ceci retourne quelque chose comme ['name' => 'Larry', 'role' => 'Lead']
@@ -115,7 +115,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la
+    Efface une variable de cookie dont le nom est défini dans $key. Fonctionne avec la
     notation par point::
 
         // Efface une variable

@@ -127,9 +127,9 @@ les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = [])
 
     :param string $type: Le type de balise meta désiré.
-    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un tableau
+    :param mixed $url: L'URL de la balise meta, soit une chaîne ou un
      :term:`tableau de routing`.
-    :param array $options: Un tableau d'attributs :term:`attributs HTML`.
+    :param array $options: Un tableau d' :term:`attributs HTML`.
 
     Cette méthode est pratique pour faire des liens vers des ressources
     externes comme RSS/Atom feeds et les favicons. Comme avec css(), vous
@@ -318,8 +318,9 @@ les utiliser.
 .. php:method:: link(string $title, mixed $url = null, array $options = [])
 
     :param string $title: Le texte à afficher comme corps du lien.
-    :param mixed $url: Soit la chaîne spécifiant le chemin, ou un :term:`tableau de routing`.
-    :param array $options: Un tableau de :`html attributes`.
+    :param mixed $url: Soit la chaîne spécifiant le chemin, ou un
+        :term:`tableau de routing`.
+    :param array $options: Un tableau d' :`attributs HTML`.
 
     Méthode générale pour la création de liens HTML. Utilisez les ``$options``
     pour spécifier les attributs des éléments et si le ``$title`` doit ou
@@ -658,8 +659,8 @@ les utiliser.
 
 .. php:method:: scriptStart($options = [])
 
-    :param array $options: Un tableau de :term:`attributs HTML` à
-        utiliser quand scriptEnd est appelée.
+    :param array $options: Un tableau d' :term:`attributs HTML` à
+        utiliser quand scriptEnd est appelé.
 
     Débute la mise en mémoire tampon d'un block de code. Ce block de code
     va capturer toutes les sorties entre ``scriptStart()`` et ``scriptEnd()``
@@ -726,10 +727,10 @@ les utiliser.
 
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
-    :param array $names: Un tableau de chaîne pour créé les entêtes de tableau.
-    :param array $trOptions: Un tableau de :term:`attributs HTML`
+    :param array $names: Un tableau de chaîne pour créé les entête de tableau.
+    :param array $trOptions: Un tableau d' :term:`attributs HTML`
         pour le <tr>.
-    :param array $thOptions: Un tableau de :term:`attributs HTML`
+    :param array $thOptions: Un tableau d' :term:`attributs HTML`
         pour l'élément <th>.
 
     Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
@@ -787,9 +788,9 @@ les utiliser.
 
     :param array $data: Un tableau à deux dimensions avec les données pour les
         lignes.
-    :param array $oddTrOptions: Un tableau de :term:`attributs HTML`
+    :param array $oddTrOptions: Un tableau d' :term:`attributs HTML`
         pour les <tr> impairs.
-    :param array $evenTrOptions: Un tableau de :term:`attributs HTML`
+    :param array $evenTrOptions: Un tableau d' :term:`attributs HTML`
         pour les <tr> pairs.
     :param boolean $useCount: Ajoute la classe "column-$i".
     :param boolean $continueOddEven: Si à false, utilisera une variable $count
@@ -882,9 +883,9 @@ les utiliser.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: Un :term:`tableau de routing`.
-    :param mixed $full: Soit un booléen s'il faut ou pas que la base du
-        chemin soit incluse ou un tableau d'options pour le routeur
+    :param mixed $url: Un tableau de routing :term:`tableau de routing`.
+    :param mixed $full: Soit un booléen s'il faut ou pas que la  base du
+        chemin soit incluse ou un tableau d'options pour le router
         :php:meth:`Router::url()`.
 
     Retourne une URL pointant vers une combinaison controller et action.
@@ -1032,7 +1033,7 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. php:method:: getCrumbList(array $options = [], mixed $startText)
 
-    :param array $options: Un tableau de :term:`attributs HTML` pour les
+    :param array $options: Un tableau d' :term:`attributs HTML` pour les
         elements contenant ``<ul>``. Peut aussi contenir les options
         'separator', 'firstClass', 'lastClass' et 'escape'.
     :param string|array $startText: Le texte ou l'elément qui précède ul.

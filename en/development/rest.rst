@@ -135,13 +135,13 @@ Everything you need should end up in ``$this->request->data``.
 Accepting Input in Other Formats
 ================================
 
-Typically REST applications not only output content in alternate data formats
-they also accept data in different formats. In CakePHP, the
-:php:class:`RequestHandlerComponent` helps facilitate this. By default
+Typically REST applications not only output content in alternate data formats,
+but also accept data in different formats. In CakePHP, the
+:php:class:`RequestHandlerComponent` helps facilitate this. By default,
 it will decode any incoming JSON/XML input data for POST/PUT requests
 and supply the array version of that data in ``$this->request->data``.
 You can also wire in additional deserializers for alternate formats if you
-need them, using :php:meth:`RequestHandler::addInputType()`
+need them, using :php:meth:`RequestHandler::addInputType()`.
 
 .. meta::
     :title lang=en: REST

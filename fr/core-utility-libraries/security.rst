@@ -82,7 +82,7 @@ L'API de Security
 
     :rtype: string
 
-        Génére un hash d'autorisation.
+    Génére un hash d'autorisation.
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
@@ -101,7 +101,7 @@ L'API de Security
         // Utilise l'algorithme de hashage par défaut
         $hash = Security::hash('CakePHP Framework');
 
-    ``hash()`` supporte aussi des algorithms plus sécurisés de hashage comme
+    ``hash()`` supporte aussi d'autres algorithms sécurisés de hashage comme
     bcrypt. Quand vous utilisez bcrypt, vous devez vous souvenir de son usage
     légèrement différent.
     Créer un hash initial fonctionne de la même façon que les autres
@@ -118,9 +118,9 @@ L'API de Security
         $newHash = Security::hash($newPassword, 'blowfish', $storedPassword);
 
     Quand vous comparez les valeurs hashées avec bcrypt, le hash original devra
-    être fourni avec le paramètre ``$salt``. Cela permet à bcrypt de réutiliser
-    le même coût et les valeurs de salt, en autorisant le hash généré pour
-    finir avec le même résultat de hash donnant la même valeur d'entrée.
+    être fourni dans le paramètre ``$salt``. Cela permet à bcrypt de réutiliser
+    les mêmes valeur de coût et de salt, en autorisant le hash généré de
+    retourner les mêmes hashs résultants, avec la même valeur d'entrée.
 
 .. php:staticmethod:: inactiveMins( )
 

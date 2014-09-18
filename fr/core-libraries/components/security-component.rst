@@ -92,17 +92,17 @@ Restreindre les actions aux actions SSL
 Restreindre les demandes croisées de controller
 ===============================================
 
-allowedControllers
-    Une liste de controllers à partir desquelles les actions du
-    controller courant sont autorisées à recevoir des requêtes.
-    Ceci peut être utilisé pour contrôler les demandes croisées de controller.
-allowedActions
-    Les actions parmi celles du controller courant qui sont autorisées
-    à recevoir des requêtes. Ceci peut être utilisé pour contrôler les
-    demandes croisées de controller.
+.. php:attr:: allowedControllers
 
-Ces options de configuration vous permettent de restreindre les demandes
-croisées de controller. Définissez les avec la méthode ``config()``.
+    Une liste de controllers qui peuvent envoyer des requêtes vers ce
+    controller. Ceci peut être utilisé pour contrôler les demandes croisées de
+    controller.
+
+.. php:attr:: allowedActions
+
+    Une liste des actions qui peuvent envoyer des requêtes vers les actions
+    de ce controller. Ceci peut être utilisé pour contrôler les demandes
+    croisées de controller.
 
 Prévention de la falsification de formulaire
 ============================================
@@ -115,9 +115,9 @@ choses suivantes:
 * Les champs ne peuvent être retirés du formulaire.
 * Les valeurs dans les inputs cachés ne peuvent être modifiées.
 
-La prévention de falsification de ces formulaires est faite de concert avec
-FormHelper et en recherchant les champs qui sont dans un formulaire. Les valeurs
-pour les champs cachés sont aussi utilisés. Toutes ces données sont combinées
+La prévention de ces types de falsification est faite de concert avec
+FormHelper, en recherchant les champs qui sont dans un formulaire. Les valeurs
+pour les champs cachés sont aussi utilisées. Toutes ces données sont combinées
 et il en ressort un hash. Quand un formulaire est soumis, SecurityComponent
 va utiliser les données POSTées pour construire la même structure et
 comparer le hash.
@@ -146,7 +146,7 @@ Utilisation
 ===========
 
 Le component Security est généralement utilisé dans la méthode
-beforeFilter() de votre controller. Vous pouvez spécifier les restrictions
+``beforeFilter()`` de votre controller. Vous pouvez spécifier les restrictions
 de sécurité que vous voulez et le component Security les forcera
 au démarrage::
 
@@ -192,7 +192,7 @@ Cette exemple forcera toutes les actions qui proviennent de la
 
 Cet exemple forcera toutes les actions qui proviennent de la "route"
 admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
-dans un trou noir, elle appellera le callback forceSSL() qui redirigera
+dans un trou noir, elle appellera le callback ``forceSSL()`` qui redirigera
 les requêtes non sécurisées vers les requêtes sécurisées automatiquement.
 
 .. _security-csrf:

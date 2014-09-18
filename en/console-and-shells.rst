@@ -22,8 +22,8 @@ based utilities that don't need to be accessible from a web browser.
 
 PHP provides a CLI client that makes interfacing with your
 file system and applications much smoother. The CakePHP console
-provides a framework for creating shell scripts. The console uses a
-dispatcher-type setup to load a shell or task, and hand it its
+provides a framework for creating shell scripts. The Console uses a
+dispatcher-type setup to load a shell or task, and provide its
 parameters.
 
 .. note::

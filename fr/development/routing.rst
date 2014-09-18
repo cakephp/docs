@@ -785,10 +785,12 @@ Générer des URLs
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
-easily change your URL structure without having to modify all your code.
-By using :term:`routing arrays <routing array>` to define your URLs, you can
-later configure routes and the generated URLs will automatically update.
+Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
+vous permettre de changer facilement votre structure d'URL sans avoir à
+modifier tout votre code. En utilisant des
+:term:`tableaux de routing <tableau de routing>` pour définir vos URLs, vous
+pouvez configurer les routes plus tard et les URLs générés vont automatiquement
+être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 

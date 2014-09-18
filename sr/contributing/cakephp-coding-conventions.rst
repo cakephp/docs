@@ -205,18 +205,17 @@ describe the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
-*  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
-*  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
-*  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
-*  `@example <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.example.pkg.html>`_
-*  `@ignore <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.ignore.pkg.html>`_
-*  `@internal <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.internal.pkg.html>`_
-*  `@link <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.link.pkg.html>`_
-*  `@see <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.see.pkg.html>`_
-*  `@since <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.since.pkg.html>`_
-*  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
-*  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
+*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
 processed if they are the first thing in a DocBlock line, for example::

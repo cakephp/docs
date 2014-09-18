@@ -12,7 +12,7 @@ longues étendues de texte.
 .. php:method:: autoLinkEmails(string $text, array $options=[])
 
     :param string $text: Le texte à convertir.
-    :param array $options: Un tableau de :term:`attributs HTML` pour générer
+    :param array $options: Un tableau d' :term:`attributs HTML` pour générer
         les liens.
 
     Ajoute les liens aux adresses email bien formées dans $text, selon toute
@@ -34,7 +34,7 @@ longues étendues de texte.
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=[])
 
     :param string $text: Le texte à convertir.
-    :param array $htmlOptions: Un tableau de :term:`attributs HTML` pour
+    :param array $htmlOptions: Un tableau d' :term:`attributs HTML` pour
         la génération de liens.
 
     De même que dans ``autoLinkEmails()``, seule cette méthode cherche les
@@ -47,7 +47,7 @@ longues étendues de texte.
 .. php:method:: autoLink(string $text, array $htmlOptions=[])
 
     :param string $text: Le texte à lier automatiquement.
-    :param array $htmlOptions: Un tableau de :term:`attributs HTML` pour
+    :param array $htmlOptions: Un tableau d' :term:`attributs HTML` pour
         générer les liens.
 
     Execute la fonctionnalité dans les deux ``autoLinkUrls()`` et

@@ -85,14 +85,17 @@ Restrict Actions to SSL
 Restricting Cross Controller Communication
 ==========================================
 
-allowedControllers
-    A List of Controller from which the actions of the current
-    controller are allowed to receive requests from. This can be used
-    to control cross controller requests.
-allowedActions
-    Actions from which actions of the current controller are allowed to
-    receive requests. This can be used to control cross controller
-    requests.
+.. php:attr:: allowedControllers
+
+    A list of controllers which can send requests 
+    to this controller.
+    This can be used to control cross controller requests.
+
+.. php:attr:: allowedActions
+
+    A list of actions which are allowed to send requests
+    to this controller's actions.
+    This can be used to control cross controller requests.
 
 These configuration options allow you to restrict cross controller
 communication. Set them with the ``config()`` method.
@@ -100,22 +103,22 @@ communication. Set them with the ``config()`` method.
 Form Tampering Prevention
 =========================
 
-By default ``SecurityComponent`` prevents users from tampering with forms in
+By default the ``SecurityComponent`` prevents users from tampering with forms in
 specific ways. The ``SecurityComponent`` will prevent the following things:
 
 * Unknown fields cannot be added to the form.
 * Fields cannot be removed from the form.
 * Values in hidden inputs cannot be modified.
 
-Preventing these forms of tampering is accomplished by working with FormHelper
+Preventing these types of tampering is accomplished by working with the FormHelper
 and tracking which fields are in a form. The values for hidden fields are
 tracked as well. All of this data is combined and turned into a hash. When
-a form is submitted, SecurityComponent will use the POST data to build the same
+a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
 structure and compare the hash.
 
 .. note::
 
-    SecurityComponent will **not** prevent select options from being
+    The SecurityComponent will **not** prevent select options from being
     added/changed. Nor will it prevent radio options from being added/changed.
 
 .. php:attr:: unlockedFields
@@ -134,8 +137,8 @@ structure and compare the hash.
 Usage
 =====
 
-Using the security component is generally done in the controller
-beforeFilter(). You would specify the security restrictions you
+Using the security component is generally done in the controllers
+``beforeFilter()``. You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
     namespace App\Controller;
