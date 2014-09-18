@@ -16,7 +16,7 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
     您几乎可以在任何地方阅读本书，当前提供的格式有 PDF 和 EPUB，您可以在更多设备上阅读它，也可以(把它下载下来)离线阅读。
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/zh/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/zh_CN/CakePHPCookbook.epub>`_
     - `原文出处 <http://github.com/cakephp/docs>`_
 
 入门指南
@@ -57,5 +57,5 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 
 .. meta::
-    :title lang=zh: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=zh: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=zh_CN: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=zh_CN: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

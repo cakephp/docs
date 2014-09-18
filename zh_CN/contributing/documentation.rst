@@ -326,5 +326,5 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 
 
 .. meta::
-    :title lang=zh: Documentation
-    :keywords lang=zh: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
+    :title lang=zh_CN: Documentation
+    :keywords lang=zh_CN: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission

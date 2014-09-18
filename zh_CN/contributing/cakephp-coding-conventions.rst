@@ -444,5 +444,5 @@ PHP 标签
 
 
 .. meta::
-    :title lang=zh: Coding Standards
-    :keywords lang=zh: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=zh_CN: Coding Standards
+    :keywords lang=zh_CN: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
