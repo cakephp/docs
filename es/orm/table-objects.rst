@@ -1779,7 +1779,7 @@ Fired after an entity has been deleted.
 Behaviors
 =========
 
-.. php:method:: loadBehavior($name, $config = [])
+.. php:method:: addBehavior($name, $config = [])
 
 .. start-behaviors
 
@@ -1788,7 +1788,7 @@ related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
 
-To add a behavior to your table you can call the ``loadBehavior`` method.
+To add a behavior to your table you can call the ``addBehavior`` method.
 Generally the best place to do this is in the ``initialize`` method::
 
     namespace App\Model\Table;
@@ -1797,7 +1797,7 @@ Generally the best place to do this is in the ``initialize`` method::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Timestamp');
+            $this->addBehavior('Timestamp');
         }
     }
 
@@ -1810,7 +1810,7 @@ configuration options::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Timestamp', [
+            $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [
                         'created_at' => 'new',

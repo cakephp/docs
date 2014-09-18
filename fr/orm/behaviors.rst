@@ -65,7 +65,7 @@ ont souvent des propriétés slug pour créer de belles URLs::
     class ArticlesTable extends Table {
 
         public function initialize(array $config) {
-            $this->loadBehavior('Sluggable');
+            $this->addBehavior('Sluggable');
         }
     }
 
@@ -117,7 +117,7 @@ aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
 table. Par exemple::
 
     // Dans une méhode initialize() de la table.
-    $this->loadBehavior('Sluggable', [
+    $this->addBehavior('Sluggable', [
         'implementedMethods' => [
             'slug' => 'superSlug',
         ]
@@ -209,7 +209,7 @@ aussi renommer/retirer les méthodes find lors de l'ajout d'un behavior à la
 table. Par exemple::
 
     // Dans la méthode initialize() de la table.
-    $this->loadBehavior('Sluggable', [
+    $this->addBehavior('Sluggable', [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]

@@ -24,7 +24,7 @@ Table object you want to make translatable::
     class ArticlesTable extends Table {
     
         public function initialize(array $config) {
-            $this->loadBehavior('Translate', ['fields' => ['title']]);
+            $this->addBehavior('Translate', ['fields' => ['title']]);
         }
     }
 
@@ -105,7 +105,7 @@ class::
     class ArticlesTable extends Table {
 
         public function initialize(array $config) {
-            $this->loadBehavior('Translate', ['fields' => ['title', 'body']]);
+            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
@@ -125,7 +125,7 @@ of the data that is stored for each different table::
     class Articles extends Table {
 
         public function initialize(array $config) {
-            $this->loadBehavior('Translate', [
+            $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
                 'translationTable' => 'articles_i18n'
             ]);
@@ -238,7 +238,7 @@ translations for any given entity. For example, given the following setup::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Translate', ['fields' => ['title', 'body']]);
+            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 

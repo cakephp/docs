@@ -22,7 +22,7 @@ collection des entities stockées dans une table spécifique et vont dans
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Timestamp');
+            $this->addBehavior('Timestamp');
         }
     }
 

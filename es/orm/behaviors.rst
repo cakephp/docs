@@ -69,7 +69,7 @@ friendly URLs::
     class ArticlesTable extends Table {
 
         public function initialize(array $config) {
-            $this->loadBehavior('Sluggable');
+            $this->addBehavior('Sluggable');
         }
     }
 
@@ -119,7 +119,7 @@ Since the exposed methods are decided by configuration you can also
 rename/remove mixin methods when adding a behavior to a table. For example::
 
     // In a table's initialize() method.
-    $this->loadBehavior('Sluggable', [
+    $this->addBehavior('Sluggable', [
         'implementedMethods' => [
             'slug' => 'superSlug',
         ]
@@ -206,7 +206,7 @@ Since the exposed methods are decided by configuration you can also
 rename/remove finder methods when adding a behavior to a table. For example::
 
     // In a table's initialize() method.
-    $this->loadBehavior('Sluggable', [
+    $this->addBehavior('Sluggable', [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]

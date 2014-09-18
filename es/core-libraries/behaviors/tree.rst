@@ -49,7 +49,7 @@ hierarchical data in::
 
     class CategoriesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Tree');
+            $this->addBehavior('Tree');
         }
     }
 
@@ -145,7 +145,7 @@ If the default column names that are used by this behavior don't match your own
 schema, you can provide aliases for them::
 
     public function initialize(array $config) {
-        $this->loadBehavior('Tree', [
+        $this->addBehavior('Tree', [
             'parent' => 'ancestor_id', // Use this instead of parent_id,
             'left' => 'tree_left', // Use this instead of lft
             'right' => 'tree_right' // Use this instead of rght
@@ -162,7 +162,7 @@ a locations table you may want to create one tree per country::
     class LocationsTable extends Table {
 
         public function initialize(array $config) {
-            $this->loadBehavior('Tree', [
+            $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }

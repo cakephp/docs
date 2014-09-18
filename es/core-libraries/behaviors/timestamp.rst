@@ -23,7 +23,7 @@ You enable the timestamp behavior like any other behavior::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Timestamp');
+            $this->addBehavior('Timestamp');
         }
     }
 
@@ -41,7 +41,7 @@ timestamp fields on custom events you can use some additional configuration::
 
     class OrdersTable extends Table {
         public function initialize(array $config) {
-            $this->loadBehavior('Timestamp', [
+            $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [
                         'created_at' => 'new',
