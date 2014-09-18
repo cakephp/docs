@@ -655,7 +655,7 @@ comments routes will look like::
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
-You can get the article_id in CommentsController by::
+You can get the ``article_id`` in ``CommentsController`` by::
 
     $this->request->params['article_id']
 
