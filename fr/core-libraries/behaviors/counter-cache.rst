@@ -22,7 +22,7 @@ pour chaque article avec ce qui suit::
 
     class CommentsTable extends Table {
         public function initialize(array $config) {
-            $this->addBehavior('CounterCache', [
+            $this->loadBehavior('CounterCache', [
                 'Articles' => ['comment_count']
             ]);
         }
@@ -45,7 +45,7 @@ des méthodes finder pour générer une valeur du compteur::
 
     // Utilise une méthode find spécifique.
     // Dans ce cas find(published)
-    $this->addBehavior('CounterCache', [
+    $this->loadBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
                 'findType' => 'published'
@@ -56,7 +56,7 @@ des méthodes finder pour générer une valeur du compteur::
 Si vous n'avez pas de méthode de finder personnalisé, vous pouvez fournir
 un tableau de conditions pour trouver les enregistrements à la place::
 
-    $this->addBehavior('CounterCache', [
+    $this->loadBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
                 'conditions' => ['Comments.spam' => false]
@@ -68,7 +68,7 @@ Enfin, si un finder personnalisé et les conditions ne sont pas réunies, vous
 pouvez fournir une méthode de callback. Cette méthode retourne la valeur du
 compteur à stocker::
 
-    $this->addBehavior('CounterCache', [
+    $this->loadBehavior('CounterCache', [
         'Articles' => [
             'rating_avg' => function($event, $entity, $table) {
                 return 4.5;

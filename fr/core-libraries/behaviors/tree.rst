@@ -47,7 +47,7 @@ les données hierarchisées dans::
 
     class CategoriesTable extends Table {
         public function initialize(array $config) {
-            $this->addBehavior('Tree');
+            $this->loadBehavior('Tree');
         }
     }
 
@@ -145,7 +145,7 @@ Si les noms de colonne par défaut qui sont utilisés par ce behavior ne
 correspondent pas à votre schéma, vous pouvez leur fournir des alias::
 
     public function initialize(array $config) {
-        $this->addBehavior('Tree', [
+        $this->loadBehavior('Tree', [
             'parent' => 'ancestor_id', // Utilise ceci plutôt que parent_id,
             'left' => 'tree_left', // Utilise ceci plutôt que lft
             'right' => 'tree_right' // Utilise ceci plutôt que rght
@@ -162,7 +162,7 @@ dans une table locations vous voudrez créer un arbre par pays::
     class LocationsTable extends Table {
 
         public function initialize(array $config) {
-            $this->addBehavior('Tree', [
+            $this->loadBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }

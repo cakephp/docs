@@ -21,7 +21,7 @@ look like this::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->addBehavior('Timestamp');
+            $this->loadBehavior('Timestamp');
         }
     }
 
@@ -370,7 +370,7 @@ back at our Articles model and make a few adjustments::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->addBehavior('Timestamp');
+            $this->loadBehavior('Timestamp');
         }
 
         public function validationDefault(Validator $validator) {

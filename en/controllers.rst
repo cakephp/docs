@@ -67,7 +67,7 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
         public function initialize() {
             // Always enable the CSRF component.
-            $this->addComponent('Csrf');
+            $this->loadComponent('Csrf');
         }
 
     }

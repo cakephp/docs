@@ -15,13 +15,13 @@ Charger les Objets
 Les objets peuvent être chargés à la volée en utilisant add<registry-object>()
 Exemple::
 
-    $this->addComponent('DebugKit.Toolbar');
+    $this->loadComponent('Acl.Acl');
     $this->addHelper('Flash')
 
 Va permettre de charger la propriété ``Toolbar`` et le helper ``Flash``.
 La configuration peut aussi être définie à la volée. Exemple::
 
-    $this->addComponent('Cookie', ['name' => 'sweet']);
+    $this->loadComponent('Cookie', ['name' => 'sweet']);
 
 Toutes clés & valeurs fournies vont être passées au constructeur du Component
 La seule exception à cette règle est ``className``. Classname est une clé
@@ -29,7 +29,7 @@ spéciale qui est utilisée pour faire des alias des objets dans un registry. Ce
 vous permet d'avoir des noms de component qui ne correspondent pas aux noms de
 classes, ce qui peut être utile quand vous étendez les components du coeur::
 
-    $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
+    $this->Auth = $this->loadComponent('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Utilise en fait MyCustomAuth::user();
 
 Attraper les Callbacks

@@ -23,7 +23,7 @@ behavior à l'objet Table que vous souhaitez rendre traduisible::
     class Articles extends Table {
     
         public function initialize(array $config) {
-            $this->addBehavior('Translate', ['fields' => ['title']]);
+            $this->loadBehavior('Translate', ['fields' => ['title']]);
         }
     }
 
@@ -105,7 +105,7 @@ classe Table::
     class Articles extends Table {
     
         public function initialize(array $config) {
-            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
+            $this->loadBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
@@ -126,7 +126,7 @@ différente::
     class Articles extends Table {
     
         public function initialize(array $config) {
-            $this->addBehavior('Translate', [
+            $this->loadBehavior('Translate', [
                 'fields' => ['title', 'body'],
                 'translationTable' => 'articles_i18n'
             ]);
@@ -243,7 +243,7 @@ Par exemple, étant donné la configuration suivante::
 
     class ArticlesTable extends Table {
         public function initialize(array $config) {
-            $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
+            $this->loadBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
