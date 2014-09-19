@@ -302,18 +302,6 @@ A more extensive example showing some options for a date field::
 Besides the specific options for ``input()`` found below, you can specify
 any option for the input type & any HTML attribute (for instance ``onfocus``).
 
-Assuming that User BelongsToMany Group. In your controller, set a
-camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
--> extraFunkyModels) with the select options. In the controller action you
-would put the following::
-
-    $this->set('groups', $this->Users->Groups->find('list'));
-
-And in the view a multiple select can be created with this simple
-code::
-
-    echo $this->Form->input('groups._ids', ['options' => $groups]);
-
 If you want to create a select field while using a belongsTo - or
 hasOne - Relation, you can add the following to your Users-controller
 (assuming your User belongsTo Group)::
@@ -615,7 +603,7 @@ Options for Select, Checkbox and Radio Inputs
 
   You can set a different hidden field value other than 0 such as 'N'::
 
-      echo $this->Form->checkbox('published', ]
+      echo $this->Form->checkbox('published', [
           'value' => 'Y',
           'hiddenField' => 'N',
       ]);
@@ -1039,7 +1027,7 @@ way PHP handles data passed via file fields
 
     When using ``$this->Form->file()``, remember to set the form
     encoding-type, by setting the type option to 'file' in
-    ``$this->Form->create()``
+    ``$this->Form->create()``.
 
 Creating Date and Time Inputs
 -----------------------------
@@ -1086,7 +1074,7 @@ empty option:
 * ``maxYear`` The max year to appear in the select element.
 * ``minYear`` The min year to appear in the select element.
 
-For example, to create a year range range from 2000 to the current year you
+For example, to create a year range from 2000 to the current year you
 would do the following::
 
     echo $this->Form->year('purchased', [
@@ -1557,8 +1545,8 @@ Building a Widget Class
 
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
-a the ``render(array $data)`` method to be implemented. The render method
-expects an array of data to build the widget and is expected to return an string
+the ``render(array $data)`` method to be implemented. The render method
+expects an array of data to build the widget and is expected to return a string
 of HTML for the widget. If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you
@@ -1655,8 +1643,8 @@ Working with SecurityComponent
 
 :php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several
 features that make your forms safer and more secure. By simply including the
-``SecurityComponent`` in your controller, you'll automatically benefit from CSRF
-and form tampering features.
+``SecurityComponent`` in your controller, you'll automatically benefit from
+form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
 your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will

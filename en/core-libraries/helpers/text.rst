@@ -51,7 +51,7 @@ Linking Both URLs and Email Addresses
 
 Performs the functionality in both ``autoLinkUrls()`` and
 ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
-are linked appropriately given the supplied ``$htmlOptions``.
+are linked appropriately given the supplied ``$options``.
 
 This method automatically escapes its input. Use the ``escape``
 option to disable this if necessary.
