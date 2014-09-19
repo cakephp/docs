@@ -103,7 +103,7 @@ To change the language for translated strings you can call this method::
 
     use Cake\I18n\I18n;
 
-    I18n::defaultLocale('de_DE');
+    I18n::locale('de_DE');
 
 This will also change how numbers and dates are formatted when using one of
 the localization tools.
@@ -356,7 +356,7 @@ minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
 use the translation functions as usual::
 
-    I18n::defaultLocale('fr_FR');
+    I18n::locale('fr_FR');
     __d('animals', 'Dog'); // Returns "Chien"
 
 As you see, ``Package`` objects take translation messages as an array. You can

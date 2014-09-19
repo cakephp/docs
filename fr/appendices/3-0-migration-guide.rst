@@ -61,7 +61,7 @@ Les constantes dépréciées suivantes ont été retirées:
 Configuration
 =============
 
-La configuration dans CakePHP 3.0 est significativement différente des 
+La configuration dans CakePHP 3.0 est significativement différente des
 versions précédentes. Vous devriez lire la documentation
 :doc:`/development/configuration` sur la façon dont la configuration est faite
 dans la version 3.0.
@@ -1138,7 +1138,7 @@ pouvez utiliser la classe ``I18n``::
     Configure::write('Config.language', 'fr_FR');
 
     // Maintenant
-    I18n::defaultLocale('en_US');
+    I18n::locale('en_US');
 
 - Les méthodes ci-dessous ont été déplacées:
 
@@ -1176,7 +1176,7 @@ Testing
   `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. Il dispose de
   plusieurs fonctionnalités supplémentaires par rapport au vieil exécuteur via
   le navigateur.
-  
+
   ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
   Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
   à la place.
