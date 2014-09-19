@@ -8,7 +8,7 @@ TreeBehavior
 It's fairly common to want to store hierarchical data in a database
 table. Examples of such data might be categories with unlimited
 subcategories, data related to a multilevel menu system or a
-literal representation of hierarchy such as a departments in company.
+literal representation of hierarchy such as departments in a company.
 
 Relational databases are usually not well suited for storing and retrieving this
 type of data, but there are a few known techniques that can make them effective
