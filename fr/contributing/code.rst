@@ -3,7 +3,7 @@ Code
 
 Les correctifs et les pull requests sont les meilleures façons de contribuer
 au code de CakePHP. Les pull requests peuvent être créés sur Github, et sont
-préféré aux correctifs attachés au tickets.
+préférés aux correctifs attachés au tickets.
 
 Configuration initiale
 ======================

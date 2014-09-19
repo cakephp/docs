@@ -1517,7 +1517,7 @@ Création des boutons et des éléments submits
     Cette méthode créé un élément ``<form>``. Donc n'utilisez pas
     pas cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`FormHelper::submit() ou :php:meth:`FormHelper::button()`
-    pour créér des boutons a l'intérieur de formulaires ouvert.
+    pour créer des boutons a l'intérieur de formulaires ouvert.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 

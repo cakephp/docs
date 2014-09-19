@@ -788,7 +788,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
-    :param array $names: Un tableau de chaîne pour créé les entêtes de tableau.
+    :param array $names: Un tableau de chaîne pour créer les entêtes de tableau.
     :param array $trOptions: Un tableau d' :term:`attributs HTML`
         pour le <tr>.
     :param array $thOptions: Un tableau d' :term:`attributs HTML`
