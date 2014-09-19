@@ -22,16 +22,17 @@ After creating the ``i18n`` table in your database attach the behavior to any
 Table object you want to make translatable::
 
     class ArticlesTable extends Table {
-    
+
         public function initialize(array $config) {
             $this->addBehavior('Translate', ['fields' => ['title']]);
         }
     }
 
-Now, select a language to be used for retrieving entities::
+Now, select a language to be used for retrieving entities by changing
+the application language, which will affect all translations::
 
+    I18n::locale('spa');
     $articles = TableRegistry::get('Articles');
-    $articles->locale('spa');
 
 Then, get an existing entity::
 
@@ -141,16 +142,16 @@ Reading Translated Content
 As shown above you can use the ``locale`` method to choose the active
 translation for entities that are loaded::
 
+    I18n::locale('spa');
     $articles = TableRegistry::get('Articles');
-    $articles->locale('spa');
 
     // All entities in results will contain spanish translation
     $results = $articles->find()->all();
 
-The locale method works with any finder in your tables. For example, you can
+This method works with any finder in your tables. For example, you can
 use TranslateBehavior with ``find('list')``::
 
-    $articles->locale('spa');
+    I18n::locale('spa');
     $data = $articles->find('list')->toArray();
 
     // Data will contain
@@ -193,7 +194,7 @@ This trait contains a single method called ``translation``, which lets you
 access or create new translation entities on the fly::
 
     // Outputs 'title'
-    echo $article->translation('eng')->title; 
+    echo $article->translation('eng')->title;
 
     // Adds a new translation data entity to the article
     $article->translation('deu')->title = 'Wunderbar';
@@ -227,6 +228,33 @@ operation::
 This assumes that ``Categories`` has the TranslateBehavior attached to it. It
 simply uses the query builder function for the ``contain`` clause to use the
 ``translations`` custom finder in the association.
+
+Retrieving one language without using I18n::locale
+--------------------------------------------------
+
+calling ``I18n::locale('spa');`` changes the default locale for all translated
+finds, there may be times you wish to retrieve translated content without modifying
+the application's state. For these scenarios use the behavior ``locale`` method:
+
+    I18n::locale('eng'); // reset for illustration
+    $articles = TableRegistry::get('Articles');
+    $articles->locale('spa'); // specific locale
+
+    $article = $articles->get(12);
+    echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
+
+Note that this only changes the locale of the Articles table, it would not affect
+the langauge of associated data. To use this technique to affect associated data
+it's necessary to call locale on each table for example:
+
+    I18n::locale('eng'); // reset for illustration
+    $articles = TableRegistry::get('Articles');
+    $articles->locale('spa');
+    $articles->categories->locale('spa');
+
+    $data = $articles->find('all', ['contain' => ['Categories']]);
+
+This example also assumes that ``Categories`` has the TranslateBehavior attached to it.
 
 Saving in Another Language
 ==========================
@@ -283,7 +311,7 @@ can be retrieved as usual::
 The second way to use for saving entities in another language is to set the
 default language directly to the table::
 
-    $articles->locale('spa');
+    I18n::locale('spa');
     $article->title = 'Mi Primer Artículo';
     $articles->save($article);
 
