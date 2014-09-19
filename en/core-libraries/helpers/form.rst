@@ -1643,7 +1643,8 @@ Working with SecurityComponent
 
 :php:meth:`Cake\\Controller\\Component\\SecurityComponent` offers several
 features that make your forms safer and more secure. By simply including the
-``SecurityComponent`` in your controller, you'll automatically benefit from form tampering features.
+``SecurityComponent`` in your controller, you'll automatically benefit from
+form tampering features.
 
 As mentioned previously when using SecurityComponent, you should always close
 your forms using :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. This will
