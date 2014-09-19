@@ -1,8 +1,6 @@
 Database Basics
 ###############
 
-.. php:namespace:: Cake\Database
-
 The ORM and database access in CakePHP has been totally rebuilt for 3.0.
 It features a new fluent API for building queries, improved schema
 reflection/generation, a flexible type system and more.
@@ -175,6 +173,8 @@ See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
 
 .. _database-data-types:
+
+.. php:namespace:: Cake\Database
 
 Data Types
 ==========
