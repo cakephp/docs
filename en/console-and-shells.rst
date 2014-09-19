@@ -84,9 +84,9 @@ code inside it::
 
     namespace App\Shell;
 
-    use App\Shell\AppShell;
+    use Cake\Console\Shell;
 
-    class HelloShell extends AppShell {
+    class HelloShell extends Shell {
         public function main() {
             $this->out('Hello world.');
         }
@@ -110,18 +110,14 @@ You should see the following output::
     Hello world.
 
 As mentioned before, the ``main()`` method in shells is a special method called
-whenever there are no other commands or arguments given to a shell. You may have
-also noticed that HelloShell is extending ``AppShell``. Much like
-:ref:`app-controller`, AppShell gives you a base class to contain all your
-common functions or logic. You can define an AppShell, by creating
-``src/Shell/AppShell.php``. Since our main method wasn't very
-interesting let's add another command that does something::
+whenever there are no other commands or arguments given to a shell. Since our
+main method wasn't very interesting let's add another command that does something::
 
     namespace App\Shell;
 
-    use App\Shell\AppShell;
+    use Cake\Console\Shell;
 
-    class HelloShell extends AppShell {
+    class HelloShell extends Shell {
         public function main() {
             $this->out('Hello world.');
         }
@@ -161,9 +157,9 @@ properties attached to your shell::
 
     namespace App\Shell;
 
-    use App\Shell\AppShell;
+    use Cake\Console\Shell;
 
-    class UserShell extends AppShell {
+    class UserShell extends Shell {
 
         public function initialize() {
             parent::initialize();
@@ -190,17 +186,21 @@ to compose functionality into re-usable classes that can be shared across many s
 Tasks allow you to extract commands into classes. For example the ``bake`` is made
 almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
-    class UserShell extends AppShell {
+    class UserShell extends Shell {
         public $tasks = ['Template'];
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
-Tasks are stored in ``Shell/Task/`` in files named after
-their classes. So if we were to create a new 'FileGenerator' task, you would create
+Tasks are stored in ``Shell/Task/`` in files named after their classes. So if
+we were to create a new 'FileGenerator' task, you would create
 ``src/Shell/Task/FileGeneratorTask.php``.
 
 Each task must at least implement a ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
+
+    namespace App\Shell\Task;
+
+    use Cake\Console\Shell;
 
     class FileGeneratorTask extends Shell {
         public function main() {
@@ -212,7 +212,7 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
-    class SeaShell extends AppShell {
+    class SeaShell extends Shell {
         // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
