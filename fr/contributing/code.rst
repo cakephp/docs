@@ -3,7 +3,7 @@ Code
 
 Les correctifs et les pull requests sont les meilleures façons de contribuer
 au code de CakePHP. Les pull requests peuvent être créés sur Github, et sont
-préféré aux correctifs attachés aux tickets.
+préférés aux correctifs attachés aux tickets.
 
 Configuration initiale
 ======================
@@ -137,10 +137,9 @@ la pull request est créée.
     Rappelez vous que tout le code auquel vous contribuez pour CakePHP sera
     sous la licence MIT License, et la
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera le
-    propriétaire de toutes les contributions de code et toutes les
-    contributions de code sont soumises au `contrat de licence des
-    Contributeurs <http://cakefoundation.org/pages/cla>`_.
-
+    propriétaire de toutes les contributions de code. Les contributeurs doivent
+    suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
+   
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).
 

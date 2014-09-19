@@ -1,6 +1,8 @@
 RSS
 ###
 
+.. php:namespace:: Cake\View\Helper
+
 .. php:class:: RssHelper(View $view, array $config = [])
 
 Le Helper RSS permet de générer facilement des XML pour les flux RSS.
@@ -17,12 +19,12 @@ l'extension .rss demandée à ``posts/index`` pour en faire votre URL
 ``posts/index.rss``. Avant d'aller plus loin en essayant d'initialiser et
 de lancer notre service Web, nous avons besoin de faire un certain nombre
 de choses. Premièrement, le parsing d'extensions doit être activé dans
-``/src/config/routes.php``::
+``config/routes.php``::
 
-    Router::parseExtensions('rss');
+    Router::extensions('rss');
 
 Dans l'appel ci-dessus, nous avons activé l'extension .rss. Quand vous
-utilisez :php:meth:`Router::parseExtensions()`, vous pouvez passer autant
+utilisez :php:meth:`Cake\\Routing\\Router::extensions()`, vous pouvez passer autant
 d'arguments ou d'extensions que vous le souhaitez. Cela activera le
 content-type de chaque extension utilisée dans votre application. Maintenant,
 quand l'adresse ``posts/index.rss`` est demandée, vous obtiendrez une version
@@ -84,7 +86,7 @@ Layout
 ------
 
 Un layout Rss est très simple, mettez les contenus suivants dans
-``/src/Template/Layout/rss/default.ctp``::
+``src/Template/Layout/rss/default.ctp``::
 
     if (!isset($documentData)) {
         $documentData = [];
@@ -107,13 +109,13 @@ données meta pour notre flux.
 
 Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier
 de layout que nous avons crée, nous avons besoin de créer un répertoire
-``Template/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
+``src/Template/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
 Les contenus du fichier sont ci-dessous.
 
 View
 ----
 
-Notre vue, localisée dans ``/src/Template/Posts/rss/index.ctp``, commence par
+Notre vue, localisée dans ``src/Template/Posts/rss/index.ctp``, commence par
 définir les variables ``$documentData`` et ``$channelData`` pour le layout,
 celles-ci contiennent toutes les metadonnées pour notre flux RSS. C'est fait
 en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la
@@ -198,84 +200,6 @@ Le Validateur de Feed ou le site de w3c à http://validator.w3.org/feed/.
     informations de debug ajoutées automatiquement sous des paramètres de
     debug plus haut qui cassent la syntaxe XML ou les règles de validation du
     flux.
-
-API de Rss Helper
-=================
-
-.. php:attr:: action
-
-    Action courante
-
-.. php:attr:: base
-
-    Base URL
-
-.. php:attr:: data
-
-    donnée du model POSTée
-
-.. php:attr:: field
-
-    Nom du champ courant
-
-.. php:attr:: helpers
-
-    Helpers utilisés par le Helper RSS
-
-.. php:attr:: here
-
-    URL de l'action courante
-
-.. php:attr:: model
-
-    Nom du model courant
-
-.. php:attr:: params
-
-    Paramètre tableau
-
-.. php:attr:: version
-
-    Version de spec par défaut de la génération de RSS.
-
-.. php:method:: channel(array $attrib = array (), array $elements = array (), mixed $content = null)
-
-    :rtype: string
-
-    Retourne un élément RSS ``<channel />``.
-
-.. php:method:: document(array $attrib = array (), string $content = null)
-
-    :rtype: string
-
-    Retourne un document RSS entouré de tags ``<rss />``.
-
-.. php:method:: elem(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
-
-    :rtype: string
-
-    Génére un élément XML.
-
-.. php:method:: item(array $att = [], array $elements = array ())
-
-    :rtype: string
-
-    Convertit un tableau en un élément ``<item />`` et ses contenus.
-
-.. php:method:: items(array $items, mixed $callback = null)
-
-    :rtype: string
-
-    Transforme un tableau de données en utilisant un callback optionnel, et le
-    map pour un ensemble de tags ``<item />``.
-
-.. php:method:: time(mixed $time)
-
-    :rtype: string
-
-    Convertit un time de tout format en time de RSS. Regardez
-    :php:meth:`TimeHelper::toRSS()`.
-
 
 .. meta::
     :title lang=fr: RssHelper

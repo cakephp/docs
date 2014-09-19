@@ -1,14 +1,14 @@
 Time
 ####
 
-.. php:namespace:: Cake\Utility
+.. php:namespace:: Cake\I18n
 
 .. php:class:: Time
 
 Si vous avez besoin de fonctionnalités :php:class:`TimeHelper` en-dehors
 d'une ``View``, utilisez la classe ``Time``::
 
-    use Cake\Utility\Time;
+    use Cake\I18n\Time;
 
     class UsersController extends AppController {
 
@@ -34,7 +34,7 @@ Créer des Instances Time
 
 Il y a plusieurs façons de créer des instances ``Time``::
 
-    use Cake\Utility\Time;
+    use Cake\I18n\Time;
 
     // Créé à partir d'une chaîne datetime.
     $time = Time::createFromFormat(
@@ -254,7 +254,7 @@ Vous pouvez comparer une instance ``Time`` avec le présent de plusieurs façons
     echo $time->isThisMonth();
     echo $time->isThisYear();
 
-Chacune des méthodes ci-dessus va retourner true/false selon si oui ou non
+Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou non
 l'instance ``Time`` correspond au présent.
 
 Comparer Avec les Intervals
