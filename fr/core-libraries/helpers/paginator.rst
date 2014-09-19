@@ -29,7 +29,7 @@ pas.
 Charger les Templates à partir d'un Fichier
 -------------------------------------------
 
-Lors de l'ajout de PaginatorHelper dans votre controller, vous pouver définir
+Lors de l'ajout de PaginatorHelper dans votre controller, vous pouvez définir
 la configuration de 'templates' pour définir un fichier de template à charger.
 Cela vous permet de facilement personnaliser plusieurs templates et de garder
 votre code DRY::
@@ -78,7 +78,7 @@ pour l'appel d'une méthode particulière::
     Les chaînes de template contenant un signe pourcentage (``%``) nécessitent
     une attention spéciale, vous devriez préfixer ce caractère avec un autre
     pourcentage pour qu'il ressemble à ``%%``. La raison est que les templates
-    sont compilés en interne pour être utilisé avec ``sprintf()``.
+    sont compilés en interne pour être utilisés avec ``sprintf()``.
     Exemple: '<div style="width:{{size}}%%">{{content}}</div>'
 
 Noms du Template
@@ -121,12 +121,12 @@ le liens retourné triera en 'décroissant'.
 
 Les clés acceptées pour ``$options``:
 
-* ``escape`` Si vous voulez que le contenu soit encodé en HTML, true par
+* ``escape`` Si vous voulez que le contenu soit encodé en HTML, ``true`` par
   défaut.
-* ``model`` Le model à utiliser, par défaut à PaginatorHelper::defaultModel().
+* ``model`` Le model à utiliser, par défaut à :php:meth:`PaginatorHelper::defaultModel()`.
 * ``direction`` La direction par défaut à utiliser quand ce lien n'est pas actif.
 * ``lock`` Verrouiller la direction. Va seulement utiliser la direction par
-  défaut, par défaut à false.
+  défaut, par défaut à ``false``.
 
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
@@ -136,7 +136,7 @@ Sortie:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/">User Id</a>
+    <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc">User Id</a>
 
 Vous pouvez utiliser le paramètre title pour créer des textes personnalisés
 pour votre lien::
@@ -147,7 +147,7 @@ Sortie:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
+    <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc">User account</a>
 
 Si vous utilisez de l'HTML comme des images dans vos liens rappelez-vous de
 paramétrer l'échappement::
@@ -162,9 +162,7 @@ Sortie:
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:asc/">
-      <em>User account</em>
-    </a>
+    <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc"><em>User account</em></a>
 
 L'option de direction peut être utilisée pour paramétrer la direction par
 défaut pour un lien. Une fois qu'un lien est activé, il changera
@@ -176,7 +174,7 @@ Sortie
 
 .. code-block:: html
 
-    <a href="/posts/index/page:1/sort:user_id/direction:desc/">User Id</a>
+    <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=desc">User Id</a>
 
 L'option lock peut être utilisée pour verrouiller le tri dans la direction
 spécifiée::
@@ -212,14 +210,14 @@ Les options supportées sont:
   courante, par défaut à 8.
 * ``first`` Si vous voulez que les premiers liens soit générés, définit à un
   entier pour définir le nombre de 'premier' liens à générer. Par défaut à
-  false. Si une chaîne est définie un lien pour la première page sera générée
+  ``false``. Si une chaîne est définie un lien pour la première page sera générée
   avec la valeur comme titre::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
 * ``last`` Si vous voulez que les derniers liens soit générés, définit à un
   entier pour définir le nombre de 'dernier' liens à générer. Par défaut à
-  false. Suit la même logique que l'option ``first``. il y a méthode
+  ``false``. Suit la même logique que l'option ``first``. il y a méthode
   :php:meth:`~PaginatorHelper::last()` à utiliser séparément si vous le voulez.
 
 Bien que cette méthode permette beaucoup de personnalisation pour ses sorties,
@@ -245,10 +243,6 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     :param string $title: Titre du lien.
     :param mixed $options: Options pour le lien de pagination.
-    :param string $disabledTitle: Titre quand le lien est désactivé, comme
-        quand vous êtes déjà sur la première page, sans page précédente où
-        aller.
-    :param mixed $disabledOptions: Options pour le lien de pagination désactivé.
 
     Génère un lien vers la page précédente dans un jeu d'enregistrements
     paginés.
@@ -256,8 +250,8 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     ``$options`` supporte les clés suivantes:
 
     * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
-      par défaut à true.
-    * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
+      par défaut à ``true``.
+    * ``model`` Le model à utiliser, par défaut :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTitle`` Le texte à utiliser quand le lien est désactivé. Par
       défaut, la valeur du paramètre ``$title``.
 
@@ -270,7 +264,11 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     .. code-block:: html
 
-        <li class="prev"><a rel="prev" href="/posts/index?page=1&amp;sort=title&amp;order=desc">&lt;&lt; previous</a></span>
+        <li class="prev">
+            <a rel="prev" href="/posts/index?page=1&amp;sort=title&amp;order=desc">
+                &lt;&lt; previous
+            </a>
+        </li>
 
     Si il n'y avait pas de page précédente vous obtenez:
 
@@ -308,8 +306,8 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     Les paramètres d'option acceptent ce qui suit:
 
     - ``model`` Le model à utiliser par défaut PaginatorHelper::defaultModel().
-    - ``escape`` Whether or not the text should be escaped. Set to false if your
-      content contains HTML.
+    - ``escape`` Si le contenu HTML doit être échappé ou pas. ``true``
+      par défaut.
 
 .. php:method:: last($last = 'last >>', $options = [])
 
@@ -333,15 +331,15 @@ Vérifier l'Etat de la Pagination
 
 .. php:method:: hasNext(string $model = null)
 
-    Retourne true si le résultat fourni n'est pas sur la dernière page.
+    Retourne ``true`` si le résultat fourni n'est pas sur la dernière page.
 
 .. php:method:: hasPrev(string $model = null)
 
-    Retourne true si le résultat fourni n'est pas sur la première page.
+    Retourne ``true`` si le résultat fourni n'est pas sur la première page.
 
 .. php:method:: hasPage(string $model = null, integer $page = 1)
 
-    Retourne true si l'ensemble de résultats fourni a le numéro de page fourni
+    Retourne ``true`` si l'ensemble de résultats fourni a le numéro de page fourni
     par ``$page``.
 
 Création d'un compteur de page
@@ -395,10 +393,6 @@ Modification des options que le Helper Paginator utilise
 
 .. php:method:: options($options = [])
 
-    :param mixed $options: Options par défaut pour les liens de pagination. Si
-       une chaîne est fournie - elle est utilisée comme id de l'élément DOM à
-       actualiser.
-
 Définit toutes les options pour le Helper Paginator Helper. Les options
 supportées sont:
 
@@ -428,8 +422,8 @@ supportées sont:
   PaginatorHelper fusionnera cela dans tous les paramètres passés et nommés.
   Ainsi vous n'aurez pas à le faire dans chacun des fichiers de vue.
 
-* ``escape`` Définit si le champ titre des liens doit être échappé HTML.
-  Par défaut à true.
+* ``escape`` Définit si le HTMl du champ titre des liens doit être échappé.
+  Par défaut à ``true``.
 
 * ``model`` Le nom du model en cours de pagination, par défaut à
   :php:meth:`PaginatorHelper::defaultModel()`.
@@ -441,13 +435,13 @@ C'est à vous de décider comment afficher les enregistrements à
 l'utilisateur, mais la plupart des fois, ce sera fait à l'intérieur des
 tables HTML. L'exemple ci-dessous suppose une présentation
 tabulaire, mais le Helper Paginator disponible dans les vues
-N'a pas toujours besoin d'être limité en tant que tel.
+n'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
 `PaginatorHelper <http://api.cakephp.org/3.0/class/paginator-helper>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
 offre également des fonctionnalités de tri qui peuvent être facilement
-intégrés dans vos en-têtes de colonne de table:
+intégrées dans vos en-têtes de colonne de table:
 
 .. code-block:: php
 
@@ -466,7 +460,7 @@ intégrés dans vos en-têtes de colonne de table:
     </table>
 
 Les liens en retour de la méthode ``sort()`` du ``PaginatorHelper``
-permettent au utilisateurs de cliquer sur les entêtes de table pour
+permettent aux utilisateurs de cliquer sur les entêtes de table pour
 faire basculer l'ordre de tri des données d'un champ donné.
 
 Il est aussi possible de trier une colonne basée sur des associations:
@@ -508,56 +502,15 @@ en utilisant des marqueurs spéciaux::
                  {{count}} total, starting on record {{start}}, ending on {{end}}'
     ]) ?>
 
-D'autres Méthodes
-=================
+Générer des Url de Pagination
+=============================
 
-.. php:method:: url(array $options = [], $model = null, $full = false)
+.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-    :param array $options: Tableau d'options Pagination/URL. Comme
-        utilisé dans les méthodes ``options()`` ou ``link()``.
-    :param string $model: Le model sur lequel paginer.
+Retourne par défault une chaine de l'URL de pagination complète pour utiliser
+dans contexte non-standard(ex. JavaScript).::
 
-    Par défaut retourne une chaîne URL complètement paginée à utiliser
-    dans des contextes non-standard (ex. JavaScript).::
-
-        echo $this->Paginator->url(['sort' => 'titre'], true);
-
-.. php:method:: defaultModel()
-
-    Retourne le model par défaut du jeu de pagination ou null
-    si la pagination n'est pas initialisée.
-
-.. php:method:: params(string $model = null)
-
-    Retourne les paramètres courants de la pagination du jeu
-    de résultat d'un model donné::
-
-        debug($this->Paginator->params());
-        /*
-        Array
-        (
-            [page] => 2
-            [current] => 2
-            [count] => 43
-            [prevPage] => 1
-            [nextPage] => 3
-            [pageCount] => 3
-            [order] =>
-            [limit] => 20
-            [sort] => null
-            [direction] = asc
-        )
-        */
-
-.. php:method:: param(string $key, string $model = null)
-
-    Récupère le paramètre de pagination spécifique à partir de l'ensemble de
-    résultats pour le model donné::
-
-        debug($this->Paginator->param('count'));
-        /*
-        (int)43
-        */
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. meta::
     :title lang=fr: PaginatorHelper
