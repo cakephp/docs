@@ -108,7 +108,7 @@ properties are passed to the log adapter's constructor as an array.::
 
 CakePHP requires that all logging adapters implement ``Psr\Log\LoggerInterface``.
 The class :php:class:`Cake\Log\Engine\BaseLog` is an easy way to satisfy the
-interface by only implementing the ``log()`` method.
+interface as it only requires you to implement the ``log()`` method.
 
 .. _file-log:
 
@@ -382,11 +382,11 @@ Using Monolog
 =============
 
 Monolog is a popular logger for PHP. Since it implements the same interfaces as
-the CakePHP loggers, it is easy to use it as the default logger in the
-framework.
+the CakePHP loggers, it is easy to use in your application as the default
+logger.
 
 After installing Monolog using composer, configure the logger using the
-``Log::config()`` method.
+``Log::config()`` method::
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
