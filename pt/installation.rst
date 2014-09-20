@@ -65,10 +65,12 @@ modelo, cache das `views`, e informações das sessões são alguns exemplos.
 Assim, tenha certeza que o diretório ``/app/tmp`` na sua instalação do cake
 permite a escrita pelo usuário do servidor web.
 
-Um problema comum é que ambos os diretórios e subdiretórios de app/tmp devem poder ser gravados pelo servidor web e pelo usuário da linha de comando.
-Em um sistema UNIX, se o seu usuário do servidor web é diferente do seu usuário da linha de comando, 
-você pode pode executar os seguintes comandos apenas uma vez em seu projeto para assegurar que
-as permissões serão configuradas apropriadamente::
+Um problema comum é que ambos os diretórios e subdiretórios de app/tmp devem
+poder ser gravados pelo servidor web e pelo usuário da linha de comando.  Em um
+sistema UNIX, se o seu usuário do servidor web é diferente do seu usuário da
+linha de comando, você pode pode executar os seguintes comandos apenas uma vez
+em seu projeto para assegurar que as permissões serão configuradas
+apropriadamente::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
@@ -123,18 +125,19 @@ Utilizando um pacote CakePHP para múltiplas Aplicações
 
 Se você está desenvolvendo uma série de aplicações, muitas vezes faz sentido que
 elas compartilhem o mesmo pacote. Existem algumas maneiras em que você pode
-alcançar este objetivo. Muitas vezes, o mais fácil é usar o PHP ``include_path``.
-Para começar, clone o CakePHP em um diretório. Para esse exemplo, nós vamos utilizar
-``/home/mark/projects``::
+alcançar este objetivo. Muitas vezes, o mais fácil é usar o PHP
+``include_path``.  Para começar, clone o CakePHP em um diretório. Para esse
+exemplo, nós vamos utilizar ``/home/mark/projects``::
 
     git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
-Isso ira clonar o CakePHP no seu diretório ``/home/mark/projects``. Se você não quiser
-utilizar git, você pode baixar um compilado e os próximos passos serão os
-mesmos. Em seguida você terá que localizar e modificar seu ``php.ini``. Em sistemas \*nix
-está localizado na maioria das vezes em ``/etc/php.ini``, mas utilizando ``php -i`` e procurando por 'Loaded
-Configuration File', você pode achar a localização atual. Uma vez que você achou o
-arquivo ini correto, modifique a configuração ``include_path`` para incluir
+Isso ira clonar o CakePHP no seu diretório ``/home/mark/projects``. Se você não
+quiser utilizar git, você pode baixar um compilado e os próximos passos serão os
+mesmos. Em seguida você terá que localizar e modificar seu ``php.ini``. Em
+sistemas \*nix está localizado na maioria das vezes em ``/etc/php.ini``, mas
+utilizando ``php -i`` e procurando por 'Loaded Configuration File', você pode
+achar a localização atual. Uma vez que você achou o arquivo ini correto,
+modifique a configuração ``include_path`` para incluir
 ``/home/mark/projects/cakephp/lib``. Um exemplo semelhamte deveria ser como::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
@@ -142,7 +145,7 @@ arquivo ini correto, modifique a configuração ``include_path`` para incluir
 Depois de reiniciar seu servidor web, você deve ver as mudanças refletidas em
 ``phpinfo()``.
 
-.. nota::
+.. note::
 
     Se você estiver no windows, separe os caminhos de inclusão com ; ao invés de :
 
@@ -157,7 +160,7 @@ Usando este método permite um total domínio para agir como uma única aplicaç
 CakePHP. Este exemplo irá ajudá-lo a instalar o Cake em qualquer lugar do seu
 sistema de arquivos e torná-lo disponível em http://www.example.com. Note que
 esta instalação pode requerer os privilégios para alteração do DocumentRoot do
-servidor apache. 
+servidor apache.
 
 Descompacte o conteúdo do arquivo do Cake em um diretório de sua escolha. Para
 fins deste exemplo, assumimos que você escolheu instalar o Cake em /cake\_install.
