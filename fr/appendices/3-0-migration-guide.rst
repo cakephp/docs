@@ -527,7 +527,7 @@ Controller
   extension de fichier de view autre que celle par défaut.
 - La propriété ``Controller::$Components`` a été retirée et remplacée par
   ``_components``. Si vous avez besoin de charger les components à la volée,
-  vous devez utiliser ``$this->addComponent()`` dans votre controller.
+  vous devez utiliser ``$this->loadComponent()`` dans votre controller.
 - La signature de :php:meth:`Cake\\Controller\\Controller::redirect()` a été
   changée en ``Controller::redirect(string|array $url, int $status = null)``.
   Le 3ème argument ``$exit`` a été retiré. La méthode ne peut plus envoyer

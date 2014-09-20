@@ -123,7 +123,7 @@ when you have multiple tables to translate and you want a cleaner separation
 of the data that is stored for each different table::
 
 
-    class ArticlesTable extends Table {
+    class Articles extends Table {
 
         public function initialize(array $config) {
             $this->addBehavior('Translate', [

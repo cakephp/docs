@@ -14,13 +14,13 @@ Loading Objects
 Objects can be loaded on-the-fly using add<registry-object>()
 Example::
 
-    $this->addComponent('DebugKit.Toolbar');
+    $this->loadComponent('Acl.Acl');
     $this->addHelper('Flash')
 
 Will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
 Configuration can also be set on-the-fly. Example::
 
-    $this->addComponent('Cookie', ['name' => 'sweet']);
+    $this->loadComponent('Cookie', ['name' => 'sweet']);
 
 Any keys & values provided will be passed to the Component's constructor.  The
 one exception to this rule is ``className``.  Classname is a special key that is
@@ -28,7 +28,7 @@ used to alias objects in a registry.  This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
-    $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
+    $this->Auth = $this->loadComponent('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
 Triggering Callbacks

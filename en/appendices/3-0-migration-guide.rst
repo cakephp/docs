@@ -473,7 +473,7 @@ Controller
   extension.
 - The ``Controller::$Components`` property has been removed and replaced with
   ``_components``. If you need to load components at runtime you should use
-  ``$this->addComponent()`` on your controller.
+  ``$this->loadComponent()`` on your controller.
 - The signature of :php:meth:`Cake\\Controller\\Controller::redirect()` has been
   changed to ``Controller::redirect(string|array $url, int $status = null)``.
   The 3rd argument ``$exit`` has been dropped. The method can no longer send
