@@ -5,6 +5,8 @@ Contents
    :maxdepth: 3
 
    index
+   installation
+   cakephp-overview
    contributing
 
 .. todolist::
