@@ -15,7 +15,7 @@ Note o botão “Improve this Doc” no canto superior direito; ele vai direcion
     **Leia a documentação em qualquer lugar**
 
     Consulte o cookbook CakePHP quase em qualquer lugar. Disponível como PDF e
-    EPUB, você pode lê-lo em mais dispositivos, tanto quanto offline.
+    EPUB, você pode lê-lo em diversos dispositivos, tanto quanto offline.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
