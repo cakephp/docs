@@ -74,7 +74,7 @@ vous pouvez aussi juste charger un tableau d'options::
     $email = new Email();
     $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-    //or in constructor::
+    //or dans le constructeur::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 Configurer les Transports
@@ -183,7 +183,8 @@ sont utilisées:
 - ``'transport'``: Nom du Transport. Regardez
   :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers del'email headers et le
-  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``
+  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``.
+- ``'helpers'``: Tableau de helpers utilisés dans le template email.
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``.
 
@@ -354,7 +355,7 @@ Créer des Transports Personnalisés
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
 systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout
-d'abord le fichier ``src/Lib/Network/Email/ExampleTransport.php`` (où
+d'abord le fichier ``src/Network/Email/ExampleTransport.php`` (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
@@ -363,14 +364,14 @@ ressembler à cela::
     class ExampleTransport extends AbstractTransport {
 
         public function send(Email $email) {
-            // magic inside!
+            // Magie à l'intérieur!
         }
 
     }
 
 Vous devez intégrer la méthode ``send(Email $Email)`` avec votre
 logique personnalisée. En option, vous pouvez intégrer la méthode
-``config($config)``. ``config()`` est appelé avant send() et vous permet
+``config($config)``. ``config()`` est appelée avant send() et vous permet
 d'accepter les configurations de l'utilisateur. Par défaut, cette méthode
 met la configuration dans l'attribut protégé ``$_config``.
 
