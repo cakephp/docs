@@ -75,7 +75,7 @@ CakePHP 的很多不同操作都要使用 ``app/tmp`` 目录，比如模型描�
 -  开发安装方式: 简单易行，应用程序的网址包含 CakePHP 的安装目录名，不是很安全。
 -  生产安装方式: 要求能够配置 web 服务器文档根目录，简洁网址，非常安全。
 -  高级安装方式: 通过一些配置，允许你把 CakePHP 的关键目录放在文件系统的不同位置，
-   可以让多个 CakePHP 应用程序共享一个 CakeHP 核心库目录。
+   可以让多个 CakePHP 应用程序共享一个 CakePHP 核心库目录。
 
 开发安装方式
 ============
@@ -115,7 +115,7 @@ CakePHP 应用程序。
 \*nix 系统中，这通常位于 ``/etc/php.ini`` ，不过，使用 ``php -i`` 并寻找 
 'Loaded Configuration File'，你就可以找到(该文件)实际的位置。一旦找到正确的 ini 
 文件，修改 ``include_path`` 设置使其包含 ``/home/mark/projects/cakephp/lib`` 。例
-如：
+如::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
