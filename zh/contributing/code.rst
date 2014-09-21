@@ -112,5 +112,5 @@
 
 
 .. meta::
-    :title lang=zh: Code
-    :keywords lang=zh: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
+    :title lang=zh_CN: Code
+    :keywords lang=zh_CN: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout

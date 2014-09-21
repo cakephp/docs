@@ -156,7 +156,7 @@
 
         更多内容在这里。
 
-    在其他地方你可以用``:ref:`标签名称```引用上面的小节。链接的文字可以是标签之后的标题。你也可以使用``:ref:`链接文字 <标签名称>```
+    在其他地方你可以用 ``:ref:`标签名称``` 引用上面的小节。链接的文字可以是标签之后的标题。你也可以使用 ``:ref:`链接文字 <标签名称>```
     的方式来提供自定义的链接文字。
 
 描述类和它们的内容
@@ -326,5 +326,5 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 
 
 .. meta::
-    :title lang=zh: Documentation
-    :keywords lang=zh: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
+    :title lang=zh_CN: Documentation
+    :keywords lang=zh_CN: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
