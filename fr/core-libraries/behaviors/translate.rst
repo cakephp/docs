@@ -241,7 +241,7 @@ surcharger certains champs dans de tels entities. Garder ceci à l'esprit, vous
 pouvez sauvegarder de façon intuitive les traductions pour une entity donnée.
 Par exemple, étant donné la configuration suivante::
 
-    class ArticlesTable extends Table {
+    class Articles extends Table {
         public function initialize(array $config) {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }

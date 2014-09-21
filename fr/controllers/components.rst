@@ -26,20 +26,22 @@ exemples :
 :doc:`/core-libraries/components/authentication` et
 :doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
-se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
-de vos controllers::
+se fait via ``loadComponent()`` dans la méthode ``initialize`` de votre
+Controller ou via le tableau ``$components``::
 
     class PostsController extends AppController {
-        public $components = [
-            'Auth' => [
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
                 'authorize' => ['controller'],
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
-            ],
-            'Cookie' => ['name' => 'CookieMonster']
-        ];
+            ]);
+            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+        }
 
-La portion de code précédente est un exemple de configuration d'un component
-avec le tableau ``$components``. Vous pouvez configurer les components à la
+    }
+
+Vous pouvez configurer les components à la
 volée en utilisant la méthode ``config()``. Souvent, ceci est fait dans la
 méthode ``beforeFilter()`` de votre controller. Ceci peut aussi être exprimé
 comme ceci::
@@ -74,11 +76,11 @@ avec une implémentation sur mesure::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController {
-        public $components = [
-            'Auth' => [
+        public function initialize() {
+            parent::initialize('Auth', [
                 'className' => 'MyAuth'
-            ]
-        ];
+            ]);
+        }
     }
 
     // src/Controller/Component/MyAuthComponent.php
@@ -189,31 +191,30 @@ d'après le component, à travers lequel nous pouvons accéder à une instance
 de celui-ci::
 
     /* Rend le nouveau component disponible par $this->Math
-    ainsi que le component standard $this->Session */
-    public $components = ['Math', 'Session'];;
-
-Les Components déclarés dans ``AppController`` seront fusionnés avec ceux
-déclarés dans vos autres controllers. Donc il n'y a pas besoin de re-déclarer
-le même component deux fois.
+    ainsi que le component standard $this->Csrf */
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math');
+        $this->loadComponent('Csrf');
+    }
 
 Quand vous incluez des Components dans un Controller, vous pouvez
 aussi déclarer un ensemble de paramètres qui seront passés au constructeur
 du Component. Ces paramètres peuvent alors être pris en charge par le
 Component::
 
-    public $components = [
-        'Math' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math', [
             'precision' => 2,
             'randomGenerator' => 'srand'
-        ],
-        'Session', 'Auth'
-    ];
+        ]);
+        $this->loadComponent('Csrf');
+    }
 
 L'exemple ci-dessus passerait le tableau contenant precision
 et randomGenerator comme second paramètre au
-``MathComponent::__construct()``. Par convention, si les clés du tableau
-correspondent aux propriétés publiques du component, les propriétés seront
-définies avec les valeurs de ces clés.
+``MathComponent::__construct()``.
 
 Utiliser d'autres Components dans votre Component
 -------------------------------------------------
@@ -227,7 +228,7 @@ variable ``$components``::
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
-        // Les autres components utilisés par votre component
+        // The other component your component uses
         public $components = ['Existing'];
 
         public function initialize(Controller $controller) {
@@ -278,7 +279,8 @@ Les Callbacks
 
 .. php:method:: initialize(Event $event)
 
-    Est appelée avant la méthode du controller beforeFilter.
+    Est appelée avant la méthode du controller beforeFilter, mais *après*
+    la méthode initialize() du controller.
 
 .. php:method:: startup(Event $event)
 

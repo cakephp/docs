@@ -42,8 +42,8 @@ Le Controller App
 
 Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
-elle-même la classe :php:class:`Controller` incluse dans la librairie du cœur
-de CakePHP. ``AppController`` est définie dans
+elle-même la classe :php:class:`Cake\\Controller\\Controller` incluse dans la
+librairie du cœur de CakePHP. ``AppController`` est définie dans
 ``/src/Controller/AppController.php`` comme ceci::
 
     namespace App\Controller;
@@ -58,27 +58,34 @@ disponibles dans tous les controllers de votre application. Les Components (que
 vous découvrirez plus loin) sont plus appropriés pour du code utilisé dans
 la plupart des controllers (mais pas nécessairement tous).
 
-Bien que les règles habituelles d'héritage de la programmation orientée objet
-soient appliquées, CakePHP exécute également un travail supplémentaire si des
-attributs spécifiques des controllers sont fournis, comme les
-components ou helpers utilisés par un controller. Dans ces situations, les
-valeurs des tableaux de ``AppController`` sont fusionnées avec les tableaux de
-la classe controller enfant. Les valeurs dans la classe enfant vont toujours
-surcharger celles dans ``AppController``.
+Vous pouvez utiliser ``AppController`` pour charger les components qui seront
+utilisés dans tous les controllers de votre application. CakePHP fournit
+une méthode ``initialize()`` qui est appelée à la fin du constructeur du
+Controller pour ce type d'utilisation::
 
-.. note::
+    namespace App\Controller;
 
-    CakePHP fusionne les variables suivantes de la classe ``AppController`` avec
-    celles des controllers de votre application:
+    use Cake\Controller\Controller;
 
-    -  :php:attr:`~Controller::$components`
-    -  :php:attr:`~Controller::$helpers`
+    class AppController extends Controller {
 
-N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la
-propriété :php:attr:`~Controller::$helpers` dans votre classe ``AppController``.
+        public function initialize() {
+            // Active toujours le component CSRF.
+            $this->loadComponent('Csrf');
+        }
 
-Pensez aussi à appeler les fonctions de rappel (callbacks) de AppController dans
-celles du controller enfant pour de meilleurs résultats::
+    }
+
+En plus de la méthode ``initialize()``, l'ancienne propriété ``$components``
+vous permettra aussi de déclarer les components qui doivent être chargés. Bien
+que les règles d'héritage en objet orienté s'appliquent, les components et
+les helpers utilisés par un controller sont traités spécialement. Dans ces
+cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec les
+tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
+seront toujours surcharger par celles de ``AppController.``
+
+Pensez aussi à appeler les fonctions de rappel (callbacks) de ``AppController``
+dans celles du controller enfant pour de meilleurs résultats::
 
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
@@ -88,9 +95,9 @@ Les paramètres de requête
 =========================
 
 Quand une requête est faîte dans une application CakePHP, Les classes
-:php:class:`Router` et :php:class:`Dispatcher` de CakePHP utilisent la
-:ref:`routes-configuration` pour trouver et créer le bon controller. La
-requête de données est encapsulée dans un objet request.
+:php:class:`Cake\\Routing\\Router` et :php:class:`Cake\\Routing\\Dispatcher` de
+CakePHP utilisent la :ref:`routes-configuration` pour trouver et créer le bon
+controller. La requête de données est encapsulée dans un objet request.
 CakePHP met toutes les informations importantes de la requête dans la
 propriété ``$this->request``. Consultez la section :ref:`cake-request`
 pour plus d'informations sur l'objet request de CakePHP.
@@ -130,25 +137,19 @@ Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
-Les actions du Controller utilisent généralement :php:meth:`~Controller::set()`
-pour créer un contexte que :php:class:`View` utilise pour rendre la vue. Du
+Les actions du Controller utilisent généralement ``Controller::set()``
+pour créer un contexte que ``View`` utilise pour afficher la vue. Du
 fait des conventions que CakePHP utilise, vous n'avez pas à créer et rendre
 la vue manuellement. Au lieu de ça, une fois qu'une action du controller est
 terminée, CakePHP va gérer le rendu et la livraison de la Vue.
 
-Si pour certaines raisons, vous voulez éviter le comportement par défaut, les
-deux techniques suivantes ne vont pas appliquer le comportement de rendu par
-défaut de la vue.
-
-* Si vous retournez une chaîne de caractères, ou un objet qui peut être
-  converti en une chaîne de caractères à partir d'une action du controller,
-  elle sera utilisée comme contenu de réponse.
-* Vous pouvez retourner un objet :php:class:`CakeResponse` avec la réponse
-  complètement créée.
+Si pour certaines raisons, vous voulez éviter le comportement par défaut, vous
+pouvez retourner un objet de :php:class:`Cake\\Network\\Response` de l'action
+avec la response complètement créée.
 
 Quand vous utilisez les méthodes du controller avec
 :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`, vous voudrez
-souvent retourner les données qui ne sont pas des chaînes de caractère. Si vous
+souvent retourner une instance de ``Response``. Si vous
 avez des méthodes du controller qui sont utilisées pour des requêtes web
 normales + requestAction, vous devrez vérifier le type de requête avant de
 retourner::
@@ -157,18 +158,16 @@ retourner::
         public function popular() {
             $popular = $this->Recipes->find('popular');
             if (!$this->request->is('requested')) {
-                return $popular;
+                $this->response->body(json_encode($popular));
+                return $this->response;
             }
             $this->set('popular', $popular);
         }
     }
 
 Le controller ci-dessus est un exemple montrant comment la méthode peut être
-utilisée avec :php:meth:`~Controller::requestAction()` et des requêtes normales.
-Retourner un tableau de données à une requête non-requestAction va entraîner
-des erreurs et devra être évité. Consultez la section sur
-:php:meth:`Cake\\Controller\\Controller::requestAction()` pour plus d'astuces
-sur l'utilisation de :php:meth:`~Controller::requestAction()`.
+utilisée avec :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
+et des requêtes normales.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
 application, nous couvrons certains des attributs et méthodes du coeur fournis
@@ -178,8 +177,6 @@ par les controllers de CakePHP.
 
 Request Life-cycle callbacks
 ============================
-
-.. php:class:: Controller
 
 Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
 (ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
@@ -211,23 +208,25 @@ ou juste après que les actions du controller ont été effectuées :
 En plus des callbacks des controllers, les :doc:`/controllers/components`
 fournissent aussi un ensemble similaire de callbacks.
 
-Interactions avec les vues
+Interactions avec les Vues
 --------------------------
 
 Les Controllers interagissent avec les vues de plusieurs façons.
 Premièrement, ils sont capables de passer des données aux vues, en utilisant
-:php:meth:`~Controller::set()`. Vous pouvez aussi décider quelle classe de vue
+``Controller::set()``. Vous pouvez aussi décider quelle classe de vue
 utiliser, et quel fichier de vue doit être rendu à partir du controller.
+
+.. _setting-view_variables:
 
 Définir les Variables de View
 -----------------------------
 
 .. php:method:: set(string $var, mixed $value)
 
-La méthode :php:meth:`~Controller::set()` est la voie principale utilisée
+La méthode ``Controller::set()`` est la principale façon utilisée
 pour transmettre des données de votre controller à votre vue. Une fois
-:php:meth:`~Controller::set()` utilisée, la variable de votre controller
-devient accessible par la vue::
+``Controller::set()`` utilisée, la variable de votre controller
+devient accessible dans la vue::
 
     // Dans un premier temps vous passez les données depuis le controller:
 
@@ -238,7 +237,7 @@ devient accessible par la vue::
 
     Vous avez sélectionné un glaçage <?= $couleur; ?> pour le gâteau.
 
-La méthode :php:meth:`~Controller::set()` peut également prendre un tableau
+La méthode ``Controller::set()`` peut également prendre un tableau
 associatif comme premier paramètre. Cela peut souvent être une manière
 rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
@@ -261,13 +260,13 @@ Rendre une View
 La méthode ``render()`` est automatiquement appelée à
 la fin de chaque action exécutée par le controller. Cette méthode exécute
 toute la logique liée à la présentation (en utilisant les variables
-transmises via la méthode :php:meth:`~Controller::set()`), place le contenu
-de la vue à l'intérieur de son :php:attr:`~View::$layout` et transmet le
+transmises via la méthode ``set()`), place le contenu
+de la vue à l'intérieur de son ``View::$layout`` et transmet le
 tout à l'utilisateur final.
 
 Le fichier de vue utilisé par défaut est déterminé par convention.
 Ainsi, si l'action ``search()`` de notre controller RecipesController
-est demandée, le fichier de vue situé dans /src/Template/Recipes/search.ctp
+est demandée, le fichier de vue situé dans ``src/Template/Recipes/search.ctp``
 sera utilisé::
 
     namespace App\Controller;
@@ -275,7 +274,7 @@ sera utilisé::
     class RecipesController extends AppController {
     // ...
         public function search() {
-            // Render the view in /src/Template/Recipes/search.ctp
+            // Render the view in src/Template/Recipes/search.ctp
             $this->render();
         }
     // ...
@@ -283,17 +282,17 @@ sera utilisé::
 
 Bien que CakePHP appelle cette fonction automatiquement à la
 fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
-à false), vous pouvez l'utiliser pour spécifier un fichier de vue
-alternatif en précisant le nom d'une action dans le controller, via
-le paramètre ``$action``.
+à ``false``), vous pouvez l'utiliser pour spécifier un fichier de vue
+alternatif en précisant le nom d'un fichier de vue en premier argument de la
+méthode ``render()``.
 
-Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
-vue ou un élément dont le chemin est relatif au dossier ``/src/Template``.
+Si ``$view`` commence par un '/' on suppose que c'est un fichier de
+vue ou un élément dont le chemin est relatif au dossier ``src/Template``.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 
-    // Rend un élément dans /Template/Elements/ajaxreturn.ctp
-    $this->render('/Elements/ajaxreturn');
+    // Rend un élément dans src/Template/Element/ajaxreturn.ctp
+    $this->render('/Element/ajaxreturn');
 
 Le paramètre ``$layout`` de ``render()`` vous permet de spécifier le layout
 de la vue qui est rendue.
@@ -315,7 +314,7 @@ directement ``render()``. Une fois que vous avez appelé
     }
 
 Cela rendrait ``src/Template/Posts/custom_file.ctp`` au lieu de
-``src/Template/Posts/mon_action.ctp``.
+``src/Template/Posts/my_action.ctp``.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -329,15 +328,15 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``/plugins/Users/src/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``plugins/Users/src/Template/UserDetails/custom_file.ctp`` 
 
 Rediriger vers d'Autres Pages
------------------------------
+=============================
 
 .. php:method:: redirect(string|array $url, integer $status)
 
 La méthode de contrôle de flux que vous utiliserez le plus souvent est
-:php:meth:`~Controller::redirect()`. Cette méthode prend son premier
+``Controller::redirect()``. Cette méthode prend son premier
 paramètre sous la forme d'une URL relative à votre application CakePHP.
 Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
 rediriger vers un écran affichant le reçu.::
@@ -367,7 +366,7 @@ Vous pouvez aussi passer des données à l'action::
 
     return $this->redirect(['action' => 'edit', $id]);
 
-Le second paramètre de la fonction :php:meth:`~Controller::redirect()`
+Le second paramètre de la fonction ``redirect()``
 vous permet de définir un code de statut HTTP accompagnant la redirection.
 Vous aurez peut-être besoin d'utiliser le code 301 (document
 déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
@@ -395,8 +394,8 @@ L'URL généré serait:
 
     http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
-Paginating a Model
-==================
+Paginer a Model
+===============
 
 .. php:method:: paginate()
 
@@ -453,6 +452,17 @@ pour charger les instances::
 
 Configurer les Components à Charger
 ===================================
+
+.. php:method:: loadComponent($name, $config = [])
+
+Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
+tout component que vous voulez charger et toute donnée de configuration
+pour eux::
+
+    public function intialize() {
+        $this->loadComponent('Csrf');
+        $this->loadComponent('Comments', Configure:read('Comments'));
+    }
 
 .. php:attr:: components
 
