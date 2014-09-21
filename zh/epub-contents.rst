@@ -4,6 +4,8 @@ Contents
 .. toctree::
    :maxdepth: 3
 
+   installation
+   cakephp-overview
    contributing
 
 .. todolist::

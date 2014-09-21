@@ -6,6 +6,7 @@ Contents
 
    index
    installation
+   cakephp-overview
    contributing
 
 .. todolist::
