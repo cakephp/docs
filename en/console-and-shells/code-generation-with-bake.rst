@@ -8,12 +8,13 @@ just talking skeleton classes: Bake can create a fully functional
 application in just a few minutes. In fact, Bake is a natural step
 to take once an application has been scaffolded.
 
-Depending on the configuration of your setup, you may have to set
-execute rights on the cake bash script or call it using ./cake
-bake. The cake console is run using the PHP CLI (command line
-interface). If you have problems running the script, ensure that
-you have the PHP CLI installed and that it has the proper modules
-enabled (eg: MySQL) Users also might have issues if the
+See :ref:`the-cakephp-console` section for instructions on how to use
+the CakePHP console in general. Depending on the configuration of your
+setup, you may have to set execute rights on the cake bash script or
+call it using ./Console/cake bake. The cake console is run using the
+PHP CLI (command line interface). If you have problems running the script,
+ensure that you have the PHP CLI installed and that it has the proper
+modules enabled (eg: MySQL) Users also might have issues if the
 database host is 'localhost' and should try '127.0.0.1' instead.
 This could cause issues with PHP CLI.
 

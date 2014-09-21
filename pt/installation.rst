@@ -11,7 +11,7 @@ Requisitos
 
 -  Servidor HTTP. Por exemplo: Apache. É preferível ter o mod\_rewrite
    habilitado mas não é uma exigência.
--  PHP 5.2.6 ou superior.
+-  PHP 5.2.8 ou superior.
 
 Tecnicamente não é exigido um banco de dados mas imaginamos que a maioria
 das aplicações irá utilizar um. O CakePHP suporta uma variedade deles:
@@ -65,6 +65,17 @@ modelo, cache das `views`, e informações das sessões são alguns exemplos.
 Assim, tenha certeza que o diretório ``/app/tmp`` na sua instalação do cake
 permite a escrita pelo usuário do servidor web.
 
+Um problema comum é que ambos os diretórios e subdiretórios de app/tmp devem
+poder ser gravados pelo servidor web e pelo usuário da linha de comando.  Em um
+sistema UNIX, se o seu usuário do servidor web é diferente do seu usuário da
+linha de comando, você pode pode executar os seguintes comandos apenas uma vez
+em seu projeto para assegurar que as permissões serão configuradas
+apropriadamente::
+
+   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+
 Configuração
 ============
 
@@ -92,22 +103,52 @@ exemplo que a sua raiz do documento é definido como /var/www/html.
 Descompacte o conteúdo do arquivo do Cake em ``/var/www/html``. Você agora tem
 uma pasta na raiz do seu servidor web com o nome da versão que você baixou (por
 exemplo, cake\2.0.0). Renomeie essa pasta para cake\_2\_0. Sua configuração de
-desenvolvimento será semelhante a esta em seu sistema de arquivos:
+desenvolvimento será semelhante a esta em seu sistema de arquivos::
 
--  /var/www/html
-
-  -  /cake\_2\_0
-
-     -  /app
-     -  /lib
-     -  /vendors
-     -  /plugins
-     -  /.htaccess
-     -  /index.php
-     -  /README
+    /var/www/html/
+        cake_2_0/
+            app/
+            lib/
+            plugins/
+            vendors/
+            .htaccess
+            index.php
+            README
 
 Se o seu servidor web está configurado corretamente, agora você deve encontrar
 sua aplicação Cake acessível em http://www.example.com/cake\_2\_0/.
+
+Utilizando um pacote CakePHP para múltiplas Aplicações
+------------------------------------------------------
+
+Se você está desenvolvendo uma série de aplicações, muitas vezes faz sentido que
+elas compartilhem o mesmo pacote. Existem algumas maneiras em que você pode
+alcançar este objetivo. Muitas vezes, o mais fácil é usar o PHP
+``include_path``.  Para começar, clone o CakePHP em um diretório. Para esse
+exemplo, nós vamos utilizar ``/home/mark/projects``::
+
+    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
+
+Isso ira clonar o CakePHP no seu diretório ``/home/mark/projects``. Se você não
+quiser utilizar git, você pode baixar um compilado e os próximos passos serão os
+mesmos. Em seguida você terá que localizar e modificar seu ``php.ini``. Em
+sistemas \*nix está localizado na maioria das vezes em ``/etc/php.ini``, mas
+utilizando ``php -i`` e procurando por 'Loaded Configuration File', você pode
+achar a localização atual. Uma vez que você achou o arquivo ini correto,
+modifique a configuração ``include_path`` para incluir
+``/home/mark/projects/cakephp/lib``. Um exemplo semelhamte deveria ser como::
+
+    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+
+Depois de reiniciar seu servidor web, você deve ver as mudanças refletidas em
+``phpinfo()``.
+
+.. note::
+
+    Se você estiver no windows, separe os caminhos de inclusão com ; ao invés de :
+
+Finalizando a definição do seu ``include_path`` suas aplicações devem estar prontas para
+encontrar o CakePHP automaticamente.
 
 Produção
 ========
@@ -117,24 +158,21 @@ Usando este método permite um total domínio para agir como uma única aplicaç
 CakePHP. Este exemplo irá ajudá-lo a instalar o Cake em qualquer lugar do seu
 sistema de arquivos e torná-lo disponível em http://www.example.com. Note que
 esta instalação pode requerer os privilégios para alteração do DocumentRoot do
-servidor apache. 
+servidor apache.
 
 Descompacte o conteúdo do arquivo do Cake em um diretório de sua escolha. Para
 fins deste exemplo, assumimos que você escolheu instalar o Cake em /cake\_install.
-Sua configuração de produção será semelhante a esta em seu sistema de arquivos:
+Sua configuração de produção será semelhante a esta em seu sistema de arquivos::
 
--  /cake\_install/
-   
-   -  /app
-      
-      -  /webroot (este diretório será usado na diretiva ``DocumentRoot``)
-
-   -  /lib
-   -  /vendors
-   -  /.htaccess
-   -  /index.php
-   -  /README
-
+    /cake_install/
+        app/
+            webroot/ (esse diretório está definido como diretiva ``DocumentRoot``)
+        lib/
+        plugins/
+        vendors/
+        .htaccess
+        index.php
+        README
 
 Desenvolvedores usando o Apache devem definir o ``DocumentRoot`` do domínio para::
 

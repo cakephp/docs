@@ -279,7 +279,7 @@ also easy. In your ``core.php`` make the session block look like the following::
     ));
 
     // Make sure to add a apc cache config
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Cache::config('apc', array('engine' => 'Apc'));
 
 Now our application will start using our custom session handler for reading &
 writing session data.

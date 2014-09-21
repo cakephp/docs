@@ -12,6 +12,8 @@ Some of these applications are used in concert with other CakePHP
 features (like ACL or i18n), and others are for general use in
 getting you working faster.
 
+.. _the-cakephp-console:
+
 The CakePHP console
 ===================
 

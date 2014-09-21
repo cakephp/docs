@@ -457,7 +457,7 @@ ini 指示子の設定
     ));
 
     // apc キャッシュ config を追加すること
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Cache::config('apc', array('engine' => 'Apc'));
 
 ..
   Now our application will start using our custom session handler for reading &
