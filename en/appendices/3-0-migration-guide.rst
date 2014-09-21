@@ -264,6 +264,9 @@ Log
 * The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now forwarded
   to the log engines' ``write()`` method in order to provide better context to
   the engines.
+* Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
+  Cake's own ``LogInterface``. In general, if you extended  :php:class:`Cake\\Log\\Engine\\BaseEngine`
+  you just need to rename the ``write()`` method to ``log()``.
 
 Routing
 =======
