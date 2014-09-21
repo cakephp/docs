@@ -172,6 +172,7 @@ directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
 
     /cake_install/
+        bin/
         config/
         logs/
         plugins/
