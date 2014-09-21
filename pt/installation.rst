@@ -105,17 +105,15 @@ uma pasta na raiz do seu servidor web com o nome da versão que você baixou (po
 exemplo, cake\2.0.0). Renomeie essa pasta para cake\_2\_0. Sua configuração de
 desenvolvimento será semelhante a esta em seu sistema de arquivos::
 
--  /var/www/html
-
-  -  /cake\_2\_0
-
-     -  /app
-     -  /lib
-     -  /vendors
-     -  /plugins
-     -  /.htaccess
-     -  /index.php
-     -  /README
+    /var/www/html/
+        cake_2_0/
+            app/
+            lib/
+            plugins/
+            vendors/
+            .htaccess
+            index.php
+            README
 
 Se o seu servidor web está configurado corretamente, agora você deve encontrar
 sua aplicação Cake acessível em http://www.example.com/cake\_2\_0/.
@@ -166,18 +164,15 @@ Descompacte o conteúdo do arquivo do Cake em um diretório de sua escolha. Para
 fins deste exemplo, assumimos que você escolheu instalar o Cake em /cake\_install.
 Sua configuração de produção será semelhante a esta em seu sistema de arquivos::
 
--  /cake\_install/
-   
-   -  /app
-      
-      -  /webroot (este diretório será usado na diretiva ``DocumentRoot``)
-
-   -  /lib
-   -  /vendors
-   -  /.htaccess
-   -  /index.php
-   -  /README
-
+    /cake_install/
+        app/
+            webroot/ (esse diretório está definido como diretiva ``DocumentRoot``)
+        lib/
+        plugins/
+        vendors/
+        .htaccess
+        index.php
+        README
 
 Desenvolvedores usando o Apache devem definir o ``DocumentRoot`` do domínio para::
 
