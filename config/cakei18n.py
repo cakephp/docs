@@ -20,13 +20,23 @@ def append_template_ctx(app, pagename, templatename, ctx, event_arg):
         dots = []
         for p in path.split(SEP):
             dots.append('..')
-        return SEP.join(dots) + SEP + lang + SEP + path + app.builder.link_suffix
+        tokens = lang.split('_')
+        if len(tokens) > 1:
+            folder = tokens[0]
+        else:
+            folder = lang
+        return SEP.join(dots) + SEP + folder + SEP + path + app.builder.link_suffix
 
     def has_lang(lang, path):
         """
         Check to see if a language file exists for a given path/RST doc.:
         """
-        possible = '..' + SEP + lang +  SEP + path + app.config.source_suffix
+        tokens = lang.split('_')
+        if len(tokens) > 1:
+            folder = tokens[0]
+        else:
+            folder = lang
+        possible = '..' + SEP + folder +  SEP + path + app.config.source_suffix
         full_path = os.path.realpath(os.path.join(os.getcwd(), possible))
 
         return os.path.isfile(full_path)
