@@ -20,7 +20,7 @@ Note o botão “Improve this Doc” no canto superior direito; ele vai direcion
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
-    - `CÓDIGO-FONTE ORIGINAL <http://github.com/cakephp/docs>`_
+    - `Código-fonte Original <http://github.com/cakephp/docs>`_
 
 Introdução
 ==========
