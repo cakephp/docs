@@ -262,7 +262,7 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
     Configure::write('Order.afterPlace', array(
         'email-sending' => 'EmailSender::sendBuyEmail',
         'inventory' => array($this->InventoryManager, 'decrement'),
-        'logger' => function($event) {
+        'logger' => function ($event) {
             // Anonymous function are only available in PHP 5.3+
             CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
         }
@@ -660,7 +660,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     $this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
 
     // Attaching an anonymous function (PHP 5.3+ only);
-    $myFunction = function($event) { ... };
+    $myFunction = function ($event) { ... };
     $this->getEventManager()->attach($myFunction, 'My.event');
 
     // Detaching the anonymous function

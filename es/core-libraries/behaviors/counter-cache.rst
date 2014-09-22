@@ -72,7 +72,7 @@ a callback method. This callable must return the count value to be stored::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
-            'rating_avg' => function($event, $entity, $table) {
+            'rating_avg' => function ($event, $entity, $table) {
                 return 4.5;
             }
         ]

@@ -1148,7 +1148,7 @@ articles quite easily::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
-    $reducer = function($output, $value) {
+    $reducer = function ($output, $value) {
         if (!in_array($value, $output)) {
             $output[] = $value;
         }

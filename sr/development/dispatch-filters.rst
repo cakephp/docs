@@ -62,7 +62,7 @@ be treated as a class name, not as a possible function name. This of course
 gives the ability to PHP 5.3 users to attach anonymous functions as filters::
 
     Configure::write('Dispatcher.filters', array(
-       'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
+       'my-filter' => array('callable' => function ($event) {...}, 'on' => 'before'),
        //more filters here
     ));
 
@@ -78,7 +78,7 @@ any other in the list, select lower priority numbers as needed::
 
     Configure::write('Dispatcher.filters', array(
        'my-filter' => array(
-            'callable' => function($event) {...},
+            'callable' => function ($event) {...},
             'on' => 'before',
             'priority' => 5
         ),
@@ -190,7 +190,7 @@ serve a list of posts in JSON format, we encourage you to do so using
 controllers and the :php:class:`JsonView` class, but let's imagine you need to save a
 few milliseconds for this mission-critical API endpoint::
 
-    $postsList = function($event) {
+    $postsList = function ($event) {
         if ($event->data['request']->url !== 'posts/recent.json') {
             return;
         }

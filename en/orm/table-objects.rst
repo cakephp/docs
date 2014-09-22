@@ -1043,7 +1043,7 @@ When using ``contain`` you are able to restrict the data returned by the
 associations and filter them by conditions::
 
     $query = $articles->find()->contain([
-        'Comments' => function($q) {
+        'Comments' => function ($q) {
            return $q
                 ->select(['body', 'author_id'])
                 ->where(['Comments.approved' => true]);
@@ -1055,7 +1055,7 @@ notation::
 
     $query = $articles->find()->contain([
         'Comments',
-        'Authors.Profiles' => function($q) {
+        'Authors.Profiles' => function ($q) {
             return $q->where(['Profiles.is_published' => true]);
         }
     ]);
@@ -1066,7 +1066,7 @@ use them inside ``contain``::
     // Bring all articles, but only bring the comments that are approved and
     // popular.
     $query = $articles->find()->contain([
-        'Comments' => function($q) {
+        'Comments' => function ($q) {
            return $q->find('approved')->find('popular');
         }
     ]);
@@ -1085,7 +1085,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
-            'queryBuilder' => function($q) {
+            'queryBuilder' => function ($q) {
                 return $q->where(...) // Full conditions for filtering
             }
         ]
@@ -1187,7 +1187,7 @@ articles quite easily::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
-    $reducer = function($output, $value) {
+    $reducer = function ($output, $value) {
         if (!in_array($value, $output)) {
             $output[] = $value;
         }

@@ -236,7 +236,7 @@ finder methods in 3.0::
 
         public function findFavorites(Query $query, array $options) {
             $for = $options['for'];
-            return $query->matching('Users.Favorites' => function($q) use ($for) {
+            return $query->matching('Users.Favorites' => function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
             });
         }
@@ -420,7 +420,7 @@ have multiple sets of rules::
                     'message' => 'Reviews must be 20 characters or more',
                 ])
                 ->add('user_id', 'exists', [
-                    'rule' => function($value, $context) {
+                    'rule' => function ($value, $context) {
                         $q = $this->association('Users')
                             ->find()
                             ->where(['id' => $value]);

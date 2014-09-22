@@ -396,7 +396,7 @@ arguments the first two params you used for attaching it::
     $this->eventManager()->detach([$this, 'doSomething'], 'My.event');
 
     // Attaching an anonymous function.
-    $myFunction = function($event) { ... };
+    $myFunction = function ($event) { ... };
     $this->eventManager()->attach($myFunction, 'My.event');
 
     // Detaching the anonymous function
