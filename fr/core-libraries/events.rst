@@ -432,7 +432,7 @@ les deux premiers paramètres que vous utilisiez pour l'attacher::
     $this->eventManager()->detach([$this, 'doSomething'], 'My.event');
 
     // Attacher une fonction anonyme.
-    $myFunction = function($event) { ... };
+    $myFunction = function ($event) { ... };
     $this->eventManager()->attach($myFunction, 'My.event');
 
     // Détacher la fonction anonyme

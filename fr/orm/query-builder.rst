@@ -836,7 +836,7 @@ The ``$mapper`` callable receives the current result from the database as first
 argument, the iteration key as second argument and finally it receives an
 instance of the ``MapReduce`` routine it is running::
 
-    $mapper = function($article, $key, $mapReduce) {
+    $mapper = function ($article, $key, $mapReduce) {
         $status = 'published';
         if ($article->isDraft() || $article->isInReview()) {
             $status = 'unpublished';
@@ -858,7 +858,7 @@ function, the instance of the ``MapReduce`` routine as the third parameter. In
 our example, we did not have to do any extra processing, so we just ``emit()``
 the final results::
 
-    $reducer = function($articles, $status, $mapReduce) {
+    $reducer = function ($articles, $status, $mapReduce) {
         $mapReduce->emit($articles, $status);
     };
 
@@ -885,7 +885,7 @@ just emitting the results.
 Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP. as usual we need a mapper function::
 
-    $mapper = function($article, $key, $mapReduce) {
+    $mapper = function ($article, $key, $mapReduce) {
         if (stripos('cakephp', $article['body']) === false) {
             return;
         }
@@ -901,7 +901,7 @@ then breaks the body into individual words. Each word will create its own
 ``bucket`` where each article id will be stored. Now let's reduce our results to
 only extract the count::
 
-    $reducer = function($occurrences, $word, $mapReduce) {
+    $reducer = function ($occurrences, $word, $mapReduce) {
         $mapReduce->emit(count($occurrences), $word);
     }
 
@@ -929,7 +929,7 @@ a ``friends`` table and you want to find "fake friends" in our database, or
 better said, people who do not follow each other. Let's start with our
 ``mapper`` function::
 
-    $mapper = function($rel, $key, $mr) {
+    $mapper = function ($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
         $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
     };
@@ -942,7 +942,7 @@ of followers per user::
     // repeated numbers mean that the relationship existed in both directions
     [2, 5, 100, 2, 4]
 
-    $reducer = function($friendsList, $user, $mr) {
+    $reducer = function ($friendsList, $user, $mr) {
         $friends = array_count_values($friendsList);
         foreach ($friends as $friend => $count) {
             if ($count < 2) {
@@ -1013,7 +1013,7 @@ a single query. For example, if we wanted to have the most commonly used words
 for articles, but then filter it to only return words that were mentioned more
 than 20 times across all articles::
 
-    $mapper = function($count, $word, $mr) {
+    $mapper = function ($count, $word, $mr) {
         if ($count > 20) {
             $mr->emit($count, $word);
         }

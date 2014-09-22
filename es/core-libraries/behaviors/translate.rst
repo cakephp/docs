@@ -221,7 +221,7 @@ It is also possible to find translations for any association in a single find
 operation::
 
     $article = $articles->find('translations')->contain([
-        'Categories' => function($query) {
+        'Categories' => function ($query) {
             return $query->find('translations');
         }
     ])->first();

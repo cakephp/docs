@@ -203,7 +203,7 @@ callable, including anonymous functions, as validation rules::
 
     // Use a closure
     $validator->add('title', 'custom', [
-        'rule' => function($value, $context) {
+        'rule' => function ($value, $context) {
             // Custom logic that returns true/false
         }
     ]);
@@ -232,7 +232,7 @@ not a particular rule should be applied::
 
     $validator->add('picture', 'file', [
         'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-        'on' => function($context) {
+        'on' => function ($context) {
             return !empty($context['data']['show_profile_picture']);
         }
     ]);

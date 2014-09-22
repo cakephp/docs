@@ -238,6 +238,18 @@ you should not typehint as ``array`` accepts only the primitive type::
     public function foo($array) {
     }
 
+Anonymous Functions (Closures)
+------------------------------
+
+Defining anonymous functions follows the `PSR-2
+<http://www.php-fig.org/psr/psr-2/>`_ coding style guide, where they are
+declared with a space after the `function` keyword, and a space before and after
+the `use` keyword::
+
+    $closure = function ($arg1, $arg2) use ($var1, $var2) {
+        // code
+    };
+
 Method Chaining
 ===============
 
