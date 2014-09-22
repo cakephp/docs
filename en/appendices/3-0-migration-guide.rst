@@ -272,7 +272,7 @@ Routing
 =======
 
 Named Parameters
------------------
+----------------
 
 Named parameters were removed in 3.0. Named parameters were added in 1.2.0 as
 a 'pretty' version of query string parameters.  While the visual benefit is

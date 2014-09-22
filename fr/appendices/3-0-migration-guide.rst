@@ -292,6 +292,10 @@ Log
 * Le logging scope passé à :php:meth:`Cake\\Log\\Log::write()` est maintenant
   transmis à la méthode ``write()`` du moteur de log afin de fournir un meilleur
   contexte aux moteurs.
+* Les moteurs de Log sont maintenant nécessaire pour intégrer
+  ``Psr\Log\LogInterface`` plutôt que la propre ``LogInterface`` de CakePHP. En
+  général, si vous étendez :php:class:`Cake\\Log\\Engine\\BaseEngine`
+  vous devez juste renommer la méthode ``write()`` en ``log()``.
 
 Routing
 =======

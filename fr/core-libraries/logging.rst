@@ -58,6 +58,18 @@ place, vous devez retirer la configuration et la re-créer en utilisant
 :php:meth:`Cake\\Log\\Log::drop()` et
 :php:meth:`Cake\\Log\\Log::config()`.
 
+Il est aussi possible de créer des loggers en fournissant une closure. C'est
+utile quand vous devez avoir un contôle complet sur la façon dont l'objet est
+construit. La closure doit retourner l'instance de logger construite. Par
+exemple::
+
+    Log::config('special', function() {
+        return new \Cake\Log\Engine\FileLog();
+    });
+
+Les loggers sont nécessaires pour intégrer l'interface
+``Psr\Log\LoggerInterface``.
+
 Créer des Adaptateurs de Log
 ----------------------------
 
@@ -72,14 +84,14 @@ configuré ``CakeLog`` va tenter de charger la configuration des flux de logs
 en appelant :php:meth:`Cake\\Log\\Log::config()`. La configuration de notre
 ``DatabaseLog`` pourrait ressembler à ceci::
 
-    // pour src/Log
+    // Pour src/Log
     Log::config('otherFile', [
         'className' => 'DatabaseLog',
         'model' => 'LogEntry',
         // ...
     ]);
 
-    // pour un plugin appelé LoggingPack
+    // Pour un plugin appelé LoggingPack
     Log::config('otherFile', [
         'className' => 'LoggingPack.DatabaseLog',
         'model' => 'LogEntry',
@@ -91,20 +103,22 @@ utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
 un tableau.::
 
-    use Cake\Log\LogInterface;
+    use Cake\Log\Engine\BaseLog;
 
-    class DatabaseLog implements LogInterface {
+    class DatabaseLog extends BaseLog {
         public function __construct($options = []) {
             // ...
         }
 
-        public function write($level, $message, $scope = []) {
-            // write to the database.
+        public function log($level, $message, array $context = []) {
+            // Write to the database.
         }
     }
 
 CakePHP a besoin que tous les adaptateurs de logging intégrent
-:php:class:`Cake\\Log\\LogInterface`.
+``Psr\Log\LoggerInterface``. La classe :php:class:`Cake\Log\Engine\BaseLog` est
+un moyen facile de satisfaire l'interface puisqu'elle nécessite seulement
+que vous intégriez la méthode ``log()``.
 
 .. _file-log:
 
@@ -289,8 +303,8 @@ configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
 Si un message de log est écrit vers un scope inconnu, les loggers qui gèrent
 ce niveau de message va journaliser le message. Par exemple::
 
-    // configurez tmp/logs/shops.log pour recevoir tous les types (niveaux de log), mais seulement
-    // ceux avec les scope `orders` et `payments`
+    // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
+    // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
         'className' => 'FileLog',
         'levels' => [],
@@ -298,7 +312,7 @@ ce niveau de message va journaliser le message. Par exemple::
         'file' => 'shops.log',
     ]);
 
-    // configurez tmp/logs/payments.log pour recevoir tous les types, mais seulement
+    // configurez logs/payments.log pour recevoir tous les types, mais seulement
     // ceux qui ont un scope `payments`
     Log::config('payments', [
         'className' => 'FileLog',
@@ -307,13 +321,17 @@ ce niveau de message va journaliser le message. Par exemple::
         'file' => 'payments.log',
     ]);
 
-    Log::warning('this gets written only to shops stream', 'orders');
-    Log::warning('this gets written to both shops and payments streams', 'payments');
-    Log::warning('this gets written to both shops and payments streams', 'unknown');
+    Log::warning('this gets written only to shops.log', ['scope' => ['orders']]);
+    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['payments']]);
+    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['unknown']]);
 
-Depuis 3.0 le scope de logging passé à :php:meth:`Cake\\Log\\Log::write()` est
-transferé à la méthode ``write()`` du moteur de log pour fournir un meilleur
-contexte aux moteurs.
+Les scopes peuvent aussi être passées en une chaine unique ou un tableau
+numériquement indexé.
+Notez que l'utilisation de ce formulaire va limiter la capacité de passer plus
+de données en contexte::
+
+    Log::warning('This is a warning', ['orders']);
+    Log::warning('This is a warning', 'payments');
 
 l'API de CakeLog
 ================
@@ -373,21 +391,6 @@ le niveau de log approprié.
 .. php:staticmethod:: debug($message, $scope = [])
 .. php:staticmethod:: info($message, $scope = [])
 
-Log Adapter Interface
-=====================
-
-.. php:interface:: LogInterface
-
-    Cette interface est nécessaire pour les adaptateurs de logging. Lors de la
-    création d'un nouvel adaptateur de logging, vous aurez besoin d'intégrer
-    cette interface.
-
-.. php:method:: write($level, $message, $scope = [])
-
-    Ecrit un message vers le système de stockage de log. ``$level`` va être
-    le niveau du message de log. ``$message`` va être le contenu du message de
-    log. ``$scope`` est le scope(s) dans lequel un message de log est créé.
-
 Logging Trait
 =============
 
@@ -401,6 +404,24 @@ Logging Trait
     les messages ERROR. Si ``$msg`` n'est pas une chaîne, elle sera convertie
     avec ``print_r`` avant d'être écrite.
 
+Utiliser Monolog
+================
+
+Monolog est un logger populaire pour PHP. Puisqu'il intègre les mêmes interfaces
+que les loggers de CakePHP, il est facile de l'utiliser dans votre application
+comme logger par défaut.
+
+Après avoir installé Monolog en utilisant composer, configurez le logger en
+utilisant la méthode ``Log::config()``::
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function() {
+        $log = new Logger('app');
+        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        return $log;
+    });
 
 .. meta::
     :title lang=fr: Journalisation (Logging)
