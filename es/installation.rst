@@ -173,6 +173,7 @@ en el directorio elegido - asumiremos que has escogido /cake_install - tu estruc
 de ficheros debe ser la siguiente::
 
     /cake_install/
+        bin/
         config/
         logs/
         plugins/

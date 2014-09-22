@@ -178,20 +178,22 @@ installation de production devrait ressembler à quelque chose comme ceci dans
 votre système de fichiers::
 
     /cake_install/
+        bin/
         config/
-        src/
+        logs/
         plugins/
+        src/
         tests/
         tmp/
-        logs/
         vendor/
         webroot/ (ce répertoire est défini comme DocumentRoot)
         .gitignore
         .htaccess
         .travis.yml
-        README.md
         composer.json
+        index.php
         phpunit.xml.dist
+        README.md
 
 Les développeurs utilisant Apache devraient régler la directive
 ``DocumentRoot`` pour le domaine à::
