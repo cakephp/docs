@@ -231,7 +231,7 @@ finder methods in 3.0::
 
         public function findFavorites(Query $query, array $options) {
             $for = $options['for'];
-            return $query->matching('Users.Favorites' => function ($q) use ($for) {
+            return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
             });
         }
