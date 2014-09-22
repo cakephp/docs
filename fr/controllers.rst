@@ -258,6 +258,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
         $this->set('title_for_layout', 'Ceci est la page titre');
 
+    Depuis 2.5 la variable $title_for_layout est dépréciée, utilisez les blocks de vues à la place.
 
 .. php:method:: render(string $action, string $layout, string $file)
 
