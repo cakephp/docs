@@ -55,6 +55,16 @@ Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
 :php:meth:`Cake\\Log\\Log::config()`.
 
+It is also possible to create loggers by providing a closure. This is useful
+when you need full control over how the logger object is built. The closure
+has to return the constructed logger instance. For example::
+
+    Log::config('special', function() {
+        return new \Cake\Log\Engine\FileLog();
+    });
+
+Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
+
 Creating Log Adapters
 ---------------------
 
@@ -84,20 +94,21 @@ When configuring a log adapter the ``className`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log adapter's constructor as an array.::
 
-    use Cake\Log\LogInterface;
+    use Cake\Log\Engine\BaseLog;
 
-    class DatabaseLog implements LogInterface {
+    class DatabaseLog extends BaseLog {
         public function __construct($options = []) {
             // ...
         }
 
-        public function write($level, $message, $scope = []) {
+        public function log($level, $message, array $context = []) {
             // Write to the database.
         }
     }
 
-CakePHP requires that all logging adapters implement
-:php:class:`Cake\\Log\\LogInterface`.
+CakePHP requires that all logging adapters implement ``Psr\Log\LoggerInterface``.
+The class :php:class:`Cake\Log\Engine\BaseLog` is an easy way to satisfy the
+interface as it only requires you to implement the ``log()`` method.
 
 .. _file-log:
 
@@ -287,13 +298,15 @@ message. For example::
         'file' => 'payments.log',
     ]);
 
-    Log::warning('this gets written only to shops.log', 'orders');
-    Log::warning('this gets written to both shops.log and payments.log', 'payments');
-    Log::warning('this gets written to both shops.log and payments.log', 'unknown');
+    Log::warning('this gets written only to shops.log', ['scope' => ['orders']]);
+    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['payments']]);
+    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['unknown']]);
 
-As of 3.0 the logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is
-forwarded to the log engines' ``write()`` method in order to provide better
-context to the engines.
+Scopes can also be passed as a single string or a numerically indexed array.
+Note that using this form will limit the ability to pass more data as context::
+
+    Log::warning('This is a warning', ['orders']);
+    Log::warning('This is a warning', 'payments');
 
 Log API
 =======
@@ -352,20 +365,6 @@ appropriate log level.
 .. php:staticmethod:: debug($message, $scope = [])
 .. php:staticmethod:: info($message, $scope = [])
 
-Log Adapter Interface
-=====================
-
-.. php:interface:: LogInterface
-
-    This interface is required for logging adapters. When creating a new logging
-    adapter you'll need to implement this interface.
-
-.. php:method:: write($level, $message, $scope = [])
-
-    Write a message to the log storage system. ``$level`` will be the level of
-    the log message.  ``$message`` will be the content of the log message.
-    ``$scope`` is the scope(s) a log message is being created in.
-
 Logging Trait
 =============
 
@@ -379,6 +378,24 @@ Logging Trait
     ERROR messages.  If ``$msg`` isn't isn't a string it will be converted with
     ``print_r`` before being logged.
 
+Using Monolog
+=============
+
+Monolog is a popular logger for PHP. Since it implements the same interfaces as
+the CakePHP loggers, it is easy to use in your application as the default
+logger.
+
+After installing Monolog using composer, configure the logger using the
+``Log::config()`` method::
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function() {
+        $log = new Logger('app');
+        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        return $log;
+    });
 
 .. meta::
     :title lang=en: Logging
