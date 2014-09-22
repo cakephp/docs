@@ -30,8 +30,8 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache si il est
   disponible.
 * ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.
-  Wincache a des fonctionnalités et des performances semblables à APC, mais
-  optimisé pour Windows et IIS.
+  Wincache offre des fonctionnalités et des performances semblables à APC, mais
+  optimisées pour Windows et IIS.
 * ``XcacheEngine`` Similaire à APC, `Xcache <http://xcache.lighttpd.net/>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcacheEngine`` Utilise l'extension `Memcache <http://php.net/memcache>`_.
