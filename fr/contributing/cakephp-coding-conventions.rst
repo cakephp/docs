@@ -232,8 +232,20 @@ le type primitif::
     public function foo($array) {
     }
 
+Fonctions Anonymes (Closures)
+-----------------------------
+
+La définition des fonctions anonymes suit le guide sur le style de codage
+`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_, où elles sont déclarées
+avec un espace après le mot clé `function`, et un espace avant et après
+le mot clé `use`::
+
+    $closure = function ($arg1, $arg2) use ($var1, $var2) {
+        // code
+    };
+
 Chaînage des Méthodes
----------------------
+=====================
 
 Le chaînage des méthodes doit avoir plusieurs méthodes réparties sur des
 lignes distinctes et indentées avec une tabulation::
