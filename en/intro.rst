@@ -115,46 +115,50 @@ we prepared with ``set()``.
 CakePHP Request Cycle
 =====================
 
-|Figure 1|
+Now that you are familiar with the different layers in CakePHP, lets review how
+a request cycle works in CakePHP:
 
-Figure: 1: A typical MVC Request in CakePHP
+.. figure:: /_static/img/typical-cake-request.png
+   :align: center
+   :alt: Flow diagram showing a typical CakePHP request
 
 The typical CakePHP request cycle starts with a user requesting a page or
-resource in your application. This request is first processed by a dispatcher
-which will select the correct controller object to handle it.
+resource in your application. At a high level each request goes through the
+following steps:
 
-Once the request arrives at the controller, it will communicate with the Model layer
-to process any data-fetching or -saving operation that might be needed.
-After this communication is over, the controller will proceed to delegate to the
-correct view object the task of generating output resulting from the data
-provided by the model.
+#. The request is first processed by your routes.
+#. After the request has been routed, the coa dispatcher which will select the
+   correct controller object to handle it.
+#. The controller's action is called and the controller interacts with the
+   required Models and Components.
+#. The controller delegates response creation to the View to generate the output
+   resulting from the model data.
 
-Finally, when this output is generated, it is immediately rendered to the user.
+Just the Start
+==============
 
-Almost every request to your application will follow this basic
-pattern. We'll add some details later on which are specific to
-CakePHP, so keep this in mind as we proceed.
+Hopefully this quick overview has piqued your interest. Some other great
+features in CakePHP are:
 
-Benefits
-========
+* A :doc:`caching </core-libraries/caching>` framework that integrates with
+  Memcache, Redis and other backends.
+* Powerful :doc:`code generation tools
+  </console-and-shells/code-generation-with-bake>` so you can hit the ground
+  running.
+* :doc:`Integrated testing framework </development/testing>` so you can ensure
+  your code works perfectly.
 
-Why use MVC? Because it is a tried and true software design pattern
-that turns an application into a maintainable, modular, rapidly
-developed package. Crafting application tasks into separate models,
-views, and controllers makes your application very light on its
-feet. New features are easily added, and new faces on old features
-are a snap. The modular and separate design also allows developers
-and designers to work simultaneously, including the ability to
-rapidly
-`prototype <http://en.wikipedia.org/wiki/Software_prototyping>`_.
-Separation also allows developers to make changes in one part of
-the application without affecting the others.
+The next obvious steps are to :doc:`download CakePHP </installation>`, read the
+:doc:`tutorial and build something awesome </tutorials-and-examples/blog/blog>`.
 
-If you've never built an application this way, it takes some time
-getting used to, but we're confident that once you've built your
-first application using CakePHP, you won't want to do it any other
-way.
+Additional Reading
+==================
 
+.. toctree::
+
+    /intro/where-to-get-help
+    /intro/conventions
+    /intro/cakephp-folder-structure
 
 .. meta::
     :title lang=en: Getting Started
