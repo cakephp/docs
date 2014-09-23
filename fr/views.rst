@@ -361,6 +361,12 @@ Le block ``content`` contient les contenus de la vue rendue.
 automatiquement, mais vous pouvez la surcharger en la configurant dans votre
 controller/view.
 
+.. note::
+
+    ``$title_for_layout`` est déprécié depuis 2.5, utilisez
+    ``$this->fetch('title')`` dans votre layout et
+    ``$this->assign('title', 'page title')`` à la place.
+
 Pour définir le titre pour le layout, il est plus facile de le faire dans le
 controller, en configurant la variable ``$title_for_layout``::
 

@@ -40,6 +40,18 @@ Ou::
         }
     }
 
+Longueur des lignes
+===================
+
+Il est recommandé de garder les lignes à une longueur d'environ 100 caractères
+pour une meilleur lisibilité du code.
+Les lignes ne doivent pas être plus longues que 120 caractères.
+
+En résumé:
+
+* 100 caractères est la limite soft.
+* 120 caractères est la limite hard.
+
 Structures de Contrôle
 ======================
 
