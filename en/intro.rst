@@ -129,7 +129,7 @@ resource in your application. At a high level each request goes through the
 following steps:
 
 #. The request is first processed by your routes.
-#. After the request has been routed, the coa dispatcher which will select the
+#. After the request has been routed, the dispatcher will select the
    correct controller object to handle it.
 #. The controller's action is called and the controller interacts with the
    required Models and Components.
