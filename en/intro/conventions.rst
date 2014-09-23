@@ -90,7 +90,7 @@ Field names with two or more words are underscored: first\_name.
 
 Foreign keys in hasMany, belongsTo or hasOne relationships are recognized by
 default as the (singular) name of the related table followed by \_id. So if
-a Bakers hasMany Cakes, the cakes table will refer to the bakers table via
+Bakers hasMany Cakes, the cakes table will refer to the bakers table via
 a baker\_id foreign key. For a table like category\_types whose name contains
 multiple words, the foreign key would be category\_type\_id.
 
