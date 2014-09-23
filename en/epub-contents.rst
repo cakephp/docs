@@ -6,7 +6,6 @@ Contents
 
    intro
    installation
-   cakephp-overview
    controllers
    views
    orm
