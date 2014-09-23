@@ -72,6 +72,12 @@ HttpSocket
 Utility
 =======
 
+CakeTime
+--------
+
+- ``CakeTime::timeAgoInWords()`` now supports ``strftime()`` compatible absolute
+  date formats. This helps make localizing formatted times easier.
+
 Hash
 ----
 
