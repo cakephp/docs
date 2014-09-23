@@ -23,7 +23,7 @@ Set up your user information with your name/handle and working email address::
 .. note::
 
     If you are new to Git, we highly recommend you to read the excellent and free
-    `ProGit <http://progit.org>`_ book.
+    `ProGit <http://git-scm.com/book/>`_ book.
 
 Get a clone of the CakePHP source code from GitHub:
 
@@ -129,8 +129,8 @@ branch, as you cannot edit it once the pull request is created.
 
     Remember that all code you contribute to CakePHP will be licensed under the
     MIT License, and the `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
-    will become the owner of any contributed code and all contributed code is
-    subject to the `Contributors license agreement <http://cakefoundation.org/pages/cla>`_.
+    will become the owner of any contributed code. Contributors should follow the 
+    `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.

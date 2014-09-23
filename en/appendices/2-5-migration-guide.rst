@@ -253,6 +253,8 @@ FormHelper
 - :php:meth:`FormHelper::end()` and :php:meth:`FormHelper::secure()` allow you
   to pass additional options that are turned into attributes on the generated
   hidden inputs. This is useful when you want to use the HTML5 ``form`` attribute.
+- :php:meth:`FormHelper::postLink()` now allows you to buffer the generated form
+  tag instead of returning it with the link. This helps avoiding nested form tags.
 
 PaginationHelper
 ----------------

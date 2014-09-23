@@ -194,7 +194,7 @@ les redirections ou les boucles compliquées. Vous pouvez aussi utiliser
 peut être appelée statiquement partout dans votre application où CakeLog
 a été chargée::
 
-    // dans app/Config/bootstrap.php
+    // Dans app/Config/bootstrap.php
     App::uses('CakeLog', 'Log');
 
     // N'importe où dans votre application
@@ -207,7 +207,7 @@ DebugKit est un plugin qui fournit un nombre de bons outiles de debug. Il
 fournit principalement une barre d'outils dans le HTML rendu, qui fournit
 une pléthore d'informations sur votre application et la requête courante.
 Vous pouvez télécharger
-`DebugKit <https://github.com/cakephp/debug_kit/tree/2.0>`_ sur github.
+`DebugKit <https://github.com/cakephp/debug_kit>`_ sur github.
 
 
 .. meta::

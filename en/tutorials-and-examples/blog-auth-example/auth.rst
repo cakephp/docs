@@ -15,7 +15,7 @@ First, let's create a new table in our blog database to hold our users' data::
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(50),
-        password VARCHAR(50),
+        password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
@@ -61,6 +61,8 @@ basic `baked` UsersController class using the code generation utilities bundled
 with CakePHP::
 
     // app/Controller/UsersController.php
+    App::uses('AppController', 'Controller');
+    
     class UsersController extends AppController {
 
         public function beforeFilter() {
@@ -177,6 +179,11 @@ file and add the following lines::
                     'controller' => 'pages', 
                     'action' => 'display', 
                     'home'
+                ),
+                'authenticate' => array(
+                    'Form' => array(
+                        'passwordHasher' => 'Blowfish'
+                    )
                 )
             )
         );
@@ -228,7 +235,7 @@ and add the following::
     // app/Model/User.php
     
     App::uses('AppModel', 'Model');
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
 
@@ -236,7 +243,7 @@ and add the following::
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher();
+            $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']
             );
@@ -246,8 +253,16 @@ and add the following::
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the SimplePasswordHasher class.
-We're just missing a template view file for the login function. Open up your ``app/View/Users/login.ctp`` file and add the following lines:
+.. note::
+
+    The BlowfishPasswordHasher uses a stronger hashing algorithm (bcrypt) than
+    SimplePasswordHasher (sha1) and provides per user salts. The
+    SimplePasswordHasher will be removed as of CakePHP version 3.0
+
+So, now every time a user is saved, the password is hashed using the
+BlowfishPasswordHasher class.  We're just missing a template view file for the
+login function. Open up your ``app/View/Users/login.ctp`` file and add the
+following lines:
 
 .. code-block:: php
 

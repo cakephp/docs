@@ -1531,6 +1531,13 @@ Creating buttons and submit elements
     .. versionchanged:: 2.3
         The ``method`` option was added.
 
+    .. versionchanged:: 2.5
+        The ``inline`` and ``block`` options were added. They allow buffering
+        the generated form tag, instead of returning with the link. This helps
+        avoiding nested form tags. Setting ``'inline' => true`` will add
+        the form tag to ``postLink`` content block or you can use option ``block``
+        to specify a custom block.
+
    .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
         in ``$options`` instead.

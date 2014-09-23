@@ -1041,14 +1041,14 @@ often results in fragile, difficult to maintain test suites that are prone to
 breaking. When writing functional tests using :php:class:`ControllerTestCase`
 you can inspect the rendered view content by setting the ``return`` option to
 'view'. While it is possible to test view content using ControllerTestCase,
-a more robust and maintable integration/view testing can be accomplished using
+more robust and maintainable integration/view testing can be accomplished using
 tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
 
 Testing Components
 ==================
 
-Lets pretend we have a component called PagematronComponent in our application.
+Let's pretend we have a component called PagematronComponent in our application.
 This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
 ``app/Controller/Component/PagematronComponent.php``::

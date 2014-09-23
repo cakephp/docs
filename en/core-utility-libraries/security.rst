@@ -14,7 +14,7 @@ Security API
 
     :rtype: string
 
-    Encrypts/Decrypts a text using the given key.::
+    Encrypts/Decrypts text using the given key::
 
         // Encrypt your text with my_key
         $secret = Security::cipher('hello world', 'my_key');
@@ -58,7 +58,7 @@ Security API
     :param string $hmacSalt: The salt to use for the HMAC process. Leave null to use Security.salt.
 
     Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
-    lots of variance in the data much like a good password. The returned result
+    lots of variance in the data, much like a good password. The returned result
     will be the encrypted value with an HMAC checksum.
 
     This method should **never** be used to store passwords.  Instead you should
@@ -100,7 +100,7 @@ Security API
 
     :rtype: string
 
-        Generate authorization hash.
+    Generate authorization hash.
 
 .. php:staticmethod:: getInstance( )
 
@@ -108,12 +108,11 @@ Security API
 
     Singleton implementation to get object instance.
 
-
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
     :rtype: string
 
-    Create a hash from string using given method. Fallback on next
+    Create a hash from a string using given method or fallback to next
     available method. If ``$salt`` is set to true, the applications salt
     value will be used::
 
@@ -126,7 +125,7 @@ Security API
         // Using the default hash algorithm
         $hash = Security::hash('CakePHP Framework');
 
-    ``hash()`` also supports more secure hashing algorithms like bcrypt. When
+    ``hash()`` also supports other secure hashing algorithms like bcrypt. When
     using bcrypt, you should be mindful of the slightly different usage.
     Creating an initial hash works the same as other algorithms::
 
@@ -142,8 +141,8 @@ Security API
 
     When comparing values hashed with bcrypt, the original hash should be
     provided as the ``$salt`` parameter. This allows bcrypt to reuse the same
-    cost and salt values, allowing the generated hash to end up with the same
-    resulting hash given the same input value.
+    cost and salt values, allowing the generated hash to return the same
+    resulting hash, given the same input value.
 
     .. versionchanged:: 2.3
         Support for bcrypt was added in 2.3

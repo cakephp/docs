@@ -128,36 +128,36 @@ Restricting cross controller communication
 
 .. php:attr:: allowedControllers
 
-    A List of Controller from which the actions of the current
-    controller are allowed to receive requests from. This can be used
-    to control cross controller requests.
+    A list of controllers which can send requests 
+    to this controller.
+    This can be used to control cross controller requests.
 
 .. php:attr:: allowedActions
 
-    Actions from which actions of the current controller are allowed to
-    receive requests. This can be used to control cross controller
-    requests.
+    A list of actions which are allowed to send requests
+    to this controller's actions.
+    This can be used to control cross controller requests.
 
 Form tampering prevention
 =========================
 
-By default ``SecurityComponent`` prevents users from tampering with forms in
+By default the ``SecurityComponent`` prevents users from tampering with forms in
 specific ways. The ``SecurityComponent`` will prevent the following things:
 
 * Unknown fields cannot be added to the form.
 * Fields cannot be removed from the form.
 * Values in hidden inputs cannot be modified.
 
-Preventing these forms of tampering is accomplished by working with FormHelper
+Preventing these types of tampering is accomplished by working with the FormHelper
 and tracking which fields are in a form. The values for hidden fields are
 tracked as well. All of this data is combined and turned into a hash. When
-a form is submitted, SecurityComponent will use the POST data to build the same
+a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
 structure and compare the hash.
 
 
 .. note::
 
-    SecurityComponent will **not** prevent select options from being
+    The SecurityComponent will **not** prevent select options from being
     added/changed. Nor will it prevent radio options from being added/changed.
 
 .. php:attr:: unlockedFields
@@ -190,7 +190,7 @@ CSRF configuration
 
 .. php:attr:: csrfUseOnce
 
-   Controls whether or not CSRF tokens are use and burn. Set to
+   Controls whether or not CSRF tokens are single use. Set to
    ``false`` to not generate new tokens on each request. One token
    will be reused until it expires. This reduces the chances of
    users getting invalid requests because of token consumption.
@@ -200,8 +200,8 @@ CSRF configuration
 Usage
 =====
 
-Using the security component is generally done in the controller
-beforeFilter(). You would specify the security restrictions you
+Using the security component is generally done in the controllers
+``beforeFilter()``. You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
     class WidgetController extends AppController {
@@ -247,8 +247,8 @@ require secure SSL requests::
     }
 
 This example would force all actions that had admin routing to
-require secure SSL requests. When the request is black holed, it
-will call the nominated forceSSL() callback which will redirect
+require SSL requests. When the request is black holed, it
+will call the nominated ``forceSSL()`` callback which will redirect
 non-secure requests to secure requests automatically.
 
 .. _security-csrf:
@@ -261,15 +261,15 @@ applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
 domains.
 
-Double submission and replay attacks are handled by the SecurityComponent's CSRF
-features. They work by adding a special token to each form request. This token
-once used cannot be used again. If an attempt is made to re-use an expired
+Double submission and replay attacks are handled by the ``SecurityComponent`` CSRF
+features. They work by adding a special token to each form request. This token,
+once used, cannot be used again. If an attempt is made to re-use an expired
 token the request will be blackholed.
 
 Using CSRF protection
 ---------------------
 
-Simply by adding the :php:class:`SecurityComponent` to your components array,
+Simply by adding the ``SecurityComponent`` to your components array,
 you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
 csrfExpires on the component.::
@@ -296,14 +296,14 @@ Handling missing or expired tokens
 ----------------------------------
 
 Missing or expired tokens are handled similar to other security violations. The
-SecurityComponent's blackHoleCallback will be called with a 'csrf' parameter.
+``SecurityComponent`` ``blackHoleCallback`` will be called with a 'csrf' parameter.
 This helps you filter out CSRF token failures, from other warnings.
 
 Using per-session tokens instead of one-time use tokens
 -------------------------------------------------------
 
 By default a new CSRF token is generated for each request, and each token can
-only be used once. If a token is used twice, it will be blackholed. Sometimes,
+only be used once. If a token is used twice, the request will be blackholed. Sometimes,
 this behaviour is not desirable, as it can create issues with single page
 applications. You can toggle on longer, multi-use tokens by setting
 ``csrfUseOnce`` to ``false``. This can be done in the components array, or in

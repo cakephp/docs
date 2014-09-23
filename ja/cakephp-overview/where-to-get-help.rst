@@ -95,3 +95,10 @@ Stackoverflow
 
 Stack Overflow の既存ユーザーが質問を見つけやすくするために、質問の際には
 ``cakephp`` タグと利用中のバージョンを明記して下さい。
+
+Where to get Help in your Language
+==================================
+
+French
+------
+- `French CakePHP Community <http://cakephp-fr.org>`_

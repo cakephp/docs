@@ -334,7 +334,7 @@ aussi facile. Dans votre ``core.php`` imitez le block de session ressemblant
     ));
 
     // Assurez vous d'ajouter une config de cache apc
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Cache::config('apc', array('engine' => 'Apc'));
 
 Maintenant notre application va commencer en utilisant notre gestionnaire
 de session personnalisé pour la lecture & l'écriture des données de session.

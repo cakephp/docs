@@ -125,7 +125,7 @@ You can introspect the configured streams with
 :php:meth:`CakeLog::configured()`. The return of ``configured()`` is an
 array of all the currently configured streams. You can remove
 streams using :php:meth:`CakeLog::drop()`. Once a log stream has been
-dropped it will no longer receive messages.
+dropped, it will no longer receive messages.
 
 
 Using the default FileLog class
@@ -234,7 +234,7 @@ All configured log streams are written to sequentially each time
 
 CakeLog does not auto-configure itself anymore. As a result log files will not be
 auto-created anymore if no stream is listening.
-Make sure you got at least one ``default`` stream set up if you want to
+Make sure you got at least one ``default`` stream set up, if you want to
 listen to all types and levels. Usually, you can just set the core ``FileLog`` class
 to output into ``app/tmp/logs/``::
 

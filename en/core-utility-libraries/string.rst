@@ -149,11 +149,12 @@ use the ``String`` class::
     :param int $length:  The length, in characters, beyond which the text should be truncated.
     :param array $options: An array of options to use.
 
-    If ``$text`` is longer than ``$length``, this method truncates it at ``$length`` and adds a prefix
-    consisting of ``'ellipsis'``, if defined. If ``'exact'``
-    is passed as ``false``, the truncation will occur at the first whitespace after the
-    point at which ``$length`` is exceeded. If ``'html'`` is passed as ``true``, HTML tags will be
-    respected and will not be cut off.
+    If ``$text`` is longer than ``$length`` characters, this method truncates it
+    at ``$length`` and adds a prefix consisting of ``'ellipsis'``, if defined.
+    If ``'exact'`` is passed as ``false``, the truncation will occur at the
+    first whitespace after the point at which ``$length`` is exceeded. If
+    ``'html'`` is passed as ``true``, HTML tags will be respected and will not
+    be cut off.
 
     ``$options`` is used to pass all extra parameters, and has the
     following possible keys by default, all of which are optional::
@@ -201,10 +202,10 @@ use the ``String`` class::
     :param int $length:  The length, in characters, beyond which the text should be truncated.
     :param array $options: An array of options to use.
 
-    If ``$text`` is longer than ``$length``, this method removes an initial substring with length
-    consisting of the difference and prepends a suffix
-    consisting of ``'ellipsis'``, if defined. If ``'exact'``
-    is passed as ``false``, the truncation will occur at the first whitespace prior to the
+    If ``$text`` is longer than ``$length`` characters, this method removes an initial
+    substring with length consisting of the difference and prepends a suffix
+    consisting of ``'ellipsis'``, if defined. If ``'exact'`` is passed as
+    ``false``, the truncation will occur at the first whitespace prior to the
     point at which truncation would otherwise take place.
 
     ``$options`` is used to pass all extra parameters, and has the

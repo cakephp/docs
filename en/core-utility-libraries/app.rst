@@ -340,7 +340,7 @@ To load **app/Vendor/geshi.php**::
 
 To load **app/Vendor/flickr/flickr.php**::
 
-    App::import('Vendor', 'flickr/flickr');
+    App::import('Vendor', 'flickr', array('file' => 'flickr/flickr.php'));
 
 To load **app/Vendor/some.name.php**::
 
@@ -361,6 +361,13 @@ To load **app/Plugin/Awesome/Vendor/services/well.named.php**::
         'Awesome.WellNamed',
         array('file' => 'services' . DS . 'well.named.php')
     );
+
+To load **app/Plugin/Awesome/Vendor/Folder/Foo.php**::
+
+    App::import(
+        'Vendor',
+        'Awesome.Foo',
+        array('file' => 'Folder' . DS . 'Foo.php'));
 
 It wouldn't make a difference if your vendor files are inside your /vendors
 directory. CakePHP will automatically find it.

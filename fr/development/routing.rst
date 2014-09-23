@@ -581,7 +581,7 @@ Les deux du dessus sortiraient::
     $this->passedArgs peut aussi contenir des paramètres nommés comme jun
     tableau mixte nommé avec des arguments passés.
 
-Quand vous générez des URLs, en utilisant un :term:`tableau routing`, vous
+Quand vous générez des URLs, en utilisant un :term:`tableau de routing`, vous
 ajoutez des arguments passés en valeurs sans clés de type chaîne dans le
 tableau::
 
@@ -652,7 +652,7 @@ utilisez :php:meth:`Router::connectNamed()`::
 Va s'assurer que votre chapitre et les paramètres de section inversent les
 routes correctement.
 
-Quand vous générez les URLs, en utilisant un :term:`tableau routing`, vous
+Quand vous générez les URLs, en utilisant un :term:`tableau de routing`, vous
 ajoutez les paramètres nommés en valeurs avec les clés en chaîne matchant
 le nom::
 
@@ -801,9 +801,9 @@ Routing inversé
 
 Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
 vous permettre de changer facilement votre structure d'URL sans avoir à
-modifier tout votre code. En utilisant
-:term:`routing arrays <tableau routing>` pour définir vos URLs, vous pouvez
-configurer les routes plus tard et les URLs générés vont automatiquement
+modifier tout votre code. En utilisant des
+:term:`tableaux de routing <tableau de routing>` pour définir vos URLs, vous
+pouvez configurer les routes plus tard et les URLs générés vont automatiquement
 être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
@@ -992,7 +992,7 @@ API du Router
 
     :param string $route: Un template de route qui dicte quels URLs devraient
         être redirigées.
-    :param mixed $url: Soit un :term:`tableau routing`, soit une chaîne URL
+    :param mixed $url: Soit un :term:`tableau de routing`, soit une chaîne URL
         pour la  destination du redirect.
     :param array $options: Un tableau d'options pour le redirect.
 
@@ -1023,9 +1023,9 @@ API du Router
 .. php:staticmethod:: url($url = null, $full = false)
 
     :param mixed $url: Une URL relative à Cake, comme "/products/edit/92" ou
-        "/presidents/elect/4" ou un :term:`tableau routing`.
-    :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera précédée
-        au résultat. Si un tableau accèpte les clés suivantes.
+        "/presidents/elect/4" ou un :term:`tableau de routing`.
+    :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera
+        précédée au résultat. Si un tableau accepte les clés suivantes.
         
            * escape - utilisé quand on fait les URLs intégrées dans les
              chaînes de requête HTML échappées '&'.
@@ -1102,7 +1102,7 @@ API du Router
 
 .. php:method:: match($url)
 
-    :param array $url: Le tableau de routing pour convertir dans une chaîne URL.
+    :param array $url: Le tableau de routing à convertir dans une chaîne URL.
     
     Tente de matcher un tableau URL. Si l'URL matche les paramètres de route
     et les configurations, alors retourne une chaîne URL générée. Si l'URL ne

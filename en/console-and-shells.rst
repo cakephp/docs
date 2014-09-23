@@ -12,6 +12,8 @@ Some of these applications are used in concert with other CakePHP
 features (like ACL or i18n), and others are for general use in
 getting you working faster.
 
+.. _the-cakephp-console:
+
 The CakePHP console
 ===================
 
@@ -23,7 +25,7 @@ for you.
 PHP provides a CLI client that makes interfacing with your
 file system and applications much smoother. The CakePHP console
 provides a framework for creating shell scripts. The Console uses a
-dispatcher-type setup to load a shell or task, and hand it its
+dispatcher-type setup to load a shell or task, and provide its
 parameters.
 
 .. note::

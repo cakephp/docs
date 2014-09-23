@@ -145,19 +145,21 @@ The required API for a CacheEngine is
     Write value for a key into cache, optional string $config
     specifies configuration name to write to.
 
-.. php:method:: read($key)
+.. php:method:: read($key, $config = 'default')
 
     :return: The cached value or false for failure.
 
-    Read a key from the cache. Return false to indicate
-    the entry has expired or does not exist.
+    Read a key from the cache, optional string $config
+    specifies configuration name to read from. Return false to
+    indicate the entry has expired or does not exist.
 
-.. php:method:: delete($key)
+.. php:method:: delete($key, $config = 'default')
 
     :return: Boolean true on success.
 
-    Delete a key from the cache. Return false to indicate that
-    the entry did not exist or could not be deleted.
+    Delete a key from the cache, optional string $config
+    specifies configuration name to delete from. Return false to
+    indicate that the entry did not exist or could not be deleted.
 
 .. php:method:: clear($check)
 
@@ -200,10 +202,10 @@ A method that uses Cache to store results could look like::
     class Post extends AppModel {
 
         public function newest() {
-            $result = Cache::read('newest_posts', 'longterm');
+            $result = Cache::read('newest_posts', 'long');
             if (!$result) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
-                Cache::write('newest_posts', $result, 'longterm');
+                Cache::write('newest_posts', $result, 'long');
             }
             return $result;
         }
@@ -214,7 +216,8 @@ a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
 As of 2.5 you can accomplish the above much more simply using
-:php:meth:`Cache::remember()`. Using the new method the above would look like::
+:php:meth:`Cache::remember()`. Assuming you are using PHP 5.3 or
+newer, using the ``remember()`` method would look like::
 
     class Post extends AppModel {
 
@@ -225,7 +228,7 @@ As of 2.5 you can accomplish the above much more simply using
                     'order' => 'Post.updated DESC',
                     'limit' => 10
                 ));
-            }, 'longterm');
+            }, 'long');
         }
     }
 
@@ -441,7 +444,8 @@ Cache API
     and the results stored in the cache at the provided key.
 
     For example, you often want to cache query results. You could use
-    ``remember()`` to make this simple. Assuming you were using PHP5.3 or more::
+    ``remember()`` to make this simple. Assuming you are using PHP 5.3 or
+    newer::
 
         class Articles extends AppModel {
             function all() {

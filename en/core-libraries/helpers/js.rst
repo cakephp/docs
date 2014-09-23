@@ -788,7 +788,7 @@ example we'll be using jQuery::
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make JavaScript enhanced links instead of plain HTML ones.
-To do so you use ``options()``::
+To do so, call the ``options()`` at the top of your view::
 
     $this->Paginator->options(array(
         'update' => '#content',
