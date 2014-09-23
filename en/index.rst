@@ -23,8 +23,14 @@ the documentation.
     - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
     - `Original Source <http://github.com/cakephp/docs>`_
 
-Getting Started
-===============
+Getting Help
+============
+
+If you're stuck, there are a number of places :doc:`you can get help
+</cakephp-overview/where-to-get-help>`.
+
+First Steps
+===========
 
 Learning a new framework can be intimidating and exciting at the same time. To
 help you along, we have created a cookbook packed with examples and recipies to
@@ -45,12 +51,6 @@ a CakePHP application:
   application needs.
 * :doc:`Models </orm>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
-
-Getting Help
-============
-
-If you're stuck, there are a number of places :doc:`you can get help
-</cakephp-overview/where-to-get-help>`.
 
 
 .. meta::
