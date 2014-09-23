@@ -27,7 +27,7 @@ Getting Help
 ============
 
 If you're stuck, there are a number of places :doc:`you can get help
-</cakephp-overview/where-to-get-help>`.
+</intro/where-to-get-help>`.
 
 First Steps
 ===========
@@ -41,8 +41,8 @@ CakePHP has to offer and how it works.
 After you've finished the Blog Tutorial, you can brush up on the key elements in
 a CakePHP application:
 
-* The :doc:`CakePHP request cycle </getting-started/a-typical-cakephp-request>`
-* The :doc:`conventions </getting-started/cakephp-conventions>` that CakePHP
+* The :ref:`CakePHP request cycle <request-cycle>`
+* The :doc:`conventions <intro/conventions>` that CakePHP
   uses.
 * :doc:`Controllers </controllers>` handle requests and co-ordinate your models
   and the responses your application creates.

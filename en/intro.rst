@@ -112,6 +112,8 @@ You may notice that we never explicitly rendered a view. CakePHP's conventions
 will take care of selecting the right view and rendering it with the view data
 we prepared with ``set()``.
 
+.. _request-cycle:
+
 CakePHP Request Cycle
 =====================
 
