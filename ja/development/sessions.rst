@@ -409,11 +409,8 @@ ini 指示子の設定
 
         // セッションへデータ書き込み
         public function write($id, $data) {
-            $result = Cache::write($id, $data, $this->cacheKey);
-            if ($result) {
-                return parent::write($id, $data);
-            }
-            return false;
+            Cache::write($id, $data, $this->cacheKey);
+            return parent::write($id, $data);
         }
 
         // セッションの破棄

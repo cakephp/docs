@@ -297,11 +297,8 @@ devrait ressembler à::
 
         // écrit les données dans la session.
         public function write($id, $data) {
-            $result = Cache::write($id, $data, $this->cacheKey);
-            if ($result) {
-                return parent::write($id, $data);
-            }
-            return false;
+            Cache::write($id, $data, $this->cacheKey);
+            return parent::write($id, $data);
         }
 
         // détruit une session.
