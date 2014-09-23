@@ -5,6 +5,7 @@ Contents
    :maxdepth: 3
 
    installation
+   getting-started
    cakephp-overview
    contributing
 

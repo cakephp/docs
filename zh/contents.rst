@@ -6,6 +6,7 @@ Contents
 
    index
    installation
+   getting-started
    cakephp-overview
    contributing
 
