@@ -157,6 +157,7 @@ Additional Reading
 ==================
 
 .. toctree::
+    :maxdepth: 1
 
     /intro/where-to-get-help
     /intro/conventions
