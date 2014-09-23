@@ -16,8 +16,8 @@ Conventions Over Configuration
 
 CakePHP provides a basic organizational structure that covers class names,
 filenames, database table names, and other conventions. While the conventions
-take some time, by following the conventions CakePHP provides you can avoid
-needless configuration and make a uniform application structure that makes
+take some time to learn, by following the conventions CakePHP provides you can
+avoid needless configuration and make a uniform application structure that makes
 working with various projects a breeze. The :doc:`conventions chapter
 </intro/conventions>` covers the various conventions that CakePHP uses.
 
