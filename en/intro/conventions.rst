@@ -3,16 +3,10 @@ CakePHP Conventions
 
 We are big fans of convention over configuration. While it takes a
 bit of time to learn CakePHP's conventions, you save time in the
-long run: by following convention, you get free functionality, and
-you free yourself from the maintenance nightmare of tracking config
-files. Convention also makes for a very uniform system development,
+long run. By following conventions, you get free functionality, and
+you liberate yourself from the maintenance nightmare of tracking config
+files. Conventions also make for a very uniform development experience,
 allowing other developers to jump in and help more easily.
-
-CakePHP's conventions have been distilled from years of web
-development experience and best practices. While we suggest you use
-these conventions while developing with CakePHP, we should mention
-that many of these tenets are easily overridden – something that is
-especially handy when working with legacy systems.
 
 Controller Conventions
 ======================
@@ -22,39 +16,10 @@ Controller class names are plural, CamelCased, and end in
 ``LatestArticlesController`` are both examples of conventional
 controller names.
 
-The first method you write for a controller might be the
-``index()`` method. When a request specifies a controller but not
-an action, the default CakePHP behavior is to execute the
-``index()`` method of that controller. For example, a request for
-http://www.example.com/apples/ maps to a call on the ``index()``
-method of the ``ApplesController``, whereas
-http://www.example.com/apples/view/ maps to a call on the
-``view()`` method of the ``ApplesController``.
-
-You can also change the visibility of controller methods in CakePHP
-by prefixing controller method names with underscores. If a
-controller method has been prefixed with an underscore, the method
-will not be accessible directly from the web but is available for
-internal use. For example::
-
-    class NewsController extends AppController {
-
-        public function latest() {
-            $this->_findNewArticles();
-        }
-
-        protected function _findNewArticles() {
-            // Logic to find latest news articles
-        }
-    }
-
-
-While the page http://www.example.com/news/latest/ would be
-accessible to the user as usual, someone trying to get to the page
-http://www.example.com/news/\_findNewArticles/ would get an error,
-because the method is preceded with an underscore. You can also use
-PHP's visibility keywords to indicate whether or not a method can be
-accessed from a URL. Non-public methods cannot be accessed.
+Public methods on Controllers are often exposed as 'actions' accessible through
+a web browser. For example the ``/articles/view`` maps to the ``view()`` method
+of the ``ArticlesController`` out of the box. Protected or private methods
+cannot be accessed with routing.
 
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,13 +32,12 @@ from http://example.com/apples.
 Multiple word controllers *can* be any 'inflected' form which
 equals the controller name so:
 
+*  /redApples
+*  /RedApples
+*  /Red\_apples
+*  /red\_apples
 
--  /redApples
--  /RedApples
--  /Red\_apples
--  /red\_apples
-
-will all resolve to the index of the RedApples controller. However,
+Will all resolve to the index of the RedApples controller. However,
 the convention is that your URLs are lowercase and underscored,
 therefore /red\_apples/go\_pick is the correct form to access the
 ``RedApplesController::go_pick`` action.
@@ -86,12 +50,9 @@ For more information on CakePHP URLs and parameter handling, see
 File and Class Name Conventions
 ===============================
 
-In general, filenames match the class names, which are
-CamelCased. So if you have a class **MyNiftyClass**, then in CakePHP,
-the file should be named **MyNiftyClass.php**. Below are
-examples of how to name the file for each of the different types of
-classes you would typically use in a CakePHP application:
-
+In general, filenames match the class names, and follow the PSR-0 or PSR-4
+standards for autoloading. The following are some examples of class names and
+their filenames:
 
 -  The Controller class **KissesAndHugsController** would be found
    in a file named **KissesAndHugsController.php**
@@ -108,7 +69,7 @@ classes you would typically use in a CakePHP application:
 -  The Helper class **BestEverHelper** would be found in a file
    named **BestEverHelper.php**
 
-Each file would be located in the appropriate folder in your app folder.
+Each file would be located in the appropriate folder/namespace in your app folder.
 
 Model and Database Conventions
 ==============================
@@ -125,20 +86,17 @@ You can use the utility library :php:class:`Cake\\Utility\\Inflector` to check
 the singular/plural of words. See the :doc:`/core-utility-libraries/inflector`
 for more information.
 
-Field names with two or more words are underscored:
-first\_name.
+Field names with two or more words are underscored: first\_name.
 
-Foreign keys in hasMany, belongsTo or hasOne relationships are
-recognized by default as the (singular) name of the related table
-followed by \_id. So if a Bakers hasMany Cakes, the cakes table will
-refer to the bakers table via a baker\_id foreign key. For a
-table like category\_types whose name contains multiple words,
-the foreign key would be category\_type\_id.
+Foreign keys in hasMany, belongsTo or hasOne relationships are recognized by
+default as the (singular) name of the related table followed by \_id. So if
+a Bakers hasMany Cakes, the cakes table will refer to the bakers table via
+a baker\_id foreign key. For a table like category\_types whose name contains
+multiple words, the foreign key would be category\_type\_id.
 
-Join tables, used in hasAndBelongsToMany (HABTM) relationships
-between models, should be named after the model tables they will
-join, arranged in alphabetical order (apples\_zebras rather than
-zebras\_apples).
+Join tables, used in BelongsToMany relationships between models, should be named
+after the model tables they will join, arranged in alphabetical order
+(apples\_zebras rather than zebras\_apples).
 
 View Conventions
 ================
@@ -146,10 +104,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-src/Template/People/get\_ready.ctp.
+``src/Template/People/get\_ready.ctp``.
 
 The basic pattern is
-src/Template/Controller/underscored\_function\_name.ctp.
+``src/Template/Controller/underscored\_function\_name.ctp``.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -157,11 +115,11 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at src/Model/Table/PeopleTable.php
--  Entity class: "Person", found at src/Model/Entity/Person.php
+-  Table class: "PeopleTable", found at ``src/Model/Table/PeopleTable.php``
+-  Entity class: "Person", found at ``src/Model/Entity/Person.php``
 -  Controller class: "PeopleController", found at
-   src/Controller/PeopleController.php
--  View template, found at src/Template/People/index.ctp
+   ``src/Controller/PeopleController.php``
+-  View template, found at ``src/Template/People/index.ctp``
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the ``index()`` function
@@ -171,9 +129,8 @@ database), and renders to a file. None of these relationships have
 been configured by any means other than by creating classes and
 files that you'd need to create anyway.
 
-Now that you've been introduced to CakePHP's fundamentals, you
-might try a run through the
-:doc:`/tutorials-and-examples/blog/blog` to see how things fit
+Now that you've been introduced to CakePHP's fundamentals, you might try a run
+through the :doc:`/tutorials-and-examples/blog/blog` to see how things fit
 together.
 
 

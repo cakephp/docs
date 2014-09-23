@@ -2,11 +2,16 @@ Contents
 ########
 
 .. toctree::
-   :maxdepth: 3
+   :hidden:
 
    index
+   topics
+
+.. toctree::
+   :maxdepth: 3
+
+   intro
    installation
-   getting-started
    cakephp-overview
    controllers
    views
