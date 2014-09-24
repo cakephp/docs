@@ -359,14 +359,14 @@ A la création d'une fixture, vous pouvez définir principalement deux choses:
 comment la table est créée (quels champs font parti de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
+Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 ``tests/Fixture`` avec le contenu suivant::
 
     namespace App\Test\Fixture;
 
     use Cake\Test\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
           // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
@@ -477,7 +477,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
         public $fields = [
             'id' => ['type' => 'integer'],
@@ -523,15 +523,15 @@ model existant ou d'une table existante.
 Commençons par un exemple. Imaginons que vous ayez un model nommé Article
 disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente
-(``tests/Fixture/ArticleFixture.php``) en ce qui suit::
+(``tests/Fixture/ArticlesFixture.php``) en ce qui suit::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles']
     }
 
 Si vous voulez utiliser une autre connection, utilisez::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
@@ -540,7 +540,7 @@ model/d'une table existante, mais vous avez vos enregistrements directement
 définis dans le fixture comme il a été montré dans la section précédente.
 Par exemple::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles'];
         public $records = [
             [
@@ -585,7 +585,7 @@ lancée contre elle. Pour charger les fixtures, vous définissez la propriété
 ``$fixtures`` dans votre model::
 
     class ArticleTest extends TestCase {
-        public $fixtures = ['app.article', 'app.comment'];
+        public $fixtures = ['app.articles', 'app.comments'];
     }
 
 Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
@@ -593,7 +593,7 @@ du répertoire de fixture de l'application. Vous pouvez aussi charger les
 fixtures à partir du coeur de CakePHP ou des plugins::
 
     class ArticlesTest extends TestCase {
-        public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
+        public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
     }
 
 Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
@@ -605,7 +605,7 @@ Vous pouvez contrôler quand vos fixtures sont chargés en configurant
 les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase {
-        public $fixtures = ['app.article', 'app.comment'];
+        public $fixtures = ['app.articles', 'app.comments'];
         public $autoFixtures = false;
 
         public function testMyFunction() {
@@ -620,7 +620,7 @@ sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
 la fixture::
 
     class ArticlesTest extends CakeTestCase {
-        public $fixtures = ['app.blog/article', 'app.blog/comment'];
+        public $fixtures = ['app.blog/articles', 'app.blog/comments'];
     }
 
 Dans l'exemple ci-dessus, les deux fixtures seront chargés à partir de
@@ -662,7 +662,7 @@ répertoire ``tests/TestCase/Model/Table``, avec les contenus suivants::
     use Cake\TestSuite\TestCase;
 
     class ArticleTest extends TestCase {
-        public $fixtures = ['app.article'];
+        public $fixtures = ['app.articles'];
     }
 
 Dans notre variable de cas de test ``$fixtures``, nous définissons l'ensemble
@@ -683,7 +683,7 @@ maintenant à ceci::
     use Cake\TestSuite\TestCase;
 
     class ArticleTest extends TestCase {
-        public $fixtures = ['app.article'];
+        public $fixtures = ['app.articles'];
 
         public function setUp() {
             parent::setUp();
@@ -789,7 +789,7 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
     use Cake\TestSuite\IntegrationTestCase;
 
     class ArticlesControllerTest extends IntegrationTestCase {
-        public $fixtures = ['app.article'];
+        public $fixtures = ['app.articles'];
 
         public function testIndex() {
             $this->get('/articles?page=1');
@@ -1170,7 +1170,7 @@ importez des classes. Ceci est un exemple d'un testcase pour le model
 ``BlogPost`` à partir du chapitre des plugins de ce manuel.
 Une différence par rapport aux autres test est dans la première
 ligne où 'Blog.BlogPost' est importé. Vous devrez aussi préfixer
-les fixtures de votre plugin avec ``plugin.blog.blog_post``::
+les fixtures de votre plugin avec ``plugin.blog.blog_posts``::
 
     namespace Blog\Test\TestCase\Model;
 
@@ -1180,7 +1180,7 @@ les fixtures de votre plugin avec ``plugin.blog.blog_post``::
     class BlogPostTest extends TestCase {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-        public $fixtures = ['plugin.blog.blog_post'];
+        public $fixtures = ['plugin.blog.blog_posts'];
         public $BlogPost;
 
         public function testSomething() {
