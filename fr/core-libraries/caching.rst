@@ -161,14 +161,14 @@ L'API requise pour CacheEngine est
     Écrit la valeur d'une clé dans le cache, la chaîne optionnelle $config
     spécifie le nom de la configuration à écrire.
 
-.. php:method:: read($key)
+.. php:method:: read($key, $config = 'default')
 
     :retourne: La valeur mise en cache ou false en cas d'échec.
 
     Lit une clé depuis le cache. Retourne false pour indiquer
     que l'entrée a expiré ou n'existe pas.
     
-.. php:method:: delete($key)
+.. php:method:: delete($key, $config = 'default')
 
     :retourne: Un booléen true en cas de succès.
 
