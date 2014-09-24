@@ -989,6 +989,15 @@ Testing
   If you find yourself in need of a way to run tests from a browser you should
   checkout `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. It
   offers many additional features over the old webrunner.
+- ``ControllerTestCase`` is deprecated and will be removed for CakePHP 3.0.0.
+  You should use the new :ref:`integration-testing` features instead.
+- The fixtures should now be referenced by plural form::
+
+    // Instead of
+    $fixtures = ['app.article'];
+
+    // You should use
+    $fixtures = ['app.articles'];
 
 Utility
 =======
@@ -1054,8 +1063,8 @@ Time
 - ``CakeTime::daysAsSql()`` has been removed.
 - ``CakeTime::fromString()`` has been removed.
 - ``CakeTime::gmt()`` has been removed.
-- ``CakeTime::toATOM()`` has been renamed to ``toATOMString``.
-- ``CakeTime::toRSS()`` has been renamed to ``toRSSString``.
+- ``CakeTime::toATOM()`` has been renamed to ``toAtomString``.
+- ``CakeTime::toRSS()`` has been renamed to ``toRssString``.
 - ``CakeTime::toUnix()`` has been renamed to ``toUnixString``.
 - ``CakeTime::wasYesterday()`` has been renamed to ``isYesterday`` to match the rest
   of the method naming.

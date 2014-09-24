@@ -1181,9 +1181,16 @@ Testing
   plusieurs fonctionnalités supplémentaires par rapport au vieil exécuteur via
   le navigateur.
 
-  ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
+- ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
   Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
   à la place.
+- Les fixtures doivent maintenant être reférencées sous leur forme plurielle::
+
+    // Au lieu de
+    $fixtures = ['app.article'];
+
+    // Vous devrez utiliser
+    $fixtures = ['app.articles'];
 
 Utility
 =======
@@ -1275,8 +1282,8 @@ Time
 - ``CakeTime::daysAsSql()`` a été retirée.
 - ``CakeTime::fromString()`` a été retirée.
 - ``CakeTime::gmt()`` a été retirée.
-- ``CakeTime::toATOM()`` a été renommée en ``toATOMString``.
-- ``CakeTime::toRSS()`` a été renommée en ``toATOMRSSString``.
+- ``CakeTime::toATOM()`` a été renommée en ``toAtomString``.
+- ``CakeTime::toRSS()`` a été renommée en ``toRssString``.
 - ``CakeTime::toUnix()`` a été renommée en ``toUnixString``.
 - ``CakeTime::wasYesterday()`` a été renommée en ``isYesterday`` pour
   correspondre aux autres noms de méthode.

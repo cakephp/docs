@@ -651,7 +651,7 @@ pour les choses sérieuses. Commencez votre propre projet et lisez le reste du
 :doc:`Cookbook </index>` et l'`API <http://api.cakephp.org>`_.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
-merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`
+merci de regarder la page :doc:`/intro/where-to-get-help`
 Bienvenue sur CakePHP !
 
 Prochaines lectures suggérées
