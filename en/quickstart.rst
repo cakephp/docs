@@ -1,5 +1,5 @@
-Writing Your First CakePHP App
-##############################
+Quick Start Guide
+#################
 
 The best way to experience and learn CakePHP is to sit down and build something.
 To start off we'll build a simple blog application.

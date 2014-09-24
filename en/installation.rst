@@ -192,6 +192,8 @@ the status of your current database connection.
 Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
+.. _url-rewriting:
+
 URL Rewriting
 =============
 
@@ -418,10 +420,24 @@ correctly.
 I Can't Use URL Rewriting
 -------------------------
 
-If you don't want to or can't use URL rewriting on your webserver,
-refer to the :ref:`core configuration <core-configuration-baseurl>`.
-If you want to use URL rewriting, see the dedicated section about the topic:
+If you don't want or can't get mod\_rewrite (or some other
+compatible module) up and running on your server, you'll need to
+use CakePHP's built in pretty URLs. In ``config/app.php``,
+uncomment the line that looks like::
 
+    'App' => [
+        // ...
+        // 'baseUrl' => env('SCRIPT_NAME'),
+    ]
+
+Also remove these .htaccess files::
+
+    /.htaccess
+    webroot/.htaccess
+
+This will make your URLs look like
+www.example.com/index.php/controllername/actionname/param rather
+than www.example.com/controllername/actionname/param.
 
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org
