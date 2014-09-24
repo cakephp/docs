@@ -3,60 +3,24 @@ Conventions de CakePHP
 
 Nous sommes de grands fans des conventions plutôt que de la configuration.
 Bien que cela réclame un peu de temps pour apprendre les conventions de
-CakePHP, à terme vous gagnerez du temps : en suivant les conventions,
+CakePHP, à terme vous gagnerez du temps. En suivant les conventions,
 vous aurez des fonctionnalités automatiques et vous vous libérerez du
-cauchemar de la maintenance par l'analyse des fichiers de configuration.
-Les conventions sont aussi là pour créer un environnement de développement
-uniforme, permettant à d'autres développeurs de s'investir dans le code
-plus facilement.
+cauchemar de la maintenance du suivi des fichiers de configuration.
+Les conventions créent un environnement de développement uniforme,
+permettant à d'autres développeurs de s'investir dans le code plus
+facilement.
 
-Les conventions de CakePHP ont été créées à partir de nombreuses années
-d'expérience et de bonnes pratiques dans le développement Web. Alors
-que nous vous conseillons d'utiliser ces conventions lors de vos
-développements CakePHP, nous devons mentionner que la plupart de ces
-principes sont facilement contournables - ce qui est particulièrement
-utile lorsque vous travaillez avec d'anciennes applications.
-
-Les conventions des Controllers
+Les Conventions des Controllers
 ===============================
 
 Les noms des classes de controller sont au pluriel, en CamelCase et
 se terminent par ``Controller``. ``PeopleController`` et
 ``LatestArticlesController`` sont des exemples respectant cette convention.
 
-La première méthode que vous écrivez pour un controller doit être
-``index()``. Lorsqu'une requête pointe vers un controller sans action, le
-comportement par défaut de CakePHP est d'exécuter la fonction ``index()``
-de ce controller. Ainsi, la requête http://www.exemple.com/apples/ renvoie
-à la fonction ``index()`` de ``ApplesController``, alors que
-http://www.exemple.com/apples/view renvoie vers la fonction ``view()`` de
-``ApplesController``.
-
-Vous pouvez aussi changer la visibilité des méthodes des controllers
-dans CakePHP en préfixant les noms de méthode des controllers avec des
-underscores. Si une méthode du controller a été préfixée avec un
-underscore, la méthode ne sera pas accessible directement à partir du web
-mais sera disponible pour une utilisation interne. Par exemple::
-
-    class NewsController extends AppController {
-    
-        public function latest() {
-            $this->_findNewArticles();
-        }
-        
-        protected function _findNewArticles() {
-            // Logique pour trouver les derniers articles de nouvelles
-        }
-    }
-    
-
-Alors que la page http://www.exemple.com/news/latest/ est accessible
-pour l'utilisateur, quelqu'un qui essaie d'aller sur la page
-http://www.example.com/news/\_findNewArticles/ aura une erreur
-car la méthode est précédée d'un underscore. Vous pouvez aussi utiliser les
-mots-clés de visibilité de PHP pour indiquer si la méthode peut ou non être
-accessible à partir d'une URL. Les méthodes non-publiques ne sont pas
-accessibles.
+les méthodes publiques des controller sont souvent exposées comme des 'actions'
+accessibles via un navigateur web. Par exemple ``/articles/view`` correspond à
+la méthode ``view()`` de ``ArticlesController`` sans rien modifier. Les méthodes
+privées ou protéges ne peuvent pas être accédées avec le routing.
 
 Considérations concernant les URLs et les Noms des Controllers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,12 +33,12 @@ l'adresse http://exemple.com/apples.
 Les controllers avec plusieurs mots *peuvent* être de forme 'inflecté' qui
 correspondent au nom du controller:
 
--  /redApples
--  /RedApples
--  /Red\_apples
--  /red\_apples
+*  /redApples
+*  /RedApples
+*  /Red\_apples
+*  /red\_apples
 
-iront tous vers l'index du controller RedApples. Cependant,
+Pointeront tous vers l'index du controller RedApples. Cependant,
 la convention est que vos URLs soient en minuscules et avec des underscores,
 c'est pourquoi /red\_apples/go\_pick est la forme correcte pour
 accéder à l'action ``RedApplesController::go_pick``.
@@ -87,12 +51,9 @@ allez voir :ref:`routes-configuration`.
 Conventions des Fichiers et des Noms de Classe
 ==============================================
 
-En général, les noms de fichiers correspondent aux noms des classes
-écrits en CamelCase. Donc si vous avez
-une classe **MaChouetteClasse**, alors dans Cake, le fichier devra être nommé
-**MaChouetteClasse.php**. Voici des exemples de la manière dont on nomme les
-fichiers, pour chacun des différents types de classes que vous utiliseriez
-habituellement dans une application CakePHP :
+En général, les noms de fichiers correspondent aux noms des classes et suivent
+les standards PSR-0 et PSR-4 pour l'autoloading (chargement automatique). Voici
+quelques exemples de noms de classes et de fichiers:
 
 -  La classe controller **BisousEtCalinsController** devra se trouver dans un
    fichier nommé **BisousEtCalinsController.php**.
@@ -109,7 +70,8 @@ habituellement dans une application CakePHP :
 -  La classe Helper (Assistant) **LeMeilleurQuiSoitHelper** devra se trouver
    dans un fichier nommé **LeMeilleurQuiSoitHelper.php**.
 
-Chaque fichier sera situé dans le répertoire approprié dans votre dossier app.
+Chaque fichier sera situé dans le répertoire/namespace approprié dans le
+dossier de votreapplication.
 
 Conventions pour les Models et les Bases de Données
 ===================================================
@@ -136,27 +98,26 @@ Les noms des champs avec deux mots ou plus doivent être avec des underscores
 comme ici : first\_name.
 
 Les clés étrangères des relations hasMany, belongsTo ou hasOne sont reconnues
-par défaut grâce au nom (singulier) du model associé, suivi de \_id. Donc,
-si un Cuisinier hasMany Cake, la table "cakes" se référera à un cuisinier de la
-table cuisiniers via une clé étrangère cuisinier\_id. Pour une table avec
+par défaut grâce au nom (singulier) de la table associée, suivi de \_id. Donc,
+si Cuisiniers hasMany Cakes, la table "cakes" se référera à la table
+"cuisiniers"via une clé étrangère cuisinier\_id. Pour une table avec
 un nom de plusieurs mots comme "type\_categories", la clé étrangère sera
 type\_categorie\_id.
 
-Les tables de jointure utilisées dans les relations hasAndBelongsToMany
-(HABTM) entre models doivent être nommées d'après le nom des tables des
-models qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt
-que "zebres\_pommes").
+Les tables de jointure utilisées dans les relations BelongsToMany entre models
+doivent être nommées d'après le nom des tables qu'elles unissent, dans l'ordre
+alphabétique ("pommes\_zebres" plutôt que "zebres\_pommes").
 
-Conventions des vues
-====================
+Conventions des Views
+=====================
 
 Les fichiers de template de vue sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
-de vue dans : /src/Template/People/soyez\_pret.ctp.
+de vue dans ``/src/Template/People/soyez\_pret.ctp``.
 
 Le schéma classique est
-/src/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp.
+``src/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp``.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -164,11 +125,11 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
 -  Nom de la table de la base de données: "people"
--  Classe Table: "PeopleTable" se trouvant dans /src/Model/Table/PeopleTable.php
--  Classe Entity: "Person" se trouvant dans /src/Model/Entity/Person.php
+-  Classe Table: "PeopleTable" se trouvant dans ``src/Model/Table/PeopleTable.php``
+-  Classe Entity: "Person" se trouvant dans ``src/Model/Entity/Person.php``
 -  Classe Controller: "PeopleController" se trouvant dans
-   /src/Controller/PeopleController.php
--  Template de View se trouvant dans /src/Template/People/index.ctp
+   ``src/Controller/PeopleController.php``
+-  Template de View se trouvant dans ``src/Template/People/index.ctp``
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/personnes/ sera liée à un appel à la fonction ``index()`` du
@@ -179,9 +140,9 @@ configurée par rien d'autre que la création des classes et des fichiers dont
 vous aviez besoin de toute façon.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
-essayer de dérouler le tutoriel du Blog CakePHP
-:doc:`/tutorials-and-examples/blog/blog` pour voir comment les choses
-s'articulent.
+essayer de dérouler 
+:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/blog/blog>` pour
+voir comment les choses s'articulent.
 
 
 .. meta::

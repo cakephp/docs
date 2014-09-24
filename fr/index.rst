@@ -20,8 +20,14 @@ la documentation.
     - `EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
     - `Source originale <http://github.com/cakephp/docs>`_.
 
-Mise en route
-=============
+Obtenir de l'Aide
+=================
+
+Si vous êtes bloqué, il y a plein d'endroits :doc:`où vous pouvez obtenir de
+l'aide </intro/where-to-get-help>`.
+
+Premiers Pas
+============
 
 Apprendre un nouveau framework peut être intimidant et excitant en même temps.
 Pour vous aider, nous avons créé un cookbook avec des exemples et des recettes
@@ -32,8 +38,8 @@ un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
 Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
 d'une application CakePHP:
 
-* Le :doc:`cycle de requête de CakePHP </getting-started/a-typical-cakephp-request>`
-* Les :doc:`conventions </getting-started/cakephp-conventions>` que CakePHP
+* Le :ref:`cycle de requête de CakePHP <request-cycle>`
+* Les :ref:`conventions <intro/conventions>` que CakePHP
   utilise.
 * Les :doc:`Controllers </controllers>` gèrent les requêtes et coordonnent vos
   models et les réponses que votre application créé.
@@ -42,12 +48,6 @@ d'une application CakePHP:
   JSON et les autres sorties dont votre application a besoin.
 * Les :doc:`Models </orm>` sont les ingrédients clé dans toute application. Ils
   gèrent la validation et la logique du domaine de votre application.
-
-Obtenir de l'Aide
-=================
-
-Si vous êtes bloqué, voici une :doc:`liste qui vous aidera
-</cakephp-overview/where-to-get-help>`.
 
 
 .. meta::

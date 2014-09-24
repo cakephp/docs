@@ -4,9 +4,8 @@ Contenu
 .. toctree::
    :maxdepth: 3
 
+   intro
    installation
-   getting-started
-   cakephp-overview
    controllers
    views
    orm
