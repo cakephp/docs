@@ -84,7 +84,7 @@ l'utilisent::
 
 
 La couche View fournit un certain nombre d'extensions tels que
-:ref:`les Elements <view-elements>` et les :doc:`Cells </view/cells>` pour vous
+:ref:`les Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
 permettre de ré-utiliser facilement votre logique de présentation.
 
 La couche Vue n'est pas seulement limitée au HTML ou à la répresentation en
