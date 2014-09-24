@@ -17,10 +17,10 @@ Les noms des classes de controller sont au pluriel, en CamelCase et
 se terminent par ``Controller``. ``PeopleController`` et
 ``LatestArticlesController`` sont des exemples respectant cette convention.
 
-les méthodes publiques des controller sont souvent exposées comme des 'actions'
+les méthodes publiques des controllers sont souvent exposées comme des 'actions'
 accessibles via un navigateur web. Par exemple ``/articles/view`` correspond à
 la méthode ``view()`` de ``ArticlesController`` sans rien modifier. Les méthodes
-privées ou protéges ne peuvent pas être accédées avec le routing.
+privées ou protégées ne peuvent pas être accédées avec le routing.
 
 Considérations concernant les URLs et les Noms des Controllers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,7 +71,7 @@ quelques exemples de noms de classes et de fichiers:
    dans un fichier nommé **LeMeilleurQuiSoitHelper.php**.
 
 Chaque fichier sera situé dans le répertoire/namespace approprié dans le
-dossier de votreapplication.
+dossier de votre application.
 
 Conventions pour les Models et les Bases de Données
 ===================================================

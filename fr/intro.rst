@@ -33,12 +33,12 @@ selon des concepts significatifs pour votre application. Cela inclut le
 traitement, la validation, l'association et beaucoup d'autres tâches
 concernant la manipulation des données.
 
-Dans le cas d'un réseau social, la couche Model s'occuperai des tâches telles
+Dans le cas d'un réseau social, la couche Model s'occuperait des tâches telles
 que sauvegarder les données utilisateur, sauvegarder les associations d'amis,
 enregistrer et récupérer les photos des utilisateurs, trouver des suggestions
 de nouveaux amis, etc ...
 Tandis que les objets Models seront "Friend", "User", "Comment", "Photo".
-Si nnous voulions charger des données depuis notre table ``users``, nous
+Si nous voulions charger des données depuis notre table ``users``, nous
 pourrions faire::
 
     use Cake\ORM\TableRegistry;
@@ -52,7 +52,7 @@ pourrions faire::
 Vous remarquerez peut-être que nous n'avons pas eu à écrire de code avant que
 nous puissions commencer à travailler avec nos données. En utilisant les
 conventions, CakePHP utilisera des classes standards pour les classes table
-et entity qui n'ont pas ecncore été définiées.
+et entity qui n'ont pas encore été définies.
 
 Si nous voulions créer un nouvel utilisateur et l'enregistrer (avec validation),
 nous ferions ceci::
@@ -83,7 +83,7 @@ l'utilisent::
     <?php endforeach; ?>
 
 
-La couche View fournit un certain nombre de points d'extension tel que
+La couche View fournit un certain nombre d'extensions tels que
 :ref:`les Elements <view-elements>` et les :doc:`Cells </view/cells>` pour vous
 permettre de ré-utiliser facilement votre logique de présentation.
 
@@ -105,7 +105,7 @@ aux bonnes personnes. Il attend des requêtes des clients, vérifie leur validit
 selon l'authentification et les règles d'autorisation, délègue la récupération
 et le traitement des données à la couche Model, puis sélectionne les types de
 présentation acceptés par client pour finalement déléguer le processus 
-de rendu à la couche View. UN example de controller d'enregistrement
+de rendu à la couche View. Un example de controller d'enregistrement
 d'utilisateur serait::
 
     public function add() {
@@ -115,13 +115,13 @@ d'utilisateur serait::
             if ($this->Users->save($user, ['validate' => 'registration'])) {
                 $this->Flash->success(__('Vous êtes maintenant enregistré.'));
             } else {
-                $this->Flash->error(__('il y a eu un problème.'));
+                $this->Flash->error(__('Il y a eu un problème.'));
             }
         }
         $this->set('user', $user);
     }
 
-Notez que nous n'avons jamais explicitement rendu dee vue . Les conventions de
+Notez que nous n'avons jamais explicitement rendu de vue. Les conventions de
 CakePHP prendront soin de sélectionner la bonne vue et de la rendre à la vue
 avec les données préparées avec ``set()``.
 
@@ -141,18 +141,18 @@ Le cycle d'une requête CakePHP typique débute avec une requête utilisateur
 qui demande une page ou une ressource de votre application. À haut niveau
 chaque requête passe par les étapes suivantes:
 
-#. La reqête est d'abord aiguillées par les routes.
-#. Après que la requête ait été routée, le dispatcher va sélectionner le bon
+#. La requête est d'abord aiguillée par les routes.
+#. Après que la requête a été routée, le dispatcher va sélectionner le bon
    objet controller pour la traiter.
 #. L'action du controller est appellée et le controller interragit avec les
    Models et Components nécessaires.
 #. Le controller delègue la création de la response à la View générer le
-   résultat obtenu à partir des données de modèle.
+   résultat obtenu à partir des données de model.
 
 Que le Début
 ============
 
-Espérons que ce bref aperçu a éveillé votre intérêt. Queqlues autres grandes 
+Espérons que ce bref aperçu ait éveillé votre intérêt. Queqlues autres grandes 
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` framework qui s'intègre
