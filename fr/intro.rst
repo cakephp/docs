@@ -75,7 +75,7 @@ Par exemple, la view pourrait utiliser les données du model pour rendre une
 page HTML les contenant ou un résultat au format XML pour que d'autres
 l'utilisent::
 
-    // Dans u nfichier view, nous rendrons un 'element' pour chaque utlisateur (user).
+    // Dans un fichier view, nous afficherons un 'element' pour chaque utilisateur (user).
     <?php foreach ($users as $user): ?>
         <div class="user">
             <?= $this->element('user', ['user' => $user]) ?>
@@ -131,7 +131,7 @@ Cycle de Requête CakePHP
 ========================
 
 Maintenant que vous êtes familier avec les différentes couches de CakePHP,
-voyons comment fonctionne le cycle d'une requête CakePHP::
+voyons comment fonctionne le cycle d'une requête CakePHP:
 
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
@@ -152,7 +152,7 @@ chaque requête passe par les étapes suivantes:
 Que le Début
 ============
 
-Espérons que ce bref aperçu ait éveillé votre intérêt. Queqlues autres grandes 
+Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres grandes 
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` framework qui s'intègre
@@ -179,4 +179,4 @@ Lectures Complémentaires
 
 .. meta::
     :title lang=fr: Pour Commencer
-    :keywords lang=en: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :keywords lang=fr: structure de dossier,noms de table,requête initiale,table base de données,structure organisationnelle,rst,noms de fichiers,conventions,mvc,page web,sit
