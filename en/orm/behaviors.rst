@@ -161,15 +161,15 @@ The above code shows a few interesting features of behaviors:
 - Behaviors can define a default configuration property. This property is merged
   with the overrides when a behavior is attached to the table.
 
-To prevent the saving to continue stop event propagation in your callback::
+To prevent the saving from continuing simply stop event propagation in your callback::
 
-        public function beforeSave(Event $event, Entity $entity) {
-            if (...) {
-           	    $event->stopPropagation();
-           	    return;
-            }
-            // ...
+    public function beforeSave(Event $event, Entity $entity) {
+        if (...) {
+            $event->stopPropagation();
+            return;
         }
+        $this->slug($entity);
+    }
 
 Defining Finders
 ----------------
