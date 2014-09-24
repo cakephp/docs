@@ -23,7 +23,7 @@ Configure suas informações pessoais com seu nome e e-mail::
 .. note::
 
     Se você é novo com Git, é recomendável que você leia o excelente e gratuito
-    `ProGit <http://progit.org>`_ book.
+    `ProGit <http://git-scm.com/book/>`_ book.
 
 Faça o clone do código do CakePHP diretamente do github:
 
