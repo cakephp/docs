@@ -1,25 +1,24 @@
 Installation
 ############
 
-CakePHP is fast and easy to install. The minimum requirements are a
-web server and a copy of CakePHP, that's it! While this manual focuses
-primarily on setting up on Apache (because it's the most commonly used),
-you can configure CakePHP to run on a variety of web servers such as
-nginx, LightHTTPD, or Microsoft IIS.
+CakePHP is simple and easy to install. The minimum requirements are a
+web server and a copy of CakePHP, that's it! While this chapter focuses
+primarily on setting up on Apache (because it's simple to install and setup),
+CakePHP will run on a variety of web servers such as nginx, LightHTTPD, or
+Microsoft IIS.
 
 Requirements
 ============
 
-- HTTP Server. For example: Apache. mod\_rewrite is preferred, but
+- HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP 5.4.19 or greater.
+- PHP 5.4.16 or greater.
 - mbstring extension
 - mcrypt extension
 - intl extension
 
-Technically a database engine isn't required, but we imagine that
-most applications will utilize one. CakePHP supports a variety of
-database storage engines:
+While a database engine isn't required, we imagine that most applications will
+utilize one. CakePHP supports a variety of database storage engines:
 
 -  MySQL (5.1.10 or greater)
 -  PostgreSQL
@@ -30,15 +29,6 @@ database storage engines:
 
     All built-in drivers require PDO. You should make sure you have the
     correct PDO extensions installed.
-
-License
-=======
-
-CakePHP is licensed under the
-`MIT license <http://www.opensource.org/licenses/mit-license.php>`_. This means
-that you are free to modify, distribute and republish the source code on the
-condition that the copyright notices are left intact. You are also free to
-incorporate CakePHP into any commercial or closed source application.
 
 Installing CakePHP
 ===================
@@ -58,7 +48,7 @@ Or, you can download ``composer.phar`` from the
 For Windows systems, you can download Composer's Windows installer
 `here <https://github.com/composer/windows-setup/releases/>`__.  Further
 instructions for Composer's Windows installer can be found within the README
-`here <https://github.com/composer/windows-setup>`__.
+`here <https://github.com/composer/windows-setup>`_.
 
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
@@ -84,7 +74,7 @@ If you want to keep current with the latest changes in CakePHP you can
 add the following to your application's ``composer.json``::
 
     "require": {
-        "cakephp/cakephp": "dev-<branch>"
+        "cakephp/cakephp": "3.0.*-dev"
     }
 
 Where ``<branch>`` is the branch name you want to follow. Each time you run
@@ -116,33 +106,20 @@ ensure that permissions will be setup properly::
    setfacl -R -m u:${HTTPDUSER}:rwx logs
    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
-Setup
-=====
+Development Server
+==================
 
-Setting up CakePHP can be as simple as slapping it in your web
-server's document root, or as complex and flexible as you wish.
-This section will cover the two main installation types for
-CakePHP: development and production.
-
--  Development: easy to get going, URLs for the application include
-   the CakePHP installation directory name, and less secure.
--  Production: Requires the ability to configure the web server's
-   document root, clean URLs, very secure.
-
-Development
-===========
-
-A development installation is the fastest method to setup CakePHP.
-In this example, we will be using CakePHP's console to run PHP's built-in
-web server which will make your application available at
-``http://host:port``. From the app directory, execute::
+A development installation is the fastest method to setup CakePHP.  In this
+example, we will be using CakePHP's console to run PHP's built-in web server
+which will make your application available at ``http://host:port``. From the app
+directory, execute::
 
     bin/cake server
 
-By default, without any arguments provided, this will serve your application
-at ``http://localhost:8765/``.
+By default, without any arguments provided, this will serve your application at
+``http://localhost:8765/``.
 
-If you have something conflicting with ``localhost`` or ``port 8765``, you can
+If you have something conflicting with ``localhost`` or port ``8765``, you can
 tell the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments::
 
@@ -155,8 +132,13 @@ configure a web server.
 
 .. warning::
 
-    The development server should *never* be used in a production environment. It
-    is only intended as a basic development server.
+    The development server should *never* be used in a production environment.
+    It is only intended as a basic development server.
+
+If you'd prefer to use a real webserver, you should be able to move your CakePHP
+install (including the hidden files) inside your webserver's document root. You
+should then be able to point your web-browser at the directory you moved the
+files into and see your application in action.
 
 Production
 ==========
@@ -197,15 +179,6 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your CakePHP application accessible at http://www.example.com.
 
-URL Rewriting
-=============
-
-If you want to use URL rewriting, see the dedicated section about the topic:
-
-.. toctree::
-    :maxdepth: 1
-
-    installation/url-rewriting
 
 Fire It Up
 ==========
@@ -218,6 +191,16 @@ the status of your current database connection.
 
 Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
+
+URL Rewriting
+=============
+
+If you want to use URL rewriting, see the dedicated section about the topic:
+
+.. toctree::
+    :maxdepth: 1
+
+    installation/url-rewriting
 
 
 .. _GitHub: http://github.com/cakephp/cakephp
