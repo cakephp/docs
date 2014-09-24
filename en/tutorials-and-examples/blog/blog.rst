@@ -84,7 +84,7 @@ completed, your directory setup should look something like the following::
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
-:doc:`/getting-started/cakephp-folder-structure` section.
+:doc:`/intro/cakephp-folder-structure` section.
 
 Directory Permissions on tmp and logs
 =====================================
@@ -140,12 +140,12 @@ SQL statements into your database::
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
-:doc:`/getting-started/cakephp-conventions`), you'll be able to take
+:doc:`/intro/conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
 CakePHP is flexible enough to accommodate even inconsistent legacy
 database schemas, but adhering to the conventions will save you time.
 
-Check out :doc:`/getting-started/cakephp-conventions` for more
+Check out :doc:`/intro/conventions` for more
 information, but it's suffice to say that naming our table 'articles'
 automatically hooks it to our Articles model, and having fields called
 'modified' and 'created' will be automatically managed by CakePHP.

@@ -123,7 +123,7 @@ flags
     supportés par le driver que vous utilisez.
 
 A ce moment-là, vous pouvez aller voir
-:doc:`/getting-started/cakephp-conventions`. Le nommage correct pour vos
+:doc:`/intro/conventions`. Le nommage correct pour vos
 tables (et l'ajout de quelques colonnes) peut vous faire gagner une
 fonctionnalité gratuite et vous aider à éviter la configuration. Par
 exemple, si vous nommez votre table de base de données big\_boxes, votre table
