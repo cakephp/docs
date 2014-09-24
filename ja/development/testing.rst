@@ -470,7 +470,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 フィクスチャをロードするには、テストケースに ``$fixtures`` プロパティを設定します。::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+        public $fixtures = array('app.articles', 'app.comments');
     }
 
 上記の例では、「Article」と「Comment」フィクスチャをアプリケーションの
@@ -478,7 +478,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 プラグインからもロードすることができます。::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+        public $fixtures = array('plugin.debug_kit.articles', 'core.comments');
     }
 
 ``core`` のプレフィックスを使えばCakePHPから、プラグイン名をプレフィックスとして使えば
@@ -489,7 +489,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+        public $fixtures = array('app.articles', 'app.comments');
         public $autoFixtures = false;
 
         public function testMyFunction() {
@@ -527,7 +527,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
     }
 
 このテストケースでは ``$fixtures`` にこの章で今まで定義してきたフィクスチャを設定します。
@@ -548,7 +548,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
 
         public function setUp() {
             parent::setUp();
@@ -638,7 +638,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 というファイルを作成し、次のように記述します。::
 
     class ArticlesControllerTest extends ControllerTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
 
         public function testIndex() {
             $result = $this->testAction('/articles/index');
@@ -1110,14 +1110,14 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 命名規則を使うことを覚えておいてください。
 これはこの本のプラグインの章で紹介した ``BlogPost`` モデルのテストケースの例です。
 他のテストとの違いは、最初の行で'Blog.BlogPost'をインポートしているところです。
-またプラグインのフィクスチャも ``plugin.blog.blog_post`` というプレフィックスをつける必要があります。::
+またプラグインのフィクスチャも ``plugin.blog.blog_posts`` というプレフィックスをつける必要があります。::
 
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
 
         // プラグインのフィクスチャは /app/Plugin/Blog/Test/Fixture/ に配置される
-        public $fixtures = array('plugin.blog.blog_post');
+        public $fixtures = array('plugin.blog.blog_posts');
         public $BlogPost;
 
         public function testSomething() {

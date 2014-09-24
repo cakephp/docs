@@ -566,14 +566,14 @@ fixture for every model that will have a query run against it. To load fixtures
 you define the ``$fixtures`` property in your model::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+        public $fixtures = array('app.articles', 'app.comments');
     }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+        public $fixtures = array('plugin.debug_kit.articles', 'core.comments');
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
@@ -584,7 +584,7 @@ You can control when your fixtures are loaded by setting
 :php:meth:`CakeTestCase::loadFixtures()`::
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+        public $fixtures = array('app.articles', 'app.comments');
         public $autoFixtures = false;
 
         public function testMyFunction() {
@@ -622,7 +622,7 @@ Let's now create a file named ``ArticleTest.php`` in your
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
@@ -646,7 +646,7 @@ this::
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
 
         public function setUp() {
             parent::setUp();
@@ -737,7 +737,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
 ``app/Test/Case/Controller`` directory and put the following inside::
 
     class ArticlesControllerTest extends ControllerTestCase {
-        public $fixtures = array('app.article');
+        public $fixtures = array('app.articles');
 
         public function testIndex() {
             $result = $this->testAction('/articles/index');
@@ -1227,14 +1227,14 @@ the naming conventions for plugins when importing classes. This is
 an example of a testcase for the ``BlogPost`` model from the plugins
 chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
-prefix your plugin fixtures with ``plugin.blog.blog_post``::
+prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
 
         // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
-        public $fixtures = array('plugin.blog.blog_post');
+        public $fixtures = array('plugin.blog.blog_posts');
         public $BlogPost;
 
         public function testSomething() {
