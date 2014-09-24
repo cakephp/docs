@@ -123,7 +123,7 @@ cacheMetadata
     for more information.
 
 At this point, you might want to take a look at the
-:doc:`/getting-started/cakephp-conventions`. The correct
+:doc:`/intro/conventions`. The correct
 naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
 example, if you name your database table big\_boxes, your table

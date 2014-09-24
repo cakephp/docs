@@ -87,7 +87,7 @@ d'installation devrait ressembler à quelque chose comme cela::
 
 A présent, il est peut-être temps de voir un peu comment fonctionne la
 structure de fichiers de CakePHP : lisez le chapitre
-:doc:`/getting-started/cakephp-folder-structure`.
+:doc:`/intro/cakephp-folder-structure`.
 
 Les Permissions du Répertoire tmp
 =================================
@@ -141,13 +141,13 @@ de données::
 Les choix des noms pour les tables et les colonnes ne sont pas arbitraires.
 Si vous respectez les conventions de nommage de CakePHP pour les bases de
 données et les classes (toutes deux expliquées au chapitre
-:doc:`/getting-started/cakephp-conventions`), vous tirerez profit d'un
+:doc:`/intro/conventions`), vous tirerez profit d'un
 grand nombre de fonctionnalités automatiques et vous éviterez des étapes
 de configurations. CakePHP est suffisamment souple pour implémenter les pires
 schémas de bases de données, mais respecter les conventions vous fera gagner
 du temps.
 
-Consultez le chapitre :doc:`/getting-started/cakephp-conventions` pour plus
+Consultez le chapitre :doc:`/intro/conventions` pour plus
 d'informations, mais il suffit de comprendre que nommer notre table 'articles'
 permet de la relier automatiquement à notre model Articles, et qu'avoir des
 champs 'modified' et 'created' permet de les avoir gérés automagiquement par
