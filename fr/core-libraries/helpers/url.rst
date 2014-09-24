@@ -48,7 +48,7 @@ URL avec une extension::
     echo $this->Url->build([
         "controller" => "posts",
         "action" => "list",
-        "ext" => "rss"
+        "_ext" => "rss"
     ]);
 
     // Affiche

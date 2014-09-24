@@ -166,6 +166,17 @@ Le code ci-dessus montre quelques fonctionnalités intéréssentes des behaviors
   propriété est fusionnée avec les overrides lorqu'un behavior est attaché à
   la table.
 
+Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
+de l'événement dans votre callback::
+
+    public function beforeSave(Event $event, Entity $entity) {
+        if (...) {
+            $event->stopPropagation();
+            return;
+        }
+        $this->slug($entity);
+    }
+
 Définir des Finders
 -------------------
 
