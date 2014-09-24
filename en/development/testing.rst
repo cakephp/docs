@@ -318,14 +318,14 @@ Creating Fixtures
 When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
-used to test our own Article model. Create a file named ``ArticleFixture.php``
+used to test our own Article model. Create a file named ``ArticlesFixture.php``
 in your ``tests/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
     use Cake\Test\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
           // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
@@ -431,7 +431,7 @@ could do the following::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
         public $fields = [
             'id' => ['type' => 'integer'],
@@ -474,16 +474,16 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``tests/Fixture/ArticleFixture.php``) to::
+(``tests/Fixture/ArticlesFixture.php``) to::
 
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles']
     }
 
 If you want to use a different connection use::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
@@ -492,7 +492,7 @@ You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles'];
         public $records = [
             [

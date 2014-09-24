@@ -299,10 +299,10 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 フィクスチャを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持った
 テーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
 それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。
-``app/Test/Fixture`` というディレクトリに ``ArticleFixture.php`` という名前のファイルを作成し、
+``app/Test/Fixture`` というディレクトリに ``ArticlesFixture.php`` という名前のファイルを作成し、
 以下のとおりに記述してください。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
 
           /* 任意。異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。 */
           public $useDbConfig = 'test';
@@ -371,7 +371,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
 
         public $fields = array(
             'id' => array('type' => 'integer', 'key' => 'primary'),
@@ -411,10 +411,10 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 
 例を見てみましょう。アプリケーション中に「Article」という名前のモデルがあり、
 それが「articles」というテーブルにマップされているとします。前節で作成した
-例のフィクスチャ(``app/Test/Fixture/ArticleFixture.php``)を、
+例のフィクスチャ(``app/Test/Fixture/ArticlesFixture.php``)を、
 次のように書き換えてください。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = 'Article';
     }
 
@@ -423,14 +423,14 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 上記の構文では「Article」のスキーマを読み込むだけなのでレコードを読み込みません。読み込むためには
 コードを次のように変更してください。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
 
 一方、モデルが存在しないテーブルの場合はどうするのでしょうか。その場合、代わりにテーブルの情報を
 読み込みよう定義することができます。例は次の通りです。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
 
@@ -438,7 +438,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 「default」という名前のデータベース接続設定を使います。これを変更したい場合は
 次のように書き換えます。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
@@ -446,14 +446,14 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 取得するときにそのプレフィックスは自動的に使用されます。また、前述したふたつの例において、
 レコードは読み込まれません。読み込むには、次のようにします。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
 
 既存のテーブルやモデルからテーブルの定義をインポートすることができますが、前節で紹介したように
 フィクスチャに対して読み込むレコードを直接定義することができます。方法は例のとおりです。::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
             array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),

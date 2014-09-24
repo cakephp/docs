@@ -335,10 +335,10 @@ Creating fixtures
 
 When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
-model. Create a file named ``ArticleFixture.php`` in your
+model. Create a file named ``ArticlesFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
 
           // Optional.
           // Set this property to load fixtures to a different test datasource
@@ -439,7 +439,7 @@ you can define ``$records`` in the init() function of your fixture. For example
 if you wanted all the created and updated timestamps to reflect today's date you
 could do the following::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
 
         public $fields = array(
             'id' => array('type' => 'integer', 'key' => 'primary'),
@@ -482,9 +482,9 @@ existing table.
 Let's start with an example. Assuming you have a model named
 Article available in your application (that maps to a table named
 articles), change the example fixture given in the previous section
-(``app/Test/Fixture/ArticleFixture.php``) to::
+(``app/Test/Fixture/ArticlesFixture.php``) to::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = 'Article';
     }
 
@@ -493,7 +493,7 @@ table linked to the model called Article. You can use any model available in
 your application. The statement will only import the Article schema, and  does
 not import records. To import records you can do the following::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
 
@@ -501,7 +501,7 @@ If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
 
@@ -509,7 +509,7 @@ Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 use a different connection use::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
@@ -519,7 +519,7 @@ table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
 change the import to::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
 
@@ -527,7 +527,7 @@ You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
-    class ArticleFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
             array(

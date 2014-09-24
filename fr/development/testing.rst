@@ -359,14 +359,14 @@ A la création d'une fixture, vous pouvez définir principalement deux choses:
 comment la table est créée (quels champs font parti de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
+Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 ``tests/Fixture`` avec le contenu suivant::
 
     namespace App\Test\Fixture;
 
     use Cake\Test\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
           // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
@@ -477,7 +477,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
 
         public $fields = [
             'id' => ['type' => 'integer'],
@@ -523,15 +523,15 @@ model existant ou d'une table existante.
 Commençons par un exemple. Imaginons que vous ayez un model nommé Article
 disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente
-(``tests/Fixture/ArticleFixture.php``) en ce qui suit::
+(``tests/Fixture/ArticlesFixture.php``) en ce qui suit::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles']
     }
 
 Si vous voulez utiliser une autre connection, utilisez::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
@@ -540,7 +540,7 @@ model/d'une table existante, mais vous avez vos enregistrements directement
 définis dans le fixture comme il a été montré dans la section précédente.
 Par exemple::
 
-    class ArticleFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles'];
         public $records = [
             [
