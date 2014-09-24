@@ -33,8 +33,8 @@ validating, associating or other tasks related to handling data.
 In the case of a social network, the Model layer would take care of
 tasks such as saving the user data, saving friends' associations, storing
 and retrieving user photos, finding suggestions for new friends, etc.
-The model objects can be thought as "Friend", "User", "Comment", or
-"Photo". If we wanted to load some data off our ``users`` table we could do::
+The model objects can be thought of as "Friend", "User", "Comment", or
+"Photo". If we wanted to load some data from our ``users`` table we could do::
 
     use Cake\ORM\TableRegistry;
 
@@ -45,8 +45,8 @@ The model objects can be thought as "Friend", "User", "Comment", or
     }
 
 You may notice that we didn't have to write any code before we could start
-working with our data. By using conventions, CakePHP can generate basic code
-when have not yet been defined.
+working with our data. By using conventions, CakePHP will use standard classes 
+for table and entity classes that have not yet been defined.
 
 If we wanted to make a new user and save it (with validation) we would do
 something like::
