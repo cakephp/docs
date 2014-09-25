@@ -25,7 +25,7 @@ adresse e-mail de travail ::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <http://progit.org>`_.
+    excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
 Récupérer un clone du code source de CakePHP sous github.:
 

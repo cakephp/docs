@@ -15,5 +15,4 @@
     development/debugging
     development/testing
     development/rest
-    development/vendor-packages
-    
+

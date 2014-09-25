@@ -3,6 +3,12 @@ JsHelper
 
 .. php:class:: JsHelper(View $view, array $settings = array())
 
+.. warning::
+
+    The JsHelper is currently deprecated and completely removed in 3.x.
+    We recommend using regular JavaScript and directly interacting with
+    JavaScript libraries where possible.
+
 Since the beginning CakePHP's support for JavaScript has been with
 Prototype/Scriptaculous. While we still think these are
 excellent JavaScript libraries, the community has been asking for

@@ -17,7 +17,6 @@ des erreurs & des exceptions, le débugging et le test seront couverts.
     development/testing
     development/rest
     development/dispatch-filters
-    development/vendor-packages
 
 
 .. meta::

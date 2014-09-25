@@ -17,7 +17,6 @@ debugging, and testing will be covered.
     development/testing
     development/rest
     development/dispatch-filters
-    development/vendor-packages
 
 
 

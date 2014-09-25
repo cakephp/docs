@@ -22,7 +22,7 @@ CakePHPのパッチの作業に入る前に、環境を整えることをお勧�
 
 .. note::
 
-    もしGitの初心者なら、優秀かつ無料である `ProGit <http://progit.org>`_ のbook(訳注: `日本語版のbook <http://progit.org/book/ja>`_)を読むことを強くお勧めします。
+    もしGitの初心者なら、優秀かつ無料である `ProGit <http://git-scm.com/book/>`_ のbook(訳注: `日本語版のbook <http://git-scm.com/book/ja>`_)を読むことを強くお勧めします。
 
 GitHubからCakePHPのソースコードのクローンを取得してください:
 
