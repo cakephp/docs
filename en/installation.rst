@@ -190,7 +190,7 @@ presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
 Congratulations! You are ready to :doc:`create your first CakePHP
-application </getting-started>`.
+application </quickstart>`.
 
 .. _url-rewriting:
 
