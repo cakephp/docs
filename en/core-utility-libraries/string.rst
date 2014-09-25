@@ -18,15 +18,15 @@ of a ``View``, use the ``String`` class::
 
     class UsersController extends AppController {
 
-        public $components = array('Auth');
+        public $components = ['Auth'];
 
         public function afterLogin() {
-            $message = $this->User->find('new_message');
+            $message = $this->Users->find('new_message');
             if (!empty($message)) {
                 // Notify user of new message
                 $this->Flash->success(__(
                     'You have a new message: {0}',
-                    String::truncate($message['Message']['body'], 255, array('html' => true))
+                    String::truncate($message['Message']['body'], 255, ['html' => true])
                 ));
             }
         }

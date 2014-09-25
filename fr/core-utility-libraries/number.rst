@@ -131,7 +131,7 @@ précision défini.::
 Formatage Des Pourcentages
 ==========================
 
-.. php:method:: toPercentage(float $value, int $precision = 2, array $options = array())
+.. php:method:: toPercentage(mixed $value, int $precision = 2, array $options = [])
 
 +---------------------+----------------------------------------------------+
 | Option              | Description                                        |
