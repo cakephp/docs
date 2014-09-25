@@ -72,8 +72,8 @@ plus sûre. Les applications CakePHP devraient avoir le document root configuré
 au répertoire ``webroot`` de l'application. Cela rend les fichiers de
 l'application et de configuration inaccessibles via une URL.
 Configurer le document root est différent selon les webserveurs. Regardez
-la documentation :doc:`/installation/url-rewriting` pour une
-information sur la spécificité de chaque webserveur.
+la documentation :ref:`url-rewriting` pour avoir des
+informations sur la spécificité de chaque webserveur.
 
 Dans tous les cas, vous devez définir le document de l'hôte/domaine virtuel
 pour qu'il soit ``webroot/``. Cela retire la possibilité que des fichiers
