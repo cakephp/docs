@@ -36,7 +36,7 @@ directory::
 
 You can now run PHPUnit using::
 
-    $ vendor/bin/phpunit
+    $ bin/phpunit
 
 Using the PHAR File
 -------------------
@@ -86,7 +86,7 @@ application's tests::
     $ php phpunit.phar
 
     // For Composer installed phpunit
-    $ vendor/bin/phpunit
+    $ bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
 To run a specific test you can supply the path to the test as a parameter to
@@ -1288,7 +1288,7 @@ of your testing results:
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
+    bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
