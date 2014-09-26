@@ -5,8 +5,9 @@ CakePHP 开发人员将使用下面的编码规范。
 
 我们建议其他开发Cake组成部分的人员也应当遵循同样的规范。
 
-你可以使用`CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_来检查
-你的代码是否遵循了必要的规范。
+你可以使用
+`CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_ 来检查你
+的代码是否遵循了必要的规范。
 
 添加新特性
 ==========
@@ -50,8 +51,8 @@ CakePHP 开发人员将使用下面的编码规范。
 控制结构
 ========
 
-控制结构是"``if``"，"``for``"，"``foreach``"，"``while``"，"``switch``"这些。下面是使用"``if``"的一
-个例子::
+控制结构是"``if``"、"``for``"、"``foreach``"、"``while``"、"``switch``"这些。下面
+是使用"``if``"的一个例子::
 
     if ((expr_1) || (expr_2)) {
         // action_1;
@@ -61,10 +62,12 @@ CakePHP 开发人员将使用下面的编码规范。
         // default_action;
     }
 
-*  在控制结构中，在第一个括号之前应该有一个空格，在最后一个括号和开始的大括号之间也应该有一个空格。
-*  在控制结构中总是使用大括号，即使他们是不必要的。这会提高代码的可读性，也导致较少的逻辑错误。
-*  开始的大括号应与控制结构放在同一行上。结束的大括号应该新起一行，并且与控制结构应该有相同的缩进级别。包括在大括号中的语句应该新起一行，其代码也应该再缩进一
-   层。
+*  在控制结构中，在第一个括号之前应该有一个空格，在最后一个括号和开始的大括号之间
+   也应该有一个空格。
+*  在控制结构中总是使用大括号，即使他们是不必要的。这会提高代码的可读性，也导致较
+   少的逻辑错误。
+*  开始的大括号应与控制结构放在同一行上。结束的大括号应该新起一行，并且与控制结构
+   应该有相同的缩进级别。包括在大括号中的语句应该新起一行，其代码也应该再缩进一层。
 *  在控制结构中不应该使用内嵌赋值(*inline assignment*)。
 
 ::
@@ -95,8 +98,9 @@ CakePHP 开发人员将使用下面的编码规范。
 三元运算符
 ----------
 
-当整个三元运算可以放在一行之内时，三元运算符是允许的。更长的三元运算就应该分成``if else``语句。三元运算符绝不允许嵌套。括号虽然不必须，但是可以用在三
-元运算的条件检查之外，使其更清晰::
+当整个三元运算可以放在一行之内时，三元运算符是允许的。更长的三元运算就应该分成
+``if else`` 语句。三元运算符绝对不允许嵌套。括号虽然不必须，但是可以用在三元运算
+的条件检查之外，使其更清晰::
 
     //很好，简单，易读
     $variable = isset($options['variable']) ? $options['variable'] : true;
@@ -108,8 +112,9 @@ CakePHP 开发人员将使用下面的编码规范。
 视图文件
 --------
 
-在视图文件(.ctp files)中，开发人员使用关键词控制结构。关键词控制结构在复杂的视图文件中更容易阅读。控制结构可以放在一段大的PHP代码段落中，也可以放
-在单独的 PHP 标签中::
+在视图文件(.ctp files)中，开发人员使用关键词控制结构。关键词控制结构在复杂的视图
+文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP 
+标签中::
 
     <?php
     if ($isAdmin):
@@ -125,7 +130,8 @@ CakePHP 开发人员将使用下面的编码规范。
 比较
 ==========
 
-总是尽可能的严格。如果特意要使用一个不严格的比较，也许应当注释说明是这样，以免混淆为错误。
+总是尽可能的严格。如果特意要使用一个不严格的比较，也许应当注释说明是这样，以免
+混淆为错误。
 
 要测试一个变量是否为空，建议使用严格检查::
 
@@ -166,7 +172,8 @@ CakePHP 开发人员将使用下面的编码规范。
         return $var;
     }
 
-带缺省值的参数应该放在函数定义的最后。尽量让你的函数返回一些东西, 至少是``true``或者``false``，这样就可以判断函数调用是否成功::
+带缺省值的参数应该放在函数定义的最后。尽量让你的函数返回一些东西, 至少是
+``true`` 或者 ``false`` ，这样就可以判断函数调用是否成功::
 
     public function connection($dns, $persistent = false) {
         if (is_array($dns)) {
@@ -198,9 +205,10 @@ CakePHP 开发人员将使用下面的编码规范。
     public function foo(Model $Model, array $array, $boolean) {
     }
 
-这里``$Model``必须是``Model``的实例，``$array``必须是数组(``array``)。
+这里 ``$Model`` 必须是 ``Model`` 的实例，``$array`` 必须是数组(``array``)。
 
-注意，如果你要允许``$array``也可以使``ArrayObject``的实例，你就不能用类型约束，因为``array``只接受基本类型::
+注意，如果你要允许 ``$array`` 也可以是 ``ArrayObject`` 的实例，你就不能用类型约束，
+因为 ``array`` 只接受基本类型::
 
     /**
      * 方法描述。
@@ -210,8 +218,8 @@ CakePHP 开发人员将使用下面的编码规范。
     public function foo($array) {
     }
 
-方法链接
-===============
+方法链接(*Method Chaining*)
+===========================
 
 方法链接时, 多个方法应当在各自的行上, 并且缩进一个制表符::
 
@@ -230,7 +238,8 @@ CakePHP 开发人员将使用下面的编码规范。
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   使用格式``@version <vector> <description>``，其中``version``和``description``是必须的。
+   使用格式 ``@version <vector> <description>`` ，其中 ``version``和``description``
+   是必须的。
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
@@ -239,7 +248,8 @@ CakePHP 开发人员将使用下面的编码规范。
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
 *  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
-PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在 DocBlock 行的开头才会起作用, 例如::
+PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在文档块(*DocBlock*)行
+的开头才会起作用, 例如::
 
     /**
      * Tag example.
@@ -273,7 +283,7 @@ PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在 
 变量类型
 --------
 
-DocBlock 中使用的变量类型:
+文档块(*DocBlock*)中使用的变量类型:
 
 类型
     描述
@@ -299,13 +309,13 @@ resource
 callable
     可调用的函数。
 
-你也可以用竖线(pipe char)组合多个类型::
+你也可以用竖线(*pipe char*)组合多个类型::
 
     int|bool
 
-对两种以上的类型，通常最好使用``mixed``。
+对两种以上的类型，通常最好使用 ``mixed`` 。
 
-当返回对象本身时，例如为了实现链式方法，应当使用``$this``::
+当返回对象本身时，例如为了实现链式方法，应当使用 ``$this`` ::
 
     /**
      * Foo function.
@@ -328,7 +338,8 @@ callable
     require_once 'ClassFileName.php';
     require_once $class;
 
-当包括类或者库的文件时, 总是只使用`require\_once <http://php.net/require_once>`_函数。
+当包括类或者库的文件时, 总是只使用
+`require\_once <http://php.net/require_once>`_ 函数。
 
 PHP 标签
 ========
@@ -341,7 +352,7 @@ PHP 标签
 函数
 ----
 
-所有函数名都应为 camelBack::
+所有函数名都应为 camelBack 形式::
 
     function longFunctionName() {
     }
@@ -349,7 +360,7 @@ PHP 标签
 类
 --
 
-类名应为 CamelCase, 例如::
+类名应为驼峰命名法(*CamelCase*), 例如::
 
     class ExampleClass {
     }
@@ -357,8 +368,9 @@ PHP 标签
 变量
 ----
 
-变量名应当尽可能具有描述性, 但同时越短越好。普通变量应当以小写字母开头，如果含有多个词, 则应当为 camelBack。引用对象的变量的变量名应当以大写字母开
-头，并且与对象所属的类应当以某种方式相关联。例如::
+变量名应当尽可能具有描述性, 但同时越短越好。普通变量应当以小写字母开头，如果含
+有多个词, 则应当为 camelBack 形式。引用对象变量的变量名应当以大写字母开头，并且
+与对象所属的类应当以某种方式相关联。例如::
 
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
@@ -368,7 +380,8 @@ PHP 标签
 成员的可见范围
 --------------
 
-方法和变量应当使用 PHP5 的 private 和 protected 关键字。另外，protected 的方法和变量应当以一个下划线开头(``_``)。例如::
+方法和变量应当使用 PHP5 的 private 和 protected 关键字。另外，protected 的方法和
+变量应当以一个下划线开头(``_``)。例如::
 
     class A {
         protected $_iAmAProtectedVariable;
@@ -388,24 +401,26 @@ PHP 标签
         }
     }
 
-不过，尽可能避免私有方法或者变量，而使用保护(protected)的(方法或者变量)。后者可以被子类访问或者改变，而私有的(方法或者变量)阻止了扩展或重用。私有
-也使测试更加困难。
+不过，尽可能避免私有方法或者变量，而使用保护(protected)的(方法或者变量)。后者可以
+被子类访问或者改变，而私有的(方法或者变量)阻止了扩展或重用。私有也使测试更加困难。
 
 示例地址
 --------
 
-所有示例用的网址和电子邮箱地址应当使用"example.com", "example.org"和"example.net", 例如:
+所有示例用的网址和电子邮箱地址应当使用"example.com"、"example.org"和"example.net"，
+例如:
 
 *  电子邮箱地址: someone@example.com
 *  网址: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-"example.com" 域名已为此目的而保留(参见:rfc:`2606`), 建议在文档中或者作为例子使用。
+"example.com" 域名已为此目的而保留(参见 :rfc:`2606` )，建议在文档中或者作为例子使
+用。
 
 文件
 ----
 
-不包含类的文件, 其文件名应当小写, 并且以下划线分隔单词, 例如::
+不包含类的文件，其文件名应当小写，并且以下划线分隔单词，例如::
 
     long_file_name.php
 
@@ -429,7 +444,8 @@ PHP 标签
 (object)
         强制转换成对象类型。
 
-在适用时，请使用``(int)$var``，而不是``intval($var)``，使用``(float)$var``，而不是``floatval($var)``。
+在适用时，请使用 ``(int)$var``，而不是 ``intval($var)``，使用 ``(float)$var``，而
+不是 ``floatval($var)``。
 
 常量
 ----
