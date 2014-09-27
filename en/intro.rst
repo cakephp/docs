@@ -38,7 +38,7 @@ The model objects can be thought of as "Friend", "User", "Comment", or
 
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Users');
+    $users = TableRegistry::get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
