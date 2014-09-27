@@ -1,29 +1,33 @@
 文档
 ####
 
-给文档做贡献是很简单的。这些文件都托管在 https://github.com/cakephp/docs。请自行复制(*fork*)代码仓库，加入你的更改/改进
-/翻译，然后发出拉取请求来提交你的改动。你甚至可以在 GitHub 上在线地编辑文档，而完全不用下载文件--在任何页面上的"Improve this Doc"按
-键将会引导你进入该页面的 GitHub 在线编辑器。
+给文档做贡献是很简单的。这些文件都托管在 https://github.com/cakephp/docs。请自行
+复制(*fork*)代码仓库，加入你的更改/改进/翻译，然后发出拉取请求来提交你的改动。你
+甚至可以在 GitHub 上在线地编辑文档，而完全不用下载文件--在任何页面上的"Improve 
+this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 
 翻译
 ====
 
-发邮件给文档小组(docs at cakephp dot org)，或者通过 IRC(freenode上的#cakephp)，来讨论任何你想参与的翻译工作。
+发邮件给文档小组(docs at cakephp dot org)，或者通过 IRC(freenode上的#cakephp)，来
+讨论任何你想参与的翻译工作。
 
 关于翻译的一些忠告:
 
 - 用要翻译的语言来进行浏览、编辑 - 否则你将无法看到哪些已经翻译了。
 - 如果你选择的语言在本书中已经存在，请自行加入。
-- 请使用 `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>` _。
+- 请使用 `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_ 。
 - 请将内容和标题一起翻译。
-- 在提交一个更正之前，请先和英文版本的内容进行比较(如果你改正了一些东西，却没有整合“上游”(*upstream*)的改动，你提交的东西将不会被接受)。
-- 如果你要写一个英文术语，请把它放在 ``<em>`` 标签之内。比如，"asdf asdf *Controller* asdf"或者"asdf asdf 
-  Kontroller (*Controller*) asfd"，请适为选用。
+- 在提交一个更正之前，请先和英文版本的内容进行比较(如果你改正了一些东西，却没有整
+  合“上游”(*upstream*)的改动，你提交的东西将不会被接受)。
+- 如果你要写一个英文术语，请把它放在 ``<em>`` 标签之内。比如，
+  "asdf asdf *Controller* asdf"或者"asdf asdf Kontroller (*Controller*) asfd"，请
+  适为选用。
 - 请不要提交不完整的翻译。
 - 请不要编辑正在改动的部分。
 - 对于标以重音符号的字符，请不要使用
-  `html 字符实体 (*html entities*) <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
-  来表示，本书使用UTF-8。
+  `html 字符实体 <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  (*html entities*) 来表示，本书使用UTF-8。
 - 请不要显著改变标记(HTML)或增加新的内容。
 - 如果原始的内容遗漏了某些信息，请先提交(对原始内容的)更正。
 
@@ -31,9 +35,10 @@
 ============
 
 这份新的 CakePHP 文档是以
-`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。ReST 
-(Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。在为 CakePHP 的文档做出贡献时，为了保持一致
-性，建议你遵循下面的准则，来你格式化和组织你的文字。
+`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。
+ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。在为 
+CakePHP 的文档做出贡献时，为了保持一致性，建议你遵循下面的准则，来你格式化和组织
+你的文字。
 
 每行的长度
 ----------
@@ -43,7 +48,7 @@
 标题和小节
 ----------
 
-小节的标题要在它的下一行以至少相同长度的标点符号来标识。
+小节的标题要在它的下一行用至少相同长度的标点符号来标识。
 
 - ``#`` 用来标识网页标题。
 - ``=`` 用于标识在一个页面中的小节。
@@ -58,8 +63,8 @@
 
 段落是简单的文本块，缩进在同一级别。段落之间应以一个以上的空行分隔。
 
-内嵌标记
---------
+内嵌(*inline*)标记
+------------------
 
 * 一个星号： *文字* 为强调(斜体)
 
@@ -79,12 +84,14 @@
 
 *  **不可以** 嵌套。
 * 内容不可以以空格开始或结束:  ``* 文本*`` 是错误的。
-* 内容必须与周围的文字由非文字字符分隔，这可以使用反斜杠转义的空格来解决：``一个长的\ *粗体*\ 词汇``。
+* 内容必须与周围的文字由非文字字符分隔，这可以使用反斜杠转义的空格来解决：
+  ``一个长的\ *粗体*\ 词汇``。
 
 列表
 ----
 
-列表与 markdown 非常相似。无序列表以一个星号和一个空格开始。有序列表可以数字开始，或以 ``#`` 进行自动编号::
+列表与 markdown 非常相似。无序列表以一个星号和一个空格开始。有序列表可以数字开始，
+或以 ``#`` 进行自动编号::
 
     * 这是一点
     * 这也是。但这一点
@@ -134,18 +141,20 @@
 
 .. rst:role:: doc
 
-    指向文档中其他网页的链接可以使用 ``:doc:`` 角色(*role*)。你可以使用绝对路径或者相对路径，来链接到指定的文件中。请省略``.rst``
-    扩展名。例如，如果链接``:doc:`form```出现在文档``core-helpers/html``中，则该链接指向
-    ``core-helpers/form``。如果链接是``:doc:`/core-helpers```，那么不论它用在那里，总是会指向
-    ``/core-helpers`` 。
+    指向文档中其他网页的链接可以使用 ``:doc:`` 角色(*role*)。你可以使用绝对路径或
+    者相对路径，来链接到指定的文件中。请省略 ``.rst`` 扩展名。例如，如果链接
+    ``:doc:`form``` 出现在文档 ``core-helpers/html`` 中，则该链接指向
+    ``core-helpers/form`` 。如果链接是 ``:doc:`/core-helpers``` ，那么不论它用在
+    那里，总是会指向 ``/core-helpers`` 。
 
 交叉引用链接
 ~~~~~~~~~~~~
 
 .. rst:role:: ref
 
-    你可以使用 ``:ref:`` 角色交叉引用在任何文件中的任何标题。链接标签指向的目标在整个文档必须是唯一的。当为类的方法创建标签时，最好使用
-    ``class-method`` 作为您的链接标签的格式。
+    你可以使用 ``:ref:`` 角色交叉引用在任何文件中的任何标题。链接标签指向的目标在
+    整个文档必须是唯一的。当为类的方法创建标签时，最好使用 ``class-method`` 作为
+    您的链接标签的格式。
 
     标签最常见的用途是在标题之前。例如::
 
@@ -156,14 +165,15 @@
 
         更多内容在这里。
 
-    在其他地方你可以用 ``:ref:`标签名称``` 引用上面的小节。链接的文字可以是标签之后的标题。你也可以使用 ``:ref:`链接文字 <标签名称>```
-    的方式来提供自定义的链接文字。
+    在其他地方你可以用 ``:ref:`标签名称``` 引用上面的小节。链接的文字可以是标签之后的
+    标题。你也可以使用 ``:ref:`链接文字 <标签名称>``` 的方式来提供自定义的链接文字。
 
 描述类和它们的内容
 ------------------
 
-CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_提供
-自定义指令描述 PHP 对象和结构。我们必须使用这些指令和角色，才能保证正确的索引和交叉引用。
+CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ 
+提供自定义指令描述 PHP 对象和结构。我们必须使用这些指令和角色，才能保证正确的索引
+和交叉引用。
 
 描述类及其组成
 --------------
@@ -199,7 +209,7 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
            方法的说明
 
 
-   属性，方法和常量不需要嵌套。他们可以直接位于类的声明之后::
+   属性、方法和常量不需要嵌套。他们可以直接位于类的声明之后::
 
         .. php:class:: MyClass
 
@@ -227,7 +237,7 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
 
-    描述了一个静态方法，其参数、返回值以及异常，选项可参看:rst:dir:`php:method`。
+    描述了一个静态方法，其参数、返回值以及异常，选项可参看 :rst:dir:`php:method` 。
 
 .. rst:directive:: .. php:attr:: name
 
@@ -236,7 +246,7 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 交叉引用
 ~~~~~~~~
 
-以下角色指向PHP对象，如果有匹配的指令，就会生成链接：
+以下角色指向 PHP 对象，如果有匹配的指令，就会生成链接：
 
 .. rst:role:: php:func
 
@@ -244,7 +254,7 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 
 .. rst:role:: php:global
 
-   指向一个名称以``$``开始的全局变量。
+   指向一个名称以 ``$`` 开始的全局变量。
 
 .. rst:role:: php:const
 
@@ -279,7 +289,8 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 源代码
 ------
 
-一个段落以 ``::`` 结束，就可以创建代码块。该段落必须缩进，且象所有段落一样，须以单个空行分隔::
+一个段落以 ``::`` 结束，就可以创建代码块。该段落必须缩进，且象所有段落一样，须以
+单个空行分隔::
 
     这是一个段落::
 
@@ -289,17 +300,21 @@ CakePHP 文档使用`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdom
 
     这又是正常的文字了。
 
-代码的文字不会被改动或格式化，除非缩进的级别被取消。
+代码的文字不会被改动或格式化，除非取消该级别的缩进。
 
 
 注释和警告
 ----------
 
-有很多时候，你会想告诉读者一个重要的提示、特别的说明或者可能的危险。sphinx 中的告诫(*Admonition*)正是为了这个目的。有三种类型的告诫。
+有很多时候，你会想告诉读者一个重要的提示、特别的说明或者可能的危险。sphinx 中的告
+诫(*Admonition*)正是为了这个目的。有三种类型的告诫。
 
-* ``.. tip::`` 提示用于说明或重申有趣或者重要的信息。应当使用完整的句子以及任何适当的标点符号。
-* ``.. note::`` 注释是用来说明特别重要的信息。应当使用完整的句子以及任何适当的标点符号。
-* ``.. warning::`` 警告用于描述潜在的障碍，或与安全有关的信息。应当使用完整的句子以及任何适当的标点符号。
+* ``.. tip::`` 提示用于说明或重申有趣或者重要的信息。应当使用完整的句子以及任何适
+  当的标点符号。
+* ``.. note::`` 注释是用来说明特别重要的信息。应当使用完整的句子以及任何适当的标
+  点符号。
+* ``.. warning::`` 警告用于描述潜在的障碍，或与安全有关的信息。应当使用完整的句子
+  以及任何适当的标点符号。
 
 所有告诫都是相同的::
 
