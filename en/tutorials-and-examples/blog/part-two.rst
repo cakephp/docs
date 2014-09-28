@@ -1,5 +1,5 @@
 Blog Tutorial - Adding a Layer
-##############################
+==============================
 
 Create an Article Model
 =======================
@@ -625,7 +625,7 @@ the real thing. Start your own project and read the rest of the
 :doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
 If you need help, there are many ways to get the help you need - please see the
-:doc:`/cakephp-overview/where-to-get-help` page.  Welcome to CakePHP!
+:doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!
 
 Suggested Follow-up Reading
 ---------------------------

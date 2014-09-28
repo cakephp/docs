@@ -1,5 +1,6 @@
 Inflector
 #########
+
 .. php:namespace:: Cake\Utility
 
 .. php:class:: Inflector

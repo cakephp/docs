@@ -12,6 +12,7 @@ Contents
 
    intro
    installation
+   quickstart
    controllers
    views
    orm

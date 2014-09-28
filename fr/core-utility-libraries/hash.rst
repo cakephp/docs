@@ -3,7 +3,7 @@ Hash
 
 .. php:class:: Hash
 
-La gestion du tableau, si elle est bien faite, peut être un outil très
+La gestion de tableau, si elle est bien faite, peut être un outil très
 puissant et utile pour construire du code plus intelligent et plus
 optimisé. CakePHP offre un ensemble d'utilitaires statiques très
 utile dans la classe Hash qui vous permet de faire justement cela.

@@ -33,7 +33,7 @@ répertoire d'application::
 
 Vous pouvez maintenant lancer PHPUnit en utilisant::
 
-    $ vendor/bin/phpunit
+    $ bin/phpunit
 
 Utiliser le fichier PHAR
 ------------------------
@@ -84,7 +84,7 @@ lancer vos propres tests en lancant un de ceux présents dans le coeur::
     $ php phpunit.phar
 
     // Pour un PHPUnit installé avec Composer
-    $ vendor/bin/phpunit
+    $ bin/phpunit
 
 Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
 qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fournir
@@ -226,13 +226,6 @@ A partir du répertoire racine de votre application. Pour lancer les tests pour
 les plugin, faîtes d'abord ``cd`` vers le répertoire du plugin, et ensuite
 utilisez ``phpunit`` pour lancer les tests.
 
-.. note::
-
-    Si vous lancez des tests qui intéragissent avec la session, c'est
-    généralement une bonne idée d'utiliser l'option ``--stderr``. Cela va régler
-    des problèmes avec les tests en échec à cause des avertissements
-    headers_sent.
-
 Filtrer les cas de test
 -----------------------
 
@@ -260,16 +253,6 @@ test en faisant ce qui suit::
 Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
-
-Lancer les tests qui utilisent des sessions
--------------------------------------------
-
-Quand vous lancez des tests en ligne de commande qui utilisent des sessions,
-vous devrez inclure le flag ``--stderr``. Ne pas le faire ne fera pas
-fonctionner les sessions. PHPUnit outputs test progress to stdout par défaut,
-cela entraine le fait que PHP suppose que les headers ont été envoyés ce qui
-empêche les sessions de démarrer. En changeant PHPUnit pour qu'il affiche avec
-stderr, ce problème sera évité.
 
 Combiner les Suites de Test pour les plugins
 --------------------------------------------
@@ -1295,7 +1278,7 @@ graphique sympa des résultats de votre test:
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    vendor/bin/phpunit --stderr --log-junit junit.xml --coverage-clover clover.xml
+    bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 Si vous utilisez le clover coverage, ou les résultats junit, assurez-vous de
 les configurer aussi dans Jenkins. Ne pas configurer ces étapes signifiera

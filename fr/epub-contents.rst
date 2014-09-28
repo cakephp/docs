@@ -6,6 +6,7 @@ Contenu
 
    intro
    installation
+   quickstart
    controllers
    views
    orm
@@ -17,8 +18,6 @@ Contenu
    tutorials-and-examples
    contributing
    appendices
-
-.. todolist::
 
 .. meta::
     :title lang=fr: Contenu

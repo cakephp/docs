@@ -68,7 +68,7 @@ Folder API
 
     $element can also be an array::
 
-        $path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+        $path = Folder::addPathElement('/a/path/for', ['testing', 'another']);
         // $path equals /a/path/for/testing/another
 
 .. php:method:: cd( $path )
@@ -81,15 +81,15 @@ Folder API
         echo $folder->path; // Prints /bar
         $false = $folder->cd('/non-existent-folder');
 
-.. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
+.. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
 
     Change the mode on a directory structure recursively. This includes
     changing the mode on files as well::
 
         $dir = new Folder();
-        $dir->chmod('/path/to/folder', 0755, true, array('skip_me.php'));
+        $dir->chmod('/path/to/folder', 0755, true, ['skip_me.php']);
 
-.. php:method:: copy(array|string $options = array())
+.. php:method:: copy(array|string $options = [])
 
     Recursively copy a directory. The only parameter $options can either
     be a path into copy to or an array of options::
@@ -250,7 +250,7 @@ Folder API
     returned array holds two sub arrays: One of directories and one of files::
 
         $dir = new Folder(WWW_ROOT);
-        $files = $dir->read(true, array('files', 'index.php'));
+        $files = $dir->read(true, ['files', 'index.php']);
         /*
         Array
         (

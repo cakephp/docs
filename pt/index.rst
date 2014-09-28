@@ -7,14 +7,14 @@ Bem-vindo
 #########
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
-Esperamos manter um alto nível de qualidade, validade e precisão para a documentação.
-Note o botão “Improve this Doc” no canto superior direito; ele vai direcionar você para o editor online do GitHub da página ativa, permitindo que você facilmente contribua com quaisquer adições, exclusões ou correções para a documentação.
+Esperamos manter um alto nível de qualidade, validade e precisão para a documentação do CakePHP.
+Observe o botão “Improve this Doc” no canto superior direito, ele vai direcioná-lo para o editor online da página ativa no GitHub, permitindo que você facilmente contribua com quaisquer adições, exclusões ou correções para a documentação.
 
 .. container:: offline-download
 
     **Leia a documentação em qualquer lugar**
 
-    Consulte o cookbook CakePHP quase em qualquer lugar. Disponível como PDF e
+    Consulte o cookbook CakePHP praticamente em qualquer lugar. Disponível como PDF e
     EPUB, você pode lê-lo em diversos dispositivos, tanto quanto offline.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
@@ -24,11 +24,11 @@ Note o botão “Improve this Doc” no canto superior direito; ele vai direcion
 Começando
 =========
 
-Apremder um novo framework pode ser intimidador e excitante ao mesmo tempo. Para
+Aprender um novo framework pode ser intimidador e excitante ao mesmo tempo. Para
 ajudar você nesse processo, nós criamos o cookbook recheado de exemplos e receitas para
 completar tarefas rotineiras. Se você é iniciante, deveria começar com o
-:doc:`/tutorials-and-examples/blog/blog` que vai lhe proporcionar um rápido panorama do que
-o CakePHP tem a oferecer e como funciona.
+:doc:`/tutorials-and-examples/blog/blog` que vai lhe proporcionar um panorama sobre o que
+o CakePHP tem a oferecer e seu funcionamento.
 
 Após concluir o tutorial do Blog, você pode pincelar sobre os elementos chave em
 uma aplicação CakePHP:
@@ -37,12 +37,12 @@ uma aplicação CakePHP:
 * As :doc:`convenções </getting-started/cakephp-conventions>` que o CakePHP
   utiliza.
 * :doc:`Controllers </controllers>` lidam com requisições, coordenam seus modelos
-  e as respostas que sua aplicação cria.
+  e as respostas que sua aplicação provê.
 * :doc:`Views </views>` são a camada de apresentação da sua aplicação. Elas
   oferecem a você poderosas ferramentas para criar HTML, JSON e outras saídas que sua
   aplicação precisa.
 * :doc:`Models </orm>` são o ingrediente chave em qualquer aplicação. Eles lidam com
-  a validação e a lógica de domínio dentro de sua aplicação.
+  a validação e a lógica de domínio.
 
 Obtendo ajuda
 =============

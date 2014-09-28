@@ -12,6 +12,7 @@ Contenu
 
    intro
    installation
+   quickstart
    controllers
    views
    orm
@@ -26,5 +27,5 @@ Contenu
 .. todolist::
 
 .. meta::
-    :title lang=fr: Contents
+    :title lang=fr: Contenu
     :keywords lang=fr: librairies du coeur,ref search,shells,déploiement,appendices,glossary,models

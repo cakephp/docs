@@ -32,8 +32,8 @@ Premiers Pas
 Apprendre un nouveau framework peut être intimidant et excitant en même temps.
 Pour vous aider, nous avons créé un cookbook avec des exemples et des recettes
 des tâches les plus comunément effectuées. Si vous êtes nouveau, vous devriez
-commencer avec le :doc:`/tutorials-and-examples/blog` puisqu'il vous donne
-un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
+commencer avec le :doc:`/quickstart` puisqu'il vous donne un aperçu rapide de
+ce que CakePHP peut vous offrir et comment il fonctionne.
 
 Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
 d'une application CakePHP:

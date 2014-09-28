@@ -31,14 +31,14 @@ Faire des requêtes est simple et direct. Faire une requête get ressemble à ce
 
 Faire des requêtes post et put est également simple::
 
-    // Envoit une requête POST avec des données encodées application/x-www-form-urlencoded
+    // Envoie une requête POST avec des données encodées application/x-www-form-urlencoded
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Envoit une requête PUT avec des données encodées application/x-www-form-urlencoded
+    // Envoie une requête PUT avec des données encodées application/x-www-form-urlencoded
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
