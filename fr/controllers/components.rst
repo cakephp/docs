@@ -254,6 +254,19 @@ variable ``$components``::
     Au contraire d'un component inclu dans un controller, aucun callback
     ne sera attrapé pour un component inclu dans un component.
 
+Accéder au Controller du  Component
+-----------------------------------
+
+À partir d'un composant, vous pouvez accéder au controler courant via le
+registre::
+
+    $controller = $this->_registry->getController();
+
+Vous pouvez également accéder facilement au controller dans n'importe quel
+callback via l'objet event::
+
+    $controller = $event->subject();
+
 .. _component-api:
 
 API de Component
