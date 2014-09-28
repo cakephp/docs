@@ -237,12 +237,6 @@ your app directory you can do the following to run tests::
     # Run the configure class test in CakePHP
     ./Console/cake test core Core/Configure
 
-.. note::
-
-    If you are running tests that interact with the session it's generally a good
-    idea to use the ``--stderr`` option. This will fix issues with tests
-    failing because of headers_sent warnings.
-
 .. versionchanged:: 2.1
     The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
     available but the new syntax is preferred.
@@ -282,16 +276,6 @@ doing the following::
 This will put the coverage results in your application's webroot directory. You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
-
-Running tests that use sessions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-When running tests on the command line that use sessions you'll need to include
-the ``--stderr`` flag. Failing to do so will cause sessions to not work.
-PHPUnit outputs test progress to stdout by default, this causes PHP to assume
-that headers have been sent which prevents sessions from starting. By switching
-PHPUnit to output on stderr, this issue is avoided.
-
 
 Test Case Lifecycle Callbacks
 =============================
@@ -1307,7 +1291,6 @@ your application. Creating a junit log file, or clover coverage is often a nice
 bonus, as it gives you a nice graphical view of your testing results::
 
     app/Console/cake test app AllTests \
-    --stderr \
     --log-junit junit.xml \
     --coverage-clover clover.xml
 
