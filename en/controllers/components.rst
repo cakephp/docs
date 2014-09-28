@@ -243,6 +243,20 @@ way you include them in controllers - using the ``$components`` var::
     In contrast to a component included in a controller
     no callbacks will be triggered on a component's component.
 
+
+Accessing a Component's Controller
+----------------------------------
+
+From within a Component you can access the current controller through the
+registry::
+
+    $controller = $this->_registry->getController();
+
+You can also easily access the controller in any callback method from the event
+object::
+
+    $controller = $event->subject();
+
 .. _component-api:
 
 Component API
