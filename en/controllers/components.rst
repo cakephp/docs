@@ -8,9 +8,11 @@ yourself wanting to copy and paste things between controllers, you should
 consider creating your own component to contain the functionality. Creating
 components keeps controller code clean and allows you to reuse code between projects.
 
-Each of the core components is detailed in its own chapter. See :doc:`/core-libraries/toc-components`.
-This section describes how to configure and use components, and how to create
-your own components.
+For more information on the components included in CakePHP, check out the
+chapter for each component:
+
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
 .. _configuring-components:
 
