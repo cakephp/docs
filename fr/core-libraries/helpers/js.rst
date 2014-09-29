@@ -311,7 +311,7 @@ méthode.
     respective des informations plus détaillées sur les options
     et les paramètres.
 
-    **Example d'utilisation**::
+    **Exemple d'utilisation**::
     
         $this->Js->get('#ma-liste');
         $this->Js->sortable(array(

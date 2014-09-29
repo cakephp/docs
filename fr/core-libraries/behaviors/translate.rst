@@ -241,7 +241,7 @@ simplement la valeur de la propriété $locale du model, avant que vous ne
 sauvegardiez les données dans la base. Vous pouvez faire cela dans votre
 controller ou vous pouvez le définir directement dans le model.
 
-**Example A:** Dans votre controller::
+**Exemple A:** Dans votre controller::
     
     class PostsController extends AppController {
 

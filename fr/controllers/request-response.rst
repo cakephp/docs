@@ -67,7 +67,7 @@ l'objet request::
 
 Tous ceux-ci vous fourniront un accès aux arguments passés et aux paramètres
 nommés. Il y a de nombreux paramètres importants et utiles que CakePHP utilise
-en interne, il sont aussi trouvables dans les paramètres de la requête:
+en interne, ils sont aussi trouvables dans les paramètres de la requête:
 
 * ``plugin`` Le plugin gérant la requête, va être nul quand il n'y a pas de
   plugins.
