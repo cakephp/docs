@@ -12,7 +12,7 @@ HTTP responses from your controllers.
 .. _cake-request:
 
 Request
-#######
+=======
 
 .. php:class:: Request
 
@@ -33,7 +33,7 @@ also access it in Components using the controller reference. Some of the duties
   properties.
 
 Request Parameters
-==================
+------------------
 
 Request exposes several interfaces for accessing request parameters::
 
@@ -65,7 +65,7 @@ are also all found in the request parameters:
 * ``requested`` Present and set to ``true`` when the action came from :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Query String Parameters
-=======================
+-----------------------
 
 .. php:method:: query($name)
 
@@ -82,7 +82,7 @@ Any keys that do not exist will return ``null``::
     // $foo === null
 
 Request Body Data
-=================
+-----------------
 
 .. php:method:: data($name)
 
@@ -103,7 +103,7 @@ You can also access the array of data, as an array::
     $this->request->data['comments'][1]['author'];
 
 PUT, PATCH or DELETE Data
-=========================
+-------------------------
 
 .. php:method:: input($callback, [$options])
 
@@ -121,7 +121,7 @@ Additional parameters for the decoding function can be passed as arguments to
     $this->request->input('json_decode');
 
 Environment Variables (from $_SERVER and $_ENV)
-===============================================
+-----------------------------------------------
 
 .. php:method:: env($key, $value = null)
 
@@ -136,7 +136,7 @@ a getter/setter for enviromnent variables without having to modify globals
     $this->request->env('REQUEST_METHOD', 'POST');
 
 XML or JSON Data
-=================
+-----------------
 
 Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded
 post bodies. You can read input data in any format using
@@ -155,7 +155,7 @@ in additional parameters as well::
     $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
 Path Information
-================
+----------------
 
 The request object also provides useful information about the paths in your
 application. ``$request->base`` and ``$request->webroot`` are useful for
@@ -176,7 +176,7 @@ a subdirectory. The various properties you can use are::
 .. _check-the-request:
 
 Checking Request Conditions
-===========================
+---------------------------
 
 .. php:method:: is($type)
 
@@ -256,7 +256,7 @@ There are several built-in detectors that you can use:
 
 
 Session Data
-============
+------------
 
 To access the session for a given request use the ``session()`` method::
 
@@ -266,7 +266,7 @@ For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
 
 Host and Domain Name
-====================
+--------------------
 
 .. php:method:: domain($tldLength = 1)
 
@@ -290,7 +290,7 @@ Returns the host your application is on::
     echo $request->host();
 
 Working With HTTP Methods & Headers
-===================================
+-----------------------------------
 
 .. php:method:: method()
 
@@ -322,7 +322,7 @@ Returns the referring address for the request.
 Returns the current visitor's IP address.
 
 Trusting Proxy Headers
-======================
+----------------------
 
 If your application is behind a load balancer or running on a cloud service, you
 will often get the load balancer host, port and scheme in your requests. Often
@@ -340,7 +340,7 @@ have the request object use these headers set the ``trustProxy`` property to
     $this->request->clientIp();
 
 Checking Accept Headers
-=======================
+-----------------------
 
 .. php:method:: accepts($type = null)
 
@@ -371,7 +371,7 @@ Check whether a specific language is accepted::
 .. index:: $this->response
 
 Response
-########
+========
 
 .. php:class:: Response
 
@@ -393,7 +393,7 @@ tasks such as:
 * Sending the response body.
 
 Changing the Response Class
-===========================
+---------------------------
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
 transparent class. If you need to override it with your own application-specific class,
@@ -407,7 +407,7 @@ out the methods that interact with :php:meth:`~CakeResponse::header()`. See the 
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with Content Types
-==========================
+--------------------------
 
 .. php:method:: type($contentType = null)
 
@@ -427,7 +427,7 @@ Usually, you'll want to map additional content types in your controller's
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
 Setting the Character Set
-=========================
+-------------------------
 
 .. php:method:: charset($charset = null)
 
@@ -438,7 +438,7 @@ Sets the charset that will be used in the response::
 .. _cake-response-file:
 
 Sending Files
-=============
+-------------
 
 .. php:method:: file($path, $options = [])
 
@@ -477,7 +477,7 @@ download
     download.
 
 Sending a String as File
-========================
+------------------------
 
 You can respond with a file that does not exist on the disk, such as
 a pdf or an ics generated on the fly from a string::
@@ -496,7 +496,7 @@ a pdf or an ics generated on the fly from a string::
     }
 
 Setting Headers
-===============
+---------------
 
 .. php:method:: header($header = null, $value = null)
 
@@ -526,7 +526,7 @@ You can now use the convenience method :php:meth:`Cake\\Network\\Response::locat
 the redirect location header.
 
 Interacting with Browser Caching
-================================
+--------------------------------
 
 .. php:method:: disableCache()
 
@@ -563,7 +563,7 @@ Cache-Control's ``public`` directive is set as well.
 .. _cake-response-caching:
 
 Fine Tuning HTTP Cache
-======================
+----------------------
 
 One of the best and easiest ways of speeding up your application is to use HTTP
 cache. Under this caching model, you are only required to help clients decide if
@@ -579,7 +579,7 @@ methods to fine-tune HTTP cache headers to take advantage of browser or reverse
 proxy caching.
 
 The Cache Control Header
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: sharable($public = null, $time = null)
 
@@ -617,7 +617,7 @@ fresh::
 the ``Cache-Control`` header.
 
 The Expiration Header
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: expires($time = null)
 
@@ -633,7 +633,7 @@ This method also accepts a :php:class:`DateTime` instance or any string that can
 :php:class:`DateTime` class.
 
 The Etag Header
----------------
+~~~~~~~~~~~~~~~
 
 .. php:method:: etag($tag = null, $weak = false)
 
@@ -662,7 +662,7 @@ To take advantage of this header, you must either call the
     }
 
 The Last Modified Header
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: modified($time = null)
 
@@ -685,7 +685,7 @@ To take advantage of this header, you must either call the
     }
 
 The Vary Header
----------------
+~~~~~~~~~~~~~~~
 
 .. php:method:: vary($header)
 
@@ -698,7 +698,7 @@ HTML depending on the browser. Under such circumstances you can use the ``Vary``
     $this->response->vary('Accept-Language');
 
 Sending Not-Modified Responses
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: checkNotModified(Request $request)
 
@@ -712,7 +712,7 @@ deletes the response content, and sends the `304 Not Modified` header::
     }
 
 Sending the Response
-====================
+--------------------
 
 .. php:method:: send()
 
@@ -724,7 +724,7 @@ end of each request by ``Dispatcher``.
 .. _cakeresponse-testing:
 
 Response and Testing
-====================
+--------------------
 
 The ``Response`` class helps make testing controllers and components easier.
 By having a single place to mock/stub headers you can more easily test
