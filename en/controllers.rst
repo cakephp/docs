@@ -474,7 +474,6 @@ More on Controllers
 .. toctree::
     :maxdepth: 1
 
-    controllers/request-response
     controllers/pages-controller
     controllers/components
 
