@@ -8,8 +8,7 @@ em conjunto ou isoladamente.
 O objetivo desta análise é introduzir os conceitos gerais presentes no CakePHP, e lhe dar
 uma rápida visão geral de como estes conceitos são implementados. Se
 você está ávido para começar um projeto, você pode :doc:`começar com o tutorial
-    </tutorials-and-examples/blog/blog>`, ou :doc:`mergulhar na documentação
-</topics>`.
+</tutorials-and-examples/blog/blog>`, ou :doc:`mergulhar na documentação</topics>`.
 
 Convenções Sobre Configuração
 =============================
@@ -117,19 +116,19 @@ Agora que você é familiar com as diferentes camadas no CakePHP, vamos revisar 
 um cíclo de requisição funciona no CakePHP:
 
 .. figure:: /_static/img/typical-cake-request.png
-:align: center
+   :align: center
    :alt: Diagrama de fluxo exibindo uma típica requisição CakePHP
 
-        O cíclo de requisição típico do CakePHP começa com um usuário solicitando uma página ou
-        recurso na sua aplicação. Em alto nível cada requisição vai através dos seguintes passos:
+O cíclo de requisição típico do CakePHP começa com um usuário solicitando uma página ou
+recurso na sua aplicação. Em alto nível cada requisição vai através dos seguintes passos:
 
-        #. A requisição é primeiramente processada pela suas rotas.
-        #. Depois da requisição ter sido roteada, o despachante irá selecionar
-           o objeto de controller correto para manipulá-la.
-        #. A action do controller é chamada e o controller interage com os
-           models e components requisitados.
-        #. O controller delega a criação de resposta à view para gerar os dados de saída
-           resultantes dos dados do model.
+#. A requisição é primeiramente processada pela suas rotas.
+#. Depois da requisição ter sido roteada, o despachante irá selecionar
+   o objeto de controller correto para manipulá-la.
+#. A action do controller é chamada e o controller interage com os
+   models e components requisitados.
+#. O controller delega a criação de resposta à view para gerar os dados de saída
+   resultantes dos dados do model.
 
 Apenas o Começo
 ===============
@@ -153,9 +152,9 @@ Leitura adicional
 .. toctree::
 :maxdepth: 1
 
-        /intro/where-to-get-help
-        /intro/conventions
-        /intro/cakephp-folder-structure
+    /intro/where-to-get-help
+    /intro/conventions
+    /intro/cakephp-folder-structure
 
 .. meta::
 :title lang=pt: CakePHP num piscar de olhos
