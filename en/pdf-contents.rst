@@ -5,8 +5,11 @@ Contents
    :maxdepth: 2
 
    intro
-   installation
    quickstart
+   installation
+   development/configuration
+   development/routing
+   controllers/request-response
    controllers
    views
    orm
