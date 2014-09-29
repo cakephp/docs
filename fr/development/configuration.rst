@@ -380,9 +380,10 @@ Créer et Modifier les Fichiers de Configuration
 Déverse toute ou quelques données de Configure dans un fichier ou un système de
 stockage supporté par le reader. Le format de sérialisation est décidé en
 configurant le reader de config attaché dans $config. Par exemple, si
-l'adaptateur 'default' est :php:class:`Cake\\Configure\\Engine\\PhpConfig`, le
-fichier généré sera un fichier de configuration PHP qu'on pourra charger avec
-:php:class:`Cake\\Configure\\Engine\\PhpConfig`.
+l'adaptateur 'default' est
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, le fichier généré sera
+un fichier de configuration PHP qu'on pourra charger avec
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`.
 
 Etant donné que le reader 'default' est une instance de PhpReader.
 Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
