@@ -3,7 +3,7 @@ Controllers (Contrôleurs)
 
 Les Controllers sont le 'C' dans MVC. Après que le routage a été appliqué et
 que le bon controller a été trouvé, l'action de votre controller est
-appelé. Votre controller devra gérer l'interpretation des données requetées,
+appelée. Votre controller devra gérer l'interprétation des données requêtées,
 s'assurer que les bon models sont appelés, et que la bonne réponse ou vue est
 rendue. Les controllers peuvent être imaginés comme un homme au milieu entre
 le Model et la Vue. Le mieux est de garder des controllers peu chargés, et
@@ -13,7 +13,7 @@ code et facilitera le test de votre code.
 Habituellement, les controllers sont utilisés pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une
 boulangerie en-ligne, vous aurez sans doute un RecettesController qui gère
-vos recettes et un IngredientsController qui gére vos ingrédients. Cependant,
+vos recettes et un IngredientsController qui gère vos ingrédients. Cependant,
 il est aussi possible d'avoir des controllers qui fonctionnent avec plus qu'un
 model. Dans CakePHP, un controller est nommé d'après le model principal qu'il
 gère.
@@ -25,7 +25,7 @@ dans ``/app/Controller/AppController.php`` et elle devrait contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
-requête. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
+requêtes. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
 publique dans un controller est une action accessible via une URL. Une action
 est responsable de l'interprétation des requêtes et de la création de
 la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
@@ -389,7 +389,7 @@ Contrôle de Flux
             'quantite' => 5
         ));
 
-    Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
+    Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
     à ceci::
 
         $this->redirect(array(
