@@ -8,6 +8,7 @@ Contents
    installation
    getting-started
    cakephp-overview
+   views
    contributing
 
 .. todolist::

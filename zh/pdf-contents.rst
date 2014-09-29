@@ -7,6 +7,7 @@ Contents
    getting-started
    installation
    cakephp-overview
+   views
 
 
 Indices and tables
