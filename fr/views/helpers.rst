@@ -15,7 +15,7 @@ et peuvent même accélérer la fonctionnalité AJAX. Pour plus d'informations s
 les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 
 .. include:: /core-libraries/toc-helpers.rst
-    :start-line: 11
+    :start-line: 10
 
 .. _configuring-helpers:
 
@@ -276,24 +276,10 @@ helper::
 
 .. _helper-api:
 
-API de Helper
+Classe Helper
 =============
 
 .. php:class:: Helper
-
-    La classe de base pour les Helpers. Elle fournit un nombre de méthodes
-    utiles et des fonctionnalités pour le chargement d'autres helpers.
-
-.. php:method:: webroot($file)
-
-    Décide du nom de fichier du webroot de l'application. Si un thème est actif
-    et que le fichier existe dans le webroot du thème courant, le chemin du
-    fichier du thème sera retourné.
-
-.. php:method:: url($url, $full = false)
-
-    Génère une URL échappée de HTML, qui délégue à
-    :php:meth:`Cake\\Routing\\Router::url()`.
 
 Callbacks
 ---------

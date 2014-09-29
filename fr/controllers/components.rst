@@ -11,10 +11,11 @@ envisager de regrouper plusieurs fonctionnalités dans un Component. Créer des
 components permet de garder un code de controller propre et vous permet de
 réutiliser du code entre des projets.
 
-Chacun des components d'origine est détaillé dans son chapitre
-spécifique. Regardez :doc:`/core-libraries/toc-components`. Cette section
-décrit la façon de configurer et d'utiliser les components et la façon de
-créer vos propres components.
+Pour plus d'informations sur les components intégrés dans CakePHP, consultez
+le chapitre de chaque component:
+
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 7
 
 .. _configuring-components:
 

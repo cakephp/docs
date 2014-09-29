@@ -12,7 +12,7 @@ permet de créer sans effort des réponses HTTP à partir de vos controllers.
 .. _cake-request:
 
 Request
-#######
+=======
 
 .. php:class:: Request
 
@@ -34,8 +34,8 @@ référence du controller. Certaines des tâches incluses que ``Request`` permet
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
   et en propriétés d'un objet.
 
-Paramètres de la requête
-========================
+Paramètres de la Requête
+------------------------
 
 Request propose plusieurs interfaces pour accéder aux paramètres de la
 requête::
@@ -72,7 +72,7 @@ interne, on peut auusi les trouver dans les paramètres de la requête:
   :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Accéder aux Paramètres Querystring
-==================================
+----------------------------------
 
 .. php:method:: query($name)
 
@@ -90,7 +90,7 @@ Toute clé qui n'existe pas va retourner ``null``::
     // $foo === null
 
 Données de la Requête Body
-==========================
+--------------------------
 
 .. php:method:: data($name)
 
@@ -111,8 +111,8 @@ Vous pouvez aussi accéder au tableau de données, comme un tableau::
     $this->request->data['title'];
     $this->request->data['comments'][1]['author'];
 
-Accéder aux données PUT, PATCH ou DELETE
-========================================
+Accéder aux Données PUT, PATCH ou DELETE
+----------------------------------------
 
 .. php:method:: input($callback, [$options])
 
@@ -131,7 +131,7 @@ Additional parameters for the decoding function can be passed as arguments to
     $this->request->input('json_decode');
 
 Variables d'Environnement (à partir de $_SERVER et $_ENV)
-=========================================================
+---------------------------------------------------------
 
 .. php:method:: env($key, $value = null)
 
@@ -147,7 +147,7 @@ d'environnement sans avoir à modifier les variables globales
     $this->request->env('REQUEST_METHOD', 'POST');
 
 Données XML ou JSON
-===================
+-------------------
 
 Les applications employant :doc:`/development/rest` échangent souvent des
 données dans des organes post non encodées en URL. Vous pouvez lire les données
@@ -169,7 +169,7 @@ des paramètres supplémentaires::
     $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
 Informations du Chemin
-======================
+----------------------
 
 L'objet request fournit aussi des informations utiles sur les chemins dans votre
 application. ``$request->base`` et ``$request->webroot`` sont utiles pour
@@ -190,7 +190,7 @@ sous-dossier. Les différents propriétés que vous pouvez utiliser sont::
 .. _check-the-request:
 
 Vérifier les Conditions de la Requête
-=====================================
+-------------------------------------
 
 .. php:method:: is($type)
 
@@ -275,7 +275,7 @@ Vous pouvez utiliser plusieurs détecteurs intégrés:
   courante de mobiles.
 
 Données de Session
-==================
+------------------
 
 Pour accéder à la session pour une requête donnée, utilisez la méthode
 ``session()``::
@@ -286,7 +286,7 @@ Pour plus d'informations, regardez la documentation :doc:`/development/sessions`
 sur la façon d'utiliser l'objet session.
 
 Hôte et Nom de Domaine
-======================
+----------------------
 
 .. php:method:: domain($tldLength = 1)
 
@@ -310,7 +310,7 @@ Retourne l'hôte sur lequel votre application tourne::
     echo $request->host();
 
 Travailler avec les Méthodes & Headers de HTTP
-==============================================
+----------------------------------------------
 
 .. php:method:: method()
 
@@ -343,7 +343,7 @@ Retourne l'adresse de référence de la requête.
 Retourne l'adresse IP du visiteur courant.
 
 Faire Confiance aux Header de Proxy
-===================================
+-----------------------------------
 
 Si votre application est derrière un load balancer ou executée sur un service
 cloud, vous voudrez souvent avoir l'hôte de load balancer, le port et le
@@ -361,7 +361,7 @@ request utilise les en-têtes, définissez la propriété ``trustProxy`` à true
     $this->request->clientIp();
 
 Vérifier les En-têtes Acceptés
-==============================
+------------------------------
 
 .. php:method:: accepts($type = null)
 
@@ -392,7 +392,7 @@ Vérifier si une langue spécifique est acceptée::
 .. index:: $this->response
 
 Response
-########
+========
 
 .. php:class:: Response
 
@@ -417,7 +417,7 @@ communes liées, telles que:
 * Envoyer le corps de la réponse.
 
 Changer la Classe Response
-==========================
+--------------------------
 
 CakePHP utilise ``Response`` par défaut. ``Response`` est flexible et
 transparente pour l'utilisation de la classe. Si vous avez besoin de la
@@ -432,8 +432,8 @@ est à portée de main pour les tests car il vous permet d'écraser les
 méthodes qui interragissent avec :php:meth:`~CakeResponse::header()`. Voir la
 section sur :ref:`cakeresponse-testing` pour plus d'informations.
 
-Gérer les types de contenu
-==========================
+Gérer les Types de Contenu
+--------------------------
 
 Vous pouvez contrôler le Content-Type des réponses de votre application
 en utilisant :php:meth:`Cake\\Network\\Response::type()`. Si votre application
@@ -453,7 +453,7 @@ vue de commutation automatique de :php:class:`RequestHandlerComponent`, si vous
 l'utilisez.
 
 Définir le Character Set
-========================
+------------------------
 
 .. php:method:: charset($charset = null)
 
@@ -464,7 +464,7 @@ Définit le charset qui sera utilisé dans response::
 .. _cake-response-file:
 
 Envoyer des fichiers
-====================
+--------------------
 
 .. php:method:: file($path, $options = [])
 
@@ -505,7 +505,7 @@ download
     forcer le téléchargement.
 
 Envoyer une Chaîne de Caractère en Fichier
-==========================================
+------------------------------------------
 
 Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
 exemple si vous voulez générer un pdf ou un ics à la volée et voulez servir la
@@ -524,8 +524,8 @@ chaîne générée en fichier, vous pouvez faire cela en utilisant::
         return $this->response;
     }
 
-Définir les en-têtes
-====================
+Définir les En-têtes
+--------------------
 
 .. php:method:: header($header = null, $value = null)
 
@@ -556,8 +556,8 @@ Vous pouvez maintenant utiliser la méthode pratique
 :php:meth:`Cake\\Network\\Response::location()` pour directement définir ou
 récupérer l'en-tête de localisation du redirect.
 
-Interagir avec le cache du navigateur
-======================================
+Interagir avec le Cache du Navigateur
+-------------------------------------
 
 .. php:method:: disableCache()
 
@@ -595,7 +595,7 @@ second paramètre. Le Cache-Control est défini aussi à ``public``.
 .. _cake-response-caching:
 
 Réglage fin du Cache HTTP
-=========================
+-------------------------
 
 Une des façons les meilleures et les plus simples de rendre votre application
 plus rapide est d'utiliser le cache HTTP. Avec la mise en cache des models,
@@ -613,8 +613,8 @@ pouvez aussi utiliser plusieurs autres méthodes pour affiner le réglage des
 en-têtes de cache HTTP pour tirer profit du navigateur ou à l'inverse du cache
 du proxy.
 
-L'en-tête de Contrôle du Cache
-------------------------------
+L'En-tête de Contrôle du Cache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: sharable($public = null, $time = null)
 
@@ -655,7 +655,7 @@ plus considérée comme récente::
 component dans l'en-tête de ``Cache-Control``.
 
 L'En-tête d'Expiration
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: expires($time = null)
 
@@ -670,8 +670,8 @@ défini en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`:
 Cette méthode accepte aussi une instance :php:class:`DateTime` ou toute chaîne
 de caractère qui peut être parsée par la classe :php:class:`DateTime`.
 
-L'en-tête Etag
---------------
+L'En-tête Etag
+~~~~~~~~~~~~~~
 
 .. php:method:: etag($tag = null, $weak = false)
 
@@ -703,8 +703,8 @@ soit appeler manuellement la méthode
         // ...
     }
 
-L'en-tête Last-Modified
------------------------
+L'En-tête Last-Modified
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: modified($time = null)
 
@@ -729,7 +729,7 @@ soit appeler manuellement la méthode
     }
 
 L'en-tête Vary
---------------
+~~~~~~~~~~~~~~
 
 .. php:method:: vary($header)
 
@@ -743,7 +743,7 @@ ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
         $this->response->vary('Accept-Language');
 
 Envoyer des Réponses Non-Modifiées
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. php:method:: checkNotModified(Request $request)
 
@@ -758,7 +758,7 @@ oui, il supprime le contenu de la réponse et envoie l'en-tête
     }
 
 Envoyer la Response
-===================
+-------------------
 
 .. php:method:: send()
 
@@ -768,8 +768,8 @@ automatiquement à la fin de chaque requête de ``Dispatcher``.
 
 .. _cakeresponse-testing:
 
-Response et les tests
-=====================
+Response et les Tests
+---------------------
 
 La classe ``Response`` aide à faciliter le test des controllers et des
 components. En ayant un seul endroit pour mock/stub les en-têtes, vous
