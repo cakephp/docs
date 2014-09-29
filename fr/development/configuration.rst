@@ -1,15 +1,13 @@
 Configuration
 #############
 
-Configurer une application CakePHP c'est du gâteau. Après avoir
-installé CakePHP, la création d'une application web basique nécessite seulement
-que vous définissiez une configuration pour la base de données.
+Alors que les conventions enlèvent le besoin de configurer tout CakePHP, vous
+aurez tout de même besoin de configurer quelques options de configurations
+comme les accès à la base de données.
 
-Il y a toutefois d'autres étapes optionnelles de configuration que vous
-pouvez suivre afin de tirer profit de l'architecture flexible de CakePHP.
-Vous pouvez facilement ajouter des fonctionnalités provenant du cœur de
-CakePHP, configurer des mappings URLs supplémentaires/différentes (routes) et
-définir des inflexions supplémentaires/différentes.
+De plus, certaines options de configuration facultatives vous permettent
+de changer les valeurs par défaut & les implémentations avec des options
+qui conviennent à votre application.
 
 .. index:: app.php, app.php.default
 
@@ -17,12 +15,6 @@ définir des inflexions supplémentaires/différentes.
 
 Configurer votre Application
 ============================
-
-Bien que CakePHP soit un framework qui privilègie les conventions par rapport
-aux configurations, il reste tout de même quelques options de configuration
-qui permettent d'accorder CakePHP à vos besoins. Nous avons essayé de
-fournir CakePHP avec des valeurs par défaut utiles pour que vous puissiez
-développer plus rapidement.
 
 La configuration est généralement stockée soit dans les fichiers PHP ou INI,
 et chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
@@ -112,7 +104,7 @@ App.jsBaseUrl
     utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
     localisation du CDN.
 Security.salt
-    Une chaîne au hasard utilisée dans les hashages de sécurité. Cette valeur
+    Une chaîne au hasard utilisée dans les hashages. Cette valeur
     est aussi utilisée comme sel HMAC quand on fait des chiffrements
     symétriques.
 Asset.timestamp
@@ -120,15 +112,17 @@ Asset.timestamp
     à la fin des URLs des fichiers d'asset (CSS, JavaScript, Image) lors de
     l'utilisation des helpers adéquats.
     Valeurs valides:
-    (bool) ``false`` - Ne fait rien (par défaut)
-    (bool) ``true`` - Ajoute le timestamp quand debug > 0
-    (string) 'force' - Toujours ajouter le timestamp.
+
+    - (bool) ``false`` - Ne fait rien (par défaut)
+    - (bool) ``true`` - Ajoute le timestamp quand debug est à ``false``
+    - (string) 'force' - Toujours ajouter le timestamp.
 
 Configuration de la Base de Données
-===================================
+-----------------------------------
 
-Regardez :ref:`database-configuration` pour plus d'informations sur la
-configuration de vos connections à la base de données.
+Regardez la :ref:`Configuration de la Base de Données <database-configuration>`
+pour plus d'informations sur la configuration de vos connections à la base de
+données.
 
 Configuration de la Mise en Cache
 ---------------------------------
@@ -166,19 +160,6 @@ Configuration du Routing
 Regardez :ref:`routes-configuration` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
 
-Les constantes de Configuration
--------------------------------
-
-Alors que la plupart des options de configuration sont gérées par Configure,
-il y a quelques constantes que CakePHP utilise pendant son execution.
-
-.. php:const:: LOG_ERROR
-
-    Constante d'Erreur. Utilisée pour différentier le logging d'erreur et le
-    logging de debug. Actuellement, PHP prend en charge LOG\_DEBUG.
-
-.. _additional-class-paths:
-
 Chemins de Classe Supplémentaires
 =================================
 
@@ -189,7 +170,7 @@ utiliser pour les controllers dans votre application::
 
     "autoload": {
         "psr-4": {
-            "App\\Controller": "/path/to/directory/with/controller/folders",
+            "App\\Controller\\": "/path/to/directory/with/controller/folders",
             "App\": "src"
         }
     }
@@ -224,9 +205,8 @@ configurer des chemins supplémentaires pour vos ressources. Dans votre
         ]
     ];
 
-Les chemins doivent être suffixés par ``/``, ou ils ne fonctionneront pas
+Les chemins doivent finir par ``/``, ou ils ne fonctionneront pas
 correctement.
-
 
 Configuration de Inflection
 ===========================
@@ -240,13 +220,6 @@ Classe Configure
 
 .. php:class:: Configure
 
-Malgré quelques petites choses à configurer dans CakePHP, il est parfois utile
-d’avoir vos propres règles de configuration pour votre application. Dans le
-passé, vous aviez peut-être défini des valeurs de configuration personnalisées
-en définissant des variables ou des constantes dans certains fichiers. Faire
-cela, vous force à inclure ce fichier de configuration chaque fois que vous
-souhaitez utiliser ces valeurs.
-
 La nouvelle classe Configure de CakePHP peut être utilisée pour stocker et
 récupèrer des valeurs spécifiques d’exécution ou d’application. Attention,
 cette classe vous permet de stocker tout dedans, puis de l’utiliser dans toute
@@ -257,128 +230,101 @@ d’objets. Souvenez-vous d’essayer de suivre la règle “convention plutôt 
 configuration” et vous ne casserez pas la structure MVC que nous avons mis en
 place.
 
-Cette classe peut être appelée de n’importe où dans l’application dans un
-contexte statique::
+Vous pouvez accéder à ``Configure`` partout dans votre application::
 
     Configure::read('debug');
 
+Ecrire des Données de Configuration
+-----------------------------------
+
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: La clé à écrire, peut utiliser une valeur de
-        :term:`notation avec points`.
-    :param mixed $value: La valeur à stocker.
+Utilisez ``write()`` pour stocker les données dans configuration de
+l'application::
 
-    Utilisez ``write()`` pour stocker les données dans configuration de
-    l'application::
+    Configure::write('Company.name','Pizza, Inc.');
+    Configure::write('Company.slogan','Pizza for your body and soul');
 
-        Configure::write('Company.name','Pizza, Inc.');
-        Configure::write('Company.slogan','Pizza for your body and soul');
+.. note::
 
-    .. note::
+    La :term:`notation avec points` utilisée dans le paramètre
+    ``$key`` peut être utilisée pour organiser vos paramètres de
+    configuration dans des groupes logiques.
 
-        La :term:`notation avec points` utilisée dans le paramètre
-        ``$key`` peut être utilisée pour organiser vos paramètres de
-        configuration dans des groupes logiques.
+L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
-    L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
+    Configure::write('Company', [
+        'name' => 'Pizza, Inc.',
+        'slogan' => 'Pizza for your body and soul'
+    ]);
 
-        Configure::write(
-            'Company',
-            [
-                'name' => 'Pizza, Inc.',
-                'slogan' => 'Pizza for your body and soul'
-            ]
-        );
+Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
+les modes de debug et de production à la volée. C'est particulièrement
+pratique pour les intéractions AMF et SOAP quand les informations de debug
+peuvent entraîner des problèmes de parsing.
 
-    Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
-    les modes de debug et de production à la volée. C'est particulièrement
-    pratique pour les intéractions AMF et SOAP quand les informations de debug
-    peuvent entraîner des problèmes de parsing.
+Lire les Données de Configuration
+---------------------------------
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: La clé à lire, peut utiliser une valeur avec
-        :term:`notation avec points`
+Utilisée pour lire les données de configuration à partir de l'application.
+Par défaut, la valeur de debug de CakePHP est au plus important. Si une
+clé est fournie, la donnée est retournée. En utilisant nos exemples du
+write() ci-dessus, nous pouvons lire cette donnée::
 
-    Utilisée pour lire les données de configuration à partir de l'application.
-    Par défaut, la valeur de debug de CakePHP est au plus important. Si une
-    clé est fournie, la donnée est retournée. En utilisant nos exemples du
-    write() ci-dessus, nous pouvons lire cette donnée::
+    Configure::read('Company.name');    //yields: 'Pizza, Inc.'
+    Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
 
-        Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-        Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+    Configure::read('Company');
 
-        Configure::read('Company');
+    //yields:
+    array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-        //yields:
-        array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+Si $key est laissé à null, toutes les valeurs dans Configure seront
+retournées.
 
-    Si $key est laissé à null, toutes les valeurs dans Configure seront
-    retournées.
+Vérifier si les Données de Configuration sont Définies
+------------------------------------------------------
 
 .. php:staticmethod:: check($key)
 
-    :param string $key: La clé à vérifier.
+Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null.
 
-    Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null.
+    $exists = Configure::check('Company.name');
+
+Supprimer une Donnée de Configuration
+-------------------------------------
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: La clé à supprimer, peut être utilisée avec une valeur
-        en :term:`notation avec points`
+Utilisée pour supprimer l'information à partir de la configuration de
+l'application::
 
-    Utilisé pour supprimer l'information à partir de la configuration de
-    l'application::
+    Configure::delete('Company.name');
 
-        Configure::delete('Company.name');
-
-.. php:staticmethod:: version()
-
-    Retourne la version de CakePHP pour l'application courante.
+Lire & Supprimer les Données de Configuration
+---------------------------------------------
 
 .. php:staticmethod:: consume($key)
 
-    Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner
-    la lecture et la suppresssion de valeurs en une seule opération.
+Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner
+la lecture et la suppresssion de valeurs en une seule opération.
 
-    .. versionadded:: 3.0
-
-.. php:staticmethod:: config($name, $engine)
-
-    :param string $name: Le nom du moteur étant attaché.
-    :param ConfigReaderInterface $engine: L'instance du moteur étant attachée.
-
-    Attachez un reader de configuration à Configure. Les readers attachés
-    peuvent ensuite être utilisés pour charger les fichiers de configuration.
-    Regardez :ref:`loading-configuration-files` pour plus d'informations sur
-    la façon de lire les fichiers de configuration.
-
-.. php:staticmethod:: configured($name = null)
-
-    :param string $name: Le nom du reader à vérifier, si null
-        une liste de tous les readers attachés va être retournée.
-
-    Soit vérifie qu'un reader avec un nom donnée est attaché, soit récupère
-    la liste des readers attachés.
-
-.. php:staticmethod:: drop($name)
-
-    Retire un objet reader connecté.
-
-Lire et écrire les fichiers de configuration
+Lire et Ecrire les Fichiers de Configuration
 ============================================
 
 CakePHP est fourni avec deux fichiers readers de configuration intégrés.
-:php:class:`Cake\\Configure\\Engine\\PhpConfig` est capable de lire les
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` est capable de lire les
 fichiers de config de PHP, dans le même format dans lequel Configure a lu
-historiquement. :php:class:`Cake\\Configure\\Engine\\IniConfig` est capable de
-lire les fichiers de config ini du coeur.
+historiquement. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` est
+capable de lire les fichiers de config ini du coeur.
 Regardez la `documentation PHP <http://php.net/parse_ini_file>`_
 pour plus d'informations sur les fichiers ini spécifiés. Pour utiliser un
 reader de config du coeur, vous aurez besoin de l'attacher à Configure
 en utilisant :php:meth:`Configure::config()`::
 
-    use Cake\\Configure\\Engine\\PhpConfig;
+    use Cake\Core\Configure\Engine\PhpConfig;
 
     // Lire les fichiers de config à partir de config
     Configure::config('default', new PhpConfig());
@@ -399,22 +345,20 @@ quels alias de reader sont attachés, vous pouvez utiliser
     // Vérifie si un reader spécifique est attaché
     Configure::configured('default');
 
+.. php:staticmethod:: drop($name)
+
 Vous pouvez aussi retirer les readers attachés. ``Configure::drop('default')``
 retirerait l'alias du reader par défaut. Toute tentative future pour charger
-les fichiers de configuration avec ce reader serait en échec.
+les fichiers de configuration avec ce reader serait en échec::
 
+    Configure::drop('default');
 
 .. _loading-configuration-files:
 
-Chargement des fichiers de configuration
-========================================
+Chargement des Fichiers de Configuration
+----------------------------------------
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
-
-    :param string $key: L'identifieur du fichier de configuration à charger.
-    :param string $config: L'alias du reader configuré.
-    :param boolean $merge: Si oui ou non les contenus du fichier de lecture
-        doivent être fusionnés, ou écraser les valeurs existantes.
 
 Une fois que vous attachez un reader de config à Configure, vous pouvez charger
 les fichiers de configuration::
@@ -428,21 +372,18 @@ et d'ajouter de nouvelles valeurs dans la configuration existante exécutée.
 En configurant ``$merge`` à true, les valeurs ne vont pas toujours écraser
 la configuration existante.
 
-Créer et modifier les fichiers de configuration
+Créer et Modifier les Fichiers de Configuration
 -----------------------------------------------
 
 .. php:staticmethod:: dump($key, $config = 'default', $keys = [])
 
-    :param string $key: Le nom du fichier/configuration stockée à créer.
-    :param string $config: Le nom du reader avec lequel stocker les données.
-    :param array $keys: La liste des clés de haut-niveau à sauvegarder. Par
-        défaut, pour toutes les clés.
-
 Déverse toute ou quelques données de Configure dans un fichier ou un système de
 stockage supporté par le reader. Le format de sérialisation est décidé en
 configurant le reader de config attaché dans $config. Par exemple, si
-l'adaptateur 'default' est un :php:class:`PhpReader`, le fichier généré sera un
-fichier de configuration PHP qu'on pourra charger avec :php:class:`PhpReader`
+l'adaptateur 'default' est
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, le fichier généré sera
+un fichier de configuration PHP qu'on pourra charger avec
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`.
 
 Etant donné que le reader 'default' est une instance de PhpReader.
 Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
@@ -451,23 +392,16 @@ Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
 
 Sauvegarde seulement les erreurs gérant la configuration::
 
-    Configure::dump('error.php', 'default', array('Error', 'Exception'));
+    Configure::dump('error.php', 'default', ['Error', 'Exception']);
 
-``Configure::dump()`` peut être utilisé pour soit modifier, soit surcharger
+``Configure::dump()`` peut être utilisée pour soit modifier, soit surcharger
 les fichiers de configuration qui sont lisibles avec
 :php:meth:`Configure::load()`
 
-
-Stocker la configuration de runtime
+Stocker la Configuration de Runtime
 -----------------------------------
 
 .. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
-
-    :param string $name: La clé de stockage pour le fichier de cache.
-    :param string $cacheConfig: Le nom de la configuration de cache pour y
-        stocker les données de configuration.
-    :param mixed $data: Soit la donnée à stocker, soit laisser à null pour
-        stocker toutes les données dans Configure.
 
 Vous pouvez aussi stocker les valeurs de configuration exécutées pour
 l'utilisation dans une requête future. Depuis que configure ne se souvient
@@ -478,19 +412,14 @@ l'utiliser dans des requêtes suivantes::
     // Stocke la configuration courante dans la clé 'user_1234' dans le cache 'default'.
     Configure::store('user_1234', 'default');
 
-Les données de configuration stockées persistent dans la classe
-:php:class:`Cache`. Cela vous permet de stocker les informations de
-Configuration dans tout moteur de stockage avec lequel :php:class:`Cache` peut
-parler.
+Les données de configuration stockées persistent dans la configuration
+appelée Cache. Consultez la documentation sur
+:doc:`/core-libraries/caching` pour plus d'informations sur la mise en cache.
 
 Restaurer la configuration de runtime
 -------------------------------------
 
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
-
-    :param string $name: La clé de stockage à charger.
-    :param string $cacheConfig: La configuration de cache à partir de laquel
-        on charge les données.
 
 Une fois que vous avez stocké la configuration executée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
@@ -504,7 +433,7 @@ les restaurer avec la même clé, et la configuration de cache comme elle
 était utilisée pour les stocker. Les informations restaurées sont fusionnées
 en haut de la configuration existante exécutée.
 
-Créer vos propres readers de Configuration
+Créer vos Propres Readers de Configuration
 ==========================================
 
 Depuis que les readers de configuration sont une partie extensible de CakePHP,
@@ -577,73 +506,78 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
     une clé identifié par ``$key``.
 
 Moteurs de Configuration intégrés
----------------------------------
+=================================
+
+Fichiers de Configuration PHP
+-----------------------------
 
 .. php:class:: PhpConfig
 
-    Vous permet de lire les fichiers de configuration qui sont stockés en
-    fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
-    ``config``, soit des répertoires configs du plugin en utilisant la
-    :term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable
-    ``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
+Vous permet de lire les fichiers de configuration qui sont stockés en
+fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
+``config``, soit des répertoires configs du plugin en utilisant la
+:term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable
+``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
 
-        $config = [
-            'debug' => 0,
-            'Security' => [
-                'salt' => 'its-secret'
-            ],
-            'App' => [
-                'namespace' => 'App'
-            ]
-        ];
+    $config = [
+	'debug' => 0,
+	'Security' => [
+	    'salt' => 'its-secret'
+	],
+	'App' => [
+	    'namespace' => 'App'
+	]
+    ];
 
-    Des fichiers sans ``$config`` entraîneraient une
-    :php:exc:`ConfigureException`.
+Des fichiers sans ``$config`` entraîneraient une
+:php:exc:`ConfigureException`.
 
-    Charger votre fichier de configuration personnalisé en insérant ce qui suit
-    dans ``config/bootstrap.php``:
+Charger votre fichier de configuration personnalisé en insérant ce qui suit
+dans ``config/bootstrap.php``:
 
-        Configure::load('customConfig');
+    Configure::load('customConfig');
+
+Fichiers de Configuration Ini
+-----------------------------
 
 .. php:class:: IniConfig
 
-    Vous permet de lire les fichiers de configuration qui sont stockés en
-    fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
-    fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
+Vous permet de lire les fichiers de configuration qui sont stockés en
+fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
+fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
 
-    * Les valeurs séparées par des points sont étendues dans les tableaux.
-    * Les valeurs de la famille des boléens comme 'on' et 'off' sont converties
-      en boléens.
+* Les valeurs séparées par des points sont étendues dans les tableaux.
+* Les valeurs de la famille des boléens comme 'on' et 'off' sont converties
+  en boléens.
 
-    Un fichier ini d'exemple ressemblerait à cela::
+Un fichier ini d'exemple ressemblerait à cela::
 
-        debug = 0
+    debug = 0
 
-        [Security]
-        salt = its-secret
+    [Security]
+    salt = its-secret
 
-        [App]
-        namespace = App
+    [App]
+    namespace = App
 
-    Le fichier ini ci-dessus aboutirait aux mêmes données de configuration que
-    dans l'exemple PHP du dessus. Les structures de tableau peuvent être créées
-    soit à travers des valeurs séparées de point, soit des sections. Les
-    sections peuvent contenir des clés séparées de point pour des imbrications
-    plus profondes.
+Le fichier ini ci-dessus aboutirait aux mêmes données de configuration que
+dans l'exemple PHP du dessus. Les structures de tableau peuvent être créées
+soit à travers des valeurs séparées de point, soit des sections. Les
+sections peuvent contenir des clés séparées de point pour des imbrications
+plus profondes.
 
 Bootstrapping CakePHP
 =====================
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
-bootstrap de CakePHP dans config/bootstrap.php. Ce fichier est
-exécuté juste après le bootstrapping du coeur de CakePHP.
+bootstrap de CakePHP dans ``config/bootstrap.php``. Ce fichier est
+inclu juste avant chaque requête et commande CLI.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping
 courantes:
 
 - Définir des fonctions commodes.
-- Enregistrer les constantes globales.
-- Définir un model supplémentaire, une vue, et des chemins de controller.
+- Déclarer des constantes.
 - Créer des configurations de cache.
 - Configurer les inflections.
 - Charger les fichiers de configuration.
@@ -651,15 +585,9 @@ courantes:
 Faîtes attention de maintenir le model MVC du logiciel quand vous ajoutez des
 choses au fichier de bootstrap: il pourrait être tentant de placer des
 fonctions de formatage ici afin de les utiliser dans vos controllers.
-
-Résister à la tentation. Vous serez content plus tard d'avoir suivi cette
-ligne de conduite.
-
-Vous pouvez aussi envisager de placer des choses dans la classe
-:php:class:`AppController`. Cette class est une classe parente pour tous les
-controllers dans votre application. :php:class:`AppController` est un endroit
-pratique pour utiliser les callbacks de controller et définir des méthodes à
-utiliser pour tous les controllers.
+Comme vous le verrez dans les sections :doc:`/controllers` et
+:doc:`/views`, il y a de meilleurs moyens d'ajouter de la logique personnalisée
+à votre application.
 
 
 .. meta::

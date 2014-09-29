@@ -5,20 +5,14 @@ Routing
 
 .. php:class:: Router
 
-Routing is a feature that maps URLs to controller actions. It was
-added to CakePHP to make pretty URLs more configurable and
-flexible. Using Apache's mod\_rewrite is not required for using
-routes, but it will make your address bar look much more tidy.
+Routing provides you tools that map URLs to controller actions. By defining
+routes, you can separate how your application is implemented from how its URL's
+are structured.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
-where an array of parameters can be reversed into a string URL.
-By using reverse routing, you can easily re-factor your application's
+where an array of parameters can be transformed into a URL string.
+By using reverse routing, you can more easily re-factor your application's
 URL structure without having to update all your code.
-
-Routes in an application are configured in ``config/routes.php``.
-Routes are processed based on the scopes they are defined in. Within each scope
-routes are processed top to bottom, so you should place the most frequently used
-routes at the top of each scope.
 
 .. index:: routes.php
 
@@ -107,9 +101,6 @@ Connecting Routes
 =================
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
-
-Defining your own routes allows you to define how your application will respond
-to a given URL. Routes are defined in the ``config/routes.php`` file.
 
 To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
@@ -364,6 +355,14 @@ as defined in the routes::
         'action' => 'view',
         'id' => 3,
         'slug' => 'CakePHP_Rocks'
+    ]);
+
+    // You can also used numerically indexed parameters.
+    echo $this->Html->link('CakePHP Rocks', [
+        'controller' => 'Blog',
+        'action' => 'view',
+        3,
+        'CakePHP_Rocks'
     ]);
 
 .. _named-routes:

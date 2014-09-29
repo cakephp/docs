@@ -14,7 +14,7 @@ functionality. For more information on the helpers included in CakePHP,
 check out the chapter for each helper:
 
 .. include:: /core-libraries/toc-helpers.rst
-    :start-line: 11
+    :start-line: 10
 
 .. _configuring-helpers:
 
@@ -263,23 +263,10 @@ helper::
 
 .. _helper-api:
 
-Helper API
-==========
+Helper Class
+============
 
 .. php:class:: Helper
-
-    The base class for Helpers. It provides a number of utility methods and
-    features for loading other helpers.
-
-.. php:method:: webroot($file)
-
-    Resolve a file name to the webroot of the application. If a theme is active
-    and the file exists in the current theme's webroot, the path to the themed
-    file will be returned.
-
-.. php:method:: url($url, $full = false)
-
-    Generates an HTML escaped URL, delegates to :php:meth:`Cake\\Routing\\Router::url()`.
 
 Callbacks
 ---------

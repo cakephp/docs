@@ -6,20 +6,13 @@ Routing
 .. php:class:: Router
 
 Routing est une fonctionnalité qui mappe les URLs aux actions du controller.
-Elle a été ajoutée à CakePHP pour rendre les URLs belles et plus configurables
-et flexibles. L'utilisation du mod\_rewrite de Apache n'est pas nécessaire pour
-utiliser les routes, mais cela rendra votre barre d'adresse beaucoup plus
-élégante.
+En définissant des routes, vous pouvez séparer la façon dont votre
+application est intégré de la façon dont ses URLs sont structurées.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé,
-où un tableau de paramètres peut être inversé en une chaîne URL.
+où un tableau de paramètres peut être transformé en une URL.
 En utilisant le routing inversé, vous pouvez facilement reconstruire votre
 structure d'URL des applications sans avoir mis à jour tous vos codes.
-
-Les Routes dans une application sont configurées dans ``config/routes.php``.
-Routes are processed based on the scopes they are defined in. Within each scope
-routes are processed top to bottom, so you should place the most frequently used
-routes at the top of each scope.
 
 .. index:: routes.php
 
@@ -112,15 +105,13 @@ Connecter les Routes
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
-Définir vos propres routes vous permet de définir la façon dont votre
-application va répondre à une URL donnée. Les Routes sont définies dans le
-fichier ``config/routes.php``.
-
-To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
-scopes not only let you keep your code DRY, they also help Router optimize its
-operation. As seen above you can also use ``Router::connect()`` to connect
-routes. This method defaults to the ``/`` scope. To create a scope and connect
-some routes we'll use the ``scope()`` method::
+Pour garder votre code :term:`DRY`, vous pouvez utiliser les 'routing scopes'.
+Les scopes de Routing permettent non seulement de garder votre code DRY mais
+aident aussi le Router à optimiser son opération. Comme vous l'avez vu
+précedemment, vous pouvez aussi utiliser ``Router::connect()`` pour connecter
+les routes. Cette méthode va par défaut vers le scope ``/``. Pour créer un
+scope et connecter certaines routes, nous allons utiliser la méthode
+``scope()``::
 
     // Dans config/routes.php
     Router::scope('/', function($routes) {
@@ -383,6 +374,14 @@ comme définie dans les routes::
         'action' => 'view',
         'id' => 3,
         'slug' => 'CakePHP_Rocks'
+    ]);
+
+    // Vous pouvez aussi utiliser des paramètres indexés numériquement.
+    echo $this->Html->link('CakePHP Rocks', [
+        'controller' => 'Blog',
+        'action' => 'view',
+        3,
+        'CakePHP_Rocks'
     ]);
 
 .. _named-routes:
