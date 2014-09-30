@@ -106,11 +106,7 @@ Convenções para Views
 Arquivos de template views são nomeadas seguindo as funções
 que a exibem do controller, separadas por sublinhado. A função
 getReady() da classe PeopleController buscará por um template view em
-``src/Template/People/get\_ready.ctp``.
-
-
-
-O padrão é
+``src/Template/People/get\_ready.ctp``. O padrão é
 ``src/Template/Controller/underscored\_function\_name.ctp``.
 
 Por nomear as partes de sua aplicação utilizando as convenções do CakePHP,
