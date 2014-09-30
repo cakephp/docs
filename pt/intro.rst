@@ -150,12 +150,12 @@ Leitura adicional
 =================
 
 .. toctree::
-:maxdepth: 1
+    :maxdepth: 1
 
     /intro/where-to-get-help
     /intro/conventions
     /intro/cakephp-folder-structure
 
 .. meta::
-:title lang=pt: CakePHP num piscar de olhos
+    :title lang=pt: CakePHP num piscar de olhos
     :keywords lang=pt: estrutura de diretórios,nomes de tablea,requisição inicial,tabela de banco de dados,estrutura organizacional,rst,nomenclatura de arquivos,convenções,mvc
