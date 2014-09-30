@@ -1,5 +1,5 @@
-Security
-########
+Security Component
+##################
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
