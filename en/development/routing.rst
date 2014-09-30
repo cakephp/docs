@@ -235,7 +235,7 @@ rewritten like so::
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'Cake\Routing\Route\InflectedRoute']
+        ['id' => '[0-9]+', 'routeClass' => 'InflectedRoute']
     );
 
 The special ``InflectedRoute`` class will make sure that the ``:controller`` and
@@ -547,7 +547,7 @@ with the following router connection::
     Router::scope('/', function($routes) {
         $routes->connect('/:plugin/:controller/:action',
             ['plugin' => '*', 'controller' => '*', 'action' => '*'],
-            ['routeClass' => 'Cake\Routing\Route\DashedRoute']
+            ['routeClass' => 'DashedRoute']
         );
 
         $routes->fallbacks();
