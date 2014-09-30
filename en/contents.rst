@@ -16,9 +16,9 @@ Contents
     development/configuration
     development/routing
     controllers/request-response
-    controllers
-    views
     orm
+    views
+    controllers
     plugins
 
     development/errors
