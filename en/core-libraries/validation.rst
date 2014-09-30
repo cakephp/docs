@@ -345,7 +345,7 @@ as follows::
             'rule' => ['minLength', 10]
         ])
         ->add('rating', 'validValue', [
-            'rule' => ['between', 1, 5]
+            'rule' => ['range', 1, 5]
         ]);
 
 Core rules that take additional parameters should have an array for the ``rule`` key
