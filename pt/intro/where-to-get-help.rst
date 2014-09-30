@@ -42,13 +42,6 @@ a API (Application Programming Interface) do CakePHP é a mais
 compreensiva documentação sobre os detalhes técnicos e minuciosos
 sobre do funcionamento interno do framework.
 
-Straight to the point and straight from the core developers, the
-CakePHP API (Application Programming Interface) is the most
-comprehensive documentation around for all the nitty gritty details
-of the internal workings of the framework. É um código de referência
-atualizado para você se deleitar.
-
-
 Os Testes de Caso
 =================
 
