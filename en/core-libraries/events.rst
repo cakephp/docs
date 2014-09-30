@@ -425,12 +425,9 @@ events can make debugging harder and require additional integration testing.
 Additional Reading
 ==================
 
-.. toctree::
-    :maxdepth: 1
-
-    /orm/behaviors
-    /controllers/components
-    /views/helpers
+* :doc:`/orm/behaviors`
+* :doc:`/controllers/components`
+* :doc:`/views/helpers`
 
 
 .. meta::
