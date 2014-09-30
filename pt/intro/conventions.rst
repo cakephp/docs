@@ -1,12 +1,12 @@
 Convenções do CakePHP
 #####################
 
-Nós somos grandes fãs de convenção sobre configuração. Enquanto que leva um
+Nós somos grandes fãs de convenção sobre configuração. Apesar de levar um
 pouco de tempo para aprender as convenções do CakePHP, você economiza tempo a
-longo prazo. Ao seguir as convenções, você ganha funcionalidades gratuitamente e 
-libertar-se do pesadelo de manutenção e rastreamento de arquivos de configuração.
+longo prazo. Ao seguir as convenções, você ganha funcionalidades instantaneamente e 
+liberta-se do pesadelo de manutenção e rastreamento de arquivos de configuração.
 Convenções também prezam por uma experiência de desenvolvimento uniforme, 
-permitindo que outros desenvolvedores embarquem e ajudem mais facilmente.
+permitindo que outros desenvolvedores ajudem mais facilmente.
 
 Convenções para Controllers
 ===========================
