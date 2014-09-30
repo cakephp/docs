@@ -364,7 +364,7 @@ ces conditions limite & options comme suit::
             'rule' => ['minLength', 10]
         ])
         ->add('rating', 'validValue', [
-            'rule' => ['between', 1, 5]
+            'rule' => ['range', 1, 5]
         ]);
 
 Les règles du Coeur qui prennnent des paramètres supplémentaires doivent avoir

@@ -247,7 +247,7 @@ peut être réécrit en::
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'Cake\Routing\Route\InflectedRoute']
+        ['id' => '[0-9]+', 'routeClass' => 'InflectedRoute']
     );
 
 La classe spéciale ``InflectedRoute`` va s'assurer que les paramètres
@@ -557,6 +557,31 @@ a link that has no plugin you can do the following::
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
+
+SEO-Friendly Routing
+--------------------
+
+As a SEO-minded developer, it'll be desirable to outfit your URLs with dashes in
+order to avoid your application being cast into the search engine shadows,
+and hoist it to the divine rankings of the search engine gods. The
+``DashedRoute`` class furnishes your application with the ability to route
+plugin, controller, and camelized action names to a dashed URL.
+
+For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
+``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
+with the following router connection::
+
+    Router::scope('/', function($routes) {
+        $routes->connect('/:plugin/:controller/:action',
+            ['plugin' => '*', 'controller' => '*', 'action' => '*'],
+            ['routeClass' => 'DashedRoute']
+        );
+
+        $routes->fallbacks();
+    });
+
+Under the ``/`` routing scope, the previous example will attempt to catch all
+plugin/controller/action dashed routes and map them to their respective actions.
 
 .. index:: file extensions
 .. _file-extensions:
