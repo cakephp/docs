@@ -14,8 +14,19 @@ formulaires), aident à la mise en forme du texte, les durées et les nombres,
 et peuvent même accélérer la fonctionnalité AJAX. Pour plus d'informations sur
 les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 10
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url
 
 .. _configuring-helpers:
 

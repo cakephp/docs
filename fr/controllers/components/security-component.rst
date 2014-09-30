@@ -1,5 +1,5 @@
-Security (Sécurité)
-###################
+SecurityComponent (Sécurité)
+############################
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
@@ -19,9 +19,7 @@ Toutes ces propriétés peuvent être définies directement ou au travers de
 
 En utilisant le Component Security vous obtenez automatiquement une protection contre la falsification de formulaire.
 Des jetons de champs cachés seront automatiquement insérés dans les
-formulaires et vérifiés par le component Security. En outre, une
-soumission par formulaire ne sera pas acceptée après une certaine
-période d'inactivité, qui est contrôler par le temps ``csrfExpires``.
+formulaires et vérifiés par le component Security.
 
 Si vous utilisez la fonctionnalité de protection des formulaires
 par le component Security et que d'autres components traitent des données
@@ -205,7 +203,7 @@ les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
 Pour activer la protection CSRF, utilisez 
-:doc:`/core-libraries/components/csrf-component`.
+:doc:`/controllers/components/csrf-component`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================

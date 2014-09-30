@@ -6,8 +6,8 @@ FlashHelper
 .. php:class:: FlashHelper(View $view, array $config = [])
 
 FlashHelper fournit une façon de rendre les messages flash qui sont définis dans
-``$_SESSION`` par :doc:`FlashComponent </core-libraries/components/flash>`.
-:doc:`FlashComponent </core-libraries/components/flash>` et FlashHelper
+``$_SESSION`` par :doc:`FlashComponent </controllers/components/flash>`.
+:doc:`FlashComponent </controllers/components/flash>` et FlashHelper
 utilisent principalement des elements pour rendre les messages flash. Les
 elements flash se trouvent dans le répertoire ``src/Template/Element/Flash``.
 Vous remarquerez que le template de l'App de CakePHP est livré avec deux
@@ -23,7 +23,7 @@ Pour rendre un message flash, vous pouvez simplement utiliser la méthode
 
 Par défaut, CakePHP utilise une clé "flash" pour les messages flash dans une
 session. Mais si vous spécifiez une clé lors de la définition du message
-flash dans :doc:`FlashComponent </core-libraries/components/flash>`, vous
+flash dans :doc:`FlashComponent </controllers/components/flash>`, vous
 pouvez spécifier la clé flash à rendre::
 
     <?= $this->Flash->render('other') ?>
@@ -47,4 +47,5 @@ FlashComponent::
     vous devez les échapper avec :php:func:`h` lors du formatage de vos
     messages.
 
-Pour plus d'informations sur le tableau d'options disponibles, consultez la section :doc:`FlashComponent </core-libraries/components/flash>`.
+Pour plus d'informations sur le tableau d'options disponibles, consultez la
+section :doc:`FlashComponent </controllers/components/flash>`.

@@ -4,72 +4,28 @@ Librairies du Coeur
 CakePHP est livré avec une pléthore de fonctions et de classes intégrées. Ces
 classes et fonctions tentent de couvrir certaines des fonctionnalités les plus
 communes requises dans les applications web.
-
-Usage Général
-=============
-
-Des librairies à usage général sont disponibles et réutilisées dans plusieurs
-endroits de CakePHP.
+Au-delà des éléments fondamentaux MVC, CakePHP comprend un grand choix de classes
+d'utilitaires qui vous aident à tout faire, de la requête vers des services web,
+à la manipulation des tableaux, la mise en forme des nombres et des chaînes de
+caractères et bien plus encore.
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-general-purpose
-
-.. _core-behaviors:
-
-Behaviors (Comportements)
-=========================
-
-.. include:: /core-libraries/toc-behaviors.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/toc-behaviors
-
-.. _core-components:
-
-Components (Composants)
-=======================
-
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-components
-
-.. _core-helpers:
-
-Helpers (Assistants)
-====================
-
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-helpers
-
-Utilitaires
-===========
-
-En plus des components du coeur MVC, CakePHP inclut une bonne sélection de
-classes utilitaires qui vous aident à faire tout à partir de requêtes de
-services web, de mettre en cache, de faire des logs, d'internationaliser et plus
-encore.
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/toc-utilities
+    core-libraries/app
+    core-libraries/collections
+    core-libraries/file-folder
+    core-libraries/global-constants-and-functions
+    core-libraries/hash
+    core-libraries/httpclient
+    core-libraries/inflector
+    core-libraries/number
+    core-libraries/registry-objects
+    core-libraries/router
+    core-libraries/security
+    core-libraries/string
+    core-libraries/time
+    core-libraries/xml
 
 .. meta::
     :title lang=fr: Librairies du Coeur

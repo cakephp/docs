@@ -464,13 +464,9 @@ tests d'intégration supplémentaires.
 Lecture Supplémentaire
 ======================
 
-.. toctree::
-    :maxdepth: 1
-
-    /orm/behaviors
-    /controllers/components
-    /views/helpers
-
+* :doc:`/orm/behaviors`
+* :doc:`/controllers/components`
+* :doc:`/views/helpers`
 
 .. meta::
     :title lang=fr: Événements système

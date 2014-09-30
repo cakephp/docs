@@ -402,7 +402,7 @@ Paginer a Model
 Cette méthode est utilisée pour paginer les résultats retournés par vos
 models. Vous pouvez définir les tailles de la page, les conditions à
 utiliser pour la recherche de ces données et bien plus encore. Consultez la
-section :doc:`pagination <core-libraries/components/pagination>`
+section :doc:`pagination <controllers/components/pagination>`
 pour plus de détails sur l'utilisation de la pagination.
 
 L'attribut paginate vous donne une façon facile de personnaliser la façon dont

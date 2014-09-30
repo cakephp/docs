@@ -14,8 +14,17 @@ réutiliser du code entre des projets.
 Pour plus d'informations sur les components intégrés dans CakePHP, consultez
 le chapitre de chaque component:
 
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 7
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+    /controllers/components/sessions
 
 .. _configuring-components:
 
@@ -24,8 +33,8 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication` et
-:doc:`/core-libraries/components/cookie`.
+:doc:`/controllers/components/authentication` et
+:doc:`/controllers/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait via ``loadComponent()`` dans la méthode ``initialize`` de votre
 Controller ou via le tableau ``$components``::
