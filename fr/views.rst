@@ -111,10 +111,10 @@ données sur notre post. Notre vue pourrait ressembler à ceci::
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
 remplir un ensemble de bloc. Tout contenu qui ne serait pas déjà dans un bloc
-défini, sera capturé et placé dans un block spécial appellé ``content``. Quand
-une vue contient un appel vers un ``extend()``, l'éxécution continue jusqu'à la
+défini, sera capturé et placé dans un block spécial appelé ``content``. Quand
+une vue contient un appel vers un ``extend()``, l'exécution continue jusqu'à la
 fin de la vue actuelle. Une fois terminé, la vue étendue va être générée. En
-appellant ``extend()`` plus d'une fois dans un fichier de vue, le dernier appel
+appelant ``extend()`` plus d'une fois dans un fichier de vue, le dernier appel
 va outrepasser les précédents::
 
     $this->extend('/Common/view');
@@ -163,7 +163,7 @@ vous permettent de travailler avec les blocs capturant::
     $this->end();
 
 Vous pouvez aussi le rattacher à l'intérieur d'un block en utilisant ``start()``
-pluieurs fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou
+plusieurs fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou
 outrepasser un block à n'importe quel moment::
 
     // Nettoyer le contenu précedent de la sidebar.
@@ -482,7 +482,7 @@ de vues). Dans l'exemple ci-dessus, le fichier
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
-l'element. Les options supoortés sont 'cache' et 'callbacks'. Un exemple::
+l'element. Les options supportés sont 'cache' et 'callbacks'. Un exemple::
 
     echo $this->element('helpbox', array(
             "helptext" => "Ceci est passé à l'element comme $helptext",
