@@ -671,6 +671,8 @@ provide the datatypes for each column in the join conditions. By providing
 datatypes for the join conditions, the ORM can correctly convert data types into
 SQL.
 
+To be able to access the data from your joins, you will need to call the contain() function.
+
 Inserting Data
 ==============
 
