@@ -1,74 +1,27 @@
-Core Libraries
-##############
-
-CakePHP comes with a plethora of built-in functions and classes. These classes
-and functions try to cover some of the most common features required in web
-applications.
-
-General Purpose
-===============
-
-General purpose libraries are available and reused in many places across
-CakePHP.
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/toc-general-purpose
-
-.. _core-behaviors:
-
-Behaviors
-=========
-
-.. include:: /core-libraries/toc-behaviors.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/toc-behaviors
-
-.. _core-components:
-
-Components
-==========
-
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-components
-
-.. _core-helpers:
-
-Helpers
-=======
-
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-helpers
-
-Utilities
-=========
+Core Utility Libraries
+#######################
 
 Beyond the core MVC components, CakePHP includes a great selection of utility
-classes that help you do everything from webservice requests, to caching, to
-logging, internationalization and more.
+classes that help you do everything from webservice requests, to manipulating
+arrays, to formatting numbers and strings and more.
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-utilities
+    core-libraries/app
+    core-libraries/collections
+    core-libraries/file-folder
+    core-libraries/global-constants-and-functions
+    core-libraries/hash
+    core-libraries/httpclient
+    core-libraries/inflector
+    core-libraries/number
+    core-libraries/registry-objects
+    core-libraries/router
+    core-libraries/security
+    core-libraries/string
+    core-libraries/time
+    core-libraries/xml
 
 .. meta::
     :title lang=en: Core Libraries

@@ -11,7 +11,7 @@ to format currency, percentages, data sizes, format numbers to
 specific precisions and also to give you more flexibility with
 formatting numbers.
 
-.. include:: ../../core-utility-libraries/number.rst
+.. include:: /core-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber
 

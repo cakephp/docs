@@ -475,7 +475,7 @@ when you often need to show the number of associated records, but don't want to
 load all the records just to count them. For example, the comment count on any
 given article is often cached to make generating lists of articles more
 efficient. You can use the :doc:`CounterCacheBehavior
-</core-libraries/behaviors/counter-cache>` to cache counts of associated
+</orm/behaviors/counter-cache>` to cache counts of associated
 records.
 
 BelongsToMany Associations
@@ -898,7 +898,7 @@ threading will occur on.
 
 .. tip::
     If you need to manage more advanced trees of data, consider using
-    :doc:`/core-libraries/behaviors/tree` instead.
+    :doc:`/orm/behaviors/tree` instead.
 
 .. _custom-find-methods:
 

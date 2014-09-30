@@ -13,8 +13,19 @@ in formatting text, times and numbers, and can even speed up AJAX
 functionality. For more information on the helpers included in CakePHP,
 check out the chapter for each helper:
 
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 10
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url
 
 .. _configuring-helpers:
 

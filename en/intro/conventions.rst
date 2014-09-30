@@ -83,7 +83,7 @@ would be ``people``, ``big_people``, and ``really_big_people``,
 respectively.
 
 You can use the utility library :php:class:`Cake\\Utility\\Inflector` to check
-the singular/plural of words. See the :doc:`/core-utility-libraries/inflector`
+the singular/plural of words. See the :doc:`/core-libraries/inflector`
 for more information.
 
 Field names with two or more words are underscored: first\_name.
