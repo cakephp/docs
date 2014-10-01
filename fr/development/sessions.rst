@@ -397,9 +397,8 @@ seule fois. Ils sont souvent utilisés pour afficher des messages d'erreur ou
 pour confirmer que les actions se font avec succès.
 
 Pour définir et afficher les messages flash, vous devez utiliser
-:doc:`/core-libraries/components/flash` et
-:doc:`/core-libraries/helpers/flash`:doc:`/core-libraries/helpers/flash`
-
+:doc:`/controllers/components/flash` et
+:doc:`/views/helpers/flash`
 
 .. meta::
     :title lang=fr: Sessions

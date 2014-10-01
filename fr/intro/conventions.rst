@@ -91,7 +91,7 @@ inflexions.
 
 Pour vous assurer de la syntaxe des mots pluriels et singuliers, vous pouvez
 utiliser la bibliothèque utilitaire :php:class:`Inflector`. Voir la
-documentation sur :doc:`/core-utility-libraries/inflector` pour plus
+documentation sur :doc:`/core-libraries/inflector` pour plus
 d'informations.
 
 Les noms des champs avec deux mots ou plus doivent être avec des underscores

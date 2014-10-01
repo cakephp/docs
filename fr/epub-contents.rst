@@ -2,26 +2,38 @@ Contenu
 #######
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
-   intro
-   quickstart
-   installation
-   development/configuration
-   development/routing
-   controllers/request-response
-   controllers
-   views
-   orm
+    intro
+    quickstart
+    installation
+    development/configuration
+    development/routing
+    controllers/request-response
+    controllers
+    views
+    orm
+    plugins
 
-   core-libraries
-   plugins
-   console-and-shells
-   development
-   deployment
-   tutorials-and-examples
-   contributing
-   appendices
+    development/errors
+    core-libraries/caching
+    core-libraries/logging
+    core-libraries/events
+
+    development/sessions
+    development/dispatch-filters
+    development/rest
+    controllers/components/pagination
+    controllers/components/csrf
+    controllers/components/security
+    core-libraries/email
+    core-libraries/validation
+    core-libraries/internationalization-and-localization
+    development/testing
+    deployment
+    console-and-shells
+    core-libraries
+    appendices
 
 .. meta::
     :title lang=fr: Contenu

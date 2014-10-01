@@ -23,9 +23,13 @@ Utiliser les Behaviors
 Behaviors du Coeur
 ==================
 
-.. include:: ../core-libraries/toc-behaviors.rst
-    :start-after: start-toc
-    :end-before: end-toc
+.. toctree::
+    :maxdepth: 1
+
+    /orm/behaviors/counter-cache
+    /orm/behaviors/timestamp
+    /orm/behaviors/translate
+    /orm/behaviors/tree
 
 Créer un Behavior
 =================

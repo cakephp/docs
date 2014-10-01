@@ -11,7 +11,7 @@ contiennent des moyens pour formater les devises, pourcentages, taille des
 données, le format des nombres avec précisions et aussi de vous donner
 davantage de souplesse en matière de formatage des nombres.
 
-.. include:: ../../core-utility-libraries/number.rst
+.. include:: /core-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber
 

@@ -53,8 +53,8 @@ Si vous sortez votre application dans la nature, il est bon de vous assurer
 qu'elle n'a pas de fuites:
 
 * Assurez-vous que vous utilisez le
-  :doc:`/core-libraries/components/csrf-component` activé.
-* Vous pouvez activer :doc:`/core-libraries/components/security-component`.
+  :doc:`/controllers/components/csrf-component` activé.
+* Vous pouvez activer :doc:`/controllers/components/security-component`.
   Il évite plusieurs types de form tampering et réduit la possibilité
   des problèmes de mass-assignment.
 * Assurez-vous que vos models ont les bonnes règles de

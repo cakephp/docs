@@ -393,7 +393,7 @@ vos propres règles.
 
 Si vous avez besoin de plus de contrôle, nous vous suggérons de lire le guide
 complet de Auth dans la section
-:doc:`/core-libraries/components/authentication` où vous en trouverez plus sur
+:doc:`/controllers/components/authentication` où vous en trouverez plus sur
 la configuration du component, la création de classes d'autorisation
 personnalisée, et bien plus encore.
 
@@ -401,7 +401,7 @@ Lectures suivantes suggérées
 ----------------------------
 
 #. :doc:`/console-and-shells/code-generation-with-bake` Génération basique CRUD de code
-#. :doc:`/core-libraries/components/authentication`: Inscription d'utilisateur et connexion
+#. :doc:`/controllers/components/authentication`: Inscription d'utilisateur et connexion
 
 
 .. meta::

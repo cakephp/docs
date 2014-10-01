@@ -367,8 +367,8 @@ Flash messages are small messages displayed to end users once. They are often us
 present error messages, or confirm that actions took place successfully.
 
 To set and display flash messages you should use
-:doc:`/core-libraries/components/flash` and
-:doc:`/core-libraries/helpers/flash`
+:doc:`/controllers/components/flash` and
+:doc:`/views/helpers/flash`
 
 .. meta::
     :title lang=en: Sessions

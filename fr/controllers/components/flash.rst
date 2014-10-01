@@ -9,7 +9,7 @@ FlashComponent est un moyen de définir des messages de notifications à affiche
 après avoir envoyé un formulaire ou des données connus. CakePHP appelle
 ces messages des "messages flash". FlashComponent écrit les messages flash dans
 ``$_SESSION``, pour être affichés dans une View en utilisant
-:doc:`FlashHelper </core-libraries/helpers/flash>`.
+:doc:`FlashHelper </views/helpers/flash>`.
 
 Définir les Messages Flash
 ==========================
@@ -70,4 +70,4 @@ Un exemple de l'utilisation de ces options::
     messages flash.
 
 Pour plus d'informations sur le rendu de vos messages flash, consultez la
-section :doc:`FlashHelper </core-libraries/helpers/flash>`.
+section :doc:`FlashHelper </views/helpers/flash>`.

@@ -476,7 +476,7 @@ Network\\Http
   le support pour les nouveaux systèmes d'authentification comme OAuth, et les
   uploads de fichier.
   Il utilise les APIs de PHP en flux donc il n'est pas nécessaire d'avoir cURL.
-  Regardez la documentation :doc:`/core-utility-libraries/httpclient` pour plus
+  Regardez la documentation :doc:`/core-libraries/httpclient` pour plus
   d'informations.
 
 Network\\Email
@@ -591,7 +591,7 @@ CookieComponent
   configuration accessible avec ``config()``.
 - ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
   deux-là sont maintenant gérés avec des données de config. Consultez
-  :doc:`/core-libraries/components/cookie` pour plus d'informations.
+  :doc:`/controllers/components/cookie` pour plus d'informations.
 - Le chemin pour les cookies sont maintenant par défaut le chemin de l'app
   plutôt que "/".
 
@@ -667,7 +667,7 @@ SessionComponent
 ----------------
 
 - ``SessionComponent::setFlash()`` est déprécié. Vous devez utiliser
-  :doc:`/core-libraries/components/flash` à la place.
+  :doc:`/controllers/components/flash` à la place.
 
 Error
 -----
@@ -986,7 +986,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   le message.
 
 Il est recommandé que vous regardiez la documentation
-:doc:`/core-libraries/helpers/form` pour plus de détails sur la façon d'utiliser
+:doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
 le FormHelper dans 3.0.
 
 HtmlHelper
@@ -1065,7 +1065,7 @@ SessionHelper
 -------------
 
 - ``SessionHelper::flash()`` est déprécié. Vous devez utiliser
-  :doc:`/core-libraries/helpers/flash` à la place.
+  :doc:`/views/helpers/flash` à la place.
 
 JsHelper
 --------

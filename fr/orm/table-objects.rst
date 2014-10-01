@@ -494,7 +494,7 @@ d'enregistrements associés, mais que vous ne souhaitiez pas charger tous les
 articles juste pour les compter. Par exemple, le compteur de comment sur
 n'importe quel article donné est souvent mis en cache pour rendre la génération
 des lists d'article plus efficace. Vous pouvez utiliser
-:doc:`CounterCacheBehavior </core-libraries/behaviors/counter-cache>` pour
+:doc:`CounterCacheBehavior </orm/behaviors/counter-cache>` pour
 mettre en cache les compteurs des enregistrements associés.
 
 Associations BelongsToMany
@@ -860,6 +860,34 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
             // More data.
         ]
     ];
+    
+Finding Threaded Data
+---------------------
+
+The ``find('threaded')`` finder returns nested entities that are threaded
+together through a key field. By default this field is ``parent_id``. This
+finder allows you to easily access data stored in an 'adjacency list' style
+table. All entities matching a given ``parent_id`` are placed under the
+``children`` attribute::
+
+    $query = $comments->find('threaded');
+
+    // Expanded default values
+    $query = $comments->find('threaded', [
+        'idField' => $comments->primaryKey(),
+        'parentField' => 'parent_id'
+    ]);
+    $results = $query->toArray();
+
+    echo count($results[0]->children);
+    echo $results[0]->children[0]->comment;
+
+The ``parentField`` and ``idField`` keys can be used to define the fields that
+threading will occur on.
+
+.. tip::
+    If you need to manage more advanced trees of data, consider using
+    :doc:`/orm/behaviors/tree` instead.
 
 .. _custom-find-methods:
 

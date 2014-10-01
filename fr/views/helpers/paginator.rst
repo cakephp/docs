@@ -9,7 +9,7 @@ Le Helper Paginator est utilisé pour présenter des contrôles de pagination
 comme les numéros de pages et les liens suivant/précédent. Il travaille en
 tamdem avec :php:class:`PaginatorComponent`.
 
-Voir aussi :doc:`/core-libraries/components/pagination` pour des informations
+Voir aussi :doc:`/controllers/components/pagination` pour des informations
 sur la façon de créer des jeux de données paginés et faire des requêtes
 paginées.
 

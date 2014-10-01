@@ -425,7 +425,7 @@ Network\\Http
 * Http\Client has been re-written from the ground up. It has a simpler/easier to
   use API, support for new authentication systems like OAuth, and file uploads.
   It uses PHP's stream APIs so there is no requirement for cURL. See the
-  :doc:`/core-utility-libraries/httpclient` documentation for more information.
+  :doc:`/core-libraries/httpclient` documentation for more information.
 
 Network\\Email
 ==============
@@ -531,7 +531,7 @@ CookieComponent
   data accessed through ``config()``.
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
   these are now managed through config data. See
-  :doc:`/core-libraries/components/cookie` for more information.
+  :doc:`/controllers/components/cookie` for more information.
 - The path for cookies now defaults to app's base path instead of "/".
 
 
@@ -595,7 +595,7 @@ SessionComponent
 ----------------
 
 - ``SessionComponent::setFlash()`` is deprecated. You should use
-  :doc:`/core-libraries/components/flash` instead.
+  :doc:`/controllers/components/flash` instead.
 
 Error
 -----
@@ -887,7 +887,7 @@ and reduce the problems people had in the past:
   has been removed. You should now use key ``confirm`` in ``$options`` to specify
   the message.
 
-It is recommended that you review the :doc:`/core-libraries/helpers/form`
+It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
 
 HtmlHelper
@@ -952,7 +952,7 @@ SessionHelper
 -------------
 
 - ``SessionHelper::flash()`` is deprecated. You should use
-  :doc:`/core-libraries/helpers/flash` instead.
+  :doc:`/views/helpers/flash` instead.
 
 JsHelper
 --------

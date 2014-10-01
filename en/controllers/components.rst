@@ -11,8 +11,17 @@ components keeps controller code clean and allows you to reuse code between proj
 For more information on the components included in CakePHP, check out the
 chapter for each component:
 
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 7
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+    /controllers/components/sessions
 
 .. _configuring-components:
 
@@ -20,8 +29,8 @@ Configuring Components
 ======================
 
 Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/core-libraries/components/authentication` and
-:doc:`/core-libraries/components/cookie`.  Configuration for these components,
+requiring configuration are :doc:`/controllers/components/authentication` and
+:doc:`/controllers/components/cookie`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize`` method or via the ``$components`` array::
 
