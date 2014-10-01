@@ -2,35 +2,19 @@ Apêndices
 #########
 
 Os apêndices contêm informações sobre os novos recursos
-introduzidos na versão 2.0 e o guia de migração da versão 1.3 para a versão 2.0.
+introduzidos em cada versão e a forma de executar a migração entre versões.
 
-Guia de Migração para a Versão 2.0
+Guia de Migração para a versão 3.0
 ==================================
 
-.. toctree::
-    :maxdepth: 1
-
-    appendices/2-0-migration-guide
-    appendices/new-features-in-cakephp-2-0
-    appendices/phpunit-migration-hints
-
-Guia de Migração para a Versão 2.1
-==================================
+A versão 3.0 ainda está em desenvolvimento, e qualquer mudança
+estará disponível apenas no branch ``3.0`` do git.
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/2-1-migration-guide
-    appendices/new-features-in-cakephp-2-1
-
-Migrando da Versão 1.2 para 1.3
-===============================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/migrating-from-cakephp-1-2-to-1-3
-    appendices/new-features-in-cakephp-1-3
+    appendices/3-0-migration-guide
+    appendices/orm-migration
 
 Informações Gerais
 ==================
@@ -44,4 +28,4 @@ Informações Gerais
 
 .. meta::
     :title lang=pt: Apêndices
-    :keywords lang=pt: guia de migração,rota de migração,novas funcionalidades,glossário
+    :keywords lang=pt: guia de migração,como migrar,migração,nova versão,ajuda,glossário,rota de migração,novas funcionalidades
