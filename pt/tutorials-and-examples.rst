@@ -1,17 +1,23 @@
 Tutoriais & Exemplos
 ####################
 
-Nesta seção, você poderá caminhar ao longo de típicas aplicações CakePHP para
+Nesta seção, você poderá caminhar através de típicas aplicações CakePHP para
 ver como todas as peças se encaixam.
 
 Como alternativa, você pode preferir visitar o repositório não oficial de
-plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ ou a
-`Padaria <http://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
+plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ e a
+`Bakery (Padaria) <http://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
 existentes.
 
 .. toctree::
+    :glob:
     :maxdepth: 1
 
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
     tutorials-and-examples/blog-auth-example/auth
+
+
+.. meta::
+    :title lang=pt: Tutoriais & Examplos
+    :keywords lang=pt: tutoriais,tutoriais de aplicação,bakery,repositório,aplicações,blog,acl,autenticação
