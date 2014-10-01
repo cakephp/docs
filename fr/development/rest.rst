@@ -31,7 +31,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         public $components = array('RequestHandler');
 
         public function index() {
-            $recipes = $this->Recipes->find('all')->toArray();
+            $recipes = $this->Recipes->find('all');
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
@@ -39,7 +39,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         }
 
         public function view($id) {
-            $recipe = $this->Recipes->findById($id)->toArray();
+            $recipe = $this->Recipes->findById($id);
             $this->set(array(
                 'recipe' => $recipe,
                 '_serialize' => array('recipe')
@@ -64,9 +64,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
 
         public function delete($id) {
             $recipe = $this->Recipes->get($id);
-            if ($this->Recipes->delete($recipe)) {
-                $message = 'Deleted';
-            } else {
+            $message = 'Deleted';
+            if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
             $this->set(array(

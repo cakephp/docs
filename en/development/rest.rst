@@ -64,7 +64,7 @@ this::
         public function delete($id) {
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
-            if ($this->Recipes->delete($recipe)) {
+            if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
             $this->set(array(
