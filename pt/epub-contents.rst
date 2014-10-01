@@ -1,15 +1,19 @@
-Contents
-########
+Conteúdos
+#########
 
 .. toctree::
    :maxdepth: 3
 
+   intro
+   quickstart
    installation
-   getting-started
-   cakephp-overview
+   development/configuration
+   development/routing
+   controllers/request-response
    controllers
    views
-   models
+   orm
+
    core-libraries
    plugins
    console-and-shells
@@ -21,3 +25,6 @@ Contents
 
 .. todolist::
 
+.. meta::
+    :title lang=pt: Conteúdos
+    :keywords lang=pt: bibliotecas,shells,depuração,apêndices,glossário
