@@ -204,7 +204,7 @@ Reading From a Cache
 .. php:staticmethod:: read($key, $config = 'default')
 
 ``Cache::read()`` is used to read the cached value stored under
-``$key`` from the ``$config``. If $config is null the default
+``$key`` from the ``$config``. If ``$config`` is null the default
 config will be used. ``Cache::read()`` will return the cached value
 if it is a valid cache or ``false`` if the cache has expired or
 doesn't exist. The contents of the cache might evaluate false, so
