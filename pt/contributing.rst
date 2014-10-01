@@ -16,4 +16,3 @@ As seções abaixo irão abordar estas formas de contribuição:
 .. meta::
     :title lang=pt: Contribuindo
     :keywords lang=pt: contribuindo,open source,ajudando
-
