@@ -30,7 +30,7 @@ this::
         public $components = array('RequestHandler');
 
         public function index() {
-            $recipes = $this->Recipes->find('all')->toArray();
+            $recipes = $this->Recipes->find('all');
             $this->set(array(
                 'recipes' => $recipes,
                 '_serialize' => array('recipes')
@@ -38,7 +38,7 @@ this::
         }
 
         public function view($id) {
-            $recipe = $this->Recipes->findById($id)->toArray();
+            $recipe = $this->Recipes->findById($id);
             $this->set(array(
                 'recipe' => $recipe,
                 '_serialize' => array('recipe')
@@ -63,9 +63,8 @@ this::
 
         public function delete($id) {
             $recipe = $this->Recipes->get($id);
+            $message = 'Deleted';
             if ($this->Recipes->delete($recipe)) {
-                $message = 'Deleted';
-            } else {
                 $message = 'Error';
             }
             $this->set(array(
