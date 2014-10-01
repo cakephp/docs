@@ -8,17 +8,17 @@ Contenu
    topics
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
-   intro
+    intro
     quickstart
     installation
     development/configuration
     development/routing
     controllers/request-response
-    orm
-    views
     controllers
+    views
+    orm
     plugins
 
     development/errors
