@@ -19,5 +19,5 @@ existentes.
 
 
 .. meta::
-    :title lang=pt: Tutorials & Examples
-    :keywords lang=pt: application tutorials,glob,bakery,repository,applications,blog,acl
+    :title lang=pt: Tutoriais & Examplos
+    :keywords lang=pt: tutoriais,tutoriais de aplicação,bakery,repositório,aplicações,blog,acl,autenticação
