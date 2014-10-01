@@ -4,20 +4,25 @@ Conteúdo
 .. toctree::
    :maxdepth: 2
 
-   getting-started
+   intro
+   quickstart
    installation
-   cakephp-overview
+   development/configuration
+   development/routing
+   controllers/request-response
    controllers
    views
+   orm
+   core-libraries
    plugins
+   console-and-shells
    development
    deployment
-   tutorials-and-examples
    appendices
 
 
-Indices and tables
-==================
+Índices e Tabelas
+=================
 
 * :ref:`genindex`
 * :ref:`modindex`
