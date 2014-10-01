@@ -126,7 +126,7 @@ your action::
         );
         $data = $this->Paginator->paginate('Recipe');
         $this->set(compact('data'));
-    );
+    }
 
 Custom Query Pagination
 =======================

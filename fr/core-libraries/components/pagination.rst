@@ -131,7 +131,7 @@ configuration de pagination à l'intérieur de votre action::
         );
         $data = $this->Paginator->paginate('Recipe');
         $this->set(compact('data'));
-    );
+    }
 
 Personnalisation des requêtes de pagination
 ===========================================
