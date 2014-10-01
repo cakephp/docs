@@ -1,43 +1,55 @@
 Tickets
 #######
 
-Receber *feedback* e ajuda da comunidade em foma de ticket é uma parte
-muito importante no processo de desenvolvimento do CakePHP. Todos os tickets sobre
-o CakePHP estão no `Github <https://github.com/cakephp/cakephp/issues>`_.
+Getting feedback and help from the community in the form of tickets is an
+extremely important part of the CakePHP development process. All of CakePHP's
+tickets are hosted on `GitHub <https://github.com/cakephp/cakephp/issues>`_.
 
-Informando Bugs
-===============
+Reporting Bugs
+==============
 
-Informações bem escritas de bugs ajudam bastante. Você pode seguir alguns passos
-que vão te ajudar a descrever um bug:
+Well written bug reports are very helpful. There are a few steps to help create
+the best bug report possible:
 
-* **Faça** uma `busca <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
-  por um ticket simular, tenha certeza que ninguém já informou seu problema e que
-  não esteja corrigido no repositório.
-* **Faça** uma descrição detalhada de como **reproduzir o bug**.
-  Isso pode ser no formato de teste (test cases) ou um trecho de código que demonstre o problema.
-  Não informar como reproduzir o problema, significa menos change do problema ser corrigido.
-* **Informe** com maior detalhes possível o seu ambiente de desenvolvimento: (OS, PHP
+* **Do** `search <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
+  for a similar existing ticket, and ensure someone hasn't already reported your
+  issue, or that it hasn't already been fixed in the repository.
+* **Do** include detailed instructions on **how to reproduce the bug**. This
+  could be in the form of test cases or a code snippet that demonstrates the
+  issue. Not having a way to reproduce an issue, means it's less likely to get
+  fixed.
+* **Do** give as many details as possible about your environment: (OS, PHP
   version, CakePHP version).
-* **Não** use o sistema de ticket para suporte, use o `grupo de discussão <http://groups.google.com/group/cake-php>`_ 
-  ou o canal #cakephp IRC channel para isso.
+* **Don't** use the ticket system to ask support questions. Use the `Google
+  Group <http://groups.google.com/group/cake-php>`_, the #cakephp IRC channel or
+  Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>
+  for that.
 
 
-Informando Problemas de Segurança
-=================================
+Reporting Security Issues
+=========================
 
-Se você achou alguma falha de segurança no CakePHP, use o seguinte procedimento 
-ao invés do metódo tradicional para bugs. Ao invés de usar o o sistema de ticket, 
-grupo de discussão ou o IRC, nós envie um email para **security [at] cakephp.org**.
-Emails enviados para este endereços serão destinados ao *core team* em uma lista 
-de email privada.
+If you've found a security issue in CakePHP, please use the following procedure
+instead of the normal bug reporting system. Instead of using the bug tracker,
+mailing list or IRC please send an email to **security [at] cakephp.org**.
+Emails sent to this address go to the CakePHP core team on a private mailing
+list.
 
-Para cada problema informado, nós tentamos primeiro confirmar. Assim que confirmado
-o time do CakePHP vai tomar as seguintes providências:
+For each report, we try to first confirm the vulnerability. Once confirmed, the
+CakePHP team will take the following actions:
 
-* Informar a pessoa que recebemos o problema e estamos trabalhando para resolver. 
-  Pedimos para manter isso em segredo até que seja informado ao público.
-* Criar a correção/path.
-* Preparar um post para descrever o problema e possíveis brechas de segurança.
-* Lançar uma versão nova de todas as versões afetadas.
-* Será proeminente informado o problema no anúncio da nova versão.
+* Acknowledge to the reporter that we've received the issue, and are working on
+  a fix. We ask that the reporter keep the issue confidential until we announce
+  it.
+* Get a fix/patch prepared.
+* Prepare a post describing the vulnerability, and the possible exploits.
+* Release new versions of all affected versions.
+* Prominently feature the problem in the release announcement.
+
+
+
+
+
+.. meta::
+    :title lang=en: Tickets
+    :keywords lang=en: bug reporting system,code snippet,reporting security,private mailing,release announcement,google,ticket system,core team,security issue,bug tracker,irc channel,test cases,support questions,bug report,security issues,bug reports,exploits,vulnerability,repository

@@ -1,264 +1,322 @@
-Componentes
-###########
+Components
+##########
 
-Componentes (`components`) são pacotes com funções lógicas que são usadas para
-serem compartilhadas entre os controllers. Se você está querendo copiar e colar
-coisas entre seus controllers, talvez seja uma boa ideia considerar a
-possibilidade de empacotar estas funcionalidades em componentes.
+Components are packages of logic that are shared between controllers.
+CakePHP comes with a fantastic set of core components you can use to aid in
+various common tasks. You can also create your own components. If you find
+yourself wanting to copy and paste things between controllers, you should
+consider creating your own component to contain the functionality. Creating
+components keeps controller code clean and allows you to reuse code between projects.
 
-O CakePHP também já vem com uma quantidade fantástica de componentes incluídos,
-que você pode usar para lhe ajudar com:
+For more information on the components included in CakePHP, check out the
+chapter for each component:
 
-- Segurança
-- Sessões
-- Lista de Controle de Acesso (do inglês ACL, `Access control lists`)
-- Emails
-- Cookies
-- Autenticação
-- Tratamento de Requisições
+.. toctree::
+    :maxdepth: 1
 
-Cada um destes componentes do Cake são detalhados em seus próprios capítulos.
-Neste momento, nós lhe mostraremos como criar e usar seus próprios componentes.
-Criar componentes mantem o código dos controllers limpos e permitem a
-reutilização de códigos entre projetos.
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+    /controllers/components/sessions
 
 .. _configuring-components:
 
-Configurando Componentes
-========================
+Configuring Components
+======================
 
-Muitos dos componentes incluídos no Cake requerem alguma configuração. Exemplos
-de componentes que requerem configuração são:
-:doc:`/core-libraries/components/authentication`,
-:doc:`/core-libraries/components/cookie` e
-:doc:`/core-libraries/components/email`.
-As configurações para estes componentes, e outros em geral, são feitas no array
-``$components`` ou no método ``beforeFilter()`` do seu controller::
+Many of the core components require configuration. Some examples of components
+requiring configuration are :doc:`/controllers/components/authentication` and
+:doc:`/controllers/components/cookie`.  Configuration for these components,
+and for components in general, is usually done via ``loadComponent()`` in your
+Controller's ``initialize`` method or via the ``$components`` array::
 
     class PostsController extends AppController {
-        public $components = array(
-            'Auth' => array(
-                'authorize' => array('controller'),
-                'loginAction' => array('controller' => 'users', 'action' => 'login')
-            ),
-            'Cookie' => array('name' => 'CookieMonster')
-        );
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => ['controller'],
+                'loginAction' => ['controller' => 'Users', 'action' => 'login']
+            ]);
+            $this->loadComponent('Cookie', ['expiry' => '1 day']);
+        }
 
-O exemplo acima seria um exemplo de como configurar um componente usando o array
-``$components``. Todos os componentes incluídos no Cake permitem ser
-configurados desta forma. Além disso, você pode configurar componentes no
-método ``beforeFilter()`` de seus controllers. Isto é útil quando você precisa
-atribuir os resultados de uma função para uma propriedade do componente. O
-exemplo acima também pode ser expressado da seguinte maneira::
-
-    public function beforeFilter() {
-        $this->Auth->authorize = array('controller');
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-
-        $this->Cookie->name = 'CookieMonster';
     }
 
-É possível, no entanto, que um componente requeira que certa configuração seja
-feita antes do método ``beforeFilter()`` do controller ser executado. Para este
-fim, alguns componentes permitem que configurações sejam feitas no array
-``$components``::
+You can configure components at runtime using the ``config()`` method. Often,
+this is done in your controller's ``beforeFilter()`` method. The above could
+also be expressed as::
 
-    public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
+    public function beforeFilter() {
+        $this->Auth->config('authorize', ['controller']);
+        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
 
-Consulte a documentação relevante para determinar quais opções de configuração
-cada componente oferece.
+        $this->Cookie->config('name', 'CookieMonster');
+    }
 
-Usando Componentes
-==================
+Like helpers, components implement a ``config()`` method that is used to get and
+set any configuration data for a component::
 
-Após ter incluído alguns componentes em seu controller, usá-los é muito simples.
-Cada componente que você usa é exposto como uma propriedade em seu controller.
-Se você carregou o :php:class:`SessionComponent` e o :php:class:`CookieComponent`
-no seu controller, você pode acessá-los da seguinte maneira::
+    // Read config data.
+    $this->Auth->config('loginAction');
+
+    // Set config
+    $this->Csrf->config('cookieName', 'token');
+
+As with helpers, components will automatically merge their ``$_defaultConfig``
+property with constructor configuration to create the ``$_config`` property
+which is accessible with ``config()``.
+
+Aliasing Components
+-------------------
+
+One common setting to use is the ``className`` option, which allows you to
+alias components. This feature is useful when you want to
+replace ``$this->Auth`` or another common Component reference with a custom
+implementation::
+
+    // src/Controller/PostsController.php
+    class PostsController extends AppController {
+        public function initialize() {
+            parent::initialize('Auth', [
+                'className' => 'MyAuth'
+            ]);
+        }
+    }
+
+    // src/Controller/Component/MyAuthComponent.php
+    use Cake\Controller\Component\AuthComponent;
+
+    class MyAuthComponent extends AuthComponent {
+        // Add your code to override the core AuthComponent
+    }
+
+The above would *alias* ``MyAuthComponent`` to ``$this->Auth`` in your
+controllers.
+
+.. note::
+
+    Aliasing a component replaces that instance anywhere that component is used,
+    including inside other Components.
+
+Using Components
+================
+
+Once you've included some components in your controller, using them is pretty
+simple. Each component you use is exposed as a property on your controller. If
+you had loaded up the :php:class:`Cake\\Controller\\Component\\FlashComponent`
+and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
+controller, you could access them like so::
 
     class PostsController extends AppController {
-        public $components = array('Session', 'Cookie');
+        public $components = ['Flash', 'Cookie'];
 
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
-                $this->Session->setFlash('Post deleted.');
-                $this->redirect(array('action' => 'index'));
+                $this->Flash->success('Post deleted.');
+                return $this->redirect(['action' => 'index']);
             }
         }
 
 .. note::
 
-    Como os models e componentes são adicionados no controller como propriedades
-    eles compartilham o mesmo espaço de nomes (``namespace``). Tenha certeza de
-    não ter um componente e um model com o mesmo nome.
+    Since both Models and Components are added to Controllers as
+    properties they share the same 'namespace'. Be sure to not give a
+    component and a model the same name.
 
-Carregando componentes sob demanda
-----------------------------------
+Loading Components on the Fly
+-----------------------------
 
-Você pode não precisar de todos os componentes disponibilizados em cada ação
-dos controllers. Nestas situações você pode carregar um componente em tempo de
-execução usando o :doc:`Component Collection </core-libraries/collections>`.
-Dentro de um controller você pode fazer o seguinte::
+You might not need all of your components available on every controller
+action. In situations like this you can load a component at runtime using the
+:doc:`Component Registry </core-libraries/registry-objects>`. From inside a
+controller's method you can do the following::
 
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
+.. note::
 
-Callbacks de Componentes
-========================
+    Keep in mind that components loaded on the fly will not have missed
+    callbacks called. If you rely on the ``initialize`` or ``startup`` callbacks
+    being called, you may need to call them manually depending on when you load
+    your component.
 
-Componentes também oferecem alguns callbacks do ciclo de vida de uma requisição,
-permitindo acrescentar rotinas ao fluxo. Veja a
-:ref:`component-api` para mais informações sobre os callbacks que os componentes
-oferecem.
+Component Callbacks
+===================
 
-Criando um Componente
-=====================
+Components also offer a few request life-cycle callbacks that allow them to
+augment the request cycle. See the base :ref:`component-api` and
+:doc:`/core-libraries/events` for more information on the callbacks components
+offer.
 
-Suponhamos que nossa aplicação online precisa realizar uma operação matemática
-complexa em diferentes partes da aplicação. Podemos criar um componente para
-abrigar esta lógica para ser usada nos diferentes controllers.
+.. _creating-a-component:
 
-O primeiro passo é criar um novo arquivo para a classe do componente.
-Crie o arquivo em ``/app/Controller/Component/MathComponent.php``. A estrutura
-básica para o componente irá se parecer com algo assim::
+Creating a Component
+====================
 
+Suppose our online application needs to perform a complex
+mathematical operation in many different parts of the application.
+We could create a component to house this shared logic for use in
+many different controllers.
+
+The first step is to create a new component file and class. Create
+the file in ``src/Controller/Component/MathComponent.php``. The basic
+structure for the component would look something like this::
+
+    namespace App\Controller\Component;
+
+    use Cake\Controller\Component;
 
     class MathComponent extends Component {
-        function doComplexOperation($amount1, $amount2) {
+        public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
         }
     }
 
 .. note::
 
-    Todos os componentes devem estender a classe :php:class:`Component`.
-    Se não fizer isto, o Cake irá disparar uma exceção.
+    All components must extend :php:class:`Component`. Failing to do this
+    will trigger an exception.
 
-Incluindo seus componentes nos seus controllers
------------------------------------------------
+Including your Component in your Controllers
+--------------------------------------------
 
-Após nosso componente estiver pronto, podemos usá-lo nos controllers da nossa
-aplicação pondo o nome do componente (sem o sufixo "Component") no array
-``$components`` do controller. O controller irá receber um novo atributo com
-o mesmo nome do componente, o qual poderemos acessá-lo como sendo uma instância
-da classe componente que queremos.
+Once our component is finished, we can use it in the application's
+controllers by loading it during the controller's ``initialize()`` method.
+Once loaded, the controller will be given a new attribute named after the
+component, through which we can access an instance of it::
 
-::
+    /* Make the new component available at $this->Math,
+    as well as the standard $this->Csrf */
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math');
+        $this->loadComponent('Csrf');
+    }
 
-    /* Torna o novo componente acessível em $this->Math,
-    bem como o $this->Session */
-    public $components = array('Math', 'Session');
+When including Components in a Controller you can also declare a
+set of parameters that will be passed on to the Component's
+constructor. These parameters can then be handled by
+the Component::
 
-Componentes declarados no ``AppController`` serão mesclados com os de outros
-controllers. Então não há necessidade de redeclarar o mesmo componente duas
-vezes.
-
-Ao incluir componentes em um controller você também pode declarar um conjunto de
-parâmetros que serão passados para o construtor do componente. Estes parâmetros
-podem ser usados pelo componente.
-
-::
-
-    public $components = array(
-        'Math' => array(
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Math', [
             'precision' => 2,
             'randomGenerator' => 'srand'
-        ),
-        'Session', 'Auth'
-    );
+        ]);
+        $this->loadComponent('Csrf');
+    }
 
-O exemplo acima irá passar no segundo parâmetro do construtor
-``MathComponent::__construct()`` um array contendo o atributo "precision" e
-"randomGenerator".
+The above would pass the array containing precision and
+randomGenerator to ``MathComponent::__construct()`` as the
+second parameter.
 
-Por convenção, qualquer configuração que você tenha passado e que também seja
-um atributo público do seu componente, irá ter seu valor definido com base no
-array.
 
-Usando outros componentes nos seus Componentes
-----------------------------------------------
+Using Other Components in your Component
+----------------------------------------
 
-Às vezes, um de seus componentes poderá precisar usar outro componente.
-Neste caso você pode incluir outros componentes no seu da mesma forma que inclui
-em controllers, usando o atributo ``$components``::
+Sometimes one of your components may need to use another component.
+In this case you can include other components in your component the exact same
+way you include them in controllers - using the ``$components`` var::
 
-    // app/Controller/Component/CustomComponent.php
+    // src/Controller/Component/CustomComponent.php
+    use Cake\Controller\Component;
+
     class CustomComponent extends Component {
-        // O outro componente que seu componente utiliza
-        public $components = array('Existing');
+        // The other component your component uses
+        public $components = ['Existing'];
 
-        function initialize(Controller $controller) {
+        public function initialize(Controller $controller) {
             $this->Existing->foo();
         }
 
-        function bar() {
+        public function bar() {
             // ...
        }
     }
 
-    // app/Controller/Component/ExistingComponent.php
+    // src/Controller/Component/ExistingComponent.php
+    use Cake\Controller\Component;
+
     class ExistingComponent extends Component {
 
-        function initialize(Controller $controller) {
-            $this->Parent->bar();
-        }
-
-        function foo() {
+        public function foo() {
             // ...
-       }
+        }
     }
+
+.. note::
+    In contrast to a component included in a controller
+    no callbacks will be triggered on a component's component.
+
+
+Accessing a Component's Controller
+----------------------------------
+
+From within a Component you can access the current controller through the
+registry::
+
+    $controller = $this->_registry->getController();
+
+You can also easily access the controller in any callback method from the event
+object::
+
+    $controller = $event->subject();
 
 .. _component-api:
 
-API dos Componentes
-===================
+Component API
+=============
 
 .. php:class:: Component
 
-    A classe base ``Component`` oferece alguns métodos para carregar sob
-    demanda (Lazy loading. Possibilita adiar a inicialização de um objeto até
-    que este seja utilizado) outros componentes utilizando o
-    :php:class:`ComponentCollection` assim como lidar com as configurações
-    básicas. Esta classe também fornece os protótipos para todos os callbacks
-    dos componentes.
+    The base Component class offers a few methods for lazily loading other
+    Components through :php:class:`Cake\\Controller\\ComponentRegistry` as well
+    as dealing with common handling of settings. It also provides prototypes
+    for all the component callbacks.
 
-.. php:method:: __construct(ComponentCollection $collection, $config = array())
+.. php:method:: __construct(ComponentRegistry $registry, $config = [])
 
-    O contrutor da classe ``Component``. Todos as propriedades públicas da
-    classe terão seus valores alterados para corresponder com o valor de
-    ``$config``.
+    Constructor for the base component class. All ``$config`` that
+    are also public properties will have their values changed to the
+    matching value in ``$config``.
 
 Callbacks
 ---------
 
-.. php:method:: initialize($controller)
+.. php:method:: initialize(Event $event)
 
-    O método ``initialize`` é chamado antes do método ``beforeFilter`` do
-    controller.
+    Is called before the controller's
+    beforeFilter method, but *after* the controller's initialize() method.
 
-.. php:method:: startup($controller)
+.. php:method:: startup(Event $event)
 
-    O método ``startup`` é chamado após o método ``beforeFilter`` do controller
-    mas antes que o controller execute a ação.
+    Is called after the controller's beforeFilter
+    method but before the controller executes the current action
+    handler.
 
-.. php:method:: beforeRender($controller)
+.. php:method:: beforeRender(Event $event)
 
-    O método ``beforeRender`` é chamado após o controller executar a lógica
-    da ação requisitada mas antes que o controller renderize a view e o layout.
+    Is called after the controller executes the requested action's logic,
+    but before the controller's renders views and layout.
 
-.. php:method:: shutdown($controller)
+.. php:method:: shutdown(Event $event)
 
-    O método ``shutdown`` é chamado antes que o conteúdo seja enviado para o
-    browser.
+    Is called before output is sent to the browser.
 
-.. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
 
-    O método ``beforeRedirect`` é invocado quando o método ``redirect`` de um
-    controller é chamado mas antes de qualquer ação. Se este método retornar
-    ``false`` o controller não irá continuar com o redirecionamento. As
-    variáveis ``$url``, ``$status`` e ``$exit`` possuem o mesmo significado do
-    método do controller. Você pode também retornar uma string que será
-    interpretada como uma URL para ser usada no redirecionamento ou retornar um
-    array associativo com a chave 'url' e opcionalmente com a chave 'status' e
-    a chave 'exit'.
+    Is invoked when the controller's redirect
+    method is called but before any further action. If this method
+    returns ``false`` the controller will not continue on to redirect the
+    request. The $url, and $response paramaters allow you to inspect and modify
+    the location or any other headers in the response.
+
+.. meta::
+    :title lang=en: Components
+    :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

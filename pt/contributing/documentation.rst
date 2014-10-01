@@ -1,353 +1,363 @@
-Documentação
-############
+Documentation
+#############
 
-Contribuir na documentação é simples. Os arquivos estão
-no https://github.com/cakephp/docs. Sinta-se livre para fazer 
-um fork e adicionar suas alterações/melhorias/traduções e enviar 
-através de um pull request.
-Você também pode editar os arquivos online através do github, 
-sem precisar fazer o download dos arquivos.
+Contributing to the documentation is simple. The files are hosted on
+https://github.com/cakephp/docs. Feel free to fork the repo, add your
+changes/improvements/translations and give back by issuing a pull request.
+You can even edit the docs online with GitHub, without ever downloading the
+files -- the "Improve this Doc" button on any given page will direct you to
+GitHub's online editor for that page.
 
-Traduções
-=========
+Translations
+============
 
-Envie um email para o equipe da documentação (docs [at] cakephp dot org)
-ou entre no IRC(#cakephp on freenode) para discutir algum processo de 
-tradução que você queira participar.
+Email the docs team (docs at cakephp dot org) or hop on IRC
+(#cakephp on freenode) to discuss any translation efforts you would
+like to participate in.
 
-Algumas dicas:
+Translator tips:
 
-- Navegue e edite no idioma que você deseja traduzir o conteúdo - caso
-  contrário você não saberá o que já foi traduzido.
-- Sinta-se livre para traduzir se o idioma escolhido já existir no book.
-- Utilize a
-  `linguagem informal <http://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
-- Traduza o conteúdo e o título ao mesmo tempo.
-- Faça uma comparação com o Inglês antes de enviar uma correção. 
-  (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a
-  alteração não será aceita.)
-- Se você precisa escrever termos em Inglês, utilize a tag ``<em>``.
-  Ex.: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
-  (*Controller*) asfd".
-- Não envie traduções parciais.
-- Não edite um seção com alterações pendentes.
-- Não utilize
+- Browse and edit in the language you want the content to be
+  translated to - otherwise you won't see what has already been
+  translated.
+- Feel free to dive right in if your chosen language already
+  exists on the book.
+- Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Translate both the content and the title at the same time.
+- Do compare to the English content before submitting a correction
+  (if you correct something, but don't integrate an 'upstream' change
+  your submission won't be accepted).
+- If you need to write an English term, wrap it in ``<em>`` tags.
+  E.g. "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
+  (*Controller*) asfd" as appropriate.
+- Do not submit partial translations.
+- Do not edit a section with a pending change.
+- Do not use
   `html entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
-  para caracteres acentuados, o livro usa UTF-8.
-- Não faça alterações significativas em marcações HTML e não adicione novos
-  conteúdos.
-- Se está faltando informações no conteúdo original, altere o original e envie
-  ele primeiro.
+  for accented characters, the book uses UTF-8.
+- Do not significantly change the markup (HTML) or add new content
+- If the original content is missing some info, submit an edit for
+  that first.
 
-Formatando a Documentação
-=========================
+Documentation Formatting Guide
+==============================
 
-A nova documentação do CakePHP é escrita no formato ReST.
-ReST é uma linguagem de marcação em texto plano parecida com markdown e textile.
-Para manter a consistência é recomendável que use os  *guidelines* a seguir de
-como formatar estruturar seu texto.
+The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
+(Re Structured Text) is a plain text markup syntax similar to markdown, or
+textile. To maintain consistency it is recommended that when adding to the
+CakePHP documentation you follow the guidelines here on how to format and
+structure your text.
 
-Largura da linha
-----------------
+Line Length
+-----------
 
-As linhas devem ter no máximo 80 colunas.
-A unica exeção são urls longas e trechos de códigos.
+Lines of text should be wrapped at 80 columns. The only exception should be
+long URLs, and code snippets.
 
-Títulos e Seções
-----------------
+Headings and Sections
+---------------------
 
-Títulos e seções são criados adicionado os caracteres de pontuação na linha
-abaixo do título do mesmo tamanho do texto.
+Section headers are created by underlining the title with punctuation characters
+at least the length of the text.
 
-- ``#`` Usado para indicar título da página.
-- ``=`` Usado para indicar seções na página.
-- ``-`` Usado para subseções.
-- ``~`` Usado para sub-subseções
-- ``^`` Usado para sub-sub-subseções.
+- ``#`` Is used to denote page titles.
+- ``=`` Is used for sections in a page.
+- ``-`` Is used for subsections.
+- ``~`` Is used for sub-subsections
+- ``^`` Is used for sub-sub-sections.
 
-Títulos não devem ser adicionados mais do que 5 níveis de profundidade.
-Títulos devem ser precedido e seguido por uma linha em branco.
+Headings should not be nested more than 5 levels deep. Headings should be
+preceded and followed by a blank line.
 
-Parágrafo
----------
+Paragraphs
+----------
 
-Parágrafos são blocos de texto simples, com todas as linhas no mesmo nível de indentação.
-Parágrafos devem ser separados por uma ou mais linhas em branco.
+Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
+Paragraphs should be separated by more than one empty line.
 
-Marcações
----------
+Inline Markup
+-------------
 
-* Um asterisco: *text* para ênfase (itálico),
-* Dois asteriscos: **text** para dar ênfase forte (negrito), e
-* crases: ``text`` para exemplos de código.
+* One asterisk: *text* for emphasis (italics)
 
-Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra 
-invertida (\\) para serem escapadas.
+  * ``*text*``
 
-Restrições para a marcação:
+* Two asterisks: **text** for strong emphasis (boldface)
 
-* As marcações **Não podem** ser aninhadas.
-* O conteúdo não pode iniciar ou terminar com espaço em branco: ``* text*`` está incorreto.
-* O conteúdo deve ser separado do restante do texto por *non-word characters*. Use
-  uma barra invertida escapando um espaço para corrigir isso: ``onelong\ *bolded*\ word``.
+  * ``**text**``
 
-Listas
-------
+* Two backquotes: ``text`` for code samples
 
-A marcação de listas é muito paracido com markdown. Listas não ordenadas
-começam a linha com um asterisco seguido de um espaço. Listas númericas
-podem ser criadas com os números na frente ou ``#`` para númerar automaticamente::
+  * ````text````
 
-    * Isso é uma linha
-    * Essa também. 
-      Mas tem duas linhas
-      
-      
-    1. Primeira linha
-    2. Segunda linha
-    
-    #. Númeração automatica
-    #. Vai salvar seu tempo.
+If asterisks or backquotes appear in running text and could be confused with inline markup
+delimiters, they have to be escaped with a backslash.
 
-Listas indentadas também podem ser criadas, indentando as seções e separando
-elas por uma linha em branco::
+Inline markup has a few restrictions:
 
-    * Primeira linha
-    * Segunda linha
-    
-        * Indo mais um nível
-        * Wow!
-    
-    * De volta para o primeiro nível.
+* It **may not** be nested.
+* Content may not start or end with whitespace: ``* text*`` is wrong.
+* Content must be separated from surrounding text by non-word characters. Use a
+  backslash escaped space to work around that: ``onelong\ *bolded*\ word``.
 
-Listas de definição pode ser criadas da seguinte forma::
+Lists
+-----
 
-    termo
-        definição
+List markup is very similar to markdown. Unordered lists are indicated by
+starting a line with a single asterisk and a space. Numbered lists can be
+created with either numerals, or ``#`` for auto numbering::
+
+    * This is a bullet
+    * So is this. But this line
+      has two lines.
+
+    1. First line
+    2. Second line
+
+    #. Automatic numbering
+    #. Will save you some time.
+
+Indented lists can also be created, by indenting sections and separating them
+with an empty line::
+
+    * First line
+    * Second line
+
+        * Going deeper
+        * Whoah
+
+    * Back to the first level.
+
+Definition lists can be created by doing the following::
+
+    term
+        definition
     CakePHP
-        Framework MVC para PHP
+        An MVC framework for PHP
 
-Os termos não podem ter mais do que uma linha, mas as definições podem ter
-muitas linhas e todos as linhas devem ter um indentação consistente.
+Terms cannot be more than one line, but definitions can be multi-line and all
+lines should be indented consistently.
 
 Links
 -----
 
-Existe vários tipos de links, cada um com seu objetivo de uso.
+There are several kinds of links, each with their own uses.
 
-Links Externos
+External Links
 ~~~~~~~~~~~~~~
 
-Links para documentos externos são feito da seguinte forma::
+Links to external documents can be with the following::
 
-    `Link Externo <http://example.com>`_
+    `External Link <http://example.com>`_
 
-O exemplo acima vai gerar um link para http://example.com
+The above would generate a link pointing to http://example.com
 
-Links para outras páginas
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Links to Other Pages
+~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
 
-    Outras páginas na documentação podem ser linkadas usando ``:doc:``.
-    Você pode criar um link para um documento especifico utilizando o caminho
-    absoluto ou relativo sem a extensão ``.rst``. Por exemplo, se a referência
-    ``:doc: `form``` aparece no documento ``core-helpers/html``, então o link
-    será criado para ``core-helpers/form``. Se a referência for
-    ``:doc:`/core-helpers```, será sempre referênciado para ``/core-helpers``
-    independente de onde for usado.
+    Other pages in the documentation can be linked to using the ``:doc:`` role.
+    You can link to the specified document using either an absolute or relative
+    path reference. You should omit the ``.rst`` extension. For example, if
+    the reference ``:doc:`form``` appears in the document ``core-helpers/html``,
+    then the link references ``core-helpers/form``. If the reference was
+    ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
+    regardless of where it was used.
 
-Links de referência cruzada
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Cross Referencing Links
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
 
-    Você pode fazer referências cruzadas para qualquer título arbitrário em
-    qualquer documento usando ``:ref:``. Links para um *label* devem ser únicos
-    dentro do documento. Quando for criar *labels* para métodos de classe, é
-    melhor usar ``class-method`` como *label* do link.
+    You can cross reference any arbitrary title in any document using the
+    ``:ref:`` role. Link label targets must be unique across the entire
+    documentation. When creating labels for class methods, it's best to use
+    ``class-method`` as the format for your link label.
 
-    A forma mais comum de usar *labels* é acima de títulos. Exemplo::
-    
+    The most common use of labels is above a title. Example::
+
         .. _label-name:
-        
-        Título de seção
+
+        Section heading
         ---------------
-        
-        Restante do conteúdo
-    
-    Em qualquer lugar você pode referenciar a seção acima usando ``:ref:`label-name```.
-    O texto do link será título da seção. Você também pode informar um texto personalizado
-    usando ``:ref: `Link text <label-name>```.
 
-Descrevendo classes e seus conteúdos
-------------------------------------
+        More content here.
 
-A documentação do CakePHP utiliza o `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ que fornece
-algumas diretivas para descrever objetos e construtores.
-Usar essas diretivas é essêncial para criar índices e referências em toda a
-documentação.
+    Elsewhere you could reference the above section using ``:ref:`label-name```.
+    The link's text would be the title that the link preceded. You can also
+    provide custom link text using ``:ref:`Link text <label-name>```.
 
-Descrevendo Classes e Construtores
-----------------------------------
+Describing Classes and their Contents
+-------------------------------------
 
-Cada diretiva alimenta o índice e/ou o *namespace* do índice.
+The CakePHP documentation uses the `phpdomain
+<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
+directives for describing PHP objects and constructs. Using these directives
+and roles is required to give proper indexing and cross referencing features.
+
+Describing Classes and Constructs
+---------------------------------
+
+Each directive populates the index, and or the namespace index.
 
 .. rst:directive:: .. php:global:: name
 
-   Essa diretiva declara uma variável global.
+   This directive declares a new PHP global variable.
 
 .. rst:directive:: .. php:function:: name(signature)
 
-   Define um função global fora da classe.
+   Defines a new global function outside of a class.
 
 .. rst:directive:: .. php:const:: name
 
-   Essa diretiva declara uma constante, você também pode usar
-   dentro de uma classe para declarar uma constante da classe.
-   
+   This directive declares a new PHP constant, you can also use it nested
+   inside a class directive to create class constants.
+
 .. rst:directive:: .. php:exception:: name
 
-   Essa diretiva declara um nova *Exception* no *namespace* atual.
-   A declaração pode conter os argumentos do construtor.
+   This directive declares a new Exception in the current namespace. The
+   signature can include constructor arguments.
 
 .. rst:directive:: .. php:class:: name
 
-   Descreve uma classe. Métodos, atributos e constantes que pertence a classe
-   devem ser declaradas dentro dessa diretiva::
+   Describes a class. Methods, attributes, and constants belonging to the class
+   should be inside this directive's body::
 
         .. php:class:: MyClass
-        
+
             Class description
-        
+
            .. php:method:: method($argument)
-        
+
            Method description
 
-   Atributos, métodos e constante não precisam estar um nível abaixo.
-   Podem ser declaradas no mesmo nível da classe::
+
+   Attributes, methods and constants don't need to be nested. They can also just
+   follow the class declaration::
 
         .. php:class:: MyClass
-        
+
             Text about the class
-        
+
         .. php:method:: methodName()
-        
+
             Text about the method
-        
+
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
 
-   Descreve um método da classe, seus argumentos, valor retornado e *exceptions*::
-   
+   Describe a class method, its arguments, return value, and exceptions::
+
         .. php:method:: instanceMethod($one, $two)
-        
-            :param string $one: Primeiro parâmetro.
-            :param string $two: Segundo parâmetro.
-            :returns: Um array com várias coisas.
+
+            :param string $one: The first parameter.
+            :param string $two: The second parameter.
+            :returns: An array of stuff.
             :throws: InvalidArgumentException
-        
-           Isso é um método de instância.
+
+           This is an instance method.
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
 
-    Descreve um método estático, seus argumentos, valor retornado e *exceptions*
-    veja :rst:dir:`php:method` para mais detalhes.
+    Describe a static method, its arguments, return value and exceptions,
+    see :rst:dir:`php:method` for options.
 
 .. rst:directive:: .. php:attr:: name
 
-   Descreve um propriedade/atributo de uma classe.
+   Describe an property/attribute on a class.
 
-Referências Cruzadas
-~~~~~~~~~~~~~~~~~~~~
+Cross Referencing
+~~~~~~~~~~~~~~~~~
 
-As funções a seguir server para referenciar objetos e links do PHP
-se alguma diretiva for encontrada:
+The following roles refer to php objects and links are generated if a
+matching directive is found:
 
 .. rst:role:: php:func
 
-   Cria uma referência para uma função PHP.
+   Reference a PHP function.
 
 .. rst:role:: php:global
 
-   Cria uma referência para uma variável global que comece com ``$``.
-   
+   Reference a global variable whose name has ``$`` prefix.
+
 .. rst:role:: php:const
 
-   Cria uma referência para um constante ou uma contante de uma classe. As constantes da classe
-   devem ser precedidas com o nome da classe::
-   
-        DateTime tem uma constante :php:const:`DateTime::ATOM`.
+   Reference either a global constant, or a class constant. Class constants should
+   be preceded by the owning class::
+
+        DateTime has an :php:const:`DateTime::ATOM` constant.
 
 .. rst:role:: php:class
 
-   Cria uma referência para uma classe através do nome::
+   Reference a class by name::
 
      :php:class:`ClassName`
 
 .. rst:role:: php:meth
 
-   Cria uma referência para um método da classe. Essa função suporta os dois métodos::
-   
+   Reference a method of a class. This role supports both kinds of methods::
+
      :php:meth:`DateTime::setDate`
      :php:meth:`Classname::staticMethod`
 
 .. rst:role:: php:attr
 
-   Cria uma referência para a propriedade de um objeto::
-   
+   Reference a property on an object::
+
       :php:attr:`ClassName::$propertyName`
 
 .. rst:role:: php:exc
 
-   Cria uma referência para uma *exception*
+   Reference an exception.
 
 
-Código Fonte
-------------
+Source Code
+-----------
 
-Blocos de códigos literais são criados terminando um paragrafo com ``::``.
-O bloco deve ser indentado e como todos os parágrafos ser separados por uma linha::
+Literal code blocks are created by ending a paragraph with ``::``. The literal
+block must be indented, and like all paragraphs be separated by single lines::
 
-    Isso é um parágrafo::
-        
+    This is a paragraph::
+
         while ($i--) {
             doStuff()
         }
-    
-    Isso é um resto normal denovo.
 
-Textos literais não são modificados ou formatados, salvo quando o level de indentação é removido.
+    This is regular text again.
+
+Literal text is not modified or formatted, save that one level of indentation is removed.
 
 
-Notas e Avisos
---------------
+Notes and Warnings
+------------------
 
-As vezes você quer infomar ao leitor do manual um dica importante, um lembrete
-ou um aviso importante. *Admonitions* no sphinx são usados para isso.
-Existe três tipos de *admonitions*.
+There are often times when you want to inform the reader of an important tip,
+special note or a potential hazard. Admonitions in sphinx are used for just
+that. There are three kinds of admonitions.
 
-* ``.. tip::`` Tips são usandos no documento para salientar algo importante.
-  O conteúdo deve ter as sentenças corretas e pontuação apropriada.
-* ``.. note::`` Notes são usadas para especificar uma parte importante da informação.
-  O conteúdo deve ter as sentenças corretas e pontuação apropriada.
-* ``.. warning::`` Warnings são usados para informar potenciais obstáculos
-  ou informações sobre segurança. O conteúdo deve ter as sentenças corretas 
-  e pontuação apropriada.
-  
-Todos os *admonitions* são declarados da mesma forma::
+* ``.. tip::`` Tips are used to document or re-iterate interesting or important
+  information. The content of the directive should be written in complete
+  sentences and include all appropriate punctuation.
+* ``.. note::`` Notes are used to document an especially important piece of
+  information. The content of the directive should be written in complete
+  sentences and include all appropriate punctuation.
+* ``.. warning::`` Warnings are used to document potential stumbling blocks, or
+  information pertaining to security. The content of the directive should be
+  written in complete sentences and include all appropriate punctuation.
+
+All admonitions are made the same::
 
     .. note::
-    
-        Indentado e precedido por uma linha branca. Como uma parágrafo.
-    
-    Esse texto não pertence a nota.
 
-Exemplos
-~~~~~~~~
+        Indented and preceded and followed by a blank line. Just like a paragraph.
+
+    This text is not part of the note.
+
+Samples
+~~~~~~~
 
 .. tip::
 
@@ -360,3 +370,8 @@ Exemplos
 .. warning::
 
     It could be dangerous.
+
+
+.. meta::
+    :title lang=en: Documentation
+    :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission

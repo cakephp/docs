@@ -1,637 +1,643 @@
-##################
-Blog - Continuação
-##################
+Blog Tutorial - Adding a Layer
+==============================
 
-Crie um Model Post
-==================
-
-A classe Model é o pão com manteiga das aplicações CakePHP. Ao criar um model
-do CakePHP que irá interagir com nossa base de dados, teremos os alicerces
-necessários para posteriormente fazer nossas operações de visualizar,
-adicionar, editar e excluir.
-
-Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
-arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
-completo deste arquivo deve ficar assim::
-
-
-    class Post extends AppModel {
-        public $name = 'Post';
-    }
-
-A nomenclatura da classe segue uma convenção que é muito importante no CakePHP.
-Ao chamar nosso model de Post, o CakePHP pode automaticamente deduzir que este
-model será usado num PostsController, e que manipulará os dados de uma tabela do
-banco chamada de ``posts``.
-
-.. note::
-
-    O CakePHP irá criar um objeto (instância) do model dinamicamente para você,
-    se não encontrar um arquivo correspondente na pasta /app/Model. Isto também
-    significa que, se você acidentalmente der um nome errado ao seu arquivo
-    (p.ex. post.php ou posts.php) o CakePHP não será capaz de reconhecer nenhuma
-    de suas configurações adicionais e ao invés disso, passará a usar seus
-    padrões definidos internamente na classe Model.
-
-Para saber mais sobre models, como prefixos de nomes de tabelas, callbacks e
-validações, confira o capítulo sobre :doc:`/models` deste manual.
-
-Crie o Controller Posts
+Create an Article Model
 =======================
 
-A seguir, vamos criar um controller para nossos posts. O controller é onde toda
-a lógica de negócio para interações vai acontecer. De uma forma geral, é o local
-onde você vai manipular os models e lidar com o resultado das ações feitas sobre
-nossos posts. Vamos pôr este novo controller num arquivo chamado
-``PostsController.php`` dentro do diretório ``/app/Controller``. Aqui está como
-um controller básico deve se parecer::
+Models are the bread and butter of CakePHP applications. By
+creating a CakePHP model that will interact with our database,
+we'll have the foundation in place needed to do our view, add,
+edit, and delete operations later.
 
-    class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
-        public $name = 'Posts';
-    }
+CakePHP's model class files are split between ``Table`` and ``Entity`` objects.
+``Table`` objects provide access to the collection of entities stored in a
+specific table and go in ``src/Model/Table``. The file we'll be creating will
+be saved to ``src/Model/Table/ArticlesTable.php``. The completed file should
+look like this::
 
-Agora, vamos adicionar uma action ao nosso controller. Actions quase sempre
-representam uma única função ou interface numa aplicação. Por exemplo, quando os
-usuários acessarem o endereço www.exemplo.com/posts/index (que, neste caso é o
-mesmo que www.exemplo.com/posts/), eles esperam ver a listagem dos posts. O
-código para tal ação deve se parecer com algo assim::
+    namespace App\Model\Table;
 
-    class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
-        public $name = 'Posts';
+    use Cake\ORM\Table;
 
-        function index() {
-            $this->set('posts', $this->Post->find('all'));
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
         }
     }
 
-Deixe-me explicar a ação um pouco. Definindo a função ``index()`` em nosso
-PostsController, os usuários podem acessar esta lógica visitando o endereço
-www.exemplo.com/posts/index. De maneira semelhante, se definirmos um método
-chamado ``foobar()`` dentro do controller, os usuários deveriam ser capazes de
-acessá-lo pelo endereço www.exemplo.com/posts/foobar.
+Naming conventions are very important in CakePHP. By naming our Table object
+``ArticlesTable``, CakePHP can automatically infer that this Table object will
+be used in the ArticlesController, and will be tied to a database table called
+``articles``.
+
+.. note::
+
+    CakePHP will dynamically create a model object for you if it
+    cannot find a corresponding file in ``src/Model/Table``. This also means
+    that if you accidentally name your file wrong (i.e. articlestable.php or
+    ArticleTable.php), CakePHP will not recognize any of your settings and will
+    use the a generated model instead.
+
+For more on models, such as callbacks, and validation, check out the :doc:`/orm`
+chapter of the Manual.
+
+
+Create the Articles Controller
+==============================
+
+Next, we'll create a controller for our articles. The controller is
+where all interaction with articles will happen. In a nutshell, it's the place
+where you play with the business logic contained in the models and get work
+related to articles done. We'll place this new controller in a file called
+``ArticlesController.php`` inside the ``src/Controller`` directory. Here's
+what the basic controller should look like::
+
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
+    }
+
+Now, let's add an action to our controller. Actions often represent
+a single function or interface in an application. For example, when
+users request www.example.com/articles/index (which is also the same
+as www.example.com/articles/), they might expect to see a listing of
+articles. The code for that action would look like this::
+
+    namespace App\Controller;
+
+    class ArticlesController extends AppController {
+
+        public function index() {
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
+        }
+    }
+
+By defining function ``index()`` in our ArticlesController, users can now
+access the logic there by requesting www.example.com/articles/index. Similarly,
+if we were to define a function called ``foobar()``, users would be able to
+access that at www.example.com/articles/foobar.
 
 .. warning::
 
-    Você pode ficar tentado a nomear seus controller e actions de uma certa
-    maneira visando obter uma certa URL. Mas resista a esta tentação. Siga as
-    convenções do CakePHP (nomes de controllers no plural, etc) e crie nomes de
-    actions e controllers que sejam legíveis e também compreensíveis. Você
-    sempre vai poder mapear URLs para seu código utilizando "rotas", conforme
-    mostraremos mais à frente.
+    You may be tempted to name your controllers and actions a certain
+    way to obtain a certain URL. Resist that temptation. Follow CakePHP
+    conventions (capitalization, plural names, etc.) and create readable,
+    understandable action names. You can map URLs to your code using
+    "routes" covered later on.
 
-A única declaração na nossa action utiliza o método ``set()`` para passar dados
-do controller para a view (que vamos criar logo mais). A linha define uma
-variável na view chamada 'posts' que vai conter o retorno da chamada do método
-``find('all')`` do model Post. Nosso model Post está automaticamente disponível
-como ``$this->Post`` uma vez que seguimos as convenções de nomenclatura do Cake.
+The single instruction in the action uses ``set()`` to pass data
+from the controller to the view (which we'll create next). The line
+sets the view variable called 'articles' equal to the return value of
+the ``find('all')`` method of the Articles table object.
 
-Para aprender mais sobre controllers do CakePHP, confira a seção
-:doc:`/controllers`.
+To learn more about CakePHP's controllers, check out the
+:doc:`/controllers` chapter.
 
-Criando as Views de Posts
-=========================
+Creating Article Views
+======================
 
-Agora que temos nossos dados chegando ao nosso model e com a lógica da nossa
-aplicação definida em nosso controller, vamos criar uma view para a ação
-``index()`` que criamos acima.
+Now that we have our data flowing from our model, and our application
+logic is defined by our controller, let's create a view for
+the index action we created above.
 
-As views do Cake são meros fragmentos voltados à apresentação de dados que vão
-dentro do layout da aplicação. Para a maioria das aplicações, as views serão
-marcações HTML intercalados com código PHP, mas as views também podem ser
-renderizadas como XML, CVS ou mesmo como dados binários.
+CakePHP views are just presentation-flavored fragments that fit inside
+an application's layout. For most applications, they're HTML mixed
+with PHP, but they may end up as XML, CSV, or even binary data.
 
-Os layouts são páginas que encapsulam as views e que podem ser intercambiáveis,
-mas por agora, vamos apenas usar o layout padrão.
+A layout is presentation code that is wrapped around a view.
+Multiple layouts can be defined, and you can switch between
+them, but for now, let's just use the default.
 
-Lembra da última seção, em que associamos a variável 'posts' para a view usando
-o método ``set()``? Com aquilo, os dados foram repassados para a view num
-formato parecido com este::
+Remember in the last section how we assigned the 'articles' variable
+to the view using the ``set()`` method? That would hand down the query
+object to the view to be invoked with a ``foreach`` iteration.
 
-    // print_r($posts) output:
-
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => The title
-                        [body] => This is the post body.
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => A title once again
-                        [body] => And the post body follows.
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Title strikes back
-                        [body] => This is really exciting! Not.
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
-
-Os arquivos de view do Cake são armazenados na pasta ``/app/View`` dentro de uma
-pasta com o mesmo nome do controller a que correspondem (em nosso caso, vamos
-criar uma pasta chamada 'Posts'). Para apresentar os dados do post num formato
-adequado de tabela, o código de nossa view deve ser algo como:
+CakePHP's view files are stored in ``src/Template`` inside a folder
+named after the controller they correspond to (we'll have to create
+a folder named 'Articles' in this case). To format this article data in a
+nice table, our view code might look something like this:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp -->
 
-    <h1>Posts do Blog</h1>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Título</th>
-            <th>Data de Criação</th>
-        </tr>
-
-        <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-             as informações dos posts -->
-
-        <?php foreach ($posts as $post): ?>
-        <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
-            <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
-            </td>
-            <td><?php echo $post['Post']['created']; ?></td>
-        </tr>
-        <?php endforeach; ?>
-
-    </table>
-
-Isto é tão simples quanto parece!
-
-Você deve ter notado o uso de um objeto chamado ``$this->Html``.
-Esta é uma instância da classe :php:class:`HtmlHelper` do CakePHP.
-O CakePHP vem com um conjunto de helpers que tornam uma moleza fazer coisas como
-criar links, gerar formulários, Javascript e elementos dinâmicos com Ajax.
-Você pode aprender mais sobre como usá-los na seção :doc:`/views/helpers`, mas o
-importante a ser notado aqui é que o método ``link()`` irá gerar um link em HTML
-com o título (o primeiro parâmetro) e URL (o segundo parâmetro) dados.
-
-Ao especificar URLs no Cake, é recomendado que você use o formato de array. Este
-assunto é explicado com mais detalhes na seção sobre Rotas. Usar o formato de
-array para URLs, permite que você tire vantagens da capacidade do CakePHP de
-reverter este formato de URL em URLs relativas e vice versa.
-você também pode simplesmente informar um caminho relativo à base da aplicação
-na forma /controller/action/parametro_1/parametro_2.
-
-Neste ponto, você deve ser capaz de apontar seu navegador para
-http://www.exemplo.com/posts/index. Você deve ver sua view, corretamente
-formatada com o título e a tabela listando os posts.
-
-Se lhe ocorreu clicar num dos links que criamos nesta view
-(no título do post e que apontam para uma URL /posts/view/algum_id),
-você provavelmente recebeu uma mensagem do CakePHP dizendo que a action ainda
-não foi definida. Se você não tiver visto um aviso assim, então ou alguma coisa
-deu errado ou então você já tinha definido uma action anteriormente, e neste
-caso, você é muito afoito. Se não, vamos criá-la em nosso PostsController
-agora::
-
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
-        public $name = 'Posts';
-
-        public function index() {
-             $this->set('posts', $this->Post->find('all'));
-        }
-
-        public function view($id = null) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
-        }
-    }
-
-A chamada do método ``set()`` deve lhe parece familiar. Perceba que estamos
-usando o método ``read()`` ao invés do ``find('all')`` porque nós realmente só
-queremos informações de um único post.
-
-Note que a action de nossa view recebe um parâmetro: O ID do post que queremos
-ver. Este parâmetro é repassado à action por meio da URL requisitada. Se um
-usuário acessar uma URL /posts/view/3, então o valor '3' será atribuído ao
-parâmetro ``$id``.
-
-Agora vamos criar a view para nossa nova action 'view' e colocá-la em
-``/app/View/Posts/view.ctp``:
-
-.. code-block:: php
-
-    <!-- File: /app/View/Posts/view.ctp -->
-
-    <h1><?php echo $post['Post']['title']?></h1>
-
-    <p><small>Created: <?php echo $post['Post']['created']?></small></p>
-
-    <p><?php echo $post['Post']['body']?></p>
-
-Confira se está funcionando tentando acessar os links em ``/posts/index`` ou
-requisitando diretamente um post acessando ``/posts/view/1``.
-
-Adicionando Posts
-=================
-
-Ler a partir da base de dados e exibir os posts foi um grande começo, mas
-precisamos permitir também que os usuários adicionem novos posts.
-
-Primeiramente, comece criando uma action ``add()`` no PostsController::
-
-    class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
-        public $name = 'Posts';
-        public $components = array('Session');
-
-        public function index() {
-            $this->set('posts', $this->Post->find('all'));
-        }
-
-        public function view($id) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
-
-        }
-
-        public function add() {
-            if ($this->request->is('post')) {
-                if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
-                    $this->redirect(array('action' => 'index'));
-                }
-            }
-        }
-    }
-
-.. note::
-
-    Você precisa incluir o componente SessionComponent e o helper SessionHelper
-    em qualquer controller que você manipula variáveis de sessão. Neste caso,
-    incluímos apenas o componente porque ele carrega o helper automaticamente.
-    Se você sempre utiliza sessões, inclua o componente no seu arquivo
-    AppController.
-
-Aqui está o que a action ``add()`` faz: se o método da requisição feita pelo cliente
-for do tipo post, ou seja, se ele enviou dados pelo formulário, tenta salvar os
-dados usando o model Post. Se, por alguma razão ele não salvar, apenas renderize
-a view. Isto nos dá uma oportunidade de mostrar erros de validação e outros
-avisos ao usuário.
-
-Quando um usuário utiliza um formulário para submeter (POSTar) dados para sua
-aplicação, esta informação fica disponível em ``$this->request->data``.Você pode
-usar as funções :php:func:`pr()` ou :php:func:`debug()` para exibir os dados se
-você quiser conferir como eles se parecem.
-
-Nós usamos o método :php:meth:`SessionComponent::setFlash()` do componente
-SessionComponent para definir uma variável de sessão com uma mensagem a ser
-exibida na página depois de ser redirecionada. No layout, nós temos
-:php:func:`SessionHelper::flash` que exibe a mensagem e limpa a variável de
-sessão correspondente. O método :php:meth:`Controller::redirect <redirect>` do
-controller redireciona para outra URL. O parâmetro ``array('action' => 'index')``
-é convertido para a URL /posts, em outras palavras, a action index do controller
-posts. Você pode conferir a função :php:func:`Router::url()` na API para ver os
-formatos que você pode usar ao especificar uma URL para actions do CakePHP.
-
-Chamar o método ``save()`` irá verificar por erros de validação e abortar o
-salvamento se algum erro ocorrer. Vamos falar mais sobre erros de validação e
-sobre como manipulá-los nas seções seguintes.
-
-Validação de Dados
-==================
-
-O CakePHP percorreu uma longa estrada combatendo a monotonia da validação de
-dados de formulários. Todo mundo detesta codificar formulários intermináveis e
-suas rotinas de validação. O CakePHP torna tudo isso mais fácil e mais rápido.
-
-Para usufruir das vantagens dos recursos de validação, você vai precisar usar o
-FormHelper do Cake em suas views. O :php:class:`FormHelper` está disponível por
-padrão em todas as suas views na variável ``$this->Form``.
-
-Aqui está nossa view add:
-
-.. code-block:: php
-
-    <!-- File: /app/View/Posts/add.ctp -->
-
-    <h1>Add Post</h1>
-    <?php
-    echo $this->Form->create('Post');
-    echo $this->Form->input('title');
-    echo $this->Form->input('body', array('rows' => '3'));
-    echo $this->Form->end('Save Post');
-
-Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário. Aqui
-está o HTML gerado pelo ``$this->Form->create()``:
-
-.. code-block:: html
-
-    <form id="PostAddForm" method="post" action="/posts/add">
-
-Se o método ``create()`` for chamado sem quaisquer parâmetros, o CakePHP assume
-que você está criando um formulário que submete para a action ``add()`` do
-controller atual (ou para a action ``edit()`` se um campo id for incluído nos
-dados do formulário), via POST.
-
-O método ``$this->Form->input()`` é usado para criar elementos de formulário de
-mesmo nome. O primeiro parâmetro informa ao CakePHP qual o campo correspondente
-e o segundo parâmetro permite que você especifique um extenso array de opções.
-Neste caso, o número de linhas para o textarea. Há alguma introspecção
-"automágica" envolvida aqui: o ``input()`` irá exibir diferentes elementos de
-formulário com base no campo do model em questão.
-
-A chamada à ``$this->Form->end()`` gera um botão de submissão e encerra o
-formulário. Se uma string for informada como primeiro parâmetro para o
-``end()``, o FormHelper exibe um botão de submit apropriadamente rotulado junto
-com a tag de fechamento do formulário. Novamente, confira o capítulo sobre os
-:doc:`/views/helpers` disponíveis no CakePHP para mais informações sobre os
-helpers.
-
-Agora vamos voltar e atualizar nossa view ``/app/View/Post/index.ctp`` para
-incluir um novo link para "Adicionar Post". Antes de <table>, adicione a
-seguinte linha::
-
-    echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
-
-Você pode estar imaginando: como eu informo ao CakePHP sobre os requisitos de
-validação de meus dados? Regras de validação são definidas no model. Vamos olhar
-de volta nosso model Post e fazer alguns pequenos ajustes::
-
-    class Post extends AppModel {
-        public $name = 'Post';
-
-        public $validate = array(
-            'title' => array(
-                'rule' => 'notEmpty'
-            ),
-            'body' => array(
-                'rule' => 'notEmpty'
-            )
-        );
-    }
-
-O array ``$validate`` diz ao CakePHP sobre como validar seus dados quando o
-método ``save()`` for chamado. Aqui, eu especifiquei que tanto os campos body e
-title não podem ser vazios. O mecanismo de validação do CakePHP é robusto, com
-diversas regras predefinidas (números de cartão de crédito, endereços de e-mail,
-etc.) além de ser bastante flexível, permitindo adicionar suas próprias regras
-de validação. Para mais informações, confira o capítulo sobre
-:doc:`/models/data-validation`.
-
-Agora que você incluiu as devidas regras de validação, tente adicionar um post
-com um título ou com o corpo vazio para ver como funciona. Uma vez que usamos o
-método :php:meth:`FormHelper::input()` do FormHelper para criar nossos elementos
-de formulário, nossas mensagens de erros de validação serão mostradas
-automaticamente.
-
-
-Editando Posts
-==============
-
-Edição de Posts: Aqui vamos nós. A partir de agora você já é um profissional do
-CakePHP, então você deve ter identificado um padrão. Criar a action e então
-criar a view. Aqui está como o código da action ``edit()`` do PostsController
-deve se parecer::
-
-
-    function edit($id = null) {
-        $this->Post->id = $id;
-        if ($this->request->is('get')) {
-            $this->request->data = $this->Post->read();
-        } else {
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
-                $this->redirect(array('action' => 'index'));
-            }
-        }
-    }
-
-Esta action primeiro verifica se a requisição é do tipo GET. Se for, nós
-buscamos o Post e passamos para a view. Se a requisição não for do tipo GET,
-provavelmente esta contém dados de um formulário POST. Nós usaremos estes dados
-para atualizar o registro do nosso Post ou exibir novamente a view mostrando
-para o usuário os erros de validação.
-
-A view edit pode ser algo parecido com isto:
-
-.. code-block:: php
-
-    <!-- File: /app/View/Posts/edit.ctp -->
-
-    <h1>Edit Post</h1>
-    <?php
-        echo $this->Form->create('Post', array('action' => 'edit'));
-        echo $this->Form->input('title');
-        echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden'));
-        echo $this->Form->end('Save Post');
-
-Esta view exibe o formulário de edição (com os valores populados), juntamente
-com quaisquer mensagens de erro de validação.
-
-Uma coisa a atentar aqui: o CakePHP vai assumir que você está editando um model
-se o campo 'id' estiver presente no array de dados.
-Se nenhum 'id' estiver presente (como a view add de inserção), o Cake irá
-assumir que você está inserindo um novo model quando o método ``save()`` for
-chamado.
-
-Você agora pode atualizar sua view index com os links para editar os posts
-específicos:
-
-.. code-block:: php
-
-    <!-- File: /app/View/Posts/index.ctp  (links para edição adicionados) -->
-
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+    <h1>Blog articles</h1>
     <table>
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Action</th>
             <th>Created</th>
         </tr>
 
-    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-    as informações dos posts -->
+        <!-- Here is where we iterate through our $articles query object, printing out article info -->
 
-    <?php foreach ($posts as $post): ?>
+        <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
-                    </td>
-                    <td>
-                <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')
-                )?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?= $this->Html->link($article->title,
+                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td><?= $article->created->format(DATE_RFC850) ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+Hopefully this should look somewhat simple.
+
+You might have noticed the use of an object called ``$this->Html``.  This is an
+instance of the CakePHP :php:class:`Cake\\View\\Helper\\HtmlHelper` class.
+CakePHP comes with a set of view helpers that make things like linking, form
+output a snap. You can learn more about how to use them in
+:doc:`/views/helpers`, but what's important to note here is that the ``link()``
+method will generate an HTML link with the given title (the first parameter) and
+URL (the second parameter).
+
+When specifying URLs in CakePHP, it is recommended that you use the
+array format. This is explained in more detail in the section on
+Routes. Using the array format for URLs allows you to take
+advantage of CakePHP's reverse routing capabilities. You can also
+specify URLs relative to the base of the application in the form of
+``/controller/action/param1/param2`` or use :ref:`named-routes`.
+
+At this point, you should be able to point your browser to
+http://www.example.com/articles/index. You should see your view,
+correctly formatted with the title and table listing of the articles.
+
+If you happened to have clicked on one of the links we created in
+this view (that link a article's title to a URL ``/articles/view/some\_id``),
+you were probably informed by CakePHP that the action hasn't yet
+been defined. If you were not so informed, either something has
+gone wrong, or you actually did define it already, in which case
+you are very sneaky. Otherwise, we'll create it in the
+ArticlesController now::
+
+    namespace App\Controller;
+
+    use Cake\Network\Exception\NotFoundException;
+
+    class ArticlesController extends AppController {
+
+        public function index() {
+             $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id = null) {
+            if (!$id) {
+                throw new NotFoundException(__('Invalid article'));
+            }
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+    }
+
+The ``set()`` call should look familiar. Notice we're using
+``get()`` rather than ``find('all')`` because we only really want
+a single article's information.
+
+Notice that our view action takes a parameter: the ID of the article
+we'd like to see. This parameter is handed to the action through
+the requested URL. If a user requests ``/articles/view/3``, then the value
+'3' is passed as ``$id``.
+
+We also do a bit of error checking to ensure a user is actually
+accessing a record. If a user requests ``/articles/view``, we will throw a
+``NotFoundException`` and let the ErrorHandler take over. By using the
+``get()`` function in the Articles table, we also perform a similar check to make
+sure the user has accessed a record that exists. In case the requested article
+is not present in the database, the ``get()`` function will throw
+a ``NotFoundException``.
+
+Now let's create the view for our new 'view' action and place it in
+``src/Template/Articles/view.ctp``
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/view.ctp -->
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
+
+
+Verify that this is working by trying the links at ``/articles/index`` or
+manually requesting an article by accessing ``/articles/view/1``.
+
+Adding Articles
+===============
+
+Reading from the database and showing us the articles is a great
+start, but let's allow for the adding of new articles.
+
+First, start by creating an ``add()`` action in the
+ArticlesController::
+
+    namespace App\Controller;
+
+    use Cake\Network\Exception\NotFoundException;
+
+    class ArticlesController extends AppController {
+        public $components = ['Flash'];
+
+        public function index() {
+            $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id) {
+            if (!$id) {
+                throw new NotFoundException(__('Invalid article'));
+            }
+
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+
+        public function add() {
+            $article = $this->Articles->newEntity($this->request->data);
+            if ($this->request->is('post')) {
+                if ($this->Articles->save($article)) {
+                    $this->Flash->success(__('Your article has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('Unable to add your article.'));
+            }
+            $this->set('article', $article);
+        }
+    }
+
+.. note::
+
+    You need to include the FlashComponent in any controller where you will use
+    it. If necessary, include it in your AppController.
+
+Here's what the ``add()`` action does: if the HTTP method of the
+request was POST, try to save the data using the Articles model. If for some
+reason it doesn't save, just render the view. This gives us a
+chance to show the user validation errors or other warnings.
+
+Every CakePHP request includes a ``Request`` object which is accessible using
+``$this->request``. The request object contains useful information regarding the
+request that was just received, and can be used to control the flow of your
+application.  In this case, we use the :php:meth:`Cake\\Network\\Request::is()`
+method to check that the request is a HTTP POST request.
+
+When a user uses a form to POST data to your application, that
+information is available in ``$this->request->data``. You can use the
+:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
+what it looks like.
+
+We use FlashComponent's magic ``__call`` method to set a message to a session
+variable, which will be displayed on the page after redirection. In the layout
+we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
+the corresponding session variable. The controller's
+:php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
+URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
+index action of the articles controller. You can refer to
+:php:func:`Cake\\Routing\\Router::url()` function on the `API
+<http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
+various CakePHP functions.
+
+Calling the ``save()`` method will check for validation errors and
+abort the save if any occur. We'll discuss how those errors are
+handled in the following sections.
+
+Data Validation
+===============
+
+CakePHP goes a long way toward taking the monotony out of form input
+validation. Everyone hates coding up endless forms and their
+validation routines. CakePHP makes it easier and faster.
+
+To take advantage of the validation features, you'll need to use CakePHP's
+FormHelper in your views. The :php:class:`Cake\\View\\Helper\\FormHelper` is
+available by default to all views at ``$this->Form``.
+
+Here's our add view:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/add.ctp -->
+
+    <h1>Add Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
+
+We use the FormHelper to generate the opening tag for an HTML
+form. Here's the HTML that ``$this->Form->create()`` generates:
+
+.. code-block:: html
+
+    <form method="post" action="/articles/add">
+
+If ``create()`` is called with no parameters supplied, it assumes
+you are building a form that submits via POST to the current controller's
+``add()`` action (or ``edit()`` action when ``id`` is included in
+the form data).
+
+The ``$this->Form->input()`` method is used to create form elements
+of the same name. The first parameter tells CakePHP which field
+they correspond to, and the second parameter allows you to specify
+a wide array of options - in this case, the number of rows for the
+textarea. There's a bit of introspection and automagic here:
+``input()`` will output different form elements based on the model
+field specified.
+
+The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
+CSRF/Form Tampering prevention is enabled.
+
+Now let's go back and update our ``src/Template/Articles/index.ctp``
+view to include a new "Add Article" link. Before the ``<table>``, add
+the following line::
+
+    <?= $this->Html->link(
+        'Add Article',
+        ['controller' => 'Articles', 'action' => 'add']
+    ) ?>
+
+You may be wondering: how do I tell CakePHP about my validation
+requirements? Validation rules are defined in the model. Let's look
+back at our Articles model and make a few adjustments::
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class ArticlesTable extends Table {
+        public function initialize(array $config) {
+            $this->addBehavior('Timestamp');
+        }
+
+        public function validationDefault(Validator $validator) {
+            $validator
+                ->notEmpty('title')
+                ->notEmpty('body');
+
+            return $validator;
+        }
+    }
+
+The ``validationDefault()`` method tells CakePHP how to validate your data
+when the ``save()`` method is called. Here, we've specified that
+both the body and title fields must not be empty. CakePHP's
+validation engine is strong, with a number of pre-built rules
+(credit card numbers, email addresses, etc.) and flexibility for
+adding your own validation rules. For more information on that
+setup, check the :doc:`/core-libraries/validation` documentation.
+
+Now that your validation rules are in place, use the app to try to add
+an article with an empty title or body to see how it works.  Since we've used the
+:php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
+create our form elements, our validation error messages will be shown
+automatically.
+
+Editing Articles
+================
+
+Post editing: here we go. You're a CakePHP pro by now, so you
+should have picked up a pattern. Make the action, then the view.
+Here's what the ``edit()`` action of the ArticlesController would look
+like::
+
+    public function edit($id = null) {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid article'));
+        }
+
+        $article = $this->Articles->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->data);
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
+
+        $this->set('article', $article);
+    }
+
+This action first ensures that the user has tried to access an existing record.
+If they haven't passed in an ``$id`` parameter, or the article does not
+exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
+
+Next the action checks whether the request is either a POST or a PUT request. If
+it is, then we use the POST data to update our article entity by using the
+'patchEntity' method.  Finally we use the table object to save the entity back
+or kick back and show the user validation errors.
+
+The edit view might look something like this:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/edit.ctp -->
+
+    <h1>Edit Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->end();
+    ?>
+
+This view outputs the edit form (with the values populated), along
+with any necessary validation error messages.
+
+CakePHP will use the result of ``$article->isNew()`` to determine whether or not
+a ``save()`` should insert a new record, or update an existing one.
+
+You can now update your index view with links to edit specific
+articles:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+
+    <h1>Blog articles</h1>
+    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Action</th>
+        </tr>
+
+    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+
+    <?php foreach ($articles as $article): ?>
+        <tr>
+            <td><?= $article->id ?></td>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 
     </table>
 
-Deletando Posts
-===============
+Deleting Articles
+=================
 
-A seguir, vamos criar uma maneira para os usuários excluírem posts. Comece com
-uma action ``delete()`` no PostsController::
+Next, let's make a way for users to delete articles. Start with a
+``delete()`` action in the ArticlesController::
 
-    function delete($id) {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
-        if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
-            $this->redirect(array('action' => 'index'));
+    public function delete($id) {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $article = $this->Articles->get($id);
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+            return $this->redirect(['action' => 'index']);
         }
     }
 
-Esta lógica exclui o post dado por $id, e utiliza ``$this->Session->setFlash()``
-para mostrar uma mensagem de confirmação para o usuário depois de redirecioná-lo
-para ``/posts``.
+This logic deletes the article specified by $id, and uses
+``$this->Flash->success()`` to show the user a confirmation
+message after redirecting them on to ``/articles``. If the user attempts to
+do a delete using a GET request, the 'allowMethod' will throw an Exception.
+Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is
+displayed. There are many built-in :doc:`Exceptions </development/errors>` that can
+be used to indicate the various HTTP errors your application might need
+to generate.
 
-Se o usuário tentar deletar um post usando uma requisição do tipo GET, nós
-lançamos uma exceção. Exceções não apanhadas são capturadas pelo manipulador de
-exceções do CakePHP e uma página de erro amigável é mostrada. O CakePHP vem com
-muitas :doc:`/development/exceptions` que você pode usar para indicar vários
-tipos de erros HTTP que sua aplicação pode precisar gerar.
-
-Como estamos executando apenas uma lógica de negócio e redirecionando, esta
-action não tem uma view. Você pode querer atualizar sua view index com links que
-permitam ao usuários excluir posts, porém, como um link executa uma requisição
-do tipo GET, nossa action irá lançar uma exceção. Precisamos então criar um
-pequeno formulário que enviará um método POST adequado. Para estes casos o
-helper FormHelper fornece o método ``postLink()``:
+Because we're just executing some logic and redirecting, this
+action has no view. You might want to update your index view with
+links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp -->
 
-    <h1>Blog posts</h1>
-    <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+    <h1>Blog articles</h1>
+    <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Actions</th>
             <th>Created</th>
+            <th>Actions</th>
         </tr>
 
-    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-    as informações dos posts -->
+    <!-- Here's where we loop through our $articles query object, printing out article info -->
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($articles as $article): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?= $article->id ?></td>
             <td>
-            <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
-            <?php echo $this->Form->postLink(
-                'Delete',
-                array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?'));
-            ?>
+                <?= $article->created->format(DATE_RFC850) ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td>
+                <?= $this->Form->postLink(
+                    'Delete',
+                    ['action' => 'delete', $article->id],
+                    ['confirm' => 'Are you sure?'])
+                ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+            </td>
         </tr>
         <?php endforeach; ?>
 
     </table>
 
+Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
+that uses JavaScript to do a POST request deleting our article.  Allowing content
+to be deleted using GET requests is dangerous, as web crawlers could
+accidentally delete all your content.
+
 .. note::
-    O código desta view também utiliza o HtmlHelper para solicitar uma
-    confirmação do usuário com um diálogo em Javascript antes de tentar excluir
-    o post.
 
-Rotas
-=====
+    This view code also uses the FormHelper to prompt the user with a
+    JavaScript confirmation dialog before they attempt to delete an
+    article.
 
-Para alguns, o roteamento padrão do CakePHP funcionará muito bem. Os
-desenvolvedores que estiverem mais afeitos a criar produtos ainda mais amigáveis
-aos usuários e aos mecanismos de busca irão gostar da maneira que as URLs do
-CakePHP são mapeadas para actions específicas. Então vamos fazer uma pequena
-alteração de rotas neste tutorial.
+Routes
+======
 
-Para mais informações sobre técnicas avançadas de roteamento, veja
+For some, CakePHP's default routing works well enough. Developers
+who are sensitive to user-friendliness and general search engine
+compatibility will appreciate the way that CakePHP's URLs map to
+specific actions. So we'll just make a quick change to routes in
+this tutorial.
+
+For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
-Por padrão, o CakePHP responde a requisições para a raiz de seu site
-(i.e. http://www.exemplo.com) usando seu PagesController e renderizando uma view
-chamada de "home". Ao invés disso, vamos substituir isto por nosso
-PostsController criando uma regra de roteamento.
+By default, CakePHP responds to a request for the root of your site
+(e.g., http://www.example.com) using its PagesController, rendering
+a view called "home". Instead, we'll replace this with our
+ArticlesController by creating a routing rule.
 
-As rotas do Cake são encontrada no arquivo ``/config/routes.php``. Você vai
-querer comentar ou remover a linha que define a rota raiz padrão. Ela se parece
-com::
+CakePHP's routing is found in ``config/routes.php``. You'll want
+to comment out or remove the line that defines the default root
+route. It looks like this:
 
-    Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+.. code-block:: php
 
-Esta linha conecta a URL '/' com a home page padrão do CakePHP. Queremos
-conectá-la com nosso próprio controller, então adicionamos uma linha parecida
-com isto::
+    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-    Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
+This line connects the URL '/' with the default CakePHP home page.
+We want it to connect with our own controller, so replace that line
+with this one::
 
-Isto deve conectar as requisições de '/' à action ``index()`` que criaremos em
-nosso PostsController.
+    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+
+This should connect users requesting '/' to the index() action of
+our ArticlesController.
 
 .. note::
-    O CakePHP também faz uso do 'roteamento reverso' - se, com a rota definida
-    acima, você passar ``array('controller' => 'posts', 'action' => 'index')`` a um
-    método que espere um array, a URL resultante será '/'. É sempre uma boa
-    ideia usar arrays para URLs, já que é a partir disto que suas rotas definem
-    para onde suas URLs apontam, além de garantir que os links sempre apontem
-    para o mesmo lugar.
 
-Conclusão
-=========
+    CakePHP also makes use of 'reverse routing'. If, with the above
+    route defined, you pass
+    ``['controller' => 'Articles', 'action' => 'index']`` to a
+    function expecting an array, the resulting URL used will be '/'.
+    It's therefore a good idea to always use arrays for URLs as this
+    means your routes define where a URL goes, and also ensures that
+    links point to the same place.
 
-Criar aplicações desta maneira irá lhe trazer paz, honra, amor e dinheiro além
-de satisfazer às suas mais ousadas fantasias. Simples, não? Tenha em mente que
-este tutorial foi muito básico. O CakePHP possui *muito* mais recursos a
-oferecer e é flexível de tantas maneiras que não conseguimos mostrar aqui por
-questões de simplicidade. Utilize o resto deste manual como guia para construir
-mais aplicações ricas em recursos.
+Conclusion
+==========
 
-Agora que você criou uma aplicação básica com o Cake, você está pronto para a
-coisa real. Comece seu próprio projeto, leia o restante do `Manual </>`_ e da
-`API <http://api20.cakephp.org>`_.
+Creating applications this way will win you peace, honor, love, and
+money beyond even your wildest fantasies. Simple, isn't it? Keep in
+mind that this tutorial was very basic. CakePHP has *many* more
+features to offer, and is flexible in ways we didn't wish to cover
+here for simplicity's sake. Use the rest of this manual as a guide
+for building more feature-rich applications.
 
-E se você precisar de ajuda, nos vemos no canal #cakephp (e no #cakephp-pt).
-Seja bem-vindo ao CakePHP!
+Now that you've created a basic CakePHP application, you're ready for
+the real thing. Start your own project and read the rest of the
+:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
 
-Leitura Recomendada
--------------------
+If you need help, there are many ways to get the help you need - please see the
+:doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!
 
-Estas são as tarefas comuns que pessoas aprendendo o CakePHP geralmente querem
-estudar:
+Suggested Follow-up Reading
+---------------------------
 
-1. :ref:`view-layouts`: Customizando o layout do seu website
-2. :ref:`view-elements` Incluindo e reutilizando trechos de código
-3. :doc:`/controllers/scaffolding`: Prototipando antes de programar
-4. :doc:`/console-and-shells/code-generation-with-bake` Gerando código CRUD básico
-5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticação e autorização de usuários
+These are common tasks people learning CakePHP usually want to study next:
+
+1. :ref:`view-layouts`: Customizing your website layout
+2. :ref:`view-elements`: Including and reusing view snippets
+3. :doc:`/console-and-shells/code-generation-with-bake`: Generating basic CRUD code
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+
+
+.. meta::
+    :title lang=en: Blog Tutorial Adding a Layer
+    :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
