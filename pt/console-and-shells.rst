@@ -28,22 +28,22 @@ tipo dispatcher para carregar uma shell ou tarefa, e prover seus parâmetros.
 
 .. note::
 
-    A command-line (CLI) build of PHP must be available on the system
-    if you plan to use the Console.
+    Uma linha de comando (CLI) constutuída a partir do PHP deve estar
+    disponível no sistema se você planeja utilizr o Console.
 
-Before we get into specifics, let's make sure you can run the CakePHP console.
-First, you'll need to bring up a system shell. The examples shown in this
-section will be in bash, but the CakePHP Console is Windows-compatible as well.
-This example assumes that the user is currently logged into a bash prompt and is
-currently at the root of a CakePHP application.
+Antes de entrar em detalhes, vamos ter certeza de que você pode executar o console do CakePHP.
+Primeiro, você vai precisar executar um sistema shell. Os exemplos apresentados nesta
+seção serão em bash, mas o Console do CakePHP é compatível com o Windows também.
+Este exemplo assume que o usuário está conectado em um prompt do bash e está
+atualmente na raiz de uma aplicação CakePHP.
 
-CakePHP applications contain a ``Console`` directory that contains all the
-shells and tasks for an application. It also comes with an executable::
+Aplicações CakePHP possuem um diretório `Console``` que contém todas as
+shells e tarefas para uma aplicação. Ele também vem com um executável::
 
     $ cd /path/to/app
     $ bin/cake
 
-Running the Console with no arguments produces this help message::
+Executar o Console sem argumentos produz esta mensagem de ajuda::
 
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
@@ -71,16 +71,16 @@ Running the Console with no arguments produces this help message::
     To run a plugin command, type cake Plugin.shell_name [args]
     To get help on a specific command, type cake shell_name --help
 
-The first information printed relates to paths. This is helpful if you're
-running the console from different parts of the filesystem.
+A primeira informação impressa refere-se a caminhos. Isso é útil se você estiver
+executando o console a partir de diferentes partes do sistema de arquivos.
 
-Creating a Shell
-================
+Criando uma Shell
+=================
 
-Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell. In your application's
-``Shell`` directory create ``HelloShell.php``. Put the following
-code inside it::
+Vamos criar uma shell para utilizar no Console. Para este exemplo,
+criaremos uma simples Hello World (Olá Mundo) shell. No diretório
+``Shell`` de sua aplicação crie ``HelloShell.php``. Coloque o seguinte
+código dentro do arquivo recem criado::
 
     namespace App\Shell;
 
@@ -92,15 +92,15 @@ code inside it::
         }
     }
 
-The conventions for shell classes are that the class name should match
-the file name, with the suffix of Shell. In our shell we created a ``main()`` method.
-This method is called when a shell is called with no additional commands. We'll add
-some more commands in a bit, but for now let's just run our shell. From your application
-directory, run::
+As convenções para as classes de shell são de que o nome da classe deve corresponder
+ao nome do arquivo, com o sufixo de Shell. No nosso shell criamos um método ``main()``.
+Este método é chamado quando um shell é chamado sem comandos adicionais. Vamos adicionar
+alguns comandos daqui a pouco, mas por agora vamos executar a nossa shell. A partir do diretório
+da aplicação, execute::
 
     bin/cake hello
 
-You should see the following output::
+Você deve ver a seguinte saída::
 
     Welcome to CakePHP Console
     ---------------------------------------------------------------
@@ -898,7 +898,6 @@ More Topics
         console-and-shells/completion-shell
         console-and-shells/upgrade-shell
 
-
 .. meta::
-:title lang=en: Console and Shells
+    :title lang=en: Console and Shells
     :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
