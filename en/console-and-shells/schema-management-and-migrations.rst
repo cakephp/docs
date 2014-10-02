@@ -219,20 +219,21 @@ column
     e.g. Single ::
 
         'indexes' => array(
-        'PRIMARY' => array(
-             'column' => 'id',
-             'unique' => 1
+            'PRIMARY' => array(
+                'column' => 'id',
+                'unique' => 1
             )
         )
 
     e.g. Multiple ::
 
         'indexes' => array(
-        'AB_KEY' => array(
-            'column' => array(
-                 'a_id', 
-                 'b_id'), 
-             'unique' => 1
+            'AB_KEY' => array(
+                'column' => array(
+                    'a_id', 
+                    'b_id'
+                ), 
+                'unique' => 1
             )
         )
 
@@ -271,10 +272,10 @@ schema file. Much like ``indexes``::
 
     var $comments => array(
         'id' => array(
-          'type' => 'integer',
-          'null' => false,
-          'default' => 0,
-          'key' => 'primary'
+            'type' => 'integer',
+            'null' => false,
+            'default' => 0,
+            'key' => 'primary'
         ),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
         'comment' => array('type' => 'text'),
