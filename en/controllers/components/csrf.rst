@@ -1,5 +1,5 @@
-Cross Site Request Forgery
-##########################
+Cross Site Request Forgery Component
+####################################
 
 By enabling the CSRF Component you get protection against attacks. `CSRF
 <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
