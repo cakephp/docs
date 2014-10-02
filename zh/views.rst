@@ -7,7 +7,7 @@ JSON 的形式，但提供文件流和创建 PDF 供用户下载也是视图层�
 CakePHP 带有一些内置的视图类，可以处理大多数常见的渲染情况：
 
 - 要创建 XML 或者 JSON 网络服务(*webservices*)，你可以使用
- :doc:`views/json-and-xml-views`。
+  :doc:`views/json-and-xml-views`。
 - 要提供受保护的文件，或者动态生成文件，你可以使用 :ref:`cake-response-file`。
 - 要创建多主题的视图，你可以使用 :doc:`views/themes`。
 
