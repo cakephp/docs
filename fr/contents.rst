@@ -42,6 +42,7 @@ Contenu
 
     contributing
     appendices
+    tutorials-and-examples
 
 
 .. todolist::

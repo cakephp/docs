@@ -41,6 +41,7 @@ Contents
     core-libraries
 
     contributing
+    tutorials-and-examples
     appendices
 
 .. todolist::

@@ -18,6 +18,7 @@ Contenidos
    deployment
    contributing
    appendices
+   tutorials-and-examples
 
 .. todolist::
 
