@@ -89,6 +89,19 @@ this::
                 '_serialize' => array('recipe')
             ));
         }
+        
+        public function add() {
+            $this->Recipe->create();
+            if ($this->Recipe->save($this->request->data)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set(array(
+                'message' => $message,
+                '_serialize' => array('message')
+            ));
+        }
 
         public function edit($id) {
             $this->Recipe->id = $id;
