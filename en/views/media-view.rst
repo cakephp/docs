@@ -69,7 +69,7 @@ Settable Parameters
 ``extension``
     The file extension. This is matched against an internal list of
     acceptable mime types. If the mime type specified is not in the
-    list (or sent in the mimeType parameter array), the file will not
+    list (or set in the mimeType parameter array), the file will not
     be downloaded.
 
 ``path``
