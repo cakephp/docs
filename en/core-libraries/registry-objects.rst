@@ -14,7 +14,7 @@ Loading Objects
 Objects can be loaded on-the-fly using add<registry-object>()
 Example::
 
-    $this->loadComponent('Acl.Acl');
+    $this->addComponent('Acl.Acl');
     $this->addHelper('Flash')
 
 Will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
@@ -28,7 +28,7 @@ used to alias objects in a registry.  This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
-    $this->Auth = $this->loadComponent('Auth', ['className' => 'MyCustomAuth']);
+    $this->Auth = $this->addComponent('Auth', ['className' => 'MyCustomAuth']);
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
 Triggering Callbacks
