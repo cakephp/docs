@@ -9,6 +9,7 @@ Contents
    getting-started
    cakephp-overview
    views
+   models
    contributing
 
 .. todolist::
