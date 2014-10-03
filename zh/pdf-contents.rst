@@ -8,6 +8,7 @@ Contents
    installation
    cakephp-overview
    views
+   models
 
 
 Indices and tables
