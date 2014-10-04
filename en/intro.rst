@@ -22,7 +22,7 @@ working with various projects a breeze. The :doc:`conventions chapter
 </intro/conventions>` covers the various conventions that CakePHP uses.
 
 
-The Model layer
+The Model Layer
 ===============
 
 The Model layer represents the part of your application that implements the
@@ -60,7 +60,7 @@ something like::
 The View Layer
 ==============
 
-The View renders a presentation of modeled data. Being separate from the
+The View layer renders a presentation of modeled data. Being separate from the
 Model objects, it is responsible for using the information it has available
 to produce any presentational interface your application might need.
 
