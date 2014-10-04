@@ -91,6 +91,19 @@ ressembler à ceci::
             ));
         }
 
+        public function add() {
+            $this->Recipe->create();
+            if ($this->Recipe->save($this->request->data)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set(array(
+                'message' => $message,
+                '_serialize' => array('message')
+            ));
+        }
+
         public function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
