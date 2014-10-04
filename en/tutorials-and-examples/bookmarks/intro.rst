@@ -170,7 +170,7 @@ Generating Scaffold Code
 ========================
 
 Because our database is following the CakePHP conventions, we can use the
-``bake`` console application to quickly generate a basic application. In your
+:doc:`bake console </console-and-shells/code-generation-with-bake>` application to quickly generate a basic application. In your
 command line run the following commands::
 
     bin/cake bake all users
@@ -259,6 +259,9 @@ from CakePHP. Lets implement that missing method now. In
         $this->set(compact('bookmarks'));
     }
 
+Creating the Finder Method
+--------------------------
+
 In CakePHP we like to keep our controller actions slim, and put most of our
 application's logic in the models. If you were to visit the
 ``/bookmarks/tagged`` URL now you would see an error that the ``findTagged``
@@ -277,6 +280,9 @@ We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
 a very powerful concept in CakePHP that allows you to package up re-usable
 queries. In our finder we've leveraged the ``matching()`` method which allows us
 to find bookmarks that have a 'matching' tag.
+
+Creating the View
+-----------------
 
 Now if you visit, the ``/bookmarks/tagged`` URL, CakePHP will show an error
 letting you know that you have not made a view file. Next, lets build the view
