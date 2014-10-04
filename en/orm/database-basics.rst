@@ -162,12 +162,11 @@ Attempting to load connections that do not exist will throw an exception.
 Creating Connections at Runtime
 -------------------------------
 
-.. php:staticmethod:: create($name, $config)
+Using ``config()`` and ``get()`` you can create new connections that are not
+defined in your configuration files at runtime::
 
-The ``create`` method allows you to define new connections that are not defined
-in your configuration files at runtime::
-
-    $conn = ConnectionManager::create('my_connection', $config);
+    ConnectionManager::config('my_connection', $config);
+    $conn = ConnectionManager::get('my_connection');
 
 See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
