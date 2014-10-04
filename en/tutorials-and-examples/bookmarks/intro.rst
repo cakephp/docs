@@ -89,7 +89,9 @@ the following SQL to create the necessary tables::
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        created DATETIME,
+        updated DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -107,7 +109,8 @@ the following SQL to create the necessary tables::
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME
+        updated DATETIME,
+        UNIQUE KEY title
     );
 
     CREATE TABLE bookmarks_tags (
@@ -163,8 +166,156 @@ to connect to the database' section have a checkmark.
     A copy of CakePHP's default configuration file is found in
     ``config/app.default.php``.
 
-
 Generating Scaffold Code
 ========================
 
+Because our database is following the CakePHP conventions, we can use the
+``bake`` console application to quickly generate a basic application. In your
+command line run the following commands::
 
+    bin/cake bake all users
+    bin/cake bake all bookmarks
+    bin/cake bake all tags
+
+This will generate the controllers, models, views, their co-responding test
+cases, and fixtures for our users, bookmarks and tags resources. If you've
+stopped your server, restart it and go to ``http://localhost:8765/bookmarks``.
+
+Once you're at the list of bookmarks, add a few users, bookmarks, and tags.
+
+Adding Password Hashing
+=======================
+
+When you created your users, you probably noticed that the passwords were stored
+in plain text. This is pretty bad from a security point of view, so lets get
+that fixed.
+
+This is also a good time to talk about the model layer in CakePHP. In CakePHP,
+we separate the methods that operate on a collection of objects, and a single
+object into different classes. Methods that operate on the collection of
+entities are put in the *Table* class, while features belonging to a single
+record are put on the *Entity* class.
+
+For example, password hashing is done on the individual record, so we'll
+implement this behavior on the entity object. Because, we want to hash the
+password each time it is set, we'll use a mutator/setter method. CakePHP will
+call convention based setter methods any time a property is set in one of your
+entities. Lets add a setter for the password. In ``src/Model/Entity/User.php``
+add the following::
+
+    namespace App\Model\Entity;
+
+    use Cake\Entity\Entity;
+    use Cake\Auth\DefaultPasswordHasher;
+
+    class User extends Entity {
+
+        // Code from bake.
+
+        protected function _setPassword($value) {
+            $hasher = new DefaultPasswordHasher();
+            return $hasher->hash($value);
+        }
+    }
+
+Now update one of the user's you set before, and you should see a hashed
+password instead of the original value. CakePHP hashes passwords with `bcrypt
+<http://codahale.com/how-to-safely-store-a-password/>`_ by default.
+
+Getting Bookmarks with a Specific Tag
+=====================================
+
+Now that we're storing passwords safely, we can build out some more interesting
+features in our application. Once you've amassed a collection of bookmarks, it
+is helpful to be able to search through them by tag. Next we'll implement
+a route, controller action, and finder method to search through bookmarks by
+tag.
+
+Ideally, we'd have a url that looks like
+``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` This would let us find
+all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we can
+implement this, we'll add a new route. In ``config/routes.php``, add the
+following::
+
+    Router::scope(
+        '/bookmarks',
+        ['controller' => 'Bookmarks'],
+        function ($routes) {
+            $routes->connect('/tagged/*', ['action' => 'tags'])
+        }
+    );
+
+The above defines a new 'route' which connects the ``/bookmarks/tagged/*`` path,
+to ``BookmarksController::tags``. By defining routes, you can isolate how your
+URLs look, from how they are implemented. If we were to visit
+``http://localhost:8765/bookmarks/tagged``, we would see a helpful error page
+from CakePHP. Lets implement that missing method now. In
+``src/Controller/BookmarksController.php`` add the following::
+
+    public function tags() {
+        $bookmarks = $this->Bookmarks->find('tagged', [
+            'tags' => $this->request->params['pass']
+        ]);
+        $this->set(compact('bookmarks'));
+    }
+
+In CakePHP we like to keep our controller actions slim, and put most of our
+application's logic in the models. If you were to visit the
+``/bookmarks/tagged`` URL now you would see an error that the ``findTagged``
+method has not been implemented yet, so lets do that. In
+``src/Model/Table/BookmarksTable.php`` add the following::
+
+    public function findTagged(Query $query, array $options) {
+        return $this->find()
+            ->contain('Tags')
+            ->matching('Tags', function($q) use ($options) {
+                return $q->where(['Tags.title IN' => $options['tags']]);
+            });
+    }
+
+We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
+a very powerful concept in CakePHP that allows you to package up re-usable
+queries. In our finder we've leveraged the ``matching()`` method which allows us
+to find bookmarks that have a 'matching' tag.
+
+Now if you visit, the ``/bookmarks/tagged`` URL, CakePHP will show an error
+letting you know that you have not made a view file. Next, lets build the view
+file for our ``tags`` action. In ``src/Template/Bookmarks/tags.ctp`` put the
+following content::
+
+    <h1>
+        Bookmarks tagged with
+        <?= $this->Text->toList($this->request->params['pass']) ?>
+    </h1>
+
+    <section>
+    <?php foreach ($bookmarks as $bookmark): ?>
+        <article>
+            <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
+            <small><?= h($bookmark->url) ?></small>
+            <?= $this->Text->autoParagraph($bookmark->description) ?>
+            <p>
+            <?php
+            $tags = collection($bookmark->tags)->extract('title');
+            echo $this->Text->toList($tags->toArray());
+            ?>
+            </p>
+        </article>
+    <?php endforeach; ?>
+    </section>
+
+In our view we've used a few of CakePHP's built-in :doc:`helpers
+</views/helpers>`. Helpers are used to make re-usable logic for formatting data,
+creating HTML or other view output.
+
+You should now be able to visit the ``/bookmarks/tags/funny`` URL and see all
+the bookmarks tagged with 'funny'.
+
+So far, we've created a basic application to manage bookmarks, tags and users.
+However, everyone can see everyone else's tags. In the next chapter, we'll
+implement authentication and restrict the visible bookmarks to only those that
+belong to the current user.
+
+Now continue to :doc:`/tutorials-and-examples/bookmarks/authentication` to
+continue building your application or :doc:`dive into the documentation
+</topics>` to learn more about what CakePHP can do for you.
