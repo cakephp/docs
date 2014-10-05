@@ -1,9 +1,10 @@
-Bookmarking Tutorial
-####################
+Bookmarkr Tutorial
+##################
 
 This tutorial will walk you through the creation of a simple bookmarking
-application. To start with, we'll be installing CakePHP, creating our database,
-and using the tools CakePHP provides to get our application up fast.
+application (bookmarkr). To start with, we'll be installing CakePHP, creating
+our database, and using the tools CakePHP provides to get our application up
+fast.
 
 Here's what you'll need:
 
@@ -87,7 +88,7 @@ tutorial, with a name of your choice, e.g. ``cake_bookmarks``. You can execute
 the following SQL to create the necessary tables::
 
     CREATE TABLE users (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
@@ -95,22 +96,22 @@ the following SQL to create the necessary tables::
     );
 
     CREATE TABLE bookmarks (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         title VARCHAR(50),
         description TEXT,
         url TEXT,
         created DATETIME,
         updated DATETIME,
-        FOREIGN KEY user_key(user_id) REFERENCES users(id)
+        FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
     CREATE TABLE tags (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
         updated DATETIME,
-        UNIQUE KEY title
+        UNIQUE KEY (title)
     );
 
     CREATE TABLE bookmarks_tags (
@@ -122,9 +123,13 @@ the following SQL to create the necessary tables::
         FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
     );
 
-The table and column name choices are not arbitrary. By using CakePHP's
+You may have noticed that the ``bookmarks_tags`` table used a composite primary
+key. CakePHP supports composite primary keys almost everywhere, making it easier
+to build multi-tenanted applications.
+
+The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP better
-and avoid having to configure the framework.  CakePHP is flexible enough to
+and avoid having to configure the framework. CakePHP is flexible enough to
 accommodate even inconsistent legacy database schemas, but adhering to the
 conventions will save you time.
 
@@ -181,7 +186,9 @@ This will generate the controllers, models, views, their co-responding test
 cases, and fixtures for our users, bookmarks and tags resources. If you've
 stopped your server, restart it and go to ``http://localhost:8765/bookmarks``.
 
-Once you're at the list of bookmarks, add a few users, bookmarks, and tags.
+You should see a basic but functional application providing data access to your
+application's database tables. Once you're at the list of bookmarks, add a few
+users, bookmarks, and tags.
 
 Adding Password Hashing
 =======================
@@ -218,9 +225,11 @@ add the following::
         }
     }
 
-Now update one of the user's you set before, and you should see a hashed
-password instead of the original value. CakePHP hashes passwords with `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ by default.
+Now update one of the user's you created earlier, if you change their password,
+you should see a hashed password instead of the original value on the list or
+view pages. CakePHP hashes passwords with `bcrypt
+<http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
+use sha1 or md5 if you're working with an existing database.
 
 Getting Bookmarks with a Specific Tag
 =====================================
@@ -235,13 +244,13 @@ Ideally, we'd have a url that looks like
 ``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` This would let us find
 all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we can
 implement this, we'll add a new route. In ``config/routes.php``, add the
-following::
+following at the top of the file::
 
     Router::scope(
         '/bookmarks',
         ['controller' => 'Bookmarks'],
         function ($routes) {
-            $routes->connect('/tagged/*', ['action' => 'tags'])
+            $routes->connect('/tagged/*', ['action' => 'tags']);
         }
     );
 
@@ -253,10 +262,11 @@ from CakePHP. Lets implement that missing method now. In
 ``src/Controller/BookmarksController.php`` add the following::
 
     public function tags() {
+        $tags = $this->request->params['pass'];
         $bookmarks = $this->Bookmarks->find('tagged', [
-            'tags' => $this->request->params['pass']
+            'tags' => tags
         ]);
-        $this->set(compact('bookmarks'));
+        $this->set(compact('bookmarks', 'tags'));
     }
 
 Creating the Finder Method
@@ -269,7 +279,13 @@ method has not been implemented yet, so lets do that. In
 ``src/Model/Table/BookmarksTable.php`` add the following::
 
     public function findTagged(Query $query, array $options) {
+        $fields = [
+            'Bookmarks.id',
+            'Bookmarks.title',
+            'Bookmarks.url',
+        ];
         return $this->find()
+            ->distinct($fields)
             ->contain('Tags')
             ->matching('Tags', function($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
@@ -291,7 +307,7 @@ following content::
 
     <h1>
         Bookmarks tagged with
-        <?= $this->Text->toList($this->request->params['pass']) ?>
+        <?= $this->Text->toList($tags) ?>
     </h1>
 
     <section>
@@ -300,21 +316,24 @@ following content::
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
             <?= $this->Text->autoParagraph($bookmark->description) ?>
-            <p>
-            <?php
-            $tags = collection($bookmark->tags)->extract('title');
-            echo $this->Text->toList($tags->toArray());
-            ?>
-            </p>
         </article>
     <?php endforeach; ?>
     </section>
+
+CakePHP expects that our templates follow the naming convention where the
+template has the lower case and underscored version of the controller action
+name.
+
+You may notice that we were able to use the ``$tags`` and ``$bookmarks``
+variables in our view. When we use the ``set()`` method in our controller's we
+set specific variables to be sent to the view. The view will make all passed
+variables available in the templates as local variables.
 
 In our view we've used a few of CakePHP's built-in :doc:`helpers
 </views/helpers>`. Helpers are used to make re-usable logic for formatting data,
 creating HTML or other view output.
 
-You should now be able to visit the ``/bookmarks/tags/funny`` URL and see all
+You should now be able to visit the ``/bookmarks/tagged/funny`` URL and see all
 the bookmarks tagged with 'funny'.
 
 So far, we've created a basic application to manage bookmarks, tags and users.
