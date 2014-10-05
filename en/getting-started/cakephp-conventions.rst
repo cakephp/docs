@@ -106,7 +106,10 @@ classes you would typically use in a CakePHP application:
 -  The Helper class **BestEverHelper** would be found in a file
    named **BestEverHelper.php**
 
-Each file would be located in the appropriate folder in your app folder.
+Each file would be located in the appropriate folder in your app folder. 
+You have to pay attention that, if your /webroot folder includes a folder 
+with the same name as your class (ie.YourClassName, you will be directed to /webroot/yourClassName
+folder, not to your class controller.
 
 Model and Database Conventions
 ==============================
