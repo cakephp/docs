@@ -79,7 +79,7 @@ therefore /red\_apples/go\_pick is the correct form to access the
 ``RedApplesController::go_pick`` action.
 
 For more information on CakePHP URLs and parameter handling, see
-:ref:`routes-configuration`.
+:ref:`routes-configuration`. If have files/directories in your ``/webroot`` directory that share a name with one of your routes/controllers, you will be directed to the file/directory and, not to your controller.
 
 .. _file-and-classname-conventions:
 
@@ -107,9 +107,7 @@ classes you would typically use in a CakePHP application:
    named **BestEverHelper.php**
 
 Each file would be located in the appropriate folder in your app folder. 
-You have to pay attention that, if your /webroot folder includes a folder 
-with the same name as your class (ie.YourClassName, you will be directed to /webroot/yourClassName
-folder, not to your class controller.
+
 
 Model and Database Conventions
 ==============================
