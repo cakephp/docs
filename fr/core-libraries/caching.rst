@@ -30,8 +30,8 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache si il est
   disponible.
 * ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.
-  Wincache a des fonctionnalités et des performances semblables à APC, mais
-  optimisé pour Windows et IIS.
+  Wincache offre des fonctionnalités et des performances semblables à APC, mais
+  optimisées pour Windows et IIS.
 * ``XcacheEngine`` Similaire à APC, `Xcache <http://xcache.lighttpd.net/>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcacheEngine`` Utilise l'extension `Memcache <http://php.net/memcache>`_.
@@ -161,14 +161,14 @@ L'API requise pour CacheEngine est
     Écrit la valeur d'une clé dans le cache, la chaîne optionnelle $config
     spécifie le nom de la configuration à écrire.
 
-.. php:method:: read($key)
+.. php:method:: read($key, $config = 'default')
 
     :retourne: La valeur mise en cache ou false en cas d'échec.
 
     Lit une clé depuis le cache. Retourne false pour indiquer
     que l'entrée a expiré ou n'existe pas.
     
-.. php:method:: delete($key)
+.. php:method:: delete($key, $config = 'default')
 
     :retourne: Un booléen true en cas de succès.
 

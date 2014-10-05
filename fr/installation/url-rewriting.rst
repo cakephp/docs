@@ -84,7 +84,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
+   Si votre site CakePHP a toujours des problèmes avec mod\_rewrite,
    essayez de modifier les paramètres pour les Hôtes Virtuels. Si vous
    êtes sur Ubuntu, modifiez le fichier /etc/apache2/sites-available/default
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous

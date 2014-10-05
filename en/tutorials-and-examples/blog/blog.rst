@@ -27,7 +27,7 @@ Here's what you'll need:
 #. Finally, you'll need a basic knowledge of the MVC programming pattern.
    A quick overview can be found in
    :doc:`/cakephp-overview/understanding-model-view-controller`.  Don't worry,
-   it's only a half a page or so.
+   it's only half a page or so.
 
 Let's get started!
 

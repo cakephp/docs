@@ -104,7 +104,7 @@ to a shared host restriction, or maybe you just want a few of your
 apps to share the same CakePHP libraries. This section describes how
 to spread your CakePHP directories across a filesystem.
 
-First, realize that there are three main parts to a Cake
+First, realize that there are three main parts to a CakePHP
 application:
 
 #. The core CakePHP libraries, in /lib/Cake.

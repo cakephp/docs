@@ -8,15 +8,19 @@ Bem Vindo
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a
-documentação do CakePHP.
+documentação.
+Note o botão “Improve this Doc” no canto superior direito; ele vai direcionar você para o editor online do GitHub da página ativa, permitindo que você facilmente contribua com quaisquer adições, exclusões ou correções para a documentação.
 
 .. container:: offline-download
 
-    Download da documentação:
+    **Leia a documentação em qualquer lugar**
 
-    - `formato PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
-    - `formato epub <../_downloads/pt/CakePHPCookbook.epub>`_
-    - `código-fonte original <http://github.com/cakephp/docs>`_
+    Consulte o cookbook CakePHP quase em qualquer lugar. Disponível como PDF e
+    EPUB, você pode lê-lo em mais dispositivos, tanto quanto offline.
+
+    - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
+    - `Código-fonte Original <http://github.com/cakephp/docs>`_
 
 Introdução
 ==========

@@ -15,7 +15,6 @@
     development/testing
     development/rest
     development/dispatch-filters
-    development/vendor-packages
 
 
 .. meta::

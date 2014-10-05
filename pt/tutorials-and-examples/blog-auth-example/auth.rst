@@ -328,7 +328,7 @@ e adicione o seguinte conteúdo::
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
-        if (!parent::isAuthorized($user)) {
+        if (parent::isAuthorized($user)) {
             if ($this->action === 'add') {
                 // Todos os usuários registrados podem criar posts
                 return true;
