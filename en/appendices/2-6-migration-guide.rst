@@ -7,8 +7,13 @@ the changes and improvements made in 2.6.
 Basics.php
 ==========
 
-- ``stackTrace()`` has been added as a convenience wrapper function for ```Debugger::trace()``.
+- ``stackTrace()`` has been added as a convenience wrapper function for ``Debugger::trace()``.
   It directly echos just as ``debug()`` does. But only if debug level is on.
+- New i18n functions have been added. The new functions allow you to include
+  message context which allows you disambiguate possibly confusing message
+  strings. For example 'read' can mean multiple things in english depending on
+  the context. The new ``__x``, ``__xn``, ``__dx``, ``__dxn``, ``__dxc``,
+  ``__dxcn``, and ``__xc`` functions provide access to the new features.
 
 Console
 =======
@@ -50,6 +55,10 @@ Model
 -----
 
 - ``Model::save()`` had the ``atomic`` option back-ported from 3.0.
+- ``Model::afterFind()`` now always uses a consistent format for afterFind().
+  When ``$primary`` is false, the results will always be located under
+  ``$data[0]['ModelName']``. You can set the ``useConsistentAfterFind`` property
+  to false on your models to restore the original behavior.
 
 Network
 =======
@@ -59,7 +68,7 @@ CakeRequest
 
 - ``CakeRequest::param()`` can now read values using :ref:`hash-path-syntax`
   like ``data()``.
-- ``CakeRequest:setInput()``
+- ``CakeRequest:setInput()`` was added.
 
 HttpSocket
 ----------
