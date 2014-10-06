@@ -7,6 +7,7 @@ Contents
    getting-started
    installation
    cakephp-overview
+   controllers
    views
    models
 
