@@ -65,7 +65,6 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
