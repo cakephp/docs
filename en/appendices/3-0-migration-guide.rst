@@ -474,6 +474,10 @@ Controller
 - The ``Controller::$ext`` property has been removed. You now have to extend and
   override the ``View::$_ext`` property if you want to use a non-default view file
   extension.
+- The ``Controller::$methods`` property has been removed. You should now use
+  ``Controller::isAction()`` to determine whether or not a method name is an
+  action. This change was made to allow easier customization of what is and is
+  not counted as an action.
 - The ``Controller::$Components`` property has been removed and replaced with
   ``_components``. If you need to load components at runtime you should use
   ``$this->loadComponent()`` on your controller.
