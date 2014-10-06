@@ -33,7 +33,7 @@ Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
 in the [app_name] directory.::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarks
+    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarkr
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -45,7 +45,7 @@ Composer, check out the :doc:`/installation` section.
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
-    /bookmarks
+    /bookmarkr
         /config
         /logs
         /plugins
