@@ -61,7 +61,7 @@ composerの実行が終わると、ディレクトリ構造は次のようにな
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 さあ、アプリケーションのスケルトンの残りの部分を生成する準備ができました::
 
@@ -73,7 +73,7 @@ composerの実行が終わると、ディレクトリ構造は次のようにな
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . '/Vendor/cakephp/cakephp/lib'
     );
 
 composerで他のライブラリをインストールしている場合は、

@@ -64,7 +64,7 @@ Once Composer has finished running you should have a directory structure that lo
             bin/
             autoload.php
             composer/
-            pear-pear.cakephp.org/
+            cakephp/
 
 You are now ready to generate the rest of your application skeleton::
 
@@ -76,7 +76,7 @@ changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
+        ROOT . DS . APP_DIR . '/Vendor/cakephp/cakephp/lib'
     );
 
 .. note::
