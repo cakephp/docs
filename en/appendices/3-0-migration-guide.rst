@@ -1090,6 +1090,10 @@ The folder and file classes have been renamed:
 Inflector
 ---------
 
+- The default value for ``$replacement`` argument of :php:meth:`Cake\\Utility\\Inflector::slug()`
+  has been changed from underscore (``_``) to dash (``-``). Using dashes to
+  separate words in urls is the popular choice and also recommended by Google.
+
 - Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
   If you use custom transliterations you will need to update your code. Instead
   of regular expressions, transliterations use simple string replacement. This
