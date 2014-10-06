@@ -262,7 +262,6 @@ further information.
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [L]
        </IfModule>
@@ -303,7 +302,6 @@ further information.
        <IfModule mod_rewrite.c>
            RewriteEngine On
            RewriteBase /path/to/app
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [L]
        </IfModule>
@@ -319,7 +317,6 @@ further information.
        <IfModule mod_rewrite.c>
            RewriteEngine On
            RewriteBase /path/to/app/
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
            RewriteRule ^ index.php [L]
