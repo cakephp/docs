@@ -182,7 +182,7 @@ command line run the following commands::
     bin/cake bake all bookmarks
     bin/cake bake all tags
 
-This will generate the controllers, models, views, their co-responding test
+This will generate the controllers, models, views, their corresponding test
 cases, and fixtures for our users, bookmarks and tags resources. If you've
 stopped your server, restart it and go to ``http://localhost:8765/bookmarks``.
 
@@ -194,7 +194,7 @@ Adding Password Hashing
 =======================
 
 When you created your users, you probably noticed that the passwords were stored
-in plain text. This is pretty bad from a security point of view, so lets get
+in plain text. This is pretty bad from a security point of view, so let's get
 that fixed.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
@@ -207,7 +207,7 @@ For example, password hashing is done on the individual record, so we'll
 implement this behavior on the entity object. Because, we want to hash the
 password each time it is set, we'll use a mutator/setter method. CakePHP will
 call convention based setter methods any time a property is set in one of your
-entities. Lets add a setter for the password. In ``src/Model/Entity/User.php``
+entities. Let's add a setter for the password. In ``src/Model/Entity/User.php``
 add the following::
 
     namespace App\Model\Entity;
@@ -225,7 +225,7 @@ add the following::
         }
     }
 
-Now update one of the user's you created earlier, if you change their password,
+Now update one of the users you created earlier, if you change their password,
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
 <http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
@@ -240,7 +240,7 @@ is helpful to be able to search through them by tag. Next we'll implement
 a route, controller action, and finder method to search through bookmarks by
 tag.
 
-Ideally, we'd have a url that looks like
+Ideally, we'd have a URL that looks like
 ``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` This would let us find
 all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we can
 implement this, we'll add a new route. In ``config/routes.php``, add the
@@ -258,7 +258,7 @@ The above defines a new 'route' which connects the ``/bookmarks/tagged/*`` path,
 to ``BookmarksController::tags``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
 ``http://localhost:8765/bookmarks/tagged``, we would see a helpful error page
-from CakePHP. Lets implement that missing method now. In
+from CakePHP. Let's implement that missing method now. In
 ``src/Controller/BookmarksController.php`` add the following::
 
     public function tags() {
@@ -275,7 +275,7 @@ Creating the Finder Method
 In CakePHP we like to keep our controller actions slim, and put most of our
 application's logic in the models. If you were to visit the
 ``/bookmarks/tagged`` URL now you would see an error that the ``findTagged``
-method has not been implemented yet, so lets do that. In
+method has not been implemented yet, so let's do that. In
 ``src/Model/Table/BookmarksTable.php`` add the following::
 
     public function findTagged(Query $query, array $options) {
@@ -300,8 +300,8 @@ to find bookmarks that have a 'matching' tag.
 Creating the View
 -----------------
 
-Now if you visit, the ``/bookmarks/tagged`` URL, CakePHP will show an error
-letting you know that you have not made a view file. Next, lets build the view
+Now if you visit the ``/bookmarks/tagged`` URL, CakePHP will show an error
+letting you know that you have not made a view file. Next, let's build the view
 file for our ``tags`` action. In ``src/Template/Bookmarks/tags.ctp`` put the
 following content::
 
