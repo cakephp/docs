@@ -46,7 +46,7 @@ These methods are useful when creating class names, or property names::
 Il doit être noté que les underscores vont seulement convertir les mots
 formatés en camelCase. Les mots qui contiennent des espaces seront en
 minuscules, mais ne contiendront pas d'underscore.
-    
+
 Créer des Formes Lisibles par l'Homme
 =====================================
 
@@ -85,13 +85,13 @@ generating code or doing work based on conventions::
 Créer des Chaînes d'URL Safe
 ============================
 
-.. php:staticmethod:: slug($word, $replacement = '_')
+.. php:staticmethod:: slug($word, $replacement = '-')
 
 Slug convertit les caractères spéciaux en version latins et convertit
-les caractères ne correspondant pas et les espaces aux underscores. La
+les caractères ne correspondant pas et les espaces en tirêts. La
 méthode slug s'attend à un encodage UTF-8.
 
-    // apple\_puree
+    // apple-puree
     Inflector::slug('apple purée');
 
 

@@ -1212,11 +1212,16 @@ The folder and file classes have been renamed:
 Inflector
 ---------
 
-Les Transliterations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
-changé. Si vous utilisez des transliterations personnalisées, vous devrez mettre
-à jour votre code. A la place des expressions réglières, les transliterations
-utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
-performances significatives::
+- la valeur par défaut pour l'argument ``$replacement`` de la méthode
+  :php:meth:`Cake\\Utility\\Inflector::slug()` a été modifée de underscore (``_``)
+  au tirêt (``-``). utiliser des tirêts pour séparer les mots dans les url
+  est le choix le plus courant et également celui recommandé par Google.
+
+- Les Transliterations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
+  changé. Si vous utilisez des transliterations personnalisées, vous devrez mettre
+  à jour votre code. A la place des expressions réglières, les transliterations
+  utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
+  performances significatives::
 
     // Au lieu de
     Inflector::rules('transliteration', array(
