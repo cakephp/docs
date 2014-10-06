@@ -27,38 +27,52 @@ this::
     // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
-        public $components = array('RequestHandler');
+        public $components = ['RequestHandler'];
 
         public function index() {
             $recipes = $this->Recipes->find('all');
-            $this->set(array(
+            $this->set([
                 'recipes' => $recipes,
-                '_serialize' => array('recipes')
-            ));
+                '_serialize' => ['recipes']
+            ]);
+        }
+
+        public function add() {
+            $recipe = $this->Recipes->newEntity($this->request->data);
+            if ($this->Recipes->save($recipe)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set([
+                'message' => $message,
+                'recipe' => $recipe,
+                '_serialize' => ['message', 'recipe']
+            ]);
         }
 
         public function view($id) {
-            $recipe = $this->Recipes->findById($id);
-            $this->set(array(
+            $recipe = $this->Recipes->get($id);
+            $this->set([
                 'recipe' => $recipe,
-                '_serialize' => array('recipe')
-            ));
+                '_serialize' => ['recipe']
+            ]);
         }
 
         public function edit($id) {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
-                $this->Recipes->patchEntity($recipe, $this->request->data);
-                if ($this->Recipes->save($this->request->data)) {
+                $recipe = $this->Recipes->patchEntity($recipe, $this->request->data);
+                if ($this->Recipes->save($recipe)) {
                     $message = 'Saved';
                 } else {
                     $message = 'Error';
                 }
             }
-            $this->set(array(
+            $this->set([
                 'message' => $message,
-                '_serialize' => array('message')
-            ));
+                '_serialize' => ['message']
+            ]);
         }
 
         public function delete($id) {
@@ -67,10 +81,10 @@ this::
             if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
-            $this->set(array(
+            $this->set([
                 'message' => $message,
-                '_serialize' => array('message')
-            ));
+                '_serialize' => ['message']
+            ]);
         }
     }
 
