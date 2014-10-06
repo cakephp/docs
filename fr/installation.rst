@@ -274,7 +274,6 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [QSA,L]
        </IfModule>
@@ -315,7 +314,6 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        <IfModule mod_rewrite.c>
            RewriteEngine On
            RewriteBase /path/to/cake/app
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^ index.php [QSA,L]
        </IfModule>
@@ -332,7 +330,6 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        <IfModule mod_rewrite.c>
            RewriteEngine On
            RewriteBase /path/to/cake/app
-           RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
            RewriteRule ^ index.php [QSA,L]

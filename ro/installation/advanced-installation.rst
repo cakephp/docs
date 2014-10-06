@@ -134,7 +134,6 @@ in .htaccess urmatorul cod::
 
     <IfModule mod_rewrite.c>
        RewriteEngine On
-       RewriteCond %{REQUEST_FILENAME} !-d
        RewriteCond %{REQUEST_FILENAME} !-f
        RewriteRule ^(.*)$ index.php [QSA,L]
     </IfModule>
@@ -160,7 +159,6 @@ configurare pentru a se incarca numai în cazul în care exista mod\_rewrite)::
     <IfModule mod_rewrite.c>
        RewriteEngine On
        RewriteBase /path/to/cake/app
-       RewriteCond %{REQUEST_FILENAME} !-d
        RewriteCond %{REQUEST_FILENAME} !-f
        RewriteRule ^(.*)$ index.php [QSA,L]
     </IfModule>
