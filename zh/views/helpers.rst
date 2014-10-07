@@ -146,7 +146,7 @@ CakePHP 的其它地方的用法一样支持集合 API。
 
 .. note::
 
-    助件必须继承 ``AppHelper` 或者 :php:class:`Helper`，或者实现 
+    助件必须继承 ``AppHelper`` 或者 :php:class:`Helper`，或者实现 
     :ref:`helper-api` 中的全部回调。
 
 引入其它助件
