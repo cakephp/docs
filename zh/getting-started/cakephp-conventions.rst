@@ -61,7 +61,9 @@ http://example.com/apples 来访问。
 下划线分隔，因此 /red\_apples/go\_pick 是访问 ``RedApplesController::go_pick`` 动
 作的正确网址。
 
-有关 CakePHP 网址和参数处理的详情，请参见 :ref:`routes-configuration`。
+有关 CakePHP 网址和参数处理的详情，请参见 :ref:`routes-configuration`。如果在 
+``/webroot`` 内有和路由/控制器同名的文件/目录，就会被重定向到这个文件/目录，而不
+是控制器。
 
 .. _file-and-classname-conventions:
 
@@ -82,8 +84,9 @@ http://example.com/apples 来访问。
 
 每个文件都会被放置于 app 目录下适当的子目录中。
 
+
 模型和数据库命名约定
-==============================
+====================
 
 模型类的名称是单数、驼峰形式。Person、BigPerson 和 ReallyBigPerson 都是符合约定的
 模型名称。
