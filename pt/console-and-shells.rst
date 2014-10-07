@@ -109,9 +109,9 @@ Você deve ver a seguinte saída::
     ---------------------------------------------------------------
     Hello world.
 
-As mentioned before, the ``main()`` method in shells is a special method called
-whenever there are no other commands or arguments given to a shell. Since our
-main method wasn't very interesting let's add another command that does something::
+Como mencionado antes, o método ``main()`` em shells é um método especial chamado
+sempre que não há outros comandos ou argumentos dados para uma shell. Por nosso
+método principal não ser muito interessante, vamos adicionar outro comando que faz algo::
 
     namespace App\Shell;
 
@@ -127,33 +127,33 @@ main method wasn't very interesting let's add another command that does somethin
         }
     }
 
-After saving this file, you should be able to run the following command and
-see your name printed out::
+Depois de salvar o arquivo, você deve ser capaz de executar o seguinte comando e
+ver o seu nome impresso::
 
     bin/cake hello hey_there your-name
 
-Any public method not prefixed by an ``_`` is allowed to be called from the
-command line. As you can see, methods invoked from the command line are
-transformed from the underscored shell argument to the correct camel-cased
-method name in the class.
+Qualquer método público não prefixado por um ``_`` é permitido para ser chamado a partir da
+linha de comando. Como você pode ver, os métodos invocados a partir da linha de comando são
+transformados do argumento prefixado para a forma correta do nome camel-cased (camelizada)
+na classe.
 
-In our ``heyThere()`` method we can see that positional arguments are provided to our
-``heyThere()`` function. Positional arguments are also available in the ``args`` property.
-You can access switches or options on shell applications, which are available at
-``$this->params``, but we'll cover that in a bit.
+No nosso método ``heyThere()`` podemos ver que os argumentos posicionais são providos para nossa
+função ``heyThere()``. Argumentos posicionais também estão disponívels na propriedade ``args``.
+Você pode acessar switches ou opções em aplicações shell, estando disponíveis em ``$this->params``,
+mas nós iremos cobrir isso daqui a pouco.
 
-When using a ``main()`` method you won't be able to use the positional
-arguments. This is because the first positional argument or option is
-interpreted as the command name. If you want to use arguments, you
-should use method names other than ``main``.
+Quando utilizando um método ``main()`` você não estará liberado para utilizar
+argumentos posicionais. Isso se deve ao primeiro argumento posicional ou opção ser
+interpretado(a) como o nome do comando. Se você quer utilizar argumentos, você
+deve usar métodos diferentes de ``main()``.
 
-Using Models in Your Shells
----------------------------
+Usando Models em suas shells
+----------------------------
 
-You'll often need access to your application's business logic in shell
-utilities; CakePHP makes that super easy. You can load models in shells, just as
-you would in a controller using ``loadModel()``. The loaded models are set as
-properties attached to your shell::
+Você frequentemente precisará acessar a camada lógica de negócios em seus
+utilitários shell; O CakePHP faz essa tarefa super fácil. Você pode carregar models em
+shells assim como faz em um controller utilizando ``loadModel()``. Os models carregados
+são definidos como propriedades anexas à sua shell::
 
     namespace App\Shell;
 
@@ -168,35 +168,36 @@ properties attached to your shell::
 
         public function show() {
             if (empty($this->args[0])) {
-                return $this->error('Please enter a username.');
+                return $this->error('Por favor, indique um nome de usuário.');
             }
             $user = $this->Users->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
     }
 
-The above shell, will fetch a user by username and display the information
-stored in the database.
+A shell acima, irá preencher um user pelo seu username e exibir a informação
+armazenada no banco de dados.
 
-Shell Tasks
-===========
+Tasks de Shell
+================
 
-There will be times when building more advanced console applications, you'll want
-to compose functionality into re-usable classes that can be shared across many shells.
-Tasks allow you to extract commands into classes. For example the ``bake`` is made
-almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
+Haverão momentos construindo aplicações mais avançadas de console que você vai
+querer compor funcionalidades em classes reutilizáveis que podem ser compartilhadas
+através de muitas shells. Tasks permitem que você extraia comandos em classes. Por exemplo,
+o ``bake`` é feito quase que completamente de tasks. Você define tasks para uma shell usando
+a propriedade ``$tasks``::
 
     class UserShell extends Shell {
         public $tasks = ['Template'];
     }
 
-You can use tasks from plugins using the standard :term:`plugin syntax`.
-Tasks are stored in ``Shell/Task/`` in files named after their classes. So if
-we were to create a new 'FileGenerator' task, you would create
+Você pode utilizar tasks de plugins utilizando o padrão :term:`plugin syntax`.
+Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas classes.
+Então se nós estivéssemos criando uma nova task 'FileGenerator', você deveria criar
 ``src/Shell/Task/FileGeneratorTask.php``.
 
-Each task must at least implement a ``main()`` method. The ShellDispatcher,
-will call this method when the task is invoked. A task class looks like::
+Cada task deve ao menos implementar um método ``main()``. O ShellDispatcher,
+vai chamar esse método quando a task é invocada. Uma classe task se parece com::
 
     namespace App\Shell\Task;
 
@@ -208,8 +209,8 @@ will call this method when the task is invoked. A task class looks like::
         }
     }
 
-A shell can also access it's tasks as properties, which makes tasks great for
-making re-usable chunks of functionality similar to :doc:`/controllers/components`::
+Uma shell também pode prover acesso a suas tasks como propriedades, que fazem tasks
+serem ótimas para criar punhados de funcionalidade reutilizáveis similares a :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
     class SeaShell extends Shell {
@@ -221,27 +222,27 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
         }
     }
 
-You can also access tasks directly from the command line::
+Você também pode acessar tasks diretamente da linha de comando::
 
     $ cake sea sound
 
 .. note::
 
-    In order to access tasks directly from the command line, the task
-    **must** be included in the shell class' $tasks property.
-    Therefore, be warned that a method called "sound" in the SeaShell
-    class would override the ability to access the functionality in the
-    Sound task specified in the $tasks array.
+    Para acessar tasks diretamente através da linha de comando, a task
+    **deve** ser incluída na propriedade da classe shell ``$tasks``.
+    Portanto, esteja ciente que um método chamado "sound" na classe SeaShell
+    deve sobrescrever a habilidade de acessar a funcionalidade na task
+    Sound, especificada no array $tasks.
 
-Loading Tasks On The Fly with TaskRegistry
-------------------------------------------
+Carregando Tasks em tempo-real com TaskRegistry
+-----------------------------------------------
 
-You can load tasks on the fly using the Task registry object. You can load tasks that
-were not declared in $tasks this way::
+Você pode carregar arquivos em tempo-real utilizando o Task registry object. Você pode
+carregar tasks que não foram declaradas no $tasks dessa forma::
 
     $project = $this->Tasks->load('Project');
 
-Would load and return a ProjectTask instance. You can load tasks from plugins using::
+Carregará e retornará uma instância ProjectTask. Você pode carregar tasks de plugins usando::
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
