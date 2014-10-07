@@ -785,6 +785,62 @@ following::
 Passing the above array to ``saveAll()`` will create the contained tags,
 each associated with their respective recipes.
 
+Another example that is helpful is when you need to save many Tags to a Post.
+You need to pass the associated HABTM data in the following HABTM array format. Note 
+you only need to pass in the id's of the associated HABTM model however it needs 
+to be nested again.
+
+    Array
+    (
+        [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Saving HABTM arrays'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(1, 2, 5, 9)
+                    )
+            )
+        [1] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Dr Who's Name is Revealed'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(7, 9, 15, 19)
+                    )
+            )
+        [2] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'I Came, I Saw and I Conquered'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(11, 12, 15, 19)
+                    )
+            )
+        [3] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Simplicity is the Ultimate Sophistication'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(12, 22, 25, 29)
+                    )
+            )
+    )
+    
+Passing the above array to ``saveAll($data, array('deep' => true))`` 
+will populate the posts_tags join table with the Tag to Post associations.
+
 As an example, we'll build a form that creates a new tag and
 generates the proper data array to associate it on the fly with
 some recipe.
