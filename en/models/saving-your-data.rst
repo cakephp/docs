@@ -786,9 +786,9 @@ Passing the above array to ``saveAll()`` will create the contained tags,
 each associated with their respective recipes.
 
 Another example that is helpful is when you need to save many Tags to a Post.
-You need to pass the associated HABTM data in the following HABTM array format. Note 
-you only need to pass in the id's of the associated HABTM model however it needs 
-to be nested again.
+You need to pass the associated HABTM data in the following HABTM array format. Note
+you only need to pass in the id's of the associated HABTM model however it needs
+to be nested again::
 
     Array
     (
@@ -837,8 +837,8 @@ to be nested again.
                     )
             )
     )
-    
-Passing the above array to ``saveAll($data, array('deep' => true))`` 
+
+Passing the above array to ``saveAll($data, array('deep' => true))``
 will populate the posts_tags join table with the Tag to Post associations.
 
 As an example, we'll build a form that creates a new tag and
@@ -972,7 +972,7 @@ named differently and its behavior is more predictable.
     ``'unique'`` array key to ``'keepExisting'``. You could think of
     this similar to 'unique' => true, but without losing data from
     the extra fields during save operation. Additionally, if you used
-    bake in order to create the models, this is set automatically. 
+    bake in order to create the models, this is set automatically.
     See: :ref:`HABTM association arrays <ref-habtm-arrays>`.
 
 However, in most cases it's easier to make a model for the join table
