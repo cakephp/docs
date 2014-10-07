@@ -1,8 +1,8 @@
-模型(*Model*)
-#############
+模型
+####
 
-模型是在应用程序中构成业务层的类。它们应当负责管理几乎所有涉及数据的事情，譬如数
-据的合法性，数据间的交互，以及整个业务领域中数据在工作流程中的演化。
+模型(*Model*)是在应用程序中构成业务层的类。它们应当负责管理几乎所有涉及数据的事情，
+譬如数据的合法性，数据间的交互，以及整个业务领域中数据在工作流程中的演化。
 
 通常模型类用来表示数据，并且在 CakePHP 应用程序中用来访问数据。它们通常代表数据库
 中的表，但也可用于访问任何操控数据的东西，比如文件，外部网络服务，iCal 日程。
@@ -62,7 +62,7 @@
     内核中已经存在的一个类了。
 
 
-模型定义了之后，就可以在 :doc:`控制器(*Controller*) <controllers>` 中使用了。如果
+模型定义了之后，就可以在 :doc:`控制器 <controllers>` (*Controller*)中使用了。如果
 模型名称与控制器名称匹配，CakePHP 就会自动使该模型可以访问。例如，一个名为 
 IngredientsController 的控制器会自动初始化 Ingredient 模型，并把它附加在控制器上，
 作为 ``$this->Ingredient``::
@@ -75,7 +75,7 @@ IngredientsController 的控制器会自动初始化 Ingredient 模型，并把�
         }
     }
 
-关联的模型可以从主模型访问到。在下例中，Recipe 模型与 Ingredient 模型有关联::
+关联的模型可以从主模型访问。在下例中，Recipe 模型与 Ingredient 模型有关联::
 
     class Recipe extends AppModel {
 
@@ -88,8 +88,8 @@ IngredientsController 的控制器会自动初始化 Ingredient 模型，并把�
 这里展示了如何使用已经关联在一起的模型。要明白关联是如何定义的，请看 
 :doc:`模型的关联一节 <models/associations-linking-models-together>`。
 
-更多关于模型
-============
+关于模型的更多内容
+==================
 
 .. toctree::
     :maxdepth: 1
