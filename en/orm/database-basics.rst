@@ -282,6 +282,11 @@ queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`.
 
 
+In the initialize() Method of your Table class, you can update the column type for a specific column by doing the following:
+
+    $this->schema()->columnType('your_column', 'json');
+
+
 Connection Classes
 ==================
 
