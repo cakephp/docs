@@ -68,7 +68,7 @@ una página o un recurso de tu aplicación. Esta solicitud es procesada por un
 despachador que selecciona el controlador correcto para manejarlo.
 
 Una vez que la solicitud llega al controlador, éste se comunicará con la capa del Modelo
-para cualquier proceso de captación de datos o el guardado de de los mismos según se requira.
+para cualquier proceso de captación de datos o el guardado de los mismos según se requiera.
 Una vez finalizada esta comunicación el controlador procederá a delegar en el
 objeto de vista correcto la tarea de generar una presentación resultante de los datos
 proporcionada por el modelo.
