@@ -61,7 +61,27 @@ for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
 Using multiple configurations also lets you incrementally change the storage as
-needed. Example::
+needed. For example in your ``config/app.php`` you could put the following::
+
+    // ...
+    'Cache' => [
+        'short' => [
+            'className' => 'File',
+            'duration' => '+1 hours',
+            'path' => CACHE,
+            'prefix' => 'cake_short_'
+        ],
+        // Using a fully namespaced name.
+        'long' => [
+            'className' => 'Cake\Cache\Engine\FileEngine',
+            'duration' => '+1 week',
+            'probability' => 100,
+            'path' => CACHE . 'long' . DS,
+        ]
+    ]
+    // ...
+
+You can also configure Cache engines at runtime::
 
     // Using a short name
     Cache::config('short', array(
@@ -83,15 +103,8 @@ needed. Example::
     $object = new FileEngine($config);
     Cache::config('other', $object);
 
-.. note::
-
-    You must specify which className to use. It does **not** default to
-    File.
-
-By placing the above code in your ``config/app.php`` you will have two
-additional Cache configurations. The name of these configurations 'short' or
-'long' is used as the ``$config`` parameter for
-:php:meth:`Cake\\Cache\\Cache::write()` and
+The name of these configurations 'short' or 'long' is used as the ``$config``
+parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
 :php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
 refer to the class name using the following syntaxes:
 
