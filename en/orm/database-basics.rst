@@ -278,7 +278,9 @@ the type mapping. During our application bootstrap we should do the following::
 
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
-queries.
+queries. You can use the custom types you've created by mapping the types in
+your Table's :ref:`_initializeSchema() method <saving-complex-types>`.
+
 
 Connection Classes
 ==================
