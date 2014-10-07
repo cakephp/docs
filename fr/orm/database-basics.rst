@@ -164,12 +164,12 @@ exception.
 Créer des Connections à l'execution
 -----------------------------------
 
-.. php:staticmethod:: create($name, $config)
+En utilisant ``config()`` et ``get()`` vous pouvez créer à tout moment de
+nouvelles connections qui ne sont pas défines dans votre fichier de
+configuration::
 
-La méthode ``create`` vous permet de définir des nouvelles connections qui
-ne sont pas définies dans vos fichiers de configuration à l'execution::
-
-    $conn = ConnectionManager::create('my_connection', $config);
+    ConnectionManager::config('my_connection', $config);
+    $conn = ConnectionManager::get('my_connection');
 
 Regarder :ref:`database-configuration` pour plus d'informations sur la
 configuration de données utilisée lors de la création de connections.
@@ -287,6 +287,8 @@ le bootstrap de notre application, nous devrions faire ce qui suit::
 Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
 notre nouveau type, et la couche de base de données de CakePHP va
 automatiquement convertir notre données JSON lors de la création de queries.
+Vous pouvez utiliser les types personalisés créés en mappant les types dans
+la :ref:`méhode _initializeSchema() <saving-complex-types>` de votre Table.
 
 Les Classes de Connection
 =========================

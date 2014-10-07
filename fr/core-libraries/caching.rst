@@ -73,7 +73,28 @@ Ceci vous évitera qu'une application vienne réécrire les données cache d'une
 autre application.
 
 L'utilisation de plusieurs configurations vous permet également de changer le
-stockage comme vous l'entendez. Exemple::
+stockage comme vous l'entendez. Par exemple vous pouvez mettre ceci dans votre
+``config/app.php`` ::
+
+    // ...
+    'Cache' => [
+        'short' => [
+            'className' => 'File',
+            'duration' => '+1 hours',
+            'path' => CACHE,
+            'prefix' => 'cake_short_'
+        ],
+        // Utilisation d'un espace de nom complet.
+        'long' => [
+            'className' => 'Cake\Cache\Engine\FileEngine',
+            'duration' => '+1 week',
+            'probability' => 100,
+            'path' => CACHE . 'long' . DS,
+        ]
+    ]
+    // ...
+
+Vous pouvez également configurer les moteurs de cache à tout moment::
 
     // Utilisation d'un nom court
     Cache::config('short', array(
