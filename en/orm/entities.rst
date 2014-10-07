@@ -134,6 +134,8 @@ You can access virtual properties as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
+    
+Do bear in mind that virtual properties cannot be used in finds.
 
 Validation Errors
 =================
