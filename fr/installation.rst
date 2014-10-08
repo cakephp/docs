@@ -96,12 +96,12 @@ lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
 meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
 serveur web.
 
-Un problème habituel est que les répertoires ``logs`` et ``tmp`` et les sous-répertoires
-doivent être accessible en écriture à la fois pour le serveur web et et pour
-l'utilisateur des lignes de commande. Sur un système UNIX, si votre serveur
-web est différent à partir de l'utilisateur en ligne de commande, vous pouvez
-lancer les commandes suivantes juste une fois dans votre projet pour vous
-assurer que les permissions sont bien configurées::
+Un problème habituel est que les répertoires ``logs`` et ``tmp`` et les
+sous-répertoires doivent être accessible en écriture à la fois pour le serveur
+web et et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
+votre serveur web est différent à partir de l'utilisateur en ligne de commande,
+vous pouvez lancer les commandes suivantes juste une fois dans votre projet
+pour vous assurer que les permissions sont bien configurées::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -221,8 +221,9 @@ Ces fichiers peuvent varier selon les différentes distributions et les versions
 d'Apache. Vous pouvez consulter
 http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
-#. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que AllowOverride est défini à
-   All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
+#. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que
+   AllowOverride est défini à All pour le bon DocumentRoot. Vous devriez voir
+   quelque chose comme::
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
        # respect pour lesquels les services et les fonctionnalités sont
@@ -260,8 +261,8 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    téléchargements du site de notre dépôt Git, et a été dézippé correctement
    en vérifiant les fichiers .htaccess.
 
-   Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
-   application avec Bake)::
+   Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de
+   votre application avec Bake)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -435,7 +436,8 @@ Je ne veux / ne peux utiliser l'URL rewriting
 
 Si vous ne voulez pas ou ne pouvez pas avoir mod\_rewrite (ou tout autre
 module compatible) sur votre serveur, vous devrez utiliser les belles URLs
-intégrées à CakePHP. Dans ``config/app.php``, décommentez la ligne qui ressemble à::
+intégrées à CakePHP. Dans ``config/app.php``, décommentez la ligne qui
+ressemble à::
 
     'App' => [
         // ...
