@@ -145,6 +145,9 @@ de la méthode::
 
     echo $user->full_name;
 
+Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
+les finds.
+
 Erreurs de Validation
 =====================
 
