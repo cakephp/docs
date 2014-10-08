@@ -22,7 +22,6 @@ Introduction à toutes les parties clés de CakePHP:
 * :doc:`/core-libraries/caching`
 * :doc:`/core-libraries/logging`
 * :doc:`/development/sessions`
-* :doc:`/development/dispatch-filters`
 * :doc:`/development/rest`
 * :doc:`/controllers/components/authentication`
 * :doc:`/controllers/components/pagination`

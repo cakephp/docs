@@ -1087,7 +1087,11 @@ RequestActionTrait
     to passing all required parameters, passed arguments must be done
     in the second array as seen above.
 
+.. toctree::
+    :glob:
+    :maxdepth: 1
 
+    development/dispatch-filters
 
 .. meta::
     :title lang=fr: Routing

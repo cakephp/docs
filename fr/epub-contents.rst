@@ -21,7 +21,6 @@ Contenu
     core-libraries/events
 
     development/sessions
-    development/dispatch-filters
     development/rest
     controllers/components/pagination
     controllers/components/csrf
