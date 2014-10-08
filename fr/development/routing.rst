@@ -500,7 +500,7 @@ sur des configurations requête/environnement spécifique. Un bon exemple de
 cela est le routing :doc:`rest`. Vous pouvez spécifier des conditions
 supplémentaires dans l'argument ``$defaults`` pour
 :php:meth:`Router::connect()`. Par défaut, CakePHP propose 3 conditions
-d'environment, mais vous pouvez en ajouter plus en utilisant
+d'environnement, mais vous pouvez en ajouter plus en utilisant
 :ref:`custom-route-classes`. Les options intégrées sont:
 
 - ``[type]`` Seulement les requêtes correspondantes pour des types de contenu spécifiques.
