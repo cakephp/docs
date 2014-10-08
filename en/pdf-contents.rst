@@ -23,8 +23,7 @@ Contents
     development/dispatch-filters
     development/rest
     controllers/components/pagination
-    controllers/components/csrf
-    controllers/components/security
+    security
     core-libraries/email
     core-libraries/validation
     core-libraries/internationalization-and-localization
