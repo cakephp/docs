@@ -12,12 +12,12 @@ CakePHP 自带 ``PagesController.php`` 作为默认的控制器。这是一个�
 ``lib/Cake/Console/Templates/skel/Controller/PagesController.php`` 拷贝该文件。
 
 .. versionchanged:: 2.1
-	CakePHP 2.0 版本中页面控制器是 ``lib/Cake`` 的一部分。从 2.1 版本起页面控
-	制器不再是核心的一部分，而是在 app 目录中发放。
+    CakePHP 2.0 版本中页面控制器是 ``lib/Cake`` 的一部分。从 2.1 版本起页面控
+    制器不再是核心的一部分，而是在 app 目录中发放。
 
 .. warning::
 
-	不要直接修改 ``lib/Cake`` 下的任何文件，以防未来升级核心时发生问题。
+    不要直接修改 ``lib/Cake`` 下的任何文件，以防未来升级核心时发生问题。
 
 
 .. meta::
