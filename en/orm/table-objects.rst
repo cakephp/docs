@@ -14,8 +14,6 @@ use.
 Before trying to use Table objects and the ORM, you should ensure that you have
 configured your :ref:`database connection <database-configuration>`.
 
-.. _table-objects:
-
 Basic Usage
 ===========
 
@@ -97,7 +95,7 @@ ones. See :ref:`custom-find-methods` for more information::
 
 Entity objects represent a single record or row in your database. Entities allow
 you to define custom behavior on a per-record basis and model the domain of your
-application. See the :ref:`entities` documentation for more information on
+application. See the :doc:`/orm/entities` documentation for more information on
 creating your entity objects.
 
 Customizing the Entity Class a Table Uses

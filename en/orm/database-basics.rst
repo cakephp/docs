@@ -109,7 +109,7 @@ log
 quoteIdentifiers
     Set to ``true`` if you are using reserved words or special characters in your
     table or column names. Enabling this setting will result in queries built using the
-    :ref:`query-builder` having identifiers quoted when creating SQL. It should be
+    :doc:`/orm/query-builder` having identifiers quoted when creating SQL. It should be
     noted that this decreases performance because each query needs to be traversed
     and manipulated before being executed.
 flags
@@ -333,7 +333,7 @@ abstract type names when creating a query::
 
 This allows you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
-to use the :ref:`query-builder`. This apporach allows you to build complex and
+to use the :doc:`/orm/query-builder`. This apporach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();
@@ -384,7 +384,7 @@ much simpler::
     });
 
 In addition to basic queries, you can execute more complex queries using either
-the :ref:`query-builder` or :ref:`table-objects`. The transactional method will
+the :doc:`/orm/query-builder` or :doc:`/orm/table-objects`. The transactional method will
 do the following:
 
 - Call ``begin``.

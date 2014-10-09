@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\ORM
-
-.. _query-builder:
-
 Query Builder
 #############
+
+.. php:namespace:: Cake\ORM
 
 .. php:class:: Query
 
