@@ -1,5 +1,3 @@
-.. _entities:
-
 Entities
 ########
 
@@ -14,6 +12,8 @@ access the data they contain.
 
 Entities are created for you by CakePHP each time you use ``find()`` on a table
 object.
+
+.. _entities:
 
 Creating Entity Classes
 =======================
