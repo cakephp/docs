@@ -1,4 +1,4 @@
-Bookmarkr - Authentification
+Tutoriel de Bookmarkr Part 2
 ############################
 
 Après avoir fini :doc:`la première partie de ce tutoriel

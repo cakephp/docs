@@ -1,5 +1,5 @@
-Bookmarkr - Authentication
-##########################
+Bookmarkr Tutorial Part 2
+#########################
 
 After finishing :doc:`the first part of this tutorial
 </tutorials-and-examples/bookmarks/intro>` you should have a very basic

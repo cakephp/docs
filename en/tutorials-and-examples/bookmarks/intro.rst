@@ -341,6 +341,6 @@ However, everyone can see everyone else's tags. In the next chapter, we'll
 implement authentication and restrict the visible bookmarks to only those that
 belong to the current user.
 
-Now continue to :doc:`/tutorials-and-examples/bookmarks/authentication` to
+Now continue to :doc:`/tutorials-and-examples/bookmarks/part-two` to
 continue building your application or :doc:`dive into the documentation
 </topics>` to learn more about what CakePHP can do for you.
