@@ -134,7 +134,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
     public function isAuthorized($user) {
         $action = $this->request->params['action'];
 
-        // Add and index are always allowed.
+        // The add and index actions are always allowed.
         if ($action === 'add' || $action === 'index') {
             return true;
         }
