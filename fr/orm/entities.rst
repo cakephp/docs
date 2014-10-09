@@ -1,5 +1,3 @@
-.. _entities:
-
 Entities
 ########
 

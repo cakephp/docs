@@ -108,9 +108,9 @@ et Entity. Si vous avez besoin de personnaliser l'entity qu'une table utilise,
 vous pouvez utiliser la méthode ``entityClass()`` pour définir un nom de
 classe spécifique.
 
-Regardez les chapitres sur :ref:`table-objects` et :ref:`entities` pour plus
-d'informations sur la façon d'utiliser les objets de table et les entities dans
-votre application.
+Regardez les chapitres sur :doc:`/orm/table-objects` et :doc:`/orm/entities`
+pour plus d'informations sur la façon d'utiliser les objets table et les
+entities dans votre application.
 
 Pour en savoir plus sur les Models
 ==================================

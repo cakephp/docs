@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\ORM
-
-.. _table-objects:
-
 Les Objets Table
 ################
+
+.. php:namespace:: Cake\ORM
 
 .. php:class:: Table
 
@@ -104,7 +102,7 @@ finder intégrées et à vos propres méthodes personnalisées. Regardez
 Les objets Entity représentent un enregitrement unique ou une ligne dans votre
 base de données. Les Entities vous permettent de définir un comportement
 personnalisé pour un enregistrement et le model du domaine de votre
-application. Regardez la documentation sur les :ref:`entities` pour plus
+application. Regardez la documentation sur les :doc:`/orm/entities` pour plus
 d'informations sur la création de vos objets entity.
 
 Personnalisaliser la Classe Entity qu'une Table Utilise
@@ -709,6 +707,24 @@ view entities and their related data. You can do this easily by using
 If the get operation does not find any results
 a ``Cake\ORM\Error\RecordNotFoundException`` will be raised. You can either
 catch this exception yourself, or allow CakePHP to convert it into a 404 error.
+
+Like ``find()`` get has caching integrated. You can use the ``cache`` option
+when calling ``get()`` to perform read-through caching::
+
+    // Use the default cache config & a generated key.
+    $article = $articles->get($id, [
+        'cache' => true,
+    ]);
+
+    // Use the custom cache config & a generated key.
+    $article = $articles->get($id, [
+        'cache' => 'custom',
+    ]);
+
+    // Use the custom cache config & specific key
+    $article = $articles->get($id, [
+        'cache' => ['config' => 'custom', 'key' => 'mykey']
+    ]);
 
 Using Finders to Load Data
 --------------------------

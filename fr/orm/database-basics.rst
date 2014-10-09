@@ -114,9 +114,9 @@ quoteIdentifiers
     Défini à true si vous utilisez les mots réservés ou les caractères spéciaux
     avec les noms de votre table ou les noms de colonnes. Activer cette
     configuration va entraîner la construction des requêtes en utilisant
-    :ref:`query-builder` avec les identifiers quotés lors de la création de SQL.
-    Cela devrait être noté que ceci diminue la performance parce que chaque
-    requête a besoin d'être traversée et manipulée avant d'être executée.
+    :doc:`/orm/query-builder` avec les identifiers quotés lors de la création
+    de SQL. Cela devrait être noté que ceci diminue la performance parce que
+    chaque requête a besoin d'être traversée et manipulée avant d'être executée.
 flags
     Un tableau associatif de constantes PDO qui doivent être passées
     à l'instance PDO soulignée. Regardez la documentation de PDO pour les flags
@@ -344,7 +344,7 @@ de la création d'une requête::
 
 Cela vous permet d'utiliser des types de données riches dans vos applications
 et de les convertir convenablement en instructions SQL. La dernière manière
-la plus flexible de créer des requêtes est d'utiliser :ref:`query-builder`.
+la plus flexible de créer des requêtes est d'utiliser :doc:`/orm/query-builder`.
 Cette approche vous permet de construire des requêtes expressive complexes sans
 avoir à utiliser une plateforme SQL spécifique::
 
@@ -399,8 +399,8 @@ begin/commit/rollback::
     });
 
 En plus des requêtes basiques, vous pouvez executer des requêtes plus complexes
-en utilisant soit :ref:`query-builder`, soit :ref:`table-objects`. La méthode
-transactional fera ce qui suit:
+en utilisant soit :doc:`/orm/query-builder`, soit :ref:`table-objects`. La
+méthode transactionelle fera ce qui suit:
 
 - Appel de ``begin``.
 - Appelle la fermeture fournie.
