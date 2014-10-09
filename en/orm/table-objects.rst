@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\ORM
-
-.. _table-objects:
-
 Table Objects
 #############
+
+.. php:namespace:: Cake\ORM
 
 .. php:class:: Table
 
@@ -15,6 +13,8 @@ use.
 
 Before trying to use Table objects and the ORM, you should ensure that you have
 configured your :ref:`database connection <database-configuration>`.
+
+.. _table-objects:
 
 Basic Usage
 ===========
