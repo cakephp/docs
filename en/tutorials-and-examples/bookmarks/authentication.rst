@@ -183,9 +183,8 @@ the add method to look like::
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error('The bookmark could not be saved. Please, try again.');
             }
+            $this->Flash->error('The bookmark could not be saved. Please, try again.');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
@@ -205,9 +204,8 @@ edit form and action. Your edit action should look like::
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error('The bookmark could not be saved. Please, try again.');
             }
+            $this->Flash->error('The bookmark could not be saved. Please, try again.');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
