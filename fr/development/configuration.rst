@@ -160,6 +160,8 @@ Configuration du Routing
 Regardez :ref:`routes-configuration` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
 
+.. _additional-class-paths:
+
 Chemins de Classe Supplémentaires
 =================================
 

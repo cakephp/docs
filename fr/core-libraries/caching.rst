@@ -15,7 +15,7 @@ stockées depuis le cache est moins consommateur en ressource qu'un accès a une
 ressource distante.
 
 La mise en cache dans CakePHP se fait principalement par la classe
- ``Cache``. Cette classe fournit un ensemble de méthodes
+``Cache``. Cette classe fournit un ensemble de méthodes
 statiques qui fournissent une API uniforme pour le traitement des
 différentes implémentations de mise en cache. CakePHP arrive avec plusieurs
 moteurs de cache intégrés, et fournit un système facile pour implémenter
@@ -64,7 +64,7 @@ et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne.
 ``_cake_core_`` est utilisé pour stocker des carte de fichiers, et les 
 résultat parsés des fichiers de
-:doc:`traduction/core-libraries/internationalization-and-localization`_.
+:doc:`traduction </core-libraries/internationalization-and-localization>` .
 ``_cake_model_``, est utilisé pour stocker les schémas des models de vos
 applications.
 models. Si vous utilisez APC ou Memcache
@@ -159,7 +159,7 @@ enabled
     Lorsqu'il est réglé sur ``true``, la mise en cache persistante est désactivé
     à l'échelle le site.
     Cela fera échouer toutes les lectures/écritures vers
-    :php:class:`Cake\\Cache\\Cache`_. Vous pouvez piloter cette valeur avec
+    :php:class:`Cake\\Cache\\Cache` . Vous pouvez piloter cette valeur avec
     :php:meth:`Cake\\Cache\\Cache::enable()` et 
     :php:meth:`Cake\\Cache\\Cache::disable()`. Son état actuel peut-être lu
     avec :php:meth:`Cake\\Cache\\Cache::enabled()`.
@@ -537,7 +537,7 @@ L'API requise pour CacheEngine est
 
 .. php:method:: increment($key, $offset = 1)
 
-    :retourne: Un boléen ``true` en cas de succès.
+    :retourne: Un boléen ``true`` en cas de succès.
 
     Incrémente un nombre dans la clé et retourne la valeur incrémentée
 

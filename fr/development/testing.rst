@@ -717,7 +717,7 @@ normal mocks have::
 .. _integration-testing:
     
 Test d'intégrations des Controllers
-======================
+===================================
 
 Alors que vous pouvez tester les controller de la même manière que les Helpers,
 Models et Components, CakePHP offre une classe spécialisée ``IntegrationTestCase``.

@@ -454,7 +454,7 @@ en utilisant les méthodes script, image ou css de
 
 Les assets de Plugin sont servis en utilisant le filtre du dispatcheur
 ``AssetFilter`` par défaut. C'est seulement recommandé pour le développement.
-En production vous devrez :ref:`symlink-assets <symlink plugin assets>` pour
+En production vous devrez :ref:`symlinker vos assets <symlink-assets>` pour
 améliorer la performance.
 
 Si vous n'utilisez pas les helpers, vous pouvez préfixer /plugin_name/ au

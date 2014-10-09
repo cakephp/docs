@@ -12,5 +12,5 @@ Les sections suivantes traitent de ces outils:
 
 
 .. meta::
-    :title lang=en: Securité
-    :keywords lang=en: securité, csrf, cross site request forgery component
+    :title lang=fr: Securité
+    :keywords lang=fr: securité, csrf, cross site request forgery component

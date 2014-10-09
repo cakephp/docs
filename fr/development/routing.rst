@@ -1091,7 +1091,7 @@ RequestActionTrait
     :glob:
     :maxdepth: 1
 
-    development/dispatch-filters
+    /development/dispatch-filters
 
 .. meta::
     :title lang=fr: Routing
