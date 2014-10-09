@@ -45,7 +45,7 @@ Nous avons seulement dit à CakePHP que nous souhaitions charger les
 components ``Flash`` et ``Auth``. En plus, nous avons personnalisé la
 configuration de AuthComponent, puisque notre table users utilise ``email``
 comme username. Maintenant, si vous tapez n'importe quelle URL, vous serez
-envoyer vers ``/users/login``, qui vous montrera une page d'erreur puisque
+envoyé vers ``/users/login``, qui vous montrera une page d'erreur puisque
 nous n'avons pas encore écrit ce code. Créons donc l'action login::
 
     // Dans src/Controller/UsersController.php
@@ -56,9 +56,8 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
-            } else {
-                $this->Flash->error('Votre username ou mot de passe est incorrect.');
             }
+            this->Flash->error('Votre username ou mot de passe est incorrect.');
         }
     }
 
@@ -102,8 +101,8 @@ Maintenant vous pouvez visiter ``/users/logout`` pour vous déconnecter et
 Permettre de s'Enregistrer
 ==========================
 
-Quand vous êtes déconnecté, si vous essayez de visiter ``/users/add`` vous serz
-renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
+Si vous n'êtes pas connecté et que vous essayez de visiter ``/users/add`` vous
+serez renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
 voulons que les gens s'inscrivent à notre application. Dans ``UsersController``,
 ajotez ce qui suit::
 
@@ -112,7 +111,7 @@ ajotez ce qui suit::
     }
 
 Ce qui est au-dessus dit à ``AuthComponent`` que l'action ``add`` *ne* nécessite
-*pas* d'authentification ou d'authorisation. Vous pouvez prendre le temps de
+*pas* d'authentification ou d'autorisation. Vous pouvez prendre le temps de
 nettoyer ``Users/add.ctp`` et de retirer les liens, ou continuez vers la
 prochaine section.
 
@@ -122,7 +121,7 @@ Restreindre l'Accès aux Bookmarks
 Maintenant que les utilisateurs peuvent se connecter, nous voulons limiter
 les bookmarks qu'ils peuvent voir à ceux qu'ils ont fait. Nous allons faire
 ceci en utilisant un adaptateur 'authorization'. Puisque nos besoins sont
-assez simples, nous pouvons écrire quelques lignes de code simples dans notre
+assez simples, nous pouvons écrire quelques lignes de code simple dans notre
 ``BookmarksController``. Mais avant de le faire, nous voulons dire à
 AuthComponent comment notre application va autoriser les actions. Dans notre
 ``AppController``, ajoutez ce qui suit::
@@ -164,7 +163,7 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
 qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
-venez. Cependant, il n'y a pas de message affiché, donc rectifions ensuit cela::
+venez. Cependant, il n'y a pas de message affiché, donc rectifions ensuite cela::
 
     // Dans src/Template/Layouts/default.ctp
     // Sous le message flash existant.
@@ -193,9 +192,8 @@ mettre à jour la méthode add pour ressembler à ceci::
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de rééssayer.');
             }
+            $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de rééssayer.');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
@@ -249,7 +247,7 @@ Améliorer l'Experience de Tag
 
 Actuellement, ajoutez des nouveaux tags est un processus difficile, puisque
 ``TagsController`` interdit tous les accès. Plutôt que de permettre l'accès,
-nous pouvons améliorer l'UI de selection de tag en utilisant un champ de texte
+nous pouvons améliorer l'UI de sélection de tag en utilisant un champ de texte
 séparé par des virgules. Cela donnera une meilleur expérience à nos
 utilisateurs, et utilisera quelques unes des fonctionnalités super de l'ORM.
 
@@ -338,7 +336,7 @@ Wrapping Up
 Nous avons élargi notre application de bookmarking pour gérer les scenariis
 de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
 aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
-capcacités de l'ORM.
+capacités de l'ORM.
 
 Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez en
 apprendre plus sur l':doc:`/orm`, ou vous pouvez lire attentivement
