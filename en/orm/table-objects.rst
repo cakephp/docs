@@ -705,6 +705,25 @@ If the get operation does not find any results
 a ``Cake\ORM\Exception\RecordNotFoundException`` will be raised. You can either
 catch this exception yourself, or allow CakePHP to convert it into a 404 error.
 
+Like ``find()`` get has caching integrated. You can use the ``cache`` option
+when calling ``get()`` to perform read-through caching::
+
+    // Use the default cache config & a generated key.
+    $article = $articles->get($id, [
+        'cache' => true,
+    ]);
+
+    // Use the custom cache config & a generated key.
+    $article = $articles->get($id, [
+        'cache' => 'custom',
+    ]);
+
+    // Use the custom cache config & specific key
+    $article = $articles->get($id, [
+        'cache' => ['config' => 'custom', 'key' => 'mykey']
+    ]);
+
+
 Using Finders to Load Data
 --------------------------
 
