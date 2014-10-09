@@ -95,7 +95,7 @@ Now you can visit ``/users/logout`` to log out and be sent to the login page.
 Enabling Registrations
 ======================
 
-When you are logged out, if you try to visit ``/users/add`` you will be kicked
+If you aren't logged in and you try to visit ``/users/add`` you will be kicked
 to the login page. We should fix that as we'll if we want people to sign up for
 our application. In the ``UsersController`` add the following::
 
