@@ -9,13 +9,13 @@ restricting the bookmarks each user can see/modify to only the ones they own.
 Adding Login
 ============
 
-In CakePHP authentication is handled by a :doc:`/controllers/components`.
-Components can be thought of as ways to create re-usable chunks of controller
+In CakePHP, authentication is handled by :doc:`/controllers/components`.
+Components can be thought of as ways to create reusable chunks of controller
 code related to a specific feature or concept. Components can also hook into the
-controller life-cycle events and interact with your application that way. To get
-started, we'll add the :doc:`AuthComponent
-</controllers/components/authentication>` to our application. We'll want pretty
-much every method to require authentication, so we'll add AuthComponent in our
+controller's event life-cycle and interact with your application that way. To
+get started, we'll add the :doc:`AuthComponent
+</controllers/components/authentication>` to our application. We'll pretty much
+want every method to require authentication, so we'll add AuthComponent in our
 AppController::
 
     // In src/Controller/AppController.php
@@ -41,9 +41,9 @@ AppController::
 
 We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
 components. In addition, we've customized the configuration of AuthComponent, as
-our users table uses ``email`` as the username. Now if you go to any URL you'll
-be kicked to ``/users/login`` which will show an error page as we have not
-written that code yet. So lets create the login action::
+our users table uses ``email`` as the username. Now, if you go to any URL you'll
+be kicked to ``/users/login``, which will show an error page as we have
+not written that code yet. So let's create the login action::
 
     // In src/Controller/UsersController.php
 
@@ -68,8 +68,8 @@ And in ``src/Template/Users/login.ctp`` add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-Now that we have a simple login form, we should be able to login with one of the
-users that has a hashed password.
+Now that we have a simple login form, we should be able to log in with one of
+the users that has a hashed password.
 
 .. note::
 
@@ -77,13 +77,13 @@ users that has a hashed password.
     ``loadComponent('Auth')`` line. Then go and edit the user,
     saving a new password for them.
 
-You should now be able to login. If not, make sure you are using a user that has
-a hashed password.
+You should now be able to log in. If not, make sure you are using a user that
+has a hashed password.
 
 Adding Logout
 =============
 
-Now that people can login, you'll probably provide a way to logout as well.
+Now that people can log in, you'll probably provide a way to log out as well.
 Again, in the ``UsersController``, add the following code::
 
     public function logout() {
@@ -91,14 +91,14 @@ Again, in the ``UsersController``, add the following code::
         return $this->redirect($this->Auth->logout());
     }
 
-Now you can visit ``/users/logout`` to logout and be sent to the login page.
+Now you can visit ``/users/logout`` to log out and be sent to the login page.
 
 Enabling Registrations
 ======================
 
 When you are logged out, if you try to visit ``/users/add`` you will be kicked
-to the login page. We should fix that as we'll want people to sign up for our
-application. In the ``UsersController`` add the following::
+to the login page. We should fix that as we'll if we want people to sign up for
+our application. In the ``UsersController`` add the following::
 
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow('add');
@@ -112,7 +112,7 @@ section.
 Restricting Bookmark Access
 ===========================
 
-Now that users can login, we'll want to limit the bookmarks they can see to the
+Now that users can log in, we'll want to limit the bookmarks they can see to the
 ones they made. We'll do this using an 'authorization' adapter. Since our
 requirements are pretty simple, we can write some simple code in our
 ``BookmarksController``. But before we do that, we'll want to tell the
@@ -156,7 +156,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
 
 Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. However, there is no
-error message being displayed, so lets rectify that next::
+error message being displayed, so let's rectify that next::
 
     // in src/Template/Layouts/default.ctp
     // Under the existing flash message.
@@ -167,13 +167,13 @@ You should now see the authorization error messages.
 Fixing List view and Forms
 ==========================
 
-While view and delete, are working edit, add and index have a few problems:
+While view and delete are working, edit, add and index have a few problems:
 
 #. When adding a bookmark you can choose the user.
 #. When editing a bookmark you can choose the user.
 #. The list page shows bookmarks from other users.
 
-Lets tackle the add form first. To begin with remove the ``input('user_id')``
+Let's tackle the add form first. To begin with remove the ``input('user_id')``
 from ``src/Template/Bookmarks/add.ctp``. With that removed, we'll also update
 the add method to look like::
 
@@ -217,7 +217,7 @@ edit form and action. Your edit action should look like::
 List View
 ---------
 
-Now, we need to only show bookmarks for the currently logged in user. We can do
+Now, we only need to show bookmarks for the currently logged in user. We can do
 that by updating the call to ``paginate()``. Make your index() action look
 like::
 
@@ -236,7 +236,7 @@ we'll leave that as an exercise you can complete on your own.
 Improving the Tagging Experience
 ================================
 
-Right adding new tags is a difficult process, as the ``TagsController``
+Right now, adding new tags is a difficult process, as the ``TagsController``
 disallows all access. Instead of allowing access, we can improve the tag
 selection UI by using a comma separated text field. This will let us give
 a better experience to our users, and use some more great features in the ORM.
