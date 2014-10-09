@@ -83,8 +83,8 @@ has a hashed password.
 Adding Logout
 =============
 
-Now that people can log in, you'll probably provide a way to log out as well.
-Again, in the ``UsersController``, add the following code::
+Now that people can log in, you'll probably want to provide a way to log out as
+well. Again, in the ``UsersController``, add the following code::
 
     public function logout() {
         $this->Flash->success('You are now logged out.');
