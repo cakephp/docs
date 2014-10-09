@@ -1175,7 +1175,7 @@ Vous pouvez passer votre propre tableau des mois à utiliser en
 paramétrant l'attribut 'monthNames', ou avoir les mois affichés
 comme des nombres en passant ``false``. (Note: les mois par défaut
 sont internationalisés et peuvent être traduits en utilisant la
-:doc:`localisation </core-libraries/internationalization-and-localization>`_.)::
+:doc:`localisation </core-libraries/internationalization-and-localization>`.)::
 
     echo $this->Form->month('mob', ['monthNames' => false]);
 
@@ -1597,11 +1597,13 @@ Construire une Classe Widget
 ----------------------------
 
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
-implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
+implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface` . Cette interface
 nécessite que la méthde ``render(array $data)`` soit implémentée. La méthode
 render attend un tableau de données pour constuire le widget et doit revoyer
 un chaine HTML pourle widget. Si CakePHP construit votre widget, vous pouvez
-vous attendre à recevoir une instance de ``Cake\View\StringTemplate``en premierargument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez construire un widget Autocomplete, vous pouvez e faire comme ceci::
+vous attendre à recevoir une instance de ``Cake\View\StringTemplate``en premier
+argument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez
+construire un widget Autocomplete, vous pouvez le faire comme ceci::
     
     namespace App\View\Widget;
 

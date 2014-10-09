@@ -399,7 +399,7 @@ begin/commit/rollback::
     });
 
 En plus des requêtes basiques, vous pouvez executer des requêtes plus complexes
-en utilisant soit :doc:`/orm/query-builder`, soit :ref:`table-objects`. La
+en utilisant soit :doc:`/orm/query-builder`, soit :doc:`/orm/table-objects`. La
 méthode transactionelle fera ce qui suit:
 
 - Appel de ``begin``.
@@ -534,6 +534,9 @@ méthodes fonctionnent de la même façon que celles fournies par PDO::
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
+
+
+.. _database-query-logging:
 
 Logging de Query
 ================

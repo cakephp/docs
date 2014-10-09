@@ -39,7 +39,7 @@ Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
 d'une application CakePHP:
 
 * Le :ref:`cycle de requête de CakePHP <request-cycle>`
-* Les :ref:`conventions <intro/conventions>` que CakePHP
+* Les :doc:`conventions <intro/conventions>` que CakePHP
   utilise.
 * Les :doc:`Controllers </controllers>` gèrent les requêtes et coordonnent vos
   models et les réponses que votre application créé.

@@ -203,7 +203,7 @@ les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
 Pour activer la protection CSRF, utilisez 
-:doc:`/controllers/components/csrf-component`.
+:doc:`/controllers/components/csrf`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================

@@ -84,8 +84,8 @@ Setting View Variables
 Views have a ``set()`` method that is analogous to the ``set()``
 found in Controller objects. Using set() from your view file will
 add the variables to the layout and elements that will be rendered
-later. See :ref:`controller-methods` for more information on using
-set().
+later. See :ref:`setting-view_variables` for more information on using
+``set()``.
 
 In your view file you can do::
 
