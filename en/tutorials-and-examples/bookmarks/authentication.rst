@@ -233,8 +233,8 @@ like::
 We should also update the ``tags()`` action and the related finder method, but
 we'll leave that as an exercise you can complete on your own.
 
-Improving Applying Tags to Bookmarks
-====================================
+Improving the Tagging Experience
+================================
 
 Right adding new tags is a difficult process, as the ``TagsController``
 disallows all access. Instead of allowing access, we can improve the tag

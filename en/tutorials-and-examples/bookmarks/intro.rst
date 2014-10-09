@@ -8,10 +8,10 @@ fast.
 
 Here's what you'll need:
 
-#. A database server. We're going to be using MySQL server in this
-   tutorial. You'll need to know enough about SQL in order to create a
-   database: CakePHP will be taking the reins from there. Since we're using MySQL,
-   also make sure that you have ``pdo_mysql`` enabled in PHP.
+#. A database server. We're going to be using MySQL server in this tutorial.
+   You'll need to know enough about SQL in order to create a database: CakePHP
+   will be taking the reins from there. Since we're using MySQL, also make sure
+   that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
 Let's get started!
