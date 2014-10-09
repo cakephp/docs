@@ -158,7 +158,7 @@ Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. However, there is no
 error message being displayed, so let's rectify that next::
 
-    // in src/Template/Layouts/default.ctp
+    // In src/Template/Layouts/default.ctp
     // Under the existing flash message.
     <?= $this->Flash->render('auth') ?>
 
@@ -242,7 +242,7 @@ selection UI by using a comma separated text field. This will let us give
 a better experience to our users, and use some more great features in the ORM.
 
 Adding a Computed Field
-----------------------
+-----------------------
 
 Because we'll want a simple way to access the formatted tags for an entity, we
 can add a virtual/computed field to the entity. In
