@@ -68,7 +68,7 @@ La Couche View (Vue)
 
 La View retourne une présentation des données modélisées. Etant séparée des
 objets Model, elle est responsable de l'utilisation des informations dont
-elle dispose pour produire n'importequ'elle interface de présentation
+elle dispose pour produire n'importe qu'elle interface de présentation
 nécessaire à votre application.
 
 Par exemple, la view pourrait utiliser les données du model pour rendre une
@@ -83,13 +83,13 @@ l'utilisent::
     <?php endforeach; ?>
 
 
-La couche View fournit un certain nombre d'extensions tels que
-:ref:`les Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
+La couche View fournit un certain nombre d'extensions tels que les
+:ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
 permettre de ré-utiliser facilement votre logique de présentation.
 
 La couche Vue n'est pas seulement limitée au HTML ou à la répresentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
-de formats tels que JSON, XML et grâce à une arhitecture modulable tout autre
+de formats tels que JSON, XML et grâce à une architecture modulable tout autre
 format dont vous auriez besoin.
 
 La Couche Controller (Contrôleur)
@@ -105,7 +105,7 @@ aux bonnes personnes. Il attend des requêtes des clients, vérifie leur validit
 selon l'authentification et les règles d'autorisation, délègue la récupération
 et le traitement des données à la couche Model, puis sélectionne les types de
 présentation acceptés par client pour finalement déléguer le processus 
-de rendu à la couche View. Un example de controller d'enregistrement
+de rendu à la couche View. Un exemple de controller d'enregistrement
 d'utilisateur serait::
 
     public function add() {
@@ -165,7 +165,7 @@ fonctionnalités de CakePHP sont:
 
 Les prochaines étapes évidentes sont de :doc:`télécharger CakePHP </installation>`
 , lire le
-:doc:`tutoriel and construire un truc génial </tutorials-and-examples/blog/blog>`.
+:doc:`tutoriel et construire un truc génial </tutorials-and-examples/blog/blog>`.
 
 Lectures Complémentaires
 ========================

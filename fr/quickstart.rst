@@ -1,7 +1,7 @@
 Guide de Démarrage Rapide
 #########################
 
-Le meilleur moyen d'essayer et d'apprendre CakePHP est de s'assoir et de
+Le meilleur moyen de tester et d'apprendre CakePHP est de s'assoir et de
 construire une application simple de blog.
 
 .. include:: /tutorials-and-examples/blog/blog.rst
