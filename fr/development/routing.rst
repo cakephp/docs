@@ -5,14 +5,14 @@ Routing
 
 .. php:class:: Router
 
-Routing est une fonctionnalité qui mappe les URLs aux actions du controller.
-En définissant des routes, vous pouvez séparer la façon dont votre
+Le Routing est une fonctionnalité qui fait correspondre les URLs aux actions du
+controller. En définissant des routes, vous pouvez séparer la façon dont votre
 application est intégré de la façon dont ses URLs sont structurées.
 
-Le Routing dans CakePHP englobe aussi l'idée de routing inversé,
-où un tableau de paramètres peut être transformé en une URL.
-En utilisant le routing inversé, vous pouvez facilement reconstruire votre
-structure d'URL des applications sans avoir mis à jour tous vos codes.
+Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
+de paramètres peut être transformé en une URL. En utilisant le routing
+inversé, vous pouvez facilement reconstruire votre structure d'URL des
+applications sans avoir mis à jour tous vos codes.
 
 .. index:: routes.php
 
