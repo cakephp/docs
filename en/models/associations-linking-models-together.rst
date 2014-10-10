@@ -562,7 +562,7 @@ model will also fetch related Comment records if they exist::
             )
     )
 
-One thing to remember is that you'll need a complimentary Comment
+One thing to remember is that you'll need a complementary Comment
 belongsTo User association in order to get the data from both
 directions. What we've outlined in this section empowers you to get
 Comment data from the User. Adding the Comment belongsTo User
