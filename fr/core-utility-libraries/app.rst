@@ -74,7 +74,7 @@ Chargement des classes
 Chargement des fichiers à partir des plugins
 --------------------------------------------
 
-Le chargement des classes dans les plugins fonctionnnent un peu de la
+Le chargement des classes dans les plugins fonctionne un peu de la
 même façon que le chargement des classes app et des classes du coeur sauf
 que vous devez spécifier le plugin à partir du quel vous chargez::
 
@@ -97,7 +97,7 @@ Trouver des chemins vers les packages en utilisant App::path()
         // retourne les chemins de model dans votre application
         App::path('Model');
 
-    Ceci peut être fait pour tous les packages qui font parti de votre
+    Ceci peut être fait pour tous les packages qui font partie de votre
     application. Vous pouvez aussi récupérer des chemins pour un plugin::
 
         // retourne les chemins de component dans DebugKit
@@ -133,7 +133,7 @@ Ajoutez des chemins dans App pour trouver des packages
 
     :rtype: void
 
-    Définit chaque localisaiton de package dans le système de fichier. Vous
+    Définit chaque localisation de package dans le système de fichier. Vous
     pouvez configurer des chemins de recherche multiples pour chaque package,
     ceux-ci vont être utilisés pour rechercher les fichiers, un dossier à la
     fois, dans l'ordre spécifié. Tous les chemins devraient être terminés par
@@ -346,7 +346,7 @@ Vos fichiers vendor ne suivent peut-être pas les conventions, ont une classe
 qui diffère du nom de fichier ou ne contiennent pas de classes. Vous pouvez
 charger ces fichiers en utilisant ``App::import()``. Les exemples siuvants
 montrent comment charger les fichiers de vendor à partir d'un certain nombre
-de structures de chemin. Ces fichiers vendor pourrraient être localisés dans
+de structures de chemin. Ces fichiers vendor pourraient être localisés dans
 n'importe quel dossier vendor.
 
 Pour charger **app/Vendor/geshi.php**::
