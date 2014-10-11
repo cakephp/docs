@@ -54,7 +54,7 @@ le debug change les types de choses suivantes:
 En plus des éléments ci-dessus, beaucoup de plugins et d'extensions
 d'application utilisent ``debug`` pour modifier leur comportement.
 
-Vous pouvez créer une variable d'environnement  pour définir le niveau de
+Vous pouvez créer une variable d'environnement pour définir le niveau de
 debug dynamiquement entre plusieurs environnements. Cela va éviter de déployer
 une application avec debug > 0 et vous permet de ne pas avoir à changer de
 niveau de debug chaque fois avant de déployer vers un environnement de
