@@ -37,6 +37,14 @@ this::
             ]);
         }
 
+        public function view($id) {
+            $recipe = $this->Recipes->get($id);
+            $this->set([
+                'recipe' => $recipe,
+                '_serialize' => ['recipe']
+            ]);
+        }
+
         public function add() {
             $recipe = $this->Recipes->newEntity($this->request->data);
             if ($this->Recipes->save($recipe)) {
@@ -49,27 +57,6 @@ this::
                 'recipe' => $recipe,
                 '_serialize' => ['message', 'recipe']
             ]);
-        }
-
-        public function view($id) {
-            $recipe = $this->Recipes->get($id);
-            $this->set([
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ]);
-        }
-        
-        public function add() {
-            $this->Recipe->create();
-            if ($this->Recipe->save($this->request->data)) {
-                $message = 'Saved';
-            } else {
-                $message = 'Error';
-            }
-            $this->set(array(
-                'message' => $message,
-                '_serialize' => array('message')
-            ));
         }
 
         public function edit($id) {

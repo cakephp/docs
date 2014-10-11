@@ -204,26 +204,7 @@ et ``end()`` vous permettent de travailler avec les blocks capturant::
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-Vous pouvez aussi le rattacher à l'intérieur d'un block en utilisant ``start()``
-plusieurs fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou
-outrepasser un block à n'importe quel moment::
-
-    // Nettoyer le contenu précedent de la sidebar.
-    $this->assign('sidebar', '');
-
-
-Dans 2.3, certaines nouvelles méthodes ont été ajoutées pour travailler avec
-les blocs. Le ``prepend()`` pour ajouter du contenu avant un block existant::
-
-    // Ajoutez avant la sidebar
-    $this->prepend('sidebar', 'ce contenu va au-dessus de la sidebar');
-
-La méthode ``startIfEmpty()`` peut être utilisée pour commencer un bloc
-**seulement** si il est vide ou non défini. Si le block existe déjà, le contenu
-capturé va être écarté. C'est utile quand vous voulez définir le contenu par
-défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister:
-
-.. code-block:: php
+Vous pouvez aussi ajouter dans un block en utilisant ``append()``::
 
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
@@ -379,39 +360,18 @@ les fichiers JavaScript et les CSS à partir des vues.
 
 .. note::
 
-    Quand vous utilisez :php:meth:`HtmlHelper::css()` ou
-    :php:meth:`HtmlHelper::script()` dans les fichiers de vues, spécifiez
+    Quand vous utilisez ``HtmlHelper::css()`` ou
+     ``HtmlHelper::script()`` dans les fichiers de vues, spécifiez
     ``'block' => true`` pour placer la source html dans un
     block avec le même nom. (Regardez l'API pour plus de détails sur leur
     utilisation).
 
 Le block ``content`` contient les contenus de la vue rendue.
 
-``$title_for_layout`` contient le titre de la page. Cette variable est générée
-automatiquement, mais vous pouvez la surcharger en la configurant dans votre
-controller/view.
-
-.. note::
-
-    ``$title_for_layout`` est déprécié depuis 2.5, utilisez
-    ``$this->fetch('title')`` dans votre layout et
-    ``$this->assign('title', 'page title')`` à la place.
-
-Pour définir le titre pour le layout, il est plus facile de le faire dans le
-controller, en configurant la variable ``title``::
-
-    namespace App\Controller;
-    
-    class UsersController extends AppController {
-        public function view_active() {
-            $this->set('title', 'View Active Users');
-        }
-    }
-
-Vous pouvez aussi définir la variable title_for_layout depuis l'intérieur
+Vous pouvez aussi définir le bloc ``title`` depuis l'intérieur
 d'un fichier de vue::
 
-    $this->set('title', $titleContent);
+    $this->assign('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
 le répertoire ``src/Template/Layout``, et passez de l'un à l'autre depuis les
@@ -517,7 +477,7 @@ de vues). Dans l'exemple ci-dessus, le fichier
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
-l'element. Les options supportés sont 'cache' et 'callbacks'. Un exemple::
+l'element. Les options supportées sont 'cache' et 'callbacks'. Un exemple::
 
     echo $this->element('helpbox', [
             "helptext" => "Ceci est passé à l'element comme $helptext",
