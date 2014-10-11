@@ -22,16 +22,16 @@ internet. Désactiver le debug change les types de choses suivantes:
 * Les Erreurs PHP ne sont pas affichées.
 * Les traces de pile d'Exception sont désactivées.
 
-En plus des éléments ci-desssus, beaucoup de plugins et d'extensions
+En plus des éléments ci-dessus, beaucoup de plugins et d'extensions
 d'application utilisent ``debug`` pour modifier leur comportement.
 
-Vous pouvez créer une variable d'environnement pour définir le niveau de
+Vous pouvez créer une variable d'environnement  pour définir le niveau de
 debug dynamiquement entre plusieurs environnements. Cela va éviter de déployer
 une application avec debug à ``true`` et vous permet de ne pas avoir à changer
 de niveau de debug chaque fois avant de déployer vers un environnement de
 production.
 
-Par exemple, vous pouvez définir une variable d'environment dans votre
+Par exemple, vous pouvez définir une variable d'environnement dans votre
 configuration Apache::
 
     SetEnv CAKEPHP_DEBUG 1

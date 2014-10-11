@@ -237,11 +237,8 @@ something like::
 
         // Write data into the session.
         public function write($id, $data) {
-            $result = Cache::write($id, $data, $this->cacheKey);
-            if ($result) {
-                return parent::write($id, $data);
-            }
-            return false;
+            Cache::write($id, $data, $this->cacheKey);
+            return parent::write($id, $data);
         }
 
         // Destroy a session.

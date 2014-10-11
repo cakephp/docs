@@ -60,6 +60,19 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             ]);
         }
 
+        public function add() {
+            $this->Recipe->create();
+            if ($this->Recipe->save($this->request->data)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set(array(
+                'message' => $message,
+                '_serialize' => array('message')
+            ));
+        }
+
         public function edit($id) {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {

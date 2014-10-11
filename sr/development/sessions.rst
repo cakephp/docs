@@ -244,11 +244,8 @@ something like::
 
         // write data into the session.
         public function write($id, $data) {
-            $result = Cache::write($id, $data, $this->cacheKey);
-            if ($result) {
-                return parent::write($id, $data);
-            }
-            return false;
+            Cache::write($id, $data, $this->cacheKey);
+            return parent::write($id, $data);
         }
 
         // destroy a session.
@@ -279,7 +276,7 @@ also easy. In your ``core.php`` make the session block look like the following::
     ));
 
     // Make sure to add a apc cache config
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Cache::config('apc', array('engine' => 'Apc'));
 
 Now our application will start using our custom session handler for reading &
 writing session data.

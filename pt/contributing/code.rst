@@ -22,7 +22,7 @@ Set up your user information with your name/handle and working email address::
 
 .. note::
 
-    If you are new to Git, we highly recommend you to read the excellent and free
+    Se você é novo com Git, é recomendável que você leia o excelente e gratuito
     `ProGit <http://git-scm.com/book/>`_ book.
 
 Get a clone of the CakePHP source code from GitHub:

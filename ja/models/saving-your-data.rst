@@ -191,7 +191,7 @@ data配列にプライマリーキーのフィールドを渡してください�
 たとえば、1年以上前にメンバーになったbakerを承認するには、\
 以下のようにメソッドを呼び出します。 ::
 
-    $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $this_year = date('Y-m-d H:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approved' => true),

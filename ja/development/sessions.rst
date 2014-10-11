@@ -409,11 +409,8 @@ ini 指示子の設定
 
         // セッションへデータ書き込み
         public function write($id, $data) {
-            $result = Cache::write($id, $data, $this->cacheKey);
-            if ($result) {
-                return parent::write($id, $data);
-            }
-            return false;
+            Cache::write($id, $data, $this->cacheKey);
+            return parent::write($id, $data);
         }
 
         // セッションの破棄
@@ -457,7 +454,7 @@ ini 指示子の設定
     ));
 
     // apc キャッシュ config を追加すること
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Cache::config('apc', array('engine' => 'Apc'));
 
 ..
   Now our application will start using our custom session handler for reading &
