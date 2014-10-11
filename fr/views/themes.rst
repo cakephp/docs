@@ -87,7 +87,7 @@ cakephp.
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` devient
    ``app/webroot/DebugKit/js/my_file.js``.
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` devient
-   ``app/webroot/themed/Navy/css/navy.css``.
+   ``app/webroot/theme/Navy/css/navy.css``.
 
 
 .. meta::
