@@ -365,6 +365,6 @@ les bookmarks visibles seulement à ceux à qui appartiennent à l'utilisateur
 actuel.
 
 Maintenant continuons avec
-:doc:`/tutorials-and-examples/bookmarks/authentication`
+:doc:`/tutorials-and-examples/bookmarks/part-two`
 pour construire votre ou :doc:`plongez dans la documentation
 </topics>` pour en apprendre plus sur ce que CakePHP peut faire pour vous.

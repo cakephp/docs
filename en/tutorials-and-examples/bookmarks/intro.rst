@@ -8,10 +8,10 @@ fast.
 
 Here's what you'll need:
 
-#. A database server. We're going to be using MySQL server in this
-   tutorial. You'll need to know enough about SQL in order to create a
-   database: CakePHP will be taking the reins from there. Since we're using MySQL,
-   also make sure that you have ``pdo_mysql`` enabled in PHP.
+#. A database server. We're going to be using MySQL server in this tutorial.
+   You'll need to know enough about SQL in order to create a database: CakePHP
+   will be taking the reins from there. Since we're using MySQL, also make sure
+   that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
 Let's get started!
@@ -341,6 +341,6 @@ However, everyone can see everyone else's tags. In the next chapter, we'll
 implement authentication and restrict the visible bookmarks to only those that
 belong to the current user.
 
-Now continue to :doc:`/tutorials-and-examples/bookmarks/authentication` to
+Now continue to :doc:`/tutorials-and-examples/bookmarks/part-two` to
 continue building your application or :doc:`dive into the documentation
 </topics>` to learn more about what CakePHP can do for you.
