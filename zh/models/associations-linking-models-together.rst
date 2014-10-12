@@ -81,6 +81,32 @@ CakePHP 的四种关联类型是：hasOne、hasMany、belongsTo 和 hasAndBelong
 
 但是下面的代码在任何情况下都不大行得通::
 
+    class User extends AppModel {
+        public $hasMany = array(
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
+        );
+        public $hasAndBelongsToMany = array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
+    }
+
+    class Group extends AppModel {
+        public $hasMany = array(
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
+        );
+        public $hasAndBelongsToMany = array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
+    }
+
 这是因为在上面的 HABTM 关联中，别名 'Member' 既指向了 User 模型(在 Group 模型中)，
 又指向了 Group 模型(在 User 模型中)。在涉及多个模型时，为模型别名起不唯一的名字，
 可能会引起预料不到的行为。
