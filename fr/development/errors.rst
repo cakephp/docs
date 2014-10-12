@@ -60,7 +60,7 @@ Créer vos Propres Gestionnaires d'Erreurs
 Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type
 de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
 pour gérer vos erreurs. En étendant ``BaseErrorHandler``, vous pouvez fournir
-un logique de gestion des erreurs personallisée. Un exemple serait::
+une logique de gestion des erreurs personnalisée. Un exemple serait::
 
     // Dans config/bootstrap.php
     use App\Error\AppError;
@@ -121,8 +121,8 @@ Classes des Exceptions
 
 Il y a de nombreuses classes d'exception dans CakePHP. Le gestionnaire
 d'exception intégré va capturer les exceptions levées et rendre une page
-utile. les exceptions qui n'utilisent pas spéciallement un code dans la
-plage 400 sera traitée comme une erreur interne au serveur.
+utile. Les exceptions qui n'utilisent pas spécialement un code dans la
+plage 400 seront traitées comme une erreur interne au serveur.
 
 .. _built-in-exceptions:
 
@@ -139,11 +139,11 @@ les méthodes HTTP
 
 .. php:exception:: UnauthorizedException
 
-    Utilisé pour faire une erreur 401 Non Authorisé.
+    Utilisé pour faire une erreur 401 Non Autorisé.
 
 .. php:exception:: ForbiddenException
 
-    Utilisé pour faire une erreur 403 Interdite..
+    Utilisé pour faire une erreur 403 Interdite.
 
 .. php:exception:: NotFoundException
 
@@ -201,11 +201,11 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingCellException
 
-    La classe Cell choisie n'a pas pu être trouvé.
+    La classe Cell choisie n'a pas pu être trouvée.
 
 .. php:exception:: MissingCellViewException
 
-    La cue de Cell choisie n'a pas pu être trouvé.
+    La vue de Cell choisie n'a pas pu être trouvée.
 
 .. php:namespace:: Cake\Controller\Exception
 
@@ -225,7 +225,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: ConsoleException
 
-    Une classe de la librairie console a encontré une erreur
+    Une classe de la librairie console a rencontré une erreur
 
 .. php:exception:: MissingTaskException
 
@@ -251,7 +251,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingExtensionException
 
-    Une extension PHP est manquante pour le driver de la base de donnée.
+    Une extension PHP est manquante pour le driver de la base de données.
 
 .. php:namespace:: Cake\ORM\Exception
 
@@ -291,7 +291,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 Ces classes d'exception étendent toutes :php:exc:`Exception`.
 En étendant Exception, vous pouvez créer vos propres erreurs 'framework'.
-Toutes les Exceptions standardes que CakePHP va lancer étendent également
+Toutes les Exceptions standards que CakePHP va lancer étendent également
 Exception.
 
 .. php:method:: responseHeader($header = null, $value = null)
@@ -404,7 +404,7 @@ de template spécifique, et que vous utilisez un code supérieur ou égal
 à ``500``, vous verrez le template ``error500``. Pour toute autre code
 d'erreur, vous aurez le template ``error400``. Si vous avez défini un template
 d'erreur pour votre exception personnalisée, ce template sera utilisé
-en mode développement. Si vous souhaitez votre propre logique degestionnaire
+en mode développement. Si vous souhaitez votre propre logique de gestionnaire
 d'exception même en production, regardez la section suivante.
 
 Etendre et Implémenter vos Propres Gestionnaires d'Exceptions
@@ -442,7 +442,7 @@ Si vous ne voulez pas prendre le contrôle sur le gestionnaire d'exception,
 mais vous voulez changer la manière dont les exceptions sont rendues, vous
 pouvez utiliser l'option ``exceptionRenderer`` dans ``config`/app.php`` pour
 choisir la classe qui affichera les pages d'exception. Par défaut
-:php:class:`Cake\\Core\\Exception\\ExceptionRenderer` est utlisée. Votre
+:php:class:`Cake\\Core\\Exception\\ExceptionRenderer` est utilisée. Votre
 gestionnaire d'exceptions doit être placé dans ``src/Error``. Dans une classe
 de rendu personnalisé d'exception vous pouvez fournir un traitement particulier
 pour les erreurs spécifique à votre application::
@@ -480,13 +480,14 @@ contrôle total la réponse.
 Créer un Controller Personnalisé pour Gérer les Exceptions
 ----------------------------------------------------------
 
-In your ExceptionRenderer sub-class, you can use the ``_getController``
-method to allow you to return a custom controller to handle your errors.
-By default CakePHP uses ``ErrorController`` which omits a few of the normal
-callbacks to help ensure errors always display.  However, you may need a more
-custom error handling controller in your application.  By implementing
-``_getController`` in your ``AppExceptionRenderer`` class, you can use any
-controller you want::
+Dans votre sous-classe ExceptionRendrer, vous pouvez utiliser la méthode
+``_getController`` pour vous permettre de retourner un controller personnalisé
+pour gérer les erreurs. Par défaut CakePHP utilise ``ErrorController`` qui omet
+quelques-uns des callback habituels pour assurer systématiquement l'affichage
+des erreurs. Cependant vous pourriez avoir besoin d'un controller de gestion
+des erreurs plus personnalisé dans votre application. En implémentant 
+``_getController`` dans votre classe ``AppExceptionRenderer``, vous pouvez
+utiliser n'importe quel controller de votre choix::
 
     namespace App\Error;
 
