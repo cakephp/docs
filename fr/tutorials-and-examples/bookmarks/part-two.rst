@@ -258,11 +258,13 @@ Comme nous voulons un accès simple vers les tags formatés pour une entity, nou
 pouvons ajouter un champ virtuel/computed à l'entity. Dans
 ``src/Model/Entity/Bookmark.php`` ajoutez ce qui suit::
 
+    use Cake\Collection\Collection;
+
     protected function _getTagString() {
         if (isset($this->_properties['tag_string'])) {
             return $this->_properties['tag_string'];
         }
-        $tags = collection($this->tags);
+        $tags = new Collection($this->tags);
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
