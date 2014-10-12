@@ -2,9 +2,8 @@ Bienvenue
 #########
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
-la documentation. Nous espérons maintenir une documentation pointue et de
-qualité. Remarquez le bouton "Improve this Doc" dans le coin en haut à droite;
-il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
+la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
+à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
 vous permettant de facilement contribuer, d'ajouter, de supprimer ou corriger
 la documentation.
 
@@ -31,9 +30,9 @@ Premiers Pas
 
 Apprendre un nouveau framework peut être intimidant et excitant en même temps.
 Pour vous aider, nous avons créé un cookbook avec des exemples et des recettes
-des tâches les plus comunément effectuées. Si vous êtes nouveau, vous devriez
-commencer avec le :doc:`/quickstart` puisqu'il vous donne un aperçu rapide de
-ce que CakePHP peut vous offrir et comment il fonctionne.
+des tâches les plus communément effectuées. Si vous êtes nouveau, vous devriez
+commencer avec le :doc:`/quickstart` puisqu'il vous donne
+un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
 
 Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
 d'une application CakePHP:

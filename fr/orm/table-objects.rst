@@ -276,7 +276,7 @@ Les clés possibles pour les tableaux d'association incluent:
 - **className**: le nom de la classe de la table que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User a une Address', la
   valeur associée à la clé 'className' devra être 'Addresses'.
-- **foreignKey**: le nom de la clé etrangère que l'on trouve dans l'autre model.
+- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre model.
   Ceci sera particulièrement pratique si vous avez besoin de définir des
   relations hasOne multiples. La valeur par défaut de cette clé est le nom du
   model actuel (avec des underscores) suffixé avec '\_id'. Dans l'exemple
@@ -444,7 +444,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   model actuel. Si l'on souhaite définir la relation 'User hasMany Comment'
   (l'User a plusieurs Comments), la valeur associée à la clef 'className' devra
   être 'Comment'.
-- **foreignKey**: le nom de la clé etrangère que l'on trouve dans l'autre
+- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
   model. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
   du model actuel (avec des underscores) suffixé avec '\_id'
