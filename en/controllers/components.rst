@@ -110,7 +110,7 @@ action. In situations like this you can load a component at runtime using the
 ``loadComponent()`` method in your controller::
 
     // In a controller action
-    $this->OneTimer = $this->loadComponent('OneTimer');
+    $this->loadComponent('OneTimer');
     $time = $this->OneTimer->getTime();
 
 .. note::
