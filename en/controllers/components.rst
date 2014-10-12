@@ -32,7 +32,7 @@ Many of the core components require configuration. Some examples of components
 requiring configuration are :doc:`/controllers/components/authentication` and
 :doc:`/controllers/components/cookie`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
-Controller's ``initialize`` method or via the ``$components`` array::
+Controller's ``initialize()`` method or via the ``$components`` array::
 
     class PostsController extends AppController {
         public function initialize() {
@@ -81,7 +81,7 @@ implementation::
     // src/Controller/PostsController.php
     class PostsController extends AppController {
         public function initialize() {
-            parent::initialize('Auth', [
+            $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
             ]);
         }
@@ -101,6 +101,24 @@ controllers.
 
     Aliasing a component replaces that instance anywhere that component is used,
     including inside other Components.
+
+Loading Components on the Fly
+-----------------------------
+
+You might not need all of your components available on every controller
+action. In situations like this you can load a component at runtime using the
+``loadComponent()`` method in your controller::
+
+    // In a controller action
+    $this->OneTimer = $this->loadComponent('OneTimer');
+    $time = $this->OneTimer->getTime();
+
+.. note::
+
+    Keep in mind that components loaded on the fly will not have missed
+    callbacks called. If you rely on the ``beforeFilter`` or ``startup``
+    callbacks being called, you may need to call them manually depending on when
+    you load your component.
 
 Using Components
 ================
@@ -127,45 +145,18 @@ controller, you could access them like so::
     properties they share the same 'namespace'. Be sure to not give a
     component and a model the same name.
 
-Loading Components on the Fly
------------------------------
-
-You might not need all of your components available on every controller
-action. In situations like this you can load a component at runtime using the
-:doc:`Component Registry </core-libraries/registry-objects>`. From inside a
-controller's method you can do the following::
-
-    $this->OneTimer = $this->Components->load('OneTimer');
-    $this->OneTimer->getTime();
-
-.. note::
-
-    Keep in mind that components loaded on the fly will not have missed
-    callbacks called. If you rely on the ``initialize`` or ``startup`` callbacks
-    being called, you may need to call them manually depending on when you load
-    your component.
-
-Component Callbacks
-===================
-
-Components also offer a few request life-cycle callbacks that allow them to
-augment the request cycle. See the base :ref:`component-api` and
-:doc:`/core-libraries/events` for more information on the callbacks components
-offer.
-
 .. _creating-a-component:
 
 Creating a Component
 ====================
 
-Suppose our online application needs to perform a complex
-mathematical operation in many different parts of the application.
-We could create a component to house this shared logic for use in
-many different controllers.
+Suppose our application needs to perform a complex mathematical operation in
+many different parts of the application.  We could create a component to house
+this shared logic for use in many different controllers.
 
-The first step is to create a new component file and class. Create
-the file in ``src/Controller/Component/MathComponent.php``. The basic
-structure for the component would look something like this::
+The first step is to create a new component file and class. Create the file in
+``src/Controller/Component/MathComponent.php``. The basic structure for the
+component would look something like this::
 
     namespace App\Controller\Component;
 
@@ -179,8 +170,8 @@ structure for the component would look something like this::
 
 .. note::
 
-    All components must extend :php:class:`Component`. Failing to do this
-    will trigger an exception.
+    All components must extend :php:class:`Cake\\Controller\\Component`. Failing
+    to do this will trigger an exception.
 
 Including your Component in your Controllers
 --------------------------------------------
@@ -190,8 +181,9 @@ controllers by loading it during the controller's ``initialize()`` method.
 Once loaded, the controller will be given a new attribute named after the
 component, through which we can access an instance of it::
 
-    /* Make the new component available at $this->Math,
-    as well as the standard $this->Csrf */
+    // In a controller
+    // Make the new component available at $this->Math,
+    // as well as the standard $this->Csrf
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Math');
@@ -203,6 +195,7 @@ set of parameters that will be passed on to the Component's
 constructor. These parameters can then be handled by
 the Component::
 
+    // In your controller.
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -212,9 +205,8 @@ the Component::
         $this->loadComponent('Csrf');
     }
 
-The above would pass the array containing precision and
-randomGenerator to ``MathComponent::__construct()`` as the
-second parameter.
+The above would pass the array containing precision and randomGenerator to
+``MathComponent::initialize()`` in the ``$config`` parameter.
 
 
 Using Other Components in your Component
@@ -225,13 +217,16 @@ In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
     // src/Controller/Component/CustomComponent.php
+    namespace App\Controller\Component;
+
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
         // The other component your component uses
         public $components = ['Existing'];
 
-        public function initialize(Controller $controller) {
+        // Execute any other additional setup for your component.
+        public function initialize(array $config) {
             $this->Existing->foo();
         }
 
@@ -241,6 +236,8 @@ way you include them in controllers - using the ``$components`` var::
     }
 
     // src/Controller/Component/ExistingComponent.php
+    namespace App\Controller\Component;
+
     use Cake\Controller\Component;
 
     class ExistingComponent extends Component {
@@ -251,6 +248,7 @@ way you include them in controllers - using the ``$components`` var::
     }
 
 .. note::
+
     In contrast to a component included in a controller
     no callbacks will be triggered on a component's component.
 
@@ -268,28 +266,13 @@ object::
 
     $controller = $event->subject();
 
-.. _component-api:
+Component Callbacks
+===================
 
-Component API
-=============
+Components also offer a few request life-cycle callbacks that allow them to
+augment the request cycle.
 
-.. php:class:: Component
-
-    The base Component class offers a few methods for lazily loading other
-    Components through :php:class:`Cake\\Controller\\ComponentRegistry` as well
-    as dealing with common handling of settings. It also provides prototypes
-    for all the component callbacks.
-
-.. php:method:: __construct(ComponentRegistry $registry, $config = [])
-
-    Constructor for the base component class. All ``$config`` that
-    are also public properties will have their values changed to the
-    matching value in ``$config``.
-
-Callbacks
----------
-
-.. php:method:: initialize(Event $event)
+.. php:method:: beforeFilter(Event $event)
 
     Is called before the controller's
     beforeFilter method, but *after* the controller's initialize() method.

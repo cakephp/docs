@@ -519,6 +519,12 @@ Component
   ``$_defaultConfig`` property. This property is automatically merged with any
   configuration provided to the constructor.
 * Configuration options are no longer set as public properties.
+* The ``Component::initialize()`` method is no longer an event listener.
+  Instead, it is a post-constructor hook like ``Table::initialize()`` and
+  ``Controller::initialize()``. The new ``Component::beforeFilter()`` method is
+  bound to the same event that ``Component::initialize()`` used to be. The
+  initialize method should have the following signature ``initialize(array
+  $config)``.
 
 Controller\\Components
 ======================
