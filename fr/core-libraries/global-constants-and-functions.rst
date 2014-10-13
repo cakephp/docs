@@ -106,6 +106,12 @@ CakePHP, comme le débogage et la traduction de contenu.
     pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
     dépendant du compteur
 
+.. php:function:: collection(mixed $items)
+
+    Vous permet d'instancier un objet :php:class:`Cake\\Collection\\Collection`
+    et wrap l'argument passé. le paramètre ``$items`` accepte soit un objet
+    ``Traversable`` soit un tableau.
+
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     Si la variable ``$debug`` du coeur est à ``true``, $var est
