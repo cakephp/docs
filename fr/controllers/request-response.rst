@@ -200,7 +200,7 @@ détecteurs. Il y a quatre différents types de détecteurs que vous pouvez cré
 
 Quelques exemples seraient::
 
-    // Ajouter un détecteur d'environment.
+    // Ajouter un détecteur d'environnement.
     $this->request->addDetector(
         'post',
         array('env' => 'REQUEST_METHOD', 'value' => 'POST')

@@ -218,7 +218,7 @@ suivantes:
 * ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
   counter caches (si il y en a).
 
-    
+
 :php:meth:`Model::updateAll(array $fields, mixed $conditions)`
 ==============================================================
 
@@ -230,7 +230,7 @@ pas défini à ``true``, tous les enregistrements seront mis à jour.
 
 Par exemple, si je voulais approuver tous les bakers qui sont membres
 depuis plus d'un an, l'appel à update devrait ressembler à quelque chose
-du style:: 
+du style::
 
     $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
@@ -482,9 +482,9 @@ CakePHP correspondant. Si vous sauvegardez un nouveau Post et ses Comments
 associés, alors vous devriez utiliser les deux models Post et Comment pendant
 l'opération de sauvegarde.
 
-Si aucun des enregistrements du model associé n'existe pour l'instant dans le 
-système (par exemple, vous voulez sauvegarder un nouveau User et ses 
-enregitrements du Profile lié en même temps), vous aurez besoin de sauvegarder 
+Si aucun des enregistrements du model associé n'existe pour l'instant dans le
+système (par exemple, vous voulez sauvegarder un nouveau User et ses
+enregitrements du Profile lié en même temps), vous aurez besoin de sauvegarder
 d'abord le model principal, ou le model parent.
 
 Pour avoir une bonne idée de la façon de faire, imaginons que nous ayons une
@@ -760,7 +760,7 @@ est montré ci-dessous::
             (
                 [id] => 42
             )
-        [Tag] => Array 
+        [Tag] => Array
             (
                 [name] => Italian
             )
@@ -820,6 +820,62 @@ celui qui suit::
 
 Passer le tableau ci-dessus à ``saveAll()`` va créer les tags contenus, chacun
 associé avec leur recipies respectives.
+
+Un autre exemple utile est lorsque quand vous souhaitez sauver de nombreusex
+Tags dans un Post. Vous devez transmettre les données HABTM associeés dans le
+ format de tableau HABTM suivant. Notez que vous devez passer uniquement l'id
+ du modèle HABTM associé mais il doit être imbriquées à nouveau::
+
+    Array
+    (
+        [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Saving HABTM arrays'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(1, 2, 5, 9)
+                    )
+            )
+        [1] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Dr Who's Name is Revealed'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(7, 9, 15, 19)
+                    )
+            )
+        [2] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'I Came, I Saw and I Conquered'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(11, 12, 15, 19)
+                    )
+            )
+        [3] => Array
+            (
+                [Post] => Array
+                    (
+                        [title] => 'Simplicity is the Ultimate Sophistication'
+                    )
+                [Tag] => Array
+                    (
+                        [Tag] => Array(12, 22, 25, 29)
+                    )
+            )
+    )
+
+Passer le tableau ci-dessus à la fonction ``saveAll($data, array('deep' => true))``
+remplira la table jointe posts_tags avec l'association Tag vers Post.
 
 Par exemple, nous allons construire un formulaire qui crée un nouveau tag et
 génèrerons le tableau de données approprié pour l'associer à la volée avec
@@ -913,7 +969,7 @@ Devient ceci::
 
     $this->set('relatedProjects', $this->Project->find('list'));
     $this->Form->input('RelatedProject');
-    
+
 Que faire quand HABTM devient compliqué?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

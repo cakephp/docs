@@ -482,7 +482,7 @@ de vues). Dans l'exemple ci-dessus, le fichier
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
-l'element. Les options supportés sont 'cache' et 'callbacks'. Un exemple::
+l'element. Les options supportées sont 'cache' et 'callbacks'. Un exemple::
 
     echo $this->element('helpbox', array(
             "helptext" => "Ceci est passé à l'element comme $helptext",

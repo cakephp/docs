@@ -955,11 +955,11 @@ with usage examples.
         );
 
     You can validate that a set of fields are unique by providing multiple
-    fields::
+    fields and set ``$or`` to ``false``::
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('isUnique', 'email', 'username'),
+                'rule'    => array('isUnique', array('email', 'username'), false),
                 'message' => 'This username & email combination has already been used.'
             )
         );

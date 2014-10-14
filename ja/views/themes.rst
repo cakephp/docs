@@ -71,7 +71,7 @@ CakePHPによって使われている ``app/webroot`` のパスに一致する�
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` は
    ``app/webroot/debug_kit/js/my_file.js`` になります。
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` は
-   ``app/webroot/themed/Navy/css/navy.css`` になります。
+   ``app/webroot/theme/Navy/css/navy.css`` になります。
 
 
 .. meta::
