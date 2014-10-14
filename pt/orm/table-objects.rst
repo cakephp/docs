@@ -325,7 +325,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
 We can define the belongsTo association in our Addresses table as follows::
 
-    class Addresses extends Table {
+    class AddressesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsTo('Users');
@@ -335,11 +335,11 @@ We can define the belongsTo association in our Addresses table as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class Addresses extends Table {
+    class AddressesTable extends Table {
 
         public function initialize(array $config) {
             $this->belongsTo('Users', [
-                'foreignKey' => 'userid',
+                'foreignKey' => 'user_id',
                 'joinType' => 'INNER',
             ]);
         }
@@ -393,16 +393,16 @@ this convention:
 ========================== ===================
 Relation                   Schema
 ========================== ===================
-Article hasMany Comment    Comment.user\_id
+Article hasMany Comment    Comment.article\_id
 -------------------------- -------------------
 Product hasMany Option     Option.product\_id
 -------------------------- -------------------
-Doctor hasMany Appointment Patient.doctor\_id
+Doctor hasMany Patient     Patient.doctor\_id
 ========================== ===================
 
 We can define the hasMany association in our Articles model as follows::
 
-    class Addresses extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->hasMany('Comments');
@@ -412,11 +412,11 @@ We can define the hasMany association in our Articles model as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class Addresses extends Table {
+    class ArticlesTable extends Table {
 
         public function initialize(array $config) {
             $this->hasMany('Comments', [
-                'foreignKey' => 'articleid',
+                'foreignKey' => 'article_id',
                 'dependent' => true,
             ]);
         }
