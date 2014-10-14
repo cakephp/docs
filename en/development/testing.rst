@@ -45,7 +45,7 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``config/app.php``
+Remember to have debug enabled in your ``config/app.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
 ``test`` datasource configuration to ``config/app.php``.  This
