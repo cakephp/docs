@@ -126,11 +126,6 @@ CakePHP 会自动在关联模型对象之间建立连接。所以，例如，在
     对 Recipe 模型没有任何影响。需要定义 Recipe belongsTo User(菜谱属于用户)才能
     从 Recipe 模型访问 User 模型。
 
-    Remember that associations are defined 'one way'. If you define
-    User hasMany Recipe, that has no effect on the Recipe Model. You
-    need to define Recipe belongsTo User to be able to access the User
-    model from your Recipe model.
-
 hasOne
 ------
 
