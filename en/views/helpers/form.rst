@@ -1610,7 +1610,8 @@ dependencies by declaring them::
     ];
 
 In the above example, the autocomplete widget would depend on the ``text`` and
-``label`` widgets. When the autocomplete widget is created, it will be passed
+``label`` widgets. If your widget needs access to the View, you should use the
+``_view`` 'widget'.  When the autocomplete widget is created, it will be passed
 the widget objects that are related to the ``text`` and ``label`` names. To add
 widgets using the ``addWidget()`` method would look like::
 
