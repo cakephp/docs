@@ -948,9 +948,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 .. php:method:: Model::isUnique()
 
     La donnée pour le champ doit être unique, elle ne peut être utilisée par
-    aucune autre ligne.
-
-    ::
+    aucune autre ligne::    
 
         public $validate = array(
             'login' => array(
@@ -958,6 +956,19 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
                 'message' => 'Ce nom d\'user a déjà été choisi.'
             )
         );
+
+    You can validate that a set of fields are unique by providing multiple
+    fields and set ``$or`` to ``false``::
+
+        public $validate = array(
+            'email' => array(
+                'rule'    => array('isUnique', array('email', 'username'), false),
+                'message' => 'Cette combinaise nom & email est déjà utilisée.'
+            )
+        );
+
+    Assurez-vous d'inclure le champ d'origine dans la liste des champs quand vous
+    joutezd'établir une règle unique sur plusieurs champs.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
