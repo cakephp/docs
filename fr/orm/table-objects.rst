@@ -355,7 +355,7 @@ syntaxe de tableau::
 
         public function initialize(array $config) {
             $this->belongsTo('Users', [
-                'foreignKey' => 'userid',
+                'foreignKey' => 'user_id',
                 'joinType' => 'INNER',
             ]);
         }
@@ -409,7 +409,7 @@ hasMany, suivez cette convention:
 ========================== ===================
 Relation                   Schema
 ========================== ===================
-Article hasMany Comment    Comment.user\_id
+Article hasMany Comment    Comment.article\_id
 -------------------------- -------------------
 Product hasMany Option     Option.product\_id
 -------------------------- -------------------
@@ -432,7 +432,7 @@ tableau::
 
         public function initialize(array $config) {
             $this->hasMany('Comments', [
-                'foreignKey' => 'articleid',
+                'foreignKey' => 'article_id',
                 'dependent' => true,
             ]);
         }
