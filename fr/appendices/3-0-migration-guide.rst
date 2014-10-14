@@ -572,7 +572,13 @@ Component
 * La configuration par défaut pour les components doit être définie dans la
   propriété ``$_defaultConfig``. Cette propriété est automatiquement fusionnée
   avec toute configuration fournie au constructeur.
-* Les options de configuration ne sont plus définie en propriété public.
+* Les options de configuration ne sont plus définies en propriété public.
+* La méthode ``Component::initialize()`` n'est plus un listener d'event.
+  A la place, c'est un hook post-constructeur comme ``Table::initialize()`` et
+  ``Controller::initialize()``. La nouvelle méthode
+  ``Component::beforeFilter()`` est liée au même évenement que
+  ``Component::initialize()``. La méthode initialize devrait avoir la signature
+  suivante ``initialize(array $config)``.
 
 Controller\\Components
 ======================

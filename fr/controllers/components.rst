@@ -36,7 +36,7 @@ exemples :
 :doc:`/controllers/components/authentication` et
 :doc:`/controllers/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
-se fait via ``loadComponent()`` dans la méthode ``initialize`` de votre
+se fait via ``loadComponent()`` dans la méthode ``initialize()`` de votre
 Controller ou via le tableau ``$components``::
 
     class PostsController extends AppController {
@@ -108,6 +108,24 @@ Le code ci-dessus fera un *alias* ``MyAuthComponent`` de
     Faire un alias à un component remplace cette instance n'importe où où le
     component est utilisé, en incluant l'intérieur des autres Components.
 
+Charger les Components à la Volée
+---------------------------------
+
+Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
+action. Dans ce cas là, vous pouvez le charger à la volée en utilisant le
+:doc:`Registre de Component </core-libraries/registry-objects>`. A
+l'intérieur d'un controller, vous pouvez faire ce qui suit::
+
+    $this->OneTimer = $this->Components->load('OneTimer');
+    $this->OneTimer->getTime();
+
+.. note::
+
+    Gardez à l'esprit que le chargement d'un component à la volée n'appelera
+    pas les callbacks manquants. Si vous souhaitez que les callbacks
+    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
+    manuellement selon le moment où vous chargez votre component.
+
 Utiliser les Components
 =======================
 
@@ -133,32 +151,6 @@ controller, vous pouvez y accéder comme ceci::
     Puisque les Models et les Components sont tous deux ajoutés aux
     controllers en tant que propriétés, ils partagent le même 'espace de noms'.
     Assurez vous de ne pas donner le même nom à un component et à un model.
-
-Charger les Components à la Volée
----------------------------------
-
-Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
-action. Dans ce cas là, vous pouvez le charger à la volée en utilisant le
-:doc:`Registre de Component </core-libraries/registry-objects>`. A
-l'intérieur d'un controller, vous pouvez faire ce qui suit::
-
-    $this->OneTimer = $this->Components->load('OneTimer');
-    $this->OneTimer->getTime();
-
-.. note::
-
-    Gardez à l'esprit que le chargement d'un component à la volée n'appelera
-    pas les callbacks manquants. Si vous souhaitez que les callbacks
-    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
-    manuellement selon le moment où vous chargez votre component.
-
-Callbacks des Components
-========================
-
-Les components vous offrent aussi quelques callbacks durant leur cycle de vie
-qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api
-:ref:`component-api` et :doc:`/core-libraries/events` pour plus d'informations
-sur les callbacks possibles des components.
 
 .. _creating-a-component:
 
@@ -187,8 +179,9 @@ le component ressemblerait à quelque chose comme cela::
 
 .. note::
 
-    Tous les components doivent étendre :php:class:`Component`.
-    Ne pas le faire vous enverra une exception.
+    Tous les components doivent étendre
+    :php:class:`Cake\\Controller\\Component`. Ne pas le faire vous enverra une
+    exception.
 
 Inclure votre Component dans vos Controllers
 --------------------------------------------
@@ -200,8 +193,9 @@ Le controller sera automatiquement pourvu d'un nouvel attribut nommé
 d'après le component, à travers lequel nous pouvons accéder à une instance
 de celui-ci::
 
-    /* Rend le nouveau component disponible par $this->Math
-    ainsi que le component standard $this->Csrf */
+    // Dans un controller
+    // Rend le nouveau component disponible par $this->Math
+    // ainsi que le component standard $this->Csrf
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Math');
@@ -213,6 +207,7 @@ aussi déclarer un ensemble de paramètres qui seront passés au constructeur
 du Component. Ces paramètres peuvent alors être pris en charge par le
 Component::
 
+    // Dans votre controller.
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -223,8 +218,8 @@ Component::
     }
 
 L'exemple ci-dessus passerait le tableau contenant precision
-et randomGenerator comme second paramètre au
-``MathComponent::__construct()``.
+et randomGenerator dans le paramètre ``$config`` de
+``MathComponent::initialize()``.
 
 Utiliser d'autres Components dans votre Component
 -------------------------------------------------
@@ -235,10 +230,12 @@ exactement de la même manière que dans vos controllers - en utilisant la
 variable ``$components``::
 
     // src/Controller/Component/CustomComponent.php
+    namespace App\Controller\Component;
+
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
-        // The other component your component uses
+        // L'autre component que votre component utilise
         public $components = ['Existing'];
 
         public function initialize(Controller $controller) {
@@ -251,6 +248,8 @@ variable ``$components``::
     }
 
     // src/Controller/Component/ExistingComponent.php
+    namespace App\Controller\Component;
+
     use Cake\Controller\Component;
 
     class ExistingComponent extends Component {
@@ -261,6 +260,7 @@ variable ``$components``::
     }
 
 .. note::
+
     Au contraire d'un component inclu dans un controller, aucun callback
     ne sera attrapé pour un component inclu dans un component.
 
@@ -277,30 +277,13 @@ callback via l'objet event::
 
     $controller = $event->subject();
 
-.. _component-api:
+Callbacks des Components
+========================
 
-API de Component
-================
+Les components vous offrent aussi quelques callbacks durant leur cycle de vie
+qui vous permettent d'augmenter le cycle de la requête.
 
-.. php:class:: Component
-
-    La classe de base de Component vous offre quelques méthodes pour le
-    chargement facile des autres Components à travers
-    :php:class:`Cake\\Controller\\ComponentRegistry` comme nous l'avons traité
-    avec la gestion habituelle des paramètres. Elle fournit aussi des prototypes
-    pour tous les callbacks des components.
-
-.. php:method:: __construct(ComponentRegistry $registry, $config = [])
-
-    Le Constructeur pour la classe de base du component. Tous les
-    paramètres se trouvent dans ``$config`` et ont des propriétés publiques.
-    Ils vont avoir leur valeur changée pour correspondre aux valeurs de
-    ``$config``.
-
-Les Callbacks
--------------
-
-.. php:method:: initialize(Event $event)
+.. php:method:: beforeFilter(Event $event)
 
     Est appelée avant la méthode du controller beforeFilter, mais *après*
     la méthode initialize() du controller.
