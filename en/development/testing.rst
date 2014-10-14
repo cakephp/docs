@@ -45,11 +45,10 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have debug enabled in your ``config/app.php``
-file before running any tests.  Tests are not accessible via the web runner when
-debug is disabled. Before running any tests you should be sure to add a
-``test`` datasource configuration to ``config/app.php``. This
-configuration is used by CakePHP for fixture tables and data::
+Remember to have debug enabled in your ``config/app.php`` file before running
+any tests.  Before running any tests you should be sure to add a ``test``
+datasource configuration to ``config/app.php``. This configuration is used by
+CakePHP for fixture tables and data::
 
     'Datasources' => [
         'test' => [
@@ -1232,4 +1231,4 @@ necessary changes to get a passing build.
 
 .. meta::
     :title lang=en: Testing
-    :keywords lang=en: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :keywords lang=en: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
