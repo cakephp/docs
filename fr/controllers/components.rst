@@ -238,7 +238,7 @@ variable ``$components``::
         // L'autre component que votre component utilise
         public $components = ['Existing'];
 
-        public function initialize(Controller $controller) {
+        public function initialize(array $config) {
             $this->Existing->foo();
         }
 
