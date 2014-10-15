@@ -175,7 +175,7 @@ Each field is described by:
 
 Example Usage::
 
-    public $_schema = array(
+    protected $_schema = array(
         'first_name' => array(
             'type' => 'string',
             'length' => 30

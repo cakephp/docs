@@ -182,7 +182,7 @@ du model. Chaque champ est décrit par:
 
 Exemple d'utilisation::
 
-    public $_schema = array(
+    protected $_schema = array(
         'first_name' => array(
             'type' => 'string',
             'length' => 30

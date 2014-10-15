@@ -169,7 +169,7 @@ data
 
 使用例::
 
-    public $_schema = array(
+    protected $_schema = array(
         'first_name' => array(
             'type' => 'string',
             'length' => 30
