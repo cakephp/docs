@@ -15,6 +15,14 @@ Basics.php
   the context. The new ``__x``, ``__xn``, ``__dx``, ``__dxn``, ``__dxc``,
   ``__dxcn``, and ``__xc`` functions provide access to the new features.
 
+Cache
+=====
+
+RedisEngine
+-----------
+
+- The ``RedisEngine`` now has a default prefix of ``Inflector::slug(APP_DIR)``.
+
 Console
 =======
 
