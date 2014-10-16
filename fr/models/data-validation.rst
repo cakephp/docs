@@ -653,7 +653,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 .. php:staticmethod:: blank(mixed $check)
 
     Cette règle est utilisée pour vérifier que le champ est laissé vide ou que
-    seulement des caractères blancs y sont présent. Les caractères blancs
+    seulement des caractères blancs y sont présents. Les caractères blancs
     incluent l'espace, la tabulation, le retour chariot et nouvelle ligne.::
 
         public $validate = array(
@@ -957,8 +957,8 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
-    You can validate that a set of fields are unique by providing multiple
-    fields and set ``$or`` to ``false``::
+    Vous pouvez valider qu'un ensemble de champs sont uniques en fournissant
+    plusieurs champs et en paramétrant ``$or`` à ``false``::
 
         public $validate = array(
             'email' => array(
@@ -968,7 +968,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         );
 
     Assurez-vous d'inclure le champ d'origine dans la liste des champs quand vous
-    joutezd'établir une règle unique sur plusieurs champs.
+    établissez une règle unique sur plusieurs champs.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
