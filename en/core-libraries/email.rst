@@ -17,7 +17,7 @@ First of all, you should ensure the class is loaded::
 
 After you've loaded ``Email``, you can send an email with the following::
 
-    $email = new Email();
+    $email = new Email('default');
     $email->from(['me@example.com' => 'My Site'])
         ->to('you@example.com')
         ->subject('About')
