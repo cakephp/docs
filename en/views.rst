@@ -33,7 +33,7 @@ The App View
     }
 
 You can use your `AppView` to load helpers that will be used for every
-view rendered in your application. CakePHP provides a `initialize()` method that
+view rendered in your application. CakePHP provides an `initialize()` method that
 is invoked at the end of a View’s constructor for this kind of use:
 
     namespace App\View;
