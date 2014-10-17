@@ -580,9 +580,11 @@ You can set extensions per scope as well::
         $routes->extensions(['json', 'xml']);
     });
 
-Setting the extensions should be the first thing you do in a scope, as the
-extensions will only be applied to routes connected **after** the extensions are
-set.
+.. note::
+
+    Setting the extensions should be the first thing you do in a scope, as the
+    extensions will only be applied to routes connected **after** the extensions
+    are set.
 
 By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
