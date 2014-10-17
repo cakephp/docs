@@ -147,7 +147,7 @@ start using the third parameter of connect()::
 
 This route is found in the routes.php file distributed with CakePHP.  It matches
 any URL starting with ``/pages/`` and hands it to the ``display()`` action of
-the ``PagesController();``. A request to ``/pages/products`` would be mapped to
+the ``PagesController``. A request to ``/pages/products`` would be mapped to
 ``PagesController->display('products')``.
 
 In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
