@@ -147,9 +147,10 @@ required
 
 传给模型的 save() 方法的数据中必须含有 login 字段的数据，否则验证就会失败。该键的缺省值为布尔类型 false。
 
-``required => true`` 和验证规则 ``notEmpty()`` 并不是一回事。``required => true``
-意味着数组的*键*必须存在 - 这不代表必须有值。所以，如果字段在数据集中不存在，验证就会失败，但如果提交的值
-为空('')，验证有可能(取决于规则)会成功。
+``required => true`` 和验证规则 ``notEmpty()`` 并不是一回事。
+``required => true`` 意味着数组的 *键* 必须存在 - 这不代表必须有值。所以，如果字
+段在数据集中不存在，验证就会失败，但如果提交的值为空('')，验证有可能(取决于规则)
+会成功。
 
 .. versionchanged:: 2.1
     增加了对 ``create`` 和 ``update`` 的支持。
@@ -361,7 +362,7 @@ last
 
     自定义的验证方法必须有 ``public``。``protected`` 和 ``private`` 的验证方法是不支持的。
 
-如果值合法，方法应该返回 ``true``。如果验证失败，返回 `false``。其它合法的返回值
+如果值合法，方法应该返回 ``true``。如果验证失败，返回 ``false``。其它合法的返回值
 可以是字符串，作为错误信息显示。返回字符串意味着验证失败。字符串会覆盖 $validate 数组中
 设置的信息，作为字段不合法的原因，显示在视图的表单中。
 
@@ -647,9 +648,6 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
     虽然很多数据存储方式要求某个特定的日期格式，但是也许应该考虑承担麻烦的部分，
     接受众多的日期格式，然后再尝试进行转换，而不是强制用户使用指定的格式。能为用户做的越多越好。
 
-    同时很多数据存储需要某种格式。可以考虑接收广泛的日期格式并且转换他们，而不是强制
-    用户使用给定的格式。为用户做的越多越好。
-
     .. versionchanged:: 2.4
          加入 ``ym`` 和 ``y`` 格式。
 
@@ -841,7 +839,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
     .. versionchanged:: 2.5
 
-    Since 2.5 ``$mimeTypes`` can be a regex string.
+    从 2.5 版本开始 ``$mimeTypes`` 可以是正则表达式字符串.
 
     ::
 
@@ -1038,8 +1036,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
 .. php:staticmethod:: url(string $check, boolean $strict = false)
 
-    这条规则检查合法的网址格式。支持 http(s)，ftp(s),
-    file，news，and gopher 协议::
+    这条规则检查合法的网址格式。支持 http(s)、ftp(s)、file、news 和 gopher 协议::
 
         public $validate = array(
             'website' => array(
@@ -1055,7 +1052,8 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
             )
         );
 
-    这个验证方法用到了复杂正则表达式，有时会在使用mod\php模块的Apache2的Windows环境下出现问题。
+    这个验证方法用到了复杂正则表达式，有时会在 Windows 平台上在使用 mod\_php 
+    模块的 Apache2 中出现问题。
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
@@ -1064,7 +1062,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
 .. php:staticmethod:: uuid(string $check)
 
-    检查数据是合法的 uuid: http://tools.ietf.org/html/rfc4122。
+    检查数据是合法的 UUID: http://tools.ietf.org/html/rfc4122。
 
 
 本地化验证
@@ -1098,10 +1096,10 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 .. tip::
 
     Localized 插件已经包括许多可以使用的规则:
-    https://github.com/cakephp/localized
-    另外，随意贡献你的本地化验证规则。
+    https://github.com/cakephp/localized。另外，随意贡献你的本地化验证规则。
 
 .. toctree::
+    :maxdepth: 1
 
     data-validation/validating-data-from-the-controller
 
