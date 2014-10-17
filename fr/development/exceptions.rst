@@ -106,7 +106,7 @@ pas été trouvés::
 
 En utilisant les exceptions pour les erreurs HTTP, vous pouvez garder à la
 fois votre code propre, et donner les réponses complètement REST aux
-appications clientes et aux utilisateurs.
+applications clientes et aux utilisateurs.
 
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
 seront lancées à partir de certains components du coeur de CakePHP:
@@ -178,7 +178,7 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 Ces classes d'exception étendent toutes :php:exc:`CakeException`.
 En étendant CakeException, vous pouvez créer vos propres erreurs 'framework'.
-Toutes les Exceptions standardes que CakePHP va aussi lancer les CakeException
+Toutes les Exceptions standards que CakePHP va aussi lancer les CakeException
 étendues.
 
 .. versionadded:: 2.3
@@ -302,7 +302,7 @@ utilisé quand vous créez une exception::
 Va créer un code de réponse ``501``, vous pouvez utiliser le code de statut
 HTTP que vous souhaitez. En développement, si votre exception n'a pas
 de template spécifique, et que vous utilisez un code égal ou supérieur
-à ``500``, vous verrez le template ``error500``. Pour toute autre code
+à ``500``, vous verrez le template ``error500``. Pour tout autre code
 d'erreur, vous aurez le template ``error400``. Si vous avez défini un template
 d'erreur pour votre exception personnalisée, ce template va être utilisé
 en mode développement. Si vous souhaitez votre propre gestionnaire d'exception
@@ -351,7 +351,7 @@ ceci::
 
 Vous pouvez lancer tout code que vous souhaitez à l'intérieur de
 ``handleException``. Le code ci-dessus afficherait simplement 'Oh noes! '
-plus le message d'exception. Vouspouvez définir des gestionnaires d'exception
+plus le message d'exception. Vous pouvez définir des gestionnaires d'exception
 comme tout type de callback, même une fonction anonyme si vous utilisez
 PHP 5.3::
 
