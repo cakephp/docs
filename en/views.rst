@@ -25,6 +25,8 @@ The App View
 `Cake\View\View` class included in CakePHP and is defined in
 `src/View/AppView.php` as follows:
 
+.. code-block:: php
+
     namespace App\View;
 
     use Cake\View\View;
@@ -35,6 +37,8 @@ The App View
 You can use your `AppView` to load helpers that will be used for every
 view rendered in your application. CakePHP provides an `initialize()` method that
 is invoked at the end of a View’s constructor for this kind of use:
+
+.. code-block:: php
 
     namespace App\View;
 
