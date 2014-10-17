@@ -47,8 +47,8 @@ is invoked at the end of a View’s constructor for this kind of use:
     class AppView extends View {
 
         public function initialize() {
-            // Always enable the Html Helper
-            $this->loadHelper('Html');
+            // Always enable the MyUtils Helper
+            $this->loadHelper('MyUtils');
         }
 
     }
