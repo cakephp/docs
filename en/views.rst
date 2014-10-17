@@ -22,7 +22,7 @@ The App View
 ============
 
 `AppView` is your application’s default View class. `AppView` itself extends the
-`Cake\View\View` class included in CakePHP. `AppView` is defined in
+`Cake\View\View` class included in CakePHP and is defined in
 `src/View/AppView.php` as follows:
 
     namespace App\View;
