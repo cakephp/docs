@@ -18,6 +18,41 @@ common rendering scenarios:
   :ref:`cake-response-file`.
 - To create multiple themed views, you can use :doc:`views/themes`.
 
+The App View
+============
+
+``AppView`` is your application’s default View class. ``AppView`` itself extends the
+``Cake\View\View`` class included in CakePHP and is defined in
+``src/View/AppView.php`` as follows:
+
+.. code-block:: php
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class AppView extends View {
+    }
+
+You can use your ``AppView`` to load helpers that will be used for every
+view rendered in your application. CakePHP provides an ``initialize()`` method that
+is invoked at the end of a View’s constructor for this kind of use:
+
+.. code-block:: php
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class AppView extends View {
+
+        public function initialize() {
+            // Always enable the MyUtils Helper
+            $this->loadHelper('MyUtils');
+        }
+
+    }
+
 View Templates
 ==============
 
