@@ -533,7 +533,7 @@ this query for retrieving article ids and their comments count::
     $query->find()
         ->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
-        ->groupBy(['Articles.id']);
+        ->group(['Articles.id']);
     $total = $query->count();
 
 After counting, the query can still be used for fetching the associated
