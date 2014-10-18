@@ -46,12 +46,11 @@ lancer vos tests::
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir un niveau de debug d'au moins 1 dans votre
-fichier ``config/app.php`` avant de lancer des tests. Les tests ne sont
-pas accessibles via le navigateur quand le debug est égal à 0. Avant de lancer
-des tests, vous devrez vous assurer d'ajouter une configuration de base de
-données ``test`` dans ``config/app.php``. Cette configuration est utilisée
-par CakePHP pour les tables fixture et les données::
+Souvenez-vous qu'il faut avoir debug activé votre fichier ``config/app.php``
+avant de lancer des tests. Avant de lancer des tests, vous devrez vous
+assurer d'ajouter une configuration de base de données ``test`` dans 
+``config/app.php``. Cette configuration est utilisée par CakePHP pour les
+tables fixture et les données::
 
     'Datasources' => [
         'test' => [
@@ -1295,4 +1294,4 @@ précédent.
 
 .. meta::
     :title lang=fr: Test
-    :keywords lang=fr: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :keywords lang=fr: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
