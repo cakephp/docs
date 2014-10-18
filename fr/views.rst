@@ -20,6 +20,42 @@ rendu les plus communs:
 - Pour créer plusieurs vues pour un thème, vous pouvez utiliser
   :doc:`views/themes`.
 
+The App View
+============
+
+``AppView`` est la classe View par défaut de votre application. ``AppView``
+étend lui même la classe ``Cake\View\View`` de CakePHP et est définie dans
+``src/View/AppView.php`` comme suit:
+
+.. code-block:: php
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class AppView extends View {
+    }
+
+Vous pouvez utiliser ``AppView`` pour charger des helpers qui seront utilisés
+dans toutes les vues rendues de votre application. CakePHP fournit une méthode
+``initialize()`` qui est invoquées à la fin du constructeur de la View pour ce
+type d'utilisation:
+
+.. code-block:: php
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class AppView extends View {
+
+        public function initialize() {
+            // Toujours activer le helper MyUtils
+            $this->loadHelper('MyUtils');
+        }
+
+    }
+
 Templates de Vues
 =================
 
