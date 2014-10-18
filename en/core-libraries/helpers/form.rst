@@ -1538,6 +1538,10 @@ Creating buttons and submit elements
         the form tag to ``postLink`` content block or you can use option ``block``
         to specify a custom block.
 
+   .. versionchanged:: 2.6
+        The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
+        in ``$options`` instead.
+
 Creating date and time inputs
 =============================
 

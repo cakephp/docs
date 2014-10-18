@@ -115,10 +115,11 @@ as keys:
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
+* ``atomic`` (since 2.6) Boolean to indicate you want records saved in
+  a transaction.
 
 More information about model callbacks is available
 :doc:`here <callback-methods>`
-
 
 .. tip::
 
