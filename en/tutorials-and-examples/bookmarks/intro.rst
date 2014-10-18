@@ -264,7 +264,7 @@ from CakePHP. Let's implement that missing method now. In
     public function tags() {
         $tags = $this->request->params['pass'];
         $bookmarks = $this->Bookmarks->find('tagged', [
-            'tags' => tags
+            'tags' => $tags
         ]);
         $this->set(compact('bookmarks', 'tags'));
     }
