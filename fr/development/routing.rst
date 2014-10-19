@@ -155,9 +155,8 @@ le troisième paramètre de connect()::
 
 Cette route est trouvée dans le fichier routes.php distribué avec CakePHP.
 Cette route matche toute URL commençant par ``/pages/`` et il tend vers
-l'action ``display()`` de ``PagesController();``
-La requête /pages/products serait mappé vers
-``PagesController->display('products')``.
+l'action ``display()`` de ``PagesController`` La requête ``/pages/products``
+serait mappé vers ``PagesController->display('products')``.
 
 En plus de l'étoile greedy ``/*`` il y aussi la syntaxe de l'étoile trailing
 ``/**``. Utiliser une étoile double trailing, va capturer le reste de l'URL
@@ -606,9 +605,11 @@ créer votre route comme illustré ci-dessous::
         $routes->extensions(['json', 'xml']);
     });
 
-Setting the extensions should be the first thing you do in a scope, as the
-extensions will only be applied to routes connected **after** the extensions are
-set.
+.. note::
+
+    Setting the extensions should be the first thing you do in a scope, as the
+    extensions will only be applied to routes connected **after** the extensions
+    are set.
 
 By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as

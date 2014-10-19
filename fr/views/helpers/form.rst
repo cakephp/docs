@@ -1663,9 +1663,10 @@ Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces dép
     ];
 
 Dans l'exemple ci-dessus, le widget autocomplete widget dépendrait des widgets
-``text`` et ``label``. Lorsque le widget autocomplete est créé, les objets widget
-liés au noms ``text`` et ``label`` lui sont passés. Ajouter des widgets en
-utilisant la méthode ``addWidget`` resemble à ceci::
+``text`` et ``label``.Si votre widget doit accéder à la View, vous devrez
+utiliser le 'widget' ``_view``. Lorsque le widget autocomplete est créé, les
+objets widget liés au noms ``text`` et ``label`` lui sont passés. Ajouter des
+widgets en utilisant la méthode ``addWidget`` resemble à ceci::
 
     // Utilise une classname.
     $this->Form->addWidget(
