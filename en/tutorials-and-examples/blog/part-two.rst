@@ -609,13 +609,13 @@ route. It looks like this:
 
 .. code-block:: php
 
-    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one::
 
-    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 This should connect users requesting '/' to the index() action of
 our ArticlesController.
