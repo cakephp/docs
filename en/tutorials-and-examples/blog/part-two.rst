@@ -248,7 +248,12 @@ ArticlesController::
     use Cake\Network\Exception\NotFoundException;
 
     class ArticlesController extends AppController {
-        public $components = ['Flash'];
+
+        public function initialize() {
+            parent::initialize();
+
+            $this->loadComponent('Flash'); // Include the FlashComponent
+        }
 
         public function index() {
             $this->set('articles', $this->Articles->find('all'));

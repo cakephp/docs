@@ -32,22 +32,23 @@ that the order key must be defined in an array structure like below::
 
     class ArticlesController extends AppController {
 
-        public $components = ['Paginator'];
-
         public $paginate = [
             'limit' => 25,
             'order' => [
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 You can also include any of the options supported by
 :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
     class ArticlesController extends AppController {
-
-        public $components = ['Paginator'];
 
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
@@ -56,6 +57,11 @@ You can also include any of the options supported by
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 While you can pass most of the query options from the paginate property it is

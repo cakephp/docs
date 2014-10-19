@@ -20,11 +20,12 @@ Using the CsrfComponent
 Simply by adding the ``CsrfComponent``` to your components array,
 you can benefit from the CSRF protection it provides::
 
-    public $components = [
-        'Csrf' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Csrc', [
             'secure' => true
-        ]
-    ];
+        ]);
+    }
 
 Settings can be passed into the component through your component's settings.
 The available configuration options are:

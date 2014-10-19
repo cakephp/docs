@@ -139,9 +139,9 @@ file and add the following lines::
     class AppController extends Controller {
         //...
 
-        public $components = [
-            'Flash',
-            'Auth' => [
+        public function initialize() {
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
                 'loginRedirect' => [
                     'controller' => 'Articles',
                     'action' => 'index'
@@ -151,8 +151,8 @@ file and add the following lines::
                     'action' => 'display',
                     'home'
                 ]
-            ]
-        ];
+            ]);
+        }
 
         public function beforeFilter(Event $event) {
             $this->Auth->allow(['index', 'view']);
@@ -306,9 +306,10 @@ config::
 
     // src/Controller/AppController.php
 
-    public $components = [
-        'Flash',
-        'Auth' => [
+    public function initialize() {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'], // Added this line
             'loginRedirect' => [
                 'controller' => 'Articles',
                 'action' => 'index'
@@ -317,10 +318,9 @@ config::
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ],
-            'authorize' => ['Controller'] // Added this line
-        ]
-    ];
+            ]
+        ]);
+    }
 
     public function isAuthorized($user) {
         // Admin can access every action
