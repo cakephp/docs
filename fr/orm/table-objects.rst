@@ -219,7 +219,7 @@ relations parent-enfant::
         }
     }
 
-HasOne Associations
+Associations HasOne
 -------------------
 
 Mettons en place un model User avec une relation de type hasOne (a une seule)
@@ -397,7 +397,7 @@ Ce qui est au-dessus rendra un SQL qui est similaire à::
 Associations HasMany
 --------------------
 
-Un example d'association hasMany est "Article hasMany Comments".
+Un exemple d'association hasMany est "Article hasMany Comments".
 Définir cette association va nous permettre de récupérer les commentaires
 d'un article quand l'article est chargé.
 
@@ -595,15 +595,14 @@ incluent:
   replace to create the links between the passed entities when saving.
 
 
-Once this association has been defined, find operations on the Articles table can
-contain the Tag records if they exist::
+Une fois que cette association a été définie, les opérations find sur la table Articles peuvent contenir les enregistrements de Tag si ils existent::
 
     $query = $articles->find('all')->contain(['Tags']);
     foreach ($query as $article) {
         echo $article->tags[0]->text;
     }
 
-The above would emit SQL that is similar to::
+Ce qui est au-dessus fera une requête SQL similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -612,8 +611,8 @@ The above would emit SQL that is similar to::
       AND article_id IN (1, 2, 3, 4, 5)
     );
 
-When the subquery strategy is used, SQL similar to the following will be
-generated::
+Quand la stratégie de sous-requête est utilisée, un SQL similaire à ce qui
+suit sera générée::
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -622,35 +621,31 @@ generated::
       AND article_id IN (SELECT id FROM articles)
     );
 
-Using the 'through' Option
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser l'Option 'through'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you plan on adding extra information to the join/pivot table, or if you
-need to use join columns outside of the conventions, you will need to define the
-``through`` option. The ``through`` option provides you full control over how the
-belongsToMany association will be created.
+Si vous souhaitez ajouter des informations supplémentaires à la table join/pivot, ou si vous avez besoin d'utiliser les colonnes jointes en dehors des conventions, vous devrez définir l'option ``through``. L'option ``through`` vous fournit un contrôle total sur la façon dont l'association belongsToMany sera créé.
 
-It is sometimes desirable to store additional data with a many to
-many association. Consider the following::
+Il est parfois souhaitable de stocker des données supplémentaires avec une association many to many. Considérez ce qui suit::
 
     Student BelongsToMany Course
     Course BelongsToMany Student
 
-A Student can take many Courses and a Course can be taken by many Students. This
-is a simple many to many association. The following table would suffice::
+Un Etudiant (Student) peut prendre plusieurs Cours (many Courses) et un Cours (Course) peut être pris par plusieurs Etudiants (many Students). C'est une simple
+association many to many. La table suivante suffira::
 
     id | student_id | course_id
 
-Now what if we want to store the number of days that were attended
-by the student on the course and their final grade? The table we'd
-want would be::
+Maintenant si nous souhaitons stocker le nombre de jours qui sont attendus
+par l'étudiant sur le cours et leur note finale? La table que nous souhaiterions
+serait::
 
     id | student_id | course_id | days_attended | grade
 
-The way to implement our requirement is to use a **join model**,
-otherwise known as a **hasMany through** association.
-That is, the association is a model itself. So, we can create a new
-model CoursesMemberships. Take a look at the following models.::
+La façon d'intégrer notre besoin est d'utiliser un **model join**,
+autrement connu comme une association **hasMany through**.
+Ceci étant, l'association est un model lui-même. Donc, nous pouvons créer
+un nouveau model CoursesMemberships. Regardez les models suivants.::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {
@@ -675,12 +670,12 @@ model CoursesMemberships. Take a look at the following models.::
         }
     }
 
-The CoursesMemberships join table uniquely identifies a given
-Student's participation on a Course in addition to extra
-meta-information.
+La table de jointure CoursesMemberships identifie de façon unique une
+participation donnée d'un Etudiant à un Cours en plus des meta-informations
+supplémentaires.
 
-Loading Entities
-================
+Charger les Entities
+====================
 
 While table objects provide an abstraction around a 'repository' or collection of
 objects, when you query for individual records you get 'entity' objects. While
