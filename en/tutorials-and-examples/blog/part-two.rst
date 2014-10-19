@@ -142,10 +142,11 @@ nice table, our view code might look something like this:
         <tr>
             <td><?= $article->id ?></td>
             <td>
-                <?= $this->Html->link($article->title,
-                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
-            <td><?= $article->created->format(DATE_RFC850) ?></td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -370,10 +371,7 @@ Now let's go back and update our ``src/Template/Articles/index.ctp``
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
-    <?= $this->Html->link(
-        'Add Article',
-        ['controller' => 'Articles', 'action' => 'add']
-    ) ?>
+    <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
