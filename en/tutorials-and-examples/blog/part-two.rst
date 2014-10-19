@@ -15,6 +15,8 @@ specific table and go in ``src/Model/Table``. The file we'll be creating will
 be saved to ``src/Model/Table/ArticlesTable.php``. The completed file should
 look like this::
 
+    // src/Model/Table/ArticlesTable.php
+
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -52,6 +54,8 @@ related to articles done. We'll place this new controller in a file called
 ``ArticlesController.php`` inside the ``src/Controller`` directory. Here's
 what the basic controller should look like::
 
+    // src/Controller/ArticlesController.php
+
     namespace App\Controller;
 
     class ArticlesController extends AppController {
@@ -62,6 +66,8 @@ a single function or interface in an application. For example, when
 users request www.example.com/articles/index (which is also the same
 as www.example.com/articles/), they might expect to see a listing of
 articles. The code for that action would look like this::
+
+    // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
@@ -173,6 +179,8 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 ArticlesController now::
 
+    // src/Controller/ArticlesController.php
+
     namespace App\Controller;
 
     use Cake\Network\Exception\NotFoundException;
@@ -215,6 +223,7 @@ Now let's create the view for our new 'view' action and place it in
 .. code-block:: php
 
     <!-- File: src/Template/Articles/view.ctp -->
+
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
@@ -231,6 +240,8 @@ start, but let's allow for the adding of new articles.
 
 First, start by creating an ``add()`` action in the
 ArticlesController::
+
+    // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
@@ -363,6 +374,8 @@ You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Articles model and make a few adjustments::
 
+    // src/Model/Table/ArticlesTable.php
+
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -403,6 +416,8 @@ Post editing: here we go. You're a CakePHP pro by now, so you
 should have picked up a pattern. Make the action, then the view.
 Here's what the ``edit()`` action of the ArticlesController would look
 like::
+
+    // src/Controller/ArticlesController.php
 
     public function edit($id = null) {
         if (!$id) {
@@ -494,6 +509,8 @@ Deleting Articles
 Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ArticlesController::
 
+    // src/Controller/ArticlesController.php
+
     public function delete($id) {
         $this->request->allowMethod(['post', 'delete']);
 
@@ -519,7 +536,7 @@ links that allow users to delete articles, however:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp (delete links added) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>

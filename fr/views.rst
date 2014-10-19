@@ -144,7 +144,7 @@ commune pour votre sidebar, et seulement définir les parties qui changent:
 
 .. code-block:: php
 
-    // src/Template/Common/view.ctp
+    <!-- src/Template/Common/view.ctp -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -165,7 +165,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
 .. code-block:: php
 
     <?php
-    // src/Template/Posts/view.ctp
+    <!-- src/Template/Posts/view.ctp -->
     $this->extend('/Common/view');
 
     $this->assign('title', $post);

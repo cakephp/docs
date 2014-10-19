@@ -103,6 +103,7 @@ tutorial, we will show just the add.ctp:
 .. code-block:: php
 
     <!-- src/Template/Users/add.ctp -->
+
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
@@ -229,7 +230,7 @@ and add the following lines:
 
 .. code-block:: php
 
-    // src/Template/Users/login.ctp
+    <!-- File: src/Template/Users/login.ctp -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>

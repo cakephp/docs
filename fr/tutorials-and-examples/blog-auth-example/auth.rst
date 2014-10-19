@@ -231,7 +231,7 @@ votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
-    // src/Template/Users/login.ctp
+    <!-- src/Template/Users/login.ctp -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>

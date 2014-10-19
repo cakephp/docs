@@ -111,7 +111,7 @@ that change:
 
 .. code-block:: php
 
-    // src/Template/Common/view.ctp
+    <!-- src/Template/Common/view.ctp -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -130,8 +130,8 @@ uncaptured content from the extending view. Assuming our view file has a
 
 .. code-block:: php
 
+    <!-- src/Template/Posts/view.ctp -->
     <?php
-    // src/Template/Posts/view.ctp
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
