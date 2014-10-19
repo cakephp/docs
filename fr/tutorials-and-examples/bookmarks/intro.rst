@@ -282,7 +282,7 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
     public function tags() {
         $tags = $this->request->params['pass'];
         $bookmarks = $this->Bookmarks->find('tagged', [
-            'tags' => tags
+            'tags' => $tags
         ]);
         $this->set(compact('bookmarks', 'tags'));
     }

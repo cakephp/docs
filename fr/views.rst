@@ -97,38 +97,38 @@ chapitre :
   en miniature pour créer des components avec une UI indépendante. Regardez
   la documentation :doc:`/views/cells` pour plus d'informations.
 
-View Variables
---------------
+Variables de Vue
+----------------
 
-Any variables you set in your controller with ``set()`` will be available in
-both the view and the layout your action renders. In addition, any set variables
-will also be available in any element. If you need to pass additional variables
-from the view to the layout you can either call ``set()`` in the view template,
-or use a :ref:`view-blocks`.
+Toute variable que vous définissez dans votre controller avec ``set()`` sera disponible à la fois dans la vue et dans le layout que votre action utilise.
+En plus, toute variable définie sera aussi disponible dans tout element.
+Si vous avez besoin de passer des variables supplémentaires de la
+vue vers le layout, vous pouvez soit appeler ``set()`` dans le template de vue,
+soit utiliser un :ref:`view-blocks`.
 
-You should remember to **always** escape any user data before outputting it as
-CakePHP does not automatically escape output. You can escape user content with
-the ``h()`` function::
+Vous devriez vous rappeler de **toujours** échapper les données d'utilisateur
+avant de les afficher puisque CakePHP n'échappe automatiquement la sortie. Vous
+pouvez échapper le contenu d'utilisateur avec la fonction ``h()``::
 
     <?= h($user->bio); ?>
 
-Setting View Variables
-----------------------
+Définir les Variables de Vue
+----------------------------
 
 .. php:method:: set(string $var, mixed $value)
 
-Views have a ``set()`` method that is analogous to the ``set()``
-found in Controller objects. Using set() from your view file will
-add the variables to the layout and elements that will be rendered
-later. See :ref:`setting-view_variables` for more information on using
-``set()``.
+Les vues ont une méthode ``set()`` qui fonctionne de la même façon que
+``set()`` qui se trouve dans les objets Controller. Utiliser set() à
+partir de la vue va ajouter les variables au layout et aux elements qui seront
+affichés plus tard. Regardez :ref:`setting-view_variables` pour plus
+d'informations sur l'utilisation de ``set()``.
 
-In your view file you can do::
+Dans votre fichier de vue, vous pouvez faire::
 
     $this->set('activeMenuButton', 'posts');
 
-Then, in your layout, the ``$activeMenuButton`` variable will be
-available and contain the value 'posts'.
+Ensuite, dans votre layout, la variable ``$activeMenuButton`` sera disponible
+et contiendra la valeur 'posts'.
 
 .. _extending-views:
 
@@ -186,7 +186,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?= h($post['Post']['body']) ?>
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
-remplir un ensemble de bloc. Tout contenu qui ne serait pas déjà dans un bloc
+remplir un ensemble de blocks. Tout contenu qui ne serait pas déjà dans un block
 défini, sera capturé et placé dans un block spécial appelé ``content``. Quand
 une vue contient un appel vers un ``extend()``, l'exécution continue jusqu'à la
 fin de la vue actuelle. Une fois terminé, la vue étendue va être générée. En
@@ -210,7 +210,8 @@ vue parente va récupérer le contenu de la vue précédente en tant que block
     application. CakePHP l'utilise pour définir le contenu non-capturé pour
     les vues étendues.
 
-You can get the list of all populated blocks using the ``blocks()`` method::
+Vous pouvez récupérer la liste de tous blocks existants en utilisant la méthode
+``blocks()``::
 
     $list = $this->blocks();
 
@@ -228,13 +229,13 @@ Soit en tant que block capturant, soit en le déclarant explicitement. Les
 méthodes ``start()``, ``append()``, ``prepend()``, ``assign()``, ``fetch()``
 et ``end()`` vous permettent de travailler avec les blocks capturant::
 
-    // Creer le block sidebar.
+    // Créer le block sidebar.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
     $this->end();
 
-    // Le rattacher a la sidebar plus tard.
+    // Le rattacher à la sidebar plus tard.
     $this->start('sidebar');
     echo $this->fetch('sidebar');
     echo $this->element('sidebar/popular_topics');
@@ -267,12 +268,12 @@ existant::
     utilisé par CakePHP en interne pour étendre les vues, et le contenu des
     vues dans le layout.
 
-Afficher les Blocs
-------------------
+Afficher les Blocks
+-------------------
 
 Vous pouvez afficher les blocks en utilisant la méthode ``fetch()``. Cette
-dernière va, de manière sécurisée, générer un bloc, en retournant '' si le bloc
-n'existe pas::
+dernière va, de manière sécurisée, générer un block, en retournant '' si le
+block n'existe pas::
 
     <?= $this->fetch('sidebar') ?>
 
@@ -291,7 +292,7 @@ en-têtes ou autres balises:
     </div>
     <?php endif; ?>
 
-Vous pouvez aussi fournir une valeur par défaut pour un bloc
+Vous pouvez aussi fournir une valeur par défaut pour un block
 qui ne devrait pas avoir de contenu. Cela vous permet d'ajouter facilement
 du contenu placeholder, pour des déclarations vides. Vous pouvez fournir
 une valeur par défaut en utilisant le 2ème argument:
@@ -300,16 +301,16 @@ une valeur par défaut en utilisant le 2ème argument:
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
-        <?= $this->fetch('cart', 'Your cart is empty') ?>
+        <?= $this->fetch('cart', 'Votre Caddie est vide') ?>
     </div>
 
 Utiliser des Blocks pour les Fichiers de Script et les CSS
 ----------------------------------------------------------
 
-The :php:class:`HtmlHelper` ties into view blocks, and its
-:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
-:php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``block = true`` option:
+:php:class:`HtmlHelper` est lié aux blocks de vue, et ses méthodes
+:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, et
+:php:meth:`~HtmlHelper::meta()` mettent à jour chacun un block avec le même nom
+quand il est utilisé avec l'option ``block = true``:
 
 .. code-block:: php
 
@@ -319,7 +320,7 @@ when used with the ``block = true`` option:
     $this->Html->css('carousel', null, ['block' => true]);
     ?>
 
-    // In your layout file.
+    // Dans votre fichier de layout.
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -327,7 +328,7 @@ when used with the ``block = true`` option:
         <?= $this->fetch('script') ?>
         <?= $this->fetch('css') ?>
         </head>
-        // rest of the layout follows
+        // reste du layout à la suite
 
 Le :php:meth:`HtmlHelper` vous permet aussi de contrôler vers quels blocks vont
 les scripts::
@@ -375,16 +376,16 @@ ressembler:
    </head>
    <body>
 
-   <!-- If you'd like some sort of menu to
-   show up on all of your views, include it here -->
+   <!-- Si vous voulez qu'un menu soit affiché pour toutes vos vues,
+   incluez le ici -->
    <div id="header">
        <div id="menu">...</div>
    </div>
 
-   <!-- Here's where I want my views to be displayed -->
+   <!-- C'est ici que je veux voir mes vues être affichées -->
    <?= $this->fetch('content') ?>
 
-   <!-- Add a footer to each displayed page -->
+   <!-- Ajoute un footer pour chaque page affichée -->
    <div id="footer">...</div>
 
    </body>
@@ -404,7 +405,7 @@ les fichiers JavaScript et les CSS à partir des vues.
 
 Le block ``content`` contient les contenus de la vue rendue.
 
-Vous pouvez aussi définir le bloc ``title`` depuis l'intérieur
+Vous pouvez aussi définir le block ``title`` depuis l'intérieur
 d'un fichier de vue::
 
     $this->assign('title', $titleContent);
