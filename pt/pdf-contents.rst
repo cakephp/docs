@@ -22,7 +22,6 @@ Conteúdo
     core-libraries/caching
     console-and-shells
     development/debugging
-    development/dispatch-filters
     deployment
     core-libraries/email
     core-libraries/events
