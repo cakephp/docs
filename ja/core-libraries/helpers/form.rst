@@ -111,6 +111,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
 
 create()のオプション
 --------------------
+
 create()には多くのオプションがあります:
 
 * ``$options['type']`` このキーは生成するフォームのタイプを指定します。
@@ -235,7 +236,7 @@ create()には多くのオプションがあります:
 
         <?php echo $this->Form->end(); ?>
 
-     ``end()`` の第一パラメータで文字列が与えられると、FormHelperは
+    ``end()`` の第一パラメータで文字列が与えられると、FormHelperは
     フォームの綴じタグと一緒にその文字列の名前のついた submit ボタンを
     出力します::
 
@@ -936,7 +937,7 @@ select, checkbox, radio に関するオプション
 ------------------
 
 * ``$options['timeFormat']`` 時刻関連の入力に関する select input の書式を
-  指定します。有効な値は ``12``, ``24``, ``null` です。
+  指定します。有効な値は ``12``, ``24``, ``null`` です。
 
 * ``$options['dateFormat']`` 日付関連の入力に関する select input の書式を
   指定します。有効な値は 'D', 'M', 'Y' の組み合わせまたは ``null`` です。
@@ -1168,7 +1169,7 @@ select, checkbox, radio に関するオプション
     * ``$attributes['between']`` legend と最初の要素の間に挿入される
       コンテンツを指定します。
 
-    * ``$attributes['disabled']`` これを ``true`` または ``'disabled'`
+    * ``$attributes['disabled']`` これを ``true`` または ``'disabled'``
       にすると、生成されたすべてのラジオボタンを無効にします。
 
     * ``$attributes['legend']`` radio エレメントはデフォルトでは label 
