@@ -23,23 +23,26 @@ Contents
     controllers
     views
     orm
-    plugins
     development/errors
 
     core-libraries/caching
-    core-libraries/logging
-    core-libraries/events
-    development/sessions
-    development/rest
-    controllers/components/pagination
-    security
-    core-libraries/email
-    core-libraries/validation
-    core-libraries/internationalization-and-localization
-    development/testing
-    deployment
-    console-and-shells
     core-libraries
+    console-and-shells
+    development/debugging
+    development/dispatch-filters
+    deployment
+    core-libraries/email
+    core-libraries/events
+    core-libraries/internationalization-and-localization
+    core-libraries/logging
+    development/sessions
+    controllers/components/pagination
+    plugins
+    development/rest
+    security
+    development/testing
+    core-libraries/validation
+
 
     appendices
 
