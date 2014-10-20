@@ -20,11 +20,14 @@ il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un
 tableau qui est assigné à ``$this->request->data``, et pourra alors être
 sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
-doit être inclu dans votre tableau $components::
+doit être inclu dans votre tableau méthode ``initialize()``::
 
     class WidgetController extends AppController {
 
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         // suite du controller
     }
@@ -45,7 +48,10 @@ contenu que le client accepte. Par exemple::
 
         class ArticlesController extends AppController {
 
-            public $components = ['RequestHandler'];
+            public function initialize() {
+                parent::initialize();
+                $this->loadComponent('RequestHandler');
+            }
 
             public function beforeFilter() {
                 if ($this->RequestHandler->accepts('html')) {
@@ -226,10 +232,12 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à ``false``::
 
-    public $components = [
-        'RequestHandler' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('RequestHandler', [
             'checkHttpCache' => false
-    ]];
+        ]);
+    }
 
 Utiliser les ViewClasses personnalisées
 =======================================
@@ -244,14 +252,16 @@ Vous pouvez mapper les types existants et les nouveaux types à vos classes
 personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
 la configuration ``viewClassMap``::
 
-    public $components = [
-        'RequestHandler' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent(''RequestHandler', [
             'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',
                 'csv' => 'ApiKit.Csv'
             ]
-    ]];
+        ]);
+    }
 
 .. meta::
     :title lang=fr: Request Handling (Gestion des requêtes)

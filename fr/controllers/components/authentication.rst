@@ -79,9 +79,9 @@ gestionnaires ne seront pas utilisés. Inversement, vous pouvez mettre un terme
 toutes les exceptions levées, et les gérer comme désiré.
 
 Vous pouvez configurer le gestionnaire d'authentification dans
-``beforeFilter`` ou dans le tableau ``$components``.
-Vous pouvez passer l'information de configuration dans chaque objet
-d'authentification en utilisant un tableau::
+la méthode``beforeFilter()`` ou dans la méthode ``initialize()``.
+Vous pouvez passer l'information de configuration dans chaque
+objet d'authentification en utilisant un tableau::
 
     // Configuration de base
     $this->Auth->config('authenticate', ['Form']);
@@ -123,40 +123,40 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
 
-Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
+Configurer différents champs pour l'utilisateur dans la méthode ``initialize()``::
 
-    // Passer la configuration dans le tableau $components
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Ne mettez pas d'autre clés de configuration de Auth(comme authError,
 loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
 ressemblerait à quelque chose comme::
 
-    // Passage de paramètre dans le tableau $components
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login',
                 'plugin' => 'Users'
             ],
-            'authError' => 'Did you really think you are allowed to see that?',
+            'authError' => 'Vous croyez vraiment que vous pouvez faire cela?',
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 En plus de la configuration courante, l'authentification de base
 prend en charge les clés suivantes:
@@ -438,8 +438,9 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
 Ensuite, vous devez configurer AuthComponent pour utiliser votre propre
 hasher de mot de passe::
 
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -447,8 +448,8 @@ hasher de mot de passe::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Supporter des système légaux est une bonne idée, mais il est encore mieux de
 garder votre base de données avec les derniers outils de sécurité. La section
@@ -464,8 +465,9 @@ d'un algorithme vers un autre, ceci est possible avec la classe
 à partir de l'exemple précédent, vous pouvez configurer AuthComponent comme
 suit::
 
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -474,8 +476,8 @@ suit::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 le premier nom qui apparait dans la clé ``hashers`` indique quelle classe
 est la préférée, et elle va remplacer les autres dans la liste si la
@@ -654,8 +656,8 @@ d'où il vient. Vous pouvez également stopper les autorisations en levant une
 exception. Vous aurez besoin de traiter toutes les exceptions levées, et de les
 manipuler.
 
-Vous pouvez configurer les gestionnaires d'autorisations dans le
-``beforeFilter`` de votre controller ou dans le tableau ``$components``.
+Vous pouvez configurer les gestionnaires d'autorisations dans l'une
+des méthodes ``beforeFilter()`` ou ``initialize()`` de votre controller.
 Vous pouvez passer les informations de configuration dans chaque objet
 d'autorisation, en utilisant un tableau::
 
@@ -808,9 +810,13 @@ ressources de la requête. Le callback est passé à l'utilisateur actif, il
 peut donc être vérifié::
 
     class AppController extends Controller {
-        public $components = [
-            'Auth' => ['authorize' => 'Controller'],
-        ];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => 'Controller',
+            ]);
+        }
+
         public function isAuthorized($user = null) {
             // Chacun des utilisateur enregistré peut accéder aux fonctions publiques
             if (empty($this->request->params['prefix'])) {
@@ -834,9 +840,9 @@ accéder aux actions qui ont le préfixe admin.
 Options de Configuration
 ========================
 
-Les configurations suivantes peuvent toutes être définies soit dans le tableau
-``$components`` de votre controller, soit en utilisant
-``$this->Auth->config()``:
+Les configurations suivantes peuvent toutes être définies soit dans la méthode
+``initialize()`` de votre controller, soit en utilisant
+``$this->Auth->config()`` dans votre ``beforeFilter()``:
 
 ajaxLogin
     Le nom d'une vue optionnelle d'un élément à rendre quand une requête AJAX

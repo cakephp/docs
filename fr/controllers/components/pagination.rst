@@ -36,22 +36,23 @@ doit être défini dans une structure en tableau comme ci-dessous::
 
     class ArticlesController extends AppController {
 
-        public $components = ['Paginator'];
-
         public $paginate = [
             'limit' => 25,
             'order' => [
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 Vous pouvez aussi inclure d'autres options
 :php:meth:`~Cake\\ORM\\Table::find()`, comme ``fields``::
 
     class ArticlesController extends AppController {
-
-        public $components = ['Paginator'];
 
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
@@ -60,6 +61,11 @@ Vous pouvez aussi inclure d'autres options
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 Alors que vous pouvez passer la plupart des options de query à partir de la

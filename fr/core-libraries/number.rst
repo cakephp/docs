@@ -14,7 +14,10 @@ d'une ``View``, utilisez la classe ``Number``::
 
     class UsersController extends AppController {
 
-        public $components = array('Auth');
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth');
+        }
 
         public function afterLogin() {
             $storageUsed = $this->Auth->user('storage_used');

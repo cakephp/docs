@@ -488,7 +488,10 @@ du component. Par exemple::
     }
 
     // dans vos controllers:
-    public $components = ['ContactManager.Example'];
+    public function intialize() {
+        parent::initialize();
+        $this->loadComponent('ContactManager.Example');
+    }
 
 La même technique s'applique aux Helpers et aux Behaviors.
 

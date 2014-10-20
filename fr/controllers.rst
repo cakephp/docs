@@ -460,6 +460,7 @@ tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
     public function intialize() {
+        parent::initialize();
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure:read('Comments'));
     }
@@ -483,7 +484,6 @@ les classes MVC supplémentaires::
 
     class RecipesController extends AppController {
         public $helpers = ['Form'];
-        public $components = ['RequestHandler'];
     }
 
 Chacune de ces variables sont fusionnées avec leurs valeurs héritées,

@@ -24,7 +24,7 @@ formulaires et vérifiés par le component Security.
 Si vous utilisez la fonctionnalité de protection des formulaires
 par le component Security et que d'autres components traitent des données
 de formulaire dans les callbacks ``startup()``, assurez-vous de placer
-le component Security avant ces components dans le tableau ``$components``.
+le component Security avant ces components dans la méthode ``initialize()``.
 
 .. note::
 
@@ -155,7 +155,10 @@ au démarrage::
 
     class WidgetsController extends AppController {
 
-        public $components = ['Security'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Security');
+        }
 
         public function beforeFilter(Event $event) {
             if (isset($this->request->params['admin'])) {
@@ -174,7 +177,10 @@ Cette exemple forcera toutes les actions qui proviennent de la
 
     class WidgetsController extends AppController {
 
-        public $components = ['Security'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Security');
+        }
 
         public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
@@ -222,7 +228,10 @@ fonctionnalités de ``SecurityComponent``::
 
     class WidgetController extends AppController {
 
-        public $components = ['Security'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Security');
+        }
 
         public function beforeFilter(Event $event) {
              $this->Security->config('unlockedActions', ['edit']);

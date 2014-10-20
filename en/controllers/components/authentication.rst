@@ -615,7 +615,7 @@ Additionally you can halt all authorization by throwing an exception.
 You will need to catch any thrown exceptions, and handle them.
 
 You can configure authorization handlers in your controller's
-``beforeFilter`` or ``initialize()`` methods. You can pass
+``beforeFilter()`` or ``initialize()`` methods. You can pass
 configuration information into each authorization object, using an
 array::
 

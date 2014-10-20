@@ -12,9 +12,11 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 Les fichiers des classes de model de CakePHP sont séparés entre des objets
 ``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
 collection des entities stockées dans une table spécifique et vont dans
-``/src/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
-``/src/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
+``src/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
+``src/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
 à ceci::
+
+    // src/Model/Table/ArticlesTable.php
 
     namespace App\Model\Table;
 
@@ -50,8 +52,10 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier ``/src/Controller``. Voici
+``ArticlesController.php`` à l'intérieur du dossier ``src/Controller``. Voici
 à quoi devrait ressembler le controller de base ::
+
+    // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
@@ -64,6 +68,8 @@ quand les utilisateurs requêtent www.exemple.com/articles/index (qui est
 également la même chose que www.exemple.com/articles/), ils pourraient
 s'attendre à voir une liste d'articles. Le code pour cette action devrait
 ressembler à quelque chose comme ça::
+
+    // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
@@ -143,10 +149,11 @@ ressembler à quelque chose comme cela:
         <tr>
             <td><?= $article->id ?></td>
             <td>
-                <?= $this->Html->link($article->title,
-                ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
-            <td><?= $article->created->format(DATE_RFC850) ?></td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -181,6 +188,8 @@ l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
 tarder dans le Controller Articles::
+
+    // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
@@ -227,6 +236,7 @@ dans ``/src/Template/Articles/view.ctp``.
 .. code-block:: php
 
     <!-- File: /src/Template/Articles/view.ctp -->
+
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
@@ -243,12 +253,17 @@ mais lançons-nous dans l'ajout de nouveaux articles.
 Premièrement, commençons par créer une action ``add()`` dans le
 ArticlesController::
 
+    // src/Controller/ArticlesController.php
+
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
+    use Cake\Network\Exception\NotFoundException;
 
     class ArticlesController extends AppController {
-        public $components = ['Flash'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Flash'); // Charge le FlashComponent
+        }
 
         public function index() {
             $this->set('articles', $this->Articles->find('all'));
@@ -374,15 +389,14 @@ A présent, revenons en arrière et modifions notre vue
 ``/src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>`` ::
 
-    <?= $this->Html->link(
-        'Ajouter un article',
-        ['controller' => 'Articles', 'action' => 'add']
-    ) ?>
+    <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
 
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
 exigences de validation ? Les règles de validation sont définies dans le
 model. Retournons donc à notre model Articles et procédons à quelques
 ajustements::
+
+    // src/Model/Table/ArticlesTable.php
 
     namespace App\Model\Table;
 
@@ -423,6 +437,8 @@ L'édition de articles : nous y voilà. Vous êtes un pro de CakePHP maintenant,
 vous devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
 Voici à quoi l'action ``edit()`` du controller Articles (ArticlesController)
 devrait ressembler::
+
+    // src/Controller/ArticlesController.php
 
     public function edit($id = null) {
         if (!$id) {
@@ -614,13 +630,13 @@ Le routage de CakePHP se trouve dans ``/config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela ::
 
-    Router::connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous
 voulons que cette URL soit connectée à notre propre controller, remplacez donc
 la ligne par celle-ci ::
 
-    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 Cela devrait connecter les utilisateurs demandant '/' à l'action ``index()`` de
 notre controller Articles (ArticlesController).

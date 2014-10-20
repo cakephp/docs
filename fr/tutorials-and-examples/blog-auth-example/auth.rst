@@ -106,6 +106,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 .. code-block:: php
 
     <!-- src/Template/Users/add.ctp -->
+
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
@@ -142,9 +143,9 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     class AppController extends Controller {
         //...
 
-        public $components = [
-            'Flash',
-            'Auth' => [
+        public function initialize() {
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
                 'loginRedirect' => [
                     'controller' => 'Articles',
                     'action' => 'index'
@@ -154,8 +155,8 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
                     'action' => 'display',
                     'home'
                 ]
-            ]
-        ];
+            ]);
+        }
 
         public function beforeFilter(Event $event) {
             $this->Auth->allow(['index', 'view']);
@@ -311,9 +312,10 @@ config de Auth::
 
     // src/Controller/AppController.php
 
-    public $components = [
-        'Flash',
-        'Auth' => [
+    public function initialize() {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'], // Ajout de cette ligne
             'loginRedirect' => [
                 'controller' => 'Articles',
                 'action' => 'index'
@@ -322,10 +324,9 @@ config de Auth::
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ],
-            'authorize' => ['Controller'] // Ajout de cette ligne
-        ]
-    ];
+            ]
+        ]);
+    }
 
     public function isAuthorized($user) {
         // Admin peuvent accéder à chaque action

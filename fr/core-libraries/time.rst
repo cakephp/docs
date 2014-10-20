@@ -12,7 +12,10 @@ d'une ``View``, utilisez la classe ``Time``::
 
     class UsersController extends AppController {
 
-        public $components = ['Auth'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth');
+        }
 
         public function afterLogin() {
             $time = new Time($this->Auth->user('date_of_birth'));

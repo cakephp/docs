@@ -19,7 +19,10 @@ d'une ``View``, utilisez la classe ``String``::
 
     class UsersController extends AppController {
 
-        public $components = ['Auth'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth');
+        }
 
         public function afterLogin() {
             $message = $this->Users->find('new_message');
