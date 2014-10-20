@@ -135,7 +135,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
         $action = $this->request->params['action'];
 
         // The add and index actions are always allowed.
-        if ($action === 'add' || $action === 'index') {
+        if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // All other actions require an id.
