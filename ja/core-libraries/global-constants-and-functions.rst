@@ -1,4 +1,4 @@
-.. Global Constants and Functions
+.. Constants & Functions
 
 グローバル定数およびグローバル関数
 ##################################
