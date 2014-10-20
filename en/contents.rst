@@ -34,11 +34,11 @@ Contents
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
-    development/sessions
     controllers/components/pagination
     plugins
     development/rest
     security
+    development/sessions
     development/testing
     core-libraries/validation
 
