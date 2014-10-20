@@ -6,6 +6,10 @@ Contents
 
     intro
     quickstart
+    appendices/3-0-migration-guide
+    tutorials-and-examples
+    contributing
+
     installation
     development/configuration
     development/routing
@@ -13,23 +17,37 @@ Contents
     controllers
     views
     orm
-
     development/errors
-    core-libraries/caching
-    core-libraries/logging
-    core-libraries/events
 
-    development/sessions
-    development/rest
-    controllers/components/pagination
-    security
-    core-libraries/email
-    core-libraries/validation
-    core-libraries/internationalization-and-localization
-    development/testing
-    deployment
+    core-libraries/caching
     console-and-shells
-    core-libraries
+    development/debugging
+    deployment
+    core-libraries/email
+    core-libraries/events
+    core-libraries/internationalization-and-localization
+    core-libraries/logging
+    controllers/components/pagination
+    plugins
+    development/rest
+    security
+    development/sessions
+    development/testing
+    core-libraries/validation
+
+    core-libraries/app
+    core-libraries/collections
+    core-libraries/file-folder
+    core-libraries/hash
+    core-libraries/httpclient
+    core-libraries/inflector
+    core-libraries/number
+    core-libraries/registry-objects
+    core-libraries/string
+    core-libraries/time
+    core-libraries/xml
+
+    core-libraries/global-constants-and-functions
     appendices
 
 

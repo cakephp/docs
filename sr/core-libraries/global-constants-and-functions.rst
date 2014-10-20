@@ -1,5 +1,5 @@
-Global Constants and Functions
-##############################
+Constants & Functions
+#####################
 
 While most of your day-to-day work in CakePHP will be utilizing
 core classes and methods, CakePHP features a number of global
