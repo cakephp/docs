@@ -70,7 +70,7 @@ caractères de ponctuation, avec une longueur de texte au moins aussi longue.
 - ``^`` Est utilisé pour les sous-sous-sous-sections.
 
 Les en-têtes ne doivent pas être imbriqués sur plus de 5 niveaux de profondeur.
-Les en-têtes doivent être précedés et suivis par une ligne vide.
+Les en-têtes doivent être précédés et suivis par une ligne vide.
 
 Les Paragraphes
 ---------------
@@ -353,11 +353,11 @@ Notes et avertissements
 -----------------------
 
 Il y a souvent des fois où vous voulez informer le lecteur d'une astuce
-importante, une note spécials ou un danger potentiel. Les avertissements
+importante, une note spéciale ou un danger potentiel. Les avertissements
 dans sphinx sont justement utilisés pour cela. Il y a trois types
 d'avertissements.
 
-* ``.. tip::`` Les astuces sont utilisées pour documenter ou ré-itérer des
+* ``.. tip::`` Les astuces sont utilisées pour documenter ou réitérer des
   informations intéressantes ou importantes. Le contenu de cette directive doit
   être écrit dans des phrases complètes et inclure toutes les ponctuations
   appropriées.
@@ -374,7 +374,7 @@ Tous les avertissements sont faits de la même façon::
 
     .. note::
 
-        Indenté, précedé et suivi par une ligne vide. Exactement comme
+        Indenté, précédé et suivi par une ligne vide. Exactement comme
         un paragraphe.
 
     Ce texte n'est pas une partie de la note.
