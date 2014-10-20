@@ -164,8 +164,8 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
 
 .. code-block:: php
 
-    <?php
     <!-- src/Template/Posts/view.ctp -->
+    <?php
     $this->extend('/Common/view');
 
     $this->assign('title', $post);
