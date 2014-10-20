@@ -43,7 +43,6 @@ Contenu
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/security
     core-libraries/string
     core-libraries/time
     core-libraries/xml
