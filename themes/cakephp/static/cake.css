@@ -10,7 +10,7 @@
  * Fully installable fonts can be purchased at http://www.fontspring.com
  *
  * The fonts included in this stylesheet are subject to the End User License you purchased
- * from Fontspring. The fonts are protected under domestic and international trademark and
+ * from Fontspring. The fonts are protected under domestic and international trademark and 
  * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
  * distributing this font software.
  *
@@ -84,12 +84,12 @@ a:hover {
 .button {
 	font-family: MuseoSlab500, Helvetica, Arial;
 	font-weight: normal;
-
+	
 	-webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
 	-moz-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
 	-o-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
-
+	
 	border: 1px solid #a61e2b;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -227,7 +227,7 @@ dl.docutils {
 	-webkit-transform: rotate(-2.8deg);
 	-moz-transform: rotate(-2.8deg);
 	transform: rotate(-2.8deg);
-
+	
 	-webkit-transform-origin: top center;
 	-moz-transform-origin: top center;
 	transform-origin: top center;
@@ -256,7 +256,7 @@ dl.docutils {
 	-webkit-box-shadow: 4px 4px 0 #003D4C;
 	-moz-box-shadow: 4px 4px 0 #003D4C;
 	box-shadow: 4px 4px 0 #003D4C;
-
+	
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
@@ -304,59 +304,6 @@ dl.docutils {
 a.improve {
 	float: right;
 }
-
-#sidebar-navigation > ul > li:nth-of-type(5) a:after,
-#sidebar-navigation > ul > li:nth-of-type(13) a:after,
-#sidebar-navigation > ul > li:nth-of-type(28) a:after,
-#sidebar-navigation > ul > li:nth-of-type(39) a:after {
-    content: " ";
-    display: block;
-    margin-bottom: 1em;
-}
-#sidebar-navigation > ul > li:nth-of-type(1):before {
-    color: #BD8A5D;
-    content: "Preface";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-}
-#sidebar-navigation > ul > li:nth-of-type(6):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
-    content: "Getting Started";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
-}
-#sidebar-navigation > ul > li:nth-of-type(14):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
-    content: "General Topics";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
-}
-#sidebar-navigation > ul > li:nth-of-type(29):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
-    content: "Utility Classes";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
-}
-#sidebar-navigation > ul > li:nth-of-type(40):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
-    content: "Other";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
-}
-
 /**
  * Responsive CSF navbar override.
  */

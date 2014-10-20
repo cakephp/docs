@@ -7,7 +7,6 @@ Les sections suivantes traitent de ces outils:
 .. toctree::
     :maxdepth: 1
 
-    core-libraries/security
     controllers/components/csrf
     controllers/components/security
 
