@@ -439,6 +439,7 @@ In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
 
     public function intialize() {
+        parent::initialize();
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure:read('Comments'));
     }
@@ -461,7 +462,6 @@ additional MVC classes::
 
     class RecipesController extends AppController {
         public $helpers = ['Form'];
-        public $components = ['RequestHandler'];
     }
 
 Each of these variables are merged with their inherited values,

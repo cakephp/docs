@@ -137,7 +137,11 @@ comme propriété dans votre controller. Si vous avez chargé la
 controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController {
-        public $components = ['Flash', 'Cookie'];
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Flash');
+            $this->loadComponent('Cookie');
+        }
 
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {

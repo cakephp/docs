@@ -234,7 +234,7 @@ and add the following lines:
 
 .. code-block:: php
 
-    // src/Template/Users/login.ctp
+    <!-- src/Template/Users/login.ctp -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>

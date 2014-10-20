@@ -27,7 +27,10 @@ this::
     // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             $recipes = $this->Recipes->find('all');

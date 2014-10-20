@@ -46,7 +46,10 @@ fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
     class PostsController extends AppController {
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             $this->set('posts', $this->paginate());
@@ -58,7 +61,10 @@ Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
 combiner::
 
     class PostsController extends AppController {
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             // du code qui créé $posts et $comments

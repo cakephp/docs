@@ -479,7 +479,10 @@ that you prefix the plugin name before the name of the component. For example::
     }
 
     // Within your controllers:
-    public $components = ['ContactManager.Example'];
+    public function intialize() {
+        parent::initialize();
+        $this->loadComponent('ContactManager.Example');
+    }
 
 The same technique applies to Helpers and Behaviors.
 

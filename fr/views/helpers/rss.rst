@@ -34,10 +34,13 @@ le controller pour y ajouter le code "rss-spécifique".
 Code du Controller
 ------------------
 
-C'est une bonne idée d'ajouter RequestHandler au tableau $components de votre
-controller Posts. Cela permettra à beaucoup d'automagie de se produire::
+C'est une bonne idée d'ajouter RequestHandler dans la méthode ``initialize()``
+de votre controller Posts. Cela permettra beaucoup d'automagie::
 
-    public $components = ['RequestHandler'];
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
 
 Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il
 doit aussi être ajouté au controller::

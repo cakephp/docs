@@ -34,9 +34,12 @@ Controller Code
 ---------------
 
 It is a good idea to add RequestHandler to your PostsController's
-$components array. This will allow a lot of automagic to occur::
+``initialize()`` method. This will allow a lot of automagic to occur::
 
-    public $components = ['RequestHandler'];
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
 
 Our view will also use the :php:class:`TextHelper` for formatting, so that
 should be added to the controller as well::

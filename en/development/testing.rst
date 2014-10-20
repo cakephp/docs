@@ -831,7 +831,10 @@ Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController {
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function view($id) {
             $marker = $this->Markers->get($id);

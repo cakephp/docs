@@ -130,7 +130,11 @@ and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
 
     class PostsController extends AppController {
-        public $components = ['Flash', 'Cookie'];
+        public function intialize() {
+            parent::initialize();
+            $this->loadComponent('Flash');
+            $this->loadComponent('Cookie');
+        }
 
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {

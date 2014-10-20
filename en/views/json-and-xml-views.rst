@@ -45,7 +45,10 @@ can be either a string or an array of view variables to serialize::
     namespace App\Controller;
 
     class ArticlesController extends AppController {
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             $this->set('articles', $this->paginate());
@@ -58,7 +61,10 @@ You can also define ``_serialize`` as an array of view variables to combine::
     namespace App\Controller;
 
     class ArticlesController extends AppController {
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             // Some code that created $articles and $comments

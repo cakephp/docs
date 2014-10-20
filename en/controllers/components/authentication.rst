@@ -69,7 +69,7 @@ authentication by throwing an exception. You will need to catch any
 thrown exceptions, and handle them as needed.
 
 You can configure authentication handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array. You can pass
+``beforeFilter()`` or ``initialize()`` methods. You can pass
 configuration information into each authentication object, using an
 array::
 
@@ -110,27 +110,27 @@ keys.
 - ``contain`` Extra models to contain and return with identified user's info.
 - ``passwordHasher`` Password hasher class. Defaults to ``Default``.
 
-To configure different fields for user in ``$components`` array::
+To configure different fields for user in your ``initialize()`` method::
 
-    // Pass settings in $components array
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Do not put other ``Auth`` configuration keys (like ``authError``, ``loginAction`` etc)
 within the ``authenticate`` or ``Form`` element. They should be at the same level as
 the authenticate key. The setup above with other Auth configuration
 should look like::
 
-    // Pass settings in $components array
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login',
@@ -142,8 +142,8 @@ should look like::
                     'fields' => ['username' => 'email']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -406,8 +406,9 @@ In order to use a different password hasher, you need to create the class in
 Then you are required to configure the AuthComponent to use your own password
 hasher::
 
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -415,8 +416,8 @@ hasher::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
@@ -430,8 +431,9 @@ to another, this is achieved through the ``FallbackPasswordHasher`` class.
 Assuming you are using ``LegacyPasswordHasher`` from the previous example, you
 can configure the AuthComponent as follows::
 
-    public $components = [
-        'Auth' => [
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -440,8 +442,8 @@ can configure the AuthComponent as follows::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 The first name appearing in the ``hashers`` key indicates which of the classes
 is the preferred one, but it will fallback to the others in the list if the
@@ -613,7 +615,7 @@ Additionally you can halt all authorization by throwing an exception.
 You will need to catch any thrown exceptions, and handle them.
 
 You can configure authorization handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array. You can pass
+``beforeFilter()`` or ``initialize()`` methods. You can pass
 configuration information into each authorization object, using an
 array::
 
@@ -764,9 +766,13 @@ the request. The callback is passed the active user, so it can be
 checked::
 
     class AppController extends Controller {
-        public $components = [
-            'Auth' => ['authorize' => 'Controller'],
-        ];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => 'Controller',
+            ]);
+        }
+
         public function isAuthorized($user = null) {
             // Any registered user can access public functions
             if (empty($this->request->params['prefix'])) {
@@ -791,7 +797,7 @@ Configuration options
 =====================
 
 The following settings can all be defined either in your controller's
-``$components`` array or using ``$this->Auth->config()``:
+``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
 
 ajaxLogin
     The name of an optional view element to render when an AJAX request is made

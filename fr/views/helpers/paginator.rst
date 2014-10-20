@@ -445,7 +445,7 @@ intégrées dans vos en-têtes de colonne de table:
 
 .. code-block:: php
 
-    // src/View/Posts/index.ctp
+    <!-- src/View/Posts/index.ctp -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>

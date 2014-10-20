@@ -28,7 +28,10 @@ dans nos actions de controller. Un controller basique pourrait ressembler
     // src/Controller/RecipesController.php
     class RecipesController extends AppController {
 
-        public $components = ['RequestHandler'];
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function index() {
             $recipes = $this->Recipes->find('all');
@@ -105,7 +108,7 @@ RecipesController à l'intérieur de ``src/Template/Recipes/xml``. Nous pouvons 
 utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces vues.
 Voici ce que notre vue index pourrait ressembler à::
 
-    // src/Template/Recipes/xml/index.ctp
+    <!-- src/Template/Recipes/xml/index.ctp -->
     // Faire du formatage et de la manipulation sur le tableau
     // $recipes.
     $xml = Xml::fromArray(array('response' => $recipes));
