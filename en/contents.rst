@@ -12,6 +12,10 @@ Contents
 
     intro
     quickstart
+    appendices/3-0-migration-guide
+    tutorials-and-examples
+    contributing
+
     installation
     development/configuration
     development/routing
@@ -20,12 +24,11 @@ Contents
     views
     orm
     plugins
-
     development/errors
+
     core-libraries/caching
     core-libraries/logging
     core-libraries/events
-
     development/sessions
     development/rest
     controllers/components/pagination
@@ -38,8 +41,6 @@ Contents
     console-and-shells
     core-libraries
 
-    contributing
-    tutorials-and-examples
     appendices
 
 .. todolist::
