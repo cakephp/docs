@@ -143,7 +143,7 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
         $action = $this->request->params['action'];
 
         // Add et index sont toujours permises.
-        if ($action === 'add' || $action === 'index') {
+        if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
         // Tout autre action nécessite un id.
