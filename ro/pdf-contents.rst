@@ -1,8 +1,8 @@
-Contents
+Cuprins
 ########
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
     intro
     quickstart
@@ -51,9 +51,3 @@ Contents
 
     core-libraries/global-constants-and-functions
     appendices
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
