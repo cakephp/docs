@@ -1,5 +1,5 @@
-Globales & Fonctions
-####################
+Constantes globales et Fonctions
+################################
 
 Alors que la plupart de vos activités quotidiennes avec CakePHP sera
 d'initialiser des classes du noyau, CakePHP dispose d'un certain nombre de
@@ -52,7 +52,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
-    Vous permet de remplacer le domaine courant lors de la recherche d'un
+    Vous permet de remplacer le domaine courant lors de la recherche d'un 
     message.
 
     Utile pour internationaliser un plugin:
@@ -62,10 +62,10 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Vous permet de remplacer le domaine courant pour la recherche d'un message.
     Permet également de spécifier une catégorie.
-
+    
     Notez que la catégorie doit être spécifiée avec une constante de classe I18n
     au lieu du nom de la constante. Les valeurs sont:
-
+   
     - I18n::LC_ALL - LC_ALL
     - I18n::LC_COLLATE - LC_COLLATE
     - I18n::LC_CTYPE - LC_CTYPE
@@ -84,7 +84,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Notez que la catégorie doit être spécifiée avec des une constante de classe
     I18n, au lieu des noms de constantes. Les valeurs sont:
-
+   
     - I18n::LC_ALL - LC_ALL
     - I18n::LC_COLLATE - LC_COLLATE
     - I18n::LC_CTYPE - LC_CTYPE
@@ -99,11 +99,11 @@ CakePHP, comme le débogage et la traduction de contenu.
     au pluriel d'un message. Retourne la forme pluriel correcte d'un
     message identifié par $singular et $plural pour le compteur $count
     depuis le domaine $domain.
-
+  
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     Retourne la forme correcte d'un message identifié par $singular et $plural
-    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel
+    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
     dépendant du compteur
 
 .. php:function:: collection(mixed $items)
@@ -132,11 +132,11 @@ CakePHP, comme le débogage et la traduction de contenu.
     de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
     (notamment si vous prévoyez de distribuer le code), puisque
     c'est un wrapper d'émulation totale.
-
+    
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
     Raccourci pratique pour ``htmlspecialchars()``.
-
+ 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     Divise le nom d'un plugin en notation par point en plugin et classname
@@ -169,7 +169,7 @@ dans votre application.
 
     Chemin vers le répertoire de cache. il peut être partagé entre les
     hôtes dans une configuration multi-serveurs.
-
+    
 .. php:const:: CAKE
 
     Chemin vers le répertoire de CAKE.
@@ -206,7 +206,7 @@ dans votre application.
 .. php:const:: WEBROOT_DIR
 
     La même chose que ``webroot`` ou le nom du répertoire webroot.
-
+    
 .. php:const:: WWW\_ROOT
 
     Chemin d'accès complet vers la racine web (webroot).
@@ -218,7 +218,7 @@ Définition de Constantes de Temps
 
     timestamp Unix en microseconde au format float du démarrage de
     l'application.
-
+  
 .. php:const:: SECOND
 
     Égale à 1

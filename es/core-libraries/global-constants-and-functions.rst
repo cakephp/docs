@@ -1,5 +1,5 @@
-Constants & Functions
-#####################
+Global Constants and Functions
+##############################
 
 .. note::
     Esta página todavía no ha sido traducida y pertenece a la documentación de

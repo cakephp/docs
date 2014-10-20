@@ -1,5 +1,5 @@
 # MakeFile for building all the docs at once.
-# Inspired by the Makefile used by bazaar.
+# Inspired by the Makefile used by bazaar. 
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
 PYTHON = python
@@ -25,7 +25,7 @@ SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
 #
 # The various formats the documentation can be created in.
-#
+# 
 # Loop over the possible languages and call other build targets.
 #
 html: $(foreach lang, $(LANGS), html-$(lang))
@@ -35,7 +35,6 @@ latex: $(foreach lang, $(PDF_LANGS), latex-$(lang))
 pdf: $(foreach lang, $(PDF_LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
-server: $(foreach lang, $(LANGS), server-$(lang))
 
 
 # Make the HTML version of the documentation with correctly nested language folders.
@@ -53,9 +52,6 @@ latex-%: $(SPHINX_DEPENDENCIES)
 
 pdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
-
-server-%: $(SPHINX_DEPENDENCIES)
-	cd build/html/$* && python -m SimpleHTTPServer
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
 	php scripts/populate_search_index.php $* $(ES_HOST)
