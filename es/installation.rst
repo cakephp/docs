@@ -12,7 +12,7 @@ Requisitos
 
 - Servidor HTTP. Por ejemplo: Apache. mod\_rewrite es recomendado, pero
   no requerido.
-- PHP 5.4.19 o mayor.
+- PHP 5.4.16 o mayor.
 - extensión mbstring.
 - extensión mcrypt.
 - extensión intl.
@@ -43,7 +43,7 @@ para incorporar CakePHP en cualquier aplicación comercial o de código cerrado.
 Instalando CakePHP
 ==================
 
-CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo de 
+CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo de
 dependicias para PHP 5.3+, como el método de instalación oficialmente soportado.
 
 Primero, necesitas descargar e instalar Composer, si no lo has hecho ya.
@@ -51,7 +51,7 @@ Si tienes instalado cURL, es tan fácil como correr esto en un terminal::
 
     curl -s https://getcomposer.org/installer | php
 
-O, puedes descargar ``composer.phar`` desde el sitio web de 
+O, puedes descargar ``composer.phar`` desde el sitio web de
 `Composer <https://getcomposer.org/download/>`_.
 
 Para sistemas Windows, puedes descargar el Instalador de Composer para Windows
@@ -69,7 +69,7 @@ O si tienes Composer definido globalmente::
     composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Una vez que Composer termine de descargar el esqueleto y la librería core
-de CakePHP, deberías tener una aplicación funcional de CakePHP instalada 
+de CakePHP, deberías tener una aplicación funcional de CakePHP instalada
 vía Composer. Asegúrate de que los ficheros composer.json y composer.lock
 se mantengan junto con el resto de tu código fuente.
 
