@@ -13,6 +13,7 @@ Contents
     controllers
     views
     orm
+    plugins
 
     development/errors
     core-libraries/caching
@@ -30,6 +31,9 @@ Contents
     deployment
     console-and-shells
     core-libraries
+
+    contributing
+    tutorials-and-examples
     appendices
 
 
