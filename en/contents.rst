@@ -26,7 +26,6 @@ Contents
     development/errors
 
     core-libraries/caching
-    core-libraries
     console-and-shells
     development/debugging
     development/dispatch-filters
@@ -43,7 +42,21 @@ Contents
     development/testing
     core-libraries/validation
 
+    core-libraries/app
+    core-libraries/collections
+    core-libraries/file-folder
+    core-libraries/hash
+    core-libraries/httpclient
+    core-libraries/inflector
+    core-libraries/number
+    core-libraries/registry-objects
+    core-libraries/router
+    core-libraries/security
+    core-libraries/string
+    core-libraries/time
+    core-libraries/xml
 
+    core-libraries/global-constants-and-functions
     appendices
 
 .. todolist::
