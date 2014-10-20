@@ -15,7 +15,7 @@ this guide for all the new features and API changes.
 Requirements
 ============
 
-- CakePHP 3.x supports PHP Version 5.4.19 and above.
+- CakePHP 3.x supports PHP Version 5.4.16 and above.
 - CakePHP 3.x requires the mbstring extension.
 - CakePHP 3.x requires the mcrypt extension.
 

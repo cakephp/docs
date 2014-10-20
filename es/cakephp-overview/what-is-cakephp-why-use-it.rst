@@ -29,7 +29,7 @@ CakePHP:
 
 - :ref:`cakephp-official-communities` activa y amigable.
 - `Licencia flexible <http://en.wikipedia.org/wiki/MIT_License>`_
-- Compatible con las versiones de PHP 5.4.19 y superiores.
+- Compatible con las versiones de PHP 5.4.16 y superiores.
 - Contiene
   `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ para la
   interacción de la base de datos.
