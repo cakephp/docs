@@ -1144,7 +1144,7 @@ Security
 - Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
   to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
   version of CakePHP 2.x before migrating.
-- The ability to generate blowfish hash been removed. You can no longer use type
+- The ability to generate a blowfish hash has been removed. You can no longer use type
   "blowfish" for ``Security::hash()``. One should just use PHP's `password_hash()`
   and `password_verify()` to generate and verify blowfish hashes. The compability
   library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_.
