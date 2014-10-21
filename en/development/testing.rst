@@ -11,7 +11,7 @@ Installing PHPUnit
 ==================
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
-standard for unit testing in PHP.  It offers a deep and powerful set of features
+standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
 <http://getcomposer.org>`_.
@@ -31,7 +31,7 @@ directory::
 
 You can now run PHPUnit using::
 
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 Using the PHAR File
 -------------------
@@ -80,7 +80,7 @@ application's tests::
     $ php phpunit.phar
 
     // For Composer installed phpunit
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
 To run a specific test you can supply the path to the test as a parameter to
@@ -1221,7 +1221,7 @@ of your testing results:
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
+    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
