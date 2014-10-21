@@ -1,5 +1,5 @@
-Simple Authentication and Authorization Application
-###################################################
+Blog Tutorial - Authentication and Authorization
+################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
 secure access to certain URLs, based on the logged-in
