@@ -165,7 +165,6 @@ configuration complet pourrait ressembler à ce qui suit::
                 'login' => 'cake_blog',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
-                'prefix' => false,
                 'encoding' => 'utf8',
                 'timezone' => 'UTC'
             ],
