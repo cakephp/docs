@@ -1,5 +1,5 @@
-Blog Tutorial - Adding a Layer
-##############################
+Blog Tutorial - Part 2
+######################
 
 Create an Article Model
 =======================
