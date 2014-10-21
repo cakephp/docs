@@ -600,7 +600,7 @@ pouvez l'activer en utilisant le paramètre ``quoteIdentifiers`` dans votre
 :ref:`database-configuration`. Vous pouvez aussi activer cette fonctionnalité
 à la volée::
 
-    $conn->quoteIdentifiers(true);
+    $conn->driver()->autoQuoting(true);
 
 Quand elle est activée, l'identifier quoting va entrainer des requêtes
 supplémentaires traversal qui convertissent tous les identifiers en objets
