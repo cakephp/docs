@@ -1055,6 +1055,12 @@ associations and filter them by conditions::
         }
     ]);
 
+.. note::
+
+    When you limit the fields that are fetched from an association, you **must**
+    ensure that the foreign key columns are selected. Failing to select foreign
+    key fields will cause associated data to not be present in the final result.
+
 Is is also possible to restrict deeply nested associations using the dot
 notation::
 
@@ -1477,7 +1483,15 @@ plural, camel cased version the association name. For example::
     $articles->save($article);
 
 When saving hasMany associations, associated records will either be updated, or
-inserted. The ORM will not remove or 'sync' a hasMany association.
+inserted. The ORM will not remove or 'sync' a hasMany association. Whenever you
+add new records into an existing association you should always mark the
+association property as 'dirty'. This lets the ORM know that the association
+property has to be persisted::
+
+    $article->comments[] = $comment;
+    $article->dirty('comments', true);
+
+Without the call to ``dirty()`` the updated comments will not be saved.
 
 Saving BelongsToMany Associations
 ---------------------------------
@@ -1507,16 +1521,24 @@ When saving belongsToMany associations, you have the choice between 2 saving
 strategies:
 
 append
-    Only new links will be created between each side of this association. It
-    will not destroy existing links even though they may not be present in the
-    array of entities to be saved.
+    Only new links will be created between each side of this association. This
+    strategy will not destroy existing links even though they may not be present
+    in the array of entities to be saved.
 replace
     When saving, existing links will be removed and new links will be created in
     the joint table. If there are existing link in the database to some of the
     entities intended to be saved, those links will be updated, not deleted and
     then re-saved.
 
-By default the ``replace`` strategy is used.
+By default the ``replace`` strategy is used. Whenever you add new records into
+an existing association you should always mark the association property as
+'dirty'. This lets the ORM know that the association property has to be
+persisted::
+
+    $article->tags[] = $tag;
+    $article->dirty('tags', true);
+
+Without the call to ``dirty()`` the updated tags will not be saved.
 
 Saving Additional Data to the Joint Table
 -----------------------------------------

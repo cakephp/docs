@@ -304,7 +304,6 @@ la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons cela. D
         ];
         return $this->find()
             ->distinct($fields)
-            ->contain('Tags')
             ->matching('Tags', function($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });

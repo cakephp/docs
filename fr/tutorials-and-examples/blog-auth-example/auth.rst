@@ -1,5 +1,5 @@
-Application avec une Authentification Simple et des Autorisations
-#################################################################
+Tutoriel d'un Blog - Authentification et Autorisations
+######################################################
 
 Suivez notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons que
 nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion

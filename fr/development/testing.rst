@@ -33,7 +33,7 @@ répertoire d'application::
 
 Vous pouvez maintenant lancer PHPUnit en utilisant::
 
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 Utiliser le fichier PHAR
 ------------------------
@@ -83,7 +83,7 @@ lancer vos propres tests en lancant un de ceux présents dans le coeur::
     $ php phpunit.phar
 
     // Pour un PHPUnit installé avec Composer
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
 qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fournir
@@ -1277,7 +1277,7 @@ graphique sympa des résultats de votre test:
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
+    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 Si vous utilisez le clover coverage, ou les résultats junit, assurez-vous de
 les configurer aussi dans Jenkins. Ne pas configurer ces étapes signifiera

@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-==================
+##################
 
 Ce tutoriel vous accompagnera à travers la création d'une simple application
 de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons

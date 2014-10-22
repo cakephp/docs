@@ -1,5 +1,5 @@
-Blog Tutoriel - Ajouter la logique
-==================================
+Tutoriel d'un Blog - Partie 2
+#############################
 
 Créer un Model Article
 ======================
