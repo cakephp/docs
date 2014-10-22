@@ -786,7 +786,7 @@ the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function(\Cake\ORM\ResultSetInterface $results, \Cake\Database\Query $query) {
+    $query->formatResults(function(\Cake\ORM\ResultSet $results, \Cake\Database\Query $query) {
         return $results->map(function($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
