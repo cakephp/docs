@@ -830,7 +830,7 @@ computed values are inserted into the correct entity.
 Modifying Results with Map/Reduce
 ==================================
 
-More often than not, find operations require post-processing the data that is
+More often than not, find operations require post-processing of the data that is
 found in the database. While entities' getter methods can take care of most of
 the virtual property generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
