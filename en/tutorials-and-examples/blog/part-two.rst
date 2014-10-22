@@ -166,7 +166,7 @@ array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
 specify URLs relative to the base of the application in the form of
-``/controller/action/param1/param2`` or use :ref:`named-routes`.
+``/controller/action/param1/param2`` or use :ref:`named routes <named-routes>`.
 
 At this point, you should be able to point your browser to
 http://www.example.com/articles/index. You should see your view,
@@ -613,7 +613,9 @@ route. It looks like this:
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
-with this one::
+with this one:
+
+.. code-block:: php
 
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
