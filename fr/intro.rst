@@ -9,7 +9,7 @@ que séparément.
 Le but de cette présentation est d'introduire les concepts généraux de CakePHP,
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
 œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, cous pouvez
-:doc:`commencer avec le tutoriel </tutorials-and-examples/blog/blog>`, ou
+:doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
 :doc:`plonger dans la documentaion </topics>`.
 
 Conventions plutôt que de Configuration
@@ -165,7 +165,7 @@ fonctionnalités de CakePHP sont:
 
 Les prochaines étapes évidentes sont de :doc:`télécharger CakePHP </installation>`
 , lire le
-:doc:`tutoriel et construire un truc génial </tutorials-and-examples/blog/blog>`.
+:doc:`tutoriel et construire un truc génial </tutorials-and-examples/bookmarks/intro>`.
 
 Lectures Complémentaires
 ========================
