@@ -10,6 +10,11 @@ Vous pouvez utilisez le `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 
+Langue
+======
+
+Tout code et commentaire doit être écrit en Anglais.
+
 Ajout de Nouvelles Fonctionnalités
 ==================================
 
@@ -252,60 +257,130 @@ lignes distinctes et indentées avec une tabulation::
         ->subject('Un super message')
         ->send();
 
-Commenter le Code
-=================
+DocBlocks
+=========
 
-Tous les commentaires doivent être écrits en anglais, et doivent clairement
-décrire le block de code commenté.
+Tous les blocs de commentaire, à l'exception du premier bloc dans un fichier,
+doit toujours être précédé d'une ligne vierge.
 
-Les commentaires doivent inclure les tags de
-`phpDocumentor <http://phpdoc.org>`_ suivants:
+DocBlock d'Entête de Fichier
+----------------------------
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+Tous les fichier PHP doivent contenir un DocBlock d'en-tête, qui doit
+ressembler à cela::
+
+    <?php
+    /**
+    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    *
+    * Licensed under The MIT License
+    * For full copyright and license information, please see the LICENSE.txt
+    * Redistributions of files must retain the above copyright notice.
+    *
+    * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    * @link          http://cakephp.org CakePHP(tm) Project
+    * @since         X.Y.Z
+    * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+    */
+
+les tags `phpDocumentor <http://phpdoc.org>`_ à inclure sont:
+
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+
+
+DocBlocks de Classe
+-------------------
+
+Les DocBlocks de classe doivent ressembler à ceci::
+
+    /**
+     * Short description of the class.
+     *
+     * Long description of class.
+     * Can use multiple lines.
+     *
+     * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+     * @see Bar
+     * @link http://book.cakephp.org/2.0/en/foo.html
+     */
+    class Foo {
+
+    }
+
+Class DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+
+DocBlocks des Attributs
+-----------------------
+
+Les DocBlocks des attribus doivent ressembler à cela::
+
+    /**
+     * @var string|null Description of property.
+     *
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
+     * @see Bar::$_bla
+     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     */
+    protected $_bar = null;
+
+Les DocBlocks des attributs peuvent contenir les tags `phpDocumentor <http://phpdoc.org>`_ suivant:
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
-Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans
-Java. Les tags sont seulement traités si ils sont la première chose dans la
-ligne DocBlock, par exemple::
+DocBlocks des Méthodes/Fonctions
+--------------------------------
 
-    /**
-     * Exemple de Tag.
-     *
-     * @author ce tag est analysé, mais @version est ignoré
-     * @version 1.0 ce tag est aussi analysé
-     */
-
-::
+Les DocBlocks de méthode ou de fonctions doivent ressembler à ceci::
 
     /**
-     * Exemple de tag inline phpDoc.
+     * Short description of the method.
      *
-     * Cette fonction travaille dur avec foo() pour gouverner le monde.
+     * Long description of method.
+     * Can use multiple lines.
      *
-     * @return void
-     */
-    function bar() {
-    }
+     * @param string $param2 first parameter.
+     * @param array|null $param2 Second parameter.
+     * @return array An array of cakes.
+     * @throws Exception If something goes wrong.
+     *
+     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
+     * @see Bar::baz
+     /*
+     public function bar($param1, $param2 = null) {
+     }
 
-    /**
-     * Foo function
-     *
-     * @return void
-     */
-    function foo() {
-    }
+Les DocBlocks des méthodes/fonctions peuvent contenir les tags `phpDocumentor <http://phpdoc.org>`_ suivant:
 
-Les blocks de commentaires, avec une exception du premier block dans le
-fichier, doivent toujours être précédés par un retour à la ligne.
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 Types de Variables
 ------------------
