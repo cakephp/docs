@@ -10,7 +10,6 @@ Alternatively, you can refer to the non-official CakePHP plugin repository
 and components.
 
 .. toctree::
-    :glob:
     :maxdepth: 1
 
     tutorials-and-examples/bookmarks/intro
