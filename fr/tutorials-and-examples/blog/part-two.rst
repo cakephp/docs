@@ -36,7 +36,7 @@ de la base de données appelée ``articles``.
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans /src/Model/Table. Cela veut aussi dire que
+    pas le fichier correspondant dans ``src/Model/Table``. Cela veut aussi dire que
     si vous n'avez pas nommé correctement votre fichier (par ex.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
@@ -122,8 +122,8 @@ défaut.
 
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
-Cela devrait transmettre les données à la vue qui ressemblerait à quelque
-chose comme cela::
+Cela devrait transmettre l'objet query à la vue  pour être invoqué par une
+itération ``foreach``.
 
 Les fichiers des vues de CakePHP sont stockés dans ``src/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
@@ -175,16 +175,17 @@ Lorsque vous indiquez des URLs dans CakePHP, il est recommandé d'utiliser les
 tableaux. Ceci est expliqué dans le chapitre des Routes. Utiliser les tableaux
 dans les URLs vous permet de tirer profit des capacités de CakePHP à
 ré-inverser les routes. Vous pouvez aussi utiliser les URLs relatives depuis
-la base de l'application comme suit /controller/action/param1/param2.
+la base de l'application sous la forme ``/controller/action/param1/param2`` ou
+en utilisant les :ref:`routes nommées <named-routes>`.
 
 A ce stade, vous devriez être en mesure de pointer votre navigateur sur la
 page http://www.exemple.com/articles/index. Vous devriez voir votre vue,
 correctement formatée avec le titre et le tableau listant les articles.
 
 Si vous avez essayé de cliquer sur l'un des liens que nous avons créés dans
-cette vue (le lien sur le titre d'un article mène à l'URL :
-/articles/view/un_id_quelconque), vous avez sûrement été informé par CakePHP que
-l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
+cette vue (le lien sur le titre d'un article mène à l'URL 
+``/articles/view/un_id_quelconque``), vous avez sûrement été informé par CakePHP
+que l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
 tarder dans le Controller Articles::
@@ -193,7 +194,7 @@ tarder dans le Controller Articles::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
+    use Cake\Network\Exception\NotFoundException;
 
     class ArticlesController extends AppController {
 
@@ -205,9 +206,7 @@ tarder dans le Controller Articles::
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
-
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
     }
@@ -231,11 +230,11 @@ existe. Dans le cas où l'article requêté n'est pas présent dans la base de
 données, la fonction ``get()`` va lancer une ``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
-dans ``/src/Template/Articles/view.ctp``.
+dans ``src/Template/Articles/view.ctp``.
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/view.ctp -->
+    <!-- File: src/Template/Articles/view.ctp -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -333,7 +332,7 @@ L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
 interrompra l'enregistrement si une erreur survient. Nous verrons
 la façon dont les erreurs sont traitées dans les sections suivantes.
 
-Valider les données
+Valider les Données
 ===================
 
 Cake place la barre très haute pour briser la monotonie de la validation des
@@ -350,7 +349,7 @@ Voici le code de notre vue "add" (ajout):
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/add.ctp -->
+    <!-- File: src/Template/Articles/add.ctp -->
 
     <h1>Add Article</h1>
     <?php
@@ -381,12 +380,12 @@ d'options - dans ce cas, le nombre de lignes du textarea. Il y a un peu
 d'introspection et "d'automagie" ici : ``input()`` affichera différents
 éléments de formulaire selon le champ spécifié du model.
 
-L'appel de la méthode ``$this->Form->end()`` cloture le formulaire. Encore
-une fois, référez-vous au chapitre :doc:`/views/helpers` pour en savoir plus
-sur les helpers.
+L'appel de la méthode ``$this->Form->end()`` cloture le formulaire. Affiche les
+champs cachés si la protection de falsification de formulaire et/ou CRSF est
+activée.
 
 A présent, revenons en arrière et modifions notre vue
-``/src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
+``src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
@@ -473,7 +472,7 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/edit.ctp -->
+    <!-- File: src/Template/Articles/edit.ctp -->
 
     <h1>Edit Article</h1>
     <?php
@@ -487,17 +486,15 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
 
-Une chose à noter ici : CakePHP supposera que vous éditez un model si le champ
-'id' est présent dans le tableau de données. S'il n'est pas présent (ce qui
-revient à notre vue add), CakePHP supposera que vous insérez un nouveau model
-lorsque ``save()`` sera appelée.
+CakePHP utilisera le résultat de ``$article->isNew()`` pour déterminer whether si
+``save()`` doit insérer un article, ou mettre à jour un article existant.
 
 Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 éditer des articles :
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/index.ctp  (liens de modification ajoutés) -->
+    <!-- File: src/Template/Articles/index.ctp  (liens de modification ajoutés) -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link("Ajouter un Article", ['action' => 'add']) ?></p>
@@ -509,7 +506,8 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
             <th>Action</th>
         </tr>
 
-    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+    <!-- C'est ici que nous itérons à travers notre objet query $articles, -->
+    <!-- en affichant les informations de l'article -->
 
     <?php foreach ($articles as $article): ?>
         <tr>
@@ -535,6 +533,8 @@ A présent, mettons en place un moyen de supprimer les articles pour les
 utilisateurs. Démarrons avec une action ``delete()`` dans le controller
 Articles (ArticlesController)::
 
+    // src/Controller/ArticlesController.php
+
     public function delete($id) {
         $this->request->allowMethod(['post', 'delete']);
 
@@ -551,7 +551,7 @@ confirmation après l'avoir redirigé sur ``/articles``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de
 CakePHP et un joli message d'erreur est affiché. Il y a plusieurs
-:doc:`/development/exceptions` intégrées qui peuvent être utilisées pour
+:doc:`Exceptions </development/errors>` intégrées qui peuvent être utilisées pour
 indiquer les différentes erreurs HTTP que votre application pourrait
 rencontrer.
 
@@ -562,7 +562,7 @@ articles, ainsi :
 
 .. code-block:: php
 
-    <!-- File: /src/Template/Articles/index.ctp -->
+    <!-- File: src/Template/Articles/index.ctp -->
 
     <h1>Blog articles</h1>
     <p><?= $this->Html->link('Ajouter un Article', ['action' => 'add']) ?></p>
@@ -574,7 +574,8 @@ articles, ainsi :
             <th>Actions</th>
         </tr>
 
-    <!-- Here's where we loop through our $articles query object, printing out article info -->
+    <!-- C'est ici que nous itérons à travers notre objet query $articles, -->
+    <!-- en affichant les informations de l'article -->
 
         <?php foreach ($articles as $article): ?>
         <tr>
@@ -626,15 +627,19 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Articles
 (ArticlesController).
 
-Le routage de CakePHP se trouve dans ``/config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans ``config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
-ressemble à cela ::
+ressemble à cela:
+
+.. code-block:: php
 
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous
 voulons que cette URL soit connectée à notre propre controller, remplacez donc
-la ligne par celle-ci ::
+la ligne par celle-ci:
+
+.. code-block:: php
 
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 

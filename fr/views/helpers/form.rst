@@ -1597,11 +1597,11 @@ Construire une Classe Widget
 ----------------------------
 
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
-implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface` . Cette interface
+implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que la méthde ``render(array $data)`` soit implémentée. La méthode
-render attend un tableau de données pour constuire le widget et doit revoyer
+render attend un tableau de données pour constuire le widget et doit renvoyer
 un chaine HTML pourle widget. Si CakePHP construit votre widget, vous pouvez
-vous attendre à recevoir une instance de ``Cake\View\StringTemplate``en premier
+vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
 argument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez
 construire un widget Autocomplete, vous pouvez le faire comme ceci::
     

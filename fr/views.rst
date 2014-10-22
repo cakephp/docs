@@ -398,7 +398,7 @@ les fichiers JavaScript et les CSS à partir des vues.
 .. note::
 
     Quand vous utilisez ``HtmlHelper::css()`` ou
-     ``HtmlHelper::script()`` dans les fichiers de vues, spécifiez
+    ``HtmlHelper::script()`` dans les fichiers de vues, spécifiez
     ``'block' => true`` pour placer la source html dans un
     block avec le même nom. (Regardez l'API pour plus de détails sur leur
     utilisation).

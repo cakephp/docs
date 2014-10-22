@@ -302,6 +302,7 @@ Toutes les exceptions Http et CakePHP étendent la classe Exception, qui
 a une méthode pour ajouter les en-têtes à la réponse. Par exemple quand vous
 lancez une MethodNotAllowedException 405,
 le rfc2616 dit:
+
     "La réponse DOIT inclure un en-tête contenant une liste de méthodes valides
     pour la ressource requêtée."
 
