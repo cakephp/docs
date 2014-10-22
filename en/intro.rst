@@ -8,7 +8,7 @@ work well together or separately.
 The goal of this overview is to introduce the general concepts in CakePHP, and
 give you a quick overview of how those concepts are implemented in CakePHP. If
 you are itching to get started on a project, you can :doc:`start with the
-tutorial </tutorials-and-examples/bookmarks/intro`, or :doc:`dive into the docs
+tutorial </tutorials-and-examples/bookmarks/intro>`, or :doc:`dive into the docs
 </topics>`.
 
 Conventions Over Configuration
