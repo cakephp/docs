@@ -41,8 +41,8 @@ many to many  hasAndBelongsToMany   Recipes have, and belong to, many ingredient
 ============= ===================== =======================================
 
 To further clarify which way around the associations are defined in the models:
-If the table of the model contains the foreign key (other_model_id), the relation type
-in this model is a Model **belongsTo** OtherModel relation, ever!
+If the table of the model contains the foreign key (other_model_id), the relation
+type in this model is **always** a Model **belongsTo** OtherModel relation!
 
 
 Associations are defined by creating a class variable named after
