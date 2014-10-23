@@ -111,10 +111,10 @@ alphabétique ("pommes\_zebres" plutôt que "zebres\_pommes").
 Conventions des Views
 =====================
 
-Les fichiers de template de vue sont nommés d'après les fonctions
+Les fichiers de template de view sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
-de vue dans ``/src/Template/People/soyez\_pret.ctp``.
+de view dans ``/src/Template/People/soyez\_pret.ctp``.
 
 Le schéma classique est
 ``src/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp``.
