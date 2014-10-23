@@ -311,10 +311,11 @@ Les DocBlocks de classe doivent ressembler à ceci::
 
     }
 
-Class DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ tags:
+Les classes DocBlocks peuvent contenir les tags de
+`phpDocumentor <http://phpdoc.org>`_ suivants:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+   Utiliser le format ``@version <vector> <description>``, où ``version`` et ``description`` sont obligatoires.
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
@@ -325,7 +326,7 @@ Class DocBlocks may contain the following `phpDocumentor <http://phpdoc.org>`_ t
 DocBlocks des Attributs
 -----------------------
 
-Les DocBlocks des attribus doivent ressembler à cela::
+Les DocBlocks des attributs doivent ressembler à cela::
 
     /**
      * @var string|null Description of property.
@@ -336,7 +337,8 @@ Les DocBlocks des attribus doivent ressembler à cela::
      */
     protected $_bar = null;
 
-Les DocBlocks des attributs peuvent contenir les tags `phpDocumentor <http://phpdoc.org>`_ suivant:
+Les DocBlocks des attributs peuvent contenir les tags
+`phpDocumentor <http://phpdoc.org>`_ suivants:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
@@ -369,7 +371,8 @@ Les DocBlocks de méthode ou de fonctions doivent ressembler à ceci::
      public function bar($param1, $param2 = null) {
      }
 
-Les DocBlocks des méthodes/fonctions peuvent contenir les tags `phpDocumentor <http://phpdoc.org>`_ suivant:
+Les DocBlocks des méthodes/fonctions peuvent contenir les tags
+`phpDocumentor <http://phpdoc.org>`_ suivants:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
