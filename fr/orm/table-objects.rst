@@ -416,7 +416,8 @@ Product hasMany Option     Option.product\_id
 Doctor hasMany Patient     Patient.doctor\_id
 ========================== ===================
 
-Nous pouvons définir l'association hasMany dans notre model Articles comme suit::
+Nous pouvons définir l'association hasMany dans notre model Articles comme
+suit::
 
     class ArticlesTable extends Table {
 
@@ -539,7 +540,8 @@ suit::
         }
     }
 
-Nous pouvons aussi définir une relation plus spécifique en utilisant un tableau::
+Nous pouvons aussi définir une relation plus spécifique en utilisant un
+tableau::
 
     class ArticlesTable extends Table {
 
@@ -595,7 +597,8 @@ incluent:
   replace to create the links between the passed entities when saving.
 
 
-Une fois que cette association a été définie, les opérations find sur la table Articles peuvent contenir les enregistrements de Tag si ils existent::
+Une fois que cette association a été définie, les opérations find sur la table
+Articles peuvent contenir les enregistrements de Tag si ils existent::
 
     $query = $articles->find('all')->contain(['Tags']);
     foreach ($query as $article) {
@@ -624,15 +627,21 @@ suit sera générée::
 Utiliser l'Option 'through'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si vous souhaitez ajouter des informations supplémentaires à la table join/pivot, ou si vous avez besoin d'utiliser les colonnes jointes en dehors des conventions, vous devrez définir l'option ``through``. L'option ``through`` vous fournit un contrôle total sur la façon dont l'association belongsToMany sera créé.
+Si vous souhaitez ajouter des informations supplémentaires à la table
+join/pivot, ou si vous avez besoin d'utiliser les colonnes jointes en dehors
+des conventions, vous devrez définir l'option ``through``. L'option ``through``
+vous fournit un contrôle total sur la façon dont l'association belongsToMany
+sera créé.
 
-Il est parfois souhaitable de stocker des données supplémentaires avec une association many to many. Considérez ce qui suit::
+Il est parfois souhaitable de stocker des données supplémentaires avec une
+association many to many. Considérez ce qui suit::
 
     Student BelongsToMany Course
     Course BelongsToMany Student
 
-Un Etudiant (Student) peut prendre plusieurs Cours (many Courses) et un Cours (Course) peut être pris par plusieurs Etudiants (many Students). C'est une simple
-association many to many. La table suivante suffira::
+Un Etudiant (Student) peut prendre plusieurs Cours (many Courses) et un Cours
+(Course) peut être pris par plusieurs Etudiants (many Students). C'est une
+simple association many to many. La table suivante suffira::
 
     id | student_id | course_id
 
@@ -642,10 +651,10 @@ serait::
 
     id | student_id | course_id | days_attended | grade
 
-La façon d'intégrer notre besoin est d'utiliser un **model join**,
-autrement connu comme une association **hasMany through**.
-Ceci étant, l'association est un model lui-même. Donc, nous pouvons créer
-un nouveau model CoursesMemberships. Regardez les models suivants.::
+La façon d'intégrer notre besoin est d'utiliser un **model join**, autrement
+connu comme une association **hasMany through**. Ceci étant, l'association est
+un model lui-même. Donc, nous pouvons créer un nouveau model
+CoursesMemberships. Regardez les models suivants.::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {
@@ -677,94 +686,101 @@ supplémentaires.
 Charger les Entities
 ====================
 
-While table objects provide an abstraction around a 'repository' or collection of
-objects, when you query for individual records you get 'entity' objects. While
-this section discusses the different ways you can find and load entities, you
-should read the :doc:`/orm/entities` section for more information on entities.
+Alors que les objets table fournissent une abstraction autour d'un 'dépôt' ou
+d'une collection d'objets, quand vous faîtes une requête pour des
+enregistrements individuels, vous récupérez des objets 'entity'. Cette section
+parle des différentes façons pour trouver et charger les entities, mais vous
+pouvez lire la section :doc:`/orm/entities` pour plus d'informations sur les
+entities.
 
-Getting a Single Entity by Primary Key
---------------------------------------
+Récupérer une Entity Unique avec une Clé Primaire
+-------------------------------------------------
 
 .. php:method:: get($id, $options = [])
 
-It is often convienent to load a single entity from the database when editing or
-view entities and their related data. You can do this easily by using
-``get()``::
+C'est souvent pratique de charger une entity unique à partir de la base de
+données quand vous modifiez ou visualisez les entities et leurs données liées.
+Vous pouvez faire ceci facilement en utilisant ``get()``::
 
-    // Get a single article
+    // Récupère un article unique
     $article = $articles->get($id);
 
-    // Get a single article, and related comments
+    // Récupère un article unique, et les commentaires liés
     $article = $articles->get($id, [
         'contain' => ['Comments']
     ]);
 
-If the get operation does not find any results
-a ``Cake\ORM\Error\RecordNotFoundException`` will be raised. You can either
-catch this exception yourself, or allow CakePHP to convert it into a 404 error.
+Si l'opération get ne trouve aucun résultats, une
+``Cake\ORM\Error\RecordNotFoundException`` sera levée. Vous pouvez soit
+attraper cette exception vous-même, ou permettre à CakePHP de la convertir en
+une erreur 404.
 
-Like ``find()`` get has caching integrated. You can use the ``cache`` option
-when calling ``get()`` to perform read-through caching::
+Comme ``find()``, get a un cache intégré. Vous pouvez utiliser l'option
+``cache`` quand vous appelez ``get()`` pour appliquer la mise en cache::
 
-     // Use any cache config or CacheEngine instance & a generated key
+     // Utilise toute config de cache ou une instance de CacheEngine & une clé générée
     $article = $articles->get($id, [
         'cache' => 'custom',
     ]);
 
-    // Use any cache config or CacheEngine instance & specific key
+    // Utilise toute config de cache ou une instance de CacheEngine & une clé spécifique
     $article = $articles->get($id, [
         'cache' => 'custom', 'key' => 'mykey'
     ]);
 
-    // Explicitly disable caching
+    // Désactive explicitement la mise en cache
     $article = $articles->get($id, [
         'cache' => false
     ]);
 
-Using Finders to Load Data
---------------------------
+Utiliser les Finders pour charger les Données
+---------------------------------------------
 
 .. php:method:: find($type, $options = [])
 
-Before you can work with entities, you'll need to load them. The easiest way to
-do this is using the ``find`` method. The find method provides an easy and
-extensible way to find the data you are interested in::
+Avant de travailler avec les entities, vous devrez les charger. La façon la
+plus facile de le faire est d'utiliser la méthode ``find``. La méthode find
+fournit un moyen facile et extensible pour trouver les données qui vous
+intéressent::
 
-    // Find all the articles
+    // Trouver tous les articles
     $query = $articles->find('all');
 
-The return value of any ``find`` method is always
-a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
-refine a query after creating it. Query objects are evaluated lazily, and do not
-execute until you start fetching rows, convert it to an array, or when the
-``all()`` method is called::
+La valeur retournée de toute méthode ``find`` est toujours un objet
+:php:class:`Cake\\ORM\\Query`. La classe Query vous permet de redéfinir
+une requête plus tard après l'avoir créée. Les objets Query sont évalués
+lazily, et ne s'exéxutent qu'à partir du moment où vous commencer à récupérer
+des lignes, les convertisser en tableau, ou quand la méthode
+``all()`` est appelée::
 
-    // Find all the articles.
-    // At this point the query has not run.
+    // Trouver tous les articles.
+    // A ce niveau, la requête n'est pas lancée.
     $query = $articles->find('all');
 
-    // Iteration will execute the query.
+    // L'itération va executer la requête.
     foreach ($query as $row) {
     }
 
-    // Calling execute will execute the query
-    // and return the result set.
+    // Appeler execute va exceuter la requête
+    // et retourne l'ensemble de résultats.
     $results = $query->all();
 
-    // Converting the query to an array will execute it.
+    // Convertir la requête en tableau va l'executer.
     $results = $query->toArray();
 
-Once you've started a query you can use the :doc:`/orm/query-builder` interface
-to build more complex queries, adding additional conditions, limits, or include
-associations using the fluent interface::
+Une fois que vous avez commencé une requête, vous pouvez utiliser l'interface
+:doc:`/orm/query-builder` pour construire des requêtes plus complexes, d'ajouter
+des conditions supplémentaires, des limites, ou d'inclure des associations
+en utilisant l'interface courante::
 
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
         ->contain(['Comments', 'Authors'])
         ->limit(10);
 
-You can also provide many commonly used options to ``find()``. This can help
-with testing as there are fewer methods to mock::
+Vous pouvez aussi fournir plusieurs options couramment utilisées avec
+``find()``. Ceci peut aider pour le test puisqu'il y a peu de méthodes à
+mocker::
 
     $query = $articles->find('all', [
         'conditions' => ['Articles.created >' => new DateTime('-10 days')],
@@ -772,64 +788,67 @@ with testing as there are fewer methods to mock::
         'limit' => 10
     ]);
 
-The list of options supported by find() are:
+La liste d'options supportées par find() sont:
 
-- ``conditions`` provide conditions for the WHERE clause of your query.
-- ``limit`` Set the number of rows you want.
-- ``offset`` Set the page offset you want. You can also use ``page`` to make
-  the calculation simpler.
-- ``contain`` define the associations to eager load.
-- ``fields`` limit the fields loaded into the entity. Only loading some fields
-  can cause entities to behave incorrectly.
-- ``group`` add a GROUP BY clause to your query. This is useful when using
-  aggregating functions.
-- ``having`` add a HAVING clause to your query.
-- ``join`` define additional custom joins.
-- ``order`` order the result set.
+- ``conditions`` fournit conditions pour la clause WHERE de la requête.
+- ``limit`` Définit le nombre de lignes que vous voulez.
+- ``offset`` Définit l'offset de la page que vous souhaitez. Vous pouvez aussi
+  utiliser ``page`` pour faciliter le calcul.
+- ``contain`` définit les associations à charger en eager.
+- ``fields`` limite les champs chargés dans l'entity. Charger seulement quelques
+  champs peut faire que les entities se comportent de manière incorrecte.
+- ``group`` ajoute une clause GROUP BY à votre requête. C'est utile quand vous
+  utiliser les fonctions d'aggrégation.
+- ``having`` ajoute une clause HAVING à votre requête.
+- ``join`` définit les jointures personnalisées supplémentaires.
+- ``order`` ordonne l'ensemble de résultats.
 
-Any options that are not in this list will be passed to beforeFind listeners
-where they can be used to modify the query object. You can use the
-``getOptions`` method on a query object to retrieve the options used.
+Toute option qui n'est pas dans la liste sera passée aux listeners de beforeFind
+où ils peuvent être utilisés pour modifier l'objet requête. Vous pouvez utiliser
+la méthode ``getOptions`` sur un objet query pour récupérer les options
+utilisées.
 
 .. _table-find-first:
 
-Getting the First Result
-------------------------
+Récupérer les Premiers Résultats
+--------------------------------
 
-The ``first()`` method allows you to fetch only the first row from a query. If
-the query has not been executed, a ``LIMIT 1`` clause will be applied::
+La méthode ``first()`` vous permet de récupérer seulement la première ligne
+à partir d'une query. Si la query n'a pas été executée, une clause ``LIMIT 1``
+sera appliquée::
 
     $query = $articles->find('all', [
         'order' => ['Article.created' => 'DESC']
     ]);
     $row = $query->first();
 
-This approach replaces ``find('first')`` in previous versions of CakePHP. You
-may also want to use the ``get()`` method if you are loading entities by primary
-key.
+Cette approche remplace le ``find('first')`` des versions précédentes de
+CakePHP. Vous pouvez aussi utiliser la méthode ``get()`` si vous chargez les
+entities avec leur clé primaire.
 
 .. _table-find-list:
 
-Finding Key/Value Pairs
------------------------
+Trouver les Paires de Clé/Valeur
+--------------------------------
 
-It is often useful to generate an associative array of data from your application's
-data. For example, this is very useful when creating `<select>` elements. CakePHP
-provides a simple to use method for generating 'lists' of data::
+C'est souvent pratique pour générer un tableau associatif de données à partir
+des données de votre applications. Par exemple, c'est très utile quand vous
+créez des elements `<select>`. CakePHP fournit une méthode simple à utiliser
+pour générer des 'lists' de données::
 
     $query = $articles->find('list');
     $data = $query->toArray();
 
-    // Data now looks like
+    // Les données ressemblent maintenant à ceci
     $data = [
         1 => 'First post',
         2 => 'Second article I wrote',
     ];
 
-With no additional options the keys of ``$data`` will be the primary key of your
-table, while the values will be the 'displayField' of the table. You can use the
-``displayField()`` method on a table object to configure the display field on
-a table::
+Avec aucune option supplémentaire, les clés de ``$data`` seront la clé primaire
+de votre table, alors que les valeurs seront le 'displayField' (champAAfficher)
+de la table. Vous pouvez utiliser la méthode ``displayField()`` sur un objet
+table pour configurer le champ à afficher sur une table::
 
     class Articles extends Table {
 
@@ -838,22 +857,24 @@ a table::
         }
     }
 
-When calling ``list`` you can configure the fields used for the key and value with
-the ``idField`` and ``valueField`` options respectively::
+Quand vous appelez ``list``, vous pouvez configurer les champs utilisés pour
+la clé et la valeur avec respectivement les options ``idField`` et
+``valueField``::
 
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
-    // Data now looks like
+    // Les données ressemblent maintenant à
     $data = [
         'first-post' => 'First post',
         'second-article-i-wrote' => 'Second article I wrote',
     ];
 
-Results can be grouped into nested sets. This is useful when you want
-bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
+Les résultats peuvent être groupés en des ensembles imbriqués. C'est utile
+quand vous voulez des ensemble bucketed ou que vous voulez construire des
+elements ``<optgroup>`` avec FormHelper::
 
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title',
@@ -861,7 +882,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
     ]);
     $data = $query->toArray();
 
-    // Data now looks like
+    // Les données ressemblent maintenant à
     $data = [
         1 => [
             'first-post' => 'First post',
@@ -872,18 +893,18 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
         ]
     ];
     
-Finding Threaded Data
----------------------
+Trouver des Données Threaded
+----------------------------
 
-The ``find('threaded')`` finder returns nested entities that are threaded
-together through a key field. By default this field is ``parent_id``. This
-finder allows you to easily access data stored in an 'adjacency list' style
-table. All entities matching a given ``parent_id`` are placed under the
-``children`` attribute::
+Le finder ``find('threaded')`` retourne les entities imbriquées qui sont
+threaded ensemble à travers un champ clé. Par défaut, ce champ est
+``parent_id``. Ce finder vous permet d'accéder facilement aux données stockées
+dans une table de style 'liste adjacente'. Toutes les entities qui matchent
+un ``parent_id`` donné sont placées sous l'attribut ``children``::
 
     $query = $comments->find('threaded');
 
-    // Expanded default values
+    // Expanded les valeurs par défaut
     $query = $comments->find('threaded', [
         'idField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
@@ -893,26 +914,27 @@ table. All entities matching a given ``parent_id`` are placed under the
     echo count($results[0]->children);
     echo $results[0]->children[0]->comment;
 
-The ``parentField`` and ``idField`` keys can be used to define the fields that
-threading will occur on.
+Les clés ``parentField`` et ``idField`` peuvent être utilisées pour définir
+les champs sur lesquels le threading va être.
 
 .. tip::
-    If you need to manage more advanced trees of data, consider using
-    :doc:`/orm/behaviors/tree` instead.
+    Si vous devez gérer des données en arbre plus compliquées, pensez à
+    utiliser :doc:`/orm/behaviors/tree` à la place.
 
 .. _custom-find-methods:
 
-Custom Finder Methods
----------------------
+Méthodes Finder Personnalisées
+------------------------------
 
-The examples above show how to use the built-in ``all`` and ``list`` finders.
-However, it is possible and recommended that you implement your own finder
-methods. Finder methods are the ideal way to package up commonly used queries,
-allowing you to abstract query details into a simple to use method. Finder
-methods are defined by creating methods following the convention of ``findFoo``
-where ``Foo`` is the name of the finder you want to create. For example if we
-wanted to add a finder to our articles table for finding published articles we
-would do the following::
+Les exemples ci-dessus montrent la façon d'utiliser les finders intégrés
+``all`` et ``list``. Cependant, il est possible et recommandé d'intégrer
+vos propres méthodes finder. Les méthodes finder sont idéales pour faire
+des packages de requêtes utilisées couramment, vous permettant de faire
+abstraction de détails de a requête en une méthode facile à utiliser. Les
+méthodes finder sont définies en créant les méthodes en suivant la convention
+``findFoo`` où ``Foo`` est le nom du finder que vous souhaitez créer. Par
+exemple si nous voulons ajouter un finder à notre table articles pour trouver
+des articles publiés, nous ferions ce qui suit::
 
     use Cake\ORM\Query;
     use Cake\ORM\Table;
@@ -932,21 +954,24 @@ would do the following::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published');
 
-Finder methods can modify the query as required, or use the
-``$options`` to customize the finder operation with relevant application logic.
-You can also 'stack' finders, allowing you to express complex queries
-effortlessly. Assuming you have both the 'published' and 'recent' finders, you
-could do the following::
+Les méthodes finder peuvent modifier la requête comme ceci, ou utiliser
+``$options`` pour personnaliser l'opérarion finder avec la logique
+d'application concernée. Vous pouvez aussi 'stack' les finders, vous
+permettant de faire des requêtes complexes sans efforts. En supposant que
+vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
+ce qui suit::
 
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
 
-While all the examples so far have show finder methods on table classes, finder
-methods can also be defined on :doc:`/orm/behaviors`.
+Alors que les exemples pour l'instant ont montré les méthodes finder sur les
+classes table, les méthodes finder peuvent aussi être définies sur les
+:doc:`/orm/behaviors`.
 
-If you need to modify the results after they have been fetched you should use
-a :ref:`map-reduce` function to modify the results. The map reduce features
-replace the 'afterFind' callback found in previous versions of CakePHP.
+Si vous devez modifier les résultats après qu'ils ont été récupérés, vous
+pouvez utiliser une fonction :ref:`map-reduce` pour modifier les résultats.
+Les fonctionnalités de map reduce remplace le callback 'afterFind' qu'on
+avait dans les versions précédentes de CakePHP.
 
 Dynamic Finders
 ---------------
