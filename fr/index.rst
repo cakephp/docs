@@ -45,7 +45,7 @@ d'une application CakePHP:
 * Les :doc:`Views </views>` sont la couche de présentation dans votre
   application. Elles vous donnent des outils puisssants pour créer le HTML,
   JSON et les autres sorties dont votre application a besoin.
-* Les :doc:`Models </orm>` sont les ingrédients clé dans toute application. Ils
+* Les :doc:`Models </orm>` sont les ingrédients clés dans toute application. Ils
   gèrent la validation et la logique du domaine de votre application.
 
 
