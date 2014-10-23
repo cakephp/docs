@@ -8,15 +8,15 @@ que séparément.
 
 Le but de cette présentation est d'introduire les concepts généraux de CakePHP,
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
-œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, cous pouvez
+œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, vous pouvez
 :doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
 :doc:`plonger dans la documentaion </topics>`.
 
-Conventions plutôt que de Configuration
-=======================================
+Conventions plutôt que Configuration
+====================================
 
-CakePHP fournit une structure organisationnelle de base qui couvre les noms de
-classes, les noms de fichiers, les noms de table de base de données, et
+CakePHP fournit une structure organisationnelle de base qui comprend les noms
+de classes, les noms de fichiers, les noms de table de base de données, et
 d'autres conventions. Même si les conventions prennent du temps à apprendre, en
 suivant les conventions offertes par CakePHP, vous pouvez éviter les
 configurations inutiles et construire une structure d'application uniforme
@@ -71,11 +71,11 @@ objets Model, elle est responsable de l'utilisation des informations dont
 elle dispose pour produire n'importe qu'elle interface de présentation
 nécessaire à votre application.
 
-Par exemple, la view pourrait utiliser les données du model pour rendre une
+Par exemple, la view pourrait utiliser les données du model pour afficher une
 page HTML les contenant ou un résultat au format XML pour que d'autres
 l'utilisent::
 
-    // Dans un fichier view, nous afficherons un 'element' pour chaque utilisateur (user).
+    // Dans un fichier de view, nous afficherons un 'element' pour chaque utilisateur (user).
     <?php foreach ($users as $user): ?>
         <div class="user">
             <?= $this->element('user', ['user' => $user]) ?>
@@ -87,7 +87,7 @@ La couche View fournit un certain nombre d'extensions tels que les
 :ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
 permettre de ré-utiliser facilement votre logique de présentation.
 
-La couche Vue n'est pas seulement limitée au HTML ou à la répresentation en
+La couche View n'est pas seulement limitée au HTML ou à la répresentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
 de formats tels que JSON, XML et grâce à une architecture modulable tout autre
 format dont vous auriez besoin.
@@ -121,8 +121,8 @@ d'utilisateur serait::
         $this->set('user', $user);
     }
 
-Notez que nous n'avons jamais explicitement rendu de vue. Les conventions de
-CakePHP prendront soin de sélectionner la bonne vue et de la rendre à la vue
+Notez que nous n'avons jamais explicitement rendu de view. Les conventions de
+CakePHP prendront soin de sélectionner la bonne view et de la rendre
 avec les données préparées avec ``set()``.
 
 .. _request-cycle:
@@ -144,10 +144,10 @@ chaque requête passe par les étapes suivantes:
 #. La requête est d'abord aiguillée par les routes.
 #. Après que la requête a été routée, le dispatcher va sélectionner le bon
    objet controller pour la traiter.
-#. L'action du controller est appellée et le controller interragit avec les
+#. L'action du controller est appellée et le controller interagit avec les
    Models et Components nécessaires.
-#. Le controller delègue la création de la response à la View générer le
-   résultat obtenu à partir des données de model.
+#. Le controller delègue la création de la response à la View pour générer
+   le résultat obtenu à partir des données de model.
 
 Que le Début
 ============
@@ -155,8 +155,8 @@ Que le Début
 Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres grandes 
 fonctionnalités de CakePHP sont:
 
-* Un framework de :doc:`cache</core-libraries/caching>` framework qui s'intègre
-  avec Memcache, Redis et d'autres.
+* Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
+  Memcache, Redis et d'autres.
 * Un :doc:`outil de génération de code
   </console-and-shells/code-generation-with-bake>` puissant pour partir sur les
   chapeaux de roue.
