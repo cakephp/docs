@@ -490,7 +490,7 @@ Toutes ses options sont aussi supportés par ``input()``. Pour réduire les
 répétitions les options communes partagées par toutes les méthodes input sont :
 
 * ``$options['id']`` Définir cette clé pour forcer la valeur du DOM id pour cet
-    input. Cela remplacera l'idPrefix qui pourrait être fixé.
+  input. Cela remplacera l'idPrefix qui pourrait être fixé.
 
 * ``$options['default']`` Utilisé pour définir une valeur par défaut au champ
   input. La valeur est utilisée si les données passées au formulaire ne
@@ -1314,7 +1314,7 @@ Création des boutons et des éléments submit
 
     Crée un bouton submit avec la légende ``$caption``. Si la ``$caption``
     fournie est l'URL d'une image (il contient un caractère '.'), le
-    bouton submit sera rendu comme une image.
+    bouton submit sera affiché comme une image::
 
         echo $this->Form->submit();
 
