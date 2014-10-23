@@ -35,7 +35,7 @@ personnaliser la gestion des erreurs pour votre application:
   le fichier de cette classe dans le dossier ``src/Error``. Cette classe doit
   implémenter un méthode ``render()``.
 * ``log`` - boolean - Si ``true``, les exceptions et leur stack traces seront
-    loguées vers :php:class:`Cake\\Log\\Log`.
+  loguées vers :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un tableau des noms de classe d'exception qui ne
   doivent pas être loguées. C'est utile pour supprimer les NotFoundExceptions
   ou toute autre message de log sans intérêt.
