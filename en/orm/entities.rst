@@ -132,8 +132,28 @@ You can access virtual properties as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
-    
+
 Do bear in mind that virtual properties cannot be used in finds.
+
+
+Checking if a Property Has Been Modified
+========================================
+
+.. php:method:: dirty($field, $dirty = null)
+
+You may want to make code conditional based on whether or not properties have
+changed in an entity. For example, may only want to validate fields when they
+change::
+
+    // See if the title has been modified.
+    $article->dirty('title');
+
+You can also flag fields as being modified. This is handy when appending into
+array properties::
+
+    // Add a comment and mark the field as changed.
+    $article->comments[] = $newComment;
+    $article->dirty('comments', true);
 
 Validation Errors
 =================
