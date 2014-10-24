@@ -582,21 +582,35 @@ Options for Select, Checkbox and Radio Inputs
 
     <h2>Primary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <input type="checkbox" name="color[]" value="5" id="color-red" />
-    <label for="color-red">Red</label>
-    <input type="checkbox" name="color[]" value="5" id="color-blue" />
-    <label for="color-blue">Blue</label>
-    <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-    <label for="color-yellow">Yellow</label>
+    <label for="color-red">
+        <input type="checkbox" name="color[]" value="5" id="color-red" />
+        Red
+    </label>
+
+    <label for="color-blue">
+        <input type="checkbox" name="color[]" value="5" id="color-blue" />
+        Blue
+    </label>
+
+    <label for="color-yellow">
+        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+        Yellow
+    </label>
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <input type="checkbox" name="color[]" value="5" id="color-green" />
-    <label for="ColorsGreen">Green</label>
-    <input type="checkbox" name="color[]" value="5" id="color-purple" />
-    <label for="color-purple">Purple</label>
-    <input type="checkbox" name="color[]" value="5" id="color-orange" />
-    <label for="color-orange">Orange</label>
+    <label for="ColorsGreen">
+        <input type="checkbox" name="color[]" value="5" id="color-green" />
+        Green
+    </label>
+    <label for="color-purple">
+        <input type="checkbox" name="color[]" value="5" id="color-purple" />
+        Purple
+    </label>
+    <label for="color-orange">
+        <input type="checkbox" name="color[]" value="5" id="color-orange" />
+        Orange
+    </label>
 
   Disabling the ``'hiddenField'`` on the second input group would
   prevent this behavior.
@@ -815,10 +829,14 @@ Creates a set of radio button inputs.
   .. code-block:: html
 
     <input name="gender" value="" type="hidden">
-    <input name="gender" id="gender-M" value="M" type="radio">
-    <label for="gender-m">Male</label>
-    <input name="gender" id="gender-F" value="F" type="radio">
-    <label for="gender-F">Female</label>
+    <label for="gender-m">
+        <input name="gender" id="gender-M" value="M" type="radio">
+        Male
+    </label>
+    <label for="gender-F">
+        <input name="gender" id="gender-F" value="F" type="radio">
+        Female
+    </label>
 
 If for some reason you don't want the hidden input, setting
 ``$attributes['value']`` to a selected value or boolean ``false`` will
@@ -942,12 +960,16 @@ Defaults to ``true``::
 
       <input name="field" value="" type="hidden">
       <div class="checkbox">
+        <label for="field-1">
          <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-         <label for="field-1">Label 1</label>
+         Label 1
+         </label>
       </div>
       <div class="checkbox">
+         <label for="field-2">
          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-         <label for="field-2">Label 2</label>
+         Label 2
+         </label>
       </div>
 
 * ``$attributes['disabled']`` When creating checkboxes, this option can be set
@@ -969,12 +991,16 @@ Defaults to ``true``::
 
        <input name="field" value="" type="hidden">
        <div class="checkbox">
+          <label for="field-1">
           <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          <label for="field-1">Label 1</label>
+          Label 1
+          </label>
        </div>
        <div class="checkbox">
+          <label for="field-2">
           <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          <label for="field-2">Label 2</label>
+          Label 2
+          </label>
        </div>
 
 Creating File Inputs
@@ -1478,6 +1504,21 @@ example::
         'options' => ['y', 'n'],
         'type' => 'radio'
     ]);
+
+Moving Checkboxes & Radios Outside the Label
+--------------------------------------------
+
+By default CakePHP nests checkbox and radio buttons inside label elements. This
+helps make it easier to integrate popular CSS frameworks. If you need to place
+checkbox/radio inputs outside of the label you can do so by modifying the
+templates::
+
+    $this->Form->templates([
+        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'formGroup' => '{{input}}{{label}}',
+    ]);
+
+Will make radio buttons and checkboxes render outside their labels.
 
 Generating Entire Forms
 =======================
