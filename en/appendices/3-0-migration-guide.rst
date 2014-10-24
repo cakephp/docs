@@ -898,7 +898,8 @@ and reduce the problems people had in the past:
   the message.
 - Checkboxes and radio input types are now rendered *inside* the label elements
   by default. This helps increase compatibility with popular CSS libraries like
-  bootstrap and foundation.
+  `Bootstrap <http://getbootstrap.com/>`_ and
+  `Foundation <http://foundation.zurb.com/>`_.
 
 It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
