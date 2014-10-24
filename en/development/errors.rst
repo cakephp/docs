@@ -177,7 +177,11 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: MissingViewException
 
-    The chosen view file could not be found.
+    The chosen view class could not be found.
+
+.. php:exception:: MissingTemplateException
+
+    The chosen template file could not be found.
 
 .. php:exception:: MissingLayoutException
 
