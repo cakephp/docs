@@ -896,6 +896,10 @@ and reduce the problems people had in the past:
 - The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
   has been removed. You should now use key ``confirm`` in ``$options`` to specify
   the message.
+- Checkbox and radio input types are now rendered *inside* of label elements
+  by default. This helps increase compatibility with popular CSS libraries like
+  `Bootstrap <http://getbootstrap.com/>`_ and
+  `Foundation <http://foundation.zurb.com/>`_.
 
 It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.

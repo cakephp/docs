@@ -990,6 +990,11 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()` a été retiré. Vous
   devez maintenant utiliser la clé ``confirm`` dans ``$options`` pour spécifier
   le message.
+- Les inputs de type checkbox et boutons radios types sont maintenant générées
+  *à l'intérieur* de balises label par défaut. Ceci aide à accroître la
+  compatibilité avec les librairies CSS populaires telles que
+  `Bootstrap <http://getbootstrap.com/>`_ et
+  `Foundation <http://foundation.zurb.com/>`_.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
