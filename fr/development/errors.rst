@@ -185,7 +185,11 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingViewException
 
-    Le fichier de vue choisi n'a pas pu être trouvé.
+    La classe View choisie n'a pas pu être trouvé.
+
+.. php:exception:: MissingTemplateException
+
+    Le fichier de template choisi n'a pas pu être trouvé.
 
 .. php:exception:: MissingLayoutException
 
