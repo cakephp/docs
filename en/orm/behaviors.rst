@@ -138,7 +138,7 @@ behavior should now look like::
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
-    use Cake\ORM\Query
+    use Cake\ORM\Query;
     use Cake\Utility\Inflector;
 
     class SluggableBehavior extends Behavior {
