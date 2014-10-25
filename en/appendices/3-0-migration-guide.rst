@@ -765,6 +765,8 @@ View Class
 - The ``View::$Helpers`` property has been removed and replaced with
   ``_helpers``. If you need to load helpers at runtime you should use
   ``$this->addHelper()`` in your view files.
+- ``View`` will now raise ``Cake\View\Exception\MissingTemplateException`` when
+  templates are missing instead of ``MissingViewException``.
 
 ViewBlock
 ---------
