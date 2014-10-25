@@ -146,6 +146,25 @@ de la méthode::
 Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
 les finds.
 
+Vérifier si une Propriété A Eté Modifiée
+========================================
+
+.. php:method:: dirty($field, $dirty = null)²
+
+Si vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
+les propriétés ont été modifiées dans l'entity. Par exemple, vous pourriez
+vouloir valider uniquement les champs lorsqu'ils ont été modifiés::
+
+    // Vérifie si le champ title n'a pas été modifié.
+    $article->dirty('title');
+
+Vous pouvez également marquer un champ comme ayant été modifié. C'est pratique
+lorsque vous ajoutez des donnée dans un tableau de propriétés::
+
+    // Ajoute un commentaire et marque le champ comme modifié.
+    $article->comments[] = $newComment;
+    $article->dirty('comments', true);
+
 Erreurs de Validation
 =====================
 

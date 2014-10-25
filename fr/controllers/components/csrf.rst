@@ -39,7 +39,7 @@ Les options de configuration disponibles sont les suivants:
   défaut.
 - ``secure`` Si le cookie doit être créé avec Secure flag ou pas.
   Par défaut à ``false``.
-- ``field`` Le champs de formulaire à vérifier. Par défaut ``_csrfToken``.
+- ``field`` Le champ de formulaire à vérifier. Par défaut ``_csrfToken``.
   Changer cette valeur nécéssite également de configurer le FormHelper.
 
 Lorsqu'il est activé, vous pouvez accéder au jeton CSRF actuel sur l'objet
