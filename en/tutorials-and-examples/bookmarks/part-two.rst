@@ -263,6 +263,19 @@ use this property in inputs later on. Remember to add the ``tag_string``
 property to the ``_accessible`` list in your entity, as we'll want to 'save' it
 later on.
 
+In ``src/Model/Entity/Bookmark.php`` add the ``tag_string`` to ``_accessible`` this way::
+
+	protected $_accessible = [
+		'user_id' => true,
+		'title' => true,
+		'description' => true,
+		'url' => true,
+		'user' => true,
+		'tags' => true,
+		'tag_string' => true,
+	];
+
+
 Updating the Views
 ------------------
 
