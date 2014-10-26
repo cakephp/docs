@@ -351,7 +351,8 @@ Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 
     class ArticlesFixture extends TestFixture {
 
-          // Optional. Set this property to load fixtures to a different test datasource
+          // Facultatif. Définissez cette variable pour charger des fixtures avec
+          // une base de données de test différente.
           public $connection = 'test';
 
           public $fields = [
@@ -729,7 +730,7 @@ d'intégration pour vos controllers.
 
 Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une
 approche de test qui rend facile à tester plusieurs éléments en même temps. Les
-fonctionnalités de test d'intégration dans CakePHP simule une requête HTTP à
+fonctionnalités de test d'intégration dans CakePHP simulent une requête HTTP à
 traiter par votre application. Par exemple, tester vos controllers impactera
 les Models, Components et Helpers qui auraient été invoqués suite à une requête
 HTTP. Cela vous permet d'écrire des tests au plus haut niveau de votre
@@ -948,7 +949,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 
         public function setController($controller) {
             $this->controller = $controller;
-            // Make sure the controller is using pagination
+            // Assurez-vous que le contrôleur utilise la pagination.
             if (!isset($this->controller->paginate)) {
                 $this->controller->paginate = [];
             }
@@ -993,7 +994,7 @@ dans notre component. Nous créons le fichier
 
         public function setUp() {
             parent::setUp();
-            // Setup our component and fake test controller
+            // Configuration de notre component et de notre faux controller de test.
             $collection = new ComponentCollection();
             $this->component = new PagematronComponent($collection);
 
@@ -1008,7 +1009,7 @@ dans notre component. Nous créons le fichier
         }
 
         public function testAdjust() {
-            // Test our adjust method with different parameter settings
+            // Test de notre méthode avec différents paramètres.
             $this->component->adjust();
             $this->assertEquals(20, $this->controller->paginate['limit']);
 
@@ -1021,7 +1022,7 @@ dans notre component. Nous créons le fichier
 
         public function tearDown() {
             parent::tearDown();
-            // Clean up after we're done
+            // Nettoie les variables quand les tests sont finis.
             unset($this->component, $this->controller);
         }
     }
@@ -1065,22 +1066,22 @@ Maintenant nous créons nos tests::
 
         public $helper = null;
 
-        // Here we instantiate our helper
+        // Nous instancions notre helper
         public function setUp() {
             parent::setUp();
             $view = new View();
             $this->helper = new CurrencyRendererHelper($view);
         }
 
-        // Testing the usd() function
+        // Test de la fonction usd()
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
-            // We should always have 2 decimal digits
+            // Nous devrions toujours avoir 2 chiffres après la virgule
             $this->assertEquals('USD 1.00', $this->helper->usd(1));
             $this->assertEquals('USD 2.05', $this->helper->usd(2.05));
 
-            // Testing the thousands separator
+            // Test du séparateur de milliers
             $this->assertEquals(
               'USD 12,000.70',
               $this->helper->usd(12000.70)
@@ -1098,12 +1099,12 @@ un message indiquant 1 passé et 4 assertions.
 Créer les Test Suites
 =====================
 
-If you want several of your tests to run at the same time, you can create a test
-suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's ``phpunit.xml`` file, or by creating suite
-classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
-need simple include/exclude rules to define your test suite. A simple example
-would be::
+Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
+créer une suite de tests. Une suite de test est composée de plusieurs cas de test.
+Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de votre
+application, ou par la création de classes en utilisant ``CakeTestSuite``. Utiliser
+``phpunit.xml`` est bien quand vous avez seulement besoin d'inclure/d'exclure
+de simples règles pour définir votre suite de tests. Un simple exemple serais::
 
     <testsuites>
       <testsuite name="Models">
@@ -1113,10 +1114,11 @@ would be::
       </testsuite>
     </testsuites>
 
-``CakeTestSuite`` offers several methods for easily creating test suites based
-on the file system. It allows you to run any code you want to prepare your test
-suite. If we wanted to create a test suite for all our model tests we could
-would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
+``CakeTestSuite`` propose plusieurs méthodes pour créer facilement des suites de
+tests basé sur le système de fichiers. Il vous permet d'exécuter n'importe quel
+code que vous voulez pour préparer votre suite de test. Si nous voulions créer
+une suite de tests pour tous nos tests de modèles, nous pourrions créer le fichier
+``tests/TestCase/AllModelTest.php``, et mettre le code suivant::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1180,16 +1182,17 @@ dans le tableau ``$fixtures``.
 Generating Tests with Bake
 ==========================
 
-If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
-generate scaffolding, it will also generate test stubs. If you need to
-re-generate test case skeletons, or if you want to generate test skeletons for
-code you wrote, you can use ``bake``:
+Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
+générer votre code, il va également générer le squelette de vos fichiers de tests.
+Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
+vous souhaitez générer le squelette de test pour le code que vous avez écris, vous
+pouvez utiliser ``bake``:
 
 .. code-block:: bash
 
     bin/cake bake test <type> <name>
 
-``<type>`` should be one of:
+``<type>`` doit être une de ces options:
 
 #. Entity
 #. Table
@@ -1200,8 +1203,8 @@ code you wrote, you can use ``bake``:
 #. Shell
 #. Cell
 
-While ``<name>`` should be the name of the object you want to bake a test
-skeleton for.
+``<name>`` doit être le nom de l'objet dont vous voulez générer le squelette de
+tests.
 
 Intégration avec Jenkins
 ========================
@@ -1211,7 +1214,7 @@ peut vous aider à automatiser l'exécution de vos cas de test. Cela aide à
 s'assurer que tous les tests passent et que votre application est déjà
 prête.
 
-Intégrer une application CakePHP avec Jenkins est fairly straightforward. Ce
+Intégrer une application CakePHP avec Jenkins est assez simple. Ce
 qui suit suppose que vous avez déjà installé Jenkins sur un système \*nix,
 et que vous êtes capable de l'administrer. Vous savez aussi comment créer des
 jobs, et lancer des builds. Si vous n'êtes pas sur de tout cela,
@@ -1251,13 +1254,14 @@ suit:
     ];
     CONFIG
 
-Then uncomment the following line in your ``config/bootstrap.php`` file::
+Ensuite, décommentez la ligne suivante dans votre fichier ``config/bootstrap.php``::
 
     //Configure::load('app_local.php', 'default');
 
-By creating an ``app_local.php`` file, you have an easy way to define
-configuration specific to Jenkins. You can use this same configuration file to
-override any other configuration files you need on Jenkins.
+En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
+configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
+configuration pour remplacer tous les autres fichiers de configuration dont vous
+avez besoin sur Jenkins.
 
 Il est souvent une bonne idée de supprimer et re-créer la base de données avant
 chaque build aussi. Cela vous évite des echecs de chaînes, où un buid cassé
@@ -1276,9 +1280,9 @@ graphique sympa des résultats de votre test:
 
 .. code-block:: bash
 
-    # Download Composer if it is missing.
+    # Télécharger Composer si il est manquant.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
-    # Install dependencies
+    # Installer les dépendances.
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
