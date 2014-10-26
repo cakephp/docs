@@ -1104,7 +1104,7 @@ créer une suite de tests. Une suite de test est composée de plusieurs cas de t
 Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de votre
 application, ou par la création de classes en utilisant ``CakeTestSuite``. Utiliser
 ``phpunit.xml`` est bien quand vous avez seulement besoin d'inclure/d'exclure
-de simples règles pour définir votre suite de tests. Un simple exemple serais::
+de simples règles pour définir votre suite de tests. Un exemple simple serait::
 
     <testsuites>
       <testsuite name="Models">
@@ -1185,7 +1185,7 @@ Generating Tests with Bake
 Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
 générer votre code, il va également générer le squelette de vos fichiers de tests.
 Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
-vous souhaitez générer le squelette de test pour le code que vous avez écris, vous
+vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous
 pouvez utiliser ``bake``:
 
 .. code-block:: bash
