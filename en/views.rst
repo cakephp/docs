@@ -247,6 +247,13 @@ You can also append into a block using ``append()``::
     // Clear the previous content from the sidebar block.
     $this->assign('sidebar', '');
 
+Assigning a block's content is often useful when you want to convert a view
+variable into a block. For example, you may want to use a block for the page
+title, and sometimes assign the title as a view variable in the controller::
+
+    // In view file or layout above $this->fetch('title')
+    $this->assign('title', $title);
+
 The ``prepend()`` method allows you to prepend content to an existing block::
 
     // Prepend to sidebar
