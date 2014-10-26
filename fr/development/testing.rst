@@ -11,7 +11,7 @@ et comment vous pouvez utiliser les extensions que CakePHP offre.
 Installer PHPUnit
 =================
 
-CakePHP utilise PHPUnit as its underlying test framework. PHPUnit est le
+CakePHP utilise PHPUnit comme son framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait
 ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
@@ -48,7 +48,7 @@ Tester la Configuration de la Base de Données
 
 Souvenez-vous qu'il faut avoir debug activé votre fichier ``config/app.php``
 avant de lancer des tests. Avant de lancer des tests, vous devrez vous
-assurer d'ajouter une configuration de base de données ``test`` dans 
+assurer d'ajouter une configuration de base de données ``test`` dans
 ``config/app.php``. Cette configuration est utilisée par CakePHP pour les
 tables fixture et les données::
 
@@ -256,24 +256,25 @@ application. Vous pourrez voir les résultats en allant à
 Combiner les Suites de Test pour les plugins
 --------------------------------------------
 
-Often times your application will be composed of several plugins. In these
-situations it can be pretty tedious to run tests for each plugin. You can make
-running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
+Souvent, votre application sera composé de plusieurs plugins. Dans ces situations,
+il peut être assez fastidieux d'effectuer des tests pour chaque plugin. Vous pouvez
+faire des tests pour chaque plugins qui composent votre application en ajoutant
+une section ``<testsuite>`` supplémentaire au fichier ``phpunit.xml`` de votre
+application::
 
     <testsuites>
         <testsuite name="App Test Suite">
             <directory>./Test/TestCase</directory>
         </testsuite>
 
-        <!-- Add your plugin suites -->
+        <!-- Ajouter vos plugins -->
         <testsuite name="Forum plugin">
             <directory>./plugins/Forum/Test/TestCase</directory>
         </testsuite>
     </testsuites>
 
-Any additional test suites added to the ``<testsuites>`` element will
-automatically be run when you use ``phpunit``.
+Les tests supplémentaires ajoutés à l'élément ``<testsuites>`` seront exécutés
+automatiquement quand quand vous utiliserez ``phpunit``.
 
 Les Callbacks du Cycle de vie des cas de Test
 =============================================
@@ -325,14 +326,14 @@ de test:
 Test Connections
 ----------------
 
-By default CakePHP will alias each connection in your application. Each
-connection defined in your application's bootstrap that does not start with
-``test_`` will have a ``test_`` prefixed alias created. Aliasing connections
-ensures, you don't accidentally use the wrong connection in test cases.
-Connection aliasing is transparent to the rest of your application. For example
-if you use the 'default' connection, instead you will get the ``test``
-connection in test cases. If you use the 'replica' connection, the test suite
-will attempt to use 'test_replica'.
+Par défaut, CakePHP va faire un alias pour chaque connexion de votre application.
+Chaque connexion définie dans le bootstrap de votre application qui ne commence
+pas avec ``test_`` va avoir un alias avec le prefix ``test_`` de créé. Les alias
+de connection assurent que vous n'utiliserez pas accidentellement la mauvaise
+connexion en cas de test. Les alias de connexion sont transparentes pour le reste
+de votre application. Par exemple, si vous utilisez la connexion 'default', à la
+place, vous obtiendrez la connexion ``test`` en cas de test. Si vous utilisez la
+connexion 'replica', la suite de tests va tenter d'utiliser 'test_replica'.
 
 Créer les fixtures
 ------------------
@@ -350,7 +351,8 @@ Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 
     class ArticlesFixture extends TestFixture {
 
-          // Optional. Set this property to load fixtures to a different test datasource
+          // Facultatif. Définissez cette variable pour charger des fixtures avec
+          // une base de données de test différente.
           public $connection = 'test';
 
           public $fields = [
@@ -423,12 +425,13 @@ la définition de la table sont:
     - ``date``: redirige vers ``DATE``.
     - ``binary``: redirige vers ``BLOB``.
 fixed
-    Used with string types to create CHAR columns in platforms that support
-    them. Also used to force UUID types in Postgres when the length is also 36.
+    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR`` dans
+    les plates-formes qui les supportent. Également utilisé pour forcer le type
+    ``UUID`` dans Postgres lorsque la longueur est de 36.
 length
     Défini à la longueur spécifique que le champ doit prendre.
 precision
-    Set the number of decimal places used on float & decimal fields.
+    Défini le nombre de décimales utilisées sur les champs ``float`` et ``decimal``.
 null
     Défini soit à ``true`` (pour permettre les NULLs) soit à ``false`` (pour
     ne pas permettre les NULLs).
@@ -552,10 +555,11 @@ Par exemple::
         ];
     }
 
-Finally, you can not load/create any schema in a fixture. This is useful if you
-already have a test database setup with all the empty tables created. By
-defining neither ``$fields`` or ``$import`` a fixture will only insert its
-records and truncate the records on each test method.
+Vous ne pouvez pas charger/créer tout type de schéma dans une fixture. Ceci est
+utile si vous avez déjà une configuration de base de données de test, avec toutes
+les tables vides créés. En définissant ni ``$fields`` ni ``$import``, une fixture
+va seulement inserer ces enregistrements et tronquer les enregistrements sur
+chaque méthode de test.
 
 Charger les fixtures dans vos cas de test
 -----------------------------------------
@@ -714,7 +718,7 @@ normal mocks have::
     }
 
 .. _integration-testing:
-    
+
 Test d'intégrations des Controllers
 ===================================
 
@@ -724,10 +728,10 @@ L'utilisation de cette classe en tant que classe de base pour les cas de test de
 votre controller vous permet de mettre plus facilement en place des tests
 d'intégration pour vos controllers.
 
-Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une 
-approche de test qui rend facile à tester plusieurs éléments en même temps. Les 
-fonctionnalités de test d'intégration dans CakePHP simule une requête HTTP à 
-traiter par votre application. Par exemple, tester vos controllers impactera 
+Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une
+approche de test qui rend facile à tester plusieurs éléments en même temps. Les
+fonctionnalités de test d'intégration dans CakePHP simulent une requête HTTP à
+traiter par votre application. Par exemple, tester vos controllers impactera
 les Models, Components et Helpers qui auraient été invoqués suite à une requête
 HTTP. Cela vous permet d'écrire des tests au plus haut niveau de votre
 application en impactant sur chacun de ses travaux.
@@ -738,7 +742,7 @@ correspondant. Le code du controller ressemble à ceci::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    
+
     class ArticlesController extends AppController {
         public $helpers = ['Form', 'Html'];
 
@@ -829,7 +833,7 @@ une requête, vous pouvez utiliser les différents assertions que fournis
 ``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
 possède de correctes effets secondaires.
 
-    
+
 Méthodes d'assertion
 --------------------
 
@@ -868,8 +872,8 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie les cookies.
     $this->assertEquals('1', $this->cookies());
-    
-    
+
+
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
 
@@ -917,7 +921,7 @@ activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas:
 
     json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
 
-    
+
 Tester les Views
 ================
 
@@ -945,7 +949,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 
         public function setController($controller) {
             $this->controller = $controller;
-            // Make sure the controller is using pagination
+            // Assurez-vous que le contrôleur utilise la pagination.
             if (!isset($this->controller->paginate)) {
                 $this->controller->paginate = [];
             }
@@ -990,7 +994,7 @@ dans notre component. Nous créons le fichier
 
         public function setUp() {
             parent::setUp();
-            // Setup our component and fake test controller
+            // Configuration de notre component et de notre faux controller de test.
             $collection = new ComponentCollection();
             $this->component = new PagematronComponent($collection);
 
@@ -1005,7 +1009,7 @@ dans notre component. Nous créons le fichier
         }
 
         public function testAdjust() {
-            // Test our adjust method with different parameter settings
+            // Test de notre méthode avec différents paramètres.
             $this->component->adjust();
             $this->assertEquals(20, $this->controller->paginate['limit']);
 
@@ -1018,7 +1022,7 @@ dans notre component. Nous créons le fichier
 
         public function tearDown() {
             parent::tearDown();
-            // Clean up after we're done
+            // Nettoie les variables quand les tests sont finis.
             unset($this->component, $this->controller);
         }
     }
@@ -1062,22 +1066,22 @@ Maintenant nous créons nos tests::
 
         public $helper = null;
 
-        // Here we instantiate our helper
+        // Nous instancions notre helper
         public function setUp() {
             parent::setUp();
             $view = new View();
             $this->helper = new CurrencyRendererHelper($view);
         }
 
-        // Testing the usd() function
+        // Test de la fonction usd()
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
-            // We should always have 2 decimal digits
+            // Nous devrions toujours avoir 2 chiffres après la virgule
             $this->assertEquals('USD 1.00', $this->helper->usd(1));
             $this->assertEquals('USD 2.05', $this->helper->usd(2.05));
 
-            // Testing the thousands separator
+            // Test du séparateur de milliers
             $this->assertEquals(
               'USD 12,000.70',
               $this->helper->usd(12000.70)
@@ -1095,12 +1099,12 @@ un message indiquant 1 passé et 4 assertions.
 Créer les Test Suites
 =====================
 
-If you want several of your tests to run at the same time, you can create a test
-suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's ``phpunit.xml`` file, or by creating suite
-classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
-need simple include/exclude rules to define your test suite. A simple example
-would be::
+Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
+créer une suite de tests. Une suite de test est composée de plusieurs cas de test.
+Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de votre
+application, ou par la création de classes en utilisant ``CakeTestSuite``. Utiliser
+``phpunit.xml`` est bien quand vous avez seulement besoin d'inclure/d'exclure
+de simples règles pour définir votre suite de tests. Un exemple simple serait::
 
     <testsuites>
       <testsuite name="Models">
@@ -1110,10 +1114,11 @@ would be::
       </testsuite>
     </testsuites>
 
-``CakeTestSuite`` offers several methods for easily creating test suites based
-on the file system. It allows you to run any code you want to prepare your test
-suite. If we wanted to create a test suite for all our model tests we could
-would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
+``CakeTestSuite`` propose plusieurs méthodes pour créer facilement des suites de
+tests basé sur le système de fichiers. Il vous permet d'exécuter n'importe quel
+code que vous voulez pour préparer votre suite de test. Si nous voulions créer
+une suite de tests pour tous nos tests de modèles, nous pourrions créer le fichier
+``tests/TestCase/AllModelTest.php``, et mettre le code suivant::
 
     class AllModelTest extends TestSuite {
         public static function suite() {
@@ -1177,16 +1182,17 @@ dans le tableau ``$fixtures``.
 Generating Tests with Bake
 ==========================
 
-If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
-generate scaffolding, it will also generate test stubs. If you need to
-re-generate test case skeletons, or if you want to generate test skeletons for
-code you wrote, you can use ``bake``:
+Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
+générer votre code, il va également générer le squelette de vos fichiers de tests.
+Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
+vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous
+pouvez utiliser ``bake``:
 
 .. code-block:: bash
 
     bin/cake bake test <type> <name>
 
-``<type>`` should be one of:
+``<type>`` doit être une de ces options:
 
 #. Entity
 #. Table
@@ -1197,8 +1203,8 @@ code you wrote, you can use ``bake``:
 #. Shell
 #. Cell
 
-While ``<name>`` should be the name of the object you want to bake a test
-skeleton for.
+``<name>`` doit être le nom de l'objet dont vous voulez générer le squelette de
+tests.
 
 Intégration avec Jenkins
 ========================
@@ -1208,7 +1214,7 @@ peut vous aider à automatiser l'exécution de vos cas de test. Cela aide à
 s'assurer que tous les tests passent et que votre application est déjà
 prête.
 
-Intégrer une application CakePHP avec Jenkins est fairly straightforward. Ce
+Intégrer une application CakePHP avec Jenkins est assez simple. Ce
 qui suit suppose que vous avez déjà installé Jenkins sur un système \*nix,
 et que vous êtes capable de l'administrer. Vous savez aussi comment créer des
 jobs, et lancer des builds. Si vous n'êtes pas sur de tout cela,
@@ -1248,13 +1254,14 @@ suit:
     ];
     CONFIG
 
-Then uncomment the following line in your ``config/bootstrap.php`` file::
+Ensuite, décommentez la ligne suivante dans votre fichier ``config/bootstrap.php``::
 
     //Configure::load('app_local.php', 'default');
 
-By creating an ``app_local.php`` file, you have an easy way to define
-configuration specific to Jenkins. You can use this same configuration file to
-override any other configuration files you need on Jenkins.
+En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
+configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
+configuration pour remplacer tous les autres fichiers de configuration dont vous
+avez besoin sur Jenkins.
 
 Il est souvent une bonne idée de supprimer et re-créer la base de données avant
 chaque build aussi. Cela vous évite des echecs de chaînes, où un buid cassé
@@ -1273,9 +1280,9 @@ graphique sympa des résultats de votre test:
 
 .. code-block:: bash
 
-    # Download Composer if it is missing.
+    # Télécharger Composer si il est manquant.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
-    # Install dependencies
+    # Installer les dépendances.
     php composer.phar install
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
