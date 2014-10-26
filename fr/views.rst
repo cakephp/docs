@@ -256,6 +256,13 @@ temps::
     // Nettoyer le contenu précédent du block de sidebar
     $this->assign('sidebar', '');
 
+Assigner le contenu d'un block est souvent utile lorsque vous voulez convertir
+une variable de vue en un block. Par exemple, vous pourriez vouloir utiliser
+un block pour le titre de la page et parfois le définir depuis le controller::
+
+    // Dans une view ou un layout avant $this->fetch('title')
+    $this->assign('title', $title);
+
 La méthode ``prepend()`` a été ajoutée pour ajouter du contenu avant un block
 existant::
 
