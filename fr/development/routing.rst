@@ -429,28 +429,28 @@ utilisant la valeur de configuration ``Routing.prefixes``, soit en définissant
 la clé ``prefix`` avec un appel de ``Router::connect()``::
 
     Router::prefix('admin', function($routes) {
-        // All routes here will be prefixed with `/admin`
-        // And have the prefix => admin route element added.
+        // Toutes les routes ici seront préfixées avec `/admin` et auront
+        // l'élément de route prefix => admin ajouté.
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
     });
 
-Prefixes are mapped to sub-namespaces in your applications ``Controller``
-namespace. By having prefixes as separate controllers you can create smaller,
-simpler controllers. Behavior that is common to the prefixed and non-prefixed
-controllers can be encapsulated using inheritance,
-:doc:`/controllers/components`, or traits.  Using our users example, accessing
-the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
-``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
-view file used would be ``src/Template/Admin/Users/edit.ctp``
+Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
+``Controller`` dans votre application. En ayant des préfixes comme séparateurs de
+controllers, vous pouvez créer de plus petits et/ou de plus simples controllers.
+Les comportements communs au routes préfixées et non-préfixéss peuvent être
+encapsulés via héritage :doc:`/controllers/components`, ou traits. En utilisant
+notre exemple des utilisateurs, accéder à l'url ``/admin/users/edit/5`` devrait
+appeler la méthode ``edit`` de notre ``App\Controller\Admin\UsersController``
+en passant 5 comme premier paramètre. Le fichier de vue utilisé devrais être
+``src/Template/Admin/Users/edit.ctp``.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::
 
     Router::prefix('admin', function($routes) {
-        // Because you are in the admin scope,
-        // you do not need to include the /admin prefix
-        // or the admin route element.
+        // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
+        // d'inclure le prefix /admin ou l'élement de route admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
@@ -509,25 +509,26 @@ Routing des Plugins
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Plugin routes are most easily created using the ``plugin()`` method. This method
-creates a new routing scope for the plugin's routes::
+Les routes des plugins sont les plus faciles à créer en utilisant la méthode
+``plugin()``. Cette méthode crée un nouveau scope pour les routes de plugin::
 
     Router::plugin('DebugKit', function($routes) {
-        // Routes connected here are prefixed with '/debug_kit' and
-        // have the plugin route element set to 'DebugKit'
+        // Les routes connectés ici sont préfixés par '/debug_kit' et ont
+        // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When creating plugin scopes, you can customize the path element used with the
-``path`` option::
+Lors de la création des scopes de plugin, vous pouvez personnaliser le chemin de
+l'élément avec l'option ``path``::
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
-        // Routes connected here are prefixed with '/debugger' and
-        // have the plugin route element set to 'DebugKit'
+        // Les routes connectés ici sont préfixés par '/debugger' et ont
+        // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When using scopes you can nest plugin scopes within prefix scopes::
+Lors de l'utilisation des scopes, vous pouvez définir un scope de plugin dans un
+scope de prefix::
 
     Router::prefix('admin', function($routes) {
         $routes->plugin('DebugKit', function($routes) {
@@ -535,27 +536,27 @@ When using scopes you can nest plugin scopes within prefix scopes::
         });
     });
 
-The above would create a route that looks like ``/admin/debug_kit/:controller``.
-It would have the ``prefix``, and ``plugin`` route elements set.
+Le code ci-dessus devrait créer une route similaire à ``/admin/debug_kit/:controller``.
+Elle devrais avoir les éléments de route ``prefix`` et ``plugin`` définies.
 
-You can create links that point to a plugin, by adding the plugin key to your
-URL array::
+Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
+``plugin`` au tableau de l'URL::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-Conversely if the active request is a plugin request and you want to create
-a link that has no plugin you can do the following::
+Inversement, si la requête active est une requête de plugin et que vous souhaitez
+créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-By setting ``plugin => null`` you tell the Router that you want to
-create a link that is not part of a plugin.
+En définissant ``plugin => null``, vous dites au Router que vous souhaitez créer
+un lien qui n'appartient pas à un plugin.
 
 SEO-Friendly Routing
 --------------------
