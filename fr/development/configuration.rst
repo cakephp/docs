@@ -291,7 +291,7 @@ Vérifier si les Données de Configuration sont Définies
 
 .. php:staticmethod:: check($key)
 
-Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null.
+Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null::
 
     $exists = Configure::check('Company.name');
 
@@ -595,8 +595,3 @@ Comme vous le verrez dans les sections :doc:`/controllers` et
 .. meta::
     :title lang=fr: Configuration
     :keywords lang=fr: configuration finie,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
-
-
-
-
-
