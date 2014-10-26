@@ -276,6 +276,19 @@ Nous utiliserons cette propriété dans inputs plus tard. Rappelez-vous
 d'ajouter la propriété ``tag_string`` dans la liste ``_accessible`` de votre
 entity, puisque nous voulons la 'sauvegarder' plus tard.
 
+Dans le fichier ``src/Model/Entity/Bookmark.php``, ajoutez ``tag_string`` à
+la propriété ``_accessible`` comme ceci::
+
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
+
 Mettre à Jour les Vues
 ----------------------
 
