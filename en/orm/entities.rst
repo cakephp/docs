@@ -155,6 +155,10 @@ array properties::
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
+In addition you can also base you conditional code on the original properties values
+by using the ``getOriginal()`` method. This method will either return the original
+value of the property if it has been modified or its actual value.
+
 Validation Errors
 =================
 

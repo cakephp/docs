@@ -165,6 +165,11 @@ lorsque vous ajoutez des donnée dans un tableau de propriétés::
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
+De plus, vous pouvez également baser votre code conditonnel sur les valeurs
+initales des propriétés en utilisant la méthode ``getOriginal()``. Cette
+méthode retournera soit la valeur initiale de la propriété si elle a été
+modifiée soit la valeur actuelle.
+
 Erreurs de Validation
 =====================
 
