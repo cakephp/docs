@@ -849,6 +849,8 @@ View Class
 - La propriété ``View::$Helpers`` a été retirée et remplacée par
   ``_helpers``. Si vous avez besoin de charger les helpers à la volée, vous
   devrez utiliser ``$this->addHelper()`` dans vos fichiers de view.
+- ``View`` lancera des ``Cake\View\Exception\MissingTemplateException`` lorsque
+  des templates sont au lieu de ``MissingViewException``.
 
 ViewBlock
 ---------

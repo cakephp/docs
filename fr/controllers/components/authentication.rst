@@ -113,7 +113,7 @@ remplaceront la clé correspondante dans la clé 'all'.
 Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.  Vous pouvez
-  utiliser ``username`` et ``password`` pour spécifier le champs de nom
+  utiliser ``username`` et ``password`` pour spécifier le champ de nom
   d'utilisateur et le mot de passse. 
 - ``userModel`` Le nom du model de la table users, par défaut Users.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
