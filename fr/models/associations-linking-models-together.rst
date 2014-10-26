@@ -46,7 +46,7 @@ Les associations se définissent en créant une variable de classe nommée
 comme l'association que vous souhaitez définir. La variable de classe peut
 quelquefois se limiter à une chaîne de caractère, mais peut également être
 aussi complète qu'un tableau multi-dimensionnel utilisé pour définir les
-spécificité de l'association.
+spécificités de l'association.
 
 ::
 
@@ -61,7 +61,7 @@ spécificité de l'association.
         );
     }
 
-Dans l'exemple ci-dessus, la première occurence du mot 'Recipe' est ce que
+Dans l'exemple ci-dessus, la première occurrence du mot 'Recipe' est ce que
 l'on appelle un 'Alias'. C'est un identifiant pour la relation et cela peut
 être ce que vous souhaitez. En règle générale, on choisit le même nom que la
 classe qu'il référence. Toutefois, **les alias pour chaque model doivent être
@@ -211,7 +211,7 @@ Les clés possibles pour les tableaux d'association incluent:
    associer au model actuel. Si l\'on souhaite définir la relation
    ’User a un Profile’, la valeur associée à la clé 'className'
    devra être ‘Profile’.
--  **foreignKey**: le nom de la clé etrangère que l'on trouve dans
+-  **foreignKey**: le nom de la clé étrangère que l'on trouve dans
    l'autre model. Ceci sera particulièrement pratique si vous avez
    besoin de définir des relations hasOne multiples. La valeur par
    défaut de cette clé est le nom du model actuel (avec des underscores)
@@ -361,7 +361,7 @@ counterCache - Cache your count()
 Cette fonction vous aide à mettre en cache le count des données liées.
 Au lieu de compter les enregistrements manuellement via ``find('count')``,
 le model suit lui-même tout ajout/suppression à travers le model ``$hasMany``
-associé et augmente/diminue un champ numérique dedié dans la table du model
+associé et augmente/diminue un champ numérique dédié dans la table du model
 parent.
 
 Le nom du champ est le nom du model particulier suivi par un underscore
@@ -509,7 +509,7 @@ Les clés possibles pour les tableaux d'association hasMany sont :
    model actuel. Si l'on souhaite définir la relation ‘User hasMany Comment’
    (l'User a plusieurs Comments),
    la valeur associée à la clef 'className' devra être ‘Comment’.
--  **foreignKey**: le nom de la clé etrangère que l'on trouve dans l'autre
+-  **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
    model. Ceci sera particulièrement pratique si vous avez besoin de définir
    des relations hasMany multiples. La valeur par défaut de cette clé est
    le nom du model actuel (avec des underscores) suffixé avec ‘\_id’
@@ -587,7 +587,7 @@ hasAndBelongsToMany (HABTM)
 ---------------------------
 
 Très bien. A ce niveau, vous pouvez déjà vous considérer comme un professionnel
-des associations de models CakePHP. Vous vous êtes déjà assez compétents
+des associations de models CakePHP. Vous êtes déjà assez compétent
 dans les 3 types d'associations afin de pouvoir effectuer la plus grande
 partie des relations entre les objets.
 
@@ -693,7 +693,7 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
    actuel. Ceci sera particulièrement pratique si vous avez besoin de définir
    des relations HABTM multiples. La valeur par défaut de cette clé est le
    nom du model actuel (avec des underscores) suffixé avec ‘\_id'.
--  **associationForeignKey**: Le nom de la clé etrangère que l'on trouve
+-  **associationForeignKey**: Le nom de la clé étrangère que l'on trouve
    dans l'autre model. Ceci sera particulièrement pratique si vous avez
    besoin de définir des relations HABTM multiples. La valeur par défaut de
    cette clé est le nom de l'autre model (avec des underscores) suffixé
