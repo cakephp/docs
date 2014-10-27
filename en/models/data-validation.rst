@@ -1160,12 +1160,12 @@ with usage examples.
         public $validate = array(
             'number' => array(
                 'rule' => array('range', -1, 11),
-                'message' => 'Please enter a number between 0 and 10'
+                'message' => 'Please enter a number between -1 and 11'
             )
         );
 
-    The above example will accept any value which is larger than 0
-    (e.g., 0.01) and less than 10 (e.g., 9.99).
+    The above example will accept any value which is larger than -1
+    (e.g., -0.99) and less than 11 (e.g., 10.99).
 
     .. note::
 
