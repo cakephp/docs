@@ -11,7 +11,6 @@ App.config = {
 App.Book = (function() {
 
 	function init() {
-
 		// Make top nav responsive.
 		$('#cakephp-global-navigation').menuSelect({'class': 'nav-select'});
 
@@ -38,12 +37,42 @@ App.Book = (function() {
 		dropdown.find('li:last-child a').bind('blur', function () {
 			$(this).parents('.dropdown').find('ul').css('display', '');
 		});
+
+		// Show back to contents button.
+		var backToTop = $('#back-to-contents'),
+			contents = $('#page-contents'),
+			doc = $(document),
+			offset = contents.offset(),
+			sidebarHeight = contents.height(),
+			showing = false;
+
+		var positionBackToTop = function() {
+			if (!showing && doc.scrollTop() > offset.top + sidebarHeight) {
+				showing = true;
+				backToTop.css({
+					position: 'fixed',
+					top: 20,
+					left: 20,
+					display:' block'
+				});
+			} else if (showing && doc.scrollTop() <= offset.top + sidebarHeight) {
+				showing = false;
+				backToTop.css({
+					display:'none'
+				});
+			}
+		};
+
+		backToTop.bind('click', function(evt) {
+			$('html,body').animate({scrollTop: offset.top}, 200);
+			return false;
+		});
+
+		doc.bind('scroll', function() {
+			positionBackToTop();
+		});
 	}
- 
-	function compare_scores(a, b) {
-		return b.score - a.score;
-	}
- 
+
 	return {
 		init : init
 	};
