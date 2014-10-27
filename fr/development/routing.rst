@@ -60,7 +60,7 @@ capable de générer une chaîne URL::
     use Cake\Routing\Router;
 
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
-    // Will output
+    // Va afficher
     /articles/15
 
 Les routes peuvent aussi être labellisées avec un nom unique, cela vous permet
@@ -558,18 +558,19 @@ créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
 En définissant ``plugin => null``, vous dites au Router que vous souhaitez créer
 un lien qui n'appartient pas à un plugin.
 
-SEO-Friendly Routing
---------------------
+Routing Favorisant le SEO
+-------------------------
 
-As a SEO-minded developer, it'll be desirable to outfit your URLs with dashes in
-order to avoid your application being cast into the search engine shadows,
-and hoist it to the divine rankings of the search engine gods. The
-``DashedRoute`` class furnishes your application with the ability to route
-plugin, controller, and camelized action names to a dashed URL.
+En tant que développeur SEO, il est souhaitable d'avoir des URLs avec des tirets,
+afin d'éviter que vos URLs soit dans l'ombre des moteurs de recherche, et par
+conséquent, améliorer le référencement de vos URLs dans les moteurs de recherche.
+La classe ``DashedRoute`` fournit à votre application la possibilité de créer des
+URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
+``camelCase``.
 
-For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
-``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
-with the following router connection::
+Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
+et une action ``showItems``, la route générée sera ``/to-do/todo-items/show-items``
+avec le code qui suit::
 
     Router::scope('/', function($routes) {
         $routes->connect('/:plugin/:controller/:action',
@@ -580,8 +581,9 @@ with the following router connection::
         $routes->fallbacks();
     });
 
-Under the ``/`` routing scope, the previous example will attempt to catch all
-plugin/controller/action dashed routes and map them to their respective actions.
+Dans le scope de route ``/``, l'exemple ci-dessus essayeras de capturer toutes les
+routes  plugin/controller/action avec des tirets et de les faire correspondre à
+leurs actions respectives.
 
 .. index:: file extensions
 .. _file-extensions:
