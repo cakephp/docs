@@ -54,6 +54,7 @@ completed, your directory setup should look something like the following::
         /tmp
         /vendor
         /webroot
+        .editorconfig
         .gitignore
         .htaccess
         .travis.yml
@@ -157,7 +158,8 @@ array might look something like the following::
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_bookmarks',
                 'encoding' => 'utf8',
-                'timezone' => 'UTC'
+                'timezone' => 'UTC',
+                'cacheMetadata' => true,
             ],
         ],
         // More configuration below.
@@ -255,7 +257,7 @@ following at the top of the file::
     );
 
 The above defines a new 'route' which connects the ``/bookmarks/tagged/*`` path,
-to ``BookmarksController::tags``. By defining routes, you can isolate how your
+to ``BookmarksController::tags()``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
 ``http://localhost:8765/bookmarks/tagged``, we would see a helpful error page
 from CakePHP. Let's implement that missing method now. In
