@@ -1158,17 +1158,16 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'nombre' => array(
                 'rule'    => array('range', -1, 11),
-                'message' => 'Merci d\'entrer un nombre entre 0 et 10'
+                'message' => 'Merci d\'entrer un nombre entre -1 et 11'
             )
         );
 
     L'exemple ci-dessus acceptera toutes les valeurs qui sont plus grandes que
-    0 (par ex, 0.01) et plus petite que 10 (par ex, 9.99). Note : Les deux
-    extrémités données (-1 et 11) ne sont pas incluses !!!
+    -1 (par ex, -0.99) et plus petite que 11 (par ex, 10.99).
     
     .. note::
     
-        The range lower/upper are not inclusive
+        Les deux extrémités ne sont pas incluses.
 
 
 .. php:staticmethod:: ssn(mixed $check, string $regex = null, string $country = null)
