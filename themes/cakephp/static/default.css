@@ -667,3 +667,8 @@ dt tt {
 		float: none;
 	}
 }
+
+
+#back-to-contents {
+	display: none;
+}
