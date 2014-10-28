@@ -746,11 +746,12 @@ lieu de ``add``.
 
 .. _custom-rest-routing:
 
-Custom Route Classes for Resource Routes
-----------------------------------------
+Classes de Route Personnalisé pour les Ressources
+-------------------------------------------------
 
-You can provide ``connectOptions`` key in the ``$options`` array for
-``resources()`` to provide custom setting used by ``connect()``::
+Vous pouvez spécifier la clé ``connectOptions`` dans le tableau ``$options`` de
+la fonction ``resources()`` pour fournir une configuration personnalisé utilisé
+par ``connect()``::
 
     Router::scope('/', function($routes) {
         $routes->resources('books', array(
