@@ -598,11 +598,12 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
     Router::parseExtensions(['html', 'rss']);
 
-Ceci indiquera au routeur de supprimer toutes extensions de fichiers
-correspondantes et ensuite d'analyser ce qui reste.
-
-Si vous voulez créer une URL comme /page/titre-de-page.html, vous devriez
-créer votre route comme illustré ci-dessous::
+Cela activera les extensions de nom pour toutes les routes déclarées **après**
+l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
+seront fusionnés avec la liste des extensions existantes. Vous pouvez passer
+``false`` en second argument pour remplacer la liste d'extension déjà existante.
+Si vous appelez la méthode sans arguments, elle retournera la liste des extensions
+existante. Vous pouvez définir des extensions pour chaque scope::
 
     Router::scope('/api', function($routes) {
         $routes->extensions(['json', 'xml']);
@@ -610,13 +611,13 @@ créer votre route comme illustré ci-dessous::
 
 .. note::
 
-    Setting the extensions should be the first thing you do in a scope, as the
-    extensions will only be applied to routes connected **after** the extensions
-    are set.
+    Le réglage des extensions devrait être la première chose que vous devriez faire
+    dans un scope, car les extensions seront appliquées uniquements aux routes
+    qui sont définis **après** la déclaration des extentions.
 
-By using extensions, you tell the router to remove any matching file extensions,
-and then parse what remains. If you want to create a URL such as
-/page/title-of-page.html you would create your route using::
+En utilisant des extensions, vous dites au router de supprimer toutes les extensions
+de fichiers correspondant, puis d'analyser le reste. Si vous souhaitez créer une
+URL comme ``/page/title-of-page.html`` vous devriez créer un scope comme ceci::
 
     Router::scope('/api', function($routes) {
         $routes->extensions(['json', 'xml']);
@@ -629,15 +630,16 @@ and then parse what remains. If you want to create a URL such as
         );
     });
 
-Then to create links which map back to the routes simply use::
+Ensuite, pour créer des liens, utilisez simplement::
 
     $this->Html->link(
         'Link title',
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-File extensions are used by :doc:`/controllers/components/request-handling`
-to do automatic view switching based on content types.
+Les extensions de fichier sont utilisées par le :doc:`/controllers/components/request-handling`
+qui fait la commutation des vues automatiquement en se basant sur les types de
+contenu.
 
 .. _resource-routes:
 
