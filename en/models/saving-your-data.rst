@@ -16,7 +16,7 @@ following basic format::
 
 Most of the time you won't even need to worry about this format:
 CakePHP's :php:class:`FormHelper`, and model find methods all
-package data in this format. If you're using either of the helpers,
+package data in this format. If you're using :php:class:`FormHelper`,
 the data is also conveniently available in ``$this->request->data`` for
 quick usage.
 
@@ -202,7 +202,7 @@ The saveField method also has an alternate syntax::
 ``$params`` array can have any of the following available options
 as keys:
 
-* ``validate`` Set to true/false to enable disable validation.
+* ``validate`` Set to true/false to enable/disable validation.
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
@@ -266,8 +266,8 @@ options may be used:
   'first' to validate *all* records before any are saved (default),
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
-*  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-*  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
+* ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
