@@ -573,7 +573,7 @@ This will enable the named extensions for all routes connected **after** this
 method call. Any routes connected prior to it will not inherit the extensions.
 By default the extensions you passed will be merged with existing list of extensions.
 You can pass ``false`` for the second argument to override existing list.
-Calling the method with arguments will return existing list of extensions.
+Calling the method without arguments will return existing list of extensions.
 You can set extensions per scope as well::
 
     Router::scope('/api', function($routes) {
