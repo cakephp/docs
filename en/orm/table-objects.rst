@@ -1335,6 +1335,11 @@ When an entity is saved a few things happen:
    belongsToMany associations will be saved.
 9. The ``Model.afterSave`` event will be dispatched.
 
+.. warning::
+
+    If no changes are made to the entity when it is saved, the callbacks will 
+    not fire because no save is performed.
+
 The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable validation and/or transactions using the ``$options`` argument for
 save::
