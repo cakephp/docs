@@ -218,7 +218,7 @@ l'application::
 
     $this->Form->addContextProvider('myprovider', function($request, $data) {
         if ($data['entity'] instanceof MyOrmClass) {
-            return new MyProvider($request, $data['entity']);
+            return new MyProvider($request, $data);
         }
     });
 
