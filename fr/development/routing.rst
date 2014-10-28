@@ -362,7 +362,7 @@ doivent aussi être rendus disponibles en arguments passés::
         ]
     );
 
-et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
+Maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
 dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
 comme définie dans les routes::
 
@@ -491,7 +491,7 @@ prefix. Voici comment construire ce lien en utilisant le helper HTML::
         ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
-    // laisser un prefix
+    // Enlever un prefix
     echo $this->Html->link(
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
@@ -648,20 +648,20 @@ Créer des Routes RESTful
 
 .. php:staticmethod:: mapResources($controller, $options)
 
-Router makes it easy to generate RESTful routes for your controllers.
-If we wanted to allow REST access to a recipe database, we'd do
-something like this::
+Avec le router, il est facile de générer des routes RESTful pour vos controllers.
+Si nous voulions permettre l'accès à une base de données REST, nous ferions
+quelque chose comme ceci::
 
-    //Dans config/routes.php...
+    //Dans config/routes.php
 
-    Router:scope('/', function($routes) {
+    Router::scope('/', function($routes) {
         $routes->extensions(['json']);
         $routes->resources('recipes');
     });
 
-The first line sets up a number of default routes for easy REST
-access where method specifies the desired result format (e.g. xml,
-json, rss). These routes are HTTP Request Method sensitive.
+La première ligne définit un certain nombre de routes par défaut pour l'accès
+REST où la méthode spécifie le format du résultat souhaité (par exemple, xml,
+json, rss). Ces routes sont sensible aux méthodes de requêtes HTTP.
 
 =========== ===================== ==============================
 HTTP format URL.format            Controller action invoked
@@ -679,25 +679,25 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-CakePHP's Router class uses a number of different indicators to
-detect the HTTP method being used. Here they are in order of
-preference:
+La classe Router de CakePHP utilise un nombre différent d'indicateurs pour détecter
+la méthode HTTP utilisée. Voici la liste dans l'ordre de préférence:
 
-#. The \_method POST variable
-#. The X\_HTTP\_METHOD\_OVERRIDE
-#. The REQUEST\_METHOD header
+#. La variable POST \_method
+#. Le X\_HTTP\_METHOD\_OVERRIDE
+#. Le header REQUEST\_METHOD
 
-The \_method POST variable is helpful in using a browser as a
-REST client (or anything else that can do POST easily). Just set
-the value of \_method to the name of the HTTP request method you
-wish to emulate.
+La variable POST \_method est utile dans l'utilisation d'un navigateur comme un
+client REST (ou tout ce qui peut faire facilement du POST). Il suffit de configurer
+la valeur de \_method avec le nom de la méthode de requête HTTP que vous souhaitez
+émuler.
 
-Creating Nested Resources
--------------------------
+Créer des Ressources Imbriquées
+------------------------------
 
-Once you have connected resources in a scope, you can connect routes for
-sub-resources as well. Sub-resource routes will be prepended by the original
-resource name and a id parameter. For example::
+Une fois que vous avez connecté une ressource dans un scope, vous pouvez aussi
+connecter des routes pour des sous-ressources. Les routes de sous-ressources
+seront préfixés par le nom de la ressource originale et par son paramètre id.
+Par exemple::
 
     Router::scope('/api', function($routes) {
         $routes->resources('Articles', function($routes) {
@@ -705,43 +705,44 @@ resource name and a id parameter. For example::
         });
     });
 
-Will generate resource routes for both ``articles`` and ``comments``. The
-comments routes will look like::
+Le code ci-dessus va générer une ressource de routes pour ``articles`` et
+``comments``. Les routes des ``comments`` vont ressembler à ceci::
 
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
 .. note::
 
-    While you can nest resources as deeply as you require, it is not recommended to
-    nest more than 2 resources together.
+    Vous pouvez imbriquer autant de ressources que vous le souhaitez, mais il
+    n'est pas recommandé d'imbriquer plus de 2 ressources ensembles.
 
-Limiting the Routes Created
----------------------------
+Limiter la Création des Routes
+------------------------------
 
-By default CakePHP will connect 6 routes for each resource. If you'd like to
-only connect specific resource routes you can use the ``only`` option::
+Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous souhaitez
+connecter uniquement des routes spécifiques à une ressource, vous pouvez utilisez
+l'option ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
     ]);
 
-Would create read only resource routes. The route names are ``create``,
-``update``, ``view``, ``index``, and ``delete``.
+Le code ci-dessus devrais créer uniquement les routes de ressource ``lecture``.
+Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``.
 
-Changing the Controller Actions Used
-------------------------------------
+Changer les Actions du Controller
+---------------------------------
 
-You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit`` action is called ``update`` you can use
-the ``actions`` key to rename the actions used::
+Vous devrez peut-être modifier le nom des actions du controller qui sont utilisés
+lors de la connexion des routes. Par exemple, si votre action ``edit`` est nommée
+``update``, vous pouvez utiliser la clé ``actions`` pour renommer vos actions::
 
     $routes->resources('Articles', [
         'actions' => ['update' => 'update', 'add' => 'create']
     ]);
 
-The above would use ``update`` for the update action, and ``create`` instead of
-``add``.
+Le code ci-dessus va utiliser ``update`` pour l'action update, et ``create`` au
+lieu de ``add``.
 
 .. _custom-rest-routing:
 
