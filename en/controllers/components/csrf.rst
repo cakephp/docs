@@ -22,7 +22,7 @@ you can benefit from the CSRF protection it provides::
 
     public function initialize() {
         parent::initialize();
-        $this->loadComponent('Csrc', [
+        $this->loadComponent('Csrf', [
             'secure' => true
         ]);
     }
