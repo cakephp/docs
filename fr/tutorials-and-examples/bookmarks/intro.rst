@@ -56,6 +56,7 @@ ce qui suit::
         /tmp
         /vendor
         /webroot
+        .editorconfig
         .gitignore
         .htaccess
         .travis.yml
@@ -164,7 +165,8 @@ de configuration pourrait ressembler à ce qui suit::
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_bookmarks',
                 'encoding' => 'utf8',
-                'timezone' => 'UTC'
+                'timezone' => 'UTC',
+                'cacheMetadata' => true,
             ],
         ],
         // Plus de configuration en dessous.
@@ -272,7 +274,7 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
     );
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
-chemin ``/bookmarks/tagged/*``, vers ``BookmarksController::tags``. En
+chemin ``/bookmarks/tagged/*``, vers ``BookmarksController::tags()``. En
 définissant les routes, vous pouvez isoler le look de vos URLs, de la façon
 dont ils sont intégrés. Si nous visitions
 ``http://localhost:8765/bookmarks/tagged``, nous verrions une page d'erreur

@@ -25,7 +25,7 @@ vous pouvez profiter de la protection CSRF fournie::
 
     public function initialize() {
         parent::initialize();
-        $this->loadComponent('Csrc', [
+        $this->loadComponent('Csrf', [
             'secure' => true
         ]);
     }
