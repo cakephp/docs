@@ -692,7 +692,7 @@ la valeur de \_method avec le nom de la méthode de requête HTTP que vous souha
 émuler.
 
 Créer des Ressources Imbriquées
-------------------------------
+-------------------------------
 
 Une fois que vous avez connecté une ressource dans un scope, vous pouvez aussi
 connecter des routes pour des sous-ressources. Les routes de sous-ressources
