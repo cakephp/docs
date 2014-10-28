@@ -581,7 +581,7 @@ avec le code qui suit::
         $routes->fallbacks();
     });
 
-Dans le scope de route ``/``, l'exemple ci-dessus essayeras de capturer toutes les
+Dans le scope de route ``/``, l'exemple ci-dessus essaiera de capturer toutes les
 routes  plugin/controller/action avec des tirets et de les faire correspondre à
 leurs actions respectives.
 
