@@ -793,7 +793,7 @@ action de controller qui ressemblait à cela::
         }
     }
 
-Vous auriez la sortie suivante::
+Vous auriez le résultat suivant::
 
     Array
     (
@@ -809,7 +809,7 @@ dans lequel elles apparaissent dans l'URL appelé::
     debug($this->request->params['pass']);
     debug($this->passedArgs);
 
-Les deux du dessus sortiraient::
+Le résultat des 2 debug() du dessus serais::
 
     Array
     (
@@ -865,7 +865,7 @@ spéciales::
         '#' => 'top'
     ]);
 
-    // va générer une URL comme.
+    // Cela générera une URL comme:
     /articles/index?page=1#top
 
 Router will also convert any unknown parameters in a routing array to
