@@ -72,7 +72,7 @@ bindModel() ou unbindModel() pour changer les associations, vous devrez définir
 
     deleteAll() retournera true même si aucun enregistrement n'est supprimé,
     puisque les conditions pour la requête de suppression est un succès et
-    qu'aucun enregitrement correspondant ne reste.
+    qu'aucun enregistrement correspondant ne reste.
     
 
 .. meta::

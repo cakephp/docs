@@ -484,7 +484,7 @@ l'opération de sauvegarde.
 
 Si aucun des enregistrements du model associé n'existe pour l'instant dans le
 système (par exemple, vous voulez sauvegarder un nouveau User et ses
-enregitrements du Profile lié en même temps), vous aurez besoin de sauvegarder
+enregistrements du Profile lié en même temps), vous aurez besoin de sauvegarder
 d'abord le model principal, ou le model parent.
 
 Pour avoir une bonne idée de la façon de faire, imaginons que nous ayons une
