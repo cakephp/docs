@@ -747,7 +747,7 @@ lieu de ``add``.
 .. _custom-rest-routing:
 
 Classes de Route Personnalisée pour les Ressources
--------------------------------------------------
+--------------------------------------------------
 
 Vous pouvez spécifier la clé ``connectOptions`` dans le tableau ``$options`` de
 la fonction ``resources()`` pour fournir une configuration personnalisée utilisée
