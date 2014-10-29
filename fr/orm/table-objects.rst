@@ -892,7 +892,7 @@ elements ``<optgroup>`` avec FormHelper::
             // More data.
         ]
     ];
-    
+
 Trouver des Données Threaded
 ----------------------------
 
@@ -1342,6 +1342,11 @@ When an entity is saved a few things happen:
 8. Child associations are saved. For example, any listed hasMany, hasOne, or
    belongsToMany associations will be saved.
 9. The ``Model.afterSave`` event will be dispatched.
+
+.. warning::
+
+    If no changes are made to the entity when it is saved, the callbacks will
+    not fire because no save is performed.
 
 The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable validation and/or transactions using the ``$options`` argument for
