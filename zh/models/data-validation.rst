@@ -20,7 +20,7 @@
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
-            'born'  => 'date'
+            'born' => 'date'
         );
     }
 
@@ -37,23 +37,23 @@ CakePHP 有许多验证规则，使用起来相当容易。一些内置的验证
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
-                    'rule'     => 'alphaNumeric',
+                    'rule' => 'alphaNumeric',
                     'required' => true,
-                    'message'  => 'Letters and numbers only'
+                    'message' => 'Letters and numbers only'
                 ),
                 'between' => array(
-                    'rule'    => array('between', 5, 15),
+                    'rule' => array('between', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
             'password' => array(
-                'rule'    => array('minLength', '8'),
+                'rule' => array('minLength', '8'),
                 'message' => 'Minimum 8 characters long'
             ),
             'email' => 'email',
             'born' => array(
-                'rule'       => 'date',
-                'message'    => 'Enter a valid date',
+                'rule' => 'date',
+                'message' => 'Enter a valid date',
                 'allowEmpty' => true
             )
         );
@@ -93,11 +93,12 @@ email 字段必须是合法的电子邮件，而 born 字段必须是合法的�
     public $validate = array(
     	// 或者: array('ruleName', 'param1', 'param2' ...)
         'fieldName1' => array(
-            'rule'       => 'ruleName',
-            'required'   => true,
+            'rule' => 'ruleName',
+            'required' => true,
             'allowEmpty' => false,
-            'on'         => 'create', // 或者: 'update'
-            'message'    => 'Your Error Message'
+            // 或者: 'update'
+            'on' => 'create',
+            'message' => 'Your Error Message'
         )
     );
 
@@ -140,7 +141,7 @@ required
 
     public $validate = array(
         'login' => array(
-            'rule'     => 'alphaNumeric',
+            'rule' => 'alphaNumeric',
             'required' => true
         )
     );
@@ -183,7 +184,7 @@ message 键是为规则定义验证失败时显示的错误信息::
 
     public $validate = array(
         'password' => array(
-            'rule'    => array('minLength', 8),
+            'rule' => array('minLength', 8),
             'message' => '密码至少8个字符长'
         )
     );
@@ -221,11 +222,11 @@ message 键是为规则定义验证失败时显示的错误信息::
     public $validate = array(
         'login' => array(
             'loginRule-1' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
              ),
             'loginRule-2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Minimum length of 8 characters'
             )
         )
@@ -249,12 +250,12 @@ last
     public $validate = array(
         'login' => array(
             'rule' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
                 'last'    => false
              ),
             'rule2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Minimum length of 8 characters'
             )
         )
@@ -265,7 +266,7 @@ last
     public $validate = array(
         'login' => array(
             'Only alphabets and numbers allowed' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
              ),
         )
     );
@@ -287,7 +288,7 @@ last
 
     public $validate = array(
         'login' => array(
-            'rule'    => '/^[a-z0-9]{3,}$/i',
+            'rule' => '/^[a-z0-9]{3,}$/i',
             'message' => 'Only letters and integers, min 3 characters'
         )
     );
@@ -307,7 +308,7 @@ last
 
         public $validate = array(
             'promotion_code' => array(
-                'rule'    => array('limitDuplicates', 25),
+                'rule' => array('limitDuplicates', 25),
                 'message' => 'This code has been used too many times.'
             )
         );
@@ -342,7 +343,7 @@ last
 
         public $validate = array(
             'slug' => array(
-                'rule'    => 'alphaNumericDashUnderscore',
+                'rule' => 'alphaNumericDashUnderscore',
                 'message' => 'Slug can only be letters,' .
                     ' numbers, dash and underscore'
             )
@@ -510,7 +511,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Usernames must only contain letters and numbers.'
             )
         );
@@ -522,7 +523,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'password' => array(
-                'rule'    => array('between', 5, 15),
+                'rule' => array('between', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
             )
         );
@@ -538,7 +539,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
-                'on'   => 'create'
+                'on' => 'create'
             )
         );
 
@@ -549,7 +550,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'myCheckbox' => array(
-                'rule'    => array('boolean'),
+                'rule' => array('boolean'),
                 'message' => 'myCheckbox 的值不正确'
             )
         );
@@ -584,7 +585,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'ccnumber' => array(
-                'rule'    => array('cc', array('visa', 'maestro'), false, null),
+                'rule' => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'The credit card number you supplied was invalid.'
             )
         );
@@ -597,14 +598,14 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', '>=', 18),
+                'rule' => array('comparison', '>=', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', 'greater or equal', 18),
+                'rule' => array('comparison', 'greater or equal', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
@@ -616,7 +617,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'infinite' => array(
-                'rule'    => array('custom', '\u221E'),
+                'rule' => array('custom', '\u221E'),
                 'message' => 'Please enter an infinite number.'
             )
         );
@@ -639,8 +640,8 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'born' => array(
-                'rule'       => array('date', 'ymd'),
-                'message'    => 'Enter a valid date in YY-MM-DD format.',
+                'rule' => array('date', 'ymd'),
+                'message' => 'Enter a valid date in YY-MM-DD format.',
                 'allowEmpty' => true
             )
         );
@@ -668,7 +669,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'birthday' => array(
-                'rule'    => array('datetime', 'dmy'),
+                'rule' => array('datetime', 'dmy'),
                 'message' => 'Please enter a valid date and time.'
             )
         );
@@ -701,7 +702,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('email', true),
+                'rule' => array('email', true),
                 'message' => 'Please supply a valid email address.'
             )
         );
@@ -715,7 +716,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'food' => array(
-                'rule'    => array('equalTo', 'cake'),
+                'rule' => array('equalTo', 'cake'),
                 'message' => 'This value must be the string cake'
             )
         );
@@ -730,7 +731,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
                 'message' => 'Please supply a valid image.'
             )
         );
@@ -762,7 +763,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
         public $validate = array(
             'function' => array(
                  'allowedChoice' => array(
-                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'rule' => array('inList', array('Foo', 'Bar')),
                      'message' => 'Enter either Foo or Bar.'
                  )
              )
@@ -779,7 +780,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'clientip' => array(
-                'rule'    => array('ip', 'IPv4'), // 或者'IPv6'， 或者'both'(缺省值)
+                'rule' => array('ip', 'IPv4'), // 或者'IPv6'， 或者'both'(缺省值)
                 'message' => 'Please supply a valid IP address.'
             )
         );
@@ -793,16 +794,16 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'isUnique',
+                'rule' => 'isUnique',
                 'message' => 'This username has already been taken.'
             )
         );
 
-    可以提供多个字段来验证一组字段是否唯一::
+    可以提供多个字段并且设置 ``$or`` 为 ``false`` 来验证一组字段是否唯一::
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('isUnique', 'email', 'username'),
+                'rule' => array('isUnique', array('email', 'username'), false),
                 'message' => 'This username & email combination has already been used.'
             )
         );
@@ -823,7 +824,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('maxLength', 15),
+                'rule' => array('maxLength', 15),
                 'message' => 'Usernames must be no larger than 15 characters long.'
             )
         );
@@ -845,11 +846,11 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('mimeType', array('image/gif')),
+                'rule' => array('mimeType', array('image/gif')),
                 'message' => 'Invalid mime type.'
             ),
             'logo' => array(
-                'rule'    => array('mimeType', '#image/.+#'),
+                'rule' => array('mimeType', '#image/.+#'),
                 'message' => 'Invalid mime type.'
             ),
         );
@@ -862,7 +863,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Usernames must be at least 8 characters long.'
             )
         );
@@ -881,7 +882,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'salary' => array(
-                'rule'    => array('money', 'left'),
+                'rule' => array('money', 'left'),
                 'message' => 'Please supply a valid monetary amount.'
             )
         );
@@ -911,7 +912,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'title' => array(
-                'rule'    => 'notEmpty',
+                'rule' => 'notEmpty',
                 'message' => 'This field cannot be left blank'
             )
         );
@@ -925,7 +926,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'cars' => array(
-                'rule'    => 'numeric',
+                'rule' => 'numeric',
                 'message' => 'Please supply the number of cars.'
             )
         );
@@ -941,11 +942,11 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'wheels' => array(
-                'rule'    => 'naturalNumber',
+                'rule' => 'naturalNumber',
                 'message' => 'Please supply the number of wheels.'
             ),
             'airbags' => array(
-                'rule'    => array('naturalNumber', true),
+                'rule' => array('naturalNumber', true),
                 'message' => 'Please supply the number of airbags.'
             ),
         );
@@ -987,13 +988,13 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'number' => array(
-                'rule'    => array('range', -1, 11),
-                'message' => 'Please enter a number between 0 and 10'
+                'rule' => array('range', -1, 11),
+                'message' => 'Please enter a number between -1 and 11'
             )
         );
 
 
-    上面的例子会接受大于0(比如0.01)而且小于10 (比如9.99)的任何数值。
+    上面的例子会接受大于-1(比如 -0.99)而且小于11(比如 10.99)的任何数值。
 
     .. note::
 
@@ -1029,7 +1030,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
         public $validate = array(
             'image' => array(
-                'rule'    => 'uploadError',
+                'rule' => 'uploadError',
                 'message' => 'Something went wrong with the upload.'
             ),
         );

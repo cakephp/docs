@@ -9,6 +9,11 @@ CakePHP 开发人员将使用下面的编码规范。
 `CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_ 来检查你
 的代码是否遵循了必要的规范。
 
+语言
+========
+
+所有代码和注释应当以英文书写。
+
 添加新特性
 ==========
 
@@ -228,57 +233,130 @@ CakePHP 开发人员将使用下面的编码规范。
         ->subject('A great message')
         ->send();
 
-代码的注释
-==========
+文档代码块(*DocBlocks*)
+=======================
 
-所有的注释都应该是英文, 并且应该清楚地描述被注释的代码段。
+所有的注释代码块，除了文件中的第一个代码块，之前总是应当有一个空行。
 
-注释可以包括以下`phpDocumentor <http://phpdoc.org>`_标签:
+文件头文档代码块
+--------------------
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+所有的 PHP 文件都应当包含一个文件头文档代码块，看起来应当象这样::
+
+    <?php
+    /**
+    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    *
+    * Licensed under The MIT License
+    * For full copyright and license information, please see the LICENSE.txt
+    * Redistributions of files must retain the above copyright notice.
+    *
+    * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    * @link          http://cakephp.org CakePHP(tm) Project
+    * @since         X.Y.Z
+    * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+    */
+
+包含的 `phpDocumentor <http://phpdoc.org>`_ 标签为：
+
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+
+类文档代码块
+------------
+
+类文档代码块应当象这样::
+
+    /**
+     * 类的简短描述。
+     *
+     * 类的详细描述。
+     * 可使用多行。
+     *
+     * @deprecated 3.0.0 在 2.6.0 版本中作废。将在 3.0.0 版本中移除。使用 Bar 代替。
+     * @see Bar
+     * @link http://book.cakephp.org/2.0/en/foo.html
+     */
+    class Foo {
+
+    }
+
+类文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
+
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   使用格式 ``@version <vector> <description>`` ，其中 ``version``和``description``
-   是必须的。
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   ``description`` 是必须的。
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+
+属性文档代码块
+--------------
+
+属性文档代码块应当象这样::
+
+    /**
+     * @var string|null 属性的描述。
+     *
+     * @deprecated 3.0.0 在 2.5.0 版本中作废。将在 3.0.0 版本中移除。使用 $_bla 代替。
+     * @see Bar::$_bla
+     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     */
+    protected $_bar = null;
+
+属性文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   ``description`` 是必须的。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
-PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在文档块(*DocBlock*)行
-的开头才会起作用, 例如::
+方法/函数文档代码块
+-------------------
 
-    /**
-     * Tag example.
-     *
-     * @author 这个标签会被处理, 但这个@version会被忽略
-     * @version 1.0 这个标签也会被处理
-     */
-
-::
+方法和函数文档代码块应当象这样::
 
     /**
-     * 内嵌 phpDoc 的例子。
+     * 方法的简短描述。
      *
-     * 这个函数致力于与 foo() 联手统治世界。
+     * 方法的详细描述。
+     * 可使用多行。
      *
-     * @return void
-     */
-    function bar() {
-    }
+     * @param string $param2 第一个参数。
+     * @param array|null $param2 第二个参数。
+     * @return array cakes 数组。
+     * @throws Exception 如果出错。
+     *
+     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @deprecated 3.0.0 在 2.5.0 版本中作废。将在 3.0.0 版本中移除。使用 Bar::baz 代替。
+     * @see Bar::baz
+     /*
+     public function bar($param1, $param2 = null) {
+     }
 
-    /**
-     * Foo 函数.
-     *
-     * @return void
-     */
-    function foo() {
-    }
+方法和函数文档代码块可以包含如下 `phpDocumentor <http://phpdoc.org>`_ 标签：
 
-所有注释段, 除了一个文件中的第一段, 之前总是应当有一个空行。
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   使用 ``@version <vector> <description>`` 格式，其中 ``version`` 和 
+   ``description`` 是必须的。
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
 
 变量类型
 --------
