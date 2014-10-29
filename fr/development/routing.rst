@@ -60,7 +60,7 @@ capable de générer une chaîne URL::
     use Cake\Routing\Router;
 
     echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);
-    // Will output
+    // Va afficher
     /articles/15
 
 Les routes peuvent aussi être labellisées avec un nom unique, cela vous permet
@@ -362,7 +362,7 @@ doivent aussi être rendus disponibles en arguments passés::
         ]
     );
 
-et maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
+Maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
 dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
 comme définie dans les routes::
 
@@ -429,28 +429,28 @@ utilisant la valeur de configuration ``Routing.prefixes``, soit en définissant
 la clé ``prefix`` avec un appel de ``Router::connect()``::
 
     Router::prefix('admin', function($routes) {
-        // All routes here will be prefixed with `/admin`
-        // And have the prefix => admin route element added.
+        // Toutes les routes ici seront préfixées avec `/admin` et auront
+        // l'élément de route prefix => admin ajouté.
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
     });
 
-Prefixes are mapped to sub-namespaces in your applications ``Controller``
-namespace. By having prefixes as separate controllers you can create smaller,
-simpler controllers. Behavior that is common to the prefixed and non-prefixed
-controllers can be encapsulated using inheritance,
-:doc:`/controllers/components`, or traits.  Using our users example, accessing
-the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
-``App\Controller\Admin\UsersController`` passing 5 as the first parameter. The
-view file used would be ``src/Template/Admin/Users/edit.ctp``
+Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
+``Controller`` de votre application. En ayant des préfixes en tant que controller
+séparés, vous pouvez créer de plus petits et/ou de plus simples controllers.
+Les comportements communs au controllers préfixés et non-préfixés peuvent être
+encapsulés via héritage :doc:`/controllers/components`, ou traits. En utilisant
+notre exemple des utilisateurs, accéder à l'url ``/admin/users/edit/5`` devrait
+appeler la méthode ``edit`` de notre ``App\Controller\Admin\UsersController``
+en passant 5 comme premier paramètre. Le fichier de vue utilisé serait
+``src/Template/Admin/Users/edit.ctp``.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::
 
     Router::prefix('admin', function($routes) {
-        // Because you are in the admin scope,
-        // you do not need to include the /admin prefix
-        // or the admin route element.
+        // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
+        // d'inclure le prefix /admin ou l'élement de route admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
@@ -491,7 +491,7 @@ prefix. Voici comment construire ce lien en utilisant le helper HTML::
         ['prefix' => 'manager', 'controller' => 'Articles', 'action' => 'add']
     );
 
-    // laisser un prefix
+    // Enlever un prefix
     echo $this->Html->link(
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
@@ -509,25 +509,26 @@ Routing des Plugins
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Plugin routes are most easily created using the ``plugin()`` method. This method
-creates a new routing scope for the plugin's routes::
+Les routes des plugins sont les plus faciles à créer en utilisant la méthode
+``plugin()``. Cette méthode crée un nouveau scope pour les routes de plugin::
 
     Router::plugin('DebugKit', function($routes) {
-        // Routes connected here are prefixed with '/debug_kit' and
-        // have the plugin route element set to 'DebugKit'
+        // Les routes connectées ici sont préfixées par '/debug_kit' et ont
+        // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When creating plugin scopes, you can customize the path element used with the
-``path`` option::
+Lors de la création des scopes de plugin, vous pouvez personnaliser le chemin de
+l'élément avec l'option ``path``::
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
-        // Routes connected here are prefixed with '/debugger' and
-        // have the plugin route element set to 'DebugKit'
+        // Les routes connectées ici sont préfixées par '/debugger' et ont
+        // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-When using scopes you can nest plugin scopes within prefix scopes::
+Lors de l'utilisation des scopes, vous pouvez imbriquer un scope de plugin dans un
+scope de prefix::
 
     Router::prefix('admin', function($routes) {
         $routes->plugin('DebugKit', function($routes) {
@@ -535,40 +536,41 @@ When using scopes you can nest plugin scopes within prefix scopes::
         });
     });
 
-The above would create a route that looks like ``/admin/debug_kit/:controller``.
-It would have the ``prefix``, and ``plugin`` route elements set.
+Le code ci-dessus devrait créer une route similaire à ``/admin/debug_kit/:controller``.
+Elle devrait avoir les éléments de route ``prefix`` et ``plugin`` définis.
 
-You can create links that point to a plugin, by adding the plugin key to your
-URL array::
+Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
+``plugin`` au tableau de l'URL::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-Conversely if the active request is a plugin request and you want to create
-a link that has no plugin you can do the following::
+Inversement, si la requête active est une requête de plugin et que vous souhaitez
+créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-By setting ``plugin => null`` you tell the Router that you want to
-create a link that is not part of a plugin.
+En définissant ``plugin => null``, vous dites au Router que vous souhaitez créer
+un lien qui n'appartient pas à un plugin.
 
-SEO-Friendly Routing
---------------------
+Routing Favorisant le SEO
+-------------------------
 
-As a SEO-minded developer, it'll be desirable to outfit your URLs with dashes in
-order to avoid your application being cast into the search engine shadows,
-and hoist it to the divine rankings of the search engine gods. The
-``DashedRoute`` class furnishes your application with the ability to route
-plugin, controller, and camelized action names to a dashed URL.
+En tant que développeur SEO, il est souhaitable d'avoir des URLs avec des tirets,
+afin d'éviter que vos URLs soit dans l'ombre des moteurs de recherche, et par
+conséquent, améliorer le référencement de vos URLs dans les moteurs de recherche.
+La classe ``DashedRoute`` fournit à votre application la possibilité de créer des
+URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
+``camelCase``.
 
-For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
-``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
-with the following router connection::
+Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
+et une action ``showItems``, la route générée sera ``/to-do/todo-items/show-items``
+avec le code qui suit::
 
     Router::scope('/', function($routes) {
         $routes->connect('/:plugin/:controller/:action',
@@ -579,8 +581,9 @@ with the following router connection::
         $routes->fallbacks();
     });
 
-Under the ``/`` routing scope, the previous example will attempt to catch all
-plugin/controller/action dashed routes and map them to their respective actions.
+Dans le scope de route ``/``, l'exemple ci-dessus essaiera de capturer toutes les
+routes  plugin/controller/action avec des tirets et de les faire correspondre à
+leurs actions respectives.
 
 .. index:: file extensions
 .. _file-extensions:
@@ -595,11 +598,12 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
     Router::parseExtensions(['html', 'rss']);
 
-Ceci indiquera au routeur de supprimer toutes extensions de fichiers
-correspondantes et ensuite d'analyser ce qui reste.
-
-Si vous voulez créer une URL comme /page/titre-de-page.html, vous devriez
-créer votre route comme illustré ci-dessous::
+Cela activera les extensions de nom pour toutes les routes déclarées **après**
+l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
+seront fusionnées avec la liste des extensions existantes. Vous pouvez passer
+``false`` en second argument pour remplacer la liste d'extension déjà existante.
+Si vous appelez la méthode sans arguments, elle retournera la liste des extensions
+existantes. Vous pouvez définir des extensions pour chaque scope::
 
     Router::scope('/api', function($routes) {
         $routes->extensions(['json', 'xml']);
@@ -607,13 +611,13 @@ créer votre route comme illustré ci-dessous::
 
 .. note::
 
-    Setting the extensions should be the first thing you do in a scope, as the
-    extensions will only be applied to routes connected **after** the extensions
-    are set.
+    Le réglage des extensions devrait être la première chose que vous devriez faire
+    dans un scope, car les extensions seront appliquées uniquements aux routes
+    qui sont définies **après** la déclaration des extentions.
 
-By using extensions, you tell the router to remove any matching file extensions,
-and then parse what remains. If you want to create a URL such as
-/page/title-of-page.html you would create your route using::
+En utilisant des extensions, vous dites au router de supprimer toutes les extensions
+de fichiers correspondant, puis d'analyser le reste. Si vous souhaitez créer une
+URL comme ``/page/title-of-page.html`` vous devriez créer un scope comme ceci::
 
     Router::scope('/api', function($routes) {
         $routes->extensions(['json', 'xml']);
@@ -626,15 +630,16 @@ and then parse what remains. If you want to create a URL such as
         );
     });
 
-Then to create links which map back to the routes simply use::
+Ensuite, pour créer des liens, utilisez simplement::
 
     $this->Html->link(
         'Link title',
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-File extensions are used by :doc:`/controllers/components/request-handling`
-to do automatic view switching based on content types.
+Les extensions de fichier sont utilisées par le :doc:`/controllers/components/request-handling`
+qui fait la commutation des vues automatiquement en se basant sur les types de
+contenu.
 
 .. _resource-routes:
 
@@ -643,20 +648,20 @@ Créer des Routes RESTful
 
 .. php:staticmethod:: mapResources($controller, $options)
 
-Router makes it easy to generate RESTful routes for your controllers.
-If we wanted to allow REST access to a recipe database, we'd do
-something like this::
+Avec le router, il est facile de générer des routes RESTful pour vos controllers.
+Si nous voulions permettre l'accès à une base de données REST, nous ferions
+quelque chose comme ceci::
 
-    //Dans config/routes.php...
+    //Dans config/routes.php
 
-    Router:scope('/', function($routes) {
+    Router::scope('/', function($routes) {
         $routes->extensions(['json']);
         $routes->resources('recipes');
     });
 
-The first line sets up a number of default routes for easy REST
-access where method specifies the desired result format (e.g. xml,
-json, rss). These routes are HTTP Request Method sensitive.
+La première ligne définit un certain nombre de routes par défaut pour l'accès
+REST où la méthode spécifie le format du résultat souhaité (par exemple, xml,
+json, rss). Ces routes sont sensibles aux méthodes de requêtes HTTP.
 
 =========== ===================== ==============================
 HTTP format URL.format            Controller action invoked
@@ -674,25 +679,25 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-CakePHP's Router class uses a number of different indicators to
-detect the HTTP method being used. Here they are in order of
-preference:
+La classe Router de CakePHP utilise un nombre différent d'indicateurs pour détecter
+la méthode HTTP utilisée. Voici la liste dans l'ordre de préférence:
 
-#. The \_method POST variable
-#. The X\_HTTP\_METHOD\_OVERRIDE
-#. The REQUEST\_METHOD header
+#. La variable POST \_method
+#. Le X\_HTTP\_METHOD\_OVERRIDE
+#. Le header REQUEST\_METHOD
 
-The \_method POST variable is helpful in using a browser as a
-REST client (or anything else that can do POST easily). Just set
-the value of \_method to the name of the HTTP request method you
-wish to emulate.
+La variable POST \_method est utile dans l'utilisation d'un navigateur comme un
+client REST (ou tout ce qui peut faire facilement du POST). Il suffit de configurer
+la valeur de \_method avec le nom de la méthode de requête HTTP que vous souhaitez
+émuler.
 
-Creating Nested Resources
--------------------------
+Créer des Ressources Imbriquées
+-------------------------------
 
-Once you have connected resources in a scope, you can connect routes for
-sub-resources as well. Sub-resource routes will be prepended by the original
-resource name and a id parameter. For example::
+Une fois que vous avez connecté une ressource dans un scope, vous pouvez aussi
+connecter des routes pour des sous-ressources. Les routes de sous-ressources
+seront préfixées par le nom de la ressource originale et par son paramètre id.
+Par exemple::
 
     Router::scope('/api', function($routes) {
         $routes->resources('Articles', function($routes) {
@@ -700,51 +705,53 @@ resource name and a id parameter. For example::
         });
     });
 
-Will generate resource routes for both ``articles`` and ``comments``. The
-comments routes will look like::
+Le code ci-dessus va générer une ressource de routes pour ``articles`` et
+``comments``. Les routes des ``comments`` vont ressembler à ceci::
 
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
 .. note::
 
-    While you can nest resources as deeply as you require, it is not recommended to
-    nest more than 2 resources together.
+    Vous pouvez imbriquer autant de ressources que vous le souhaitez, mais il
+    n'est pas recommandé d'imbriquer plus de 2 ressources ensembles.
 
-Limiting the Routes Created
----------------------------
+Limiter la Création des Routes
+------------------------------
 
-By default CakePHP will connect 6 routes for each resource. If you'd like to
-only connect specific resource routes you can use the ``only`` option::
+Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous souhaitez
+connecter uniquement des routes spécifiques à une ressource, vous pouvez utilisez
+l'option ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
     ]);
 
-Would create read only resource routes. The route names are ``create``,
-``update``, ``view``, ``index``, and ``delete``.
+Le code ci-dessus devrait créer uniquement les routes de ressource ``lecture``.
+Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``.
 
-Changing the Controller Actions Used
-------------------------------------
+Changer les Actions du Controller
+---------------------------------
 
-You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit`` action is called ``update`` you can use
-the ``actions`` key to rename the actions used::
+Vous devrez peut-être modifier le nom des actions du controller qui sont utilisés
+lors de la connexion des routes. Par exemple, si votre action ``edit`` est nommée
+``update``, vous pouvez utiliser la clé ``actions`` pour renommer vos actions::
 
     $routes->resources('Articles', [
         'actions' => ['update' => 'update', 'add' => 'create']
     ]);
 
-The above would use ``update`` for the update action, and ``create`` instead of
-``add``.
+Le code ci-dessus va utiliser ``update`` pour l'action update, et ``create`` au
+lieu de ``add``.
 
 .. _custom-rest-routing:
 
-Custom Route Classes for Resource Routes
-----------------------------------------
+Classes de Route Personnalisée pour les Ressources
+--------------------------------------------------
 
-You can provide ``connectOptions`` key in the ``$options`` array for
-``resources()`` to provide custom setting used by ``connect()``::
+Vous pouvez spécifier la clé ``connectOptions`` dans le tableau ``$options`` de
+la fonction ``resources()`` pour fournir une configuration personnalisée utilisée
+par ``connect()``::
 
     Router::scope('/', function($routes) {
         $routes->resources('books', array(
@@ -786,7 +793,7 @@ action de controller qui ressemblait à cela::
         }
     }
 
-Vous auriez la sortie suivante::
+Vous auriez le résultat suivant::
 
     Array
     (
@@ -802,7 +809,7 @@ dans lequel elles apparaissent dans l'URL appelé::
     debug($this->request->params['pass']);
     debug($this->passedArgs);
 
-Les deux du dessus sortiraient::
+Le résultat des 2 debug() du dessus serait::
 
     Array
     (
@@ -858,7 +865,7 @@ spéciales::
         '#' => 'top'
     ]);
 
-    // va générer une URL comme.
+    // Cela générera une URL comme:
     /articles/index?page=1#top
 
 Router will also convert any unknown parameters in a routing array to
