@@ -436,13 +436,13 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
     });
 
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
-``Controller`` dans votre application. En ayant des préfixes comme séparateurs de
-controllers, vous pouvez créer de plus petits et/ou de plus simples controllers.
-Les comportements communs au routes préfixées et non-préfixéss peuvent être
+``Controller`` de votre application. En ayant des préfixes en tant que controller
+séparés, vous pouvez créer de plus petits et/ou de plus simples controllers.
+Les comportements communs au controllers préfixés et non-préfixés peuvent être
 encapsulés via héritage :doc:`/controllers/components`, ou traits. En utilisant
 notre exemple des utilisateurs, accéder à l'url ``/admin/users/edit/5`` devrait
 appeler la méthode ``edit`` de notre ``App\Controller\Admin\UsersController``
-en passant 5 comme premier paramètre. Le fichier de vue utilisé devrais être
+en passant 5 comme premier paramètre. Le fichier de vue utilisé serait
 ``src/Template/Admin/Users/edit.ctp``.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
@@ -513,7 +513,7 @@ Les routes des plugins sont les plus faciles à créer en utilisant la méthode
 ``plugin()``. Cette méthode crée un nouveau scope pour les routes de plugin::
 
     Router::plugin('DebugKit', function($routes) {
-        // Les routes connectés ici sont préfixés par '/debug_kit' et ont
+        // Les routes connectées ici sont préfixées par '/debug_kit' et ont
         // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
@@ -522,12 +522,12 @@ Lors de la création des scopes de plugin, vous pouvez personnaliser le chemin d
 l'élément avec l'option ``path``::
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
-        // Les routes connectés ici sont préfixés par '/debugger' et ont
+        // Les routes connectées ici sont préfixées par '/debugger' et ont
         // l'élément de route plugin défini à 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-Lors de l'utilisation des scopes, vous pouvez définir un scope de plugin dans un
+Lors de l'utilisation des scopes, vous pouvez imbriquer un scope de plugin dans un
 scope de prefix::
 
     Router::prefix('admin', function($routes) {
@@ -537,7 +537,7 @@ scope de prefix::
     });
 
 Le code ci-dessus devrait créer une route similaire à ``/admin/debug_kit/:controller``.
-Elle devrais avoir les éléments de route ``prefix`` et ``plugin`` définies.
+Elle devrait avoir les éléments de route ``prefix`` et ``plugin`` définis.
 
 Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
 ``plugin`` au tableau de l'URL::
@@ -600,10 +600,10 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
 Cela activera les extensions de nom pour toutes les routes déclarées **après**
 l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
-seront fusionnés avec la liste des extensions existantes. Vous pouvez passer
+seront fusionnées avec la liste des extensions existantes. Vous pouvez passer
 ``false`` en second argument pour remplacer la liste d'extension déjà existante.
 Si vous appelez la méthode sans arguments, elle retournera la liste des extensions
-existante. Vous pouvez définir des extensions pour chaque scope::
+existantes. Vous pouvez définir des extensions pour chaque scope::
 
     Router::scope('/api', function($routes) {
         $routes->extensions(['json', 'xml']);
@@ -613,7 +613,7 @@ existante. Vous pouvez définir des extensions pour chaque scope::
 
     Le réglage des extensions devrait être la première chose que vous devriez faire
     dans un scope, car les extensions seront appliquées uniquements aux routes
-    qui sont définis **après** la déclaration des extentions.
+    qui sont définies **après** la déclaration des extentions.
 
 En utilisant des extensions, vous dites au router de supprimer toutes les extensions
 de fichiers correspondant, puis d'analyser le reste. Si vous souhaitez créer une
@@ -661,7 +661,7 @@ quelque chose comme ceci::
 
 La première ligne définit un certain nombre de routes par défaut pour l'accès
 REST où la méthode spécifie le format du résultat souhaité (par exemple, xml,
-json, rss). Ces routes sont sensible aux méthodes de requêtes HTTP.
+json, rss). Ces routes sont sensibles aux méthodes de requêtes HTTP.
 
 =========== ===================== ==============================
 HTTP format URL.format            Controller action invoked
@@ -696,7 +696,7 @@ Créer des Ressources Imbriquées
 
 Une fois que vous avez connecté une ressource dans un scope, vous pouvez aussi
 connecter des routes pour des sous-ressources. Les routes de sous-ressources
-seront préfixés par le nom de la ressource originale et par son paramètre id.
+seront préfixées par le nom de la ressource originale et par son paramètre id.
 Par exemple::
 
     Router::scope('/api', function($routes) {
@@ -727,7 +727,7 @@ l'option ``only``::
         'only' => ['index', 'view']
     ]);
 
-Le code ci-dessus devrais créer uniquement les routes de ressource ``lecture``.
+Le code ci-dessus devrait créer uniquement les routes de ressource ``lecture``.
 Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``.
 
 Changer les Actions du Controller
@@ -746,11 +746,11 @@ lieu de ``add``.
 
 .. _custom-rest-routing:
 
-Classes de Route Personnalisé pour les Ressources
+Classes de Route Personnalisée pour les Ressources
 -------------------------------------------------
 
 Vous pouvez spécifier la clé ``connectOptions`` dans le tableau ``$options`` de
-la fonction ``resources()`` pour fournir une configuration personnalisé utilisé
+la fonction ``resources()`` pour fournir une configuration personnalisée utilisée
 par ``connect()``::
 
     Router::scope('/', function($routes) {
@@ -809,7 +809,7 @@ dans lequel elles apparaissent dans l'URL appelé::
     debug($this->request->params['pass']);
     debug($this->passedArgs);
 
-Le résultat des 2 debug() du dessus serais::
+Le résultat des 2 debug() du dessus serait::
 
     Array
     (
