@@ -251,6 +251,9 @@ can add a virtual/computed field to the entity. In
         if (isset($this->_properties['tag_string'])) {
             return $this->_properties['tag_string'];
         }
+        if (empty($this->tags)) {
+            return '';
+        }
         $tags = new Collection($this->tags);
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';

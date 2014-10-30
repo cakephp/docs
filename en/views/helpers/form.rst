@@ -811,36 +811,17 @@ Creates a set of radio button inputs.
 
 **Options**
 
-* ``$attributes['value']`` to set which value should be selected default.
-
-* ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
-  will disable all of the generated radio buttons.
-
-* ``$attributes['legend']`` Radio elements are wrapped with a legend and
-  fieldset by default. Set ``$attributes['legend']`` to ``false`` to remove
-  them.::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    $attributes = ['legend' => false];
-    echo $this->Form->radio('gender', $options, $attributes);
-
-  Will output:
-
-  .. code-block:: html
-
-    <input name="gender" value="" type="hidden">
-    <label for="gender-m">
-        <input name="gender" id="gender-M" value="M" type="radio">
-        Male
-    </label>
-    <label for="gender-F">
-        <input name="gender" id="gender-F" value="F" type="radio">
-        Female
-    </label>
-
-If for some reason you don't want the hidden input, setting
-``$attributes['value']`` to a selected value or boolean ``false`` will
-do just that.
+* ``value`` - Indicates the value when this radio button is checked.
+* ``label`` - boolean to indicate whether or not labels for widgets should be
+  displayed.
+* ``hiddenField`` - boolean to indicate if you want the results of radio() to
+  include a hidden input with a value of ''. This is useful for creating radio
+  sets that are non-continuous.
+* ``disabled`` - Set to ``true`` or ``disabled`` to disable all the radio
+  buttons.
+* ``empty`` - Set to ``true`` to create an input with the value '' as the first
+  option. When ``true`` the radio label will be 'empty'. Set this option to
+  a string to control the label value.
 
 Creating Select Pickers
 -----------------------
