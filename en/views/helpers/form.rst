@@ -811,12 +811,12 @@ Creates a set of radio button inputs.
 
 **Options**
 
-* ``value`` - Indicate a value that is should be checked.
-* ``label`` - boolean to indicate whether or not labels for widgets show be
+* ``value`` - Indicates the value when this radio button is checked.
+* ``label`` - boolean to indicate whether or not labels for widgets should be
   displayed.
 * ``hiddenField`` - boolean to indicate if you want the results of radio() to
   include a hidden input with a value of ''. This is useful for creating radio
-  sets that non-continuous.
+  sets that are non-continuous.
 * ``disabled`` - Set to ``true`` or ``disabled`` to disable all the radio
   buttons.
 * ``empty`` - Set to ``true`` to create an input with the value '' as the first
