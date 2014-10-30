@@ -81,6 +81,19 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
                 '_serialize' => array('recipe')
             ));
         }
+        
+        public function add() {
+            $this->Recipe->create();
+            if ($this->Recipe->save($this->request->data)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            $this->set(array(
+                'message' => $message,
+                '_serialize' => array('message')
+            ));
+        }
 
         public function edit($id) {
             $this->Recipe->id = $id;
