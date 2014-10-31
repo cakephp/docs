@@ -844,36 +844,17 @@ Crée un jeu d'inputs radios.
 
 **Options**
 
-* ``$attributes['value']`` pour définir quelle valeur sera sélectionnée
-  par défaut.
-
-* ``$attributes['disabled']`` défini a ``true`` ou ``'disabled'``
-  désactivera tous les boutons radios générés.
-
-* ``$attributes['legend']`` Les éléments Radio sont enveloppés avec un
-  legend et un fieldset par défaut. Définir ``$attributes['legend']`` à
-  ``false`` pour les retirer.::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    $attributes = ['legend' => false];
-    echo $this->Form->radio('gender', $options, $attributes);
-
-  Affichera:
-
-  .. code-block:: html
-
-    <input name="gender" value="" type="hidden">
-    <label for="gender-m">
-        <input name="gender" id="gender-M" value="M" type="radio">
-        Male
-    </label>
-    <label for="gender-F">
-        <input name="gender" id="gender-F" value="F" type="radio">
-        Female
-    </label>
-
-Si pour quelque raisons vous ne voulez pas de l'input caché, définissez
-``$attributes['value']`` à une valeur sélectionnée ou le booléen ``false``.
+ *   ` ` v a l u e ` `   I n d i q u e   l a   v a l e u r   q u a n d   c e   b o u t o n   r a d i o  est coché. 
+ *   ` ` l a b e l ` `   -   b o o l éen pour indiquer si oui ou non les  l a b e l s  pour les  w i d g e t s 
+  doivent être affichés. 
+ *   ` ` h i d d e n F i e l d ` `   -   b o o l éen pour indiquer si vous voulez que les résultats de
+   r a d i o ( )   incluent un input caché avec une valeur de  ' ' .  C'est utile pour créer
+  des ensembles de  r a d i o  qui ne sont pas continus.
+ *   ` ` d i s a b l e d ` `   -   Défini à  ` ` t r u e ` `   o u   ` ` d i s a b l e d ` `  pour désactiver tous les
+  boutons radio.
+ *   ` ` e m p t y ` `   -  Défini à  ` ` t r u e ` `  pour créer un input avec la valeur  ' '  en
+  première   o p t i o n .  Quand à  ` ` t r u e ` `, le label radio sera  'vide' .  Définissez
+  cette option pour contrôler la valeur du label.
 
 Créer des Pickers Select
 ------------------------
@@ -1113,7 +1094,7 @@ un certain nombre d'options:
 * ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
   dans une direction. Par défaut à null.
 
-* ``default`` Le valeur par défaut à utilier par l'input. Une valeur dans 
+* ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
   ``$this->request->data`` correspondante au nom du l'input écrasera cette
   valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
 * ``timeFormat`` Le format d'heure à utiliser, soit 12 soit 24.
@@ -1131,8 +1112,8 @@ Créer des Inputs Year
 .. php:method:: year(string $fieldName, array $options = [])
 
 Crée un input de type select rempli avec les années comprises entre ``minYear``
-et ``maxYear``. En plus, des attributs HTML peuvent être fournis via $options. Si
-``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
+et ``maxYear``. En plus, des attributs HTML peuvent être fournis via $options.
+Si ``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
 
 * ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
   chaine, cette chaine est affichée comme élement vide.
@@ -1618,7 +1599,7 @@ Si vous désactiver le fieldset, la legend ne s'affichera pas.
 
 .. php:method:: allInputs(array $fields, $options = [])
 
-Cette méthode est étroitement liée à ``inputs()``, cependant l'argument 
+Cette méthode est étroitement liée à ``inputs()``, cependant l'argument
 ``$fields`` est égal par défaut à *tous* les champs de l'entity de niveau
 supérieur actuelle. Pour exclure des champs spécifiques de la liste d'inputs
 générées, définissez les à ``false`` dans le paramètre fields::
@@ -1629,9 +1610,9 @@ Ajouter des Widgets Personnalisés
 =================================
 
 CakePHP permet d'ajouter facilement des widgets personnalisés dans votre
-application, afin de les utiliser comme n'importe quel input. Tous les types   
+application, afin de les utiliser comme n'importe quel input. Tous les types
 d'input que contient le coeur de cake sont implémentés comme des widgets. Ainsi
-vous pouvez facilement remplacer n'importe quel widget de base par votre propre 
+vous pouvez facilement remplacer n'importe quel widget de base par votre propre
 implémentation.
 
 Construire une Classe Widget
@@ -1645,7 +1626,7 @@ un chaine HTML pourle widget. Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
 argument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez
 construire un widget Autocomplete, vous pouvez le faire comme ceci::
-    
+
     namespace App\View\Widget;
 
     use Cake\View\Widget\WidgetInterface;
@@ -1669,7 +1650,7 @@ construire un widget Autocomplete, vous pouvez le faire comme ceci::
         }
 
     }
-    
+
 
 Évidemment, c'est un exemple très simple, mais il montre comment développer
 un widget personnalisé.
