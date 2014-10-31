@@ -1039,7 +1039,7 @@ ci-dessous::
         );
     }
 
-**Récupérer un tableau imbriqué d'enregitrements associés:**
+**Récupérer un tableau imbriqué d'enregistrements associés:**
 
 Si votre table a un champ ``parent_id``, vous pouvez aussi utiliser
 :ref:`model-find-threaded` pour récupérer un tableau imbriqué d'enregistrements

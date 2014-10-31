@@ -112,7 +112,7 @@ beforeSave
 ``beforeSave(array $options = array())``
 
 Placez toute logique de pré-enregistrement dans cette fonction. Cette fonction
-s'exécute immediatement après que les données du model ont été validées avec
+s'exécute immédiatement après que les données du model ont été validées avec
 succès, mais juste avant que les données ne soient sauvegardées. Cette fonction
 devrait toujours retourner true si voulez que l'opération d'enregistrement
 se poursuive.
@@ -182,7 +182,7 @@ dépendent de cet enregistrement soient aussi supprimés.
 
 .. tip::
 
-    Assurez vous que beforeDelete() retourne true, ou votre
+    Assurez-vous que beforeDelete() retourne true, ou votre
     suppression ne va pas marcher.
 
 ::
