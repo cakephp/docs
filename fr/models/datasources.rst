@@ -156,7 +156,7 @@ allons l'appeler ``FarAwaySource`` et nous allons la placer dans
         }
 
     /**
-     * calculate() est pour determiner la façon dont nous allons compter
+     * calculate() est pour déterminer la façon dont nous allons compter
      * les enregistrements et est requis pour faire fonctionner ``update()``
      * et ``delete()``.
      *
@@ -179,14 +179,14 @@ allons l'appeler ``FarAwaySource`` et nous allons la placer dans
              * méthode calculate() ci-dessus. Nous pouvons soit vérifier la
              * source du dépôt, soit une autre façon pour récupérer le compte
              * de l\'enregistrement. Ici nous allons simplement retourner 1
-             * ainsi ``update()`` et ``delete()`` vont estimer que l\'enregistrment
+             * ainsi ``update()`` et ``delete()`` vont estimer que l\'enregistrement
              * existe.
              */
             if ($queryData['fields'] === 'COUNT') {
                 return array(array(array('count' => 1)));
             }
             /**
-             * Maintenant nous récupèrons, décodons et retournons les données du dépôt.
+             * Maintenant nous récupérons, décodons et retournons les données du dépôt.
              */
             $queryData['conditions']['apiKey'] = $this->config['apiKey'];
             $json = $this->Http->get('http://example.com/api/list.json', $queryData['conditions']);
@@ -216,7 +216,7 @@ allons l'appeler ``FarAwaySource`` et nous allons la placer dans
 
     /**
      * Implémente le U dans CRUD. Appel à ``Model::save()`` avec $Model->id
-     * défini se trouve ici. Selon la source du dépôt, vous pouvez just appeler
+     * défini se trouve ici. Selon la source du dépôt, vous pouvez juste appeler
      * ``$this->create()``.
      */
         public function update(Model $model, $fields = null, $values = null, $conditions = null) {

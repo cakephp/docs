@@ -70,7 +70,7 @@ primaryKey
 ==========
 
 Chaque table a normalement une clé primaire, ``id``. Vous pouvez changer
-le nom du champ que le model utlilise en clé primaire. Ceci est courant
+le nom du champ que le model utilise en clé primaire. Ceci est courant
 quand on configure CakePHP pour utiliser une table d'une base de données
 existante.
 

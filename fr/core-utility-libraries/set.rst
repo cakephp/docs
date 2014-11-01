@@ -1506,7 +1506,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Trie un tableau selon toute valeur, determiné par un chemin Set-compatible::
+    Trie un tableau selon toute valeur, déterminé par un chemin Set-compatible::
 
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),

@@ -441,7 +441,7 @@ User      users.messages\_read   Compte les ``Message`` lus
 --------- ---------------------- -------------------------------------------
 User      users.messages\_unread Compte les ``Message`` non lus
 --------- ---------------------- -------------------------------------------
-Message   messages.is\_read      Determines si un ``Message`` est lu ou non.
+Message   messages.is\_read      Détermines si un ``Message`` est lu ou non.
 ========= ====================== ===========================================
 
 Avec la configuration de votre ``belongsTo`` qui ressemblerait à cela::
