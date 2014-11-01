@@ -444,7 +444,7 @@ It is also possible to sort a column based on associations:
     <table>
         <tr>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
-            <th><?= $this->Paginator->sort('Author.name', 'Author') ?></th>
+            <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
         </tr>
            <?php foreach ($recipies as $recipe): ?>
         <tr>
