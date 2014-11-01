@@ -172,7 +172,7 @@ Le XML rendu va au final ressembler à ceci::
     </recipes>
 
 Créer la logique pour l'action edit est un peu vicieux, mais pas de beaucoup.
-Puisque nous fournissons un API qui sort du XML, c'est un chois naturel pour
+Puisque nous fournissons un API qui sort du XML, c'est un choix naturel pour
 recevoir le XML en entrée. Ne vous inquiétez pas, les classes
 :php:class:`RequestHandler` et :php:class:`Router` facilitent beaucoup les
 choses. Si une requête POST ou PUT a un content-type XML,
