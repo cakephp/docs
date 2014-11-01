@@ -702,6 +702,7 @@ into collections that can be iterated more than once::
 
     // In PHP 5.5+
     function results() {
+        ...
         foreach ($transientElements as $e) {
             yield $e;
         }
