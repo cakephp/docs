@@ -128,8 +128,9 @@ method. The helper we're going to test will be formatting progress bar HTML.
 Our helper looks like::
 
     namespace App\View\Helper;
-
-    class ProgressHelper extends AppHelper {
+    use Cake\View\Helper;
+    
+    class ProgressHelper extends Helper {
         public function bar($value) {
             $width = round($value / 100, 2) * 100;
             return sprintf(
