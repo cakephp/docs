@@ -234,7 +234,7 @@ Retrieving one language without using I18n::locale
 
 calling ``I18n::locale('spa');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without modifying
-the application's state. For these scenarios use the behavior ``locale`` method:
+the application's state. For these scenarios use the behavior ``locale`` method::
 
     I18n::locale('eng'); // reset for illustration
     $articles = TableRegistry::get('Articles');
@@ -245,7 +245,7 @@ the application's state. For these scenarios use the behavior ``locale`` method:
 
 Note that this only changes the locale of the Articles table, it would not affect
 the langauge of associated data. To use this technique to affect associated data
-it's necessary to call locale on each table for example:
+it's necessary to call locale on each table for example::
 
     I18n::locale('eng'); // reset for illustration
     $articles = TableRegistry::get('Articles');
