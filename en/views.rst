@@ -433,14 +433,12 @@ using something like::
         }
     }
 
-CakePHP features two core layouts (besides CakePHP's default
-layout) you can use in your own application: 'ajax' and 'flash'.
+Besides a default layout CakePHP's official skeleton app also has an 'ajax' layout.
 The Ajax layout is handy for crafting AJAX responses - it's an
 empty layout. (Most AJAX calls only require a bit of markup in
 return, rather than a fully-rendered interface.)
 
-Three other layouts, xml, js, and rss, exist in the core for a quick
-and easy way to serve up content that isn't text/html.
+The skeleton app also has a default layout to help generate RSS.
 
 Using Layouts from Plugins
 --------------------------
