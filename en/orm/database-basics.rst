@@ -55,8 +55,8 @@ would be::
     ]);
 
 
-Configuration options can also be provided as a DSN string. This is useful
-when working with environment variables or :term:`PaaS` providers::
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
 
     ConnectionManager::config('default', [
         'dsn' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',

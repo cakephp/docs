@@ -81,8 +81,8 @@ needed. For example in your ``config/app.php`` you could put the following::
     ]
     // ...
 
-Configuration options can also be provided as a DSN string. This is useful
-when working with environment variables or :term:`PaaS` providers::
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
 
     Cache::config('short', [
         'dsn' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
