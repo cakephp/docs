@@ -37,6 +37,14 @@ Shell
 - ``overwrite()`` has been added to allow generating progress bars or to avoid outputting
   too many lines by replacing text that has been already outputted to the screen.
 
+Controller
+==========
+
+AuthComponent
+-------------
+
+- ``AuthComponent`` had the ``userFields`` option added.
+
 Behavior
 ========
 
