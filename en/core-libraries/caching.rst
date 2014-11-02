@@ -81,6 +81,16 @@ needed. For example in your ``config/app.php`` you could put the following::
     ]
     // ...
 
+Configuration options can also be provided as a DSN string. This is useful
+when working with environment variables or :term:`PaaS` providers::
+
+    Cache::config('short', [
+        'dsn' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
+    ]);
+
+When using a DSN string you can define any additional parameters/options as
+query string arguments.
+
 You can also configure Cache engines at runtime::
 
     // Using a short name

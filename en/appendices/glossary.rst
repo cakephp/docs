@@ -74,6 +74,11 @@ Glossary
         to allow you to code things once and re-use them across your
         application.
 
+    PaaS
+        Platform as a Service. Platform as a Service providers will provide
+        cloud based hosting, database and caching resources. Some popular
+        providers include Heroku, EngineYard and PagodaBox
+
 
 .. meta::
     :title lang=en: Glossary
