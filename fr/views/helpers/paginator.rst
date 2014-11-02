@@ -470,7 +470,8 @@ Il est aussi possible de trier une colonne basée sur des associations:
     <table>
         <tr>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
-            <th><?= $this->Paginator->sort('Author.name', 'Author') ?></th>
+            <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
+
         </tr>
            <?php foreach ($data as $recipe): ?>
         <tr>

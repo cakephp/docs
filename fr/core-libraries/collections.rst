@@ -641,12 +641,12 @@ The ``insert()`` method can operate array elements or objects implementing the
 Optimizing Collections
 ----------------------
 
-.. php:method: compile($preserveKeys = true)
+.. php:method: buffered()
 
 Collections often perform most operations that you create using its functions in
 a lazy way. This means that even though you can call a function, it does not
 mean it is executed right away. This is true for a great deal of functions in
-this class. Lazy evaluation allows allows you to save resources in situations
+this class. Lazy evaluation allows you to save resources in situations
 where you don't use all the values in a collection. You might not use all the
 values when iteration stops early, or when an exception/failure case is reached
 early.
@@ -688,14 +688,47 @@ both filters.
 
 Luckily we can overcome this issue with a single function. If you plan to reuse
 the values from certain operations more than once, you can compile the results
-into another collection using the ``compile()`` function::
+into another collection using the ``buffered()`` function::
 
-    $ages = $collection->extract('age')->compile();
+    $ages = $collection->extract('age')->buffered();
     $youngerThan30 = ...
     $olderThan30 = ...
 
 Now, when both collections are iterated, they will only call the
 extracting operation once.
+
+Making Collections Rewindable
+-----------------------------
+
+The ``buffered()`` method is also useful for converting non-rewindable iterators
+into collections that can be iterated more than once::
+
+    // In PHP 5.5+
+    function results() {
+        ...
+        foreach ($transientElements as $e) {
+            yield $e;
+        }
+    }
+    $rewindable = (new Collection(results()))->buffered();
+
+Cloning Collections
+-------------------
+
+.. php:method: compile($preserveKeys = true)
+
+Sometimes you need to get a clone of the elements from another
+collection. This is useful when you need to iterate the same set from different
+places at the same time. In order to clone a collection out of another use the
+``compile()`` method::
+
+    $ages = $collection->extract('age')->compile();
+
+    foreach ($ages as $age) {
+        foreach ($collection as $element) {
+            echo $element->name . ' - ' . $age;
+        }
+    }
 
 .. meta::
     :title lang=fr: Collections

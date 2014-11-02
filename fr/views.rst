@@ -450,15 +450,13 @@ actions du controller en utilisant quelque chose comme::
         }
     }
 
-CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
-du layout default de CakePHP) que vous pouvez utiliser dans votre propre
-application: 'ajax' et 'flash'.
-Le layout AJAX est pratique pour élaborer des réponses AJAX - c'est un layout
-vide (la plupart des appels ajax ne nécessitent qu'un peu de balise en retour,
-et pas une interface de rendu complète).
+Outre le layout par défaut, le squelette officiel d'application CakePHP dispose
+également d'un layout 'ajax'. Le layout AJAX est pratique pour élaborer des
+réponses AJAX - c'est un layout vide (la plupart des appels ajax ne nécessitent
+qu'un peu de balise en retour, et pas une interface de rendu complète).
 
-Trois autres layouts, xml, js, et rss, existent dans le coeur permettant
-de servir rapidement et facilement du contenu qui n'est pas du text/html.
+Le squelette d'aplication dispose également d'un layout par défaut pour aider
+à générer du RSS.
 
 Utiliser les layouts à partir de plugins
 ----------------------------------------

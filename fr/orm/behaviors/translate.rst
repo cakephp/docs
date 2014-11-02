@@ -238,7 +238,7 @@ Récupérer une langue sans utiliser I18n::locale
 Appeler ``I18n::locale('spa');`` change la locale par défaut pour tous les finds
 traduits, il peut y avoir des fois où vous souhaitez récupérer du contenu
 traduit sans modification de l'état de l'application. Pour ces scenarii,
-utilisez la méthode ``locale`` du behavior:
+utilisez la méthode ``locale`` du behavior::
 
     I18n::locale('eng'); // reset for illustration
     $articles = TableRegistry::get('Articles');
@@ -250,7 +250,7 @@ utilisez la méthode ``locale`` du behavior:
 Notez que ceci va seulement changer la locale de la table Articles, cela ne
 changera pas la langue des données associées. Pour utiliser cette technique
 pour changer les données associées, il est nécessaire d'appeler la locale
-pour chaque table par exemple:
+pour chaque table par exemple::
 
     I18n::locale('eng'); // reset for illustration
     $articles = TableRegistry::get('Articles');

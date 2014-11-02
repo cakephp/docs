@@ -199,6 +199,8 @@ Ainsi vous pouvez soit laisser s'afficher la page d'erreur normale, soit utilise
 un bloc try catch et faire des actions appropriées quand une
 ``NotFoundException`` est attrapée::
 
+    use Cake\Network\Exception\NotFoundException;
+    
     public function index() {
         try {
             $this->paginate();
