@@ -1578,7 +1578,7 @@ could do the following::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class Autocomplete implements WidgetInterface {
+    class AutocompleteWidget implements WidgetInterface {
 
         protected $_templates;
 
@@ -1611,7 +1611,7 @@ a setting::
     public $helpers = [
         'Form' => [
             'widgets' => [
-                'autocomplete' => ['App\View\Widget\Autocomplete']
+                'autocomplete' => ['Autocomplete']
             ]
         ]
     ];
@@ -1623,7 +1623,7 @@ dependencies by declaring them::
         'Form' => [
             'widgets' => [
                 'autocomplete' => [
-                    'App\View\Widget\Autocomplete',
+                    'App\View\Widget\AutocompleteWidget',
                     'text',
                     'label'
                 ]
@@ -1640,11 +1640,11 @@ widgets using the ``addWidget()`` method would look like::
     // Using a classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['App\View\Widget\Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text' 'label']
     );
 
     // Using an instance - requires you to resolve dependencies.
-    $autocomplete = new Autocomplete(
+    $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
         $this->Form->widgetRegistry()->get('text'),
         $this->Form->widgetRegistry()->get('label'),
