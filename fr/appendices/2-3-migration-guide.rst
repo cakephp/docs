@@ -271,7 +271,7 @@ FormHelper
   en ajoutant ``'novalidate' => true`` dans les options de FormHelper::create().
 - :php:meth:`FormHelper::input()` génère maintenant les elements d'input de
   type ``tel`` et ``email`` basé sur les noms de champ si l'option ``type``
-  n'est pas specifiée.
+  n'est pas spécifiée.
 
 HtmlHelper
 ----------

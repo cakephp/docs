@@ -156,7 +156,7 @@ de notre colonne en utilisant la forme ``MonModel__MonChamp`` comme ceci::
 
     $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
-Lancer la requête de nouveau après avoir specifié le champ virtuel résultera
+Lancer la requête de nouveau après avoir spécifié le champ virtuel résultera
 en un groupement plus propre des valeurs::
 
     Array

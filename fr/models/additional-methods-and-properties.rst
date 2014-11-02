@@ -50,7 +50,7 @@ champ unique.
 :php:meth:`Model::escapeField(string $field = null, string $alias = null)`
 ==========================================================================
 
-Echappe le nom du champ et ajoute le nom du model. L'echappement est fait en
+Echappe le nom du champ et ajoute le nom du model. L'échappement est fait en
 fonction des règles du driver de la base de données courante.
 
 :php:meth:`Model::exists($id)`
