@@ -59,7 +59,7 @@ To create our sluggable behavior. Put the following into
     }
 
 Similar to tables, behaviors also have an ``initialize()`` hook where you can
-put your behavior's initialization code if required.
+put your behavior's initialization code if required::
 
     public function initialize(array $config) {
         // Some initialization code here
