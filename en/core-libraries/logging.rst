@@ -63,7 +63,16 @@ has to return the constructed logger instance. For example::
         return new \Cake\Log\Engine\FileLog();
     });
 
-Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    Log::config('error', [
+        'dsn' => 'file:///?levels[]=warning&levels[]=error&file=error',
+    ]);
+
+.. note::
+
+    Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
 
 Creating Log Adapters
 ---------------------

@@ -49,11 +49,21 @@ would be::
         'login' => 'my_app',
         'password' => 'sekret',
         'database' => 'my_app',
-        'prefix' => false,
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
     ]);
+
+
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    ConnectionManager::config('default', [
+        'dsn' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+    ]);
+
+When using a DSN string you can define any additional parameters/options as
+query string arguments.
 
 By default, all Table objects will use the ``default`` connection. To
 use a non-default connection, see :ref:`configuring-table-connections`.
@@ -101,8 +111,6 @@ init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLServer at this time.
-dsn
-    A full PDO compatible data source name.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
