@@ -155,7 +155,7 @@ array might look something like the following::
                 'driver' => 'Cake\Database\Driver\Mysql',
                 'persistent' => false,
                 'host' => 'localhost',
-                'login' => 'cake_blog',
+                'username' => 'cake_blog',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
                 'encoding' => 'utf8',

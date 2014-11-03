@@ -490,7 +490,7 @@ configuration d'une connection::
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Driver\Mysql',
-            'login' => 'root',
+            'username' => 'root',
             'password' => 'super_secret',
             'host' => 'localhost',
             'database' => 'cakephp',

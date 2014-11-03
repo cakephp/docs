@@ -30,7 +30,7 @@ like::
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'localhost',
-            'login' => 'my_app',
+            'username' => 'my_app',
             'password' => 'sekret',
             'database' => 'my_app',
             'prefix' => false,
@@ -53,7 +53,7 @@ would be::
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'my_app',
+        'username' => 'my_app',
         'password' => 'sekret',
         'database' => 'my_app',
         'prefix' => false,
@@ -77,7 +77,7 @@ persistent
     Whether or not to use a persistent connection to the database.
 host
     The database server's hostname (or IP address).
-login
+username
     The username for the account.
 password
     The password for the account.

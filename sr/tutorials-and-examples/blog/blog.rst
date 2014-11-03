@@ -137,7 +137,7 @@ like the following::
         'persistent' => false,
         'host' => 'localhost',
         'port' => '',
-        'login' => 'cakeBlog',
+        'username' => 'cakeBlog',
         'password' => 'c4k3-rUl3Z',
         'database' => 'cake_blog_tutorial',
         'schema' => '',
