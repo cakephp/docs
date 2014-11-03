@@ -23,7 +23,7 @@ Une configuration de connection d'exemple ressemblera à ceci::
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'localhost',
-            'login' => 'my_app',
+            'username' => 'my_app',
             'password' => 'sekret',
             'database' => 'my_app',
             'prefix' => false,
@@ -46,7 +46,7 @@ serait::
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'my_app',
+        'username' => 'my_app',
         'password' => 'sekret',
         'database' => 'my_app',
         'prefix' => false,
@@ -71,7 +71,7 @@ persistent
     S'il faut utiliser ou non une connection persistente à la base de données.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
-login
+username
     L'username pour votre compte.
 password
     Le mot de passe pour le compte.
