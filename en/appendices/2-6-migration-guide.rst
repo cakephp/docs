@@ -140,3 +140,8 @@ FormHelper
   the message.
 - The ``maxlength`` attribute will now also be applied to textareas, when the corresponding
   DB field is of type varchar, as per HTML specs.
+
+PaginatorHelper
+---------------
+
+- :php:meth:`PaginatorHelper::meta()` has been added to output the meta-links (rel prev/next) for a paginated result set.
