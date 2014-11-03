@@ -598,7 +598,7 @@ Other Methods
 
 .. php:method:: meta(array $options = array())
 
-    Returns the meta-links for a paginated result set::
+    Outputs the meta-links for a paginated result set::
 
         echo $this->Paginator->meta(); // Example output for page 5
         /*
