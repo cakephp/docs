@@ -57,7 +57,7 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            this->Flash->error('Votre username ou mot de passe est incorrect.');
+            $this->Flash->error('Votre username ou mot de passe est incorrect.');
         }
     }
 
