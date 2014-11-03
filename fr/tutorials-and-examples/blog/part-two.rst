@@ -135,7 +135,7 @@ ressembler à quelque chose comme cela:
 
     <!-- File: src/Template/Articles/index.ctp -->
 
-    <h1>Blog articles</h1>
+    <h1>Tous les articles du Blog</h1>
     <table>
         <tr>
             <th>Id</th>
@@ -204,7 +204,7 @@ tarder dans le Controller Articles::
 
         public function view($id = null) {
             if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
+                throw new NotFoundException(__('Article invalide'));
             }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
@@ -270,7 +270,7 @@ ArticlesController::
 
         public function view($id) {
             if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
+                throw new NotFoundException(__('Article invalide'));
             }
 
             $article = $this->Articles->get($id);
@@ -285,7 +285,7 @@ ArticlesController::
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('Impossible d ajouter votre article.'));
+                $this->Flash->error(__('Impossible d\'ajouter votre article.'));
             }
             $this->set('article', $article);
         }
@@ -351,7 +351,7 @@ Voici le code de notre vue "add" (ajout):
 
     <!-- File: src/Template/Articles/add.ctp -->
 
-    <h1>Add Article</h1>
+    <h1>Ajouter un article</h1>
     <?php
         echo $this->Form->create($article);
         echo $this->Form->input('title');
@@ -441,7 +441,7 @@ devrait ressembler::
 
     public function edit($id = null) {
         if (!$id) {
-            throw new NotFoundException(__('Invalid article'));
+            throw new NotFoundException(__('Article invalide'));
         }
 
         $article = $this->Articles->get($id);
@@ -474,12 +474,12 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 
     <!-- File: src/Template/Articles/edit.ctp -->
 
-    <h1>Edit Article</h1>
+    <h1>Modifier un article</h1>
     <?php
         echo $this->Form->create($article);
         echo $this->Form->input('title');
         echo $this->Form->input('body', ['rows' => '3']);
-        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->button(__('Sauvegarder l\'article'));
         echo $this->Form->end();
     ?>
 
@@ -519,7 +519,7 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
                 <?= $article->created->format(DATE_RFC850) ?>
             </td>
             <td>
-                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+                <?= $this->Html->link('Modifier', ['action' => 'edit', $article->id]) ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -540,7 +540,7 @@ Articles (ArticlesController)::
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('L article avec l id: {0} a été supprimé.', h($id)));
+            $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -588,11 +588,11 @@ articles, ainsi :
             </td>
             <td>
                 <?= $this->Form->postLink(
-                    'Delete',
+                    'Supprimer',
                     ['action' => 'delete', $article->id],
-                    ['confirm' => 'Etes vous sur?'])
+                    ['confirm' => 'Etes-vous sûr?'])
                 ?>
-                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+                <?= $this->Html->link('Modifier', ['action' => 'edit', $article->id]) ?>
             </td>
         </tr>
         <?php endforeach; ?>
