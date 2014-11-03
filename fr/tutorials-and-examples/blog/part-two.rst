@@ -212,7 +212,7 @@ tarder dans le Controller Articles::
     }
 
 L'appel de ``set()`` devrait vous être familier. Notez que nous utilisons
-``findById()`` plutôt que ``find('all')`` parce que nous voulons seulement
+``get()`` plutôt que ``find('all')`` parce que nous voulons seulement
 récupérer les informations d'un seul article.
 
 Notez que notre action "view" prend un paramètre : l'ID de l'article que nous
@@ -224,7 +224,7 @@ Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
 utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
 ``/articles/view``, nous lancerons un ``NotFoundException`` et laisserons
 le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. En utilisant
-la fonction ``get()`` dans la table Articles, nous faisons aussi un vérification
+la fonction ``get()`` dans la table Articles, nous faisons aussi une vérification
 similaire pour nous assurer que l'utilisateur a accès à l'enregistrement qui
 existe. Dans le cas où l'article requêté n'est pas présent dans la base de
 données, la fonction ``get()`` va lancer une ``NotFoundException``.
