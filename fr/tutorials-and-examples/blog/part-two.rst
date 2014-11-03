@@ -513,7 +513,7 @@ Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
         <tr>
             <td><?= $article->id ?></td>
             <td>
-                <?= $this->Html->link($article->title, ['action' => 'view', $article->id']) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
             </td>
             <td>
                 <?= $article->created->format(DATE_RFC850) ?>
