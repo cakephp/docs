@@ -80,6 +80,34 @@ l'utilisation de la pagination du finder en configurant l'option ``findType``::
         ];
     }
 
+Because custom finder methods can also take in options, 
+this is how you pass in options into a custom finder method within the paginate property::
+
+    class ArticlesController extends AppController {
+
+        // find articles by tag
+        public function tags() {
+            $tags = $this->request->params['pass'];
+
+            $customFinderOptions = [
+                'tags' => $tags
+            ];
+            // the custom finder method is called findTagged inside ArticlesTable.php
+            // it should look like this:
+            // public function findTagged(Query $query, array $options) {
+            // hence you use tagged as the key
+            $this->paginate = [
+                'finder' => [
+                    'tagged' => $customFinderOptions
+                ]
+            ];
+
+            $articles = $this->paginate($this->Articles);
+
+            $this->set(compact('articles', 'tags'));
+        }
+    }
+
 En plus de définir les valeurs de pagination générales, vous pouvez définir
 plus d'un jeu de pagination par défaut dans votre controller, vous avez juste
 à nommer les clés du tableau d'après le model que vous souhaitez configurer::
@@ -200,7 +228,7 @@ un bloc try catch et faire des actions appropriées quand une
 ``NotFoundException`` est attrapée::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function index() {
         try {
             $this->paginate();
