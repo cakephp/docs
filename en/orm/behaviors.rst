@@ -58,6 +58,14 @@ To create our sluggable behavior. Put the following into
     class SluggableBehavior extends Behavior {
     }
 
+Similar to tables, behaviors also have an ``initialize()`` hook where you can
+put your behavior's initialization code, if required::
+
+    public function initialize(array $config) {
+        // Some initialization code here
+    }
+
+
 We can now add this behavior to one of our table classes. In this example we'll
 use an ``ArticlesTable``, as articles often have slug properties for creating
 friendly URLs::
