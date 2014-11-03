@@ -86,22 +86,21 @@ this is how you pass in options into a custom finder method within the paginate 
             $tags = $this->request->params['pass'];
 
             $customFinderOptions = [
-    			'tags' => $tags
-    		];
-    		
-    		// the custom finder method is called findTagged inside ArticlesTable.php
-    		// it should look like this:
-    		// public function findTagged(Query $query, array $options) {
-    		// hence you use tagged as the key
-    	    $this->paginate = [
-    	    	'finder' => [
-    	    		'tagged' => $customFinderOptions
-    	    	]
-    	    ];
+                'tags' => $tags
+            ];
+            // the custom finder method is called findTagged inside ArticlesTable.php
+            // it should look like this:
+            // public function findTagged(Query $query, array $options) {
+            // hence you use tagged as the key
+            $this->paginate = [
+                'finder' => [
+                    'tagged' => $customFinderOptions
+                ]
+            ];
     	    
-    	    $articles = $this->paginate($this->Articles);
+            $articles = $this->paginate($this->Articles);
     	    
-    	    $this->set(compact('articles', 'tags'));
+            $this->set(compact('articles', 'tags'));
         }
     }
 
