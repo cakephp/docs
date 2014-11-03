@@ -139,7 +139,7 @@ simplement en poursuivant les associations de votre model::
 
 .. note::
 
-    Rappelez-vous que les associations sont définis dans 'un sens'. Si vous
+    Rappelez-vous que les associations sont définies dans 'un sens'. Si vous
     définissez User hasMany Recipe, cela n'a aucun effet sur le model
     Recipe. Vous avez besoin de définir Recipe belongsTo User pour
     pouvoir accéder au model User à partir du model Recipe.
@@ -371,7 +371,7 @@ et le mot "count"::
 
 Disons que vous avez un model appelé ``ImageComment`` et un model
 appelé ``Image``, vous ajouteriez un nouveau champ numérique (INT) à la
-table ``images`` et l'appeleriez ``image_comment_count``.
+table ``images`` et l'appelleriez ``image_comment_count``.
 
 Ici vous trouverez quelques exemples supplémentaires:
 
@@ -796,7 +796,7 @@ association many to many. Considérons ce qui suit
 
 En d'autres termes, un Student peut avoir plusieurs (many) Courses et un
 Course peut être pris par plusieurs (many) Students. C'est une association
-simple de many to many nécéssitant une table comme ceci::
+simple de many to many nécessitant une table comme ceci::
 
     id | student_id | course_id
 
@@ -808,7 +808,7 @@ souhaiterions serait comme ceci::
 
 Le problème est que hasAndBelongsToMany ne va pas supporter ce type de
 scénario parce que quand les associations hasAndBelongsToMany sont sauvegardées,
-l'association est d'abord supprimée. Vous perderiez les données supplémentaires
+l'association est d'abord supprimée. Vous perdriez les données supplémentaires
 dans les colonnes qui ne seraient pas remplacées dans le nouvel ajout.
 
     .. versionchanged:: 2.1
