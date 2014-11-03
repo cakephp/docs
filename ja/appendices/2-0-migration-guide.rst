@@ -1158,7 +1158,7 @@ ConnectionManager
         'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'root',
+        'username' => 'root',
         'password' => 'root',
         'database' => 'cake',
     );

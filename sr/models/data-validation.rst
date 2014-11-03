@@ -31,7 +31,7 @@ those fields::
 
     class User extends AppModel {
         public $validate = array(
-            'login' => 'alphaNumeric',
+            'username' => 'alphaNumeric',
             'email' => 'email',
             'born'  => 'date'
         );
@@ -54,7 +54,7 @@ some of these built-in validation rules::
 
     class User extends AppModel {
         public $validate = array(
-            'login' => array(
+            'username' => array(
                 'alphaNumeric' => array(
                     'rule'     => 'alphaNumeric',
                     'required' => true,
@@ -157,7 +157,7 @@ If the rule does not require any parameters, 'rule' can be a single
 value e.g.::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'rule' => 'alphaNumeric'
         )
     );
@@ -184,7 +184,7 @@ operations. If 'required' is evaluated to true, the field must be present in the
 data array. For example, if the validation rule has been defined as follows::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'rule'     => 'alphaNumeric',
             'required' => true
         )
@@ -286,7 +286,7 @@ of validation parameters.
 This is better explained with a practical example::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'loginRule-1' => array(
                 'rule'    => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
@@ -318,7 +318,7 @@ and error messages for both failing rules will be returned if "rule2" also
 fails::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'rule1' => array(
                 'rule'    => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
@@ -335,7 +335,7 @@ When specifying validation rules in this array form it's possible to avoid
 providing the ``message`` key. Consider this example::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'Only alphabets and numbers allowed' => array(
                 'rule'    => 'alphaNumeric',
              ),
@@ -363,7 +363,7 @@ using regular expression matching, you can define a custom
 expression as a field validation rule::
 
     public $validate = array(
-        'login' => array(
+        'username' => array(
             'rule'    => '/^[a-z0-9]{3,}$/i',
             'message' => 'Only letters and integers, min 3 characters'
         )
@@ -616,7 +616,7 @@ with usage examples.
     The data for the field must only contain letters and numbers.::
 
         public $validate = array(
-            'login' => array(
+            'username' => array(
                 'rule'    => 'alphaNumeric',
                 'message' => 'Usernames must only contain letters and numbers.'
             )
@@ -946,7 +946,7 @@ with usage examples.
     ::
 
         public $validate = array(
-            'login' => array(
+            'username' => array(
                 'rule'    => 'isUnique',
                 'message' => 'This username has already been taken.'
             )
@@ -967,7 +967,7 @@ with usage examples.
     ::
 
         public $validate = array(
-            'login' => array(
+            'username' => array(
                 'rule'    => array('maxLength', 15),
                 'message' => 'Usernames must be no larger than 15 characters long.'
             )
@@ -1000,7 +1000,7 @@ with usage examples.
     ::
 
         public $validate = array(
-            'login' => array(
+            'username' => array(
                 'rule'    => array('minLength', 8),
                 'message' => 'Usernames must be at least 8 characters long.'
             )
