@@ -67,8 +67,18 @@ exemple::
         return new \Cake\Log\Engine\FileLog();
     });
 
-Les loggers sont nécessaires pour intégrer l'interface
-``Psr\Log\LoggerInterface``.
+Les options de configuration peuvent également être fournies en tant que chaine
+:term:`DSN`. C'est utile lorsque vous travaillez avec des variables
+d'environnement ou des fournisseurs :term:`PaaS`::
+
+    Log::config('error', [
+        'dsn' => 'file:///?levels[]=warning&levels[]=error&file=error',
+    ]);
+
+.. note::
+
+    Les loggers sont nécessaires pour intégrer l'interface
+    ``Psr\Log\LoggerInterface``.
 
 Créer des Adaptateurs de Log
 ----------------------------

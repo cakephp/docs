@@ -94,7 +94,18 @@ stockage comme vous l'entendez. Par exemple vous pouvez mettre ceci dans votre
     ]
     // ...
 
-Vous pouvez également configurer les moteurs de cache à tout moment::
+Les options de configuration peuvent également être fournies en tant que chaine
+:term:`DSN`. C'est utile lorsque vous travaillez avec des variables
+d'environnement ou des fournisseurs :term:`PaaS`::
+
+    Cache::config('short', [
+        'dsn' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
+    ]);
+
+Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
+supplémentaires en tant qu'arguments de query string.
+
+Vous pouvez également configurer les moteurs de cache pendant l'exécution::
 
     // Utilisation d'un nom court
     Cache::config('short', array(
