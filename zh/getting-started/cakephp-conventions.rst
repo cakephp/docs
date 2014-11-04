@@ -127,7 +127,7 @@ CakePHP 不支持复合主键。如果你要直接操作连接表的数据，请
 ==========
 
 视图模版文件依照它们显示的控制器方法来命名，并以下划线分隔。例如：在 
-PeopleController 中的 getPeady() 方法将调用视图模版文件 
+PeopleController 中的 getReady() 方法将调用视图模版文件 
 /app/View/People/get\_ready.ctp。
 
 基本的模式是 /app/View/控制器/以下划线分隔的方法名.ctp。
