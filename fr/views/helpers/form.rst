@@ -1631,7 +1631,7 @@ construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class Autocomplete implements WidgetInterface {
+    class AutocompleteWidget implements WidgetInterface {
 
         protected $_templates;
 
@@ -1665,7 +1665,7 @@ sont déinis comme des paramètres::
     public $helpers = [
         'Form' => [
             'widgets' => [
-                'autocomplete' => ['App\View\Widget\Autocomplete']
+                'autocomplete' => ['Autocomplete']
             ]
         ]
     ];
@@ -1676,7 +1676,7 @@ Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces dép
         'Form' => [
             'widgets' => [
                 'autocomplete' => [
-                    'App\View\Widget\Autocomplete',
+                    'App\View\Widget\AutocompleteWidget',
                     'text',
                     'label'
                 ]
@@ -1693,11 +1693,11 @@ widgets en utilisant la méthode ``addWidget`` resemble à ceci::
     // Utilise une classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['App\View\Widget\Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text' 'label']
     );
 
     // Utilise une instance - nécessite de résoudre les dépendances.
-    $autocomplete = new Autocomplete(
+    $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
         $this->Form->widgetRegistry()->get('text'),
         $this->Form->widgetRegistry()->get('label'),

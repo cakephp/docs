@@ -28,7 +28,8 @@ Une configuration de connection d'exemple ressemblera à ceci::
             'database' => 'my_app',
             'prefix' => false,
             'encoding' => 'utf8',
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
         ]
     ],
 
@@ -49,10 +50,21 @@ serait::
         'username' => 'my_app',
         'password' => 'sekret',
         'database' => 'my_app',
-        'prefix' => false,
         'encoding' => 'utf8',
-        'timezone' => 'UTC'
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
     ]);
+
+Les options de configuration peuvent également être fournies en tant que chaine
+:term:`DSN`. C'est utile lorsque vous travaillez avec des variables
+d'environnement ou des fournisseurs :term:`PaaS`::
+
+    ConnectionManager::config('default', [
+        'dsn' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+    ]);
+
+Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
+supplémentaires en tant qu'arguments de query string.
 
 Par défaut, tous les objets Table vont utiliser la connection ``default``. Pour
 utiliser une connection non-default, regardez
@@ -104,8 +116,6 @@ init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
     données lorsque la connection est créée. Cette options est seulement
     supportée seuelemement par le Serveur MySQL, Postgres, et SQL cette fois-ci.
-dsn
-    Un nom de source de données compatible totalement avec PDO.
 log
     Défini à true pour activer les logs des requêtes. Quand les requêtes sont
     activées, elles seront écrites à un niveau ``debug`` avec le scope

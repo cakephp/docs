@@ -129,6 +129,17 @@ messages d'email.
     Pour utiliser SSL + SMTP, vous devrez avoir SSL configuré dans votre
     installation PHP.
 
+Les options de configuration peuvent également être fournies en tant que chaine
+:term:`DSN`. C'est utile lorsque vous travaillez avec des variables
+d'environnement ou des fournisseurs :term:`PaaS`::
+
+    Email::configTransport('default', [
+        'dsn' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
+    ]);
+
+Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
+supplémentaires en tant qu'arguments de query string.
+
 
 .. php:staticmethod:: dropTransport($key)
 
