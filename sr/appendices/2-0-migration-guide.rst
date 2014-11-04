@@ -1280,7 +1280,7 @@ need to pass the package they are located in. Example::
         'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'root',
+        'username' => 'root',
         'password' => 'root',
         'database' => 'cake',
     );

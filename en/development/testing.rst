@@ -55,7 +55,7 @@ CakePHP for fixture tables and data::
             'datasource' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'dbhost',
-            'login' => 'dblogin',
+            'username' => 'dblogin',
             'password' => 'dbpassword',
             'database' => 'test_database'
         ],
@@ -1184,7 +1184,7 @@ a *shell script step* to the build that contains the following:
                 'datasource' => 'Database/Mysql',
                 'host'       => 'localhost',
                 'database'   => 'jenkins_test',
-                'login'      => 'jenkins',
+                'username'      => 'jenkins',
                 'password'   => 'cakephp_jenkins',
                 'encoding'   => 'utf8'
             ]

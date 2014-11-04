@@ -27,7 +27,7 @@ configuration should look something like this::
             'datasource'  => 'Database/Mysql',
             'persistent'  => false,
             'host'        => 'localhost',
-            'login'       => 'cakephpuser',
+            'username'       => 'cakephpuser',
             'password'    => 'c4k3roxx!',
             'database'    => 'my_cakephp_project',
             'prefix'      => ''
