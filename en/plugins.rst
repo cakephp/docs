@@ -16,9 +16,9 @@ behaving much like it would if it were an application on its own.
 .. toctree::
    :maxdepth: 1
 
+   plugins/how-to-install-plugins
    plugins/how-to-use-plugins
    plugins/how-to-create-plugins
-
 
 
 .. meta::
