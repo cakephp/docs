@@ -235,7 +235,7 @@ Controllers du Plugin
 =====================
 
 Les controllers pour notre plugin ContactManager seront stockés dans
-``/plugins/ContactManager/sr/Controller/``. Puisque la principale chose que
+``/plugins/ContactManager/src/Controller/``. Puisque la principale chose que
 nous souhaitons faire est la gestion des contacts, nous aurons besoin de créer
 un ContactsController pour ce plugin.
 
