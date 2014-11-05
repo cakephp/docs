@@ -38,8 +38,8 @@ get the common tasks completed. If you are new, you should start off with the
 :doc:`/quickstart` as it will give you a quick tour of what
 CakePHP has to offer and how it works.
 
-After you've finished the Blog Tutorial, you can brush up on the key elements in
-a CakePHP application:
+After you've finished the Bookmarker Tutorial, you can brush up on the key
+elements in a CakePHP application:
 
 * The :ref:`CakePHP request cycle <request-cycle>`
 * The :doc:`conventions <intro/conventions>` that CakePHP
