@@ -293,7 +293,7 @@ that everyone can benefit from your awesome, reusable components!
 Plugin Tips
 ===========
 
-Once a plugin has been installed in /app/Plugin, you can access it
+Once a plugin has been installed in /app/Plugin/, you can access it
 at the URL /plugin_name/controller_name/action. In our ContactManager
 plugin example, we'd access our ContactsController at
 /contact_manager/contacts.
