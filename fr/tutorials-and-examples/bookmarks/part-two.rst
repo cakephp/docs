@@ -1,5 +1,5 @@
-Tutoriel de Bookmarkr Part 2
-############################
+Tutoriel de Bookmarker Part 2
+#############################
 
 Après avoir fini :doc:`la première partie de ce tutoriel
 </tutorials-and-examples/bookmarks/intro>` vous devriez avoir une application
