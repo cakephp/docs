@@ -1,9 +1,9 @@
-Tutoriel de Bookmarkr
-#####################
+Tutoriel de Bookmarker
+######################
 
 Ce tutoriel va vous montrer la création d'une application simple
-de bookmarking (bookmarkr). Pour commencer, nous allons installer CakePHP, créer
-notre base de données et utiliser les outils que CakePHP nous fournit pour
+de bookmarking (bookmarker). Pour commencer, nous allons installer CakePHP,
+créer notre base de données et utiliser les outils que CakePHP nous fournit pour
 créer une application rapidement.
 
 Voici ce dont vous allez avoir besoin:
@@ -34,7 +34,7 @@ Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
 CakePHP dans le répertoire [app_name].::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarkr
+    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de
@@ -47,7 +47,7 @@ Peu importe la façon dont vous avez téléchargé et installé CakePHP, une foi
 que votre configuration est faite, votre répertoire devrait ressembler à
 ce qui suit::
 
-    /bookmarkr
+    /bookmarker
         /config
         /logs
         /plugins

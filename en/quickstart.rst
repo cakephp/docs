@@ -4,8 +4,8 @@ Quick Start Guide
 The best way to experience and learn CakePHP is to sit down and build something.
 To start off we'll build a simple bookmarking application.
 
-.. include:: /tutorials-and-examples/blog/blog.rst
-.. include:: /tutorials-and-examples/blog/part-two.rst
+.. include:: /tutorials-and-examples/bookmarks/intro.rst
+.. include:: /tutorials-and-examples/bookmarks/part-two.rst
 
 .. meta::
     :title lang=en: Getting Started
