@@ -26,8 +26,8 @@ known about datasources, you've been using them all along.
 
 All of the above sources derive from a base ``DboSource`` class, which
 aggregates some logic that is common to most relational databases. If you decide
-to write a RDBMS datasource, working from one of these (e.g. Mysql, or Sqlite is
-your best bet.)
+to write a RDBMS datasource, working from one of these (e.g. Mysql, or Sqlite)
+is your best bet.
 
 Most people, however, are interested in writing datasources for external sources
 of data, such as remote REST APIs or even an LDAP server. So that's what we're
