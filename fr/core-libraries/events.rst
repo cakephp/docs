@@ -40,17 +40,18 @@ Le sous-système d'event est au coeur des callbacks de Model, de Behavior, de
 Controller, de View et de Helper. Si vous avez jamais utilisé aucun d'eux,
 vous êtes déjà quelque part familier avec les events dans CakePHP.
 
-Example event usage
-===================
+Exemple d'utilisation d'événement
+=================================
+
 Supposons que vous codez un Plugin de gestion de panier, et que vous vouliez
-vous focaliser sur la logique de lors de la commande. Vous ne voulez pas à ce
+vous focaliser sur la logique lors de la commande. Vous ne voulez pas à ce
 moment là inclure la logique pour l'expédition, l'email ou la décrémentation
 du produit dans le stock, mais ce sont des tâches importantes pour les personnes
 utilisant votre plugin. Si vous n'utilisiez pas les évènements vous auriez pu
 implémenter cela en attachant des behaviors à vos modèles ou en ajoutant des 
-composant à votre controller. Doing so represents a challenge most of the time, since you
-would have to come up with the code for externally loading those behaviors or
-attaching hooks to your plugin controllers.
+composants à votre controller. Doing so represents a challenge most of the time,
+since you would have to come up with the code for externally loading those
+behaviors or attaching hooks to your plugin controllers.
 
 Instead, you can use events to allow you to cleanly separate the concerns of
 your code and allow additional concerns to hook into your plugin using events.
