@@ -6,7 +6,7 @@ CakePHP的模型类提供了多种从数据库中删除记录的方法。
 .. _model-delete:
 
 delete方法 
-======
+==========
 
 ``delete(int $id = null, boolean $cascade = true);``
 
