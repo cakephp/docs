@@ -629,6 +629,10 @@ with usage examples.
     The length of the data for the field must fall within the specified
     numeric range. Both minimum and maximum values must be supplied.
     Uses = not.::
+    -------------
+I am translating this article into Japanese.
+But I don't know what this sentence means. 
+Can someone tell me about this?
 
         public $validate = array(
             'password' => array(
