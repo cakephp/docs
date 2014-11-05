@@ -1047,7 +1047,7 @@ Changing the tags output by HtmlHelper
 Creating breadcrumb trails with HtmlHelper
 ==========================================
 
-.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbs(string $separator = '&raquo;', string|array|bool $startText = false)
 
     CakePHP has the built-in ability to automatically create a
     breadcrumb trail in your app. To set this up, first add something

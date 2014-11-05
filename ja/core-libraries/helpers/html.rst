@@ -920,7 +920,7 @@ HtmlHelper が出力するタグの変更
 HtmlHelper を使ったパンくずリストの作成
 =======================================
 
-.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbs(string $separator = '&raquo;', string|array|bool $startText = false)
 
     CakePHP はパンくずリストを自動生成する組み込みメソッドを持っています。
     設置するにはまず、レイアウトテンプレートに以下のようなコードを追加します。::

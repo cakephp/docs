@@ -1028,7 +1028,7 @@ Changer la restitution des balises avec le Helper Html
 Création d'un chemin de navigation avec le Helper Html
 ======================================================
 
-.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbs(string $separator = '&raquo;', string|array|bool $startText = false)
 
     CakePHP inclut la possibilité de créer automatiquement un chemin de
     navigation (fil d'Ariane) dans votre application. Pour mettre cela en
