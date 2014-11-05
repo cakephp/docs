@@ -34,8 +34,8 @@ des tâches les plus communément effectuées. Si vous êtes nouveau, vous devri
 commencer avec le :doc:`/quickstart` puisqu'il vous donne
 un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
 
-Après avoir fini le Tutoriel du Blog, vous pouvez regarder les éléments clés
-d'une application CakePHP:
+Après avoir fini le Tutoriel du Bookmarker, vous pouvez regarder les éléments
+clés d'une application CakePHP:
 
 * Le :ref:`cycle de requête de CakePHP <request-cycle>`
 * Les :doc:`conventions <intro/conventions>` que CakePHP
