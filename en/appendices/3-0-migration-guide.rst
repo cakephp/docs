@@ -551,8 +551,6 @@ AuthComponent
 - ``Default`` is now the default password hasher used by authentication classes.
   It uses exclusively the bcrypt hashing algorithm. If you want to continue using
   SHA1 hashing used in 2.x use ``'passwordHasher' => 'Weak'`` in your authenticator configuration.
-- ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
-  class instead.
 - A new ``FallbackPasswordHasher`` was added to help users migrate old passwords
   from one algorithm to another. Check AuthComponent's documentation for more
   info.
@@ -567,6 +565,15 @@ AuthComponent
   To login a user you now have to call ``identify()`` which returns user info upon
   successful identification and then use ``setUser()`` to save the info to
   session for persistence across requests.
+
+- ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
+  class instead.
+- ``BaseAuthenticate::logout()`` as been removed.
+- ``AuthComponent`` now triggers two events ``Auth.afterIdentify`` and
+  ``Auth.logout`` after a user has been identified and before a user is
+  logged out respectively. You can set callback functions for these events by
+  returning a mapping array from ``implementedEvent()`` method of your
+  authenticate class.
 
 ACL related classes were moved to a separate plugin. Password hashers, Authentication and
 Authorization providers where moved to the ``\Cake\Auth`` namespace. You are
