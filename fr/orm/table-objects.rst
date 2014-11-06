@@ -1068,7 +1068,7 @@ When using ``contain`` you are able to restrict the data returned by the
 associations and filter them by conditions::
 
     $query = $articles->find()->contain([
-        'Comments' => function($q) {
+        'Comments' => function ($q) {
            return $q
                 ->select(['body', 'author_id'])
                 ->where(['Comments.approved' => true]);
@@ -1086,7 +1086,7 @@ notation::
 
     $query = $articles->find()->contain([
         'Comments',
-        'Authors.Profiles' => function($q) {
+        'Authors.Profiles' => function ($q) {
             return $q->where(['Profiles.is_published' => true]);
         }
     ]);
@@ -1097,7 +1097,7 @@ use them inside ``contain``::
     // Bring all articles, but only bring the comments that are approved and
     // popular
     $query = $articles->find()->contain([
-        'Comments' => function($q) {
+        'Comments' => function ($q) {
            return $q->find('approved')->find('popular');
         }
     ]);
@@ -1131,7 +1131,7 @@ you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP::
 
     $query = $articles->find();
-    $query->matching('Tags', function($q) {
+    $query->matching('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
@@ -1140,7 +1140,7 @@ You can apply this strategy to HasMany associations as well. For example if
 published articles using the following::
 
     $query = $authors->find();
-    $query->matching('Articles', function($q) {
+    $query->matching('Articles', function ($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
@@ -1148,14 +1148,14 @@ Filtering by deep associations is surprisingly easy, and the syntax should be
 already familiar to you::
 
     $query = $products->find()->matching(
-        'Shops.Cities.Countries', function($q) {
+        'Shops.Cities.Countries', function ($q) {
             return $q->where(['Country.name' => 'Japan'])
         }
     );
 
     // Bring unique articles that were commented by 'markstory' using passed variable
     $username = 'markstory';
-    $query = $articles->find()->matching('Comments.Users', function($q) use($username) {
+    $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username])
     });
 

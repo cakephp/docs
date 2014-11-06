@@ -454,7 +454,7 @@ règles::
                     'message' => 'Reviews must be 20 characters or more',
                 ])
                 ->add('user_id', 'exists', [
-                    'rule' => function($value, $context) {
+                    'rule' => function ($value, $context) {
                         $q = $this->association('Users')
                             ->find()
                             ->where(['id' => $value]);

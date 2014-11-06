@@ -241,7 +241,7 @@ service distant. Vous pouvez utiliser ``remember()`` pour rendre cela simple::
     class IssueService  {
 
         function allIssues($repo) {
-            return Cache::remember($repo . '-issues', function() use ($repo) {
+            return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
         }

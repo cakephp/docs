@@ -210,7 +210,7 @@ validation::
 
     // Utilise une closure
     $validator->add('title', 'custom', [
-        'rule' => function($value, $context) {
+        'rule' => function ($value, $context) {
             // Custom logic that returns true/false
         }
     ]);
@@ -241,7 +241,7 @@ ou non, une règle particulière doit être appliquée::
 
     $validator->add('picture', 'file', [
         'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-        'on' => function($context) {
+        'on' => function ($context) {
             return !empty($context['data']['show_profile_picture']);
         }
     ]);
@@ -255,14 +255,14 @@ Les deux prennent une fonction appelable en dernier argument, ce qui determine
 si oui ou non la règle doit être appliquée. Par exemple on peut autoriser
 parfois à un champ à être vide::
 
-    $validator->allowEmpty('tax', function($context) {
+    $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
 De la même façon, on peut vouloir qu'un champ soit peuplé quand certaines
 conditions sont vérifiées::
 
-    $validator->notEmpty('email_frequency', 'This field is required', function($context) {
+    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
         return !empty($context['data']['wants_newsletter']);
     });
 

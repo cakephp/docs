@@ -70,7 +70,7 @@ compteur à stocker::
 
     $this->addBehavior('CounterCache', [
         'Articles' => [
-            'rating_avg' => function($event, $entity, $table) {
+            'rating_avg' => function ($event, $entity, $table) {
                 return 4.5;
             }
         ]

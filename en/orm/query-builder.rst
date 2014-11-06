@@ -121,7 +121,7 @@ anything you can call on a Collection object, you can also do in a Query object:
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function($row) { // map() is a collection method, it executes the query
+        ->map(function ($row) { // map() is a collection method, it executes the query
             $row->trimmedTitle = trim($row->title);
             return $row;
         });
@@ -324,7 +324,7 @@ you can easily compose conditions together with the expression objects::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
-        ->andWhere(function($exp) {
+        ->andWhere(function ($exp) {
             return $exp->or_([
                 'author_id' => 2,
                 'is_highlighted' => true
@@ -351,7 +351,7 @@ with ``OR``. An example of adding conditions with an ``Expression`` object would
 be::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             return $exp
                 ->eq('author_id', 2)
                 ->eq('published', true)
@@ -376,7 +376,7 @@ However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -398,7 +398,7 @@ The ``or_()`` and ``and_()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
@@ -411,7 +411,7 @@ parameters. This is often easier to read than method chaining::
 You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -546,7 +546,7 @@ expensive unneeded parts such as left joins. This becomes particularly handy
 when using the CakePHP built-in pagination system which calls the ``count()``
 method::
 
-    $query = $query->where(['is_active' => true])->counter(function($query) {
+    $query = $query->where(['is_active' => true])->counter(function ($query) {
         return 100000;
     });
     $query->count(); // Returns 100000
@@ -581,7 +581,7 @@ cache key::
 
     // Generate a key based on a simple checksum
     // of the query's where clause
-    $query->cache(function($q) {
+    $query->cache(function ($q) {
         return 'articles-' . md5(serialize($q->clause('where')));
     });
 
@@ -786,8 +786,8 @@ the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function(\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
-        return $results->map(function($row) {
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
+        return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
         });
@@ -807,8 +807,8 @@ expect::
 
     // In a method in the Articles table
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function($authors) {
-            return $authors->map(function($author) {
+        return $q->formatResults(function ($authors) {
+            return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
             });

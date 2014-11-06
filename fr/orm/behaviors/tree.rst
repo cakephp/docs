@@ -178,7 +178,7 @@ Vous pouvez changer le scoping à la volée en utilisant la fonction 'config'::
 En option, vous pouvez avoir un contrôle plus fin du scope en passant une
 closure au scope::
 
-    $this->behaviors()->Tree->config('scope', function($query) {
+    $this->behaviors()->Tree->config('scope', function ($query) {
         $country = $this->getConfigureContry(); // A made-up function
         return $query->where(['country_name' => $country]);
     });

@@ -82,7 +82,7 @@ A scope defines a common path segment, and optionally route defaults. Any routes
 connected inside a scope will inherit the path/defaults from their wrapping
 scopes::
 
-    Router::scope('/blog', ['plugin' => 'Blog'], function($routes) {
+    Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
         $routes->connect('/', ['controller' => 'Articles']);
     });
 
@@ -109,7 +109,7 @@ routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
-    Router::scope('/', function($routes) {
+    Router::scope('/', function ($routes) {
         $routes->connect('/:controller', ['action' => 'index']);
         $routes->connect('/:controller/:action/*');
     });
@@ -405,7 +405,7 @@ privileged users can make changes. This is often done through a
 special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
 can be enabled by using the ``prefix`` scope method::
 
-    Router::prefix('admin', function($routes) {
+    Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
         $routes->connect('/:controller', ['action' => 'index']);
@@ -424,7 +424,7 @@ view file used would be ``src/Template/Admin/Users/edit.ctp``
 You can map the URL /admin to your ``index`` action of pages controller using
 following route::
 
-    Router::prefix('admin', function($routes) {
+    Router::prefix('admin', function ($routes) {
         // Because you are in the admin scope,
         // you do not need to include the /admin prefix
         // or the admin route element.
@@ -433,8 +433,8 @@ following route::
 
 You can define prefixes inside plugin scopes as well::
 
-    Router::plugin('DebugKit', function($routes) {
-        $routes->prefix('admin', function($routes) {
+    Router::plugin('DebugKit', function ($routes) {
+        $routes->prefix('admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -444,8 +444,8 @@ The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 When defining prefixes, you can nest multiple prefixes if necessary::
 
-    Router::prefix('manager', function($routes) {
-        $routes->prefix('admin', function($routes) {
+    Router::prefix('manager', function ($routes) {
+        $routes->prefix('admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -486,7 +486,7 @@ Plugin Routing
 Plugin routes are most easily created using the ``plugin()`` method. This method
 creates a new routing scope for the plugin's routes::
 
-    Router::plugin('DebugKit', function($routes) {
+    Router::plugin('DebugKit', function ($routes) {
         // Routes connected here are prefixed with '/debug_kit' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
@@ -495,7 +495,7 @@ creates a new routing scope for the plugin's routes::
 When creating plugin scopes, you can customize the path element used with the
 ``path`` option::
 
-    Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
+    Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
         // Routes connected here are prefixed with '/debugger' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
@@ -503,8 +503,8 @@ When creating plugin scopes, you can customize the path element used with the
 
 When using scopes you can nest plugin scopes within prefix scopes::
 
-    Router::prefix('admin', function($routes) {
-        $routes->plugin('DebugKit', function($routes) {
+    Router::prefix('admin', function ($routes) {
+        $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -544,7 +544,7 @@ For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
-    Router::scope('/', function($routes) {
+    Router::scope('/', function ($routes) {
         $routes->connect('/:plugin/:controller/:action',
             ['plugin' => '*', 'controller' => '*', 'action' => '*'],
             ['routeClass' => 'DashedRoute']
@@ -576,7 +576,7 @@ You can pass ``false`` for the second argument to override existing list.
 Calling the method without arguments will return existing list of extensions.
 You can set extensions per scope as well::
 
-    Router::scope('/api', function($routes) {
+    Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
     });
 
@@ -590,7 +590,7 @@ By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
-    Router::scope('/api', function($routes) {
+    Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
         $routes->connect(
             '/page/:title',
@@ -624,7 +624,7 @@ something like this::
 
     // In config/routes.php...
 
-    Router::scope('/', function($routes) {
+    Router::scope('/', function ($routes) {
         $routes->extensions(['json']);
         $routes->resources('Recipes');
     });
@@ -669,8 +669,8 @@ Once you have connected resources in a scope, you can connect routes for
 sub-resources as well. Sub-resource routes will be prepended by the original
 resource name and a id parameter. For example::
 
-    Router::scope('/api', function($routes) {
-        $routes->resources('Articles', function($routes) {
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
             $routes->resources('Comments');
         });
     });
@@ -725,7 +725,7 @@ Custom Route Classes for Resource Routes
 You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
-    Router::scope('/', function($routes) {
+    Router::scope('/', function ($routes) {
         $routes->resources('books', array(
             'connectOptions' => array(
                 'routeClass' => 'ApiRoute',
