@@ -303,7 +303,7 @@ component génial et réutilisable!
 Astuces pour les Plugins
 ========================
 
-Une fois qu'un plugin a été installé dans /app/Plugin, vous pouvez y accéder
+Une fois qu'un plugin a été installé dans /app/Plugin/, vous pouvez y accéder
 à l'URL /nom_plugin/nom_controller/action. Dans notre exemple de plugin
 ContactManager, nous accédons à notre ContactsController à l'adresse
 /contact_manager/contacts.

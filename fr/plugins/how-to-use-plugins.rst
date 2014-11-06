@@ -1,28 +1,8 @@
 Comment Utiliser des Plugins
 ############################
 
-Installer un Plugin
-===================
-
-Pour installer un plugin, commencez par simplement déplacer le dossier du
-plugin dans votre dossier app/Plugin. Si vous installez un plugin nommé
-'ContactManager' alors vous devez avoir un dossier dans app/Plugin
-appelé 'ContactManager' dans lequel vous aurez les Vues, les Models, les
-Controllers, webroot et tout autre répertoire du Plugin.
-
-Nouveau dans CakePHP 2.0, les plugins ont besoin d'être chargés manuellement
-dans app/Config/bootstrap.php.
-
-Vous pouvez soit les charger un par un, soit tous d'un coup en un seul
-appel::
-
-    CakePlugin::loadAll(); // Charge tous les plugins d'un coup.
-    CakePlugin::load('ContactManager'); //Charge un seul plugin.
-
-``loadAll()`` charge tous les plugins disponibles, bien que vous autorisant à
-configurer certains paramètres pour des plugins spécifiques. ``load()``
-fonctionne de la même manière, mais charge seulement les plugins que vous avez
-explicitement spécifiés.
+Avant d'utiliser un plugin, vous devez avant tout l'installer et l'activer.
+Voir :doc:`/plugins/how-to-install-plugins`.
 
 Configuration du Plugin
 =======================

@@ -16,6 +16,7 @@ comme il l'aurait fait si il était une application à part entière.
 .. toctree::
    :maxdepth: 1
 
+   plugins/how-to-install-plugins
    plugins/how-to-use-plugins
    plugins/how-to-create-plugins
 
