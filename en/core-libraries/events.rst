@@ -158,7 +158,7 @@ Registering Listeners
 =====================
 
 Listeners are the preferred way to register callbacks for an event. This is done by
-implementing the :php:class:`Cake\\Event\\EventListener` interface in any class you wish
+implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface in any class you wish
 to register some callbacks. Classes implementing it need to provide the
 ``implementedEvents()`` method. This method must return an associative array
 with all event names that the class will handle.
@@ -169,9 +169,9 @@ global site statistics. This is a great place to use a listener class. Doing so
 allows you concentrate the statistics logic in one place and react to events as
 necessary. Our ``UserStatistics`` listener might start out like::
 
-    use Cake\Event\EventListener;
+    use Cake\Event\EventListenerInterface;
 
-    class UserStatistic implements EventListener {
+    class UserStatistic implements EventListenerInterface {
 
         public function implementedEvents() {
             return array(
@@ -253,7 +253,7 @@ event listeners::
     );
 
     // Setting priority for a listener
-    class UserStatistic implements EventListener {
+    class UserStatistic implements EventListenerInterface {
         public function implementedEvents() {
             return array(
                 'Model.Order.afterPlace' => array(
