@@ -200,7 +200,7 @@ you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
 
-    $this->Form->addContextProvider('myprovider', function($request, $data) {
+    $this->Form->addContextProvider('myprovider', function ($request, $data) {
         if ($data['entity'] instanceof MyOrmClass) {
             return new MyProvider($request, $data);
         }

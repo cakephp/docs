@@ -335,7 +335,7 @@ for a single domain and locale::
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', 'fr_FR', function() {
+    I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
             'default', // The fallback domain
@@ -424,7 +424,7 @@ any language from an external service::
 
     use Aura\Intl\Package;
 
-    I18n::config('default', function($domain, $locale) {
+    I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);
         $language = $locale['language'];
         $messages = file_get_contents("http://example.com/translations/$lang.json");

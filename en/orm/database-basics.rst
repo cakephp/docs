@@ -386,7 +386,7 @@ In addition to this interface connection instances also provide the
 ``transactional`` method which makes handling the begin/commit/rollback calls
 much simpler::
 
-    $conn->transactional(function($conn) {
+    $conn->transactional(function ($conn) {
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });

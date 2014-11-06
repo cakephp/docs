@@ -274,7 +274,7 @@ Then create the ContactManager plugin routes. Put the following into
     <?php
     use Cake\Routing\Router;
 
-    Router::plugin('ContactManager', function($routes) {
+    Router::plugin('ContactManager', function ($routes) {
         $routes->fallbacks();
     });
 

@@ -63,7 +63,7 @@ utile quand vous devez avoir un contôle complet sur la façon dont l'objet est
 construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
-    Log::config('special', function() {
+    Log::config('special', function () {
         return new \Cake\Log\Engine\FileLog();
     });
 
@@ -427,7 +427,7 @@ utilisant la méthode ``Log::config()``::
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function() {
+    Log::config('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your.log'));
         return $log;

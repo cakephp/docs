@@ -240,14 +240,14 @@ Both take a callable function as the last argument, which determines whether or 
 the rule should be applied. For example, a field can be sometimes allowed to be
 empty::
 
-    $validator->allowEmpty('tax', function($context) {
+    $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
 Likewise, a field can be required to be populated when certain conditions are
 met::
 
-    $validator->notEmpty('email_frequency', 'This field is required', function($context) {
+    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
         return !empty($context['data']['wants_newsletter']);
     });
 

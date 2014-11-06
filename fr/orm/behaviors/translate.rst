@@ -219,7 +219,7 @@ Il est aussi possible de trouver des traductions pour toute association dans une
 opération de find unique::
 
     $article = $articles->find('translations')->contain([
-        'Categories' => function($query) {
+        'Categories' => function ($query) {
             return $query->find('translations');
         }
     ])->first();

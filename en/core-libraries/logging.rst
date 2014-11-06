@@ -59,7 +59,7 @@ It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
 has to return the constructed logger instance. For example::
 
-    Log::config('special', function() {
+    Log::config('special', function () {
         return new \Cake\Log\Engine\FileLog();
     });
 
@@ -400,7 +400,7 @@ After installing Monolog using composer, configure the logger using the
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function() {
+    Log::config('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your.log'));
         return $log;

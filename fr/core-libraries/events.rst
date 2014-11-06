@@ -231,7 +231,7 @@ anonyme simple pour le faire::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->attach(function($event) {
+    $this->Orders->eventManager()->attach(function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->subject()->id

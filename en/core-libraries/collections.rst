@@ -29,7 +29,7 @@ A simple use of a Collection would be::
 
     // Create a new collection containing elements
     // with a value greater than one.
-    $overOne = $collection->filter(function($value, $key, $iterator) {
+    $overOne = $collection->filter(function ($value, $key, $iterator) {
         return $value > 1;
     });
 
@@ -47,7 +47,7 @@ Collections can be iterated and/or transformed into new collections with the
 collection, but will allow you to modify any objects within the collection::
 
     $collection = new Collection($items);
-    $collection = $collection->each(function($value, $key) {
+    $collection = $collection->each(function ($value, $key) {
         echo "Element $key: $value";
     });
 
@@ -61,7 +61,7 @@ callback being applied to each object in the original collection::
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
 
-    $new = $collection->map(function($value, $key) {
+    $new = $collection->map(function ($value, $key) {
         return $value * 2;
     });
 
@@ -81,10 +81,10 @@ the result of callback functions. You can use ``filter()`` to create a new
 collection of elements matching a criteria callback::
 
     $collection = new Collection($people);
-    $ladies = $collection->filter(function($person, $key) {
+    $ladies = $collection->filter(function ($person, $key) {
         return $person->gender === 'female';
     });
-    $guys = $collection->filter(function($person, $key) {
+    $guys = $collection->filter(function ($person, $key) {
         return $person->gender === 'male';
     });
 
@@ -94,7 +94,7 @@ The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
 removing elements that match the filter function::
 
     $collection = new Collection($people);
-    $ladies = $collection->reject(function($person, $key) {
+    $ladies = $collection->reject(function ($person, $key) {
         return $person->gender === 'male';
     });
 
@@ -104,7 +104,7 @@ You can do truth tests with filter functions. To see if every element in
 a collection matches a test you can use ``every()``::
 
     $collection = new Collection($people);
-    $allYoungPeople = $collection->every(function($person) {
+    $allYoungPeople = $collection->every(function ($person) {
         return $person->age < 21;
     });
 
@@ -114,7 +114,7 @@ You can see if the collection contains at least one element matching a filter
 function using the ``some()`` method::
 
     $collection = new Collection($people);
-    $hasYoungPeople = $collection->some(function($person) {
+    $hasYoungPeople = $collection->some(function ($person) {
         return $person->age < 21;
     });
 
@@ -173,7 +173,7 @@ Finally, if the property you are looking after cannot be expressed as a path,
 you can use a callback function to return it::
 
     $collection = new Collection($articles);
-    $names = $collection->extract(function($article) {
+    $names = $collection->extract(function ($article) {
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
@@ -183,7 +183,7 @@ The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
 collection::
 
-    $totalPrice = $collection->reduce(function($orderLine, $accumulated) {
+    $totalPrice = $collection->reduce(function ($orderLine, $accumulated) {
         return $accumulated + $orderLine->price;
     }, 0);
 
@@ -192,7 +192,7 @@ contained in the collection. Note the second argument for the ``reduce()``
 function, it takes the initial value for the reduce operation you are
 performing::
 
-    $allTags = $collection->reduce(function($article, $accumulated) {
+    $allTags = $collection->reduce(function ($article, $accumulated) {
         return array_merge($accumulated, $article->tags);
     }, []);
 
@@ -211,7 +211,7 @@ You are also able to express the property to compare by providing a path or a
 callback function::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function($person) {
+    $personYougestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
@@ -225,7 +225,7 @@ element from the collection having the highest property value::
     $collection = new Collection($people);
     $oldest = $collection->max('age');
 
-    $personOldestChild = $collection->max(function($person) {
+    $personOldestChild = $collection->max(function ($person) {
         return $person->child->age;
     });
 
@@ -265,7 +265,7 @@ properties or your own callback function to generate the groups dynamically::
 
     $commentsByUserId = $comments->groupBy('user.id');
 
-    $classResults = $students->groupBy(function($student) {
+    $classResults = $students->groupBy(function ($student) {
         retrun $student->grade > 6 ? 'approved' : 'denied';
     });
 
@@ -275,7 +275,7 @@ If you only wish to know the number of occurrences per group, you can do so by
 using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
-    $classResults = $students->countBy(function($student) {
+    $classResults = $students->countBy(function ($student) {
         retrun $student->grade > 6 ? 'approved' : 'denied';
     });
 
@@ -302,7 +302,7 @@ a callback::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
 
-    $filesByHash = $files->indexBy(function($file) {
+    $filesByHash = $files->indexBy(function ($file) {
         return md5($file);
     });
 
@@ -331,7 +331,7 @@ function that will let you dynamically select the value to use for comparing two
 different values in the collection::
 
     $collection = new Collection($articles);
-    $sorted = $collection->sortBy(function($article) {
+    $sorted = $collection->sortBy(function ($article) {
         return $article->author->name . '-' . $article->title;
     });
 
@@ -558,7 +558,7 @@ collection containing the values from both sources::
     $myTimeline = $cakephpTweets->append($phpTweets);
 
     // Tweets containing cakefest from both sources
-    $myTimeline->filter(function($tweet) {
+    $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });
 
@@ -652,7 +652,7 @@ Additionally, lazy evaluation helps speed up some operations. Consider the
 following example::
 
     $collection = new Collection($oneMillionItems);
-    $collection->map(function($item) {
+    $collection->map(function ($item) {
         return $item * 2;
     });
     $itemsToShow = $collection->take(30);
@@ -670,11 +670,11 @@ this example::
 
     $ages = $collection->extract('age');
 
-    $youngerThan30 = $ages->filter(function($item) {
+    $youngerThan30 = $ages->filter(function ($item) {
         return $item < 30;
     });
 
-    $olderThan30 = $ages->filter(function($item) {
+    $olderThan30 = $ages->filter(function ($item) {
         return $item > 30;
     });
 
