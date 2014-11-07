@@ -210,7 +210,7 @@ xdebug
 
 If your environment supplies the xdebug php extension, fatal errors will show
 additional xdebug stack trace details. Details about
-`xdebug <https://http://xdebug.org>`_ .
+`xdebug <http://xdebug.org>`_ .
 
 .. meta::
     :title lang=en: Debugging
