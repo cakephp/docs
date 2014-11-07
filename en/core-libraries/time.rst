@@ -266,15 +266,15 @@ You can see if a ``Time`` instance falls within a given range using
     // Within 2 next weeks.
     echo $time->isWithinNext('2 weeks');
 
-.. php:method:: isWithinPast($interval)
+.. php:method:: wasWithinLast($interval)
 
 You can also compare a ``Time`` instance within a range in the past::
 
     // Within past 2 days.
-    echo $time->isWithinPast(2);
+    echo $time->wasWithinLast(2);
 
     // Within past 2 weeks.
-    echo $time->isWithinPast('2 weeks');
+    echo $time->wasWithinLast('2 weeks');
 
 .. end-time
 
