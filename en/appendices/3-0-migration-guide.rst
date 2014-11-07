@@ -572,7 +572,7 @@ AuthComponent
 - ``AuthComponent`` now triggers two events ``Auth.afterIdentify`` and
   ``Auth.logout`` after a user has been identified and before a user is
   logged out respectively. You can set callback functions for these events by
-  returning a mapping array from ``implementedEvent()`` method of your
+  returning a mapping array from ``implementedEvents()`` method of your
   authenticate class.
 
 ACL related classes were moved to a separate plugin. Password hashers, Authentication and

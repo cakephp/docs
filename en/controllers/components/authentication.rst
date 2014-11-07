@@ -263,7 +263,7 @@ basic and digest authentication below for more information.
 ``AuthComponent`` triggers two events ``Auth.afterIdentify`` and ``Auth.logout``
 after a user has been identified and before a user is logged out respectively.
 You can set callback functions for these events by returning a mapping array
-from ``implementedEvent()`` method of your authenticate class::
+from ``implementedEvents()`` method of your authenticate class::
 
     public function implementedEvents() {
         return [
