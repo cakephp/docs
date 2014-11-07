@@ -260,6 +260,19 @@ also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
 basic and digest authentication below for more information.
 
+``AuthComponent`` triggers two events ``Auth.afterIdentify`` and ``Auth.logout``
+after a user has been identified and before a user is logged out respectively.
+You can set callback functions for these events by returning a mapping array
+from ``implementedEvents()`` method of your authenticate class::
+
+    public function implementedEvents() {
+        return [
+            'Auth.afterIdentify' => 'afterIdentify',
+            'Auth.logout' => 'logout'
+        ];
+    }
+
+
 Using Custom Authentication Objects
 -----------------------------------
 
