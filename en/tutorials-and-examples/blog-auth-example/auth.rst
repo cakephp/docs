@@ -116,7 +116,9 @@ with CakePHP::
         }
 
         public function delete($id = null) {
-            $this->request->onlyAllow('post');
+            $this->request->allowMethod('post');
+            // Prior to 2.5 use
+            // `$this->request->onlyAllow('post');`
 
             $this->User->id = $id;
             if (!$this->User->exists()) {
@@ -131,7 +133,7 @@ with CakePHP::
         }
 
     }
-
+    
 In the same way we created the views for our blog posts or by using the code
 generation tool, we implement the views. For the purpose of this tutorial, we
 will show just the add.ctp:
