@@ -116,7 +116,10 @@ de génération de code fournis avec CakePHP::
         }
 
         public function delete($id = null) {
-            $this->request->onlyAllow('post');
+            // Avant 2.5, utilisez
+            // $this->request->onlyAllow('post');
+
+            $this->request->allowMethod('post');
 
             $this->User->id = $id;
             if (!$this->User->exists()) {
@@ -131,6 +134,11 @@ de génération de code fournis avec CakePHP::
         }
 
     }
+
+.. versionchanged:: 2.5
+
+    Depuis 2.5, utilisez ``CakeRequest::allowMethod()`` au lieu de
+    ``CakeRequest::onlyAllow()`` (dépréciée).
 
 De la même façon, nous avons crée les vues pour nos posts de blog ou en
 utilisant l'outil de génération de code, nous exécutons les vues. Dans

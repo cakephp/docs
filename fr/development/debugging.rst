@@ -214,7 +214,7 @@ xdebug
 
 Si votre environnement a l'extension php xdebug, des erreurs fatales vont
 montrer des détails de stack trace supplémentaires de xdebug. Plus de détails
-sur `xdebug <https://http://xdebug.org>`_ .
+sur `xdebug <https://xdebug.org>`_ .
 
 .. meta::
     :title lang=fr: Debugger
