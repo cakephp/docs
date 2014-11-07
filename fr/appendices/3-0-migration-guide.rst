@@ -608,8 +608,6 @@ AuthComponent
   les classes d'authentification.
   Si vous voulez continuer à utiliser le hashage SHA1 utilisé dans 2.x utilisez
   ``'passwordHasher' => 'Weak'`` dans votre configuration d'authenticator.
-- ``BaseAuthenticate::_password()`` a été retirée. Utilisez une classe
-  ``PasswordHasher`` à la place.
 - Un nouveau ``FallbackPasswordHasher`` a été ajouté pour aider les utilisateurs
   à migrer des vieux mots de passe d'un algorithm à un autre. Consultez la
   documentation de AuthComponent pour plus d'informations.
@@ -627,6 +625,15 @@ AuthComponent
   qui retourne les informations d'utilisateur en cas de succès d'identification
   et utilise ensuite ``setUser()`` pour sauvegarder les informations de session
   pour la persistence au cours des différentes requêtes.
+
+- ``BaseAuthenticate::_password()`` a été retirée. Utilisez ``PasswordHasher``
+  à la place.
+- ``BaseAuthenticate::logout()`` a été retirée.
+- ``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+  ``Auth.logout`` respectivement après qu'un utilisateur ait été identifié et
+  avant qu'un utilisateur soit déconnecté. Vous pouvez définir une fonction de
+  callback pour ces événements en retournant un tableau de maping depuis la
+  méthode ``implementedEvents()`` de votre classe d'authentification.
 
 Les classes liées à ACL ont été déplacées dans un plugin séparée. Les hashers
 de mot de passe, l'Authentification et les fournisseurs d'Authorisation ont

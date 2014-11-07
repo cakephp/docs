@@ -276,15 +276,15 @@ utilisant ``wasWithinLast()`` et ``isWithinNext()``::
     // A moins de 2 semaines.
     echo $time->isWithinNext('2 weeks');
 
-.. php:method:: isWithinPast($interval)
+.. php:method:: wasWithinPast($interval)
 
 Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé::
 
     // Dans les 2 derniers jours.
-    echo $time->isWithinPast(2);
+    echo $time->wasWithinPast(2);
 
     // Dans les 2 dernières semaines.
-    echo $time->isWithinPast('2 weeks');
+    echo $time->wasWithinPast('2 weeks');
 
 .. end-time
 

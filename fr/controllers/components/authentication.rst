@@ -284,6 +284,19 @@ si votre objet d'identification doit supporter des authentifications sans
 cookie ou sans état (stateless). Regardez les sections portant sur
 l'authentification digest et basic plus bas pour plus d'information.
 
+``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+``Auth.logout`` respectivement après qu'un utilisateur ait été identifié et
+avant qu'un utilisateur soit déconnecté. Vous pouvez définir une fonction de
+callback pour ces événements en retournant un tableau de maping depuis la
+méthode ``implementedEvents()`` de votre classe d'authentification::
+
+    public function implementedEvents() {
+        return [
+            'Auth.afterIdentify' => 'afterIdentify',
+            'Auth.logout' => 'logout'
+        ];
+    }
+
 Utilisation d'Objets d'Authentification Personnalisés
 -----------------------------------------------------
 

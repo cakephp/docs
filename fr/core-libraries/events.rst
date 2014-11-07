@@ -183,7 +183,7 @@ Enregistrer les Listeners
 
 Les listeners (écouteurs) sont le meilleur moyen d'enregistrer les callbacks
 pour un évenement. Ceci est fait en intégrant l'interface
-:php:class:`Cake\\Event\\EventListener` dans toute classe dans laquelle vous
+:php:class:`Cake\\Event\\EventListenerInterface` dans toute classe dans laquelle vous
 souhaitez enregistrer des callbacks. Les classes l'intégrant ont besoin de
 fournir la méthode ``implementedEvents()``. Cette méthode doit retourner un
 tableau associatif avec tous les noms d'évenement que la classe va gérer.
@@ -196,14 +196,14 @@ concentrer sur la logique des statistiques à un endroit et de réagir aux
 évenements si nécessaire. Notre listener ``UserStatistics`` pourrait commencer
 comme ceci::
 
-    use Cake\Event\EventListener;
+    use Cake\Event\EventListenerInterface;
 
-    class UserStatistic implements EventListener {
+    class UserStatistic implements EventListenerInterface {
 
         public function implementedEvents() {
-            return [
+            return array(
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
-            ];
+            );
         }
 
         public function updateBuyStatistic($event) {
