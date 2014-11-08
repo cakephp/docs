@@ -252,7 +252,7 @@ commande::
 
 
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
-l'OptionParser du Shell:   
+l'OptionParser du Shell::   
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();

@@ -201,9 +201,9 @@ comme ceci::
     class UserStatistic implements EventListenerInterface {
 
         public function implementedEvents() {
-            return array(
+            return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
-            );
+            ];
         }
 
         public function updateBuyStatistic($event) {

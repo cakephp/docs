@@ -232,7 +232,7 @@ You can also access tasks directly from the command line::
 
 
 Also, the task name must be added as a sub command to the Shell's
-OptionParser:
+OptionParser::
 
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
