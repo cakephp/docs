@@ -10,6 +10,7 @@ Contents
    controllers
    views
    models
+   development
    contributing
 
 .. todolist::
