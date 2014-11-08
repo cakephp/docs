@@ -78,8 +78,8 @@ composer.json de votre application pour contenir les informations suivantes::
         "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
     }
 
-Si vous utilisez un espace de nom pour vos plugins, le mapping des namespace vers
-les dossiers doit ressembler à ceci::
+Si vous utilisez un espace de nom pour vos plugins, le mapping des namespaces
+vers les dossiers doit ressembler à ceci::
 
     "psr-4": {
         (...)

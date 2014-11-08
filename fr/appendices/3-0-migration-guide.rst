@@ -630,9 +630,9 @@ AuthComponent
   à la place.
 - ``BaseAuthenticate::logout()`` a été retirée.
 - ``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
-  ``Auth.logout`` respectivement après qu'un utilisateur ait été identifié et
-  avant qu'un utilisateur soit déconnecté. Vous pouvez définir une fonction de
-  callback pour ces événements en retournant un tableau de maping depuis la
+  ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
+  avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction
+  de callback pour ces événements en retournant un tableau de mapping depuis la
   méthode ``implementedEvents()`` de votre classe d'authentification.
 
 Les classes liées à ACL ont été déplacées dans un plugin séparée. Les hashers
