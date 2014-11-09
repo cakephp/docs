@@ -72,7 +72,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 d'environnement ou des fournisseurs :term:`PaaS`::
 
     Log::config('error', [
-        'dsn' => 'file:///?levels[]=warning&levels[]=error&file=error',
+        'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
 .. note::

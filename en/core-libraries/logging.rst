@@ -67,7 +67,7 @@ Configuration options can also be provided as a :term:`DSN` string. This is
 useful when working with environment variables or :term:`PaaS` providers::
 
     Log::config('error', [
-        'dsn' => 'file:///?levels[]=warning&levels[]=error&file=error',
+        'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
 .. note::

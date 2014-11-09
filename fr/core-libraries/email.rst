@@ -134,7 +134,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 d'environnement ou des fournisseurs :term:`PaaS`::
 
     Email::configTransport('default', [
-        'dsn' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
     ]);
 
 Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
