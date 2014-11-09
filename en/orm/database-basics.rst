@@ -26,7 +26,6 @@ like::
             'username' => 'my_app',
             'password' => 'sekret',
             'database' => 'my_app',
-            'prefix' => false,
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

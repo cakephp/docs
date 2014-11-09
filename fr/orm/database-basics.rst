@@ -26,7 +26,6 @@ Une configuration de connection d'exemple ressemblera à ceci::
             'username' => 'my_app',
             'password' => 'sekret',
             'database' => 'my_app',
-            'prefix' => false,
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
