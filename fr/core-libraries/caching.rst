@@ -99,7 +99,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 d'environnement ou des fournisseurs :term:`PaaS`::
 
     Cache::config('short', [
-        'dsn' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
+        'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
     ]);
 
 Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
