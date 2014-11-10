@@ -823,8 +823,8 @@ associé avec leur recipies respectives.
 
 Un autre exemple utile est lorsque quand vous souhaitez sauver de nombreusex
 Tags dans un Post. Vous devez transmettre les données HABTM associeés dans le
- format de tableau HABTM suivant. Notez que vous devez passer uniquement l'id
- du modèle HABTM associé mais il doit être imbriquées à nouveau::
+format de tableau HABTM suivant. Notez que vous devez passer uniquement l'id
+du modèle HABTM associé mais il doit être imbriquées à nouveau::
 
     Array
     (
