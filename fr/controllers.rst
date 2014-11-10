@@ -25,7 +25,7 @@ gère.
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans ``/src/Controller/AppController.php`` et elle devra contenir les
+dans ``src/Controller/AppController.php`` et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
@@ -44,7 +44,7 @@ Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Cake\\Controller\\Controller` incluse dans la
 librairie du cœur de CakePHP. ``AppController`` est définie dans
-``/src/Controller/AppController.php`` comme ceci::
+``src/Controller/AppController.php`` comme ceci::
 
     namespace App\Controller;
 
@@ -114,7 +114,7 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``/src/Controller/RecipesController.php`` et contiendrait::
+``src/Controller/RecipesController.php`` et contiendrait::
 
         # /src/Controller/RecipesController.php
         

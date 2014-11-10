@@ -1129,7 +1129,7 @@ une suite de tests pour tous nos tests de modèles, nous pourrions créer le fic
     }
 
 Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
-``/tests/TestCase/Model/``. Pour ajouter un fichier individuel, utilisez
+``tests/TestCase/Model/``. Pour ajouter un fichier individuel, utilisez
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive
 un répertoire pour tous les tests en utilisant::
 

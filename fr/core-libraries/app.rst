@@ -89,7 +89,7 @@ Si vous ne pouvez pas installer une librairie avec Composer, il est mieux
 d'installer chaque librairie dans un répertoire en suivant les conventions de
 Composer de ``vendor/$author/$package``.
 Si vous avez une librairie appelée AcmeLib, vous pouvez l'installer dans
-``/vendor/Acme/AcmeLib``. En supposant qu'il n'utilise pas des noms de classe
+``vendor/Acme/AcmeLib``. En supposant qu'il n'utilise pas des noms de classe
 compatible avec PSR-0, vous pouvez auto-charger les classes qu'il contient en
 utilisant ``classmap`` dans le ``composer.json`` de votre application::
 

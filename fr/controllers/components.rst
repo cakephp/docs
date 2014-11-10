@@ -168,7 +168,7 @@ de l'utiliser dans plusieurs controllers différents.
 
 La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
-``/src/Controller/Component/MathComponent.php``. La structure de base pour
+``src/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
 
     namespace App\Controller\Component;
