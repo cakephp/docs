@@ -1632,9 +1632,9 @@ column Types::
 
     class UsersTable extends Table {
 
-        protected function _initializeSchema(Schema\Table $table) {
-            $table->columnType('preferences', 'json');
-            return $table;
+        protected function _initializeSchema(Schema $schema) {
+            $schema->columnType('preferences', 'json');
+            return $schema;
         }
 
     }
