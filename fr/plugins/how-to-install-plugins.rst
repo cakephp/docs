@@ -44,7 +44,7 @@ du répertoire vendors habituel.
     Utilisez "require-dev" si vous  souhaitez uniquement inclure le plugin
     pour votre environnement de développement.
 
-Sinon, vous pouverz utiliser l'
+Sinon, vous pouvez utiliser l'
 `outil CLI de Composer <https://getcomposer.org/doc/03-cli.md#require>`_
 pour déclarer (et installer) le plugin::
 
@@ -53,10 +53,10 @@ pour déclarer (et installer) le plugin::
 Clonage Git
 ===========
 
-Si le plugin que vous souhaitez installer est hébergé en tant que dépôt Git, vous
-pous également le cloner. Imaginons que le plugin 'ContactManager' est hébergé sur
-Github. Vous pouvez le cloner en exécutant la ligne de commande suivante depuis
-votre répertoire app/Plugin/::
+Si le plugin que vous souhaitez installer est hébergé en tant que dépôt Git,
+vous pouvez également le cloner. Imaginons que le plugin 'ContactManager' est
+hébergé sur Github. Vous pouvez le cloner en exécutant la ligne de commande
+suivante depuis votre répertoire app/Plugin/::
 
     git clone git://github.com/cakephp/contact-manager.git ContactManager
 
