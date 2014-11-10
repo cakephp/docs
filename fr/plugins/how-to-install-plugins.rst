@@ -45,7 +45,7 @@ du répertoire vendors habituel.
     pour votre environnement de développement.
 
 Sinon, vous pouverz utiliser l'
-`outil CLI de Composer CLI tool <https://getcomposer.org/doc/03-cli.md#require>`_
+`outil CLI de Composer <https://getcomposer.org/doc/03-cli.md#require>`_
 pour déclarer (et installer) le plugin::
 
     php composer.phar require cakephp/contact-manager:1.2.*
@@ -87,7 +87,7 @@ Vous pouvez au choix les charger un par un ou bien tous en une seule fois::
     CakePlugin::load('ContactManager'); // Charge un seul plugin
 
 ``loadAll()`` charge tous les plugins disponibles, et vous laisse la possibilité
-de régler certain paramètres pour des plugin spécifiques. ``load()`` fonctionne
+de régler certain paramètres pour des plugins spécifiques. ``load()`` fonctionne
 de façon similaire mais charge uniquement le plugin spécifié explicitement.
 
 .. meta::
