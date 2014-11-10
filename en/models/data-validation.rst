@@ -966,6 +966,9 @@ with usage examples.
 
     Make sure to include the original field in the list of fields when making
     a unique rule across multiple fields.
+    
+    If a listed field isn't included in the model data, then it's treated as a null value.
+    You may consider marking the listed fields as ``required``.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
