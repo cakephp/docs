@@ -421,7 +421,7 @@ Attribute Matching Types
     :rtype: array
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-    custom $callback to filter the array elements. You callback should return
+    custom $callback to filter the array elements. Your callback should return
     ``false`` to remove elements from the resulting array::
 
         $data = array(
