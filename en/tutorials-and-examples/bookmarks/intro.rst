@@ -46,6 +46,7 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /bookmarker
+        /bin
         /config
         /logs
         /plugins
