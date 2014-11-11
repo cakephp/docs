@@ -778,13 +778,10 @@ boolean as to whether or not the user is allowed to access resources in
 the request. The callback is passed the active user, so it can be
 checked::
 
-    class AppController extends Controller {
-        public function initialize() {
-            parent::initialize();
-            $this->loadComponent('Auth', [
-                'authorize' => 'Controller',
-            ]);
-        }
+    // src/Auth/AuthorizeTrait.php
+    namespace App\Auth;
+
+    trait AuthorizeTrait {
 
         public function isAuthorized($user = null) {
             // Any registered user can access public functions
@@ -800,6 +797,25 @@ checked::
             // Default deny
             return false;
         }
+
+    }
+
+    // src/Controller/AppController.php
+    namespace App\Controller;
+
+    use App\Auth\AuthorizeTrait;
+
+    class AppController extends Controller {
+
+        use AuthorizeTrait;
+
+        public function initialize() {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => 'Controller',
+            ]);
+        }
+
     }
 
 The above callback would provide a very simple authorization system
