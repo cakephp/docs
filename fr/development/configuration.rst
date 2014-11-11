@@ -82,7 +82,7 @@ App.encoding
     données.
 App.webroot
     Le répertoire webroot.
-App.www_root
+App.wwwRoot
     Le chemin vers webroot.
 App.fullBaseUrl
     Le nom de domaine complet (y compris le protocole) vers la racine de votre

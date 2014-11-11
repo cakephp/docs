@@ -29,14 +29,15 @@ Maintenant que nous connaissons le time zone de l'utilisateur connecté, nous
 pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
 
     echo $this->Time->format(
-      'F jS, Y h:i A',
-      $post['Post']['created'],
+      $post->created,
+      \IntlDateFormatter::FULL,
       null,
-      $user['User']['time_zone']
+      $user->time_zone
     );
-    // Affichera August 22nd, 2011 11:53 PM pour un utilisateur dans GMT+0
-    // August 22nd, 2011 03:53 PM pour un utilisateur dans GMT-8
-    // et August 23rd, 2011 09:53 AM GMT+10
+    // Affichera 'Saturday, August 22, 2011 at 11:53:00 PM GMT'
+    // pour un utilisateur dans GMT+0. Cela affichera,
+    // 'Saturday, August 22, 2011 at 03:53 PM GMT-8:00'
+    // pour un utilisateur dans GMT-8
 
 La plupart des méthodes du Helper Time contiennent un paramètre $timezone.
 Le paramètre $timezone accepte une chaîne identifiante de timezone valide ou
