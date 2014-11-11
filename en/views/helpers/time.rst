@@ -28,14 +28,15 @@ the time zone of the logged in user we can correct the date and time on our
 posts using the Time Helper::
 
     echo $this->Time->format(
-      $post['Post']['created'],
-      'F jS, Y h:i A',
+      $post->created,
+      \IntlDateFormatter::FULL,
       null,
-      $user['User']['time_zone']
+      $user->time_zone
     );
-    // Will display August 22nd, 2011 11:53 PM for a user in GMT+0
-    // August 22nd, 2011 03:53 PM for a user in GMT-8
-    // and August 23rd, 2011 09:53 AM GMT+10
+    // Will display 'Saturday, August 22, 2011 at 11:53:00 PM GMT'
+    // for a user in GMT+0. While displaying,
+    // 'Saturday, August 22, 2011 at 03:53 PM GMT-8:00'
+    // for a user in GMT-8
 
 Most of TimeHelper's features are intended as backwards compatible interfaces
 for applications that are upgrading from older versions of CakePHP. Because the
