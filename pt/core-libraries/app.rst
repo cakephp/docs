@@ -62,12 +62,12 @@ Used for finding the path to a package inside CakePHP::
 Locating Plugins
 ================
 
-.. php:staticmethod:: pluginPath(string $plugin)
+.. php:staticmethod:: path(string $plugin)
 
-Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
+Plugins can be located with App as well. Using ``App::path('DebugKit');``
 for example, will give you the full path to the DebugKit plugin::
 
-    $path = App::pluginPath('DebugKit');
+    $path = App::path('DebugKit');
 
 Locating Themes
 ===============
