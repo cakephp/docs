@@ -1256,7 +1256,7 @@ suit:
 
 Ensuite, décommentez la ligne suivante dans votre fichier ``config/bootstrap.php``::
 
-    //Configure::load('app_local.php', 'default');
+    //Configure::load('app_local', 'default');
 
 En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
 configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de

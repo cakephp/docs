@@ -37,8 +37,8 @@ dans ``bootstrap.php``::
     use Cake\Core\Configure\Engine\PhpConfig;
 
     Configure::config('default', new PhpConfig());
-    Configure::load('app.php', 'default', false);
-    Configure::load('other_config.php', 'default');
+    Configure::load('app', 'default', false);
+    Configure::load('other_config', 'default');
 
 Vous pouvez aussi utiliser des fichiers de configuration supplémentaires pour
 surcharger un environement spécifique. Chaque fichier chargé après ``app.php``

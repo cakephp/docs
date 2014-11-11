@@ -32,8 +32,8 @@ configuration into multiple files. After creating each of the files in your
     use Cake\Core\Configure\Engine\PhpConfig;
 
     Configure::config('default', new PhpConfig());
-    Configure::load('app.php', 'default', false);
-    Configure::load('other_config.php', 'default');
+    Configure::load('app', 'default', false);
+    Configure::load('other_config', 'default');
 
 You can also use additional configuration files to provide environment specific
 overrides. Each file loaded after ``app.php`` can redefine previously declared
