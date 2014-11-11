@@ -51,6 +51,7 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /cake_install
+        /bin
         /config
         /logs
         /plugins
@@ -59,6 +60,7 @@ completed, your directory setup should look something like the following::
         /tmp
         /vendor
         /webroot
+        .editorconfig
         .gitignore
         .htaccess
         .travis.yml
