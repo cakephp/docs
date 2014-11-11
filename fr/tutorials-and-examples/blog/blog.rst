@@ -55,6 +55,7 @@ du "DocumentRoot" de votre serveur. Une fois terminé, votre répertoire
 d'installation devrait ressembler à quelque chose comme cela::
 
     /cake_install
+        /bin
         /config
         /logs
         /plugins
@@ -63,6 +64,7 @@ d'installation devrait ressembler à quelque chose comme cela::
         /tmp
         /vendor
         /webroot
+        .editorconfig
         .gitignore
         .htaccess
         .travis.yml

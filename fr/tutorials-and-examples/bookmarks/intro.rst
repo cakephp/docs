@@ -48,6 +48,7 @@ que votre configuration est faite, votre répertoire devrait ressembler à
 ce qui suit::
 
     /bookmarker
+        /bin
         /config
         /logs
         /plugins
