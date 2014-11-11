@@ -518,7 +518,7 @@ Loguer les Exceptions
 
 En Utilisant la gestion d'exception intégrée, vous pouvez loguer toutes les
 exceptions qui sont gérées par ErrorHandler en configurant l'option ``log`` à
-``true`` dans votre ``config/app.php```. Activer cela va loguer chaque exception vers
+``true`` dans votre ``config/app.php``. Activer cela va loguer chaque exception vers
 :php:class:`Cake\\Log\\Log` et les loggers configurés.
 
 .. note::

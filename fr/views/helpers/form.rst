@@ -844,16 +844,16 @@ Crée un jeu d'inputs radios.
 
 **Options**
 
- *   ` ` v a l u e ` `   I n d i q u e   l a   v a l e u r   q u a n d   c e   b o u t o n   r a d i o  est coché. 
- *   ` ` l a b e l ` `   -   b o o l éen pour indiquer si oui ou non les  l a b e l s  pour les  w i d g e t s 
-  doivent être affichés. 
- *   ` ` h i d d e n F i e l d ` `   -   b o o l éen pour indiquer si vous voulez que les résultats de
-   r a d i o ( )   incluent un input caché avec une valeur de  ' ' .  C'est utile pour créer
-  des ensembles de  r a d i o  qui ne sont pas continus.
- *   ` ` d i s a b l e d ` `   -   Défini à  ` ` t r u e ` `   o u   ` ` d i s a b l e d ` `  pour désactiver tous les
+* ``value`` - Indique la valeur quand ce bouton radio est coché.
+* ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
+  doivent être affichés.
+* ``hiddenField`` - booléen pour indiquer si vous voulez que les résultats de
+  radio() incluent un input caché avec une valeur de ''. C'est utile pour créer
+  des ensembles de radio qui ne sont pas continus.
+* ``disabled`` - Défini à ``true``ou``disabled`` pour désactiver tous les
   boutons radio.
- *   ` ` e m p t y ` `   -  Défini à  ` ` t r u e ` `  pour créer un input avec la valeur  ' '  en
-  première   o p t i o n .  Quand à  ` ` t r u e ` `, le label radio sera  'vide' .  Définissez
+* ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
+  première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
 
 Créer des Pickers Select
