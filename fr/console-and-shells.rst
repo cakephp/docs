@@ -452,7 +452,7 @@ les attributs ``text`` et ``background``:
 * white
 
 Vous pouvez aussi utiliser les options suivantes en commutateurs boléens,
-en les définissant à une valeur true qui les active.
+en les définissant à une valeur ``true`` qui les active.
 
 * bold
 * underline
@@ -674,10 +674,10 @@ pour définir le comportement de l'option:
 * ``help`` - Le texte d'aide pour cette option. Utilisé lors de la génération
   d'aide pour l'option.
 * ``default`` - La valeur par défaut pour cette option. Si elle n'est pas
-  définie, la valeur par défaut sera true.
+  définie, la valeur par défaut sera ``true``.
 * ``boolean`` - L'option n'utilise aucune valeur, c'est juste un switch de
   boléen.
-  Par défaut à false.
+  Par défaut à ``false``.
 * ``choices`` Un tableau de choix valides pour cette option. Si elle est vide,
   toutes les valeurs sont valides. Une exception sera lancée lorque parse()
   rencontre une valeur non valide.
@@ -714,8 +714,8 @@ Utiliser les Options Boléennes
 Les options peuvent être définies en options boléennes, qui sont utiles quand
 vous avez besoin de créer des options de flag. Comme les options par défaut,
 les options boléennes les incluent toujours dans les paramètres parsés. Quand
-les flags sont présents, ils sont définis à true, quand ils sont absents à
-false::
+les flags sont présents, ils sont définis à ``true``, quand ils sont absents à
+``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',

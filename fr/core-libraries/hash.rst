@@ -739,7 +739,7 @@ Les Types d'Attribut Correspondants
 
     :rtype: array
 
-    Normalise un tableau. Si ``$assoc`` est à true, le tableau résultant
+    Normalise un tableau. Si ``$assoc`` est à ``true``, le tableau résultant
     sera normalisé en un tableau associatif. Les clés numériques avec les
     valeurs, seront convertis en clés de type chaîne avec des valeurs null.
     Normaliser un tableau, facilite l'utilisation des résultats avec

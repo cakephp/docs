@@ -646,7 +646,7 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
   how exceptions are rendered you can use ``Configure::write('Exception.renderer',
   'AppExceptionRenderer');`` to choose a class that will render exception pages.
   By default :php:class`ExceptionRenderer` is used.  Your custom exception
-  renderer class should be placed in ``app/Lib/Error``.  Or an ``Error```
+  renderer class should be placed in ``app/Lib/Error``.  Or an ``Error``
   directory in any bootstrapped Lib path. In a custom exception rendering class
   you can provide specialized handling for application specific errors::
 

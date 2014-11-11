@@ -43,7 +43,7 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
   remplace les fonctionnalités de gestionnaire de session personnalisé
   des versions précédentes.
 
-CakePHP met par défaut la configuration de ``session.cookie_secure`` à true,
+CakePHP met par défaut la configuration de ``session.cookie_secure`` à ``true``,
 quand votre application est sur un protocole SSL. Si votre application sert
 à partir des deux protocoles SSL et non-SSL, alors vous aurez peut-être
 des problèmes avec les sessions étant perdues. Si vous avez besoin d'accéder

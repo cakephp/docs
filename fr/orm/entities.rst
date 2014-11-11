@@ -261,7 +261,7 @@ gardés::
 
     $article->set($properties, ['guard' => false]);
 
-En définissant l'option ``guard`` à false, vous pouvez ignorer la liste des
+En définissant l'option ``guard`` à ``false``. vous pouvez ignorer la liste des
 champs accessible pour un appel unique de ``set()``.
 
 

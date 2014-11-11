@@ -20,7 +20,7 @@ deux valeurs ne correspondent pas, le component lancera une
 Utiliser le CsrfComponent
 =========================
 
-En ajoutant simplement le ``CsrfComponent``` à votre tableau de components,
+En ajoutant simplement le ``CsrfComponent`` à votre tableau de components,
 vous pouvez profiter de la protection CSRF fournie::
 
     public function initialize() {

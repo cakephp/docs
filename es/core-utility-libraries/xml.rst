@@ -19,7 +19,7 @@ Importing Data to Xml Class
 
 .. php:staticmethod:: build($input, $options = [])
 
-You can load XML-ish data do it using ``Xml::build()```. This method will return
+You can load XML-ish data do it using ``Xml::build()``. This method will return
 a SimpleXMLElement or DOMDocument object (depending of your options parameter
 - default is SimpleXMLElement). Below the samples how to import data from URL::
 
@@ -38,7 +38,7 @@ a SimpleXMLElement or DOMDocument object (depending of your options parameter
     $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // $xml now is a instance of DOMDocument
 
-You can use ``Xml::build()``` to build XML objects from a variety of sources.
+You can use ``Xml::build()`` to build XML objects from a variety of sources.
 For example, you can load XML from strings::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>

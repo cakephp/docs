@@ -586,11 +586,11 @@ Mise en cache des Elements
 --------------------------
 
 Vous pouvez tirer profit de la mise en cache de vue de CakePHP si vous
-fournissez un paramètre cache. Si défini à true, cela va mettre en cache
+fournissez un paramètre cache. Si défini à ``true``, cela va mettre en cache
 l'element dans la configuration 'default' de Cache. Sinon, vous pouvez définir
 la configuration de cache devant être utilisée. Regardez
 :doc:`/core-libraries/caching` pour plus d'informations sur la façon de
-configurer :php:class:`Cache`. Un exemple simple de mise en cache d'un element
+configurer ``Cache``. Un exemple simple de mise en cache d'un element
 serait par exemple::
 
     echo $this->element('helpbox', [], ['cache' => true]);
@@ -616,7 +616,7 @@ Par exemple::
 Ce qui est au-dessus va s'enquérir que les deux résultats d'element sont
 mis en cache séparément. Si vous voulez que tous les elements mis en cache
 utilisent la même configuration du cache, vous pouvez sauvegarder quelques
-répétitions, en configurant :php:attr:`View::$elementCache` dans la
+répétitions, en configurant ``View::$elementCache`` dans la
 configuration de Cache que vous souhaitez utiliser. CakePHP va utiliser cette
 configuration, quand aucune n'est donnée.
 

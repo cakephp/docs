@@ -529,14 +529,14 @@ L'API requise pour CacheEngine est
 
 .. php:method:: clear($check)
 
-    :retourne: Un Booléen true en cas de succès.
+    :retourne: Un booléen ``true`` en cas de succès.
 
     Efface toutes les clés depuis le cache. Si $check est à ``true``, vous devez
     valider que chacune des valeurs a réellement expirée.
 
 .. php:method:: clearGroup($group)
 
-    :return: Boolean ``true`` en cas de succès.
+    :return: Un booléen ``true`` en cas de succès.
 
     Supprime toutes les clés à partir du cache appartenant au même groupe.
 

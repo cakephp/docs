@@ -68,7 +68,7 @@ interne, on peut auusi les trouver dans les paramètres de la requête:
 * ``bare`` Présent quand la requête vient de
   :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
   bare. Les requêtes vides n'ont pas de layout de rendu.
-* ``requested`` Présent et mis à true quand l'action vient de
+* ``requested`` Présent et mis à ``true`` quand l'action vient de
   :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Accéder aux Paramètres Querystring
@@ -350,7 +350,7 @@ cloud, vous voudrez souvent avoir l'hôte de load balancer, le port et le
 scheme dans vos requêtes. Souvent les load balancers vont aussi envoyer
 des en-têtes ``HTTP-X-Forwarded-*`` avec les valeurs originales. Les en-têtes
 forwarded ne seront pas utilisés par CakePHP directement. Pour que l'objet
-request utilise les en-têtes, définissez la propriété ``trustProxy`` à true::
+request utilise les en-têtes, définissez la propriété ``trustProxy`` à ``true``::
 
     $this->request->trustProxy = true;
 

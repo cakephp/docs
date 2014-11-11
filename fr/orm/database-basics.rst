@@ -116,13 +116,13 @@ init
     données lorsque la connection est créée. Cette options est seulement
     supportée seuelemement par le Serveur MySQL, Postgres, et SQL cette fois-ci.
 log
-    Défini à true pour activer les logs des requêtes. Quand les requêtes sont
+    Défini à ``true`` pour activer les logs des requêtes. Quand les requêtes sont
     activées, elles seront écrites à un niveau ``debug`` avec le scope
     ``queriesLog``.
 quoteIdentifiers
-    Défini à true si vous utilisez les mots réservés ou les caractères spéciaux
-    avec les noms de votre table ou les noms de colonnes. Activer cette
-    configuration va entraîner la construction des requêtes en utilisant
+    Défini à ``true`` si vous utilisez les mots réservés ou les caractères
+    spéciaux avec les noms de votre table ou les noms de colonnes. Activer
+    cette configuration va entraîner la construction des requêtes en utilisant
     :doc:`/orm/query-builder` avec les identifiers quotés lors de la création
     de SQL. Cela devrait être noté que ceci diminue la performance parce que
     chaque requête a besoin d'être traversée et manipulée avant d'être executée.
@@ -551,7 +551,7 @@ Logging de Query
 ================
 
 Le logging de Query peut être activé lors de la configuration de votre
-connection en définissant l'option ``log`` à true. Vous pouvez changer le
+connection en définissant l'option ``log`` à ``true``. Vous pouvez changer le
 logging de query à la volée, en utlisant ``logQueries``::
 
     // Active le logging de query.

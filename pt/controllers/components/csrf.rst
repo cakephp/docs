@@ -17,7 +17,7 @@ component will throw a :php:class:`Cake\Network\Exception\ForbiddenException`.
 Using the CsrfComponent
 =======================
 
-Simply by adding the ``CsrfComponent``` to your components array,
+Simply by adding the ``CsrfComponent`` to your components array,
 you can benefit from the CSRF protection it provides::
 
     public $components = [

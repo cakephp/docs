@@ -371,7 +371,7 @@ les fichiers de configuration::
 Les fichiers de configuration chargés fusionnent leurs données avec la
 configuration exécutée existante dans Configure. Cela vous permet d'écraser
 et d'ajouter de nouvelles valeurs dans la configuration existante exécutée.
-En configurant ``$merge`` à true, les valeurs ne vont pas toujours écraser
+En configurant ``$merge`` à ``true``, les valeurs ne vont pas toujours écraser
 la configuration existante.
 
 Créer et Modifier les Fichiers de Configuration

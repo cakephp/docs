@@ -382,7 +382,7 @@ l'authentification échoue::
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
 l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
-sa valeur avec le boléen ``false``.
+sa valeur avec le booléen ``false``.
 
 Dans le beforeFilter() de votre controller, ou dans les configurations du
 component::

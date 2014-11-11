@@ -110,11 +110,13 @@ utilisées dans ``$options``:
 - ``auth`` - Tableau de données d'authentification, la clé ``type`` est utilisée
   pour déleguer à une stratégie d'authentification. Par défaut l'Auth Basic est
   utilisée.
-- ``ssl_verify_peer`` - par défaut à true. Définie à false pour désactiver
-  la certification SSL (non conseillé)
+- ``ssl_verify_peer`` - par défaut à ``true``. Définie à ``false`` pour
+  désactiver la certification SSL (non conseillé)
 - ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
-- ``ssl_verify_host`` - par défaut à true. Valide le certificat SSL pour un nom d'hôte.
-- ``ssl_cafile`` - par défaut pour construire dans cafile. Overwrite to use custom CA bundles.
+- ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL pour un
+  nom d'hôte.
+- ``ssl_cafile`` - par défaut pour construire dans cafile. Overwrite to use
+  custom CA bundles.
 - ``timeout`` - Durée d'attente avant timing out.
 - ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
@@ -319,7 +321,7 @@ de réponse.
 .. php:method:: cookie($name = null, $all = false)
 
     Récupère un cookie unique à partir de response. Par défaut, seule la valeur
-    d'un cookie est retourné. Si vous définissez le deuxième paramètre à true,
+    d'un cookie est retourné. Si vous définissez le deuxième paramètre à ``true``,
     toutes les propriétés définies dans la response seront retournées.
 
 .. php:method:: statusCode()

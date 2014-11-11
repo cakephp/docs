@@ -121,7 +121,7 @@ Vous pouvez fournir un tableau d'options qui contrôlent la façon dont
 on entoure. Les options possibles sont:
 
 * ``width`` La largeur de l'enroulement. Par défaut à 72.
-* ``wordWrap`` Entoure ou non les mots entiers. Par défaut à true.
+* ``wordWrap`` Entoure ou non les mots entiers. Par défaut à ``true``.
 * ``indent`` Le caractère avec lequel on indente les lignes. Par défaut
   à ''.
 * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte.
@@ -141,7 +141,7 @@ Options:
 
 -  'format' - chaîne la partie de html avec laquelle la phrase sera mise
    en excergue.
--  'html' - bool Si true, va ignorer tous les tags HTML, s'assurant que
+-  'html' - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
    seul le bon texte est mise en avant.
 
 Exemple::

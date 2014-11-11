@@ -79,8 +79,8 @@ D'autres méthodes de détections du contenu des requêtes:
 
 .. php:method:: isAtom()
 
-    Renvoie ``true`` si l'appel actuel accepte les réponse Atom, false dans le cas
-    contraire.
+    Renvoie ``true`` si l'appel actuel accepte les réponse Atom, ``false`` dans
+    le cas contraire.
 
 .. php:method:: isMobile()
 

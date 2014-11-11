@@ -200,7 +200,7 @@ API de Folder
 
 .. php:method:: inCakePath(string $path = '')
 
-    Retourne true si le Fichier est dans un CakePath donné.
+    Retourne ``true`` si le Fichier est dans un CakePath donné.
 
 .. php:method:: inPath(string $path = '', boolean $reverse = false)
 

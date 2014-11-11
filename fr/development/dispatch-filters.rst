@@ -83,7 +83,7 @@ only apply it some of the time. You can apply conditions using the ``for`` and
         }
     ]);
 
-The callable provided to ``when`` should return true when the filter should run.
+The callable provided to ``when`` should return ``true`` when the filter should run.
 The callable can expect to get the current request and response as arguments.
 
 Building a Filter

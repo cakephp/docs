@@ -516,7 +516,7 @@ répétitions les options communes partagées par toutes les méthodes input son
     utilisant la clé 'selected'.
 
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut. Une
-    valeur false est utilisé pour désactiver/exclure les options d'un champ,
+    valeur ``false`` est utilisé pour désactiver/exclure les options d'un champ,
     ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
@@ -882,7 +882,7 @@ Affichera:
 L'input de type ``select``  permet un attribut ``$option`` spécial
 appelée ``'escape'``  qui accepte un booléen et détermine
 si il faut que l'entité HTML encode le contenu des options
-sélectionnées. Par défaut à true::
+sélectionnées. Par défaut à ``true``::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);

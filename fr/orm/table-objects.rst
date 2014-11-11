@@ -286,13 +286,13 @@ Les clés possibles pour les tableaux d'association incluent:
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
   à INNER. Vous voulez peut-être utiliser LEFT si votre association hasOne est
   optionnelle.
-- **dependent**: Quand la clé dependent est définie à true, et qu'une
+- **dependent**: Quand la clé dependent est définie à ``true``, et qu'une
   entity est supprimée, les enregistrements du model associé sont aussi
-  supprimés. Dans ce cas, nous le définissons à true pour que la suppression
-  d'un User supprime aussi son Address associée.
-- **cascadeCallbacks**: Quand ceci et **dependent** sont à true, les
+  supprimés. Dans ce cas, nous le définissons à ``true`` pour que la
+  suppression d'un User supprime aussi son Address associée.
+- **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade vont charger et supprimer les entities pour que les
-  callbacks soient lancés correctement. Quand il est à false, ``deleteAll()``
+  callbacks soient lancés correctement. Quand il est à ``false``. ``deleteAll()``
   est utilisée pour retirer les données associées et que aucun callback ne soit
   lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
@@ -453,12 +453,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   chaînes SQL comme ``['Comments.visible' => true]``.
 - **sort**  un tableau compatible avec les clauses order de find() ou les
   chaînes SQL comme ``['Comments.created' => 'ASC']``.
-- **dependent**: Lorsque dependent vaut true, une suppression récursive du
+- **dependent**: Lorsque dependent vaut ``true``, une suppression récursive du
   model est possible. Dans cet exemple, les enregistrements Comment seront
   supprimés lorsque leur Article associé l'aura été.
-- **cascadeCallbacks**: Quand ceci et **dependent** sont à true, les
+- **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade chargeront les entities supprimés pour que les
-  callbacks soient correctement lancés. Si à false, ``deleteAll()`` est utilisé
+  callbacks soient correctement lancés. Si à ``false``. ``deleteAll()`` est utilisé
   pour retirer les données associées et aucun callback ne sera lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
   des Table associées dans les résultats de la table source. Par défaut,
@@ -578,11 +578,11 @@ incluent:
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
   personnaliser le comportement de la table pivot.
-- **cascadeCallbacks**: Quand défini à true, les suppressions en cascade vont
+- **cascadeCallbacks**: Quand défini à ``true``, les suppressions en cascade vont
   charger et supprimer les entities ainsi les callbacks sont correctement
-  lancés sur les enregistrements de la table de jointure. Quand défini à false,
+  lancés sur les enregistrements de la table de jointure. Quand défini à ``false``.
   ``deleteAll()`` est utilisée pour retirer les données associées et aucun
-  callback n'est lancé. Ceci est par défaut à false pour aider à réduire
+  callback n'est lancé. Ceci est par défaut à ``false``.pour aider à réduire
   l'overhead.
 - **propertyName**: Le nom de la propriété qui doit être remplie avec les
   données de la table associée dans les résultats de la table source. Par défaut
@@ -1702,7 +1702,7 @@ HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
 are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
-``cascadeCallbacks`` option to true. A sample HasMany association with both
+``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
 
     $this->hasMany('Comments', [
@@ -1712,7 +1712,7 @@ these options enabled would be::
 
 .. note::
 
-    Setting ``cascadeCallbacks`` to true, results in considerably slower deletes
+    Setting ``cascadeCallbacks`` to ``true``, results in considerably slower deletes
     when compared to bulk deletes. The cascadeCallbacks option should only be
     enabled when your application has important work handled by event listeners.
 

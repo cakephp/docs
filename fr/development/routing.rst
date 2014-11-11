@@ -322,7 +322,7 @@ spécifiquement la signification.
 * ``plugin`` Utilisé pour nommer le plugin dans lequel un controller est localisé.
 * ``prefix`` Utilisé pour :ref:`prefix-routing`.
 * ``_ext`` Utilisé pour le routing des :ref:`file-extensions`.
-* ``_base`` Défini à false pour retirer le chemin de base de l'URL générée. Si
+* ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée. Si
   votre application n'est pas dans le répertoire racine, cette option peut être
   utilisée pour générer les URLs qui sont 'liée à cake'.
   Les URLs liées à cake sont nécessaires pour utiliser requestAction.
@@ -331,11 +331,15 @@ spécifiquement la signification.
 * ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
 * ``_port`` Définit le port si vous avez besoin de créer les liens sur des ports
   non-standard.
-* ``_full`` Si à true, la constante `FULL_BASE_URL` va être ajoutée devant les
+* ``_full`` Si à ``true``, la constante `FULL_BASE_URL` va être ajoutée devant les
   URLS générées.
 * ``#`` Vous permet de définir les fragments de hash d'URL.
-* ``_ssl`` Défini à true pour convertir l'URL générée à https, ou false pour
-  forcer http.
+* ``_ssl`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
+  pour forcer http.
+* ``_method`` Defini la méthode HTTP à utiliser. utile si vous travaillez avec
+  :ref:`resource-routes`.
+* ``_name`` Nom de route. Si vous avez configuré les routes nommées, vous
+  pouvez utiliser cette clé pour les spécifier.
 
 Passer des Paramètres à l'Action
 --------------------------------
@@ -875,15 +879,17 @@ older versions of CakePHP.
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to false to remove the base path from the generated URL. If your application
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
   to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If true the `FULL_BASE_URL` constant will be prepended to generated URLs.
-* ``_ssl`` Set to true to convert the generated URL to https, or false to force http.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https, or ``false`` to force http.
+* ``_name`` Name of route. If you have setup named routes, you can use this key
+  to specify it.
 
 .. _redirect-routing:
 

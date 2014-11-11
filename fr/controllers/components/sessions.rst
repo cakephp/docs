@@ -53,7 +53,7 @@ le nom/la clé utilisé.
 .. php:method:: check($name)
 
     Utilisée pour vérifier qu'une variable de Session a été créée.
-    Retourne ``true`` si la variable existe et false dans le cas contraire.
+    Retourne ``true`` si la variable existe et ``false`` dans le cas contraire.
 
 .. php:method:: delete($name)
 

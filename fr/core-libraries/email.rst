@@ -433,7 +433,7 @@ avec le sujet Subject et le contenu Message.
 Le retour de ``deliver()`` est une instance de :php:class:`Cake\\Email\\Email`
 avec l'ensemble des configurations. Si vous ne voulez pas envoyer l'email
 maintenant, et souhaitez configurer quelques trucs avant d'envoyer, vous pouvez
-passer le 5ème paramètre à false.
+passer le 5ème paramètre à ``false``.
 
 Le 3ème paramètre est le contenu du message ou un tableau avec les variables
 (quand on utilise le contenu rendu).
