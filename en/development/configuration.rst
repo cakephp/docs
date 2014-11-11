@@ -74,7 +74,7 @@ App.encoding
     It should match the encoding values specified for your database.
 App.webroot
     The webroot directory.
-App.www_root
+App.wwwRoot
     The file path to webroot.
 App.fullBaseUrl
     The fully qualified domain name (including protocol) to your application's
@@ -99,7 +99,7 @@ Asset.timestamp
     file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-    
+
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``false``
     - (string) 'force' - Always appends the timestamp.
