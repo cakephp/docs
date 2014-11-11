@@ -15,7 +15,7 @@ un package ou dossier où d'autres classes se trouvent. Vous pouvez configurer
 chaque localisation de package dans votre application en utilisant
 ``App::build('APackage/SubPackage', $paths)`` pour informer le framework où
 chaque classe doit être chargée. Presque toute classe dans le framework
-CakePHP peut être échangée avec une des votres compatible. Si vous souhaitez
+CakePHP peut être échangée avec une des vôtres compatible. Si vous souhaitez
 utiliser votre propre classe à la place des classes que le framework fournit,
 ajoutez seulement la classe à vos dossiers libs émulant la localisation du
 répertoire à partir duquel CakePHP s'attend à le trouver.
@@ -216,7 +216,7 @@ Trouver les objets que CakePHP connaît
         App::objects('Controller');
 
     Vous pouvez aussi chercher seulement dans les objets de plugin en utilisant
-    la syntaxe de plugin avec les points.::
+    la syntaxe de plugin avec les points::
 
         // retourne array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');
@@ -261,7 +261,7 @@ Inclure les fichiers avec App::import()
 
     :rtype: boolean
 
-    Au premier coup d'oeil, ``App::import`` a l'air compliqué, cependant pour
+    Au premier coup d'œil, ``App::import`` a l'air compliqué, cependant pour
     la plupart des utilisations, seuls 2 arguments sont nécessaires.
 
     .. note::
@@ -344,7 +344,7 @@ ajouter ces chemins avec ``App::build()``::
 
 Vos fichiers vendor ne suivent peut-être pas les conventions, ont une classe
 qui diffère du nom de fichier ou ne contiennent pas de classes. Vous pouvez
-charger ces fichiers en utilisant ``App::import()``. Les exemples siuvants
+charger ces fichiers en utilisant ``App::import()``. Les exemples suivants
 montrent comment charger les fichiers de vendor à partir d'un certain nombre
 de structures de chemin. Ces fichiers vendor pourraient être localisés dans
 n'importe quel dossier vendor.

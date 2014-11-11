@@ -1006,7 +1006,7 @@ API de Shell
     verbose. out() vous permet aussi d'utiliser les tags de formatage de
     couleur, ce qui permettra la sortie colorée sur les systèmes qui le
     supportent. Il y a plusieurs styles intégrées pour la coloration de texte,
-    et vous pouvez définir les votres.
+    et vous pouvez définir les vôtres.
 
     * ``error`` Messages d'Erreur.
     * ``warning`` Messages d'avertissement.

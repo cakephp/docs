@@ -591,7 +591,7 @@ la table jointe est associée pour chaque model en utilisant un type de relation
 `hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole
 CakePHP qui nous demande d'écrire une application qui lui permette de connecter
 la présence d'un étudiant à un cours avec les journées assistées et
-validées. Jettez un oeil au code suivant.::
+validées. Jettez un œil au code suivant.::
 
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {

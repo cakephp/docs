@@ -91,7 +91,7 @@ patron MVC, qui transforme une application en un dossier élaboré maintenable,
 modulable et rapide. Elaborer les tâches de l'application en séparant les
 models, vues et controllers, allègent votre application. De nouvelles
 fonctionnalités sont ajoutées facilement, et les améliorations sur les vieilles
-fonctionnalités se font en un clin d'oeil. La conception modulable et séparée
+fonctionnalités se font en un clin d'œil. La conception modulable et séparée
 permet aussi aux développeurs et designeurs de travailler simultanément, avec
 la possibilité de
 `prototyper <http://en.wikipedia.org/wiki/Software_prototyping>`_ rapidement :
