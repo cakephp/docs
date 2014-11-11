@@ -8,8 +8,8 @@ between page requests. It acts as a wrapper for ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
 related functions.
 
-Sessions can be configured in a number of ways in CakePHP. For more information,
-you should see the :doc:`Session configuration </development/sessions>`
+The SessionComponent has been deprecated in the 3.x version of the framework. For 
+more information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
 
 Interacting with Session Data
