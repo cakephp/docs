@@ -70,6 +70,9 @@ Two new configure variables provide the path configuration for plugins, and
 views. You can add multiple paths to ``App.paths.templates`` and
 ``App.paths.plugins`` to configure multiple paths for templates & plugins.
 
+The config key ``www_root`` has been changed to ``wwwRoot`` for consistency. Please adjust
+your ``app.php`` config file as well as any usage of ``Configure::read('App.wwwRoot')``.
+
 New ORM
 =======
 
