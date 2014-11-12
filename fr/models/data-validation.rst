@@ -291,9 +291,9 @@ Ce sera plus explicite avec un exemple pratique::
                 'last'    => true
              ),
             'regleLogin-2' => array(
-                'rule'    => array('minLength', 8),  
+                'rule'    => array('minLength', 8),
                 'message' => 'Taille minimum de 8 caractères'
-            )  
+            )
         )
     );
 
@@ -797,7 +797,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         Les formats ``ym`` et ``y`` ont été ajoutés.
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
-    
+
     Cette règle s'assure que les données sont dans un format datetime valide.
     Un paramètre (qui peut être un tableau) peut être passé pour spécifier le
     format de la date. La valeur du paramètre peut être une ou plusieurs des
@@ -829,7 +829,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Un second paramètre peut aussi être passé pour spécifier une expression
     réguière personnalisée. Si un paramètre est utilisé, ce sera la seule
     validation qui apparaitra.
-    
+
     Notez que au contraire de date(), datetime() validera une date et un time.
 
 .. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
@@ -851,9 +851,9 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Celle-ci vérifie que la donnée est une adresse email valide. En passant
     un booléen true comme second paramètre de cette règle, elle tentera de
     vérifier aussi, que l'hôte de l'adresse est valide::
-    
+
         public $validate = array('email' => array('rule' => 'email'));
-        
+
         public $validate = array(
             'email' => array(
                 'rule'    => array('email', true),
@@ -948,7 +948,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 .. php:method:: Model::isUnique()
 
     La donnée pour le champ doit être unique, elle ne peut être utilisée par
-    aucune autre ligne::    
+    aucune autre ligne::
 
         public $validate = array(
             'login' => array(
@@ -969,6 +969,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Assurez-vous d'inclure le champ d'origine dans la liste des champs quand vous
     établissez une règle unique sur plusieurs champs.
+
+    Si un champ listé n'est pas inclut dans les données du model, il sera alors traité
+    comme une valeur null. Vous pouvez envisager de marquer les champs répertoriés
+    comme ``required``.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
@@ -1076,7 +1080,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     La règle de base pour s'assurer qu'un champ n'est pas vide.::
 
         public $validate = array(
-            'titre' => array( 
+            'titre' => array(
                 'rule'    => 'notEmpty',
                 'message' => 'Ce champ ne peut pas rester vide'
             )
@@ -1164,9 +1168,9 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     L'exemple ci-dessus acceptera toutes les valeurs qui sont plus grandes que
     -1 (par ex, -0.99) et plus petite que 11 (par ex, 10.99).
-    
+
     .. note::
-    
+
         Les deux extrémités ne sont pas incluses.
 
 
