@@ -231,13 +231,13 @@ vers laquelle l'utilisateur doit être redirigé après s'être connecté.
 Si aucun paramètre n'est passé, elle obtient l'URL de redirection
 d'authentification. L'URL retournée correspond aux règles suivantes:
 
- - Retourne l'URL normalisée de valeur Auth.redirect si elle est présente
-   en session et pour le même domaine que celui sur lequel application est
-   exécuté.
- - S'il n'y a pas de valeur en session et qu'il y a une configuration
-   ``loginRedirect``, la valeur de ``loginRedirect`` est retournée..
- - S'il n'y a pas de valeur en session et pas de ``loginRedirect``, / 
-   est retournée.
+- Retourne l'URL normalisée de valeur Auth.redirect si elle est présente
+  en session et pour le même domaine que celui sur lequel application est
+  exécuté.
+- S'il n'y a pas de valeur en session et qu'il y a une configuration
+  ``loginRedirect``, la valeur de ``loginRedirect`` est retournée..
+- S'il n'y a pas de valeur en session et pas de ``loginRedirect``, / 
+  est retournée.
 
 Utilisation de l'Authentification Digest et Basic pour la Connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

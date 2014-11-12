@@ -213,11 +213,11 @@ to upon logging in.
 If no parameter is passed, gets the authentication redirect URL. The URL
 returned is as per following rules:
 
- - Returns the normalized URL from session Auth.redirect value if it is
-   present and for the same domain the current app is running on.
- - If there is no session value and there is a config ``loginRedirect``, the
-   ``loginRedirect`` value is returned.
- - If there is no session and no ``loginRedirect``, / is returned.
+- Returns the normalized URL from session Auth.redirect value if it is
+  present and for the same domain the current app is running on.
+- If there is no session value and there is a config ``loginRedirect``, the
+  ``loginRedirect`` value is returned.
+- If there is no session and no ``loginRedirect``, / is returned.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
