@@ -251,7 +251,7 @@ commande::
     tâche **doit** être inclue dans la propriété $tasks de la classe shell.
 
 
-De plus, le nom de la task doit être ajouté en tant que sous commande dans
+De plus, le nom de la task doit être ajouté en tout que sous commande dans
 l'OptionParser du Shell::   
 
     public function getOptionParser() {
@@ -330,7 +330,7 @@ Si le Shell est interactif, un avertissement sera généré, et il sera demandé
 propriété iinteractive du shell est à ``false``, aucune question ne sera
 posée et le fichier sera simplement écrasé.
 
-Sorite de la Console
+Sortie de la Console
 ====================
 
 .. php:method:out($message, $newlines, $level)
@@ -451,7 +451,7 @@ les attributs ``text`` et ``background``:
 * cyan
 * white
 
-Vous pouvez aussi utiliser les options suivantes en commutateurs boléens,
+Vous pouvez aussi utiliser les options suivantes en commutateurs booléens,
 en les définissant à une valeur ``true`` qui les active.
 
 * bold
@@ -708,12 +708,12 @@ vont lancer une ``InvalidArgumentException``::
         'choices' => ['working', 'theirs', 'mine']
     ]);
 
-Utiliser les Options Boléennes
+Utiliser les Options Booléennes
 ------------------------------
 
-Les options peuvent être définies en options boléennes, qui sont utiles quand
+Les options peuvent être définies en options booléennes, qui sont utiles quand
 vous avez besoin de créer des options de flag. Comme les options par défaut,
-les options boléennes les incluent toujours dans les paramètres parsés. Quand
+les options booléennes les incluent toujours dans les paramètres parsés. Quand
 les flags sont présents, ils sont définis à ``true``, quand ils sont absents à
 ``false``::
 
@@ -724,7 +724,7 @@ les flags sont présents, ils sont définis à ``true``, quand ils sont absents 
 
 L'option suivante fera que ``$this->params['verbose']`` sera toujours
 disponible. Cela vous permet d'oublier ``empty()`` ou ``isset()``
-pour vérifier les flags de boléens::
+pour vérifier les flags de booléens::
 
     if ($this->params['verbose']) {
         // faire quelque chose
@@ -754,7 +754,7 @@ les commandes pour ses tâches::
 Ce qui est au-dessus est un exemple de la façon dont vous pouvez fournir de
 l'aide et un parser d'option spécialisé pour une tâche du shell. En appelant
 le ``getOptionParser()`` de la tâche, nous n'avons pas à dupliquer la
-génération du parser d'option, ou mixer les tâches concernés dans notre shell.
+génération du parser d'option, ou mixer les tâches concernées dans notre shell.
 Ajoutez des sous-commandes de cette façon a deux avantages.
 Premièrement, cela laisse votre shell documenter facilement ces sous-commandes
 dans l'aide générée, et cela vous permet aussi un accès facile à l'aide de
@@ -919,8 +919,8 @@ Routing dans shells / CLI
 =========================
 
 Dans l'interface en ligne de commande (CLI), spécialement dans vos shells et
-tasks, ``env('HTTP_HOST')`` et les autres variables d'environnement spécifique
-à votre navigateur ne sont pas définis.
+tasks, ``env('HTTP_HOST')`` et les autres variables d'environnement spécifiques
+à votre navigateur ne sont pas définies.
 
 Si vous générez des rapports ou envoyez des emails qui utilisent
 ``Router::url()``, ceux-ci vont contenir l'hôte par défaut
@@ -944,7 +944,7 @@ Méthodes Hook
 .. php:method:: initialize()
 
     Initialize le constructeur du shell pour les sous-classes, permet la
-    configuration de tâches avant l'execution du shell.
+    configuration de tâches avant l'exécution du shell.
 
 .. php:method:: startup()
 
