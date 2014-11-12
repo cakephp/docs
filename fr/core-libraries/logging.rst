@@ -113,6 +113,7 @@ utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
 un tableau.::
 
+    namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
     class DatabaseLog extends BaseLog {

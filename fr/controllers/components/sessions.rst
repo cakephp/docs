@@ -8,9 +8,12 @@ client entre les pages requêtées. Il agit comme une interface pour ``$_SESSION
 et offre aussi des méthodes pratiques pour de nombreuses fonctions relatives
 à ``$_SESSION``.
 
-Les sessions peuvent être paramétrées de différentes façons dans CakePHP.  Pour
-plus d'information, vous devriez lire la documentation sur la :doc:`
-configuration des Sessions </development/sessions>`
+Le SessionComponent a été déprécié dans la version 3.x du framework. Pour accéder
+à la Session regardez
+:doc:`Accéder la Session </development/sessions.html#accessing-the-session-object>`
+
+Pour plus d'information, vous devriez lire la documentation sur la
+:doc:`configuration de Session</development/sessions>`.
 
 Interagir avec les Données de Session
 =====================================
