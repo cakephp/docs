@@ -103,6 +103,7 @@ When configuring a log adapter the ``className`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log adapter's constructor as an array.::
 
+    namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
     class DatabaseLog extends BaseLog {
