@@ -82,7 +82,7 @@ que les règles d'héritage en objet orienté s'appliquent, les components et
 les helpers utilisés par un controller sont traités spécialement. Dans ces
 cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec les
 tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
-seront toujours surcharger par celles de ``AppController.``
+seront toujours surchargées par celles de ``AppController.``
 
 Pensez aussi à appeler les fonctions de rappel (callbacks) de ``AppController``
 dans celles du controller enfant pour de meilleurs résultats::
