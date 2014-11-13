@@ -280,12 +280,12 @@ conditions arrays in previous versions of CakePHP::
     $query = $articles->find()
         ->where([
             'author_id' => 3,
-            'OR' => ['author_id' => 2],
+            'OR' => ['view_count' => 2, 'view_count' => 3],
         ]);
 
 The above would generate SQL like::
 
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+    SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
 If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere()`` and
 ``andWhere()`` methods to build your queries. Each method sets the combining
@@ -315,9 +315,11 @@ The above generates SQL similar to::
 
     SELECT *
     FROM articles
-    WHERE (promoted = 1
-    OR (published = true AND view_count > 10)
-    AND (author_id = 2 OR author_id = 3))
+    WHERE (promoted = true
+    OR (
+      (published = true AND view_count > 10)
+      AND (author_id = 2 OR author_id = 3)
+    ))
 
 By using functions as the parameters to ``orWhere()`` abd ``andWhere()``,
 you can easily compose conditions together with the expression objects::
