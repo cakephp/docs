@@ -485,6 +485,30 @@ contexts (i.e. JavaScript).::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 
+Pagination meta links
+=====================
+
+.. php:method:: meta(array $options = [])
+
+This method generates meta links for paginated results. Pagination meta links are
+`recommended to aide search engines navigating paginated data sets <http://googlewebmastercentral.blogspot.com.es/2011/09/pagination-with-relnext-and-relprev.html`.
+
+Called with no options this method will output the meta links inline:
+
+    <?= $this->Paginator->meta([]) ?>
+
+Output:
+
+.. code-block:: html
+
+    <link rel="prev" href="http://www.example.com/posts/index?page=1" />
+    <link rel="next" href="http://www.example.com/posts/index?page=3" />
+
+To add the links to a view block, call specifying which block to append to - the default
+view block is ``meta``:
+
+    <?php $this->Paginator->meta(['block' => true]) ?>
+
 .. meta::
     :title lang=en: PaginatorHelper
     :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
