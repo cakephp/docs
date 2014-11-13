@@ -264,7 +264,7 @@ conventions comme mentionnées plus tôt. C'est-à-dire, avoir un model
 User avec les colonnes username et password, et
 utiliser un formulaire posté à un controller avec les données d'utilisateur.
 Cette fonction retourne si la connexion a réussi ou non, et en cas de succès,
-alors nous redirigeons l'utilisateur vers l'URL configuré de redirection que
+alors nous redirigeons l'utilisateur vers l'URL de redirection configurée que
 nous utilisions quand nous avons ajouté AuthComponent à notre application.
 
 La déconnexion fonctionne juste en allant à l'URL ``/users/logout`` et
