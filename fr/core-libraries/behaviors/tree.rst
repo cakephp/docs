@@ -352,7 +352,7 @@ de permutations en plus des méthodes find de bases.
       models associés.
 
     La méthode ``children`` prend la clé primaire (l\'id d'une ligne) et
-    retourne l'enfant (children), par défaut dans l'ordre d\'apparition dans
+    retourne les enfants (children), par défaut dans l'ordre d\'apparition dans
     l'arbre. Le second paramètre optionnel definit si il faut ou non
     retourner les enfants directs. En utilisant l'exemple des données
     de la section précédente::
