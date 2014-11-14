@@ -354,7 +354,7 @@ de permutations en plus des méthodes find de bases.
     La méthode ``children`` prend la clé primaire (l\'id d'une ligne) et
     retourne l'enfant (children), par défaut dans l'ordre d\'apparition dans
     l'arbre. Le second paramètre optionnel definit si il faut ou non
-    retourner les enfants directs. En utilisant l'exemple des données
+    retourner seulement les enfants directs. En utilisant l'exemple des données
     de la section précédente::
      
         $allChildren = $this->Category->children(1); // un tableau plat à 11 éléments
