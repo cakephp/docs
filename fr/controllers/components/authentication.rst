@@ -72,7 +72,7 @@ Vous pouvez configurer un ou plusieurs gestionnaires pour l'authentification.
 L'utilisation de plusieurs gestionnaires d'authentification vous permet de
 supporter les différentes méthodes de connexion des utilisateurs.
 Quand les utilisateurs se connectent, les gestionnaires d'authentification
-sont utilisés dans l'ordre auquel ils ont été déclarés.
+sont utilisés dans l'ordre selon lequel ils ont été déclarés.
 Une fois qu'un gestionnaire est capable d'identifier un utilisateur, les autres
 gestionnaires ne seront pas utilisés. Inversement, vous pouvez mettre un terme
 à toutes les authentifications en levant une exception. Vous devrez traiter
