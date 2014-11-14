@@ -704,27 +704,27 @@ Exemple de sortie::
         (
             [0] => Array
                 (
-                    [0] => node
+                    [0] => "node"
                     [1] => 3
-                    [2] => left and right values identical
+                    [2] => "left and right values identical"
                 )
             [1] => Array
                 (
-                    [0] => node
+                    [0] => "node"
                     [1] => 2
-                    [2] => The parent node 999 doesn't exist
+                    [2] => "The parent node 999 doesn't exist"
                 )
             [10] => Array
                 (
-                    [0] => index
+                    [0] => "index"
                     [1] => 123
-                    [2] => missing
+                    [2] => "missing"
                 )
             [99] => Array
                 (
-                    [0] => node
+                    [0] => "node"
                     [1] => 163
-                    [2] => left greater than right
+                    [2] => "left greater than right"
                 )
 
         )
