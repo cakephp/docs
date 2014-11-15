@@ -409,7 +409,7 @@ have multiple sets of rules::
     class ReviewsTable extends Table {
 
         public function validationDefault($validator) {
-            $validator->validatePresence('body')
+            $validator->requirePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
                     'message' => 'Reviews must be 20 characters or more',
