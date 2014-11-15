@@ -115,7 +115,7 @@ methods of the HtmlHelper and how to use them.
     If you want to include a CSS file which shares a name with a loaded
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
-    
+
     .. versionchanged:: 2.4
 
         echo $this->Html->css('Blog.common.css', array('plugin' => false));
@@ -373,14 +373,13 @@ methods of the HtmlHelper and how to use them.
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Specify ``$confirmMessage`` to display a JavaScript ``confirm()``
+    Specify ``confirm`` key in options to display a JavaScript ``confirm()``
     dialog::
 
         echo $this->Html->link(
             'Delete',
             array('controller' => 'recipes', 'action' => 'delete', 6),
-            array(),
-            "Are you sure you wish to delete this recipe?"
+            array('confirm' => 'Are you sure you wish to delete this recipe?'),
         );
 
     Will output:
@@ -474,6 +473,10 @@ methods of the HtmlHelper and how to use them.
 
    .. versionchanged:: 2.4
         The ``escapeTitle`` option was added.
+
+   .. versionchanged:: 2.6
+        The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
+        in ``$options`` instead.
 
     Also check :php:meth:`HtmlHelper::url` method
     for more examples of different types of URLs.
@@ -1102,7 +1105,7 @@ Creating breadcrumb trails with HtmlHelper
 
     .. versionchanged:: 2.3
         The 'separator', 'firstClass' and 'lastClass' options were added.
-        
+
     .. versionchanged:: 2.5
         The 'escape' option was added.
 

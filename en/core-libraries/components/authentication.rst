@@ -115,6 +115,12 @@ keys.
 
   .. versionadded:: 2.4
 
+- ``userFields`` The list of fields to fetch from the ``userModel``. This option
+  is helpful when you have a wide user table and do not need all the columns in
+  the session. By default all fields are fetched.
+
+  .. versionadded:: 2.6
+
 To configure different fields for user in ``$components`` array::
 
     // Pass settings in $components array
@@ -127,6 +133,7 @@ To configure different fields for user in ``$components`` array::
             )
         )
     );
+
 
 Do not put other Auth configuration keys (like authError, loginAction etc)
 within the authenticate or Form element. They should be at the same level as
