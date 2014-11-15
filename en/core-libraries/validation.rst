@@ -24,7 +24,7 @@ Once created, you can start defining sets of rules for the fields you want to
 validate::
 
     $validator
-        ->validatePresence('title')
+        ->requirePresence('title')
         ->notEmpty('title', 'Please fill this field')
         ->add('title', [
             'length' => [
@@ -36,7 +36,7 @@ validate::
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
-        ->validatePresence('body')
+        ->requirePresence('body')
         ->add('body', 'length', [
             'rule' => ['minLength', 50],
             'message' => 'Articles must have a substantial body.'
@@ -49,12 +49,12 @@ There were a few methods called in the example above, so let's go over the
 various features. The ``add()`` method allows you to add new rules to
 a validator. You can either add rules individually or in groups as seen above.
 
-Validating Field Presence
+Requiring Field Presence
 -------------------------
 
-The ``validatePresence()`` method requires the field to be present in any
+The ``requirePresence()`` method requires the field to be present in any
 validated array. If the field is absent, validation will fail. The
-``validatePresence()`` method has 4 modes:
+``requirePresence()`` method has 4 modes:
 
 * ``true`` The field's presence is always required.
 * ``false`` The field's presence is not required.
@@ -67,7 +67,7 @@ By default, ``true`` is used. Key presence is checked by using
 ``array_key_exists()`` so that null values will count as present. You can set the
 mode using the second parameter::
 
-    $validator->validatePresence('author_id', 'create');
+    $validator->requirePresence('author_id', 'create');
 
 Allowing Empty Fields
 ---------------------
@@ -118,7 +118,7 @@ the following::
         ]
     ]);
 
-This will ensure that the provided e-mail address is only unique to other 
+This will ensure that the provided e-mail address is only unique to other
 records with the same ``site_id``.
 
 Notice that these examples take a ``provider`` key.  Adding ``Validator``
@@ -286,14 +286,14 @@ sending an email you could do the following::
 
     $validator = new Validator();
     $validator
-        ->validatePresence('email')
+        ->requirePresence('email')
         ->add('email', 'validFormat', [
             'rule' => 'email',
             'message' => 'E-mail must be valid'
         ])
-        ->validatePresence('name')
+        ->requirePresence('name')
         ->notEmpty('name', 'We need your name.')
-        ->validatePresence('comment')
+        ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
