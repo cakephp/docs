@@ -137,6 +137,10 @@ CakePHP, comme le débogage et la traduction de contenu.
     la ligne depuis laquelle il a été appelé.
     Voir aussi  :doc:`/development/debugging`
 
+.. php:function:: stackTrace(array $options = array())
+
+    Imprine la stack trace si le niveau de DEBUG de l'application est supérieur à 0.
+
 .. php:function:: env(string $key)
 
     Récupère une variable d'environnement depuis les sources disponibles.

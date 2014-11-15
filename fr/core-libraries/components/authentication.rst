@@ -126,7 +126,14 @@ Les objets d'authentification supportent les clés de configuration suivante.
 
   .. versionadded:: 2.4
 
-Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
+- ``userFields`` La liste des champs à récupérer depuis le ``userModel``. Cette
+  option est utile lorsque vous avez une large table d'utilisateurs et que vous 
+  n'avez pas besoin de toutes les colonnes dans la session. Par défaut tous les
+  champs sont récupérés.
+
+  .. versionadded:: 2.6
+
+  Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
 
     // Passer la configuration dans le tableau $components
     public $components = array(

@@ -61,7 +61,7 @@ quelques-unes de ces règles pré-définies::
                     'message'  => 'Chiffres et lettres uniquement !'
                 ),
                 'between' => array(
-                    'rule'    => array('between', 5, 15),
+                    'rule'    => array('lengthBetween', 5, 15),
                     'message' => 'Entre 5 et 15 caractères'
                 )
             ),
@@ -502,7 +502,7 @@ souhaitez::
             'required' => 'create'
         ))
         ->add('password', 'size', array(
-            'rule' => array('between', 8, 20),
+            'rule' => array('lengthBetween', 8, 20),
             'message' => 'Password should be at least 8 chars long'
         ));
 
@@ -515,7 +515,7 @@ champ unique::
             'required' => 'create'
         ),
         'size' => array(
-            'rule' => array('between', 8, 20),
+            'rule' => array('lengthBetween', 8, 20),
             'message' => 'Password should be at least 8 chars long'
         )
     ));

@@ -117,6 +117,8 @@ suivante en clé:
   utilisant 'before' ou 'after' activera seulement ces callbacks.
 * ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
   counter caches (si il y en a).
+* ``atomic`` (depuis 2.6) Booléen pour indiquer que vous voulez sauvegarder
+  les enregistrements dans une transaction.
 
 Plus d'informations sur les callbacks du model sont disponibles
 :doc:`ici <callback-methods>`.

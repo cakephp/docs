@@ -1024,6 +1024,20 @@ API de Shell
     Sur les systèmes windows, la sortie brute est la sortie par défaut sauf si
     la variable d'environnement ``ANSICON`` est présente.
 
+.. php:method:: overwrite($message = null, $newlines = 1, $size = null)
+
+    :param string $method: Le message à afficher.
+    :param integer $newlines: Le nombre de nouvelle ligne à la suite du message.
+    :param integer $size: Le nombre d'octets à surcharger
+
+    C'est une méthode utile pour générer des progess bars ou pour éviter de
+    générer trop de lignes.
+
+    Attention: Vous ne pouvez pas surcharger du texte qui contient des retours
+    à la ligne.
+
+    .. versionadded:: 2.6
+
 .. php:method:: runCommand($command, $argv)
 
     Lance le Shell avec argv fourni.

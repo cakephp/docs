@@ -623,6 +623,25 @@ D'autres Méthodes
 .. versionadded:: 2.4
     La méthode ``param()`` a été ajoutée dans 2.4.
 
+.. php:method:: meta(array $options = array())
+
+    Génère le meta-links pour un résultat paginé::
+
+        echo $this->Paginator->meta(); // Example output for page 5
+        /*
+        <link href="/?page=4" rel="prev" /><link href="/?page=6" rel="next" />
+        */
+
+    Vous pouvez également ajouter la génération de la fcontion meta à un block
+    nommé::
+
+        $this->Paginator->meta(array('block' => true));
+
+    Si true est envoyé, le block "meta" est utilisé.
+
+.. versionadded:: 2.6
+    La méthode ``meta()`` a été ajoutée dans 2.6.
+
 .. meta::
     :title lang=fr: PaginatorHelper
     :description lang=fr: PaginationHelper est utilisé pour le contrôle des sorties paginées comme le nombre de page et les liens précédents/suivants.

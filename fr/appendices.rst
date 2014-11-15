@@ -10,6 +10,14 @@ de la version 2.x ainsi qu'un guide de migration de la version 1.3 vers 2.0.
 .. toctree::
     :maxdepth: 1
 
+    appendices/2-6-migration-guide
+    
+2.5 Guide de Migration
+======================
+
+.. toctree::
+    :maxdepth: 1
+
     appendices/2-5-migration-guide
 
 2.4 Guide de Migration
