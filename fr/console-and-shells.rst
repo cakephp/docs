@@ -81,6 +81,8 @@ La première information affichée est en rapport avec les chemins. Ceci est
 particulièrement pratique si vous exécutez la Console depuis différents
 endroits de votre système de fichier.
 
+.. php:class:: Shell
+
 Créer un Shell
 ==============
 
@@ -485,6 +487,22 @@ que vous pouvez utiliser:
 Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
 de la couleur. Sur les systèmes windows, la sortie simple est mise par défaut
 sauf si la variable d'environnement ``ANSICON`` est présente.
+
+Méthodes Hook
+=============
+
+.. php:method:: initialize()
+
+    Initialize le constructeur du shell pour les sous-classes, permet la
+    configuration de tâches avant l'exécution du shell.
+
+.. php:method:: startup()
+
+    Démarre le Shell et affiche le message d'accueil. Permet de vérifier et de
+    configurer avant de faire la commande ou l'exécution principale.
+
+    Redéfinit cette méthode si vous voulez retirer l'information de bienvenue,
+    ou sinon modifier le pre-command flow.
 
 Configurer les options et générer de l'aide
 ===========================================
@@ -929,30 +947,16 @@ vous devrez spécifier le domaine manuellement. Vous pouvez faire cela en
 utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
 config, par exemple.
 
-Pour envoyer des emails, vous devrez fournir à la classe CakeEmail l'hôte avec
+Pour envoyer des emails, vous devrez fournir à la classe Email l'hôte avec
 lequel vous souhaitez envoyer l'email en faisant::
 
-    $Email = new CakeEmail();
-    $Email->domain('www.example.org');
+    use Cake\Network\Email\Email;
+
+    $email = new Email();
+    $email->domain('www.example.org');
 
 Cela suppose que les ID du message généré sont valides et correspondent au
 domaine duquel les emails sont envoyés.
-
-Méthodes Hook
-=============
-
-.. php:method:: initialize()
-
-    Initialize le constructeur du shell pour les sous-classes, permet la
-    configuration de tâches avant l'exécution du shell.
-
-.. php:method:: startup()
-
-    Démarre le Shell et affiche le message d'accueil. Permet de vérifier et de
-    configurer avant de faire la commande ou l'exécution principale.
-
-    Redéfinit cette méthode si vous voulez retirer l'information de bienvenue,
-    ou sinon modifier le pre-command flow.
 
 Plus de sujets
 ==============

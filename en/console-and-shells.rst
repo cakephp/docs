@@ -889,7 +889,7 @@ the default host ``http://localhost/``  and thus resulting in invalid URLs. In t
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 
-For sending emails, you should provide CakeEmail class with the host you want to send the email with::
+For sending emails, you should provide Email class with the host you want to send the email with::
 
     use Cake\Network\Email\Email;
 
