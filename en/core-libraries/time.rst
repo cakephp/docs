@@ -130,7 +130,7 @@ dates. CakePHP makes this a snap::
     $now->i18nFormat(\IntlDateFormatter::FULL);
 
     // Use full date but short time format
-    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     // Outputs '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
@@ -176,9 +176,9 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 ``i18nFormat``::
 
-    Time::setToStringFormat(\IntlDateFormatter::Short);
+    Time::setToStringFormat(\IntlDateFormatter::SHORT);
 
-    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
 
