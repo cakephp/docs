@@ -135,7 +135,7 @@ dates formatées. CakePHP facilite cela::
     $now->i18nFormat(\IntlDateFormatter::FULL);
 
     // Utilise la date complète mais un format court de temps
-    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     // affiche '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
@@ -185,9 +185,9 @@ la méthode de formatage.
 De même, il est possible de modifier la chaîne de formatage par défaut à
 utiliser pour le format ``i18nFormat``::
 
-    Time::setToStringFormat(\IntlDateFormatter::Short);
+    Time::setToStringFormat(\IntlDateFormatter::SHORT);
 
-    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
 

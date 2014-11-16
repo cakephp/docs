@@ -76,6 +76,10 @@ de chemin pour les plugins, et les views. Vous pouvez ajouter plusieurs chemins
 à ``App.paths.views`` et ``App.paths.plugins`` pour configurer les chemins
 multiples pour les fichiers de plugins & de view.
 
+La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
+Merci d'ajuster votre fichier de configuration ``app.php`` ainsi que chaque
+utilisation de``Configure::read('App.wwwRoot')``.
+
 Nouvel ORM
 ==========
 

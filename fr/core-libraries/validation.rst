@@ -26,7 +26,7 @@ Une fois créé, vous pouvez commencer à définir des ensembles de règle pour 
 champs que vous souhaitez valider::
 
     $validator
-        ->validatePresence('title')
+        ->requirePresence('title')
         ->notEmpty('title', 'Please fill this field')
         ->add('title', [
             'length' => [
@@ -38,7 +38,7 @@ champs que vous souhaitez valider::
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
-        ->validatePresence('body')
+        ->requirePresence('body')
         ->add('body', 'length', [
             'rule' => ['minLength', 50],
             'message' => 'Articles must have a substantial body.'
@@ -56,9 +56,9 @@ individuellement, soit dans en groupe comme vu ci-dessus.
 Valider la Présence d'un champ
 ------------------------------
 
-La méthode ``validatePresence()`` oblige le champ à être présent dans tout
+La méthode ``requirePresence()`` oblige le champ à être présent dans tout
 tableau de validation. Si le champ est absent, la validation va échouer. La
-méthode ``validatePresence()`` a 4 modes:
+méthode ``requirePresence()`` a 4 modes:
 
 * ``true`` La présence du champ est toujours requise.
 * ``false`` La présence du champ n'est pas requise.
@@ -72,7 +72,7 @@ l'utilisation de ``array_key_exists()`` donc les valeurs null vont être
 comptabilisées comme étant présentes. Vous pouvez définir le mode en utilisant
 le deuxième paramètre::
 
-    $validator->validatePresence('author_id', 'create');
+    $validator->requirePresence('author_id', 'create');
 
 Permettre aux Champs d'être Vides
 ---------------------------------
@@ -303,14 +303,14 @@ d'envoyer un email, vous pouvez faire ce qui suit::
 
     $validator = new Validator();
     $validator
-        ->validatePresence('email')
+        ->requirePresence('email')
         ->add('email', 'validFormat', [
             'rule' => 'email',
             'message' => 'E-mail must be valid'
         ])
-        ->validatePresence('name')
+        ->requirePresence('name')
         ->allowEmpty('name', false, 'We need your name.')
-        ->validatePresence('comment')
+        ->requirePresence('comment')
         ->allowEmpty('comment', false, 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
