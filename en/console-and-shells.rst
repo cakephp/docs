@@ -74,6 +74,8 @@ Running the Console with no arguments produces this help message::
 The first information printed relates to paths. This is helpful if you're
 running the console from different parts of the filesystem.
 
+.. php:class:: Shell
+
 Creating a Shell
 ================
 
@@ -450,6 +452,22 @@ no styling is done at all. There are three modes you can use.
 By default on \*nix systems ConsoleOutput objects default to colour output.
 On windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
+
+Hook Methods
+============
+
+.. php:method:: initialize()
+
+    Initializes the Shell acts as constructor for subclasses allows
+    configuration of tasks prior to shell execution.
+
+.. php:method:: startup()
+
+    Starts up the Shell and displays the welcome message. Allows for checking
+    and configuring prior to command or main execution.
+
+    Override this method if you want to remove the welcome information, or
+    otherwise modify the pre-command flow.
 
 Configuring Options and Generating Help
 =======================================
@@ -877,22 +895,6 @@ For sending emails, you should provide CakeEmail class with the host you want to
     $Email->domain('www.example.org');
 
 This asserts that the generated message IDs are valid and fit to the domain the emails are sent from.
-
-Hook Methods
-============
-
-.. php:method:: initialize()
-
-    Initializes the Shell acts as constructor for subclasses allows
-    configuration of tasks prior to shell execution.
-
-.. php:method:: startup()
-
-    Starts up the Shell and displays the welcome message. Allows for checking
-    and configuring prior to command or main execution.
-
-    Override this method if you want to remove the welcome information, or
-    otherwise modify the pre-command flow.
 
 More Topics
 ===========
