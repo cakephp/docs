@@ -84,8 +84,8 @@ Network
 CakeRequest
 -----------
 
-- ``CakeRequest::param()`` can now read values using :ref:`hash-path-syntax`
-  like ``data()``.
+- ``CakeRequest::param()`` peut maintenant lire des valeurs utilisant
+  :ref:`hash-path-syntax` comme ``data()``.
 - ``CakeRequest:setInput()`` a été ajoutée.
 
 HttpSocket
@@ -116,10 +116,10 @@ Hash
 Validation
 ----------
 
-- ``Validation::between`` has been deprecated, you should use
-  :php:meth:`Validation::lengthBetween` instead.
-- ``Validation::ssn`` has been deprecated and can be provided as standalone/plugin solution.
-
+- ``Validation::between`` a été dépréciée, vous devez utiliser
+  :php:meth:`Validation::lengthBetween` à la place.
+- ``Validation::ssn`` a été dépréciée et peut être fourni en tant que plugin
+  autonome.
 
 View
 ====
