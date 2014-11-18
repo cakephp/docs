@@ -340,7 +340,7 @@ spécifiquement la signification.
   :ref:`resource-routes`.
 * ``_name`` Nom de route. Si vous avez configuré les routes nommées, vous
   pouvez utiliser cette clé pour les spécifier.
-.. _params-routes:
+
 Passer des Paramètres à l'Action
 --------------------------------
 
@@ -785,7 +785,7 @@ l'action appelée, deuxièmement en étant accessibles dans
 numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même
 façon que par ``$this->request->params['pass']``. Lorsque vous utilisez des routes personnalisées
 il est possible de forcer des paramètres particuliers comme étant des
-paramètres passés également. Voir :ref:`params-routes`.
+paramètres passés également.
 
 Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::

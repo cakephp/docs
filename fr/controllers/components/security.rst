@@ -168,7 +168,7 @@ au démarrage::
     }
 
 Cette exemple forcera toutes les actions qui proviennent de la
-"route" Admin à être effectuées via des requêtes sécurisées SSL::
+"route" Admin à être effectuées via des requêtes sécurisées ::
 
     namespace App\Controller;
 
@@ -179,21 +179,20 @@ Cette exemple forcera toutes les actions qui proviennent de la
 
         public function initialize() {
             parent::initialize();
-            $this->loadComponent('Security');
+            $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
         public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
-                $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
 
         public function forceSSL() {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
-
+    
 Cet exemple forcera toutes les actions qui proviennent de la "route"
 admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
 dans un trou noir, elle appellera le callback ``forceSSL()`` qui redirigera
