@@ -170,18 +170,17 @@ require secure SSL requests::
 
         public function initialize() {
             parent::initialize();
-            $this->loadComponent('Security');
+            $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
         public function beforeFilter(Event $event) {
             if (isset($this->params['admin'])) {
-                $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
 
         public function forceSSL() {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
 
