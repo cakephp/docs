@@ -23,7 +23,7 @@ créée et passée en référence aux différentes couches de l'application que 
 requête de données utilise. Par défaut la requête est assignée à
 ``$this->request``, et est disponible dans les Controllers, Cells, Vues et
 Helpers. Vous pouvez aussi y accéder dans les Components en utilisant la
-référence du controller. Certaines des tâches incluses que ``Request`` permet :
+référence du controller. Certaines des tâches incluses que ``Request`` permettent de :
 
 * Transformer les tableaux GET, POST, et FILES en structures de données avec
   lesquelles vous êtes familiers.
@@ -82,8 +82,8 @@ Les paramètres Querystring peuvent être lus en utilisant
     // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
-utiliser ``query()`` pour lire l'URL requêtée d'une manière sans erreur.
+Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
+utiliser ``query()`` pour lire l'URL demandée sans erreur.
 Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -95,8 +95,8 @@ Données de la Requête Body
 .. php:method:: data($name)
 
 Toutes les données POST sont accessibles en utilisant
-:php:meth:`Cake\\Network\\Request::data()`. Toute données de formulaire qui
-contient un préfix ``data`` verra ce préfix data prefix retiré. Par exemple::
+:php:meth:`Cake\\Network\\Request::data()`. Toute donnée de formulaire qui
+contient un préfix ``data`` verra ce préfix ``data`` retiré. Par exemple::
 
     // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible dans
     $this->request->data('MyModel.title');
