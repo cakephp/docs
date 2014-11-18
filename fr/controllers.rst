@@ -78,7 +78,7 @@ Controller pour ce type d'utilisation::
 
 En plus de la méthode ``initialize()``, l'ancienne propriété ``$components``
 vous permettra aussi de déclarer les components qui doivent être chargés. Bien
-que les règles d'héritage en objet orienté s'appliquent, les components et
+que les règles d'héritage en orienté objet s'appliquent, les components et
 les helpers utilisés par un controller sont traités spécialement. Dans ces
 cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec les
 tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
@@ -94,9 +94,9 @@ dans celles du controller enfant pour de meilleurs résultats::
 Les paramètres de requête
 =========================
 
-Quand une requête est faîte dans une application CakePHP, Les classes
+Quand une requête est faîte dans une application CakePHP, les classes
 :php:class:`Cake\\Routing\\Router` et :php:class:`Cake\\Routing\\Dispatcher` de
-CakePHP utilisent la :ref:`routes-configuration` pour trouver et créer le bon
+CakePHP utilisent la fonctionnalité :ref:`routes-configuration` pour trouver et créer le bon
 controller. La requête de données est encapsulée dans un objet request.
 CakePHP met toutes les informations importantes de la requête dans la
 propriété ``$this->request``. Consultez la section :ref:`cake-request`
@@ -260,7 +260,7 @@ Rendre une View
 La méthode ``render()`` est automatiquement appelée à
 la fin de chaque action exécutée par le controller. Cette méthode exécute
 toute la logique liée à la présentation (en utilisant les variables
-transmises via la méthode ``set()`), place le contenu
+transmises via la méthode ``set()``, place le contenu
 de la vue à l'intérieur de son ``View::$layout`` et transmet le
 tout à l'utilisateur final.
 
