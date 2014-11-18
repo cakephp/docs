@@ -35,7 +35,7 @@ paramètres de votre composant.
 Les options de configuration disponibles sont les suivants:
 
 - ``cookieName`` Le nom du cookie à envoyer. Par défaut ``csrfToken``.
-- ``expiry`` Durée avent l'expiration du jeton CSRF. Session du navigateur par
+- ``expiry`` Durée avant l'expiration du jeton CSRF. Session du navigateur par
   défaut.
 - ``secure`` Si le cookie doit être créé avec Secure flag ou pas.
   Par défaut à ``false``.
@@ -58,7 +58,7 @@ contenant le jeton CSRF.
 
     Lorsque vous utilisez le CsrfComponent vous devez toujours commencer vos
     formulaires avec le FormHelper. Si vous ne le faites pas, vous devrez créer
-    manuellement les champs cachées dans chacun de vos formulzires.
+    manuellement les champs cachées dans chacun de vos formulaires.
 
 Protection CSRF et Requêtes AJAX
 ================================
@@ -72,7 +72,7 @@ Désactiver le Component CSRF pour des Actions Spécifiques
 =========================================================
 
 Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines 
-requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du controlle, au cours de la méthode ``beforeFilter``::
+requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du controlleur, au cours de la méthode ``beforeFilter``::
 
     public function beforeFilter(Event $event) {
         $this->eventManager()->detach($this->Csrf);
