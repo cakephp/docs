@@ -48,8 +48,8 @@ paramètres pour vous conformer à une expression régulière::
 
 L'exemple précédent a changé le matcher par un nouveau placeholder ``:id``.
 Utiliser les placeholders nous permet de valider les parties de l'url, dans ce
-cas, nous utilisons l'expression régulière ``\d+`` pour que seules les chiffres
-fonctionnenet. Finalement, nous disons au Router de traiter le placeholder
+cas, nous utilisons l'expression régulière ``\d+`` pour que seuls les chiffres
+fonctionnent. Finalement, nous disons au Router de traiter le placeholder
 ``id`` comme un argument de fonction pour la fonction ``view()`` en spécifiant
 l'option ``pass``. Vous pourrez en voir plus sur leur utilisation plus tard.
 
@@ -91,7 +91,7 @@ scope héritera du chemin et des routes par défaut du scope qui la contient::
 Le route ci-dessus matchera ``/blog/`` et renverra
 ``Blog\Controller\ArticlesController::index()``.
 
-Le squellette d'application contient quelques routes pour vous aider à commencer.
+Le squelette d'application contient quelques routes pour vous aider à commencer.
 Une fois que vous avez ajouté vos propres routes, vous pouvez retirer les routes
 par défaut si vous n'en avez pas besoin.
 
@@ -220,7 +220,7 @@ une requête est faite, les valeurs pour ces éléments de route se
 trouvent dans ``$this->request->params`` dans le controller. Quand vous
 définissez un element de route personnalisé, vous pouvez spécifier en option
 une expression régulière - ceci dit à CakePHP comment savoir si l'URL est
-correctement formé ou non. Si vous choisissez de ne pas fournir une expression
+correctement formée ou non. Si vous choisissez de ne pas fournir une expression
 régulière, toute expression non ``/`` sera traitée comme une partie du
 paramètre::
 
@@ -232,7 +232,7 @@ paramètre::
 
 Cet exemple simple montre comment créer une manière rapide de voir les models
 à partir de tout controller en élaborant une URL qui ressemble à
-``/controllername/:id``. L'URL fourni à connect() spécifie deux éléments de
+``/controllername/:id``. L'URL fournie à connect() spécifie deux éléments de
 route: ``:controller`` et ``:id``. L'élément ``:controller`` est l'élément de
 route par défaut de CakePHP, donc le routeur sait comment matcher et identifier
 les noms de controller dans les URLs. L'élément ``:id`` est un élément de route
@@ -258,14 +258,14 @@ La classe spéciale ``InflectedRoute`` va s'assurer que les paramètres
     de groupes capturés. Si ils le font, le Router ne va pas fonctionner
     correctement.
 
-Une fois que cette route a été définie, requêtant ``/apples/5`` est la même
+Une fois que cette route a été définie, la requête ``/apples/5`` est la même
 que celle requêtant ``/apples/view/5``. Les deux appeleraient la méthode view()
 de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
 d'accéder à l'ID passé à ``$this->request->params['id']``.
 
-Si vous avez un unique controller dans votre application et que vous ne ne
+Si vous avez un unique controller dans votre application et que vous ne
 voulez pas que le nom du controller apparaisse dans l'URL, vous pouvez mapper
-tous les URLs aux actions dans votre controller. Par exemple, pour mapper
+toutes les URLs aux actions dans votre controller. Par exemple, pour mapper
 toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
@@ -324,13 +324,13 @@ spécifiquement la signification.
 * ``_ext`` Utilisé pour le routing des :ref:`file-extensions`.
 * ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée. Si
   votre application n'est pas dans le répertoire racine, cette option peut être
-  utilisée pour générer les URLs qui sont 'liée à cake'.
+  utilisée pour générer les URLs qui sont 'liées à cake'.
   Les URLs liées à cake sont nécessaires pour utiliser requestAction.
 * ``_scheme`` Défini pour créer les liens sur les schémas différents comme
   `webcal` ou `ftp`. Par défaut, au schéma courant.
 * ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
 * ``_port`` Définit le port si vous avez besoin de créer les liens sur des ports
-  non-standard.
+  non-standards.
 * ``_full`` Si à ``true``, la constante `FULL_BASE_URL` va être ajoutée devant les
   URLS générées.
 * ``#`` Vous permet de définir les fragments de hash d'URL.
@@ -340,7 +340,7 @@ spécifiquement la signification.
   :ref:`resource-routes`.
 * ``_name`` Nom de route. Si vous avez configuré les routes nommées, vous
   pouvez utiliser cette clé pour les spécifier.
-
+.. _params-routes:
 Passer des Paramètres à l'Action
 --------------------------------
 
@@ -393,7 +393,7 @@ Utiliser les Routes Nommées
 ---------------------------
 
 Parfois vous trouvez que taper tous les paramètres de l'URL pour une route est
-trop verbeux, ou que vous souhaitiez tirer avantage des améliorations de la
+trop verbeux, ou bien vous souhaitez tirer avantage des améliorations de la
 performance que les routes nommées permettent. Lorque vous connectez les routes,
 vous pouvez spécifier une option ``_name``, cette option peut être utilisée
 pour le routing inversé pour identifier la route que vous souhaitez utiliser::
@@ -442,7 +442,7 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
 ``Controller`` de votre application. En ayant des préfixes en tant que controller
 séparés, vous pouvez créer de plus petits et/ou de plus simples controllers.
-Les comportements communs au controllers préfixés et non-préfixés peuvent être
+Les comportements communs aux controllers préfixés et non-préfixés peuvent être
 encapsulés via héritage :doc:`/controllers/components`, ou traits. En utilisant
 notre exemple des utilisateurs, accéder à l'url ``/admin/users/edit/5`` devrait
 appeler la méthode ``edit`` de notre ``App\Controller\Admin\UsersController``
@@ -467,7 +467,7 @@ Vous pouvez aussi définir les préfixes dans les scopes de plugin::
     });
 
 Ce qui est au-dessus va créer un template de route de type
-``/debug_kit/admin/:controller``. La route connectée aura les elements de
+``/debug_kit/admin/:controller``. La route connectée aura les éléments de
 route ``plugin`` et ``prefix`` définis.
 
 Quand vous définissez des préfixes, vous pouvez imbriquer plusieurs préfixes
@@ -480,7 +480,7 @@ si besoin::
     });
 
 Ce qui est au-dessus va créer un template de route de type
-``/manager/admin/:controller``. La route connectée aura l'element de
+``/manager/admin/:controller``. La route connectée aura l'élément de
 route ``prefix`` défini à ``manager/admin``.
 
 Le préfixe actuel sera disponible à partir des méthodes du controller avec
@@ -513,7 +513,7 @@ Routing des Plugins
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Les routes des plugins sont les plus faciles à créer en utilisant la méthode
+Les routes des plugins sont plus faciles à créer en utilisant la méthode
 ``plugin()``. Cette méthode crée un nouveau scope pour les routes de plugin::
 
     Router::plugin('DebugKit', function ($routes) {
@@ -605,7 +605,7 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 Cela activera les extensions de nom pour toutes les routes déclarées **après**
 l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
 seront fusionnées avec la liste des extensions existantes. Vous pouvez passer
-``false`` en second argument pour remplacer la liste d'extension déjà existante.
+``false`` en second argument pour remplacer la liste d'extensions déjà existantes.
 Si vous appelez la méthode sans arguments, elle retournera la liste des extensions
 existantes. Vous pouvez définir des extensions pour chaque scope::
 
@@ -777,16 +777,15 @@ pour transmettre des paramètres aux méthodes de vos controllers.::
 
     http://localhost/calendars/view/recent/mark
 
-Dans l'exemple ci-dessus, ``recent`` et ``mark`` tous deux des arguments passés
+Dans l'exemple ci-dessus, ``recent`` et ``mark`` sont tous deux des arguments passés
 à ``CalendarsController::view()``. Les arguments passés sont transmis aux
 contrôleurs de trois manières. D'abord comme arguments de la méthode de
 l'action appelée, deuxièmement en étant accessibles dans
 ``$this->request->params['pass']`` sous la forme d'un tableau indexé
 numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même
-façon que la deuxième façon. Lorsque vous utilisez des routes personnalisées
+façon que par ``$this->request->params['pass']``. Lorsque vous utilisez des routes personnalisées
 il est possible de forcer des paramètres particuliers comme étant des
-paramètres passés également. Voir passer des paramètres à une action pour plus
-d'informations.
+paramètres passés également. Voir :ref:`params-routes`.
 
 Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
