@@ -38,7 +38,7 @@ The App View
 
 Vous pouvez utiliser ``AppView`` pour charger des helpers qui seront utilisés
 dans toutes les vues rendues de votre application. CakePHP fournit une méthode
-``initialize()`` qui est invoquées à la fin du constructeur de la View pour ce
+``initialize()`` qui est invoquée à la fin du constructeur de la View pour ce
 type d'utilisation:
 
 .. code-block:: php
@@ -79,7 +79,7 @@ correspondant à son action. Par exemple, le fichier de vue pour l'action
 ``src/Template/Products/view.ctp``.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
-différentes. Chaque partie a différent usages qui seront présentés dans ce
+différentes. Chaque partie a différents usages qui seront présentés dans ce
 chapitre :
 
 - **views**: Les Views sont la partie de la page qui est unique pour l'action
@@ -135,7 +135,7 @@ et contiendra la valeur 'posts'.
 Vues étendues
 -------------
 
-Une vue étendue vous permet d'enrouler une vue dans une autre. En combinant
+Une vue étendue vous permet d'encapsuler une vue dans une autre. En combinant
 cela avec :ref:`view blocks <view-blocks>`, cela vous donne une façon puissante
 pour garder vos vues :term:`DRY`. Par exemple, votre application a une sidebar
 qui a besoin de changer selon la vue spécifique en train d'être rendue. En
@@ -220,7 +220,7 @@ Vous pouvez récupérer la liste de tous blocks existants en utilisant la métho
 Utiliser les Blocks de Vues
 ===========================
 
-Les blocks de vue remplacent fournissent une API flexible qui vous permet de
+Les blocks de vue fournissent une API flexible qui vous permet de
 définir des slots (emplacements), ou blocks, dans vos vues / layouts qui peuvent
 être définies ailleurs. Par exemple, les blocks pour implémenter des choses
 telles que les sidebars, ou des régions pour charger des ressources dans
