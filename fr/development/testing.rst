@@ -46,8 +46,8 @@ lancer vos tests::
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir debug activé votre fichier ``config/app.php``
-avant de lancer des tests. Avant de lancer des tests, vous devrez vous
+Souvenez-vous qu'il faut avoir debug activé dans votre fichier ``config/app.php``
+avant de lancer des tests. Vous devrez aussi vous
 assurer d'ajouter une configuration de base de données ``test`` dans
 ``config/app.php``. Cette configuration est utilisée par CakePHP pour les
 tables fixture et les données::
