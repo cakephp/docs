@@ -772,7 +772,7 @@ n'autorisera la vérification des objets ::
     $this->Auth->allow();
 
     // Ne permet que les actions view et index.
-    $this->Auth->allow('view', 'index');
+    $this->Auth->allow('view');
 
     // Ne permet que les actions view et index.
     $this->Auth->allow(['view', 'index']);
