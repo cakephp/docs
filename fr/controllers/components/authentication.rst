@@ -771,7 +771,7 @@ n'autorisera la vérification des objets ::
     // Permet toutes les actions
     $this->Auth->allow();
 
-    // Ne permet que les actions view et index.
+    // Ne permet que l'actions view.
     $this->Auth->allow('view');
 
     // Ne permet que les actions view et index.

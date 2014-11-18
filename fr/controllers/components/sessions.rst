@@ -10,7 +10,7 @@ et offre aussi des méthodes pratiques pour de nombreuses fonctions relatives
 
 Le SessionComponent a été déprécié dans la version 3.x du framework. Pour accéder
 à la Session regardez
-:doc:`Accéder la Session </development/sessions.html#accessing-the-session-object>`
+:doc:`Accéder la Session </development/sessions.html#acceder-a-l-objet-session>`
 
 Pour plus d'information, vous devriez lire la documentation sur la
 :doc:`configuration de Session</development/sessions>`.

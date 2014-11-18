@@ -727,7 +727,7 @@ vont lancer une ``InvalidArgumentException``::
     ]);
 
 Utiliser les Options Booléennes
-------------------------------
+-------------------------------
 
 Les options peuvent être définies en options booléennes, qui sont utiles quand
 vous avez besoin de créer des options de flag. Comme les options par défaut,
