@@ -100,7 +100,7 @@ to the login page. We should fix that as we'll if we want people to sign up for
 our application. In the ``UsersController`` add the following::
 
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow('add');
+        $this->Auth->allow(['add']);
     }
 
 The above tells ``AuthComponent`` that the ``add`` action does *not* require
