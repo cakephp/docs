@@ -43,7 +43,7 @@ Les options de configuration disponibles sont les suivants:
   Changer cette valeur nécéssite également de configurer le FormHelper.
 
 Lorsqu'il est activé, vous pouvez accéder au jeton CSRF actuel sur l'objet
-request:: 
+request::
 
     $token = $this->request->param('_csrfToken');
 
@@ -71,8 +71,9 @@ applications Javascript, ou des API basées sur XML/JSON.
 Désactiver le Component CSRF pour des Actions Spécifiques
 =========================================================
 
-Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines 
-requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du controlleur, au cours de la méthode ``beforeFilter``::
+Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines
+requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du
+controller, au cours de la méthode ``beforeFilter``::
 
     public function beforeFilter(Event $event) {
         $this->eventManager()->detach($this->Csrf);
