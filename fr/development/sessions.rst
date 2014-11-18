@@ -75,7 +75,7 @@ CakePHP est fourni avec plusieurs configurations de session intégrées. Vous
 pouvez soit utiliser celles-ci comme base pour votre configuration de
 session, soit vous pouvez créer une solution complètement personnalisée.
 Pour utiliser les valeurs par défaut, définissez simplement la clé
-'defaults' avec le nom par défaut, vous voulez utiliser. Vous pouvez
+'defaults' avec le nom par défaut que vous voulez utiliser. Vous pouvez
 ensuite surcharger toute sous-configuration en la déclarant dans votre config
 Session::
 
@@ -99,7 +99,7 @@ configuration de session 'php'. Les configurations intégrées sont:
 * ``php`` - Sauvegarde les sessions avec les configurations standard dans
   votre fichier php.ini.
 * ``cake`` - Sauvegarde les sessions en tant que fichiers à l'intérieur de
-  ``app/tmp/sessions``. Ceci est une bonne option quand les hôtes qui ne
+  ``app/tmp/sessions``. Ceci est une bonne option quand les hôtes ne
   vous autorisent pas à écrire en dehors de votre propre dir home.
 * ``database`` - Utiliser les sessions de base de données intégrées.
   Regardez ci-dessous pour plus d'informations.
@@ -184,8 +184,8 @@ Les Sessions de Cache
 
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
 permet de stocker les sessions dans un cache comme APC, memcache, ou Xcache.
-Il y a some caveats dans l'utilisation des sessions en cache, puisque
-si vous exhaust l'espace de cache, les sessions vont commencer à expirer
+Il y a quelques bémols dans l'utilisation des sessions en cache, puisque
+si vous vider le cache, les sessions vont commencer à expirer
 puisque les enregistrements sont évincés.
 
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre
