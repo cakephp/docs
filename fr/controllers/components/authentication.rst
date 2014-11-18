@@ -224,8 +224,8 @@ Rediriger les Utilisateurs Après Connection
 
 .. php:method:: redirectUrl
 
-Après avoir connecté un utilisateur, vous voudrez générallement le rediriger
-vers l'endroit doù ils viennent. Passez une URL pour définir la destination
+Après avoir connecté un utilisateur, vous voudrez généralement le rediriger
+vers l'endroit d'où il vient. Passez une URL pour définir la destination
 vers laquelle l'utilisateur doit être redirigé après s'être connecté.
 
 Si aucun paramètre n'est passé, elle obtient l'URL de redirection
@@ -417,7 +417,7 @@ setter dans votre entity User::
     }
 
 AuthComponent est configuré par défaut pour utiliser ``DefaultPasswordHasher``
-lors de la validation de clé utilisateur, donc aucun configuration
+lors de la validation de clé utilisateur, donc aucune configuration
 supplémentaire n'est nécessaire pour authentifier les utilisateurs.
 
 ``DefaultPasswordHasher`` utilise l'algorythme de hashage bcrypt en interne,
@@ -656,12 +656,12 @@ Configurer les Gestionnaires d'Autorisation
 
 Vous configurez les gestionnaires d'autorisation en utilisant la clé de config
 ``authorize``. Vous pouvez configurer un ou plusieurs
-gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
+gestionnaires . L'utilisation de plusieurs gestionnaires vous donne la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
 dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
-``false``, s'il ne sont pas capable de vérifier les autorisation, ou bien si
-la vérification a échouée. Le gestionnaire devrait retourner ``true`` si ils
+``false``, s'il ne sont pas capable de vérifier les autorisations, ou bien si
+la vérification a échoué. Le gestionnaire devrait retourner ``true`` si ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
 seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne ``true``.
 Si toutes les vérifications échouent, l'utilisateur sera redirigé vers la page
