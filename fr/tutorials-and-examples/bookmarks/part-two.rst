@@ -248,8 +248,8 @@ Améliorer l'Experience de Tag
 Actuellement, ajoutez des nouveaux tags est un processus difficile, puisque
 ``TagsController`` interdit tous les accès. Plutôt que de permettre l'accès,
 nous pouvons améliorer l'UI de sélection de tag en utilisant un champ de texte
-séparé par des virgules. Cela donnera une meilleur expérience à nos
-utilisateurs, et utilisera quelques unes des fonctionnalités super de l'ORM.
+séparé par des virgules. Cela donnera une meilleure expérience à nos
+utilisateurs, et utilisera quelques unes des super fonctionnalités de l'ORM.
 
 Ajouter un Champ Computed
 -------------------------
