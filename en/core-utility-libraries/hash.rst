@@ -74,13 +74,18 @@ Attribute Matching Types
 .. versionchanged:: 2.5
     Matcher support was added to ``insert()`` and ``remove()``.
 
-.. php:staticmethod:: get(array $data, $path)
+.. php:staticmethod:: get(array $data, $path, $default = null)
 
     :rtype: mixed
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
     path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
     supported. Use ``get()`` when you want exactly one value out of an array.
+    The optional third argument will be returned if the requested path is not
+    found in the array.
+
+    .. versionchanged:: 2.5
+        The optional third argument ``$default = null`` was added.
 
 .. php:staticmethod:: extract(array $data, $path)
 
