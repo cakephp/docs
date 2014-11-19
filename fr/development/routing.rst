@@ -21,7 +21,7 @@ Tour Rapide
 
 Cette section va vous apprendre par exemple les utilisations les plus
 habituelles du Router de CakePHP. Typiquement si vous voulez afficher quelque
-chose en page de base, vous ajoutez ceci au fichier **routes.php**::
+chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
 
     use Cake\Routing\Router;
 
@@ -34,7 +34,7 @@ d'une route pour voir le contenu d'un article::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-La route ci-dessus accepte tout url qui ressemble à ``/articles/15`` et appelle
+La route ci-dessus accepte toute url qui ressemble à ``/articles/15`` et appelle
 la méthode ``view(15)`` dans ``ArticlesController``. Ceci ne va pas en revanche
 fonctionner pour les gens qui essaient d'accéder aux URLs ressemblant à
 ``/articles/foobar``. Si vous le souhaitez, vous pouvez rechanger quelques
