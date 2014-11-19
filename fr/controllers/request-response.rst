@@ -82,8 +82,8 @@ Les paramètres Querystring peuvent être lus en utilisant
     // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
-utiliser ``query()`` pour lire l'URL requêtée d'une manière sans erreur.
+Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
+utiliser ``query()`` pour lire l'URL requêtée sans erreur.
 Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -95,8 +95,8 @@ Données de la Requête Body
 .. php:method:: data($name)
 
 Toutes les données POST sont accessibles en utilisant
-:php:meth:`Cake\\Network\\Request::data()`. Toute données de formulaire qui
-contient un préfix ``data`` verra ce préfix data prefix retiré. Par exemple::
+:php:meth:`Cake\\Network\\Request::data()`. Toute donnée de formulaire qui
+contient un préfix ``data`` verra ce préfix retiré. Par exemple::
 
     // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible dans
     $this->request->data('MyModel.title');
@@ -121,7 +121,15 @@ requêtées sur des requêtes ``PUT`` et ``DELETE``. Toute donnée
 de corps de requête ``application/x-www-form-urlencoded``
 va automatiquement être parsée et définie dans ``$this->data`` pour les
 requêtes ``PUT`` et ``DELETE``. Si vous acceptez les données JSON ou XML,
-regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder aux corps de ces requêtes.
+regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder
+aux corps de ces requêtes.
+
+When accessing the input data, you can decode it with an optional function.
+This is useful when interacting with XML or JSON request body content.
+Additional parameters for the decoding function can be passed as arguments to
+``input()``::
+
+    $this->request->input('json_decode');
 
 Variables d'Environnement (à partir de $_SERVER et $_ENV)
 ---------------------------------------------------------
@@ -138,7 +146,9 @@ d'environnement sans avoir à modifier les variables globales
 
     // Définir une valeur. Généralement utile pour les tests.
     $this->request->env('REQUEST_METHOD', 'POST');
+
 .. _xml-datas:
+
 Données XML ou JSON
 -------------------
 
@@ -498,7 +508,7 @@ download
     forcer le téléchargement.
 
 Envoyer une Chaîne de Caractères en Fichier
-------------------------------------------
+-------------------------------------------
 
 Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
 exemple si vous voulez générer un pdf ou un ics à la volée et voulez servir la
@@ -597,7 +607,7 @@ en définissant quelques propriétés d'en-têtes comme la date de mise à jour 
 balise d'entité de réponse :ref:`etag-tag`.
 
 Plutôt que d'avoir à coder la logique de mise en cache et de sa nullité
-(rafraîchissement) une fois que les données ont changé, HTPP utilise deux
+(rafraîchissement) une fois que les données ont changé, HTTP utilise deux
 modèles, l'expiration et la validation qui habituellement sont beaucoup plus
 simples que d'avoir à gérer le cache soi-même.
 
