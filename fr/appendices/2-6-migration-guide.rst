@@ -1,5 +1,5 @@
 2.6 Guide de Migration
-#####################
+######################
 
 CakePHP 2.6 est une mise à jour complète à partir de l'API de 2.5. Cette page
 souligne les changements et améliorations faits dans 2.6.

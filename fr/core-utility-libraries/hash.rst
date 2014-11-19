@@ -83,14 +83,18 @@ Les Types d'Attribut Correspondants
 .. versionchanged:: 2.5
     Le support des matcher a été ajouté dans ``insert()`` et ``remove()``.
 
-.. php:staticmethod:: get(array $data, $path)
+.. php:staticmethod:: get(array $data, $path, $default = null)
 
     :rtype: mixed
 
     ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
     que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
     ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous
-    voulez exactement une valeur sortie d'un tableau.
+    voulez exactement une valeur sortie d'un tableau. Le troisième paramètre
+    sera retourné si le chemin demandé n'a pas été trouvé dans le tableau.
+
+    .. versionchanged:: 2.5
+        Le troisième argument ``$default = null`` optionel a été ajouté.
 
 .. php:staticmethod:: extract(array $data, $path)
 

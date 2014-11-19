@@ -351,7 +351,7 @@ nous avions façonnée pourrait ressembler dans une syntaxe INI :
     allow = porc_sale
 
 Maintenant que vous avez défini vos permissions, vous pouvez passer à la
-section sur la :ref:`vérification des permissions <verification-permissions>`
+section sur la :ref:`vérification des permissions <checking-permissions>`
 en utilisant le component ACL.
 
 Définir les permissions : ACL de CakePHP via une base de données

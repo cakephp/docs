@@ -209,7 +209,7 @@ faire, suivez ces étapes:
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config...
 
-::
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
