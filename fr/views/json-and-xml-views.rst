@@ -80,7 +80,7 @@ automatiquement un elément de top-niveau ``<response>`` en utilisant
 elément unique de top-niveau. Sans un elément de top-niveau, le Xml ne pourra
 être généré.
 
-Utilisation d'une Vue de Vonnées avec les Fichiers de Vue
+Utilisation d'une Vue de Données avec les Fichiers de Vue
 =========================================================
 
 Vous devrez utiliser les fichiers de vue si vous avez besoin de faire des
@@ -115,7 +115,7 @@ utiliser les helpers pour formater.
     Une classe de vue pour la génération de vue de données Xml. Voir au-dessus
     pour savoir comment vous pouvez utiliser XmlView dans votre application
 
-    Par défaut quand on utilise ``_serialize``, XmlView va enrouler vos
+    Par défaut quand on utilise ``_serialize``, XmlView va enveloppera vos
     variables de vue sérialisées avec un noeud ``<response>``. Vous pouvez
     définir un nom personnalisé pour ce noeud en utilisant la variable de vue
     ``_rootNode``.
