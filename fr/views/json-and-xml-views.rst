@@ -115,7 +115,7 @@ utiliser les helpers pour formater.
     Une classe de vue pour la génération de vue de données Xml. Voir au-dessus
     pour savoir comment vous pouvez utiliser XmlView dans votre application
 
-    Par défaut quand on utilise ``_serialize``, XmlView va enveloppera vos
+    Par défaut quand on utilise ``_serialize``, XmlView va envelopper vos
     variables de vue sérialisées avec un noeud ``<response>``. Vous pouvez
     définir un nom personnalisé pour ce noeud en utilisant la variable de vue
     ``_rootNode``.
