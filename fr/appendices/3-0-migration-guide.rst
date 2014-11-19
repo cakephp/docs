@@ -71,10 +71,11 @@ classe supplémentaires. A la place, vous devez mapper les chemins
 supplémentaires en utilisant l'autoloader de votre application. Regardez la
 section sur :ref:`additional-class-paths` pour plus d'informations.
 
-Deux nouvelles variables de configuration fournissent la configuration
-de chemin pour les plugins, et les views. Vous pouvez ajouter plusieurs chemins
-à ``App.paths.views`` et ``App.paths.plugins`` pour configurer les chemins
-multiples pour les fichiers de plugins & de view.
+Trois nouvelles variables de configuration fournissent la configuration
+de chemin pour les plugins, les views et les fichiers locale. Vous pouvez
+ajouter plusieurs chemins à ``App.paths.templates``, ``App.paths.plugins`` et
+``App.paths.locales`` pour configurer les chemins multiples pour respectivement
+les templates, les plugins et les fichiers locales.
 
 La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
 Merci d'ajuster votre fichier de configuration ``app.php`` ainsi que chaque

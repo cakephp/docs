@@ -572,12 +572,6 @@ Les Options pour Select, Checkbox et Inputs Radio
           </select>
       </div>
 
-  .. note::
-
-      Si vous avez besoin de définir la valeur par défaut d'un champ
-      password à vide, utilisez 'value'=> '' (deux fois simple cote) à
-      la place.
-
     Les options peuvent aussi fournir une paire de clé-valeur.
 
 * ``$options['hiddenField']`` Pour certain types d' input (checkboxes,

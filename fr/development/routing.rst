@@ -341,6 +341,24 @@ spécifiquement la signification.
 * ``_name`` Nom de route. Si vous avez configuré les routes nommées, vous
   pouvez utiliser cette clé pour les spécifier.
 
+Classe de Route par Défaut
+--------------------------
+
+.. php:staticmethod:: defaultRouteClass($routeClass = null)
+
+Si vous voulez utiliser une autre classe de route pour toutes vos routes
+en plus de la ``Route`` par défaut, vous pouvez faire ceci en appelant
+``Router::defaultRouteClass()`` avant de définir la moindre route et éviter
+ de spécifier l'option ``routeClass`` pour chaque route. Par exemple en
+ utilisant::
+
+    Router::defaultRouteClass('DashedRoute');
+
+Ce la va faire que les routes seront connectées après ceci pour utiliser la
+classe de route ``DashedRoute``.
+Appeler la méthode sans argument va retourner la classe de route courante par
+défaut.
+
 Passer des Paramètres à l'Action
 --------------------------------
 
