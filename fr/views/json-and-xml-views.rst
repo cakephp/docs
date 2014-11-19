@@ -136,7 +136,7 @@ Réponse JSONP
 Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
 ``_jsonp`` pour retourner une réponse JSONP. La définir à ``true``
 fait que la classe de vue vérifie si le paramètre de chaine de la requête
-nommée "callback" est définie et si c'est la cas, permet d'enrouler la réponse
+nommée "callback" est définie et si c'est la cas, permet d'envelopper la réponse
 json dans le nom de la fonction fournie. Si vous voulez utiliser un nom
 personnalisé de paramètre de requête à la place de "callback", définissez
 ``_jsonp`` avec le nom requis à la place de ``true``.
