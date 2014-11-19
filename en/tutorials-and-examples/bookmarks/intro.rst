@@ -215,7 +215,7 @@ add the following::
 
     namespace App\Model\Entity;
 
-    use Cake\Entity\Entity;
+    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
     class User extends Entity {
