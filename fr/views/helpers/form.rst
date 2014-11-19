@@ -147,7 +147,7 @@ Définir l'Action du Controller pour le Formulaire
 -------------------------------------------------
 
 Utiliser l'option ``action`` vous permet de diriger le formulaire vers une
-action spécifique dans vore controller courant. Par exemple, si vous voulez
+action spécifique dans votre controller courant. Par exemple, si vous voulez
 diriger le formulaire vers une action login() du controller courant, vous
 pouvez fournir le tableau $options comme ce qui suit::
 
@@ -239,7 +239,7 @@ erreur de validation si besoin. En utilisant les metadonnées dans le contexte
 du formulaire, cette méthode va choisir un type d'input approprié pour chaque
 champ. En interne, ``input()`` utilise les autres méthodes de FormHelper.
 
-Le type d'input créés dépends de la colonne datatype:
+Le type d'input créés dépend de la colonne datatype:
 
 Column Type
     Champ de formulaire résultant
@@ -277,7 +277,7 @@ vous avez besoin::
 
 .. _html5-required:
 
-Un nom de classe ``required`` sera ajouté à div enveloppante si les règles de
+Un nom de classe ``required`` sera ajouté à la div enveloppante si les règles de
 validation pour le champ du model indiquent qu'il est requis et ne peut pas être
 vide. Vous pouvez désactiver les require automatiques en utilisant l'option
 required::
@@ -317,8 +317,8 @@ Un exemple plus complet montrant quelques options pour le champ de date::
         'maxYear' => date('Y') - 18,
     ]);
 
-Outre les options spécifique pour ``input()`` vu ci-dessus, vous pouvez
-spécifier n'importe quelle options pour le type d'input et n'importe quel
+Outre les options spécifiques pour ``input()`` vu ci-dessus, vous pouvez
+spécifier n'importe quelle option pour le type d'input et n'importe quel
 attribut HTML (par exemple ``onfocus``).
 
 Si vous voulez un champ de sélection utilisant une relation belongsTo
@@ -374,7 +374,7 @@ Options
 -------
 
 ``FormHelper::input()`` supporte un nombre important d'options. En plus de ses
-propres options ``input()`` accepte des options pour les champs input générés,
+propres options, ``input()`` accepte des options pour les champs input générés,
 comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 ``FormHelper::input()``.
 
@@ -452,7 +452,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   les messages de model par défaut et de les utiliser, par exemple, pour
   définir des messages i18n. Elle comporte un nombre de sous-options qui
   contrôle l'enveloppe de l'élément (wrapping), le nom de classe de l'élément
-  enveloppé, et si le HTML dans le message d'erreur doit être echappé ou non.
+  enveloppé, et si le HTML dans le message d'erreur doit être échappé ou non.
 
   Pour désactiver le rendu des messages d'erreurs définissez la clé error
   ``false``::
@@ -478,7 +478,7 @@ méthodes spécifiques pour générer différents types d'inputs. Ceci peut
 être utilisé pour générer juste un extrait de code input, et combiné avec
 d'autres méthodes comme :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` et
 :php:meth:`~Cake\\View\\Helper\\FormHelper::error()` pour générer des layouts
-(mise en page) complètements personnalisées.
+(mise en page) complètements personnalisés.
 
 .. _general-input-options:
 
@@ -486,8 +486,8 @@ Options Communes
 ----------------
 
 Beaucoup des différentes méthodes d'input supportent un jeu d'options communes.
-Toutes ses options sont aussi supportés par ``input()``. Pour réduire les
-répétitions les options communes partagées par toutes les méthodes input sont :
+Toutes ses options sont aussi supportées par ``input()``. Pour réduire les
+répétitions, les options communes partagées par toutes les méthodes input sont :
 
 * ``$options['id']`` Définir cette clé pour forcer la valeur du DOM id pour cet
   input. Cela remplacera l'idPrefix qui pourrait être fixé.
@@ -516,14 +516,14 @@ répétitions les options communes partagées par toutes les méthodes input son
     utilisant la clé 'selected'.
 
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut. Une
-    valeur ``false`` est utilisé pour désactiver/exclure les options d'un champ,
+    valeur ``false`` est utilisée pour désactiver/exclure les options d'un champ,
     ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
-que vous souhaitez utiliser. Chacun des nom d'options non-special sera
-traité comme un attribut HTML, et appliqué a l'élément HTML input généré.
-NdT. celui qui capte cette phrase gagne un giroTermoOnduleur a double
+que vous souhaitez utiliser. Tout nom d'option non-special sera
+traité comme un attribut HTML, et appliqué à l'élément HTML input généré.
+NdT. celui qui capte cette phrase gagne un giroTermoOnduleur à double
 convection.
 
 Les Options pour Select, Checkbox et Inputs Radio
@@ -581,7 +581,7 @@ Les Options pour Select, Checkbox et Inputs Radio
     Les options peuvent aussi fournir une paire de clé-valeur.
 
 * ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
-  radios) un input caché est créé ainsi la clé dans $this->request->data
+  radios) un input caché est créé. Ainsi, la clé dans $this->request->data
   existera même sans valeur spécifiée:
 
   .. code-block:: html
@@ -606,7 +606,7 @@ Les Options pour Select, Checkbox et Inputs Radio
   de valeur d'input qui sera sauvegardé.
 
   Dans cet exemple , seules les couleurs tertiaires seront passées,
-  et les couleurs primaires seront réécrite:
+  et les couleurs primaires seront réécrites:
 
   .. code-block:: html
 
@@ -622,16 +622,16 @@ Les Options pour Select, Checkbox et Inputs Radio
         Blue
     </label>
 
-    <label for="color-yellow">
-        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-        Yellow
+    <label for="ColorsGreen">
+        <input type="checkbox" name="color[]" value="5" id="color-green" />
+        Green
     </label>
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <label for="ColorsGreen">
-        <input type="checkbox" name="color[]" value="5" id="color-green" />
-        Green
+    <label for="color-yellow">
+        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+        Yellow
     </label>
     <label for="color-purple">
         <input type="checkbox" name="color[]" value="5" id="color-purple" />
@@ -677,7 +677,7 @@ Les Options de Datetime
         'interval' => 15
     ]);
 
-  Créera 4 options dans la select box minute. Une toute les 15 minutes.
+  Créera 4 options dans la select box minute. Une toutes les 15 minutes.
 
 * ``$options['round']`` Peut être défini à `up` ou `down` pour forcer l'arrondi
   dans une direction. Par défaut à null qui arrondit à la moitié
@@ -850,7 +850,7 @@ Crée un jeu d'inputs radios.
 * ``hiddenField`` - booléen pour indiquer si vous voulez que les résultats de
   radio() incluent un input caché avec une valeur de ''. C'est utile pour créer
   des ensembles de radio qui ne sont pas continus.
-* ``disabled`` - Défini à ``true``ou``disabled`` pour désactiver tous les
+* ``disabled`` - Défini à ``true`` ou ``disabled`` pour désactiver tous les
   boutons radio.
 * ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
@@ -887,7 +887,7 @@ sélectionnées. Par défaut à ``true``::
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$attributes['options']`` Cette clé vous permets de spécifier
+* ``$attributes['options']`` Cette clé vous permet de spécifier
   manuellement des options pour un input select (menu de sélection),
   ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
   le Helper Form supposera que la cible est un input select (menu de
@@ -1296,7 +1296,7 @@ Options:
 -  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
    soit enveloppé d'une div. Si c'est une chaîne , sera utilisé comme le
    tag HTML à utiliser.
--  'class' chanine contenant le nom de classe du message d'erreur.
+-  'class' chaine contenant le nom de classe du message d'erreur.
 
 .. TODO:: Add examples.
 
@@ -1430,10 +1430,10 @@ Créer des Boutons Indépendants et des liens POST
     travers POST.
 
     Cette méthode créé un élément ``<form>``. Donc n'utilisez pas
-    pas cette méthode dans un formulaire ouvert. Utilisez plutôt
+    cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    pour créér des boutons a l'intérieur de formulaires ouvert.
+    pour créér des boutons à l'intérieur de formulaires ouvert.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
@@ -1450,7 +1450,7 @@ Personnaliser les Templates que FormHelper Utilise
 
 Comme beaucoup de helpers dans CakePHP, FormHelper utilise les string templates
 pour mettre en forme le HTML qu'il créé. Alors que les templates par défaut
-sont detinés à être un ensemble raisonnable de valeurs par défaut, vous aurez peut-être besoin
+sont destinés à être un ensemble raisonnable de valeurs par défaut, vous aurez peut-être besoin
 de personnaliser les templates pour correspondre à votre application.
 
 Pour changer les templates quand le helper est chargé, vous pouvez définir
@@ -1568,7 +1568,7 @@ Vous pouvez personnaliser le texte de légende en utilisant une option::
 
     echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
 
-Vous pouvez peronnaliser les inputs générés en définissant des options
+Vous pouvez personnaliser les inputs générés en définissant des options
 additionnelles dans le paramètre ``$fields``::
 
     echo $this->Form->inputs([
@@ -1576,7 +1576,7 @@ additionnelles dans le paramètre ``$fields``::
     ]);
 
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
-``$options`` pour contrôler les legend/fieldset générés.
+``$options`` pour contrôler les legend/fields générés.
 
 - ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Si une chaîne est
   fournie, elle sera utilisée comme nom de classe pour l'element fieldset
@@ -1622,7 +1622,7 @@ Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que la méthde ``render(array $data)`` soit implémentée. La méthode
 render attend un tableau de données pour constuire le widget et doit renvoyer
-un chaine HTML pourle widget. Si CakePHP construit votre widget, vous pouvez
+un chaine HTML pour le widget. Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
 argument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez
 construire un widget Autocomplete, vous pouvez le faire comme ceci::
@@ -1660,7 +1660,7 @@ Utiliser les Widgets
 
 Vous pouver charger des widgets personnalisés dans le tableau ``$helpers`` ou
 en utilisant la méthode ``addWidget()``. Dans votre tableau helpers, les widgets
-sont déinis comme des paramètres::
+sont définis comme des paramètres::
 
     public $helpers = [
         'Form' => [
@@ -1718,8 +1718,8 @@ input en utilisant la méthode magique::
 Travailler avec SecurityComponent
 =================================
 
-:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offre plusieur
-fonctionnalités qui rendent vos formulaires  that make your forms plus sûrs et
+:php:meth:`Cake\\Controller\\Component\\SecurityComponent` offre plusieurs
+fonctionnalités qui rendent vos formulaires plus sûrs et
 plus sécurisés. En incluant simplement le ``SecurityComponent`` dans votre
 controller, vous bénéficierez automatiquement des fonctionnalités de prévention
 contre la falsification de formulaires.
@@ -1732,7 +1732,7 @@ vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\
 
     Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
     Cela autorise également à manipuler le champ via JavaScript.
-    Le paramètre ``$name`` doit correspondre au nom de l'etity pour l'input::
+    Le paramètre ``$name`` doit correspondre au nom de l'entity pour l'input::
 
         $this->Form->unlockField('User.id');
 
