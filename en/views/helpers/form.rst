@@ -544,11 +544,6 @@ Options for Select, Checkbox and Radio Inputs
           </select>
       </div>
 
-  .. note::
-
-      If you need to set the default value in a password field to blank,
-      use 'value' => '' instead.
-
   Options can also supplied as key-value pairs.
 
 * ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
