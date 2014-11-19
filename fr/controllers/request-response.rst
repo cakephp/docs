@@ -23,7 +23,7 @@ créée et passée en référence aux différentes couches de l'application que 
 requête de données utilise. Par défaut la requête est assignée à
 ``$this->request``, et est disponible dans les Controllers, Cells, Vues et
 Helpers. Vous pouvez aussi y accéder dans les Components en utilisant la
-référence du controller. Certaines des tâches incluses que ``Request`` permettent de :
+référence du controller. Certaines des tâches incluses que ``Request`` permet :
 
 * Transformer les tableaux GET, POST, et FILES en structures de données avec
   lesquelles vous êtes familiers.
@@ -82,8 +82,8 @@ Les paramètres Querystring peuvent être lus en utilisant
     // l'URL est /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
-utiliser ``query()`` pour lire l'URL demandée sans erreur.
+Vous pouvez soit directement accéder à la prorpiété requêtée, soit vous pouvez
+utiliser ``query()`` pour lire l'URL requêtée d'une manière sans erreur.
 Toute clé qui n'existe pas va retourner ``null``::
 
     $foo = $this->request->query('value_that_does_not_exist');
@@ -95,8 +95,8 @@ Données de la Requête Body
 .. php:method:: data($name)
 
 Toutes les données POST sont accessibles en utilisant
-:php:meth:`Cake\\Network\\Request::data()`. Toute donnée de formulaire qui
-contient un préfix ``data`` verra ce préfix ``data`` retiré. Par exemple::
+:php:meth:`Cake\\Network\\Request::data()`. Toute données de formulaire qui
+contient un préfix ``data`` verra ce préfix data prefix retiré. Par exemple::
 
     // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible dans
     $this->request->data('MyModel.title');
@@ -121,14 +121,7 @@ requêtées sur des requêtes ``PUT`` et ``DELETE``. Toute donnée
 de corps de requête ``application/x-www-form-urlencoded``
 va automatiquement être parsée et définie dans ``$this->data`` pour les
 requêtes ``PUT`` et ``DELETE``. Si vous acceptez les données JSON ou XML,
-regardez ci-dessous comment vous pouvez accéder aux corps de ces requêtes.
-
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
-``input()``::
-
-    $this->request->input('json_decode');
+regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder aux corps de ces requêtes.
 
 Variables d'Environnement (à partir de $_SERVER et $_ENV)
 ---------------------------------------------------------
@@ -145,7 +138,7 @@ d'environnement sans avoir à modifier les variables globales
 
     // Définir une valeur. Généralement utile pour les tests.
     $this->request->env('REQUEST_METHOD', 'POST');
-
+.. _xml-datas:
 Données XML ou JSON
 -------------------
 
@@ -162,8 +155,8 @@ Puisque certaines méthodes de desérialization ont besoin de paramètres
 supplémentaires quand elles sont appelées, comme le paramètre
 de type tableau pour ``json_decode`` ou si vous voulez
 convertir les XML en objet DOMDocument,
-:php:meth:`~Cake\\Network\\Request::input()` supporte aussi le passement dans
-des paramètres supplémentaires::
+:php:meth:`~Cake\\Network\\Request::input()` supporte aussi le passage de
+paramètres supplémentaires::
 
     // Obtenir les données encodées en Xml soumises avec une action PUT/POST
     $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
@@ -174,7 +167,7 @@ Informations du Chemin
 L'objet request fournit aussi des informations utiles sur les chemins dans votre
 application. ``$request->base`` et ``$request->webroot`` sont utiles pour
 générer des URLs, et déterminer si votre application est ou n'est pas dans un
-sous-dossier. Les différents propriétés que vous pouvez utiliser sont::
+sous-dossier. Les différentes propriétés que vous pouvez utiliser sont::
 
     // Suppose que la requête URL courante est /subdir/articles/edit/1?page=1
 
@@ -207,11 +200,11 @@ pour créer de nouveaux types de detecteurs. Il y a quatre différents types
 de detecteurs que vous pouvez créer:
 
 * Comparaison avec valeur d'environnement - Une comparaison de la valeur
-  d'environnement, compare une valeur attrapée à partir de :php:func:`env()`
+  d'environnement, compare une valeur récupérée à partir de :php:func:`env()`
   pour une valeur connue, la valeur d'environnement est vérifiée équitablement
   avec la valeur fournie.
 * La comparaison de la valeur model - La comparaison de la valeur model vous
-  autorise à comparer une valeur attrapée à partir de :php:func:`env()` avec
+  autorise à comparer une valeur récupérée à partir de :php:func:`env()` avec
   une expression régulière.
 * Comparaison basée sur les options -  La comparaison basée sur les options
   utilise une liste d'options pour créer une expression régulière. De tels
@@ -504,7 +497,7 @@ download
     Une valeur boléenne indiquant si les en-têtes doivent être définies pour
     forcer le téléchargement.
 
-Envoyer une Chaîne de Caractère en Fichier
+Envoyer une Chaîne de Caractères en Fichier
 ------------------------------------------
 
 Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
@@ -529,7 +522,7 @@ Définir les En-têtes
 
 .. php:method:: header($header = null, $value = null)
 
-Le réglage des en-têtes est fait avec la métode
+Le réglage des en-têtes est fait avec la méthode
 :php:meth:`Cake\\Network\\Response::header()`. Elle peut être appelée avec
 quelques paramètres de configurations::
 
@@ -548,7 +541,7 @@ quelques paramètres de configurations::
 
 Régler le même :php:meth:`~CakeResponse::header()` de multiples fois entraînera
 l'écrasement des précédentes valeurs, un peu comme les appels réguliers
-d'en-tête. Les en-têtes ne sont aussi pas envoyés quand
+d'en-tête. Les en-têtes ne sont pas envoyés quand
 :php:meth:`Cake\\Network\\Response::header()` est appelé; à la place, ils sont
 simplement conservés jusqu'à ce que la réponse soit effectivement envoyée.
 
@@ -598,14 +591,14 @@ Réglage fin du Cache HTTP
 -------------------------
 
 Une des façons les meilleures et les plus simples de rendre votre application
-plus rapide est d'utiliser le cache HTTP. Avec la mise en cache des models,
-vous n'avez qu'à aider les clients à décider si ils doivent utiliser une
-copie mise en cache de la réponse en configurant un peu les en-têtes comme les
-temps modifiés, les balise d'entité de réponse et autres.
+plus rapide est d'utiliser le cache HTTP. vous devez uniquement pour aider les 
+clients à décider si ils doivent utiliser une copie de la réponse mise en cache,
+en définissant quelques propriétés d'en-têtes comme la date de mise à jour et la 
+balise d'entité de réponse :ref:`etag-tag`.
 
-Opposé à l'idée d'avoir à coder la logique de mise en cache et de sa nullité
+Plutôt que d'avoir à coder la logique de mise en cache et de sa nullité
 (rafraîchissement) une fois que les données ont changé, HTPP utilise deux
-models, l'expiration et la validation qui habituellement sont beaucoup plus
+modèles, l'expiration et la validation qui habituellement sont beaucoup plus
 simples que d'avoir à gérer le cache soi-même.
 
 En dehors de l'utilisation de :php:meth:`Cake\\Network\\Response::cache()` vous
@@ -618,7 +611,7 @@ L'En-tête de Contrôle du Cache
 
 .. php:method:: sharable($public = null, $time = null)
 
-Utilisé sous le model d'expiration, cet en-tête contient de multiples
+Utilisé sous le modèle d'expiration, cet en-tête contient de multiples
 indicateurs qui peuvent changer la façon dont les navigateurs ou les
 proxies utilisent le contenu mis en cache. Un en-tête ``Cache-Control`` peut
 ressembler à ceci::
@@ -670,6 +663,8 @@ défini en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`:
 Cette méthode accepte aussi une instance :php:class:`DateTime` ou toute chaîne
 de caractère qui peut être parsée par la classe :php:class:`DateTime`.
 
+.. _etag-tag:
+
 L'En-tête Etag
 ~~~~~~~~~~~~~~
 
@@ -677,7 +672,7 @@ L'En-tête Etag
 
 La validation du Cache dans HTTP est souvent utilisé quand le contenu change
 constamment et demande à l'application de générer seulement les contenus
-réponse si le cache n'est plus récent. Sous ce model, le client continue
+réponse si le cache n'est plus récent. Sous ce modèle, le client continue
 de stocker les pages dans le cache, mais au lieu de l'utiliser directement,
 il demande à l'application à chaque fois si les ressources ont changé ou non.
 C'est utilisé couramment avec des ressources statiques comme les images et
@@ -708,10 +703,10 @@ L'En-tête Last-Modified
 
 .. php:method:: modified($time = null)
 
-Toujours dans le cadre du model de validation du cache HTTP, vous pouvez
-définir l'en-tête ``Last-Modified`` pour indiquer la date et le temps pendant
-lequel la ressource a été modifiée pour la dernière fois. Définir cet en-tête
-aide la réponse de CakePHP pour mettre en cache les clients si la réponse a été
+Toujours dans le cadre du modèle de validation du cache HTTP, vous pouvez
+définir l'en-tête ``Last-Modified`` pour indiquer la date et l'heure à laquelle la ressource
+a été modifiée pour la dernière fois. Définir cet en-tête
+aide CakePHP à indiquer à ces clients si la réponse a été
 modifiée ou n'est pas basée sur leur cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
