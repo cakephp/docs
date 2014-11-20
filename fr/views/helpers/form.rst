@@ -616,15 +616,15 @@ Les Options pour Select, Checkbox et Inputs Radio
         Blue
     </label>
 
-    <label for="ColorsGreen">
-        <input type="checkbox" name="color[]" value="5" id="color-green" />
+    <label for="color-yellow">
+        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
         Green
     </label>
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <label for="color-yellow">
-        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+    <label for="color-green">
+        <input type="checkbox" name="color[]" value="5" id="color-green" />
         Yellow
     </label>
     <label for="color-purple">

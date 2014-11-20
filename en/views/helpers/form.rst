@@ -594,7 +594,7 @@ Options for Select, Checkbox and Radio Inputs
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <label for="ColorsGreen">
+    <label for="color-green">
         <input type="checkbox" name="color[]" value="5" id="color-green" />
         Green
     </label>
