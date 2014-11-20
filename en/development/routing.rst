@@ -535,7 +535,7 @@ SEO-Friendly Routing
 --------------------
 
 Some developers prefer to use dashes in URLs, as it's perceived to give
-better search engine rankins. The ``DashedRoute`` class can be used in your 
+better search engine rankings. The ``DashedRoute`` class can be used in your 
 application with the ability to route plugin, controller, and camelized action
 names to a dashed URL.
 
