@@ -17,12 +17,12 @@ vous aideront à atteindre ce but, il y a certains cas où vous avez besoin
 de communiquer proprement avec les autres parties du système sans avoir à
 coder en dur ces dépendances, ainsi réduire la cohésion et accroître le
 couplage de classe. Un motif de conception (design pattern) très réussi dans
-l'ingénierie software est le modèle obervateur (Observer pattern), où les
+l'ingénierie software est le modèle observateur (Observer pattern), où les
 objets peuvent générer des événements et notifier à des écouteurs (listener)
 possiblement anonymes des changements d'états internes.
 
 Les écouteurs (listener) dans le modèle observateur (Observer pattern) peuvent
-s'abonner à de tel événements et choisir d'interagir sur eux, modifier l'état
+s'abonner à de tels événements et choisir d'interagir sur eux, modifier l'état
 du sujet ou simplement faire des logs. Si vous avez utilisez JavaScript dans
 le passé, vous avez la chance d'être déjà familier avec la programmation
 événementielle.
@@ -30,14 +30,14 @@ le passé, vous avez la chance d'être déjà familier avec la programmation
 CakePHP émule plusieurs aspects sur la façon dont les événements sont
 déclenchés et managés dans des frameworks JavaScript comme le populaire
 jQuery, tout en restant fidèle à sa conception orientée objet. Dans cette
-implémentation, un objet événement est transporté a travers tous les écouteurs
+implémentation, un objet événement est transporté à travers tous les écouteurs
 qui détiennent l'information et la possibilité d'arrêter la propagation des
 événements à tout moment. Les écouteurs peuvent s'enregistrer eux-mêmes ou
 peuvent déléguer cette tâche a d'autres objets et avoir la chance de modifier
 l'état et l'événement lui-même pour le reste des callbacks.
 
 Le sous-système d'event est au coeur des callbacks de Model, de Behavior, de
-Controller, de View et de Helper. Si vous avez jamais utilisé aucun d'eux,
+Controller, de View et de Helper. Si vous n'avez jamais utilisé aucun d'eux,
 vous êtes déjà quelque part familier avec les events dans CakePHP.
 
 Exemple d'utilisation d'événement
@@ -153,7 +153,7 @@ du controller. La classe du sujet est importante parce que les écouteurs
 (listeners) auront des accès immédiats aux propriétés des objets et la chance
 de les inspecter ou de les changer à la volée.
 
-Finalement, le troisième argument est le paramètres d'événement. Ceci peut
+Finalement, le troisième argument est le paramètre d'événement. Ceci peut
 être n'importe quelle donnée que vous considérez comme étant utile à passer
 avec laquelle les écouteurs peuvent interagir. Même si cela peut être
 n'importe quel type d'argument, nous vous recommandons de passer un tableau
@@ -242,7 +242,7 @@ supports::
 
 Dans certains cas, vous souhaitez exécuter un callback et être sûre qu'il sera
 exécuté avant, ou après tous les autres callbacks déjà lancés. Par exemple,
-repensons a notre exemple de statistiques utilisateur. Il serait judicieux
+repensons à notre exemple de statistiques utilisateur. Il serait judicieux
 de n'exécuter cette méthode que si nous sommes sûrs que l'événement n'a pas
 été annulé, qu'il n'y a pas d'erreur et que les autres callbacks n'ont pas
 changés l'état de 'order' lui même. Pour ces raisons vous pouvez utiliser les
@@ -288,7 +288,7 @@ Obtenir des données d'événements comme paramètres de fonction
 
 Certain développeurs pourraient préférer avoir les données d'événements
 passées comme des paramètres de fonctions au lieu de recevoir l'objet
-événement. Bien que ce soit un préférence étrange et que l'utilisation d'objet
+événement. Bien que ce soit une préférence étrange et que l'utilisation d'objet
 événement est bien plus puissant, ceci a été nécessaire pour fournir une
 compatibilité ascendante avec le précédent système d'événement et pour offrir
 aux développeurs chevronnés une alternative pour ce auquel ils sont habitués.
@@ -326,7 +326,7 @@ l'événement `Model.Order.afterPlace` avec quelques données::
 .. note::
 
     Les paramètres ne peuvent être passés comme arguments de fonction que
-    si la donnée d'événement est un tableau. N'importe quelle autre type de
+    si la donnée d'événement est un tableau. N'importe quel autre type de
     données sera converti en paramètre de fonction, ne pas utiliser cette
     option est souvent plus adéquate.
 
@@ -354,13 +354,13 @@ callbacks ou appeler la méthode `stopPropagation` sur l'objet événement::
 
 Stopper un événement peut avoir deux effets différents. Le premier peut
 toujours être attendu; n'importe quel callback après l'événement qui à
-été stoppé ne sera appelé. Le seconde conséquence est optionnelle et dépend
+été stoppé ne sera appelé. La seconde conséquence est optionnelle et dépend
 du code qui déclenche l'événement, par exemple, dans votre exemple
 `afterPlace` cela n'aurait pas de sens d'annuler l'opération tant que les
 données n'aurons pas toutes été enregistrées et le Caddie vidé. Néanmoins,
 si nous avons une `beforePlace` arrêtant l'événement cela semble valable.
 
-Pour vérifier qu'un événement à été stoppé, vous appelez la méthode
+Pour vérifier qu'un événement a été stoppé, vous appelez la méthode
 `isStopped()` dans l'objet événement::
 
     public function place($order) {
@@ -375,7 +375,7 @@ Pour vérifier qu'un événement à été stoppé, vous appelez la méthode
         // ...
     }
 
-Dans l'exemple précédent la vente ne seraient pas enregistrée si l'événement
+Dans l'exemple précédent la vente ne serait pas enregistrée si l'événement
 est stoppé durant le processus `beforePlace`. 
 
 Récupérer les résultats d'événement
