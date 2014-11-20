@@ -534,11 +534,10 @@ create a link that is not part of a plugin.
 SEO-Friendly Routing
 --------------------
 
-As a SEO-minded developer, it'll be desirable to outfit your URLs with dashes in
-order to avoid your application being cast into the search engine shadows,
-and hoist it to the divine rankings of the search engine gods. The
-``DashedRoute`` class furnishes your application with the ability to route
-plugin, controller, and camelized action names to a dashed URL.
+Some developers prefer to use dashes in URLs, as it's perceived to give
+better search engine rankins. The ``DashedRoute`` class can be used in your 
+application with the ability to route plugin, controller, and camelized action
+names to a dashed URL.
 
 For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
