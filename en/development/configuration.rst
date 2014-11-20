@@ -91,6 +91,10 @@ App.cssBaseUrl
 App.jsBaseUrl
     Web path to the public js directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
+App.paths
+    Configure paths for non class based resources. Supports the
+    ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
+    of paths for plugins, view templates and locale files respectively.
 Security.salt
     A random string used in hashing. This value is also used as the
     HMAC salt when doing symetric encryption.

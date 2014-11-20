@@ -918,6 +918,21 @@ This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
 standard :term:`plugin syntax`.
 
+Default Route Class
+-------------------
+
+.. php:staticmethod:: defaultRouteClass($routeClass = null)
+
+If you want to use an alterate route class for all your routes besides the
+default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
+before setting up any routes and avoid having to specify the ``routeClass``
+option for each route. For example using::
+
+    Router::defaultRouteClass('DashedRoute');
+
+will cause all routes connected after this to use the ``DashedRoute`` route class.
+Calling the method without an argument will return current default route class.
+
 Handling Named Parameters in URLs
 =================================
 

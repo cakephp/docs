@@ -66,9 +66,10 @@ You can no longer use ``App::build()`` to configure additional class paths.
 Instead you should map additional paths using your application's autoloader. See
 the section on :ref:`additional-class-paths` for more information.
 
-Two new configure variables provide the path configuration for plugins, and
-views. You can add multiple paths to ``App.paths.templates`` and
-``App.paths.plugins`` to configure multiple paths for templates & plugins.
+Three new configure variables provide the path configuration for plugins,
+views and locale files. You can add multiple paths to ``App.paths.templates``,
+``App.paths.plugins``, ``App.paths.locales`` to configure multiple paths for
+templates, plugins and locale files respectively.
 
 The config key ``www_root`` has been changed to ``wwwRoot`` for consistency. Please adjust
 your ``app.php`` config file as well as any usage of ``Configure::read('App.wwwRoot')``.

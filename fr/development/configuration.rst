@@ -99,6 +99,11 @@ App.cssBaseUrl
     Le chemin Web vers le répertoire public des css dans webroot. Si vous
     utilisez un :term:`CDN`, vous devez définir cette valeur vers la
     localisation du CDN.
+App.paths
+    Les chemins de Configure pour les ressources non basées sur les classes.
+    Accepte les sous-clés ``plugins``, ``templates``, ``locales``, qui
+    permettent la définition de chemins respectivement pour les plugins, les
+    templates de view et les fichiers locale.
 App.jsBaseUrl
     Le chemin Web vers le répertoire public des js dans webroot. Si vous
     utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
