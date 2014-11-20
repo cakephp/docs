@@ -112,7 +112,7 @@ it will clear the currently stored value. By default, it will retrieve the
 Formatting Floating Point Numbers
 =================================
 
-.. php:method:: precision(float $value, int $precision = 3)
+.. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
