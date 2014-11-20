@@ -36,8 +36,16 @@ AuthComponent dans notre AppController::
                             'password' => 'password'
                         ]
                     ]
+                ],
+                'unauthorizedRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
                 ]
             ]);
+
+            // Autorise l'action display pour que notre controller de pages
+            // continue de fonctionner.
+            $this->Auth->allow(['display']);
         }
     }
 
@@ -113,7 +121,10 @@ ajotez ce qui suit::
 Ce qui est au-dessus dit à ``AuthComponent`` que l'action ``add`` *ne* nécessite
 *pas* d'authentification ou d'autorisation. Vous pouvez prendre le temps de
 nettoyer ``Users/add.ctp`` et de retirer les liens, ou continuez vers la
-prochaine section.
+prochaine section. Nous ne ferons pas de fichier d'édition (edit) ou de vue
+d'un utilisateur (view), ni de liste d'utilisateurs (index) dans ce tutoriel
+donc ils ne fonctionneront pas puisque ``AuthComponent`` va vous refuser
+l'accès pour ces actions de controller.
 
 Restreindre l'Accès aux Bookmarks
 =================================

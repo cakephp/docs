@@ -115,11 +115,11 @@ et 'en_US' sinon.
 Formatage Des Nombres A Virgules Flottantes
 ===========================================
 
-.. php:method:: precision(float $value, int $precision = 3)
+.. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
 Cette méthode affiche un nombre avec la précision spécifiée
 (place de la décimale). Elle arrondira afin de maintenir le niveau de
-précision défini.:: 
+précision défini.::
 
     // Appelé avec NumberHelper
     echo $this->Number->precision(456.91873645, 2 );
@@ -148,7 +148,7 @@ Comme :php:meth:`Cake\\I18n\\Number::precision()`, cette méthode formate un
 nombre selon la précision fournie (où les nombres sont arrondis pour parvenir
 à ce degré de précision). Cette méthode exprime aussi le nombre en tant que
 pourcentage et préfixe la sortie avec un signe de pourcent.::
-    
+
     // appelé avec NumberHelper. Sortie: 45.69%
     echo $this->Number->toPercentage(45.691873645);
 

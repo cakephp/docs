@@ -229,7 +229,7 @@ mot de passe. Dans ``src/Model/Entity/User.php``, ajoutez ce qui suit::
 
     namespace App\Model\Entity;
 
-    use Cake\Entity\Entity;
+    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
     class User extends Entity {
@@ -260,7 +260,7 @@ application. Une fois que vous avez une collection de bookmarks, il peut
 intégrer une route, une action de controller, et une méthode finder pour
 chercher les bookmarks par tag.
 
-Idéalement, nous aurions une URL qui ressemble à 
+Idéalement, nous aurions une URL qui ressemble à
 ``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` Cela nous aide
 à trouver tous les bookmarks qui ont les tags 'funny', 'cat' et 'gifs'. Avant
 de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans

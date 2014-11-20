@@ -104,15 +104,15 @@ Vous pouvez obtenir des composantes internes d'une date en accédant à ses
 propriétés::
 
     $now = Time::now();
-    echo $now->y; // 2014
-    echo $now->m; // 5
-    echo $now->d; // 10
+    echo $now->year; // 2014
+    echo $now->month; // 5
+    echo $now->day; // 10
     echo $now->timezone; // America/New_York
 
 Il est aussi permis d'assigner directement ces propriétés pour modifier la
 date::
 
-    $time->y = 2015;
+    $time->year = 2015;
     $time->timezone = 'Europe/Paris';
 
 Formatage
