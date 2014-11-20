@@ -34,8 +34,16 @@ AppController::
                             'password' => 'password'
                         ]
                     ]
+                ],
+                'unauthorizedRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
                 ]
             ]);
+
+            // Allow the display action so our pages controller
+            // continues to work.
+            $this->Auth->allow(['display']);
         }
     }
 
@@ -106,7 +114,9 @@ our application. In the ``UsersController`` add the following::
 The above tells ``AuthComponent`` that the ``add`` action does *not* require
 authentication or authorization. You may want to take the time to clean up the
 ``Users/add.ctp`` and remove the misleading links, or continue on to the next
-section.
+section. We won't be building out user editing, viewing or listing in this
+tutorial so they will not work as ``AuthComponent`` will deny you access to those
+controller actions.
 
 Restricting Bookmark Access
 ===========================
