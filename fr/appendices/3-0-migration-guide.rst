@@ -74,7 +74,7 @@ section sur :ref:`additional-class-paths` pour plus d'informations.
 Trois nouvelles variables de configuration fournissent la configuration
 de chemin pour les plugins, les views et les fichiers locale. Vous pouvez
 ajouter plusieurs chemins à ``App.paths.templates``, ``App.paths.plugins`` et
-``App.paths.locales`` pour configurer les chemins multiples pour respectivement
+``App.paths.locales`` pour configurer des chemins multiples pour respectivement
 les templates, les plugins et les fichiers locales.
 
 La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
