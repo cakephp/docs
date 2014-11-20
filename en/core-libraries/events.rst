@@ -277,7 +277,7 @@ converted into arguments for the listeners. An example from the View layer is
 the afterRender callback::
 
     $this->eventManager()
-        ->dispatch(new Event('View.afterRender', $this, [$viewFileName]));
+        ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
 The listeners of the ``View.afterRender`` callback should have the following
 signature::
