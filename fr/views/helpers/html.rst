@@ -453,7 +453,7 @@ Inclus un(des) fichier(s), présent soit localement soit à une URL
 distante.
 
 Par défaut, les balises du script sont ajoutées au document inline. Si vous
-le surcharger en configurant ``$options['block']`` à ``true``, les balises du
+le surchargez en configurant ``$options['block']`` à ``true``, les balises du
 script vont plutôt être ajoutées au block ``script`` que vous pouvez
 afficher ailleurs dans le document. Si vous souhaitez surcharger le nom
 du block utilisé, vous pouvez le faire en configurant
