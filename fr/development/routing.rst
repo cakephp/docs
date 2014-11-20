@@ -565,9 +565,8 @@ un lien qui n'appartient pas à un plugin.
 Routing Favorisant le SEO
 -------------------------
 
-En tant que développeur SEO, il est souhaitable d'avoir des URLs avec des tirets,
-afin d'éviter que vos URLs soit dans l'ombre des moteurs de recherche, et par
-conséquent, améliorer le référencement de vos URLs dans les moteurs de recherche.
+Certains développeurs préfèrent utiliser des tirets dans les URLs, car cela
+semble donner un meilleur classement dans les moteurs de recherche.
 La classe ``DashedRoute`` fournit à votre application la possibilité de créer des
 URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
 ``camelCase``.
@@ -965,8 +964,8 @@ Classe de Route par Défaut
 Si vous voulez utiliser une autre classe de route pour toutes vos routes
 en plus de la ``Route`` par défaut, vous pouvez faire ceci en appelant
 ``Router::defaultRouteClass()`` avant de définir la moindre route et éviter
- de spécifier l'option ``routeClass`` pour chaque route. Par exemple en
- utilisant::
+de spécifier l'option ``routeClass`` pour chaque route. Par exemple en
+utilisant::
 
     Router::defaultRouteClass('DashedRoute');
 

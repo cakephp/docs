@@ -308,7 +308,7 @@ données fournies sont converties en arguments pour les listeners. Un exemple
 de la couche View est le callback afterRender::
 
     $this->eventManager()
-        ->dispatch(new Event('View.afterRender', $this, [$viewFileName]));
+        ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
 Les listeners du callback ``View.afterRender`` doivent avoir la signature
 suivante::
