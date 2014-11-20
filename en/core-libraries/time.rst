@@ -100,14 +100,14 @@ Dates can be modified through subtraction and addition of their components::
 You can get the internal components of a date by accessing its properties::
 
     $now = Time::now();
-    echo $now->y; // 2014
-    echo $now->m; // 5
-    echo $now->d; // 10
+    echo $now->year; // 2014
+    echo $now->month; // 5
+    echo $now->day; // 10
     echo $now->timezone; // America/New_York
 
 It is also allowed to directly assign those properties to modify the date::
 
-    $time->y = 2015;
+    $time->year = 2015;
     $time->timezone = 'Europe/Paris';
 
 Formatting
