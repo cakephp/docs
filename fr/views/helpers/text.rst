@@ -8,7 +8,7 @@ TextHelper
 TextHelper possède des méthodes pour rendre le texte plus utilisable et sympa
 dans vos vues. Il aide à activer les liens, à formater les URLs, à créer
 des extraits de texte autour des mots ou des phrases choisies, mettant en
-évidence des mots clés dans des blocs de texte et tronquer élegamment de
+évidence des mots clés dans des blocs de texte et tronquer élégamment de
 longues étendues de texte.
 
 Lier les Adresses Email
@@ -16,7 +16,7 @@ Lier les Adresses Email
 
 .. php:method:: autoLinkEmails(string $text, array $options=[])
 
-Ajoute les liens aux adresses email bien formées dans $text, selon toute
+Ajoute les liens aux adresses email bien formées dans $text, selon toutes
 les options définies dans ``$options`` (regardez
 :php:meth:`HtmlHelper::link()`).::
 
@@ -38,7 +38,7 @@ Lier les URLs
 .. php:method:: autoLinkUrls(string $text, array $options=[])
 
 De même que dans ``autoLinkEmails()``, seule cette méthode cherche les
-chaînes de caractère qui commence par https, http, ftp, ou nntp et
+chaînes de caractères qui commence par https, http, ftp, ou nntp et
 les liens de manière appropriée.
 
 Cette méthode échappe automatiquement son input. Utilisez l'option
@@ -49,7 +49,7 @@ Lier à la fois les URLs et les Adresses Email
 
 .. php:method:: autoLink(string $text, array $options=[])
 
-Execute la fonctionnalité dans les deux ``autoLinkUrls()`` et
+Exécute la fonctionnalité dans les deux ``autoLinkUrls()`` et
 ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails
 sont liés de manière appropriée donnée par ``$options`` fourni.
 
