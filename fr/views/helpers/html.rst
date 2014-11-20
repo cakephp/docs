@@ -7,7 +7,7 @@ HTMLHelper
 
 Le rôle du Helper Html dans CakePHP est de fabriquer les options du HTML plus
 facilement, plus rapidement. L'utilisation de ce Helper permettra à votre
-application d'être plus légère, bien ancrée et plus flexible de l'endroit ou
+application d'être plus légère, bien ancrée et plus flexible de l'endroit où
 il est placé en relation avec la racine de votre domaine.
 
 De nombreuses méthodes du Helper Html contiennent un paramètre
@@ -63,7 +63,7 @@ Lier des Fichiers CSS
 
 Créé un ou plusieurs lien(s) vers une feuille de style CSS. Si l'option ``block``
 est définie à ``true``, les balises de liens sont ajoutées au bloc ``css`` qui
-qui peut être dans la balise head du document.
+peut être dans la balise head du document.
 
 Vous pouvez utiliser  l'option ``block`` pour contrôler sur lequel
 des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc ``css``.
@@ -452,10 +452,10 @@ Lier des Fichiers Javascript
 Inclus un(des) fichier(s), présent soit localement soit à une URL
 distante.
 
-Par défaut, les balises du script sont ajoutés au document inline. Si vous
+Par défaut, les balises du script sont ajoutées au document inline. Si vous
 le surcharger en configurant ``$options['block']`` à ``true``, les balises du
 script vont plutôt être ajoutées au block ``script`` que vous pouvez
-afficher aileurs dans le document. Si vous souhaitez surcharger le nom
+afficher ailleurs dans le document. Si vous souhaitez surcharger le nom
 du block utilisé, vous pouvez le faire en configurant
 ``$options['block']``.
 
@@ -534,7 +534,7 @@ Créer des Blocs Javascript Inline
 
 Génère un bloc de code contenant ``code`` et définit ``$options['inline']``
 à ``true`` pour voir le bloc de script apparaître dans le bloc de vue
-``script``. D'autre options définies seront ajoutées comme attributs dans
+``script``. D'autres options définies seront ajoutées comme attributs dans
 les balises de script.
 ``$this->Html->scriptBlock('stuff', ['defer' => true]);`` va créer une
 balise script avec l'attribut ``defer="defer"``.
@@ -806,7 +806,7 @@ pour démarrer le fil d'Ariane sur chacune de vos pages.::
 Ceci ajoutera la sortie "**Home > Users > Add User**" dans votre layout
 où ``getCrumbs`` a été ajouté.
 
-Vous pouvez aussi récupérer le fil d'Ariane en tant une liste Html::
+Vous pouvez aussi récupérer le fil d'Ariane en tant que liste Html::
 
     echo $this->Html->getCrumbList();
 
