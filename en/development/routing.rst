@@ -320,21 +320,6 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
-Default Route Class
--------------------
-
-.. php:staticmethod:: defaultRouteClass($routeClass = null)
-
-If you want to use an alterate route class for all your routes besides the
-default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
-before setting up any routes and avoid having to specify the ``routeClass``
-option for each route. For example using::
-
-    Router::defaultRouteClass('DashedRoute');
-
-will cause all routes connected after this to use the ``DashedRoute`` route class.
-Calling the method without an argument will return current default route class.
-
 Passing Parameters to Action
 ----------------------------
 
@@ -932,6 +917,21 @@ option::
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
 standard :term:`plugin syntax`.
+
+Default Route Class
+-------------------
+
+.. php:staticmethod:: defaultRouteClass($routeClass = null)
+
+If you want to use an alterate route class for all your routes besides the
+default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
+before setting up any routes and avoid having to specify the ``routeClass``
+option for each route. For example using::
+
+    Router::defaultRouteClass('DashedRoute');
+
+will cause all routes connected after this to use the ``DashedRoute`` route class.
+Calling the method without an argument will return current default route class.
 
 Handling Named Parameters in URLs
 =================================
