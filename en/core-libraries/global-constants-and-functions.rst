@@ -54,7 +54,7 @@ such as debugging and translating content.
     Allows you to override the current domain for a single message lookup.
 
     Useful when internationalizing a plugin:
-    ``echo __d('PluginName', 'This is my plugin');``
+    ``echo __d('plugin_name', 'This is my plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 
