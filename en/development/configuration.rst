@@ -673,7 +673,9 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
 .. warning::
 
-        It is not a good idea to call your custom configure class ``XmlReader`` because that classname is an internal PHP one already: http://php.net/manual/de/book.xmlreader.php
+        It is not a good idea to call your custom configure class ``XmlReader`` because that
+        classname is an internal PHP one already:
+        `XMLReader <http://php.net/manual/de/book.xmlreader.php>`_
 
     Configure::load('my_xml');
 
