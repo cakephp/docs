@@ -203,6 +203,12 @@ callable, including anonymous functions, as validation rules::
         }
     ]);
 
+    // Use a rule from a custom provider
+    $validator->add('title', 'unique', [
+        'rule' => 'uniqueTitle',
+        'provider' => 'custom'
+    ]);
+
 Closures or callable methods will receive 2 arguments when called. The first
 will be the value for the field being validated. The second is a context array
 containing data related to the validation process:
