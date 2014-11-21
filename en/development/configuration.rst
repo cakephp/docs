@@ -671,13 +671,13 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
     Configure::config('xml', new MyXmlReader());
     ...
 
+    Configure::load('my_xml');
+
 .. warning::
 
         It is not a good idea to call your custom configure class ``XmlReader`` because that
         class name is an internal PHP one already:
         `XMLReader <http://php.net/manual/en/book.xmlreader.php>`_
-
-    Configure::load('my_xml');
 
 The ``read()`` method of a config reader, must return an array of the configuration information
 that the resource named ``$key`` contains.

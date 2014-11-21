@@ -632,9 +632,9 @@ plugins. Les readers de configuration ont besoin d'implémenter l'
 lecture, comme seule méthode requise. Si vous aimez vraiment les fichiers XML,
 vous pouvez créer un reader de config simple Xml pour votre application::
 
-    // dans app/Lib/Configure/XmlReader.php
+    // dans app/Lib/Configure/MyXmlReader.php
     App::uses('Xml', 'Utility');
-    class XmlReader implements ConfigReaderInterface {
+    class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
             if (!$path) {
                 $path = APP . 'Config' . DS;
@@ -656,11 +656,17 @@ vous pouvez créer un reader de config simple Xml pour votre application::
 Dans votre ``app/Config/bootstrap.php``, vous pouvez attacher ce reader et
 l'utiliser::
 
-    App::uses('XmlReader', 'Configure');
-    Configure::config('xml', new XmlReader());
+    App::uses('MyXmlReader', 'Configure');
+    Configure::config('xml', new MyXmlReader());
     ...
 
     Configure::load('my_xml');
+
+.. warning::
+
+        Ce n'dest pas une bonne idée de nommer votre classe de configuration
+        ``XmlReader`` car ce nom de classe est déjà utilisé en interne par PHP
+        `XMLReader <http://php.net/manual/fr/book.xmlreader.php>`_
 
 La méthode ``read()`` du reader de config, doit retourner un tableau
 d'informations de configuration que la ressource nommé ``$key`` contient.
