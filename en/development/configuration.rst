@@ -648,7 +648,7 @@ reader for you application::
     App::uses('Xml', 'Utility');
     class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
-            if (!$path) {
+            if ($path === null) {
                 $path = APP . 'Config' . DS;
             }
             $this->_path = $path;
@@ -660,7 +660,7 @@ reader for you application::
         }
 
         // As of 2.3 a dump() method is also required
-        public function dump($key, $data) {
+        public function dump($key, array $data) {
             // code to dump data to file
         }
     }
