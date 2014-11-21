@@ -644,11 +644,11 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 reader for you application::
 
-    // in app/Lib/Configure/XmlReader.php
+    // in app/Lib/Configure/MyXmlReader.php
     App::uses('Xml', 'Utility');
-    class XmlReader implements ConfigReaderInterface {
+    class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
-            if (!$path) {
+            if ($path === null) {
                 $path = APP . 'Config' . DS;
             }
             $this->_path = $path;
@@ -660,16 +660,22 @@ reader for you application::
         }
 
         // As of 2.3 a dump() method is also required
-        public function dump($key, $data) {
+        public function dump($key, array $data) {
             // code to dump data to file
         }
     }
 
 In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
-    App::uses('XmlReader', 'Configure');
-    Configure::config('xml', new XmlReader());
+    App::uses('MyXmlReader', 'Configure');
+    Configure::config('xml', new MyXmlReader());
     ...
+
+.. warning::
+
+        It is not a good idea to call your custom configure class ``XmlReader`` because that
+        classname is an internal PHP one already:
+        `XMLReader <http://php.net/manual/en/book.xmlreader.php>`_
 
     Configure::load('my_xml');
 
