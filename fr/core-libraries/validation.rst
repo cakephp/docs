@@ -215,6 +215,12 @@ validation::
         }
     ]);
 
+    // Utilisez une règle à partir d'un provider personnalisé
+    $validator->add('title', 'unique', [
+        'rule' => 'uniqueTitle',
+        'provider' => 'table'
+    ]);
+
 Les Closures ou les méthodes appelables vont recevoir 2 arguments lors de leur
 appel. Le premier va être la valeur pour le champ étant validé. Le second est
 un tableau contextuel contenant des données liées au processus de validation:
