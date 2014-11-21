@@ -648,7 +648,7 @@ reader for you application::
     App::uses('Xml', 'Utility');
     class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
-            if ($path === null) {
+            if (!$path) {
                 $path = APP . 'Config' . DS;
             }
             $this->_path = $path;
@@ -660,7 +660,7 @@ reader for you application::
         }
 
         // As of 2.3 a dump() method is also required
-        public function dump($key, array $data) {
+        public function dump($key, $data) {
             // code to dump data to file
         }
     }
@@ -674,7 +674,7 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 .. warning::
 
         It is not a good idea to call your custom configure class ``XmlReader`` because that
-        classname is an internal PHP one already:
+        class name is an internal PHP one already:
         `XMLReader <http://php.net/manual/en/book.xmlreader.php>`_
 
     Configure::load('my_xml');
