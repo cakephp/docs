@@ -90,7 +90,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     .. Useful when internationalizing a plugin:
 
     プラグインを国際化するときに便利です:
-    ``echo __d('PluginName', 'This is my plugin');``
+    ``echo __d('plugin_name', 'This is my plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 

@@ -58,7 +58,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     message.
 
     Utile pour internationaliser un plugin:
-     ``echo __d('PluginName', 'This is my plugin');``
+     ``echo __d('plugin_name', 'This is my plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 
