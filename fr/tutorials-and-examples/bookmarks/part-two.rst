@@ -130,7 +130,7 @@ Restreindre l'Accès aux Bookmarks
 =================================
 
 Maintenant que les utilisateurs peuvent se connecter, nous voulons limiter
-les bookmarks qu'ils peuvent voir à ceux qu'ils ont fait. Nous allons faire
+les bookmarks qu'ils peuvent voir à ceux qu'ils ont créés. Nous allons faire
 ceci en utilisant un adaptateur 'authorization'. Puisque nos besoins sont
 assez simples, nous pouvons écrire quelques lignes de code simple dans notre
 ``BookmarksController``. Mais avant de le faire, nous voulons dire à
@@ -368,5 +368,5 @@ aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
 capacités de l'ORM.
 
 Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez en
-apprendre plus sur l':doc:`/orm`, ou vous pouvez lire attentivement
-les :doc:`/topics`.
+apprendre plus sur l':doc:`ORM </orm>`, ou vous pouvez lire attentivement
+:doc:`/topics`.

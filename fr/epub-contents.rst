@@ -52,4 +52,4 @@ Contenu
 
 .. meta::
     :title lang=fr: Contenu
-    :keywords lang=fr: librairies du coeur,ref search,shells,déploiement,appendices,glossary,models
+    :keywords lang=fr: librairies du cœur,ref search,shells,déploiement,appendices,glossary,models

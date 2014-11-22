@@ -74,7 +74,7 @@ Vérifier la Configuration Test
 
 Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lancant un de ceux présents dans le coeur::
+lancer vos propres tests en lancant un de ceux présents dans le cœur::
 
     // Pour un PHPunit installé sur l'ensemble du système
     $ phpunit
@@ -576,7 +576,7 @@ lancée contre elle. Pour charger les fixtures, vous définissez la propriété
 
 Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
 du répertoire de fixture de l'application. Vous pouvez aussi charger les
-fixtures à partir du coeur de CakePHP ou des plugins::
+fixtures à partir du cœur de CakePHP ou des plugins::
 
     class ArticlesTest extends TestCase {
         public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
@@ -1142,7 +1142,7 @@ Créer des Tests pour les Plugins
 ================================
 
 Les Tests pour les plugins sont crées dans leur propre répertoire à
-l'intérieur du dossier des plugins.::
+l'intérieur du dossier des plugins. ::
 
     /src
         /plugins

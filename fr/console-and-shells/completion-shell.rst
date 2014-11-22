@@ -29,7 +29,7 @@ Retourne::
 
     acl api bake command_list completion console i18n schema server test testsuite upgrade
 
-Votre script de completion peut selectionner les commandes pertinentes de cette
+Votre script de completion peut sélectionner les commandes pertinentes de cette
 liste pour continuer avec. (Pour celle-là et les sous-commandes suivantes.)
 
 Sous-Commandes

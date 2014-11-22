@@ -53,7 +53,7 @@ généraux sur le code.
 
 Si vous trouvez un problème, la meilleure réponse est d'écrire un test. Le 
 meilleur conseil que nous pouvons offrir dans l'écriture des tests est de 
-regarder ceux qui sont inclus dans le coeur.
+regarder ceux qui sont inclus dans le cœur.
 
 Comme toujours, si vous avez n'importe quelle question ou commentaire,
 rendez-nous une visite sur #cakephp sur irc.freenode.net.

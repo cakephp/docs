@@ -629,7 +629,7 @@ habituelle. Si la vue est rendue pour un controller/action d'un plugin, le nom
 du plugin va automatiquement être préfixé pour tous les elements utilisés, à
 moins qu'un autre nom de plugin ne soit présent.
 Si l'element n'existe pas dans le plugin, il ira voir dans le dossier principal
-APP.::
+APP. ::
 
     echo $this->element('Contacts.helpbox');
 

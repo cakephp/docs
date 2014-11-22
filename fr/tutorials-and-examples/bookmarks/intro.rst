@@ -12,7 +12,7 @@ Voici ce dont vous allez avoir besoin:
    ce tutoriel. Vous devrez en savoir assez sur SQL pour créer une base de
    données: CakePHP prendra les rênes à partir de là. Puisque nous utilisons
    MySQL, assure-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
-#. Des connaissance de base en PHP.
+#. Des connaissances de base en PHP.
 
 C'est parti !
 
@@ -32,7 +32,7 @@ Ou alors vous pouvez télécharger ``composer.phar`` depuis le
 
 Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
-CakePHP dans le répertoire [app_name].::
+CakePHP dans le répertoire [app_name]. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
 
@@ -91,7 +91,7 @@ Créer la Base de Données
 Ensuite, configurons la base de données pour notre application de bookmarking.
 Si vous ne l'avez pas déjà fait, créez une base de données vide que nous
 allons utiliser dans ce tutoriel, avec un nom de votre choix, par ex
-``cake_bookmarks``. Vous pouvez executez le SQL suivant pour créer les
+``cake_bookmarks``. Vous pouvez exécuter le SQL suivant pour créer les
 tables nécessaires::
 
     CREATE TABLE users (
@@ -131,14 +131,14 @@ tables nécessaires::
     );
 
 Vous avez peut-être remarqué que la table ``bookmarks_tags`` utilisait une
-clé primaire composite. CakePHP permet les clés primaires composite presque
+clé primaire composite. CakePHP permet les clés primaires composites presque
 partout, facilitant la construction des applications multi-tenanted.
 
 La table et les noms de colonne que nous avons utilisés n'étaient pas
 arbitraires. En utilisant les
 :doc:`conventions de nommage </intro/conventions>` de CakePHP, nous pouvons
 mieux contrôler CakePHP et éviter d'avoir à configurer le framework. CakePHP est
-assez flexible pour s'accomoder de tout schéma de base de données, mais
+assez flexible pour s'accommoder de tout schéma de base de données, mais
 suivre les conventions va vous faire gagner du temps.
 
 Configuration de Base de Données
@@ -201,7 +201,7 @@ Si vous stoppé votre serveur, relancez le et allez sur
 ``http://localhost:8765/bookmarks``.
 
 Vous devriez voir une application basique mais fonctionnelle fournissant
-des accés aux données vers les tables de la base de données de votre
+des accès aux données vers les tables de la base de données de votre
 application. Une fois que vous avez la liste des bookmarks, ajoutez quelques
 users, bookmarks, et tags.
 
@@ -217,12 +217,12 @@ CakePHP, nous séparons les méthodes qui agissent sur une collection
 d'objets, et un objet unique dans les classes différentes. Les méthodes qui
 agissent sur la collection des entities sont mises dans la classe *Table*,
 alors que les fonctionnalités correspondant à un enregistrement unique
-sont mis dans la classe *Entity*.
+sont mises dans la classe *Entity*.
 
 Par exemple, le hashage des mots de passe se fait pour un enregistrement
 individuel, donc nous allons intégrer ce comportement sur l'objet entity.
 Comme nous voulons hasher le mot de passe à chaque fois qu'il est défini
-nous allons utiliser une méthode mutateur/setter. CakePHP va appeler la
+nous allons utiliser une méthode mutateur/setter. CakePHP va appeler
 les méthodes setter basées sur les conventions à chaque fois qu'une
 propriété est définie dans une de vos entities. Ajoutons un setter pour le
 mot de passe. Dans ``src/Model/Entity/User.php``, ajoutez ce qui suit::
@@ -242,7 +242,7 @@ mot de passe. Dans ``src/Model/Entity/User.php``, ajoutez ce qui suit::
         }
     }
 
-Maintenant mettez à jour un des users que vous avez créez précedemment, si vous
+Maintenant mettez à jour un des users que vous avez créez précédemment, si vous
 changez son mot de passe, vous devriez voir un mot de passe hashé à la
 place de la valeur originale sur la liste ou les pages de vue. CakePHP hashe les
 mots de passe avec
@@ -312,7 +312,7 @@ la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons cela. D
             });
     }
 
-Nous intégrons juste :ref:`custom finder method <custom-find-methods>`. C'est
+Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`. C'est
 un concept très puissant dans CakePHP qui vous permet de faire un package
 réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
@@ -347,7 +347,7 @@ controller.
 
 Vous avez peut-être remarqué que nous pouvions utiliser les variables
 ``$tags`` et ``$bookmarks`` dans notre vue. Quand nous utilisons la méthode
-``set()`` dans notre controller, nous définissons les variables spéciques à
+``set()`` dans notre controller, nous définissons les variables spécifiques à
 envoyer à la vue. La vue va rendre disponible toutes les variables passées
 dans les templates en variables locales.
 

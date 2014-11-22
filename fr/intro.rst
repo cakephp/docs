@@ -10,7 +10,7 @@ Le but de cette présentation est d'introduire les concepts généraux de CakePH
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
 œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, vous pouvez
 :doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
-:doc:`plonger dans la documentaion </topics>`.
+:doc:`plonger dans la documentation </topics>`.
 
 Conventions plutôt que Configuration
 ====================================
@@ -87,7 +87,7 @@ La couche View fournit un certain nombre d'extensions tels que les
 :ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
 permettre de ré-utiliser facilement votre logique de présentation.
 
-La couche View n'est pas seulement limitée au HTML ou à la répresentation en
+La couche View n'est pas seulement limitée au HTML ou à la représentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
 de formats tels que JSON, XML et grâce à une architecture modulable tout autre
 format dont vous auriez besoin.

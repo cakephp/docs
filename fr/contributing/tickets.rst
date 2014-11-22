@@ -34,11 +34,11 @@ Si vous avez trouvé un problème de sécurité dans CakePHP, merci de bien voul
 utiliser la procédure suivante, plutôt que le système de rapport de bug
 classique. Au lieu d'utiliser le tracker de bug, la mailing-liste ou le canal
 IRC, merci d'envoyer un email à **security [at] cakephp.org**.
-Les emails envoyés à cette adresse vont à l'équipe qui construit le coeur de
+Les emails envoyés à cette adresse vont à l'équipe qui construit le cœur de
 CakePHP via une mailing-liste privée.
 
 Pour chaque rapport, nous essayons d'abord de confirmer la vulnérabilité.
-Une fois confirmée, l'équipe du coeur de CakePHP va entreprendre les actions
+Une fois confirmée, l'équipe du cœur de CakePHP va entreprendre les actions
 suivantes:
 
 * La reconnaissance faite au rapporteur que nous avons reçu son problème, et

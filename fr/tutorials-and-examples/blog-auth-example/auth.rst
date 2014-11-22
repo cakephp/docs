@@ -269,7 +269,7 @@ nous utilisions quand nous avons ajouté AuthComponent à notre application.
 
 La déconnexion fonctionne juste en allant à l'URL ``/users/logout`` et
 redirigera l'utilisateur vers l'Url de Déconnexion configurée décrite
-précedemment. Cette URL est le résultat de la fonction
+précédemment. Cette URL est le résultat de la fonction
 ``AuthComponent::logout()`` en cas de succès.
 
 Autorisation (Qui est autorisé à accéder à quoi)
@@ -373,7 +373,7 @@ fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
 Nous surchargeons maintenant l'appel ``isAuthorized()`` de AppController's et
 vérifions à l'intérieur si la classe parente autorise déjà l'utilisateur.
 Si elle ne le fait pas, alors nous ajoutons juste l'autorisation d'accéder
-à l'action add, et éventuellement autorisons l'accés pour modifier et supprimer.
+à l'action add, et éventuellement autorisons l'accès pour modifier et supprimer.
 Une dernière chose à que nous avons oubliée de faire est de dire si
 l'utilisateur à l'autorisation ou non de modifier l'article, nous appelons
 une fonction ``isOwnedBy()`` dans la table Articles. Intégrons la fonction

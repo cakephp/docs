@@ -15,7 +15,7 @@ internet. Désactiver le debug change les types de choses suivantes:
 
 * Les messages de Debug, créés avec :php:func:`pr()` et :php:func:`debug()`
   sont désactivés.
-* Les caches du Coeur de CakePHP sont flushés tous les 999 jours, au lieu de
+* Les caches du Cœur de CakePHP sont flushés tous les 999 jours, au lieu de
   tous les 10 seconds en développement.
 * Les vues d'Erreur sont moins informatives, et renvoient des messages
   génériques d'erreur à la place.

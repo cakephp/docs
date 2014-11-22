@@ -204,10 +204,10 @@ la requête spécifique à l'application::
 
     $this->request->is('post');
 
-Vous pouvez aussi facilement étendre les detecteurs de la requête qui sont
+Vous pouvez aussi facilement étendre les détecteurs de la requête qui sont
 disponibles, en utilisant :php:meth:`Cake\\Network\\Request::addDetector()`
-pour créer de nouveaux types de detecteurs. Il y a quatre différents types
-de detecteurs que vous pouvez créer:
+pour créer de nouveaux types de détecteurs. Il y a quatre différents types
+de détecteurs que vous pouvez créer:
 
 * Comparaison avec valeur d'environnement - Une comparaison de la valeur
   d'environnement, compare une valeur récupérée à partir de :php:func:`env()`

@@ -9,7 +9,7 @@ Le behavior timestamp permet à vos objets de table de mettre à jour un ou
 plusieurs timestamps sur chaque evenement de model. C'est principalement utilisé
 pour remplir les données dans les champs ``created`` et ``modified``.
 Cependant, avec quelques configurations supplémentaires, vous pouvez mettre à
-jour la colonne timestamp/datetime sur chaque évenement qu'une table publie.
+jour la colonne timestamp/datetime sur chaque évènement qu'une table publie.
 
 Utilisation Basique
 ===================

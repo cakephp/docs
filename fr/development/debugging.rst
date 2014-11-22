@@ -19,7 +19,7 @@ sympa en HTML, définissez le deuxième paramètre à ``true``. La fonction affi
 aussi la ligne et le fichier dont ils sont originaires par défaut.
 
 La sortie de cette fonction est seulement montrée si la variable de ``$debug``
-du coeur a été définie à ``true``.
+du cœur a été définie à ``true``.
 
 .. php:function stackTrace()
 
@@ -86,7 +86,7 @@ Generating Stack Traces
 .. php:staticmethod:: trace($options)
 
 Retourne le stack trace courant. Chaque ligne des traces inlut la méthode
-appelée, incluant chaque fichier et ligne d'où est originaire l'appel.::
+appelée, incluant chaque fichier et ligne d'où est originaire l'appel. ::
 
     //Dans PostsController::index()
     pr( Debugger::trace() );
@@ -113,7 +113,7 @@ Getting an Excerpt From a File
 
 Récupérer un extrait du fichier dans $path (qui est un chemin de fichier
 absolu), mettant en évidence le numéro de la ligne $line avec le nombre
-de lignes $context autour.::
+de lignes $context autour. ::
 
     pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
 

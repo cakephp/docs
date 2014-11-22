@@ -75,7 +75,7 @@ le nom/la clé utilisé.
 
     La méthode ``destroy`` supprimera le cookie de session et toutes les
     données de session stockées dans le fichier temporaire du système. Cela
-    va détruire la session PHP et ainsi en créer une nouvelle.::
+    va détruire la session PHP et ainsi en créer une nouvelle. ::
 
         $this->Session->destroy();
 

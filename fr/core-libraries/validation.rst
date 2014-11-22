@@ -347,7 +347,7 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
     méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
     :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
 
-Règles de Validation du Coeur
+Règles de Validation du Cœur
 =============================
 
 CakePHP fournit une suite basique de méthodes de validation dans la classe
@@ -373,6 +373,6 @@ ces conditions limite & options comme suit::
             'rule' => ['range', 1, 5]
         ]);
 
-Les règles du Coeur qui prennnent des paramètres supplémentaires doivent avoir
+Les règles du Cœur qui prennnent des paramètres supplémentaires doivent avoir
 un tableau pour la clé ``rule`` qui contient la règle comme premier élément, et
 les paramètres supplémentaires en paramètres restants.

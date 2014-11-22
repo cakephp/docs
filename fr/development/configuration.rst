@@ -325,10 +325,10 @@ CakePHP est fourni avec deux fichiers readers de configuration intégrés.
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` est capable de lire les
 fichiers de config de PHP, dans le même format dans lequel Configure a lu
 historiquement. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` est
-capable de lire les fichiers de config ini du coeur.
+capable de lire les fichiers de config ini du cœur.
 Regardez la `documentation PHP <http://php.net/parse_ini_file>`_
 pour plus d'informations sur les fichiers ini spécifiés. Pour utiliser un
-reader de config du coeur, vous aurez besoin de l'attacher à Configure
+reader de config du cœur, vous aurez besoin de l'attacher à Configure
 en utilisant :php:meth:`Configure::config()`::
 
     use Cake\Core\Configure\Engine\PhpConfig;

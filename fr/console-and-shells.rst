@@ -73,7 +73,7 @@ Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     [app] behavior_time, console, orm
 
-    Pour lancer une commande de app ou du coeur, tapez cake shell_name [args]
+    Pour lancer une commande de app ou du cœur, tapez cake shell_name [args]
     Pour lancer une commande d'un plugin, tapez cake Plugin.shell_name [args]
     Pour avoir de l'aide sur une commande spécifique, tapez cake shell_name --help
 
@@ -313,7 +313,7 @@ CakePHP a un moyen facile de le faire::
     // Récupère un choix de l'utilisateur.
     $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
 
-La validation de la selection est sensible à la casse.
+La validation de la sélection est sensible à la casse.
 
 Créer des Fichiers
 ==================
@@ -526,7 +526,7 @@ Vous pouvez aussi configurer les parsers d'option des sous-commandes, ce qui
 vous permet d'avoir des parsers d'option différents pour les sous-commandes
 et les tâches.
 ConsoleOptionParser implémente une interface courant et inclut les méthodes
-pour configurer facilement les multiple options/arguments en une fois.::
+pour configurer facilement les multiple options/arguments en une fois. ::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -623,7 +623,7 @@ gérer cela dans votre shell.
 .. php:method:: addArguments(array $args)
 
 Si vous avez un tableau avec plusieurs arguments, vous pouvez utiliser
-``$parser->addArguments()`` pour ajouter plusieurs arguments en une fois.::
+``$parser->addArguments()`` pour ajouter plusieurs arguments en une fois. ::
 
     $parser->addArguments([
         'node', ['help' => 'The node to create', 'required' => true],
@@ -661,7 +661,7 @@ Les options ou les flags sont aussi fréquemment utilisés avec les outils de
 ligne de commande. ``ConsoleOptionParser`` supporte la création d'options avec
 les deux verbose et short aliases, fournissant les valeurs par défaut
 et créant des switches en boléen. Les options sont créées avec soit
-``$parser->addOption()``, soit ``$parser->addOptions()``.::
+``$parser->addOption()``, soit ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', [
         'short' => 'c'
@@ -674,7 +674,7 @@ Ce qui est au-dessus vous permet l'utilisation soit de
 ``cake myshell --connection other``, ou soit de ``cake myshell -c other`` lors
 de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
 switches ne consomment pas de valeurs, et leur présence les active juste dans
-les paramètres parsés.::
+les paramètres parsés. ::
 
     $parser->addOption('no-commit', ['boolean' => true]);
 
@@ -703,7 +703,7 @@ pour définir le comportement de l'option:
 .. php:method:: addOptions(array $options)
 
 Si vous avez un tableau avec plusieurs options, vous pouvez utiliser
-``$parser->addOptions()`` pour ajouter plusieurs options en une fois.::
+``$parser->addOptions()`` pour ajouter plusieurs options en une fois. ::
 
     $parser->addOptions([
         'node', ['short' => 'n', 'help' => 'The node to create'],
@@ -854,7 +854,7 @@ Obtenir de l'Aide dans les Shells
 
 Avec l'ajout de ConsoleOptionParser, récupérer l'aide des shells est faite
 d'une façon cohérente et uniforme. En utilisant l'option ``--help`` ou -``h``,
-vous pouvez voir l'aide pour tout shell du coeur, et tout shell qui implémente
+vous pouvez voir l'aide pour tout shell du cœur, et tout shell qui implémente
 un ConsoleOptionParser::
 
     cake bake --help
@@ -880,7 +880,7 @@ fournir de l'aide au format XML en définissant un argument supplémentaire::
     cake bake -h xml
 
 Les commandes ci-dessus vont retourner un document XML contenant de l'aide
-à propos des options, arguments et sous-commandes du shell selectionné. Voici
+à propos des options, arguments et sous-commandes du shell sélectionné. Voici
 un exemple de documentation:
 
 .. code-block:: xml

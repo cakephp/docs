@@ -24,7 +24,7 @@ moment, il avait quelques problèmes que nous souhaitions régler.
   ingérable. La rendre un peu plus réutilisable rendrait le framework plus
   extensible.
 
-L'ORM dans CakePHP 3.0 résoud ces problèmes et beaucoup d'autres encore. Le
+L'ORM dans CakePHP 3.0 résout ces problèmes et beaucoup d'autres encore. Le
 nouvel ORM se focalise actuellement sur les stockages des données
 relationnelles. Dans le future et à travers les plugins, nous ajouterons des
 stockages non relationnels comme ElasticSearch et d'autres encore.
@@ -32,7 +32,7 @@ stockages non relationnels comme ElasticSearch et d'autres encore.
 Design du nouvel ORM
 ====================
 
-Le nouvel ORM résoud de nombreux problèmes en ayant des classes plus
+Le nouvel ORM résout de nombreux problèmes en ayant des classes plus
 spécialisées et concentrées. Dans le passé vous utilisiez ``Model`` et une
 Source de données pour toutes les opérations. Maintenant l'ORM est
 séparé en plus de couches:
@@ -324,7 +324,7 @@ lequelles vous etiez interessées. Une tactique commune pour gérer les
 associations était de définir ``recursive`` à ``-1`` et utiliser Containable
 pour gérer toutes les associations. Dans CakePHP 3.0 ContainableBehavior,
 recursive, bindModel, et unbindModel ont été retirées. A la place, la méthode
-``contain()`` a été favorisée pour être une fonctionnalité du coeur du
+``contain()`` a été favorisée pour être une fonctionnalité du cœur du
 query builder. Les associations sont seulement chargées si elles sont
 explicitement activées. Par exemple::
 
