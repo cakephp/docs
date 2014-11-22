@@ -254,11 +254,11 @@ Routing.prefixes
     tableau de noms préfixés de routes que vous voulez utiliser. En savoir
     plus sur cela plus tard.
 Cache.disable
-    Quand défini à true, la mise en cache persistente est désativée côté-site.
+    Quand défini à true, la mise en cache persistante est désactivée côté-site.
     Cela mettra toutes les lectures/écritures du :php:class:`Cache` en échec.
 Cache.check
     Si défini à true, active la mise en cache de la vue. L'activation est
-    toujours necéssaire dans les controllers, mais cette variable permet
+    toujours nécessaire dans les controllers, mais cette variable permet
     la détection de ces configurations.
 Session
     Contient un tableau de configurations à utiliser pour la configuration
@@ -302,7 +302,7 @@ Session
     Session.handler à <name>.
 
     Pour utiliser les sessions en base de données, lancez le schéma
-    ``app/Config/Schema/sessions.php`` en utilisant la commnde de shell de
+    ``app/Config/Schema/sessions.php`` en utilisant la commande de shell de
     cake: ``cake schema create Sessions``.
 
 Security.salt
@@ -365,15 +365,15 @@ Classe Configure
 .. php:class:: Configure
 
 Malgré quelques petites choses à configurer dans CakePHP, il
-est parfois utilie d'avoir vos propres règles de configuration pour votre
-application. Dans le passé, vous avoiez peut-être défini des valeurs
+est parfois utile d'avoir vos propres règles de configuration pour votre
+application. Dans le passé, vous aviez peut-être défini des valeurs
 de configuration personnalisées en définissant des variables ou des
 constantes dans certains fichiers. Faire cela, vous force à inclure ce
 fichier de configuration chaque fois que vous souhaitez utiliser
 ces valeurs.
 
 La nouvelle classe Configure de CakePHP peut être utilisée pour stocker et
-récupèrer des valeurs spécifiques d'exécution ou d'application. Attention,
+récupéré des valeurs spécifiques d'exécution ou d'application. Attention,
 cette classe vous permet de stocker tout dedans, puis de l'utiliser dans
 toute autre partie de votre code: une tentative évidente de casser le modèle
 MVC avec lequel CakePHP a été conçu. Le but principal de la classe Configure
@@ -607,10 +607,10 @@ Restaurer la configuration de runtime
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
 
     :param string $name: La clé de stockage à charger.
-    :param string $cacheConfig: La configuration de cache à partir de laquel
+    :param string $cacheConfig: La configuration de cache à partir de laquelle
         on charge les données.
 
-Une fois que vous avez stocké la configuration executée, vous aurez
+Une fois que vous avez stocké la configuration exécutée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
 ``Configure::restore()`` fait exactement cela::
 

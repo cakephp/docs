@@ -243,7 +243,7 @@ Lancer les tests à partir d'une ligne de commande
 CakePHP fournit un shell ``test`` pour lancer les tests. Vous pouvez
 lancer les tests de app, core et plugin facilement en utilisant le shell
 test. Il accepte aussi tous les arguments que vous vous attendez à trouver
-sur l'outil de ligne de commnde du PHPUnit normal. A partir de votre répertoire
+sur l'outil de ligne de commande du PHPUnit normal. A partir de votre répertoire
 app, vous pouvez faire ce qui suit pour lancer les tests::
 
     # Lancer un test de model dans app
@@ -354,7 +354,7 @@ d'utiliser les fixtures de la base de données.
 CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
 de test:
 
-#. Crée les tables pour chacun des fixtues necéssaires.
+#. Crée les tables pour chacun des fixtures nécessaires.
 #. Remplit les tables avec les données, si les données sont fournis dans la fixture.
 #. Lance les méthodes de test.
 #. Vide les tables de fixture.
@@ -1355,7 +1355,7 @@ Lancer un build
 ---------------
 
 Vous devriez être capable de lancer un build maintenant. Vérifiez la sortie de
-la console et faites tous les changements necéssaires pour obtenir un build
+la console et faites tous les changements nécessaires pour obtenir un build
 précédent.
 
 

@@ -102,7 +102,7 @@ Les Types d'Attribut Correspondants
 
     ``Hash::extract()`` supporte toutes les expressions, les components
     matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
-    récupèrer les données à partir des tableaux, le long des chemins
+    récupéré les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
@@ -180,7 +180,7 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     Crée un tableau associatif en utilisant $keyPath en clé pour le chemin
-    à construire, et optionnellement $valuePath comme chemin pour récupèrer
+    à construire, et optionnellement $valuePath comme chemin pour récupérer
     les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans

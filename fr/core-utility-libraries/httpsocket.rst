@@ -156,7 +156,7 @@ retour des méthodes de requête en chaîne::
 * ``isOk()`` retourne si le code est 200;
 * ``isRedirect()`` retourne si le code est 301, 302, 303 or 307 et la
   *localisation* du header est définie.
-* ``getHeader()`` vous permet de récupèrer les headers, voir la prochaine
+* ``getHeader()`` vous permet de récupérer les headers, voir la prochaine
   section.
 
 Obtenir des headers à partir d'une réponse

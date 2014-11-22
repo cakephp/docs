@@ -94,7 +94,7 @@ identifiant d'une langue, pour ainsi dire.
 Lire le contenu traduit
 =======================
 
-Par défaut, le TranslateBehavior va automatiquement récupèrer et ajouter les
+Par défaut, le TranslateBehavior va automatiquement récupérer et ajouter les
 données basées sur la locale courante. La locale courante est lue à partir de
 ``Configure::read('Config.language')`` qui est assignée par la classe
 :php:class:`L10n`. Vous pouvez surcharger cette valeur par défaut à la volée

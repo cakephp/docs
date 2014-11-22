@@ -46,7 +46,7 @@ Accorder et refuser l'accès
 ===========================
 
 Utilisez la commande d'accès pour accorder les permssions ACL.
-Une fois executée, l'ARO spécifié (et ses enfants, si il en a) aura un accès
+Une fois exécutée, l'ARO spécifié (et ses enfants, si il en a) aura un accès
 AUTORISÉ à l'action ACO spécifié (et les enfants de l'ACO, si il y en a)::
 
     ./Console/cake acl grant Group.1 controllers/Posts

@@ -170,7 +170,7 @@ de controller configuré pour répondre à cette URL, donc nous avons choisi
 
 ``DispatcherFilter`` propose deux méthodes qui peuvent être écrasées dans des
 sous-classes, elles sont ``beforeDispatch`` et ``afterDispatch``, et sont
-executées respectivement avant ou après que tout controller soit executé.
+exécutées respectivement avant ou après que tout controller soit executé.
 Les deux méthodes reçoivent un objet  :php:class:`CakeEvent` contenant
 les objets ``request`` et ``response``
 (instances :php:class:`CakeRequest` et :php:class:`CakeResponse`) avec
@@ -245,7 +245,7 @@ petite milliseconde pour cette mission-critical API endpoint::
 Dans l'exemple précédent, nous avons selectionné une priorité à ``9`` pour
 notre filtre, donc pour sauter toute autre logique, soit placé dans des
 filtres personnalisés, soit dans des filtres du coeur comme le système de
-routing interne de CakePHP. Bien que cela ne soit pas necéssaire, cela
+routing interne de CakePHP. Bien que cela ne soit pas nécessaire, cela
 montre comment faire pour que votre code important se lance en premier au
 cas où vous auriez besoin de trim au plus gros possible à partir de
 certaines requêtes.

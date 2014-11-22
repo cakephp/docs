@@ -711,7 +711,7 @@ quelles options sont disponibles.
 
     Set::extract utilise la syntaxe basique XPath 2.0 pour retourner les 
     sous-ensembles de vos données à partir d'un fin ou d'un find all. Cette 
-    fonction vous permet de récupèrer vos données rapidement sans avoir 
+    fonction vous permet de récupérer vos données rapidement sans avoir 
     à boucler à travers des tableaux multi-dimensionnels ou de traverser 
     à travers les structures en arbre.
     

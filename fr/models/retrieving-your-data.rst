@@ -574,7 +574,7 @@ dans un tableau dans le second argument.
 
     class ArticlesController extends AppController {
 
-        // Va récupèrer le nombre d'articles publiés (en utilisant le find available défini ci-dessus)
+        // Va récupérer le nombre d'articles publiés (en utilisant le find available défini ci-dessus)
         public function index() {
             $count = $this->Article->find('count', array(
                 'type' => 'available'

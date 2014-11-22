@@ -37,7 +37,7 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
   fois que le compte à rebours atteint 0, l'id de session sera regénéré. C'est
   une bonne option à utiliser pour les applications qui necéssitent de changer
   fréquemment les ids de session pour des raisons de sécurité. Vous pouvez
-  contrôler le nombre de requêtes necéssaires pour regénérer la session en
+  contrôler le nombre de requêtes nécessaires pour regénérer la session en
   modifiant :php:attr:`CakeSession::$requestCountdown`.
 
 * ``Session.defaults`` - Vous permet d'utiliser les configurations de session
