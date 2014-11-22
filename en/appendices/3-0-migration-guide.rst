@@ -242,10 +242,10 @@ a reference to a local event manager.
 The Event subsystem has had a number of optional features removed. When
 dispatching events you can no longer use the following options:
 
-  * ``passParams`` This option is now enabled always implicitly. You
-    cannot turn it off.
-  * ``break`` This option has been removed. You must now stop events.
-  * ``breakOn`` This option has been removed. You must now stop events.
+* ``passParams`` This option is now enabled always implicitly. You
+  cannot turn it off.
+* ``break`` This option has been removed. You must now stop events.
+* ``breakOn`` This option has been removed. You must now stop events.
 
 Log
 ===
@@ -669,7 +669,7 @@ TreeBehavior
 ------------
 
 The TreeBheavior was completely re-written to use the new ORM. Although it works
-the same as in 2.x, a few methods were renamed or removed::
+the same as in 2.x, a few methods were renamed or removed:
 
 - ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
 - ``TreeBehavior::generateTreeList()`` is now a custom finder ``find('treeList')``.
@@ -825,14 +825,14 @@ Helper
 
 Helper has had the following methods removed:
 
-* Helper::setEntity()
-* Helper::entity()
-* Helper::model()
-* Helper::field()
-* Helper::value()
-* Helper::_name()
-* Helper::_initInputField()
-* Helper::_selectedArray()
+* ``Helper::setEntity()``
+* ``Helper::entity()``
+* ``Helper::model()``
+* ``Helper::field()``
+* ``Helper::value()``
+* ``Helper::_name()``
+* ``Helper::_initInputField()``
+* ``Helper::_selectedArray()``
 
 These methods were part used only by FormHelper, and part of the persistent
 field features that have proven to be problematic over time. FormHelper no
@@ -841,8 +841,8 @@ anymore.
 
 The following methods have been removed:
 
-* Helper::_parseAttributes()
-* Helper::_formatAttribute()
+* ``Helper::_parseAttributes()``
+* ``Helper::_formatAttribute()``
 
 These methods can now be found on the ``StringTemplate`` class that helpers
 frequently use. See the ``StringTemplateTrait`` for an easy way to integrate
@@ -1164,7 +1164,7 @@ Security
 - The ability to generate a blowfish hash has been removed. You can no longer use type
   "blowfish" for ``Security::hash()``. One should just use PHP's `password_hash()`
   and `password_verify()` to generate and verify blowfish hashes. The compability
-  library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_.
+  library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   which is installed along with CakePHP provides these functions for PHP < 5.5.
 
 Time
