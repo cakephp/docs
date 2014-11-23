@@ -335,6 +335,19 @@ The generated URL would be::
 
     http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
+Redirecting to Another Action on the Same Controller
+----------------------------------------------------
+
+.. php:method:: setAction($action, $args...)
+
+If you need to forward the current action to a different action on the *same*
+controller, you can use ``setAction()`` to update the request object, modify the
+view template that will be rendered and forward execution to the named action::
+
+    // From a delete action, you can render the updated
+    // list page.
+    $this->setAction('index');
+
 
 Loading Additional Models
 =========================
