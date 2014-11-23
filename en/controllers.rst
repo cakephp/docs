@@ -79,15 +79,8 @@ a controller are treated specially. In these cases, ``AppController`` property
 values are merged with child controller class arrays.  The values in the child
 class will always override those in ``AppController.``
 
-Remember to call ``AppController``'s callbacks within child controller callbacks
-for best results::
-
-    public function beforeFilter(Event $event) {
-        parent::beforeFilter($event);
-    }
-
-Request Parameters
-==================
+Request Flow
+============
 
 When a request is made to a CakePHP application, CakePHP's
 :php:class:`Cake\\Routing\\Router` and :php:class:`Cake\\Routing\\Dispatcher`
@@ -165,40 +158,6 @@ requests.
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
-
-.. _controller-life-cycle:
-
-Request Life-cycle Callbacks
-============================
-
-CakePHP controllers come fitted with callbacks you can use to
-insert logic around the request life-cycle:
-
-.. php:method:: beforeFilter(Event $event)
-
-    This function is executed before every action in the controller.
-    It's a handy place to check for an active session or inspect user
-    permissions.
-
-    .. note::
-
-        The beforeFilter() method will be called for missing actions.
-
-.. php:method:: beforeRender(Event $event)
-
-    Called after controller action logic, but before the view is rendered. This
-    callback is not used often, but may be needed if you are calling
-    :php:meth:`Cake\\Controller\\Controller::render()` manually before the end
-    of a given action.
-
-.. php:method:: afterFilter(Event $event)
-
-    Called after every controller action, and after rendering is
-    complete. This is the last controller method to run.
-
-In addition to controller life-cycle callbacks, :doc:`/controllers/components`
-also provide a similar set of callbacks.
-
 
 Interacting with Views
 ======================
@@ -376,26 +335,6 @@ The generated URL would be::
 
     http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
-Paginating a Model
-==================
-
-.. php:method:: paginate()
-
-This method is used for paginating results fetched by your models.
-You can specify page sizes, model find conditions and more. See the
-:doc:`pagination <controllers/components/pagination>` section for more details on
-how to use ``paginate()``
-
-The paginate attribute gives you an easy way to customize how ``paginate()``
-behaves::
-
-    class ArticlesController extends AppController {
-        public $paginate = [
-            'Articles' => [
-                'conditions' => ['published' => 1]
-            ]
-        ];
-    }
 
 Loading Additional Models
 =========================
@@ -429,6 +368,27 @@ instances::
 
     The built-in ORM's TableRegistry is connected by default as the 'Table'
     provider.
+
+Paginating a Model
+==================
+
+.. php:method:: paginate()
+
+This method is used for paginating results fetched by your models.
+You can specify page sizes, model find conditions and more. See the
+:doc:`pagination <controllers/components/pagination>` section for more details on
+how to use ``paginate()``
+
+The paginate attribute gives you an easy way to customize how ``paginate()``
+behaves::
+
+    class ArticlesController extends AppController {
+        public $paginate = [
+            'Articles' => [
+                'conditions' => ['published' => 1]
+            ]
+        ];
+    }
 
 Configuring Components to Load
 ==============================
@@ -467,6 +427,48 @@ additional MVC classes::
 Each of these variables are merged with their inherited values,
 therefore it is not necessary (for example) to redeclare the
 ``FormHelper``, or anything that is declared in your ``AppController``.
+
+.. _controller-life-cycle:
+
+Request Life-cycle Callbacks
+============================
+
+CakePHP controllers come fitted with callbacks you can use to
+insert logic around the request life-cycle:
+
+.. php:method:: beforeFilter(Event $event)
+
+    This function is executed before every action in the controller.
+    It's a handy place to check for an active session or inspect user
+    permissions.
+
+    .. note::
+
+        The beforeFilter() method will be called for missing actions.
+
+.. php:method:: beforeRender(Event $event)
+
+    Called after controller action logic, but before the view is rendered. This
+    callback is not used often, but may be needed if you are calling
+    :php:meth:`~Cake\\Controller\\Controller::render()` manually before the end
+    of a given action.
+
+.. php:method:: afterFilter(Event $event)
+
+    Called after every controller action, and after rendering is
+    complete. This is the last controller method to run.
+
+In addition to controller life-cycle callbacks, :doc:`/controllers/components`
+also provide a similar set of callbacks.
+
+Remember to call ``AppController``'s callbacks within child controller callbacks
+for best results::
+
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+    }
+
+
 
 More on Controllers
 ===================
