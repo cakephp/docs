@@ -42,7 +42,7 @@ de cette classe.
 Accéder aux Données de l'Entity
 ===============================
 
-Les entities fournissent quelques façons d'accéder aux données qu'ils
+Les entities fournissent quelques façons d'accéder aux données qu'elles
 contiennent. La plupart du temps, vous accéderez aux données dans une entity
 en utilisant la notation objet::
 
@@ -113,7 +113,7 @@ faisant cela, attention à ne pas introduire de boucle, puisque CakePHP
 n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
 mutateurs vous permettent de facilement convertir les propriétés puisqu'elles
 sont définies ou de créer des données calculées. Les mutateurs et accesseurs
-sont appliqués quand les propriétés sont lus en utilisant la notation objet
+sont appliqués quand les propriétés sont lues en utilisant la notation objet
 ou en utilisant get() et set().
 
 Créer des Propriétés Virtuelles
@@ -146,12 +146,12 @@ de la méthode::
 Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
 les finds.
 
-Vérifier si une Propriété A Eté Modifiée
+Vérifier si une Propriété à été Modifiée
 ========================================
 
 .. php:method:: dirty($field, $dirty = null)²
 
-Si vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
+Vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
 les propriétés ont été modifiées dans l'entity. Par exemple, vous pourriez
 vouloir valider uniquement les champs lorsqu'ils ont été modifiés::
 
@@ -159,7 +159,7 @@ vouloir valider uniquement les champs lorsqu'ils ont été modifiés::
     $article->dirty('title');
 
 Vous pouvez également marquer un champ comme ayant été modifié. C'est pratique
-lorsque vous ajoutez des donnée dans un tableau de propriétés::
+lorsque vous ajoutez des données dans un tableau de propriétés::
 
     // Ajoute un commentaire et marque le champ comme modifié.
     $article->comments[] = $newComment;
@@ -199,12 +199,12 @@ Mass Assignment
 Alors que la définition des propriétés en entites in bulk est simple et
 pratique, il peut créer des problèmes importants de sécurité.
 Assigner Bulk les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier une et toutes les colonnes. Par
-défaut CakePHP protecte contre l'assignement massif et vous fait faire une
+entity permet à l'utilisateur de modifier toutes les colonnes. Par
+défaut CakePHP protège contre l'assignement massif et vous fait faire une
 liste des champs qui sont assignables massivement.
 
-La propriété ``_accessible`` vous permet de fournir un map des propriétés et
-si oui ou non ils peuvent être assigné en masse. Les valeurs ``true`` et
+La propriété ``_accessible`` vous permet de fournir une map des champs et
+si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
 ``false`` indiquent si un champ peut ou ne peut pas être assigné massivement::
 
     namespace App\Model\Entity;
@@ -219,7 +219,7 @@ si oui ou non ils peuvent être assigné en masse. Les valeurs ``true`` et
     }
 
 En plus des champs réels, il existe un champ spécial ``*`` qui définit le
-bahavior fallback si un champ n'est pas nommé spécifiquement::
+behavior fallback si un champ n'est pas nommé spécifiquement::
 
     namespace App\Model\Entity;
 
@@ -249,20 +249,20 @@ méthode ``accessible``::
 
 .. note::
 
-    Modifier des champs accessibles agissent seulement sur l'instance de la
+    Modifier des champs accessibles agit seulement sur l'instance de la
     méthode sur laquelle il est appelé.
 
 
 Outrepasser le Champ Gardé
 --------------------------
 
-Il arrive des fois où vous voulez permettre un mass-assignment aux champs
+Il arrive parfois que vous vouliez permettre un mass-assignment aux champs
 gardés::
 
     $article->set($properties, ['guard' => false]);
 
 En définissant l'option ``guard`` à ``false``. vous pouvez ignorer la liste des
-champs accessible pour un appel unique de ``set()``.
+champs accessibles pour un appel unique de ``set()``.
 
 
 .. _lazy-load-associations:
@@ -271,9 +271,9 @@ Associations Lazy Loading
 =========================
 
 Alors que les associations chargées eager sont généralement la façon la plus
-efficace pour accéder à vos associations, il peut arriver des fois où vous
-avez besoin de charger lazily les données associées. Avant de voir comment
-faire avec des associations chargé en lazy, nous devrions discuter des
+efficace pour accéder à vos associations, il peut arriver que vous
+ayez besoin de charger lazily les données associées. Avant de voir comment
+faire avec des associations chargées en lazy, nous devrions discuter des
 différences entre le chargement des associations eager et lazy:
 
 Eager loading
@@ -283,7 +283,7 @@ Eager loading
     association HasMany, une requête unique est émise pour récupérer *toutes*
     les données associées pour l'ensemble courant d'objets.
 Lazy loading
-    Le chargement Lazy defers le chargement des données de l'association jusqu'à
+    Le chargement Lazy diffère le chargement des données de l'association jusqu'à
     ce que ce soit complètement nécessaire. Alors que ceci peut sauver du temps
     CPU car des données possiblement non utilisées ne sont pas hydratées dans
     les objets, cela peut résulter en plus de requêtes émises vers la base de
@@ -326,7 +326,7 @@ Vous pouvez vous retrouver dans un cas où vous avez besoin de la même logique
 dans plusieurs classes d'entity. Les traits de PHP sont parfaits pour cela.
 Vous pouvez mettre les traits de votre application dans ``src/Model/Entity``.
 Par convention, les traits dans CakePHP sont suffixés avec ``Trait`` pour
-qu'ils sont facilement discernables des classes ou des interfaces. Les traits
+qu'ils soient facilement discernables des classes ou des interfaces. Les traits
 sont souvent un bon allié des behaviors, vous permettant de fournir des
 fonctionnalités pour la table et les objets entity.
 
@@ -371,7 +371,7 @@ entities en tableaux ou en données JSON. CakePHP facilite cela::
     $json = json_encode($user);
 
 Lors de la conversion d'une entity en tableau/JSON, les listes de champ
-virtuel & caché sont utilisés. Les entities sont convertis aussi de façon
+virtuel & caché sont utilisées. Les entities sont converties aussi de façon
 récursive. Cela signifie que si vous chargez eager les entities avec leurs
 associations, CakePHP va correctement gérer la conversion des données associées
 dans le bon format.
@@ -406,7 +406,7 @@ Il arrive souvent que vous ne souhaitiez pas exporter certains champs dans
 des formats JSON ou tableau. Par exemple il n'est souvent pas sage de montrer
 les hashs de mot de passe ou les questions pour retrouver son compte. Lors
 de la définition d'une classe entity, définissez les propriétés qui doivent
-être cachés::
+être cachées::
 
     namespace App\Model\Entity;
 
@@ -428,5 +428,5 @@ Stocker des Types Complexes
 Les entities n'ont pas pour objectif de contenir de la logique pour sérialiser
 et desérialiser les données complexes venant de la base de données. Réferez-vous
 à la section :ref:`saving-complex-types` pour comprendre la façon dont votre
-application peut stocker des types de données complexe comme les tableaux et les
+application peut stocker des types de données complexes comme les tableaux et les
 objets.
