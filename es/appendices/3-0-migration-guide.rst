@@ -667,12 +667,6 @@ The following assertion methods have been deprecated and will be removed in the 
 Both method replacements also switched the argument order for a consistent assert method API
 with ``$expected`` as first argument.
 
-ControllerTestCase
-------------------
-
-- You can now simulate query strings, POST data and cookie values when using ``testAction()``.
-  The default method for ``testAction()`` is now ``GET``.
-
 View
 ====
 

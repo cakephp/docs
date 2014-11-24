@@ -785,12 +785,6 @@ le futur:
 Les deux méthodes de remplacement changent aussi l'ordre des arguments pour
 avoir une méthode d'API assert cohérente avec ``$expected`` en premier argument.
 
-ControllerTestCase
-------------------
-
-- Vous pouvez maintenant simuler un query string, une post data et les valeurs
-  de cookie lors de l'utilisation ``testAction()``. La méthode par défaut pour
-  ``testAction()`` est maintenant ``GET``.
 
 View
 ====

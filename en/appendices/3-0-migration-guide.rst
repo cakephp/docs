@@ -669,7 +669,7 @@ TreeBehavior
 ------------
 
 The TreeBheavior was completely re-written to use the new ORM. Although it works
-the same as in 2.x, a few methods were renamed or removed::
+the same as in 2.x, a few methods were renamed or removed:
 
 - ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
 - ``TreeBehavior::generateTreeList()`` is now a custom finder ``find('treeList')``.
@@ -710,11 +710,6 @@ The following assertion methods have been deprecated and will be removed in the 
 Both method replacements also switched the argument order for a consistent assert method API
 with ``$expected`` as first argument.
 
-ControllerTestCase
-------------------
-
-- You can now simulate query strings, POST data and cookie values when using ``testAction()``.
-  The default method for ``testAction()`` is now ``GET``.
 
 View
 ====
@@ -1086,7 +1081,7 @@ Testing
   offers many additional features over the old webrunner.
 - ``ControllerTestCase`` is deprecated and will be removed for CakePHP 3.0.0.
   You should use the new :ref:`integration-testing` features instead.
-- The fixtures should now be referenced by plural form::
+- Fixtures should now be referenced using their plural form::
 
     // Instead of
     $fixtures = ['app.article'];
