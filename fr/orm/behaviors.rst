@@ -4,7 +4,7 @@ Behaviors (Comportements)
 Les behaviors (comportements) sont une manière d'organiser et de réutiliser
 la logique de la couche Model. Conceptuellement, ils sont similaires aux traits.
 Cependant, les behaviors sont implémentés en classes séparées. Ceci leur permet
-de hook dans le cycle de vie des callbacks que les models emettent, tout en
+de s'insérer dans le cycle de vie des callbacks que les models émettent, tout en
 fournissant des fonctionnalités de type trait.
 
 Les Behaviors fournissent une façon pratique de packager un behavior qui est
@@ -66,7 +66,7 @@ pouvez mettre le code d'initialisation, si nécessaire::
     }
 
 Nous pouvons maintenant ajouter ce behavior à l'une de nos classes de table.
-Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque articles
+Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque les articles
 ont souvent des propriétés slug pour créer de belles URLs::
 
     namespace App\Model\Table;
@@ -80,9 +80,9 @@ ont souvent des propriétés slug pour créer de belles URLs::
         }
     }
 
-Notre nouveau behavior ne fait pas beaucoup plus en ce moment. Ensuite, nous
+Notre nouveau behavior ne fait pas beaucoup plus pour le moment. Ensuite, nous
 allons ajouter une méthode mixin et un event listener pour que lorque nous
-sauvegardons les entities, nous puissions automatiquement slugger un champ.
+sauvegarderons les entities, nous puissions automatiquement slugger un champ.
 
 Définir les Méthodes Mixin
 --------------------------
@@ -92,14 +92,14 @@ sur l'objet table sur laquelle elle est attachée. Si vous attachez deux
 behaviors qui fournissent les mêmes méthodes, une exception sera levée.
 Si un behavior fournit la même méthode en classe de table, la méthode du
 behavior ne sera pas appelable à partir de la table. Les méthodes mixin de
-Behavior vont recevoir exactement les mêmes arguments qui sont fournies à la
+Behavior vont recevoir exactement les mêmes arguments qui sont fournis à la
 table. Par exemple, si notre SluggableBehavior définit la méthode suivante::
 
     public function slug($value) {
         return Inflector::slug($value, $this->_config['replacement']);
     }
 
-It could be invoked using::
+Il pourrait être invoqué de la façon suivante::
 
     $slug = $articles->slug('My article name');
 
@@ -119,11 +119,11 @@ slug(), nous pourrions faire ce qui suit::
     ];
 
 Appliquer cette configuration rendra votre ``slug()`` non appelable, cependant
-elle va ajouter une méthode mixin ``superSlug()`` à la table. Notablement, si
-notre behavior implémentait d'autres méthodes public, ils **n'auraient** pas
+elle va ajouter une méthode mixin ``superSlug()`` à la table. Cependant, si
+notre behavior implémentait d'autres méthodes public, elles **n'auraient** pas
 été disponible en méthodes mixin avec la configuration ci-dessus.
 
-Depuis que les méthodes montrées sont décidées par configuration, vous pouvez
+Alors que les méthodes montrées sont définies par configuration, vous pouvez
 aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
 table. Par exemple::
 
@@ -170,7 +170,7 @@ behavior devrait maintenant ressembler à ceci::
 
     }
 
-Le code ci-dessus montre quelques fonctionnalités intéréssentes des behaviors:
+Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors:
 
 - Les Behaviors peuvent définir des méthodes callback en définissant des
   méthodes qui suivent les conventions :ref:`table-callbacks`.
