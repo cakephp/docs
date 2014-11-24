@@ -101,11 +101,11 @@ de données :
     );
 
     /* Puis insérons quelques posts pour les tests : */
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Le titre', 'Voici le contenu du post.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Encore un titre', 'Et le contenu du post qui suit.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
 Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
