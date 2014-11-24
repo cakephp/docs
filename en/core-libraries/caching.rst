@@ -143,7 +143,7 @@ Other than configuring caching adapters, there are a few other cache related
 configuration properties:
 
 enabled
-    When set to ``true``, persistent caching is disabled site-wide.
+    When set to ``false``, persistent caching is disabled site-wide.
     This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
     You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
     :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
