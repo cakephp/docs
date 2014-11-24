@@ -129,7 +129,7 @@ Our helper looks like::
 
     namespace App\View\Helper;
     use Cake\View\Helper;
-    
+
     class ProgressHelper extends Helper {
         public function bar($value) {
             $width = round($value / 100, 2) * 100;
@@ -1154,7 +1154,7 @@ Creating Tests for Plugins
 ==========================
 
 Tests for plugins are created in their own directory inside the
-plugins folder.::
+plugins folder. ::
 
     /app
         /Plugin

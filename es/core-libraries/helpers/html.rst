@@ -76,7 +76,7 @@ will be appended to. By default it will append to the ``css`` block.
 If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
 This method of CSS inclusion assumes that the CSS file specified
-resides inside the ``webroot/css`` directory if path doesn't start with a '/'.::
+resides inside the ``webroot/css`` directory if path doesn't start with a '/'. ::
 
     echo $this->Html->css('forms');
 
@@ -86,7 +86,7 @@ Will output:
 
     <link rel="stylesheet" href="/css/forms.css" />
 
-The first parameter can be an array to include multiple files.::
+The first parameter can be an array to include multiple files. ::
 
     echo $this->Html->css(['forms', 'tables', 'menu']);
 
@@ -117,7 +117,7 @@ Creating CSS Programatically
 
 Builds CSS style definitions based on the keys and values of the
 array passed to the method. Especially handy if your CSS file is
-dynamic.::
+dynamic. ::
 
     echo $this->Html->style([
         'background' => '#633',
@@ -245,7 +245,7 @@ Linking to Images
 
 
 Creates a formatted image tag. The path supplied should be relative
-to ``webroot/img/``.::
+to ``webroot/img/``. ::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -256,7 +256,7 @@ Will output:
     <img src="/img/cake_logo.png" alt="CakePHP" />
 
 To create an image link specify the link destination using the
-``url`` option in ``$attributes``.::
+``url`` option in ``$attributes``. ::
 
     echo $this->Html->image("recipes/6.jpg", [
         "alt" => "Brownies",
@@ -301,7 +301,7 @@ Creating Links
 
 General purpose method for creating HTML links. Use ``$options`` to
 specify attributes for the element and whether or not the
-``$title`` should be escaped.::
+``$title`` should be escaped. ::
 
     echo $this->Html->link(
         'Enter',
@@ -349,7 +349,7 @@ Will output:
         Delete
     </a>
 
-Query strings can also be created with ``link()``.::
+Query strings can also be created with ``link()``. ::
 
     echo $this->Html->link('View image', [
         'controller' => 'Images',
@@ -366,7 +366,7 @@ Will output:
 
 HTML special characters in ``$title`` will be converted to HTML
 entities. To disable this conversion, set the escape option to
-false in the ``$options`` array.::
+false in the ``$options`` array. ::
 
     echo $this->Html->link(
         $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
@@ -384,7 +384,7 @@ Will output:
 
 Setting ``escape`` to false will also disable escaping of attributes of the
 link. You can use the option ``escapeTitle`` to disable just
-escaping of title and not the attributes.::
+escaping of title and not the attributes. ::
 
     echo $this->Html->link(
         $this->Html->image('recipes/6.jpg', ['alt' => 'Brownies']),
@@ -497,7 +497,7 @@ Will output:
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
-The first parameter can be an array to include multiple files.::
+The first parameter can be an array to include multiple files. ::
 
     echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
 
@@ -602,7 +602,7 @@ Creating Table Headings
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
 Creates a row of table header cells to be placed inside of <table>
-tags.::
+tags. ::
 
     echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
 

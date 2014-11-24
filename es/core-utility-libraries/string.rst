@@ -43,7 +43,7 @@ Generating UUIDs
 .. php:staticmethod:: uuid()
 
 The UUID method is used to generate unique identifiers as per :rfc:`4122`. The
-UUID is a 128bit string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68.::
+UUID is a 128bit string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68. ::
 
     String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -278,7 +278,7 @@ Extracts an excerpt from ``$haystack`` surrounding the ``$needle``
 with a number of characters on each side determined by ``$radius``,
 and prefix/suffix with ``$ellipsis``. This method is especially handy for
 search results. The query string or keywords can be shown within
-the resulting document.::
+the resulting document. ::
 
     // Called as TextHelper
     echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
@@ -298,7 +298,7 @@ Converting an Array to Sentence Form
 .. php:method:: toList(array $list, $and='and')
 
 Creates a comma-separated list where the last two items are joined
-with 'and'.::
+with 'and'. ::
 
     // Called as TextHelper
     echo $this->Text->toList($colors);

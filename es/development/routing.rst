@@ -700,7 +700,7 @@ Passed Arguments
 
 Passed arguments are additional arguments or path segments that are
 used when making a request. They are often used to pass parameters
-to your controller methods.::
+to your controller methods. ::
 
     http://localhost/calendars/view/recent/mark
 

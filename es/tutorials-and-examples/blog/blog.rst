@@ -44,7 +44,7 @@ cada proyecto.
 
 Luego, simplemente escribe la siguiente línea en tu terminal desde tu directorio
 de instalación para instalar el esqueleto de la aplicación de CakePHP en el
-directorio [nombre_app].::
+directorio [nombre_app]. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [nombre_app]
 

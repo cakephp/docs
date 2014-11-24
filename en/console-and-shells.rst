@@ -585,7 +585,7 @@ handle that in your shell.
 .. php:method:: addArguments(array $args)
 
 If you have an array with multiple arguments you can use ``$parser->addArguments()``
-to add multiple arguments at once.::
+to add multiple arguments at once. ::
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
@@ -622,7 +622,7 @@ Options or flags are also frequently used in command line tools.
 ``ConsoleOptionParser`` supports creating options
 with both verbose and short aliases, supplying defaults
 and creating boolean switches. Options are created with either
-``$parser->addOption()`` or ``$parser->addOptions()``.::
+``$parser->addOption()`` or ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', [
         'short' => 'c',
@@ -634,7 +634,7 @@ The above would allow you to use either ``cake myshell --connection=other``,
 ``cake myshell --connection other``, or ``cake myshell -c other``
 when invoking the shell. You can also create boolean switches, these switches do not
 consume values, and their presence just enables them in the
-parsed parameters.::
+parsed parameters. ::
 
     $parser->addOption('no-commit', ['boolean' => true]);
 
@@ -658,7 +658,7 @@ define the behavior of the option:
 .. php:method:: addOptions(array $options)
 
 If you have an array with multiple options you can use ``$parser->addOptions()``
-to add multiple options at once.::
+to add multiple options at once. ::
 
     $parser->addOptions([
         'node' => ['short' => 'n', 'help' => 'The node to create'],

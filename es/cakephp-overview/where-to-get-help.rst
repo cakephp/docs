@@ -48,7 +48,7 @@ Las pruebas unitarias
 Si alguna vez sientes la información proporcionada en la API no es
 suficiente, echa un vistazo al código de las pruebas unitarias de
 CakePHP. Pueden servir como ejemplos prácticos para la utilización y
-los datos parametros de cada clase.::
+los datos parametros de cada clase. ::
 
     lib/Cake/Test/Case
 

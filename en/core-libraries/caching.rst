@@ -452,7 +452,7 @@ directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either ``src/Cache/Engine/MyCustomCacheEngine.php``
 as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
+dot syntax. ::
 
     Cache::config('custom', array(
         'className' => 'CachePack.MyCustomCache',

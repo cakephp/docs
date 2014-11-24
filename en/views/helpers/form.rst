@@ -675,7 +675,7 @@ Creating Password Inputs
 
 .. php:method:: password(string $fieldName, array $options)
 
-Creates a password field.::
+Creates a password field. ::
 
     echo $this->Form->password('password');
 
@@ -705,7 +705,7 @@ Creating Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Creates a textarea input field.::
+Creates a textarea input field. ::
 
     echo $this->Form->textarea('notes');
 
@@ -763,7 +763,7 @@ Creating Checkboxes
 
 Creates a checkbox form element. This method also generates an
 associated hidden form input to force the submission of data for
-the specified field.::
+the specified field. ::
 
     echo $this->Form->checkbox('done');
 
@@ -1254,7 +1254,7 @@ Options:
 .. php:method:: isFieldError(string $fieldName)
 
 Returns ``true`` if the supplied $fieldName has an active validation
-error.::
+error. ::
 
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
@@ -1283,7 +1283,7 @@ Creating Buttons and Submit Elements
         <div class="submit"><input value="Submit" type="submit"></div>
 
     You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text.::
+    caption parameter instead of caption text. ::
 
         echo $this->Form->submit('ok.png');
 

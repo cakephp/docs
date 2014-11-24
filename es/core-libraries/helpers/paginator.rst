@@ -216,7 +216,7 @@ Supported options are:
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params.::
+also ok to just call the method without any params. ::
 
     echo $this->Paginator->numbers();
 
@@ -486,7 +486,7 @@ Generating Pagination URLs
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
 By default returns a full pagination URL string for use in non-standard
-contexts (i.e. JavaScript).::
+contexts (i.e. JavaScript). ::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 

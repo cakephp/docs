@@ -117,7 +117,7 @@ Getting an Excerpt From a File
 
 Grab an excerpt from the file at $path (which is an absolute
 filepath), highlights line number $line with $context number of
-lines around it.::
+lines around it. ::
 
     pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 

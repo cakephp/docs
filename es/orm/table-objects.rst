@@ -633,7 +633,7 @@ want would be::
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CoursesMemberships. Take a look at the following models.::
+model CoursesMemberships. Take a look at the following models. ::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {

@@ -296,7 +296,7 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
 request, these values are used to re-identify the user and ensure they are
 valid user. As with authentication object's ``authenticate()`` method the
 ``getUser()`` method should return an array of user information on success or
-``false`` on failure.::
+``false`` on failure. ::
 
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');

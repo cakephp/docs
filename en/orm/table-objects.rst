@@ -626,7 +626,7 @@ want would be::
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CoursesMemberships. Take a look at the following models.::
+model CoursesMemberships. Take a look at the following models. ::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {
@@ -1337,7 +1337,7 @@ When an entity is saved a few things happen:
 
 .. warning::
 
-    If no changes are made to the entity when it is saved, the callbacks will 
+    If no changes are made to the entity when it is saved, the callbacks will
     not fire because no save is performed.
 
 The ``save()`` method will return the modified entity on success, and ``false``

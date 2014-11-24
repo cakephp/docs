@@ -36,7 +36,7 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the [app_name] directory.::
+in the [app_name] directory. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
@@ -186,7 +186,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. If you used Composer this too is taken
-care of for you during the install. Else you'd need to change the default salt value 
+care of for you during the install. Else you'd need to change the default salt value
 by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
 it's not easily guessed::
 
