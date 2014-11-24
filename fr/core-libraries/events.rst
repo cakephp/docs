@@ -34,7 +34,7 @@ qui détiennent l'information et la possibilité d'arrêter la propagation des
 peuvent déléguer cette tâche a d'autres objets et peuvent modifier
 l'état et l'événement lui-même pour le reste des callbacks.
 
-Le sous-système d'évènement est au coeur des callbacks de Model, de Behavior,
+Le sous-système d'évènement est au cœur des callbacks de Model, de Behavior,
 de Controller, de View et de Helper. Si vous avez déjà utilisé l'un
 d'eux, vous êtes quelque part déjà familiarisé avec les évènements dans
 CakePHP.
@@ -108,10 +108,10 @@ gestionnaire d'evenement global qui vous permettent d'écouter tout evenement
 déclenché dans une application. C'est utile quand attacher des écouteurs à une
 instance spécifique peut être lent ou difficile. Le gestionnaire global
 est une instance singleton de :php:class:`Cake\\Event\\EventManager` qui reçoit
-chaque évenement **avant** que les gestionnaires d'instance le reçoivent. En
-plus de recevoir les évenements en premier, le gestionnaire global maintient
+chaque évènement **avant** que les gestionnaires d'instance le reçoivent. En
+plus de recevoir les évènements en premier, le gestionnaire global maintient
 aussi une pile de priorité distincte pour les écouteurs. Une fois qu'un
-évenement a été dispatché au gestionnaire global, il sera dispatché au
+évènement a été dispatché au gestionnaire global, il sera dispatché au
 gestionnaire au niveau de l'instance. Vous pouvez accéder au gestionnaire global
 en utilisant une méthode statique::
 
@@ -147,7 +147,7 @@ dispatcher les evenements en utilisant
 instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
 d'un evenement::
 
-    // Créé un nouvel évenement et le dispatch.
+    // Créé un nouvel évènement et le dispatch.
     $event = new Event('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
@@ -156,15 +156,15 @@ d'un evenement::
 :php:class:`Cake\\Event\\Event` accepte 3 arguments dans son constructeur. Le
 premier est le nom de l'event, vous devriez essayer de garder ce nom aussi
 unique que possible, en le rendant lisible. Nous vous suggérons une convention
-comme suit: ``Layer.eventName`` pour les évenements généraux qui arrivent
+comme suit: ``Layer.eventName`` pour les évènements généraux qui arrivent
 au niveau couche (par ex ``Controller.startup``,
 ``View.beforeRender``) et ``Layer.Class.eventName`` pour les evenements
 qui arrivent dans des classes spécifiques sur une couche, par exemple
 ``Model.User.afterRegister`` ou ``Controller.Courses.invalidAccess``.
 
 Le deuxième argument est le ``subject``, ce qui signifie que l'objet associé
-à l'évenement, habituellement quand c'est la même classe attrapant les
-évenements sur lui-même, en utilisant ``$this`` sera le cas le plus commun.
+à l'évènement, habituellement quand c'est la même classe attrapant les
+évènements sur lui-même, en utilisant ``$this`` sera le cas le plus commun.
 D'ailleurs un :php:class:`Component` puisse attraper aussi les evenements de
 controller. La classe subject est importante parce que les écouteurs auront
 un accès immédiat aux propriétés de l'objet et pourront les inspecter ou
@@ -182,18 +182,18 @@ Enregistrer les Listeners
 =========================
 
 Les listeners (écouteurs) sont le meilleur moyen d'enregistrer les callbacks
-pour un évenement. Ceci est fait en intégrant l'interface
+pour un évènement. Ceci est fait en intégrant l'interface
 :php:class:`Cake\\Event\\EventListenerInterface` dans toute classe dans laquelle vous
 souhaitez enregistrer des callbacks. Les classes l'intégrant ont besoin de
 fournir la méthode ``implementedEvents()``. Cette méthode doit retourner un
-tableau associatif avec tous les noms d'évenement que la classe va gérer.
+tableau associatif avec tous les noms d'évènement que la classe va gérer.
 
 Pour continuer notre exemple précédent, imaginons que nous avons une classe
 UserStatistic qui s'occupe de calculer l'historique des achats d'un utilisateur
 et les compile dans des statistiques globales du site. C'est un bon cas
 pour utiliser une classe listener. Faire ceci vous permet aussi de vous
 concentrer sur la logique des statistiques à un endroit et de réagir aux
-évenements si nécessaire. Notre listener ``UserStatistics`` pourrait commencer
+évènements si nécessaire. Notre listener ``UserStatistics`` pourrait commencer
 comme ceci::
 
     use Cake\Event\EventListenerInterface;
@@ -211,7 +211,7 @@ comme ceci::
         }
     }
 
-    // Attache l'objet UserStatistic au gestionnaire globale d'évenement de la Commande
+    // Attache l'objet UserStatistic au gestionnaire globale d'évènement de la Commande
     $statistics = new UserStatistic();
     $this->Order->eventManager()->attach($statistics);
 
@@ -225,7 +225,7 @@ Enregistrer des Listeners Anonymes
 
 Alors que les objets listener d'evenement sont généralement une meilleure façon
 d'intégrer des listeners, vous pouvez aussi lier tout ``callable`` comme un
-listener d'évenement. Par exemple si nous souhaitons mettre toutes les
+listener d'évènement. Par exemple si nous souhaitons mettre toutes les
 commandes dans des fichiers de log, nous pourrions utiliser une fonction
 anonyme simple pour le faire::
 
@@ -257,7 +257,7 @@ Etablir des Priorités
 Dans certains cas vous voulez contrôler la commande que les listeners appelent.
 Par exemple, si nous retournons à notre exemple des statistiques d'utilisateur.
 Il serait idéal le listenet était appelé à la fin de la pile. En l'appelant
-à la fin de la pile, nous pouvons assurer que l'évenement n'a pas été annulé
+à la fin de la pile, nous pouvons assurer que l'évènement n'a pas été annulé
 et qu'aucun autre listener ne lève d'exceptions. Nous pouvons aussi obtenir
 l'état final des objets dans le cas où d'autres listeners ont modifiés le
 sujet ou l'objet event.
@@ -272,7 +272,7 @@ après les autres, utiliser un nombre au-dessus de ``10`` le fera.
 Si deux callbacks ont la même valeur de priorité, ils seront executés selon
 l'ordre dans lequel ils ont été attachés. Vous définissez les priorités en
 utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
-la fonction ``implementedEvents`` pour les listeners d'évenement::
+la fonction ``implementedEvents`` pour les listeners d'évènement::
 
     // Définir la priorité pour un callback
     $callback = array($this, 'doSomething');
@@ -303,7 +303,7 @@ lire pour savoir quelle fonction dans la classe il doit appeler.
 Obtenir des Données d'Event en Paramètres de Fonction
 -----------------------------------------------------
 
-Quand les évenements ont des données fournies dans leur constructeur, les
+Quand les évènements ont des données fournies dans leur constructeur, les
 données fournies sont converties en arguments pour les listeners. Un exemple
 de la couche View est le callback afterRender::
 
@@ -329,13 +329,13 @@ determiner l'ordre des arguments de la fonction.
 Stopper les Events
 ------------------
 
-Un peu comme les events DOM, vous voulez peut-être stopper un évenement pour
+Un peu comme les events DOM, vous voulez peut-être stopper un évènement pour
 éviter aux autres listeners d'être notifiés. Vous pouvez voir ceci pendant
 les callbacks de mode(par ex beforeSave) dans lesquels il est possible de
 stopper l'opération de sauvegarde si le code détecte qu'il ne peut pas
 continuer.
 
-Afin de stopper les évenements, vous pouvez soit retourner ``false`` dans vos
+Afin de stopper les évènements, vous pouvez soit retourner ``false`` dans vos
 callbacks ou appeler la méthode ``stopPropagation`` sur l'objet event::
 
     public function doSomething($event) {
@@ -348,13 +348,13 @@ callbacks ou appeler la méthode ``stopPropagation`` sur l'objet event::
         $event->stopPropagation();
     }
 
-Stopper un évenement va éviter à tout callback supplémentaire d'être appelé.
-En plus, le code attrapant l'évenement peut se comporter différemment selon
-que l'évenement est stoppé ou non. Généralement il n'est pas sensé de stopper
-'après' les évenements, mais stopper 'avant' les évenements est souvent utilisé
+Stopper un évènement va éviter à tout callback supplémentaire d'être appelé.
+En plus, le code attrapant l'évènement peut se comporter différemment selon
+que l'évènement est stoppé ou non. Généralement il n'est pas sensé de stopper
+'après' les évènements, mais stopper 'avant' les évènements est souvent utilisé
 pour empêcher toutes les opérations de se passer.
 
-Pour vérifier si un évenement a été stoppé, vous appelez la méthode
+Pour vérifier si un évènement a été stoppé, vous appelez la méthode
 ``isStopped()`` dans l'objet event::
 
     public function place($order) {
@@ -369,7 +369,7 @@ Pour vérifier si un évenement a été stoppé, vous appelez la méthode
         // ...
     }
 
-Dans l'exemple précédent, l'ordre ne serait pas sauvegardé si l'évenement est
+Dans l'exemple précédent, l'ordre ne serait pas sauvegardé si l'évènement est
 stoppé pendant le processus ``beforePlace``.
 
 Obtenir des Résultats d'Evenement
@@ -377,7 +377,7 @@ Obtenir des Résultats d'Evenement
 
 A chaque fois qu'un callback retourne une valeur, il sera stocké dans la
 propriété ``$result`` de l'objet event. C'est utile quand vous voulez
-permettre aux callbacks de modifier l'execution de l'évenement. Prenons
+permettre aux callbacks de modifier l'execution de l'évènement. Prenons
 à nouveau notre exemple ``beforePlace`` et laissons les callbacks modifier
 la donnée $order.
 
@@ -421,7 +421,7 @@ Retirer les Callbacks et les Listeners
 --------------------------------------
 
 Si pour certaines raisons, vous voulez retirer tout callback d'un gestionnaire
-d'évenement, appelez seulement la méthode
+d'évènement, appelez seulement la méthode
 :php:meth:`Cake\\Event\\EventManager::detach()` en utilisant des arguments
 les deux premiers paramètres que vous utilisiez pour l'attacher::
 
@@ -442,7 +442,7 @@ les deux premiers paramètres que vous utilisiez pour l'attacher::
     $listener = new MyEventLister();
     $this->eventManager()->attach($listener);
 
-    // Détacher une clé d'évenement unique d'un listener
+    // Détacher une clé d'évènement unique d'un listener
     $this->eventManager()->detach($listener, 'My.event');
 
     // Détacher tous les callbacks intégrés par un listener
@@ -458,7 +458,7 @@ autres, néanmoins l'utilisation des événements n'est pas la solution
 de l'application et rendre les plugins extensibles.
 
 Gardez à l'esprit que beaucoup de pouvoir implique beaucoup de responsabilité.
-Utiliser trop d'évenements peut rendre le debug plus difficile et nécessiter des
+Utiliser trop d'évènements peut rendre le debug plus difficile et nécessiter des
 tests d'intégration supplémentaires.
 
 Lecture Supplémentaire

@@ -135,7 +135,7 @@ Récupérer vos données
 =====================
 
 La plupart des applications web utilisent beaucoup les requêtes de type
-``SELECT``. CakePHP permet de construire ces requêtes en un clin d'oeil. La
+``SELECT``. CakePHP permet de construire ces requêtes en un clin d'œil. La
 ::method ``select()`` vous permet de ne récupérer que les champs qui vous sont
 nécessaire::
 

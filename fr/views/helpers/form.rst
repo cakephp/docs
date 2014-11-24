@@ -127,7 +127,7 @@ En spécifiant 'file' cela changera la méthode de soumission à 'post', et
 ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
 Vous devez l'utiliser si vous avez des demandes de fichiers dans
 votre formulaire. L'absence de cet attribut enctype empêchera le
-fonctionnement de l'envoi de fichiers.::
+fonctionnement de l'envoi de fichiers. ::
 
     echo $this->Form->create($article, ['type' => 'file']);
 
@@ -466,7 +466,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         'error' => ['tooShort' => __('This is not long enough')]
     ]);
 
-  Comme vu précedemment, vous pouvez définir le message d'erreur pour chaque
+  Comme vu précédemment, vous pouvez définir le message d'erreur pour chaque
   règle de validation dans vos models. De plus, vous pouvez fournir des
   messages i18n pour vos formulaires.
 
@@ -545,7 +545,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
 * ``$options['empty']`` Est défini à ``true``, pour forcer l'input à rester vide.
 
-  Quand passé à une list select (liste de selection), ceci créera une
+  Quand passé à une list select (liste de sélection), ceci créera une
   option vide avec une valeur vide dans la liste déroulante. Si vous
   voulez une valeur vide avec un texte affiché ou juste une option
   vide, passer une chaîne pour vider::
@@ -709,7 +709,7 @@ Créer des Inputs Password
 
 .. php:method:: password(string $fieldName, array $options)
 
-Création d'un champ password.::
+Création d'un champ password. ::
 
     echo $this->Form->password('password');
 
@@ -739,7 +739,7 @@ Créer des Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Crée un champ input textarea (zone de texte).::
+Crée un champ input textarea (zone de texte). ::
 
     echo $this->Form->textarea('notes');
 
@@ -796,7 +796,7 @@ Créer des Checkboxes
 
 Crée un élément de formulaire checkbox. Cette méthode génère également un
 input de formulaire caché pour forcer la soumission de données pour le champ
-spécifié.::
+spécifié. ::
 
     echo $this->Form->checkbox('done');
 
@@ -1605,7 +1605,7 @@ Ajouter des Widgets Personnalisés
 
 CakePHP permet d'ajouter facilement des widgets personnalisés dans votre
 application, afin de les utiliser comme n'importe quel input. Tous les types
-d'input que contient le coeur de cake sont implémentés comme des widgets. Ainsi
+d'input que contient le cœur de cake sont implémentés comme des widgets. Ainsi
 vous pouvez facilement remplacer n'importe quel widget de base par votre propre
 implémentation.
 

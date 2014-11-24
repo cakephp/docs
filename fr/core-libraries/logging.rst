@@ -111,7 +111,7 @@ en appelant :php:meth:`Cake\\Log\\Log::config()`. La configuration de notre
 Lorsque vous configurez le flux d'un log le paramètre de ``className`` est
 utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
-un tableau.::
+un tableau. ::
 
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;

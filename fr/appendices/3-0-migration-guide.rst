@@ -3,7 +3,7 @@
 
 Cette page résume les changements de CakePHP 2.x qui aidera à la migration d'un
 projet vers la version 3.0, ainsi qu'une référence pour être à jour des
-changements faits dans le coeur depuis la branche CakePHP 2.x. Assurez-vous de
+changements faits dans le cœur depuis la branche CakePHP 2.x. Assurez-vous de
 bien lire les autres pages de ce guide pour toutes les nouvelles
 fonctionnalités et les changements de l'API.
 
@@ -39,7 +39,7 @@ votre application.
 Namespaces (Espaces de Noms)
 ============================
 
-Toutes les classes du coeur de CakePHP sont maintenant dans des namespaces et
+Toutes les classes du cœur de CakePHP sont maintenant dans des namespaces et
 suivent les spécifications du chargement PSR-4. Par exemple
 ``src/Cache/Cache.php`` est dans le namespace ``Cake\Cache\Cache``. Les constantes
 globales et les méthodes de helper comme :php:meth:`__()` et :php:meth:`debug()`
@@ -103,7 +103,7 @@ Debugging
 =========
 
 * ``Configure::write('debug', $bool)`` n'accepte plus 0/1/2. Un simple
-  boléen est utilisé à la place pour changer entre le mode debug on et off.
+  booléen est utilisé à la place pour changer entre le mode debug on et off.
 
 Paramétrage/Configuration des Objets
 ====================================
@@ -125,14 +125,14 @@ Cache
   l'option de configuration ``Cache.disable``.
 * :php:meth:`Cake\\Cache\\Cache::enable()` a été ajoutée.
 * :php:meth:`Cake\\Cache\\Cache::disable()` a été ajoutée.
-* Les configurations de Cache sont maintenant immutable. Si vous avez besoin de
+* Les configurations de Cache sont maintenant immutables. Si vous avez besoin de
   changer la configuration, vous devez d'abord retirer la configuration et la
-  recréer. Cela évite les problèmes de synchronization avec les options de
+  recréer. Cela évite les problèmes de synchronisation avec les options de
   configuration.
 * ``Cache::set()`` a été retirée. Il est recommandé que vous créiez des
   configurations de cache multiples pour remplacer les réglages de configuration
   d'exécution, ce qui était auparavant possible avec ``Cache::set()``.
-* Toutes les sous-classes ``CacheEngine`` integrent maintenant une méthode
+* Toutes les sous-classes ``CacheEngine`` intègrent maintenant une méthode
   ``config()``.
 * :php:meth:`Cake\\Cache\\Cache::readMany()`,
   :php:meth:`Cake\\Cache\\Cache::deleteMany()`, et
@@ -141,7 +141,7 @@ Cache
 Toutes les méthodes de :php:class:`Cake\\Cache\\Cache\\CacheEngine` sont
 maintenant responsables de la gestion du préfix de clé configuré.
 :php:meth:`Cake\\Cache\\CacheEngine::write()` ne permet plus de définir la
-durée d'écriture - la durée est prise par la configuration d'éxecution du
+durée d'écriture - la durée est prise par la configuration d'exécution du
 moteur de cache. Appeler une méthode de cache avec une clé vide va maintenant
 lancer :php:class:`InvalidArgumentException`, au lieu de retourner ``false``.
 
@@ -190,7 +190,7 @@ Object
 
 La classe ``Object`` a été retirée. Elle contenait au début un tas de méthodes
 qui étaient utilisées dans plusieurs endroits à travers le framework. Les
-méthodes les plus utiles qui était utilisées ont été extraites dans des traits.
+méthodes les plus utiles qui étaient utilisées ont été extraites dans des traits.
 Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la méthode
 ``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
 ``requestAction()``.
@@ -198,7 +198,7 @@ Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la métho
 Console
 =======
 
-L'executable ``cake`` a été déplacée du répertoire ``app/Console`` vers le
+L'exécutable ``cake`` a été déplacée du répertoire ``app/Console`` vers le
 répertoire ``bin`` dans le squelette de l'application. Vous pouvez maintenant
 lancer la console de CakePHP avec ``bin/cake``.
 
@@ -209,7 +209,7 @@ Cette classe a été renommée en :php:class:`Cake\\Console\\TaskRegistry`.
 Regardez la section sur :doc:`/core-libraries/registry-objects` pour plus
 d'informations sur les fonctionnalités fournies par la nouvelle classe. Vous
 pouvez utiliser ``cake upgrade rename_collections`` pour vous aider à mettre
-à niveau votre code. Les Tasks n'ont plus accès aux callbacks, puiqu'il
+à niveau votre code. Les Tasks n'ont plus accès aux callbacks, puisqu'il
 n'y avait jamais de callbacks à utiliser.
 
 Shell
@@ -222,7 +222,7 @@ Shell
 De plus, toutes les méthodes du shell vont être transformées en camel case lors
 de leur appel. Par exemple, si vous avez une méthode ``hello_world()`` dans un
 shell et que vous l'appelez avec ``bin/cake my_shell hello_world``, vous devez
-renommer la méthode en ``helloWorld``. Il n'y a pas de changements necessaires
+renommer la méthode en ``helloWorld``. Il n'y a pas de changements nécessaires
 dans la façon d'appeler les commandes.
 
 
@@ -251,7 +251,7 @@ BakeShell / TemplateTask
 
 - Les templates de bake ont été déplacés dans ``src/Template/Bake``. Aussi,
   l'option ``theme``, utilisée pour choisir un template pour bake, a été
-  renommé en ``template``.
+  renommée en ``template``.
 
 Event
 =====
@@ -259,25 +259,25 @@ Event
 La méthode ``getEventManager()`` a été retirée pour tous les objets qui
 l'avaient. Une méthode ``eventManager()`` est maintenant fournie par
 ``EventManagerTrait``. ``EventManagerTrait`` contient la logique pour instancier
-et garder une référence d'un gestionnaire d'évenement local.
+et garder une référence d'un gestionnaire d'évènement local.
 
 Le sous-système d'Event s'est vu retiré un certain nombre de fonctionnalités
-Lors du dispatching des évenements, vous ne pouvez plus utiliser les options
+Lors du dispatching des évènements, vous ne pouvez plus utiliser les options
 suivantes:
 
-  * ``passParams`` Cette option est maintenant toujours activée implicitement.
-    Vous ne pouvez pas l'arrêter.
-  * ``break`` Cette option a été retirée. Vous devez maintenant arrêter les
-    events.
-  * ``breakOn`` Cette option a été retirée. Vous devez maintenant arrêter les
-    events.
+* ``passParams`` Cette option est maintenant toujours activée implicitement.
+  Vous ne pouvez pas l'arrêter.
+* ``break`` Cette option a été retirée. Vous devez maintenant arrêter les
+  events.
+* ``breakOn`` Cette option a été retirée. Vous devez maintenant arrêter les
+  events.
 
 Log
 ===
 
-* Les configurations des logs sont maintenant immutable. Si vous devez changer
+* Les configurations des logs sont maintenant immutables. Si vous devez changer
   la configuration, vous devez d'abord supprimer la configuration et la récréer.
-  Cela évite les problèmes de synchronization avec les options de configuration.
+  Cela évite les problèmes de synchronisation avec les options de configuration.
 * Les moteurs de Log se chargent maintenant automatiquement à la première
   écriture dans les logs.
 * :php:meth:`Cake\\Log\\Log::engine()` a été ajoutée.
@@ -290,14 +290,14 @@ Log
 * Vous ne pouvez plus spécifier de niveaux de log personnalisé. Vous devez
   utiliser les niveaux de log définis par défaut. Pour créer des fichiers de
   log personnalisés ou spécifiques à la gestion de différentes sections de
-  votre application, vous devez utiliser les logging scopes . L'utilisation
+  votre application, vous devez utiliser les logging scopes. L'utilisation
   d'un niveau de log non-standard lancera maintenant une exception.
 * :php:trait:`Cake\\Log\\LogTrait` a été ajoutée. Vous pouvez utiliser ce trait
   dans vos classes pour ajouter la méthode ``log()``.
 * Le logging scope passé à :php:meth:`Cake\\Log\\Log::write()` est maintenant
   transmis à la méthode ``write()`` du moteur de log afin de fournir un meilleur
   contexte aux moteurs.
-* Les moteurs de Log sont maintenant nécessaire pour intégrer
+* Les moteurs de Log sont maintenant nécessaires pour intégrer
   ``Psr\Log\LogInterface`` plutôt que la propre ``LogInterface`` de CakePHP. En
   général, si vous étendez :php:class:`Cake\\Log\\Engine\\BaseEngine`
   vous devez juste renommer la méthode ``write()`` en ``log()``.
@@ -355,7 +355,7 @@ Router
 * Les classes de route sont responsables pour *toutes* les générations d'URL
   incluant les paramètres de query string. Cela rend les routes bien plus
   puissantes et flexibles.
-* Les paramètres persistents ont été retirés. Ils ont été remplacés par
+* Les paramètres persistants ont été retirés. Ils ont été remplacés par
   :php:meth:`Cake\\Routing\\Router::urlFilter()` qui est une meilleur façon
   plus flexible pour changer les urls étant routées inversement.
 * La signature de :php:meth:`Cake\\Routing\\Router::parseExtensions()` a changé
@@ -371,7 +371,7 @@ Router
   :php:meth:`Cake\\Routing\\Router::parseExtensions()` à la place.
 * ``Router::resourceMap()`` a été retirée.
 * L'option ``[method]`` a été renommée en ``_method``.
-* La capacité pour faire correspondre les en-tête arbitraires avec les
+* La capacité pour faire correspondre les en-têtes arbitraires avec les
   paramètres de style ``[]`` a été retirée. Si vous avez besoin de parser/faire
   correspondre sur les conditions arbitraires, pensez à utiliser les classes de
   route personnalisées.
@@ -428,15 +428,15 @@ Request
 * :php:meth:`Cake\\Network\\Request::scheme()` a été ajoutée.
 * :php:meth:`Cake\\Network\\Request::cookie()` a été ajoutée.
 * :php:attr:`Cake\\Network\\Request::$trustProxy` a été ajoutée. Cela rend
-   la chose plus facile pour mettre les applications CakePHP derrière les
-   load balancers.
+  la chose plus facile pour mettre les applications CakePHP derrière les
+  load balancers.
 * :php:attr:`Cake\\Network\\Request::$data` n'est plus fusionnée avec la clé
   de données préfixés, puisque ce prefix a été retiré.
 * :php:meth:`Cake\\Network\\Request::env()` a été ajoutée.
 * :php:meth:`Cake\\Network\\Request::acceptLanguage()` a été changée d'une
   méthode static en non static.
-* Le detecteur de Request pour "mobile" a été retiré du coeur. A la place
-  le template de app ajoute des detecteurs pour "mobile" et "tablet" en
+* Le détecteur de Request pour "mobile" a été retiré du cœur. A la place
+  le template de app ajoute des détecteurs pour "mobile" et "tablet" en
   utilisant la lib ``MobileDetect``.
 * La méthode ``onlyAllow()`` a été renommée en ``allowMethod()`` et n'accepte
   plus "var args". Tous les noms de méthode doivent être passés en premier
@@ -530,7 +530,7 @@ Controller
   liées.
 - ``Controller::loadModel()`` charge maintenant les objets table.
 - La propriété ``Controller::$scaffold`` a été retirée. Le scaffolding dynamique
-  a été retiré du coeur de CakePHP, et sera fourni en tant que plugin autonome.
+  a été retiré du cœur de CakePHP, et sera fourni en tant que plugin autonome.
 - La propriété ``Controller::$ext`` a été retirée. Vous devez maintenant étendre
   et surcharger la propriété ``View::$_ext`` si vous voulez utiliser une
   extension de fichier de view autre que celle par défaut.
@@ -553,7 +553,7 @@ Controller
 Scaffold retiré
 ---------------
 
-Le scaffolding dynamique dans CakePHP a été retiré du coeur de CakePHP. Il
+Le scaffolding dynamique dans CakePHP a été retiré du cœur de CakePHP. Il
 était peu fréquemment utilisé, et n'avait jamais pour intention d'être
 utilisé en mode production. Il sera remplacé par un plugin autonome que les
 gens désireux d'avoir cette fonctionnalité pourront utiliser.
@@ -581,7 +581,7 @@ Component
 * La méthode ``Component::initialize()`` n'est plus un listener d'event.
   A la place, c'est un hook post-constructeur comme ``Table::initialize()`` et
   ``Controller::initialize()``. La nouvelle méthode
-  ``Component::beforeFilter()`` est liée au même évenement que
+  ``Component::beforeFilter()`` est liée au même évènement que
   ``Component::initialize()``. La méthode initialize devrait avoir la signature
   suivante ``initialize(array $config)``.
 
@@ -615,13 +615,13 @@ AuthComponent
   ``'passwordHasher' => 'Weak'`` dans votre configuration d'authenticator.
 - Un nouveau ``FallbackPasswordHasher`` a été ajouté pour aider les utilisateurs
   à migrer des vieux mots de passe d'un algorithm à un autre. Consultez la
-  documentation de AuthComponent pour plus d'informations.
+  documentation d'AuthComponent pour plus d'informations.
 - La classe ``BlowfishAuthenticate`` a été retirée. Utilisez juste
   ``FormAuthenticate``.
 - La classe ``BlowfishPasswordHasher`` a été retirée. Utilisez
   ``DefaultPasswordHasher`` à la place.
 - La méthode ``loggedIn()`` a été retirée. Utilisez ``user()`` à la place.
-- Les options de configuration ne sont plus définie en propriété public.
+- Les options de configuration ne sont plus définies en propriété public.
 - Les méthodes ``allow()`` et ``deny()`` n'acceptent plus "var args". Tous les
   noms de méthode ont besoin d'être passés en premier argument, soit en chaîne,
   soit en tableau de chaînes.
@@ -640,7 +640,7 @@ AuthComponent
   de callback pour ces événements en retournant un tableau de mapping depuis la
   méthode ``implementedEvents()`` de votre classe d'authentification.
 
-Les classes liées à ACL ont été déplacées dans un plugin séparée. Les hashers
+Les classes liées à ACL ont été déplacées dans un plugin séparé. Les hashers
 de mot de passe, l'Authentification et les fournisseurs d'Authorisation ont
 été déplacés vers le namespace ``\Cake\Auth``. Vous devez aussi déplacer vos
 providers et les hashers dans le namespace ``App\Auth``.
@@ -679,7 +679,7 @@ SecurityComponent
   publiques.
 - Les méthodes ``requireAuth()`` et ``requireSecure()`` n'acceptent plus
   "var args". Tous les noms de méthode ont besoin d'être passés en premier
-  argument, soi en chaîne, soit en tableau de chaînes.
+  argument, soit en chaîne, soit en tableau de chaînes.
 
 SessionComponent
 ----------------
@@ -690,7 +690,7 @@ SessionComponent
 Error
 -----
 
-Les ExceptionRenderers personnalisées deoivent maintenant soit retourner un objet
+Les ExceptionRenderers personnalisées doivent maintenant soit retourner un objet
 ``Cake\\Network\\Response``, soit une chaîne de caractère lors du rendu des
 erreurs. Cela signifie que toutes les méthodes gérant des exceptions spécifiques
 doivent retourner une réponse ou une valeur.
@@ -699,8 +699,8 @@ Model
 =====
 
 La couche Model de 2.x a été entièrement réécrite et remplacée. Vous devriez
-regarder :doc:`/appendices/orm-migration` pour plus d'informations sur la façon
-d'utiliser le nouvel ORM.
+regarder le :doc:`Guide de Migration du Nouvel ORM </appendices/orm-migration>`
+pour plus d'informations sur la façon d'utiliser le nouvel ORM.
 
 - La classe ``Model`` a été retirée.
 - La classe ``BehaviorCollection`` a été retirée.
@@ -740,7 +740,7 @@ TreeBehavior
 
 TreeBheavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
 fonctionne de la même manière que dans 2.x, certaines méthodes ont été renommées
-ou retirées::
+ou retirées:
 
 - ``TreeBehavior::children()`` est maintenant un finder personnalisé ``find('children')``.
 - ``TreeBehavior::generateTreeList()`` est maintenant un finder personnalisé ``find('treeList')``.
@@ -776,7 +776,7 @@ Notez que l'ordre des paramètres de certaines méthodes a été changé, par ex
 ``assertEqual($is, $expected)`` devra maintenant être
 ``assertEquals($expected, $is)``.
 
-Les méthodes d'assertion suivantes onté été dépréciées et seront retirées dans
+Les méthodes d'assertion suivantes ont été dépréciées et seront retirées dans
 le futur:
 
 - ``assertWithinMargin()`` en faveur de ``assertWithinRange()``
@@ -795,7 +795,7 @@ Les Themes sont maintenant purement des Plugins
 Avoir des themes et des plugins comme façon de créer des composants
 d'applications modulaires nous semblait limité et cela apportait de la
 confusion. Dans CakePHP 3.0, les themes ne se trouvent plus **dans**
-l'application. A la place, ce sont des plugins autonomes. Cela résoud certains
+l'application. A la place, ce sont des plugins autonomes. Cela résout certains
 problèmes liés aux themes:
 
 - Vous ne pouviez pas mettre les themes *dans* les plugins.
@@ -815,7 +815,7 @@ classes php (par ex les classes Helpers et View).
 Les dossiers de View suivants ont été renommés pour éviter les collisions
 avec les noms de controller:
 
-- ``Layouts`` est mantenant ``Layout``
+- ``Layouts`` est maintenant ``Layout``
 - ``Elements`` est maintenant ``Element``
 - ``Scaffolds`` est maintenant ``Scaffold``
 - ``Errors`` est maintenant ``Error``
@@ -845,7 +845,7 @@ View Class
   ``action`` et ``params`` ont été retirées. Vous pouvez accéder à toutes ces
   propriétés dans ``$this->request`` à la place.
 - ``View::start()`` n'ajoute plus à un block existant. A la place, il va
-  écraser le contenu du block quand when end est appelé. Si vous avez besoin de
+  écraser le contenu du block quand end est appelé. Si vous avez besoin de
   combiner les contenus de block, vous devrez récupérer le contenu du block lors
   de l'appel de start une deuxième fois ou utiliser le mode de capture
   ``append()``.
@@ -880,7 +880,7 @@ View\\Helper
 ============
 
 - La propriété ``$settings`` est maintenant appelée ``$_config`` et peut être
-  accesible via la méthode ``config()``.
+  accessible via la méthode ``config()``.
 - Les options de configuration ne sont plus définies en propriété public.
 - ``Helper::clean()`` a été retirée. Il n'était jamais assez
   robuste pour complètement empêcher XSS. A la place, vous devez echapper
@@ -909,24 +909,24 @@ Helper
 
 Les méthodes suivantes de Helper ont été retirées:
 
-* Helper::setEntity()
-* Helper::entity()
-* Helper::model()
-* Helper::field()
-* Helper::value()
-* Helper::_name()
-* Helper::_initInputField()
-* Helper::_selectedArray()
+* ``Helper::setEntity()``
+* ``Helper::entity()``
+* ``Helper::model()``
+* ``Helper::field()``
+* ``Helper::value()``
+* ``Helper::_name()``
+* ``Helper::_initInputField()``
+* ``Helper::_selectedArray()``
 
 Ces méthodes étaient des parties uniquement utilisées par FormHelper, et
-faisaient parti des continuelles fonctionnalités des champs qui devenaient
+faisaient partie des continuelles fonctionnalités des champs qui devenaient
 problématiques au fil du temps. FormHelper ne s'appuie plus sur ces méthodes
 et leur complexité n'est plus nécessaire.
 
 Les méthodes suivantes ont été retirées:
 
-* Helper::_parseAttributes()
-* Helper::_formatAttribute()
+* ``Helper::_parseAttributes()``
+* ``Helper::_formatAttribute()``
 
 Ces méthodes se trouvent dans la classe ``StringTemplate`` que les helpers
 utilisent fréquemment. Regardez ``StringTemplateTrait`` pour intégrer facilement
@@ -955,7 +955,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - Le prefix ``data[`` a été retiré de tous les inputs générés. Le prefix n'a
   plus de réelle utilité.
 - Les diverses méthodes d'input autonomes comme ``text()``, ``select()`` et
-  autres ne genèrent plus d'attributs id.
+  autres ne génèrent plus d'attributs id.
 - L'option ``inputDefaults`` a été retirée de ``create()``.
 - Les options ``default`` et ``onsubmit`` de ``create()`` ont été retirées. A la
   place, vous devez utiliser le binding d'event javascript ou définir tout le
@@ -1021,7 +1021,7 @@ HtmlHelper
 - Le paramètre ``inline`` a été retiré des méthodes meta(), css(), script(),
   scriptBlock(). Vous devrez utiliser l'option ``block`` à la place. Définir
   ``block => true`` va émuler le comportement précédent.
-- ``HtmlHelper::meta()`` necessite maintenant que ``$type`` soit une chaîne de
+- ``HtmlHelper::meta()`` nécessite maintenant que ``$type`` soit une chaîne de
   caractère. Les options supplémentaires peuvent en outre être passées dans
   ``$options``.
 - ``HtmlHelper::nestedList()`` nécessite maintenant que ``$options`` soit un
@@ -1100,13 +1100,13 @@ CacheHelper Retiré
 
 CacheHelper a été retiré. La fonctionnalité de cache  quelle fournissait n'était
 pas standard, limitée et incompatible avec les mises en page non-HTML et les
-vues de données. Ces limitations signifiait qu'une réécriture complète était
-nécessaire. Edge Side Includes est devenu une moyen standard d'implémenter les
+vues de données. Ces limitations signifiaient qu'une réécriture complète était
+nécessaire. Edge Side Includes est devenu un moyen standard d'implémenter les
 fonctionnalités que CacheHelper fournissait. Cependant, implémenter `Edge Side
 Includes <http://fr.wikipedia.org/wiki/Edge_Side_Includes>`_ en PHP présente un
 grand nombre de limitations. Au lieu de construire une solution de qualité
 inférieure, nous recommandons aux développeurs ayant besoin d'un cache global
-d'utiliser uVarnish <http://varnish-cache.org>`_ or `Squid <http://squid-cache.org>`_
+d'utiliser `Varnish <http://varnish-cache.org>`_ ou `Squid <http://squid-cache.org>`_
 à la place.
 
 I18n
@@ -1114,7 +1114,7 @@ I18n
 
 Le sous-système I18n a été complètement réécrit. En général, vous pouvez vous
 attendre au même comportement que dans les versions précédentes, spécialement
-si vous utiilsez la famille de fonctions ``__()``.
+si vous utilisez la famille de fonctions ``__()``.
 
 En interne, la classe ``I18n`` utilise ``Aura\Intl``, et les méthodes
 appropriées sont exposées pour accéder aux fonctionnalités spécifiques de cette
@@ -1134,7 +1134,7 @@ du dispatcher pour récupérer automatiquement la langue depuis l'en-tête
     // Dans config/bootstrap.php
     DispatcherFactory::addFilter('LocaleSelector');
 
-Il n'y a pas de remplacement intégré en ce qui concerne la selection de la
+Il n'y a pas de remplacement intégré en ce qui concerne la sélection de la
 langue en définissant une valeur dans la session de l'utilisateur.
 
 La fonction de formatage par défaut pour les messages traduits n'est plus
@@ -1191,7 +1191,7 @@ Testing
   nouvellement créés utilisent tous ``phpunit`` pour executer les tests.
 - L'executeur via le navigateur (webroot/test.php) a été retiré. L'adoption
   de CLI a beaucoup augmenté depuis les premières versions de 2.x. De plus,
-  les exécuteurs CLI ont une intégration meilleur avec les outils des IDE et
+  les exécuteurs CLI ont une meilleure intégration avec les outils des IDE et
   autres outils automatisés.
 
   Si vous cherchez un moyen de lancer les tests à partir d'un navigateur, vous
@@ -1203,7 +1203,7 @@ Testing
 - ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
   Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
   à la place.
-- Les fixtures doivent maintenant être reférencées sous leur forme plurielle::
+- Les fixtures doivent maintenant être référencées sous leur forme plurielle::
 
     // Au lieu de
     $fixtures = ['app.article'];
@@ -1223,10 +1223,10 @@ La classe Set a été retirée, vous devriez maintenant utiliser la classe Hash
 Folder & File
 -------------
 
-The folder and file classes have been renamed:
+Les classes folder et file ont été renommées:
 
-- ``Cake\Utility\File`` renamed to :php:class:`Cake\\Filesystem\\File`
-- ``Cake\Utility\Folder`` renamed to :php:class:`Cake\\Filesystem\\Folder`
+- ``Cake\Utility\File`` renommée :php:class:`Cake\\Filesystem\\File`
+- ``Cake\Utility\Folder`` renommée :php:class:`Cake\\Filesystem\\Folder`
 
 Inflector
 ---------
@@ -1236,9 +1236,9 @@ Inflector
   au tirêt (``-``). utiliser des tirêts pour séparer les mots dans les url
   est le choix le plus courant et également celui recommandé par Google.
 
-- Les Transliterations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
-  changé. Si vous utilisez des transliterations personnalisées, vous devrez mettre
-  à jour votre code. A la place des expressions réglières, les transliterations
+- Les translitérations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
+  changé. Si vous utilisez des translitérations  personnalisées, vous devrez mettre
+  à jour votre code. A la place des expressions régulières, les translitérations 
   utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
   performances significatives::
 
@@ -1284,11 +1284,11 @@ Security
   les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez re-crypter
   les valeurs en utilisant une version plus récente de CakePHP 2.x avant
   migration.
-- La capacité de générer blowfish a été retiré. Vous ne pouvez plus utiliser le
+- La capacité de générer blowfish a été retirée. Vous ne pouvez plus utiliser le
   type "blowfish" pour ``Security::hash()``. Vous devrez utiliser uniquement
-  le `password_hash()` de PHP et `password_verify()` pour génerer et vérifier
+  le `password_hash()` de PHP et `password_verify()` pour générer et vérifier
   les hashs de blowfish. La librairie compatible
-  `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_.
+  `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   qui est installée avec CakePHP fournit ces fonctions pour PHP < 5.5.
 
 Time

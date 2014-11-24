@@ -23,7 +23,7 @@ Vous remarquerez quelques dossiers principaux:
 - Le dossier *config* contient les (quelques) fichiers de
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
   connection à la Base de Données, le bootstrapping, les fichiers de
-  configuration du coeur et consorts doivent être stockés ici.
+  configuration du cœur et consorts doivent être stockés ici.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
 - Le dossier *tests* contient tous les cas de test, et les fixtures de test pour
@@ -35,7 +35,7 @@ Vous remarquerez quelques dossiers principaux:
   l'application vont être installés. Engagez-vous personnellement à ne
   **pas** modifier les fichiers dans ce dossier. Nous ne pourrons pas vous
   aider si vous avez modifié le cœur du framework.
-- Le répertoire *webroot* est la racine de votre application public. Il contient
+- Le répertoire *webroot* est la racine de votre application publique. Il contient
   tous les fichiers que vous souhaitez voir accessibles publiquement.
 - Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
   données qu'il stocke dépendent de la façon dont vous avez configuré CakePHP,
@@ -55,8 +55,7 @@ ce répertoire.
 
 Console
     Contient les commandes de la console et les Tasks de la console pour votre
-    application. Ce répertoire peut aussi contenir un répertoire ``Templates``
-    pour personnaliser la sortie de bake. Pour plus d'informations, regardez
+    application. Pour plus d'informations, regardez
     :doc:`/console-and-shells`.
 Controller
     Contient vos Controllers et leurs Components.
@@ -74,4 +73,4 @@ Template
 
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
-    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connexion,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp
+    :keywords lang=fr: librairies internes,configuration du cœur,descriptions du model,librairies externes,détails de connexion,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

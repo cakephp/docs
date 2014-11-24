@@ -654,7 +654,7 @@ serait::
 La façon d'intégrer notre besoin est d'utiliser un **model join**, autrement
 connu comme une association **hasMany through**. Ceci étant, l'association est
 un model lui-même. Donc, nous pouvons créer un nouveau model
-CoursesMemberships. Regardez les models suivants.::
+CoursesMemberships. Regardez les models suivants. ::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {

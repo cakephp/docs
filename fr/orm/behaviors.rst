@@ -20,7 +20,7 @@ Utiliser les Behaviors
     :start-after: start-behaviors
     :end-before: end-behaviors
 
-Behaviors du Coeur
+Behaviors du Cœur
 ==================
 
 .. toctree::

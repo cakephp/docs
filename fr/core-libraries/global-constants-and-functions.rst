@@ -114,7 +114,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    Si la variable ``$debug`` du coeur est à ``true``, $var est
+    Si la variable ``$debug`` du cœur est à ``true``, $var est
     affiché. Si ``$showHTML`` est ``true`` ou laissé null, la donnée est
     formatée pour être visualisée facilement dans un navigateur.
 

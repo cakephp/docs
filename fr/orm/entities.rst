@@ -8,7 +8,7 @@ Entities
 Alors que :doc:`/orm/table-objects` représentent et fournissent un accès à une
 collection d'objets, les entities représentent des lignes individuelles ou
 des objets de domaine dans votre application. Les entities contiennent des
-propriétés persistentes et des méthodes pour manipuler et accéder aux données
+propriétés persistantes et des méthodes pour manipuler et accéder aux données
 qu'ils contiennent.
 
 Les entities sont créés pour vous par CakePHP à chaque fois que vous utilisez

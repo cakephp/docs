@@ -163,7 +163,7 @@ Espérons que cela vous semble simple.
 Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
 C'est une instance de la classe CakePHP
 :php:class:`Cake\\View\\Helper\\HtmlHelper`. CakePHP est livré avec un ensemble
-de "helpers" (des assistants) pour les vues, qui réalisent en un clin d'oeil
+de "helpers" (des assistants) pour les vues, qui réalisent en un clin d'œil
 des choses comme le "linking" (mettre les liens dans un texte), l'affichage des
 formulaires, du JavaScript et de l'AJAX. Vous pouvez en apprendre plus sur la
 manière de les utiliser dans le chapitre :doc:`/views/helpers`, mais ce qu'il

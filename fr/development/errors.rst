@@ -179,7 +179,7 @@ fois votre code propre, et donner les réponses RESTful aux applications
 clientes et aux utilisateurs.
 
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
-seront lancées à partir de certains components du coeur de CakePHP:
+seront lancées à partir de certains components du cœur de CakePHP:
 
 .. php:namespace:: Cake\View\Exception
 
@@ -349,7 +349,7 @@ modifiez simplement les vues d'erreur et ajoutez la ligne
 ``$this->layout = 'my_error';`` dans ``error400.ctp`` et ``error500.ctp``.
 
 Chaque exception au niveau du framework a son propre fichier de vue localisé dans
-les templates du coeur mais vous n'avez pas besoin de les personnaliser
+les templates du cœur mais vous n'avez pas besoin de les personnaliser
 puisqu'ils sont utilisés seulement pendant le développement. Avec debug éteint,
 toutes les exceptions au niveau du framework sont converties en
 ``InternalErrorException``.
@@ -505,7 +505,7 @@ utiliser n'importe quel controller de votre choix::
         }
     }
 
-Sinon vous pouvez simplement écraser l'``ErrorController`` du coeur, en en
+Sinon vous pouvez simplement écraser l'``ErrorController`` du cœur, en en
 incluant un dans ``src/Controller``. Si vous utilisez un controller
 personnalisé pour la gestion des erreurs, assurez-vous de faire toutes les
 configurations dont vous aurez besoin dans votre constructeur, ou dans la

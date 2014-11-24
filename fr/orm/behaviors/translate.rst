@@ -27,7 +27,7 @@ behavior à l'objet Table que vous souhaitez rendre traduisible::
         }
     }
 
-Maintenant, selectionnez une langue à utiliser pour récupérer les entities::
+Maintenant, sélectionnez une langue à utiliser pour récupérer les entities::
 
     I18n::locale('spa');
     $articles = TableRegistry::get('Articles');

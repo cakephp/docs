@@ -108,7 +108,7 @@ Connecter les Routes
 Pour garder votre code :term:`DRY`, vous pouvez utiliser les 'routing scopes'.
 Les scopes de Routing permettent non seulement de garder votre code DRY mais
 aident aussi le Router à optimiser son opération. Comme vous l'avez vu
-précedemment, vous pouvez aussi utiliser ``Router::connect()`` pour connecter
+précédemment, vous pouvez aussi utiliser ``Router::connect()`` pour connecter
 les routes. Cette méthode va par défaut vers le scope ``/``. Pour créer un
 scope et connecter certaines routes, nous allons utiliser la méthode
 ``scope()``::
@@ -772,7 +772,7 @@ Arguments Passés
 
 Les arguments passés sont des arguments supplémentaires ou des segments
 du chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés
-pour transmettre des paramètres aux méthodes de vos controllers.::
+pour transmettre des paramètres aux méthodes de vos controllers. ::
 
     http://localhost/calendars/view/recent/mark
 

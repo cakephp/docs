@@ -170,7 +170,7 @@ utilisée avec :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
 et des requêtes normales.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
-application, nous couvrons certains des attributs et méthodes du coeur fournis
+application, nous couvrons certains des attributs et méthodes du cœur fournis
 par les controllers de CakePHP.
 
 .. _controller-life-cycle:
@@ -339,7 +339,7 @@ La méthode de contrôle de flux que vous utiliserez le plus souvent est
 ``Controller::redirect()``. Cette méthode prend son premier
 paramètre sous la forme d'une URL relative à votre application CakePHP.
 Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-rediriger vers un écran affichant le reçu.::
+rediriger vers un écran affichant le reçu. ::
 
     public function place_order() {
         // Logic for finalizing order goes here
@@ -501,4 +501,4 @@ Plus sur les Controllers
 
 .. meta::
     :title lang=fr: Controllers (Contrôleurs)
-    :keywords lang=fr: bons modèles,classe controller,controller controller,librairie du coeur,modèle unique,donnée requêtée,homme du milieu,boulangerie,mvc,attributs,logique,recettes
+    :keywords lang=fr: bons modèles,classe controller,controller controller,librairie du cœur,modèle unique,donnée requêtée,homme du milieu,boulangerie,mvc,attributs,logique,recettes

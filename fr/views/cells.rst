@@ -11,7 +11,7 @@ Quand utiliser les Cells
 ========================
 
 Les Cells sont idéals pour la construction de components de page réutilisables
-qui necessitent une interaction avec les models, la logique de view, et la
+qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
 ou un menu de navigation selon des données dans un CMS.
 

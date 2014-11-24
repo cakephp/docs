@@ -167,7 +167,7 @@ Helper habituel avec une implémentation personnalisée::
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper {
-        // Ajout de code pour surcharger le HtmlHelper du coeur
+        // Ajout de code pour surcharger le HtmlHelper du cœur
     }
 
 Ce qui est au-dessus va faire un *alias* de ``MyHtmlHelper`` vers
@@ -213,7 +213,7 @@ et :doc:`/core-libraries/events` pour plus d'informations.
 Créer des Helpers
 =================
 
-Si un helper du coeur (ou l'un présenté sur github ou dans la Boulangerie)
+Si un helper du cœur (ou l'un présenté sur github ou dans la Boulangerie)
 ne correspond pas à vos besoins, les helpers sont faciles à créer.
 
 Mettons que nous voulions créer un helper, qui pourra être utilisé pour
@@ -296,7 +296,7 @@ Callbacks
 ---------
 
 En implémentant une méthode de callback dans un helper, CakePHP va
-automatiquement inscrire votre helper à l'évenement correspondant. A la
+automatiquement inscrire votre helper à l'évènement correspondant. A la
 différence des versions précédentes de CakePHP, vous *ne* devriez pas appeler
 ``parent`` dans vos callbacks, puisque la classe Helper de base n'implémente
 aucune des méthodes de callback.

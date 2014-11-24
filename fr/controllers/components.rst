@@ -97,7 +97,7 @@ avec une implémentation sur mesure::
     use Cake\Controller\Component\AuthComponent;
 
     class MyAuthComponent extends AuthComponent {
-        // Ajoutez votre code pour surcharge l'AuthComponent du coeur
+        // Ajoutez votre code pour surcharge l'AuthComponent du cœur
     }
 
 Le code ci-dessus fera un *alias* ``MyAuthComponent`` de
@@ -317,4 +317,4 @@ qui vous permettent d'augmenter le cycle de la requête.
 
 .. meta::
     :title lang=fr: Components (Composants)
-    :keywords lang=fr: tableau controller,librairies du coeur,authentification requêtes,tableau de nom,Liste contrôle accès,public components,controller code,components du coeur,cookiemonster,cookie de connexion,paramètres de configuration,fonctionalité,logic,sessions,cakephp,doc
+    :keywords lang=fr: tableau controller,librairies du cœur,authentification requêtes,tableau de nom,Liste contrôle accès,public components,controller code,components du cœur,cookiemonster,cookie de connexion,paramètres de configuration,fonctionalité,logic,sessions,cakephp,doc

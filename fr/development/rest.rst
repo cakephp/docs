@@ -3,7 +3,7 @@ REST
 
 Beaucoup de programmeurs néophytes d'application réalisent qu'ils ont
 besoin d'ouvrir leurs fonctionnalités principales à un public plus important.
-Fournir facilement, un accès sans entrave à votre API du coeur peut
+Fournir facilement, un accès sans entrave à votre API du cœur peut
 aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
 

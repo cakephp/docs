@@ -79,7 +79,7 @@ className
     de driver construite. Les exemples de noms de classe court sont Mysql,
     Sqlite, Postgres, et Sqlserver.
 persistent
-    S'il faut utiliser ou non une connection persistente à la base de données.
+    S'il faut utiliser ou non une connection persistante à la base de données.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
 username

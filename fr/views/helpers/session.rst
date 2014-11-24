@@ -34,7 +34,7 @@ méthodes du helper Session où une variable ``$key`` est utilisée.
 
     :rtype: boolean
 
-    Vérifie si une clé est dans la Session. Retourne un boléen sur l'existence
+    Vérifie si une clé est dans la Session. Retourne un booléen sur l'existence
     d'un clé.
 
 .. meta::

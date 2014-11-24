@@ -33,7 +33,7 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
   intégrées par défaut comme une base pour votre configuration de session.
 
 * ``Session.handler`` - Vous permet de définir un gestionnaire de session
-  personnalisé. La base de données du coeur et les gestionnaires de cache
+  personnalisé. La base de données du cœur et les gestionnaires de cache
   de session utilisent celui-ci. Cette option remplace ``Session.save``
   dans les versions précédentes. Regardez ci-dessous pour des informations
   supplémentaires sur les gestionnaires de Session.
@@ -114,7 +114,7 @@ session. En définissant la clé de config 'handler.engine', vous pouvez nommer
 le nom de la classe, ou fournir une instance de gestionnaire. La classe/objet
 doit implémenter le ``SessionHandlerInterface`` natif de PHP. Implémenter
 cette interface va permettre de faire le lien automatiquement de
-``Session`` vers les méthodes du gestionnaire. Le Cache du coeur et les
+``Session`` vers les méthodes du gestionnaire. Le Cache du cœur et les
 gestionnaires de session de la Base de Données utilisent tous les deux cette
 méthode pour sauvegarder les sessions. De plus, les configurations pour le
 gestionnaire doivent être placées dans le tableau du gestionnaire. Vous

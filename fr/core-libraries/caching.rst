@@ -483,13 +483,13 @@ Création d'un moteur de stockage pour le Cache
 Vous pouvez fournir vos propre adaptateurs ``Cache`` dans ``App\Cache\Engine``
 ou dans un plugin en utilisant ``$plugin\Cache\Engine``.
 Les moteurs de cache src/plugin peuvent aussi remplacer les moteurs
-du coeur. Les adaptateurs de cache doivent être dans un répertoire cache.
+du cœur. Les adaptateurs de cache doivent être dans un répertoire cache.
 Si vous avez un moteur de cache nommé ``MyCustomCacheEngine`` il devra
 être placé soit dans ``src/Cache/Engine/MyCustomCacheEngine.php``
 comme une app/libs ou dans
 ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` faisant parti d'un
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
-notation par points de plugin.::
+notation par points de plugin. ::
 
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
@@ -542,13 +542,13 @@ L'API requise pour CacheEngine est
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :retourne: Un boléen ``true`` en cas de succès.
+    :retourne: Un booléen ``true`` en cas de succès.
 
     Décrémente un nombre dans la clé et retourne la valeur décrémentée
 
 .. php:method:: increment($key, $offset = 1)
 
-    :retourne: Un boléen ``true`` en cas de succès.
+    :retourne: Un booléen ``true`` en cas de succès.
 
     Incrémente un nombre dans la clé et retourne la valeur incrémentée
 
