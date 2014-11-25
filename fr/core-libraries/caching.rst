@@ -148,6 +148,12 @@ syntaxes suivantes:
   d'utiliser des classes situées en dehors des emplacements classiques.
 * tiliser un objet qui étend la classe ``CacheEngine``
 
+.. note::
+
+    Lorsque vous utilisez le FileEngine vous pourriez avoir besoin d'utiliser
+    l'option ``mask`` pour assurer que les fichiers de cache sont créés avec
+    les autorisations nécessaires.
+
 Suppression de Configuration de Cache
 -------------------------------------
 
@@ -159,27 +165,6 @@ cela, vous devriez suppirmer la configuration et re-créer à l'aide de
 :php:meth:`Cake\\Cache\\Cache::config()`.
 Supprimer un moteur de cache va supprimer la configuration et de détruire
 l'adaptateur si il a été construit.
-
-Autres Configuration Liée au Cache
-----------------------------------
-
-En plus de la configuration des adaptateurs de cache, il y a quelques autres
-propriétés de configuration liées au cache:
-
-enabled
-    Lorsqu'il est réglé sur ``true``, la mise en cache persistante est désactivé
-    à l'échelle le site.
-    Cela fera échouer toutes les lectures/écritures vers
-    :php:class:`Cake\\Cache\\Cache` . Vous pouvez piloter cette valeur avec
-    :php:meth:`Cake\\Cache\\Cache::enable()` et 
-    :php:meth:`Cake\\Cache\\Cache::disable()`. Son état actuel peut-être lu
-    avec :php:meth:`Cake\\Cache\\Cache::enabled()`.
-
-.. note::
-
-    Lorsque vous utilisez le FileEngine vous pourriez avoir besoin d'utiliser
-    l'option ``mask`` assurer que les fichiers de cache sont créés avec les
-    autorisations nécessaires.
 
 Ecrire dans un Cache
 ====================

@@ -126,6 +126,11 @@ refer to the class name using the following syntaxes:
   classes located outside of the conventional locations.
 * Using an object that extends the ``CacheEngine`` class.
 
+.. note::
+
+    When using the FileEngine you might need to use the ``mask`` option to
+    ensure cache files are made with the correct permissions.
+
 Removing Configured Cache Engines
 ---------------------------------
 
@@ -135,24 +140,6 @@ Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
 :php:meth:`Cake\\Cache\\Cache::config()`. Dropping a cache engine will remove
 the config and destroy the adapter if it was constructed.
-
-Other Cache Related Configuration
----------------------------------
-
-Other than configuring caching adapters, there are a few other cache related
-configuration properties:
-
-enabled
-    When set to ``false``, persistent caching is disabled site-wide.
-    This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
-    You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
-    :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
-    :php:meth:`Cake\\Cache\\Cache::enabled()`.
-
-.. note::
-
-    When using the FileEngine you might need to use the ``mask`` option to
-    ensure cache files are made with the correct permissions.
 
 Writing to a Cache
 ==================
