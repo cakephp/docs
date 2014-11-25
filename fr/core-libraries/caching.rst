@@ -151,8 +151,8 @@ syntaxes suivantes:
 .. note::
 
     Lorsque vous utilisez le FileEngine vous pourriez avoir besoin d'utiliser
-    l'option ``mask`` assurer que les fichiers de cache sont créés avec les
-    autorisations nécessaires.
+    l'option ``mask`` pour assurer que les fichiers de cache sont créés avec
+    les autorisations nécessaires.
 
 Suppression de Configuration de Cache
 -------------------------------------
