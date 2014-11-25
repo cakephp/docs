@@ -84,14 +84,7 @@ cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec le
 tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
 seront toujours surchargées par celles de ``AppController.``
 
-Pensez aussi à appeler les fonctions de rappel (callbacks) de ``AppController``
-dans celles du controller enfant pour de meilleurs résultats::
-
-    public function beforeFilter(Event $event) {
-        parent::beforeFilter($event);
-    }
-
-Les paramètres de requête
+Déroulement d'une Requête
 =========================
 
 Quand une requête est faîte dans une application CakePHP, les classes
@@ -172,41 +165,6 @@ et des requêtes normales.
 Afin que vous utilisiez efficacement le controller dans votre propre
 application, nous couvrons certains des attributs et méthodes du cœur fournis
 par les controllers de CakePHP.
-
-.. _controller-life-cycle:
-
-Request Life-cycle callbacks
-============================
-
-Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
-(ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
-ou juste après que les actions du controller ont été effectuées :
-
-.. php:method:: beforeFilter(Event $event)
-
-    Cette fonction est exécutée avant chaque action du controller. C'est
-    un endroit pratique pour vérifier le statut d'une session ou les
-    permissions d'un utilisateur.
-
-    .. note::
-
-        La méthode beforeFilter() sera appelée pour les actions manquantes.
-
-.. php:method:: beforeRender(Event $event)
-
-    Cette méthode est appelée après l'action du controller mais avant
-    que la vue ne soit rendue. Ce callback n'est pas souvent utilisé,
-    mais peut-être nécessaire si vous appellez :php:meth:`~Controller::render()`
-    manuellement à la fin d'une action donnée.
-
-.. php:method:: afterFilter(Event $event)
-
-    Cette méthode est appelée après chaque action du controller, et après
-    que l'affichage soit terminé. C'est la dernière méthode du controller
-    qui est exécutée.
-
-En plus des callbacks des controllers, les :doc:`/controllers/components`
-fournissent aussi un ensemble similaire de callbacks.
 
 Interactions avec les Vues
 --------------------------
@@ -297,7 +255,7 @@ d'appels AJAX::
 Le paramètre ``$layout`` de ``render()`` vous permet de spécifier le layout
 de la vue qui est rendue.
 
-Rendre un template de vue spécifique
+Rendre un Template de Vue Spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans votre controller, vous pourriez avoir envie de rendre une vue
@@ -390,31 +348,23 @@ Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
         '#' => 'top'
     ]);
 
-L'URL généré serait:
+L'URL générée serait:
 
     http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
-Paginer a Model
-===============
+Rediriger vers une Autre Action du Même Controller
+--------------------------------------------------
 
-.. php:method:: paginate()
+.. php:method:: setAction($action, $args...)
 
-Cette méthode est utilisée pour paginer les résultats retournés par vos
-models. Vous pouvez définir les tailles de la page, les conditions à
-utiliser pour la recherche de ces données et bien plus encore. Consultez la
-section :doc:`pagination <controllers/components/pagination>`
-pour plus de détails sur l'utilisation de la pagination.
+Si vous devez rediriger l'action courante vers une autre action du *même*
+controller, vous pouvez utiliser ``setAction()`` pour mettre à jour l'objet
+request, modifier le template de vue qui va être rendu et rediriger l'exécution
+vers l'action nommée::
 
-L'attribut paginate vous donne une façon facile de personnaliser la façon dont
-``paginate()`` se comporte::
-
-    class ArticlesController extends AppController {
-        public $paginate = [
-            'Articles' => [
-                'conditions' => ['published' => 1]
-            ]
-        ];
-    }
+    // Depuis l'action delete, vous pouvez rendre
+    // la liste mise à jour.
+    $this->setAction('index');
 
 Chargement des Models Supplémentaires
 =====================================
@@ -449,6 +399,28 @@ pour charger les instances::
 
     La TableRegistry intégrée dans l'ORM est connectée par défaut comme
     provider de 'Table'.
+
+Paginer un Model
+================
+
+.. php:method:: paginate()
+
+Cette méthode est utilisée pour paginer les résultats retournés par vos
+models. Vous pouvez définir les tailles de la page, les conditions à
+utiliser pour la recherche de ces données et bien plus encore. Consultez la
+section :doc:`pagination <controllers/components/pagination>`
+pour plus de détails sur l'utilisation de la pagination.
+
+L'attribut paginate vous donne une façon facile de personnaliser la façon dont
+``paginate()`` se comporte::
+
+    class ArticlesController extends AppController {
+        public $paginate = [
+            'Articles' => [
+                'conditions' => ['published' => 1]
+            ]
+        ];
+    }
 
 Configurer les Components à Charger
 ===================================
@@ -489,6 +461,41 @@ les classes MVC supplémentaires::
 Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
 ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
 bien tout ce qui est déclaré dans votre ``AppController``.
+
+.. _controller-life-cycle:
+
+Request Life-cycle callbacks
+============================
+
+Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
+(ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
+ou juste après que les actions du controller ont été effectuées :
+
+.. php:method:: beforeFilter(Event $event)
+
+    Cette fonction est exécutée avant chaque action du controller. C'est
+    un endroit pratique pour vérifier le statut d'une session ou les
+    permissions d'un utilisateur.
+
+    .. note::
+
+        La méthode beforeFilter() sera appelée pour les actions manquantes.
+
+.. php:method:: beforeRender(Event $event)
+
+    Cette méthode est appelée après l'action du controller mais avant
+    que la vue ne soit rendue. Ce callback n'est pas souvent utilisé,
+    mais peut-être nécessaire si vous appellez :php:meth:`~Controller::render()`
+    manuellement à la fin d'une action donnée.
+
+.. php:method:: afterFilter(Event $event)
+
+    Cette méthode est appelée après chaque action du controller, et après
+    que l'affichage soit terminé. C'est la dernière méthode du controller
+    qui est exécutée.
+
+En plus des callbacks des controllers, les :doc:`/controllers/components`
+fournissent aussi un ensemble similaire de callbacks.
 
 Plus sur les Controllers
 ========================
