@@ -36,7 +36,7 @@ optional::
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-It's also possible to add and use other parameters. Some types of find() 
+It's also possible to add and use other parameters. Some types of find()
 and behaviors make use of this ability, and your own model methods can, too.
 
 If your find() operation fails to match any records, you will get an empty array.
@@ -548,7 +548,7 @@ It is also possible to paginate via a custom find type as follows:
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
 
-To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the 
+To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the
 find type in an array for the second argument.
 
 ::
@@ -947,6 +947,8 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
+There is also RLIKE and ILIKE as wildcard operators available.
+
 CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null::
 
@@ -1090,7 +1092,7 @@ This should generate the following SQL::
                 "User2"."status" = 'B'
         )
 
-Also, if you need to pass just part of your query as raw SQL as 
+Also, if you need to pass just part of your query as raw SQL as
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
 
