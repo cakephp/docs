@@ -230,3 +230,19 @@ rename/remove finder methods when adding a behavior to a table. For example::
             'slugged' => 'findSlug',
         ]
     ]);
+
+
+Accessing Loaded Behaviors
+==========================
+
+Once you've attached behaviors to your Table instance you can introspect the
+loaded behaviors, or access specific behaviors using the ``BehaviorRegistry``::
+
+    // See which behaviors are loaded
+    $table->behaviors()->loaded();
+
+    // Check if a specific behavior is loaded.
+    $table->behaviors()->has('CounterCache');
+
+    // Get a loaded behavior
+    $table->behaviors()->get('CounterCache');
