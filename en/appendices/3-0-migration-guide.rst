@@ -205,6 +205,15 @@ For example, if you had a ``hello_world()`` method inside a shell and invoked it
 with ``bin/cake my_shell hello_world``, you will need to rename the method
 to ``helloWorld``. There are no changes required in the way you invoke commands.
 
+ConsoleOptionParser
+-------------------
+
+- ``ConsoleOptionParser::merge()`` has been added to merge parsers.
+
+ConsoleInputArgument
+--------------------
+
+- ``ConsoleInputArgument::isEqualTo()`` has been added to compare two arguments.
 
 Shell / Task
 ============
