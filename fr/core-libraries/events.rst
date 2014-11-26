@@ -138,7 +138,7 @@ emails, mettre à jour les statistiques d'utilisateur si possible dans des
 objets séparés et même le déleguer à des tâches offlline si vous avez ce
 besoin.
 
-Dispatcher les Evenements
+Dispatcher les Evènements
 =========================
 
 Une fois que vous avez obtenu une instance du gestionnaire d'event, vous pouvez
@@ -158,20 +158,20 @@ premier est le nom de l'event, vous devriez essayer de garder ce nom aussi
 unique que possible, en le rendant lisible. Nous vous suggérons une convention
 comme suit: ``Layer.eventName`` pour les évènements généraux qui arrivent
 au niveau couche (par ex ``Controller.startup``,
-``View.beforeRender``) et ``Layer.Class.eventName`` pour les evenements
+``View.beforeRender``) et ``Layer.Class.eventName`` pour les événements
 qui arrivent dans des classes spécifiques sur une couche, par exemple
 ``Model.User.afterRegister`` ou ``Controller.Courses.invalidAccess``.
 
-Le deuxième argument est le ``subject``, ce qui signifie que l'objet associé
-à l'évènement, habituellement quand c'est la même classe attrapant les
-évènements sur lui-même, en utilisant ``$this`` sera le cas le plus commun.
-D'ailleurs un :php:class:`Component` puisse attraper aussi les evenements de
+Le deuxième argument est le ``subject``, c'est à dire l'objet associé
+à l'évènement, comme une classe attrape les
+évènements sur elle-même, utiliser ``$this`` sera le cas le plus commun.
+Même si un :php:class:`Component` peut aussi déclencher les événements d'un
 controller. La classe subject est importante parce que les écouteurs auront
 un accès immédiat aux propriétés de l'objet et pourront les inspecter ou
 les changer à la volée.
 
-Au final, le troisième argument est une donnée d'evenement supplémentaire. Ceci
-peut être tout donnée que vous considérez utile de passer autour pour que les
+Au final, le troisième argument est une donnée d'événement supplémentaire. Ceci
+peut être toute donnée que vous considérez utile de passer pour que les
 écouteurs puissent agir sur eux. Alors que ceci peut être un argument de tout
 type, nous vous recommandons de passer un tableau associatif.
 
@@ -223,7 +223,7 @@ les bons callbacks.
 Enregistrer des Listeners Anonymes
 ----------------------------------
 
-Alors que les objets listener d'evenement sont généralement une meilleure façon
+Alors que les objets listener d'évènement sont généralement une meilleure façon
 d'intégrer des listeners, vous pouvez aussi lier tout ``callable`` comme un
 listener d'évènement. Par exemple si nous souhaitons mettre toutes les
 commandes dans des fichiers de log, nous pourrions utiliser une fonction
@@ -256,9 +256,9 @@ Etablir des Priorités
 
 Dans certains cas vous voulez contrôler la commande que les listeners appelent.
 Par exemple, si nous retournons à notre exemple des statistiques d'utilisateur.
-Il serait idéal le listenet était appelé à la fin de la pile. En l'appelant
+Ce serait idéal si le listener était appelé à la fin de la pile. En l'appelant
 à la fin de la pile, nous pouvons assurer que l'évènement n'a pas été annulé
-et qu'aucun autre listener ne lève d'exceptions. Nous pouvons aussi obtenir
+et qu'aucun autre listener ne lève d'exception. Nous pouvons aussi obtenir
 l'état final des objets dans le cas où d'autres listeners ont modifiés le
 sujet ou l'objet event.
 
