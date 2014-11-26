@@ -868,8 +868,8 @@ a post"::
 
 Notice the '!=' that follows the field name. CakePHP can parse out
 any valid SQL comparison operator, including match expressions
-using LIKE, BETWEEN, or REGEX, as long as you leave a space between
-field name and the operator. The one exception here is IN
+using ``LIKE``, ``BETWEEN``, or ``REGEX``, as long as you leave a space between
+field name and the operator. The one exception here is ``IN``
 (...)-style matches. Let's say you wanted to find posts where the
 title was in a given set of values::
 
@@ -902,7 +902,7 @@ The above example will return posts where the created date is
 equal to the modified date (that is, it will return posts that have never
 been modified).
 
-Remember that if you find yourself unable to form a WHERE clause in
+Remember that if you find yourself unable to form a ``WHERE`` clause in
 this method (for example, boolean operations), you can always specify it as
 a string like::
 
@@ -911,7 +911,7 @@ a string like::
         // other conditions as usual
     )
 
-By default, CakePHP joins multiple conditions with boolean AND.
+By default, CakePHP joins multiple conditions with boolean ``AND``.
 This means the snippet above would only match posts that have
 been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
@@ -922,8 +922,8 @@ that match either condition::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-CakePHP accepts all valid SQL boolean operations, including AND, OR,
-NOT, XOR, etc., and they can be upper or lower case, whichever you
+CakePHP accepts all valid SQL boolean operations, including ``AND``, ``OR``,
+``NOT``, ``XOR``, etc., and they can be upper or lower case, whichever you
 prefer. These conditions are also infinitely nestable. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
@@ -939,7 +939,7 @@ wanted to restrict your search to posts written by Bob::
     )
 
 If you need to set multiple conditions on the same field, like when
-you want to do a LIKE search with multiple terms, you can do so by
+you want to do a ``LIKE`` search with multiple terms, you can do so by
 using conditions similar to::
 
     array('OR' => array(
@@ -947,7 +947,7 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
-There is also ILIKE and RLIKE (RLIKE since version 2.6) as wildcard operators available.
+The wildcard operators ``ILIKE`` and ``RLIKE`` (RLIKE since version 2.6) are also available.
 
 CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null::
@@ -957,7 +957,7 @@ will return records where the post title is not null::
         )
     )
 
-To handle BETWEEN queries, you can use the following::
+To handle ``BETWEEN`` queries, you can use the following::
 
     array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 
@@ -994,8 +994,8 @@ The data returned for this would be in the following format::
         [1] => Array
         ...
 
-A quick example of doing a DISTINCT query. You can use other
-operators, such as MIN(), MAX(), etc., in a similar fashion::
+A quick example of doing a ``DISTINCT`` query. You can use other
+operators, such as ``MIN()``, ``MAX()``, etc., in a similar fashion::
 
     array(
         'fields' => array('DISTINCT (User.name) AS my_column_name'),
