@@ -53,7 +53,7 @@ contenu que le client accepte. Par exemple::
                 // les réponses HTML (text/html) 
             } elseif ($this->RequestHandler->accepts('xml')) {
                 // executé seulement si le client accepte seulement
-                // les réponse XML
+                // les réponses XML
             }
             if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {
                 // Executé si le client accepte l'un des suivants: XML, RSS ou Atom
@@ -73,7 +73,7 @@ D'autres méthodes de détections du contenu des requêtes:
 
 .. php:method:: isAtom()
 
-    Renvoie true si l'appel actuel accepte les réponse Atom, false dans le cas
+    Renvoie true si l'appel actuel accepte les réponses Atom, false dans le cas
     contraire.
 
 .. php:method:: isMobile()
@@ -277,7 +277,7 @@ pour déterminer si la réponse n'a pas été modifiée depuis la dernière fois
 que le client a fait sa demande.
 
 Si la réponse est évaluée comme non modifiée, alors le processus de rendu de
-vues est arrêter, réduisant le temps processeur. Un ``no content`` est retourné
+vues est arrêté, réduisant le temps processeur. Un ``no content`` est retourné
 au client, augmentant la bande passante. Le code de réponse est défini
 à `304 Not Modified`.
 
