@@ -218,7 +218,7 @@ comme ceci::
 Comme vous pouvez le voir dans le code ci-dessus, la fonction ``attach`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
 gestionnaire d'evenement va utiliser ``implementedEvents`` pour attacher
-les bons callbacks.
+les bonnes callbacks.
 
 Enregistrer des Listeners Anonymes
 ----------------------------------
@@ -266,15 +266,15 @@ Les priorités sont définies comme un integer lors de l'ajout d'un listener.
 Plus le nombre est haut, plus la méthode sera lancé tardivement. La priorité
 par défaut pour tous les listeners est ``10``. Si vous avez besoin que votre
 méthode soit lancée plus tôt, en utilisant toute valeur avant que celle par
-défaut ne fonctionne. D'un autre côté, si vous souhaitez lancer le callback
+défaut ne fonctionne. D'un autre côté, si vous souhaitez lancer la callback
 après les autres, utiliser un nombre au-dessus de ``10`` le fera.
 
-Si deux callbacks ont la même valeur de priorité, ils seront executés selon
-l'ordre dans lequel ils ont été attachés. Vous définissez les priorités en
+Si deux callbacks ont la même valeur de priorité, elles seront executées selon
+l'ordre dans lequel elles ont été attachées. Vous définissez les priorités en
 utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
 la fonction ``implementedEvents`` pour les listeners d'évènement::
 
-    // Définir la priorité pour un callback
+    // Définir la priorité pour une callback
     $callback = array($this, 'doSomething');
     $this->eventManager()->attach(
         $callback,
@@ -305,12 +305,12 @@ Obtenir des Données d'Event en Paramètres de Fonction
 
 Quand les évènements ont des données fournies dans leur constructeur, les
 données fournies sont converties en arguments pour les listeners. Un exemple
-de la couche View est le callback afterRender::
+de la couche View est la callback afterRender::
 
     $this->eventManager()
         ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
-Les listeners du callback ``View.afterRender`` doivent avoir la signature
+Les listeners de la callback ``View.afterRender`` doivent avoir la signature
 suivante::
 
     function (Event $event, $viewFileName)
@@ -348,9 +348,9 @@ callbacks ou appeler la méthode ``stopPropagation`` sur l'objet event::
         $event->stopPropagation();
     }
 
-Stopper un évènement va éviter à tout callback supplémentaire d'être appelé.
+Stopper un évènement va éviter à toute callback supplémentaire d'être appelée.
 En plus, le code attrapant l'évènement peut se comporter différemment selon
-que l'évènement est stoppé ou non. Généralement il n'est pas sensé de stopper
+que l'évènement est stoppé ou non. Généralement il n'est pas sensé stopper
 'après' les évènements, mais stopper 'avant' les évènements est souvent utilisé
 pour empêcher toutes les opérations de se passer.
 
@@ -375,24 +375,24 @@ stoppé pendant le processus ``beforePlace``.
 Obtenir des Résultats d'Evenement
 ---------------------------------
 
-A chaque fois qu'un callback retourne une valeur, il sera stocké dans la
+A chaque fois qu'une callback retourne une valeur, elle sera stockée dans la
 propriété ``$result`` de l'objet event. C'est utile quand vous voulez
-permettre aux callbacks de modifier l'execution de l'évènement. Prenons
+permettre aux callbacks de modifier l'exécution de l'évènement. Prenons
 à nouveau notre exemple ``beforePlace`` et laissons les callbacks modifier
 la donnée $order.
 
 Les résultats d'Event peuvent être modifiés soit en utilisant directement
 la propriété de résultat de l'objet event, soit en retournant la valeur dans
-le callback lui-même::
+le callback elle-même::
 
-    // Un callback listener
+    // Une callback listener
     public function doSomething($event) {
         // ...
         $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
-    // Un autre callback listener
+    // Une autre callback listener
     public function doSomethingElse($event) {
         // ...
         $event->result['order'] = $alteredData;
@@ -412,7 +412,7 @@ le callback lui-même::
     }
 
 Il est possible de modifier toute propriété d'un objet event et d'avoir les
-nouvelles données passées au prochain callback. Dans la plupart des cas, fournir
+nouvelles données passées à la prochaine callback. Dans la plupart des cas, fournir
 des objets en données d'event ou en résultat et directement modifier l'objet
 est la meilleure solution puisque la référence est la même et les modifications
 sont partagées à travers tous les appels de callback.
@@ -420,7 +420,7 @@ sont partagées à travers tous les appels de callback.
 Retirer les Callbacks et les Listeners
 --------------------------------------
 
-Si pour certaines raisons, vous voulez retirer tout callback d'un gestionnaire
+Si pour certaines raisons, vous voulez retirer toute callback d'un gestionnaire
 d'évènement, appelez seulement la méthode
 :php:meth:`Cake\\Event\\EventManager::detach()` en utilisant des arguments
 les deux premiers paramètres que vous utilisiez pour l'attacher::
@@ -452,7 +452,7 @@ Conclusion
 ==========
 
 Les événements sont une bonne façon de séparer les préoccupations dans
-votre application et rend les classes a la fois cohérentes et découplées des
+votre application et rend les classes à la fois cohérentes et découplées des
 autres, néanmoins l'utilisation des événements n'est pas la solution
 à tous les problèmes. Les Events peuvent être utilisés pour découpler le code
 de l'application et rendre les plugins extensibles.
