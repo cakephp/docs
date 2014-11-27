@@ -181,6 +181,7 @@ controller to your view. Once you've used ``Controller::set()``, the variable
 can be accessed in your view::
 
     // First you pass data from the controller:
+
     $this->set('color', 'pink');
 
     // Then, in the view, you can utilize the data:
@@ -259,8 +260,7 @@ have called ``render()``, CakePHP will not try to re-render the view::
     }
 
 This would render ``src/Template/Posts/custom_file.ctp`` instead of
-``src/Template/Posts/my_action.ctp``
-
+``src/Template/Posts/my_action.ctp``.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.

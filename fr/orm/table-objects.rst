@@ -77,6 +77,7 @@ Avant de pouvoir requêter sur une table, vous aurez besoin d'obtenir une
 instance de la table. Vous pouvez faire ceci en utilisant la classe
 ``TableRegistry``::
 
+    // Dans un controller ou dans une méthode table.
     use Cake\ORM\TableRegistry;
 
     $articles = TableRegistry::get('Articles');
@@ -94,6 +95,7 @@ d'utiliser la méthode ``find``. Elle vous permet d'accéder aux divers méthode
 finder intégrées et à vos propres méthodes personnalisées. Regardez
 :ref:`custom-find-methods` pour plus d'informations::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all');
     foreach ($query as $row) {
         // Faire quelque chose
@@ -179,7 +181,6 @@ avec le deuxième paramètre::
         }
 
     }
-
 
 La même table peut être utilisée plusieurs fois pour définir différents types
 d'associations. Par exemple considérons un cas où vous voulez séparer les
@@ -299,10 +300,12 @@ Les clés possibles pour les tableaux d'association incluent:
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
+- **finder**: The finder method to use when loading associated records.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Users peuvent contenir l'enregistrement Address, si il existe::
 
+    // Dans un controller ou dans une méthode table.
     $query = $users->find('all')->contain(['Addresses']);
     foreach ($query as $user) {
         echo $user->address->street;
@@ -380,10 +383,12 @@ Les clés possibles pour les tableaux d'association belongsTo incluent:
   données de la table associée dans les résultats de la table source. Par défaut
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
+- **finder**: The finder method to use when loading associated records.
 
 Une fois que cette association a été définie, les opérations find sur la table
 User peuvent contenir l'enregistrement Address si il existe::
 
+    // Dans un controller ou dans une méthode table.
     $query = $addresses->find('all')->contain(['Users']);
     foreach ($query as $address) {
         echo $address->user->username;
@@ -467,10 +472,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
   'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
+- **finder**: The finder method to use when loading associated records.
 
 Une fois que cette association a été définie, les opérations de recherche sur
 la table Articles récupèreront également les Comments liés si ils existent::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')->contain(['Comments']);
     foreach ($query as $article) {
         echo $article->comments[0]->text;
@@ -595,11 +602,12 @@ incluent:
   for saving associated entities. The former will only create new links
   between both side of the relation and the latter will do a wipe and
   replace to create the links between the passed entities when saving.
-
+- **finder**: The finder method to use when loading associated records.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Articles peuvent contenir les enregistrements de Tag si ils existent::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')->contain(['Tags']);
     foreach ($query as $article) {
         echo $article->tags[0]->text;
@@ -683,6 +691,27 @@ La table de jointure CoursesMemberships identifie de façon unique une
 participation donnée d'un Etudiant à un Cours en plus des meta-informations
 supplémentaires.
 
+Using the 'finder' Option
+-------------------------
+
+The ``finder`` option allows you to use a :ref:`custom finder
+<custom-find-methods>` to load associated record data. This lets you encapsulate
+your queries better and keep your code DRY'er. There are some limitations when
+using finders to load associated records for associations that are loaded using
+joins (belongsTo/hasOne). Only the following aspects of the query will be
+applied to the root query:
+
+- WHERE conditions
+- Additional joins
+- Contained associations
+- Map/Reduce functions
+- Result formatters
+
+Other aspects of the query, such as selected columns, order, group by, having and
+other sub-statements, will not be applied to the root query. Associations that
+are *not* loaded through joins (hasMany/belongsToMany), do not have the above
+restrictions.
+
 Charger les Entities
 ====================
 
@@ -701,6 +730,8 @@ Récupérer une Entity Unique avec une Clé Primaire
 C'est souvent pratique de charger une entity unique à partir de la base de
 données quand vous modifiez ou visualisez les entities et leurs données liées.
 Vous pouvez faire ceci facilement en utilisant ``get()``::
+
+    // Dans un controller ou dans une méthode table.
 
     // Récupère un article unique
     $article = $articles->get($id);
@@ -733,7 +764,7 @@ Comme ``find()``, get a un cache intégré. Vous pouvez utiliser l'option
         'cache' => false
     ]);
 
-Utiliser les Finders pour charger les Données
+Utiliser les Finders pour Charger les Données
 ---------------------------------------------
 
 .. php:method:: find($type, $options = [])
@@ -742,6 +773,8 @@ Avant de travailler avec les entities, vous devrez les charger. La façon la
 plus facile de le faire est d'utiliser la méthode ``find``. La méthode find
 fournit un moyen facile et extensible pour trouver les données qui vous
 intéressent::
+
+    // Dans un controller ou dans une méthode table.
 
     // Trouver tous les articles
     $query = $articles->find('all');
@@ -752,6 +785,8 @@ une requête plus tard après l'avoir créée. Les objets Query sont évalués
 lazily, et ne s'exéxutent qu'à partir du moment où vous commencer à récupérer
 des lignes, les convertisser en tableau, ou quand la méthode
 ``all()`` est appelée::
+
+    // Dans un controller ou dans une méthode table.
 
     // Trouver tous les articles.
     // A ce niveau, la requête n'est pas lancée.
@@ -773,6 +808,7 @@ Une fois que vous avez commencé une requête, vous pouvez utiliser l'interface
 des conditions supplémentaires, des limites, ou d'inclure des associations
 en utilisant l'interface courante::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
         ->contain(['Comments', 'Authors'])
@@ -782,6 +818,7 @@ Vous pouvez aussi fournir plusieurs options couramment utilisées avec
 ``find()``. Ceci peut aider pour le test puisqu'il y a peu de méthodes à
 mocker::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all', [
         'conditions' => ['Articles.created >' => new DateTime('-10 days')],
         'contain' => ['Authors', 'Comments'],
@@ -817,6 +854,7 @@ La méthode ``first()`` vous permet de récupérer seulement la première ligne
 à partir d'une query. Si la query n'a pas été executée, une clause ``LIMIT 1``
 sera appliquée::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('all', [
         'order' => ['Article.created' => 'DESC']
     ]);
@@ -825,6 +863,20 @@ sera appliquée::
 Cette approche remplace le ``find('first')`` des versions précédentes de
 CakePHP. Vous pouvez aussi utiliser la méthode ``get()`` si vous chargez les
 entities avec leur clé primaire.
+
+Getting a Count of Results
+--------------------------
+
+Once you have created a query object, you can use the ``count()`` method to get
+a result count of that query::
+
+    // In a controller or table method.
+    $query = $articles->find('all', [
+        'where' => ['Articles.title LIKE' => '%Ovens%']
+    ]);
+    $number = $query->count();
+
+See :ref:`query-count` for additional usage of the ``count()`` method.
 
 .. _table-find-list:
 
@@ -836,6 +888,7 @@ des données de votre applications. Par exemple, c'est très utile quand vous
 créez des elements `<select>`. CakePHP fournit une méthode simple à utiliser
 pour générer des 'lists' de données::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('list');
     $data = $query->toArray();
 
@@ -861,6 +914,7 @@ Quand vous appelez ``list``, vous pouvez configurer les champs utilisés pour
 la clé et la valeur avec respectivement les options ``idField`` et
 ``valueField``::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title'
     ]);
@@ -876,6 +930,7 @@ Les résultats peuvent être groupés en des ensembles imbriqués. C'est utile
 quand vous voulez des ensemble bucketed ou que vous voulez construire des
 elements ``<optgroup>`` avec FormHelper::
 
+    // Dans un controller ou dans une méthode table.
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title',
         'groupField' => ['author_id']
@@ -902,6 +957,7 @@ threaded ensemble à travers un champ clé. Par défaut, ce champ est
 dans une table de style 'liste adjacente'. Toutes les entities qui matchent
 un ``parent_id`` donné sont placées sous l'attribut ``children``::
 
+    // Dans un controller ou dans une méthode table.
     $query = $comments->find('threaded');
 
     // Expanded les valeurs par défaut
@@ -951,6 +1007,7 @@ des articles publiés, nous ferions ce qui suit::
 
     }
 
+    // Dans un controller ou dans une méthode table.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published');
 
@@ -961,6 +1018,7 @@ permettant de faire des requêtes complexes sans efforts. En supposant que
 vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
 ce qui suit::
 
+    // Dans un controller ou dans une méthode table.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
 
@@ -1026,6 +1084,8 @@ surrounding lazy-loading in an ORM. The queries generated by eager loading can
 better leverage joins, allowing more efficient queries to be made. In CakePHP
 you define eager loaded associations using the 'contain' method::
 
+    // Dans un controller ou dans une méthode table.
+
     // As an option to find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
@@ -1066,6 +1126,8 @@ Passing Conditions to Contain
 
 When using ``contain`` you are able to restrict the data returned by the
 associations and filter them by conditions::
+
+    // Dans un controller ou dans une méthode table.
 
     $query = $articles->find()->contain([
         'Comments' => function ($q) {
@@ -1130,6 +1192,8 @@ specific associated data. For example if you have 'Articles belongsToMany Tags'
 you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP::
 
+    // Dans un controller ou dans une méthode table.
+
     $query = $articles->find();
     $query->matching('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
@@ -1147,6 +1211,7 @@ published articles using the following::
 Filtering by deep associations is surprisingly easy, and the syntax should be
 already familiar to you::
 
+    // Dans un controller ou dans une méthode table.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
             return $q->where(['Country.name' => 'Japan'])
@@ -1197,6 +1262,7 @@ can disable buffering on the query to stream results::
 
 Result sets allow you to easily cache/serialize or JSON encode results for API results::
 
+    // Dans un controller ou dans une méthode table.
     $results = $query->all();
 
     // serialized
@@ -1215,6 +1281,7 @@ support the same methods that :ref:`collection objects<collection-objects>`
 do. For example, you can extract a list of unique tags on a collection of
 articles quite easily::
 
+    // Dans un controller ou dans une méthode table.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
@@ -1352,6 +1419,7 @@ The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable validation and/or transactions using the ``$options`` argument for
 save::
 
+    // Dans un controller ou dans une méthode table.
     $articles->save($article, ['validate' => false, 'atomic' => false]);
 
 In addition to disabling validation you can choose which validation rule set you
@@ -1421,6 +1489,8 @@ that are directly related to articles table.
 You can fine tune which associations are saved by using the ``associated``
 option::
 
+    // Dans un controller.
+
     // Only save the comments association
     $articles->save($entity, ['associated' => ['Comments']);
 
@@ -1432,6 +1502,8 @@ You can define save distant or deeply nested associations by using dot notation:
 
 If you need to run a different validation rule set for any association you can
 specify it as an options array for the association::
+
+    // Dans un controller.
 
     // Save the company, the employees and related addresses for each of them.
     // For employees use the 'special' validation group
@@ -1464,6 +1536,7 @@ When saving belongsTo associations, the ORM expects a single nested entity at
 the singular, camel cased version the association name. For
 example::
 
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\User;
 
@@ -1479,7 +1552,7 @@ Saving HasOne Associations
 When saving hasOne associations, the ORM expects a single nested entity at the
 singular, camel cased version the association name. For example::
 
-
+    // Dans un controller.
     use App\Model\Entity\User;
     use App\Model\Entity\Profile;
 
@@ -1495,6 +1568,7 @@ Saving HasMany Associations
 When saving hasOne associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\Comment;
 
@@ -1524,6 +1598,7 @@ Saving BelongsToMany Associations
 When saving hasOne associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\Tag;
 
@@ -1631,11 +1706,11 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    // in config/bootstrap.php
+    // In config/bootstrap.php
     use Cake\Database\Type;
     Type::map('json', 'App\Database\Type\JsonType');
 
-    // in src/Model/Table/UsersTable.php
+    // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
     class UsersTable extends Table {
@@ -1676,6 +1751,7 @@ Deleting Entities
 Once you've loaded an entity you can delete it by calling the originating
 table's delete method::
 
+    // Dans un controller.
     $entity = $articles->find('all')->where(['id' => 2]);
     $result = $articles->delete($entity);
 
@@ -1705,6 +1781,7 @@ have the ORM load related entities, and delete them individually by setting the
 ``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
 
+    // Dans une méthode initialize de Table.
     $this->hasMany('Comments', [
         'dependent' => true,
         'cascadeCallbacks' => true,
@@ -2052,6 +2129,7 @@ look like::
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
 
+    // Dans un controller.
     foreach ($entities as $entity) {
         // Save entity
         $articles->save($entity);
@@ -2064,6 +2142,7 @@ The above will run a separate transaction for each entity saved. If you'd like
 to process all the entities as a single transaction you can use
 ``transactional()``::
 
+    // Dans un controller.
     $articles->connection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
@@ -2086,11 +2165,11 @@ changed will be saved, as opposed to sending all fields to the database to be
 persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity`` method::
 
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
-    ]);
+    $articles->patchEntity($article, $this->request->data());
+    $articles->save($article);
 
 As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity`` method is equally capable of
@@ -2098,8 +2177,12 @@ merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the second parameter of the method::
 
-    $entity = $articles->get(1);
-    $articles->patchEntity($article, $this->request->data(), ['Tags', 'Comments.Users']);
+    // Dans un controller.
+    $article = $articles->get(1);
+    $articles->patchEntity($article, $this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
+    $articles->save($article);
 
 Associations are merged by matching the primary key field in the source entities
 to the corresponding fields in the data array. For belongsTo and hasOne
@@ -2118,6 +2201,7 @@ For example give some request data like the following::
 Trying to patch an entity without an entity in the user property will create
 a new user entity::
 
+    // Dans un controller.
     $entity = $articles->patchEntity(new Article, $data);
     echo $entity->user->username; // Echoes 'mark'
 
@@ -2128,6 +2212,10 @@ important note should be made.
     For  hasMany and belongsToMany associations, if there were any entities that
     could not be matched by primary key to any record in the data array, then
     those records will be discarded from the resulting entity.
+
+    Remember that using either ``patchEntity()`` or ``patchEntities()``
+    does not persist the data, it just edits (or creates) the given entities. In order to
+    save the entity you will have to call the ``save()`` method.
 
 For example, consider the following case::
 
@@ -2148,6 +2236,7 @@ For example, consider the following case::
         ]
     ];
     $articles->patchEntity($entity, $newData);
+    $articles->save($article);
 
 At the end, if the entity is converted back to an array you will obtain the
 following result::
@@ -2174,8 +2263,10 @@ the database, if you wish to remove the comments for that article that are not
 present in the entity, you can collect the primary keys and execute a batch
 delete for those not in the list::
 
+    // Dans un controller.
+    $comments = TableRegistry::get('Comments');
     $present = (new Collection($entity->comments))->extract('id');
-    TableRegistry::get('Comments')->deleteAll([
+    $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
     ]);
@@ -2188,15 +2279,24 @@ patching hasMany and belongsToMany associations apply form patching multiple
 entities: Matches are done by the primary key field value and missing matches in
 the original entities array will be removed and not present in the result::
 
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->data());
+    foreach ($patched as $entity) {
+        $articles->save($entity);
+    }
 
 Similarly to using ``patchEntity``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
-    $patched = $articles->patchEntities($list, $this->request->data(), ['Tags', 'Comments.Users']);
+    // Dans un controller.
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->data(),
+        ['associated' => ['Tags', 'Comments.Users']]
+    );
 
 Avoiding Property Mass Assignment Attacks
 -----------------------------------------
@@ -2206,9 +2306,10 @@ what you allow your users to change or add in the entities. For example, by
 sending an array in the request containing the ``user_id`` an attacker could change the
 owner of an article, causing undesirable effects::
 
-    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
+    $this->save($entity);
 
 There are two ways of protecting you against this problem. The first one is by
 setting the default columns that can be safely set from a request using the
@@ -2217,13 +2318,14 @@ setting the default columns that can be safely set from a request using the
 The second way is by using the ``fieldList`` option when creating or merging
 data into an entity::
 
-    // contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
 
     // Only allow title to be changed
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);
+    $this->save($entity);
 
 You can also control which properties can be assigned for associations::
 
@@ -2233,6 +2335,7 @@ You can also control which properties can be assigned for associations::
         'fieldList' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
+    $this->save($entity);
 
 Using this feature is handy when you have many different functions your users
 can access and you want to let your users edit different data based on their

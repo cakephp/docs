@@ -109,21 +109,21 @@ RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
 ``src/Controller/RecipesController.php`` et contiendrait::
 
-        # /src/Controller/RecipesController.php
-        
-        class RecipesController extends AppController {
-            public function view($id) {
-                //la logique de l'action va ici..
-            }
-        
-            public function share($customerId, $recipeId) {
-                //la logique de l'action va ici..
-            }
-        
-            public function search($query) {
-                //la logique de l'action va ici..
-            }
+    // src/Controller/RecipesController.php
+
+    class RecipesController extends AppController {
+        public function view($id) {
+            //la logique de l'action va ici..
         }
+
+        public function share($customerId, $recipeId) {
+            //la logique de l'action va ici..
+        }
+
+        public function search($query) {
+            //la logique de l'action va ici..
+        }
+    }
 
 Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
 ``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
@@ -147,6 +147,8 @@ avez des méthodes du controller qui sont utilisées pour des requêtes web
 normales + requestAction, vous devrez vérifier le type de requête avant de
 retourner::
 
+    // src/Controller/RecipesController.php
+
     class RecipesController extends AppController {
         public function popular() {
             $popular = $this->Recipes->find('popular');
@@ -167,7 +169,7 @@ application, nous couvrons certains des attributs et méthodes du cœur fournis
 par les controllers de CakePHP.
 
 Interactions avec les Vues
---------------------------
+==========================
 
 Les Controllers interagissent avec les vues de plusieurs façons.
 Premièrement, ils sont capables de passer des données aux vues, en utilisant
@@ -205,10 +207,10 @@ rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
         'prix_de_base' => 23.95
     ];
 
-    // donne $couleur, $type, et $prix_de_base 
+    // donne $couleur, $type, et $prix_de_base
     // disponible dans la vue:
 
-    $this->set($data);  
+    $this->set($data);
 
 Rendre une View
 ---------------
@@ -286,7 +288,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``plugins/Users/src/Template/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
 
 Rediriger vers d'Autres Pages
 =============================
@@ -348,7 +350,7 @@ Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
         '#' => 'top'
     ]);
 
-L'URL générée serait:
+L'URL générée serait::
 
     http://www.example.com/orders/confirm?product=pizza&quantity=5#top
 
@@ -375,24 +377,27 @@ La fonction ``loadModel`` devient pratique quand
 vous avez besoin d'utiliser une table de model/collection qui n'est pas le
 model du controller par défaut ou un de ses models associés::
 
+    // Dans une méthode de controller.
     $this->loadModel('Articles');
     $recentArticles = $this->Articles->find('all', [
-	'limit' => 5,
-	'order' => 'Articles.created DESC'
+        'limit' => 5,
+        'order' => 'Articles.created DESC'
     ]);
 
 Si vous utilisez un provider de table différent de l'ORM intégré, vous
 pouvez lier ce système de table dans les controllers de CakePHP en
 connectant sa méthode factory::
 
+    // Dans une méthode de controller.
     $this->modelFactory(
-	'ElasticIndex',
-	['ElasticIndexes', 'factory']
+        'ElasticIndex',
+        ['ElasticIndexes', 'factory']
     );
 
 Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
 pour charger les instances::
 
+    // Dans une méthode de controller.
     $this->loadModel('Locations', 'ElasticIndex');
 
 .. note::
@@ -496,6 +501,13 @@ ou juste après que les actions du controller ont été effectuées :
 
 En plus des callbacks des controllers, les :doc:`/controllers/components`
 fournissent aussi un ensemble similaire de callbacks.
+
+N'oubliez pas d'appeler les callbacks de ``AppController`` dans les callbacks
+des controllers enfant pour avoir de meilleurs résultats::
+
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+    }
 
 Plus sur les Controllers
 ========================
