@@ -279,6 +279,8 @@ writing session data.
 
 .. php:class:: Session
 
+.. _accessing-session-object:
+
 Accessing the Session Object
 ============================
 

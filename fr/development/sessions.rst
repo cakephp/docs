@@ -304,6 +304,8 @@ de session personnalisé pour la lecture & l'écriture des données de session.
 
 .. php:class:: Session
 
+.. _accessing-session-object:
+
 Accéder à l'Objet Session
 =========================
 

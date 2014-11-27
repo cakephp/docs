@@ -9,7 +9,7 @@ well as providing convenience methods for several ``$_SESSION``
 related functions.
 
 The SessionComponent has been deprecated in the 3.x version of the framework. To access
-the Session please see :doc:`Accessing the Session </development/sessions.html#accessing-the-session-object>`
+the Session please see :ref:`Accessing the Session <accessing-session-object>`
 
 For more information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
