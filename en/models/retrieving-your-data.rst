@@ -947,7 +947,8 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
-The wildcard operators ``ILIKE`` and ``RLIKE`` (RLIKE since version 2.6) are also available.
+The wildcard operators ``ILIKE`` and ``RLIKE`` (RLIKE since version 2.6) are
+also available.
 
 CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null::

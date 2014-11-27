@@ -61,6 +61,8 @@ Datasource
 Mysql
 -----
 
+- The ``RLIKE`` wildcard operator has been added to allow regular expression
+  pattern lookups this way.
 - Schema migrations with MySQL now support an ``after`` key when adding
   a column. This key allows you to specify which column the new one should be
   added after.
