@@ -322,7 +322,7 @@ in your ``tests/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
-    use Cake\Test\TestFixture;
+    use Cake\TestSuite\Fixture\TestFixture;
 
     class ArticlesFixture extends TestFixture {
 
