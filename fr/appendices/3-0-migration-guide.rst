@@ -20,6 +20,15 @@ Pré-requis
 
     CakePHP 3.0 ne fonctionnera pas si vous n'avez pas les pré-requis ci-dessus.
 
+Outil d'Upgrade
+===============
+
+Alors que ce document couvre tous les changements non rétro-compatibles et les
+évolutions faites dans CakePHP 3.0, nous avons également créé une application
+de console pour vous aider à réaliser facilement quelques changements qui
+consomment du temps. Vous pouvez `Récupérer l'outil d'upgrade
+depuis Github <https://github.com/cakephp/upgrade>`_.
+
 Organisation des Répertoires de l'Application
 =============================================
 

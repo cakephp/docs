@@ -347,7 +347,7 @@ Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 
     namespace App\Test\Fixture;
 
-    use Cake\Test\TestFixture;
+    use Cake\TestSuite\Fixture\TestFixture;
 
     class ArticlesFixture extends TestFixture {
 
