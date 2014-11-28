@@ -593,7 +593,7 @@ la table jointe est associée pour chaque model en utilisant un type de relation
 `hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole
 CakePHP qui nous demande d'écrire une application qui lui permette de connecter
 la présence d'un étudiant à un cours avec les journées assistées et
-validées. Jettez un œil au code suivant.::
+validées. Jettez un œil au code suivant. ::
 
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
@@ -627,7 +627,7 @@ validées. Jettez un œil au code suivant.::
    <?php echo  $this->Form->end(); ?>
 
 
-Le tableau de données ressemblera à ceci quand il sera soumis.::
+Le tableau de données ressemblera à ceci quand il sera soumis. ::
 
     Array
     (
@@ -690,7 +690,7 @@ Il y aura des cas où vous voudrez créer les Student et Course
 indépendamment et associer les deux ensemble avec CourseMemberShip plus tard.
 Donc, vous aurez peut-être un formulaire qui permet la sélection de students
 et de courses existants à partir d'une liste de choix ou d'une entrée d'un ID
-et ensuite les deux meta-champs pour CourseMembership, par ex.::
+et ensuite les deux meta-champs pour CourseMembership, par ex. ::
 
         // View/CourseMemberships/add.ctp
 
@@ -949,7 +949,7 @@ La clé est dans la configuration du model ``className``. En ajoutant
 simplement une relation ``Project`` HABTM ``Project`` entraine des
 problèmes lors des enregistrements de données.
 En configurant le ``className`` au nom de models et en utilisant l'alias
-en clé, nous évitons ces problèmes.::
+en clé, nous évitons ces problèmes. ::
 
     class Project extends AppModel {
         public $hasAndBelongsToMany = array(

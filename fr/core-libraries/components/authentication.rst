@@ -149,7 +149,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 Ne mettez pas d'autre clés de configuration de Auth(comme authError,
 loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
-ressemblerait à quelque chose comme.::
+ressemblerait à quelque chose comme. ::
 
         // Passage de paramètre dans le tableau $components
         public $components = array(
@@ -307,7 +307,7 @@ cookies, ces valeurs sont utilisées pour ré-identifier l'utilisateur et
 s'assurer que c'est un utilisateur valide. Comme avec les méthodes
 d'authentification de l'objet ``authenticate()``, la méthode ``getuser()``
 devrait retourner un tableau d'information utilisateur en cas de succès,
-et ``false`` en cas d'echec.::
+et ``false`` en cas d'echec. ::
 
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
@@ -350,7 +350,7 @@ Afficher les messages flash de Auth
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de
-préférence avant la ligne content_for_layout.::
+préférence avant la ligne content_for_layout. ::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');

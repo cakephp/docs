@@ -32,7 +32,7 @@ Formatting
     :rtype: integer
 
     Converts given time (in server's time zone) to user's local
-    time, given his/her timezone.::
+    time, given his/her timezone. ::
 
         // called via TimeHelper
         echo $this->Time->convert(time(), 'Asia/Jakarta');
@@ -166,7 +166,7 @@ Formatting
 
     :rtype: integer
 
-    Will return the date as an integer set to Greenwich Mean Time (GMT).::
+    Will return the date as an integer set to Greenwich Mean Time (GMT). ::
 
         // called via TimeHelper
         echo $this->Time->gmt('Aug 22, 2011');

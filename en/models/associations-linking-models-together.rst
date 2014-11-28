@@ -792,7 +792,7 @@ the columns as it is not replaced in the new insert.
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models.::
+model CourseMembership. Take a look at the following models. ::
 
             // Student.php
             class Student extends AppModel {

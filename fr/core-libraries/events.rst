@@ -390,7 +390,7 @@ la donnée $order (commande).
 
 Les résultats d'événement peuvent être modifiés soit en utilisant directement
 la propriété result de l'objet event  ou en retournant une valeur dans le
-callback lui même.::
+callback lui même. ::
 
     // Un écouteur (listener) de callback
     public function doSomething($event) {

@@ -628,7 +628,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     Create a JavaScript snippet containing an ``alert()`` snippet. By
     default, ``alert`` does not buffer, and returns the script
-    snippet.::
+    snippet. ::
 
         $alert = $this->Js->alert('Hey there');
 
@@ -636,7 +636,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     Create a JavaScript snippet containing a ``confirm()`` snippet. By
     default, ``confirm`` does not buffer, and returns the script
-    snippet.::
+    snippet. ::
 
         $alert = $this->Js->confirm('Are you sure?');
 
@@ -644,7 +644,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     Create a JavaScript snippet containing a ``prompt()`` snippet. By
     default, ``prompt`` does not buffer, and returns the script
-    snippet.::
+    snippet. ::
 
         $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
 
@@ -676,7 +676,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
         echo $this->Js->submit('Save', array('update' => '#content'));
 
     Will create a submit button with an attached onclick event. The
-    click event will be buffered by default.::
+    click event will be buffered by default. ::
 
         echo $this->Js->submit('Save', array(
             'update' => '#content',
@@ -722,7 +722,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     with the response.
 
     You can use the ``htmlAttributes`` option to add in additional
-    custom attributes.::
+    custom attributes. ::
 
         echo $this->Js->link('Page 2', array('page' => 2), array(
             'update' => '#content',

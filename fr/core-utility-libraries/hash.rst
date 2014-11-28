@@ -150,7 +150,7 @@ Les Types d'Attribut Correspondants
 
     :rtype: array
 
-    Retire tous les éléments d'un tableau qui matche avec $path.::
+    Retire tous les éléments d'un tableau qui matche avec $path. ::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -184,7 +184,7 @@ Les Types d'Attribut Correspondants
     les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
-    $groupPath.::
+    $groupPath. ::
 
         $a = array(
             array(

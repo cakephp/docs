@@ -593,7 +593,7 @@ Utilisation avancée
 
     Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la
     direction spécifiée dans les paramètres. Cette méthode ne changera pas le
-    parent d'un nœud.::
+    parent d'un nœud. ::
 
         $model->reorder(array(
             'id' => ,    //id de l\'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id

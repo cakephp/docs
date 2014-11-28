@@ -88,7 +88,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     la feuille de style sera importée.
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
-    le répertoire /app/webroot/css si un chemin ne commence par un '/'.::
+    le répertoire /app/webroot/css si un chemin ne commence par un '/'. ::
 
         echo $this->Html->css('forms');
 
@@ -99,7 +99,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
     Le premier paramètre peut être un tableau pour inclure des fichiers
-    multiples.::
+    multiples. ::
 
         echo $this->Html->css(array('forms', 'tables', 'menu'));
 
@@ -272,7 +272,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Construit les définitions de style CSS en se basant sur les clés et
     valeurs du tableau passé à la méthode. Particulièrement pratique si votre
-    fichier CSS est dynamique.::
+    fichier CSS est dynamique. ::
 
         echo $this->Html->style(array(
             'background' => '#633',
@@ -290,7 +290,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau de :term:`attributs html`.
 
     Créé une balise image formatée. Le chemin fournit devra être relatif à
-    /app/webroot/img/.::
+    /app/webroot/img/. ::
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
@@ -301,7 +301,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
     Pour créer un lien d'image, spécifiez le lien de destination en
-    utilisant l'option ``url`` dans ``$htmlAttributes``.::
+    utilisant l'option ``url`` dans ``$htmlAttributes``. ::
 
         echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "Brownies",
@@ -353,7 +353,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Méthode générale pour la création de liens HTML. Utilisez les ``$options``
     pour spécifier les attributs des éléments et si le ``$title`` devra ou
-    non être échappé.::
+    non être échappé. ::
 
         echo $this->Html->link(
             'Enter',
@@ -401,7 +401,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
 
-    Les chaînes de requête peuvent aussi être créées avec ``link()``.::
+    Les chaînes de requête peuvent aussi être créées avec ``link()``. ::
 
         echo $this->Html->link('View image', array(
             'controller' => 'images',
@@ -420,7 +420,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex 
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité.::
+    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité. ::
 
         <?php
         echo $this->Html->link(
@@ -462,7 +462,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Définir ``escape`` à false va aussi désactiver l'échappement des attributs
     du lien. Puisque depuis 2.4, vous pouvez utiliser l'option ``escapeTitle``
-    pour juste désactiver l'échappement du titre et pas des attributs.::
+    pour juste désactiver l'échappement du titre et pas des attributs. ::
 
         <?php
         echo $this->Html->link(
@@ -639,7 +639,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     les attributs seront appliqués à toutes les balises script générées.
 
     Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
-    JavaScript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
+    JavaScript spécifiés se trouvent dans le répertoire ``/app/webroot/js``. ::
 
         echo $this->Html->script('scripts');
 
@@ -665,7 +665,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
 
     Le premier paramètre peut être un tableau pour inclure des
-    fichiers multiples.::
+    fichiers multiples. ::
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
@@ -678,7 +678,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <script type="text/javascript" href="/js/scripts.js"></script>
 
     Vous pouvez insérer dans la balise script un bloc spécifique en
-    utilisant l'option ``block``.::
+    utilisant l'option ``block``. ::
 
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
 
@@ -794,7 +794,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $thOptions: Un tableau d' :term:`attributs HTML`
         pour l'élément <th>.
 
-    Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
+    Créé une ligne de cellule d'en-tête à placer dans la balise <table>. ::
 
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
@@ -1054,7 +1054,7 @@ Création d'un chemin de navigation avec le Helper Html
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
     Maintenant, dans votre vue vous allez devoir ajouter ce qui suit
-    pour démarrer le fil d'Ariane sur chacune de vos pages.::
+    pour démarrer le fil d'Ariane sur chacune de vos pages. ::
 
         $this->Html->addCrumb('Users', '/users');
         $this->Html->addCrumb('Add User', array('controller' => 'users', 'action' => 'add'));

@@ -154,7 +154,7 @@ default, see
 :ref:`core-validation-rules`.
 
 If the rule does not require any parameters, 'rule' can be a single
-value e.g.::
+value e.g. ::
 
     public $validate = array(
         'login' => array(
@@ -615,7 +615,7 @@ with usage examples.
 
 .. php:staticmethod:: alphaNumeric(mixed $check)
 
-    The data for the field must only contain letters and numbers.::
+    The data for the field must only contain letters and numbers. ::
 
         public $validate = array(
             'login' => array(
@@ -628,7 +628,7 @@ with usage examples.
 
     The length of the data for the field must fall within the specified
     numeric range. Both minimum and maximum values must be supplied.
-    Uses = not.::
+    Uses = not. ::
 
         public $validate = array(
             'password' => array(
@@ -646,7 +646,7 @@ with usage examples.
 
     This rule is used to make sure that the field is left blank or only
     white space characters are present in its value. White space
-    characters include space, tab, carriage return, and newline.::
+    characters include space, tab, carriage return, and newline. ::
 
         public $validate = array(
             'id' => array(
@@ -659,7 +659,7 @@ with usage examples.
 .. php:staticmethod:: boolean(string $check)
 
     The data for the field must be a boolean value. Valid values are
-    true or false, integers 0 or 1 or strings '0' or '1'.::
+    true or false, integers 0 or 1 or strings '0' or '1'. ::
 
         public $validate = array(
             'myCheckbox' => array(
@@ -1076,7 +1076,7 @@ with usage examples.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
-    The basic rule to ensure that a field is not empty.::
+    The basic rule to ensure that a field is not empty. ::
 
         public $validate = array(
             'title' => array(
@@ -1091,7 +1091,7 @@ with usage examples.
 
 .. php:staticmethod:: numeric(string $check)
 
-    Checks if the data passed is a valid number.::
+    Checks if the data passed is a valid number. ::
 
         public $validate = array(
             'cars' => array(

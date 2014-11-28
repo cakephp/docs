@@ -272,7 +272,7 @@ Using CSRF protection
 Simply by adding the ``SecurityComponent`` to your components array,
 you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
-csrfExpires on the component.::
+csrfExpires on the component. ::
 
     public $components = array(
         'Security' => array(

@@ -209,7 +209,7 @@ Finding which objects CakePHP knows about
         //returns array('PagesController', 'BlogController');
         App::objects('Controller');
 
-    You can also search only within a plugin's objects by using the plugin dot syntax.::
+    You can also search only within a plugin's objects by using the plugin dot syntax. ::
 
         // returns array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');

@@ -115,7 +115,7 @@ directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
 as an app/libs or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
+dot syntax. ::
 
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
@@ -387,7 +387,7 @@ Cache API
     ``Cache::set()`` to change the settings for a write, you should
     also use ``Cache::set()`` before reading the data back in. If you
     fail to do so, the default settings will be used when the cache key
-    is read.::
+    is read. ::
 
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);

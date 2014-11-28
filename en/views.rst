@@ -596,7 +596,7 @@ If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP folder.::
+If the element doesn't exist in the plugin, it will look in the main APP folder. ::
 
     echo $this->element('Contacts.helpbox');
 

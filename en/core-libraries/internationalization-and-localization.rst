@@ -85,7 +85,7 @@ etc.) cake will use them if appropriate.
 
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
-should consider implementing a different solution. e.g.::
+should consider implementing a different solution. e.g. ::
 
     // App Controller Code.
     public function beforeFilter() {

@@ -252,7 +252,7 @@ by Daniel::
 There is an important caveat to using Containable when filtering on a deeper association. In the previous example,
 assume you had 3 posts in your database and Daniel had commented on 2 of those posts. The operation
 $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"')); would return ALL 3 posts, not
-just the 2 posts that Daniel had commented on. It won't return all comments however, just comments by Daniel.::
+just the 2 posts that Daniel had commented on. It won't return all comments however, just comments by Daniel. ::
 
     [0] => Array
             (
@@ -315,7 +315,7 @@ just the 2 posts that Daniel had commented on. It won't return all comments howe
             )
 
 If you want to filter the posts by the comments, so that posts without a comment by Daniel won't be
-returned, the easiest way is to find all the comments by Daniel and contain the Posts.::
+returned, the easiest way is to find all the comments by Daniel and contain the Posts. ::
 
     $this->Comment->find('all', array(
         'conditions' => 'Comment.author = "Daniel"',
@@ -421,7 +421,7 @@ reattaching the behavior as seen in
 ContainableBehavior can sometimes cause issues with other behaviors
 or queries that use aggregate functions and/or GROUP BY statements.
 If you get invalid SQL errors due to mixing of aggregate and
-non-aggregate fields, try disabling the ``autoFields`` setting.::
+non-aggregate fields, try disabling the ``autoFields`` setting. ::
 
     $this->Post->Behaviors->load('Containable', array('autoFields' => false));
 

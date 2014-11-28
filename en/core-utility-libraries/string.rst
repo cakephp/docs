@@ -259,7 +259,7 @@ use the ``String`` class::
     with a number of characters on each side determined by ``$radius``,
     and prefix/suffix with ``$ellipsis``. This method is especially handy for
     search results. The query string or keywords can be shown within
-    the resulting document.::
+    the resulting document. ::
 
         // called as TextHelper
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
@@ -279,7 +279,7 @@ use the ``String`` class::
     :param string $and: The word used for the last join.
 
     Creates a comma-separated list where the last two items are joined
-    with 'and'.::
+    with 'and'. ::
 
         // called as TextHelper
         echo $this->Text->toList($colors);

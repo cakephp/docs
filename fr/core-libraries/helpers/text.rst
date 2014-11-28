@@ -24,7 +24,7 @@ longues étendues de texte.
 
     Ajoute les liens aux adresses email bien formées dans $text, selon toute
     les options définies dans ``$htmlOptions`` (regardez
-    :php:meth:`HtmlHelper::link()`).::
+    :php:meth:`HtmlHelper::link()`). ::
 
         $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
             contactez info@example.com';
@@ -72,7 +72,7 @@ longues étendues de texte.
     :param string $text: Le texte à convertir.
 
     Ajoute <p> autour du texte où la double ligne retourne et <br> où une
-    simple ligne retourne, sont trouvés.::
+    simple ligne retourne, sont trouvés. ::
 
         $myText = 'For more information
         regarding our world-famous pastries and desserts.

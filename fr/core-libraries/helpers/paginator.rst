@@ -151,7 +151,7 @@ Les options supportées sont:
   'a' ou 'span' supplémentaires.
 
 Bien que cette méthode permette beaucoup de customisation pour ses sorties.
-Elle est aussi prête pour être appelée sans aucun paramètres.::
+Elle est aussi prête pour être appelée sans aucun paramètres. ::
 
     echo $this->Paginator->numbers();
 
@@ -573,7 +573,7 @@ D'autres Méthodes
     :param string $model: Le model sur lequel paginer.
 
     Par défaut retourne une chaîne URL complètement paginée à utiliser
-    dans des contextes non-standard (ex. JavaScript).::
+    dans des contextes non-standard (ex. JavaScript). ::
 
         echo $this->Paginator->url(array('sort' => 'titre'), true);
 

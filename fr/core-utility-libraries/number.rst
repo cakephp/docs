@@ -158,7 +158,7 @@ automatiqement la sortie dans la vue.
           de fraction.
 
     Ajoute le format de monnaie au helper Number. Facilite la réutilisation
-    des formats de monnaie.::
+    des formats de monnaie. ::
 
         // appelé par NumberHelper
         $this->Number->addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
@@ -200,7 +200,7 @@ automatiqement la sortie dans la vue.
 
     Cette méthode affiche un nombre avec le montant de précision spécifié
     (place de la décimal). Elle arrondira afin de maintenir le niveau de
-    précision défini.:: 
+    précision défini. :: 
 
         // appelé avec NumberHelper
         echo $this->Number->precision(456.91873645, 2 );
@@ -230,7 +230,7 @@ automatiqement la sortie dans la vue.
     Comme precision(), cette méthode formate un nombre selon la précision
     fournie (où les nombres sont arrondis pour parvenir à ce degré de
     précision). Cette méthode exprime aussi le nombre en tant que
-    pourcentage et préfixe la sortie avec un signe de pourcent.::
+    pourcentage et préfixe la sortie avec un signe de pourcent. ::
     
         // appelé avec NumberHelper. Sortie: 45.69%
         echo $this->Number->toPercentage(45.691873645);

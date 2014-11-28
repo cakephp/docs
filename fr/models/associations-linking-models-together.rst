@@ -821,7 +821,7 @@ dans les colonnes qui ne seraient pas remplacées dans le nouvel ajout.
 La façon d'implémenter nos exigences est d'utiliser un **join model**,
 autrement connu comme une association **hasMany through**.
 Cela étant fait, l'association est elle-même un model. Ainsi, vous pouvez
-créer un nouveau model CourseMembership. Regardez les models suivants.::
+créer un nouveau model CourseMembership. Regardez les models suivants. ::
 
             // Student.php
             class Student extends AppModel {

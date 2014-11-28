@@ -507,7 +507,7 @@ are a few more tree-orientated permutations at your disposal.
 
 
     Using the id of "International" getPath will return each of the
-    parents in turn (starting from the top).::
+    parents in turn (starting from the top). ::
 
         $parents = $this->Category->getPath(15);
 
@@ -671,7 +671,7 @@ Advanced Usage
 
     Reorders the nodes (and child nodes) of the tree according to the
     field and direction specified in the parameters. This method does
-    not change the parent of any node.::
+    not change the parent of any node. ::
 
         $model->reorder(array(
             //id of record to use as top node for reordering, default: $Model->id

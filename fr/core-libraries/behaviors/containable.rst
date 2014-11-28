@@ -256,7 +256,7 @@ posts. L'opération
 $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 retournerait TOUS les 3 posts, pas juste les 3 posts que Daniel a commenté.
 Cela ne va pas retourner tous les comments cependant, juste les comments de
-Daniel.::
+Daniel. ::
 
     [0] => Array
             (
@@ -320,7 +320,7 @@ Daniel.::
 
 Si vous voulez filtrer les posts selon les comments, pour que les posts non
 commentés par Daniel ne soient pas retournés, le plus simple est de
-trouver tous les comments de Daniel et de faire un contain sur les Posts.::
+trouver tous les comments de Daniel et de faire un contain sur les Posts. ::
 
     $this->Comment->find('all', array(
         'conditions' => 'Comment.author = "Daniel"',

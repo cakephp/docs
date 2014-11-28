@@ -321,7 +321,7 @@ Flow Control
     The flow control method you'll use most often is :php:meth:`~Controller::redirect()`.
     This method takes its first parameter in the form of a
     CakePHP-relative URL. When a user has successfully placed an order,
-    you might wish to redirect them to a receipt screen.::
+    you might wish to redirect them to a receipt screen. ::
 
         public function place_order() {
             // Logic for finalizing order goes here

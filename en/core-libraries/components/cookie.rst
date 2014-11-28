@@ -127,7 +127,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 .. php:method:: read(mixed $key = null)
 
     This method is used to read the value of a cookie variable with the
-    name specified by $key.::
+    name specified by $key. ::
 
         // Outputs "Larry"
         echo $this->Cookie->read('name');

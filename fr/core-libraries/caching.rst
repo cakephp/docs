@@ -131,7 +131,7 @@ Si vous avez un moteur de cache nommé ``MonMoteurDeCachePerso`` il devra
 comme une app/librairie ou dans
 ``$plugin/Lib/Cache/Engine/MonMoteurDeCachePerso.php`` faisant parti d'un
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
-notation par points de plugin.::
+notation par points de plugin. ::
 
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
@@ -387,7 +387,7 @@ l'API de Cache
     le cache. Si il n'y a pas de ``$config`` spécifiée c'est la
     configuration par défaut qui sera appliquée. Cache::write()
     peut stocker n'importe quel type d'objet et elle est idéale pour
-    stocker les résultats des finds de vos models.::
+    stocker les résultats des finds de vos models. ::
 
    
             if (($posts = Cache::read('posts')) === false) {
@@ -411,7 +411,7 @@ l'API de Cache
     Si vous utilisez ``Cache::set()`` pour changer les paramètres pour une
     écriture, vous devez aussi utiliser ``Cache::set()`` avant de lire les
     données en retour. Si vous ne faites pas cela, les paramètres par défaut
-    seront utilisés quand la clé de cache est lue.::
+    seront utilisés quand la clé de cache est lue. ::
    
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);

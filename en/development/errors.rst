@@ -80,7 +80,7 @@ need to be done::
 
 This class/method will print out 'There has been an error!' each time an error
 occurs. Since you can define an error handler as any callback type, you could
-use an anonymous function if you are using PHP5.3 or greater.::
+use an anonymous function if you are using PHP5.3 or greater. ::
 
     Configure::write('Error.handler', function($code, $description, $file = null,
         $line = null, $context = null) {

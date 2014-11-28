@@ -1242,7 +1242,7 @@ Créer des Tests pour les Plugins
 ================================
 
 Les Tests pour les plugins sont crées dans leur propre répertoire à
-l'intérieur du dossier des plugins.::
+l'intérieur du dossier des plugins. ::
 
     /app
         /Plugin

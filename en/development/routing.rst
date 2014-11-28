@@ -45,7 +45,7 @@ that CakePHP comes configured with a default set of routes.
 CakePHP's default routing will get you pretty far in any
 application. You can access an action directly via the URL by
 putting its name in the request. You can also pass parameters to
-your controller actions using the URL.::
+your controller actions using the URL. ::
 
         URL pattern default routes:
         http://example.com/controller/action/param1/param2/param3
@@ -538,7 +538,7 @@ Passed Arguments
 
 Passed arguments are additional arguments or path segments that are
 used when making a request. They are often used to pass parameters
-to your controller methods.::
+to your controller methods. ::
 
     http://localhost/calendars/view/recent/mark
 
@@ -940,7 +940,7 @@ Router API
     The first parameter will be used as a controller name while the second is
     used as the action name. The '/\*' syntax makes this route greedy in that
     it will match requests like `/posts/index` as well as requests like
-    ``/posts/edit/1/foo/bar`` .::
+    ``/posts/edit/1/foo/bar`` . ::
 
         Router::connect(
             '/home-page',
@@ -948,7 +948,7 @@ Router API
         );
 
     The above shows the use of route parameter defaults. And providing routing
-    parameters for a static route.::
+    parameters for a static route. ::
 
         Router::connect(
             '/:lang/:controller/:action/:id',

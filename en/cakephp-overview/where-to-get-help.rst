@@ -50,7 +50,7 @@ The Test Cases
 If you ever feel the information provided in the API is not
 sufficient, check out the code of the test cases provided with
 CakePHP. They can serve as practical examples for function and
-data member usage for a class.::
+data member usage for a class. ::
 
     lib/Cake/Test/Case
 

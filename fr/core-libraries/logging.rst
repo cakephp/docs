@@ -50,7 +50,7 @@ pourrait ressembler à ceci::
 Lorsque vous configurez le flux d'un log le paramètre de ``engine`` est
 utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
-un tableau.::
+un tableau. ::
 
     App::uses('BaseLog', 'Log/Engine');
 
@@ -174,7 +174,7 @@ l'utilisateur pour que la journalisation fonctionne correctement.
 
 Vous pouvez configurer/alterner la localisation de FileLog en utilisant
 :php:meth:`CakeLog::config()`. FileLog accepte un ``chemin`` qui permet aux
-chemins personnalisés d'être utilisés.::
+chemins personnalisés d'être utilisés. ::
 
     CakeLog::config('chemin_perso', array(
         'engine' => 'FileLog',

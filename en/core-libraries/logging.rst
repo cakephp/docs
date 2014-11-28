@@ -48,7 +48,7 @@ DatabaseLog would look like::
 
 When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log stream's constructor as an array.::
+properties are passed to the log stream's constructor as an array. ::
 
     App::uses('BaseLog', 'Log/Engine');
 

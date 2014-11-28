@@ -60,7 +60,7 @@ switch 'deny' in for 'grant'.
 Check permissions
 =================
 
-Use this command to check ACL permissions.::
+Use this command to check ACL permissions. ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 

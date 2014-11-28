@@ -88,7 +88,7 @@ pour gérer vos erreurs. Ce qui suit serait à faire::
 Cette classe/méthode va afficher 'Il y a eu une erreur!' chaque fois qu'une
 erreur apparaît. Depuis que vous pouvez définir un gestionnaire d'erreur comme
 tout type de callback, vous pouvez utiliser une fonction anonyme si vous
-utilisez PHP5.3 ou supérieur.::
+utilisez PHP5.3 ou supérieur. ::
 
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
         echo 'Oh non quelque chose est apparu';

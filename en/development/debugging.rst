@@ -113,7 +113,7 @@ set to a value greater than 0.
 
     Returns the current stack trace. Each line of the trace includes
     the calling method, including which file and line the call
-    originated from.::
+    originated from. ::
 
         //In PostsController::index()
         pr(Debugger::trace());
@@ -137,7 +137,7 @@ set to a value greater than 0.
 
     Grab an excerpt from the file at $path (which is an absolute
     filepath), highlights line number $line with $context number of
-    lines around it.::
+    lines around it. ::
 
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
