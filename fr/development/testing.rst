@@ -836,13 +836,13 @@ possède de correctes effets secondaires.
 Configurer la Requête
 ---------------------
 
-La classe ``IntegrationTestCase`` intégre de nombreux helpers pour rendre simple
+La classe ``IntegrationTestCase`` intègre de nombreux helpers pour faciliter
 la configuration des requêtes que vous allez envoyer à votre controller::
 
-    // Défini des cookies
+    // Définit des cookies
     $this->cookie('name', 'Uncle Bob');
 
-    // Défini des données de session
+    // Définit des données de session
     $this->session('Auth.User.id', 1);
 
     // Configure les en-têtes
