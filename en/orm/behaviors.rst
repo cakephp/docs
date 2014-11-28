@@ -242,7 +242,9 @@ loaded behaviors, or access specific behaviors using the ``BehaviorRegistry``::
     $table->behaviors()->loaded();
 
     // Check if a specific behavior is loaded.
+    // Remember to omit plugin prefixes.
     $table->behaviors()->has('CounterCache');
 
     // Get a loaded behavior
+    // Remember to omit plugin prefixes
     $table->behaviors()->get('CounterCache');
