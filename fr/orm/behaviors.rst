@@ -249,7 +249,9 @@ spécifiques en utilisant ``BehaviorRegistry``::
     $table->behaviors()->loaded();
 
     // Vérifie si un behavior spécifique est chargé.
+    // N'utilisez pas les préfixes de plugin.
     $table->behaviors()->has('CounterCache');
 
-    // récupère un behavior chargé
+    // Récupère un behavior chargé
+    // N'utilisez pas les préfixes de plugin.
     $table->behaviors()->get('CounterCache');
