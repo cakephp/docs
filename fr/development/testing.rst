@@ -833,8 +833,63 @@ une requête, vous pouvez utiliser les différents assertions que fournis
 ``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
 possède de correctes effets secondaires.
 
+Configurer la Requête
+---------------------
 
-Méthodes d'assertion
+La classe ``IntegrationTestCase`` intègre de nombreux helpers pour faciliter
+la configuration des requêtes que vous allez envoyer à votre controller::
+
+    // Définit des cookies
+    $this->cookie('name', 'Uncle Bob');
+
+    // Définit des données de session
+    $this->session('Auth.User.id', 1);
+
+    // Configure les en-têtes
+    $this->configRequest([
+        'headers' => ['Accept' => 'application/json']
+    ]);
+
+Les états de ces helpers définis par ces méthodes est remis à zéro dans la
+méthode ``tearDown``.
+
+.. _testing-authentication:
+
+Tester des Actions Protégées par AuthComponent
+----------------------------------------------
+
+Si vous utilisez ``AuthComponent``, vous aurez besoin de simuler les données
+de session utilisées par AuthComponent pour valider l'identité d'un utilisateur.
+Pour ce faire, vous pouvez utiliser les méthodes de helper fournies par
+``IntegrationTestCase``. En admettant que vous ayez un ``ArticlesController``
+qui contient une méthode add, et que cette méthode nécessite une
+authentification, vous pourriez écrire les tests suivants::
+
+    public function testAddUnauthenticatedFails() {
+        // Pas de données de session définies.
+        $this->get('/articles/add');
+
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    public function testAddAuthenticated() {
+        // Défini des données de session
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'testing',
+                    // autres clés.
+                ]
+            ]
+        ]);
+        $this->get('/articles/add');
+
+        $this->assertResponseOk();
+        // Autres assertions.
+    }
+
+Méthodes d'Assertion
 --------------------
 
 La classe ``IntegrationTestCase`` vous fournis de nombreuses méthodes
@@ -850,7 +905,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertResponseFailure();
 
     // Vérifie l'entête d'emplacement
-    $this->assertRedirect(['controller' => 'articles', 'action' => 'index']);
+    $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
 
     // Verifie le contenu de la réponse
     $this->assertResponseContains('You won!');
@@ -1179,8 +1234,8 @@ Si vous voulez utiliser les fixures de plugin dans les app tests, vous pouvez
 y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
 dans le tableau ``$fixtures``.
 
-Generating Tests with Bake
-==========================
+Générer des Tests avec Bake
+===========================
 
 Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
 générer votre code, il va également générer le squelette de vos fichiers de tests.

@@ -910,6 +910,12 @@ unauthorizedRedirect
     Si défini à ``false``, une exception ForbiddenException est lancée au lieu de
     la redirection.
 
+Tester des Actions Protégées par AuthComponent
+==============================================
+
+Regardez la section :ref:`Tester l'authentification <testing-authentication>`
+pour des astuces sur comment tester des actions de controllers protégées paramètres
+``AuthComponent``.
 
 .. meta::
     :title lang=fr: Authentification

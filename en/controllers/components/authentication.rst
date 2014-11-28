@@ -855,7 +855,14 @@ logoutRedirect
 unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to ``false`` a ForbiddenException exception is thrown instead of redirecting.
+    If set to ``false`` a ForbiddenException exception is thrown instead of
+    redirecting.
+
+Testing Actions Protected By AuthComponent
+==========================================
+
+See the :ref:`testing-authentication` section for tips on how to test controller
+actions that are protected by ``AuthComponent``.
 
 .. meta::
     :title lang=en: Authentication

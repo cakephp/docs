@@ -783,6 +783,60 @@ that allows you to send a request body. After dispatching a request you can use
 the various assertions provided by ``IntegrationTestCase`` or by PHPUnit to
 ensure your request had the correct side-effects.
 
+Setting up the Request
+----------------------
+
+The ``IntegrationTestCase`` class comes with a number of helpers to make it easy
+to configure the requests you will send to your application under test::
+
+    // Set cookies
+    $this->cookie('name', 'Uncle Bob');
+
+    // Set session data
+    $this->session('Auth.User.id', 1);
+
+    // Configure headers
+    $this->configRequest([
+        'headers' => ['Accept' => 'application/json']
+    ]);
+
+The state set by these helper methods is reset in the ``tearDown`` method.
+
+.. _testing-authentication:
+
+Testing Actions That Require Authentication
+-------------------------------------------
+
+If you are using ``AuthComponent`` you will need to stub out the session data
+that AuthComponent uses to validate a user's identity. You can use helper
+methods in ``IntegrationTestCase`` to do this. Assuming you had an
+``ArticlesController`` that contained an add method, and that add method
+required authentication, you could write the following tests::
+
+    public function testAddUnauthenticatedFails() {
+        // No session data set.
+        $this->get('/articles/add');
+
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    public function testAddAuthenticated() {
+        // Set session data
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'testing',
+                    // other keys.
+                ]
+            ]
+        ]);
+        $this->get('/articles/add');
+
+        $this->assertResponseOk();
+        // Other assertions.
+    }
+
 Assertion methods
 -----------------
 
@@ -799,7 +853,7 @@ make testing responses much simpler. Some examples are::
     $this->assertResponseFailure();
 
     // Check the Location header
-    $this->assertRedirect(['controller' => 'articles', 'action' => 'index']);
+    $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
 
     // Assert content in the response
     $this->assertResponseContains('You won!');
