@@ -103,21 +103,21 @@ name. Returning to our online bakery example, our RecipesController might contai
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
 in ``src/Controller/RecipesController.php`` and contain::
 
-        # src/Controller/RecipesController.php
+    // src/Controller/RecipesController.php
 
-        class RecipesController extends AppController {
-            public function view($id) {
-                // Action logic goes here..
-            }
-
-            public function share($customerId, $recipeId) {
-                // Action logic goes here..
-            }
-
-            public function search($query) {
-                // Action logic goes here..
-            }
+    class RecipesController extends AppController {
+        public function view($id) {
+            // Action logic goes here..
         }
+
+        public function share($customerId, $recipeId) {
+            // Action logic goes here..
+        }
+
+        public function search($query) {
+            // Action logic goes here..
+        }
+    }
 
 The view files for these actions would be ``src/Template/Recipes/view.ctp``,
 ``src/Template/Recipes/share.ctp``, and ``src/Template/Recipes/search.ctp``. The
@@ -140,6 +140,8 @@ When you use controller methods with
 you will typcially return a ``Response`` instance. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning::
+
+    // src/Controller/RecipesController.php
 
     class RecipesController extends AppController {
         public function popular() {
@@ -258,8 +260,7 @@ have called ``render()``, CakePHP will not try to re-render the view::
     }
 
 This would render ``src/Template/Posts/custom_file.ctp`` instead of
-``src/Template/Posts/my_action.ctp``
-
+``src/Template/Posts/my_action.ctp``.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -357,6 +358,7 @@ Loading Additional Models
 The ``loadModel`` function comes handy when you need to use a model
 table/collection that is not the controller's default one::
 
+    // In a controller method.
     $this->loadModel('Articles');
     $recentArticles = $this->Articles->find('all', [
         'limit' => 5,
@@ -367,6 +369,7 @@ If you are using a table provider other than the built-in ORM you can
 link that table system into CakePHP's controllers by connecting its
 factory method::
 
+    // In a controller method.
     $this->modelFactory(
         'ElasticIndex',
         ['ElasticIndexes', 'factory']
@@ -375,6 +378,7 @@ factory method::
 After registering a table factory, you can use ``loadModel`` to load
 instances::
 
+    // In a controller method.
     $this->loadModel('Locations', 'ElasticIndex');
 
 .. note::
