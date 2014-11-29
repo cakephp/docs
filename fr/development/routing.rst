@@ -454,7 +454,7 @@ du controller Pages en utilisant la route suivante::
 
     Router::prefix('admin', function ($routes) {
         // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
-        // d'inclure le prefix /admin ou l'élement de route admin.
+        // d'inclure le prefix /admin ou l'élément de route admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 

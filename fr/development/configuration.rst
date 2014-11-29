@@ -228,7 +228,7 @@ Classe Configure
 .. php:class:: Configure
 
 La nouvelle classe Configure de CakePHP peut être utilisée pour stocker et
-récupèrer des valeurs spécifiques d’exécution ou d’application. Attention,
+récupérer des valeurs spécifiques d’exécution ou d’application. Attention,
 cette classe vous permet de stocker tout dedans, puis de l’utiliser dans toute
 autre partie de votre code: une tentative évidente de casser le modèle MVC avec
 lequel CakePHP a été conçu. Le but principal de la classe Configure est de
