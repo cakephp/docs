@@ -41,8 +41,8 @@ Affichage des Valeurs
 
 .. php:staticmethod:: dump($var, $depth = 3)
 
-Dump prints out the contents of a variable. It will print out all
-properties and methods (if any) of the supplied variable::
+Dump affiche le contenu d'une variable. Elle affiche toutes les propriétés
+et méthodes (si il y en a) de la variable fournie:::
 
     $foo = array(1,2,3);
 
