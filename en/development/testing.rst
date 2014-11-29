@@ -793,7 +793,7 @@ to configure the requests you will send to your application under test::
     $this->cookie('name', 'Uncle Bob');
 
     // Set session data
-    $this->session('Auth.User.id', 1);
+    $this->session(['Auth.User.id' => 1]);
 
     // Configure headers
     $this->configRequest([
