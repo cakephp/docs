@@ -1,6 +1,8 @@
 Hash
 ####
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Hash
 
 Array management, if done right, can be a very powerful and useful
