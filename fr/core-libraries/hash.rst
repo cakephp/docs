@@ -1,6 +1,8 @@
 Hash
 ####
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Hash
 
 La gestion de tableau, si elle est bien faite, peut être un outil très
@@ -8,7 +10,7 @@ puissant et utile pour construire du code plus intelligent et plus
 optimisé. CakePHP offre un ensemble d'utilitaires statiques très
 utile dans la classe Hash qui vous permet de faire justement cela.
 
-La classe Hash de CakePHP peut être appelée à partir de n'inporte quel
+La classe Hash de CakePHP peut être appelée à partir de n'importe quel
 model ou controller de la même façon que pour un appel à Inflector
 Exemple: :php:meth:`Hash::combine()`.
 
@@ -23,7 +25,7 @@ disponibles dans toutes les méthodes. Une expression en chemin est faite
 depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
 groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
-appliquez les matchers aux élements de l'expression.
+appliquez les matchers aux éléments de l'expression.
 
 Types d'expression
 ------------------
@@ -39,7 +41,7 @@ Types d'expression
 |                                | chaîne numérique.                          |
 +--------------------------------+--------------------------------------------+
 | ``Foo``                        | Matche les clés avec exactement la même    |
-|                                | valeur keys with the exact same value.     |
+|                                | valeur.                                    |
 +--------------------------------+--------------------------------------------+
 
 Tous les éléments d'expression supportent toutes les méthodes. En plus des
@@ -52,7 +54,7 @@ Les Types d'Attribut Correspondants
 -----------------------------------
 
 +--------------------------------+--------------------------------------------+
-| Matcher                        | Definition                                 |
+| Matcher                        | Définition                                 |
 +================================+============================================+
 | ``[id]``                       | Match les éléments avec une clé de         |
 |                                | tableau donnée.                            |
@@ -65,12 +67,12 @@ Les Types d'Attribut Correspondants
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
 | ``[id>=2]``                    | Match les éléments avec un id supérieur    |
-|                                | égal à 2.                                  |
+|                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[id<2]``                     | Match les éléments avec un id inférieur    |
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
-| ``[id<=2]``                    | Match les éléménts avec un id inférieur    |
+| ``[id<=2]``                    | Match les éléments avec un id inférieur    |
 |                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[text=/.../]``               | Match les éléments qui ont des valeurs     |
@@ -80,8 +82,6 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: get(array $data, $path)
 
-    :rtype: mixed
-
     ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
     que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
     ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous
@@ -89,11 +89,9 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: extract(array $data, $path)
 
-    :rtype: array
-
     ``Hash::extract()`` supporte toutes les expressions, les components
     matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
-    récupèrer les données à partir des tableaux, le long des chemins
+    récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
@@ -105,8 +103,6 @@ Les Types d'Attribut Correspondants
         // [1,2,3,4,5,...];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
-
-    :rtype: array
 
     Insère $data dans un tableau tel que défini dans ``$path``::
 
@@ -133,8 +129,6 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    :rtype: array
-
     Retire tous les éléments d'un tableau qui matche avec $path. ::
 
         $a = [
@@ -156,10 +150,8 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
-    :rtype: array
-
     Crée un tableau associatif en utilisant $keyPath en clé pour le chemin
-    à construire, et optionnellement $valuePath comme chemin pour récupèrer
+    à construire, et optionnellement $valuePath comme chemin pour récupérer
     les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
@@ -249,7 +241,7 @@ Les Types d'Attribut Correspondants
         */
 
     Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
-    vous le faîtes, la première valeur sera utlisée comme un format de chaîne
+    vous le faîtes, la première valeur sera utilisée comme un format de chaîne
     de caractères, pour les valeurs extraites par les autres chemins::
 
         $result = Hash::combine(
@@ -282,8 +274,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: format(array $data, array $paths, $format)
-
-    :rtype: array
 
     Retourne une série de valeurs extraites d'un tableau, formaté avec un
     format de chaîne de caractères::
@@ -338,8 +328,6 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: contains(array $data, array $needle)
 
-    :rtype: boolean
-
     Détermine si un Hash ou un tableau contient les clés et valeurs exactes
     d'un autre::
 
@@ -362,8 +350,6 @@ Les Types d'Attribut Correspondants
         // true
 
 .. php:staticmethod:: check(array $data, string $path = null)
-
-    :rtype: boolean
 
    Vérifie si un chemin particulier est défini dans un tableau::
 
@@ -401,8 +387,6 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
-    :rtype: array
-
     Filtre les éléments vides en dehors du tableau, en excluant '0'. Vous
     pouvez aussi fournir un $callback personnalisé pour filtrer les éléments
     de tableau. Votre callback devrait retourner ``false`` pour retirer
@@ -432,8 +416,6 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: flatten(array $data, string $separator = '.')
 
-    :rtype: array
-
     Réduit un tableau multi-dimensionnel en un tableau à une seule dimension::
 
         $arr = [
@@ -461,8 +443,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: expand(array $data, string $separator = '.')
-
-    :rtype: array
 
     Développe un tableau qui a déjà été aplatie avec
     :php:meth:`Hash::flatten()`::
@@ -492,8 +472,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: merge(array $data, array $merge[, array $n])
-
-    :rtype: array
 
     Cette fonction peut être vue comme un hybride entre le ``array_merge`` et
     le ``array_merge_recursive`` de PHP. La différence entre les deux est que
@@ -547,9 +525,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: numeric(array $data)
-
-    :rtype: boolean
-
     Vérifie pour voir si toutes les valeurs dans le tableau sont numériques::
 
         $data = ['one'];
@@ -561,8 +536,6 @@ Les Types d'Attribut Correspondants
         // $res est à false
 
 .. php:staticmethod:: dimensions (array $data)
-
-    :rtype: integer
 
     Compte les dimensions d'un tableau. Cette méthode va seulement considérer
     la dimension du premier élément dans le tableau::
@@ -623,7 +596,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    Appliquer un callback à un ensemble de valeurs extraites en utilisant
     $function. La fonction va récupérer les valeurs extraites en premier
     argument.
 
@@ -632,7 +605,7 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     Trie un tableau selon n'importe quelle valeur, déterminé par une
-    :ref:`hash-path-syntax`. Seuls les élements de type expression sont
+    :ref:`hash-path-syntax`. Seuls les éléments de type expression sont
     supportés par cette méthode::
 
         $a = [
@@ -655,7 +628,7 @@ Les Types d'Attribut Correspondants
             ]
         */
 
-    ``$dir`` peut être soit ``asc``, soit ``desc`. Le ``$type``
+    ``$dir`` peut être soit ``asc``, soit ``desc``. Le ``$type``
     peut être une des valeurs suivantes:
 
     * ``regular`` pour le trier régulier.
@@ -667,8 +640,6 @@ Les Types d'Attribut Correspondants
       a besoin de PHP 5.4 ou supérieur.
 
 .. php:staticmethod:: diff(array $data, array $compare)
-
-    :rtype: array
 
     Calcule la différence entre deux tableaux::
 
@@ -692,8 +663,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: mergeDiff(array $data, array $compare)
-
-    :rtype: array
 
     Cette fonction fusionne les deux tableaux et pousse les différences
     dans les données à la fin du tableau résultant.
@@ -736,8 +705,6 @@ Les Types d'Attribut Correspondants
         */
 
 .. php:staticmethod:: normalize(array $data, $assoc = true)
-
-    :rtype: array
 
     Normalise un tableau. Si ``$assoc`` est à ``true``, le tableau résultant
     sera normalisé en un tableau associatif. Les clés numériques avec les
