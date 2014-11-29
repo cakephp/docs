@@ -336,4 +336,4 @@ aucune des méthodes de callback.
 
 .. meta::
     :title lang=fr: Helpers (Assistants)
-    :keywords lang=fr: classe php,fonction time,couche de présentation,puissance du processeur,ajax,balise,tableau,fonctionnalité,logique,syntaxe,élements,cakephp,plugins
+    :keywords lang=fr: classe php,fonction time,couche de présentation,puissance du processeur,ajax,balise,tableau,fonctionnalité,logique,syntaxe,éléments,cakephp,plugins

@@ -187,7 +187,7 @@ a été trouvé, et que CakePHP peut s'y connecter avec succès.
 Configuration facultative
 =========================
 
-Il y a quelques autres élements qui peuvent être configurés. La plupart des
+Il y a quelques autres éléments qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les

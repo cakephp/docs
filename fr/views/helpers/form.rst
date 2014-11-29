@@ -1084,7 +1084,7 @@ un certain nombre d'options:
 * ``maxYear`` L'année la plus lointaine à utiliser dans le select de l'année
 * ``interval`` L'intervale en minutes entre chaque valeur dans le slect des minutes. 1 par défaut.
 * ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élement vide.
+  chaine, cette chaine est affichée comme élément vide.
 * ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
   dans une direction. Par défaut à null.
 
@@ -1110,7 +1110,7 @@ et ``maxYear``. En plus, des attributs HTML peuvent être fournis via $options.
 Si ``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
 
 * ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
-  chaine, cette chaine est affichée comme élement vide.
+  chaine, cette chaine est affichée comme élément vide.
 * ``orderYear`` - Ordre de tri des années dans les options du select.
   Les valeurs accepteée sont 'asc', 'desc'. 'desc' par défaut.
 * ``value`` La valeur sélectionnée pour l'input.

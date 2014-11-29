@@ -141,7 +141,7 @@ Using Logging to Debug
 
 Logging messages is another good way to debug applications, and you can use
 :php:class:`Cake\\Log\\Log` to do logging in your application. All objects that
-use ``LogTrait`` have an instance method `log()` which can be used
+use ``LogTrait`` have an instance method ``log()`` which can be used
 to log messages::
 
     $this->log('Got here', 'debug');
