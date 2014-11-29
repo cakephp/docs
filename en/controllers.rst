@@ -352,7 +352,7 @@ Flow Control
     The method will issue an ``exit()`` after the redirect unless you
     set the third parameter to ``false``.
 
-    If you need to redirect to the referer page you can use::
+    If you need to redirect to the referrer page you can use::
 
         $this->redirect($this->referer());
 
