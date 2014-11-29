@@ -237,3 +237,21 @@ table. Par exemple::
             'slugged' => 'findSlug',
         ]
     ]);
+
+Accéder aux Behaviors Chargés
+=============================
+
+Une fois que vous avez attaché les behaviors à votre instance de Table, vous
+pouvez interroger les behaviors chargés ou accéder à des behaviors
+spécifiques en utilisant ``BehaviorRegistry``::
+
+    // Regarde quels behaviors sont chargés
+    $table->behaviors()->loaded();
+
+    // Vérifie si un behavior spécifique est chargé.
+    // N'utilisez pas les préfixes de plugin.
+    $table->behaviors()->has('CounterCache');
+
+    // Récupère un behavior chargé
+    // N'utilisez pas les préfixes de plugin.
+    $table->behaviors()->get('CounterCache');
