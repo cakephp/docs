@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-##################
+******************
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
