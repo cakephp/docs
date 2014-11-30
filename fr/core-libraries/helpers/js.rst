@@ -292,7 +292,7 @@ méthode.
     **Options**
 
     -  ``containment`` - Conteneur de l'action de déplacement.
-    -  ``handle`` - Selecteur de l'élement. Seul cet élément
+    -  ``handle`` - Selecteur de l'élément. Seul cet élément
        commencera l'action de tri.
     -  ``revert`` - S'il faut ou pas utiliser un effet pour déplacer l'élément
        triable dans sa position finale.
@@ -399,7 +399,7 @@ méthode.
 
     **Options**
 
-    -  ``handle`` - selecteur de l'élement.
+    -  ``handle`` - selecteur de l'élément.
     -  ``snapGrid`` - La grille de pixel qui  déclenche les mouvements, un
        tableau(x, y)
     -  ``container`` - L'élément qui agit comme un rectangle de selection pour

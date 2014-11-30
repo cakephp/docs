@@ -1038,7 +1038,7 @@ Vos signatures de fonction des helpers doivent ressembler à cela::
     }
 
 
-L'élement attrapé, et les callbacks de vue ont été changés dans 2.0 pour vous
+L'élément attrapé, et les callbacks de vue ont été changés dans 2.0 pour vous
 aider à vous fournir plus de flexibilité et de cohérence. :doc:`Lire plus sur
 les changements </views>`.
 

@@ -306,7 +306,7 @@ Vues étendues
 -------------
 
 :php:class:`View` a une nouvelle méthode vous permettant d'enrouler 
-ou 'étendre' une vue/élement/layout avec un autre fichier.
+ou 'étendre' une vue/élément/layout avec un autre fichier.
 Voir la section sur
 :ref:`extending-views` pour plus d'informations sur cette fonctionnalité.
 

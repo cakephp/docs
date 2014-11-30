@@ -10,7 +10,7 @@ puissant et utile pour construire du code plus intelligent et plus
 optimisé. CakePHP offre un ensemble d'utilitaires statiques très
 utile dans la classe Hash qui vous permet de faire justement cela.
 
-La classe Hash de CakePHP peut être appelée à partir de n'inporte quel
+La classe Hash de CakePHP peut être appelée à partir de n'importe quel
 model ou controller de la même façon que pour un appel à Inflector
 Exemple: :php:meth:`Hash::combine()`.
 
@@ -25,7 +25,7 @@ disponibles dans toutes les méthodes. Une expression en chemin est faite
 depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
 groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
-appliquez les matchers aux élements de l'expression.
+appliquez les matchers aux éléments de l'expression.
 
 Types d'expression
 ------------------
@@ -67,12 +67,12 @@ Les Types d'Attribut Correspondants
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
 | ``[id>=2]``                    | Match les éléments avec un id supérieur    |
-|                                | égal à 2.                                  |
+|                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[id<2]``                     | Match les éléments avec un id inférieur    |
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
-| ``[id<=2]``                    | Match les éléménts avec un id inférieur    |
+| ``[id<=2]``                    | Match les éléments avec un id inférieur    |
 |                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[text=/.../]``               | Match les éléments qui ont des valeurs     |
@@ -671,7 +671,7 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     Trie un tableau selon n'importe quelle valeur, déterminé par une
-    :ref:`hash-path-syntax`. Seuls les élements de type expression sont
+    :ref:`hash-path-syntax`. Seuls les éléments de type expression sont
     supportés par cette méthode::
 
         $a = array(

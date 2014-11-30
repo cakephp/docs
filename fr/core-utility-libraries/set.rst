@@ -1375,7 +1375,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Retire un élémént d'un Set ou d'un tableau selon ce qui est défini par $path::
+    Retire un élément d'un Set ou d'un tableau selon ce qui est défini par $path::
 
         $a = array(
             'pages'     => array('name' => 'page'),

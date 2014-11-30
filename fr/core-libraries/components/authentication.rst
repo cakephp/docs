@@ -884,7 +884,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     :php:meth:`SessionComponent::setFlash()`.
     Les clés disponibles sont:
 
-    - ``element`` - L'élement à utiliser , par défaut à 'default'.
+    - ``element`` - L'élément à utiliser , par défaut à 'default'.
     - ``key`` - La clé à utiliser, par défaut à 'auth'.
     - ``params`` - Un tableau de paramètres supplémentaires à utiliser par
       défaut à array()

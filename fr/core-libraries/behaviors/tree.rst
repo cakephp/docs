@@ -732,4 +732,4 @@ Exemple de sortie::
 
 .. meta::
     :title lang=fr: Tree
-    :keywords lang=fr: auto increment,représentation littérale,parent id,table catégories,table base de données,données hiérarchisées,valeur null,système de menu,intricacies,contrôle accès,hiérarchie,logique,élements,trees, arbres
+    :keywords lang=fr: auto increment,représentation littérale,parent id,table catégories,table base de données,données hiérarchisées,valeur null,système de menu,intricacies,contrôle accès,hiérarchie,logique,éléments,trees, arbres
