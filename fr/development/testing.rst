@@ -843,7 +843,7 @@ la configuration des requêtes que vous allez envoyer à votre controller::
     $this->cookie('name', 'Uncle Bob');
 
     // Définit des données de session
-    $this->session('Auth.User.id', 1);
+    $this->session(['Auth.User.id', 1]);
 
     // Configure les en-têtes
     $this->configRequest([
