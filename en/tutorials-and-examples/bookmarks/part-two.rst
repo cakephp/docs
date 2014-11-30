@@ -137,6 +137,31 @@ Also, add the following to the configuration for ``Auth`` in your
 
     'authorize' => 'Controller',
 
+Your ``initialize`` method should now look like::
+
+        public function initialize() {
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
+                'authorize'=> 'Controller',//added this line
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password'
+                        ]
+                    ]
+                ],
+                'unauthorizedRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
+                ]
+            ]);
+
+            // Allow the display action so our pages controller
+            // continues to work.
+            $this->Auth->allow(['display']);
+        }
+
 We'll default to denying access, and incrementally grant access where it makes
 sense. First, we'll add the authorization logic for bookmarks. In your
 ``BookmarksController`` add the following::
