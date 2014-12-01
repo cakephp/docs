@@ -1,72 +1,69 @@
-.. CakePHP Cookbook documentation master file, created by
-   sphinx-quickstart on Tue Jan 18 12:54:14 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Hoşgeldiniz
+###########
 
-Welcome
-#######
-
-The CakePHP cookbook is an openly developed and community editable documentation
-project. We hope to maintain a high level of quality, validity and accuracy for
-the documentation. Notice the "Improve this Doc" button in the upper right-hand
-corner; it will direct you to the GitHub online editor of the active page,
-allowing you to easily contribute any additions, deletions, or corrections to
-the documentation.
+CakePHP Yemekkitabı açık kaynaklı geliştirilen ve toplulukça düzenlenebilen
+dokümantasyon projesidir. Kalitesini, geçerliliğini ve doğruluğunu yüksek 
+düzeyde tuttuğumu bir dokümantasyon amaçlamaktayız. Sağ üst köşede gördüğünüz
+"Improve this Doc" butonu sizi aktif sayfa üzerinde, eklemeler, silmeler ve 
+düzeltmeler yapabilmeniz için Gihub çevrimiçi düzenleyicisine yönlendirecektir.
 
 .. container:: offline-download
 
-    **Read the Book Anywhere**
+    **Kitabı heryerde okumak için**
 
-    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
-    EPUB, you can now read it on more devices, as well as offline.
+    Hemen hemen her yerde CakePHP yemekkitabının keyfini çıkarın. Birden fazla 
+    cihazda, hem de çevrimdışı olarak okuyabilmeniz için PDF ve EPUB olarak da 
+    mevcuttur.
 
-    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/en/CakePHPCookbook.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_
+    - `PDF <../_downloads/tr/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/tr/CakePHPCookbook.epub>`_
+    - `Orijinal Kaynak <http://github.com/cakephp/docs>`_
 
-Getting Started
+Başlarken
 ===============
 
-Build a Blog
+Bir Blog Oluşturun
 ------------
 
-Get started with the :doc:`blog tutorial</tutorials-and-examples/blog/blog>`.
-You'll learn the basics of CakePHP, and build a basic blog in the process.
+:doc:`Blog öğretici</tutorials-and-examples/blog/blog>` ile başlayın.
+Hem CakePHP'nin temellerini hem de bir blog oluşturmayı öğreneceksiniz.
 
-Conventions
+Yazım Kuralları
 -----------
 
-Learn about a typical :doc:`CakePHP request
-</getting-started/a-typical-cakephp-request>` and the :doc:`conventions
-</getting-started/cakephp-conventions>` that power CakePHP.
+Tipik bir :doc:`CakePHP isteğini
+</getting-started/a-typical-cakephp-request>` ve CakePHP'ye güç veren 
+:doc:`yazım kurallarını </getting-started/cakephp-conventions>` öğrenin.
 
-Controllers
+Denetçiler
 -----------
 
-Controllers handle requests and help co-ordinate and prepare
-responses for the client. Read more about :doc:`/controllers`.
+Denetçiler istekleri işlerler ve cevapları koordine edilmesine 
+yardımcı olurlar ve onları istemci için hazırlarlar.
+hazırlamaya yardımcı olurlar. Konu hakkında daha fazla bilgi 
+için: :doc:`/controllers`.
 
-Views
+Görünümler
 -----
 
-Views are the presentation layer in CakePHP. They convert
-the data fetched from Models into the output format requested by the
-client. Read more about :doc:`/views`.
+Görünümler CakePHP'de sunum katmanını oluştururlar. Modellerden getirilen 
+veriyi istenen biçime dönüştürürler. Konu hakkında daha fazla bilgi 
+için: :doc:`/views`.
 
-Models
+Modeller
 ------
 
-Models are the heart of your application. They handle the validation,
-storage and retrieval of your data. Read more about :doc:`/models`.
+Modeller uygulamanızın kalbidirler. Verilerin doğrulanmasını, depolanmasını ve
+getirilmesini sağlarlar. Konu hakkında daha fazla bilgi 
+için: :doc:`/models`.
 
-Getting Help
+Yardım almak
 ============
 
-If you're stuck, there are a number of places :doc:`you can get help
-</cakephp-overview/where-to-get-help>`.
-
+Bir konuda takıldıysanız, yardım alabaileceğiniz :doc:`bir çok yer
+</cakephp-overview/where-to-get-help>` mevcuttur.
 
 
 .. meta::
-    :title lang=en: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=tr: .. CakePHP Dokümantasyonu
+    :keywords lang=tr: modeller,dokümantasyon,sunum katmanı,proje dokümantasyonu,hızlı başlangıç,orijinal kaynak,sphinx,hoşlanmak,yemekkitabı,doğruluk,yazım kuralları,doğrulama,cakephp,kesinlik,depolama ve getirme,kalp,blog,proje
