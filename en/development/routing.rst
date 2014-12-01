@@ -930,7 +930,7 @@ Router API
         parameters and supplying the name of a custom routing class.
 
     Routes are a way of connecting request URLs to objects in your application.
-    At their core routes are a set or regular expressions that are used to
+    At their core routes are a set of regular expressions that are used to
     match requests to destinations.
 
     Examples::
@@ -939,7 +939,7 @@ Router API
 
     The first parameter will be used as a controller name while the second is
     used as the action name. The '/\*' syntax makes this route greedy in that
-    it will match requests like `/posts/index` as well as requests like
+    it will match requests like ``/posts/index`` as well as requests like
     ``/posts/edit/1/foo/bar`` . ::
 
         Router::connect(
@@ -1031,8 +1031,8 @@ Router API
 
     * ``base`` - Set to false to remove the base path from the generated URL.
       If your application is not in the root directory, this can be used to
-      generate URLs that are 'cake relative'. CakePHP relative URLs are required
-      when using requestAction.
+      generate URLs that are 'CakePHP relative'. CakePHP relative URLs are
+      required when using requestAction.
     * ``?`` - Takes an array of query string parameters
     * ``#`` - Allows you to set URL hash fragments.
     * ``full_base`` - If true the value of :php:meth:`Router::fullBaseUrl()` will
