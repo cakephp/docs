@@ -1,15 +1,13 @@
-CakePHP Overview
+CakePHP'ye Genel Bakış
 ################
 
-Welcome to the Cookbook, the manual for the CakePHP web application
-framework that makes developing a piece of cake!
+Geliştiriciliği dilim kek kadar lezzetli yapan, CakePHP uygulama 
+çatısının el kitabı, Yemekkitabı'na hoşgeldiniz!
 
-This manual assumes that you have a general understanding of PHP
-and a basic understanding of object-oriented programming (OOP).
-Different functionality within the framework makes use of different
-technologies – such as SQL, JavaScript, and XML – and this manual
-does not attempt to explain those technologies, only how they are
-used in context.
+Bu kılavuz PHP ve nesne yönelimli programlama (NYP) hakkında genel 
+bilginiz olduğunu varsayar. Framework içinde farklı işleri yapmak 
+için SQL, Javascript ve XML gibi farklı teknolojiler kullanılmaktadır 
+ve bu klavuz bu teknolojileri değil, nasıl kullanıldıklarını anlatacaktır.
 
 .. toctree::
     :maxdepth: 1
@@ -20,5 +18,5 @@ used in context.
 
 
 .. meta::
-    :title lang=en: CakePHP Overview
-    :keywords lang=en: web application framework,model view controller,object oriented programming,piece of cake,cookbook,functionality,xml,cakephp
+    :title lang=tr: CakePHP'ye Genel Bakış
+    :keywords lang=en: web uygulama çatısı,model view controller,nesne yönelimli programlama,dilim kek,yemekkitabı,işlevsellik,xml,cakephp
