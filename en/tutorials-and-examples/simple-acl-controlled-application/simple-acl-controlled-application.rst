@@ -127,7 +127,7 @@ Acl components. First add a login and logout action to your
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Session->setFlash(__('Your username or password was incorrect.'));
         }
