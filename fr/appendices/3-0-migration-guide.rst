@@ -216,7 +216,7 @@ Shell
 -----
 
 - ``Shell::__construct()`` a changé. Il prend maintenant une instance de
-  ``Cake\\Console\\ConsoleIo``.
+  :php:class:`Cake\\Console\\ConsoleIo`.
 - ``Shell::param()`` a été ajoutée pour un accès pratique aux paramètre.
 
 De plus, toutes les méthodes du shell vont être transformées en camel case lors
@@ -225,6 +225,16 @@ shell et que vous l'appelez avec ``bin/cake my_shell hello_world``, vous devez
 renommer la méthode en ``helloWorld``. Il n'y a pas de changements nécessaires
 dans la façon d'appeler les commandes.
 
+ConsoleOptionParser
+-------------------
+
+- ``ConsoleOptionParser::merge()`` a été ajoutée pour fusionner les parsers.
+
+ConsoleInputArgument
+--------------------
+
+- ``ConsoleInputArgument::isEqualTo()`` a été ajoutée pour comparer deux
+  arguments.
 
 Shell / Task
 ============
