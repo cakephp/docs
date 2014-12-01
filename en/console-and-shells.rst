@@ -796,7 +796,7 @@ buildFromArray on its own, to build an option parser::
     }
 
 Merging ConsoleOptionParsers
---------------------------------------------
+----------------------------
 
 .. php:method:: merge($spec)
 
