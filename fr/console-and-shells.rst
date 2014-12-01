@@ -849,6 +849,20 @@ d'option::
         ]);
     }
 
+Fusionner les ConsoleOptionParsers
+----------------------------------
+
+.. php:method:: merge($spec)
+
+Lorsque vous construisez un groupe de commandes, vous voudrez peut-être combiner
+plusieurs parsers::
+
+    $parser->merge($anotherParser);
+
+Notez que l'ordre des arguments de chaque parser doit être identique, et que
+les options doivent être compatibles pour que cela fonctionne. N'utilisez donc
+pas les mêmes clés pour des choses différentes.
+
 Obtenir de l'Aide dans les Shells
 ---------------------------------
 
