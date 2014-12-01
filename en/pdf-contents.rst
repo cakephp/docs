@@ -16,6 +16,7 @@ Contents
    development
    deployment
    tutorials-and-examples
+   contributing
    appendices
 
 
