@@ -10,6 +10,7 @@ Contents
    controllers
    views
    models
+   plugins
    development
    contributing
 
