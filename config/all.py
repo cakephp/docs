@@ -52,8 +52,6 @@ release = '2.x'
 # directories to ignore when looking for source files.
 exclude_patterns = [
     'themes',
-    'pdf-contents.rst',
-    'epub-contents.rst',
     'core-libraries/components/email.rst'
 ]
 
