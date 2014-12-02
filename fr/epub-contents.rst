@@ -4,8 +4,8 @@ Contenu
 .. toctree::
    :maxdepth: 3
 
-   installation
    getting-started
+   installation
    cakephp-overview
    controllers
    views
