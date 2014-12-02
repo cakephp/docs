@@ -1,56 +1,51 @@
-A Typical CakePHP Request
+Tipik Bir CakePHP İsteği
 #########################
 
-We've covered the basic ingredients in CakePHP, so let's look at
-how objects work together to complete a basic request. Continuing
-with our original request example, let's imagine that our friend
-Ricardo just clicked on the "Buy A Custom Cake Now!" link on a
-CakePHP application's landing page.
+CakePHP'nin temellerini tamamladığımıza göre, temel bir isteği
+tamamlamak için nesnelerin birlikte nasıl çalıştıklarına bir 
+göz atalım. Orjinal istek örneğimize devam edersek, arkadaşımız 
+Kamil'in CakePHP uygulamasının açılış sayfasındaki "Haydi Özel Bir 
+Kek Satın Al" bağlantısına tıkladığını düşünelim.
 
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
-   :alt: Flow diagram showing a typical CakePHP request
+   :alt: Tipik bir CakePHP isteğini gösteren akış diyagramı
 
-   Flow diagram showing a typical CakePHP request
+   Tipik bir CakePHP isteğini gösteren akış diyagramı
 
-Figure: 2. Typical CakePHP Request.
+Figure: 2. Tipik CakePHP isteği
 
-Black = required element, Gray = optional element, Blue = callback
+Siyah = gerekli eleman, Gri = isteğe bağlı eleman, Mavi = callback
 
 
-#. Ricardo clicks the link pointing to
-   http://www.example.com/cakes/buy, and his browser makes a request
-   to your web server.
-#. The Router parses the URL in order to extract the parameters for
-   this request: the controller, action, and any other arguments that
-   will affect the business logic during this request.
-#. Using routes, a request URL is mapped to a controller action (a
-   method in a specific controller class). In this case, it's the
-   buy() method of the CakesController. The controller's
-   beforeFilter() callback is called before any controller action
-   logic is executed.
-#. The controller may use models to gain access to the
-   application's data. In this example, the controller uses a model to
-   fetch Ricardo's last purchases from the database. Any applicable
-   model callbacks, behaviors, and DataSources may apply during this
-   operation. While model usage is not required, all CakePHP
-   controllers initially require at least one model.
-#. After the model has retrieved the data, it is returned to the
-   controller. Model callbacks may apply.
-#. The controller may use components to further refine the data or
-   perform other operations (session manipulation, authentication, or
-   sending emails, for example).
-#. Once the controller has used models and components to prepare
-   the data sufficiently, that data is handed to the view using the
-   controller's set() method. Controller callbacks may be applied
-   before the data is sent. The view logic is performed, which may
-   include the use of elements and/or helpers. By default, the view is
-   rendered inside a layout.
-#. Additional controller callbacks (like :php:meth:`~Controller::afterFilter`) may be
-   applied. The complete, rendered view code is sent to Ricardo's
-   browser.
+#. Kamil http://www.example.com/cakes/buy linkini tıklar ve tarayıcısı
+   web sunucusuna bir istekte bulunur.
+#. Yönlendirici iş mantığını etkileyecek olan denetçi, aksiyon ve diğer
+   paramtereleri elde etmek için URL'yi ayrıştırır.
+#. İsteğin URL'si denetçi aksiyonuna eşleştirilir. (Denetçi sınıfı içinde
+   özel bir metod) Bu durumda CakesController denetçisi içinde buy yani
+   "satın al" metodudur. Herhangi bir denetçi aksiyon mantığı çalıştırılmadan 
+   önce denetçinin beforeFilter() metodu çağrılacaktır.
+#. Denetçi uygulamanın verilerine erişmek için modelleri kullanabilir.
+   Bu durumda, denetçi Kamil'in son satın aldıklarını veritabanından 
+   getirecektir. Bu duruma uyan her model çağrısı, davranışları ve
+   VeriKaynakları bu işlem sırasında kullanılabilir. Model kullanımı
+   gerekmiyorsa gile, tüm CakePHP denetçileri başlangıçta en az bir 
+   modele ihtiyaç duyabilirler.
+#. Model veriyi çektikten sonra, denetçiye gönderir. Model çağrıları
+   da kullanılmış olabilirler.
+#. Denetçi veriyi sadeleştirmek veya (örneğin oturum bilgisini değiştirme, 
+   kimlik doğrulama veya e-posta gönderme) farklı işlemler gerçekleştimek
+   için bileşenleri kullanabilir.
+#. Denetçi veriyi düzgünce hazırlamak için modelleri ve bileşenleri kullandıktan
+   sonra, veriyi görünüme (View) denetçinin set() metodunu kullanarak iletir. Bu
+   aşamada veri gönderilmeden önce denetçi çağrıları kullanılabilir. Görünüm mantığı
+   elemanları ve/veya yardımcıların kullanımını içerebilir. Varsayılan olarak, görünüm
+   bir plan (layout) içinde görüntülenir.
+#. Ek olarak denetçi çağrıları kullanılabilir. (:php:meth:`~Controller::afterFilter` gibi)
+   Tamamlanmış ve görüntülenmiş görünüm kodu Kamil'in tarayıcısına iletilir.
 
 
 .. meta::
-    :title lang=en: A Typical CakePHP Request
-    :keywords lang=en: optional element,model usage,controller class,custom cake,business logic,request example,request url,flow diagram,basic ingredients,datasources,sending emails,callback,cakes,manipulation,authentication,router,web server,parameters,cakephp,models
+    :title lang=tr: Tipik bir CakePHP İsteği
+    :keywords lang=tr: İsteğe bağlı eleman,model kullanımı,denetleyici sınıfı,özel kek,iş mantığı,talep örneği,istek url'si,akış şeması,temel bileşenler, verikaynakları,e-posta gönderme,çağrı,kekler,manipülasyon,kimlik doğrulama,yönlendirici, web sunucusu,parametreler,cakephp, modeller
