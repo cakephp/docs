@@ -1865,14 +1865,14 @@ stopping this event, you can abort the validate + save operations.
 afterValidate
 -------------
 
-.. php:method:: afterValidate(Event $event, Entity $entity, array $options, Validator $validator)
+.. php:method:: afterValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
 
 The ``Model.afterValidate`` event is fired after an entity is validated.
 
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, Entity $entity, array $options)
+.. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
@@ -1881,14 +1881,14 @@ of the event will be returned.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, Entity $entity, array $options)
+.. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, Entity $entity, array $options)
+.. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation.
@@ -1896,7 +1896,7 @@ stopping this event you will abort the delete operation.
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, Entity $entity, array $options)
+.. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
 Fired after an entity has been deleted.
 
@@ -2106,7 +2106,7 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
-
+a
 You can convert multiple entities using::
 
     $articles = TableRegistry::get('Articles');
