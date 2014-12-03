@@ -209,6 +209,28 @@ self-associated tables to create parent-child relationships::
         }
     }
 
+You can all setup associations en mass by making a single call to
+``Table::addAssociations()``. It takes an array containing set of
+table names indexed by association type as argument::
+
+    class PostsTable extends Table {
+
+      public function initialize(array $config) {
+        $this->addAssociations([
+          'belongsTo' => [
+            'Users' => ['className' => 'App\Model\Table\UsersTable']
+          ],
+          'hasMany' => ['Comments'],
+          'belongsToMany' => ['Tags']
+        ]);
+      }
+
+    }
+
+Each association type accepts multiple associations where the keys are the
+aliases, and the values are association config data. If numeric keys are used
+the values will be treated as association aliases.
+
 HasOne Associations
 -------------------
 
