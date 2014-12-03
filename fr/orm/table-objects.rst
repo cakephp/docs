@@ -2106,7 +2106,7 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
-a
+
 You can convert multiple entities using::
 
     $articles = TableRegistry::get('Articles');
