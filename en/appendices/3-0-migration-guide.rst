@@ -580,7 +580,7 @@ AuthComponent
 
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
-- ``BaseAuthenticate::logout()`` as been removed.
+- ``BaseAuthenticate::logout()`` has been removed.
 - ``AuthComponent`` now triggers two events ``Auth.afterIdentify`` and
   ``Auth.logout`` after a user has been identified and before a user is
   logged out respectively. You can set callback functions for these events by
