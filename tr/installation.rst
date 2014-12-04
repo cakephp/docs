@@ -82,24 +82,24 @@ Burada ``<branch>`` güncel kalmasını sitediğiniz dalın ismidir.
 ``php composer.phar update`` komutunu her çalıştırdığınızda, seçilmiş
 olan daldaki en son değişiklikleri alacaksınız.
 
-Permissions
-===========
+İzinler
+=======
 
-CakePHP uses the ``tmp`` directory for a number of different operations.
-Model descriptions, cached views, and session information are just a few examples.
-The ``logs`` directory is used to write log files by the default ``FileLog`` engine.
+CakePHP çeşitli işlemler için ``tmp`` dizinini kullanır. Bunlardan bazıları
+model açıklamaları, önbelleğe alınmış görünümler ve oturum bilgileridir. ``logs``
+dizini ise Log işlemleri için ``FileLog`` motoru tarafından kullanılmaktadır.
 
-As such, make sure the directories ``logs``, ``tmp`` and all its subdirectories
-in your CakePHP installation are writable by the web server user. Composer's
-installation process makes ``tmp`` and it's subfolders globally writeable to get
-things up and running quickly but you can update the permissions for better
-security and keep them writable only for the webserver user.
+Bu nedenle, CakePHP kurulumunuzdaki ``logs``, ``tmp`` dizinleri ve altdizinlerinin
+web sunucusu kullanıcısı tarafından yazılabilir olduklarından emin olmalısınız.
+Composer'in kurulum işlemi, işleri hızlıca halletmek için `tmp`` ve alt dizinlerini 
+heryerden yazılabilir yapar, ancak daha iyi güvenlik ve sadece web sunucusu kullanıcısı
+tarafından yazılabilir olması için izinleri güncelleyebilirsiniz.
 
-One common issue is that ``logs`` and ``tmp`` directories and subdirectories must be
-writable both by the web server and the command line user. On a UNIX system, if
-your web server user is different from your command line user, you can run the
-following commands from your application directory just once in your project to
-ensure that permissions will be setup properly::
+Üzerine düşünülmesi gereken bir diğer konu da, ``logs`` ve ``tmp`` dizinlerinin
+hem web sunucusu hem de komut satırı kullanıcıları tarafından yazılabilir olmalarıdır.
+Bir UNIX sisteminde, web sunucusu ve komut satırı kullanıcıları farklı ise, uygulama
+dizininizdde bir seferliğinie izinlerinizin düzgün kurulduğundan emin olmak için
+aşağıdaki komutları çalıştırabilirsiniz::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -107,48 +107,48 @@ ensure that permissions will be setup properly::
    setfacl -R -m u:${HTTPDUSER}:rwx logs
    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
-Development Server
-==================
+Geliştirme Sunucusu
+===================
 
-A development installation is the fastest method to setup CakePHP.  In this
-example, we will be using CakePHP's console to run PHP's built-in web server
-which will make your application available at ``http://host:port``. From the app
-directory, execute::
+CakePHP'yi kurmanın en hızlı yolu geliştime kurulumudur. Bu örnekte uygulamanın
+``http://host:port`` adresinden açılabilmesini sağlamak için PHP'nin
+gömülü sunucusunu CakePHP konsolunu kullanarak çalıştıracağız. Şu komutu
+ygulama dizininde çalıştırıalım::
 
     bin/cake server
 
-By default, without any arguments provided, this will serve your application at
+Herhangi bir parametre kullanmadığınızda uygulama şu adreste çalışacaktır
 ``http://localhost:8765/``.
 
-If you have something conflicting with ``localhost`` or port ``8765``, you can
-tell the CakePHP console to run the web server on a specific host and/or port
-utilizing the following arguments::
+Eğer ``localhost`` sunucusunda veya  ``8765`` portları üstünde çakışma oluyorsa,
+CakePHP konsoluna, web sunucusunu belirttiğiniz adres veya portta çalışrmasını
+öyleyebilirsiniz::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
-This will serve your application at ``http://192.168.13.37:5673/``.
+Bu komut uygulamanızı ``http://192.168.13.37:5673/`` adresinde çalıştıracaktır.
 
 That's it! Your CakePHP application is up and running without having to
 configure a web server.
 
 .. warning::
 
-    The development server should *never* be used in a production environment.
-    It is only intended as a basic development server.
+    Geliştirme sunucusu *asla* canlı sistemde kullanılmamalıdır. Bu sunucu sadece
+    basit işler için kullanılmalıdır.
 
-If you'd prefer to use a real webserver, you should be able to move your CakePHP
-install (including the hidden files) inside your webserver's document root. You
-should then be able to point your web-browser at the directory you moved the
-files into and see your application in action.
+Eğer gerçek bir sunucu kullanmayı tercih ediyosanız, CakePHP kurulumunuzu (gizli
+dosyalarıyla beraber) wen sunucunuzun kök dizinine koyabilmelisiniz. Böylelikle
+web tarayıcınızı kullanarak uygulamanıza erişim sağlayabilirsiniz.
 
-Production
-==========
+Canlı sistem
+============
 
-A production installation is a more flexible way to setup CakePHP.  Using this
-method allows an entire domain to act as a single CakePHP application. This
-example will help you install CakePHP anywhere on your filesystem and make it
-available at http://www.example.com. Note that this installation may require the
-rights to change the ``DocumentRoot`` on Apache webservers.
+Calışan canlı bir sistemde CakePHP kurulumu daha esnek seçenekler sağlar.
+Bu yolu kullanarak, bütün domainin tek bir CakePHP uygulaması olarak çalışmasını
+sağlayabilirsiniz. Bu örnek size CakePHP'yi dosyas isteminde herhangi bir yere
+kurmanıza ve uygulamanın http://www.example.com adresinden erişebilmenize yardım
+edecektir. Bu kurulumun apache sunucularda ``DocumentRoot`` dizinine yazma
+hakkı gerektirdiğine dikkat edin.
 
 After installing your application using one of the methods above into the
 directory of your choosing - we'll assume you chose /cake_install - your
