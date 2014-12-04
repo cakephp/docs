@@ -505,6 +505,41 @@ expression objects to add snippets of SQL to your queries::
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
 
+Getting Results
+===============
+
+Once you've made your query, you'll want to retrieve rows from it. There are
+a few ways of doing this::
+
+    // Iterate the query
+    foreach ($query as $row) {
+        // Do stuff.
+    }
+
+    // Get the results
+    $results = $query->all();
+
+You can use :doc:`any of the collection </core-libraries/collections>` methods
+on you query objects to pre-process or transform the results::
+
+    // Use one of the collection methods.
+    $ids = $query->map(function ($row) {
+        return $row->id;
+    });
+
+    $maxAge = $query->max(function ($row) {
+        return $max->age;
+    });
+
+You can use ``first`` or ``firstOrFail`` to retrieve a single record. These
+methods will alter the query adding a ``LIMIT 1`` clause::
+
+    // Get just the first row
+    $row = $query->first();
+
+    // Get the first row or an exception.
+    $row = $query->firstOrFail();
+
 .. _query-count:
 
 Returning the Total Count of Records
