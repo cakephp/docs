@@ -69,7 +69,7 @@ pour plus d'informations.
 
 Le helper Pagination fournit des classes CSS supplémentaires pour le style et
 vous pouvez configurer la direction de sort() par défaut.
-``PaginatorHelper::next()`` et ``PaginatorHelper::prev()`` générent maintenant
+``PaginatorHelper::next()`` et ``PaginatorHelper::prev()`` génèrent maintenant
 des tags span par défaut, au lieu de divs.
 
 **Helper**

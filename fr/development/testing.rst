@@ -71,7 +71,7 @@ Vérifier la Configuration Test
 
 Après avoir installé PHPUnit et configuré le ``$test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lancant un de ceux présents dans le coeur. Il y a
+lancer vos propres tests en lançant un de ceux présents dans le coeur. Il y a
 deux exécuteurs integrés pour le test, nous commencerons en utilisant
 l'exécution par le navigateur. Les tests peuvent être accessibles par le
 navigateur à http://localhost/votre_app/test.php. Vous devriez voir une liste
