@@ -220,6 +220,28 @@ relations parent-enfant::
         }
     }
 
+Vous pouvez aussi définir les associations en masse via un appel unique
+à la méthode ``Table::addAssociations()``. Elle accepte en paramètre un
+tableau contenant les noms de tables indexés par association::
+
+    class PostsTable extends Table {
+
+      public function initialize(array $config) {
+        $this->addAssociations([
+          'belongsTo' => [
+            'Users' => ['className' => 'App\Model\Table\UsersTable']
+          ],
+          'hasMany' => ['Comments', 'Links'],
+          'belongsToMany' => ['Tags']
+        ]);
+      }
+
+    }
+
+Chaque type d'association accepte plusieurs associations où les clés sont les
+alias et les valeurs sont les données de configuration de l'association. Si
+une clé numérique est utilisée, la valeur sera traitée en tant qu'alias.
+
 Associations HasOne
 -------------------
 
