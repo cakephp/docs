@@ -34,7 +34,7 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
 
 在了解如何配置自己的路由之前，你应当知道 CakePHP 带有一组默认的路由。CakePHP 的
 默认路由适用于任何应用程序的很多情况。把一个动作的名称放入请求中，就可以直接从网
-址访问该动作。也可以用网址传递参数到控制器动作。::
+址访问该动作。也可以用网址传递参数到控制器动作。 ::
 
         URL pattern default routes:
         http://example.com/controller/action/param1/param2/param3
@@ -455,7 +455,7 @@ plugin 键::
 ========
 
 传入参数(*passed argument*)是发起请求时使用的其它参数或路径片段。它们经常用来给
-控制器方法传递参数。::
+控制器方法传递参数。 ::
 
     http://localhost/calendars/view/recent/mark
 
@@ -814,14 +814,14 @@ connectNamed() 方法支持一些选项：
 
     第一个参数被当作控制器名称，而第二个参数被当作当作名称。'/\*' 语法使该路由贪
     婪，这样它就会匹配象 `/posts/index` 以及象 ``/posts/edit/1/foo/bar`` 这样的
-    请求。::
+    请求。 ::
 
         Router::connect(
             '/home-page',
             array('controller' => 'pages', 'action' => 'display', 'home')
         );
 
-    上面这个说明路由参数默认值的用法。而为静态路由提供路由参数。::
+    上面这个说明路由参数默认值的用法。而为静态路由提供路由参数。 ::
 
         Router::connect(
             '/:lang/:controller/:action/:id',

@@ -100,9 +100,9 @@ save 方法还有另外一种语法::
 * ``callbacks`` 设置为 false 将禁止回调。使用 'before' 或 'after' 将仅开启指定的
   回调。
 * ``counterCache`` (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值
+* ``atomic`` (从 2.6 版本开始) 指定要使用事务保存记录的布尔值。
 
 欲知模型回调的更多信息，请参见 :doc:`这里 <callback-methods>`。
-
 
 .. tip::
 
@@ -497,7 +497,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 让我们来看看如何保存两个模型的连接(*join*)表中的数据。就像 
 :ref:`hasMany-through` 一节展示的那样，连接表用 `hasMany` 类型的关系关联到各个模
 型。在我们的例子中，Cake 学校的负责人要求我们写一个应用程序，让他可以记录一个学
-生在某门课上的出勤天数和分数。查看下面的代码。::
+生在某门课上的出勤天数和分数。查看下面的代码。 ::
 
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
@@ -531,7 +531,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
    <?php echo  $this->Form->end(); ?>
 
 
-提交的数据数组如下。::
+提交的数据数组如下。 ::
 
     Array
     (
@@ -832,7 +832,7 @@ HABTM 关系更可能的情形会包含一个允许多选的 ``<select>`` 元素
 
 关键在于模型的设置 ``className``。简单地添加 ``Project`` HABTM ``Project`` 关联
 会引起保存数据时的错误。设置 ``className`` 为模型名称，并用别名作为键，就避免了
-这些问题。::
+这些问题。 ::
 
     class Project extends AppModel {
         public $hasAndBelongsToMany = array(

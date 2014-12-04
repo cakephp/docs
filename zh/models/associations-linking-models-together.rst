@@ -676,7 +676,7 @@ HABTM 关联。
     请参阅 :ref:`HABTM association arrays <ref-habtm-arrays>`。
 
 实现需求的方法是使用 **连接模型**，或者也称为 **hasMany through** 关联。即，关联
-自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。::
+自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。 ::
 
             // Student.php
             class Student extends AppModel {

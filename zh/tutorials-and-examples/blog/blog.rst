@@ -1,5 +1,5 @@
 博客教程
-########
+********
 
 欢迎使用 CakePHP。阅读这个教程多半是因为你想了解更多有关 CakePHP 是如何工作的。我
 们的目的是提高生产力，并使编写代码更令人愉快，我们希望当你深入代码时会感受到这一
@@ -81,11 +81,11 @@ Tmp 目录的权限
     );
 
     /* 然后，插入一些测试用的文章记录: */
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('The title', 'This is the post body.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('A title once again', 'And the post body follows.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 表和列的名字并不是随意取的。如果你遵循 CakePHP 的数据库命名约定，以及类的命名约定

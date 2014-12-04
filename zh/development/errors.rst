@@ -65,7 +65,7 @@
     }
 
 当每次发生错误时，这个类/方法将输出'There has been an error!'。由于可以定义一个错误处理作为任何回调类型，
-在PHP5.3或更高版本可以使用一个匿名函数。::
+在PHP5.3或更高版本可以使用一个匿名函数。 ::
 
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
         echo 'Oh no something bad happened';
