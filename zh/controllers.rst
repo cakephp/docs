@@ -23,7 +23,7 @@
 .. _app-controller:
 
 App 控制器
-==================
+==========
 
 如介绍中说所说，``AppController`` 控制器是应用程序中所有控制器的父类。
 ``AppController`` 本身扩展了 CakePHP 核心库中的 :php:class:`Controller` 类。
@@ -49,8 +49,8 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
     -  :php:attr:`~Controller::$helpers`
     -  :php:attr:`~Controller::$uses`
 
-如果你在你的 ``AppController`` 中定义 :php:attr:`~Controller::$helpers`，记住加入
-默认的 Html 和 Form 助件。
+如果你在你的 ``AppController`` 中定义 :php:attr:`~Controller::$helpers`，记住加
+入默认的 Html 和 Form 助件。
 
 也请记住，最好在控制器子类的回调方法中调用 ``AppController`` 的回调方法::
 
@@ -62,8 +62,8 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 ========
 
 当一个请求提交给 CakePHP 应用程序时，CakePHP 的 :php:class:`Router` 和
-:php:class:`Dispatcher` 类使用 :ref:`routes-configuration` 来查找和创建正确的控制
-器。请求数据被封装在一个请求对象中。CakePHP 把所有重要的请求信息放在 
+:php:class:`Dispatcher` 类使用 :ref:`routes-configuration` 来查找和创建正确的控
+制器。请求数据被封装在一个请求对象中。CakePHP 把所有重要的请求信息放在 
 ``$this->request`` 属性中。欲知 CakePHP 请求对象的更多信息，请参看 
 :ref:`cake-request` 这一节。
 
@@ -73,10 +73,10 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 控制器动作负责将请求参数转换成对提交请求的浏览器/用户的响应。CakePHP 使用约定使
 这个过程自动化，去掉一些否则你要自己写的样板(*boiler-plate*)代码。
 
-根据约定，CakePHP 会渲染一个以动作名称的转换(*inflected*)版本命名的视图。回到我们
-在线面包店的例子，我们的 RecipesController 也许会有 ``view()``，``share()`` 和 
-``search()`` 动作。控制器会是 ``/app/Controller/RecipesController.php``，其内容如
-下::
+根据约定，CakePHP 会渲染一个以动作名称的转换(*inflected*)版本命名的视图。回到我
+们在线面包店的例子，我们的 RecipesController 也许会有 ``view()``，``share()`` 和 
+``search()`` 动作。控制器会是 ``/app/Controller/RecipesController.php``，其内容
+如下::
 
         # /app/Controller/RecipesController.php
 
@@ -95,12 +95,12 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
         }
 
 这些动作的视图文件将会是 ``app/View/Recipes/view.ctp`` 、 
-``app/View/Recipes/share.ctp`` 和 ``app/View/Recipes/search.ctp``。根据约定，视图
-文件名是动作名称的下划线分隔的小写格式。
+``app/View/Recipes/share.ctp`` 和 ``app/View/Recipes/search.ctp``。根据约定，视
+图文件名是动作名称的下划线分隔的小写格式。
 
 控制器动作通常用 :php:meth:`~Controller::set()` 创建上下文，供 :php:class:`View` 
-用来渲染视图。正是得益于 CakePHP 使用的约定，你不必手动创建和渲染视图。而是一旦控
-制器动作完成，CakePHP 会处理视图的渲染和发送。
+用来渲染视图。正是得益于 CakePHP 使用的约定，你不必手动创建和渲染视图。而是一旦
+控制器动作完成，CakePHP 会处理视图的渲染和发送。
 
 如果出于某种原因，想要跳过默认的行为，下面的两种技术都可以跳过默认的视图渲染过程。
 
@@ -109,8 +109,8 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 * 你可以返回一个 :php:class:`CakeResponse` 对象，包含创建的完整响应。
 
 当控制器方法用于 :php:meth:`~Controller::requestAction()` 时，你经常要返回非字符
-串数据。如果你有用于正常网页请求 + requestAction 的控制器方法，你应当在返回前检查
-请求类型::
+串数据。如果你有用于正常网页请求 + requestAction 的控制器方法，你应当在返回前检
+查请求类型::
 
     class RecipesController extends AppController {
         public function popular() {
@@ -127,8 +127,8 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 回数组数据会引起错误，应当避免。欲知使用 :php:meth:`~Controller::requestAction()` 
 的更多窍门，请参看 :php:meth:`~Controller::requestAction()` 一节。
 
-为了让你在自己的应用程序中有效地使用控制器，我们来介绍一些 CakePHP 的控制器提供的
-核心属性和方法。
+为了让你在自己的应用程序中有效地使用控制器，我们来介绍一些 CakePHP 的控制器提供
+的核心属性和方法。
 
 .. _controller-life-cycle:
 
@@ -175,8 +175,8 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 
 .. php:method:: set(string $var, mixed $value)
 
-    :php:meth:`~Controller::set()` 方法是从控制器传递数据到视图的主要方式。一旦用
-    了 :php:meth:`~Controller::set()`，变量就可以在视图中访问::
+    :php:meth:`~Controller::set()` 方法是从控制器传递数据到视图的主要方式。一旦
+    用了 :php:meth:`~Controller::set()`，变量就可以在视图中访问::
 
         // 首先从控制器传递数据:
 
@@ -187,8 +187,8 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 
         你为蛋糕选择了 <?php echo $color; ?> 色的糖霜。
 
-    :php:meth:`~Controller::set()` 方法也接受关联数组作为其第一个参数。这经常是快
-    速为视图设置一组信息的方法::
+    :php:meth:`~Controller::set()` 方法也接受关联数组作为其第一个参数。这经常是
+    快速为视图设置一组信息的方法::
 
         $data = array(
             'color' => 'pink',
@@ -211,9 +211,9 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 .. php:method:: render(string $view, string $layout)
 
     :php:meth:`~Controller::render()` 方法在每个请求的控制器动作结束时会被自动调
-    用。这个方法执行所有的视图逻辑(使用你用 :php:meth:`~Controller::set()` 方法给
-    出的数据)，将视图放入它的布局(:php:attr:`~View::$layout`)中，并把它提供给最终
-    用户。
+    用。这个方法执行所有的视图逻辑(使用你用 :php:meth:`~Controller::set()` 方法
+    给出的数据)，将视图放入它的布局(:php:attr:`~View::$layout`)中，并把它提供给
+    最终用户。
 
     渲染使用的默认视图文件由约定决定。如果请求的是 RecipesController 的 
     ``search()`` 动作，视图文件 /app/View/Recipes/search.ctp 将被渲染::
@@ -231,8 +231,8 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
     为 false)，仍然可以用该方法通过用 ``$action`` 指定一个控制器的动作来指定另外
     一个视图文件。
 
-    如果 ``$view`` 以 '/' 开头，就被认为是相对于 ``/app/View`` 的视图或者元素文件。
-    这可以直接渲染元素，在 AJAX 请求中很有用。
+    如果 ``$view`` 以 '/' 开头，就被认为是相对于 ``/app/View`` 的视图或者元素文
+    件。这可以直接渲染元素，在 AJAX 请求中很有用。
     ::
 
         // 渲染 /View/Elements/ajaxreturn.ctp 中的元素
@@ -273,9 +273,9 @@ CakePHP 就不会试图再次渲染该视图了::
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
-    最常用到的流程控制方法是 :php:meth:`~Controller::redirect()` 方法。这个方法的
-    第一个参数接受的是 CakePHP 相对网址的形式。当一个用户成功地提交了一份订单之后，
-    也许要引导他们到收据页面::
+    最常用到的流程控制方法是 :php:meth:`~Controller::redirect()` 方法。这个方法
+    的第一个参数接受的是 CakePHP 相对网址的形式。当一个用户成功地提交了一份订单
+    之后，也许要引导他们到收据页面。 ::
 
         public function place_order() {
             // 这里是确认订单的逻辑
@@ -309,8 +309,8 @@ CakePHP 就不会试图再次渲染该视图了::
         $this->redirect($this->referer());
 
     该方法也支持命名的参数。如果要跳转到类似
-    ``http://www.example.com/orders/confirm/product:pizza/quantity:5`` 的网址，可
-    以用::
+    ``http://www.example.com/orders/confirm/product:pizza/quantity:5`` 的网址，
+    可以用::
 
         $this->redirect(array(
             'controller' => 'orders',
@@ -337,13 +337,13 @@ CakePHP 就不会试图再次渲染该视图了::
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
-    如同 :php:meth:`~Controller::redirect()`，:php:meth:`~Controller::flash()` 方
-    法用于在一项操作之后引导用户到一个新的页面。
-    :php:meth:`~Controller::flash()` 方法的不同之处在于，它会显示一条信息，然后才
-    引导用户到另一个网址。
+    如同 :php:meth:`~Controller::redirect()`，:php:meth:`~Controller::flash()` 
+    方法用于在一项操作之后引导用户到一个新的页面。
+    :php:meth:`~Controller::flash()` 方法的不同之处在于，它会显示一条信息，然后
+    才引导用户到另一个网址。
 
-    第一个参数应当为要显示的信息，而第二个参数是 CakePHP 的相对网址。CakePHP 会显
-    示 ``$message`` 并停留 ``$pause`` 秒，再引导用户跳转。
+    第一个参数应当为要显示的信息，而第二个参数是 CakePHP 的相对网址。CakePHP 会
+    显示 ``$message`` 并停留 ``$pause`` 秒，再引导用户跳转。
 
     如果你想用某个模板来显示你的跳转信息，可以在 :php:attr:`~View::$layout` 参数
     指定那个布局的名字。
@@ -373,12 +373,12 @@ CakePHP 就不会试图再次渲染该视图了::
     $method 是调用的方法名，例如 index、edit，等等。
 
 其它有用的方法
---------------------
+--------------
 
 .. php:method:: constructClasses
 
-    这个方法加载控制器需要的模型。此加载过程通常由 CakePHP 执行，但在不同的情况下
-    使用控制器时，有该方法就很方便。如果在命令行脚本或者一些其它外部应用中需要 
+    这个方法加载控制器需要的模型。此加载过程通常由 CakePHP 执行，但在不同的情况
+    下使用控制器时，有该方法就很方便。如果在命令行脚本或者一些其它外部应用中需要 
     CakePHP，那么 :php:meth:`~Controller::constructClasses()` 就会很方便。
 
 .. php:method:: referer(mixed $default = null, boolean $local = false)
@@ -486,18 +486,18 @@ CakePHP 就不会试图再次渲染该视图了::
 
         从 options 参数传入 'return'，就能用 
         :php:meth:`~Controller::requestAction()` 得到完整渲染的视图:
-        ``requestAction($url, array('return'));``。重要的是，请注意，从控制器方法
-        用 'return' 调用 :php:meth:`~Controller::requestAction()`，可能引起脚本和
-        CSS 标签无法正常工作。
+        ``requestAction($url, array('return'));``。重要的是，请注意，从控制器方
+        法用 'return' 调用 :php:meth:`~Controller::requestAction()`，可能引起脚
+        本和 CSS 标签无法正常工作。
 
     .. warning::
 
-        如果不使用缓存，:php:meth:`~Controller::requestAction()` 可能会导致糟糕的
-        性能。所以在控制器或者模型中都极少适用。
+        如果不使用缓存，:php:meth:`~Controller::requestAction()` 可能会导致糟糕
+        的性能。所以在控制器或者模型中都极少适用。
 
-    :php:meth:`~Controller::requestAction()` 最好和(缓存的)元素一起使用 —— 作为一
-    种在渲染前为元素获取数据的方法。让我们看一个把"近期评论"的元素放入布局的例子。
-    首先我们要增加一个控制器函数来返回数据::
+    :php:meth:`~Controller::requestAction()` 最好和(缓存的)元素一起使用 —— 作为
+    一种在渲染前为元素获取数据的方法。让我们看一个把"近期评论"的元素放入布局的例
+    子。首先我们要增加一个控制器函数来返回数据::
 
         // Controller/CommentsController.php
         class CommentsController extends AppController {
@@ -514,7 +514,8 @@ CakePHP 就不会试图再次渲染该视图了::
 
     你应当总是包括确认 :php:meth:`~Controller::requestAction()` 方法的调用确实来
     自 :php:meth:`~Controller::requestAction()` 的检查。不做此检查，将允许 
-    :php:meth:`~Controller::requestAction()` 方法可以直接从网址访问，这样通常不好。
+    :php:meth:`~Controller::requestAction()` 方法可以直接从网址访问，这样通常不
+    好。
 
     如果我们现在增加一个简单的元素来调用此函数::
 
@@ -577,8 +578,8 @@ CakePHP 就不会试图再次渲染该视图了::
 
     当把数组网址和 :php:meth:`~Controller::requestAction()` 方法一起使用时，一定
     要给出请求的动作所需要的 **所有** 参数。这包括象 ``$this->request->data`` 这
-    样的参数。除了传入所有需要的参数外，命名(*named*)参数和传入(*pass*)参数必须在
-    第二个数组提供，如上面所示。
+    样的参数。除了传入所有需要的参数外，命名(*named*)参数和传入(*pass*)参数必须
+    在第二个数组提供，如上面所示。
 
 
 .. php:method:: loadModel(string $modelClass, mixed $id)
@@ -604,8 +605,9 @@ CakePHP 就不会试图再次渲染该视图了::
 
 .. php:attr:: name
 
-    :php:attr:`~Controller::$name` 属性应当置为控制器名称。通常这只是控制器使用的
-    主要模型的复数形式。该属性可以省略，如果 CakePHP 不转换(*inflecting*)它的话::
+    :php:attr:`~Controller::$name` 属性应当置为控制器名称。通常这只是控制器使用
+    的主要模型的复数形式。该属性可以省略，如果 CakePHP 不转换(*inflecting*)它的
+    话::
 
         // $name 控制器属性用法示例
         class RecipesController extends AppController {
@@ -620,8 +622,8 @@ $components、$helpers 和 $uses
 :php:attr:`~Controller::$helpers` 、 :php:attr:`~Controller::$components` 和 
 ``models``。使用这些属性让由 :php:attr:`~Controller::$components` 和 
 :php:attr:`~Controller::$uses` 指定的 MVC 类成为(控制器的)类变量(例如 
-``$this->模型名称``)可以为控制器所用，而由 :php:attr:`~Controller::$helpers` 指定
-的类作为(视图的)对象引用变量(``$this->{助件名称}``)可以被视图使用。
+``$this->模型名称``)可以为控制器所用，而由 :php:attr:`~Controller::$helpers` 指
+定的类作为(视图的)对象引用变量(``$this->{助件名称}``)可以被视图使用。
 
 .. note::
 
@@ -635,10 +637,10 @@ $components、$helpers 和 $uses
     :php:attr:`~Controller::$uses` 变量让控制器访问更多的模型时，当前控制器的(主
     要)模型名称一定也要包括在内。这可由下面的例子说明。
 
-    如果你在控制器中不想使用(任何)模型，就设置 ``public $uses = array()``。这让你
-    可以使用控制器，而不需要相应的模型文件。然而 ``AppController`` 中定义的模型仍
-    然会加载。你也可以用 ``false`` 来完全不加载任何模型，即使是 ``AppController``
-    中定义的模型。
+    如果你在控制器中不想使用(任何)模型，就设置 ``public $uses = array()``。这让
+    你可以使用控制器，而不需要相应的模型文件。然而 ``AppController`` 中定义的模
+    型仍然会加载。你也可以用 ``false`` 来完全不加载任何模型，即使是 
+    ``AppController`` 中定义的模型。
 
     .. versionchanged:: 2.1
         :php:attr:`~Controller::$uses` 变量现在有了新的缺省值，而且它对 ``false``
@@ -650,11 +652,11 @@ $components、$helpers 和 $uses
     :php:class:`SessionHelper` 助件都是可用的，就象 :php:class:`SessionComponent`
     组件一样。但如果选择在 ``AppController`` 中定义你自己的 
     :php:attr:`~Controller::$helpers` 数组，记得包括 :php:class:`HtmlHelper` 和 
-    :php:class:`FormHelper`，如果还想让它们在控制器中缺省就可用的话。要想了解更多
-    关于这些类的信息，就请查看本手册后面的相关章节。
+    :php:class:`FormHelper`，如果还想让它们在控制器中缺省就可用的话。要想了解更
+    多关于这些类的信息，就请查看本手册后面的相关章节。
 
-    让我们来看看如何让 CakePHP 的 :php:class:`Controller` 知道你打算使用额外的 MVC
-    类::
+    让我们来看看如何让 CakePHP 的 :php:class:`Controller` 知道你打算使用额外的
+    MVC 类::
 
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
@@ -677,8 +679,8 @@ $components、$helpers 和 $uses
 其它属性
 --------
 
-虽然你可以在 `API <http://api.cakephp.org>`_ 中查看所有控制器属性的细节，不过还有
-其它一些控制器属性值得我们在手册中花费章节单独介绍它们。
+虽然你可以在 `API <http://api.cakephp.org>`_ 中查看所有控制器属性的细节，不过还
+有其它一些控制器属性值得我们在手册中花费章节单独介绍它们。
 
 .. php:attr:: cacheAction
 
