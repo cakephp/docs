@@ -30,8 +30,8 @@ re-evaluating a query will result in additional SQL being run.
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
 
-Creating a Query Object
-=======================
+The Query Object
+================
 
 The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
@@ -131,12 +131,12 @@ anything you can call on a Collection object, you can also do in a Query object:
 The following sections will show you everything there is to know about using and
 combining the Query object methods to construct SQL statements and extract data.
 
-Récupérer vos données
+Récupérer vos Données
 =====================
 
 La plupart des applications web utilisent beaucoup les requêtes de type
 ``SELECT``. CakePHP permet de construire ces requêtes en un clin d'œil. La
-::method ``select()`` vous permet de ne récupérer que les champs qui vous sont
+méthode ``select()`` vous permet de ne récupérer que les champs qui vous sont
 nécessaire::
 
     $query = $articles->find();
@@ -145,9 +145,10 @@ nécessaire::
         debug($row->title);
     }
 
-La ::method ``select()`` permet également de définir des alias pour vos champs::
+Vous pouvez également de définir des alias pour vos champs en fournissant les
+champs en tant que tableau associatif::
 
-    // Results in SELECT id pk, title aliased_title, body ...
+    // Results in SELECT id AS pk, title AS aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
@@ -185,7 +186,7 @@ and ``page()`` methods::
         ->page(2);
 
 As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query though chained method
+provide a fluent interface, allowing you to build a query through chained method
 calls.
 
 Using SQL Functions
@@ -281,12 +282,12 @@ conditions arrays in previous versions of CakePHP::
     $query = $articles->find()
         ->where([
             'author_id' => 3,
-            'OR' => ['author_id' => 2],
+            'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
 The above would generate SQL like::
 
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+    SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
 If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere()`` and
 ``andWhere()`` methods to build your queries. Each method sets the combining
@@ -316,9 +317,11 @@ The above generates SQL similar to::
 
     SELECT *
     FROM articles
-    WHERE (promoted = 1
-    OR (published = true AND view_count > 10)
-    AND (author_id = 2 OR author_id = 3))
+    WHERE (promoted = true
+    OR (
+      (published = true AND view_count > 10)
+      AND (author_id = 2 OR author_id = 3)
+    ))
 
 By using functions as the parameters to ``orWhere()`` abd ``andWhere()``,
 you can easily compose conditions together with the expression objects::
@@ -473,6 +476,18 @@ using::
     $query = $articles->find()
         ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 
+Automatic IS NULL Creation
+--------------------------
+
+When a condition value is expected to be ``null`` or any other value, you can use
+the ``IS`` operator to automatically create the correct expression::
+
+    $query = $categories->find()
+        ->where(['parent_id IS' => $parentId]);
+
+
+The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
+
 
 Raw Expressions
 ---------------
@@ -491,6 +506,41 @@ expression objects to add snippets of SQL to your queries::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
+
+Getting Results
+===============
+
+Once you've made your query, you'll want to retrieve rows from it. There are
+a few ways of doing this::
+
+    // Iterate the query
+    foreach ($query as $row) {
+        // Do stuff.
+    }
+
+    // Get the results
+    $results = $query->all();
+
+You can use :doc:`any of the collection </core-libraries/collections>` methods
+on you query objects to pre-process or transform the results::
+
+    // Use one of the collection methods.
+    $ids = $query->map(function ($row) {
+        return $row->id;
+    });
+
+    $maxAge = $query->max(function ($row) {
+        return $max->age;
+    });
+
+You can use ``first`` or ``firstOrFail`` to retrieve a single record. These
+methods will alter the query adding a ``LIMIT 1`` clause::
+
+    // Get just the first row
+    $row = $query->first();
+
+    // Get the first row or an exception.
+    $row = $query->firstOrFail();
 
 .. _query-count:
 
@@ -776,7 +826,6 @@ of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
     $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
-    $query->formatResults(function ($results, $query) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -882,7 +931,7 @@ example in which the reducer function will be needed to do something more than
 just emitting the results.
 
 Calculating the most commonly mentioned words, where the articles contain
-information about CakePHP. as usual we need a mapper function::
+information about CakePHP, as usual we need a mapper function::
 
     $mapper = function ($article, $key, $mapReduce) {
         if (stripos('cakephp', $article['body']) === false) {
