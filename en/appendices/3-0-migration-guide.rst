@@ -279,6 +279,7 @@ Log
 * Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
   Cake's own ``LogInterface``. In general, if you extended  :php:class:`Cake\\Log\\Engine\\BaseEngine`
   you just need to rename the ``write()`` method to ``log()``.
+* :php:meth:`Cake\\Log\\Engine\\FileLog` now writes files in ``ROOT/logs`` instead of ``ROOT/tmp/logs``
 
 Routing
 =======
