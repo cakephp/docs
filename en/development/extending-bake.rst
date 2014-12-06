@@ -173,13 +173,13 @@ that bake uses. The best way to do this is::
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
 
-Creating new bake options
-=========================
+Creating new bake command options
+=================================
 
-It's possible to add new bake options, or override the ones provided by CakePHP
-by creating tasks in your application or plugins. By extending
-``Cake\Shell\Task\BakeTask``, bake will find your new task and include
-it as part of bake.
+It's possible to add new bake command options, or override the ones provided
+by CakePHP by creating tasks in your application or plugins. By extending
+``Cake\Shell\Task\BakeTask``, bake will find your new task and include it as
+part of bake.
 
 As an example, we'll make a task that creates an arbitrary foo class. First, create
 the task file ``src/Shell/Task/FooTask.php``. We'll extend the
