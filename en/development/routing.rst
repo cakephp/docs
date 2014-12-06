@@ -543,17 +543,9 @@ For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
-    Router::scope('/', function ($routes) {
-        $routes->connect('/:plugin/:controller/:action',
-            ['plugin' => '*', 'controller' => '*', 'action' => '*'],
-            ['routeClass' => 'DashedRoute']
-        );
-
+    Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks('DashedRoute');
     });
-
-Under the ``/`` routing scope, the previous example will attempt to catch all
-plugin/controller/action dashed routes and map them to their respective actions.
 
 .. index:: file extensions
 .. _file-extensions:
