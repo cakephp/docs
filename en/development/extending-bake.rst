@@ -3,7 +3,7 @@ Extending Bake
 
 Bake features an extensible architecture that allows your application or plugins to
 easily modify or add-to the base functionality. Bake makes use of a dedicated view
-class which does not use standard php syntax.
+class which does not use standard PHP syntax.
 
 Bake events
 ===========
@@ -150,12 +150,7 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this:
         }
 
     }
-In bake template files the following tags are defined:
 
-``<%``
-------
-
-This is the basic open tag,
 
 Changing bake's output
 ======================

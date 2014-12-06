@@ -53,7 +53,7 @@ availble using the ``--help`` option::
 Changing bake's output
 ======================
 
-One you are familiar with using bake, you may wish to taylor the output to
+Once you are familiar with using bake, you may wish to tailor the output to
 your specific needs, or add a new option/class to the bake cli. For details
 on how to achieve this see :doc:`/development/extending-bake.rst`.
 
