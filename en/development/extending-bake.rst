@@ -5,6 +5,58 @@ Bake features an extensible architecture that allows your application or plugins
 easily modify or add-to the base functionality. Bake makes use of a dedicated view
 class which does not use standard php syntax.
 
+Bake events
+===========
+
+As a view class, ``BakeView`` emits the same events as any other view class, plus one
+extra initialize event. However, whereas standard view classes use the event
+prefix "View.", ``BakeView`` uses the event prefix "Bake.".
+
+The initialize event can be used to modify the view class used to bake files, for example
+to add another helper to the bake view class:
+
+    use Cake\Event\Event;
+    use Cake\Event\EventManager;
+    EventManager::instance()->attach(function (Event $event) {
+        $view = $event->subject;
+
+        // In my bake templates, allow the use of the MySpecial helper
+        $view->loadHelper('MySpecial', ['some' => 'config']);
+
+    }, 'Bake.initialize');
+
+Bake events can also be useful for making small changes to existing templates. For
+example, to change the variable names used when baking controller/template files one
+can use a function listening for ``Bake.beforeRender`` to modify the variables used in
+the bake templates:
+
+    use Cake\Event\Event;
+    use Cake\Event\EventManager;
+    EventManager::instance()->attach(function (Event $event) {
+        $view = $event->subject;
+
+        // Use $rows for the main data variable in indexes
+        if (isset($view->viewVars['pluralName'])) {
+            $view->viewVars['pluralName'] = 'rows';
+        }
+        if (isset($view->viewVars['pluralVar'])) {
+            $view->viewVars['pluralVar'] = 'rows';
+        }
+
+        // Use $theOne for the main data variable in view/edit
+        if (isset($view->viewVars['singularName'])) {
+            $view->viewVars['singularName'] = 'theOne';
+        }
+        if (isset($view->viewVars['singularVar'])) {
+            $view->viewVars['singularVar'] = 'theOne';
+        }
+
+        // Add an $author variable to all templates
+        $view->viewVars['author'] = 'Andy';
+
+    }, 'Bake.beforeRender');
+
+
 Bake Template syntax
 ====================
 
