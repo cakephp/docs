@@ -50,13 +50,6 @@ availble using the ``--help`` option::
 
     $ bin/cake bake model --help
 
-Changing bake's output
-======================
-
-Once you are familiar with using bake, you may wish to tailor the output to
-your specific needs, or add a new option/class to the bake cli. For details
-on how to achieve this see :doc:`/development/extending-bake.rst`.
-
 .. meta::
     :title lang=en: Code Generation with Bake
     :keywords lang=en: command line interface,functional application,atabase,database configuration,bash script,basic ingredients,roject,odel,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
