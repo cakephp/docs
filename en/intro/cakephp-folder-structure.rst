@@ -59,7 +59,7 @@ Locale
 Model
     Contains your application's tables, entities and behaviors.
 View
-    Presentational classes are placed here: cells, helpers, and view files.
+    Presentational classes are placed here: cells, helpers, and template files.
 Template
     Presentational files are placed here: elements, error pages,
     layouts, and view template files.

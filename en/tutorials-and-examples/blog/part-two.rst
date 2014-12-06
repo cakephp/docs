@@ -119,7 +119,7 @@ Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
 object to the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's view files are stored in ``src/Template`` inside a folder
+CakePHP's template files are stored in ``src/Template`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Articles' in this case). To format this article data in a
 nice table, our view code might look something like this:

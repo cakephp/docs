@@ -100,7 +100,7 @@ view variable is used to define which view variables ``XmlView`` should
 serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
-define the ``_serialize`` view variable, and instead use view files. We place
+define the ``_serialize`` view variable, and instead use template files. We place
 the REST views for our RecipesController inside ``src/Template/recipes/xml``. We can also use
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::

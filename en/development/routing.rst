@@ -549,7 +549,7 @@ with the following router connection::
             ['routeClass' => 'DashedRoute']
         );
 
-        $routes->fallbacks();
+        $routes->fallbacks('DashedRoute');
     });
 
 Under the ``/`` routing scope, the previous example will attempt to catch all

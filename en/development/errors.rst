@@ -327,8 +327,8 @@ Exception Renderer
 The ExceptionRenderer class with the help of ``ErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
-The error page views are located at ``src/Template/Error/``. For all 4xx and 
-5xx errors the view files ``error400.ctp`` and ``error500.ctp`` are used
+The error page views are located at ``src/Template/Error/``. For all 4xx and
+5xx errors the template files ``error400.ctp`` and ``error500.ctp`` are used
 respectively. You can customize them as per your needs. By default your
 ``src/Template/Layout/default.ctp`` is used for error pages too. If for
 example, you want to use another layout ``src/Template/Layout/my_error.ctp``
@@ -346,7 +346,7 @@ Creating your own Application Exceptions
 
 You can create your own application exceptions using any of the built in `SPL
 exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
-itself, or :php:exc:`Cake\\Core\\Exception\\Exception`. 
+itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.
 If your application contained the following exception::
 
     use Cake\Core\Exception\Exception;
