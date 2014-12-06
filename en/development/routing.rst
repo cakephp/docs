@@ -940,8 +940,11 @@ Is equivalent to the following explicit calls:
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
 
-Note that using the default route class (``Route``) with fallbacks will result in inconsistent
-URL case.
+.. note::
+
+    Using the default route class (``Route``) with fallbacks, or any route
+    with ``:plugin`` and/or ``:controller`` route elements will result in
+    inconsistent URL case.
 
 Handling Named Parameters in URLs
 =================================
