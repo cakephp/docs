@@ -275,7 +275,7 @@ Then create the ContactManager plugin routes. Put the following into
     use Cake\Routing\Router;
 
     Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks();
+        $routes->fallbacks('InflectedRoute');
     });
 
 The above will connect default routes for you plugin. You can customize this

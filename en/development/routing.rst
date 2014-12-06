@@ -932,6 +932,27 @@ option for each route. For example using::
 will cause all routes connected after this to use the ``DashedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
+Fallbacks method
+----------------
+
+.. php:meth:: fallbacks($routeClass = null)
+
+The fallbacks method is a simple shortcut for defining default routes. The method
+uses the passed routing class for the defined rules or if no class is provided the
+class returned by ``Router::defaultRouteClass()`` is used.
+
+Calling fallbacks like so:
+
+    $routes->fallbacks('InflectedRoute');
+
+Is equivalent to the following explicit calls:
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+
+Note that using the default route class (``Route``) with fallbacks will result in inconsistent
+url case.
+
 Handling Named Parameters in URLs
 =================================
 
