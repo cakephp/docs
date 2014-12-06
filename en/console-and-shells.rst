@@ -795,6 +795,18 @@ buildFromArray on its own, to build an option parser::
         ]);
     }
 
+Merging ConsoleOptionParsers
+----------------------------
+
+.. php:method:: merge($spec)
+
+When building a group command, you maybe want to combine several parsers for this::
+
+    $parser->merge($anotherParser);
+
+Note that the order of arguments for each parser must be the same, and that options must
+also be compatible for it work. So do not use keys for different things.
+
 Getting Help from Shells
 ------------------------
 
