@@ -13,7 +13,7 @@ extra initialize event. However, whereas standard view classes use the event
 prefix "View.", ``BakeView`` uses the event prefix "Bake.".
 
 The initialize event can be used to make changes which apply to all baked output, for
-example to add another helper to the bake view class this event can be used:
+example to add another helper to the bake view class this event can be used::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
@@ -31,7 +31,7 @@ example to add another helper to the bake view class this event can be used:
 Bake events can also be useful for making small changes to existing templates. For
 example, to change the variable names used when baking controller/template files one
 can use a function listening for ``Bake.beforeRender`` to modify the variables used in
-the bake templates:
+the bake templates::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
@@ -67,7 +67,7 @@ everything else including php tags as plain text.
 
     Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
 
-``BakeView`` implements the following tags:
+``BakeView`` implements the following tags::
 
   * ``<%`` A Bake template php open tag
   * ``%>`` A Bake template php close tag
@@ -79,12 +79,12 @@ One way to see/understand how bake templates works, especially when attempting t
 bake template files, is to bake a class and compare the template used with the
 pre-processed template file which is left in the application's tmp folder.
 
-So, for example, when baking a shell like so:
+So, for example, when baking a shell like so::
 
     bin/cake bake shell Foo
 
 The template used (``vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp``)
-looks like this:
+looks like this::
 
     <?php
     namespace <%= $namespace %>\Shell;
@@ -107,7 +107,7 @@ looks like this:
     }
 
 The pre-processed template file (``tmp/Bake-Shell-shell-ctp.php``), which is the file
-actually rendered, looks like this:
+actually rendered, looks like this::
 
     <CakePHPBakeOpenTagphp
     namespace <?= $namespace ?>\Shell;
@@ -129,7 +129,7 @@ actually rendered, looks like this:
 
     }
 
-And the resultant baked class (``src/Shell/FooShell.php``) looks like this:
+And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
 
     <?php
     namespace App\Shell;
@@ -157,7 +157,7 @@ Changing bake's output
 
 If you wish to modify the default HTML output produced by the "bake" command, you can
 create your own bake 'theme' which allows you to replace some or all of the templates
-that bake uses. The best way to do this is:
+that bake uses. The best way to do this is::
 
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
 #. Create a new directory in ``plugin/[name]/src/Template/Bake``.
