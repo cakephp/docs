@@ -50,87 +50,12 @@ availble using the ``--help`` option::
 
     $ bin/cake bake model --help
 
-Create New Tasks for Bake
-=========================
+Changing bake's output
+======================
 
-Bake features an extensible architecture that allows your application or plugins
-to provide new tasks, or replace tasks provided by CakePHP. By extending
-``Cake\Shell\Task\BakeTask``, bake will find your new task and include
-it as part of bake.
-
-As an example, we'll make a task that creates shell classes. First, create
-the task file ``src/Shell/Task/ShellTask.php``. We'll extend the
-``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
-is abstract and requires us to define 4 methods that tell bake what the task is
-called, where the files it generates should go, and what template to use. Our
-ShellTask.php file should look like::
-
-    <?php
-    namespace App\Shell\Task;
-
-    use Cake\Shell\Task\SimpleBakeTask;
-
-    class ShellTask extends SimpleBakeTask {
-        public $pathFragment = 'Shell/';
-
-        public function name() {
-            return 'shell';
-        }
-
-        public function fileName($name) {
-            return $name . 'Shell.php';
-        }
-
-        public function template() {
-            return 'shell';
-        }
-
-    }
-
-Once this file has been created, we need to create a template that bake can use
-when generating code. Create
-``src/Template/Bake/app/classes/shell.ctp``. In this file we'll add
-the following content::
-
-    <?php
-    echo "<?php\n"; ?>
-    namespace <?= $namespace ?>\Shell;
-
-    use Cake\Console\Shell;
-
-    /**
-     * <?= $name ?> shell
-     */
-    class <?= $name ?>Shell extends Shell {
-
-        public function main() {
-            // Add code.
-        }
-    }
-
-You should now see your new task in the output of ``bin/cake bake``. You can
-run your new task by running ``bin/cake bake shell Example --template app``.
-This will generate a new ``ExampleShell`` class for your application to use.
-
-Modify Default HTML/Code Produced by bake
-=========================================
-
-If you wish to modify the default HTML output produced by the
-"bake" command, you can create your own bake 'template' which allows you to replace
-some or all of the templates that bake uses. To create a new bake template do the
-following:
-
-#. Create a new directory in ``src/Template/Bake/[name]``.
-#. Copy any templates you want to override from
-   ``vendor/cakephp/cakephp/src/Template/Bake/default``.  to matching
-   directories in your application/plugin.
-#. When running bake use the ``--template`` option to specify the bake template you
-   want to use.
-
-.. note::
-
-    Bake template names need to be unique, so don't use 'default'.
-
+One you are familiar with using bake, you may wish to taylor the output to
+your specific needs, or add a new option/class to the bake cli. For details
+on how to achieve this see :doc:`/development/extending-bake.rst`.
 
 .. meta::
     :title lang=en: Code Generation with Bake
