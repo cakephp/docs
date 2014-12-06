@@ -27,7 +27,7 @@ example to add another helper to the bake view class this event can be used::
         $view->loadHelper('MySpecial', ['some' => 'config']);
 
         // And add an $author variable so it's always available
-        $view->viewVars['author'] = 'Andy';
+        $view->set('author', 'Andy');
 
     }, 'Bake.initialize');
 
@@ -45,19 +45,19 @@ the bake templates::
         $view = $event->subject;
 
         // Use $rows for the main data variable in indexes
-        if (isset($view->viewVars['pluralName'])) {
-            $view->viewVars['pluralName'] = 'rows';
+        if ($view->get('pluralName')) {
+            $view->set('pluralName', 'rows');
         }
-        if (isset($view->viewVars['pluralVar'])) {
-            $view->viewVars['pluralVar'] = 'rows';
+        if ($view->get('pluralVar')) {
+            $view->set('pluralVar', 'rows');
         }
 
         // Use $theOne for the main data variable in view/edit
-        if (isset($view->viewVars['singularName'])) {
-            $view->viewVars['singularName'] = 'theOne';
+        if ($view->get('singularName')) {
+            $view->set('singularName', 'theOne');
         }
-        if (isset($view->viewVars['singularVar'])) {
-            $view->viewVars['singularVar'] = 'theOne';
+        if ($view->get('singularVar')) {
+            $view->set('singularVar', 'theOne');
         }
 
     }, 'Bake.beforeRender');
