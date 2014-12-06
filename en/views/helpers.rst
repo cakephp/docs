@@ -218,7 +218,7 @@ class in ``src/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     /* src/View/Helper/LinkHelper.php */
-    namespace Cake\View\Helper;
+    namespace App\View\Helper;
 
     use Cake\View\Helper;
 
