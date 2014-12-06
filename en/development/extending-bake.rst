@@ -2,7 +2,100 @@ Extending Bake
 ##############
 
 Bake features an extensible architecture that allows your application or plugins to
-easily modify or add-to the base functionality.
+easily modify or add-to the base functionality. Bake makes use of a dedicated view
+class which does not use standard php suntax.
+
+Bake Template syntax
+====================
+
+Bake template files use erb-style (``<% %>``) tags to denote template logic, and treat
+everything else including php tags as plain text.
+
+.. note::
+
+    Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
+
+One simple way to see/understand how bake templates works is to bake a class and compare
+the template used with the pre-processed template file which is left in the application's
+tmp folder.
+
+So, for example, when baking a shell like so:
+
+    bin/cake bake shell Foo
+
+The template used (``vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp``)
+looks like this:
+
+    <?php
+    namespace <%= $namespace %>\Shell;
+
+    use Cake\Console\Shell;
+
+    /**
+    * <%= $name %> shell command.
+    */
+    class <%= $name %>Shell extends Shell {
+
+    /**
+    * main() method.
+    *
+    * @return bool|int Success or error code.
+    */
+        public function main() {
+        }
+
+    }
+
+The pre-processed template file (``Bake-Shell-shell-ctp.php``), which is the file
+actually rendered, looks like this:
+
+    <CakePHPBakeOpenTagphp
+    namespace <?= $namespace ?>\Shell;
+
+    use Cake\Console\Shell;
+
+    /**
+    * <?= $name ?> shell command.
+    */
+    class <?= $name ?>Shell extends Shell {
+
+    /**
+    * main() method.
+    *
+    * @return bool|int Success or error code.
+    */
+        public function main() {
+        }
+
+    }
+
+And the resultant baked class (``src/Shell/FooShell.php``) looks like this:
+
+    <?php
+    namespace App\Shell;
+
+    use Cake\Console\Shell;
+
+    /**
+    * Foo shell command.
+    */
+    class FooShell extends Shell {
+
+    /**
+    * main() method.
+    *
+    * @return bool|int Success or error code.
+    */
+        public function main() {
+        }
+
+    }
+In bake template files the following tags are defined:
+
+``<%``
+------
+
+This is the basic open tag,
 
 Changing bake's output
 ======================
@@ -78,5 +171,5 @@ for your application to use.
 
 .. meta::
     :title lang=en: Extending Bake
-    :keywords lang=en: command line interface,development,bake view, bake view syntax,erb tags,asp tags,percent tags
+    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
 
