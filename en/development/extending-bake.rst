@@ -12,8 +12,8 @@ As a view class, ``BakeView`` emits the same events as any other view class, plu
 extra initialize event. However, whereas standard view classes use the event
 prefix "View.", ``BakeView`` uses the event prefix "Bake.".
 
-The initialize event can be used to modify the view class used to bake files, for example
-to add another helper to the bake view class:
+The initialize event can be used to make changes which apply to all baked output, for
+example to add another helper to the bake view class this event can be used:
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
@@ -22,6 +22,9 @@ to add another helper to the bake view class:
 
         // In my bake templates, allow the use of the MySpecial helper
         $view->loadHelper('MySpecial', ['some' => 'config']);
+
+        // And add an $author variable so it's always available
+        $view->viewVars['author'] = 'Andy';
 
     }, 'Bake.initialize');
 
@@ -50,9 +53,6 @@ the bake templates:
         if (isset($view->viewVars['singularVar'])) {
             $view->viewVars['singularVar'] = 'theOne';
         }
-
-        // Add an $author variable to all templates
-        $view->viewVars['author'] = 'Andy';
 
     }, 'Bake.beforeRender');
 
