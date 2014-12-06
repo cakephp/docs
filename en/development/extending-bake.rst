@@ -106,7 +106,7 @@ looks like this:
 
     }
 
-The pre-processed template file (``Bake-Shell-shell-ctp.php``), which is the file
+The pre-processed template file (``tmp/Bake-Shell-shell-ctp.php``), which is the file
 actually rendered, looks like this:
 
     <CakePHPBakeOpenTagphp
