@@ -226,7 +226,7 @@ send multipart templated email messages as well::
         ->from('app@domain.com')
         ->send();
 
-This would use the following view files:
+This would use the following template files:
 
 * ``src/Template/Email/text/welcome.ctp``
 * ``src/Template/Layout/Email/text/fancy.ctp``
@@ -245,7 +245,7 @@ In your email templates you can use these with::
 
     <p>Here is your value: <b><?= $value ?></b></p>
 
-You can use helpers in emails as well, much like you can in normal view files.
+You can use helpers in emails as well, much like you can in normal template files.
 By default only the ``HtmlHelper`` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 

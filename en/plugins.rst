@@ -393,12 +393,12 @@ If the plugin prefix is omitted, the layout/view file will be located normally.
     For information on how to use elements from a plugin, look up
     :ref:`view-elements`
 
-Overriding Plugin Views from Inside Your Application
+Overriding Plugin Templates from Inside Your Application
 ----------------------------------------------------
 
 You can override any plugin views from inside your app using special paths. If
-you have a plugin called 'ContactManager' you can override the view files of the
-plugin with more application specific view logic by creating files using the
+you have a plugin called 'ContactManager' you can override the template files of the
+plugin with application specific view logic by creating files using the
 following template ``src/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 

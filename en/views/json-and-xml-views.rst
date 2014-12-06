@@ -11,7 +11,7 @@ leverage the new view classes. ``XmlView`` and ``JsonView`` will be referred to
 as data views for the rest of this page.
 
 There are two ways you can generate data views. The first is by using the
-``_serialize`` key, and the second is by creating normal view files.
+``_serialize`` key, and the second is by creating normal template files.
 
 Enabling Data Views in Your Application
 =======================================
@@ -35,11 +35,11 @@ Using Data Views with the Serialize Key
 
 The ``_serialize`` key is a special view variable that indicates which other view
 variable(s) should be serialized when using a data view. This lets you skip
-defining view files for your controller actions if you don't need to do any
+defining template files for your controller actions if you don't need to do any
 custom formatting before your data is converted into json/xml.
 
 If you need to do any formatting or manipulation of your view variables before
-generating the response, you should use view files. The value of ``_serialize``
+generating the response, you should use template files. The value of ``_serialize``
 can be either a string or an array of view variables to serialize::
 
     namespace App\Controller;
@@ -79,10 +79,10 @@ If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
 element the Xml will fail to generate.
 
-Using a Data View with View Files
+Using a Data View with Template Files
 =================================
 
-You should use view files if you need to do some manipulation of your view
+You should use template files if you need to do some manipulation of your view
 content before creating the final output. For example if we had posts, that had
 a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::

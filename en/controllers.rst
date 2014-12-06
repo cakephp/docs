@@ -126,7 +126,7 @@ in ``src/Controller/RecipesController.php`` and contain::
             }
         }
 
-The view files for these actions would be ``src/Template/Recipes/view.ctp``,
+The template files for these actions would be ``src/Template/Recipes/view.ctp``,
 ``src/Template/Recipes/share.ctp``, and ``src/Template/Recipes/search.ctp``. The
 conventional view file name is the lowercased and underscored version of the
 action name.
