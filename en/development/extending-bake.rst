@@ -15,6 +15,9 @@ prefix "View.", ``BakeView`` uses the event prefix "Bake.".
 The initialize event can be used to make changes which apply to all baked output, for
 example to add another helper to the bake view class this event can be used::
 
+    <?php
+    // config/bootstrap_cli.php
+
     use Cake\Event\Event;
     use Cake\Event\EventManager;
     EventManager::instance()->attach(function (Event $event) {
@@ -32,6 +35,9 @@ Bake events can also be useful for making small changes to existing templates. F
 example, to change the variable names used when baking controller/template files one
 can use a function listening for ``Bake.beforeRender`` to modify the variables used in
 the bake templates::
+
+    <?php
+    // config/bootstrap_cli.php
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
