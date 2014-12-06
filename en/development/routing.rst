@@ -110,8 +110,7 @@ some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -408,8 +407,7 @@ can be enabled by using the ``prefix`` scope method::
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
