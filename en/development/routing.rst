@@ -931,11 +931,11 @@ The fallbacks method is a simple shortcut for defining default routes. The metho
 uses the passed routing class for the defined rules or if no class is provided the
 class returned by ``Router::defaultRouteClass()`` is used.
 
-Calling fallbacks like so:
+Calling fallbacks like so::
 
     $routes->fallbacks('InflectedRoute');
 
-Is equivalent to the following explicit calls:
+Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
     $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
@@ -955,7 +955,7 @@ named parameters.
 
 In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
-arguments::
+arguments:::
 
     public function beforeFilter() {
         parent::beforeFilter();
