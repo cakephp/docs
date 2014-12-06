@@ -77,7 +77,7 @@ Configuration options
 
 You can pass configuration options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
-    
+
     namespace App\View\Helper;
 
     use Cake\View\Helper;
@@ -218,6 +218,8 @@ class in ``src/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     /* src/View/Helper/LinkHelper.php */
+    namespace App\View\Helper;
+    
     use Cake\View\Helper;
 
     class LinkHelper extends Helper {
@@ -234,7 +236,7 @@ helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
     /* src/View/Helper/LinkHelper.php (using other helpers) */
-    
+
     namespace App\View\Helper;
 
     use Cake\View\Helper;
