@@ -403,7 +403,7 @@ In order to use a different password hasher, you need to create the class in
 
     namespace App\Auth;
 
-    use \Cake\Auth\AbstractPasswordHasher;
+    use Cake\Auth\AbstractPasswordHasher;
 
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 
