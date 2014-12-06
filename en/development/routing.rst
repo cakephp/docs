@@ -955,7 +955,7 @@ named parameters.
 
 In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
-arguments:::
+arguments::
 
     public function beforeFilter() {
         parent::beforeFilter();
