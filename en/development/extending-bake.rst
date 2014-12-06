@@ -98,15 +98,15 @@ looks like this::
     use Cake\Console\Shell;
 
     /**
-    * <%= $name %> shell command.
-    */
+     * <%= $name %> shell command.
+     */
     class <%= $name %>Shell extends Shell {
 
     /**
-    * main() method.
-    *
-    * @return bool|int Success or error code.
-    */
+     * main() method.
+     *
+     * @return bool|int Success or error code.
+     */
         public function main() {
         }
 
@@ -121,15 +121,15 @@ actually rendered, looks like this::
     use Cake\Console\Shell;
 
     /**
-    * <?= $name ?> shell command.
-    */
+     * <?= $name ?> shell command.
+     */
     class <?= $name ?>Shell extends Shell {
 
     /**
-    * main() method.
-    *
-    * @return bool|int Success or error code.
-    */
+     * main() method.
+     *
+     * @return bool|int Success or error code.
+     */
         public function main() {
         }
 
@@ -143,15 +143,15 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
     use Cake\Console\Shell;
 
     /**
-    * Foo shell command.
-    */
+     * Foo shell command.
+     */
     class FooShell extends Shell {
 
     /**
-    * main() method.
-    *
-    * @return bool|int Success or error code.
-    */
+     * main() method.
+     *
+     * @return bool|int Success or error code.
+     */
         public function main() {
         }
 
