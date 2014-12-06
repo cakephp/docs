@@ -941,7 +941,7 @@ Is equivalent to the following explicit calls:
     $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
 
 Note that using the default route class (``Route``) with fallbacks will result in inconsistent
-url case.
+URL case.
 
 Handling Named Parameters in URLs
 =================================
