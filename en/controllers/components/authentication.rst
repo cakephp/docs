@@ -486,7 +486,7 @@ function accordingly::
 
 As you can see we are just setting the plain password again so the setter
 function in the entity will hash the password as shown in the previous example and
-then save the entitiy.
+then save the entity.
 
 Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
