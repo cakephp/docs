@@ -388,7 +388,7 @@ about configuring the component, creating custom Authorization classes, and much
 Suggested Follow-up Reading
 ---------------------------
 
-#. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+#. :doc:`/bake/usage` Generating basic CRUD code
 #. :doc:`/controllers/components/authentication`: User registration and login
 
 .. meta::

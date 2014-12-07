@@ -145,7 +145,7 @@ features in CakePHP are:
 * A :doc:`caching </core-libraries/caching>` framework that integrates with
   Memcache, Redis and other backends.
 * Powerful :doc:`code generation tools
-  </console-and-shells/code-generation-with-bake>` so you can hit the ground
+  </bake/usage>` so you can hit the ground
   running.
 * :doc:`Integrated testing framework </development/testing>` so you can ensure
   your code works perfectly.

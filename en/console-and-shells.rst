@@ -916,7 +916,6 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/code-generation-with-bake
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
