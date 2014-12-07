@@ -73,7 +73,7 @@ everything else including php tags as plain text.
 
     Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
 
-``BakeView`` implements the following tags::
+``BakeView`` implements the following tags:
 
   * ``<%`` A Bake template php open tag
   * ``%>`` A Bake template php close tag
@@ -157,19 +157,17 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
 
     }
 
+Creating a bake theme
+=====================
 
-Changing bake's output
-======================
-
-If you wish to modify the default HTML output produced by the "bake" command, you can
+If you wish to modify the default output produced by the "bake" command, you can
 create your own bake 'theme' which allows you to replace some or all of the templates
-that bake uses. The best way to do this is::
+that bake uses. The best way to do this is:
 
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
 #. Create a new directory in ``plugin/[name]/src/Template/Bake``.
 #. Copy any templates you want to override from
-   ``vendor/cakephp/cakephp/src/Template/Bake``.  to matching
-   directories in your application/plugin.
+  ``vendor/cakephp/cakephp/src/Template/Bake`` to matching directories in your plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
 
