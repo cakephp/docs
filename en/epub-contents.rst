@@ -17,6 +17,7 @@ Contents
     controllers
     views
     orm
+    bake
     development/errors
 
     core-libraries/caching
