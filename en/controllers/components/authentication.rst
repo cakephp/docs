@@ -462,6 +462,9 @@ The first name appearing in the ``hashers`` key indicates which of the classes
 is the preferred one, but it will fallback to the others in the list if the
 check was unsuccessful.
 
+When using the ``WeakPasswordHasher`` you will need to
+set the ``Security.salt`` configure value to ensure passwords are salted.
+
 In order to update old users' passwords on the fly, you can change the login
 function accordingly::
 
@@ -481,9 +484,9 @@ function accordingly::
         }
     }
 
-As you cans see we are just setting the plain password again to to property so
-the setter function in the entity hashes the password as shown in previous
-examples and then saved again to the database.
+As you can see we are just setting the plain password again so the setter
+function in the entity will hash the password as shown in the previous example and
+then save the entity.
 
 Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
