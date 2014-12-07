@@ -73,13 +73,13 @@ everything else including php tags as plain text.
 
     Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
 
-``BakeView`` implements the following tags::
+``BakeView`` implements the following tags:
 
-- ``<%`` A Bake template php open tag
-- ``%>`` A Bake template php close tag
-- ``<%=`` A Bake template php short-echo tag
-- ``<%~`` A Bake template php open tag, stripping any leading whitespace before the tag
-- ``~%>`` A Bake template php close tag, stripping trailing whitespace after the tag
+  * ``<%`` A Bake template php open tag
+  * ``%>`` A Bake template php close tag
+  * ``<%=`` A Bake template php short-echo tag
+  * ``<%~`` A Bake template php open tag, stripping any leading whitespace before the tag
+  * ``~%>`` A Bake template php close tag, stripping trailing whitespace after the tag
 
 One way to see/understand how bake templates works, especially when attempting to modify
 bake template files, is to bake a class and compare the template used with the
