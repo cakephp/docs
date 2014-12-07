@@ -925,7 +925,7 @@ Calling the method without an argument will return current default route class.
 Fallbacks method
 ----------------
 
-.. php:meth:: fallbacks($routeClass = null)
+.. php:method:: fallbacks($routeClass = null)
 
 The fallbacks method is a simple shortcut for defining default routes. The method
 uses the passed routing class for the defined rules or if no class is provided the
