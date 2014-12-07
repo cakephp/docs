@@ -394,7 +394,7 @@ If the plugin prefix is omitted, the layout/view file will be located normally.
     :ref:`view-elements`
 
 Overriding Plugin Templates from Inside Your Application
-----------------------------------------------------
+--------------------------------------------------------
 
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
