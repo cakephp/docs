@@ -306,9 +306,9 @@ a.improve {
 }
 
 #sidebar-navigation > ul > li:nth-of-type(5) a:after,
-#sidebar-navigation > ul > li:nth-of-type(13) a:after,
-#sidebar-navigation > ul > li:nth-of-type(28) a:after,
-#sidebar-navigation > ul > li:nth-of-type(39) a:after {
+#sidebar-navigation > ul > li:nth-of-type(14) a:after,
+#sidebar-navigation > ul > li:nth-of-type(29) a:after,
+#sidebar-navigation > ul > li:nth-of-type(40) a:after {
     content: " ";
     display: block;
     margin-bottom: 1em;
@@ -335,7 +335,7 @@ a.improve {
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(6):before {
     content: "Pour Commencer";
 }
-#sidebar-navigation > ul > li:nth-of-type(14):before {
+#sidebar-navigation > ul > li:nth-of-type(15):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "General Topics";
@@ -344,10 +344,10 @@ a.improve {
     padding-bottom: .4em;
     padding-top: 1em;
 }
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(14):before {
+#sidebar-navigation > ul > li:lang(fr):nth-of-type(15):before {
     content: "Généralités";
 }
-#sidebar-navigation > ul > li:nth-of-type(29):before {
+#sidebar-navigation > ul > li:nth-of-type(30):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "Utility Classes";
@@ -356,10 +356,10 @@ a.improve {
     padding-bottom: .4em;
     padding-top: 1em;
 }
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(29):before {
+#sidebar-navigation > ul > li:lang(fr):nth-of-type(30):before {
     content: "Utilitaires";
 }
-#sidebar-navigation > ul > li:nth-of-type(40):before {
+#sidebar-navigation > ul > li:nth-of-type(41):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "Other";
@@ -368,7 +368,7 @@ a.improve {
     padding-bottom: .4em;
     padding-top: 1em;
 }
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(40):before {
+#sidebar-navigation > ul > li:lang(fr):nth-of-type(41):before {
     content: "Divers";
 }
 
