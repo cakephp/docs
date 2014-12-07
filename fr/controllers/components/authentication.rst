@@ -435,7 +435,7 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
 
     namespace App\Auth;
 
-    use \Cake\Auth\AbstractPasswordHasher;
+    use Cake\Auth\AbstractPasswordHasher;
 
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 

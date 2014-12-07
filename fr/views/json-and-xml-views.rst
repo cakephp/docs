@@ -11,7 +11,7 @@ automatiquement vous appuyer sur les nouvelles classes de vue. ``XmlView`` et
 ``JsonView`` feront référence aux vues de données pour le reste de cette page.
 
 Il y a deux façons de générer des vues de données. La première est en utilisant
-la clé ``_serialize``, et la seconde en créant des fichiers de vue normaux.
+la clé ``_serialize``, et la seconde en créant des fichiers de template normaux.
 
 Activation des vues de données dans votre application
 =====================================================
@@ -36,13 +36,13 @@ Utilisation des Vues de Données avec la Clé Serialize
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quel
 autre(s) variable(s) de vue devraient être sérialisée(s) quand on utilise la
-vue de données. Cela vous permet de sauter la définition des fichiers de vue
+vue de données. Cela vous permet de sauter la définition des fichiers de template
 pour vos actions de controller si vous n'avez pas besoin de faire un formatage
 avant que vos données ne soient converties en json/xml.
 
 Si vous avez besoin de faire tout type de formatage ou de manipulation de vos
 variables de vue avant la génération de la réponse, vous devrez utiliser les
-fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de
+fichiers de template. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
     class PostsController extends AppController {
@@ -80,10 +80,10 @@ automatiquement un elément de top-niveau ``<response>`` en utilisant
 elément unique de top-niveau. Sans un elément de top-niveau, le Xml ne pourra
 être généré.
 
-Utilisation d'une Vue de Données avec les Fichiers de Vue
-=========================================================
+Utilisation d'une Vue de Données avec les Fichiers de Template
+==============================================================
 
-Vous devrez utiliser les fichiers de vue si vous avez besoin de faire des
+Vous devrez utiliser les fichiers de template si vous avez besoin de faire des
 manipulations du contenu de votre vue avant de créer la sortie finale. Par
 exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
 vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.

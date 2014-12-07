@@ -125,7 +125,7 @@ RecipesController pourrait contenir les actions
         }
     }
 
-Les fichiers de vue pour ces actions seraient ``src/Template/Recipes/view.ctp``,
+Les fichiers de template pour ces actions seraient ``src/Template/Recipes/view.ctp``,
 ``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.

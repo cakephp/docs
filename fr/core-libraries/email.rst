@@ -224,8 +224,8 @@ faciliter cela, CakePHP fournit une façon d'envoyer les emails en utilisant la
 :doc:`view layer </views>` de CakePHP.
 
 Les templates pour les emails se placent dans un dossier spécial appelé
-``Email`` dans le répertoire ``Template`` de votre application. Les vues des
-emails peuvent aussi utiliser les layouts et éléments tout comme les vues
+``Email`` dans le répertoire ``Template`` de votre application. Les templates des
+emails peuvent aussi utiliser les layouts et éléments tout comme les templates
 normales::
 
     $Email = new Email();
@@ -246,7 +246,7 @@ aussi envoyer des messages email templaté multipart::
         ->from('app@domain.com')
         ->send();
 
-Ceci utiliserait les fichiers de vue suivants:
+Ceci utiliserait les fichiers de template suivants:
 
 * ``src/Template/Email/text/welcome.ctp``
 * ``src/Template/Layout/Email/text/fancy.ctp``
@@ -266,7 +266,7 @@ Dans votre email template, vous pouvez utiliser ceux-ci avec::
     <p>Ici est votre valeur: <b><?= $value; ?></b></p>
 
 Vous pouvez aussi utiliser les helpers dans les emails, un peu comme vous
-pouvez dans des fichiers normaux de vue. Par défaut, seul
+pouvez dans des fichiers de template normaux. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers
 supplémentaires en utilisant la méthode ``helpers()``::
 

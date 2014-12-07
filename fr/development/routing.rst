@@ -115,8 +115,7 @@ scope et connecter certaines routes, nous allons utiliser la méthode
 
     // Dans config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
@@ -435,8 +434,7 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
     Router::prefix('admin', function ($routes) {
         // Toutes les routes ici seront préfixées avec `/admin` et auront
         // l'élément de route prefix => admin ajouté.
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
@@ -575,18 +573,9 @@ Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
 et une action ``showItems``, la route générée sera ``/to-do/todo-items/show-items``
 avec le code qui suit::
 
-    Router::scope('/', function ($routes) {
-        $routes->connect('/:plugin/:controller/:action',
-            ['plugin' => '*', 'controller' => '*', 'action' => '*'],
-            ['routeClass' => 'DashedRoute']
-        );
-
-        $routes->fallbacks();
+    Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
+        $routes->fallbacks('DashedRoute');
     });
-
-Dans le scope de route ``/``, l'exemple ci-dessus essaiera de capturer toutes les
-routes  plugin/controller/action avec des tirets et de les faire correspondre à
-leurs actions respectives.
 
 .. index:: file extensions
 .. _file-extensions:
@@ -974,6 +963,30 @@ routes suivantes.
 Appeler la méthode sans argument va retourner la classe de route courante par
 défaut.
 
+Fallbacks method
+----------------
+
+.. php:meth:: fallbacks($routeClass = null)
+
+The fallbacks method is a simple shortcut for defining default routes. The method
+uses the passed routing class for the defined rules or if no class is provided the
+class returned by ``Router::defaultRouteClass()`` is used.
+
+Calling fallbacks like so::
+
+    $routes->fallbacks('InflectedRoute');
+
+Is equivalent to the following explicit calls::
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+
+.. note::
+
+    Using the default route class (``Route``) with fallbacks, or any route
+    with ``:plugin`` and/or ``:controller`` route elements will result in
+    inconsistent URL case.
+    
 Handling Named Parameters in URLs
 =================================
 

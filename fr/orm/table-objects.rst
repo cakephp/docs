@@ -1206,8 +1206,16 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         ]
     ]);
 
-Using 'matching' when Finding Results
--------------------------------------
+If you have limited the fields you are loading with ``select()`` but also want to
+load fields off of contained associations, you can use ``autoFields()``::
+
+    // Select id & title from articles, but all fields off of Users.
+    $query->select(['id', 'title'])
+        ->contain(['Users'])
+        ->autoFields(true);
+
+Filtering by Associated Data
+----------------------------
 
 A fairly common query case with associations is finding records 'matching'
 specific associated data. For example if you have 'Articles belongsToMany Tags'

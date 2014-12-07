@@ -125,7 +125,7 @@ la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre l'objet query à la vue  pour être invoqué par une
 itération ``foreach``.
 
-Les fichiers des vues de CakePHP sont stockés dans ``src/Template`` à
+Les fichiers de template de CakePHP sont stockés dans ``src/Template`` à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
 aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
 données de ces articles dans un joli tableau, le code de notre vue devrait

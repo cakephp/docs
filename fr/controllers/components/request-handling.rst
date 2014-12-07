@@ -14,7 +14,7 @@ Par défaut, le RequestHandler détectera automatiquement les requêtes AJAX
 basées sur le header HTTP-X-Requested-With, qui est utilisé par de nombreuses
 librairies JavaScript. Quand il est utilisé conjointement avec
 :php:meth:`Router::parseExtensions()`, RequestHandler changera automatiquement
-le layout et les fichiers de vue par ceux qui correspondent au type demandé.
+le layout et les fichiers de template par ceux qui correspondent au type demandé.
 En outre, s'il existe un helper avec le même nom que l'extension demandée,
 il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un

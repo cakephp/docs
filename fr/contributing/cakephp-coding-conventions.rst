@@ -106,7 +106,7 @@ Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
         statement;
     }
 
-Opérateurs ternaires
+Opérateurs Ternaires
 --------------------
 
 Les opérateurs ternaires sont permis quand l'opération entière rentre sur une
@@ -122,14 +122,14 @@ vérifiée de l'opération pour rendre le code plus clair::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
-Fichiers de Vue
----------------
+Fichiers de Template
+--------------------
 
-Dans les fichiers de vue (fichiers .ctp) les développeurs devront utiliser
+Dans les fichiers de template (fichiers .ctp) les développeurs devront utiliser
 les structures de contrôle en mot (keyword control structures).
 Les structures de contrôle en mot sont plus faciles à lire dans des fichiers
-de vue complexes. Les structures de contrôle peuvent soit être contenues dans
-un block PHP plus large, soit dans des tags PHP séparés::
+de template complexes. Les structures de contrôle peuvent soit être contenues
+dans un block PHP plus large, soit dans des tags PHP séparés::
 
     <?php
     if ($isAdmin):
@@ -393,8 +393,8 @@ Les Balises PHP
 ===============
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
-courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de vue
-(``.ctp``) lorque cela est nécessaire.
+courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
+template (``.ctp``) lorque cela est nécessaire.
 
 Echo court
 ----------

@@ -282,7 +282,7 @@ Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
     use Cake\Routing\Router;
 
     Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks();
+        $routes->fallbacks('InflectedRoute');
     });
 
 Ce qui est au-dessus connecte les routes par défaut pour votre plugin. Vous
@@ -403,12 +403,12 @@ normalement.
     Pour des informations sur la façon d'utiliser les elements à partir d'un
     plugin, regardez :ref:`view-elements`.
 
-Redéfinition des Vues de Plugin à partir de l'Intérieur de votre Application
-----------------------------------------------------------------------------
+Redéfinition des Template de Plugin depuis l'Intérieur de votre Application
+---------------------------------------------------------------------------
 
 Vous pouvez redéfinir toutes les vues du plugin à partir de l'intérieur de
 votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
-'ContactManager', vous pouvez redéfinir les fichiers de vue du plugin avec
+'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
 ``src/Template/plugins/[Plugin]/[Controller]/[view].ctp``. Pour le controller

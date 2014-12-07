@@ -320,6 +320,9 @@ Log
   ``Psr\Log\LogInterface`` plutôt que la propre ``LogInterface`` de CakePHP. En
   général, si vous étendez :php:class:`Cake\\Log\\Engine\\BaseEngine`
   vous devez juste renommer la méthode ``write()`` en ``log()``.
+* :php:meth:`Cake\\Log\\Engine\\FileLog` écrit maintenant les fichiers dans
+  ``ROOT/logs`` au lieu de ``ROOT/tmp/logs``.
+
 
 Routing
 =======

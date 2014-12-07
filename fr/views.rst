@@ -65,14 +65,14 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de vue de CakePHP sont écrits en pur PHP et ont par défaut .ctp
+Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut .ctp
 (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la logique
 de présentation nécessaire à l'organisation des données reçues du controller,
 dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre langage de template et CakePHP.
 
-Un fichier de vue est stocké dans ``src/Template/``, dans un sous-dossier
+Un fichier de template est stocké dans ``src/Template/``, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
@@ -86,7 +86,7 @@ chapitre :
   lancée. Elles sont la substance de la réponse de votre application.
 - **elements** : morceaux de code de view plus petits, réutilisables. Les
   éléments sont habituellement rendus dans les vues.
-- **layouts** : fichiers de vue contenant le code de présentation qui se
+- **layouts** : fichiers de template contenant le code de présentation qui se
   retrouve dans plusieurs interfaces de votre application. La plupart des
   vues sont rendues à l'intérieur d'un layout.
 - **helpers** : ces classes encapsulent la logique de vue qui est requise
@@ -405,7 +405,7 @@ les fichiers JavaScript et les CSS à partir des vues.
 .. note::
 
     Quand vous utilisez ``HtmlHelper::css()`` ou
-    ``HtmlHelper::script()`` dans les fichiers de vues, spécifiez
+    ``HtmlHelper::script()`` dans les fichiers de template, spécifiez
     ``'block' => true`` pour placer la source html dans un
     block avec le même nom. (Regardez l'API pour plus de détails sur leur
     utilisation).
@@ -512,7 +512,7 @@ de element::
 Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
-de vues). Dans l'exemple ci-dessus, le fichier
+de template). Dans l'exemple ci-dessus, le fichier
 ``src/Template/Element/helpbox.ctp`` peut utiliser la variable ``$helptext``::
 
     // A l'intérieur de src/Template/Element/helpbox.ctp
