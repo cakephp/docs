@@ -54,7 +54,7 @@ tasks. You should see something like::
 You can get more information on what each task does, and what options are
 availble using the ``--help`` option::
 
-    -> bin/cake bake controller --help
+    $ bin/cake bake controller --help
 
     Welcome to CakePHP v3.0.0 Console
     ---------------------------------------------------------------
