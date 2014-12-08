@@ -403,7 +403,7 @@ Exemple::
 
     CakeEmail::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
 
-Cette méthode va envoyer un email à you@example.com, à partir de me@example.com 
+Cette méthode va envoyer un email à you@example.com, à partir de me@example.com
 avec le sujet Subject et le contenu Message.
 
 Le retour de ``deliver()`` est une instance de :php:class:`CakeEmail` avec
@@ -427,6 +427,7 @@ Envoyer des emails depuis CLI
 =============================
 
 .. versionchanged:: 2.2
+
     La méthode ``domain()`` a été ajoutée dans 2.2
 
 Quand vous envoyez des emails à travers un script CLI (Shells, Tasks, ...),
@@ -439,7 +440,9 @@ de nom d'hôte dans un environnement CLI)::
     // au lieu de `<UUID@>`` (invalid)
 
 Un id de message valide peut permettre à ce message de ne pas finir dans un
-dossier de spam.
+dossier de spam. Si vous générez des liens dans les corps de vos emails, vous
+pouvez aussi avoir besoin de définir la valeur de configuration
+``App.fullBaseUrl``.
 
 .. meta::
     :title lang=fr: CakeEmail
