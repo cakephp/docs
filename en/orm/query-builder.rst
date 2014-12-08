@@ -749,20 +749,6 @@ Instead, create new a ``Query`` object using ``query()``::
 Generally, it is easier to update data using entities and
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
 
-Deleting Data
-=============
-
-As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new a query object using ``query()``::
-
-    $query = $articles->query();
-    $query->delete()
-        ->where(['id' => $id])
-        ->execute();
-
-Generally, it is easier to delete data using entities and
-:php:meth:`~Cake\\ORM\\Table::delete()`.
-
 More Complex Queries
 ====================
 

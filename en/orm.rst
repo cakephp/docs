@@ -110,6 +110,7 @@ More Information
     orm/query-builder
     orm/table-objects
     orm/entities
+    orm/delete
     orm/behaviors
     orm/database-basics
     orm/schema-system
