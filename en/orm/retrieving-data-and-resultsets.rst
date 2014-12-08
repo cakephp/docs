@@ -54,24 +54,6 @@ when calling ``get()`` to perform read-through caching::
     ]);
 
 
-Fetching All Entities
-=====================
-
-The best way to fetch entities from a table object is to use the ``find`` method. It
-allows you to access the various built-in finder methods and your own custom
-ones. See :ref:`custom-find-methods` for more information::
-
-    // In a controller or table method.
-    $query = $articles->find('all');
-    foreach ($query as $row) {
-        // Do work
-    }
-
-Entity objects represent a single record or row in your database. Entities allow
-you to define custom behavior on a per-record basis and model the domain of your
-application. See the :doc:`/orm/entities` documentation for more information on
-creating your entity objects.
-
 Using Finders to Load Data
 ==========================
 
@@ -105,6 +87,9 @@ execute until you start fetching rows, convert it to an array, or when the
     // Calling execute will execute the query
     // and return the result set.
     $results = $query->all();
+
+    // Once we have a result set we can get all the rows
+    $data = $results->toArray();
 
     // Converting the query to an array will execute it.
     $results = $query->toArray();
@@ -146,7 +131,19 @@ The list of options supported by find() are:
 
 Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
-``getOptions`` method on a query object to retrieve the options used.
+``getOptions`` method on a query object to retrieve the options used. While you
+can very easily pass query objects to your controllers, we recommend that you
+package your queries up as :ref:`custom-find-methods` instead. Using custom
+finder methods will let you re-use your queries more easily and make testing
+easier.
+
+By default queries and result sets will return :doc:`/orm/entities` objects. You
+can retrieve basic arrays by disabling hydration::
+
+    $query->hydrate(false);
+
+    // $data is ResultSet that contains array data.
+    $data = $query->all();
 
 .. _table-find-first:
 

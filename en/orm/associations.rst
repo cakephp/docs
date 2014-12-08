@@ -1,4 +1,4 @@
-Associations - Linking Models Together
+Associations - Linking Tables Together
 ######################################
 
 Defining relations between different objects in your application should be
@@ -564,8 +564,8 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Using the 'finder' Option
--------------------------
+Default Association Conditions
+------------------------------
 
 The ``finder`` option allows you to use a :ref:`custom finder
 <custom-find-methods>` to load associated record data. This lets you encapsulate
