@@ -3,7 +3,7 @@ Saving Data
 
 .. php:namespace:: Cake\ORM
 
-.. php:table:: Table
+.. php:class:: Table
 
 After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
 will probably want to update & save the changes.
