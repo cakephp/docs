@@ -23,11 +23,11 @@ Contents
     controllers
     views
     orm
-    bake
     development/errors
 
     core-libraries/caching
     console-and-shells
+    bake
     development/debugging
     deployment
     core-libraries/email
