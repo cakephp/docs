@@ -235,6 +235,14 @@ ApiShell Removed
 The ApiShell was removed as it didn't provide any benefit over the file source itself
 and the online documentation/`API <http://api.cakephp.org/>`_.
 
+SchemaShell Removed
+-------------------
+
+The SchemaShell was removed as it was never a complete database migration implementation
+and better tools such as `Phinx <https://phinx.org/>`_ have emerged. It has been replaced by
+the `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ which acts as a wrapper between
+CakePHP and `Phinx <https://phinx.org/>`_.
+
 ExtractTask
 -----------
 
