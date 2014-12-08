@@ -1,21 +1,14 @@
 Code Generation with Bake
 #########################
 
-CakePHP's bake console is another effort to get you up and running in CakePHP
-– fast. The bake console can create any of CakePHP's basic ingredients: models,
-behaviors, views, helpers, components, components test cases, fixtures and
-plugins. And we aren't just talking skeleton classes: Bake can create a fully
-functional application in just a few minutes. In fact, Bake is a natural step to
-take once an application has been scaffolded.
-
 Depending on how your computer is configured, you may have to set
 execute rights on the cake bash script to call it using ``bin/cake
 bake``. The cake console is run using the PHP CLI (command line
 interface). If you have problems running the script, ensure that
 you have the PHP CLI installed and that it has the proper modules
-enabled (eg: MySQL) Users also might have issues if the
-database host is 'localhost' and should try '127.0.0.1' instead.
-This could cause issues with PHP CLI.
+enabled (eg: MySQL, intl). Users also might have issues if the
+database host is 'localhost' and should try '127.0.0.1' instead, as localhost
+can cause issues with PHP CLI.
 
 Before running bake you should make sure you have at least one database
 connection configured. See the section on :ref:`database configuration
@@ -80,7 +73,7 @@ availble using the ``--help`` option::
     --plugin, -p      Plugin to bake into.
     --force, -f       Force overwriting existing files without prompting.
     --connection, -c  The datasource connection to get data from.
-                    (default: default)
+                      (default: default)
     --theme, -t       The theme to use when baking code.
     --components      The comma separated list of components to use.
     --helpers         The comma separated list of helpers to use.
@@ -107,4 +100,4 @@ show::
 
 .. meta::
     :title lang=en: Code Generation with Bake
-    :keywords lang=en: command line interface,functional application,atabase,database configuration,bash script,basic ingredients,roject,odel,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
+    :keywords lang=en: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql

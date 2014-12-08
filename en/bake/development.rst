@@ -1,19 +1,20 @@
 Extending Bake
 ##############
 
-Bake features an extensible architecture that allows your application or plugins to
-easily modify or add-to the base functionality. Bake makes use of a dedicated view
-class which does not use standard PHP syntax.
+Bake features an extensible architecture that allows your application or plugins
+to easily modify or add-to the base functionality. Bake makes use of a dedicated
+view class which does not use standard PHP syntax.
 
 Bake events
 ===========
 
-As a view class, ``BakeView`` emits the same events as any other view class, plus one
-extra initialize event. However, whereas standard view classes use the event
-prefix "View.", ``BakeView`` uses the event prefix "Bake.".
+As a view class, ``BakeView`` emits the same events as any other view class,
+plus one extra initialize event. However, whereas standard view classes use the
+event prefix "View.", ``BakeView`` uses the event prefix "Bake.".
 
-The initialize event can be used to make changes which apply to all baked output, for
-example to add another helper to the bake view class this event can be used::
+The initialize event can be used to make changes which apply to all baked
+output, for example to add another helper to the bake view class this event can
+be used::
 
     <?php
     // config/bootstrap_cli.php
@@ -31,10 +32,10 @@ example to add another helper to the bake view class this event can be used::
 
     }, 'Bake.initialize');
 
-Bake events can also be useful for making small changes to existing templates. For
-example, to change the variable names used when baking controller/template files one
-can use a function listening for ``Bake.beforeRender`` to modify the variables used in
-the bake templates::
+Bake events can also be useful for making small changes to existing templates.
+For example, to change the variable names used when baking controller/template
+files one can use a function listening for ``Bake.beforeRender`` to modify the
+variables used in the bake templates::
 
     <?php
     // config/bootstrap_cli.php
@@ -66,8 +67,8 @@ the bake templates::
 Bake Template syntax
 ====================
 
-Bake template files use erb-style (``<% %>``) tags to denote template logic, and treat
-everything else including php tags as plain text.
+Bake template files use erb-style (``<% %>``) tags to denote template logic, and
+treat everything else including php tags as plain text.
 
 .. note::
 
@@ -78,12 +79,15 @@ everything else including php tags as plain text.
   * ``<%`` A Bake template php open tag
   * ``%>`` A Bake template php close tag
   * ``<%=`` A Bake template php short-echo tag
-  * ``<%~`` A Bake template php open tag, stripping any leading whitespace before the tag
-  * ``~%>`` A Bake template php close tag, stripping trailing whitespace after the tag
+  * ``<%~`` A Bake template php open tag, stripping any leading whitespace
+    before the tag
+  * ``~%>`` A Bake template php close tag, stripping trailing whitespace after
+    the tag
 
-One way to see/understand how bake templates works, especially when attempting to modify
-bake template files, is to bake a class and compare the template used with the
-pre-processed template file which is left in the application's tmp folder.
+One way to see/understand how bake templates works, especially when attempting
+to modify bake template files, is to bake a class and compare the template used
+with the pre-processed template file which is left in the application's tmp
+folder.
 
 So, for example, when baking a shell like so::
 
@@ -112,8 +116,8 @@ looks like this::
 
     }
 
-The pre-processed template file (``tmp/Bake-Shell-shell-ctp.php``), which is the file
-actually rendered, looks like this::
+The pre-processed template file (``tmp/Bake-Shell-shell-ctp.php``), which is the
+file actually rendered, looks like this::
 
     <CakePHPBakeOpenTagphp
     namespace <?= $namespace ?>\Shell;
@@ -161,26 +165,27 @@ Creating a bake theme
 =====================
 
 If you wish to modify the default output produced by the "bake" command, you can
-create your own bake 'theme' which allows you to replace some or all of the templates
-that bake uses. The best way to do this is:
+create your own bake 'theme' which allows you to replace some or all of the
+templates that bake uses. The best way to do this is:
 
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
 #. Create a new directory in ``plugin/[name]/src/Template/Bake``.
 #. Copy any templates you want to override from
-  ``vendor/cakephp/cakephp/src/Template/Bake`` to matching directories in your plugin.
+   ``vendor/cakephp/cakephp/src/Template/Bake`` to matching directories in your
+   plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
 
 Creating new bake command options
 =================================
 
-It's possible to add new bake command options, or override the ones provided
-by CakePHP by creating tasks in your application or plugins. By extending
+It's possible to add new bake command options, or override the ones provided by
+CakePHP by creating tasks in your application or plugins. By extending
 ``Cake\Shell\Task\BakeTask``, bake will find your new task and include it as
 part of bake.
 
-As an example, we'll make a task that creates an arbitrary foo class. First, create
-the task file ``src/Shell/Task/FooTask.php``. We'll extend the
+As an example, we'll make a task that creates an arbitrary foo class. First,
+create the task file ``src/Shell/Task/FooTask.php``. We'll extend the
 ``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
 is abstract and requires us to define 4 methods that tell bake what the task is
 called, where the files it generates should go, and what template to use. Our

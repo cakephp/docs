@@ -125,7 +125,7 @@ spécifique.
 
 Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
 partir du plugin Blog::
-    
+
     Plugin::loadAll([
         ['bootstrap' => true],
         'Blog' => ['routes' => true]
@@ -205,7 +205,7 @@ de répertoire basique. Cela devrait ressembler à ceci::
                 /TestCase
                 /Fixture
             /webroot
-                    
+
 Notez que le nom du dossier du plugin, '**ContactManager**'. Il est important
 que ce dossier ait le même nom que le plugin.
 
@@ -234,7 +234,7 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Référez-vous au chapitre
-:doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
+:doc:`/bake/usage` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande. Assurez-vous de
 re-générer votre autoloader une fois que vous avez créé votre plugin::
 
