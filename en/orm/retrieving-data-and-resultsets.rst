@@ -55,7 +55,7 @@ when calling ``get()`` to perform read-through caching::
 
 
 Fetching All Entities
----------------------
+=====================
 
 The best way to fetch entities from a table object is to use the ``find`` method. It
 allows you to access the various built-in finder methods and your own custom
@@ -73,7 +73,7 @@ application. See the :doc:`/orm/entities` documentation for more information on
 creating your entity objects.
 
 Using Finders to Load Data
---------------------------
+==========================
 
 .. php:method:: find($type, $options = [])
 
@@ -151,7 +151,7 @@ where they can be used to modify the query object. You can use the
 .. _table-find-first:
 
 Getting the First Result
-------------------------
+========================
 
 The ``first()`` method allows you to fetch only the first row from a query. If
 the query has not been executed, a ``LIMIT 1`` clause will be applied::
@@ -167,7 +167,7 @@ may also want to use the ``get()`` method if you are loading entities by primary
 key.
 
 Getting a Count of Results
---------------------------
+==========================
 
 Once you have created a query object, you can use the ``count()`` method to get
 a result count of that query::
@@ -183,7 +183,7 @@ See :ref:`query-count` for additional usage of the ``count()`` method.
 .. _table-find-list:
 
 Finding Key/Value Pairs
------------------------
+=======================
 
 It is often useful to generate an associative array of data from your application's
 data. For example, this is very useful when creating `<select>` elements. CakePHP
@@ -249,7 +249,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
     ];
 
 Finding Threaded Data
----------------------
+=====================
 
 The ``find('threaded')`` finder returns nested entities that are threaded
 together through a key field. By default this field is ``parent_id``. This
@@ -280,7 +280,7 @@ threading will occur on.
 .. _custom-find-methods:
 
 Custom Finder Methods
----------------------
+=====================
 
 The examples above show how to use the built-in ``all`` and ``list`` finders.
 However, it is possible and recommended that you implement your own finder
@@ -328,7 +328,7 @@ a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
 Dynamic Finders
----------------
+===============
 
 CakePHP's ORM provides dynamically constructed finder methods which allow you to
 easily express simple queries with no additional code. For example if you wanted
@@ -367,7 +367,7 @@ The above would translate into the following::
 
 
 Eager Loading Associations
---------------------------
+==========================
 
 By default CakePHP does not load **any** associated data when using ``find()``.
 You need to 'contain' or eager-load each association you want loaded in your
@@ -545,7 +545,7 @@ where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` section for more information.
 
 Working with Result Sets
-------------------------
+========================
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\ResultSet`. This object offers powerful ways to manipulate

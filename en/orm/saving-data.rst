@@ -685,7 +685,7 @@ complex data could result in malicious users being able to store data they
 would not normally be able to.
 
 Bulk Updates
-------------
+============
 
 .. php:method:: updateAll($fields, $conditions)
 
