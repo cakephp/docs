@@ -1,6 +1,8 @@
 Deleting Data
 #############
 
+CakePHP offers a few ways to delete records from your database.
+
 .. _model-delete-entities:
 
 Deleting Entities
