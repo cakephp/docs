@@ -8,7 +8,9 @@ CakePHP offers a few ways to delete records from your database.
 Deleting Entities
 =================
 
-.. php:namespace:: Cake\ORM\Table
+.. php:namespace:: Cake\ORM
+
+.. php:class:: Table
 
 .. php:method:: delete(Entity $entity, $options = [])
 
@@ -92,4 +94,3 @@ Instead, create new a query object using ``query()``::
         ->execute();
 
 Generally, it is easier to :ref:`delete data using entities <model-delete-entities>`.
-
