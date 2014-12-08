@@ -107,11 +107,14 @@ More Information
 .. toctree::
     :maxdepth: 2
 
-    orm/query-builder
+    orm/database-basics
     orm/table-objects
     orm/entities
+    orm/retrieving-data-and-result-sets
+    orm/query-builder
+    orm/saving-data
+    orm/deleting-data
     orm/associations
     orm/behaviors
-    orm/database-basics
     orm/schema-system
     console-and-shells/orm-cache

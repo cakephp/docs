@@ -62,6 +62,21 @@ If you need to modify this you can use the ``primaryKey()`` method::
         }
     }
 
+Customizing the Entity Class a Table Uses
+-----------------------------------------
+
+By default table objects use an entity class based on naming conventions. For
+example if your table class is called ``ArticlesTable`` the entity would be
+``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
+``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
+conventions you can use the ``entityClass`` method to change things up::
+
+    class PurchaseOrdersTable extends Table {
+        public function initialize(array $config) {
+            $this->entityClass('App\Model\PO');
+        }
+    }
+
 As seen in the examples above Table objects have an ``initialize()`` method
 which is called at the end of the constructor. It is recommended that you use
 this method to do initialization logic instead of overriding the constructor.
@@ -81,39 +96,6 @@ The TableRegistry class provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
 :ref:`table-registry-usage` for more information.
-
-Fetching All Entities
----------------------
-
-The best way to fetch entities from a table object is to use the ``find`` method. It
-allows you to access the various built-in finder methods and your own custom
-ones. See :ref:`custom-find-methods` for more information::
-
-    // In a controller or table method.
-    $query = $articles->find('all');
-    foreach ($query as $row) {
-        // Do work
-    }
-
-Entity objects represent a single record or row in your database. Entities allow
-you to define custom behavior on a per-record basis and model the domain of your
-application. See the :doc:`/orm/entities` documentation for more information on
-creating your entity objects.
-
-Customizing the Entity Class a Table Uses
------------------------------------------
-
-By default table objects use an entity class based on naming conventions. For
-example if your table class is called ``ArticlesTable`` the entity would be
-``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
-``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
-conventions you can use the ``entityClass`` method to change things up::
-
-    class PurchaseOrdersTable extends Table {
-        public function initialize(array $config) {
-            $this->entityClass('App\Model\PO');
-        }
-    }
 
 Loading Entities
 ================
@@ -166,6 +148,24 @@ when calling ``get()`` to perform read-through caching::
         'cache' => false
     ]);
 
+
+Fetching All Entities
+---------------------
+
+The best way to fetch entities from a table object is to use the ``find`` method. It
+allows you to access the various built-in finder methods and your own custom
+ones. See :ref:`custom-find-methods` for more information::
+
+    // In a controller or table method.
+    $query = $articles->find('all');
+    foreach ($query as $row) {
+        // Do work
+    }
+
+Entity objects represent a single record or row in your database. Entities allow
+you to define custom behavior on a per-record basis and model the domain of your
+application. See the :doc:`/orm/entities` documentation for more information on
+creating your entity objects.
 
 Using Finders to Load Data
 --------------------------
