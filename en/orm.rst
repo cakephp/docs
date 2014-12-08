@@ -110,7 +110,7 @@ More Information
     orm/database-basics
     orm/table-objects
     orm/entities
-    orm/retrieving-data-and-result-sets
+    orm/retrieving-data-and-resultsets
     orm/query-builder
     orm/saving-data
     orm/deleting-data
