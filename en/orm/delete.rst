@@ -1,8 +1,12 @@
 Deleting Data
 #############
 
+.. _model-delete-entities:
+
 Deleting Entities
 =================
+
+.. php:namespace:: Cake\ORM\Table
 
 .. php:method:: delete(Entity $entity, $options = [])
 
@@ -34,7 +38,7 @@ Cascading Deletes
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
-are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
+are removed using :php:meth:`~Cake\\ORM\\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 ``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
@@ -74,10 +78,10 @@ A bulk-delete will be considered successful if 1 or more rows are deleted.
 
 .. _table-callbacks:
 
-Deleting Data from Query
-========================
+Deleting Data Using a Query
+===========================
 
-As with insert queries, you should not use ``find()`` to create delete queries.
+Unlike other query operations, you should not use ``find()`` to create delete queries.
 Instead, create new a query object using ``query()``::
 
     $query = $articles->query();
@@ -85,6 +89,5 @@ Instead, create new a query object using ``query()``::
         ->where(['id' => $id])
         ->execute();
 
-Generally, it is easier to delete data using entities and
-:php:meth:`~Cake\\ORM\\Table::delete()`.
+Generally, it is easier to :ref:`delete data using entities <model-delete-entities>`.
 
