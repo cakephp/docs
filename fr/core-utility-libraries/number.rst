@@ -70,7 +70,7 @@ automatiqement la sortie dans la vue.
     +---------------------+----------------------------------------------------+
     | after               | Le symbole de la monnaie à placer après les nombres|
     |                     | décimaux                                           |
-    |                     | ex: 'c'. Définit le boléeen à false pour utiliser  |
+    |                     | ex: 'c'. Définit le booléen à false pour utiliser  |
     |                     | aucun symbole décimal                              |
     |                     | ex: 0.35 => $0.35.                                 |
     +---------------------+----------------------------------------------------+
@@ -124,7 +124,7 @@ automatiqement la sortie dans la vue.
     :param string $currency: Défini une monnaie connu pour
         :php:meth:`CakeNumber::currency()`.
 
-    Setter/getter pour la monnaie par défaut. Ceci retire la necessité de
+    Setter/getter pour la monnaie par défaut. Ceci retire la nécessité de
     toujours passer la monnaie à :php:meth:`CakeNumber::currency()` et change
     toutes les sorties de monnaie en définissant les autres par défaut.
 
@@ -143,7 +143,7 @@ automatiqement la sortie dans la vue.
           ex: 0, 'Free!'
         - `places` Nombre de décimal à utiliser. ex. 2.
         - `thousands` Séparateur des milliers. ex: ','.
-        - `decimals` Symbole de Séparateur des Decimales. ex: '.'.
+        - `decimals` Symbole de Séparateur des décimales. ex: '.'.
         - `negative` Symbole pour les nombres négatifs. Si égal à '()', le
           nombre sera entouré avec ( et ).
         - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
@@ -168,7 +168,7 @@ automatiqement la sortie dans la vue.
         CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 
     Vous pouvez maintenant utiliser `BRL` de manière courte quand vous
-    formattez les montants de monnaie::
+    formatez les montants de monnaie::
 
         // appelé par NumberHelper
         echo $this->Number->currency($value, 'BRL');
@@ -216,7 +216,7 @@ automatiqement la sortie dans la vue.
 .. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = array())
 
     :param float $number: La valeur à convertir.
-    :param integer $precision: Le nomnbre de décimal à afficher.
+    :param integer $precision: Le nombre de décimal à afficher.
     :param array $options: Options, voir ci-dessous.
 
     +---------------------+----------------------------------------------------+
@@ -348,7 +348,7 @@ automatiqement la sortie dans la vue.
 
     Le paramètre $number est le nombre que vous planifiez sur le formatage
     de sortie. Avec aucun $options fourni, le nombre 1236.334 sortirait
-    1,236. Notez que la valeur de precision par défaut est aucune décimale.
+    1,236. Notez que la valeur de précision par défaut est aucune décimale.
 
     Le paramètre $options prend les mêmes clés que
     :php:meth:`CakeNumber::format()` lui-même:

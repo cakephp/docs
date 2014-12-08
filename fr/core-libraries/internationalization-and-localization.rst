@@ -161,7 +161,7 @@ vous avez à faire est dans la partie suivante::
 Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
 régionale, comme fr\_FR, la locale
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
-utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue
+utilisée au cas où cela n'existerait pas), vous pouvez changer la langue
 à n'importe quel moment pendant une requête. Ex: dans votre bootstrap
 si vous avez défini les paramètres de langue par défaut, dans la partie
 beforefilter de votre (app) controller si c'est spécifique à la requête ou

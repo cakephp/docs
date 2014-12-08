@@ -1221,7 +1221,7 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
   1.3 est qu'il ne supportera que Sqlite 3.x. C'est une bonne alternative pour
   le développement des apps, et rapidement en lançant les cas de test.
 * Les valeurs des colonnes boléennes vont être lancées automatiquement vers le
-  type boléeen natif de php, donc assurez vous de mettre à jour vos cas de test
+  type booléen natif de php, donc assurez vous de mettre à jour vos cas de test
   et code si vous attendiez une valeur retournée de type chaîne de caractère ou
   un entier: Si vous aviez une colonne "published" dans le passé en utilisant
   mysql, toutes les valeurs retournées d'un find auraient été numériques dans
