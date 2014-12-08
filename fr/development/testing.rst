@@ -1237,7 +1237,7 @@ dans le tableau ``$fixtures``.
 Générer des Tests avec Bake
 ===========================
 
-Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
+Si vous utilisez :doc:`bake </bake/usage>` pour
 générer votre code, il va également générer le squelette de vos fichiers de tests.
 Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
 vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous

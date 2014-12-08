@@ -187,7 +187,7 @@ Génération de Code Scaffold
 
 Comme notre base de données suit les conventions de CakePHP, nous pouvons
 utiliser l'application de
-:doc:`console bake </console-and-shells/code-generation-with-bake>` pour
+:doc:`console bake </bake/usage>` pour
 générer rapidement une application basique. Dans votre terminal, lancez
 les commandes suivantes::
 

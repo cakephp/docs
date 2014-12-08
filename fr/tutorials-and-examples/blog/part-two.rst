@@ -183,7 +183,7 @@ page http://www.exemple.com/articles/index. Vous devriez voir votre vue,
 correctement formatée avec le titre et le tableau listant les articles.
 
 Si vous avez essayé de cliquer sur l'un des liens que nous avons créés dans
-cette vue (le lien sur le titre d'un article mène à l'URL 
+cette vue (le lien sur le titre d'un article mène à l'URL
 ``/articles/view/un_id_quelconque``), vous avez sûrement été informé par CakePHP
 que l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
@@ -682,7 +682,7 @@ Voici les différents chapitres que les gens veulent souvent lire après:
 
 1. :ref:`view-layouts`: Personnaliser les Layouts de votre application.
 2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
-3. :doc:`/console-and-shells/code-generation-with-bake` Générer un code CRUD basique.
+3. :doc:`/bake/usage` Générer un code CRUD basique.
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur l'enregistrement et la connexion d'utilisateurs.
 
 

@@ -401,7 +401,7 @@ personnalisée, et bien plus encore.
 Lectures suivantes suggérées
 ----------------------------
 
-#. :doc:`/console-and-shells/code-generation-with-bake` Génération basique CRUD de code
+#. :doc:`/bake/usage` Génération basique CRUD de code
 #. :doc:`/controllers/components/authentication`: Inscription d'utilisateur et connexion
 
 
