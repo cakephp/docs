@@ -80,7 +80,7 @@ view variable has a single top-level element. Without a single top-level
 element the Xml will fail to generate.
 
 Using a Data View with Template Files
-=================================
+=====================================
 
 You should use template files if you need to do some manipulation of your view
 content before creating the final output. For example if we had posts, that had
