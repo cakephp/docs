@@ -8,7 +8,7 @@ utilise une classe de vue dédiée qui n'utilise pas la syntaxe PHP standard.
 Evénements de Bake
 ==================
 
-Comme une classe de vue, ``BakeView`` envoie les mêmes événements que tout autre
+Comme une classe de vue, ``BakeView`` envoie les mêmes événements que toute autre
 classe de vue, ainsi qu'un événement initialize supplémentaire. Cependant,
 alors que les classes de vue standard utilisent le préfixe d'événement
 "View.", ``BakeView`` utilise le préfixe d'événement "Bake.".
@@ -201,13 +201,6 @@ qui disent à bake comment la tâche est appelée, l'endroit où devront se trou
 les fichiers qu'il va générer, et le template à utiliser. Notre fichier
 FooTask.php devra ressembler à ceci::
 
-As an example, we'll make a task that creates . First,
-create the task file ``src/Shell/Task/FooTask.php``. We'll extend the
-``SimpleBakeTask`` for now as our shell task will be simple. ``SimpleBakeTask``
-is abstract and requires us to define 4 methods that tell bake what the task is
-called, where the files it generates should go, and what template to use. Our
-FooTask.php file should look like::
-
     <?php
     namespace App\Shell\Task;
 
@@ -247,7 +240,7 @@ ajouterons le contenu suivant::
     }
 
 Vous devriez maintenant voir votre nouvelle tâche dans l'affichage de
-``bin/cake bake``. Vous pouvez lancer votre nouvelle tâche en executant
+``bin/cake bake``. Vous pouvez lancer votre nouvelle tâche en exécutant
 ``bin/cake bake foo Example``.
 Cela va générer une nouvelle classe ``ExampleFoo`` dans
 ``src/Foo/ExampleFoo.php`` que votre application va

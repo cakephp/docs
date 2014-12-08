@@ -1,5 +1,5 @@
-Code Generation with Bake
-#########################
+Génération de Code avec Bake
+############################
 
 Suivant la configuration de votre installation, vous devrez peut être donner
 les droits d'exécution au script bash cake ou l'appeler avec la commande
@@ -15,6 +15,9 @@ Avant de lancer bake, vous devrez vous assurer qu'au moins une connection à une
 base de données est configurée. Regardez la section dans
 :ref:`configuration de la base de données <database-configuration>` pour plus
 d'informations.
+
+Si vous exécutez la commande sans argument, ``bin/cake bake`` affichera la liste
+des tâches disponibles. Vous devriez voir quelquechose comme ceci::
 
     $ bin/cake bake
 
@@ -90,9 +93,9 @@ options disponibles en utilisant l'option ``--help``::
 Themes de Bake
 ==============
 
-L'option theme est commune à toutes les commandes de bake, et permettent de
+L'option theme est commune à toutes les commandes de bake, et permet de
 changer les fichiers de template utilisés lors de la création avec bake. Tout
-plugin chérgé qui contient un dossier ``src/Template/Bake`` est automatiquement
+plugin chargé qui contient un dossier ``src/Template/Bake`` est automatiquement
 détecté par bake comme un theme de bake disponible, et sera affiché dans la
 sortie d'aide. Par exemple, existe-t-il un plugin appelé ``Special`` qui
 intègre un theme de bake, la sortie d'aide afficherait::
