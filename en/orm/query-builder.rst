@@ -435,7 +435,7 @@ It is also possible to build expressions using SQL functions::
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
                 'created' => 'literal'
-            ])
+            ]);
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);
