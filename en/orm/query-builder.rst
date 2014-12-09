@@ -647,7 +647,7 @@ data, you first need to setup associations between the tables as described in
 the :doc:`/orm/associations` section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
-.. include:: ./retrieving-data-and-resultssets.rst
+.. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
 
