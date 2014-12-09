@@ -57,9 +57,9 @@ in the controller.
 
 .. php:attr:: blackHoleCallback
 
-    A Controller callback that will handle and requests that are
-    blackholed. A blackhole callback can be any public method on a controllers.
-    The callback should expect an parameter indicating the type of error::
+    A Controller callback that will handle any requests that are
+    blackholed. A blackhole callback can be any public method on a controller.
+    The callback should expect a parameter indicating the type of error::
 
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
