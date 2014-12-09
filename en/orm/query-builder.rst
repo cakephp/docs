@@ -487,7 +487,7 @@ the ``IS`` operator to automatically create the correct expression::
 The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
 
 Automatic IS NOT NULL Creation
---------------------------
+------------------------------
 
 When a condition value is expected not to be ``null`` or any other value, you can use
 the ``IS NOT`` operator to automatically create the correct expression::
