@@ -429,6 +429,26 @@ Which will generate the following SQL looking like::
     NOT (author_id = 2 OR author_id = 5)
     AND view_count <= 10)
 
+It is also possible to build expressions using SQL functions::
+
+    $query = $articles->find()
+        ->where(function ($exp, $q) {
+            $year = $q->func()->year([
+                'created' => 'literal'
+            ])
+            return $exp
+                ->gte($year, 2014)
+                ->eq('published', true);
+        });
+
+Which will generate the following SQL looking like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    YEAR(created) >= 2014
+    AND published = 1
+    )
 
 When using the expression objects you can use the following methods to create
 conditions:
