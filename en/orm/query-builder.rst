@@ -239,6 +239,26 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
+In addition to the above functions, the ``func()`` method can be used to create any generic SQL function
+such as ``year``, ``date_format``, ``convert``, etc. For example::
+
+    $query = $articles->find();
+    $year = $query->func()->year([
+        'created' => 'literal'
+    ]);
+    $time = $query->func()->date_format([
+        'created' => 'literal',
+        "'%H:%i'" => 'literal'
+    ]);
+    $query->select([
+        'yearCreated' => $year,
+        'timeCreated' => $time
+    ]);
+
+Would result in::
+
+    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
 Aggregates - Group and Having
 -----------------------------
 
