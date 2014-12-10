@@ -1071,14 +1071,14 @@ necessary.  In these cases it is more efficient to use a bulk-update to modify
 many rows at once::
 
     // Publish all the unpublished articles.
-    function publishAllUnpublished() {
+    public function publishAllUnpublished() {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
-    function incrementCounters() {
+    public function incrementCounters() {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }
@@ -1201,7 +1201,7 @@ In these cases it is more performant to use a bulk-delete to remove many rows at
 once::
 
     // Delete all the spam
-    function destroySpam() {
+    public function destroySpam() {
         return $this->deleteAll(['is_spam' => true]);
     }
 

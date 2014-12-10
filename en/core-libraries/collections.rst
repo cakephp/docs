@@ -701,7 +701,7 @@ The ``buffered()`` method is also useful for converting non-rewindable iterators
 into collections that can be iterated more than once::
 
     // In PHP 5.5+
-    function results() {
+    public function results() {
         ...
         foreach ($transientElements as $e) {
             yield $e;
@@ -723,7 +723,7 @@ places at the same time. In order to clone a collection out of another use the
 
     foreach ($ages as $age) {
         foreach ($collection as $element) {
-            echo $element->name . ' - ' . $age;
+            echo h($element->name) . ' - ' . $age;
         }
     }
 

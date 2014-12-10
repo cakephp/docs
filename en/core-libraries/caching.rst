@@ -199,7 +199,7 @@ For example, you often want to cache remote service call results. You could use
 
     class IssueService  {
 
-        function allIssues($repo) {
+        public function allIssues($repo) {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
