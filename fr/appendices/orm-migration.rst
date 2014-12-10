@@ -379,7 +379,7 @@ les mêmes résultats que les champs virtuels, cela donne::
     use Cake\ORM\Query;
 
     class ReviewsTable extends Table {
-        function findAverage(Query $query, array $options = []) {
+        public function findAverage(Query $query, array $options = []) {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;
