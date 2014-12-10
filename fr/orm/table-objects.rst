@@ -633,7 +633,7 @@ already familiar to you::
     // Dans un controller ou dans une méthode table.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan'])
         }
     );
 

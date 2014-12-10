@@ -1118,7 +1118,7 @@ already familiar to you::
 
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan'])
         }
     );
 
