@@ -1116,7 +1116,7 @@ dans notre component. Nous créons le fichier
         }
 
         public function testAdjust() {
-            // Tester notre méthode adjust avec les configuraitons de différents paramètres
+            // Tester notre méthode adjust avec les configurations de différents paramètres
             $this->PagematronComponent->adjust();
             $this->assertEquals(20, $this->Controller->paginate['limit']);
 

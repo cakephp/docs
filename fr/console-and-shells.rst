@@ -1049,7 +1049,7 @@ API de Shell
     - Correspondance du nom de la tâche.
     - méthode main().
 
-    Si un shell intégre une méthode main(), toute appel de méthode perdu
+    Si un shell intègre une méthode main(), toute appel de méthode perdu
     sera envoyé à main() avec le nom de la méthode originale dans argv.
 
 .. php:method:: shortPath($file)
