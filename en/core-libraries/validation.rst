@@ -1,7 +1,7 @@
-.. php:namespace:: Cake\Validation
-
 Validation
 ##########
+
+.. php:namespace:: Cake\Validation
 
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease.
