@@ -151,7 +151,9 @@ should look like::
             'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => array(
                 'Form' => array(
-                    'fields' => array('username' => 'email')
+                    'fields' => array(
+                      'username' => 'myUserModelUsernameField', //Default is 'username' in the userModel
+                      'password' => 'myUserModelPasswordField') //Default is 'password' in the userModel
                 )
             )
         )
