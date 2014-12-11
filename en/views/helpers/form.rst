@@ -435,10 +435,10 @@ HTML attributes. The following will cover the options specific to
     echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
-  the keys matching the validation rule names::
+  the keys matching the original validation error messages::
 
     $this->Form->input('name', [
-        'error' => ['tooShort' => __('This is not long enough')]
+        'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
   As seen above you can set the error message for each validation
