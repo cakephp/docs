@@ -155,7 +155,6 @@ should look like::
                       'username' => 'my_user_model_username_field', //Default is 'username' in the userModel
                       'password' => 'my_user_model_password_field'  //Default is 'password' in the userModel
                     )
-                  )
                 )
             )
         )

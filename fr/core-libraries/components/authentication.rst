@@ -151,22 +151,25 @@ loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
 ressemblerait à quelque chose comme. ::
 
-        // Passage de paramètre dans le tableau $components
-        public $components = array(
-            'Auth' => array(
-                'loginAction' => array(
-                    'controller' => 'users',
-                    'action' => 'login',
-                    'plugin' => 'users'
-                ),
-                'authError' => 'Pensiez-vous réellement que vous étiez autorisés à voir cela ?',
-                'authenticate' => array(
-                    'Form' => array(
-                        'fields' => array('username' => 'email')
+    // Passage de paramètre dans le tableau $components
+    public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'plugin' => 'users'
+            ),
+            'authError' => 'Pensiez-vous réellement que vous étiez autorisés à voir cela ?',
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array(
+                        'username' => 'mon_champ_username_personnalise', // 'username' par défaut
+                        'password' => 'mon_champ_password_personnalise'  // 'password' par défaut
                     )
                 )
             )
-        );
+        )
+    );
 
 En plus de la configuration courante, l'authentification de base
 prend en charge les clés suivantes:
