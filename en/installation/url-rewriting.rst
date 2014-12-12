@@ -33,6 +33,15 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        #    Order deny,allow
        #    Deny from all
        </Directory>
+   
+   For users having apache 2.4 and above, you need to go to etc/apache2/sites-enabled/000-default.conf
+   and make the following changes to get it working.
+       <Directory /var/www/>
+            Options Indexes FollowSymLinks Includes
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+       </Directory>
 
 #. Make sure you are loading mod\_rewrite correctly. You should
    see something like::
