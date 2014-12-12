@@ -183,7 +183,7 @@ The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
 collection::
 
-    $totalPrice = $collection->reduce(function ($orderLine, $accumulated) {
+    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
         return $accumulated + $orderLine->price;
     }, 0);
 
@@ -192,7 +192,7 @@ contained in the collection. Note the second argument for the ``reduce()``
 function, it takes the initial value for the reduce operation you are
 performing::
 
-    $allTags = $collection->reduce(function ($article, $accumulated) {
+    $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
     }, []);
 
