@@ -7,6 +7,8 @@ trapping that prints and or logs errors as they occur. This same error handler
 is used to catch uncaught exceptions from controllers and other parts of your
 application.
 
+i am thinking of backporting the IntegrationTestCase to 2.x. That would save me quite some upgrading time later on for the 2.x projects regarding the controller tests
+
 .. _error-configuration:
 
 Error & Exception Configuration
@@ -29,7 +31,7 @@ your application:
   where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
-  class in ``src/Error``s. This class needs to implement a ``render()`` method.
+  class in ``src/Error``. This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When ``true``, exceptions + their stack traces will be logged
   to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
