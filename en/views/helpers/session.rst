@@ -13,7 +13,7 @@ The major difference between the Session Helper and the Session
 Component is that the helper does *not* have the ability to write
 to the session.
 
-As with the Session Component, data is read by using
+As with the session object, data is read by using
 :term:`dot notation` array structures::
 
     ['User' => [
@@ -41,5 +41,5 @@ used.
 
 .. meta::
     :title lang=en: SessionHelper
-    :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.
+    :description lang=en: The Session Helper replicates most of the functionality and making it available in your view.
     :keywords lang=en: session helper,flash messages,session flash,session read,session check

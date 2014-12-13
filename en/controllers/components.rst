@@ -21,7 +21,6 @@ chapter for each component:
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
-    /controllers/components/sessions
 
 .. _configuring-components:
 
