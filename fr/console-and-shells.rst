@@ -254,7 +254,7 @@ commande::
 
 
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
-l'OptionParser du Shell::   
+l'OptionParser du Shell::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -978,7 +978,6 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/code-generation-with-bake
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell

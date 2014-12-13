@@ -251,12 +251,21 @@ Shell / Task
 Shells et Tasks ont été déplacés de ``Console/Command`` et
 ``Console/Command/Task`` vers ``Shell`` et ``Shell/Task``.
 
-ApiShell Retirée
-----------------
+ApiShell Retiré
+---------------
 
-ApiShell a été retirée puisqu'il ne fournit aucun bénéfice sur le fichier
+ApiShell a été retiré puisqu'il ne fournit aucun bénéfice sur le fichier
 source lui-même et sur la documentation/`l'API <http://api.cakephp.org/>`_
 en-ligne.
+
+SchemaShell Removed
+-------------------
+
+SchemaShell a été retiré puisqu'il n'a jamais été une implémentation
+d'une migrations de base de données complète et de meilleurs outils comme
+`Phinx <https://phinx.org/>`_ ont emergé. Il a été remplacé par
+le `Plugin de Migrations pour CakePHP <https://github.com/cakephp/migrations>`_
+qui permet l'utilisation de `Phinx <https://phinx.org/>`_ avec CakePHP.
 
 ExtractTask
 -----------
@@ -1260,7 +1269,7 @@ Inflector
 
 - Les translitérations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
   changé. Si vous utilisez des translitérations  personnalisées, vous devrez mettre
-  à jour votre code. A la place des expressions régulières, les translitérations 
+  à jour votre code. A la place des expressions régulières, les translitérations
   utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
   performances significatives::
 

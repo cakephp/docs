@@ -104,7 +104,7 @@ que toutes les ressources nécessaires pour accomplir une tâche soient délégu
 aux bonnes personnes. Il attend des requêtes des clients, vérifie leur validité
 selon l'authentification et les règles d'autorisation, délègue la récupération
 et le traitement des données à la couche Model, puis sélectionne les types de
-présentation acceptés par client pour finalement déléguer le processus 
+présentation acceptés par client pour finalement déléguer le processus
 de rendu à la couche View. Un exemple de controller d'enregistrement
 d'utilisateur serait::
 
@@ -152,14 +152,13 @@ chaque requête passe par les étapes suivantes:
 Que le Début
 ============
 
-Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres grandes 
+Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres grandes
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
   Memcache, Redis et d'autres.
 * Un :doc:`outil de génération de code
-  </console-and-shells/code-generation-with-bake>` puissant pour partir sur les
-  chapeaux de roue.
+  </bake/usage>` puissant pour partir sur les chapeaux de roue.
 * Un :doc:`framework de tests intégéré</development/testing>` pour vous assurer
   que votre code fonctionne correctement.
 

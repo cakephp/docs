@@ -21,6 +21,7 @@ Contents
 
     core-libraries/caching
     console-and-shells
+    bake
     development/debugging
     deployment
     core-libraries/email

@@ -1179,7 +1179,7 @@ reference them using ``plugin.pluginName.fixtureName`` syntax in the
 Generating Tests with Bake
 ==========================
 
-If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
+If you use :doc:`bake </bake/usage>` to
 generate scaffolding, it will also generate test stubs. If you need to
 re-generate test case skeletons, or if you want to generate test skeletons for
 code you wrote, you can use ``bake``:

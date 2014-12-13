@@ -239,6 +239,26 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
+In addition to the above functions, the ``func()`` method can be used to create any generic SQL function
+such as ``year``, ``date_format``, ``convert``, etc. For example::
+
+    $query = $articles->find();
+    $year = $query->func()->year([
+        'created' => 'literal'
+    ]);
+    $time = $query->func()->date_format([
+        'created' => 'literal',
+        "'%H:%i'" => 'literal'
+    ]);
+    $query->select([
+        'yearCreated' => $year,
+        'timeCreated' => $time
+    ]);
+
+Would result in::
+
+    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
 Aggregates - Group and Having
 -----------------------------
 
@@ -429,6 +449,26 @@ Which will generate the following SQL looking like::
     NOT (author_id = 2 OR author_id = 5)
     AND view_count <= 10)
 
+It is also possible to build expressions using SQL functions::
+
+    $query = $articles->find()
+        ->where(function ($exp, $q) {
+            $year = $q->func()->year([
+                'created' => 'literal'
+            ]);
+            return $exp
+                ->gte($year, 2014)
+                ->eq('published', true);
+        });
+
+Which will generate the following SQL looking like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    YEAR(created) >= 2014
+    AND published = 1
+    )
 
 When using the expression objects you can use the following methods to create
 conditions:
@@ -486,6 +526,17 @@ the ``IS`` operator to automatically create the correct expression::
 
 The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
 
+Automatic IS NOT NULL Creation
+------------------------------
+
+When a condition value is expected not to be ``null`` or any other value, you can use
+the ``IS NOT`` operator to automatically create the correct expression::
+
+    $query = $categories->find()
+        ->where(['parent_id IS NOT' => $parentId]);
+
+
+The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL`` depending on the type of ``$parentId``
 
 Raw Expressions
 ---------------

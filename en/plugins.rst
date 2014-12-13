@@ -227,7 +227,7 @@ of your app. For example - baking controllers::
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
-:doc:`/console-and-shells/code-generation-with-bake` if you
+:doc:`/bake/usage` if you
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin::
 

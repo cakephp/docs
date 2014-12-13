@@ -178,7 +178,7 @@ Generating Scaffold Code
 ========================
 
 Because our database is following the CakePHP conventions, we can use the
-:doc:`bake console </console-and-shells/code-generation-with-bake>` application to quickly generate a basic application. In your
+:doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
 command line run the following commands::
 
     bin/cake bake all users

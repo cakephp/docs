@@ -121,6 +121,7 @@ Pour en savoir plus sur les Models
     orm/query-builder
     orm/table-objects
     orm/entities
+    orm/associations
     orm/behaviors
     orm/database-basics
     orm/schema-system
