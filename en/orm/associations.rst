@@ -1,7 +1,5 @@
-Building Associations
-#####################
-
-.. _table-associations:
+Associations - Linking Tables Together
+######################################
 
 Defining relations between different objects in your application should be
 a natural process. For example, an article may have many comments, and belong
@@ -266,9 +264,9 @@ Possible keys for belongsTo association arrays include:
   is LEFT which may not fit your needs in all situations, INNER may
   be helpful when you want everything from your main and associated
   models or nothing at all.
-- **propertyName**: The property name that should be filled with data from the associated
-  table into the source table results. By default this is the underscored & singular name of
-  the association so ``user`` in our example.
+- **propertyName**: The property name that should be filled with data from the
+  associated table into the source table results. By default this is the
+  underscored & singular name of the association so ``user`` in our example.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the User table can
@@ -346,13 +344,13 @@ Possible keys for hasMany association arrays include:
 - **dependent**: When dependent is set to ``true``, recursive model
   deletion is possible. In this example, Comment records will be
   deleted when their associated Article record has been deleted.
-- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When ``false``,
-  ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered.
-- **propertyName**: The property name that should be filled with data from the associated
-  table into the source table results. By default this is the underscored & plural name of
-  the association so ``comments`` in our example.
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded
+  deletes will load and delete entities so that callbacks are properly
+  triggered. When ``false``, ``deleteAll()`` is used to remove associated data
+  and no callbacks are triggered.
+- **propertyName**: The property name that should be filled with data from the
+  associated table into the source table results. By default this is the
+  underscored & plural name of the association so ``comments`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
@@ -382,9 +380,8 @@ You may want to cache the counts for your hasMany associations. This is useful
 when you often need to show the number of associated records, but don't want to
 load all the records just to count them. For example, the comment count on any
 given article is often cached to make generating lists of articles more
-efficient. You can use the :doc:`CounterCacheBehavior
-  </orm/behaviors/counter-cache>` to cache counts of associated
-  records.
+efficient. You can use the :doc:`CounterCacheBehavior 
+</orm/behaviors/counter-cache>` to cache counts of associated records.
 
 BelongsToMany Associations
 ==========================
@@ -464,16 +461,17 @@ Possible keys for belongsToMany association arrays include:
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
   pivot table.
-- **cascadeCallbacks**: When this is ``true``, cascaded deletes will load and delete
-  entities so that callbacks are properly triggered on join table records. When
-  ``false``, ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered. This defaults to ``false`` to help reduce overhead.
-- **propertyName**: The property name that should be filled with data from the associated
-  table into the source table results. By default this is the underscored & plural name of
-  the association, so ``tags`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
-  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
-  subquery.
+- **cascadeCallbacks**: When this is ``true``, cascaded deletes will load and
+  delete entities so that callbacks are properly triggered on join table
+  records. When ``false``, ``deleteAll()`` is used to remove associated data and
+  no callbacks are triggered. This defaults to ``false`` to help reduce
+  overhead.
+- **propertyName**: The property name that should be filled with data from the
+  associated table into the source table results. By default this is the
+  underscored & plural name of the association, so ``tags`` in our example.
+- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The
+  other valid value is 'subquery', which replaces the ``IN`` list with an
+  equivalent subquery.
 - **saveStrategy**: Either 'append' or 'replace'. Indicates the mode to be used
   for saving associated entities. The former will only create new links
   between both side of the relation and the latter will do a wipe and
@@ -566,15 +564,15 @@ The CoursesMemberships join table uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
 
-Using the 'finder' Option
-=========================
+Default Association Conditions
+------------------------------
 
-The ``finder`` option allows you to use a :ref:`custom finder<custom-find-methods>`
-to load associated record data. This lets you encapsulate your queries better
-and keep your code DRY'er. There are some limitations when using finders to
-load associated records for associations that are loaded using joins
-(belongsTo/hasOne). Only the following aspects of the query will be applied to
-the root query:
+The ``finder`` option allows you to use a :ref:`custom finder
+<custom-find-methods>` to load associated record data. This lets you encapsulate
+your queries better and keep your code DRY'er. There are some limitations when
+using finders to load associated records for associations that are loaded using
+joins (belongsTo/hasOne). Only the following aspects of the query will be
+applied to the root query:
 
 - WHERE conditions
 - Additional joins
