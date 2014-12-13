@@ -428,7 +428,7 @@ Restaurer la configuration de runtime
 
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
 
-Une fois que vous avez stocké la configuration executée, vous aurez
+Une fois que vous avez stocké la configuration exécutée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
 ``Configure::restore()`` fait exactement cela::
 

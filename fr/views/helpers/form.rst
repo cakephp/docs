@@ -460,10 +460,10 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
     echo $this->Form->input('name', ['error' => false]);
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
-  avec les clés respectant les règles de validation::
+  avec les clés respectant les messages d'erreurs de validation originaux::
 
     $this->Form->input('name', [
-        'error' => ['tooShort' => __('This is not long enough')]
+        'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
   Comme vu précédemment, vous pouvez définir le message d'erreur pour chaque

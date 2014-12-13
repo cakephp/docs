@@ -125,7 +125,7 @@ quoteIdentifiers
     cette configuration va entraîner la construction des requêtes en utilisant
     :doc:`/orm/query-builder` avec les identifiers quotés lors de la création
     de SQL. Cela devrait être noté que ceci diminue la performance parce que
-    chaque requête a besoin d'être traversée et manipulée avant d'être executée.
+    chaque requête a besoin d'être traversée et manipulée avant d'être exécutée.
 flags
     Un tableau associatif de constantes PDO qui doivent être passées
     à l'instance PDO soulignée. Regardez la documentation de PDO pour les flags
@@ -407,7 +407,7 @@ begin/commit/rollback::
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
-En plus des requêtes basiques, vous pouvez executer des requêtes plus complexes
+En plus des requêtes basiques, vous pouvez exécuter des requêtes plus complexes
 en utilisant soit :doc:`/orm/query-builder`, soit :doc:`/orm/table-objects`. La
 méthode transactionelle fera ce qui suit:
 
@@ -423,7 +423,7 @@ Interagir avec les Requêtes
 
 Lors de l'utilisation de bas niveau de l'API, vous rencontrerez souvent des
 objets statement (requête). Ces objets vous permettent de manipuler les
-requêtes préparées sous-jacentes du driver. Après avoir créé et executé un objet
+requêtes préparées sous-jacentes du driver. Après avoir créé et exécuté un objet
 query, ou en utilisant ``execute()``, vous devriez avoir une instance
 ``StatementDecorator``. Elle enveloppe l'objet statement basique sous-jacent
 et fournit quelques fonctionnalités supplémentaires.
@@ -443,11 +443,11 @@ incomplet::
     );
 
     // Les Requêtes à partir de prepare seront des paramètres pour les placeholders.
-    // Vous avez besoin de lier les paramètres avant d'essayer de l'executer.
+    // Vous avez besoin de lier les paramètres avant d'essayer de l'exécuter.
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
 Une fois que vous avez préparé une requête, vous pouvez lier les données
-supplémentaires et l'executer.
+supplémentaires et l'exécuter.
 
 Lier les Valeurs
 ----------------
@@ -497,8 +497,8 @@ Executer & Récupérer les Colonnes
 ---------------------------------
 
 Après la préparation d'une requête et après avoir lié les données à celle-ci,
-vous pouvez l'executer et récupérer les lignes. Les requêtes devront être
-executées en utilisant la méthode ``execute()``. Une fois executée, les
+vous pouvez l'exécuter et récupérer les lignes. Les requêtes devront être
+exécutées en utilisant la méthode ``execute()``. Une fois exécutée, les
 résultats peuvent être récupérés en utilisant ``fetch()``, ``fetchAll()`` ou
 en faisant une itération de la requête::
 
@@ -524,7 +524,7 @@ en faisant une itération de la requête::
 Récupérer les Compteurs de Ligne
 --------------------------------
 
-Après avoir executé une requête, vous pouvez récupérer le nombre de lignes
+Après avoir exécuté une requête, vous pouvez récupérer le nombre de lignes
 affectées::
 
     $rowCount = count($stmt);

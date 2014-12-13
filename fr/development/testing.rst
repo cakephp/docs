@@ -93,7 +93,7 @@ de test pour la classe ArticlesTable, vous pourriez le lancer avec::
     $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
 
 Vous devriez voir une barre verte avec quelques informations supplémentaires sur
-les tests executés et le nombre qui a été passé.
+les tests exécutés et le nombre qui a été passé.
 
 .. note::
 

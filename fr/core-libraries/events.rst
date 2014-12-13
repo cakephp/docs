@@ -269,7 +269,7 @@ méthode soit lancée plus tôt, en utilisant toute valeur avant que celle par
 défaut ne fonctionne. D'un autre côté, si vous souhaitez lancer la callback
 après les autres, utiliser un nombre au-dessus de ``10`` le fera.
 
-Si deux callbacks ont la même valeur de priorité, elles seront executées selon
+Si deux callbacks ont la même valeur de priorité, elles seront exécutées selon
 l'ordre dans lequel elles ont été attachées. Vous définissez les priorités en
 utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
 la fonction ``implementedEvents`` pour les listeners d'évènement::

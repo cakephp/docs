@@ -1219,7 +1219,7 @@ Testing
 =======
 
 - ``TestShell`` a été retiré. CakePHP, le squelette d'application et les plugins
-  nouvellement créés utilisent tous ``phpunit`` pour executer les tests.
+  nouvellement créés utilisent tous ``phpunit`` pour exécuter les tests.
 - L'executeur via le navigateur (webroot/test.php) a été retiré. L'adoption
   de CLI a beaucoup augmenté depuis les premières versions de 2.x. De plus,
   les exécuteurs CLI ont une meilleure intégration avec les outils des IDE et

@@ -347,7 +347,7 @@ Retourne l'adresse IP du visiteur courant.
 Faire Confiance aux Header de Proxy
 -----------------------------------
 
-Si votre application est derrière un load balancer ou executée sur un service
+Si votre application est derrière un load balancer ou exécutée sur un service
 cloud, vous voudrez souvent avoir l'hôte de load balancer, le port et le
 scheme dans vos requêtes. Souvent les load balancers vont aussi envoyer
 des en-têtes ``HTTP-X-Forwarded-*`` avec les valeurs originales. Les en-têtes

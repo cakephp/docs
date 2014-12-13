@@ -131,10 +131,10 @@ autres enregistrements avec le même ``site_id``.
 Remarquez que ces exemples prennent une clé ``provider``. L'ajout des providers
 ``Validator`` est expliqué plus loin dans les sections suivantes.
 
-Marquer les Règles comme étant les Dernières à être executées
+Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
 
-Quand les champs ont plusieurs règles, chaque règle de validation sera executée
+Quand les champs ont plusieurs règles, chaque règle de validation sera exécutée
 même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
 de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
 stopper l'execution après qu'une règle spécifique a échoué, vous pouvez définir
@@ -155,7 +155,7 @@ l'option ``last`` à ``true``::
         ]);
 
 Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
-la règle maxLength ne sera pas executée.
+la règle maxLength ne sera pas exécutée.
 
 Ajouter des Providers de Validation
 -----------------------------------
@@ -346,6 +346,60 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
     Si vous avez besoin de valider les entities, vous devez utiliser les
     méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
     :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
+
+
+Validating Entities
+===================
+
+While entities are validated as they are saved, you may also want to validate
+entities before attempting to do any saving. Validating entities before
+saving is often useful from the context of a controller, where you want to show
+all the error messages for an entity and its related data::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($this->request->data());
+    $valid = $articles->validate($article, [
+        'associated' => ['Comments', 'Author']
+    ]);
+    if ($valid) {
+        $articles->save($article, ['validate' => false]);
+    } else {
+        // Do work to show error messages.
+    }
+
+The ``validate`` method returns a boolean indicating whether or not the entity
+& related entities are valid. If they are not valid, any validation errors will
+be set on the entities that had validation errors. You can use the
+:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+
+When you need to pre-validate multiple entities at a time, you can use the
+``validateMany`` method::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+    if ($articles->validateMany($entities)) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['validate' => false]);
+        }
+    } else {
+        // Do work to show error messages.
+    }
+
+Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
+methods allow you to specify which associations are validated, and which
+validation sets to apply using the ``options`` parameter::
+
+    $valid = $articles->validate($article, [
+      'associated' => [
+        'Comments' => [
+          'associated' => ['User'],
+          'validate' => 'special',
+        ]
+      ]
+    ]);
+
 
 Règles de Validation du Cœur
 =============================

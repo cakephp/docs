@@ -121,7 +121,7 @@ l'intérieur d'un controller, vous pouvez faire ce qui suit::
 
 .. note::
 
-    Gardez à l'esprit que le chargement d'un component à la volée n'appelera
+    Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
     ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
