@@ -1,9 +1,10 @@
 Vues JSON et XML
 ################
 
-Deux nouvelles classes de vue dans CakePHP 2.1. Les vues ``XmlView`` et
+Les views ``XmlView`` et
 ``JsonView`` vous laissent créer facilement des réponses XML et JSON,
-et sont intégrées à :php:class:`RequestHandlerComponent`.
+et sont intégrées à
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 En activant ``RequestHandlerComponent`` dans votre application, et en activant
 le support pour les extensions ``xml`` et/ou ``json``, vous pouvez
@@ -13,29 +14,30 @@ automatiquement vous appuyer sur les nouvelles classes de vue. ``XmlView`` et
 Il y a deux façons de générer des vues de données. La première est en utilisant
 la clé ``_serialize``, et la seconde en créant des fichiers de template normaux.
 
-Activation des vues de données dans votre application
+Activation des Vues de Données dans votre Application
 =====================================================
 
 Avant que vous puissiez utiliser les classes de vue de données, vous aurez
 besoin de faire un peu de configuration:
 
-#. Activez les extensions json et/ou xml avec
-   :ref:`file-extensions`. Cela permettra au Router de gérer plusieurs
-   extensions.
-#. Ajoutez le :php:class:`RequestHandlerComponent` à la liste de components de
-   votre controller. Cela activera automatiquement le changement de la classe
-   de vue pour les types de contenu.
+#. Activez les extensions json et/ou xml avec :ref:`file-extensions`.
+   Cela permettra au Router de gérer plusieurs extensions.
+#. Ajoutez le :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
+   à la liste de components de votre controller. Cela activera automatiquement
+   le changement de la classe de vue pour les types de contenu. Vous pouvez
+   également paramétrer les components avec ``viewClassMap``, pour mapper des
+   types vers vos classes personnalisées et/ou mapper d'autres types.
 
-Après avoir ajouté ``Router::parseExtensions(['json']);`` à votre fichier de
-routes, CakePHP changera automatiquement les classes de vue quand une requête
+Après avoir activé :ref:`le routing des extensions de fichier <file-extensions>`,
+CakePHP changera automatiquement les classes de vue quand une requête
 sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
 ``application/json``.
 
 Utilisation des Vues de Données avec la Clé Serialize
 =====================================================
 
-La clé ``_serialize`` est une variable de vue spéciale qui indique quel
-autre(s) variable(s) de vue devraient être sérialisée(s) quand on utilise la
+La clé ``_serialize`` est une variable de vue spéciale qui indique quelle(s)
+autre(s) variable(s) de vue devrai(en)t être sérialisée(s) quand on utilise la
 vue de données. Cela vous permet de sauter la définition des fichiers de template
 pour vos actions de controller si vous n'avez pas besoin de faire un formatage
 avant que vos données ne soient converties en json/xml.
@@ -52,32 +54,32 @@ caractère, soit un tableau de variables de vue à sérialiser::
         }
 
         public function index() {
-            $this->set('posts', $this->paginate());
-            $this->set('_serialize', ['posts']);
+            $this->set('articles', $this->paginate());
+            $this->set('_serialize', ['articles']);
         }
     }
 
 Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
 combiner::
 
-    class PostsController extends AppController {
+    class ArticlesController extends AppController {
         public function initialize() {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
         public function index() {
-            // du code qui créé $posts et $comments
-            $this->set(compact('posts', 'comments'));
-            $this->set('_serialize', ['posts', 'comments']);
+            // Some code that created $articles and $comments
+            $this->set(compact('articles', 'comments'));
+            $this->set('_serialize', ['articles', 'comments']);
         }
     }
 
-Définir ``_serialize`` en tableau a le bénéfice supplémentaire d'ajouter
-automatiquement un elément de top-niveau ``<response>`` en utilisant
+Définir ``_serialize`` en tableau comporte le bénéfice supplémentaire d'ajouter
+automatiquement un élément de top-niveau ``<response>`` en utilisant
 :php:class:`XmlView`. Si vous utilisez une valeur de chaîne de caractère pour
 ``_serialize`` et XmlView, assurez-vous que vos variables de vue aient un
-elément unique de top-niveau. Sans un elément de top-niveau, le Xml ne pourra
+élément unique de top-niveau. Sans un élément de top-niveau, le Xml ne pourra
 être généré.
 
 Utilisation d'une Vue de Données avec les Fichiers de Template
@@ -92,7 +94,8 @@ C'est une situation où un fichier de vue est utile::
     // Code du controller
     class PostsController extends AppController {
         public function index() {
-            $this->set(compact('posts', 'comments'));
+            $articles = $this->paginate('Articles');
+            $this->set(compact('articles'));
         }
     }
 
@@ -100,7 +103,7 @@ C'est une situation où un fichier de vue est utile::
     foreach ($posts as &$post) {
         unset($post->generated_html);
     }
-    echo json_encode(compact('posts', 'comments'));
+    echo json_encode(compact('posts'));
 
 Vous pouvez faire des manipulations encore beaucoup plus complexes, comme
 utiliser les helpers pour formater.
@@ -110,33 +113,33 @@ utiliser les helpers pour formater.
     Les classes de vue de données ne supportent pas les layouts. Elles
     supposent que le fichier de vue va afficher le contenu sérialisé.
 
+Créer des Views XML
+===================
+
 .. php:class:: XmlView
 
-    Une classe de vue pour la génération de vue de données Xml. Voir au-dessus
-    pour savoir comment vous pouvez utiliser XmlView dans votre application
+Par défaut quand on utilise ``_serialize``, XmlView va envelopper vos
+variables de vue sérialisées avec un nœud ``<response>``. Vous pouvez
+définir un nom personnalisé pour ce nœud en utilisant la variable de vue
+``_rootNode``.
 
-    Par défaut quand on utilise ``_serialize``, XmlView va envelopper vos
-    variables de vue sérialisées avec un noeud ``<response>``. Vous pouvez
-    définir un nom personnalisé pour ce noeud en utilisant la variable de vue
-    ``_rootNode``.
+Créer des Views JSON
+====================
 
 .. php:class:: JsonView
 
-    Une classe de vue pour la génération de vue de données Json. Voir au-dessus
-    pour savoir comment vous pouvez utiliser JsonView dans votre application.
-
-    La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
-    personnaliser le bit-mask utilisé pour générer le JSON. Regardez la
-    documentation `http://php.net/json_encode <json_encode>`_ sur la façon de
-    valider les valeurs de cette option.
+La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
+personnaliser le bit-mask utilisé pour générer le JSON. Regardez la
+documentation `json_encode <http://php.net/json_encode>`_ sur les valeurs
+valides de cette option.
 
 Réponse JSONP
-=============
+-------------
 
-Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
-``_jsonp`` pour retourner une réponse JSONP. La définir à ``true``
+Quand vous utilisez ``JsonView``, vous pouvez utiliser la variable de vue
+spéciale ``_jsonp`` pour retourner une réponse JSONP. La définir à ``true``
 fait que la classe de vue vérifie si le paramètre de chaine de la requête
-nommée "callback" est définie et si c'est la cas, permet d'envelopper la réponse
+nommée "callback" est défini et si c'est la cas, permet d'envelopper la réponse
 json dans le nom de la fonction fournie. Si vous voulez utiliser un nom
 personnalisé de paramètre de requête à la place de "callback", définissez
 ``_jsonp`` avec le nom requis à la place de ``true``.

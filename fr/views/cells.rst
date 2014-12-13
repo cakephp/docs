@@ -3,19 +3,17 @@ View Cells
 
 View cells sont des mini-controllers qui peuvent invoquer de la logique de vue
 et afficher les templates. Ils sont un module de remplacement léger pour
-``requestAction()``. L'idée des cells est emprunté aux `cells dans ruby
-<http://cells.rubyforge.org/>`_, où elles remplissent un rôle et un sujet
-similaire.
+``requestAction()``. L'idée des cells est empruntée aux `cells dans ruby
+<https://github.com/apotonick/cells>`_, où elles remplissent un rôle et un
+sujet similaire.
 
 Quand utiliser les Cells
 ========================
 
-Les Cells sont idéals pour la construction de components de page réutilisables
+Les Cells sont idéales pour la construction de components de page réutilisables
 qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
-ou un menu de navigation selon des données dans un CMS.
-
-Les Cells remplacent aussi ``requestAction()``. Parce que les cells ne
+ou un menu de navigation selon des données dans un CMS. Parceque les cells ne
 dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
 de ``requestAction()``.
 
@@ -95,12 +93,8 @@ Dans notre fichier de template, ajoutons ce qui suit::
 Charger les Cells
 =================
 
-Les cells peuvent être chargées à partir des controllers ou des views en
-utilisant la méthode ``cell()``. La méthode ``cell()`` fonctionne de la même
-manière dans les deux contextes. La méthode ``cell()`` est disponible dans les
-deux contextes car vous pourriez avoir besoin d'utiliser la logique de
-controller pour choisir les cells à construire. Pour charger une cell, utilisez
-la méthode ``cell()``::
+Les cells peuvent être chargées à partir des views en utilisant la méthode
+``cell()`` et fonctionne de la même manière dans les deux contextes::
 
     // Charge une celle d'une application
     $cell = $this->cell('Inbox');
@@ -108,12 +102,27 @@ la méthode ``cell()``::
     // Charge une cell d'un plugin
     $cell = $this->cell('Messaging.Inbox');
 
-Ce qui est au-dessus va charger la classe de cell nommée et executer la méthode
+Ce qui est au-dessus va charger la classe de cell nommée et exécuter la méthode
 ``display()``.
-Vous pouvez executer d'autres méthodes en utilisant ce qui suit::
+Vous pouvez exécuter d'autres méthodes en utilisant ce qui suit::
 
     // Lance la méthode expanded() dans la cell Inbox
     $cell = $this->cell('Inbox::expanded');
+
+Si vous avez besoin que votre controller décide quelles cells doivent être
+chargées dans une requête, vous pouvez utiliser le ``CellTrait`` dans votre
+controller pour y activer la méthode ``cell()``::
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\View\CellTrait;
+
+    class DashboardsController extends AppController {
+        use CellTrait;
+
+        // More code.
+    }
 
 Passer des Arguments à une Cell
 -------------------------------
@@ -133,7 +142,7 @@ Ce qui est au-dessus correspondra à la signature de la fonction suivante::
 Afficher une Cell
 =================
 
-Une fois qu'une cell a été chargée et executée, vous voudrez probablement
+Une fois qu'une cell a été chargée et exécutée, vous voudrez probablement
 l'afficher. La façon la plus simple pour rendre une cell est de faire une echo::
 
     <?= $cell ?>
@@ -148,7 +157,7 @@ Afficher un Template alternatif
 -------------------------------
 
 Par convention, les cells affichent les templates qui correspondent à l'action
-qu'ils executent. Si vous avez besoin d'afficher un template de vue différent,
+qu'ils exécutent. Si vous avez besoin d'afficher un template de vue différent,
 vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
 
     // Appel de render() explicitement

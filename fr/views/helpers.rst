@@ -188,7 +188,7 @@ d'y accéder en faisant ce qui suit::
 
     echo $this->Html->css('styles');
 
-Ce qui est au-dessus appelera la méthode ``css`` du HtmlHelper. Vous pouvez
+Ce qui est au-dessus appellera la méthode ``css`` du HtmlHelper. Vous pouvez
 accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``.
 
 Charger les Helpers à la Volée
@@ -223,18 +223,16 @@ la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
 classe dans ``src/View/Helper``. Appelons notre helper LinkHelper. Le
 fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
-    /* /src/View/Helper/LinkHelper.php */
+    /* src/View/Helper/LinkHelper.php */
+    namespace App\View\Helper;
+
     use Cake\View\Helper;
 
-    class LinkHelper extends AppHelper {
+    class LinkHelper extends Helper {
         public function makeEdit($title, $url) {
             // La logique pour créer le lien spécialement formaté se place ici
         }
     }
-
-.. note::
-
-    Les Helpers doivent étendre soit ``AppHelper`` soit :php:class:`Helper`.
 
 Inclure d'autres Helpers
 ------------------------
@@ -244,8 +242,7 @@ un autre helper. Pour faire cela, vous pouvez spécifier les helpers que
 vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le
 feriez dans un controller::
 
-    /* /src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
-    use App\View\Helper\AppHelper;
+    /* src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
    
     namespace App\View\Helper;
 
@@ -297,7 +294,7 @@ Callbacks
 
 En implémentant une méthode de callback dans un helper, CakePHP va
 automatiquement inscrire votre helper à l'évènement correspondant. A la
-différence des versions précédentes de CakePHP, vous *ne* devriez pas appeler
+différence des versions précédentes de CakePHP, vous *ne* devriez *pas* appeler
 ``parent`` dans vos callbacks, puisque la classe Helper de base n'implémente
 aucune des méthodes de callback.
 
@@ -315,7 +312,7 @@ aucune des méthodes de callback.
 
 .. php:method:: beforeRender(Event $event, $viewFile)
 
-    La méthode beforeRender est appelé après la méthode beforeRender du
+    La méthode beforeRender est appelée après la méthode beforeRender du
     controller, mais avant les rendus du controller de la vue et du layout
     Reçoit le fichier à rendre en argument.
 
