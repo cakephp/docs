@@ -215,7 +215,7 @@ tâche 'FileGenerator', vous pourriez créer
 ``src/Shell/Task/FileGeneratorTask.php``.
 
 Chaque tâche doit au moins intégrer une méthode ``main()``. Le
-ShellDispatcher appelera cette méthode quand la tâche est invoquée.
+ShellDispatcher appellera cette méthode quand la tâche est invoquée.
 une classe de tâche ressemble à cela::
 
     namespace App\Shell\Task;
@@ -643,7 +643,7 @@ est appelé. De plus, vous pouvez utiliser ``choices`` pour forcer un argument
 pour qu'il soit une liste de choix valides::
 
     $parser->addArgument('type', [
-        'help' => 'Le type de noeud avec lequel intéragir.',
+        'help' => 'Le type de nœud avec lequel intéragir.',
         'required' => true,
         'choices' => ['aro', 'aco']
     ]);

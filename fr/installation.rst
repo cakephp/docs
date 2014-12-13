@@ -48,7 +48,7 @@ Ou vous pouvez télécharger ``composer.phar`` à partir de son
 
 Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
 Composer `ici <https://github.com/composer/windows-setup/releases/>`_. D'autres
-instructions pour l'installeur Windows de Composer se trouvent dans le 
+instructions pour l'installeur Windows de Composer se trouvent dans le
 `README <https://github.com/composer/windows-setup>`_.
 
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
@@ -113,7 +113,7 @@ Serveur de Développement
 ========================
 
 Une installation "développement" est la méthode la plus rapide pour lancer
-CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour executer
+CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour exécuter
 le serveur web PHP intégré qui va rendre votre application disponible sur
 ``http://host:port``. A partir du répertoire de l'app, lancez::
 
@@ -335,14 +335,14 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
            RewriteRule ^ index.php [QSA,L]
        </IfModule>
-       
+
    Ce qui est au-dessus va simplement empêcher les assets incorrects d'être
    envoyés à index.php et à la place d'afficher la page 404 de votre serveur
    web.
-   
+
    De plus, vous pouvez créer une page HTML 404 correspondante, ou utiliser la
    page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``::
-       
+
        ErrorDocument 404 /404-not-found
 
 nginx

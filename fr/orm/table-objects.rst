@@ -203,7 +203,7 @@ des lignes, les convertisser en tableau, ou quand la méthode
     // A ce niveau, la requête n'est pas lancée.
     $query = $articles->find('all');
 
-    // L'itération va executer la requête.
+    // L'itération va exécuter la requête.
     foreach ($query as $row) {
     }
 
@@ -211,7 +211,7 @@ des lignes, les convertisser en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
-    // Convertir la requête en tableau va l'executer.
+    // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
 Une fois que vous avez commencé une requête, vous pouvez utiliser l'interface
@@ -262,7 +262,7 @@ Récupérer les Premiers Résultats
 --------------------------------
 
 La méthode ``first()`` vous permet de récupérer seulement la première ligne
-à partir d'une query. Si la query n'a pas été executée, une clause ``LIMIT 1``
+à partir d'une query. Si la query n'a pas été exécutée, une clause ``LIMIT 1``
 sera appliquée::
 
     // Dans un controller ou dans une méthode table.

@@ -131,10 +131,10 @@ autres enregistrements avec le même ``site_id``.
 Remarquez que ces exemples prennent une clé ``provider``. L'ajout des providers
 ``Validator`` est expliqué plus loin dans les sections suivantes.
 
-Marquer les Règles comme étant les Dernières à être executées
+Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
 
-Quand les champs ont plusieurs règles, chaque règle de validation sera executée
+Quand les champs ont plusieurs règles, chaque règle de validation sera exécutée
 même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
 de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
 stopper l'execution après qu'une règle spécifique a échoué, vous pouvez définir
@@ -155,7 +155,7 @@ l'option ``last`` à ``true``::
         ]);
 
 Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
-la règle maxLength ne sera pas executée.
+la règle maxLength ne sera pas exécutée.
 
 Ajouter des Providers de Validation
 -----------------------------------

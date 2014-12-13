@@ -77,7 +77,7 @@ informations sur la spécificité de chaque webserveur.
 
 Dans tous les cas, vous devez définir le document de l'hôte/domaine virtuel
 pour qu'il soit ``webroot/``. Cela retire la possibilité que des fichiers
-soient executés en-dehors du répertoire webroot.
+soient exécutés en-dehors du répertoire webroot.
 
 .. _symlink-assets:
 

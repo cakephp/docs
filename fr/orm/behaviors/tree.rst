@@ -63,7 +63,7 @@ et en demandant le nombre de descendants qu'il a::
     $node = $categories->get(1);
     echo $categories->childCount($node);
 
-Obtenir une liste aplatie des descendants pour un noeud est également facile::
+Obtenir une liste aplatie des descendants pour un nœud est également facile::
 
     $descendants = $categories->find('children', ['for' => 1]);
 
@@ -72,7 +72,7 @@ Obtenir une liste aplatie des descendants pour un noeud est également facile::
     }
 
 Si à la place, vous avez besoin d'une liste liée, où les enfants pour
-chaque noeud sont imbriqués dans une hierarchie, vous pouvez utiliser le
+chaque nœud sont imbriqués dans une hierarchie, vous pouvez utiliser le
 finder 'threaded'::
 
     $children = $categories
@@ -111,7 +111,7 @@ La sortie sera similaire à ceci::
     __National
     __International
 
-Une tâche classique est de trouver le chemin de l'arbre à partir d'un noeud en
+Une tâche classique est de trouver le chemin de l'arbre à partir d'un nœud en
 particulier vers le racine de l'arbre. C'est utile, par exemple, pour ajouter
 la liste des breadcrumbs pour une strcture de menu::
 
@@ -124,18 +124,18 @@ la liste des breadcrumbs pour une strcture de menu::
 
 Les arbres construits avec TreeBehavior ne peuvent pas être triés avec d'autres
 colonnes que ``lft``, ceci parce que la représentation interne de l'arbre
-dépend de ce tri. Heureusement, vous pouvez réorganiser les noeuds à
+dépend de ce tri. Heureusement, vous pouvez réorganiser les nœuds à
 l'intérieur du même niveau dans avoir à changer leur parent::
 
     $node = $categories->get(5);
 
-    // Déplace le noeud pour qu'il monte d'une position quand on liste les enfants.
+    // Déplace le nœud pour qu'il monte d'une position quand on liste les enfants.
     $categories->moveUp($node);
 
-    // Déplace le noeud vers le haut de la liste dans le même niveau.
+    // Déplace le nœud vers le haut de la liste dans le même niveau.
     $categories->moveUp($node, true);
 
-    // Déplace le noeud vers le bas.
+    // Déplace le nœud vers le bas.
     $categories->moveDown($node, true);
 
 Configuration
@@ -188,7 +188,7 @@ Sauvegarder les Données Hiérarchisées
 
 Quand vous utilisez le behavior Tree, vous n'avez habituellement pas besoin
 de vous soucier de la représentation interne de la structure hierarchisée. Les
-positions où les noeuds sont placés dans l'arbre se déduisent de la colonne
+positions où les nœuds sont placés dans l'arbre se déduisent de la colonne
 'parent_id' dans chacune de vos entities::
 
     $aCategory = $categoriesTable->get(10);
@@ -196,33 +196,33 @@ positions où les noeuds sont placés dans l'arbre se déduisent de la colonne
     $categoriesTable->save($aCategory);
 
 Fournir des ids de parent non existant lors de la sauvegarde ou tenter de
-créer une boucle dans l'arbre (faire un noeud enfant de lui-même) va lancer
+créer une boucle dans l'arbre (faire un nœud enfant de lui-même) va lancer
 une exception.
 
-Vous pouvez faire un noeud à la racine de l'arbre en configurant la colonne
+Vous pouvez faire un nœud à la racine de l'arbre en configurant la colonne
 'parent_id' à null::
 
     $aCategory = $categoriesTable->get(10);
     $aCategory->parent_id = null;
     $categoriesTable->save($aCategory);
 
-Les enfants pour un nouveau noeud à la racine seront préservés.
+Les enfants pour un nouveau nœud à la racine seront préservés.
 
-Supprimer les Noeuds
+Supprimer les nœuds
 ====================
 
-Supprimer un noeud et tous son sous-arbre (tout enfant qu'il peut avoir à tout
+Supprimer un nœud et tous son sous-arbre (tout enfant qu'il peut avoir à tout
 niveau dans l'arbre) est facile::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->delete($aCategory);
 
 TreeBehavior va s'occuper de toutes les opérations internes de suppression.
-Il est aussi possible de Seulement supprimer un noeud et de réassigner tous les
-enfants au noeud parent immédiatemment supérieur dans l'arbre::
+Il est aussi possible de Seulement supprimer un nœud et de réassigner tous les
+enfants au nœud parent immédiatemment supérieur dans l'arbre::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->removeFromTree($aCategory);
     $categoriesTable->delete($aCategory);
 
-Tous les noeuds enfant seront conservés et un nouveau parent leur sera assigné.
+Tous les nœuds enfant seront conservés et un nouveau parent leur sera assigné.

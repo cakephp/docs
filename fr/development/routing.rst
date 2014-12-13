@@ -27,7 +27,7 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
 
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-Ceci va executer la méthode index dans ``ArticlesController`` quand la page
+Ceci va exécuter la méthode index dans ``ArticlesController`` quand la page
 d'accueil de votre site est visitée. Parfois vous avez besoin de routes
 dynamiques qui vont accepter plusieurs paramètres, ce sera le cas par exemple
 d'une route pour voir le contenu d'un article::
@@ -258,7 +258,7 @@ La classe spéciale ``InflectedRoute`` va s'assurer que les paramètres
     correctement.
 
 Une fois que cette route a été définie, la requête ``/apples/5`` est la même
-que celle requêtant ``/apples/view/5``. Les deux appeleraient la méthode view()
+que celle requêtant ``/apples/view/5``. Les deux appelleraient la méthode view()
 de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
 d'accéder à l'ID passé à ``$this->request->params['id']``.
 
@@ -986,7 +986,7 @@ Is equivalent to the following explicit calls::
     Using the default route class (``Route``) with fallbacks, or any route
     with ``:plugin`` and/or ``:controller`` route elements will result in
     inconsistent URL case.
-    
+
 Handling Named Parameters in URLs
 =================================
 
