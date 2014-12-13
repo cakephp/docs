@@ -37,7 +37,7 @@ The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information.  For the remaining
+:ref:`database-queries` section for more information. For the remaining
 examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
 
     // Start a new query.

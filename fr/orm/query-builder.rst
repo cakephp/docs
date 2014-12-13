@@ -5,52 +5,58 @@ Query Builder
 
 .. php:class:: Query
 
-The ORM's query builder provides a simple to use fluent interface for creating
-and running queries. By composing queries together, you can create advanced
-queries using unions and subqueries with ease.
+Le constructeur de requête de l'ORM fournit une interface facile à utiliser
+pour créer et lancer les requêtes. En arrangeant les requêtes ensemble,
+vous pouvez créer des requêtes avancées en utilisant les unions et les
+sous-requêtes avec facilité.
 
-Underneath the covers, the query builder uses PDO prepared statements which
-protect against SQL injection attacks.
+Sous le capot, le constructeur de requête utilise les requêtes préparées de
+PDO qui protègent contre les attaques d'injection SQL.
 
-Query objects are lazily evaluated. This means a query is not executed until one
-of the following things occur:
+Less objets Query sont lazily evaluated. Cela signifie qu'une requête n'est
+pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
-- The query is iterated with ``foreach()``.
-- The query's ``execute()`` method is called. This will return the underlying
-  statement object, and is to be used with insert/update/delete queries.
-- The query's ``all()`` method is called. This will return the result set and
-  can only be used with select statements.
-- The query's ``toArray()`` method is called.
+- La requête est itérée avec ``foreach()``.
+- La méthode ``execute()`` de query est appelée. Elle retourne l'objet
+  underlying statement, et va être utilisée avec les requêtes
+  insert/update/delete.
+- La méthode ``all()`` de query est appelée. Elle retourne l'ensemble de
+  résultats et peut seulement être utilisée avec les select statements.
+- La méthode ``toArray()`` de query est appelée.
 
-Until one of these conditions are met, the query can be modified with additional
-SQL being sent to the database. It also means that if a Query hasn't been
-evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
+Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
+modifiée avec du SQL supplémentaire envoyé à la base de données. Cela signifie
+que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
+base de données. Une fois exécutée, la modification et la ré-évaluation
+d'une requête va entraîner l'exécution de SQL supplémentaire.
 
-If you want to take a look at what SQL CakePHP is generating, you can turn
-database :ref:`query logging <database-query-logging>` on.
+Si vous souhaitez jeter un oeil sur le SQL que CakePHP génère, vous pouvez
+activer les :ref:`logs de requête <database-query-logging>` de la base de
+données.
 
-The Query Object
-================
+L'Objet Query
+=============
 
-The easiest way to create a ``Query`` object is to use ``find()`` from a
-``Table`` object. This method will return an incomplete query ready to be
-modified. You can also use a table's connection object to access the lower level
-Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information.  For the remaining
-examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
+La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()``
+à partir d'un objet ``Table``. Cette méthode va retourner une requête
+incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
+connection pour accéder au niveau inférieur du constructeur de Requête
+qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
+section :ref:`database-queries` pour plus d'informations. Pour les exemples
+restants, en supposant que ``$articles`` est une
+:php:class:`~Cake\\ORM\\Table`::
 
-    // Start a new query.
+    // Commence une nouvelle requête.
     $query = $articles->find();
 
-Almost every method in a ``Query`` object will return the same query, this means
-that ``Query`` objects are lazy, and will not be executed unless you tell them
-to::
+Preque chaque méthode dans un objet ``Query`` va retourner la même requête, cela
+signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à moins
+que vous lui disiez de le faire::
 
-    $query->where(['id' => 1]); // Return the same query object
-    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
+    $query->where(['id' => 1]); // Retourne le même objet query
+    $query->order(['title' => 'DESC']); // Toujours le même objet, aucun SQL exécuté
 
-You can of course chain the methods you call on Query objects::
+Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets Query::
 
     $query = $articles
         ->find()
@@ -58,18 +64,19 @@ You can of course chain the methods you call on Query objects::
         ->where(['id !=' => 1])
         ->order(['created' => 'DESC']);
 
-If you try to call ``debug()`` on a Query object, you will see its internal
-state and the SQL that will be executed in the database::
+Si vous essayez d'appeler ``debug()`` sur un objet Query, vous verrez son état
+interne et le SQL qui sera executé dans la base de données::
 
     debug($articles->find()->where(['id' => 1]));
 
-    // Outputs
+    // Affiche
     // ...
     // 'sql' => 'SELECT * FROM articles where id = ?'
     // ...
 
-Once you're happy with the Query, you can execute it. The easiest way is to
-either call the ``first()`` or the ``all()`` methods::
+Une fois que vous êtes satisfaits avec la Query, vous pouvez l'exécuter. La
+façon la plus simple est de soit appeler la méthode ``first()``, soit la
+méthode ``all()``::
 
     $firstArticle = $articles
         ->find()
@@ -81,55 +88,60 @@ either call the ``first()`` or the ``all()`` methods::
         ->where(['id >' => 1])
         ->all();
 
-In the above example, ``$allResults`` will be an instance of
-``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
-and traversing methods on. Often, there is no need to call ``all()``, you are
-allowed to just iterate the Query object to get its results::
+Dans l'exemple ci-dessus, ``$allResults`` sera une instance de
+``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et appliquer
+plusieurs extractions et traverser les méthodes. Souvent, il n'y a pas besoin
+d'appeler ``all()``, vous pouvez juste itérer l'objet Query pour récupérer
+ses résultats::
 
-    // Iterate the results
+    // Itére les résultats
     foreach ($allResults as $result) {
      ...
     }
 
-    // That is equivalent to
+    // Ceci est équivalent à
     $query = $articles->find()->where(['id' => 1]);
     foreach ($query as $result) {
      ...
     }
 
-Query objects can also be used directly as the result object; trying to iterate the query,
-calling ``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
-will result in the query being executed and results returned to you::
+Les objets Query peuvent aussi être utilisés directement comme un objet
+résultat; en essayant d'itérer la requête, appeler ``toArray`` ou une méthode
+héritée de :ref:`Collection<collection-objects>`, cela va entraîner l'exécution
+de la requête et les résultats vous seront retournés::
 
-    // This executes the query and returns an array of results
+    // Ceci exécute la requête et retourne un tableau de résultats
     $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
 
-    // Use the combine() method from the collections library
+    // Utilise la méthode combine() à partir de la librairie collections
     // This executes the query
     $keyValueList = $articles->find()->combine('id', 'title');
 
-    // Use the extract() method from the collections library
-    // This executes the query as well
+    // Utilise la méthode extract() à partir de la librairie collections
+    // Ceci exécute aussi la requête
     $allTitles = $articles->find()->extract('title');
 
-Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection<collection-objects>` section to improve your skills
-in efficiently traversing the data. In short, it is important to remember that
-anything you can call on a Collection object, you can also do in a Query object::
+Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
+fortement recommandé que vous consultiez la section
+:ref:`Collection<collection-objects>` pour améliorer vos compétences dans
+le traversement efficace de données. En résumé, il est important de se
+rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
+pouvez aussi le faire avec un objet Query::
 
-    // An advanced example
+    // Un exemple avancé
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->map(function ($row) { // map() est une méthode de collection, elle exécute la requête
             $row->trimmedTitle = trim($row->title);
             return $row;
         });
-        ->combine('id', 'trimmedTitle') // combine() is another collection method
-        ->toArray(); // Also a collections library method
+        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
+        ->toArray(); // Aussi une méthode de la librairie collections
 
-The following sections will show you everything there is to know about using and
-combining the Query object methods to construct SQL statements and extract data.
+Les sections suivantes vont vous montrer tout ce qu'il faut savoir sur
+l'utilisation et la combinaison des méthodes de l'objet Query pour construire
+des requêtes SQL et extraire les données.
 
 Récupérer vos Données
 =====================
@@ -145,52 +157,54 @@ nécessaire::
         debug($row->title);
     }
 
-Vous pouvez également de définir des alias pour vos champs en fournissant les
+Vous pouvez également définir des alias pour vos champs en fournissant les
 champs en tant que tableau associatif::
 
-    // Results in SELECT id AS pk, title AS aliased_title, body ...
+    // Résultats dans SELECT id AS pk, title AS aliased_title, body ...
     $query = $articles->find();
     $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
-To select distinct fields, you can use the ``distinct()`` method::
+Pour sélectionner des champs distincts, vous pouvez utiliser la méthode
+``distinct()``::
 
-    // Results in SELECT DISTINCT country FROM ...
+    // Résultats dans SELECT DISTINCT country FROM ...
     $query = $articles->find();
     $query->select(['country'])
         ->distinct(['country']);
 
-To set some basic conditions you can use the ``where()`` method::
+Pour définir certaines conditions basiques que vous pouvez utiliser avec la
+méthode ``where()``::
 
-    // Conditions are combined with AND
+    // Conditions sont combinées avec AND
     $query = $articles->find();
     $query->where(['title' => 'First Post', 'published' => true]);
 
-    // You can call where() multiple times
+    // Vous pouvez aussi appeler where() plusieurs fois
     $query = $articles->find();
     $query->where(['title' => 'First Post'])
         ->where(['published' => true]);
 
-See the :ref:`advanced-query-conditions` section to find out how to construct
-more complex ``WHERE`` conditions. To apply ordering, you can use the ``order``
-method::
+Consultez la section :ref:`advanced-query-conditions` pour trouver comment
+construire des conditions ``WHERE`` plus complexes. Pour appliquer un tri,
+vous pouvez utiliser la méthode ``order``::
 
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-To limit the number of rows or set the row offset you can use the ``limit()``
-and ``page()`` methods::
+Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
+utiliser les méthodes ``limit()`` et ``page()``::
 
-    // Fetch rows 50 to 100
+    // Récupérer les lignes 50 à 100
     $query = $articles->find()
         ->limit(50)
         ->page(2);
 
-As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query through chained method
-calls.
+Comme vous pouvez le voir sur les exemples précédents, toutes les méthodes
+qui modifient la requête fournissent une interface courante, vous permettant
+de construire une requête avec les appels de méthode chaînés.
 
-Using SQL Functions
--------------------
+Utiliser les Fonctions SQL
+--------------------------
 
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
