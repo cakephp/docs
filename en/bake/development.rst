@@ -79,9 +79,9 @@ treat everything else including php tags as plain text.
   * ``<%`` A Bake template php open tag
   * ``%>`` A Bake template php close tag
   * ``<%=`` A Bake template php short-echo tag
-  * ``<%~`` A Bake template php open tag, stripping any leading whitespace
+  * ``<%-`` A Bake template php open tag, stripping any leading whitespace
     before the tag
-  * ``~%>`` A Bake template php close tag, stripping trailing whitespace after
+  * ``-%>`` A Bake template php close tag, stripping trailing whitespace after
     the tag
 
 One way to see/understand how bake templates works, especially when attempting
