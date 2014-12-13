@@ -5,8 +5,8 @@ SessionHelper
 
 .. php:class:: SessionHelper(View $view, array $config = [])
 
-Équivalent du Component Session, le Helper Session offre la majorité des
-fonctionnalités du component et les rend disponible dans votre vue.
+Le Helper Session offre la majorité des fonctionnalités du component et les
+rend disponible dans votre vue.
 
 La grande différence entre le Component Session et le Helper Session est que ce
 dernier *ne peut pas* écrire dans la session.
@@ -39,5 +39,5 @@ méthodes du helper Session où une variable ``$key`` est utilisée.
 
 .. meta::
     :title lang=fr: SessionHelper
-    :description lang=fr: Équivalent du component Session, le Helper Session offre la majorité des fonctionnalités du component et les rend disponibles dans votre vue.
+    :description lang=fr: le Helper Session offre la majorité des fonctionnalités disponibles dans votre vue.
     :keywords lang=fr: session helper,flash messages,session flash,session read,session check

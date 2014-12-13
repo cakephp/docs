@@ -319,10 +319,8 @@ Vous pouvez accéder aux données session à tous les endroits où vous avez acc
 * Components
 
 En plus de l'objet basique session, vous pouvez aussi utiliser
-:php:class:`Cake\\Controller\\Component\\SessionComponent` et
 :php:class:`Cake\\View\\Helper\\SessionHelper` pour intéragir avec la session
-dans les controllers et les views. Un exemple simple de l'utilisation de
-session serait::
+dans vos views. Un exemple simple de l'utilisation de session serait::
 
     $name = $this->request->session()->read('User.name');
 
