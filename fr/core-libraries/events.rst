@@ -209,10 +209,10 @@ gestionnaire d'événement lira le tableau retourné par la méthode
 `implementedEvents` et relie les callbacks en conséquence.
 
 Enregistrer les écouteurs anonymes
--------------------------------
+----------------------------------
 
 Tandis que les objects d'écoute d'événements sont généralement une meilleure manière d'implémenter les écouteurs,
-vous pouvez aussi attacher n'importe quel ``callable``comment écouteur d'événement. Par exemple, si nous vouilonswe
+vous pouvez aussi attacher n'importe quel ``callable``comme écouteur d'événement. Par exemple, si nous voulions
 enregistrer chaque commande dans les fichiers de journalisation, nous utiliserions une simple fonction anonyme pour le faire ::
 
     // Les fonctions anonymes requièrent PHP 5.3+
