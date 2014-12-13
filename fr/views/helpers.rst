@@ -104,7 +104,7 @@ toute configuration dont votre helper a besoin. Par exemple::
     namespace App\View\Helper;
 
     use Cake\View\Helper;
-    use Cake\View\StringTemplateTrait;
+    use Cake\View\Helper\StringTemplateTrait;
 
     class AwesomeHelper extends Helper {
 
