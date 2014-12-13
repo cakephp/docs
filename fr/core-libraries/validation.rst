@@ -347,6 +347,60 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
     méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
     :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
 
+
+Validating Entities
+===================
+
+While entities are validated as they are saved, you may also want to validate
+entities before attempting to do any saving. Validating entities before
+saving is often useful from the context of a controller, where you want to show
+all the error messages for an entity and its related data::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($this->request->data());
+    $valid = $articles->validate($article, [
+        'associated' => ['Comments', 'Author']
+    ]);
+    if ($valid) {
+        $articles->save($article, ['validate' => false]);
+    } else {
+        // Do work to show error messages.
+    }
+
+The ``validate`` method returns a boolean indicating whether or not the entity
+& related entities are valid. If they are not valid, any validation errors will
+be set on the entities that had validation errors. You can use the
+:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+
+When you need to pre-validate multiple entities at a time, you can use the
+``validateMany`` method::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+    if ($articles->validateMany($entities)) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['validate' => false]);
+        }
+    } else {
+        // Do work to show error messages.
+    }
+
+Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
+methods allow you to specify which associations are validated, and which
+validation sets to apply using the ``options`` parameter::
+
+    $valid = $articles->validate($article, [
+      'associated' => [
+        'Comments' => [
+          'associated' => ['User'],
+          'validate' => 'special',
+        ]
+      ]
+    ]);
+
+
 Règles de Validation du Cœur
 =============================
 

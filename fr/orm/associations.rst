@@ -1,5 +1,5 @@
-Construire les Associations
-###########################
+Associations - Liers les Tables Ensemble 
+########################################
 
 .. _table-associations:
 
@@ -588,11 +588,11 @@ La table de jointure CoursesMemberships identifie de façon unique une
 participation donnée d'un Etudiant à un Cours en plus des meta-informations
 supplémentaires.
 
-Utiliser l'Option 'finder'
-==========================
+Conditions d'Association par Défaut
+===================================
 
 L'option ``finder`` vous permet d'utiliser un
-:ref:`custom finder<custom-find-methods>` pour charger les données associés.
+:ref:`custom finder <custom-find-methods>` pour charger les données associés.
 Ceci permet de mieux encapsuler vos requêtes et de garder votre code plus
 DRY. Il y a quelques limitations lors de l'utilisation de finders pour charger
 les enregistrements associés pour les associations qui sont chargées en

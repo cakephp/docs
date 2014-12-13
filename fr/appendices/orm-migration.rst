@@ -418,7 +418,7 @@ Comme vous pouvez le voir de l'exemple ci-dessus, chaque type d'association
 utilise une méthode pour créer l'association. Une autre différence est que
 ``hasAndBelongsToMany`` a été renommée en ``belongsToMany``. Pour en apprendre
 plus sur la création des associations dans 3.0, regardez la section sur
-:ref:`table-associations`.
+:doc:`les associations </orm/associations>`.
 
 Une autre amélioration bienvenue de CakePHP est la capacité de créer votre
 propre classe d'associations. Si vous avez des types d'association qui ne sont
