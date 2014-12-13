@@ -126,9 +126,9 @@ Souvenez-vous qu'une extrême flexibilité implique une extrême complexité.
 Distribution des événements
 ===========================
 
-Once you have obtained an instance of an event manager you can dispatch events
-using :php:meth:`~CakeEventManager::dispatch()`. This method takes an instance
-of the :php:class:`CakeEvent` class. Let's look at dispatching an event::
+Une fois obtenue l'instance d'un gestionnaire d'événement, vous pourrez distribuer 
+les événements via :php:meth:`~CakeEventManager::dispatch()`. Cette méthode prend en argument un instance
+de la classe :php:class:`CakeEvent`. Regardons comment distribuer un événement::
 
     // Create a new event and dispatch it.
     $event = new CakeEvent('Model.Order.afterPlace', $this, array(
@@ -208,15 +208,14 @@ manipuler les instances de l'interface `CakeEventListener`. En interne, le
 gestionnaire d'événement lira le tableau retourné par la méthode
 `implementedEvents` et relie les callbacks en conséquence.
 
-Registering anonymous listeners
+Enregistrer les écouteurs anonymes
 -------------------------------
 
-While event listener objects are generally a better way to implement listeners,
-you can also bind any ``callable`` as an event listener. For example if we
-wanted to put any orders into the log files, we could use a simple anonymous
-function to do so::
+Tandis que les objects d'écoute d'événements sont généralement une meilleure manière d'implémenter les écouteurs,
+vous pouvez aussi attacher n'importe quel ``callable``comment écouteur d'événement. Par exemple, si nous vouilonswe
+enregistrer chaque commande dans les fichiers de journalisation, nous utiliserions une simple fonction anonyme pour le faire ::
 
-    // Anonymous functions require PHP 5.3+
+    // Les fonctions anonymes requièrent PHP 5.3+
     $this->Order->getEventManager()->attach(function($event) {
         CakeLog::write(
             'info',
@@ -224,8 +223,7 @@ function to do so::
         );
     }, 'Model.Order.afterPlace');
 
-In addition to anonymous functions you can use any other callable type that PHP
-supports::
+En plus des fonctions anonymes, vous pouvez utiliser n'importe quel type de ``callable`` supporté par PHP::
 
     $events = array(
         'email-sending' => 'EmailSender::sendBuyEmail',
