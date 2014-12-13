@@ -7,8 +7,6 @@ trapping that prints and or logs errors as they occur. This same error handler
 is used to catch uncaught exceptions from controllers and other parts of your
 application.
 
-i am thinking of backporting the IntegrationTestCase to 2.x. That would save me quite some upgrading time later on for the 2.x projects regarding the controller tests
-
 .. _error-configuration:
 
 Error & Exception Configuration
