@@ -1,5 +1,5 @@
-Associations - Liers les Tables Ensemble
-########################################
+Associations - Lier les Tables Ensemble
+#######################################
 
 .. _table-associations:
 
@@ -209,7 +209,7 @@ Users peuvent contenir l'enregistrement Address, si il existe::
         echo $user->address->street;
    }
 
-Ce qui est au-dessus fera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
@@ -293,7 +293,7 @@ User peuvent contenir l'enregistrement Address si il existe::
         echo $address->user->username;
     }
 
-Ce qui est au-dessus fera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -383,7 +383,7 @@ la table Articles récupèreront également les Comments liés si ils existent::
         echo $article->comments[0]->text;
     }
 
-Ce qui est au-dessus fera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
@@ -515,7 +515,7 @@ Articles peuvent contenir les enregistrements de Tag si ils existent::
         echo $article->tags[0]->text;
     }
 
-Ce qui est au-dessus fera une requête SQL similaire à::
+Ce qui est au-dessus génèrera une requête SQL similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM tags

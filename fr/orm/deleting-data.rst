@@ -57,22 +57,22 @@ d'association HasMany avec ces deux options activées serait::
     cascadeCallbacks doit seulement être activée quand votre application a
     un travail important de gestion des écouteurs d'événements.
 
-Suppressions Bulk
------------------
+Suppressions en Masse
+---------------------
 
 .. php:method:: deleteAll($conditions)
 
 Il peut arriver des fois où la suppression de lignes une par une n'est pas
 efficace ou utile. Dans ces cas, il est plus performant d'utiliser une
-suppression bulk pour retirer plusieurs lignes en une fois::
+suppression en masse pour retirer plusieurs lignes en une fois::
 
     // Supprime tous les spams
     function destroySpam() {
         return $this->deleteAll(['is_spam' => true]);
     }
 
-Une suppression bulk va être considerée comme réussie si 1 ou plusieurs lignes
-ont été supprimées.
+Une suppression en masse va être considerée comme réussie si 1 ou plusieurs
+lignes ont été supprimées.
 
 .. warning::
 
