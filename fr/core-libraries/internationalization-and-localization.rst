@@ -37,11 +37,12 @@ traduction est disponible, sinon elle la renverra non modifiée.
 Fichiers de Langues
 -------------------
 
-Translations can be made available by using language files stored in your
-application. The default format for CakePHP translation files is the
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files neeed to be
-placed under ``src/Locale/`` and within this directory, there should be
-a subfolder for each language the application needs to support::
+Les traductions peuvent être mis à disposition en utilisant des fichiers 
+de langue stockées dans votre application. Le format par défaut pour ces fichiers est
+le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Ces fichiers doivent être
+placé dans ``src/Locale/`` et dans ce répertoire, il devrait y avoir
+un sous-dossier par langue que l'application doit prendre en charge::
+
 
     /src
         /Locale
@@ -53,14 +54,13 @@ a subfolder for each language the application needs to support::
             /es
                 default.po
 
-The default domain is 'default', therefore your locale folder should at least
-contain the ``default.po`` file as shown above. A domain refers to any arbitrary
-grouping of translation messages. When no group is used, then the default group
-is selected.
+Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc 
+contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se réfère à un regroupement
+arbitraire de messages de traduction. Si aucun groupe n'est utilisé, le groupe par défaut
+est sélectionné.
 
-Plugins can also contain translation files, the convention is to use the
-``under_scored`` version of the plugin name as the domain for the translation
-messages::
+Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version 
+``under_scored`` du nom du plugin comme domaine de la traduction des messages::
 
     MyPlugin
         /src
@@ -70,11 +70,11 @@ messages::
                 /de
                     my_plugin.po
 
-Translation folders can either be the two letter ISO code of the language or the
-full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the
-language and the country where it is spoken.
+Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de 
+la langue ou de le nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``, 
+qui contient en même temps la langue et le pays où elle est parlée.
 
-An example translation file could look like this:
+Un fichier de traduction pourrai ressembler à ça :
 
 .. code-block:: pot
 
@@ -84,17 +84,18 @@ An example translation file could look like this:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
-Setting the Default Locale
---------------------------
+Définir la Locale par Défaut
+----------------------------
 
-The default locale can be set in your ``config/bootstrap.php`` folder by using
-the following line::
+La ``locale``par défaut se détermine dans le fichier ``config/bootstrap.php``
+via::
 
     ini_set('intl.default_locale', 'fr_FR');
 
-This will control several aspects of your application, including the default
-translations language, the date format, number format and currency whenever any
-of those is displayed using the localization libraries that CakePHP provides.
+Cela permet de contrôler plusieurs aspects de votre application, incluant la langue 
+de traduction par défaut, le format des dates, des nombres, et devises 
+à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques 
+de localisation fournies par CakePHP.
 
 Changing the Locale at Runtime
 ------------------------------
