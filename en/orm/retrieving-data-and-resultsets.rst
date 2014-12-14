@@ -198,7 +198,7 @@ provides a simple to use method for generating 'lists' of data::
 
 With no additional options the keys of ``$data`` will be the primary key of your
 table, while the values will be the 'displayField' of the table. You can use the
-``displayField()`` method on a table object to configure the display field on
+``displayField()`` method on a table object to configure the display field of
 a table::
 
     class ArticlesTable extends Table {
