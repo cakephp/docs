@@ -38,9 +38,9 @@ Fichiers de Langues
 -------------------
 
 Les traductions peuvent être mis à disposition en utilisant des fichiers 
-de langue stockées dans votre application. Le format par défaut pour ces fichiers est
+de langue stockés dans votre application. Le format par défaut pour ces fichiers est
 le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Ces fichiers doivent être
-placé dans ``src/Locale/`` et dans ce répertoire, il devrait y avoir
+placés dans ``src/Locale/`` et dans ce répertoire, il devrait y avoir
 un sous-dossier par langue que l'application doit prendre en charge::
 
 
@@ -71,10 +71,10 @@ Les plugins peuvent également contenir des fichiers de traduction, la conventio
                     my_plugin.po
 
 Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de 
-la langue ou de le nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``, 
+la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``, 
 qui contient en même temps la langue et le pays où elle est parlée.
 
-Un fichier de traduction pourrai ressembler à ça :
+Un fichier de traduction pourrait ressembler à ça :
 
 .. code-block:: pot
 
