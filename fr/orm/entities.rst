@@ -194,8 +194,8 @@ d'erreur::
 
 .. _entities-mass-assignment:
 
-Mass Assignment
-===============
+Assignment de Masse
+===================
 
 Alors que la définition des propriétés en entities en masse est simple et
 pratique, elle peut créer des problèmes importants de sécurité.
@@ -236,7 +236,7 @@ behavior fallback si un champ n'est pas nommé spécifiquement::
 
 Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
-Modifier les Champs Gardés à l'Execution
+Modifier les Champs Gardés à l'exécution
 ----------------------------------------
 
 Vous pouvez modifier la liste des champs gardés à la volée en utilisant la

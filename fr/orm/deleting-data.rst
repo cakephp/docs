@@ -38,7 +38,7 @@ Suppression en Cascade
 Quand les entities sont supprimées, les données associées peuvent aussi être
 supprimées. Si vos associations HasOne et HasMany sont configurées avec
 ``dependent``, les opérations de suppression se feront aussi en 'cascade'
-à ces entities. Par défaut, les entities dans les tables associées sont
+sur leurs entitites. Par défaut, les entities dans les tables associées sont
 retirées en utilisant :php:meth:`~Cake\\ORM\Table::deleteAll()`. Vous pouvez
 choisir que l'ORM charge les entities liées et les supprime individuellement
 en configurant l'option ``cascadeCallbacks`` à ``true``. Un exemple
@@ -53,9 +53,9 @@ d'association HasMany avec ces deux options activées serait::
 .. note::
 
     Définir ``cascadeCallbacks`` à ``true``, entrainera  des lenteurs
-    supplémentaires des suppressions par rapport aux suppressions bulk. L'option
-    cascadeCallbacks doit seulement être activée quand votre application a
-    un travail important de gestion des écouteurs d'événements.
+    supplémentaires des suppressions par rapport aux suppressions de masse.
+    L'option cascadeCallbacks doit seulement être activée quand votre
+    application a un travail important de gestion des écouteurs d'événements.
 
 Suppressions en Masse
 ---------------------

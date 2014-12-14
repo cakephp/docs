@@ -179,7 +179,7 @@ avant, ou retourner la connection connue existante::
 La tentative de chargement de connections qui n'existent pas va lancer une
 exception.
 
-Créer des Connections à l'Execution
+Créer des Connections à l'exécution
 -----------------------------------
 
 En utilisant ``config()`` et ``get()`` vous pouvez créer à tout moment de
@@ -318,12 +318,12 @@ Les Classes de Connection
 Les classes de Connection fournissent une interface simple pour intéragir avec
 les connections à la base de données d'une façon pratique. Elles ont pour
 objectif d'être une interface plus abstraite à la couche de driver et de fournir
-des fonctionnalités pour l'execution des requêtes, le logging des requêtes, et
+des fonctionnalités pour l'exécution des requêtes, le logging des requêtes, et
 de faire des opérations transactionnelles.
 
 .. _database-queries:
 
-L'execution des Requêtes
+L'exécution des Requêtes
 ------------------------
 
 .. php:method:: query($sql)
@@ -639,7 +639,7 @@ La Mise en Cache de Metadata
 ============================
 
 L'ORM de CakePHP utilise la reflection de base de données pour determiner
-le schema, les indices et les clés étrangères que votre application a. Comme
+le schema, les indices et les clés étrangères de votre application. Comme
 cette metadata change peu fréquemment et peut être lourde à accéder, elle est
 habituellement mise en cache. Par défaut, les metadata sont stockées dans la
 configuration du cache ``_cake_model_``. Vous pouvez définir une configuration
@@ -655,7 +655,7 @@ configuration de la source de données::
         ]
     ],
 
-Vous pouvez aussi configurer les metadata mises en cache à l'execution avec la
+Vous pouvez aussi configurer les metadata mises en cache à l'exécution avec la
 méthode ``cacheMetadata()``::
 
     // Désactive le cache

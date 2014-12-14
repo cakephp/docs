@@ -49,7 +49,7 @@ restants, en supposant que ``$articles`` est une
     // Commence une nouvelle requête.
     $query = $articles->find();
 
-Preque chaque méthode dans un objet ``Query`` va retourner la même requête, cela
+Presque chaque méthode dans un objet ``Query`` va retourner la même requête, cela
 signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à moins
 que vous lui disiez de le faire::
 
@@ -200,8 +200,8 @@ utiliser les méthodes ``limit()`` et ``page()``::
         ->page(2);
 
 Comme vous pouvez le voir sur les exemples précédents, toutes les méthodes
-qui modifient la requête fournissent une interface courante, vous permettant
-de construire une requête avec les appels de méthode chaînés.
+qui modifient la requête fournissent une interface fluide, vous permettant
+de construire une requête avec des appels de méthode chaînés.
 
 Utiliser les Fonctions SQL
 --------------------------

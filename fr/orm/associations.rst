@@ -198,7 +198,7 @@ Les clés possibles pour une association hasOne sont:
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
 - **finder**: La méthode finder à utiliser lors du chargement des
-  enregistrements associées.
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Users peuvent contenir l'enregistrement Address, si il existe::
@@ -209,7 +209,7 @@ Users peuvent contenir l'enregistrement Address, si il existe::
         echo $user->address->street;
    }
 
-Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
@@ -282,7 +282,7 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
 - **finder**: La méthode finder à utiliser lors du chargement des
-  enregistrements associées.
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 User peuvent contenir l'enregistrement Address si il existe::
@@ -293,7 +293,7 @@ User peuvent contenir l'enregistrement Address si il existe::
         echo $address->user->username;
     }
 
-Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -372,7 +372,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
 - **finder**: La méthode finder à utiliser lors du chargement des
-  enregistrements associées.
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations de recherche sur
 la table Articles récupèreront également les Comments liés si ils existent::
@@ -383,7 +383,7 @@ la table Articles récupèreront également les Comments liés si ils existent::
         echo $article->comments[0]->text;
     }
 
-Ce qui est au-dessus génèrera une commande SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
@@ -504,7 +504,7 @@ sont:
   et remplacer pour créer les liens entre les entities passées lors de la
   sauvegarde.
 - **finder**: La méthode finder à utiliser lors du chargement des
-  enregistrements associées.
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Articles peuvent contenir les enregistrements de Tag si ils existent::
