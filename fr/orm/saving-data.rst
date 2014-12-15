@@ -5,26 +5,27 @@ Saving Data
 
 .. php:class:: Table
 
-After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
-will probably want to update & save the changes.
+Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
+voulez probablement mettre à jour & sauvegarder les changements.
 
 .. _converting-request-data:
 
-Converting Request Data into Entities
-=====================================
+Convertir les Données de Request en Entities
+============================================
 
-Before editing and saving data back into the database, you'll need to convert
-the request data from the array format held in the request, and the entities
-that the ORM uses. The Table class provides an easy way to convert one or many
-entities from request data. You can convert a single entity using::
+Avant de modifier et sauvegarder les données à nouveau dans la base de données,
+vous devrez convertir les données de request à partir du format de tableau
+qui se trouve dans la request, et les entities que l'ORM utilise. La classe
+Table est un moyen facile de convertir une ou plusieurs entities à partir de
+données de request. Vous pouvez convertir une entity unique en utilisant::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data());
 
-The request data should follow the structure of your entities. For example if
-you had an article, which belonged to a user, and had many comments, your
-request data should look like::
+Les données de request doivent suivre la structure de vos entities. Par exemple
+si vous avez un article, qui appartient à un utilisateur, et avez plusieurs
+commentaires, vos données de request devrait ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -39,9 +40,9 @@ request data should look like::
         ]
     ];
 
-If you are saving belongsToMany associations you can either use a list of
-entity data or a list of ids. When using a list of entity data your request data
-should look like::
+Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
+une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
+liste de données d'entity, vos données de request devrait ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -53,7 +54,8 @@ should look like::
         ]
     ];
 
-When using a list of ids, your request data should look like::
+Quand vous utilisez une liste d'ids, vos données de request devrait ressembler
+à ceci::
 
     $data = [
         'title' => 'My title',
@@ -64,13 +66,13 @@ When using a list of ids, your request data should look like::
         ]
     ];
 
-The marshaller will handle both of these forms correctly, but only for
-belongsToMany associations.
+Le marshaller va gérer ces deux formulaires correctement, mais seulement pour
+des associations belongsToMany.
 
-When building forms that save nested associations, you need to define which
-associations should be marshalled::
+Lors de la construction de formulaires qui sauvegardent des associations
+imbriquées, vous devez définir quelles associations doivent être marshalled::
 
-    // In a controller
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
@@ -78,23 +80,24 @@ associations should be marshalled::
         ]
     ]);
 
-The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. Alternatively, you can use dot notation for brevity::
+Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
+Comments doivent être marshalled. D'une autre façon, vous pouvez utiliser
+la notation par point pour être plus bref::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-You can convert multiple entities using::
+Vous pouvez convertir plusieurs entities en utilisant::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-When converting multiple entities, the request data for multiple articles should
-look like::
+Lors de la conversion de plusieurs entities, les données de request pour
+plusieurs articles devrait ressembler à ceci::
 
     $data = [
         [
@@ -107,23 +110,23 @@ look like::
         ],
     ];
 
-Once you've converted request data into entities you can ``save()`` or
-``delete()`` them::
+Une fois que vous avez converti des données de request dans des entities, vous
+pouvez leur faire un ``save()`` ou un ``delete()``::
 
-    // In a controller.
+    // Dans un controller.
     foreach ($entities as $entity) {
         // Save entity
         $articles->save($entity);
 
-        // Delete entity
+        // Supprime l'entity
         $articles->delete($entity);
     }
 
-The above will run a separate transaction for each entity saved. If you'd like
-to process all the entities as a single transaction you can use
-``transactional()``::
+Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
+sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
+vous pouvez utiliser ``transactional()``::
 
-    // In a controller.
+    // Dans un controller.
     $articles->connection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
@@ -132,20 +135,22 @@ to process all the entities as a single transaction you can use
 
 .. note::
 
-    If you are using newEntity() and the resulting entities are missing some or
-    all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity.
+    Si vous utilisez newEntity() et il manque quelques unes ou toutes les
+    données des entities résultants, vérifiez deux fois que les colonnes que
+    vous souhaitez définir sont listées dans la propriété ``$_accessible``
+    de votre entity.
 
-Merging Request Data Into Entities
-----------------------------------
+Fusionner les Données de Request dans des Entities
+--------------------------------------------------
 
-In order to update entities you may choose to apply request data directly to an
-existing entity. This has the advantage that only the fields that actually
-changed will be saved, as opposed to sending all fields to the database to be
-persisted. You can merge an array of raw data into an existing entity using the
-``patchEntity`` method::
+Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des données
+de request directement dans une entity existante. Ceci a le désavantage que
+seuls les champs qui changent réellement seront sauvegardés, as opposed
+to sending all fields to the database to be persisted. Vous pouvez fusionner
+un tableau de données raw dans une entity existante en utilisant la méthode
+``patchEntity``::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
@@ -712,4 +717,3 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
-
