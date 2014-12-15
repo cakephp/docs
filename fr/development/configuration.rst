@@ -347,7 +347,7 @@ quels alias de reader sont attachés, vous pouvez utiliser
 :php:meth:`Configure::configured()`::
 
     // Récupère le tableau d'alias pour les readers attachés.
-    Configure::configured()
+    Configure::configured();
 
     // Vérifie si un reader spécifique est attaché
     Configure::configured('default');
