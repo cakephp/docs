@@ -341,7 +341,7 @@ The above generates SQL similar to::
       AND (author_id = 2 OR author_id = 3)
     ))
 
-By using functions as the parameters to ``orWhere()`` abd ``andWhere()``,
+By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
 you can easily compose conditions together with the expression objects::
 
     $query = $articles->find()
@@ -993,7 +993,7 @@ information about CakePHP, as usual we need a mapper function::
         }
     };
 
-It first checks for whether the "cakephp" word in in the article's body, and
+It first checks for whether the "cakephp" word is in the article's body, and
 then breaks the body into individual words. Each word will create its own
 ``bucket`` where each article id will be stored. Now let's reduce our results to
 only extract the count::
@@ -1011,7 +1011,7 @@ Finally, we put everything together::
         ->mapReduce($mapper, $reducer);
 
 This could return a very large array if we don't clean stop words, but it could
-look something like like this::
+look something like this::
 
     [
         'cakephp' => 100,
