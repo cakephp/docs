@@ -84,9 +84,9 @@ balises php, comme du texte.
   * ``<%`` Une balise php ouverte de template de Bake
   * ``%>`` Une balise php fermante de template de Bake
   * ``<%=`` Une balise php de short-echo de template de Bake
-  * ``<%~`` Une balise php ouverte de template de Bake, enlevant tout espace
+  * ``<%-`` Une balise php ouverte de template de Bake, enlevant tout espace
     en tête avant la balise
-  * ``~%>`` Une balise php fermante de template de Bake, enlevant les espaces
+  * ``-%>`` Une balise php fermante de template de Bake, enlevant les espaces
     à a fin après la balise
 
 Une façon de voir/comprendre la façon dont les templates de Bake fonctionne,

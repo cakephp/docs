@@ -502,7 +502,7 @@ in your exception renderer you can use any controller you want::
     ],
     // ...
 
-The error controller, whether custom or conventional,  is used to render the
+The error controller, whether custom or conventional, is used to render the
 error page view and receives all the standard request life-cycle events.
 
 Logging Exceptions

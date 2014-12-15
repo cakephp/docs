@@ -277,9 +277,11 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Les templates de bake ont été déplacés dans ``src/Template/Bake``. Aussi,
-  l'option ``theme``, utilisée pour choisir un template pour bake, a été
-  renommée en ``template``.
+- Bake ne fait plus partie du code source du core et est remplacé par le
+  `Plugin CakePHP Bake <https://github.com/cakephp/bake>`_
+- Les templates de bake ont été déplacés vers ``src/Template/Bake``.
+- La syntaxe des templates Bake utilise maintenant des balises de type erb
+  (``<% %>``) pour désigner le templating.
 
 Event
 =====

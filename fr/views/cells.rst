@@ -86,9 +86,18 @@ se comportent un peu comme un controller. Nous pouvons utiliser les méthodes
 ``loadModel()`` et ``set()`` un peu comme nous le ferions dans un controller.
 Dans notre fichier de template, ajoutons ce qui suit::
 
+    <!-- src/Template/Cell/Inbox/display.ctp -->
     <div class="notification-icon">
-        You have <?= $unread_count ?> unread messages.
+        Vous avez <?= $unread_count ?> messages non lus.
     </div>
+
+.. note::
+
+    Les templates des cells ont une portée isolée et ne partage pas la même
+    instance de View que celle utilisée pour rendre le template et le layout
+    de l'action du controller courant ou d'autres cells. Ils sont donc pas au
+    courant de tous les appels aux helpers ou aux blocs définis dans
+    template / layout de l'action et vice versa.
 
 Charger les Cells
 =================
