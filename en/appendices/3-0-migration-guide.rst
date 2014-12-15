@@ -253,7 +253,7 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Bake is nolonger part of the core source and is superceeded by
+- Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
 - Bake templates have been moved under ``src/Template/Bake``.
 - The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote templating
