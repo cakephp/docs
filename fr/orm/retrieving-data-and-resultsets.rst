@@ -64,7 +64,7 @@ Utiliser les Finders pour Charger les Données
 
 Avant de travailler avec les entities, vous devrez les charger. La façon la
 plus facile de le faire est d'utiliser la méthode ``find``. La méthode find
-fournit un moyen facile et extensible pour trouver les données qui vous
+est un moyen facile et extensible pour trouver les données qui vous
 intéressent::
 
     // Dans un controller ou dans une méthode table.
@@ -75,8 +75,8 @@ intéressent::
 La valeur retournée de toute méthode ``find`` est toujours un objet
 :php:class:`Cake\\ORM\\Query`. La classe Query vous permet de redéfinir
 une requête plus tard après l'avoir créée. Les objets Query sont évalués
-lazily, et ne s'exéxutent qu'à partir du moment où vous commencer à récupérer
-des lignes, les convertisser en tableau, ou quand la méthode
+lazily, et ne s'exécutent qu'à partir du moment où vous commencez à récupérer
+des lignes, les convertissez en tableau, ou quand la méthode
 ``all()`` est appelée::
 
     // Dans un controller ou dans une méthode table.
@@ -89,7 +89,7 @@ des lignes, les convertisser en tableau, ou quand la méthode
     foreach ($query as $row) {
     }
 
-    // Appeler execute va exceuter la requête
+    // Appeler execute va exécuter la requête
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
@@ -120,7 +120,7 @@ mocker::
 
 La liste d'options supportées par find() sont:
 
-- ``conditions`` fournit conditions pour la clause WHERE de la requête.
+- ``conditions`` fournit des conditions pour la clause WHERE de la requête.
 - ``limit`` Définit le nombre de lignes que vous voulez.
 - ``offset`` Définit l'offset de la page que vous souhaitez. Vous pouvez aussi
   utiliser ``page`` pour faciliter le calcul.
@@ -128,25 +128,27 @@ La liste d'options supportées par find() sont:
 - ``fields`` limite les champs chargés dans l'entity. Charger seulement quelques
   champs peut faire que les entities se comportent de manière incorrecte.
 - ``group`` ajoute une clause GROUP BY à votre requête. C'est utile quand vous
-  utiliser les fonctions d'aggrégation.
+  utilisez les fonctions d'aggrégation.
 - ``having`` ajoute une clause HAVING à votre requête.
 - ``join`` définit les jointures personnalisées supplémentaires.
-- ``order`` ordonne l'ensemble de résultats.
+- ``order`` ordonne l'ensemble des résultats.
 
-Toute option qui n'est pas dans la liste sera passée aux listeners de beforeFind
+Toute option qui n'est pas dans la liste sera passée aux écouteurs de beforeFind
 où ils peuvent être utilisés pour modifier l'objet requête. Vous pouvez utiliser
 la méthode ``getOptions`` sur un objet query pour récupérer les options
-utilisées. While you can very easily pass query objects to your controllers,
-we recommend that you package your queries up as :ref:`custom-find-methods` instead.
-Using custom finder methods will let you re-use your queries more easily and make
-testing easier.
+utilisées. Alors que vous pouvez très facilement passer des objets requête à
+vos controllers, nous recommandons que vous fassiez plutôt des packages de vos
+requêtes en tant que :ref:`custom-find-methods`.
+Utiliser des méthodes finder personnalisées va vous laisser réutiliser vos
+requêtes plus facilement et faciliter les tests.
 
-By default queries and result sets will return :doc:`/orm/entities` objects. You
-can retrieve basic arrays by disabling hydration::
+Par défaut, les requêtes et les ensembles de résultat seront retournés
+en objets :doc:`/orm/entities`. Vous pouvez récupérer des tableaux basiques en
+désactivant l'hydratation::
 
     $query->hydrate(false);
 
-    // $data is ResultSet that contains array data.
+    // $data est le ResultSet qui contient le tableau de données.
     $data = $query->all();
 
 .. _table-find-first:
@@ -168,19 +170,20 @@ Cette approche remplace le ``find('first')`` des versions précédentes de
 CakePHP. Vous pouvez aussi utiliser la méthode ``get()`` si vous chargez les
 entities avec leur clé primaire.
 
-Getting a Count of Results
-==========================
+Récupérer un Nombre de Résultats
+================================
 
-Once you have created a query object, you can use the ``count()`` method to get
-a result count of that query::
+Une fois que vous avez créé un objet query, vous pouvez utiliser la méthode
+``count()`` pour récupérer un nombre de résultats de cette query::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
     $query = $articles->find('all', [
         'where' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
 
-See :ref:`query-count` for additional usage of the ``count()`` method.
+Consultez :ref:`query-count` pour l'utilisation supplémentaire de la méthode
+``count()``.
 
 .. _table-find-list:
 
@@ -188,11 +191,11 @@ Trouver les Paires de Clé/Valeur
 ================================
 
 C'est souvent pratique pour générer un tableau associatif de données à partir
-des données de votre applications. Par exemple, c'est très utile quand vous
+des données de votre application. Par exemple, c'est très utile quand vous
 créez des elements `<select>`. CakePHP fournit une méthode simple à utiliser
 pour générer des 'lists' de données::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list');
     $data = $query->toArray();
 
@@ -218,7 +221,7 @@ Quand vous appelez ``list``, vous pouvez configurer les champs utilisés pour
 la clé et la valeur avec respectivement les options ``idField`` et
 ``valueField``::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title'
     ]);
@@ -231,10 +234,10 @@ la clé et la valeur avec respectivement les options ``idField`` et
     ];
 
 Les résultats peuvent être groupés en des ensembles imbriqués. C'est utile
-quand vous voulez des ensemble bucketed ou que vous voulez construire des
+quand vous voulez des ensembles bucketed ou que vous voulez construire des
 elements ``<optgroup>`` avec FormHelper::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
         'idField' => 'slug', 'valueField' => 'title',
         'groupField' => ['author_id']
@@ -248,7 +251,7 @@ elements ``<optgroup>`` avec FormHelper::
             'second-article-i-wrote' => 'Second article I wrote',
         ],
         2 => [
-            // More data.
+            // Plus de données.
         ]
     ];
 
@@ -322,7 +325,7 @@ permettant de faire des requêtes complexes sans efforts. En supposant que
 vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
 ce qui suit::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
 
@@ -332,37 +335,40 @@ classes table, les méthodes finder peuvent aussi être définies sur les
 
 Si vous devez modifier les résultats après qu'ils ont été récupérés, vous
 pouvez utiliser une fonction :ref:`map-reduce` pour modifier les résultats.
-Les fonctionnalités de map reduce remplace le callback 'afterFind' qu'on
+Les fonctionnalités de map reduce remplacent le callback 'afterFind' qu'on
 avait dans les versions précédentes de CakePHP.
 
-Dynamic Finders
-===============
+Finders Dynamiques
+==================
 
-CakePHP's ORM provides dynamically constructed finder methods which allow you to
-easily express simple queries with no additional code. For example if you wanted
-to find a user by username you could do::
+L'ORM de CakePHP fournit des méthodes de finder construits dynamiquement qui
+vous permettent de facilement exprimer des requêtes simples avec aucun code
+supplémentaire. Par exemple si vous voulez trouver un utilisateur selon son
+uername, vous pourriez faire::
 
-    // The following two calls are equal.
+    // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
 
-When using dynamic finders you can constrain on multiple fields::
+Lors de l'utilisation de finders dynamiques, vous pouvez faire des contraintes
+sur plusieurs champs::
 
     $query = $users->findAllByUsernameAndApproved('joebob', 1);
 
-You can also create ``OR`` conditions::
+Vous pouvez aussi créer des conditions ``OR``::
 
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
-While you can use either OR or AND conditions, you cannot combine the two in
-a single dynamic finder. Other query options like ``contain`` are also not
-supported with dynamic finders. You should use :ref:`custom-find-methods` to
-encapsulate more complex queries.  Lastly, you can also combine dynamic finders
-with custom finders::
+Alors que vous pouvez utiliser des conditions OR ou AND, vous ne pouvez pas
+combiner les deux dans un finder unique dynanique. Les autres options de requête
+comme ``contain`` ne sont aussi pas supportées avec les finders dynamiques. Vous
+devrez utiliser :ref:`custom-find-methods` pour encapsuler plus de requêtes
+complexes. Dernier point, vous pouvez aussi combiner les finders dynamiques
+avec des finders personnalisés::
 
     $query = $users->findTrollsByUsername('bro');
 
-The above would translate into the following::
+Ce qui est au-dessus se traduirait dans ce qui suit::
 
     $users->find('trolls', [
         'conditions' => ['username' => 'bro']
@@ -370,68 +376,71 @@ The above would translate into the following::
 
 .. note::
 
-    While dynamic finders make it simple to express queries, they come with some
-    additional performance overhead.
+    Alors que les finders dynamiques facilitent la gestion des requêtes, ils
+    entraînent des coûts de performance supplémentaires.
 
-
-Eager Loading Associations
+Associations Eager Loading
 ==========================
 
-By default CakePHP does not load **any** associated data when using ``find()``.
-You need to 'contain' or eager-load each association you want loaded in your
-results.
+Par défaut, CakePHP ne charge **aucune** donnée associée lors de l'utilisation
+de ``find()``. Vous devez faire un 'contain' ou charger en eager chaque
+association que vous souhaitez charger dans vos résultats.
 
 .. start-contain
 
-Eager loading helps avoid many of the potential performance problems
-surrounding lazy-loading in an ORM. The queries generated by eager loading can
-better leverage joins, allowing more efficient queries to be made. In CakePHP
-you define eager loaded associations using the 'contain' method::
+Chaque chargement Eager évite plusieurs problèmes potentiels de chargement
+lors du chargement lazy dans un ORM. Les requêtes générées par le chargement
+eager peut entraîner des jointures leverage, permettant de faire des
+requêtes plus efficaces. Dans CakePHP vous définissez des associations chargées
+en eager en utilisant la méthode 'contain'::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
 
-    // As an option to find()
+    // En option du find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
-    // As a method on the query object
+    // En méthode sut un objet query
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments']);
 
-The above will load the related author and comments for each article in the
-result set. You can load nested associations using nested arrays to define the
-associations to be loaded::
+Ce qui est au-dessus va charger les auteur et commentaires liés pour chaque
+article de l'ensemble de résultats. Vous pouvez charger les associations
+imbriquées en utilisant les tableaux imbriqués pour définir les
+associations à charger::
 
     $query = $articles->find()->contain([
         'Authors' => ['Addresses'], 'Comments' => ['Authors']
     ]);
 
-Alternatively, you can express nested associations using the dot notation::
+D'une autre façon, vous pouvez exprimer des associations imbriquée en utilisant
+la notation par point::
 
     $query = $articles->find()->contain([
         'Authors.Addresses',
         'Comments.Authors'
     ]);
 
-You can eager load associations as deep as you like::
+Vous pouvez charger les associations en eager aussi profondément que vous le
+souhaitez::
 
     $query = $products->find()->contain([
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
 
-If you need to reset the containments on a query you can set the second argument
-to ``true``::
+Si vous avez besoin de remettre les contain sur une requête, vous pouvez
+définir le second argument à ``true``::
 
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
 
-Passing Conditions to Contain
------------------------------
+Passer des Conditions à Contain
+-------------------------------
 
-When using ``contain`` you are able to restrict the data returned by the
-associations and filter them by conditions::
+Avec l'utilisation de ``contain``, vous pouvez restreindre les données
+retournées par les associations et les filtrer par conditions::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
 
     $query = $articles->find()->contain([
         'Comments' => function ($q) {
@@ -443,12 +452,13 @@ associations and filter them by conditions::
 
 .. note::
 
-    When you limit the fields that are fetched from an association, you **must**
-    ensure that the foreign key columns are selected. Failing to select foreign
-    key fields will cause associated data to not be present in the final result.
+    Quand vous limitez les champs qui sont récupérés d'une association, vous
+    **devez** vous assurer que les colonnes de la clé étrangère soient
+    séléctionnées. Ne pas sélectionner les champs de clé étrangère va entraîner
+    la non présence des données associées dans le résultat final.
 
-It is also possible to restrict deeply nested associations using the dot
-notation::
+Il est aussi possible de restreindre les associations imbriquées profondément
+en utilisant la notation par point::
 
     $query = $articles->find()->contain([
         'Comments',
@@ -457,11 +467,11 @@ notation::
         }
     ]);
 
-If you have defined some custom finder methods in your associated table, you can
-use them inside ``contain``::
+Si vous avez défini certaines méthodes de finder personnalisées dans votre table
+associée, vous pouvez les utiliser à l'intérieur de ``contain``::
 
-    // Bring all articles, but only bring the comments that are approved and
-    // popular.
+    // Récupère tous les articles, mais récupère seulement les commentaires qui
+    // sont approuvés et populaires.
     $query = $articles->find()->contain([
         'Comments' => function ($q) {
            return $q->find('approved')->find('popular');
@@ -470,14 +480,15 @@ use them inside ``contain``::
 
 .. note::
 
-    For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
-    ``select`` clauses are used when loading the associated records. For the
-    rest of the association types you can use every clause that the query object
-    provides.
+    Pour les associations ``BelongsTo`` et ``HasOne``, seules les clauses
+    ``where`` et ``select`` sont utilisées lors du chargement des
+    enregistrements associés. Pour le reste des types d'association, vous pouvez
+    utiliser chaque clause que l'objet query fournit.
 
-If you need full control over the query that is generated, you can tell ``contain``
-to not append the ``foreignKey`` constraints to the generated query. In that
-case you should use an array passing ``foreignKey`` and ``queryBuilder``::
+Si vous devez prendre le contrôle total d'une requête qui est générée, vous
+pouvez appeler ``contain`` pou ne pas ajouter les contraintes ``foreignKey``
+à la requête générée. Dans ce cas, vous devez utiliser un tableau en passant
+``foreignKey`` et ``queryBuilder``::
 
     $query = $articles->find()->contain([
         'Authors' => [
@@ -488,49 +499,52 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         ]
     ]);
 
-If you have limited the fields you are loading with ``select()`` but also want to
-load fields off of contained associations, you can use ``autoFields()``::
+Si vous avez limité les champs que vous chargez avec ``select()`` mais aussi
+que vous souhaitez charger les champs en dehors d'associations avec contain,
+vous pouvez utiliser ``autoFields()``::
 
-    // Select id & title from articles, but all fields off of Users.
+    // Select id & title de articles, mais tous les champs de Users.
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
 
-Filtering by Associated Data
-----------------------------
+Filtrer par les Données Associées
+---------------------------------
 
-A fairly common query case with associations is finding records 'matching'
-specific associated data. For example if you have 'Articles belongsToMany Tags'
-you will probably want to find Articles that have the CakePHP tag. This is
-extremely simple to do with the ORM in CakePHP::
+Un cas de requête couramment fait avec les associations est de trouver les
+enregistrements qui 'matchent' les données associées spécifiques. Par exemple
+si vous avez 'Articles belongsToMany Tags', vous aurez probablement envie de
+trouver les Articles qui ont le tag CakePHP. C'est extrêmement simple
+de faire l'ORM dans CakePHP::
 
-    // In a controller or table method.
+    // Dans un controller ou table de méthode.
 
     $query = $articles->find();
     $query->matching('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
-You can apply this strategy to HasMany associations as well. For example if
-'Authors HasMany Articles', you could find all the authors with recently
-published articles using the following::
+Vous pouvez aussi appliquer cette stratégie aux associations HasMany. Par
+exemple si 'Authors HasMany Articles', vous pouvez trouver tous les auteurs
+avec les articles récemment publiés en utilisant ce qui suit::
 
     $query = $authors->find();
     $query->matching('Articles', function ($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtering by deep associations is surprisingly easy, and the syntax should be
-already familiar to you::
+Filtrer des associations profondes est étonnement facile, et la syntaxe doit
+être toujours familière pour vous::
 
-    // In a controller or table method.
+    // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
             return $q->where(['Country.name' => 'Japan'])
         }
     );
 
-    // Bring unique articles that were commented by 'markstory' using passed variable
+    // Récupère les articles uniques qui étaient commentés par 'markstory'
+    // en utilisant la variable passée
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username])
@@ -538,62 +552,68 @@ already familiar to you::
 
 .. note::
 
-    As this function will create an ``INNER JOIN``, you might want to consider
-    calling ``distinct`` on the find query as you might get duplicate rows if
-    your conditions don't filter them already. This might be the case, for example,
-    when the same users comments more than once on a single article.
+    Comme cette fonction va créer un ``INNER JOIN``, vous pouvez appeler
+    ``distinct`` sur le find de la requête puisque vous aurez des lignes
+    dupliquées si les conditions ne les filtrent pas déjà. Ceci peut être le
+    cas, par exemple, quand les mêmes utilisateurs commentent plus d'une fois
+    un article unique.
 
 .. end-contain
 
-Lazy Loading Associations
--------------------------
+Associations Chargées en Lazy
+-----------------------------
 
-While CakePHP makes it easy to eager load your associations, there may be cases
-where you need to lazy-load associations. You should refer to the
-:ref:`lazy-load-associations` section for more information.
+Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
+cas où vous devrez charger en lazy les associations. Vous devez vous référer
+à la section :ref:`lazy-load-associations` pour plus d'informations.
 
-Working with Result Sets
-========================
+Travailler avec des Ensembles de Résultat
+=========================================
 
-Once a query is executed with ``all()``, you will get an instance of
-:php:class:`Cake\\ORM\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from your queries.
+Une fois qu'une requête est exécutée avec ``all()``, vous récupèrerez une
+instance de :php:class:`Cake\\ORM\ResultSet`. Cet objet offre des manières
+puissantes de manipuler les données résultantes à partir de vos requêtes.
 
-Result set objects will lazily load rows from the underlying prepared statement.
-By default results will be buffered in memory allowing you to iterate a result
-set multiple times, or cache and iterate the results. If you need to disable
-buffering because you are working with a data set that does not fit into memory you
-can disable buffering on the query to stream results::
+Les objets d'ensemble de résultat vont charger en lazily les lignes à partir
+de la requête préparée underlying.
+Par défaut, les résultats seront buffered dans la mémoire vous permettant
+d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
+d'itérer les résultats. Si vous devez désactiver le buffering parce que vous
+travaillez sur un ensemble de données qui ne rentre pas dans la mémoire, vous
+pouvez désactiver le buffering sur la requête pour stream les résultats::
 
     $query->bufferResults(false);
 
 .. warning::
 
-    Streaming results is not possible when using SQLite, or queries with eager
-    loaded hasMany or belongsToMany associations.
+    Les résultats de streaming ne sont pas possibles quand vous utilisez
+    SQLite, ou avec les requêtes des associations hasMany ou belongsToMany
+    qui sont chargées en eager.
 
-Result sets allow you to easily cache/serialize or JSON encode results for API results::
+Les ensembles de résultat vous permettent de mettre en cache/serializer ou
+d'encoder en JSON les résultats pour les résultats d'une API::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
     $results = $query->all();
 
-    // Serialized
+    // Serializé
     $serialized = serialize($results);
 
     // Json
     $json = json_encode($results);
 
-Both serializing and JSON encoding result sets work as you would expect. The
-serialized data can be unserialized into a working result set. Converting to
-JSON respects hidden & virtual field settings on all entity objects
-within a result set.
+Les sérialisations et encodage en JSON des ensembles de résultats fonctionne
+comme vous pouvez vous attendre. Les données sérialisées peuvent être
+désérializées en un ensemble de résultats de travail. Convertir en JSON
+garde les configurations de champ caché & virtuel sur tous les objets
+entity dans un ensemble de résultat.
 
-In addition to making serialization easy, result sets are a 'Collection' object and
-support the same methods that :ref:`collection objects<collection-objects>`
-do. For example, you can extract a list of unique tags on a collection of
-articles quite easily::
+En plus de faciliter la sérialisation, les ensembles de résultats sont un
+objet 'Collection' et supportent les mêmes méthodes que les
+:ref:`objets collection<collection-objects>`. Par exemple, vous pouvez extraire
+une liste des tags uniques sur une collection d'articles assez facilement::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
     $articles = TableRegistry::get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
@@ -608,5 +628,6 @@ articles quite easily::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
-The :doc:`/core-libraries/collections` chapter has more detail on what can be
-done with result sets using the collections features.
+Le chapitre :doc:`/core-libraries/collections` a plus de détails sur ce qui
+peut être fait avec les ensembles de résultat en utilisant les fonctionnalités
+des collections.
