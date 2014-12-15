@@ -146,7 +146,7 @@ Aussi, ajoutez ce qui suit dans la configuration de ``Auth`` dans
 
     'authorize' => 'Controller',
 
-Votre méthoder ``initialize`` doit maintenant ressembler à ceci::
+Votre méthode ``initialize`` doit maintenant ressembler à ceci::
 
         public function initialize() {
             $this->loadComponent('Flash');
