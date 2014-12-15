@@ -3,7 +3,7 @@ Gestion des Erreurs et des Exceptions
 
 Un grand nombre de méthodes internes à PHP utilisent les erreurs pour
 communiquer les échecs. Ces erreurs devront être prise au piège et traitées.
-CakePHP fournit une récupération d'erreurs par défaut qui les affiche 
+CakePHP fournit une récupération d'erreurs par défaut qui les affiche
 et/ou les logger lorsqu'elles se produisent. Ce gestionnaire d'erreur est utilisé
 pour capturer des exceptions non interceptées des controllers et d'autres parties
 de votre application.
@@ -365,7 +365,7 @@ Créer vos Propres Exceptions dans votre Application
 
 Vous pouvez créer vos propres exceptions d'application en utilisant toute
 `exception SPL <http://php.net/manual/fr/spl.exceptions.php>`_ intégrée,
-``Exception`` lui-même, ou ::php:exc:`Cake\\Core\\Exception\\Exception`. 
+``Exception`` lui-même, ou ::php:exc:`Cake\\Core\\Exception\\Exception`.
 
 Si votre application contenait l'exception suivante::
 
@@ -496,13 +496,13 @@ Créer un Controller Personnalisé pour Gérer les Exceptions
 ----------------------------------------------------------
 
 Par convention CakePHP utilisera ``App\Controller\ErrorController`` si il existe.
-Implémenter cette classe vous offrira une voie de de personnaliser les pages
+Implémenter cette classe vous offrira une voie pour personnaliser les pages
 d'erreur sans aucune configuration supplémentaire.
 
 Si vous utilisez un moteur de rendu d'exceptions personnalisé, vous pouvez
 utiliser la méthode ``_getController`` pour rendre un controller personnalisé.
 En implémentant ``_getController`` dans votre moteur de rendu d'exceptions,
-vous pouvez utiliser n'importequel controller de votre choix::
+vous pouvez utiliser n'importe quel controller de votre choix::
 
     // Dans src/Error/AppExceptionRenderer
     namespace App\Error;

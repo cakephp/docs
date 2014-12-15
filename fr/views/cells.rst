@@ -95,8 +95,8 @@ Dans notre fichier de template, ajoutons ce qui suit::
 
     Les templates des cells ont une portée isolée et ne partage pas la même
     instance de View que celle utilisée pour rendre le template et le layout
-    de l'action du controller courant ou d'autres cells. Ils sont donc pas au
-    courant de tous les appels aux helpers ou aux blocs définis dans
+    de l'action du controller courant ou d'autres cells. Ils ne sont donc pas
+    au courant de tous les appels aux helpers ou aux blocs définis dans
     template / layout de l'action et vice versa.
 
 Charger les Cells
@@ -176,4 +176,3 @@ vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
     $cell = $this->cell('Inbox'); ?>
     $cell->template = 'messages';
     echo $cell;
-
