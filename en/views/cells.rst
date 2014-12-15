@@ -80,9 +80,17 @@ very much like a controller would.  We can use the ``loadModel()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
+    <!-- src/Template/Cell/Inbox/display.ctp -->
     <div class="notification-icon">
         You have <?= $unread_count ?> unread messages.
     </div>
+
+.. note::
+
+Cell templates have an isolated scope do not share the same View instance as the
+one used to render template and layout for the current controller action or
+other cells. Hence they are unaware of any helper calls made or blocks set in
+the action's template / layout and vice versa.
 
 Loading Cells
 =============
