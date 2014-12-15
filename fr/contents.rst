@@ -34,6 +34,7 @@ Contenu
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
+    controllers/components/authentication
     controllers/components/pagination
     plugins
     development/rest
