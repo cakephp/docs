@@ -265,7 +265,7 @@ data back::
     Configure::read('Company');
 
     // Yields:
-    array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 If $key is left null, all values in Configure will be returned.
 
@@ -357,7 +357,7 @@ will not ever overwrite the existing configuration.
 Creating or Modifying Configuration Files
 -----------------------------------------
 
-.. php:staticmethod:: dump($key, $config = 'default', $keys = array())
+.. php:staticmethod:: dump($key, $config = 'default', $keys = [])
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config

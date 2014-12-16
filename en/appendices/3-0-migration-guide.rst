@@ -370,7 +370,7 @@ Route
 -----
 
 * ``CakeRoute`` was re-named to ``Route``.
-* The signature of ``match()`` has changed to ``match($url, $context = array())``
+* The signature of ``match()`` has changed to ``match($url, $context = [])``
   See :php:meth:`Cake\\Routing\\Route::match()` for information on the new signature.
 
 Dispatcher Filters Configuration Changed
@@ -1144,10 +1144,10 @@ Inflector
   yielded significant performance improvements::
 
     // Instead of
-    Inflector::rules('transliteration', array(
+    Inflector::rules('transliteration', [
         '/ä|æ/' => 'ae',
         '/å/' => 'aa'
-    ));
+    ]);
 
     // You should use
     Inflector::rules('transliteration', [

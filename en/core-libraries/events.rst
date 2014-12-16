@@ -60,9 +60,9 @@ created. To keep your Orders model clean you could use events::
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $event = new Event('Model.Order.afterPlace', $this, array(
+                $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
-                ));
+                ]);
                 $this->eventManager()->dispatch($event);
                 return true;
             }
@@ -127,9 +127,9 @@ using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an i
 of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event::
 
     // Create a new event and dispatch it.
-    $event = new Event('Model.Order.afterPlace', $this, array(
+    $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
-    ));
+    ]);
     $this->eventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
@@ -212,10 +212,10 @@ function to do so::
 In addition to anonymous functions you can use any other callable type that PHP
 supports::
 
-    $events = array(
+    $events = [
         'email-sending' => 'EmailSender::sendBuyEmail',
-        'inventory' => array($this->InventoryManager, 'decrement'),
-    );
+        'inventory' => [$this->InventoryManager, 'decrement'],
+    ];
     foreach ($events as $callable) {
         $eventManager->attach($callable, 'Model.Order.afterPlace');
     }
@@ -245,22 +245,22 @@ method for callbacks, and declaring it in the ``implementedEvents`` function for
 event listeners::
 
     // Setting priority for a callback
-    $callback = array($this, 'doSomething');
+    $callback = [$this, 'doSomething'];
     $this->eventManager()->attach(
         $callback,
         'Model.Order.afterPlace',
-        array('priority' => 2)
+        ['priority' => 2]
     );
 
     // Setting priority for a listener
     class UserStatistic implements EventListenerInterface {
         public function implementedEvents() {
-            return array(
-                'Model.Order.afterPlace' => array(
+            return [
+                'Model.Order.afterPlace' => [
                     'callable' => 'updateBuyStatistic',
                     'priority' => 100
-                ),
-            );
+                ],
+            ];
         }
     }
 

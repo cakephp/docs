@@ -715,11 +715,11 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', array(
-            'connectOptions' => array(
+        $routes->resources('books', [
+            'connectOptions' => [
                 'routeClass' => 'ApiRoute',
-            )
-        );
+            ]
+        ];
     });
 
 .. index:: passed arguments

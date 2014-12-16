@@ -108,7 +108,7 @@ our index view might look like::
     // app/View/Recipes/xml/index.ctp
     // Do some formatting and manipulation on
     // the $recipes array.
-    $xml = Xml::fromArray(array('response' => $recipes));
+    $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
 When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::extensions()`,
