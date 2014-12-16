@@ -1439,30 +1439,30 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
 * ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
 * ``errorItem`` {{text}}
 * ``file`` {{name}}, {{attrs}}
+* ``formGroup`` {{label}}, {{input}}, {{error}}
 * ``formstart`` {{attrs}}
 * ``formend`` No variables are provided.
 * ``hiddenblock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputsubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioWrapper``  {{input}}, {{label}},
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``formGroup`` {{label}}, {{input}},
-* ``checkboxFormGroup`` {{input}}, {{label}},
 * ``inputContainer`` {{type}}, {{required}}, {{content}}
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``inputsubmit`` {{type}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioWrapper``  {{input}}, {{label}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
 
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating
