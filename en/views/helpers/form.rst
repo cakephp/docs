@@ -532,17 +532,14 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-      <div class="input select">
-          <label for="field">Field</label>
-          <select name="field" id="field">
-              <option value="">(choose one)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
-      </div>
+      <select name="field" id="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
 
   Options can also supplied as key-value pairs.
 
