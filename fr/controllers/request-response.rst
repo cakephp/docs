@@ -316,7 +316,7 @@ Travailler avec les Méthodes & Headers de HTTP
 
 .. php:method:: method()
 
-Retourne la méthode HTTP où la requête a été faite.
+Retourne la méthode HTTP où la requête a été faite::
 
     // Affiche POST
     echo $request->method();
