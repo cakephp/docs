@@ -373,7 +373,7 @@ which allows the native ``__toString()`` methods to work as normal::
         protected $_messageTemplate = 'Seems that %s is missing.';
     }
 
-    throw new MissingWidgetException(array('widget' => 'Pointy'));
+    throw new MissingWidgetException(['widget' => 'Pointy']);
 
 
 When caught by the built in exception handler, you would get a ``$widget``

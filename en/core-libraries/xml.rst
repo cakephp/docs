@@ -35,13 +35,13 @@ You can also build Xml objects from local files::
 
 You can also build Xml objects using an array::
 
-    $data = array(
-        'post' => array(
+    $data = [
+        'post' => [
             'id' => 1,
             'title' => 'Best post',
             'body' => ' ... '
-        )
-    );
+        ]
+    ];
     $xml = Xml::build($data);
 
 If your input is invalid the Xml class will throw an Exception::
@@ -78,9 +78,9 @@ Transforming an Array into a String of XML
 
 ::
 
-    $xmlArray = array('root' => array('child' => 'value'));
+    $xmlArray = ['root' => ['child' => 'value']];
     // You can use Xml::build() too.
-    $xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags'));
+    $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']);
     $xmlString = $xmlObject->asXML();
 
 Your array must have only one element in the "top level" and it can not be
@@ -88,28 +88,28 @@ numeric. If the array is not in this format, Xml will throw a Exception.
 Examples of invalid arrays::
 
     // Top level with numeric key
-    array(
-        array('key' => 'value')
-    );
+    [
+        ['key' => 'value']
+    ];
 
     // Multiple keys in top level
-    array(
+    [
         'key1' => 'first value',
         'key2' => 'other value'
-    );
+    ];
 
 
 By default array values will be output as XML tags, if you want to define
 attributes or text values you can should prefix the keys that are supposed to be
 attributes with ``@``. For value text, use ``@`` as the key::
 
-    $xmlArray = array(
-        'project' => array(
+    $xmlArray = [
+        'project' => [
             '@id' => 1,
             'name' => 'Name of project, as tag',
             '@' => 'Value of project'
-        )
-    );
+        ]
+    ];
     $xmlObject = Xml::fromArray($xmlArray);
     $xmlString = $xmlObject->asXML();
 
@@ -126,24 +126,24 @@ To use XML Namespaces, in your array you must create a key with name ``xmlns:``
 to generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
 the samples::
 
-    $xmlArray = array(
-        'root' => array(
+    $xmlArray = [
+        'root' => [
             'xmlns:' => 'http://cakephp.org',
             'child' => 'value'
-        )
-    );
+        ]
+    ];
     $xml1 = Xml::fromArray($xmlArray);
 
     $xmlArray(
-        'root' => array(
-            'tag' => array(
+        'root' => [
+            'tag' => [
                 'xmlns:pref' => 'http://cakephp.org',
-                'pref:item' => array(
+                'pref:item' => [
                     'item 1',
                     'item 2'
-                )
-            )
-        )
+                ]
+            ]
+        ]
     );
     $xml2 = Xml::fromArray($xmlArray);
 
@@ -169,7 +169,7 @@ your document type to add, remove, or manipulate child nodes::
 
     // Using DOMDocument
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-    $xml = Xml::build($myXmlOriginal, array('return' => 'domdocument'));
+    $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
 

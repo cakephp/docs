@@ -60,7 +60,7 @@ formatting such as tag lists::
     $data = "cakephp 'great framework' php";
     $result = String::tokenize($data, ' ', "'", "'");
     // Result contains
-    array('cakephp', "'great framework'", 'php');
+    ['cakephp', "'great framework'", 'php'];
 
 .. php:method:: parseFileSize(string $size, $default)
 
@@ -72,18 +72,18 @@ to an integer number of bytes::
 Formatting Strings
 ==================
 
-.. php:staticmethod:: insert($string, $data, $options = array())
+.. php:staticmethod:: insert($string, $data, $options = [])
 
 The insert method is used to create string templates and to allow
 for key/value replacements::
 
     String::insert(
         'My name is :name and I am :age years old.',
-        array('name' => 'Bob', 'age' => '65')
+        ['name' => 'Bob', 'age' => '65']
     );
     // Returns: "My name is Bob and I am 65 years old."
 
-.. php:staticmethod:: cleanInsert($string, $options = array())
+.. php:staticmethod:: cleanInsert($string, $options = [])
 
 Cleans up a ``String::insert`` formatted string with given $options
 depending on the 'clean' key in $options. The default method used
@@ -93,18 +93,18 @@ did not get replaced by ``String::insert``.
 
 You can use the following options in the options array::
 
-    $options = array(
-        'clean' => array(
+    $options = [
+        'clean' => [
             'method' => 'text', // or html
-        ),
+        ],
         'before' => '',
         'after' => ''
-    );
+    ];
 
 Wrapping Text
 =============
 
-.. php:staticmethod:: wrap($text, $options = array())
+.. php:staticmethod:: wrap($text, $options = [])
 
 Wraps a block of text to a set width, and indent blocks as well.
 Can intelligently wrap text so words are not sliced across lines::
@@ -129,7 +129,7 @@ supported options are:
 Highlighting Substrings
 =======================
 
-.. php:method:: highlight(string $haystack, string $needle, array $options = array() )
+.. php:method:: highlight(string $haystack, string $needle, array $options = [] )
 
 Highlights ``$needle`` in ``$haystack`` using the ``$options['format']`` string
 specified or a default string.
@@ -147,7 +147,7 @@ Example::
     echo $this->Text->highlight(
         $lastSentence,
         'using',
-        array('format' => '<span class="highlight">\1</span>')
+        ['format' => '<span class="highlight">\1</span>']
     );
 
     // Called as String
@@ -155,7 +155,7 @@ Example::
     echo String::highlight(
         $lastSentence,
         'using',
-        array('format' => '<span class="highlight">\1</span>')
+        ['format' => '<span class="highlight">\1</span>']
     );
 
 Output::
@@ -198,10 +198,10 @@ Example::
     echo $this->Text->truncate(
         'The killer crept forward and tripped on the rug.',
         22,
-        array(
+        [
             'ellipsis' => '...',
             'exact' => false
-        )
+        ]
     );
 
     // Called as String
@@ -209,10 +209,10 @@ Example::
     echo String::truncate(
         'The killer crept forward and tripped on the rug.',
         22,
-        array(
+        [
             'ellipsis' => '...',
             'exact' => false
-        )
+        ]
     );
 
 Output::
@@ -233,10 +233,10 @@ truncation would otherwise take place.
 ``$options`` is used to pass all extra parameters, and has the
 following possible keys by default, all of which are optional::
 
-    array(
+    [
         'ellipsis' => '...',
         'exact' => true
-    )
+    ]
 
 Example::
 
@@ -247,10 +247,10 @@ Example::
     echo $this->Text->tail(
         $sampleText,
         70,
-        array(
+        [
             'ellipsis' => '...',
             'exact' => false
-        )
+        ]
     );
 
     // Called as String
@@ -258,10 +258,10 @@ Example::
     echo String::tail(
         $sampleText,
         70,
-        array(
+        [
             'ellipsis' => '...',
             'exact' => false
-        )
+        ]
     );
 
 Output::

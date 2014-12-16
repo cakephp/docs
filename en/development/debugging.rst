@@ -46,7 +46,7 @@ Outputting Values
 Dump prints out the contents of a variable. It will print out all
 properties and methods (if any) of the supplied variable::
 
-    $foo = array(1,2,3);
+    $foo = [1,2,3];
 
     Debugger::dump($foo);
 
