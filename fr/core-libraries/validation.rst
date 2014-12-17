@@ -242,7 +242,7 @@ valeurs valides sont ``create`` et ``update``. L'utilisation d'une de ces
 valeurs va faire que la règle va s'appliquer seulement pour les opérations
 create ou update.
 
-En plus, vous pouvez fournir une fonction appelable qui va determiner si oui
+En plus, vous pouvez fournir une fonction appelable qui va déterminer si oui
 ou non, une règle particulière doit être appliquée::
 
     $validator->add('picture', 'file', [

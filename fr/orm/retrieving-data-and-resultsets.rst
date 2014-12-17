@@ -1,5 +1,5 @@
-Retrieving Data & Results Sets
-##############################
+Récupérer les Données et les Ensembles de Résultats
+###################################################
 
 .. php:namespace:: Cake\ORM
 
@@ -31,7 +31,7 @@ Vous pouvez faire ceci facilement en utilisant ``get()``::
         'contain' => ['Comments']
     ]);
 
-Si l'opération get ne trouve aucun résultats, une
+Si l'opération get ne trouve aucun résultat, une
 ``Cake\ORM\Error\RecordNotFoundException`` sera levée. Vous pouvez soit
 attraper cette exception vous-même, ou permettre à CakePHP de la convertir en
 une erreur 404.
@@ -360,7 +360,7 @@ Vous pouvez aussi créer des conditions ``OR``::
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
 Alors que vous pouvez utiliser des conditions OR ou AND, vous ne pouvez pas
-combiner les deux dans un finder unique dynanique. Les autres options de requête
+combiner les deux dans un finder unique dynamique. Les autres options de requête
 comme ``contain`` ne sont aussi pas supportées avec les finders dynamiques. Vous
 devrez utiliser :ref:`custom-find-methods` pour encapsuler plus de requêtes
 complexes. Dernier point, vous pouvez aussi combiner les finders dynamiques
@@ -454,7 +454,7 @@ retournées par les associations et les filtrer par conditions::
 
     Quand vous limitez les champs qui sont récupérés d'une association, vous
     **devez** vous assurer que les colonnes de clé étrangère soient
-    séléctionnées. Ne pas sélectionner les champs de clé étrangère va entraîner
+    sélectionnées. Ne pas sélectionner les champs de clé étrangère va entraîner
     la non présence des données associées dans le résultat final.
 
 Il est aussi possible de restreindre les associations imbriquées profondément
@@ -486,7 +486,7 @@ associée, vous pouvez les utiliser à l'intérieur de ``contain``::
     utiliser chaque clause que l'objet query fournit.
 
 Si vous devez prendre le contrôle total d'une requête qui est générée, vous
-pouvez appeler ``contain`` pou ne pas ajouter les contraintes ``foreignKey``
+pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
 à la requête générée. Dans ce cas, vous devez utiliser un tableau en passant
 ``foreignKey`` et ``queryBuilder``::
 
@@ -574,7 +574,7 @@ Une fois qu'une requête est exécutée avec ``all()``, vous récupèrerez une
 instance de :php:class:`Cake\\ORM\ResultSet`. Cet objet offre des manières
 puissantes de manipuler les données résultantes à partir de vos requêtes.
 
-Les objets d'ensemble de résultat vont charger en lazily les lignes à partir
+Les objets d'ensemble de résultat vont charger lazily les lignes à partir
 de la requête préparée underlying.
 Par défaut, les résultats seront buffered dans la mémoire vous permettant
 d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
@@ -628,6 +628,6 @@ une liste des tags uniques sur une collection d'articles assez facilement::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
-Le chapitre :doc:`/core-libraries/collections` a plus de détails sur ce qui
-peut être fait avec les ensembles de résultat en utilisant les fonctionnalités
-des collections.
+Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
+ce qui peut être fait avec les ensembles de résultat en utilisant les
+fonctionnalités des collections.

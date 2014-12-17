@@ -638,7 +638,7 @@ supplémentaires traversal qui convertissent tous les identifiers en objets
 La Mise en Cache de Metadata
 ============================
 
-L'ORM de CakePHP utilise la reflection de base de données pour determiner
+L'ORM de CakePHP utilise la reflection de base de données pour déterminer
 le schema, les indices et les clés étrangères de votre application. Comme
 cette metadata change peu fréquemment et peut être lourde à accéder, elle est
 habituellement mise en cache. Par défaut, les metadata sont stockées dans la

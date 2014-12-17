@@ -25,7 +25,7 @@ données de request. Vous pouvez convertir une entity unique en utilisant::
 
 Les données de request doivent suivre la structure de vos entities. Par exemple
 si vous avez un article, qui appartient à un utilisateur, et avez plusieurs
-commentaires, vos données de request devrait ressembler à ceci::
+commentaires, vos données de request devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -42,7 +42,7 @@ commentaires, vos données de request devrait ressembler à ceci::
 
 Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
 une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
-liste de données d'entity, vos données de request devrait ressembler à ceci::
+liste de données d'entity, vos données de request devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -54,7 +54,7 @@ liste de données d'entity, vos données de request devrait ressembler à ceci::
         ]
     ];
 
-Quand vous utilisez une liste d'ids, vos données de request devrait ressembler
+Quand vous utilisez une liste d'ids, vos données de request devraient ressembler
 à ceci::
 
     $data = [
@@ -147,7 +147,7 @@ Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des donnée
 de request directement dans une entity existante. Ceci a le désavantage que
 seuls les champs qui changent réellement seront sauvegardés, as opposed
 to sending all fields to the database to be persisted. Vous pouvez fusionner
-un tableau de données raw dans une entity existante en utilisant la méthode
+un tableau de données brutes dans une entity existante en utilisant la méthode
 ``patchEntity``::
 
     // Dans un controller.
@@ -160,7 +160,7 @@ Comme expliqué dans la section précédente, les données de request doivent su
 la structure de votre entity. La méthode ``patchEntity`` est également capable
 de fusionner les associations, par défaut seul les premiers niveaux
 d'associations sont fusionnés mais si vous voulez contrôler la liste des
-associations à fusionner ou fusionner des niveaux de plus en plus profond, vous
+associations à fusionner ou fusionner des niveaux de plus en plus profonds, vous
 pouvez utiliser le troisième paramètre de la méthode::
 
     // Dans un controller.
@@ -171,7 +171,7 @@ pouvez utiliser le troisième paramètre de la méthode::
     $articles->save($article);
 
 Les associations sont fusionnées en faisant correspondre le champ de clé
-primaire dans la source entities avec les champs correpondants dans le tableau
+primaire dans la source entities avec les champs correspondants dans le tableau
 de données. Pour des associations belongsTo et hasOne, les nouvelles entities
 seront construites si aucune entity précédente n'est trouvé pour la propriété
 cible.
@@ -198,7 +198,7 @@ mais une importante note doit être faîte.
 .. note::
 
     Pour les associations hasMany et belongsToMany, s'il y avait des entities
-    qui ne pouvaient pas correpondre avec leur clé primaire à aucun
+    qui ne pouvaient pas correspondre avec leur clé primaire à aucun
     enregistrement dans le tableau de données, alors ces enregistrements
     seraient annulés de l'entity résultante.
 
@@ -263,7 +263,7 @@ pas dans la liste::
     ]);
 
 Comme vous pouvez le voir, ceci permet aussi de créer des solutions lorsqu'une
-association a besoin d'être inmplémentée comme un ensemble unique.
+association a besoin d'être implémentée comme un ensemble unique.
 
 Vous pouvez aussi faire un patch de plusieurs entities en une fois. Les
 considérations faîtes pour les associations hasMany et belongsToMany
@@ -291,11 +291,11 @@ dans chacune des entities du tableau::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-Avoiding Property Mass Assignment Attacks
------------------------------------------
+Eviter les Attaques d'Assignement de Propriété de Masse
+-------------------------------------------------------
 
 Lors de la création ou la fusion des entities à partir des données de request,
- vous devez faire attention à ce que vous autorisez à changer ou à ajouter
+vous devez faire attention à ce que vous autorisez à changer ou à ajouter
 dans les entities à vos utilisateurs. Par exemple, en envoyant un tableau
 dans la request contenant ``user_id``, un pirate pourrait changer le
 propriétaire d'un article, ce qui entraînerait des effets indésirables::
@@ -307,7 +307,7 @@ propriétaire d'un article, ce qui entraînerait des effets indésirables::
 
 Il y a deux façons de se protéger pour ce problème. La première est de définir
 les colonnes par défaut qui peuvent être définies en toute sécurité à partir
-d'une request en utilisant la fonctionnalité de :ref:`entities-mass-assignment`
+d'une request en utilisant la fonctionnalité d':ref:`entities-mass-assignment`
 dans les entities.
 
 La deuxième façon est d'utiliser l'option ``fieldList`` lors de la création ou
@@ -358,7 +358,7 @@ passer dans ``save()``. Pare exemple::
       // ...
   }
 
-L'ORM utilise la méthode ``isNew()`` sur une entity pour determiner si oui ou
+L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
 ``isNew()`` retourne ``null`` et que l'entity a une valeur de clé primaire,
 une requête 'exists' sera faîte.
@@ -633,7 +633,7 @@ replace
     sauvegarder, ces liens seront mis à jour, non supprimés et re-sauvegardés.
 
 Par défaut la stratégie ``replace`` est utilisée. Quand vous avez de nouveaux
-enregistrement dans une association existante, vous devez toujours marquer
+enregistrements dans une association existante, vous devez toujours marquer
 la propriété de l'association en 'dirty'. Ceci dit à l'ORM que la propriété
 de l'association doit persister::
 
@@ -719,7 +719,7 @@ représentation JSON::
 Lors de l'utilisation de types complexes, il est important de valider que les
 données que vous recevez de l'utilisateur finale est de type correct. Ne pas
 faire correctement la gestion des données complexes entraînera chez des
-utilisateurs mal intentionnés d'être capable de stocker des données qu'il ne
+utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
 pourraient pas stocker normalement.
 
 Mises à Jour en Masse

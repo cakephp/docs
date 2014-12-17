@@ -20,7 +20,7 @@ Quand vous supprimez des entities, quelques actions se passent:
    arrêté, la suppression sera abandonnée et les résultats de l'événement seront
    retournés.
 2. L'entity sera supprimée.
-3. Toutes les associations dépendentes seront supprimées. Si les associations
+3. Toutes les associations dépendantes seront supprimées. Si les associations
    sont supprimées en tant qu'entities, des événements supplémentaires seront
    dispatched.
 4. Tout enregistrement de table jointe pour les associations BelongsToMany
@@ -71,7 +71,7 @@ suppression en masse pour retirer plusieurs lignes en une fois::
         return $this->deleteAll(['is_spam' => true]);
     }
 
-Une suppression en masse va être considerée comme réussie si 1 ou plusieurs
+Une suppression en masse va être considérée comme réussie si 1 ou plusieurs
 lignes ont été supprimées.
 
 .. warning::
