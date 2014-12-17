@@ -12,7 +12,7 @@ de requêtes.
 
 CakePHP fournit une interface propre et extensible pour de tels cas pour
 attacher les filtres au cycle de dispatchement, de la même façon qu'une
-couce middleware pour fournir des services empilables ou des routines
+couche middleware pour fournir des services empilables ou des routines
 pour chaque requête. Nous les appelons `Dispatcher Filters`.
 
 Configurer les Filtres
@@ -73,9 +73,9 @@ de PHP5.3 d'attacher des fonctions anonymes en tant que filtres::
 
 La clé ``on`` prend seulement ``before`` et ``after`` comme valeurs valides,
 et cela signifie bien évidemment si le filtre doit être lancé avant ou après
-que tout code du controller soit executé. En plus de définir les filtres avec
+que tout code du controller soit exécuté. En plus de définir les filtres avec
 la clé ``callable``, vous pouvez aussi définir une priorité pour vos filtres,
-si aucun n'est spécifié alors par défaut ``10`` et séléctionné pour vous.
+si aucun n'est spécifié alors par défaut ``10`` et sélectionné pour vous.
 
 Puisque tous les filtres auront une priorité par défaut à ``10``, vous aurez
 envie de lancer un filtre avant tout autre dans la liste, sélectionner des
@@ -134,7 +134,7 @@ Classes Filter
 Les filtres de Dispatcher, quand définis en tant que noms de classe dans
 configuration, doivent étendre la classe ``DispatcherFilter`` fournie
 dans le répertoire `Routing` de CakePHP.
-Créeons un simple filtre pour répondre à une URL spécifique avec un texte
+Créons un simple filtre pour répondre à une URL spécifique avec un texte
 'Hello World'::
 
     App::uses('DispatcherFilter', 'Routing');
@@ -162,7 +162,7 @@ de choses à expliquer ici, commençons avec la valeur ``$priority``.
 Comme mentionné avant, quand vous utilisez les classes de filtre,
 vous pouvez seulement définir l'ordre dans lequel elles sont lancées en
 utilisant la propriété ``$priority`` dans la classe, la valeur par défaut est
-10 si la propriété est déclarée, cela signifie qu'il sera executé _après_ que
+10 si la propriété est déclarée, cela signifie qu'il sera exécuté _après_ que
 la classe de Router a parsé la requête. Nous ne voulons pas que cela
 arrive dans notre exemple précédent, parce que probablement, vous n'avez pas
 de controller configuré pour répondre à cette URL, donc nous avons choisi
@@ -170,7 +170,7 @@ de controller configuré pour répondre à cette URL, donc nous avons choisi
 
 ``DispatcherFilter`` propose deux méthodes qui peuvent être écrasées dans des
 sous-classes, elles sont ``beforeDispatch`` et ``afterDispatch``, et sont
-exécutées respectivement avant ou après que tout controller soit executé.
+exécutées respectivement avant ou après que tout controller soit exécuté.
 Les deux méthodes reçoivent un objet  :php:class:`CakeEvent` contenant
 les objets ``request`` et ``response``
 (instances :php:class:`CakeRequest` et :php:class:`CakeResponse`) avec
@@ -184,7 +184,7 @@ et retourner un objet comme cela en réponse immédiatement au client. Nous
 avons aussi ajouté ``$event->stopPropagation()`` pour empêcher d'autres
 filtres d'être exécuté après celui-ci.
 
-Créeons maintenant un autre filtre pour modifier les headers de réponse dans
+Créons maintenant un autre filtre pour modifier les headers de réponse dans
 toute page publique, dans notre cas, ce serait tout ce qui est servi à
 partir de ``PagesController``::
 
@@ -251,7 +251,7 @@ cas où vous auriez besoin de trim au plus gros possible à partir de
 certaines requêtes.
 
 Pour des raisons évidentes, ceci a le potentiel de rendre la maintenance de
-votre app très difficile. Les filtres sont un outil extrèmement puissant
+votre app très difficile. Les filtres sont un outil extrêmement puissant
 quand on les utilise sagement, ajoutez les gestionnaires de réponse
 pour chaque URL dans votre app n'est pas une bonne utilisation pour cela. Mais
 si vous avez une raison valide de le faire, alors vous avez une solution
