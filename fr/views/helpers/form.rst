@@ -560,19 +560,16 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <div class="input select">
-          <label for="field">Field</label>
-          <select name="field" id="field">
-              <option value="">(choisissez)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
-      </div>
+      <select name="field" id="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
 
-    Les options peuvent aussi fournir une paire de clé-valeur.
+  Les options peuvent aussi fournir une paire de clé-valeur.
 
 * ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
   radios) un input caché est créé. Ainsi, la clé dans $this->request->data
@@ -1489,31 +1486,30 @@ suivantes:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
 * ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
 * ``errorItem`` {{text}}
 * ``file`` {{name}}, {{attrs}}
+* ``formGroup`` {{label}}, {{input}}, {{error}}
 * ``formstart`` {{attrs}}
 * ``formend`` No variables are provided.
 * ``hiddenblock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputsubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioWrapper``  {{input}}, {{label}},
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``formGroup`` {{label}}, {{input}},
-* ``checkboxFormGroup`` {{input}}, {{label}},
 * ``inputContainer`` {{type}}, {{required}}, {{content}}
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
-* ``submitContainer`` {{content}}{{required}}, {{content}}, {{error}}
+* ``inputsubmit`` {{type}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioWrapper``  {{input}}, {{label}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
