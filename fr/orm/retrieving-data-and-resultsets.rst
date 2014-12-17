@@ -341,10 +341,10 @@ avait dans les versions précédentes de CakePHP.
 Finders Dynamiques
 ==================
 
-L'ORM de CakePHP fournit des méthodes de finder construits dynamiquement qui
-vous permettent de facilement exprimer des requêtes simples avec aucun code
-supplémentaire. Par exemple si vous voulez trouver un utilisateur selon son
-uername, vous pourriez faire::
+L'ORM de CakePHP fournit des méthodes de finder construites dynamiquement qui
+vous permettent de facilement exprimer des requêtes simples sans aucun code
+supplémentaire. Par exemple si vous vouliez trouver un utilisateur selon son
+username, vous pourriez faire::
 
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
@@ -403,7 +403,7 @@ en eager en utilisant la méthode 'contain'::
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments']);
 
-Ce qui est au-dessus va charger les auteur et commentaires liés pour chaque
+Ce qui est au-dessus va charger les auteurs et commentaires liés pour chaque
 article de l'ensemble de résultats. Vous pouvez charger les associations
 imbriquées en utilisant les tableaux imbriqués pour définir les
 associations à charger::
@@ -412,7 +412,7 @@ associations à charger::
         'Authors' => ['Addresses'], 'Comments' => ['Authors']
     ]);
 
-D'une autre façon, vous pouvez exprimer des associations imbriquée en utilisant
+D'une autre façon, vous pouvez exprimer des associations imbriquées en utilisant
 la notation par point::
 
     $query = $articles->find()->contain([
@@ -453,7 +453,7 @@ retournées par les associations et les filtrer par conditions::
 .. note::
 
     Quand vous limitez les champs qui sont récupérés d'une association, vous
-    **devez** vous assurer que les colonnes de la clé étrangère soient
+    **devez** vous assurer que les colonnes de clé étrangère soient
     séléctionnées. Ne pas sélectionner les champs de clé étrangère va entraîner
     la non présence des données associées dans le résultat final.
 
@@ -515,7 +515,7 @@ Un cas de requête couramment fait avec les associations est de trouver les
 enregistrements qui 'matchent' les données associées spécifiques. Par exemple
 si vous avez 'Articles belongsToMany Tags', vous aurez probablement envie de
 trouver les Articles qui ont le tag CakePHP. C'est extrêmement simple
-de faire l'ORM dans CakePHP::
+à faire avec l'ORM de CakePHP::
 
     // Dans un controller ou table de méthode.
 
@@ -534,7 +534,7 @@ avec les articles récemment publiés en utilisant ce qui suit::
     });
 
 Filtrer des associations profondes est étonnement facile, et la syntaxe doit
-être toujours familière pour vous::
+déjà vous être familière::
 
     // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
