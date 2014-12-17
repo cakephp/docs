@@ -166,7 +166,9 @@ global site statistics. This is a great place to use a listener class. Doing so
 allows you concentrate the statistics logic in one place and react to events as
 necessary. Our ``UserStatistics`` listener might start out like::
 
+    // In app/Lib/Event/UserStatistic.php
     App::uses('CakeEventListener', 'Event');
+
     class UserStatistic implements CakeEventListener {
 
         public function implementedEvents() {
@@ -187,6 +189,32 @@ necessary. Our ``UserStatistics`` listener might start out like::
 As you can see in the above code, the ``attach`` function will accept instances
 of the ``CakeEventListener`` interface. Internally, the event manager will use
 ``implementedEvents`` to attach the correct callbacks.
+
+Registering Global Listeners
+----------------------------
+
+As shown in the example above, event listeners are conventionally placed in
+``app/Lib/Event``. Following this convention allows you to easily locate your
+listener classes. It is also recommended that you attach global listeners during
+your application bootstrap process::
+
+    // In app/Config/bootstrap.php
+
+    // Load the global event listeners.
+    require_once APP . 'Config' . DS . 'events.php'
+
+An example events bootstrap file for our cart application could look like::
+
+    // In app/Config/events.php
+
+    // Load event listeners
+    App::uses('UserStatistic', 'Lib/Event');
+    App::uses('ProductStatistic', 'Lib/Event');
+    App::uses('CakeEventManager', 'Event');
+
+    // Attach listeners.
+    CakeEventManager::instance()->attach(new UserStatistic());
+    CakeEventManager::instance()->attach(new ProductStatistic());
 
 Registering Anonymous Listeners
 -------------------------------
