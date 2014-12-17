@@ -263,7 +263,7 @@ Le paramètre ``$options`` est là où réside la réelle magie de cette méthod
 Formatage Des Différences
 =========================
 
-.. php:method:: formatDelta(mixed $value, mixed $options=array())
+.. php:method:: formatDelta(mixed $value, mixed $options=[])
 
 Cette méthode affiche les différences en valeur comme un nombre signé::
 

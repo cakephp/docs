@@ -286,7 +286,7 @@ write() ci-dessus, nous pouvons lire cette donnée::
     Configure::read('Company');
 
     //yields:
-    array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 Si $key est laissé à null, toutes les valeurs dans Configure seront
 retournées.

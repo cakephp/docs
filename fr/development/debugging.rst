@@ -44,16 +44,16 @@ Affichage des Valeurs
 Dump affiche le contenu d'une variable. Elle affiche toutes les propriétés
 et méthodes (si il y en a) de la variable fournie:::
 
-    $foo = array(1,2,3);
+    $foo = [1,2,3];
 
     Debugger::dump($foo);
 
     // Outputs
-    array(
+    [
         1,
         2,
         3
-    )
+    ]
 
     // Simple object
     $car = new Car();
@@ -118,7 +118,7 @@ de lignes $context autour. ::
         [0] => <code><span style="color: #000000"> * @access public</span></code>
         [1] => <code><span style="color: #000000"> */</span></code>
         [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-        [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
+        [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = [];</span></code></span>
         [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
     )
 

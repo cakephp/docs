@@ -390,7 +390,7 @@ fonctionner normalement::
         protected $_messageTemplate = 'Il semblerait que %s soit manquant.';
     }
 
-    throw new MissingWidgetException(array('widget' => 'Pointy'));
+    throw new MissingWidgetException(['widget' => 'Pointy']);
 
 Lorsque le gestionnaire d'exception intégré attrapera l'exception, vous
 obtiendriez une variable ``$widget`` dans votre template de vue d'erreur.

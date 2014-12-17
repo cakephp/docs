@@ -148,9 +148,9 @@ instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
 d'un evenement::
 
     // Créé un nouvel évènement et le dispatch.
-    $event = new Event('Model.Order.afterPlace', $this, array(
+    $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
-    ));
+    ]);
     $this->eventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` accepte 3 arguments dans son constructeur. Le
@@ -241,10 +241,10 @@ anonyme simple pour le faire::
 En plus des fonctions anonymes, vous pouvez utiliser tout autre type callable
 que PHP supporte::
 
-    $events = array(
+    $events = [
         'email-sending' => 'EmailSender::sendBuyEmail',
-        'inventory' => array($this->InventoryManager, 'decrement'),
-    );
+        'inventory' => [$this->InventoryManager, 'decrement'],
+    ];
     foreach ($events as $callable) {
         $eventManager->attach($callable, 'Model.Order.afterPlace');
     }
@@ -275,22 +275,22 @@ utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
 la fonction ``implementedEvents`` pour les listeners d'évènement::
 
     // Définir la priorité pour une callback
-    $callback = array($this, 'doSomething');
+    $callback = [$this, 'doSomething'];
     $this->eventManager()->attach(
         $callback,
         'Model.Order.afterPlace',
-        array('priority' => 2)
+        ['priority' => 2]
     );
 
     // Définir la priorité pour un listener
     class UserStatistic implements EventListener {
         public function implementedEvents() {
-            return array(
-                'Model.Order.afterPlace' => array(
+            return [
+                'Model.Order.afterPlace' => [
                     'callable' => 'updateBuyStatistic',
                     'priority' => 100
-                ),
-            );
+                ],
+            ];
         }
     }
 

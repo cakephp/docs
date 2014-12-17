@@ -54,12 +54,12 @@ API de Folder
 .. php:attr:: sort
 
     Dit si la liste des résultats doit être oui ou non rangée par name.
-    
+
 .. php:attr:: mode
 
     Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne
     fait rien sur les machines windows.
-    
+
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
     Retourne $path avec $element ajouté, avec le bon slash entre-deux::
@@ -94,19 +94,19 @@ API de Folder
 
     Copie de façon récursive un répertoire. Le seul paramètre $options peut
     être soit un chemin à copier soit un tableau d'options::
-    
+
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
         // mettra le folder1 et tout son contenu dans folder2
 
         $folder = new Folder('/path/to/folder');
-        $folder->copy(array(
+        $folder->copy([
             'to' => '/path/to/new/folder',
             'from' => '/path/to/copy/from', // Will cause a cd() to occur
             'mode' => 0755,
-            'skip' => array('skip-me.php', '.git'),
+            'skip' => ['skip-me.php', '.git'],
             'scheme' => Folder::SKIP  // Ne fait pas les répertoires/fichiers qui existent déjà.
-        ));
+        ]);
 
     y a 3 schémas supportés:
 
@@ -279,7 +279,7 @@ API de Folder
 
 .. php:staticmethod:: slashTerm(string $path)
 
-    Retourne $path avec le slash ajouté à la fin (corrigé pour 
+    Retourne $path avec le slash ajouté à la fin (corrigé pour
     Windows ou d'autres OS).
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)

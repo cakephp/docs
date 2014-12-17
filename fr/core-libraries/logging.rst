@@ -229,9 +229,9 @@ vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
 par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`::
 
-    CakeLog::config('default', array(
+    CakeLog::config('default', [
         'engine' => 'Syslog'
-    ));
+    ]);
 
 Le tableau de configuration accepté pour le moteur de journalisation Syslog
 comprend les clés suivantes:

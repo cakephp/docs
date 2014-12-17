@@ -746,11 +746,11 @@ la fonction ``resources()`` pour fournir une configuration personnalisée utilis
 par ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', array(
-            'connectOptions' => array(
+        $routes->resources('books', [
+            'connectOptions' => [
                 'routeClass' => 'ApiRoute',
-            )
-        );
+            ]
+        ];
     });
 
 .. index:: passed arguments

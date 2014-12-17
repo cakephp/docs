@@ -421,7 +421,7 @@ Route
 -----
 
 * ``CakeRoute`` a été renommée en ``Route``.
-* La signature de ``match()`` a changé en ``match($url, $context = array())``
+* La signature de ``match()`` a changé en ``match($url, $context = [])``
   Consultez :php:meth:`Cake\\Routing\\Route::match()` pour plus d'informations
   sur la nouvelle signature.
 
@@ -1276,10 +1276,10 @@ Inflector
   performances significatives::
 
     // Au lieu de
-    Inflector::rules('transliteration', array(
+    Inflector::rules('transliteration', [
         '/ä|æ/' => 'ae',
         '/å/' => 'aa'
-    ));
+    ]);
 
     // Vous devrez utiliser
     Inflector::rules('transliteration', [

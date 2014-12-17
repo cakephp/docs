@@ -111,7 +111,7 @@ Voici ce que notre vue index pourrait ressembler à::
     <!-- src/Template/Recipes/xml/index.ctp -->
     // Faire du formatage et de la manipulation sur le tableau
     // $recipes.
-    $xml = Xml::fromArray(array('response' => $recipes));
+    $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
 Quand vous servez le type de contenu spécifique en utilisant parseExtensions(),

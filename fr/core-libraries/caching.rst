@@ -62,7 +62,7 @@ le fichier ``config/app.php`` est le lieu approprié pour cette configuration.
 Vous pouvez configurer autant de configurations de cache dont vous avez besoin,
 et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne.
-``_cake_core_`` est utilisé pour stocker des carte de fichiers, et les 
+``_cake_core_`` est utilisé pour stocker des carte de fichiers, et les
 résultat parsés des fichiers de
 :doc:`traduction </core-libraries/internationalization-and-localization>` .
 ``_cake_model_``, est utilisé pour stocker les schémas des models de vos
@@ -108,20 +108,20 @@ supplémentaires en tant qu'arguments de query string.
 Vous pouvez également configurer les moteurs de cache pendant l'exécution::
 
     // Utilisation d'un nom court
-    Cache::config('short', array(
+    Cache::config('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
         'prefix' => 'cake_short_'
-    ));
+    ]);
 
     // Utilisation d'un espace de nom complet.
-    Cache::config('long', array(
+    Cache::config('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
-    ));
+    ]);
 
     // utilisation d'un objet.
     $object = new FileEngine($config);
@@ -198,7 +198,7 @@ Ecrire Plusieurs Clés d'un Coup
 .. php:staticmethod:: writeMany($data, $config = 'default')
 
 Vous pouvez avoir besoin d'écrire clés du cache plusieurs à la fois. Bien que
-vous pouvez utiliser de multiples appels à ``write()``, ``writeMany()`` permet 
+vous pouvez utiliser de multiples appels à ``write()``, ``writeMany()`` permet
 à CakePHP l'utilisation d'une API de stockage plus efficace quand cela est
 possible. Par exemple utiliser ``writeMany()`` permet de gagner de nombreuses
 connections réseau lors de l'utilisation de Memcached::
@@ -239,7 +239,7 @@ Lire depuis un Cache
 
 .. php:staticmethod:: read($key, $config = 'default')
 
-``Cache::read()``  est utilisée pour lire la valeur mise en cache stocké sous 
+``Cache::read()``  est utilisée pour lire la valeur mise en cache stocké sous
 ``$key`` dans la ``$config``. Si ``$config`` est null la configuration par
 défaut sera utilisée. ``Cache::read()`` renverra la valeur mise en cache si le
 cache est valide ou ``false`` si le cache a expiré ou n'existe pas. Le contenu
@@ -476,10 +476,10 @@ comme une app/libs ou dans
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
 notation par points de plugin. ::
 
-    Cache::config('custom', array(
+    Cache::config('custom', [
         'engine' => 'CachePack.MyCustomCache',
         // ...
-    ));
+    ]);
 
 Les moteurs de cache personnalisés doivent étendre
 :php:class:`Cake\\Cache\\CacheEngine` qui définit un certain nombre de méthodes
