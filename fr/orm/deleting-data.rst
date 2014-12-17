@@ -1,5 +1,5 @@
-Deleting Data
-#############
+Supprimer des Données
+#####################
 
 .. php:namespace:: Cake\ORM
 
@@ -7,38 +7,42 @@ Deleting Data
 
 .. php:method:: delete(Entity $entity, $options = [])
 
-Once you've loaded an entity you can delete it by calling the originating
-table's delete method::
+Une fois que vous avez chargé une entity, vous pouvez la supprimer en appelant
+la méthode delete de la table d'origine::
 
     // Dans un controller.
     $entity = $articles->get(2);
     $result = $articles->delete($entity);
 
-When deleting entities a few things happen:
+Quand vous supprimez des entities, quelques actions se passent:
 
-1. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
-   delete will be aborted and the event's result will be returned.
-2. The entity will be deleted.
-3. All dependent associations will be deleted. If associations are being deleted
-   as entities, additional events will be dispatched.
-4. Any junction table records for BelongsToMany associations will be removed.
-5. The ``Model.afterDelete`` event will be triggered.
+1. L'événement ``Model.beforeDelete`` est déclenché. Si cet événement est
+   arrêté, la suppression sera abandonnée et les résultats de l'événement seront
+   retournés.
+2. L'entity sera supprimée.
+3. Toutes les associations dépendantes seront supprimées. Si les associations
+   sont supprimées en tant qu'entities, des événements supplémentaires seront
+   dispatched.
+4. Tout enregistrement de table jointe pour les associations BelongsToMany
+   seront retirées.
+5. L'événement ``Model.afterDelete`` sera déclenché.
 
-By default all deletes happen within a transaction. You can disable the
-transaction with the atomic option::
+Par défaut, toutes les suppressions se passent dans une transaction. Vous
+pouvez désactiver la transaction avec l'option atomic::
 
     $result = $articles->delete($entity, ['atomic' => false]);
 
-Cascading Deletes
------------------
+Suppression en Cascade
+----------------------
 
-When deleting entities, associated data can also be deleted. If your HasOne and
-HasMany associations are configured as ``dependent``, delete operations will
-'cascade' to those entities as well. By default entities in associated tables
-are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
-have the ORM load related entities, and delete them individually by setting the
-``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
-these options enabled would be::
+Quand les entities sont supprimées, les données associées peuvent aussi être
+supprimées. Si vos associations HasOne et HasMany sont configurées avec
+``dependent``, les opérations de suppression se feront aussi en 'cascade'
+sur leurs entitites. Par défaut, les entities dans les tables associées sont
+retirées en utilisant :php:meth:`~Cake\\ORM\Table::deleteAll()`. Vous pouvez
+choisir que l'ORM charge les entities liées et les supprime individuellement
+en configurant l'option ``cascadeCallbacks`` à ``true``. Un exemple
+d'association HasMany avec ces deux options activées serait::
 
     // Dans une méthode initialize de Table.
     $this->hasMany('Comments', [
@@ -48,27 +52,30 @@ these options enabled would be::
 
 .. note::
 
-    Setting ``cascadeCallbacks`` to ``true``, results in considerably slower deletes
-    when compared to bulk deletes. The cascadeCallbacks option should only be
-    enabled when your application has important work handled by event listeners.
+    Définir ``cascadeCallbacks`` à ``true``, entrainera  des lenteurs
+    supplémentaires des suppressions par rapport aux suppressions de masse.
+    L'option cascadeCallbacks doit seulement être activée quand votre
+    application a un travail important de gestion des écouteurs d'événements.
 
-Bulk Deletes
-------------
+Suppressions en Masse
+---------------------
 
 .. php:method:: deleteAll($conditions)
 
-There may be times when deleting rows one by one is not efficient or useful.
-In these cases it is more performant to use a bulk-delete to remove many rows at
-once::
+Il peut arriver des fois où la suppression de lignes une par une n'est pas
+efficace ou utile. Dans ces cas, il est plus performant d'utiliser une
+suppression en masse pour retirer plusieurs lignes en une fois::
 
-    // Delete all the spam
+    // Supprime tous les spams
     function destroySpam() {
         return $this->deleteAll(['is_spam' => true]);
     }
 
-A bulk-delete will be considered successful if 1 or more rows are deleted.
+Une suppression en masse va être considérée comme réussie si 1 ou plusieurs
+lignes ont été supprimées.
 
 .. warning::
 
-    deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
-    first load a collection of records and delete them.
+    deleteAll *ne* va *pas* déclencher les événements beforeDelete/afterDelete.
+    Si vous avez besoin d'eux, chargez d'abord une collection d'enregistrements
+    et supprimez les.

@@ -85,7 +85,7 @@ Améliorer les performances de votre application
 ===============================================
 
 Le chargement des classes peut facilement prendre une bonne part du temps
-d'execution de votre application. Afin d'éviter ce problème, il est recommandé
+d'exécution de votre application. Afin d'éviter ce problème, il est recommandé
 que vous lanciez cette commande dans votre serveur de production une fois
 que l'application est déployée::
 

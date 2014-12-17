@@ -8,10 +8,10 @@ de s'insérer dans le cycle de vie des callbacks que les models émettent, tout 
 fournissant des fonctionnalités de type trait.
 
 Les Behaviors fournissent une façon pratique de packager un behavior qui est
-commun à plusieurs models. Par exemple, CakePHP inclut un ``TimestampBehavior``.
-Plusieurs models voudront des champs timestamp, et la logique pour gérer ces
-champs n'est pas spécifique à un seul model. C'est dans ce genre de scénario
-que les behaviors sont utiles.
+commun à plusieurs models. Par exemple, CakePHP intègre un
+``TimestampBehavior``. Plusieurs models voudront des champs timestamp, et la
+logique pour gérer ces champs n'est pas spécifique à un seul model. C'est dans
+ce genre de scénario que les behaviors sont utiles.
 
 Utiliser les Behaviors
 ======================
@@ -88,7 +88,7 @@ Définir les Méthodes Mixin
 --------------------------
 
 Toute méthode public définie sur un behavior sera ajoutée en méthode 'mixin'
-sur l'objet table sur laquelle elle est attachée. Si vous attachez deux
+sur l'objet table sur laquelle il est attaché. Si vous attachez deux
 behaviors qui fournissent les mêmes méthodes, une exception sera levée.
 Si un behavior fournit la même méthode en classe de table, la méthode du
 behavior ne sera pas appelable à partir de la table. Les méthodes mixin de
@@ -109,8 +109,8 @@ Limiter ou renommer les Méthodes Mixin Exposed
 Lors de la création de behaviors, il peut y avoir des situations où vous ne
 voulez pas montrer les méthodes public en méthodes mixin. Dans ces cas, vous
 pouvez utiliser la clé de configuration ``implementedMethods`` pour renommer
-ou exclure les méthodes mixin. Par exemple si vous voulez préfixer notre méthode
-slug(), nous pourrions faire ce qui suit::
+ou exclure les méthodes mixin. Par exemple si nous voulions préfixer notre
+méthode slug(), nous pourrions faire ce qui suit::
 
     public $_defaultConfig = [
         'implementedMethods' => [
@@ -121,7 +121,7 @@ slug(), nous pourrions faire ce qui suit::
 Appliquer cette configuration rendra votre ``slug()`` non appelable, cependant
 elle va ajouter une méthode mixin ``superSlug()`` à la table. Cependant, si
 notre behavior implémentait d'autres méthodes public, elles **n'auraient** pas
-été disponible en méthodes mixin avec la configuration ci-dessus.
+été disponibles en méthodes mixin avec la configuration ci-dessus.
 
 Alors que les méthodes montrées sont définies par configuration, vous pouvez
 aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
@@ -173,10 +173,10 @@ behavior devrait maintenant ressembler à ceci::
 Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors:
 
 - Les Behaviors peuvent définir des méthodes callback en définissant des
-  méthodes qui suivent les conventions :ref:`table-callbacks`.
+  méthodes qui suivent les conventions des :ref:`table-callbacks`.
 - Les Behaviors peuvent définir une propriété de configuration par défaut. Cette
-  propriété est fusionnée avec les overrides lorqu'un behavior est attaché à
-  la table.
+  propriété est fusionnée avec les valeurs données lorsqu'un behavior est
+  attaché à la table.
 
 Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
 de l'événement dans votre callback::
@@ -206,7 +206,7 @@ Une fois que notre behavior a la méthode ci-dessus, nous pouvons l'appeler::
 
     $article = $articles->find('slug', ['slug' => $value])->first();
 
-Limiter ou renommer les Méthodes de Exposed Finder
+Limiter ou renommer les Méthodes de Finder Exposed
 --------------------------------------------------
 
 Lors de la création de behaviors, il peut y avoir des situations où vous ne
@@ -243,9 +243,9 @@ Accéder aux Behaviors Chargés
 
 Une fois que vous avez attaché les behaviors à votre instance de Table, vous
 pouvez interroger les behaviors chargés ou accéder à des behaviors
-spécifiques en utilisant ``BehaviorRegistry``::
+spécifiques en utilisant le ``BehaviorRegistry``::
 
-    // Regarde quels behaviors sont chargés
+    // Regarde les behaviors qui sont chargés
     $table->behaviors()->loaded();
 
     // Vérifie si un behavior spécifique est chargé.

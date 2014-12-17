@@ -13,7 +13,7 @@ donnée, CakePHP va générer une instance Table à utiliser pour vous.
 
 Avant d'essayer d'utiliser les objets Table et l'ORM, vous devriez vous assurer
 que vous avez configuré votre
-:ref:`database connection <database-configuration>`.
+:ref:`connection à la base de données <database-configuration>`.
 
 Utilisation Basique
 ===================
@@ -66,8 +66,8 @@ utiliser la méthode ``primaryKey()``::
     }
 
 
-Personnalisaliser la Classe Entity qu'une Table Utilise
--------------------------------------------------------
+Personnaliser la Classe Entity qu'une Table Utilise
+---------------------------------------------------
 
 Par défaut, les objets table utilisent une classe entity basée sur les
 conventions de nommage. Par exemple, si votre classe de table est appelée
@@ -94,7 +94,7 @@ Avant de pouvoir requêter sur une table, vous aurez besoin d'obtenir une
 instance de la table. Vous pouvez faire ceci en utilisant la classe
 ``TableRegistry``::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     use Cake\ORM\TableRegistry;
 
     $articles = TableRegistry::get('Articles');
@@ -104,92 +104,100 @@ et maintenir un registre de toutes les instances de table construites,
 faciliter la construction de relations et configurer l'ORM. Regardez
 :ref:`table-registry-usage` pour plus d'informations.
 
-
 .. _table-callbacks:
 
 Lifecycle Callbacks
 ===================
 
-As you have seen above table objects trigger a number of events. Events are
-useful if you want to hook into the ORM and add logic in without subclassing or
-overriding methods. Event listeners can be defined in table or behavior classes.
-You can also use a table's event manager to bind listeners in.
+Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
+d'événements. Les événements sont utiles si vous souhaitez hook dans l'ORM
+et ajouter de la logique sans faire de sous-classe ou sans surcharger les
+méthodes. Les écouteurs d'événement peuvent être définis dans les classes
+table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'événement
+de table pour lier les écouteurs dedans.
 
-When using callback methods behaviors attached in the
-``initialize`` method will have their listeners fired **before** the table
-callback methods are triggered. This follows the same sequencing as controllers
-& components.
+Lors de l'utilisation des méthodes callback des behaviors attachés dans la
+méthode ``initialize`` va voir ses écouteurs lancés **avant** que les
+méthodes de callback de la table ne soient déclenchées. Ceci suit la même
+séquence que les controllers & les components.
 
-To add an event listener to a Table class or Behavior simply implement the
-method signatures as described below. See the :doc:`/core-libraries/events` for
-more detail on how to use the events subsystem.
+Pour ajouter un écouteur d'événement à une classe Table ou un Behavior,
+implémentez simplement les signatures de méthode comme décrit ci-dessus.
+Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
+façon d'utiliser le sous-système d'événements.
 
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, array $options, boolean $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
 
-The ``Model.beforeFind`` event is fired before each find operation. By stopping
-the event and supplying a return value you can bypass the find operation
-entirely. Any changes done to the $query instance will be retained for the rest
-of the find. The ``$primary`` parameter indicates whether or not this is the root
-query, or an associated query. All associations participating in a query will
-have a ``Model.beforeFind`` event triggered. For associations that use joins,
-a dummy query will be provided. In your event listener you can set additional
-fields, conditions, joins or result formatters. These options/features will be
-copied onto the root query.
+L'événement ``Model.beforeFind`` est lancé avant chaque opération find. En
+stoppant l'événement et en fournissant une valeur de retour, vous pouvez
+outrepasser entièrement l'opération find. Tout changement fait à l'instance
+$query sera retenu pour le reste du find. Le paramètre ``$primary`` indique
+si oui ou non ceci est la requête racine ou une requête associée. Toutes les
+associations participant à une requête vont avoir un événement
+``Model.beforeFind`` déclenché. Pour les associations qui utilisent les joins,
+une requête dummy sera fournie. Dans votre écouteur d'événement, vous pouvez
+définir des champs supplémentaires, des conditions, des joins ou des formatteurs
+de résultat. Ces options/fonctionnalités seront copiées dans la requête racine.
 
-You might use this callback to restrict find operations based on a user's role,
-or make caching decisions based on the current load.
+Vous pouvez utiliser ce callback pour restreindre les opérations find basées
+sur le rôle de l'utilisateur, ou faire des décisions de mise en cache basées sur
+le chargement courant.
 
-In previous versions of CakePHP there was an ``afterFind`` callback, this has
-been replaced with the :ref:`map-reduce` features and entity constructors.
+Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``,
+ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
+constructeurs d'entity.
 
 beforeValidate
 --------------
 
-.. php:method:: beforeValidate(Event $event, Entity $entity, array $options, Validator $validator)
+.. php:method:: beforeValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
 
-The ``Model.beforeValidate`` method is fired before an entity is validated. By
-stopping this event, you can abort the validate + save operations.
+La méthode ``Model.beforeValidate`` est lancée avant qu'une entity ne soit
+validée. En stoppant cet événement, vous pouvez annuler les opérations de
+validate + save.
 
 afterValidate
 -------------
 
 .. php:method:: afterValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
 
-The ``Model.afterValidate`` event is fired after an entity is validated.
+L'événement ``Model.afterValidate`` est lancé après qu'une entity est validée.
 
 beforeSave
 ----------
 
 .. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
 
-The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
-this event will abort the save operation. When the event is stopped the result
-of the event will be returned.
+L'événement ``Model.beforeSave`` est lancé avant que chaque entity ne soit
+sauvegardée. Stopper cet événement va annuler l'opération de sauvegarde. Quand
+l'événement est stoppé, le résultat de l'événement sera retourné.
 
 afterSave
 ---------
 
 .. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
 
-The ``Model.afterSave`` event is fired after an entity is saved.
+L'événement ``Model.afterSave`` est lancé après qu'une entity ne soit
+sauvegardée.
 
 beforeDelete
 ------------
 
 .. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
 
-The ``Model.beforeDelete`` event is fired before an entity is deleted. By
-stopping this event you will abort the delete operation.
+L'événement ``Model.beforeDelete`` est lancé avant qu'une entity ne soit
+supprimée. En stoppant cet événement, vous allez annuler l'opération de
+suppression.
 
 afterDelete
 -----------
 
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
-Fired after an entity has been deleted.
+Lancé après qu'une entity a été supprimée.
 
 Behaviors
 =========
@@ -198,13 +206,16 @@ Behaviors
 
 .. start-behaviors
 
-Behaviors provide an easy way to create horizonally re-usable pieces of logic
-related to table classes. You may be wondering why behaviors are regular classes
-and not traits. The primary reason for this is event listeners. While traits
-would allow for re-usable pieces of logic, they would complicate binding events.
+Les Behaviors fournissent une façon facile de créer des parties de logique
+réutilisables horizontalement liées aux classes table. Vous vous demandez
+peut-être pourquoi les behaviors sont des classes classiques et non des
+traits. La première raison est les écouteurs d'événement. Alors que les traits
+permettent de réutiliser des parties de logique, ils compliqueraient la
+liaison des événements.
 
-To add a behavior to your table you can call the ``addBehavior`` method.
-Generally the best place to do this is in the ``initialize`` method::
+Pour ajouter un behavior à votre table, vous pouvez appeler la méthode
+``addBehavior``. Généralement, le meilleur endroit pour le faire est dans la
+méthode ``initialize``::
 
     namespace App\Model\Table;
 
@@ -216,8 +227,8 @@ Generally the best place to do this is in the ``initialize`` method::
         }
     }
 
-As with associations, you can use :term:`syntaxe de plugin` and provide additional
-configuration options::
+Comme pour les associations, vous pouvez utiliser la :term:`syntaxe de plugin`
+et fournir des options de configuration supplémentaires::
 
     namespace App\Model\Table;
 
@@ -238,17 +249,18 @@ configuration options::
 
 .. end-behaviors
 
-You can find out more about behaviors, including the behaviors provided by
-CakePHP in the chapter on :doc:`/orm/behaviors`.
+Vous pouvez en savoir plus sur les behaviors, y compris sur les behaviors
+fournis par CakePHP dans le chapitre sur les :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
-Configuring Connections
-=======================
+COnfigurer les Connections
+==========================
 
-By default all table instances use the ``default`` database connection. If your
-application uses multiple database connections you will want to configure which
-tables use which connections. This is the ``defaultConnectionName`` method::
+Par défaut, toutes les instances de table utilisent la connection à la base
+de données ``default``. Si votre application utilise plusieurs connections à la
+base de données, vous voudrez peut-être configurer quelles tables utilisent
+quelles connections. C'est avec la méthode ``defaultConnectionName``::
 
     namespace App\Model\Table;
 
@@ -262,26 +274,27 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
 .. note::
 
-    The ``defaultConnectionName`` method **must** be static.
+    La méthode ``defaultConnectionName`` **doit** être statique.
 
 .. _table-registry-usage:
 
-Using the TableRegistry
-=======================
+Utiliser la TableRegistry
+=========================
 
 .. php:class:: TableRegistry
 
-As we've seen earlier, the TableRegistry class provides an easy to use
-factory/registry for accessing your applications table instances. It provides a
-few other useful features as well.
+Comme nous l'avons vu précédemment, la classe TableRegistry fournit un moyen
+facile de factory/registry pour accéder aux instances des tables de vos
+applications. Elle fournit aussi quelques autres fonctionnalités utiles.
 
-Configuring Table Objects
--------------------------
+Configurer les Objets Table
+---------------------------
 
 .. php:staticmethod:: get($alias, $config)
 
-When loading tables from the registry you can customize their dependencies, or
-use mock objects by providing an ``$options`` array::
+Lors du chargement des tables à partir du registry, vous pouvez personnaliser
+leurs dépendances, ou utiliser les objets mock en fournissant un tableau
+``$options``::
 
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
@@ -295,27 +308,28 @@ use mock objects by providing an ``$options`` array::
 
 .. note::
 
-    If your table also does additional configuration in its ``initialize()`` method,
-    those values will overwrite the ones provided to the registry.
+    Si votre table fait aussi une configuration supplémentaire dans sa méthode
+    ``initialize()``, ces valeurs vont écraser celles fournies au registre.
 
-You can also pre-configure the registry using the ``config()`` method.
-Configuration data is stored *per alias*, and can be overridden by an object's
-``initialize()`` method::
+Vous pouvez aussi pré-configurer le registre en utilsant la méthode
+``config()``. Les données de configuration sont stockées *par alias*, et peuvent
+être surchargées par une méthode ``initialize()`` de l'objet::
 
     TableRegistry::config('Users', ['table' => 'my_users']);
 
 .. note::
 
-    You can only configure a table before or during the **first** time you
-    access that alias. Doing it after the registry is populated will have no
-    effect.
+    Vous pouvez configurer une table avant ou pendant la **première** fois
+    où vous accédez à l'alias. Faire ceci après que le registre est rempli va
+    n'avoir aucun effet.
 
-Flushing the Registry
----------------------
+Flushing le Registry
+--------------------
 
 .. php:staticmethod:: clear()
 
-During test cases you may want to flush the registry. Doing so is often useful
-when you are using mock objects, or modifying a table's dependencies::
+Pendant les cas de test, vous voulez flush la registry. Faire ceci est souvent
+utile quand vous utilisez les objets mock, ou modifier les dépendances d'une
+table::
 
     TableRegistry::clear();

@@ -233,7 +233,7 @@ following result::
 
 As you can see, the comment with id 2 is no longer there, as it could not be
 matched to anything in the ``$newData`` array. This is done this way to better
-capture the intention of a request data post, The sent data is reflecting the
+capture the intention of a request data post. The sent data is reflecting the
 new state that the entity should have.
 
 Some additional advantages of this approach is that it reduces the number of
@@ -256,7 +256,7 @@ As you can see, this also helps creating solutions where an association needs to
 be implemented like a single set.
 
 You can also patch multiple entities at once. The consideration made for
-patching hasMany and belongsToMany associations apply form patching multiple
+patching hasMany and belongsToMany associations apply for patching multiple
 entities: Matches are done by the primary key field value and missing matches in
 the original entities array will be removed and not present in the result::
 
@@ -712,4 +712,3 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
-

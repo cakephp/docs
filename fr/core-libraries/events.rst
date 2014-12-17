@@ -318,7 +318,7 @@ suivante::
 Chaque valeur fournie au constructeur d'Event sera convertie dans les
 paramètres de fonction afin qu'ils apparaissent dans le tableau de données. Si
 vous utilisez un tableau associatif, les résultats de ``array_values`` vont
-determiner l'ordre des arguments de la fonction.
+déterminer l'ordre des arguments de la fonction.
 
 .. note::
 

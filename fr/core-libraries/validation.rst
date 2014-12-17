@@ -137,7 +137,7 @@ Marquer les Règles comme étant les Dernières à être exécutées
 Quand les champs ont plusieurs règles, chaque règle de validation sera exécutée
 même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
 de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
-stopper l'execution après qu'une règle spécifique a échoué, vous pouvez définir
+stopper l'exécution après qu'une règle spécifique a échoué, vous pouvez définir
 l'option ``last`` à ``true``::
 
     $validator = new Validator();
@@ -242,7 +242,7 @@ valeurs valides sont ``create`` et ``update``. L'utilisation d'une de ces
 valeurs va faire que la règle va s'appliquer seulement pour les opérations
 create ou update.
 
-En plus, vous pouvez fournir une fonction appelable qui va determiner si oui
+En plus, vous pouvez fournir une fonction appelable qui va déterminer si oui
 ou non, une règle particulière doit être appliquée::
 
     $validator->add('picture', 'file', [

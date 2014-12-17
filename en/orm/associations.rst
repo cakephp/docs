@@ -115,7 +115,7 @@ the values will be treated as association aliases.
 HasOne Associations
 ===================
 
-Let's set up a User model with a hasOne relationship to an Address Table.
+Let's set up a Users Table with a hasOne relationship to an Addresses Table.
 
 First, your database tables need to be keyed correctly. For a hasOne
 relationship to work, one table has to contain a foreign key that points to
@@ -380,7 +380,7 @@ You may want to cache the counts for your hasMany associations. This is useful
 when you often need to show the number of associated records, but don't want to
 load all the records just to count them. For example, the comment count on any
 given article is often cached to make generating lists of articles more
-efficient. You can use the :doc:`CounterCacheBehavior 
+efficient. You can use the :doc:`CounterCacheBehavior
 </orm/behaviors/counter-cache>` to cache counts of associated records.
 
 BelongsToMany Associations

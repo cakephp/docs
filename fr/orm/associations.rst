@@ -1,5 +1,5 @@
-Associations - Liers les Tables Ensemble 
-########################################
+Associations - Lier les Tables Ensemble
+#######################################
 
 .. _table-associations:
 
@@ -7,7 +7,7 @@ Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
 articles et plusieurs commentaires. CakePHP facilite la gestion de ces
-associations. Les quatres types d'association dans CakePHP sont:
+associations. Les quatre types d'association dans CakePHP sont:
 hasOne, hasMany, belongsTo, et belongsToMany.
 
 ============= ===================== =======================================
@@ -23,9 +23,9 @@ many to many  belongsToMany         Les Tags appartiennent aux articles.
 ============= ===================== =======================================
 
 Les Associations sont définies durant la méthode ``inititalize()`` de votre
-objet table. Les méthodes matchant le type d'association vous permet de définir
-les associations dans votre application. Par exemple, si vous voulez définir une
-association belongsTo dans notre ArticlesTable::
+objet table. Les méthodes ayant pour nom le type d'association vous permettent
+de définir les associations dans votre application. Par exemple, si nous
+souhaitions définir une association belongsTo dans notre ArticlesTable::
 
     namespace App\Model\Table;
 
@@ -40,8 +40,8 @@ association belongsTo dans notre ArticlesTable::
     }
 
 La forme la plus simple de toute configuration d'association prend l'alias de
-la table que vous souhaitez associer avec. Par défaut, tous les détails d'une
-association vont utiliser les conventions de CakePHP. Si vous souhaitez
+la table avec laquelle vous souhaitez l'associer. Par défaut, tous les détails
+d'une association vont utiliser les conventions de CakePHP. Si vous souhaitez
 personnaliser la façon dont sont gérées vos associations, vous pouvez le faire
 avec le deuxième paramètre::
 
@@ -58,7 +58,7 @@ avec le deuxième paramètre::
     }
 
 La même table peut être utilisée plusieurs fois pour définir différents types
-d'associations. Par exemple considérons un cas où vous voulez séparer les
+d'associations. Par exemple considérons le cas où vous voulez séparer les
 commentaires approuvés et ceux qui n'ont pas encore été modérés::
 
     class ArticlesTable extends Table {
@@ -78,7 +78,7 @@ commentaires approuvés et ceux qui n'ont pas encore été modérés::
     }
 
 Comme vous pouvez le voir, en spécifiant la clé ``className``, il est possible
-d'utiliser la même table que les associations différentes pour la même table.
+d'utiliser la même table avec des associations différentes pour la même table.
 Vous pouvez même créer les tables associées avec elles-même pour créer des
 relations parent-enfant::
 
@@ -106,7 +106,7 @@ tableau contenant les noms de tables indexés par association::
           'belongsTo' => [
             'Users' => ['className' => 'App\Model\Table\UsersTable']
           ],
-          'hasMany' => ['Comments', 'Links'],
+          'hasMany' => ['Comments'],
           'belongsToMany' => ['Tags']
         ]);
       }
@@ -120,14 +120,14 @@ une clé numérique est utilisée, la valeur sera traitée en tant qu'alias.
 Associations HasOne
 ===================
 
-Mettons en place un model User avec une relation de type hasOne (a une seule)
-vers un model Address.
+Mettons en place une Table Users avec une relation de type hasOne (a une seule)
+Table Addresses.
 
 Tout d'abord, les tables de votre base de données doivent être saisies
 correctement. Pour qu'une relation de type hasOne fonctionne, une table doit
 contenir une clé étrangère qui pointe vers un enregistrement de l'autre. Dans
 notre cas, la table addresses contiendra un champ nommé ``user_id``. Le motif de
-base est :
+base est:
 
 **hasOne:** l'*autre* model contient la clé étrangère.
 
@@ -169,7 +169,7 @@ limiter l'association pour inclure seulement certains enregistrements::
         }
     }
 
-Les clés possibles pour les tableaux d'association incluent:
+Les clés possibles pour une association hasOne sont:
 
 - **className**: le nom de la classe de la table que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User a une Address', la
@@ -197,7 +197,8 @@ Les clés possibles pour les tableaux d'association incluent:
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: La méthode finder à utiliser lors du chargement des
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Users peuvent contenir l'enregistrement Address, si il existe::
@@ -208,7 +209,7 @@ Users peuvent contenir l'enregistrement Address, si il existe::
         echo $user->address->street;
    }
 
-Ce qui est au-dessus rendra un SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
@@ -217,7 +218,7 @@ Associations BelongsTo
 
 Maintenant que nous avons un accès des données Address à partir de la table
 User, définissons une association belongsTo dans la table Addresses afin
-d'avoir un accès aux données liés de l'User. L'association belongsTo est un
+d'avoir un accès aux données liées de l'User. L'association belongsTo est un
 complément naturel aux associations hasOne et hasMany.
 
 Lorsque vous remplissez les clés des tables de votre base de données pour une
@@ -261,7 +262,7 @@ syntaxe de tableau::
         }
     }
 
-Les clés possibles pour les tableaux d'association belongsTo incluent:
+Les clés possibles pour les tableaux d'association belongsTo sont:
 
 - **className**: le nom de classe du model associé au model courant. Si vous
   définissez une relation 'Profile belongsTo User', la clé className
@@ -280,7 +281,8 @@ Les clés possibles pour les tableaux d'association belongsTo incluent:
   données de la table associée dans les résultats de la table source. Par défaut
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: La méthode finder à utiliser lors du chargement des
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 User peuvent contenir l'enregistrement Address si il existe::
@@ -291,7 +293,7 @@ User peuvent contenir l'enregistrement Address si il existe::
         echo $address->user->username;
     }
 
-Ce qui est au-dessus rendra un SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -299,9 +301,9 @@ Ce qui est au-dessus rendra un SQL qui est similaire à::
 Associations HasMany
 ====================
 
-Un exemple d'association hasMany est "Article hasMany Comments".
-Définir cette association va nous permettre de récupérer les commentaires
-d'un article quand l'article est chargé.
+Un exemple d'association hasMany est "Article hasMany Comments" (Un Article a
+plusieurs Commentaires). Définir cette association va nous permettre de
+récupérer les commentaires d'un article quand l'article est chargé.
 
 Lors de la création des tables de votre base de données pour une relation
 hasMany, suivez cette convention:
@@ -345,8 +347,8 @@ Les clés possibles pour les tableaux d'association hasMany sont:
 
 - **className**: le nom de la classe du model que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User hasMany Comment'
-  (l'User a plusieurs Comments), la valeur associée à la clef 'className' devra
-  être 'Comment'.
+  (l'User a plusieurs Commentaires), la valeur associée à la clef 'className'
+  devra être 'Comment'.
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
   model. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
@@ -360,8 +362,8 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   supprimés lorsque leur Article associé l'aura été.
 - **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade chargeront les entities supprimés pour que les
-  callbacks soient correctement lancés. Si à ``false``. ``deleteAll()`` est utilisé
-  pour retirer les données associées et aucun callback ne sera lancé.
+  callbacks soient correctement lancés. Si à ``false``. ``deleteAll()`` est
+  utilisée pour retirer les données associées et aucun callback ne sera lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
   des Table associées dans les résultats de la table source. Par défaut,
   celui-ci est le nom au pluriel et avec des underscores de l'association donc
@@ -369,31 +371,32 @@ Les clés possibles pour les tableaux d'association hasMany sont:
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
   'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
-- **finder**: The finder method to use when loading associated records.
+- **finder**: La méthode finder à utiliser lors du chargement des
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations de recherche sur
 la table Articles récupèreront également les Comments liés si ils existent::
 
-    // Dans un controller ou dans une méthode table.
+    // Dans un controller ou dans une méthode de table.
     $query = $articles->find('all')->contain(['Comments']);
     foreach ($query as $article) {
         echo $article->comments[0]->text;
     }
 
-Ce qui est au-dessus rendra un SQL qui est similaire à::
+Ce qui est au-dessus génèrera une commande SQL similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
-Quand la stratégie de sous-requête est utilisée, SQL similaire à ce qui suit
-sera générée::
+Quand la stratégie de sous-requête est utilisée, une commande SQL similaire à
+ce qui suit sera générée::
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
 
 Vous voudrez peut-être mettre en cache les compteurs de vos associations
 hasMany. C'est utile quand vous avez souvent besoin de montrer le nombre
-d'enregistrements associés, mais que vous ne souhaitiez pas charger tous les
+d'enregistrements associés, mais que vous ne souhaitez pas charger tous les
 articles juste pour les compter. Par exemple, le compteur de comment sur
 n'importe quel article donné est souvent mis en cache pour rendre la génération
 des lists d'article plus efficace. Vous pouvez utiliser
@@ -417,7 +420,7 @@ pour le prochain article que j'écris.
 Trois tables de la base de données sont nécessaires pour une association
 BelongsToMany. Dans l'exemple du dessus, nous aurons besoin des tables pour
 ``articles``, ``tags`` et ``articles_tags``. La table ``articles_tags`` contient
-les données- qui font le lien entre les tags et les articles. La table de
+les données qui font le lien entre les tags et les articles. La table de
 jointure est nommée à partir des deux tables impliquées, séparée par un
 underscore par convention. Dans sa forme la plus simple, cette table se résume
 à ``article_id`` et ``tag_id``.
@@ -457,7 +460,7 @@ tableau::
     }
 
 Les clés possibles pour un tableau définissant une association belongsToMany
-incluent:
+sont:
 
 - **className**: Le nom de la classe du model que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation
@@ -470,10 +473,10 @@ incluent:
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans le model
   actuel. Ceci est particulièrement pratique si vous avez besoin de définir
   plusieurs relations belongsToMany. La valeur par défaut de cette clé est le
-  nom du model actuel (avec des underscores) suffixé avec '\_id'.
-- **targetForeignKey**: le nom de la clé étrangère trouvé dans le model cible.
-  La valeur par défaut pour cette clé est le model cible, au singulier et en
-  underscore, suffixé avec '\_id'.
+  nom du model actuel (avec des underscores) avec le suffixe '\_id'.
+- **targetForeignKey**: le nom de la clé étrangère qui se trouve dans le model
+  cible. La valeur par défaut pour cette clé est le model cible, au singulier
+  et en underscore, avec le suffixe '\_id'.
 - **conditions**: un tableau de conditions compatibles avec find(). Si vous avez
   des conditions sur une table associée, vous devriez utiliser un model
   'through' et lui définir les associations belongsTo nécessaires.
@@ -482,12 +485,12 @@ incluent:
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
   personnaliser le comportement de la table pivot.
-- **cascadeCallbacks**: Quand défini à ``true``, les suppressions en cascade vont
-  charger et supprimer les entities ainsi les callbacks sont correctement
-  lancés sur les enregistrements de la table de jointure. Quand défini à ``false``.
-  ``deleteAll()`` est utilisée pour retirer les données associées et aucun
-  callback n'est lancé. Ceci est par défaut à ``false``.pour aider à réduire
-  l'overhead.
+- **cascadeCallbacks**: Quand définie à ``true``, les suppressions en cascade
+  vont charger et supprimer les entities ainsi les callbacks sont correctement
+  lancés sur les enregistrements de la table de jointure. Quand définie à
+  ``false``. ``deleteAll()`` est utilisée pour retirer les données associées
+  et aucun callback n'est lancé. Ceci est par défaut à ``false`` pour
+  réduire la charge.
 - **propertyName**: Le nom de la propriété qui doit être remplie avec les
   données de la table associée dans les résultats de la table source. Par défaut
   c'est le nom au pluriel, avec des underscores de l'association, donc ``tags``
@@ -495,11 +498,13 @@ incluent:
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
   'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
-- **saveStrategy**: Either 'append' or 'replace'. Indicates the mode to be used
-  for saving associated entities. The former will only create new links
-  between both side of the relation and the latter will do a wipe and
-  replace to create the links between the passed entities when saving.
-- **finder**: The finder method to use when loading associated records.
+- **saveStrategy**: Soit 'append' ou bien 'replace'. Indique le mode à utiliser
+  pour sauvegarder les entities associées. Le premier va seulement créer des
+  nouveaux liens entre les deux côtés de la relation et le deuxième va effacer
+  et remplacer pour créer les liens entre les entities passées lors de la
+  sauvegarde.
+- **finder**: La méthode finder à utiliser lors du chargement des
+  enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
 Articles peuvent contenir les enregistrements de Tag si ils existent::
@@ -510,7 +515,7 @@ Articles peuvent contenir les enregistrements de Tag si ils existent::
         echo $article->tags[0]->text;
     }
 
-Ce qui est au-dessus fera une requête SQL similaire à::
+Ce qui est au-dessus génèrera une requête SQL similaire à::
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -536,7 +541,7 @@ Si vous souhaitez ajouter des informations supplémentaires à la table
 join/pivot, ou si vous avez besoin d'utiliser les colonnes jointes en dehors
 des conventions, vous devrez définir l'option ``through``. L'option ``through``
 vous fournit un contrôle total sur la façon dont l'association belongsToMany
-sera créé.
+sera créée.
 
 Il est parfois souhaitable de stocker des données supplémentaires avec une
 association many to many. Considérez ce qui suit::
@@ -559,7 +564,7 @@ serait::
 La façon d'intégrer notre besoin est d'utiliser un **model join**, autrement
 connu comme une association **hasMany through**. Ceci étant, l'association est
 un model lui-même. Donc, nous pouvons créer un nouveau model
-CoursesMemberships. Regardez les models suivants. ::
+CoursesMemberships. Regardez les models suivants::
 
     class StudentsTable extends Table {
         public function initialize(array $config) {
@@ -589,20 +594,20 @@ participation donnée d'un Etudiant à un Cours en plus des meta-informations
 supplémentaires.
 
 Conditions d'Association par Défaut
-===================================
+-----------------------------------
 
 L'option ``finder`` vous permet d'utiliser un
-:ref:`custom finder <custom-find-methods>` pour charger les données associés.
-Ceci permet de mieux encapsuler vos requêtes et de garder votre code plus
-DRY. Il y a quelques limitations lors de l'utilisation de finders pour charger
-les enregistrements associés pour les associations qui sont chargées en
+:ref:`finder personnalisé <custom-find-methods>` pour charger les données
+associées. Ceci permet de mieux encapsuler vos requêtes et de garder votre code
+plus DRY. Il y a quelques limitations lors de l'utilisation de finders pour
+charger les enregistrements associés pour les associations qui sont chargées en
 utilisant les jointures (belongsTo/hasOne). Les seuls aspects de la requête
 qui seront appliqués à la requête racine sont les suivants:
 
 - WHERE conditions
-- Additional joins
-- Contained associations
-- Map/Reduce functions
+- Jointures supplémentaires
+- Associations avec Contain
+- Fonctions Map/Reduce
 - Result formatters
 
 Les autres aspects de la requête, comme les colonnes sélectionnées, l'order,

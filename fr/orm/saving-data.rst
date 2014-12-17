@@ -1,30 +1,31 @@
-Saving Data
-###########
+Sauvegarder les Donnnées
+########################
 
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
 
-After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
-will probably want to update & save the changes.
+Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
+voulez probablement mettre à jour & sauvegarder les changements.
 
 .. _converting-request-data:
 
-Converting Request Data into Entities
-=====================================
+Convertir les Données de Request en Entities
+============================================
 
-Before editing and saving data back into the database, you'll need to convert
-the request data from the array format held in the request, and the entities
-that the ORM uses. The Table class provides an easy way to convert one or many
-entities from request data. You can convert a single entity using::
+Avant de modifier et sauvegarder les données à nouveau dans la base de données,
+vous devrez convertir les données de request à partir du format de tableau
+qui se trouve dans la request, et les entities que l'ORM utilise. La classe
+Table est un moyen facile de convertir une ou plusieurs entities à partir de
+données de request. Vous pouvez convertir une entity unique en utilisant::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data());
 
-The request data should follow the structure of your entities. For example if
-you had an article, which belonged to a user, and had many comments, your
-request data should look like::
+Les données de request doivent suivre la structure de vos entities. Par exemple
+si vous avez un article, qui appartient à un utilisateur, et avez plusieurs
+commentaires, vos données de request devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -39,9 +40,9 @@ request data should look like::
         ]
     ];
 
-If you are saving belongsToMany associations you can either use a list of
-entity data or a list of ids. When using a list of entity data your request data
-should look like::
+Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
+une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
+liste de données d'entity, vos données de request devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -53,7 +54,8 @@ should look like::
         ]
     ];
 
-When using a list of ids, your request data should look like::
+Quand vous utilisez une liste d'ids, vos données de request devraient ressembler
+à ceci::
 
     $data = [
         'title' => 'My title',
@@ -64,13 +66,13 @@ When using a list of ids, your request data should look like::
         ]
     ];
 
-The marshaller will handle both of these forms correctly, but only for
-belongsToMany associations.
+Le marshaller va gérer ces deux formulaires correctement, mais seulement pour
+des associations belongsToMany.
 
-When building forms that save nested associations, you need to define which
-associations should be marshalled::
+Lors de la construction de formulaires qui sauvegardent des associations
+imbriquées, vous devez définir quelles associations doivent être marshalled::
 
-    // In a controller
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
@@ -78,23 +80,24 @@ associations should be marshalled::
         ]
     ]);
 
-The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. Alternatively, you can use dot notation for brevity::
+Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
+Comments doivent être marshalled. D'une autre façon, vous pouvez utiliser
+la notation par point pour être plus bref::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-You can convert multiple entities using::
+Vous pouvez convertir plusieurs entities en utilisant::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-When converting multiple entities, the request data for multiple articles should
-look like::
+Lors de la conversion de plusieurs entities, les données de request pour
+plusieurs articles devrait ressembler à ceci::
 
     $data = [
         [
@@ -107,23 +110,23 @@ look like::
         ],
     ];
 
-Once you've converted request data into entities you can ``save()`` or
-``delete()`` them::
+Une fois que vous avez converti des données de request dans des entities, vous
+pouvez leur faire un ``save()`` ou un ``delete()``::
 
-    // In a controller.
+    // Dans un controller.
     foreach ($entities as $entity) {
         // Save entity
         $articles->save($entity);
 
-        // Delete entity
+        // Supprime l'entity
         $articles->delete($entity);
     }
 
-The above will run a separate transaction for each entity saved. If you'd like
-to process all the entities as a single transaction you can use
-``transactional()``::
+Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
+sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
+vous pouvez utiliser ``transactional()``::
 
-    // In a controller.
+    // Dans un controller.
     $articles->connection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
@@ -132,44 +135,48 @@ to process all the entities as a single transaction you can use
 
 .. note::
 
-    If you are using newEntity() and the resulting entities are missing some or
-    all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity.
+    Si vous utilisez newEntity() et il manque quelques unes ou toutes les
+    données des entities résultants, vérifiez deux fois que les colonnes que
+    vous souhaitez définir sont listées dans la propriété ``$_accessible``
+    de votre entity.
 
-Merging Request Data Into Entities
-----------------------------------
+Fusionner les Données de Request dans des Entities
+--------------------------------------------------
 
-In order to update entities you may choose to apply request data directly to an
-existing entity. This has the advantage that only the fields that actually
-changed will be saved, as opposed to sending all fields to the database to be
-persisted. You can merge an array of raw data into an existing entity using the
-``patchEntity`` method::
+Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des données
+de request directement dans une entity existante. Ceci a le désavantage que
+seuls les champs qui changent réellement seront sauvegardés, as opposed
+to sending all fields to the database to be persisted. Vous pouvez fusionner
+un tableau de données brutes dans une entity existante en utilisant la méthode
+``patchEntity``::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
     $articles->save($article);
 
-As explained in the previous section, the request data should follow the
-structure of your entity. The ``patchEntity`` method is equally capable of
-merging associations, by default only the first level of associations are
-merged, but if you wish to control the list of associations to be merged or
-merge deeper to deeper levels, you can use the third parameter of the method::
+Comme expliqué dans la section précédente, les données de request doivent suivre
+la structure de votre entity. La méthode ``patchEntity`` est également capable
+de fusionner les associations, par défaut seul les premiers niveaux
+d'associations sont fusionnés mais si vous voulez contrôler la liste des
+associations à fusionner ou fusionner des niveaux de plus en plus profonds, vous
+pouvez utiliser le troisième paramètre de la méthode::
 
-    // In a controller.
+    // Dans un controller.
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
     $articles->save($article);
 
-Associations are merged by matching the primary key field in the source entities
-to the corresponding fields in the data array. For belongsTo and hasOne
-associations, new entities will be constructed if no previous entity is found
-for the target property.
+Les associations sont fusionnées en faisant correspondre le champ de clé
+primaire dans la source entities avec les champs correspondants dans le tableau
+de données. Pour des associations belongsTo et hasOne, les nouvelles entities
+seront construites si aucune entity précédente n'est trouvé pour la propriété
+cible.
 
-For example give some request data like the following::
+Pa exemple, donnez des données de request comme ce qui suit::
 
     $data = [
         'title' => 'My title',
@@ -178,27 +185,29 @@ For example give some request data like the following::
         ]
     ];
 
-Trying to patch an entity without an entity in the user property will create
-a new user entity::
+Essayer de faire un patch d'une entity sans entity dans la propriété user va
+créer une nouvelle entity user::
 
-    // In a controller.
+    // Dans un controller.
     $entity = $articles->patchEntity(new Article, $data);
     echo $entity->user->username; // Echoes 'mark'
 
-The same can be said about hasMany and belongsToMany associations, but an
-important note should be made.
+La même chose peut être dite pour les associations hasMany et belongsToMany,
+mais une importante note doit être faîte.
 
 .. note::
 
-    For hasMany and belongsToMany associations, if there were any entities that
-    could not be matched by primary key to any record in the data array, then
-    those records will be discarded from the resulting entity.
+    Pour les associations hasMany et belongsToMany, s'il y avait des entities
+    qui ne pouvaient pas correspondre avec leur clé primaire à aucun
+    enregistrement dans le tableau de données, alors ces enregistrements
+    seraient annulés de l'entity résultante.
 
-    Remember that using either ``patchEntity()`` or ``patchEntities()`` does not
-    persist the data, it just edits (or creates) the given entities. In order to
-    save the entity you will have to call the ``save()`` method.
+    Rappelez-vous que l'utilisation soit de ``patchEntity()`` ou
+    ``patchEntities()`` ne fait pas persister les données, il modifie juste
+    (ou créé) les entities données. Afin de sauvegarder l'entity, vous devrez
+    appeler la méthode ``save()``.
 
-For example, consider the following case::
+Par exemple, considérons le cas suivant::
 
     $data = [
         'title' => 'My title',
@@ -219,8 +228,8 @@ For example, consider the following case::
     $articles->patchEntity($entity, $newData);
     $articles->save($article);
 
-At the end, if the entity is converted back to an array you will obtain the
-following result::
+A la fin, si l'entity est à nouveau convertie en tableau, vous obtiendrez le
+résultat suivant::
 
     [
         'title' => 'My title',
@@ -231,20 +240,21 @@ following result::
         ]
     ];
 
-As you can see, the comment with id 2 is no longer there, as it could not be
-matched to anything in the ``$newData`` array. This is done this way to better
-capture the intention of a request data post, The sent data is reflecting the
-new state that the entity should have.
+Comme vous l'avez vu, le commentaire avec l'id 2 n'est plus ici, puisqu'il ne
+correspondait à rien dans le tableau ``$newData``. Ceci est fait ainsi pour
+mieux capturer l'intention du post des données de request. Les données envoyées
+reflètent le nouvel état que l'entity doit avoir.
 
-Some additional advantages of this approach is that it reduces the number of
-operations to be executed when persisting the entity again.
+Des avantages supplémentaires à cette approche sont qu'elle réduit le nombre
+d'opérations à exécuter quand on fait persister l'entity à nouveau.
 
-Please note that this does not mean that the comment with id 2 was removed from
-the database, if you wish to remove the comments for that article that are not
-present in the entity, you can collect the primary keys and execute a batch
-delete for those not in the list::
+Notez bien que ceci ne signifie pas que le commentaire avec l'id 2 a été
+supprimé de la base de données, si vous souhaitez retirer les commentaires pour
+cet article qui ne sont pas présents dans l'entity, vous pouvez collecter
+les clés primaires et exécuter une suppression batch pour celles qui ne sont
+pas dans la liste::
 
-    // In a controller.
+    // Dans un controller.
     $comments = TableRegistry::get('Comments');
     $present = (new Collection($entity->comments))->extract('id');
     $comments->deleteAll([
@@ -252,15 +262,17 @@ delete for those not in the list::
         'id NOT IN' => $present
     ]);
 
-As you can see, this also helps creating solutions where an association needs to
-be implemented like a single set.
+Comme vous pouvez le voir, ceci permet aussi de créer des solutions lorsqu'une
+association a besoin d'être implémentée comme un ensemble unique.
 
-You can also patch multiple entities at once. The consideration made for
-patching hasMany and belongsToMany associations apply form patching multiple
-entities: Matches are done by the primary key field value and missing matches in
-the original entities array will be removed and not present in the result::
+Vous pouvez aussi faire un patch de plusieurs entities en une fois. Les
+considérations faîtes pour les associations hasMany et belongsToMany
+s'appliquent pour le patch de plusieurs entities: Les correspondances sont
+faites avec la valeur du champ de la clé primaire et les correspondances
+manquantes dans le tableau original des entities seront retirées et non
+présentes dans les résultats::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->data());
@@ -268,86 +280,92 @@ the original entities array will be removed and not present in the result::
         $articles->save($entity);
     }
 
-Similarly to using ``patchEntity``, you can use the third argument for
-controlling the associations that will be merged in each of the entities in the
-array::
+De la même façon que pour l'utilisation de ``patchEntity``, vous pouvez utiliser
+le troisième argument pour controller les associations qui seront fusionnées
+dans chacune des entities du tableau::
 
-    // In a controller.
+    // Dans un controller.
     $patched = $articles->patchEntities(
         $list,
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-Avoiding Property Mass Assignment Attacks
------------------------------------------
+Eviter les Attaques d'Assignement de Propriété de Masse
+-------------------------------------------------------
 
-When creating or merging entities from request data you need to be careful of
-what you allow your users to change or add in the entities. For example, by
-sending an array in the request containing the ``user_id`` an attacker could
-change the owner of an article, causing undesirable effects::
+Lors de la création ou la fusion des entities à partir des données de request,
+vous devez faire attention à ce que vous autorisez à changer ou à ajouter
+dans les entities à vos utilisateurs. Par exemple, en envoyant un tableau
+dans la request contenant ``user_id``, un pirate pourrait changer le
+propriétaire d'un article, ce qui entraînerait des effets indésirables::
 
-    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contient ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
     $entity = $this->patchEntity($entity, $data);
     $this->save($entity);
 
-There are two ways of protecting you against this problem. The first one is by
-setting the default columns that can be safely set from a request using the
-:ref:`entities-mass-assignment` feature in the entities.
+Il y a deux façons de se protéger pour ce problème. La première est de définir
+les colonnes par défaut qui peuvent être définies en toute sécurité à partir
+d'une request en utilisant la fonctionnalité d':ref:`entities-mass-assignment`
+dans les entities.
 
-The second way is by using the ``fieldList`` option when creating or merging
-data into an entity::
+La deuxième façon est d'utiliser l'option ``fieldList`` lors de la création ou
+la fusion de données dans une entity::
 
-    // Contains ['user_id' => 100, 'title' => 'Hacked!'];
+    // Contient ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
 
-    // Only allow title to be changed
+    // Permet seulement pour au title d'être changé
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);
     $this->save($entity);
 
-You can also control which properties can be assigned for associations::
+Vous pouvez aussi contrôler les propriétés qui peuvent être assignées pour les
+associations::
 
-    // Only allow changing the title and tags
-    // and the tag name is the only column that can be set
+    // Permet seulement le changement de title et de tags
+    // et le nom du tag est la seule colonne qui peut être définie
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title', 'tags'],
         'associated' => ['Tags' => ['fieldList' => ['name']]]
     ]);
     $this->save($entity);
 
-Using this feature is handy when you have many different functions your users
-can access and you want to let your users edit different data based on their
-privileges.
+Utiliser cette fonctionnalité est pratique quand vous avez différentes fonctions
+auxquelles vos utilisateurs peuvent accéder et que vous voulez laisser vos
+utilisateurs modifier différentes données basées sur leurs privilèges.
 
-The ``fieldList`` options is also accepted by the ``newEntity()``,
-``newEntities()`` and ``patchEntitites()`` methods.
+L'option ``fieldList`` est aussi acceptée par les méthodes ``newEntity()``,
+``newEntities()`` et ``patchEntitites()``.
 
 .. _saving-entities:
 
-Saving Entities
-===============
+Sauvegarder les Entities
+========================
 
 .. php:method:: save(Entity $entity, array $options = [])
 
-When saving request data to your database you need to first hydrate a new entity
-using ``newEntity()`` for passing into ``save()``. For example::
+Quand vous sauvegardez les données de request dans votre base de données, vous
+devez d'abord hydrater une nouvelle entity en utilisant ``newEntity()`` pour
+passer dans ``save()``. Pare exemple::
 
-  // In a controller
+  // Dans un controller
   $articles = TableRegistry::get('Articles');
   $article = $articles->newEntity($this->request->data);
   if ($articles->save($article)) {
       // ...
   }
 
-The ORM uses the ``isNew()`` method on an entity to determine whether or not an
-insert or update should be performed. If the ``isNew()`` method returns ``null``
-and the entity has a primary key value, an 'exists' query will be issued.
+L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
+non une insertion ou une mise à jour doit être faite. Si la méthode
+``isNew()`` retourne ``null`` et que l'entity a une valeur de clé primaire,
+une requête 'exists' sera faîte.
 
-Once you've loaded some entities you'll probably want to modify them and update
-your database. This is a pretty simple exercise in CakePHP::
+Une fois que vous avez chargé quelques entities, vous voudrez probablement les
+modifier et les mettre à jour dans votre base de données. C'est un exercice
+simple dans CakePHP::
 
     $articles = TableRegistry::get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
@@ -355,53 +373,56 @@ your database. This is a pretty simple exercise in CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-When saving, CakePHP will apply your validation rules, and wrap the save operation
-in a database transaction. It will also only update properties that have
-changed. The above ``save()`` call would generate SQL like::
+Lors de la sauvegarde, CakePHP va appliquer vos règles de validation, et
+entourer l'opération de sauvegarde dans une transaction de base de données.
+Cela va aussi seulement mettre à jour les propriétés qui ont changé. Le
+``save()`` ci-dessus va générer le code SQL suivant::
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-If you had a new entity, the following SQL would be generated::
+Si vous avez une nouvelle entity, le code SQL suivant serait généré::
 
     INSERT INTO articles (title) VALUES ('My new title');
 
-When an entity is saved a few things happen:
+Quand une entity est sauvegardée, voici ce qui se passe:
 
-1. Validation will be started if not disabled.
-2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
-   stopped the save operation will fail and return ``false``.
-3. Validation will be applied. If validation fails, the save will be aborted,
-   and save() will return ``false``.
-4. The ``Model.afterValidate`` event will be triggered.
-5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
-   be aborted, and save() will return ``false``.
-6. Parent associations are saved. For example, any listed belongsTo
-   associations will be saved.
-7. The modified fields on the entity will be saved.
-8. Child associations are saved. For example, any listed hasMany, hasOne, or
-   belongsToMany associations will be saved.
-9. The ``Model.afterSave`` event will be dispatched.
+1. La validation commencera si elle n'est pas désactivée.
+2. La validation va déclencher l'événement ``Model.beforeValidate``. Si
+   l'événement est stoppé, l'opération de sauvegarde va connaitre un échec
+   et retourner ``false``.
+3. La validation sera appliquée. Si la validation échoue, la sauvegarde sera
+   annulée et le save() va retourner ``false``.
+4. L'événement ``Model.afterValidate`` sera déclenché.
+5. L'événement ``Model.beforeSave`` est dispatché. Si il est stoppé, la
+   sauvegarde sera annulée, et save() va retourner ``false``.
+6. Les associations parentes sont sauvegardées. Par exemple, toute association
+   belongsTo listée sera sauvegardée.
+7. Les champs modifiés sur l'entity seront sauvegardés.
+8. Les associations Enfant sont sauvegardées. Par exemple, toute association
+   hasMany, hasOne, ou belongsToMany listée sera sauvegardée.
+9. L'événement ``Model.afterSave`` sera dispatché.
 
 .. warning::
 
-    If no changes are made to the entity when it is saved, the callbacks will
-    not fire because no save is performed.
+    Si aucun changement n'est fait à l'entity quand elle est sauvegardée, les
+    callbacks ne vont pas être déclenchés car aucune sauvegarde n'est faîte.
 
-The ``save()`` method will return the modified entity on success, and ``false``
-on failure. You can disable validation and/or transactions using the
-``$options`` argument for save::
+La méthode ``save()`` va retourner l'entity modifiée en cas de succès, et
+``false`` en cas d'échec. Vous pouvez désactiver la validation et/ou les
+transactions en utilisant l'argument ``$options`` pendant la sauvegarde::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
     $articles->save($article, ['validate' => false, 'atomic' => false]);
 
-In addition to disabling validation you can choose which validation rule set you
-want applied::
+En plus de désactiver la validation, vous pouvez choisir l'ensemble de règle de
+validation que vous souhaitez appliquer::
 
     $articles->save($article, ['validate' => 'update']);
 
-The above would call the ``validationUpdate`` method on the table instance to
-build the required rules.  By default the ``validationDefault`` method will be
-used. A sample validator method for our articles table would be::
+Ce qui est au-dessus va appeler la méthode ``validationUpdate`` sur l'instance
+table pour construire les règles requises. Par défaut la méthode
+``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
+notre Table articles serait::
 
     class ArticlesTable extends Table {
         public function validationUpdate($validator) {
@@ -418,22 +439,24 @@ used. A sample validator method for our articles table would be::
         }
     }
 
-You can have as many validation sets as you need. See the :doc:`validation
-chapter </core-libraries/validation>` for more information on building
-validation rule-sets.
+Vous pouvez avoir autant d'ensembles de validation que vous le souhaitez.
+Consultez le :doc:`chapitre sur la validation </core-libraries/validation>`
+pour plus d'informations sur la construction des ensembles de règle de
+validation.
 
-Validation rules can use functions defined on any known providers. By default
-CakePHP sets up a few providers:
+Les règles de validation peuvent utiliser les fonctions définies sur tout
+provider connu. Par défaut, CakePHP définit quelques providers:
 
-1. Methods on the table class, or its behaviors are available on the ``table``
-   provider.
-2. Methods on the entity class, are available on the ``entity`` provider.
-3. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
-   ``default`` provider.
+1. Les méthodes sur la classe table, ou ses behaviors sont disponible sur
+   le provider ``table``.
+2. Les méthodes sur une classe entity, sont disponibles sur le provider
+   ``entity``.
+3. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
+   configurée avec le provider ``default``.
 
-When a validation rule is created you can name the provider of that rule. For
-example, if your entity had a 'isValidRole' method you could use it as
-a validation rule::
+Quand une règle de validation est créée, vous pouvez nommer le provider de cette
+règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
+l'utiliser comme une règle de validation::
 
     class UsersTable extends Table {
 
@@ -449,34 +472,37 @@ a validation rule::
 
     }
 
-Saving Associations
--------------------
+Sauvegarder les Associations
+----------------------------
 
-When you are saving an entity, you can also elect to save some or all of the
-associated entities. By default all first level entities will be saved. For
-example saving an Article, will also automatically update any dirty entities
-that are directly related to articles table.
+Quand vous sauvegardez une entity, vous pouvez aussi choisir d'avoir quelques
+unes ou toutes les entities associées. Par défaut, toutes les entities de
+premier niveau seront sauvegardées. Par exemple sauvegarder un Article, va
+aussi automatiquement mettre à jour tout entity dirty qui n'est pas directement
+liée à la table articles.
 
-You can fine tune which associations are saved by using the ``associated``
-option::
+Vous pouvez régler finement les associations qui sont sauvegardées en
+utilisant l'option ``associated``::
 
-    // In a controller.
+    // Dans un controller.
 
-    // Only save the comments association
+    // Sauvegarde seulement l'association avec les commentaires
     $articles->save($entity, ['associated' => ['Comments']);
 
-You can define save distant or deeply nested associations by using dot notation::
+Vous pouvez définir une sauvegarde distante ou des associations imbriquées
+profondément en utilisant la notation par point::
 
-    // Save the company, the employees and related addresses for each of them.
+    // Sauvegarde la company, les employees et les addresses liées pour chacun d'eux.
     $companies->save($entity, ['associated' => ['Employees.Addresses']]);
 
-If you need to run a different validation rule set for any association you can
-specify it as an options array for the association::
+Si vous avez besoin de lancer un ensemble de règle de validation différente pour
+une association, vous pouvez le spécifier dans un tableau d'options pour
+l'association::
 
-    // In a controller.
+    // Dans un controller.
 
-    // Save the company, the employees and related addresses for each of them.
-    // For employees use the 'special' validation group
+    // Sauvegarde la company, les employees et les addresses liées pour chacun d'eux.
+    // Pour les employees, utilisez le groupe de validation 'special'
     $companies->save($entity, [
       'associated' => [
         'Employees' => [
@@ -486,8 +512,8 @@ specify it as an options array for the association::
       ]
     ]);
 
-Moreover, you can combine the dot notation for associations with the options
-array::
+En plus, vous pouvez combiner la notation par point pour les associations avec
+le tableau d'options::
 
     $companies->save($entity, [
       'associated' => [
@@ -496,17 +522,17 @@ array::
       ]
     ]);
 
-Your entities should be in the structured in the same way as they are when
-loaded from the database.
+Vos entities doivent être structurées de la même façon qu'elles l'étaient
+quand elles ont été chargées à partir de la base de données.
 
-Saving BelongsTo Associations
------------------------------
+Sauvegarder les Associations BelongsTo
+--------------------------------------
 
-When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, camel cased version the association name. For
-example::
+Lors de la sauvegarde des associations belongsTo, l'ORM s'attend à une entity
+imbriquée unique avec le nom de l'association au singulier, en camel case.
+Par exemple::
 
-    // In a controller.
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\User;
 
@@ -516,13 +542,14 @@ example::
     $articles = TableRegistry::get('Articles');
     $articles->save($article);
 
-Saving HasOne Associations
---------------------------
+Sauvegarder les Associations HasOne
+-----------------------------------
 
-When saving hasOne associations, the ORM expects a single nested entity at the
-singular, camel cased version the association name. For example::
+Lors de la sauvegarde d'associations hasOne, l'ORM s'attend à une entity
+imbriquée unique avec le nom de l'association au singulier et en camel case.
+Par exemple::
 
-    // In a controller.
+    // Dans un controller.
     use App\Model\Entity\User;
     use App\Model\Entity\Profile;
 
@@ -532,13 +559,14 @@ singular, camel cased version the association name. For example::
     $users = TableRegistry::get('Users');
     $users->save($user);
 
-Saving HasMany Associations
----------------------------
+Sauvegarder les Associations HasMany
+------------------------------------
 
-When saving hasMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
+imbriquée unique avec le nom de l'association au pluriel et en camel case.
+Par exemple::
 
-    // In a controller.
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\Comment;
 
@@ -551,24 +579,27 @@ plural, camel cased version the association name. For example::
     $articles = TableRegistry::get('Articles');
     $articles->save($article);
 
-When saving hasMany associations, associated records will either be updated, or
-inserted. The ORM will not remove or 'sync' a hasMany association. Whenever you
-add new records into an existing association you should always mark the
-association property as 'dirty'. This lets the ORM know that the association
-property has to be persisted::
+Lors de la sauvegarde d'associations hasMany, les enregistrements associés
+seront soit mis à jour, soit insérés. L'ORM ne va pas retirer ou 'sync' une
+association hasMany. Peu importe quand vous ajoutez de nouveaux
+enregistrements dans une association existante, vous devez toujours marquer la
+propriété de l'association comme 'dirty'. Ceci dit à l'ORM que la propriété de
+l'association doit persister::
 
     $article->comments[] = $comment;
     $article->dirty('comments', true);
 
-Without the call to ``dirty()`` the updated comments will not be saved.
+Sans l'appel à ``dirty()``, les commentaires mis à jour ne seront pas
+sauvegardés.
 
-Saving BelongsToMany Associations
----------------------------------
+Sauvegarder les Associations BelongsToMany
+------------------------------------------
 
-When saving belongsToMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
+imbriquée unique avec le nom de l'association au pluriel et en camel case.
+Par exemple::
 
-    // In a controller.
+    // Dans un controller.
     use App\Model\Entity\Article;
     use App\Model\Entity\Tag;
 
@@ -581,77 +612,82 @@ plural, camel cased version the association name. For example::
     $articles = TableRegistry::get('Articles');
     $articles->save($article);
 
-When converting request data into entities, the ``newEntity`` and
-``newEntities`` methods will handle both arrays of properties, as well as a list
-of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
-select box or checkbox based form controls for belongs to many associations. See
-the :ref:`converting-request-data` section for more information.
+Quand vous convertissez les données de request en entities, les méthodes
+``newEntity`` et ``newEntities`` vont gérer les deux tableau de propriétés,
+ainsi qu'une liste d'ids avec la clé ``_ids``. Utiliser la clé ``_ids``
+facilite lac construction d'un box select ou d'un checkbox basé sur les
+contrôles pour les associations belongs to many. Consultez la section
+:ref:`converting-request-data` pour plus d'informations.
 
-When saving belongsToMany associations, you have the choice between 2 saving
-strategies:
+Lors de la sauvegarde des associations belongsToMany, vous avez le choix entre
+2 stratégies de sauvegarde:
 
 append
-    Only new links will be created between each side of this association. This
-    strategy will not destroy existing links even though they may not be present
-    in the array of entities to be saved.
+    Seuls les nouveaux liens seront créés entre chaque côté de cette
+    association. Cette stratégie ne va pas détruire les liens existants même
+    si ils ne sont pas présents dans le tableau d'entities à sauvegarder.
 replace
-    When saving, existing links will be removed and new links will be created in
-    the joint table. If there are existing link in the database to some of the
-    entities intended to be saved, those links will be updated, not deleted and
-    then re-saved.
+    Lors de la sauvegarde, les liens existants seront retirés et les nouveaux
+    liens seront créés dans la table de jointure. S'il y a des liens existants
+    dans la base de données vers certaines entities que l'on souhaite
+    sauvegarder, ces liens seront mis à jour, non supprimés et re-sauvegardés.
 
-By default the ``replace`` strategy is used. Whenever you add new records into
-an existing association you should always mark the association property as
-'dirty'. This lets the ORM know that the association property has to be
-persisted::
+Par défaut la stratégie ``replace`` est utilisée. Quand vous avez de nouveaux
+enregistrements dans une association existante, vous devez toujours marquer
+la propriété de l'association en 'dirty'. Ceci dit à l'ORM que la propriété
+de l'association doit persister::
 
     $article->tags[] = $tag;
     $article->dirty('tags', true);
 
-Without the call to ``dirty()`` the updated tags will not be saved.
+Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
 
-Saving Additional Data to the Joint Table
------------------------------------------
+Sauvegarder des Données Supplémentaires à la Table de Jointure
+--------------------------------------------------------------
 
-In some situations the table joining your BelongsToMany association, will have
-additional columns on it. CakePHP makes it simple to save properties into these
-columns. Each entity in a belongsToMany association has a ``_joinData`` property
-that contains the additional columns on the joint table. This data can be either
-an array or an Entity instance. For example if Students BelongsToMany Courses,
-we could have a joint table that looks like::
+Dans certaines situations, la table de jointure de l'association BelongsToMany,
+aura des colonnes supplémentaires. CakePHP facilite la sauvegarde des
+propriétés dans ces colonnes. Chaque entity dans une association belongsToMany
+a une propriété ``_joinData`` qui contient les colonnes supplémentaires sur la
+table de jointure. Ces données peuvent être soit un tableau, soit une instance
+Entity. Par exemple si les Students BelongsToMany Courses, nous pourrions
+avoir une table de jointure qui ressemble à ceci::
 
     id | student_id | course_id | days_attended | grade
 
-When saving data you can populate the additional columns on the joint table by
-setting data to the ``_joinData`` property::
+Lors de la sauvegarde de données, vous pouvez remplir les colonnes
+supplémentaires sur la table de jointure en définissant les données dans la
+propriété ``_joinData``::
 
     $student->courses[0]->_joinData->grade = 80.12;
     $student->courses[0]->_joinData->days_attended = 30;
 
     $studentsTable->save($student);
 
-The ``_joinData`` property can be either an entity, or an array of data if you
-are saving entities built from request data.
+La propriété ``_joinData`` peut être soit une entity, soit un tableau de données
+si vous sauvegardez les saving entities construites à partir de données de
+request.
 
 .. _saving-complex-types:
 
-Saving Complex Types
---------------------
+Sauvegarder les Types Complexes
+-------------------------------
 
-Tables are capable of storing data represented in basic types, like strings,
-integers, floats, booleans, etc. But It can also be extended to accept more
-complex types such as arrays or objects and serialize this data into simpler
-types that can be saved in the database.
+Les tables peuvent stocker des données représentées dans des types basiques,
+comme les chaînes, les integers, floats, booleans, etc... Mais elles peuvent
+aussi être étendues pour accepter plus de types complexes comme les tableaux
+ou les objets et sérialiser ces données en types plus simples qui peuvent
+être sauvegardés dans la base de données.
 
-This functionality is achieved by using the custom types system. See the
-:ref:`adding-custom-database-types` section to find out how to build custom
-column Types::
+Cette fonctionnalité se fait en utilisant le système personnalisé de types.
+Consulter la section :ref:`adding-custom-database-types` pour trouver comment
+construire les Types de colonne personnalisés::
 
-    // In config/bootstrap.php
+    // Dans config/bootstrap.php
     use Cake\Database\Type;
     Type::map('json', 'App\Database\Type\JsonType');
 
-    // In src/Model/Table/UsersTable.php
+    // Dans src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
     class UsersTable extends Table {
@@ -663,13 +699,14 @@ column Types::
 
     }
 
-The code above maps the ``preferences`` column to the ``json`` custom type.
-This means that when retrieving data for that column, it will be
-unserialized from a JSON string in the database and put into an entity as an
-array.
+Le code ci-dessus correspond à la colonne ``preferences`` pour le type
+personnalisé ``json``.
+Cela signifie que quand on récupère des données pour cette colonne, elles seront
+désérialisées à partir d'une chaîne JSON dans la base de données et mises
+dans une entity en tant que tableau.
 
-Likewise, when saved, the array will be transformed back into its JSON
-representation::
+Comme ceci, lors de la sauvegarde, le tableau sera transformé à nouveau en sa
+représentation JSON::
 
     $user = new User([
         'preferences' => [
@@ -679,37 +716,40 @@ representation::
     ]);
     $usersTable->save($user);
 
-When using complex types it is important to validate that the data you are
-receiving from the end user is the correct type. Failing to correctly handle
-complex data could result in malicious users being able to store data they
-would not normally be able to.
+Lors de l'utilisation de types complexes, il est important de valider que les
+données que vous recevez de l'utilisateur finale est de type correct. Ne pas
+faire correctement la gestion des données complexes entraînera chez des
+utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
+pourraient pas stocker normalement.
 
-Bulk Updates
-============
+Mises à Jour en Masse
+=====================
 
 .. php:method:: updateAll($fields, $conditions)
 
-There may be times when updating rows individually is not efficient or
-necessary. In these cases it is more efficient to use a bulk-update to modify
-many rows at once::
+Il peut arriver que la mise à jour de lignes individuellement n'est pas
+efficace ou pas nécessaire. Dans ces cas, il est plus efficace d'utiliser une
+mise à jour en masse pour modifier plusieurs lignes en une fois::
 
-    // Publish all the unpublished articles.
+    // Publie tous les articles non publiés.
     function publishAllUnpublished() {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
-If you need to do bulk updates and use SQL expressions, you will need to use an
-expression object as ``updateAll()`` uses prepared statements under the hood::
+Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
+vous devrez utiliser un objet expression puisque ``updateAll()`` utilise
+des requêtes préparées sous le capot::
 
     function incrementCounters() {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }
 
-A bulk-update will be considered successful if 1 or more rows are updated.
+Une mise à jour en masse sera considérée comme un succès si 1 ou plusieurs
+lignes sont mises à jour.
 
 .. warning::
 
-    updateAll will *not* trigger beforeSave/afterSave events. If you need those
-    first load a collection of records and update them.
-
+    updateAll *ne* va *pas* déclencher d'événements beforeSave/afterSave. Si
+    vous avez besoin de ceux-ci, chargez d'abord une collection
+    d'enregistrements et mettez les à jour.
