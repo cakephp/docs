@@ -611,6 +611,6 @@ qui seront appliqués à la requête racine sont les suivants:
 - Result formatters
 
 Les autres aspects de la requête, comme les colonnes sélectionnées, l'order,
-le group by, having et les autres sous-statements, ne seront pas appliqués à
+le group by, having et les autres sous-instructions, ne seront pas appliqués à
 la requête racine. Les associations qui *ne* sont *pas* chargées avec les
 jointures (hasMany/belongsToMany), n'ont pas les restrictions ci-dessus.

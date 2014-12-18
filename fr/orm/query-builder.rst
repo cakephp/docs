@@ -18,10 +18,10 @@ pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
 - La requête est itérée avec ``foreach()``.
 - La méthode ``execute()`` de query est appelée. Elle retourne l'objet
-  underlying statement, et va être utilisée avec les requêtes
+  d'instruction sous-jacente, et va être utilisée avec les requêtes
   insert/update/delete.
 - La méthode ``all()`` de query est appelée. Elle retourne l'ensemble de
-  résultats et peut seulement être utilisée avec les select statements.
+  résultats et peut seulement être utilisée avec les instructions select.
 - La méthode ``toArray()`` de query est appelée.
 
 Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
@@ -312,6 +312,33 @@ entity::
 
     Quand l'hydration est désactivée, les résultats seront retournés en
     tableaux basiques.
+
+Instructions Case
+-----------------
+
+L'ORM offre également l'expression SQL ``case``. L'expression ``case`` permet
+l'implémentation d'une logique ``if ... then ... else`` dans votre SQL. Cela
+peut être utile pour créer des rapports sur sur des données que vous avez besoin
+d'additionner ou de compter conditionnellement, ou si vous avez besoin de données
+spécifiques basées sur une condition.
+
+Si vous vouliez savoir combien d'articles sont publiés dans notre base de
+données, vous auriez besoin de générer le SQL suivant::
+
+    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    FROM articles GROUP BY published
+
+Pour faire ceci avec le générateur de requêtes , vous utiliseriez le code suivant::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
+    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+
+    $query->select([
+        'number_published' => $query->func()->sum($publishedCase),
+        'number_unpublished' => $query->func()->sum($unpublishedCase)
+    ])
+    ->group('published');
 
 .. _advanced-query-conditions:
 
