@@ -330,7 +330,7 @@ Par défaut, CakePHP va faire un alias pour chaque connexion de votre applicatio
 Chaque connexion définie dans le bootstrap de votre application qui ne commence
 pas avec ``test_`` va avoir un alias avec le prefix ``test_`` de créé. Les alias
 de connexion assurent que vous n'utiliserez pas accidentellement la mauvaise
-connexion en cas de test. Les alias de connexion sont transparentes pour le reste
+connexion en cas de test. Les alias de connexion sont transparents pour le reste
 de votre application. Par exemple, si vous utilisez la connexion 'default', à la
 place, vous obtiendrez la connexion ``test`` en cas de test. Si vous utilisez la
 connexion 'replica', la suite de tests va tenter d'utiliser 'test_replica'.
@@ -339,10 +339,10 @@ Créer les fixtures
 ------------------
 
 A la création d'une fixture, vous pouvez définir principalement deux choses:
-comment la table est créée (quels champs font parti de la table), et quels
+comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
+Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 ``tests/Fixture`` avec le contenu suivant::
 
     namespace App\Test\Fixture;
