@@ -1494,13 +1494,13 @@ suivantes:
 * ``errorItem`` {{text}}
 * ``file`` {{name}}, {{attrs}}
 * ``formGroup`` {{label}}, {{input}}, {{error}}
-* ``formstart`` {{attrs}}
-* ``formend`` No variables are provided.
-* ``hiddenblock`` {{content}}
+* ``formStart`` {{attrs}}
+* ``formEnd`` No variables are provided.
+* ``hiddenBlock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
 * ``inputContainer`` {{type}}, {{required}}, {{content}}
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
-* ``inputsubmit`` {{type}}, {{attrs}}
+* ``inputSubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
