@@ -33,7 +33,7 @@ The event subsystem is at the heart of Model, Behavior, Controller, View and
 Helper callbacks. If you've ever used any of them, you are already somewhat
 familiar with events in CakePHP.
 
-Example event usage
+Example Event Usage
 ===================
 
 Let's suppose you are building a Cart plugin, and you'd like to focus on just
@@ -73,7 +73,7 @@ that an order has been created. You can then do tasks like send email
 notifications, update stock, log relevant statistics and other tasks in separate
 objects that focus on those concerns.
 
-Accessing event managers
+Accessing Event Managers
 ========================
 
 In CakePHP events are triggered against event managers. Event managers are
@@ -85,7 +85,7 @@ Each model has a separate event manager, while the View and Controller
 share one. This allows model events to be self contained, and allow components
 or controllers to act upon events created in the view if necessary.
 
-Global event manager
+Global Event Manager
 --------------------
 
 In addition to instance level event managers, CakePHP provides a global event
@@ -113,10 +113,10 @@ global manager, some additional complexity is incurred.
 .. versionchanged:: 2.5
 
     Prior to 2.5, listeners on the global manager were kept in a separate list
-    and fired **before** instance listeners are.
+    and fired **before** instance listeners are. After 2.5, global and instance
+    listeners are fired in priority order.
 
-
-Dispatching events
+Dispatching Events
 ==================
 
 Once you have obtained an instance of an event manager you can dispatch events
@@ -144,14 +144,14 @@ controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.
 
-Finally, the third argument is any additional event data.This can be any data you consider
-useful to pass around so listeners can act upon it. While this can be an argument
-of any type, we recommend passing an associative array.
+Finally, the third argument is any additional event data.This can be any data
+you consider useful to pass around so listeners can act upon it. While this can
+be an argument of any type, we recommend passing an associative array.
 
-The :php:meth:`~CakeEventManager::dispatch()` method accepts an event object as an argument
-and notifies all subscribed listeners.
+The :php:meth:`~CakeEventManager::dispatch()` method accepts an event object as
+an argument and notifies all subscribed listeners.
 
-Registering listeners
+Registering Listeners
 =====================
 
 Listeners are the preferred way to register callbacks for an event. This is done by
@@ -161,12 +161,14 @@ to register some callbacks. Classes implementing it need to provide the
 with all event names that the class will handle.
 
 To continue our previous example, let's imagine we have a UserStatistic class
-responsible for calculating a user's purchasing history, and compiling into global site
-statistics. This is a great place to use a listener class. Doing so allows you concentrate the statistics
-logic in one place and react to events as necessary. Our ``UserStatistics``
-listener might start out like::
+responsible for calculating a user's purchasing history, and compiling into
+global site statistics. This is a great place to use a listener class. Doing so
+allows you concentrate the statistics logic in one place and react to events as
+necessary. Our ``UserStatistics`` listener might start out like::
 
+    // In app/Lib/Event/UserStatistic.php
     App::uses('CakeEventListener', 'Event');
+
     class UserStatistic implements CakeEventListener {
 
         public function implementedEvents() {
@@ -188,7 +190,33 @@ As you can see in the above code, the ``attach`` function will accept instances
 of the ``CakeEventListener`` interface. Internally, the event manager will use
 ``implementedEvents`` to attach the correct callbacks.
 
-Registering anonymous listeners
+Registering Global Listeners
+----------------------------
+
+As shown in the example above, event listeners are conventionally placed in
+``app/Lib/Event``. Following this convention allows you to easily locate your
+listener classes. It is also recommended that you attach global listeners during
+your application bootstrap process::
+
+    // In app/Config/bootstrap.php
+
+    // Load the global event listeners.
+    require_once APP . 'Config' . DS . 'events.php'
+
+An example events bootstrap file for our cart application could look like::
+
+    // In app/Config/events.php
+
+    // Load event listeners
+    App::uses('UserStatistic', 'Lib/Event');
+    App::uses('ProductStatistic', 'Lib/Event');
+    App::uses('CakeEventManager', 'Event');
+
+    // Attach listeners.
+    CakeEventManager::instance()->attach(new UserStatistic());
+    CakeEventManager::instance()->attach(new ProductStatistic());
+
+Registering Anonymous Listeners
 -------------------------------
 
 While event listener objects are generally a better way to implement listeners,
@@ -217,7 +245,7 @@ supports::
 
 .. _event-priorities:
 
-Establishing priorities
+Establishing Priorities
 -----------------------
 
 In some cases you might want to control the order that listeners are invoked.
@@ -264,7 +292,7 @@ to use an array for specifying the callable method and the priority preference.
 The ``callable`` key is an special array entry that the manager will read to know
 what function in the class it should be calling.
 
-Getting event data as function parameters
+Getting Event Data as Function Parameters
 -----------------------------------------
 
 By default listeners receive the event object as their only parameter. If you
@@ -315,7 +343,7 @@ previous example we trigger the ``Model.Order.afterPlace`` event with some data:
     Any other data type cannot be converted to function parameters, thus not using
     this option is often the most adequate choice.
 
-Stopping events
+Stopping Events
 ---------------
 
 Much like DOM events, you may want to stop an event to prevent additional
@@ -362,7 +390,7 @@ To check if an event was stopped, you call the ``isStopped()`` method in the eve
 In the previous example the order would not get saved if the event is stopped
 during the ``beforePlace`` process.
 
-Getting event results
+Getting Event Results
 ---------------------
 
 Every time a callback returns a value, it gets stored in the ``$result``
@@ -407,7 +435,7 @@ to the next callback. In most of the cases, providing objects as event data or
 result and directly altering the object is the best solution as the reference is
 kept the same and modifications are shared across all callback calls.
 
-Removing callbacks and listeners
+Removing Callbacks and Listeners
 --------------------------------
 
 If for any reason you want to remove any callback from the event manager just call
