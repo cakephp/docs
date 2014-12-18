@@ -21,7 +21,8 @@ Cache
 RedisEngine
 -----------
 
-- The ``RedisEngine`` now has a default prefix of ``Inflector::slug(APP_DIR)``.
+- ``RedisEngine`` a maintenant ``Inflector::slug(APP_DIR)`` comme préfixe par
+  défaut.
 
 Console
 =======
@@ -45,6 +46,9 @@ AuthComponent
 -------------
 
 - L'option``userFields`` a été ajoutée à ``AuthComponent``.
+- AuthComponent déclenche maintenant un event ``Auth.afterIdentify`` après qu'un
+  utilisateur a été identifié et s'est connecté. L'event va contenir
+  l'utilisateur connecté en données.
 
 Behavior
 ========
@@ -139,13 +143,15 @@ HtmlHelper
 FormHelper
 ----------
 
-- The ``$confirmMessage`` argument of :php:meth:`FormHelper::postLink()` has been
-  deprecated. You should instead use key ``confirm`` in ``$options`` to specify
-  the message.
-- The ``maxlength`` attribute will now also be applied to textareas, when the corresponding
-  DB field is of type varchar, as per HTML specs.
+- L'argument ``$confirmMessage`` de :php:meth:`FormHelper::postLink()` a été
+  déprécié. Vous devez maintenant utiliser la clé ``confirm`` dans ``$options``
+  pour spécifier le message.
+- L'attribut ``maxlength`` va maintenant aussi être appliqué aux textareas,
+  quand le champ de la base de données correspondant est de type varchar,
+  selon les specs de HTML.
 
 PaginatorHelper
 ---------------
 
-- :php:meth:`PaginatorHelper::meta()` has been added to output the meta-links (rel prev/next) for a paginated result set.
+- :php:meth:`PaginatorHelper::meta()` a été ajoutée pour afficher les
+  meta-links (rel prev/next) pour un ensemble de résultats paginés.
