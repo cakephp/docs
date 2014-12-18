@@ -306,7 +306,7 @@ temporairement des tables de données chargées avec des données d'exemple
 qui peuvent être utilisées par le test. Le bénéfice de l'utilisation de
 fixtures est que votre test n'a aucune chance d'abimer les données
 de l'application qui tourne. De plus, vous pouvez commencer à tester
-votre code avant dee développer réellement en live le contenu pour
+votre code avant de développer réellement en live le contenu pour
 une application.
 
 CakePHP utilise la connection nommée ``test`` dans votre fichier de
