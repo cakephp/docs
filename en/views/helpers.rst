@@ -100,7 +100,7 @@ your helper requires. For example::
     namespace App\View\Helper;
 
     use Cake\View\Helper;
-    use Cake\View\Helper\StringTemplateTrait;
+    use Cake\View\StringTemplateTrait;
 
     class AwesomeHelper extends Helper {
 
