@@ -309,8 +309,8 @@ de l'application qui tourne. De plus, vous pouvez commencer à tester
 votre code avant dee développer réellement en live le contenu pour
 une application.
 
-CakePHP utilise la connection nommée ``test`` dans votre fichier de
-configuration ``config/datasources.php`` Si la connection n'est pas
+CakePHP utilise la connexion nommée ``test`` dans votre fichier de
+configuration ``config/datasources.php`` Si la connexion n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -323,13 +323,13 @@ de test:
 #. Vide les tables de fixture.
 #. Retire les tables de fixture de la base de données.
 
-Test Connections
-----------------
+Connexions de Test
+------------------
 
 Par défaut, CakePHP va faire un alias pour chaque connexion de votre application.
 Chaque connexion définie dans le bootstrap de votre application qui ne commence
 pas avec ``test_`` va avoir un alias avec le prefix ``test_`` de créé. Les alias
-de connection assurent que vous n'utiliserez pas accidentellement la mauvaise
+de connexion assurent que vous n'utiliserez pas accidentellement la mauvaise
 connexion en cas de test. Les alias de connexion sont transparentes pour le reste
 de votre application. Par exemple, si vous utilisez la connexion 'default', à la
 place, vous obtiendrez la connexion ``test`` en cas de test. Si vous utilisez la
@@ -514,7 +514,7 @@ articles), on changerait le fixture donné dans la section précédente
         public $import = ['table' => 'articles']
     }
 
-Si vous voulez utiliser une autre connection, utilisez::
+Si vous voulez utiliser une autre connexion, utilisez::
 
     class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles', 'connection' => 'other'];
