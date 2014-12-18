@@ -44,6 +44,9 @@ AuthComponent
 -------------
 
 - ``AuthComponent`` had the ``userFields`` option added.
+- AuthComponent now triggers an ``Auth.afterIdentify`` event after a user has
+  been identified and logged in. The event will contain the logged in user as
+  data.
 
 Behavior
 ========
