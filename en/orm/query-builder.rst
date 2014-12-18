@@ -287,6 +287,31 @@ not make sense. In these situations you may want to disable entity hydration::
 
     When hydration is disabled results will be returned as basic arrays.
 
+Case statements
+---------------
+
+The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
+for implementing ``if ... then ... else`` logic inside your SQL. This can be useful
+for reporting on data where you need to conditionally sum or count data, or where you
+need to specific data based on a condition.
+
+If we wished to know how many published articles are in our database, we'd need to generate the following SQL::
+
+    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    FROM articles GROUP BY published
+
+To do this with the query builder, we'd use the following code::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
+    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+
+    $query->select([
+        'number_published' => $query->func()->sum($publishedCase),
+        'number_unpublished' => $query->func()->sum($unpublishedCase)
+    ])
+    ->group('published');
+
 .. _advanced-query-conditions:
 
 Advanced Conditions
