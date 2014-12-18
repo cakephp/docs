@@ -194,10 +194,6 @@ Most of the following constants refer to paths in your application.
 
     Path to the temporary files directory.
 
-.. php:const:: WEBROOT_DIR
-
-    Equals ``webroot`` or the name of your webroot directory.
-
 .. php:const:: WWW\_ROOT
 
     Full path to the webroot.
