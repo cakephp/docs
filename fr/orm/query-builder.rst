@@ -13,7 +13,7 @@ sous-requêtes avec facilité.
 Sous le capot, le constructeur de requête utilise les requêtes préparées de
 PDO qui protègent contre les attaques d'injection SQL.
 
-Less objets Query sont lazily evaluated. Cela signifie qu'une requête n'est
+Les objets Query sont lazily evaluated. Cela signifie qu'une requête n'est
 pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
 - La requête est itérée avec ``foreach()``.
@@ -318,7 +318,7 @@ Instructions Case
 
 L'ORM offre également l'expression SQL ``case``. L'expression ``case`` permet
 l'implémentation d'une logique ``if ... then ... else`` dans votre SQL. Cela
-peut être utile pour créer des rapports sur sur des données que vous avez besoin
+peut être utile pour créer des rapports sur des données que vous avez besoin
 d'additionner ou de compter conditionnellement, ou si vous avez besoin de données
 spécifiques basées sur une condition.
 

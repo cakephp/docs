@@ -268,23 +268,23 @@ champs accessibles pour un appel unique de ``set()``.
 
 .. _lazy-load-associations:
 
-Associations Lazy Loading
-=========================
+Lazy Loading des Associations 
+=============================
 
-Alors que les associations chargées eager sont généralement la façon la plus
-efficace pour accéder à vos associations, il peut arriver que vous
-ayez besoin de charger lazily les données associées. Avant de voir comment
-faire avec des associations chargées en lazy, nous devrions discuter des
-différences entre le chargement des associations eager et lazy:
+Alors que les associations chargées en eager loading sont généralement la
+façon la plus efficace pour accéder à vos associations, il peut arriver que
+vous ayez besoin d'utiliser le lazy loading des données associées. Avant de
+voir comment utiliser le Lazy loading d'associations, nous devrions
+discuter des différences entre le chargement des associations eager et lazy:
 
 Eager loading
-    Le chargement Eager utilise les joins (si possible) pour récupérer les
+    Le Eager loading utilise les joins (si possible) pour récupérer les
     données de la base de données avec aussi *peu* de requêtes que possible.
     Quand une requête séparée est nécessaire comme dans le cas d'une
     association HasMany, une requête unique est émise pour récupérer *toutes*
     les données associées pour l'ensemble courant d'objets.
 Lazy loading
-    Le chargement Lazy diffère le chargement des données de l'association jusqu'à
+    Le Lazy loading diffère le chargement des données de l'association jusqu'à
     ce que ce soit complètement nécessaire. Alors que ceci peut sauver du temps
     CPU car des données possiblement non utilisées ne sont pas hydratées dans
     les objets, cela peut résulter en plus de requêtes émises vers la base de
@@ -292,10 +292,10 @@ Lazy loading
     commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
     étant itérés.
 
-Alors que le chargement lazy n'est pas inclu par l'ORM de CakePHP, il n'est
+Alors que le lazy loading n'est pas inclu par l'ORM de CakePHP, il n'est
 pas difficile de l'intégrer vous-même quand et où vous le souhaitez. Lors
-de l'implémentation d'une méthode accesseur, vous pouvez charger lazily les
-données associées::
+de l'implémentation d'une méthode accesseur, vous pouvez charger les
+données associées en lazy loading::
 
     namespace App\Model\Entity;
 
@@ -373,9 +373,9 @@ entities en tableaux ou en données JSON. CakePHP facilite cela::
 
 Lors de la conversion d'une entity en tableau/JSON, les listes de champ
 virtuel & caché sont utilisées. Les entities sont converties aussi de façon
-récursive. Cela signifie que si vous chargez eager les entities avec leurs
-associations, CakePHP va correctement gérer la conversion des données associées
-dans le bon format.
+récursive. Cela signifie que si vous les entities avec leurs associations sont
+chragées en eager loading, CakePHP va correctement gérer la conversion des
+données associées dans le bon format.
 
 Montrer les Propriétés Virtuelles
 ---------------------------------
