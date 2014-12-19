@@ -268,7 +268,7 @@ champs accessibles pour un appel unique de ``set()``.
 
 .. _lazy-load-associations:
 
-Lazy Loading des Associations 
+Lazy Loading des Associations
 =============================
 
 Alors que les associations chargées en eager loading sont généralement la
@@ -373,8 +373,8 @@ entities en tableaux ou en données JSON. CakePHP facilite cela::
 
 Lors de la conversion d'une entity en tableau/JSON, les listes de champ
 virtuel & caché sont utilisées. Les entities sont converties aussi de façon
-récursive. Cela signifie que si vous les entities avec leurs associations sont
-chragées en eager loading, CakePHP va correctement gérer la conversion des
+récursive. Cela signifie que si les entities et leurs associations sont
+chargées en eager loading, CakePHP va correctement gérer la conversion des
 données associées dans le bon format.
 
 Montrer les Propriétés Virtuelles
