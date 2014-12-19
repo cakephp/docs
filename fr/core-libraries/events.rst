@@ -243,7 +243,7 @@ Enregistrer les Écouteurs Anonymes
 
 Tandis que les objects d'écoute d'événements sont généralement une meilleure
 manière d'implémenter les écouteurs, vous pouvez aussi attacher n'importe quel
-``callable``comme écouteur d'événement. Par exemple, si nous voulions
+``callable`` comme écouteur d'événement. Par exemple, si nous voulions
 enregistrer chaque commande dans les fichiers de journalisation, nous
 utiliserions une simple fonction anonyme pour le faire ::
 
