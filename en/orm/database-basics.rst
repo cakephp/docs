@@ -71,10 +71,14 @@ There are a number of keys supported in database configuration. A full list is
 as follows:
 
 className
-    The class name of the driver used to power the connection. This can either
-    be a short classname using :term:`plugin syntax`, a fully namespaced name, or
-    a constructed driver instance. Examples of short classnames are Mysql,
-    Sqlite, Postgres, and Sqlserver.
+    The fully namespaced class name of the class that represents the connection to a database server.
+    This class is responsible for loading the database driver, providing SQL
+    transaction mechanisms and preparing SQL statements among other things.
+driver
+    The class name of the driver used to implements all specificities for
+    a database engine. This can either be a short classname using :term:`plugin syntax`,
+    a fully namespaced name, or a constructed driver instance.
+    Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 persistent
     Whether or not to use a persistent connection to the database.
 host

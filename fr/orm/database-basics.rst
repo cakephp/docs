@@ -74,11 +74,16 @@ Il y a un certain nombre de clés supportés dans la configuration de la base
 de données. Une liste complète est comme suit:
 
 className
-    Le nom de la classe du driver utilisée pour faire fonctionner la connection.
-    Ceci peut être soit un nom de classe court en utilisant la
-    :term:`syntaxe de plugin`, un nom complet en namespace, soit être une
-    instance de driver construite. Les exemples de noms de classe court sont
-    Mysql, Sqlite, Postgres, et Sqlserver.
+    Nom de classe complète (incluant le *namespace*) de la classe qui représente une connexion
+    au serveur de base de données.
+    Cette classe a la charge de charger le driver de base de données, d'apporter les méchanismes de
+    transaction SQL et de préparer les requêtes SQL (entres autres choses).
+driver
+    Le nom de la classe du driver utilisée pour implémenter les spécificités
+    du moteur de base de données. Cela peut être soit un nom de classe court en utilisant la
+    :term:`syntaxe de plugin`, un nom complet en namespace, soit être une instance
+    de driver construite. Les exemples de noms de classe courts sont Mysql,
+    Sqlite, Postgres, et Sqlserver.
 persistent
     S'il faut utiliser ou non une connection persistante à la base de données.
 host
