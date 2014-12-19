@@ -558,6 +558,12 @@ déjà vous être familière::
     cas, par exemple, quand les mêmes utilisateurs commentent plus d'une fois
     un article unique.
 
+Les données des associations qui sont 'matchés' (appairés) seront disponibles
+dans l'attribut ``_matchingData`` des entities. Si vous utilisez à la fois
+match et contain sur la même association, vous pouvez vous attendre à recevoir
+à la fois la propriété ``_matchingData`` et la propriété standard d'association
+dans vos résultats.
+
 .. end-contain
 
 Lazy loading des Associations
