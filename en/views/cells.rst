@@ -167,3 +167,23 @@ to use when rendering the cell::
     $cell->template = 'messages';
     echo $cell;
 
+Caching Cell Output
+-------------------
+
+When rendering a cell you may want to cache the rendered output if the contents
+don't change often or to help improve performance of your application. You can
+define the ``cache`` option when creating a cell to enable & configure caching::
+
+    // Cache using the default config and a generated key
+    $cell = $this->cell('Inbox', [], ['cache' => true]);
+
+    // Cache to a specific cache config and a generated key
+    $cell = $this->cell('Inbox', [], ['cache' => ['config' => 'cell_cache']]);
+
+    // Specify the key and config to use.
+    $cell = $this->cell('Inbox', [], [
+        'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
+    ]);
+
+If a key is generated the underscored version of the cell class and template
+name will be used.

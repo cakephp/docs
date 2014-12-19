@@ -620,6 +620,24 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 
 are equivalent and will result in the same element being rendered.
 
+Caching Sections of Your View
+-----------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Sometimes generating a section of your view output can be expensive because of
+rendered :doc:`/views/cells` or expensive helper operations. To help make your
+application run faster CakePHP provides a way to cache view sections::
+
+    // Assuming some local variables
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+By default cached view content will go into the ``View::$elementCache`` cache
+config, but you can use the ``config`` option to change this.
+
 
 Creating Your Own View Classes
 ==============================
