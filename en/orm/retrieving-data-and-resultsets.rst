@@ -529,8 +529,13 @@ already familiar to you::
 
     As this function will create an ``INNER JOIN``, you might want to consider
     calling ``distinct`` on the find query as you might get duplicate rows if
-    your conditions don't filter them already. This might be the case, for example,
-    when the same users comments more than once on a single article.
+    your conditions don't filter them already. This might be the case, for
+    example, when the same users comments more than once on a single article.
+
+The data from the association that is 'matched' will be available on the
+``_matchingData`` property of entities. If you both match and contain the same
+association, you can expect to get both the ``_matchingData`` and standard
+association properties in your results.
 
 .. end-contain
 
