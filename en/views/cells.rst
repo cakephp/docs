@@ -182,7 +182,7 @@ define the ``cache`` option when creating a cell to enable & configure caching::
 
     // Specify the key and config to use.
     $cell = $this->cell('Inbox', [], [
-        'cache' => ['config' => 'cell_cache' 'key' => 'inbox_' . $user->id]
+        'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
     ]);
 
 If a key is generated the underscored version of the cell class and template
