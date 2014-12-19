@@ -203,10 +203,6 @@ dans votre application.
 
     Chemin vers le répertoire des fichiers temporaires.
 
-.. php:const:: WEBROOT_DIR
-
-    La même chose que ``webroot`` ou le nom du répertoire webroot.
-
 .. php:const:: WWW\_ROOT
 
     Chemin d'accès complet vers la racine web (webroot).
