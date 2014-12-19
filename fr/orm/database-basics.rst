@@ -92,7 +92,7 @@ database
 port (*optionnel*)
     Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
-    Indique le character set à utiliser lors de l'envoi de statements SQL au
+    Indique le character set à utiliser lors de l'envoi d'instructions SQL au
     serveur. Ceci est par défaut à l'encodage par défaut de la base de données
     pout toutes les bases de données autres que DB2. Si vous souhaitez utiliser
     l'encodage UTF-8 avec les connections mysql, vous devez utiliser
@@ -437,8 +437,8 @@ Lors de l'utilisation de bas niveau de l'API, vous rencontrerez souvent des
 objets statement (requête). Ces objets vous permettent de manipuler les
 requêtes préparées sous-jacentes du driver. Après avoir créé et exécuté un objet
 query, ou en utilisant ``execute()``, vous devriez avoir une instance
-``StatementDecorator``. Elle enveloppe l'objet statement basique sous-jacent
-et fournit quelques fonctionnalités supplémentaires.
+``StatementDecorator``. Elle enveloppe l'objet statement (instruction) basique
+sous-jacent et fournit quelques fonctionnalités supplémentaires.
 
 Préparer une Requête
 --------------------

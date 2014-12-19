@@ -379,8 +379,8 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
     Alors que les finders dynamiques facilitent la gestion des requêtes, ils
     entraînent des coûts de performance supplémentaires.
 
-Associations Eager Loading
-==========================
+Eager Loading des Associations
+==============================
 
 Par défaut, CakePHP ne charge **aucune** donnée associée lors de l'utilisation
 de ``find()``. Vous devez faire un 'contain' ou charger en eager chaque
@@ -388,9 +388,9 @@ association que vous souhaitez charger dans vos résultats.
 
 .. start-contain
 
-Chaque chargement Eager évite plusieurs problèmes potentiels de chargement
-lors du chargement lazy dans un ORM. Les requêtes générées par le chargement
-eager peut entraîner des jointures leverage, permettant de faire des
+Chaque Eager loading évite plusieurs problèmes potentiels de chargement
+lors du lazy loading dans un ORM. Les requêtes générées par le eager loading
+peuvent augmenter l'impact des jointures, permettant de faire des
 requêtes plus efficaces. Dans CakePHP vous définissez des associations chargées
 en eager en utilisant la méthode 'contain'::
 
@@ -560,7 +560,7 @@ déjà vous être familière::
 
 .. end-contain
 
-Associations Chargées en Lazy
+Lazy loading des Associations
 -----------------------------
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
