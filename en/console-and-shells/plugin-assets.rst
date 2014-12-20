@@ -14,7 +14,7 @@ respective folders instead of being symlinked.
 
 You can symlink assets of one particular plugin by specifying it's name::
 
-	bin/cake plugin_assets symlink MyPlugin
+    bin/cake plugin_assets symlink MyPlugin
 
 .. meta::
     :title lang=en: Plugin Assets Shell
