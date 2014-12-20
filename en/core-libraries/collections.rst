@@ -37,6 +37,38 @@ The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
 collection-like features into any ``Traversable`` object you have in your
 application as well.
 
+List of Methods
+===============
+
+* :php:meth:`each`
+* :php:meth:`map`
+* :php:meth:`extract`
+* :php:meth:`combine`
+* :php:meth:`stopWhen`
+* :php:meth:`unfold`
+* :php:meth:`filter`
+* :php:meth:`reject`
+* :php:meth:`every`
+* :php:meth:`some`
+* :php:meth:`match`
+* :php:meth:`reduce`
+* :php:meth:`min`
+* :php:meth:`max`
+* :php:meth:`groupBy`
+* :php:meth:`countBy`
+* :php:meth:`indexBy`
+* :php:meth:`sortBy`
+* :php:meth:`nest`
+* :php:meth:`listNested`
+* :php:meth:`contains`
+* :php:meth:`shuffle`
+* :php:meth:`sample`
+* :php:meth:`take`
+* :php:meth:`append`
+* :php:meth:`insert`
+* :php:meth:`buffered`
+* :php:meth:`compile`
+
 Iterating
 =========
 
@@ -51,10 +83,12 @@ collection, but will allow you to modify any objects within the collection::
         echo "Element $key: $value";
     });
 
-.. php:method:: map(callable $c)
 
 The return of ``each()`` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
+
+.. php:method:: map(callable $c)
+
 The ``map()`` method will create a new collection based on the output of the
 callback being applied to each object in the original collection::
 
@@ -70,6 +104,67 @@ callback being applied to each object in the original collection::
 
 The ``map()`` method will create a new iterator which lazily creates
 the resulting items when iterated.
+
+.. php:method:: extract($matcher)
+
+One of the most common uses for a ``map()`` function is to extract a single
+column from a collection. If you are looking to build a list of elements
+containing the values for a particular property, you can use the ``extract()``
+method::
+
+    $collection = new Collection($people);
+    $names = $collection->extract('name');
+
+    // $result contains ['mark', 'jose', 'barbara'];
+    $result = $names->toArray();
+
+As with many other functions in the collection class, you are allowed to specify
+a dot-separated path for extracting columns. This example will return
+a collection containing the author names from a list of articles::
+
+    $collection = new Collection($articles);
+    $names = $collection->extract('author.name');
+
+    // $result contains ['Maria', 'Stacy', 'Larry'];
+    $result = $names->toArray();
+
+Finally, if the property you are looking after cannot be expressed as a path,
+you can use a callback function to return it::
+
+    $collection = new Collection($articles);
+    $names = $collection->extract(function ($article) {
+        return $article->author->name . ', ' . $article->author->last_name;
+    });
+
+.. php:method:: combine($keyPath, $valuePath, $groupPath = null)
+
+Collections allow you to create a new collection made from keys and values in
+an existing collection. Both the key and value paths can be specified with
+dot notation paths::
+
+    $items = [
+        ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
+        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
+        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+    ];
+    $combined = (new Collection($items))->combine('id', 'name');
+
+    // Result will look like this when converted to array
+    [
+        1 => 'foo',
+        2 => 'bar',
+        3 => 'baz',
+    ];
+
+You can also optionally use a ``groupPath`` to group results based on a path::
+
+    $combined = (new Collection($items))->combine('id', 'name', 'parent');
+
+    // Result will look like this when converted to array
+    [
+        'a' => [1 => 'foo', 3 => 'baz'],
+        'b' => [2 => 'bar']
+    ];
 
 .. php:method:: stopWhen(callable $c)
 
@@ -189,37 +284,6 @@ against.
 
 Aggregation
 ===========
-
-.. php:method:: extract($matcher)
-
-One of the most common uses for a ``map()`` function is to extract a single
-column from a collection. If you are looking to build a list of elements
-containing the values for a particular property, you can use the ``extract()``
-method::
-
-    $collection = new Collection($people);
-    $names = $collection->extract('name');
-
-    // $result contains ['mark', 'jose', 'barbara'];
-    $result = $names->toArray();
-
-As with many other functions in the collection class, you are allowed to specify
-a dot-separated path for extracting columns. This example will return
-a collection containing the author names from a list of articles::
-
-    $collection = new Collection($articles);
-    $names = $collection->extract('author.name');
-
-    // $result contains ['Maria', 'Stacy', 'Larry'];
-    $result = $names->toArray();
-
-Finally, if the property you are looking after cannot be expressed as a path,
-you can use a callback function to return it::
-
-    $collection = new Collection($articles);
-    $names = $collection->extract(function ($article) {
-        return $article->author->name . ', ' . $article->author->last_name;
-    });
 
 .. php:method:: reduce(callable $c)
 
@@ -525,40 +589,10 @@ position, use the ``shuffle``::
     // This could return ['b' => 2, 'c' => 3, 'a' => 1]
     $collection->shuffle()->toArray();
 
-.. php:method:: combine($keyPath, $valuePath, $groupPath = null)
-
-Collections allow you to create a new collection made from keys and values in
-an existing collection. Both the key and value paths can be specified with
-dot notation paths::
-
-    $items = [
-        ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
-        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
-        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
-    ];
-    $combined = (new Collection($items))->combine('id', 'name');
-
-    // Result will look like this when converted to array
-    [
-        1 => 'foo',
-        2 => 'bar',
-        3 => 'baz',
-    ];
-
-You can also optionally use a ``groupPath`` to group results based on a path::
-
-    $combined = (new Collection($items))->combine('id', 'name', 'parent');
-
-    // Result will look like this when converted to array
-    [
-        'a' => [1 => 'foo', 3 => 'baz'],
-        'b' => [2 => 'bar']
-    ];
-
 Withdrawing Elements
 --------------------
 
-.. php:method: sample($size)
+.. php:method:: sample(int $size)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
 Another common operation when doing this sort of task is withdrawing a few
@@ -575,7 +609,7 @@ some A/B tests to, you can use the ``sample()`` function::
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
-.. php:method: take($size, $from)
+.. php:method:: take(int $size, int $from)
 
 Whenever you want to take a slice of a collection use the ``take()`` function,
 it will create a new collection with at most the number of values you specify in
@@ -591,7 +625,7 @@ Positions are zero-based, therefore the first position number is ``0``.
 Expanding Collections
 ---------------------
 
-.. php:method: append($items)
+.. php:method:: append(array|Traversable $items)
 
 You can compose multiple collections into a single one. This enables you to
 gather data from various sources, concatenate it, and apply other collection
@@ -618,7 +652,7 @@ collection containing the values from both sources::
 Modifiying Elements
 -------------------
 
-.. php:method: insert($path, $items)
+.. php:method:: insert(string $path, array|Traversable $items)
 
 At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
@@ -682,7 +716,7 @@ The ``insert()`` method can operate array elements or objects implementing the
 Optimizing Collections
 ----------------------
 
-.. php:method: buffered()
+.. php:method:: buffered()
 
 Collections often perform most operations that you create using its functions in
 a lazy way. This means that even though you can call a function, it does not
@@ -756,7 +790,7 @@ into collections that can be iterated more than once::
 Cloning Collections
 -------------------
 
-.. php:method: compile($preserveKeys = true)
+.. php:method:: compile(bool $preserveKeys = true)
 
 Sometimes you need to get a clone of the elements from another
 collection. This is useful when you need to iterate the same set from different
