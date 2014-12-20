@@ -32,7 +32,7 @@ Cela va supprimer et créer les tables en se basant sur le contenu de
 schema.php.
 
 Les fichiers de schéma peuvent aussi être utilisés pour générer des dumps sql.
-Pour générer un fichier sql comprennant les définitions ``CREATE TABLE``,
+Pour générer un fichier sql comprenant les définitions ``CREATE TABLE``,
 lancez::
 
     $ Console/cake schema dump --write filename.sql
@@ -108,7 +108,7 @@ Ecrire un Schema CakePHP à la main
 
 La classe CakeSchema est la classe de base pour tous les schémas de base de
 données. Chaque classe schema est capable de générer un ensemble de tables. La
-classe de console shell schema ``SchemaShell`` dans le repertoire
+classe de console shell schema ``SchemaShell`` dans le répertoire
 ``lib/Cake/Console/Command`` interprète la ligne de commande, et la classe
 schema de base peut lire la base de données, ou générer la table de la base de
 données.
@@ -297,7 +297,7 @@ un fichier de schema. Un peu comme les ``indexes``::
     );
 
 est un exemple d'une table utilisant ``tableParameters`` pour définir quelques
-parmaètres spécifiques de base de données. Si vous utilisez un fichier de
+paramètres spécifiques de base de données. Si vous utilisez un fichier de
 schema qui contient des options et des fonctionnalités que votre base de données
 n'intègre pas, ces options seront ignorées.
 
@@ -383,7 +383,7 @@ Si à un moment donné vous avez besoin de revenir en arrière et de retourner �
 un état précédent à votre dernière mise à jour, vous devez être informé que ce
 n'est pas pour l'instant pas possible avec cake schema.
 
-Plus précisemment, vous ne pouvez pas supprimer automatiquement vos tables
+Plus précisément, vous ne pouvez pas supprimer automatiquement vos tables
 une fois qu'elles ont été créées.
 
 L'utilisation de ``update`` supprimera, au contraire, n'importe quel champ
