@@ -71,6 +71,50 @@ callback being applied to each object in the original collection::
 The ``map()`` method will create a new iterator which lazily creates
 the resulting items when iterated.
 
+.. php:method:: stopWhen(callable $c)
+
+You can stop the iteration at any point using the ``stopWhen()`` method. Calling
+it in a collection will create a new one that will stop yielding results if the
+passed callable returns false for one of the elements::
+
+    $items = [10, 20, 50, 1, 2];
+    $collection = new Collection($items);
+
+    $new = $collection->stopWhen(function ($value, $key) {
+        // Stop on the first value bigger than 30
+        return $value > 30;
+    });
+
+    // $result contains [10, 20];
+    $result = $new->toArray();
+
+.. php:method:: unfold(callable $c)
+
+Sometimes the internal items of a collection will contain arrays or iterators
+with more items. If you wish to flatten the internal structure to iterate once
+over all elements you can use the ``unfold()`` method. It will create a new
+collection that will yield the every single element nested in the collection::
+
+    $items = [[1, 2, 3], [4, 5]];
+    $collection = new Collection($items);
+    $allElements = $collection->unfold();
+
+    // $result contains [1, 2, 3, 4, 5];
+    $result = $new->toArray(false);
+
+When passing a callable to ``unfold()`` you can control what elements will be
+unfolded from each item in the original collection. This is useful for returning
+data from paginated services::
+
+    $pages = [1, 2, 3, 4];
+    $collection = new Collection($pages);
+    $items = $collection->unfold(function ($page, $key) {
+        // An imaginary web service that returns a page of results
+        return MyService::fetchPage($page)->toArray();
+    });
+
+    $allPagesItems = $items->toArray(false);
+
 Filtering
 =========
 
