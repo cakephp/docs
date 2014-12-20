@@ -652,7 +652,7 @@ Parfois, générer une section de l'affichage de votre view peut être couteux
 couteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
 un moyen de mettre en cache des sections de view::
 
-    // En supposant l'éxistance des variables locales
+    // En supposant l'existence des variables locales
     echo $this->cache(function () use ($user, $article) {
         echo $this->cell('UserProfile', [$user]);
         echo $this->cell('ArticleFull', [$article]);
