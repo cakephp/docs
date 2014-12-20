@@ -455,7 +455,7 @@ Outre le layout par défaut, le squelette officiel d'application CakePHP dispose
 réponses AJAX - c'est un layout vide (la plupart des appels ajax ne nécessitent
 qu'un peu de balise en retour, et pas une interface de rendu complète).
 
-Le squelette d'aplication dispose également d'un layout par défaut pour aider
+Le squelette d'application dispose également d'un layout par défaut pour aider
 à générer du RSS.
 
 Utiliser les layouts à partir de plugins
@@ -502,8 +502,7 @@ extension .ctp. Ils sont affichés en utilisant la méthode element de la vue::
 Passer des Variables à l'intérieur d'un Element
 -----------------------------------------------
 
-Vous pouvez passer des données dans un element grâce au deuxième argument
-de element::
+Vous pouvez passer des données dans un element grâce au deuxième argument::
 
     echo $this->element('helpbox', [
         "helptext" => "Oh, this text is very helpful."
@@ -633,7 +632,7 @@ APP. ::
 
     echo $this->element('Contacts.helpbox');
 
-Si votre vue fait parti d'un plugin, vous pouvez ne pas mettre le nom du
+Si votre vue fait partie d'un plugin, vous pouvez ne pas mettre le nom du
 plugin. Par exemple, si vous êtes dans le ``ContactsController`` du plugin
 Contacts::
 
@@ -643,8 +642,28 @@ Contacts::
 
 Sont équivalents et résulteront au même element rendu.
 
-Créer vos propres classes de vue
-================================
+Mettre en Cache des Sections de votre View
+------------------------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Parfois, générer une section de l'affichage de votre view peut être couteux
+à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
+couteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
+un moyen de mettre en cache des sections de view::
+
+    // En supposant l'existence des variables locales
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+Par défaut, le contenu de la view ira dans la config de cache
+``View::$elementCache``, mais vous pouvez utiliser l'option ``config`` pour
+changer ceci.
+
+Créer vos propres Classes de View
+=================================
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire
