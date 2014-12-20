@@ -304,7 +304,7 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min($callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
 To extract the minimum value for a collection based on a property, just use the
 ``min()`` function. This will return the full element from the collection and
@@ -325,7 +325,7 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max($callback, $type = SORT_NUMERIC)
+.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
 The same can be applied to the ``max()`` function, which will return a single
 element from the collection having the highest property value::
@@ -338,6 +338,20 @@ element from the collection having the highest property value::
     });
 
     $personWithOldestDad = $collection->min('dad.age');
+
+.. php:method:: sumOf(string|callable $callback)
+
+Finally, the ``sumOf`` method will return the sum of a property of all
+elements::
+
+    $collection = new Collection($people);
+    $sumOfAges =  $collection->sumOf('age');
+
+    $sumOfChildrenAges = $collection->sumOf(function ($person) {
+        return $preson->child->age;
+    });
+
+    $sumOfDadAges = $collection->sumOf('dad.age');
 
 Grouping and Counting
 ---------------------
@@ -807,4 +821,4 @@ places at the same time. In order to clone a collection out of another use the
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert
+    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold
