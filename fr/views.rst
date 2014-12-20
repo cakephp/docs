@@ -643,8 +643,28 @@ Contacts::
 
 Sont équivalents et résulteront au même element rendu.
 
-Créer vos propres classes de vue
-================================
+Mettre en Cache des Sections de votre View
+------------------------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Parfois, générer une section de l'affichage de votre view peut être couteuse
+à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
+couteuse. Pour que votre application s'exécute plus rapidement, CakePHP fournit
+un moyen de mettre en cache des sections de view::
+
+    // En supposant des variables locales
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+Par défaut, le contenu de la view ira dans la config de cache
+``View::$elementCache``, mais vous pouvez utiliser l'option ``config`` pour
+changer ceci.
+
+Créer vos propres Classes de View
+=================================
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire
