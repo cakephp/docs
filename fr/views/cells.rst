@@ -13,7 +13,7 @@ Quand utiliser les Cells
 Les Cells sont idéales pour la construction de components de page réutilisables
 qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
-ou un menu de navigation selon des données dans un CMS. Parceque les cells ne
+ou un menu de navigation selon des données dans un CMS. Puisque les cells ne
 dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
 de ``requestAction()``.
 
@@ -181,9 +181,9 @@ Mettre en Cache la Sortie de Cell
 ---------------------------------
 
 Quand vous affichez une cell, vous pouvez mettre en cache la sortie rendue si
-les contenus de changent pas souvent ou pour aider à améliorer la performance
+les contenus ne changent pas souvent ou pour aider à améliorer la performance
 de votre application. Vous pouvez définir l'option ``cache`` lors de la création
-d'une cell pourr activer & configurer la mise en cache::
+d'une cell pour activer & configurer la mise en cache::
 
     // Le Cache utilisant la config par défaut et une clé générée
     $cell = $this->cell('Inbox', [], ['cache' => true]);
