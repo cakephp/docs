@@ -324,7 +324,11 @@ compatible syntax::
 
 When you need to delete data from the session, you can use delete::
 
-    $session->delete('Config.language');
+    $session->delete('Some.value');
+
+When you need to read and delete data from the session, you can use consume::
+
+    $session->consume('Some.value');
 
 .. php:method:: check($key)
 

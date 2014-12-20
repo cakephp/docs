@@ -450,6 +450,8 @@ for using the session object.
 * The path for session cookie now defaults to app's base path instead of "/".
   Also new config variable ``Session.cookiePath`` has been added to easily
   customize the cookie path.
+* A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
+  to allow reading and deleting session data in a single step.
 
 Network\\Http
 =============
