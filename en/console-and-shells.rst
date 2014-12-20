@@ -921,7 +921,7 @@ More Topics
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
-
+    console-and-shells/plugin-assets
 
 .. meta::
     :title lang=en: Console and Shells
