@@ -307,8 +307,8 @@ a.improve {
 
 #sidebar-navigation > ul > li:nth-of-type(5) a:after,
 #sidebar-navigation > ul > li:nth-of-type(13) a:after,
-#sidebar-navigation > ul > li:nth-of-type(30) a:after,
-#sidebar-navigation > ul > li:nth-of-type(41) a:after {
+#sidebar-navigation > ul > li:nth-of-type(31) a:after,
+#sidebar-navigation > ul > li:nth-of-type(42) a:after {
     content: " ";
     display: block;
     margin-bottom: 1em;
@@ -347,7 +347,7 @@ a.improve {
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(14):before {
     content: "Généralités";
 }
-#sidebar-navigation > ul > li:nth-of-type(31):before {
+#sidebar-navigation > ul > li:nth-of-type(32):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "Utility Classes";
@@ -359,7 +359,7 @@ a.improve {
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(31):before {
     content: "Utilitaires";
 }
-#sidebar-navigation > ul > li:nth-of-type(42):before {
+#sidebar-navigation > ul > li:nth-of-type(43):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "Other";
