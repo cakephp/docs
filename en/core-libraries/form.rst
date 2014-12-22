@@ -25,7 +25,7 @@ a simple contact form would look like::
     use Cake\Form\Schema;
     use Cake\Validation\Validator;
 
-    class ContactForm extends {
+    class ContactForm extends Form {
 
         protected function _buildSchema(Schema $schema) {
             return $schema->addField('name', 'string')
@@ -106,7 +106,7 @@ it. FormHelper understands Form objects just like ORM entities::
     echo $this->Form->create($contact);
     echo $this->Form->input('name');
     echo $this->Form->input('email');
-    echo $this->Form->input('text');
+    echo $this->Form->input('body');
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 
