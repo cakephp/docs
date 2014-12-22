@@ -852,8 +852,14 @@ make testing responses much simpler. Some examples are::
     // Check for a 5xx response code
     $this->assertResponseFailure();
 
+    // Check for a specific response code, e.g. 200
+    $this->assertResponseCode(200);
+
     // Check the Location header
     $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
+
+    // Check that no Location header has been set
+    $this->assertNoRedirect();
 
     // Assert content in the response
     $this->assertResponseContains('You won!');
