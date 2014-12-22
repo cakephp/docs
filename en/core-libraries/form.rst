@@ -5,8 +5,8 @@ Forms with no Models
 
 .. php:class:: Form
 
-Most of the time you will have forms backed by :doc:`/orm/entities <ORM
-entities>` and :doc:`/orm/table-objects <ORM tables>` or other peristent stores,
+Most of the time you will have forms backed by :doc:`ORM entities </orm/entities>`
+and :doc:`ORM tables </orm/table-objects>` or other peristent stores,
 but there are times when you'll need to validate user input and then perform an
 action if the data is valid. The most common example of this is a contact form.
 
