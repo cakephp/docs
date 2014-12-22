@@ -21,6 +21,7 @@ Introduction to all the key parts of CakePHP:
 * :doc:`/development/errors`
 * :doc:`/core-libraries/caching`
 * :doc:`/core-libraries/logging`
+* :doc:`/core-libraries/form`
 * :doc:`/development/sessions`
 * :doc:`/development/rest`
 * :doc:`/controllers/components/authentication`
