@@ -45,6 +45,7 @@ a simple contact form would look like::
 
         protected function _execute(array $data) {
             // Send an email.
+            return true;
         }
     }
 
@@ -66,17 +67,24 @@ Once you've defined your form, you can use it in your controller to process
 and validate request data::
 
     // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
     use App\Form\ContactForm;
 
-    $form = new ContactForm();
-    if ($this->request->is('post')) {
-        if ($form->execute($this->request->data)) {
-            $this->Flash->success('We will get back to you soon.');
-        } else {
-            $this->Flash->error('There was a problem submitting your form.');
+    class ContactController extends AppController {
+        public function index() {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->data)) {
+                    $this->Flash->success('We will get back to you soon.');
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+            $this->set('contact', $contact);
         }
     }
-    $this->set('contact', $contact);
 
 In the above example, we use the ``execute()`` method to run our form's
 ``_execute()`` method only when the data is valid, and set flash messages
