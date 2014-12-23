@@ -463,6 +463,13 @@ anywhere within your application, in a static context::
 
     If $key is left null, all values in Configure will be returned.
 
+.. php:staticmethod:: consume($key)
+
+    :param string $key: The key to read, can use be a :term:`dot notation` value
+
+    Read and delete a key from Configure. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
 .. php:staticmethod:: check($key)
 
     :param string $key: The key to check.
