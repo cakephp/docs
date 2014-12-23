@@ -51,6 +51,8 @@ can be either a string or an array of view variables to serialize::
         }
 
         public function index() {
+            // You have to select which data type you want to output using viewClass
+            $this->viewClass = 'Json';
             $this->set('articles', $this->paginate());
             $this->set('_serialize', ['articles']);
         }
