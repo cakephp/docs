@@ -196,9 +196,8 @@ on this record will also be deleted.
         ));
         if ($count == 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 afterDelete
