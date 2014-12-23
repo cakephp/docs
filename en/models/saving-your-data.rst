@@ -268,7 +268,7 @@ options may be used:
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
 * ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-* ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``deep``: (since 2.1) If set to true, also associated data is saved; see also :ref:`saveAssociated() <Model-saveAssociated>`
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
@@ -322,6 +322,8 @@ one you just need to add the primary key index to the data row::
             'Article' => array('id' => 2, 'title' => 'title 2')),
     );
 
+
+.. _Model-saveAssociated:
 
 :php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
 ===============================================================================
