@@ -69,6 +69,13 @@ HttpSocket
   use when making a request.
 
 
+I18n
+====
+
+- Configure value ``I18n.preferApp`` can now be used to control the order of translations.
+  If set to true it will prefer the app translations over any plugins' ones.
+
+
 Utility
 =======
 
