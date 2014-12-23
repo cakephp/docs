@@ -39,7 +39,7 @@ Language Files
 
 Translations can be made available by using language files stored in your
 application. The default format for CakePHP translation files is the
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files neeed to be
+`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
 placed under ``src/Locale/`` and within this directory, there should be
 a subfolder for each language the application needs to support::
 

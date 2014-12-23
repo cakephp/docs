@@ -65,14 +65,14 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de vue de CakePHP sont écrits en pur PHP et ont par défaut .ctp
+Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut .ctp
 (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la logique
 de présentation nécessaire à l'organisation des données reçues du controller,
 dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre langage de template et CakePHP.
 
-Un fichier de vue est stocké dans ``src/Template/``, dans un sous-dossier
+Un fichier de template est stocké dans ``src/Template/``, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
@@ -86,7 +86,7 @@ chapitre :
   lancée. Elles sont la substance de la réponse de votre application.
 - **elements** : morceaux de code de view plus petits, réutilisables. Les
   éléments sont habituellement rendus dans les vues.
-- **layouts** : fichiers de vue contenant le code de présentation qui se
+- **layouts** : fichiers de template contenant le code de présentation qui se
   retrouve dans plusieurs interfaces de votre application. La plupart des
   vues sont rendues à l'intérieur d'un layout.
 - **helpers** : ces classes encapsulent la logique de vue qui est requise
@@ -405,7 +405,7 @@ les fichiers JavaScript et les CSS à partir des vues.
 .. note::
 
     Quand vous utilisez ``HtmlHelper::css()`` ou
-    ``HtmlHelper::script()`` dans les fichiers de vues, spécifiez
+    ``HtmlHelper::script()`` dans les fichiers de template, spécifiez
     ``'block' => true`` pour placer la source html dans un
     block avec le même nom. (Regardez l'API pour plus de détails sur leur
     utilisation).
@@ -455,7 +455,7 @@ Outre le layout par défaut, le squelette officiel d'application CakePHP dispose
 réponses AJAX - c'est un layout vide (la plupart des appels ajax ne nécessitent
 qu'un peu de balise en retour, et pas une interface de rendu complète).
 
-Le squelette d'aplication dispose également d'un layout par défaut pour aider
+Le squelette d'application dispose également d'un layout par défaut pour aider
 à générer du RSS.
 
 Utiliser les layouts à partir de plugins
@@ -502,8 +502,7 @@ extension .ctp. Ils sont affichés en utilisant la méthode element de la vue::
 Passer des Variables à l'intérieur d'un Element
 -----------------------------------------------
 
-Vous pouvez passer des données dans un element grâce au deuxième argument
-de element::
+Vous pouvez passer des données dans un element grâce au deuxième argument::
 
     echo $this->element('helpbox', [
         "helptext" => "Oh, this text is very helpful."
@@ -512,7 +511,7 @@ de element::
 Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
-de vues). Dans l'exemple ci-dessus, le fichier
+de template). Dans l'exemple ci-dessus, le fichier
 ``src/Template/Element/helpbox.ctp`` peut utiliser la variable ``$helptext``::
 
     // A l'intérieur de src/Template/Element/helpbox.ctp
@@ -633,7 +632,7 @@ APP. ::
 
     echo $this->element('Contacts.helpbox');
 
-Si votre vue fait parti d'un plugin, vous pouvez ne pas mettre le nom du
+Si votre vue fait partie d'un plugin, vous pouvez ne pas mettre le nom du
 plugin. Par exemple, si vous êtes dans le ``ContactsController`` du plugin
 Contacts::
 
@@ -643,8 +642,28 @@ Contacts::
 
 Sont équivalents et résulteront au même element rendu.
 
-Créer vos propres classes de vue
-================================
+Mettre en Cache des Sections de votre View
+------------------------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Parfois, générer une section de l'affichage de votre view peut être couteux
+à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
+couteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
+un moyen de mettre en cache des sections de view::
+
+    // En supposant l'existence des variables locales
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+Par défaut, le contenu de la view ira dans la config de cache
+``View::$elementCache``, mais vous pouvez utiliser l'option ``config`` pour
+changer ceci.
+
+Créer vos propres Classes de View
+=================================
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire

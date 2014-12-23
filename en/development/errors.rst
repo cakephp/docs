@@ -29,7 +29,7 @@ your application:
   where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
-  class in ``src/Error``s. This class needs to implement a ``render()`` method.
+  class in ``src/Error``. This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When ``true``, exceptions + their stack traces will be logged
   to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
@@ -263,6 +263,10 @@ be thrown from a number of CakePHP core components:
 
     A model's behavior could not be found.
 
+.. php:exception:: RecordNotFoundException
+
+   The requested record could not be found.
+
 .. php:namespace:: Cake\Routing\Exception
 
 .. php:exception:: MissingControllerException
@@ -327,8 +331,8 @@ Exception Renderer
 The ExceptionRenderer class with the help of ``ErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
-The error page views are located at ``src/Template/Error/``. For all 4xx and 
-5xx errors the view files ``error400.ctp`` and ``error500.ctp`` are used
+The error page views are located at ``src/Template/Error/``. For all 4xx and
+5xx errors the template files ``error400.ctp`` and ``error500.ctp`` are used
 respectively. You can customize them as per your needs. By default your
 ``src/Template/Layout/default.ctp`` is used for error pages too. If for
 example, you want to use another layout ``src/Template/Layout/my_error.ctp``
@@ -346,7 +350,7 @@ Creating your own Application Exceptions
 
 You can create your own application exceptions using any of the built in `SPL
 exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
-itself, or :php:exc:`Cake\\Core\\Exception\\Exception`. 
+itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.
 If your application contained the following exception::
 
     use Cake\Core\Exception\Exception;
@@ -369,7 +373,7 @@ which allows the native ``__toString()`` methods to work as normal::
         protected $_messageTemplate = 'Seems that %s is missing.';
     }
 
-    throw new MissingWidgetException(array('widget' => 'Pointy'));
+    throw new MissingWidgetException(['widget' => 'Pointy']);
 
 
 When caught by the built in exception handler, you would get a ``$widget``
@@ -412,19 +416,19 @@ In the next few sections, we will detail the various approaches and the
 benefits each has.
 
 Create and Register your own Exception Handler
-==============================================
+----------------------------------------------
 
 Creating your own exception handler gives you full control over the exception
 handling process. You will have to call ``set_exception_handler`` yourself in
 this situation.
 
 Extend the BaseErrorHandler
-===========================
+---------------------------
 
 The :ref:`error-configuration` section has an example of this.
 
 Using the exceptionRenderer Option of the Default Handler
-=========================================================
+---------------------------------------------------------
 
 If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use the ``exceptionRenderer`` option in
@@ -446,32 +450,40 @@ specific errors::
     }
 
 
+    // In config/app.php
+    'Error' => [
+        'exceptionRenderer' => 'App\Error\AppExceptionRenderer',
+        // ...
+    ],
+    // ...
+
 The above would handle any exceptions of the type ``MissingWidgetException``,
 and allow you to provide custom display/handling logic for those application
 exceptions. Exception handling methods get the exception being handled as
 their argument. Your custom exception rendering can return either a string or
-a ``Response`` object. By returning a ``Response`` you can take full control
-over the entire response.
+a ``Response`` object. Returning a ``Response`` will give you full control
+over the response.
 
 .. note::
 
     Your custom renderer should expect an exception in its constructor, and
     implement a render method. Failing to do so will cause additional errors.
 
-    If you are using a custom exception handling this setting will have
-    no effect. Unless you reference it inside your implementation.
+    If you are using a custom exception handling, configuring the renderer will
+    have no effect. Unless you reference it inside your implementation.
 
 Creating a Custom Controller to Handle Exceptions
 -------------------------------------------------
 
-In your ExceptionRenderer sub-class, you can use the ``_getController``
-method to allow you to return a custom controller to handle your errors.
-By default CakePHP uses ``ErrorController`` which omits a few of the normal
-callbacks to help ensure errors always display. However, you may need a more
-custom error handling controller in your application. By implementing
-``_getController`` in your ``AppExceptionRenderer`` class, you can use any
-controller you want::
+By convention CakePHP will use ``App\Controller\ErrorController`` if it exists.
+Implementing this class can give you a configuration free way of customizing
+error page output.
 
+If you are using custom exception renderer, you can use the ``_getController``
+method to return a customize the controller.  By implementing ``_getController``
+in your exception renderer you can use any controller you want::
+
+    // in src/Error/AppExceptionRenderer
     namespace App\Error;
 
     use App\Controller\SuperCustomErrorController;
@@ -483,12 +495,15 @@ controller you want::
         }
     }
 
-Alternatively, you could just override the core ``ErrorController``,
-by including one in ``src/Controller``. If you are using a custom
-controller for error handling, make sure you do all the setup you need
-in your constructor, or the render method. As those are the only methods
-that the built-in ``ErrorHandler`` class directly call.
+    // in config/app.php
+    'Error' => [
+        'exceptionRenderer' => 'App\Error\AppExceptionRenderer',
+        // ...
+    ],
+    // ...
 
+The error controller, whether custom or conventional, is used to render the
+error page view and receives all the standard request life-cycle events.
 
 Logging Exceptions
 ------------------

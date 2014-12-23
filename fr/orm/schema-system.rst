@@ -181,7 +181,7 @@ Ajouter des Options de Table
 Certains drivers (principalement MySQL) supportent & nécessitent des
 meta données de table supplémentaires. Dans le cas de MySQL, les propriétés
 ``CHARSET``, ``COLLATE`` et ``ENGINE`` sont nécessaires pour maintenir une
-structure de table dans MySQL. Ce qui suit pourra être utilisée pour ajouter
+structure de table dans MySQL. Ce qui suit pourra être utilisé pour ajouter
 des options de table::
 
     $t->options([

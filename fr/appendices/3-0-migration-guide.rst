@@ -225,7 +225,7 @@ Shell
 -----
 
 - ``Shell::__construct()`` a changé. Il prend maintenant une instance de
-  ``Cake\\Console\\ConsoleIo``.
+  :php:class:`Cake\\Console\\ConsoleIo`.
 - ``Shell::param()`` a été ajoutée pour un accès pratique aux paramètre.
 
 De plus, toutes les méthodes du shell vont être transformées en camel case lors
@@ -234,6 +234,16 @@ shell et que vous l'appelez avec ``bin/cake my_shell hello_world``, vous devez
 renommer la méthode en ``helloWorld``. Il n'y a pas de changements nécessaires
 dans la façon d'appeler les commandes.
 
+ConsoleOptionParser
+-------------------
+
+- ``ConsoleOptionParser::merge()`` a été ajoutée pour fusionner les parsers.
+
+ConsoleInputArgument
+--------------------
+
+- ``ConsoleInputArgument::isEqualTo()`` a été ajoutée pour comparer deux
+  arguments.
 
 Shell / Task
 ============
@@ -241,12 +251,21 @@ Shell / Task
 Shells et Tasks ont été déplacés de ``Console/Command`` et
 ``Console/Command/Task`` vers ``Shell`` et ``Shell/Task``.
 
-ApiShell Retirée
-----------------
+ApiShell Retiré
+---------------
 
-ApiShell a été retirée puisqu'il ne fournit aucun bénéfice sur le fichier
+ApiShell a été retiré puisqu'il ne fournit aucun bénéfice sur le fichier
 source lui-même et sur la documentation/`l'API <http://api.cakephp.org/>`_
 en-ligne.
+
+SchemaShell Removed
+-------------------
+
+SchemaShell a été retiré puisqu'il n'a jamais été une implémentation
+d'une migrations de base de données complète et de meilleurs outils comme
+`Phinx <https://phinx.org/>`_ ont emergé. Il a été remplacé par
+le `Plugin de Migrations pour CakePHP <https://github.com/cakephp/migrations>`_
+qui permet l'utilisation de `Phinx <https://phinx.org/>`_ avec CakePHP.
 
 ExtractTask
 -----------
@@ -258,9 +277,11 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Les templates de bake ont été déplacés dans ``src/Template/Bake``. Aussi,
-  l'option ``theme``, utilisée pour choisir un template pour bake, a été
-  renommée en ``template``.
+- Bake ne fait plus partie du code source du core et est remplacé par le
+  `Plugin CakePHP Bake <https://github.com/cakephp/bake>`_
+- Les templates de bake ont été déplacés vers ``src/Template/Bake``.
+- La syntaxe des templates Bake utilise maintenant des balises de type erb
+  (``<% %>``) pour désigner le templating.
 
 Event
 =====
@@ -310,6 +331,9 @@ Log
   ``Psr\Log\LogInterface`` plutôt que la propre ``LogInterface`` de CakePHP. En
   général, si vous étendez :php:class:`Cake\\Log\\Engine\\BaseEngine`
   vous devez juste renommer la méthode ``write()`` en ``log()``.
+* :php:meth:`Cake\\Log\\Engine\\FileLog` écrit maintenant les fichiers dans
+  ``ROOT/logs`` au lieu de ``ROOT/tmp/logs``.
+
 
 Routing
 =======
@@ -397,7 +421,7 @@ Route
 -----
 
 * ``CakeRoute`` a été renommée en ``Route``.
-* La signature de ``match()`` a changé en ``match($url, $context = array())``
+* La signature de ``match()`` a changé en ``match($url, $context = [])``
   Consultez :php:meth:`Cake\\Routing\\Route::match()` pour plus d'informations
   sur la nouvelle signature.
 
@@ -1012,6 +1036,9 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   compatibilité avec les librairies CSS populaires telles que
   `Bootstrap <http://getbootstrap.com/>`_ et
   `Foundation <http://foundation.zurb.com/>`_.
+- Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags pre-3.0 ``formstart``,
+  ``formend``, ``hiddenblock`` et ``inputsubmit`` sont maintenant ``formStart``, ``formEnd``, ``hiddenBlock``
+  et ``inputSubmit``. Pensez à bien les changer s'ils sont personnalisés dans votre application.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
@@ -1197,7 +1224,7 @@ Testing
 =======
 
 - ``TestShell`` a été retiré. CakePHP, le squelette d'application et les plugins
-  nouvellement créés utilisent tous ``phpunit`` pour executer les tests.
+  nouvellement créés utilisent tous ``phpunit`` pour exécuter les tests.
 - L'executeur via le navigateur (webroot/test.php) a été retiré. L'adoption
   de CLI a beaucoup augmenté depuis les premières versions de 2.x. De plus,
   les exécuteurs CLI ont une meilleure intégration avec les outils des IDE et
@@ -1247,15 +1274,15 @@ Inflector
 
 - Les translitérations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
   changé. Si vous utilisez des translitérations  personnalisées, vous devrez mettre
-  à jour votre code. A la place des expressions régulières, les translitérations 
+  à jour votre code. A la place des expressions régulières, les translitérations
   utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
   performances significatives::
 
     // Au lieu de
-    Inflector::rules('transliteration', array(
+    Inflector::rules('transliteration', [
         '/ä|æ/' => 'ae',
         '/å/' => 'aa'
-    ));
+    ]);
 
     // Vous devrez utiliser
     Inflector::rules('transliteration', [

@@ -34,13 +34,13 @@ Vous pouvez aussi construire des objets Xml à partir de fichiers locaux::
 
 Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
-    $data = array(
-        'post' => array(
+    $data = [
+        'post' => [
             'id' => 1,
             'title' => 'Best post',
             'body' => ' ... '
-        )
-    );
+        ]
+    ];
     $xml = Xml::build($data);
 
 Si votre entrée est invalide, la classe Xml enverra une Exception::
@@ -78,9 +78,9 @@ Transformer un tableau en une chaîne de caractères XML
 
 ::
 
-    $xmlArray = array('root' => array('child' => 'value'));
+    $xmlArray = ['root' => ['child' => 'value']];
     // You can use Xml::build() too.
-    $xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags'));
+    $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']);
     $xmlString = $xmlObject->asXML();
 
 Votre tableau ne doit avoir qu'un élément de "niveau supérieur" et il ne doit
@@ -89,27 +89,27 @@ une Exception.
 Des Exemples de tableaux invalides::
 
     // Niveau supérieur avec une clé numérique
-    array(
-        array('key' => 'value')
-    );
+    [
+        ['key' => 'value']
+    ];
 
     // Plusieurs clés au niveau supérieur
-    array(
+    [
         'key1' => 'première valeur',
         'key2' => 'autre valeur'
-    );
+    ];
 
 By default array values will be output as XML tags, if you want to define
 attributes or text values you can should prefix the keys that are supposed to be
 attributes with ``@``. For value text, use ``@`` as the key::
 
-    $xmlArray = array(
-        'project' => array(
+    $xmlArray = [
+        'project' => [
             '@id' => 1,
             'name' => 'Name of project, as tag',
             '@' => 'Value of project'
-        )
-    );
+        ]
+    ];
     $xmlObject = Xml::fromArray($xmlArray);
     $xmlString = $xmlObject->asXML();
 
@@ -125,24 +125,24 @@ Pour utiliser les Namespaces XML, dans votre tableau vous devez créer une clé
 avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 ``xmlns:`` dans un namespace personnalisé. Regardez les exemples::
 
-    $xmlArray = array(
-        'root' => array(
+    $xmlArray = [
+        'root' => [
             'xmlns:' => 'http://cakephp.org',
             'child' => 'value'
-        )
-    );
+        ]
+    ];
     $xml1 = Xml::fromArray($xmlArray);
 
     $xmlArray(
-        'root' => array(
-            'tag' => array(
+        'root' => [
+            'tag' => [
                 'xmlns:pref' => 'http://cakephp.org',
-                'pref:item' => array(
+                'pref:item' => [
                     'item 1',
                     'item 2'
-                )
-            )
-        )
+                ]
+            ]
+        ]
     );
     $xml2 = Xml::fromArray($xmlArray);
 
@@ -168,7 +168,7 @@ your document type to add, remove, or manipulate child nodes::
 
     // Using DOMDocument
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-    $xml = Xml::build($myXmlOriginal, array('return' => 'domdocument'));
+    $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
 

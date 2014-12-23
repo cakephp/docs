@@ -24,7 +24,6 @@ le chapitre de chaque component:
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
-    /controllers/components/sessions
 
 .. _configuring-components:
 
@@ -121,7 +120,7 @@ l'intérieur d'un controller, vous pouvez faire ce qui suit::
 
 .. note::
 
-    Gardez à l'esprit que le chargement d'un component à la volée n'appelera
+    Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
     ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
@@ -132,7 +131,7 @@ Utiliser les Components
 Une fois que vous avez inclu quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
-:php:class:`Cake\\Controller\\Component\\FlashComponent` et le 
+:php:class:`Cake\\Controller\\Component\\FlashComponent` et le
 :php:class:`Cake\\Controller\\Component\\CookieComponent` dans votre
 controller, vous pouvez y accéder comme ceci::
 

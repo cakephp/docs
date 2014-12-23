@@ -93,7 +93,7 @@ de test pour la classe ArticlesTable, vous pourriez le lancer avec::
     $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
 
 Vous devriez voir une barre verte avec quelques informations supplémentaires sur
-les tests executés et le nombre qui a été passé.
+les tests exécutés et le nombre qui a été passé.
 
 .. note::
 
@@ -306,11 +306,11 @@ temporairement des tables de données chargées avec des données d'exemple
 qui peuvent être utilisées par le test. Le bénéfice de l'utilisation de
 fixtures est que votre test n'a aucune chance d'abimer les données
 de l'application qui tourne. De plus, vous pouvez commencer à tester
-votre code avant dee développer réellement en live le contenu pour
+votre code avant de développer réellement en live le contenu pour
 une application.
 
-CakePHP utilise la connection nommée ``test`` dans votre fichier de
-configuration ``config/datasources.php`` Si la connection n'est pas
+CakePHP utilise la connexion nommée ``test`` dans votre fichier de
+configuration ``config/datasources.php`` Si la connexion n'est pas
 utilisable, une exception sera levée et vous ne serez pas capable
 d'utiliser les fixtures de la base de données.
 
@@ -323,14 +323,14 @@ de test:
 #. Vide les tables de fixture.
 #. Retire les tables de fixture de la base de données.
 
-Test Connections
-----------------
+Connexions de Test
+------------------
 
 Par défaut, CakePHP va faire un alias pour chaque connexion de votre application.
 Chaque connexion définie dans le bootstrap de votre application qui ne commence
 pas avec ``test_`` va avoir un alias avec le prefix ``test_`` de créé. Les alias
-de connection assurent que vous n'utiliserez pas accidentellement la mauvaise
-connexion en cas de test. Les alias de connexion sont transparentes pour le reste
+de connexion assurent que vous n'utiliserez pas accidentellement la mauvaise
+connexion en cas de test. Les alias de connexion sont transparents pour le reste
 de votre application. Par exemple, si vous utilisez la connexion 'default', à la
 place, vous obtiendrez la connexion ``test`` en cas de test. Si vous utilisez la
 connexion 'replica', la suite de tests va tenter d'utiliser 'test_replica'.
@@ -339,10 +339,10 @@ Créer les fixtures
 ------------------
 
 A la création d'une fixture, vous pouvez définir principalement deux choses:
-comment la table est créée (quels champs font parti de la table), et quels
+comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Crée un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
+Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 ``tests/Fixture`` avec le contenu suivant::
 
     namespace App\Test\Fixture;
@@ -514,7 +514,7 @@ articles), on changerait le fixture donné dans la section précédente
         public $import = ['table' => 'articles']
     }
 
-Si vous voulez utiliser une autre connection, utilisez::
+Si vous voulez utiliser une autre connexion, utilisez::
 
     class ArticlesFixture extends TestFixture {
         public $import = ['table' => 'articles', 'connection' => 'other'];
@@ -1237,7 +1237,7 @@ dans le tableau ``$fixtures``.
 Générer des Tests avec Bake
 ===========================
 
-Si vous utilisez :doc:`bake </console-and-shells/code-generation-with-bake>` pour
+Si vous utilisez :doc:`bake </bake/usage>` pour
 générer votre code, il va également générer le squelette de vos fichiers de tests.
 Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
 vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous

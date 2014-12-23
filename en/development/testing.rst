@@ -852,8 +852,14 @@ make testing responses much simpler. Some examples are::
     // Check for a 5xx response code
     $this->assertResponseFailure();
 
+    // Check for a specific response code, e.g. 200
+    $this->assertResponseCode(200);
+
     // Check the Location header
     $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
+
+    // Check that no Location header has been set
+    $this->assertNoRedirect();
 
     // Assert content in the response
     $this->assertResponseContains('You won!');
@@ -1179,7 +1185,7 @@ reference them using ``plugin.pluginName.fixtureName`` syntax in the
 Generating Tests with Bake
 ==========================
 
-If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
+If you use :doc:`bake </bake/usage>` to
 generate scaffolding, it will also generate test stubs. If you need to
 re-generate test case skeletons, or if you want to generate test skeletons for
 code you wrote, you can use ``bake``:

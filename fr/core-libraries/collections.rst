@@ -186,7 +186,7 @@ The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
 collection::
 
-    $totalPrice = $collection->reduce(function ($orderLine, $accumulated) {
+    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
         return $accumulated + $orderLine->price;
     }, 0);
 
@@ -195,7 +195,7 @@ contained in the collection. Note the second argument for the ``reduce()``
 function, it takes the initial value for the reduce operation you are
 performing::
 
-    $allTags = $collection->reduce(function ($article, $accumulated) {
+    $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
     }, []);
 
@@ -704,7 +704,7 @@ The ``buffered()`` method is also useful for converting non-rewindable iterators
 into collections that can be iterated more than once::
 
     // In PHP 5.5+
-    function results() {
+    public function results() {
         ...
         foreach ($transientElements as $e) {
             yield $e;
@@ -726,7 +726,7 @@ places at the same time. In order to clone a collection out of another use the
 
     foreach ($ages as $age) {
         foreach ($collection as $element) {
-            echo $element->name . ' - ' . $age;
+            echo h($element->name) . ' - ' . $age;
         }
     }
 

@@ -80,9 +80,17 @@ very much like a controller would.  We can use the ``loadModel()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
+    <!-- src/Template/Cell/Inbox/display.ctp -->
     <div class="notification-icon">
         You have <?= $unread_count ?> unread messages.
     </div>
+
+.. note::
+
+    Cell templates have an isolated scope do not share the same View instance
+    as the one used to render template and layout for the current controller
+    action or other cells. Hence they are unaware of any helper calls made or
+    blocks set in the action's template / layout and vice versa.
 
 Loading Cells
 =============
@@ -159,3 +167,23 @@ to use when rendering the cell::
     $cell->template = 'messages';
     echo $cell;
 
+Caching Cell Output
+-------------------
+
+When rendering a cell you may want to cache the rendered output if the contents
+don't change often or to help improve performance of your application. You can
+define the ``cache`` option when creating a cell to enable & configure caching::
+
+    // Cache using the default config and a generated key
+    $cell = $this->cell('Inbox', [], ['cache' => true]);
+
+    // Cache to a specific cache config and a generated key
+    $cell = $this->cell('Inbox', [], ['cache' => ['config' => 'cell_cache']]);
+
+    // Specify the key and config to use.
+    $cell = $this->cell('Inbox', [], [
+        'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
+    ]);
+
+If a key is generated the underscored version of the cell class and template
+name will be used.

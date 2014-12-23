@@ -37,7 +37,7 @@ The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information.  For the remaining
+:ref:`database-queries` section for more information. For the remaining
 examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
 
     // Start a new query.
@@ -239,6 +239,26 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
+In addition to the above functions, the ``func()`` method can be used to create any generic SQL function
+such as ``year``, ``date_format``, ``convert``, etc. For example::
+
+    $query = $articles->find();
+    $year = $query->func()->year([
+        'created' => 'literal'
+    ]);
+    $time = $query->func()->date_format([
+        'created' => 'literal',
+        "'%H:%i'" => 'literal'
+    ]);
+    $query->select([
+        'yearCreated' => $year,
+        'timeCreated' => $time
+    ]);
+
+Would result in::
+
+    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
 Aggregates - Group and Having
 -----------------------------
 
@@ -266,6 +286,31 @@ not make sense. In these situations you may want to disable entity hydration::
 .. note::
 
     When hydration is disabled results will be returned as basic arrays.
+
+Case statements
+---------------
+
+The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
+for implementing ``if ... then ... else`` logic inside your SQL. This can be useful
+for reporting on data where you need to conditionally sum or count data, or where you
+need to specific data based on a condition.
+
+If we wished to know how many published articles are in our database, we'd need to generate the following SQL::
+
+    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    FROM articles GROUP BY published
+
+To do this with the query builder, we'd use the following code::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
+    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+
+    $query->select([
+        'number_published' => $query->func()->sum($publishedCase),
+        'number_unpublished' => $query->func()->sum($unpublishedCase)
+    ])
+    ->group('published');
 
 .. _advanced-query-conditions:
 
@@ -321,7 +366,7 @@ The above generates SQL similar to::
       AND (author_id = 2 OR author_id = 3)
     ))
 
-By using functions as the parameters to ``orWhere()`` abd ``andWhere()``,
+By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
 you can easily compose conditions together with the expression objects::
 
     $query = $articles->find()
@@ -429,6 +474,26 @@ Which will generate the following SQL looking like::
     NOT (author_id = 2 OR author_id = 5)
     AND view_count <= 10)
 
+It is also possible to build expressions using SQL functions::
+
+    $query = $articles->find()
+        ->where(function ($exp, $q) {
+            $year = $q->func()->year([
+                'created' => 'literal'
+            ]);
+            return $exp
+                ->gte($year, 2014)
+                ->eq('published', true);
+        });
+
+Which will generate the following SQL looking like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    YEAR(created) >= 2014
+    AND published = 1
+    )
 
 When using the expression objects you can use the following methods to create
 conditions:
@@ -486,6 +551,17 @@ the ``IS`` operator to automatically create the correct expression::
 
 The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
 
+Automatic IS NOT NULL Creation
+------------------------------
+
+When a condition value is expected not to be ``null`` or any other value, you can use
+the ``IS NOT`` operator to automatically create the correct expression::
+
+    $query = $categories->find()
+        ->where(['parent_id IS NOT' => $parentId]);
+
+
+The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL`` depending on the type of ``$parentId``
 
 Raw Expressions
 ---------------
@@ -504,6 +580,41 @@ expression objects to add snippets of SQL to your queries::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
+
+Getting Results
+===============
+
+Once you've made your query, you'll want to retrieve rows from it. There are
+a few ways of doing this::
+
+    // Iterate the query
+    foreach ($query as $row) {
+        // Do stuff.
+    }
+
+    // Get the results
+    $results = $query->all();
+
+You can use :doc:`any of the collection </core-libraries/collections>` methods
+on you query objects to pre-process or transform the results::
+
+    // Use one of the collection methods.
+    $ids = $query->map(function ($row) {
+        return $row->id;
+    });
+
+    $maxAge = $query->max(function ($row) {
+        return $max->age;
+    });
+
+You can use ``first`` or ``firstOrFail`` to retrieve a single record. These
+methods will alter the query adding a ``LIMIT 1`` clause::
+
+    // Get just the first row
+    $row = $query->first();
+
+    // Get the first row or an exception.
+    $row = $query->firstOrFail();
 
 .. _query-count:
 
@@ -609,10 +720,10 @@ Loading Associations
 The builder can help you retrieve data from multiple tables at the same time
 with the minimum amount of queries possible. To be able to fetch associated
 data, you first need to setup associations between the tables as described in
-the :ref:`table-associations` section. This technique of combining queries
+the :doc:`/orm/associations` section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
-.. include:: ./table-objects.rst
+.. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
 
@@ -907,7 +1018,7 @@ information about CakePHP, as usual we need a mapper function::
         }
     };
 
-It first checks for whether the "cakephp" word in in the article's body, and
+It first checks for whether the "cakephp" word is in the article's body, and
 then breaks the body into individual words. Each word will create its own
 ``bucket`` where each article id will be stored. Now let's reduce our results to
 only extract the count::
@@ -925,7 +1036,7 @@ Finally, we put everything together::
         ->mapReduce($mapper, $reducer);
 
 This could return a very large array if we don't clean stop words, but it could
-look something like like this::
+look something like this::
 
     [
         'cakephp' => 100,

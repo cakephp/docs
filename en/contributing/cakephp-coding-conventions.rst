@@ -120,11 +120,11 @@ clarity::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
-View Files
-----------
+Template Files
+--------------
 
-In view files (.ctp files) developers should use keyword control structures.
-Keyword control structures are easier to read in complex view files. Control
+In template files (.ctp files) developers should use keyword control structures.
+Keyword control structures are easier to read in complex template files. Control
 structures can either be contained in a larger PHP block, or in separate PHP
 tags::
 
@@ -382,12 +382,12 @@ PHP Tags
 ========
 
 Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short echo
-should be used in view files (``.ctp``) where appropriate.
+should be used in template files (``.ctp``) where appropriate.
 
 Short Echo
 ----------
 
-The short echo should be used in view files in place of ``<?php echo``. It should be
+The short echo should be used in template files in place of ``<?php echo``. It should be
 immediately followed by a single space, the variable or function value to ``echo``, a
 single space, and the php closing tag::
 

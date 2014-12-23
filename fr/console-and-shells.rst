@@ -215,7 +215,7 @@ tâche 'FileGenerator', vous pourriez créer
 ``src/Shell/Task/FileGeneratorTask.php``.
 
 Chaque tâche doit au moins intégrer une méthode ``main()``. Le
-ShellDispatcher appelera cette méthode quand la tâche est invoquée.
+ShellDispatcher appellera cette méthode quand la tâche est invoquée.
 une classe de tâche ressemble à cela::
 
     namespace App\Shell\Task;
@@ -254,7 +254,7 @@ commande::
 
 
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
-l'OptionParser du Shell::   
+l'OptionParser du Shell::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -643,7 +643,7 @@ est appelé. De plus, vous pouvez utiliser ``choices`` pour forcer un argument
 pour qu'il soit une liste de choix valides::
 
     $parser->addArgument('type', [
-        'help' => 'Le type de noeud avec lequel intéragir.',
+        'help' => 'Le type de nœud avec lequel intéragir.',
         'required' => true,
         'choices' => ['aro', 'aco']
     ]);
@@ -849,6 +849,20 @@ d'option::
         ]);
     }
 
+Fusionner les ConsoleOptionParsers
+----------------------------------
+
+.. php:method:: merge($spec)
+
+Lorsque vous construisez un groupe de commandes, vous voudrez peut-être combiner
+plusieurs parsers::
+
+    $parser->merge($anotherParser);
+
+Notez que l'ordre des arguments de chaque parser doit être identique, et que
+les options doivent être compatibles pour que cela fonctionne. N'utilisez donc
+pas les mêmes clés pour des choses différentes.
+
 Obtenir de l'Aide dans les Shells
 ---------------------------------
 
@@ -964,14 +978,13 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/code-generation-with-bake
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
-
-
+    console-and-shells/plugin-assets
+    
 .. meta::
     :title lang=fr: Console et Shells
     :keywords lang=fr: scripts de shell,système shell,classes application,tâches de fond,script en ligne,tâche cron,réponse requête request response,système path,acl,nouveaux projets,shells,spécifiques,paramètres,i18n,cakephp,répertoire,maintenance,idéal,applications,mvc

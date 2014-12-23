@@ -886,6 +886,9 @@ and reduce the problems people had in the past:
 - The ``$confirmMessage`` argument of :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
   has been removed. You should now use key ``confirm`` in ``$options`` to specify
   the message.
+- Templates tags are now all camelBacked. Pre-3.0 tags ``formstart``, ``formend``, ``hiddenblock``
+  and ``inputsubmit`` are now ``formStart``, ``formEnd``, ``hiddenBlock`` and ``inputSubmit``.
+  Make sure you change them if they are customized in your app.
 
 It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.

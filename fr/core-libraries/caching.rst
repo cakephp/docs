@@ -6,8 +6,8 @@ La mise en cache
 .. php:class:: Cache
 
 La mise en cache est fréquemment utilisée pour réduire le temps pris pour créer
-ou lire depuis une autre ressource. La mise en cache est souvent  utilisée pour
-rendre la lecture de ressources consommatrices en temps en ressources moins
+ou lire depuis une autre ressource. La mise en cache est souvent utilisée pour
+rendre la lecture de ressources consommatrices en temps et en ressources moins
 consommatrice. Vous pouvez aisément stocker en cache les résultats de requêtes
 consommatrices en ressources ou les accès à distance à des services web qui ne
 changent pas fréquemment. Une fois mis en cache, re-lire les ressources
@@ -17,7 +17,7 @@ ressource distante.
 La mise en cache dans CakePHP se fait principalement par la classe
 ``Cache``. Cette classe fournit un ensemble de méthodes
 statiques qui fournissent une API uniforme pour le traitement des
-différentes implémentations de mise en cache. CakePHP arrive avec plusieurs
+différentes implémentations de mise en cache. CakePHP dispose de plusieurs
 moteurs de cache intégrés, et fournit un système facile pour implémenter
 votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 
@@ -62,19 +62,18 @@ le fichier ``config/app.php`` est le lieu approprié pour cette configuration.
 Vous pouvez configurer autant de configurations de cache dont vous avez besoin,
 et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne.
-``_cake_core_`` est utilisé pour stocker des carte de fichiers, et les 
-résultat parsés des fichiers de
+``_cake_core_`` est utilisé pour stocker des correspondances de fichiers,
+et les résultats parsés des fichiers de
 :doc:`traduction </core-libraries/internationalization-and-localization>` .
-``_cake_model_``, est utilisé pour stocker les schémas des models de vos
-applications.
-models. Si vous utilisez APC ou Memcache
+``_cake_model_`` est utilisé pour stocker les schémas des models de vos
+applications. Si vous utilisez APC ou Memcache
 vous devrez vous assurer de définir des clés uniques pour les caches du noyau.
 Ceci vous évitera qu'une application vienne réécrire les données cache d'une
 autre application.
 
 L'utilisation de plusieurs configurations vous permet également de changer le
 stockage comme vous l'entendez. Par exemple vous pouvez mettre ceci dans votre
-``config/app.php`` ::
+``config/app.php``::
 
     // ...
     'Cache' => [
@@ -108,20 +107,20 @@ supplémentaires en tant qu'arguments de query string.
 Vous pouvez également configurer les moteurs de cache pendant l'exécution::
 
     // Utilisation d'un nom court
-    Cache::config('short', array(
+    Cache::config('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
         'prefix' => 'cake_short_'
-    ));
+    ]);
 
     // Utilisation d'un espace de nom complet.
-    Cache::config('long', array(
+    Cache::config('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
-    ));
+    ]);
 
     // utilisation d'un objet.
     $object = new FileEngine($config);
@@ -159,12 +158,12 @@ Suppression de Configuration de Cache
 
 .. php:staticmethod:: drop($key)
 
-Une fois la configuration est créé, vous ne pouvez pas la changer. Au lieu de
-cela, vous devriez suppirmer la configuration et re-créer à l'aide de
+Une fois la configuration créée, vous ne pouvez pas la changer. Au lieu de
+cela, vous devriez supprimer la configuration et la re-créer à l'aide de
 :php:meth:`Cake\\Cache\\Cache::drop()` et
 :php:meth:`Cake\\Cache\\Cache::config()`.
-Supprimer un moteur de cache va supprimer la configuration et de détruire
-l'adaptateur si il a été construit.
+Supprimer un moteur de cache va supprimer la configuration et détruire
+l'adaptateur s'il a été construit.
 
 Ecrire dans un Cache
 ====================
@@ -172,10 +171,11 @@ Ecrire dans un Cache
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
 ``Cache::write()`` stocke $value dans le Cache. Vous pouvez lire ou supprimer
-cette valeur plus tard en vous y reférant via ``$key``. Vous pouvez spécifier une configuration optionnelle pour y stocker le cache.
+cette valeur plus tard en vous y reférant via ``$key``. Vous pouvez spécifier
+une configuration optionnelle pour y stocker le cache.
 Si aucune ``$config`` n'est spécifiée, la configuration par défaut sera
-utilisée. ``Cache::write()`` peut stocker tout type d'objet et est idéal pour
-stocker les résultats des 'finds' de vos modèles trouve::
+utilisée. ``Cache::write()`` peut stocker tout type d'objet et est idéale pour
+stocker les résultats des 'finds' de vos models::
 
     if (($posts = Cache::read('posts')) === false) {
         $posts = $unService->getAllPosts();
@@ -189,7 +189,7 @@ d'allers-retours effectués vers la base de données pour récupérer les messag
 
     Si vous prevoyez de mettre en cache le résulat de requêtes faites avec
     l'ORM de CakePHP, il est préférable d'utiliser les fonctionnalités de cache
-    intégrées dans l'objet Query, tel que décrit dans la section
+    intégrées dans l'objet Query, telles que décrites dans la section
     :ref:`mettre les résultats de requête en cache <caching-query-results>`
 
 Ecrire Plusieurs Clés d'un Coup
@@ -197,8 +197,8 @@ Ecrire Plusieurs Clés d'un Coup
 
 .. php:staticmethod:: writeMany($data, $config = 'default')
 
-Vous pouvez avoir besoin d'écrire clés du cache plusieurs à la fois. Bien que
-vous pouvez utiliser de multiples appels à ``write()``, ``writeMany()`` permet 
+Vous pouvez avoir besoin d'écrire plusieurs clés du cache à la fois. Bien que
+vous pouvez utiliser plusieurs appels à ``write()``, ``writeMany()`` permet
 à CakePHP l'utilisation d'une API de stockage plus efficace quand cela est
 possible. Par exemple utiliser ``writeMany()`` permet de gagner de nombreuses
 connections réseau lors de l'utilisation de Memcached::
@@ -208,7 +208,7 @@ connections réseau lors de l'utilisation de Memcached::
         'article-' . $slug . '-comments' => $comments
     ]);
 
-    // $result will contain
+    // $result va contenir
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
 Lire un Cache Distribué
@@ -216,12 +216,12 @@ Lire un Cache Distribué
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-Cache rend facile de lire le cache distribué. Si la clé de cache demandée
-existe, elle sera retourné. Si la clé n'existe pas, le callable sera invoqué
-et les résultats stockés dans le cache à la clé fournie.
+Cache facilite la lecture d'un cache distribué. Si la clé de cache demandée
+existe, elle sera retournée. Si la clé n'existe pas, le callable sera invoqué
+et les résultats stockés dans le cache pour la clé fournie.
 
 Par exemple, vous souhaitez souvent mettre en cache les résultats du appel à un
-service distant. Vous pouvez utiliser ``remember()`` pour rendre cela simple::
+service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
     class IssueService  {
 
@@ -239,7 +239,7 @@ Lire depuis un Cache
 
 .. php:staticmethod:: read($key, $config = 'default')
 
-``Cache::read()``  est utilisée pour lire la valeur mise en cache stocké sous 
+``Cache::read()``  est utilisée pour lire la valeur mise en cache stockée dans
 ``$key`` dans la ``$config``. Si ``$config`` est null la configuration par
 défaut sera utilisée. ``Cache::read()`` renverra la valeur mise en cache si le
 cache est valide ou ``false`` si le cache a expiré ou n'existe pas. Le contenu
@@ -267,7 +267,7 @@ Lire Plusieurs Clés d'un Coup
 .. php:staticmethod:: readMany($keys, $config = 'default')
 
 Après avoir écrit plusieurs clés d'un coup, vous voudrez probablement les lire
-également. Bien que vous pouvez utiliser de multiples appels à ``read()``,
+également. Bien que vous pouvez utiliser plusieurs appels à ``read()``,
 ``readMany()``permet à CakePHP l'utilisation d'une API de stockage plus
 efficace quand cela est possible. Par exemple utiliser ``readMany()``
 permet de gagner de nombreuses connections réseau lors de l'utilisation de
@@ -298,8 +298,8 @@ Supprimer Plusieurs Clés d'un Coup
 .. php:staticmethod:: deleteMany($keys, $config = 'default')
 
 Après avoir écrit plusieurs clés d'un coup, vous voudrez probablement les
-supprimer également. Bien que vous pouvez utiliser de multiples appels à
-``delete()``, ``deleteMany()``permet à CakePHP l'utilisation d'une API de
+supprimer également. Bien que vous pouvez utiliser plusieurs appels à
+``delete()``, ``deleteMany()`` permet à CakePHP l'utilisation d'une API de
 stockage plus efficace quand cela est possible. Par exemple utiliser
 ``deleteMany()`` permet de gagner de nombreuses connections réseau lors de
 l'utilisation de Memcached::
@@ -317,10 +317,10 @@ Effacer les Données du Cache
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-Détruit toute kes vakeurs pour une configuration de cache. Pour les moteurs
-tels que Apc, Memcached and Wincache, le préfixe du configuration du cahe est
-utilisé pour supprimer les données de cache. Assurez-vous que les
-configurations de cache différentes ont différents préfixes::
+Détruit toute les valeurs pour une configuration de cache. Pour les moteurs
+tels que Apc, Memcached et Wincache, le préfixe de la configuration du cache
+est utilisé pour supprimer les données de cache. Assurez-vous que les
+différentes configurations de cache ont des préfixes différents::
 
     // Détruira uniquement les clés expirées.
     Cache::clear(true);
@@ -331,12 +331,12 @@ configurations de cache différentes ont différents préfixes::
 
 .. php:staticmethod:: gc($config)
 
-Garbage collects entries in the cache configuration. This is primarily
-used by FileEngine. It should be implemented by any Cache engine
-that requires manual eviction of cached data.
+Garbage collects entries in the cache configuration. C'est principalement
+utilisé par FileEngine. Elle ne devra être implémentée par tout moteur
+de Cache qui a besoin d'une suppresion manuelle des données mises en cache.
 
-Using Cache to Store Counters
-=============================
+Utiliser le Cache pour Stocker les Compteurs
+============================================
 
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
@@ -348,10 +348,10 @@ peut être stocké dans le cache. La classe Cache expose des opérations atomiqu
 pour incrémenter/décrémenter les valeurs du compteur de manière simple. Les
 opérations atomiques sont importantes pour ces valeurs, car elle réduisent le
 risque de contention, et la capacité pour deux utilisateurs d'abaisser
-simultanément la valeur, ce qui entraînerai une valeur incorrecte.
+simultanément la valeur, ce qui entraînerait une valeur incorrecte.
 
-Après avoir défini une valeur entière, vous pouvez la manipuler à l'aide
-``increment()`` and ``decrement()``::
+Après avoir défini une valeur entière, vous pouvez la manipuler à l'aide des
+fonctions ``increment()`` et ``decrement()``::
 
     Cache::write('initial_count', 10);
 
@@ -383,7 +383,7 @@ Utilisation des Groupes
 
 Parfois vous voudrez marquer plusieurs entrées de cache comme appartenant à
 un même groupe ou un namespace. C'est une exigence courante pour invalider
-des grosses quantités de clés alors que quelques changements d'informations
+de sgrosses quantités de clés alors que quelques changements d'informations
 sont partagés pour toutes les entrées dans un même groupe. Cela est possible
 en déclarant les groupes dans la configuration de cache::
 
@@ -399,7 +399,7 @@ Disons que vous voulez stocker le HTML généré pour votre page d'accueil
 dans le cache, mais vous voulez aussi invalider automatiquement ce cache à
 chaque fois qu'un commentaire ou un post est ajouté à votre base de données.
 En ajoutant les groupes ``comment`` et ``article``, nous avons effectivement
-taggés les clés stockées dans la configuration du cache avec les noms des
+taggé les clés stockées dans la configuration du cache avec les noms des
 deux groupes.
 
 Par exemple, dès qu'un post est ajouté, nous pouvons dire au moteur de
@@ -414,8 +414,8 @@ Cache de retirer toutes les entrées associées au groupe ``article``::
 
 .. php:staticmethod:: groupConfigs($group = null)
 
-``groupConfigs()`` peut être utilisé pour récupérer le mapping entre des
-groupes et des configurations, ex: en ayant le même groupe::
+``groupConfigs()`` peut être utilisée pour récupérer la correspondance
+entre des groupes et des configurations, par exemple ayant le même groupe::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -476,10 +476,10 @@ comme une app/libs ou dans
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
 notation par points de plugin. ::
 
-    Cache::config('custom', array(
+    Cache::config('custom', [
         'engine' => 'CachePack.MyCustomCache',
         // ...
-    ));
+    ]);
 
 Les moteurs de cache personnalisés doivent étendre
 :php:class:`Cake\\Cache\\CacheEngine` qui définit un certain nombre de méthodes

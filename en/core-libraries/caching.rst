@@ -94,20 +94,20 @@ query string arguments.
 You can also configure Cache engines at runtime::
 
     // Using a short name
-    Cache::config('short', array(
+    Cache::config('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
         'prefix' => 'cake_short_'
-    ));
+    ]);
 
     // Using a fully namespaced name.
-    Cache::config('long', array(
+    Cache::config('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
-    ));
+    ]);
 
     // Using a constructed object.
     $object = new FileEngine($config);
@@ -199,7 +199,7 @@ For example, you often want to cache remote service call results. You could use
 
     class IssueService  {
 
-        function allIssues($repo) {
+        public function allIssues($repo) {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
@@ -441,10 +441,10 @@ as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. ::
 
-    Cache::config('custom', array(
+    Cache::config('custom', [
         'className' => 'CachePack.MyCustomCache',
         // ...
-    ));
+    ]);
 
 Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which
 defines a number of abstract methods as well as provides a few initialization

@@ -116,7 +116,7 @@ Les Types d'Attribut Correspondants
                     [name] => page
 	]
             [files] => [
-            
+
                     [name] => files
 	]
         ]
@@ -581,11 +581,11 @@ Les Types d'Attribut Correspondants
     d'éléments avec cette méthode::
 
         // Appel de la fonction noop $this->noop() sur chaque element de $data
-        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        $result = Hash::map($data, "{n}", [$this, 'noop']);
 
-        function noop($array) {
-         // Fait des choses au tableau et retourne les résultats
-         return $array;
+        public function noop(array $array) {
+            // Fait des choses au tableau et retourne les résultats
+            return $array;
         }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)

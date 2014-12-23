@@ -114,7 +114,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.  Vous pouvez
   utiliser ``username`` et ``password`` pour spécifier le champ de nom
-  d'utilisateur et le mot de passse. 
+  d'utilisateur et le mot de passe.
 - ``userModel`` Le nom du model de la table users, par défaut Users.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``['Users.is_active' => true]``.
@@ -236,7 +236,7 @@ d'authentification. L'URL retournée correspond aux règles suivantes:
   exécuté.
 - S'il n'y a pas de valeur en session et qu'il y a une configuration
   ``loginRedirect``, la valeur de ``loginRedirect`` est retournée..
-- S'il n'y a pas de valeur en session et pas de ``loginRedirect``, / 
+- S'il n'y a pas de valeur en session et pas de ``loginRedirect``, /
   est retournée.
 
 Utilisation de l'Authentification Digest et Basic pour la Connexion
@@ -435,7 +435,7 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
 
     namespace App\Auth;
 
-    use \Cake\Auth\AbstractPasswordHasher;
+    use Cake\Auth\AbstractPasswordHasher;
 
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 
@@ -492,9 +492,13 @@ suit::
         ]);
     }
 
-le premier nom qui apparait dans la clé ``hashers`` indique quelle classe
+Le premier nom qui apparait dans la clé ``hashers`` indique quelle classe
 est la préférée, et elle va remplacer les autres dans la liste si la
 vérification n'est pas un succès.
+
+Quand vous utilisez ``WeakPasswordHasher``, vous devez définir la valeur de
+configuration ``Security.salt`` pour vous assurer que les mots de passe sont
+bien chiffrés avec cette valeur salt.
 
 Afin de mettre à jour les mots de passe ancien des utilisateurs à la volée, vous
 pouvez changer la fonction login selon::
@@ -516,9 +520,8 @@ pouvez changer la fonction login selon::
     }
 
 Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
-vers la propriété comme cela la fonction setter dans l'entity hashe le mot de
-passe comme montré dans les exemples précédents et sauvegardent à nouveau vers
-la base de données.
+pour que la fonction setter dans l'entity hashe le mot de passe comme montré
+dans les exemples précédents et sauvegarde ensuite l'entity.
 
 Hachage de Mots de Passe pour l'Authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

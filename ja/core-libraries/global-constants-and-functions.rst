@@ -311,13 +311,6 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     あなたのアプリケーションのディレクトリ名。``app`` かも知れません。
 
-.. php:const:: APPLIBS
-
-    ..
-        Path to the application's Lib directory.
-
-    アプリケーションの Lib ディレクトリへのパス。
-
 .. php:const:: CACHE
 
     ..
@@ -348,67 +341,11 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ルートディレクトリへの、末尾にディレクトリスラッシュを付加したパス。
 
-.. php:const:: CSS
-
-    ..
-        Path to the public CSS directory.
-
-    public CSS ディレクトリへのパス。
-
-.. php:const:: CSS_URL
-
-    ..
-        Web path to the CSS files directory.
-
-    CSS ファイル・ディレクトリへの Webパス。
-
-    .. deprecated:: 2.4
-        代わりに設定値の ``App.cssBaseUrl`` を使用して下さい。
-
 .. php:const:: DS
 
     .. Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
 
     PHP の DIRECTORY\_SEPARATOR (Linux の場合は / windows の場合は \\) のショートカット。
-
-.. php:const:: FULL_BASE_URL
-
-    .. Full url prefix. Such as ``https://example.com``
-
-    ``https://example.com`` のような完全なURLプリフィクス。
-
-    .. deprecated:: 2.4
-        この定数は廃止されたので、代わりに :php:meth:`Router::fullbaseUrl()` を使用する必要があります。
-
-.. php:const:: IMAGES
-
-    .. Path to the public images directory.
-
-    画像の公開ディレクトリへのパス。
-
-.. php:const:: IMAGES_URL
-
-    .. Web path to the public images directory.
-
-    画像の公開ディレクトリへのWebパス。
-
-    .. deprecated:: 2.4
-        代わりに設定値の ``App.imageBaseUrl`` を使用して下さい。
-
-.. php:const:: JS
-
-    .. Path to the public JavaScript directory.
-
-    JavaScript の公開ディレクトリへのパス。
-
-.. php:const:: JS_URL
-
-    .. Web path to the js files directory.
-
-    JavaScript の公開ディレクトリへのWebパス。
-
-    .. deprecated:: 2.4
-        代わりに設定値の ``App.jsBaseUrl`` を使用して下さい。
 
 .. php:const:: LOGS
 
@@ -433,18 +370,6 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     .. Path to the temporary files directory.
 
     一時ファイルディレクトリへのパス。
-
-.. php:const:: VENDORS
-
-    .. Path to the vendors directory.
-
-    ベンダーディレクトリへのパス。
-
-.. php:const:: WEBROOT_DIR
-
-    .. Equals ``webroot`` or the name of your webroot directory.
-
-    あなたのウェブルートディレクトリの名前。``webroot`` かも知れません。
 
 .. php:const:: WWW\_ROOT
 
@@ -508,5 +433,5 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
 
 .. meta::
-    :title lang=en: Global Constants and Functions
-    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
+    :title lang=ja: Global Constants and Functions
+    :keywords lang=ja: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations

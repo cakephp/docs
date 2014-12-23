@@ -435,10 +435,10 @@ HTML attributes. The following will cover the options specific to
     echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
-  the keys matching the validation rule names::
+  the keys matching the original validation error messages::
 
     $this->Form->input('name', [
-        'error' => ['tooShort' => __('This is not long enough')]
+        'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
   As seen above you can set the error message for each validation
@@ -532,17 +532,14 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-      <div class="input select">
-          <label for="field">Field</label>
-          <select name="field" id="field">
-              <option value="">(choose one)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
-      </div>
+      <select name="field" id="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
 
   Options can also supplied as key-value pairs.
 
@@ -1439,30 +1436,30 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
 * ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
 * ``errorItem`` {{text}}
 * ``file`` {{name}}, {{attrs}}
-* ``formstart`` {{attrs}}
-* ``formend`` No variables are provided.
-* ``hiddenblock`` {{content}}
+* ``formGroup`` {{label}}, {{input}}, {{error}}
+* ``formStart`` {{attrs}}
+* ``formEnd`` No variables are provided.
+* ``hiddenBlock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputsubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioWrapper``  {{input}}, {{label}},
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``formGroup`` {{label}}, {{input}},
-* ``checkboxFormGroup`` {{input}}, {{label}},
 * ``inputContainer`` {{type}}, {{required}}, {{content}}
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
+* ``inputSubmit`` {{type}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioWrapper``  {{input}}, {{label}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
 
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating

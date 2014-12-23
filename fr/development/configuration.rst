@@ -286,7 +286,7 @@ write() ci-dessus, nous pouvons lire cette donnée::
     Configure::read('Company');
 
     //yields:
-    array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 Si $key est laissé à null, toutes les valeurs dans Configure seront
 retournées.
@@ -347,7 +347,7 @@ quels alias de reader sont attachés, vous pouvez utiliser
 :php:meth:`Configure::configured()`::
 
     // Récupère le tableau d'alias pour les readers attachés.
-    Configure::configured()
+    Configure::configured();
 
     // Vérifie si un reader spécifique est attaché
     Configure::configured('default');
@@ -428,7 +428,7 @@ Restaurer la configuration de runtime
 
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
 
-Une fois que vous avez stocké la configuration executée, vous aurez
+Une fois que vous avez stocké la configuration exécutée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
 ``Configure::restore()`` fait exactement cela::
 

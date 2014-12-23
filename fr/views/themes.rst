@@ -4,7 +4,7 @@ Themes
 Vous pouvez profiter des themes, ce qui facilite le changement du visuel et
 du ressenti de votre page rapidement et facilement. Les Themes dans CakePHP
 sont simplement des plugins qui se focalisent sur la livraison de fichiers
-de vues. En plus des fichiers de template, ils peuvent fournir des helpers et
+de template. En plus des fichiers de template, ils peuvent fournir des helpers et
 des cells si votre theme le nécessite. Quand vous utilisez des cells et des
 helpers à partir de votre theme, vous devrez continuer à utiliser la
 :term:`syntaxe de plugin`
@@ -20,7 +20,7 @@ dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::
 
     $this->theme = 'AutreExemple';
 
-Les fichiers de vue du theme doivent être dans un plugin avec le même nom. Par
+Les fichiers de template du theme doivent être dans un plugin avec le même nom. Par
 exemple, le theme ci-dessus se trouvera dans
 ``plugins/AutreExemple/src/Template``. Il est important de se rappeler que
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
@@ -31,9 +31,9 @@ Par exemple, le fichier de vue pour une action edit d'un controller Posts se
 trouvera dans ``plugins/AutreExemple/src/Template/Posts/edit.ctp``. Les fichiers de
 layout se trouveront dans ``plugins/AutreExemple/src/Template/Layout/``.
 
-Si un fichier de vue ne peut pas être trouvé dans le theme, CakePHP va essayer
+Si un fichier de template ne peut pas être trouvé dans le theme, CakePHP va essayer
 de le trouver dans le dossier ``src/Template/``. De cette façon, vous pouvez
-créer les fichiers de vue principaux et simplement les surcharger au cas par
+créer les fichiers de template principaux et simplement les surcharger au cas par
 cas dans votre dossier theme.
 
 Assets du theme
@@ -41,15 +41,15 @@ Assets du theme
 
 Puisque les themes sont des plugins CakePHP standards, ils peuvent inclure
 tout asset nécessaire dans leur répertoire webroot. Cela permet de facilement
-packager et distribuer les themes. En development, les requêtes pour les assets
-de theme seront gérés par :php:class:`Cake\\Routing\\Dispatcher`. Pour améliorer
+packager et distribuer les themes. En développement, les requêtes pour les assets
+de theme seront gérées par :php:class:`Cake\\Routing\\Dispatcher`. Pour améliorer
 les performances pour les environnements de production, il est recommandé
-de :ref:`symlink-assets`.
+d':ref:`améliorer les performances de votre application. <symlink-assets>`.
 
 Tous les helpers intégrés à CakePHP connaissent les themes et seront créés
-avec les bons chemins automatiquement. Comme les fichiers de vue, si un fichier
-n'est pas dans le dossier du theme, il va chercher par défaut dans le dossier
-webroot principal::
+avec les bons chemins automatiquement. Comme les fichiers de template, si un
+fichier n'est pas dans le dossier du theme, il va chercher par défaut dans le
+dossier webroot principal::
 
     //Quand un theme avec le nom de 'purple_cupcake'
     $this->Html->css('main.css');

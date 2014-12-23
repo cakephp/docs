@@ -213,6 +213,15 @@ For example, if you had a ``hello_world()`` method inside a shell and invoked it
 with ``bin/cake my_shell hello_world``, you will need to rename the method
 to ``helloWorld``. There are no changes required in the way you invoke commands.
 
+ConsoleOptionParser
+-------------------
+
+- ``ConsoleOptionParser::merge()`` has been added to merge parsers.
+
+ConsoleInputArgument
+--------------------
+
+- ``ConsoleInputArgument::isEqualTo()`` has been added to compare two arguments.
 
 Shell / Task
 ============
@@ -226,6 +235,14 @@ ApiShell Removed
 The ApiShell was removed as it didn't provide any benefit over the file source itself
 and the online documentation/`API <http://api.cakephp.org/>`_.
 
+SchemaShell Removed
+-------------------
+
+The SchemaShell was removed as it was never a complete database migration implementation
+and better tools such as `Phinx <https://phinx.org/>`_ have emerged. It has been replaced by
+the `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ which acts as a wrapper between
+CakePHP and `Phinx <https://phinx.org/>`_.
+
 ExtractTask
 -----------
 
@@ -236,8 +253,11 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Bake templates have been moved under ``src/Template/Bake``. Also, the ``theme``
-  option, used for selecting a bake template, has been renamed to ``template``.
+- Bake is no longer part of the core source and is superseded by
+  `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
+- Bake templates have been moved under ``src/Template/Bake``.
+- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote templating
+  logic, allowing php code to be treated as plain text.
 
 Event
 =====
@@ -279,6 +299,7 @@ Log
 * Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
   Cake's own ``LogInterface``. In general, if you extended  :php:class:`Cake\\Log\\Engine\\BaseEngine`
   you just need to rename the ``write()`` method to ``log()``.
+* :php:meth:`Cake\\Log\\Engine\\FileLog` now writes files in ``ROOT/logs`` instead of ``ROOT/tmp/logs``.
 
 Routing
 =======
@@ -352,7 +373,7 @@ Route
 -----
 
 * ``CakeRoute`` was re-named to ``Route``.
-* The signature of ``match()`` has changed to ``match($url, $context = array())``
+* The signature of ``match()`` has changed to ``match($url, $context = [])``
   See :php:meth:`Cake\\Routing\\Route::match()` for information on the new signature.
 
 Dispatcher Filters Configuration Changed
@@ -429,6 +450,8 @@ for using the session object.
 * The path for session cookie now defaults to app's base path instead of "/".
   Also new config variable ``Session.cookiePath`` has been added to easily
   customize the cookie path.
+* A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
+  to allow reading and deleting session data in a single step.
 
 Network\\Http
 =============
@@ -580,7 +603,7 @@ AuthComponent
 
 - ``BaseAuthenticate::_password()`` has been removed. Use a ``PasswordHasher``
   class instead.
-- ``BaseAuthenticate::logout()`` as been removed.
+- ``BaseAuthenticate::logout()`` has been removed.
 - ``AuthComponent`` now triggers two events ``Auth.afterIdentify`` and
   ``Auth.logout`` after a user has been identified and before a user is
   logged out respectively. You can set callback functions for these events by
@@ -916,6 +939,9 @@ and reduce the problems people had in the past:
   by default. This helps increase compatibility with popular CSS libraries like
   `Bootstrap <http://getbootstrap.com/>`_ and
   `Foundation <http://foundation.zurb.com/>`_.
+- Templates tags are now all camelBacked. Pre-3.0 tags ``formstart``, ``formend``, ``hiddenblock``
+  and ``inputsubmit`` are now ``formStart``, ``formEnd``, ``hiddenBlock`` and ``inputSubmit``.
+  Make sure you change them if they are customized in your app.
 
 It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.
@@ -1126,10 +1152,10 @@ Inflector
   yielded significant performance improvements::
 
     // Instead of
-    Inflector::rules('transliteration', array(
+    Inflector::rules('transliteration', [
         '/ä|æ/' => 'ae',
         '/å/' => 'aa'
-    ));
+    ]);
 
     // You should use
     Inflector::rules('transliteration', [

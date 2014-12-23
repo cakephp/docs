@@ -184,8 +184,8 @@ it easier to test code that works with error messages::
 Mass Assignment
 ===============
 
-While setting properties to entites in bulk is simple and convenient, it can
-create signifcant security issues. Bulk assigning user data from the request
+While setting properties to entities in bulk is simple and convenient, it can
+create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. By default CakePHP
 protects against mass-assignment and makes you whitelist which fields
 are mass-assignable.

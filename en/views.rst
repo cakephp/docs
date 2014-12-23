@@ -60,7 +60,7 @@ The view layer of CakePHP is how you speak to your users. Most of the time your
 views will be showing (X)HTML documents to browsers, but you might also need to
 reply to a remote application via JSON, or output a CSV file for a user.
 
-By default CakePHP view files are written in plain PHP and have a default
+By default CakePHP template files are written in plain PHP and have a default
 extension of ``.ctp`` (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you're
@@ -68,7 +68,7 @@ serving to. If you'd prefer using a templating language like
 Twig, a subclass of View will bridge your templating
 language and CakePHP.
 
-View files are stored in ``src/Template/``, in a folder named after the
+Template files are stored in ``src/Template/``, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
@@ -82,7 +82,7 @@ chapter:
   action being run. They form the meat of your application's response.
 - **elements**: small, reusable bits of view code. Elements are
   usually rendered inside views.
-- **layouts**: view files that contain presentational code that
+- **layouts**: template files that contain presentational code that
   wraps many interfaces in your application. Most views are
   rendered inside a layout.
 - **helpers**: these classes encapsulate view logic that is needed
@@ -391,7 +391,7 @@ JavaScript and CSS files from views.
 .. note::
 
     When using ``HtmlHelper::css()`` or ``HtmlHelper::script()``
-    in view files, specify ``'block' => true`` to place the HTML
+    in template files, specify ``'block' => true`` to place the HTML
     source in a block with the same name. (See API for more details on usage).
 
 The ``content`` block contains the contents of the rendered view.
@@ -493,7 +493,7 @@ argument::
 
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that ``Controller::set()`` in
-the controller works with view files). In the above example, the
+the controller works with template files). In the above example, the
 ``src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
@@ -619,6 +619,24 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
     echo $this->element('Contacts.helpbox');
 
 are equivalent and will result in the same element being rendered.
+
+Caching Sections of Your View
+-----------------------------
+
+.. php:method:: cache(callable $block, array $options = [])
+
+Sometimes generating a section of your view output can be expensive because of
+rendered :doc:`/views/cells` or expensive helper operations. To help make your
+application run faster CakePHP provides a way to cache view sections::
+
+    // Assuming some local variables
+    echo $this->cache(function () use ($user, $article) {
+        echo $this->cell('UserProfile', [$user]);
+        echo $this->cell('ArticleFull', [$article]);
+    }, ['key' => 'my_view_key']);
+
+By default cached view content will go into the ``View::$elementCache`` cache
+config, but you can use the ``config`` option to change this.
 
 
 Creating Your Own View Classes

@@ -9,7 +9,7 @@ console interactive en utilisant::
     $ bin/cake console
 
 Cela va démarrer votre application et lancer une console interactive. A ce
-niveau-là, vous pouvez intéragir avec le code de votre application et executer
+niveau-là, vous pouvez intéragir avec le code de votre application et exécuter
 des requêtes en utilisant les models de votre application::
 
     $ bin/cake console

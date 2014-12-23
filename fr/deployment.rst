@@ -77,7 +77,7 @@ informations sur la spécificité de chaque webserveur.
 
 Dans tous les cas, vous devez définir le document de l'hôte/domaine virtuel
 pour qu'il soit ``webroot/``. Cela retire la possibilité que des fichiers
-soient executés en-dehors du répertoire webroot.
+soient exécutés en-dehors du répertoire webroot.
 
 .. _symlink-assets:
 
@@ -85,7 +85,7 @@ Améliorer les performances de votre application
 ===============================================
 
 Le chargement des classes peut facilement prendre une bonne part du temps
-d'execution de votre application. Afin d'éviter ce problème, il est recommandé
+d'exécution de votre application. Afin d'éviter ce problème, il est recommandé
 que vous lanciez cette commande dans votre serveur de production une fois
 que l'application est déployée::
 

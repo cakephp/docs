@@ -119,7 +119,7 @@ Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
 object to the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's view files are stored in ``src/Template`` inside a folder
+CakePHP's template files are stored in ``src/Template`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Articles' in this case). To format this article data in a
 nice table, our view code might look something like this:
@@ -467,8 +467,8 @@ The edit view might look something like this:
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
 
-CakePHP will use the result of ``$article->isNew()`` to determine whether or not
-a ``save()`` should insert a new record, or update an existing one.
+CakePHP will determine to whether a ``save()`` generates an insert, or update
+statement based on state in the entity.
 
 You can now update your index view with links to edit specific
 articles:
@@ -656,7 +656,7 @@ These are common tasks people learning CakePHP usually want to study next:
 
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements`: Including and reusing view snippets
-3. :doc:`/console-and-shells/code-generation-with-bake`: Generating basic CRUD code
+3. :doc:`/bake/usage`: Generating basic CRUD code
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
 
 

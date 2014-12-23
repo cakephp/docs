@@ -233,26 +233,25 @@ Quelques exemples seraient::
         'post',
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
-    
+
     // Ajouter un détecteur de valeur model.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
-    
+
     // Ajouter un détecteur d'options
     $this->request->addDetector('internalIp', [
-        'env' => 'CLIENT_IP', 
+        'env' => 'CLIENT_IP',
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
-    
-    // Ajouter un détecteur de callback. Peut soit être une fonction anonyme
-    // ou un callback régulier.
+
+    // Ajouter un détecteur de callback. Doit être un callable valide.
     $this->request->addDetector(
         'awesome',
-        ['callback' => function ($request) {
+        function ($request) {
             return isset($request->awesome);
-        }]
+        }
     );
 
 ``Request`` inclut aussi des méthodes comme
@@ -317,7 +316,7 @@ Travailler avec les Méthodes & Headers de HTTP
 
 .. php:method:: method()
 
-Retourne la méthode HTTP où la requête a été faite.
+Retourne la méthode HTTP où la requête a été faite::
 
     // Affiche POST
     echo $request->method();
@@ -348,7 +347,7 @@ Retourne l'adresse IP du visiteur courant.
 Faire Confiance aux Header de Proxy
 -----------------------------------
 
-Si votre application est derrière un load balancer ou executée sur un service
+Si votre application est derrière un load balancer ou exécutée sur un service
 cloud, vous voudrez souvent avoir l'hôte de load balancer, le port et le
 scheme dans vos requêtes. Souvent les load balancers vont aussi envoyer
 des en-têtes ``HTTP-X-Forwarded-*`` avec les valeurs originales. Les en-têtes
@@ -601,9 +600,9 @@ Réglage fin du Cache HTTP
 -------------------------
 
 Une des façons les meilleures et les plus simples de rendre votre application
-plus rapide est d'utiliser le cache HTTP. vous devez uniquement pour aider les 
+plus rapide est d'utiliser le cache HTTP. vous devez uniquement pour aider les
 clients à décider si ils doivent utiliser une copie de la réponse mise en cache,
-en définissant quelques propriétés d'en-têtes comme la date de mise à jour et la 
+en définissant quelques propriétés d'en-têtes comme la date de mise à jour et la
 balise d'entité de réponse :ref:`etag-tag`.
 
 Plutôt que d'avoir à coder la logique de mise en cache et de sa nullité

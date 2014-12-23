@@ -460,10 +460,10 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
     echo $this->Form->input('name', ['error' => false]);
 
   Pour surcharger les messages d'erreurs du model utilisez un tableau
-  avec les clés respectant les règles de validation::
+  avec les clés respectant les messages d'erreurs de validation originaux::
 
     $this->Form->input('name', [
-        'error' => ['tooShort' => __('This is not long enough')]
+        'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
   Comme vu précédemment, vous pouvez définir le message d'erreur pour chaque
@@ -560,19 +560,16 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <div class="input select">
-          <label for="field">Field</label>
-          <select name="field" id="field">
-              <option value="">(choisissez)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
-      </div>
+      <select name="field" id="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
 
-    Les options peuvent aussi fournir une paire de clé-valeur.
+  Les options peuvent aussi fournir une paire de clé-valeur.
 
 * ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
   radios) un input caché est créé. Ainsi, la clé dans $this->request->data
@@ -1489,31 +1486,30 @@ suivantes:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
+* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
 * ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
 * ``errorItem`` {{text}}
 * ``file`` {{name}}, {{attrs}}
-* ``formstart`` {{attrs}}
-* ``formend`` No variables are provided.
-* ``hiddenblock`` {{content}}
+* ``formGroup`` {{label}}, {{input}}, {{error}}
+* ``formStart`` {{attrs}}
+* ``formEnd`` No variables are provided.
+* ``hiddenBlock`` {{content}}
 * ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputsubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioWrapper``  {{input}}, {{label}},
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``formGroup`` {{label}}, {{input}},
-* ``checkboxFormGroup`` {{input}}, {{label}},
 * ``inputContainer`` {{type}}, {{required}}, {{content}}
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
-* ``submitContainer`` {{content}}{{required}}, {{content}}, {{error}}
+* ``inputSubmit`` {{type}}, {{attrs}}
+* ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``option`` {{value}}, {{attrs}}, {{text}}
+* ``optgroup`` {{label}}, {{attrs}}, {{content}}
+* ``radio`` {{name}}, {{value}}, {{attrs}}
+* ``radioWrapper``  {{input}}, {{label}}
+* ``select`` {{name}}, {{attrs}}, {{content}}
+* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
+* ``textarea``  {{name}}, {{attrs}}, {{value}}
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création

@@ -125,7 +125,7 @@ spécifique.
 
 Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
 partir du plugin Blog::
-    
+
     Plugin::loadAll([
         ['bootstrap' => true],
         'Blog' => ['routes' => true]
@@ -205,7 +205,7 @@ de répertoire basique. Cela devrait ressembler à ceci::
                 /TestCase
                 /Fixture
             /webroot
-                    
+
 Notez que le nom du dossier du plugin, '**ContactManager**'. Il est important
 que ce dossier ait le même nom que le plugin.
 
@@ -234,7 +234,7 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Référez-vous au chapitre
-:doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
+:doc:`/bake/usage` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande. Assurez-vous de
 re-générer votre autoloader une fois que vous avez créé votre plugin::
 
@@ -282,7 +282,7 @@ Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
     use Cake\Routing\Router;
 
     Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks();
+        $routes->fallbacks('InflectedRoute');
     });
 
 Ce qui est au-dessus connecte les routes par défaut pour votre plugin. Vous
@@ -403,12 +403,12 @@ normalement.
     Pour des informations sur la façon d'utiliser les elements à partir d'un
     plugin, regardez :ref:`view-elements`.
 
-Redéfinition des Vues de Plugin à partir de l'Intérieur de votre Application
-----------------------------------------------------------------------------
+Redéfinition des Template de Plugin depuis l'Intérieur de votre Application
+---------------------------------------------------------------------------
 
 Vous pouvez redéfinir toutes les vues du plugin à partir de l'intérieur de
 votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
-'ContactManager', vous pouvez redéfinir les fichiers de vue du plugin avec
+'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
 ``src/Template/plugins/[Plugin]/[Controller]/[view].ctp``. Pour le controller

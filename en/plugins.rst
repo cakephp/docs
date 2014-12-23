@@ -227,7 +227,7 @@ of your app. For example - baking controllers::
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
-:doc:`/console-and-shells/code-generation-with-bake` if you
+:doc:`/bake/usage` if you
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin::
 
@@ -275,7 +275,7 @@ Then create the ContactManager plugin routes. Put the following into
     use Cake\Routing\Router;
 
     Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks();
+        $routes->fallbacks('InflectedRoute');
     });
 
 The above will connect default routes for you plugin. You can customize this
@@ -393,12 +393,12 @@ If the plugin prefix is omitted, the layout/view file will be located normally.
     For information on how to use elements from a plugin, look up
     :ref:`view-elements`
 
-Overriding Plugin Views from Inside Your Application
-----------------------------------------------------
+Overriding Plugin Templates from Inside Your Application
+--------------------------------------------------------
 
 You can override any plugin views from inside your app using special paths. If
-you have a plugin called 'ContactManager' you can override the view files of the
-plugin with more application specific view logic by creating files using the
+you have a plugin called 'ContactManager' you can override the template files of the
+plugin with application specific view logic by creating files using the
 following template ``src/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
 Contacts controller you could make the following file::
 

@@ -294,9 +294,8 @@ This means the session is easily accessible from:
 * Components
 
 In addition to the basic session object, you can also use the
-:php:class:`Cake\\Controller\\Component\\SessionComponent` and
 :php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
-controllers and views. A basic example of session usage would be::
+your views. A basic example of session usage would be::
 
     $name = $this->request->session()->read('User.name');
 
@@ -325,7 +324,11 @@ compatible syntax::
 
 When you need to delete data from the session, you can use delete::
 
-    $session->delete('Config.language');
+    $session->delete('Some.value');
+
+When you need to read and delete data from the session, you can use consume::
+
+    $session->consume('Some.value');
 
 .. php:method:: check($key)
 

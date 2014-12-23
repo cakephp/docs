@@ -566,11 +566,11 @@ Attribute Matching Types
     this method::
 
         // Call the noop function $this->noop() on every element of $data
-        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        $result = Hash::map($data, "{n}", [$this, 'noop']);
 
-        function noop($array) {
-         // Do stuff to array and return the result
-         return $array;
+        public function noop(array $array) {
+            // Do stuff to array and return the result
+            return $array;
         }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)

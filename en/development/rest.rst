@@ -100,7 +100,7 @@ view variable is used to define which view variables ``XmlView`` should
 serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
-define the ``_serialize`` view variable, and instead use view files. We place
+define the ``_serialize`` view variable, and instead use template files. We place
 the REST views for our RecipesController inside ``src/Template/recipes/xml``. We can also use
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
@@ -108,7 +108,7 @@ our index view might look like::
     // app/View/Recipes/xml/index.ctp
     // Do some formatting and manipulation on
     // the $recipes array.
-    $xml = Xml::fromArray(array('response' => $recipes));
+    $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
 When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::extensions()`,

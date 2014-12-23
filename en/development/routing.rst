@@ -110,8 +110,7 @@ some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -408,8 +407,7 @@ can be enabled by using the ``prefix`` scope method::
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
@@ -543,17 +541,9 @@ For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
-    Router::scope('/', function ($routes) {
-        $routes->connect('/:plugin/:controller/:action',
-            ['plugin' => '*', 'controller' => '*', 'action' => '*'],
-            ['routeClass' => 'DashedRoute']
-        );
-
-        $routes->fallbacks();
+    Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
+        $routes->fallbacks('DashedRoute');
     });
-
-Under the ``/`` routing scope, the previous example will attempt to catch all
-plugin/controller/action dashed routes and map them to their respective actions.
 
 .. index:: file extensions
 .. _file-extensions:
@@ -725,11 +715,11 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', array(
-            'connectOptions' => array(
+        $routes->resources('books', [
+            'connectOptions' => [
                 'routeClass' => 'ApiRoute',
-            )
-        );
+            ]
+        ];
     });
 
 .. index:: passed arguments
@@ -931,6 +921,30 @@ option for each route. For example using::
 
 will cause all routes connected after this to use the ``DashedRoute`` route class.
 Calling the method without an argument will return current default route class.
+
+Fallbacks method
+----------------
+
+.. php:method:: fallbacks($routeClass = null)
+
+The fallbacks method is a simple shortcut for defining default routes. The method
+uses the passed routing class for the defined rules or if no class is provided the
+class returned by ``Router::defaultRouteClass()`` is used.
+
+Calling fallbacks like so::
+
+    $routes->fallbacks('InflectedRoute');
+
+Is equivalent to the following explicit calls::
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+
+.. note::
+
+    Using the default route class (``Route``) with fallbacks, or any route
+    with ``:plugin`` and/or ``:controller`` route elements will result in
+    inconsistent URL case.
 
 Handling Named Parameters in URLs
 =================================
