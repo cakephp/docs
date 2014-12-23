@@ -37,3 +37,11 @@ View
 SessionHelper
 -------------
 - :php:meth:`SessionHelper::consume()` has been added to read and delete from session in a single step.
+
+
+TestSuite
+=========
+
+ControllerTestCase
+------------------
+- :php:meth:`ControllerTestCase::testAction()` now supports an array as URL.
