@@ -59,5 +59,5 @@
 .. todolist::
 
 .. meta::
-    :title lang=en: Contents
-    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=tr: İçindekiler
+    :keywords lang=tr: çekirdek kütüphaneleri,ref araması,kabuklar,kurulum,ekler,sözlük,modeller

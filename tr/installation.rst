@@ -91,7 +91,7 @@ dizini ise Log işlemleri için ``FileLog`` motoru tarafından kullanılmaktadı
 
 Bu nedenle, CakePHP kurulumunuzdaki ``logs``, ``tmp`` dizinleri ve altdizinlerinin
 web sunucusu kullanıcısı tarafından yazılabilir olduklarından emin olmalısınız.
-Composer'in kurulum işlemi, işleri hızlıca halletmek için `tmp`` ve alt dizinlerini 
+Composer'in kurulum işlemi, işleri hızlıca halletmek için ``tmp`` ve alt dizinlerini 
 heryerden yazılabilir yapar, ancak daha iyi güvenlik ve sadece web sunucusu kullanıcısı
 tarafından yazılabilir olması için izinleri güncelleyebilirsiniz.
 
