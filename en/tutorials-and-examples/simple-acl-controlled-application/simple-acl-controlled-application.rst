@@ -185,15 +185,15 @@ site controlled with Auth and Acl, we will set them up in
         public function beforeFilter() {
             //Configure AuthComponent
             $this->Auth->loginAction = array(
-              'controller' => 'users', 
+              'controller' => 'users',
               'action' => 'login'
             );
             $this->Auth->logoutRedirect = array(
-              'controller' => 'users', 
+              'controller' => 'users',
               'action' => 'login'
             );
             $this->Auth->loginRedirect = array(
-              'controller' => 'posts', 
+              'controller' => 'posts',
               'action' => 'add'
             );
         }
@@ -270,9 +270,8 @@ our ``User`` model we will add the following::
             }
             if (!$groupId) {
                 return null;
-            } else {
-                return array('Group' => array('id' => $groupId));
             }
+            return array('Group' => array('id' => $groupId));
         }
     }
 
@@ -339,7 +338,7 @@ Then modify the ``actsAs`` for the model ``User`` and disable the requester dire
 
     public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 
-These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group`` 
+These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group``
 Aro's. This also avoids the afterSave being called.
 
 Note: Every user has to have ``group_id`` assigned for this to work.
