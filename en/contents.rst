@@ -36,6 +36,7 @@ Contents
     core-libraries/logging
     controllers/components/authentication
     controllers/components/pagination
+    core-libraries/form
     plugins
     development/rest
     security
