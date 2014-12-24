@@ -98,9 +98,9 @@ execute until you start fetching rows, convert it to an array, or when the
 
     Once you've started a query you can use the :doc:`/orm/query-builder` interface
     to build more complex queries, adding additional conditions, limits, or include
-    associations using the fluent interface::
+    associations using the fluent interface.
 
-
+::
     // In a controller or table method.
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
