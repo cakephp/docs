@@ -100,7 +100,8 @@ execute until you start fetching rows, convert it to an array, or when the
     to build more complex queries, adding additional conditions, limits, or include
     associations using the fluent interface.
 
-::
+.. code-block:: php
+
     // In a controller or table method.
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
