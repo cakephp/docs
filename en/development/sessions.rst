@@ -322,11 +322,13 @@ compatible syntax::
 
 .. php:method:: delete($key)
 
-When you need to delete data from the session, you can use delete::
+When you need to delete data from the session, you can use ``delete()``::
 
     $session->delete('Some.value');
 
-When you need to read and delete data from the session, you can use consume::
+.. php:staticmethod:: consume($key)
+
+When you need to read and delete data from the session, you can use ``consume()``::
 
     $session->consume('Some.value');
 

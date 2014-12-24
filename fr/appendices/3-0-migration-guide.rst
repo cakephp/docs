@@ -505,6 +505,8 @@ La classe session n'est plus statique, à la place, la session est accessible
   l'application plutôt que "/".
   De plus, une nouvelle variable de configuration ``Session.cookiePath`` a été
   ajoutée pour personnaliser facilement le chemin du cookie.
+* Une nouvelle méthode :php:meth:`Cake\\Network\\Session::consume()` a été ajoutée
+  pour permettre de lire et supprimer les données de session en une seule étape.
 
 Network\\Http
 =============
