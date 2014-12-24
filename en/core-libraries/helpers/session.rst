@@ -30,6 +30,13 @@ used.
     Read from the Session. Returns a string or array depending on the
     contents of the session.
 
+.. php:method:: consume($name)
+
+    :rtype: mixed
+
+    Read and delete a value from the Session. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
 .. php:method:: check(string $key)
 
     :rtype: boolean

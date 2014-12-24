@@ -51,6 +51,11 @@ all Session component methods wherever a name/key is used.
     Retrieve the value Green from the session. Reading data that does not exist
     will return null.
 
+.. php:method:: consume($name)
+
+    Read and delete a value from the Session. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
 .. php:method:: check($name)
 
     Used to check if a Session variable has been set. Returns true on
