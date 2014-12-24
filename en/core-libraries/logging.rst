@@ -209,7 +209,7 @@ to specify ``Syslog`` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
 be done in the ``bootstrap.php`` file::
 
-    CakeLog::config('default', array(
+    Log::config('default', array(
         'engine' => 'Syslog'
     ));
 
