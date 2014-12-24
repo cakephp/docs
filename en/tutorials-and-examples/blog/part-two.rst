@@ -15,6 +15,7 @@ specific table and go in ``src/Model/Table``. The file we'll be creating will
 be saved to ``src/Model/Table/ArticlesTable.php``. The completed file should
 look like this::
 
+<?php
     // src/Model/Table/ArticlesTable.php
 
     namespace App\Model\Table;
@@ -54,6 +55,7 @@ related to articles done. We'll place this new controller in a file called
 ``ArticlesController.php`` inside the ``src/Controller`` directory. Here's
 what the basic controller should look like::
 
+<?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -67,6 +69,7 @@ users request www.example.com/articles/index (which is also the same
 as www.example.com/articles/), they might expect to see a listing of
 articles. The code for that action would look like this::
 
+<?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -180,6 +183,7 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 ArticlesController now::
 
+<?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -242,6 +246,7 @@ start, but let's allow for the adding of new articles.
 First, start by creating an ``add()`` action in the
 ArticlesController::
 
+<?php
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
@@ -377,6 +382,7 @@ You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Articles model and make a few adjustments::
 
+<?php
     // src/Model/Table/ArticlesTable.php
 
     namespace App\Model\Table;
@@ -420,6 +426,7 @@ should have picked up a pattern. Make the action, then the view.
 Here's what the ``edit()`` action of the ArticlesController would look
 like::
 
+<?php
     // src/Controller/ArticlesController.php
 
     public function edit($id = null) {
@@ -512,6 +519,7 @@ Deleting Articles
 Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ArticlesController::
 
+<?php
     // src/Controller/ArticlesController.php
 
     public function delete($id) {
