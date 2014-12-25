@@ -409,9 +409,13 @@ After installing Monolog using composer, configure the logger using the
 
     Log::config('default', function () {
         $log = new Logger('app');
-        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
     });
+
+    // Optionally stop using the default logfiles
+    Log::drop('debug');
+    Log::drop('error');
 
 .. meta::
     :title lang=en: Logging
