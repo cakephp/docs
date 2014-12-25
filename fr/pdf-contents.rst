@@ -29,6 +29,7 @@ Contenu
     core-libraries/internationalization-and-localization
     core-libraries/logging
     controllers/components/pagination
+    core-libraries/form
     plugins
     development/rest
     security

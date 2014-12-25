@@ -895,19 +895,25 @@ Méthodes d'Assertion
 La classe ``IntegrationTestCase`` vous fournis de nombreuses méthodes
 d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
-    // Verifie pour un code de réponse 2xx
+    // Vérifie pour un code de réponse 2xx
     $this->assertResponseOk();
 
-    // Verifie pour un code de réponse 4xx
+    // Vérifie pour un code de réponse 4xx
     $this->assertResponseError();
 
-    // Verifie pour un code de réponse 5xx
+    // Vérifie pour un code de réponse 5xx
     $this->assertResponseFailure();
 
-    // Vérifie l'entête d'emplacement
+    // Vérifie un code de réponse spécifique, par exemple 200
+    $this->assertResponseCode(200);
+
+    // Vérifie l'en-tête Location
     $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
 
-    // Verifie le contenu de la réponse
+    // Vérifie qu'aucun en-tête Location n'a été envoyé
+    $this->assertNoRedirect();
+
+    // Vérifie le contenu de la réponse
     $this->assertResponseContains('You won!');
 
     // Vérifie le layout

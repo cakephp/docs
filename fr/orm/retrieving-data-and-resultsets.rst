@@ -96,10 +96,14 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
-Une fois que vous avez commencé une requête, vous pouvez utiliser l'interface
-:doc:`/orm/query-builder` pour construire des requêtes plus complexes, d'ajouter
-des conditions supplémentaires, des limites, ou d'inclure des associations
-en utilisant l'interface courante::
+.. note::
+
+    Une fois que vous avez commencé une requête, vous pouvez utiliser
+    l'interface :doc:`/orm/query-builder` pour construire des requêtes
+    plus complexes, d'ajouter des conditions supplémentaires, des limites,
+    ou d'inclure des associations en utilisant l'interface courante.
+
+.. code-block:: php
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')

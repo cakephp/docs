@@ -486,8 +486,8 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
 
-CakePHP utilisera le résultat de ``$article->isNew()`` pour déterminer whether si
-``save()`` doit insérer un article, ou mettre à jour un article existant.
+CakePHP déterminera si un ``save()`` doit générer une insertion un article ou
+la mise à jour d'un article existant.
 
 Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 éditer des articles :
