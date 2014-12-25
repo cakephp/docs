@@ -398,6 +398,8 @@ logger.
 After installing Monolog using composer, configure the logger using the
 ``Log::config()`` method::
 
+    // config/bootstrap.php
+
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
