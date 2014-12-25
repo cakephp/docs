@@ -413,7 +413,7 @@ After installing Monolog using composer, configure the logger using the
         return $log;
     });
 
-    // Optionally stop using the default separated logfiles
+    // Optionally stop using the now redundant default loggers
     Log::drop('debug');
     Log::drop('error');
 
