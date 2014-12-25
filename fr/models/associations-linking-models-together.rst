@@ -42,6 +42,10 @@ plusieurs vers un          belongsTo             Plusieurs recipes appartiennent
 plusieurs vers plusieurs   hasAndBelongsToMany   Les recipes ont, et appartiennent à plusieurs ingrédients.
 ========================== ===================== ============================================================
 
+Pour clarifier davantage la définition des associations dans les modèles:
+Si la table d'un model contient la clé étrangère (other_model_id), le type
+de relation dans ce model est **toujours** un Model **belongsTo** OtherModel.
+
 Les associations se définissent en créant une variable de classe nommée
 comme l'association que vous souhaitez définir. La variable de classe peut
 quelquefois se limiter à une chaîne de caractère, mais peut également être

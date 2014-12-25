@@ -101,6 +101,12 @@ HttpSocket
 - You can now use the ``protocol`` option to override the specific protocol to
   use when making a request.
 
+I18n
+====
+
+- La valeur de configuration ``I18n.preferApp`` peut maintenant être utilisée
+  pour controller l'ordre des traductions. Si défini à true, les traductions
+  de l'application seront préférées à celles des plugins.
 
 Utility
 =======

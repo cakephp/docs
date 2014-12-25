@@ -150,6 +150,18 @@ et avec des underscores, pour le comparer avec le domaine de traduction et va
 regarder dans le plugin si il y a une correspondance pour le fichier de
 traduction donné.
 
+Controller l'Ordre de Traduction
+================================
+
+La valeur de configuration ``I18n.preferApp`` peut maintenant être utilisée
+pour controller l'ordre des traductions. Si défini à true, les traductions
+de l'application seront préférées à celles des plugins::
+    Configure::write('I18n.preferApp', true);
+
+Défini à ``false`` par défaut.
+
+.. versionadded:: 2.6
+
 Localisation dans CakePHP
 =========================
 
