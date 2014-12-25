@@ -34,6 +34,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
     // Short classname
     Log::config('debug', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
@@ -41,6 +42,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
     // Fully namespaced name.
     Log::config('error', [
         'className' => 'Cake\Log\Engine\FileLog',
+        'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         'file' => 'error',
     ]);
@@ -60,7 +62,7 @@ when you need full control over how the logger object is built. The closure
 has to return the constructed logger instance. For example::
 
     Log::config('special', function () {
-        return new \Cake\Log\Engine\FileLog();
+        return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
 Configuration options can also be provided as a :term:`DSN` string. This is
@@ -294,6 +296,7 @@ message. For example::
     // those with `orders` and `payments` scope.
     Log::config('shops', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
@@ -303,6 +306,7 @@ message. For example::
     // those with `payments` scope.
     Log::config('payments', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
