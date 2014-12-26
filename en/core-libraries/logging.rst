@@ -417,6 +417,29 @@ After installing Monolog using composer, configure the logger using the
     Log::drop('debug');
     Log::drop('error');
 
+Use similar methods if you want to configure a different logger for your
+console::
+
+    // config/bootstrap_cli.php
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function () {
+        $log = new Logger('cli');
+        $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+        return $log;
+    });
+
+    // Optionally stop using the now redundant default cli loggers
+    Log::delete('debug');
+    Log::delete('error');
+
+.. note::
+
+    When using a console specific logger, make sure to conditionally configure
+    your application logger. This will prevent duplicate log entries.
+
 .. meta::
     :title lang=en: Logging
     :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
