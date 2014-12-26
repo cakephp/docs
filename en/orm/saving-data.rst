@@ -279,6 +279,98 @@ array::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
+Validating Data Before Building Entities
+----------------------------------------
+
+When marshalling data into entities, you can validate data. Validating data
+allows you to check the type, shape and size of data. By default request data
+will be converted into entities before it is converted into entities.
+If any validation rules fail, the returned entity will have errors::
+
+    $article = $articles->newEntity($this->request->data);
+    if ($article->errors()) {
+        // Entity has errors.
+    }
+
+When building an entity with validation enabled the following things happen:
+
+1. The validator object is created.
+2. The ``table`` and ``default`` validation provider are attached.
+3. The named validation method is invoked. For example, ``validationDefault``.
+4. The ``Model.buildValidator`` event will be triggered.
+5. Request data will be validated.
+6. Request data will be type cast into types that match the column types.
+7. Data and errors will be set into the entity.
+
+If you'd like to disable validation when converting request data, set the
+``validate`` option to false::
+
+    $article = $articles->newEntity(
+        $this->request->data,
+        ['validate' => false]
+    );
+
+In addition to disabling validation you can choose which validation rule set you
+want applied::
+
+    $article = $articles->newEntity(
+        $this->request->data,
+        ['validate' => 'update']
+    );
+
+The above would call the ``validationUpdate`` method on the table instance to
+build the required rules. By default the ``validationDefault`` method will be
+used. A sample validator for our articles table would be::
+
+    class ArticlesTable extends Table
+    {
+        public function validationUpdate($validator)
+        {
+            $validator
+                ->add('title', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => __('You need to provide a title'),
+                ])
+                ->add('body', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => __('A body is required')
+                ]);
+            return $validator;
+        }
+    }
+
+You can have as many validation sets as you need. See the :doc:`validation
+chapter </core-libraries/validation>` for more information on building
+validation rule-sets.
+
+Validation rules can use functions defined on any known providers. By default
+CakePHP sets up a few providers:
+
+1. Methods on the table class, or its behaviors are available on the ``table``
+   provider.
+2. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
+   ``default`` provider.
+
+When a validation rule is created you can name the provider of that rule. For
+example, if your entity had a 'isValidRole' method you could use it as
+a validation rule::
+
+    class UsersTable extends Table
+    {
+
+        public function validationDefault($validator)
+        {
+            $validator
+                ->add('role', 'validRole', [
+                    'rule' => 'isValidRole',
+                    'message' => __('You need to provide a valid role'),
+                    'provider' => 'table',
+                ]);
+            return $validator;
+        }
+
+    }
+
 Avoiding Property Mass Assignment Attacks
 -----------------------------------------
 
@@ -355,7 +447,7 @@ your database. This is a pretty simple exercise in CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-When saving, CakePHP will apply your validation rules, and wrap the save operation
+When saving, CakePHP will apply your rules, and wrap the save operation
 in a database transaction. It will also only update properties that have
 changed. The above ``save()`` call would generate SQL like::
 
@@ -367,12 +459,13 @@ If you had a new entity, the following SQL would be generated::
 
 When an entity is saved a few things happen:
 
-1. Validation will be started if not disabled.
-2. Validation will trigger the ``Model.beforeValidate`` event. If this event is
-   stopped the save operation will fail and return ``false``.
-3. Validation will be applied. If validation fails, the save will be aborted,
-   and save() will return ``false``.
-4. The ``Model.afterValidate`` event will be triggered.
+1. Rule checking will be started if not disabled.
+2. Rule checking will trigger the ``Model.beforeRules`` event. If this event is
+   stopped the save operation will fail. and return ``false``.
+3. Rules will be checked. If the entity is being created, the ``create`` rules
+   will be used. If the entity is being updated, the ``update`` rules will be
+   used.
+4. The ``Model.afterRules`` event will be triggered.
 5. The ``Model.beforeSave`` event is dispatched. If it is stopped, the save will
    be aborted, and save() will return ``false``.
 6. Parent associations are saved. For example, any listed belongsTo
@@ -388,70 +481,11 @@ When an entity is saved a few things happen:
     not fire because no save is performed.
 
 The ``save()`` method will return the modified entity on success, and ``false``
-on failure. You can disable validation and/or transactions using the
+on failure. You can disable rules and/or transactions using the
 ``$options`` argument for save::
 
     // In a controller or table method.
-    $articles->save($article, ['validate' => false, 'atomic' => false]);
-
-In addition to disabling validation you can choose which validation rule set you
-want applied::
-
-    $articles->save($article, ['validate' => 'update']);
-
-The above would call the ``validationUpdate`` method on the table instance to
-build the required rules.  By default the ``validationDefault`` method will be
-used. A sample validator method for our articles table would be::
-
-    class ArticlesTable extends Table
-    {
-        public function validationUpdate($validator)
-        {
-            $validator
-                ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('You need to provide a title'),
-                ])
-                ->add('body', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('A body is required')
-                ]);
-            return $validator;
-        }
-    }
-
-You can have as many validation sets as you need. See the :doc:`validation
-chapter </core-libraries/validation>` for more information on building
-validation rule-sets.
-
-Validation rules can use functions defined on any known providers. By default
-CakePHP sets up a few providers:
-
-1. Methods on the table class, or its behaviors are available on the ``table``
-   provider.
-2. Methods on the entity class, are available on the ``entity`` provider.
-3. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
-   ``default`` provider.
-
-When a validation rule is created you can name the provider of that rule. For
-example, if your entity had a 'isValidRole' method you could use it as
-a validation rule::
-
-    class UsersTable extends Table
-    {
-
-        public function validationDefault($validator)
-        {
-            $validator
-                ->add('role', 'validRole', [
-                    'rule' => 'isValidRole',
-                    'message' => __('You need to provide a valid role'),
-                    'provider' => 'entity',
-                ]);
-            return $validator;
-        }
-
-    }
+    $articles->save($article, ['checkRules' => false, 'atomic' => false]);
 
 Saving Associations
 -------------------
