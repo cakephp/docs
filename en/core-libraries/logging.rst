@@ -417,7 +417,7 @@ After installing Monolog using composer, configure the logger using the
     Log::drop('debug');
     Log::drop('error');
 
-Use similar methods to configure a different logger for your console::
+Use similar methods if you want to configure a different logger for your console::
 
     // config/bootstrap_cli.php
 
