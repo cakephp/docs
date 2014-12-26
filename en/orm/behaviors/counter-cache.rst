@@ -20,7 +20,8 @@ stored on each of them. Using our example below, we could cache the comment
 count for each article with the following::
 
     class CommentsTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('CounterCache', [
                 'Articles' => ['comment_count']
             ]);

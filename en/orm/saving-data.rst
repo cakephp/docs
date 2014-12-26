@@ -404,7 +404,8 @@ build the required rules.  By default the ``validationDefault`` method will be
 used. A sample validator method for our articles table would be::
 
     class ArticlesTable extends Table {
-        public function validationUpdate($validator) {
+        public function validationUpdate($validator)
+        {
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
@@ -437,7 +438,8 @@ a validation rule::
 
     class UsersTable extends Table {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
@@ -656,7 +658,8 @@ column Types::
 
     class UsersTable extends Table {
 
-        protected function _initializeSchema(Schema $schema) {
+        protected function _initializeSchema(Schema $schema)
+        {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
@@ -694,14 +697,16 @@ necessary. In these cases it is more efficient to use a bulk-update to modify
 many rows at once::
 
     // Publish all the unpublished articles.
-    function publishAllUnpublished() {
+    function publishAllUnpublished()
+    {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
-    function incrementCounters() {
+    function incrementCounters()
+    {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }

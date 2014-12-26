@@ -89,7 +89,8 @@ code inside it::
     use Cake\Console\Shell;
 
     class HelloShell extends Shell {
-        public function main() {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -120,7 +121,8 @@ main method wasn't very interesting let's add another command that does somethin
     use Cake\Console\Shell;
 
     class HelloShell extends Shell {
-        public function main() {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
@@ -163,12 +165,14 @@ properties attached to your shell::
 
     class UserShell extends Shell {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
@@ -205,7 +209,8 @@ will call this method when the task is invoked. A task class looks like::
     use Cake\Console\Shell;
 
     class FileGeneratorTask extends Shell {
-        public function main() {
+        public function main()
+        {
 
         }
     }
@@ -218,7 +223,8 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
         // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -491,7 +497,8 @@ have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         // Configure parser
         return $parser;
@@ -503,7 +510,8 @@ Configuring an Option Parser with the Fluent Interface
 All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -780,7 +788,8 @@ format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also use
 buildFromArray on its own, to build an option parser::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),

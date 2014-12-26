@@ -51,11 +51,13 @@ in the controller.
 By configuring a callback method you can customize how the blackhole process
 works::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type) {
+    public function blackhole($type)
+    {
         // Handle errors.
     }
 
@@ -146,12 +148,14 @@ want and the Security Component will enforce them on its startup::
 
     class WidgetsController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -168,18 +172,21 @@ require secure SSL requests::
 
     class WidgetsController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             if (isset($this->params['admin'])) {
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL() {
+        public function forceSSL()
+        {
             return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
@@ -216,12 +223,14 @@ There may be cases where you want to disable all security checks for an action
 
     class WidgetController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
              $this->Security->config('unlockedActions', ['edit']);
         }
     }

@@ -192,7 +192,8 @@ definition. Try to make your functions return something, at least ``true``
 or ``false``, so it can be determined whether the function call was
 successful::
 
-    public function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false)
+    {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -221,7 +222,8 @@ We only typehint public methods, though, as typehinting is not cost-free::
      * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, callable $callback, $boolean) {
+    public function foo(Model $Model, array $array, callable $callback, $boolean)
+    {
     }
 
 Here ``$Model`` must be an instance of ``Model``, ``$array`` must be an ``array`` and
@@ -235,7 +237,8 @@ you should not typehint as ``array`` accepts only the primitive type::
      *
      * @param array|ArrayObject $array Some array value.
      */
-    public function foo($array) {
+    public function foo($array)
+    {
     }
 
 Anonymous Functions (Closures)
@@ -301,7 +304,8 @@ processed if they are the first thing in a DocBlock line, for example::
      *
      * @return void
      */
-    function bar() {
+    function bar()
+    {
     }
 
     /**
@@ -309,7 +313,8 @@ processed if they are the first thing in a DocBlock line, for example::
      *
      * @return void
      */
-    function foo() {
+    function foo()
+    {
     }
 
 Comment blocks, with the exception of the first block in a file, should
@@ -358,7 +363,8 @@ When returning the object itself, e.g. for chaining, one should use ``$this`` in
      *
      * @return $this
      */
-    public function foo() {
+    public function foo()
+    {
         return $this;
     }
 
@@ -408,7 +414,8 @@ Functions
 
 Write all functions in camelBack::
 
-    function longFunctionName() {
+    function longFunctionName()
+    {
     }
 
 Classes
@@ -442,7 +449,8 @@ protected method or variable names start with a single underscore (``_``). Examp
     class A {
         protected $_iAmAProtectedVariable;
 
-        protected function _iAmAProtectedMethod() {
+        protected function _iAmAProtectedMethod()
+        {
            /* ... */
         }
     }
@@ -452,7 +460,8 @@ Private methods or variable names start with double underscore (``__``). Example
     class A {
         private $__iAmAPrivateVariable;
 
-        private function __iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod()
+        {
             /* ... */
         }
     }

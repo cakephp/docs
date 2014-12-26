@@ -55,10 +55,12 @@ do not use the helper and helps keep the controller better
 organized::
 
     class BakeriesController extends AppController {
-        public function bake() {
+        public function bake()
+        {
             $this->helpers[] = 'Time';
         }
-        public function mix() {
+        public function mix()
+        {
             // The Time helper is not loaded here and thus not available
         }
     }
@@ -132,7 +134,8 @@ configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::
 
     class PostsController extends AppController {
-        public function beforeRender(Event $event) {
+        public function beforeRender(Event $event)
+        {
             parent::beforeRender($event);
             $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
         }
@@ -223,7 +226,8 @@ actual PHP class file would look something like this::
     use Cake\View\Helper;
 
     class LinkHelper extends Helper {
-        public function makeEdit($title, $url) {
+        public function makeEdit($title, $url)
+        {
             // Logic to create specially formatted link goes here...
         }
     }
@@ -244,7 +248,8 @@ helper. To do so, you can specify helpers you wish to use with a
     class LinkHelper extends Helper {
         public $helpers = ['Html'];
 
-        public function makeEdit($title, $url) {
+        public function makeEdit($title, $url)
+        {
             // Use the HTML helper to output
             // Formatted data:
 

@@ -221,13 +221,15 @@ something like::
     class ComboSession extends DatabaseSession {
         public $cacheKey;
 
-        public function __construct() {
+        public function __construct()
+        {
             $this->cacheKey = Configure::read('Session.handler.cache');
             parent::__construct();
         }
 
         // Read data from the session.
-        public function read($id) {
+        public function read($id)
+        {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
                 return $result;
@@ -236,19 +238,22 @@ something like::
         }
 
         // Write data into the session.
-        public function write($id, $data) {
+        public function write($id, $data)
+        {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
         // Destroy a session.
-        public function destroy($id) {
+        public function destroy($id)
+        {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
         // Removes expired sessions.
-        public function gc($expires = null) {
+        public function gc($expires = null)
+        {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }

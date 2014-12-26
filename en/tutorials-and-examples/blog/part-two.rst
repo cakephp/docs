@@ -22,7 +22,8 @@ look like this::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -73,7 +74,8 @@ articles. The code for that action would look like this::
 
     class ArticlesController extends AppController {
 
-        public function index() {
+        public function index()
+        {
             $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
@@ -188,11 +190,13 @@ ArticlesController now::
 
     class ArticlesController extends AppController {
 
-        public function index() {
+        public function index()
+        {
              $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -250,17 +254,20 @@ ArticlesController::
 
     class ArticlesController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
 
             $this->loadComponent('Flash'); // Include the FlashComponent
         }
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -269,7 +276,8 @@ ArticlesController::
             $this->set(compact('article'));
         }
 
-        public function add() {
+        public function add()
+        {
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
@@ -385,11 +393,13 @@ back at our Articles model and make a few adjustments::
     use Cake\Validation\Validator;
 
     class ArticlesTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator
                 ->notEmpty('title')
                 ->notEmpty('body');
@@ -422,7 +432,8 @@ like::
 
     // src/Controller/ArticlesController.php
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid article'));
         }
@@ -514,7 +525,8 @@ Next, let's make a way for users to delete articles. Start with a
 
     // src/Controller/ArticlesController.php
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);

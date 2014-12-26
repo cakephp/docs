@@ -222,7 +222,8 @@ add the following::
 
         // Code from bake.
 
-        protected function _setPassword($value) {
+        protected function _setPassword($value)
+        {
             $hasher = new DefaultPasswordHasher();
             return $hasher->hash($value);
         }
@@ -264,7 +265,8 @@ URLs look, from how they are implemented. If we were to visit
 from CakePHP. Let's implement that missing method now. In
 ``src/Controller/BookmarksController.php`` add the following::
 
-    public function tags() {
+    public function tags()
+    {
         $tags = $this->request->params['pass'];
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
@@ -281,7 +283,8 @@ application's logic in the models. If you were to visit the
 method has not been implemented yet, so let's do that. In
 ``src/Model/Table/BookmarksTable.php`` add the following::
 
-    public function findTagged(Query $query, array $options) {
+    public function findTagged(Query $query, array $options)
+    {
         $fields = [
             'Bookmarks.id',
             'Bookmarks.title',

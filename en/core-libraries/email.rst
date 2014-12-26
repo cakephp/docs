@@ -347,7 +347,8 @@ transport). To start off your file should look like::
 
     class ExampleTransport extends AbstractTransport {
 
-        public function send(Email $email) {
+        public function send(Email $email)
+        {
             // Magic inside!
         }
 

@@ -275,7 +275,8 @@ create ``Validator`` sub-classes for your reusable validation logic::
     use Cake\Validation\Validator;
 
     class ContactValidator extends Validator {
-        public function __construct() {
+        public function __construct()
+        {
             // Add validation rules here.
         }
     }

@@ -39,7 +39,8 @@ that the order key must be defined in an array structure like below::
             ]
         ];
 
-        public function intialize() {
+        public function intialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -58,7 +59,8 @@ You can also include any of the options supported by
             ]
         ];
 
-        public function intialize() {
+        public function intialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -82,7 +84,8 @@ this is how you pass in options into a custom finder method within the paginate 
     class ArticlesController extends AppController {
 
         // find articles by tag
-        public function tags() {
+        public function tags()
+        {
             $tags = $this->request->params['pass'];
 
             $customFinderOptions = [
@@ -129,7 +132,8 @@ example of using ``paginate()`` would be::
 
     class ArticlesController extends AppController {
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->paginate());
         }
     }
@@ -137,7 +141,8 @@ example of using ``paginate()`` would be::
 By default the ``paginate()`` method will use the default model for
 a controller. You can also pass the resulting query of a find method::
 
-     public function index() {
+     public function index()
+     {
         $query = $this->Articles->find('popular')->where(['author_id' => 1]);
         $this->set('articles', $this->paginate($query));
     }
@@ -220,7 +225,8 @@ block and take appropriate action when a ``NotFoundException`` is caught::
 
     use Cake\Network\Exception\NotFoundException;
 
-    public function index() {
+    public function index()
+    {
         try {
             $this->paginate();
         } catch (NotFoundException $e) {

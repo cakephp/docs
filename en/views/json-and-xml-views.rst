@@ -45,12 +45,14 @@ can be either a string or an array of view variables to serialize::
     namespace App\Controller;
 
     class ArticlesController extends AppController {
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function index() {
+        public function index()
+        {
             // You have to select which data type you want to output using viewClass
             $this->viewClass = 'Json';
             $this->set('articles', $this->paginate());
@@ -63,12 +65,14 @@ You can also define ``_serialize`` as an array of view variables to combine::
     namespace App\Controller;
 
     class ArticlesController extends AppController {
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function index() {
+        public function index()
+        {
             // Some code that created $articles and $comments
             $this->set(compact('articles', 'comments'));
             $this->set('_serialize', ['articles', 'comments']);
@@ -91,7 +95,8 @@ JSON response. This is a situation where a view file would be useful::
 
     // Controller code
     class ArticlesController extends AppController {
-        public function index() {
+        public function index()
+        {
             $articles = $this->paginate('Articles');
             $this->set(compact('articles'));
         }

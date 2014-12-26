@@ -111,7 +111,8 @@ looks like this::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -134,7 +135,8 @@ file actually rendered, looks like this::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -156,7 +158,8 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -199,15 +202,18 @@ FooTask.php file should look like::
     class FooTask extends SimpleBakeTask {
         public $pathFragment = 'Foo/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Foo.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'foo';
         }
 

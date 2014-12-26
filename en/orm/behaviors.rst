@@ -61,7 +61,8 @@ To create our sluggable behavior. Put the following into
 Similar to tables, behaviors also have an ``initialize()`` hook where you can
 put your behavior's initialization code, if required::
 
-    public function initialize(array $config) {
+    public function initialize(array $config)
+    {
         // Some initialization code here
     }
 
@@ -76,7 +77,8 @@ friendly URLs::
 
     class ArticlesTable extends Table {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Sluggable');
         }
     }
@@ -96,7 +98,8 @@ Behavior mixin methods will receive the exact same arguments that are provided
 to the table. For example, if our SluggableBehavior defined the following
 method::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         return Inflector::slug($value, $this->_config['replacement']);
     }
 
@@ -156,13 +159,15 @@ behavior should now look like::
             'replacement' => '-',
         ];
 
-        public function slug(Entity $entity) {
+        public function slug(Entity $entity)
+        {
             $config = $this->config();
             $value = $entity->get($config['field']);
             $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, Entity $entity) {
+        public function beforeSave(Event $event, Entity $entity)
+        {
             $this->slug($entity);
         }
 
@@ -177,7 +182,8 @@ The above code shows a few interesting features of behaviors:
 
 To prevent the saving from continuing simply stop event propagation in your callback::
 
-    public function beforeSave(Event $event, Entity $entity) {
+    public function beforeSave(Event $event, Entity $entity)
+    {
         if (...) {
             $event->stopPropagation();
             return;
@@ -193,7 +199,8 @@ a finder method so we can easily fetch articles by their slug. Behavior finder
 methods, use the same conventions as :ref:`custom-find-methods` do. Our
 ``find('slug')`` method would look like::
 
-    public function findSlug(Query $query, array $options) {
+    public function findSlug(Query $query, array $options)
+    {
         return $query->where(['slug' => $options['slug']]);
     }
 

@@ -428,19 +428,22 @@ files, you could create a simple Xml config engine for you application::
 
     class XmlConfig implements ConfigEngineInterface {
 
-        public function __construct($path = null) {
+        public function __construct($path = null)
+        {
             if (!$path) {
                 $path = CONFIG;
             }
             $this->_path = $path;
         }
 
-        public function read($key) {
+        public function read($key)
+        {
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data) {
+        public function dump($key, $data)
+        {
             // Code to dump data to file
         }
     }

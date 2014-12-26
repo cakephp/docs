@@ -42,7 +42,8 @@ method::
 
     class ArticlesTable extends Table {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->table('my_table');
         }
 
@@ -57,7 +58,8 @@ If you need to modify this you can use the ``primaryKey()`` method::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->primaryKey('my_id');
         }
     }
@@ -72,7 +74,8 @@ example if your table class is called ``ArticlesTable`` the entity would be
 conventions you can use the ``entityClass`` method to change things up::
 
     class PurchaseOrdersTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->entityClass('App\Model\PO');
         }
     }
@@ -203,7 +206,8 @@ Generally the best place to do this is in the ``initialize`` method::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -216,7 +220,8 @@ configuration options::
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [

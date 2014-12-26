@@ -24,7 +24,8 @@ RequestHandler it must be included in your ``initialize()`` method::
 
     class WidgetsController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
@@ -48,12 +49,14 @@ the client and its request.
 
         class ArticlesController extends AppController {
 
-            public function initialize() {
+            public function initialize()
+            {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter() {
+            public function beforeFilter()
+            {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html)
                     // response.
@@ -226,7 +229,8 @@ the client. The response status code is then set to ``304 Not Modified``.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to ``false``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
             'checkHttpCache' => false
@@ -244,7 +248,8 @@ with a custom View class, or add View classes for other types.
 You can map existing and new types to your custom classes. You can also set this
 automatically by using the ``viewClassMap`` setting::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent(''RequestHandler', [
             'viewClassMap' => [

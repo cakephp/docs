@@ -76,7 +76,8 @@ are read or set. For example::
     use Cake\ORM\Entity;
 
     class Article extends Entity {
-        protected function _getTitle($title) {
+        protected function _getTitle($title)
+        {
             return ucwords($title);
         }
     }
@@ -93,7 +94,8 @@ a mutator::
 
     class Article extends Entity {
 
-        protected function _setTitle($title) {
+        protected function _setTitle($title)
+        {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -121,7 +123,8 @@ actually exist. For example if your users table has ``first_name`` and
 
     class User extends Entity {
 
-        protected function _getFullName() {
+        protected function _getFullName()
+        {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -286,7 +289,8 @@ can lazily load associated data::
 
     class Article extends Entity {
 
-        protected function _getComments() {
+        protected function _getComments()
+        {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
@@ -322,7 +326,8 @@ could be provided by a trait::
 
     trait SoftDeleteTrait {
 
-        public function softDelete() {
+        public function softDelete()
+        {
             $this->set('deleted', true);
         }
 

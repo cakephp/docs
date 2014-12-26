@@ -225,11 +225,13 @@ finder methods in 3.0::
 
     class ArticlesTable {
 
-        public function findPopular(Query $query, array $options) {
+        public function findPopular(Query $query, array $options)
+        {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites(Query $query, array $options) {
+        public function findFavorites(Query $query, array $options)
+        {
             $for = $options['for'];
             return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -250,7 +252,8 @@ migrate this code in one of a few ways:
 
 In the 3rd case above your code would look like::
 
-    public function findAll(Query $query, array $options) {
+    public function findAll(Query $query, array $options)
+    {
         $mapper = function ($row, $key, $mr) {
             // Your afterFind logic
         };
@@ -325,7 +328,8 @@ on the fly::
     use Cake\ORM\Entity;
 
     class User extends Entity {
-        public function getFullName() {
+        public function getFullName()
+        {
             return $this->first_name . '  ' . $this->last_name;
         }
     }
@@ -370,7 +374,8 @@ code, interact with the same API when manipulating associations::
 
     class ReviewsTable extends Table {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Movies');
             $this->hasOne('Ratings');
             $this->hasMany('Comments')
@@ -408,7 +413,8 @@ have multiple sets of rules::
 
     class ReviewsTable extends Table {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
@@ -496,7 +502,8 @@ a constructor::
 
         protected $_table;
 
-        public function __construct(Table $table, array $config) {
+        public function __construct(Table $table, array $config)
+        {
             parent::__construct($table, $config);
             $this->_table = $table;
         }
@@ -517,7 +524,8 @@ behavior mixin methods can expect the **same** arguments provided to the table
 The behavior providing the ``slug`` method will receive only 1 argument, and its
 method signature should look like::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         // Code here.
     }
 
@@ -528,7 +536,8 @@ Behavior callbacks have been unified with all other listener methods. Instead of
 their previous arguments, they need to expect an event object as their first
 argument::
 
-    public function beforeFind(Event $event, Query $query, array $options) {
+    public function beforeFind(Event $event, Query $query, array $options)
+    {
         // Code.
     }
 

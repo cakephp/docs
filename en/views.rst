@@ -46,7 +46,8 @@ is invoked at the end of a View’s constructor for this kind of use:
 
     class AppView extends View {
 
-        public function initialize() {
+        public function initialize()
+        {
             // Always enable the MyUtils Helper
             $this->loadHelper('MyUtils');
         }
@@ -406,7 +407,8 @@ controller actions using the controller or view's
 ``$layout`` property::
 
     // From a controller
-    public function admin_view() {
+    public function admin_view()
+    {
         // Stuff
         $this->layout = 'admin';
     }
@@ -422,12 +424,14 @@ using something like::
     namespace App\Controller;
 
     class UsersController extends AppController {
-        public function view_active() {
+        public function view_active()
+        {
             $this->set('title', 'View Active Users');
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image() {
+        public function view_image()
+        {
             $this->layout = 'image';
             // Output user image
         }
@@ -450,7 +454,8 @@ Contacts plugin::
     namespace App\Controller;
 
     class UsersController extends AppController {
-        public function view_active() {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -542,7 +547,8 @@ the Post example::
 
     class PostsController extends AppController {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -660,7 +666,8 @@ You'll also want to extend ``View`` to ensure things work correctly::
     use Cake\View\View;
 
     class PdfView extends View {
-        public function render($view = null, $layout = null) {
+        public function render($view = null, $layout = null)
+        {
             // Custom logic here.
         }
     }

@@ -69,7 +69,8 @@ be created as an edit form.  For example, if we browse to
 http://example.org/articles/edit/5, we could do the following::
 
     // src/Controller/ArticlesController.php:
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (empty($id)) {
             throw new NotFoundException;
         }
@@ -1574,11 +1575,13 @@ could do the following::
 
         protected $_templates;
 
-        public function __construct($templates) {
+        public function __construct($templates)
+        {
             $this->_templates = $templates;
         }
 
-        public function render(array $data) {
+        public function render(array $data)
+        {
             $data += [
                 'name' => '',
             ];

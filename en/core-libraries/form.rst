@@ -27,13 +27,15 @@ a simple contact form would look like::
 
     class ContactForm extends Form {
 
-        protected function _buildSchema(Schema $schema) {
+        protected function _buildSchema(Schema $schema)
+        {
             return $schema->addField('name', 'string')
                 ->addField('email', ['type' => 'string'])
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function _buildValidator(Validator $validator) {
+        protected function _buildValidator(Validator $validator)
+        {
             return $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
                     'message' => 'A name is required'
@@ -43,7 +45,8 @@ a simple contact form would look like::
                 ]);
         }
 
-        protected function _execute(array $data) {
+        protected function _execute(array $data)
+        {
             // Send an email.
             return true;
         }
@@ -73,7 +76,8 @@ and validate request data::
     use App\Form\ContactForm;
 
     class ContactController extends AppController {
-        public function index() {
+        public function index()
+        {
             $contact = new ContactForm();
             if ($this->request->is('post')) {
                 if ($contact->execute($this->request->data)) {

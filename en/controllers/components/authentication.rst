@@ -112,7 +112,8 @@ keys.
 
 To configure different fields for user in your ``initialize()`` method::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -128,7 +129,8 @@ within the ``authenticate`` or ``Form`` element. They should be at the same leve
 the authenticate key. The setup above with other Auth configuration
 should look like::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'loginAction' => [
@@ -173,7 +175,8 @@ in the order they are attached. Once one of the objects can identify
 the user, no other objects are checked. A sample login function for
 working with a login form could look like::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -244,7 +247,8 @@ you wanted to create an OpenID authentication object. In
     use Cake\Auth\BaseAuthenticate;
 
     class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(Request $request, Response $response) {
+        public function authenticate(Request $request, Response $response)
+        {
             // Do things for OpenID here.
             // Return an array of user if they could authenticate the user,
             // return false if not.
@@ -265,7 +269,8 @@ after a user has been identified and before a user is logged out respectively.
 You can set callback functions for these events by returning a mapping array
 from ``implementedEvents()`` method of your authenticate class::
 
-    public function implementedEvents() {
+    public function implementedEvents()
+    {
         return [
             'Auth.afterIdentify' => 'afterIdentify',
             'Auth.logout' => 'logout'
@@ -298,7 +303,8 @@ valid user. As with authentication object's ``authenticate()`` method the
 ``getUser()`` method should return an array of user information on success or
 ``false`` on failure. ::
 
-    public function getUser($request) {
+    public function getUser($request)
+    {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
 
@@ -377,7 +383,8 @@ database, the easiest way is to use a setter function in your User entity::
 
         // ...
 
-        protected function _setPassword($password) {
+        protected function _setPassword($password)
+        {
             return (new DefaultPasswordHasher)->hash($password);
         }
 
@@ -407,11 +414,13 @@ In order to use a different password hasher, you need to create the class in
 
     class LegacyPasswordHasher extends AbstractPasswordHasher {
 
-        public function hash($password) {
+        public function hash($password)
+        {
             return sha1($password);
         }
 
-        public function check($password, $hashedPassword) {
+        public function check($password, $hashedPassword)
+        {
             return sha1($password) === $hashedPassword;
         }
     }
@@ -419,7 +428,8 @@ In order to use a different password hasher, you need to create the class in
 Then you are required to configure the AuthComponent to use your own password
 hasher::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -444,7 +454,8 @@ to another, this is achieved through the ``FallbackPasswordHasher`` class.
 Assuming you are using ``LegacyPasswordHasher`` from the previous example, you
 can configure the AuthComponent as follows::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -468,7 +479,8 @@ set the ``Security.salt`` configure value to ensure passwords are salted.
 In order to update old users' passwords on the fly, you can change the login
 function accordingly::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -507,7 +519,8 @@ from the normal password hash::
 
     class UsersTable extends Table {
 
-        public function beforeSave(Event $event) {
+        public function beforeSave(Event $event)
+        {
             $entity = $event->data['entity'];
 
             // Make a password for digest auth.
@@ -540,7 +553,8 @@ Sometimes the need arises where you need to manually log a user in, such
 as just after they registered for your application. You can do this by
 calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
-    public function register() {
+    public function register()
+    {
         $user = $this->Users->newEntity($this->request->data);
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
@@ -582,7 +596,8 @@ redirect them to where they need to go. This method is also useful if
 you want to provide a 'Log me out' link inside a members' area of your
 application::
 
-    public function logout() {
+    public function logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 
@@ -681,7 +696,8 @@ following::
     use Cake\Network\Request;
 
     class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, Request $request) {
+        public function authorize($user, Request $request)
+        {
             // Do things for ldap here.
         }
     }
@@ -782,14 +798,16 @@ the request. The callback is passed the active user, so it can be
 checked::
 
     class AppController extends Controller {
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth', [
                 'authorize' => 'Controller',
             ]);
         }
 
-        public function isAuthorized($user = null) {
+        public function isAuthorized($user = null)
+        {
             // Any registered user can access public functions
             if (empty($this->request->params['prefix'])) {
                 return true;

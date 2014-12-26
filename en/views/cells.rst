@@ -29,7 +29,8 @@ Its contents should look like::
 
     class InboxCell extends Cell {
 
-        public function display() {
+        public function display()
+        {
         }
 
     }
@@ -67,7 +68,8 @@ case for a cell. In the class we just made, add the following::
 
     class InboxCell extends Cell {
 
-        public function display() {
+        public function display()
+        {
             $this->loadModel('Messages');
             $unread = $this->Messages->find('unread');
             $this->set('unread_count', $unread->count());
@@ -135,7 +137,8 @@ parameters and additional options to your cell classes::
 
 The above would match the following function signature::
 
-    public function recent($since) {
+    public function recent($since)
+    {
     }
 
 Rendering a Cell

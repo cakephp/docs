@@ -124,7 +124,8 @@ Our helper looks like::
     namespace App\View\Helper;
 
     class ProgressHelper extends AppHelper {
-        public function bar($value) {
+        public function bar($value)
+        {
             $width = round($value / 100, 2) * 100;
             return sprintf(
                 '<div class="progress-container">
@@ -145,11 +146,13 @@ we'll start with the following::
     use Cake\View\View;
 
     class ProgressHelperTest extends TestCase {
-        public function setUp() {
+        public function setUp()
+        {
 
         }
 
-        public function testBar() {
+        public function testBar()
+        {
 
         }
     }
@@ -160,7 +163,8 @@ in a test case class. Setup methods should initialize the objects needed for the
 test, and do any configuration needed. In our setup method we'll add the
 following::
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $View = new View();
         $this->Progress = new ProgressHelper($View);
@@ -173,7 +177,8 @@ storing the paths in :php:class:`~Cake\\Core\\App`.
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
 
-    public function testBar() {
+    public function testBar()
+    {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
         $this->assertContains('progress-bar', $result);
@@ -444,7 +449,8 @@ could do the following::
             ]
         ];
 
-        public function init() {
+        public function init()
+        {
             $this->records = [
                 [
                     'id' => 1,
@@ -556,7 +562,8 @@ You can control when your fixtures are loaded by setting
         public $fixtures = ['app.articles', 'app.comments'];
         public $autoFixtures = false;
 
-        public function testMyFunction() {
+        public function testMyFunction()
+        {
             $this->loadFixtures('Article', 'Comment');
         }
     }
@@ -586,7 +593,8 @@ Let's say we already have our Articles Table class defined in
 
     class ArticlesTable extends Table {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 $this->alias() . '.published' => 1
             ]);
@@ -626,12 +634,14 @@ looks like this::
     class ArticleTest extends TestCase {
         public $fixtures = ['app.articles'];
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $this->Articles = TableRegistry::get('Articles');
         }
 
-        public function testFindPublished() {
+        public function testFindPublished()
+        {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->hydrate(false)->toArray();
@@ -661,7 +671,8 @@ There will be times you'll want to mock methods on models when testing them. You
 use ``getMockForModel`` to create testing mocks of table classes. It avoids issues
 with reflected properties that normal mocks have::
 
-    public function testSendingEmails() {
+    public function testSendingEmails()
+    {
         $model = $this->getMockForModel('EmailVerification', ['send']);
         $model->expects($this->once())
             ->method('send')
@@ -697,7 +708,8 @@ model. The controller code looks like::
     class ArticlesController extends AppController {
         public $helpers = ['Form', 'Html'];
 
-        public function index($short = null) {
+        public function index($short = null)
+        {
             if (!empty($this->request->data)) {
                 $article = $this->Articles->newEntity($this->request->data);
                 $this->Articles->save($article);
@@ -728,21 +740,24 @@ Create a file named ``ArticlesControllerTest.php`` in your
     class ArticlesControllerTest extends IntegrationTestCase {
         public $fixtures = ['app.articles'];
 
-        public function testIndex() {
+        public function testIndex()
+        {
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
             // More asserts.
         }
 
-        public function testIndexQueryData() {
+        public function testIndexQueryData()
+        {
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
             // More asserts.
         }
 
-        public function testIndexShort() {
+        public function testIndexShort()
+        {
             $this->get('/articles/index/short');
 
             $this->assertResponseOk();
@@ -750,7 +765,8 @@ Create a file named ``ArticlesControllerTest.php`` in your
             // More asserts.
         }
 
-        public function testIndexPostData() {
+        public function testIndexPostData()
+        {
             $data = [
                 'user_id' => 1,
                 'published' => 1,
@@ -813,14 +829,16 @@ methods in ``IntegrationTestCase`` to do this. Assuming you had an
 ``ArticlesController`` that contained an add method, and that add method
 required authentication, you could write the following tests::
 
-    public function testAddUnauthenticatedFails() {
+    public function testAddUnauthenticatedFails()
+    {
         // No session data set.
         $this->get('/articles/add');
 
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
-    public function testAddAuthenticated() {
+    public function testAddAuthenticated()
+    {
         // Set session data
         $this->session([
             'Auth' => [
@@ -891,12 +909,14 @@ Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController {
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             $marker = $this->Markers->get($id);
             $this->set([
                 '_serialize' => ['marker'],
@@ -910,7 +930,8 @@ and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase {
 
-        public function testGet() {
+        public function testGet()
+        {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
             ]);
@@ -953,7 +974,8 @@ controllers that use it. Here is our example component located in
     class PagematronComponent extends Component {
         public $controller = null;
 
-        public function setController($controller) {
+        public function setController($controller)
+        {
             $this->controller = $controller;
             // Make sure the controller is using pagination
             if (!isset($this->controller->paginate)) {
@@ -961,7 +983,8 @@ controllers that use it. Here is our example component located in
             }
         }
 
-        public function startup(Event $event) {
+        public function startup(Event $event)
+        {
             $this->setController($event->subject());
         }
 
@@ -997,7 +1020,8 @@ set correctly by the ``adjust`` method in our component. We create the file
         public $component = null;
         public $controller = null;
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             // Setup our component and fake test controller
             $collection = new ComponentCollection();
@@ -1013,7 +1037,8 @@ set correctly by the ``adjust`` method in our component. We create the file
             $this->component->setController($this->controller);
         }
 
-        public function testAdjust() {
+        public function testAdjust()
+        {
             // Test our adjust method with different parameter settings
             $this->component->adjust();
             $this->assertEquals(20, $this->controller->paginate['limit']);
@@ -1025,7 +1050,8 @@ set correctly by the ``adjust`` method in our component. We create the file
             $this->assertEquals(100, $this->controller->paginate['limit']);
         }
 
-        public function tearDown() {
+        public function tearDown()
+        {
             parent::tearDown();
             // Clean up after we're done
             unset($this->component, $this->controller);
@@ -1048,7 +1074,8 @@ help us display currencies in our views and for simplicity only has one method
     use Cake\View\Helper;
 
     class CurrencyRendererHelper extends Helper {
-        public function usd($amount) {
+        public function usd($amount)
+        {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
     }
@@ -1071,14 +1098,16 @@ Now we create our tests::
         public $helper = null;
 
         // Here we instantiate our helper
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $view = new View();
             $this->helper = new CurrencyRendererHelper($view);
         }
 
         // Testing the usd() function
-        public function testUsd() {
+        public function testUsd()
+        {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
             // We should always have 2 decimal digits
@@ -1173,7 +1202,8 @@ prefix your plugin fixtures with ``plugin.blog.blog_posts``::
         public $fixtures = ['plugin.blog.blog_posts'];
         public $BlogPost;
 
-        public function testSomething() {
+        public function testSomething()
+        {
             // Test something.
         }
     }

@@ -18,12 +18,14 @@ of a ``View``, use the ``String`` class::
 
     class UsersController extends AppController {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth')
         };
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $message = $this->Users->find('new_message');
             if (!empty($message)) {
                 // Notify user of new message

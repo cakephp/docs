@@ -251,7 +251,8 @@ So, we place our new ContactsController in
 
     class ContactsController extends AppController {
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -338,7 +339,8 @@ name, separated with a dot. For example::
     use Cake\ORM\Table;
 
     class ContactsTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('ContactManager.AltName');
         }
     }
@@ -352,7 +354,8 @@ prefix on them, use the alternative syntax::
     use Cake\ORM\Table;
 
     class ContactsTable extends Table {
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
             ]);
@@ -479,7 +482,8 @@ that you prefix the plugin name before the name of the component. For example::
     }
 
     // Within your controllers:
-    public function intialize() {
+    public function intialize()
+    {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');
     }

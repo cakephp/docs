@@ -34,7 +34,8 @@ and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
     class PostsController extends AppController {
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth', [
                 'authorize' => ['controller'],
@@ -49,7 +50,8 @@ You can configure components at runtime using the ``config()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->config('authorize', ['controller']);
         $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
 
@@ -79,7 +81,8 @@ implementation::
 
     // src/Controller/PostsController.php
     class PostsController extends AppController {
-        public function initialize() {
+        public function initialize()
+        {
             $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
             ]);
@@ -129,13 +132,15 @@ and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
 
     class PostsController extends AppController {
-        public function intialize() {
+        public function intialize()
+        {
             parent::initialize();
             $this->loadComponent('Flash');
             $this->loadComponent('Cookie');
         }
 
-        public function delete() {
+        public function delete()
+        {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Flash->success('Post deleted.');
                 return $this->redirect(['action' => 'index']);
@@ -166,7 +171,8 @@ component would look something like this::
     use Cake\Controller\Component;
 
     class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
+        public function doComplexOperation($amount1, $amount2)
+        {
             return $amount1 + $amount2;
         }
     }
@@ -187,7 +193,8 @@ component, through which we can access an instance of it::
     // In a controller
     // Make the new component available at $this->Math,
     // as well as the standard $this->Csrf
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Math');
         $this->loadComponent('Csrf');
@@ -199,7 +206,8 @@ constructor. These parameters can then be handled by
 the Component::
 
     // In your controller.
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Math', [
             'precision' => 2,
@@ -229,11 +237,13 @@ way you include them in controllers - using the ``$components`` var::
         public $components = ['Existing'];
 
         // Execute any other additional setup for your component.
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->Existing->foo();
         }
 
-        public function bar() {
+        public function bar()
+        {
             // ...
        }
     }
@@ -245,7 +255,8 @@ way you include them in controllers - using the ``$components`` var::
 
     class ExistingComponent extends Component {
 
-        public function foo() {
+        public function foo()
+        {
             // ...
         }
     }

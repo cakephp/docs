@@ -65,7 +65,8 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
     class AppController extends Controller {
 
-        public function initialize() {
+        public function initialize()
+        {
             // Always enable the CSRF component.
             $this->loadComponent('Csrf');
         }
@@ -106,15 +107,18 @@ in ``src/Controller/RecipesController.php`` and contain::
     // src/Controller/RecipesController.php
 
     class RecipesController extends AppController {
-        public function view($id) {
+        public function view($id)
+        {
             // Action logic goes here..
         }
 
-        public function share($customerId, $recipeId) {
+        public function share($customerId, $recipeId)
+        {
             // Action logic goes here..
         }
 
-        public function search($query) {
+        public function search($query)
+        {
             // Action logic goes here..
         }
     }
@@ -144,7 +148,8 @@ the request type before returning::
     // src/Controller/RecipesController.php
 
     class RecipesController extends AppController {
-        public function popular() {
+        public function popular()
+        {
             $popular = $this->Recipes->find('popular');
             if (!$this->request->is('requested')) {
                 $this->response->body(json_encode($popular));
@@ -222,7 +227,8 @@ the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 
     class RecipesController extends AppController {
     // ...
-        public function search() {
+        public function search()
+        {
             // Render the view in src/Template/Recipes/search.ctp
             $this->render();
         }
@@ -254,7 +260,8 @@ have called ``render()``, CakePHP will not try to re-render the view::
     namespace App\Controller;
 
     class PostsController extends AppController {
-        public function my_action() {
+        public function my_action()
+        {
             $this->render('custom_file');
         }
     }
@@ -269,7 +276,8 @@ For example::
     namespace App\Controller;
 
     class PostsController extends AppController {
-        public function my_action() {
+        public function my_action()
+        {
             $this->render('Users.UserDetails/custom_file');
         }
     }
@@ -286,7 +294,8 @@ This method takes its first parameter in the form of a
 CakePHP-relative URL. When a user has successfully placed an order,
 you might wish to redirect them to a receipt screen. ::
 
-    public function place_order() {
+    public function place_order()
+    {
         // Logic for finalizing order goes here
         if ($success) {
             return $this->redirect(
@@ -415,7 +424,8 @@ Configuring Components to Load
 In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
 
-    public function intialize() {
+    public function intialize()
+    {
         parent::initialize();
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure:read('Comments'));
@@ -481,7 +491,8 @@ also provide a similar set of callbacks.
 Remember to call ``AppController``'s callbacks within child controller callbacks
 for best results::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
     }
 

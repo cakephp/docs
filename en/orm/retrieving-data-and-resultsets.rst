@@ -207,7 +207,8 @@ a table::
 
     class ArticlesTable extends Table {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->displayField('title');
         }
     }
@@ -297,7 +298,8 @@ would do the following::
 
     class ArticlesTable extends Table {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true
