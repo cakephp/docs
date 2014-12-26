@@ -218,7 +218,8 @@ add the following::
     use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // Code from bake.
 

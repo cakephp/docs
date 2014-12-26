@@ -345,7 +345,8 @@ transport). To start off your file should look like::
 
     use Cake\Network\Email\AbstractTransport;
 
-    class ExampleTransport extends AbstractTransport {
+    class ExampleTransport extends AbstractTransport
+    {
 
         public function send(Email $email)
         {

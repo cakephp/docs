@@ -385,7 +385,8 @@ class::
 
     namespace App\I18n\Parser;
 
-    class YamlFileParser {
+    class YamlFileParser
+    {
 
         public function parse($file)
         {

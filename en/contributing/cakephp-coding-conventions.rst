@@ -423,7 +423,8 @@ Classes
 
 Class names should be written in CamelCase, for example::
 
-    class ExampleClass {
+    class ExampleClass
+    {
     }
 
 Variables
@@ -446,7 +447,8 @@ Member Visibility
 Use PHP5's private and protected keywords for methods and variables. Additionally,
 protected method or variable names start with a single underscore (``_``). Example::
 
-    class A {
+    class A
+    {
         protected $_iAmAProtectedVariable;
 
         protected function _iAmAProtectedMethod()
@@ -457,7 +459,8 @@ protected method or variable names start with a single underscore (``_``). Examp
 
 Private methods or variable names start with double underscore (``__``). Example::
 
-    class A {
+    class A
+    {
         private $__iAmAPrivateVariable;
 
         private function __iAmAPrivateMethod()

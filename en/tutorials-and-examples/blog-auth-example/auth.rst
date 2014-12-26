@@ -35,7 +35,8 @@ validating any user data::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
         public function validationDefault(Validator $validator)
         {
@@ -63,7 +64,8 @@ with CakePHP::
     use Cake\Network\Exception\ForbiddenException;
     use Cake\Event\Event;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public function beforeFilter(Event $event)
         {
@@ -141,7 +143,8 @@ file and add the following lines::
     use Cake\Event\Event;
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         //...
 
         public function initialize()
@@ -219,7 +222,8 @@ and add the following::
     use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // Make all fields mass assignable for now.
         protected $_accessible = ['*' => true];

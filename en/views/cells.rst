@@ -27,7 +27,8 @@ Its contents should look like::
 
     use Cake\View\Cell;
 
-    class InboxCell extends Cell {
+    class InboxCell extends Cell
+    {
 
         public function display()
         {
@@ -66,7 +67,8 @@ case for a cell. In the class we just made, add the following::
 
     use Cake\View\Cell;
 
-    class InboxCell extends Cell {
+    class InboxCell extends Cell
+    {
 
         public function display()
         {
@@ -120,7 +122,8 @@ use the ``CellTrait`` in your controller to enable the ``cell()`` method there::
     use App\Controller\AppController;
     use Cake\View\CellTrait;
 
-    class DashboardsController extends AppController {
+    class DashboardsController extends AppController
+    {
         use CellTrait;
 
         // More code.

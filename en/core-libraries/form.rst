@@ -25,7 +25,8 @@ a simple contact form would look like::
     use Cake\Form\Schema;
     use Cake\Validation\Validator;
 
-    class ContactForm extends Form {
+    class ContactForm extends Form
+    {
 
         protected function _buildSchema(Schema $schema)
         {
@@ -75,7 +76,8 @@ and validate request data::
     use App\Controller\AppController;
     use App\Form\ContactForm;
 
-    class ContactController extends AppController {
+    class ContactController extends AppController
+    {
         public function index()
         {
             $contact = new ContactForm();

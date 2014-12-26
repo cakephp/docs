@@ -55,7 +55,8 @@ To create our sluggable behavior. Put the following into
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
     }
 
 Similar to tables, behaviors also have an ``initialize()`` hook where you can
@@ -75,7 +76,8 @@ friendly URLs::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
         public function initialize(array $config)
         {
@@ -152,7 +154,8 @@ behavior should now look like::
     use Cake\ORM\Query;
     use Cake\Utility\Inflector;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
         protected $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',

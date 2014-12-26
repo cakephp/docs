@@ -54,7 +54,8 @@ associations or defining some additional methods we would add the following to
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
     }
 
@@ -75,7 +76,8 @@ following to ``src/Model/Entity/Article.php`` after the ``<?php`` opening tag::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
     }
 

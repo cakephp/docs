@@ -42,7 +42,8 @@ A Quick Tour
 You enable the Tree behavior by adding it to the Table you want to store
 hierarchical data in::
 
-    class CategoriesTable extends Table {
+    class CategoriesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('Tree');
@@ -156,7 +157,8 @@ Sometimes you want to persist more than one tree structure inside the same
 table, you can achieve that by using the 'scope' configuration. For example, in
 a locations table you may want to create one tree per country::
 
-    class LocationsTable extends Table {
+    class LocationsTable extends Table
+    {
 
         public function initialize(array $config)
         {

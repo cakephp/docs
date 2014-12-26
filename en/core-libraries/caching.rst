@@ -197,7 +197,8 @@ and the results stored in the cache at the provided key.
 For example, you often want to cache remote service call results. You could use
 ``remember()`` to make this simple::
 
-    class IssueService  {
+    class IssueService 
+    {
 
         public function allIssues($repo)
         {

@@ -123,7 +123,8 @@ Our helper looks like::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper {
+    class ProgressHelper extends AppHelper
+    {
         public function bar($value)
         {
             $width = round($value / 100, 2) * 100;
@@ -145,7 +146,8 @@ we'll start with the following::
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
-    class ProgressHelperTest extends TestCase {
+    class ProgressHelperTest extends TestCase
+    {
         public function setUp()
         {
 
@@ -329,7 +331,8 @@ in your ``tests/Fixture`` directory, with the following content::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
 
           // Optional. Set this property to load fixtures to a different test datasource
           public $connection = 'test';
@@ -435,7 +438,8 @@ could do the following::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
 
         public $fields = [
             'id' => ['type' => 'integer'],
@@ -482,13 +486,15 @@ in your application, change the example fixture given in the previous section
 (``tests/Fixture/ArticlesFixture.php``) to::
 
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles']
     }
 
 If you want to use a different connection use::
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
@@ -497,7 +503,8 @@ You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles'];
         public $records = [
             [
@@ -540,14 +547,16 @@ In each test case you should load the fixtures you will need. You should load a
 fixture for every model that will have a query run against it. To load fixtures
 you define the ``$fixtures`` property in your model::
 
-    class ArticlesTest extends TestCase {
+    class ArticlesTest extends TestCase
+    {
         public $fixtures = ['app.articles', 'app.comments'];
     }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
-    class ArticlesTest extends TestCase {
+    class ArticlesTest extends TestCase
+    {
         public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
     }
 
@@ -558,7 +567,8 @@ You can control when your fixtures are loaded by setting
 :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
 :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticlesTest extends TestCase {
+    class ArticlesTest extends TestCase
+    {
         public $fixtures = ['app.articles', 'app.comments'];
         public $autoFixtures = false;
 
@@ -573,7 +583,8 @@ can make it easier to organize your fixtures if you have a larger application.
 To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name::
 
-    class ArticlesTest extends CakeTestCase {
+    class ArticlesTest extends CakeTestCase
+    {
         public $fixtures = ['app.blog/articles', 'app.blog/comments'];
     }
 
@@ -591,7 +602,8 @@ Let's say we already have our Articles Table class defined in
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
         public function findPublished(Query $query, array $options)
         {
@@ -611,7 +623,8 @@ with the following contents::
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase {
+    class ArticleTest extends TestCase
+    {
         public $fixtures = ['app.articles'];
     }
 
@@ -631,7 +644,8 @@ looks like this::
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase {
+    class ArticleTest extends TestCase
+    {
         public $fixtures = ['app.articles'];
 
         public function setUp()
@@ -705,7 +719,8 @@ model. The controller code looks like::
 
     use App\Controller\AppController;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $helpers = ['Form', 'Html'];
 
         public function index($short = null)
@@ -737,7 +752,8 @@ Create a file named ``ArticlesControllerTest.php`` in your
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\IntegrationTestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase {
+    class ArticlesControllerTest extends IntegrationTestCase
+    {
         public $fixtures = ['app.articles'];
 
         public function testIndex()
@@ -908,7 +924,8 @@ JSON is a friendly and common format to use when building a web service.
 Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
-    class MarkersController extends AppController {
+    class MarkersController extends AppController
+    {
         public function initialize()
         {
             parent::initialize();
@@ -928,7 +945,8 @@ begin with a simple example controller that responds in JSON::
 Now we create the file ``tests/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
-    class MarkersControllerTest extends IntegrationTestCase {
+    class MarkersControllerTest extends IntegrationTestCase
+    {
 
         public function testGet()
         {
@@ -971,7 +989,8 @@ This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
 ``app/Controller/Component/PagematronComponent.php``::
 
-    class PagematronComponent extends Component {
+    class PagematronComponent extends Component
+    {
         public $controller = null;
 
         public function setController($controller)
@@ -1015,7 +1034,8 @@ set correctly by the ``adjust`` method in our component. We create the file
     use Cake\Network\Request;
     use Cake\Network\Response;
 
-    class PagematronComponentTest extends TestCase {
+    class PagematronComponentTest extends TestCase
+    {
 
         public $component = null;
         public $controller = null;
@@ -1073,7 +1093,8 @@ help us display currencies in our views and for simplicity only has one method
 
     use Cake\View\Helper;
 
-    class CurrencyRendererHelper extends Helper {
+    class CurrencyRendererHelper extends Helper
+    {
         public function usd($amount)
         {
             return 'USD ' . number_format($amount, 2, '.', ',');
@@ -1093,7 +1114,8 @@ Now we create our tests::
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
-    class CurrencyRendererHelperTest extends TestCase {
+    class CurrencyRendererHelperTest extends TestCase
+    {
 
         public $helper = null;
 
@@ -1153,7 +1175,8 @@ on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
 would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
 
-    class AllModelTest extends TestSuite {
+    class AllModelTest extends TestSuite
+    {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
             $suite->addTestDirectory(TESTS . 'Case/Model');
@@ -1196,7 +1219,8 @@ prefix your plugin fixtures with ``plugin.blog.blog_posts``::
     use Blog\Model\BlogPost;
     use Cake\TestSuite\TestCase;
 
-    class BlogPostTest extends TestCase {
+    class BlogPostTest extends TestCase
+    {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];

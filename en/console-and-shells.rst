@@ -88,7 +88,8 @@ code inside it::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
+    class HelloShell extends Shell
+    {
         public function main()
         {
             $this->out('Hello world.');
@@ -120,7 +121,8 @@ main method wasn't very interesting let's add another command that does somethin
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
+    class HelloShell extends Shell
+    {
         public function main()
         {
             $this->out('Hello world.');
@@ -163,7 +165,8 @@ properties attached to your shell::
 
     use Cake\Console\Shell;
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
 
         public function initialize()
         {
@@ -192,7 +195,8 @@ to compose functionality into re-usable classes that can be shared across many s
 Tasks allow you to extract commands into classes. For example the ``bake`` is made
 almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
         public $tasks = ['Template'];
     }
 
@@ -208,7 +212,8 @@ will call this method when the task is invoked. A task class looks like::
 
     use Cake\Console\Shell;
 
-    class FileGeneratorTask extends Shell {
+    class FileGeneratorTask extends Shell
+    {
         public function main()
         {
 
@@ -219,7 +224,8 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends Shell
+    {
         // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 

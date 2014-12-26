@@ -1571,7 +1571,8 @@ could do the following::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class AutocompleteWidget implements WidgetInterface {
+    class AutocompleteWidget implements WidgetInterface
+    {
 
         protected $_templates;
 

@@ -16,7 +16,8 @@ of a ``View``, use the ``String`` class::
 
     use Cake\Utility\String;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public function initialize()
         {

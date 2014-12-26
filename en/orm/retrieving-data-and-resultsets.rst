@@ -205,7 +205,8 @@ table, while the values will be the 'displayField' of the table. You can use the
 ``displayField()`` method on a table object to configure the display field of
 a table::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
         public function initialize(array $config)
         {
@@ -296,7 +297,8 @@ would do the following::
     use Cake\ORM\Query;
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
         public function findPublished(Query $query, array $options)
         {

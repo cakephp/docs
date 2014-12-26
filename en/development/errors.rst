@@ -68,7 +68,8 @@ An example would be::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError extends BaseErrorHandler {
+    class AppError extends BaseErrorHandler
+    {
         public function _displayError($error, $debug)
         {
             return 'There has been an error!';
@@ -102,7 +103,8 @@ standard error page, you can override it like::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError {
+    class AppError
+    {
         // Other methods.
 
         public function handleFatalError($code, $description, $file, $line)
@@ -360,7 +362,8 @@ If your application contained the following exception::
 
     use Cake\Core\Exception\Exception;
 
-    class MissingWidgetException extends Exception {};
+    class MissingWidgetException extends Exception
+    {};
 
 You could provide nice development errors, by creating
 ``src/Template/Error/missing_widget.ctp``. When in production mode, the above
@@ -374,7 +377,8 @@ which allows the native ``__toString()`` methods to work as normal::
 
     use Cake\Core\Exception\Exception;
 
-    class MissingWidgetException extends Exception {
+    class MissingWidgetException extends Exception
+    {
         protected $_messageTemplate = 'Seems that %s is missing.';
     }
 
@@ -448,7 +452,8 @@ specific errors::
 
     use Cake\Error\ExceptionRenderer;
 
-    class AppExceptionRenderer extends ExceptionRenderer {
+    class AppExceptionRenderer extends ExceptionRenderer
+    {
         public function missingWidget($error)
         {
             return 'Oops that widget is missing!';
@@ -495,7 +500,8 @@ in your exception renderer you can use any controller you want::
     use App\Controller\SuperCustomErrorController;
     use Cake\Error\ExceptionRenderer;
 
-    class AppExceptionRenderer extends ExceptionRenderer {
+    class AppExceptionRenderer extends ExceptionRenderer
+    {
         protected function _getController($exception)
         {
             return new SuperCustomErrorController();

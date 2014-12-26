@@ -146,7 +146,8 @@ want and the Security Component will enforce them on its startup::
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetsController extends AppController {
+    class WidgetsController extends AppController
+    {
 
         public function initialize()
         {
@@ -170,7 +171,8 @@ require secure SSL requests::
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetsController extends AppController {
+    class WidgetsController extends AppController
+    {
 
         public function initialize()
         {
@@ -221,7 +223,8 @@ There may be cases where you want to disable all security checks for an action
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
         public function initialize()
         {

@@ -10,7 +10,8 @@ use the ``Time`` class::
 
     use Cake\I18n\Time;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public function initialize()
         {

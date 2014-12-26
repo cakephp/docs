@@ -47,7 +47,8 @@ follows::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
     }
 
 Controller attributes and methods created in your ``AppController`` will be
@@ -63,7 +64,8 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
 
         public function initialize()
         {
@@ -106,7 +108,8 @@ in ``src/Controller/RecipesController.php`` and contain::
 
     // src/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
         public function view($id)
         {
             // Action logic goes here..
@@ -147,7 +150,8 @@ the request type before returning::
 
     // src/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
         public function popular()
         {
             $popular = $this->Recipes->find('popular');
@@ -225,7 +229,8 @@ the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 
     namespace App\Controller;
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
     // ...
         public function search()
         {
@@ -259,7 +264,8 @@ have called ``render()``, CakePHP will not try to re-render the view::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public function my_action()
         {
             $this->render('custom_file');
@@ -275,7 +281,8 @@ For example::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public function my_action()
         {
             $this->render('Users.UserDetails/custom_file');
@@ -408,7 +415,8 @@ how to use ``paginate()``
 The paginate attribute gives you an easy way to customize how ``paginate()``
 behaves::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
@@ -447,7 +455,8 @@ Configuring Helpers to Load
 Let's look at how to tell a CakePHP Controller that you plan to use
 additional MVC classes::
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
         public $helpers = ['Form'];
     }
 

@@ -25,7 +25,8 @@ controller actions. A basic controller might look something like
 this::
 
     // src/Controller/RecipesController.php
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
 
         public function initialize()
         {

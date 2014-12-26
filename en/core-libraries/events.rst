@@ -55,7 +55,8 @@ created. To keep your Orders model clean you could use events::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class OrdersTable extends Table {
+    class OrdersTable extends Table
+    {
 
         public function place($order)
         {
@@ -172,7 +173,8 @@ necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListenerInterface;
 
-    class UserStatistic implements EventListenerInterface {
+    class UserStatistic implements EventListenerInterface
+    {
 
         public function implementedEvents()
         {
@@ -256,7 +258,8 @@ event listeners::
     );
 
     // Setting priority for a listener
-    class UserStatistic implements EventListenerInterface {
+    class UserStatistic implements EventListenerInterface
+    {
         public function implementedEvents()
         {
             return [

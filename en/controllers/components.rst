@@ -33,7 +33,8 @@ requiring configuration are :doc:`/controllers/components/authentication` and
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public function initialize()
         {
             parent::initialize();
@@ -80,7 +81,8 @@ replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
     // src/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public function initialize()
         {
             $this->loadComponent('Auth', [
@@ -92,7 +94,8 @@ implementation::
     // src/Controller/Component/MyAuthComponent.php
     use Cake\Controller\Component\AuthComponent;
 
-    class MyAuthComponent extends AuthComponent {
+    class MyAuthComponent extends AuthComponent
+    {
         // Add your code to override the core AuthComponent
     }
 
@@ -131,7 +134,8 @@ you had loaded up the :php:class:`Cake\\Controller\\Component\\FlashComponent`
 and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public function intialize()
         {
             parent::initialize();
@@ -170,7 +174,8 @@ component would look something like this::
 
     use Cake\Controller\Component;
 
-    class MathComponent extends Component {
+    class MathComponent extends Component
+    {
         public function doComplexOperation($amount1, $amount2)
         {
             return $amount1 + $amount2;
@@ -232,7 +237,8 @@ way you include them in controllers - using the ``$components`` var::
 
     use Cake\Controller\Component;
 
-    class CustomComponent extends Component {
+    class CustomComponent extends Component
+    {
         // The other component your component uses
         public $components = ['Existing'];
 
@@ -253,7 +259,8 @@ way you include them in controllers - using the ``$components`` var::
 
     use Cake\Controller\Component;
 
-    class ExistingComponent extends Component {
+    class ExistingComponent extends Component
+    {
 
         public function foo()
         {

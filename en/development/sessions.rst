@@ -218,7 +218,8 @@ something like::
     use Cake\Core\Configure;
     use Cake\Network\Session\DatabaseSession;
 
-    class ComboSession extends DatabaseSession {
+    class ComboSession extends DatabaseSession
+    {
         public $cacheKey;
 
         public function __construct()

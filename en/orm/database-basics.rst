@@ -267,7 +267,8 @@ we could make the following type class::
     use Cake\Database\Type;
     use PDO;
 
-    class JsonType extends Type {
+    class JsonType extends Type
+    {
 
         public function toPHP($value, Driver $driver)
         {

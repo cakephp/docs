@@ -23,7 +23,8 @@ AppController::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public function initialize()
         {
             $this->loadComponent('Flash');

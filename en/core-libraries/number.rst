@@ -12,7 +12,8 @@ use the ``Number`` class::
 
     use Cake\I18n\Number;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public function initialize()
         {

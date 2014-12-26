@@ -30,7 +30,8 @@ the basis for your pagination queries. They are augmented by the sort, direction
 limit, and page parameters passed in from the URL. It is important to note
 that the order key must be defined in an array structure like below::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'limit' => 25,
@@ -49,7 +50,8 @@ that the order key must be defined in an array structure like below::
 You can also include any of the options supported by
 :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
@@ -71,7 +73,8 @@ often cleaner and simpler to bundle up your pagination options into
 a :ref:`custom-find-methods`. You can define the finder pagination uses by
 setting the ``finder`` option::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'finder' => 'published',
@@ -81,7 +84,8 @@ setting the ``finder`` option::
 Because custom finder methods can also take in options, 
 this is how you pass in options into a custom finder method within the paginate property::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         // find articles by tag
         public function tags()
@@ -111,7 +115,8 @@ In addition to defining general pagination values, you can define more than one
 set of pagination defaults in the controller, you just name the keys of the
 array after the model you wish to configure::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'Articles' => [],
@@ -130,7 +135,8 @@ paginated query, and set pagination metadata to the request. You can access the
 pagination metadata at ``$this->request->params['paging']``. A more complete
 example of using ``paginate()`` would be::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public function index()
         {

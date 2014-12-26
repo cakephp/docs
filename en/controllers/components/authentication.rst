@@ -246,7 +246,8 @@ you wanted to create an OpenID authentication object. In
 
     use Cake\Auth\BaseAuthenticate;
 
-    class OpenidAuthenticate extends BaseAuthenticate {
+    class OpenidAuthenticate extends BaseAuthenticate
+    {
         public function authenticate(Request $request, Response $response)
         {
             // Do things for OpenID here.
@@ -379,7 +380,8 @@ database, the easiest way is to use a setter function in your User entity::
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // ...
 
@@ -412,7 +414,8 @@ In order to use a different password hasher, you need to create the class in
 
     use Cake\Auth\AbstractPasswordHasher;
 
-    class LegacyPasswordHasher extends AbstractPasswordHasher {
+    class LegacyPasswordHasher extends AbstractPasswordHasher
+    {
 
         public function hash($password)
         {
@@ -517,7 +520,8 @@ from the normal password hash::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
         public function beforeSave(Event $event)
         {
@@ -695,7 +699,8 @@ following::
     use Cake\Auth\BaseAuthorize;
     use Cake\Network\Request;
 
-    class LdapAuthorize extends BaseAuthorize {
+    class LdapAuthorize extends BaseAuthorize
+    {
         public function authorize($user, Request $request)
         {
             // Do things for ldap here.
@@ -797,7 +802,8 @@ boolean as to whether or not the user is allowed to access resources in
 the request. The callback is passed the active user, so it can be
 checked::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public function initialize()
         {
             parent::initialize();

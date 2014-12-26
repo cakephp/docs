@@ -426,7 +426,8 @@ files, you could create a simple Xml config engine for you application::
     use Cake\Core\Configure\ConfigEngineInterface;
     use Cake\Utility\Xml;
 
-    class XmlConfig implements ConfigEngineInterface {
+    class XmlConfig implements ConfigEngineInterface
+    {
 
         public function __construct($path = null)
         {

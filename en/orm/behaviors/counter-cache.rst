@@ -19,7 +19,8 @@ anything until you configure some relations and the field counts that should be
 stored on each of them. Using our example below, we could cache the comment
 count for each article with the following::
 
-    class CommentsTable extends Table {
+    class CommentsTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('CounterCache', [

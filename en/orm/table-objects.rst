@@ -26,7 +26,8 @@ basic table class would look like::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
     }
 
 Note that we did not tell the ORM which table to use for our class. By
@@ -40,7 +41,8 @@ method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
         public function initialize(array $config)
         {
@@ -57,7 +59,8 @@ If you need to modify this you can use the ``primaryKey()`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->primaryKey('my_id');
@@ -73,7 +76,8 @@ example if your table class is called ``ArticlesTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
 conventions you can use the ``entityClass`` method to change things up::
 
-    class PurchaseOrdersTable extends Table {
+    class PurchaseOrdersTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->entityClass('App\Model\PO');
@@ -205,7 +209,8 @@ Generally the best place to do this is in the ``initialize`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp');
@@ -219,7 +224,8 @@ configuration options::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp', [
@@ -251,7 +257,8 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public static function defaultConnectionName() {
             return 'slavedb';
         }

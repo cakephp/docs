@@ -31,7 +31,8 @@ The App View
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
     }
 
 You can use your ``AppView`` to load helpers that will be used for every
@@ -44,7 +45,8 @@ is invoked at the end of a View’s constructor for this kind of use:
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
 
         public function initialize()
         {
@@ -423,7 +425,8 @@ using something like::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
         public function view_active()
         {
             $this->set('title', 'View Active Users');
@@ -453,7 +456,8 @@ Contacts plugin::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
         public function view_active()
         {
             $this->layout = 'Contacts.contact';
@@ -545,7 +549,8 @@ the Post example::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
         public function index()
         {
@@ -665,7 +670,8 @@ You'll also want to extend ``View`` to ensure things work correctly::
 
     use Cake\View\View;
 
-    class PdfView extends View {
+    class PdfView extends View
+    {
         public function render($view = null, $layout = null)
         {
             // Custom logic here.

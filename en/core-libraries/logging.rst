@@ -108,7 +108,8 @@ properties are passed to the log adapter's constructor as an array. ::
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
-    class DatabaseLog extends BaseLog {
+    class DatabaseLog extends BaseLog
+    {
         public function __construct($options = []) {
             // ...
         }

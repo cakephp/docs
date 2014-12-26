@@ -151,7 +151,8 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
     /**
      * Foo shell command.
      */
-    class FooShell extends Shell {
+    class FooShell extends Shell
+    {
 
     /**
      * main() method.
@@ -199,7 +200,8 @@ FooTask.php file should look like::
 
     use Cake\Shell\Task\SimpleBakeTask;
 
-    class FooTask extends SimpleBakeTask {
+    class FooTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Foo/';
 
         public function name()

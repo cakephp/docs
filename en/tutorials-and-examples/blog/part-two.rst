@@ -21,7 +21,8 @@ look like this::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp');
@@ -59,7 +60,8 @@ what the basic controller should look like::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
     }
 
 Now, let's add an action to our controller. Actions often represent
@@ -72,7 +74,8 @@ articles. The code for that action would look like this::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public function index()
         {
@@ -188,7 +191,8 @@ ArticlesController now::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public function index()
         {
@@ -252,7 +256,8 @@ ArticlesController::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public function initialize()
         {
@@ -392,7 +397,8 @@ back at our Articles model and make a few adjustments::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp');

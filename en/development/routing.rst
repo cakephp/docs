@@ -1007,7 +1007,8 @@ RequestActionTrait
     return the data::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
+        class CommentsController extends AppController
+        {
             public function latest()
             {
                 if (!$this->request->is('requested')) {
