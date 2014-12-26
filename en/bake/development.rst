@@ -21,6 +21,7 @@ be used::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -42,6 +43,7 @@ variables used in the bake templates::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 

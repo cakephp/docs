@@ -407,6 +407,7 @@ application. Next, create the translations file under
 And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
+    
     I18n::translator(
         'animals',
         'fr_FR',
