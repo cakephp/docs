@@ -279,6 +279,8 @@ array::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
+.. _validating-request-data:
+
 Validating Data Before Building Entities
 ----------------------------------------
 
@@ -447,9 +449,10 @@ your database. This is a pretty simple exercise in CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-When saving, CakePHP will apply your rules, and wrap the save operation
-in a database transaction. It will also only update properties that have
-changed. The above ``save()`` call would generate SQL like::
+When saving, CakePHP will :ref:`apply your rules <appliction-rules>`, and wrap
+the save operation in a database transaction. It will also only update
+properties that have changed. The above ``save()`` call would generate SQL
+like::
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
@@ -474,6 +477,9 @@ When an entity is saved a few things happen:
 8. Child associations are saved. For example, any listed hasMany, hasOne, or
    belongsToMany associations will be saved.
 9. The ``Model.afterSave`` event will be dispatched.
+
+See the :ref:`application-rules` section for more information on creating and
+using rules.
 
 .. warning::
 
@@ -723,6 +729,36 @@ When using complex types it is important to validate that the data you are
 receiving from the end user is the correct type. Failing to correctly handle
 complex data could result in malicious users being able to store data they
 would not normally be able to.
+
+.. _application-rules:
+
+Applying Application Rules
+==========================
+
+While basic data validation is done when :ref:`request data is converted into
+entities <validating-request-data>`, many applications also have more complex
+validation that should only be applied to after basic validation has completed.
+These types of rules are often referred to as 'domain rules' or 'application
+rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
+before entities are persisted. Some example domain rules are:
+
+* Ensuring email uniqueness
+* State transitions or workflow steps, for example updating an invoice's status.
+* Preventing modification of soft deleted items.
+* Enforcing usage/rate limit caps.
+
+Creating a Rules Checker
+------------------------
+
+Disabling Rules
+---------------
+
+.. TODO::
+    * Explain event process.
+    * Explain building a rules checker.
+    * Disabling rules.
+    * Delete rules.
+
 
 Bulk Updates
 ============
