@@ -741,6 +741,10 @@ The following assertion methods have been deprecated and will be removed in the 
 Both method replacements also switched the argument order for a consistent assert method API
 with ``$expected`` as first argument.
 
+The following assertion methods have been added:
+
+- ``assertNotWithinRange()`` as counter part to ``assertWithinRange()``
+
 
 View
 ====
