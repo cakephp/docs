@@ -789,6 +789,14 @@ or callable classes::
 
     $rules->addCreate(new IsUnique(['email']));
 
+When adding rules you can define the field the rule is for, and the error
+message as options::
+
+    $rules->add([$this, 'isValidState'], [
+        'errorField' => 'status',
+        'message' => 'This invoice cannot be moved to that status.'
+    ]);
+
 Creating Unique Field Rules
 ---------------------------
 
@@ -810,13 +818,11 @@ While you could rely on database errors to enforce constraints, using rules code
 can help provide a nicer user experience. Because of this CakePHP includes an
 ``ExistsIn`` rule class::
 
-    use Cake\ORM\Rule\ExistsIn;
-
     // A single field.
-    $rules->add(new ExistsIn('article_id', 'articles'));
+    $rules->add($rules->existsIn('article_id', 'articles'));
 
     // Multiple keys, useful for composite primary keys.
-    $rules->add(new ExistsIn(['site_id', 'article_id'], 'articles'));
+    $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
 Creating Custom Rule objects
 ----------------------------
@@ -835,6 +841,12 @@ those rules into re-usable classes::
             return false;
         }
     }
+
+
+    // Add the custom rule
+    use App\Model\Rule\CustomRule;
+
+    $rules->add(new CustomRule(...));
 
 By creating custom rule classes you can keep your code DRY and make your domain
 rules easy to test.
