@@ -750,15 +750,101 @@ before entities are persisted. Some example domain rules are:
 Creating a Rules Checker
 ------------------------
 
+Rules checker classes are generally defined by the ``buildRules`` method in your
+table class. Behaviors, and other event subscribers can use the
+``Model.buildRules`` event to augment the rules checker for a given Table
+class::
+
+    // In a table class
+    public function buildRules(RulesChecker $checker) {
+        // Add a rule that is always applied
+        $rules->add(function($entity, $options) {
+            // Return a boolean to indicate pass/fail
+        });
+
+        // Add a rule for create.
+        $rules->addCreate(function ($entity, $options) {
+        });
+
+        // Add a rule for update
+        $rules->addUpdate(function ($entity, $options) {
+        });
+
+        // Add a rule for the deleting.
+        $rules->addDelete(function ($entity, $options) {
+        });
+
+        return $rules;
+    }
+
+Your rules functions can expect to get the Entity being checked, and an array of
+options. The options array will contain ``errorField``, ``message``, and
+``repository``. The ``repository`` option will contain the table class the rules
+are attached to. Because rules accept any ``callable``, you can also use
+instance functions::
+
+    $rules->addCreate([$this, 'uniqueEmail']);
+
+or callable classes::
+
+    $rules->addCreate(new IsUnique(['email']));
+
+Creating Unique Field Rules
+---------------------------
+
+Because unique rules are quite common, CakePHP includes a simple Rule class that
+allows you to easily define unique field sets::
+
+    use Cake\ORM\Rule\IsUnique;
+
+    // A single field.
+    $rules->add(new IsUnique(['email']));
+
+    // A list of fields
+    $rules->add(new IsUnique(['username', 'account_id']));
+
+Foreign Key Rules
+-----------------
+
+While you could rely on database errors to enforce constraints, using rules code
+can help provide a nicer user experience. Because of this CakePHP includes an
+``ExistsIn`` rule class::
+
+    use Cake\ORM\Rule\ExistsIn;
+
+    // A single field.
+    $rules->add(new ExistsIn('article_id', 'articles'));
+
+    // Multiple keys, useful for composite primary keys.
+    $rules->add(new ExistsIn(['site_id', 'article_id'], 'articles'));
+
+Creating Custom Rule objects
+----------------------------
+
+If your application has rules that are commonly reused, it is helpful to package
+those rules into re-usable classes::
+
+    // in src/Model/Rule/CustomRule.php
+    namespace App\Model\Rule;
+
+    use Cake\Datasource\EntityInterface;
+
+    class CustomRule {
+        public function __invoke(EntityInterface $entity, array $options) {
+            // Do work
+            return false;
+        }
+    }
+
+By creating custom rule classes you can keep your code DRY and make your domain
+rules easy to test.
+
 Disabling Rules
 ---------------
 
-.. TODO::
-    * Explain event process.
-    * Explain building a rules checker.
-    * Disabling rules.
-    * Delete rules.
+When saving an entity, you can disable the rules if necessary::
 
+    $articles->save($article, ['checkRules' => false]);
 
 Bulk Updates
 ============
