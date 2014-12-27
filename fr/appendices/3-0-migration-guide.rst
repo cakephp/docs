@@ -820,6 +820,9 @@ le futur:
 Les deux méthodes de remplacement changent aussi l'ordre des arguments pour
 avoir une méthode d'API assert cohérente avec ``$expected`` en premier argument.
 
+Les méthodes d'assertion suivantes ont été ajoutées:
+
+- ``assertNotWithinRange()`` comme contre partie de ``assertWithinRange()``
 
 View
 ====

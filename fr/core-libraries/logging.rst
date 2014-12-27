@@ -35,6 +35,7 @@ Un exemple serait::
     // Nom de classe court
     Log::config('debug', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
@@ -42,6 +43,7 @@ Un exemple serait::
     // Nom avec le namespace complet.
     Log::config('error', [
         'className' => 'Cake\Log\Engine\FileLog',
+        'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         'file' => 'error',
     ]);
@@ -64,7 +66,7 @@ construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
     Log::config('special', function () {
-        return new \Cake\Log\Engine\FileLog();
+        return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
 Les options de configuration peuvent également être fournies en tant que chaine
@@ -316,7 +318,8 @@ ce niveau de message va journaliser le message. Par exemple::
     // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
-        'className' => 'FileLog',
+        'className' => 'FileLog',        
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
@@ -326,6 +329,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // ceux qui ont un scope `payments`
     Log::config('payments', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
@@ -431,9 +435,36 @@ utilisant la méthode ``Log::config()``::
 
     Log::config('default', function () {
         $log = new Logger('app');
-        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
     });
+
+    // Optionnellement, coupez les loggers par défaut devenus redondants
+    Log::drop('debug');
+    Log::drop('error');
+
+Utilisez des méthodes similaires pour configurer un logger différent pour la console::
+
+    // config/bootstrap_cli.php
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function () {
+        $log = new Logger('cli');
+        $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+        return $log;
+    });
+
+    // Optionnellement, coupez les loggers par défaut devenus redondants
+    Configure::delete('Log.debug');
+    Configure::delete('Log.error');
+
+.. note::
+
+    Lorsque vous utilisez un logger spécifique pour la console, assurez-vous
+    de configurer conditionnellement le logger de votre application. Cela
+    évitera la duplication des entrées de log.
 
 .. meta::
     :title lang=fr: Journalisation (Logging)
